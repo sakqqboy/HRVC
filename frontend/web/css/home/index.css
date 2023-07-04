@@ -1,0 +1,107 @@
+.index-Dashboard {
+    font-size: 35px;
+    font-weight: 700;
+    color: black;
+    font-style: normal;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.width-dashboard {
+    width: 20%;
+    margin-top: 20px;
+}
+
+.card {
+    background-color: #EAF7FF;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+
+.width-risk {
+    width: 230px;
+}
+
+.card-Dashboard {
+    margin-left: 50px;
+    border: none;
+}
+
+.title-KPI {
+    color: #265AA7;
+    font-weight: 700;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding-top: 30px;
+    font-style: normal;
+}
+
+.title-Dashboard-Welcome {
+    font-style: normal;
+    color: black;
+    padding-top: 30px;
+
+}
+
+.navbar {
+    position: fixed;
+    z-index: 1;
+    height: 55px;
+}
+
+.nav-align {
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.no-underline {
+    text-decoration: none;
+}
+
+.Googday {
+    font-weight: 700;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.navbar-button {
+    padding-left: 160px;
+}
+
+@media(max-width:768px) {
+    .navbar {
+        padding-left: -10px;
+    }
+
+    .nav-align {
+        display: none;
+    }
+
+    .width-ehsan-small {
+        width: 20px;
+    }
+
+    .Googday {
+        font-size: 10px;
+    }
+
+    .name {
+        font-size: 10px;
+    }
+
+    .width-dashboard {
+        width: 50%;
+        padding-top: 30px
+    }
+
+    .width-risk {
+        width: 70%;
+    }
+
+    .title-KPI {
+        font-size: 12px;
+    }
+
+    .navbar-button {
+        padding-left: 185px;
+    }
+
+
+}

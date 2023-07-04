@@ -1,0 +1,55 @@
+.update-page {
+    margin-top: 80px;
+    font-size: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.moon-red {
+    color: red;
+}
+
+.group-mounthly {
+    font-size: 14px;
+}
+
+.name-Description {
+    font-size: 20px;
+    margin-top: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+#myProgress {
+    width: 100%;
+    background-color: grey;
+}
+
+#myBar {
+    width: 1%;
+    height: 10px;
+    border-radius: 5px;
+    background-color: rgb(74, 172, 241);
+}
+
+.icon-minimize {
+    padding-left: 10px;
+}
+
+.from-add {
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.sl-font {
+    font-size: 11px;
+    width: 90px;
+}
+
+.sl-size {
+    font-size: 11px;
+    width: 65px;
+}
+
+.example-calendar {
+    font-size: 12px;
+}

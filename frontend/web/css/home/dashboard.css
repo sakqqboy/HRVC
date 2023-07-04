@@ -1,0 +1,126 @@
+.table-KPI {
+    font-style: normal;
+    font-size: 30px;
+    color: #4F4F4F;
+    font-weight: 600;
+    margin-top: 80px;
+}
+
+.table-All {
+    font-style: normal;
+    font-size: 16px;
+}
+
+.width-Round-Bangladesh {
+    width: 20px;
+}
+
+.font-title {
+    font-size: 18px;
+}
+
+.space {
+    padding-left: 40px;
+    border-radius: 2px;
+}
+
+.card-border {
+    border: none;
+    border-radius: 10px;
+}
+
+.fa-chevron-right1 {
+    color: white;
+    font-size: 12px;
+    padding-left: 30px;
+}
+
+.branch-eye {
+    font-size: 10px;
+}
+
+.branch-Export {
+    font-size: 10px;
+    margin-left: -40px;
+}
+
+.branch-refresh {
+    font-size: 10px;
+    margin-left: -75px;
+}
+
+.branch-filter {
+    font-size: 10px;
+    margin-left: -130px;
+}
+
+.branch-select {
+    width: 90px;
+    font-size: 12px;
+    margin-left: -180px;
+}
+
+.select-departments {
+    width: 120px;
+    font-size: 12px;
+    margin-left: -180px;
+}
+
+.select-team {
+    width: 80px;
+    font-size: 12px;
+    margin-left: -150px;
+}
+
+.select-title {
+    width: 80px;
+    font-size: 12px;
+    margin-left: -160px;
+}
+
+.select-employee {
+    width: 105px;
+    font-size: 12px;
+    margin-left: -170px;
+}
+
+.group-date-from {
+    width: 150px;
+    margin-left: -150px;
+}
+
+.group-date-to {
+    width: 150px;
+    margin-left: -90px;
+}
+
+.group-text-from {
+    font-size: 12px;
+}
+
+.control-day {
+    font-size: 12px;
+}
+
+.search-submit {
+    width: 140px;
+    height: 35px;
+    margin-left: -30px;
+}
+
+.label-search {
+    font-size: 12px;
+}
+
+.table-striped {
+    font-size: 16px;
+    margin-top: 30px;
+}
+
+.tdody-font {
+    font-size: 14px;
+}
+
+.txt-sales {
+    color: #265AA7;
+}

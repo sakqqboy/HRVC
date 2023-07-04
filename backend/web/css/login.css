@@ -1,0 +1,56 @@
+.width-HRVC {
+    width: 50%;
+}
+
+.z-HRVC {
+    font-size: 35px;
+    padding-top: 30px;
+    color: #4A4543;
+    font-family: 'klavika';
+    font-weight: 100;
+}
+
+.em-login {
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'klavika';
+}
+
+.enter {
+    color: #808080;
+    font-family: 'klavika';
+    font-weight: 100;
+}
+
+.submit-primary {
+    width: 498px;
+    margin-top: 30px;
+}
+
+.width-rof {
+    width: 40%;
+    margin-top: 350px;
+}
+
+.black-roof {
+    background-color: #DDF3FF;
+}
+
+.problem {
+    color: #265AA7;
+    font-weight: 400;
+}
+
+.signin-problem {
+    margin-top: -25px;
+}
+
+.rows-remember {
+    margin-top: 60px;
+    font-family: 'klavika';
+    font-weight: 300;
+}
+
+.noline {
+    text-decoration: none;
+}

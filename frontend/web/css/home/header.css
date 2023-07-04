@@ -1,0 +1,42 @@
+.header1 {
+    background-color: #1E293B;
+    height: 100%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 16px;
+    position: fixed;
+    z-index: 1;
+    width: 15.5%;
+
+
+}
+
+.width-hrvc {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.no-underline {
+    text-decoration: none;
+    color: white;
+}
+
+.navbar-header {
+    padding-left: 10px;
+    padding-top: 20px;
+}
+
+@media(max-width: 768px) {
+    .width-hrvc {
+        width: 100%;
+    }
+
+    .header1 {
+        display: none;
+    }
+}
+
+@media(max-width:992px) {
+    .header1 {
+        display: none;
+    }
+}
