@@ -14,7 +14,7 @@ $this->title = 'Update';
 
 <div class="col-12">
     <div class="col-12 update-page">
-        KGI/KPI Management Update Page
+        KGI Management Update Page
     </div>
 </div>
 

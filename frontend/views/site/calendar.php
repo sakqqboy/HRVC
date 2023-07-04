@@ -31,7 +31,6 @@ $this->title = 'Summary';
 </div>
 
 <div class="col-12 pl-30 mt-30">
-
     <div class="row">
         <div class="col-lg-12">
             <table id="calendar">

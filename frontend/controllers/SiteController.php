@@ -93,6 +93,10 @@ class SiteController extends Controller
     {
         return $this->render("calendar");
     }
+    public function actionUpdateKpi()
+    {
+        return $this->render("update-kpi");
+    }
 
 
     /**
