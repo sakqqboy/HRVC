@@ -65,6 +65,7 @@
     padding-left: 160px;
 }
 
+
 @media(max-width:768px) {
     .navbar {
         padding-left: -10px;
@@ -80,10 +81,12 @@
 
     .Googday {
         font-size: 10px;
+        margin-left: 30px;
     }
 
     .name {
         font-size: 10px;
+        margin-left: 30px;
     }
 
     .width-dashboard {
@@ -100,8 +103,34 @@
     }
 
     .navbar-button {
-        padding-left: 185px;
+        margin-left: 20px;
+        margin-top: -30px;
     }
 
+    .rounded {
+        font-size: 12px;
+    }
 
+    .fit {
+        font-size: 10px;
+    }
+
+    .fa-clock-o {
+        font-size: 10px;
+    }
+
+    .bnheader {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 992px) {
+    .navbar-button {
+        margin-left: 250px;
+        margin-top: -30px;
+    }
+
+    .slide-toggle {
+        padding-left: 30px;
+    }
 }

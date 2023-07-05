@@ -17,11 +17,10 @@ function move() {
         }
     }
 }
-$(document).ready(function () {
+$(indexmenu).ready(function () {
     $(".slide-toggle").click(function () {
-        $(".header1").toggle({
+        $(".header1").animate({
             width: "toggle"
         });
     });
 });
-

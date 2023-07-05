@@ -7,7 +7,7 @@ use Codeception\Lib\Connector\Yii2;
 $this->title = 'index';
 ?>
 
-<div class="col-12">
+<div class="col-12" id="indexmenu">
     <div class="row">
         <div class="col-12">
             <div class="col-12 text-center mt-50">
