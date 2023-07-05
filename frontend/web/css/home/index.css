@@ -17,7 +17,18 @@
     margin-top: 20px;
 }
 
+.copy-card {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%),
+        linear-gradient(180deg, #B5E9FF 0%, rgba(55, 161, 221, 0.43) 100%);
+    border-radius: 20px;
+    margin-top: 20px;
+}
+
 .width-risk {
+    width: 230px;
+}
+
+.copy-width-risk {
     width: 230px;
 }
 
@@ -26,11 +37,25 @@
     border: none;
 }
 
+.copy-card-Dashboard {
+    margin-left: 50px;
+    border: none;
+}
+
+
 .title-KPI {
     color: #265AA7;
     font-weight: 700;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     padding-top: 30px;
+    font-style: normal;
+}
+
+.copy-title-KPI {
+    color: white;
+    font-weight: 700;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding-top: 10px;
     font-style: normal;
 }
 

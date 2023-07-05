@@ -24,3 +24,13 @@ $(indexmenu).ready(function () {
         });
     });
 });
+
+function showHrvc2(i) {
+    $("#HRVC-" + i).css("display", "none");
+    $("#HRVC2" + i).show();
+}
+
+function showHrvc1(i) {
+    $("#HRVC2" + i).css("display", "none");
+    $("#HRVC-" + i).show();
+}

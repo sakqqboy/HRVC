@@ -24,7 +24,7 @@ $this->title = 'index';
                 personal
             </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-3 col-4 card card-Dashboard">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-4 card card-Dashboard" id="HRVC-<?= $i ?>" onmouseover="javascript:showHrvc2(<?= $i ?>)">
             <img src="<?= Yii::$app->homeUrl ?>image/3.png" class="width-risk">
             <a href="#" class="no-underline">
                 <p class="title-KPI"> KPI, KGI Management <i class="fa fa-chevron-right" aria-hidden="true"></i></p>
@@ -58,6 +58,67 @@ $this->title = 'index';
             <img src="<?= Yii::$app->homeUrl ?>image/7.png" class="width-risk">
             <a href="#" class="no-underline">
                 <p class="title-KPI"> Employee Profile <i class="fa fa-chevron-right" aria-hidden="true"></i></p>
+            </a>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-3 col-4 copy-card  copy-card-Dashboard" style="display:none;" id="HRVC2-<?= $i ?>" onmouseleave="javascript:showHrvc1(<?= $i ?>)">
+            <img src="<?= Yii::$app->homeUrl ?>image/Group.png" class="copy-width-risk">
+            <a href="#" class="no-underline">
+                <p class="copy-title-KPI">Access Denied
+                    Sorry Currently You don't have
+                    access to this service
+                    <p>Middle Management System MMS</p>
+                </p>
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-4 copy-card copy-card-Dashboard" style="display:none;">
+            <img src="<?= Yii::$app->homeUrl ?>image/Group.png" class="copy-width-risk">
+            <a href="#" class="no-underline">
+                <p class="copy-title-KPI">Access Denied
+                    Sorry Currently You don't have
+                    access to this service
+                    <p>Middle Management System MMS</p>
+                </p>
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-4 copy-card copy-card-Dashboard" style="display:none;">
+            <img src="<?= Yii::$app->homeUrl ?>image/Group.png" class="copy-width-risk">
+            <a href="#" class="no-underline">
+                <p class="copy-title-KPI">Access Denied
+                    Sorry Currently You don't have
+                    access to this service
+                    <p>Middle Management System MMS</p>
+                </p>
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-4 copy-card copy-card-Dashboard" style="display:none;">
+            <img src="<?= Yii::$app->homeUrl ?>image/Group.png" class="copy-width-risk">
+            <a href="#" class="no-underline">
+                <p class="copy-title-KPI">Access Denied
+                    Sorry Currently You don't have
+                    access to this service
+                    <p>Middle Management System MMS</p>
+                </p>
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-4 copy-card copy-card-Dashboard" style="display:none;">
+            <img src="<?= Yii::$app->homeUrl ?>image/Group.png" class="copy-width-risk">
+            <a href="#" class="no-underline">
+                <p class="copy-title-KPI">Access Denied
+                    Sorry Currently You don't have
+                    access to this service
+                    <p>Middle Management System MMS</p>
+                </p>
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-4 copy-card copy-card-Dashboard" style="display:none;">
+            <img src="<?= Yii::$app->homeUrl ?>image/Group.png" class="copy-width-risk">
+            <a href="#" class="no-underline">
+                <p class="copy-title-KPI">Access Denied
+                    Sorry Currently You don't have
+                    access to this service
+                    <p>Middle Management System MMS</p>
+                </p>
             </a>
         </div>
     </div>
