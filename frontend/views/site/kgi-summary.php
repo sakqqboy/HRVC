@@ -5,12 +5,13 @@
 use Codeception\Lib\Connector\Yii2;
 use yii\bootstrap5\Carousel;
 
-$this->title = 'Summary';
+$this->title = 'KGI Summary';
 ?>
+
 
 <div class="col-12" style="margin-top: 90px;">
     <div class="col-12 title-summary">
-        KPI Summary
+        KGI Summary
     </div>
     <div class="row mt-20">
         <div class="col">
@@ -120,16 +121,16 @@ $this->title = 'Summary';
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                     <div class="col-12">
-                        <p><progress value="0" max="100" style="--value: 35; --max: 100;"></progress></p>
+                        <p><progress value="0" max="100" style="--value: 77; --max: 100;"></progress></p>
                     </div>
                     <div class="col-12 mt-40">
-                        <p> <progress value="0" max="100" style="--value: 45; --max: 100;"></progress></p>
+                        <p> <progress value="0" max="100" style="--value: 80; --max: 100;"></progress></p>
                     </div>
                     <div class="col-12 mt-40">
-                        <p> <progress value="0" max="100" style="--value: 73; --max: 100;"></progress></p>
+                        <p> <progress value="0" max="100" style="--value: 23; --max: 100;"></progress></p>
                     </div>
                     <div class="col-12 mt-40">
-                        <p> <progress value="0" max="100" style="--value: 98; --max: 100;"></progress></p>
+                        <p> <progress value="0" max="100" style="--value: 19; --max: 100;"></progress></p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
@@ -203,13 +204,13 @@ $this->title = 'Summary';
                         <p><progress value="0" max="100" style="--value: 45; --max: 100;"></progress></p>
                     </div>
                     <div class="col-12 mt-40">
-                        <p> <progress value="0" max="100" style="--value: 75; --max: 100;"></progress></p>
+                        <p> <progress value="0" max="100" style="--value: 46; --max: 100;"></progress></p>
                     </div>
                     <div class="col-12 mt-40">
-                        <p> <progress value="0" max="100" style="--value: 63; --max: 100;"></progress></p>
+                        <p> <progress value="0" max="100" style="--value: 47; --max: 100;"></progress></p>
                     </div>
                     <div class="col-12 mt-40">
-                        <p> <progress value="0" max="100" style="--value: 100; --max: 100;"></progress></p>
+                        <p> <progress value="0" max="100" style="--value: 19; --max: 100;"></progress></p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">

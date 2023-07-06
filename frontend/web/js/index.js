@@ -17,7 +17,7 @@ function move() {
         }
     }
 }
-$(indexmenu).ready(function () {
+$(document).ready(function () {
     $(".slide-toggle").click(function () {
         $(".header1").animate({
             width: "toggle"
@@ -25,12 +25,12 @@ $(indexmenu).ready(function () {
     });
 });
 
-function showHrvc2(i) {
-    $("#HRVC-" + i).css("display", "none");
-    $("#HRVC2-" + i).show();
+function showHrvc2() {
+    $("#HRVC").css("display", "none");
+    $("#HRVC2-").show();
 }
 
-function showHrvc1(i) {
-    $("#HRVC2-" + i).css("display", "none");
-    $("#HRVC-" + i).show();
+function showHrvc1() {
+    $("#HRVC2").css("display", "none");
+    $("#HRVC").show();
 }

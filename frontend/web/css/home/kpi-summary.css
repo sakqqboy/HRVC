@@ -21,12 +21,12 @@
 :root {
     --progress-bar-color: #cfd8dc;
     --progress-value-color: #2196f3;
-    --progress-empty-color-h: 4.1;
-    --progress-empty-color-s: 89.6;
-    --progress-empty-color-l: 58.4;
-    --progress-filled-color-h: 122.4;
-    --progress-filled-color-s: 39.4;
-    --progress-filled-color-l: 49.2;
+    --progress-empty-color-h: 238;
+    --progress-empty-color-s: 130;
+    --progress-empty-color-l: 238;
+    --progress-filled-color-h: 238;
+    --progress-filled-color-s: 130;
+    --progress-filled-color-l: 255;
 }
 
 

@@ -10,21 +10,91 @@ $this->title = 'Summary';
 
 <div class="col-12 pl-30" style="margin-top: 90px;">
     <div class="row">
-        <div class="col-lg-2">
-            <button id="btnPrev" type="button" class="btn btn-primary"><i class="fa fa-chevron-left chevron-left1" aria-hidden="true"></i></button>
-            <button id="btnNext" type="button" class="btn btn-primary"><i class="fa fa-chevron-right chevron-left1" aria-hidden="true"></i></button>
-        </div>
-        <div class="col-lg-2">
+        <div class="col-lg-6 col-md-6 col-12">
             <div class="col-12 size-font-june">
                 June 2023
             </div>
         </div>
-        <div class="col-lg-8 text-end">
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-primary">Month</button>
-                <button type="button" class="btn btn-primary">Week</button>
-                <button type="button" class="btn btn-primary">day</button>
-                <button type="button" class="btn btn-primary">Filter By</button>
+        <div class="col-lg-3 col-md-6 col-12 mt-30">
+            <button type="submit" class="btn btn-success"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Update KPI/KGI </button>
+        </div>
+        <div class="col-lg-3 col-md-6 col-12 mt-30 text-end">
+            <button type="submit" class="btn btn-primary"> 360° Evaluation <i class="fa fa-external-link" aria-hidden="true"></i></button>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-lg-1">
+            <button id="btnPrev" type="button" class="btn btn-primary button-lf"><i class="fa fa-chevron-left fontas-left" aria-hidden="true"></i></button>
+            <button id="btnNext" type="button" class="btn btn-primary button-lf"><i class="fa fa-chevron-right fontas-right" aria-hidden="true"></i></button>
+        </div>
+        <div class="col-lg-2">
+            <div class="input-group mb-3 input-calendar-from" style="width: 10rem;" action="/action_page.php">
+                <span class="input-group-text select-calendar-from" id="inputGroup-sizing-default">From</span>
+                <input type="date" id="birthday" class="form-control select-calendar-from" name="birthday" aria-label="Sizing example input" aria-describedby="">
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="input-group mb-3 input-calendar-to" style="width: 10rem;" action="/action_page.php">
+                <span class="input-group-text select-calendar-to" id="inputGroup-sizing-default">To</span>
+                <input type="date" id="birthday" class="form-control select-calendar-to" name="birthday" aria-label="Sizing example input" aria-describedby="">
+            </div>
+        </div>
+        <div class="col-lg-1">
+            <button type="button" class="btn btn-outline-primary button-filter" data-mdb-ripple-color="dark"> <i class="fa fa-filter" aria-hidden="true"></i> </button>
+        </div>
+        <div class="col-lg-1">
+            <select class="form-select calendar-branch" aria-label="Default select example">
+                <option selected>branch</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+        </div>
+        <div class="col-lg-1">
+            <select class="form-select calendar-Departments" aria-label="Default select example">
+                <option selected>Departments</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+        </div>
+        <div class="col-lg-1">
+            <select class="form-select calendar-Team" aria-label="Default select example">
+                <option selected>Team</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+        </div>
+        <div class="col-lg-1">
+            <select class="form-select calendar-Title" aria-label="Default select example">
+                <option selected>Title</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+        </div>
+        <div class="col-lg-1">
+            <select class="form-select calendar-Employee" aria-label="Default select example">
+                <option selected>Employee</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+        </div>
+        <div class="col-lg-1">
+            <div class="btn-group input-calendar-month" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-outline-primary calendar-month">Month</button>
+                <button type="button" class="btn btn-outline-primary calendar-month">Week</button>
+                <button type="button" class="btn btn-outline-primary calendar-month">day</button>
+                <button type="button" class="btn btn-outline-primary calendar-month">Filter By</button>
+            </div>
+        </div>
+        <div class="col-lg-1">
+            <div class="btn-group" role="group" aria-label="Basic outlnied example">
+                <button type="button" class="btn btn-outline-primary button-th-large"><i class="fa fa-th-large" aria-hidden="true"></i></button>
+                <button type="button" class="btn btn-outline-primary button-th-large"><i class="fa fa-list-ul" aria-hidden="true"></i> </button>
             </div>
         </div>
     </div>
@@ -91,33 +161,18 @@ $this->title = 'Summary';
                                 5:00pm to 6:00pm
                             </div>
                         </div>
-                        <div class="event Evaluation" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">
+                        <div class="event Evaluation">
                             <div class="event-desc">
                                 Evaluation Feedback
+                                <span class="feedback">
+                                    <button type="button" class="btn btn-primary mt-10 collapse-font"><i class="fa fa-clock-o" aria-hidden="true"></i> KPI/KGI </button>
+                                    <button type="button" class="btn btn-primary mt-10 collapse-font"><i class="fa fa-usd" aria-hidden="true"></i> Update Amount</button>
+                                    <button type="button" class="btn btn-primary mt-10 collapse-font"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Remark Explain</button>
+                                    <button type="button" class="btn btn-primary mt-10 collapse-font"><i class="fa fa-file-text-o" aria-hidden="true"></i> Keep Evidence</button>
+                                </span>
                             </div>
                             <div class="event-time">
                                 2:45 PM - 3:15 PM
-                            </div>
-                        </div>
-                        <div class="collapse multi-collapse" id="multiCollapseExample2">
-                            <div class="event">
-                                <div class="btn-group dropend">
-                                    <button type="button" class="btn btn-outline-secondary dropdown-toggle collapse-font" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fa fa-clock-o" aria-hidden="true"></i> KPI/KGI
-                                    </button>
-                                    <ul class="dropdown-menu droup1">
-                                        <li><a class="dropdown-item text-dark" href="">Action</a></li>
-                                        <li><a class="dropdown-item text-dark" href="">Another action</a></li>
-                                        <li><a class="dropdown-item text-dark" href="">Something else here</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="dropdown-item text-dark" href="">Separated link</a></li>
-                                    </ul>
-                                </div>
-                                <button type="button" class="btn btn-outline-secondary mt-10 collapse-font"><i class="fa fa-usd" aria-hidden="true"></i> Update Amount</button>
-                                <button type="button" class="btn btn-outline-secondary mt-10 collapse-font"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Remark Explain</button>
-                                <button type="button" class="btn btn-outline-secondary mt-10 collapse-font"><i class="fa fa-file-text-o" aria-hidden="true"></i> Keep Evidence</button>
                             </div>
                         </div>
                     </td>

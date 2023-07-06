@@ -85,9 +85,13 @@ class SiteController extends Controller
     {
         return $this->render('update');
     }
-    public function actionSummary()
+    public function actionKpiSummary()
     {
-        return $this->render("summary");
+        return $this->render("kpi-summary");
+    }
+    public function actionKgiSummary()
+    {
+        return $this->render("kgi-summary");
     }
     public function actionCalendar()
     {

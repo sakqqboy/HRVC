@@ -3,9 +3,89 @@
 }
 
 .size-font-june {
-    font-size: 22px;
+    font-size: 32px;
+    margin-top: 30px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: #475569;
+}
+
+.input-calendar-month {
+    margin-left: -150px;
+    width: 20px;
+}
+
+.input-calendar-from {
+    margin-left: -25px;
+}
+
+.input-calendar-to {
+    margin-left: -65px;
+}
+
+.select-calendar-from {
+    font-size: 11px;
+    margin-left: 5px;
+}
+
+.select-calendar-to {
+    font-size: 12px;
+    margin-left: 11px;
+}
+
+.fontas-left {
+    font-size: 10px;
+}
+
+.fontas-right {
+    font-size: 10px;
+}
+
+.calendar-branch {
+    font-size: 12px;
+    margin-left: -150px;
+    width: 90px;
+}
+
+.button-filter {
+    font-size: 12px;
+    margin-left: -95px;
+}
+
+.calendar-Departments {
+    font-size: 12px;
+    margin-left: -152px;
+    width: 120px;
+}
+
+.calendar-Team {
+    font-size: 12px;
+    width: 78px;
+    margin-left: -125px;
+}
+
+.calendar-Title {
+    font-size: 12px;
+    width: 75px;
+    margin-left: -140px;
+}
+
+.calendar-Employee {
+    font-size: 12px;
+    width: 101px;
+    margin-left: -160px;
+}
+
+.calendar-month {
+    font-size: 10px;
+    height: 33px;
+}
+
+.button-lf {
+    font-size: 12px;
+}
+
+.button-th-large {
+    font-size: 12px;
 }
 
 .droup1 {
@@ -104,7 +184,41 @@
 
 .Evaluation {
     cursor: pointer;
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted rgb(222, 221, 221);
 }
+
+.Evaluation .feedback {
+    visibility: hidden;
+    width: 130px;
+    background-color: rgb(207, 205, 205);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    left: 110%;
+}
+
+.Evaluation .feedback::after {
+    content: "";
+    position: absolute;
+    top: 10%;
+    right: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent rgb(194, 194, 194) transparent transparent;
+}
+
+.Evaluation:hover .feedback {
+    cursor: pointer;
+    visibility: visible;
+}
+
 
 .collapse-font {
     font-size: 11px;

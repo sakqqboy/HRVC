@@ -90,6 +90,24 @@
     padding-left: 160px;
 }
 
+#HRVC2 {
+    display: none;
+}
+
+#HRVC2:hover {
+    display: block;
+}
+
+
+#HRVC {
+    display: none;
+
+}
+
+#HRVC:hover {
+    display: block;
+}
+
 
 @media(max-width:768px) {
     .navbar {

@@ -24,6 +24,15 @@
     padding-top: 20px;
 }
 
+.navbar-header a:hover {
+    background-color: rgb(220, 228, 229);
+    color: rgb(25, 116, 201);
+    border-radius: 4px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+
 @media(max-width: 768px) {
     .width-hrvc {
         width: 100%;
