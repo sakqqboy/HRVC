@@ -9,21 +9,18 @@
     color: #475569;
 }
 
-.input-calendar-month {
-    margin-left: -150px;
-    width: 20px;
-}
-
 .input-calendar-from {
-    margin-left: -25px;
+    margin-top: 20px;
+    margin-left: -90px;
 }
 
 .input-calendar-to {
-    margin-left: -65px;
+    margin-left: -75px;
+    margin-top: 20px;
 }
 
 .select-calendar-from {
-    font-size: 11px;
+    font-size: 12px;
     margin-left: 5px;
 }
 
@@ -42,8 +39,9 @@
 
 .calendar-branch {
     font-size: 12px;
-    margin-left: -150px;
+    margin-left: -58px;
     width: 90px;
+    margin-top: 20px;
 }
 
 .button-filter {
@@ -53,35 +51,40 @@
 
 .calendar-Departments {
     font-size: 12px;
-    margin-left: -152px;
-    width: 120px;
+    margin-left: -109px;
+    width: 118px;
+    margin-top: 20px;
 }
 
 .calendar-Team {
     font-size: 12px;
     width: 78px;
-    margin-left: -125px;
+    margin-left: -132px;
+    margin-top: 20px;
 }
 
 .calendar-Title {
     font-size: 12px;
-    width: 75px;
-    margin-left: -140px;
+    width: 72px;
+    margin-left: 680px;
+    margin-top: -48px;
 }
 
 .calendar-Employee {
     font-size: 12px;
-    width: 101px;
-    margin-left: -160px;
+    width: 100.99px;
+    margin-left: 610px;
+    margin-top: -48px;
 }
 
 .calendar-month {
-    font-size: 10px;
+    font-size: 14px;
     height: 33px;
 }
 
 .button-lf {
-    font-size: 12px;
+    font-size: 10px;
+    width: 20px;
 }
 
 .button-th-large {
@@ -140,7 +143,7 @@
 }
 
 #calendar td {
-    min-height: 180px;
+    min-height: 150px;
     display: flex;
     flex-direction: column;
 }
@@ -180,6 +183,25 @@
 #calendar .other-month {
     background: #f5f5f5;
     color: #666;
+}
+
+.calendar-seehr {
+    font-size: 35px;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.alert-table-summary {
+    height: 90%;
+}
+
+.alert-summary {
+    font-size: 18px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.alert-edit {
+    height: 20%;
 }
 
 .Evaluation {

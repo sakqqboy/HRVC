@@ -3,6 +3,12 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+.group-mounthly1 {
+    font-size: 11px;
+    margin-left: -20px;
+}
+
+
 .title-february {
     font-size: 16px;
     font-weight: 700;
@@ -11,6 +17,7 @@
 .small-title-february {
     font-size: 14px;
 }
+
 
 @property --progress-value {
     syntax: '<integer>';
@@ -90,6 +97,7 @@ progress[value]::after {
     font-weight: 700;
     color: #ffffff;
 }
+
 
 @keyframes progress {
     from {

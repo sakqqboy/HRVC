@@ -17,6 +17,7 @@ function move() {
         }
     }
 }
+
 $(document).ready(function () {
     $(".slide-toggle").click(function () {
         $(".header1").animate({
@@ -25,12 +26,3 @@ $(document).ready(function () {
     });
 });
 
-function showHrvc2() {
-    $("#HRVC").css("display", "none");
-    $("#HRVC2-").show();
-}
-
-function showHrvc1() {
-    $("#HRVC2").css("display", "none");
-    $("#HRVC").show();
-}

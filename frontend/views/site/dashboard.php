@@ -10,8 +10,13 @@ $this->title = 'Dashboard';
 
 
 <div class="col-12">
-    <div class="col-12 table-KPI">
-        <p>KPI & KGI Management</p>
+    <div class="row">
+        <div class="col-6 table-KPI">
+            <p>KPI & KGI Management</p>
+        </div>
+        <div class="col-6 text-end title-Update">
+            <button type="submit" class="btn btn-success"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Update KPI/KGI </button>
+        </div>
     </div>
     <div class="row">
         <div class="col-lg-12">
@@ -25,15 +30,15 @@ $this->title = 'Dashboard';
                     <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false"> <i class="fa fa-calendar-minus-o" aria-hidden="true"></i> Previous Activity</button>
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" style="margin-left: 180px;">
                         <div class="btn-group pr-10" role="group" aria-label="First group">
-                            <button type="button" class="btn btn-dark">month</button>
-                            <button type="button" class="btn btn-dark">week</button>
-                            <button type="button" class="btn btn-dark">day</button>
-                            <button type="button" class="btn btn-dark">filter by</button>
+                            <button type="button" class="btn btn-outline-primary">month</button>
+                            <button type="button" class="btn btn-outline-primary">week</button>
+                            <button type="button" class="btn btn-outline-primary">day</button>
+                            <button type="button" class="btn btn-outline-primary">filter by</button>
                         </div>
                     </div>
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-dark"> <i class="fa fa-angle-left" aria-hidden="true"></i></button>
-                        <button type="button" class="btn btn-dark"> <i class="fa fa-angle-right" aria-hidden="true"></i></button>
+                        <button type="button" class="btn btn-primary"> <i class="fa fa-angle-left" aria-hidden="true"></i></button>
+                        <button type="button" class="btn btn-primary"> <i class="fa fa-angle-right" aria-hidden="true"></i></button>
                     </div>
                 </div>
 

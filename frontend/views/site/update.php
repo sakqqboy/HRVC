@@ -8,10 +8,6 @@ use yii\bootstrap5\Carousel;
 $this->title = 'Update';
 ?>
 
-
-
-
-
 <div class="col-12">
     <div class="col-12 update-page">
         KGI Management Update Page

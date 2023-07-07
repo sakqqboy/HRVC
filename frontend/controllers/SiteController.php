@@ -101,6 +101,10 @@ class SiteController extends Controller
     {
         return $this->render("update-kpi");
     }
+    public function actionEvaluation()
+    {
+        return $this->render("evaluation");
+    }
 
 
     /**

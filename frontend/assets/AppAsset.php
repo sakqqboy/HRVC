@@ -22,6 +22,7 @@ class AppAsset extends AssetBundle
         'css/home/kgi-summary.css',
         'css/home/calendar.css',
         'css/home/update-kpi.css',
+        'css/home/evaluation.css',
     ];
     public $js = [
         'js/index.js',
@@ -30,6 +31,5 @@ class AppAsset extends AssetBundle
         'yii\web\YiiAsset',
         'yii\bootstrap5\BootstrapAsset',
         '\rmrevin\yii\fontawesome\AssetBundle'
-
     ];
 }

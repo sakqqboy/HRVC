@@ -1,0 +1,25 @@
+.page-Evaluation {
+    color: black;
+    font-weight: 700;
+    font-size: 25px;
+}
+
+.table-firstnname,
+.th-firtname,
+.td-title {
+    border: 1px solid white;
+    border-collapse: collapse;
+    color: white;
+    font-size: 17px;
+    height: 60px;
+    text-align: center;
+}
+
+.th-firtname {
+    background-color: #2981e6;
+}
+
+.td-title {
+    background-color: #bfdaf9;
+    color: black;
+}
