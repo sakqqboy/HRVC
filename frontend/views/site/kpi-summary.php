@@ -120,16 +120,24 @@ $this->title = 'KPI Summary';
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                     <div class="col-12">
-                        <p><progress value="0" max="100" style="--value: 35; --max: 100;"></progress></p>
+                        <div class="progress">
+                            <div class="progress-bar" style="width:50%; background:#3d99f9;"></div>
+                        </div>
                     </div>
                     <div class="col-12 mt-40">
-                        <p> <progress value="0" max="100" style="--value: 45; --max: 100;"></progress></p>
+                        <div class="progress">
+                            <div class="progress-bar" style="width:40%; background:#3d99f9;"></div>
+                        </div>
                     </div>
                     <div class="col-12 mt-40">
-                        <p> <progress value="0" max="100" style="--value: 73; --max: 100;"></progress></p>
+                        <div class="progress">
+                            <div class="progress-bar" style="width:56%; background:#3d99f9;"></div>
+                        </div>
                     </div>
                     <div class="col-12 mt-40">
-                        <p> <progress value="0" max="100" style="--value: 98; --max: 100;"></progress></p>
+                        <div class="progress">
+                            <div class="progress-bar" style="width:78%; background:#3d99f9;"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
@@ -307,16 +315,24 @@ $this->title = 'KPI Summary';
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                     <div class="col-12">
-                        <p><progress value="0" max="100" style="--value: 45; --max: 100;"></progress></p>
+                        <div class="progress">
+                            <div class="progress-bar" style="width:50%; background:#3d99f9;"></div>
+                        </div>
                     </div>
                     <div class="col-12 mt-40">
-                        <p> <progress value="0" max="100" style="--value: 75; --max: 100;"></progress></p>
+                        <div class="progress">
+                            <div class="progress-bar" style="width:40%; background:#3d99f9;"></div>
+                        </div>
                     </div>
                     <div class="col-12 mt-40">
-                        <p> <progress value="0" max="100" style="--value: 63; --max: 100;"></progress></p>
+                        <div class="progress">
+                            <div class="progress-bar" style="width:56%; background:#3d99f9;"></div>
+                        </div>
                     </div>
                     <div class="col-12 mt-40">
-                        <p> <progress value="0" max="100" style="--value: 100; --max: 100;"></progress></p>
+                        <div class="progress">
+                            <div class="progress-bar" style="width:78%; background:#3d99f9;"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
@@ -387,16 +403,24 @@ $this->title = 'KPI Summary';
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                     <div class="col-12">
-                        <p><progress value="0" max="100" style="--value: 45; --max: 100;"></progress></p>
+                        <div class="progress">
+                            <div class="progress-bar" style="width:50%; background:#3d99f9;"></div>
+                        </div>
                     </div>
                     <div class="col-12 mt-40">
-                        <p> <progress value="0" max="100" style="--value: 75; --max: 100;"></progress></p>
+                        <div class="progress">
+                            <div class="progress-bar" style="width:40%; background:#3d99f9;"></div>
+                        </div>
                     </div>
                     <div class="col-12 mt-40">
-                        <p> <progress value="0" max="100" style="--value: 63; --max: 100;"></progress></p>
+                        <div class="progress">
+                            <div class="progress-bar" style="width:56%; background:#3d99f9;"></div>
+                        </div>
                     </div>
                     <div class="col-12 mt-40">
-                        <p> <progress value="0" max="100" style="--value: 100; --max: 100;"></progress></p>
+                        <div class="progress">
+                            <div class="progress-bar" style="width:78%; background:#3d99f9;"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
@@ -467,16 +491,24 @@ $this->title = 'KPI Summary';
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                     <div class="col-12">
-                        <p><progress value="0" max="100" style="--value: 45; --max: 100;"></progress></p>
+                        <div class="progress">
+                            <div class="progress-bar" style="width:50%; background:#3d99f9;"></div>
+                        </div>
                     </div>
                     <div class="col-12 mt-40">
-                        <p> <progress value="0" max="100" style="--value: 75; --max: 100;"></progress></p>
+                        <div class="progress">
+                            <div class="progress-bar" style="width:40%; background:#3d99f9;"></div>
+                        </div>
                     </div>
                     <div class="col-12 mt-40">
-                        <p> <progress value="0" max="100" style="--value: 63; --max: 100;"></progress></p>
+                        <div class="progress">
+                            <div class="progress-bar" style="width:40%; background:#3d99f9;"></div>
+                        </div>
                     </div>
                     <div class="col-12 mt-40">
-                        <p> <progress value="0" max="100" style="--value: 100; --max: 100;"></progress></p>
+                        <div class="progress">
+                            <div class="progress-bar" style="width:78%; background:#3d99f9;"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">

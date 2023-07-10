@@ -19,92 +19,53 @@
 }
 
 
-@property --progress-value {
-    syntax: '<integer>';
-    inherits: true;
-    initial-value: 0;
-}
-
-:root {
-    --progress-bar-color: #cfd8dc;
-    --progress-value-color: #2196f3;
-    --progress-empty-color-h: 238;
-    --progress-empty-color-s: 130;
-    --progress-empty-color-l: 238;
-    --progress-filled-color-h: 238;
-    --progress-filled-color-s: 130;
-    --progress-filled-color-l: 255;
-}
-
-
-progress[value] {
-    display: block;
+.progress {
+    height: 20px;
+    background: #e9e9ea;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    overflow: visible;
     position: relative;
-    appearance: none;
-    width: 80%;
-    height: 18px;
-    border: 0;
-    --border-radius: 10px;
-    border-radius: var(--border-radius);
-    counter-reset: progress var(--progress-value);
-    --progress-value-string: counter(progress) '%';
-    --progress-max-decimal: calc(var(--value, 0) / var(--max, 0));
-    --progress-value-decimal: calc(var(--progress-value, 0) / var(--max, 0));
-
-    @supports selector(::-moz-progress-bar) {
-        --progress-value-decimal: calc(var(--value, 0) / var(--max, 0));
-    }
-
-    --progress-value-percent: calc(var(--progress-value-decimal) * 100%);
-    --progress-value-color: hsl(calc((var(--progress-empty-color-h) + (var(--progress-filled-color-h) - var(--progress-empty-color-h)) * var(--progress-value-decimal)) * 1deg) calc((var(--progress-empty-color-s) + (var(--progress-filled-color-s) - var(--progress-empty-color-s)) * var(--progress-value-decimal)) * 1%) calc((var(--progress-empty-color-l) + (var(--progress-filled-color-l) - var(--progress-empty-color-l)) * var(--progress-value-decimal)) * 1%));
-    animation: calc(3s * var(--progress-max-decimal)) linear 0.5s 1 normal both progress;
 }
 
-progress[value]::-webkit-progress-bar {
-    background-color: var(--progress-bar-color);
-    border-radius: var(--border-radius);
-    overflow: hidden;
+.progress .progress-bar {
+    box-shadow: none;
+    border: none;
+    border-radius: 15px;
+    position: relative;
+    -webkit-animation: animate-positive 1s;
+    animation: animate-positive 1s;
 }
 
-progress[value]::-webkit-progress-value {
-    width: var(--progress-value-percent) !important;
-    background-color: var(--progress-value-color);
-    border-radius: var(--border-radius);
-}
-
-progress[value]::-moz-progress-bar {
-    width: var(--progress-value-percent) !important;
-    background-color: var(--progress-value-color);
-    border-radius: var(--border-radius);
-}
-
-progress[value]::after {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    --size: 32px;
-    width: var(--size);
-    height: var(--size);
+.progress .progress-value {
+    width: 70px;
+    height: 35px;
+    line-height: 27px;
+    border-radius: 20px;
+    background: #fff;
+    font-size: 17px;
+    font-weight: 600;
     position: absolute;
-    left: var(--progress-value-percent);
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background-color: var(--progress-value-color);
-    border-radius: 50%;
-    content: attr(value);
-    content: var(--progress-value-string, var(--value));
-    font-size: 12px;
-    font-weight: 700;
-    color: #ffffff;
+    top: -12px;
+    right: 0;
+    z-index: 2;
 }
 
 
-@keyframes progress {
-    from {
-        --progress-value: 0;
-    }
 
-    to {
-        --progress-value: var(--value);
+.progress.blue:before {
+    border-radius: 20px;
+}
+
+
+@-webkit-keyframes animate-positive {
+    0% {
+        width: 0;
+    }
+}
+
+@keyframes animate-positive {
+    0% {
+        width: 0;
     }
 }

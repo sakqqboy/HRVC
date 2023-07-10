@@ -1,12 +1,30 @@
 .header1 {
-    background-color: #1E293B;
+    background-color: #111727;
     height: 100%;
+    padding-top: 20px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 16px;
     position: fixed;
     z-index: 1;
     width: 15.5%;
+    overflow: auto;
 
+}
+
+::-webkit-scrollbar {
+    background-color: #e8f2ff;
+    display: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #111;
+}
+
+.caret-left {
+    color: white;
+    font-size: 18px;
+    margin-left: 190px;
+    cursor: pointer;
 }
 
 .width-hrvc {
@@ -31,6 +49,22 @@
     font-size: 18px;
     font-weight: 700;
 }
+
+.haeder-company {
+    color: #94989F;
+    margin-top: 20px;
+}
+
+.haeder-kpi {
+    color: #94989F;
+    margin-top: 20px;
+}
+
+.haeder-Evalution {
+    color: #94989F;
+    margin-top: 20px;
+}
+
 
 
 @media(max-width: 768px) {
