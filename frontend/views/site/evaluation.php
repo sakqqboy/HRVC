@@ -2,8 +2,6 @@
 
 /** @var yii\web\View $this */
 
-use Codeception\Lib\Connector\Yii2;
-use yii\bootstrap5\Carousel;
 
 $this->title = 'Evaluation';
 ?>

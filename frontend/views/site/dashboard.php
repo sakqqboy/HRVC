@@ -109,7 +109,7 @@ $this->title = 'Dashboard';
                         </div>
                         <div class="col">
                             <div class="input-group flex-nowrap search-submit">
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                <button type="submit" class="btn btn-outline-dark"><i class="fa fa-search" aria-hidden="true"></i></button>
                                 <input type="search" class="form-control label-search" placeholder="search" aria-label="search" aria-describedby="addon-wrapping">
                             </div>
                         </div>
@@ -303,3 +303,4 @@ $this->title = 'Dashboard';
         </div>
     </div>
 </div>
+<div class="col-12 mt-50"></div>

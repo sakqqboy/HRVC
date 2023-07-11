@@ -29,7 +29,6 @@
                         <div class="col-12"> <a href="" class="no-underline"><i class="fa fa-user pr-10 mt-20" aria-hidden="true"></i> Admin</a></div>
                         <div class="col-12"> <a href="" class="no-underline"><i class="fa fa-sun-o pr-10 mt-20" aria-hidden="true"></i> Super admin</a></div>
                         <div class="col-12"> <a href="" class="no-underline"><i class="fa fa-bell-o pr-10 mt-20" aria-hidden="true"></i> Notification Center</a></div>
-
                 </div>
         </div>
 </div>

@@ -29,8 +29,10 @@
 }
 
 .card-border {
+    background-color: whitesmoke;
     border: none;
     border-radius: 10px;
+    font-size: 12px;
 }
 
 .fa-chevron-right1 {

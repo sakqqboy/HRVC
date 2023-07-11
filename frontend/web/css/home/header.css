@@ -7,17 +7,11 @@
     position: fixed;
     z-index: 1;
     width: 15.5%;
-    overflow: auto;
-
+    overflow-y: auto;
 }
 
 ::-webkit-scrollbar {
-    background-color: #e8f2ff;
     display: none;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #111;
 }
 
 .caret-left {

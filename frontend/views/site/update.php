@@ -2,9 +2,6 @@
 
 /** @var yii\web\View $this */
 
-use Codeception\Lib\Connector\Yii2;
-use yii\bootstrap5\Carousel;
-
 $this->title = 'Update';
 ?>
 
@@ -117,18 +114,19 @@ $this->title = 'Update';
                         </div>
                         <div class="col-12">
                             <div class="form-check">
-                                <input class="form-check-input" onclick="move()" type="checkbox" value="" id="defaultCheck1">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
                                 <label class="form-check-label" for="defaultCheck1">
                                     Calculate progress through tasks
                                 </label>
                             </div>
                         </div>
                         <div class="col-lg-12 mt-20">
-                            <div id="myProgress">
-                                <div id="myBar"></div>
+                            <div class="progress-element progress-element--html">
+                                <p class="progress-label">Progress </p>
+                                <div class="progress-container">
+                                    <progress max="100" value="100">100%</progress>
+                                </div>
                             </div>
-                            <br>
-                            <!-- <button class="btn btn-outline-primary" onclick="move()">Click Me</button> -->
                         </div>
                         <div class="col-lg-12 mt-20">
                             <label for="exampleFormControlInput1" class="form-label"> <i class="fa fa-tag" aria-hidden="true"></i> Tags (Maximum 10)</label>
@@ -194,6 +192,10 @@ $this->title = 'Update';
                                 </div>
                             </div>
                             <div class="col-12" style="padding-top: 500px;"></div>
+                        </div>
+                        <div class="col-12 text-end" style="padding-top: 100px;">
+                            <button type="button" class="btn btn-dark">Back</button>
+                            <button type="button" class="btn btn-primary">Save</button>
                         </div>
                     </div>
                 </div>

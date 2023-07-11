@@ -15,14 +15,18 @@
                     <span class="Googday"> Good Day!! &nbsp;</span>
                     <span class="name" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false"> Quazi Ehsan Hossain
                         <img src="<?= Yii::$app->homeUrl ?>image/ehsan-small.png" class="width-ehsan-small">
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" style="margin-left: 100px;">
                             <li><button class="dropdown-item" type="button"><i class="fa fa-user" aria-hidden="true"></i> Profile</button></li>
                             <li><button class="dropdown-item" type="button"><i class="fa fa-cog" aria-hidden="true"></i> Setting &privacy</button></li>
                             <li><button class="dropdown-item" type="button"><i class="fa fa-info-circle" aria-hidden="true"></i> Help & Support</button></li>
                             <li><button class="dropdown-item" type="button"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</button></li>
                         </ul>
                     </span>
-                    <button type="button" class="btn btn-outline-dark bnheader position-relative"> <i class="fa fa-bell" aria-hidden="true"></i></button>
+                    <button type="button" class="btn btn-outline-dark bnheader position-relative"> <i class="fa fa-bell" aria-hidden="true"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            12+
+                        </span>
+                    </button>
                 </div>
             </div>
         </nav>

@@ -2,9 +2,6 @@
 
 /** @var yii\web\View $this */
 
-use Codeception\Lib\Connector\Yii2;
-use yii\bootstrap5\Carousel;
-
 $this->title = 'KPI Summary';
 ?>
 
@@ -121,22 +118,26 @@ $this->title = 'KPI Summary';
                 <div class="col-lg-3 col-md-6 col-12">
                     <div class="col-12">
                         <div class="progress">
-                            <div class="progress-bar" style="width:50%; background:#3d99f9;"></div>
+                            <div class="progress-bar" style="width:50%; background:#2F80ED;"></div>
+                            <span class="badge rounded-pill  pro-load">50%</span>
                         </div>
                     </div>
                     <div class="col-12 mt-40">
                         <div class="progress">
-                            <div class="progress-bar" style="width:40%; background:#3d99f9;"></div>
+                            <div class="progress-bar" style="width:40%; background:#2F80ED;"></div>
+                            <span class="badge rounded-pill  pro-load">40%</span>
                         </div>
                     </div>
                     <div class="col-12 mt-40">
                         <div class="progress">
-                            <div class="progress-bar" style="width:56%; background:#3d99f9;"></div>
+                            <div class="progress-bar" style="width:56%; background:#2F80ED;"></div>
+                            <span class="badge rounded-pill pro-load">56%</span>
                         </div>
                     </div>
                     <div class="col-12 mt-40">
                         <div class="progress">
-                            <div class="progress-bar" style="width:78%; background:#3d99f9;"></div>
+                            <div class="progress-bar" style="width:78%; background:#2F80ED;"></div>
+                            <span class="badge rounded-pill  pro-load">78%</span>
                         </div>
                     </div>
                 </div>
@@ -316,22 +317,26 @@ $this->title = 'KPI Summary';
                 <div class="col-lg-3 col-md-6 col-12">
                     <div class="col-12">
                         <div class="progress">
-                            <div class="progress-bar" style="width:50%; background:#3d99f9;"></div>
+                            <div class="progress-bar" style="width:50%; background:#2F80ED;"></div>
+                            <span class="badge rounded-pill  pro-load">50%</span>
                         </div>
                     </div>
                     <div class="col-12 mt-40">
                         <div class="progress">
-                            <div class="progress-bar" style="width:40%; background:#3d99f9;"></div>
+                            <div class="progress-bar" style="width:40%; background:#2F80ED;"></div>
+                            <span class="badge rounded-pill  pro-load">40%</span>
                         </div>
                     </div>
                     <div class="col-12 mt-40">
                         <div class="progress">
-                            <div class="progress-bar" style="width:56%; background:#3d99f9;"></div>
+                            <div class="progress-bar" style="width:56%; background:#2F80ED;"></div>
+                            <span class="badge rounded-pill  pro-load">56%</span>
                         </div>
                     </div>
                     <div class="col-12 mt-40">
                         <div class="progress">
-                            <div class="progress-bar" style="width:78%; background:#3d99f9;"></div>
+                            <div class="progress-bar" style="width:78%; background:#2F80ED;"></div>
+                            <span class="badge rounded-pill  pro-load">78%</span>
                         </div>
                     </div>
                 </div>
@@ -404,22 +409,27 @@ $this->title = 'KPI Summary';
                 <div class="col-lg-3 col-md-6 col-12">
                     <div class="col-12">
                         <div class="progress">
-                            <div class="progress-bar" style="width:50%; background:#3d99f9;"></div>
+                            <div class="progress-bar" style="width:50%; background:#2F80ED;"></div>
+                            <span class="badge rounded-pill  pro-load">50%</span>
                         </div>
                     </div>
                     <div class="col-12 mt-40">
                         <div class="progress">
-                            <div class="progress-bar" style="width:40%; background:#3d99f9;"></div>
+                            <div class="progress-bar" style="width:40%; background:#2F80ED;"></div>
+                            <span class="badge rounded-pill  pro-load">40%</span>
                         </div>
                     </div>
                     <div class="col-12 mt-40">
                         <div class="progress">
-                            <div class="progress-bar" style="width:56%; background:#3d99f9;"></div>
+                            <div class="progress-bar" style="width:56%; background:#2F80ED;"></div>
+                            <span class="badge rounded-pill  pro-load">56%</span>
+
                         </div>
                     </div>
                     <div class="col-12 mt-40">
                         <div class="progress">
-                            <div class="progress-bar" style="width:78%; background:#3d99f9;"></div>
+                            <div class="progress-bar" style="width:78%; background:#2F80ED;"></div>
+                            <span class="badge rounded-pill  pro-load">78%</span>
                         </div>
                     </div>
                 </div>
@@ -492,22 +502,26 @@ $this->title = 'KPI Summary';
                 <div class="col-lg-3 col-md-6 col-12">
                     <div class="col-12">
                         <div class="progress">
-                            <div class="progress-bar" style="width:50%; background:#3d99f9;"></div>
+                            <div class="progress-bar" style="width:50%; background:#2F80ED;"></div>
+                            <span class="badge rounded-pill  pro-load">40%</span>
                         </div>
                     </div>
                     <div class="col-12 mt-40">
                         <div class="progress">
-                            <div class="progress-bar" style="width:40%; background:#3d99f9;"></div>
+                            <div class="progress-bar" style="width:40%; background:#2F80ED;"></div>
+                            <span class="badge rounded-pill  pro-load">40%</span>
                         </div>
                     </div>
                     <div class="col-12 mt-40">
                         <div class="progress">
-                            <div class="progress-bar" style="width:40%; background:#3d99f9;"></div>
+                            <div class="progress-bar" style="width:40%; background:#2F80ED;"></div>
+                            <span class="badge rounded-pill  pro-load">40%</span>
                         </div>
                     </div>
                     <div class="col-12 mt-40">
                         <div class="progress">
-                            <div class="progress-bar" style="width:78%; background:#3d99f9;"></div>
+                            <div class="progress-bar" style="width:78%; background:#2F80ED;"></div>
+                            <span class="badge rounded-pill  pro-load">40%</span>
                         </div>
                     </div>
                 </div>
