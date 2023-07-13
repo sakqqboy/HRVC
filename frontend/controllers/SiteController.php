@@ -105,10 +105,7 @@ class SiteController extends Controller
     {
         return $this->render("evaluation");
     }
-    public function actionProfile()
-    {
-        return $this->render("profile");
-    }
+
 
 
     /**

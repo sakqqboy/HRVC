@@ -241,6 +241,43 @@
     visibility: visible;
 }
 
+.title-kpi {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted rgb(222, 221, 221);
+}
+
+
+.title-kpi .setting {
+    visibility: hidden;
+    width: 130px;
+    background-color: rgb(207, 205, 205);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    left: 110%;
+}
+
+.title-kpi .setting::after {
+    content: "";
+    position: absolute;
+    top: 10%;
+    right: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent rgb(194, 194, 194) transparent transparent;
+}
+
+.title-kpi:hover .setting {
+    cursor: pointer;
+    visibility: visible;
+}
 
 .collapse-font {
     font-size: 11px;

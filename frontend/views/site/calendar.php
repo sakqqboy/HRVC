@@ -148,9 +148,15 @@ $this->title = 'Summary';
                                 </td>
                                 <td class="day">
                                     <div class="date">6</div>
-                                    <div class="event">
+                                    <div class="event title-kpi">
                                         <div class="event-desc">
                                             KPI Setting Phase Start
+                                            <span class="setting">
+                                                <button type="button" class="btn btn-primary mt-10 collapse-font"><i class="fa fa-clock-o" aria-hidden="true"></i> KPI/KGI</button>
+                                                <button type="button" class="btn btn-primary mt-10 collapse-font"><i class="fa fa-usd" aria-hidden="true"></i> Update time</button>
+                                                <button type="button" class="btn btn-primary mt-10 collapse-font"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Remark Explain</button>
+                                                <button type="button" class="btn btn-primary mt-10 collapse-font"><i class="fa fa-file-text-o" aria-hidden="true"></i> Keep Evidence</button>
+                                            </span>
                                         </div>
 
                                         <div class="event-time">
