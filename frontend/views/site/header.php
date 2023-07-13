@@ -1,6 +1,8 @@
-<div class="col-lg-12 header1">
+<div class="col-lg-12 header1" id="header-menu">
         <div class="col-12">
-                <i class="fa fa-caret-left caret-left" aria-hidden="true"></i>
+                <div class="col-12">
+                        <i class="fa fa-caret-left caret-left menu" aria-hidden="true"></i>
+                </div>
                 <div class="col-12">
                         <a href="<?= Yii::$app->homeUrl ?>site/index"><img src="<?= Yii::$app->homeUrl ?>image/Human-1.png" class="width-hrvc"></a>
                 </div>

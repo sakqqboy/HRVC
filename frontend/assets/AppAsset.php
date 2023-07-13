@@ -23,6 +23,7 @@ class AppAsset extends AssetBundle
         'css/home/calendar.css',
         'css/home/update-kpi.css',
         'css/home/evaluation.css',
+        'css/home/profile.css',
     ];
     public $js = [
         'js/content.js',

@@ -23,7 +23,6 @@
 }
 
 .submit-primary {
-    width: 498px;
     margin-top: 30px;
 }
 
@@ -38,11 +37,8 @@
 
 .problem {
     color: #265AA7;
-    font-weight: 400;
-}
-
-.signin-problem {
-    margin-top: -25px;
+    font-weight: 700;
+    cursor: pointer;
 }
 
 .rows-remember {
@@ -55,10 +51,12 @@
     text-decoration: none;
 }
 
-
 @media (max-width: 768px) {
     .submit-primary {
-        width: 400px;
         margin-top: 30px;
+    }
+
+    .problem {
+        font-size: 12px;
     }
 }

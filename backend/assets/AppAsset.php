@@ -14,7 +14,6 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/site.css',
         'css/login.css',
-
     ];
     public $js = [
         'js/login.js',
@@ -23,6 +22,5 @@ class AppAsset extends AssetBundle
         'yii\web\YiiAsset',
         'yii\bootstrap5\BootstrapAsset',
         '\rmrevin\yii\fontawesome\AssetBundle',
-
     ];
 }

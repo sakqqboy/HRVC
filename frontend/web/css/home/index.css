@@ -12,6 +12,10 @@
     margin-top: 30px;
 }
 
+.button-start a:hover {
+    background-color: red;
+}
+
 .button-start1 {
     font-size: 11px;
     margin-top: 60px;

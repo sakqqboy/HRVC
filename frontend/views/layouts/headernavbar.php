@@ -1,4 +1,4 @@
-<div class="col-12">
+<div class="col-12" id="index1">
     <div class="row">
         <nav class="navbar navbar-light bg-white">
             <div class="col-lg-5 col-md-12 col-12">
@@ -16,7 +16,9 @@
                     <span class="name" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false"> Quazi Ehsan Hossain
                         <img src="<?= Yii::$app->homeUrl ?>image/ehsan-small.png" class="width-ehsan-small">
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" style="margin-left: 100px;">
-                            <li><button class="dropdown-item" type="button"><i class="fa fa-user" aria-hidden="true"></i> Profile</button></li>
+                            <a href="<?= Yii::$app->homeUrl ?>site/profile" class="no-underline">
+                                <button class="dropdown-item" type="button"><i class="fa fa-user" aria-hidden="true"></i> Profile</button>
+                            </a>
                             <li><button class="dropdown-item" type="button"><i class="fa fa-cog" aria-hidden="true"></i> Setting &privacy</button></li>
                             <li><button class="dropdown-item" type="button"><i class="fa fa-info-circle" aria-hidden="true"></i> Help & Support</button></li>
                             <li><button class="dropdown-item" type="button"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</button></li>

@@ -3,7 +3,7 @@
 $this->title = 'index';
 ?>
 
-<div class="col-12">
+<div class="col-12" id="index1">
     <div class="row">
         <div class="col-12">
             <div class="col-12 mt-50">
@@ -145,7 +145,7 @@ $this->title = 'index';
                             </a>
                         </div>
                         <div class="col-3 text-end">
-                            <span type="button" class="badge bg-primary button-start">Start</span>
+                            <a href="#"> <span type="button" class="badge bg-primary button-start">Start</span></a>
                         </div>
                     </div>
                 </div>
