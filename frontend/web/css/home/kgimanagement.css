@@ -1,0 +1,33 @@
+.card-border {
+    background-color: whitesmoke;
+    border: none;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+.space {
+    padding-left: 40px;
+    border-radius: 2px;
+}
+
+.table-KPI {
+    font-style: normal;
+    font-size: 30px;
+    color: #4F4F4F;
+    font-weight: 600;
+    margin-top: 100px;
+}
+
+.title-Update {
+    margin-top: 25px;
+    font-size: 15px;
+}
+
+.branch-select1 {
+    font-size: 12px;
+    width: 350px;
+}
+
+.font-title1 {
+    font-size: 18px;
+}

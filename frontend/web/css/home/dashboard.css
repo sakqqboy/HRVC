@@ -7,7 +7,13 @@
 }
 
 .title-Update {
-    margin-top: 100px;
+    margin-top: 25px;
+    font-size: 15px;
+}
+
+.title-Respiratory {
+    margin-top: 25px;
+    font-size: 15px;
 }
 
 .table-All {
@@ -23,17 +29,6 @@
     font-size: 18px;
 }
 
-.space {
-    padding-left: 40px;
-    border-radius: 2px;
-}
-
-.card-border {
-    background-color: whitesmoke;
-    border: none;
-    border-radius: 10px;
-    font-size: 12px;
-}
 
 .fa-chevron-right1 {
     color: white;
@@ -57,55 +52,102 @@
 
 .branch-filter {
     font-size: 10px;
-    margin-left: -130px;
 }
 
 .branch-select {
-    width: 90px;
-    font-size: 12px;
-    margin-left: -180px;
+    font-size: 14px;
+    border: none;
+
 }
 
 .select-departments {
-    width: 120px;
-    font-size: 12px;
-    margin-left: -180px;
+    border: none;
+    font-size: 14px;
 }
 
 .select-team {
-    width: 80px;
-    font-size: 12px;
-    margin-left: -150px;
+    font-size: 14px;
+    border: none;
 }
 
 .select-title {
-    width: 80px;
-    font-size: 12px;
-    margin-left: -160px;
+    border: none;
+    font-size: 14px;
 }
 
 .select-employee {
-    width: 105px;
-    font-size: 12px;
-    margin-left: -170px;
+    border: none;
+    font-size: 14px;
 }
 
 .group-date-from {
-    width: 150px;
-    margin-left: -150px;
+    width: 170px;
+
 }
 
 .group-date-to {
     width: 150px;
-    margin-left: -90px;
 }
 
 .group-text-from {
     font-size: 12px;
 }
 
+.group-text-to {
+    font-size: 12px;
+}
+
 .control-day {
     font-size: 12px;
+}
+
+.title-calendar1 {
+    margin-top: 30px;
+}
+
+.title-calendar2 {
+    margin-top: 25px;
+}
+
+.title-refresh {
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+.table-font-small {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.width-Round-table {
+    width: 20px;
+}
+
+.buttton-eye {
+    cursor: pointer;
+    font-size: 22px;
+    color: grey;
+}
+
+.button-pencil {
+    cursor: pointer;
+    font-size: 22px;
+    color: grey;
+    padding-left: 10px;
+}
+
+.button-plus {
+    cursor: pointer;
+    font-size: 22px;
+    color: grey;
+    padding-left: 10px;
+}
+
+.buton-delete {
+    color: red;
+    cursor: pointer;
+    font-size: 22px;
+    padding-left: 10px;
 }
 
 .search-submit {
@@ -129,4 +171,21 @@
 
 .txt-sales {
     color: #265AA7;
+}
+
+.show-fade-one {
+    font-size: 16px;
+    margin-top: 30px;
+    font-weight: 700;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+@media (max-width: 768px) {
+    .show-fade-one {
+        font-size: 15px;
+    }
+
+    .title-Respiratory {
+        margin-top: 25px;
+    }
 }

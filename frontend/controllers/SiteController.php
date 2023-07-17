@@ -105,6 +105,10 @@ class SiteController extends Controller
     {
         return $this->render("evaluation");
     }
+    public function actionKgimanagement()
+    {
+        return $this->render("kgimanagement");
+    }
 
 
 

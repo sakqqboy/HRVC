@@ -7,7 +7,7 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    $("#index1").click(function () {
+    $("#btttn-left").click(function () {
         $("index1").removeClass("col-lg-10");
         $("index1").addClass("col-lg-12");
     })

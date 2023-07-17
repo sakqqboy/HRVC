@@ -14,7 +14,7 @@ $this->title = 'Login';
     <div class="row">
         <div class="col-lg-8 col-md-6 col-12">
             <div class="col-12 text-center">
-                <img src="<?= Yii::$app->homeUrl ?>image/HRVC.png" class="width-HRVC">
+                <img src="<?= Yii::$app->homeUrl ?>image/human-backennd.png" class="width-HRVC">
             </div>
             <div class="col-12 text-center z-HRVC">
                 Welcome to HRVC
