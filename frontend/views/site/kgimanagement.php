@@ -13,7 +13,6 @@ $this->title = 'Dashboard';
     </div>
     <div class="row">
         <div class="col-lg-12">
-
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true"> <i class="fa fa-list-ol" aria-hidden="true"></i>&nbsp; &nbsp;All</button>
                 <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"> <i class="fa fa-flag-o" aria-hidden="true"></i>&nbsp; &nbsp;KGI 1 </button>
@@ -58,7 +57,7 @@ $this->title = 'Dashboard';
                         </select>
                     </div>
                     <div class="col">
-                        <select class="form-select select-departments" aria-label="Default select example">
+                        <select class="form-select select-departments1" aria-label="Default select example">
                             <option selected>Departments</option>
                             <option value="1">One</option>
                             <option value="2">Two</option>
@@ -66,7 +65,7 @@ $this->title = 'Dashboard';
                         </select>
                     </div>
                     <div class="col">
-                        <select class="form-select select-team" aria-label="Default select example">
+                        <select class="form-select select-team1" aria-label="Default select example">
                             <option selected>Team</option>
                             <option value="1">One</option>
                             <option value="2">Two</option>
@@ -74,7 +73,7 @@ $this->title = 'Dashboard';
                         </select>
                     </div>
                     <div class="col">
-                        <select class="form-select select-title" aria-label="Default select example">
+                        <select class="form-select select-title1" aria-label="Default select example">
                             <option selected>Title</option>
                             <option value="1">One</option>
                             <option value="2">Two</option>
@@ -82,7 +81,7 @@ $this->title = 'Dashboard';
                         </select>
                     </div>
                     <div class="col">
-                        <select class="form-select select-employee" aria-label="Default select example">
+                        <select class="form-select select-employee1" aria-label="Default select example">
                             <option selected>Employee</option>
                             <option value="1">One</option>
                             <option value="2">Two</option>
@@ -90,15 +89,15 @@ $this->title = 'Dashboard';
                         </select>
                     </div>
                     <div class="col">
-                        <div class="input-group mb-3 group-date-from" action="/action_page.php">
-                            <span class="input-group-text group-text-from" id="inputGroup-sizing-default">From</span>
-                            <input type="date" id="birthday" class="form-control control-day" name="birthday" aria-label="Sizing example input" aria-describedby="">
+                        <div class="input-group mb-3 group-date-from1" action="/action_page.php">
+                            <span class="input-group-text group-text-from1" id="inputGroup-sizing-default">From</span>
+                            <input type="date" id="birthday" class="form-control control-day1" name="birthday" aria-label="Sizing example input" aria-describedby="">
                         </div>
                     </div>
                     <div class="col">
-                        <div class="input-group mb-3 group-date-to" action="/action_page.php">
-                            <span class="input-group-text group-text-from" id="inputGroup-sizing-default">To</span>
-                            <input type="date" id="birthday" class="form-control control-day" name="birthday" aria-label="Sizing example input" aria-describedby="">
+                        <div class="input-group mb-3 group-date-to1" action="/action_page.php">
+                            <span class="input-group-text group-text-to1" id="inputGroup-sizing-default">To</span>
+                            <input type="date" id="birthday" class="form-control control-day1" name="birthday" aria-label="Sizing example input" aria-describedby="">
                         </div>
                     </div>
                     <div class="col">

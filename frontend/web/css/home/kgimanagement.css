@@ -28,6 +28,100 @@
     width: 350px;
 }
 
+.select-departments1 {
+    font-size: 12px;
+    width: 350px;
+}
+
+.select-team1 {
+    font-size: 12px;
+    width: 350px;
+}
+
+.select-title1 {
+    font-size: 12px;
+    width: 350px;
+}
+
+.select-employee1 {
+    font-size: 12px;
+    width: 350px;
+}
+
 .font-title1 {
     font-size: 18px;
+}
+
+.branch-filter {
+    font-size: 10px;
+}
+
+.branch-eye {
+    font-size: 10px;
+}
+
+.branch-Export {
+    font-size: 10px;
+    margin-left: -40px;
+}
+
+.branch-refresh {
+    font-size: 10px;
+    margin-left: -75px;
+}
+
+.group-date-from1 {
+    width: 170px;
+}
+
+.group-date-to1 {
+    width: 150px;
+}
+
+.group-text-from1 {
+    font-size: 12px;
+}
+
+.group-text-to1 {
+    font-size: 12px;
+}
+
+.control-day1 {
+    font-size: 12px;
+}
+
+.search-submit {
+    width: 140px;
+    height: 35px;
+    margin-left: -30px;
+}
+
+.label-search {
+    font-size: 12px;
+}
+
+.table-striped {
+    font-size: 16px;
+    margin-top: 30px;
+}
+
+.tdody-font {
+    font-size: 14px;
+}
+
+.width-Round-Bangladesh {
+    width: 20px;
+}
+
+.title-Update {
+    margin-top: 50px;
+    font-size: 15px;
+}
+
+.table-KPI {
+    font-style: normal;
+    font-size: 30px;
+    color: #4F4F4F;
+    font-weight: 600;
+    margin-top: 100px;
 }
