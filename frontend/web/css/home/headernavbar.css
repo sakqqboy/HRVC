@@ -1,0 +1,59 @@
+.navbar {
+    position: fixed;
+    z-index: 1;
+    height: 55px;
+}
+
+.Googday {
+    font-weight: 700;
+    font-size: 18px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+.width-ehsan-small {
+    width: 40px;
+}
+
+.bnheader {
+    margin-left: 20px;
+}
+
+@media(max-width: 768px) {
+    .rounded {
+        margin-left: 20px;
+        font-size: 14px;
+    }
+
+    .Googday {
+        display: none;
+    }
+
+    .hdfit {
+        font-size: 13px;
+    }
+
+    strong {
+        font-size: 12px;
+    }
+
+    .drop-avatar {
+        margin-top: -35px;
+        margin-left: 10px;
+    }
+
+    .width-ehsan-small {
+        margin-left: 55%;
+        width: 35px;
+    }
+
+    .bnheader {
+        font-size: 13px;
+        margin-top: -60px;
+        margin-left: 455px;
+    }
+
+    .shadow-logout {
+        margin-left: 290px;
+    }
+}

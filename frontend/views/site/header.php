@@ -21,7 +21,7 @@
                         <div class="col-12"> <a href="" class="no-underline"><i class="fa fa-user pr-10 mt-20" aria-hidden="true"></i> Employees</a></div>
                         <div class="col-12 haeder-kpi"> KPI & KGI MANAGEMENT</div>
                         <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/kgimanagement" class="no-underline"><i class="fa fa-line-chart pr-10 mt-20" aria-hidden="true"></i> KGI Management</a></div>
-                        <div class="col-12"> <a href="" class="no-underline"><i class="fa fa-tachometer pr-10 mt-20" aria-hidden="true"></i>KPI Management</a></div>
+                        <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/kpimanagement" class="no-underline"><i class="fa fa-tachometer pr-10 mt-20" aria-hidden="true"></i>KPI Management</a></div>
                         <div class="col-12 haeder-Evalution"> EVALUTION SETTINGS</div>
                         <div class="col-12"> <a href="" class="no-underline"><i class="fa fa-pencil-square-o pr-10 mt-20" aria-hidden="true"></i> Evaluetion</a></div>
                         <div class="col-12"> <a href="" class="no-underline"><i class="fa fa-history pr-10 mt-20" aria-hidden="true"></i> 360 Degree Evaluetion</a></div>

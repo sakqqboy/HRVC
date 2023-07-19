@@ -5,6 +5,10 @@
     font-size: 12px;
 }
 
+tr {
+    font-size: 14px;
+}
+
 .space {
     padding-left: 40px;
     border-radius: 2px;
@@ -23,59 +27,70 @@
     font-size: 15px;
 }
 
-.branch-select1 {
-    font-size: 12px;
-    width: 350px;
+.select-1 {
+    width: 95px;
+    margin-left: -90px;
+    font-size: 11px;
+    font-weight: 700;
 }
 
 .select-departments1 {
-    font-size: 12px;
-    width: 350px;
+    width: 120px;
+    margin-left: -90px;
+    font-size: 11px;
+    font-weight: 700;
 }
 
 .select-team1 {
-    font-size: 12px;
-    width: 350px;
+    font-size: 11px;
+    width: 90px;
+    font-weight: 700;
+    margin-left: -60px;
 }
 
 .select-title1 {
-    font-size: 12px;
-    width: 350px;
+    font-size: 11px;
+    width: 90px;
+    font-weight: 700;
+    margin-left: -60px;
 }
 
 .select-employee1 {
-    font-size: 12px;
-    width: 350px;
-}
-
-.font-title1 {
-    font-size: 18px;
+    font-size: 11px;
+    width: 100px;
+    font-weight: 700;
+    margin-left: -160px;
 }
 
 .branch-filter {
-    font-size: 10px;
+    font-size: 11px;
+}
+
+.twenty {
+    font-size: 11px;
 }
 
 .branch-eye {
-    font-size: 10px;
+    font-size: 11px;
 }
 
 .branch-Export {
-    font-size: 10px;
-    margin-left: -40px;
+    font-size: 11px;
 }
 
 .branch-refresh {
-    font-size: 10px;
-    margin-left: -75px;
+    font-size: 11px;
 }
 
 .group-date-from1 {
-    width: 170px;
+    width: 165px;
+    margin-left: -155px;
 }
 
 .group-date-to1 {
     width: 150px;
+    margin-left: 925px;
+    margin-top: -48px;
 }
 
 .group-text-from1 {
@@ -91,13 +106,21 @@
 }
 
 .search-submit {
-    width: 140px;
-    height: 35px;
-    margin-left: -30px;
+    width: 125px;
+    margin-left: 1080px;
+    margin-top: -48px;
+    height: 32px;
+
 }
 
 .label-search {
-    font-size: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    width: 71px;
+}
+
+.success-search {
+    font-size: 11px;
 }
 
 .table-striped {
@@ -113,15 +136,119 @@
     width: 20px;
 }
 
-.title-Update {
-    margin-top: 50px;
-    font-size: 15px;
-}
-
 .table-KPI {
     font-style: normal;
     font-size: 30px;
     color: #4F4F4F;
     font-weight: 600;
     margin-top: 100px;
+}
+
+@media(max-width: 768px) {
+    tr {
+        font-size: 10px;
+    }
+
+    .r-l {
+        margin-top: 10px;
+    }
+
+    .twenty {
+        font-size: 8px;
+        width: 45px;
+    }
+
+    .branch-Export {
+        font-size: 8px;
+        width: 35px;
+        padding-left: 6px;
+    }
+
+    .branch-refresh {
+        font-size: 8px;
+        width: 20px;
+        height: 25px;
+        margin-top: -55px;
+        margin-left: 87px;
+        padding-left: 6px;
+    }
+
+    .branch-filter {
+        font-size: 8px;
+        width: 20px;
+        height: 25px;
+        padding-left: 6px;
+        margin-top: -102px;
+        margin-left: 110px;
+    }
+
+    .select-1 {
+        font-size: 10px;
+        margin-left: 7px;
+        width: 90px;
+    }
+
+    .select-departments1 {
+        font-size: 10px;
+        margin-left: 230px;
+        margin-top: -75px;
+        width: 111px;
+    }
+
+    .select-team1 {
+        font-size: 10px;
+        margin-left: 90px;
+        margin-top: -75px;
+        width: 75px;
+    }
+
+    .select-title1 {
+        font-size: 10px;
+        margin-left: 425px;
+        margin-top: -75px;
+        width: 70px;
+    }
+
+    .select-employee1 {
+        font-size: 10px;
+        margin-left: -253px;
+    }
+
+    .group-date-from1 {
+        margin-left: 110px;
+        margin-top: -30px;
+        width: 145px;
+    }
+
+    .group-text-from1 {
+        font-size: 10px;
+    }
+
+    .control-day1 {
+        font-size: 10px;
+    }
+
+    .group-date-to1 {
+        margin-left: 3px;
+        margin-top: -30px;
+        width: 130px;
+    }
+
+    .group-text-to1 {
+        font-size: 10px;
+    }
+
+    .search-submit {
+        font-size: 10px;
+        margin-left: 135px;
+        height: 30px;
+        margin-top: -45px;
+    }
+
+    .label-search {
+        width: 60px;
+        font-size: 9px;
+    }
+
+
 }

@@ -21,10 +21,6 @@
     margin-top: 60px;
 }
 
-.width-ehsan-small {
-    width: 30px;
-}
-
 .card {
     margin-top: 30px;
     padding: 2%;
@@ -75,16 +71,6 @@
 
 }
 
-.name {
-    cursor: pointer;
-}
-
-.navbar {
-    position: fixed;
-    z-index: 1;
-    height: 55px;
-}
-
 .nav-align {
     margin-top: 10px;
     cursor: pointer;
@@ -94,38 +80,10 @@
     text-decoration: none;
 }
 
-.Googday {
-    font-weight: 700;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
-.navbar-button {
-    padding-left: 160px;
-}
-
-
 
 @media(max-width:768px) {
-    .navbar {
-        padding-left: -10px;
-    }
-
     .nav-align {
         display: none;
-    }
-
-    .width-ehsan-small {
-        width: 20px;
-    }
-
-    .Googday {
-        font-size: 10px;
-        margin-left: 30px;
-    }
-
-    .name {
-        font-size: 10px;
-        margin-left: 30px;
     }
 
     .width-dashboard {
@@ -141,32 +99,9 @@
         font-size: 12px;
     }
 
-    .navbar-button {
-        margin-left: 20px;
-        margin-top: -30px;
-    }
-
-    .rounded {
-        font-size: 12px;
-    }
-
-    .fit {
-        font-size: 10px;
-    }
-
     .fa-clock-o {
         font-size: 10px;
     }
-
-    .bnheader {
-        font-size: 10px;
-    }
 }
 
-@media (max-width: 992px) {
-    .navbar-button {
-        margin-left: 250px;
-        margin-top: -30px;
-    }
-
-}
+@media (max-width: 992px) {}

@@ -24,6 +24,10 @@ class AppAsset extends AssetBundle
         'css/home/update-kpi.css',
         'css/home/evaluation.css',
         'css/home/profile.css',
+        'css/home/kgimanagement.css',
+        'css/home/kpimanagement.css',
+        'css/home/headernavbar.css',
+
     ];
     public $js = [
         'js/content.js',
