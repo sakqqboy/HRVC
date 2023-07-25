@@ -1,0 +1,128 @@
+.width-HRVC {
+    width: 60%;
+}
+
+.z-HRVC {
+    font-size: 32px;
+    padding-top: 30px;
+    color: #4A4543;
+    font-family: 'klavika';
+    font-weight: 100;
+}
+
+.em-login {
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'klavika';
+}
+
+.enter {
+    color: #808080;
+    font-family: 'klavika';
+    font-weight: 100;
+}
+
+.fm-log-mail {
+    margin-left: 120px;
+    margin-top: 30px;
+}
+
+.fm-log-password {
+    margin-left: 120px;
+    margin-top: 30px;
+}
+
+.checkbox-remember {
+    margin-top: 30px;
+    margin-left: 120px
+}
+
+.fm-box-sig {
+    margin-top: -25px;
+    margin-left: 130px;
+}
+
+.width-rof {
+    width: 40%;
+    margin-top: 350px;
+}
+
+.black-roof {
+    background-color: #DDF3FF;
+}
+
+.problem {
+    color: #265AA7;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.TCG-Logo1 {
+    width: 50px;
+    margin-top: 50px;
+}
+
+.rows-remember {
+    margin-top: 60px;
+    font-family: 'klavika';
+    font-weight: 300;
+}
+
+.noline {
+    text-decoration: none;
+}
+
+@media (max-width: 992px) {
+    .fm-log-mail {
+        margin-left: 20px;
+        padding-right: 70px;
+    }
+
+    .fm-log-password {
+        margin-left: 20px;
+        padding-right: 70px;
+    }
+
+    .checkbox-remember {
+        margin-left: 20px;
+        font-size: 12px;
+    }
+
+    .problem {
+        padding-left: 10px;
+
+    }
+
+    .width-HRVC {
+        width: 70%;
+    }
+
+    .z-HRVC {
+        font-size: 28px;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .problem {
+        font-size: 12px;
+
+    }
+
+    .fm-log-mail {
+        margin-left: 30px;
+        padding-right: 70px;
+    }
+
+    .fm-log-password {
+        margin-left: 30px;
+        padding-right: 70px;
+    }
+
+    .checkbox-remember {
+        margin-left: 30px;
+        font-size: 12px;
+    }
+
+}

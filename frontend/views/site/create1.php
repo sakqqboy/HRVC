@@ -2,7 +2,7 @@
 
 /** @var yii\web\View $this */
 
-$this->title = 'Update';
+$this->title = 'Create KPI1';
 ?>
 
 <div class="col-12">

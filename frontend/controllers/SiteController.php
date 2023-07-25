@@ -75,7 +75,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render("index");
+        return $this->render('index');
     }
     public function actionDashboard()
     {
@@ -97,9 +97,9 @@ class SiteController extends Controller
     {
         return $this->render("calendar");
     }
-    public function actionUpdateKpi()
+    public function actionRespiratory1()
     {
-        return $this->render("update-kpi");
+        return $this->render("respiratory1");
     }
     public function actionEvaluation()
     {
@@ -112,6 +112,18 @@ class SiteController extends Controller
     public function actionKpimanagement()
     {
         return $this->render("kpimanagement");
+    }
+    public function actionCreate1()
+    {
+        return $this->render("create1");
+    }
+    public function actionDashboardEdit()
+    {
+        return $this->render("dashboard-edit");
+    }
+    public function actionDashboardDelete()
+    {
+        return $this->render("dashboard-delete");
     }
 
 

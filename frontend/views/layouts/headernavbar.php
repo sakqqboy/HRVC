@@ -1,7 +1,7 @@
 <div class="col-12" id="index1">
     <div class="row">
         <nav class="navbar navbar-light bg-white">
-            <div class="col-lg-6 col-md-6 col-12">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                 <div class="col-lg-8 col-md-6 col-6">
                     <div class="input-group">
                         <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
@@ -12,7 +12,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-12  navbar-button">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-12  navbar-button">
                 <div class="row">
                     <div class="col-lg-2 col-md-6 col-sm-4 col-12">
                         <span class="Googday"> Good Day!! </span>

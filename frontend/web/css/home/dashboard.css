@@ -32,62 +32,68 @@
     padding-left: 30px;
 }
 
-.branch-select {
+.branch-select-1 {
     font-size: 14px;
     border: none;
 
 }
 
-.select-departments {
+.select-departments-1 {
     border: none;
     font-size: 14px;
 }
 
-.select-team {
+.select-team-1 {
     font-size: 14px;
     border: none;
 }
 
-.select-title {
+.select-title-1 {
     border: none;
     font-size: 14px;
 }
 
-.select-employee {
+.select-employee-1 {
     border: none;
     font-size: 14px;
 }
 
-.group-date-from {
+.group-date-from-1 {
     width: 170px;
 }
 
-.group-date-to {
+.group-date-to-1 {
     width: 150px;
 }
 
-.group-text-from {
+.group-text-from-1 {
     font-size: 12px;
 }
 
-.group-text-to {
+.group-text-to-1 {
     font-size: 12px;
 }
 
-.control-day {
+.control-day-1 {
     font-size: 12px;
 }
 
 .title-calendar1 {
-    margin-top: 30px;
+    margin-top: 25px;
+}
+
+.title-calendar3 {
+    margin-top: 25px;
+
 }
 
 .title-calendar2 {
     margin-top: 25px;
+
 }
 
 .title-refresh {
-    margin-top: 30px;
+    margin-top: 25px;
     cursor: pointer;
 }
 
@@ -135,7 +141,7 @@
     font-size: 16px;
     margin-top: 30px;
     font-weight: 700;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: black;
 }
 
 @media (max-width: 768px) {

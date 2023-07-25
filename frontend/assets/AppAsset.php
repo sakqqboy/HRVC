@@ -21,12 +21,15 @@ class AppAsset extends AssetBundle
         'css/home/kpi-summary.css',
         'css/home/kgi-summary.css',
         'css/home/calendar.css',
-        'css/home/update-kpi.css',
+        'css/home/respiratory1.css',
         'css/home/evaluation.css',
         'css/home/profile.css',
         'css/home/kgimanagement.css',
         'css/home/kpimanagement.css',
         'css/home/headernavbar.css',
+        'css/home/create.css',
+        'css/home/dashboard-edit.css',
+        'css/home/dashboard-delete.css',
 
     ];
     public $js = [

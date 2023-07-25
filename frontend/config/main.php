@@ -7,10 +7,15 @@ $params = array_merge(
 );
 
 return [
-    'id' => 'app-frontend',
+    'id' => 'app-frontend-hrvc',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'modules' => [
+        'designfront' => [
+            'class' => 'frontend\modules\design\designfront',
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
@@ -22,7 +27,7 @@ return [
         ],
         'session' => [
             // this is the name of the session cookie used for login on the frontend
-            'name' => 'advanced-frontend',
+            'name' => 'advanced-frontend-hrvc',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

@@ -1,25 +1,32 @@
-.page-Evaluation {
+.evaluation-chepter1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: black;
+}
+
+.evaluation-chepter2 {
+    font-size: 26px;
+    font-weight: 700;
+    text-align: end;
+    color: black;
+}
+
+.alert-evaluion {
+    border: none;
+    background-color: gainsboro;
+}
+
+.phepter3-thumbs {
+    font-size: 40px;
+}
+
+.ff {
+    font-size: 20px;
     color: black;
     font-weight: 700;
-    font-size: 25px;
+    margin-top: -20px;
 }
 
-.table-firstnname,
-.th-firtname,
-.td-title {
-    border: 1px solid white;
-    border-collapse: collapse;
-    color: white;
-    font-size: 17px;
-    height: 60px;
-    text-align: center;
-}
-
-.th-firtname {
-    background-color: #2981e6;
-}
-
-.td-title {
-    background-color: #bfdaf9;
-    color: black;
+.finist {
+    font-size: 13px;
 }

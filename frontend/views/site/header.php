@@ -14,7 +14,7 @@
                         <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/update" class="no-underline"><i class="fa fa-building-o pr-10 mt-20" aria-hidden="true"></i> Group Information</a></div>
                         <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/kpi-summary" class="no-underline"><i class="fa fa-home pr-10 mt-20" aria-hidden="true"></i> Company Name </a> </div>
                         <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/calendar" class="no-underline"><i class="fa fa-book pr-10 mt-20" aria-hidden="true"></i> Culture Book</a></div>
-                        <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/update-kpi" class="no-underline"><i class="fa fa-sitemap pr-10 mt-20" aria-hidden="true"></i> Hierarchy</a></div>
+                        <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/respiratory1" class="no-underline"><i class="fa fa-sitemap pr-10 mt-20" aria-hidden="true"></i> Hierarchy</a></div>
                         <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/kgi-summary" class="no-underline"><i class="fa fa-code-fork pr-10 mt-20" aria-hidden="true"></i> Department</a></div>
                         <div class="col-12"> <a href="" class="no-underline"><i class="fa fa-users pr-10 mt-20" aria-hidden="true"></i> Team </a></div>
                         <div class="col-12"> <a href="" class="no-underline"><i class="fa fa-star-o pr-10 mt-20" aria-hidden="true"></i> Designation</a></div>
@@ -24,7 +24,7 @@
                         <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/kpimanagement" class="no-underline"><i class="fa fa-tachometer pr-10 mt-20" aria-hidden="true"></i>KPI Management</a></div>
                         <div class="col-12 haeder-Evalution"> EVALUTION SETTINGS</div>
                         <div class="col-12"> <a href="" class="no-underline"><i class="fa fa-pencil-square-o pr-10 mt-20" aria-hidden="true"></i> Evaluetion</a></div>
-                        <div class="col-12"> <a href="" class="no-underline"><i class="fa fa-history pr-10 mt-20" aria-hidden="true"></i> 360 Degree Evaluetion</a></div>
+                        <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/evaluation" class="no-underline"><i class="fa fa-history pr-10 mt-20" aria-hidden="true"></i> 360 Degree Evaluetion</a></div>
                         <div class="col-12 haeder-Evalution"> REPORTS</div>
                         <div class="col-12"> <a href="" class="no-underline"><i class="fa fa-pie-chart pr-10 mt-20" aria-hidden="true"></i> Analysis</a></div>
                         <div class="col-12 haeder-Evalution"> ADMIN SETTINGS</div>

@@ -7,16 +7,20 @@ $this->title = 'Update';
 
 <div class="col-12">
     <div class="col-12 update-page">
-        KGI1 Create
+        KGI Management Update Page
     </div>
 </div>
 
-<div class="alert alert-light mt-30" role="alert">
+<div class="alert alert-light" role="alert">
     <div class="col-12">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Add KGI1</button>
+                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Add KGI</button>
             </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">KGI Settings</button>
+            </li>
+
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="AddKGI" role="tabpanel" aria-labelledby="addKGI-tab">
