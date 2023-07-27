@@ -13,11 +13,12 @@
 
 .alert-evaluion {
     border: none;
-    background-color: gainsboro;
+    background-color: rgb(235, 235, 235);
 }
 
 .phepter3-thumbs {
     font-size: 40px;
+    cursor: pointer;
 }
 
 .ff {
@@ -29,4 +30,16 @@
 
 .finist {
     font-size: 13px;
+}
+
+.alert-evaluion-light {
+    border: none;
+    background-color: #D9D9D9;
+    color: black;
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.evalution-background {
+    background-color: #fafafa;
 }

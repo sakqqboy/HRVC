@@ -117,13 +117,13 @@ class SiteController extends Controller
     {
         return $this->render("create1");
     }
-    public function actionDashboardEdit()
+    public function actionDashboardKpi2()
     {
-        return $this->render("dashboard-edit");
+        return $this->render("dashboard-kpi2");
     }
-    public function actionDashboardDelete()
+    public function actionAnalysis()
     {
-        return $this->render("dashboard-delete");
+        return $this->render("analysis");
     }
 
 

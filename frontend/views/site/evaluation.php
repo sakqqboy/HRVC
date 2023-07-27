@@ -49,6 +49,25 @@ $this->title = 'Evaluation';
                     </div>
                 </div>
             </div>
+            <div class="col-lg-6 col-md-6 col-12">
+                <div class="row">
+                    <div class="alert alert-light alert-evaluion-light" role="alert">
+                        <div class="col-4">
+                            Self Evaluation
+                        </div>
+                    </div>
+                    <div class="alert alert-light alert-evaluion-light" role="alert">
+                        <div class="col-4">
+                            Self Evaluation
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-12">
+            <div class="alert alert-light evalution-background" role="alert" style="border: none;">
+                A simple light alert—check it out!
+            </div>
         </div>
     </div>
 </div>

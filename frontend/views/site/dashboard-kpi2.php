@@ -4,9 +4,8 @@
 
 use yii\bootstrap5\Carousel;
 
-$this->title = 'Dashboard';
+$this->title = 'kpi2 group';
 ?>
-
 
 <div class="col-12">
     <div class="col-6 table-KPI">
@@ -84,13 +83,13 @@ $this->title = 'Dashboard';
                 <div class="col-12">
                     <div class="row">
                         <div class="col-lg-2 col-md-6 col-12">
-                            <div class="tab-pane fade show active show-fade-one" id="home" role="tabpanel" aria-labelledby="home-tab">KGI1 Group Dashboard</div>
+                            <div class="tab-pane fade show active show-fade-one" id="home" role="tabpanel" aria-labelledby="home-tab">KGI2 Group Dashboard</div>
                         </div>
                         <div class="col-lg-2 col-md-6 col-12">
-                            <a href="<?= Yii::$app->homeUrl ?>site/create1"><button type="submit" class="btn btn-success title-Update"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Create KGI 1 Group</button></a>
+                            <a href="<?= Yii::$app->homeUrl ?>site/create1"><button type="submit" class="btn btn-success title-Update"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Create KGI 2 Group</button></a>
                         </div>
                         <div class="col-lg-2 col-md-6 col-12 title-Respiratory">
-                            <a href="<?= Yii::$app->homeUrl ?>site/respiratory1"><button type="submit" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> KGI 1 Respiratory</button></a>
+                            <a href="<?= Yii::$app->homeUrl ?>site/respiratory1"><button type="submit" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> KGI 2 Respiratory</button></a>
                         </div>
                         <div class="col-lg-1 col-md-6 col-12 title-calendar1">
                             12 <i class="fa fa-eye" aria-hidden="true"></i>

@@ -6,54 +6,66 @@
 
 .Googday {
     font-weight: 700;
-    font-size: 18px;
+    font-size: 16px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-
+    padding-left: 40px;
 }
 
 .width-ehsan-small {
     width: 40px;
 }
 
-.bnheader {
-    margin-left: 20px;
+.box-list-group {
+    margin-left: -1120%;
 }
 
-@media(max-width: 768px) {
-    .rounded {
-        margin-left: 20px;
-        font-size: 14px;
+@media (max-width: 992px) {
+    .rounded1 {
+        margin-left: 25px;
+        font-size: 12px;
     }
 
     .Googday {
-        display: none;
+        font-size: 16px;
     }
 
-    .hdfit {
-        font-size: 13px;
+    .but-massenge {
+        margin-left: 60px;
+    }
+
+}
+
+@media(max-width: 768px) {
+    .rounded1 {
+        margin-left: 20px;
+        margin-top: -10px;
+        font-size: 12px;
+    }
+
+    .shadow-header {
+        margin-left: -88px;
+    }
+
+    .but-massenge {
+        margin-left: 108px;
+    }
+
+    .Googday {
+        font-size: 10px;
+        margin-left: -55px;
     }
 
     strong {
         font-size: 12px;
     }
 
-    .drop-avatar {
-        margin-top: -35px;
-        margin-left: 10px;
-    }
-
     .width-ehsan-small {
         margin-left: 55%;
-        width: 35px;
+        width: 30px;
     }
 
-    .bnheader {
-        font-size: 13px;
-        margin-top: -60px;
-        margin-left: 455px;
+    .search-input2 {
+        font-size: 12px;
     }
 
-    .shadow-logout {
-        margin-left: 290px;
-    }
 }
