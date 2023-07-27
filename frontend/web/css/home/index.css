@@ -105,7 +105,11 @@
 }
 
 @media (max-width: 992px) {
-    /* .card-Dashboard {
-        margin-left: 60px;
-    } */
+    .width-risk2 {
+        width: 50%;
+    }
+
+    .width-risk1 {
+        width: 65%;
+    }
 }
