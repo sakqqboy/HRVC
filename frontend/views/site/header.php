@@ -1,7 +1,7 @@
-<div class="col-lg-12 header1 header-menu">
+<div class="col-lg-12 header1 header-menu" id="mySidebar">
         <div class="col-12">
                 <div class="col-12">
-                        <i class="fa fa-caret-left caret-left menu" aria-hidden="true"></i>
+                        <i id="" class="fa fa-caret-left caret-left menu" aria-hidden="true"></i>
                 </div>
                 <div class="col-12">
                         <a href="<?= Yii::$app->homeUrl ?>site/index"><img src="<?= Yii::$app->homeUrl ?>image/Human-1.png" class="width-hrvc"></a>
@@ -23,7 +23,7 @@
                         <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/kgimanagement" class="no-underline"><i class="fa fa-line-chart pr-10 mt-20" aria-hidden="true"></i> KGI Management</a></div>
                         <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/kpimanagement" class="no-underline"><i class="fa fa-tachometer pr-10 mt-20" aria-hidden="true"></i> KPI Management</a></div>
                         <div class="col-12 haeder-Evalution"> EVALUTION SETTINGS</div>
-                        <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/index" class="no-underline"><i class="fa fa-pencil-square-o pr-10 mt-20" aria-hidden="true"></i> Evaluetion</a></div>
+                        <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/registration" class="no-underline"><i class="fa fa-pencil-square-o pr-10 mt-20" aria-hidden="true"></i> Evaluetion</a></div>
                         <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/evaluation" class="no-underline"><i class="fa fa-history pr-10 mt-20" aria-hidden="true"></i> 360 Degree Evaluetion</a></div>
                         <div class="col-12 haeder-Evalution"> REPORTS</div>
                         <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/analysis" class="no-underline"><i class="fa fa-pie-chart pr-10 mt-20" aria-hidden="true"></i> Analysis</a></div>

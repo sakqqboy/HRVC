@@ -75,15 +75,15 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->render("index");
     }
     public function actionDashboard()
     {
-        return $this->render('dashboard');
+        return $this->render("dashboard");
     }
     public function actionUpdate()
     {
-        return $this->render('update');
+        return $this->render("update");
     }
     public function actionKpiSummary()
     {
@@ -124,6 +124,10 @@ class SiteController extends Controller
     public function actionAnalysis()
     {
         return $this->render("analysis");
+    }
+    public function actionRegistration()
+    {
+        return $this->render("registration");
     }
 
 

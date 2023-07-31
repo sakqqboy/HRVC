@@ -1,0 +1,28 @@
+.page-Questions {
+    font-size: 39px;
+    padding-left: 50px;
+}
+
+.Dashboard-Master {
+    font-size: 23px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.white-bb {
+    background-color: aliceblue;
+    border-radius: 20px;
+}
+
+.fon-bold {
+    font-weight: 700;
+    font-size: 25px;
+}
+
+.icon-big {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.detail-card {
+    font-weight: 600;
+}

@@ -1,8 +1,7 @@
 <div class="col-12">
     <div class="row">
         <nav class="navbar navbar-light bg-light">
-            <div class="col-lg-1 col-md-6 col-sm-4 col-1 menubar1"></div>
-            <div class="col-lg-5 col-md-6 col-sm-4 col-5">
+            <div class="col-lg-6 col-md-6 col-sm-4 col-5">
                 <div class="input-group rounded1">
                     <input type="search" class="form-control rounded search-input2" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                     <span class="input-group-text border-0" id="search-addon">
@@ -10,7 +9,6 @@
                     </span>
                     <button type="button" class="btn btn-outline-dark"><i class="fa fa-filter" aria-hidden="true"></i></button>
                 </div>
-
             </div>
             <div class="col-lg-6 col-md-6 col-sm-4 col-6">
                 <div class="row">
