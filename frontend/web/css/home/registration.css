@@ -1,6 +1,5 @@
 .page-Questions {
     font-size: 39px;
-    padding-left: 50px;
 }
 
 .Dashboard-Master {
@@ -9,13 +8,13 @@
 }
 
 .white-bb {
-    background-color: aliceblue;
+    background-color: white;
     border-radius: 20px;
 }
 
 .fon-bold {
     font-weight: 700;
-    font-size: 25px;
+    font-size: 23px;
 }
 
 .icon-big {
@@ -25,4 +24,36 @@
 
 .detail-card {
     font-weight: 600;
+}
+
+.alert1-info1 {
+    background-color: #E8F0F6;
+}
+
+.fon1-small {
+    font-size: 15px;
+    font-weight: 100;
+}
+
+.line-tag {
+    text-decoration: none;
+    color: white;
+}
+
+@media(max-width: 992px) {}
+
+@media(max-width: 768px) {
+    .page-Questions {
+        font-size: 20px;
+        padding-left: 20px;
+    }
+
+    .Dashboard-Master {
+        font-size: 18px;
+        padding-left: 10px;
+    }
+
+    .white-bb {
+        margin-left: 10px;
+    }
 }

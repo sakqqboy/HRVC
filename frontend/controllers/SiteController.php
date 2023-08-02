@@ -129,9 +129,10 @@ class SiteController extends Controller
     {
         return $this->render("registration");
     }
-
-
-
+    public function actionRegistrationRegister()
+    {
+        return $this->render("registration-register");
+    }
     /**
      * Logs in a user.
      *
