@@ -32,8 +32,8 @@ class AppAsset extends AssetBundle
         'css/home/dashboard-delete.css',
         'css/home/analysis.css',
         'css/home/registration.css',
-        'css/home/registration-register.css',
-
+        'css/home/template-dashboard.css',
+        'css/home/template-maker.css',
     ];
     public $js = [
         'js/content.js',

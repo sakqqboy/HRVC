@@ -13,11 +13,11 @@ $this->title = 'registration';
                     Select QS
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Master QS Dashboard</a></li>
+                    <li><a class="dropdown-item" href="<?= Yii::$app->homeUrl ?>site/registration">Master QS Dashboard</a></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" href="#">Template Dashboard</a></li>
+                    <li><a class="dropdown-item" href="<?= Yii::$app->homeUrl ?>site/template-dashboard">Template Dashboard</a></li>
                 </ul>
             </div>
         </div>
@@ -30,7 +30,7 @@ $this->title = 'registration';
             </div>
             <div class="col-lg-5 col-md-6 col-4">
                 <button type="button" class="btn btn-primary">
-                    <a href="<?= Yii::$app->homeUrl ?>site/registration-register" class="line-tag"><i class="fa fa-plus-circle" aria-hidden="true"></i> Register QS </a>
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i> Register QS
                 </button>
             </div>
             <div class="col-lg-2 col-md-6 col-4">

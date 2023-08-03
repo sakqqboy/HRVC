@@ -1,0 +1,18 @@
+.line-text {
+    text-decoration: none;
+    color: white;
+}
+
+.moon-template {
+    color: red;
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.label-template1 {
+    color: #838E9E;
+}
+
+.tb-border {
+    border-radius: 10px;
+}

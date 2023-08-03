@@ -129,9 +129,13 @@ class SiteController extends Controller
     {
         return $this->render("registration");
     }
-    public function actionRegistrationRegister()
+    public function actionTemplateDashboard()
     {
-        return $this->render("registration-register");
+        return $this->render("template-dashboard");
+    }
+    public function actionTemplateMaker()
+    {
+        return $this->render("template-maker");
     }
     /**
      * Logs in a user.

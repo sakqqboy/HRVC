@@ -4,7 +4,7 @@
 
 .Dashboard-Master {
     font-size: 23px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .white-bb {
@@ -18,7 +18,7 @@
 }
 
 .icon-big {
-    font-size: 30px;
+    font-size: 22px;
     cursor: pointer;
 }
 
