@@ -7,6 +7,7 @@
                         <a href="<?= Yii::$app->homeUrl ?>site/index"><img src="<?= Yii::$app->homeUrl ?>image/Human-1.png" class="width-hrvc"></a>
                 </div>
                 <div class="col-12 navbar-header">
+
                         <div class="col-12">
                                 <a href="<?= Yii::$app->homeUrl ?>site/dashboard" class="no-underline"> <i class="fa fa-th-large pr-10 mt-10" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tooltip on bottom"></i> Dashboard</a>
                         </div>
@@ -32,5 +33,6 @@
                         <div class="col-12"> <a href="" class="no-underline"><i class="fa fa-sun-o pr-10 mt-20" aria-hidden="true"></i> Super admin</a></div>
                         <div class="col-12"> <a href="" class="no-underline"><i class="fa fa-bell-o pr-10 mt-20" aria-hidden="true"></i> Notification Center</a></div>
                 </div>
+
         </div>
 </div>

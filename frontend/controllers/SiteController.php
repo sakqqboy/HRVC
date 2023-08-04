@@ -137,6 +137,11 @@ class SiteController extends Controller
     {
         return $this->render("template-maker");
     }
+    public function actionPreview()
+    {
+        return $this->render("preview");
+    }
+
     /**
      * Logs in a user.
      *

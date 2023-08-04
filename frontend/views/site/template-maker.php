@@ -71,9 +71,9 @@ $this->title = 'template maker';
     </table>
     <div class="row">
         <div class="col-12 text-end" style="margin-top: 120px;">
-            <button class="btn btn-outline-dark" type="button">Cancel</button>
-            <a href="<?= Yii::$app->homeUrl ?>site/"><button class="btn btn-primary" type="submit">Preview</button> </a>
-            <input class="btn btn-primary" type="submit" value="Submit">
+            <button type="button" class="btn btn-secondary">Cancel</button>
+            <a href="<?= Yii::$app->homeUrl ?>site/preview"><button type="button" class="btn btn-primary">Preview</button></a>
+            <button type="button" class="btn btn-primary">Submit</button>
         </div>
     </div>
 </div>
