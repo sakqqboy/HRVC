@@ -30,7 +30,7 @@ return [
         ],
         'session' => [
             // this is the name of the session cookie used for login on the frontend
-            'name' => 'advanced-frontend-hrvc',
+            'name' => 'tcg-frontend-hrvc',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
