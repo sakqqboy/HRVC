@@ -125,9 +125,9 @@ class SiteController extends Controller
     {
         return $this->render("analysis");
     }
-    public function actionRegistration()
+    public function actionMasterDashboard()
     {
-        return $this->render("registration");
+        return $this->render("master-dashboard");
     }
     public function actionTemplateDashboard()
     {
@@ -140,6 +140,10 @@ class SiteController extends Controller
     public function actionPreview()
     {
         return $this->render("preview");
+    }
+    public function actionMasterSetting()
+    {
+        return $this->render("master-setting");
     }
 
     /**
