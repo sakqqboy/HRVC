@@ -145,6 +145,10 @@ class SiteController extends Controller
     {
         return $this->render("master-setting");
     }
+    public function actionRegistration()
+    {
+        return $this->render("registration");
+    }
 
     /**
      * Logs in a user.

@@ -1,0 +1,76 @@
+.page-register-qs {
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.Sub-category {
+    font-size: 14px;
+}
+
+.moon-n1 {
+    color: red;
+    font-size: 16px;
+}
+
+.regis-rating {
+    font-size: 25px;
+    font-weight: 400;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+.regis-select-rating {
+    font-size: 14px;
+    padding-left: 20px;
+    padding-top: 10px;
+
+}
+
+.sero {
+    font-size: 18px;
+    font-weight: 500;
+    padding-left: 15px;
+    padding-top: 25px;
+}
+
+.exampleInput-text {
+    padding-top: 15px;
+}
+
+.icon-sml {
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.details-table1 {
+    font-size: 14px;
+    font-weight: bolder;
+    line-height: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.coolor {
+    font-size: 11px;
+    width: 25px;
+    margin-left: 20px;
+
+}
+
+.font-Associated {
+    font-size: 15px;
+    color: gray;
+    font-weight: 500;
+}
+
+.check-box {
+    color: #0D99D6;
+    font-weight: 500;
+}
+
+.font-Assessing {
+    font-size: 12px;
+}
+
+.bg-font-color {
+    color: black;
+}

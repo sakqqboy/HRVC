@@ -13,7 +13,7 @@ $this->title = 'template dashboard';
                     Select QS
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="<?= Yii::$app->homeUrl ?>site/registration">Master QS Dashboard</a></li>
+                    <li><a class="dropdown-item" href="<?= Yii::$app->homeUrl ?>site/master-dashboard">Master QS Dashboard</a></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
