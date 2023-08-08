@@ -9,18 +9,79 @@
                 <div class="col-12 navbar-header">
 
                         <div class="col-12">
-                                <a href="<?= Yii::$app->homeUrl ?>site/dashboard" class="no-underline"> <i class="fa fa-th-large pr-10 mt-10" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tooltip on bottom"></i> Dashboard</a>
+                                <a href="<?= Yii::$app->homeUrl ?>site/dashboard" class="no-underline">
+                                        <i class="fa fa-th-large pr-10 mt-10" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tooltip on bottom"></i>
+                                        Dashboard
+                                </a>
                         </div>
-                        <div class="col-12  haeder-company"> Company Details </div>
-                        <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/master-setting" class="no-underline"><i class="fa fa-building-o pr-10 mt-20" aria-hidden="true"></i> Group Information</a></div>
-                        <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/kpi-summary" class="no-underline"><i class="fa fa-home pr-10 mt-20" aria-hidden="true"></i> Company Name </a> </div>
-                        <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/dashboard-kpi2" class="no-underline"><i class="fa fa-book pr-10 mt-20" aria-hidden="true"></i> Culture Book</a></div>
-                        <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/respiratory1" class="no-underline"><i class="fa fa-sitemap pr-10 mt-20" aria-hidden="true"></i> Hierarchy</a></div>
-                        <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/kgi-summary" class="no-underline"><i class="fa fa-code-fork pr-10 mt-20" aria-hidden="true"></i> Department</a></div>
-                        <div class="col-12"> <a href="" class="no-underline"><i class="fa fa-users pr-10 mt-20" aria-hidden="true"></i> Team </a></div>
-                        <div class="col-12"> <a href="" class="no-underline"><i class="fa fa-star-o pr-10 mt-20" aria-hidden="true"></i> Designation</a></div>
-                        <div class="col-12"> <a href="" class="no-underline"><i class="fa fa-user pr-10 mt-20" aria-hidden="true"></i> Employees</a></div>
-                        <div class="col-12 haeder-kpi"> KPI & KGI MANAGEMENT</div>
+                        <div class="col-12  haeder-company">
+                                Company Details
+                        </div>
+                        <div class="col-12">
+                                <a href="<?= Yii::$app->homeUrl ?>site/master-setting" class="no-underline">
+                                        <i class="fa fa-building-o pr-10 mt-20" aria-hidden="true"></i> Group Information
+                                </a>
+                        </div>
+                        <div class="col-12">
+                                <a href="<?= Yii::$app->homeUrl ?>site/kpi-summary" class="no-underline">
+                                        <i class="fa fa-home pr-10 mt-20" aria-hidden="true"></i> Company Name
+                                </a>
+                        </div>
+                        <div class="col-12">
+                                <a href="<?= Yii::$app->homeUrl ?>site/dashboard-kpi2" class="no-underline">
+                                        <i class="fa fa-book pr-10 mt-20" aria-hidden="true"></i> Culture Book
+                                </a>
+                        </div>
+                        <div class="col-12">
+                                <a href="<?= Yii::$app->homeUrl ?>site/respiratory1" class="no-underline">
+                                        <i class="fa fa-sitemap pr-10 mt-20" aria-hidden="true"></i>
+                                        Hierarchy
+                                </a>
+                        </div>
+                        <div class="col-12">
+                                <a href="<?= Yii::$app->homeUrl ?>site/kgi-summary" class="no-underline">
+                                        <i class="fa fa-code-fork pr-10 mt-20" aria-hidden="true"></i> Department
+                                </a>
+                        </div>
+
+                        <div class="col-12">
+                                <a href="" class="no-underline">
+                                        <i class="fa fa-star-o pr-10 mt-20" aria-hidden="true"></i>
+                                        Designation
+                                </a>
+                        </div>
+                        <div class="col-12">
+                                <a href="" class="no-underline">
+                                        <i class="fa fa-users pr-10 mt-20" aria-hidden="true">
+
+                                        </i> Branch </a>
+                        </div>
+                        <div class="col-12">
+                                <a href="" class="no-underline">
+                                        <i class="fa fa-users pr-10 mt-20" aria-hidden="true">
+
+                                        </i> Department </a>
+                        </div>
+                        <div class="col-12">
+                                <a href="" class="no-underline">
+                                        <i class="fa fa-users pr-10 mt-20" aria-hidden="true">
+
+                                        </i> Position </a>
+                        </div>
+                        <div class="col-12">
+                                <a href="" class="no-underline">
+                                        <i class="fa fa-users pr-10 mt-20" aria-hidden="true">
+
+                                        </i> Team </a>
+                        </div>
+                        <div class="col-12"> <a href="" class="no-underline">
+                                        <i class="fa fa-user pr-10 mt-20" aria-hidden="true"></i>
+                                        Employee
+                                </a>
+                        </div>
+                        <div class="col-12 haeder-kpi">
+                                KPI & KGI MANAGEMENT
+                        </div>
                         <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/kgimanagement" class="no-underline"><i class="fa fa-line-chart pr-10 mt-20" aria-hidden="true"></i> KGI Management</a></div>
                         <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/kpimanagement" class="no-underline"><i class="fa fa-tachometer pr-10 mt-20" aria-hidden="true"></i> KPI Management</a></div>
                         <div class="col-12 haeder-Evalution"> EVALUTION SETTINGS</div>

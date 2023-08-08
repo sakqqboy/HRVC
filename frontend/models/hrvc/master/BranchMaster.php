@@ -9,7 +9,7 @@ use Yii;
 *
     * @property integer $branchId
     * @property string $branchName
-    * @property integer $countryId
+    * @property integer $companyId
     * @property integer $status
     * @property string $createDateTime
     * @property string $updateDateTime
@@ -30,8 +30,8 @@ return 'branch';
 public function rules()
 {
 return [
-            [['branchName', 'countryId'], 'required'],
-            [['countryId'], 'integer'],
+            [['branchName', 'companyId'], 'required'],
+            [['companyId'], 'integer'],
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['branchName'], 'string', 'max' => 255],
             [['status'], 'string', 'max' => 10],
@@ -46,7 +46,7 @@ public function attributeLabels()
 return [
     'branchId' => 'Branch ID',
     'branchName' => 'Branch Name',
-    'countryId' => 'Country ID',
+    'companyId' => 'Company ID',
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',
     'updateDateTime' => 'Update Date Time',
