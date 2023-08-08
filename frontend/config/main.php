@@ -15,6 +15,9 @@ return [
         'designfront' => [
             'class' => 'frontend\modules\design\designfront',
         ],
+        'setting' => [
+            'class' => 'frontend\modules\setting\setting',
+        ],
     ],
     'components' => [
         'request' => [
