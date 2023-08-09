@@ -169,7 +169,36 @@ $this->title = 'Registration';
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-4">
-                                <button class="btn btn-outline-secondary" type="button"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="staticBackdropLabel">Edit Sub Category</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form>
+                                                    <div class="mb-3">
+                                                        <label for="recipient-name" class="col-form-label">Sub-Category Name</label>
+                                                        <input type="text" class="form-control" id="recipient-name">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="message-text" class="col-form-label">Sub-Category details</label>
+                                                        <textarea class="form-control textarea-font" id="message-text"></textarea>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
                                 <button class="btn btn-outline-secondary" type="button"> <i class="fa fa-plus-circle" aria-hidden="true"></i></button>
                                 <button class="btn btn-outline-danger" type="button"> <i class="fa fa-trash" aria-hidden="true"></i></button>
                             </div>

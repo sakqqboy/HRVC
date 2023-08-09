@@ -37,6 +37,7 @@ class AppAsset extends AssetBundle
         'css/home/preview.css',
         'css/home/master-setting.css',
         'css/home/registration.css',
+        'css/home/group.css',
     ];
     public $js = [
         'js/content.js',

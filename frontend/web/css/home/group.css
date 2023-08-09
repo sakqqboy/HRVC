@@ -1,0 +1,67 @@
+.bk-mastersetting {
+    background-color: #D9D9D9;
+}
+
+.image-15 {
+    width: 40rem;
+    height: 12.10rem;
+}
+
+.image-14 {
+    width: 20rem;
+    height: 12rem;
+}
+
+.image-TCG-Logo {
+    margin-top: -50px;
+    margin-left: 10px;
+}
+
+.name-tokyo {
+    font-weight: bold;
+    font-size: 22px;
+    margin-left: -100px;
+}
+
+.tokyo-small {
+    font-size: 12px;
+    margin-left: -100px;
+}
+
+.thin-solid-color {
+    border: none solid thin;
+    height: 6px;
+    border-radius: 3px;
+    margin-left: -25px;
+    background: linear-gradient(270deg, #02C39A 0%, #F0F3BD 100%);
+}
+
+.title-Profile {
+    font-weight: 600;
+    margin-top: -10px;
+}
+
+.not-outline {
+    color: #7A78DA;
+    font-size: 14px;
+}
+
+.ABOUT-NAME {
+    padding-top: 150px;
+    font-weight: 700;
+}
+
+.title-Companies {
+    font-size: 16px;
+    color: #2B89DF;
+}
+
+.companies-27 {
+    font-size: 20px;
+    font-weight: 700;
+    color: black;
+}
+
+.website-bold {
+    font-weight: 700;
+}

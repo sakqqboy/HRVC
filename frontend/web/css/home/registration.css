@@ -74,3 +74,7 @@
 .bg-font-color {
     color: black;
 }
+
+.textarea-font {
+    font-size: 13px;
+}
