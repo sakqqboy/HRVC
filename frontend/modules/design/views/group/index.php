@@ -3,7 +3,7 @@
 $this->title = 'group profile';
 ?>
 
-<div class="col-12" style="margin-top: 90px;">
+<div class="col-12" style="margin-top: 60px;">
     <div class="col-12">
         <img src="<?= Yii::$app->homeUrl ?>image/sadd-1.png" class="sad-1">
     </div>
@@ -32,7 +32,7 @@ $this->title = 'group profile';
             </div>
         </div>
 
-        <div class="col-lg-4 col-md-6 col-12 text-end mt-40">
+        <div class="col-lg-4 col-md-6 col-12 text-end mt-30">
             <span class="tcg-edit">TCG </span> <button type="button" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
         </div>
     </div>
@@ -112,7 +112,7 @@ $this->title = 'group profile';
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-6">
-                    <div class="alert alert-secondary" role="alert">
+                    <div class="alert alert-secondary-background" role="alert">
                         <div class="row">
                             <div class="col-2">
                                 <i class="fa fa-users" aria-hidden="true" style="font-size: 20px;padding-top: 20px;"></i>

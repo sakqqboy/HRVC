@@ -3,7 +3,7 @@
 $this->title = 'company profile';
 ?>
 
-<div class="col-12" style="margin-top: 90px;">
+<div class="col-12" style="margin-top: 60px;">
     <div class="col-12">
         <img src="<?= Yii::$app->homeUrl ?>image/sadd-1.png" class="sad-1">
     </div>

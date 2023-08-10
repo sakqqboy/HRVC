@@ -19,7 +19,7 @@ class AppAsset extends AssetBundle
         'css/layout/layout.css',
         'css/home/update.css',
         'css/home/kpi-summary.css',
-        'css/home/kgi-summary.css',
+        'css/home/department.css',
         'css/home/calendar.css',
         'css/home/respiratory1.css',
         'css/home/evaluation.css',
@@ -40,6 +40,10 @@ class AppAsset extends AssetBundle
         'css/home/group.css',
         'css/home/company-profile.css',
         'css/home/group-add.css',
+        'css/home/company-add.css',
+        'css/home/company.css',
+        'css/home/branch.css',
+        'css/home/team.css',
     ];
     public $js = [
         'js/content.js',

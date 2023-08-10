@@ -1,0 +1,19 @@
+.branch-title {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.alert-branch {
+    background-color: #e9f1fc;
+    border-radius: 1px;
+}
+
+.card-tcf {
+    padding-top: 10px;
+    width: 55px;
+    border-radius: 5px;
+}
+
+.card-round {
+    width: 18px;
+}
