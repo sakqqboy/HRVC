@@ -1,0 +1,82 @@
+.alert-layer {
+    background-color: #e6ebf2;
+}
+
+.alert-layer1 {
+    background-color: #e6ebf2;
+    margin-top: 100px;
+}
+
+.image-shape {
+    width: 35%;
+}
+
+.image-shape1 {
+    width: 70%;
+    margin-top: 5px;
+}
+
+.image-shape2 {
+    width: 100%;
+    margin-top: 45px;
+}
+
+.top-management {
+    margin-top: -60px;
+    font-weight: 700;
+}
+
+.top-middle {
+    margin-top: -60px;
+    font-weight: 700;
+}
+
+.top-lower {
+    margin-top: -60px;
+    font-weight: 700;
+}
+
+.Top-sub-Layer {
+    padding-top: 10px;
+    font-weight: 700;
+    font-size: 20px;
+    padding-left: 60px;
+}
+
+.flex-formcontrol {
+    margin-left: 60px;
+}
+
+.alert-vector {
+    width: 60%;
+    margin-top: 30px;
+}
+
+.show-Management {
+    border-left: solid #D9D9D9 thin;
+    margin-top: 30px;
+}
+
+.sub-later0 {
+    font-weight: 700;
+    margin-top: 40px;
+    font-size: 13px;
+}
+
+.TM {
+    margin-top: 20px;
+}
+
+.big-management {
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.leyer-Editor {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.editor1 {
+    font-weight: 700;
+}
