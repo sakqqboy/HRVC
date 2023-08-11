@@ -63,7 +63,7 @@ $this->title = 'Add';
             <div class="col-lg-6 col-md-6 col-12">
                 <hr>
             </div>
-            <div class="col-lg-5 col-md-6 col-12 text-end Groupname2">
+            <div class="col-lg-6 col-md-6 col-12 text-end Groupname2">
                 Group Company Profile
             </div>
         </div>

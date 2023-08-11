@@ -23,7 +23,7 @@ $this->title = 'Add';
                 </div>
             </div>
         </div>
-        <div class="col-lg-6 col-md-6 col-12">
+        <div class="col-lg-7 col-md-6 col-12">
             <div class="form-companyname">
                 <div class="row">
                     <div class="col-5 Groupname1">
@@ -55,7 +55,7 @@ $this->title = 'Add';
             <div class="col-lg-6 col-md-6 col-12">
                 <hr>
             </div>
-            <div class="col-lg-5 col-md-6 col-12 text-end Groupname2">
+            <div class="col-lg-6 col-md-6 col-12 text-end Groupname2">
                 Group Company Profile
             </div>
         </div>
@@ -150,17 +150,19 @@ $this->title = 'Add';
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-12 mt-50">
+            <div class="col-lg-6 col-md-6 col-12 mt-30">
                 <div class="row">
-                    <div class="col-2" style="padding-top: 150px; font-weight:700;">
+                    <div class="col-2" style="padding-top: 250px; font-weight:700;">
                         ABOUT <span class="profile-moon">*</span>
                     </div>
                     <div class="col-10">
-                        <div class="alert alert-secondary" role="alert" style="font-size: 14px;">
-                            Tokyo Consulting Group's mission is to help foreign companies to set-up business in Japan, and to help Japanese companies establishing themselves abroad. Our goal is to enhance businesses through the incorporation of our services. Our main services are book keeping, accounting, audit, tax, labor & human resources (social insurance and payroll), and outsourcing.
-                            <p> Furthermore, Tokyo Consulting Group provides consulting and advising services in various types of businesses and industries for foreign and prospective entities setting business in Japan. Our multicultural and multilingual staff is composed of more than 300 experienced and qualified professionals, many of them being Japanese Certified Public Accountants, USCPAs, Licensed Japanese Tax Accountants, and Social Insurance and Labor Specialists. We have an integrated service philosophy which allows us to provide the best service by selecting the exact expertise needed for each project from our experienced staff. Thus, we can deliver the best service possible, from accounting work to legal and cultural education. Throughout the wide range of services we provide, our commitment to our clients is absolute, and we focus on providing additional value to every engagement. It is our ultimate goal and wish that our clients become increasingly successful, and contribute to society in an effective way through our support.</p>
+                        <div class="card">
+                            <div class="card-body">
+                                Tokyo Consulting Group's mission is to help foreign companies to set-up business in Japan, and to help Japanese companies establishing themselves abroad. Our goal is to enhance businesses through the incorporation of our services. Our main services are book keeping, accounting, audit, tax, labor & human resources (social insurance and payroll), and outsourcing.
+                                <p> Furthermore, Tokyo Consulting Group provides consulting and advising services in various types of businesses and industries for foreign and prospective entities setting business in Japan. Our multicultural and multilingual staff is composed of more than 300 experienced and qualified professionals, many of them being Japanese Certified Public Accountants, USCPAs, Licensed Japanese Tax Accountants, and Social Insurance and Labor Specialists. We have an integrated service philosophy which allows us to provide the best service by selecting the exact expertise needed for each project from our experienced staff. Thus, we can deliver the best service possible, from accounting work to legal and cultural education. Throughout the wide range of services we provide, our commitment to our clients is absolute, and we focus on providing additional value to every engagement. It is our ultimate goal and wish that our clients become increasingly successful, and contribute to society in an effective way through our support.</p>
+                            </div>
                         </div>
-                        <div class="row">
+                        <div class="row mt-10">
                             <div class="col-4">
                                 <div class="alert alert-secondary text-center" role="alert">
                                     <div class="text-primary"> Companies</div>
