@@ -114,7 +114,7 @@ $this->title = 'company profile';
     <hr>
     <div class="row">
         <div class="col-lg-3 col-md-6 col-6">
-            <div class="alert alert-secondary" role="alert">
+            <div class="alert alert-secondary-background" role="alert">
                 <div class="row">
                     <div class="col-4">
                         <i class="fa fa-users" aria-hidden="true" style="font-size: 32px;padding-top: 15px;"></i>
@@ -131,7 +131,7 @@ $this->title = 'company profile';
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-6">
-            <div class="alert alert-secondary" role="alert">
+            <div class="alert alert-secondary-background" role="alert">
                 <div class="row">
                     <div class="col-4">
                         <i class="fa fa-users" aria-hidden="true" style="font-size: 32px;padding-top: 15px;"></i>
@@ -148,7 +148,7 @@ $this->title = 'company profile';
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-6">
-            <div class="alert alert-secondary" role="alert">
+            <div class="alert alert-secondary-background" role="alert">
                 <div class="row">
                     <div class="col-4">
                         <i class="fa fa-users" aria-hidden="true" style="font-size: 32px;padding-top: 15px;"></i>
@@ -165,7 +165,7 @@ $this->title = 'company profile';
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-6">
-            <div class="alert alert-secondary" role="alert">
+            <div class="alert alert-secondary-background" role="alert">
                 <div class="row">
                     <div class="col-4">
                         <i class="fa fa-users" aria-hidden="true" style="font-size: 32px;padding-top: 15px;"></i>

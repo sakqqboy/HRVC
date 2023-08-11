@@ -150,9 +150,9 @@ $this->title = 'Add';
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-12 mt-50">
+            <div class="col-lg-6 col-md-6 col-12 mt-30">
                 <div class="row">
-                    <div class="col-2" style="padding-top: 150px; font-weight:700;">
+                    <div class="col-2" style="padding-top: 250px; font-weight:700;">
                         ABOUT <span class="profile-moon">*</span>
                     </div>
                     <div class="col-10">

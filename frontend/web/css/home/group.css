@@ -4,7 +4,11 @@
 
 .edit-update {
     margin-top: -50px;
-    /* padding-left: 1010px; */
+    padding-left: 1010px;
+}
+
+.tcg-edit0 {
+    text-align: end;
 }
 
 body {
@@ -123,6 +127,11 @@ h1 small {
 
 .name-head {
     font-weight: 700;
+    text-align: end;
+}
+
+.name-head0 {
+    text-align: start;
 }
 
 .number-bold {
@@ -161,64 +170,123 @@ h1 small {
     background-color: #FBFBFB;
 }
 
-
-/* .bk-mastersetting {
-    background-color: #D9D9D9;
+.clipboard0 {
+    cursor: pointer;
 }
 
-.image-15 {
-    width: 40rem;
-    height: 12.10rem;
+.building0 {
+    font-size: 30px;
 }
 
-.image-14 {
-    width: 20rem;
-    height: 12rem;
-}
-
-.image-TCG-Logo {
-    margin-top: -50px;
-    margin-left: 10px;
-}
-
-
-
-
-
-.thin-solid-color {
-    border: none solid thin;
-    height: 6px;
-    border-radius: 3px;
-    margin-left: -25px;
-    background: linear-gradient(270deg, #02C39A 0%, #F0F3BD 100%);
-}
-
-.title-Profile {
-    font-weight: 600;
-    margin-top: -10px;
-}
-
-.not-outline {
-    color: #7A78DA;
+.address-box0 {
     font-size: 14px;
 }
 
-.ABOUT-NAME {
-    padding-top: 150px;
-    font-weight: 700;
+@media(max-width:992px) {
+    .edit-update {
+        padding-left: 755px;
+    }
+
+    .width-TCF-BD {
+        width: 100%;
+    }
+
+    .alert-secondary-background {
+        margin-left: 20px;
+    }
 }
 
-.title-Companies {
-    font-size: 16px;
-    color: #2B89DF;
-}
 
-.companies-27 {
-    font-size: 20px;
-    font-weight: 700;
-    color: black;
-}
 
-.website-bold {
-    font-weight: 700;
-} */
+
+@media(max-width: 768px) {
+    .edit-update {
+        padding-left: 350px;
+    }
+
+    .avatar-upload {
+        margin-left: 80px;
+    }
+
+    .name-tokyo {
+        padding-left: 215px;
+        margin-top: -180px;
+        font-size: 20px;
+    }
+
+    .tokyo-small {
+        padding-left: 220px;
+        margin-top: -5px;
+    }
+
+    .tcg-edit0 {
+        margin-top: -40px;
+        text-align: right;
+    }
+
+    .name-head {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .name-head0 {
+        text-align: right;
+        margin-top: -24px;
+    }
+
+    .address-box {
+        font-size: 13px;
+        width: 125px;
+        margin-left: 340px;
+
+    }
+
+    .address-box0 {
+        font-size: 13px;
+    }
+
+    .Group-Information {
+        margin-top: 30px;
+    }
+
+    .ABOUT-NAME {
+        margin-top: 30px;
+    }
+
+    .box-about0 {
+        margin-left: 20px;
+    }
+
+    .home-tokyo {
+        margin-left: 30px;
+        margin-top: 30px;
+    }
+
+    .width-TCF-BD {
+        width: 60%;
+    }
+
+    .building0 {
+        font-size: 30px;
+        padding-left: 30px;
+    }
+
+    .Affiliated0 {
+        margin-top: -20px;
+        text-align: center;
+    }
+
+    .box-27 {
+        padding-left: 400px;
+        margin-top: -25px;
+    }
+
+    .numberemployees {
+        font-size: 13px;
+        padding-top: -20px;
+    }
+
+    .alert-secondary-background {
+        margin-left: 20px;
+    }
+}
