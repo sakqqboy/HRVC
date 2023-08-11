@@ -36,7 +36,7 @@ $this->title = 'group profile';
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-4 col-md-4 col-12">
+        <div class="col-lg-4 col-md-4 col-12 all-information">
             <div class="col-12 Group-Information">
                 Group Information
             </div>
@@ -45,7 +45,7 @@ $this->title = 'group profile';
                     Headquarter
                 </div>
                 <div class="col-lg-6 col-md-6 col-12 name-head0">
-                    <i class="fa fa-map-marker" aria-hidden="true"></i> <span class="text-primary address-box">Shinjuku-ku, Tokyo</span>
+                    <i class="fa fa-map-marker location" aria-hidden="true"></i> <span class="text-primary address-box">Shinjuku-ku, Tokyo</span>
                 </div>
                 <div class="col-lg-6 col-md-6 col-12 name-head">
                     Address
@@ -131,11 +131,11 @@ $this->title = 'group profile';
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-4 col-12 box-about0">
+        <div class="col-lg-5 col-md-4 col-12 box-about0">
             <div class="col-12 ABOUT-NAME">
                 ABOUT
             </div>
-            <div class="col-12" style="font-size: 14px;">
+            <div class="col-12 detail-tokyo">
                 Tokyo Consulting Group's mission is to help foreign companies to set-up business in Japan, and to help Japanese companies establishing themselves abroad. Our goal is to enhance businesses through the incorporation of our services. Our main services are book keeping, accounting, audit, tax, labor & human resources (social insurance and payroll), and outsourcing.
                 <p> Furthermore, Tokyo Consulting Group provides consulting and advising services in various types of businesses and industries for foreign and prospective entities setting business in Japan.</p>
 
@@ -146,12 +146,12 @@ $this->title = 'group profile';
                 <p>Social Tag <span class="facebook"> Facebook</span> </p>
             </div>
         </div>
-        <div class="col-lg-4 col-md-4 col-12 home-tokyo">
+        <div class="col-lg-3 col-md-4 col-12 home-tokyo">
             <div class="row">
                 <div class="col-lg-2 col-md-2 col-12">
                     <i class="fa fa-building building0" aria-hidden="true"></i>
                 </div>
-                <div class="col-lg-7 col-md-7 col-12 Affiliated0" style="font-weight:700;">
+                <div class="col-lg-7 col-md-7 col-12 Affiliated0">
                     Affiliated Companies
                 </div>
                 <div class="col-lg-3 col-md-3 col-12 box-27" style="font-weight:700;">
@@ -161,42 +161,42 @@ $this->title = 'group profile';
             <hr>
             <div class="col-12">
                 <div class="row">
-                    <div class="col-lg-4 col-md-4 col-4">
+                    <div class="col-lg-3 col-md-4 col-4">
                         <img src="<?= Yii::$app->homeUrl ?>image/TCF-BD.png" class="width-TCF-BD">
                     </div>
-                    <div class="col-lg-8 col-md-8 col-8">
+                    <div class="col-lg-9 col-md-8 col-8 mt-10">
+                        <div class="tokyoconsultinggroup"> Tokyo Consulting Firm Pvt. Ltd.</div>
+                        <i class="fa fa-map-marker FT" aria-hidden="true"></i>Chennai, India
+                        <div class="numberemployees">100,560 Employees</div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-4">
+                        <img src="<?= Yii::$app->homeUrl ?>image/TCF-BD.png" class="width-TCF-BD">
+                    </div>
+                    <div class="col-lg-9 col-md-8 col-8 mt-10">
                         <div class="tokyoconsultinggroup"> Tokyo Consulting Firm Pvt. Ltd.</div>
                         <i class="fa fa-map-marker" aria-hidden="true"></i> Chennai, India
                         <div class="numberemployees">100,560 Employees</div>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-4">
+                    <div class="col-lg-3 col-md-4 col-4">
                         <img src="<?= Yii::$app->homeUrl ?>image/TCF-BD.png" class="width-TCF-BD">
                     </div>
-                    <div class="col-lg-8 col-md-8 col-8">
+                    <div class="col-lg-9 col-md-8 col-8 mt-10">
                         <div class="tokyoconsultinggroup"> Tokyo Consulting Firm Pvt. Ltd.</div>
                         <i class="fa fa-map-marker" aria-hidden="true"></i> Chennai, India
                         <div class="numberemployees">100,560 Employees</div>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-4">
+                    <div class="col-lg-3 col-md-4 col-4">
                         <img src="<?= Yii::$app->homeUrl ?>image/TCF-BD.png" class="width-TCF-BD">
                     </div>
-                    <div class="col-lg-8 col-md-8 col-8">
+                    <div class="col-lg-9 col-md-8 col-8 mt-10">
                         <div class="tokyoconsultinggroup"> Tokyo Consulting Firm Pvt. Ltd.</div>
                         <i class="fa fa-map-marker" aria-hidden="true"></i> Chennai, India
                         <div class="numberemployees">100,560 Employees</div>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-4">
+                    <div class="col-lg-3 col-md-4 col-4">
                         <img src="<?= Yii::$app->homeUrl ?>image/TCF-BD.png" class="width-TCF-BD">
                     </div>
-                    <div class="col-lg-8 col-md-8 col-8">
-                        <div class="tokyoconsultinggroup"> Tokyo Consulting Firm Pvt. Ltd.</div>
-                        <i class="fa fa-map-marker" aria-hidden="true"></i> Chennai, India
-                        <div class="numberemployees">100,560 Employees</div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-4">
-                        <img src="<?= Yii::$app->homeUrl ?>image/TCF-BD.png" class="width-TCF-BD">
-                    </div>
-                    <div class="col-lg-8 col-md-8 col-8">
+                    <div class="col-lg-9 col-md-8 col-8 mt-10">
                         <div class="tokyoconsultinggroup"> Tokyo Consulting Firm Pvt. Ltd.</div>
                         <i class="fa fa-map-marker" aria-hidden="true"></i> Chennai, India
                         <div class="numberemployees">100,560 Employees</div>

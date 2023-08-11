@@ -31,8 +31,7 @@ $this->title = 'company profile';
                 Balanced money, balanced life
             </div>
         </div>
-
-        <div class="col-lg-4 col-md-6 col-12 text-end mt-40">
+        <div class="col-lg-4 col-md-6 col-12 text-end all-create0">
             <span class="tcg-edit">TCF </span>
             <button type="button" class="btn btn-success"><i class="fa fa-th-large" aria-hidden="true"></i> Create</button>
             <button type="button" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
@@ -44,29 +43,30 @@ $this->title = 'company profile';
                 Group Information
             </div>
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-12 mt-10 text-end name-head">
+                <div class="col-lg-6 col-md-6 col-12 name-head">
                     Headquarter
                 </div>
-                <div class="col-lg-6 col-md-6 col-12 mt-10">
-                    <i class="fa fa-map-marker" aria-hidden="true"></i> <span class="text-primary">Shinjuku-ku, Tokyo</span>
+                <div class="col-lg-6 col-md-6 col-12 name-head0">
+                    <i class="fa fa-map-marker location" aria-hidden="true"></i> <span class="text-primary address-box">Shinjuku-ku, Tokyo</span>
                 </div>
-                <div class="col-lg-6 col-md-6 col-12 mt-10 text-end name-head">
+                <div class="col-lg-6 col-md-6 col-12 name-head">
                     Address
                 </div>
-                <div class="col-lg-6 col-md-6 col-12 mt-10">
-                    7F-AM building, 2-5-3 Shinjuku
-                    Shinjuku-ku, Tokyo 160-0022, JP
+                <div class="col-lg-6 col-md-6 col-12 name-head0">
+                    <div class="address-box">7F-AM building, 2-5-3 Shinjuku
+                        Shinjuku-ku, Tokyo 160-0022, JP
+                    </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-12 mt-10 text-end name-head">
+                <div class="col-lg-6 col-md-6 col-12 name-head">
                     Established
                 </div>
-                <div class="col-lg-6 col-md-6 col-12 mt-10">
+                <div class="col-lg-6 col-md-6 col-12 name-head0">
                     1998
                 </div>
-                <div class="col-lg-6 col-md-6 col-12 mt-10 text-end name-head">
+                <div class="col-lg-6 col-md-6 col-12 name-head">
                     Company/Director
                 </div>
-                <div class="col-lg-6 col-md-6 col-12 mt-10">
+                <div class="col-lg-6 col-md-6 col-12 name-head0">
                     <img src="<?= Yii::$app->homeUrl ?>image/Mask-group.png"> Yasunari Kuno
                 </div>
                 <hr class="mt-20">
@@ -75,27 +75,27 @@ $this->title = 'company profile';
                 Contact Information
             </div>
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-12 mt-10 text-end name-head">
+                <div class="col-lg-6 col-md-6 col-12  name-head">
                     Email
                 </div>
-                <div class="col-lg-6 col-md-6 col-12 mt-10">
-                    <span class="text-primary">tcg@tokyoconsultinggroup.com</span>
+                <div class="col-lg-6 col-md-6 col-12 name-head0">
+                    <span class="text-primary address-box0">tcg@tokyoconsultinggroup.com</span> <i class="fa fa-clipboard clipboard0" aria-hidden="true"></i>
                 </div>
-                <div class="col-lg-6 col-md-6 col-12 mt-10 text-end name-head">
+                <div class="col-lg-6 col-md-6 col-12 name-head">
                     Contact
                 </div>
-                <div class="col-lg-6 col-md-6 col-12 mt-10">
+                <div class="col-lg-6 col-md-6 col-12 name-head0">
                     +813-5369-2930
                 </div>
-                <div class="col-lg-6 col-md-6 col-12 mt-10 text-end name-head">
+                <div class="col-lg-6 col-md-6 col-12 name-head">
                     Website
                 </div>
-                <div class="col-lg-6 col-md-6 col-12 mt-10">
-                    <span class="text-primary">https://www.kuno-cpa.co.jp</span>
+                <div class="col-lg-6 col-md-6 col-12 name-head0">
+                    <span class="text-primary address-box0">https://www.kuno-cpa.co.jp</span> <i class="fa fa-clipboard clipboard0" aria-hidden="true"></i>
                 </div>
             </div>
         </div>
-        <div class="col-lg-6 col-md-6 col-12">
+        <div class="col-lg-6 col-md-6 col-12 box-about-company1">
             <div class="col-12 ABOUT-NAME">
                 ABOUT
             </div>

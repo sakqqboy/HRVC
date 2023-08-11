@@ -7,3 +7,34 @@
     width: 100%;
     height: 180px;
 }
+
+.plus-click0 {
+    cursor: pointer;
+}
+
+@media(max-width: 992px) {
+    .form-companyname {
+        margin-left: 50px;
+    }
+
+}
+
+@media(max-width: 768px) {
+    .all-tokyoname0 {
+        margin-top: 40px;
+        margin-left: -20px;
+    }
+
+    .eye-view-profile {
+        margin-top: 10px;
+    }
+
+    .about-consulting {
+        margin-left: 10px;
+    }
+
+    .employee-center {
+        font-size: 14px;
+    }
+
+}

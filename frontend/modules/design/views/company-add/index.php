@@ -49,7 +49,7 @@ $this->title = 'Add';
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6 col-12">
+        <div class="col-lg-4 col-md-6 col-12 all-tokyoname0">
             <div class="col-12 form-companyname">
                 <button type="button" class="btn btn-secondary"> Tokyo Consulting Group</button>
             </div>
@@ -60,10 +60,10 @@ $this->title = 'Add';
     </div>
     <div class="col-12 mt-50">
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-12">
+            <div class="col-lg-6 col-md-6 col-6">
                 <hr>
             </div>
-            <div class="col-lg-6 col-md-6 col-12 text-end Groupname2">
+            <div class="col-lg-6 col-md-6 col-6 text-end Groupname2">
                 Group Company Profile
             </div>
         </div>
@@ -160,8 +160,7 @@ $this->title = 'Add';
             </div>
             <div class="col-lg-6 col-md-6 col-12 mt-50">
                 <div class="row">
-
-                    <div class="col-12">
+                    <div class="col-12 about-consulting">
                         <div class="col-12" style="font-weight:700;">
                             ABOUT <span class="profile-moon">*</span>
                         </div>
@@ -174,26 +173,26 @@ $this->title = 'Add';
                         <div class="row mt-10">
                             <div class="col-3">
                                 <div class="alert alert-secondary text-center" role="alert">
-                                    <div class="text-primary"> Employees</div>
-                                    <i class="fa fa-plus mt-10" aria-hidden="true"></i>
+                                    <div class="text-primary employee-center"> Employees</div>
+                                    <i class="fa fa-plus mt-10 plus-click0" aria-hidden="true"></i>
                                 </div>
                             </div>
                             <div class="col-3">
                                 <div class="alert alert-secondary text-center" role="alert">
-                                    <div class="text-primary"> Branches</div>
-                                    <i class="fa fa-plus mt-10" aria-hidden="true"></i>
+                                    <div class="text-primary employee-center"> Branches</div>
+                                    <i class="fa fa-plus mt-10 plus-click0" aria-hidden="true"></i>
                                 </div>
                             </div>
                             <div class="col-3">
                                 <div class="alert alert-secondary text-center" role="alert">
-                                    <div class="text-primary"> Departments</div>
-                                    <i class="fa fa-plus mt-10" aria-hidden="true"></i>
+                                    <div class="text-primary employee-center"> Departments</div>
+                                    <i class="fa fa-plus mt-10 plus-click0" aria-hidden="true"></i>
                                 </div>
                             </div>
                             <div class="col-3">
                                 <div class="alert alert-secondary text-center" role="alert">
-                                    <div class="text-primary"> Tearm</div>
-                                    <i class="fa fa-plus mt-10" aria-hidden="true"></i>
+                                    <div class="text-primary employee-center"> Tearm</div>
+                                    <i class="fa fa-plus mt-10 plus-click0" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </div>

@@ -1,0 +1,24 @@
+.all-create0 {
+    margin-top: 30px;
+}
+
+@media(max-width: 768px) {
+    .box-about-company1 {
+        margin-left: 20px;
+    }
+
+    .edit-update {
+        text-align: end;
+    }
+}
+
+@media(max-width: 992px) {
+    .edit-update {
+        text-align: end;
+    }
+
+    .all-create0 {
+        margin-left: 420px;
+        margin-top: -30px;
+    }
+}

@@ -52,15 +52,15 @@ $this->title = 'Add';
     </div>
     <div class="col-12 mt-50">
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-12">
+            <div class="col-lg-6 col-md-6 col-6">
                 <hr>
             </div>
-            <div class="col-lg-6 col-md-6 col-12 text-end Groupname2">
+            <div class="col-lg-6 col-md-6 col-6 text-end Groupname2">
                 Group Company Profile
             </div>
         </div>
     </div>
-    <div class="col-12">
+    <div class="col-12 mt-10">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-12">
                 <div class="form-companyname">
@@ -166,19 +166,19 @@ $this->title = 'Add';
                             <div class="col-4">
                                 <div class="alert alert-secondary text-center" role="alert">
                                     <div class="text-primary"> Companies</div>
-                                    <i class="fa fa-plus mt-10" aria-hidden="true"></i>
+                                    <i class="fa fa-plus mt-10 plus-click" aria-hidden="true"></i>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="alert alert-secondary text-center" role="alert">
                                     <div class="text-primary"> Employees</div>
-                                    <i class="fa fa-plus mt-10" aria-hidden="true"></i>
+                                    <i class="fa fa-plus mt-10 plus-click" aria-hidden="true"></i>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="alert alert-secondary text-center" role="alert">
                                     <div class="text-primary"> Branches</div>
-                                    <i class="fa fa-plus mt-10" aria-hidden="true"></i>
+                                    <i class="fa fa-plus mt-10 plus-click" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </div>
