@@ -1,13 +1,19 @@
 <?php
 
+use yii\bootstrap5\ActiveForm;
+
 $this->title = 'Add';
 ?>
+<?php $form = ActiveForm::begin([
+	'id' => 'create-group',
+	'method' => 'post',
+	'options' => [
+		'enctype' => 'multipart/form-data',
+	],
 
+]); ?>
 <div class="col-12" style="margin-top: 60px;background-color:white;padding-bottom:20px;">
 	<div class="col-12" id="imagePreviewBanner" style="height: 180px;background-color:gray;">
-
-
-
 	</div>
 	<div class="col-12 edit-update text-end" style="padding-right: 30px;">
 		<div class="form-group">
@@ -40,21 +46,21 @@ $this->title = 'Add';
 						Group Company Name <span class="profile-moon">*</span>
 					</div>
 					<div class="col-7">
-						<input type="text" class="form-control" id="colFormLabel" required>
+						<input type="text" class="form-control" id="colFormLabel" name="groupName" required>
 					</div>
 					<div class="mt-20"></div>
 					<div class="col-5">
 						Tag line
 					</div>
 					<div class="col-7">
-						<input type="text" class="form-control" id="colFormLabel">
+						<input type="text" class="form-control" id="colFormLabel" name="tagLine">
 					</div>
 					<div class="mt-20"></div>
 					<div class="col-5">
 						Headquarter <span class="profile-moon">*</span>
 					</div>
 					<div class="col-7">
-						<input type="text" class="form-control" id="colFormLabel" required>
+						<input type="text" class="form-control" id="colFormLabel" name="headQuaterName" required>
 					</div>
 				</div>
 			</div>
@@ -79,20 +85,20 @@ $this->title = 'Add';
 							Display <span class="profile-moon">*</span>
 						</div>
 						<div class="col-9">
-							<input type="text" class="form-control" id="colFormLabel">
+							<input type="text" class="form-control" name="displayName" required>
 						</div>
 						<div class="mt-20"></div>
 						<div class="col-3  pl-30">
 							Website </div>
 						<div class="col-9">
-							<input type="text" class="form-control" id="colFormLabel">
+							<input type="text" class="form-control" name="website">
 						</div>
 						<div class="mt-20"></div>
 						<div class="col-3  pl-30">
 							Address <span class="profile-moon">*</span>
 						</div>
 						<div class="col-9">
-							<input type="text" class="form-control" id="colFormLabel">
+							<input type="text" class="form-control" name="location" required>
 						</div>
 						<div class="mt-20"></div>
 						<div class="col-12">
@@ -101,59 +107,70 @@ $this->title = 'Add';
 									Country
 								</div>
 								<div class="col-4">
-									<input type="text" class="form-control" id="colFormLabel">
+									<select class="form-control" name="country">
+										<option value="">Select country</option>
+										<?php
+										if (isset($countries) && count($countries) > 0) {
+											foreach ($countries as $countryId => $country) : ?>
+												<option value="<?= $countryId ?>"><?= $country ?></option>
+										<?php
+											endforeach;
+										}
+										?>
+									</select>
+
 								</div>
 								<div class="col-1">
 									City
 								</div>
 								<div class="col-4">
-									<input type="text" class="form-control" id="colFormLabel">
+									<input type="text" class="form-control" name="city">
 								</div>
 								<div class="mt-20"></div>
 								<div class="col-3  pl-30">
 									Postal Code
 								</div>
 								<div class="col-4">
-									<input type="text" class="form-control" id="colFormLabel">
+									<input type="text" class="form-control" name="postalCode">
 								</div>
 								<div class="mt-20"></div>
 								<div class="col-3  pl-30">
 									Industries <span class="profile-moon">*</span>
 								</div>
 								<div class="col-4">
-									<input type="text" class="form-control" id="colFormLabel">
+									<input type="text" class="form-control" name="industries" required>
 								</div>
 								<div class="col-2">
 									Email <span class="profile-moon">*</span>
 								</div>
 								<div class="col-3">
-									<input type="email" class="form-control" id="colFormLabel">
+									<input type="email" class="form-control" name="email">
 								</div>
 								<div class="mt-20"></div>
 								<div class="col-3  pl-30">
 									Founded
 								</div>
 								<div class="col-4">
-									<input type="text" class="form-control" id="colFormLabel">
+									<input type="text" name="founded" class="form-control">
 								</div>
 								<div class="col-2">
 									Contact <span class="profile-moon">*</span>
 								</div>
 								<div class="col-3">
-									<input type="text" class="form-control" id="colFormLabel">
+									<input type="text" class="form-control" name="contact">
 								</div>
 								<div class="mt-20"></div>
 								<div class="col-3 pl-30">
 									Director <span class="profile-moon">*</span>
 								</div>
 								<div class="col-4">
-									<input type="text" class="form-control" id="colFormLabel">
+									<input type="text" class="form-control" name="director" required>
 								</div>
 								<div class="col-2">
 									Social Tag
 								</div>
 								<div class="col-3">
-									<input type="text" class="form-control" id="colFormLabel">
+									<input type="text" name="socialTag" class="form-control">
 								</div>
 							</div>
 						</div>
@@ -167,10 +184,10 @@ $this->title = 'Add';
 					</div>
 					<div class="col-10">
 						<div class="alert alert-secondary" role="alert" style="font-size: 14px;">
-							<textarea style="height:410px;" class="form-control"></textarea>
+							<textarea style="height:410px;" name="about" class="form-control"></textarea>
 
 						</div>
-						<div class="row">
+						<!-- <div class="row">
 							<div class="col-4">
 								<div class="alert alert-secondary text-center" role="alert">
 									<div class="text-primary"> Companies</div>
@@ -189,9 +206,9 @@ $this->title = 'Add';
 									<i class="fa fa-plus mt-10" aria-hidden="true"></i>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<div class="col-12 text-end mt-10">
-							<button type="button" class="btn btn-success">Apply Changes</button>
+							<button type="submit" class="btn btn-success">Apply Changes</button>
 						</div>
 					</div>
 				</div>
@@ -199,3 +216,4 @@ $this->title = 'Add';
 		</div>
 	</div>
 </div>
+<?php ActiveForm::end(); ?>

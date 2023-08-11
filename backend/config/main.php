@@ -15,6 +15,9 @@ return [
         'kt-generator' => [
             'class' => 'backend\modules\KTGenerator\KTGenerator',
         ],
+        'masterdata' => [
+            'class' => 'backend\modules\masterdata\masterdata',
+        ],
     ],
     'components' => [
         'request' => [

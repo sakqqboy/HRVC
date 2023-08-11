@@ -48,7 +48,11 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [],
+            'rules' => [
+
+                'setting/group/group-view/<hash>' => 'setting/group/group-view',
+                'setting/group/update-group/<hash>' => 'setting/group/update-group',
+            ],
         ],
         'assetManager' => [
             'appendTimestamp' => true,
