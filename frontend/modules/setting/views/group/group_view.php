@@ -1,104 +1,128 @@
 <?php
 
-$this->title = 'group profile';
+use common\models\ModelMaster;
+
+$this->title = 'Group profile';
 ?>
 
 <div class="col-12" style="margin-top: 60px;">
-	<div class="col-12">
-		<img src="<?= Yii::$app->homeUrl ?>image/sadd-1.png" class="sad-1">
-	</div>
-	<div class="col-12 edit-update">
-		<button type="button" class="btn btn-light"> <i class="fa fa-pencil" aria-hidden="true"></i> Update</button>
-	</div>
-	<div class="row">
-		<div class="col-lg-4 col-md-6 col-12  all-avatar">
-			<div class="avatar-upload">
-				<div class="avatar-edit">
-					<input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
-					<label for="imageUpload"></label>
-				</div>
-				<div class="avatar-preview">
-					<div id="imagePreview">
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-4 col-md-6 col-12">
-			<div class="col-12 name-tokyo">
-				Tokyo Consulting Group
-			</div>
-			<div class="col-12 tokyo-small">
-				Balanced money, balanced life
-			</div>
-		</div>
+	<div class="col-12" style="height: 180px;background-color:gray;">
+		<?php
+		if ($group["banner"] != null) { ?>
+			<img src="<?= Yii::$app->homeUrl . $group['banner'] ?>" class="sad-1">
+		<?php
+		} else { ?>
 
-		<div class="col-lg-4 col-md-6 col-12 text-end mt-30">
-			<span class="tcg-edit">TCG </span> <button type="button" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
+		<?php
+		}
+		?>
+
+	</div>
+	<!-- <div class="col-12 edit-update text-end" style="padding-right: 30px;">
+		<a href="" class="btn btn-light"> <i class="fa fa-pencil" aria-hidden="true"></i> Update</a>
+	</div> -->
+	<div class="row">
+		<div class="col-lg-2 col-md-5 col-12" style="margin-top:-100px;">
+			<div class="avatar-upload" style="margin-left:20px;">
+				<div class="avatar-preview">
+					<?php
+					if ($group["picture"] != null) { ?>
+						<img src="<?= Yii::$app->homeUrl . $group['picture'] ?>" class="company-group-picture">
+					<?php
+					} else { ?>
+
+					<?php
+					}
+					?>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-5 col-md-4 col-12">
+			<div class="col-12 name-tokyo pl-30">
+				<?= $group['groupName'] ?>
+			</div>
+			<div class="col-12 tokyo-small pl-30">
+				<?= $group['tagLine'] ?>
+			</div>
+		</div>
+		<div class="col-lg-5 col-md-3 col-12 tcg-edit0 mt-40">
+			<span class="tcg-edit"><?= $group['displayName'] ?> </span>
+			<a href="<?= Yii::$app->homeUrl ?>setting/group/update-group/<?= ModelMaster::encodeParams(['groupId' => $group['groupId']]) ?>" class="btn btn-success ml-40" style="margin-top: -20px;">
+				<i class="fa fa-pencil" aria-hidden="true"></i> Edit
+			</a>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-lg-4 col-md-6 col-12">
-			<div class="col-12 Group-Information">
+		<div class="col-lg-4 col-md-4 col-12 all-information">
+			<div class="col-12 Group-Information mb-20">
 				Group Information
 			</div>
 			<div class="row">
-				<div class="col-lg-6 col-md-6 col-12 mt-10 text-end name-head">
+				<div class="col-lg-5 col-md-6 col-12 name-head">
 					Headquarter
 				</div>
-				<div class="col-lg-6 col-md-6 col-12 mt-10">
-					<i class="fa fa-map-marker" aria-hidden="true"></i> <span class="text-primary">Shinjuku-ku, Tokyo</span>
+				<div class="col-lg-7 col-md-6 col-12 name-head0">
+					<i class="fa fa-map-marker location" aria-hidden="true"></i>
+					<span class="text-primary address-box"><?= $group["headQuaterName"] ?></span>
 				</div>
-				<div class="col-lg-6 col-md-6 col-12 mt-10 text-end name-head">
+				<div class="col-lg-5 col-md-6 col-12 name-head mt-10">
 					Address
 				</div>
-				<div class="col-lg-6 col-md-6 col-12 mt-10">
-					7F-AM building, 2-5-3 Shinjuku
-					Shinjuku-ku, Tokyo 160-0022, JP
+				<div class="col-lg-7 col-md-6 col-12 name-head0 mt-10">
+					<div class="address-box">
+						<?= $group["location"] ?>
+					</div>
 				</div>
-				<div class="col-lg-6 col-md-6 col-12 mt-10 text-end name-head">
+				<div class="col-lg-5 col-md-6 col-12 name-head mt-10">
 					Established
 				</div>
-				<div class="col-lg-6 col-md-6 col-12 mt-10">
-					1998
+				<div class="col-lg-7 col-md-6 col-12 name-head0 mt-10">
+					<?= $group["founded"] ?>
 				</div>
-				<div class="col-lg-6 col-md-6 col-12 mt-10 text-end name-head">
+				<div class="col-lg-5 col-md-6 col-12 name-head mt-10">
 					Company/Director
 				</div>
-				<div class="col-lg-6 col-md-6 col-12 mt-10">
-					<img src="<?= Yii::$app->homeUrl ?>image/Mask-group.png"> Yasunari Kuno
+				<div class="col-lg-7 col-md-6 col-12 name-head0 mt-10">
+					<img src="<?= Yii::$app->homeUrl ?>image/Mask-group.png"> <?= $group["director"] ?>
 				</div>
 				<hr class="mt-20">
 			</div>
-			<div class="col-12 Group-Information">
+			<div class="col-12 Group-Information mb-20">
 				Contact Information
 			</div>
 			<div class="row">
-				<div class="col-lg-6 col-md-6 col-12 mt-10 text-end name-head">
+				<div class="col-lg-5 col-md-6 col-12  name-head mt-10">
 					Email
 				</div>
-				<div class="col-lg-6 col-md-6 col-12 mt-10">
-					<span class="text-primary">tcg@tokyoconsultinggroup.com</span>
+				<div class="col-lg-7 col-md-6 col-12 name-head0 mt-10">
+					<span class="text-primary address-box0"> <?= $group["email"] ?></span>&nbsp;
+					<i class="fa fa-clipboard clipboard0 " aria-hidden="true"></i>
 				</div>
-				<div class="col-lg-6 col-md-6 col-12 mt-10 text-end name-head">
+				<div class="col-lg-5 col-md-6 col-12 name-head mt-10">
 					Contact
 				</div>
-				<div class="col-lg-6 col-md-6 col-12 mt-10">
-					+813-5369-2930
+				<div class="col-lg-7 col-md-6 col-12 name-head0 mt-10">
+					<?= $group["contact"] ?>&nbsp;&nbsp;<i class="fa fa-clipboard clipboard0" aria-hidden="true"></i>
 				</div>
-				<div class="col-lg-6 col-md-6 col-12 mt-10 text-end name-head">
+				<div class="col-lg-5 col-md-6 col-12 name-head mt-10">
 					Website
 				</div>
-				<div class="col-lg-6 col-md-6 col-12 mt-10">
-					<span class="text-primary">https://www.kuno-cpa.co.jp</span>
+				<div class="col-lg-7 col-md-6 col-12 name-head0 mt-10">
+					<span class="text-primary address-box0">
+						<a href="<?= $group['website'] ?>">
+							<?= $group["website"] ?>
+						</a>
+					</span>&nbsp;&nbsp;
+					<i class="fa fa-clipboard clipboard0" aria-hidden="true"></i>
 				</div>
 				<hr class="mt-20">
 			</div>
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-6">
-					<div class="alert alert-secondary" role="alert">
+					<div class="alert alert-secondary-background" role="alert">
 						<div class="row">
-							<div class="col-2">
-								<i class="fa fa-users" aria-hidden="true" style="font-size: 20px;padding-top: 20px;"></i>
+							<div class="col-4">
+								<i class="fa fa-users" aria-hidden="true" style="font-size: 25px;padding-top: 18px;"></i>
 							</div>
 							<div class="col-2">
 								<div class="col-12 text-primary">
@@ -114,8 +138,8 @@ $this->title = 'group profile';
 				<div class="col-lg-6 col-md-6 col-6">
 					<div class="alert alert-secondary-background" role="alert">
 						<div class="row">
-							<div class="col-2">
-								<i class="fa fa-users" aria-hidden="true" style="font-size: 20px;padding-top: 20px;"></i>
+							<div class="col-4">
+								<i class="fa fa-users" aria-hidden="true" style="font-size: 25px;padding-top: 18px;"></i>
 							</div>
 							<div class="col-2">
 								<div class="col-12 text-primary">
@@ -131,75 +155,72 @@ $this->title = 'group profile';
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-4 col-md-6 col-12">
-			<div class="col-12 ABOUT-NAME">
+		<div class="col-lg-5 col-md-4 col-12 box-about0">
+			<div class="col-12 ABOUT-NAME mb-20">
 				ABOUT
 			</div>
-			<div class="col-12" style="font-size: 14px;">
-				Tokyo Consulting Group's mission is to help foreign companies to set-up business in Japan, and to help Japanese companies establishing themselves abroad. Our goal is to enhance businesses through the incorporation of our services. Our main services are book keeping, accounting, audit, tax, labor & human resources (social insurance and payroll), and outsourcing.
-				<p> Furthermore, Tokyo Consulting Group provides consulting and advising services in various types of businesses and industries for foreign and prospective entities setting business in Japan.</p>
+			<div class="col-12 detail-tokyo">
+				<?= $group["about"] ?>
 
-				<p> Furthermore, Tokyo Consulting Group provides consulting and advising services in various types of businesses and industries for foreign and prospective entities setting business in Japan.</p>
-
-				<p> Furthermore, Tokyo Consulting Group provides consulting and advising services in various types of businesses and industries for foreign and prospective entities setting business in Japan.</p>
-
-				<p>Social Tag <span class="facebook"> Facebook</span> </p>
+			</div>
+			<div class="col-12 mt-10">
+				<p>Social Tag <span class="facebook"> <?= $group["socialTag"] ?></span> </p>
 			</div>
 		</div>
-		<div class="col-lg-4 col-md-6 col-12 home-tokyo">
+		<div class="col-lg-3 col-md-4 col-12 home-tokyo">
 			<div class="row">
-				<div class="col-lg-2">
-					<i class="fa fa-building" aria-hidden="true"></i>
+				<div class="col-lg-2 col-md-2 col-12">
+					<i class="fa fa-building building0" aria-hidden="true"></i>
 				</div>
-				<div class="col-lg-7" style="font-weight:700;">
+				<div class="col-lg-7 col-md-7 col-12 Affiliated0">
 					Affiliated Companies
 				</div>
-				<div class="col-lg-3" style="font-weight:700;">
+				<div class="col-lg-3 col-md-3 col-12 box-27" style="font-weight:700;">
 					27
 				</div>
 			</div>
 			<hr>
 			<div class="col-12">
 				<div class="row">
-					<div class="col-lg-3">
+					<div class="col-lg-3 col-md-4 col-4">
 						<img src="<?= Yii::$app->homeUrl ?>image/TCF-BD.png" class="width-TCF-BD">
 					</div>
-					<div class="col-lg-9">
+					<div class="col-lg-9 col-md-8 col-8 mt-10">
 						<div class="tokyoconsultinggroup"> Tokyo Consulting Firm Pvt. Ltd.</div>
-						<p> <i class="fa fa-map-marker" aria-hidden="true"></i> Chennai, India </p>
-						<p>100,560 Employees</p>
+						<i class="fa fa-map-marker FT" aria-hidden="true"></i>Chennai, India
+						<div class="numberemployees">100,560 Employees</div>
 					</div>
-					<div class="col-lg-3">
+					<div class="col-lg-3 col-md-4 col-4">
 						<img src="<?= Yii::$app->homeUrl ?>image/TCF-BD.png" class="width-TCF-BD">
 					</div>
-					<div class="col-lg-9">
+					<div class="col-lg-9 col-md-8 col-8 mt-10">
 						<div class="tokyoconsultinggroup"> Tokyo Consulting Firm Pvt. Ltd.</div>
-						<p> <i class="fa fa-map-marker" aria-hidden="true"></i> Chennai, India </p>
-						<p>100,560 Employees</p>
+						<i class="fa fa-map-marker" aria-hidden="true"></i> Chennai, India
+						<div class="numberemployees">100,560 Employees</div>
 					</div>
-					<div class="col-lg-3">
+					<div class="col-lg-3 col-md-4 col-4">
 						<img src="<?= Yii::$app->homeUrl ?>image/TCF-BD.png" class="width-TCF-BD">
 					</div>
-					<div class="col-lg-9">
+					<div class="col-lg-9 col-md-8 col-8 mt-10">
 						<div class="tokyoconsultinggroup"> Tokyo Consulting Firm Pvt. Ltd.</div>
-						<p> <i class="fa fa-map-marker" aria-hidden="true"></i> Chennai, India </p>
-						<p>100,560 Employees</p>
+						<i class="fa fa-map-marker" aria-hidden="true"></i> Chennai, India
+						<div class="numberemployees">100,560 Employees</div>
 					</div>
-					<div class="col-lg-3">
+					<div class="col-lg-3 col-md-4 col-4">
 						<img src="<?= Yii::$app->homeUrl ?>image/TCF-BD.png" class="width-TCF-BD">
 					</div>
-					<div class="col-lg-9">
+					<div class="col-lg-9 col-md-8 col-8 mt-10">
 						<div class="tokyoconsultinggroup"> Tokyo Consulting Firm Pvt. Ltd.</div>
-						<p> <i class="fa fa-map-marker" aria-hidden="true"></i> Chennai, India </p>
-						<p>100,560 Employees</p>
+						<i class="fa fa-map-marker" aria-hidden="true"></i> Chennai, India
+						<div class="numberemployees">100,560 Employees</div>
 					</div>
-					<div class="col-lg-3">
+					<div class="col-lg-3 col-md-4 col-4">
 						<img src="<?= Yii::$app->homeUrl ?>image/TCF-BD.png" class="width-TCF-BD">
 					</div>
-					<div class="col-lg-9">
+					<div class="col-lg-9 col-md-8 col-8 mt-10">
 						<div class="tokyoconsultinggroup"> Tokyo Consulting Firm Pvt. Ltd.</div>
-						<p> <i class="fa fa-map-marker" aria-hidden="true"></i> Chennai, India </p>
-						<p>100,560 Employees</p>
+						<i class="fa fa-map-marker" aria-hidden="true"></i> Chennai, India
+						<div class="numberemployees">100,560 Employees</div>
 					</div>
 					<div class="col-12 text-end">
 						<a href="#"> See All </a>
