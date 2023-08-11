@@ -45,6 +45,8 @@ class AppAsset extends AssetBundle
         'css/home/branch.css',
         'css/home/team.css',
         'css/component/button.css',
+        'css/home/title.css',
+        'css/home/management-layer.css',
     ];
     public $js = [
         'js/content.js',

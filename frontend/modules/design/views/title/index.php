@@ -15,16 +15,24 @@ $this->title = 'Title';
         </div>
     </div>
     <div class="row mt-50">
-        <div class="col-lg-5 col-md-6 col-12">
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">Title</button>
-                <button type="button" class="btn btn-secondary">Management Layer</button>
+        <div class="col-lg-5 col-md-6 col-4">
+            <div class="alert alert-secondary backtitle" role=" alert" style="width: 25rem;height:4rem;">
+                <div class="row">
+                    <div class="col-6 text-center">
+                        <a href="" style="text-decoration: none;">
+                            <button type="button" class="btn btn-primary" style="width: 10rem;"> Title </button>
+                        </a>
+                    </div>
+                    <div class="col-6 text-center">
+                        <a href="" style="text-decoration: none;"> Management Layer </a>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6 col-12">
+        <div class="col-lg-4 col-md-6 col-4 text-end">
             <button type="button" class="btn btn-outline-primary"> <i class="fa fa-filter" aria-hidden="true"></i></button>
         </div>
-        <div class="col-lg-3 col-md-6 col-12">
+        <div class="col-lg-3 col-md-6 col-4">
             <div class="input-group">
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Company</button>
                 <ul class="dropdown-menu">
@@ -36,7 +44,7 @@ $this->title = 'Title';
                     </li>
                     <li><a class="dropdown-item" href="#">Separated link</a></li>
                 </ul>
-                <input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="Tokyo Consulting Firm Pvt. Ltd">
+                <input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="">
             </div>
         </div>
     </div>
@@ -90,115 +98,61 @@ $this->title = 'Title';
         <div class="col-12">
             <div class="alert alert-branch" role="alert">
                 <div class="row">
-                    <div class="col-lg-3 col-md-5 col-sm-3 col-4">
-                        <div class="card" style="border: none;">
+                    <div class="col-lg-5 col-md-5 col-sm-3 col-12">
+                        <div class="card" style="border: none;border-radius:10px;">
                             <div class="card-body">
-                                <div class="row mt-20">
-                                    <div class="col-3">
-                                        <i class="fa fa-user share-big" aria-hidden="true"></i>
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div class="col-12">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/user.png" class="name-user">
+                                        </div>
                                     </div>
                                     <div class="col-1 show-height"></div>
-                                    <div class="col-7 title-manager">
-                                        Manager
+                                    <div class="col-6">
+                                        <div class="col-12 manager">
+                                            Manager <span class="badge rounded-pill bg-primary">TM</span>
+
+                                        </div>
+                                        <div class="col-12 Consulting-Firm">
+                                            Tokyo Consulting Firm Limited
+                                        </div>
+                                        <div class="col-12 branch-country">
+                                            Branch: <img src="<?= Yii::$app->homeUrl ?>image/Round-Bangladesh.png" class="bangladresh-hrvc1"> Dhaka, Bangladesh
+                                        </div>
+                                    </div>
+                                    <div class="col-3 mt-20">
+                                        <button type="button" class="btn btn-outline-secondary but0"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                        <button type="button" class="btn btn-outline-danger but0"><i class="fa fa-trash" aria-hidden="true"></i> </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-5 col-sm-3 col-4">
-                        <div class="card" style="border: none;">
+                    <div class="col-lg-5 col-md-5 col-sm-3 col-12">
+                        <div class="card" style="border: none;border-radius:10px;">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-9">
-                                        Team A
+                                    <div class="col-2">
+                                        <div class="col-12">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/user.png" class="name-user">
+                                        </div>
                                     </div>
-                                    <div class="col-3">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                        <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                    <div class="col-1 show-height"></div>
+                                    <div class="col-6">
+                                        <div class="col-12 manager">
+                                            Executive <span class="badge rounded-pill bg-primary">LM</span>
+
+                                        </div>
+                                        <div class="col-12 Consulting-Firm">
+                                            Tokyo Consulting Firm Limited
+                                        </div>
+                                        <div class="col-12 branch-country">
+                                            Branch: <img src="<?= Yii::$app->homeUrl ?>image/Round-Bangladesh.png" class="bangladresh-hrvc1"> Dhaka, Bangladesh
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-9 department-tokyo">
-                                    Tokyo Consulting Firm Limited
-                                </div>
-                                <div class="col-12 bangladresh-hrvc2">
-                                    Branch: <img src="<?= Yii::$app->homeUrl ?>image/Round-Bangladesh.png" class="bangladresh-hrvc1"> Dhaka, Bangladesh
-                                </div>
-                                <div class="row mt-20">
-                                    <div class="col-3">
-                                        <i class="fa fa-users share-big mt-40" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="col-2 show-height"></div>
-                                    <div class="col-7 team-sizesmall">
-                                        <p> Saige Fuentes > LEADER</p>
-                                        <p> Bowen Higgins > Sub-Leader</p>
-                                        <p>Leighton Kramer > Staff</p>
-                                        <p> Kylan Gentry > Staff</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-5 col-sm-3 col-4">
-                        <div class="card" style="border: none;">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-9">
-                                        Team A
-                                    </div>
-                                    <div class="col-3">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                        <i class="fa fa-trash text-danger" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                                <div class="col-9 department-tokyo">
-                                    Tokyo Consulting Firm Limited
-                                </div>
-                                <div class="col-12 bangladresh-hrvc2">
-                                    Branch: <img src="<?= Yii::$app->homeUrl ?>image/Round-Bangladesh.png" class="bangladresh-hrvc1"> Dhaka, Bangladesh
-                                </div>
-                                <div class="row mt-20">
-                                    <div class="col-3">
-                                        <i class="fa fa-users share-big mt-40" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="col-2 show-height"></div>
-                                    <div class="col-7 team-sizesmall">
-                                        <p> Saige Fuentes > LEADER</p>
-                                        <p> Bowen Higgins > Sub-Leader</p>
-                                        <p>Leighton Kramer > Staff</p>
-                                        <p> Kylan Gentry > Staff</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-5 col-sm-3 col-4">
-                        <div class="card" style="border: none;">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-9">
-                                        Team A
-                                    </div>
-                                    <div class="col-3">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                        <i class="fa fa-trash text-danger" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                                <div class="col-9 department-tokyo">
-                                    Tokyo Consulting Firm Limited
-                                </div>
-                                <div class="col-12 bangladresh-hrvc2">
-                                    Branch: <img src="<?= Yii::$app->homeUrl ?>image/Round-Bangladesh.png" class="bangladresh-hrvc1"> Dhaka, Bangladesh
-                                </div>
-                                <div class="row mt-20">
-                                    <div class="col-3">
-                                        <i class="fa fa-users share-big mt-40" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="col-2 show-height"></div>
-                                    <div class="col-7 team-sizesmall">
-                                        <p> Saige Fuentes > LEADER</p>
-                                        <p> Bowen Higgins > Sub-Leader</p>
-                                        <p>Leighton Kramer > Staff</p>
-                                        <p> Kylan Gentry > Staff</p>
+                                    <div class="col-3 mt-20">
+                                        <button type="button" class="btn btn-outline-secondary but0"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                        <button type="button" class="btn btn-outline-danger but0"><i class="fa fa-trash" aria-hidden="true"></i> </button>
                                     </div>
                                 </div>
                             </div>

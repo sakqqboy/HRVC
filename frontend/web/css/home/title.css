@@ -1,4 +1,26 @@
-.title-manager {
+.backtitle {
+    background-color: rgb(218, 218, 218);
+    border: none;
+}
+
+.name-user {
+    width: 100%;
+    padding-top: 20px;
+}
+
+.Consulting-Firm {
+    font-size: 13px;
+}
+
+.manager {
     font-weight: 700;
-    font-size: 15px;
+    font-size: 17px;
+}
+
+.branch-country {
+    font-size: 13px;
+}
+
+.but0 {
+    font-size: 14px;
 }
