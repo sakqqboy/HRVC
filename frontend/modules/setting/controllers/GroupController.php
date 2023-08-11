@@ -80,7 +80,6 @@ class GroupController extends Controller
                 return $this->redirect(Yii::$app->homeUrl . 'setting/group/group-view/' . ModelMaster::encodeParams(["groupId" => $groupId]));
             }
         }
-        // $countries = json_decode(Path::Api() . 'masterdata/country/active-country');
         $ch1 = curl_init();
         curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
@@ -94,9 +93,45 @@ class GroupController extends Controller
     }
     public function actionGroupView($hash)
     {
-        return $this->render('group_view');
+        $param = ModelMaster::decodeParams($hash);
+        $groupId = $param["groupId"];
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/group-detail?id=' . $groupId);
+        $groupJson = curl_exec($api);
+        curl_close($api);
+        $group = json_decode($groupJson, true);
+        return $this->render('group_view', [
+            "group" => $group
+        ]);
     }
     public function actionUpdateGroup($hash)
+    {
+        $param = ModelMaster::decodeParams($hash);
+        $groupId = $param["groupId"];
+
+        $apiCountry = curl_init();
+        curl_setopt($apiCountry, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($apiCountry, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($apiCountry, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
+        $resultCountry = curl_exec($apiCountry);
+        curl_close($apiCountry);
+
+        $apiGroup = curl_init();
+        curl_setopt($apiGroup, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($apiGroup, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($apiGroup, CURLOPT_URL, Path::Api() . 'masterdata/group/group-detail?id=' . $groupId);
+        $groupJson = curl_exec($apiGroup);
+        curl_close($apiGroup);
+        $group = json_decode($groupJson, true);
+        $countries = json_decode($resultCountry, true);
+        return $this->render('update_group', [
+            "countries" => $countries,
+            "group" => $group
+        ]);
+    }
+    public function actionSaveUpdateGroup()
     {
     }
 }
