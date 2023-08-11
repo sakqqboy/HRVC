@@ -2,6 +2,10 @@
     margin-top: 30px;
 }
 
+.in-for {
+    font-size: 14px;
+}
+
 @media(max-width: 768px) {
     .box-about-company1 {
         margin-left: 20px;

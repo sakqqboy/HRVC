@@ -47,7 +47,7 @@ $this->title = 'Branch';
                     <div class="col-12">
                         <label for="exampleFormControlInput1" class="form-label"> Select Associate Company </label>
                         <select class="form-select" aria-label="Default select example">
-                            <option selected>select Company</option>
+                            <option selected>Select Company</option>
                             <option value="1">Tokyo Consulting Firm Pvt. Ltd</option>
                             <option value="2">Tokyo Consulting Firm Pvt. Ltd</option>
                             <option value="3">Tokyo Consulting Firm Pvt. Ltd</option>
@@ -58,7 +58,7 @@ $this->title = 'Branch';
                     <div class="col-12">
                         <label for="exampleFormControlInput1" class="form-label"> Country</label>
                         <select class="form-select" aria-label="Default select example">
-                            <option selected>select Country</option>
+                            <option selected>Select Country</option>
                             <option value="1">Bangladresh</option>
                             <option value="2">China</option>
                             <option value="3">Columbia</option>
@@ -128,7 +128,9 @@ $this->title = 'Branch';
                                         </div>
                                         <div class="row">
                                             <div class="col-1">
-                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                <!-- <img src="<?= Yii::$app->homeUrl ?>image/Layer-0.png"> -->
+                                                <i class="fa fa-arrows-alt" aria-hidden="true"></i>
+
                                             </div>
                                             <div class="col-5" style="font-size: 13px;">
                                                 IT Services and IT Consulting

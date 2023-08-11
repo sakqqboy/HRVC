@@ -23,7 +23,7 @@ $this->title = 'Add';
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6 col-12">
+        <div class="col-lg-5 col-md-6 col-12">
             <div class="form-companyname">
                 <div class="row">
                     <div class="col-5 Groupname1">
@@ -49,8 +49,8 @@ $this->title = 'Add';
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6 col-12 all-tokyoname0">
-            <div class="col-12 form-companyname">
+        <div class="col-lg-3 col-md-6 col-12 all-tokyoname0">
+            <div class="col-12 your-consulgroup">
                 <button type="button" class="btn btn-secondary"> Tokyo Consulting Group</button>
             </div>
             <div class="col-12 eye-view-profile">
@@ -68,7 +68,7 @@ $this->title = 'Add';
             </div>
         </div>
     </div>
-    <div class="col-12">
+    <div class="col-12 mt-30">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-12">
                 <div class="form-companyname">
@@ -160,17 +160,17 @@ $this->title = 'Add';
             </div>
             <div class="col-lg-6 col-md-6 col-12 mt-50">
                 <div class="row">
-                    <div class="col-12 about-consulting">
+                    <div class="col-12 your-about">
                         <div class="col-12" style="font-weight:700;">
                             ABOUT <span class="profile-moon">*</span>
                         </div>
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-body body-tokyo">
                                 Tokyo Consulting Group's mission is to help foreign companies to set-up business in Japan, and to help Japanese companies establishing themselves abroad. Our goal is to enhance businesses through the incorporation of our services. Our main services are book keeping, accounting, audit, tax, labor & human resources (social insurance and payroll), and outsourcing.
                                 <p> Furthermore, Tokyo Consulting Group provides consulting and advising services in various types of businesses and industries for foreign and prospective entities setting business in Japan. Our multicultural and multilingual staff is composed of more than 300 experienced and qualified professionals, many of them being Japanese Certified Public Accountants, USCPAs, Licensed Japanese Tax Accountants, and Social Insurance and Labor Specialists. We have an integrated service philosophy which allows us to provide the best service by selecting the exact expertise needed for each project from our experienced staff. Thus, we can deliver the best service possible, from accounting work to legal and cultural education. Throughout the wide range of services we provide, our commitment to our clients is absolute, and we focus on providing additional value to every engagement. It is our ultimate goal and wish that our clients become increasingly successful, and contribute to society in an effective way through our support.</p>
                             </div>
                         </div>
-                        <div class="row mt-10">
+                        <div class="row mt-20">
                             <div class="col-3">
                                 <div class="alert alert-secondary text-center" role="alert">
                                     <div class="text-primary employee-center"> Employees</div>

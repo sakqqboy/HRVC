@@ -12,6 +12,14 @@
     cursor: pointer;
 }
 
+.body-tokyo {
+    font-size: 14px;
+}
+
+.all-tokyoname0 {
+    margin-top: 60px;
+}
+
 @media(max-width: 992px) {
     .form-companyname {
         margin-left: 50px;
@@ -35,6 +43,18 @@
 
     .employee-center {
         font-size: 14px;
+    }
+
+    .form-companyname {
+        margin-left: 10px;
+    }
+
+    .your-about {
+        margin-left: 10px;
+    }
+
+    .your-consulgroup {
+        text-align: end;
     }
 
 }

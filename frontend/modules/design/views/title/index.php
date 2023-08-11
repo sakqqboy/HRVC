@@ -16,17 +16,15 @@ $this->title = 'Title';
     </div>
     <div class="row mt-50">
         <div class="col-lg-5 col-md-6 col-4">
-            <div class="alert alert-secondary backtitle" role=" alert" style="width: 25rem;height:4rem;">
-                <div class="row">
-                    <div class="col-6 text-center">
-                        <a href="" style="text-decoration: none;">
-                            <button type="button" class="btn btn-primary" style="width: 10rem;"> Title </button>
-                        </a>
-                    </div>
-                    <div class="col-6 text-center">
-                        <a href="" style="text-decoration: none;"> Management Layer </a>
-                    </div>
-                </div>
+            <div class="alert alert-secondary backtitle" role="alert" style="width: 17rem; height:3.2rem;">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <button class="nav-link title1-top" id="pills-title-tab" data-bs-toggle="pill" data-bs-target="#pills-title" type="button" role="tab" aria-controls="pills-title" aria-selected="true">Title</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link title1-top" id="pills-Management-tab" data-bs-toggle="pill" data-bs-target="#pills-Management-Layer" type="button" role="tab" aria-controls="pills-Management-Layer" aria-selected="false">Management Layer</button>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="col-lg-4 col-md-6 col-4 text-end">

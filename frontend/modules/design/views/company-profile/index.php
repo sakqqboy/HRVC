@@ -38,11 +38,11 @@ $this->title = 'company profile';
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-6 col-md-6 col-12">
+        <div class="col-lg-6 col-md-6 col-12 in-for">
             <div class="col-12 Group-Information">
                 Group Information
             </div>
-            <div class="row">
+            <div class="row mt-20">
                 <div class="col-lg-6 col-md-6 col-12 name-head">
                     Headquarter
                 </div>
@@ -74,7 +74,7 @@ $this->title = 'company profile';
             <div class="col-12 Group-Information">
                 Contact Information
             </div>
-            <div class="row">
+            <div class="row mt-30">
                 <div class="col-lg-6 col-md-6 col-12  name-head">
                     Email
                 </div>

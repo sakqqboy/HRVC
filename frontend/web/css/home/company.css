@@ -7,15 +7,33 @@
     text-decoration: none;
 }
 
-.td-icon {
-    font-size: 20px;
-    cursor: pointer;
-}
-
 .tr-font {
     font-size: 12px;
 }
 
 .bangladresh-hrvc {
     width: 15px;
+}
+
+.Full-icon {
+    font-size: 14px;
+}
+
+.table-border-weight {
+    text-align: center;
+    font-size: 13px;
+}
+
+.long-about {
+    width: 350px;
+}
+
+.width-aa {
+    width: 10%;
+}
+
+@media(max-width: 768px) {
+    .width-aa {
+        width: 30%;
+    }
 }
