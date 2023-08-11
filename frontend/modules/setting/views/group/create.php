@@ -1,23 +1,33 @@
 <?php
 
-$this->title = 'Add Group';
+$this->title = 'Add';
 ?>
 
-<div class="col-12" style="margin-top: 80px;">
-	<div class="col-12">
-		<img src="<?= Yii::$app->homeUrl ?>image/gray.jpg" class="sad-1">
+<div class="col-12" style="margin-top: 60px;background-color:white;padding-bottom:20px;">
+	<div class="col-12" id="imagePreviewBanner" style="height: 180px;background-color:gray;">
+
+
+
 	</div>
-	<div class="col-12 edit-update">
-		<button type="button" class="btn btn-light"> <i class="fa fa-upload" aria-hidden="true"></i> Update</button>
+	<div class="col-12 edit-update text-end" style="padding-right: 30px;">
+		<div class="form-group">
+
+			<span class="fileUpload btn btn-light">
+				<div id="upload" class="uplode-btn"><i class="fa fa-upload" aria-hidden="true"></i> Update</div>
+				<input type="file" name="imageUploadBanner" id="imageUploadBanner" class="upload up upload-checklist" id="up" />
+			</span><!-- btn-orange -->
+			<!-- group -->
+		</div><!-- form-group -->
+
 	</div>
 	<div class="row">
-		<div class="col-lg-4 col-md-6 col-12  all-avatar">
+		<div class="col-lg-4 col-md-6 col-12 all-avatar">
 			<div class="avatar-upload">
 				<div class="avatar-edit">
-					<input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+					<input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" name="image" />
 					<label for="imageUpload"></label>
 				</div>
-				<div class="avatar-preview">
+				<div class="avatar-preview" style="background-color:white;">
 					<div id="imagePreview">
 					</div>
 				</div>
@@ -30,21 +40,21 @@ $this->title = 'Add Group';
 						Group Company Name <span class="profile-moon">*</span>
 					</div>
 					<div class="col-7">
-						<input type="text" class="form-control" id="colFormLabel" placeholder="Tokyo Consulting Group">
+						<input type="text" class="form-control" id="colFormLabel" required>
 					</div>
 					<div class="mt-20"></div>
 					<div class="col-5">
 						Tag line
 					</div>
 					<div class="col-7">
-						<input type="text" class="form-control" id="colFormLabel" placeholder="Balanced money, balanced life">
+						<input type="text" class="form-control" id="colFormLabel">
 					</div>
 					<div class="mt-20"></div>
 					<div class="col-5">
 						Headquarter <span class="profile-moon">*</span>
 					</div>
 					<div class="col-7">
-						<input type="text" class="form-control" id="colFormLabel" placeholder="Shinjuku-ku, Tokyo">
+						<input type="text" class="form-control" id="colFormLabel" required>
 					</div>
 				</div>
 			</div>
@@ -55,110 +65,110 @@ $this->title = 'Add Group';
 			<div class="col-lg-6 col-md-6 col-12">
 				<hr>
 			</div>
-			<div class="col-lg-5 col-md-6 col-12 text-end Groupname2">
+			<div class="col-lg-6 col-md-6 col-12 text-end Groupname2" style="padding-right: 40px;">
 				Group Company Profile
 			</div>
 		</div>
 	</div>
-	<div class="col-12">
+	<div class="col-12" s>
 		<div class="row">
 			<div class="col-lg-6 col-md-6 col-12">
-				<div class="form-companyname">
+				<div class="col-12 mt-40">
 					<div class="row">
-						<div class="col-3">
+						<div class="col-3 pl-30">
 							Display <span class="profile-moon">*</span>
 						</div>
 						<div class="col-9">
-							<input type="text" class="form-control" id="colFormLabel" placeholder="TCG">
+							<input type="text" class="form-control" id="colFormLabel">
 						</div>
 						<div class="mt-20"></div>
-						<div class="col-3">
+						<div class="col-3  pl-30">
 							Website </div>
 						<div class="col-9">
-							<input type="text" class="form-control" id="colFormLabel" placeholder="https://www.kuno-cpa.co.jp/tcf/japan/service/overveiw.php">
+							<input type="text" class="form-control" id="colFormLabel">
 						</div>
 						<div class="mt-20"></div>
-						<div class="col-3">
+						<div class="col-3  pl-30">
 							Address <span class="profile-moon">*</span>
 						</div>
 						<div class="col-9">
-							<input type="text" class="form-control" id="colFormLabel" placeholder="7F-AM building, 2-5-3 Shinjuku Shinjuku-ku, Tokyo 160-0022, JP">
+							<input type="text" class="form-control" id="colFormLabel">
 						</div>
 						<div class="mt-20"></div>
 						<div class="col-12">
 							<div class="row">
-								<div class="col-3">
+								<div class="col-3  pl-30">
 									Country
 								</div>
 								<div class="col-4">
-									<input type="text" class="form-control" id="colFormLabel" placeholder="Japan">
+									<input type="text" class="form-control" id="colFormLabel">
 								</div>
 								<div class="col-1">
 									City
 								</div>
 								<div class="col-4">
-									<input type="text" class="form-control" id="colFormLabel" placeholder="Tokyo">
+									<input type="text" class="form-control" id="colFormLabel">
 								</div>
 								<div class="mt-20"></div>
-								<div class="col-3">
+								<div class="col-3  pl-30">
 									Postal Code
 								</div>
 								<div class="col-4">
-									<input type="text" class="form-control" id="colFormLabel" placeholder=" 160-0022">
+									<input type="text" class="form-control" id="colFormLabel">
 								</div>
 								<div class="mt-20"></div>
-								<div class="col-3">
+								<div class="col-3  pl-30">
 									Industries <span class="profile-moon">*</span>
 								</div>
 								<div class="col-4">
-									<input type="text" class="form-control" id="colFormLabel" placeholder="Accounting">
+									<input type="text" class="form-control" id="colFormLabel">
 								</div>
 								<div class="col-2">
 									Email <span class="profile-moon">*</span>
 								</div>
 								<div class="col-3">
-									<input type="email" class="form-control" id="colFormLabel" placeholder="tokyotaro@tokyoconsultinggroup.com">
+									<input type="email" class="form-control" id="colFormLabel">
 								</div>
 								<div class="mt-20"></div>
-								<div class="col-3">
+								<div class="col-3  pl-30">
 									Founded
 								</div>
 								<div class="col-4">
-									<input type="text" class="form-control" id="colFormLabel" placeholder="1998">
+									<input type="text" class="form-control" id="colFormLabel">
 								</div>
 								<div class="col-2">
 									Contact <span class="profile-moon">*</span>
 								</div>
 								<div class="col-3">
-									<input type="text" class="form-control" id="colFormLabel" placeholder="+813-5369-2930">
+									<input type="text" class="form-control" id="colFormLabel">
 								</div>
 								<div class="mt-20"></div>
-								<div class="col-3">
+								<div class="col-3 pl-30">
 									Director <span class="profile-moon">*</span>
 								</div>
 								<div class="col-4">
-									<input type="text" class="form-control" id="colFormLabel" placeholder="Yasunari Kuno">
+									<input type="text" class="form-control" id="colFormLabel">
 								</div>
 								<div class="col-2">
 									Social Tag
 								</div>
 								<div class="col-3">
-									<input type="text" class="form-control" id="colFormLabel" placeholder="Facebook">
+									<input type="text" class="form-control" id="colFormLabel">
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-6 col-md-6 col-12 mt-50">
+			<div class="col-lg-6 col-md-6 col-12 mt-40" style="padding-right: 40px;">
 				<div class="row">
-					<div class="col-2" style="padding-top: 150px; font-weight:700;">
+					<div class="col-2 text-end" style="padding-top: 200px;font-size:14px;">
 						ABOUT <span class="profile-moon">*</span>
 					</div>
 					<div class="col-10">
 						<div class="alert alert-secondary" role="alert" style="font-size: 14px;">
-							Tokyo Consulting Group's mission is to help foreign companies to set-up business in Japan, and to help Japanese companies establishing themselves abroad. Our goal is to enhance businesses through the incorporation of our services. Our main services are book keeping, accounting, audit, tax, labor & human resources (social insurance and payroll), and outsourcing.
-							<p> Furthermore, Tokyo Consulting Group provides consulting and advising services in various types of businesses and industries for foreign and prospective entities setting business in Japan. Our multicultural and multilingual staff is composed of more than 300 experienced and qualified professionals, many of them being Japanese Certified Public Accountants, USCPAs, Licensed Japanese Tax Accountants, and Social Insurance and Labor Specialists. We have an integrated service philosophy which allows us to provide the best service by selecting the exact expertise needed for each project from our experienced staff. Thus, we can deliver the best service possible, from accounting work to legal and cultural education. Throughout the wide range of services we provide, our commitment to our clients is absolute, and we focus on providing additional value to every engagement. It is our ultimate goal and wish that our clients become increasingly successful, and contribute to society in an effective way through our support.</p>
+							<textarea style="height:410px;" class="form-control"></textarea>
+
 						</div>
 						<div class="row">
 							<div class="col-4">
