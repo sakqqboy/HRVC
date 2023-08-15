@@ -42,7 +42,6 @@
     margin-top: 100px;
 }
 
-
 .mb-5 {
     margin-bottom: 5px;
 }
@@ -134,7 +133,6 @@
 .ml-5 {
     margin-left: 5px;
 }
-
 
 .ml-10 {
     margin-left: 10px;
@@ -362,4 +360,8 @@
 
 .pl-100 {
     padding-left: 100px;
+}
+
+.no-underline {
+    text-decoration: none;
 }
