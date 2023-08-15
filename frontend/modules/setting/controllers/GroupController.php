@@ -80,7 +80,7 @@ class GroupController extends Controller
                 return $this->redirect(Yii::$app->homeUrl . 'setting/group/group-view/' . ModelMaster::encodeParams(["groupId" => $groupId]));
             }
         }
-        return $this->redirect(Yii::$app->homeUrl . 'setting/group/group-view/' . ModelMaster::encodeParams(["groupId" => 2]));
+        // return $this->redirect(Yii::$app->homeUrl . 'setting/group/group-view/' . ModelMaster::encodeParams(["groupId" => 2]));
         $ch1 = curl_init();
         curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);

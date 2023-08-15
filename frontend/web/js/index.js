@@ -2,6 +2,7 @@ function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function(e) {
+            $("#old-image").hide();
             $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
             $('#imagePreview').hide();
             $('#imagePreview').fadeIn(650);
@@ -17,6 +18,7 @@ function readURLBanner(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function(e) {
+            $("#old-banner").hide();
             $('#imagePreviewBanner').css('background-image', 'url(' + e.target.result + ')');
             $('#imagePreviewBanner').hide();
             $('#imagePreviewBanner').fadeIn(650);

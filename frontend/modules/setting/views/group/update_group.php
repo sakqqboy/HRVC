@@ -2,7 +2,7 @@
 
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'Add';
+$this->title = 'Update Group';
 ?>
 <?php $form = ActiveForm::begin([
 	'id' => 'create-group',
@@ -43,7 +43,7 @@ $this->title = 'Add';
 					<div id="imagePreview">
 						<?php
 						if ($group["picture"] != null) { ?>
-							<img src="<?= Yii::$app->homeUrl . $group['picture'] ?>" class="company-group-picture">
+							<img src="<?= Yii::$app->homeUrl . $group['picture'] ?>" class="company-group-picture" id="old-image">
 						<?php
 						} else { ?>
 
@@ -203,7 +203,7 @@ $this->title = 'Add';
 							<textarea style="height:410px;" name="about" class="form-control"><?= $group['about'] ?></textarea>
 
 						</div>
-						<!-- <div class="row">
+						<div class="row">
 							<div class="col-4">
 								<div class="alert alert-secondary text-center" role="alert">
 									<div class="text-primary"> Companies</div>
@@ -222,7 +222,7 @@ $this->title = 'Add';
 									<i class="fa fa-plus mt-10" aria-hidden="true"></i>
 								</div>
 							</div>
-						</div> -->
+						</div>
 						<div class="col-12 text-end mt-10">
 							<button type="submit" class="btn btn-success">Apply Changes</button>
 						</div>

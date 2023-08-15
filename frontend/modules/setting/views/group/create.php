@@ -2,7 +2,7 @@
 
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'Add';
+$this->title = 'Create Group';
 ?>
 <?php $form = ActiveForm::begin([
 	'id' => 'create-group',
