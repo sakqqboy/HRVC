@@ -208,7 +208,7 @@ $this->title = 'Add';
 							</div>
 						</div> -->
 						<div class="col-12 text-end mt-10">
-							<button type="submit" class="btn btn-success">Apply Changes</button>
+							<button type="submit" class="btn btn-success">Create Group</button>
 						</div>
 					</div>
 				</div>
