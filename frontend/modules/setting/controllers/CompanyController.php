@@ -115,15 +115,108 @@ class CompanyController extends Controller
 	{
 		$param = ModelMaster::decodeParams($hash);
 		$companyId = $param["companyId"];
-		$apiGroup = curl_init();
-		curl_setopt($apiGroup, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($apiGroup, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($apiGroup, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
-		$groupJson = curl_exec($apiGroup);
-		curl_close($apiGroup);
+		$apiCompany = curl_init();
+		curl_setopt($apiCompany, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($apiCompany, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($apiCompany, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
+		$groupJson = curl_exec($apiCompany);
+		curl_close($apiCompany);
 		$company = json_decode($groupJson, true);
 		return $this->render('company_view', [
 			"company" => $company
 		]);
+	}
+	public function actionUpdateCompany($hash)
+	{
+		$param = ModelMaster::decodeParams($hash);
+		$companyId = $param["companyId"];
+
+		$apiCountry = curl_init();
+		curl_setopt($apiCountry, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($apiCountry, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($apiCountry, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
+		$resultCountry = curl_exec($apiCountry);
+		curl_close($apiCountry);
+
+		$apiCompany = curl_init();
+		curl_setopt($apiCompany, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($apiCompany, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($apiCompany, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
+		$company = curl_exec($apiCompany);
+		curl_close($apiCompany);
+		$company = json_decode($company, true);
+		$countries = json_decode($resultCountry, true);
+		return $this->render('update_company', [
+			"countries" => $countries,
+			"company" => $company
+		]);
+	}
+	public function actionSaveUpdateCompany()
+	{
+		if (isset($_POST["companyId"])) {
+			$companyId = $_POST["companyId"] - 543;
+			$company = Company::find()->where(["companyId" => $companyId])->one();
+			$oldBanner = $company->banner;
+			$oldImage = $company->picture;
+			$company->companyName = $_POST["companyName"];
+			$company->tagLine = $_POST["tagLine"];
+			$company->displayName = $_POST["displayName"];
+			$company->website = $_POST["website"];
+			$company->location = $_POST["location"];
+			$company->countryId = $_POST["country"];
+			$company->city = $_POST["city"];
+			$company->postalCode = $_POST["postalCode"];
+			$company->industries = $_POST["industries"];
+			$company->email = $_POST["email"];
+			$company->contact = $_POST["contact"];
+			$company->founded = $_POST["founded"];
+			$company->director = $_POST["director"];
+			$company->socialTag = $_POST["socialTag"];
+			$company->about = $_POST["about"];
+			$company->status = 1;
+			$company->createDateTime = new Expression('NOW()');
+			$company->updateDateTime =  new Expression('NOW()');
+			$fileBanner = UploadedFile::getInstanceByName("imageUploadBanner");
+			if (isset($fileBanner) && !empty($fileBanner)) {
+				$path = Path::getHost() . 'images/company/banner/';
+
+				if (!file_exists($path)) {
+					mkdir($path, 0777, true);
+				}
+				$oldPathBanner = Path::getHost() . $oldBanner;
+				if (file_exists($oldPathBanner)) {
+					unlink($oldPathBanner,);
+				}
+				$file = $fileBanner->name;
+				$filenameArray = explode('.', $file);
+				$countArrayFile = count($filenameArray);
+				$fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
+				$pathSave = $path . $fileName;
+				$fileBanner->saveAs($pathSave);
+				$company->banner = 'images/company/banner/' . $fileName;
+			}
+			$fileImage = UploadedFile::getInstanceByName("image");
+			if (isset($fileImage) && !empty($fileImage)) {
+				$path = Path::getHost() . 'images/company/profile/';
+
+				if (!file_exists($path)) {
+					mkdir($path, 0777, true);
+				}
+				$oldPathBanner = Path::getHost() . $oldImage;
+				if (file_exists($oldPathBanner)) {
+					unlink($oldPathBanner);
+				}
+				$file = $fileImage->name;
+				$filenameArray = explode('.', $file);
+				$countArrayFile = count($filenameArray);
+				$fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
+				$pathSave = $path . $fileName;
+				$fileImage->saveAs($pathSave);
+				$company->picture = 'images/company/profile/' . $fileName;
+			}
+			if ($company->save(false)) {
+				return $this->redirect(Yii::$app->homeUrl . 'setting/company/company-view/' . ModelMaster::encodeParams(["companyId" => $companyId]));
+			}
+		}
 	}
 }

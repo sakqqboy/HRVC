@@ -1,5 +1,7 @@
 <?php
 
+use common\models\ModelMaster;
+
 $this->title = 'company profile';
 ?>
 
@@ -52,7 +54,7 @@ $this->title = 'company profile';
 		<div class="col-lg-5 col-md-6 col-12 tcg-edit0 mt-40">
 			<span class="tcg-edit"><?= $company['displayName'] ?> </span>
 			<!-- <button type="button" class="btn btn-success"><i class="fa fa-th-large" aria-hidden="true"></i> Create</button> -->
-			<a type="button" class="btn btn-primary  ml-10" style="margin-top: -20px;"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+			<a href="<?= Yii::$app->homeUrl ?>setting/company/update-company/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>" class="btn btn-primary  ml-10" style="margin-top: -20px;"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
 		</div>
 	</div>
 	<div class="row">
@@ -67,25 +69,24 @@ $this->title = 'company profile';
 				<div class="col-lg-6 col-md-6 col-12 name-head0">
 					<i class="fa fa-map-marker location" aria-hidden="true"></i> <span class="text-primary address-box">Shinjuku-ku, Tokyo</span>
 				</div>
-				<div class="col-lg-6 col-md-6 col-12 name-head">
+				<div class="col-lg-6 col-md-6 col-12 name-head mt-10">
 					Address
 				</div>
-				<div class="col-lg-6 col-md-6 col-12 name-head0">
-					<div class="address-box">7F-AM building, 2-5-3 Shinjuku
-						Shinjuku-ku, Tokyo 160-0022, JP
+				<div class="col-lg-6 col-md-6 col-12 name-head0 mt-10" style="word-wrap: break-word;">
+					<div class="address-box"><?= $company["location"] ?>
 					</div>
 				</div>
-				<div class="col-lg-6 col-md-6 col-12 name-head">
+				<div class="col-lg-6 col-md-6 col-12 name-head mt-10">
 					Established
 				</div>
-				<div class="col-lg-6 col-md-6 col-12 name-head0">
-					1998
+				<div class="col-lg-6 col-md-6 col-12 name-head0 mt-10">
+					<?= $company["founded"] ?>
 				</div>
-				<div class="col-lg-6 col-md-6 col-12 name-head">
+				<div class="col-lg-6 col-md-6 col-12 name-head mt-10">
 					Company/Director
 				</div>
-				<div class="col-lg-6 col-md-6 col-12 name-head0">
-					<img src="<?= Yii::$app->homeUrl ?>image/Mask-group.png"> Yasunari Kuno
+				<div class="col-lg-6 col-md-6 col-12 name-head0 mt-10">
+					<?= $company["director"] ?>
 				</div>
 				<hr class="mt-20">
 			</div>
@@ -97,19 +98,22 @@ $this->title = 'company profile';
 					Email
 				</div>
 				<div class="col-lg-6 col-md-6 col-12 name-head0">
-					<span class="text-primary address-box0">tcg@tokyoconsultinggroup.com</span> <i class="fa fa-clipboard clipboard0" aria-hidden="true"></i>
+					<span class="text-primary address-box0"><?= $company["email"] ?></span>
+					<i class="fa fa-clipboard clipboard0" aria-hidden="true"></i>
 				</div>
-				<div class="col-lg-6 col-md-6 col-12 name-head">
+				<div class="col-lg-6 col-md-6 col-12 name-head mt-10">
 					Contact
+
 				</div>
-				<div class="col-lg-6 col-md-6 col-12 name-head0">
-					+813-5369-2930
+				<div class="col-lg-6 col-md-6 col-12 name-head0 mt-10">
+					<?= $company["contact"] ?>
+					<i class="fa fa-clipboard clipboard0" aria-hidden="true"></i>
 				</div>
-				<div class="col-lg-6 col-md-6 col-12 name-head">
+				<div class="col-lg-6 col-md-6 col-12 name-head mt-10">
 					Website
 				</div>
-				<div class="col-lg-6 col-md-6 col-12 name-head0">
-					<span class="text-primary address-box0">https://www.kuno-cpa.co.jp</span> <i class="fa fa-clipboard clipboard0" aria-hidden="true"></i>
+				<div class="col-lg-6 col-md-6 col-12 name-head0 mt-10">
+					<span class="text-primary address-box0"><?= $company["website"] ?></span> <i class="fa fa-clipboard clipboard0" aria-hidden="true"></i>
 				</div>
 			</div>
 		</div>
@@ -117,15 +121,12 @@ $this->title = 'company profile';
 			<div class="col-12 ABOUT-NAME">
 				ABOUT
 			</div>
-			<div class="col-12" style="font-size: 14px; padding-top:20px;">
-				Tokyo Consulting Group's mission is to help foreign companies to set-up business in Japan, and to help Japanese companies establishing themselves abroad. Our goal is to enhance businesses through the incorporation of our services. Our main services are book keeping, accounting, audit, tax, labor & human resources (social insurance and payroll), and outsourcing.
-				<p> Furthermore, Tokyo Consulting Group provides consulting and advising services in various types of businesses and industries for foreign and prospective entities setting business in Japan.</p>
+			<div class="col-12 detail-tokyo mt-10">
+				<?= $company["about"] ?>
 
-				<p> Furthermore, Tokyo Consulting Group provides consulting and advising services in various types of businesses and industries for foreign and prospective entities setting business in Japan.</p>
-
-				<p> Furthermore, Tokyo Consulting Group provides consulting and advising services in various types of businesses and industries for foreign and prospective entities setting business in Japan.</p>
-
-				<p>Social Tag <span class="facebook"> Facebook</span> </p>
+			</div>
+			<div class="col-12 mt-10">
+				<p>Social Tag <span class="facebook"> <?= $company["socialTag"] ?></span> </p>
 			</div>
 		</div>
 	</div>

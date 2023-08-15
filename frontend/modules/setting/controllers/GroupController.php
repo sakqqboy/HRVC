@@ -165,7 +165,7 @@ class GroupController extends Controller
                 }
                 $oldPathBanner = Path::getHost() . $oldBanner;
                 if (file_exists($oldPathBanner)) {
-                    unlink($oldPathBanner, 0777, true);
+                    unlink($oldPathBanner);
                 }
                 $file = $fileBanner->name;
                 $filenameArray = explode('.', $file);
@@ -183,7 +183,7 @@ class GroupController extends Controller
                 }
                 $oldPathPicture = Path::getHost() . $oldImage;
                 if (file_exists($oldPathPicture)) {
-                    unlink($oldPathPicture, 0777, true);
+                    unlink($oldPathPicture);
                 }
                 $file = $fileImage->name;
                 $filenameArray = explode('.', $file);
