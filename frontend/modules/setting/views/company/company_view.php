@@ -1,0 +1,203 @@
+<?php
+
+$this->title = 'company profile';
+?>
+
+<div class="col-12" style="margin-top: 60px;">
+	<div class="col-12" style="height: 180px;background-color:gray;">
+		<?php
+		if ($company["banner"] != null) { ?>
+			<img src="<?= Yii::$app->homeUrl . $company['banner'] ?>" class="sad-1">
+		<?php
+		} else { ?>
+
+		<?php
+		}
+		?>
+	</div>
+	<!-- <div class="col-12 edit-update">
+		<button type="button" class="btn btn-light"> <i class="fa fa-pencil" aria-hidden="true"></i> Update</button>
+	</div> -->
+	<div class="row">
+		<div class="col-lg-2 col-md-5 col-12" style="margin-top:-100px;">
+			<div class="avatar-upload" style="margin-left:20px;">
+				<div class="avatar-preview">
+					<?php
+					if ($company["picture"] != null) { ?>
+						<img src="<?= Yii::$app->homeUrl . $company['picture'] ?>" class="company-group-picture">
+					<?php
+					} else { ?>
+
+					<?php
+					}
+					?>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-5 col-md-6 col-12">
+			<div class="col-12 name-tokyo pl-30">
+				<?= $company["companyName"] ?>
+				<?php
+				if ($company["headQuaterId"] == null) { ?>
+					<span style="font-size: 11px;font-weight:100">(Head Quater)</span>
+				<?php
+
+				}
+				?>
+			</div>
+			<div class="col-12 tokyo-small pl-30">
+				<?= $company['tagLine'] ?>
+			</div>
+		</div>
+		<div class="col-lg-5 col-md-6 col-12 tcg-edit0 mt-40">
+			<span class="tcg-edit"><?= $company['displayName'] ?> </span>
+			<!-- <button type="button" class="btn btn-success"><i class="fa fa-th-large" aria-hidden="true"></i> Create</button> -->
+			<a type="button" class="btn btn-primary  ml-10" style="margin-top: -20px;"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-6 col-md-6 col-12 in-for">
+			<div class="col-12 Group-Information">
+				Group Information
+			</div>
+			<div class="row mt-20">
+				<div class="col-lg-6 col-md-6 col-12 name-head">
+					Headquarter
+				</div>
+				<div class="col-lg-6 col-md-6 col-12 name-head0">
+					<i class="fa fa-map-marker location" aria-hidden="true"></i> <span class="text-primary address-box">Shinjuku-ku, Tokyo</span>
+				</div>
+				<div class="col-lg-6 col-md-6 col-12 name-head">
+					Address
+				</div>
+				<div class="col-lg-6 col-md-6 col-12 name-head0">
+					<div class="address-box">7F-AM building, 2-5-3 Shinjuku
+						Shinjuku-ku, Tokyo 160-0022, JP
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-6 col-12 name-head">
+					Established
+				</div>
+				<div class="col-lg-6 col-md-6 col-12 name-head0">
+					1998
+				</div>
+				<div class="col-lg-6 col-md-6 col-12 name-head">
+					Company/Director
+				</div>
+				<div class="col-lg-6 col-md-6 col-12 name-head0">
+					<img src="<?= Yii::$app->homeUrl ?>image/Mask-group.png"> Yasunari Kuno
+				</div>
+				<hr class="mt-20">
+			</div>
+			<div class="col-12 Group-Information">
+				Contact Information
+			</div>
+			<div class="row mt-30">
+				<div class="col-lg-6 col-md-6 col-12  name-head">
+					Email
+				</div>
+				<div class="col-lg-6 col-md-6 col-12 name-head0">
+					<span class="text-primary address-box0">tcg@tokyoconsultinggroup.com</span> <i class="fa fa-clipboard clipboard0" aria-hidden="true"></i>
+				</div>
+				<div class="col-lg-6 col-md-6 col-12 name-head">
+					Contact
+				</div>
+				<div class="col-lg-6 col-md-6 col-12 name-head0">
+					+813-5369-2930
+				</div>
+				<div class="col-lg-6 col-md-6 col-12 name-head">
+					Website
+				</div>
+				<div class="col-lg-6 col-md-6 col-12 name-head0">
+					<span class="text-primary address-box0">https://www.kuno-cpa.co.jp</span> <i class="fa fa-clipboard clipboard0" aria-hidden="true"></i>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-6 col-md-6 col-12 box-about-company1">
+			<div class="col-12 ABOUT-NAME">
+				ABOUT
+			</div>
+			<div class="col-12" style="font-size: 14px; padding-top:20px;">
+				Tokyo Consulting Group's mission is to help foreign companies to set-up business in Japan, and to help Japanese companies establishing themselves abroad. Our goal is to enhance businesses through the incorporation of our services. Our main services are book keeping, accounting, audit, tax, labor & human resources (social insurance and payroll), and outsourcing.
+				<p> Furthermore, Tokyo Consulting Group provides consulting and advising services in various types of businesses and industries for foreign and prospective entities setting business in Japan.</p>
+
+				<p> Furthermore, Tokyo Consulting Group provides consulting and advising services in various types of businesses and industries for foreign and prospective entities setting business in Japan.</p>
+
+				<p> Furthermore, Tokyo Consulting Group provides consulting and advising services in various types of businesses and industries for foreign and prospective entities setting business in Japan.</p>
+
+				<p>Social Tag <span class="facebook"> Facebook</span> </p>
+			</div>
+		</div>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-lg-3 col-md-6 col-6">
+			<div class="alert alert-secondary-background" role="alert">
+				<div class="row">
+					<div class="col-4">
+						<i class="fa fa-users" aria-hidden="true" style="font-size: 32px;padding-top: 15px;"></i>
+					</div>
+					<div class="col-2">
+						<div class="col-12 text-primary">
+							Employees
+						</div>
+						<div class="col-2 number-bold">
+							598
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-3 col-md-6 col-6">
+			<div class="alert alert-secondary-background" role="alert">
+				<div class="row">
+					<div class="col-4">
+						<i class="fa fa-users" aria-hidden="true" style="font-size: 32px;padding-top: 15px;"></i>
+					</div>
+					<div class="col-2">
+						<div class="col-12 text-primary">
+							Branch
+						</div>
+						<div class="col-2 number-bold">
+							44
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-3 col-md-6 col-6">
+			<div class="alert alert-secondary-background" role="alert">
+				<div class="row">
+					<div class="col-4">
+						<i class="fa fa-users" aria-hidden="true" style="font-size: 32px;padding-top: 15px;"></i>
+					</div>
+					<div class="col-2">
+						<div class="col-12 text-primary">
+							Departments
+						</div>
+						<div class="col-2 number-bold">
+							598
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-3 col-md-6 col-6">
+			<div class="alert alert-secondary-background" role="alert">
+				<div class="row">
+					<div class="col-4">
+						<i class="fa fa-users" aria-hidden="true" style="font-size: 32px;padding-top: 15px;"></i>
+					</div>
+					<div class="col-2">
+						<div class="col-12 text-primary">
+							Teams
+						</div>
+						<div class="col-2 number-bold">
+							44
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

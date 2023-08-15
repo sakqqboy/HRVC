@@ -1,9 +1,8 @@
 <?php
 
-use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'Update Group';
+$this->title = 'New Company';
 ?>
 <?php $form = ActiveForm::begin([
 	'id' => 'create-group',
@@ -11,17 +10,11 @@ $this->title = 'Update Group';
 	'options' => [
 		'enctype' => 'multipart/form-data',
 	],
-	'action' => Yii::$app->homeUrl . 'setting/group/save-update-group'
+	'action' => Yii::$app->homeUrl . 'setting/company/save-create-company'
 
 ]); ?>
 <div class="col-12" style="margin-top: 60px;background-color:white;padding-bottom:20px;">
 	<div class="col-12" id="imagePreviewBanner" style="height: 180px;background-color:gray;">
-		<?php
-		if ($group["banner"] != null) { ?>
-			<img src="<?= Yii::$app->homeUrl . $group['banner'] ?>" class="sad-1" id="old-banner">
-		<?php
-		}
-		?>
 	</div>
 	<div class="col-12 edit-update text-end" style="padding-right: 30px;">
 		<div class="form-group">
@@ -43,43 +36,54 @@ $this->title = 'Update Group';
 				</div>
 				<div class="avatar-preview" style="background-color:white;">
 					<div id="imagePreview">
-						<?php
-						if ($group["picture"] != null) { ?>
-							<img src="<?= Yii::$app->homeUrl . $group['picture'] ?>" class="company-group-picture" id="old-image">
-						<?php
-						} else { ?>
-
-						<?php
-						}
-						?>
 					</div>
-
 				</div>
 			</div>
 		</div>
 		<div class="col-lg-6 col-md-6 col-12">
 			<div class="form-companyname">
 				<div class="row">
-					<div class="col-5 Groupname1">
-						Group Company Name <span class="profile-moon">*</span>
-					</div>
+					<?php
+					if (isset($headQuater) && !empty($headQuater)) { ?>
+						<div class="col-5 Groupname1">
+							Company Name <span class="profile-moon">*</span>
+						</div>
+					<?php
+					} else { ?>
+						<div class="col-5 Groupname1">
+							Head Quater Name <span class="profile-moon">*</span>
+						</div>
+					<?php
+
+					}
+					?>
 					<div class="col-7">
-						<input type="text" class="form-control" name="groupName" value="<?= $group['groupName'] ?>" required>
+						<input type="text" class="form-control" id="colFormLabel" name="companyName" required>
 					</div>
 					<div class="mt-20"></div>
 					<div class="col-5">
 						Tag line
 					</div>
 					<div class="col-7">
-						<input type="text" class="form-control" name="tagLine" value="<?= $group['tagLine'] ?>">
+						<input type="text" class="form-control" id="colFormLabel" name="tagLine">
 					</div>
 					<div class="mt-20"></div>
-					<div class="col-5">
-						Headquarter <span class="profile-moon">*</span>
-					</div>
-					<div class="col-7">
-						<input type="text" class="form-control" id="colFormLabel" name="headQuaterName" value="<?= $group['headQuaterName'] ?>" required>
-					</div>
+					<?php
+					if (isset($headQuater) && !empty($headQuater)) { ?>
+						<div class="col-5">
+							Headquarter <span class="profile-moon">*</span>
+						</div>
+
+						<div class="col-7">
+
+							<input type="hidden" name="headQuaterId" value="<?= $headQuater["companyId"] + 543 ?>">
+
+							<?= $headQuater["companyName"] ?>
+
+						</div>
+					<?php
+					}
+					?>
 				</div>
 			</div>
 		</div>
@@ -90,7 +94,7 @@ $this->title = 'Update Group';
 				<hr>
 			</div>
 			<div class="col-lg-6 col-md-6 col-12 text-end Groupname2" style="padding-right: 40px;">
-				Group Company Profile
+				Company Profile
 			</div>
 		</div>
 	</div>
@@ -103,20 +107,20 @@ $this->title = 'Update Group';
 							Display <span class="profile-moon">*</span>
 						</div>
 						<div class="col-9">
-							<input type="text" class="form-control" name="displayName" value="<?= $group['displayName'] ?>" required>
+							<input type="text" class="form-control" name="displayName" required>
 						</div>
 						<div class="mt-20"></div>
 						<div class="col-3  pl-30">
 							Website </div>
 						<div class="col-9">
-							<input type="text" class="form-control" name="website" value="<?= $group['website'] ?>">
+							<input type="text" class="form-control" name="website">
 						</div>
 						<div class="mt-20"></div>
 						<div class="col-3  pl-30">
 							Address <span class="profile-moon">*</span>
 						</div>
 						<div class="col-9">
-							<input type="text" class="form-control" name="location" value="<?= $group['location'] ?>" required>
+							<input type="text" class="form-control" name="location" required>
 						</div>
 						<div class="mt-20"></div>
 						<div class="col-12">
@@ -142,53 +146,53 @@ $this->title = 'Update Group';
 									City
 								</div>
 								<div class="col-4">
-									<input type="text" class="form-control" name="city" value="<?= $group['city'] ?>">
+									<input type="text" class="form-control" name="city">
 								</div>
 								<div class="mt-20"></div>
 								<div class="col-3  pl-30">
 									Postal Code
 								</div>
 								<div class="col-4">
-									<input type="text" class="form-control" value="<?= $group['postalCode'] ?>" name="postalCode">
+									<input type="text" class="form-control" name="postalCode">
 								</div>
 								<div class="mt-20"></div>
 								<div class="col-3  pl-30">
 									Industries <span class="profile-moon">*</span>
 								</div>
 								<div class="col-4">
-									<input type="text" class="form-control" value="<?= $group['industries'] ?>" name="industries" required>
+									<input type="text" class="form-control" name="industries" required>
 								</div>
 								<div class="col-2">
 									Email <span class="profile-moon">*</span>
 								</div>
 								<div class="col-3">
-									<input type="email" class="form-control" name="email" value="<?= $group['email'] ?>">
+									<input type="email" class="form-control" name="email">
 								</div>
 								<div class="mt-20"></div>
 								<div class="col-3  pl-30">
 									Founded
 								</div>
 								<div class="col-4">
-									<input type="text" name="founded" class="form-control" value="<?= $group['founded'] ?>">
+									<input type="text" name="founded" class="form-control">
 								</div>
 								<div class="col-2">
 									Contact <span class="profile-moon">*</span>
 								</div>
 								<div class="col-3">
-									<input type="text" class="form-control" name="contact" value="<?= $group['contact'] ?>">
+									<input type="text" class="form-control" name="contact">
 								</div>
 								<div class="mt-20"></div>
 								<div class="col-3 pl-30">
 									Director <span class="profile-moon">*</span>
 								</div>
 								<div class="col-4">
-									<input type="text" class="form-control" name="director" value="<?= $group['director'] ?>" required>
+									<input type="text" class="form-control" name="director" required>
 								</div>
 								<div class="col-2">
 									Social Tag
 								</div>
 								<div class="col-3">
-									<input type="text" name="socialTag" class="form-control" value="<?= $group['socialTag'] ?>">
+									<input type="text" name="socialTag" class="form-control">
 								</div>
 							</div>
 						</div>
@@ -200,40 +204,14 @@ $this->title = 'Update Group';
 					<div class="col-2 text-end" style="padding-top: 200px;font-size:14px;">
 						ABOUT <span class="profile-moon">*</span>
 					</div>
-					<input type="hidden" name="groupId" value="<?= $group['groupId'] + 543 ?>">
 					<div class="col-10">
 						<div class="alert alert-secondary" role="alert" style="font-size: 14px;">
-							<textarea style="height:410px;" name="about" class="form-control"><?= $group['about'] ?></textarea>
+							<textarea style="height:410px;" name="about" class="form-control"></textarea>
 
 						</div>
-						<div class="row">
-							<div class="col-4">
-								<a href="<?= Yii::$app->homeUrl ?>setting/company/create/<?= ModelMaster::encodeParams(['groupId' => $group['groupId']]) ?>" class="no-underline">
-									<div class="alert alert-secondary text-center" role="alert">
-										<div class="text-primary"> Companies</div>
-										<i class="fa fa-plus mt-10" aria-hidden="true"></i>
-									</div>
-								</a>
-							</div>
-							<div class="col-4">
-								<a href="<?= Yii::$app->homeUrl ?>setting/employee/create/<?= ModelMaster::encodeParams(['groupId' => $group['groupId']]) ?>" class="no-underline">
-									<div class="alert alert-secondary text-center" role="alert">
-										<div class="text-primary"> Employees</div>
-										<i class="fa fa-plus mt-10" aria-hidden="true"></i>
-									</div>
-								</a>
-							</div>
-							<div class="col-4">
-								<a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['groupId' => $group['groupId']]) ?>" class="no-underline">
-									<div class="alert alert-secondary text-center" role="alert">
-										<div class="text-primary"> Branches</div>
-										<i class="fa fa-plus mt-10" aria-hidden="true"></i>
-									</div>
-								</a>
-							</div>
-						</div>
+						<input type="hidden" name="groupId" value="<?= $groupId + 543 ?>">
 						<div class="col-12 text-end mt-10">
-							<button type="submit" class="btn btn-success">Apply Changes</button>
+							<button type="submit" class="btn btn-success">Create Company</button>
 						</div>
 					</div>
 				</div>
