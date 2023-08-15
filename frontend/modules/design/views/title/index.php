@@ -16,7 +16,7 @@ $this->title = 'Title';
     </div>
     <div class="row mt-50">
         <div class="col-lg-5 col-md-4 col-12">
-            <div class="alert alert-secondary backtitle" role="alert" style="width: 17rem; height:3.2rem;">
+            <div class="alert alert-secondary backtitle" role="alert">
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li class="nav-item">
                         <button class="nav-link title1-top" id="pills-title-tab" data-bs-toggle="pill" data-bs-target="#pills-title" type="button" role="tab" aria-controls="pills-title" aria-selected="true">Title</button>

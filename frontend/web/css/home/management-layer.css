@@ -17,7 +17,8 @@
 }
 
 .image-shape2 {
-    width: 100%;
+    width: 104.9%;
+    margin-left: -10px;
     margin-top: 45px;
 }
 
@@ -40,11 +41,11 @@
     padding-top: 10px;
     font-weight: 700;
     font-size: 20px;
-    padding-left: 60px;
+    padding-left: 30px;
 }
 
 .flex-formcontrol {
-    margin-left: 60px;
+    margin-left: 30px;
 }
 
 .alert-vector {
@@ -79,4 +80,28 @@
 
 .editor1 {
     font-weight: 700;
+}
+
+.top-layer-all {
+    margin-top: 30px;
+}
+
+@media(max-width: 922px) {
+    .manage-one {
+        padding-left: 20px;
+    }
+
+    .alert-layer1 {
+        margin-top: 10px;
+    }
+}
+
+@media(max-width: 768px) {
+    .manage-one {
+        padding-left: 20px;
+    }
+
+    .top-layer-all {
+        margin-top: 60px;
+    }
 }

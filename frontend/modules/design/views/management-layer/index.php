@@ -3,7 +3,7 @@
 $this->title = 'Management Layer';
 ?>
 
-<div class="col-12" style="margin-top: 90px;">
+<div class="col-12 manage-one" style="margin-top: 90px;">
     <div class="col-12">
         <div class="col-12 branch-title">
             Management Layer
@@ -11,7 +11,7 @@ $this->title = 'Management Layer';
     </div>
     <div class="col-12 mt-50">
         <div class="col-lg-5 col-md-6 col-4">
-            <div class="alert alert-secondary backtitle" role=" alert" style="width: 17rem; height:3.2rem;">
+            <div class="alert alert-secondary backtitle" role=" alert">
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li class="nav-item">
                         <button class="nav-link title1-top" id="pills-title-tab" data-bs-toggle="pill" data-bs-target="#pills-title" type="button" role="tab" aria-controls="pills-title" aria-selected="true">Title</button>
@@ -23,9 +23,9 @@ $this->title = 'Management Layer';
             </div>
         </div>
     </div>
-    <div class="col-12 mt-30">
+    <div class="col-12">
         <div class="row">
-            <div class="col-lg-8 col-md-6 col-12">
+            <div class="col-lg-8 col-md-12 col-12">
                 <div class="alert alert-layer" role="alert">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-12 text-center mt-50">
@@ -50,7 +50,7 @@ $this->title = 'Management Layer';
                                 Lower Management
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-12">
+                        <div class="col-lg-6 col-md-6 col-12 top-layer-all">
                             <div class="alert alert-light" role="alert" style="border-radius: 10px;">
                                 <div class="col-12 Top-sub-Layer">
                                     Top sub Layer
@@ -88,7 +88,7 @@ $this->title = 'Management Layer';
                     </div>
                     <div class="col-12">
                         <div class="row">
-                            <div class="col-lg-4 col-md-6 col-12 mt-30">
+                            <div class="col-lg-4 col-md-6 col-12">
                                 <div class="alert alert-light" role="alert" style="border-radius: 10px;">
                                     <div class="col-12 big-management">
                                         Top Management
@@ -109,7 +109,7 @@ $this->title = 'Management Layer';
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-6 col-12 mt-30">
+                            <div class="col-lg-4 col-md-6 col-12">
                                 <div class="alert alert-light" role="alert" style="border-radius: 10px;">
                                     <div class="col-12 big-management">
                                         Top Management
@@ -130,7 +130,7 @@ $this->title = 'Management Layer';
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-6 col-12 mt-30">
+                            <div class="col-lg-4 col-md-6 col-12">
                                 <div class="alert alert-light" role="alert" style="border-radius: 10px;">
                                     <div class="col-12 big-management">
                                         Top Management
@@ -155,7 +155,7 @@ $this->title = 'Management Layer';
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 col-12">
+            <div class="col-lg-4 col-md-12 col-12">
                 <div class="alert alert-layer1" role="alert">
                     <div class="col-12 leyer-Editor">
                         Layer Title Editor

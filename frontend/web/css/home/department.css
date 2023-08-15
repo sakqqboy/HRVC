@@ -43,6 +43,7 @@
     z-index: 0;
 }
 
+
 @media(max-width: 922px) {
     .department-one {
         padding-left: 20px;

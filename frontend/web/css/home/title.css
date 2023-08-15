@@ -1,6 +1,8 @@
 .backtitle {
     background-color: rgb(218, 218, 218);
     border: none;
+    width: 17rem;
+    height: 3.2rem;
 }
 
 .name-user {
@@ -29,13 +31,11 @@
     margin-top: -10px;
 }
 
+
 .btt-filter0 {
     text-align: end;
 }
 
-.input-group {
-    z-index: 0;
-}
 
 @media(max-width: 992px) {
     .title-one {
@@ -55,4 +55,5 @@
     .title-one {
         padding-left: 20px;
     }
+
 }
