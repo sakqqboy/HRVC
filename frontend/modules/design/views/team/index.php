@@ -3,7 +3,7 @@
 $this->title = 'Team';
 ?>
 
-<div class="col-12" style="margin-top: 90px;">
+<div class="col-12 team-one" style="margin-top: 90px;">
     <div class="row">
         <div class="col-lg-1 col-md-6 col-12">
             <div class="col-12 branch-title">
@@ -13,7 +13,7 @@ $this->title = 'Team';
         <div class="col-lg-2 col-md-6 col-12 mt-10">
             <button type="button" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Create</button>
         </div>
-        <div class="col-lg-3 col-md-6 col-12">
+        <div class="col-lg-3 col-md-4 col-12 mt-10">
             <div class="input-group">
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Company</button>
                 <ul class="dropdown-menu">
@@ -28,7 +28,7 @@ $this->title = 'Team';
                 <input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="">
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 col-12">
+        <div class="col-lg-3 col-md-4 col-12 mt-10">
             <div class="input-group">
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Branch</button>
                 <ul class="dropdown-menu">
@@ -43,7 +43,7 @@ $this->title = 'Team';
                 <input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="">
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 col-12">
+        <div class="col-lg-3 col-md-4 col-12 mt-10">
             <div class="input-group">
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Department</button>
                 <ul class="dropdown-menu">
@@ -124,7 +124,7 @@ $this->title = 'Team';
                         </select>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-2 col-12">
+                <div class="col-lg-2 col-md-2 col-12 team-create0">
                     <button type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Create</button>
                 </div>
             </div>

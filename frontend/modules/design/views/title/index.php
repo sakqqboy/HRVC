@@ -3,19 +3,19 @@
 $this->title = 'Title';
 ?>
 
-<div class="col-12" style="margin-top: 90px;">
+<div class="col-12 title-one" style="margin-top: 90px;">
     <div class="row">
         <div class="col-lg-1 col-md-6 col-12">
             <div class="col-12 branch-title">
                 Title
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 col-12 mt-10">
+        <div class="col-lg-3 col-md-12 col-12 mt-10">
             <button type="button" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Create</button>
         </div>
     </div>
     <div class="row mt-50">
-        <div class="col-lg-5 col-md-6 col-4">
+        <div class="col-lg-5 col-md-4 col-12">
             <div class="alert alert-secondary backtitle" role="alert" style="width: 17rem; height:3.2rem;">
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li class="nav-item">
@@ -27,10 +27,10 @@ $this->title = 'Title';
                 </ul>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6 col-4 text-end">
+        <div class="col-lg-4 col-md-4 col-2 btt-filter0">
             <button type="button" class="btn btn-outline-primary"> <i class="fa fa-filter" aria-hidden="true"></i></button>
         </div>
-        <div class="col-lg-3 col-md-6 col-4">
+        <div class="col-lg-3 col-md-4 col-10">
             <div class="input-group">
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Company</button>
                 <ul class="dropdown-menu">

@@ -11,3 +11,23 @@
 .Company-select {
     font-size: 14px;
 }
+
+@media(max-width: 992px) {
+    .team-one {
+        padding-left: 20px;
+    }
+
+    .team-create0 {
+        padding-top: 10px;
+    }
+}
+
+@media(max-width: 768px) {
+    .team-one {
+        padding-left: 20px;
+    }
+
+    .team-create0 {
+        padding-top: 10px;
+    }
+}

@@ -17,3 +17,48 @@
 .card-round {
     width: 18px;
 }
+
+.image-zoom {
+    width: 15px;
+    cursor: pointer;
+}
+
+.bt-right {
+    text-align: end;
+}
+
+.bt-plus0 {
+    padding-top: 30px;
+}
+
+.bt-togg {
+    z-index: 0px;
+}
+
+
+@media(max-width: 992px) {
+    .bt-right {
+        text-align: center;
+        padding-top: 10px;
+    }
+
+    .bt-togg {
+        padding-top: 10px;
+    }
+
+    .branch-one {
+        padding-left: 10px;
+    }
+
+}
+
+@media(max-width: 768px) {
+    .bt-right {
+        text-align: start;
+    }
+
+    .branch-one {
+        padding-left: 10px;
+    }
+
+}
