@@ -3,32 +3,29 @@
 $this->title = 'Branch';
 ?>
 
-<div class="col-12" style="margin-top: 90px;">
-    <div class="row">
-        <div class="col-lg-2 col-md-6 col-12">
+<div class="col-12 branch-one" style="margin-top: 90px;">
+    <div class="row all-row">
+        <div class="col-lg-2 col-md-3 col-12">
             <div class="col-12 branch-title">
                 Branch
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 col-12 mt-10">
+        <div class="col-lg-3 col-md-3 col-3 mt-10">
             <button type="button" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Create</button>
         </div>
-        <div class="col-4 text-end">
+        <div class="col-lg-4 col-md-3 col-2 bt-right">
             <button type="button" class="btn btn-outline-primary"> <i class="fa fa-filter" aria-hidden="true"></i></button>
         </div>
-        <div class="col-3">
+        <div class="col-lg-3 col-md-3 col-7 bt-togg">
             <div class="input-group">
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Company</button>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="#">Action</a></li>
                     <li><a class="dropdown-item" href="#">Another action</a></li>
                     <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
                     <li><a class="dropdown-item" href="#">Separated link</a></li>
                 </ul>
-                <input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="Tokyo Consulting Firm Pvt. Ltd">
+                <input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="Tokyo Consulting">
             </div>
         </div>
     </div>
@@ -73,7 +70,7 @@ $this->title = 'Branch';
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-2 col-12 pt-30">
+                <div class="col-lg-2 col-md-2 col-12 bt-plus0">
                     <button type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Create</button>
                 </div>
             </div>
@@ -81,7 +78,7 @@ $this->title = 'Branch';
         <div class="col-12">
             <div class="alert alert-branch" role="alert">
                 <div class="row">
-                    <div class="col-lg-4 col-md-5 col-sm-3 col-4">
+                    <div class="col-lg-4 col-md-5 col-sm-3 col-12">
                         <div class="card" style="border: none;">
                             <div class="card-body">
                                 <div class="row">
@@ -97,7 +94,7 @@ $this->title = 'Branch';
                                         </div>
                                         <div class="row">
                                             <div class="col-1">
-                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                <img src="<?= Yii::$app->homeUrl ?>image/zoom.png" class="image-zoom">
                                             </div>
                                             <div class="col-5" style="font-size: 13px;">
                                                 IT Services and IT Consulting
@@ -112,7 +109,7 @@ $this->title = 'Branch';
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-5 col-sm-3 col-4">
+                    <div class="col-lg-4 col-md-5 col-sm-3 col-12">
                         <div class="card" style="border: none;">
                             <div class="card-body">
                                 <div class="row">
@@ -128,9 +125,7 @@ $this->title = 'Branch';
                                         </div>
                                         <div class="row">
                                             <div class="col-1">
-                                                <!-- <img src="<?= Yii::$app->homeUrl ?>image/Layer-0.png"> -->
-                                                <i class="fa fa-arrows-alt" aria-hidden="true"></i>
-
+                                                <img src="<?= Yii::$app->homeUrl ?>image/zoom.png" class="image-zoom">
                                             </div>
                                             <div class="col-5" style="font-size: 13px;">
                                                 IT Services and IT Consulting
@@ -145,7 +140,7 @@ $this->title = 'Branch';
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-5 col-sm-3 col-4">
+                    <div class="col-lg-4 col-md-5 col-sm-3 col-12">
                         <div class="card" style="border: none;">
                             <div class="card-body">
                                 <div class="row">
@@ -161,7 +156,7 @@ $this->title = 'Branch';
                                         </div>
                                         <div class="row">
                                             <div class="col-1">
-                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                <img src="<?= Yii::$app->homeUrl ?>image/zoom.png" class="image-zoom">
                                             </div>
                                             <div class="col-5" style="font-size: 13px;">
                                                 IT Services and IT Consulting
@@ -176,7 +171,7 @@ $this->title = 'Branch';
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-5 col-sm-3 col-4">
+                    <div class="col-lg-4 col-md-5 col-sm-3 col-12">
                         <div class="card" style="border: none;">
                             <div class="card-body">
                                 <div class="row">
@@ -192,7 +187,7 @@ $this->title = 'Branch';
                                         </div>
                                         <div class="row">
                                             <div class="col-1">
-                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                <img src="<?= Yii::$app->homeUrl ?>image/zoom.png" class="image-zoom">
                                             </div>
                                             <div class="col-5" style="font-size: 13px;">
                                                 Finance
@@ -207,7 +202,7 @@ $this->title = 'Branch';
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-5 col-sm-3 col-4">
+                    <div class="col-lg-4 col-md-5 col-sm-3 col-12">
                         <div class="card" style="border: none;">
                             <div class="card-body">
                                 <div class="row">
@@ -223,7 +218,7 @@ $this->title = 'Branch';
                                         </div>
                                         <div class="row">
                                             <div class="col-1">
-                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                <img src="<?= Yii::$app->homeUrl ?>image/zoom.png" class="image-zoom">
                                             </div>
                                             <div class="col-5" style="font-size: 13px;">
                                                 Finance
@@ -238,7 +233,7 @@ $this->title = 'Branch';
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-5 col-sm-3 col-4">
+                    <div class="col-lg-4 col-md-5 col-sm-3 col-12">
                         <div class="card" style="border: none;">
                             <div class="card-body">
                                 <div class="row">
@@ -254,7 +249,7 @@ $this->title = 'Branch';
                                         </div>
                                         <div class="row">
                                             <div class="col-1">
-                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                <img src="<?= Yii::$app->homeUrl ?>image/zoom.png" class="image-zoom">
                                             </div>
                                             <div class="col-5" style="font-size: 13px;">
                                                 Finance
@@ -269,7 +264,7 @@ $this->title = 'Branch';
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-5 col-sm-3 col-4">
+                    <div class="col-lg-4 col-md-5 col-sm-3 col-12">
                         <div class="card" style="border: none;">
                             <div class="card-body">
                                 <div class="row">
@@ -285,7 +280,7 @@ $this->title = 'Branch';
                                         </div>
                                         <div class="row">
                                             <div class="col-1">
-                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                <img src="<?= Yii::$app->homeUrl ?>image/zoom.png" class="image-zoom">
                                             </div>
                                             <div class="col-5" style="font-size: 13px;">
                                                 IT Services and IT Consulting
@@ -300,7 +295,7 @@ $this->title = 'Branch';
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-5 col-sm-3 col-4">
+                    <div class="col-lg-4 col-md-5 col-sm-3 col-12">
                         <div class="card" style="border: none;">
                             <div class="card-body">
                                 <div class="row">
@@ -316,7 +311,7 @@ $this->title = 'Branch';
                                         </div>
                                         <div class="row">
                                             <div class="col-1">
-                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                <img src="<?= Yii::$app->homeUrl ?>image/zoom.png" class="image-zoom">
                                             </div>
                                             <div class="col-5" style="font-size: 13px;">
                                                 IT Services and IT Consulting
@@ -331,7 +326,7 @@ $this->title = 'Branch';
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-5 col-sm-3 col-4">
+                    <div class="col-lg-4 col-md-5 col-sm-3 col-12">
                         <div class="card" style="border: none;">
                             <div class="card-body">
                                 <div class="row">
@@ -347,7 +342,7 @@ $this->title = 'Branch';
                                         </div>
                                         <div class="row">
                                             <div class="col-1">
-                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                <img src="<?= Yii::$app->homeUrl ?>image/zoom.png" class="image-zoom">
                                             </div>
                                             <div class="col-5" style="font-size: 13px;">
                                                 IT Services and IT Consulting
@@ -362,7 +357,7 @@ $this->title = 'Branch';
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-5 col-sm-3 col-4">
+                    <div class="col-lg-4 col-md-5 col-sm-3 col-12">
                         <div class="card" style="border: none;">
                             <div class="card-body">
                                 <div class="row">
@@ -378,7 +373,7 @@ $this->title = 'Branch';
                                         </div>
                                         <div class="row">
                                             <div class="col-1">
-                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                <img src="<?= Yii::$app->homeUrl ?>image/zoom.png" class="image-zoom">
                                             </div>
                                             <div class="col-5" style="font-size: 13px;">
                                                 IT Services and IT Consulting
@@ -393,7 +388,7 @@ $this->title = 'Branch';
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-5 col-sm-3 col-4">
+                    <div class="col-lg-4 col-md-5 col-sm-3 col-12">
                         <div class="card" style="border: none;">
                             <div class="card-body">
                                 <div class="row">
@@ -409,7 +404,7 @@ $this->title = 'Branch';
                                         </div>
                                         <div class="row">
                                             <div class="col-1">
-                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                <img src="<?= Yii::$app->homeUrl ?>image/zoom.png" class="image-zoom">
                                             </div>
                                             <div class="col-5" style="font-size: 13px;">
                                                 IT Services and IT Consulting
@@ -424,7 +419,7 @@ $this->title = 'Branch';
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-5 col-sm-3 col-4">
+                    <div class="col-lg-4 col-md-5 col-sm-3 col-12">
                         <div class="card" style="border: none;">
                             <div class="card-body">
                                 <div class="row">
@@ -440,7 +435,7 @@ $this->title = 'Branch';
                                         </div>
                                         <div class="row">
                                             <div class="col-1">
-                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                <img src="<?= Yii::$app->homeUrl ?>image/zoom.png" class="image-zoom">
                                             </div>
                                             <div class="col-5" style="font-size: 13px;">
                                                 IT Services and IT Consulting
