@@ -283,3 +283,16 @@
     font-size: 11px;
     text-align: start;
 }
+
+
+.object-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nnma {
+    /* max-inline-size: 100%;
+    block-size: auto; */
+    background-image: no-repeat;
+}

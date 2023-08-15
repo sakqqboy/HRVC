@@ -556,3 +556,7 @@ $this->title = 'KPI Summary';
         </div>
     </div>
 </div>
+
+<div class="col-12">
+    <img src="<?= Yii::$app->homeUrl ?>image/15.png" class="nnma">
+</div>
