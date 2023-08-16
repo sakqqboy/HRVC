@@ -31,4 +31,14 @@ class CountryController extends Controller
         }
         return json_encode($country);
     }
+    public function actionCountryDetail($id)
+    {
+        $country = [];
+        $country = Country::find()
+            ->select('countryId,countryName')
+            ->where(["countryId" => $id])
+            ->asArray()
+            ->one();
+        return json_encode($country);
+    }
 }

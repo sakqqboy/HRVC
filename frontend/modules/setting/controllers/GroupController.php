@@ -129,6 +129,7 @@ class GroupController extends Controller
         curl_setopt($apiCountry, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($apiCountry, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
         $resultCountry = curl_exec($apiCountry);
+        $countries = json_decode($resultCountry, true);
         curl_close($apiCountry);
 
         $apiGroup = curl_init();
@@ -136,12 +137,20 @@ class GroupController extends Controller
         curl_setopt($apiGroup, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($apiGroup, CURLOPT_URL, Path::Api() . 'masterdata/group/group-detail?id=' . $groupId);
         $groupJson = curl_exec($apiGroup);
-        curl_close($apiGroup);
         $group = json_decode($groupJson, true);
-        $countries = json_decode($resultCountry, true);
+        curl_close($apiGroup);
+
+        $apiCountry = curl_init();
+        curl_setopt($apiCountry, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($apiCountry, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($apiCountry, CURLOPT_URL, Path::Api() . 'masterdata/country/country-detail?id=' . $group["countryId"]);
+        $resultCountryDetail = curl_exec($apiCountry);
+        $groupCountry = json_decode($resultCountryDetail, true);
+        curl_close($apiCountry);
         return $this->render('update_group', [
             "countries" => $countries,
-            "group" => $group
+            "group" => $group,
+            "groupCountry" => $groupCountry
         ]);
     }
     public function actionSaveUpdateGroup()
@@ -209,5 +218,17 @@ class GroupController extends Controller
                 return $this->redirect(Yii::$app->homeUrl . 'setting/group/group-view/' . ModelMaster::encodeParams(["groupId" => $groupId]));
             }
         }
+    }
+    public function actionFontSize()
+    {
+        $myfile = fopen(Path::urlUpload() . "css/layout/font.css", "w");
+        $i = 10;
+        $text = '';
+        while ($i <= 100) {
+            $text .= ".font-size-" . $i . "{font-size:" . $i . "px;}";
+            $i++;
+        }
+        fwrite($myfile, $text);
+        fclose($myfile);
     }
 }

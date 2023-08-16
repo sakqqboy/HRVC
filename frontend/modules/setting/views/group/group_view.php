@@ -187,25 +187,29 @@ $this->title = 'Group profile';
 					$i = 0;
 					foreach ($companyGroup as $company) :
 				?>
-						<div class="row <?= $i > 0 ? 'mt-10' : '' ?> affiliated-list">
-							<div class="col-lg-3 col-md-4 col-4">
-								<img src="<?= Yii::$app->homeUrl . $company['picture'] ?>" class="width-TCF-BD">
-							</div>
-							<div class="col-lg-9 col-md-8 col-8">
-								<div class="tokyoconsultinggroup">
-									<?= $company['companyName'] ?>
-									<?php
-									if ($company['headQuaterId'] == null) {
-									?>
-										<span style="font-size: 11px;font-weight:100;">(head Quater)</span>
-									<?php
-									}
-									?>
+						<a href="<?= Yii::$app->homeUrl . 'setting/company/company-view/' . ModelMaster::encodeParams([
+									'companyId' => $company['companyId']
+								]) ?>" class="no-underline" style="color:black;">
+							<div class="row <?= $i > 0 ? 'mt-10' : '' ?> affiliated-list">
+								<div class="col-lg-3 col-md-4 col-4">
+									<img src="<?= Yii::$app->homeUrl . $company['picture'] ?>" class="width-TCF-BD">
 								</div>
-								<i class="fa fa-map-marker FT mr-5" aria-hidden="true"></i><?= $company["city"] ?>, <?= $company["countryName"] ?>
-								<div class="numberemployees">100,560 Employees</div>
+								<div class="col-lg-9 col-md-8 col-8">
+									<div class="tokyoconsultinggroup">
+										<?= $company['companyName'] ?>
+										<?php
+										if ($company['headQuaterId'] == null) {
+										?>
+											<span style="font-size: 11px;font-weight:100;">(head Quater)</span>
+										<?php
+										}
+										?>
+									</div>
+									<i class="fa fa-map-marker FT mr-5" aria-hidden="true"></i><?= $company["city"] ?>, <?= $company["countryName"] ?>
+									<div class="numberemployees">100,560 Employees</div>
+								</div>
 							</div>
-						</div>
+						</a>
 					<?php
 						$i++;
 					endforeach;

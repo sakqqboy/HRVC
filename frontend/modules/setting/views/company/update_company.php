@@ -1,5 +1,6 @@
 <?php
 
+use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
 $this->title = 'New Company';
@@ -142,8 +143,8 @@ $this->title = 'New Company';
 									Country
 								</div>
 								<div class="col-4">
-									<select class="form-control" name="country">
-										<option value="">Select country</option>
+									<select class="form-control" name="country" required>
+										<option value="<?= $companyCountry['countryId'] ?>"><?= $companyCountry['countryName'] ?></option>
 										<?php
 										if (isset($countries) && count($countries) > 0) {
 											foreach ($countries as $countryId => $country) : ?>
@@ -222,9 +223,39 @@ $this->title = 'New Company';
 							<textarea style="height:410px;" name="about" class="form-control"><?= $company['about'] ?></textarea>
 
 						</div>
+						<div class="row mt-20">
+							<div class="col-3">
+								<a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>" class="no-underline">
+									<div class="alert alert-secondary text-center col-12 pr-0 pl-0" role="alert" style="font-size: 13px;">
+										<div class="text-primary"> Employees</div>
+										<i class="fa fa-plus mt-10 plus-click0" aria-hidden="true"></i>
+									</div>
+								</a>
+							</div>
+							<div class="col-3">
+								<a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>" class="no-underline">
+									<div class="alert alert-secondary text-center  col-12 pr-0 pl-0" role="alert" style="font-size: 13px;">
+										<div class="text-primary employee-center"> Branches</div>
+										<i class="fa fa-plus mt-10 plus-click0" aria-hidden="true"></i>
+									</div>
+								</a>
+							</div>
+							<div class="col-3">
+								<div class="alert alert-secondary text-center  col-12 pr-0 pl-0" role="alert" style="font-size: 13px;">
+									<div class="text-primary employee-center"> Departments</div>
+									<i class="fa fa-plus mt-10 plus-click0" aria-hidden="true"></i>
+								</div>
+							</div>
+							<div class="col-3">
+								<div class="alert alert-secondary text-center col-12 pr-0 pl-0" role="alert" style="font-size: 13px;">
+									<div class="text-primary employee-center"> Tearm</div>
+									<i class="fa fa-plus mt-10 plus-click0" aria-hidden="true"></i>
+								</div>
+							</div>
+						</div>
 						<div class="col-12 text-end mt-10">
 							<input type="hidden" name="companyId" value="<?= $company['companyId'] + 543 ?>">
-							<button type="submit" class="btn btn-success">Update Company</button>
+							<button type="submit" class="btn btn-primary"> Apply </button>
 						</div>
 					</div>
 				</div>

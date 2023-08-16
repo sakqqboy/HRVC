@@ -17,6 +17,7 @@ class AppAsset extends AssetBundle
         'css/home/header.css',
         'css/home/dashboard.css',
         'css/layout/layout.css',
+        'css/layout/font.css',
         'css/home/update.css',
         'css/home/kpi-summary.css',
         'css/home/department.css',

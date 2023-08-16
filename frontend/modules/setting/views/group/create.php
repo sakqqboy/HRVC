@@ -107,7 +107,7 @@ $this->title = 'Create Group';
 									Country
 								</div>
 								<div class="col-4">
-									<select class="form-control" name="country">
+									<select class="form-control" name="country" required>
 										<option value="">Select country</option>
 										<?php
 										if (isset($countries) && count($countries) > 0) {
