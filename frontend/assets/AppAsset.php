@@ -47,6 +47,8 @@ class AppAsset extends AssetBundle
         'css/component/button.css',
         'css/home/title.css',
         'css/home/management-layer.css',
+        'css/home/employee.css',
+        'css/home/create-employee.css',
     ];
     public $js = [
         'js/content.js',

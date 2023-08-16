@@ -1,7 +1,7 @@
 <div class="col-lg-12 header1" id="mySidebar">
         <div class="col-12">
                 <div class="col-12">
-                        <i class="fa fa-step-backward caret-left" aria-hidden="true"></i>
+                        <i onclick="w3_close()" class="fa fa-step-backward caret-left" aria-hidden="true"></i>
                 </div>
                 <div class="col-12">
                         <a href="<?= Yii::$app->homeUrl ?>site/index"><img src="<?= Yii::$app->homeUrl ?>image/Human-1.png" class="width-hrvc"></a>
