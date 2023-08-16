@@ -125,8 +125,8 @@ $this->title = 'Update Group';
 									Country
 								</div>
 								<div class="col-4">
-									<select class="form-control" name="country">
-										<option value="">Select country</option>
+									<select class="form-control" name="country" required>
+										<option value="<?= $groupCountry['countryId'] ?>"><?= $groupCountry['countryName'] ?></option>
 										<?php
 										if (isset($countries) && count($countries) > 0) {
 											foreach ($countries as $countryId => $country) : ?>

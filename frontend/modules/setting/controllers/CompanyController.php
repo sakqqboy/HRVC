@@ -136,6 +136,7 @@ class CompanyController extends Controller
 		curl_setopt($apiCountry, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($apiCountry, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
 		$resultCountry = curl_exec($apiCountry);
+		$countries = json_decode($resultCountry, true);
 		curl_close($apiCountry);
 
 		$apiCompany = curl_init();
@@ -143,12 +144,30 @@ class CompanyController extends Controller
 		curl_setopt($apiCompany, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($apiCompany, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
 		$company = curl_exec($apiCompany);
-		curl_close($apiCompany);
 		$company = json_decode($company, true);
-		$countries = json_decode($resultCountry, true);
+		curl_close($apiCompany);
+
+		$headQuaterApi = curl_init();
+		curl_setopt($headQuaterApi, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($headQuaterApi, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($headQuaterApi, CURLOPT_URL, Path::Api() . 'masterdata/company/header?id=' . $company['groupId']);
+		$headQuater = curl_exec($headQuaterApi);
+		curl_close($headQuaterApi);
+		$headQuater = json_decode($headQuater, true);
+
+		$apiCountry = curl_init();
+		curl_setopt($apiCountry, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($apiCountry, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($apiCountry, CURLOPT_URL, Path::Api() . 'masterdata/country/country-detail?id=' . $company["countryId"]);
+		$resultCountryDetail = curl_exec($apiCountry);
+		$companyCountry = json_decode($resultCountryDetail, true);
+		curl_close($apiCountry);
+
 		return $this->render('update_company', [
 			"countries" => $countries,
-			"company" => $company
+			"company" => $company,
+			"headQuater" => $headQuater,
+			"companyCountry" => $companyCountry
 		]);
 	}
 	public function actionSaveUpdateCompany()

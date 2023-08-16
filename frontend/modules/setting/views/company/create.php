@@ -209,10 +209,11 @@ $this->title = 'New Company';
 							<textarea style="height:410px;" name="about" class="form-control"></textarea>
 
 						</div>
-						<input type="hidden" name="groupId" value="<?= $groupId + 543 ?>">
-						<div class="col-12 text-end mt-10">
-							<button type="submit" class="btn btn-success">Create Company</button>
-						</div>
+
+					</div>
+					<input type="hidden" name="groupId" value="<?= $groupId + 543 ?>">
+					<div class="col-12 text-end mt-10">
+						<button type="submit" class="btn btn-success">Create Company</button>
 					</div>
 				</div>
 			</div>

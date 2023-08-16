@@ -10,7 +10,9 @@ $this->title = 'Create Employee';
             Personal Information
         </div>
         <hr>
-        <div class="row"></div>
+        <div class="row">
+
+        </div>
         <div class="col-lg-"></div>
     </div>
 </div>

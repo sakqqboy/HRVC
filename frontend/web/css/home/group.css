@@ -16,10 +16,12 @@
     text-align: end;
 }
 
+
 /* body {
     background: whitesmoke;
     font-family: 'Open Sans', sans-serif;
 } */
+
 
 /* .container {
     max-width: 960px;
@@ -27,11 +29,13 @@
     padding: 20px;
 } */
 
+
 /* h1 {
     font-size: 20px;
     text-align: center;
     margin: 20px 0 20px;
 } */
+
 
 /* h1 small {
     display: block;
@@ -46,7 +50,6 @@
     max-width: 205px;
     margin: 50px auto;
 }
-
 
 .avatar-upload .avatar-edit {
     position: absolute;
@@ -167,6 +170,7 @@
 
 .width-TCF-BD {
     width: 100%;
+    height: 55px;
 }
 
 .tcg-edit {
@@ -203,6 +207,11 @@
 
 .detail-tokyo {
     font-size: 14px;
+    letter-spacing: 0.5px;
+    line-height: 23px;
+    word-wrap: break-word;
+    padding-right: 15px;
+    text-indent: 20px;
 }
 
 .box-about0 {
@@ -211,6 +220,15 @@
 
 .Affiliated0 {
     font-weight: 700;
+}
+
+
+.affiliated-list {
+    cursor: pointer;
+}
+
+.affiliated-list:hover {
+    opacity: 0.5;
 }
 
 

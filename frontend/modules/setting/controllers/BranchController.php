@@ -17,4 +17,8 @@ class BranchController extends Controller
     {
         return $this->render('index');
     }
+    public function actionCreate($hash)
+    {
+        return $this->render('create');
+    }
 }
