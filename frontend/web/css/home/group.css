@@ -16,10 +16,12 @@
     text-align: end;
 }
 
+
 /* body {
     background: whitesmoke;
     font-family: 'Open Sans', sans-serif;
 } */
+
 
 /* .container {
     max-width: 960px;
@@ -27,11 +29,13 @@
     padding: 20px;
 } */
 
+
 /* h1 {
     font-size: 20px;
     text-align: center;
     margin: 20px 0 20px;
 } */
+
 
 /* h1 small {
     display: block;
@@ -45,7 +49,6 @@
     max-width: 205px;
     margin: 50px auto;
 }
-
 
 .avatar-upload .avatar-edit {
     position: absolute;
@@ -166,6 +169,7 @@
 
 .width-TCF-BD {
     width: 100%;
+    height: 55px;
 }
 
 .tcg-edit {
@@ -202,6 +206,11 @@
 
 .detail-tokyo {
     font-size: 14px;
+    letter-spacing: 0.5px;
+    line-height: 23px;
+    word-wrap: break-word;
+    padding-right: 15px;
+    text-indent: 20px;
 }
 
 .box-about0 {
@@ -212,15 +221,21 @@
     font-weight: 700;
 }
 
+.affiliated-list {
+    cursor: pointer;
+}
+
+.affiliated-list:hover {
+    opacity: 0.5;
+}
+
 @media(max-width: 992px) {
     .edit-update {
         padding-left: 755px;
     }
-
     .width-TCF-BD {
         width: 100%;
     }
-
     .alert-secondary-background {
         margin-left: 20px;
     }
@@ -230,92 +245,73 @@
     .edit-update {
         padding-left: 350px;
     }
-
     .avatar-upload {
         margin-left: 80px;
     }
-
     .name-tokyo {
         padding-left: 215px;
         margin-top: -180px;
         font-size: 20px;
     }
-
     .tokyo-small {
         padding-left: 220px;
         margin-top: -5px;
     }
-
     .tcg-edit0 {
         margin-top: -40px;
         text-align: right;
     }
-
     .name-head {
         text-align: center;
         margin-top: 30px;
     }
-
     .name-head0 {
         text-align: right;
         margin-top: -24px;
     }
-
     .address-box {
         font-size: 13px;
         width: 125px;
         margin-left: 340px;
     }
-
     .address-box0 {
         font-size: 13px;
     }
-
     .Group-Information {
         margin-top: 30px;
     }
-
     .ABOUT-NAME {
         margin-top: 30px;
     }
-
     .box-about0 {
         padding-left: 20px;
     }
-
     .home-tokyo {
         margin-left: 30px;
         margin-top: 30px;
     }
-
     .width-TCF-BD {
         width: 60%;
     }
-
     .building0 {
         font-size: 30px;
         padding-left: 30px;
     }
-
     .Affiliated0 {
         margin-top: -20px;
         text-align: center;
     }
-
     .box-27 {
         padding-left: 400px;
         margin-top: -25px;
     }
-
     .numberemployees {
         font-size: 13px;
         padding-top: -20px;
     }
-
     .alert-secondary-background {
         margin-left: 20px;
     }
-
     .location {
         display: none;
     }

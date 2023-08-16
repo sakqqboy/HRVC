@@ -2,6 +2,7 @@
 
 namespace backend\modules\masterdata\controllers;
 
+use backend\models\hrvc\Company;
 use backend\models\hrvc\Country;
 use backend\models\hrvc\Group;
 use Exception;
@@ -25,5 +26,17 @@ class GroupController extends Controller
         $group = [];
         $group = Group::find()->where(["groupId" => $id])->asArray()->one();
         return json_encode($group);
+    }
+    public function actionCompanyGroup($id)
+    {
+        $company = [];
+        $company = Company::find()
+            ->select('company.companyName,company.companyId,company.city,c.countryName,company.picture,company.headQuaterId')
+            ->JOIN("LEFT JOIN", "country c", "c.countryId=company.countryId")
+            ->where(["groupId" => $id])
+            ->orderBy('company.createDateTime')
+            ->asArray()
+            ->all();
+        return json_encode($company);
     }
 }

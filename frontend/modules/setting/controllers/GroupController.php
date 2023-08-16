@@ -80,7 +80,7 @@ class GroupController extends Controller
                 return $this->redirect(Yii::$app->homeUrl . 'setting/group/group-view/' . ModelMaster::encodeParams(["groupId" => $groupId]));
             }
         }
-        // return $this->redirect(Yii::$app->homeUrl . 'setting/group/group-view/' . ModelMaster::encodeParams(["groupId" => 2]));
+        return $this->redirect(Yii::$app->homeUrl . 'setting/group/group-view/' . ModelMaster::encodeParams(["groupId" => 2]));
         $ch1 = curl_init();
         curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
@@ -103,9 +103,20 @@ class GroupController extends Controller
         $groupJson = curl_exec($api);
         curl_close($api);
         $group = json_decode($groupJson, true);
-        // throw new exception(print_r($group, true));
+
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+        $companyJson = curl_exec($api);
+        curl_close($api);
+        $companyGroup = json_decode($companyJson, true);
+        //throw new exception(print_r($companyGroup, true));
+
+
         return $this->render('group_view', [
-            "group" => $group
+            "group" => $group,
+            "companyGroup" => $companyGroup
         ]);
     }
     public function actionUpdateGroup($hash)

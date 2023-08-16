@@ -176,56 +176,49 @@ $this->title = 'Group profile';
 					Affiliated Companies
 				</div>
 				<div class="col-lg-3 col-md-3 col-12 box-27" style="font-weight:700;">
-					27
+					<?= count($companyGroup) ?>
 				</div>
 			</div>
 			<hr>
 			<div class="col-12">
-				<div class="row">
-					<div class="col-lg-3 col-md-4 col-4">
-						<img src="<?= Yii::$app->homeUrl ?>image/TCF-BD.png" class="width-TCF-BD">
-					</div>
-					<div class="col-lg-9 col-md-8 col-8 mt-10">
-						<div class="tokyoconsultinggroup"> Tokyo Consulting Firm Pvt. Ltd.</div>
-						<i class="fa fa-map-marker FT" aria-hidden="true"></i>Chennai, India
-						<div class="numberemployees">100,560 Employees</div>
-					</div>
-					<div class="col-lg-3 col-md-4 col-4">
-						<img src="<?= Yii::$app->homeUrl ?>image/TCF-BD.png" class="width-TCF-BD">
-					</div>
-					<div class="col-lg-9 col-md-8 col-8 mt-10">
-						<div class="tokyoconsultinggroup"> Tokyo Consulting Firm Pvt. Ltd.</div>
-						<i class="fa fa-map-marker" aria-hidden="true"></i> Chennai, India
-						<div class="numberemployees">100,560 Employees</div>
-					</div>
-					<div class="col-lg-3 col-md-4 col-4">
-						<img src="<?= Yii::$app->homeUrl ?>image/TCF-BD.png" class="width-TCF-BD">
-					</div>
-					<div class="col-lg-9 col-md-8 col-8 mt-10">
-						<div class="tokyoconsultinggroup"> Tokyo Consulting Firm Pvt. Ltd.</div>
-						<i class="fa fa-map-marker" aria-hidden="true"></i> Chennai, India
-						<div class="numberemployees">100,560 Employees</div>
-					</div>
-					<div class="col-lg-3 col-md-4 col-4">
-						<img src="<?= Yii::$app->homeUrl ?>image/TCF-BD.png" class="width-TCF-BD">
-					</div>
-					<div class="col-lg-9 col-md-8 col-8 mt-10">
-						<div class="tokyoconsultinggroup"> Tokyo Consulting Firm Pvt. Ltd.</div>
-						<i class="fa fa-map-marker" aria-hidden="true"></i> Chennai, India
-						<div class="numberemployees">100,560 Employees</div>
-					</div>
-					<div class="col-lg-3 col-md-4 col-4">
-						<img src="<?= Yii::$app->homeUrl ?>image/TCF-BD.png" class="width-TCF-BD">
-					</div>
-					<div class="col-lg-9 col-md-8 col-8 mt-10">
-						<div class="tokyoconsultinggroup"> Tokyo Consulting Firm Pvt. Ltd.</div>
-						<i class="fa fa-map-marker" aria-hidden="true"></i> Chennai, India
-						<div class="numberemployees">100,560 Employees</div>
-					</div>
+
+				<?php
+				if (isset($companyGroup) && count($companyGroup) > 0) {
+					$i = 0;
+					foreach ($companyGroup as $company) :
+				?>
+						<div class="row <?= $i > 0 ? 'mt-10' : '' ?> affiliated-list">
+							<div class="col-lg-3 col-md-4 col-4">
+								<img src="<?= Yii::$app->homeUrl . $company['picture'] ?>" class="width-TCF-BD">
+							</div>
+							<div class="col-lg-9 col-md-8 col-8">
+								<div class="tokyoconsultinggroup">
+									<?= $company['companyName'] ?>
+									<?php
+									if ($company['headQuaterId'] == null) {
+									?>
+										<span style="font-size: 11px;font-weight:100;">(head Quater)</span>
+									<?php
+									}
+									?>
+								</div>
+								<i class="fa fa-map-marker FT mr-5" aria-hidden="true"></i><?= $company["city"] ?>, <?= $company["countryName"] ?>
+								<div class="numberemployees">100,560 Employees</div>
+							</div>
+						</div>
+					<?php
+						$i++;
+					endforeach;
+				}
+				if (count($companyGroup) > 5) {
+					?>
 					<div class="col-12 text-end">
 						<a href="#"> See All </a>
 					</div>
-				</div>
+				<?php
+				}
+				?>
+
 			</div>
 		</div>
 	</div>
