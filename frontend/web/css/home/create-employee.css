@@ -1,0 +1,116 @@
+.alert-create0 {
+    background-color: rgb(239, 247, 251);
+    border-radius: 0px;
+}
+
+.create2-one {
+    font-size: 32px;
+    font-weight: 500;
+}
+
+
+.profile-pic-div {
+    height: 200px;
+    width: 200px;
+    margin-left: 100px;
+    margin-top: 100px;
+    top: 50%;
+    left: 150px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid grey;
+}
+
+#photo {
+    height: 100%;
+    width: 100%;
+    border-radius: 100%;
+    background: #FFFFFF;
+    border: 2px solid transparent;
+}
+
+#file {
+    display: none;
+}
+
+#uploadBtn {
+    height: 40px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    line-height: 30px;
+    font-family: sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+    display: none;
+}
+
+.acceptable {
+    margin-top: -60px;
+}
+
+.show-thin {
+    border-left: rgb(0, 0, 0) solid thin;
+}
+
+.input-Firstname {
+    margin-left: -70px;
+}
+
+.Select-Nationality {
+    margin-left: -70px;
+    padding-top: 50px;
+}
+
+.Father-name {
+    margin-top: 50px;
+}
+
+.Address-line1 {
+    margin-top: 50px;
+    margin-left: -70px;
+}
+
+.Address-line2 {
+    margin-top: 50px;
+}
+
+.example-2 {
+    position: relative;
+    overflow-y: scroll;
+    height: 600px;
+    border: none;
+    background-color: #f2f4f6;
+}
+
+.dashed {
+    border-style: dashed;
+    border-radius: 8px;
+    color: #658EBE;
+
+}
+
+.image-file-plus {
+    width: 100%;
+}
+
+.show2 {
+    border-left: lightgray solid thin;
+    height: 70px;
+    margin-top: 20px;
+}
+
+.show3 {
+    border-left: lightgray solid thin;
+}
+
+.solid {
+    border-style: solid;
+    border-radius: 10px;
+}

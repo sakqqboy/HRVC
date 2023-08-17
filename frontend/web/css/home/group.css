@@ -44,6 +44,7 @@
     color: gray;
 } */
 
+
 .avatar-upload {
     position: relative;
     max-width: 205px;
@@ -221,6 +222,7 @@
     font-weight: 700;
 }
 
+
 .affiliated-list {
     cursor: pointer;
 }
@@ -229,13 +231,16 @@
     opacity: 0.5;
 }
 
+
 @media(max-width: 992px) {
     .edit-update {
         padding-left: 755px;
     }
+
     .width-TCF-BD {
         width: 100%;
     }
+
     .alert-secondary-background {
         margin-left: 20px;
     }
@@ -245,73 +250,92 @@
     .edit-update {
         padding-left: 350px;
     }
+
     .avatar-upload {
         margin-left: 80px;
     }
+
     .name-tokyo {
         padding-left: 215px;
         margin-top: -180px;
         font-size: 20px;
     }
+
     .tokyo-small {
         padding-left: 220px;
         margin-top: -5px;
     }
+
     .tcg-edit0 {
         margin-top: -40px;
         text-align: right;
     }
+
     .name-head {
         text-align: center;
         margin-top: 30px;
     }
+
     .name-head0 {
         text-align: right;
         margin-top: -24px;
     }
+
     .address-box {
         font-size: 13px;
         width: 125px;
         margin-left: 340px;
     }
+
     .address-box0 {
         font-size: 13px;
     }
+
     .Group-Information {
         margin-top: 30px;
     }
+
     .ABOUT-NAME {
         margin-top: 30px;
     }
+
     .box-about0 {
         padding-left: 20px;
     }
+
     .home-tokyo {
         margin-left: 30px;
         margin-top: 30px;
     }
+
     .width-TCF-BD {
         width: 60%;
     }
+
     .building0 {
         font-size: 30px;
         padding-left: 30px;
     }
+
     .Affiliated0 {
         margin-top: -20px;
         text-align: center;
     }
+
     .box-27 {
         padding-left: 400px;
         margin-top: -25px;
     }
+
     .numberemployees {
         font-size: 13px;
         padding-top: -20px;
     }
+
     .alert-secondary-background {
         margin-left: 20px;
     }
+
     .location {
         display: none;
     }
