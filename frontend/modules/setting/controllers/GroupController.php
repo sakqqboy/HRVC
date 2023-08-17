@@ -231,4 +231,50 @@ class GroupController extends Controller
         fwrite($myfile, $text);
         fclose($myfile);
     }
+    public function actionLayout()
+    {
+        $myfile = fopen(Path::urlUpload() . "css/layout/layout.css", "w");
+        $i = 0;
+        $a = 1;
+        $text = '';
+        while ($a <= 8) {
+            if ($i < 6) {
+                $important = " !important";
+            } else {
+                $important = '';
+            }
+            if ($a == 1) {
+                $text .= ".pt-" . $i . "{padding-top:" . $i . "px" . $important . ";}";
+            }
+            if ($a == 2) {
+                $text .= ".pb-" . $i . "{padding-bottom:" . $i . "px" . $important . ";}";
+            }
+            if ($a == 3) {
+                $text .= ".pl-" . $i . "{padding-left:" . $i . "px" . $important . ";}";
+            }
+            if ($a == 4) {
+                $text .= ".pr-" . $i . "{padding-right:" . $i . "px" . $important . ";}";
+            }
+            if ($a == 5) {
+                $text .= ".mt-" . $i . "{margin-top:" . $i . "px" . $important . ";}";
+            }
+            if ($a == 6) {
+                $text .= ".mb-" . $i . "{margin-bottom:" . $i . "px" . $important . ";}";
+            }
+            if ($a == 7) {
+                $text .= ".ml-" . $i . "{margin-left:" . $i . "px" . $important . ";}";
+            }
+            if ($a == 8) {
+                $text .= ".mr-" . $i . "{margin-right:" . $i . "px" . $important . ";}";
+            }
+            $i++;
+            if ($i > 100) {
+                $a++;
+                $i = 0;
+            }
+        }
+        $text .= ".no-underline {text-decoration: none;}";
+        fwrite($myfile, $text);
+        fclose($myfile);
+    }
 }

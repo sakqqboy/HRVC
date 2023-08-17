@@ -22,7 +22,7 @@ class CountryController extends Controller
     public function actionActiveCountry()
     {
         $country = [];
-        $countries = Country::find()->select('countryId,countryName')->where(["status" => 1])->asArray()->orderBy('countryName')->all();
+        $countries = Country::find()->select('countryId,countryName,flag')->where(["status" => 1])->asArray()->orderBy('countryName')->all();
         //throw new Exception(print_r($countries, true));
         if (isset($countries) && count($countries) > 0) {
             foreach ($countries as $c) :
@@ -35,7 +35,7 @@ class CountryController extends Controller
     {
         $country = [];
         $country = Country::find()
-            ->select('countryId,countryName')
+            ->select('countryId,countryName,flag')
             ->where(["countryId" => $id])
             ->asArray()
             ->one();

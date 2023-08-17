@@ -10,7 +10,8 @@
 
 .card-tcf {
     padding-top: 10px;
-    width: 55px;
+    width: 70px;
+    height: 80px;
     border-radius: 5px;
 }
 
@@ -35,30 +36,24 @@
     z-index: 0px;
 }
 
-
 @media(max-width: 992px) {
     .bt-right {
         text-align: center;
         padding-top: 10px;
     }
-
     .bt-togg {
         padding-top: 10px;
     }
-
     .branch-one {
         padding-left: 10px;
     }
-
 }
 
 @media(max-width: 768px) {
     .bt-right {
         text-align: start;
     }
-
     .branch-one {
         padding-left: 10px;
     }
-
 }

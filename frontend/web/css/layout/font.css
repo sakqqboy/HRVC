@@ -361,3 +361,11 @@
 .font-size-100 {
     font-size: 100px;
 }
+
+.font-b {
+    font-weight: bold;
+}
+
+.font-bb {
+    font-weight: bolder;
+}
