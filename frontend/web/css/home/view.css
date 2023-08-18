@@ -1,0 +1,67 @@
+.view-goback {
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.alert-goback {
+    background-color: rgb(241, 241, 241);
+    border-radius: 0px;
+    margin-top: 20px;
+}
+
+.imageView {
+    width: 100%;
+    border-radius: 100%;
+    background: #FFFFFF;
+    border: 2px solid transparent;
+}
+
+.name-Tadawoki {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: black;
+    font-size: 20px;
+}
+
+.Director-view {
+    font-size: 14px;
+    color: black;
+}
+
+.view-solid {
+    border-left: black solid thin;
+    margin-left: 5px;
+}
+
+.bd {
+    width: 10%;
+}
+
+.crd-background {
+    background-color: #f0f6fa;
+}
+
+.alert-personal-information {
+    border: none;
+    margin-left: -10px;
+    height: 100%
+}
+
+.emplo-infor {
+    font-weight: 700;
+    font-size: 31px;
+    line-height: 40px;
+    padding-top: 30px;
+}
+
+.view-font-bold {
+    font-weight: 500;
+    color: black;
+}
+
+.show-in-solid {
+    border-left: lightgray solid thin;
+    margin-top: 100px;
+    height: 490px;
+}
