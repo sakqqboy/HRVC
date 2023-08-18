@@ -191,13 +191,15 @@ $this->title = 'Create Employee';
                 <div class="dashed">
                     <div class="row">
                         <div class="col-lg-2 col-md-6 col-12 pt-20">
-                            <img src="<?= Yii::$app->homeUrl ?>image/file-plus.png" class="image-file-plus">
+                            <!-- <img src="<?= Yii::$app->homeUrl ?>image/file-plus.png" class="image-file-plus"> -->
+                            <label for="files" class="btn choosefile">File</label>
+                            <input id="files" style="display:none;" type="file">
                         </div>
                         <div class="col-lg-5 col-md-6 col-12 pt-20">
-                            <strong class="text-danger">*</strong> <strong class="text-dark"> Upload Resume</strong>
-                            <p class="text-secondary font-size-14">Supported Files <span class="text-dark"> - .pdf, .doc, .docx</span>
-                                Maximum File Size 5 MB
-                            </p>
+                            <strong class="text-danger">*</strong>
+                            <label for="name">Upload Resume</label>
+                            <div class="text-secondary font-size-14">Supported Files <span class="text-dark font-size-10"> - .pdf, .doc, .docx</span></div>
+                            <div class="text-secondary font-size-14">Maximum File Size 5 MB</div>
                         </div>
                         <div class="col-lg-1 col-md-6 col-12 show2"></div>
                         <div class="col-lg-4 col-md-6 col-12 pt-30">
@@ -209,10 +211,12 @@ $this->title = 'Create Employee';
                 <div class="dashed">
                     <div class="row">
                         <div class="col-lg-2 col-md-6 col-12 pt-20">
-                            <img src="<?= Yii::$app->homeUrl ?>image/pdf.png" class="image-file-plus">
+                            <!-- <img src="<?= Yii::$app->homeUrl ?>image/pdf.png" class="image-file-plus"> -->
+                            <label for="files" class="btn choosefile">File</label>
+                            <input id="files" style="display:none;" type="file">
                         </div>
                         <div class="col-lg-5 col-md-6 col-12 pt-20">
-                            <strong class="text-dark"> Employee Agreement-DD.pdf</strong>
+                            <label for="name"> Employee Agreement-DD.pdf</label>
                             <p class="text-secondary font-size-14">Size 1.21 MB
                                 Uploaded On 08/14/2023
                             </p>

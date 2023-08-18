@@ -282,19 +282,37 @@ $this->title = 'view';
                                     </div>
                                     <hr>
                                     <div class="row">
-                                        <div class="col-lg-2 col-md-6 col-12 pt-20">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/Doc-1.png" class="image-file-plus">
+                                        <div class="col-lg-2 col-md-6 col-12 pt-20 pl-20">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/Doc-1.png" class="image-file-plus1">
                                         </div>
-                                        <div class="col-lg-7 col-md-6 col-12 pt-20">
+                                        <div class="col-lg-6 col-md-6 col-12 pt-20">
                                             <strong class="text-dark"> Employee Agreement-DD.pdf</strong>
                                             <div class="text-secondary font-size-14" style="width: 80px;">Size 5.21 MB </div>
                                             <div class="text-secondary font-size-14">last Updated 08/14/2023</div>
                                         </div>
-                                        <div class="col-lg-3 col-md-6 col-12 pt-30">
-                                            <button type="button" class="btn btn-outline-secondary"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                                            <button type="button" class="btn btn-outline-secondary"><i class="fa fa-cloud-download" aria-hidden="true"></i> </button>
+                                        <div class="col-lg-4 col-md-6 col-12 pt-30">
+                                            <button type="button" class="btn btn-outline-secondary font-size-12"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                            <button type="button" class="btn btn-outline-secondary font-size-12"><i class="fa fa-cloud-download" aria-hidden="true"></i> </button>
                                         </div>
                                     </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-lg-2 col-md-6 col-12 pt-20 pl-20">
+                                            <!-- <img src="<?= Yii::$app->homeUrl ?>image/Doc-2.png" class="image-file-plus1"> -->
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-12 pt-20">
+                                            <strong class="text-dark"> Employee Agreement-DD.pdf</strong>
+                                            <div class="text-secondary font-size-14" style="width: 80px;">Size 5.21 MB </div>
+                                            <div class="text-secondary font-size-14">last Updated 08/14/2023</div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-12 pt-30">
+                                            <button type="button" class="btn btn-outline-secondary font-size-12"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                            <button type="button" class="btn btn-outline-secondary font-size-12"><i class="fa fa-cloud-download" aria-hidden="true"></i> </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-12 form-pdf">
+
                                 </div>
                             </div>
                         </div>

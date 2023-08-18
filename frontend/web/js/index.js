@@ -73,3 +73,10 @@ file.addEventListener('change', function () {
 
     }
 });
+
+document.querySelector("#files").onchange = function () {
+    const fileName = this.files[0]?.name;
+    const label = document.querySelector("label[for=name]");
+    label.innerText = fileName ?? "Browse Files";
+};
+

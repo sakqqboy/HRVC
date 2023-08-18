@@ -114,3 +114,13 @@
     border-style: solid;
     border-radius: 10px;
 }
+
+.choosefile {
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    padding: 10px 10px;
+    margin-left: 5px;
+    /* font-family: 'Helvetica', sans-serif; */
+    transition: .5s;
+    font-weight: 700;
+}
