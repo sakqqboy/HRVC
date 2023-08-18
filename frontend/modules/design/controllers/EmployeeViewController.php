@@ -7,7 +7,7 @@ use yii\web\Controller;
 /**
  * Default controller for the `designfront` module
  */
-class ViewEmployeeController extends Controller
+class EmployeeViewController extends Controller
 {
     /**
      * Renders the index view for the module

@@ -40,17 +40,20 @@
 
 .crd-background {
     background-color: #f0f6fa;
+    height: 550px;
 }
 
 .alert-personal-information {
     border: none;
-    margin-left: -10px;
-    height: 100%
+    margin-left: -30px;
+    background-color: white;
+    width: 54rem;
+    height: 550px;
 }
 
 .emplo-infor {
     font-weight: 700;
-    font-size: 31px;
+    font-size: 32px;
     line-height: 40px;
     padding-top: 30px;
 }
@@ -60,8 +63,43 @@
     color: black;
 }
 
+.view-font-bold1 {
+    font-weight: 500;
+    color: black;
+    padding-top: 40px;
+    width: 100%;
+}
+
 .show-in-solid {
     border-left: lightgray solid thin;
-    margin-top: 100px;
-    height: 490px;
+    margin-top: 60px;
+    padding-left: 10px;
+    height: 460px;
 }
+
+.view-cursor {
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.vertical0 {
+    border-right: 3px solid #e7e7e7;
+    margin-left: -90px;
+}
+
+.briefcase-work {
+    margin-top: -500px;
+}
+
+.briefcase-Attachments {
+    margin-top: -378px;
+}
+
+/* .social-facebook {
+    cursor: pointer;
+} */
+
+/* .social-facebook a:hover {
+    cursor: pointer;
+    color: rgb(51, 125, 252);
+} */
