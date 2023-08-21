@@ -17,6 +17,16 @@
     border: 2px solid transparent;
 }
 
+.share-pointer {
+    cursor: pointer;
+    color: rgb(45, 111, 243);
+    text-align: end;
+}
+
+.box-shareprofile {
+    padding-left: 40%;
+}
+
 .name-Tadawoki {
     text-transform: uppercase;
     font-weight: bold;
@@ -95,6 +105,37 @@
     margin-top: -378px;
 }
 
+.salary {
+    margin-top: -312px;
+}
+
+.salary-bold {
+    font-weight: 500;
+    color: black;
+    font-size: 14px;
+}
+
+.danger-details {
+    margin-top: -312px;
+    text-align: end;
+}
+
+.detail-salary {
+    margin-top: -310px;
+}
+
+.in-details {
+    margin-top: -310px;
+}
+
+.buttonlinks {
+    border-radius: 20px;
+    width: 20px;
+}
+
+.nav-link {
+    border: none;
+}
 
 /* .form-pdf {} */
 
@@ -104,5 +145,5 @@
 
 /* .social-facebook a:hover {
     cursor: pointer;
-    color: rgb(51, 125, 252);
+    color: rgb(51, 125, 252)
 } */

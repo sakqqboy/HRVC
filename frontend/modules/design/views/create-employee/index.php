@@ -12,10 +12,15 @@ $this->title = 'Create Employee';
         <hr class="col-10">
         <div class="row">
             <div class="col-lg-3 col-md-6 col-12">
-                <div class="profile-pic-div">
-                    <img src="<?= Yii::$app->homeUrl ?>image/gray.png" id="photo">
-                    <input type="file" id="file">
-                    <label for="file" id="uploadBtn"><i class="fa fa-pencil" aria-hidden="true"></i> Upload</label>
+                <div class="avatar-upload">
+                    <div class="avatar-edit">
+                        <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                        <label for="imageUpload"></label>
+                    </div>
+                    <div class="avatar-preview">
+                        <div id="imagePreview">
+                        </div>
+                    </div>
                 </div>
                 <div class="col-12 acceptable">
                     <p> Acceptable file types: <strong> JPEG, PNG,</strong> </p>
@@ -236,7 +241,6 @@ $this->title = 'Create Employee';
                     <i class="fa fa-briefcase" aria-hidden="true"></i> Remarks
                 </div>
                 <div class="col-12 solid" style="height: 90%">
-
                 </div>
             </div>
         </div>

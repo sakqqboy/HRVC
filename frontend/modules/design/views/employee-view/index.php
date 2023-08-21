@@ -37,20 +37,24 @@ $this->title = 'view';
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row mt-10">
-                    <div class="col-lg-3 col-md-6 col-12 text-primary font-size-17">
-                        <i class="fa fa-share-alt" aria-hidden="true"></i> Share Profile
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-12 text-primary font-size-17">
-                        <i class="fa fa-print" aria-hidden="true"></i> Print
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-12 text-primary font-size-17">
-                        <i class="fa fa-cloud-download" aria-hidden="true"></i> Download CV
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-12 text-primary font-size-17">
-                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+                        <div class="row mt-30">
+                            <div class="col-lg-12 col-md-6 col-12 box-shareprofile">
+                                <div class="row">
+                                    <div class="col-4 font-size-14 share-pointer">
+                                        <i class="fa fa-share-alt" aria-hidden="true"></i> Share Profile
+                                    </div>
+                                    <div class="col-2 font-size-14 share-pointer">
+                                        <i class="fa fa-print" aria-hidden="true"></i> Print
+                                    </div>
+                                    <div class="col-4 font-size-14 share-pointer">
+                                        <i class="fa fa-cloud-download" aria-hidden="true"></i> Download CV
+                                    </div>
+                                    <div class="col-2 font-size-14 share-pointer">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -62,16 +66,19 @@ $this->title = 'view';
                             Information
                         </div>
                         <div class="col-12 mt-30 mr-30 ml-30">
-                            <button class="nav-link" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true"> Personal & Contact Details</button>
+                            <button class="nav-link  text-dark" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true"> Personal & Contact Details</button>
                         </div>
                         <div class="col-12 mt-30 mr-30 ml-30">
-                            <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false"> Work Information</button>
+                            <button class="nav-link text-dark" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false"> Work Information</button>
                         </div>
                         <div class="col-12 mt-30 mr-30 ml-30">
-                            <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false"> Attachments</button>
+                            <button class="nav-link text-dark" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false"> Attachments</button>
                         </div>
                         <div class="col-12 mt-30 mr-30 ml-30">
-                            <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"> Evaluation</button>
+                            <button class="nav-link text-dark" id="v-pills-detail-tab" data-bs-toggle="pill" data-bs-target="#v-pills-detail" type="button" role="tab" aria-controls="v-pills-detail" aria-selected="false"> Salary & Allowance</button>
+                        </div>
+                        <div class="col-12 mt-30 mr-30 ml-30">
+                            <button class="nav-link text-dark" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"> Evaluation</button>
                         </div>
                     </div>
                 </div>
@@ -298,7 +305,7 @@ $this->title = 'view';
                                     <hr>
                                     <div class="row">
                                         <div class="col-lg-2 col-md-6 col-12 pt-20 pl-20">
-                                            <!-- <img src="<?= Yii::$app->homeUrl ?>image/Doc-2.png" class="image-file-plus1"> -->
+                                            <img src="<?= Yii::$app->homeUrl ?>image/Doc-2.png" class="image-file-plus1">
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-12 pt-20">
                                             <strong class="text-dark"> Employee Agreement-DD.pdf</strong>
@@ -312,9 +319,13 @@ $this->title = 'view';
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-12 form-pdf">
+                                    <div class="col-12">
 
+                                    </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-detail" role="tabpanel" aria-labelledby="v-pills-detail-tab">
                         </div>
                     </div>
                 </div>
@@ -322,7 +333,3 @@ $this->title = 'view';
         </div>
     </div>
 </div>
-
-
-
-<div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
