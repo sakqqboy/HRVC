@@ -59,31 +59,31 @@ $this->title = 'view';
                 </div>
             </div>
             <div class="d-flex align-items-start">
-                <div class="col-lg-3 col-md-12 col-12 crd-background mr-10 ml-10">
+                <div class="col-lg-3 col-md-12 col-12 crd-background">
                     <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        <div class="col-12 emplo-infor mr-40 ml-40">
+                        <div class="col-12 emplo-infor mr-30 ml-30">
                             Employee
                             Information
                         </div>
                         <div class="col-12 mt-30 mr-30 ml-30">
-                            <button class="nav-link " id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true"> Personal & Contact Details</button>
+                            <div class="active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true"> Personal & Contact Details</div>
                         </div>
                         <div class="col-12 mt-30 mr-30 ml-30">
-                            <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false"> Work Information</button>
+                            <div class="" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false"> Work Information</div>
                         </div>
                         <div class="col-12 mt-30 mr-30 ml-30">
-                            <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false"> Attachments</button>
+                            <div class="" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false"> Attachments</div>
                         </div>
                         <div class="col-12 mt-30 mr-30 ml-30">
-                            <button class="nav-link" id="v-pills-detail-tab" data-bs-toggle="pill" data-bs-target="#v-pills-detail" type="button" role="tab" aria-controls="v-pills-detail" aria-selected="false"> Salary & Allowance</button>
+                            <div class="" id="v-pills-detail-tab" data-bs-toggle="pill" data-bs-target="#v-pills-detail" type="button" role="tab" aria-controls="v-pills-detail" aria-selected="false"> Salary & Allowance</div>
                         </div>
                         <div class="col-12 mt-30 mr-30 ml-30">
-                            <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"> Evaluation</button>
+                            <div class="" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"> Evaluation</div>
                         </div>
                     </div>
                 </div>
                 <div class="tab-content" id="v-pills-tabContent">
-                    <div class="col-lg-9 col-md-12 col-12 alert-personal-information">
+                    <div class="col-lg-9 col-md-12 col-12 alert-personal-information ml-20">
                         <div class="tab-pane fade show" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-12">
@@ -299,7 +299,7 @@ $this->title = 'view';
                                         </div>
                                         <div class="col-lg-4 col-md-6 col-12 pt-30">
                                             <button type="button" class="btn btn-outline-secondary font-size-12"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                                            <button type="button" class="btn btn-outline-secondary font-size-12"><i class="fa fa-cloud-download" aria-hidden="true"></i> </button>
+                                            <button type="button" class="btn btn-outline-secondary font-size-12"><i class="fa fa-cloud-download" aria-hidden="true"></i></button>
                                         </div>
                                     </div>
                                     <hr>
@@ -313,98 +313,133 @@ $this->title = 'view';
                                             <div class="text-secondary font-size-14">last Updated 08/14/2023</div>
                                         </div>
                                         <div class="col-lg-4 col-md-6 col-12 pt-30">
-                                            <button type="button" class="btn btn-outline-secondary font-size-12"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                                            <button type="button" class="btn btn-outline-secondary font-size-12"><i class="fa fa-cloud-download" aria-hidden="true"></i> </button>
+                                            <a href="#"> <button type="button" class="btn btn-outline-secondary font-size-12"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
+                                            <button type="button" class="btn btn-outline-secondary font-size-12"><i class="fa fa-cloud-download" aria-hidden="true"></i></button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-12 form-pdf">
-                                    <div class="col-12">
+                                <div class="col-lg-6 col-md-6 col-12 form-pdf pr-20">
+                                    <div class="col-12 alert example-3 scrollbar-ripe-malinka alert-create0">
+                                        <div class="col-12 pl-20 pr-20">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/f-pdf.png" style="width: 100%">
+                                        </div>
+                                        <div class="row uploadBtn">
+                                            <div class="col-10 pl-20">
+                                                <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> &nbsp; <i class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                                                <span class="badge rounded-pill bg-secondary">Page &nbsp; 1 &nbsp; of &nbsp; 1000</span> &nbsp;
+                                                <i class="fa fa-minus-square" aria-hidden="true"></i> &nbsp; <i class="fa fa-plus-square" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="col-2 text-end">
+                                                <i class="fa fa-arrows-alt" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="container">
+                                                <div class="row">
 
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="v-pills-detail" role="tabpanel" aria-labelledby="v-pills-detail-tab">
                             <div class="row">
-                                <div class="col-lg-6  pl-20 font-size-18 text-dark detail-salary">
+                                <div class="col-lg-9  pl-20 font-size-18 text-dark detail-salary">
                                     <i class="fa fa-database" aria-hidden="true"></i> Salary & Allowance
                                 </div>
-                                <div class="col-lg-6 text-end in-details pr-20">
+                                <div class="col-lg-3  in-details pr-20">
                                     VIEW IN DETAILS
                                 </div>
+                                <hr class="col-11 Allowance">
                             </div>
-                            <div class="col-lg-5 col-md-6 col-12 danger-details">
-                                <div class="row">
-                                    <div class="col-6 pl-30 font-size-14">
-                                        Currency
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 col-12 danger-details">
+                                    <div class="row">
+                                        <div class="col-6 pl-30 font-size-14">
+                                            Currency
+                                        </div>
+                                        <div class="col-6 salary-bold">
+                                            JPY (¥)
+                                        </div>
+                                        <div class="col-6 pl-30 pt-20 font-size-14">
+                                            Total Salary
+                                        </div>
+                                        <div class="col-6 pt-20 salary-bold">
+                                            ¥ 49,000,000
+                                        </div>
+                                        <div class="col-6 pl-30 pt-20 font-size-14">
+                                            Basic Salary
+                                        </div>
+                                        <div class="col-6 pt-20 salary-bold">
+                                            ¥ 48,000,000
+                                        </div>
+                                        <div class="col-6 pl-30 pt-20 font-size-14">
+                                            Transportation
+                                        </div>
+                                        <div class="col-6 pt-20 salary-bold">
+                                            ¥ 500,000
+                                        </div>
+                                        <div class="col-6 pl-30 pt-20 font-size-14">
+                                            Title Allowance
+                                        </div>
+                                        <div class="col-6 pt-20 salary-bold">
+                                            ¥ 300,000
+                                        </div>
+                                        <div class="col-6 pl-30 pt-20 font-size-14">
+                                            Qualification Allowance
+                                        </div>
+                                        <div class="col-6 pt-20 salary-bold">
+                                            ¥ 200,000
+                                        </div>
+                                        <div class="col-6 pl-30 pt-20 font-size-14">
+                                            Food Allowance
+                                        </div>
+                                        <div class="col-6 pt-20 salary-bold">
+                                            N/A
+                                        </div>
+                                        <div class="col-6 pl-30 pt-20 font-size-14">
+                                            Other Allowance
+                                        </div>
+                                        <div class="col-6 pt-20 salary-bold">
+                                            N/A
+                                        </div>
+                                        <div class="col-6 pl-30 pt-20 font-size-14">
+                                            Other Allowance
+                                        </div>
+                                        <div class="col-6 pt-20 salary-bold">
+                                            N/A
+                                        </div>
+                                        <div class="col-6 pl-30 pt-20 font-size-14">
+                                            Other Allowance
+                                        </div>
+                                        <div class="col-6 pt-20 salary-bold">
+                                            N/A
+                                        </div>
                                     </div>
-                                    <div class="col-6 salary-bold">
-                                        JPY (¥)
-                                    </div>
-                                    <div class="col-6 pl-30 pt-20 font-size-14">
-                                        Total Salary
-                                    </div>
-                                    <div class="col-6 pt-20 salary-bold">
-                                        ¥ 49,000,000
-                                    </div>
-                                    <div class="col-6 pl-30 pt-20 font-size-14">
-                                        Basic Salary
-                                    </div>
-                                    <div class="col-6 pt-20 salary-bold">
-                                        ¥ 48,000,000
-                                    </div>
-                                    <div class="col-6 pl-30 pt-20 font-size-14">
-                                        Transportation
-                                    </div>
-                                    <div class="col-6 pt-20 salary-bold">
-                                        ¥ 500,000
-                                    </div>
-                                    <div class="col-6 pl-30 pt-20 font-size-14">
-                                        Title Allowance
-                                    </div>
-                                    <div class="col-6 pt-20 salary-bold">
-                                        ¥ 300,000
-                                    </div>
-                                    <div class="col-6 pl-30 pt-20 font-size-14">
-                                        Qualification Allowance
-                                    </div>
-                                    <div class="col-6 pt-20 salary-bold">
-                                        ¥ 200,000
-                                    </div>
-                                    <div class="col-6 pl-30 pt-20 font-size-14">
-                                        Food Allowance
-                                    </div>
-                                    <div class="col-6 pt-20 salary-bold">
-                                        N/A
-                                    </div>
-                                    <div class="col-6 pl-30 pt-20 font-size-14">
-                                        Other Allowance
-                                    </div>
-                                    <div class="col-6 pt-20 salary-bold">
-                                        N/A
-                                    </div>
-                                    <div class="col-6 pl-30 pt-20 font-size-14">
-                                        Other Allowance
-                                    </div>
-                                    <div class="col-6 pt-20 salary-bold">
-                                        N/A
-                                    </div>
-                                    <div class="col-6 pl-30 pt-20 font-size-14">
-                                        Other Allowance
-                                    </div>
-                                    <div class="col-6 pt-20 salary-bold">
-                                        N/A
+                                </div>
+                                <div class="col-lg-8 col-md-6 col-12 a-shadowbd pr-20">
+                                    <div class="shadow p-3 bg-body rounded">
+                                        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+                                        <div id="chart"></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-7 col-md-6 col-12">
-                                <div class="chartCard">
-                                    <div class="chartBox">
-                                        <canvas id="myChart"></canvas>
-                                    </div>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                            <div class="row">
+                                <div class="col-lg-9 col-md-6 col-12 pl-30 e-valution font-size-18 text-dark">
+                                    <i class="fa fa-tachometer" aria-hidden="true"></i> Evaluation
                                 </div>
-                                <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
+                                <div class="col-lg-3 col-md-6 col-12 e-valution-view">
+                                    VIEW IN DETAILS
+                                </div>
+                                <hr class="col-11 e-valution1">
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-12 pl-20 pr-20">
+                                <div class="shadow p-3 bg-body rounded shadow-line">
+                                    <script type="text/javascript" src="https://code.highcharts.com/highcharts.src.js"></script>
+                                    <div id="container"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
