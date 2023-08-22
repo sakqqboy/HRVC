@@ -66,19 +66,19 @@ $this->title = 'view';
                             Information
                         </div>
                         <div class="col-12 mt-30 mr-30 ml-30">
-                            <button class="nav-link  text-dark" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true"> Personal & Contact Details</button>
+                            <button class="nav-link " id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true"> Personal & Contact Details</button>
                         </div>
                         <div class="col-12 mt-30 mr-30 ml-30">
-                            <button class="nav-link text-dark" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false"> Work Information</button>
+                            <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false"> Work Information</button>
                         </div>
                         <div class="col-12 mt-30 mr-30 ml-30">
-                            <button class="nav-link text-dark" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false"> Attachments</button>
+                            <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false"> Attachments</button>
                         </div>
                         <div class="col-12 mt-30 mr-30 ml-30">
-                            <button class="nav-link text-dark" id="v-pills-detail-tab" data-bs-toggle="pill" data-bs-target="#v-pills-detail" type="button" role="tab" aria-controls="v-pills-detail" aria-selected="false"> Salary & Allowance</button>
+                            <button class="nav-link" id="v-pills-detail-tab" data-bs-toggle="pill" data-bs-target="#v-pills-detail" type="button" role="tab" aria-controls="v-pills-detail" aria-selected="false"> Salary & Allowance</button>
                         </div>
                         <div class="col-12 mt-30 mr-30 ml-30">
-                            <button class="nav-link text-dark" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"> Evaluation</button>
+                            <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"> Evaluation</button>
                         </div>
                     </div>
                 </div>
@@ -326,6 +326,86 @@ $this->title = 'view';
                             </div>
                         </div>
                         <div class="tab-pane fade" id="v-pills-detail" role="tabpanel" aria-labelledby="v-pills-detail-tab">
+                            <div class="row">
+                                <div class="col-lg-6  pl-20 font-size-18 text-dark detail-salary">
+                                    <i class="fa fa-database" aria-hidden="true"></i> Salary & Allowance
+                                </div>
+                                <div class="col-lg-6 text-end in-details pr-20">
+                                    VIEW IN DETAILS
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-6 col-12 danger-details">
+                                <div class="row">
+                                    <div class="col-6 pl-30 font-size-14">
+                                        Currency
+                                    </div>
+                                    <div class="col-6 salary-bold">
+                                        JPY (¥)
+                                    </div>
+                                    <div class="col-6 pl-30 pt-20 font-size-14">
+                                        Total Salary
+                                    </div>
+                                    <div class="col-6 pt-20 salary-bold">
+                                        ¥ 49,000,000
+                                    </div>
+                                    <div class="col-6 pl-30 pt-20 font-size-14">
+                                        Basic Salary
+                                    </div>
+                                    <div class="col-6 pt-20 salary-bold">
+                                        ¥ 48,000,000
+                                    </div>
+                                    <div class="col-6 pl-30 pt-20 font-size-14">
+                                        Transportation
+                                    </div>
+                                    <div class="col-6 pt-20 salary-bold">
+                                        ¥ 500,000
+                                    </div>
+                                    <div class="col-6 pl-30 pt-20 font-size-14">
+                                        Title Allowance
+                                    </div>
+                                    <div class="col-6 pt-20 salary-bold">
+                                        ¥ 300,000
+                                    </div>
+                                    <div class="col-6 pl-30 pt-20 font-size-14">
+                                        Qualification Allowance
+                                    </div>
+                                    <div class="col-6 pt-20 salary-bold">
+                                        ¥ 200,000
+                                    </div>
+                                    <div class="col-6 pl-30 pt-20 font-size-14">
+                                        Food Allowance
+                                    </div>
+                                    <div class="col-6 pt-20 salary-bold">
+                                        N/A
+                                    </div>
+                                    <div class="col-6 pl-30 pt-20 font-size-14">
+                                        Other Allowance
+                                    </div>
+                                    <div class="col-6 pt-20 salary-bold">
+                                        N/A
+                                    </div>
+                                    <div class="col-6 pl-30 pt-20 font-size-14">
+                                        Other Allowance
+                                    </div>
+                                    <div class="col-6 pt-20 salary-bold">
+                                        N/A
+                                    </div>
+                                    <div class="col-6 pl-30 pt-20 font-size-14">
+                                        Other Allowance
+                                    </div>
+                                    <div class="col-6 pt-20 salary-bold">
+                                        N/A
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-7 col-md-6 col-12">
+                                <div class="chartCard">
+                                    <div class="chartBox">
+                                        <canvas id="myChart"></canvas>
+                                    </div>
+                                </div>
+                                <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
+                            </div>
                         </div>
                     </div>
                 </div>

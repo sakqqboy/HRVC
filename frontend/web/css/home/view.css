@@ -117,7 +117,7 @@
 
 .danger-details {
     margin-top: -312px;
-    text-align: end;
+    padding-top: 20px;
 }
 
 .detail-salary {
@@ -126,16 +126,13 @@
 
 .in-details {
     margin-top: -310px;
+    font-weight: 600;
+    font-size: 12px;
+    color: rgb(30, 116, 237);
 }
 
-.buttonlinks {
-    border-radius: 20px;
-    width: 20px;
-}
 
-.nav-link {
-    border: none;
-}
+
 
 /* .form-pdf {} */
 
@@ -147,3 +144,31 @@
     cursor: pointer;
     color: rgb(51, 125, 252)
 } */
+
+.chartMenu {
+    width: 100vw;
+    height: 40px;
+    background: #1A1A1A;
+    color: rgba(54, 162, 235, 1);
+}
+
+.chartMenu p {
+    padding: 10px;
+    font-size: 20px;
+}
+
+.chartCard {
+    width: 100vw;
+    height: calc(100vh - 40px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chartBox {
+    width: 700px;
+    padding: 20px;
+    border-radius: 20px;
+    border: solid 3px rgba(54, 162, 235, 1);
+    background: white;
+}
