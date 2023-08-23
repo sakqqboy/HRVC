@@ -150,21 +150,23 @@ $this->title = 'company profile';
 			</div>
 		</div>
 		<div class="col-lg-3 col-md-6 col-6">
-			<div class="alert alert-secondary-background" role="alert">
-				<div class="row">
-					<div class="col-4">
-						<i class="fa fa-users" aria-hidden="true" style="font-size: 32px;padding-top: 15px;"></i>
-					</div>
-					<div class="col-2">
-						<div class="col-12 text-primary">
-							Branch
+			<a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>" class="no-underline-black">
+				<div class="alert alert-secondary-background" role="alert">
+					<div class="row">
+						<div class="col-4">
+							<i class="fa fa-users" aria-hidden="true" style="font-size: 32px;padding-top: 15px;"></i>
 						</div>
-						<div class="col-2 number-bold">
-							44
+						<div class="col-2">
+							<div class="col-12 text-primary">
+								Branch
+							</div>
+							<div class="col-2 number-bold">
+								<?= $totalBranch ?>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</a>
 		</div>
 		<div class="col-lg-3 col-md-6 col-6">
 			<div class="alert alert-secondary-background" role="alert">

@@ -10,7 +10,6 @@
     width: 15.5%;
 }
 
-
 .expand {
     display: block !important;
 }
@@ -64,13 +63,10 @@
     margin-top: 20px;
 }
 
-
-
 @media(max-width: 768px) {
     .width-hrvc {
         width: 100%;
     }
-
     .header1 {
         display: none;
     }

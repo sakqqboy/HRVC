@@ -241,10 +241,12 @@ $this->title = 'New Company';
 								</a>
 							</div>
 							<div class="col-3">
-								<div class="alert alert-secondary text-center  col-12 pr-0 pl-0" role="alert" style="font-size: 13px;">
-									<div class="text-primary employee-center"> Departments</div>
-									<i class="fa fa-plus mt-10 plus-click0" aria-hidden="true"></i>
-								</div>
+								<a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>" class="no-underline-black">
+									<div class="alert alert-secondary text-center  col-12 pr-0 pl-0" role="alert" style="font-size: 13px;">
+										<div class="text-primary employee-center"> Departments</div>
+										<i class="fa fa-plus mt-10 plus-click0" aria-hidden="true"></i>
+									</div>
+								</a>
 							</div>
 							<div class="col-3">
 								<div class="alert alert-secondary text-center col-12 pr-0 pl-0" role="alert" style="font-size: 13px;">

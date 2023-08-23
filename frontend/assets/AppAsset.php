@@ -50,11 +50,14 @@ class AppAsset extends AssetBundle
         'css/home/management-layer.css',
         'css/home/employee.css',
         'css/home/create-employee.css',
+        'css/setting/department.css',
+        'css/form/checkbox.css',
     ];
     public $js = [
         'js/content.js',
         'js/index.js',
-        'js/setting/branch.js'
+        'js/setting/branch.js',
+        'js/setting/department.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

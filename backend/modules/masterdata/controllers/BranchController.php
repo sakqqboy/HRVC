@@ -19,7 +19,10 @@ class BranchController extends Controller
 	public function actionCompanyBranch($id)
 	{
 		$branch = [];
-		$branch = Branch::find()->where(["companyId" => $id, "status" => 1])->asArray()->all();
+		$branch = Branch::find()
+			->where(["companyId" => $id, "status" => 1])
+			->orderBy('branchName')
+			->asArray()->all();
 		return json_encode($branch);
 	}
 }

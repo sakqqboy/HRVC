@@ -56,6 +56,7 @@ return [
                 'setting/company/create/<hash>' => 'setting/company/create',
                 'setting/company/update-company/<hash>' => 'setting/company/update-company',
                 'setting/branch/create/<hash>' => 'setting/branch/create',
+                'setting/department/create/<hash>' => 'setting/department/create',
             ],
         ],
         'assetManager' => [

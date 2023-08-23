@@ -3230,6 +3230,11 @@
     margin-right: 100px;
 }
 
-.no-underline {
+.no-underline-black {
     text-decoration: none;
+    color: black;
+}
+
+.close-box {
+    cursor: pointer;
 }

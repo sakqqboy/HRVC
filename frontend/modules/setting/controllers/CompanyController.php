@@ -5,6 +5,7 @@ namespace frontend\modules\setting\controllers;
 use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
+use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\Company;
 use Yii;
 use yii\db\Expression;
@@ -122,8 +123,14 @@ class CompanyController extends Controller
 		$groupJson = curl_exec($apiCompany);
 		curl_close($apiCompany);
 		$company = json_decode($groupJson, true);
+
+		$branch = Branch::find()->select('branchId')->where(["companyId" => $companyId, "status" => 1])->asArray()->all();
+		$totalBranch = count($branch);
+
+
 		return $this->render('company_view', [
-			"company" => $company
+			"company" => $company,
+			"totalBranch" => $totalBranch
 		]);
 	}
 	public function actionUpdateCompany($hash)
