@@ -1,0 +1,203 @@
+.view-goback {
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.alert-goback {
+    background-color: rgb(241, 241, 241);
+    border-radius: 0px;
+    margin-top: 20px;
+}
+
+.imageView {
+    width: 100%;
+    border-radius: 100%;
+    background: #FFFFFF;
+    border: 2px solid transparent;
+}
+
+.share-pointer {
+    cursor: pointer;
+    color: rgb(45, 111, 243);
+    text-align: end;
+}
+
+.box-shareprofile {
+    padding-left: 40%;
+}
+
+.name-Tadawoki {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: black;
+    font-size: 20px;
+}
+
+.Director-view {
+    font-size: 14px;
+    color: black;
+}
+
+.view-solid {
+    border-left: black solid thin;
+    margin-left: 5px;
+}
+
+.bd {
+    width: 10%;
+}
+
+.crd-background {
+    background-color: #f0f6fa;
+    height: 550px;
+    margin-left: 10px;
+}
+
+.alert-personal-information {
+    border: none;
+    margin-left: -30px;
+    background-color: white;
+    width: 54rem;
+    height: 550px;
+}
+
+.emplo-infor {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 40px;
+    padding-top: 30px;
+}
+
+.view-font-bold {
+    font-weight: 500;
+    color: black;
+}
+
+.view-font-bold1 {
+    font-weight: 500;
+    color: black;
+    padding-top: 40px;
+    width: 100%;
+}
+
+.show-in-solid {
+    border-left: lightgray solid thin;
+    margin-top: 60px;
+    padding-left: 10px;
+    height: 460px;
+}
+
+.view-cursor {
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.vertical0 {
+    border-right: 3px solid #e7e7e7;
+    margin-left: -90px;
+}
+
+.briefcase-work {
+    margin-top: -500px;
+}
+
+.briefcase-Attachments {
+    margin-top: -378px;
+}
+
+.salary {
+    margin-top: -312px;
+}
+
+.salary-bold {
+    font-weight: 500;
+    color: black;
+    font-size: 14px;
+}
+
+.danger-details {
+    margin-top: -312px;
+    padding-top: 70px;
+}
+
+.detail-salary {
+    margin-top: -310px;
+}
+
+.Allowance {
+    margin-top: -270px;
+    margin-left: 10px;
+}
+
+.in-details {
+    margin-top: -310px;
+    font-weight: 600;
+    font-size: 12px;
+    color: rgb(30, 116, 237);
+}
+
+.a-shadowbd {
+    margin-top: -250px;
+}
+
+.e-valution {
+    margin-top: -480px;
+}
+
+.e-valution1 {
+    margin-top: -440px;
+    margin-left: 10px;
+}
+
+.e-valution-view {
+    margin-top: -480px;
+    font-weight: 600;
+    font-size: 12px;
+    color: rgb(30, 116, 237);
+
+}
+
+.shadow-line {
+    margin-top: -430px;
+}
+
+.example-3 {
+    position: relative;
+    overflow-y: scroll;
+    height: 520px;
+    border-radius: 10px;
+    background-color: #f3f2f2;
+
+}
+
+.content-pdf {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    position: fixed;
+    z-index: 1;
+}
+
+.form-pdf {
+    margin-top: -50px;
+}
+
+.uploadBtn {
+    background: rgba(177, 176, 176, 0.7);
+    color: black;
+    line-height: 30px;
+    font-size: 18px;
+    margin-top: 470px;
+    position: relative;
+    z-index: 1;
+}
+
+/* .social-facebook {
+    cursor: pointer;
+} */
+
+/* .social-facebook a:hover {
+    cursor: pointer;
+    color: rgb(51, 125, 252)
+} */

@@ -204,13 +204,13 @@
     height: 20%;
 }
 
-.Evaluation {
+/* .Evaluation {
     cursor: pointer;
     position: relative;
     display: inline-block;
     border-bottom: 1px dotted rgb(222, 221, 221);
-}
-
+} */
+/* 
 .Evaluation .feedback {
     visibility: hidden;
     width: 130px;
@@ -223,9 +223,9 @@
     z-index: 1;
     top: -5px;
     left: 110%;
-}
+} */
 
-.Evaluation .feedback::after {
+/* .Evaluation .feedback::after {
     content: "";
     position: absolute;
     top: 10%;
@@ -234,12 +234,12 @@
     border-width: 5px;
     border-style: solid;
     border-color: transparent rgb(194, 194, 194) transparent transparent;
-}
+} */
 
-.Evaluation:hover .feedback {
+/* .Evaluation:hover .feedback {
     cursor: pointer;
     visibility: visible;
-}
+} */
 
 .title-kpi {
     cursor: pointer;
