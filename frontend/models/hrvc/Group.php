@@ -6,39 +6,49 @@ use Yii;
 use \frontend\models\hrvc\master\GroupMaster;
 
 /**
-* This is the model class for table "group".
-*
-* @property integer $groupId
-* @property string $groupName
-* @property string $location
-* @property string $industries
-* @property string $founded
-* @property string $website
-* @property string $director
-* @property string $email
-* @property string $contact
-* @property string $specialties
-* @property string $socialTag
-* @property string $about
-* @property integer $status
-* @property string $createDateTime
-* @property string $updateDateTime
-*/
+ * This is the model class for table "group".
+ *
+ * @property integer $groupId
+ * @property string $groupName
+ * @property string $location
+ * @property string $industries
+ * @property string $founded
+ * @property string $website
+ * @property string $director
+ * @property string $email
+ * @property string $contact
+ * @property string $specialties
+ * @property string $socialTag
+ * @property string $about
+ * @property integer $status
+ * @property string $createDateTime
+ * @property string $updateDateTime
+ */
 
-class Group extends \frontend\models\hrvc\master\GroupMaster{
+class Group extends \frontend\models\hrvc\master\GroupMaster
+{
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function rules()
     {
         return array_merge(parent::rules(), []);
     }
 
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return array_merge(parent::attributeLabels(), []);
+    }
+    public static function currentGroupId()
+    {
+        $group = Group::find()->select('groupId')->where(["status" => 1])->one();
+        if (isset($group) && !empty($group)) {
+            return $group["groupId"];
+        } else {
+            return null;
+        }
     }
 }

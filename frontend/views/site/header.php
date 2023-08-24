@@ -4,7 +4,9 @@
                         <i onclick="w3_close()" class="fa fa-step-backward caret-left" aria-hidden="true"></i>
                 </div>
                 <div class="col-12">
-                        <a href="<?= Yii::$app->homeUrl ?>site/index"><img src="<?= Yii::$app->homeUrl ?>image/Human-1.png" class="width-hrvc"></a>
+                        <a href="<?= Yii::$app->homeUrl ?>site/index">
+                                <img src="<?= Yii::$app->homeUrl ?>image/Human-1.png" class="width-hrvc">
+                        </a>
                 </div>
                 <div class="col-12 navbar-header">
 
@@ -18,7 +20,7 @@
                                 Company Details
                         </div>
                         <div class="col-12">
-                                <a href="<?= Yii::$app->homeUrl ?>site/master-setting" class="no-underline">
+                                <a href="<?= Yii::$app->homeUrl ?>setting/group/create-group" class="no-underline">
                                         <i class="fa fa-building-o pr-10 mt-20" aria-hidden="true"></i> Group Information
                                 </a>
                         </div>
@@ -27,6 +29,7 @@
                                         <i class="fa fa-home pr-10 mt-20" aria-hidden="true"></i> Company Name
                                 </a>
                         </div>
+
                         <div class="col-12">
                                 <a href="<?= Yii::$app->homeUrl ?>site/dashboard-kpi2" class="no-underline">
                                         <i class="fa fa-book pr-10 mt-20" aria-hidden="true"></i> Culture Book
@@ -39,10 +42,23 @@
                                 </a>
                         </div>
                         <div class="col-12">
+                                <a href="" class="no-underline">
+                                        <i class="fa fa-users pr-10 mt-20" aria-hidden="true">
+
+                                        </i> Branch </a>
+                        </div>
+                        <div class="col-12">
                                 <a href="<?= Yii::$app->homeUrl ?>site/kgi-summary" class="no-underline">
                                         <i class="fa fa-code-fork pr-10 mt-20" aria-hidden="true"></i> Department
                                 </a>
                         </div>
+                        <div class="col-12">
+                                <a href="" class="no-underline">
+                                        <i class="fa fa-users pr-10 mt-20" aria-hidden="true">
+
+                                        </i> Title </a>
+                        </div>
+
 
                         <div class="col-12">
                                 <a href="" class="no-underline">
@@ -50,31 +66,17 @@
                                         Designation
                                 </a>
                         </div>
-                        <div class="col-12">
-                                <a href="" class="no-underline">
-                                        <i class="fa fa-users pr-10 mt-20" aria-hidden="true">
 
-                                        </i> Branch </a>
-                        </div>
-                        <div class="col-12">
-                                <a href="" class="no-underline">
-                                        <i class="fa fa-users pr-10 mt-20" aria-hidden="true">
 
-                                        </i> Department </a>
-                        </div>
-                        <div class="col-12">
-                                <a href="" class="no-underline">
-                                        <i class="fa fa-users pr-10 mt-20" aria-hidden="true">
 
-                                        </i> Position </a>
-                        </div>
                         <div class="col-12">
-                                <a href="" class="no-underline">
+                                <a href="<?= Yii::$app->homeUrl ?>setting/team/create" class="no-underline">
                                         <i class="fa fa-users pr-10 mt-20" aria-hidden="true">
 
                                         </i> Team </a>
                         </div>
-                        <div class="col-12"> <a href="" class="no-underline">
+                        <div class="col-12">
+                                <a href="<?= Yii::$app->homeUrl ?>setting/employee/index" class="no-underline">
                                         <i class="fa fa-user pr-10 mt-20" aria-hidden="true"></i>
                                         Employee
                                 </a>

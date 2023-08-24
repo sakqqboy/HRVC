@@ -28,4 +28,14 @@ class DepartmentController extends Controller
 		//throw  new Exception(print_r($department, true));
 		return json_encode($department);
 	}
+	public function actionBranchDepartment($id)
+	{
+		$department = [];
+		$department = Department::find()
+			->where(["status" => 1, "branchId" => $id])
+			->asArray()
+			->orderBy('departmentName')
+			->all();
+		return json_encode($department);
+	}
 }

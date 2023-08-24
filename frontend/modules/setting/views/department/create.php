@@ -109,36 +109,6 @@ $this->title = 'Department';
 						</div>
 					</div>
 				</div>
-				<!-- <div class="col-lg-3 col-md-6 col-1">
-					<div class="col-12">
-						<label class="form-label font-size-12 font-b"> Set titles</label>
-						<div placeholder="Select title" class="form-control" id="choose-title" style="height:37px;">
-							<i class="fa fa-angle-down float-end mt-5 font-b" aria-hidden="true"></i>
-						</div>
-						<div class="col-12 border title-list list-group" id="title-list">
-							<div class="col-12">
-								<div class="row">
-									<div class="col-12  pl-25 pt-10">
-										<input type="checkbox" class="mr-8 checkbox-md">Manager
-									</div>
-									<div class="col-12 pl-25 pt-10">
-										<input type="checkbox" class="mr-8 checkbox-md">Supervisor
-									</div>
-									<div class="col-12 pl-25 pt-10">
-										<input type="checkbox" class="mr-8 checkbox-md">Senior
-									</div>
-									<div class="col-12  pl-25 pt-10">
-										<input type="checkbox" class="mr-8 checkbox-md">Senior Assistant
-									</div>
-									<div class="col-12  pl-25 pt-10">
-										<input type="checkbox" class="mr-8 checkbox-md">Junior
-									</div>
-
-								</div>
-							</div>
-						</div>
-					</div>
-				</div> -->
 				<div class="col-lg-1 col-md-2 col-12 pt-30 text-end  pr-1">
 					<a href="javascript:createDepartment()" class="btn btn-success" id="create-department">
 						<i class="fa fa-plus" aria-hidden="true"></i> Create</a>

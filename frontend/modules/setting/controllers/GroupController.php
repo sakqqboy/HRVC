@@ -26,6 +26,10 @@ class GroupController extends Controller
     }
     public function actionCreateGroup()
     {
+        $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
+        if (isset($group) && !empty($group)) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/group/group-view/' . ModelMaster::encodeParams(["groupId" => $group["groupId"]]));
+        }
         if (isset($_POST["groupName"]) && trim($_POST["groupName"]) != '') {
             $group = new Group();
             $group->groupName = $_POST["groupName"];
@@ -80,7 +84,7 @@ class GroupController extends Controller
                 return $this->redirect(Yii::$app->homeUrl . 'setting/group/group-view/' . ModelMaster::encodeParams(["groupId" => $groupId]));
             }
         }
-        return $this->redirect(Yii::$app->homeUrl . 'setting/group/group-view/' . ModelMaster::encodeParams(["groupId" => 2]));
+        //
         $ch1 = curl_init();
         curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);

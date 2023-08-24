@@ -33,7 +33,7 @@ class GroupController extends Controller
         $company = Company::find()
             ->select('company.companyName,company.companyId,company.city,c.countryName,company.picture,company.headQuaterId')
             ->JOIN("LEFT JOIN", "country c", "c.countryId=company.countryId")
-            ->where(["groupId" => $id])
+            ->where(["company.groupId" => $id, "company.status" => 1])
             ->orderBy('company.createDateTime')
             ->asArray()
             ->all();
