@@ -65,19 +65,19 @@ $this->title = 'view';
                             Employee
                             Information
                         </div>
-                        <div class="col-12 mt-30 mr-30 ml-30">
+                        <div class="col-12 mt-70 mr-30 ml-30">
                             <div class="active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true"> Personal & Contact Details</div>
                         </div>
-                        <div class="col-12 mt-30 mr-30 ml-30">
+                        <div class="col-12 mt-20 mr-30 ml-30">
                             <div class="" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false"> Work Information</div>
                         </div>
-                        <div class="col-12 mt-30 mr-30 ml-30">
+                        <div class="col-12 mt-20 mr-30 ml-30">
                             <div class="" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false"> Attachments</div>
                         </div>
-                        <div class="col-12 mt-30 mr-30 ml-30">
+                        <div class="col-12 mt-20 mr-30 ml-30">
                             <div class="" id="v-pills-detail-tab" data-bs-toggle="pill" data-bs-target="#v-pills-detail" type="button" role="tab" aria-controls="v-pills-detail" aria-selected="false"> Salary & Allowance</div>
                         </div>
-                        <div class="col-12 mt-30 mr-30 ml-30">
+                        <div class="col-12 mt-20 mr-30 ml-30">
                             <div class="" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"> Evaluation</div>
                         </div>
                     </div>
@@ -87,7 +87,7 @@ $this->title = 'view';
                         <div class="tab-pane fade show" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-12">
-                                    <div class="col-12 mt-60 pl-10 font-size-18 text-dark">
+                                    <div class="col-12 mt-60 pl-10 font-size-18">
                                         <i class="fa fa-info-circle" aria-hidden="true"></i> Personal Information
                                     </div>
                                     <hr>
@@ -154,7 +154,7 @@ $this->title = 'view';
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-12 show-in-solid">
-                                    <div class="col-12 font-size-18 text-dark">
+                                    <div class="col-12 font-size-18">
                                         <i class="fa fa-phone" aria-hidden="true"></i> Contact Information
                                     </div>
                                     <hr>
@@ -200,7 +200,7 @@ $this->title = 'view';
                             </div>
                         </div>
                         <div class="tab-pane fade  briefcase-work" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                            <div class="col-12 pl-20 pt-40 font-size-18 text-dark">
+                            <div class="col-12 pl-20 pt-40 font-size-18">
                                 <i class="fa fa-briefcase" aria-hidden="true"></i> Work information
                             </div>
                             <hr>
@@ -284,7 +284,7 @@ $this->title = 'view';
                         <div class="tab-pane fade briefcase-Attachments" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-12">
-                                    <div class="col-12 pl-10 font-size-18 text-dark">
+                                    <div class="col-12 pl-10 font-size-18">
                                         <i class="fa fa-briefcase" aria-hidden="true"></i> Attachments
                                     </div>
                                     <hr>
@@ -344,10 +344,10 @@ $this->title = 'view';
                         </div>
                         <div class="tab-pane fade" id="v-pills-detail" role="tabpanel" aria-labelledby="v-pills-detail-tab">
                             <div class="row">
-                                <div class="col-lg-9  pl-20 font-size-18 text-dark detail-salary">
+                                <div class="col-lg-9  pl-30 font-size-18 detail-salary">
                                     <i class="fa fa-database" aria-hidden="true"></i> Salary & Allowance
                                 </div>
-                                <div class="col-lg-3  in-details pr-20">
+                                <div class="col-lg-3  in-details text-end pr-70">
                                     VIEW IN DETAILS
                                 </div>
                                 <hr class="col-11 Allowance">
@@ -417,10 +417,10 @@ $this->title = 'view';
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-8 col-md-6 col-12 a-shadowbd pr-20">
+                                <div class="col-lg-8 col-md-6 col-12 a-shadowbd pr-60">
                                     <div class="shadow p-3 bg-body rounded">
-                                        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-                                        <div id="chart"></div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -437,8 +437,81 @@ $this->title = 'view';
                             </div>
                             <div class="col-lg-12 col-md-12 col-12 pl-20 pr-20">
                                 <div class="shadow p-3 bg-body rounded shadow-line">
-                                    <script type="text/javascript" src="https://code.highcharts.com/highcharts.src.js"></script>
-                                    <div id="container"></div>
+
+                                    <html>
+
+                                    <head>
+                                        <script type="text/javascript">
+                                            window.onload = function() {
+                                                var chart = new CanvasJS.Chart("chartContainer", {
+
+                                                    data: [{
+                                                        type: "line",
+
+                                                        dataPoints: [{
+                                                                x: (0),
+                                                                y: 50
+                                                            },
+                                                            {
+                                                                x: (1),
+                                                                y: 20
+                                                            },
+                                                            {
+                                                                x: (2),
+                                                                y: 90
+                                                            },
+                                                            {
+                                                                x: (3),
+                                                                y: 60
+                                                            },
+                                                            {
+                                                                x: (4),
+                                                                y: 80
+                                                            },
+                                                            {
+                                                                x: (5),
+                                                                y: 50
+                                                            },
+                                                            {
+                                                                x: (6),
+                                                                y: 89
+                                                            },
+                                                            {
+                                                                x: (7),
+                                                                y: 60
+                                                            },
+                                                            {
+                                                                x: (8),
+                                                                y: 100
+                                                            },
+                                                            {
+                                                                x: (9),
+                                                                y: 70
+                                                            },
+                                                            {
+                                                                x: (10),
+                                                                y: 102
+                                                            },
+                                                            {
+                                                                x: (11),
+                                                                y: 120
+                                                            }
+                                                        ]
+                                                    }]
+                                                });
+
+                                                chart.render();
+                                            }
+                                        </script>
+                                        <script type="text/javascript" src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+                                    </head>
+
+                                    <body>
+                                        <div id="chartContainer" style="height: 400px; width: 100%;">
+                                        </div>
+                                    </body>
+
+                                    </html>
                                 </div>
                             </div>
                         </div>

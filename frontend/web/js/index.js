@@ -30,26 +30,9 @@ $("#imageUploadBanner").change(function () {
     readURLBanner(this);
 });
 
-
-function w3_close() {
-    $("main").removeClass("col-lg-12");
-    $("main").addClass("col-lg-10");
-}
-
-function w3_open() {
-    $("mySidebar").removeClass("col-lg-10");
-    $("mySidebar").css("display", "none");
-
-}
-
-
 document.querySelector("#files").onchange = function () {
     const fileName = this.files[0]?.name;
     const label = document.querySelector("label[for=name]");
     label.innerText = fileName ?? "Browse Files";
 };
-
-
-
-
 
