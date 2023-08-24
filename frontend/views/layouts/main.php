@@ -58,15 +58,11 @@ AppAsset::register($this);
             </div>
         </div>
     </main>
-
-    <footer class="footer mt-auto py-3 text-muted">
-        <div class="container">
-            <p class="float-start">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
-            <p class="float-end"><?= Yii::powered() ?></p>
-        </div>
-    </footer>
-
-    <?php $this->endBody() ?>
+    <?php
+    if (class_exists('yii\debug\Module')) {
+        $this->off(\yii\web\View::EVENT_END_BODY, [\yii\debug\Module::getInstance(), 'renderToolbar']);
+    }
+    $this->endBody() ?>
 </body>
 
 </html>

@@ -7,7 +7,6 @@
     background-color: white;
 }
 
-
 .scrollbar-ripe-malinka::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
     background-color: #f5f5f5;
@@ -40,7 +39,7 @@
 .example-1 {
     position: relative;
     overflow-y: scroll;
-    height: 500px;
+    height: 650px;
     border: none;
     background-color: #f2f4f6;
 }
@@ -113,13 +112,10 @@
     color: black;
 }
 
-
-
 @media(max-width: 992px) {
     .all-employee0 {
         padding-left: 20px;
     }
-
     .fil0 {
         text-align: start;
     }
@@ -129,18 +125,14 @@
     .all-employee0 {
         padding-left: 20px;
     }
-
     .fil0 {
         text-align: start;
     }
-
     .image-employee {
         width: 60%;
         margin-top: 10px;
     }
-
     .employee-view {
         font-size: 13px;
     }
-
 }
