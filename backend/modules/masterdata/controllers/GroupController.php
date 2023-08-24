@@ -34,7 +34,7 @@ class GroupController extends Controller
             ->select('company.companyName,company.companyId,company.city,c.countryName,company.picture,company.headQuaterId')
             ->JOIN("LEFT JOIN", "country c", "c.countryId=company.countryId")
             ->where(["company.groupId" => $id, "company.status" => 1])
-            ->orderBy('company.createDateTime')
+            ->orderBy('company.companyName')
             ->asArray()
             ->all();
         return json_encode($company);

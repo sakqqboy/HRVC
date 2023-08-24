@@ -9,7 +9,7 @@
 }
 
 .acceptable {
-    margin-top: -60px;
+    margin-top: -45px;
 }
 
 .show-thin {
@@ -40,17 +40,18 @@
 
 .example-2 {
     position: relative;
-    overflow-y: scroll;
-    height: 600px;
+    /* overflow-y: scroll; */
+    /* height: 600px; */
     border: none;
     background-color: #f2f4f6;
+    padding: 2% 3% 2% 3%;
+    /* box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px; */
 }
 
 .dashed {
     border-style: dashed;
     border-radius: 8px;
     color: #658EBE;
-
 }
 
 .image-file-plus {

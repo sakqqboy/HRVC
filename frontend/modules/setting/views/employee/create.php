@@ -1,6 +1,17 @@
 <?php
+
+use yii\bootstrap5\ActiveForm;
+
 $this->title = 'Create Employee';
 ?>
+<?php $form = ActiveForm::begin([
+	'id' => 'create-employee',
+	'method' => 'post',
+	'options' => [
+		'enctype' => 'multipart/form-data',
+	],
+
+]); ?>
 <div class="col-12 mt-90">
 	<div class="alert example-2 scrollbar-ripe-malinka alert-create0" role="alert">
 		<div class="col-12 create2-one">
@@ -9,12 +20,14 @@ $this->title = 'Create Employee';
 		<div class="col-12 mt-30 font-size-20" style="font-weight: 700;">
 			Personal Information
 		</div>
-		<hr class="col-10">
+		<div class="col-12">
+			<hr class="col-lg-10 col-12">
+		</div>
 		<div class="row">
-			<div class="col-lg-3 col-md-6 col-12">
-				<div class="avatar-upload">
+			<div class="col-lg-3 col-md-6 col-12" style="border-right:lightgray solid thin">
+				<div class="avatar-upload" style="margin-top: 17px;">
 					<div class="avatar-edit">
-						<input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+						<input type='file' name="picture" id="imageUpload" accept=".png, .jpg, .jpeg" />
 						<label for="imageUpload"></label>
 					</div>
 					<div class="avatar-preview">
@@ -22,63 +35,76 @@ $this->title = 'Create Employee';
 						</div>
 					</div>
 				</div>
-				<div class="col-12 acceptable">
-					<p> Acceptable file types: <strong> JPEG, PNG,</strong> </p>
-					<p class="pl-10">Maximum file Size: 1 MB</p>
+				<div class="col-12 acceptable font-size-12 text-center">
+					<div class="col-12"> Acceptable file types: <strong> JPEG, PNG,</strong> </div>
+					<div class="col-12 mt-2">Maximum file Size: 1 MB</div>
 				</div>
 			</div>
-			<div class="col-lg-1 col-md-6 col-12 show-thin"></div>
-			<div class="col-lg-8 col-md-6 col-12">
+
+			<div class="col-lg-9 col-md-6 col-12 pl-20">
 				<div class="row">
-					<div class="col-lg-3 col-md-6 col-3 input-Firstname">
-						<label for="exampleFormControlInput1" class="form-label"><strong class="text-danger">*</strong> First Name</label>
-						<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+					<div class="col-lg-4 col-md-6 col-12 mt-10">
+						<label class="form-label font-size-13"><strong class="text-danger">*</strong> First Name</label>
+						<input type="text" class="form-control font-size-14" name="firstName" required>
 					</div>
-					<div class="col-lg-3 col-md-6 col-3">
-						<label for="exampleFormControlInput1" class="form-label"><strong class="text-danger">*</strong> Last Name</label>
-						<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+					<div class="col-lg-4 col-md-6 col-12  mt-10">
+						<label class="form-label font-size-13"><strong class="text-danger">*</strong> Last Name</label>
+						<input type="text" class="form-control font-size-14" name="lastName" required>
 					</div>
-					<div class="col-lg-3 col-md-6 col-3">
-						<label for="exampleFormControlInput1" class="form-label"><strong class="text-danger">*</strong> Employee Number</label>
-						<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+					<div class="col-lg-4 col-md-6 col-12  mt-10">
+						<label class="form-label font-size-13"><strong class="text-danger">*</strong> Employee Number</label>
+						<input type="text" class="form-control font-size-14" name="employeeNumber" required>
 					</div>
-					<div class="col-lg-3 col-md-6 col-3">
-						<label for="exampleFormControlInput1" class="form-label"><strong class="text-danger">*</strong> Joining Date</label>
-						<input type="date" id="birthday" class="form-control" name="birthday" aria-label="Sizing example input" aria-describedby="">
+					<div class="col-lg-4 col-md-6 col-12  mt-10">
+						<label class="form-label font-size-13"><strong class="text-danger">*</strong> Joining Date</label>
+						<input type="date" id="birthday" class="form-control font-size-14" name="joinDate" required>
 					</div>
-					<div class="col-lg-3 col-md-6 col-3 Select-Nationality">
-						<label for="exampleFormControlInput1" class="form-label"> Nationality </label>
-						<select class="form-select" aria-label="Default select example">
-							<option selected>Select menu</option>
-							<option value="1">bangladresh</option>
-							<option value="2">Indonesia</option>
-							<option value="3">Japan</option>
+					<div class="col-lg-4 col-md-6 col-12 mt-10">
+						<label class="form-label font-size-13"> Nationality </label>
+						<select class="form-select font-size-14" name="nationality">
+							<option value="">Select menu</option>
+							<?php
+							if (isset($countries) && count($countries) > 0) {
+								foreach ($countries as $countryId => $countryName) : ?>
+									<option value="<?= $countryId ?>"><?= $countryName ?></option>
+							<?php
+								endforeach;
+							}
+							?>
 						</select>
 					</div>
-					<div class="col-lg-3 col-md-6 col-3 Father-name">
-						<label for="exampleFormControlInput1" class="form-label">Father's Name</label>
-						<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+					<!-- <div class="col-lg-3 col-md-6 col-3 mt-20">
+						<label class="form-label font-size-13">Father's Name</label>
+						<input type="text" class="form-control" placeholder="">
 					</div>
-					<div class="col-lg-3 col-md-6 col-3 Father-name">
-						<label for="exampleFormControlInput1" class="form-label">Mother's Name</label>
-						<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+					<div class="col-lg-3 col-md-6 col-3 mt-20">
+						<label class="form-label font-size-13">Mother's Name</label>
+						<input type="text" class="form-control font-size-14" placeholder="">
+					</div> -->
+					<div class="col-lg-4 col-md-6 col-12 mt-10">
+						<label class="form-label font-size-13">
+							<strong class="text-danger">*</strong> Date of Birth
+						</label>
+						<input type="date" id="birthday" class="form-control font-size-14" name="birthDate" required>
 					</div>
-					<div class="col-lg-3 col-md-6 col-3 Father-name">
-						<label for="exampleFormControlInput1" class="form-label"><strong class="text-danger">*</strong> Date of Birth</label>
-						<input type="date" id="birthday" class="form-control" name="birthday" aria-label="Sizing example input" aria-describedby="">
+					<div class="col-lg-5 col-md-6 col-12 mt-10">
+						<label class="form-label font-size-13">
+							<strong class="text-danger">*</strong> Address 1
+						</label>
+						<input type="text" class="form-control font-size-14" required>
 					</div>
-					<div class="col-lg-5 col-md-6 col-3 Address-line1">
-						<label for="exampleFormControlInput1" class="form-label"><strong class="text-danger">*</strong> Address Line 1</label>
-						<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+					<div class="col-lg-5 col-md-6 col-12 mt-10">
+						<label class="form-label font-size-13">
+							<strong class="text-danger">*</strong> Address 2
+						</label>
+						<input type="text" class="form-control font-size-14" required>
 					</div>
-					<div class="col-lg-5 col-md-6 col-3 Address-line2">
-						<label for="exampleFormControlInput1" class="form-label"><strong class="text-danger">*</strong> Address Line 2</label>
-						<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
-					</div>
-					<div class="col-lg-2 col-md-6 col-3 Address-line2">
-						<label for="exampleFormControlInput1" class="form-label"><strong class="text-danger">*</strong> Gender</label>
-						<select class="form-select" aria-label="Default select example">
-							<option selected>Select</option>
+					<div class="col-lg-2 col-md-6 col-12 mt-10">
+						<label class="form-label font-size-13">
+							<strong class="text-danger">*</strong> Gender
+						</label>
+						<select class="form-select font-size-14" name="gender" required>
+							<option value="">Select</option>
 							<option value="1">Man</option>
 							<option value="2">Female</option>
 						</select>
@@ -89,160 +115,207 @@ $this->title = 'Create Employee';
 		<div class="col-12 mt-20 font-size-16" style="font-weight: 700;">
 			Contact Information
 		</div>
-		<hr class="col-10">
+		<div class="col-12">
+			<hr class="col-lg-10 col-12">
+		</div>
 		<div class="row">
-			<div class="col-lg-3 col-md-6 col-3">
-				<label for="exampleFormControlInput1" class="form-label"><strong class="text-danger">*</strong> Contact Number</label>
-				<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+			<div class="col-lg-3 col-md-6 col-12">
+				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Contact Number</label>
+				<input type="text" class="form-control font-size-14" name="telephoneNumber" required>
 			</div>
-			<div class="col-lg-3 col-md-6 col-3">
-				<label for="exampleFormControlInput1" class="form-label"><strong class="text-danger">*</strong> Emergency Contact Number</label>
-				<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+			<div class="col-lg-3 col-md-6 col-12">
+				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Emergency Contact Number</label>
+				<input type="text" class="form-control font-size-14" name="urgentTelephoneNumber" required>
 
 			</div>
-			<div class="col-lg-3 col-md-6 col-3">
-				<label for="exampleFormControlInput1" class="form-label"><strong class="text-danger">*</strong> Company Mail</label>
-				<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+			<div class="col-lg-3 col-md-6 col-12">
+				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Company Email</label>
+				<input type="email" class="form-control font-size-14" name="companyEmail" required>
 			</div>
-			<div class="col-lg-3 col-md-6 col-3">
-				<label for="exampleFormControlInput1" class="form-label"><strong class="text-danger">*</strong> Personal Email</label>
-				<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+			<div class="col-lg-3 col-md-6 col-12">
+				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Personal Email</label>
+				<input type="email" class="form-control font-size-14" name="personalEmail" required>
 			</div>
 		</div>
-		<div class="col-12 mt-20 font-size-16" style="font-weight: 700;">
+		<div class="col-12 mt-30 font-size-16" style="font-weight: 700;">
 			Work Information
 		</div>
-		<hr class="col-10">
+		<div class="col-12">
+			<hr class="col-lg-10 col-12">
+		</div>
 		<div class="row">
 			<div class="col-lg-3 col-md-6 col-12">
-				<label for="exampleFormControlInput1" class="form-label"><strong class="text-danger">*</strong> Working Hours</label>
-				<select class="form-select" aria-label="Default select example">
-					<option selected>Select</option>
-					<option value="1">Man</option>
-					<option value="2">Female</option>
+				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Company</label>
+				<select class="form-select font-size-14" name="company">
+					<option value="">Select</option>
+					<?php
+					if (isset($companies) && count($companies) > 0) {
+						foreach ($companies as $company) : ?>
+							<option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
+					<?php
+
+						endforeach;
+					}
+					?>
 				</select>
 			</div>
 			<div class="col-lg-3 col-md-6 col-12">
-				<label for="exampleFormControlInput1" class="form-label"><strong class="text-danger">*</strong> Working Hours</label>
-				<select class="form-select" aria-label="Default select example">
-					<option selected>Select</option>
-					<option value="1">Man</option>
-					<option value="2">Female</option>
+				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Branch</label>
+				<select class="form-select font-size-14" name="branch">
+					<option value="">Select</option>
 				</select>
 			</div>
 			<div class="col-lg-3 col-md-6 col-12">
-				<label for="exampleFormControlInput1" class="form-label"><strong class="text-danger">*</strong> Company</label>
-				<select class="form-select" aria-label="Default select example">
-					<option selected>Select</option>
-					<option value="1">Man</option>
-					<option value="2">Female</option>
+				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Department Name</label>
+				<select class="form-select font-size-14" name="department">
+					<option value="">Select</option>
 				</select>
 			</div>
 			<div class="col-lg-3 col-md-6 col-12">
-				<label for="exampleFormControlInput1" class="form-label"><strong class="text-danger">*</strong> Branch</label>
-				<select class="form-select" aria-label="Default select example">
-					<option selected>Select</option>
-					<option value="1">Man</option>
-					<option value="2">Female</option>
+				<label class="form-label font-size-13"><strong class="text-danger">*</strong>Team</label>
+				<select class="form-select font-size-14" name="title">
+					<option value="">Select</option>
 				</select>
 			</div>
-			<div class="col-lg-3 col-md-6 col-12 mt-50">
-				<label for="exampleFormControlInput1" class="form-label"><strong class="text-danger">*</strong> Jop Title</label>
-				<select class="form-select" aria-label="Default select example">
-					<option selected>Select</option>
-					<option value="1">Man</option>
-					<option value="2">Female</option>
+			<div class="col-lg-3 col-md-6 col-12 mt-10">
+				<label class="form-label font-size-13"><strong class="text-danger">*</strong>Title</label>
+				<select class="form-select font-size-14" name="title">
+					<option value="">Select</option>
 				</select>
 			</div>
-			<div class="col-lg-3 col-md-6 col-12 mt-50">
-				<label for="exampleFormControlInput1" class="form-label"><strong class="text-danger">*</strong> Employee Condition</label>
-				<select class="form-select" aria-label="Default select example">
-					<option selected>Select</option>
-					<option value="1">Man</option>
-					<option value="2">Female</option>
+			<div class="col-lg-3 col-md-6 col-12 mt-10">
+				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Working Hours</label>
+				<select class="form-select font-size-14" name="workTime" required>
+					<option value="">Select</option>
 				</select>
 			</div>
-			<div class="col-lg-3 col-md-6 col-12 mt-50">
-				<label for="exampleFormControlInput1" class="form-label"><strong class="text-danger">*</strong> Employee Status</label>
-				<select class="form-select" aria-label="Default select example">
-					<option selected>Select</option>
-					<option value="1">Man</option>
-					<option value="2">Female</option>
+			<div class="col-lg-3 col-md-6 col-12 mt-10">
+				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Employee Condition</label>
+				<select class="form-select font-size-14" name="condition" required>
+					<option value="">Select</option>
 				</select>
 			</div>
-			<div class="col-lg-3 col-md-6 col-12 mt-50">
-				<label for="exampleFormControlInput1" class="form-label"><strong class="text-danger">*</strong> Department Name</label>
-				<select class="form-select" aria-label="Default select example">
-					<option selected>Select</option>
-					<option value="1">Man</option>
-					<option value="2">Female</option>
+			<div class="col-lg-3 col-md-6 col-12 mt-10">
+				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Employee Status</label>
+				<select class="form-select font-size-14" name="status" required>
+					<option value="">Select</option>
 				</select>
 			</div>
-			<div class="col-lg-3 col-md-6 col-12 mt-50">
-				<label for="exampleFormControlInput1" class="form-label"><strong class="text-danger">*</strong> Management</label>
-				<select class="form-select" aria-label="Default select example">
-					<option selected>Select</option>
-					<option value="1">Man</option>
-					<option value="2">Female</option>
+
+			<div class="col-lg-3 col-md-6 col-12 mt-10">
+				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Management</label>
+				<select class="form-select font-size-14" name="management" required>
+					<option value="">Select</option>
 				</select>
 			</div>
 		</div>
-		<div class="col-12 mt-20 font-size-16" style="font-weight: 700;">
+		<div class="col-12 mt-30 font-size-16" style="font-weight: 700;">
 			Attachments
 		</div>
-		<hr class="col-10">
+		<div class="col-12 mb-30">
+			<hr class="col-lg-10 col-12">
+		</div>
 		<div class="row">
-			<div class="col-lg-5 col-md-6 col-12">
-				<div class="dashed">
-					<div class="row">
-						<div class="col-lg-2 col-md-6 col-12 pt-20">
-							<!-- <img src="<?= Yii::$app->homeUrl ?>image/file-plus.png" class="image-file-plus"> -->
-							<label for="files" class="btn choosefile">File</label>
-							<input id="files" style="display:none;" type="file">
-						</div>
-						<div class="col-lg-5 col-md-6 col-12 pt-20">
-							<strong class="text-danger">*</strong>
-							<label for="name">Upload Resume</label>
-							<div class="text-secondary font-size-14">Supported Files <span class="text-dark font-size-10"> - .pdf, .doc, .docx</span></div>
-							<div class="text-secondary font-size-14">Maximum File Size 5 MB</div>
-						</div>
-						<div class="col-lg-1 col-md-6 col-12 show2"></div>
-						<div class="col-lg-4 col-md-6 col-12 pt-30">
-							<button type="button" class="btn btn-info text-white"> Upload</button>
+			<div class="col-lg-6 col-md-6 col-12 " style="border-right:lightgray solid thin;">
+				<div class="col-lg-11">
+					<div class="dashed">
+						<div class="row pt-10 pb-10">
+							<div class="col-lg-2 col-md-6 col-12  text-center">
+								<!-- <img src="<?= Yii::$app->homeUrl ?>image/file-plus.png" class="image-file-plus"> -->
+								<label for="files" class="btn choosefile">File</label>
+								<input id="files" style="display:none;" type="file" name="resume">
+							</div>
+							<div class="col-lg-6 col-md-6 col-12 " style="border-right:lightgray solid thin;">
+								<label for="name">Upload Resume</label>
+								<div class="text-secondary font-size-14">Supported Files <span class="text-dark font-size-10"> - .pdf, .doc, .docx</span></div>
+								<div class="text-secondary font-size-14">Maximum File Size 5 MB</div>
+							</div>
+							<div class="col-lg-4 col-md-6 col-12 text-center pt-13">
+								<button type="button" class="btn btn-info text-white"> Upload</button>
+							</div>
 						</div>
 					</div>
 				</div>
 				<div class="mt-20"></div>
-				<div class="dashed">
-					<div class="row">
-						<div class="col-lg-2 col-md-6 col-12 pt-20">
-							<!-- <img src="<?= Yii::$app->homeUrl ?>image/pdf.png" class="image-file-plus"> -->
-							<label for="files" class="btn choosefile">File</label>
-							<input id="files" style="display:none;" type="file">
-						</div>
-						<div class="col-lg-5 col-md-6 col-12 pt-20">
-							<label for="name"> Employee Agreement-DD.pdf</label>
-							<p class="text-secondary font-size-14">Size 1.21 MB
-								Uploaded On 08/14/2023
-							</p>
-						</div>
-						<div class="col-lg-1 col-md-6 col-12 show2"></div>
-						<div class="col-lg-4 col-md-6 col-12 pt-30">
-							<button type="button" class="btn btn-outline-secondary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-							<button type="button" class="btn btn-outline-secondary"><i class="fa fa-eye" aria-hidden="true"></i></button>
-							<button type="button" class="btn btn-outline-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+				<div class="col-lg-11">
+					<div class="dashed">
+						<div class="row pt-10 pb-10">
+							<div class="col-lg-2 col-md-6 col-12 text-center">
+								<!-- <img src="<?= Yii::$app->homeUrl ?>image/pdf.png" class="image-file-plus"> -->
+								<label for="files" class="btn choosefile">File</label>
+								<input id="files" style="display:none;" type="file" name="agreement">
+							</div>
+							<div class="col-lg-6 col-md-6 col-12" style="border-right:lightgray solid thin;">
+								<label for="name"> Employee Agreement-DD.pdf</label>
+								<p class="text-secondary font-size-14">
+									Size 1.21 MB
+								</p>
+							</div>
+							<div class="col-lg-4 col-md-6 col-12 text-center pt-13">
+								<a type="button" class="btn btn-outline-secondary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+								<a type="button" class="btn btn-outline-secondary"><i class="fa fa-eye" aria-hidden="true"></i></a>
+								<a type="button" class="btn btn-outline-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-1 col-md-6 col-12 show3"></div>
-			<div class="col-lg-6 col-md-6 col-12">
+
+			<div class="col-lg-6 col-md-6 col-12 pl-40">
 				<div class="col-12 font-size-21">
 					<i class="fa fa-briefcase" aria-hidden="true"></i> Remarks
 				</div>
-				<div class="col-12 solid" style="height: 90%">
+				<div class="col-12 mt-5">
+					<textarea class="form-control" name="remark" style="height:160px;"></textarea>
 				</div>
+			</div>
+		</div>
+		<div class="col-12 mt-20 font-size-16" style="font-weight: 700;">
+			Other
+		</div>
+		<div class="col-12">
+			<hr class="col-lg-10 col-12">
+		</div>
+		<div class="row">
+			<div class="col-lg-4 col-12">
+				<div class="col-12">
+					<label class="form-label font-size-13">Languages Spoken</label>
+					<input type="text" class="form-control font-size-14" name="language">
+				</div>
+				<div class="col-12 mt-10">
+					<label class="form-label font-size-13">Social Links</label>
+					<input type="text" class="form-control font-size-14" name="socialLink">
+				</div>
+			</div>
+			<div class="col-lg-6 col-12">
+				<div class="row">
+					<div class="col-12">
+						<label class="form-label font-size-13">Employee right</label>
+					</div>
+					<div class="col-4 mt-10 font-size-14">
+						<input type="checkbox" name="role[]" class="checkbox-md mr-5" value="1"> Admin
+					</div>
+					<div class="col-6 mt-10 font-size-14">
+						<input type="checkbox" name="role[]" class="checkbox-md mr-5" value="1"> GM
+					</div>
+					<div class="col-4 mt-10 font-size-14">
+						<input type="checkbox" name="role[]" class="checkbox-md mr-5" value="1"> Staff
+					</div>
+					<div class="col-6 mt-10 font-size-14">
+						<input type="checkbox" name="role[]" class="checkbox-md mr-5" value="1"> HR
+					</div>
+					<div class="col-4 mt-10 font-size-14">
+						<input type="checkbox" name="role[]" class="checkbox-md mr-5" value="1"> Supervisor
+					</div>
+					<div class="col-6 mt-10 font-size-14">
+						<input type="checkbox" name="role[]" class="checkbox-md mr-5" value="1"> Manager
+					</div>
+				</div>
+			</div>
+			<div class="col-12 text-end" style="margin-top: -40px;">
+				<button type="submit" class="btn btn-success text-white"> Create</button>
 			</div>
 		</div>
 	</div>
 </div>
+<?php ActiveForm::end(); ?>

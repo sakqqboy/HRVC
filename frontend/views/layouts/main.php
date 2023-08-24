@@ -51,10 +51,12 @@ AppAsset::register($this);
                 <?= $this->render("@frontend/views/site/header")
                 ?>
             </div>
-            <div class="col-lg-10">
+            <div class="col-lg-10 ">
                 <?= $this->render("@frontend/views/layouts/headernavbar")
                 ?>
-                <?= $content ?>
+                <div class="col-12 pr-15">
+                    <?= $content ?>
+                </div>
             </div>
         </div>
     </main>
