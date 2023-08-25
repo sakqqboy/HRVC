@@ -53,6 +53,7 @@ class AppAsset extends AssetBundle
         'css/setting/department.css',
         'css/form/checkbox.css',
         'css/home/view.css',
+        'css/home/salary-view.css',
     ];
     public $js = [
         'js/content.js',
