@@ -86,6 +86,16 @@ class ModelMaster extends \yii\db\ActiveRecord
         $date = $day[2];
         return $date . '/' . $month . '/' . $year;
     }
+    public static function dateNumberDash($dateFull)
+    {
+        $d = explode(' ', $dateFull);
+        $days = $d[0];
+        $day = explode('-', $days);
+        $year = $day[0];
+        $month = $day[1];
+        $date = $day[2];
+        return $date . '-' . $month . '-' . $year;
+    }
     public static function dateExcel($dateFull)
     {
         if ($dateFull != '' && $dateFull != null) {

@@ -27,7 +27,16 @@ class EmployeeController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/all-employee-detail');
+        $employees = curl_exec($api);
+        $employees = json_decode($employees, true);
+        curl_close($api);
+        return $this->render('index', [
+            "employees" => $employees
+        ]);
     }
     public function actionCreate()
     {
@@ -127,7 +136,7 @@ class EmployeeController extends Controller
                 $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
                 $pathSave = $path . $fileName;
                 $fileResume->saveAs($pathSave);
-                $employee->resume = 'file/resume/' . $fileName;
+                $employee->resume = 'files/resume/' . $fileName;
             }
             $fileAgreement = UploadedFile::getInstanceByName("agreement");
             if (isset($fileAgreement) && !empty($fileAgreement)) {
@@ -141,7 +150,7 @@ class EmployeeController extends Controller
                 $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
                 $pathSave = $path . $fileName;
                 $fileAgreement->saveAs($pathSave);
-                $employee->employeeAgreement = 'file/resume/' . $fileName;
+                $employee->employeeAgreement = 'files/resume/' . $fileName;
             }
             $employee->remark = $_POST["remark"];
             $employee->status = 1;
@@ -160,7 +169,26 @@ class EmployeeController extends Controller
     }
     public function actionEmployeeProfile($hash)
     {
-        return $this->render('employee_profile');
+        $param = ModelMaster::decodeParams($hash);
+        $employeeId = $param["employeeId"];
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
+        $employee = curl_exec($api);
+        $employee = json_decode($employee, true);
+        curl_close($api);
+        if ($employee["birthDate"] != '') {
+            $year = date('Y');
+            $birthDateArr = explode('-', $employee["birthDate"]);
+            $birthYear = (int)$birthDateArr[0];
+            $employee["age"] = (int)$year - (int)$birthYear;
+        } else {
+            $employee["age"] = '-';
+        }
+        return $this->render('employee_profile', [
+            "employee" => $employee
+        ]);
     }
     public function saveEmployeeStatus($employeeId, $statusId)
     {
