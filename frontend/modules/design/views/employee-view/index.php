@@ -58,148 +58,146 @@ $this->title = 'view';
                     </div>
                 </div>
             </div>
-            <div class="d-flex align-items-start">
-                <div class="col-lg-3 col-md-12 col-12 crd-background">
-                    <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        <div class="col-12 emplo-infor mr-30 ml-30">
-                            Employee
-                            Information
-                        </div>
-                        <div class="col-12 mt-70 mr-30 ml-30">
-                            <div class="active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true"> Personal & Contact Details</div>
-                        </div>
-                        <div class="col-12 mt-20 mr-30 ml-30">
-                            <div class="" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false"> Work Information</div>
-                        </div>
-                        <div class="col-12 mt-20 mr-30 ml-30">
-                            <div class="" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false"> Attachments</div>
-                        </div>
-                        <div class="col-12 mt-20 mr-30 ml-30">
-                            <div class="" id="v-pills-detail-tab" data-bs-toggle="pill" data-bs-target="#v-pills-detail" type="button" role="tab" aria-controls="v-pills-detail" aria-selected="false"> Salary & Allowance</div>
-                        </div>
-                        <div class="col-12 mt-20 mr-30 ml-30">
-                            <div class="" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"> Evaluation</div>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-12">
+                    <div class="alert crd-background">
+                        <div class="col-12">
+                            <div class="col-12 emplo-infor mr-20 ml-20">
+                                Employee
+                                Information
+                            </div>
+                            <div class="pt-50">
+                                <div class="nav flex-column nav-tabs" id="v-tabs-tab" role="tablist" aria-orientation="vertical">
+                                    <a class="link-2" href="" id="v-tabs-home-tab" data-mdb-toggle="tab" role="tab" aria-controls="v-tabs-home" aria-selected="true">Personal & Contact Details</a>
+                                    <a class="link-2" href="" id="v-tabs-Work-tab" data-mdb-toggle="tab" role="tab" aria-controls="v-tabs-Work" aria-selected="false">Work Information</a>
+                                    <a class="link-2" href="" id="v-tabs-Attach-tab" data-mdb-toggle="tab" role="tab" aria-controls="v-tabs-Attach" aria-selected="false">Attachments</a>
+                                    <a class="link-2" href="" id="v-tabs-Salary-tab" data-mdb-toggle="tab" role="tab" aria-controls="v-tabs-Salary" aria-selected="false">Salary & Allowance</a>
+                                    <a class="link-2" href="" id="v-tabs-Evaluation-tab" data-mdb-toggle="tab" role="tab" aria-controls="v-tabs-Evaluation" aria-selected="false">Evaluation</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="tab-content" id="v-pills-tabContent">
-                    <div class="col-lg-9 col-md-12 col-12 alert-personal-information ml-20">
-                        <div class="tab-pane fade show" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-12">
-                                    <div class="col-12 mt-60 pl-10 font-size-18">
-                                        <i class="fa fa-info-circle" aria-hidden="true"></i> Personal Information
-                                    </div>
-                                    <hr>
-                                    <div class="row pl-20">
-                                        <div class="col-5 font-size-14">
-                                            <div class="col-12">
-                                                First Name
+                <div class="col-lg-9 col-md-6 col-12">
+                    <div class="tab-content" id="v-tabs-tabContent">
+                        <div class="" id="v-tabs-home" role="tabpanel" aria-labelledby="v-tabs-home-tab">
+                            <div class="alert alert-personal-information">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-12">
+                                        <div class="col-12 mt-60 pl-10 font-size-18">
+                                            <i class="fa fa-info-circle" aria-hidden="true"></i> Personal Information
+                                        </div>
+                                        <hr>
+                                        <div class="row pl-20">
+                                            <div class="col-5 font-size-14">
+                                                <div class="col-12">
+                                                    First Name
+                                                </div>
+                                                <div class="col-12 pt-20">
+                                                    Last Name
+                                                </div>
+                                                <div class="col-12 pt-20">
+                                                    Nationality
+                                                </div>
+                                                <div class="col-12 pt-20">
+                                                    Date of Birth
+                                                </div>
+                                                <div class="col-12 pt-20">
+                                                    Age
+                                                </div>
+                                                <div class="col-12 pt-20">
+                                                    Gender
+                                                </div>
+                                                <div class="col-12 pt-20">
+                                                    Father's Name
+                                                </div>
+                                                <div class="col-12 pt-20">
+                                                    Mother's Name
+                                                </div>
+                                                <div class="col-12 pt-20">
+                                                    Address
+                                                </div>
                                             </div>
-                                            <div class="col-12 pt-20">
-                                                Last Name
-                                            </div>
-                                            <div class="col-12 pt-20">
-                                                Nationality
-                                            </div>
-                                            <div class="col-12 pt-20">
-                                                Date of Birth
-                                            </div>
-                                            <div class="col-12 pt-20">
-                                                Age
-                                            </div>
-                                            <div class="col-12 pt-20">
-                                                Gender
-                                            </div>
-                                            <div class="col-12 pt-20">
-                                                Father's Name
-                                            </div>
-                                            <div class="col-12 pt-20">
-                                                Mother's Name
-                                            </div>
-                                            <div class="col-12 pt-20">
-                                                Address
+                                            <div class="col-7 font-size-14">
+                                                <div class="col-12 view-font-bold">
+                                                    Tadawoki
+                                                </div>
+                                                <div class="col-12 pt-20 view-font-bold">
+                                                    Watanabe
+                                                </div>
+                                                <div class="col-12 pt-20 view-font-bold">
+                                                    Japanease
+                                                </div>
+                                                <div class="col-12 pt-20 view-font-bold">
+                                                    08/02/1989
+                                                </div>
+                                                <div class="col-12 pt-20 view-font-bold">
+                                                    34 Years, 2 Months
+                                                </div>
+                                                <div class="col-12 pt-20 view-font-bold">
+                                                    Male <i class="fa fa-mars" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="col-12 pt-20 view-font-bold">
+                                                    Sample Name San
+                                                </div>
+                                                <div class="col-12 pt-20 view-font-bold">
+                                                    Sample Name San
+                                                </div>
+                                                <div class="col-12 pt-20 view-font-bold">
+                                                    Flat #6A, House #54, Road, #7/A, Block H, Banani
+                                                    Dhaka 2016, Bangladesh
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-7 font-size-14">
-                                            <div class="col-12 view-font-bold">
-                                                Tadawoki
-                                            </div>
-                                            <div class="col-12 pt-20 view-font-bold">
-                                                Watanabe
-                                            </div>
-                                            <div class="col-12 pt-20 view-font-bold">
-                                                Japanease
-                                            </div>
-                                            <div class="col-12 pt-20 view-font-bold">
-                                                08/02/1989
-                                            </div>
-                                            <div class="col-12 pt-20 view-font-bold">
-                                                34 Years, 2 Months
-                                            </div>
-                                            <div class="col-12 pt-20 view-font-bold">
-                                                Male <i class="fa fa-mars" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="col-12 pt-20 view-font-bold">
-                                                Sample Name San
-                                            </div>
-                                            <div class="col-12 pt-20 view-font-bold">
-                                                Sample Name San
-                                            </div>
-                                            <div class="col-12 pt-20 view-font-bold">
-                                                Flat #6A, House #54, Road, #7/A, Block H, Banani
-                                                Dhaka 2016, Bangladesh
-                                            </div>
-                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-12 show-in-solid">
-                                    <div class="col-12 font-size-18">
-                                        <i class="fa fa-phone" aria-hidden="true"></i> Contact Information
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-5 font-size-14">
-                                            <div class="col-12">
-                                                Personal Email
-                                            </div>
-                                            <div class="col-12 pt-20">
-                                                Contact Number
-                                            </div>
-                                            <div class="col-12 pt-20">
-                                                Emergency Contact Number
-                                            </div>
-                                            <div class="col-12 pt-20">
-                                                Company Mail
-                                            </div>
-                                            <div class="col-12 pt-20">
-                                                Social Links
-                                            </div>
+                                    <div class="col-lg-6 col-md-6 col-12 show-in-solid">
+                                        <div class="col-12 font-size-18">
+                                            <i class="fa fa-phone" aria-hidden="true"></i> Contact Information
                                         </div>
-                                        <div class="col-7 font-size-14">
-                                            <div class="col-12 view-font-bold">
-                                                watanabetada@gmail.com <i class="fa fa-clipboard view-cursor" aria-hidden="true"></i>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-5 font-size-14">
+                                                <div class="col-12">
+                                                    Personal Email
+                                                </div>
+                                                <div class="col-12 pt-20">
+                                                    Contact Number
+                                                </div>
+                                                <div class="col-12 pt-20">
+                                                    Emergency Contact Number
+                                                </div>
+                                                <div class="col-12 pt-20">
+                                                    Company Mail
+                                                </div>
+                                                <div class="col-12 pt-20">
+                                                    Social Links
+                                                </div>
                                             </div>
-                                            <div class="col-12 pt-20 view-font-bold">
-                                                +880175089653 <i class="fa fa-clipboard view-cursor" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="col-12 pt-20 view-font-bold">
-                                                +880175089653 <i class="fa fa-clipboard view-cursor" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="col-12 view-font-bold1">
-                                                watanabe@tokyocons.com <i class="fa fa-clipboard view-cursor" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="col-12 pt-20 view-font-bold">
-                                                <p><i class="fa fa-facebook-square social-facebook" aria-hidden="true"></i> &nbsp;/watanabe <i class="fa fa-clipboard view-cursor" aria-hidden="true"></i></p>
-                                                <p><i class="fa fa-twitter-square" aria-hidden="true"></i> &nbsp;/watanabetadawoki <i class="fa fa-clipboard view-cursor" aria-hidden="true"></i></p>
-                                                <p><i class="fa fa-linkedin-square" aria-hidden="true"></i> &nbsp;/watanab546 <i class="fa fa-clipboard view-cursor" aria-hidden="true"></i></p>
+                                            <div class="col-7 font-size-14">
+                                                <div class="col-12 view-font-bold">
+                                                    watanabetada@gmail.com <i class="fa fa-clipboard view-cursor" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="col-12 pt-20 view-font-bold">
+                                                    +880175089653 <i class="fa fa-clipboard view-cursor" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="col-12 pt-20 view-font-bold">
+                                                    +880175089653 <i class="fa fa-clipboard view-cursor" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="col-12 view-font-bold1">
+                                                    watanabe@tokyocons.com <i class="fa fa-clipboard view-cursor" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="col-12 pt-20 view-font-bold">
+                                                    <p><i class="fa fa-facebook-square social-facebook" aria-hidden="true"></i> &nbsp;/watanabe <i class="fa fa-clipboard view-cursor" aria-hidden="true"></i></p>
+                                                    <p><i class="fa fa-twitter-square" aria-hidden="true"></i> &nbsp;/watanabetadawoki <i class="fa fa-clipboard view-cursor" aria-hidden="true"></i></p>
+                                                    <p><i class="fa fa-linkedin-square" aria-hidden="true"></i> &nbsp;/watanab546 <i class="fa fa-clipboard view-cursor" aria-hidden="true"></i></p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade  briefcase-work" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                        <div class="tab-pane fade" id="v-tabs-Work" role="tabpanel" aria-labelledby="v-tabs-Work-tab">
                             <div class="col-12 pl-20 pt-40 font-size-18">
                                 <i class="fa fa-briefcase" aria-hidden="true"></i> Work information
                             </div>
@@ -281,7 +279,7 @@ $this->title = 'view';
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade briefcase-Attachments" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                        <div class="tab-pane fade" id="v-tabs-Attach" role="tabpanel" aria-labelledby="v-tabs-Attach-tab">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <div class="col-12 pl-10 font-size-18">
@@ -342,7 +340,7 @@ $this->title = 'view';
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="v-pills-detail" role="tabpanel" aria-labelledby="v-pills-detail-tab">
+                        <div class="tab-pane fade" id="v-tabs-Salary" role="tabpanel" aria-labelledby="v-tabs-Salary-tab">
                             <div class="row">
                                 <div class="col-lg-9  pl-30 font-size-18 detail-salary">
                                     <i class="fa fa-database" aria-hidden="true"></i> Salary & Allowance
@@ -425,7 +423,7 @@ $this->title = 'view';
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                        <div class="tab-pane fade" id="v-tabs-Evaluation" role="tabpanel" aria-labelledby="v-tabs-Evaluation-tab">
                             <div class="row">
                                 <div class="col-lg-9 col-md-6 col-12 pl-30 e-valution font-size-18 text-dark">
                                     <i class="fa fa-tachometer" aria-hidden="true"></i> Evaluation
