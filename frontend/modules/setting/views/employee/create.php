@@ -10,6 +10,7 @@ $this->title = 'Create Employee';
 	'options' => [
 		'enctype' => 'multipart/form-data',
 	],
+	'action' => Yii::$app->homeUrl . 'setting/employee/save-create-employee'
 
 ]); ?>
 <div class="col-12 mt-90">
@@ -91,13 +92,13 @@ $this->title = 'Create Employee';
 						<label class="form-label font-size-13">
 							<strong class="text-danger">*</strong> Address 1
 						</label>
-						<input type="text" class="form-control font-size-14" required>
+						<textarea name="address1" class="form-control font-size-14" required></textarea>
 					</div>
 					<div class="col-lg-5 col-md-6 col-12 mt-10">
 						<label class="form-label font-size-13">
 							<strong class="text-danger">*</strong> Address 2
 						</label>
-						<input type="text" class="form-control font-size-14" required>
+						<textarea name="address2" class="form-control font-size-14" required></textarea>
 					</div>
 					<div class="col-lg-2 col-md-6 col-12 mt-10">
 						<label class="form-label font-size-13">
@@ -105,7 +106,7 @@ $this->title = 'Create Employee';
 						</label>
 						<select class="form-select font-size-14" name="gender" required>
 							<option value="">Select</option>
-							<option value="1">Man</option>
+							<option value="1">Male</option>
 							<option value="2">Female</option>
 						</select>
 					</div>
@@ -125,7 +126,7 @@ $this->title = 'Create Employee';
 			</div>
 			<div class="col-lg-3 col-md-6 col-12">
 				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Emergency Contact Number</label>
-				<input type="text" class="form-control font-size-14" name="urgentTelephoneNumber" required>
+				<input type="text" class="form-control font-size-14" name="emergencyTel" required>
 
 			</div>
 			<div class="col-lg-3 col-md-6 col-12">
@@ -235,12 +236,12 @@ $this->title = 'Create Employee';
 				</select>
 			</div>
 
-			<div class="col-lg-3 col-md-6 col-12 mt-10">
+			<!-- <div class="col-lg-3 col-md-6 col-12 mt-10">
 				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Management</label>
 				<select class="form-select font-size-14" name="management" required>
 					<option value="">Select</option>
 				</select>
-			</div>
+			</div> -->
 		</div>
 		<div class="col-12 mt-30 font-size-16" style="font-weight: 700;">
 			Attachments
@@ -310,7 +311,7 @@ $this->title = 'Create Employee';
 			<hr class="col-lg-10 col-12">
 		</div>
 		<div class="row">
-			<div class="col-lg-4 col-12">
+			<div class="col-lg-4 col-12 z-1">
 				<div class="col-12">
 					<label class="form-label font-size-13">Languages Spoken</label>
 					<input type="text" class="form-control font-size-14" name="language">
