@@ -310,33 +310,10 @@ $this->title = 'view';
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-12 form-pdf">
-                                        <div class="col-12 alert example-3 scrollbar-ripe-malinka alert-create0">
-                                            <div class="col-12 pl-20 pr-20">
-                                                <img src="<?= Yii::$app->homeUrl ?>image/f-pdf.png" style="width: 100%">
+                                        <div class="col-12">
+                                            <div class="myIframe">
+                                                <iframe src="https://bandoo101.go.th/uploads/20151110121622y9OqG9U/store/20220224091733978TqLP.pdf" frameborder="0"></iframe>
                                             </div>
-                                            <div class="col-12 footer-pdf">
-                                                <div class="row">
-                                                    <div class="col-1">
-                                                        <i class="fa fa-chevron-circle-down font-size-20 text-white" aria-hidden="true"></i>
-                                                    </div>
-                                                    <div class="col-1">
-                                                        <i class="fa fa-chevron-circle-up font-size-20 text-white" aria-hidden="true"></i>
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <span class="badge rounded-pill bg-light text-dark">Page &nbsp; 1 &nbsp; of &nbsp; 1000</span>
-                                                    </div>
-                                                    <div class="col-1">
-                                                        <i class="fa fa-minus-square font-size-20 text-white" aria-hidden="true"></i>
-                                                    </div>
-                                                    <div class="col-1">
-                                                        <i class="fa fa-plus-square font-size-20 text-white" aria-hidden="true"></i>
-                                                    </div>
-                                                    <div class="col-1">
-                                                        <i class="fa fa-arrows-alt font-size-20 text-white" aria-hidden="true"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -497,8 +474,8 @@ $this->title = 'view';
                                                 chart.render();
                                             }
                                         </script>
-                                        <script type="text/javascript" src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
-
+                                        <!-- <script type="text/javascript" src="https://cdn.canvasjs.com/canvasjs.min.js"></script> -->
+                                        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css"></script>
                                         <div id="chartContainer" style="height: 400px; width: 800px;">
                                         </div>
 
