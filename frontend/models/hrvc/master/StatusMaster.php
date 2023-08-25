@@ -1,27 +1,26 @@
 <?php
 
-namespace backend\models\hrvc\master;
+namespace frontend\models\hrvc\master;
 
 use Yii;
 
 /**
-* This is the model class for table "team".
+* This is the model class for table "status".
 *
-    * @property integer $teamId
-    * @property string $teamName
-    * @property integer $departmentId
+    * @property integer $statusId
+    * @property string $statusName
     * @property integer $status
     * @property string $createDateTime
     * @property string $updateDateTime
 */
-class TeamMaster extends \common\models\ModelMaster
+class StatusMaster extends \common\models\ModelMaster
 {
 /**
 * @inheritdoc
 */
 public static function tableName()
 {
-return 'team';
+return 'status';
 }
 
 /**
@@ -30,10 +29,9 @@ return 'team';
 public function rules()
 {
 return [
-            [['teamName', 'departmentId'], 'required'],
-            [['departmentId'], 'integer'],
+            [['statusName'], 'required'],
             [['createDateTime', 'updateDateTime'], 'safe'],
-            [['teamName'], 'string', 'max' => 100],
+            [['statusName'], 'string', 'max' => 255],
             [['status'], 'string', 'max' => 10],
         ];
 }
@@ -44,9 +42,8 @@ return [
 public function attributeLabels()
 {
 return [
-    'teamId' => 'Team ID',
-    'teamName' => 'Team Name',
-    'departmentId' => 'Department ID',
+    'statusId' => 'Status ID',
+    'statusName' => 'Status Name',
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',
     'updateDateTime' => 'Update Date Time',

@@ -38,11 +38,31 @@ class EmployeeController extends Controller
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
         $companies = curl_exec($api);
         $companies = json_decode($companies, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/title/title-list');
+        $titles = curl_exec($api);
+        $titles = json_decode($titles, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/status/active-status');
+        $status = curl_exec($api);
+        $status = json_decode($status, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee-condition/active-condition');
+        $conditions = curl_exec($api);
+        $conditions = json_decode($conditions, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/role/active-role');
+        $roles = curl_exec($api);
+        $roles = json_decode($roles, true);
         curl_close($api);
 
         return $this->render('create', [
             "countries" => $countries,
-            "companies" => $companies
+            "companies" => $companies,
+            "titles" => $titles,
+            "status" => $status,
+            "conditions" => $conditions,
+            "roles" => $roles
         ]);
     }
 }

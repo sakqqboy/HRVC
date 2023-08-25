@@ -37,6 +37,21 @@ function departmentBranch() {
     });
 }
 
+function teamDepartment() {
+    var departmentId = $("#department-team").val();
+    var url = $url + 'setting/team/department-team';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { departmentId: departmentId },
+        success: function(data) {
+            $("#team-department").removeAttr("disabled", "true");
+            $("#team-department").html(data.textSelect);
+        }
+    });
+}
+
 function saveCreateTeam() {
     var branchId = $("#branch-team").val();
     var companyId = $("#company-team").val();

@@ -46,4 +46,14 @@ class TeamController extends Controller
 			->one();
 		return json_encode($teams);
 	}
+	public function actionDepartmentTeam($id)
+	{
+		$teams = [];
+		$teams = Team::find()
+			->select("teamName,teamId")
+			->where(["departmentId" => $id, "status" => 1])
+			->asArray()
+			->all();
+		return json_encode($teams);
+	}
 }

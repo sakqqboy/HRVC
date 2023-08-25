@@ -60,6 +60,7 @@ class AppAsset extends AssetBundle
         'js/setting/branch.js',
         'js/setting/department.js',
         'js/setting/team.js',
+        'js/setting/employee.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

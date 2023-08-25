@@ -1,27 +1,27 @@
 <?php
 
-namespace backend\models\hrvc\master;
+namespace common\models\hrvc\master;
 
 use Yii;
 
 /**
-* This is the model class for table "team".
+* This is the model class for table "employee_status".
 *
-    * @property integer $teamId
-    * @property string $teamName
-    * @property integer $departmentId
+    * @property integer $employeeStatusId
+    * @property integer $employeeId
+    * @property integer $statusId
     * @property integer $status
     * @property string $createDateTime
     * @property string $updateDateTime
 */
-class TeamMaster extends \common\models\ModelMaster
+class EmployeeStatusMaster extends \common\models\ModelMaster
 {
 /**
 * @inheritdoc
 */
 public static function tableName()
 {
-return 'team';
+return 'employee_status';
 }
 
 /**
@@ -30,10 +30,9 @@ return 'team';
 public function rules()
 {
 return [
-            [['teamName', 'departmentId'], 'required'],
-            [['departmentId'], 'integer'],
+            [['employeeId', 'statusId'], 'required'],
+            [['employeeId', 'statusId'], 'integer'],
             [['createDateTime', 'updateDateTime'], 'safe'],
-            [['teamName'], 'string', 'max' => 100],
             [['status'], 'string', 'max' => 10],
         ];
 }
@@ -44,9 +43,9 @@ return [
 public function attributeLabels()
 {
 return [
-    'teamId' => 'Team ID',
-    'teamName' => 'Team Name',
-    'departmentId' => 'Department ID',
+    'employeeStatusId' => 'Employee Status ID',
+    'employeeId' => 'Employee ID',
+    'statusId' => 'Status ID',
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',
     'updateDateTime' => 'Update Date Time',

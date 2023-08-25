@@ -146,7 +146,7 @@ $this->title = 'Create Employee';
 		<div class="row">
 			<div class="col-lg-3 col-md-6 col-12">
 				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Company</label>
-				<select class="form-select font-size-14" name="company">
+				<select class="form-select font-size-14" id="company-team" name="company" onchange="javascript:branchCompany()">
 					<option value="">Select</option>
 					<?php
 					if (isset($companies) && count($companies) > 0) {
@@ -161,44 +161,77 @@ $this->title = 'Create Employee';
 			</div>
 			<div class="col-lg-3 col-md-6 col-12">
 				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Branch</label>
-				<select class="form-select font-size-14" name="branch">
-					<option value="">Select</option>
+				<select class="form-select font-size-14" id="branch-team" disabled name="branch" onchange="javascript:departmentBranch()">
+					<option value="">Select Branch</option>
 				</select>
 			</div>
 			<div class="col-lg-3 col-md-6 col-12">
 				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Department Name</label>
-				<select class="form-select font-size-14" name="department">
-					<option value="">Select</option>
+				<select class="form-select font-size-14" name="department" id="department-team" disabled onchange="javascript:teamDepartment()">
+					<option value="">Select Department</option>
 				</select>
 			</div>
 			<div class="col-lg-3 col-md-6 col-12">
 				<label class="form-label font-size-13"><strong class="text-danger">*</strong>Team</label>
-				<select class="form-select font-size-14" name="title">
+				<select class="form-select font-size-14" name="team" id="team-department" disabled>
 					<option value="">Select</option>
 				</select>
 			</div>
 			<div class="col-lg-3 col-md-6 col-12 mt-10">
 				<label class="form-label font-size-13"><strong class="text-danger">*</strong>Title</label>
 				<select class="form-select font-size-14" name="title">
-					<option value="">Select</option>
+					<option value="">Select Title</option>
+					<?php
+					if (isset($titles) && count($titles) > 0) {
+						foreach ($titles as $title) : ?>
+							<option value="<?= $title['titleId'] ?>"><?= $title['titleName'] ?></option>
+					<?php
+						endforeach;
+					}
+					?>
 				</select>
 			</div>
 			<div class="col-lg-3 col-md-6 col-12 mt-10">
 				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Working Hours</label>
 				<select class="form-select font-size-14" name="workTime" required>
 					<option value="">Select</option>
+					<?php
+					$i = 1;
+					while ($i < 13) {
+					?>
+						<option value="<?= $i ?>"><?= $i ?> hr<?= $i == 1 ? '' : 's' ?>.</option>
+					<?php
+						$i++;
+					}
+					?>
 				</select>
 			</div>
 			<div class="col-lg-3 col-md-6 col-12 mt-10">
 				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Employee Condition</label>
 				<select class="form-select font-size-14" name="condition" required>
 					<option value="">Select</option>
+					<?php
+					if (isset($conditions) && count($conditions) > 0) {
+						foreach ($conditions as $c) : ?>
+							<option value="<?= $c['employeeConditionId'] ?>"><?= $c["employeeConditionName"] ?></option>
+					<?php
+						endforeach;
+					}
+					?>
 				</select>
 			</div>
 			<div class="col-lg-3 col-md-6 col-12 mt-10">
 				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Employee Status</label>
 				<select class="form-select font-size-14" name="status" required>
 					<option value="">Select</option>
+					<?php
+					if (isset($status) && count($status) > 0) {
+						foreach ($status as $s) : ?>
+							<option value="<?= $s['statusId'] ?>"><?= $s["statusName"] ?></option>
+					<?php
+						endforeach;
+					}
+					?>
 				</select>
 			</div>
 
@@ -287,32 +320,41 @@ $this->title = 'Create Employee';
 					<input type="text" class="form-control font-size-14" name="socialLink">
 				</div>
 			</div>
-			<div class="col-lg-6 col-12">
+			<div class="col-lg-6 col-12 z-1">
 				<div class="row">
 					<div class="col-12">
 						<label class="form-label font-size-13">Employee right</label>
 					</div>
-					<div class="col-4 mt-10 font-size-14">
-						<input type="checkbox" name="role[]" class="checkbox-md mr-5" value="1"> Admin
-					</div>
-					<div class="col-6 mt-10 font-size-14">
-						<input type="checkbox" name="role[]" class="checkbox-md mr-5" value="1"> GM
-					</div>
-					<div class="col-4 mt-10 font-size-14">
-						<input type="checkbox" name="role[]" class="checkbox-md mr-5" value="1"> Staff
-					</div>
-					<div class="col-6 mt-10 font-size-14">
-						<input type="checkbox" name="role[]" class="checkbox-md mr-5" value="1"> HR
-					</div>
-					<div class="col-4 mt-10 font-size-14">
-						<input type="checkbox" name="role[]" class="checkbox-md mr-5" value="1"> Supervisor
-					</div>
-					<div class="col-6 mt-10 font-size-14">
-						<input type="checkbox" name="role[]" class="checkbox-md mr-5" value="1"> Manager
-					</div>
+					<?php
+
+					if (isset($roles) && count($roles) > 0) {
+						$i = 0;
+						foreach ($roles as $role) :
+							if (($i % 2) == 0) {
+								$class = "col-4";
+							} else {
+								$class = "col-6";
+							}
+					?>
+							<div class="<?= $class ?> mt-10 font-size-14">
+								<input type="checkbox" name="role[]" class="checkbox-md mr-5" value="<?= $role['roleId'] ?>"> <?= $role["roleName"] ?>
+							</div>
+						<?php
+							$i++;
+						endforeach;
+					} else {
+						?>
+						<div class="col-12 text-center mt-20 font-size-84">
+							Cantact Administrator
+						</div>
+					<?php
+					}
+					?>
+
+
 				</div>
 			</div>
-			<div class="col-12 text-end" style="margin-top: -40px;">
+			<div class="col-12 text-end z-0" style="margin-top: -40px;">
 				<button type="submit" class="btn btn-success text-white"> Create</button>
 			</div>
 		</div>

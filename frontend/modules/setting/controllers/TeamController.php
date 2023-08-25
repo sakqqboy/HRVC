@@ -91,6 +91,26 @@ class TeamController extends Controller
         $res["textSelect"] = $textSelect;
         return json_encode($res);
     }
+    public function actionDepartmentTeam()
+    {
+        $departmentId = $_POST["departmentId"];
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/department-team?id=' . $departmentId);
+        $team = curl_exec($api);
+        $team = json_decode($team, true);
+        curl_close($api);
+        $res = [];
+        $textSelect = '<option value="">Select Department</option>';
+        if (count($team) > 0) {
+            foreach ($team as $t) :
+                $textSelect .= "<option value='" . $t['teamId'] . "'>" . $t['teamName'] . "</option>";
+            endforeach;
+        }
+        $res["textSelect"] = $textSelect;
+        return json_encode($res);
+    }
     public function actionSaveCreateTeam()
     {
         $departmentId = $_POST["departmentId"];
