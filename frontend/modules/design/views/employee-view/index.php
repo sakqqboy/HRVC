@@ -312,7 +312,6 @@ $this->title = 'view';
                                     <div class="col-lg-6 col-md-6 col-12 form-pdf">
                                         <div class="col-12">
                                             <div class="myIframe">
-                                                <iframe src="https://bandoo101.go.th/uploads/20151110121622y9OqG9U/store/20220224091733978TqLP.pdf" frameborder="0"></iframe>
                                             </div>
                                         </div>
                                     </div>
@@ -411,74 +410,47 @@ $this->title = 'view';
                                 </div>
                                 <hr>
                                 <div class="col-lg-12 col-md-12 col-12 pl-20 pr-20">
-                                    <div class="shadow p-3 bg-body rounded shadow-line">
-                                        <script type="text/javascript">
-                                            window.onload = function() {
-                                                var chart = new CanvasJS.Chart("chartContainer", {
+                                    <div class="shadow p-3 bg-body rounded">
+                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+                                        <canvas id="myChart"></canvas>
+                                        <script>
+                                            const xValues = ['1Q', '2Q', '3Q', '4Q', '1Q', '2Q', '3Q', '4Q', '1Q', '2Q', '3Q', '4Q', '1Q', '2Q', '3Q', '4Q', '1Q', '2Q', '3Q', '4Q'];
+                                            const yValues = ['0', '20', '30', '40', '50', '60', '70', '80', '90', '100']
 
-                                                    data: [{
-                                                        type: "line",
+                                            new Chart("myChart", {
+                                                type: "line",
+                                                data: {
+                                                    labels: xValues,
+                                                    datasets: [{
+                                                            data: [60, 70, 60, 80, 70, 59, 50, 60, 70, 80, 70, 80, 70, 60, 70, 59, 70, 50, 70, 48],
+                                                            borderColor: "red",
+                                                            lineTension: 0,
+                                                            fill: false
 
-                                                        dataPoints: [{
-                                                                x: (0),
-                                                                y: 50
-                                                            },
-                                                            {
-                                                                x: (1),
-                                                                y: 20
-                                                            },
-                                                            {
-                                                                x: (2),
-                                                                y: 90
-                                                            },
-                                                            {
-                                                                x: (3),
-                                                                y: 60
-                                                            },
-                                                            {
-                                                                x: (4),
-                                                                y: 80
-                                                            },
-                                                            {
-                                                                x: (5),
-                                                                y: 50
-                                                            },
-                                                            {
-                                                                x: (6),
-                                                                y: 89
-                                                            },
-                                                            {
-                                                                x: (7),
-                                                                y: 60
-                                                            },
-                                                            {
-                                                                x: (8),
-                                                                y: 100
-                                                            },
-                                                            {
-                                                                x: (9),
-                                                                y: 70
-                                                            },
-                                                            {
-                                                                x: (10),
-                                                                y: 102
-                                                            },
-                                                            {
-                                                                x: (11),
-                                                                y: 120
-                                                            }
-                                                        ]
-                                                    }]
-                                                });
 
-                                                chart.render();
-                                            }
+                                                        }, {
+                                                            data: [70, 60, 75, 65, 80, 60, 90, 60, 75, 57, 95, 50, 40, 30, 60, 85, 60, 60, 60, 50],
+                                                            borderColor: "orange",
+                                                            lineTension: 0,
+                                                            fill: false
+
+                                                        },
+                                                        {
+                                                            data: [50, 45, 70, 40, 60, 55, 65, 70, 60, 70, 40, 45, 60, 50, 39, 70, 78, 75, 90, 93],
+                                                            borderColor: "blue",
+                                                            lineTension: 0,
+                                                            fill: false
+
+                                                        }
+                                                    ]
+                                                },
+                                                options: {
+                                                    legend: {
+                                                        display: false
+                                                    },
+                                                }
+                                            });
                                         </script>
-                                        <!-- <script type="text/javascript" src="https://cdn.canvasjs.com/canvasjs.min.js"></script> -->
-                                        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css"></script>
-                                        <div id="chartContainer" style="height: 400px; width: 800px;">
-                                        </div>
-
                                     </div>
                                 </div>
                             </div>

@@ -1,6 +1,7 @@
 .bkc-salary {
-    background-color: rgb(240, 242, 242);
+    background-color: rgb(239, 243, 245);
     border: none;
+    border-radius: 3px;
 }
 
 .data {
@@ -13,4 +14,26 @@
     color: black;
     font-size: 12px;
     padding-top: 5px;
+}
+
+.box-nam {
+    font-weight: 700;
+    font-size: 22px;
+    padding-top: 15px;
+    text-transform: uppercase;
+    color: black;
+}
+
+.Generate {
+    font-weight: 700;
+    font-size: 18px;
+    color: black;
+}
+
+.no {
+    text-decoration: none;
+}
+
+.graph {
+    padding-top: 50px;
 }
