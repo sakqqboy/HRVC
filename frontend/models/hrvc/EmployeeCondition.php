@@ -6,29 +6,43 @@ use Yii;
 use \frontend\models\hrvc\master\EmployeeConditionMaster;
 
 /**
-* This is the model class for table "employee_condition".
-*
-* @property integer $employeeConditionId
-* @property string $employeeConditionName
-* @property integer $status
-* @property string $createDateTime
-* @property string $updateDateTime
-*/
+ * This is the model class for table "employee_condition".
+ *
+ * @property integer $employeeConditionId
+ * @property string $employeeConditionName
+ * @property integer $status
+ * @property string $createDateTime
+ * @property string $updateDateTime
+ */
 
-class EmployeeCondition extends \frontend\models\hrvc\master\EmployeeConditionMaster{
+class EmployeeCondition extends \frontend\models\hrvc\master\EmployeeConditionMaster
+{
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function rules()
     {
         return array_merge(parent::rules(), []);
     }
 
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return array_merge(parent::attributeLabels(), []);
+    }
+    public static function conditionName($conditionId)
+    {
+        $employeeCondition = EmployeeCondition::find()
+            ->select('employeeConditionName')
+            ->where(["employeeConditionId" => $conditionId])
+            ->asArray()
+            ->one();
+        if (isset($employeeCondition) && !empty($employeeCondition)) {
+            return  $employeeCondition["employeeConditionName"];
+        } else {
+            return '';
+        }
     }
 }
