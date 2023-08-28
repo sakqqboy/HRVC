@@ -58,6 +58,7 @@ return [
                 'setting/branch/create/<hash>' => 'setting/branch/create',
                 'setting/department/create/<hash>' => 'setting/department/create',
                 'setting/employee/employee-profile/<hash>' => 'setting/employee/employee-profile',
+                'setting/employee/update/<hash>' => 'setting/employee/update',
             ],
         ],
         'assetManager' => [

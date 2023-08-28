@@ -65,7 +65,9 @@ $this->title = 'view';
 										</a>
 									</div>
 									<div class="col-2 font-size-14 share-pointer">
-										<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+										<a href="<?= Yii::$app->homeUrl ?>setting/employee/update/<?= ModelMaster::encodeParams(['employeeId' => $employee['employeeId']]) ?>" style="text-decoration:none;">
+											<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+										</a>
 									</div>
 								</div>
 							</div>
