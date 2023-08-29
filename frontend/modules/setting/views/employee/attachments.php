@@ -14,8 +14,8 @@
 				<div class="text-secondary font-size-14">last Updated <?= $updateDateTime ?></div>
 			</div>
 			<div class="col-lg-4 col-md-6 col-12 pt-30">
-				<a href="javascript:showFile(1)" target="_blank" class="btn btn-outline-secondary font-size-12"><i class="fa fa-eye" aria-hidden="true"></i></a>
-				<a href="<?= Yii::$app->homeUrl . $resume ?>" class="btn btn-outline-secondary font-size-12"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
+				<a href="javascript:showFile(1)" class="btn btn-outline-secondary font-size-12"><i class="fa fa-eye" aria-hidden="true"></i></a>
+				<a href="<?= Yii::$app->homeUrl . $resume ?>" target="_blank" class="btn btn-outline-secondary font-size-12"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
 			</div>
 		</div>
 		<hr>
@@ -30,8 +30,8 @@
 				<div class="text-secondary font-size-14">last Updated <?= $updateDateTime ?></div>
 			</div>
 			<div class="col-lg-4 col-md-6 col-12 pt-30">
-				<a href="javascript:showFile(2)" target="_blank" class="btn btn-outline-secondary font-size-12"><i class="fa fa-eye" aria-hidden="true"></i></a>
-				<a href="<?= Yii::$app->homeUrl . $agreement ?>" class="btn btn-outline-secondary font-size-12"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
+				<a href="javascript:showFile(2)" class="btn btn-outline-secondary font-size-12"><i class="fa fa-eye" aria-hidden="true"></i></a>
+				<a href="<?= Yii::$app->homeUrl . $agreement ?>" target="_blank" class="btn btn-outline-secondary font-size-12"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
 			</div>
 		</div>
 	</div>

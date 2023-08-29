@@ -10,12 +10,13 @@
 <div class="col-lg-12 col-md-12 col-12 pl-20 pr-20">
 	<div class="shadow p-3 bg-body rounded">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-		<canvas id="myChart"></canvas>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+		<canvas id="myChart1"></canvas>
 		<script>
 			const xValues = ['1Q', '2Q', '3Q', '4Q', '1Q', '2Q', '3Q', '4Q', '1Q', '2Q', '3Q', '4Q', '1Q', '2Q', '3Q', '4Q', '1Q', '2Q', '3Q', '4Q'];
 			const yValues = ['0', '20', '30', '40', '50', '60', '70', '80', '90', '100']
 
-			new Chart("myChart", {
+			new Chart("myChart1", {
 				type: "line",
 				data: {
 					labels: xValues,
