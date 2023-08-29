@@ -143,7 +143,6 @@ $this->title = 'Employee';
 									</div>
 								</div>
 							</div>
-
 					<?php
 						endforeach;
 					}

@@ -193,6 +193,13 @@ class EmployeeController extends Controller
         } else {
             $employee["age"] = '-';
         }
+        $employee["branchName"] = Branch::branchName($employee['branchId']);
+        $employee["departmentName"] =  Department::departmentName($employee['departmentId']);
+        $employee["teamName"] =  Team::teamName($employee['teamId']);
+        $employee["titleName"] = Title::titleName($employee['titleId']);
+        $employee["conditionName"] = EmployeeCondition::conditionName($employee['employeeConditionId']);
+        $employee["status"] = EmployeeStatus::employeeStatus($employee['employeeId']);
+        // throw new Exception(print_r($employee, true));
         return $this->render('employee_profile', [
             "employee" => $employee
         ]);
@@ -317,7 +324,7 @@ class EmployeeController extends Controller
             "name" => Title::titleName($employee['titleId'])
         ];
         $oldData["condition"] = [
-            "id" => $employee['employeeId'],
+            "id" => $employee['employeeConditionId'],
             "name" => EmployeeCondition::conditionName($employee['employeeConditionId'])
         ];
         $oldData["status"] = EmployeeStatus::employeeStatus($employee['employeeId']);

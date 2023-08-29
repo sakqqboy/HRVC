@@ -85,122 +85,36 @@ $this->title = 'view';
 							</div>
 							<div class="pt-30">
 								<div class="nav flex-column nav-tabs" id="v-tabs-tab" role="tablist" aria-orientation="vertical">
-									<a class="link-2" href="" id="v-tabs-home-tab" data-mdb-toggle="tab" role="tab" aria-controls="v-tabs-home" aria-selected="true">Personal & Contact Details</a>
-									<a class="link-2" href="" id="v-tabs-Work-tab" data-mdb-toggle="tab" role="tab" aria-controls="v-tabs-Work" aria-selected="false">Work Information</a>
-									<a class="link-2" href="" id="v-tabs-Attach-tab" data-mdb-toggle="tab" role="tab" aria-controls="v-tabs-Attach" aria-selected="false">Attachments</a>
-									<a class="link-2" href="" id="v-tabs-Salary-tab" data-mdb-toggle="tab" role="tab" aria-controls="v-tabs-Salary" aria-selected="false">Salary & Allowance</a>
-									<a class="link-2" href="" id="v-tabs-Evaluation-tab" data-mdb-toggle="tab" role="tab" aria-controls="v-tabs-Evaluation" aria-selected="false">Evaluation</a>
+									<a href="javascript:showEmployeeView(1)" class="link-2 font-b" id="link1">Personal & Contact Details</a>
+									<a href="javascript:showEmployeeView(2)" class="link-2" id="link2">Work Information</a>
+									<a href="javascript:showEmployeeView(3)" class="link-2" id="link3">Attachments</a>
+									<a href="javascript:showEmployeeView(4)" class="link-2" id="link4">Salary & Allowance</a>
+									<a href="javascript:showEmployeeView(5)" class="link-2" id="link5">Evaluation</a>
+									<input type="hidden" value="1" id="currentShow">
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-9 col-md-6 col-12" style="background-color: white;">
-					<div class="row">
-						<div class="col-lg-6 col-md-6 col-12 pr-30">
-							<div class="col-12 mt-40 pl-10 font-size-18">
-								<i class="fa fa-info-circle mr-10" aria-hidden="true"></i> Personal Information
-							</div>
-							<hr>
-							<div class="row pl-20 font-size-14">
-								<div class="col-5 mt-10">
-									First Name
-								</div>
-								<div class="col-7 mt-10 view-font-bold">
-									<?= $employee['employeeFirstname'] ?>
-								</div>
-								<div class="col-5 mt-20">
-									Last Name
-								</div>
-								<div class="col-7 mt-20 view-font-bold">
-									<?= $employee['employeeSurename'] ?>
-								</div>
-								<div class="col-5 mt-20">
-									Nationality
-								</div>
-								<div class="col-7 mt-20 view-font-bold">
-									<?= $employee['countryName'] ?>
-								</div>
-								<div class="col-5 mt-20">
-									Date of Birth
-								</div>
-								<div class="col-7 mt-20 view-font-bold">
-									<?= ModelMaster::dateNumberDash($employee['birthDate']) ?>
-								</div>
-								<div class="col-5 mt-20">
-									Age
-								</div>
-								<div class="col-7 mt-20 view-font-bold">
-									<?= $employee['age'] ?>
-								</div>
-								<div class="col-5 mt-20">
-									Gender
-								</div>
-								<div class="col-7 mt-20 view-font-bold">
-									<?php
-									if ($employee['gender'] == 1) {
-									?>
-										Male <i class="fa fa-mars" aria-hidden="true"></i>
-									<?php
-									} else { ?>
-										Female <i class="fa fa-venus" aria-hidden="true"></i>
-									<?php
-									}
-									?>
-								</div>
+				<div class="col-lg-9 col-md-6 col-12" id='show1' style="background-color: white;">
+					<?= $this->render('personal', ["employee" => $employee]) ?>
+				</div>
 
-								<div class="col-5 mt-20">
-									Address
-								</div>
-								<div class="col-7 mt-20 view-font-bold">
-									<?= $employee['address1'] ?>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-6 col-md-6 col-12 mt-40 pl-30" style="border-left: lightgrey solid thin;">
-							<div class="col-12 font-size-18">
-								<i class="fa fa-phone mr-10" aria-hidden="true"></i> Contact Information
-							</div>
-							<hr>
-							<div class="row font-size-14">
-
-								<div class="col-5  mt-10">
-									Personal Email
-								</div>
-								<div class="col-7  mt-10 view-font-bold">
-									<?= $employee['email'] ?> <i class="fa fa-clipboard view-cursor" aria-hidden="true"></i>
-								</div>
-								<div class="col-5 mt-20">
-									Contact Number
-								</div>
-								<div class="col-7 mt-20 view-font-bold">
-									<?= $employee['telephoneNumber'] ?> <i class="fa fa-clipboard view-cursor" aria-hidden="true"></i>
-								</div>
-								<div class="col-5 mt-20">
-									Emergency Contact Number
-								</div>
-								<div class="col-7 mt-20 view-font-bold">
-									<?= $employee['emergencyTel'] ?> <i class="fa fa-clipboard view-cursor" aria-hidden="true"></i>
-								</div>
-								<div class="col-5 mt-20">
-									Company Mail
-								</div>
-								<div class="col-7 mt-20 view-font-bold1">
-									<?= $employee['companyEmail'] ?> <i class="fa fa-clipboard view-cursor" aria-hidden="true"></i>
-								</div>
-								<div class="col-5 mt-20">
-									Social Links
-								</div>
-								<div class="col-7 mt-20 view-font-bold">
-									<?= $employee['socialLink'] ?>
-									<!-- <p><i class="fa fa-facebook-square social-facebook" aria-hidden="true"></i> &nbsp;/watanabe <i class="fa fa-clipboard view-cursor" aria-hidden="true"></i></p> -->
-									<!-- <p><i class="fa fa-twitter-square" aria-hidden="true"></i> &nbsp;/watanabetadawoki <i class="fa fa-clipboard view-cursor" aria-hidden="true"></i></p>
-													<p><i class="fa fa-linkedin-square" aria-hidden="true"></i> &nbsp;/watanab546 <i class="fa fa-clipboard view-cursor" aria-hidden="true"></i></p> -->
-								</div>
-							</div>
-						</div>
-					</div>
-
+				<div class="col-lg-9 col-md-6 col-12" id='show2' style="background-color: white;display:none;">
+					<?= $this->render('work_info', ["employee" => $employee]) ?>
+				</div>
+				<div class="col-lg-9 col-md-6 col-12" id='show3' style="background-color: white;display:none;">
+					<?= $this->render('attachments', [
+						"resume" => $employee["resume"],
+						"agreement" => $employee["employeeAgreement"],
+						"updateDateTime" => ModelMaster::dateNumberDash($employee["updateDateTime"])
+					]) ?>
+				</div>
+				<div class="col-lg-9 col-md-6 col-12" id='show4' style="background-color: white;display:none;">
+					<?= $this->render('salary') ?>
+				</div>
+				<div class="col-lg-9 col-md-6 col-12" id='show5' style="background-color: white;display:none;">
+					<?= $this->render('evaluation') ?>
 				</div>
 			</div>
 		</div>
