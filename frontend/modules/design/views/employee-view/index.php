@@ -393,8 +393,59 @@ $this->title = 'view';
                                         </div>
                                     </div>
                                     <div class="col-lg-8 col-md-6 col-12 a-shadowbd">
-                                        <div class="shadow p-3 bg-body rounded">
+                                        <div class="shadow p-3 bg-body rounded linechart0">
+                                            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+                                            </script>
 
+                                            <canvas id="sampleChart" style="height: 200px;"></canvas>
+                                            <div id="output"> </div>
+                                            <script>
+                                                let output = document.getElementById('output');
+                                                let canvas = document.getElementById("sampleChart");
+                                                let line1Data = [9, 10, 12, 11, 11, 15, 12, 12, 12, 13, 19, 22, 31, 36, 39, 40, 41, 45, 50, 55, 59, 60];
+                                                let line2Data = [0, 0, 10, 0, 0, 10, 0, 00, 50, 10, 15, 10, 11, 15, 9, 19, 12, 24, 10, 10];
+
+                                                var xValues = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th', '11th', '12th', '13th', '14th', '15th', '16th', '17th', '18th', '19th', '20th'];
+                                                new Chart(canvas, {
+                                                    type: "line",
+                                                    data: {
+                                                        labels: xValues,
+                                                        datasets: [{
+                                                            borderColor: "red",
+                                                            pointBackgroundColor: "red",
+                                                            fill: false,
+                                                            data: line1Data,
+                                                            label: "Total Salary"
+
+
+                                                        }, {
+                                                            borderColor: "orange",
+                                                            pointBackgroundColor: "orange",
+                                                            fill: false,
+                                                            data: line2Data,
+                                                            lineTension: 0,
+                                                            label: "Increase Ratio"
+                                                        }]
+                                                    },
+                                                    options: {
+                                                        scales: {
+                                                            xAxes: [{
+                                                                ticks: {
+                                                                    min: 0,
+                                                                    max: 20
+                                                                }
+                                                            }],
+                                                            yAxes: [{
+                                                                ticks: {
+                                                                    min: 0,
+                                                                    max: 60
+                                                                }
+                                                            }],
+                                                        }
+                                                    },
+
+                                                });
+                                            </script>
                                         </div>
                                     </div>
                                 </div>
@@ -412,7 +463,7 @@ $this->title = 'view';
                                 <div class="col-lg-12 col-md-12 col-12 pl-20 pr-20">
                                     <div class="shadow p-3 bg-body rounded">
                                         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-                                        <canvas id="myChart"></canvas>
+                                        <canvas id="myChart" style="width: 100%;height:450px;"></canvas>
                                         <script>
                                             const xValues = ['1Q', '2Q', '3Q', '4Q', '1Q', '2Q', '3Q', '4Q', '1Q', '2Q', '3Q', '4Q', '1Q', '2Q', '3Q', '4Q', '1Q', '2Q', '3Q', '4Q'];
                                             const yValues = ['0', '20', '30', '40', '50', '60', '70', '80', '90', '100']
@@ -422,21 +473,22 @@ $this->title = 'view';
                                                 data: {
                                                     labels: xValues,
                                                     datasets: [{
-                                                            data: [60, 70, 60, 80, 70, 59, 50, 60, 70, 80, 70, 80, 70, 60, 70, 59, 70, 50, 70, 48],
+                                                            data: [55, 60, 65, 65, 70, 65, 60, 70, 60, 70, 70, 70, 80, 70, 65, 70, 60, 75, 78, 80],
                                                             borderColor: "red",
                                                             lineTension: 0,
                                                             fill: false
 
 
                                                         }, {
-                                                            data: [70, 60, 75, 65, 80, 60, 90, 60, 75, 57, 95, 50, 40, 30, 60, 85, 60, 60, 60, 50],
+                                                            data: [70, 60, 75, 65, 80, 60, 90, 60, 75, 57, 95, 60, 40, 60, 55, 75, 60, 60, 60, 50],
                                                             borderColor: "orange",
                                                             lineTension: 0,
                                                             fill: false
 
+
                                                         },
                                                         {
-                                                            data: [50, 45, 70, 40, 60, 55, 65, 70, 60, 70, 40, 45, 60, 50, 39, 70, 78, 75, 90, 93],
+                                                            data: [40, 50, 40, 30, 28, 35, 45, 56, 40, 43, 60, 40, 50, 50, 59, 40, 43, 56, 50, 48],
                                                             borderColor: "blue",
                                                             lineTension: 0,
                                                             fill: false

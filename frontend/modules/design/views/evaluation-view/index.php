@@ -31,21 +31,262 @@ $this->title = 'view in details';
                             </thead>
                         </table>
                     </div>
-                    <div class="col-12">
-                        <div class="alert alert-light">
-                            <table class="table table-outline-dark">
-                                <thead>
-                                    <tr>
-                                        <th scope="col"></th>
-                                        <th scope="col">50</th>
-                                        <th scope="col">B</th>
-                                        <th scope="col">40</th>
-                                        <th scope="col">50</th>
-                                        <th scope="col">50</th>
-                                        <th scope="col">50</th>
-                                    </tr>
-                                </thead>
-                            </table>
+
+                    <div class="accordion" id="JAZAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button type="button" class="accordion-button collapsed bg-white text-dark" data-bs-toggle="collapse" data-bs-target="#collapseItemOne"> 2022</button>
+                            </h2>
+                            <div id="collapseItemOne" class="accordion-collapse collapse show" data-bs-parent="#JAZAccordion">
+                                <div class="card-body">
+                                    <table class="table table-outline-dark">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th scope="col">50</th>
+                                                <th scope="col"><span class="badge bg-info text-dark">B</span> </th>
+                                                <th scope="col">40</th>
+                                                <th scope="col">50</th>
+                                                <th scope="col">50</th>
+                                                <th scope="col">50</th>
+                                            </tr>
+                                            <tr>
+                                                <th></th>
+                                                <th scope="col">65</th>
+                                                <th scope="col"><span class="badge bg-success text-white">A</span> </th>
+                                                <th scope="col">65</th>
+                                                <th scope="col">65</th>
+                                                <th scope="col">65</th>
+                                                <th scope="col">65</th>
+                                            </tr>
+                                            <tr>
+                                                <th></th>
+                                                <th scope="col">89</th>
+                                                <th scope="col"><span class="badge bg-warning text-dark">C</span> </th>
+                                                <th scope="col">89</th>
+                                                <th scope="col">72</th>
+                                                <th scope="col">89</th>
+                                                <th scope="col">89</th>
+                                            </tr>
+                                            <tr>
+                                                <th></th>
+                                                <th scope="col">45</th>
+                                                <th scope="col"><span class="badge bg-secondary text-white">D</span> </th>
+                                                <th scope="col">45</th>
+                                                <th scope="col">45</th>
+                                                <th scope="col">45</th>
+                                                <th scope="col">45</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion mt-20" id="JAZAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button type="button" class="accordion-button bg-white text-dark" data-bs-toggle="collapse" data-bs-target="#collapseItemTwo"> 2023</button>
+                            </h2>
+                            <div id="collapseItemTwo" class="accordion-collapse collapse" data-bs-parent="#JAZAccordion">
+                                <div class="card-body">
+                                    <table class="table table-outline-dark">
+                                        <thead>
+                                            <tr>
+                                                <th> </th>
+                                                <th scope="col">50</th>
+                                                <th scope="col"><span class="badge bg-info text-dark">B</span> </th>
+                                                <th scope="col">40</th>
+                                                <th scope="col">50</th>
+                                                <th scope="col">50</th>
+                                                <th scope="col">50</th>
+                                            </tr>
+                                            <tr>
+                                                <th></th>
+                                                <th scope="col">65</th>
+                                                <th scope="col"><span class="badge bg-success text-white">A</span> </th>
+                                                <th scope="col">65</th>
+                                                <th scope="col">65</th>
+                                                <th scope="col">65</th>
+                                                <th scope="col">65</th>
+                                            </tr>
+                                            <tr>
+                                                <th></th>
+                                                <th scope="col">89</th>
+                                                <th scope="col"><span class="badge bg-warning text-dark">C</span> </th>
+                                                <th scope="col">89</th>
+                                                <th scope="col">72</th>
+                                                <th scope="col">89</th>
+                                                <th scope="col">89</th>
+                                            </tr>
+                                            <tr>
+                                                <th></th>
+                                                <th scope="col">45</th>
+                                                <th scope="col"><span class="badge bg-secondary text-white">D</span> </th>
+                                                <th scope="col">45</th>
+                                                <th scope="col">45</th>
+                                                <th scope="col">45</th>
+                                                <th scope="col">45</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion mt-20" id="JAZAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button type="button" class="accordion-button collapsed bg-white text-dark" data-bs-toggle="collapse" data-bs-target="#collapseItemThree"> 2024</button>
+                            </h2>
+                            <div id="collapseItemThree" class="accordion-collapse collapse" data-bs-parent="#JAZAccordion">
+                                <div class="card-body">
+                                    <table class="table table-outline-dark">
+                                        <thead>
+                                            <tr>
+                                                <th> </th>
+                                                <th scope="col">50</th>
+                                                <th scope="col"><span class="badge bg-info text-dark">B</span> </th>
+                                                <th scope="col">40</th>
+                                                <th scope="col">50</th>
+                                                <th scope="col">50</th>
+                                                <th scope="col">50</th>
+                                            </tr>
+                                            <tr>
+                                                <th></th>
+                                                <th scope="col">65</th>
+                                                <th scope="col"><span class="badge bg-success text-white">A</span> </th>
+                                                <th scope="col">65</th>
+                                                <th scope="col">65</th>
+                                                <th scope="col">65</th>
+                                                <th scope="col">65</th>
+                                            </tr>
+                                            <tr>
+                                                <th></th>
+                                                <th scope="col">89</th>
+                                                <th scope="col"><span class="badge bg-warning text-dark">C</span> </th>
+                                                <th scope="col">89</th>
+                                                <th scope="col">72</th>
+                                                <th scope="col">89</th>
+                                                <th scope="col">89</th>
+                                            </tr>
+                                            <tr>
+                                                <th></th>
+                                                <th scope="col">45</th>
+                                                <th scope="col"><span class="badge bg-secondary text-white">D</span> </th>
+                                                <th scope="col">45</th>
+                                                <th scope="col">45</th>
+                                                <th scope="col">45</th>
+                                                <th scope="col">45</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion mt-20" id="JAZAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingfour">
+                                <button type="button" class="accordion-button collapsed bg-white text-dark" data-bs-toggle="collapse" data-bs-target="#collapseItemfour"> 2025</button>
+                            </h2>
+                            <div id="collapseItemfour" class="accordion-collapse collapse" data-bs-parent="#JAZAccordion">
+                                <div class="card-body">
+                                    <table class="table table-outline-dark">
+                                        <thead>
+                                            <tr>
+                                                <th> </th>
+                                                <th scope="col">50</th>
+                                                <th scope="col"><span class="badge bg-info text-dark">B</span> </th>
+                                                <th scope="col">40</th>
+                                                <th scope="col">50</th>
+                                                <th scope="col">50</th>
+                                                <th scope="col">50</th>
+                                            </tr>
+                                            <tr>
+                                                <th></th>
+                                                <th scope="col">65</th>
+                                                <th scope="col"><span class="badge bg-success text-white">A</span> </th>
+                                                <th scope="col">65</th>
+                                                <th scope="col">65</th>
+                                                <th scope="col">65</th>
+                                                <th scope="col">65</th>
+                                            </tr>
+                                            <tr>
+                                                <th></th>
+                                                <th scope="col">89</th>
+                                                <th scope="col"><span class="badge bg-warning text-dark">C</span> </th>
+                                                <th scope="col">89</th>
+                                                <th scope="col">72</th>
+                                                <th scope="col">89</th>
+                                                <th scope="col">89</th>
+                                            </tr>
+                                            <tr>
+                                                <th></th>
+                                                <th scope="col">45</th>
+                                                <th scope="col"><span class="badge bg-secondary text-white">D</span> </th>
+                                                <th scope="col">45</th>
+                                                <th scope="col">45</th>
+                                                <th scope="col">45</th>
+                                                <th scope="col">45</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion mt-20" id="JAZAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingfive">
+                                <button type="button" class="accordion-button collapsed bg-white text-dark" data-bs-toggle="collapse" data-bs-target="#collapseItemfive"> 2026</button>
+                            </h2>
+                            <div id="collapseItemfive" class="accordion-collapse collapse" data-bs-parent="#JAZAccordion">
+                                <div class="card-body">
+                                    <table class="table table-outline-dark">
+                                        <thead>
+                                            <tr>
+                                                <div scoped='col-21' col-20>team</div>
+                                                <th scope="col"></th>
+                                                <th scope="col">50</th>
+                                                <th scope="col"><span class="badge bg-info text-dark">B</span> </th>
+                                                <th scope="col">40</th>
+                                                <th scope="col">50</th>
+                                                <th scope="col">50</th>
+                                                <th scope="col">50</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="col"></th>
+                                                <th scope="col">65</th>
+                                                <th scope="col"><span class="badge bg-success text-white">A</span> </th>
+                                                <th scope="col">65</th>
+                                                <th scope="col">65</th>
+                                                <th scope="col">65</th>
+                                                <th scope="col">65</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="col"></th>
+                                                <th scope="col">89</th>
+                                                <th scope="col"><span class="badge bg-warning text-dark">C</span> </th>
+                                                <th scope="col">89</th>
+                                                <th scope="col">72</th>
+                                                <th scope="col">89</th>
+                                                <th scope="col">89</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="col"></th>
+                                                <th scope="col">45</th>
+                                                <th scope="col"><span class="badge bg-secondary text-white">D</span> </th>
+                                                <th scope="col">45</th>
+                                                <th scope="col">45</th>
+                                                <th scope="col">45</th>
+                                                <th scope="col">45</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -127,10 +368,9 @@ $this->title = 'view in details';
                             </div>
                         </div>
                         <div class="col-12 graph">
-
                             <div class="shadow p-3 bg-body rounded">
                                 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-                                <canvas id="myChart" style="width: 100%;max-width:900px;"></canvas>
+                                <canvas id="myChart" style="width: 100%;height:650px;"></canvas>
                                 <script>
                                     const xValues = ['1Q', '2Q', '3Q', '4Q', '1Q', '2Q', '3Q', '4Q', '1Q', '2Q', '3Q', '4Q', '1Q', '2Q', '3Q', '4Q', '1Q', '2Q', '3Q', '4Q'];
                                     const yValues = ['0', '20', '30', '40', '50', '60', '70', '80', '90', '100']
@@ -140,21 +380,22 @@ $this->title = 'view in details';
                                         data: {
                                             labels: xValues,
                                             datasets: [{
-                                                    data: [60, 70, 60, 80, 70, 59, 50, 60, 70, 80, 70, 80, 70, 60, 70, 59, 70, 50, 70, 48],
+                                                    data: [55, 60, 65, 65, 70, 65, 60, 70, 60, 70, 70, 70, 80, 70, 65, 70, 60, 75, 78, 80],
                                                     borderColor: "red",
                                                     lineTension: 0,
                                                     fill: false
 
 
                                                 }, {
-                                                    data: [70, 60, 75, 65, 80, 60, 90, 60, 75, 57, 95, 50, 40, 30, 60, 85, 60, 60, 60, 50],
+                                                    data: [70, 60, 75, 65, 80, 60, 90, 60, 75, 57, 95, 60, 40, 60, 55, 75, 60, 60, 60, 50],
                                                     borderColor: "orange",
                                                     lineTension: 0,
                                                     fill: false
 
+
                                                 },
                                                 {
-                                                    data: [50, 45, 70, 40, 60, 55, 65, 70, 60, 70, 40, 45, 60, 50, 39, 70, 78, 75, 90, 93],
+                                                    data: [40, 50, 40, 30, 28, 35, 45, 56, 40, 43, 60, 40, 50, 50, 59, 40, 43, 56, 50, 48],
                                                     borderColor: "blue",
                                                     lineTension: 0,
                                                     fill: false
