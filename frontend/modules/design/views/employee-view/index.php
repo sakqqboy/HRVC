@@ -394,9 +394,7 @@ $this->title = 'view';
                                     </div>
                                     <div class="col-lg-8 col-md-6 col-12 a-shadowbd">
                                         <div class="shadow p-3 bg-body rounded linechart0">
-                                            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
-                                            </script>
-
+                                            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"> </script>
                                             <canvas id="sampleChart" style="height: 200px;"></canvas>
                                             <div id="output"> </div>
                                             <script>
@@ -463,28 +461,26 @@ $this->title = 'view';
                                 <div class="col-lg-12 col-md-12 col-12 pl-20 pr-20">
                                     <div class="shadow p-3 bg-body rounded">
                                         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-                                        <canvas id="myChart" style="width: 100%;height:450px;"></canvas>
+                                        <canvas id="myChart" style="width: 100%;height:390px;"></canvas>
                                         <script>
-                                            const xValues = ['1Q', '2Q', '3Q', '4Q', '1Q', '2Q', '3Q', '4Q', '1Q', '2Q', '3Q', '4Q', '1Q', '2Q', '3Q', '4Q', '1Q', '2Q', '3Q', '4Q'];
-                                            const yValues = ['0', '20', '30', '40', '50', '60', '70', '80', '90', '100']
+                                            const xValue = ['1Q', '2Q', '3Q', '4Q', '1Q', '2Q', '3Q', '4Q', '1Q', '2Q', '3Q', '4Q', '1Q', '2Q', '3Q', '4Q', '1Q', '2Q', '3Q', '4Q'];
+                                            const yValue = ['0', '20', '30', '40', '50', '60', '70', '80', '90', '100']
 
                                             new Chart("myChart", {
                                                 type: "line",
                                                 data: {
-                                                    labels: xValues,
+                                                    labels: xValue,
                                                     datasets: [{
-                                                            data: [55, 60, 65, 65, 70, 65, 60, 70, 60, 70, 70, 70, 80, 70, 65, 70, 60, 75, 78, 80],
+                                                            data: [70, 60, 70, 60, 80, 70, 60, 50, 60, 70, 80, 70, 80, 70, 60, 70, 50, 70, 50, 55],
                                                             borderColor: "red",
                                                             lineTension: 0,
                                                             fill: false
 
-
                                                         }, {
-                                                            data: [70, 60, 75, 65, 80, 60, 90, 60, 75, 57, 95, 60, 40, 60, 55, 75, 60, 60, 60, 50],
+                                                            data: [60, 70, 60, 80, 70, 60, 50, 60, 70, 80, 70, 80, 70, 60, 70, 60, 70, 50, 70, 50],
                                                             borderColor: "orange",
                                                             lineTension: 0,
                                                             fill: false
-
 
                                                         },
                                                         {
