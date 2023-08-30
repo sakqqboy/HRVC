@@ -54,6 +54,7 @@ class AppAsset extends AssetBundle
         'css/form/checkbox.css',
         'css/home/view.css',
         'css/home/salary-view.css',
+        'css/home/evaluation-module.css',
 
     ];
     public $js = [

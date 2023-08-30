@@ -8,17 +8,17 @@ $this->title = 'view';
     </div>
     <div class="alert alert-goback">
         <div class="col-12">
-            <div class="alert alert-light mr-10 ml-10" style="border: none;">
+            <div class="alert alert-light pr-10 pl-10" style="border: none;">
                 <div class="row">
-                    <div class="col-lg-2 col-md-6 col-3">
+                    <div class="col-lg-2 col-md-4 col-3">
                         <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageView">
                     </div>
-                    <div class="col-lg-10 col-md-6 col-9">
+                    <div class="col-lg-10 col-md-8 col-9">
                         <div class="con-12 mt-30">
                             <span class="name-Tadawoki">Tadawoki Watanabe</span><span class="badge bg-success font-size-16 ml-10">Active</span>
                         </div>
                         <div class="row">
-                            <div class="col-lg-8 col-lg-6 col-12">
+                            <div class="col-lg-8 col-md-8 col-12">
                                 <div class="col-12 pt-10 Director-view">
                                     Director, Bangladesh
                                 </div>
@@ -28,7 +28,7 @@ $this->title = 'view';
                                     <span class="badge bg-secondary"> Permanent</span>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-6 col-12 text-end">
+                            <div class="col-lg-4 col-md-4 col-12 text-end">
                                 <div class="col-12 pt-10">
                                     Working Place
                                 </div>
@@ -37,19 +37,19 @@ $this->title = 'view';
                                 </div>
                             </div>
                         </div>
-                        <div class="row mt-30">
-                            <div class="col-lg-12 col-md-6 col-12 box-shareprofile">
+                        <div class="mt-30">
+                            <div class="col-lg-12 col-md-12 col-12 box-shareprofile">
                                 <div class="row">
-                                    <div class="col-4 font-size-14 share-pointer">
+                                    <div class="col-lg-4 col-md-4 col-4 font-size-14 share-pointer">
                                         <i class="fa fa-share-alt" aria-hidden="true"></i> Share Profile
                                     </div>
-                                    <div class="col-2 font-size-14 share-pointer">
+                                    <div class="col-lg-2 col-md-2 col-2 font-size-14 share-pointer">
                                         <i class="fa fa-print" aria-hidden="true"></i> Print
                                     </div>
-                                    <div class="col-4 font-size-14 share-pointer">
+                                    <div class="col-lg-4 col-md-3 col-3 font-size-14 share-pointer">
                                         <i class="fa fa-cloud-download" aria-hidden="true"></i> Download CV
                                     </div>
-                                    <div class="col-2 font-size-14 share-pointer">
+                                    <div class="col-lg-2 col-md-2 col-2 font-size-14 share-pointer">
                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@ $this->title = 'view';
             </div>
             <div class="row">
                 <div class="d-flex align-items-start">
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-7 crd-background">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-4 crd-background">
                         <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                             <div class="col-12 emplo-infor">
                                 Employee
@@ -83,7 +83,7 @@ $this->title = 'view';
                                         </div>
                                         <hr>
                                         <div class="row pl-20">
-                                            <div class="col-5 font-size-14">
+                                            <div class="col-5 font-size-14 personal-information-big">
                                                 <div class="col-12">
                                                     First Name
                                                 </div>
@@ -112,7 +112,7 @@ $this->title = 'view';
                                                     Address
                                                 </div>
                                             </div>
-                                            <div class="col-7 font-size-14">
+                                            <div class="col-7 font-size-14 personal-information-big">
                                                 <div class="col-12 view-font-bold">
                                                     Tadawoki
                                                 </div>
@@ -150,7 +150,7 @@ $this->title = 'view';
                                         </div>
                                         <hr>
                                         <div class="row">
-                                            <div class="col-6 font-size-14">
+                                            <div class="col-5 font-size-14 personal-information-big">
                                                 <div class="col-12">
                                                     Personal Email
                                                 </div>
@@ -167,7 +167,7 @@ $this->title = 'view';
                                                     Social Links
                                                 </div>
                                             </div>
-                                            <div class="col-6 font-size-14">
+                                            <div class="col-7 font-size-14 personal-information-big">
                                                 <div class="col-12 view-font-bold">
                                                     watanabetada@gmail.com <i class="fa fa-clipboard view-cursor" aria-hidden="true"></i>
                                                 </div>
@@ -196,7 +196,7 @@ $this->title = 'view';
                                 </div>
                                 <hr>
                                 <div class="row pl-20">
-                                    <div class="col-2 pt-10 font-size-14">
+                                    <div class="col-lg-2 col-md-6 col-6 pt-10 font-size-14">
                                         <div class="col-12">
                                             Company
                                         </div>
@@ -222,7 +222,7 @@ $this->title = 'view';
                                             Management
                                         </div>
                                     </div>
-                                    <div class="col-4 font-size-14">
+                                    <div class="col-lg-4 col-md-6 col-6 font-size-14">
                                         <div class="col-12 pt-10 view-font-bold">
                                             Tokyo Consulting Firm Limited
                                         </div>
@@ -248,7 +248,7 @@ $this->title = 'view';
                                             Leader
                                         </div>
                                     </div>
-                                    <div class="col-2 font-size-14">
+                                    <div class="col-lg-2 col-md-6 col-6 font-size-14">
                                         <div class="col-12 pt-10">
                                             Joining Date
                                         </div>
@@ -259,7 +259,7 @@ $this->title = 'view';
                                             Employee ID
                                         </div>
                                     </div>
-                                    <div class="col-3 font-size-14">
+                                    <div class="col-lg-3 col-md-6 col-6 font-size-14">
                                         <div class="col-12 pt-10 view-font-bold">
                                             08/02/2013
                                         </div>
@@ -275,35 +275,35 @@ $this->title = 'view';
                             <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-12">
-                                        <div class="col-12 pl-30 font-size-17 pt-60">
+                                        <div class="col-12 pl-20 font-size-17 pt-60">
                                             <i class="fa fa-briefcase" aria-hidden="true"></i> Attachments
                                         </div>
                                         <hr>
-                                        <div class="row pl-20">
-                                            <div class="col-lg-2 col-md-6 col-12 pt-20 pl-20">
+                                        <div class="row pl-10">
+                                            <div class="col-lg-2 col-md-3 col-3 pt-20 pl-20">
                                                 <img src="<?= Yii::$app->homeUrl ?>image/Doc-1.png" class="image-file-plus1">
                                             </div>
-                                            <div class="col-lg-6 col-md-6 col-12 pt-20">
+                                            <div class="col-lg-6 col-md-5 col-5 pt-20">
                                                 <strong class="text-dark"> Employee Agreement-DD.pdf</strong>
                                                 <div class="text-secondary font-size-14" style="width: 80px;">Size 5.21 MB </div>
                                                 <div class="text-secondary font-size-14">last Updated 08/14/2023</div>
                                             </div>
-                                            <div class="col-lg-4 col-md-6 col-12 pt-30">
+                                            <div class="col-lg-4 col-md-4 col-4 pt-30">
                                                 <button type="button" class="btn btn-outline-secondary font-size-12"><i class="fa fa-eye" aria-hidden="true"></i></button>
                                                 <button type="button" class="btn btn-outline-secondary font-size-12"><i class="fa fa-cloud-download" aria-hidden="true"></i></button>
                                             </div>
                                         </div>
                                         <hr>
-                                        <div class="row pl-20">
-                                            <div class="col-lg-2 col-md-6 col-12 pt-20 pl-20">
+                                        <div class="row pl-10">
+                                            <div class="col-lg-2 col-md-3 col-3 pt-20 pl-20">
                                                 <img src="<?= Yii::$app->homeUrl ?>image/Doc-2.png" class="image-file-plus1">
                                             </div>
-                                            <div class="col-lg-6 col-md-6 col-12 pt-20">
+                                            <div class="col-lg-6 col-md-5 col-5 pt-20">
                                                 <strong class="text-dark"> Employee Agreement-DD.pdf</strong>
                                                 <div class="text-secondary font-size-14" style="width: 80px;">Size 5.21 MB </div>
                                                 <div class="text-secondary font-size-14">last Updated 08/14/2023</div>
                                             </div>
-                                            <div class="col-lg-4 col-md-6 col-12 pt-30">
+                                            <div class="col-lg-4 col-md-4 col-4 pt-30">
                                                 <button type="button" class="btn btn-outline-secondary font-size-12"><i class="fa fa-eye" aria-hidden="true"></i></button>
                                                 <button type="button" class="btn btn-outline-secondary font-size-12"><i class="fa fa-cloud-download" aria-hidden="true"></i></button>
                                             </div>
@@ -319,10 +319,10 @@ $this->title = 'view';
                             </div>
                             <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
                                 <div class="row">
-                                    <div class="col-lg-9 col-md-6 col-12 detail-salary">
+                                    <div class="col-lg-9 col-md-6 col-6 detail-salary">
                                         <i class="fa fa-database" aria-hidden="true"></i> Salary & Allowance
                                     </div>
-                                    <div class="col-lg-3 col-md-6 col-12 in-details">
+                                    <div class="col-lg-3 col-md-6 col-6 in-details">
                                         VIEW IN DETAILS
                                     </div>
                                 </div>
@@ -393,7 +393,7 @@ $this->title = 'view';
                                         </div>
                                     </div>
                                     <div class="col-lg-8 col-md-6 col-12 a-shadowbd">
-                                        <div class="shadow p-3 bg-body rounded linechart0 mr-20">
+                                        <div class="shadow p-3 bg-body rounded linechart0 mr-10">
                                             <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"> </script>
                                             <canvas id="sampleChart" style="height: 200px;"></canvas>
                                             <div id="output"></div>
@@ -450,13 +450,13 @@ $this->title = 'view';
                             </div>
                             <div class="tab-pane fade" id="v-pills-details" role="tabpanel" aria-labelledby="v-pills-details-tab">
                                 <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-12 pl-30 e-valution font-size-17">
+                                    <div class="col-lg-6 col-md-4 col-4 pl-30 e-valution font-size-17">
                                         <i class="fa fa-tachometer" aria-hidden="true"></i> Evaluation
                                     </div>
-                                    <div class="col-lg-3 col-md-6 col-12 e-valution-view text-end">
-                                        <i class="fa fa-external-link-square" aria-hidden="true"></i> Evaluation Dashboard
+                                    <div class="col-lg-3 col-md-4 col-4 e-valution-view text-end">
+                                        <i class="fa fa-external-link" aria-hidden="true"></i> Evaluation Dashboard
                                     </div>
-                                    <div class="col-lg-3 col-md-6 col-12 e-valution-view">
+                                    <div class="col-lg-3 col-md-4 col-4 e-valution-view">
                                         Detailed Summary
                                     </div>
                                 </div>
