@@ -25,7 +25,7 @@
                                 </a>
                         </div>
                         <div class="col-12">
-                                <a href="<?= Yii::$app->homeUrl ?>site/kpi-summary" class="no-underline">
+                                <a href="<?= Yii::$app->homeUrl ?>setting/company/index" class="no-underline">
                                         <i class="fa fa-home pr-10 mt-20" aria-hidden="true"></i> Company Name
                                 </a>
                         </div>

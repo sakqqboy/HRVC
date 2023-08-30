@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\LoginForm;
+use Exception;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -72,6 +73,7 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        // throw new Exception('11111');
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }

@@ -39,7 +39,7 @@ class Path
 		if ($_SERVER['HTTP_HOST'] == "localhost") {
 			$url = 'http://localhost/HRVC/backend/web/';
 		} else {
-			$url = 'https://tcg-hrvc-api.com/';
+			$url = 'https://api.tcg-hrvc-system.com/';
 		}
 		return $url;
 	}

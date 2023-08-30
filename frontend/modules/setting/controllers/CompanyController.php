@@ -7,6 +7,7 @@ use common\models\ModelMaster;
 use Exception;
 use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\Company;
+use frontend\models\hrvc\Group;
 use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
@@ -23,7 +24,23 @@ class CompanyController extends Controller
 	 */
 	public function actionIndex()
 	{
-		return $this->render('index');
+		$group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
+		if (!isset($group) && !empty($group)) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
+		}
+		$groupId = $group["groupId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$companies = curl_exec($api);
+		$companies = json_decode($companies, true);
+		//throw new exception(print_r($companies, true));
+		curl_close($api);
+		return $this->render('index', [
+			"companies" => $companies,
+			"groupId" => $groupId
+		]);
 	}
 	public function actionCreate($hash)
 	{
@@ -244,5 +261,16 @@ class CompanyController extends Controller
 				return $this->redirect(Yii::$app->homeUrl . 'setting/company/company-view/' . ModelMaster::encodeParams(["companyId" => $companyId]));
 			}
 		}
+	}
+	public function actionDeleteCompany()
+	{
+		$company = Company::find()->where(["companyId" => $_POST["companyId"]])->one();
+		$company->status = 99;
+		$company->updateDateTime = new Expression('NOW()');
+		$res["status"] = false;
+		if ($company->save(false)) {
+			$res["status"] = true;
+		}
+		return json_encode($res);
 	}
 }
