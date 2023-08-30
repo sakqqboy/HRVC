@@ -63,9 +63,11 @@ return [
         ],
         'assetManager' => [
             'appendTimestamp' => true,
+            // 'linkAssets' => true,
             'bundles' => [],
             //            'forceCopy' => TRUE
         ],
+
 
     ],
     'params' => $params,

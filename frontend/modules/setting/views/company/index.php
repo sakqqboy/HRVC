@@ -36,20 +36,23 @@ $this->title = 'company';
 						$about = substr($company['about'], 0, $maxLength);
 				?>
 						<tr class="tr-font" id="company-<?= $company['companyId'] ?>">
-							<th><?= $i ?></th>
+							<td class="text-center"><?= $i ?></td>
 							<td><?= $company['groupName'] ?></td>
 							<td><img src="<?= Yii::$app->homeUrl ?>image/aa.png" class="width-aa"> <?= $company['companyName'] ?></td>
 							<td><img src="<?= Yii::$app->homeUrl ?><?= $company['flag'] ?>" class="bangladresh-hrvc"> <?= $company['city'] ?>, <?= $company['countryName'] ?></td>
 							<td><?= $company['industries'] ?></td>
 							<td>
 								<?= $about ?>
-								<a href="" class="not"> <span class="text-primary">See more</span></a>
+								<a href="<?= Yii::$app->homeUrl ?>setting/company/company-view/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>" class="not"> <span class="text-primary">See more</span></a>
 							</td>
-							<td>
+							<td class="text-center">
+								<a href="<?= Yii::$app->homeUrl ?>setting/company/company-view/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>" class="btn btn-outline-primary btn-sm Full-icon mt-10 mr-10">
+									<i class="fa fa-eye" aria-hidden="true"></i>
+								</a>
 								<a href="<?= Yii::$app->homeUrl ?>setting/company/update-company/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>" class="btn btn-outline-secondary btn-sm Full-icon mt-10 mr-10">
 									<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 								</a>
-								<a class="btn btn-outline-danger btn-sm Full-icon mt-10"><i class="fa fa-trash" aria-hidden="true"></i></a>
+								<a href="javascript:deleteCompany(<?= $company['companyId'] ?>)" class="btn btn-outline-danger btn-sm Full-icon mt-10"><i class="fa fa-trash" aria-hidden="true"></i></a>
 							</td>
 						</tr>
 				<?php

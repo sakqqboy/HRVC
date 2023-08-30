@@ -98,6 +98,7 @@ class GroupController extends Controller
     }
     public function actionGroupView($hash)
     {
+        clearstatcache();
         $param = ModelMaster::decodeParams($hash);
         $groupId = $param["groupId"];
         $api = curl_init();

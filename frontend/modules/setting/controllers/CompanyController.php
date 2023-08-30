@@ -262,6 +262,27 @@ class CompanyController extends Controller
 			}
 		}
 	}
+	public function actionCompanyBranch()
+	{
+		$companyId = $_POST["companyId"];
+		$text = "<option value=''>Select Branch</option>";
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
+		$branch = curl_exec($api);
+		$branch = json_decode($branch, true);
+		curl_close($api);
+		$res["status"] = false;
+		if (isset($branch) && count($branch) > 0) {
+			$res["status"] = true;
+			foreach ($branch as $b) :
+				$text .= "<option value='" . $b['branchId'] . "'>" . $b['branchName'] . "</option>";
+			endforeach;
+		}
+		$res["branchText"] = $text;
+		return json_encode($res);
+	}
 	public function actionDeleteCompany()
 	{
 		$company = Company::find()->where(["companyId" => $_POST["companyId"]])->one();

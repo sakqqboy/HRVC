@@ -52,53 +52,53 @@ $this->title = 'Department';
 				<div class="col-lg-3 col-md-6 col-12">
 					<div class="col-12">
 						<label class="form-label font-size-12 font-b"> Select Associate Company </label>
-						<!-- <select class="form-select" aria-label="Default select example">
-							<option selected>select Company</option>
-							<option value="1">Tokyo Consulting Firm Pvt. Ltd</option>
-							<option value="2">Tokyo Consulting Firm Pvt. Ltd</option>
-							<option value="3">Tokyo Consulting Firm Pvt. Ltd</option>
-						</select> -->
-						<div class="col-12 font-b">
-							<?= $company["companyName"] ?>
-							<input type="hidden" id="company" value="<?= $company['companyId'] ?>">
-						</div>
+						<?php
+						if ($companyId == null) {
+						?>
+							<select class="form-select form-control" id="company" onchange="javascript:companyBranch()">
+								<option value="">Select Company</option>
+								<?php
+								if (isset($companies) && count($companies) > 0) {
+									foreach ($companies as $c) : ?>
+										<option value="<?= $c['companyId'] ?>">
+											<?= $c['companyName'] ?>
+										</option>
+								<?php
+									endforeach;
+								}
+								?>
+							</select>
+						<?php
+						} else {
+						?>
+							<div class="col-12 font-b">
+								<?= $company["companyName"] ?>
+								<input type="hidden" id="company" value="<?= $company['companyId'] ?>">
+							</div>
+						<?php
+						}
+						?>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 col-12">
 					<div class="col-12">
 						<label class="form-label font-size-12 font-b"> Select Associate Branch</label>
-						<?php
-						if ($branchId == null) {
-							if (isset($branches) && count($branches) > 0) {
-						?>
-								<select class="form-select" id="branch">
-									<option value="">select Branch</option>
-									<?php
-									foreach ($branches as $b) : ?>
-										<option value="<?= $b['branchId'] ?>"><?= $b['branchName'] ?></option>
-									<?php
-									endforeach; ?>
-								</select>
+						<select class="form-select" id="branch">
+							<option value="">Select Branch</option>
 							<?php
-							} else { ?>
-								<div class="col-12 font-b">
-									<a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>" class="no-underline-black">
-										+ Create branch
-									</a>
-								</div>
+							if (isset($branches) && count($branches) > 0) {
+							?>
+
+								<?php
+								foreach ($branches as $b) : ?>
+									<option value="<?= $b['branchId'] ?>"><?= $b['branchName'] ?></option>
+								<?php
+								endforeach; ?>
+
 							<?php
 							}
-						} else { ?>
-							<span class="font-b">
-								<?= $branch["branchName"] ?>
-								<input type="hidden" id="branch" value="<?= $branch['branchId'] ?>">
-							</span>
-
-						<?php
-
-						}
-
-						?>
+							?>
+						</select>
 					</div>
 				</div>
 				<div class="col-lg-5 col-md-6 col-12">
@@ -109,7 +109,7 @@ $this->title = 'Department';
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-1 col-md-2 col-12 pt-30 text-end  pr-1">
+				<div class="col-lg-1 col-md-2 col-12 pt-30 text-end  pr-1 pl-0">
 					<a href="javascript:createDepartment()" class="btn btn-success" id="create-department">
 						<i class="fa fa-plus" aria-hidden="true"></i> Create</a>
 					<a class="btn btn-sm btn-warning font-size-12 mr-5 " id="update-department" style="display:none;">

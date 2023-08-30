@@ -10,6 +10,7 @@ use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Country;
 use frontend\models\hrvc\Department;
 use frontend\models\hrvc\DepartmentTitle;
+use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Title;
 use Yii;
 use yii\db\Expression;
@@ -18,30 +19,43 @@ use yii\web\Controller;
 /**
  * Default controller for the `setting` module
  */
+header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
+header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 class DepartmentController extends Controller
 {
     /**
      * Renders the index view for the module
      * @return string
      */
+
     public function actionIndex()
     {
         return $this->render('index');
     }
     public function actionCreate($hash)
     {
+
         $param = ModelMaster::decodeParams($hash);
-        $companyId = $param["companyId"];
 
         $branches = [];
         $branch = [];
+        $company = [];
+        $companies = [];
         $branchId = null;
         $titleList = [];
         $departments = [];
         $departmentList = [];
+        $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
+        if (!isset($group) && !empty($group)) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
+        }
         if (isset($param["branchId"])) {
             $branchId = $param["branchId"];
         }
+
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -59,20 +73,34 @@ class DepartmentController extends Controller
                 ];
             endforeach;
         }
+        if ($param["companyId"] != '') {
+            $companyId = $param["companyId"];
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
+            $company = curl_exec($api);
+            $company = json_decode($company, true);
+        } else {
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' .  $group["groupId"]);
+            $companies = curl_exec($api);
+            $companies = json_decode($companies, true);
+            $companyId = null;
+        }
         //throw new Exception(print_r($departmentList, true));
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
-        $company = curl_exec($api);
-        $company = json_decode($company, true);
+
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/title/title-list');
         $titleList = curl_exec($api);
         $titleList = json_decode($titleList, true);
 
-        if ($branchId == null) {
+        if ($companyId == null) {
+            $branches = [];
+        } else {
             curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
             $branches = curl_exec($api);
             $branches = json_decode($branches, true);
+        }
+
+        if ($branchId == null) {
         } else {
             curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-detail?id=' . $branchId);
             $branch = curl_exec($api);
@@ -84,7 +112,9 @@ class DepartmentController extends Controller
             "branches" => $branches,
             "branch" => $branch,
             "company" => $company,
+            "companies" => $companies,
             "branchId" => $branchId,
+            "companyId" => $companyId,
             "titleList" => $titleList
         ]);
     }
@@ -135,9 +165,28 @@ class DepartmentController extends Controller
             ->where(["departmentId" => $_POST["departmentId"] - 543])
             ->asArray()
             ->one();
+        $branch = Branch::find()->select('companyId')->where(["branchId" => $department["branchId"]])->one();
+
         $res["branchId"] = $department["branchId"];
         $res["departmentId"] = $department["departmentId"] + 543;
         $res["departmentName"] = $department["departmentName"];
+        $res["companyId"] = $branch["companyId"];
+        $text = "<option value=''>Select Branch</option>";
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $branch["companyId"]);
+        $branch = curl_exec($api);
+        $branch = json_decode($branch, true);
+        curl_close($api);
+        $res["status"] = false;
+        if (isset($branch) && count($branch) > 0) {
+            $res["status"] = true;
+            foreach ($branch as $b) :
+                $text .= "<option value='" . $b['branchId'] . "'>" . $b['branchName'] . "</option>";
+            endforeach;
+        }
+        $res["branchText"] = $text;
         return json_encode($res);
     }
     public function actionDeleteDepartment()

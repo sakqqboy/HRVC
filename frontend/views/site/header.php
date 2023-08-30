@@ -1,3 +1,7 @@
+<?php
+
+use common\models\ModelMaster;
+?>
 <div class="col-lg-12 header1" id="mySidebar">
         <div class="col-12">
                 <div class="col-12">
@@ -48,7 +52,7 @@
                                         </i> Branch </a>
                         </div>
                         <div class="col-12">
-                                <a href="<?= Yii::$app->homeUrl ?>site/kgi-summary" class="no-underline">
+                                <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" class="no-underline">
                                         <i class="fa fa-code-fork pr-10 mt-20" aria-hidden="true"></i> Department
                                 </a>
                         </div>

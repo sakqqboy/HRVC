@@ -50,6 +50,13 @@ return [
             'showScriptName' => false,
             'rules' => [],
         ],
+        'assetManager' => [
+            'appendTimestamp' => true,
+            //'linkAssets' => true,
+            'bundles' => [],
+            //            'forceCopy' => TRUE
+        ],
+
 
     ],
     'params' => $params,

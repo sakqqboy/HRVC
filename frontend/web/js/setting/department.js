@@ -57,6 +57,7 @@ function createDepartment() {
 
 function updateDepartment(departmentId) {
     var url = $url + 'setting/department/update-department';
+    $("#departmentId").val(departmentId);
     $.ajax({
         type: "POST",
         dataType: 'json',
@@ -66,8 +67,10 @@ function updateDepartment(departmentId) {
             $("#create-department").css("display", "none");
             $("#update-department").show();
             $("#reset-department").show();
+            $("#department").val(data.branchId);
+            $("#branch").html(data.branchText);
             $("#branch").val(data.branchId);
-            $("#departmentId").val(data.departmentId);
+            $("#company").val(data.companyId);
             $("#departmentName").val(data.departmentName);
         }
     });

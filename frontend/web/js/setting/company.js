@@ -25,3 +25,21 @@ function deleteCompany(companyId) {
         });
     }
 }
+
+function companyBranch() {
+    var companyId = $("#company").val();
+    //alert(companyId);
+    var url = $url + 'setting/company/company-branch';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { companyId: companyId },
+        success: function(data) {
+            if (data.status) {
+                $("#branch").html(data.branchText);
+            }
+
+        }
+    });
+}
