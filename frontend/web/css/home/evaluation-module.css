@@ -1,0 +1,30 @@
+.al-sky {
+    background-color: rgb(235, 241, 243);
+}
+
+.man-watanabe {
+    width: 100%;
+    padding-top: 40px;
+
+}
+
+.module-name {
+    padding-top: 40px;
+    font-weight: 700;
+    color: #000000;
+    font-size: 17px;
+}
+
+.DOB {
+    padding-top: 70px;
+    font-size: 13px;
+}
+
+.joined {
+    padding-top: 70px;
+    font-size: 13px;
+}
+
+.st-nd {
+    padding-top: 70px;
+}

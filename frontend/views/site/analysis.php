@@ -3,7 +3,7 @@
 $this->title = 'Analysis';
 ?>
 
-<div class="col-12" style="margin-top: 90px;">
+<div class="col-12 mt-90">
     <div class="col-lg-6 col-md-6 col-12">
         <img src="<?= Yii::$app->homeUrl ?>image/11.png" class="img-11">
     </div>
