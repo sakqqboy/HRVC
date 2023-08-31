@@ -156,3 +156,12 @@
     border-left: lightgray solid thin;
     font-size: 12px;
 }
+
+.cc-secondary {
+    background-color: rgb(244, 244, 244);
+    font-size: 12px;
+}
+
+.bold-goalbal {
+    font-weight: 600;
+}
