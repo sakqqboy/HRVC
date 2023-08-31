@@ -1,10 +1,10 @@
 .al-sky {
-    background-color: rgb(235, 241, 243);
+    background-color: rgb(238, 241, 242);
 }
 
 .man-watanabe {
     width: 100%;
-    padding-top: 40px;
+    padding-top: 10px;
 
 }
 
@@ -12,7 +12,7 @@
     padding-top: 40px;
     font-weight: 700;
     color: #000000;
-    font-size: 17px;
+    font-size: 20px;
 }
 
 .DOB {
@@ -27,4 +27,132 @@
 
 .st-nd {
     padding-top: 70px;
+}
+
+.al-secondary {
+    background-color: rgb(238, 241, 242);
+}
+
+.Elavuation-Summary {
+    font-weight: 500;
+    font-size: 13px;
+}
+
+.Salary1-Summary {
+    font-weight: 500;
+    font-size: 13px;
+}
+
+.total-score {
+    padding-left: 50px;
+    padding-top: 20px;
+    font-size: 13px;
+    color: #000000;
+}
+
+.number-65 {
+    font-size: 50px;
+    color: #000000;
+    padding-left: 50px;
+    font-weight: 500;
+}
+
+.total-score1 {
+    padding-top: 20px;
+    font-size: 13px;
+    color: #000000;
+}
+
+.number-65-1 {
+    font-size: 50px;
+    font-weight: 500;
+    color: #000000;
+}
+
+.number-bath {
+    padding-left: 20px;
+    font-weight: 500;
+    color: #000000;
+    font-size: 30px;
+}
+
+.show-modules-solid {
+    border-left: rgb(185, 184, 184) solid thin;
+}
+
+.Current-salary {
+    padding-left: 20px;
+    font-size: 13px;
+    color: #000000;
+    padding-top: 20px
+}
+
+.Current-salary1 {
+    font-size: 13px;
+    color: #000000;
+    padding-top: 20px
+}
+
+.number-bath1 {
+    font-weight: 500;
+    color: #000000;
+    font-size: 30px;
+}
+
+.salary-top {
+    font-weight: 500;
+    color: #000000;
+    font-size: 13px;
+    margin-top: -10px;
+}
+
+.currency {
+    margin-top: -40px;
+    font-size: 12px;
+}
+
+.flagthailand {
+    border-radius: 40px;
+    width: 10px;
+    height: 10px;
+}
+
+.img-flagthailand {
+    margin-top: -25px;
+}
+
+.amount {
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.salary-new {
+    font-weight: 700;
+    color: #000000;
+}
+
+.score-table1 {
+    font-weight: 700;
+    color: #000000;
+    font-size: 18px;
+}
+
+.score-table {
+    font-weight: 700;
+    color: #000000;
+    border: none;
+    text-align: center;
+}
+
+.number-eng {
+    font-weight: 700;
+    color: #000000;
+    border-right: lightgray solid thin;
+    text-align: center;
+    font-size: 12px;
+}
+
+.eng-solid {
+    border-left: lightgray solid thin;
+    font-size: 12px;
 }

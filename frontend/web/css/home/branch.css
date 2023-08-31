@@ -33,17 +33,21 @@
 }
 
 .bt-togg {
-    z-index: 0px;
+    z-index: 1;
+    position: relative;
 }
+
 
 @media(max-width: 992px) {
     .bt-right {
         text-align: center;
         padding-top: 10px;
     }
+
     .bt-togg {
         padding-top: 10px;
     }
+
     .branch-one {
         padding-left: 10px;
     }
@@ -53,6 +57,7 @@
     .bt-right {
         text-align: start;
     }
+
     .branch-one {
         padding-left: 10px;
     }
