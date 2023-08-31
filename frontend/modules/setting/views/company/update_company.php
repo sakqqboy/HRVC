@@ -225,7 +225,7 @@ $this->title = 'New Company';
 						</div>
 						<div class="row mt-20">
 							<div class="col-3">
-								<a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>" class="no-underline">
+								<a href="<?= Yii::$app->homeUrl ?>setting/employee/create" class="no-underline">
 									<div class="alert alert-secondary text-center col-12 pr-0 pl-0" role="alert" style="font-size: 13px;">
 										<div class="text-primary"> Employees</div>
 										<i class="fa fa-plus mt-10 plus-click0" aria-hidden="true"></i>
@@ -249,10 +249,12 @@ $this->title = 'New Company';
 								</a>
 							</div>
 							<div class="col-3">
-								<div class="alert alert-secondary text-center col-12 pr-0 pl-0" role="alert" style="font-size: 13px;">
-									<div class="text-primary employee-center"> Tearm</div>
-									<i class="fa fa-plus mt-10 plus-click0" aria-hidden="true"></i>
-								</div>
+								<a href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>" class="no-underline-black">
+									<div class="alert alert-secondary text-center col-12 pr-0 pl-0" role="alert" style="font-size: 13px;">
+										<div class="text-primary employee-center"> Tearm</div>
+										<i class="fa fa-plus mt-10 plus-click0" aria-hidden="true"></i>
+									</div>
+								</a>
 							</div>
 						</div>
 						<div class="col-12 text-end mt-10">

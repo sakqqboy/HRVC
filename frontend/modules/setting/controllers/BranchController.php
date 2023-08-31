@@ -6,6 +6,7 @@ use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
 use frontend\models\hrvc\Branch;
+use frontend\models\hrvc\Group;
 use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
@@ -13,6 +14,11 @@ use yii\web\Controller;
 /**
  * Default controller for the `setting` module
  */
+header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
+header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 class BranchController extends Controller
 {
     /**
@@ -27,32 +33,45 @@ class BranchController extends Controller
     {
         $param = ModelMaster::decodeParams($hash);
         $companyId = $param["companyId"];
+        $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
+        if (!isset($group) && !empty($group)) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
+        }
+        $company = [];
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
-        $company = curl_exec($api);
-        $company = json_decode($company, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $company["groupId"]);
+        if ($companyId != '') {
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
+            $company = curl_exec($api);
+            $company = json_decode($company, true);
+
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
+            $branchJson = curl_exec($api);
+            $branches = json_decode($branchJson, true);
+
+            // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/country-detail?id=' . $company["countryId"]);
+            // $resultCountryDetail = curl_exec($api);
+            // $companyCountry = json_decode($resultCountryDetail, true);
+        } else {
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch');
+            $branchJson = curl_exec($api);
+            $branches = json_decode($branchJson, true);
+        }
+        //  throw new Exception(print_r($companies, true));
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $group["groupId"]);
         $companyJson = curl_exec($api);
         $companyGroup = json_decode($companyJson, true);
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
-        $branchJson = curl_exec($api);
-        $branches = json_decode($branchJson, true);
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/country-detail?id=' . $company["countryId"]);
-        $resultCountryDetail = curl_exec($api);
-        $companyCountry = json_decode($resultCountryDetail, true);
-        // throw new Exception(print_r($companyCountry, true));
         curl_close($api);
 
         return $this->render('create', [
             "company" => $company,
             "companies" => $companyGroup,
             "branches" => $branches,
-            "country" => $companyCountry
+            // "country" => $companyCountry,
+            "companyId" => $companyId
         ]);
     }
     public function actionSaveCreateBranch()
@@ -116,6 +135,7 @@ class BranchController extends Controller
         $res["branchId"] = $branch["branchId"];
         $res["branchName"] = $branch["branchName"];
         $res["description"] = $branch["description"];
+        $res["companyId"] = $branch["companyId"];
 
         return json_encode($res);
     }

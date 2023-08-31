@@ -26,18 +26,28 @@ use yii\web\UploadedFile;
 /**
  * Default controller for the `setting` module
  */
+header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
+header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 class EmployeeController extends Controller
 {
     /**
      * Renders the index view for the module
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex($hash)
     {
+        $param = ModelMaster::decodeParams($hash);
+        $companyId = $param["companyId"];
+        if ($companyId == '') {
+            $companyId = null;
+        }
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/all-employee-detail');
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/all-employee-detail?companyId=' . $companyId);
         $employees = curl_exec($api);
         $employees = json_decode($employees, true);
         curl_close($api);

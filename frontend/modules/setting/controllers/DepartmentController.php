@@ -59,9 +59,31 @@ class DepartmentController extends Controller
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/all-department');
-        $departments = curl_exec($api);
-        $departments = json_decode($departments, true);
+
+
+        if ($param["companyId"] != '') {
+            $companyId = $param["companyId"];
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
+            $company = curl_exec($api);
+            $company = json_decode($company, true);
+
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/company-department?id=' . $companyId);
+            $departments = curl_exec($api);
+            $departments = json_decode($departments, true);
+            //throw new Exception(1);
+        } else {
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' .  $group["groupId"]);
+            $companies = curl_exec($api);
+            $companies = json_decode($companies, true);
+            $companyId = null;
+
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/all-department');
+            $departments = curl_exec($api);
+            $departments = json_decode($departments, true);
+            //throw new Exception(2);
+        }
+
+        //throw new Exception(print_r($departments, true));
         if (count($departments) > 0) {
             foreach ($departments as $department) :
                 $departmentList[$department["departmentId"]] = [
@@ -72,17 +94,6 @@ class DepartmentController extends Controller
                     "titleDepartments" => DepartmentTitle::departmentTitle($department["departmentId"])
                 ];
             endforeach;
-        }
-        if ($param["companyId"] != '') {
-            $companyId = $param["companyId"];
-            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
-            $company = curl_exec($api);
-            $company = json_decode($company, true);
-        } else {
-            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' .  $group["groupId"]);
-            $companies = curl_exec($api);
-            $companies = json_decode($companies, true);
-            $companyId = null;
         }
         //throw new Exception(print_r($departmentList, true));
 

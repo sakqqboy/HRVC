@@ -68,6 +68,7 @@ function updateBranch(branchId) {
             $("#branchId").val(branchId);
             $("#branchName").val(data.branchName);
             $("#description").val(data.description);
+            $("#company").val(data.companyId);
         }
     });
 }

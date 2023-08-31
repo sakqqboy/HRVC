@@ -133,21 +133,23 @@ $this->title = 'company profile';
 	<hr>
 	<div class="row">
 		<div class="col-lg-3 col-md-6 col-6">
-			<div class="alert alert-secondary-background" role="alert">
-				<div class="row">
-					<div class="col-4">
-						<i class="fa fa-users" aria-hidden="true" style="font-size: 32px;padding-top: 15px;"></i>
-					</div>
-					<div class="col-2">
-						<div class="col-12 text-primary">
-							Employees
+			<a href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>" class="no-underline-black">
+				<div class="alert alert-secondary-background" role="alert">
+					<div class="row">
+						<div class="col-4">
+							<i class="fa fa-users" aria-hidden="true" style="font-size: 32px;padding-top: 15px;"></i>
 						</div>
-						<div class="col-2 number-bold">
-							598
+						<div class="col-2">
+							<div class="col-12 text-primary">
+								Employees
+							</div>
+							<div class="col-2 number-bold">
+								<?= $totalEmployee ?>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</a>
 		</div>
 		<div class="col-lg-3 col-md-6 col-6">
 			<a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>" class="no-underline-black">
@@ -169,38 +171,42 @@ $this->title = 'company profile';
 			</a>
 		</div>
 		<div class="col-lg-3 col-md-6 col-6">
-			<div class="alert alert-secondary-background" role="alert">
-				<div class="row">
-					<div class="col-4">
-						<i class="fa fa-users" aria-hidden="true" style="font-size: 32px;padding-top: 15px;"></i>
-					</div>
-					<div class="col-2">
-						<div class="col-12 text-primary">
-							Departments
+			<a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>" class="no-underline-black">
+				<div class="alert alert-secondary-background" role="alert">
+					<div class="row">
+						<div class="col-4">
+							<i class="fa fa-users" aria-hidden="true" style="font-size: 32px;padding-top: 15px;"></i>
 						</div>
-						<div class="col-2 number-bold">
-							598
+						<div class="col-2">
+							<div class="col-12 text-primary">
+								Departments
+							</div>
+							<div class="col-2 number-bold">
+								<?= $totalDepartment ?>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</a>
 		</div>
 		<div class="col-lg-3 col-md-6 col-6">
-			<div class="alert alert-secondary-background" role="alert">
-				<div class="row">
-					<div class="col-4">
-						<i class="fa fa-users" aria-hidden="true" style="font-size: 32px;padding-top: 15px;"></i>
-					</div>
-					<div class="col-2">
-						<div class="col-12 text-primary">
-							Teams
+			<a href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>" class="no-underline-black">
+				<div class="alert alert-secondary-background" role="alert">
+					<div class="row">
+						<div class="col-4">
+							<i class="fa fa-users" aria-hidden="true" style="font-size: 32px;padding-top: 15px;"></i>
 						</div>
-						<div class="col-2 number-bold">
-							44
+						<div class="col-2">
+							<div class="col-12 text-primary">
+								Teams
+							</div>
+							<div class="col-2 number-bold">
+								<?= $totalTeam ?>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</a>
 		</div>
 	</div>
 </div>

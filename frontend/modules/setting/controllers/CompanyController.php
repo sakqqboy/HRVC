@@ -7,7 +7,10 @@ use common\models\ModelMaster;
 use Exception;
 use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\Company;
+use frontend\models\hrvc\Department;
+use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Group;
+use frontend\models\hrvc\Team;
 use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
@@ -16,6 +19,11 @@ use yii\web\UploadedFile;
 /**
  * Default controller for the `setting` module
  */
+header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
+header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 class CompanyController extends Controller
 {
 	/**
@@ -141,13 +149,34 @@ class CompanyController extends Controller
 		curl_close($apiCompany);
 		$company = json_decode($groupJson, true);
 
+		$totalDepartment = 0;
+		$totalTeam = 0;
 		$branch = Branch::find()->select('branchId')->where(["companyId" => $companyId, "status" => 1])->asArray()->all();
+		$employee = Employee::find()->select('employeeId')->where(["companyId" => $companyId])->all();
+		if (isset($branch) && count($branch) > 0) {
+			foreach ($branch as $b) :
+				$departments = Department::find()->select('departmentId')->where(["branchId" => $b["branchId"], "status" => 1])->asArray()->all();
+				if (count($departments) > 0) {
+					foreach ($departments as $dep) :
+						$teams = Team::find()->select('teamId')->where(["departmentId" => $dep["departmentId"], "status" => 1])->asArray()->all();
+						$totalTeam += count($teams);
+					endforeach;
+				}
+				$totalDepartment += count($departments);
+			endforeach;
+		}
+
+
 		$totalBranch = count($branch);
+		$totalEmployee = count($employee);
 
 
 		return $this->render('company_view', [
 			"company" => $company,
-			"totalBranch" => $totalBranch
+			"totalBranch" => $totalBranch,
+			"totalEmployee" => $totalEmployee,
+			"totalDepartment" => $totalDepartment,
+			"totalTeam" => $totalTeam
 		]);
 	}
 	public function actionUpdateCompany($hash)

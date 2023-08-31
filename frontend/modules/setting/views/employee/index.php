@@ -140,11 +140,15 @@ $this->title = 'Employee';
 									<div class="col-12 employee-view">
 										<a href="<?= Yii::$app->homeUrl ?>setting/employee/employee-profile/<?= ModelMaster::encodeParams(['employeeId' => $employee['employeeId']]) ?>" style="text-decoration: none;">
 											View Profile
+										</a>
 									</div>
 								</div>
 							</div>
-					<?php
+						<?php
 						endforeach;
+					} else { ?>
+						<div class="col-12 text-center font-b font-size-16"> Employee not found.</div>
+					<?php
 					}
 					?>
 				</div>

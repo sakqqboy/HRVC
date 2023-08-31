@@ -35,9 +35,29 @@ $this->title = 'Branch';
 				<div class="col-lg-3 col-md-6 col-12">
 					<div class="col-12">
 						<label class="form-label font-size-12 font-b">Company </label>
-						<div class="col-12 pt-10 font-b">
-							<input type="hidden" id="company" value="<?= $company['companyId'] ?>">
-							<?= $company['companyName'] ?>
+						<div class="col-12 font-b">
+							<?php
+							if (isset($companyId) && $companyId != '') {
+							?>
+								<input type="hidden" id="company" value="<?= $company['companyId'] ?>">
+								<?= $company['companyName'] ?>
+							<?php
+							} else { ?>
+								<select class="form-select" id="company">
+									<option value="">Select Company</option>
+									<?php
+									if (isset($companies) && count($companies) > 0) {
+										foreach ($companies as $c) : ?>
+											<option value="<?= $c['companyId'] ?>"><?= $c['companyName'] ?></option>
+									<?php
+										endforeach;
+									}
+									?>
+
+								</select>
+							<?php
+							}
+							?>
 						</div>
 
 					</div>
@@ -96,7 +116,7 @@ $this->title = 'Branch';
 									<div class="card-body">
 										<div class="row">
 											<div class="col-3">
-												<img src="<?= Yii::$app->homeUrl ?><?= $company["picture"] ?>" class="card-tcf">
+												<img src="<?= Yii::$app->homeUrl ?><?= $branch["picture"] ?>" class="card-tcf">
 											</div>
 											<div class="col-9">
 												<div class="row">
@@ -104,10 +124,10 @@ $this->title = 'Branch';
 														<?= $branch["branchName"] ?>
 													</div>
 													<div class="col-1 mt-5 text-start  pr-0 pl-4">
-														<img src="<?= Yii::$app->homeUrl ?><?= $country["flag"] ?>" class="card-round">
+														<img src="<?= Yii::$app->homeUrl ?><?= $branch["flag"] ?>" class="card-round">
 													</div>
 													<div class="col-11 font-size-12 mt-10">
-														<?= $company["city"] ?>, <?= $country["countryName"] ?>
+														<?= $branch["city"] ?>, <?= $branch["countryName"] ?>
 													</div>
 												</div>
 												<div class="row">

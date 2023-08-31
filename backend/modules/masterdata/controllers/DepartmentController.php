@@ -46,4 +46,18 @@ class DepartmentController extends Controller
 			->all();
 		return json_encode($department);
 	}
+	public function actionCompanyDepartment($id)
+	{
+		$department = [];
+		$department = Department::find()
+			->select('department.*')
+			->JOIN("LEFT JOIN", "branch b", "b.branchId=department.branchId")
+			->JOIN("LEFT JOIN", "company c", "c.companyId=b.companyId")
+			->where(["department.status" => 1, "c.companyId" => $id])
+			->asArray()
+			->orderBy('department.departmentName')
+			->all();
+		//throw  new Exception(print_r($department, true));
+		return json_encode($department);
+	}
 }

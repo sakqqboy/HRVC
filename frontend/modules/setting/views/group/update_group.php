@@ -208,7 +208,7 @@ $this->title = 'Update Group';
 						</div>
 						<div class="row">
 							<div class="col-4">
-								<a href="<?= Yii::$app->homeUrl ?>setting/company/create/<?= ModelMaster::encodeParams(['groupId' => $group['groupId']]) ?>" class="no-underline">
+								<a href="<?= Yii::$app->homeUrl ?>setting/company/index" class="no-underline">
 									<div class="alert alert-secondary text-center" role="alert">
 										<div class="text-primary"> Companies</div>
 										<i class="fa fa-plus mt-10" aria-hidden="true"></i>
@@ -216,7 +216,7 @@ $this->title = 'Update Group';
 								</a>
 							</div>
 							<div class="col-4">
-								<a href="<?= Yii::$app->homeUrl ?>setting/employee/create/<?= ModelMaster::encodeParams(['groupId' => $group['groupId']]) ?>" class="no-underline">
+								<a href="<?= Yii::$app->homeUrl ?>setting/employee/index/" class="no-underline">
 									<div class="alert alert-secondary text-center" role="alert">
 										<div class="text-primary"> Employees</div>
 										<i class="fa fa-plus mt-10" aria-hidden="true"></i>
@@ -224,7 +224,7 @@ $this->title = 'Update Group';
 								</a>
 							</div>
 							<div class="col-4">
-								<a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['groupId' => $group['groupId']]) ?>" class="no-underline">
+								<a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" class="no-underline">
 									<div class="alert alert-secondary text-center" role="alert">
 										<div class="text-primary"> Branches</div>
 										<i class="fa fa-plus mt-10" aria-hidden="true"></i>

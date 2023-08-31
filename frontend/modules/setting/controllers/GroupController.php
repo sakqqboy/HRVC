@@ -5,6 +5,8 @@ namespace frontend\modules\setting\controllers;
 use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
+use frontend\models\hrvc\Branch;
+use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Group;
 use Yii;
 use yii\db\Expression;
@@ -14,6 +16,11 @@ use yii\web\UploadedFile;
 /**
  * Default controller for the `setting` module
  */
+header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
+header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 class GroupController extends Controller
 {
     /**
@@ -98,7 +105,7 @@ class GroupController extends Controller
     }
     public function actionGroupView($hash)
     {
-        clearstatcache();
+
         $param = ModelMaster::decodeParams($hash);
         $groupId = $param["groupId"];
         $api = curl_init();
@@ -116,12 +123,14 @@ class GroupController extends Controller
         $companyJson = curl_exec($api);
         curl_close($api);
         $companyGroup = json_decode($companyJson, true);
-        //throw new exception(print_r($companyGroup, true));
-
+        $employees = Employee::find()->select('employeeId')->where(["status" => 1])->all();
+        $branches = Branch::find()->select('branchId')->where(["status" => 1])->all();
 
         return $this->render('group_view', [
             "group" => $group,
-            "companyGroup" => $companyGroup
+            "companyGroup" => $companyGroup,
+            "totalEmployees" => count($employees),
+            "totalBranches" => count($branches)
         ]);
     }
     public function actionUpdateGroup($hash)

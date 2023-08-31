@@ -125,12 +125,14 @@ $this->title = 'Group profile';
 								<i class="fa fa-users" aria-hidden="true" style="font-size: 25px;padding-top: 18px;"></i>
 							</div>
 							<div class="col-2">
-								<div class="col-12 text-primary">
-									Employees
-								</div>
-								<div class="col-2 number-bold">
-									598
-								</div>
+								<a href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" style="text-decoration: none;">
+									<div class="col-12 text-primary">
+										Employee
+									</div>
+									<div class="col-2 number-bold text-black">
+										<?= $totalEmployees ?>
+									</div>
+								</a>
 							</div>
 						</div>
 					</div>
@@ -142,12 +144,14 @@ $this->title = 'Group profile';
 								<i class="fa fa-users" aria-hidden="true" style="font-size: 25px;padding-top: 18px;"></i>
 							</div>
 							<div class="col-2">
-								<div class="col-12 text-primary">
-									Branch
-								</div>
-								<div class="col-2 number-bold">
-									44
-								</div>
+								<a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" style="text-decoration: none;">
+									<div class="col-12 text-primary">
+										Branch
+									</div>
+									<div class="col-2 number-bold text-black">
+										<?= $totalBranches ?>
+									</div>
+								</a>
 							</div>
 
 						</div>

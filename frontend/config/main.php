@@ -59,6 +59,8 @@ return [
                 'setting/department/create/<hash>' => 'setting/department/create',
                 'setting/employee/employee-profile/<hash>' => 'setting/employee/employee-profile',
                 'setting/employee/update/<hash>' => 'setting/employee/update',
+                'setting/employee/index/<hash>' => 'setting/employee/index',
+                'setting/team/create/<hash>' => 'setting/team/create',
             ],
         ],
         'assetManager' => [

@@ -17,6 +17,11 @@ use yii\web\Controller;
 /**
  * Default controller for the `setting` module
  */
+header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
+header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 class TeamController extends Controller
 {
     /**
@@ -27,16 +32,35 @@ class TeamController extends Controller
     {
         return $this->render('index');
     }
-    public function actionCreate()
+    public function actionCreate($hash)
     {
+        $param = ModelMaster::decodeParams($hash);
+        $companyId = $param["companyId"];
         $allTeams = [];
-
+        $companyName = '';
+        $branches = [];
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/all-teams-detail');
-        $allTeams = curl_exec($api);
-        $allTeams = json_decode($allTeams, true);
+
+        if ($companyId != '') {
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
+            $company = curl_exec($api);
+            $company = json_decode($company, true);
+            $companyName = $company["companyName"];
+
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
+            $branches = curl_exec($api);
+            $branches = json_decode($branches, true);
+
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/company-team?id=' . $companyId);
+            $allTeams = curl_exec($api);
+            $allTeams = json_decode($allTeams, true);
+        } else {
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/all-teams-detail');
+            $allTeams = curl_exec($api);
+            $allTeams = json_decode($allTeams, true);
+        }
 
         $groupId = Group::currentGroupId();
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
@@ -45,10 +69,12 @@ class TeamController extends Controller
 
         curl_close($api);
 
-
         return $this->render('create', [
             "companies" => $companies,
-            "allTeams" => $allTeams
+            "allTeams" => $allTeams,
+            "companyName" => $companyName,
+            "companyId" => $companyId,
+            "branches" => $branches
         ]);
     }
     public function actionCompanyBranch()

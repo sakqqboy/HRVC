@@ -65,25 +65,47 @@ $this->title = 'Team';
 				<div class="col-lg-3 col-md-6 col-12">
 					<div class="col-12">
 						<label class="form-label font-size-12 font-b"> Select Associate Company </label>
-						<select class="form-select Company-select" aria-label="Default select example" id="company-team" onchange="javascript:branchCompany()">
-							<option value="">Select Company</option>
-							<?php
-							if (isset($companies) && count($companies) > 0) {
-								foreach ($companies as $company) :
-							?>
-									<option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
-							<?php
-								endforeach;
-							}
-							?>
-						</select>
+						<?php
+						if ($companyId == '') {
+						?>
+							<select class="form-select Company-select" aria-label="Default select example" id="company-team" onchange="javascript:branchCompany()">
+								<option value="">Select Company</option>
+								<?php
+								if (isset($companies) && count($companies) > 0) {
+									foreach ($companies as $company) :
+								?>
+										<option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
+								<?php
+									endforeach;
+								}
+								?>
+							</select>
+						<?php
+						} else { ?>
+							<input type="hidden" id="company-team" value="<?= $companyId ?>">
+							<div class="col-12 font-size-14 font-b"><?= $companyName ?></div>
+						<?php
+						}
+						?>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 col-12">
 					<div class="col-12">
 						<label class="form-label font-size-12 font-b"> Select Associate Branch</label>
-						<select class="form-select Company-select" aria-label="Default select example" id="branch-team" disabled onchange="javascript:departmentBranch()">
+						<select class="form-select Company-select" aria-label="Default select example" id="branch-team" <?= $companyId != '' ? '' : 'disabled' ?> onchange="javascript:departmentBranch()">
+
 							<option value="">Select Branch</option>
+							<?php
+							if ($companyId != '') {
+								if (isset($branches) && count($branches) > 0) {
+									foreach ($branches as $b) : ?>
+										<option value="<?= $b['branchId'] ?>"><?= $b['branchName'] ?></option>
+							<?php
+
+									endforeach;
+								}
+							}
+							?>
 						</select>
 					</div>
 				</div>
@@ -190,8 +212,11 @@ $this->title = 'Team';
 									</div>
 								</div>
 							</div>
-					<?php
+						<?php
 						endforeach;
+					} else { ?>
+						<div class="col-12 text-center font-b font-size-16"> Team not found.</div>
+					<?php
 					}
 					?>
 				</div>
