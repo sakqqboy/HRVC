@@ -53,4 +53,9 @@ class Company extends \frontend\models\hrvc\master\CompanyMaster
             return '';
         }
     }
+    public static function totalEmployeeCompany($companyId)
+    {
+        $employees = Employee::find()->select('employeeId')->where(["companyId" => $companyId])->asArray()->all();
+        return count($employees);
+    }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use common\models\ModelMaster;
+use frontend\models\hrvc\Company;
 
 $this->title = 'Group profile';
 ?>
@@ -210,7 +211,7 @@ $this->title = 'Group profile';
 										?>
 									</div>
 									<i class="fa fa-map-marker FT mr-5" aria-hidden="true"></i><?= $company["city"] ?>, <?= $company["countryName"] ?>
-									<div class="numberemployees">100,560 Employees</div>
+									<div class="numberemployees"><?= Company::totalEmployeeCompany($company['companyId']) ?> Employees</div>
 								</div>
 							</div>
 						</a>
