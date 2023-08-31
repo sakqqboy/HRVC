@@ -30,7 +30,7 @@ $this->title = 'Title';
         <div class="col-lg-4 col-md-4 col-2 btt-filter0">
             <button type="button" class="btn btn-outline-primary"> <i class="fa fa-filter" aria-hidden="true"></i></button>
         </div>
-        <div class="col-lg-3 col-md-4 col-10">
+        <div class="col-lg-3 col-md-4 col-10 bt-togg">
             <div class="input-group">
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Company</button>
                 <ul class="dropdown-menu">
