@@ -1,5 +1,5 @@
 <?php
-$this->title = '';
+$this->title = 'module';
 ?>
 
 <div class="col-12 mt-90">

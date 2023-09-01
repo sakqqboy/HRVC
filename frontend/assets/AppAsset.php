@@ -55,6 +55,7 @@ class AppAsset extends AssetBundle
         'css/home/view.css',
         'css/home/salary-view.css',
         'css/home/evaluation-module.css',
+        'css/home/kfi.css',
 
     ];
     public $js = [

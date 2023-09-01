@@ -1,0 +1,136 @@
+.alert2-secondary2 {
+    background-color: rgb(249, 249, 249);
+}
+
+.alert-white-4 {
+    background-color: rgb(243, 243, 243);
+}
+
+.alert-light-4 {
+    background-color: rgb(249, 249, 249);
+}
+
+.key1 {
+    color: #000000;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.btn-light-3 {
+    background-color: rgb(231, 231, 231);
+    color: #000000;
+
+}
+
+.Flag-Turkey {
+    border-radius: 30px;
+    height: 35px;
+    width: 35px;
+}
+
+#progress1 {
+    display: flex;
+    justify-content: space-around;
+}
+
+.progress-item1 {
+    display: flex;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 0;
+    animation: .4s ease-out reverse;
+}
+
+.progress-item1::after {
+    content: attr(data-value);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100px;
+    margin: 10px;
+    border-radius: 50%;
+    background: white;
+    font-size: 12px;
+    text-align: center;
+}
+
+.on-cursor {
+    cursor: pointer;
+    font-size: 18px;
+}
+
+#transform-none {
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+#visible0 {
+    font-size: 12px;
+}
+
+.content-navitem {
+    margin-left: 40%;
+}
+
+.dropdown-menu {
+    --bs-dropdown-min-width: 0rem;
+}
+
+.nav-pills {
+    --bs-nav-pills-border-radius: var(--bs-border-radius);
+    --bs-nav-pills-link-active-color: #fff;
+    --bs-nav-pills-link-active-bg: #e1e1e1;
+}
+
+.new-light-4 a:hover {
+    background-color: rgb(37, 130, 224);
+    color: #fff;
+}
+
+@media(max-width: 992px) {
+    .pd-Performance {
+        padding-left: 10px;
+    }
+
+    .New-date {
+        padding-top: 20px;
+    }
+
+    .New-KFI {
+        padding-top: 20px;
+    }
+
+}
+
+
+
+@media (max-width: 768px) {
+    .tb-width5 {
+        width: 20rem;
+    }
+
+    .content-navitem {
+        margin-left: 70px;
+    }
+
+    .pd-Performance {
+        padding-left: 10px;
+    }
+
+    .New-KFI {
+        padding-top: 20px;
+    }
+
+    .New-date {
+        padding-top: 20px;
+    }
+
+    .key1 {
+        font-size: 16px;
+    }
+
+    .new-light-4 {
+        text-align: end;
+    }
+}
