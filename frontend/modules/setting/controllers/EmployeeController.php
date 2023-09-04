@@ -123,7 +123,7 @@ class EmployeeController extends Controller
             $employee->departmentId = $_POST["department"];
             $employee->teamId = $_POST["team"];
             $employee->titleId = $_POST["title"];
-            $employee->workingTime = $_POST["workTime"];
+            //$employee->workingTime = $_POST["workTime"];
             $employee->employeeConditionId = $_POST["condition"];
             $employee->spoken = $_POST["language"];
             $employee->socialLink = $_POST["socialLink"];
@@ -378,7 +378,7 @@ class EmployeeController extends Controller
             $employee->departmentId = $_POST["department"];
             $employee->teamId = $_POST["team"];
             $employee->titleId = $_POST["title"];
-            $employee->workingTime = $_POST["workTime"];
+            //$employee->workingTime = $_POST["workTime"];
             $employee->employeeConditionId = $_POST["condition"];
             $employee->spoken = $_POST["language"];
             $employee->socialLink = $_POST["socialLink"];

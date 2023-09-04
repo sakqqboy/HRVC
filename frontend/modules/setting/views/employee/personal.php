@@ -75,26 +75,30 @@ use common\models\ModelMaster;
 			<div class="col-5  mt-10">
 				Personal Email
 			</div>
-			<div class="col-7  mt-10 view-font-bold">
-				<?= $employee['email'] ?> <i class="fa fa-clipboard view-cursor" aria-hidden="true"></i>
+			<div class="col-7  mt-10 view-font-bold word-fit">
+				<?= $employee['email'] ?>
+				<i class="fa fa-clipboard view-cursor" aria-hidden="true" onclick="javascript:copyToClipboard('<?= $employee['email'] ?>')"></i>
 			</div>
 			<div class="col-5 mt-20">
 				Contact Number
 			</div>
 			<div class="col-7 mt-20 view-font-bold">
-				<?= $employee['telephoneNumber'] ?> <i class="fa fa-clipboard view-cursor" aria-hidden="true"></i>
+				<?= $employee['telephoneNumber'] ?>
+				<i class="fa fa-clipboard view-cursor" aria-hidden="true" onclick="javascript:copyToClipboard('<?= $employee['telephoneNumber'] ?>')"></i>
 			</div>
 			<div class="col-5 mt-20">
 				Emergency Contact Number
 			</div>
 			<div class="col-7 mt-20 view-font-bold">
-				<?= $employee['emergencyTel'] ?> <i class="fa fa-clipboard view-cursor" aria-hidden="true"></i>
+				<?= $employee['emergencyTel'] ?>
+				<i class="fa fa-clipboard view-cursor" aria-hidden="true" onclick="javascript:copyToClipboard('<?= $employee['emergencyTel'] ?>')"></i>
 			</div>
 			<div class="col-5 mt-20">
 				Company Mail
 			</div>
-			<div class="col-7 mt-20 view-font-bold1">
-				<?= $employee['companyEmail'] ?> <i class="fa fa-clipboard view-cursor" aria-hidden="true"></i>
+			<div class="col-7 mt-20 view-font-bold1 word-fit">
+				<?= $employee['companyEmail'] ?>
+				<i class="fa fa-clipboard view-cursor" aria-hidden="true" onclick="javascript:copyToClipboard('<?= $employee['companyEmail'] ?>')"></i>
 			</div>
 			<div class="col-5 mt-20">
 				Social Links

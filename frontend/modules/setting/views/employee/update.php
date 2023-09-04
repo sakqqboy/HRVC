@@ -241,21 +241,13 @@ $this->title = 'Update Employee';
 					?>
 				</select>
 			</div>
-			<div class="col-lg-3 col-md-6 col-12 mt-10">
+			<!-- <div class="col-lg-3 col-md-6 col-12 mt-10">
 				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Working Hours</label>
 				<select class="form-select font-size-14" name="workTime" required>
 					<option value="<?= $employee['workingTime'] ?>"><?= $employee['workingTime'] ?> hrs.</option>
-					<?php
-					$i = 1;
-					while ($i < 13) {
-					?>
-						<option value="<?= $i ?>"><?= $i ?> hr<?= $i == 1 ? '' : 's' ?>.</option>
-					<?php
-						$i++;
-					}
-					?>
+					
 				</select>
-			</div>
+			</div> -->
 			<div class="col-lg-3 col-md-6 col-12 mt-10">
 				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Employee Condition</label>
 				<select class="form-select font-size-14" name="condition" required>
@@ -328,12 +320,28 @@ $this->title = 'Update Employee';
 							<div class="col-lg-4 col-md-6 col-12 text-center pt-20">
 								<!-- <button type="button" class="btn btn-info text-white"> Upload</button> -->
 								<?php
-								if ($employee['resume'] != null) { ?>
-									<a href="<?= Yii::$app->homeUrl . $employee['resume'] ?>" target="_blank" style="text-decoration: none;">
-										<i class="fa fa-eye mr-5" aria-hidden="true"></i>View resume
-									</a>
+								if ($employee['resume'] != null) {
+									$type = explode('.', $employee['resume']);
+									if ($type[1] != 'pdf') { ?>
+										<a href="https://view.officeapps.live.com/op/embed.aspx?src=https://tcg-hrvc-system.com/<?= $employee['resume'] ?>" target="_blank" style="text-decoration: none;">
+											<i class="fa fa-eye mr-5" aria-hidden="true"></i>View resume
+										</a>
+									<?php
+									} else { ?>
+										<a href="<?= Yii::$app->homeUrl . $employee['resume'] ?>" target="_blank" style="text-decoration: none;">
+											<i class="fa fa-eye mr-5" aria-hidden="true"></i>View resume
+										</a>
+									<?php
+
+									}
+									?>
+
 								<?php
 
+								} else {
+								?>
+									<div class="col-12 mt-5 text-center font-size-12 font-b text-default">File not found</div>
+								<?php
 								}
 
 								?>
@@ -358,19 +366,34 @@ $this->title = 'Update Employee';
 							</div>
 							<div class="col-lg-4 col-md-6 col-12 text-center pt-8">
 								<!-- <a type="button" class="btn btn-outline-secondary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> -->
-								<a type="button" class="btn btn-outline-secondary mr-20"><i class="fa fa-eye" aria-hidden="true"></i></a>
+								<!-- <a type="button" class="btn btn-outline-secondary mr-20"><i class="fa fa-eye" aria-hidden="true"></i></a>
 
-								<a type="button" class="btn btn-outline-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+								<a type="button" class="btn btn-outline-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a> -->
 								<div class="col-12 mt-10">
 									<?php
-									if ($employee['employeeAgreement'] != null) { ?>
-										<a href="<?= Yii::$app->homeUrl . $employee['employeeAgreement'] ?>" target="_blank" style="text-decoration: none;">
-											<i class="fa fa-eye mr-5" aria-hidden="true"></i>View Agreement
-										</a>
+									if ($employee['employeeAgreement'] != null) {
+										$type = explode('.', $employee['employeeAgreement']);
+										if ($type[1] != 'pdf') { ?>
+											<a href="https://view.officeapps.live.com/op/embed.aspx?src=https://tcg-hrvc-system.com/<?= $employee['employeeAgreement'] ?>" target="_blank" style="text-decoration: none;">
+												<i class="fa fa-eye mr-5" aria-hidden="true"></i>View Agreement
+											</a>
+										<?php
+										} else { ?>
+											<a href="<?= Yii::$app->homeUrl . $employee['employeeAgreement'] ?>" target="_blank" style="text-decoration: none;">
+												<i class="fa fa-eye mr-5" aria-hidden="true"></i>View Agreement
+											</a>
+										<?php
+
+										}
+										?>
+
 									<?php
 
+									} else {
+									?>
+										<div class="col-12 mt-5 text-center font-size-12 font-b text-default">File not found</div>
+									<?php
 									}
-
 									?>
 								</div>
 							</div>

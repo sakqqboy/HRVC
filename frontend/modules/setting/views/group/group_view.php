@@ -97,24 +97,25 @@ $this->title = 'Group profile';
 				</div>
 				<div class="col-lg-7 col-md-6 col-12 name-head0 mt-10">
 					<span class="text-primary address-box0"> <?= $group["email"] ?></span>&nbsp;
-					<i class="fa fa-clipboard clipboard0 " aria-hidden="true"></i>
+					<i class="fa fa-clipboard clipboard0 " aria-hidden="true" onclick="javascript:copyToClipboard('<?= $group['email'] ?>')"></i>
 				</div>
 				<div class="col-lg-5 col-md-6 col-12 name-head mt-10">
 					Contact
 				</div>
 				<div class="col-lg-7 col-md-6 col-12 name-head0 mt-10">
-					<?= $group["contact"] ?>&nbsp;&nbsp;<i class="fa fa-clipboard clipboard0" aria-hidden="true"></i>
+					<?= $group["contact"] ?>&nbsp;&nbsp;
+					<i class="fa fa-clipboard clipboard0" aria-hidden="true" onclick="javascript:copyToClipboard('<?= $group['contact'] ?>')"></i>
 				</div>
 				<div class="col-lg-5 col-md-6 col-12 name-head mt-10">
 					Website
 				</div>
 				<div class="col-lg-7 col-md-6 col-12 name-head0 mt-10">
 					<span class="text-primary address-box0">
-						<a href="<?= $group['website'] ?>">
+						<a href="<?= $group['website'] ?>" target="_blank">
 							<?= $group["website"] ?>
 						</a>
 					</span>&nbsp;&nbsp;
-					<i class="fa fa-clipboard clipboard0" aria-hidden="true"></i>
+					<i class="fa fa-clipboard clipboard0" aria-hidden="true" onclick="javascript:copyToClipboard('<?= $group['website'] ?>')"></i>
 				</div>
 				<hr class="mt-20">
 			</div>

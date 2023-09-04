@@ -181,4 +181,9 @@ class BranchController extends Controller
         }
         return json_encode($res);
     }
+    public function actionSearchBranch()
+    {
+        $companyId = $_POST["companyId"];
+        return $this->redirect(Yii::$app->homeUrl . 'setting/branch/create/' . ModelMaster::encodeParams(["companyId" => $companyId]));
+    }
 }

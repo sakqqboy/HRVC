@@ -18,14 +18,32 @@ $this->title = 'Branch';
 		</div>
 		<div class="col-lg-3 col-md-3 col-7 bt-togg pt-10">
 			<div class="input-group">
-				<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Company</button>
+				<!-- <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Company</button>
 				<ul class="dropdown-menu">
 					<li><a class="dropdown-item" href="#">Action</a></li>
 					<li><a class="dropdown-item" href="#">Another action</a></li>
 					<li><a class="dropdown-item" href="#">Something else here</a></li>
 					<li><a class="dropdown-item" href="#">Separated link</a></li>
 				</ul>
-				<input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="Tokyo Consulting">
+				<input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="Tokyo Consulting"> -->
+				<select id="filter-branch" class="form-control font-size-18 text-black-50" onchange="javascript:filterBranchCompany()">
+					<?php
+					if (isset($company['companyName']) && $company['companyName'] != '') {
+					?>
+						<option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
+					<?php
+					}
+					?>
+					<option value="">Filter by Company</option>
+					<?php
+					if (isset($companies) && count($companies) > 0) {
+						foreach ($companies as $com) : ?>
+							<option value="<?= $com['companyId'] ?>"><?= $com['companyName'] ?></option>
+					<?php
+						endforeach;
+					}
+					?>
+				</select>
 			</div>
 		</div>
 	</div>
@@ -85,7 +103,7 @@ $this->title = 'Branch';
 				<div class="col-lg-4 col-md-6 col-12">
 					<div class="col-12">
 						<div class="mb-3">
-							<label for="exampleFormControlInput1" class="form-label font-size-12 font-b"> Concerned Industry</label>
+							<label for="exampleFormControlInput1" class="form-label font-size-12 font-b"> Concerned business</label>
 							<input type="text" class="form-control" id="description" placeholder="">
 						</div>
 					</div>

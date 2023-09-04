@@ -1,6 +1,8 @@
 <?php
 
 use common\models\ModelMaster;
+use frontend\models\hrvc\Employee;
+
 ?>
 <div class="col-12 mt-40 font-size-17 pl-10">
 	<i class="fa fa-briefcase  mr-10" aria-hidden="true"></i> Work information
@@ -67,7 +69,7 @@ use common\models\ModelMaster;
 				Service Years
 			</div>
 			<div class="col-7 font-b  mt-20">
-				10 Year 2 Months
+				<?= Employee::calculateDate($employee['joinDate']) ?>
 			</div>
 			<div class="col-5  mt-20">
 				Employee Number

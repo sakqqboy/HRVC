@@ -56,19 +56,19 @@ class TeamController extends Controller
             curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/company-team?id=' . $companyId);
             $allTeams = curl_exec($api);
             $allTeams = json_decode($allTeams, true);
+            //throw new Exception(1);
         } else {
             curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/all-teams-detail');
             $allTeams = curl_exec($api);
             $allTeams = json_decode($allTeams, true);
+            //throw new Exception(2);
         }
-
         $groupId = Group::currentGroupId();
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
         $companies = curl_exec($api);
         $companies = json_decode($companies, true);
 
         curl_close($api);
-
         return $this->render('create', [
             "companies" => $companies,
             "allTeams" => $allTeams,
