@@ -1,0 +1,41 @@
+.scrollbar-tab {
+    scrollbar-width: initial;
+    background-color: rgb(225, 225, 225);
+    height: 100%;
+    width: 100%;
+    margin-top: 20px;
+    padding-left: 10px;
+    overflow-y: scroll;
+    border-radius: 5px;
+}
+
+.cards-grid {
+    border: none;
+    margin-left: 20px;
+}
+
+.linechart-increase {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.image-is {
+    width: 15px;
+    height: 15px;
+    border-radius: 50px;
+}
+
+.ima-is {
+    font-size: 11px;
+}
+
+.ting-size {
+    color: black;
+    font-size: 11px;
+    padding-left: 10px;
+}
+
+.alert-deadline {
+    background-color: rgb(241, 241, 241);
+    border-radius: 5px;
+}
