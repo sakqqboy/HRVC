@@ -3238,3 +3238,8 @@
 .close-box {
     cursor: pointer;
 }
+
+.word-fit {
+    word-wrap: break-word;
+    ;
+}

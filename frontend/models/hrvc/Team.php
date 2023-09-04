@@ -42,4 +42,9 @@ class Team extends \frontend\models\hrvc\master\TeamMaster
             return '';
         }
     }
+    public static function  employeeInTeam($teamId)
+    {
+        $employee = Employee::find()->where(["teamId" => $teamId])->asArray()->all();
+        return count($employee);
+    }
 }

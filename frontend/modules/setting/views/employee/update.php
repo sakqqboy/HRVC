@@ -241,21 +241,13 @@ $this->title = 'Update Employee';
 					?>
 				</select>
 			</div>
-			<div class="col-lg-3 col-md-6 col-12 mt-10">
+			<!-- <div class="col-lg-3 col-md-6 col-12 mt-10">
 				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Working Hours</label>
 				<select class="form-select font-size-14" name="workTime" required>
 					<option value="<?= $employee['workingTime'] ?>"><?= $employee['workingTime'] ?> hrs.</option>
-					<?php
-					$i = 1;
-					while ($i < 13) {
-					?>
-						<option value="<?= $i ?>"><?= $i ?> hr<?= $i == 1 ? '' : 's' ?>.</option>
-					<?php
-						$i++;
-					}
-					?>
+					
 				</select>
-			</div>
+			</div> -->
 			<div class="col-lg-3 col-md-6 col-12 mt-10">
 				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Employee Condition</label>
 				<select class="form-select font-size-14" name="condition" required>

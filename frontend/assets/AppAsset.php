@@ -60,11 +60,13 @@ class AppAsset extends AssetBundle
     public $js = [
         'js/content.js',
         'js/index.js',
+        'js/share.js',
         'js/setting/branch.js',
         'js/setting/department.js',
         'js/setting/team.js',
         'js/setting/employee.js',
         'js/setting/company.js',
+
     ];
     public $depends = [
         'yii\web\YiiAsset',

@@ -111,3 +111,17 @@ $("#reset-branch").click(function(e) {
     $("#reset-branch").css("display", "none");
     $("#create-branch").show();
 });
+
+function filterBranchCompany() {
+    var companyId = $("#filter-branch").val();
+    var url = $url + 'setting/branch/search-branch';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { companyId: companyId },
+        success: function(data) {
+
+        }
+    });
+}

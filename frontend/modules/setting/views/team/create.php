@@ -1,5 +1,7 @@
 <?php
 
+use frontend\models\hrvc\Team;
+
 $this->title = 'Team';
 ?>
 
@@ -146,7 +148,7 @@ $this->title = 'Team';
 						</select>
 					</div>
 				</div> -->
-				<div class="col-lg-1 col-md-2 col-12 team-create0 mt-30 pr-0 pl-0 text-end">
+				<div class="col-lg-1 col-md-2 col-12 team-create0 mt-10 pr-0 pl-0 text-end">
 					<a href="javascript:saveCreateTeam()" class="btn btn-success" id="create-team"><i class="fa fa-plus" aria-hidden="true"></i> Create</a>
 					<a class="btn btn-sm btn-warning font-size-12 mr-5 " id="update-team" style="display:none;">
 						<i class="fa fa-check" aria-hidden="true"></i>
@@ -202,9 +204,10 @@ $this->title = 'Team';
 														Employees
 													</div>
 													<div class="col-4 text-end font-size-12 font-b">
-														<a href="" class="no-underline-black">
-															8
-														</a>
+														<!-- <a href="" class="no-underline-black"> -->
+														<?= Team::employeeInTeam($team['teamId']) ?>
+
+														<!-- </a> -->
 													</div>
 												</div>
 											</div>
