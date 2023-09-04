@@ -1,5 +1,5 @@
 <?php
-$this->title = '';
+$this->title = 'module';
 ?>
 
 <div class="col-12 mt-90">
@@ -297,18 +297,54 @@ $this->title = '';
             </div>
             <div class="alert al-secondary">
                 <div class="col-12">
-                    Competency <span class="badge rounded-pill bg-info text-dark">Info</span>
+                    <strong class="font-size-32 text-dark"> Competency</strong> <span class="badge rounded-pill bg-primary text-white font-size-14"> Weight 20%</span>
                 </div>
-                <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="col-12 text-primary">
+                    Long Term Perspactive Category
+                </div>
+                <div class="accordion mt-20" id="accordionExample">
                     <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingOne">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                Accordion Item #1
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                1. Calmness <span class="badge rounded-pill bg-primary text-white"> Category A</span>
                             </button>
                         </h2>
-                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                hgyjuukoiu
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-6 col-sm-4 col-4">
+                                        <div class="col-12 bold-goalbal">
+                                            Goal Settings (By Employee)
+                                        </div>
+                                        <div class="alert cc-secondary mt-20" style="border:none;">
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text, ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived.
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-4 col-4">
+                                        <div class="col-12 bold-goalbal">
+                                            Intermediate Review
+                                        </div>
+                                        <div class="alert cc-secondary mt-20" style="border:none;">
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text, ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived.
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-4 col-4">
+                                        <div class="col-12 bold-goalbal">
+                                            Self Review
+                                        </div>
+                                        <div class="alert cc-secondary mt-20" style="border:none;">
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text, ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived.
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-4 col-4">
+                                        <div class="col-12 bold-goalbal">
+                                            Evaluator Review
+                                        </div>
+                                        <div class="alert cc-secondary mt-20" style="border:none;">
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text, ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived.
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
