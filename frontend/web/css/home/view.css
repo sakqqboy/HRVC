@@ -16,6 +16,8 @@
     border-radius: 100%;
     background: #FFFFFF;
     border: 2px solid transparent; */
+    border-radius: 100%;
+    height: 100%
 }
 
 .share-pointer {
@@ -203,96 +205,76 @@
     width: 100%;
 }
 
-
 @media(max-width:992px) {
     .imageView {
         width: 100%;
     }
-
     .box-shareprofile {
         padding-top: 50px;
     }
-
     .image-file-plus1 {
         width: 40px;
     }
 }
-
 
 @media (max-width: 768px) {
     .imageView {
         width: 100%;
         padding-top: 20px;
     }
-
     .name-Tadawoki {
         font-size: 16px;
     }
-
     .box-shareprofile {
         padding-left: 0px;
     }
-
     .personal-information-big {
         font-size: 12px;
     }
-
     .bd {
         width: 20px;
     }
-
     .emplo-infor {
         font-size: 16px;
         line-height: 23px;
         margin-top: 20px;
     }
-
     .link-2 {
         font-size: 12px;
         margin-top: 20px;
         padding: 5px 8px 0 0px;
     }
-
     .link-2:hover {
         font-size: 12px;
     }
-
     .crd-background {
         height: 100%;
     }
-
     .alert-personal-information {
         height: 100%;
         width: 67%;
     }
-
     .show-in-solid {
         padding-left: 20px;
         border-left: none;
     }
-
     .form-pdf {
         padding-left: 30px;
     }
-
     .detail-salary {
         font-size: 13px;
     }
-
     .in-details {
         font-size: 11px;
     }
-
     .linechart0 {
         margin-left: 10px;
         margin-top: 10px;
         height: 200px;
     }
-
     .e-valution {
         font-size: 15px;
     }
-
     .alert-goback {
         margin-left: 10px;
     }

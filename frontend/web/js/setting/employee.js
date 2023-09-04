@@ -11,9 +11,19 @@ function showEmployeeView(content) {
 
 function showFile(index) {
     if (index == 1) {
-        $("#file2").css("display", "none");
+        if ($("#file1").length > 0) {
+            $("#file2").css("display", "none");
+            $("#file" + index).show();
+        } else {
+            alert("Employee resume did't upload yet.");
+        }
     } else {
-        $("#file1").css("display", "none");
+        if ($("#file2").length > 0) {
+            $("#file1").css("display", "none");
+            $("#file" + index).show();
+        } else {
+            alert("Employee agreement did't upload yet.");
+        }
     }
-    $("#file" + index).show();
+
 }
