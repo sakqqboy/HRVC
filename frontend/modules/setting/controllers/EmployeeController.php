@@ -167,7 +167,7 @@ class EmployeeController extends Controller
                 $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
                 $pathSave = $path . $fileName;
                 $fileAgreement->saveAs($pathSave);
-                $employee->employeeAgreement = 'files/resume/' . $fileName;
+                $employee->employeeAgreement = 'files/agreement/' . $fileName;
             }
             $employee->remark = $_POST["remark"];
             $employee->status = 1;
@@ -355,6 +355,7 @@ class EmployeeController extends Controller
     public function actionSaveUpdateEmployee()
     {
         if (isset($_POST["firstName"]) && trim($_POST["firstName"] != '')) {
+            //throw new exception(print_r(Yii::$app->request->post(), true));
             $employee = Employee::find()->where(["employeeId" => $_POST['eId']])->one();
             $oldPicture = $employee->picture;
             $oldResume = $employee->resume;
@@ -384,12 +385,13 @@ class EmployeeController extends Controller
             $employee->socialLink = $_POST["socialLink"];
             $pictureProfile = UploadedFile::getInstanceByName("picture");
             if (isset($pictureProfile) && !empty($pictureProfile)) {
+
                 $path = Path::getHost() . 'images/employee/profile/';
                 if (!file_exists($path)) {
                     mkdir($path, 0777, true);
                 }
                 $oldProfilePic = Path::getHost() . $oldPicture;
-                if (file_exists($oldProfilePic)) {
+                if (file_exists($oldProfilePic) && $oldProfilePic != '') {
                     unlink($oldProfilePic);
                 }
                 $file = $pictureProfile->name;
@@ -407,7 +409,7 @@ class EmployeeController extends Controller
                     mkdir($path, 0777, true);
                 }
                 $oldResu = Path::getHost() . $oldResume;
-                if (file_exists($oldResu)) {
+                if (file_exists($oldResu) && $oldResume != '') {
                     unlink($oldResu);
                 }
                 $file = $fileResume->name;
@@ -420,6 +422,7 @@ class EmployeeController extends Controller
             }
             $fileAgreement = UploadedFile::getInstanceByName("agreement");
             if (isset($fileAgreement) && !empty($fileAgreement)) {
+                //throw new exception("1111");
                 $path = Path::getHost() . 'files/agreement/';
                 if (!file_exists($path)) {
                     mkdir($path, 0777, true);
@@ -434,8 +437,9 @@ class EmployeeController extends Controller
                 $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
                 $pathSave = $path . $fileName;
                 $fileAgreement->saveAs($pathSave);
-                $employee->employeeAgreement = 'files/resume/' . $fileName;
+                $employee->employeeAgreement = 'files/agreement/' . $fileName;
             }
+
             $employee->remark = $_POST["remark"];
             $employee->status = 1;
             $employee->updateDateTime = new Expression('NOW()');
