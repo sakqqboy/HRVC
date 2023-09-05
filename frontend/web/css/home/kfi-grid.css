@@ -13,7 +13,7 @@
 
 .linechart-increase {
     font-weight: 500;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .image-is {
@@ -27,14 +27,13 @@
 }
 
 .ting-size {
-    font-weight: 500;
-    font-size: 11px;
-    padding-left: 10px;
+    color: #000000;
+    font-size: 10px;
 }
 
 .deadline-orange {
     color: rgb(244, 165, 17);
-    font-size: 11px;
+    font-size: 10px;
 }
 
 
@@ -51,6 +50,68 @@
     font-size: 10px;
     font-weight: 500;
 }
+
+.pro-load0 {
+    border-radius: 50px;
+    background: #2F80ED;
+    font-size: 11px;
+    width: 35px;
+    height: 35px;
+    margin-left: -9px;
+    margin-top: -6px;
+    padding-top: 12px;
+}
+
+.progress {
+    height: 20px;
+    background: #e9e9ea;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    overflow: visible;
+    position: relative;
+}
+
+.progress .progress-bar {
+    box-shadow: none;
+    border: none;
+    border-radius: 15px;
+    position: relative;
+    -webkit-animation: animate-positive 1s;
+    animation: animate-positive 1s;
+}
+
+.progress .progress-value {
+    width: 70px;
+    height: 35px;
+    line-height: 27px;
+    border-radius: 20px;
+    background: #fff;
+    font-size: 17px;
+    font-weight: 600;
+    position: absolute;
+    top: -12px;
+    right: 0;
+    z-index: 2;
+}
+
+.progress.blue:before {
+    border-radius: 20px;
+}
+
+
+@-webkit-keyframes animate-positive {
+    0% {
+        width: 0;
+    }
+}
+
+@keyframes animate-positive {
+    0% {
+        width: 0;
+    }
+}
+
+
 
 .padding-FEB {
     padding-top: 30px;
@@ -128,4 +189,11 @@
     font-size: 13px;
     color: rgb(36, 122, 220);
     cursor: pointer;
+}
+
+.pro-loadding {
+    background-color: rgb(189, 189, 189);
+    /* font-size: 11px; */
+    width: 50px;
+    height: 50px;
 }

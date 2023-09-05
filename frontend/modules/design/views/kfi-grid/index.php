@@ -164,1138 +164,911 @@ $this->title = 'KFI Grid View';
                             </div>
                         </div>
                         <div class="col-4 new-light-4">
-                            <ul class="nav nav-pills" id="pills-tab" role="tablist">
-                                <div class="btn-group" role="group" aria-label="Basic example">
-                                    <div class="nav-item" role="presentation">
-                                        <button class="nav-link  btn btn-outline-primary" id="pills-Sort-tab" data-bs-toggle="pill" data-bs-target="#pills-sort" type="button" role="tab" aria-controls="pills-Sort" aria-selected="true"><i class="fa fa-list-ul" aria-hidden="true"></i></button>
-                                    </div>
-                                    <div class="nav-item" role="presentation">
-                                        <button class="nav-link btn btn-outline-primary" id="pills-Compile-tab" data-bs-toggle="pill" data-bs-target="#pills-Compile" type="button" role="tab" aria-controls="pills-Compile" aria-selected="true"><i class="fa fa-th-large" aria-hidden="true"></i></button>
-                                    </div>
-                                </div>
-                            </ul>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-outline-primary font-size-13"><i class="fa fa-list-ul" aria-hidden="true"></i></button>
+                                <button type="button" class="btn btn-outline-primary font-size-13"><i class="fa fa-th-large" aria-hidden="true"></i></button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade show active" id="pills-Sort" role="tabpanel" aria-describedby="pills-Sort-tab">
-                    <div class="col-12 tb-5">
-                        <table class="table table-striped">
-                            <thead class="table-secondary">
-                                <tr class="transform-none">
-                                    <th>KFI Contents</th>
-                                    <th>Company Name</th>
-                                    <th>Branch</th>
-                                    <th>Quant Ratio</th>
-                                    <th>Target</th>
-                                    <th>Code</th>
-                                    <th>Result</th>
-                                    <th>Ratio</th>
-                                    <th>Unit</th>
-                                    <th>Month</th>
-                                    <th>Next Check</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody class="over">
-                                <tr>
-                                    <td>
-                                        <span class="badge bg-info text-white">PL</span> Total Sales
-
-                                    </td>
-                                    <td>Tokyo Consulting Firm Danışmanlık</td>
-                                    <td>
-                                        <img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey">
-                                        Izmir, Turkey
-                                    </td>
-                                    <td>Quantity</td>
-                                    <td>1,000,000</td>
-                                    <td>
-                                        < </td>
-                                    <td>৳902,566</td>
-                                    <td>
-                                        <div id="progress1">
-                                            <div data-num="35" class="progress-item1"></div>
-                                        </div>
-                                    </td>
-                                    <td>Month</td>
-                                    <td>August</td>
-                                    <td>May 31, 2023</td>
-                                    <td colspan="row">
-                                        <span> <i class="fa fa-comments-o on-cursor" aria-hidden="true"></i></span> &nbsp;
-                                        <span class="dropdown" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li><a class="dropdown-item" href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i> <strong class="red">*</strong></a> </li>
-                                            <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                            <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tbody class="over1">
-                                <tr class="font-size-12">
-                                    <td>
-                                        <span class="badge bg-info text-white">PL</span>
-                                        Subscribe Sales
-                                    </td>
-                                    <td>Tokyo Consulting Firm Pvt. Ltd.</td>
-                                    <td>
-                                        <img src="<?= Yii::$app->homeUrl ?>image/Flag-Brazil.png" class="Flag-Turkey">
-                                        São Paulo, Brazil
-                                    </td>
-                                    <td>Quantity</td>
-                                    <td>856,000</td>
-                                    <td>
-                                        > </td>
-                                    <td>৳902,566</td>
-                                    <td>
-                                        <div id="progress1">
-                                            <div data-num="75" class="progress-item1"></div>
-                                        </div>
-                                    </td>
-                                    <td>Month</td>
-                                    <td>December</td>
-                                    <td>May 31, 2023</td>
-                                    <td colspan="row">
-                                        <span> <i class="fa fa-comments-o on-cursor" aria-hidden="true"></i></span> &nbsp;
-                                        <span class="dropdown" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li><a class="dropdown-item" href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i> <strong class="red">*</strong></a> </li>
-                                            <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                            <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tbody class="over">
-                                <tr class="font-size-12">
-                                    <td>
-                                        <span class="badge bg-info text-white">PL</span>
-                                        Decrease Variable Expene
-                                    </td>
-                                    <td>Tokyo Consulting Firm PLC</td>
-                                    <td>
-                                        <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="Flag-Turkey">
-                                        Dhaka, Bangladesh
-                                    </td>
-                                    <td>Quantity</td>
-                                    <td>941,652</td>
-                                    <td>
-                                        = </td>
-                                    <td>৳902,566</td>
-                                    <td>
-                                        <div id="progress1">
-                                            <div data-num="100" class="progress-item1"></div>
-                                        </div>
-                                    </td>
-                                    <td>Month</td>
-                                    <td>August</td>
-                                    <td>May 31, 2023</td>
-                                    <td colspan="row">
-                                        <span> <i class="fa fa-comments-o on-cursor" aria-hidden="true"></i></span> &nbsp;
-                                        <span class="dropdown" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li><a class="dropdown-item" href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i> <strong class="red">*</strong></a> </li>
-                                            <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                            <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tbody class="over1">
-                                <tr class="font-size-12">
-                                    <td>
-                                        <span class="badge bg-info text-white">PL</span>
-                                        Operating Profit
-                                    </td>
-                                    <td>Tokyo Consulting Firm Pt.</td>
-                                    <td>
-                                        <img src="<?= Yii::$app->homeUrl ?>image/thai.jpg" class="Flag-Turkey">
-                                        Bangkok, Thailand
-                                    </td>
-                                    <td>Quantity</td>
-                                    <td>1,000,000</td>
-                                    <td>
-                                        < </td>
-                                    <td>৳902,566</td>
-                                    <td>
-                                        <div id="progress1">
-                                            <div data-num="25" class="progress-item1"></div>
-                                        </div>
-                                    </td>
-                                    <td>Month</td>
-                                    <td>September</td>
-                                    <td>May 31, 2023</td>
-                                    <td colspan="row">
-                                        <span> <i class="fa fa-comments-o on-cursor" aria-hidden="true"></i></span> &nbsp;
-                                        <span class="dropdown" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li><a class="dropdown-item" href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i> <strong class="red">*</strong></a> </li>
-                                            <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                            <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tbody class="over">
-                                <tr class="font-size-12">
-                                    <td>
-                                        <span class="badge bg-info text-white">PL</span>
-                                        Decrease Variable Expene
-                                    </td>
-                                    <td>Tokyo Consulting Firm PLC</td>
-                                    <td>
-                                        <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="Flag-Turkey">
-                                        Dhaka, Bangladesh
-                                    </td>
-                                    <td>Quantity</td>
-                                    <td>941,652</td>
-                                    <td>
-                                        = </td>
-                                    <td>৳902,566</td>
-                                    <td>
-                                        <div id="progress1">
-                                            <div data-num="100" class="progress-item1"></div>
-                                        </div>
-                                    </td>
-                                    <td>Month</td>
-                                    <td>August</td>
-                                    <td>May 31, 2023</td>
-                                    <td colspan="row">
-                                        <span> <i class="fa fa-comments-o on-cursor" aria-hidden="true"></i></span> &nbsp;
-                                        <span class="dropdown" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li><a class="dropdown-item" href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i> <strong class="red">*</strong></a> </li>
-                                            <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                            <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tbody class="over1">
-                                <tr class="font-size-12">
-                                    <td>
-                                        <span class="badge bg-info text-white">PL</span>
-                                        Decrease Variable Expene
-                                    </td>
-                                    <td>Tokyo Consulting Firm PLC</td>
-                                    <td>
-                                        <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="Flag-Turkey">
-                                        Dhaka, Bangladesh
-                                    </td>
-                                    <td>Quantity</td>
-                                    <td>941,652</td>
-                                    <td>
-                                        = </td>
-                                    <td>৳902,566</td>
-                                    <td>
-                                        <div id="progress1">
-                                            <div data-num="100" class="progress-item1"></div>
-                                        </div>
-                                    </td>
-                                    <td>Month</td>
-                                    <td>August</td>
-                                    <td>May 31, 2023</td>
-                                    <td colspan="row">
-                                        <span> <i class="fa fa-comments-o on-cursor" aria-hidden="true"></i></span> &nbsp;
-                                        <span class="dropdown" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li><a class="dropdown-item" href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i> <strong class="red">*</strong></a> </li>
-                                            <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                            <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="pills-Compile" role="tabpanel" aria-labelledby="pills-Compile-tab">
-                    <div class="card example-4 scrollbar-ripe-malinka">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-6 col-sm-5 col-12 card alert-grid">
-                                <div class="row">
-                                    <div class="col-lg-5 col-md-6 col-6">
-                                        <div class="col-12 linechart-increase">
-                                            <i class="fa fa-line-chart" aria-hidden="true"></i> Increase Sales
-                                        </div>
-                                        <div class="col-12  ting-size">
-                                            Tokyo Consulting Firm Limited
-                                        </div>
-                                        <div class="col-12 ima-is">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-is"> Dhaka, Bangladesh
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-7 col-md-6 col-6">
-                                        <div class="row">
-                                            <div class="col-1">
-                                                <a href=""> <i class="fa fa-eye" aria-hidden="true"></i></a>
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-Financial" role="tabpanel" aria-labelledby="pills-Financial-tab">
+                        <div class="card example-4 scrollbar-ripe-malinka">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 col-sm-5 col-12 card alert-grid">
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-6 col-6">
+                                            <div class="col-12 linechart-increase">
+                                                <i class="fa fa-line-chart" aria-hidden="true"></i> Increase Sales
                                             </div>
-                                            <div class="col-1">
-                                                <a href=""> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                            <div class="col-12  ting-size">
+                                                Tokyo Consulting Firm Limited
                                             </div>
-                                            <div class="col-5">
-                                                <span class="badge rounded-pill bg-deadline0">
-                                                    <span class="deadline-orange"> Deadline</span> <span class="mon-dark">: Mon, Feb 12,2023</span>
-                                                </span>
+                                            <div class="col-12 ima-is">
+                                                <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-is"> Dhaka, Bangladesh
                                             </div>
                                         </div>
-                                        <div class="col-12 text-end pt-5">
-                                            <span class="badge rounded-pill bg-warning text-dark"> Completed</span>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-20">
-                                        <div class="col-lg-2 col-md-6 col-2">
-                                            <div class="col-12 padding-FEB">
-                                                FEB
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-6 col-3">
-                                            <div class="col-12 Quant-ratio">
-                                                Quant Ratio
-                                            </div>
-                                            <div class="col-12 diamond-con">
-                                                <i class="fa fa-diamond" aria-hidden="true"></i> Quality
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-3 col-md-6 col-3">
-                                            <div class="col-12 bullseye-con">
-                                                <i class="fa fa-bullseye" aria-hidden="true"></i> Target
-                                            </div>
-                                            <div class="col-12 million-number">
-                                                1,000,000
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-1 col-md-6 col-3">
-                                            <div class="col-12 padding-mark">
-                                                >
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 cl-md-6 col-3">
-                                            <div class="col-12 trophy-con">
-                                                <i class="fa fa-trophy" aria-hidden="true"></i> Result
-                                            </div>
-                                            <div class="col-12 million-number">
-                                                902,566
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-2 col-md-6 col-6"></div>
-                                            <div class="col-lg-4 col-md-6 col-6">
-                                                <div class="col-12 padding-update">
-                                                    Update Interval
+                                        <div class="col-lg-7 col-md-6 col-6">
+                                            <div class="row">
+                                                <div class="col-1">
+                                                    <a href=""> <i class="fa fa-eye" aria-hidden="true"></i></a>
                                                 </div>
-                                                <div class="col-12 update-mouth">
-                                                    Monthly
+                                                <div class="col-1">
+                                                    <a href=""> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                </div>
+                                                <div class="col-5">
+                                                    <span class="badge rounded-pill bg-deadline0">
+                                                        <span class="deadline-orange"> Deadline</span> <span class="mon-dark">: Mon, Feb 12,2023</span>
+                                                    </span>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6 col-md-6 col-6">
-                                                <div class="col-12">
-                                                    <div class="animated-progress progress-blue">
-                                                        <span data-progress="45"></span>
+                                            <div class="col-12 text-end pt-5">
+                                                <span class="badge rounded-pill bg-warning text-dark"> Completed</span>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-20">
+                                            <div class="col-lg-2 col-md-6 col-2">
+                                                <div class="col-12 padding-FEB">
+                                                    FEB
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-6 col-3">
+                                                <div class="col-12 Quant-ratio">
+                                                    Quant Ratio
+                                                </div>
+                                                <div class="col-12 diamond-con">
+                                                    <i class="fa fa-diamond" aria-hidden="true"></i> Quality
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-3 col-md-6 col-3">
+                                                <div class="col-12 bullseye-con">
+                                                    <i class="fa fa-bullseye" aria-hidden="true"></i> Target
+                                                </div>
+                                                <div class="col-12 million-number">
+                                                    1,000,000
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-1 col-md-6 col-3">
+                                                <div class="col-12 padding-mark">
+                                                    >
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 cl-md-6 col-3">
+                                                <div class="col-12 trophy-con">
+                                                    <i class="fa fa-trophy" aria-hidden="true"></i> Result
+                                                </div>
+                                                <div class="col-12 million-number">
+                                                    902,566
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-2 col-md-6 col-6"></div>
+                                                <div class="col-lg-4 col-md-6 col-6">
+                                                    <div class="col-12 padding-update">
+                                                        Update Interval
+                                                    </div>
+                                                    <div class="col-12 update-mouth">
+                                                        Monthly
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-6">
+                                                    <div class="col-12">
+                                                        <div class="progress">
+                                                            <div class="progress-bar" style="width:18%; background:#2F80ED;"></div>
+                                                            <span class="badge rounded-pill  pro-load0">18%</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-lg-4 text-end">
-                                                <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima">
-                                            </div>
-                                            <div class="col-lg-8 text-end">
-                                                <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-12">Tue,Mar 12,2023</strong>
-                                            </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-lg-4 text-end">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima">
+                                                </div>
+                                                <div class="col-lg-8 text-end">
+                                                    <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-12">Tue,Mar 12,2023</strong>
+                                                </div>
 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-5 col-12 card alert-grid">
-                                <div class="row">
-                                    <div class="col-lg-5 col-md-6 col-6">
-                                        <div class="col-12 linechart-increase">
-                                            <i class="fa fa-line-chart" aria-hidden="true"></i> Increase Sales
-                                        </div>
-                                        <div class="col-12  ting-size">
-                                            Tokyo Consulting Firm Limited
-                                        </div>
-                                        <div class="col-12 ima-is">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-is"> Dhaka, Bangladesh
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-7 col-md-6 col-6">
-                                        <div class="row">
-                                            <div class="col-1">
-                                                <a href=""> <i class="fa fa-eye" aria-hidden="true"></i></a>
-                                            </div>
-                                            <div class="col-1">
-                                                <a href=""> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                            </div>
-                                            <div class="col-5">
-                                                <span class="badge rounded-pill bg-deadline0">
-                                                    <span class="deadline-orange"> Deadline</span> <span class="mon-dark">: Mon, Feb 12,2023</span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 text-end pt-5">
-                                            <span class="badge rounded-pill bg-warning text-dark"> Completed</span>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-20">
-                                        <div class="col-lg-2 col-md-6 col-2">
-                                            <div class="col-12 padding-FEB">
-                                                FEB
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-6 col-3">
-                                            <div class="col-12 Quant-ratio">
-                                                Quant Ratio
-                                            </div>
-                                            <div class="col-12 diamond-con">
-                                                <i class="fa fa-diamond" aria-hidden="true"></i> Quality
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-3 col-md-6 col-3">
-                                            <div class="col-12 bullseye-con">
-                                                <i class="fa fa-bullseye" aria-hidden="true"></i> Target
-                                            </div>
-                                            <div class="col-12 million-number">
-                                                1,000,000
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-1 col-md-6 col-3">
-                                            <div class="col-12 padding-mark">
-                                                >
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 cl-md-6 col-3">
-                                            <div class="col-12 trophy-con">
-                                                <i class="fa fa-trophy" aria-hidden="true"></i> Result
-                                            </div>
-                                            <div class="col-12 million-number">
-                                                902,566
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-2 col-md-6 col-6"></div>
-                                            <div class="col-lg-4 col-md-6 col-6">
-                                                <div class="col-12 padding-update">
-                                                    Update Interval
-                                                </div>
-                                                <div class="col-12 update-mouth">
-                                                    Monthly
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-6">
-                                                <div class="col-12">
-                                                    <div class="animated-progress progress-blue">
-                                                        <span data-progress="45"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-lg-4 text-end">
-                                                <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima">
-                                            </div>
-                                            <div class="col-lg-8 text-end">
-                                                <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-12">Tue,Mar 12,2023</strong>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-5 col-12 card alert-grid">
-                                <div class="row">
-                                    <div class="col-lg-5 col-md-6 col-6">
-                                        <div class="col-12 linechart-increase">
-                                            <i class="fa fa-line-chart" aria-hidden="true"></i> Increase Sales
-                                        </div>
-                                        <div class="col-12  ting-size">
-                                            Tokyo Consulting Firm Limited
-                                        </div>
-                                        <div class="col-12 ima-is">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-is"> Dhaka, Bangladesh
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-7 col-md-6 col-6">
-                                        <div class="row">
-                                            <div class="col-1">
-                                                <a href=""> <i class="fa fa-eye" aria-hidden="true"></i></a>
-                                            </div>
-                                            <div class="col-1">
-                                                <a href=""> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                            </div>
-                                            <div class="col-5">
-                                                <span class="badge rounded-pill bg-deadline0">
-                                                    <span class="deadline-orange"> Deadline</span> <span class="mon-dark">: Mon, Feb 12,2023</span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 text-end pt-5">
-                                            <span class="badge rounded-pill bg-warning text-dark"> Completed</span>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-20">
-                                        <div class="col-lg-2 col-md-6 col-2">
-                                            <div class="col-12 padding-FEB">
-                                                FEB
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-6 col-3">
-                                            <div class="col-12 Quant-ratio">
-                                                Quant Ratio
-                                            </div>
-                                            <div class="col-12 diamond-con">
-                                                <i class="fa fa-diamond" aria-hidden="true"></i> Quality
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-3 col-md-6 col-3">
-                                            <div class="col-12 bullseye-con">
-                                                <i class="fa fa-bullseye" aria-hidden="true"></i> Target
-                                            </div>
-                                            <div class="col-12 million-number">
-                                                1,000,000
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-1 col-md-6 col-3">
-                                            <div class="col-12 padding-mark">
-                                                >
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 cl-md-6 col-3">
-                                            <div class="col-12 trophy-con">
-                                                <i class="fa fa-trophy" aria-hidden="true"></i> Result
-                                            </div>
-                                            <div class="col-12 million-number">
-                                                902,566
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-2 col-md-6 col-6"></div>
-                                            <div class="col-lg-4 col-md-6 col-6">
-                                                <div class="col-12 padding-update">
-                                                    Update Interval
-                                                </div>
-                                                <div class="col-12 update-mouth">
-                                                    Monthly
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-6">
-                                                <div class="col-12">
-                                                    <div class="animated-progress progress-blue">
-                                                        <span data-progress="45"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-lg-4 text-end">
-                                                <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima">
-                                            </div>
-                                            <div class="col-lg-8 text-end">
-                                                <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-12">Tue,Mar 12,2023</strong>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-5 col-12 card alert-grid">
-                                <div class="row">
-                                    <div class="col-lg-5 col-md-6 col-6">
-                                        <div class="col-12 linechart-increase">
-                                            <i class="fa fa-line-chart" aria-hidden="true"></i> Increase Sales
-                                        </div>
-                                        <div class="col-12  ting-size">
-                                            Tokyo Consulting Firm Limited
-                                        </div>
-                                        <div class="col-12 ima-is">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-is"> Dhaka, Bangladesh
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-7 col-md-6 col-6">
-                                        <div class="row">
-                                            <div class="col-1">
-                                                <a href=""> <i class="fa fa-eye" aria-hidden="true"></i></a>
+                                <div class="col-lg-4 col-md-6 col-sm-5 col-12 card alert-grid">
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-6 col-6">
+                                            <div class="col-12 linechart-increase">
+                                                <i class="fa fa-line-chart" aria-hidden="true"></i> Increase Sales
                                             </div>
-                                            <div class="col-1">
-                                                <a href=""> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                            <div class="col-12  ting-size">
+                                                Tokyo Consulting Firm Limited
                                             </div>
-                                            <div class="col-5">
-                                                <span class="badge rounded-pill bg-deadline0">
-                                                    <span class="deadline-orange"> Deadline</span> <span class="mon-dark">: Mon, Feb 12,2023</span>
-                                                </span>
+                                            <div class="col-12 ima-is">
+                                                <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-is"> Dhaka, Bangladesh
                                             </div>
                                         </div>
-                                        <div class="col-12 text-end pt-5">
-                                            <span class="badge rounded-pill bg-warning text-dark"> Completed</span>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-20">
-                                        <div class="col-lg-2 col-md-6 col-2">
-                                            <div class="col-12 padding-FEB">
-                                                FEB
+                                        <div class="col-lg-7 col-md-6 col-6">
+                                            <div class="row">
+                                                <div class="col-1">
+                                                    <a href=""> <i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                </div>
+                                                <div class="col-1">
+                                                    <a href=""> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                </div>
+                                                <div class="col-5">
+                                                    <span class="badge rounded-pill bg-deadline0">
+                                                        <span class="deadline-orange"> Deadline</span> <span class="mon-dark">: Mon, Feb 12,2023</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 text-end pt-5">
+                                                <span class="badge rounded-pill bg-success text-white"> In Progress</span>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-md-6 col-3">
-                                            <div class="col-12 Quant-ratio">
-                                                Quant Ratio
+                                        <div class="row mt-20">
+                                            <div class="col-lg-2 col-md-6 col-2">
+                                                <div class="col-12 padding-FEB">
+                                                    FEB
+                                                </div>
                                             </div>
-                                            <div class="col-12 diamond-con">
-                                                <i class="fa fa-diamond" aria-hidden="true"></i> Quality
+                                            <div class="col-lg-3 col-md-6 col-3">
+                                                <div class="col-12 Quant-ratio">
+                                                    Quant Ratio
+                                                </div>
+                                                <div class="col-12 diamond-con">
+                                                    <i class="fa fa-diamond" aria-hidden="true"></i> Quality
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="col-lg-3 col-md-6 col-3">
-                                            <div class="col-12 bullseye-con">
-                                                <i class="fa fa-bullseye" aria-hidden="true"></i> Target
-                                            </div>
-                                            <div class="col-12 million-number">
-                                                1,000,000
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-1 col-md-6 col-3">
-                                            <div class="col-12 padding-mark">
-                                                >
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 cl-md-6 col-3">
-                                            <div class="col-12 trophy-con">
-                                                <i class="fa fa-trophy" aria-hidden="true"></i> Result
-                                            </div>
-                                            <div class="col-12 million-number">
-                                                902,566
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-2 col-md-6 col-6"></div>
-                                            <div class="col-lg-4 col-md-6 col-6">
-                                                <div class="col-12 padding-update">
-                                                    Update Interval
+                                            <div class="col-lg-3 col-md-6 col-3">
+                                                <div class="col-12 bullseye-con">
+                                                    <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                                                 </div>
-                                                <div class="col-12 update-mouth">
-                                                    Monthly
+                                                <div class="col-12 million-number">
+                                                    1,000,000
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6 col-md-6 col-6">
-                                                <div class="col-12">
-                                                    <div class="animated-progress progress-blue">
-                                                        <span data-progress="45"></span>
+                                            <div class="col-lg-1 col-md-6 col-3">
+                                                <div class="col-12 padding-mark">
+                                                    >
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 cl-md-6 col-3">
+                                                <div class="col-12 trophy-con">
+                                                    <i class="fa fa-trophy" aria-hidden="true"></i> Result
+                                                </div>
+                                                <div class="col-12 million-number">
+                                                    902,566
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-2 col-md-6 col-6"></div>
+                                                <div class="col-lg-4 col-md-6 col-6">
+                                                    <div class="col-12 padding-update">
+                                                        Update Interval
+                                                    </div>
+                                                    <div class="col-12 update-mouth">
+                                                        Monthly
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-6">
+                                                    <div class="col-12">
+                                                        <div class="progress">
+                                                            <div class="progress-bar" style="width:25%; background:#2F80ED;"></div>
+                                                            <span class="badge rounded-pill  pro-load0">25%</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-lg-4 text-end">
-                                                <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima">
-                                            </div>
-                                            <div class="col-lg-8 text-end">
-                                                <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-12">Tue,Mar 12,2023</strong>
-                                            </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-lg-4 text-end">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima">
+                                                </div>
+                                                <div class="col-lg-8 text-end">
+                                                    <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-12">Tue,Mar 12,2023</strong>
+                                                </div>
 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-5 col-12 card alert-grid">
-                                <div class="row">
-                                    <div class="col-lg-5 col-md-6 col-6">
-                                        <div class="col-12 linechart-increase">
-                                            <i class="fa fa-line-chart" aria-hidden="true"></i> Increase Sales
-                                        </div>
-                                        <div class="col-12  ting-size">
-                                            Tokyo Consulting Firm Limited
-                                        </div>
-                                        <div class="col-12 ima-is">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-is"> Dhaka, Bangladesh
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-7 col-md-6 col-6">
-                                        <div class="row">
-                                            <div class="col-1">
-                                                <a href=""> <i class="fa fa-eye" aria-hidden="true"></i></a>
-                                            </div>
-                                            <div class="col-1">
-                                                <a href=""> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                            </div>
-                                            <div class="col-5">
-                                                <span class="badge rounded-pill bg-deadline0">
-                                                    <span class="deadline-orange"> Deadline</span> <span class="mon-dark">: Mon, Feb 12,2023</span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 text-end pt-5">
-                                            <span class="badge rounded-pill bg-warning text-dark"> Completed</span>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-20">
-                                        <div class="col-lg-2 col-md-6 col-2">
-                                            <div class="col-12 padding-FEB">
-                                                FEB
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-6 col-3">
-                                            <div class="col-12 Quant-ratio">
-                                                Quant Ratio
-                                            </div>
-                                            <div class="col-12 diamond-con">
-                                                <i class="fa fa-diamond" aria-hidden="true"></i> Quality
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-3 col-md-6 col-3">
-                                            <div class="col-12 bullseye-con">
-                                                <i class="fa fa-bullseye" aria-hidden="true"></i> Target
-                                            </div>
-                                            <div class="col-12 million-number">
-                                                1,000,000
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-1 col-md-6 col-3">
-                                            <div class="col-12 padding-mark">
-                                                >
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 cl-md-6 col-3">
-                                            <div class="col-12 trophy-con">
-                                                <i class="fa fa-trophy" aria-hidden="true"></i> Result
-                                            </div>
-                                            <div class="col-12 million-number">
-                                                902,566
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-2 col-md-6 col-6"></div>
-                                            <div class="col-lg-4 col-md-6 col-6">
-                                                <div class="col-12 padding-update">
-                                                    Update Interval
-                                                </div>
-                                                <div class="col-12 update-mouth">
-                                                    Monthly
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-6">
-                                                <div class="col-12">
-                                                    <div class="animated-progress progress-blue">
-                                                        <span data-progress="45"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-lg-4 text-end">
-                                                <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima">
-                                            </div>
-                                            <div class="col-lg-8 text-end">
-                                                <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-12">Tue,Mar 12,2023</strong>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-5 col-12 card alert-grid">
-                                <div class="row">
-                                    <div class="col-lg-5 col-md-6 col-6">
-                                        <div class="col-12 linechart-increase">
-                                            <i class="fa fa-line-chart" aria-hidden="true"></i> Increase Sales
-                                        </div>
-                                        <div class="col-12  ting-size">
-                                            Tokyo Consulting Firm Limited
-                                        </div>
-                                        <div class="col-12 ima-is">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-is"> Dhaka, Bangladesh
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-7 col-md-6 col-6">
-                                        <div class="row">
-                                            <div class="col-1">
-                                                <a href=""> <i class="fa fa-eye" aria-hidden="true"></i></a>
+                                <div class="col-lg-4 col-md-6 col-sm-5 col-12 card alert-grid">
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-6 col-6">
+                                            <div class="col-12 linechart-increase">
+                                                <i class="fa fa-line-chart" aria-hidden="true"></i> Increase Sales
                                             </div>
-                                            <div class="col-1">
-                                                <a href=""> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                            <div class="col-12  ting-size">
+                                                Tokyo Consulting Firm Limited
                                             </div>
-                                            <div class="col-5">
-                                                <span class="badge rounded-pill bg-deadline0">
-                                                    <span class="deadline-orange"> Deadline</span> <span class="mon-dark">: Mon, Feb 12,2023</span>
-                                                </span>
+                                            <div class="col-12 ima-is">
+                                                <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-is"> Dhaka, Bangladesh
                                             </div>
                                         </div>
-                                        <div class="col-12 text-end pt-5">
-                                            <span class="badge rounded-pill bg-warning text-dark"> Completed</span>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-20">
-                                        <div class="col-lg-2 col-md-6 col-2">
-                                            <div class="col-12 padding-FEB">
-                                                FEB
+                                        <div class="col-lg-7 col-md-6 col-6">
+                                            <div class="row">
+                                                <div class="col-1">
+                                                    <a href=""> <i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                </div>
+                                                <div class="col-1">
+                                                    <a href=""> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                </div>
+                                                <div class="col-5">
+                                                    <span class="badge rounded-pill bg-deadline0">
+                                                        <span class="deadline-orange"> Deadline</span> <span class="mon-dark">: Mon, Feb 12,2023</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 text-end pt-5">
+                                                <span class="badge rounded-pill bg-warning text-dark"> Completed</span>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-md-6 col-3">
-                                            <div class="col-12 Quant-ratio">
-                                                Quant Ratio
+                                        <div class="row mt-20">
+                                            <div class="col-lg-2 col-md-6 col-2">
+                                                <div class="col-12 padding-FEB">
+                                                    FEB
+                                                </div>
                                             </div>
-                                            <div class="col-12 diamond-con">
-                                                <i class="fa fa-diamond" aria-hidden="true"></i> Quality
+                                            <div class="col-lg-3 col-md-6 col-3">
+                                                <div class="col-12 Quant-ratio">
+                                                    Quant Ratio
+                                                </div>
+                                                <div class="col-12 diamond-con">
+                                                    <i class="fa fa-diamond" aria-hidden="true"></i> Quality
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="col-lg-3 col-md-6 col-3">
-                                            <div class="col-12 bullseye-con">
-                                                <i class="fa fa-bullseye" aria-hidden="true"></i> Target
-                                            </div>
-                                            <div class="col-12 million-number">
-                                                1,000,000
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-1 col-md-6 col-3">
-                                            <div class="col-12 padding-mark">
-                                                >
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 cl-md-6 col-3">
-                                            <div class="col-12 trophy-con">
-                                                <i class="fa fa-trophy" aria-hidden="true"></i> Result
-                                            </div>
-                                            <div class="col-12 million-number">
-                                                902,566
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-2 col-md-6 col-6"></div>
-                                            <div class="col-lg-4 col-md-6 col-6">
-                                                <div class="col-12 padding-update">
-                                                    Update Interval
+                                            <div class="col-lg-3 col-md-6 col-3">
+                                                <div class="col-12 bullseye-con">
+                                                    <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                                                 </div>
-                                                <div class="col-12 update-mouth">
-                                                    Monthly
+                                                <div class="col-12 million-number">
+                                                    1,000,000
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6 col-md-6 col-6">
-                                                <div class="col-12">
-                                                    <div class="animated-progress progress-blue">
-                                                        <span data-progress="45"></span>
+                                            <div class="col-lg-1 col-md-6 col-3">
+                                                <div class="col-12 padding-mark">
+                                                    >
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 cl-md-6 col-3">
+                                                <div class="col-12 trophy-con">
+                                                    <i class="fa fa-trophy" aria-hidden="true"></i> Result
+                                                </div>
+                                                <div class="col-12 million-number">
+                                                    902,566
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-2 col-md-6 col-6"></div>
+                                                <div class="col-lg-4 col-md-6 col-6">
+                                                    <div class="col-12 padding-update">
+                                                        Update Interval
+                                                    </div>
+                                                    <div class="col-12 update-mouth">
+                                                        Monthly
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-6">
+                                                    <div class="col-12">
+                                                        <div class="progress">
+                                                            <div class="progress-bar" style="width:18%; background:#2F80ED;"></div>
+                                                            <span class="badge rounded-pill  pro-load0">18%</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-lg-4 text-end">
-                                                <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima">
-                                            </div>
-                                            <div class="col-lg-8 text-end">
-                                                <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-12">Tue,Mar 12,2023</strong>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-lg-4 text-end">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima">
+                                                </div>
+                                                <div class="col-lg-8 text-end">
+                                                    <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-12">Tue,Mar 12,2023</strong>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-5 col-12 card alert-grid">
-                                <div class="row">
-                                    <div class="col-lg-5 col-md-6 col-6">
-                                        <div class="col-12 linechart-increase">
-                                            <i class="fa fa-line-chart" aria-hidden="true"></i> Increase Sales
-                                        </div>
-                                        <div class="col-12  ting-size">
-                                            Tokyo Consulting Firm Limited
-                                        </div>
-                                        <div class="col-12 ima-is">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-is"> Dhaka, Bangladesh
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-7 col-md-6 col-6">
-                                        <div class="row">
-                                            <div class="col-1">
-                                                <a href=""> <i class="fa fa-eye" aria-hidden="true"></i></a>
+                                <div class="col-lg-4 col-md-6 col-sm-5 col-12 card alert-grid">
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-6 col-6">
+                                            <div class="col-12 linechart-increase">
+                                                <i class="fa fa-line-chart" aria-hidden="true"></i> Increase Sales
                                             </div>
-                                            <div class="col-1">
-                                                <a href=""> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                            <div class="col-12  ting-size">
+                                                Tokyo Consulting Firm Limited
                                             </div>
-                                            <div class="col-5">
-                                                <span class="badge rounded-pill bg-deadline0">
-                                                    <span class="deadline-orange"> Deadline</span> <span class="mon-dark">: Mon, Feb 12,2023</span>
-                                                </span>
+                                            <div class="col-12 ima-is">
+                                                <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-is"> Dhaka, Bangladesh
                                             </div>
                                         </div>
-                                        <div class="col-12 text-end pt-5">
-                                            <span class="badge rounded-pill bg-warning text-dark"> Completed</span>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-20">
-                                        <div class="col-lg-2 col-md-6 col-2">
-                                            <div class="col-12 padding-FEB">
-                                                FEB
+                                        <div class="col-lg-7 col-md-6 col-6">
+                                            <div class="row">
+                                                <div class="col-1">
+                                                    <a href=""> <i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                </div>
+                                                <div class="col-1">
+                                                    <a href=""> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                </div>
+                                                <div class="col-5">
+                                                    <span class="badge rounded-pill bg-deadline0">
+                                                        <span class="deadline-orange"> Deadline</span> <span class="mon-dark">: Mon, Feb 12,2023</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 text-end pt-5">
+                                                <span class="badge rounded-pill bg-success text-white"> In Progress</span>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-md-6 col-3">
-                                            <div class="col-12 Quant-ratio">
-                                                Quant Ratio
+                                        <div class="row mt-20">
+                                            <div class="col-lg-2 col-md-6 col-2">
+                                                <div class="col-12 padding-FEB">
+                                                    FEB
+                                                </div>
                                             </div>
-                                            <div class="col-12 diamond-con">
-                                                <i class="fa fa-diamond" aria-hidden="true"></i> Quality
+                                            <div class="col-lg-3 col-md-6 col-3">
+                                                <div class="col-12 Quant-ratio">
+                                                    Quant Ratio
+                                                </div>
+                                                <div class="col-12 diamond-con">
+                                                    <i class="fa fa-diamond" aria-hidden="true"></i> Quality
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="col-lg-3 col-md-6 col-3">
-                                            <div class="col-12 bullseye-con">
-                                                <i class="fa fa-bullseye" aria-hidden="true"></i> Target
-                                            </div>
-                                            <div class="col-12 million-number">
-                                                1,000,000
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-1 col-md-6 col-3">
-                                            <div class="col-12 padding-mark">
-                                                >
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 cl-md-6 col-3">
-                                            <div class="col-12 trophy-con">
-                                                <i class="fa fa-trophy" aria-hidden="true"></i> Result
-                                            </div>
-                                            <div class="col-12 million-number">
-                                                902,566
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-2 col-md-6 col-6"></div>
-                                            <div class="col-lg-4 col-md-6 col-6">
-                                                <div class="col-12 padding-update">
-                                                    Update Interval
+                                            <div class="col-lg-3 col-md-6 col-3">
+                                                <div class="col-12 bullseye-con">
+                                                    <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                                                 </div>
-                                                <div class="col-12 update-mouth">
-                                                    Monthly
+                                                <div class="col-12 million-number">
+                                                    1,000,000
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6 col-md-6 col-6">
-                                                <div class="col-12">
-                                                    <div class="animated-progress progress-blue">
-                                                        <span data-progress="45"></span>
+                                            <div class="col-lg-1 col-md-6 col-3">
+                                                <div class="col-12 padding-mark">
+                                                    >
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 cl-md-6 col-3">
+                                                <div class="col-12 trophy-con">
+                                                    <i class="fa fa-trophy" aria-hidden="true"></i> Result
+                                                </div>
+                                                <div class="col-12 million-number">
+                                                    902,566
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-2 col-md-6 col-6"></div>
+                                                <div class="col-lg-4 col-md-6 col-6">
+                                                    <div class="col-12 padding-update">
+                                                        Update Interval
+                                                    </div>
+                                                    <div class="col-12 update-mouth">
+                                                        Monthly
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-6">
+                                                    <div class="col-12">
+                                                        <div class="progress">
+                                                            <div class="progress-bar" style="width:50%; background:#2F80ED;"></div>
+                                                            <span class="badge rounded-pill  pro-load0">50%</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-lg-4 text-end">
-                                                <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima">
-                                            </div>
-                                            <div class="col-lg-8 text-end">
-                                                <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-12">Tue,Mar 12,2023</strong>
-                                            </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-lg-4 text-end">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima">
+                                                </div>
+                                                <div class="col-lg-8 text-end">
+                                                    <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-12">Tue,Mar 12,2023</strong>
+                                                </div>
 
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-5 col-12 card alert-grid">
-                                <div class="row">
-                                    <div class="col-lg-5 col-md-6 col-6">
-                                        <div class="col-12 linechart-increase">
-                                            <i class="fa fa-line-chart" aria-hidden="true"></i> Increase Sales
-                                        </div>
-                                        <div class="col-12  ting-size">
-                                            Tokyo Consulting Firm Limited
-                                        </div>
-                                        <div class="col-12 ima-is">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-is"> Dhaka, Bangladesh
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-7 col-md-6 col-6">
-                                        <div class="row">
-                                            <div class="col-1">
-                                                <a href=""> <i class="fa fa-eye" aria-hidden="true"></i></a>
+                                <div class="col-lg-4 col-md-6 col-sm-5 col-12 card alert-grid">
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-6 col-6">
+                                            <div class="col-12 linechart-increase">
+                                                <i class="fa fa-line-chart" aria-hidden="true"></i> Increase Sales
                                             </div>
-                                            <div class="col-1">
-                                                <a href=""> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                            <div class="col-12  ting-size">
+                                                Tokyo Consulting Firm Limited
                                             </div>
-                                            <div class="col-5">
-                                                <span class="badge rounded-pill bg-deadline0">
-                                                    <span class="deadline-orange"> Deadline</span> <span class="mon-dark">: Mon, Feb 12,2023</span>
-                                                </span>
+                                            <div class="col-12 ima-is">
+                                                <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-is"> Dhaka, Bangladesh
                                             </div>
                                         </div>
-                                        <div class="col-12 text-end pt-5">
-                                            <span class="badge rounded-pill bg-warning text-dark"> Completed</span>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-20">
-                                        <div class="col-lg-2 col-md-6 col-2">
-                                            <div class="col-12 padding-FEB">
-                                                FEB
+                                        <div class="col-lg-7 col-md-6 col-6">
+                                            <div class="row">
+                                                <div class="col-1">
+                                                    <a href=""> <i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                </div>
+                                                <div class="col-1">
+                                                    <a href=""> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                </div>
+                                                <div class="col-5">
+                                                    <span class="badge rounded-pill bg-deadline0">
+                                                        <span class="deadline-orange"> Deadline</span> <span class="mon-dark">: Mon, Feb 12,2023</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 text-end pt-5">
+                                                <span class="badge rounded-pill bg-warning text-dark"> Completed</span>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-md-6 col-3">
-                                            <div class="col-12 Quant-ratio">
-                                                Quant Ratio
+                                        <div class="row mt-20">
+                                            <div class="col-lg-2 col-md-6 col-2">
+                                                <div class="col-12 padding-FEB">
+                                                    FEB
+                                                </div>
                                             </div>
-                                            <div class="col-12 diamond-con">
-                                                <i class="fa fa-diamond" aria-hidden="true"></i> Quality
+                                            <div class="col-lg-3 col-md-6 col-3">
+                                                <div class="col-12 Quant-ratio">
+                                                    Quant Ratio
+                                                </div>
+                                                <div class="col-12 diamond-con">
+                                                    <i class="fa fa-diamond" aria-hidden="true"></i> Quality
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="col-lg-3 col-md-6 col-3">
-                                            <div class="col-12 bullseye-con">
-                                                <i class="fa fa-bullseye" aria-hidden="true"></i> Target
-                                            </div>
-                                            <div class="col-12 million-number">
-                                                1,000,000
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-1 col-md-6 col-3">
-                                            <div class="col-12 padding-mark">
-                                                >
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 cl-md-6 col-3">
-                                            <div class="col-12 trophy-con">
-                                                <i class="fa fa-trophy" aria-hidden="true"></i> Result
-                                            </div>
-                                            <div class="col-12 million-number">
-                                                902,566
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-2 col-md-6 col-6"></div>
-                                            <div class="col-lg-4 col-md-6 col-6">
-                                                <div class="col-12 padding-update">
-                                                    Update Interval
+                                            <div class="col-lg-3 col-md-6 col-3">
+                                                <div class="col-12 bullseye-con">
+                                                    <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                                                 </div>
-                                                <div class="col-12 update-mouth">
-                                                    Monthly
+                                                <div class="col-12 million-number">
+                                                    1,000,000
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6 col-md-6 col-6">
-                                                <div class="col-12">
-                                                    <div class="animated-progress progress-blue">
-                                                        <span data-progress="45"></span>
+                                            <div class="col-lg-1 col-md-6 col-3">
+                                                <div class="col-12 padding-mark">
+                                                    >
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 cl-md-6 col-3">
+                                                <div class="col-12 trophy-con">
+                                                    <i class="fa fa-trophy" aria-hidden="true"></i> Result
+                                                </div>
+                                                <div class="col-12 million-number">
+                                                    902,566
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-2 col-md-6 col-6"></div>
+                                                <div class="col-lg-4 col-md-6 col-6">
+                                                    <div class="col-12 padding-update">
+                                                        Update Interval
+                                                    </div>
+                                                    <div class="col-12 update-mouth">
+                                                        Monthly
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-6">
+                                                    <div class="col-12">
+                                                        <div class="progress">
+                                                            <div class="progress-bar" style="width:30%; background:#2F80ED;"></div>
+                                                            <span class="badge rounded-pill  pro-load0">30%</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-lg-4 text-end">
-                                                <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima">
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-lg-4 text-end">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima">
+                                                </div>
+                                                <div class="col-lg-8 text-end">
+                                                    <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-12">Tue,Mar 12,2023</strong>
+                                                </div>
                                             </div>
-                                            <div class="col-lg-8 text-end">
-                                                <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-12">Tue,Mar 12,2023</strong>
-                                            </div>
-
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-5 col-12 card alert-grid">
-                                <div class="row">
-                                    <div class="col-lg-5 col-md-6 col-6">
-                                        <div class="col-12 linechart-increase">
-                                            <i class="fa fa-line-chart" aria-hidden="true"></i> Increase Sales
-                                        </div>
-                                        <div class="col-12  ting-size">
-                                            Tokyo Consulting Firm Limited
-                                        </div>
-                                        <div class="col-12 ima-is">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-is"> Dhaka, Bangladesh
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-7 col-md-6 col-6">
-                                        <div class="row">
-                                            <div class="col-1">
-                                                <a href=""> <i class="fa fa-eye" aria-hidden="true"></i></a>
+                                <div class="col-lg-4 col-md-6 col-sm-5 col-12 card alert-grid">
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-6 col-6">
+                                            <div class="col-12 linechart-increase">
+                                                <i class="fa fa-line-chart" aria-hidden="true"></i> Increase Sales
                                             </div>
-                                            <div class="col-1">
-                                                <a href=""> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                            <div class="col-12  ting-size">
+                                                Tokyo Consulting Firm Limited
                                             </div>
-                                            <div class="col-5">
-                                                <span class="badge rounded-pill bg-deadline0">
-                                                    <span class="deadline-orange"> Deadline</span> <span class="mon-dark">: Mon, Feb 12,2023</span>
-                                                </span>
+                                            <div class="col-12 ima-is">
+                                                <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-is"> Dhaka, Bangladesh
                                             </div>
                                         </div>
-                                        <div class="col-12 text-end pt-5">
-                                            <span class="badge rounded-pill bg-warning text-dark"> Completed</span>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-20">
-                                        <div class="col-lg-2 col-md-6 col-2">
-                                            <div class="col-12 padding-FEB">
-                                                FEB
+                                        <div class="col-lg-7 col-md-6 col-6">
+                                            <div class="row">
+                                                <div class="col-1">
+                                                    <a href=""> <i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                </div>
+                                                <div class="col-1">
+                                                    <a href=""> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                </div>
+                                                <div class="col-5">
+                                                    <span class="badge rounded-pill bg-deadline0">
+                                                        <span class="deadline-orange"> Deadline</span> <span class="mon-dark">: Mon, Feb 12,2023</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 text-end pt-5">
+                                                <span class="badge rounded-pill bg-warning text-dark"> Completed</span>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-md-6 col-3">
-                                            <div class="col-12 Quant-ratio">
-                                                Quant Ratio
+                                        <div class="row mt-20">
+                                            <div class="col-lg-2 col-md-6 col-2">
+                                                <div class="col-12 padding-FEB">
+                                                    FEB
+                                                </div>
                                             </div>
-                                            <div class="col-12 diamond-con">
-                                                <i class="fa fa-diamond" aria-hidden="true"></i> Quality
+                                            <div class="col-lg-3 col-md-6 col-3">
+                                                <div class="col-12 Quant-ratio">
+                                                    Quant Ratio
+                                                </div>
+                                                <div class="col-12 diamond-con">
+                                                    <i class="fa fa-diamond" aria-hidden="true"></i> Quality
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="col-lg-3 col-md-6 col-3">
-                                            <div class="col-12 bullseye-con">
-                                                <i class="fa fa-bullseye" aria-hidden="true"></i> Target
-                                            </div>
-                                            <div class="col-12 million-number">
-                                                1,000,000
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-1 col-md-6 col-3">
-                                            <div class="col-12 padding-mark">
-                                                >
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 cl-md-6 col-3">
-                                            <div class="col-12 trophy-con">
-                                                <i class="fa fa-trophy" aria-hidden="true"></i> Result
-                                            </div>
-                                            <div class="col-12 million-number">
-                                                902,566
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-2 col-md-6 col-6"></div>
-                                            <div class="col-lg-4 col-md-6 col-6">
-                                                <div class="col-12 padding-update">
-                                                    Update Interval
+                                            <div class="col-lg-3 col-md-6 col-3">
+                                                <div class="col-12 bullseye-con">
+                                                    <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                                                 </div>
-                                                <div class="col-12 update-mouth">
-                                                    Monthly
+                                                <div class="col-12 million-number">
+                                                    1,000,000
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6 col-md-6 col-6">
-                                                <div class="col-12">
-                                                    <div class="animated-progress progress-blue">
-                                                        <span data-progress="45"></span>
+                                            <div class="col-lg-1 col-md-6 col-3">
+                                                <div class="col-12 padding-mark">
+                                                    >
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 cl-md-6 col-3">
+                                                <div class="col-12 trophy-con">
+                                                    <i class="fa fa-trophy" aria-hidden="true"></i> Result
+                                                </div>
+                                                <div class="col-12 million-number">
+                                                    902,566
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-2 col-md-6 col-6"></div>
+                                                <div class="col-lg-4 col-md-6 col-6">
+                                                    <div class="col-12 padding-update">
+                                                        Update Interval
+                                                    </div>
+                                                    <div class="col-12 update-mouth">
+                                                        Monthly
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-6">
+                                                    <div class="col-12">
+                                                        <div class="progress">
+                                                            <div class="progress-bar" style="width:30%; background:#2F80ED;"></div>
+                                                            <span class="badge rounded-pill  pro-load0">30%</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-lg-4 text-end">
-                                                <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima">
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-lg-4 text-end">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima">
+                                                </div>
+                                                <div class="col-lg-8 text-end">
+                                                    <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-12">Tue,Mar 12,2023</strong>
+                                                </div>
                                             </div>
-                                            <div class="col-lg-8 text-end">
-                                                <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-12">Tue,Mar 12,2023</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-5 col-12 card alert-grid">
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-6 col-6">
+                                            <div class="col-12 linechart-increase">
+                                                <i class="fa fa-line-chart" aria-hidden="true"></i> Increase Sales
+                                            </div>
+                                            <div class="col-12  ting-size">
+                                                Tokyo Consulting Firm Limited
+                                            </div>
+                                            <div class="col-12 ima-is">
+                                                <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-is"> Dhaka, Bangladesh
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-7 col-md-6 col-6">
+                                            <div class="row">
+                                                <div class="col-1">
+                                                    <a href=""> <i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                </div>
+                                                <div class="col-1">
+                                                    <a href=""> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                </div>
+                                                <div class="col-5">
+                                                    <span class="badge rounded-pill bg-deadline0">
+                                                        <span class="deadline-orange"> Deadline</span> <span class="mon-dark">: Mon, Feb 12,2023</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 text-end pt-5">
+                                                <span class="badge rounded-pill bg-warning text-dark"> Completed</span>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-20">
+                                            <div class="col-lg-2 col-md-6 col-2">
+                                                <div class="col-12 padding-FEB">
+                                                    FEB
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-6 col-3">
+                                                <div class="col-12 Quant-ratio">
+                                                    Quant Ratio
+                                                </div>
+                                                <div class="col-12 diamond-con">
+                                                    <i class="fa fa-diamond" aria-hidden="true"></i> Quality
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-3 col-md-6 col-3">
+                                                <div class="col-12 bullseye-con">
+                                                    <i class="fa fa-bullseye" aria-hidden="true"></i> Target
+                                                </div>
+                                                <div class="col-12 million-number">
+                                                    1,000,000
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-1 col-md-6 col-3">
+                                                <div class="col-12 padding-mark">
+                                                    >
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 cl-md-6 col-3">
+                                                <div class="col-12 trophy-con">
+                                                    <i class="fa fa-trophy" aria-hidden="true"></i> Result
+                                                </div>
+                                                <div class="col-12 million-number">
+                                                    902,566
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-2 col-md-6 col-6"></div>
+                                                <div class="col-lg-4 col-md-6 col-6">
+                                                    <div class="col-12 padding-update">
+                                                        Update Interval
+                                                    </div>
+                                                    <div class="col-12 update-mouth">
+                                                        Monthly
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-6">
+                                                    <div class="col-12">
+                                                        <div class="progress">
+                                                            <div class="progress-bar" style="width:30%; background:#2F80ED;"></div>
+                                                            <span class="badge rounded-pill  pro-load0">30%</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-lg-4 text-end">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima">
+                                                </div>
+                                                <div class="col-lg-8 text-end">
+                                                    <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-12">Tue,Mar 12,2023</strong>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-5 col-12 card alert-grid">
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-6 col-6">
+                                            <div class="col-12 linechart-increase">
+                                                <i class="fa fa-line-chart" aria-hidden="true"></i> Increase Sales
+                                            </div>
+                                            <div class="col-12  ting-size">
+                                                Tokyo Consulting Firm Limited
+                                            </div>
+                                            <div class="col-12 ima-is">
+                                                <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-is"> Dhaka, Bangladesh
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-7 col-md-6 col-6">
+                                            <div class="row">
+                                                <div class="col-1">
+                                                    <a href=""> <i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                </div>
+                                                <div class="col-1">
+                                                    <a href=""> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                </div>
+                                                <div class="col-5">
+                                                    <span class="badge rounded-pill bg-deadline0">
+                                                        <span class="deadline-orange"> Deadline</span> <span class="mon-dark">: Mon, Feb 12,2023</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 text-end pt-5">
+                                                <span class="badge rounded-pill bg-warning text-dark"> Completed</span>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-20">
+                                            <div class="col-lg-2 col-md-6 col-2">
+                                                <div class="col-12 padding-FEB">
+                                                    FEB
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-6 col-3">
+                                                <div class="col-12 Quant-ratio">
+                                                    Quant Ratio
+                                                </div>
+                                                <div class="col-12 diamond-con">
+                                                    <i class="fa fa-diamond" aria-hidden="true"></i> Quality
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-3 col-md-6 col-3">
+                                                <div class="col-12 bullseye-con">
+                                                    <i class="fa fa-bullseye" aria-hidden="true"></i> Target
+                                                </div>
+                                                <div class="col-12 million-number">
+                                                    1,000,000
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-1 col-md-6 col-3">
+                                                <div class="col-12 padding-mark">
+                                                    >
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 cl-md-6 col-3">
+                                                <div class="col-12 trophy-con">
+                                                    <i class="fa fa-trophy" aria-hidden="true"></i> Result
+                                                </div>
+                                                <div class="col-12 million-number">
+                                                    902,566
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-2 col-md-6 col-6"></div>
+                                                <div class="col-lg-4 col-md-6 col-6">
+                                                    <div class="col-12 padding-update">
+                                                        Update Interval
+                                                    </div>
+                                                    <div class="col-12 update-mouth">
+                                                        Monthly
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-6">
+                                                    <div class="col-12">
+                                                        <div class="progress">
+                                                            <div class="progress-bar" style="width:30%; background:#2F80ED;"></div>
+                                                            <span class="badge rounded-pill  pro-load0">30%</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-lg-4 text-end">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima">
+                                                </div>
+                                                <div class="col-lg-8 text-end">
+                                                    <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-12">Tue,Mar 12,2023</strong>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-5 col-12 card alert-grid">
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-6 col-6">
+                                            <div class="col-12 linechart-increase">
+                                                <i class="fa fa-line-chart" aria-hidden="true"></i> Increase Sales
+                                            </div>
+                                            <div class="col-12  ting-size">
+                                                Tokyo Consulting Firm Limited
+                                            </div>
+                                            <div class="col-12 ima-is">
+                                                <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-is"> Dhaka, Bangladesh
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-7 col-md-6 col-6">
+                                            <div class="row">
+                                                <div class="col-1">
+                                                    <a href=""> <i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                </div>
+                                                <div class="col-1">
+                                                    <a href=""> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                </div>
+                                                <div class="col-5">
+                                                    <span class="badge rounded-pill bg-deadline0">
+                                                        <span class="deadline-orange"> Deadline</span> <span class="mon-dark">: Mon, Feb 12,2023</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 text-end pt-5">
+                                                <span class="badge rounded-pill bg-warning text-dark"> Completed</span>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-20">
+                                            <div class="col-lg-2 col-md-6 col-2">
+                                                <div class="col-12 padding-FEB">
+                                                    FEB
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-6 col-3">
+                                                <div class="col-12 Quant-ratio">
+                                                    Quant Ratio
+                                                </div>
+                                                <div class="col-12 diamond-con">
+                                                    <i class="fa fa-diamond" aria-hidden="true"></i> Quality
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-3 col-md-6 col-3">
+                                                <div class="col-12 bullseye-con">
+                                                    <i class="fa fa-bullseye" aria-hidden="true"></i> Target
+                                                </div>
+                                                <div class="col-12 million-number">
+                                                    1,000,000
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-1 col-md-6 col-3">
+                                                <div class="col-12 padding-mark">
+                                                    >
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 cl-md-6 col-3">
+                                                <div class="col-12 trophy-con">
+                                                    <i class="fa fa-trophy" aria-hidden="true"></i> Result
+                                                </div>
+                                                <div class="col-12 million-number">
+                                                    902,566
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-2 col-md-6 col-6"></div>
+                                                <div class="col-lg-4 col-md-6 col-6">
+                                                    <div class="col-12 padding-update">
+                                                        Update Interval
+                                                    </div>
+                                                    <div class="col-12 update-mouth">
+                                                        Monthly
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-6">
+                                                    <div class="col-12">
+                                                        <div class="progress">
+                                                            <div class="progress-bar" style="width:30%; background:#2F80ED;"></div>
+                                                            <span class="badge rounded-pill  pro-load0">30%</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-lg-4 text-end">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima">
+                                                </div>
+                                                <div class="col-lg-8 text-end">
+                                                    <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-12">Tue,Mar 12,2023</strong>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -1304,7 +1077,7 @@ $this->title = 'KFI Grid View';
                         </div>
                     </div>
                 </div>
-            </div>
+            </ul>
         </div>
     </div>
 </div>
