@@ -68,6 +68,7 @@ class AppAsset extends AssetBundle
         'js/setting/team.js',
         'js/setting/employee.js',
         'js/setting/company.js',
+        'js/setting/layer.js',
 
     ];
     public $depends = [

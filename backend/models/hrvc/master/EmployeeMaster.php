@@ -23,8 +23,11 @@ use Yii;
     * @property integer $departmentId
     * @property integer $titleId
     * @property integer $teamId
+    * @property string $joinDate
     * @property string $hireDate
     * @property integer $employeeConditionId
+    * @property string $address1
+    * @property string $address2
     * @property string $picture
     * @property integer $nationalityId
     * @property string $contact
@@ -55,12 +58,12 @@ public function rules()
 {
 return [
             [['employeeNumber', 'employeeFirstname', 'employeeSurename', 'gender', 'birthDate', 'email', 'telephoneNumber', 'companyId', 'branchId', 'departmentId', 'titleId', 'employeeConditionId'], 'required'],
-            [['birthDate', 'hireDate', 'createDateTime', 'updateDateTime'], 'safe'],
+            [['birthDate', 'joinDate', 'hireDate', 'createDateTime', 'updateDateTime'], 'safe'],
             [['companyId', 'branchId', 'departmentId', 'titleId', 'teamId', 'employeeConditionId', 'nationalityId', 'workingTime'], 'integer'],
-            [['spoken', 'socialLink', 'remark'], 'string'],
-            [['employeeNumber', 'employeeFirstname', 'employeeSurename', 'employeeNickname', 'email', 'telephoneNumber', 'emergencyTel', 'contact'], 'string', 'max' => 100],
+            [['address1', 'address2', 'spoken', 'socialLink', 'remark'], 'string'],
+            [['employeeNumber', 'employeeFirstname', 'employeeSurename', 'employeeNickname', 'email', 'contact'], 'string', 'max' => 100],
             [['gender', 'status'], 'string', 'max' => 10],
-            [['companyEmail', 'picture', 'resume', 'employeeAgreement'], 'string', 'max' => 255],
+            [['companyEmail', 'telephoneNumber', 'emergencyTel', 'picture', 'resume', 'employeeAgreement'], 'string', 'max' => 255],
         ];
 }
 
@@ -86,8 +89,11 @@ return [
     'departmentId' => 'Department ID',
     'titleId' => 'Title ID',
     'teamId' => 'Team ID',
+    'joinDate' => 'Join Date',
     'hireDate' => 'Hire Date',
     'employeeConditionId' => 'Employee Condition ID',
+    'address1' => 'Address1',
+    'address2' => 'Address2',
     'picture' => 'Picture',
     'nationalityId' => 'Nationality ID',
     'contact' => 'Contact',

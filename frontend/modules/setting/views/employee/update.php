@@ -355,8 +355,8 @@ $this->title = 'Update Employee';
 						<div class="row pt-10 pb-10">
 							<div class="col-lg-2 col-md-6 col-12 text-center">
 								<!-- <img src="<?= Yii::$app->homeUrl ?>image/pdf.png" class="image-file-plus"> -->
-								<label for="files" class="btn choosefile">File</label>
-								<input id="files" style="display:none;" type="file" name="agreement">
+								<label for="agreement" class="btn choosefile">File</label>
+								<input id="agreement" style="display:none;" type="file" name="agreement">
 							</div>
 							<div class="col-lg-6 col-md-6 col-12" style="border-right:lightgray solid thin;">
 								<label for="name"> Employee Agreement-DD.pdf</label>

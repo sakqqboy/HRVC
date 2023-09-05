@@ -80,6 +80,12 @@ use common\models\ModelMaster;
                                         Employee
                                 </a>
                         </div>
+                        <div class="col-12">
+                                <a href="<?= Yii::$app->homeUrl ?>setting/layer/index" class="no-underline">
+
+                                        <i class="fa fa-angle-double-up pr-10 mt-20" aria-hidden="true"></i> Management Layer
+                                </a>
+                        </div>
                         <div class="col-12 haeder-kpi">
                                 KPI & KGI MANAGEMENT
                         </div>
