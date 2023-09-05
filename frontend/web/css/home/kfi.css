@@ -16,16 +16,10 @@
     font-weight: 500;
 }
 
-.btn-light-3 {
-    background-color: rgb(231, 231, 231);
-    color: #000000;
-
-}
-
 .Flag-Turkey {
     border-radius: 30px;
-    height: 35px;
-    width: 35px;
+    height: 20px;
+    width: 20px;
 }
 
 #progress1 {
@@ -35,8 +29,8 @@
 
 .progress-item1 {
     display: flex;
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     font-size: 0;
     animation: .4s ease-out reverse;
@@ -48,10 +42,10 @@
     justify-content: center;
     flex-direction: column;
     width: 100px;
-    margin: 10px;
+    margin: 4px;
     border-radius: 50%;
     background: white;
-    font-size: 12px;
+    font-size: 11px;
     text-align: center;
 }
 
@@ -60,9 +54,13 @@
     font-size: 18px;
 }
 
-#transform-none {
+.transform-none {
     text-transform: uppercase;
-    font-size: 13px;
+    font-size: 12px;
+}
+
+.tb-5 {
+    margin-top: -20px;
 }
 
 #visible0 {
@@ -84,9 +82,28 @@
 }
 
 .new-light-4 a:hover {
-    background-color: rgb(37, 130, 224);
-    color: #fff;
+    background: rgb(255, 255, 255);
+    color: #5CAEF9;
 }
+
+.btn-light-3 {
+    background-color: rgb(255, 255, 255);
+
+
+}
+
+.presentation-end {
+    margin-left: 190px;
+}
+
+.over {
+    border-left: #5CAEF9 solid thin;
+}
+
+.over1 {
+    border-left: #ffea00 solid thin;
+}
+
 
 @media(max-width: 992px) {
     .pd-Performance {
