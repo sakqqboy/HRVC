@@ -1,0 +1,139 @@
+.example-5 {
+    position: relative;
+    overflow-y: scroll;
+    height: 400px;
+    width: 1140px;
+    border: none;
+    background-color: #eaeaea;
+}
+
+.month-feb {
+    font-size: 12px;
+    padding-top: 5px;
+    color: #475569;
+}
+
+.clients-employee {
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.bg-bsc {
+    background-color: rgb(228, 238, 243);
+    color: #000000;
+}
+
+.flex-tokyo {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.image-flex {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+
+.tokyo-ima {
+    text-align: end;
+    font-size: 12px;
+}
+
+.card-radius {
+    border-radius: 10px;
+    border: none;
+}
+
+.slds-badge {
+    background-color: #eaeaea;
+    color: #ef3a3a;
+    font-size: 12px;
+}
+
+.top-teamcontent {
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.sample-bordersolid {
+    border-left: lightgray solid thin;
+}
+
+.Quality-diamond {
+    font-weight: 700;
+    font-size: 15px;
+    padding-top: 5px;
+}
+
+.Quality-monthly0 {
+    font-weight: 700;
+    font-size: 15px;
+    padding-top: 5px;
+}
+
+.circle-update {
+    border: 4px solid rgb(52, 153, 224);
+    padding-left: 10px;
+    padding-top: 3px;
+    background-color: #FFFFFF;
+    height: 40px;
+    border-radius: 50%;
+    width: 40px;
+
+}
+
+.progress-bordersolid {
+    border-left: lightgray solid thin;
+}
+
+.target-progress {
+    font-size: 13px;
+    color: rgb(107, 107, 107);
+}
+
+.target-million {
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.target-plush {
+    font-weight: 700;
+    font-size: 16px;
+    text-align: center;
+}
+
+.pro-load2 {
+    background: #2F80ED;
+    font-size: 9px;
+    width: 35px;
+    height: 35px;
+    padding-left: 9px;
+    margin-left: -11px;
+    margin-top: -9px;
+    padding-top: 13px;
+}
+
+.refresh0 {
+    color: rgb(50, 121, 23);
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.pencil-nextupdate {
+    font-size: 12px;
+    color: #2F80ED;
+    cursor: pointer;
+    text-align: end;
+}
+
+.card-bordersolid {
+    border-left: lightgray solid thin;
+}
+
+.dashed1 {
+    border-style: dashed;
+    border-radius: 8px;
+    color: #abadaf;
+    padding-left: 5px;
+}

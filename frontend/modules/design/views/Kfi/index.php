@@ -26,155 +26,154 @@ $this->title = 'KFI';
                 </li>
             </ul>
         </div>
-
-        <div class="alert alert-white-4">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-12 key1">
-                    <div class="row">
-                        <div class="col-6 key1">
-                            Key Financial Indicators
-                        </div>
-                        <div class="col-6">
-                            <button type="button" class="btn btn-primary font-size-14" data-bs-toggle="modal" data-bs-target="#staticBackdrop1"><i class="fa fa-magic" aria-hidden="true"></i> Create New KFI</button>
-                            <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title text-primary" id="staticBackdropLabel"><i class="fa fa-magic" aria-hidden="true"></i> Create</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="col-12" style="margin-top: -20px; padding-left:20px; font-size: 13px;">
-                                            <i class="fa fa-line-chart" aria-hidden="true"></i> Key Financial Indicator
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-lg-6 col-md-6 col-6">
-                                                    <div class="col-12">
-                                                        <label for="exampleFormControlInput1" class="form-label"><strong class="red">*</strong> KFI Contents</label>
-                                                        <input type="text" class="form-control" id="" placeholder="">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-Financial" role="tabpanel" aria-labelledby="pills-Financial-tab">
+                    <div class="alert alert-white-4">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-12 key1">
+                                <div class="row">
+                                    <div class="col-6 key1">
+                                        Key Financial Indicators
+                                    </div>
+                                    <div class="col-6">
+                                        <button type="button" class="btn btn-primary font-size-14" data-bs-toggle="modal" data-bs-target="#staticBackdrop1"><i class="fa fa-magic" aria-hidden="true"></i> Create New KFI</button>
+                                        <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title text-primary" id="staticBackdropLabel"><i class="fa fa-magic" aria-hidden="true"></i> Create</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <div class="col-12 pt-5">
-                                                        <label for="input" class="form-label"><strong class="red">*</strong> Company</label>
-                                                        <select class="form-select" aria-label="Default select example">
-                                                            <option selected>Select Company</option>
-                                                            <option value="1">Tokyo Consulting Firm Danışmanlık</option>
-                                                            <option value="2">Tokyo Consulting Firm Pvt. Ltd.</option>
-                                                            <option value="3">Tokyo Consulting Firm PLC</option>
-                                                            <option value="4">Tokyo Consulting Firm Pt.</option>
-                                                            <option value="5">Tokyo Consulting Firm</option>
-                                                        </select>
+                                                    <div class="col-12" style="margin-top: -20px; padding-left:20px; font-size: 13px;">
+                                                        <i class="fa fa-line-chart" aria-hidden="true"></i> Key Financial Indicator
                                                     </div>
-                                                    <div class="col-12 pt-5">
-                                                        <label for="input" class="form-label"><strong class="red">*</strong> Branch</label>
-                                                        <select class="form-select" aria-label="Default select example">
-                                                            <option selected>Select Branch</option>
-                                                            <option value="1">Branch 1</option>
-                                                            <option value="2">Branch 2</option>
-                                                            <option value="3">Branch 3</option>
-                                                            <option value="4">Branch 4</option>
-                                                            <option value="5">Branch 5</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-12 pt-5">
-                                                        <label for="input" class="form-label"><strong class="red">*</strong> Check Unit</label>
-                                                        <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                            <button type="button" class="btn btn-outline-secondary font-size-14">Monthly</button>
-                                                            <button type="button" class="btn btn-outline-secondary font-size-14">Weekly</button>
-                                                            <button type="button" class="btn btn-outline-secondary font-size-14">Quaterly</button>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-md-6 col-6">
+                                                                <div class="col-12">
+                                                                    <label for="exampleFormControlInput1" class="form-label"><strong class="red">*</strong> KFI Contents</label>
+                                                                    <input type="text" class="form-control" id="" placeholder="">
+                                                                </div>
+                                                                <div class="col-12 pt-5">
+                                                                    <label for="input" class="form-label"><strong class="red">*</strong> Company</label>
+                                                                    <select class="form-select" aria-label="Default select example">
+                                                                        <option selected>Select Company</option>
+                                                                        <option value="1">Tokyo Consulting Firm Danışmanlık</option>
+                                                                        <option value="2">Tokyo Consulting Firm Pvt. Ltd.</option>
+                                                                        <option value="3">Tokyo Consulting Firm PLC</option>
+                                                                        <option value="4">Tokyo Consulting Firm Pt.</option>
+                                                                        <option value="5">Tokyo Consulting Firm</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-12 pt-5">
+                                                                    <label for="input" class="form-label"><strong class="red">*</strong> Branch</label>
+                                                                    <select class="form-select" aria-label="Default select example">
+                                                                        <option selected>Select Branch</option>
+                                                                        <option value="1">Branch 1</option>
+                                                                        <option value="2">Branch 2</option>
+                                                                        <option value="3">Branch 3</option>
+                                                                        <option value="4">Branch 4</option>
+                                                                        <option value="5">Branch 5</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-12 pt-5">
+                                                                    <label for="input" class="form-label"><strong class="red">*</strong> Check Unit</label>
+                                                                    <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                                                        <button type="button" class="btn btn-outline-secondary font-size-14">Monthly</button>
+                                                                        <button type="button" class="btn btn-outline-secondary font-size-14">Weekly</button>
+                                                                        <button type="button" class="btn btn-outline-secondary font-size-14">Quaterly</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6 col-6">
+                                                                <div class="col-12">
+                                                                    <label for="exampleFormControlTextarea1" class="form-label"> KFI Details</label>
+                                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="7"></textarea>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 col-md-6 col-6 pt-10">
+                                                                        <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Target Amount</label>
+                                                                        <input type="text" class="form-control font-size-13" id="" placeholder="">
+                                                                    </div>
+                                                                    <div class="col-lg-6 col-md-6 col-6 pt-10">
+                                                                        <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Month</label>
+                                                                        <select class="form-select font-size-13" aria-label="Default select example">
+                                                                            <option selected>Select Month</option>
+                                                                            <option value="1">January</option>
+                                                                            <option value="2">June</option>
+                                                                            <option value="3">July</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-6 col-md-6 col-6">
-                                                    <div class="col-12">
-                                                        <label for="exampleFormControlTextarea1" class="form-label"> KFI Details</label>
-                                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="7"></textarea>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-lg-6 col-md-6 col-6 pt-10">
-                                                            <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Target Amount</label>
-                                                            <input type="text" class="form-control font-size-13" id="" placeholder="">
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-6 pt-10">
-                                                            <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Month</label>
-                                                            <select class="form-select font-size-13" aria-label="Default select example">
-                                                                <option selected>Select Month</option>
-                                                                <option value="1">January</option>
-                                                                <option value="2">June</option>
-                                                                <option value="3">July</option>
-                                                            </select>
-                                                        </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                        <button type="button" class="btn btn-primary">Create</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-primary">Create</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-5 col-md-12 col-12 New-KFI">
+                                <div class="col-12">
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fa fa-filter" aria-hidden="true"></i></span>
+                                        <select class="form-select font-size-13" aria-label="Example select">
+                                            <option selected>Company</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                        <select class="form-select font-size-13" aria-label="Example select">
+                                            <option selected>Branch</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                        <select class="form-select font-size-13" aria-label="Example select">
+                                            <option selected>Month</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                        <select class="form-select font-size-13" aria-label="Example select">
+                                            <option selected>Type</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                        <select class="form-select font-size-13" aria-label="Example select">
+                                            <option selected>Status</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12 New-date">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div class="input-group">
+                                            <label class="input-group-text font-size-13" for="">Date</label>
+                                            <input type="date" class="form-control font-size-13" name="birthday" id="">
+                                        </div>
+                                    </div>
+                                    <div class="col-4 new-light-4">
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <button type="button" class="btn btn-outline-primary font-size-13"><i class="fa fa-list-ul" aria-hidden="true"></i></button>
+                                            <button type="button" class="btn btn-outline-primary font-size-13"><i class="fa fa-th-large" aria-hidden="true"></i></button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-5 col-md-12 col-12 New-KFI">
-                    <div class="col-12">
-                        <div class="input-group">
-                            <span class="input-group-text"><i class="fa fa-filter" aria-hidden="true"></i></span>
-                            <select class="form-select font-size-13" aria-label="Example select">
-                                <option selected>Company</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
-                            <select class="form-select font-size-13" aria-label="Example select">
-                                <option selected>Branch</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
-                            <select class="form-select font-size-13" aria-label="Example select">
-                                <option selected>Month</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
-                            <select class="form-select font-size-13" aria-label="Example select">
-                                <option selected>Type</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
-                            <select class="form-select font-size-13" aria-label="Example select">
-                                <option selected>Status</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-12 New-date">
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="input-group">
-                                <label class="input-group-text font-size-13" for="">Date</label>
-                                <input type="date" class="form-control font-size-13" name="birthday" id="">
-                            </div>
-                        </div>
-                        <div class="col-4 new-light-4">
-                            <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-outline-primary font-size-13"><i class="fa fa-list-ul" aria-hidden="true"></i></button>
-                                <button type="button" class="btn btn-outline-primary font-size-13"><i class="fa fa-th-large" aria-hidden="true"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-Financial" role="tabpanel" aria-labelledby="pills-Financial-tab">
                         <div class="col-12 tb-5">
                             <table class="table table-striped">
                                 <thead class="table-secondary">
@@ -194,7 +193,7 @@ $this->title = 'KFI';
                                     </tr>
                                 </thead>
                                 <tbody class="over">
-                                    <tr>
+                                    <tr class="font-size-12">
                                         <td>
                                             <span class="badge bg-info text-white">PL</span> Total Sales
 
@@ -218,12 +217,12 @@ $this->title = 'KFI';
                                         <td>August</td>
                                         <td>May 31, 2023</td>
                                         <td colspan="row">
-                                            <span> <i class="fa fa-comments-o on-cursor" aria-hidden="true"></i></span> &nbsp;
+                                            <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td"></span>&nbsp;&nbsp;
                                             <span class="dropdown" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                 <li><a class="dropdown-item" href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i> <strong class="red">*</strong></a> </li>
                                                 <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                                <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
                                             </ul>
                                         </td>
                                     </tr>
@@ -253,12 +252,12 @@ $this->title = 'KFI';
                                         <td>December</td>
                                         <td>May 31, 2023</td>
                                         <td colspan="row">
-                                            <span> <i class="fa fa-comments-o on-cursor" aria-hidden="true"></i></span> &nbsp;
+                                            <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td"></span>&nbsp;&nbsp;
                                             <span class="dropdown" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                 <li><a class="dropdown-item" href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i> <strong class="red">*</strong></a> </li>
                                                 <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                                <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
                                             </ul>
                                         </td>
                                     </tr>
@@ -288,12 +287,12 @@ $this->title = 'KFI';
                                         <td>August</td>
                                         <td>May 31, 2023</td>
                                         <td colspan="row">
-                                            <span> <i class="fa fa-comments-o on-cursor" aria-hidden="true"></i></span> &nbsp;
+                                            <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td"></span>&nbsp;&nbsp;
                                             <span class="dropdown" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                 <li><a class="dropdown-item" href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i> <strong class="red">*</strong></a> </li>
                                                 <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                                <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
                                             </ul>
                                         </td>
                                     </tr>
@@ -323,12 +322,12 @@ $this->title = 'KFI';
                                         <td>September</td>
                                         <td>May 31, 2023</td>
                                         <td colspan="row">
-                                            <span> <i class="fa fa-comments-o on-cursor" aria-hidden="true"></i></span> &nbsp;
+                                            <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td"></span>&nbsp;&nbsp;
                                             <span class="dropdown" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                 <li><a class="dropdown-item" href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i> <strong class="red">*</strong></a> </li>
                                                 <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                                <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
                                             </ul>
                                         </td>
                                     </tr>
@@ -358,12 +357,12 @@ $this->title = 'KFI';
                                         <td>August</td>
                                         <td>May 31, 2023</td>
                                         <td colspan="row">
-                                            <span> <i class="fa fa-comments-o on-cursor" aria-hidden="true"></i></span> &nbsp;
+                                            <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td"></span>&nbsp;&nbsp;
                                             <span class="dropdown" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                 <li><a class="dropdown-item" href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i> <strong class="red">*</strong></a> </li>
                                                 <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                                <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
                                             </ul>
                                         </td>
                                     </tr>
@@ -393,12 +392,12 @@ $this->title = 'KFI';
                                         <td>August</td>
                                         <td>May 31, 2023</td>
                                         <td colspan="row">
-                                            <span> <i class="fa fa-comments-o on-cursor" aria-hidden="true"></i></span> &nbsp;
+                                            <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td"></span>&nbsp;&nbsp;
                                             <span class="dropdown" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                 <li><a class="dropdown-item" href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i> <strong class="red">*</strong></a> </li>
                                                 <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                                <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
                                             </ul>
                                         </td>
                                     </tr>
@@ -406,33 +405,494 @@ $this->title = 'KFI';
                             </table>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="pills-Group" role="tabpanel" aria-labelledby="pills-Group-tab">
-                        <div class="col=12">
-                            <table class="table table-striped">
-                                <thead class="table-secondary">
-                                    <tr>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-
-                            </table>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="pills-Performance" role="tabpanel" aria-labelledby="pills-Performance-tab">...</div>
-                    <div class="tab-pane fade" id="pills-Action" role="tabpanel" aria-labelledby="pills-Action-tab">...</div>
-                    <div class="col-12 content-navitem">
+                    <div class="col-12 navigation-next">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
-                                <li class="page-item"><a class="page-link" href="#"><i class="fa fa-chevron-left" aria-hidden="true"></i> Previous</a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
+                                <li class="page-item"><a class="page-link page-navigation" href="#"><i class="fa fa-chevron-left" aria-hidden="true"></i> Previous</a></li>
+                                <li class="page-item"><a class="page-link page-navigation" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link page-navigation" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link page-navigation" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link page-navigation" href="#">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
                             </ul>
                         </nav>
                     </div>
                 </div>
-            </ul>
-        </div>
+                <div class="tab-pane fade" id="pills-Group" role="tabpanel" aria-labelledby="pills-Group-tab">
+                    <div class="alert alert-white-4">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-12 key1">
+                                <div class="row">
+                                    <div class="col-6 key1">
+                                        Key Goal Indicators
+                                    </div>
+                                    <div class="col-6">
+                                        <button type="button" class="btn btn-primary font-size-14" data-bs-toggle="modal" data-bs-target="#staticBackdrop1"><i class="fa fa-magic" aria-hidden="true"></i> Create New KGI</button>
+                                        <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title text-primary" id="staticBackdropLabel"><i class="fa fa-magic" aria-hidden="true"></i> Create KGI</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="col-12" style="margin-top: -20px; padding-left:20px; font-size: 13px;">
+                                                        <i class="fa fa-line-chart" aria-hidden="true"></i> Key Goal Indicators
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-md-6 col-6">
+                                                                <div class="col-12">
+                                                                    <label for="exampleFormControlInput1" class="form-label"><strong class="red">*</strong> KGI Contents</label>
+                                                                    <input type="text" class="form-control" id="" placeholder="">
+                                                                </div>
+                                                                <div class="col-12 pt-5">
+                                                                    <label for="input" class="form-label"><strong class="red">*</strong> Company</label>
+                                                                    <select class="form-select" aria-label="Default select example">
+                                                                        <option selected>Select Company</option>
+                                                                        <option value="1">Tokyo Consulting Firm Danışmanlık</option>
+                                                                        <option value="2">Tokyo Consulting Firm Pvt. Ltd.</option>
+                                                                        <option value="3">Tokyo Consulting Firm PLC</option>
+                                                                        <option value="4">Tokyo Consulting Firm Pt.</option>
+                                                                        <option value="5">Tokyo Consulting Firm</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-12 pt-5">
+                                                                    <label for="input" class="form-label"><strong class="red">*</strong> Branch</label>
+                                                                    <select class="form-select" aria-label="Default select example">
+                                                                        <option selected>Select Branch</option>
+                                                                        <option value="1">Branch 1</option>
+                                                                        <option value="2">Branch 2</option>
+                                                                        <option value="3">Branch 3</option>
+                                                                        <option value="4">Branch 4</option>
+                                                                        <option value="5">Branch 5</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-12 pt-5">
+                                                                    <label for="input" class="form-label"><strong class="red">*</strong> Check Unit</label>
+                                                                    <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                                                        <button type="button" class="btn btn-outline-secondary font-size-14">Monthly</button>
+                                                                        <button type="button" class="btn btn-outline-secondary font-size-14">Weekly</button>
+                                                                        <button type="button" class="btn btn-outline-secondary font-size-14">Quaterly</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6 col-6">
+                                                                <div class="col-12">
+                                                                    <label for="exampleFormControlTextarea1" class="form-label"> KFI Details</label>
+                                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="7"></textarea>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 col-md-6 col-6 pt-10">
+                                                                        <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Target Amount</label>
+                                                                        <input type="text" class="form-control font-size-13" id="" placeholder="">
+                                                                    </div>
+                                                                    <div class="col-lg-6 col-md-6 col-6 pt-10">
+                                                                        <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Month</label>
+                                                                        <select class="form-select font-size-13" aria-label="Default select example">
+                                                                            <option selected>Select Month</option>
+                                                                            <option value="1">January</option>
+                                                                            <option value="2">June</option>
+                                                                            <option value="3">July</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                        <button type="button" class="btn btn-primary">Create</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-5 col-md-12 col-12 New-KFI">
+                                <div class="col-12">
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fa fa-filter" aria-hidden="true"></i></span>
+                                        <select class="form-select font-size-13" aria-label="Example select">
+                                            <option selected>Company</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                        <select class="form-select font-size-13" aria-label="Example select">
+                                            <option selected>Branch</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                        <select class="form-select font-size-13" aria-label="Example select">
+                                            <option selected>Month</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                        <select class="form-select font-size-13" aria-label="Example select">
+                                            <option selected>Type</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                        <select class="form-select font-size-13" aria-label="Example select">
+                                            <option selected>Status</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12 New-date">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div class="input-group">
+                                            <label class="input-group-text font-size-13" for="">Date</label>
+                                            <input type="date" class="form-control font-size-13" name="birthday" id="">
+                                        </div>
+                                    </div>
+                                    <div class="col-4 new-light-4">
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <button type="button" class="btn btn-outline-primary font-size-13"><i class="fa fa-list-ul" aria-hidden="true"></i></button>
+                                            <button type="button" class="btn btn-outline-primary font-size-13"><i class="fa fa-th-large" aria-hidden="true"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 tb-5">
+                            <table class="table table-striped">
+                                <thead class="table-secondary">
+                                    <tr class="transform-none">
+                                        <th>KGI Contents</th>
+                                        <th>Company</th>
+                                        <th>Branch</th>
+                                        <th>Team KGI Contents</th>
+                                        <th>Priority</th>
+                                        <th>Employees</th>
+                                        <th>Team</th>
+                                        <th>QR</th>
+                                        <th>target</th>
+                                        <th>Code</th>
+                                        <th>result</th>
+                                        <th>ratio</th>
+                                        <th>month</th>
+                                        <th>Unit</th>
+                                        <th>Last</th>
+                                        <th>next</th>
+                                        <th colspan="row"></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="over">
+                                    <tr class="font-size-12">
+                                        <td>Increase Something</td>
+                                        <td>TCF</td>
+                                        <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
+                                        <td>The number of clients per employee by team</td>
+                                        <td class="text-center">A</td>
+                                        <td>
+                                            <span class="badge rounded-pill bg-white">
+                                                <div class="flex mb-5 -space-x-4">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/employee1.png" class="image-Avatar1">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/employee2.png" class="image-Avatar1" style="margin-left: -10px;">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="image-Avatar1" style="margin-left: -10px;">
+                                                    <span class="slds-avatar slds-avatar_circle">
+                                                        <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
+                                                    </span>
+                                                </div>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
+                                        </td>
+                                        <td>Quality</td>
+                                        <td>2.5</td>
+                                        <td>
+                                            >
+                                        </td>
+                                        <td>2.1</td>
+                                        <td>
+                                            <div id="progress1">
+                                                <div data-num="35" class="progress-item1"></div>
+                                            </div>
+                                        </td>
+                                        <td>January</td>
+                                        <td>Monthly</td>
+                                        <td>2nd Feb, 2023</td>
+                                        <td>23rd Feb, 2023</td>
+                                        <td colspan="row">
+                                            <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
+                                            <span class="dropdown" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <li><a class="dropdown-item" href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i></a></li>
+                                                <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
+                                                <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tbody class="over">
+                                    <tr class="font-size-12">
+                                        <td>Increase Something</td>
+                                        <td>TCF</td>
+                                        <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
+                                        <td>The number of clients per employee by team</td>
+                                        <td class="text-center">A</td>
+                                        <td>
+                                            <span class="badge rounded-pill bg-white">
+                                                <div class="avatars">
+                                                    <span class="avatar">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/employee1.png" width="30" height="30" />
+                                                    </span>
+                                                    <span class="avatar">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/employee2.png" width="3" height="30" />
+                                                    </span>
+                                                    <span class="avatar">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" width="30" height="30" />
+                                                    </span>
+                                                    <span class="avatar">
+                                                        <a class="flex items-center justify-center  font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" width="40" height="40"></a>
+                                                    </span>
+                                                </div>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
+                                        </td>
+                                        <td>Quality</td>
+                                        <td>2.5</td>
+                                        <td>
+                                            >
+                                        </td>
+                                        <td>2.1</td>
+                                        <td>
+                                            <div id="progress1">
+                                                <div data-num="35" class="progress-item1"></div>
+                                            </div>
+                                        </td>
+                                        <td>January</td>
+                                        <td>Monthly</td>
+                                        <td>2nd Feb, 2023</td>
+                                        <td>23rd Feb, 2023</td>
+                                        <td colspan="row">
+                                            <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
+                                            <span class="dropdown" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <li><a class="dropdown-item" href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i></a></li>
+                                                <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
+                                                <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tbody class="over">
+                                    <tr class="font-size-12">
+                                        <td>Increase Something</td>
+                                        <td>TCF</td>
+                                        <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
+                                        <td>The number of clients per employee by team</td>
+                                        <td class="text-center">A</td>
+                                        <td>
+                                            <div class="flex mb-5 -space-x-4">
+                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
+                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
+                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
+                                                <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
+                                        </td>
+                                        <td>Quality</td>
+                                        <td>2.5</td>
+                                        <td>
+                                            >
+                                        </td>
+                                        <td>2.1</td>
+                                        <td>
+                                            <div id="progress1">
+                                                <div data-num="35" class="progress-item1"></div>
+                                            </div>
+                                        </td>
+                                        <td>January</td>
+                                        <td>Monthly</td>
+                                        <td>2nd Feb, 2023</td>
+                                        <td>23rd Feb, 2023</td>
+                                        <td colspan="row">
+                                            <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
+                                            <span class="dropdown" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <li><a class="dropdown-item" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
+                                                <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
+                                                <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tbody class="over">
+                                    <tr class="font-size-12">
+                                        <td>Increase Something</td>
+                                        <td>TCF</td>
+                                        <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
+                                        <td>The number of clients per employee by team</td>
+                                        <td class="text-center">A</td>
+                                        <td>
+                                            <div class="flex mb-5 -space-x-4">
+                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
+                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
+                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
+                                                <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
+                                        </td>
+                                        <td>Quality</td>
+                                        <td>2.5</td>
+                                        <td>
+                                            >
+                                        </td>
+                                        <td>2.1</td>
+                                        <td>
+                                            <div id="progress1">
+                                                <div data-num="35" class="progress-item1"></div>
+                                            </div>
+                                        </td>
+                                        <td>January</td>
+                                        <td>Monthly</td>
+                                        <td>2nd Feb, 2023</td>
+                                        <td>23rd Feb, 2023</td>
+                                        <td colspan="row">
+                                            <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
+                                            <span class="dropdown" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <li><a class="dropdown-item" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
+                                                <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
+                                                <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tbody class="over">
+                                    <tr class="font-size-12">
+                                        <td>Increase Something</td>
+                                        <td>TCF</td>
+                                        <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
+                                        <td>The number of clients per employee by team</td>
+                                        <td class="text-center">A</td>
+                                        <td>
+                                            <div class="flex mb-5 -space-x-4">
+                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
+                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
+                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
+                                                <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
+                                        </td>
+                                        <td>Quality</td>
+                                        <td>2.5</td>
+                                        <td>
+                                            >
+                                        </td>
+                                        <td>2.1</td>
+                                        <td>
+                                            <div id="progress1">
+                                                <div data-num="35" class="progress-item1"></div>
+                                            </div>
+                                        </td>
+                                        <td>January</td>
+                                        <td>Monthly</td>
+                                        <td>2nd Feb, 2023</td>
+                                        <td>23rd Feb, 2023</td>
+                                        <td colspan="row">
+                                            <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
+                                            <span class="dropdown" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <li><a class="dropdown-item" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
+                                                <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
+                                                <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tbody class="over">
+                                    <tr class="font-size-12">
+                                        <td>Increase Something</td>
+                                        <td>TCF</td>
+                                        <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
+                                        <td>The number of clients per employee by team</td>
+                                        <td class="text-center">A</td>
+                                        <td>
+                                            <div class="flex mb-5 -space-x-4">
+                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
+                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
+                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
+                                                <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
+                                        </td>
+                                        <td>Quality</td>
+                                        <td>2.5</td>
+                                        <td>
+                                            >
+                                        </td>
+                                        <td>2.1</td>
+                                        <td>
+                                            <div id="progress1">
+                                                <div data-num="35" class="progress-item1"></div>
+                                            </div>
+                                        </td>
+                                        <td>January</td>
+                                        <td>Monthly</td>
+                                        <td>2nd Feb, 2023</td>
+                                        <td>23rd Feb, 2023</td>
+                                        <td colspan="3">
+                                            <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
+                                            <span class="dropdown" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <li><a class="dropdown-item" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> </li>
+                                                <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
+                                                <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-12 navigation-next">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link page-navigation" href="#"><i class="fa fa-chevron-left" aria-hidden="true"></i> Previous</a></li>
+                                <li class="page-item"><a class="page-link page-navigation" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link page-navigation" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link page-navigation" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link page-navigation" href="#">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </ul>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+<div class="tab-pane fade" id="pills-Performance" role="tabpanel" aria-labelledby="pills-Performance-tab">...</div>
+<div class="tab-pane fade" id="pills-Action" role="tabpanel" aria-labelledby="pills-Action-tab">...</div>
+<div class="col-12 content-navitem">

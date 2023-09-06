@@ -32,7 +32,7 @@ $this->title = 'KFI Grid View';
                 <div class="col-lg-4 col-md-6 col-12 key1">
                     <div class="row">
                         <div class="col-6 key1">
-                            Key Financial Indicators
+                            Key Goal Indicators
                         </div>
                         <div class="col-6">
                             <button type="button" class="btn btn-primary font-size-14" data-bs-toggle="modal" data-bs-target="#staticBackdrop1"><i class="fa fa-magic" aria-hidden="true"></i> Create New KFI</button>
