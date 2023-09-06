@@ -406,12 +406,20 @@ $this->title = 'KFI';
                             </table>
                         </div>
                     </div>
+                    <div class="tab-pane fade" id="pills-Group" role="tabpanel" aria-labelledby="pills-Group-tab">
+                        <div class="col=12">
+                            <table class="table table-striped">
+                                <thead class="table-secondary">
+                                    <tr>
+                                        <th></th>
+                                    </tr>
+                                </thead>
 
-                    <div class="tab-pane fade" id="pills-Group" role="tabpanel" aria-labelledby="pills-Group-tab">...</div>
+                            </table>
+                        </div>
+                    </div>
                     <div class="tab-pane fade" id="pills-Performance" role="tabpanel" aria-labelledby="pills-Performance-tab">...</div>
                     <div class="tab-pane fade" id="pills-Action" role="tabpanel" aria-labelledby="pills-Action-tab">...</div>
-
-
                     <div class="col-12 content-navitem">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
@@ -423,6 +431,7 @@ $this->title = 'KFI';
                             </ul>
                         </nav>
                     </div>
+                </div>
             </ul>
         </div>
     </div>
