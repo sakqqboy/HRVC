@@ -32,22 +32,28 @@ $this->title = 'Management Layer';
 							<?php
 							if (isset($layers) && count($layers) > 0) {
 
-								$i = 0;
+								$i = 1;
 								foreach ($layers as $layer) :
 									if ($i == 0) { ?>
 										<div class="col-12 pl-10">
-											<img src="<?= Yii::$app->homeUrl ?>image/shape.png" class="image-shape">
+											<img src="<?= Yii::$app->homeUrl ?>image/shape-<?= $i ?>.png" class="image-shape">
 										</div>
 
-									<?php
+										<?php
 
 									} else {
-
-									?>
-										<div class="col-12 mt-25 pl-10" style="word-wrap: break-word;">
-											<img src="<?= Yii::$app->homeUrl ?>image/shape-<?= $i ?>.png" style="width:245px;height:90px;margin-top:5px;">
-										</div>
+										if ($i == 1) {
+										?>
+											<div class="col-12 mt-25 pl-10" style="word-wrap: break-word;">
+												<img src="<?= Yii::$app->homeUrl ?>image/shape-<?= $i ?>.png" style="width:100%;margin-top:-10px;height:50px;">
+											</div>
+										<?php
+										} else { ?>
+											<div class="col-12 mt-25 pl-10" style="word-wrap: break-word;">
+												<img src="<?= Yii::$app->homeUrl ?>image/shape-<?= $i ?>.png" style="width:100%;margin-top:5px;height:150px;">
+											</div>
 									<?php
+										}
 									}
 									$arr = explode(" ", $layer['layerName']);
 									?>
@@ -71,6 +77,7 @@ $this->title = 'Management Layer';
 								endforeach;
 							}
 							?>
+
 						</div>
 						<div class="col-lg-6 col-md-6 col-12 top-layer-all">
 							<?php
@@ -136,6 +143,26 @@ $this->title = 'Management Layer';
 					"layers" => $layers
 				]) ?>
 
+			</div>
+			<div class="col-12 mt-25 pl-10 text-center border" style="word-wrap: break-word;">
+				<?php
+				$a = 1;
+				while ($a <= 10) {
+					if ($a == 1) { ?>
+						<div class="col-12 border">
+							<img src="<?= Yii::$app->homeUrl ?>image/shape-<?= $a ?>.png" style="width:15%;margin-top:5px;height:100px;">
+						</div>
+					<?php
+					} else {
+					?>
+						<div class="col-12 border">
+							<img src="<?= Yii::$app->homeUrl ?>image/shape-<?= $a ?>.png" style="margin-top:5px;height:100px;margin-left:-8px;">
+						</div>
+				<?php
+					}
+					$a++;
+				}
+				?>
 			</div>
 		</div>
 	</div>
