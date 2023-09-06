@@ -22,7 +22,7 @@
 }
 
 .top-management {
-    margin-top: -45px;
+    margin-top: -75px;
     font-weight: 700;
 }
 
@@ -50,7 +50,7 @@
 
 .alert-vector {
     width: 60%;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .show-Management {
@@ -60,20 +60,19 @@
 
 .sub-later0 {
     font-weight: 700;
-    margin-top: 40px;
+    margin-top: 20px;
     font-size: 12px;
 }
 
 .TM {
-    margin-top: 20px;
-    font-size: 12px;
-    line-height: 23px;
+    line-height: 20px;
 }
 
 .big-management {
     font-weight: 600;
     font-size: 18px;
-    color: black
+    color: black;
+    margin-top: -20px;
 }
 
 .leyer-Editor {
@@ -88,6 +87,47 @@
 
 .top-layer-all {
     margin-top: 30px;
+}
+
+.basic-layer {
+    width: 350%;
+    height: 100px;
+    margin-top: 10px;
+    margin-left: -470px;
+}
+
+.basic-layer-text {
+    margin-top: -55px;
+    position: absolute;
+    margin-left: -212px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.advance-layer {
+    width: 200%;
+    height: 90px;
+    margin-top: 10px;
+    margin-left: -190px;
+    font-size: 12px;
+}
+
+.create-new-layer {
+    opacity: 0.3;
+    cursor: pointer;
+}
+
+.create-new-layer:hover {
+    opacity: 0.7;
+    font-size: 16px !important;
+}
+
+.advance-layer-text {
+    margin-top: -55px;
+    position: absolute;
+    margin-left: -215px;
+    font-size: 12px;
+    font-weight: bold;
 }
 
 @media(max-width: 922px) {

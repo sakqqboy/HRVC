@@ -1,5 +1,7 @@
 <?php
 
+use frontend\models\hrvc\SubLayer;
+
 $this->title = 'Management Layer';
 ?>
 
@@ -30,54 +32,58 @@ $this->title = 'Management Layer';
 					<div class="row">
 						<div class="col-lg-6 col-md-6 col-12 text-center mt-50">
 							<?php
+							$i = 1;
+							if (isset($layers) && count($layers) <= 2) {
+								$class1 = "basic-layer";
+								$class2 = "basic-layer-text";
+							} else {
+								$class1 = "advance-layer";
+								$class2 = "advance-layer-text";
+							}
 							if (isset($layers) && count($layers) > 0) {
-
-								$i = 1;
 								foreach ($layers as $layer) :
-									if ($i == 0) { ?>
-										<div class="col-12 pl-10">
-											<img src="<?= Yii::$app->homeUrl ?>image/shape-<?= $i ?>.png" class="image-shape">
-										</div>
+							?>
+									<div class="col-12 text-center" onclick="javascript:showSubLayer(<?= $layer['layerId'] ?>)" style="cursor: pointer;">
 
+										<img src="<?= Yii::$app->homeUrl ?>image/shape-<?= $i ?>.png" class="<?= $class1 ?>">
 										<?php
-
-									} else {
-										if ($i == 1) {
+										$arr = explode(" ", $layer['layerName']);
 										?>
-											<div class="col-12 mt-25 pl-10" style="word-wrap: break-word;">
-												<img src="<?= Yii::$app->homeUrl ?>image/shape-<?= $i ?>.png" style="width:100%;margin-top:-10px;height:50px;">
-											</div>
-										<?php
-										} else { ?>
-											<div class="col-12 mt-25 pl-10" style="word-wrap: break-word;">
-												<img src="<?= Yii::$app->homeUrl ?>image/shape-<?= $i ?>.png" style="width:100%;margin-top:5px;height:150px;">
-											</div>
-									<?php
-										}
-									}
-									$arr = explode(" ", $layer['layerName']);
-									?>
-									<div class="col-12 top-management font-size-12 pl-9">
-										<?= $arr[0] ?>
-										<p><?= $arr[1] ?>
-											<?php
-											if (isset($arr[2])) { ?>
-												<?= $arr[2] ?>
-											<?php
-											}
-											if (isset($arr[3])) { ?>
-												<?= $arr[3] ?>
-											<?php
-											}
-											?>
-										</p>
+										<div class="<?= $class2 ?> col-12" id="layerName-<?= $layer['layerId'] ?>">
+
+											<?= $arr[0] ?>
+
+											<p>
+												<?php
+												if (isset($arr[1])) { ?>
+													<?= $arr[1] ?>
+												<?php
+												}
+												if (isset($arr[2])) { ?>
+													<?= $arr[2] ?>
+												<?php
+												}
+												if (isset($arr[3])) { ?>
+													<?= $arr[3] ?>
+												<?php
+												}
+												?>
+											</p>
+										</div>
 									</div>
 							<?php
 									$i++;
 								endforeach;
 							}
 							?>
+							<div class="col-12 text-center create-new-layer" id="createNewLayer" onclick="javascript:addNewLayer(<?= $i ?>)">
 
+								<img src="<?= Yii::$app->homeUrl ?>image/shape-<?= $i ?>.png" class="<?= $class1 ?> ">
+
+								<div class="<?= $class2 ?> col-12">
+									+ Create new
+								</div>
+							</div>
 						</div>
 						<div class="col-lg-6 col-md-6 col-12 top-layer-all">
 							<?php
@@ -103,16 +109,23 @@ $this->title = 'Management Layer';
 							?>
 						</div>
 					</div>
-					<div class="col-12">
+					<div class="col-12 mt-20">
 						<div class="row">
 							<?php
 							if (isset($layers) && count($layers) > 0) {
 								foreach ($layers as $layer) : ?>
 
 									<div class="col-lg-4 col-md-6 col-12">
-										<div class="alert alert-light" role="alert" style="border-radius: 10px;">
+										<div class="alert alert-light" role="alert" style="border-radius: 10px;padding-bottom:30px;">
+											<div class="col-12 pr-0 text-end">
+												<a href="javascript:deleteLayer(<?= $layer['layerId'] ?>)" class="btn btn-outline-danger btn-sm">
+													<i class="fa fa-trash-o" aria-hidden="true"></i>
+												</a>
+											</div>
 											<div class="col-12 big-management" id="bottom-layer-<?= $layer['layerId'] ?>">
-												<?= $layer['layerName'] ?>
+												<a href="javascript:showSubLayer(<?= $layer['layerId'] ?>)" class="no-underline-black">
+													<?= $layer['layerName'] ?>
+												</a>
 											</div>
 											<div class="row mt-10">
 												<div class="col-3 text-center" style="border-right: lightgray solid thin;">
@@ -122,10 +135,8 @@ $this->title = 'Management Layer';
 												<div class="col-5 sub-later0">
 													SUB-LAYER
 												</div>
-												<div class="col-3 TM ">
-													TM
-													MM
-													LM
+												<div class="col-3 TM font-size-16" id="sub-layer-tag-<?= $layer['layerId'] ?>">
+													<?= SubLayer::subLayerInLayer($layer['layerId']) ?>
 												</div>
 											</div>
 										</div>
@@ -142,28 +153,10 @@ $this->title = 'Management Layer';
 				<?= $this->render('layer_title', [
 					"layers" => $layers
 				]) ?>
+				<?= $this->render('sub_layer') ?>
 
 			</div>
-			<div class="col-12 mt-25 pl-10 text-center border" style="word-wrap: break-word;">
-				<?php
-				$a = 1;
-				while ($a <= 10) {
-					if ($a == 1) { ?>
-						<div class="col-12 border">
-							<img src="<?= Yii::$app->homeUrl ?>image/shape-<?= $a ?>.png" style="width:15%;margin-top:5px;height:100px;">
-						</div>
-					<?php
-					} else {
-					?>
-						<div class="col-12 border">
-							<img src="<?= Yii::$app->homeUrl ?>image/shape-<?= $a ?>.png" style="margin-top:5px;height:100px;margin-left:-8px;">
-						</div>
-				<?php
-					}
-					$a++;
-				}
-				?>
-			</div>
+
 		</div>
 	</div>
 </div>
