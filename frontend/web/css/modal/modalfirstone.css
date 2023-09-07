@@ -1,0 +1,56 @@
+.Modalfirstone {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.fsm {
+    font-size: 14px;
+    text-align: end;
+    padding-right: 30px;
+}
+
+.Round1 {
+    width: 20px;
+}
+
+.nav-border4 {
+    text-decoration: none;
+    color: #000000;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.nav-border4 :hover {
+    border-bottom: 2px solid thin;
+    color: rgb(51, 183, 235);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.Report-Issue {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.card-hashed {
+    border-style: dashed;
+    border-radius: 5px;
+    color: gray;
+    margin-top: 20px;
+    padding-left: 10px;
+    padding-top: 10px;
+    font-weight: 700;
+    color: #000000;
+}
+
+.image-hashed {
+    width: 20px;
+}
+
+.problemm {
+    font-weight: 400;
+    color: #000000;
+    padding-right: 10px;
+    padding-top: 10px;
+}
