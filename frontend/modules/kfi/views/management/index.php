@@ -27,7 +27,7 @@ $this->title = 'KFI';
 			</ul>
 		</div>
 
-		<div class="alert alert-white-4">
+		<div class="alert alert-light-4">
 			<div class="row">
 				<div class="col-lg-4 col-md-6 col-12 key1">
 					<div class="row">
@@ -193,8 +193,8 @@ $this->title = 'KFI';
 										<th></th>
 									</tr>
 								</thead>
-								<tbody class="">
-									<tr>
+								<tbody>
+									<tr style="border-bottom: 10px white !important;">
 										<td class="over-blue">
 											<span class="badge bg-info text-white">PL</span> Total Sales
 
@@ -229,8 +229,8 @@ $this->title = 'KFI';
 									</tr>
 								</tbody>
 								<tbody class="over1">
-									<tr class="font-size-12">
-										<td>
+									<tr class="font-size-12 " style="border-color: white;">
+										<td class="over-yellow">
 											<span class="badge bg-info text-white">PL</span>
 											Subscribe Sales
 										</td>

@@ -80,18 +80,15 @@
 .new-light-4 a:hover {
     background: rgb(255, 255, 255);
     color: #5CAEF9;
-
 }
 
 .btn-light-3 {
     background-color: rgb(255, 255, 255);
-
 }
 
 .presentation-end {
     margin-left: 190px;
 }
-
 
 .over-blue {
     border-left: 7px solid #5CAEF9;
@@ -109,8 +106,6 @@ table {
     border-radius: 5px;
     overflow: hidden;
 }
-
-
 
 .image-Avatar1 {
     width: 2rem;
@@ -154,49 +149,37 @@ table {
     cursor: pointer;
 }
 
-
-
 @media(max-width: 992px) {
     .pd-Performance {
         padding-left: 10px;
     }
-
     .New-date {
         padding-top: 20px;
     }
-
     .New-KFI {
         padding-top: 20px;
     }
-
 }
-
 
 @media (max-width: 768px) {
     .tb-width5 {
         width: 20rem;
     }
-
     .content-navitem {
         margin-left: 70px;
     }
-
     .pd-Performance {
         padding-left: 10px;
     }
-
     .New-KFI {
         padding-top: 20px;
     }
-
     .New-date {
         padding-top: 20px;
     }
-
     .key1 {
         font-size: 16px;
     }
-
     .new-light-4 {
         text-align: end;
     }
