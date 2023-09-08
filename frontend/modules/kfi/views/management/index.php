@@ -195,7 +195,7 @@ $this->title = 'KFI';
 								</thead>
 								<tbody class="">
 									<tr>
-										<td style="border-radius: 10px !important;border-left: 10px solid black;">
+										<td class="over-blue">
 											<span class="badge bg-info text-white">PL</span> Total Sales
 
 										</td>
