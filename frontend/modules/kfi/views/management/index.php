@@ -150,7 +150,12 @@ $this->title = 'KFI';
 													<span> <i class="fa fa-comments-o on-cursor" aria-hidden="true"></i></span> &nbsp;
 													<span class="dropdown" href="#" role="but ton" id="dropdownMenuLink-<?= $kfiId ?>" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
 													<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kfiId ?>">
-														<li><a class="dropdown-item" href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i> <strong class="red">*</strong></a> </li>
+														<li data-bs-toggle="modal" data-bs-target="#staticBackdrop2" onclick="javascript:updateKfi(<?= $kfiId ?>)">
+															<a class="dropdown-item" href="#">
+																<i class="fa fa-file-text-o" aria-hidden="true"></i>
+																<strong class="red">*</strong>
+															</a>
+														</li>
 														<li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
 														<li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
 													</ul>

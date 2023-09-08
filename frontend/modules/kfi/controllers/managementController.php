@@ -5,6 +5,8 @@ namespace frontend\modules\kfi\controllers;
 use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
+use frontend\models\hrvc\Branch;
+use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Kfi;
 use frontend\models\hrvc\KfiHistory;
@@ -74,7 +76,7 @@ class ManagementController extends Controller
 			}
 		}
 	}
-	public function actionUpdateKfi()
+	public function actionSaveUpdateKfi()
 	{
 		if (isset($_POST["kfiId"])) {
 			$kfi = Kfi::find()->where(["kfiId" => $_POST["kfiId"]])->one();
@@ -98,5 +100,39 @@ class ManagementController extends Controller
 			$kfiHistory->save(false);
 			return $this->redirect('index');
 		}
+	}
+	public function actionUpdateKfi()
+	{
+		$kfiId = $_POST["kfiId"];
+		$kfi = Kfi::find()->where(["kfiId" => $kfiId])->asArray()->one();
+		$res["kfiName"] = $kfi["kfiName"];
+		$res["companyName"] = Company::companyName($kfi['companyId']);
+		$res["branchName"] = Branch::branchName($kfi['branchId']);
+		$res["unitId"] = $kfi["unitId"];
+		$res["detail"] = $kfi["kfiDetail"];
+		$res["targetAmount"] = $kfi["targetAmount"];
+		$res["status"] = true;
+		$res["monthName"] = ModelMaster::monthEng($kfi['month'], 1);
+
+		$kfiHistory = KfiHistory::find()
+			->where(["kfiId" => $kfi["kfiId"], "status" => [1, 4]])
+			->orderBy('kfiHistoryId DESC')
+			->one();
+		if (isset($kfiHistory) && !empty($kfiHistory)) {
+			$res["quantRatio"] = $kfiHistory["quantRatio"];
+			$res["code"] =  $kfiHistory["code"];
+			$res["result"] = $kfiHistory["result"];
+			$res["amountType"] = $kfiHistory["amountType"];
+			$res["kfistatus"] = $kfiHistory["historyStatus"];
+			$res["code"] = $kfiHistory["code"];
+		} else {
+			$res["quantRatio"] = "";
+			$res["code"] = "";
+			$res["result"] = "";
+			$res["amountType"] = "";
+			$res["kfistatus"] = "";
+			$res["code"] = "";
+		}
+		return json_encode($res);
 	}
 }
