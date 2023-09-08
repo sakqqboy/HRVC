@@ -7,6 +7,7 @@ use common\models\ModelMaster;
 use Exception;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Kfi;
+use frontend\models\hrvc\KfiHistory;
 use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
@@ -71,6 +72,31 @@ class ManagementController extends Controller
 			if ($kfi->save(false)) {
 				return $this->redirect('index');
 			}
+		}
+	}
+	public function actionUpdateKfi()
+	{
+		if (isset($_POST["kfiId"])) {
+			$kfi = Kfi::find()->where(["kfiId" => $_POST["kfiId"]])->one();
+			$kfi->unitId = $_POST["unit"];
+			$kfi->kfiDetail = $_POST["detail"];
+			$kfi->quantRatio = $_POST["quantio"];
+			$kfi->status = $_POST["status"];
+			$kfi->save(false);
+			$kfiHistory = new KfiHistory();
+			$kfiHistory->kfiId = $_POST["kfiId"];
+			$kfiHistory->checkPeriodDate = $_POST["periodDate"];
+			$kfiHistory->nextCheckDate = $_POST["nextCheckDate"];
+			$kfiHistory->amountType = $_POST["amountType"];
+			$kfiHistory->code = $_POST["code"];
+			$kfiHistory->status = 1;
+			$kfiHistory->historyStatus = $_POST["status"];
+			$kfiHistory->result =  $_POST["result"];
+			$kfiHistory->fomular = $_POST["formular"];
+			$kfiHistory->createDateTime = new Expression('NOW()');
+			$kfiHistory->updateDateTime = new Expression('NOW()');
+			$kfiHistory->save(false);
+			return $this->redirect('index');
 		}
 	}
 }
