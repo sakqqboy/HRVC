@@ -34,12 +34,12 @@ $this->title = 'KGI Grid View';
                             Key Goal Indicators
                         </div>
                         <div class="col-6">
-                            <button type="button" class="btn btn-primary font-size-14" data-bs-toggle="modal" data-bs-target="#staticBackdrop1"><i class="fa fa-magic" aria-hidden="true"></i> Create New KGI</button>
-                            <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <button type="button" class="btn btn-primary font-size-14" data-bs-toggle="modal" data-bs-target="#"><i class="fa fa-magic" aria-hidden="true"></i> Create New KGI</button>
+                            <div class="modal fade" id="" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="" aria-hidden="true">
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title text-primary" id="staticBackdropLabel"><i class="fa fa-magic" aria-hidden="true"></i> Create KGI</h5>
+                                            <h5 class="modal-title text-primary" id=""><i class="fa fa-magic" aria-hidden="true"></i> Create KGI</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="col-12" style="margin-top: -20px; padding-left:20px; font-size: 13px;">
