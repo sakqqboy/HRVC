@@ -116,7 +116,7 @@ $this->title = 'Management Layer';
 								foreach ($layers as $layer) : ?>
 
 									<div class="col-lg-4 col-md-6 col-12">
-										<div class="alert alert-light" role="alert" style="border-radius: 10px;padding-bottom:30px;">
+										<div class="alert alert-light" role="alert" style="border-radius: 10px;padding-bottom:30px;min-height:200px;">
 											<div class="col-12 pr-0 text-end">
 												<a href="javascript:deleteLayer(<?= $layer['layerId'] ?>)" class="btn btn-outline-danger btn-sm">
 													<i class="fa fa-trash-o" aria-hidden="true"></i>

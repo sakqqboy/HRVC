@@ -9,11 +9,11 @@
 			foreach ($layers as $layer) : ?>
 				<div class="col-lg-7 col-md-6 col-12 mt-20">
 					<label for="exampleFormControlInput1" class="form-label editor1"> <?= $layer["layerName"] ?></label>
-					<input type="text" class="form-control" id="layerName<?= $layer['layerId'] ?>" value="<?= $layer['layerName'] ?>" onkeyup="javascript:updateLayerName(<?= $layer['layerId'] ?>)">
+					<input type="text" class="form-control font-size-14" id="layerName<?= $layer['layerId'] ?>" value="<?= $layer['layerName'] ?>" onkeyup="javascript:updateLayerName(<?= $layer['layerId'] ?>)">
 				</div>
 				<div class="col-lg-5 col-md-6 col-12 mt-20">
 					<label for="exampleFormControlInput1" class="form-label editor1"> Short Tag</label>
-					<input type="text" class="form-control" id="shortTag<?= $layer['layerId'] ?>" value="<?= $layer['shortTag'] ?>" onkeyup="javascript:updateLayerTag(<?= $layer['layerId'] ?>)">
+					<input type="text" class="form-control font-size-14" id="shortTag<?= $layer['layerId'] ?>" value="<?= $layer['shortTag'] ?>" onkeyup="javascript:updateLayerTag(<?= $layer['layerId'] ?>)">
 				</div>
 		<?php
 			endforeach;

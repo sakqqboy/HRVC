@@ -18,6 +18,9 @@ return [
         'setting' => [
             'class' => 'frontend\modules\setting\setting',
         ],
+        'kfi' => [
+            'class' => 'frontend\modules\kfi\kfi',
+        ],
     ],
     'components' => [
         'request' => [

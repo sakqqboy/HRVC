@@ -31,7 +31,7 @@ return 'sub_layer';
 public function rules()
 {
 return [
-            [['subLayerName', 'layerId', 'shortTag'], 'required'],
+            [['subLayerName', 'layerId'], 'required'],
             [['layerId'], 'integer'],
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['subLayerName'], 'string', 'max' => 255],
