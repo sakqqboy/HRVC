@@ -97,7 +97,12 @@
 
 .over-yellow {
     border-left: 7px solid #FFDC61;
-    border-radius: 5px 5px;
+    border-radius: 5px 0px 0px 5px;
+}
+
+.border-bottom-white {
+    border-bottom: 3px solid white;
+    font-size: 12px;
 }
 
 table {
