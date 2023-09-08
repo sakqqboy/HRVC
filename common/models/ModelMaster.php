@@ -205,6 +205,22 @@ class ModelMaster extends \yii\db\ActiveRecord
         $month["12"] = "Dec";
         return $month;
     }
+    public static function monthFull()
+    {
+        $month["01"] = "January";
+        $month["02"] = "February";
+        $month["03"] = "Marh";
+        $month["04"] = "April";
+        $month["05"] = "May";
+        $month["06"] = "June";
+        $month["07"] = "July";
+        $month["08"] = "August";
+        $month["09"] = "September";
+        $month["10"] = "October";
+        $month["11"] = "November";
+        $month["12"] = "December";
+        return $month;
+    }
     public static function shotMonthValue($monthText)
     {
         switch ($monthText) {

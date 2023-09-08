@@ -18,6 +18,9 @@ return [
         'masterdata' => [
             'class' => 'backend\modules\masterdata\masterdata',
         ],
+        'kfi' => [
+            'class' => 'backend\modules\kfi\kfi',
+        ],
     ],
     'components' => [
         'request' => [

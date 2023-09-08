@@ -71,6 +71,8 @@ class AppAsset extends AssetBundle
         'js/setting/employee.js',
         'js/setting/company.js',
         'js/setting/layer.js',
+        'js/kfi/kfi.js',
+
 
     ];
     public $depends = [
