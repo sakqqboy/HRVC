@@ -18,8 +18,8 @@
 
 .Flag-Turkey {
     border-radius: 30px;
-    height: 20px;
-    width: 20px;
+    height: 15px;
+    width: 15px;
 }
 
 #progress1 {
@@ -29,8 +29,8 @@
 
 .progress-item1 {
     display: flex;
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     font-size: 0;
     animation: .4s ease-out reverse;
@@ -59,10 +59,6 @@
     font-size: 12px;
 }
 
-.tb-5 {
-    margin-top: -20px;
-}
-
 #visible0 {
     font-size: 12px;
 }
@@ -84,11 +80,11 @@
 .new-light-4 a:hover {
     background: rgb(255, 255, 255);
     color: #5CAEF9;
+
 }
 
 .btn-light-3 {
     background-color: rgb(255, 255, 255);
-
 
 }
 
@@ -96,13 +92,70 @@
     margin-left: 190px;
 }
 
+
 .over {
-    border-left: #5CAEF9 solid thin;
+    border-left: 5px solid #5CAEF9;
+    padding: 10px;
+    border-radius: 5px 5px;
 }
 
 .over1 {
-    border-left: #ffea00 solid thin;
+    border-left: 5px solid #FFDC61;
+    padding: 10px;
+    border-radius: 5px 5px;
 }
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+
+
+.image-Avatar1 {
+    width: 2rem;
+    height: 2rem;
+}
+
+.bg-secondary-bsc {
+    background-color: rgb(226, 226, 226);
+    color: #000000;
+    font-size: 13px;
+}
+
+.avatar img {
+    border-radius: 50%;
+    position: relative;
+    margin-left: -25px;
+    z-index: 1;
+}
+
+.avatars {
+    direction: ltr;
+    text-align: right;
+    padding-left: 25px;
+}
+
+.navigation-next {
+    margin-left: 40%;
+}
+
+.page-navigation {
+    color: #000000;
+}
+
+.comment-td {
+    width: 17px;
+    cursor: pointer;
+}
+
+.comment-td-dropdown {
+    width: 15px;
+    cursor: pointer;
+}
+
 
 
 @media(max-width: 992px) {
@@ -119,7 +172,6 @@
     }
 
 }
-
 
 
 @media (max-width: 768px) {

@@ -57,6 +57,8 @@ class AppAsset extends AssetBundle
         'css/home/evaluation-module.css',
         'css/home/kfi.css',
         'css/home/kfi-grid.css',
+        'css/home/kgi-grid.css',
+        'css/modal/modalfirstone.css',
 
     ];
     public $js = [
