@@ -195,7 +195,7 @@ $this->title = 'KFI';
                                 </thead>
                                 <tbody>
                                     <tr class="font-size-12">
-                                        <td class="over">
+                                        <td class="over-blue">
                                             <span class="badge bg-info text-white">PL</span> Total Sales
 
                                         </td>
@@ -245,16 +245,31 @@ $this->title = 'KFI';
                                                                         <i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i> Report an Issue
                                                                     </div>
                                                                     <div class="col-12 card-hashed">
-                                                                        <img src="<?= Yii::$app->homeUrl ?>image/ehsan-small.png" class="image-hashed"> Quazi Ehsan Hossain
+                                                                        <img src="<?= Yii::$app->homeUrl ?>image/ehsan-small.png" class="image-hashed">&nbsp; Quazi Ehsan Hossain
                                                                         <div class="col-12 problemm">
                                                                             I am having a problem in this work, i can't work It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
                                                                         </div>
-                                                                        <div class="col-12 mt-10">
-
+                                                                        <div class="col-12 mt-20">
+                                                                            <div class="input-group pr-20">
+                                                                                <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                                                                                <button class="btn btn-primary" type="button" id="inputGroupFileAddon04"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> Submit</button>
+                                                                            </div>
+                                                                            <div class="mt-20"></div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="tab-pane fade" id="pills-History" role="tabpanel" aria-labelledby="pills-History-tab">...</div>
+                                                                <div class="tab-pane fade" id="pills-History" role="tabpanel" aria-labelledby="pills-History-tab">
+                                                                    <ul>
+                                                                        <li class="li-circle">
+                                                                            <img src="<?= Yii::$app->homeUrl ?>image/ehsan-small.png" class="image-circle1"><span class="li-name">Quazi Ehsan Hossain</span>
+                                                                            <div class="style-circle-li">
+                                                                                <span> Hi Tani! Could you take quick look at these Landing Page designs? when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries
+                                                                                    Thanks so much!
+                                                                                </span>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
@@ -277,7 +292,7 @@ $this->title = 'KFI';
                                 </tbody>
                                 <tbody>
                                     <tr class="font-size-12">
-                                        <td class="over1">
+                                        <td class="over-yellow">
                                             <span class="badge bg-info text-white">PL</span>
                                             Subscribe Sales
                                         </td>
@@ -312,7 +327,7 @@ $this->title = 'KFI';
                                 </tbody>
                                 <tbody>
                                     <tr class="font-size-12">
-                                        <td class="over">
+                                        <td class="over-blue">
                                             <span class="badge bg-info text-white">PL</span>
                                             Decrease Variable Expene
                                         </td>
@@ -347,7 +362,7 @@ $this->title = 'KFI';
                                 </tbody>
                                 <tbody>
                                     <tr class="font-size-12">
-                                        <td class="over1">
+                                        <td class="over-yellow">
                                             <span class="badge bg-info text-white">PL</span>
                                             Operating Profit
                                         </td>
@@ -382,7 +397,7 @@ $this->title = 'KFI';
                                 </tbody>
                                 <tbody>
                                     <tr class="font-size-12">
-                                        <td class="over">
+                                        <td class="over-blue">
                                             <span class="badge bg-info text-white">PL</span>
                                             Decrease Variable Expene
                                         </td>
@@ -417,7 +432,7 @@ $this->title = 'KFI';
                                 </tbody>
                                 <tbody>
                                     <tr class="font-size-12">
-                                        <td class="over1">
+                                        <td class="over-yellow">
                                             <span class="badge bg-info text-white">PL</span>
                                             Decrease Variable Expene
                                         </td>

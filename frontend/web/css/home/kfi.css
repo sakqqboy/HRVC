@@ -93,15 +93,13 @@
 }
 
 
-.over {
-    border-left: 5px solid #5CAEF9;
-    padding: 10px;
-    border-radius: 5px 5px;
+.over-blue {
+    border-left: 7px solid #5CAEF9;
+    border-radius: 5px 0px 0px 5px;
 }
 
-.over1 {
-    border-left: 5px solid #FFDC61;
-    padding: 10px;
+.over-yellow {
+    border-left: 7px solid #FFDC61;
     border-radius: 5px 5px;
 }
 

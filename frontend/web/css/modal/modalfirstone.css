@@ -45,7 +45,11 @@
 }
 
 .image-hashed {
-    width: 20px;
+    width: 30px;
+}
+
+.image-circle1 {
+    width: 40px;
 }
 
 .problemm {
@@ -53,4 +57,28 @@
     color: #000000;
     padding-right: 10px;
     padding-top: 10px;
+}
+
+.li-circle {
+    list-style-type: disc;
+    font-size: 50px;
+    color: gray;
+}
+
+.li-name {
+    font-size: 20px;
+    color: #000000;
+    font-weight: 600;
+    padding-left: 15px;
+}
+
+.style-circle-li {
+    border-left: 3px rgb(227, 227, 227) solid;
+    height: 200px;
+    margin-left: -33px;
+    margin-top: -20px 20px;
+    font-size: 18px;
+    color: #000000;
+    width: 1100px;
+    padding: 10px;
 }
