@@ -29,7 +29,7 @@ $this->title = 'KFI';
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-Financial" role="tabpanel" aria-labelledby="pills-Financial-tab">
-                    <div class="alert alert-white-4">
+                    <div class="alert alert2-secondary2">
                         <div class="row">
                             <div class="col-lg-4 col-md-6 col-12 key1">
                                 <div class="row">
@@ -194,7 +194,7 @@ $this->title = 'KFI';
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="font-size-12">
+                                    <tr class="font-size-12 border-bottom-white">
                                         <td class="over-blue">
                                             <span class="badge bg-info text-white">PL</span> Total Sales
 
@@ -231,40 +231,78 @@ $this->title = 'KFI';
                                                             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                                                                 <div class="row">
                                                                     <div class="col-lg-6 col-md-6 col-12">
-                                                                        <a class="nav-border4" id="pills-Issues-tab" data-bs-toggle="pill" data-bs-target="#pills-Issues" type="button" role="tab" aria-controls="pills-Issues" aria-selected="true">Issues</a>
+                                                                        <a class="link-3" id="pills-Issues-tab" data-bs-toggle="pill" data-bs-target="#pills-Issues" type="button" role="tab" aria-controls="pills-Issues" aria-selected="true">Issues</a>
                                                                     </div>
                                                                     <div class="col-lg-6 col-md-6 col-12">
-                                                                        <a class="nav-border4" id="pills-History-tab" data-bs-toggle="pill" data-bs-target="#pills-History" type="button" role="tab" aria-controls="pills-History" aria-selected="false">History</a>
+                                                                        <a class="link-3" id="pills-History-tab" data-bs-toggle="pill" data-bs-target="#pills-History" type="button" role="tab" aria-controls="pills-History" aria-selected="false">History</a>
                                                                     </div>
                                                                 </div>
                                                             </ul>
                                                             <hr>
                                                             <div class="tab-content" id="pills-tabContent">
                                                                 <div class="tab-pane fade show active" id="pills-Issues" role="tabpanel" aria-labelledby="pills-Issues-tab">
-                                                                    <div class="col-12 Report-Issue">
-                                                                        <i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i> Report an Issue
-                                                                    </div>
-                                                                    <div class="col-12 card-hashed">
-                                                                        <img src="<?= Yii::$app->homeUrl ?>image/ehsan-small.png" class="image-hashed">&nbsp; Quazi Ehsan Hossain
-                                                                        <div class="col-12 problemm">
-                                                                            I am having a problem in this work, i can't work It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                                                                    <ul>
+                                                                        <li class="li-circle">
+                                                                            <img src="<?= Yii::$app->homeUrl ?>image/ehsan-small.png" class="image-circle1"><span class="li-name">Quazi Ehsan Hossain
+                                                                                <span class="Report-Issue"> May 31, 2023 <i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i> </span>
+                                                                        </li>
+                                                                        <div class="style-circle-li">
+                                                                            <span> Hi Tani! Could you take quick look at these Landing Page designs? when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries
+                                                                                <p class="mt-20">Thanks so much!</p>
+                                                                            </span>
                                                                         </div>
-                                                                        <div class="col-12 mt-20">
-                                                                            <div class="input-group pr-20">
-                                                                                <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-                                                                                <button class="btn btn-primary" type="button" id="inputGroupFileAddon04"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> Submit</button>
+                                                                        <div class="alert alert-secondary" style="border: none;margin-top: -30px;margin-left:20px;">
+                                                                            <div class="row">
+                                                                                <div class="col-lg-7 col-md-6 col-12">
+                                                                                    <span class="badge bg-white"> <img src="<?= Yii::$app->homeUrl ?>image/pdf.png" class="pdf-down"></span> <span class="text-dark"> 115 IHI July Invoice(Gunman) 30.July.2021.pdf 2.3mb</span>
+                                                                                </div>
+                                                                                <div class="col-lg-5 col-md-6 col-12 text-end">
+                                                                                    <button class="btn btn-outline-secondary"> <i class="fa fa-eye" aria-hidden="true"></i></button>
+                                                                                    <button class="btn btn-outline-secondary"> <i class="fa fa-cloud-download" aria-hidden="true"></i></button>
+                                                                                </div>
                                                                             </div>
-                                                                            <div class="mt-20"></div>
                                                                         </div>
-                                                                    </div>
+                                                                        </li>
+                                                                        <li class="li-circle1">
+                                                                            <div class="col-12 card-hashed">
+                                                                                <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-hashed">&nbsp; <span class="font-size-12">Tadawoki Watanabe</span>
+                                                                                <div class="col-12 problemm">
+                                                                                    <span> Hi Tani! Could you take quick look at these Landing Page designs? when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries
+                                                                                        <p class="mt-20">Thanks so much!</p>
+                                                                                    </span>
+                                                                                </div>
+                                                                                <div class="col-12 mt-20">
+                                                                                    <div class="input-group pr-20">
+                                                                                        <input for class="form-control">
+                                                                                        <a><i class="fa fa-paperclip clip-file" aria-hidden="true" type="file"></i></a>
+                                                                                        <button class="btn btn-primary form-submitbotton" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> Submit</button>
+                                                                                    </div>
+                                                                                    <div class="mt-20"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
                                                                 </div>
                                                                 <div class="tab-pane fade" id="pills-History" role="tabpanel" aria-labelledby="pills-History-tab">
                                                                     <ul>
                                                                         <li class="li-circle">
-                                                                            <img src="<?= Yii::$app->homeUrl ?>image/ehsan-small.png" class="image-circle1"><span class="li-name">Quazi Ehsan Hossain</span>
-                                                                            <div class="style-circle-li">
+                                                                            <img src="<?= Yii::$app->homeUrl ?>image/ehsan-small.png" class="image-circle1"><span class="li-name">Quazi Ehsan Hossain
+                                                                                <span class="Report-Issue">2:56 PM, May 31, 2023</span>
+                                                                        </li>
+                                                                        <div class="style-circle-li">
+                                                                            <span> Hi Tani! Could you take quick look at these Landing Page designs? when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries
+                                                                                <p class="mt-20">Thanks so much!</p>
+                                                                            </span>
+                                                                        </div>
+                                                                        <div class="col-12 badge-pdf0">
+                                                                            <span class="badge bg-light"> <img src="<?= Yii::$app->homeUrl ?>image/pdf.png" class="pdf-down"></span> <span class="text-dark"> 115 IHI July Invoice(Gunman) 30.July.2021.pdf 2.3mb</span>
+                                                                        </div>
+                                                                        </li>
+                                                                        <li class="li-circle">
+                                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-hashed">&nbsp; <strong class="font-size-14 text-dark">Tadawoki Watanabe </strong>&nbsp; <span class="Report-Issue"> 2:56 PM, May 31, 2023</span>
+                                                                            <div class="col-12 problemm">
                                                                                 <span> Hi Tani! Could you take quick look at these Landing Page designs? when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries
-                                                                                    Thanks so much!
+                                                                                    <p class="mt-20">Thanks so much!</p>
                                                                                 </span>
                                                                             </div>
                                                                         </li>
@@ -272,17 +310,199 @@ $this->title = 'KFI';
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-primary">Save</button>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <span class="dropdown" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
+                                            <span class="dropdown" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                 <li>
-                                                    <button class="dropdown-item"><i class="fa fa-file-text-o" aria-hidden="true"></i> <strong class="red">*</strong></button>
+                                                    <button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop2"><i class="fa fa-file-text-o" aria-hidden="true"></i> <strong class="red">*</strong></button>
+                                                    <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdrop2" aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title text-primary" id="staticBackdropLabel"><i class="fa fa-magic" aria-hidden="true"></i> Complete Setup</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="col-12" style="margin-top: -20px; padding-left:20px; font-size: 13px;">
+                                                                    <i class="fa fa-flag" aria-hidden="true"></i> Key Financial Indicator
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-6 col-md-6 col-6">
+                                                                            <div class="col-12">
+                                                                                <label for="exampleFormControlInput1" class="form-label"><strong class="red">*</strong> KFI Contents</label>
+                                                                                <input type="text" class="form-control" placeholder="">
+                                                                            </div>
+                                                                            <div class="col-12 pt-5">
+                                                                                <label for="input" class="form-label"><strong class="red">*</strong> Company</label>
+                                                                                <select class="form-select" aria-label="Default select example">
+                                                                                    <option selected>Select Company</option>
+                                                                                    <option value="1">Tokyo Consulting Firm Danışmanlık</option>
+                                                                                    <option value="2">Tokyo Consulting Firm Pvt. Ltd.</option>
+                                                                                    <option value="3">Tokyo Consulting Firm PLC</option>
+                                                                                    <option value="4">Tokyo Consulting Firm Pt.</option>
+                                                                                    <option value="5">Tokyo Consulting Firm</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="col-12 pt-5">
+                                                                                <label for="input" class="form-label"><strong class="red">*</strong> Branch</label>
+                                                                                <select class="form-select" aria-label="Default select example">
+                                                                                    <option selected>Select Branch</option>
+                                                                                    <option value="1">Branch 1</option>
+                                                                                    <option value="2">Branch 2</option>
+                                                                                    <option value="3">Branch 3</option>
+                                                                                    <option value="4">Branch 4</option>
+                                                                                    <option value="5">Branch 5</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="col-12 pt-10">
+                                                                                <label for="input" class="form-label"><strong class="red">*</strong> Check Unit</label>
+                                                                                <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                                                                    <button type="button" class="btn btn-outline-secondary font-size-11">Monthly</button>
+                                                                                    <button type="button" class="btn btn-outline-secondary font-size-11">Weekly</button>
+                                                                                    <button type="button" class="btn btn-outline-secondary font-size-11">Quaterly</button>
+                                                                                    <button type="button" class="btn btn-outline-secondary font-size-11">Daily</button>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-12 pt-5">
+                                                                                <div class="input-group">
+                                                                                    <label for="input" class="form-label"><strong class="red">*</strong> Select Period</label>
+                                                                                    <div class="input-group">
+                                                                                        <span class="input-group-text font-size-12"><i class="fa fa-calendar-o" aria-hidden="true"></i> &nbsp;&nbsp; Date</span>
+                                                                                        <input type="date" aria-label="" class="form-control font-size-12">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-12 pt-5">
+                                                                                <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Target Amount</label>
+                                                                                <input type="text" class="form-control font-size-13" placeholder="">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-md-6 col-6">
+                                                                            <div class="col-12">
+                                                                                <label for="exampleFormControlTextarea1" class="form-label"> KFI Details</label>
+                                                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-lg-6 col-md-6 col-6 pt-10">
+                                                                                    <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Quant Ratio</label>
+                                                                                    <select class="form-select font-size-13" aria-label="Default select example">
+                                                                                        <option selected>Quantity or Quality</option>
+                                                                                        <option value="1">January</option>
+                                                                                        <option value="2">June</option>
+                                                                                        <option value="3">July</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="col-lg-6 col-md-6 col-6 pt-10">
+                                                                                    <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Priority</label>
+                                                                                    <select class="form-select font-size-13" aria-label="Default select example">
+                                                                                        <option selected>A/B/C</option>
+                                                                                        <option value="1"></option>
+                                                                                        <option value="2"></option>
+                                                                                        <option value="3"></option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="col-lg-6 col-md-6 col-6 pt-10">
+                                                                                    <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Amount Type</label>
+                                                                                    <select class="form-select font-size-13" aria-label="Default select example">
+                                                                                        <option selected>% or Number</option>
+                                                                                        <option value="1"></option>
+                                                                                        <option value="2"></option>
+                                                                                        <option value="3"></option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="col-lg-6 col-md-6 col-6 pt-10">
+                                                                                    <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Code</label>
+                                                                                    <select class="form-select font-size-13" aria-label="Default select example">
+                                                                                        <option selected>
+                                                                                            <=>
+                                                                                        </option>
+                                                                                        <option value="1"></option>
+                                                                                        <option value="2"></option>
+                                                                                        <option value="3"></option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="col-lg-6 col-md-6 col-6 pt-10">
+                                                                                    <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Status</label>
+                                                                                    <select class="form-select font-size-13" aria-label="Default select example">
+                                                                                        <option selected>Active/Finished</option>
+                                                                                        <option value="1"></option>
+                                                                                        <option value="2"></option>
+                                                                                        <option value="3"></option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="col-lg-6 col-md-6 col-6 pt-10">
+                                                                                    <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Month</label>
+                                                                                    <select class="form-select font-size-13" aria-label="Default select example">
+                                                                                        <option selected>Select Month</option>
+                                                                                        <option value="1">January</option>
+                                                                                        <option value="2"></option>
+                                                                                        <option value="3"></option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="col-12">
+                                                                                    <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Result</label>
+                                                                                    <input type="text" class="form-control font-size-13" placeholder="">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12 pt-10">
+                                                                        Set Ratio Formula
+                                                                    </div>
+                                                                    <div class="col-12 pt-10">
+                                                                        <select class="form-select font-size-12 alert-primary-12 text-dark" aria-label="Default select example">
+                                                                            <option selected>Use Custom Formula</option>
+                                                                            <option value="1">One</option>
+                                                                            <option value="2">Two</option>
+                                                                            <option value="3">Three</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="alert alert-primary-12 mt-10" role="alert">
+                                                                        <div class="alert alert-light">
+                                                                            <div class="row">
+                                                                                <div class="col-lg-2 col-md-6 col-12">
+                                                                                    <a href=""> <span class="badge bg-secondary text-white font-size-14"> <i class="fa fa-bullseye" aria-hidden="true"></i> Target</span></a>
+                                                                                </div>
+                                                                                <div class="col-lg-2 col-md-6 col-12">
+                                                                                    <a href=""> <span class="badge bg-secondary text-white font-size-14"> <i class="fa fa-trophy" aria-hidden="true"></i> Result </span></a>
+                                                                                </div>
+                                                                                <div class="col-lg-1 col-md-6 col-12">
+                                                                                    <button type="button" class="btn btn-primary"> + </button>
+                                                                                </div>
+                                                                                <div class="col-lg-1 col-md-6 col-12">
+                                                                                    <button type="button" class="btn btn-primary"> - </button>
+                                                                                </div>
+                                                                                <div class="col-lg-1 col-md-6 col-12">
+                                                                                    <button type="button" class="btn btn-primary"> / </button>
+                                                                                </div>
+                                                                                <div class="col-lg-1 col-md-6 col-12">
+                                                                                    <button type="button" class="btn btn-primary"> x </button>
+                                                                                </div>
+                                                                                <div class="col-lg-1 col-md-6 col-12">
+                                                                                    <button type="button" class="btn btn-secondary"> ( </button>
+                                                                                </div>
+                                                                                <div class="col-lg-1 col-md-6 col-12">
+                                                                                    <button type="button" class="btn btn-secondary"> ) </button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="alert alert-light">
+                                                                            <div class="col-12 ">
+                                                                                <input type="text" class="form-control" style="border: none;" placeholder="( [ Target ] + [ Result ] - [ Target ] )">
+                                                                            </div>
+                                                                            <div class="mt-50"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                    <button type="button" class="btn btn-primary">Create</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </li>
                                                 <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
                                                 <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
@@ -291,7 +511,7 @@ $this->title = 'KFI';
                                     </tr>
                                 </tbody>
                                 <tbody>
-                                    <tr class="font-size-12">
+                                    <tr class="border-bottom-white">
                                         <td class="over-yellow">
                                             <span class="badge bg-info text-white">PL</span>
                                             Subscribe Sales
@@ -326,7 +546,7 @@ $this->title = 'KFI';
                                     </tr>
                                 </tbody>
                                 <tbody>
-                                    <tr class="font-size-12">
+                                    <tr class="border-bottom-white">
                                         <td class="over-blue">
                                             <span class="badge bg-info text-white">PL</span>
                                             Decrease Variable Expene
@@ -361,7 +581,7 @@ $this->title = 'KFI';
                                     </tr>
                                 </tbody>
                                 <tbody>
-                                    <tr class="font-size-12">
+                                    <tr class="border-bottom-white">
                                         <td class="over-yellow">
                                             <span class="badge bg-info text-white">PL</span>
                                             Operating Profit
@@ -396,7 +616,7 @@ $this->title = 'KFI';
                                     </tr>
                                 </tbody>
                                 <tbody>
-                                    <tr class="font-size-12">
+                                    <tr class="border-bottom-white">
                                         <td class="over-blue">
                                             <span class="badge bg-info text-white">PL</span>
                                             Decrease Variable Expene
@@ -431,7 +651,7 @@ $this->title = 'KFI';
                                     </tr>
                                 </tbody>
                                 <tbody>
-                                    <tr class="font-size-12">
+                                    <tr class="border-bottom-white">
                                         <td class="over-yellow">
                                             <span class="badge bg-info text-white">PL</span>
                                             Decrease Variable Expene
