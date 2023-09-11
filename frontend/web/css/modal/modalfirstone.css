@@ -109,3 +109,152 @@
     margin-left: -70px;
     margin-top: -4px;
 }
+
+.is-bangladresh2 {
+    width: 15px;
+    height: 15px;
+    margin-left: 20px;
+    border-radius: 50%;
+}
+
+.view-show-name {
+    margin-top: -60px;
+    font-weight: 500;
+    padding-left: 20px;
+}
+
+.country-show-name {
+    font-size: 12px;
+    padding-top: 10px;
+    font-weight: 600;
+}
+
+.dashed-Backdrop3 {
+    border-style: dashed;
+    background-color: rgb(245, 245, 245);
+    border-radius: 6px;
+}
+
+.padding-FEB-Backdrop3 {
+    font-weight: 600;
+    color: #000000;
+    padding-top: 48px;
+    padding-left: 20px;
+}
+
+.Quant-ratio-Backdrop3 {
+    font-size: 13px;
+    color: gray;
+}
+
+.diamond-con-Backdrop3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: black;
+}
+
+.padding-update-Backdrop3 {
+    margin-top: 5px;
+    font-size: 12px;
+    color: gray;
+}
+
+.update-mouth-Backdrop3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: black;
+}
+
+.pro-load-Backdrop3 {
+    background: #2F80ED;
+    font-size: 10px;
+    width: 35px;
+    height: 35px;
+    margin-left: -11px;
+    margin-top: -7px;
+    padding-top: 12px;
+    padding-left: 11px;
+}
+
+.bullseye-con-Backdrop3 {
+    font-size: 13px;
+    color: #7A7A7A;
+}
+
+.million-number-Backdrop3 {
+    font-size: 25px;
+    font-weight: 700;
+    color: #000000;
+}
+
+.padding-mark-Backdrop3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.trophy-con-Backdrop3 {
+    font-size: 13px;
+    color: #7A7A7A;
+}
+
+.Description-Backdrop3 {
+    padding-left: 20px;
+    padding-top: 20px;
+    color: gray;
+    font-weight: 700;
+}
+
+.detailsDescription-Backdrop3 {
+    color: gray;
+    font-size: 12px;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+.History-Backdrop3 {
+    padding-top: 15px;
+    font-size: 17px;
+    padding-left: 20px;
+    font-weight: 700;
+}
+
+.name-Backdrop3 {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+}
+
+.image-pdf-Backdrop3 {
+    width: 50px;
+}
+
+.PM {
+    padding-left: 30px;
+    font-size: 12px;
+}
+
+.New {
+    font-size: 15px;
+}
+
+.alertlight-Backdrop3 {
+    border: none;
+    background-color: rgb(250 250 250);
+}
+
+.deadline-Backdrop3 {
+    color: orange;
+}
+
+.bg-deadline-Backdrop3 {
+    background-color: #e0e0e0;
+}
+
+.NextUpdate-Backdrop3 {
+    color: #5d9ef4;
+}
+
+.progress-Backdrop3 {
+    border-left: 3px #000000 solid thin;
+}

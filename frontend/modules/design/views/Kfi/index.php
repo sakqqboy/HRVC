@@ -318,15 +318,13 @@ $this->title = 'KFI';
                                                 <li data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
                                                     <a class="dropdown-item" type="button"><i class="fa fa-file-text-o" aria-hidden="true"></i> <strong class="red">*</strong></a>
                                                 </li>
-
-
-
-                                                <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                                <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
+                                                <li data-bs-toggle="modal" data-bs-target="#staticBackdrop3">
+                                                    <a class="dropdown-item" type="button"><i class="fa fa-eye" aria-hidden="true"></i>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item"><i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
+                                                </li>
                                             </ul>
-
-
-
                                         </td>
                                     </tr>
                                 </tbody>
@@ -1284,6 +1282,196 @@ $this->title = 'KFI';
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdrop3" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom:none;">
+                <div class="modal-title Modalfirstone" id="staticBackdrop"><i class="fa fa-line-chart" aria-hidden="true"></i> Increase Sales</div>
+                <div class="modal-title badge rounded-pill bg-warning text-dark font-size-14">Completed</div>
+            </div>
+            <div class="text-end">
+                <div class="badge rounded-pill  bg-deadline-Backdrop3 text-dark"> <span class="deadline-Backdrop3">Deadline</span> : Mon, Feb 12, 2023 </div>
+            </div>
+            <div class="text-end">
+                <div class="badge rounded-pill  bg-deadline-Backdrop3 text-dark"> <span class="NextUpdate-Backdrop3">Next Update</span> Tue, Mar 12, 2023</div>
+            </div>
+            <div class="view-show-name">Tokyo Consulting Firm Limited </div>
+            <div class="country-show-name">
+                <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="is-bangladresh2"> Dhaka, Bangladesh
+            </div>
+            <div class="modal-body mt-20">
+                <div class="col-12 dashed-Backdrop3">
+                    <div class="row mt-20">
+                        <div class="col-lg-2 col-md-6 col-2">
+                            <div class="col-12 padding-FEB-Backdrop3">
+                                FEB
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-3">
+                            <div class="col-12 Quant-ratio-Backdrop3">
+                                Quant Ratio
+                            </div>
+                            <div class="col-12 diamond-con-Backdrop3">
+                                <i class="fa fa-diamond" aria-hidden="true"></i> Quality
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-3">
+                            <div class="col-12 bullseye-con-Backdrop3">
+                                <i class="fa fa-bullseye" aria-hidden="true"></i> Target
+                            </div>
+                            <div class="col-12 million-number-Backdrop3">
+                                1,000,000
+                            </div>
+                        </div>
+                        <div class="col-lg-1 col-md-6 col-3">
+                            <div class="col-12 padding-mark-Backdrop3">
+                                >
+                            </div>
+                        </div>
+                        <div class="col-lg-3 cl-md-6 col-3">
+                            <div class="col-12 trophy-con-Backdrop3">
+                                <i class="fa fa-trophy" aria-hidden="true"></i> Result
+                            </div>
+                            <div class="col-12 million-number-Backdrop3">
+                                902,566
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2 col-md-6 col-6"></div>
+                            <div class="col-lg-4 col-md-6 col-6">
+                                <div class="col-12 padding-update-Backdrop3">
+                                    Update Interval
+                                </div>
+                                <div class="col-12 update-mouth-Backdrop3">
+                                    Monthly
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-6 mt-10">
+                                <div class="col-12">
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width:85%; background:#2F80ED;margin-left:-50px;"></div>
+                                        <span class="badge rounded-pill  pro-load-Backdrop3">85%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 Description-Backdrop3">
+                    Description
+                </div>
+                <div class="col-10 detailsDescription-Backdrop3">
+                    The more people who have access to your point of sales system or place of business means more people have the possibility of buying from you and increasing your profits. The more people who have access to your point of sales system or place of business means more people have the possibility of buying from you and increasing your profits.
+                </div>
+                <div class="col-12 History-Backdrop3">
+                    History
+                </div>
+                <hr>
+                <div class="alert alert-light alertlight-Backdrop3">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="col-12">
+                                Stripe risk evaluation: normal
+                            </div>
+                            <div class="col-12">
+                                <img src="<?= Yii::$app->homeUrl ?>image/Faruque.png" class="name-Backdrop3">
+                                <a href="" class="font-size-12"> Mohammed Sharukh</a> <span class="font-size-12 text-secondary"> Title : Admin</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="col-12 text-secondary">
+                                <i class="fa fa-bullseye" aria-hidden="true"></i> Updated the information
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="row">
+                                <div class="col-2">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/pdf.png" class="image-pdf-Backdrop3">
+                                </div>
+                                <div class="col-10 PM">
+                                    August 22, 2018, 6:14 PM
+                                    <div class="col-12 New">
+                                        New Amount <strong> 200255</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert alert-light alertlight-Backdrop3">
+                    <div class="row">
+
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="col-12">
+                                Stripe risk evaluation: normal
+                            </div>
+                            <div class="col-12">
+                                <img src="<?= Yii::$app->homeUrl ?>image/Faruque.png" class="name-Backdrop3">
+                                <a href="" class="font-size-12"> Mohammed Sharukh</a> <span class="font-size-12 text-secondary"> Title : Admin</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="col-12 text-secondary">
+                                <i class="fa fa-bullseye" aria-hidden="true"></i> Updated the information
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="row">
+                                <div class="col-2">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/pdf.png" class="image-pdf-Backdrop3">
+                                </div>
+                                <div class="col-10 PM">
+                                    August 22, 2018, 6:14 PM
+                                    <div class="col-12 New">
+                                        New Amount <strong> 200255</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert alert-light alertlight-Backdrop3">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="col-12">
+                                Stripe risk evaluation: normal
+                            </div>
+                            <div class="col-12">
+                                <img src="<?= Yii::$app->homeUrl ?>image/Faruque.png" class="name-Backdrop3">
+                                <a href="" class="font-size-12"> Mohammed Sharukh</a> <span class="font-size-12 text-secondary"> Title : Admin</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="col-12 text-secondary">
+                                <i class="fa fa-bullseye" aria-hidden="true"></i> Updated the information
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="row">
+                                <div class="col-2">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/pdf.png" class="image-pdf-Backdrop3">
+                                </div>
+                                <div class="col-10 PM">
+                                    August 22, 2018, 6:14 PM
+                                    <div class="col-12 New">
+                                        New Amount <strong> 200255</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 text-end">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
