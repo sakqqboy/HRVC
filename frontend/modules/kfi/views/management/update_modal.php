@@ -32,7 +32,7 @@
 								<button type="button" class="btn btn border col-3  font-size-12 unit-2" onclick="javascript:selectUnit(2)">Weekly</button>
 								<button type="button" class="btn btn border col-3  font-size-12 unit-3" onclick="javascript:selectUnit(3)">Quaterly</button>
 								<button type="button" class="btn btn border col-3  font-size-12 unit-4" onclick="javascript:selectUnit(4)">Daily</button>
-								<input type="hidden" value="1" class="currentUnit" name="unit" required>
+								<input type="hidden" value="" class="currentUnit" name="unit" required>
 								<input type="hidden" value="" class="previousUnit" required>
 							</div>
 						</div>
@@ -43,7 +43,7 @@
 										<label for="input" class="form-label"><strong class="red">*</strong> Select Period</label>
 										<div class="input-group">
 											<span class="input-group-text font-size-12"><i class="fa fa-calendar-o" aria-hidden="true"></i> &nbsp;&nbsp; Date</span>
-											<input type="date" aria-label="" class="form-control font-size-12">
+											<input type="date" aria-label="" class="form-control font-size-12" required name="periodDate">
 										</div>
 									</div>
 								</div>
@@ -52,7 +52,7 @@
 										<label for="input" class="form-label"><strong class="red">*</strong> Next Check Date</label>
 										<div class="input-group">
 											<span class="input-group-text font-size-12"><i class="fa fa-calendar-o" aria-hidden="true"></i> &nbsp;&nbsp; Date</span>
-											<input type="date" aria-label="" class="form-control font-size-12">
+											<input type="date" aria-label="" class="form-control font-size-12" required name="nextCheckDate">
 										</div>
 									</div>
 								</div>
@@ -61,18 +61,18 @@
 						</div>
 						<div class="col-12 pt-5 pt-5 mt-10">
 							<label for="exampleFormControl" class="form-label font-size-13">Target Amount</label>
-							<input type="text" class="form-control" value="" disabled id="targetAmount">
+							<input type="text" class="form-control text-end" value="" disabled id="targetAmount">
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-6 col-6 font-size-14">
 						<div class="col-12">
 							<label for="kfiDetail" class="form-label"> KFI Details</label>
-							<textarea class="form-control" id="kfiDetail" rows="4" id="kfiDetail"></textarea>
+							<textarea class="form-control" id="kfiDetail" rows="4" id="kfiDetail" name="detail"></textarea>
 						</div>
 						<div class="row">
 							<div class="col-12 pt-10">
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Quant Ratio</label>
-								<select class="form-select font-size-13" id="quantRatio">
+								<select class="form-select font-size-13" id="quantRatio" name="quanRatio">
 									<option value="">Quantity or Quality</option>
 									<option value="1">Quantity</option>
 									<option value="2">Quality</option>
@@ -81,7 +81,7 @@
 							</div>
 							<div class="col-lg-6 col-md-6 col-6 pt-10 mt-17">
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Amount Type</label>
-								<select class="form-select font-size-13" id="amountType">
+								<select class="form-select font-size-13" id="amountType" name="amountType">
 									<option value="">% or Number</option>
 									<option value="1">%</option>
 									<option value="2">Number</option>
@@ -89,18 +89,18 @@
 							</div>
 							<div class="col-lg-6 col-md-6 col-6 pt-10  mt-17">
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Code</label>
-								<select class="form-select font-size-13" id="code">
+								<select class="form-select font-size-13" id="code" name="code">
 									<option value="">
 										<&nbsp;&nbsp;=&nbsp;&nbsp;>
 									</option>
-									<option value="1">&nbsp;&nbsp;<?= '<' ?>&nbsp;&nbsp;</option>
-									<option value="2">&nbsp;&nbsp;=&nbsp;&nbsp;</option>
-									<option value="3">&nbsp;&nbsp;>&nbsp;&nbsp;</option>
+									<option value="<">&nbsp;&nbsp;<?= '<' ?>&nbsp;&nbsp;</option>
+									<option value="=">&nbsp;&nbsp;=&nbsp;&nbsp;</option>
+									<option value=">">&nbsp;&nbsp;>&nbsp;&nbsp;</option>
 								</select>
 							</div>
 							<div class="col-lg-6 col-md-6 col-6 pt-10  mt-3">
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Status</label>
-								<select class="form-select font-size-13" id="kfiStatus">
+								<select class="form-select font-size-13" id="kfiStatus" name="status">
 									<option value="">Active/Finished</option>
 									<option value="1">Active</option>
 									<option value="2">Finished</option>
@@ -108,11 +108,11 @@
 							</div>
 							<div class="col-lg-6 col-md-6 col-6 pt-10  mt-3">
 								<label for="exampleFormControl" class="form-label font-size-13">Month</label>
-								<input type="text" class="form-control" value="" disabled id="monthName">
+								<input type="text" class="form-control" value="" disabled id="monthName" name="month">
 							</div>
 							<div class="col-12  mt-15">
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Result</label>
-								<input type="number" step="any" class="form-control font-size-13" id="result">
+								<input type="number" step="any" class="form-control font-size-13 text-end" id="result" name="result">
 							</div>
 						</div>
 					</div>
@@ -159,15 +159,15 @@
 					</div>
 					<div class="alert alert-light">
 						<div class="col-12 ">
-							<input type="text" class="form-control" style="border: none;" placeholder="( [ Target ] + [ Result ] - [ Target ] )">
+							<input type="text" class="form-control" style="border: none;" placeholder="( [ Target ] + [ Result ] - [ Target ] )" name="formular">
 						</div>
 						<div class="mt-50"></div>
 					</div>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-				<button type="button" class="btn btn-primary">Create</button>
+				<button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+				<button type="submit" class="btn btn-primary">Update</button>
 			</div>
 		</div>
 	</div>

@@ -7,6 +7,7 @@ use backend\models\hrvc\Company;
 use backend\models\hrvc\Kfi;
 use backend\models\hrvc\KfiHistory;
 use common\models\ModelMaster;
+use Exception;
 use yii\web\Controller;
 
 /**
@@ -39,29 +40,47 @@ class ManagementController extends Controller
 					"nextCheck" => "",
 					"amountType" => "",
 					"status" => $kfi['status'],
+					"quantRatio" => "",
+					"code" =>  "",
+					"result" => "",
+					"ratio" => 0,
+					"nextCheck" => "",
+					"amountType" => "",
 				];
 				$kfiHistory = KfiHistory::find()
 					->where(["kfiId" => $kfi["kfiId"], "status" => [1, 4]])
 					->orderBy('kfiHistoryId DESC')->one();
 				if (isset($kfiHistory) && !empty($kfiHistory)) {
-					if ($kfiHistory["result"] == null || $kfiHistory["result"] == '' || $kfiHistory["result"] == 0) {
+					if ($kfi["targetAmount"] == null || $kfi["targetAmount"] == '' || $kfi["targetAmount"] == 0) {
 						$ratio = 0;
 					} else {
-						$ratio = ($kfi['targetAmount'] / $kfiHistory["result"]) * 100;
+						$ratio = ((int)$kfiHistory['result'] / (int)$kfi["targetAmount"]) * 100;
 					}
 					$data[$kfi["kfiId"]] = [
+						"kfiName" => $kfi["kfiName"],
+						"companyName" => Company::companyName($kfi['companyId']),
+						"branchName" => Branch::branchName($kfi['branchId']),
+						"quantRatio" => "",
+						"target" => $kfi['targetAmount'],
+						"code" => "",
+						"result" => "",
+						"unit" => $kfi['unitId'],
+						"month" => ModelMaster::monthEng($kfi['month'], 1),
+						"nextCheck" => "",
+						"amountType" => "",
+						"status" => $kfi['status'],
 						"quantRatio" => $kfiHistory["quantRatio"],
 						"code" =>  $kfiHistory["code"],
 						"result" => $kfiHistory["result"],
-						"ratio" => $ratio,
+						"ratio" => number_format($ratio, 2),
 						"nextCheck" => ModelMaster::engDate($kfiHistory["nextCheckDate"]),
-						"ratio" => $ratio,
 						"amountType" => $kfiHistory["amountType"],
 					];
 				}
 
 			endforeach;
 		}
+		//throw new Exception(print_r($data, true));
 		return json_encode($data);
 	}
 }

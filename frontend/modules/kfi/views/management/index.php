@@ -91,8 +91,8 @@ $this->title = 'KFI';
 						</div>
 						<div class="col-4 new-light-4">
 							<div class="btn-group" role="group" aria-label="Basic example">
-								<button type="button" class="btn btn-outline-primary font-size-13"><i class="fa fa-list-ul" aria-hidden="true"></i></button>
-								<button type="button" class="btn btn-outline-primary font-size-13"><i class="fa fa-th-large" aria-hidden="true"></i></button>
+								<a href="#" class="btn btn-primary font-size-13"><i class="fa fa-list-ul" aria-hidden="true"></i></a>
+								<a href="<?= Yii::$app->homeUrl . 'kfi/management/grid' ?>" class="btn btn-outline-primary font-size-13"><i class="fa fa-th-large" aria-hidden="true"></i></a>
 							</div>
 						</div>
 					</div>
@@ -134,13 +134,13 @@ $this->title = 'KFI';
 													<img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey">
 													<?= $kfi["branchName"] ?>, Turkey
 												</td>
-												<td><?= $kfi["quantRatio"] ?></td>
+												<td><?= $kfi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?></td>
 												<td class="text-end"><?= number_format($kfi["target"], 2) ?></td>
 												<td><?= $kfi["code"] ?></td>
 												<td><?= $kfi["result"] ?></td>
 												<td>
 													<div id="progress1">
-														<div data-num="<?= $kfi["ratio"] ?>" class="progress-item1"></div>
+														<div data-num="<?= $kfi["ratio"] == '' ? 0 : $kfi["ratio"] ?>" class="progress-item1"></div>
 													</div>
 												</td>
 												<td></td>
@@ -198,6 +198,18 @@ $this->title = 'KFI';
 		"units" => $units,
 		"months" => $months
 	]) ?>
+	<?php ActiveForm::end(); ?>
+
+
+	<?php $form = ActiveForm::begin([
+		'id' => 'update-kfi',
+		'method' => 'post',
+		'options' => [
+			'enctype' => 'multipart/form-data',
+		],
+		'action' => Yii::$app->homeUrl . 'kfi/management/save-update-kfi'
+
+	]); ?>
 	<?= $this->render('update_modal', [
 		"units" => $units,
 	]) ?>

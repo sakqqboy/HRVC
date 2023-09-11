@@ -56,6 +56,34 @@ class ManagementController extends Controller
 
 		]);
 	}
+	public function actionGrid()
+	{
+		$groupId = Group::currentGroupId();
+		if ($groupId == null) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+		}
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$companies = curl_exec($api);
+		$companies = json_decode($companies, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index');
+		$kfis = curl_exec($api);
+		$kfis = json_decode($kfis, true);
+		//throw new Exception(print_r($kfis, true));
+
+		$units = ["1" => "Monthly", "2" => "Weekly", "3" => "QuaterLy", "4" => "Daily"];
+		$months = ModelMaster::monthFull(1);
+		//throw new Exception(print_r($months, true));
+		return $this->render('index_grid', [
+			"companies" => $companies,
+			"units" => $units,
+			"months" => $months,
+			"kfis" => $kfis
+
+		]);
+	}
 	public function actionCreateKfi()
 	{
 		if (isset($_POST["kfiName"])) {
@@ -79,10 +107,10 @@ class ManagementController extends Controller
 	public function actionSaveUpdateKfi()
 	{
 		if (isset($_POST["kfiId"])) {
+			//throw new Exception(print_r(Yii::$app->request->post(), true));
 			$kfi = Kfi::find()->where(["kfiId" => $_POST["kfiId"]])->one();
 			$kfi->unitId = $_POST["unit"];
 			$kfi->kfiDetail = $_POST["detail"];
-			$kfi->quantRatio = $_POST["quantio"];
 			$kfi->status = $_POST["status"];
 			$kfi->save(false);
 			$kfiHistory = new KfiHistory();
@@ -92,9 +120,11 @@ class ManagementController extends Controller
 			$kfiHistory->amountType = $_POST["amountType"];
 			$kfiHistory->code = $_POST["code"];
 			$kfiHistory->status = 1;
+			$kfiHistory->quantRatio = $_POST["quanRatio"];
 			$kfiHistory->historyStatus = $_POST["status"];
 			$kfiHistory->result =  $_POST["result"];
-			$kfiHistory->fomular = $_POST["formular"];
+			$kfiHistory->unitId =  $_POST["unit"];
+			$kfiHistory->formular = $_POST["formular"];
 			$kfiHistory->createDateTime = new Expression('NOW()');
 			$kfiHistory->updateDateTime = new Expression('NOW()');
 			$kfiHistory->save(false);
@@ -123,8 +153,9 @@ class ManagementController extends Controller
 			$res["code"] =  $kfiHistory["code"];
 			$res["result"] = $kfiHistory["result"];
 			$res["amountType"] = $kfiHistory["amountType"];
-			$res["kfistatus"] = $kfiHistory["historyStatus"];
+			$res["kfiStatus"] = $kfiHistory["historyStatus"];
 			$res["code"] = $kfiHistory["code"];
+			$res["result"] = $kfiHistory["result"];
 		} else {
 			$res["quantRatio"] = "";
 			$res["code"] = "";
@@ -132,6 +163,7 @@ class ManagementController extends Controller
 			$res["amountType"] = "";
 			$res["kfistatus"] = "";
 			$res["code"] = "";
+			$res["result"] = "";
 		}
 		return json_encode($res);
 	}

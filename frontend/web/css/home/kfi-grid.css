@@ -10,7 +10,6 @@
     background-color: #ffffff;
 }
 
-
 .linechart-increase {
     font-weight: 500;
     font-size: 14px;
@@ -35,7 +34,6 @@
     color: rgb(244, 165, 17);
     font-size: 10px;
 }
-
 
 .bg-deadline0 {
     background-color: #ebebeb;
@@ -98,7 +96,6 @@
     border-radius: 20px;
 }
 
-
 @-webkit-keyframes animate-positive {
     0% {
         width: 0;
@@ -111,12 +108,9 @@
     }
 }
 
-
-
 .padding-FEB {
     padding-top: 30px;
     color: #000000;
-    font-size: 10px;
 }
 
 .bullseye-con {
@@ -127,11 +121,6 @@
 .Quant-ratio {
     font-size: 10px;
     color: #7A7A7A;
-}
-
-.million-number {
-    font-size: 10px;
-    font-weight: 500;
 }
 
 .trophy-con {

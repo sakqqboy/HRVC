@@ -14,17 +14,24 @@ function selectUnit(currentUnit) {
         $(".previousUnit").val(previous);
         $("#unit-" + previous).css("background-color", "white");
         $(".unit-" + previous).css("background-color", "white");
+        $("#unit-" + previous).css("color", "black");
+        $(".unit-" + previous).css("color", "black");
     }
 
     $("#currentUnit").val(currentUnit);
     $(".currentUnit").val(currentUnit);
-    $("#unit-" + currentUnit).css("background-color", "gray");
-    $(".unit-" + currentUnit).css("background-color", "gray");
+    $("#unit-" + currentUnit).css("background-color", "#3366FF");
+    $(".unit-" + currentUnit).css("background-color", "#3366FF");
+    $("#unit-" + currentUnit).css("color", "white");
+    $(".unit-" + currentUnit).css("color", "white");
 
 }
 
 function updateKfi(kfiId) {
+
+    resetUnit();
     $("#staticBackdrop2").show();
+    $("#update-kfi")[0].reset();
     var url = $url + 'kfi/management/update-kfi';
     $.ajax({
         type: "POST",
@@ -37,13 +44,32 @@ function updateKfi(kfiId) {
                 $(".currentUnit").val(data.unitId);
                 $("#companyName").val(data.companyName);
                 $("#branchName").val(data.branchName);
-                $(".unit-" + parseInt(data.unitId)).css("background-color", "gray");
+                $(".unit-" + parseInt(data.unitId)).css("background-color", "#3366FF");
+                $(".unit-" + data.unitId).css("color", "white");
                 $("#targetAmount").val(data.targetAmount);
                 $("#kfiDetail").val(data.detail);
                 $("#quantRatio").val(data.quantRatio);
                 $("#monthName").val(data.monthName);
+                $("#amountType").val(data.amountType);
+                $("#code").val(data.code);
+                $("#kfiStatus").val(data.kfiStatus);
+                $("#kfiId").val(kfiId);
             }
 
         }
     });
+}
+
+function resetUnit() {
+    $(".unit-1").css("color", "black");
+    $(".unit-1").css("background-color", "white");
+
+    $(".unit-2").css("color", "black");
+    $(".unit-2").css("background-color", "white");
+    $(".unit-3").css("color", "black");
+    $(".unit-3").css("background-color", "white");
+    $(".unit-4").css("color", "black");
+    $(".unit-4").css("background-color", "white");
+    $(".currentUnit").val('');
+    $(".previousUnit").val('');
 }
