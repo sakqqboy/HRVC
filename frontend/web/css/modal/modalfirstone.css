@@ -245,16 +245,27 @@
 
 .deadline-Backdrop3 {
     color: orange;
+    font-size: 12px;
+    padding-left: 5px;
 }
 
-.bg-deadline-Backdrop3 {
-    background-color: #e0e0e0;
-}
 
 .NextUpdate-Backdrop3 {
     color: #5d9ef4;
+    font-size: 12px;
+    padding-left: 5px;
+    cursor: pointer;
 }
 
-.progress-Backdrop3 {
-    border-left: 3px #000000 solid thin;
+.delete-Backdrop4 {
+    text-align: center;
+    font-size: 17px;
+}
+
+.successbackdrop4 {
+    border-left: 2px dashed rgb(193 193 193);
+    height: 50px;
+    margin-left: 28px;
+    margin-top: -50px;
+    position: relative;
 }
