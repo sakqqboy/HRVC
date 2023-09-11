@@ -136,7 +136,7 @@ $this->title = 'KFI';
 												</td>
 												<td><?= $kfi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?></td>
 												<td class="text-end"><?= number_format($kfi["target"], 2) ?></td>
-												<td><?= $kfi["code"] ?></td>
+												<td class="text-center"><?= $kfi["code"] ?></td>
 												<td><?= $kfi["result"] ?></td>
 												<td>
 													<div id="progress1">
@@ -156,7 +156,11 @@ $this->title = 'KFI';
 																<strong class="red">*</strong>
 															</a>
 														</li>
-														<li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
+														<li data-bs-toggle="modal" data-bs-target="#staticBackdrop3" onclick="javascript:kfiHistory(<?= $kfiId ?>)">
+															<a class="dropdown-item" href="#">
+																<i class="fa fa-eye" aria-hidden="true"></i>
+															</a>
+														</li>
 														<li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
 													</ul>
 												</td>
@@ -214,4 +218,10 @@ $this->title = 'KFI';
 		"units" => $units,
 	]) ?>
 	<?php ActiveForm::end(); ?>
+
+
+	<?= $this->render('history_modal', [
+		"units" => $units,
+	]) ?>
+
 </div>

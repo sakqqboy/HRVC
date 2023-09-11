@@ -83,4 +83,52 @@ class ManagementController extends Controller
 		//throw new Exception(print_r($data, true));
 		return json_encode($data);
 	}
+	public function actionKfiDetail($kfiId)
+	{
+		$kfi = Kfi::find()->where(["kfiId" => $kfiId])->asArray()->one();
+		$res["kfiName"] = $kfi["kfiName"];
+		$res["companyName"] = Company::companyName($kfi['companyId']);
+		$res["branchName"] = Branch::branchName($kfi['branchId']);
+		$res["unitId"] = $kfi["unitId"];
+		$res["detail"] = $kfi["kfiDetail"];
+		$res["targetAmount"] = $kfi["targetAmount"];
+		$res["status"] = $kfi["status"];
+		$res["monthName"] = strtoupper(ModelMaster::monthEng($kfi['month'], 1));
+
+		$kfiHistory = KfiHistory::find()
+			->where(["kfiId" => $kfiId, "status" => [1, 4]])
+			->orderBy('kfiHistoryId DESC')
+			->asArray()
+			->one();
+		if (isset($kfiHistory) && !empty($kfiHistory)) {
+			$res2["quantRatio"] = $kfiHistory["quantRatio"];
+			$res2["code"] =  $kfiHistory["code"];
+			$res2["result"] = $kfiHistory["result"];
+			$res2["amountType"] = $kfiHistory["amountType"];
+			$res2["kfiStatus"] = $kfiHistory["historyStatus"];
+			if ($kfi["targetAmount"] == null || $kfi["targetAmount"] == '' || $kfi["targetAmount"] == 0) {
+				$ratio = 0;
+			} else {
+				$ratio = ((int)$kfiHistory['result'] / (int)$kfi["targetAmount"]) * 100;
+			}
+			$res2["ratio"] = number_format($ratio, 2);
+		} else {
+			$res2["quantRatio"] = "";
+			$res2["code"] = "";
+			$res2["result"] = "";
+			$res2["amountType"] = "";
+			$res2["kfistatus"] = "";
+			$res2["ratio"] = 0;
+		}
+		$res3 = array_merge($res, $res2);
+		return json_encode($res3);
+	}
+	public function actionKfiHistory($kfiId)
+	{
+		$kfiHistory = KfiHistory::find()
+			->where(["kfiId" => $kfiId, "status" => [1, 4]])
+			->orderBy('kfiHistoryId DESC')
+			->asArray()
+			->all();
+	}
 }

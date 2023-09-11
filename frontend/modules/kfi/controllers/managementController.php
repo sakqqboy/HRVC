@@ -125,6 +125,7 @@ class ManagementController extends Controller
 			$kfiHistory->result =  $_POST["result"];
 			$kfiHistory->unitId =  $_POST["unit"];
 			$kfiHistory->formular = $_POST["formular"];
+			$kfiHistory->description = $_POST["detail"];
 			$kfiHistory->createDateTime = new Expression('NOW()');
 			$kfiHistory->updateDateTime = new Expression('NOW()');
 			$kfiHistory->save(false);
@@ -143,7 +144,6 @@ class ManagementController extends Controller
 		$res["targetAmount"] = $kfi["targetAmount"];
 		$res["status"] = true;
 		$res["monthName"] = ModelMaster::monthEng($kfi['month'], 1);
-
 		$kfiHistory = KfiHistory::find()
 			->where(["kfiId" => $kfi["kfiId"], "status" => [1, 4]])
 			->orderBy('kfiHistoryId DESC')
@@ -165,6 +165,24 @@ class ManagementController extends Controller
 			$res["code"] = "";
 			$res["result"] = "";
 		}
+		return json_encode($res);
+	}
+	public function actionHistory()
+	{
+		$kfiId = $_POST["kfiId"];
+		$groupId = Group::currentGroupId();
+		if ($groupId == null) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+		}
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId);
+		$kfi = curl_exec($api);
+		$kfi = json_decode($kfi, true);
+		//throw new exception(print_r($kfi, true));
+		$res["kfi"] = $kfi;
+		$res["status"] = true;
+		//throw new exception(print_r($res, true));
 		return json_encode($res);
 	}
 }

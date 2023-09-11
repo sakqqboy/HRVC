@@ -73,3 +73,50 @@ function resetUnit() {
     $(".currentUnit").val('');
     $(".previousUnit").val('');
 }
+
+function kfiHistory(kfiId) {
+
+    var url = $url + 'kfi/management/history';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { kfiId: kfiId },
+        success: function(data) {
+            if (data.status) {
+
+                $("#kfiNameHistory").html(data.kfi.kfiName);
+                // alert(data.kfi.status);
+                if (data.kfi.status == 1) {
+                    $("#statusHistory").html('Inprocess');
+                    $("#statusHistory").removeClass("bg-warning");
+                    $("#statusHistory").removeClass("text-dark");
+                    $("#statusHistory").addClass("bg-success");
+                } else {
+                    $("#statusHistory").html('complete');
+                    $("#statusHistory").removeClass("bg-success");
+                    $("#statusHistory").removeClass("text-dark");
+                    $("#statusHistory").addClass("bg-warning");
+                    $("#statusHistory").addClass("text-dark");
+                }
+                $("#companyHistory").html(data.kfi.companyName);
+                $("#branchHistory").html(data.kfi.branchName);
+                let month = data.kfi.monthName.substring(0, 3);
+                $("#monthHistory").html(month);
+                if (data.kfi.quanRatio == 1) {
+                    $("#quanRatioHistory").html('Quantuty');
+                } else {
+                    $("#quanRatioHistory").html('Quality');
+                }
+                $("#targetHistory").html(data.kfi.targetAmount);
+                $("#codeHistory").html(data.kfi.code);
+                $("#resultHistory").html(data.kfi.result);
+                $("#progressHistory").css("width", data.kfi.ratio + '%');
+                $("#decimalHistory").html(data.kfi.ratio);
+                $("#detailHistory").html(data.kfi.detail);
+            }
+
+        }
+    });
+    $("#staticBackdrop3").show();
+}

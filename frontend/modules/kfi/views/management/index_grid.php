@@ -107,7 +107,7 @@ $this->title = 'KFI Grid View';
 								foreach ($kfis as $kfiId => $kfi) :
 							?>
 									<div class="col-lg-4 col-md-6 col-sm-5 col-12 mt-20">
-										<div class="col-12 border pl-20 pr-20 pt-20 pb-5" style="background-color:white;border-radius:10px;">
+										<div class="col-12 border pl-20 pr-20 pt-20 pb-5" style="background-color:white;border-radius:10px;box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;">
 											<div class="row">
 												<div class="col-lg-5 col-md-6 col-6">
 													<div class="col-12 linechart-increase">
