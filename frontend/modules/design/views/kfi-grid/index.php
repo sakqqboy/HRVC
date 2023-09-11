@@ -32,12 +32,12 @@ $this->title = 'KFI Grid View';
                 <div class="col-lg-4 col-md-6 col-12 key1">
                     <div class="row">
                         <div class="col-6 key1">
-                            Key Goal Indicators
+                            Key Financial Indicator
                         </div>
                         <div class="col-6">
                             <button type="button" class="btn btn-primary font-size-14" data-bs-toggle="modal" data-bs-target="#staticBackdrop1"><i class="fa fa-magic" aria-hidden="true"></i> Create New KFI</button>
                             <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog">
+                                <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title text-primary" id="staticBackdropLabel"><i class="fa fa-magic" aria-hidden="true"></i> Create</h5>
@@ -75,12 +75,13 @@ $this->title = 'KFI Grid View';
                                                             <option value="5">Branch 5</option>
                                                         </select>
                                                     </div>
-                                                    <div class="col-12 pt-5">
+                                                    <div class="col-12 pt-10">
                                                         <label for="input" class="form-label"><strong class="red">*</strong> Check Unit</label>
-                                                        <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                            <button type="button" class="btn btn-outline-secondary font-size-14">Monthly</button>
-                                                            <button type="button" class="btn btn-outline-secondary font-size-14">Weekly</button>
-                                                            <button type="button" class="btn btn-outline-secondary font-size-14">Quaterly</button>
+                                                        <div class="btn-group mt-10" role="group" aria-label="Basic outlined example">
+                                                            <button type="button" class="btn btn-outline-secondary">Monthly</button>
+                                                            <button type="button" class="btn btn-outline-secondary">Weekly</button>
+                                                            <button type="button" class="btn btn-outline-secondary">Quaterly</button>
+                                                            <button type="button" class="btn btn-outline-secondary">Daily</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -91,12 +92,12 @@ $this->title = 'KFI Grid View';
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-lg-6 col-md-6 col-6 pt-10">
-                                                            <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Target Amount</label>
-                                                            <input type="text" class="form-control font-size-13" id="" placeholder="">
+                                                            <label for="exampleFormControl" class="form-label"><strong class="red">*</strong> Target Amount</label>
+                                                            <input type="text" class="form-control" id="" placeholder="">
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-6 pt-10">
-                                                            <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Month</label>
-                                                            <select class="form-select font-size-13" aria-label="Default select example">
+                                                            <label for="exampleFormControl" class="form-label"><strong class="red">*</strong> Month</label>
+                                                            <select class="form-select" aria-label="Default select example">
                                                                 <option selected>Select Month</option>
                                                                 <option value="1">January</option>
                                                                 <option value="2">June</option>
@@ -107,7 +108,7 @@ $this->title = 'KFI Grid View';
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="modal-footer">
+                                        <div class="modal-footer" style="border: none;">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                             <button type="button" class="btn btn-primary">Create</button>
                                         </div>
@@ -196,7 +197,7 @@ $this->title = 'KFI Grid View';
                                                     <a href=""> <i class="fa fa-eye" aria-hidden="true"></i></a>
                                                 </div>
                                                 <div class="col-1">
-                                                    <a href=""> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                    <a href=""> <i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
                                                 </div>
                                                 <div class="col-5">
                                                     <span class="badge rounded-pill bg-deadline0">
@@ -296,7 +297,7 @@ $this->title = 'KFI Grid View';
                                                     <a href=""> <i class="fa fa-eye" aria-hidden="true"></i></a>
                                                 </div>
                                                 <div class="col-1">
-                                                    <a href=""> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                    <a href=""> <i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
                                                 </div>
                                                 <div class="col-5">
                                                     <span class="badge rounded-pill bg-deadline0">
@@ -396,7 +397,7 @@ $this->title = 'KFI Grid View';
                                                     <a href=""> <i class="fa fa-eye" aria-hidden="true"></i></a>
                                                 </div>
                                                 <div class="col-1">
-                                                    <a href=""> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                    <a href=""> <i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
                                                 </div>
                                                 <div class="col-5">
                                                     <span class="badge rounded-pill bg-deadline0">
@@ -495,7 +496,7 @@ $this->title = 'KFI Grid View';
                                                     <a href=""> <i class="fa fa-eye" aria-hidden="true"></i></a>
                                                 </div>
                                                 <div class="col-1">
-                                                    <a href=""> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                    <a href=""> <i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
                                                 </div>
                                                 <div class="col-5">
                                                     <span class="badge rounded-pill bg-deadline0">
@@ -595,7 +596,7 @@ $this->title = 'KFI Grid View';
                                                     <a href=""> <i class="fa fa-eye" aria-hidden="true"></i></a>
                                                 </div>
                                                 <div class="col-1">
-                                                    <a href=""> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                    <a href=""> <i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
                                                 </div>
                                                 <div class="col-5">
                                                     <span class="badge rounded-pill bg-deadline0">
@@ -694,7 +695,7 @@ $this->title = 'KFI Grid View';
                                                     <a href=""> <i class="fa fa-eye" aria-hidden="true"></i></a>
                                                 </div>
                                                 <div class="col-1">
-                                                    <a href=""> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                    <a href=""> <i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
                                                 </div>
                                                 <div class="col-5">
                                                     <span class="badge rounded-pill bg-deadline0">
@@ -793,107 +794,7 @@ $this->title = 'KFI Grid View';
                                                     <a href=""> <i class="fa fa-eye" aria-hidden="true"></i></a>
                                                 </div>
                                                 <div class="col-1">
-                                                    <a href=""> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                                </div>
-                                                <div class="col-5">
-                                                    <span class="badge rounded-pill bg-deadline0">
-                                                        <span class="deadline-orange"> Deadline</span> <span class="mon-dark">: Mon, Feb 12,2023</span>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 text-end pt-5">
-                                                <span class="badge rounded-pill bg-warning text-dark"> Completed</span>
-                                            </div>
-                                        </div>
-                                        <div class="row mt-20">
-                                            <div class="col-lg-2 col-md-6 col-2">
-                                                <div class="col-12 padding-FEB">
-                                                    FEB
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6 col-3">
-                                                <div class="col-12 Quant-ratio">
-                                                    Quant Ratio
-                                                </div>
-                                                <div class="col-12 diamond-con">
-                                                    <i class="fa fa-diamond" aria-hidden="true"></i> Quality
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-3 col-md-6 col-3">
-                                                <div class="col-12 bullseye-con">
-                                                    <i class="fa fa-bullseye" aria-hidden="true"></i> Target
-                                                </div>
-                                                <div class="col-12 million-number">
-                                                    1,000,000
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-1 col-md-6 col-3">
-                                                <div class="col-12 padding-mark">
-                                                    >
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 cl-md-6 col-3">
-                                                <div class="col-12 trophy-con">
-                                                    <i class="fa fa-trophy" aria-hidden="true"></i> Result
-                                                </div>
-                                                <div class="col-12 million-number">
-                                                    902,566
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-2 col-md-6 col-6"></div>
-                                                <div class="col-lg-4 col-md-6 col-6">
-                                                    <div class="col-12 padding-update">
-                                                        Update Interval
-                                                    </div>
-                                                    <div class="col-12 update-mouth">
-                                                        Monthly
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 col-md-6 col-6">
-                                                    <div class="col-12">
-                                                        <div class="progress">
-                                                            <div class="progress-bar" style="width:30%; background:#2F80ED;"></div>
-                                                            <span class="badge rounded-pill  pro-load0">30%</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="row">
-                                                <div class="col-lg-4 text-end">
-                                                    <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima">
-                                                </div>
-                                                <div class="col-lg-8 text-end">
-                                                    <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-12">Tue,Mar 12,2023</strong>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-sm-5 col-12 card alert-grid">
-                                    <div class="row">
-                                        <div class="col-lg-5 col-md-6 col-6">
-                                            <div class="col-12 linechart-increase">
-                                                <i class="fa fa-line-chart" aria-hidden="true"></i> Increase Sales
-                                            </div>
-                                            <div class="col-12  ting-size">
-                                                Tokyo Consulting Firm Limited
-                                            </div>
-                                            <div class="col-12 ima-is">
-                                                <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-is"> Dhaka, Bangladesh
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-7 col-md-6 col-6">
-                                            <div class="row">
-                                                <div class="col-1">
-                                                    <a href=""> <i class="fa fa-eye" aria-hidden="true"></i></a>
-                                                </div>
-                                                <div class="col-1">
-                                                    <a href=""> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                    <a href=""> <i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
                                                 </div>
                                                 <div class="col-5">
                                                     <span class="badge rounded-pill bg-deadline0">
@@ -993,7 +894,107 @@ $this->title = 'KFI Grid View';
                                                     <a href=""> <i class="fa fa-eye" aria-hidden="true"></i></a>
                                                 </div>
                                                 <div class="col-1">
-                                                    <a href=""> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                    <a href=""> <i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
+                                                </div>
+                                                <div class="col-5">
+                                                    <span class="badge rounded-pill bg-deadline0">
+                                                        <span class="deadline-orange"> Deadline</span> <span class="mon-dark">: Mon, Feb 12,2023</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 text-end pt-5">
+                                                <span class="badge rounded-pill bg-warning text-dark"> Completed</span>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-20">
+                                            <div class="col-lg-2 col-md-6 col-2">
+                                                <div class="col-12 padding-FEB">
+                                                    FEB
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-6 col-3">
+                                                <div class="col-12 Quant-ratio">
+                                                    Quant Ratio
+                                                </div>
+                                                <div class="col-12 diamond-con">
+                                                    <i class="fa fa-diamond" aria-hidden="true"></i> Quality
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-3 col-md-6 col-3">
+                                                <div class="col-12 bullseye-con">
+                                                    <i class="fa fa-bullseye" aria-hidden="true"></i> Target
+                                                </div>
+                                                <div class="col-12 million-number">
+                                                    1,000,000
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-1 col-md-6 col-3">
+                                                <div class="col-12 padding-mark">
+                                                    >
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 cl-md-6 col-3">
+                                                <div class="col-12 trophy-con">
+                                                    <i class="fa fa-trophy" aria-hidden="true"></i> Result
+                                                </div>
+                                                <div class="col-12 million-number">
+                                                    902,566
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-2 col-md-6 col-6"></div>
+                                                <div class="col-lg-4 col-md-6 col-6">
+                                                    <div class="col-12 padding-update">
+                                                        Update Interval
+                                                    </div>
+                                                    <div class="col-12 update-mouth">
+                                                        Monthly
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-6">
+                                                    <div class="col-12">
+                                                        <div class="progress">
+                                                            <div class="progress-bar" style="width:30%; background:#2F80ED;"></div>
+                                                            <span class="badge rounded-pill  pro-load0">30%</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-lg-4 text-end">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima">
+                                                </div>
+                                                <div class="col-lg-8 text-end">
+                                                    <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-12">Tue,Mar 12,2023</strong>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-5 col-12 card alert-grid">
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-6 col-6">
+                                            <div class="col-12 linechart-increase">
+                                                <i class="fa fa-line-chart" aria-hidden="true"></i> Increase Sales
+                                            </div>
+                                            <div class="col-12  ting-size">
+                                                Tokyo Consulting Firm Limited
+                                            </div>
+                                            <div class="col-12 ima-is">
+                                                <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-is"> Dhaka, Bangladesh
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-7 col-md-6 col-6">
+                                            <div class="row">
+                                                <div class="col-1">
+                                                    <a href=""> <i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                </div>
+                                                <div class="col-1">
+                                                    <a href=""> <i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
                                                 </div>
                                                 <div class="col-5">
                                                     <span class="badge rounded-pill bg-deadline0">
