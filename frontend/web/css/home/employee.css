@@ -5,6 +5,9 @@
 
 .alert-employee {
     background-color: white;
+    border: black;
+    margin-top: 20px;
+    height: 215px;
 }
 
 .scrollbar-ripe-malinka::-webkit-scrollbar-track {
@@ -45,47 +48,58 @@
 }
 
 .image-employee {
-    /* width: 100%;
-    height: 100%; */
-    width: 100px;
-    height: 95px;
+    width: 40px;
+    height: 40px;
     border-radius: 100%;
 }
 
 .emplo-tadawoki {
-    padding-top: 10px;
+    padding-top: 5px;
     margin-left: -30px;
-    font-size: 14px;
-    line-height: 21px;
+    font-size: 8px;
+    line-height: 10px;
     font-weight: 700;
     cursor: default;
 }
 
+
 .emplo-permanent {
-    font-size: 12px;
+    font-size: 5px;
+    margin-left: -29px;
     border-radius: 50%;
     cursor: default;
+    margin-top: 5px;
 }
 
 .alert1-employee1 {
     background-color: rgb(233, 240, 243);
+    border-radius: 3px;
+    margin-top: 10px;
 }
 
 .lead-programmer {
-    font-size: 10px;
+    font-size: 5px;
     color: #7A8CAC;
 }
 
 .lead-it {
-    font-size: 9px;
+    font-size: 5px;
     padding-top: 5px;
     color: black;
 }
 
+.envelope-mail {
+    font-size: 6px;
+    margin-top: 3px;
+}
+
+.envelope-send {
+    font-size: 6px;
+}
+
 .employee-email {
-    font-size: 8.5px;
+    font-size: 5px;
     color: black;
-    padding-top: 5px;
 }
 
 .employee-view {
@@ -93,11 +107,13 @@
     text-align: end;
     cursor: pointer;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 9px;
+    margin-top: -10px;
 }
 
 .bg-success0 {
     background-color: rgb(17, 179, 57);
+    font-size: 7px;
 }
 
 .input-group0 {
@@ -118,6 +134,7 @@
     .all-employee0 {
         padding-left: 20px;
     }
+
     .fil0 {
         text-align: start;
     }
@@ -127,13 +144,16 @@
     .all-employee0 {
         padding-left: 20px;
     }
+
     .fil0 {
         text-align: start;
     }
+
     .image-employee {
         width: 60%;
         margin-top: 10px;
     }
+
     .employee-view {
         font-size: 13px;
     }

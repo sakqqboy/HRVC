@@ -13,7 +13,7 @@ $this->title = 'company';
     <div class="col-12 mt-20 tb0">
         <table class="table table-bordered">
             <thead>
-                <tr class=" table-border-weight">
+                <tr class="table-border-weight">
                     <th>SL</th>
                     <th>Assiociated Group</th>
                     <th>Company Name</th>
