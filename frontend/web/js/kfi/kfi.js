@@ -63,7 +63,6 @@ function updateKfi(kfiId) {
 function resetUnit() {
     $(".unit-1").css("color", "black");
     $(".unit-1").css("background-color", "white");
-
     $(".unit-2").css("color", "black");
     $(".unit-2").css("background-color", "white");
     $(".unit-3").css("color", "black");
@@ -114,6 +113,9 @@ function kfiHistory(kfiId) {
                 $("#progressHistory").css("width", data.kfi.ratio + '%');
                 $("#decimalHistory").html(data.kfi.ratio);
                 $("#detailHistory").html(data.kfi.detail);
+                $("#deadlineHistory").html(data.kfi.checkDate);
+                $("#NextCheckDateHistory").html(data.kfi.nextCheck);
+                $("#unitHistory").html(data.kfi.unit)
             }
 
         }

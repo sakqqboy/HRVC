@@ -18,7 +18,7 @@ use Yii;
     * @property string $code
     * @property integer $historyStatus
     * @property string $result
-    * @property string $formula
+    * @property string $formular
     * @property string $description
     * @property integer $status
     * @property string $createDateTime
@@ -45,7 +45,7 @@ return [
             [['checkPeriodDate', 'nextCheckDate', 'createDateTime', 'updateDateTime'], 'safe'],
             [['result'], 'number'],
             [['description'], 'string'],
-            [['kfiHistoryName', 'formula'], 'string', 'max' => 255],
+            [['kfiHistoryName', 'formular'], 'string', 'max' => 255],
             [['unitId', 'amountType', 'historyStatus', 'status'], 'string', 'max' => 10],
             [['quantRatio', 'code'], 'string', 'max' => 45],
         ];
@@ -68,7 +68,7 @@ return [
     'code' => 'Code',
     'historyStatus' => 'History Status',
     'result' => 'Result',
-    'formula' => 'Formula',
+    'formular' => 'Formular',
     'description' => 'Description',
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',

@@ -6,6 +6,7 @@ use backend\models\hrvc\Branch;
 use backend\models\hrvc\Company;
 use backend\models\hrvc\Kfi;
 use backend\models\hrvc\KfiHistory;
+use backend\models\hrvc\Unit;
 use common\models\ModelMaster;
 use Exception;
 use yii\web\Controller;
@@ -35,17 +36,12 @@ class ManagementController extends Controller
 					"code" => "",
 					"result" => "",
 					"ratio" => 0,
-					"unit" => $kfi['unitId'],
+					"unit" => Unit::unitName($kfi['unitId']),
 					"month" => ModelMaster::monthEng($kfi['month'], 1),
-					"nextCheck" => "",
 					"amountType" => "",
 					"status" => $kfi['status'],
-					"quantRatio" => "",
-					"code" =>  "",
-					"result" => "",
-					"ratio" => 0,
 					"nextCheck" => "",
-					"amountType" => "",
+					"checkDate" => "",
 				];
 				$kfiHistory = KfiHistory::find()
 					->where(["kfiId" => $kfi["kfiId"], "status" => [1, 4]])
@@ -60,20 +56,16 @@ class ManagementController extends Controller
 						"kfiName" => $kfi["kfiName"],
 						"companyName" => Company::companyName($kfi['companyId']),
 						"branchName" => Branch::branchName($kfi['branchId']),
-						"quantRatio" => "",
 						"target" => $kfi['targetAmount'],
-						"code" => "",
-						"result" => "",
-						"unit" => $kfi['unitId'],
+						"unit" => Unit::unitName($kfi['unitId']),
 						"month" => ModelMaster::monthEng($kfi['month'], 1),
-						"nextCheck" => "",
-						"amountType" => "",
 						"status" => $kfi['status'],
 						"quantRatio" => $kfiHistory["quantRatio"],
 						"code" =>  $kfiHistory["code"],
 						"result" => $kfiHistory["result"],
 						"ratio" => number_format($ratio, 2),
-						"nextCheck" => ModelMaster::engDate($kfiHistory["nextCheckDate"]),
+						"nextCheck" => ModelMaster::engDate($kfiHistory["nextCheckDate"], 2),
+						"checkDate" => ModelMaster::engDate($kfiHistory["checkPeriodDate"], 2),
 						"amountType" => $kfiHistory["amountType"],
 					];
 				}
@@ -94,6 +86,7 @@ class ManagementController extends Controller
 		$res["targetAmount"] = $kfi["targetAmount"];
 		$res["status"] = $kfi["status"];
 		$res["monthName"] = strtoupper(ModelMaster::monthEng($kfi['month'], 1));
+		$res["unit"] = Unit::unitName($kfi['unitId']);
 
 		$kfiHistory = KfiHistory::find()
 			->where(["kfiId" => $kfiId, "status" => [1, 4]])
@@ -106,6 +99,8 @@ class ManagementController extends Controller
 			$res2["result"] = $kfiHistory["result"];
 			$res2["amountType"] = $kfiHistory["amountType"];
 			$res2["kfiStatus"] = $kfiHistory["historyStatus"];
+			$res2["nextCheck"] = ModelMaster::engDate($kfiHistory["nextCheckDate"], 2);
+			$res2["checkDate"] = ModelMaster::engDate($kfiHistory["checkPeriodDate"], 2);
 			if ($kfi["targetAmount"] == null || $kfi["targetAmount"] == '' || $kfi["targetAmount"] == 0) {
 				$ratio = 0;
 			} else {
@@ -119,6 +114,8 @@ class ManagementController extends Controller
 			$res2["amountType"] = "";
 			$res2["kfistatus"] = "";
 			$res2["ratio"] = 0;
+			$res2["nextCheck"] = "";
+			$res2["checkDate"] = "";
 		}
 		$res3 = array_merge($res, $res2);
 		return json_encode($res3);

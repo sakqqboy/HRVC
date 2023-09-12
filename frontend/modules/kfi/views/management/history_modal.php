@@ -6,10 +6,16 @@
 				<div class="modal-title badge rounded-pill bg-warning text-dark font-size-14" id="statusHistory">Completed</div>
 			</div>
 			<div class="text-end mr-20">
-				<span class="border border-1 text-dark" style="border-radius: 15px;"> <span class="deadline-Backdrop3">Deadline</span> <span class="font-size-11">: Mon, Feb 12, 2023 &nbsp;</span></span>
+				<span class="border border-1 text-dark pr-10 pl-5" style="border-radius: 15px;">
+					<span class="deadline-Backdrop3">Deadline&nbsp;&nbsp;</span>
+					<span class="font-size-11" id="deadlineHistory"></span>
+				</span>
 			</div>
 			<div class="text-end mt-10 mr-20">
-				<span class="border border-1 text-dark" style="border-radius: 15px;"><span class="NextUpdate-Backdrop3">Next Update</span> <span class="font-size-11"> Tue, Mar 12, 2023 &nbsp;</span></span>
+				<span class="border border-1 text-dark pr-10 pl-5" style="border-radius: 15px;">
+					<span class="NextUpdate-Backdrop3">Next Update&nbsp;&nbsp;</span>
+					<span class="font-size-11" id="NextCheckDateHistory"> </span>
+				</span>
 			</div>
 			<div class="view-show-name" id="companyHistory">Tokyo Consulting Firm Limited </div>
 			<div class="country-show-name">
@@ -59,8 +65,8 @@
 								<div class="col-12 padding-update-Backdrop3">
 									Update Interval
 								</div>
-								<div class="col-12 update-mouth-Backdrop3">
-									Monthly
+								<div class="col-12 update-mouth-Backdrop3" id="unitHistory">
+
 								</div>
 							</div>
 							<div class="col-lg-6 col-md-6 col-6 mt-10">

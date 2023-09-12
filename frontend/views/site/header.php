@@ -89,6 +89,7 @@ use common\models\ModelMaster;
                         <div class="col-12 haeder-kpi">
                                 KPI & KGI MANAGEMENT
                         </div>
+                        <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>kfi/management/index" class="no-underline"><i class="fa fa-bar-chart pr-10 mt-20" aria-hidden="true"></i> KFI Management</a></div>
                         <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/kgimanagement" class="no-underline"><i class="fa fa-line-chart pr-10 mt-20" aria-hidden="true"></i> KGI Management</a></div>
                         <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/kpimanagement" class="no-underline"><i class="fa fa-tachometer pr-10 mt-20" aria-hidden="true"></i> KPI Management</a></div>
                         <div class="col-12 haeder-Evalution"> EVALUTION SETTINGS</div>

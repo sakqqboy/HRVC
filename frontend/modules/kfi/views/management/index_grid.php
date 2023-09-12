@@ -129,7 +129,7 @@ $this->title = 'KFI Grid View';
 														</div>
 														<div class="col-8 text-start pl-0">
 															<span class="badge rounded-pill bg-deadline0 ml-5" style="width:100%;">
-																<span class="deadline-orange"> Deadline</span> <span class="mon-dark">: Mon,Feb,2023</span>
+																<span class="deadline-orange"> Deadline</span> <span class="mon-dark">: <?= $kfi['checkDate'] == "" ? 'Not set' : $kfi['checkDate'] ?></span>
 															</span>
 														</div>
 													</div>
@@ -181,8 +181,8 @@ $this->title = 'KFI Grid View';
 															<div class="col-12 padding-update">
 																Update Interval
 															</div>
-															<div class="col-12 update-mouth">
-																Monthly
+															<div class="col-12 update-mouth mt-5">
+																<?= $kfi["unit"] ?>
 															</div>
 														</div>
 														<div class="col-lg-6 col-md-6 col-6 pr-0">
@@ -197,15 +197,16 @@ $this->title = 'KFI Grid View';
 												</div>
 												<div class="col-12">
 													<div class="row">
-														<div class="col-lg-4 text-end pr-0">
-															<img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima">
-														</div>
-														<div class="col-lg-8 text-end pr-0">
+														<div class="col-lg-12 text-end pr-0 border">
+															<img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima mr-15" style="margin-top: -5px;">
+
+
 															<span class="next-update-span" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" onclick=" javascript:updateKfi(<?= $kfiId ?>)">
 																<i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i>
-																Next Update
+
 															</span> &nbsp;
-															<strong class="font-size-12">Tue,Mar 12,2023</strong>
+															<span class="text-primary font-size-12">Next Update</span>
+															<strong class="font-size-12"><?= $kfi['nextCheck'] == "" ? 'Not set' : $kfi['nextCheck'] ?></strong>
 														</div>
 
 													</div>

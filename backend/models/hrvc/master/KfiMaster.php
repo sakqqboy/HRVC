@@ -14,6 +14,7 @@ use Yii;
     * @property integer $unitId
     * @property integer $targetAmount
     * @property string $month
+    * @property string $kfiDetail
     * @property integer $createrId
     * @property integer $status
     * @property string $createDateTime
@@ -37,6 +38,7 @@ public function rules()
 return [
             [['kfiName', 'companyId', 'branchId', 'unitId', 'createrId'], 'required'],
             [['companyId', 'branchId', 'unitId', 'targetAmount', 'createrId'], 'integer'],
+            [['kfiDetail'], 'string'],
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['kfiName', 'month'], 'string', 'max' => 45],
             [['status'], 'string', 'max' => 10],
@@ -56,6 +58,7 @@ return [
     'unitId' => 'Unit ID',
     'targetAmount' => 'Target Amount',
     'month' => 'Month',
+    'kfiDetail' => 'Kfi Detail',
     'createrId' => 'Creater ID',
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',
