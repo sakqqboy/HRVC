@@ -1864,12 +1864,15 @@ $this->title = 'KFI';
             <div class="modal-body">
                 <div class="col-12 dashed-Backdrop7">
                     <div class="row mt-20">
-                        <div class="col-lg-2 col-md-6 col-2">
-                            <div class="col-12 padding-FEB-Backdrop3">
-                                FEB
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <div class="col-12 content-KGI">
+                                Team KPI Contents
+                            </div>
+                            <div class="col-12 KGI-Clients">
+                                Ten Clients employee
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6 col-3">
+                        <div class="col-lg-2 col-md-6 col-3">
                             <div class="col-12 Quant-ratio-Backdrop3">
                                 Quant Ratio
                             </div>
@@ -1877,7 +1880,12 @@ $this->title = 'KFI';
                                 <i class="fa fa-diamond" aria-hidden="true"></i> Quality
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6 col-3">
+                        <div class="col-lg-1 col-md-6 col-2">
+                            <div class="col-12 padding-FEB-Backdrop7">
+                                FEB
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-3">
                             <div class="col-12 bullseye-con-Backdrop3">
                                 <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                             </div>
@@ -1890,7 +1898,7 @@ $this->title = 'KFI';
                                 >
                             </div>
                         </div>
-                        <div class="col-lg-3 cl-md-6 col-3">
+                        <div class="col-lg-2 cl-md-6 col-3">
                             <div class="col-12 trophy-con-Backdrop3">
                                 <i class="fa fa-trophy" aria-hidden="true"></i> Result
                             </div>
@@ -1899,7 +1907,12 @@ $this->title = 'KFI';
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-2 col-md-6 col-6"></div>
+                            <div class="col-lg-3 col-md-6 col-12">
+                                <div class="col-12">
+                                    <p class="Priority1">Priority</p>
+                                    <div class="circle-Priority">A</div>
+                                </div>
+                            </div>
                             <div class="col-lg-4 col-md-6 col-6">
                                 <div class="col-12 padding-update-Backdrop3">
                                     Update Interval
@@ -1908,19 +1921,29 @@ $this->title = 'KFI';
                                     Monthly
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-6 mt-10">
+                            <div class="col-lg-5 col-md-6 col-6 mt-10">
                                 <div class="col-12">
                                     <div class="progress">
-                                        <div class="progress-bar" style="width:85%; background:#2F80ED;margin-left:-50px;"></div>
-                                        <span class="badge rounded-pill  pro-load-Backdrop3">85%</span>
+                                        <div class="progress-bar" style="width:85%; background:#2F80ED;margin-left:-50px;height:13px;"></div>
+                                        <span class="badge rounded-pill  pro-load-Backdrop7">85%</span>
                                     </div>
                                 </div>
                             </div>
+                            <div class="mt-5"></div>
                         </div>
                     </div>
                 </div>
+                <div class="col-12 Description-Backdrop7">
+                    Description
+                </div>
+                <div class="col-12 detailsDescription-Backdrop3">
+                    The more people who have access to your point of sales system or place of business means more people have the possibility of buying from you and increasing your profits. The more people who have access to your point of sales system or place of business means more people have the possibility of buying from you and increasing your profits.
+                </div>
+                <div class="col-12 History-Backdrop3">
+                    History
+                </div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" style="border: none;">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
