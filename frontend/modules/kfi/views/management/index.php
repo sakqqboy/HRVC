@@ -147,7 +147,9 @@ $this->title = 'KFI';
 												<td><?= $kfi["month"] ?></td>
 												<td><?= $kfi["nextCheck"] ?></td>
 												<td colspan="row">
-													<span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td"></span>&nbsp;&nbsp;
+													<span data-bs-toggle="modal" data-bs-target="#exampleModalfirstone">
+														<img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td">
+													</span>&nbsp;&nbsp;
 													<span class="dropdown" href="#" role="but ton" id="dropdownMenuLink-<?= $kfiId ?>" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
 													<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kfiId ?>">
 														<li data-bs-toggle="modal" data-bs-target="#staticBackdrop2" onclick="javascript:updateKfi(<?= $kfiId ?>)">
@@ -221,6 +223,9 @@ $this->title = 'KFI';
 
 
 	<?= $this->render('history_modal', [
+		"units" => $units,
+	]) ?>
+	<?= $this->render('comment_modal', [
 		"units" => $units,
 	]) ?>
 
