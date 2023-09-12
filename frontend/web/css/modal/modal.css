@@ -10,7 +10,9 @@
 }
 
 .Round1 {
-    width: 20px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
 }
 
 .link-3 {
@@ -272,4 +274,43 @@
 
 .menulink {
     padding-left: 5px;
+}
+
+.flag-Backdrop7 {
+    font-weight: 700;
+    font-size: 23px;
+}
+
+.border-deadline-Backdrop7 {
+    border-radius: 20px;
+    color: orange;
+    font-weight: 500;
+    font-size: 12px;
+    padding-left: 10px;
+}
+
+.Completed-Backdrop7 {
+    margin-left: -90px;
+    font-size: 12px;
+}
+
+.tk {
+    font-weight: 700;
+    padding-left: 10px;
+    margin-top: -30px;
+}
+
+.border-next-Backdrop7 {
+    border-radius: 20px;
+    color: #2F80ED;
+    font-weight: 500;
+    font-size: 12px;
+    padding-left: 10px;
+    margin-right: 16px;
+}
+
+.dashed-Backdrop7 {
+    border-style: dashed;
+    background-color: #ebebeb;
+    border-radius: 10px;
 }

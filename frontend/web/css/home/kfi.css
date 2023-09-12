@@ -75,15 +75,6 @@
     --bs-nav-pills-link-active-bg: #e1e1e1;
 }
 
-.link-pills {
-    color: #000000;
-}
-
-.link-pills :hover {
-    border-bottom: #5CAEF9 2px solid;
-    color: #5CAEF9;
-}
-
 .new-light-4 a:hover {
     background: rgb(255, 255, 255);
     color: #5CAEF9;
