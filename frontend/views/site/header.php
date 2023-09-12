@@ -9,7 +9,7 @@ use common\models\ModelMaster;
                 </div>
                 <div class="col-12">
                         <a href="<?= Yii::$app->homeUrl ?>site/index">
-                                <img src="<?= Yii::$app->homeUrl ?>image/Human-1.png" class="width-hrvc">
+                                <img src="<?= Yii::$app->homeUrl ?>image/Human.png" class="width-hrvc">
                         </a>
                 </div>
                 <div class="col-12 navbar-header">
