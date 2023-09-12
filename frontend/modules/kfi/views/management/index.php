@@ -132,7 +132,7 @@ $this->title = 'KFI';
 												<td><?= $kfi["companyName"] ?></td>
 												<td>
 													<img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey">
-													<?= $kfi["branchName"] ?>, Turkey
+													<?= $kfi["branchName"] ?>, <?= $kfi['countryName'] ?>
 												</td>
 												<td><?= $kfi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?></td>
 												<td class="text-end"><?= number_format($kfi["target"], 2) ?></td>
@@ -147,7 +147,7 @@ $this->title = 'KFI';
 												<td><?= $kfi["month"] ?></td>
 												<td><?= $kfi["nextCheck"] ?></td>
 												<td colspan="row">
-													<span> <i class="fa fa-comments-o on-cursor" aria-hidden="true"></i></span> &nbsp;
+													<span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td"></span>&nbsp;&nbsp;
 													<span class="dropdown" href="#" role="but ton" id="dropdownMenuLink-<?= $kfiId ?>" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
 													<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kfiId ?>">
 														<li data-bs-toggle="modal" data-bs-target="#staticBackdrop2" onclick="javascript:updateKfi(<?= $kfiId ?>)">

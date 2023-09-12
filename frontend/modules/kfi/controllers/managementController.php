@@ -43,6 +43,8 @@ class ManagementController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index');
 		$kfis = curl_exec($api);
 		$kfis = json_decode($kfis, true);
+
+		curl_close($api);
 		//throw new Exception(print_r($kfis, true));
 
 		$units = ["1" => "Monthly", "2" => "Weekly", "3" => "QuaterLy", "4" => "Daily"];
@@ -72,7 +74,7 @@ class ManagementController extends Controller
 		$kfis = curl_exec($api);
 		$kfis = json_decode($kfis, true);
 		//throw new Exception(print_r($kfis, true));
-
+		curl_close($api);
 		$units = ["1" => "Monthly", "2" => "Weekly", "3" => "QuaterLy", "4" => "Daily"];
 		$months = ModelMaster::monthFull(1);
 		//throw new Exception(print_r($kfis, true));
@@ -115,6 +117,8 @@ class ManagementController extends Controller
 			$kfi->save(false);
 			$kfiHistory = new KfiHistory();
 			$kfiHistory->kfiId = $_POST["kfiId"];
+			$kfiHistory->titleProgress = $_POST["progressTitle"];
+			$kfiHistory->remark = $_POST["progressTitle"];
 			$kfiHistory->checkPeriodDate = $_POST["periodDate"];
 			$kfiHistory->nextCheckDate = $_POST["nextCheckDate"];
 			$kfiHistory->amountType = $_POST["amountType"];
@@ -176,13 +180,24 @@ class ManagementController extends Controller
 		}
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId);
 		$kfi = curl_exec($api);
 		$kfi = json_decode($kfi, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-history?kfiId=' . $kfiId);
+		$history = curl_exec($api);
+		$history = json_decode($history, true);
+		curl_close($api);
+		//throw new exception(print_r($history, true));
+
+		$historyText = $this->renderAjax('history', [
+			"history" => $history
+		]);
 		//throw new exception(print_r($kfi, true));
 		$res["kfi"] = $kfi;
+		$res["history"] = $historyText;
 		$res["status"] = true;
-		//throw new exception(print_r($res, true));
 		return json_encode($res);
 	}
 }

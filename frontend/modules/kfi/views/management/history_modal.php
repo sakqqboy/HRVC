@@ -2,7 +2,9 @@
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header" style="border-bottom:none;">
-				<div class="modal-title Modalfirstone" id="staticBackdrop"><i class="fa fa-line-chart mr-5" aria-hidden="true"></i><span id="kfiNameHistory"></span></div>
+				<div class="modal-title Modalfirstone" id="staticBackdrop"><i class="fa fa-line-chart mr-5" aria-hidden="true"></i>
+					<span id="kfiNameHistory"></span>
+				</div>
 				<div class="modal-title badge rounded-pill bg-warning text-dark font-size-14" id="statusHistory">Completed</div>
 			</div>
 			<div class="text-end mr-20">
@@ -19,7 +21,7 @@
 			</div>
 			<div class="view-show-name" id="companyHistory">Tokyo Consulting Firm Limited </div>
 			<div class="country-show-name">
-				<img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="is-bangladresh2"> <span id="branchHistory">Dhaka</span>, Bangladesh
+				<img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="is-bangladresh2"> <span id="branchHistory"></span>, <span id="countryHistory"></span>
 			</div>
 			<div class="modal-body mt-20">
 				<div class="col-12 dashed-Backdrop3">
@@ -89,164 +91,9 @@
 				<div class="col-12 History-Backdrop3">
 					History
 				</div>
+				<div class="col-12 mt-15" id="showHistory"></div>
+				<div class="col-12 mt-15" id="showIssue"></div>
 				<hr>
-				<div class="alert alert-light alertlight-Backdrop3">
-					<div class="row">
-						<div class="col-lg-5 col-md-6 col-12">
-							<div class="row">
-								<div class="col-2">
-									<span class="badge rounded-pill bg-success"> ✓</span>
-
-								</div>
-								<div class="col-10">
-									Stripe risk evaluation: normal
-								</div>
-								<div class="col-12 pl-60">
-									<img src="<?= Yii::$app->homeUrl ?>image/Faruque.png" class="name-Backdrop3">
-									<a href="#" class="font-size-12"> Mohammed Sharukh</a> <span class="font-size-12 text-secondary"> Title : Admin</span>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-12">
-							<div class="col-12 text-secondary font-size-12">
-								<i class="fa fa-bullseye" aria-hidden="true"></i> Updated the information
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-12">
-							<div class="row">
-								<div class="col-2">
-									<img src="<?= Yii::$app->homeUrl ?>image/pdf.png" class="image-pdf-Backdrop3">
-								</div>
-								<div class="col-10 PM">
-									August 22, 2018, 6:14 PM
-									<div class="col-12 New">
-										New Amount <strong> 200255</strong>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-12">
-					<div class="successbackdrop4"></div>
-				</div>
-				<div class="alert alert-light alertlight-Backdrop3">
-					<div class="row">
-						<div class="col-lg-5 col-md-6 col-12">
-							<div class="row">
-								<div class="col-2">
-									<span class="badge rounded-pill bg-primary"> ✓</span>
-
-								</div>
-								<div class="col-10">
-									Stripe risk evaluation: normal
-								</div>
-								<div class="col-12 pl-60">
-									<img src="<?= Yii::$app->homeUrl ?>image/Faruque.png" class="name-Backdrop3">
-									<a href="#" class="font-size-12"> Mohammed Sharukh</a> <span class="font-size-12 text-secondary"> Title : Admin</span>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-12">
-							<div class="col-12 text-secondary font-size-12">
-								<i class="fa fa-bullseye" aria-hidden="true"></i> Payment approved and review closed
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-12">
-							<div class="row">
-								<div class="col-2">
-									<img src="<?= Yii::$app->homeUrl ?>image/pdf.png" class="image-pdf-Backdrop3">
-								</div>
-								<div class="col-10 PM">
-									August 22, 2018, 6:14 PM
-									<div class="col-12 New">
-										New Amount <strong> 200255</strong>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-12">
-					<div class="successbackdrop4"></div>
-				</div>
-				<div class="alert alert-light alertlight-Backdrop3">
-					<div class="row">
-						<div class="col-lg-5 col-md-6 col-12">
-							<div class="row">
-								<div class="col-2">
-									<span class="badge rounded-pill bg-primary"> ✓</span>
-
-								</div>
-								<div class="col-10">
-									Stripe risk evaluation: normal
-								</div>
-								<div class="col-12 pl-60">
-									<img src="<?= Yii::$app->homeUrl ?>image/Faruque.png" class="name-Backdrop3">
-									<a href="#" class="font-size-12"> Mohammed Sharukh</a> <span class="font-size-12 text-secondary"> Title : Admin</span>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-12">
-							<div class="col-12 text-secondary font-size-12">
-								<i class="fa fa-bullseye" aria-hidden="true"></i> Payment approved and review closed
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-12">
-							<div class="row">
-								<div class="col-2">
-									<img src="<?= Yii::$app->homeUrl ?>image/pdf.png" class="image-pdf-Backdrop3">
-								</div>
-								<div class="col-10 PM">
-									August 22, 2018, 6:14 PM
-									<div class="col-12 New">
-										New Amount <strong> 200255</strong>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-12">
-					<div class="successbackdrop4"></div>
-				</div>
-				<div class="alert alert-light alertlight-Backdrop3">
-					<div class="row">
-						<div class="col-lg-5 col-md-6 col-12">
-							<div class="row">
-								<div class="col-2">
-									<span class="badge rounded-pill bg-primary"> ✓</span>
-
-								</div>
-								<div class="col-10">
-									Stripe risk evaluation: normal
-								</div>
-								<div class="col-12 pl-60">
-									<img src="<?= Yii::$app->homeUrl ?>image/Faruque.png" class="name-Backdrop3">
-									<a href="#" class="font-size-12"> Mohammed Sharukh</a> <span class="font-size-12 text-secondary"> Title : Admin</span>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-12">
-							<div class="col-12 text-secondary font-size-12">
-								<i class="fa fa-bullseye" aria-hidden="true"></i> Payment approved and review closed
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-12">
-							<div class="row">
-								<div class="col-2">
-									<img src="<?= Yii::$app->homeUrl ?>image/pdf.png" class="image-pdf-Backdrop3">
-								</div>
-								<div class="col-10 PM">
-									August 22, 2018, 6:14 PM
-									<div class="col-12 New">
-										New Amount <strong> 200255</strong>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
 				<div class="col-12 text-end">
 					<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
 				</div>

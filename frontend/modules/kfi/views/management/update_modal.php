@@ -21,11 +21,15 @@
 							<label for="input" class="form-label">Company</label>
 							<input type="text" class="form-control" value="" disabled id="companyName">
 						</div>
-						<div class="col-12 pt-5">
+						<div class="col-12 mt-10">
 							<label for="input" class="form-label">Branch</label>
 							<input type="text" class="form-control" value="" disabled id="branchName">
 						</div>
-						<div class="col-12 pt-10 mt-10">
+						<div class="col-12 mt-15">
+							<label for="input" class="form-label"><strong class="red">*</strong> Progress title</label>
+							<input type="text" class="form-control" name="progressTitle" required>
+						</div>
+						<div class="col-12 pt-10 mt-5">
 							<label for="input" class="form-label"><strong class="red">*</strong> Check Unit</label>
 							<div class="btn-group mt-5 col-12" role="group" aria-label="Basic outlined example">
 								<button type="button" class="btn btn border col-3  font-size-12 unit-1" onclick="javascript:selectUnit(1)">Monthly</button>
@@ -36,7 +40,7 @@
 								<input type="hidden" value="" class="previousUnit" required>
 							</div>
 						</div>
-						<div class="col-12 pt-5 mt-10 font-size-14">
+						<div class="col-12 pt-5 mt-15 font-size-14">
 							<div class="row">
 								<div class="col-lg-6 col-md-6 col-12">
 									<div class="input-group">
@@ -113,6 +117,10 @@
 							<div class="col-12  mt-15">
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Result</label>
 								<input type="number" step="any" class="form-control font-size-13 text-end" id="result" name="result">
+							</div>
+							<div class="col-12 mt-10">
+								<label class="form-label font-size-13">Remark</label>
+								<textarea class="form-control font-size-13" id="remark" name="remark"></textarea>
 							</div>
 						</div>
 					</div>

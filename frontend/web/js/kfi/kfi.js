@@ -115,7 +115,9 @@ function kfiHistory(kfiId) {
                 $("#detailHistory").html(data.kfi.detail);
                 $("#deadlineHistory").html(data.kfi.checkDate);
                 $("#NextCheckDateHistory").html(data.kfi.nextCheck);
-                $("#unitHistory").html(data.kfi.unit)
+                $("#unitHistory").html(data.kfi.unit);
+                $("#countryHistory").html(data.kfi.countryName);
+                $("#showHistory").html(data.history);
             }
 
         }

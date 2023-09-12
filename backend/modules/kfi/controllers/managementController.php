@@ -4,6 +4,7 @@ namespace backend\modules\kfi\controllers;
 
 use backend\models\hrvc\Branch;
 use backend\models\hrvc\Company;
+use backend\models\hrvc\Country;
 use backend\models\hrvc\Kfi;
 use backend\models\hrvc\KfiHistory;
 use backend\models\hrvc\Unit;
@@ -42,6 +43,7 @@ class ManagementController extends Controller
 					"status" => $kfi['status'],
 					"nextCheck" => "",
 					"checkDate" => "",
+					"countryName" => Country::countryNameBycompany($kfi['companyId'])
 				];
 				$kfiHistory = KfiHistory::find()
 					->where(["kfiId" => $kfi["kfiId"], "status" => [1, 4]])
@@ -67,6 +69,7 @@ class ManagementController extends Controller
 						"nextCheck" => ModelMaster::engDate($kfiHistory["nextCheckDate"], 2),
 						"checkDate" => ModelMaster::engDate($kfiHistory["checkPeriodDate"], 2),
 						"amountType" => $kfiHistory["amountType"],
+						"countryName" => Country::countryNameBycompany($kfi['companyId'])
 					];
 				}
 
@@ -83,10 +86,11 @@ class ManagementController extends Controller
 		$res["branchName"] = Branch::branchName($kfi['branchId']);
 		$res["unitId"] = $kfi["unitId"];
 		$res["detail"] = $kfi["kfiDetail"];
-		$res["targetAmount"] = $kfi["targetAmount"];
+		$res["targetAmount"] = number_format($kfi["targetAmount"], 2);
 		$res["status"] = $kfi["status"];
 		$res["monthName"] = strtoupper(ModelMaster::monthEng($kfi['month'], 1));
 		$res["unit"] = Unit::unitName($kfi['unitId']);
+		$res["countryName"] = Country::countryNameBycompany($kfi['companyId']);
 
 		$kfiHistory = KfiHistory::find()
 			->where(["kfiId" => $kfiId, "status" => [1, 4]])
@@ -127,5 +131,22 @@ class ManagementController extends Controller
 			->orderBy('kfiHistoryId DESC')
 			->asArray()
 			->all();
+		$data = [];
+		if (isset($kfiHistory) && count($kfiHistory) > 0) {
+
+
+			foreach ($kfiHistory as $history) :
+				$time = explode(' ', $history["createDateTime"]);
+				$data[$history["kfiHistoryId"]] = [
+					"title" => $history["titleProgress"],
+					"remark" => $history["remark"],
+					"result" => $history["result"],
+					"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
+					"time" => ModelMaster::timeText($time[1]),
+					"status" => $history["historyStatus"]
+				];
+			endforeach;
+		}
+		return json_encode($data);
 	}
 }

@@ -120,7 +120,7 @@ $this->title = 'KFI Grid View';
 												<div class="col-lg-7 col-md-6 col-6 pl-0 text-end">
 													<div class="row">
 														<div class="col-4 pr-0">
-															<a href="" class="btn btn-xs btn-outline-secondary" style="margin-left: 0px;">
+															<a class="btn btn-xs btn-outline-secondary" style="margin-left: 0px;" data-bs-toggle="modal" data-bs-target="#staticBackdrop3" onclick="javascript:kfiHistory(<?= $kfiId ?>)">
 																<i class="fa fa-eye" aria-hidden="true"></i>
 															</a>
 															<a href="" class="btn btn-xs btn-outline-danger ml-5">
@@ -160,7 +160,7 @@ $this->title = 'KFI Grid View';
 																<i class="fa fa-bullseye" aria-hidden="true"></i> Target
 															</div>
 															<div class="col-12" style="font-weight: 500;">
-																<?= number_format($kfi["target"]) ?>
+																<?= number_format($kfi["target"], 2) ?>
 															</div>
 														</div>
 														<div class="col-lg-1 col-md-6 col-3 pt-13">
@@ -197,7 +197,7 @@ $this->title = 'KFI Grid View';
 												</div>
 												<div class="col-12">
 													<div class="row">
-														<div class="col-lg-12 text-end pr-0 border">
+														<div class="col-lg-12 text-end pr-0">
 															<img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima mr-15" style="margin-top: -5px;">
 
 
@@ -249,6 +249,9 @@ $this->title = 'KFI Grid View';
 
 	]); ?>
 	<?= $this->render('update_modal', [
+		"units" => $units,
+	]) ?>
+	<?= $this->render('history_modal', [
 		"units" => $units,
 	]) ?>
 	<?php ActiveForm::end(); ?>

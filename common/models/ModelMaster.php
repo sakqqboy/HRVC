@@ -76,6 +76,28 @@ class ModelMaster extends \yii\db\ActiveRecord
             return null;
         }
     }
+    public static function timeText($time)
+    {
+        $timeArr = explode(':', $time);
+        $text = '';
+        if (count($timeArr) > 2) {
+            if ((int)$timeArr[0] >= 12) {
+                $text = 'PM';
+                if ((int)$timeArr[0] == 12) {
+                    $text = '12:' . $timeArr[1] . ' PM';
+                } else {
+                    $time = (int)$timeArr[0] - 12;
+                    $text = $time . ':' . $timeArr[1] . ' PM';
+                }
+            } else {
+                $text = (int)$timeArr[0] . ':' . $timeArr[1] . ' AM';
+            }
+        } else {
+            return null;
+        }
+        return $text;
+    }
+
     public static function dateNumber($dateFull)
     {
         $d = explode(' ', $dateFull);
@@ -119,6 +141,48 @@ class ModelMaster extends \yii\db\ActiveRecord
         $month = $day[1];
         $date = $day[2];
         return $date . '/' . $month . '/' . $year;
+    }
+    public static function engDateHr($date, $type = self::DATE_THAI_TYPE_FULL)
+    {
+        $monthFullEng = [
+            1 => 'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December',
+        ];
+        $monthShortEng = [
+            1 => 'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec',
+        ];
+
+        $d = explode('-', $date);
+        if (count($d) >= 3) {
+            $year = $d[0];
+            $month = ($type == self::DATE_THAI_TYPE_FULL) ? $monthFullEng[(int) $d[1]] : $monthShortEng[(int) $d[1]];
+            $date = (int) $d[2];
+
+            return $month . ' ' . $date . ', ' . $year;
+        } else {
+            return null;
+        }
     }
     public static function monthEng($month, $type = self::DATE_THAI_TYPE_FULL)
     {
