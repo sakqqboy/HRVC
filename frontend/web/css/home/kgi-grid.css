@@ -2,7 +2,7 @@
     position: relative;
     overflow-y: scroll;
     height: 400px;
-    width: 1140px;
+    width: 100%;
     border: none;
     background-color: #eaeaea;
 }
