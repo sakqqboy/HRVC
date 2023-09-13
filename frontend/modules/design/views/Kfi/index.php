@@ -1890,7 +1890,12 @@ $this->title = 'KFI';
                                 <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                             </div>
                             <div class="col-12 million-number-Backdrop3">
-                                number_format(2,)
+                                <?php
+                                echo number_format(1);
+                                echo number_format(0);
+                                echo number_format(0);
+                                echo number_format(0);
+                                ?>
                             </div>
                         </div>
                         <div class="col-lg-1 col-md-6 col-3">
@@ -1906,7 +1911,12 @@ $this->title = 'KFI';
                                 <i class="fa fa-trophy" aria-hidden="true"></i> Result
                             </div>
                             <div class="col-12 million-number-Backdrop3">
-                                902,566
+                                <?php
+                                echo number_format(9);
+                                echo number_format(0);
+                                echo number_format(2);
+                                echo number_format(5);
+                                ?>
                             </div>
                         </div>
                         <div class="row">
@@ -1945,12 +1955,22 @@ $this->title = 'KFI';
                 <div class="row pl-20 mt-20">
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="col-12">
-                            <a href="" class=""> Team</a>
+                            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                <div class="nav-item">
+                                    <a class="active" id="pills-team1-tab" data-bs-toggle="pill" data-bs-target="#pills-team1" type="button" role="tab" aria-controls="pills-team1" aria-selected="true"> Team</a>
+                            </ul>
+                        </div>
+                        <div class="col-12">
+                            <div class="tab-content" id="pills-tabContent">
+                                <div class="tab-pane fade show active" id="pills-team1" role="tabpanel" aria-labelledby="pills-team1-tab">
+                                    ...yujh
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="col-12">
-                            <a href=""> Assign Members</a>
+                            <a class=""> Assign Members</a>
                         </div>
                     </div>
                 </div>
