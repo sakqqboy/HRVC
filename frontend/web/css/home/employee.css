@@ -48,24 +48,23 @@
 }
 
 .image-employee {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border-radius: 100%;
     margin-top: -20px;
 }
 
 .emplo-tadawoki {
-    padding-top: 5px;
-    margin-left: -30px;
+    margin-left: -25px;
     font-size: 8px;
-    line-height: 10px;
+    line-height: 8px;
     font-weight: 700;
     cursor: default;
 }
 
 .emplo-permanent {
     font-size: 5px;
-    margin-left: -29px;
+    margin-left: -25px;
     border-radius: 50%;
     cursor: default;
     margin-top: 5px;
@@ -118,8 +117,7 @@
 
 .bg-success0 {
     background-color: rgb(17, 179, 57);
-    font-size: 7px;
-    margin-left: 90px;
+    margin-left: 100px;
 }
 
 .input-group0 {

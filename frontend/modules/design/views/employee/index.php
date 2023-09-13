@@ -44,6 +44,267 @@ $this->title = 'Employee';
                     <div class="col-lg-2 col-md-6 col-8">
                         <div class="alert alert-employee" role="alert">
                             <div class="row" style="margin-top: -13px;">
+                                <div class="col-lg-10 col-md-10 col-10" style="margin-top: -10px;">
+                                    <span class="badge rounded-pill bg-success0">Active</span>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-2 text-end">
+                                    <div class="col-12 employee-ellipsis">
+                                        <strong><i class="fa fa-ellipsis-v" aria-hidden="true"></i></strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-6">
+                                    <div class="col-12">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/employee1.png" class="image-employee">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-6">
+                                    <div class="col-12 emplo-tadawoki">
+                                        Tadawoki
+                                        Watanabe
+                                    </div>
+                                    <div class="col-12 emplo-permanent">
+                                        <span class="badge bg-info text-dark">Permanent</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="alert alert1-employee1" role="alert">
+                                <div class="row">
+                                    <div class="col-lg-7 col-md-6 col-6">
+                                        <div class="col-12 lead-programmer">
+                                            lead Programmer
+                                        </div>
+                                        <div class="col-12 lead-it">
+                                            IT & Development
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5 col-md-6 col-6">
+                                        <div class="col-12 lead-programmer">
+                                            <i class="fa fa-calendar" aria-hidden="true"></i> Hiring Date
+                                        </div>
+                                        <div class="col-12 lead-it">
+                                            17/02/2000
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-6 col-2">
+                                            <div class="col-12" style="margin-top: -10px;">
+                                                <i class="fa fa-envelope-o envelope-send" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9 col-md-6 col-10">
+                                            <div class="col-12 employee-email">
+                                                dibbo.du..t@tokyoconsultinggroup.com
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6 col-2">
+                                            <div class="col-12" style="margin-top: -10px;">
+                                                <i class="fa fa-phone envelope-send" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9 col-md-6 col-10">
+                                            <div class="col-12 envelope-mail">
+                                                +88078896454123
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6 col-2">
+                                            <div class="col-12" style="margin-top: -10px;">
+                                                <i class="fa fa-user envelope-send" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9 col-md-6 col-10">
+                                            <div class="col-12 employee-email">
+                                                EID 14
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 employee-view">
+                                View Profile
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-8">
+                        <div class="alert alert-employee" role="alert">
+                            <div class="row" style="margin-top: -13px;">
+                                <div class="col-lg-10 col-md-10 col-10">
+                                    <span class="badge rounded-pill bg-danger bg-success0">Resigned</span>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-2 text-end">
+                                    <div class="col-12 employee-ellipsis">
+                                        <strong><i class="fa fa-ellipsis-v" aria-hidden="true"></i></strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-6">
+                                    <div class="col-12">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/employee2.png" class="image-employee">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-6">
+                                    <div class="col-12 emplo-tadawoki">
+                                        Taiki
+                                        Taninokuchi
+                                    </div>
+                                    <div class="col-12 emplo-permanent">
+                                        <span class="badge bg-info text-dark">Intern</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="alert alert1-employee1" role="alert">
+                                <div class="row">
+                                    <div class="col-lg-7 col-md-6 col-6">
+                                        <div class="col-12 lead-programmer">
+                                            Junior Executive
+                                        </div>
+                                        <div class="col-12 lead-it">
+                                            IT & Development
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5 col-md-6 col-6">
+                                        <div class="col-12 lead-programmer">
+                                            <i class="fa fa-calendar" aria-hidden="true"></i> Hiring Date
+                                        </div>
+                                        <div class="col-12 lead-it">
+                                            17/02/2000
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-6 col-2">
+                                            <div class="col-12" style="margin-top: -10px;">
+                                                <i class="fa fa-envelope-o envelope-send" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9 col-md-6 col-10">
+                                            <div class="col-12 employee-email">
+                                                dibbo.du..t@tokyoconsultinggroup.com
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6 col-2">
+                                            <div class="col-12" style="margin-top: -10px;">
+                                                <i class="fa fa-phone envelope-send" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9 col-md-6 col-10">
+                                            <div class="col-12 envelope-mail">
+                                                +88078896454123
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6 col-2">
+                                            <div class="col-12" style="margin-top: -10px;">
+                                                <i class="fa fa-user envelope-send" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9 col-md-6 col-10">
+                                            <div class="col-12 employee-email">
+                                                EID 14
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 employee-view">
+                                View Profile
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-8">
+                        <div class="alert alert-employee" role="alert">
+                            <div class="row" style="margin-top: -13px;">
+                                <div class="col-lg-10 col-md-10 col-10">
+                                    <span class="badge rounded-pill bg-success0">Active</span>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-2 text-end">
+                                    <div class="col-12 employee-ellipsis">
+                                        <strong><i class="fa fa-ellipsis-v" aria-hidden="true"></i></strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-6">
+                                    <div class="col-12">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="image-employee">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-6">
+                                    <div class="col-12 emplo-tadawoki">
+                                        Sanjina
+                                        Momu
+                                    </div>
+                                    <div class="col-12 emplo-permanent">
+                                        <span class="badge bg-info text-dark">Permanent</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="alert alert1-employee1" role="alert">
+                                <div class="row">
+                                    <div class="col-lg-7 col-md-6 col-6">
+                                        <div class="col-12 lead-programmer">
+                                            Head of HR
+                                        </div>
+                                        <div class="col-12 lead-it">
+                                            Human Resource
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5 col-md-6 col-6">
+                                        <div class="col-12 lead-programmer">
+                                            <i class="fa fa-calendar" aria-hidden="true"></i> Hiring Date
+                                        </div>
+                                        <div class="col-12 lead-it">
+                                            16/04/2023
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-6 col-2">
+                                            <div class="col-12" style="margin-top: -10px;">
+                                                <i class="fa fa-envelope-o envelope-send" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9 col-md-6 col-10">
+                                            <div class="col-12 employee-email">
+                                                dibbo.du..t@tokyoconsultinggroup.com
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6 col-2">
+                                            <div class="col-12" style="margin-top: -10px;">
+                                                <i class="fa fa-phone envelope-send" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9 col-md-6 col-10">
+                                            <div class="col-12 envelope-mail">
+                                                +88078896454123
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6 col-2">
+                                            <div class="col-12" style="margin-top: -10px;">
+                                                <i class="fa fa-user envelope-send" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9 col-md-6 col-10">
+                                            <div class="col-12 employee-email">
+                                                EID 14
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 employee-view">
+                                View Profile
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-8">
+                        <div class="alert alert-employee" role="alert">
+                            <div class="row" style="margin-top: -13px;">
                                 <div class="col-lg-10 col-md-10 col-10">
                                     <span class="badge rounded-pill bg-success0">Active</span>
                                 </div>
@@ -131,8 +392,8 @@ $this->title = 'Employee';
                     <div class="col-lg-2 col-md-6 col-8">
                         <div class="alert alert-employee" role="alert">
                             <div class="row" style="margin-top: -13px;">
-                                <div class="col-lg-10 col-md-10 col-10 text-end">
-                                    <span class="badge rounded-pill bg-danger bg-success0">Resigned</span>
+                                <div class="col-lg-10 col-md-10 col-10">
+                                    <span class="badge rounded-pill bg-success0">Active</span>
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-2 text-end">
                                     <div class="col-12 employee-ellipsis">
@@ -148,11 +409,11 @@ $this->title = 'Employee';
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-6">
                                     <div class="col-12 emplo-tadawoki">
-                                        Taiki
-                                        Taninokuchi
+                                        Tadawoki
+                                        Watanabe
                                     </div>
                                     <div class="col-12 emplo-permanent">
-                                        <span class="badge bg-info text-dark">Intern</span>
+                                        <span class="badge bg-info text-dark">Permanent</span>
                                     </div>
                                 </div>
                             </div>
@@ -160,7 +421,7 @@ $this->title = 'Employee';
                                 <div class="row">
                                     <div class="col-lg-7 col-md-6 col-6">
                                         <div class="col-12 lead-programmer">
-                                            Junior Executive
+                                            lead Programmer
                                         </div>
                                         <div class="col-12 lead-it">
                                             IT & Development
@@ -218,7 +479,7 @@ $this->title = 'Employee';
                     <div class="col-lg-2 col-md-6 col-8">
                         <div class="alert alert-employee" role="alert">
                             <div class="row" style="margin-top: -13px;">
-                                <div class="col-lg-10 col-md-10 col-10 text-end">
+                                <div class="col-lg-10 col-md-10 col-10">
                                     <span class="badge rounded-pill bg-success0">Active</span>
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-2 text-end">
@@ -235,8 +496,8 @@ $this->title = 'Employee';
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-6">
                                     <div class="col-12 emplo-tadawoki">
-                                        Sanjina
-                                        Momu
+                                        Tadawoki
+                                        Watanabe
                                     </div>
                                     <div class="col-12 emplo-permanent">
                                         <span class="badge bg-info text-dark">Permanent</span>
@@ -247,10 +508,10 @@ $this->title = 'Employee';
                                 <div class="row">
                                     <div class="col-lg-7 col-md-6 col-6">
                                         <div class="col-12 lead-programmer">
-                                            Head of HR
+                                            lead Programmer
                                         </div>
                                         <div class="col-12 lead-it">
-                                            Human Resource
+                                            IT & Development
                                         </div>
                                     </div>
                                     <div class="col-lg-5 col-md-6 col-6">
@@ -258,7 +519,7 @@ $this->title = 'Employee';
                                             <i class="fa fa-calendar" aria-hidden="true"></i> Hiring Date
                                         </div>
                                         <div class="col-12 lead-it">
-                                            16/04/2023
+                                            17/02/2000
                                         </div>
                                     </div>
                                 </div>
@@ -305,7 +566,7 @@ $this->title = 'Employee';
                     <div class="col-lg-2 col-md-6 col-8">
                         <div class="alert alert-employee" role="alert">
                             <div class="row" style="margin-top: -13px;">
-                                <div class="col-lg-10 col-md-10 col-10 text-end">
+                                <div class="col-lg-10 col-md-10 col-10">
                                     <span class="badge rounded-pill bg-success0">Active</span>
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-2 text-end">
@@ -392,7 +653,7 @@ $this->title = 'Employee';
                     <div class="col-lg-2 col-md-6 col-8">
                         <div class="alert alert-employee" role="alert">
                             <div class="row" style="margin-top: -13px;">
-                                <div class="col-lg-10 col-md-10 col-10 text-end">
+                                <div class="col-lg-10 col-md-10 col-10">
                                     <span class="badge rounded-pill bg-success0">Active</span>
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-2 text-end">
@@ -479,7 +740,7 @@ $this->title = 'Employee';
                     <div class="col-lg-2 col-md-6 col-8">
                         <div class="alert alert-employee" role="alert">
                             <div class="row" style="margin-top: -13px;">
-                                <div class="col-lg-10 col-md-10 col-10 text-end">
+                                <div class="col-lg-10 col-md-10 col-10">
                                     <span class="badge rounded-pill bg-success0">Active</span>
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-2 text-end">
@@ -566,181 +827,7 @@ $this->title = 'Employee';
                     <div class="col-lg-2 col-md-6 col-8">
                         <div class="alert alert-employee" role="alert">
                             <div class="row" style="margin-top: -13px;">
-                                <div class="col-lg-10 col-md-10 col-10 text-end">
-                                    <span class="badge rounded-pill bg-success0">Active</span>
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-2 text-end">
-                                    <div class="col-12 employee-ellipsis">
-                                        <strong><i class="fa fa-ellipsis-v" aria-hidden="true"></i></strong>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-6">
-                                    <div class="col-12">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/employee1.png" class="image-employee">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-6">
-                                    <div class="col-12 emplo-tadawoki">
-                                        Tadawoki
-                                        Watanabe
-                                    </div>
-                                    <div class="col-12 emplo-permanent">
-                                        <span class="badge bg-info text-dark">Permanent</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="alert alert1-employee1" role="alert">
-                                <div class="row">
-                                    <div class="col-lg-7 col-md-6 col-6">
-                                        <div class="col-12 lead-programmer">
-                                            lead Programmer
-                                        </div>
-                                        <div class="col-12 lead-it">
-                                            IT & Development
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-5 col-md-6 col-6">
-                                        <div class="col-12 lead-programmer">
-                                            <i class="fa fa-calendar" aria-hidden="true"></i> Hiring Date
-                                        </div>
-                                        <div class="col-12 lead-it">
-                                            17/02/2000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-6 col-2">
-                                            <div class="col-12" style="margin-top: -10px;">
-                                                <i class="fa fa-envelope-o envelope-send" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-9 col-md-6 col-10">
-                                            <div class="col-12 employee-email">
-                                                dibbo.du..t@tokyoconsultinggroup.com
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-6 col-2">
-                                            <div class="col-12" style="margin-top: -10px;">
-                                                <i class="fa fa-phone envelope-send" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-9 col-md-6 col-10">
-                                            <div class="col-12 envelope-mail">
-                                                +88078896454123
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-6 col-2">
-                                            <div class="col-12" style="margin-top: -10px;">
-                                                <i class="fa fa-user envelope-send" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-9 col-md-6 col-10">
-                                            <div class="col-12 employee-email">
-                                                EID 14
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 employee-view">
-                                View Profile
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-8">
-                        <div class="alert alert-employee" role="alert">
-                            <div class="row" style="margin-top: -13px;">
-                                <div class="col-lg-10 col-md-10 col-10 text-end">
-                                    <span class="badge rounded-pill bg-success0">Active</span>
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-2 text-end">
-                                    <div class="col-12 employee-ellipsis">
-                                        <strong><i class="fa fa-ellipsis-v" aria-hidden="true"></i></strong>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-6">
-                                    <div class="col-12">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/employee2.png" class="image-employee">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-6">
-                                    <div class="col-12 emplo-tadawoki">
-                                        Tadawoki
-                                        Watanabe
-                                    </div>
-                                    <div class="col-12 emplo-permanent">
-                                        <span class="badge bg-info text-dark">Permanent</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="alert alert1-employee1" role="alert">
-                                <div class="row">
-                                    <div class="col-lg-7 col-md-6 col-6">
-                                        <div class="col-12 lead-programmer">
-                                            lead Programmer
-                                        </div>
-                                        <div class="col-12 lead-it">
-                                            IT & Development
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-5 col-md-6 col-6">
-                                        <div class="col-12 lead-programmer">
-                                            <i class="fa fa-calendar" aria-hidden="true"></i> Hiring Date
-                                        </div>
-                                        <div class="col-12 lead-it">
-                                            17/02/2000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-6 col-2">
-                                            <div class="col-12" style="margin-top: -10px;">
-                                                <i class="fa fa-envelope-o envelope-send" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-9 col-md-6 col-10">
-                                            <div class="col-12 employee-email">
-                                                dibbo.du..t@tokyoconsultinggroup.com
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-6 col-2">
-                                            <div class="col-12" style="margin-top: -10px;">
-                                                <i class="fa fa-phone envelope-send" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-9 col-md-6 col-10">
-                                            <div class="col-12 envelope-mail">
-                                                +88078896454123
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-6 col-2">
-                                            <div class="col-12" style="margin-top: -10px;">
-                                                <i class="fa fa-user envelope-send" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-9 col-md-6 col-10">
-                                            <div class="col-12 employee-email">
-                                                EID 14
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 employee-view">
-                                View Profile
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-8">
-                        <div class="alert alert-employee" role="alert">
-                            <div class="row" style="margin-top: -13px;">
-                                <div class="col-lg-10 col-md-10 col-10 text-end">
+                                <div class="col-lg-10 col-md-10 col-10">
                                     <span class="badge rounded-pill bg-success0">Active</span>
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-2 text-end">
@@ -827,7 +914,7 @@ $this->title = 'Employee';
                     <div class="col-lg-2 col-md-6 col-8">
                         <div class="alert alert-employee" role="alert">
                             <div class="row" style="margin-top: -13px;">
-                                <div class="col-lg-10 col-md-10 col-10 text-end">
+                                <div class="col-lg-10 col-md-10 col-10">
                                     <span class="badge rounded-pill bg-success0">Active</span>
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-2 text-end">
@@ -914,94 +1001,7 @@ $this->title = 'Employee';
                     <div class="col-lg-2 col-md-6 col-8">
                         <div class="alert alert-employee" role="alert">
                             <div class="row" style="margin-top: -13px;">
-                                <div class="col-lg-10 col-md-10 col-10 text-end">
-                                    <span class="badge rounded-pill bg-success0">Active</span>
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-2 text-end">
-                                    <div class="col-12 employee-ellipsis">
-                                        <strong><i class="fa fa-ellipsis-v" aria-hidden="true"></i></strong>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-6">
-                                    <div class="col-12">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="image-employee">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-6">
-                                    <div class="col-12 emplo-tadawoki">
-                                        Tadawoki
-                                        Watanabe
-                                    </div>
-                                    <div class="col-12 emplo-permanent">
-                                        <span class="badge bg-info text-dark">Permanent</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="alert alert1-employee1" role="alert">
-                                <div class="row">
-                                    <div class="col-lg-7 col-md-6 col-6">
-                                        <div class="col-12 lead-programmer">
-                                            lead Programmer
-                                        </div>
-                                        <div class="col-12 lead-it">
-                                            IT & Development
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-5 col-md-6 col-6">
-                                        <div class="col-12 lead-programmer">
-                                            <i class="fa fa-calendar" aria-hidden="true"></i> Hiring Date
-                                        </div>
-                                        <div class="col-12 lead-it">
-                                            17/02/2000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-6 col-2">
-                                            <div class="col-12" style="margin-top: -10px;">
-                                                <i class="fa fa-envelope-o envelope-send" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-9 col-md-6 col-10">
-                                            <div class="col-12 employee-email">
-                                                dibbo.du..t@tokyoconsultinggroup.com
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-6 col-2">
-                                            <div class="col-12" style="margin-top: -10px;">
-                                                <i class="fa fa-phone envelope-send" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-9 col-md-6 col-10">
-                                            <div class="col-12 envelope-mail">
-                                                +88078896454123
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-6 col-2">
-                                            <div class="col-12" style="margin-top: -10px;">
-                                                <i class="fa fa-user envelope-send" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-9 col-md-6 col-10">
-                                            <div class="col-12 employee-email">
-                                                EID 14
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 employee-view">
-                                View Profile
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-8">
-                        <div class="alert alert-employee" role="alert">
-                            <div class="row" style="margin-top: -13px;">
-                                <div class="col-lg-10 col-md-10 col-10 text-end">
+                                <div class="col-lg-10 col-md-10 col-10">
                                     <span class="badge rounded-pill bg-success0">Active</span>
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-2 text-end">
