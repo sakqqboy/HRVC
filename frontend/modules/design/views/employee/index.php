@@ -44,7 +44,7 @@ $this->title = 'Employee';
                     <div class="col-lg-2 col-md-6 col-8">
                         <div class="alert alert-employee" role="alert">
                             <div class="row" style="margin-top: -13px;">
-                                <div class="col-lg-10 col-md-10 col-10 text-end">
+                                <div class="col-lg-10 col-md-10 col-10">
                                     <span class="badge rounded-pill bg-success0">Active</span>
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-2 text-end">
