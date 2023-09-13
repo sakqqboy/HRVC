@@ -6,8 +6,8 @@
 .alert-employee {
     background-color: white;
     border: black;
-    margin-top: 20px;
-    height: 215px;
+    /* margin-top: 20px; */
+    height: 200px;
 }
 
 .scrollbar-ripe-malinka::-webkit-scrollbar-track {
@@ -62,7 +62,6 @@
     cursor: default;
 }
 
-
 .emplo-permanent {
     font-size: 5px;
     margin-left: -29px;
@@ -74,7 +73,9 @@
 .alert1-employee1 {
     background-color: rgb(233, 240, 243);
     border-radius: 3px;
-    margin-top: 10px;
+    padding-top: 7px;
+    padding-left: 7px;
+    padding-right: 7px;
 }
 
 .lead-programmer {
@@ -84,7 +85,6 @@
 
 .lead-it {
     font-size: 5px;
-    padding-top: 5px;
     color: black;
 }
 
@@ -108,7 +108,7 @@
     cursor: pointer;
     font-weight: 700;
     font-size: 9px;
-    margin-top: -10px;
+    margin-top: -8px;
 }
 
 .bg-success0 {
@@ -134,7 +134,6 @@
     .all-employee0 {
         padding-left: 20px;
     }
-
     .fil0 {
         text-align: start;
     }
@@ -144,16 +143,13 @@
     .all-employee0 {
         padding-left: 20px;
     }
-
     .fil0 {
         text-align: start;
     }
-
     .image-employee {
         width: 60%;
         margin-top: 10px;
     }
-
     .employee-view {
         font-size: 13px;
     }

@@ -100,7 +100,7 @@ class ManagementController extends Controller
 		if (isset($kfiHistory) && !empty($kfiHistory)) {
 			$res2["quantRatio"] = $kfiHistory["quantRatio"];
 			$res2["code"] =  $kfiHistory["code"];
-			$res2["result"] = $kfiHistory["result"];
+			$res2["result"] = number_format($kfiHistory["result"], 2);
 			$res2["amountType"] = $kfiHistory["amountType"];
 			$res2["kfiStatus"] = $kfiHistory["historyStatus"];
 			$res2["nextCheck"] = ModelMaster::engDate($kfiHistory["nextCheckDate"], 2);
