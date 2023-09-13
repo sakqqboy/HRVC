@@ -1946,35 +1946,43 @@ $this->title = 'KFI';
                         </div>
                     </div>
                 </div>
-                <div class="col-12 Description-Backdrop7">
+                <div class="col-12 Description-Backdrop7 pl-10">
                     Description
                 </div>
-                <div class="col-12 detailsDescription-Backdrop3">
+                <div class="col-12 detailsDescription-Backdrop3 pl-10">
                     The more people who have access to your point of sales system or place of business means more people have the possibility of buying from you and increasing your profits. The more people who have access to your point of sales system or place of business means more people have the possibility of buying from you and increasing your profits.
                 </div>
-                <div class="row pl-20 mt-20">
-                    <div class="col-lg-6 col-md-6 col-12">
-                        <div class="col-12">
-                            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                                <div class="nav-item">
-                                    <a class="active" id="pills-team1-tab" data-bs-toggle="pill" data-bs-target="#pills-team1" type="button" role="tab" aria-controls="pills-team1" aria-selected="true"> Team</a>
-                            </ul>
-                        </div>
-                        <div class="col-12">
-                            <div class="tab-content" id="pills-tabContent">
-                                <div class="tab-pane fade show active" id="pills-team1" role="tabpanel" aria-labelledby="pills-team1-tab">
-                                    ...yujh
-                                </div>
+                <div class="row mt-20">
+                    <div class="col-lg-6 col-md-6 col-12 pl-50">
+
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li>
+                                <a class="nav" id="pills-team1-tab" data-bs-toggle="pill" data-bs-target="#pills-team1" type="button" role="tab" aria-controls="pills-team1" aria-selected="true"> Team</a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-team1" role="tabpanel" aria-labelledby="pills-team1-tab">
+                                hoijhpoktghpo
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
-                        <div class="col-12">
-                            <a class=""> Assign Members</a>
+
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li>
+                                <a class="nav" id="pills-Assign-tab" data-bs-toggle="pill" data-bs-target="#pills-Assign" type="button" role="tab" aria-controls="pills-Assign" aria-selected="true"> Assign Members</a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade" id="pills-Assign" role="tabpanel" aria-labelledby="pills-Assign-tab">
+                                bhtyrhjdytjnhhyty
+                            </div>
                         </div>
+
                     </div>
                 </div>
-
             </div>
             <div class="modal-footer" style="border: none;">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
