@@ -200,4 +200,12 @@ class ManagementController extends Controller
 		$res["status"] = true;
 		return json_encode($res);
 	}
+	public function actionDeleteKfi()
+	{
+		$kfiId = $_POST["kfiId"];
+		KfiHistory::updateAll(["status" => 99], ["kfiId" => $kfiId]);
+		Kfi::updateAll(["status" => 99], ["kfiId" => $kfiId]);
+		$res["status"] = true;
+		return json_encode($res);
+	}
 }

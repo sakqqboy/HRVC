@@ -124,7 +124,7 @@ $this->title = 'KFI';
 									if (isset($kfis) && count($kfis) > 0) {
 										foreach ($kfis as $kfiId => $kfi) :
 									?>
-											<tr style="border-bottom: 10px white !important;">
+											<tr style="border-bottom: 10px white !important;" id="kfi-<?= $kfiId ?>">
 												<td class="<?= $kfi["status"] == 1 ? 'over-blue' : 'over-yellow' ?>">
 													<!-- <span class="badge bg-info text-white">PL</span> --> <?= $kfi["kfiName"] ?>
 
@@ -163,7 +163,11 @@ $this->title = 'KFI';
 																<i class="fa fa-eye" aria-hidden="true"></i>
 															</a>
 														</li>
-														<li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+														<li data-bs-toggle="modal" data-bs-target="#staticBackdrop4" onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)">
+															<a class="dropdown-item" href="#">
+																<i class="fa fa-trash-o" aria-hidden="true"></i>
+															</a>
+														</li>
 													</ul>
 												</td>
 											</tr>
@@ -228,5 +232,6 @@ $this->title = 'KFI';
 	<?= $this->render('comment_modal', [
 		"units" => $units,
 	]) ?>
+	<?= $this->render('delete_modal') ?>
 
 </div>

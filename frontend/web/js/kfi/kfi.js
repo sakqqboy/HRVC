@@ -124,3 +124,25 @@ function kfiHistory(kfiId) {
     });
     $("#staticBackdrop3").show();
 }
+
+function prepareDeleteKfi(kfiId) {
+    $("#kfiId-modal").val(kfiId);
+}
+
+function deleteKfi() {
+    var url = $url + 'kfi/management/delete-kfi';
+    var kfiId = $("#kfiId-modal").val();
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { kfiId: kfiId },
+        success: function(data) {
+            if (data.status) {
+                $("#staticBackdrop4").modal("hide");
+                $("#kfi-" + kfiId).hide();
+
+            }
+        }
+    });
+}

@@ -39,12 +39,7 @@ use common\models\ModelMaster;
                                         <i class="fa fa-book pr-10 mt-20" aria-hidden="true"></i> Culture Book
                                 </a>
                         </div>
-                        <div class="col-12">
-                                <a href="<?= Yii::$app->homeUrl ?>site/respiratory1" class="no-underline">
-                                        <i class="fa fa-sitemap pr-10 mt-20" aria-hidden="true"></i>
-                                        Hierarchy
-                                </a>
-                        </div>
+
                         <div class="col-12">
                                 <a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" class="no-underline">
                                         <i class="fa fa-users pr-10 mt-20" aria-hidden="true">
@@ -57,17 +52,12 @@ use common\models\ModelMaster;
                                 </a>
                         </div>
                         <div class="col-12">
-                                <a href="" class="no-underline">
+                                <a href="<?= Yii::$app->homeUrl ?>setting/layer/index" class="no-underline">
                                         <i class="fa fa-users pr-10 mt-20" aria-hidden="true">
 
                                         </i> Title </a>
                         </div>
-                        <div class="col-12">
-                                <a href="" class="no-underline">
-                                        <i class="fa fa-star-o pr-10 mt-20" aria-hidden="true"></i>
-                                        Designation
-                                </a>
-                        </div>
+
                         <div class="col-12">
                                 <a href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" class="no-underline">
                                         <i class="fa fa-users pr-10 mt-20" aria-hidden="true">

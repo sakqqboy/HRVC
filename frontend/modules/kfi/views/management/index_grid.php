@@ -120,11 +120,11 @@ $this->title = 'KFI Grid View';
 												<div class="col-lg-7 col-md-6 col-6 pl-0 text-end">
 													<div class="row">
 														<div class="col-4 pr-0">
-															<a class="btn btn-xs btn-outline-secondary" style="margin-left: 0px;" data-bs-toggle="modal" data-bs-target="#staticBackdrop3" onclick="javascript:kfiHistory(<?= $kfiId ?>)">
-																<i class="fa fa-eye" aria-hidden="true"></i>
+															<a class="btn btn-xs btn-outline-secondary pt-0" style="margin-left: 0px;" data-bs-toggle="modal" data-bs-target="#staticBackdrop3" onclick="javascript:kfiHistory(<?= $kfiId ?>)">
+																<i class="fa fa-eye mt-6" aria-hidden="true" style="margin-left: -5px"></i>
 															</a>
-															<a href="" class="btn btn-xs btn-outline-danger ml-5">
-																<i class="fa fa-trash-o" aria-hidden="true" style="margin-left: -5px !important;margin-top: -20px !important;"></i>
+															<a class="btn btn-xs btn-outline-danger ml-5 pt-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop4" onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)">
+																<i class="fa fa-trash-o mt-6" aria-hidden="true" style="margin-left: -5px;"></i>
 															</a>
 														</div>
 														<div class="col-8 text-start pl-0">
@@ -251,8 +251,10 @@ $this->title = 'KFI Grid View';
 	<?= $this->render('update_modal', [
 		"units" => $units,
 	]) ?>
+
+	<?php ActiveForm::end(); ?>
+	<?= $this->render('delete_modal') ?>
 	<?= $this->render('history_modal', [
 		"units" => $units,
 	]) ?>
-	<?php ActiveForm::end(); ?>
 </div>
