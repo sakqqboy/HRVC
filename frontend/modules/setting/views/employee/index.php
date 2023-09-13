@@ -107,32 +107,32 @@ $this->title = 'Employee';
 										</div>
 										<div class="col-12 mt-5">
 											<div class="row">
-												<div class="col-lg-3 col-md-6 col-2">
+												<div class="col-lg-2 col-md-6 col-2">
 													<div class="col-12" style="margin-top: -10px;">
 														<i class="fa fa-envelope-o envelope-send" aria-hidden="true"></i>
 													</div>
 												</div>
-												<div class="col-lg-9 col-md-6 col-10 pr-0 pl-0">
+												<div class="col-lg-10 col-md-6 col-10 pr-0 pl-0">
 													<div class="col-12 employee-email mt-3 ">
 														<?= $employee["companyEmail"] ?>
 													</div>
 												</div>
-												<div class="col-lg-3 col-md-6 col-2">
+												<div class="col-lg-2 col-md-6 col-2">
 													<div class="col-12" style="margin-top: -10px;">
 														<i class="fa fa-phone envelope-send" aria-hidden="true"></i>
 													</div>
 												</div>
-												<div class="col-lg-9 col-md-6 col-10  pr-0 pl-0">
+												<div class="col-lg-10 col-md-6 col-10  pr-0 pl-0">
 													<div class="col-12 envelope-mail">
 														<?= $employee["telephoneNumber"] ?>
 													</div>
 												</div>
-												<div class="col-lg-3 col-md-6 col-2">
+												<div class="col-lg-2 col-md-6 col-2">
 													<div class="col-12" style="margin-top: -10px;">
 														<i class="fa fa-user envelope-send" aria-hidden="true"></i>
 													</div>
 												</div>
-												<div class="col-lg-9 col-md-6 col-10  pr-0 pl-0">
+												<div class="col-lg-10 col-md-6 col-10  pr-0 pl-0">
 													<div class="col-12 employee-email mt-3">
 														<?= $employee["employeeNumber"] ?>
 													</div>
