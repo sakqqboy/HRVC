@@ -21,6 +21,9 @@ return [
         'kfi' => [
             'class' => 'frontend\modules\kfi\kfi',
         ],
+        'kgi' => [
+            'class' => 'frontend\modules\kgi\kgi',
+        ],
     ],
     'components' => [
         'request' => [

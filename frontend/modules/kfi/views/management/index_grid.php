@@ -10,25 +10,7 @@ $this->title = 'KFI Grid View';
 		<i class="fa fa-tachometer font-size-20" aria-hidden="true"></i> <strong class="font-size-20"> Performance Indicator Matrices (PIM)</strong>
 	</div>
 	<div class="col-12 mt-20">
-		<div class="alert alert2-secondary2">
-			<ul class="nav nav-pills" id="pills-tab" role="tablist">
-				<li class="nav-item" role="presentation">
-					<a class="nav-link text-dark" id="pills-Financial-tab" data-bs-toggle="pill" data-bs-target="#pills-Financial" type="button" role="tab" aria-controls="pills-Financial" aria-selected="true"><i class="fa fa-line-chart" aria-hidden="true"></i> Key Financial Indicator</a>
-				</li>
-				<li class="nav-item" role="presentation">
-					<a class="nav-link text-dark" id="pills-Group-tab" data-bs-toggle="pill" data-bs-target="#pills-Group" type="button" role="tab" aria-controls="pills-Group" aria-selected="false"><i class="fa fa-flag-o" aria-hidden="true"></i> Key Group Indicator</a>
-				</li>
-				<li class="nav-item" role="presentation">
-					<a class="nav-link text-dark" id="pills-Performance-tab" data-bs-toggle="pill" data-bs-target="#pills-Performance" type="button" role="tab" aria-controls="pills-Performance" aria-selected="false"><i class="fa fa-clock-o" aria-hidden="true"></i> Key Performance Indicator</a>
-				</li>
-				<li class="nav-item" role="presentation">
-					<a class="nav-link text-dark" id="pills-Action-tab" data-bs-toggle="pill" data-bs-target="#pills-Action" type="button" role="tab" aria-controls="pills-Action" aria-selected="false"><i class="fa fa-list-ul" aria-hidden="true"></i> Key Action Indicator</a>
-				</li>
-				<li class="nav-item presentation-end" role="presentation">
-					<a class="nav-link text-dark" id="pills-Setting-tab" data-bs-toggle="pill" data-bs-target="#pills-Setting" type="button" role="tab" aria-controls="pills-Action" aria-selected="false"><i class="fa fa-cog" aria-hidden="true"></i> Assign</a>
-				</li>
-			</ul>
-		</div>
+		<?= $this->render('header_filter') ?>
 
 		<div class="alert alert-light-4">
 			<div class="row">
