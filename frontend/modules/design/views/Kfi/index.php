@@ -1357,7 +1357,7 @@ $this->title = 'KFI';
                 <div class="col-12 Description-Backdrop3">
                     Description
                 </div>
-                <div class="col-10 detailsDescription-Backdrop3">
+                <div class="col-12 detailsDescription-Backdrop3">
                     The more people who have access to your point of sales system or place of business means more people have the possibility of buying from you and increasing your profits. The more people who have access to your point of sales system or place of business means more people have the possibility of buying from you and increasing your profits.
                 </div>
                 <div class="col-12 History-Backdrop3">
@@ -1890,12 +1890,15 @@ $this->title = 'KFI';
                                 <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                             </div>
                             <div class="col-12 million-number-Backdrop3">
-                                1,000,000
+                                number_format(2,)
                             </div>
                         </div>
                         <div class="col-lg-1 col-md-6 col-3">
                             <div class="col-12 padding-mark-Backdrop3">
                                 >
+                            </div>
+                            <div class="col-12">
+
                             </div>
                         </div>
                         <div class="col-lg-2 cl-md-6 col-3">
@@ -1939,16 +1942,25 @@ $this->title = 'KFI';
                 <div class="col-12 detailsDescription-Backdrop3">
                     The more people who have access to your point of sales system or place of business means more people have the possibility of buying from you and increasing your profits. The more people who have access to your point of sales system or place of business means more people have the possibility of buying from you and increasing your profits.
                 </div>
-                <div class="col-12 History-Backdrop3">
-                    History
+                <div class="row pl-20 mt-20">
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <div class="col-12">
+                            <a href="" class=""> Team</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <div class="col-12">
+                            <a href=""> Assign Members</a>
+                        </div>
+                    </div>
                 </div>
+
             </div>
             <div class="modal-footer" style="border: none;">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
-</div>
 </div>
 <!-- end view -->
 
