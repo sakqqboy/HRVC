@@ -1890,7 +1890,7 @@ $this->title = 'KFI';
                                 <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                             </div>
                             <div class="col-12 million-number-Backdrop3">
-                                number_format(2,);
+                                number_format(2,)
                             </div>
                         </div>
                         <div class="col-lg-1 col-md-6 col-3">
