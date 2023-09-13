@@ -9,14 +9,15 @@
 }
 
 .card-tcf {
-    padding-top: 10px;
     width: 70px;
-    height: 80px;
-    border-radius: 5px;
+    height: 70px;
+    border-radius: 14%;
 }
 
 .card-round {
-    width: 18px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
 }
 
 .image-zoom {
