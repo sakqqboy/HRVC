@@ -1954,33 +1954,367 @@ $this->title = 'KFI';
                 </div>
                 <div class="row mt-20">
                     <div class="col-lg-6 col-md-6 col-12 pl-50">
-
                         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                             <li>
                                 <a class="nav" id="pills-team1-tab" data-bs-toggle="pill" data-bs-target="#pills-team1" type="button" role="tab" aria-controls="pills-team1" aria-selected="true"> Team</a>
                             </li>
                         </ul>
-
                         <div class="tab-content" id="pills-tabContent">
                             <div class="tab-pane fade show active" id="pills-team1" role="tabpanel" aria-labelledby="pills-team1-tab">
-                                hoijhpoktghpo
+                                <div class="row mt-30 Assign-solid">
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="col-12">
+                                            <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
+                                        </div>
+                                        <div class="col-12" style="margin-top: -10px;margin-left:-10px;">
+                                            <strong class="font-size-10"> Team SGO</strong>
+                                            <div class="font-size-10"> IT Department</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="col-12">
+                                            <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
+                                        </div>
+                                        <div class="col-12" style="margin-top: -10px;margin-left:-10px;">
+                                            <strong class="font-size-10"> Team SGO</strong>
+                                            <div class="font-size-10"> IT Department</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="col-12">
+                                            <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
+                                        </div>
+                                        <div class="col-12" style="margin-top: -10px;margin-left:-10px;">
+                                            <strong class="font-size-10"> Team SGO</strong>
+                                            <div class="font-size-10"> IT Department</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="col-12">
+                                            <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
+                                        </div>
+                                        <div class="col-12" style="margin-top: -10px;margin-left:-10px;">
+                                            <strong class="font-size-10"> Team SGO</strong>
+                                            <div class="font-size-10"> IT Department</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="col-12">
+                                            <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
+                                        </div>
+                                        <div class="col-12" style="margin-top: -10px;margin-left:-10px;">
+                                            <strong class="font-size-10"> Team SGO</strong>
+                                            <div class="font-size-10"> IT Department</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="col-12">
+                                            <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
+                                        </div>
+                                        <div class="col-12" style="margin-top: -10px;margin-left:-10px;">
+                                            <strong class="font-size-10"> Team SGO</strong>
+                                            <div class="font-size-10"> IT Department</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="col-12">
+                                            <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
+                                        </div>
+                                        <div class="col-12" style="margin-top: -10px;margin-left:-10px;">
+                                            <strong class="font-size-10"> Team SGO</strong>
+                                            <div class="font-size-10"> IT Department</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="col-12">
+                                            <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
+                                        </div>
+                                        <div class="col-12" style="margin-top: -10px;margin-left:-10px;">
+                                            <strong class="font-size-10"> Team SGO</strong>
+                                            <div class="font-size-10"> IT Department</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="col-12">
+                                            <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
+                                        </div>
+                                        <div class="col-12" style="margin-top: -10px;margin-left:-10px;">
+                                            <strong class="font-size-10"> Team SGO</strong>
+                                            <div class="font-size-10"> IT Department</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="col-12">
+                                            <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
+                                        </div>
+                                        <div class="col-12" style="margin-top: -10px;margin-left:-10px;">
+                                            <strong class="font-size-10"> Team SGO</strong>
+                                            <div class="font-size-10"> IT Department</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="col-12">
+                                            <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
+                                        </div>
+                                        <div class="col-12" style="margin-top: -10px;margin-left:-10px;">
+                                            <strong class="font-size-10"> Team SGO</strong>
+                                            <div class="font-size-10"> IT Department</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="col-12">
+                                            <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
+                                        </div>
+                                        <div class="col-12" style="margin-top: -10px;margin-left:-10px;">
+                                            <strong class="font-size-10"> Team SGO</strong>
+                                            <div class="font-size-10"> IT Department</div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
-
                         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                             <li>
                                 <a class="nav" id="pills-Assign-tab" data-bs-toggle="pill" data-bs-target="#pills-Assign" type="button" role="tab" aria-controls="pills-Assign" aria-selected="true"> Assign Members</a>
                             </li>
                         </ul>
-
                         <div class="tab-content" id="pills-tabContent">
                             <div class="tab-pane fade" id="pills-Assign" role="tabpanel" aria-labelledby="pills-Assign-tab">
-                                bhtyrhjdytjnhhyty
+                                <div class="row mt-30">
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="col-12">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-1.png" class="image-AssignMembers">
+                                        </div>
+                                        <div class="col-12">
+                                            <strong class="font-size-10"> Faruk Khan</strong>
+                                            <div class="font-size-10"> Old Product Manager</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="col-12">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-3.png" class="image-AssignMembers">
+                                        </div>
+                                        <div class="col-12">
+                                            <strong class="font-size-10"> Amir Khan </strong>
+                                            <div class="font-size-10"> Software Engineer</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="col-12">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-2.png" class="image-AssignMembers">
+                                        </div>
+                                        <div class="col-12">
+                                            <strong class="font-size-10"> Shahrukh Khan</strong>
+                                            <div class="font-size-10"> Business Development</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="col-12">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-1.png" class="image-AssignMembers">
+                                        </div>
+                                        <div class="col-12">
+                                            <strong class="font-size-10"> Faruk Khan</strong>
+                                            <div class="font-size-10"> Old Product Manager</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="col-12">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-3.png" class="image-AssignMembers">
+                                        </div>
+                                        <div class="col-12">
+                                            <strong class="font-size-10"> Amir Khan </strong>
+                                            <div class="font-size-10"> Software Engineer</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="col-12">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-2.png" class="image-AssignMembers">
+                                        </div>
+                                        <div class="col-12">
+                                            <strong class="font-size-10"> Shahrukh Khan</strong>
+                                            <div class="font-size-10"> Business Development</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="col-12">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-1.png" class="image-AssignMembers">
+                                        </div>
+                                        <div class="col-12">
+                                            <strong class="font-size-10"> Faruk Khan</strong>
+                                            <div class="font-size-10"> Old Product Manager</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="col-12">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-3.png" class="image-AssignMembers">
+                                        </div>
+                                        <div class="col-12">
+                                            <strong class="font-size-10"> Amir Khan </strong>
+                                            <div class="font-size-10"> Software Engineer</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="col-12">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-3.png" class="image-AssignMembers">
+                                        </div>
+                                        <div class="col-12">
+                                            <strong class="font-size-10"> Amir Khan </strong>
+                                            <div class="font-size-10"> Software Engineer</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="col-12">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-2.png" class="image-AssignMembers">
+                                        </div>
+                                        <div class="col-12">
+                                            <strong class="font-size-10"> Shahrukh Khan</strong>
+                                            <div class="font-size-10"> Business Development</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="col-12">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-1.png" class="image-AssignMembers">
+                                        </div>
+                                        <div class="col-12">
+                                            <strong class="font-size-10"> Faruk Khan</strong>
+                                            <div class="font-size-10"> Old Product Manager</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="col-12">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-3.png" class="image-AssignMembers">
+                                        </div>
+                                        <div class="col-12">
+                                            <strong class="font-size-10"> Amir Khan </strong>
+                                            <div class="font-size-10"> Software Engineer</div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="col-12 History-Backdrop3">
+                    History
+                </div>
+                <hr>
+                <div class="alert alert-light alertlight-Backdrop3">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-6 col-12">
+                            <div class="row">
+                                <div class="col-2">
+                                    <span class="badge rounded-pill bg-success"> ✓</span>
 
+                                </div>
+                                <div class="col-10">
+                                    Stripe risk evaluation: normal
+                                </div>
+                                <div class="col-12 pl-60">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/Faruque.png" class="name-Backdrop3">
+                                    <a href="#" class="font-size-12"> Mohammed Sharukh</a> <span class="font-size-12 text-secondary"> Title : Admin</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <div class="col-12 text-secondary font-size-12">
+                                <i class="fa fa-bullseye" aria-hidden="true"></i> Updated the information
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="row">
+                                <div class="col-2">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/pdf.png" class="image-pdf-Backdrop3">
+                                </div>
+                                <div class="col-10 PM">
+                                    August 22, 2018, 6:14 PM
+                                    <div class="col-12 New">
+                                        New Amount <strong> 200255</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="successbackdrop4"></div>
+                </div>
+                <div class="alert alert-light alertlight-Backdrop3">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-6 col-12">
+                            <div class="row">
+                                <div class="col-2">
+                                    <span class="badge rounded-pill bg-primary"> ✓</span>
+
+                                </div>
+                                <div class="col-10">
+                                    Stripe risk evaluation: normal
+                                </div>
+                                <div class="col-12 pl-60">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/Faruque.png" class="name-Backdrop3">
+                                    <a href="#" class="font-size-12"> Mohammed Sharukh</a> <span class="font-size-12 text-secondary"> Title : Admin</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <div class="col-12 text-secondary font-size-12">
+                                <i class="fa fa-bullseye" aria-hidden="true"></i> Updated the information
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="row">
+                                <div class="col-2">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/pdf.png" class="image-pdf-Backdrop3">
+                                </div>
+                                <div class="col-10 PM">
+                                    August 22, 2018, 6:14 PM
+                                    <div class="col-12 New">
+                                        New Amount <strong> 200255</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="successbackdrop4"></div>
+                </div>
+                <div class="alert alert-light alertlight-Backdrop3">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-6 col-12">
+                            <div class="row">
+                                <div class="col-2">
+                                    <span class="badge rounded-pill bg-primary"> ✓</span>
+
+                                </div>
+                                <div class="col-10">
+                                    Stripe risk evaluation: normal
+                                </div>
+                                <div class="col-12 pl-60">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/Faruque.png" class="name-Backdrop3">
+                                    <a href="#" class="font-size-12"> Mohammed Sharukh</a> <span class="font-size-12 text-secondary"> Title : Admin</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <div class="col-12 text-secondary font-size-12">
+                                <i class="fa fa-bullseye" aria-hidden="true"></i> Updated the information
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="row">
+                                <div class="col-2">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/pdf.png" class="image-pdf-Backdrop3">
+                                </div>
+                                <div class="col-10 PM">
+                                    August 22, 2018, 6:14 PM
+                                    <div class="col-12 New">
+                                        New Amount <strong> 200255</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
