@@ -104,7 +104,7 @@
 							</div>
 							<div class="col-lg-6 col-md-6 col-6 pt-10  mt-3">
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Status</label>
-								<select class="form-select font-size-13" id="kfiStatus" name="status">
+								<select class="form-select font-size-13" id="kfiStatus" name="status" required>
 									<option value="">Active/Finished</option>
 									<option value="1">Active</option>
 									<option value="2">Finished</option>

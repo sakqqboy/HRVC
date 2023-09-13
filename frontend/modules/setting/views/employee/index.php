@@ -48,10 +48,10 @@ $this->title = 'Employee';
 					if (isset($employees) && count($employees) > 0) {
 						foreach ($employees as $employee) :
 					?>
-							<div class="col-lg-3 col-md-6 col-12">
-								<div class="alert alert-employee" role="alert">
-									<div class="row ">
-										<div class="col-lg-11 col-md-10 col-10 text-end pt-0 ">
+							<div class="col-lg-2 col-md-6 col-8">
+								<div class="alert alert-employee pr-10 pl-10" role="alert">
+									<div class="row" style="margin-top: -13px;">
+										<div class="col-lg-10 col-md-10 col-10 text-end">
 											<?php
 											if ($employee["statusName"] == "Active") {
 												$text = 'success0';
@@ -59,78 +59,81 @@ $this->title = 'Employee';
 												$text = 'danger';
 											}
 											?>
-											<span class="badge rounded-pill bg-<?= $text ?>"><?= $employee["statusName"] ?></span>
+											<span class="badge rounded-pill bg-<?= $text ?>" style="font-size: 7px;"><?= $employee["statusName"] ?></span>
 										</div>
-										<div class="col-lg-1 col-md-2 col-2 text-end pl-0">
-											<strong><i class="fa fa-ellipsis-v" aria-hidden="true"></i></strong>
+										<div class="col-lg-2 col-md-2 col-2 text-end">
+											<div class="col-12 employee-ellipsis">
+												<strong><i class="fa fa-ellipsis-v" aria-hidden="true"></i></strong>
+											</div>
 										</div>
 									</div>
-									<div class="row" style="margin-top: -23px;">
-										<div class="col-lg-5 col-md-6 col-6 pl-0">
-											<div class="col-12 pl-5">
+									<div class="row">
+										<div class="col-lg-6 col-md-6 col-6">
+											<div class="col-12">
 												<img src="<?= Yii::$app->homeUrl ?><?= $employee["picture"] ?>" class="image-employee">
 											</div>
 										</div>
-										<div class="col-lg-7 col-md-6 col-6 mt-19 ">
-											<div class="col-12 font-b font-size-12 mt-5">
+										<div class="col-lg-6 col-md-6 col-6">
+											<div class="col-12 emplo-tadawoki">
 												<?= $employee["employeeFirstname"] ?>
 											</div>
-											<div class="col-12 font-b font-size-12 mt-2">
+											<div class="col-12 emplo-tadawoki">
 												<?= $employee["employeeSurename"] ?>
 											</div>
-											<div class="col-12 emplo-permanent mt-3">
+											<div class="col-12 emplo-permanent">
 												<span class="badge bg-info text-dark"><?= $employee["employeeConditionName"] ?></span>
 											</div>
 										</div>
 									</div>
-									<div class="alert alert1-employee1 mt-20" role="alert">
+
+									<div class="alert alert1-employee1 mt-10" role="alert">
 										<div class="row">
-											<div class="col-lg-7 col-md-6 col-6">
+											<div class="col-lg-6 col-md-6 col-6">
 												<div class="col-12 lead-programmer">
 													lead Programmer
 												</div>
-												<div class="col-12 lead-it">
+												<div class="col-12 lead-it mt-3">
 													IT & Development
 												</div>
 											</div>
-											<div class="col-lg-5 col-md-6 col-6">
+											<div class="col-lg-6 col-md-6 col-6">
 												<div class="col-12 lead-programmer">
 													<i class="fa fa-calendar" aria-hidden="true"></i> Hiring Date
 												</div>
-												<div class="col-12 lead-it">
+												<div class="col-12 lead-it mt-3">
 													<?= ModelMaster::dateNumberDash($employee['hireDate']) ?>
 												</div>
 											</div>
 										</div>
-										<div class="col-12">
+										<div class="col-12 mt-5">
 											<div class="row">
-												<div class="col-lg-2 col-md-6 col-2 mt-10">
-													<div class="col-12">
-														<i class="fa fa-envelope-o" aria-hidden="true"></i>
+												<div class="col-lg-3 col-md-6 col-2">
+													<div class="col-12" style="margin-top: -10px;">
+														<i class="fa fa-envelope-o envelope-send" aria-hidden="true"></i>
 													</div>
 												</div>
-												<div class="col-lg-10 col-md-6 col-10 mt-10">
-													<div class="col-12 employee-email">
+												<div class="col-lg-9 col-md-6 col-10 pr-0 pl-0">
+													<div class="col-12 employee-email mt-3 ">
 														<?= $employee["companyEmail"] ?>
 													</div>
 												</div>
-												<div class="col-lg-2 col-md-6 col-2 mt-10">
-													<div class="col-12">
-														<i class="fa fa-phone" aria-hidden="true"></i>
+												<div class="col-lg-3 col-md-6 col-2">
+													<div class="col-12" style="margin-top: -10px;">
+														<i class="fa fa-phone envelope-send" aria-hidden="true"></i>
 													</div>
 												</div>
-												<div class="col-lg-10 col-md-6 col-10 mt-10">
-													<div class="col-12 employee-email">
+												<div class="col-lg-9 col-md-6 col-10  pr-0 pl-0">
+													<div class="col-12 envelope-mail">
 														<?= $employee["telephoneNumber"] ?>
 													</div>
 												</div>
-												<div class="col-lg-2 col-md-6 col-2 mt-10">
-													<div class="col-12">
-														<i class="fa fa-user" aria-hidden="true"></i>
+												<div class="col-lg-3 col-md-6 col-2">
+													<div class="col-12" style="margin-top: -10px;">
+														<i class="fa fa-user envelope-send" aria-hidden="true"></i>
 													</div>
 												</div>
-												<div class="col-lg-10 col-md-6 col-10 mt-10">
-													<div class="col-12 employee-email">
+												<div class="col-lg-9 col-md-6 col-10  pr-0 pl-0">
+													<div class="col-12 employee-email mt-3">
 														<?= $employee["employeeNumber"] ?>
 													</div>
 												</div>
@@ -144,6 +147,7 @@ $this->title = 'Employee';
 									</div>
 								</div>
 							</div>
+
 						<?php
 						endforeach;
 					} else { ?>
