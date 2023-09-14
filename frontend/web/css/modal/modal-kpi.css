@@ -1,0 +1,8 @@
+.example-6 {
+    position: relative;
+    overflow-y: scroll;
+    height: 400px;
+    width: 100%;
+    border: none;
+    background-color: #eaeaea;
+}

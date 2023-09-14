@@ -59,6 +59,8 @@ class AppAsset extends AssetBundle
         'css/home/kfi-grid.css',
         'css/home/kgi-grid.css',
         'css/modal/modal.css',
+        'css/modal/modal-kpi.css',
+        'css/home/kgiteam-grid.css',
 
     ];
     public $js = [
