@@ -7,8 +7,11 @@ use common\models\ModelMaster;
 use Exception;
 use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\Company;
+use frontend\models\hrvc\Department;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Kfi;
+use frontend\models\hrvc\KfiBranch;
+use frontend\models\hrvc\KfiDepartment;
 use frontend\models\hrvc\KfiHistory;
 use Yii;
 use yii\db\Expression;
@@ -92,7 +95,7 @@ class ManagementController extends Controller
 			$kfi = new Kfi();
 			$kfi->kfiName = $_POST["kfiName"];
 			$kfi->companyId = $_POST["company"];
-			$kfi->branchId = $_POST["branch"];
+			//$kfi->branchId = $_POST["branch"];
 			$kfi->unitId = $_POST["unit"];
 			$kfi->targetAmount = $_POST["amount"];
 			$kfi->month = $_POST["month"];
@@ -102,6 +105,54 @@ class ManagementController extends Controller
 			$kfi->createDateTime = new Expression('NOW()');
 			$kfi->updateDateTime = new Expression('NOW()');
 			if ($kfi->save(false)) {
+				$kfiId = Yii::$app->db->lastInsertID;
+				if ($_POST["branch"] != "all") {
+					$branch = new KfiBranch();
+					$branch->branchId = $_POST["branch"];
+					$branch->kfiId = $kfiId;
+					$branch->status = 1;
+					$branch->createDateTime = new Expression('NOW()');
+					$branch->updateDateTime = new Expression('NOW()');
+					$branch->save(false);
+					$department = new KfiDepartment();
+					$department->departmentId = $_POST["department"];
+					$department->kfiId = $kfiId;
+					$department->status = 1;
+					$department->createDateTime = new Expression('NOW()');
+					$department->updateDateTime = new Expression('NOW()');
+					$department->save(false);
+				} else {
+					$branches = Branch::find()
+						->where(["companyId" => $_POST["company"], "status" => 1])
+						->asArray()
+						->all();
+					if (isset($branches) && count($branches) > 0) {
+						foreach ($branches as $branch) :
+							$kfiBranch = new KfiBranch();
+							$kfiBranch->branchId = $branch["branchId"];
+							$kfiBranch->kfiId = $kfiId;
+							$kfiBranch->status = 1;
+							$kfiBranch->createDateTime = new Expression('NOW()');
+							$kfiBranch->updateDateTime = new Expression('NOW()');
+							$kfiBranch->save(false);
+							$departments = Department::find()
+								->where(["branchId" => $branch["branchId"], "status" => 1])
+								->asArray()
+								->all();
+							if (isset($departments) && count($departments) > 0) {
+								foreach ($departments as $d) :
+									$kfiDepartment = new KfiDepartment();
+									$kfiDepartment->departmentId = $d["departmentId"];
+									$kfiDepartment->kfiId = $kfiId;
+									$kfiDepartment->status = 1;
+									$kfiDepartment->createDateTime = new Expression('NOW()');
+									$kfiDepartment->updateDateTime = new Expression('NOW()');
+									$kfiDepartment->save(false);
+								endforeach;
+							}
+						endforeach;
+					}
+				}
 				return $this->redirect('index');
 			}
 		}
@@ -142,12 +193,13 @@ class ManagementController extends Controller
 		$kfi = Kfi::find()->where(["kfiId" => $kfiId])->asArray()->one();
 		$res["kfiName"] = $kfi["kfiName"];
 		$res["companyName"] = Company::companyName($kfi['companyId']);
-		$res["branchName"] = Branch::branchName($kfi['branchId']);
+		$res["branchName"] = Branch::kfiBranchName($kfiId); //Branch::branchName($kfi['branchId']);//if count==1 show branch name else show all
 		$res["unitId"] = $kfi["unitId"];
 		$res["detail"] = $kfi["kfiDetail"];
 		$res["targetAmount"] = $kfi["targetAmount"];
 		$res["status"] = true;
 		$res["monthName"] = ModelMaster::monthEng($kfi['month'], 1);
+		$res["departmentName"] = KfiDepartment::kfiDepartmentName($kfiId);
 		$kfiHistory = KfiHistory::find()
 			->where(["kfiId" => $kfi["kfiId"], "status" => [1, 4]])
 			->orderBy('kfiHistoryId DESC')
@@ -206,6 +258,50 @@ class ManagementController extends Controller
 		KfiHistory::updateAll(["status" => 99], ["kfiId" => $kfiId]);
 		Kfi::updateAll(["status" => 99], ["kfiId" => $kfiId]);
 		$res["status"] = true;
+		return json_encode($res);
+	}
+	public function actionCompanyBranch()
+	{
+		$companyId = $_POST["companyId"];
+		$text = "<option value=''>Select Branch</option>";
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
+		$branch = curl_exec($api);
+		$branch = json_decode($branch, true);
+		curl_close($api);
+		$res["status"] = false;
+		if (isset($branch) && count($branch) > 0) {
+			$res["status"] = true;
+			$text .= "<option value='all'> All </option>";
+			foreach ($branch as $b) :
+				$text .= "<option value='" . $b['branchId'] . "'>" . $b['branchName'] . "</option>";
+			endforeach;
+		}
+		$res["branchText"] = $text;
+		return json_encode($res);
+	}
+	public function actionBranchDepartment()
+	{
+		$branchId = $_POST["branchId"];
+		$text = "<option value=''>Select Department</option>";
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' . $branchId);
+		$departments = curl_exec($api);
+		$departments = json_decode($departments, true);
+		curl_close($api);
+		$res["status"] = false;
+		if (isset($departments) && count($departments) > 0) {
+			$res["status"] = true;
+			$text .= "<option value='all'> All </option>";
+			foreach ($departments as $d) :
+				$text .= "<option value='" . $d['departmentId'] . "'>" . $d['departmentName'] . "</option>";
+			endforeach;
+		}
+		$res["departmentText"] = $text;
 		return json_encode($res);
 	}
 }

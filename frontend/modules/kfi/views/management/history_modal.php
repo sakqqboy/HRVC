@@ -1,4 +1,4 @@
-<div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdrop3" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop3" tabindex="-1" aria-labelledby="staticBackdrop3" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header" style="border-bottom:none;">

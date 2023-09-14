@@ -79,7 +79,7 @@ use yii\bootstrap5\ActiveForm;
 				</div>
 				<div class="tab-pane fade show active" id="pills-Group" role="tabpanel" aria-labelledby="pills-Group-tab">
 					<div class="card example-5 scrollbar-ripe-malinka">
-						<div class="col-12 card card-radius">
+						<div class="col-12 card card-radius mt-10">
 							<div class="row">
 								<div class="col-lg-4 col-md-6 col-12 clients-employee">
 									<i class="fa fa-flag" aria-hidden="true"></i> The Number Of Clients Per Employee

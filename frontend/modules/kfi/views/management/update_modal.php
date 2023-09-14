@@ -1,4 +1,5 @@
-<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdrop2" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop2" tabindex="-1" aria-labelledby="staticBackdrop2" aria-hidden="true">
+	<!-- data-bs-backdrop="static" data-bs-keyboard="false" -->
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header" style="height: 90px;">
@@ -25,6 +26,10 @@
 							<label for="input" class="form-label">Branch</label>
 							<input type="text" class="form-control" value="" disabled id="branchName">
 						</div>
+						<div class="col-12 mt-10">
+							<label for="input" class="form-label">Department</label>
+							<input type="text" class="form-control" value="" disabled id="departmentName">
+						</div>
 						<div class="col-12 mt-15">
 							<label for="input" class="form-label"><strong class="red">*</strong> Progress title</label>
 							<input type="text" class="form-control" name="progressTitle" required>
@@ -32,10 +37,10 @@
 						<div class="col-12 pt-10 mt-5">
 							<label for="input" class="form-label"><strong class="red">*</strong> Check Unit</label>
 							<div class="btn-group mt-5 col-12" role="group" aria-label="Basic outlined example">
-								<button type="button" class="btn btn border col-3  font-size-12 unit-1" onclick="javascript:selectUnit(1)">Monthly</button>
-								<button type="button" class="btn btn border col-3  font-size-12 unit-2" onclick="javascript:selectUnit(2)">Weekly</button>
-								<button type="button" class="btn btn border col-3  font-size-12 unit-3" onclick="javascript:selectUnit(3)">Quaterly</button>
-								<button type="button" class="btn btn border col-3  font-size-12 unit-4" onclick="javascript:selectUnit(4)">Daily</button>
+								<button type="button" class="btn btn border col-3  font-size-12 unit-1" onclick="javascript:selectUnitUpdate(1)">Monthly</button>
+								<button type="button" class="btn btn border col-3  font-size-12 unit-2" onclick="javascript:selectUnitUpdate(2)">Weekly</button>
+								<button type="button" class="btn btn border col-3  font-size-12 unit-3" onclick="javascript:selectUnitUpdate(3)">Quaterly</button>
+								<button type="button" class="btn btn border col-3  font-size-12 unit-4" onclick="javascript:selectUnitUpdate(4)">Daily</button>
 								<input type="hidden" value="" class="currentUnit" name="unit" required>
 								<input type="hidden" value="" class="previousUnit" required>
 							</div>
@@ -71,7 +76,7 @@
 					<div class="col-lg-6 col-md-6 col-6 font-size-14">
 						<div class="col-12">
 							<label for="kfiDetail" class="form-label"> KFI Details</label>
-							<textarea class="form-control" id="kfiDetail" rows="4" id="kfiDetail" name="detail"></textarea>
+							<textarea class="form-control" id="kfiDetail" rows="7" id="kfiDetail" name="detail"></textarea>
 						</div>
 						<div class="row">
 							<div class="col-12 pt-10">

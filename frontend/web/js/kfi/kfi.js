@@ -5,28 +5,71 @@ if (window.location.host == 'localhost') {
     $baseUrl = window.location.protocol + "//" + window.location.host + '/';
 }
 $url = $baseUrl;
+function companyBranchKfi() {
+    var companyId = $("#company-create-kfi").val();
+    var url = $url + 'kfi/management/company-branch';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { companyId: companyId },
+        success: function(data) {
+            if (data.status) {
+                $("#branch-create-kfi").html(data.branchText);
+                $("#branch-create-kfi").removeAttr("disabled", "true");
+                $("#department-create-kfi").val("");
+                $("#department-create-kfi").html('<option value=""> Select Department</option>');
+                $("#department-create-kfi").attr("disabled", "true");
+            }
 
+        }
+    });
+}
+function branchDepartmentKfi() { 
+    var branchId = $("#branch-create-kfi").val();
+    var url = $url + 'kfi/management/branch-department';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { branchId: branchId },
+        success: function(data) {
+            if (data.status) {
+                $("#department-create-kfi").html(data.departmentText);
+                $("#department-create-kfi").removeAttr("disabled", "true");
+            }
+
+        }
+    });
+    if (branchId == 'all') { 
+        $("#department-create-kfi").removeAttr("disabled", "true");
+        $("#department-create-kfi").html('<option value="all"> All</option>');
+    }
+}
 function selectUnit(currentUnit) {
     var previous = $("#currentUnit").val();
-    var previous = $(".currentUnit").val();
     if (previous != '') {
         $("#previousUnit").val(previous);
-        $(".previousUnit").val(previous);
         $("#unit-" + previous).css("background-color", "white");
-        $(".unit-" + previous).css("background-color", "white");
         $("#unit-" + previous).css("color", "black");
-        $(".unit-" + previous).css("color", "black");
     }
 
     $("#currentUnit").val(currentUnit);
-    $(".currentUnit").val(currentUnit);
     $("#unit-" + currentUnit).css("background-color", "#3366FF");
-    $(".unit-" + currentUnit).css("background-color", "#3366FF");
     $("#unit-" + currentUnit).css("color", "white");
-    $(".unit-" + currentUnit).css("color", "white");
 
 }
-
+function selectUnitUpdate(currentUnit) {
+    var previous = $(".currentUnit").val();
+    if (previous != '') {
+        $(".previousUnit").val(previous);
+        $(".unit-" + previous).css("background-color", "white");
+        $(".unit-" + previous).css("color", "black");
+    }
+    $(".currentUnit").val(currentUnit);
+    $(".unit-" + currentUnit).css("background-color", "#3366FF");
+    $(".unit-" + currentUnit).css("color", "white");
+}
 function updateKfi(kfiId) {
 
     resetUnit();
@@ -44,6 +87,7 @@ function updateKfi(kfiId) {
                 $(".currentUnit").val(data.unitId);
                 $("#companyName").val(data.companyName);
                 $("#branchName").val(data.branchName);
+                $("#departmentName").val(data.departmentName);
                 $(".unit-" + parseInt(data.unitId)).css("background-color", "#3366FF");
                 $(".unit-" + data.unitId).css("color", "white");
                 $("#targetAmount").val(data.targetAmount);

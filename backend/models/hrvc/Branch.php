@@ -4,6 +4,7 @@ namespace backend\models\hrvc;
 
 use Yii;
 use \backend\models\hrvc\master\BranchMaster;
+use Exception;
 
 /**
  * This is the model class for table "branch".
@@ -37,5 +38,27 @@ class Branch extends \backend\models\hrvc\master\BranchMaster
     {
         $branch = Branch::find()->select('branchName')->where(["branchId" => $branchId])->one();
         return $branch["branchName"];
+    }
+    public static function kfiBranchName($kfiId)
+    {
+        $kfiBranch = KfiBranch::find()->select('b.branchName')
+            ->JOIN("LEFT JOIN", "branch b", "b.branchId=kfi_branch.branchId")
+            ->where(["kfi_branch.kfiId" => $kfiId])
+            ->asArray()
+            ->orderBy("b.branchName")
+            ->all();
+        //throw new Exception(print_r($kfiBranch, true));
+        $branchName = '';
+        if (isset($kfiBranch) && count($kfiBranch) > 0) {
+            foreach ($kfiBranch as $branch) :
+                if (count($kfiBranch) == 1) {
+                    $branchName .= $branch["branchName"];
+                } else {
+                    $branchName .= 'All';
+                    break;
+                }
+            endforeach;
+        }
+        return $branchName;
     }
 }

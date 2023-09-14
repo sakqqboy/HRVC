@@ -19,7 +19,9 @@ use Yii;
     * @property integer $historyStatus
     * @property string $result
     * @property string $formular
+    * @property string $titleProgress
     * @property string $description
+    * @property string $remark
     * @property integer $status
     * @property string $createDateTime
     * @property string $updateDateTime
@@ -44,8 +46,8 @@ return [
             [['kfiId'], 'integer'],
             [['checkPeriodDate', 'nextCheckDate', 'createDateTime', 'updateDateTime'], 'safe'],
             [['result'], 'number'],
-            [['description'], 'string'],
-            [['kfiHistoryName', 'formular'], 'string', 'max' => 255],
+            [['description', 'remark'], 'string'],
+            [['kfiHistoryName', 'formular', 'titleProgress'], 'string', 'max' => 255],
             [['unitId', 'amountType', 'historyStatus', 'status'], 'string', 'max' => 10],
             [['quantRatio', 'code'], 'string', 'max' => 45],
         ];
@@ -69,7 +71,9 @@ return [
     'historyStatus' => 'History Status',
     'result' => 'Result',
     'formular' => 'Formular',
+    'titleProgress' => 'Title Progress',
     'description' => 'Description',
+    'remark' => 'Remark',
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',
     'updateDateTime' => 'Update Date Time',

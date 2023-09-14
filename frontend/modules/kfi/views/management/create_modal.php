@@ -20,7 +20,7 @@
 						</div>
 						<div class="col-12 pt-5">
 							<label for="input" class="form-label"><strong class="red">*</strong> Company</label>
-							<select class="form-select" name="company" id="company-team" onchange="javascript:branchCompany()" required>
+							<select class="form-select" name="company" id="company-create-kfi" onchange="javascript:companyBranchKfi()" required>
 								<option value="">Select Company</option>
 								<?php
 								if (isset($companies) && count($companies) > 0) {
@@ -36,26 +36,34 @@
 						</div>
 						<div class="col-12 pt-5">
 							<label for="input" class="form-label"><strong class="red">*</strong> Branch</label>
-							<select class="form-select" name="branch" disabled id="branch-team" required>
-								<option selected>Select Branch</option>
+							<select class="form-select" name="branch" disabled id="branch-create-kfi" required onchange="javascript:branchDepartmentKfi()">
+								<option value="">Select Branch</option>
+							</select>
+						</div>
+						<div class="col-12 pt-5">
+							<label for="input" class="form-label"><strong class="red">*</strong> Department</label>
+							<select class="form-select" name="department" disabled id="department-create-kfi" required>
+								<option value="">Select Department</option>
 							</select>
 						</div>
 						<div class="col-12 pt-10">
 							<label for="input" class="form-label"><strong class="red">*</strong> Check Unit</label>
-							<div class="btn-group mt-10 col-12" role="group" aria-label="Basic outlined example">
+							<div class="btn-group  col-12" role="group" aria-label="Basic outlined example">
 								<?php
 								if (isset($units) && count($units) > 0) {
 									$i = 1;
 									foreach ($units as $unitId => $unit) :
 										$style = "";
+										$default = "";
 										if ($i == 4) {
 											$style = "border-radius:0 5px 5px 0;";
 										}
 										if ($i == 1) {
-											$style = "background-color:gray;";
+											//$style = "background-color:gray;";
+											$default = 'btn-primary';
 										}
 								?>
-										<button type="button" id="unit-<?= $unitId ?>" class="btn border col-3  font-size-12" onclick="javascript:selectUnit(<?= $unitId ?>)" style="<?= $style ?>">
+										<button type="button" id="unit-<?= $unitId ?>" class="btn border col-3  font-size-12 <?= $default ?>" onclick="javascript:selectUnit(<?= $unitId ?>)" style="<?= $style ?>">
 											<?= $unit ?>
 										</button>
 								<?php
@@ -66,14 +74,14 @@
 
 
 								<input type="hidden" value="1" id="currentUnit" name="unit" required>
-								<input type="hidden" value="" id="previousUnit" required>
+								<input type="hidden" value="1" id="previousUnit" required>
 							</div>
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-6 col-6">
 						<div class="col-12">
 							<label for="exampleFormControlTextarea1" class="form-label"> KFI Details</label>
-							<textarea class="form-control" name="detail" rows="7"></textarea>
+							<textarea class="form-control" name="detail" rows="9"></textarea>
 						</div>
 						<div class="row">
 							<div class="col-lg-6 col-md-6 col-6 pt-10">

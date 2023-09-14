@@ -31,7 +31,7 @@ class ManagementController extends Controller
 				$data[$kfi["kfiId"]] = [
 					"kfiName" => $kfi["kfiName"],
 					"companyName" => Company::companyName($kfi['companyId']),
-					"branchName" => Branch::branchName($kfi['branchId']),
+					"branchName" => Branch::kfiBranchName($kfi["kfiId"]),
 					"quantRatio" => "",
 					"target" => $kfi['targetAmount'],
 					"code" => "",
@@ -57,7 +57,8 @@ class ManagementController extends Controller
 					$data[$kfi["kfiId"]] = [
 						"kfiName" => $kfi["kfiName"],
 						"companyName" => Company::companyName($kfi['companyId']),
-						"branchName" => Branch::branchName($kfi['branchId']),
+						"branchName" => Branch::kfiBranchName($kfi["kfiId"]),
+						"branchName" => "",
 						"target" => $kfi['targetAmount'],
 						"unit" => Unit::unitName($kfi['unitId']),
 						"month" => ModelMaster::monthEng($kfi['month'], 1),
@@ -83,7 +84,7 @@ class ManagementController extends Controller
 		$kfi = Kfi::find()->where(["kfiId" => $kfiId])->asArray()->one();
 		$res["kfiName"] = $kfi["kfiName"];
 		$res["companyName"] = Company::companyName($kfi['companyId']);
-		$res["branchName"] = Branch::branchName($kfi['branchId']);
+		$res["branchName"] = Branch::kfiBranchName($kfiId);
 		$res["unitId"] = $kfi["unitId"];
 		$res["detail"] = $kfi["kfiDetail"];
 		$res["targetAmount"] = number_format($kfi["targetAmount"], 2);
