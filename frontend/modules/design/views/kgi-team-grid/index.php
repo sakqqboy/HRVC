@@ -100,12 +100,12 @@ $this->title = 'Team Grid';
                         <div class="row">
                             <div class="col-lg-6 col-6 col-6 card card-radius">
                                 <div class="row">
-                                    <div class="col-md-5 border team-grid-clients">
+                                    <div class="col-md-5 team-grid-clients">
                                         <div class="col-12">
                                             <i class="fa fa-flag-o" aria-hidden="true"></i> The Number Of Clients Per Employee
                                         </div>
                                     </div>
-                                    <div class="col-md-2 border">
+                                    <div class="col-md-2">
                                         <div class="col-12">
                                             <span class="badge rounded-pill bg-warning text-dark">Completed</span>
                                         </div>
@@ -118,16 +118,110 @@ $this->title = 'Team Grid';
                                             <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-flex"> Dhaka, Bangladesh
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-4 mt-10">
                                         <div class="col-12">
-                                            <span class="border border-1 font-size-12"> Deadline : Mon, Feb 28, 2024</span>
+                                            <span class="border border-1 boderradius-dead"> <span class="borderdeadline">Deadline</span> : Mon, Feb 28, 2024</span>
                                         </div>
+                                        <div class="col-12 top-teamcontent">
+                                            Team Content
+                                        </div>
+                                        <div class="col-12 font-size-12 pt-10">
+                                            This is a sample KGI content
+                                        </div>
+                                        <div class="col-12 font-size-12 mt-20">
+                                            Priority
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="circle-update">A</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mt-20 solid2-kgi">
+                                        <div class="col-12 font-size-12 text-secondary">
+                                            Quant Ratio
+                                        </div>
+                                        <div class="col-12 Quality-diamond">
+                                            <i class="fa fa-diamond" aria-hidden="true"></i> Quality
+                                        </div>
+                                        <div class="col-12 pt-20 pl-80 font-size-11">
+                                            <strong>FEBRUARY</strong>
+                                        </div>
+                                        <div class="col-12 font-size-10 pt-20" style="width: 10rem;">
+                                            Update Interval
+                                        </div>
+                                        <div class="col-12 Quality-monthly0">
+                                            Monthly
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mt-20 solid3">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <div class="col-12 target-progress1">
+                                                    <i class="fa fa-bullseye" aria-hidden="true"></i> Target
+                                                </div>
+                                                <div class="col-12 result-million">
+                                                    453,0000
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="col-12 target-plush1">
+                                                    >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="col-12 target-progress1">
+                                                    Result <i class="fa fa-trophy" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="col-12 result-million">
+                                                    904,0000
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mt-20">
+                                                <div class="progress">
+                                                    <div class="progress-bar" style="width:25%;"></div>
+                                                    <span class="badge rounded-pill  pro-load2">25%</span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="col-12 refresh1">
+                                                        <i class="fa fa-refresh" aria-hidden="true"></i> Latest Update
+                                                    </div>
+                                                    <div class="col-12 font-size-10 pt-5" style="font-weight: 700;">
+                                                        Tue, Mar 12, 2023
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6  text-end">
+                                                    <div class="col-12 pencil-nextupdate1">
+                                                        Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                    </div>
+                                                    <div class="col-12 font-size-10 pt-5" style="font-weight: 700;">
+                                                        Tue, Mar 12, 2023
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row  mt-20">
+                                    <div class="col-9 text-end">
+                                        <span class="badge rounded-pill bg-white">
+                                            <div class="flex mb-5 -space-x-4">
+                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
+                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
+                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
+                                                <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
+                                            </div>
+                                        </span>
+                                    </div>
+                                    <div class="col-3 text-end">
+                                        <button class="btn btn-outline-secondary font-size-10"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                        <button class="btn btn-outline-danger font-size-10"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-6 col-6 card card-radius">
                                 <div class="row">
-                                    <div class="col-md-5  team-grid-clients">
+                                    <div class="col-md-5 team-grid-clients">
                                         <div class="col-12">
                                             <i class="fa fa-flag-o" aria-hidden="true"></i> The Number Of Clients Per Employee
                                         </div>
@@ -137,13 +231,354 @@ $this->title = 'Team Grid';
                                             <span class="badge rounded-pill bg-warning text-dark">Completed</span>
                                         </div>
                                     </div>
-                                    <div class="col-4">
-                                        <div class="team-tokyo">
+                                    <div class="col-md-5">
+                                        <div class="col-12 team-tokyo">
                                             Tokyo Consulting Firm Limited
                                         </div>
-                                        <div class="font-size-12">
+                                        <div class="font-size-12 text-end">
                                             <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-flex"> Dhaka, Bangladesh
                                         </div>
+                                    </div>
+                                    <div class="col-md-4 mt-10">
+                                        <div class="col-12">
+                                            <span class="border border-1 boderradius-dead"> <span class="borderdeadline">Deadline</span> : Mon, Feb 28, 2024</span>
+                                        </div>
+                                        <div class="col-12 top-teamcontent">
+                                            Team Content
+                                        </div>
+                                        <div class="col-12 font-size-12 pt-10">
+                                            This is a sample KGI content
+                                        </div>
+                                        <div class="col-12 font-size-12 mt-20">
+                                            Priority
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="circle-update">A</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mt-20 solid2-kgi">
+                                        <div class="col-12 font-size-12 text-secondary">
+                                            Quant Ratio
+                                        </div>
+                                        <div class="col-12 Quality-diamond">
+                                            <i class="fa fa-diamond" aria-hidden="true"></i> Quality
+                                        </div>
+                                        <div class="col-12 pt-20 pl-80 font-size-11">
+                                            <strong>FEBRUARY</strong>
+                                        </div>
+                                        <div class="col-12 font-size-10 pt-20" style="width: 10rem;">
+                                            Update Interval
+                                        </div>
+                                        <div class="col-12 Quality-monthly0">
+                                            Monthly
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mt-20 solid3">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <div class="col-12 target-progress1">
+                                                    <i class="fa fa-bullseye" aria-hidden="true"></i> Target
+                                                </div>
+                                                <div class="col-12 result-million">
+                                                    453,0000
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="col-12 target-plush1">
+                                                    >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="col-12 target-progress1">
+                                                    Result <i class="fa fa-trophy" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="col-12 result-million">
+                                                    904,0000
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mt-20">
+                                                <div class="progress">
+                                                    <div class="progress-bar" style="width:25%;"></div>
+                                                    <span class="badge rounded-pill  pro-load2">25%</span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="col-12 refresh1">
+                                                        <i class="fa fa-refresh" aria-hidden="true"></i> Latest Update
+                                                    </div>
+                                                    <div class="col-12 font-size-10 pt-5" style="font-weight: 700;">
+                                                        Tue, Mar 12, 2023
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6  text-end">
+                                                    <div class="col-12 pencil-nextupdate1">
+                                                        Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                    </div>
+                                                    <div class="col-12 font-size-10 pt-5" style="font-weight: 700;">
+                                                        Tue, Mar 12, 2023
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row  mt-20">
+                                    <div class="col-9 text-end">
+                                        <span class="badge rounded-pill bg-white">
+                                            <div class="flex mb-5 -space-x-4">
+                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
+                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
+                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
+                                                <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
+                                            </div>
+                                        </span>
+                                    </div>
+                                    <div class="col-3 text-end">
+                                        <button class="btn btn-outline-secondary font-size-10"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                        <button class="btn btn-outline-danger font-size-10"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-6 col-6 card card-radius">
+                                <div class="row">
+                                    <div class="col-md-5 team-grid-clients">
+                                        <div class="col-12">
+                                            <i class="fa fa-flag-o" aria-hidden="true"></i> The Number Of Clients Per Employee
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="col-12">
+                                            <span class="badge rounded-pill bg-warning text-dark">Completed</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="col-12 team-tokyo">
+                                            Tokyo Consulting Firm Limited
+                                        </div>
+                                        <div class="font-size-12 text-end">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-flex"> Dhaka, Bangladesh
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mt-10">
+                                        <div class="col-12">
+                                            <span class="border border-1 boderradius-dead"> <span class="borderdeadline">Deadline</span> : Mon, Feb 28, 2024</span>
+                                        </div>
+                                        <div class="col-12 top-teamcontent">
+                                            Team Content
+                                        </div>
+                                        <div class="col-12 font-size-12 pt-10">
+                                            This is a sample KGI content
+                                        </div>
+                                        <div class="col-12 font-size-12 mt-20">
+                                            Priority
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="circle-update">A</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mt-20 solid2-kgi">
+                                        <div class="col-12 font-size-12 text-secondary">
+                                            Quant Ratio
+                                        </div>
+                                        <div class="col-12 Quality-diamond">
+                                            <i class="fa fa-diamond" aria-hidden="true"></i> Quality
+                                        </div>
+                                        <div class="col-12 pt-20 pl-80 font-size-11">
+                                            <strong>FEBRUARY</strong>
+                                        </div>
+                                        <div class="col-12 font-size-10 pt-20" style="width: 10rem;">
+                                            Update Interval
+                                        </div>
+                                        <div class="col-12 Quality-monthly0">
+                                            Monthly
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mt-20 solid3">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <div class="col-12 target-progress1">
+                                                    <i class="fa fa-bullseye" aria-hidden="true"></i> Target
+                                                </div>
+                                                <div class="col-12 result-million">
+                                                    453,0000
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="col-12 target-plush1">
+                                                    >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="col-12 target-progress1">
+                                                    Result <i class="fa fa-trophy" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="col-12 result-million">
+                                                    904,0000
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mt-20">
+                                                <div class="progress">
+                                                    <div class="progress-bar" style="width:25%;"></div>
+                                                    <span class="badge rounded-pill  pro-load2">25%</span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="col-12 refresh1">
+                                                        <i class="fa fa-refresh" aria-hidden="true"></i> Latest Update
+                                                    </div>
+                                                    <div class="col-12 font-size-10 pt-5" style="font-weight: 700;">
+                                                        Tue, Mar 12, 2023
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6  text-end">
+                                                    <div class="col-12 pencil-nextupdate1">
+                                                        Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                    </div>
+                                                    <div class="col-12 font-size-10 pt-5" style="font-weight: 700;">
+                                                        Tue, Mar 12, 2023
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row  mt-20">
+                                    <div class="col-9 text-end">
+                                        <span class="badge rounded-pill bg-white">
+                                            <div class="flex mb-5 -space-x-4">
+                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
+                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
+                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
+                                                <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
+                                            </div>
+                                        </span>
+                                    </div>
+                                    <div class="col-3 text-end">
+                                        <button class="btn btn-outline-secondary font-size-10"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                        <button class="btn btn-outline-danger font-size-10"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-6 col-6 card card-radius">
+                                <div class="row">
+                                    <div class="col-md-5 team-grid-clients">
+                                        <div class="col-12">
+                                            <i class="fa fa-flag-o" aria-hidden="true"></i> The Number Of Clients Per Employee
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="col-12">
+                                            <span class="badge rounded-pill bg-warning text-dark">Completed</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="col-12 team-tokyo">
+                                            Tokyo Consulting Firm Limited
+                                        </div>
+                                        <div class="font-size-12 text-end">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-flex"> Dhaka, Bangladesh
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mt-10">
+                                        <div class="col-12">
+                                            <span class="border border-1 boderradius-dead"> <span class="borderdeadline">Deadline</span> : Mon, Feb 28, 2024</span>
+                                        </div>
+                                        <div class="col-12 top-teamcontent">
+                                            Team Content
+                                        </div>
+                                        <div class="col-12 font-size-12 pt-10">
+                                            This is a sample KGI content
+                                        </div>
+                                        <div class="col-12 font-size-12 mt-20">
+                                            Priority
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="circle-update">A</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mt-20 solid2-kgi">
+                                        <div class="col-12 font-size-12 text-secondary">
+                                            Quant Ratio
+                                        </div>
+                                        <div class="col-12 Quality-diamond">
+                                            <i class="fa fa-diamond" aria-hidden="true"></i> Quality
+                                        </div>
+                                        <div class="col-12 pt-20 pl-80 font-size-11">
+                                            <strong>FEBRUARY</strong>
+                                        </div>
+                                        <div class="col-12 font-size-10 pt-20" style="width: 10rem;">
+                                            Update Interval
+                                        </div>
+                                        <div class="col-12 Quality-monthly0">
+                                            Monthly
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mt-20 solid3">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <div class="col-12 target-progress1">
+                                                    <i class="fa fa-bullseye" aria-hidden="true"></i> Target
+                                                </div>
+                                                <div class="col-12 result-million">
+                                                    453,0000
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="col-12 target-plush1">
+                                                    >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="col-12 target-progress1">
+                                                    Result <i class="fa fa-trophy" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="col-12 result-million">
+                                                    904,0000
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mt-20">
+                                                <div class="progress">
+                                                    <div class="progress-bar" style="width:25%;"></div>
+                                                    <span class="badge rounded-pill  pro-load2">25%</span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="col-12 refresh1">
+                                                        <i class="fa fa-refresh" aria-hidden="true"></i> Latest Update
+                                                    </div>
+                                                    <div class="col-12 font-size-10 pt-5" style="font-weight: 700;">
+                                                        Tue, Mar 12, 2023
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6  text-end">
+                                                    <div class="col-12 pencil-nextupdate1">
+                                                        Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                    </div>
+                                                    <div class="col-12 font-size-10 pt-5" style="font-weight: 700;">
+                                                        Tue, Mar 12, 2023
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row  mt-20">
+                                    <div class="col-9 text-end">
+                                        <span class="badge rounded-pill bg-white">
+                                            <div class="flex mb-5 -space-x-4">
+                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
+                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
+                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
+                                                <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
+                                            </div>
+                                        </span>
+                                    </div>
+                                    <div class="col-3 text-end">
+                                        <button class="btn btn-outline-secondary font-size-10"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                        <button class="btn btn-outline-danger font-size-10"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                                     </div>
                                 </div>
                             </div>
