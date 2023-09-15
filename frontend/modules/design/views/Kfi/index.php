@@ -1074,9 +1074,6 @@ $this->title = 'KFI';
                         </nav>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="pills-Performance" role="tabpanel" aria-labelledby="pills-Performance-tab">
-                    hykoilhkpolpo
-                </div>
             </div>
         </ul>
     </div>

@@ -151,14 +151,14 @@ $this->title = 'Team KGI';
                                 <td>2nd Feb, 2023</td>
                                 <td>23rd Feb, 2023</td>
                                 <td colspan="row">
-                                    <span data-bs-toggle="modal" data-bs-target="#exampleModal3"> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
+                                    <span data-bs-toggle="modal" data-bs-target="#exampleModal"> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
                                     <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
-                                        <li data-bs-toggle="modal" data-bs-target="#staticBackdrop11">
+                                        <li data-bs-toggle="modal" data-bs-target="#exampleModal4">
                                             <a class="dropdown-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                         </li>
-                                        <li data-bs-toggle="modal" data-bs-target="#staticBackdrop10">
+                                        <li data-bs-toggle="modal" data-bs-target="#exampleModal3">
                                             <a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                         </li>
                                         <li data-bs-toggle="modal" data-bs-target="#staticBackdrop11">
@@ -386,12 +386,55 @@ $this->title = 'Team KGI';
     </div>
 </div>
 
-<!-- modal Team KGI -->
-<div class="modal fade" id="staticBackdrop10" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdro10" aria-hidden="true">
+
+<!-- modal edit KGI -->
+
+<div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="border:none;">
+                <h5 class="modal-title text-primary" id="exampleModalLabel"><i class="fa fa-magic" aria-hidden="true"></i> Edit KGI</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="col-12 pl-20">
+                <i class="fa fa-flag-o" aria-hidden="true"></i> Key Goal Indicator
+            </div>
+            <div class="modal-body">
+                <div class="col-12">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label"> <strong>Company KGI Contents</strong></label>
+                        <input type="text" class="form-control" id="" disabled readonly>
+                    </div>
+                </div>
+                <div class="col-12 mt-20">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput2" class="form-label"> <strong>Single KGI Contents</strong></label>
+                        <input type="text" class="form-control" id="">
+                    </div>
+                </div>
+                <div class="col-12 mt-20">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput3" class="form-label"> <strong>Team KGI Contents</strong></label>
+                        <input type="text" class="form-control" id="">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border: none;">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal edit KGI -->
+
+<!-- modal view Team KGI -->
+<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom:none;">
-                <div class="modal-title Modalfirstone" id="staticBackdrop"><i class="fa fa-line-chart" aria-hidden="true"></i> Increase Sales</div>
+                <div class="modal-title Modalfirstone" id="exampleModalLabel"><i class="fa fa-flag-o" aria-hidden="true"></i> Increase Something</div>
+                <div class="modal-title"> Team KGI Contents</div>
+                <div class="modal-title circle-update-team"> A</div>
                 <div class="modal-title badge rounded-pill bg-warning text-dark font-size-14">Completed</div>
             </div>
             <div class="text-end mr-20">
@@ -401,8 +444,12 @@ $this->title = 'Team KGI';
                 <span class="border border-1 text-dark" style="border-radius: 15px;"><span class="NextUpdate-Backdrop3">Next Update</span> <span class="font-size-11"> Tue, Mar 12, 2023 &nbsp;</span></span>
             </div>
             <div class="view-show-name">Tokyo Consulting Firm Limited </div>
+            <div class="teamClients"> Ten Clients employee</div>
             <div class="country-show-name">
                 <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="is-bangladresh2"> Dhaka, Bangladesh
+            </div>
+            <div class="san">
+                <span class="badge rounded-pill  bg-secondary-bsc text-secondary"><i class="fa fa-user" aria-hidden="true"></i> Team A, Accounts & Taxation</span>
             </div>
             <div class="modal-body mt-20">
                 <div class="col-12 dashed-Backdrop3">
@@ -465,8 +512,123 @@ $this->title = 'Team KGI';
                 <div class="col-12 Description-Backdrop3">
                     Description
                 </div>
-                <div class="col-12 detailsDescription-Backdrop3">
+                <div class="col-12 detailsDescription-Backdrop3 pl-20">
                     The more people who have access to your point of sales system or place of business means more people have the possibility of buying from you and increasing your profits. The more people who have access to your point of sales system or place of business means more people have the possibility of buying from you and increasing your profits.
+                </div>
+                <div class="col-12 Team-Members">
+                    Team Members
+                </div>
+                <hr>
+                <div class="row mt-30 pl-20">
+                    <div class="col-lg-2 col-md-6 col-12">
+                        <div class="col-12">
+                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-1.png" class="image-AssignMembers">
+                        </div>
+                        <div class="col-12">
+                            <strong class="font-size-10"> Faruk Khan</strong>
+                            <div class="font-size-10"> Old Product Manager</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-12">
+                        <div class="col-12">
+                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-3.png" class="image-AssignMembers">
+                        </div>
+                        <div class="col-12">
+                            <strong class="font-size-10"> Amir Khan </strong>
+                            <div class="font-size-10"> Software Engineer</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-12">
+                        <div class="col-12">
+                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-2.png" class="image-AssignMembers">
+                        </div>
+                        <div class="col-12">
+                            <strong class="font-size-10"> Shahrukh Khan</strong>
+                            <div class="font-size-10"> Business Development</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-12">
+                        <div class="col-12">
+                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-1.png" class="image-AssignMembers">
+                        </div>
+                        <div class="col-12">
+                            <strong class="font-size-10"> Faruk Khan</strong>
+                            <div class="font-size-10"> Old Product Manager</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-12">
+                        <div class="col-12">
+                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-3.png" class="image-AssignMembers">
+                        </div>
+                        <div class="col-12">
+                            <strong class="font-size-10"> Amir Khan </strong>
+                            <div class="font-size-10"> Software Engineer</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-12">
+                        <div class="col-12">
+                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-2.png" class="image-AssignMembers">
+                        </div>
+                        <div class="col-12">
+                            <strong class="font-size-10"> Shahrukh Khan</strong>
+                            <div class="font-size-10"> Business Development</div>
+                        </div>
+                    </div>
+                    <div class="mt-20"></div>
+                    <div class="col-lg-2 col-md-6 col-12">
+                        <div class="col-12">
+                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-1.png" class="image-AssignMembers">
+                        </div>
+                        <div class="col-12">
+                            <strong class="font-size-10"> Faruk Khan</strong>
+                            <div class="font-size-10"> Old Product Manager</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-12">
+                        <div class="col-12">
+                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-3.png" class="image-AssignMembers">
+                        </div>
+                        <div class="col-12">
+                            <strong class="font-size-10"> Amir Khan </strong>
+                            <div class="font-size-10"> Software Engineer</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-12">
+                        <div class="col-12">
+                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-3.png" class="image-AssignMembers">
+                        </div>
+                        <div class="col-12">
+                            <strong class="font-size-10"> Amir Khan </strong>
+                            <div class="font-size-10"> Software Engineer</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-12">
+                        <div class="col-12">
+                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-2.png" class="image-AssignMembers">
+                        </div>
+                        <div class="col-12">
+                            <strong class="font-size-10"> Shahrukh Khan</strong>
+                            <div class="font-size-10"> Business Development</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-12">
+                        <div class="col-12">
+                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-1.png" class="image-AssignMembers">
+                        </div>
+                        <div class="col-12">
+                            <strong class="font-size-10"> Faruk Khan</strong>
+                            <div class="font-size-10"> Old Product Manager</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-12">
+                        <div class="col-12">
+                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-3.png" class="image-AssignMembers">
+                        </div>
+                        <div class="col-12">
+                            <strong class="font-size-10"> Amir Khan </strong>
+                            <div class="font-size-10"> Software Engineer</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-12 History-Backdrop3">
                     History
