@@ -151,3 +151,9 @@
 .solid-single1 {
     border-left: lightgray 2px solid;
 }
+
+.image-employeekgi {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
