@@ -805,7 +805,7 @@ $this->title = 'KFI';
                                             </div>
                                         </td>
                                         <td>
-                                            <span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
+                                            <span class="badge rounded-pill bg-secondary-bsc1"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
                                         </td>
                                         <td>Quality</td>
                                         <td>2.5</td>
@@ -832,7 +832,7 @@ $this->title = 'KFI';
                                                 <li data-bs-toggle="modal" data-bs-target="#staticBackdrop7">
                                                     <a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                                 </li>
-                                                <li data-bs-toggle="modal" data-bs-target="#staticBackdrop8">
+                                                <li data-bs-toggle="modal" data-bs-target="#staticBackdropdelete">
                                                     <a class="dropdown-item"><i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
                                                 </li>
                                             </ul>
@@ -855,7 +855,7 @@ $this->title = 'KFI';
                                             </div>
                                         </td>
                                         <td>
-                                            <span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
+                                            <span class="badge rounded-pill bg-secondary-bsc1"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
                                         </td>
                                         <td>Quality</td>
                                         <td>2.5</td>
@@ -899,7 +899,7 @@ $this->title = 'KFI';
                                             </div>
                                         </td>
                                         <td>
-                                            <span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
+                                            <span class="badge rounded-pill bg-secondary-bsc1"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
                                         </td>
                                         <td>Quality</td>
                                         <td>2.5</td>
@@ -943,7 +943,7 @@ $this->title = 'KFI';
                                             </div>
                                         </td>
                                         <td>
-                                            <span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
+                                            <span class="badge rounded-pill bg-secondary-bsc1"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
                                         </td>
                                         <td>Quality</td>
                                         <td>2.5</td>
@@ -987,7 +987,7 @@ $this->title = 'KFI';
                                             </div>
                                         </td>
                                         <td>
-                                            <span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
+                                            <span class="badge rounded-pill bg-secondary-bsc1"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
                                         </td>
                                         <td>Quality</td>
                                         <td>2.5</td>
@@ -1031,7 +1031,7 @@ $this->title = 'KFI';
                                             </div>
                                         </td>
                                         <td>
-                                            <span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
+                                            <span class="badge rounded-pill bg-secondary-bsc1"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
                                         </td>
                                         <td>Quality</td>
                                         <td>2.5</td>
@@ -1573,10 +1573,10 @@ $this->title = 'KFI';
                 <ul class="nav nav-pills mb-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-12">
-                            <a class="link" id="v-pills-Issues-tab" data-bs-toggle="pill" data-bs-target="#v-pills-Issues" type="button" role="tab" aria-controls="v-pills-Issues" aria-selected="true">Issues</a>
+                            <a class="link-3" id="v-pills-Issues-tab" data-bs-toggle="pill" data-bs-target="#v-pills-Issues" type="button" role="tab" aria-controls="v-pills-Issues" aria-selected="true">Issues</a>
                         </div>
                         <div class="col-lg-6 col-md-6 col-12">
-                            <a class="link" id="v-pills-History-tab" data-bs-toggle="pill" data-bs-target="#v-pills-History" type="button" role="tab" aria-controls="v-pills-History" aria-selected="false">History</a>
+                            <a class="link-3" id="v-pills-History-tab" data-bs-toggle="pill" data-bs-target="#v-pills-History" type="button" role="tab" aria-controls="v-pills-History" aria-selected="false">History</a>
                         </div>
                     </div>
                 </ul>
@@ -1843,6 +1843,7 @@ $this->title = 'KFI';
 <!-- end EDIT -->
 
 
+
 <!-- madal KGI view -->
 <div class="modal fade" id="staticBackdrop7" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdrop7" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -1889,12 +1890,7 @@ $this->title = 'KFI';
                                 <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                             </div>
                             <div class="col-12 million-number-Backdrop3">
-                                <?php
-                                echo number_format(1);
-                                echo number_format(0);
-                                echo number_format(0);
-                                echo number_format(0);
-                                ?>
+                                1000000
                             </div>
                         </div>
                         <div class="col-lg-1 col-md-6 col-3">
@@ -1910,12 +1906,7 @@ $this->title = 'KFI';
                                 <i class="fa fa-trophy" aria-hidden="true"></i> Result
                             </div>
                             <div class="col-12 million-number-Backdrop3">
-                                <?php
-                                echo number_format(9);
-                                echo number_format(0);
-                                echo number_format(2);
-                                echo number_format(5);
-                                ?>
+                                1000000
                             </div>
                         </div>
                         <div class="row">
@@ -1948,18 +1939,26 @@ $this->title = 'KFI';
                 <div class="col-12 Description-Backdrop7 pl-10">
                     Description
                 </div>
-                <div class="col-12 detailsDescription-Backdrop3 pl-10">
+                <div class="col-12 detailsDescription-Backdrop3 pl-20">
                     The more people who have access to your point of sales system or place of business means more people have the possibility of buying from you and increasing your profits. The more people who have access to your point of sales system or place of business means more people have the possibility of buying from you and increasing your profits.
                 </div>
                 <div class="row mt-20">
-                    <div class="col-lg-6 col-md-6 col-12 pl-50">
-                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                            <li>
-                                <a class="nav" id="pills-team1-tab" data-bs-toggle="pill" data-bs-target="#pills-team1" type="button" role="tab" aria-controls="pills-team1" aria-selected="true"> Team</a>
-                            </li>
-                        </ul>
+                    <div class="col-12">
+                        <div class="row">
+                            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                <li class="col-lg-6 col-md-6 col-6 pl-20">
+                                    <a class="link-3" id="v-pills-team1-tab" data-bs-toggle="pill" data-bs-target="#v-pills-team1" type="button" role="tab" aria-controls="v-pills-team1" aria-selected="true"> Team</a>
+                                </li>
+                                <li class="col-lg-6 col-md-6 col-6">
+                                    <a class="link-3" id="v-pills-Assign-tab" data-bs-toggle="pill" data-bs-target="#v-pills-Assign" type="button" role="tab" aria-controls="v-pills-Assign" aria-selected="true"> Assign Members</a>
+                                </li>
+                            </ul>
+                            <hr style="margin-top: -5px;">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-12 pl-40">
                         <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade show active" id="pills-team1" role="tabpanel" aria-labelledby="pills-team1-tab">
+                            <div class="tab-pane fade show active" id="v-pills-team1" role="tabpanel" aria-labelledby="v-pills-team1-tab">
                                 <div class="row mt-30 Assign-solid">
                                     <div class="col-lg-3 col-md-6 col-12">
                                         <div class="col-12">
@@ -2074,13 +2073,8 @@ $this->title = 'KFI';
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
-                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                            <li>
-                                <a class="nav" id="pills-Assign-tab" data-bs-toggle="pill" data-bs-target="#pills-Assign" type="button" role="tab" aria-controls="pills-Assign" aria-selected="true"> Assign Members</a>
-                            </li>
-                        </ul>
                         <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade" id="pills-Assign" role="tabpanel" aria-labelledby="pills-Assign-tab">
+                            <div class="tab-pane fade" id="v-pills-Assign" role="tabpanel" aria-labelledby="v-pills-Assign-tab">
                                 <div class="row mt-30">
                                     <div class="col-lg-3 col-md-6 col-12">
                                         <div class="col-12">
@@ -2328,7 +2322,7 @@ $this->title = 'KFI';
 
 
 <!-- modal KGI delete -->
-<div class="modal fade" id="staticBackdrop8" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdrop8" aria-hidden="true">
+<div class="modal fade" id="staticBackdropdelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropdelete" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom:none;">

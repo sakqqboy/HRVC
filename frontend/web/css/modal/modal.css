@@ -17,13 +17,14 @@
 
 .link-3 {
     font-size: 18px;
-    font-weight: 700;
     text-decoration: none;
     color: #000000;
 }
 
-.link-3 a:hover {
-    color: aqua;
+.link-3:hover {
+    border-bottom: #2F80ED 2px solid;
+    font-weight: 700;
+    color: #000000;
 }
 
 .card-hashed {

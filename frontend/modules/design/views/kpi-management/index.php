@@ -1,7 +1,5 @@
 <?php
-
-$this->title = 'Dashboard';
-
+$this->title = 'KPI Team Grid';
 ?>
 <div class="col-12">
     <div class="col-6 table-KPI">

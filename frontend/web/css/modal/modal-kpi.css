@@ -34,3 +34,25 @@
     font-weight: 600;
     padding-top: 30px;
 }
+
+#v-pills-Assign-tab {
+    text-decoration: none;
+    font-weight: 500;
+    color: #2F80ED;
+}
+
+#v-pills-Assign-tab:hover {
+    border-bottom: #2F80ED 2px solid;
+    width: 150px;
+}
+
+#v-pills-team1-tab {
+    text-decoration: none;
+    font-weight: 500;
+    color: #2F80ED;
+}
+
+#v-pills-team1-tab:hover {
+    border-bottom: #2F80ED 2px solid;
+    width: 50px;
+}

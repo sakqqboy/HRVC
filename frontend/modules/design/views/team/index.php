@@ -3,7 +3,7 @@
 $this->title = 'Team';
 ?>
 
-<div class="col-12 team-one" style="margin-top: 90px;">
+<div class="col-12 team-one mt-90">
     <div class="row">
         <div class="col-lg-1 col-md-6 col-12">
             <div class="col-12 branch-title">

@@ -7,7 +7,7 @@ use yii\web\Controller;
 /**
  * Default controller for the `designfront` module
  */
-class AnalysisController extends Controller
+class SingleKgiController extends Controller
 {
     /**
      * Renders the index view for the module
