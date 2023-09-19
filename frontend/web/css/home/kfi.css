@@ -121,7 +121,13 @@
 }
 
 .bg-secondary-bsc {
-    background-color: rgb(226, 226, 226);
+    background-color: rgb(144 152 159);
+    color: #ffffff;
+    font-size: 13px;
+}
+
+.bg-secondary-bsc1 {
+    background-color: rgb(216, 216, 216);
     color: #000000;
     font-size: 11px;
 }
@@ -153,7 +159,7 @@
 }
 
 .comment-td-dropdown {
-    width: 17px;
+    width: 15px;
     cursor: pointer;
     margin-left: -20px;
     margin-top: -5px;
