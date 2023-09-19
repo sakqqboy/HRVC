@@ -12,3 +12,17 @@
     width: 20px;
     height: 20px;
 }
+.multi-select{
+    font-size: 14px;
+    border-bottom: lightgray solid thin;
+    background-color: aliceblue;
+}
+.multi-select-head{
+    font-size: 13px;
+    font-weight: 500;
+    background-color: aliceblue;
+}
+.multi-box{
+    height: 35px;
+  
+}

@@ -119,7 +119,7 @@ $this->title = 'KFI';
 												<td><?= $kfi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?></td>
 												<td class="text-end"><?= number_format($kfi["target"], 2) ?></td>
 												<td class="text-center"><?= $kfi["code"] ?></td>
-												<td><?= $kfi["result"] ?></td>
+												<td><?= number_format((int)$kfi["result"], 2) ?></td>
 												<td>
 													<div id="progress1">
 														<div data-num="<?= $kfi["ratio"] == '' ? 0 : $kfi["ratio"] ?>" class="progress-item1"></div>

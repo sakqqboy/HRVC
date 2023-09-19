@@ -183,11 +183,14 @@ $this->title = 'Team';
 												</a>
 											</div>
 										</div>
-										<div class="col-12 mt-10 font-size-12">
+										<div class="col-12 mt-5 font-size-12">
 											<?= $team["companyName"] ?>
 										</div>
-										<div class="col-12 mt-10 bangladresh-hrvc2">
+										<div class="col-12 mt-5 bangladresh-hrvc2">
 											Branch: <img src="<?= Yii::$app->homeUrl ?><?= $team['flag'] ?>" class="bangladresh-hrvc1 mr-5"> <?= $team["branchName"] ?>, <?= $team["countryName"] ?>
+										</div>
+										<div class="col-12 mt-5 font-size-12">
+											Department: <?= $team["departmentName"] ?>
 										</div>
 										<div class="row mt-20">
 

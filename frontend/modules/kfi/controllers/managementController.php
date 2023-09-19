@@ -52,7 +52,6 @@ class ManagementController extends Controller
 
 		$units = ["1" => "Monthly", "2" => "Weekly", "3" => "QuaterLy", "4" => "Daily"];
 		$months = ModelMaster::monthFull(1);
-		//throw new Exception(print_r($months, true));
 		return $this->render('index', [
 			"companies" => $companies,
 			"units" => $units,

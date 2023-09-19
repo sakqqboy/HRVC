@@ -10,7 +10,6 @@ use Yii;
     * @property integer $kfiId
     * @property string $kfiName
     * @property integer $companyId
-    * @property integer $branchId
     * @property integer $unitId
     * @property integer $targetAmount
     * @property string $month
@@ -36,8 +35,8 @@ return 'kfi';
 public function rules()
 {
 return [
-            [['kfiName', 'companyId', 'branchId', 'unitId', 'createrId'], 'required'],
-            [['companyId', 'branchId', 'unitId', 'targetAmount', 'createrId'], 'integer'],
+            [['kfiName', 'companyId', 'unitId', 'createrId'], 'required'],
+            [['companyId', 'unitId', 'targetAmount', 'createrId'], 'integer'],
             [['kfiDetail'], 'string'],
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['kfiName', 'month'], 'string', 'max' => 45],
@@ -54,7 +53,6 @@ return [
     'kfiId' => 'Kfi ID',
     'kfiName' => 'Kfi Name',
     'companyId' => 'Company ID',
-    'branchId' => 'Branch ID',
     'unitId' => 'Unit ID',
     'targetAmount' => 'Target Amount',
     'month' => 'Month',

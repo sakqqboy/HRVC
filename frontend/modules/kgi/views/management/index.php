@@ -1,6 +1,8 @@
 <?php
 
 use yii\bootstrap5\ActiveForm;
+
+$this->title = "KGI";
 ?>
 <div class="col-12 mt-90 pd-Performance">
 	<div class="col-12">
@@ -101,275 +103,65 @@ use yii\bootstrap5\ActiveForm;
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="border-bottom-white2">
-								<td class="over-blue">Increase Something</td>
-								<td>TCF</td>
-								<td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
-								<td>The number of clients per employee by team</td>
-								<td class="text-center">A</td>
-								<td>
-									<div class="flex mb-5 -space-x-4">
-										<img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-										<img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-										<img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-										<a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-									</div>
-								</td>
-								<td>
-									<span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
-								</td>
-								<td>Quality</td>
-								<td>2.5</td>
-								<td>
-									>
-								</td>
-								<td>2.1</td>
-								<td>
-									<div id="progress1">
-										<div data-num="35" class="progress-item1"></div>
-									</div>
-								</td>
-								<td>January</td>
-								<td>Monthly</td>
-								<td>2nd Feb, 2023</td>
-								<td>23rd Feb, 2023</td>
-								<td colspan="row">
-									<span data-bs-toggle="modal" data-bs-target="#exampleModalcomment"> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
-									<span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-									<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-										<li data-bs-toggle="modal" data-bs-target="#staticBackdrop6">
-											<a class="dropdown-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-										</li>
-										<li data-bs-toggle="modal" data-bs-target="#staticBackdrop7">
-											<a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
-										</li>
-										<li data-bs-toggle="modal" data-bs-target="#staticBackdrop8">
-											<a class="dropdown-item"><i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
-										</li>
-									</ul>
-								</td>
-							</tr>
+							<?php
+							if (count($kgis) > 0) {
+								foreach ($kgis as $kgiId => $kgi) :
+
+							?>
+									<tr class="border-bottom-white2" id='<?= $kgiId ?>'>
+										<td class="over-blue"><?= $kgi["kgiName"] ?></td>
+										<td><?= $kgi["companyName"] ?></td>
+										<td><img src="<?= Yii::$app->homeUrl . $kgi['flag'] ?>" class="Flag-Turkey"> <?= $kgi["branch"] ?>, <?= $kgi["countryName"] ?></td>
+										<td></td>
+										<td class="text-center"><?= $kgi["priority"] ?></td>
+										<td>
+											<div class="flex mb-5 -space-x-4">
+												<img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
+												<img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
+												<img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
+												<a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
+											</div>
+										</td>
+										<td>
+											<span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users" aria-hidden="true"></i> <?= $kgi["countTeam"] ?></span>
+										</td>
+										<td><?= $kgi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?></td>
+										<td><?= $kgi["targetAmount"] ?></td>
+										<td>
+											<?= $kgi["code"] ?>
+										</td>
+										<td><?= $kgi["result"] ?></td>
+										<td>
+											<div id="progress1">
+												<div data-num="<?= $kgi["ratio"] ?>" class="progress-item1"></div>
+											</div>
+										</td>
+										<td><?= $kgi["month"] ?></td>
+										<td><?= $kgi["unit"] ?></td>
+										<td><?= $kgi["periodCheck"] ?></td>
+										<td><?= $kgi["nextCheck"] ?></td>
+										<td colspan="row">
+											<span data-bs-toggle="modal" data-bs-target="#exampleModalcomment"> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
+											<span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
+											<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+												<li data-bs-toggle="modal" data-bs-target="#staticBackdrop6">
+													<a class="dropdown-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+												</li>
+												<li data-bs-toggle="modal" data-bs-target="#staticBackdrop7">
+													<a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
+												</li>
+												<li data-bs-toggle="modal" data-bs-target="#staticBackdrop8">
+													<a class="dropdown-item"><i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
+												</li>
+											</ul>
+										</td>
+									</tr>
+							<?php
+								endforeach;
+							}
+							?>
 						</tbody>
-						<tbody>
-							<tr class="border-bottom-white2">
-								<td class="over-blue">Increase Something</td>
-								<td>TCF</td>
-								<td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
-								<td>The number of clients per employee by team</td>
-								<td class="text-center">A</td>
-								<td>
-									<div class="flex mb-5 -space-x-4">
-										<img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-										<img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-										<img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-										<a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-									</div>
-								</td>
-								<td>
-									<span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
-								</td>
-								<td>Quality</td>
-								<td>2.5</td>
-								<td>
-									>
-								</td>
-								<td>2.1</td>
-								<td>
-									<div id="progress1">
-										<div data-num="35" class="progress-item1"></div>
-									</div>
-								</td>
-								<td>January</td>
-								<td>Monthly</td>
-								<td>2nd Feb, 2023</td>
-								<td>23rd Feb, 2023</td>
-								<td colspan="row">
-									<span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
-									<span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-									<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-										<li><a class="dropdown-item" href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i></a></li>
-										<li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-										<li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
-									</ul>
-								</td>
-							</tr>
-						</tbody>
-						<tbody>
-							<tr class="border-bottom-white2">
-								<td class="over-blue">Increase Something</td>
-								<td>TCF</td>
-								<td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
-								<td>The number of clients per employee by team</td>
-								<td class="text-center">A</td>
-								<td>
-									<div class="flex mb-5 -space-x-4">
-										<img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-										<img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-										<img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-										<a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-									</div>
-								</td>
-								<td>
-									<span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
-								</td>
-								<td>Quality</td>
-								<td>2.5</td>
-								<td>
-									>
-								</td>
-								<td>2.1</td>
-								<td>
-									<div id="progress1">
-										<div data-num="35" class="progress-item1"></div>
-									</div>
-								</td>
-								<td>January</td>
-								<td>Monthly</td>
-								<td>2nd Feb, 2023</td>
-								<td>23rd Feb, 2023</td>
-								<td colspan="row">
-									<span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
-									<span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-									<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-										<li><a class="dropdown-item" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
-										<li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-										<li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
-									</ul>
-								</td>
-							</tr>
-						</tbody>
-						<tbody>
-							<tr class="border-bottom-white2">
-								<td class="over-blue">Increase Something</td>
-								<td>TCF</td>
-								<td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
-								<td>The number of clients per employee by team</td>
-								<td class="text-center">A</td>
-								<td>
-									<div class="flex mb-5 -space-x-4">
-										<img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-										<img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-										<img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-										<a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-									</div>
-								</td>
-								<td>
-									<span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
-								</td>
-								<td>Quality</td>
-								<td>2.5</td>
-								<td>
-									>
-								</td>
-								<td>2.1</td>
-								<td>
-									<div id="progress1">
-										<div data-num="35" class="progress-item1"></div>
-									</div>
-								</td>
-								<td>January</td>
-								<td>Monthly</td>
-								<td>2nd Feb, 2023</td>
-								<td>23rd Feb, 2023</td>
-								<td colspan="row">
-									<span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
-									<span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-									<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-										<li><a class="dropdown-item" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
-										<li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-										<li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
-									</ul>
-								</td>
-							</tr>
-						</tbody>
-						<tbody>
-							<tr class="border-bottom-white2">
-								<td class="over-blue">Increase Something</td>
-								<td>TCF</td>
-								<td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
-								<td>The number of clients per employee by team</td>
-								<td class="text-center">A</td>
-								<td>
-									<div class="flex mb-5 -space-x-4">
-										<img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-										<img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-										<img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-										<a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-									</div>
-								</td>
-								<td>
-									<span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
-								</td>
-								<td>Quality</td>
-								<td>2.5</td>
-								<td>
-									>
-								</td>
-								<td>2.1</td>
-								<td>
-									<div id="progress1">
-										<div data-num="35" class="progress-item1"></div>
-									</div>
-								</td>
-								<td>January</td>
-								<td>Monthly</td>
-								<td>2nd Feb, 2023</td>
-								<td>23rd Feb, 2023</td>
-								<td colspan="row">
-									<span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
-									<span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-									<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-										<li><a class="dropdown-item" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
-										<li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-										<li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
-									</ul>
-								</td>
-							</tr>
-						</tbody>
-						<tbody>
-							<tr class="border-bottom-white2">
-								<td class="over-blue">Increase Something</td>
-								<td>TCF</td>
-								<td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
-								<td>The number of clients per employee by team</td>
-								<td class="text-center">A</td>
-								<td>
-									<div class="flex mb-5 -space-x-4">
-										<img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-										<img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-										<img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-										<a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-									</div>
-								</td>
-								<td>
-									<span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
-								</td>
-								<td>Quality</td>
-								<td>2.5</td>
-								<td>
-									>
-								</td>
-								<td>2.1</td>
-								<td>
-									<div id="progress1">
-										<div data-num="35" class="progress-item1"></div>
-									</div>
-								</td>
-								<td>January</td>
-								<td>Monthly</td>
-								<td>2nd Feb, 2023</td>
-								<td>23rd Feb, 2023</td>
-								<td colspan="3">
-									<span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
-									<span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-									<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-										<li><a class="dropdown-item" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> </li>
-										<li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-										<li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
-									</ul>
-								</td>
-							</tr>
-						</tbody>
+
 					</table>
 				</div>
 			</div>
@@ -396,6 +188,27 @@ use yii\bootstrap5\ActiveForm;
 		'action' => Yii::$app->homeUrl . 'kgi/management/create-kgi'
 
 	]); ?>
-	<?= $this->render('create_modal') ?>
+	<?= $this->render('modal_create', [
+		"units" => $units,
+		"companies" => $companies,
+		"months" => $months
+	]) ?>
+	<?php ActiveForm::end(); ?>
+
+	<?php
+	$form = ActiveForm::begin([
+		'id' => 'create-kgi',
+		'method' => 'post',
+		'options' => [
+			'enctype' => 'multipart/form-data',
+		],
+		'action' => Yii::$app->homeUrl . 'kgi/management/update-kgi'
+
+	]); ?>
+	<?= $this->render('modal_update', [
+		"units" => $units,
+		"companies" => $companies,
+		"months" => $months
+	]) ?>
 	<?php ActiveForm::end(); ?>
 </div>

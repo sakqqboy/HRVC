@@ -3,7 +3,7 @@
 		<div class="modal-content">
 			<div class="modal-header" style="height: 90px;">
 				<h5 class="modal-title text-primary" id="staticBackdropLabel" style="margin-top:-20px;">
-					<i class="fa fa-magic" aria-hidden="true"></i> Create
+					<i class="fa fa-magic" aria-hidden="true"></i> Create KFI
 				</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin-top:-20px;"></button>
 
@@ -30,7 +30,6 @@
 									endforeach;
 								}
 								?>
-								<option value="1">Tokyo Consulting Firm Danışmanlık</option>
 
 							</select>
 						</div>

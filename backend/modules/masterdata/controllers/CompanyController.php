@@ -2,6 +2,7 @@
 
 namespace backend\modules\masterdata\controllers;
 
+use backend\models\hrvc\Branch;
 use backend\models\hrvc\Company;
 use Exception;
 use yii\web\Controller;
@@ -38,5 +39,14 @@ class CompanyController extends Controller
 			->asArray()
 			->one();
 		return json_encode($headQuater);
+	}
+	public function actionCompanyBranch($id)
+	{
+		$branches = [];
+		$branches = Branch::find()
+			->select('branchId,branchName')
+			->where(["companyId" => $id, "status" => 1])
+			->asArray()->all();
+		return json_encode($branches);
 	}
 }
