@@ -51,13 +51,13 @@ $this->title = 'KPI';
                                             <div class="row">
                                                 <div class="col-lg-6 col-md-6 col-6">
                                                     <div class="col-12">
-                                                        <label for="exampleFormControlInput1" class="form-label"><strong class="red">*</strong> Company KGI Contents</label>
-                                                        <input type="text" class="form-control" placeholder="">
+                                                        <label for="exampleFormControlInput1" class="form-label"><strong class="red">*</strong> Company KPI Contents</label>
+                                                        <input type="text" class="form-control">
                                                     </div>
                                                     <div class="col-12 pt-5">
                                                         <label for="input" class="form-label"><strong class="red">*</strong> Company (Single)</label>
                                                         <select class="form-select" aria-label="Default select example">
-                                                            <option selected>Select Company</option>
+                                                            <option selected value="">Select Company</option>
                                                             <option value="1">Tokyo Consulting Firm Danışmanlık</option>
                                                             <option value="2">Tokyo Consulting Firm Pvt. Ltd.</option>
                                                             <option value="3">Tokyo Consulting Firm PLC</option>
@@ -68,7 +68,7 @@ $this->title = 'KPI';
                                                     <div class="col-12 pt-5">
                                                         <label for="input" class="form-label"><strong class="red">*</strong> Branch (Single)</label>
                                                         <select class="form-select" aria-label="Default select example">
-                                                            <option selected>Select Branch</option>
+                                                            <option selected value="">Select Branch</option>
                                                             <option value="1">Branch 1</option>
                                                             <option value="2">Branch 2</option>
                                                             <option value="3">Branch 3</option>
@@ -90,13 +90,13 @@ $this->title = 'KPI';
                                                             <label for="input" class="form-label"><strong class="red">*</strong> Select Period</label>
                                                             <div class="input-group">
                                                                 <span class="input-group-text font-size-12"><i class="fa fa-calendar-o" aria-hidden="true"></i> &nbsp;&nbsp; Date</span>
-                                                                <input type="date" aria-label="" class="form-control font-size-12">
+                                                                <input type="date" class="form-control font-size-12">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-12 pt-5">
                                                         <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Target Amount</label>
-                                                        <input type="text" class="form-control font-size-13" placeholder="">
+                                                        <input type="number" class="form-control font-size-13 text-end">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-6">
@@ -108,7 +108,7 @@ $this->title = 'KPI';
                                                         <div class="col-lg-6 col-md-6 col-6 pt-10">
                                                             <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Quant Ratio</label>
                                                             <select class="form-select font-size-13" aria-label="Default select example">
-                                                                <option selected>Quantity or Quality</option>
+                                                                <option selected value="">Quantity or Quality</option>
                                                                 <option value="1">January</option>
                                                                 <option value="2">June</option>
                                                                 <option value="3">July</option>
@@ -117,7 +117,7 @@ $this->title = 'KPI';
                                                         <div class="col-lg-6 col-md-6 col-6 pt-10">
                                                             <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Priority</label>
                                                             <select class="form-select font-size-13" aria-label="Default select example">
-                                                                <option selected>A/B/C</option>
+                                                                <option selected value="">A/B/C</option>
                                                                 <option value="1"></option>
                                                                 <option value="2"></option>
                                                                 <option value="3"></option>
@@ -163,7 +163,7 @@ $this->title = 'KPI';
                                                         </div>
                                                         <div class="col-12">
                                                             <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Result</label>
-                                                            <input type="text" class="form-control font-size-13" placeholder="">
+                                                            <input type="number" class="form-control font-size-13 text-end">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -702,7 +702,7 @@ $this->title = 'KPI';
                         <div class="col-12 pt-5">
                             <label for="input" class="form-label"><strong class="red">*</strong> Company (Single)</label>
                             <select class="form-select" aria-label="Default select example">
-                                <option selected>Select Company</option>
+                                <option selected value="">Select Company</option>
                                 <option value="1">Tokyo Consulting Firm Danışmanlık</option>
                                 <option value="2">Tokyo Consulting Firm Pvt. Ltd.</option>
                                 <option value="3">Tokyo Consulting Firm PLC</option>
@@ -713,7 +713,7 @@ $this->title = 'KPI';
                         <div class="col-12 pt-5">
                             <label for="input" class="form-label"><strong class="red">*</strong> Branch (Single)</label>
                             <select class="form-select" aria-label="Default select example">
-                                <option selected>Select Branch</option>
+                                <option selected value="">Select Branch</option>
                                 <option value="1">Branch 1</option>
                                 <option value="2">Branch 2</option>
                                 <option value="3">Branch 3</option>
@@ -754,7 +754,7 @@ $this->title = 'KPI';
                         </div>
                         <div class="col-12 pt-5">
                             <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Target Amount</label>
-                            <input type="text" class="form-control font-size-13" placeholder="">
+                            <input type="number" class="form-control font-size-13 text-end">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-6">
@@ -766,7 +766,7 @@ $this->title = 'KPI';
                             <div class="col-lg-6 col-md-6 col-6 pt-10">
                                 <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Quant Ratio</label>
                                 <select class="form-select font-size-13" aria-label="Default select example">
-                                    <option selected>Quantity or Quality</option>
+                                    <option selected value="">Quantity or Quality</option>
                                     <option value="1">January</option>
                                     <option value="2">June</option>
                                     <option value="3">July</option>
@@ -775,7 +775,7 @@ $this->title = 'KPI';
                             <div class="col-lg-6 col-md-6 col-6 pt-10">
                                 <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Priority</label>
                                 <select class="form-select font-size-13" aria-label="Default select example">
-                                    <option selected>A/B/C</option>
+                                    <option selected value="">A/B/C</option>
                                     <option value="1"></option>
                                     <option value="2"></option>
                                     <option value="3"></option>
@@ -784,7 +784,7 @@ $this->title = 'KPI';
                             <div class="col-lg-6 col-md-6 col-6 pt-10">
                                 <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Amount Type</label>
                                 <select class="form-select font-size-13" aria-label="Default select example">
-                                    <option selected>% or Number</option>
+                                    <option selected value="">% or Number</option>
                                     <option value="1"></option>
                                     <option value="2"></option>
                                     <option value="3"></option>
@@ -793,7 +793,7 @@ $this->title = 'KPI';
                             <div class="col-lg-6 col-md-6 col-6 pt-10">
                                 <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Code</label>
                                 <select class="form-select font-size-13" aria-label="Default select example">
-                                    <option selected>
+                                    <option selected value="">
                                         <=>
                                     </option>
                                     <option value="1"></option>
@@ -804,7 +804,7 @@ $this->title = 'KPI';
                             <div class="col-lg-6 col-md-6 col-6 pt-10">
                                 <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Status</label>
                                 <select class="form-select font-size-13" aria-label="Default select example">
-                                    <option selected>Active/Finished</option>
+                                    <option selected value="">Active/Finished</option>
                                     <option value="1"></option>
                                     <option value="2"></option>
                                     <option value="3"></option>
@@ -813,7 +813,7 @@ $this->title = 'KPI';
                             <div class="col-lg-6 col-md-6 col-6 pt-10">
                                 <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Month</label>
                                 <select class="form-select font-size-13" aria-label="Default select example">
-                                    <option selected>Select Month</option>
+                                    <option selected value="">Select Month</option>
                                     <option value="1">January</option>
                                     <option value="2"></option>
                                     <option value="3"></option>
@@ -821,7 +821,7 @@ $this->title = 'KPI';
                             </div>
                             <div class="col-12">
                                 <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Result</label>
-                                <input type="text" class="form-control font-size-13" placeholder="">
+                                <input type="number" class="form-control font-size-13 text-end">
                             </div>
                         </div>
                     </div>
@@ -923,15 +923,12 @@ $this->title = 'KPI';
                                 <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                             </div>
                             <div class="col-12 million-number-Backdrop3">
-                                1000000
+                                <?= number_format(1000000) ?>
                             </div>
                         </div>
                         <div class="col-lg-1 col-md-6 col-3">
                             <div class="col-12 padding-mark-Backdrop3">
                                 >
-                            </div>
-                            <div class="col-12">
-
                             </div>
                         </div>
                         <div class="col-lg-2 cl-md-6 col-3">
@@ -939,7 +936,7 @@ $this->title = 'KPI';
                                 <i class="fa fa-trophy" aria-hidden="true"></i> Result
                             </div>
                             <div class="col-12 million-number-Backdrop3">
-                                1000000
+                                <?= number_format(902566) ?>
                             </div>
                         </div>
                         <div class="row">

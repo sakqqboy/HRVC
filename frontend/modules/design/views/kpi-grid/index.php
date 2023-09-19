@@ -43,31 +43,31 @@ $this->title = 'KPI Grid View';
                         <div class="input-group">
                             <span class="input-group-text"><i class="fa fa-filter" aria-hidden="true"></i></span>
                             <select class="form-select font-size-13" aria-label="Example select">
-                                <option selected>Company</option>
+                                <option selected value="">Company</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                             </select>
                             <select class="form-select font-size-13" aria-label="Example select">
-                                <option selected>Branch</option>
+                                <option selected value="">Branch</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                             </select>
                             <select class="form-select font-size-13" aria-label="Example select">
-                                <option selected>Month</option>
+                                <option selected value="">Month</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                             </select>
                             <select class="form-select font-size-13" aria-label="Example select">
-                                <option selected>Type</option>
+                                <option selected value="">Type</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                             </select>
                             <select class="form-select font-size-13" aria-label="Example select">
-                                <option selected>Status</option>
+                                <option selected value="">Status</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -176,7 +176,7 @@ $this->title = 'KPI Grid View';
                                                     <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                                                 </div>
                                                 <div class="col-12 target-million">
-                                                    1,000,000
+                                                    <?= number_format(1000000) ?>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -189,7 +189,7 @@ $this->title = 'KPI Grid View';
                                                     Result <i class="fa fa-trophy" aria-hidden="true"></i>
                                                 </div>
                                                 <div class="col-12 target-million">
-                                                    902,566
+                                                    <?= number_format(902566) ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -316,7 +316,7 @@ $this->title = 'KPI Grid View';
                                                     <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                                                 </div>
                                                 <div class="col-12 target-million">
-                                                    1,000,000
+                                                    <?= number_format(1000000) ?>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -329,7 +329,7 @@ $this->title = 'KPI Grid View';
                                                     Result <i class="fa fa-trophy" aria-hidden="true"></i>
                                                 </div>
                                                 <div class="col-12 target-million">
-                                                    902,566
+                                                    <?= number_format(902566) ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -400,12 +400,12 @@ $this->title = 'KPI Grid View';
                     <div class="col-lg-6 col-md-6 col-6">
                         <div class="col-12">
                             <label for="exampleFormControlInput1" class="form-label"><strong class="red">*</strong> Company KPI Contents</label>
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="text" class="form-control">
                         </div>
                         <div class="col-12 mt-20">
                             <label for="input" class="form-label"><strong class="red">*</strong> Company (Single)</label>
                             <select class="form-select" aria-label="Default select example">
-                                <option selected>Select Company</option>
+                                <option selected value="">Select Company</option>
                                 <option value="1">Tokyo Consulting Firm Danışmanlık</option>
                                 <option value="2">Tokyo Consulting Firm Pvt. Ltd.</option>
                                 <option value="3">Tokyo Consulting Firm PLC</option>
@@ -416,7 +416,7 @@ $this->title = 'KPI Grid View';
                         <div class="col-12 mt-20">
                             <label for="input" class="form-label"><strong class="red">*</strong> Branch (Single)</label>
                             <select class="form-select" aria-label="Default select example">
-                                <option selected>Select Branch</option>
+                                <option selected value="">Select Branch</option>
                                 <option value="1">Branch 1</option>
                                 <option value="2">Branch 2</option>
                                 <option value="3">Branch 3</option>
@@ -438,13 +438,13 @@ $this->title = 'KPI Grid View';
                                 <label for="input" class="form-label"><strong class="red">*</strong> Select Period</label>
                                 <div class="input-group">
                                     <span class="input-group-text font-size-12"><i class="fa fa-calendar-o" aria-hidden="true"></i> &nbsp;&nbsp; Date</span>
-                                    <input type="date" aria-label="" class="form-control font-size-12">
+                                    <input type="date" class="form-control font-size-12">
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 mt-10">
                             <label for="exampleFormControl" class="form-label font-size-14"><strong class="red">*</strong> Target Amount</label>
-                            <input type="text" class="form-control font-size-13" placeholder="">
+                            <input type="number" class="form-control font-size-13 text-end">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-6">
@@ -456,7 +456,7 @@ $this->title = 'KPI Grid View';
                             <div class="col-lg-6 col-md-6 col-6 pt-10">
                                 <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Quant Ratio</label>
                                 <select class="form-select font-size-13" aria-label="Default select example">
-                                    <option selected>Quantity or Quality</option>
+                                    <option selected value="">Quantity or Quality</option>
                                     <option value="1">January</option>
                                     <option value="2">June</option>
                                     <option value="3">July</option>
@@ -465,7 +465,7 @@ $this->title = 'KPI Grid View';
                             <div class="col-lg-6 col-md-6 col-6 pt-10">
                                 <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Priority</label>
                                 <select class="form-select font-size-13" aria-label="Default select example">
-                                    <option selected>A/B/C</option>
+                                    <option selected value="">A/B/C</option>
                                     <option value="1"></option>
                                     <option value="2"></option>
                                     <option value="3"></option>
@@ -474,7 +474,7 @@ $this->title = 'KPI Grid View';
                             <div class="col-lg-6 col-md-6 col-6 pt-10">
                                 <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Amount Type</label>
                                 <select class="form-select font-size-13" aria-label="Default select example">
-                                    <option selected>% or Number</option>
+                                    <option selected value="">% or Number</option>
                                     <option value="1"></option>
                                     <option value="2"></option>
                                     <option value="3"></option>
@@ -483,7 +483,7 @@ $this->title = 'KPI Grid View';
                             <div class="col-lg-6 col-md-6 col-6 pt-10">
                                 <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Code</label>
                                 <select class="form-select font-size-13" aria-label="Default select example">
-                                    <option selected>
+                                    <option selected value="">
                                         <=>
                                     </option>
                                     <option value="1"></option>
@@ -494,7 +494,7 @@ $this->title = 'KPI Grid View';
                             <div class="col-lg-6 col-md-6 col-6 pt-10">
                                 <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Status</label>
                                 <select class="form-select font-size-13" aria-label="Default select example">
-                                    <option selected>Active/Finished</option>
+                                    <option selected value="">Active/Finished</option>
                                     <option value="1"></option>
                                     <option value="2"></option>
                                     <option value="3"></option>
@@ -503,7 +503,7 @@ $this->title = 'KPI Grid View';
                             <div class="col-lg-6 col-md-6 col-6 pt-10">
                                 <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Month</label>
                                 <select class="form-select font-size-13" aria-label="Default select example">
-                                    <option selected>Select Month</option>
+                                    <option selected value="">Select Month</option>
                                     <option value="1">January</option>
                                     <option value="2"></option>
                                     <option value="3"></option>
@@ -511,7 +511,7 @@ $this->title = 'KPI Grid View';
                             </div>
                             <div class="col-12">
                                 <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Result</label>
-                                <input type="text" class="form-control font-size-13" placeholder="">
+                                <input type="number" class="form-control font-size-13 text-end">
                             </div>
                         </div>
                     </div>
@@ -521,7 +521,7 @@ $this->title = 'KPI Grid View';
                 </div>
                 <div class="col-12 pt-10">
                     <select class="form-select font-size-12 alert-primary-12 text-dark" aria-label="Default select example">
-                        <option selected>Use Custom Formula</option>
+                        <option selected value="">Use Custom Formula</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>

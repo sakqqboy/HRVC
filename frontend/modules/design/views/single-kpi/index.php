@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Employee KGI';
+$this->title = 'Single KGI';
 ?>
 
 <div class="col-12 mt-90">
@@ -26,21 +26,20 @@ $this->title = 'Employee KGI';
                 <li class="nav-item" role="presentation">
                     <a class="nav-link text-dark" id="pills-Action-tab" data-bs-toggle="pill" data-bs-target="#pills-Action" type="button" role="tab" aria-controls="pills-Action" aria-selected="false"><i class="fa fa-list-ul" aria-hidden="true"></i> Key Action Indicator</a>
                 </li>
+                <li class="nav-item presentation-end" role="presentation">
+                    <a class="nav-link text-dark" id="pills-Setting-tab" data-bs-toggle="pill" data-bs-target="#pills-Setting" type="button" role="tab" aria-controls="pills-Action" aria-selected="false"><i class="fa fa-cog" aria-hidden="true"></i> Assign</a>
+                </li>
             </ul>
         </div>
         <div class="alert alert-white-4">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-12 key1">
+                <div class="col-lg-5 col-md-6 col-12 key1">
                     <div class="row">
-                        <div class="col-md-4 key3">
-                            Key Goal Indicator
+                        <div class="col-7 key3">
+                            Key Performance Indicator
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-5">
                             <span class="badge rounded-pill  bg-secondary-bsc"><i class="fa fa-user" aria-hidden="true"></i> TAKASHASI SAN</span>
-                        </div>
-                        <div class="col-md-5 font-size-14">
-                            Tokyo Consulting Firm Limited
-                            <p><img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-employeekgi"> Dhaka, Bangladesh</p>
                         </div>
                     </div>
                 </div>
@@ -63,7 +62,7 @@ $this->title = 'Employee KGI';
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-12 New-date">
+                <div class="col-lg-4 col-md-6 col-12 New-date">
                     <div class="row">
                         <div class="col-8">
                             <div class="input-group">
@@ -84,8 +83,9 @@ $this->title = 'Employee KGI';
                 <table class="table table-striped">
                     <thead class="table-secondary">
                         <tr class="transform-none">
-                            <th>KGI Contents</th>
-                            <th>month</th>
+                            <th>KPI Contents</th>
+                            <th>Company</th>
+                            <th>Branch</th>
                             <th>Single KGI Contents &nbsp;&nbsp; <i class="fa fa-pencil-square-o" aria-hidden="true"></i></th>
                             <th>Priority</th>
                             <th>QR</th>
@@ -93,18 +93,20 @@ $this->title = 'Employee KGI';
                             <th>Code</th>
                             <th>result</th>
                             <th>ratio</th>
+                            <th>month</th>
                             <th>Unit</th>
                             <th>Last</th>
                             <th>next</th>
-                            <th colspan="row"></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="border-bottom-white2">
                             <td class="over-blue">Increase Something</td>
-                            <td>January</td>
+                            <td>TCF</td>
+                            <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
                             <td>The number of clients per employee by team</td>
-                            <td>A</td>
+                            <td class="text-center">A</td>
                             <td>Quality</td>
                             <td class="text-center">2.5</td>
                             <td class="text-center">
@@ -116,16 +118,14 @@ $this->title = 'Employee KGI';
                                     <div data-num="35" class="progress-item1"></div>
                                 </div>
                             </td>
+                            <td>January</td>
                             <td>Monthly</td>
                             <td>2nd Feb, 2023</td>
                             <td>23rd Feb, 2023</td>
                             <td colspan="row">
-                                <span data-bs-toggle="modal" data-bs-target="#exampleModalcomment4"> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
+                                <span data-bs-toggle="modal" data-bs-target="#exampleModalcomment3"> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
                                 <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li data-bs-toggle="modal" data-bs-target="#exampleModal4">
-                                        <a class="dropdown-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                    </li>
                                     <li data-bs-toggle="modal" data-bs-target="#exampleModal3">
                                         <a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                     </li>
@@ -139,9 +139,10 @@ $this->title = 'Employee KGI';
                     <tbody>
                         <tr class="border-bottom-white2">
                             <td class="over-blue">Increase Something</td>
-                            <td>January</td>
+                            <td>TCF</td>
+                            <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
                             <td>The number of clients per employee by team</td>
-                            <td>A</td>
+                            <td class="text-center">A</td>
                             <td>Quality</td>
                             <td class="text-center">2.5</td>
                             <td class="text-center">
@@ -153,6 +154,7 @@ $this->title = 'Employee KGI';
                                     <div data-num="35" class="progress-item1"></div>
                                 </div>
                             </td>
+                            <td>January</td>
                             <td>Monthly</td>
                             <td>2nd Feb, 2023</td>
                             <td>23rd Feb, 2023</td>
@@ -169,9 +171,10 @@ $this->title = 'Employee KGI';
                     <tbody>
                         <tr class="border-bottom-white2">
                             <td class="over-blue">Increase Something</td>
-                            <td>January</td>
+                            <td>TCF</td>
+                            <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
                             <td>The number of clients per employee by team</td>
-                            <td>A</td>
+                            <td class="text-center">A</td>
                             <td>Quality</td>
                             <td class="text-center">2.5</td>
                             <td class="text-center">
@@ -183,6 +186,7 @@ $this->title = 'Employee KGI';
                                     <div data-num="35" class="progress-item1"></div>
                                 </div>
                             </td>
+                            <td>January</td>
                             <td>Monthly</td>
                             <td>2nd Feb, 2023</td>
                             <td>23rd Feb, 2023</td>
@@ -199,9 +203,10 @@ $this->title = 'Employee KGI';
                     <tbody>
                         <tr class="border-bottom-white2">
                             <td class="over-blue">Increase Something</td>
-                            <td>January</td>
+                            <td>TCF</td>
+                            <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
                             <td>The number of clients per employee by team</td>
-                            <td>A</td>
+                            <td class="text-center">A</td>
                             <td>Quality</td>
                             <td class="text-center">2.5</td>
                             <td class="text-center">
@@ -213,6 +218,7 @@ $this->title = 'Employee KGI';
                                     <div data-num="35" class="progress-item1"></div>
                                 </div>
                             </td>
+                            <td>January</td>
                             <td>Monthly</td>
                             <td>2nd Feb, 2023</td>
                             <td>23rd Feb, 2023</td>
@@ -229,9 +235,10 @@ $this->title = 'Employee KGI';
                     <tbody>
                         <tr class="border-bottom-white2">
                             <td class="over-blue">Increase Something</td>
-                            <td>January</td>
+                            <td>TCF</td>
+                            <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
                             <td>The number of clients per employee by team</td>
-                            <td>A</td>
+                            <td class="text-center">A</td>
                             <td>Quality</td>
                             <td class="text-center">2.5</td>
                             <td class="text-center">
@@ -243,6 +250,7 @@ $this->title = 'Employee KGI';
                                     <div data-num="35" class="progress-item1"></div>
                                 </div>
                             </td>
+                            <td>January</td>
                             <td>Monthly</td>
                             <td>2nd Feb, 2023</td>
                             <td>23rd Feb, 2023</td>
@@ -259,9 +267,10 @@ $this->title = 'Employee KGI';
                     <tbody>
                         <tr class="border-bottom-white2">
                             <td class="over-blue">Increase Something</td>
-                            <td>January</td>
+                            <td>TCF</td>
+                            <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
                             <td>The number of clients per employee by team</td>
-                            <td>A</td>
+                            <td class="text-center">A</td>
                             <td>Quality</td>
                             <td class="text-center">2.5</td>
                             <td class="text-center">
@@ -273,6 +282,7 @@ $this->title = 'Employee KGI';
                                     <div data-num="35" class="progress-item1"></div>
                                 </div>
                             </td>
+                            <td>January</td>
                             <td>Monthly</td>
                             <td>2nd Feb, 2023</td>
                             <td>23rd Feb, 2023</td>
@@ -290,37 +300,107 @@ $this->title = 'Employee KGI';
             </div>
         </div>
     </div>
+    <div class="col-12 navigation-next">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link page-navigation" href="#"><i class="fa fa-chevron-left" aria-hidden="true"></i> Previous</a></li>
+                <li class="page-item"><a class="page-link page-navigation" href="#">1</a></li>
+                <li class="page-item"><a class="page-link page-navigation" href="#">2</a></li>
+                <li class="page-item"><a class="page-link page-navigation" href="#">3</a></li>
+                <li class="page-item"><a class="page-link page-navigation" href="#">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
+            </ul>
+        </nav>
+    </div>
 </div>
 
-<!-- modal comment employee kgi -->
-<div class="modal fade" id="exampleModalcomment4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+<!-- modal comment single kgi -->
+<div class="modal fade" id="exampleModalcomment3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <div class="modal-header" style="border: none;">
-                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-flag-o" aria-hidden="true"></i> <strong>The number of clients per employee</strong> </h5>
-                <div class="modal-title"> <strong>Tokyo Consulting Firm Limited</strong> </div>
+            <div class="modal-header" style="border-bottom:none;">
+                <div class="modal-title Modalfirstone" id="exampleModalcommentLabel"><i class="fa fa-clock-o" aria-hidden="true"></i> Work More and More</div>
+                <div class="modal-title Modalfirstone">Tokyo Consulting Firm Limited</div>
             </div>
-            <div class="col-12 padding-employee">Dhaka, Bangladesh <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="is-bangladresh3"></div>
+            <div class="fsm">Dhaka, Bangladesh <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="Round1"></div>
             <div class="modal-body">
-                <div class="col-12">
-                    <i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i> Report an Issue
-                </div>
-                <div class="col-12">
-                    <div class="card">
-                        <div class="col-12 line-height-employee">
-                            I am having a problem in this work, i can’t work It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                <ul class="nav nav-pills mb-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <a class="link-3" id="v-pills-Issues-tab" data-bs-toggle="pill" data-bs-target="#v-pills-Issues" type="button" role="tab" aria-controls="v-pills-Issues" aria-selected="true">Issues</a>
                         </div>
-                        <div class="col-12 mt-20">
-                            <input class="form-control">
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <a class="link-3" id="v-pills-History-tab" data-bs-toggle="pill" data-bs-target="#v-pills-History" type="button" role="tab" aria-controls="v-pills-History" aria-selected="false">History</a>
                         </div>
-                        <div class="row">
-                            <div class="col-2">
-                                <button type="file" class="btn cilp-send"> <i class="fa fa-paperclip" aria-hidden="true"></i></button>
+                    </div>
+                </ul>
+                <hr>
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="v-pills-Issues" role="tabpanel" aria-labelledby="v-pills-Issues-tab">
+                        <ul>
+                            <li class="li-circle">
+                                <img src="<?= Yii::$app->homeUrl ?>image/ehsan-small.png" class="image-circle1"><span class="li-name">Quazi Ehsan Hossain
+                                    <span class="Report-Issue"> May 31, 2023 <i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i> </span>
+                            </li>
+                            <div class="style-circle-li">
+                                <span> Hi Tani! Could you take quick look at these Landing Page designs? when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries
+                                    <p class="mt-20">Thanks so much!</p>
+                                </span>
                             </div>
-                            <div class="col-2">
-                                <button type="button" class="btn btn-secondary send-paper">Send</button>
+                            <div class="alert alert-secondary" style="border: none;margin-top: -30px;margin-left:20px;">
+                                <div class="row">
+                                    <div class="col-lg-7 col-md-6 col-12">
+                                        <span class="badge bg-white"> <img src="<?= Yii::$app->homeUrl ?>image/pdf.png" class="pdf-down"></span> <span class="text-dark"> 115 IHI July Invoice(Gunman) 30.July.2021.pdf <span class="text-secondary font-size-12"> 2.3mb</span></span>
+                                    </div>
+                                    <div class="col-lg-5 col-md-6 col-12 text-end">
+                                        <button class="btn btn-outline-secondary"> <i class="fa fa-eye" aria-hidden="true"></i></button>
+                                        <button class="btn btn-outline-secondary"> <i class="fa fa-cloud-download" aria-hidden="true"></i></button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                            </li>
+                            <li class="li-circle1">
+                                <div class="col-12 card-hashed">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-hashed">&nbsp; <span class="font-size-12">Tadawoki Watanabe</span>
+                                    <div class="col-12 problemm">
+                                        <span> Hi Tani! Could you take quick look at these Landing Page designs? when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries
+                                            <p class="mt-20">Thanks so much!</p>
+                                        </span>
+                                    </div>
+                                    <div class="col-12 mt-20">
+                                        <div class="input-group pr-20">
+                                            <input for class="form-control">
+                                            <a><i class="fa fa-paperclip clip-file" aria-hidden="true" type="file"></i></a>
+                                            <button class="btn btn-primary form-submitbotton" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> Submit</button>
+                                        </div>
+                                        <div class="mt-20"></div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-History" role="tabpanel" aria-labelledby="v-pills-History-tab">
+                        <ul>
+                            <li class="li-circle">
+                                <img src="<?= Yii::$app->homeUrl ?>image/ehsan-small.png" class="image-circle1"><span class="li-name">Quazi Ehsan Hossain
+                                    <span class="Report-Issue">2:56 PM, May 31, 2023</span>
+                            </li>
+                            <div class="style-circle-li">
+                                <span> Hi Tani! Could you take quick look at these Landing Page designs? when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries
+                                    <p class="mt-20">Thanks so much!</p>
+                                </span>
+                            </div>
+                            <div class="col-12 badge-pdf0">
+                                <span class="badge bg-light"> <img src="<?= Yii::$app->homeUrl ?>image/pdf.png" class="pdf-down"></span> <span class="text-dark"> 115 IHI July Invoice(Gunman) 30.July.2021.pdf 2.3mb</span>
+                            </div>
+                            <li class="li-circle">
+                                <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-hashed">&nbsp; <strong class="font-size-14 text-dark">Tadawoki Watanabe </strong>&nbsp; <span class="Report-Issue"> 2:56 PM, May 31, 2023</span>
+                                <div class="col-12 problemm">
+                                    <span> Hi Tani! Could you take quick look at these Landing Page designs? when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries
+                                        <p class="mt-20">Thanks so much!</p>
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -328,43 +408,6 @@ $this->title = 'Employee KGI';
     </div>
 </div>
 <!-- end -->
-
-
-<!-- modal edit employee kgi -->
-<div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header" style="border:none;">
-                <h5 class="modal-title text-primary" id="exampleModalLabel"><i class="fa fa-magic" aria-hidden="true"></i> Edit KGI</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="col-12 pl-20">
-                <i class="fa fa-flag-o" aria-hidden="true"></i> Key Goal Indicator
-            </div>
-            <div class="modal-body">
-                <div class="col-12">
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label"> <strong>Company KGI Contents</strong></label>
-                        <input class="form-control" type="text" value="The number of clients per employee" aria-label="The number of clients per employee" disabled readonly>
-                    </div>
-                </div>
-                <div class="col-12 mt-20">
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput2" class="form-label"> <strong>Single KGI Contents</strong></label>
-                        <input type="text" class="form-control" id="">
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer" style="border: none;">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Update</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end -->
-
-
-
 
 <!-- modal view single kgi -->
 <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -624,7 +667,7 @@ $this->title = 'Employee KGI';
 </div>
 <!-- end -->
 
-<!-- modal delete employee kgi -->
+<!-- modal delete single kgi -->
 <div class="modal fade" id="staticBackdrop11" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdrop11" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

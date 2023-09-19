@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Leader KGI Grid';
+$this->title = 'Single KPI Grid';
 ?>
 
 <div class="col-12 mt-90">
@@ -26,21 +26,20 @@ $this->title = 'Leader KGI Grid';
                 <li class="nav-item" role="presentation">
                     <a class="nav-link text-dark" id="pills-Action-tab" data-bs-toggle="pill" data-bs-target="#pills-Action" type="button" role="tab" aria-controls="pills-Action" aria-selected="false"><i class="fa fa-list-ul" aria-hidden="true"></i> Key Action Indicator</a>
                 </li>
+                <li class="nav-item presentation-end" role="presentation">
+                    <a class="nav-link text-dark" id="pills-Setting-tab" data-bs-toggle="pill" data-bs-target="#pills-Setting" type="button" role="tab" aria-controls="pills-Action" aria-selected="false"><i class="fa fa-cog" aria-hidden="true"></i> Assign</a>
+                </li>
             </ul>
         </div>
         <div class="alert alert-white-4">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-12 key1">
                     <div class="row">
-                        <div class="col-md-4 key3">
-                            Key Goal Indicator
+                        <div class="col-5 key3">
+                            Key Performance Indicator
                         </div>
-                        <div class="col-md-3">
-                            <span class="badge rounded-pill  bg-secondary-bsc"><i class="fa fa-user" aria-hidden="true"></i> TAKASHASI SAN</span>
-                        </div>
-                        <div class="col-md-5 font-size-14">
-                            Tokyo Consulting Firm Limited
-                            <p><img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-employeekgi"> Dhaka, Bangladesh</p>
+                        <div class="col-6">
+                            <span class="badge rounded-pill  bg-secondary-bsc"><i class="fa fa-users" aria-hidden="true"></i> Team A, Accounts & Taxation</span>
                         </div>
                     </div>
                 </div>
@@ -49,19 +48,13 @@ $this->title = 'Leader KGI Grid';
                         <div class="input-group">
                             <span class="input-group-text"><i class="fa fa-filter" aria-hidden="true"></i></span>
                             <select class="form-select font-size-13" aria-label="Example select">
-                                <option selected value="">Select Employee</option>
+                                <option selected value="">Month</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                             </select>
                             <select class="form-select font-size-13" aria-label="Example select">
-                                <option selected value="">Select Month</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
-                            <select class="form-select font-size-13" aria-label="Example select">
-                                <option selected value="">Select Status</option>
+                                <option selected value="">Status</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -147,6 +140,127 @@ $this->title = 'Leader KGI Grid';
                                             <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                                         </div>
                                         <div class="col-12 font-size-10 mt-10">
+                                            <strong> <?= number_format(1000000) ?> </strong>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="col-12 target-plush">
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="col-12 font-size-10 text-secondary">
+                                            Result <i class="fa fa-trophy" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="col-12 mt-10 font-size-10">
+                                            <strong> <?= number_format(1000000) ?> </strong>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-20">
+                                        <div class="progress">
+                                            <div class="progress-bar" style="width:18%;"></div>
+                                            <span class="badge rounded-pill  pro-load2">18%</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="col-12 text-success font-size-10">
+                                                    <i class="fa fa-refresh" aria-hidden="true"></i> Latest Update
+                                                </div>
+                                                <div class="col-12 font-size-10 pt-5" style="font-weight: 500;">
+                                                    Tue, Mar 12, 2023
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="col-12 text-primary font-size-10 text-end">
+                                                    Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="col-12 font-size-10 pt-5 text-end" style="font-weight: 500;">
+                                                    Tue, Mar 12, 2023
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 text-end mt-10">
+                                                <div class="col-12">
+                                                    <span class="badge rounded-pill bg-white">
+                                                        <div class="flex mb-5 -space-x-4">
+                                                            <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
+                                                            <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
+                                                            <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
+                                                            <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
+                                                        </div>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 text-end mt-10">
+                                                <button class="btn btn-outline-secondary font-size-10"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                                <button class="btn btn-outline-danger font-size-10"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-6 card card-radius">
+                        <div class="row">
+                            <div class="col-md-6 font-size-12">
+                                <i class="fa fa-flag" aria-hidden="true"></i> The Number Of Clients Per Employee
+                            </div>
+                            <div class="col-md-2">
+                                <span class="badge rounded-pill bg-warning text-dark">Completed</span>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="col-12">
+                                    <div class="flex-tokyo">
+                                        Tokyo Consulting Firm Limited
+                                    </div>
+                                    <p class="tokyo-ima"> <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-flex"> Dhaka, Bangladesh</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="col-12">
+                                    <span class="badge rounded-pill slds-badge">
+                                        Deadline <span class="text-dark font-size-10">: Mon,Feb 28,2024</span>
+                                    </span>
+                                </div>
+                                <div class="col-12 font-size-14 mt-10">
+                                    <strong> Single Content</strong>
+                                </div>
+                                <div class="col-12 font-size-12 mt-5">
+                                    <input type="text" class="form-control font-size-12" id="" value="This is a sample KGI content" style="border-radius: 2px;border:none;" aria-label="Disabled input example" disabled readonly>
+                                </div>
+                                <div class="col-12 font-size-13 mt-20">
+                                    Priority
+                                </div>
+                                <div class="col-12">
+                                    <div class="circle-update">A</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 solid-single">
+                                <div class="col-12 font-size-10 pt-5 text-secondary">
+                                    Quant Ratio
+                                </div>
+                                <div class="col-12 font-size-12">
+                                    <strong><i class="fa fa-diamond" aria-hidden="true"></i> Quality</strong>
+                                </div>
+                                <div class="col-12 mt-30 pl-40">
+                                    <strong class="text-secondary font-size-13">FEBRUARY</strong>
+                                </div>
+                                <div class="col-12 font-size-10 pt-30 text-secondary" style="width: 10rem;">
+                                    Update Interval
+                                </div>
+                                <div class="col-12 font-size-12">
+                                    <strong>Monthly</strong>
+                                </div>
+                            </div>
+                            <div class="col-md-5 solid-single1">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="col-12 font-size-10 text-secondary">
+                                            <i class="fa fa-bullseye" aria-hidden="true"></i> Target
+                                        </div>
+                                        <div class="col-12 font-size-10 mt-10">
                                             <strong> <?= number_format(1000000) ?></strong>
                                         </div>
                                     </div>
@@ -160,7 +274,7 @@ $this->title = 'Leader KGI Grid';
                                             Result <i class="fa fa-trophy" aria-hidden="true"></i>
                                         </div>
                                         <div class="col-12 mt-10 font-size-10">
-                                            <strong> <?= number_format(902566) ?> </strong>
+                                            <strong> <?= number_format(200000) ?> </strong>
                                         </div>
                                     </div>
                                     <div class="col-12 mt-20">
@@ -180,10 +294,10 @@ $this->title = 'Leader KGI Grid';
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="col-12 text-primary font-size-10">
+                                                <div class="col-12 text-primary font-size-10 text-end">
                                                     Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="col-12 font-size-10 pt-5" style="font-weight: 500;">
+                                                <div class="col-12 font-size-10 pt-5 text-end" style="font-weight: 500;">
                                                     Tue, Mar 12, 2023
                                                 </div>
                                             </div>
@@ -268,7 +382,7 @@ $this->title = 'Leader KGI Grid';
                                             <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                                         </div>
                                         <div class="col-12 font-size-10 mt-10">
-                                            <strong> 1,000,000</strong>
+                                            <strong><?= number_format(1000000) ?></strong>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -281,7 +395,7 @@ $this->title = 'Leader KGI Grid';
                                             Result <i class="fa fa-trophy" aria-hidden="true"></i>
                                         </div>
                                         <div class="col-12 mt-10 font-size-10">
-                                            <strong> 902,566 </strong>
+                                            <strong> <?= number_format(30000) ?> </strong>
                                         </div>
                                     </div>
                                     <div class="col-12 mt-20">
@@ -301,10 +415,10 @@ $this->title = 'Leader KGI Grid';
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="col-12 text-primary font-size-10">
+                                                <div class="col-12 text-primary font-size-10 text-end">
                                                     Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="col-12 font-size-10 pt-5" style="font-weight: 500;">
+                                                <div class="col-12 font-size-10 pt-5 text-end" style="font-weight: 500;">
                                                     Tue, Mar 12, 2023
                                                 </div>
                                             </div>
@@ -389,7 +503,7 @@ $this->title = 'Leader KGI Grid';
                                             <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                                         </div>
                                         <div class="col-12 font-size-10 mt-10">
-                                            <strong> 1,000,000</strong>
+                                            <strong> <?= number_format(2000000) ?></strong>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -402,7 +516,7 @@ $this->title = 'Leader KGI Grid';
                                             Result <i class="fa fa-trophy" aria-hidden="true"></i>
                                         </div>
                                         <div class="col-12 mt-10 font-size-10">
-                                            <strong> 902,566 </strong>
+                                            <strong> <?= number_format(320000) ?> </strong>
                                         </div>
                                     </div>
                                     <div class="col-12 mt-20">
@@ -422,131 +536,10 @@ $this->title = 'Leader KGI Grid';
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="col-12 text-primary font-size-10">
+                                                <div class="col-12 text-primary font-size-10 text-end">
                                                     Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="col-12 font-size-10 pt-5" style="font-weight: 500;">
-                                                    Tue, Mar 12, 2023
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 text-end mt-10">
-                                                <div class="col-12">
-                                                    <span class="badge rounded-pill bg-white">
-                                                        <div class="flex mb-5 -space-x-4">
-                                                            <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-                                                            <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-                                                            <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-                                                            <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-                                                        </div>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 text-end mt-10">
-                                                <button class="btn btn-outline-secondary font-size-10"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                                                <button class="btn btn-outline-danger font-size-10"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-6 card card-radius">
-                        <div class="row">
-                            <div class="col-md-6 font-size-12">
-                                <i class="fa fa-flag" aria-hidden="true"></i> The Number Of Clients Per Employee
-                            </div>
-                            <div class="col-md-2">
-                                <span class="badge rounded-pill bg-warning text-dark">Completed</span>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="col-12">
-                                    <div class="flex-tokyo">
-                                        Tokyo Consulting Firm Limited
-                                    </div>
-                                    <p class="tokyo-ima"> <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-flex"> Dhaka, Bangladesh</p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="col-12">
-                                    <span class="badge rounded-pill slds-badge">
-                                        Deadline <span class="text-dark font-size-10">: Mon,Feb 28,2024</span>
-                                    </span>
-                                </div>
-                                <div class="col-12 font-size-14 mt-10">
-                                    <strong> Single Content</strong>
-                                </div>
-                                <div class="col-12 font-size-12 mt-5">
-                                    <input type="text" class="form-control font-size-12" id="" value="This is a sample KGI content" style="border-radius: 2px;border:none;" aria-label="Disabled input example" disabled readonly>
-                                </div>
-                                <div class="col-12 font-size-13 mt-20">
-                                    Priority
-                                </div>
-                                <div class="col-12">
-                                    <div class="circle-update">A</div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 solid-single">
-                                <div class="col-12 font-size-10 pt-5 text-secondary">
-                                    Quant Ratio
-                                </div>
-                                <div class="col-12 font-size-12">
-                                    <strong><i class="fa fa-diamond" aria-hidden="true"></i> Quality</strong>
-                                </div>
-                                <div class="col-12 mt-30 pl-40">
-                                    <strong class="text-secondary font-size-13">FEBRUARY</strong>
-                                </div>
-                                <div class="col-12 font-size-10 pt-30 text-secondary" style="width: 10rem;">
-                                    Update Interval
-                                </div>
-                                <div class="col-12 font-size-12">
-                                    <strong>Monthly</strong>
-                                </div>
-                            </div>
-                            <div class="col-md-5 solid-single1">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="col-12 font-size-10 text-secondary">
-                                            <i class="fa fa-bullseye" aria-hidden="true"></i> Target
-                                        </div>
-                                        <div class="col-12 font-size-10 mt-10">
-                                            <strong> 1,000,000</strong>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="col-12 target-plush">
-                                            >
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="col-12 font-size-10 text-secondary">
-                                            Result <i class="fa fa-trophy" aria-hidden="true"></i>
-                                        </div>
-                                        <div class="col-12 mt-10 font-size-10">
-                                            <strong> 902,566 </strong>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 mt-20">
-                                        <div class="progress">
-                                            <div class="progress-bar" style="width:18%;"></div>
-                                            <span class="badge rounded-pill  pro-load2">18%</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="col-12 text-success font-size-10">
-                                                    <i class="fa fa-refresh" aria-hidden="true"></i> Latest Update
-                                                </div>
-                                                <div class="col-12 font-size-10 pt-5" style="font-weight: 500;">
-                                                    Tue, Mar 12, 2023
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="col-12 text-primary font-size-10">
-                                                    Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                                </div>
-                                                <div class="col-12 font-size-10 pt-5" style="font-weight: 500;">
+                                                <div class="col-12 font-size-10 pt-5 text-end" style="font-weight: 500;">
                                                     Tue, Mar 12, 2023
                                                 </div>
                                             </div>
