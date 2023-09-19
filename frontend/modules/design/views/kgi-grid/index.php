@@ -43,31 +43,31 @@ $this->title = 'KGI Grid View';
                         <div class="input-group">
                             <span class="input-group-text"><i class="fa fa-filter" aria-hidden="true"></i></span>
                             <select class="form-select font-size-13" aria-label="Example select">
-                                <option selected>Company</option>
+                                <option selected value="">Company</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                             </select>
                             <select class="form-select font-size-13" aria-label="Example select">
-                                <option selected>Branch</option>
+                                <option selected value="">Branch</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                             </select>
                             <select class="form-select font-size-13" aria-label="Example select">
-                                <option selected>Month</option>
+                                <option selected value="">Month</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                             </select>
                             <select class="form-select font-size-13" aria-label="Example select">
-                                <option selected>Type</option>
+                                <option selected value="">Type</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                             </select>
                             <select class="form-select font-size-13" aria-label="Example select">
-                                <option selected>Status</option>
+                                <option selected value="">Status</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
