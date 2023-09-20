@@ -5,9 +5,9 @@ namespace frontend\modules\design\controllers;
 use yii\web\Controller;
 
 /**
- * Default KpiGridController for the `designfront` module
+ * Default controller for the `designfront` module
  */
-class LeaderGridController extends Controller
+class LeaderKpiController extends Controller
 {
     /**
      * Renders the index view for the module

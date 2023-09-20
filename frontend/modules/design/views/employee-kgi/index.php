@@ -7,9 +7,9 @@ $this->title = 'Employee KGI';
         <div class="col-lg-8 col-md-8 col-8">
             <i class="fa fa-tachometer font-size-20" aria-hidden="true"></i> <strong class="font-size-20"> Performance Indicator Matrices (PIM)</strong>
         </div>
-        <div class="col-lg-4 col-md-4 col-4 view-goback text-end">
+        <!-- <div class="col-lg-4 col-md-4 col-4 view-goback text-end">
             <i class="fa fa-caret-left" aria-hidden="true"></i> Go Back
-        </div>
+        </div> -->
     </div>
     <div class="col-12 mt-20">
         <div class="alert alert2-secondary2">

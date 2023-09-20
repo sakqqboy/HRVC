@@ -99,7 +99,7 @@ $this->title = 'KPI Grid View';
                             <div class="col-12 card card-radius">
                                 <div class="row">
                                     <div class="col-lg-4 col-md-6 col-12 clients-employee">
-                                        <i class="fa fa-flag" aria-hidden="true"></i> The Number Of Clients Per Employee
+                                        <i class="fa fa-tachometer" aria-hidden="true"></i> The Number Of Clients Per Employee
                                     </div>
                                     <div class="col-lg-1 col-md-6 col-12">
                                         <span class="badge rounded-pill bg-warning text-dark">Completed</span>
@@ -212,7 +212,7 @@ $this->title = 'KPI Grid View';
                                                 <div class="col-12 pencil-nextupdate">
                                                     Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="col-12 font-size-12 pt-5" style="font-weight: 700;">
+                                                <div class="col-12 font-size-12 pt-5 text-end" style="font-weight: 700;">
                                                     Tue, Mar 12, 2023
                                                 </div>
                                             </div>
@@ -239,7 +239,7 @@ $this->title = 'KPI Grid View';
                             <div class="col-12 card card-radius">
                                 <div class="row">
                                     <div class="col-lg-4 col-md-6 col-12 clients-employee">
-                                        <i class="fa fa-flag" aria-hidden="true"></i> The Number Of Clients Per Employee
+                                        <i class="fa fa-tachometer" aria-hidden="true"></i> The Number Of Clients Per Employee
                                     </div>
                                     <div class="col-lg-1 col-md-6 col-12">
                                         <span class="badge rounded-pill bg-warning text-dark">Completed</span>
@@ -352,7 +352,7 @@ $this->title = 'KPI Grid View';
                                                 <div class="col-12 pencil-nextupdate">
                                                     Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="col-12 font-size-12 pt-5" style="font-weight: 700;">
+                                                <div class="col-12 font-size-12 pt-5 text-end" style="font-weight: 700;">
                                                     Tue, Mar 12, 2023
                                                 </div>
                                             </div>

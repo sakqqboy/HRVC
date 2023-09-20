@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Leader KGI Grid';
+$this->title = 'Leader KPI Grid';
 ?>
 
 <div class="col-12 mt-90">
@@ -91,7 +91,7 @@ $this->title = 'Leader KGI Grid';
                     <div class="col-lg-6 col-md-6 col-6 card card-radius">
                         <div class="row">
                             <div class="col-md-6 font-size-12">
-                                <i class="fa fa-flag" aria-hidden="true"></i> The Number Of Clients Per Employee
+                                <strong> <i class="fa fa-tachometer" aria-hidden="true"></i> The Number Of Clients Per Employee</strong>
                             </div>
                             <div class="col-md-2">
                                 <span class="badge rounded-pill bg-warning text-dark">Completed</span>
@@ -111,7 +111,7 @@ $this->title = 'Leader KGI Grid';
                                     </span>
                                 </div>
                                 <div class="col-12 font-size-14 mt-10">
-                                    <strong> Single Content</strong>
+                                    <strong> Team Content</strong>
                                 </div>
                                 <div class="col-12 font-size-12 mt-5">
                                     <input type="text" class="form-control font-size-12" id="" value="This is a sample KGI content" style="border-radius: 2px;border:none;" aria-label="Disabled input example" disabled readonly>
@@ -180,10 +180,10 @@ $this->title = 'Leader KGI Grid';
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="col-12 text-primary font-size-10">
+                                                <div class="col-12 text-primary font-size-10 text-end">
                                                     Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="col-12 font-size-10 pt-5" style="font-weight: 500;">
+                                                <div class="col-12 font-size-10 pt-5 text-end" style="font-weight: 500;">
                                                     Tue, Mar 12, 2023
                                                 </div>
                                             </div>
@@ -212,7 +212,7 @@ $this->title = 'Leader KGI Grid';
                     <div class="col-lg-6 col-md-6 col-6 card card-radius">
                         <div class="row">
                             <div class="col-md-6 font-size-12">
-                                <i class="fa fa-flag" aria-hidden="true"></i> The Number Of Clients Per Employee
+                                <strong> <i class="fa fa-tachometer" aria-hidden="true"></i> The Number Of Clients Per Employee</strong>
                             </div>
                             <div class="col-md-2">
                                 <span class="badge rounded-pill bg-warning text-dark">Completed</span>
@@ -232,7 +232,7 @@ $this->title = 'Leader KGI Grid';
                                     </span>
                                 </div>
                                 <div class="col-12 font-size-14 mt-10">
-                                    <strong> Single Content</strong>
+                                    <strong> Team Content</strong>
                                 </div>
                                 <div class="col-12 font-size-12 mt-5">
                                     <input type="text" class="form-control font-size-12" id="" value="This is a sample KGI content" style="border-radius: 2px;border:none;" aria-label="Disabled input example" disabled readonly>
@@ -268,7 +268,7 @@ $this->title = 'Leader KGI Grid';
                                             <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                                         </div>
                                         <div class="col-12 font-size-10 mt-10">
-                                            <strong> 1,000,000</strong>
+                                            <strong> <?= number_format(1230000) ?></strong>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -281,7 +281,7 @@ $this->title = 'Leader KGI Grid';
                                             Result <i class="fa fa-trophy" aria-hidden="true"></i>
                                         </div>
                                         <div class="col-12 mt-10 font-size-10">
-                                            <strong> 902,566 </strong>
+                                            <strong> <?= number_format(458000) ?> </strong>
                                         </div>
                                     </div>
                                     <div class="col-12 mt-20">
@@ -301,10 +301,10 @@ $this->title = 'Leader KGI Grid';
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="col-12 text-primary font-size-10">
+                                                <div class="col-12 text-primary font-size-10 text-end">
                                                     Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="col-12 font-size-10 pt-5" style="font-weight: 500;">
+                                                <div class="col-12 font-size-10 pt-5 text-end" style="font-weight: 500;">
                                                     Tue, Mar 12, 2023
                                                 </div>
                                             </div>
@@ -333,7 +333,7 @@ $this->title = 'Leader KGI Grid';
                     <div class="col-lg-6 col-md-6 col-6 card card-radius">
                         <div class="row">
                             <div class="col-md-6 font-size-12">
-                                <i class="fa fa-flag" aria-hidden="true"></i> The Number Of Clients Per Employee
+                                <strong> <i class="fa fa-tachometer" aria-hidden="true"></i> The Number Of Clients Per Employee</strong>
                             </div>
                             <div class="col-md-2">
                                 <span class="badge rounded-pill bg-warning text-dark">Completed</span>
@@ -353,7 +353,7 @@ $this->title = 'Leader KGI Grid';
                                     </span>
                                 </div>
                                 <div class="col-12 font-size-14 mt-10">
-                                    <strong> Single Content</strong>
+                                    <strong> Team Content</strong>
                                 </div>
                                 <div class="col-12 font-size-12 mt-5">
                                     <input type="text" class="form-control font-size-12" id="" value="This is a sample KGI content" style="border-radius: 2px;border:none;" aria-label="Disabled input example" disabled readonly>
@@ -389,7 +389,7 @@ $this->title = 'Leader KGI Grid';
                                             <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                                         </div>
                                         <div class="col-12 font-size-10 mt-10">
-                                            <strong> 1,000,000</strong>
+                                            <strong> <?= number_format(5000000) ?></strong>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -402,7 +402,7 @@ $this->title = 'Leader KGI Grid';
                                             Result <i class="fa fa-trophy" aria-hidden="true"></i>
                                         </div>
                                         <div class="col-12 mt-10 font-size-10">
-                                            <strong> 902,566 </strong>
+                                            <strong> <?= number_format(454000) ?> </strong>
                                         </div>
                                     </div>
                                     <div class="col-12 mt-20">
@@ -422,10 +422,10 @@ $this->title = 'Leader KGI Grid';
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="col-12 text-primary font-size-10">
+                                                <div class="col-12 text-primary font-size-10 text-end">
                                                     Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="col-12 font-size-10 pt-5" style="font-weight: 500;">
+                                                <div class="col-12 font-size-10 pt-5 text-end" style="font-weight: 500;">
                                                     Tue, Mar 12, 2023
                                                 </div>
                                             </div>
@@ -454,7 +454,7 @@ $this->title = 'Leader KGI Grid';
                     <div class="col-lg-6 col-md-6 col-6 card card-radius">
                         <div class="row">
                             <div class="col-md-6 font-size-12">
-                                <i class="fa fa-flag" aria-hidden="true"></i> The Number Of Clients Per Employee
+                                <strong> <i class="fa fa-tachometer" aria-hidden="true"></i> The Number Of Clients Per Employee</strong>
                             </div>
                             <div class="col-md-2">
                                 <span class="badge rounded-pill bg-warning text-dark">Completed</span>
@@ -474,7 +474,7 @@ $this->title = 'Leader KGI Grid';
                                     </span>
                                 </div>
                                 <div class="col-12 font-size-14 mt-10">
-                                    <strong> Single Content</strong>
+                                    <strong> Team Content</strong>
                                 </div>
                                 <div class="col-12 font-size-12 mt-5">
                                     <input type="text" class="form-control font-size-12" id="" value="This is a sample KGI content" style="border-radius: 2px;border:none;" aria-label="Disabled input example" disabled readonly>
@@ -510,7 +510,7 @@ $this->title = 'Leader KGI Grid';
                                             <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                                         </div>
                                         <div class="col-12 font-size-10 mt-10">
-                                            <strong> 1,000,000</strong>
+                                            <strong> <?= number_format(1200000) ?></strong>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -523,7 +523,7 @@ $this->title = 'Leader KGI Grid';
                                             Result <i class="fa fa-trophy" aria-hidden="true"></i>
                                         </div>
                                         <div class="col-12 mt-10 font-size-10">
-                                            <strong> 902,566 </strong>
+                                            <strong> <?= number_format(925000) ?> </strong>
                                         </div>
                                     </div>
                                     <div class="col-12 mt-20">
@@ -543,10 +543,10 @@ $this->title = 'Leader KGI Grid';
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="col-12 text-primary font-size-10">
+                                                <div class="col-12 text-primary font-size-10 text-end">
                                                     Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="col-12 font-size-10 pt-5" style="font-weight: 500;">
+                                                <div class="col-12 font-size-10 pt-5 text-end" style="font-weight: 500;">
                                                     Tue, Mar 12, 2023
                                                 </div>
                                             </div>

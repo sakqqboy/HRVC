@@ -229,7 +229,7 @@ $this->title = 'KFI Grid View';
                                                     <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                                                 </div>
                                                 <div class="col-12 million-number">
-                                                    1,000,000
+                                                    <?= number_format(1000000) ?>
                                                 </div>
                                             </div>
                                             <div class="col-lg-1 col-md-6 col-3">
@@ -242,7 +242,7 @@ $this->title = 'KFI Grid View';
                                                     <i class="fa fa-trophy" aria-hidden="true"></i> Result
                                                 </div>
                                                 <div class="col-12 million-number">
-                                                    902,566
+                                                    <?= number_format(6524000) ?>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -258,8 +258,8 @@ $this->title = 'KFI Grid View';
                                                 <div class="col-lg-6 col-md-6 col-6">
                                                     <div class="col-12">
                                                         <div class="progress">
-                                                            <div class="progress-bar" style="width:18%; background:#2F80ED;"></div>
-                                                            <span class="badge rounded-pill  pro-load0">18%</span>
+                                                            <div class="progress-bar" style="width:50%; background:#2F80ED;"></div>
+                                                            <span class="badge rounded-pill  pro-load0">50.99</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -271,9 +271,8 @@ $this->title = 'KFI Grid View';
                                                     <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima">
                                                 </div>
                                                 <div class="col-lg-8 text-end">
-                                                    <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-12">Tue,Mar 12,2023</strong>
+                                                    <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-13" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-11">Tue,Mar 12,2023</strong>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
@@ -329,7 +328,7 @@ $this->title = 'KFI Grid View';
                                                     <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                                                 </div>
                                                 <div class="col-12 million-number">
-                                                    1,000,000
+                                                    <?= number_format(2000000) ?>
                                                 </div>
                                             </div>
                                             <div class="col-lg-1 col-md-6 col-3">
@@ -342,7 +341,7 @@ $this->title = 'KFI Grid View';
                                                     <i class="fa fa-trophy" aria-hidden="true"></i> Result
                                                 </div>
                                                 <div class="col-12 million-number">
-                                                    902,566
+                                                    <?= number_format(985000) ?>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -358,8 +357,8 @@ $this->title = 'KFI Grid View';
                                                 <div class="col-lg-6 col-md-6 col-6">
                                                     <div class="col-12">
                                                         <div class="progress">
-                                                            <div class="progress-bar" style="width:25%; background:#2F80ED;"></div>
-                                                            <span class="badge rounded-pill  pro-load0">25%</span>
+                                                            <div class="progress-bar" style="width:35%; background:#2F80ED;"></div>
+                                                            <span class="badge rounded-pill  pro-load0">35%</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -371,7 +370,7 @@ $this->title = 'KFI Grid View';
                                                     <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima">
                                                 </div>
                                                 <div class="col-lg-8 text-end">
-                                                    <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-12">Tue,Mar 12,2023</strong>
+                                                    <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-13" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-11">Tue,Mar 12,2023</strong>
                                                 </div>
 
                                             </div>
@@ -429,7 +428,7 @@ $this->title = 'KFI Grid View';
                                                     <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                                                 </div>
                                                 <div class="col-12 million-number">
-                                                    1,000,000
+                                                    <?= number_format(2450000) ?>
                                                 </div>
                                             </div>
                                             <div class="col-lg-1 col-md-6 col-3">
@@ -442,7 +441,7 @@ $this->title = 'KFI Grid View';
                                                     <i class="fa fa-trophy" aria-hidden="true"></i> Result
                                                 </div>
                                                 <div class="col-12 million-number">
-                                                    902,566
+                                                    <?= number_format(230000) ?>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -471,7 +470,7 @@ $this->title = 'KFI Grid View';
                                                     <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima">
                                                 </div>
                                                 <div class="col-lg-8 text-end">
-                                                    <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-12">Tue,Mar 12,2023</strong>
+                                                    <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-13" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-11">Tue,Mar 12,2023</strong>
                                                 </div>
                                             </div>
                                         </div>
@@ -570,7 +569,7 @@ $this->title = 'KFI Grid View';
                                                     <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima">
                                                 </div>
                                                 <div class="col-lg-8 text-end">
-                                                    <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-12">Tue,Mar 12,2023</strong>
+                                                    <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-13" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-11">Tue,Mar 12,2023</strong>
                                                 </div>
 
                                             </div>
@@ -670,7 +669,7 @@ $this->title = 'KFI Grid View';
                                                     <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima">
                                                 </div>
                                                 <div class="col-lg-8 text-end">
-                                                    <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-12">Tue,Mar 12,2023</strong>
+                                                    <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-13" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-11">Tue,Mar 12,2023</strong>
                                                 </div>
                                             </div>
                                         </div>
@@ -769,7 +768,7 @@ $this->title = 'KFI Grid View';
                                                     <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima">
                                                 </div>
                                                 <div class="col-lg-8 text-end">
-                                                    <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-12">Tue,Mar 12,2023</strong>
+                                                    <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-13" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-11">Tue,Mar 12,2023</strong>
                                                 </div>
                                             </div>
                                         </div>
@@ -868,7 +867,7 @@ $this->title = 'KFI Grid View';
                                                     <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima">
                                                 </div>
                                                 <div class="col-lg-8 text-end">
-                                                    <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-12">Tue,Mar 12,2023</strong>
+                                                    <span class="next-update-span"> <i class="fa fa-pencil-square-o font-size-13" aria-hidden="true"></i> Next Update </span> &nbsp; <strong class="font-size-11">Tue,Mar 12,2023</strong>
                                                 </div>
 
                                             </div>

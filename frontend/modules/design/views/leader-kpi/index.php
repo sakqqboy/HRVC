@@ -1,5 +1,5 @@
 <?php
-$this->title = 'TeamLeader KGI';
+$this->title = 'TeamLeader KPI';
 ?>
 
 <div class="col-12 mt-90">
@@ -27,6 +27,9 @@ $this->title = 'TeamLeader KGI';
                     <li class="nav-item" role="presentation">
                         <a class="nav-link text-dark" id="pills-Action-tab" data-bs-toggle="pill" data-bs-target="#pills-Action" type="button" role="tab" aria-controls="pills-Action" aria-selected="false"><i class="fa fa-list-ul" aria-hidden="true"></i> Key Action Indicator</a>
                     </li>
+                    <li class="nav-item presentation-end" role="presentation">
+                        <a class="nav-link text-dark" id="pills-Setting-tab" data-bs-toggle="pill" data-bs-target="#pills-Setting" type="button" role="tab" aria-controls="pills-Action" aria-selected="false"><i class="fa fa-cog" aria-hidden="true"></i> Assign</a>
+                    </li>
                 </ul>
             </div>
             <div class="alert alert-white-4">
@@ -34,7 +37,7 @@ $this->title = 'TeamLeader KGI';
                     <div class="col-lg-6 col-md-6 col-12 key1">
                         <div class="row">
                             <div class="col-md-4 key3">
-                                Key Goal Indicator
+                                Key Performance Indicator
                             </div>
                             <div class="col-md-3">
                                 <span class="badge rounded-pill  bg-secondary-bsc"><i class="fa fa-user" aria-hidden="true"></i> TAKASHASI SAN</span>
@@ -91,9 +94,9 @@ $this->title = 'TeamLeader KGI';
                     <table class="table table-striped">
                         <thead class="table-secondary">
                             <tr class="transform-none">
-                                <th>KGI Contents</th>
-                                <th>Single KGI contents <i class="fa fa-pencil-square-o" aria-hidden="true"></i></th>
-                                <th>Team KGI Contents <i class="fa fa-pencil-square-o" aria-hidden="true"></i></th>
+                                <th>KGP Contents</th>
+                                <th>Single KPI contents <i class="fa fa-pencil-square-o" aria-hidden="true"></i></th>
+                                <th>Team KPI Contents <i class="fa fa-pencil-square-o" aria-hidden="true"></i></th>
                                 <th>Priority</th>
                                 <th>Employees</th>
                                 <th>QR</th>
@@ -469,7 +472,7 @@ $this->title = 'TeamLeader KGI';
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header" style="border:none;">
-                <h5 class="modal-title text-primary" id="exampleModalLabel"><i class="fa fa-magic" aria-hidden="true"></i> Edit KGI</h5>
+                <h5 class="modal-title text-primary" id="exampleModalLabel"><i class="fa fa-magic" aria-hidden="true"></i> Edit KPI</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="col-12 pl-20">
@@ -478,20 +481,20 @@ $this->title = 'TeamLeader KGI';
             <div class="modal-body">
                 <div class="col-12">
                     <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label"> <strong>Company KGI Contents</strong></label>
+                        <label for="exampleFormControlInput1" class="form-label"> <strong>Company KPI Contents</strong></label>
                         <input class="form-control" type="text" value="The number of clients per employee" aria-label="The number of clients per employee" disabled readonly>
                     </div>
                 </div>
 
                 <div class="col-12 mt-20">
                     <div class="mb-3">
-                        <label for="exampleFormControlInput2" class="form-label"> <strong>Single KGI Contents</strong></label>
+                        <label for="exampleFormControlInput2" class="form-label"> <strong>Single KPI Contents</strong></label>
                         <input type="text" class="form-control" id="">
                     </div>
                 </div>
                 <div class="col-12 mt-20">
                     <div class="mb-3">
-                        <label for="exampleFormControlInput3" class="form-label"> <strong>Team KGI Contents</strong></label>
+                        <label for="exampleFormControlInput3" class="form-label"> <strong>Team KPI Contents</strong></label>
                         <input type="text" class="form-control" id="">
                     </div>
                 </div>
@@ -510,7 +513,7 @@ $this->title = 'TeamLeader KGI';
         <div class="modal-content">
             <div class="modal-header" style="border-bottom:none;">
                 <div class="modal-title Modalfirstone" id="exampleModalLabel"><i class="fa fa-flag-o" aria-hidden="true"></i> Increase Something</div>
-                <div class="modal-title"> Team KGI Contents</div>
+                <div class="modal-title"> Team KPI Contents</div>
                 <div class="modal-title circle-update-team"> A</div>
                 <div class="modal-title badge rounded-pill bg-warning text-dark font-size-14">Completed</div>
             </div>
@@ -562,7 +565,7 @@ $this->title = 'TeamLeader KGI';
                                 <i class="fa fa-trophy" aria-hidden="true"></i> Achieved/Actual
                             </div>
                             <div class="col-12 million-number-Backdrop3">
-                                <?= number_format(509544) ?>
+                                <?= number_format(906566) ?>
                             </div>
                         </div>
                         <div class="row">
