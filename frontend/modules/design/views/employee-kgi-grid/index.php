@@ -174,10 +174,10 @@ $this->title = 'Employee grid';
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="col-12 text-primary font-size-10">
+                                                <div class="col-12 text-primary font-size-10 text-end">
                                                     Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="col-12 font-size-10 pt-5" style="font-weight: 500;">
+                                                <div class="col-12 font-size-10 pt-5 text-end" style="font-weight: 500;">
                                                     Tue, Mar 12, 2023
                                                 </div>
                                             </div>
@@ -295,10 +295,10 @@ $this->title = 'Employee grid';
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="col-12 text-primary font-size-10">
+                                                <div class="col-12 text-primary font-size-10 text-end">
                                                     Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="col-12 font-size-10 pt-5" style="font-weight: 500;">
+                                                <div class="col-12 font-size-10 pt-5 text-end" style="font-weight: 500;">
                                                     Tue, Mar 12, 2023
                                                 </div>
                                             </div>
@@ -416,10 +416,10 @@ $this->title = 'Employee grid';
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="col-12 text-primary font-size-10">
+                                                <div class="col-12 text-primary font-size-10 text-end">
                                                     Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="col-12 font-size-10 pt-5" style="font-weight: 500;">
+                                                <div class="col-12 font-size-10 pt-5 text-end" style="font-weight: 500;">
                                                     Tue, Mar 12, 2023
                                                 </div>
                                             </div>
@@ -537,10 +537,10 @@ $this->title = 'Employee grid';
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="col-12 text-primary font-size-10">
+                                                <div class="col-12 text-primary font-size-10 text-end">
                                                     Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="col-12 font-size-10 pt-5" style="font-weight: 500;">
+                                                <div class="col-12 font-size-10 pt-5 text-end" style="font-weight: 500;">
                                                     Tue, Mar 12, 2023
                                                 </div>
                                             </div>

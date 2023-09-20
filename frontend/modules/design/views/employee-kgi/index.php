@@ -120,16 +120,16 @@ $this->title = 'Employee KGI';
                             <td>2nd Feb, 2023</td>
                             <td>23rd Feb, 2023</td>
                             <td colspan="row">
-                                <span data-bs-toggle="modal" data-bs-target="#exampleModalcomment4"> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
+                                <span data-bs-toggle="modal" data-bs-target="#exampleModalcomment1"> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
                                 <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li data-bs-toggle="modal" data-bs-target="#exampleModal4">
+                                    <li data-bs-toggle="modal" data-bs-target="#exampleModalEditkgi3">
                                         <a class="dropdown-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                     </li>
-                                    <li data-bs-toggle="modal" data-bs-target="#exampleModal3">
+                                    <li data-bs-toggle="modal" data-bs-target="#exampleModalViewkgi3">
                                         <a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                     </li>
-                                    <li data-bs-toggle="modal" data-bs-target="#staticBackdrop11">
+                                    <li data-bs-toggle="modal" data-bs-target="#staticBackdropdelete">
                                         <a class="dropdown-item"><i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
                                     </li>
                                 </ul>
@@ -293,11 +293,11 @@ $this->title = 'Employee KGI';
 </div>
 
 <!-- modal comment employee kgi -->
-<div class="modal fade" id="exampleModalcomment4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModalcomment1" tabindex="-1" aria-labelledby="exampleModalcomment1Label" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header" style="border: none;">
-                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-flag-o" aria-hidden="true"></i> <strong>The number of clients per employee</strong> </h5>
+                <h5 class="modal-title" id="exampleModalcomment1Label"><i class="fa fa-flag-o" aria-hidden="true"></i> <strong>The number of clients per employee</strong> </h5>
                 <div class="modal-title"> <strong>Tokyo Consulting Firm Limited</strong> </div>
             </div>
             <div class="col-12 padding-employee">Dhaka, Bangladesh <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="is-bangladresh3"></div>
@@ -331,11 +331,11 @@ $this->title = 'Employee KGI';
 
 
 <!-- modal edit employee kgi -->
-<div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModalEditkgi3" tabindex="-1" aria-labelledby="exampleModalEditkgi3Label" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header" style="border:none;">
-                <h5 class="modal-title text-primary" id="exampleModalLabel"><i class="fa fa-magic" aria-hidden="true"></i> Edit KGI</h5>
+                <h5 class="modal-title text-primary" id="exampleModalEditkgi3Label"><i class="fa fa-magic" aria-hidden="true"></i> Edit KGI</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="col-12 pl-20">
@@ -367,11 +367,11 @@ $this->title = 'Employee KGI';
 
 
 <!-- modal view single kgi -->
-<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModalViewkgi3" tabindex="-1" aria-labelledby="exampleModalViewkgi3Label" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom:none;">
-                <div class="modal-title Modalfirstone" id="exampleModalLabel"><i class="fa fa-flag-o" aria-hidden="true"></i> Increase Something</div>
+                <div class="modal-title Modalfirstone" id="exampleModalViewkgi3Label"><i class="fa fa-flag-o" aria-hidden="true"></i> Increase Something</div>
                 <div class="modal-title"> Single KGI Contents</div>
                 <div class="modal-title circle-update-team"> A</div>
                 <div class="modal-title badge rounded-pill bg-warning text-dark font-size-14">Completed</div>
@@ -625,7 +625,7 @@ $this->title = 'Employee KGI';
 <!-- end -->
 
 <!-- modal delete employee kgi -->
-<div class="modal fade" id="staticBackdrop11" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdrop11" aria-hidden="true">
+<div class="modal fade" id="staticBackdropdelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropdelete" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom:none;">

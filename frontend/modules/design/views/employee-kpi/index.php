@@ -43,7 +43,7 @@ $this->title = 'Employee KPI';
                             <p><img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-employeekgi"> Dhaka, Bangladesh</p>
                         </div>
                         <div class="col-md-3">
-                            <button type="button" class="btn btn-primary font-size-12" data-bs-toggle="modal" data-bs-target="#staticBackdropCreatekpi"><i class="fa fa-magic" aria-hidden="true"></i> Create New KPI</button>
+                            <button type="button" class="btn btn-primary font-size-12" data-bs-toggle="modal" data-bs-target="#staticBackdropCreatekpi1"><i class="fa fa-magic" aria-hidden="true"></i> Create New KPI</button>
                         </div>
                     </div>
                 </div>
@@ -123,16 +123,16 @@ $this->title = 'Employee KPI';
                             <td>2nd Feb, 2023</td>
                             <td>23rd Feb, 2023</td>
                             <td colspan="row">
-                                <span data-bs-toggle="modal" data-bs-target="#exampleModalcomment4"> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
+                                <span data-bs-toggle="modal" data-bs-target="#exampleModalcomment3"> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
                                 <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li data-bs-toggle="modal" data-bs-target="#exampleModal4">
+                                    <li data-bs-toggle="modal" data-bs-target="#exampleModalEditkpi2">
                                         <a class="dropdown-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                     </li>
-                                    <li data-bs-toggle="modal" data-bs-target="#exampleModal3">
+                                    <li data-bs-toggle="modal" data-bs-target="#exampleModalViewkpi4">
                                         <a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                     </li>
-                                    <li data-bs-toggle="modal" data-bs-target="#staticBackdrop11">
+                                    <li data-bs-toggle="modal" data-bs-target="#staticBackdropdelete1">
                                         <a class="dropdown-item"><i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
                                     </li>
                                 </ul>
@@ -297,11 +297,11 @@ $this->title = 'Employee KPI';
 
 
 <!-- modal createkpi -->
-<div class="modal fade" id="staticBackdropCreatekpi" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropCreatekpi" aria-hidden="true">
+<div class="modal fade" id="staticBackdropCreatekpi1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropCreatekpi1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-primary" id="staticBackdrop"><i class="fa fa-magic" aria-hidden="true"></i> Create KPI</h5>
+                <h5 class="modal-title text-primary" id="staticBackdropCreatekpi1"><i class="fa fa-magic" aria-hidden="true"></i> Create KPI</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="col-12" style="margin-top: -20px; padding-left:20px; font-size: 13px;">
@@ -485,7 +485,7 @@ $this->title = 'Employee KPI';
 
 
 <!-- modal comment employee kgi -->
-<div class="modal fade" id="exampleModalcomment4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModalcomment3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header" style="border: none;">
@@ -523,11 +523,11 @@ $this->title = 'Employee KPI';
 
 
 <!-- modal edit employee kpi -->
-<div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModalEditkpi2" tabindex="-1" aria-labelledby="exampleModalEditkpi2Label" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header" style="border:none;">
-                <h5 class="modal-title text-primary" id="exampleModalLabel"><i class="fa fa-magic" aria-hidden="true"></i> Edit KPI</h5>
+                <h5 class="modal-title text-primary" id="exampleModalEditkpi2Label"><i class="fa fa-magic" aria-hidden="true"></i> Edit KPI</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="col-12 pl-20">
@@ -559,11 +559,11 @@ $this->title = 'Employee KPI';
 
 
 <!-- modal view single kpi -->
-<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModalViewkpi4" tabindex="-1" aria-labelledby="exampleModalViewkpi4Label" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom:none;">
-                <div class="modal-title Modalfirstone" id="exampleModalLabel"><i class="fa fa-tachometer" aria-hidden="true"></i>Increase Something</div>
+                <div class="modal-title Modalfirstone" id="exampleModalViewkpi4Label"><i class="fa fa-tachometer" aria-hidden="true"></i>Increase Something</div>
                 <div class="modal-title"> Single KPI Contents</div>
                 <div class="modal-title circle-update-team"> A</div>
                 <div class="modal-title badge rounded-pill bg-warning text-dark font-size-14">Completed</div>
@@ -817,7 +817,7 @@ $this->title = 'Employee KPI';
 <!-- end -->
 
 <!-- modal delete employee kgi -->
-<div class="modal fade" id="staticBackdrop11" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdrop11" aria-hidden="true">
+<div class="modal fade" id="staticBackdropdelete1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropdelete1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom:none;">
