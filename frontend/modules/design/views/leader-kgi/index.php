@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Team KPI';
+$this->title = 'TeamLeader KGI';
 ?>
 
 <div class="col-12 mt-90">
@@ -27,53 +27,42 @@ $this->title = 'Team KPI';
                     <li class="nav-item" role="presentation">
                         <a class="nav-link text-dark" id="pills-Action-tab" data-bs-toggle="pill" data-bs-target="#pills-Action" type="button" role="tab" aria-controls="pills-Action" aria-selected="false"><i class="fa fa-list-ul" aria-hidden="true"></i> Key Action Indicator</a>
                     </li>
-                    <li class="nav-item presentation-end" role="presentation">
-                        <a class="nav-link text-dark" id="pills-Setting-tab" data-bs-toggle="pill" data-bs-target="#pills-Setting" type="button" role="tab" aria-controls="pills-Action" aria-selected="false"><i class="fa fa-cog" aria-hidden="true"></i> Assign</a>
-                    </li>
                 </ul>
             </div>
             <div class="alert alert-white-4">
                 <div class="row">
-                    <div class="col-lg-4 col-md-6 col-12 key1">
+                    <div class="col-lg-6 col-md-6 col-12 key1">
                         <div class="row">
-                            <div class="col-5 key3">
-                                Key Performance Indicator
+                            <div class="col-md-4 key3">
+                                Key Goal Indicator
                             </div>
-                            <div class="col-6">
-                                <span class="badge rounded-pill  bg-secondary-bsc"><i class="fa fa-users" aria-hidden="true"></i> Team A, Accounts & Taxation</span>
+                            <div class="col-md-3">
+                                <span class="badge rounded-pill  bg-secondary-bsc"><i class="fa fa-user" aria-hidden="true"></i> TAKASHASI SAN</span>
+                            </div>
+                            <div class="col-md-5 font-size-14">
+                                Tokyo Consulting Firm Limited
+                                <p><img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-employeekgi"> Dhaka, Bangladesh</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-5 col-md-12 col-12 New-KFI">
+                    <div class="col-lg-3 col-md-12 col-12 New-KFI">
                         <div class="col-12">
                             <div class="input-group">
                                 <span class="input-group-text"><i class="fa fa-filter" aria-hidden="true"></i></span>
                                 <select class="form-select font-size-13" aria-label="Example select">
-                                    <option selected value="">Branch</option>
+                                    <option selected value="">Select Employee</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                 </select>
                                 <select class="form-select font-size-13" aria-label="Example select">
-                                    <option selected value="">Company</option>
+                                    <option selected value="">Select Month</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                 </select>
                                 <select class="form-select font-size-13" aria-label="Example select">
-                                    <option selected value="">Employee</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                </select>
-                                <select class="form-select font-size-13" aria-label="Example select">
-                                    <option selected value="">Month</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                </select>
-                                <select class="form-select font-size-13" aria-label="Example select">
-                                    <option selected value="">Status</option>
+                                    <option selected value="">Select Status</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -89,7 +78,7 @@ $this->title = 'Team KPI';
                                     <input type="date" class="form-control font-size-13" name="birthday" id="">
                                 </div>
                             </div>
-                            <div class="col-4 new-light-4">
+                            <div class="col-4 new-light-4 text-end">
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                     <button type="button" class="btn btn-outline-primary font-size-13"><i class="fa fa-list-ul" aria-hidden="true"></i></button>
                                     <button type="button" class="btn btn-outline-primary font-size-13"><i class="fa fa-th-large" aria-hidden="true"></i></button>
@@ -102,18 +91,17 @@ $this->title = 'Team KPI';
                     <table class="table table-striped">
                         <thead class="table-secondary">
                             <tr class="transform-none">
-                                <th>KPI Contents</th>
-                                <th>Company</th>
-                                <th>Branch</th>
-                                <th>Team KPI Contents &nbsp;<i class="fa fa-pencil-square-o" aria-hidden="true"></i></th>
+                                <th>KGI Contents</th>
+                                <th>Single KGI contents <i class="fa fa-pencil-square-o" aria-hidden="true"></i></th>
+                                <th>Team KGI Contents <i class="fa fa-pencil-square-o" aria-hidden="true"></i></th>
                                 <th>Priority</th>
                                 <th>Employees</th>
                                 <th>QR</th>
+                                <th>month</th>
                                 <th>target</th>
                                 <th>Code</th>
                                 <th>result</th>
                                 <th>ratio</th>
-                                <th>month</th>
                                 <th>Unit</th>
                                 <th>Last</th>
                                 <th>next</th>
@@ -123,8 +111,7 @@ $this->title = 'Team KPI';
                         <tbody>
                             <tr class="border-bottom-white2">
                                 <td class="over-blue">Increase Something</td>
-                                <td>TCF</td>
-                                <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
+                                <td>The number of clients per employee by team</td>
                                 <td>The number of clients per employee by team</td>
                                 <td class="text-center">A</td>
                                 <td>
@@ -136,6 +123,7 @@ $this->title = 'Team KPI';
                                     </div>
                                 </td>
                                 <td>Quality</td>
+                                <td>January</td>
                                 <td>2.5</td>
                                 <td>
                                     >
@@ -146,18 +134,21 @@ $this->title = 'Team KPI';
                                         <div data-num="35" class="progress-item1"></div>
                                     </div>
                                 </td>
-                                <td>January</td>
                                 <td>Monthly</td>
                                 <td>2nd Feb, 2023</td>
                                 <td>23rd Feb, 2023</td>
-                                <td colspan="row">
-                                    <span data-bs-toggle="modal" data-bs-target="#exampleModalcomment2"> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
-                                    <span class="dropdown menulink" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
+                                <td class="text-end">
+                                    <span data-bs-toggle="modal" data-bs-target="#exampleModalcomment"> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
+                                    <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <li data-bs-toggle="modal" data-bs-target="#exampleModalViewkpi3">
+
+                                        <li data-bs-toggle="modal" data-bs-target="#exampleModalEditkgi4">
+                                            <a class="dropdown-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                        </li>
+                                        <li data-bs-toggle="modal" data-bs-target="#exampleModalViewkgi3">
                                             <a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                         </li>
-                                        <li data-bs-toggle="modal" data-bs-target="#staticBackdropdelete1">
+                                        <li data-bs-toggle="modal" data-bs-target="#staticBackdropdelete">
                                             <a class="dropdown-item"><i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
                                         </li>
                                     </ul>
@@ -167,8 +158,7 @@ $this->title = 'Team KPI';
                         <tbody>
                             <tr class="border-bottom-white2">
                                 <td class="over-blue">Increase Something</td>
-                                <td>TCF</td>
-                                <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
+                                <td>The number of clients per employee by team</td>
                                 <td>The number of clients per employee by team</td>
                                 <td class="text-center">A</td>
                                 <td>
@@ -180,6 +170,7 @@ $this->title = 'Team KPI';
                                     </div>
                                 </td>
                                 <td>Quality</td>
+                                <td>January</td>
                                 <td>2.5</td>
                                 <td>
                                     >
@@ -190,11 +181,10 @@ $this->title = 'Team KPI';
                                         <div data-num="35" class="progress-item1"></div>
                                     </div>
                                 </td>
-                                <td>January</td>
                                 <td>Monthly</td>
                                 <td>2nd Feb, 2023</td>
                                 <td>23rd Feb, 2023</td>
-                                <td colspan="row">
+                                <td class="text-end">
                                     <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
                                     <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -207,11 +197,10 @@ $this->title = 'Team KPI';
                         <tbody>
                             <tr class="border-bottom-white2">
                                 <td class="over-blue">Increase Something</td>
-                                <td>TCF</td>
-                                <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
+                                <td>The number of clients per employee by team</td>
                                 <td>The number of clients per employee by team</td>
                                 <td class="text-center">A</td>
-                                <td>
+                                <td class="text-center">
                                     <div class="flex mb-5 -space-x-4">
                                         <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
                                         <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
@@ -220,6 +209,7 @@ $this->title = 'Team KPI';
                                     </div>
                                 </td>
                                 <td>Quality</td>
+                                <td>January</td>
                                 <td>2.5</td>
                                 <td>
                                     >
@@ -230,11 +220,10 @@ $this->title = 'Team KPI';
                                         <div data-num="35" class="progress-item1"></div>
                                     </div>
                                 </td>
-                                <td>January</td>
                                 <td>Monthly</td>
                                 <td>2nd Feb, 2023</td>
                                 <td>23rd Feb, 2023</td>
-                                <td colspan="row">
+                                <td class="text-end">
                                     <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
                                     <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -247,8 +236,7 @@ $this->title = 'Team KPI';
                         <tbody>
                             <tr class="border-bottom-white2">
                                 <td class="over-blue">Increase Something</td>
-                                <td>TCF</td>
-                                <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
+                                <td>The number of clients per employee by team</td>
                                 <td>The number of clients per employee by team</td>
                                 <td class="text-center">A</td>
                                 <td>
@@ -260,6 +248,7 @@ $this->title = 'Team KPI';
                                     </div>
                                 </td>
                                 <td>Quality</td>
+                                <td>January</td>
                                 <td>2.5</td>
                                 <td>
                                     >
@@ -270,11 +259,10 @@ $this->title = 'Team KPI';
                                         <div data-num="35" class="progress-item1"></div>
                                     </div>
                                 </td>
-                                <td>January</td>
                                 <td>Monthly</td>
                                 <td>2nd Feb, 2023</td>
                                 <td>23rd Feb, 2023</td>
-                                <td colspan="row">
+                                <td class="text-end">
                                     <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
                                     <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -287,8 +275,7 @@ $this->title = 'Team KPI';
                         <tbody>
                             <tr class="border-bottom-white2">
                                 <td class="over-blue">Increase Something</td>
-                                <td>TCF</td>
-                                <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
+                                <td>The number of clients per employee by team</td>
                                 <td>The number of clients per employee by team</td>
                                 <td class="text-center">A</td>
                                 <td>
@@ -300,6 +287,7 @@ $this->title = 'Team KPI';
                                     </div>
                                 </td>
                                 <td>Quality</td>
+                                <td>January</td>
                                 <td>2.5</td>
                                 <td>
                                     >
@@ -310,11 +298,10 @@ $this->title = 'Team KPI';
                                         <div data-num="35" class="progress-item1"></div>
                                     </div>
                                 </td>
-                                <td>January</td>
                                 <td>Monthly</td>
                                 <td>2nd Feb, 2023</td>
                                 <td>23rd Feb, 2023</td>
-                                <td colspan="row">
+                                <td class="text-end">
                                     <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
                                     <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -327,8 +314,7 @@ $this->title = 'Team KPI';
                         <tbody>
                             <tr class="border-bottom-white2">
                                 <td class="over-blue">Increase Something</td>
-                                <td>TCF</td>
-                                <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
+                                <td>The number of clients per employee by team</td>
                                 <td>The number of clients per employee by team</td>
                                 <td class="text-center">A</td>
                                 <td>
@@ -340,6 +326,7 @@ $this->title = 'Team KPI';
                                     </div>
                                 </td>
                                 <td>Quality</td>
+                                <td>January</td>
                                 <td>2.5</td>
                                 <td>
                                     >
@@ -350,11 +337,10 @@ $this->title = 'Team KPI';
                                         <div data-num="35" class="progress-item1"></div>
                                     </div>
                                 </td>
-                                <td>January</td>
                                 <td>Monthly</td>
                                 <td>2nd Feb, 2023</td>
                                 <td>23rd Feb, 2023</td>
-                                <td colspan="3">
+                                <td class="text-end">
                                     <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
                                     <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -382,9 +368,8 @@ $this->title = 'Team KPI';
     </div>
 </div>
 
-
-<!-- modal comment kpi -->
-<div class="modal fade" id="exampleModalcomment3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- modal comment teamleader kgi -->
+<div class="modal fade" id="exampleModalcomment" tabindex="-1" aria-labelledby="exampleModalcommentLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom:none;">
@@ -479,14 +464,53 @@ $this->title = 'Team KPI';
 </div>
 <!-- end -->
 
+<!-- modal edit KGI -->
+<div class="modal fade" id="exampleModalEditkgi4" tabindex="-1" aria-labelledby="exampleModalEditkgi4Label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="border:none;">
+                <h5 class="modal-title text-primary" id="exampleModalEditkgi4Label"><i class="fa fa-magic" aria-hidden="true"></i> Edit KGI</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="col-12 pl-20">
+                <i class="fa fa-flag-o" aria-hidden="true"></i> Key Goal Indicator
+            </div>
+            <div class="modal-body">
+                <div class="col-12">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label"> <strong>Company KGI Contents</strong></label>
+                        <input class="form-control" type="text" value="The number of clients per employee" aria-label="The number of clients per employee" disabled readonly>
+                    </div>
+                </div>
 
-<!-- modal view single kgi -->
-<div class="modal fade" id="exampleModalViewkpi3" tabindex="-1" aria-labelledby="exampleModalViewkpi3Label" aria-hidden="true">
+                <div class="col-12 mt-20">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput2" class="form-label"> <strong>Single KGI Contents</strong></label>
+                        <input type="text" class="form-control" id="">
+                    </div>
+                </div>
+                <div class="col-12 mt-20">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput3" class="form-label"> <strong>Team KGI Contents</strong></label>
+                        <input type="text" class="form-control" id="">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border: none;">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal edit KGI -->
+
+<!-- modal view Team KGI -->
+<div class="modal fade" id="exampleModalViewkgi3" tabindex="-1" aria-labelledby="exampleModalViewkgi3Label" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom:none;">
-                <div class="modal-title Modalfirstone" id="exampleModalViewkpi3Label"><i class="fa fa-flag-o" aria-hidden="true"></i> Increase Something</div>
-                <div class="modal-title"> Team KPI Contents</div>
+                <div class="modal-title Modalfirstone" id="exampleModalViewkgi3Label"><i class="fa fa-flag-o" aria-hidden="true"></i> Increase Something</div>
+                <div class="modal-title"> Team KGI Contents</div>
                 <div class="modal-title circle-update-team"> A</div>
                 <div class="modal-title badge rounded-pill bg-warning text-dark font-size-14">Completed</div>
             </div>
@@ -502,7 +526,7 @@ $this->title = 'Team KPI';
                 <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="is-bangladresh2"> Dhaka, Bangladesh
             </div>
             <div class="san">
-                <span class="badge rounded-pill  bg-secondary-bsc text-secondary text-white"><i class="fa fa-users" aria-hidden="true"></i> Team A, Accounts & Taxation</span>
+                <span class="badge rounded-pill  bg-secondary-bsc text-secondary text-white"><i class="fa fa-user" aria-hidden="true"></i> TAKASHASI SAN</span>
             </div>
             <div class="modal-body mt-20">
                 <div class="col-12 dashed-Backdrop3">
@@ -538,7 +562,7 @@ $this->title = 'Team KPI';
                                 <i class="fa fa-trophy" aria-hidden="true"></i> Achieved/Actual
                             </div>
                             <div class="col-12 million-number-Backdrop3">
-                                <?= number_format(902566) ?>
+                                <?= number_format(509544) ?>
                             </div>
                         </div>
                         <div class="row">
@@ -851,10 +875,11 @@ $this->title = 'Team KPI';
         </div>
     </div>
 </div>
-<!-- end -->
+<!-- end modal Team KGI -->
+
 
 <!-- modal KGI delete -->
-<div class="modal fade" id="staticBackdropdelete1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropdelete1" aria-hidden="true">
+<div class="modal fade" id="staticBackdropdelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropdelete" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom:none;">

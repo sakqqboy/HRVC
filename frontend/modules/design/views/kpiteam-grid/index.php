@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Single KGI Grid';
+$this->title = 'KPI Team Grid';
 ?>
 
 <div class="col-12 mt-90">
@@ -33,13 +33,13 @@ $this->title = 'Single KGI Grid';
         </div>
         <div class="alert alert-white-4">
             <div class="row">
-                <div class="col-lg-4 col-md-6 col-12 key1">
+                <div class="col-lg-5 col-md-6 col-12 key1">
                     <div class="row">
-                        <div class="col-5 key3">
-                            Key Goal Indicator
+                        <div class="col-md-6 key3">
+                            Key Performance Indicator
                         </div>
-                        <div class="col-6">
-                            <span class="badge rounded-pill  bg-secondary-bsc"><i class="fa fa-user" aria-hidden="true"></i> TAKASHASI SAN</span>
+                        <div class="col-md-5">
+                            <span class="badge rounded-pill  bg-secondary-bsc"><i class="fa fa-users" aria-hidden="true"></i> Team A, Accounts & Taxation</span>
                         </div>
                     </div>
                 </div>
@@ -48,13 +48,31 @@ $this->title = 'Single KGI Grid';
                         <div class="input-group">
                             <span class="input-group-text"><i class="fa fa-filter" aria-hidden="true"></i></span>
                             <select class="form-select font-size-13" aria-label="Example select">
-                                <option selected value="">Month</option>
+                                <option selected value="">Select Employee</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                             </select>
                             <select class="form-select font-size-13" aria-label="Example select">
-                                <option selected value="">Status</option>
+                                <option selected value="">Select Month</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                            <select class="form-select font-size-13" aria-label="Example select">
+                                <option selected value="">Select Status</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                            <select class="form-select font-size-13" aria-label="Example select">
+                                <option selected value="">Select Status</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                            <select class="form-select font-size-13" aria-label="Example select">
+                                <option selected value="">Select Status</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -62,7 +80,7 @@ $this->title = 'Single KGI Grid';
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-12 New-date">
+                <div class="col-lg-3 col-md-6 col-12 New-date">
                     <div class="row">
                         <div class="col-8">
                             <div class="input-group">
@@ -104,7 +122,7 @@ $this->title = 'Single KGI Grid';
                                     </span>
                                 </div>
                                 <div class="col-12 font-size-14 mt-10">
-                                    <strong> Single Content</strong>
+                                    <strong> Team Content</strong>
                                 </div>
                                 <div class="col-12 font-size-12 mt-5">
                                     <input type="text" class="form-control font-size-12" id="" value="This is a sample KGI content" style="border-radius: 2px;border:none;" aria-label="Disabled input example" disabled readonly>
@@ -140,7 +158,7 @@ $this->title = 'Single KGI Grid';
                                             <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                                         </div>
                                         <div class="col-12 font-size-10 mt-10">
-                                            <strong> 1,000,000</strong>
+                                            <strong> <?= number_format(1000000) ?></strong>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -153,7 +171,7 @@ $this->title = 'Single KGI Grid';
                                             Result <i class="fa fa-trophy" aria-hidden="true"></i>
                                         </div>
                                         <div class="col-12 mt-10 font-size-10">
-                                            <strong> 902,566 </strong>
+                                            <strong> <?= number_format(902566) ?> </strong>
                                         </div>
                                     </div>
                                     <div class="col-12 mt-20">
@@ -173,10 +191,10 @@ $this->title = 'Single KGI Grid';
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="col-12 text-primary font-size-10">
+                                                <div class="col-12 text-primary font-size-10 text-end">
                                                     Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="col-12 font-size-10 pt-5" style="font-weight: 500;">
+                                                <div class="col-12 font-size-10 pt-5 text-end" style="font-weight: 500;">
                                                     Tue, Mar 12, 2023
                                                 </div>
                                             </div>
@@ -225,7 +243,7 @@ $this->title = 'Single KGI Grid';
                                     </span>
                                 </div>
                                 <div class="col-12 font-size-14 mt-10">
-                                    <strong> Single Content</strong>
+                                    <strong> Team Content</strong>
                                 </div>
                                 <div class="col-12 font-size-12 mt-5">
                                     <input type="text" class="form-control font-size-12" id="" value="This is a sample KGI content" style="border-radius: 2px;border:none;" aria-label="Disabled input example" disabled readonly>
@@ -261,7 +279,7 @@ $this->title = 'Single KGI Grid';
                                             <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                                         </div>
                                         <div class="col-12 font-size-10 mt-10">
-                                            <strong> 1,000,000</strong>
+                                            <strong> <?= number_format(1000000) ?></strong>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -274,7 +292,7 @@ $this->title = 'Single KGI Grid';
                                             Result <i class="fa fa-trophy" aria-hidden="true"></i>
                                         </div>
                                         <div class="col-12 mt-10 font-size-10">
-                                            <strong> 902,566 </strong>
+                                            <strong> <?= number_format(902566) ?> </strong>
                                         </div>
                                     </div>
                                     <div class="col-12 mt-20">
@@ -294,10 +312,10 @@ $this->title = 'Single KGI Grid';
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="col-12 text-primary font-size-10">
+                                                <div class="col-12 text-primary font-size-10 text-end">
                                                     Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="col-12 font-size-10 pt-5" style="font-weight: 500;">
+                                                <div class="col-12 font-size-10 pt-5 text-end" style="font-weight: 500;">
                                                     Tue, Mar 12, 2023
                                                 </div>
                                             </div>
@@ -346,7 +364,7 @@ $this->title = 'Single KGI Grid';
                                     </span>
                                 </div>
                                 <div class="col-12 font-size-14 mt-10">
-                                    <strong> Single Content</strong>
+                                    <strong> Team Content</strong>
                                 </div>
                                 <div class="col-12 font-size-12 mt-5">
                                     <input type="text" class="form-control font-size-12" id="" value="This is a sample KGI content" style="border-radius: 2px;border:none;" aria-label="Disabled input example" disabled readonly>
@@ -382,7 +400,7 @@ $this->title = 'Single KGI Grid';
                                             <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                                         </div>
                                         <div class="col-12 font-size-10 mt-10">
-                                            <strong> 1,000,000</strong>
+                                            <strong> <?= number_format(1000000) ?></strong>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -395,7 +413,7 @@ $this->title = 'Single KGI Grid';
                                             Result <i class="fa fa-trophy" aria-hidden="true"></i>
                                         </div>
                                         <div class="col-12 mt-10 font-size-10">
-                                            <strong> 902,566 </strong>
+                                            <strong> <?= number_format(902566) ?> </strong>
                                         </div>
                                     </div>
                                     <div class="col-12 mt-20">
@@ -415,10 +433,10 @@ $this->title = 'Single KGI Grid';
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="col-12 text-primary font-size-10">
+                                                <div class="col-12 text-primary font-size-10 text-end">
                                                     Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="col-12 font-size-10 pt-5" style="font-weight: 500;">
+                                                <div class="col-12 font-size-10 pt-5 text-end" style="font-weight: 500;">
                                                     Tue, Mar 12, 2023
                                                 </div>
                                             </div>
@@ -467,7 +485,7 @@ $this->title = 'Single KGI Grid';
                                     </span>
                                 </div>
                                 <div class="col-12 font-size-14 mt-10">
-                                    <strong> Single Content</strong>
+                                    <strong> Team Content</strong>
                                 </div>
                                 <div class="col-12 font-size-12 mt-5">
                                     <input type="text" class="form-control font-size-12" id="" value="This is a sample KGI content" style="border-radius: 2px;border:none;" aria-label="Disabled input example" disabled readonly>
@@ -503,7 +521,7 @@ $this->title = 'Single KGI Grid';
                                             <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                                         </div>
                                         <div class="col-12 font-size-10 mt-10">
-                                            <strong> 1,000,000</strong>
+                                            <strong> <?= number_format(1000000) ?></strong>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -516,7 +534,7 @@ $this->title = 'Single KGI Grid';
                                             Result <i class="fa fa-trophy" aria-hidden="true"></i>
                                         </div>
                                         <div class="col-12 mt-10 font-size-10">
-                                            <strong> 902,566 </strong>
+                                            <strong> <?= number_format(902566) ?> </strong>
                                         </div>
                                     </div>
                                     <div class="col-12 mt-20">
@@ -536,10 +554,10 @@ $this->title = 'Single KGI Grid';
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="col-12 text-primary font-size-10">
+                                                <div class="col-12 text-primary font-size-10 text-end">
                                                     Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="col-12 font-size-10 pt-5" style="font-weight: 500;">
+                                                <div class="col-12 font-size-10 pt-5 text-end" style="font-weight: 500;">
                                                     Tue, Mar 12, 2023
                                                 </div>
                                             </div>

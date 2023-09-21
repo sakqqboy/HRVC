@@ -315,10 +315,10 @@ $this->title = 'KFI';
                                             </div>
                                             <span class="dropdown" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <li data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+                                                <li data-bs-toggle="modal" data-bs-target="#exampleModalEditkgi2">
                                                     <a class="dropdown-item" type="button"><i class="fa fa-file-text-o" aria-hidden="true"></i> <strong class="red">*</strong></a>
                                                 </li>
-                                                <li data-bs-toggle="modal" data-bs-target="#staticBackdrop3">
+                                                <li data-bs-toggle="modal" data-bs-target="#exampleModalViewkgi3">
                                                     <a class="dropdown-item" type="button"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                                 </li>
                                                 <li data-bs-toggle="modal" data-bs-target="#staticBackdrop4">
@@ -826,10 +826,10 @@ $this->title = 'KFI';
                                             <span data-bs-toggle="modal" data-bs-target="#exampleModalcomment"> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
                                             <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <li data-bs-toggle="modal" data-bs-target="#staticBackdrop6">
+                                                <li data-bs-toggle="modal" data-bs-target="#staticBackdrop5">
                                                     <a class="dropdown-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                                 </li>
-                                                <li data-bs-toggle="modal" data-bs-target="#staticBackdrop7">
+                                                <li data-bs-toggle="modal" data-bs-target="#exampleModalViewkgi3">
                                                     <a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                                 </li>
                                                 <li data-bs-toggle="modal" data-bs-target="#staticBackdropdelete">
@@ -1658,13 +1658,12 @@ $this->title = 'KFI';
 <!-- end modal-KGI -->
 
 
-
 <!-- modal KGI EDIT/COMPLETED -->
-<div class="modal fade" id="staticBackdrop6" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdrop6" aria-hidden="true">
+<div class="modal fade" id="exampleModalEditkgi2" tabindex="-1" aria-labelledby="exampleModalEditkgi2Label" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-primary" id="staticBackdrop"><i class="fa fa-magic" aria-hidden="true"></i> Complete Setup</h5>
+                <h5 class="modal-title text-primary" id="exampleModalEditkgi2Label"><i class="fa fa-magic" aria-hidden="true"></i> Edit</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="col-12" style="margin-top: -20px; padding-left:20px; font-size: 13px;">
@@ -1845,11 +1844,11 @@ $this->title = 'KFI';
 
 
 <!-- madal KGI view -->
-<div class="modal fade" id="staticBackdrop7" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdrop7" aria-hidden="true">
+<div class="modal fade" id="exampleModalViewkgi3" tabindex="-1" aria-labelledby="exampleModalViewkgi3Label" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header" style="border: none;">
-                <div class="modal-title flag-Backdrop7" id="staticBackdrop"><i class="fa fa-flag-o" aria-hidden="true"></i> Increase Something</div>
+                <div class="modal-title flag-Backdrop7" id="exampleModalViewkgi3Label"><i class="fa fa-flag-o" aria-hidden="true"></i> Increase Something</div>
                 <div class="modal-title Completed-Backdrop7 badge rounded-pill bg-warning text-dark">Completed</div>
                 <span class="border border-1 border-deadline-Backdrop7">Deadline <span class="font-size-10 text-dark pr-10"> : Mon, Feb 12, 2023</span></span>
             </div>
@@ -2326,7 +2325,7 @@ $this->title = 'KFI';
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom:none;">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" id="staticBackdropdelete" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="col-12 delete-Backdrop4">

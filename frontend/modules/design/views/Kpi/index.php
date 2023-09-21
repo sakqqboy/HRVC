@@ -36,28 +36,28 @@ $this->title = 'KPI';
                             Key Performance Indicator
                         </div>
                         <div class="col-6">
-                            <button type="button" class="btn btn-primary font-size-14" data-bs-toggle="modal" data-bs-target="#staticBackdrop5"><i class="fa fa-magic" aria-hidden="true"></i> Create New KPI</button>
-                            <div class="modal fade" id="staticBackdrop5" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <button type="button" class="btn btn-primary font-size-14" data-bs-toggle="modal" data-bs-target="#staticBackdrop6"><i class="fa fa-magic" aria-hidden="true"></i> Create New KPI</button>
+                            <div class="modal fade" id="staticBackdrop6" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdrop6Label" aria-hidden="true">
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title text-primary" id="staticBackdropLabel"><i class="fa fa-magic" aria-hidden="true"></i> Create KPI</h5>
+                                            <h5 class="modal-title text-primary" id="staticBackdrop6Label"><i class="fa fa-magic" aria-hidden="true"></i> Create KPI</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="col-12" style="margin-top: -20px; padding-left:20px; font-size: 13px;">
-                                            <i class="fa fa-flag" aria-hidden="true"></i> Key Performance Indicator
+                                            <i class="fa fa-tachometer" aria-hidden="true"></i> Key Performance Indicator
                                         </div>
                                         <div class="modal-body">
                                             <div class="row">
                                                 <div class="col-lg-6 col-md-6 col-6">
                                                     <div class="col-12">
-                                                        <label for="exampleFormControlInput1" class="form-label"><strong class="red">*</strong> Company KGI Contents</label>
-                                                        <input type="text" class="form-control" placeholder="">
+                                                        <label for="exampleFormControlInput1" class="form-label"><strong class="red">*</strong> Company KPI Contents</label>
+                                                        <input type="text" class="form-control">
                                                     </div>
                                                     <div class="col-12 pt-5">
                                                         <label for="input" class="form-label"><strong class="red">*</strong> Company (Single)</label>
                                                         <select class="form-select" aria-label="Default select example">
-                                                            <option selected>Select Company</option>
+                                                            <option selected value="">Select Company</option>
                                                             <option value="1">Tokyo Consulting Firm Danışmanlık</option>
                                                             <option value="2">Tokyo Consulting Firm Pvt. Ltd.</option>
                                                             <option value="3">Tokyo Consulting Firm PLC</option>
@@ -68,7 +68,7 @@ $this->title = 'KPI';
                                                     <div class="col-12 pt-5">
                                                         <label for="input" class="form-label"><strong class="red">*</strong> Branch (Single)</label>
                                                         <select class="form-select" aria-label="Default select example">
-                                                            <option selected>Select Branch</option>
+                                                            <option selected value="">Select Branch</option>
                                                             <option value="1">Branch 1</option>
                                                             <option value="2">Branch 2</option>
                                                             <option value="3">Branch 3</option>
@@ -79,10 +79,10 @@ $this->title = 'KPI';
                                                     <div class="col-12 pt-10">
                                                         <label for="input" class="form-label"><strong class="red">*</strong> Check Unit</label>
                                                         <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                            <button type="button" class="btn btn-outline-secondary">Monthly</button>
-                                                            <button type="button" class="btn btn-outline-secondary">Weekly</button>
-                                                            <button type="button" class="btn btn-outline-secondary">Quaterly</button>
-                                                            <button type="button" class="btn btn-outline-secondary">Daily</button>
+                                                            <button type="button" class="btn btn-outline-secondary font-size-15">Monthly</button>
+                                                            <button type="button" class="btn btn-outline-secondary font-size-15">Weekly</button>
+                                                            <button type="button" class="btn btn-outline-secondary font-size-15">Quaterly</button>
+                                                            <button type="button" class="btn btn-outline-secondary font-size-15">Daily</button>
                                                         </div>
                                                     </div>
                                                     <div class="col-12 pt-5">
@@ -90,13 +90,13 @@ $this->title = 'KPI';
                                                             <label for="input" class="form-label"><strong class="red">*</strong> Select Period</label>
                                                             <div class="input-group">
                                                                 <span class="input-group-text font-size-12"><i class="fa fa-calendar-o" aria-hidden="true"></i> &nbsp;&nbsp; Date</span>
-                                                                <input type="date" aria-label="" class="form-control font-size-12">
+                                                                <input type="date" class="form-control font-size-12">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-12 pt-5">
                                                         <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Target Amount</label>
-                                                        <input type="text" class="form-control font-size-13" placeholder="">
+                                                        <input type="number" class="form-control font-size-13 text-end">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-6">
@@ -108,7 +108,7 @@ $this->title = 'KPI';
                                                         <div class="col-lg-6 col-md-6 col-6 pt-10">
                                                             <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Quant Ratio</label>
                                                             <select class="form-select font-size-13" aria-label="Default select example">
-                                                                <option selected>Quantity or Quality</option>
+                                                                <option selected value="">Quantity or Quality</option>
                                                                 <option value="1">January</option>
                                                                 <option value="2">June</option>
                                                                 <option value="3">July</option>
@@ -117,7 +117,7 @@ $this->title = 'KPI';
                                                         <div class="col-lg-6 col-md-6 col-6 pt-10">
                                                             <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Priority</label>
                                                             <select class="form-select font-size-13" aria-label="Default select example">
-                                                                <option selected>A/B/C</option>
+                                                                <option selected value="">A/B/C</option>
                                                                 <option value="1"></option>
                                                                 <option value="2"></option>
                                                                 <option value="3"></option>
@@ -161,9 +161,9 @@ $this->title = 'KPI';
                                                                 <option value="3"></option>
                                                             </select>
                                                         </div>
-                                                        <div class="col-12">
+                                                        <div class="col-12 pt-5">
                                                             <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Result</label>
-                                                            <input type="text" class="form-control font-size-13" placeholder="">
+                                                            <input type="number" class="form-control font-size-13 text-end">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -332,16 +332,16 @@ $this->title = 'KPI';
                             <td>2nd Feb, 2023</td>
                             <td>23rd Feb, 2023</td>
                             <td colspan="row">
-                                <span data-bs-toggle="modal" data-bs-target="#exampleModalcomment3"> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
+                                <span data-bs-toggle="modal" data-bs-target="#exampleModalcomment2"> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
                                 <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li data-bs-toggle="modal" data-bs-target="#staticBackdropeditkpi">
+                                    <li data-bs-toggle="modal" data-bs-target="#exampleModalEditkpi1">
                                         <a class="dropdown-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                     </li>
-                                    <li data-bs-toggle="modal" data-bs-target="#staticBackdropviewkpi">
+                                    <li data-bs-toggle="modal" data-bs-target="#exampleModalViewkpi2">
                                         <a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                     </li>
-                                    <li data-bs-toggle="modal" data-bs-target="#staticBackdrop8">
+                                    <li data-bs-toggle="modal" data-bs-target="#staticBackdropdelete1">
                                         <a class="dropdown-item"><i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
                                     </li>
                                 </ul>
@@ -586,11 +586,11 @@ $this->title = 'KPI';
 </div>
 
 <!-- modal kpi comment -->
-<div class="modal fade" id="exampleModalcomment3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModalcomment2" tabindex="-1" aria-labelledby="exampleModalcomment2Label" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom:none;">
-                <div class="modal-title Modalfirstone" id="exampleModalcommentLabel"><i class="fa fa-clock-o" aria-hidden="true"></i> Work More and More</div>
+                <div class="modal-title Modalfirstone" id="exampleModalcomment2Label"><i class="fa fa-clock-o" aria-hidden="true"></i> Work More and More</div>
                 <div class="modal-title Modalfirstone">Tokyo Consulting Firm Limited</div>
             </div>
             <div class="fsm">Dhaka, Bangladesh <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="Round1"></div>
@@ -682,11 +682,11 @@ $this->title = 'KPI';
 <!-- end -->
 
 <!-- modal edit kpi -->
-<div class="modal fade" id="staticBackdropeditkpi" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropeditkpi" aria-hidden="true">
+<div class="modal fade" id="exampleModalEditkpi1" tabindex="-1" aria-labelledby="exampleModalEditkpi1Label" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-primary" id="staticBackdrop"><i class="fa fa-magic" aria-hidden="true"></i> Edit KPI</h5>
+                <h5 class="modal-title text-primary" id="exampleModalEditkpi1Label"><i class="fa fa-magic" aria-hidden="true"></i> Edit KPI</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="col-12" style="margin-top: -20px; padding-left:20px; font-size: 13px;">
@@ -702,7 +702,7 @@ $this->title = 'KPI';
                         <div class="col-12 pt-5">
                             <label for="input" class="form-label"><strong class="red">*</strong> Company (Single)</label>
                             <select class="form-select" aria-label="Default select example">
-                                <option selected>Select Company</option>
+                                <option selected value="">Select Company</option>
                                 <option value="1">Tokyo Consulting Firm Danışmanlık</option>
                                 <option value="2">Tokyo Consulting Firm Pvt. Ltd.</option>
                                 <option value="3">Tokyo Consulting Firm PLC</option>
@@ -713,7 +713,7 @@ $this->title = 'KPI';
                         <div class="col-12 pt-5">
                             <label for="input" class="form-label"><strong class="red">*</strong> Branch (Single)</label>
                             <select class="form-select" aria-label="Default select example">
-                                <option selected>Select Branch</option>
+                                <option selected value="">Select Branch</option>
                                 <option value="1">Branch 1</option>
                                 <option value="2">Branch 2</option>
                                 <option value="3">Branch 3</option>
@@ -754,7 +754,7 @@ $this->title = 'KPI';
                         </div>
                         <div class="col-12 pt-5">
                             <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Target Amount</label>
-                            <input type="text" class="form-control font-size-13" placeholder="">
+                            <input type="number" class="form-control font-size-13 text-end">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-6">
@@ -766,7 +766,7 @@ $this->title = 'KPI';
                             <div class="col-lg-6 col-md-6 col-6 pt-10">
                                 <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Quant Ratio</label>
                                 <select class="form-select font-size-13" aria-label="Default select example">
-                                    <option selected>Quantity or Quality</option>
+                                    <option selected value="">Quantity or Quality</option>
                                     <option value="1">January</option>
                                     <option value="2">June</option>
                                     <option value="3">July</option>
@@ -775,7 +775,7 @@ $this->title = 'KPI';
                             <div class="col-lg-6 col-md-6 col-6 pt-10">
                                 <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Priority</label>
                                 <select class="form-select font-size-13" aria-label="Default select example">
-                                    <option selected>A/B/C</option>
+                                    <option selected value="">A/B/C</option>
                                     <option value="1"></option>
                                     <option value="2"></option>
                                     <option value="3"></option>
@@ -784,7 +784,7 @@ $this->title = 'KPI';
                             <div class="col-lg-6 col-md-6 col-6 pt-10">
                                 <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Amount Type</label>
                                 <select class="form-select font-size-13" aria-label="Default select example">
-                                    <option selected>% or Number</option>
+                                    <option selected value="">% or Number</option>
                                     <option value="1"></option>
                                     <option value="2"></option>
                                     <option value="3"></option>
@@ -793,7 +793,7 @@ $this->title = 'KPI';
                             <div class="col-lg-6 col-md-6 col-6 pt-10">
                                 <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Code</label>
                                 <select class="form-select font-size-13" aria-label="Default select example">
-                                    <option selected>
+                                    <option selected value="">
                                         <=>
                                     </option>
                                     <option value="1"></option>
@@ -804,7 +804,7 @@ $this->title = 'KPI';
                             <div class="col-lg-6 col-md-6 col-6 pt-10">
                                 <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Status</label>
                                 <select class="form-select font-size-13" aria-label="Default select example">
-                                    <option selected>Active/Finished</option>
+                                    <option selected value="">Active/Finished</option>
                                     <option value="1"></option>
                                     <option value="2"></option>
                                     <option value="3"></option>
@@ -813,7 +813,7 @@ $this->title = 'KPI';
                             <div class="col-lg-6 col-md-6 col-6 pt-10">
                                 <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Month</label>
                                 <select class="form-select font-size-13" aria-label="Default select example">
-                                    <option selected>Select Month</option>
+                                    <option selected value="">Select Month</option>
                                     <option value="1">January</option>
                                     <option value="2"></option>
                                     <option value="3"></option>
@@ -821,7 +821,7 @@ $this->title = 'KPI';
                             </div>
                             <div class="col-12">
                                 <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Result</label>
-                                <input type="text" class="form-control font-size-13" placeholder="">
+                                <input type="number" class="form-control font-size-13 text-end">
                             </div>
                         </div>
                     </div>
@@ -878,11 +878,11 @@ $this->title = 'KPI';
 <!-- end -->
 
 <!-- modal view kpi -->
-<div class="modal fade" id="staticBackdropviewkpi" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropviewkpi" aria-hidden="true">
+<div class="modal fade" id="exampleModalViewkpi2" tabindex="-1" aria-labelledby="exampleModalViewkpi2Label" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header" style="border: none;">
-                <div class="modal-title flag-Backdrop7" id="staticBackdrop"><i class="fa fa-flag-o" aria-hidden="true"></i> Increase Something</div>
+                <div class="modal-title flag-Backdrop7" id="exampleModalViewkpi2Label"><i class="fa fa-flag-o" aria-hidden="true"></i> Increase Something</div>
                 <div class="modal-title Completed-Backdrop7 badge rounded-pill bg-warning text-dark">Completed</div>
                 <span class="border border-1 border-deadline-Backdrop7">Deadline <span class="font-size-10 text-dark pr-10"> : Mon, Feb 12, 2023</span></span>
             </div>
@@ -923,15 +923,12 @@ $this->title = 'KPI';
                                 <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                             </div>
                             <div class="col-12 million-number-Backdrop3">
-                                1000000
+                                <?= number_format(1000000) ?>
                             </div>
                         </div>
                         <div class="col-lg-1 col-md-6 col-3">
                             <div class="col-12 padding-mark-Backdrop3">
                                 >
-                            </div>
-                            <div class="col-12">
-
                             </div>
                         </div>
                         <div class="col-lg-2 cl-md-6 col-3">
@@ -939,7 +936,7 @@ $this->title = 'KPI';
                                 <i class="fa fa-trophy" aria-hidden="true"></i> Result
                             </div>
                             <div class="col-12 million-number-Backdrop3">
-                                1000000
+                                <?= number_format(902566) ?>
                             </div>
                         </div>
                         <div class="row">
@@ -1352,7 +1349,7 @@ $this->title = 'KPI';
 <!-- end -->
 
 <!-- modal delete kpi -->
-<div class="modal fade" id="staticBackdrop8" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdrop8" aria-hidden="true">
+<div class="modal fade" id="staticBackdropdelete1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropdelete1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom:none;">

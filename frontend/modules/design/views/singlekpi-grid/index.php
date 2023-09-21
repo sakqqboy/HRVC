@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Single KGI Grid';
+$this->title = 'Single KPI Grid';
 ?>
 
 <div class="col-12 mt-90">
@@ -33,17 +33,17 @@ $this->title = 'Single KGI Grid';
         </div>
         <div class="alert alert-white-4">
             <div class="row">
-                <div class="col-lg-4 col-md-6 col-12 key1">
+                <div class="col-lg-6 col-md-6 col-12 key1">
                     <div class="row">
                         <div class="col-5 key3">
-                            Key Goal Indicator
+                            Key Performance Indicator
                         </div>
                         <div class="col-6">
-                            <span class="badge rounded-pill  bg-secondary-bsc"><i class="fa fa-user" aria-hidden="true"></i> TAKASHASI SAN</span>
+                            <span class="badge rounded-pill  bg-secondary-bsc"><i class="fa fa-users" aria-hidden="true"></i> Team A, Accounts & Taxation</span>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-12 col-12 New-KFI">
+                <div class="col-lg-3 col-md-12 col-12 New-KFI">
                     <div class="col-12">
                         <div class="input-group">
                             <span class="input-group-text"><i class="fa fa-filter" aria-hidden="true"></i></span>
@@ -62,7 +62,7 @@ $this->title = 'Single KGI Grid';
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-12 New-date">
+                <div class="col-lg-3 col-md-6 col-12 New-date">
                     <div class="row">
                         <div class="col-8">
                             <div class="input-group">
@@ -140,7 +140,7 @@ $this->title = 'Single KGI Grid';
                                             <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                                         </div>
                                         <div class="col-12 font-size-10 mt-10">
-                                            <strong> 1,000,000</strong>
+                                            <strong> <?= number_format(1000000) ?> </strong>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -153,7 +153,7 @@ $this->title = 'Single KGI Grid';
                                             Result <i class="fa fa-trophy" aria-hidden="true"></i>
                                         </div>
                                         <div class="col-12 mt-10 font-size-10">
-                                            <strong> 902,566 </strong>
+                                            <strong> <?= number_format(1000000) ?> </strong>
                                         </div>
                                     </div>
                                     <div class="col-12 mt-20">
@@ -173,10 +173,10 @@ $this->title = 'Single KGI Grid';
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="col-12 text-primary font-size-10">
+                                                <div class="col-12 text-primary font-size-10 text-end">
                                                     Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="col-12 font-size-10 pt-5" style="font-weight: 500;">
+                                                <div class="col-12 font-size-10 pt-5 text-end" style="font-weight: 500;">
                                                     Tue, Mar 12, 2023
                                                 </div>
                                             </div>
@@ -261,7 +261,7 @@ $this->title = 'Single KGI Grid';
                                             <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                                         </div>
                                         <div class="col-12 font-size-10 mt-10">
-                                            <strong> 1,000,000</strong>
+                                            <strong> <?= number_format(1000000) ?></strong>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -274,7 +274,7 @@ $this->title = 'Single KGI Grid';
                                             Result <i class="fa fa-trophy" aria-hidden="true"></i>
                                         </div>
                                         <div class="col-12 mt-10 font-size-10">
-                                            <strong> 902,566 </strong>
+                                            <strong> <?= number_format(200000) ?> </strong>
                                         </div>
                                     </div>
                                     <div class="col-12 mt-20">
@@ -294,10 +294,10 @@ $this->title = 'Single KGI Grid';
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="col-12 text-primary font-size-10">
+                                                <div class="col-12 text-primary font-size-10 text-end">
                                                     Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="col-12 font-size-10 pt-5" style="font-weight: 500;">
+                                                <div class="col-12 font-size-10 pt-5 text-end" style="font-weight: 500;">
                                                     Tue, Mar 12, 2023
                                                 </div>
                                             </div>
@@ -382,7 +382,7 @@ $this->title = 'Single KGI Grid';
                                             <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                                         </div>
                                         <div class="col-12 font-size-10 mt-10">
-                                            <strong> 1,000,000</strong>
+                                            <strong><?= number_format(1000000) ?></strong>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -395,7 +395,7 @@ $this->title = 'Single KGI Grid';
                                             Result <i class="fa fa-trophy" aria-hidden="true"></i>
                                         </div>
                                         <div class="col-12 mt-10 font-size-10">
-                                            <strong> 902,566 </strong>
+                                            <strong> <?= number_format(30000) ?> </strong>
                                         </div>
                                     </div>
                                     <div class="col-12 mt-20">
@@ -415,10 +415,10 @@ $this->title = 'Single KGI Grid';
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="col-12 text-primary font-size-10">
+                                                <div class="col-12 text-primary font-size-10 text-end">
                                                     Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="col-12 font-size-10 pt-5" style="font-weight: 500;">
+                                                <div class="col-12 font-size-10 pt-5 text-end" style="font-weight: 500;">
                                                     Tue, Mar 12, 2023
                                                 </div>
                                             </div>
@@ -503,7 +503,7 @@ $this->title = 'Single KGI Grid';
                                             <i class="fa fa-bullseye" aria-hidden="true"></i> Target
                                         </div>
                                         <div class="col-12 font-size-10 mt-10">
-                                            <strong> 1,000,000</strong>
+                                            <strong> <?= number_format(2000000) ?></strong>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -516,7 +516,7 @@ $this->title = 'Single KGI Grid';
                                             Result <i class="fa fa-trophy" aria-hidden="true"></i>
                                         </div>
                                         <div class="col-12 mt-10 font-size-10">
-                                            <strong> 902,566 </strong>
+                                            <strong> <?= number_format(320000) ?> </strong>
                                         </div>
                                     </div>
                                     <div class="col-12 mt-20">
@@ -536,10 +536,10 @@ $this->title = 'Single KGI Grid';
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="col-12 text-primary font-size-10">
+                                                <div class="col-12 text-primary font-size-10 text-end">
                                                     Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="col-12 font-size-10 pt-5" style="font-weight: 500;">
+                                                <div class="col-12 font-size-10 pt-5 text-end" style="font-weight: 500;">
                                                     Tue, Mar 12, 2023
                                                 </div>
                                             </div>

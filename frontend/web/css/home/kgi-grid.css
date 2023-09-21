@@ -157,3 +157,40 @@
     height: 10px;
     border-radius: 50%;
 }
+
+.is-bangladresh3 {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+
+.padding-employee {
+    margin-left: 625px;
+    margin-top: -20px;
+}
+
+.line-height-employee {
+    line-height: 18px;
+    font-size: 14px;
+    padding-top: 30px;
+    color: #000000;
+}
+
+.input-paperclip {
+    padding-top: -50px;
+}
+
+.send-paper {
+    margin-top: -67px;
+    margin-left: 530px;
+    font-size: 13px;
+    width: 70px;
+    height: 30px;
+}
+
+.cilp-send {
+    margin-left: 620px;
+    margin-top: -67px;
+    font-size: 12px;
+    border: none;
+}

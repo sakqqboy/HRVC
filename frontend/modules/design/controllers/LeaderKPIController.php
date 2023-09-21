@@ -7,7 +7,7 @@ use yii\web\Controller;
 /**
  * Default controller for the `designfront` module
  */
-class KgiteamGridController extends Controller
+class LeaderKpiController extends Controller
 {
     /**
      * Renders the index view for the module

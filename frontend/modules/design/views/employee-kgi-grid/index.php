@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Single KGI Grid';
+$this->title = 'Employee grid';
 ?>
 
 <div class="col-12 mt-90">
@@ -26,35 +26,36 @@ $this->title = 'Single KGI Grid';
                 <li class="nav-item" role="presentation">
                     <a class="nav-link text-dark" id="pills-Action-tab" data-bs-toggle="pill" data-bs-target="#pills-Action" type="button" role="tab" aria-controls="pills-Action" aria-selected="false"><i class="fa fa-list-ul" aria-hidden="true"></i> Key Action Indicator</a>
                 </li>
-                <li class="nav-item presentation-end" role="presentation">
-                    <a class="nav-link text-dark" id="pills-Setting-tab" data-bs-toggle="pill" data-bs-target="#pills-Setting" type="button" role="tab" aria-controls="pills-Action" aria-selected="false"><i class="fa fa-cog" aria-hidden="true"></i> Assign</a>
-                </li>
             </ul>
         </div>
         <div class="alert alert-white-4">
             <div class="row">
-                <div class="col-lg-4 col-md-6 col-12 key1">
+                <div class="col-lg-6 col-md-6 col-12 key1">
                     <div class="row">
-                        <div class="col-5 key3">
+                        <div class="col-md-4 key3">
                             Key Goal Indicator
                         </div>
-                        <div class="col-6">
+                        <div class="col-md-3">
                             <span class="badge rounded-pill  bg-secondary-bsc"><i class="fa fa-user" aria-hidden="true"></i> TAKASHASI SAN</span>
+                        </div>
+                        <div class="col-md-5 font-size-14">
+                            Tokyo Consulting Firm Limited
+                            <p><img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-employeekgi"> Dhaka, Bangladesh</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-12 col-12 New-KFI">
+                <div class="col-lg-3 col-md-12 col-12 New-KFI">
                     <div class="col-12">
                         <div class="input-group">
                             <span class="input-group-text"><i class="fa fa-filter" aria-hidden="true"></i></span>
                             <select class="form-select font-size-13" aria-label="Example select">
-                                <option selected value="">Month</option>
+                                <option selected>Month</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                             </select>
                             <select class="form-select font-size-13" aria-label="Example select">
-                                <option selected value="">Status</option>
+                                <option selected>Status</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -62,7 +63,7 @@ $this->title = 'Single KGI Grid';
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-12 New-date">
+                <div class="col-lg-3 col-md-6 col-12 New-date">
                     <div class="row">
                         <div class="col-8">
                             <div class="input-group">
@@ -173,10 +174,10 @@ $this->title = 'Single KGI Grid';
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="col-12 text-primary font-size-10">
+                                                <div class="col-12 text-primary font-size-10 text-end">
                                                     Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="col-12 font-size-10 pt-5" style="font-weight: 500;">
+                                                <div class="col-12 font-size-10 pt-5 text-end" style="font-weight: 500;">
                                                     Tue, Mar 12, 2023
                                                 </div>
                                             </div>
@@ -294,10 +295,10 @@ $this->title = 'Single KGI Grid';
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="col-12 text-primary font-size-10">
+                                                <div class="col-12 text-primary font-size-10 text-end">
                                                     Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="col-12 font-size-10 pt-5" style="font-weight: 500;">
+                                                <div class="col-12 font-size-10 pt-5 text-end" style="font-weight: 500;">
                                                     Tue, Mar 12, 2023
                                                 </div>
                                             </div>
@@ -415,10 +416,10 @@ $this->title = 'Single KGI Grid';
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="col-12 text-primary font-size-10">
+                                                <div class="col-12 text-primary font-size-10 text-end">
                                                     Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="col-12 font-size-10 pt-5" style="font-weight: 500;">
+                                                <div class="col-12 font-size-10 pt-5 text-end" style="font-weight: 500;">
                                                     Tue, Mar 12, 2023
                                                 </div>
                                             </div>
@@ -536,10 +537,10 @@ $this->title = 'Single KGI Grid';
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="col-12 text-primary font-size-10">
+                                                <div class="col-12 text-primary font-size-10 text-end">
                                                     Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="col-12 font-size-10 pt-5" style="font-weight: 500;">
+                                                <div class="col-12 font-size-10 pt-5 text-end" style="font-weight: 500;">
                                                     Tue, Mar 12, 2023
                                                 </div>
                                             </div>
