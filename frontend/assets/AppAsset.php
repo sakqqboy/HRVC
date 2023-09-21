@@ -76,6 +76,7 @@ class AppAsset extends AssetBundle
         'js/setting/layer.js',
         'js/kfi/kfi.js',
         'js/kgi/kgi.js',
+        'js/kgi/kgi_update.js',
 
 
     ];

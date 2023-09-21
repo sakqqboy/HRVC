@@ -42,4 +42,10 @@ class Country extends \backend\models\hrvc\master\CountryMaster
         $country = Country::find()->select('countryName')->where(["countryId" => $company["countryId"]])->asArray()->one();
         return $country["countryName"];
     }
+    public static function countryFlagBycompany($companyId)
+    {
+        $company = Company::find()->select('countryId')->where(["companyId" => $companyId])->asArray()->one();
+        $country = Country::find()->select('flag')->where(["countryId" => $company["countryId"]])->asArray()->one();
+        return $country["flag"];
+    }
 }

@@ -10,6 +10,7 @@ use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Kgi;
 use frontend\models\hrvc\KgiBranch;
 use frontend\models\hrvc\KgiDepartment;
+use frontend\models\hrvc\KgiHistory;
 use frontend\models\hrvc\KgiTeam;
 use frontend\models\hrvc\Team;
 use Yii;
@@ -31,6 +32,7 @@ class ManagementController extends Controller
 
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
@@ -94,12 +96,21 @@ class ManagementController extends Controller
 	public function actionCompanyMultiBranch()
 	{
 		$companyId = $_POST["companyId"];
+		$acType = $_POST["acType"];
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
 		$branches = curl_exec($api);
 		$branches = json_decode($branches, true);
-		$branchText = $this->renderAjax('multi_branch', ["branches" => $branches]);
+		if ($acType == "create") {
+			$branchText = $this->renderAjax('multi_branch', ["branches" => $branches]);
+		} else {
+			$kgiId = $_POST["kgiId"];
+			$branchText = $this->renderAjax('multi_branch_update', [
+				"branches" => $branches,
+				"kgiId" => $kgiId
+			]);
+		}
 		curl_close($api);
 		$res["status"] = true;
 		$res["branchText"] = $branchText;
@@ -108,6 +119,7 @@ class ManagementController extends Controller
 	public function actionBranchMultiDepartment()
 	{
 		$res["status"] = false;
+		$acType = $_POST["acType"];
 		if (isset($_POST["multiBranch"]) && count($_POST["multiBranch"]) > 0) {
 			//throw new Exception(print_r($_POST["multiBranch"], true));
 			$branchIdArr = $_POST["multiBranch"];
@@ -123,9 +135,17 @@ class ManagementController extends Controller
 					}
 				endforeach;
 			}
-			$textDepartment = $this->renderAjax('multi_department', [
-				"d" => $d
-			]);
+			if ($acType == "create") {
+				$textDepartment = $this->renderAjax('multi_department', [
+					"d" => $d,
+				]);
+			} else {
+				$kgiId = $_POST["kgiId"];
+				$textDepartment = $this->renderAjax('multi_department_update', [
+					"d" => $d,
+					"kgiId" => $kgiId
+				]);
+			}
 			$res["status"] = true;
 			$res["textDepartment"] = $textDepartment;
 		}
@@ -137,6 +157,7 @@ class ManagementController extends Controller
 		$t = [];
 		$textTeam = '';
 		$branchDepartment = [];
+		$acType = $_POST["acType"];
 		if (isset($_POST["multiBranch"]) && count($_POST["multiBranch"]) > 0) {
 			foreach ($_POST["multiBranch"] as $branchId) :
 				if (isset($_POST["multiDepartment"]) && count($_POST["multiDepartment"]) > 0) {
@@ -173,9 +194,17 @@ class ManagementController extends Controller
 				endforeach;
 			endforeach;
 			//throw new Exception(print_r($t, true));
-			$textTeam .= $this->renderAjax('multi_team', [
-				"t" => $t
-			]);
+			if ($acType == "create") {
+				$textTeam .= $this->renderAjax('multi_team', [
+					"t" => $t,
+				]);
+			} else {
+				$kgiId = $_POST["kgiId"];
+				$textTeam .= $this->renderAjax('multi_team_update', [
+					"t" => $t,
+					"kgiId" => $kgiId
+				]);
+			}
 			$res["status"] = true;
 			$res["textTeam"] = $textTeam;
 		}
@@ -183,44 +212,209 @@ class ManagementController extends Controller
 	}
 	public function saveKgiBranch($branch, $kgiId)
 	{
+		$kgiBranch = KgiBranch::find()->where(["kgiId" => $kgiId, "status" => 1])->all();
+		if (isset($kgiBranch) && count($kgiBranch) > 0) {
+			foreach ($kgiBranch as $kb) :
+				foreach ($branch as $bb) :
+					if ($kb->branchId == $bb) {
+						$saveBranch[$kb->branchId] = 1;
+						break;
+					} else {
+						$saveBranch[$kb->branchId] = 0;
+					}
+				endforeach;
+				if ($saveBranch[$kb["branchId"]] == 0) {
+					$kb->status = 99;
+					$kb->save(false);
+				}
+			endforeach;
+		}
 		if (count($branch) > 0) {
 			foreach ($branch as $b) :
-				$kgiBranch = new KgiBranch();
-				$kgiBranch->kgiId = $kgiId;
-				$kgiBranch->branchId = $b;
-				$kgiBranch->status = 1;
-				$kgiBranch->createDateTime = new Expression('NOW()');
-				$kgiBranch->updateDateTime = new Expression('NOW()');
-				$kgiBranch->save(false);
+				$old = KgiBranch::find()->where(["kgiId" => $kgiId, "branchId" => $b, "status" => 1])->one();
+				if (!isset($old) || empty($old)) {
+					$kgiBranch = new KgiBranch();
+					$kgiBranch->kgiId = $kgiId;
+					$kgiBranch->branchId = $b;
+					$kgiBranch->status = 1;
+					$kgiBranch->createDateTime = new Expression('NOW()');
+					$kgiBranch->updateDateTime = new Expression('NOW()');
+					$kgiBranch->save(false);
+				}
 			endforeach;
 		}
 	}
 	public function saveKgiDepartment($department, $kgiId)
 	{
+		$kgiDepartment = KgiDepartment::find()->where(["kgiId" => $kgiId, "status" => 1])->all();
+		if (isset($kgiDepartment) && count($kgiDepartment) > 0) {
+			foreach ($kgiDepartment as $kd) :
+				foreach ($department as $dp) :
+					if ($kd->departmentId == $dp) {
+						$saveDepartment[$kd->departmentId] = 1;
+						break;
+					} else {
+						$saveDepartment[$kd->departmentId] = 0;
+					}
+				endforeach;
+				if ($saveDepartment[$kd->departmentId] == 0) {
+					$kd->status = 99;
+					$kd->save(false);
+				}
+			endforeach;
+		}
 		if (count($department) > 0) {
 			foreach ($department as $d) :
-				$kgiDepartment = new KgiDepartment();
-				$kgiDepartment->kgiId = $kgiId;
-				$kgiDepartment->departmentId = $d;
-				$kgiDepartment->status = 1;
-				$kgiDepartment->createDateTime = new Expression('NOW()');
-				$kgiDepartment->updateDateTime = new Expression('NOW()');
-				$kgiDepartment->save(false);
+				$old = KgiDepartment::find()->where(["kgiId" => $kgiId, "departmentId" => $d, "status" => 1])->one();
+				if (!isset($old) || empty($old)) {
+					$kgiDepartment = new KgiDepartment();
+					$kgiDepartment->kgiId = $kgiId;
+					$kgiDepartment->departmentId = $d;
+					$kgiDepartment->status = 1;
+					$kgiDepartment->createDateTime = new Expression('NOW()');
+					$kgiDepartment->updateDateTime = new Expression('NOW()');
+					$kgiDepartment->save(false);
+				}
 			endforeach;
 		}
 	}
 	public function saveKgiTeam($team, $kgiId)
 	{
-		if (count($team) > 0) {
-			foreach ($team as $t) :
-				$kgiTeam = new KgiTeam();
-				$kgiTeam->kgiId = $kgiId;
-				$kgiTeam->teamId = $t;
-				$kgiTeam->status = 1;
-				$kgiTeam->createDateTime = new Expression('NOW()');
-				$kgiTeam->updateDateTime = new Expression('NOW()');
-				$kgiTeam->save(false);
+		$kgiTeam = KgiTeam::find()->where(["kgiId" => $kgiId, "status" => 1])->all();
+		if (isset($kgiTeam) && count($kgiTeam) > 0) {
+			foreach ($kgiTeam as $kt) :
+				foreach ($team as $tt) :
+					if ($kt->teamId == $tt) {
+						$saveTeam[$kt->teamId] = 1;
+						break;
+					} else {
+						$saveTeam[$kt->teamId] = 0;
+					}
+				endforeach;
+				if ($saveTeam[$kt["teamId"]] == 0) {
+					$kt->status = 99;
+					$kt->save(false);
+				}
 			endforeach;
 		}
+		if (count($team) > 0) {
+			foreach ($team as $t) :
+				$old = KgiTeam::find()->where(["kgiId" => $kgiId, "teamId" => $t, "status" => 1])->one();
+				if (!isset($old) || empty($old)) {
+					$kgiTeam = new KgiTeam();
+					$kgiTeam->kgiId = $kgiId;
+					$kgiTeam->teamId = $t;
+					$kgiTeam->status = 1;
+					$kgiTeam->createDateTime = new Expression('NOW()');
+					$kgiTeam->updateDateTime = new Expression('NOW()');
+					$kgiTeam->save(false);
+				}
+			endforeach;
+		}
+	}
+	public function actionPrepareUpdate()
+	{
+		$kgiId = $_POST["kgiId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
+		$kgi = curl_exec($api);
+		$kgi = json_decode($kgi, true);
+
+		$companyId = $kgi["companyId"];
+		$kgiBranchText = '';
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
+		$kgiBranch = curl_exec($api);
+		$kgiBranch = json_decode($kgiBranch, true);
+		$kgiBranchText = $this->renderAjax('multi_branch_update', [
+			"branches" => $kgiBranch,
+			"kgiId" => $kgiId
+		]);
+		$branch["textBranch"] = $kgiBranchText;
+
+		$kgiDepartmentText = '';
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-department?id=' . $kgiId);
+		$kgiDepartment = curl_exec($api);
+		$kgiDepartment = json_decode($kgiDepartment, true);
+		$kgiDepartmentText = $this->renderAjax('multi_department_update', [
+			"d" => $kgiDepartment,
+			"kgiId" => $kgiId
+		]);
+		$department["textDepartment"] = $kgiDepartmentText;
+
+
+		$kgiTeamText = '';
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-team?id=' . $kgiId);
+		$kgiTeam = curl_exec($api);
+		$kgiTeam = json_decode($kgiTeam, true);
+		$kgiTeamText = $this->renderAjax('multi_team_update', [
+			"t" => $kgiTeam,
+			"kgiId" => $kgiId
+		]);
+		$team["textTeam"] = $kgiTeamText;
+
+
+		$data = array_merge($kgi, $branch, $department, $team);
+		//throw new Exception(print_r($data, true));
+		curl_close($api);
+		return json_encode($data);
+	}
+	public function actionUpdateKgi()
+	{
+		//throw new Exception(print_r(Yii::$app->request->post(), true));
+		if (isset($_POST["kgiId"]) && $_POST["kgiId"] != "") {
+			$kgiId = $_POST["kgiId"];
+			//throw new Exception(print_r(Yii::$app->request->post(), true));
+			$kgi = Kgi::find()->where(["kgiId" => $kgiId])->one();
+			//$kgi->kgiName = $_POST["kgiName"];
+			$kgi->companyId = $_POST["companyId"];
+			$kgi->unitId = $_POST["unit"];
+			$kgi->periodDate = $_POST["periodDate"];
+			$kgi->targetAmount = $_POST["targetAmount"];
+			$kgi->kgiDetail = $_POST["detail"];
+			$kgi->quantRatio = $_POST["quantRatio"];
+			$kgi->priority = $_POST["priority"];
+			$kgi->amountType = $_POST["amountType"];
+			$kgi->code = $_POST["code"];
+			$kgi->status = $_POST["status"];
+			$kgi->month = $_POST["month"];
+			$kgi->result = $_POST["result"];
+			$kgi->createrId = 1;
+			$kgi->updateDateTime = new Expression('NOW()');
+			if ($kgi->save(false)) {
+				$kgiHistory = new KgiHistory();
+				$kgiHistory->kgiId = $_POST["kgiId"];
+				$kgiHistory->kgiHistoryName = $_POST["historyName"];
+				$kgiHistory->titleProcess = $_POST["historyName"];
+				$kgiHistory->unitId = $_POST["unit"];
+				$kgiHistory->periodDate = $_POST["periodDate"];
+				$kgiHistory->nextCheckDate = $_POST["nextDate"];
+				$kgiHistory->targetAmount = $_POST["targetAmount"];
+				$kgiHistory->description = $_POST["detail"];
+				$kgiHistory->remark = $_POST["remark"];
+				$kgiHistory->quantRatio = $_POST["quantRatio"];
+				$kgiHistory->priority = $_POST["priority"];
+				$kgiHistory->amountType = $_POST["amountType"];
+				$kgiHistory->code = $_POST["code"];
+				$kgiHistory->status = $_POST["status"];
+				$kgiHistory->month = $_POST["month"];
+				$kgiHistory->result = $_POST["result"];
+				$kgiHistory->createrId = 1;
+				$kgiHistory->createDateTime = new Expression('NOW()');
+				$kgiHistory->updateDateTime = new Expression('NOW()');
+				$kgiHistory->save(false);
+				if (isset($_POST["branch"]) && count($_POST["branch"]) > 0) {
+					$this->saveKgiBranch($_POST["branch"], $kgiId);
+				}
+				if (isset($_POST["department"]) && count($_POST["department"]) > 0) {
+					$this->saveKgiDepartment($_POST["department"], $kgiId);
+				}
+				if (isset($_POST["team"]) && count($_POST["team"]) > 0) {
+					$this->saveKgiTeam($_POST["team"], $kgiId);
+				}
+				return $this->redirect('index');
+			}
+		}
+		return $this->redirect('index');
 	}
 }

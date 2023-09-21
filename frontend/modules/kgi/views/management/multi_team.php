@@ -19,7 +19,7 @@ if (isset($t) && count($t) > 0) {
 		}
 		foreach ($teams as $teamId => $team) : ?>
 			<div class="col-12 multi-select pl-30 pt-5 pb-5">
-				<input type="checkbox" id='multi-check-team' name="team[]" class="checkbox-md mr-5 " value="<?= $teamId ?>" required>
+				<input type="checkbox" id='multi-check-team-<?= $departmentId ?>' name="team[]" class="checkbox-md mr-5" value="<?= $teamId ?>" required>
 				<?= $team ?>
 			</div>
 <?php

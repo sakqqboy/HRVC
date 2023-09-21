@@ -19,7 +19,8 @@ $this->title = "KGI";
 								Key Goal Indicators
 							</div>
 							<div class="col-6">
-								<button type="button" class="btn btn-primary font-size-14" data-bs-toggle="modal" data-bs-target="#staticBackdrop5"><i class="fa fa-magic" aria-hidden="true"></i> Create New KGI</button>
+								<button type="button" class="btn btn-primary font-size-14" data-bs-toggle="modal" data-bs-target="#staticBackdrop5" onclick="javascript:changeType()">
+									<i class="fa fa-magic" aria-hidden="true"></i> Create New KGI</button>
 
 							</div>
 						</div>
@@ -144,7 +145,7 @@ $this->title = "KGI";
 											<span data-bs-toggle="modal" data-bs-target="#exampleModalcomment"> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
 											<span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
 											<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-												<li data-bs-toggle="modal" data-bs-target="#staticBackdrop6">
+												<li data-bs-toggle="modal" data-bs-target="#update-kgi-modal" onclick="javascript:updateKgi(<?= $kgiId ?>)">
 													<a class="dropdown-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 												</li>
 												<li data-bs-toggle="modal" data-bs-target="#staticBackdrop7">
@@ -178,6 +179,7 @@ $this->title = "KGI";
 			</div>
 		</div>
 	</div>
+	<input type="hidden" value="create" id="acType">
 	<?php
 	$form = ActiveForm::begin([
 		'id' => 'create-kgi',
@@ -197,7 +199,7 @@ $this->title = "KGI";
 
 	<?php
 	$form = ActiveForm::begin([
-		'id' => 'create-kgi',
+		'id' => 'update-kgi',
 		'method' => 'post',
 		'options' => [
 			'enctype' => 'multipart/form-data',
