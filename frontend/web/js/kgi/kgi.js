@@ -5,20 +5,25 @@ if (window.location.host == 'localhost') {
     $baseUrl = window.location.protocol + "//" + window.location.host + '/';
 }
 $url = $baseUrl;
+
+function changeType() {
+	$("#acType").val('create');
+	$("#kgiId").val('');
+}
 function companyMultiBrach() { 
 	var companyId = $("#companyId").val();
 	clearEveryShow();
 	var url = $url + 'kgi/management/company-multi-branch';
+	var acType = $("#acType").val();
 	$.ajax({
 		type: "POST",
 		dataType: 'json',
 		url: url,
-		data: { companyId: companyId },
-		success: function(data) {
-		    if (data.status) {
-			    $("#show-multi-branch").html(data.branchText);
-		    }
-      
+		data: { companyId: companyId, acType: acType },
+		success: function (data) {
+			if (data.status) {
+				$("#show-multi-branch").html(data.branchText);
+			}
 		}
 	   });
 }
@@ -62,11 +67,12 @@ function branchMultiDepartment() {
 		$("#check-all-branch").prop("checked", true);
 	}
 	var url = $url + 'kgi/management/branch-multi-department';
+	var acType = $("#acType").val();
 	$.ajax({
 		type: "POST",
 		dataType: 'json',
 		url: url,
-		data: { multiBranch: multiBranch },
+		data: { multiBranch: multiBranch, acType: acType },
 		success: function (data) {
 			if (data.status) {
 				$("#show-multi-department").html(data.textDepartment);
@@ -89,10 +95,8 @@ function totalBranch() {
 }
 function allDepartment(branchId) { 
 	var sumDepartment = totalDepartment(branchId);
-	
 	if ($("#multi-check-all-"+branchId).prop("checked") == true) {
 		var i = 1;
-		
 		$('input[id="multi-check-' + branchId + '"').each(function () {
 			if (i < sumDepartment) {
 				$(this).prop("checked", true);
@@ -104,7 +108,6 @@ function allDepartment(branchId) {
 			);
 	} else { 
 		var i = 1;
-		
 		$('input[id="multi-check-' + branchId + '"').each(function () {
 			if (i != sumDepartment) {
 				$(this).prop("checked", false);
@@ -139,12 +142,13 @@ function departmentMultiTeam(branchId) {
 	} else { 
 		$("#multi-check-all-" + branchId).prop("checked", true);
 	}
+	var acType = $("#acType").val();
 	var url = $url + 'kgi/management/department-multi-team';
 	$.ajax({
 		type: "POST",
 		dataType: 'json',
 		url: url,
-		data: { multiDepartment: multiDepartment,multiBranch:multiBranch },
+		data: { multiDepartment: multiDepartment, multiBranch: multiBranch, acType: acType },
 		success: function (data) {
 			if (data.status) {
 				$("#show-multi-team").html(data.textTeam);
@@ -169,15 +173,16 @@ function clearEveryShow() {
 	$("#show-multi-department").html('');
 	$("#show-multi-team").html('');
 	$("#show-multi-department").html('');
+	
 }
 function allTeam(departmentId) { 
 	if ($("#multi-check-all-team-"+departmentId).prop("checked") == true) {
-		$('input[id="multi-check-team"]').each(function () {
+		$('input[id="multi-check-team-'+departmentId+'"]').each(function () {
 			$(this).prop("checked", true);
 		}
 		);
 	} else { 
-		$('input[id="multi-check-team"]').each(function () {
+		$('input[id="multi-check-team-'+departmentId+'"]').each(function () {
 			$(this).prop("checked", false);
 		}
 		);

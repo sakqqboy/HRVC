@@ -41,16 +41,6 @@ class KgiTeam extends \backend\models\hrvc\master\KgiTeamMaster
             ->where(["t.status" => 1, "kgi_team.status" => 1, "kgi_team.kgiId" => $kgiId])
             ->asArray()
             ->all();
-        /*$teamName = '';
-        if (count($kgiTeam) > 0) {
-            if (count($kgiTeam) == 1) {
-                foreach ($kgiTeam as $team) :
-                    $teamName = $team["team"];
-                endforeach;
-            } else {
-                $teamName = count($kgiTeam);
-            }
-        }*/
         return count($kgiTeam);
     }
 }
