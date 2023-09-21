@@ -1842,7 +1842,6 @@ $this->title = 'KFI';
 <!-- end EDIT -->
 
 
-
 <!-- madal KGI view -->
 <div class="modal fade" id="exampleModalViewkgi3" tabindex="-1" aria-labelledby="exampleModalViewkgi3Label" aria-hidden="true">
     <div class="modal-dialog modal-lg">
