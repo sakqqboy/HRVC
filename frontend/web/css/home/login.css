@@ -1,11 +1,11 @@
 .width-HRVC {
-    width: 40%;
-    margin-top: -30px;
+    width: 30%;
+    margin-top: 30px;
 }
 
 .z-HRVC {
     font-size: 32px;
-    padding-top: 30px;
+    margin-top: 40px;
     color: #4A4543;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 100;
@@ -13,7 +13,7 @@
 
 .em-login {
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 600;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -24,46 +24,50 @@
 }
 
 .fm-log-mail {
-    margin-left: 120px;
+    margin-left: 210px;
     margin-top: 30px;
 }
 
 .fm-log-password {
-    margin-left: 120px;
+    margin-left: 210px;
+    margin-top: 30px;
+}
+
+.fm-signin {
+    margin-left: 210px;
     margin-top: 30px;
 }
 
 .checkbox-remember {
     margin-top: 30px;
-    margin-left: 120px
+    font-size: 12px;
 }
 
 .fm-box-sig {
-    margin-top: -25px;
-    margin-left: 120px;
+    padding-left: 50px;
+    margin-top: 30px;
+    font-size: 12px;
+}
+
+.link-privacy {
+    margin-top: 30px;
+    font-size: 10px;
+    padding-left: 230px;
+    font-weight: 700;
 }
 
 .width-rof {
-    width: 40%;
-    margin-top: 350px;
+    width: 60%;
+    margin-top: -350%;
+    margin-left: 80px;
 }
 
-.black-roof {
-    background-color: #DDF3FF;
-    margin-top: -40px;
-    height: 704px;
+.backgroundbule {
+    height: 700px;
 }
 
 .problem {
     color: #9c9a9a;
-}
-
-.cricletokyo {
-    border: 1px solid;
-    border-radius: 50%;
-    width: 30px;
-    height: 10px;
-    color: #808080;
 }
 
 .TCG-Logo1 {
@@ -74,10 +78,6 @@
     margin-top: 60px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 300;
-}
-
-.noline {
-    text-decoration: none;
 }
 
 @media (max-width: 992px) {
