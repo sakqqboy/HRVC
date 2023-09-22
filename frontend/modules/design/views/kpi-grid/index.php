@@ -223,13 +223,20 @@ $this->title = 'KPI Grid View';
                                             <div class="col-md-6">
                                                 <div class="col-12 dashed1">
                                                     <strong class="text-dark font-size-13"> Issue</strong>
-                                                    <p class="font-size-11 text-dark">Now use Lorem Ipsum as their default model text, and a search</p>
+                                                    <p class="font-size-11 text-dark pt-5">Now use Lorem Ipsum as their default model text, and a search</p>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="col-12 dashed1">
-                                                    <strong class="text-dark font-size-13"> Solution</strong>
-                                                    <p class="font-size-11 text-dark">Now use Lorem Ipsum as their default model text, and a search </p>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <strong class="text-dark font-size-13"> Solution</strong>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="imagecomment">
+                                                        </div>
+                                                    </div>
+                                                    <p class="font-size-11 text-dark pt-5">Now use Lorem Ipsum as their default model text, and a search </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -363,13 +370,20 @@ $this->title = 'KPI Grid View';
                                             <div class="col-md-6">
                                                 <div class="col-12 dashed1">
                                                     <strong class="text-dark font-size-13"> Issue</strong>
-                                                    <p class="font-size-11 text-dark">Now use Lorem Ipsum as their default model text, and a search </p>
+                                                    <p class="font-size-11 text-dark pt-5">Now use Lorem Ipsum as their default model text, and a search </p>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="col-12 dashed1">
-                                                    <strong class="text-dark font-size-13"> Solution</strong>
-                                                    <p class="font-size-11 text-dark">Now use Lorem Ipsum as their default model text, and a search</p>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <strong class="text-dark font-size-13"> Solution</strong>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="imagecomment">
+                                                        </div>
+                                                    </div>
+                                                    <p class="font-size-11 text-dark pt-5">Now use Lorem Ipsum as their default model text, and a search </p>
                                                 </div>
                                             </div>
                                         </div>

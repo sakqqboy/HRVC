@@ -1,7 +1,6 @@
 <?php
 $this->title = 'KGI Grid View';
 ?>
-
 <div class="col-12 mt-90">
     <div class="col-12">
         <i class="fa fa-tachometer font-size-20" aria-hidden="true"></i> <strong class="font-size-20"> Performance Indicator Matrices (PIM)</strong>
@@ -223,13 +222,20 @@ $this->title = 'KGI Grid View';
                                             <div class="col-md-6">
                                                 <div class="col-12 dashed1">
                                                     <strong class="text-dark font-size-13"> Issue</strong>
-                                                    <p class="font-size-11 text-dark">Now use Lorem Ipsum as their default model text, and a search</p>
+                                                    <p class="font-size-11 text-dark pt-5">Now use Lorem Ipsum as their default model text, and a search</p>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="col-12 dashed1">
-                                                    <strong class="text-dark font-size-13"> Solution</strong>
-                                                    <p class="font-size-11 text-dark">Now use Lorem Ipsum as their default model text, and a search </p>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <strong class="text-dark font-size-13"> Solution</strong>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="imagecomment1">
+                                                        </div>
+                                                    </div>
+                                                    <p class="font-size-11 text-dark pt-5">Now use Lorem Ipsum as their default model text, and a search </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -363,13 +369,20 @@ $this->title = 'KGI Grid View';
                                             <div class="col-md-6">
                                                 <div class="col-12 dashed1">
                                                     <strong class="text-dark font-size-13"> Issue</strong>
-                                                    <p class="font-size-11 text-dark">Now use Lorem Ipsum as their default model text, and a search </p>
+                                                    <p class="font-size-11 text-dark pt-5">Now use Lorem Ipsum as their default model text, and a search </p>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="col-12 dashed1">
-                                                    <strong class="text-dark font-size-13"> Solution</strong>
-                                                    <p class="font-size-11 text-dark">Now use Lorem Ipsum as their default model text, and a search</p>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <strong class="text-dark font-size-13"> Solution</strong>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="imagecomment1">
+                                                        </div>
+                                                    </div>
+                                                    <p class="font-size-11 text-dark pt-5">Now use Lorem Ipsum as their default model text, and a search</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -389,7 +402,7 @@ $this->title = 'KGI Grid View';
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-primary" id="staticBackdrop5Label"><i class="fa fa-magic" aria-hidden="true"></i> Create KGI</h5>
+                <h5 class="modal-title text-primary" id="staticBackLabel"><i class="fa fa-magic" aria-hidden="true"></i> Create KGI</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="col-12" style="margin-top: -20px; padding-left:20px; font-size: 13px;">
@@ -560,12 +573,11 @@ $this->title = 'KGI Grid View';
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="modal-footer" style="border: none;">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary">Create</button>
+            <div class="modal-footer" style="border: none;">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Create</button>
+            </div>
         </div>
     </div>
-</div>
 </div>
 <!-- end -->

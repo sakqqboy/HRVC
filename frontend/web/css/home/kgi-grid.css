@@ -67,8 +67,14 @@
 
 .Quality-monthly0 {
     font-weight: 700;
-    font-size: 15px;
-    padding-top: 8px;
+    font-size: 13px;
+    padding-top: 5px;
+}
+
+.imagecomment {
+    width: 10px;
+    margin-left: 65px;
+    cursor: pointer;
 }
 
 .circle-update {
