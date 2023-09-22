@@ -59,8 +59,8 @@ $this->title = 'Setting KFI';
                 </div>
             </div>
             <div class="alert alert-light mt-20" role="alert">
-                <table class="table">
-                    <thead class="table table-secondary secondary-setting">
+                <table class="table table-striped">
+                    <thead class="table-secondary">
                         <td>KFI Contents</td>
                         <td>Company</td>
                         <td>Branch</td>
@@ -69,7 +69,7 @@ $this->title = 'Setting KFI';
                         <td>Month</td>
                         <td>Status</td>
                     </thead>
-                    <tbody class="table-light">
+                    <tbody>
                         <tr>
                             <th>Increase sales in a way that company gains</th>
                             <th>
@@ -81,6 +81,19 @@ $this->title = 'Setting KFI';
                                     </button>
                                 </span>
                                 <div class="company-setting"><i class="fa fa-building-o pl-8 pt-5 font-size-15" aria-hidden="true"></i> </div>
+                                <i class="fa fa-plus-circle plus-circle-logo" aria-hidden="true"></i>
+                                <div class="company-setting">
+                                    <div class="avatar-setting">
+                                        <input type="file" id="fileSetting" accept=".png, .jpg, .jpeg" name="image">
+                                        <label for="fileSetting"></label>
+                                    </div>
+                                    <div class="company-preview">
+                                        <div id="filePreview">
+                                            <img src="/HRVC/frontend/web/images/group/profile/8VCfq1gkt9.png" class="company-group-picture" id="old-image">
+                                        </div>
+
+                                    </div>
+                                </div>
                             </th>
                         </tr>
                     </tbody>

@@ -1846,19 +1846,32 @@ $this->title = 'KFI';
 <div class="modal fade" id="exampleModalViewkgi3" tabindex="-1" aria-labelledby="exampleModalViewkgi3Label" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header" style="border: none;">
-                <div class="modal-title flag-Backdrop7" id="exampleModalViewkgi3Label"><i class="fa fa-flag-o" aria-hidden="true"></i> Increase Something</div>
-                <div class="modal-title Completed-Backdrop7 badge rounded-pill bg-warning text-dark">Completed</div>
-                <span class="border border-1 border-deadline-Backdrop7">Deadline <span class="font-size-10 text-dark pr-10"> : Mon, Feb 12, 2023</span></span>
+            <div class="container mt-30">
+                <div class="row">
+                    <div class="col-lg-5 col-md-6 col-12">
+                        <div class="col-12">
+                            <div class="flag-Backdrop7" id="exampleModalViewkgi3Label"><i class="fa fa-flag-o" aria-hidden="true"></i> Increase Something</div>
+                        </div>
+                        <div class="col-12">
+                            <div class="tk">Tokyo Consulting Firm Limited</div>
+                        </div>
+                        <div class="col-12 font-size-12 pt-5">
+                            <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="Round1"> Dhaka, Bangladesh
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-12">
+                        <div class="Completed-Backdrop7 badge rounded-pill bg-warning text-dark">Completed</div>
+                    </div>
+                    <div class="col-lg-5 col-md-6 col-12 text-end">
+                        <div class="col-12">
+                            <span class="border border-1 border-deadline-Backdrop7">Deadline <span class="font-size-10 text-dark pr-10"> : Mon, Feb 12, 2023</span></span>
+                        </div>
+                        <div class="col-12">
+                            <span class="border border-1 border-next-Backdrop7">Next Update <span class="font-size-10 text-dark pr-10"> Tue, Mar 12, 2023</span></span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="text-end">
-                <span class="border border-1 border-next-Backdrop7">Next Update <span class="font-size-10 text-dark pr-10"> Tue, Mar 12, 2023</span></span>
-            </div>
-            <div class="tk">Tokyo Consulting Firm Limited</div>
-            <div class="col-12 font-size-12 pl-10 pt-5">
-                <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="Round1"> Dhaka, Bangladesh
-            </div>
-
             <div class="modal-body">
                 <div class="col-12 dashed-Backdrop7">
                     <div class="row mt-20">
@@ -1937,7 +1950,7 @@ $this->title = 'KFI';
                 <div class="col-12 Description-Backdrop7 pl-10">
                     Description
                 </div>
-                <div class="col-12 detailsDescription-Backdrop3 pl-20">
+                <div class="col-12 detailsDescription-Backdrop3 pl-10">
                     The more people who have access to your point of sales system or place of business means more people have the possibility of buying from you and increasing your profits. The more people who have access to your point of sales system or place of business means more people have the possibility of buying from you and increasing your profits.
                 </div>
                 <div class="row mt-20">
