@@ -9,6 +9,11 @@
     padding-top: 100px;
 }
 
+.c-padding {
+    margin-top: 12px;
+    width: 140px;
+}
+
 .z-HRVC {
     font-size: 32px;
     margin-top: 40px;
@@ -40,8 +45,9 @@
 }
 
 .fm-signin {
-    margin-left: 250px;
+
     margin-top: 30px;
+    text-align: center;
 }
 
 .checkbox-remember {
@@ -50,9 +56,13 @@
 }
 
 .fm-box-sig {
-    padding-left: 50px;
     margin-top: 30px;
     font-size: 12px;
+    text-align: end;
+}
+
+.password-eye {
+    cursor: pointer;
 }
 
 .link-privacy {
@@ -63,13 +73,14 @@
 }
 
 .width-rof {
-    width: 60%;
-    margin-top: -260%;
-    margin-left: 80px;
+    width: 70%;
+    padding-top: 70%;
+    margin-left: 50px;
 }
 
 .backgroundbule {
-    height: 700px;
+    height: 775px;
+    background-color: #DDF3FF;
 }
 
 .problem {

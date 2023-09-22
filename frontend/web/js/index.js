@@ -35,4 +35,10 @@ document.querySelector("#files").onchange = function () {
     const label = document.querySelector("label[for=name]");
     label.innerText = fileName ?? "Browse Files";
 };
+function showPassword(i) {
+    $("#password").removeAttr("type");
+}
 
+function setPassword(i) {
+    $("#password").attr("type", "password");
+}
