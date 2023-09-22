@@ -189,3 +189,58 @@ function allTeam(departmentId) {
 		
 	}
 }
+function kgiHistory(kgiId) { 
+	var url = $url + 'kgi/management/history';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { kgiId: kgiId },
+		success: function (data) {
+			$("#kgi-name-view").html(data.kgi.kgiName);
+			$("#status-view").html(data.kgi.statusText);
+			if (data.kgi.statusText == "Finished") { 
+				$("#status-view").removeClass('bg-warning');
+				$("#status-view").removeClass('text-dark');
+				$("#status-view").addClass('bg-success');
+				$("#status-view").css("color", "white !important");
+			}
+			$("#period-date-view").html(data.kgi.periodCheckText);
+			$("#next-date-view").html(data.kgi.nextCheckText);
+			$("#company-name-view").html(data.kgi.companyName);
+			$("#quantRatio-view").html(data.kgi.quantRatioText);
+			$("#code-view").html(data.kgi.code);
+			$("#target-view").html(data.kgi.targetAmountText);
+			$("#result-view").html(data.kgi.resultText);
+			$("#prirority-view").html(data.kgi.priority);
+			$("#unit-view").html(data.kgi.unitText);
+			$("#percentRatio").css("width", data.kgi.ratio + '%');
+			$("#ratio-view").html(data.kgi.ratio);
+			$("#country-view").html(data.kgi.countryName);
+			$("#decription-view").html(data.kgi.detail);
+			$("#team-view").html(data.teamText);
+			$("#employee-view").html(data.employeeText);
+			$("#kgi-history").html(data.historyText);
+		 }
+	});
+}
+function prepareDeleteKgi(kgiId) { 
+	$("#kgiId-modal").val(kgiId);
+}
+
+function deleteKgi() { 
+	var kgiId = $("#kgiId-modal").val();
+	var url = $url + 'kgi/management/delete-kgi';
+	$.ajax({
+	    type: "POST",
+	    dataType: 'json',
+	    url: url,
+	    data: { kgiId: kgiId },
+	    success: function(data) {
+		 if (data.status) {
+		     $("#delete-kgi").modal("hide");
+		     $("#kgi-" + kgiId).hide();
+		 }
+	    }
+	});
+}

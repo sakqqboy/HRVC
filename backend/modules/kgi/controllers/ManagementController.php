@@ -5,6 +5,7 @@ namespace backend\modules\kgi\controllers;
 use backend\models\hrvc\Branch;
 use backend\models\hrvc\Company;
 use backend\models\hrvc\Country;
+use backend\models\hrvc\Employee;
 use backend\models\hrvc\Kgi;
 use backend\models\hrvc\KgiBranch;
 use backend\models\hrvc\KgiDepartment;
@@ -47,12 +48,12 @@ class ManagementController extends Controller
 					"priority" => $kgi["priority"],
 					"ratio" => number_format($ratio, 2),
 					"periodCheck" => ModelMaster::engDate($kgi["periodDate"], 2),
-					"nextCheck" => "",
+					"nextCheck" => Kgi::nextCheckDate($kgi['kgiId']),
 					"countTeam" => KgiTeam::kgiTeam($kgi["kgiId"]),
 					"flag" => Country::countryFlagBycompany($kgi["companyId"]),
 					"employee" => "",
+					"status" => $kgi["status"],
 					"countryName" => Country::countryNameBycompany($kgi['companyId']),
-					//"team" => KgiTeam::kgiTeam($kgi["kgiId"])
 				];
 			endforeach;
 		}
@@ -63,11 +64,14 @@ class ManagementController extends Controller
 		$kgiHistory = KgiHistory::find()->where(["status" => [1, 4], "kgiId" => $id])->orderBy('kgiHistoryId DESC')->asArray()->one();
 		if (isset($kgiHistory) && !empty($kgiHistory)) { //wait edit
 			$kgi = Kgi::find()->where(["kgiId" => $id])->asArray()->one();
+			if ($kgi["targetAmount"] != '' && $kgi["targetAmount"] != 0) {
+				$ratio = ($kgi["result"] / $kgi["targetAmount"]) * 100;
+			} else {
+				$ratio = 0;
+			}
 			$data = [
 				"kgiName" => $kgi["kgiName"],
-				//"companyName" => Company::companyName($kgi["companyId"]),
 				"companyId" => $kgi["companyId"],
-				//"branch" => KgiBranch::kgiBranch($kgi["kgiId"]),
 				"detail" => $kgiHistory['description'],
 				"quantRatio" => $kgiHistory["quantRatio"],
 				"targetAmount" => $kgiHistory["targetAmount"],
@@ -76,24 +80,29 @@ class ManagementController extends Controller
 				"result" => $kgiHistory["result"],
 				"unitId" => $kgiHistory["unitId"],
 				"month" => $kgiHistory['month'],
+				"monthName" => strtoupper(ModelMaster::monthEng($kgi['month'], 2)),
 				"priority" => $kgiHistory["priority"],
 				"periodCheck" => $kgiHistory["periodDate"],
 				"status" => $kgiHistory["status"],
 				"nextCheck" => $kgiHistory["nextCheckDate"],
 				"remark" => $kgiHistory["remark"],
-				//"countTeam" => KgiTeam::kgiTeam($kgi["kgiId"]),
-				//"flag" => Country::countryFlagBycompany($kgi["companyId"]),
-				//"employee" => "",
-				//"countryName" => Country::countryNameBycompany($kgi['companyId']),
-				//"team" => KgiTeam::kgiTeam($kgi["kgiId"])
+				"statusText" => $kgiHistory["status"] == 1 ? 'On process' : 'Finished',
+				"nextCheckText" => ModelMaster::engDate($kgiHistory["nextCheckDate"], 2),
+				"periodCheckText" => ModelMaster::engDate($kgiHistory["periodDate"], 2),
+				"companyName" => Company::companyName($kgi["companyId"]),
+				"countryName" => Country::countryNameBycompany($kgi["companyId"]),
+				"flag" => Country::countryFlagBycompany($kgi["companyId"]),
+				"quantRatioText" => $kgiHistory["quantRatio"] == 1 ? "Quantity" : "Quality",
+				"targetAmountText" => number_format($kgiHistory["targetAmount"], 2),
+				"resultText" =>  number_format($kgiHistory["result"], 2),
+				"ratio" => number_format($ratio, 2),
+				"unitText" => Unit::unitName($kgiHistory["unitId"]),
 			];
 		} else {
 			$kgi = Kgi::find()->where(["kgiId" => $id])->asArray()->one();
 			$data = [
 				"kgiName" => $kgi["kgiName"],
-				//"companyName" => Company::companyName($kgi["companyId"]),
 				"companyId" => $kgi["companyId"],
-				//"branch" => KgiBranch::kgiBranch($kgi["kgiId"]),
 				"detail" => $kgi['kgiDetail'],
 				"quantRatio" => $kgi["quantRatio"],
 				"targetAmount" => $kgi["targetAmount"],
@@ -102,16 +111,12 @@ class ManagementController extends Controller
 				"result" => $kgi["result"],
 				"unitId" => $kgi["unitId"],
 				"month" => $kgi['month'],
+				"monthName" => strtoupper(ModelMaster::monthEng($kgi['month'], 2)),
 				"priority" => $kgi["priority"],
 				"periodCheck" => $kgi["periodDate"],
 				"status" => $kgi["status"],
 				"nextCheck" => "",
 				"remark" => "",
-				//"countTeam" => KgiTeam::kgiTeam($kgi["kgiId"]),
-				//"flag" => Country::countryFlagBycompany($kgi["companyId"]),
-				//"employee" => "",
-				//"countryName" => Country::countryNameBycompany($kgi['companyId']),
-				//"team" => KgiTeam::kgiTeam($kgi["kgiId"])
 			];
 		}
 
@@ -165,6 +170,59 @@ class ManagementController extends Controller
 		if (isset($kgiTeams) && count($kgiTeams)) {
 			foreach ($kgiTeams as $kgiTeam) :
 				$data[$kgiTeam["departmentId"]][$kgiTeam["teamId"]] = $kgiTeam["teamName"];
+			endforeach;
+		}
+		return json_encode($data);
+	}
+	public function actionKgiEmployee($id)
+	{
+		$kgiTeams = KgiTeam::find()
+			->select('teamId')
+			->where(["kgiId" => $id])
+			->asArray()
+			->all();
+		$data = [];
+		if (isset($kgiTeams) && count($kgiTeams) > 0) {
+			foreach ($kgiTeams as $team) :
+				$employee = Employee::find()->select('employeeFirstname,employeeSurename,employeeNumber,employeeId,picture')
+					->where(["teamId" => $team["teamId"], "status" => 1])
+					->asArray()
+					->orderBy('employeeNumber')
+					->all();
+				if (isset($employee) && count($employee) > 0) {
+					foreach ($employee as $em) :
+						$data[$em["employeeId"]] = [
+							"firstname" => $em["employeeFirstname"],
+							"surename" => $em["employeeSurename"],
+							"image" => $em["picture"],
+						];
+					endforeach;
+				}
+
+			endforeach;
+		}
+
+		return json_encode($data);
+	}
+	public function actionKgiHistory($kgiId)
+	{
+		$kgiHistory = KgiHistory::find()
+			->where(["kgiId" => $kgiId, "status" => [1, 4]])
+			->orderBy('kgiHistoryId DESC')
+			->asArray()
+			->all();
+		$data = [];
+		if (isset($kgiHistory) && count($kgiHistory) > 0) {
+			foreach ($kgiHistory as $history) :
+				$time = explode(' ', $history["createDateTime"]);
+				$data[$history["kgiHistoryId"]] = [
+					"title" => $history["titleProcess"],
+					"remark" => $history["remark"],
+					"result" => $history["result"],
+					"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
+					"time" => ModelMaster::timeText($time[1]),
+					"status" => $history["status"]
+				];
 			endforeach;
 		}
 		return json_encode($data);

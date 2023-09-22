@@ -28,7 +28,6 @@ class ManagementController extends Controller
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
-		//$units = ["1" => "Monthly", "2" => "Weekly", "3" => "QuaterLy", "4" => "Daily"];
 
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -56,7 +55,34 @@ class ManagementController extends Controller
 	}
 	public function actionGrid()
 	{
-		return $this->render('kgi_grid');
+		$groupId = Group::currentGroupId();
+		if ($groupId == null) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+		}
+
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$companies = curl_exec($api);
+		$companies = json_decode($companies, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
+		$units = curl_exec($api);
+		$units = json_decode($units, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/index');
+		$kgis = curl_exec($api);
+		$kgis = json_decode($kgis, true);
+
+		curl_close($api);
+		$months = ModelMaster::monthFull(1);
+		return $this->render('kgi_grid', [
+			"units" => $units,
+			"companies" => $companies,
+			"months" => $months,
+			"kgis" => $kgis
+		]);
 	}
 	public function actionCreateKgi()
 	{
@@ -416,5 +442,48 @@ class ManagementController extends Controller
 			}
 		}
 		return $this->redirect('index');
+	}
+	public function actionHistory()
+	{
+		$kgiId = $_POST["kgiId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
+		$kgi = curl_exec($api);
+		$kgi = json_decode($kgi, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-team?id=' . $kgiId);
+		$kgiTeams = curl_exec($api);
+		$kgiTeams = json_decode($kgiTeams, true);
+		//throw new Exception(print_r($kgiTeams, true));
+		$res["teamText"] = $this->renderAjax('kgi_team', ["kgiTeams" => $kgiTeams]);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-employee?id=' . $kgiId);
+		$kgiEmloyee = curl_exec($api);
+		$kgiEmloyee = json_decode($kgiEmloyee, true);
+		$res["employeeText"] = $this->renderAjax('kgi_member', ["kgiEmloyee" => $kgiEmloyee]);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-history?kgiId=' . $kgiId);
+		$history = curl_exec($api);
+		$history = json_decode($history, true);
+		$res["historyText"] = $this->renderAjax('kgi_history', ["history" => $history]);
+
+		curl_close($api);
+
+		$res["kgi"] = $kgi;
+
+
+		return json_encode($res);
+	}
+	public function actionDeleteKgi()
+	{
+		$kgiId = $_POST["kgiId"];
+		KgiTeam::updateAll(["status" => 99], ["kgiId" => $kgiId]);
+		KgiDepartment::updateAll(["status" => 99], ["kgiId" => $kgiId]);
+		KgiBranch::updateAll(["status" => 99], ["kgiId" => $kgiId]);
+		KgiHistory::updateAll(["status" => 99], ["kgiId" => $kgiId]);
+		Kgi::updateAll(["status" => 99], ["kgiId" => $kgiId]);
+		$res["status"] = true;
+		return json_encode($res);
 	}
 }

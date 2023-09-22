@@ -17,14 +17,7 @@
 
 .link-3 {
     font-size: 18px;
-    text-decoration: none;
-    color: #000000;
-}
-
-.link-3:hover {
-    border-bottom: #2F80ED 2px solid;
     font-weight: 700;
-    color: #000000;
 }
 
 .card-hashed {
@@ -330,7 +323,7 @@
 
 .circle-Priority {
     border: 4px solid rgb(52, 153, 224);
-    padding-left: 10px;
+    /* padding-left: 10px; */
     padding-top: 3px;
     background-color: #FFFFFF;
     height: 40px;
@@ -338,6 +331,8 @@
     width: 40px;
     margin-left: 90px;
     margin-top: -15px;
+    text-align: center;
+    font-weight: 500;
 }
 
 .Priority1 {

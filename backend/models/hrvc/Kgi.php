@@ -4,6 +4,7 @@ namespace backend\models\hrvc;
 
 use Yii;
 use \backend\models\hrvc\master\KgiMaster;
+use common\models\ModelMaster;
 
 /**
  * This is the model class for table "kgi".
@@ -43,5 +44,16 @@ class Kgi extends \backend\models\hrvc\master\KgiMaster
     public function attributeLabels()
     {
         return array_merge(parent::attributeLabels(), []);
+    }
+    public static function nextCheckDate($kgiId)
+    {
+        $date = '';
+        $kgiHistory = KgiHistory::find()
+            ->select('nextCheckDate')
+            ->where(["kgiId" => $kgiId, "status" => [1, 4]])->orderBy('kgiHistoryId')->asArray()->one();
+        if (isset($kgiHistory) && !empty($kgiHistory) && $kgiHistory["nextCheckDate"] != '') {
+            $date = ModelMaster::engDate($kgiHistory["nextCheckDate"], 2);
+        }
+        return $date;
     }
 }

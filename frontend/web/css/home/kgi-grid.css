@@ -61,24 +61,24 @@
 
 .Quality-diamond {
     font-weight: 700;
-    font-size: 13px;
+    font-size: 12px;
     padding-top: 5px;
 }
 
 .Quality-monthly0 {
     font-weight: 700;
     font-size: 15px;
-    padding-top: 5px;
+    padding-top: 8px;
 }
 
 .circle-update {
     border: 4px solid rgb(52, 153, 224);
-    padding-left: 10px;
     padding-top: 3px;
     background-color: #FFFFFF;
     height: 40px;
     border-radius: 50%;
     width: 40px;
+    font-weight: 500;
 
 }
 

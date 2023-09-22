@@ -86,8 +86,8 @@
 								?>
 
 
-								<input type="hidden" value="1" id="currentUnit" class="currentUnit" name="unit" required>
-								<input type="hidden" value="1" id="previousUnit" class="previousUnit" required>
+								<input type="hidden" value="" id="currentUnit" class="currentUnit" name="unit" required>
+								<input type="hidden" value="" id="previousUnit" class="previousUnit" required>
 							</div>
 						</div>
 						<div class="row">
