@@ -63,7 +63,7 @@ $form = ActiveForm::begin([
             This site is protected by reCAPTCHA and the Google <a href="" class="text-dark"> Privacy Policy</a> and <a href="" class="text-dark">Terms of Service</a> apply
         </div>
         <div class="col-12 all-cc">
-            <img src="<?= Yii::$app->homeUrl ?>image/TCG-Logo1.png" class="TCG-Logo1"> <img src="<?= Yii::$app->homeUrl ?>image/c-tokyo.png" class="c-padding">
+            <img src="<?= Yii::$app->homeUrl ?>image/TCG-Logo1.png" class="TCG-Logo1"> <i class="fa fa-copyright text-secondary font-size-12" aria-hidden="true"></i> <span class="text-secondary font-size-12">Tokyo Consulting Group 2023</span>
         </div>
     </div>
     <div class="col-lg-3 col-md-6 col-12 backgroundbule">
