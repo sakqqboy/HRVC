@@ -22,6 +22,13 @@ use yii\web\Controller;
  */
 class ManagementController extends Controller
 {
+	public function beforeAction($action)
+	{
+		if (!Yii::$app->user->id) {
+			return $this->redirect(Yii::$app->homeUrl . 'site/login');
+		}
+		return true;
+	}
 	public function actionIndex()
 	{
 		$groupId = Group::currentGroupId();
