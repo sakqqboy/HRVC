@@ -10,7 +10,7 @@ use yii\bootstrap5\Html;
 $this->title = 'Login';
 ?>
 
-<div class="col-12">
+<!-- <div class="col-12">
     <div class="row">
         <div class="col-lg-8 col-md-6 col-12">
             <div class="col-12 text-center">
@@ -67,4 +67,4 @@ $this->title = 'Login';
             </div>
         </div>
     </div>
-</div>
+</div> -->
