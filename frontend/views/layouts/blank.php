@@ -23,8 +23,8 @@ AppAsset::register($this);
 <body class="d-flex flex-column h-100">
 	<?php $this->beginBody() ?>
 
-	<main role="main">
-		<div class="container">
+	<main role="main" class="flex-shrink-0">
+		<div class="mt-30">
 			<?= $content ?>
 		</div>
 	</main>
