@@ -16,8 +16,6 @@ $form = ActiveForm::begin([
     ],
 
 ]); ?>
-?>
-
 
 <div class="row">
     <div class="col-lg-9 col-md-6 col-12">
@@ -62,11 +60,11 @@ $form = ActiveForm::begin([
         <div class="col-12 link-privacy">
             This site is protected by reCAPTCHA and the Google <a href="" class="text-dark"> Privacy Policy</a> and <a href="" class="text-dark">Terms of Service</a> apply
         </div>
-        <div class="col-12" style="margin-top :100px;">
-            <img src="<?= Yii::$app->homeUrl ?>image/TCG-Logo1.png" class="TCG-Logo1"> &nbsp; <img src="<?= Yii::$app->homeUrl ?>image/c-tokyo.png" style="padding-top: 15px;width:100px;">
+        <div class="col-12 all-cc">
+            <img src="<?= Yii::$app->homeUrl ?>image/TCG-Logo1.png" class="TCG-Logo1"> <img src="<?= Yii::$app->homeUrl ?>image/c-tokyo.png">
         </div>
     </div>
-    <div class="col-lg-3 col-md-6 col-12 border">
+    <div class="col-lg-3 col-md-6 col-12">
         <div class="col-12">
             <img src="<?= Yii::$app->homeUrl ?>image/backgroundbule.png" class="backgroundbule">
         </div>

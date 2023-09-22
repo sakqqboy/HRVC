@@ -1,6 +1,12 @@
 .width-HRVC {
     width: 30%;
     margin-top: 30px;
+    margin-left: 30px;
+}
+
+.all-cc {
+    margin-left: 30px;
+    padding-top: 100px;
 }
 
 .z-HRVC {
@@ -59,7 +65,7 @@
 .width-rof {
     width: 60%;
     margin-top: -350%;
-    margin-left: 80px;
+    /* margin-left: 80px; */
 }
 
 .backgroundbule {
