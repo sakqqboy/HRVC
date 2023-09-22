@@ -29,7 +29,7 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_INACTIVE = 99;
     const STATUS_ACTIVE = 1;
 
-
+    public $auth_key;
     /**
      * {@inheritdoc}
      */
@@ -64,7 +64,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+        return static::findOne(['userId' => $id, 'status' => self::STATUS_ACTIVE]);
     }
 
     /**

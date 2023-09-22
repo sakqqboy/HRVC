@@ -30,6 +30,13 @@ class CompanyController extends Controller
 	 * Renders the index view for the module
 	 * @return string
 	 */
+	public function beforeAction($action)
+	{
+		if (!Yii::$app->user->id) {
+			return $this->redirect(Yii::$app->homeUrl . 'site/login');
+		}
+		return true; //go to origin request
+	}
 	public function actionIndex()
 	{
 		$group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();

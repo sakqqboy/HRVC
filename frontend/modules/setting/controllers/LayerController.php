@@ -5,6 +5,7 @@ namespace frontend\modules\setting\controllers;
 use common\helpers\Path;
 use frontend\models\hrvc\Layer;
 use frontend\models\hrvc\SubLayer;
+use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
 
@@ -18,6 +19,13 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 class LayerController extends Controller
 {
+	public function beforeAction($action)
+	{
+		if (!Yii::$app->user->id) {
+			return $this->redirect(Yii::$app->homeUrl . 'site/login');
+		}
+		return true; //go to origin request
+	}
 	public function actionIndex()
 	{
 		$api = curl_init();

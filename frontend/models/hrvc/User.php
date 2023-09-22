@@ -6,31 +6,52 @@ use Yii;
 use \frontend\models\hrvc\master\UserMaster;
 
 /**
-* This is the model class for table "user".
-*
-* @property integer $userId
-* @property string $userName
-* @property string $password_hash
-* @property integer $employeeId
-* @property integer $status
-* @property string $createDateTime
-* @property string $updateDateTime
-*/
+ * This is the model class for table "user".
+ *
+ * @property integer $userId
+ * @property string $userName
+ * @property string $password_hash
+ * @property integer $employeeId
+ * @property integer $status
+ * @property string $createDateTime
+ * @property string $updateDateTime
+ */
 
-class User extends \frontend\models\hrvc\master\UserMaster{
+class User extends \frontend\models\hrvc\master\UserMaster
+{
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function rules()
     {
         return array_merge(parent::rules(), []);
     }
 
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return array_merge(parent::attributeLabels(), []);
+    }
+    public static function userHeaderName()
+    {
+        if (Yii::$app->user->id) {
+            $user = User::find()->where(["userId" => Yii::$app->user->id, "status" => 1])->asArray()->one();
+            $employee = Employee::find()->where(["employeeId" => $user["employeeId"]])->asArray()->one();
+            if (isset($employee) && !empty($employee)) {
+                return $employee["employeeFirstname"] . " " . $employee["employeeSurename"];
+            } else {
+                return '';
+            }
+        }
+    }
+    public static function userHeaderImage()
+    {
+        if (Yii::$app->user->id) {
+            $user = User::find()->where(["userId" => Yii::$app->user->id, "status" => 1])->asArray()->one();
+            $employee = Employee::find()->where(["employeeId" => $user["employeeId"]])->asArray()->one();
+            return $employee["picture"];
+        }
     }
 }

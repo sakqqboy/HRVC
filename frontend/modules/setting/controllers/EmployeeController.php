@@ -37,6 +37,13 @@ class EmployeeController extends Controller
      * Renders the index view for the module
      * @return string
      */
+    public function beforeAction($action)
+    {
+        if (!Yii::$app->user->id) {
+            return $this->redirect(Yii::$app->homeUrl . 'site/login');
+        }
+        return true; //go to origin request
+    }
     public function actionIndex($hash)
     {
         $param = ModelMaster::decodeParams($hash);

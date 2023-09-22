@@ -1,3 +1,7 @@
+<?php
+
+use frontend\models\hrvc\User;
+?>
 <div class="col-12" id="main">
     <div class="row">
         <nav class="navbar navbar-light bg-light">
@@ -21,8 +25,8 @@
                     <div class="col-lg-4  col-4 shadow-header">
                         <div class="dropdown">
                             <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="<?= Yii::$app->homeUrl ?>image/ehsan-small.png" class="width-ehsan-small">
-                                <strong> Quazi Ehsan Hossain</strong>
+                                <img src="<?= Yii::$app->homeUrl ?><?= isset(Yii::$app->user->id) ? User::userHeaderImage() : 'image/ehsan-small.png' ?>" class="width-ehsan-small">
+                                <strong> <?= isset(Yii::$app->user->id) ? User::userHeaderName() : 'Login' ?></strong>
                             </a>
                             <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
                                 <li><a class="dropdown-item" href="#"><i class="fa fa-user" aria-hidden="true"></i> My Profile</a></li>
@@ -31,7 +35,7 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
+                                <li><a class="dropdown-item" href="<?= Yii::$app->homeUrl ?>site/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
                             </ul>
                         </div>
                     </div>
