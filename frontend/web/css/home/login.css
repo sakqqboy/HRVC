@@ -30,17 +30,17 @@
 }
 
 .fm-log-mail {
-    margin-left: 210px;
+    margin-left: 250px;
     margin-top: 30px;
 }
 
 .fm-log-password {
-    margin-left: 210px;
+    margin-left: 250px;
     margin-top: 30px;
 }
 
 .fm-signin {
-    margin-left: 210px;
+    margin-left: 250px;
     margin-top: 30px;
 }
 
@@ -58,14 +58,14 @@
 .link-privacy {
     margin-top: 30px;
     font-size: 10px;
-    padding-left: 230px;
+    padding-left: 280px;
     font-weight: 700;
 }
 
 .width-rof {
     width: 60%;
-    margin-top: -350%;
-    /* margin-left: 80px; */
+    margin-top: -260%;
+    margin-left: 80px;
 }
 
 .backgroundbule {
