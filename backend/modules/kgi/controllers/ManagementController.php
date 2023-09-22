@@ -100,6 +100,11 @@ class ManagementController extends Controller
 			];
 		} else {
 			$kgi = Kgi::find()->where(["kgiId" => $id])->asArray()->one();
+			if ($kgi["targetAmount"] != '' && $kgi["targetAmount"] != 0) {
+				$ratio = ($kgi["result"] / $kgi["targetAmount"]) * 100;
+			} else {
+				$ratio = 0;
+			}
 			$data = [
 				"kgiName" => $kgi["kgiName"],
 				"companyId" => $kgi["companyId"],
@@ -117,6 +122,17 @@ class ManagementController extends Controller
 				"status" => $kgi["status"],
 				"nextCheck" => "",
 				"remark" => "",
+				"statusText" => $kgi["status"] == 1 ? 'On process' : 'Finished',
+				"nextCheckText" => "",
+				"periodCheckText" => ModelMaster::engDate($kgi["periodDate"], 2),
+				"companyName" => Company::companyName($kgi["companyId"]),
+				"countryName" => Country::countryNameBycompany($kgi["companyId"]),
+				"flag" => Country::countryFlagBycompany($kgi["companyId"]),
+				"quantRatioText" => $kgi["quantRatio"] == 1 ? "Quantity" : "Quality",
+				"targetAmountText" => number_format($kgi["targetAmount"], 2),
+				"resultText" =>  number_format($kgi["result"], 2),
+				"ratio" => number_format($ratio, 2),
+				"unitText" => Unit::unitName($kgi["unitId"]),
 			];
 		}
 
