@@ -24,7 +24,7 @@ AppAsset::register($this);
 	<?php $this->beginBody() ?>
 
 	<main role="main" class="flex-shrink-0">
-		<div class="">
+		<div class="pr-12">
 			<?= $content ?>
 		</div>
 	</main>

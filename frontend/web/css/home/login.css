@@ -6,7 +6,11 @@
 
 .all-cc {
     margin-left: 30px;
-    padding-top: 100px;
+    padding-top: 130px;
+}
+
+.c1 {
+    color: #808080;
 }
 
 .z-HRVC {
@@ -22,6 +26,7 @@
     font-weight: 600;
     font-family: Arial, Helvetica, sans-serif;
 }
+
 
 .enter {
     color: #808080;
@@ -40,8 +45,9 @@
 }
 
 .fm-signin {
-    margin-left: 250px;
+
     margin-top: 30px;
+    text-align: center;
 }
 
 .checkbox-remember {
@@ -50,9 +56,13 @@
 }
 
 .fm-box-sig {
-    padding-left: 50px;
     margin-top: 30px;
     font-size: 12px;
+    text-align: end;
+}
+
+.password-eye {
+    cursor: pointer;
 }
 
 .link-privacy {
@@ -63,13 +73,14 @@
 }
 
 .width-rof {
-    width: 60%;
-    margin-top: -260%;
-    margin-left: 80px;
+    width: 70%;
+    padding-top: 70%;
+    margin-left: 50px;
 }
 
 .backgroundbule {
-    height: 700px;
+    height: 775px;
+    background-color: #DDF3FF;
 }
 
 .problem {
@@ -78,6 +89,7 @@
 
 .TCG-Logo1 {
     width: 40px;
+    margin-top: -17px;
 }
 
 .rows-remember {

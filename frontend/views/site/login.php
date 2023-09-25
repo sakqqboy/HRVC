@@ -39,36 +39,35 @@ $form = ActiveForm::begin([
             <label for="exampleInputPassword1" class="form-label em-login">Password</label>
             <div class="input-group mb-3">
                 <span class="input-group-text"><i class="fa fa-unlock-alt" aria-hidden="true"></i></span>
-                <input type="password" required name="LoginForm[password]" class="form-control" aria-label="" placeholder="password">
-                <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
+                <input id="password" type="password" required name="LoginForm[password]" class="form-control" aria-label="password" placeholder="password">
+                <span class="input-group-text" onmousedown="javascript:showPassword()" onmouseup="javascript:setPassword()"><i class="fa fa-eye password-eye" aria-hidden="true"></i></span>
             </div>
             <div class="row">
-                <div class="col-lg-6 checkbox-remember">
+                <div class="col-6 checkbox-remember">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                         <label class="form-check-label" for="flexCheckDefault"> Remember Credentials</label>
                     </div>
                 </div>
-                <div class="col-lg-6 fm-box-sig">
-                    <span class="problem">Signing Problem?</span> <a href="">Contact Support</a>
+                <div class="col-6 fm-box-sig">
+                    <span class="problem">Signing Problem? </span> <a href="">Contact Support</a>
+                </div>
+                <div class="col-12 fm-signin">
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Sign in</button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-8 col-md-6 col-12 fm-signin">
-            <button type="submit" class="btn btn-primary" style="width: 33rem;">Sign in</button>
         </div>
         <div class="col-12 link-privacy">
             This site is protected by reCAPTCHA and the Google <a href="" class="text-dark"> Privacy Policy</a> and <a href="" class="text-dark">Terms of Service</a> apply
         </div>
         <div class="col-12 all-cc">
-            <img src="<?= Yii::$app->homeUrl ?>image/TCG-Logo1.png" class="TCG-Logo1"> <img src="<?= Yii::$app->homeUrl ?>image/c-tokyo.png">
+            <img src="<?= Yii::$app->homeUrl ?>image/TCG-Logo1.png" class="TCG-Logo1"> <i class="fa fa-copyright text-secondary font-size-12" aria-hidden="true"></i> <span class="text-secondary font-size-12">Tokyo Consulting Group 2023</span>
         </div>
     </div>
-    <div class="col-lg-3 col-md-6 col-12">
+    <div class="col-lg-3 col-md-6 col-12 backgroundbule">
         <div class="col-12">
-            <img src="<?= Yii::$app->homeUrl ?>image/backgroundbule.png" class="backgroundbule">
-        </div>
-        <div class="col-12 pr-0 pl-0">
             <img src="<?= Yii::$app->homeUrl ?>image/Roof.png" class="width-rof">
         </div>
     </div>
