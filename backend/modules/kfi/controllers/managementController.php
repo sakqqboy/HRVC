@@ -5,11 +5,15 @@ namespace backend\modules\kfi\controllers;
 use backend\models\hrvc\Branch;
 use backend\models\hrvc\Company;
 use backend\models\hrvc\Country;
+use backend\models\hrvc\Employee;
 use backend\models\hrvc\Kfi;
 use backend\models\hrvc\KfiHistory;
 use backend\models\hrvc\Unit;
+use backend\models\hrvc\User;
 use common\models\ModelMaster;
 use Exception;
+use frontend\models\hrvc\KfiIssue;
+use yii\db\Expression;
 use yii\web\Controller;
 
 /**
@@ -92,6 +96,7 @@ class ManagementController extends Controller
 		$res["monthName"] = strtoupper(ModelMaster::monthEng($kfi['month'], 1));
 		$res["unit"] = Unit::unitName($kfi['unitId']);
 		$res["countryName"] = Country::countryNameBycompany($kfi['companyId']);
+		$res["flag"] = Country::countryFlagBycompany($kfi["companyId"]);
 
 		$kfiHistory = KfiHistory::find()
 			->where(["kfiId" => $kfiId, "status" => [1, 4]])
@@ -145,6 +150,29 @@ class ManagementController extends Controller
 					"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
 					"time" => ModelMaster::timeText($time[1]),
 					"status" => $history["historyStatus"]
+				];
+			endforeach;
+		}
+		return json_encode($data);
+	}
+	public function actionKfiIssue($kfiId)
+	{
+		$kfiIssue = KfiIssue::find()
+			->where(["status" => [1, 4], "kfiId" => $kfiId])
+			->orderBy("kfiIssueId")
+			->asArray()
+			->all();
+
+		$data = [];
+		if (isset($kfiIssue) && count($kfiIssue) > 0) {
+			foreach ($kfiIssue as $issue) :
+				$employee = Employee::EmployeeDetail($issue["employeeId"]);
+				$data[$issue["kfiIssueId"]] = [
+					"issue" => $issue["issue"],
+					"file" => $issue["file"],
+					"employeeName" => $employee["employeeFirstname"] . ' ' . $employee["employeeSurename"],
+					"image" => Employee::EmployeeDetail($issue["employeeId"])["picture"],
+					"createDateTime" => ModelMaster::engDate($issue["createDateTime"], 2),
 				];
 			endforeach;
 		}

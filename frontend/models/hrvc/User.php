@@ -54,4 +54,9 @@ class User extends \frontend\models\hrvc\master\UserMaster
             return $employee["picture"];
         }
     }
+    public static function employeeIdFromUserId()
+    {
+        $user = User::find()->where(["userId" => Yii::$app->user->id])->asArray()->one();
+        return $user["employeeId"];
+    }
 }

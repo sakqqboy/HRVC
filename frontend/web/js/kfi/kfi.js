@@ -190,3 +190,38 @@ function deleteKfi() {
         }
     });
 }
+$("#pills-Issues-tab-kfi").click(function () {
+    $("#pills-Issues-tab-kfi").addClass("text-primary");
+    $("#pills-History-tab-kfi").removeClass("text-primary");
+    $("#pills-History").removeClass("active");
+    $("#pills-Issues-tab-kfi").css("border-bottom", "5px #0d6efd solid");
+    $("#pills-History-tab-kfi").removeAttr("style");
+});
+$("#pills-History-tab-kfi").click(function () {
+    $("#pills-History-tab-kfi").addClass("text-primary");
+    $("#pills-Issues-tab-kfi").removeClass("text-primary");
+    $("#pills-Issues").removeClass("active");
+    $("#pills-History-tab-kfi").attr("style");
+    $("#pills-History-tab-kfi").css("border-bottom", "5px #0d6efd solid");
+    $("#pills-Issues-tab-kfi").removeAttr("style");
+});
+function showKfiComment(kfiId) { 
+    var url = $url + 'kfi/management/show-comment';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { kfiId: kfiId },
+        success: function(data) {
+            if (data.status) {
+                $("#kfi-name-issue").html(data.kfi.kfiName);
+                $("#pills-Issues").html(data.issueText);
+                $("#pills-History").html(data.historyText);
+                $("#company-issue").html(data.kfi.companyName);
+                $("#branch-issue").html(data.kfi.branchName);
+                $("#country-issue").html(data.kfi.countryName);
+                $("#flag-issue").attr('src',$url+data.kfi.flag);
+            }
+        }
+    });
+}

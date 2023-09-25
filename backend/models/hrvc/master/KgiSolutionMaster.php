@@ -1,28 +1,29 @@
 <?php
 
-namespace frontend\models\hrvc\master;
+namespace backend\models\hrvc\master;
 
 use Yii;
 
 /**
-* This is the model class for table "user".
+* This is the model class for table "kgi_solution".
 *
-    * @property integer $userId
-    * @property string $username
-    * @property string $password_hash
+    * @property integer $kgiSolutionId
+    * @property integer $kgiIssueId
+    * @property string $solution
+    * @property integer $parentId
     * @property integer $employeeId
     * @property integer $status
     * @property string $createDateTime
     * @property string $updateDateTime
 */
-class UserMaster extends \common\models\ModelMaster
+class KgiSolutionMaster extends \common\models\ModelMaster
 {
 /**
 * @inheritdoc
 */
 public static function tableName()
 {
-return 'user';
+return 'kgi_solution';
 }
 
 /**
@@ -31,11 +32,10 @@ return 'user';
 public function rules()
 {
 return [
-            [['username', 'password_hash', 'employeeId'], 'required'],
-            [['employeeId'], 'integer'],
+            [['kgiIssueId', 'solution', 'employeeId'], 'required'],
+            [['kgiIssueId', 'parentId', 'employeeId'], 'integer'],
+            [['solution'], 'string'],
             [['createDateTime', 'updateDateTime'], 'safe'],
-            [['username'], 'string', 'max' => 100],
-            [['password_hash'], 'string', 'max' => 255],
             [['status'], 'string', 'max' => 10],
         ];
 }
@@ -46,9 +46,10 @@ return [
 public function attributeLabels()
 {
 return [
-    'userId' => 'User ID',
-    'username' => 'Username',
-    'password_hash' => 'Password Hash',
+    'kgiSolutionId' => 'Kgi Solution ID',
+    'kgiIssueId' => 'Kgi Issue ID',
+    'solution' => 'Solution',
+    'parentId' => 'Parent ID',
     'employeeId' => 'Employee ID',
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',

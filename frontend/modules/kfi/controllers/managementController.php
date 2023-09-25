@@ -8,11 +8,14 @@ use Exception;
 use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Department;
+use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Kfi;
 use frontend\models\hrvc\KfiBranch;
 use frontend\models\hrvc\KfiDepartment;
 use frontend\models\hrvc\KfiHistory;
+use frontend\models\hrvc\KfiIssue;
+use frontend\models\hrvc\User;
 use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
@@ -309,5 +312,54 @@ class ManagementController extends Controller
 		}
 		$res["departmentText"] = $text;
 		return json_encode($res);
+	}
+	public function actionShowComment()
+	{
+		$userId = Yii::$app->user->id;
+		$employeeId = User::employeeIdFromUserId($userId);
+		$kfiId = $_POST["kfiId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId);
+		$kfi = curl_exec($api);
+		$kfi = json_decode($kfi, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-issue?kfiId=' . $kfiId);
+		$kfiIssue = curl_exec($api);
+		$kfiIssue = json_decode($kfiIssue, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
+		$profile = curl_exec($api);
+		$profile = json_decode($profile, true);
+
+		curl_close($api);
+		$res["status"] = true;
+		$res["issueText"] = $this->renderAjax('kfi_issue', [
+			"kfiIssue" => $kfiIssue,
+			"kfiId" => $kfiId,
+			"profile" => $profile,
+			"employeeId" => $employeeId
+		]);
+		$res["historyText"] =  $this->renderAjax('kfi_history');;
+		$res["kfi"] = $kfi;
+
+		return json_encode($res);
+	}
+	public function actionCreateNewIssue()
+	{
+		if (isset($_POST["newIssue"]) && trim($_POST["newIssue"]) != "") {
+			$kfiIssue = new KfiIssue();
+
+			$kfiIssue->issue = $_POST["newIssue"];
+			$kfiIssue->kfiId = $_POST["kfiId"];
+			$kfiIssue->employeeId = $_POST["employeeId"];
+			$kfiIssue->status = 1;
+			$kfiIssue->createDateTime = new Expression('NOW()');
+			$kfiIssue->updateDateTime = new Expression('NOW()');
+			if ($kfiIssue->save(false)) {
+				return $this->redirect('index');
+			}
+		}
 	}
 }

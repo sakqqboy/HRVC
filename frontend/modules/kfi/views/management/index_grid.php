@@ -239,4 +239,7 @@ $this->title = 'KFI Grid View';
 	<?= $this->render('history_modal', [
 		"units" => $units,
 	]) ?>
+	<?= $this->render('issue_modal', [
+		"units" => $units,
+	]) ?>
 </div>
