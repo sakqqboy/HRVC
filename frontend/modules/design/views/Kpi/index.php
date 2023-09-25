@@ -333,7 +333,7 @@ $this->title = 'KPI';
                             <td>23rd Feb, 2023</td>
                             <td colspan="row">
                                 <span data-bs-toggle="modal" data-bs-target="#exampleModalcomment2"> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
-                                <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
+                                <span class="dropdown menulink" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <li data-bs-toggle="modal" data-bs-target="#exampleModalEditkpi1">
                                         <a class="dropdown-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>

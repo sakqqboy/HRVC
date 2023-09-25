@@ -2,10 +2,10 @@
 
 use common\models\ModelMaster;
 ?>
-<div class="col-lg-12 header1" id="mySidebar">
+<div class="col-lg-12 header1">
         <div class="col-12">
                 <div class="col-12">
-                        <i onclick="w3_close()" class="fa fa-step-backward caret-left" aria-hidden="true"></i>
+                        <i class="fa fa-step-backward caret-left" aria-hidden="true"></i>
                 </div>
                 <div class="col-12">
                         <a href="<?= Yii::$app->homeUrl ?>site/index">

@@ -33,7 +33,7 @@ $this->title = 'Setting KFI';
                     <div class="col-12">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1"><i class="fa fa-filter" aria-hidden="true"></i></span>
-                            <select class="form-select" aria-label="Default select example">
+                            <select class="form-select font-size-13" aria-label="Default select example">
                                 <option selected value="">Month</option>
                                 <option value="1">January</option>
                                 <option value="2">February</option>
@@ -48,7 +48,7 @@ $this->title = 'Setting KFI';
                                 <option value="11">November</option>
                                 <option value="12">December</option>
                             </select>
-                            <select class="form-select" aria-label="Default select example">
+                            <select class="form-select font-size-13" aria-label="Default select example">
                                 <option selected value="">Status</option>
                                 <option value="1">one</option>
                                 <option value="2">Two</option>
@@ -60,45 +60,174 @@ $this->title = 'Setting KFI';
             </div>
             <div class="alert alert-light mt-20" role="alert">
                 <table class="table table-striped">
-                    <thead class="table-secondary">
-                        <td>KFI Contents</td>
-                        <td>Company</td>
-                        <td>Branch</td>
-                        <td>Assign Employee</td>
-                        <td>Target</td>
-                        <td>Month</td>
-                        <td>Status</td>
+                    <thead class="table table-secondary">
+                        <tr class="secondary-setting">
+                            <th>KFI Contents</th>
+                            <th>Company</th>
+                            <th>Branch</th>
+                            <th>Assign Employee</th>
+                            <th>Target</th>
+                            <th>Month</th>
+                            <th>Status</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th>Increase sales in a way that company gains</th>
-                            <th>
-                                <span class="badge rounded-pill bg-setting">
-                                    <img class="Image-Description" src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png">
-                                    <img class="Image-Description" src="<?= Yii::$app->homeUrl ?>image/Flag-Brazil.png">
-                                    <button id="hs-dropdown-avatar-more" class="number-rounded">
-                                        <span class="font-medium leading-none">5</span>
-                                    </button>
-                                </span>
-                                <div class="company-setting"><i class="fa fa-building-o pl-8 pt-5 font-size-15" aria-hidden="true"></i> </div>
-                                <i class="fa fa-plus-circle plus-circle-logo" aria-hidden="true"></i>
-                                <div class="company-setting">
-                                    <div class="avatar-setting">
-                                        <input type="file" id="fileSetting" accept=".png, .jpg, .jpeg" name="image">
-                                        <label for="fileSetting"></label>
+                        <tr class="setting-fontsize">
+                            <td>Increase sales in a way that company gains</td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <span class="badge rounded-pill bg-setting">
+                                            <img class="Image-Description" src="<?= Yii::$app->homeUrl ?>image/logo-tcg.png">
+                                            <img class="Image-Description" src="<?= Yii::$app->homeUrl ?>image/1.png">
+                                            <button id="hs-dropdown-avatar-more" class="number-rounded">
+                                                <span class="font-medium leading-none">5</span>
+                                            </button>
+                                        </span>
                                     </div>
-                                    <div class="company-preview">
-                                        <div id="filePreview">
-                                            <img src="/HRVC/frontend/web/images/group/profile/8VCfq1gkt9.png" class="company-group-picture" id="old-image">
+                                    <div class="col-3">
+                                        <div class="setting-upload">
+                                            <i class="fa fa-building-o building1" aria-hidden="true"></i>
+                                            <div class="setting-edit">
+                                                <input type="file" id="loaddingUpload" accept=".png, .jpg, .jpeg">
+                                                <label for="loaddingUpload"></label>
+                                            </div>
+                                            <div class="setting-preview">
+                                                <div id="loaddingPreview">
+                                                </div>
+                                            </div>
                                         </div>
-
                                     </div>
                                 </div>
-                            </th>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <span class="badge rounded-pill bg-setting">
+                                            <img class="Image-Description" src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png">
+                                            <img class="Image-Description" src="<?= Yii::$app->homeUrl ?>image/Flag-Brazil.png">
+                                            <button id="hs-dropdown-avatar-more" class="number-rounded">
+                                                <span class="font-medium leading-none">5</span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="dashedshare">
+                                            <i class="fa fa-share-alt share-alt-setting" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <span class="badge rounded-pill bg-setting">
+                                            <img class="Image-Description" src="<?= Yii::$app->homeUrl ?>image/employee1.png">
+                                            <img class="Image-Description" src="<?= Yii::$app->homeUrl ?>image/employee2.png">
+                                            <button id="hs-dropdown-avatar-more" class="number-rounded">
+                                                <span class="font-medium leading-none">5</span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="dasheduser-upload">
+                                            <i class="fa fa-user user0m" aria-hidden="true"></i>
+                                            <div class="dasheduser-edit">
+                                                <input type="file" id="loaddingUploaduser" accept=".png, .jpg, .jpeg">
+                                                <label for="loaddingUploaduser"></label>
+                                            </div>
+                                            <div class="dasheduser-preview">
+                                                <div id="loaddinguserPreview">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><?= number_format(1000000) ?></td>
+                            <td>January</td>
+                            <td class="text-primary">Active</td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr class="setting-fontsize">
+                            <td>Increase sales in a way that company gains</td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <span class="badge rounded-pill bg-setting">
+                                            <button id="hs-dropdown-avatar-more" class="number-rounded">
+                                                <span class="font-medium leading-none">0</span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="setting-upload">
+                                            <i class="fa fa-building-o building1" aria-hidden="true"></i>
+                                            <div class="setting-edit">
+                                                <input type="file" id="loaddingUpload" accept=".png, .jpg, .jpeg">
+                                                <label for="loaddingUpload"></label>
+                                            </div>
+                                            <div class="setting-preview">
+                                                <div id="loaddingPreview">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <span class="badge rounded-pill bg-setting">
+                                            <button id="hs-dropdown-avatar-more" class="number-rounded">
+                                                <span class="font-medium leading-none">0</span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="dashedshare">
+                                            <i class="fa fa-share-alt share-alt-setting" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <span class="badge rounded-pill bg-setting">
+                                            <button id="hs-dropdown-avatar-more" class="number-rounded">
+                                                <span class="font-medium leading-none">0</span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="dasheduser-upload">
+                                            <i class="fa fa-user user0m" aria-hidden="true"></i>
+                                            <div class="dasheduser-edit">
+                                                <input type="file" id="loaddingUploaduser" accept=".png, .jpg, .jpeg">
+                                                <label for="loaddingUploaduser"></label>
+                                            </div>
+                                            <div class="dasheduser-preview">
+                                                <div id="loaddinguserPreview">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><?= number_format(52) ?></td>
+                            <td>January</td>
+                            <td class="text-danger">In Active</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+</div>
+
+<div class="form-check">
+    <label class="form-check-label" for="boxradios-kfi"> Default checkbox</label>
+    <input class="form-check-input" type="checkbox" value="" id="boxradios-kfi">
 </div>

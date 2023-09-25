@@ -6,9 +6,6 @@ use frontend\models\hrvc\User;
     <div class="row">
         <nav class="navbar navbar-light bg-light">
             <div class="col-lg-6 col-md-6 col-sm-4 col-5">
-                <!-- <div class="col-12">
-                    <i onclick="w3_close()" class="fa fa-step-forward caret-left" aria-hidden="true"></i>
-                </div> -->
                 <div class="input-group rounded1">
                     <input type="search" class="form-control rounded search-input2" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                     <span class="input-group-text border-0" id="search-addon">
@@ -39,7 +36,6 @@ use frontend\models\hrvc\User;
                             </ul>
                         </div>
                     </div>
-
                     <div class="col-lg-2 col-4">
                         <div class="dropdown">
                             <button type="button" class="btn btn-outline-dark  position-relative but-massenge" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-bell" aria-hidden="true"></i>
