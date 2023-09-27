@@ -20,12 +20,27 @@
 .teamClients {
     margin-top: -25px;
     margin-left: 300px;
+    font-weight: 700;
+}
 
+.million-number-Backdrop3 {
+    font-weight: 700;
 }
 
 .san {
-    margin-left: 290px;
+    margin-left: 310px;
     margin-top: -20px;
+}
+
+.on-right {
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    color: white;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 600;
+    margin-left: 5px;
 }
 
 .Team-Members {
@@ -55,4 +70,9 @@
 #v-pills-team1-tab:hover {
     border-bottom: #2F80ED 2px solid;
     width: 50px;
+}
+
+.Report-an-Issue {
+    font-weight: 700;
+    font-size: 14px;
 }

@@ -506,8 +506,7 @@ $this->title = 'Single KGI';
                         <div class="col-lg-5 col-md-6 col-12">
                             <div class="row">
                                 <div class="col-2">
-                                    <span class="badge rounded-pill bg-success"> ✓</span>
-
+                                    <div class="bg-success on-right"> ✓</div>
                                 </div>
                                 <div class="col-10">
                                     Stripe risk evaluation: normal
@@ -546,8 +545,7 @@ $this->title = 'Single KGI';
                         <div class="col-lg-5 col-md-6 col-12">
                             <div class="row">
                                 <div class="col-2">
-                                    <span class="badge rounded-pill bg-primary"> ✓</span>
-
+                                    <div class="bg-primary on-right"> ✓</div>
                                 </div>
                                 <div class="col-10">
                                     Stripe risk evaluation: normal
@@ -586,8 +584,7 @@ $this->title = 'Single KGI';
                         <div class="col-lg-5 col-md-6 col-12">
                             <div class="row">
                                 <div class="col-2">
-                                    <span class="badge rounded-pill bg-primary"> ✓</span>
-
+                                    <div class="bg-primary on-right"> ✓</div>
                                 </div>
                                 <div class="col-10">
                                     Stripe risk evaluation: normal
@@ -626,8 +623,7 @@ $this->title = 'Single KGI';
                         <div class="col-lg-5 col-md-6 col-12">
                             <div class="row">
                                 <div class="col-2">
-                                    <span class="badge rounded-pill bg-primary"> ✓</span>
-
+                                    <div class="bg-primary on-right"> ✓</div>
                                 </div>
                                 <div class="col-10">
                                     Stripe risk evaluation: normal

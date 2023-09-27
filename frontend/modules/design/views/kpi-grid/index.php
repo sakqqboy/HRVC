@@ -108,13 +108,15 @@ $this->title = 'KPI Grid View';
                                         FEBRUARY
                                     </div>
                                     <div class="col-lg-1 col-md-6 col-12">
-                                        <span class="badge rounded-pill bg-white">
-                                            <div class="flex mb-5 -space-x-4">
-                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-                                                <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-                                            </div>
+                                        <span class="badge rounded-pill bg-gray">
+                                            <ul class="try-cricle">
+                                                <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
+                                                <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
+                                                <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar3"></li>
+                                                <a href="" class="none">
+                                                    <li class="tri-li-number1"> 5 </li>
+                                                </a>
+                                            </ul>
                                         </span>
                                     </div>
                                     <div class="col-lg-1 col-md-6 col-12 text-end">
@@ -204,7 +206,7 @@ $this->title = 'KPI Grid View';
                                                 <div class="col-12 refresh0">
                                                     <i class="fa fa-refresh" aria-hidden="true"></i> Latest Update
                                                 </div>
-                                                <div class="col-12 font-size-12 pt-5" style="font-weight: 700;">
+                                                <div class="col-12 font-size-10 pt-5" style="font-weight: 700;">
                                                     Tue, Mar 12, 2023
                                                 </div>
                                             </div>
@@ -212,7 +214,7 @@ $this->title = 'KPI Grid View';
                                                 <div class="col-12 pencil-nextupdate">
                                                     Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="col-12 font-size-12 pt-5 text-end" style="font-weight: 700;">
+                                                <div class="col-12 font-size-10 pt-5 text-end" style="font-weight: 700;">
                                                     Tue, Mar 12, 2023
                                                 </div>
                                             </div>
@@ -255,13 +257,15 @@ $this->title = 'KPI Grid View';
                                         FEBRUARY
                                     </div>
                                     <div class="col-lg-1 col-md-6 col-12">
-                                        <span class="badge rounded-pill bg-white">
-                                            <div class="flex mb-5 -space-x-4">
-                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-                                                <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-                                            </div>
+                                        <span class="badge rounded-pill bg-gray">
+                                            <ul class="try-cricle">
+                                                <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
+                                                <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
+                                                <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar3"></li>
+                                                <a href="" class="none">
+                                                    <li class="tri-li-number1"> 5 </li>
+                                                </a>
+                                            </ul>
                                         </span>
                                     </div>
                                     <div class="col-lg-1 col-md-6 col-12 text-end">
@@ -351,7 +355,7 @@ $this->title = 'KPI Grid View';
                                                 <div class="col-12 refresh0">
                                                     <i class="fa fa-refresh" aria-hidden="true"></i> Latest Update
                                                 </div>
-                                                <div class="col-12 font-size-12 pt-5" style="font-weight: 700;">
+                                                <div class="col-12 font-size-10  pt-5" style="font-weight: 700;">
                                                     Tue, Mar 12, 2023
                                                 </div>
                                             </div>
@@ -359,7 +363,7 @@ $this->title = 'KPI Grid View';
                                                 <div class="col-12 pencil-nextupdate">
                                                     Next Update <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="col-12 font-size-12 pt-5 text-end" style="font-weight: 700;">
+                                                <div class="col-12 font-size-10 pt-5  text-end" style="font-weight: 700;">
                                                     Tue, Mar 12, 2023
                                                 </div>
                                             </div>

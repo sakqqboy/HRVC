@@ -182,13 +182,15 @@ $this->title = 'Single KPI Grid';
                                             </div>
                                             <div class="col-lg-6 text-end mt-10">
                                                 <div class="col-12">
-                                                    <span class="badge rounded-pill bg-white">
-                                                        <div class="flex mb-5 -space-x-4">
-                                                            <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-                                                            <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-                                                            <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-                                                            <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-                                                        </div>
+                                                    <span class="badge rounded-pill bg-gray">
+                                                        <ul class="try-cricle">
+                                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
+                                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
+                                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar3"></li>
+                                                            <a href="" class="none">
+                                                                <li class="tri-li-number1"> 5 </li>
+                                                            </a>
+                                                        </ul>
                                                     </span>
                                                 </div>
                                             </div>
@@ -303,13 +305,15 @@ $this->title = 'Single KPI Grid';
                                             </div>
                                             <div class="col-lg-6 text-end mt-10">
                                                 <div class="col-12">
-                                                    <span class="badge rounded-pill bg-white">
-                                                        <div class="flex mb-5 -space-x-4">
-                                                            <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-                                                            <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-                                                            <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-                                                            <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-                                                        </div>
+                                                    <span class="badge rounded-pill bg-gray">
+                                                        <ul class="try-cricle">
+                                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
+                                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
+                                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar3"></li>
+                                                            <a href="" class="none">
+                                                                <li class="tri-li-number1"> 5 </li>
+                                                            </a>
+                                                        </ul>
                                                     </span>
                                                 </div>
                                             </div>
@@ -424,13 +428,15 @@ $this->title = 'Single KPI Grid';
                                             </div>
                                             <div class="col-lg-6 text-end mt-10">
                                                 <div class="col-12">
-                                                    <span class="badge rounded-pill bg-white">
-                                                        <div class="flex mb-5 -space-x-4">
-                                                            <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-                                                            <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-                                                            <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-                                                            <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-                                                        </div>
+                                                    <span class="badge rounded-pill bg-gray">
+                                                        <ul class="try-cricle">
+                                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
+                                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
+                                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar3"></li>
+                                                            <a href="" class="none">
+                                                                <li class="tri-li-number1"> 5 </li>
+                                                            </a>
+                                                        </ul>
                                                     </span>
                                                 </div>
                                             </div>
@@ -545,13 +551,15 @@ $this->title = 'Single KPI Grid';
                                             </div>
                                             <div class="col-lg-6 text-end mt-10">
                                                 <div class="col-12">
-                                                    <span class="badge rounded-pill bg-white">
-                                                        <div class="flex mb-5 -space-x-4">
-                                                            <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-                                                            <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-                                                            <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-                                                            <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-                                                        </div>
+                                                    <span class="badge rounded-pill bg-gray">
+                                                        <ul class="try-cricle">
+                                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
+                                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
+                                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar3"></li>
+                                                            <a href="" class="none">
+                                                                <li class="tri-li-number1"> 5 </li>
+                                                            </a>
+                                                        </ul>
                                                     </span>
                                                 </div>
                                             </div>

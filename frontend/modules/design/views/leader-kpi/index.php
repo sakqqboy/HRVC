@@ -118,12 +118,16 @@ $this->title = 'TeamLeader KPI';
                                 <td>The number of clients per employee by team</td>
                                 <td class="text-center">A</td>
                                 <td>
-                                    <div class="flex mb-5 -space-x-4">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-                                        <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-                                    </div>
+                                    <span class="badge rounded-pill bg-gray">
+                                        <ul class="try-cricle">
+                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
+                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
+                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar3"></li>
+                                            <a href="" class="none">
+                                                <li class="tri-li-number"> 5 </li>
+                                            </a>
+                                        </ul>
+                                    </span>
                                 </td>
                                 <td>Quality</td>
                                 <td>January</td>
@@ -165,12 +169,16 @@ $this->title = 'TeamLeader KPI';
                                 <td>The number of clients per employee by team</td>
                                 <td class="text-center">A</td>
                                 <td>
-                                    <div class="flex mb-5 -space-x-4">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-                                        <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-                                    </div>
+                                    <span class="badge rounded-pill bg-gray">
+                                        <ul class="try-cricle">
+                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
+                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
+                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar3"></li>
+                                            <a href="" class="none">
+                                                <li class="tri-li-number"> 5 </li>
+                                            </a>
+                                        </ul>
+                                    </span>
                                 </td>
                                 <td>Quality</td>
                                 <td>January</td>
@@ -204,12 +212,16 @@ $this->title = 'TeamLeader KPI';
                                 <td>The number of clients per employee by team</td>
                                 <td class="text-center">A</td>
                                 <td class="text-center">
-                                    <div class="flex mb-5 -space-x-4">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-                                        <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-                                    </div>
+                                    <span class="badge rounded-pill bg-gray">
+                                        <ul class="try-cricle">
+                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
+                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
+                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar3"></li>
+                                            <a href="" class="none">
+                                                <li class="tri-li-number"> 5 </li>
+                                            </a>
+                                        </ul>
+                                    </span>
                                 </td>
                                 <td>Quality</td>
                                 <td>January</td>
@@ -243,12 +255,16 @@ $this->title = 'TeamLeader KPI';
                                 <td>The number of clients per employee by team</td>
                                 <td class="text-center">A</td>
                                 <td>
-                                    <div class="flex mb-5 -space-x-4">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-                                        <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-                                    </div>
+                                    <span class="badge rounded-pill bg-gray">
+                                        <ul class="try-cricle">
+                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
+                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
+                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar3"></li>
+                                            <a href="" class="none">
+                                                <li class="tri-li-number"> 5 </li>
+                                            </a>
+                                        </ul>
+                                    </span>
                                 </td>
                                 <td>Quality</td>
                                 <td>January</td>
@@ -282,12 +298,16 @@ $this->title = 'TeamLeader KPI';
                                 <td>The number of clients per employee by team</td>
                                 <td class="text-center">A</td>
                                 <td>
-                                    <div class="flex mb-5 -space-x-4">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-                                        <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-                                    </div>
+                                    <span class="badge rounded-pill bg-gray">
+                                        <ul class="try-cricle">
+                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
+                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
+                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar3"></li>
+                                            <a href="" class="none">
+                                                <li class="tri-li-number"> 5 </li>
+                                            </a>
+                                        </ul>
+                                    </span>
                                 </td>
                                 <td>Quality</td>
                                 <td>January</td>
@@ -321,12 +341,16 @@ $this->title = 'TeamLeader KPI';
                                 <td>The number of clients per employee by team</td>
                                 <td class="text-center">A</td>
                                 <td>
-                                    <div class="flex mb-5 -space-x-4">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-                                        <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-                                    </div>
+                                    <span class="badge rounded-pill bg-gray">
+                                        <ul class="try-cricle">
+                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
+                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
+                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar3"></li>
+                                            <a href="" class="none">
+                                                <li class="tri-li-number"> 5 </li>
+                                            </a>
+                                        </ul>
+                                    </span>
                                 </td>
                                 <td>Quality</td>
                                 <td>January</td>
@@ -512,7 +536,7 @@ $this->title = 'TeamLeader KPI';
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom:none;">
-                <div class="modal-title Modalfirstone" id="exampleModalViewkpi5Label"><i class="fa fa-flag-o" aria-hidden="true"></i> Increase Something</div>
+                <div class="modal-title Modalfirstone" id="exampleModalViewkpi5Label"><i class="fa fa-tachometer" aria-hidden="true"></i> Increase Something</div>
                 <div class="modal-title"> Team KPI Contents</div>
                 <div class="modal-title circle-update-team"> A</div>
                 <div class="modal-title badge rounded-pill bg-warning text-dark font-size-14">Completed</div>
@@ -719,8 +743,7 @@ $this->title = 'TeamLeader KPI';
                         <div class="col-lg-5 col-md-6 col-12">
                             <div class="row">
                                 <div class="col-2">
-                                    <span class="badge rounded-pill bg-success"> ✓</span>
-
+                                    <div class="bg-success on-right"> ✓</div>
                                 </div>
                                 <div class="col-10">
                                     Stripe risk evaluation: normal
@@ -759,8 +782,7 @@ $this->title = 'TeamLeader KPI';
                         <div class="col-lg-5 col-md-6 col-12">
                             <div class="row">
                                 <div class="col-2">
-                                    <span class="badge rounded-pill bg-primary"> ✓</span>
-
+                                    <div class="bg-primary on-right"> ✓</div>
                                 </div>
                                 <div class="col-10">
                                     Stripe risk evaluation: normal
@@ -799,8 +821,7 @@ $this->title = 'TeamLeader KPI';
                         <div class="col-lg-5 col-md-6 col-12">
                             <div class="row">
                                 <div class="col-2">
-                                    <span class="badge rounded-pill bg-primary"> ✓</span>
-
+                                    <div class="bg-primary on-right"> ✓</div>
                                 </div>
                                 <div class="col-10">
                                     Stripe risk evaluation: normal
@@ -839,8 +860,7 @@ $this->title = 'TeamLeader KPI';
                         <div class="col-lg-5 col-md-6 col-12">
                             <div class="row">
                                 <div class="col-2">
-                                    <span class="badge rounded-pill bg-primary"> ✓</span>
-
+                                    <div class="bg-primary on-right"> ✓</div>
                                 </div>
                                 <div class="col-10">
                                     Stripe risk evaluation: normal
