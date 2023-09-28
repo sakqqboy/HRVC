@@ -139,156 +139,6 @@ $this->title = 'Employee KPI';
                             </td>
                         </tr>
                     </tbody>
-                    <tbody>
-                        <tr class="border-bottom-white2">
-                            <td class="over-blue">Increase Something</td>
-                            <td>January</td>
-                            <td>The number of clients per employee by team</td>
-                            <td>A</td>
-                            <td>Quality</td>
-                            <td class="text-center">2.5</td>
-                            <td class="text-center">
-                                >
-                            </td>
-                            <td class="text-center">2.1</td>
-                            <td>
-                                <div id="progress1">
-                                    <div data-num="35" class="progress-item1"></div>
-                                </div>
-                            </td>
-                            <td>Monthly</td>
-                            <td>2nd Feb, 2023</td>
-                            <td>23rd Feb, 2023</td>
-                            <td colspan="row">
-                                <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
-                                <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr class="border-bottom-white2">
-                            <td class="over-blue">Increase Something</td>
-                            <td>January</td>
-                            <td>The number of clients per employee by team</td>
-                            <td>A</td>
-                            <td>Quality</td>
-                            <td class="text-center">2.5</td>
-                            <td class="text-center">
-                                >
-                            </td>
-                            <td class="text-center">2.1</td>
-                            <td>
-                                <div id="progress1">
-                                    <div data-num="35" class="progress-item1"></div>
-                                </div>
-                            </td>
-                            <td>Monthly</td>
-                            <td>2nd Feb, 2023</td>
-                            <td>23rd Feb, 2023</td>
-                            <td colspan="row">
-                                <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
-                                <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr class="border-bottom-white2">
-                            <td class="over-blue">Increase Something</td>
-                            <td>January</td>
-                            <td>The number of clients per employee by team</td>
-                            <td>A</td>
-                            <td>Quality</td>
-                            <td class="text-center">2.5</td>
-                            <td class="text-center">
-                                >
-                            </td>
-                            <td class="text-center">2.1</td>
-                            <td>
-                                <div id="progress1">
-                                    <div data-num="35" class="progress-item1"></div>
-                                </div>
-                            </td>
-                            <td>Monthly</td>
-                            <td>2nd Feb, 2023</td>
-                            <td>23rd Feb, 2023</td>
-                            <td colspan="row">
-                                <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
-                                <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr class="border-bottom-white2">
-                            <td class="over-blue">Increase Something</td>
-                            <td>January</td>
-                            <td>The number of clients per employee by team</td>
-                            <td>A</td>
-                            <td>Quality</td>
-                            <td class="text-center">2.5</td>
-                            <td class="text-center">
-                                >
-                            </td>
-                            <td class="text-center">2.1</td>
-                            <td>
-                                <div id="progress1">
-                                    <div data-num="35" class="progress-item1"></div>
-                                </div>
-                            </td>
-                            <td>Monthly</td>
-                            <td>2nd Feb, 2023</td>
-                            <td>23rd Feb, 2023</td>
-                            <td colspan="row">
-                                <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
-                                <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr class="border-bottom-white2">
-                            <td class="over-blue">Increase Something</td>
-                            <td>January</td>
-                            <td>The number of clients per employee by team</td>
-                            <td>A</td>
-                            <td>Quality</td>
-                            <td class="text-center">2.5</td>
-                            <td class="text-center">
-                                >
-                            </td>
-                            <td class="text-center">2.1</td>
-                            <td>
-                                <div id="progress1">
-                                    <div data-num="35" class="progress-item1"></div>
-                                </div>
-                            </td>
-                            <td>Monthly</td>
-                            <td>2nd Feb, 2023</td>
-                            <td>23rd Feb, 2023</td>
-                            <td colspan="3">
-                                <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
-                                <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
                 </table>
             </div>
         </div>
@@ -494,7 +344,7 @@ $this->title = 'Employee KPI';
             </div>
             <div class="col-12 padding-employee">Dhaka, Bangladesh <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="is-bangladresh3"></div>
             <div class="modal-body">
-                <div class="col-12">
+                <div class="col-12 Report-an-Issue">
                     <i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i> Report an Issue
                 </div>
                 <div class="col-12">
@@ -655,8 +505,7 @@ $this->title = 'Employee KPI';
                         <div class="col-lg-5 col-md-6 col-12">
                             <div class="row">
                                 <div class="col-2">
-                                    <span class="badge rounded-pill bg-success"> ✓</span>
-
+                                    <div class="bg-success on-right"> ✓</div>
                                 </div>
                                 <div class="col-10">
                                     Stripe risk evaluation: normal
@@ -695,8 +544,7 @@ $this->title = 'Employee KPI';
                         <div class="col-lg-5 col-md-6 col-12">
                             <div class="row">
                                 <div class="col-2">
-                                    <span class="badge rounded-pill bg-primary"> ✓</span>
-
+                                    <div class="bg-primary on-right"> ✓</div>
                                 </div>
                                 <div class="col-10">
                                     Stripe risk evaluation: normal
@@ -735,8 +583,7 @@ $this->title = 'Employee KPI';
                         <div class="col-lg-5 col-md-6 col-12">
                             <div class="row">
                                 <div class="col-2">
-                                    <span class="badge rounded-pill bg-primary"> ✓</span>
-
+                                    <div class="bg-primary on-right"> ✓</div>
                                 </div>
                                 <div class="col-10">
                                     Stripe risk evaluation: normal
@@ -775,8 +622,7 @@ $this->title = 'Employee KPI';
                         <div class="col-lg-5 col-md-6 col-12">
                             <div class="row">
                                 <div class="col-2">
-                                    <span class="badge rounded-pill bg-primary"> ✓</span>
-
+                                    <div class="bg-primary on-right"> ✓</div>
                                 </div>
                                 <div class="col-10">
                                     Stripe risk evaluation: normal

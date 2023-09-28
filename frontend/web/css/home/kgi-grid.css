@@ -11,6 +11,7 @@
     font-size: 12px;
     padding-top: 5px;
     color: #475569;
+    font-weight: 600;
 }
 
 .clients-employee {
@@ -85,7 +86,7 @@
     border-radius: 50%;
     width: 40px;
     font-weight: 500;
-
+    text-align: center;
 }
 
 .progress-bordersolid {
@@ -178,7 +179,7 @@
 }
 
 .line-height-employee {
-    line-height: 18px;
+    line-height: 19px;
     font-size: 14px;
     padding-top: 30px;
     color: #000000;

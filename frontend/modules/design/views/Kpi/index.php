@@ -27,561 +27,341 @@ $this->title = 'KPI';
             </ul>
         </div>
     </div>
-    <div class="tab-pane fade" id="pills-Performance" role="tabpanel" aria-labelledby="pills-Performance-tab">
-        <div class="alert alert-white-4">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-12 key1">
-                    <div class="row">
-                        <div class="col-6 key2">
-                            Key Performance Indicator
-                        </div>
-                        <div class="col-6">
-                            <button type="button" class="btn btn-primary font-size-14" data-bs-toggle="modal" data-bs-target="#staticBackdrop6"><i class="fa fa-magic" aria-hidden="true"></i> Create New KPI</button>
-                            <div class="modal fade" id="staticBackdrop6" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdrop6Label" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title text-primary" id="staticBackdrop6Label"><i class="fa fa-magic" aria-hidden="true"></i> Create KPI</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="col-12" style="margin-top: -20px; padding-left:20px; font-size: 13px;">
-                                            <i class="fa fa-tachometer" aria-hidden="true"></i> Key Performance Indicator
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-lg-6 col-md-6 col-6">
-                                                    <div class="col-12">
-                                                        <label for="exampleFormControlInput1" class="form-label"><strong class="red">*</strong> Company KPI Contents</label>
-                                                        <input type="text" class="form-control">
+    <div class="alert alert-white-4">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-12 key1">
+                <div class="row">
+                    <div class="col-6 key2">
+                        Key Performance Indicator
+                    </div>
+                    <div class="col-6">
+                        <button type="button" class="btn btn-primary font-size-14" data-bs-toggle="modal" data-bs-target="#staticBackdrop6"><i class="fa fa-magic" aria-hidden="true"></i> Create New KPI</button>
+                        <div class="modal fade" id="staticBackdrop6" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdrop6Label" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-primary" id="staticBackdrop6Label"><i class="fa fa-magic" aria-hidden="true"></i> Create KPI</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="col-12" style="margin-top: -20px; padding-left:20px; font-size: 13px;">
+                                        <i class="fa fa-tachometer" aria-hidden="true"></i> Key Performance Indicator
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-6">
+                                                <div class="col-12">
+                                                    <label for="exampleFormControlInput1" class="form-label"><strong class="red">*</strong> Company KPI Contents</label>
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                                <div class="col-12 pt-5">
+                                                    <label for="input" class="form-label"><strong class="red">*</strong> Company (Single)</label>
+                                                    <select class="form-select" aria-label="Default select example">
+                                                        <option selected value="">Select Company</option>
+                                                        <option value="1">Tokyo Consulting Firm Danışmanlık</option>
+                                                        <option value="2">Tokyo Consulting Firm Pvt. Ltd.</option>
+                                                        <option value="3">Tokyo Consulting Firm PLC</option>
+                                                        <option value="4">Tokyo Consulting Firm Pt.</option>
+                                                        <option value="5">Tokyo Consulting Firm</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 pt-5">
+                                                    <label for="input" class="form-label"><strong class="red">*</strong> Branch (Single)</label>
+                                                    <select class="form-select" aria-label="Default select example">
+                                                        <option selected value="">Select Branch</option>
+                                                        <option value="1">Branch 1</option>
+                                                        <option value="2">Branch 2</option>
+                                                        <option value="3">Branch 3</option>
+                                                        <option value="4">Branch 4</option>
+                                                        <option value="5">Branch 5</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 pt-10">
+                                                    <label for="input" class="form-label"><strong class="red">*</strong> Check Unit</label>
+                                                    <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                                        <button type="button" class="btn btn-outline-secondary font-size-15">Monthly</button>
+                                                        <button type="button" class="btn btn-outline-secondary font-size-15">Weekly</button>
+                                                        <button type="button" class="btn btn-outline-secondary font-size-15">Quaterly</button>
+                                                        <button type="button" class="btn btn-outline-secondary font-size-15">Daily</button>
                                                     </div>
-                                                    <div class="col-12 pt-5">
-                                                        <label for="input" class="form-label"><strong class="red">*</strong> Company (Single)</label>
-                                                        <select class="form-select" aria-label="Default select example">
-                                                            <option selected value="">Select Company</option>
-                                                            <option value="1">Tokyo Consulting Firm Danışmanlık</option>
-                                                            <option value="2">Tokyo Consulting Firm Pvt. Ltd.</option>
-                                                            <option value="3">Tokyo Consulting Firm PLC</option>
-                                                            <option value="4">Tokyo Consulting Firm Pt.</option>
-                                                            <option value="5">Tokyo Consulting Firm</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-12 pt-5">
-                                                        <label for="input" class="form-label"><strong class="red">*</strong> Branch (Single)</label>
-                                                        <select class="form-select" aria-label="Default select example">
-                                                            <option selected value="">Select Branch</option>
-                                                            <option value="1">Branch 1</option>
-                                                            <option value="2">Branch 2</option>
-                                                            <option value="3">Branch 3</option>
-                                                            <option value="4">Branch 4</option>
-                                                            <option value="5">Branch 5</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-12 pt-10">
-                                                        <label for="input" class="form-label"><strong class="red">*</strong> Check Unit</label>
-                                                        <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                            <button type="button" class="btn btn-outline-secondary font-size-15">Monthly</button>
-                                                            <button type="button" class="btn btn-outline-secondary font-size-15">Weekly</button>
-                                                            <button type="button" class="btn btn-outline-secondary font-size-15">Quaterly</button>
-                                                            <button type="button" class="btn btn-outline-secondary font-size-15">Daily</button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 pt-5">
+                                                </div>
+                                                <div class="col-12 pt-5">
+                                                    <div class="input-group">
+                                                        <label for="input" class="form-label"><strong class="red">*</strong> Select Period</label>
                                                         <div class="input-group">
-                                                            <label for="input" class="form-label"><strong class="red">*</strong> Select Period</label>
-                                                            <div class="input-group">
-                                                                <span class="input-group-text font-size-12"><i class="fa fa-calendar-o" aria-hidden="true"></i> &nbsp;&nbsp; Date</span>
-                                                                <input type="date" class="form-control font-size-12">
-                                                            </div>
+                                                            <span class="input-group-text font-size-12"><i class="fa fa-calendar-o" aria-hidden="true"></i> &nbsp;&nbsp; Date</span>
+                                                            <input type="date" class="form-control font-size-12">
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class="col-12 pt-5">
+                                                    <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Target Amount</label>
+                                                    <input type="number" class="form-control font-size-13 text-end">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-6">
+                                                <div class="col-12">
+                                                    <label for="exampleFormControlTextarea1" class="form-label"> KGI Details</label>
+                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6 col-6 pt-10">
+                                                        <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Quant Ratio</label>
+                                                        <select class="form-select font-size-13" aria-label="Default select example">
+                                                            <option selected value="">Quantity or Quality</option>
+                                                            <option value="1">January</option>
+                                                            <option value="2">June</option>
+                                                            <option value="3">July</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-6 pt-10">
+                                                        <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Priority</label>
+                                                        <select class="form-select font-size-13" aria-label="Default select example">
+                                                            <option selected value="">A/B/C</option>
+                                                            <option value="1"></option>
+                                                            <option value="2"></option>
+                                                            <option value="3"></option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-6 pt-10">
+                                                        <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Amount Type</label>
+                                                        <select class="form-select font-size-13" aria-label="Default select example">
+                                                            <option selected value="">% or Number</option>
+                                                            <option value="1"></option>
+                                                            <option value="2"></option>
+                                                            <option value="3"></option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-6 pt-10">
+                                                        <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Code</label>
+                                                        <select class="form-select font-size-13" aria-label="Default select example">
+                                                            <option selected value="">
+                                                                <=>
+                                                            </option>
+                                                            <option value="1"></option>
+                                                            <option value="2"></option>
+                                                            <option value="3"></option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-6 pt-10">
+                                                        <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Status</label>
+                                                        <select class="form-select font-size-13" aria-label="Default select example">
+                                                            <option selected value="">Active/Finished</option>
+                                                            <option value="1"></option>
+                                                            <option value="2"></option>
+                                                            <option value="3"></option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-6 pt-10">
+                                                        <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Month</label>
+                                                        <select class="form-select font-size-13" aria-label="Default select example">
+                                                            <option selected value="">Select Month</option>
+                                                            <option value="1">January</option>
+                                                            <option value="2"></option>
+                                                            <option value="3"></option>
+                                                        </select>
+                                                    </div>
                                                     <div class="col-12 pt-5">
-                                                        <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Target Amount</label>
+                                                        <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Result</label>
                                                         <input type="number" class="form-control font-size-13 text-end">
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6 col-md-6 col-6">
-                                                    <div class="col-12">
-                                                        <label for="exampleFormControlTextarea1" class="form-label"> KGI Details</label>
-                                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-lg-6 col-md-6 col-6 pt-10">
-                                                            <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Quant Ratio</label>
-                                                            <select class="form-select font-size-13" aria-label="Default select example">
-                                                                <option selected value="">Quantity or Quality</option>
-                                                                <option value="1">January</option>
-                                                                <option value="2">June</option>
-                                                                <option value="3">July</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-6 pt-10">
-                                                            <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Priority</label>
-                                                            <select class="form-select font-size-13" aria-label="Default select example">
-                                                                <option selected value="">A/B/C</option>
-                                                                <option value="1"></option>
-                                                                <option value="2"></option>
-                                                                <option value="3"></option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-6 pt-10">
-                                                            <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Amount Type</label>
-                                                            <select class="form-select font-size-13" aria-label="Default select example">
-                                                                <option selected value="">% or Number</option>
-                                                                <option value="1"></option>
-                                                                <option value="2"></option>
-                                                                <option value="3"></option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-6 pt-10">
-                                                            <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Code</label>
-                                                            <select class="form-select font-size-13" aria-label="Default select example">
-                                                                <option selected value="">
-                                                                    <=>
-                                                                </option>
-                                                                <option value="1"></option>
-                                                                <option value="2"></option>
-                                                                <option value="3"></option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-6 pt-10">
-                                                            <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Status</label>
-                                                            <select class="form-select font-size-13" aria-label="Default select example">
-                                                                <option selected value="">Active/Finished</option>
-                                                                <option value="1"></option>
-                                                                <option value="2"></option>
-                                                                <option value="3"></option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-6 pt-10">
-                                                            <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Month</label>
-                                                            <select class="form-select font-size-13" aria-label="Default select example">
-                                                                <option selected value="">Select Month</option>
-                                                                <option value="1">January</option>
-                                                                <option value="2"></option>
-                                                                <option value="3"></option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-12 pt-5">
-                                                            <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Result</label>
-                                                            <input type="number" class="form-control font-size-13 text-end">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 pt-10">
-                                                Set Ratio Formula
-                                            </div>
-                                            <div class="col-12 pt-10">
-                                                <select class="form-select font-size-12 alert-primary-12 text-dark" aria-label="Default select example">
-                                                    <option selected value="">Use Custom Formula</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
-                                                </select>
-                                            </div>
-                                            <div class="alert alert-primary-12 mt-10" role="alert">
-                                                <div class="alert alert-light">
-                                                    <div class="row">
-                                                        <div class="col-lg-4 col-md-6 col-12">
-                                                            <a href="#"> <span class="badge bg-secondary text-white font-size-14"> <i class="fa fa-bullseye" aria-hidden="true"></i> Target</span></a>
-
-                                                            <a href="#"> <span class="badge bg-secondary text-white font-size-14"> <i class="fa fa-trophy" aria-hidden="true"></i> Result </span></a>
-                                                        </div>
-                                                        <div class="col-lg-8 col-md-6 col-12 targrt-small">
-                                                            <a href="#"><span class="badge bg-primary text-white pl-10 pr-10"> +</span></a>
-
-                                                            <a href="#"> <span class="badge bg-primary text-white pl-10 pr-10"> - </button></a>
-
-                                                            <a href="#"> <span class="badge bg-primary text-white pl-10 pr-10"> / </span></a>
-
-                                                            <a href="#"> <span class="badge bg-primary text-white pl-10 pr-10"> x </span></a>
-
-                                                            <a href="#"> <span class="badge bg-secondary text-white pl-10 pr-10"> ( </span></a>
-
-                                                            <a href="#"> <span class="badge bg-secondary text-white  pl-10 pr-10"> ) </span></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="alert alert-light">
-                                                    <div class="col-12">
-                                                        <input type="text" class="form-control" style="border: none;" placeholder="( [ Target ] + [ Result ] - [ Target ] )">
-                                                    </div>
-                                                    <div class="mt-50"></div>
-                                                </div>
                                             </div>
                                         </div>
-                                        <div class="modal-footer" style="border: none;">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-primary">Create</button>
+                                        <div class="col-12 pt-10">
+                                            Set Ratio Formula
                                         </div>
+                                        <div class="col-12 pt-10">
+                                            <select class="form-select font-size-12 alert-primary-12 text-dark" aria-label="Default select example">
+                                                <option selected value="">Use Custom Formula</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                        </div>
+                                        <div class="alert alert-primary-12 mt-10" role="alert">
+                                            <div class="alert alert-light">
+                                                <div class="row">
+                                                    <div class="col-lg-4 col-md-6 col-12">
+                                                        <a href="#"> <span class="badge bg-secondary text-white font-size-14"> <i class="fa fa-bullseye" aria-hidden="true"></i> Target</span></a>
+
+                                                        <a href="#"> <span class="badge bg-secondary text-white font-size-14"> <i class="fa fa-trophy" aria-hidden="true"></i> Result </span></a>
+                                                    </div>
+                                                    <div class="col-lg-8 col-md-6 col-12 targrt-small">
+                                                        <a href="#"><span class="badge bg-primary text-white pl-10 pr-10"> +</span></a>
+
+                                                        <a href="#"> <span class="badge bg-primary text-white pl-10 pr-10"> - </button></a>
+
+                                                        <a href="#"> <span class="badge bg-primary text-white pl-10 pr-10"> / </span></a>
+
+                                                        <a href="#"> <span class="badge bg-primary text-white pl-10 pr-10"> x </span></a>
+
+                                                        <a href="#"> <span class="badge bg-secondary text-white pl-10 pr-10"> ( </span></a>
+
+                                                        <a href="#"> <span class="badge bg-secondary text-white  pl-10 pr-10"> ) </span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="alert alert-light">
+                                                <div class="col-12">
+                                                    <input type="text" class="form-control" style="border: none;" placeholder="( [ Target ] + [ Result ] - [ Target ] )">
+                                                </div>
+                                                <div class="mt-50"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer" style="border: none;">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-primary">Create</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-lg-5 col-md-12 col-12 New-KFI">
-                    <div class="col-12">
+            </div>
+            <div class="col-lg-5 col-md-12 col-12 New-KFI">
+                <div class="col-12">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa fa-filter" aria-hidden="true"></i></span>
+                        <select class="form-select font-size-13" aria-label="Example select">
+                            <option selected value="">Company</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                        <select class="form-select font-size-13" aria-label="Example select">
+                            <option selected value="">Branch</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                        <select class="form-select font-size-13" aria-label="Example select">
+                            <option selected value="">Month</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                        <select class="form-select font-size-13" aria-label="Example select">
+                            <option selected value="">Type</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                        <select class="form-select font-size-13" aria-label="Example select">
+                            <option selected value="">Status</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-12 New-date">
+                <div class="row">
+                    <div class="col-8">
                         <div class="input-group">
-                            <span class="input-group-text"><i class="fa fa-filter" aria-hidden="true"></i></span>
-                            <select class="form-select font-size-13" aria-label="Example select">
-                                <option selected value="">Company</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
-                            <select class="form-select font-size-13" aria-label="Example select">
-                                <option selected value="">Branch</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
-                            <select class="form-select font-size-13" aria-label="Example select">
-                                <option selected value="">Month</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
-                            <select class="form-select font-size-13" aria-label="Example select">
-                                <option selected value="">Type</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
-                            <select class="form-select font-size-13" aria-label="Example select">
-                                <option selected value="">Status</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
+                            <label class="input-group-text font-size-13" for="">Date</label>
+                            <input type="date" class="form-control font-size-13" name="birthday" id="">
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-12 New-date">
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="input-group">
-                                <label class="input-group-text font-size-13" for="">Date</label>
-                                <input type="date" class="form-control font-size-13" name="birthday" id="">
-                            </div>
-                        </div>
-                        <div class="col-4 new-light-4">
-                            <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-outline-primary font-size-13"><i class="fa fa-list-ul" aria-hidden="true"></i></button>
-                                <button type="button" class="btn btn-outline-primary font-size-13"><i class="fa fa-th-large" aria-hidden="true"></i></button>
-                            </div>
+                    <div class="col-4 new-light-4">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-outline-primary font-size-13"><i class="fa fa-list-ul" aria-hidden="true"></i></button>
+                            <button type="button" class="btn btn-outline-primary font-size-13"><i class="fa fa-th-large" aria-hidden="true"></i></button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12">
-                <table class="table table-striped">
-                    <thead class="table-secondary">
-                        <tr class="transform-none">
-                            <th>KPI Contents</th>
-                            <th>Company</th>
-                            <th>Branch</th>
-                            <th>Team KPI Contents</th>
-                            <th>Priority</th>
-                            <th>Employees</th>
-                            <th>Team</th>
-                            <th>QR</th>
-                            <th>target</th>
-                            <th>Code</th>
-                            <th>result</th>
-                            <th>ratio</th>
-                            <th>month</th>
-                            <th>Unit</th>
-                            <th>Last</th>
-                            <th>next</th>
-                            <th colspan="row"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="border-bottom-white2">
-                            <td class="over-blue">Increase Something</td>
-                            <td>TCF</td>
-                            <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
-                            <td>The number of clients per employee by team</td>
-                            <td class="text-center">A</td>
-                            <td>
-                                <div class="flex mb-5 -space-x-4">
-                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-                                    <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="badge rounded-pill bg-secondary-bsc1"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
-                            </td>
-                            <td>Quality</td>
-                            <td>2.5</td>
-                            <td>
-                                >
-                            </td>
-                            <td>2.1</td>
-                            <td>
-                                <div id="progress1">
-                                    <div data-num="35" class="progress-item1"></div>
-                                </div>
-                            </td>
-                            <td>January</td>
-                            <td>Monthly</td>
-                            <td>2nd Feb, 2023</td>
-                            <td>23rd Feb, 2023</td>
-                            <td colspan="row">
-                                <span data-bs-toggle="modal" data-bs-target="#exampleModalcomment2"> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
-                                <span class="dropdown menulink" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li data-bs-toggle="modal" data-bs-target="#exampleModalEditkpi1">
-                                        <a class="dropdown-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                    </li>
-                                    <li data-bs-toggle="modal" data-bs-target="#exampleModalViewkpi2">
-                                        <a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                    </li>
-                                    <li data-bs-toggle="modal" data-bs-target="#staticBackdropdelete1">
-                                        <a class="dropdown-item"><i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr class="border-bottom-white2">
-                            <td class="over-blue">Increase Something</td>
-                            <td>TCF</td>
-                            <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
-                            <td>The number of clients per employee by team</td>
-                            <td class="text-center">A</td>
-                            <td>
-                                <div class="flex mb-5 -space-x-4">
-                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-                                    <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="badge rounded-pill bg-secondary-bsc1"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
-                            </td>
-                            <td>Quality</td>
-                            <td>2.5</td>
-                            <td>
-                                >
-                            </td>
-                            <td>2.1</td>
-                            <td>
-                                <div id="progress1">
-                                    <div data-num="35" class="progress-item1"></div>
-                                </div>
-                            </td>
-                            <td>January</td>
-                            <td>Monthly</td>
-                            <td>2nd Feb, 2023</td>
-                            <td>23rd Feb, 2023</td>
-                            <td colspan="row">
-                                <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
-                                <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i></a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr class="border-bottom-white2">
-                            <td class="over-blue">Increase Something</td>
-                            <td>TCF</td>
-                            <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
-                            <td>The number of clients per employee by team</td>
-                            <td class="text-center">A</td>
-                            <td>
-                                <div class="flex mb-5 -space-x-4">
-                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-                                    <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="badge rounded-pill bg-secondary-bsc1"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
-                            </td>
-                            <td>Quality</td>
-                            <td>2.5</td>
-                            <td>
-                                >
-                            </td>
-                            <td>2.1</td>
-                            <td>
-                                <div id="progress1">
-                                    <div data-num="35" class="progress-item1"></div>
-                                </div>
-                            </td>
-                            <td>January</td>
-                            <td>Monthly</td>
-                            <td>2nd Feb, 2023</td>
-                            <td>23rd Feb, 2023</td>
-                            <td colspan="row">
-                                <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
-                                <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr class="border-bottom-white2">
-                            <td class="over-blue">Increase Something</td>
-                            <td>TCF</td>
-                            <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
-                            <td>The number of clients per employee by team</td>
-                            <td class="text-center">A</td>
-                            <td>
-                                <div class="flex mb-5 -space-x-4">
-                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-                                    <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="badge rounded-pill bg-secondary-bsc1"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
-                            </td>
-                            <td>Quality</td>
-                            <td>2.5</td>
-                            <td>
-                                >
-                            </td>
-                            <td>2.1</td>
-                            <td>
-                                <div id="progress1">
-                                    <div data-num="35" class="progress-item1"></div>
-                                </div>
-                            </td>
-                            <td>January</td>
-                            <td>Monthly</td>
-                            <td>2nd Feb, 2023</td>
-                            <td>23rd Feb, 2023</td>
-                            <td colspan="row">
-                                <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
-                                <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> </li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr class="border-bottom-white2">
-                            <td class="over-blue">Increase Something</td>
-                            <td>TCF</td>
-                            <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
-                            <td>The number of clients per employee by team</td>
-                            <td class="text-center">A</td>
-                            <td>
-                                <div class="flex mb-5 -space-x-4">
-                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-                                    <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="badge rounded-pill bg-secondary-bsc1"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
-                            </td>
-                            <td>Quality</td>
-                            <td>2.5</td>
-                            <td>
-                                >
-                            </td>
-                            <td>2.1</td>
-                            <td>
-                                <div id="progress1">
-                                    <div data-num="35" class="progress-item1"></div>
-                                </div>
-                            </td>
-                            <td>January</td>
-                            <td>Monthly</td>
-                            <td>2nd Feb, 2023</td>
-                            <td>23rd Feb, 2023</td>
-                            <td colspan="row">
-                                <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
-                                <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> </li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr class="border-bottom-white2">
-                            <td class="over-blue">Increase Something</td>
-                            <td>TCF</td>
-                            <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
-                            <td>The number of clients per employee by team</td>
-                            <td class="text-center">A</td>
-                            <td>
-                                <div class="flex mb-5 -space-x-4">
-                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-                                    <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="badge rounded-pill bg-secondary-bsc1"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
-                            </td>
-                            <td>Quality</td>
-                            <td>2.5</td>
-                            <td>
-                                >
-                            </td>
-                            <td>2.1</td>
-                            <td>
-                                <div id="progress1">
-                                    <div data-num="35" class="progress-item1"></div>
-                                </div>
-                            </td>
-                            <td>January</td>
-                            <td>Monthly</td>
-                            <td>2nd Feb, 2023</td>
-                            <td>23rd Feb, 2023</td>
-                            <td colspan="row">
-                                <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
-                                <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> </li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
         </div>
-        <div class="col-12 navigation-next">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item"><a class="page-link page-navigation" href="#"><i class="fa fa-chevron-left" aria-hidden="true"></i> Previous</a></li>
-                    <li class="page-item"><a class="page-link page-navigation" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link page-navigation" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link page-navigation" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link page-navigation" href="#">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
-                </ul>
-            </nav>
-        </div>
+
+        <table class="table table-striped">
+            <thead class="table-secondary">
+                <tr class="transform-none">
+                    <th>KPI Contents</th>
+                    <th>Company</th>
+                    <th>Branch</th>
+                    <th>Team KPI Contents</th>
+                    <th>Priority</th>
+                    <th>Employees</th>
+                    <th>Team</th>
+                    <th>QR</th>
+                    <th>target</th>
+                    <th>Code</th>
+                    <th>result</th>
+                    <th>ratio</th>
+                    <th>month</th>
+                    <th>Unit</th>
+                    <th>Last</th>
+                    <th>next</th>
+                    <th colspan="row"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="border-bottom-white2">
+                    <td class="over-blue">Increase Something</td>
+                    <td>TCF</td>
+                    <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
+                    <td>The number of clients per employee by team</td>
+                    <td class="text-center">A</td>
+                    <td>
+                        <span class="badge rounded-pill bg-gray">
+                            <ul class="try-cricle">
+                                <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
+                                <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
+                                <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar3"></li>
+                                <a href="" class="none">
+                                    <li class="tri-li-number"> 5 </li>
+                                </a>
+                            </ul>
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge rounded-pill bg-secondary-bsc1"><i class="fa fa-users" aria-hidden="true"></i> 12</span>
+                    </td>
+                    <td>Quality</td>
+                    <td>2.5</td>
+                    <td>
+                        >
+                    </td>
+                    <td>2.1</td>
+                    <td>
+                        <div id="progress1">
+                            <div data-num="35" class="progress-item1"></div>
+                        </div>
+                    </td>
+                    <td>January</td>
+                    <td>Monthly</td>
+                    <td>2nd Feb, 2023</td>
+                    <td>23rd Feb, 2023</td>
+                    <td colspan="row">
+                        <span data-bs-toggle="modal" data-bs-target="#exampleModalcomment2"> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
+                        <span class="dropdown menulink" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li data-bs-toggle="modal" data-bs-target="#exampleModalEditkpi1">
+                                <a class="dropdown-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                            </li>
+                            <li data-bs-toggle="modal" data-bs-target="#exampleModalViewkpi2">
+                                <a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            </li>
+                            <li data-bs-toggle="modal" data-bs-target="#staticBackdropdelete1">
+                                <a class="dropdown-item"><i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-12 navigation-next">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link page-navigation" href="#"><i class="fa fa-chevron-left" aria-hidden="true"></i> Previous</a></li>
+                <li class="page-item"><a class="page-link page-navigation" href="#">1</a></li>
+                <li class="page-item"><a class="page-link page-navigation" href="#">2</a></li>
+                <li class="page-item"><a class="page-link page-navigation" href="#">3</a></li>
+                <li class="page-item"><a class="page-link page-navigation" href="#">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
+            </ul>
+        </nav>
     </div>
 </div>
 
@@ -690,7 +470,7 @@ $this->title = 'KPI';
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="col-12" style="margin-top: -20px; padding-left:20px; font-size: 13px;">
-                <i class="fa fa-flag" aria-hidden="true"></i> Key Performance Indicator
+                <i class="fa fa-tachometer" aria-hidden="true"></i> Key Performance Indicator
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -882,15 +662,15 @@ $this->title = 'KPI';
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header" style="border: none;">
-                <div class="modal-title flag-Backdrop7" id="exampleModalViewkpi2Label"><i class="fa fa-flag-o" aria-hidden="true"></i> Increase Something</div>
+                <div class="modal-title flag-Backdrop7" id="exampleModalViewkpi2Label"><i class="fa fa-tachometer" aria-hidden="true"></i> Increase Something</div>
                 <div class="modal-title Completed-Backdrop7 badge rounded-pill bg-warning text-dark">Completed</div>
                 <span class="border border-1 border-deadline-Backdrop7">Deadline <span class="font-size-10 text-dark pr-10"> : Mon, Feb 12, 2023</span></span>
             </div>
-            <div class="text-end">
+            <div class="text-end mr-15">
                 <span class="border border-1 border-next-Backdrop7">Next Update <span class="font-size-10 text-dark pr-10"> Tue, Mar 12, 2023</span></span>
             </div>
             <div class="tk">Tokyo Consulting Firm Limited</div>
-            <div class="col-12 font-size-12 pl-10 pt-5">
+            <div class="col-12 font-size-12 pl-20 pt-5">
                 <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="Round1"> Dhaka, Bangladesh
             </div>
 
@@ -975,245 +755,235 @@ $this->title = 'KPI';
                 <div class="row mt-20">
                     <div class="col-12">
                         <div class="row">
-                            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                                <li class="col-lg-6 col-md-6 col-6 pl-20">
-                                    <a class="link-3" id="v-pills-team1-tab" data-bs-toggle="pill" data-bs-target="#v-pills-team1" type="button" role="tab" aria-controls="v-pills-team1" aria-selected="true"> Team</a>
-                                </li>
-                                <li class="col-lg-6 col-md-6 col-6">
-                                    <a class="link-3" id="v-pills-Assign-tab" data-bs-toggle="pill" data-bs-target="#v-pills-Assign" type="button" role="tab" aria-controls="v-pills-Assign" aria-selected="true"> Assign Members</a>
-                                </li>
-                            </ul>
+                            <div class="col-lg-6 col-md-6 col-6 pl-20">
+                                <div class="team1"> Team</div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-6">
+                                <div class="team1"> Assign Members</div>
+                            </div>
                             <hr style="margin-top: -5px;">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12 pl-40">
-                        <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade show active" id="v-pills-team1" role="tabpanel" aria-labelledby="v-pills-team1-tab">
-                                <div class="row mt-30 Assign-solid">
-                                    <div class="col-lg-3 col-md-6 col-12">
-                                        <div class="col-12">
-                                            <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
-                                        </div>
-                                        <div class="col-12" style="margin-top: -10px;margin-left:-10px;">
-                                            <strong class="font-size-10"> Team SGO</strong>
-                                            <div class="font-size-10"> IT Department</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 col-12">
-                                        <div class="col-12">
-                                            <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
-                                        </div>
-                                        <div class="col-12" style="margin-top: -10px;margin-left:-10px;">
-                                            <strong class="font-size-10"> Team SGO</strong>
-                                            <div class="font-size-10"> IT Department</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 col-12">
-                                        <div class="col-12">
-                                            <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
-                                        </div>
-                                        <div class="col-12" style="margin-top: -10px;margin-left:-10px;">
-                                            <strong class="font-size-10"> Team SGO</strong>
-                                            <div class="font-size-10"> IT Department</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 col-12">
-                                        <div class="col-12">
-                                            <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
-                                        </div>
-                                        <div class="col-12" style="margin-top: -10px;margin-left:-10px;">
-                                            <strong class="font-size-10"> Team SGO</strong>
-                                            <div class="font-size-10"> IT Department</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 col-12">
-                                        <div class="col-12">
-                                            <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
-                                        </div>
-                                        <div class="col-12" style="margin-top: -10px;margin-left:-10px;">
-                                            <strong class="font-size-10"> Team SGO</strong>
-                                            <div class="font-size-10"> IT Department</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 col-12">
-                                        <div class="col-12">
-                                            <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
-                                        </div>
-                                        <div class="col-12" style="margin-top: -10px;margin-left:-10px;">
-                                            <strong class="font-size-10"> Team SGO</strong>
-                                            <div class="font-size-10"> IT Department</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 col-12">
-                                        <div class="col-12">
-                                            <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
-                                        </div>
-                                        <div class="col-12" style="margin-top: -10px;margin-left:-10px;">
-                                            <strong class="font-size-10"> Team SGO</strong>
-                                            <div class="font-size-10"> IT Department</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 col-12">
-                                        <div class="col-12">
-                                            <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
-                                        </div>
-                                        <div class="col-12" style="margin-top: -10px;margin-left:-10px;">
-                                            <strong class="font-size-10"> Team SGO</strong>
-                                            <div class="font-size-10"> IT Department</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 col-12">
-                                        <div class="col-12">
-                                            <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
-                                        </div>
-                                        <div class="col-12" style="margin-top: -10px;margin-left:-10px;">
-                                            <strong class="font-size-10"> Team SGO</strong>
-                                            <div class="font-size-10"> IT Department</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 col-12">
-                                        <div class="col-12">
-                                            <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
-                                        </div>
-                                        <div class="col-12" style="margin-top: -10px;margin-left:-10px;">
-                                            <strong class="font-size-10"> Team SGO</strong>
-                                            <div class="font-size-10"> IT Department</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 col-12">
-                                        <div class="col-12">
-                                            <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
-                                        </div>
-                                        <div class="col-12" style="margin-top: -10px;margin-left:-10px;">
-                                            <strong class="font-size-10"> Team SGO</strong>
-                                            <div class="font-size-10"> IT Department</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 col-12">
-                                        <div class="col-12">
-                                            <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
-                                        </div>
-                                        <div class="col-12" style="margin-top: -10px;margin-left:-10px;">
-                                            <strong class="font-size-10"> Team SGO</strong>
-                                            <div class="font-size-10"> IT Department</div>
-                                        </div>
-                                    </div>
+                        <div class="row mt-30 Assign-solid">
+                            <div class="col-lg-3 col-md-6 col-12">
+                                <div class="col-12">
+                                    <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
+                                </div>
+                                <div class="col-12" style="margin-top: -15px;margin-left:-10px;">
+                                    <strong class="font-size-10"> Team SGO</strong>
+                                    <div class="font-size-10"> IT Department</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12">
+                                <div class="col-12">
+                                    <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
+                                </div>
+                                <div class="col-12" style="margin-top: -15px;margin-left:-10px;">
+                                    <strong class="font-size-10"> Team SGO</strong>
+                                    <div class="font-size-10"> IT Department</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12">
+                                <div class="col-12">
+                                    <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
+                                </div>
+                                <div class="col-12" style="margin-top: -15px;margin-left:-10px;">
+                                    <strong class="font-size-10"> Team SGO</strong>
+                                    <div class="font-size-10"> IT Department</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12">
+                                <div class="col-12">
+                                    <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
+                                </div>
+                                <div class="col-12" style="margin-top: -15px;margin-left:-10px;">
+                                    <strong class="font-size-10"> Team SGO</strong>
+                                    <div class="font-size-10"> IT Department</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12 mt-10">
+                                <div class="col-12">
+                                    <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
+                                </div>
+                                <div class="col-12" style="margin-top: -15px;margin-left:-10px;">
+                                    <strong class="font-size-10"> Team SGO</strong>
+                                    <div class="font-size-10"> IT Department</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12 mt-10">
+                                <div class="col-12">
+                                    <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
+                                </div>
+                                <div class="col-12" style="margin-top: -15px;margin-left:-10px;">
+                                    <strong class="font-size-10"> Team SGO</strong>
+                                    <div class="font-size-10"> IT Department</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12 mt-10">
+                                <div class="col-12">
+                                    <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
+                                </div>
+                                <div class="col-12" style="margin-top: -15px;margin-left:-10px;">
+                                    <strong class="font-size-10"> Team SGO</strong>
+                                    <div class="font-size-10"> IT Department</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12 mt-10">
+                                <div class="col-12">
+                                    <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
+                                </div>
+                                <div class="col-12" style="margin-top: -15px;margin-left:-10px;">
+                                    <strong class="font-size-10"> Team SGO</strong>
+                                    <div class="font-size-10"> IT Department</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12 mt-10">
+                                <div class="col-12">
+                                    <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
+                                </div>
+                                <div class="col-12" style="margin-top: -15px;margin-left:-10px;">
+                                    <strong class="font-size-10"> Team SGO</strong>
+                                    <div class="font-size-10"> IT Department</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12 mt-10">
+                                <div class="col-12">
+                                    <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
+                                </div>
+                                <div class="col-12" style="margin-top: -15px;margin-left:-10px;">
+                                    <strong class="font-size-10"> Team SGO</strong>
+                                    <div class="font-size-10"> IT Department</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12 mt-10">
+                                <div class="col-12">
+                                    <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
+                                </div>
+                                <div class="col-12" style="margin-top: -15px;margin-left:-10px;">
+                                    <strong class="font-size-10"> Team SGO</strong>
+                                    <div class="font-size-10"> IT Department</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12 mt-10">
+                                <div class="col-12">
+                                    <div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
+                                </div>
+                                <div class="col-12" style="margin-top: -15px;margin-left:-10px;">
+                                    <strong class="font-size-10"> Team SGO</strong>
+                                    <div class="font-size-10"> IT Department</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
-                        <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade" id="v-pills-Assign" role="tabpanel" aria-labelledby="v-pills-Assign-tab">
-                                <div class="row mt-30">
-                                    <div class="col-lg-3 col-md-6 col-12">
-                                        <div class="col-12">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-1.png" class="image-AssignMembers">
-                                        </div>
-                                        <div class="col-12">
-                                            <strong class="font-size-10"> Faruk Khan</strong>
-                                            <div class="font-size-10"> Old Product Manager</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 col-12">
-                                        <div class="col-12">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-3.png" class="image-AssignMembers">
-                                        </div>
-                                        <div class="col-12">
-                                            <strong class="font-size-10"> Amir Khan </strong>
-                                            <div class="font-size-10"> Software Engineer</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 col-12">
-                                        <div class="col-12">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-2.png" class="image-AssignMembers">
-                                        </div>
-                                        <div class="col-12">
-                                            <strong class="font-size-10"> Shahrukh Khan</strong>
-                                            <div class="font-size-10"> Business Development</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 col-12">
-                                        <div class="col-12">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-1.png" class="image-AssignMembers">
-                                        </div>
-                                        <div class="col-12">
-                                            <strong class="font-size-10"> Faruk Khan</strong>
-                                            <div class="font-size-10"> Old Product Manager</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 col-12">
-                                        <div class="col-12">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-3.png" class="image-AssignMembers">
-                                        </div>
-                                        <div class="col-12">
-                                            <strong class="font-size-10"> Amir Khan </strong>
-                                            <div class="font-size-10"> Software Engineer</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 col-12">
-                                        <div class="col-12">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-2.png" class="image-AssignMembers">
-                                        </div>
-                                        <div class="col-12">
-                                            <strong class="font-size-10"> Shahrukh Khan</strong>
-                                            <div class="font-size-10"> Business Development</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 col-12">
-                                        <div class="col-12">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-1.png" class="image-AssignMembers">
-                                        </div>
-                                        <div class="col-12">
-                                            <strong class="font-size-10"> Faruk Khan</strong>
-                                            <div class="font-size-10"> Old Product Manager</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 col-12">
-                                        <div class="col-12">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-3.png" class="image-AssignMembers">
-                                        </div>
-                                        <div class="col-12">
-                                            <strong class="font-size-10"> Amir Khan </strong>
-                                            <div class="font-size-10"> Software Engineer</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 col-12">
-                                        <div class="col-12">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-3.png" class="image-AssignMembers">
-                                        </div>
-                                        <div class="col-12">
-                                            <strong class="font-size-10"> Amir Khan </strong>
-                                            <div class="font-size-10"> Software Engineer</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 col-12">
-                                        <div class="col-12">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-2.png" class="image-AssignMembers">
-                                        </div>
-                                        <div class="col-12">
-                                            <strong class="font-size-10"> Shahrukh Khan</strong>
-                                            <div class="font-size-10"> Business Development</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 col-12">
-                                        <div class="col-12">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-1.png" class="image-AssignMembers">
-                                        </div>
-                                        <div class="col-12">
-                                            <strong class="font-size-10"> Faruk Khan</strong>
-                                            <div class="font-size-10"> Old Product Manager</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 col-12">
-                                        <div class="col-12">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/Assign-3.png" class="image-AssignMembers">
-                                        </div>
-                                        <div class="col-12">
-                                            <strong class="font-size-10"> Amir Khan </strong>
-                                            <div class="font-size-10"> Software Engineer</div>
-                                        </div>
-                                    </div>
+                        <div class="row mt-30">
+                            <div class="col-lg-3 col-md-6 col-12">
+                                <div class="col-12">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/Assign-1.png" class="image-AssignMembers">
+                                </div>
+                                <div class="col-12">
+                                    <strong class="font-size-10"> Faruk Khan</strong>
+                                    <div class="font-size-10"> Old Product Manager</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12">
+                                <div class="col-12">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/Assign-3.png" class="image-AssignMembers">
+                                </div>
+                                <div class="col-12">
+                                    <strong class="font-size-10"> Amir Khan </strong>
+                                    <div class="font-size-10"> Software Engineer</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12">
+                                <div class="col-12">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/Assign-2.png" class="image-AssignMembers">
+                                </div>
+                                <div class="col-12">
+                                    <strong class="font-size-10"> Shahrukh Khan</strong>
+                                    <div class="font-size-10"> Business Development</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12">
+                                <div class="col-12">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/Assign-1.png" class="image-AssignMembers">
+                                </div>
+                                <div class="col-12">
+                                    <strong class="font-size-10"> Faruk Khan</strong>
+                                    <div class="font-size-10"> Old Product Manager</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12 mt-10">
+                                <div class="col-12">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/Assign-3.png" class="image-AssignMembers">
+                                </div>
+                                <div class="col-12">
+                                    <strong class="font-size-10"> Amir Khan </strong>
+                                    <div class="font-size-10"> Software Engineer</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12 mt-10">
+                                <div class="col-12">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/Assign-2.png" class="image-AssignMembers">
+                                </div>
+                                <div class="col-12">
+                                    <strong class="font-size-10"> Shahrukh Khan</strong>
+                                    <div class="font-size-10"> Business Development</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12 mt-10">
+                                <div class="col-12">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/Assign-1.png" class="image-AssignMembers">
+                                </div>
+                                <div class="col-12">
+                                    <strong class="font-size-10"> Faruk Khan</strong>
+                                    <div class="font-size-10"> Old Product Manager</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12 mt-10">
+                                <div class="col-12">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/Assign-3.png" class="image-AssignMembers">
+                                </div>
+                                <div class="col-12">
+                                    <strong class="font-size-10"> Amir Khan </strong>
+                                    <div class="font-size-10"> Software Engineer</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12 mt-10">
+                                <div class="col-12">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/Assign-3.png" class="image-AssignMembers">
+                                </div>
+                                <div class="col-12">
+                                    <strong class="font-size-10"> Amir Khan </strong>
+                                    <div class="font-size-10"> Software Engineer</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12 mt-10">
+                                <div class="col-12">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/Assign-2.png" class="image-AssignMembers">
+                                </div>
+                                <div class="col-12">
+                                    <strong class="font-size-10"> Shahrukh Khan</strong>
+                                    <div class="font-size-10"> Business Development</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12 mt-10">
+                                <div class="col-12">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/Assign-1.png" class="image-AssignMembers">
+                                </div>
+                                <div class="col-12">
+                                    <strong class="font-size-10"> Faruk Khan</strong>
+                                    <div class="font-size-10"> Old Product Manager</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12 mt-10">
+                                <div class="col-12">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/Assign-3.png" class="image-AssignMembers">
+                                </div>
+                                <div class="col-12">
+                                    <strong class="font-size-10"> Amir Khan </strong>
+                                    <div class="font-size-10"> Software Engineer</div>
                                 </div>
                             </div>
                         </div>
@@ -1228,7 +998,7 @@ $this->title = 'KPI';
                         <div class="col-lg-5 col-md-6 col-12">
                             <div class="row">
                                 <div class="col-2">
-                                    <span class="badge rounded-pill bg-success"> ✓</span>
+                                    <div class="bg-success on-right"> ✓</div>
                                 </div>
                                 <div class="col-10">
                                     Stripe risk evaluation: normal
@@ -1267,8 +1037,7 @@ $this->title = 'KPI';
                         <div class="col-lg-5 col-md-6 col-12">
                             <div class="row">
                                 <div class="col-2">
-                                    <span class="badge rounded-pill bg-primary"> ✓</span>
-
+                                    <div class="bg-primary on-right"> ✓</div>
                                 </div>
                                 <div class="col-10">
                                     Stripe risk evaluation: normal
@@ -1307,8 +1076,7 @@ $this->title = 'KPI';
                         <div class="col-lg-5 col-md-6 col-12">
                             <div class="row">
                                 <div class="col-2">
-                                    <span class="badge rounded-pill bg-primary"> ✓</span>
-
+                                    <div class="bg-primary on-right"> ✓</div>
                                 </div>
                                 <div class="col-10">
                                     Stripe risk evaluation: normal

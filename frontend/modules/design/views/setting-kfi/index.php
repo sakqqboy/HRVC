@@ -85,17 +85,9 @@ $this->title = 'Setting KFI';
                                             </button>
                                         </span>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-5">
                                         <div class="setting-upload">
                                             <i class="fa fa-building-o building1" aria-hidden="true"></i>
-                                            <div class="setting-edit">
-                                                <input type="file" id="loaddingUpload" accept=".png, .jpg, .jpeg">
-                                                <label for="loaddingUpload"></label>
-                                            </div>
-                                            <div class="setting-preview">
-                                                <div id="loaddingPreview">
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -133,7 +125,7 @@ $this->title = 'Setting KFI';
                                         <div class="dasheduser-upload">
                                             <i class="fa fa-user user0m" aria-hidden="true"></i>
                                             <div class="dasheduser-edit">
-                                                <input type="file" id="loaddingUploaduser" accept=".png, .jpg, .jpeg">
+                                                <input type="button" id="loaddingUploaduser" accept=".png, .jpg, .jpeg">
                                                 <label for="loaddingUploaduser"></label>
                                             </div>
                                             <div class="dasheduser-preview">
@@ -162,17 +154,7 @@ $this->title = 'Setting KFI';
                                         </span>
                                     </div>
                                     <div class="col-3">
-                                        <div class="setting-upload">
-                                            <i class="fa fa-building-o building1" aria-hidden="true"></i>
-                                            <div class="setting-edit">
-                                                <input type="file" id="loaddingUpload" accept=".png, .jpg, .jpeg">
-                                                <label for="loaddingUpload"></label>
-                                            </div>
-                                            <div class="setting-preview">
-                                                <div id="loaddingPreview">
-                                                </div>
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </div>
                             </td>
@@ -227,7 +209,22 @@ $this->title = 'Setting KFI';
     </div>
 </div>
 
-<div class="form-check">
-    <label class="form-check-label" for="boxradios-kfi"> Default checkbox</label>
-    <input class="form-check-input" type="checkbox" value="" id="boxradios-kfi">
+<i class="fa fa-plus-circle" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#staticBackdropmunucompany"></i>
+
+<div class="modal fade" id="staticBackdropmunucompany" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropmunucompanyLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Understood</button>
+            </div>
+        </div>
+    </div>
 </div>

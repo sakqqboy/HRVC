@@ -118,12 +118,16 @@ $this->title = 'TeamLeader KPI';
                                 <td>The number of clients per employee by team</td>
                                 <td class="text-center">A</td>
                                 <td>
-                                    <div class="flex mb-5 -space-x-4">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-                                        <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-                                    </div>
+                                    <span class="badge rounded-pill bg-gray">
+                                        <ul class="try-cricle">
+                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
+                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
+                                            <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar3"></li>
+                                            <a href="" class="none">
+                                                <li class="tri-li-number"> 5 </li>
+                                            </a>
+                                        </ul>
+                                    </span>
                                 </td>
                                 <td>Quality</td>
                                 <td>January</td>
@@ -154,201 +158,6 @@ $this->title = 'TeamLeader KPI';
                                         <li data-bs-toggle="modal" data-bs-target="#staticBackdropdelete1">
                                             <a class="dropdown-item"><i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
                                         </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr class="border-bottom-white2">
-                                <td class="over-blue">Increase Something</td>
-                                <td>The number of clients per employee by team</td>
-                                <td>The number of clients per employee by team</td>
-                                <td class="text-center">A</td>
-                                <td>
-                                    <div class="flex mb-5 -space-x-4">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-                                        <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-                                    </div>
-                                </td>
-                                <td>Quality</td>
-                                <td>January</td>
-                                <td>2.5</td>
-                                <td>
-                                    >
-                                </td>
-                                <td>2.1</td>
-                                <td>
-                                    <div id="progress1">
-                                        <div data-num="35" class="progress-item1"></div>
-                                    </div>
-                                </td>
-                                <td>Monthly</td>
-                                <td>2nd Feb, 2023</td>
-                                <td>23rd Feb, 2023</td>
-                                <td class="text-end">
-                                    <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
-                                    <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                        <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr class="border-bottom-white2">
-                                <td class="over-blue">Increase Something</td>
-                                <td>The number of clients per employee by team</td>
-                                <td>The number of clients per employee by team</td>
-                                <td class="text-center">A</td>
-                                <td class="text-center">
-                                    <div class="flex mb-5 -space-x-4">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-                                        <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-                                    </div>
-                                </td>
-                                <td>Quality</td>
-                                <td>January</td>
-                                <td>2.5</td>
-                                <td>
-                                    >
-                                </td>
-                                <td>2.1</td>
-                                <td>
-                                    <div id="progress1">
-                                        <div data-num="35" class="progress-item1"></div>
-                                    </div>
-                                </td>
-                                <td>Monthly</td>
-                                <td>2nd Feb, 2023</td>
-                                <td>23rd Feb, 2023</td>
-                                <td class="text-end">
-                                    <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
-                                    <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                        <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr class="border-bottom-white2">
-                                <td class="over-blue">Increase Something</td>
-                                <td>The number of clients per employee by team</td>
-                                <td>The number of clients per employee by team</td>
-                                <td class="text-center">A</td>
-                                <td>
-                                    <div class="flex mb-5 -space-x-4">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-                                        <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-                                    </div>
-                                </td>
-                                <td>Quality</td>
-                                <td>January</td>
-                                <td>2.5</td>
-                                <td>
-                                    >
-                                </td>
-                                <td>2.1</td>
-                                <td>
-                                    <div id="progress1">
-                                        <div data-num="35" class="progress-item1"></div>
-                                    </div>
-                                </td>
-                                <td>Monthly</td>
-                                <td>2nd Feb, 2023</td>
-                                <td>23rd Feb, 2023</td>
-                                <td class="text-end">
-                                    <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
-                                    <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                        <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr class="border-bottom-white2">
-                                <td class="over-blue">Increase Something</td>
-                                <td>The number of clients per employee by team</td>
-                                <td>The number of clients per employee by team</td>
-                                <td class="text-center">A</td>
-                                <td>
-                                    <div class="flex mb-5 -space-x-4">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-                                        <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-                                    </div>
-                                </td>
-                                <td>Quality</td>
-                                <td>January</td>
-                                <td>2.5</td>
-                                <td>
-                                    >
-                                </td>
-                                <td>2.1</td>
-                                <td>
-                                    <div id="progress1">
-                                        <div data-num="35" class="progress-item1"></div>
-                                    </div>
-                                </td>
-                                <td>Monthly</td>
-                                <td>2nd Feb, 2023</td>
-                                <td>23rd Feb, 2023</td>
-                                <td class="text-end">
-                                    <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
-                                    <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                        <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr class="border-bottom-white2">
-                                <td class="over-blue">Increase Something</td>
-                                <td>The number of clients per employee by team</td>
-                                <td>The number of clients per employee by team</td>
-                                <td class="text-center">A</td>
-                                <td>
-                                    <div class="flex mb-5 -space-x-4">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-                                        <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
-                                    </div>
-                                </td>
-                                <td>Quality</td>
-                                <td>January</td>
-                                <td>2.5</td>
-                                <td>
-                                    >
-                                </td>
-                                <td>2.1</td>
-                                <td>
-                                    <div id="progress1">
-                                        <div data-num="35" class="progress-item1"></div>
-                                    </div>
-                                </td>
-                                <td>Monthly</td>
-                                <td>2nd Feb, 2023</td>
-                                <td>23rd Feb, 2023</td>
-                                <td class="text-end">
-                                    <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
-                                    <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                        <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
                                     </ul>
                                 </td>
                             </tr>
@@ -512,7 +321,7 @@ $this->title = 'TeamLeader KPI';
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom:none;">
-                <div class="modal-title Modalfirstone" id="exampleModalViewkpi5Label"><i class="fa fa-flag-o" aria-hidden="true"></i> Increase Something</div>
+                <div class="modal-title Modalfirstone" id="exampleModalViewkpi5Label"><i class="fa fa-tachometer" aria-hidden="true"></i> Increase Something</div>
                 <div class="modal-title"> Team KPI Contents</div>
                 <div class="modal-title circle-update-team"> A</div>
                 <div class="modal-title badge rounded-pill bg-warning text-dark font-size-14">Completed</div>
@@ -719,8 +528,7 @@ $this->title = 'TeamLeader KPI';
                         <div class="col-lg-5 col-md-6 col-12">
                             <div class="row">
                                 <div class="col-2">
-                                    <span class="badge rounded-pill bg-success"> ✓</span>
-
+                                    <div class="bg-success on-right"> ✓</div>
                                 </div>
                                 <div class="col-10">
                                     Stripe risk evaluation: normal
@@ -759,8 +567,7 @@ $this->title = 'TeamLeader KPI';
                         <div class="col-lg-5 col-md-6 col-12">
                             <div class="row">
                                 <div class="col-2">
-                                    <span class="badge rounded-pill bg-primary"> ✓</span>
-
+                                    <div class="bg-primary on-right"> ✓</div>
                                 </div>
                                 <div class="col-10">
                                     Stripe risk evaluation: normal
@@ -799,8 +606,7 @@ $this->title = 'TeamLeader KPI';
                         <div class="col-lg-5 col-md-6 col-12">
                             <div class="row">
                                 <div class="col-2">
-                                    <span class="badge rounded-pill bg-primary"> ✓</span>
-
+                                    <div class="bg-primary on-right"> ✓</div>
                                 </div>
                                 <div class="col-10">
                                     Stripe risk evaluation: normal
@@ -839,8 +645,7 @@ $this->title = 'TeamLeader KPI';
                         <div class="col-lg-5 col-md-6 col-12">
                             <div class="row">
                                 <div class="col-2">
-                                    <span class="badge rounded-pill bg-primary"> ✓</span>
-
+                                    <div class="bg-primary on-right"> ✓</div>
                                 </div>
                                 <div class="col-10">
                                     Stripe risk evaluation: normal
