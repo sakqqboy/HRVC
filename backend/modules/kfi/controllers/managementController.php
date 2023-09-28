@@ -8,6 +8,7 @@ use backend\models\hrvc\Country;
 use backend\models\hrvc\Employee;
 use backend\models\hrvc\Kfi;
 use backend\models\hrvc\KfiHistory;
+use backend\models\hrvc\KfiSolution;
 use backend\models\hrvc\Unit;
 use backend\models\hrvc\User;
 use common\models\ModelMaster;
@@ -62,7 +63,6 @@ class ManagementController extends Controller
 						"kfiName" => $kfi["kfiName"],
 						"companyName" => Company::companyName($kfi['companyId']),
 						"branchName" => Branch::kfiBranchName($kfi["kfiId"]),
-						"branchName" => "",
 						"target" => $kfi['targetAmount'],
 						"unit" => Unit::unitName($kfi['unitId']),
 						"month" => ModelMaster::monthEng($kfi['month'], 1),
@@ -173,6 +173,7 @@ class ManagementController extends Controller
 					"employeeName" => $employee["employeeFirstname"] . ' ' . $employee["employeeSurename"],
 					"image" => Employee::EmployeeDetail($issue["employeeId"])["picture"],
 					"createDateTime" => ModelMaster::engDate($issue["createDateTime"], 2),
+					"solutionList" => KfiSolution::solutionList($issue["kfiIssueId"])
 				];
 			endforeach;
 		}

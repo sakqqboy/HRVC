@@ -15,10 +15,13 @@ use frontend\models\hrvc\KfiBranch;
 use frontend\models\hrvc\KfiDepartment;
 use frontend\models\hrvc\KfiHistory;
 use frontend\models\hrvc\KfiIssue;
+use frontend\models\hrvc\KfiSolution;
 use frontend\models\hrvc\User;
 use Yii;
+use yii\base\Model;
 use yii\db\Expression;
 use yii\web\Controller;
+use yii\web\UploadedFile;
 
 header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
@@ -339,9 +342,16 @@ class ManagementController extends Controller
 			"kfiIssue" => $kfiIssue,
 			"kfiId" => $kfiId,
 			"profile" => $profile,
-			"employeeId" => $employeeId
+			"employeeId" => $employeeId,
+			"kfiName" => $kfi["kfiName"]
 		]);
-		$res["historyText"] =  $this->renderAjax('kfi_history');;
+		$res["historyText"] =  $this->renderAjax('kfi_history', [
+			"kfiIssue" => $kfiIssue,
+			"kfiId" => $kfiId,
+			"profile" => $profile,
+			"employeeId" => $employeeId,
+			"kfiName" => $kfi["kfiName"]
+		]);
 		$res["kfi"] = $kfi;
 
 		return json_encode($res);
@@ -357,9 +367,71 @@ class ManagementController extends Controller
 			$kfiIssue->status = 1;
 			$kfiIssue->createDateTime = new Expression('NOW()');
 			$kfiIssue->updateDateTime = new Expression('NOW()');
+			$fileObj = UploadedFile::getInstanceByName("attachKfiFile");
+			if (isset($fileObj) && !empty($fileObj)) {
+				//throw new Exception("asdfad");
+				$path = Path::getHost() . 'file/kfi/';
+				if (!file_exists($path)) {
+					mkdir($path, 0777, true);
+				}
+				$file = $fileObj->name;
+				$filenameArray = explode('.', $file);
+				$countArrayFile = count($filenameArray);
+				$fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
+				$pathSave = $path . $fileName;
+				$fileObj->saveAs($pathSave);
+				$kfiIssue->file = 'file/kfi/' . $fileName;
+			}
+			//throw new Exception(print_r(Yii::$app->request->post(), true));
 			if ($kfiIssue->save(false)) {
 				return $this->redirect('index');
 			}
 		}
+	}
+	public function actionSaveKfiAnswer()
+	{
+		$solution = $_POST["answer"];
+		$kfiIssueId = $_POST["kfiIssueId"];
+		$employeeId = User::employeeIdFromUserId(Yii::$app->user->id);
+		$answer = new KfiSolution();
+		$res["status"] = false;
+		$file = '';
+		$fileName = '';
+		if (isset($_FILES['file']['name'])) {
+			$fileObj = UploadedFile::getInstanceByName("file");
+			$filename = $_FILES['file']['name'];
+			$path = Path::getHost() . 'file/kfi/';
+			if (!file_exists($path)) {
+				mkdir($path, 0777, true);
+			}
+			$filenameArray = explode('.', $filename);
+			$fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[1];
+			$pathSave = $path . $fileName;
+			$fileObj->saveAs($pathSave);
+			$answer->file = 'file/kfi/' . $fileName;
+			$file = 'file/kfi/' . $fileName;
+		}
+
+		$answer->kfiIssueId = $kfiIssueId;
+		$answer->solution = $solution;
+		$answer->parentId = null;
+		$answer->employeeId = $employeeId;
+		$answer->status = 1;
+		$answer->createDateTime = new Expression('NOW()');
+		$answer->updateDateTime = new Expression('NOW()');
+		$createDateTime = date('Y-m-d');
+		if ($answer->save(false)) {
+			$res["commentText"] = $this->renderAjax('comment', [
+				"name" => User::userHeaderName(),
+				"image" => User::userHeaderImage(),
+				"answer" => $solution,
+				"createDateTime" => ModelMaster::engDate($createDateTime, 2),
+				"kfiIssueId" => $kfiIssueId,
+				"file" => $file,
+				"fileName" => $fileName
+			]);
+			$res["status"] = true;
+		}
+		return json_encode($res);
 	}
 }

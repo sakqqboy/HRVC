@@ -11,11 +11,15 @@ use frontend\models\hrvc\Kgi;
 use frontend\models\hrvc\KgiBranch;
 use frontend\models\hrvc\KgiDepartment;
 use frontend\models\hrvc\KgiHistory;
+use frontend\models\hrvc\KgiIssue;
+use frontend\models\hrvc\KgiSolution;
 use frontend\models\hrvc\KgiTeam;
 use frontend\models\hrvc\Team;
+use frontend\models\hrvc\User;
 use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
+use yii\web\UploadedFile;
 
 /**
  * Default controller for the `kgi` module
@@ -491,6 +495,125 @@ class ManagementController extends Controller
 		KgiHistory::updateAll(["status" => 99], ["kgiId" => $kgiId]);
 		Kgi::updateAll(["status" => 99], ["kgiId" => $kgiId]);
 		$res["status"] = true;
+		return json_encode($res);
+	}
+
+	public function actionShowComment()
+	{
+		$userId = Yii::$app->user->id;
+		$employeeId = User::employeeIdFromUserId($userId);
+		$kgiId = $_POST["kgiId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
+		$kgi = curl_exec($api);
+		$kgi = json_decode($kgi, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-issue?kgiId=' . $kgiId);
+		$kgiIssue = curl_exec($api);
+		$kgiIssue = json_decode($kgiIssue, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
+		$profile = curl_exec($api);
+		$profile = json_decode($profile, true);
+
+		curl_close($api);
+		$res["status"] = true;
+		$res["issueText"] = $this->renderAjax('kgi_issue', [
+			"kgiIssue" => $kgiIssue,
+			"kgiId" => $kgiId,
+			"profile" => $profile,
+			"employeeId" => $employeeId,
+			"kgiName" => $kgi["kgiName"]
+		]);
+		$res["historyText"] =  $this->renderAjax('kgi_history2', [
+			"kgiIssue" => $kgiIssue,
+			"kgiId" => $kgiId,
+			"profile" => $profile,
+			"employeeId" => $employeeId,
+			"kgiName" => $kgi["kgiName"]
+		]);
+		$res["kgi"] = $kgi;
+
+		return json_encode($res);
+	}
+	public function actionCreateNewIssue()
+	{
+		if (isset($_POST["newIssue"]) && trim($_POST["newIssue"]) != "") {
+			$kgiIssue = new KgiIssue();
+
+			$kgiIssue->issue = $_POST["newIssue"];
+			$kgiIssue->kgiId = $_POST["kgiId"];
+			$kgiIssue->employeeId = $_POST["employeeId"];
+			$kgiIssue->status = 1;
+			$kgiIssue->createDateTime = new Expression('NOW()');
+			$kgiIssue->updateDateTime = new Expression('NOW()');
+			$fileObj = UploadedFile::getInstanceByName("attachKgiFile");
+			if (isset($fileObj) && !empty($fileObj)) {
+				//throw new Exception("asdfad");
+				$path = Path::getHost() . 'file/kgi/';
+				if (!file_exists($path)) {
+					mkdir($path, 0777, true);
+				}
+				$file = $fileObj->name;
+				$filenameArray = explode('.', $file);
+				$countArrayFile = count($filenameArray);
+				$fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
+				$pathSave = $path . $fileName;
+				$fileObj->saveAs($pathSave);
+				$kgiIssue->file = 'file/kgi/' . $fileName;
+			}
+			//throw new Exception(print_r(Yii::$app->request->post(), true));
+			if ($kgiIssue->save(false)) {
+				return $this->redirect('index');
+			}
+		}
+	}
+	public function actionSaveKgiAnswer()
+	{
+		$solution = $_POST["answer"];
+		$kgiIssueId = $_POST["kgiIssueId"];
+		$employeeId = User::employeeIdFromUserId(Yii::$app->user->id);
+		$answer = new KgiSolution();
+		$res["status"] = false;
+		$file = '';
+		$fileName = '';
+		if (isset($_FILES['file']['name'])) {
+			$fileObj = UploadedFile::getInstanceByName("file");
+			$filename = $_FILES['file']['name'];
+			$path = Path::getHost() . 'file/kgi/';
+			if (!file_exists($path)) {
+				mkdir($path, 0777, true);
+			}
+			$filenameArray = explode('.', $filename);
+			$fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[1];
+			$pathSave = $path . $fileName;
+			$fileObj->saveAs($pathSave);
+			$answer->file = 'file/kgi/' . $fileName;
+			$file = 'file/kgi/' . $fileName;
+		}
+
+		$answer->kgiIssueId = $kgiIssueId;
+		$answer->solution = $solution;
+		$answer->parentId = null;
+		$answer->employeeId = $employeeId;
+		$answer->status = 1;
+		$answer->createDateTime = new Expression('NOW()');
+		$answer->updateDateTime = new Expression('NOW()');
+		$createDateTime = date('Y-m-d');
+		if ($answer->save(false)) {
+			$res["commentText"] = $this->renderAjax('comment', [
+				"name" => User::userHeaderName(),
+				"image" => User::userHeaderImage(),
+				"answer" => $solution,
+				"createDateTime" => ModelMaster::engDate($createDateTime, 2),
+				"kgiIssueId" => $kgiIssueId,
+				"file" => $file,
+				"fileName" => $fileName
+			]);
+			$res["status"] = true;
+		}
 		return json_encode($res);
 	}
 }

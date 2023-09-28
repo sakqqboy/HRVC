@@ -211,9 +211,7 @@ $this->title = 'KFI';
 	<?= $this->render('history_modal', [
 		"units" => $units,
 	]) ?>
-	<?= $this->render('issue_modal', [
-		"units" => $units,
-	]) ?>
+	<?= $this->render('issue_modal') ?>
 	<?= $this->render('delete_modal') ?>
 
 </div>

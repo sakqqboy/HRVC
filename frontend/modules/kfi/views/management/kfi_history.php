@@ -1,23 +1,106 @@
 <ul>
-	<li class="li-circle">
-		<img src="<?= Yii::$app->homeUrl ?>image/ehsan-small.png" class="image-circle1"><span class="li-name">Quazi Ehsan Hossain
-			<span class="Report-Issue">2:56 PM, May 31, 2023</span>
-	</li>
-	<div class="style-circle-li">
-		<span> Hi Tani! Could you take quick look at these Landing Page designs? when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries
-			<p class="mt-20">Thanks so much!</p>
-		</span>
-	</div>
-	<div class="col-12 badge-pdf0">
-		<span class="badge bg-light"> <img src="<?= Yii::$app->homeUrl ?>image/pdf.png" class="pdf-down"></span> <span class="text-dark"> 115 IHI July Invoice(Gunman) 30.July.2021.pdf 2.3mb</span>
-	</div>
+	<?php
 
-	<li class="li-circle">
-		<img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-hashed">&nbsp; <strong class="font-size-14 text-dark">Tadawoki Watanabe </strong>&nbsp; <span class="Report-Issue"> 2:56 PM, May 31, 2023</span>
-		<div class="col-12 problemm">
-			<span> Hi Tani! Could you take quick look at these Landing Page designs? when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries
-				<p class="mt-20">Thanks so much!</p>
-			</span>
-		</div>
-	</li>
+	use yii\bootstrap5\ActiveForm;
+
+	if (isset($kfiIssue) && count($kfiIssue) > 0) {
+		$i = 1;
+		foreach ($kfiIssue as $kfiIssueId => $issue) :
+	?>
+			<li class="li-circle">
+				<img src="<?= Yii::$app->homeUrl ?><?= $issue['image'] ?>" class="image-circle1">
+				<span class="li-name">
+					<?= $issue["employeeName"] ?>
+				</span>
+				<span class="Report-Issue"> <?= $issue['createDateTime'] ?>
+					<i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i>
+				</span>
+			</li>
+			<div class="col-12 border-left-dash mb-30">
+				<div class="font-size-14 pl-30 pt-20 pb-10" style="text-indent: 40px;">
+					<span>
+						<?= $issue['issue'] ?>
+					</span>
+				</div>
+
+				<?php
+
+				if ($issue["file"] != "") {
+					$fileSize = filesize($issue["file"]) / 1000000;
+				?>
+					<div class="col-12 pr-10 mr-10  pb-10 text-end">
+
+						<a href="<?= Yii::$app->homeUrl . $issue['file'] ?>" class="no-underline">
+							<img src="<?= Yii::$app->homeUrl ?>image/pdf.png" class="pdf-down">
+							<span class="text-dark font-size-14"> <?= $kfiName ?>
+								<span class="text-secondary font-size-12"> &nbsp;<?= number_format($fileSize, 2) ?> mb</span>
+							</span>
+						</a>
+
+					</div>
+				<?php
+				}
+
+				?>
+				<hr>
+				<div class="col-12 mt-5" id="solution-<?= $kfiIssueId ?>">
+					<?php
+					if (isset($issue["solutionList"]) && count($issue["solutionList"]) > 0) {
+						foreach ($issue["solutionList"] as $kfiSolutionId => $data) : ?>
+							<div class="col-12 pl-30" style="margin-top: -10px;">
+								<div class="col-12 comment-box">
+									<img src="<?= Yii::$app->homeUrl ?><?= $data['image'] ?>" class="image-circle1">&nbsp;
+									<span class="font-size-14"><?= $data['name'] ?></span>
+									<span class="Report-Issue"> <?= $data['createDateTime'] ?>
+										<i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i>
+									</span>
+									<div class="font-size-14 pl-30 pb-10" style="text-indent: 30px;">
+										<span>
+											<?= $data['solution'] ?>
+										</span>
+										<?php
+										if ($data["file"] != "") {
+											$fileSize = filesize($data["file"]) / 1000000;
+										?>
+											<div class="pr-10 mr-10 mt-10 pb-10" style="background-color:#F5F5F5;border-radius:5px;">
+												<div class="row">
+													<div class="col-lg-7 col-md-6 col-12 pt-15">
+														<img src="<?= Yii::$app->homeUrl ?>image/pdf.png" class="pdf-down">
+														<span class="text-dark"> <?= $data["file"] ?> <span class="text-secondary font-size-12"> &nbsp;<?= number_format($fileSize, 2) ?> mb</span></span>
+													</div>
+													<div class="col-lg-5 col-md-6 col-12 pt-15 text-end " style="text-indent: 0px;">
+														<a href="<?= Yii::$app->homeUrl . $data['file'] ?>" target="_blank" class="btn btn-outline-secondary mr-5 btn-sm">
+															<i class="fa fa-eye" aria-hidden="true"></i>
+														</a>
+														<a href="<?= Yii::$app->homeUrl . $data['file'] ?>" class="btn btn-outline-secondary  btn-sm">
+															<i class="fa fa-cloud-download" aria-hidden="true"></i>
+														</a>
+													</div>
+												</div>
+											</div>
+										<?php
+										}
+										?>
+									</div>
+								</div>
+							</div>
+						<?php
+						endforeach;
+					} else { ?>
+						<div class="alert alert-light text-center">
+							Waiting for solution.
+						</div>
+					<?php
+
+					}
+					?>
+				</div>
+			</div>
+			<hr>
+	<?php
+			$i++;
+		endforeach;
+	}
+	?>
+
 </ul>

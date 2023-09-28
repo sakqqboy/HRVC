@@ -180,12 +180,11 @@ $this->title = 'KFI Grid View';
 												<div class="col-12">
 													<div class="row">
 														<div class="col-lg-12 text-end pr-0">
-															<img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima mr-15" style="margin-top: -5px;">
-
-
+															<span data-bs-toggle="modal" data-bs-target="#kfi-issue" onclick="javascript:showKfiComment(<?= $kfiId ?>)">
+																<img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima" style="margin-top: -5px;cursor:pointer;">
+															</span>&nbsp;&nbsp;
 															<span class="next-update-span" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" onclick=" javascript:updateKfi(<?= $kfiId ?>)">
 																<i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i>
-
 															</span> &nbsp;
 															<span class="text-primary font-size-12">Next Update</span>
 															<strong class="font-size-12"><?= $kfi['nextCheck'] == "" ? 'Not set' : $kfi['nextCheck'] ?></strong>
@@ -242,4 +241,5 @@ $this->title = 'KFI Grid View';
 	<?= $this->render('issue_modal', [
 		"units" => $units,
 	]) ?>
+	<?= $this->render('issue_modal') ?>
 </div>

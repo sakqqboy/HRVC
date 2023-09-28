@@ -117,10 +117,20 @@ $this->title = "KGI";
 									<td class="text-center"><?= $kgi["priority"] ?></td>
 									<td>
 										<div class="flex mb-5 -space-x-4">
-											<img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-											<img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-											<img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-											<a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
+											<?php
+											if (isset($kgi["employee"]) && count($kgi["employee"]) > 0) {
+												$e = 1;
+												foreach ($kgi["employee"] as $emp) : ?>
+													<img class="image-grid" src="<?= Yii::$app->homeUrl . $emp ?>">
+											<?php
+													if ($e == 3) {
+														break;
+													}
+													$e++;
+												endforeach;
+											}
+											?>
+											<a class="no-underline-black ml-2 mt-3" href="#"><?= count($kgi["employee"]) ?></a>
 										</div>
 									</td>
 									<td>
@@ -142,7 +152,9 @@ $this->title = "KGI";
 									<td><?= $kgi["periodCheck"] ?></td>
 									<td><?= $kgi["nextCheck"] ?></td>
 									<td colspan="row">
-										<span data-bs-toggle="modal" data-bs-target="#exampleModalcomment"> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
+										<span data-bs-toggle="modal" data-bs-target="#kgi-issue" onclick="javascript:showKgiComment(<?= $kgiId ?>)">
+											<img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown">
+										</span>
 										<span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
 										<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 											<li data-bs-toggle="modal" data-bs-target="#update-kgi-modal" onclick="javascript:updateKgi(<?= $kgiId ?>)">
@@ -216,3 +228,4 @@ $this->title = "KGI";
 
 </div>
 <?= $this->render('modal_delete') ?>
+<?= $this->render('modal_issue') ?>

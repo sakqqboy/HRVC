@@ -10,9 +10,12 @@ use backend\models\hrvc\Kgi;
 use backend\models\hrvc\KgiBranch;
 use backend\models\hrvc\KgiDepartment;
 use backend\models\hrvc\KgiHistory;
+use backend\models\hrvc\KgiIssue;
+use backend\models\hrvc\KgiSolution;
 use backend\models\hrvc\KgiTeam;
 use backend\models\hrvc\Unit;
 use common\models\ModelMaster;
+use Exception;
 use yii\web\Controller;
 
 /**
@@ -54,6 +57,9 @@ class ManagementController extends Controller
 					"employee" => "",
 					"status" => $kgi["status"],
 					"countryName" => Country::countryNameBycompany($kgi['companyId']),
+					"issue" => KgiIssue::lastestIssue($kgi["kgiId"])["issue"],
+					"solution" => KgiIssue::lastestIssue($kgi["kgiId"])["solution"],
+					"employee" => KgiTeam::employeeTeam($kgi['kgiId'])
 				];
 			endforeach;
 		}
@@ -238,6 +244,30 @@ class ManagementController extends Controller
 					"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
 					"time" => ModelMaster::timeText($time[1]),
 					"status" => $history["status"]
+				];
+			endforeach;
+		}
+		return json_encode($data);
+	}
+	public function actionKgiIssue($kgiId)
+	{
+		$kgiIssue = KgiIssue::find()
+			->where(["status" => [1, 4], "kgiId" => $kgiId])
+			->orderBy("kgiIssueId")
+			->asArray()
+			->all();
+
+		$data = [];
+		if (isset($kgiIssue) && count($kgiIssue) > 0) {
+			foreach ($kgiIssue as $issue) :
+				$employee = Employee::EmployeeDetail($issue["employeeId"]);
+				$data[$issue["kgiIssueId"]] = [
+					"issue" => $issue["issue"],
+					"file" => $issue["file"],
+					"employeeName" => $employee["employeeFirstname"] . ' ' . $employee["employeeSurename"],
+					"image" => Employee::EmployeeDetail($issue["employeeId"])["picture"],
+					"createDateTime" => ModelMaster::engDate($issue["createDateTime"], 2),
+					"solutionList" => KgiSolution::solutionList($issue["kgiIssueId"])
 				];
 			endforeach;
 		}

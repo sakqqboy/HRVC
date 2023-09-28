@@ -104,10 +104,20 @@ $this->title = 'KGI Grid View';
 											<div class="col-lg-1 col-md-6 col-12">
 												<span class="badge rounded-pill bg-white">
 													<div class="flex mb-5 -space-x-4">
-														<img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1">
-														<img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar2.png" class="image-avatar1">
-														<img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar1">
-														<a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-dark bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">9</a>
+														<?php
+														if (isset($kgi["employee"]) && count($kgi["employee"]) > 0) {
+															$e = 1;
+															foreach ($kgi["employee"] as $emp) : ?>
+																<img class="image-grid" src="<?= Yii::$app->homeUrl . $emp ?>">
+														<?php
+																if ($e == 3) {
+																	break;
+																}
+																$e++;
+															endforeach;
+														}
+														?>
+														<a class="no-underline-black ml-2 mt-3" href="#"><?= count($kgi["employee"]) ?></a>
 													</div>
 												</span>
 											</div>
@@ -219,16 +229,22 @@ $this->title = 'KGI Grid View';
 											<div class="col-lg-5 col-md-6 col-12 card-bordersolid">
 												<div class="row mt-20">
 													<div class="col-md-6">
-														<div class="col-12 dashed1">
+														<div class="col-12 dashed1" style="word-wrap: break-word;">
 															<strong class="text-dark font-size-13"> Issue</strong>
-															<p class="font-size-11 text-dark">Now use Lorem Ipsum as their default model text, and a search</p>
+															<p class="font-size-11 text-dark"><?= $kgi["issue"] ?></p>
 														</div>
 													</div>
 													<div class="col-md-6">
-														<div class="col-12 dashed1">
+														<div class="col-12 dashed1" style="word-wrap: break-word;">
 															<strong class="text-dark font-size-13"> Solution</strong>
-															<p class="font-size-11 text-dark">Now use Lorem Ipsum as their default model text, and a search </p>
+															<p class="font-size-11 text-dark"><?= $kgi["solution"] ?></p>
 														</div>
+													</div>
+													<div class="col-12 text-end font-size-12 mt-5">
+														<span data-bs-toggle="modal" data-bs-target="#kgi-issue" onclick="javascript:showKgiComment(<?= $kgiId ?>)" style="cursor: pointer;" class="text-primary">
+															<i class="fa fa-eye mr-5" aria-hidden="true"></i>
+															See more Issue & solution
+														</span>
 													</div>
 												</div>
 											</div>
@@ -283,4 +299,5 @@ $form = ActiveForm::begin([
 ]) ?>
 <?php ActiveForm::end(); ?>
 <?= $this->render('modal_delete') ?>
+<?= $this->render('modal_issue') ?>
 <!-- end -->

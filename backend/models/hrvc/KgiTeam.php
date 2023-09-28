@@ -43,4 +43,22 @@ class KgiTeam extends \backend\models\hrvc\master\KgiTeamMaster
             ->all();
         return count($kgiTeam);
     }
+    public static function employeeTeam($kgiId)
+    {
+        $kgiTeam = KgiTeam::find()->select('teamId')->where(["kgiId" => $kgiId])->asArray()->all();
+        $data = [];
+        if (isset($kgiTeam) && count($kgiTeam) > 0) {
+            foreach ($kgiTeam as $team) :
+                $employee = Employee::find()->select('picture,employeeId')
+                    ->where(["teamId" => $team["teamId"]])
+                    ->asArray()->all();
+                if (isset($employee) && count($employee) > 0) {
+                    foreach ($employee as $emp) :
+                        $data[$emp["employeeId"]] = $emp["picture"];
+                    endforeach;
+                }
+            endforeach;
+        }
+        return $data;
+    }
 }

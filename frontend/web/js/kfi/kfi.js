@@ -225,3 +225,37 @@ function showKfiComment(kfiId) {
         }
     });
 }
+function answerKfiIssue(kfiIssueId) { 
+    var answer = $("#answer-" + kfiIssueId).val();
+    var fd = new FormData();
+    var files = $("#attachKfiFileAnswer-"+kfiIssueId)[0].files;
+    if (files.length > 0) {
+        fd.append('file', files[0]);
+
+    }
+    fd.append('answer', answer);
+    fd.append('kfiIssueId', kfiIssueId);
+    var url = $url + 'kfi/management/save-kfi-answer';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: fd,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            if (data.status) { 
+                $("#solution-" + kfiIssueId).append(data.commentText);
+                $("#answer-" + kfiIssueId).val('');
+            }
+        }
+    });
+}
+function showSelectFileName(kfiIssueId) {
+    var message = "Attached : "+$("#attachKfiFileAnswer-" + kfiIssueId).val();
+    $("#fileName-" + kfiIssueId).html(message);
+}
+function showAttachFileName(kfiId) { 
+    var message = "Attached : " + $("#attachKfiFile").val();
+    $("#attachFile-" + kfiId).html(message);
+}

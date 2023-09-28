@@ -244,3 +244,72 @@ function deleteKgi() {
 	    }
 	});
 }
+$("#pills-Issues-tab-kgi").click(function () {
+	$("#pills-Issues-tab-kgi").addClass("text-primary");
+	$("#pills-History-tab-kgi").removeClass("text-primary");
+	$("#pills-History").removeClass("active");
+	$("#pills-Issues-tab-kgi").css("border-bottom", "5px #0d6efd solid");
+	$("#pills-History-tab-kgi").removeAttr("style");
+   });
+   $("#pills-History-tab-kgi").click(function () {
+	$("#pills-History-tab-kgi").addClass("text-primary");
+	$("#pills-Issues-tab-kgi").removeClass("text-primary");
+	$("#pills-Issues").removeClass("active");
+	$("#pills-History-tab-kgi").attr("style");
+	$("#pills-History-tab-kgi").css("border-bottom", "5px #0d6efd solid");
+	$("#pills-Issues-tab-kgi").removeAttr("style");
+   });
+function showKgiComment(kgiId) { 
+	var url = $url + 'kgi/management/show-comment';
+	$.ajax({
+	    type: "POST",
+	    dataType: 'json',
+	    url: url,
+	    data: { kgiId: kgiId },
+	    success: function(data) {
+		 if (data.status) {
+		     $("#kgi-name-issue").html(data.kgi.kgiName);
+		     $("#pills-Issues").html(data.issueText);
+		     $("#pills-History").html(data.historyText);
+		     $("#company-issue").html(data.kgi.companyName);
+		     $("#branch-issue").html(data.kgi.branchName);
+		     $("#country-issue").html(data.kgi.countryName);
+		     $("#flag-issue").attr('src',$url+data.kgi.flag);
+		 }
+	    }
+	});
+}
+function showSelectFileNameKgi(kgiIssueId) {
+	var message = "Attached : "+$("#attachKgiFileAnswer-" + kgiIssueId).val();
+	$("#fileName-" + kgiIssueId).html(message);
+   }
+   function showAttachFileNameKgi(kgiId) { 
+	var message = "Attached : " + $("#attachKgiFile").val();
+	$("#attachFile-" + kgiId).html(message);
+}
+function answerKgiIssue(kgiIssueId) { 
+	var answer = $("#answer-" + kgiIssueId).val();
+	var fd = new FormData();
+	var files = $("#attachKgiFileAnswer-"+kgiIssueId)[0].files;
+	if (files.length > 0) {
+	    fd.append('file', files[0]);
+   
+	}
+	fd.append('answer', answer);
+	fd.append('kgiIssueId', kgiIssueId);
+	var url = $url + 'kgi/management/save-kgi-answer';
+	$.ajax({
+	    type: "POST",
+	    dataType: 'json',
+	    url: url,
+	    data: fd,
+	    contentType: false,
+	    processData: false,
+	    success: function (data) {
+		 if (data.status) { 
+		     $("#solution-" + kgiIssueId).append(data.commentText);
+		     $("#answer-" + kgiIssueId).val('');
+		 }
+	    }
+	});
+   }
