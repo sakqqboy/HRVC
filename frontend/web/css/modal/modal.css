@@ -17,7 +17,21 @@
 
 .link-3 {
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 500;
+    padding-left: 50px;
+    text-decoration: dashed;
+    color: #000000;
+}
+
+.canceltomato {
+    background-color: rgb(255 127 104);
+    color: #FFFFFF;
+    width: 70px;
+    font-size: 14px;
+    text-align: center;
+    padding-top: 6px;
+    height: 35px;
+    border-radius: 5px;
 }
 
 .card-hashed {
@@ -286,13 +300,16 @@
 
 .Completed-Backdrop7 {
     font-size: 12px;
+    margin-right: 170px;
 }
 
 .tk {
     font-weight: 600;
-    padding-top: 5px;
+    margin-top: -35px;
     font-size: 13px;
+    padding-left: 20px;
 }
+
 
 .border-next-Backdrop7 {
     border-radius: 20px;

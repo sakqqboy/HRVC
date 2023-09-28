@@ -102,7 +102,7 @@ $this->title = 'KPI Team Grid';
                     <div class="col-lg-6 col-md-6 col-6 card card-radius">
                         <div class="row">
                             <div class="col-md-6 font-size-12">
-                                <i class="fa fa-flag" aria-hidden="true"></i> The Number Of Clients Per Employee
+                                <i class="fa fa-tachometer" aria-hidden="true"></i> The Number Of Clients Per Employee
                             </div>
                             <div class="col-md-2">
                                 <span class="badge rounded-pill bg-warning text-dark">Completed</span>
@@ -225,7 +225,7 @@ $this->title = 'KPI Team Grid';
                     <div class="col-lg-6 col-md-6 col-6 card card-radius">
                         <div class="row">
                             <div class="col-md-6 font-size-12">
-                                <i class="fa fa-flag" aria-hidden="true"></i> The Number Of Clients Per Employee
+                                <i class="fa fa-tachometer" aria-hidden="true"></i> The Number Of Clients Per Employee
                             </div>
                             <div class="col-md-2">
                                 <span class="badge rounded-pill bg-warning text-dark">Completed</span>
@@ -348,7 +348,7 @@ $this->title = 'KPI Team Grid';
                     <div class="col-lg-6 col-md-6 col-6 card card-radius">
                         <div class="row">
                             <div class="col-md-6 font-size-12">
-                                <i class="fa fa-flag" aria-hidden="true"></i> The Number Of Clients Per Employee
+                                <i class="fa fa-tachometer" aria-hidden="true"></i> The Number Of Clients Per Employee
                             </div>
                             <div class="col-md-2">
                                 <span class="badge rounded-pill bg-warning text-dark">Completed</span>
@@ -471,7 +471,7 @@ $this->title = 'KPI Team Grid';
                     <div class="col-lg-6 col-md-6 col-6 card card-radius">
                         <div class="row">
                             <div class="col-md-6 font-size-12">
-                                <i class="fa fa-flag" aria-hidden="true"></i> The Number Of Clients Per Employee
+                                <i class="fa fa-tachometer" aria-hidden="true"></i> The Number Of Clients Per Employee
                             </div>
                             <div class="col-md-2">
                                 <span class="badge rounded-pill bg-warning text-dark">Completed</span>

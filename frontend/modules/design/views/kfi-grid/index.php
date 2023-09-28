@@ -39,13 +39,14 @@ $this->title = 'KFI Grid View';
                             <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
-                                        <div class="modal-header">
+                                        <div class="modal-header" style="border:none">
                                             <h5 class="modal-title text-primary" id="staticBackdropLabel"><i class="fa fa-magic" aria-hidden="true"></i> Create</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <div class="col-12" style="margin-top: -20px; padding-left:20px; font-size: 13px;">
+                                        <div class="col-12" style="margin-top: -10px; padding-left:20px; font-size: 13px;">
                                             <i class="fa fa-line-chart" aria-hidden="true"></i> Key Financial Indicator
                                         </div>
+                                        <hr>
                                         <div class="modal-body">
                                             <div class="row">
                                                 <div class="col-lg-6 col-md-6 col-6">

@@ -136,166 +136,6 @@ $this->title = 'Single KGI';
                             </td>
                         </tr>
                     </tbody>
-                    <tbody>
-                        <tr class="border-bottom-white2">
-                            <td class="over-blue">Increase Something</td>
-                            <td>TCF</td>
-                            <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
-                            <td>The number of clients per employee by team</td>
-                            <td class="text-center">A</td>
-                            <td>Quality</td>
-                            <td class="text-center">2.5</td>
-                            <td class="text-center">
-                                >
-                            </td>
-                            <td class="text-center">2.1</td>
-                            <td>
-                                <div id="progress1">
-                                    <div data-num="35" class="progress-item1"></div>
-                                </div>
-                            </td>
-                            <td>January</td>
-                            <td>Monthly</td>
-                            <td>2nd Feb, 2023</td>
-                            <td>23rd Feb, 2023</td>
-                            <td colspan="row">
-                                <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
-                                <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr class="border-bottom-white2">
-                            <td class="over-blue">Increase Something</td>
-                            <td>TCF</td>
-                            <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
-                            <td>The number of clients per employee by team</td>
-                            <td class="text-center">A</td>
-                            <td>Quality</td>
-                            <td class="text-center">2.5</td>
-                            <td class="text-center">
-                                >
-                            </td>
-                            <td class="text-center">2.1</td>
-                            <td>
-                                <div id="progress1">
-                                    <div data-num="35" class="progress-item1"></div>
-                                </div>
-                            </td>
-                            <td>January</td>
-                            <td>Monthly</td>
-                            <td>2nd Feb, 2023</td>
-                            <td>23rd Feb, 2023</td>
-                            <td colspan="row">
-                                <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
-                                <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr class="border-bottom-white2">
-                            <td class="over-blue">Increase Something</td>
-                            <td>TCF</td>
-                            <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
-                            <td>The number of clients per employee by team</td>
-                            <td class="text-center">A</td>
-                            <td>Quality</td>
-                            <td class="text-center">2.5</td>
-                            <td class="text-center">
-                                >
-                            </td>
-                            <td class="text-center">2.1</td>
-                            <td>
-                                <div id="progress1">
-                                    <div data-num="35" class="progress-item1"></div>
-                                </div>
-                            </td>
-                            <td>January</td>
-                            <td>Monthly</td>
-                            <td>2nd Feb, 2023</td>
-                            <td>23rd Feb, 2023</td>
-                            <td colspan="row">
-                                <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
-                                <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr class="border-bottom-white2">
-                            <td class="over-blue">Increase Something</td>
-                            <td>TCF</td>
-                            <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
-                            <td>The number of clients per employee by team</td>
-                            <td class="text-center">A</td>
-                            <td>Quality</td>
-                            <td class="text-center">2.5</td>
-                            <td class="text-center">
-                                >
-                            </td>
-                            <td class="text-center">2.1</td>
-                            <td>
-                                <div id="progress1">
-                                    <div data-num="35" class="progress-item1"></div>
-                                </div>
-                            </td>
-                            <td>January</td>
-                            <td>Monthly</td>
-                            <td>2nd Feb, 2023</td>
-                            <td>23rd Feb, 2023</td>
-                            <td colspan="row">
-                                <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
-                                <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr class="border-bottom-white2">
-                            <td class="over-blue">Increase Something</td>
-                            <td>TCF</td>
-                            <td><img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="Flag-Turkey"> Izmir, Turkey</td>
-                            <td>The number of clients per employee by team</td>
-                            <td class="text-center">A</td>
-                            <td>Quality</td>
-                            <td class="text-center">2.5</td>
-                            <td class="text-center">
-                                >
-                            </td>
-                            <td class="text-center">2.1</td>
-                            <td>
-                                <div id="progress1">
-                                    <div data-num="35" class="progress-item1"></div>
-                                </div>
-                            </td>
-                            <td>January</td>
-                            <td>Monthly</td>
-                            <td>2nd Feb, 2023</td>
-                            <td>23rd Feb, 2023</td>
-                            <td colspan="3">
-                                <span> <img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown"></span>
-                                <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" style="color: tomato;" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
                 </table>
             </div>
         </div>
@@ -319,7 +159,7 @@ $this->title = 'Single KGI';
         <div class="modal-content">
             <div class="modal-header" style="border-bottom:none;">
                 <div class="modal-title Modalfirstone" id="exampleModalcomment2Label"><i class="fa fa-clock-o" aria-hidden="true"></i> Work More and More</div>
-                <div class="modal-title Modalfirstone">Tokyo Consulting Firm Limited</div>
+                <div class="modal-title Modalfirstone"> Tokyo Consulting Firm Limited</div>
             </div>
             <div class="fsm">Dhaka, Bangladesh <img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="Round1"></div>
             <div class="modal-body">
@@ -414,7 +254,7 @@ $this->title = 'Single KGI';
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom:none;">
-                <div class="modal-title Modalfirstone" id="exampleModalViewkpi4Label"><i class="fa fa-flag-o" aria-hidden="true"></i> Increase Something</div>
+                <div class="modal-title Modalfirstone" id="exampleModalViewkpi4Label"><i class="fa fa-tachometer" aria-hidden="true"></i> Increase Something</div>
                 <div class="modal-title"> Single KGI Contents</div>
                 <div class="modal-title circle-update-team"> A</div>
                 <div class="modal-title badge rounded-pill bg-warning text-dark font-size-14">Completed</div>

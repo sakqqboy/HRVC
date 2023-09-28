@@ -94,7 +94,7 @@ $this->title = 'Leader KPI Grid';
                                 <strong> <i class="fa fa-tachometer" aria-hidden="true"></i> The Number Of Clients Per Employee</strong>
                             </div>
                             <div class="col-md-2">
-                                <span class="badge rounded-pill bg-warning text-dark">Completed</span>
+                                <span class="badge rounded-pill bg-warning text-dark font-size-11">Completed</span>
                             </div>
                             <div class="col-md-4">
                                 <div class="col-12">
@@ -217,7 +217,7 @@ $this->title = 'Leader KPI Grid';
                                 <strong> <i class="fa fa-tachometer" aria-hidden="true"></i> The Number Of Clients Per Employee</strong>
                             </div>
                             <div class="col-md-2">
-                                <span class="badge rounded-pill bg-warning text-dark">Completed</span>
+                                <span class="badge rounded-pill bg-warning text-dark font-size-11">Completed</span>
                             </div>
                             <div class="col-md-4">
                                 <div class="col-12">
@@ -340,7 +340,7 @@ $this->title = 'Leader KPI Grid';
                                 <strong> <i class="fa fa-tachometer" aria-hidden="true"></i> The Number Of Clients Per Employee</strong>
                             </div>
                             <div class="col-md-2">
-                                <span class="badge rounded-pill bg-warning text-dark">Completed</span>
+                                <span class="badge rounded-pill bg-warning text-dark font-size-11">Completed</span>
                             </div>
                             <div class="col-md-4">
                                 <div class="col-12">
@@ -463,7 +463,7 @@ $this->title = 'Leader KPI Grid';
                                 <strong> <i class="fa fa-tachometer" aria-hidden="true"></i> The Number Of Clients Per Employee</strong>
                             </div>
                             <div class="col-md-2">
-                                <span class="badge rounded-pill bg-warning text-dark">Completed</span>
+                                <span class="badge rounded-pill bg-warning text-dark font-size-11">Completed</span>
                             </div>
                             <div class="col-md-4">
                                 <div class="col-12">
