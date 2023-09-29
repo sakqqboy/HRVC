@@ -70,6 +70,7 @@ class AppAsset extends AssetBundle
         'js/content.js',
         'js/index.js',
         'js/share.js',
+        'js/assign_kfi.js',
         'js/setting/branch.js',
         'js/setting/department.js',
         'js/setting/team.js',
