@@ -41,8 +41,8 @@ class KgiIssue extends \backend\models\hrvc\master\KgiIssueMaster
             "solution" => ""
         ];
         $issue = KgiIssue::find()->where(["kgiId" => $kgiId])->asArray()->orderBy('kgiIssueId DESC')->one();
-        $issueLength = strlen($issue["issue"]);
         if (isset($issue) && !empty($issue)) {
+            $issueLength = strlen($issue["issue"]);
             if ($issueLength > 140) {
                 $issueText = substr($issue["issue"], 0, 140) . " . . .";
             } else {

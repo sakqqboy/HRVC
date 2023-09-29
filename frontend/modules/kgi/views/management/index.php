@@ -107,7 +107,6 @@ $this->title = "KGI";
 						<?php
 						if (count($kgis) > 0) {
 							foreach ($kgis as $kgiId => $kgi) :
-
 						?>
 								<tr class="border-bottom-white2" id='<?= $kgiId ?>' id="kgi-<?= $kgiId ?>">
 									<td class="over-blue"><?= $kgi["kgiName"] ?></td>
