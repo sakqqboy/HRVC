@@ -89,7 +89,7 @@ $this->title = 'Setting KFI';
                                         <div class="setting-upload">
                                             <i class="fa fa-building-o building1" aria-hidden="true"></i>
                                         </div>
-                                        <i class="fa fa-plus-circle circle5"></i>
+                                        <i class="fa fa-plus-circle circle5" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"></i>
                                     </div>
                                 </div>
                             </td>
@@ -105,7 +105,7 @@ $this->title = 'Setting KFI';
                                         </span>
                                     </div>
                                     <div class="col-3">
-                                        <div class="dashedshare">
+                                        <div class="dashedshare" data-bs-toggle="modal" data-bs-target="#modallink">
                                             <i class="fa fa-share-alt share-alt-setting" aria-hidden="true"></i>
                                         </div>
                                     </div>
@@ -205,6 +205,161 @@ $this->title = 'Setting KFI';
                         </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-sm dialog-allshow">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title fs-5" id="staticBackdropLabel"></div>
+                <div class="setting-upload2">
+                    <i class="fa fa-building building2" aria-hidden="true"></i> Company
+                </div>
+                <div class="dashedshare2 mr-80">
+                    <i class="fa fa-share-alt share-alt-setting2" aria-hidden="true"></i> Branch
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-4 text-end">
+                        <div class="col-12">
+                            <img src="<?= Yii::$app->homeUrl ?>image/logo-tcg.png" class="company-image2">
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="col-12">
+                            <div class="font-size-18"> TCF</div>
+                        </div>
+                        <div class="col-12">
+                            <img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="image-izmir">
+                            <span>Izmir, Turkey</span>
+                        </div>
+                    </div>
+                    <div class="mt-20"></div>
+                    <div class="col-lg-4 text-end">
+                        <div class="col-12">
+                            <img src="<?= Yii::$app->homeUrl ?>image/Flag-Brazil.png" class="company-image2">
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="col-12">
+                            <div class="font-size-18"> TCFBD</div>
+                        </div>
+                        <div class="col-12">
+                            <img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="image-izmir">
+                            <span>Izmir, Turkey</span>
+                        </div>
+                    </div>
+                    <div class="mt-20"></div>
+                    <div class="col-lg-4 text-end">
+                        <div class="col-12">
+                            <img src="<?= Yii::$app->homeUrl ?>image/logo-hrvc.png" class="company-image2">
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="col-12">
+                            <div class="font-size-18"> TCH</div>
+                        </div>
+                        <div class="col-12">
+                            <img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="image-izmir">
+                            <span>Izmir, Turkey</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modallink" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modallink" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered dialog-allshow1">
+        <div class="modal-content header-company">
+            <div class="container">
+                <div id="modallink">
+                    <div class="row">
+                        <div class="col-lg-1 col-12 pl-50">
+                            <div class="col-12 ">
+                                <div class="Resolve-c"><i class="fa fa-building ml-8 font-size-11" aria-hidden="true"></i></div>
+                                <span class="company-c"> </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-12 mt-20 pl-30">Company</div>
+                        <div class="col-lg-1 col-12">
+                            <div class="col-12">
+                                <div class="Resolve-c"><i class="fa fa-share-alt ml-8 font-size-11" aria-hidden="true"></i></i></div>
+                                <span class="company-c"> </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-12 mt-20">Branch</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="card card-company">
+                    <div class="row">
+                        <div class="col-lg-5 col-12">
+                            <div class="col-12">
+                                <div class="form-check mt-10">
+                                    <input class="form-check-input" type="checkbox" value="" id="flex1">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        &nbsp;&nbsp; <img src="<?= Yii::$app->homeUrl ?>image/logo-hrvc.png" class="company-image3">
+                                        <span class="font-size-10">HRVC</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check mt-15">
+                                    <input class="form-check-input" type="checkbox" value="" id="flex2">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        &nbsp;&nbsp; <img src="<?= Yii::$app->homeUrl ?>image/logo-tcg.png" class="company-image3">
+                                        <span class="font-size-10">TCG</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check mt-15">
+                                    <input class="form-check-input" type="checkbox" value="" id="flex3">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        &nbsp;&nbsp; <img src="<?= Yii::$app->homeUrl ?>image/Roof.png" class="company-image3">
+                                        <span class="font-size-10">TCF</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-12">
+                            <div class="col-12 mt-5">
+                                <select class="form-select font-size-13" aria-label="Default select example">
+                                    <option selected value="">Select Branch</option>
+                                    <option value="">All</option>
+                                    <option value="">Two</option>
+                                    <option value="">Three</option>
+                                </select>
+                            </div>
+                            <div class="col-12 mt-15">
+                                <select class="form-select font-size-13" aria-label="Default select example">
+                                    <option selected value="">Select Branch</option>
+                                    <option value="">One</option>
+                                    <option value="">Two</option>
+                                    <option value="">Three</option>
+                                </select>
+                            </div>
+                            <div class="col-12 mt-15">
+                                <select class="form-select font-size-13" aria-label="Default select example">
+                                    <option selected value="">Select Branch</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="Resolve" data-bs-dismiss="modal">Resolve</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

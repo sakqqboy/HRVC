@@ -46,8 +46,13 @@
 }
 
 .building1 {
-    margin-left: 4px;
+    margin-left: 5px;
     font-size: 10px;
+}
+
+.building2 {
+    font-size: 14px;
+    margin-left: 8px;
 }
 
 .setting-upload {
@@ -60,6 +65,16 @@
     margin-top: 2px;
 }
 
+.setting-upload2 {
+    width: 30px;
+    height: 30px;
+    border-style: dashed;
+    color: #757575;
+    border-radius: 50%;
+    margin-left: -70px;
+}
+
+
 
 .dashedshare {
     border-style: dashed;
@@ -68,11 +83,25 @@
     height: 20px;
     color: #757575;
     margin-top: 2px;
+    cursor: pointer;
+}
+
+.dashedshare2 {
+    border-style: dashed;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    color: #757575;
 }
 
 .share-alt-setting {
     padding-left: 3px;
     font-size: 10px;
+}
+
+.share-alt-setting2 {
+    font-size: 14px;
+    margin-left: 8px;
 }
 
 .dasheduser {
@@ -82,6 +111,19 @@
     width: 20px;
     height: 20px;
     margin-top: 2px;
+}
+
+.company-image2 {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid rgb(51, 123, 175);
+}
+
+.image-izmir {
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
 }
 
 .user0m {
@@ -156,5 +198,60 @@
 }
 
 .circle5 {
-    margin-top: -20px;
+    margin-top: -24px;
+    position: absolute;
+    padding-left: 15px;
+    cursor: pointer;
+    color: gray;
+}
+
+.dialog-allshow {
+    margin-top: 388px;
+    margin-left: 715px;
+}
+
+.dialog-allshow1 {
+    margin-top: 160px;
+    margin-left: 500px;
+}
+
+.Resolve {
+    color: hsl(203, 81%, 61%);
+    cursor: pointer;
+    margin-top: 30px;
+    font-size: 12px;
+}
+
+.header-company {
+    background-color: #eeeeee;
+}
+
+.Resolve-c {
+    width: 30px;
+    height: 30px;
+    border-style: dashed;
+    border-radius: 50%;
+    margin-top: 20px;
+    color: #757575;
+}
+
+.card-company {
+    margin-top: -5px;
+}
+
+.company-c {
+    font-size: 12px;
+}
+
+.company-image3 {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid rgb(54 160 236);
+
+}
+
+.fa {
+    content: "\f000";
+    font-family: 'FontAwesome';
 }
