@@ -123,17 +123,10 @@ $this->title = 'Setting KFI';
                                         </span>
                                     </div>
                                     <div class="col-3">
-                                        <div class="dasheduser-upload">
+                                        <div class="setting-upload">
                                             <i class="fa fa-user user0m" aria-hidden="true"></i>
-                                            <div class="dasheduser-edit">
-                                                <input type="button" id="loaddingUploaduser">
-                                                <label for="loaddingUploaduser"></label>
-                                            </div>
-                                            <div class="dasheduser-preview">
-                                                <div id="loaddinguserPreview">
-                                                </div>
-                                            </div>
                                         </div>
+                                        <i class="fa fa-plus-circle circle5" data-bs-target="#exampleModalemployeeSearch" data-bs-toggle="modal"></i>
                                     </div>
                                 </div>
                             </td>
@@ -185,17 +178,7 @@ $this->title = 'Setting KFI';
                                         </span>
                                     </div>
                                     <div class="col-3">
-                                        <div class="dasheduser-upload">
-                                            <i class="fa fa-user user0m" aria-hidden="true"></i>
-                                            <div class="dasheduser-edit">
-                                                <input type="file" id="loaddingUploaduser" accept=".png, .jpg, .jpeg">
-                                                <label for="loaddingUploaduser"></label>
-                                            </div>
-                                            <div class="dasheduser-preview">
-                                                <div id="loaddinguserPreview">
-                                                </div>
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </div>
                             </td>
@@ -213,13 +196,25 @@ $this->title = 'Setting KFI';
 <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
     <div class="modal-dialog modal-sm dialog-allshow">
         <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-title fs-5" id="staticBackdropLabel"></div>
-                <div class="setting-upload2">
-                    <i class="fa fa-building building2" aria-hidden="true"></i> Company
-                </div>
-                <div class="dashedshare2 mr-80">
-                    <i class="fa fa-share-alt share-alt-setting2" aria-hidden="true"></i> Branch
+            <div class="mcontainer">
+                <div id="exampleModalToggleLabel">
+                    <div class="row">
+                        <div class="col-lg-1 col-12 pl-50">
+                            <div class="col-12 ">
+                                <div class="Resolve-c"><i class="fa fa-building ml-8 font-size-11" aria-hidden="true"></i></div>
+                                <span class="company-c"> </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-12 mt-20 pl-30">Company</div>
+                        <div class="col-lg-1 col-12">
+                            <div class="col-12">
+                                <div class="Resolve-c"><i class="fa fa-share-alt ml-8 font-size-11" aria-hidden="true"></i></i></div>
+                                <span class="company-c"> </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-12 mt-20 pl-30">Branch</div>
+                    </div>
+                    <hr>
                 </div>
             </div>
             <div class="modal-body">
@@ -231,11 +226,11 @@ $this->title = 'Setting KFI';
                     </div>
                     <div class="col-lg-8">
                         <div class="col-12">
-                            <div class="font-size-18"> TCF</div>
+                            <div class="font-size-16"> TCF</div>
                         </div>
                         <div class="col-12">
                             <img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="image-izmir">
-                            <span>Izmir, Turkey</span>
+                            <span class="font-size-14">Izmir, Turkey</span>
                         </div>
                     </div>
                     <div class="mt-20"></div>
@@ -246,11 +241,11 @@ $this->title = 'Setting KFI';
                     </div>
                     <div class="col-lg-8">
                         <div class="col-12">
-                            <div class="font-size-18"> TCFBD</div>
+                            <div class="font-size-16"> TCFBD</div>
                         </div>
                         <div class="col-12">
                             <img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="image-izmir">
-                            <span>Izmir, Turkey</span>
+                            <span class="font-size-14">Izmir, Turkey</span>
                         </div>
                     </div>
                     <div class="mt-20"></div>
@@ -261,11 +256,11 @@ $this->title = 'Setting KFI';
                     </div>
                     <div class="col-lg-8">
                         <div class="col-12">
-                            <div class="font-size-18"> TCH</div>
+                            <div class="font-size-16"> TCH</div>
                         </div>
                         <div class="col-12">
                             <img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="image-izmir">
-                            <span>Izmir, Turkey</span>
+                            <span class="font-size-14">Izmir, Turkey</span>
                         </div>
                     </div>
                 </div>
@@ -364,3 +359,68 @@ $this->title = 'Setting KFI';
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="exampleModalemployeeSearch" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalemployeeSearch" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered dialog-allshow2">
+        <div class="modal-content">
+            <div class="container">
+                <div id="exampleModalemployeeSearch">
+                    <div class="row">
+                        <div class="col-lg-1 col-12 pl-30">
+                            <div class="col-12 ">
+                                <div class="Resolve-c"><i class="fa fa-user ml-8 font-size-11" aria-hidden="true"></i></div>
+                                <span class="company-c"> </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-12 mt-20 pl-30 Employees-0"> Employees</div>
+                        <div class="col-lg-6 col-12 mt-20">
+                            <div class="col-12">
+                                <form class="d-flex">
+                                    <input class="form-control me-2 shadow bg-body rounded pl-40" type="search" placeholder="Search" aria-label="Search">
+                                    <span type="submit" class="submit-search"> <i class="fa fa-search" aria-hidden="true"></i></i></span>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="card card-company">
+                    <div class="row">
+                        <div class="col-lg-5 col-12">
+                            <div class="col-12">
+                                <div class="form-check mt-10">
+                                    <input class="form-check-input" type="checkbox" value="" id="">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        &nbsp;&nbsp; <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="company-image3">
+                                        <span class="font-size-11">Ehsan </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check mt-15">
+                                    <input class="form-check-input" type="checkbox" value="" id="">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        &nbsp;&nbsp; <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="company-image3">
+                                        <span class="font-size-11">Amir Vai</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check mt-15">
+                                    <input class="form-check-input" type="checkbox" value="" id="">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        &nbsp;&nbsp; <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="company-image3">
+                                        <span class="font-size-11">Ehsan Vai</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="Resolve" data-bs-dismiss="modal">Resolve</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
