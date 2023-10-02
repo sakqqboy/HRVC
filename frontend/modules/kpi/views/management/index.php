@@ -1,0 +1,235 @@
+<?php
+
+use yii\bootstrap5\ActiveForm;
+
+$this->title = 'KPI';
+?>
+
+<div class="col-12 mt-90">
+	<div class="col-12">
+		<i class="fa fa-tachometer font-size-20" aria-hidden="true"></i> <strong class="font-size-20"> Performance Indicator Matrices (PIM)</strong>
+	</div>
+	<div class="col-12 mt-20">
+		<?= $this->render('header_filter') ?>
+
+	</div>
+	<div class="alert alert-white-4">
+		<div class="row">
+			<div class="col-lg-4 col-md-6 col-12 key1">
+				<div class="row">
+					<div class="col-6 key2">
+						Key Performance Indicator
+					</div>
+					<div class="col-6">
+						<button type="button" class="btn btn-primary font-size-14" data-bs-toggle="modal" data-bs-target="#creat-kpi">
+							<i class="fa fa-magic" aria-hidden="true"></i>
+							Create New KPI
+						</button>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-5 col-md-12 col-12 New-KFI">
+				<div class="col-12">
+					<div class="input-group">
+						<span class="input-group-text"><i class="fa fa-filter" aria-hidden="true"></i></span>
+						<select class="form-select font-size-13" aria-label="Example select">
+							<option selected value="">Company</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+						</select>
+						<select class="form-select font-size-13" aria-label="Example select">
+							<option selected value="">Branch</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+						</select>
+						<select class="form-select font-size-13" aria-label="Example select">
+							<option selected value="">Month</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+						</select>
+						<select class="form-select font-size-13" aria-label="Example select">
+							<option selected value="">Type</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+						</select>
+						<select class="form-select font-size-13" aria-label="Example select">
+							<option selected value="">Status</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6 col-12 New-date">
+				<div class="row">
+					<div class="col-8">
+						<div class="input-group">
+							<label class="input-group-text font-size-13" for="">Date</label>
+							<input type="date" class="form-control font-size-13" name="birthday" id="">
+						</div>
+					</div>
+					<div class="col-4 new-light-4">
+						<div class="btn-group" role="group" aria-label="Basic example">
+							<a href="<?= Yii::$app->homeUrl ?>kpi/management/index" class="btn btn-primary font-size-13">
+								<i class="fa fa-list-ul" aria-hidden="true"></i>
+							</a>
+							<a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="btn btn-outline-primary  font-size-13">
+								<i class="fa fa-th-large" aria-hidden="true"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<table class="table table-striped">
+			<thead class="table-secondary">
+				<tr class="transform-none">
+					<th>KPI Contents</th>
+					<th>Company</th>
+					<th>Branch</th>
+					<th>Team KPI Contents</th>
+					<th>Priority</th>
+					<th>Employees</th>
+					<th>Team</th>
+					<th>QR</th>
+					<th>target</th>
+					<th>Code</th>
+					<th>result</th>
+					<th>ratio</th>
+					<th>month</th>
+					<th>Unit</th>
+					<th>Last</th>
+					<th>next</th>
+					<th colspan="row"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+				if (count($kpis) > 0) {
+					foreach ($kpis as $kpiId => $kpi) :
+				?>
+						<tr class="border-bottom-white2" id="kpi-<?= $kpiId ?>">
+							<td class="over-blue"><?= $kpi['kpiName'] ?></td>
+							<td><?= $kpi['companyName'] ?></td>
+							<td><img src="<?= Yii::$app->homeUrl ?><?= $kpi['flag'] ?>" class="Flag-Turkey"> <?= $kpi['branch'] ?>, <?= $kpi['countryName'] ?></td>
+							<td></td>
+							<td class="text-center"><?= $kpi['priority'] ?></td>
+							<td>
+								<span class="badge rounded-pill bg-gray">
+									<ul class="try-cricle">
+										<?php
+										if (isset($kpi["employee"]) && count($kpi["employee"]) > 0) {
+											$e = 1;
+											foreach ($kpi["employee"] as $emp) : ?>
+												<img class="image-grid" src="<?= Yii::$app->homeUrl . $emp ?>">
+										<?php
+												if ($e == 3) {
+													break;
+												}
+												$e++;
+											endforeach;
+										}
+										?>
+										<a class="no-underline-black ml-2 mt-3" href="#"><?= count($kpi["employee"]) ?></a>
+									</ul>
+								</span>
+							</td>
+							<td>
+								<span class="badge rounded-pill bg-secondary-bsc1"><i class="fa fa-users" aria-hidden="true"></i> <?= $kpi['countTeam'] ?></span>
+							</td>
+							<td><?= $kpi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?></td>
+							<td><?= $kpi["targetAmount"] ?></td>
+							<td>
+								<?= $kpi["code"] ?>
+							</td>
+							<td><?= $kpi["result"] ?></td>
+							<td>
+								<div id="progress1">
+									<div data-num="<?= (int)$kpi["ratio"] ?>" class="progress-item1"></div>
+								</div>
+							</td>
+							<td><?= $kpi["month"] ?></td>
+							<td><?= $kpi["unit"] ?></td>
+							<td><?= $kpi["periodCheck"] ?></td>
+							<td><?= $kpi["nextCheck"] ?></td>
+							<td colspan="row">
+								<span data-bs-toggle="modal" data-bs-target="#kpi-issue" onclick="javascript:showKpiComment(<?= $kpiId ?>)">
+									<img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown">
+								</span>
+
+								<span class="dropdown menulink" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
+								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+									<li data-bs-toggle="modal" data-bs-target="#update-kpi-modal" onclick="javascript:updateKpi(<?= $kpiId ?>)">
+										<a class="dropdown-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+									</li>
+									<li data-bs-toggle="modal" data-bs-target="#kpi-view" onclick="javascript:kpiHistory(<?= $kpiId ?>)">
+										<a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
+									</li>
+									<li data-bs-toggle="modal" data-bs-target="#delete-kpi" onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)">
+										<a class="dropdown-item"><i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
+									</li>
+								</ul>
+							</td>
+						</tr>
+				<?php
+					endforeach;
+				}
+				?>
+			</tbody>
+		</table>
+	</div>
+	<div class="col-12 navigation-next">
+		<nav aria-label="Page navigation example">
+			<ul class="pagination">
+				<li class="page-item"><a class="page-link page-navigation" href="#"><i class="fa fa-chevron-left" aria-hidden="true"></i> Previous</a></li>
+				<li class="page-item"><a class="page-link page-navigation" href="#">1</a></li>
+				<li class="page-item"><a class="page-link page-navigation" href="#">2</a></li>
+				<li class="page-item"><a class="page-link page-navigation" href="#">3</a></li>
+				<li class="page-item"><a class="page-link page-navigation" href="#">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
+			</ul>
+		</nav>
+	</div>
+</div>
+<input type="hidden" value="create" id="acType">
+<?php
+$form = ActiveForm::begin([
+	'id' => 'create-kpi',
+	'method' => 'post',
+	'options' => [
+		'enctype' => 'multipart/form-data',
+	],
+	'action' => Yii::$app->homeUrl . 'kpi/management/create-kpi'
+
+]); ?>
+<?= $this->render('modal_create', [
+	"units" => $units,
+	"companies" => $companies,
+	"months" => $months
+]) ?>
+<?php ActiveForm::end(); ?>
+<?php
+$form = ActiveForm::begin([
+	'id' => 'update-kpi',
+	'method' => 'post',
+	'options' => [
+		'enctype' => 'multipart/form-data',
+	],
+	'action' => Yii::$app->homeUrl . 'kpi/management/update-kpi'
+
+]); ?>
+<?= $this->render('modal_update', [
+	"units" => $units,
+	"companies" => $companies,
+	"months" => $months
+]) ?>
+<?php ActiveForm::end(); ?>
+<?= $this->render('modal_delete') ?>
+<?= $this->render('modal_view') ?>
+<?= $this->render('modal_issue') ?>
