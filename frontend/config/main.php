@@ -24,6 +24,9 @@ return [
         'kgi' => [
             'class' => 'frontend\modules\kgi\kgi',
         ],
+        'kpi' => [
+            'class' => 'frontend\modules\kpi\kpi',
+        ],
     ],
     'components' => [
         'request' => [

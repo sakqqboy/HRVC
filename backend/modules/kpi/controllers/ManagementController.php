@@ -1,0 +1,321 @@
+<?php
+
+namespace backend\modules\kpi\controllers;
+
+use backend\models\hrvc\Company;
+use backend\models\hrvc\Country;
+use backend\models\hrvc\KpiBranch;
+use backend\models\hrvc\KpiIssue;
+use backend\models\hrvc\KpiTeam;
+use backend\models\hrvc\Unit;
+use common\models\ModelMaster;
+use Exception;
+use backend\models\hrvc\Kpi;
+use backend\models\hrvc\KpiDepartment;
+use backend\models\hrvc\KpiHistory;
+use backend\models\hrvc\KpiSolution;
+use common\helpers\Path;
+use backend\models\hrvc\Employee;
+use yii\web\Controller;
+
+/**
+ * Default controller for the `masterdata` module
+ */
+header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
+header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+class ManagementController extends Controller
+{
+	public function actionIndex()
+	{
+		$kpis = Kpi::find()->where(["status" => [1, 4]])->asArray()->all();
+		$data = [];
+		if (count($kpis) > 0) {
+			foreach ($kpis as $kpi) :
+				$ratio = 0;
+				if ($kpi["targetAmount"] != '' && $kpi["targetAmount"] != 0 && $kpi["targetAmount"] != null) {
+					$ratio = ($kpi["result"] / $kpi["targetAmount"]) * 100;
+				}
+				$data[$kpi["kpiId"]] = [
+					"kpiName" => $kpi["kpiName"],
+					"companyName" => Company::companyName($kpi["companyId"]),
+					"branch" => KpiBranch::kpiBranch($kpi["kpiId"]),
+					"quantRatio" => $kpi["quantRatio"],
+					"targetAmount" => number_format($kpi["targetAmount"], 2),
+					"code" => $kpi["code"],
+					"result" => number_format($kpi["result"], 2),
+					"unit" => Unit::unitName($kpi["unitId"]),
+					"month" => ModelMaster::monthEng($kpi['month'], 1),
+					"priority" => $kpi["priority"],
+					"ratio" => number_format($ratio, 2),
+					"periodCheck" => ModelMaster::engDate($kpi["periodDate"], 2),
+					"nextCheck" => Kpi::nextCheckDate($kpi['kpiId']),
+					"countTeam" => KpiTeam::kpiTeam($kpi["kpiId"]),
+					"flag" => Country::countryFlagBycompany($kpi["companyId"]),
+					"employee" => "",
+					"status" => $kpi["status"],
+					"countryName" => Country::countryNameBycompany($kpi['companyId']),
+					"issue" => KpiIssue::lastestIssue($kpi["kpiId"])["issue"],
+					"solution" => KpiIssue::lastestIssue($kpi["kpiId"])["solution"],
+					"employee" => KpiTeam::employeeTeam($kpi['kpiId'])
+				];
+			endforeach;
+		}
+		return json_encode($data);
+	}
+	public function actionPrepareUpdate()
+	{
+		$kpiId = $_POST["kpiId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId);
+		$kpi = curl_exec($api);
+		$kpi = json_decode($kpi, true);
+
+		$companyId = $kpi["companyId"];
+		$kpiBranchText = '';
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
+		$kpiBranch = curl_exec($api);
+		$kpiBranch = json_decode($kpiBranch, true);
+		$kpiBranchText = $this->renderAjax('multi_branch_update', [
+			"branches" => $kpiBranch,
+			"kpiId" => $kpiId
+		]);
+		$branch["textBranch"] = $kpiBranchText;
+
+		$kpiDepartmentText = '';
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-department?id=' . $kpiId);
+		$kpiDepartment = curl_exec($api);
+		$kpiDepartment = json_decode($kpiDepartment, true);
+		$kpiDepartmentText = $this->renderAjax('multi_department_update', [
+			"d" => $kpiDepartment,
+			"kpiId" => $kpiId
+		]);
+		$department["textDepartment"] = $kpiDepartmentText;
+
+
+		$kpiTeamText = '';
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-team?id=' . $kpiId);
+		$kpiTeam = curl_exec($api);
+		$kpiTeam = json_decode($kpiTeam, true);
+		$kpiTeamText = $this->renderAjax('multi_team_update', [
+			"t" => $kpiTeam,
+			"kpiId" => $kpiId
+		]);
+		$team["textTeam"] = $kpiTeamText;
+
+
+		$data = array_merge($kpi, $branch, $department, $team);
+		curl_close($api);
+		return json_encode($data);
+	}
+	public function actionKpiDetail($id)
+	{
+		$kpiHistory = KpiHistory::find()->where(["status" => [1, 4], "kpiId" => $id])->orderBy('kpiHistoryId DESC')->asArray()->one();
+		if (isset($kpiHistory) && !empty($kpiHistory)) { //wait edit
+			$kpi = Kpi::find()->where(["kpiId" => $id])->asArray()->one();
+			if ($kpi["targetAmount"] != '' && $kpi["targetAmount"] != 0) {
+				$ratio = ($kpi["result"] / $kpi["targetAmount"]) * 100;
+			} else {
+				$ratio = 0;
+			}
+			$data = [
+				"kpiName" => $kpi["kpiName"],
+				"companyId" => $kpi["companyId"],
+				"detail" => $kpiHistory['description'],
+				"quantRatio" => $kpiHistory["quantRatio"],
+				"targetAmount" => $kpiHistory["targetAmount"],
+				"amountType" => $kpiHistory["amountType"],
+				"code" => $kpiHistory["code"],
+				"result" => $kpiHistory["result"],
+				"unitId" => $kpiHistory["unitId"],
+				"month" => $kpiHistory['month'],
+				"monthName" => strtoupper(ModelMaster::monthEng($kpi['month'], 2)),
+				"priority" => $kpiHistory["priority"],
+				"periodCheck" => $kpiHistory["periodDate"],
+				"status" => $kpiHistory["status"],
+				"nextCheck" => $kpiHistory["nextCheckDate"],
+				"remark" => $kpiHistory["remark"],
+				"statusText" => $kpiHistory["status"] == 1 ? 'On process' : 'Finished',
+				"nextCheckText" => ModelMaster::engDate($kpiHistory["nextCheckDate"], 2),
+				"periodCheckText" => ModelMaster::engDate($kpiHistory["periodDate"], 2),
+				"companyName" => Company::companyName($kpi["companyId"]),
+				"countryName" => Country::countryNameBycompany($kpi["companyId"]),
+				"flag" => Country::countryFlagBycompany($kpi["companyId"]),
+				"quantRatioText" => $kpiHistory["quantRatio"] == 1 ? "Quantity" : "Quality",
+				"targetAmountText" => number_format($kpiHistory["targetAmount"], 2),
+				"resultText" =>  number_format($kpiHistory["result"], 2),
+				"ratio" => number_format($ratio, 2),
+				"unitText" => Unit::unitName($kpiHistory["unitId"]),
+			];
+		} else {
+			$kpi = Kpi::find()->where(["kpiId" => $id])->asArray()->one();
+			if (isset($kpi) && $kpi["targetAmount"] != '' && $kpi["targetAmount"] != 0 && $kpi["targetAmount"] != null) {
+				$ratio = ($kpi["result"] / $kpi["targetAmount"]) * 100;
+			} else {
+				$ratio = 0;
+			}
+			$data = [
+				"kpiName" => $kpi["kpiName"],
+				"companyId" => $kpi["companyId"],
+				"detail" => $kpi['kpiDetail'],
+				"quantRatio" => $kpi["quantRatio"],
+				"targetAmount" => $kpi["targetAmount"],
+				"amountType" => $kpi["amountType"],
+				"code" => $kpi["code"],
+				"result" => $kpi["result"],
+				"unitId" => $kpi["unitId"],
+				"month" => $kpi['month'],
+				"monthName" => strtoupper(ModelMaster::monthEng($kpi['month'], 2)),
+				"priority" => $kpi["priority"],
+				"periodCheck" => $kpi["periodDate"],
+				"status" => $kpi["status"],
+				"nextCheck" => "",
+				"remark" => "",
+				"statusText" => $kpi["status"] == 1 ? 'On process' : 'Finished',
+				"nextCheckText" => "",
+				"periodCheckText" => ModelMaster::engDate($kpi["periodDate"], 2),
+				"companyName" => Company::companyName($kpi["companyId"]),
+				"countryName" => Country::countryNameBycompany($kpi["companyId"]),
+				"flag" => Country::countryFlagBycompany($kpi["companyId"]),
+				"quantRatioText" => $kpi["quantRatio"] == 1 ? "Quantity" : "Quality",
+				"targetAmountText" => number_format($kpi["targetAmount"], 2),
+				"resultText" =>  number_format($kpi["result"], 2),
+				"ratio" => number_format($ratio, 2),
+				"unitText" => Unit::unitName($kpi["unitId"]),
+			];
+		}
+
+		return json_encode($data);
+	}
+	public function actionKpiBranch($id)
+	{
+		$kpiBranches = KpiBranch::find()
+			->select('kpi_branch.branchId,b.branchName')
+			->JOIN("LEFT JOIN", "branch b", "b.branchId=kpi_branch.branchId")
+			->where(["kpi_branch.kpiId" => $id])
+			->asArray()
+			->all();
+		$data = [];
+		if (isset($kpiBranches) && count($kpiBranches)) {
+			foreach ($kpiBranches as $kpiBranch) :
+				$data[$kpiBranch["branchId"]] = [
+					"branchName" => $kpiBranch["branchName"],
+					"branchId" => $kpiBranch["branchId"],
+				];
+			endforeach;
+		}
+		return json_encode($data);
+	}
+	public function actionKpiDepartment($id)
+	{
+		$kpiDepartments = KpiDepartment::find()
+			->select('kpi_department.departmentId,d.departmentName,d.branchId')
+			->JOIN("LEFT JOIN", "department d", "d.departmentId=kpi_department.departmentId")
+			->where(["kpi_department.kpiId" => $id])
+			->asArray()
+			->all();
+		$data = [];
+		if (isset($kpiDepartments) && count($kpiDepartments)) {
+			foreach ($kpiDepartments as $kpiDepartment) :
+				$data[$kpiDepartment["branchId"]][$kpiDepartment["departmentId"]] = $kpiDepartment["departmentName"];
+			endforeach;
+		}
+		return json_encode($data);
+	}
+	public function actionKpiTeam($id)
+	{
+		$kpiTeams = KpiTeam::find()
+			->select('kpi_team.teamId,t.teamName,t.departmentId')
+			->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
+			->where(["kpi_team.kpiId" => $id])
+			->asArray()
+			->all();
+		$data = [];
+		if (isset($kpiTeams) && count($kpiTeams)) {
+			foreach ($kpiTeams as $kpiTeam) :
+				$data[$kpiTeam["departmentId"]][$kpiTeam["teamId"]] = $kpiTeam["teamName"];
+			endforeach;
+		}
+		return json_encode($data);
+	}
+	public function actionKpiEmployee($id)
+	{
+		$kpiTeams = KpiTeam::find()
+			->select('teamId')
+			->where(["kpiId" => $id])
+			->asArray()
+			->all();
+		$data = [];
+		if (isset($kpiTeams) && count($kpiTeams) > 0) {
+			foreach ($kpiTeams as $team) :
+				$employee = Employee::find()->select('employeeFirstname,employeeSurename,employeeNumber,employeeId,picture')
+					->where(["teamId" => $team["teamId"], "status" => 1])
+					->asArray()
+					->orderBy('employeeNumber')
+					->all();
+				if (isset($employee) && count($employee) > 0) {
+					foreach ($employee as $em) :
+						$data[$em["employeeId"]] = [
+							"firstname" => $em["employeeFirstname"],
+							"surename" => $em["employeeSurename"],
+							"image" => $em["picture"],
+						];
+					endforeach;
+				}
+
+			endforeach;
+		}
+
+		return json_encode($data);
+	}
+	public function actionKpiHistory($kpiId)
+	{
+		$kpiHistory = KpiHistory::find()
+			->where(["kpiId" => $kpiId, "status" => [1, 4]])
+			->orderBy('kpiHistoryId DESC')
+			->asArray()
+			->all();
+		$data = [];
+		if (isset($kpiHistory) && count($kpiHistory) > 0) {
+			foreach ($kpiHistory as $history) :
+				$time = explode(' ', $history["createDateTime"]);
+				$data[$history["kpiHistoryId"]] = [
+					"title" => $history["titleProcess"],
+					"remark" => $history["remark"],
+					"result" => $history["result"],
+					"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
+					"time" => ModelMaster::timeText($time[1]),
+					"status" => $history["status"]
+				];
+			endforeach;
+		}
+		return json_encode($data);
+	}
+	public function actionKpiIssue($kpiId)
+	{
+		$kpiIssue = KpiIssue::find()
+			->where(["status" => [1, 4], "kpiId" => $kpiId])
+			->orderBy("kpiIssueId")
+			->asArray()
+			->all();
+
+		$data = [];
+		if (isset($kpiIssue) && count($kpiIssue) > 0) {
+			foreach ($kpiIssue as $issue) :
+				$employee = Employee::EmployeeDetail($issue["employeeId"]);
+				$data[$issue["kpiIssueId"]] = [
+					"issue" => $issue["issue"],
+					"file" => $issue["file"],
+					"employeeName" => $employee["employeeFirstname"] . ' ' . $employee["employeeSurename"],
+					"image" => Employee::EmployeeDetail($issue["employeeId"])["picture"],
+					"createDateTime" => ModelMaster::engDate($issue["createDateTime"], 2),
+					"solutionList" => KpiSolution::solutionList($issue["kpiIssueId"])
+				];
+			endforeach;
+		}
+		return json_encode($data);
+	}
+}

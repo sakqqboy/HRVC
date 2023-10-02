@@ -12,6 +12,7 @@ use Yii;
     * @property string $solution
     * @property integer $parentId
     * @property integer $employeeId
+    * @property string $file
     * @property integer $status
     * @property string $createDateTime
     * @property string $updateDateTime
@@ -36,6 +37,7 @@ return [
             [['kgiIssueId', 'parentId', 'employeeId'], 'integer'],
             [['solution'], 'string'],
             [['createDateTime', 'updateDateTime'], 'safe'],
+            [['file'], 'string', 'max' => 255],
             [['status'], 'string', 'max' => 10],
         ];
 }
@@ -51,6 +53,7 @@ return [
     'solution' => 'Solution',
     'parentId' => 'Parent ID',
     'employeeId' => 'Employee ID',
+    'file' => 'File',
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',
     'updateDateTime' => 'Update Date Time',

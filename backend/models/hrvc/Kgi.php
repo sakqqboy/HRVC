@@ -50,7 +50,7 @@ class Kgi extends \backend\models\hrvc\master\KgiMaster
         $date = '';
         $kgiHistory = KgiHistory::find()
             ->select('nextCheckDate')
-            ->where(["kgiId" => $kgiId, "status" => [1, 4]])->orderBy('kgiHistoryId')->asArray()->one();
+            ->where(["kgiId" => $kgiId, "status" => [1, 4]])->orderBy('kgiHistoryId DESC')->asArray()->one();
         if (isset($kgiHistory) && !empty($kgiHistory) && $kgiHistory["nextCheckDate"] != '') {
             $date = ModelMaster::engDate($kgiHistory["nextCheckDate"], 2);
         }
