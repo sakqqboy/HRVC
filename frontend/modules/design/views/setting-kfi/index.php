@@ -197,6 +197,17 @@ $this->title = 'Setting KFI';
             </div>
         </div>
     </div>
+    <div class="col-12 navigation-next">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link page-navigation" href="#"><i class="fa fa-chevron-left" aria-hidden="true"></i> Previous</a></li>
+                <li class="page-item"><a class="page-link page-navigation" href="#">1</a></li>
+                <li class="page-item"><a class="page-link page-navigation" href="#">2</a></li>
+                <li class="page-item"><a class="page-link page-navigation" href="#">3</a></li>
+                <li class="page-item"><a class="page-link page-navigation" href="#">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
+            </ul>
+        </nav>
+    </div>
 </div>
 
 <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
@@ -332,7 +343,7 @@ $this->title = 'Setting KFI';
                         </div>
                         <div class="col-lg-6 col-12">
                             <div class="col-12 mt-5">
-                                <select class="form-select font-size-13" aria-label="Default select example">
+                                <select class="form-select font-size-13 selectpicker show-tick" aria-label="Default select example">
                                     <option selected value="">Select Branch</option>
                                     <option value="">All</option>
                                     <option value="">Two</option>
@@ -340,7 +351,7 @@ $this->title = 'Setting KFI';
                                 </select>
                             </div>
                             <div class="col-12 mt-15">
-                                <select class="form-select font-size-13" aria-label="Default select example">
+                                <select class="form-select font-size-13 selectpicker show-tick" aria-label="Default select example">
                                     <option selected value="">Select Branch</option>
                                     <option value="">One</option>
                                     <option value="">Two</option>
@@ -348,7 +359,7 @@ $this->title = 'Setting KFI';
                                 </select>
                             </div>
                             <div class="col-12 mt-15">
-                                <select class="form-select font-size-13" aria-label="Default select example">
+                                <select class="form-select font-size-13 selectpicker show-tick" aria-label="Default select example">
                                     <option selected value="">Select Branch</option>
                                     <option value="1">One</option>
                                     <option value="2">Two</option>

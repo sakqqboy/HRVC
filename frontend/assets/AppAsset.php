@@ -65,6 +65,7 @@ class AppAsset extends AssetBundle
         'css/home/kpi.css',
         'css/adminsetting/setting-kfi.css',
         'css/adminsetting/setting-kgi.css',
+        'css/adminsetting/setting-kpi.css',
 
     ];
     public $js = [
