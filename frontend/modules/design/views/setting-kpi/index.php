@@ -1,0 +1,332 @@
+<?php
+$this->title = 'Setting KPI';
+?>
+
+<div class="col-12 mt-90">
+    <div class="col-12">
+        <i class="fa fa-tachometer font-size-20" aria-hidden="true"></i> <strong class="font-size-20"> Assign Management</strong>
+    </div>
+    <div class="col-12 mt-20">
+        <div class="alert alert2-secondary2">
+            <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link text-dark" id="pills-Financial-tab" data-bs-toggle="pill" data-bs-target="#pills-Financial" type="button" role="tab" aria-controls="pills-Financial" aria-selected="true"><i class="fa fa-line-chart" aria-hidden="true"></i> Key Financial Indicator</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link text-dark" id="pills-Group-tab" data-bs-toggle="pill" data-bs-target="#pills-Group" type="button" role="tab" aria-controls="pills-Group" aria-selected="false"><i class="fa fa-flag-o" aria-hidden="true"></i> Key Group Indicator</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link text-dark" id="pills-Performance-tab" data-bs-toggle="pill" data-bs-target="#pills-Performance" type="button" role="tab" aria-controls="pills-Performance" aria-selected="false"><i class="fa fa-clock-o" aria-hidden="true"></i> Key Performance Indicator</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link text-dark" id="pills-Action-tab" data-bs-toggle="pill" data-bs-target="#pills-Action" type="button" role="tab" aria-controls="pills-Action" aria-selected="false"><i class="fa fa-list-ul" aria-hidden="true"></i> Key Action Indicator</a>
+                </li>
+            </ul>
+        </div>
+        <div class="alert alert-white-5">
+            <div class="row">
+                <div class="col-lg-9 col-md-6 col-12">
+                    <div class="col-12">
+                        Key Performance Indicator
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                    <div class="col-12">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-filter" aria-hidden="true"></i></span>
+                            <select class="form-select font-size-13" aria-label="Default select example">
+                                <option selected value="">Month</option>
+                                <option value="1">January</option>
+                                <option value="2">February</option>
+                                <option value="3">March</option>
+                                <option value="4">April</option>
+                                <option value="5">May</option>
+                                <option value="6">June</option>
+                                <option value="7">July </option>
+                                <option value="8">August</option>
+                                <option value="9">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                            <select class="form-select font-size-13" aria-label="Default select example">
+                                <option selected value="">Status</option>
+                                <option value="1">one</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="alert alert-light mt-20" role="alert">
+                <table class="table table-striped">
+                    <thead class="table table-secondary">
+                        <tr class="secondary-setting">
+                            <th>KGI Contents</th>
+                            <th>Company name</th>
+                            <th>Branch</th>
+                            <th>Target</th>
+                            <th>Priority</th>
+                            <th>Assign Team</th>
+                            <th>Assign Employee</th>
+                            <th>Month</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="setting-fontsize">
+                            <td>Increase sales in a way that company gains</td>
+                            <td>Total Sales, sales is important, focus</td>
+                            <td>
+                                <img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="imaFlag0"> Izmir, Turkey
+                            </td>
+                            <td> <?= number_format(1000000) ?></td>
+                            <td> A</td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <span class="badge rounded-pill bg-secondary-bsc1"><i class="fa fa-users" aria-hidden="true"></i> 3</span>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="setting-upload">
+                                            <i class="fa fa-user font-size-10 pl-4" aria-hidden="true"></i>
+                                        </div>
+                                        <i class="fa fa-plus-circle circle5" data-bs-target="#exampleModalTeamSearch" data-bs-toggle="modal"></i>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-7">
+                                        <span class="badge rounded-pill bg-setting">
+                                            <img class="Image-Description" src="<?= Yii::$app->homeUrl ?>image/logo-tcg.png">
+                                            <img class="Image-Description" src="<?= Yii::$app->homeUrl ?>image/1.png">
+                                            <button id="hs-dropdown-avatar-more" class="number-rounded">
+                                                <span class="font-medium leading-none">5</span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="col-5">
+                                        <div class="setting-upload">
+                                            <i class="fa fa-users font-size-10 pl-3" aria-hidden="true"></i>
+                                        </div>
+                                        <i class="fa fa-plus-circle circle5" data-bs-target="#exampleModalEmployeeSearch1" data-bs-toggle="modal"></i>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>January</td>
+                            <td class="text-primary">Active</td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr class="setting-fontsize">
+                            <td>Total Sales, sales is important, focus</td>
+                            <td>Tokyo Consulting Firm Danışmanlık </td>
+                            <td>
+                                <img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="imaFlag0"> Izmir, Turkey
+                            </td>
+                            <td><?= number_format(52) ?></td>
+                            <td> C</td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <span class="badge rounded-pill bg-secondary-bsc1"><i class="fa fa-users" aria-hidden="true"></i> 0</span>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="setting-upload">
+                                            <i class="fa fa-user font-size-10 pl-4" aria-hidden="true"></i>
+                                        </div>
+                                        <i class="fa fa-plus-circle circle5" data-bs-target="#exampleModalTeamSearch" data-bs-toggle="modal"></i>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-7">
+                                        <span class="badge rounded-pill bg-setting">
+                                            <button id="hs-dropdown-avatar-more" class="number-rounded">
+                                                <span class="font-medium leading-none">0</span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="col-5">
+                                        <div class="setting-upload">
+                                            <i class="fa fa-users font-size-10 pl-3" aria-hidden="true"></i>
+                                        </div>
+                                        <i class="fa fa-plus-circle circle5" data-bs-target="#exampleModalEmployeeSearch1" data-bs-toggle="modal"></i>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>January</td>
+                            <td class="text-danger">In Active</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 navigation-next">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link page-navigation" href="#"><i class="fa fa-chevron-left" aria-hidden="true"></i> Previous</a></li>
+                <li class="page-item"><a class="page-link page-navigation" href="#">1</a></li>
+                <li class="page-item"><a class="page-link page-navigation" href="#">2</a></li>
+                <li class="page-item"><a class="page-link page-navigation" href="#">3</a></li>
+                <li class="page-item"><a class="page-link page-navigation" href="#">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<div class="modal fade" id="exampleModalTeamSearch" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalemployeeSearch" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered dialog-allshow2">
+        <div class="modal-content">
+            <div class="container">
+                <div id="exampleModaleTeamSearch">
+                    <div class="row">
+                        <div class="col-lg-1 col-12 pl-30">
+                            <div class="col-12 ">
+                                <div class="Resolve-c"><i class="fa fa-users ml-8 font-size-11" aria-hidden="true"></i></div>
+                                <span class="company-c"> </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-12 mt-20 pl-30 Employees-0"> Team</div>
+                        <div class="col-lg-6 col-12 mt-20">
+                            <div class="col-12">
+                                <form class="d-flex">
+                                    <input class="form-control me-2 shadow bg-body rounded pl-40" type="search" placeholder="Search" aria-label="Search">
+                                    <span type="submit" class="submit-search"> <i class="fa fa-search" aria-hidden="true"></i></i></span>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="card card-company">
+                    <div class="row">
+                        <div class="col-lg-5 col-12">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-check mt-10 ml-10">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            <div class="Resolve-kgi"><i class="fa fa-users font-size-12" aria-hidden="true"></i></div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-8 mt-10">
+                                    &nbsp;&nbsp; <span class="font-size-11">Team A</span>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-check mt-15 ml-10">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            <div class="Resolve-kgi"><i class="fa fa-users font-size-12" aria-hidden="true"></i></div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-8 mt-15">
+                                    &nbsp;&nbsp; <span class="font-size-11">Team B
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-check mt-15 ml-10">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            <div class="Resolve-kgi"><i class="fa fa-users font-size-12" aria-hidden="true"></i></div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-8 mt-15">
+                                    &nbsp;&nbsp; <span class="font-size-11">Team C</span>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-check mt-15 ml-10">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            <div class="Resolve-kgi"><i class="fa fa-users font-size-12" aria-hidden="true"></i></div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-8 mt-15">
+                                    &nbsp;&nbsp; <span class="font-size-11">Team D</span>
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div class="Resolve" data-bs-dismiss="modal">Resolve</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalEmployeeSearch1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalEmployeeSearch1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered dialog-allshow2">
+        <div class="modal-content">
+            <div class="container">
+                <div id="exampleModalEmployeeSearch1">
+                    <div class="row">
+                        <div class="col-lg-1 col-12 pl-30">
+                            <div class="col-12 ">
+                                <div class="Resolve-c"><i class="fa fa-user ml-8 font-size-11" aria-hidden="true"></i></div>
+                                <span class="company-c"> </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-12 mt-20 pl-30 Employees-0"> Employees</div>
+                        <div class="col-lg-6 col-12 mt-20">
+                            <div class="col-12">
+                                <form class="d-flex">
+                                    <input class="form-control me-2 shadow bg-body rounded pl-40" type="search" placeholder="Search" aria-label="Search">
+                                    <span type="submit" class="submit-search"> <i class="fa fa-search" aria-hidden="true"></i></i></span>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="card card-company">
+                    <div class="row">
+                        <div class="col-lg-5 col-12">
+                            <div class="col-12">
+                                <div class="form-check mt-10">
+                                    <input class="form-check-input" type="checkbox" value="" id="">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        &nbsp;&nbsp; <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="company-image3">
+                                        <span class="font-size-11">Ehsan </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check mt-15">
+                                    <input class="form-check-input" type="checkbox" value="" id="">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        &nbsp;&nbsp; <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="company-image3">
+                                        <span class="font-size-11">Amir Vai</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check mt-15">
+                                    <input class="form-check-input" type="checkbox" value="" id="">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        &nbsp;&nbsp; <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="company-image3">
+                                        <span class="font-size-11">Ehsan Vai</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="Resolve" data-bs-dismiss="modal">Resolve</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
