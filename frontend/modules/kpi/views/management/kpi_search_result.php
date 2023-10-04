@@ -30,9 +30,17 @@ $this->title = 'KPI';
 				</div>
 			</div>
 			<div class="col-lg-5 col-md-12 col-12 New-KFI">
-				<?= $this->render('filter_list', [
+				<?= $this->render('filter_list_search', [
 					"companies" => $companies,
-					"months" => $months
+					"months" => $months,
+					"companyId" => $companyId,
+					"branchId" => $branchId,
+					"teamId" => $teamId,
+					"month" => $month,
+					"status" => $status,
+					"date" => $date,
+					"branches" => $branches,
+					"teams" => $teams
 				]) ?>
 				<input type="hidden" id="type" value="list">
 			</div>

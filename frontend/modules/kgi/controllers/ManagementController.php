@@ -214,10 +214,8 @@ class ManagementController extends Controller
 						}
 					endforeach;
 				}
-
 			endforeach;
 		}
-
 		if (count($branchDepartment) > 0) {
 
 			foreach ($branchDepartment as $branchId => $departments) :
@@ -620,5 +618,98 @@ class ManagementController extends Controller
 			$res["status"] = true;
 		}
 		return json_encode($res);
+	}
+	public function actionSearchKgi()
+	{
+		$companyId = isset($_POST["companyId"]) && $_POST["companyId"] != null ? $_POST["companyId"] : null;
+		$branchId = isset($_POST["branchId"]) && $_POST["branchId"] != null ? $_POST["branchId"] : null;
+		$teamId = isset($_POST["teamId"]) && $_POST["teamId"] != null ? $_POST["teamId"] : null;
+		$month = isset($_POST["month"]) && $_POST["month"] != null ? $_POST["month"] : null;
+		$status = isset($_POST["status"]) && $_POST["status"] != null ? $_POST["status"] : null;
+		$date = isset($_POST["date"]) && $_POST["date"] != null ? $_POST["date"] : null;
+		$type = $_POST["type"];
+		return $this->redirect(Yii::$app->homeUrl . 'kgi/management/kgi-search-result/' . ModelMaster::encodeParams([
+			"companyId" => $companyId,
+			"branchId" => $branchId,
+			"teamId" => $teamId,
+			"month" => $month,
+			"status" => $status,
+			"date" => $date,
+			"type" => $type
+		]));
+	}
+	public function actionKgiSearchResult($hash)
+	{
+		$param = ModelMaster::decodeParams($hash);
+		$companyId = $param["companyId"];
+		$branchId = $param["branchId"];
+		$teamId = $param["teamId"];
+		$month = $param["month"];
+		$status = $param["status"];
+		$date = $param["date"];
+		$type = $param["type"];
+		$branches = [];
+		$teams = [];
+		if ($companyId == "" && $branchId == "" && $teamId == "" && $month == "" && $status == "" && $status == "") {
+			if ($type == "list") {
+				return $this->redirect(Yii::$app->homeUrl . 'kgi/management/index');
+			} else {
+				return $this->redirect(Yii::$app->homeUrl . 'kgi/management/grid');
+			}
+		}
+		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&teamId=' . $teamId . '&&month=' . $month . '&&status=' . $status . '&&date=' . $date;
+		$groupId = Group::currentGroupId();
+		if ($groupId == null) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+		}
+
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-filter?' . $paramText);
+		$kgis = curl_exec($api);
+		$kgis = json_decode($kgis, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$companies = curl_exec($api);
+		$companies = json_decode($companies, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
+		$units = curl_exec($api);
+		$units = json_decode($units, true);
+
+		if ($companyId != "") {
+			curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
+			$branches = curl_exec($api);
+			$branches = json_decode($branches, true);
+		}
+		if ($branchId != "") {
+			curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-team?id=' . $branchId);
+			$teams = curl_exec($api);
+			$teams = json_decode($teams, true);
+		}
+
+		curl_close($api);
+		$months = ModelMaster::monthFull(1);
+		if ($type == "list") {
+			$file = "kgi_search_result";
+		} else {
+			$file = "kgi_search_result_grid";
+		}
+
+		return $this->render($file, [
+			"units" => $units,
+			"companies" => $companies,
+			"months" => $months,
+			"kgis" => $kgis,
+			"companyId" => $companyId,
+			"branchId" => $branchId,
+			"teamId" => $teamId,
+			"month" => $month,
+			"status" => $status,
+			"date" => $date,
+			"branches" => $branches,
+			"teams" => $teams
+		]);
 	}
 }

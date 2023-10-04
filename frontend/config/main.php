@@ -71,6 +71,9 @@ return [
                 'setting/employee/update/<hash>' => 'setting/employee/update',
                 'setting/employee/index/<hash>' => 'setting/employee/index',
                 'setting/team/create/<hash>' => 'setting/team/create',
+                'kpi/management/kpi-search-result/<hash>' => 'kpi/management/kpi-search-result',
+                'kgi/management/kgi-search-result/<hash>' => 'kgi/management/kgi-search-result',
+                'kfi/management/kfi-search-result/<hash>' => 'kfi/management/kfi-search-result',
             ],
         ],
         'assetManager' => [

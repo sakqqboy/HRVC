@@ -2,7 +2,7 @@
 
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'KPI Grid View';
+$this->title = 'KGI Grid View';
 ?>
 
 <div class="col-12 mt-90">
@@ -16,18 +16,26 @@ $this->title = 'KPI Grid View';
 			<div class="row">
 				<div class="col-lg-4 col-md-6 col-12 key1">
 					<div class="row">
-						<div class="col-6 key2">
-							Key Performance Indicators
+						<div class="col-6 key1">
+							Key Goal Indicators
 						</div>
 						<div class="col-6">
-							<button type="button" class="btn btn-primary font-size-14" data-bs-toggle="modal" data-bs-target="#creat-kpi"><i class="fa fa-magic" aria-hidden="true"></i> Create New kpi</button>
+							<button type="button" class="btn btn-primary font-size-14" data-bs-toggle="modal" data-bs-target="#staticBackdrop5"><i class="fa fa-magic" aria-hidden="true"></i> Create New KGI</button>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-5 col-md-12 col-12 New-KFI">
-					<?= $this->render('filter_list', [
+					<?= $this->render('filter_list_search', [
 						"companies" => $companies,
-						"months" => $months
+						"months" => $months,
+						"companyId" => $companyId,
+						"branchId" => $branchId,
+						"teamId" => $teamId,
+						"month" => $month,
+						"status" => $status,
+						"date" => $date,
+						"branches" => $branches,
+						"teams" => $teams
 					]) ?>
 					<input type="hidden" id="type" value="grid">
 				</div>
@@ -41,10 +49,10 @@ $this->title = 'KPI Grid View';
 						</div>
 						<div class="col-4 new-light-4">
 							<div class="btn-group" role="group" aria-label="Basic example">
-								<a href="<?= Yii::$app->homeUrl ?>kpi/management/index" class="btn btn-outline-primary font-size-13">
+								<a href="<?= Yii::$app->homeUrl ?>kgi/management/index" class="btn btn-outline-primary font-size-13">
 									<i class="fa fa-list-ul" aria-hidden="true"></i>
 								</a>
-								<a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="btn btn-primary  font-size-13">
+								<a class="btn btn-primary  font-size-13">
 									<i class="fa fa-th-large" aria-hidden="true"></i>
 								</a>
 							</div>
@@ -57,27 +65,27 @@ $this->title = 'KPI Grid View';
 					<div class="tab-pane fade show active" id="pills-Group" role="tabpanel" aria-labelledby="pills-Group-tab">
 						<div class="card example-5 scrollbar-ripe-malinka">
 							<?php
-							if (count($kpis) > 0) {
-								foreach ($kpis as $kpiId => $kpi) :
+							if (count($kgis) > 0) {
+								foreach ($kgis as $kgiId => $kgi) :
 							?>
-									<div class="col-12 card card-radius" id="kpi-<?= $kpiId ?>">
+									<div class="col-12 card card-radius" id="kgi-<?= $kgiId ?>">
 										<div class="row">
 											<div class="col-lg-4 col-md-6 col-12 clients-employee">
-												<i class="fa fa-flag" aria-hidden="true"></i> <?= $kpi["kpiName"] ?>
+												<i class="fa fa-flag" aria-hidden="true"></i> <?= $kgi["kgiName"] ?>
 											</div>
 											<div class="col-lg-1 col-md-6 col-12">
-												<span class="badge rounded-pill <?= $kpi['status'] == 4 ? 'bg-success' : 'bg-warning text-dark' ?> "> <?= $kpi['status'] == 4 ? 'Completed' : 'On process' ?></span>
+												<span class="badge rounded-pill <?= $kgi['status'] == 4 ? 'bg-success' : 'bg-warning text-dark' ?> "> <?= $kgi['status'] == 4 ? 'Completed' : 'On process' ?></span>
 											</div>
 											<div class="col-lg-1 col-md-6 col-12 month-feb">
-												<?= $kpi["month"] ?>
+												<?= $kgi["month"] ?>
 											</div>
 											<div class="col-lg-1 col-md-6 col-12">
 												<span class="badge rounded-pill bg-white">
 													<div class="flex mb-5 -space-x-4">
 														<?php
-														if (isset($kpi["employee"]) && count($kpi["employee"]) > 0) {
+														if (isset($kgi["employee"]) && count($kgi["employee"]) > 0) {
 															$e = 1;
-															foreach ($kpi["employee"] as $emp) : ?>
+															foreach ($kgi["employee"] as $emp) : ?>
 																<img class="image-grid" src="<?= Yii::$app->homeUrl . $emp ?>">
 														<?php
 																if ($e == 3) {
@@ -87,38 +95,38 @@ $this->title = 'KPI Grid View';
 															endforeach;
 														}
 														?>
-														<a class="no-underline-black ml-2 mt-3" href="#"><?= count($kpi["employee"]) ?></a>
+														<a class="no-underline-black ml-2 mt-3" href="#"><?= count($kgi["employee"]) ?></a>
 													</div>
 												</span>
 											</div>
 											<div class="col-lg-1 col-md-6 col-12 text-end">
-												<span class="badge rounded-pill bg-bsc"><i class="fa fa-users" aria-hidden="true"></i> <?= $kpi["countTeam"] ?></span>
+												<span class="badge rounded-pill bg-bsc"><i class="fa fa-users" aria-hidden="true"></i> <?= $kgi["countTeam"] ?></span>
 											</div>
 											<div class="col-lg-2 col-md-6 col-12">
 												<div class="flex-tokyo">
-													<?= $kpi["companyName"] ?>
+													<?= $kgi["companyName"] ?>
 												</div>
-												<p class="tokyo-ima"> <img src="<?= Yii::$app->homeUrl ?><?= $kpi["flag"] ?>" class="image-flex"> <?= $kpi["branch"] ?>, <?= $kpi["countryName"] ?></p>
+												<p class="tokyo-ima"> <img src="<?= Yii::$app->homeUrl ?><?= $kgi["flag"] ?>" class="image-flex"> <?= $kgi["branch"] ?>, <?= $kgi["countryName"] ?></p>
 											</div>
 											<div class="col-lg-2 col-md-6 col-12 text-end">
-												<button class="btn btn-outline-secondary font-size-10" data-bs-toggle="modal" data-bs-target="#kpi-view" onclick="javascript:kpiHistory(<?= $kpiId ?>)">
+												<button class="btn btn-outline-secondary font-size-10" data-bs-toggle="modal" data-bs-target="#kgi-view" onclick="javascript:kgiHistory(<?= $kgiId ?>)">
 													<i class="fa fa-eye" aria-hidden="true"></i>
 												</button>
-												<button class="btn btn-outline-danger font-size-10" data-bs-toggle="modal" data-bs-target="#delete-kpi" onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)">
+												<button class="btn btn-outline-danger font-size-10" data-bs-toggle="modal" data-bs-target="#delete-kgi" onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)">
 													<i class="fa fa-trash-o" aria-hidden="true"></i>
 												</button>
 											</div>
 											<div class="col-lg-2 col-md-6 col-12">
 												<div class="col-12">
 													<span class="badge rounded-pill slds-badge">
-														Deadline <span class="text-dark font-size-10">: <?= $kpi["periodCheck"] ?></span>
+														Deadline <span class="text-dark font-size-10">: <?= $kgi["periodCheck"] ?></span>
 													</span>
 												</div>
 												<div class="col-12 top-teamcontent">
 													Team Content
 												</div>
 												<div class="col-12 font-size-12 pt-10">
-													This is a sample kpi content
+													This is a sample KGI content
 												</div>
 											</div>
 											<div class="col-lg-2 col-md-6 col-12 sample-bordersolid">
@@ -128,13 +136,13 @@ $this->title = 'KPI Grid View';
 															Quant Ratio
 														</div>
 														<div class="col-12 Quality-diamond">
-															<i class="fa fa-diamond" aria-hidden="true"></i> <?= $kpi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?>
+															<i class="fa fa-diamond" aria-hidden="true"></i> <?= $kgi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?>
 														</div>
 														<div class="col-12 font-size-10 pt-40" style="width: 10rem;">
 															Update Interval
 														</div>
 														<div class="col-12 Quality-monthly0">
-															<?= $kpi["unit"] ?>
+															<?= $kgi["unit"] ?>
 														</div>
 													</div>
 													<div class="col-md-6 mt-25 text-center">
@@ -142,7 +150,7 @@ $this->title = 'KPI Grid View';
 															Priority
 														</div>
 														<div class="col-12 mt-5 pl-13">
-															<div class="circle-update text-center"><?= $kpi["priority"] ?></div>
+															<div class="circle-update text-center"><?= $kgi["priority"] ?></div>
 														</div>
 													</div>
 												</div>
@@ -154,12 +162,12 @@ $this->title = 'KPI Grid View';
 															<i class="fa fa-bullseye" aria-hidden="true"></i> Target
 														</div>
 														<div class="col-12 target-million">
-															<?= $kpi["targetAmount"] ?>
+															<?= $kgi["targetAmount"] ?>
 														</div>
 													</div>
 													<div class="col-md-4">
 														<div class="col-12 target-plush">
-															<?= $kpi["code"] ?>
+															<?= $kgi["code"] ?>
 														</div>
 													</div>
 													<div class="col-md-4">
@@ -167,14 +175,14 @@ $this->title = 'KPI Grid View';
 															Result <i class="fa fa-trophy" aria-hidden="true"></i>
 														</div>
 														<div class="col-12 target-million">
-															<?= $kpi["result"] ?>
+															<?= $kgi["result"] ?>
 														</div>
 													</div>
 												</div>
 												<div class="col-12 mt-20">
 													<div class="progress">
-														<div class="progress-bar" style="width:<?= $kpi['ratio'] ?>%;"></div>
-														<span class="badge rounded-pill  pro-load2"><?= $kpi['ratio'] ?>%</span>
+														<div class="progress-bar" style="width:<?= $kgi['ratio'] ?>%;"></div>
+														<span class="badge rounded-pill  pro-load2"><?= $kgi['ratio'] ?>%</span>
 													</div>
 												</div>
 												<div class="row">
@@ -183,15 +191,15 @@ $this->title = 'KPI Grid View';
 															<i class="fa fa-refresh mr-5" aria-hidden="true"></i> Latest Update
 														</div>
 														<div class="col-12 font-size-12 pt-5" style="font-weight: 700;">
-															<?= $kpi['periodCheck'] ?>
+															<?= $kgi['periodCheck'] ?>
 														</div>
 													</div>
 													<div class="col-md-6">
-														<div class="col-12 pencil-nextupdate" data-bs-toggle="modal" data-bs-target="#update-kpi-modal" onclick="javascript:updateKpi(<?= $kpiId ?>)">
+														<div class="col-12 pencil-nextupdate" data-bs-toggle="modal" data-bs-target="#update-kgi-modal" onclick="javascript:updateKgi(<?= $kgiId ?>)">
 															Next Update <i class="fa fa-pencil-square-o ml-5" aria-hidden="true"></i>
 														</div>
 														<div class="col-12 font-size-12 pt-5 text-end" style="font-weight: 700;">
-															<?= $kpi['nextCheck'] ?>
+															<?= $kgi['nextCheck'] ?>
 														</div>
 													</div>
 												</div>
@@ -201,17 +209,17 @@ $this->title = 'KPI Grid View';
 													<div class="col-md-6">
 														<div class="col-12 dashed1" style="word-wrap: break-word;">
 															<strong class="text-dark font-size-13"> Issue</strong>
-															<p class="font-size-11 text-dark"><?= $kpi["issue"] ?></p>
+															<p class="font-size-11 text-dark"><?= $kgi["issue"] ?></p>
 														</div>
 													</div>
 													<div class="col-md-6">
 														<div class="col-12 dashed1" style="word-wrap: break-word;">
 															<strong class="text-dark font-size-13"> Solution</strong>
-															<p class="font-size-11 text-dark"><?= $kpi["solution"] ?></p>
+															<p class="font-size-11 text-dark"><?= $kgi["solution"] ?></p>
 														</div>
 													</div>
 													<div class="col-12 text-end font-size-12 mt-5">
-														<span data-bs-toggle="modal" data-bs-target="#kpi-issue" onclick="javascript:showKpiComment(<?= $kpiId ?>)" style="cursor: pointer;" class="text-primary">
+														<span data-bs-toggle="modal" data-bs-target="#kgi-issue" onclick="javascript:showKgiComment(<?= $kgiId ?>)" style="cursor: pointer;" class="text-primary">
 															<i class="fa fa-eye mr-5" aria-hidden="true"></i>
 															See more Issue & solution
 														</span>
@@ -237,12 +245,12 @@ $this->title = 'KPI Grid View';
 <input type="hidden" value="create" id="acType">
 <?php
 $form = ActiveForm::begin([
-	'id' => 'create-kpi',
+	'id' => 'create-kgi',
 	'method' => 'post',
 	'options' => [
 		'enctype' => 'multipart/form-data',
 	],
-	'action' => Yii::$app->homeUrl . 'kpi/management/create-kpi'
+	'action' => Yii::$app->homeUrl . 'kgi/management/create-kgi'
 
 ]); ?>
 <?= $this->render('modal_create', [
@@ -254,12 +262,12 @@ $form = ActiveForm::begin([
 
 <?php
 $form = ActiveForm::begin([
-	'id' => 'update-kpi',
+	'id' => 'update-kgi',
 	'method' => 'post',
 	'options' => [
 		'enctype' => 'multipart/form-data',
 	],
-	'action' => Yii::$app->homeUrl . 'kpi/management/update-kpi'
+	'action' => Yii::$app->homeUrl . 'kgi/management/update-kgi'
 
 ]); ?>
 <?= $this->render('modal_update', [

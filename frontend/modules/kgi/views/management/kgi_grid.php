@@ -25,41 +25,11 @@ $this->title = 'KGI Grid View';
 					</div>
 				</div>
 				<div class="col-lg-5 col-md-12 col-12 New-KFI">
-					<div class="col-12">
-						<div class="input-group">
-							<span class="input-group-text"><i class="fa fa-filter" aria-hidden="true"></i></span>
-							<select class="form-select font-size-13" aria-label="Example select">
-								<option selected value="">Company</option>
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-							</select>
-							<select class="form-select font-size-13" aria-label="Example select">
-								<option selected value="">Branch</option>
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-							</select>
-							<select class="form-select font-size-13" aria-label="Example select">
-								<option selected value="">Month</option>
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-							</select>
-							<select class="form-select font-size-13" aria-label="Example select">
-								<option selected value="">Type</option>
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-							</select>
-							<select class="form-select font-size-13" aria-label="Example select">
-								<option selected value="">Status</option>
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-							</select>
-						</div>
-					</div>
+					<?= $this->render('filter_list', [
+						"companies" => $companies,
+						"months" => $months
+					]) ?>
+					<input type="hidden" id="type" value="grid">
 				</div>
 				<div class="col-lg-3 col-md-6 col-12 New-date">
 					<div class="row">

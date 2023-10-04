@@ -60,10 +60,14 @@ class ManagementController extends Controller
 		$kfis = curl_exec($api);
 		$kfis = json_decode($kfis, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
+		$units = curl_exec($api);
+		$units = json_decode($units, true);
+
 		curl_close($api);
 		//throw new Exception(print_r($kfis, true));
 
-		$units = ["1" => "Monthly", "2" => "Weekly", "3" => "QuaterLy", "4" => "Daily"];
+		// $units = ["1" => "Monthly", "2" => "Weekly", "3" => "QuaterLy", "4" => "Daily"];
 		$months = ModelMaster::monthFull(1);
 		return $this->render('index', [
 			"companies" => $companies,
@@ -89,8 +93,13 @@ class ManagementController extends Controller
 		$kfis = curl_exec($api);
 		$kfis = json_decode($kfis, true);
 		//throw new Exception(print_r($kfis, true));
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
+		$units = curl_exec($api);
+		$units = json_decode($units, true);
+
 		curl_close($api);
-		$units = ["1" => "Monthly", "2" => "Weekly", "3" => "QuaterLy", "4" => "Daily"];
+		// $units = ["1" => "Monthly", "2" => "Weekly", "3" => "QuaterLy", "4" => "Daily"];
 		$months = ModelMaster::monthFull(1);
 		//throw new Exception(print_r($kfis, true));
 		return $this->render('index_grid', [
@@ -118,52 +127,11 @@ class ManagementController extends Controller
 			$kfi->updateDateTime = new Expression('NOW()');
 			if ($kfi->save(false)) {
 				$kfiId = Yii::$app->db->lastInsertID;
-				if ($_POST["branch"] != "all") {
-					$branch = new KfiBranch();
-					$branch->branchId = $_POST["branch"];
-					$branch->kfiId = $kfiId;
-					$branch->status = 1;
-					$branch->createDateTime = new Expression('NOW()');
-					$branch->updateDateTime = new Expression('NOW()');
-					$branch->save(false);
-					$department = new KfiDepartment();
-					$department->departmentId = $_POST["department"];
-					$department->kfiId = $kfiId;
-					$department->status = 1;
-					$department->createDateTime = new Expression('NOW()');
-					$department->updateDateTime = new Expression('NOW()');
-					$department->save(false);
-				} else {
-					$branches = Branch::find()
-						->where(["companyId" => $_POST["company"], "status" => 1])
-						->asArray()
-						->all();
-					if (isset($branches) && count($branches) > 0) {
-						foreach ($branches as $branch) :
-							$kfiBranch = new KfiBranch();
-							$kfiBranch->branchId = $branch["branchId"];
-							$kfiBranch->kfiId = $kfiId;
-							$kfiBranch->status = 1;
-							$kfiBranch->createDateTime = new Expression('NOW()');
-							$kfiBranch->updateDateTime = new Expression('NOW()');
-							$kfiBranch->save(false);
-							$departments = Department::find()
-								->where(["branchId" => $branch["branchId"], "status" => 1])
-								->asArray()
-								->all();
-							if (isset($departments) && count($departments) > 0) {
-								foreach ($departments as $d) :
-									$kfiDepartment = new KfiDepartment();
-									$kfiDepartment->departmentId = $d["departmentId"];
-									$kfiDepartment->kfiId = $kfiId;
-									$kfiDepartment->status = 1;
-									$kfiDepartment->createDateTime = new Expression('NOW()');
-									$kfiDepartment->updateDateTime = new Expression('NOW()');
-									$kfiDepartment->save(false);
-								endforeach;
-							}
-						endforeach;
-					}
+				if (isset($_POST["branch"]) && count($_POST["branch"]) > 0) {
+					$this->saveKfiBranch($_POST["branch"], $kfiId);
+				}
+				if (isset($_POST["department"]) && count($_POST["department"]) > 0) {
+					$this->saveKfiDepartment($_POST["department"], $kfiId);
 				}
 				return $this->redirect('index');
 			}
@@ -196,44 +164,150 @@ class ManagementController extends Controller
 			$kfiHistory->createDateTime = new Expression('NOW()');
 			$kfiHistory->updateDateTime = new Expression('NOW()');
 			$kfiHistory->save(false);
+			if (isset($_POST["branch"]) && count($_POST["branch"]) > 0) {
+				$this->saveKfiBranch($_POST["branch"], $_POST["kfiId"]);
+			}
+			if (isset($_POST["department"]) && count($_POST["department"]) > 0) {
+				$this->saveKfiDepartment($_POST["department"], $_POST["kfiId"]);
+			}
 			return $this->redirect('index');
 		}
 	}
 	public function actionUpdateKfi()
 	{
 		$kfiId = $_POST["kfiId"];
-		$kfi = Kfi::find()->where(["kfiId" => $kfiId])->asArray()->one();
-		$res["kfiName"] = $kfi["kfiName"];
-		$res["companyName"] = Company::companyName($kfi['companyId']);
-		$res["branchName"] = Branch::kfiBranchName($kfiId); //Branch::branchName($kfi['branchId']);//if count==1 show branch name else show all
-		$res["unitId"] = $kfi["unitId"];
-		$res["detail"] = $kfi["kfiDetail"];
-		$res["targetAmount"] = $kfi["targetAmount"];
-		$res["status"] = true;
-		$res["monthName"] = ModelMaster::monthEng($kfi['month'], 1);
-		$res["departmentName"] = KfiDepartment::kfiDepartmentName($kfiId);
-		$kfiHistory = KfiHistory::find()
-			->where(["kfiId" => $kfi["kfiId"], "status" => [1, 4]])
-			->orderBy('kfiHistoryId DESC')
-			->one();
-		if (isset($kfiHistory) && !empty($kfiHistory)) {
-			$res["quantRatio"] = $kfiHistory["quantRatio"];
-			$res["code"] =  $kfiHistory["code"];
-			$res["result"] = $kfiHistory["result"];
-			$res["amountType"] = $kfiHistory["amountType"];
-			$res["kfiStatus"] = $kfiHistory["historyStatus"];
-			$res["code"] = $kfiHistory["code"];
-			$res["result"] = $kfiHistory["result"];
-		} else {
-			$res["quantRatio"] = "";
-			$res["code"] = "";
-			$res["result"] = "";
-			$res["amountType"] = "";
-			$res["kfistatus"] = "";
-			$res["code"] = "";
-			$res["result"] = "";
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId);
+		$kfi = curl_exec($api);
+		$kfi = json_decode($kfi, true);
+
+		$companyId = $kfi["companyId"];
+		$kfiBranchText = '';
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
+		$kfiBranch = curl_exec($api);
+		$kfiBranch = json_decode($kfiBranch, true);
+		$kfiBranchText = $this->renderAjax('multi_branch_update', [
+			"branches" => $kfiBranch,
+			"kfiId" => $kfiId
+		]);
+		$branch["textBranch"] = $kfiBranchText;
+
+		$kfiDepartmentText = '';
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-department?id=' . $kfiId);
+		$kfiDepartment = curl_exec($api);
+		$kfiDepartment = json_decode($kfiDepartment, true);
+		$kfiDepartmentText = $this->renderAjax('multi_department_update', [
+			"d" => $kfiDepartment,
+			"kfiId" => $kfiId
+		]);
+		$department["textDepartment"] = $kfiDepartmentText;
+		curl_close($api);
+
+		$data = array_merge($kfi, $branch, $department);
+		return json_encode($data);
+	}
+	public function actionBranchMultiDepartment()
+	{
+		$res["status"] = false;
+		$acType = $_POST["acType"];
+		if (isset($_POST["multiBranch"]) && count($_POST["multiBranch"]) > 0) {
+			$branchIdArr = $_POST["multiBranch"];
+			$d = [];
+			if (count($branchIdArr) > 0) {
+				$i = 0;
+				foreach ($branchIdArr as $branchId) :
+					$department = Department::find()->where(["branchId" => $branchId, "status" => 1])->asArray()->all();
+					if (isset($department) && count($department) > 0) {
+						foreach ($department as $dep) :
+							$d[$dep["branchId"]][$dep["departmentId"]] = $dep["departmentName"];
+						endforeach;
+					}
+				endforeach;
+			}
+			if ($acType == "create") {
+				$textDepartment = $this->renderAjax('multi_department', [
+					"d" => $d,
+				]);
+			} else {
+				$kfiId = $_POST["kfiId"];
+				$textDepartment = $this->renderAjax('multi_department_update', [
+					"d" => $d,
+					"kfiId" => $kfiId
+				]);
+			}
+			$res["status"] = true;
+			$res["textDepartment"] = $textDepartment;
 		}
 		return json_encode($res);
+	}
+	public function saveKfiBranch($branch, $kfiId)
+	{
+		$kfiBranch = KfiBranch::find()->where(["kfiId" => $kfiId, "status" => 1])->all();
+		if (isset($kfiBranch) && count($kfiBranch) > 0) {
+			foreach ($kfiBranch as $kb) :
+				foreach ($branch as $bb) :
+					if ($kb->branchId == $bb) {
+						$saveBranch[$kb->branchId] = 1;
+						break;
+					} else {
+						$saveBranch[$kb->branchId] = 0;
+					}
+				endforeach;
+				if ($saveBranch[$kb["branchId"]] == 0) {
+					$kb->status = 99;
+					$kb->save(false);
+				}
+			endforeach;
+		}
+		if (count($branch) > 0) {
+			foreach ($branch as $b) :
+				$old = kfiBranch::find()->where(["kfiId" => $kfiId, "branchId" => $b, "status" => 1])->one();
+				if (!isset($old) || empty($old)) {
+					$kfiBranch = new KfiBranch();
+					$kfiBranch->kfiId = $kfiId;
+					$kfiBranch->branchId = $b;
+					$kfiBranch->status = 1;
+					$kfiBranch->createDateTime = new Expression('NOW()');
+					$kfiBranch->updateDateTime = new Expression('NOW()');
+					$kfiBranch->save(false);
+				}
+			endforeach;
+		}
+	}
+	public function saveKfiDepartment($department, $kfiId)
+	{
+		$kfiDepartment = KfiDepartment::find()->where(["kfiId" => $kfiId, "status" => 1])->all();
+		if (isset($kfiDepartment) && count($kfiDepartment) > 0) {
+			foreach ($kfiDepartment as $kd) :
+				foreach ($department as $dp) :
+					if ($kd->departmentId == $dp) {
+						$saveDepartment[$kd->departmentId] = 1;
+						break;
+					} else {
+						$saveDepartment[$kd->departmentId] = 0;
+					}
+				endforeach;
+				if ($saveDepartment[$kd->departmentId] == 0) {
+					$kd->status = 99;
+					$kd->save(false);
+				}
+			endforeach;
+		}
+		if (count($department) > 0) {
+			foreach ($department as $d) :
+				$old = KfiDepartment::find()->where(["kfiId" => $kfiId, "departmentId" => $d, "status" => 1])->one();
+				if (!isset($old) || empty($old)) {
+					$kfiDepartment = new KfiDepartment();
+					$kfiDepartment->kfiId = $kfiId;
+					$kfiDepartment->departmentId = $d;
+					$kfiDepartment->status = 1;
+					$kfiDepartment->createDateTime = new Expression('NOW()');
+					$kfiDepartment->updateDateTime = new Expression('NOW()');
+					$kfiDepartment->save(false);
+				}
+			endforeach;
+		}
 	}
 	public function actionHistory()
 	{
@@ -433,5 +507,97 @@ class ManagementController extends Controller
 			$res["status"] = true;
 		}
 		return json_encode($res);
+	}
+	public function actionSearchKfi()
+	{
+		$companyId = isset($_POST["companyId"]) && $_POST["companyId"] != null ? $_POST["companyId"] : null;
+		$branchId = isset($_POST["branchId"]) && $_POST["branchId"] != null ? $_POST["branchId"] : null;
+		// $teamId = isset($_POST["teamId"]) && $_POST["teamId"] != null ? $_POST["teamId"] : null;
+		$month = isset($_POST["month"]) && $_POST["month"] != null ? $_POST["month"] : null;
+		$status = isset($_POST["status"]) && $_POST["status"] != null ? $_POST["status"] : null;
+		$date = isset($_POST["date"]) && $_POST["date"] != null ? $_POST["date"] : null;
+		$type = $_POST["type"];
+		return $this->redirect(Yii::$app->homeUrl . 'kfi/management/kfi-search-result/' . ModelMaster::encodeParams([
+			"companyId" => $companyId,
+			"branchId" => $branchId,
+			// "teamId" => $teamId,
+			"month" => $month,
+			"status" => $status,
+			"date" => $date,
+			"type" => $type
+		]));
+	}
+	public function actionKfiSearchResult($hash)
+	{
+		$param = ModelMaster::decodeParams($hash);
+		$companyId = $param["companyId"];
+		$branchId = $param["branchId"];
+		// $teamId = $param["teamId"];
+		$month = $param["month"];
+		$status = $param["status"];
+		$date = $param["date"];
+		$type = $param["type"];
+		$branches = [];
+		$teams = [];
+		if ($companyId == "" && $branchId == "" && $month == "" && $status == "" && $status == "") {
+			if ($type == "list") {
+				return $this->redirect(Yii::$app->homeUrl . 'kfi/management/index');
+			} else {
+				return $this->redirect(Yii::$app->homeUrl . 'kfi/management/grid');
+			}
+		}
+		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&month=' . $month . '&&status=' . $status . '&&date=' . $date;
+		$groupId = Group::currentGroupId();
+		if ($groupId == null) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+		}
+
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-filter?' . $paramText);
+		$kfis = curl_exec($api);
+		$kfis = json_decode($kfis, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$companies = curl_exec($api);
+		$companies = json_decode($companies, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
+		$units = curl_exec($api);
+		$units = json_decode($units, true);
+
+		if ($companyId != "") {
+			curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
+			$branches = curl_exec($api);
+			$branches = json_decode($branches, true);
+		}
+		if ($branchId != "") {
+			curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-team?id=' . $branchId);
+			$teams = curl_exec($api);
+			$teams = json_decode($teams, true);
+		}
+
+		curl_close($api);
+		$months = ModelMaster::monthFull(1);
+		if ($type == "list") {
+			$file = "kfi_search_result";
+		} else {
+			$file = "kfi_search_result_grid";
+		}
+
+		return $this->render($file, [
+			"units" => $units,
+			"companies" => $companies,
+			"months" => $months,
+			"kfis" => $kfis,
+			"companyId" => $companyId,
+			"branchId" => $branchId,
+			// "teamId" => $teamId,
+			"month" => $month,
+			"status" => $status,
+			"date" => $date,
+			"branches" => $branches,
+		]);
 	}
 }

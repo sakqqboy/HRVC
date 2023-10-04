@@ -313,3 +313,22 @@ function answerKgiIssue(kgiIssueId) {
 		}
 	});
 }
+function kgiFilter() {
+	var companyId = $("#company-filter").val();
+	var branchId = $("#branch-filter").val();
+	var teamId = $("#team-filter").val();
+	var month = $("#month-filter").val();
+	var status = $("#status-filter").val();
+	var date = $("#date-filter").val();
+	var type = $("#type").val();
+	var url = $url + 'kgi/management/search-kgi';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { companyId: companyId,branchId: branchId,teamId: teamId,month: month,status: status,date: date,type:type },
+		success: function (data) {
+			
+		}
+	});
+}

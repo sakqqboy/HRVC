@@ -23,12 +23,21 @@
 							<input type="text" class="form-control" value="" disabled id="companyName">
 						</div>
 						<div class="col-12 mt-10">
-							<label for="input" class="form-label">Branch</label>
-							<input type="text" class="form-control" value="" disabled id="branchName">
+							<label for="input" class="form-label"><strong class="red">*</strong> Branch</label>
+
+							<div class="col-12 form-control">
+								Select branch
+								<i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
+							</div>
+							<div class="col-12" id="show-multi-branch-update"></div>
 						</div>
 						<div class="col-12 mt-10">
-							<label for="input" class="form-label">Department</label>
-							<input type="text" class="form-control" value="" disabled id="departmentName">
+							<label for="input" class="form-label"><strong class="red">*</strong> Department</label>
+							<div class="col-12 form-control">
+								Select Department
+								<i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
+							</div>
+							<div class="col-12" id="show-multi-department-update"></div>
 						</div>
 						<div class="col-12 mt-15">
 							<label for="input" class="form-label"><strong class="red">*</strong> Progress title</label>
@@ -52,7 +61,7 @@
 										<label for="input" class="form-label"><strong class="red">*</strong> Select Period</label>
 										<div class="input-group">
 											<span class="input-group-text font-size-12"><i class="fa fa-calendar-o" aria-hidden="true"></i> &nbsp;&nbsp; Date</span>
-											<input type="date" aria-label="" class="form-control font-size-12" required name="periodDate">
+											<input type="date" aria-label="" class="form-control font-size-12" required name="periodDate" id="periodDate-update">
 										</div>
 									</div>
 								</div>
@@ -61,7 +70,7 @@
 										<label for="input" class="form-label"><strong class="red">*</strong> Next Check Date</label>
 										<div class="input-group">
 											<span class="input-group-text font-size-12"><i class="fa fa-calendar-o" aria-hidden="true"></i> &nbsp;&nbsp; Date</span>
-											<input type="date" aria-label="" class="form-control font-size-12" required name="nextCheckDate">
+											<input type="date" aria-label="" class="form-control font-size-12" required name="nextCheckDate" id="nextCheckDate-update">
 										</div>
 									</div>
 								</div>
@@ -81,7 +90,7 @@
 						<div class="row">
 							<div class="col-12 pt-10">
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Quant Ratio</label>
-								<select class="form-select font-size-13" id="quantRatio" name="quanRatio">
+								<select class="form-select font-size-13" id="quantRatio" name="quanRatio" required>
 									<option value="">Quantity or Quality</option>
 									<option value="1">Quantity</option>
 									<option value="2">Quality</option>
@@ -90,7 +99,7 @@
 							</div>
 							<div class="col-lg-6 col-md-6 col-6 pt-10 mt-17">
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Amount Type</label>
-								<select class="form-select font-size-13" id="amountType" name="amountType">
+								<select class="form-select font-size-13" id="amountType" name="amountType" required>
 									<option value="">% or Number</option>
 									<option value="1">%</option>
 									<option value="2">Number</option>
@@ -98,7 +107,7 @@
 							</div>
 							<div class="col-lg-6 col-md-6 col-6 pt-10  mt-17">
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Code</label>
-								<select class="form-select font-size-13" id="code" name="code">
+								<select class="form-select font-size-13" id="code" name="code" required>
 									<option value="">
 										<&nbsp;&nbsp;=&nbsp;&nbsp;>
 									</option>
@@ -121,7 +130,7 @@
 							</div>
 							<div class="col-12  mt-15">
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Result</label>
-								<input type="number" step="any" class="form-control font-size-13 text-end" id="result" name="result">
+								<input type="number" step="any" class="form-control font-size-13 text-end" id="result" name="result" required>
 							</div>
 							<div class="col-12 mt-10">
 								<label class="form-label font-size-13">Remark</label>

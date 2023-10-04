@@ -27,9 +27,15 @@ $this->title = 'KFI';
 				</div>
 
 				<div class="col-lg-5 col-md-12 col-12 New-KFI">
-					<?= $this->render('filter_list', [
+					<?= $this->render('filter_list_search', [
 						"companies" => $companies,
-						"months" => $months
+						"months" => $months,
+						"companyId" => $companyId,
+						"branchId" => $branchId,
+						"month" => $month,
+						"status" => $status,
+						"date" => $date,
+						"branches" => $branches,
 					]) ?>
 					<input type="hidden" id="type" value="list">
 				</div>

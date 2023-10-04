@@ -238,3 +238,104 @@ function answerKpiIssue(kpiIssueId) {
 		}
 	});
 }
+function kpiFilter() {
+	var companyId = $("#company-filter").val();
+	var branchId = $("#branch-filter").val();
+	var teamId = $("#team-filter").val();
+	var month = $("#month-filter").val();
+	var status = $("#status-filter").val();
+	var date = $("#date-filter").val();
+	var type = $("#type").val();
+	var url = $url + 'kpi/management/search-kpi';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { companyId: companyId,branchId: branchId,teamId: teamId,month: month,status: status,date: date,type:type },
+		success: function (data) {
+			
+		}
+	});
+}
+function departmentMultiTeamUpdateKpi(branchId) { 
+	var sumDepartment = totalDepartmentUpdate(branchId);
+	var multiDepartmentBranch = [];
+	var multiDepartment = [];
+	var multiBranch = [];
+	var i = 0;
+		$("#multi-check-"+branchId+"-update:checked").each(function () {
+			multiDepartmentBranch[i] = $(this).val();
+			i++;
+		});
+		$("#multi-check-update:checked").each(function () {
+			multiBranch[i] = $(this).val();
+			i++;
+		});
+		$(".multi-check-department-update:checked").each(function () {
+			multiDepartment[i] = $(this).val();
+			i++;
+		});
+	if (sumDepartment != multiDepartmentBranch.length) {
+		$("#multi-check-all-" + branchId+"-update").prop("checked", false);
+	} else { 
+		$("#multi-check-all-" + branchId+"-update").prop("checked", true);
+	}
+	var acType = $("#acType").val();
+	var kpiId=$("#kpiId").val();
+	var url = $url + 'kpi/management/department-multi-team';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { multiDepartment: multiDepartment, multiBranch: multiBranch, acType: acType,kpiId:kpiId },
+		success: function (data) {
+			if (data.status) {
+				$("#show-multi-team-update").html(data.textTeam);
+				
+			} else {
+				$("#show-multi-team-update").html('');
+			}
+		}
+	});
+}
+function branchMultiDepartmentUpdateKpi() {
+	var multiBranch = [];
+	var sumBranch = totalBranchUpdate();
+	var i = 0;
+		$("#multi-check-update:checked").each(function () {
+			multiBranch[i] = $(this).val();
+			i++;
+		});
+	if (sumBranch != multiBranch.length) {
+		$("#check-all-branch-update").prop("checked", false);
+	} else { 
+		$("#check-all-branch-update").prop("checked", true);
+	}
+	var url = $url + 'kpi/management/branch-multi-department';
+	var acType = $("#acType").val();
+	var kgiId=$("#kgiId").val();
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { multiBranch: multiBranch, acType: acType,kgiId:kgiId },
+		success: function (data) {
+			if (data.status) {
+				$("#show-multi-department-update").html(data.textDepartment);
+			} else {
+				$("#show-multi-department-update").html('');
+			}
+		}
+	});
+}
+function totalBranchUpdate() { 
+	var totalBranch = 0;
+	var data = [];
+	var i = 0;
+	$('input[id="multi-check-update"').each(function () {
+		data[i] = $(this).val();
+		i++;
+	});
+	totalBranch=data.length;
+	return totalBranch;
+}

@@ -55,4 +55,13 @@ class KfiDepartment extends \frontend\models\hrvc\master\KfiDepartmentMaster
         }
         return $departmentName;
     }
+    public static function isInThisKfi($departmentId, $kfiId)
+    {
+        $kfiDepartment = KfiDepartment::find()->where(["departmentId" => $departmentId, "kfiId" => $kfiId, "status" => 1])->asArray()->one();
+        $has = 0;
+        if (isset($kfiDepartment) && !empty($kfiDepartment)) {
+            $has = 1;
+        }
+        return $has;
+    }
 }
