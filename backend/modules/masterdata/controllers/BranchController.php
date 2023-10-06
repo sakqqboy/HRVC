@@ -3,6 +3,8 @@
 namespace backend\modules\masterdata\controllers;
 
 use backend\models\hrvc\Branch;
+use backend\models\hrvc\Department;
+use backend\models\hrvc\Team;
 use Exception;
 use yii\web\Controller;
 
@@ -44,5 +46,31 @@ class BranchController extends Controller
 			->orderBy('branch.branchName')
 			->asArray()->all();
 		return json_encode($branch);
+	}
+	public function actionBranchTeam($id)
+	{
+		$team = [];
+		$department = Department::find()
+			->where(["branchId" => $id, "status" => 1])
+			->asArray()
+			->all();
+		if (isset($department) && count($department) > 0) {
+			foreach ($department as $dep) :
+				$teams = Team::find()
+					->where(["departmentId" => $dep["departmentId"], "status" => 1])
+					->asArray()
+					->orderBy('teamName')
+					->all();
+				if (isset($teams) && count($teams) > 0) {
+					foreach ($teams as $t) :
+						$team[$t["teamId"]] = [
+							"teamId" => $t['teamId'],
+							"teamName" => $t["teamName"]
+						];
+					endforeach;
+				}
+			endforeach;
+		}
+		return json_encode($team);
 	}
 }

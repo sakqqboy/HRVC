@@ -71,7 +71,7 @@ function selectUnitUpdate(currentUnit) {
     $(".unit-" + currentUnit).css("color", "white");
 }
 function updateKfi(kfiId) {
-
+    $("#acType").val('update');
     resetUnit();
     $("#staticBackdrop2").show();
     $("#update-kfi")[0].reset();
@@ -81,27 +81,104 @@ function updateKfi(kfiId) {
         dataType: 'json',
         url: url,
         data: { kfiId: kfiId },
-        success: function(data) {
-            if (data.status) {
-                $("#kfiName").val(data.kfiName);
-                $(".currentUnit").val(data.unitId);
-                $("#companyName").val(data.companyName);
-                $("#branchName").val(data.branchName);
-                $("#departmentName").val(data.departmentName);
-                $(".unit-" + parseInt(data.unitId)).css("background-color", "#3366FF");
-                $(".unit-" + data.unitId).css("color", "white");
-                $("#targetAmount").val(data.targetAmount);
-                $("#kfiDetail").val(data.detail);
-                $("#quantRatio").val(data.quantRatio);
-                $("#monthName").val(data.monthName);
-                $("#amountType").val(data.amountType);
-                $("#code").val(data.code);
-                $("#kfiStatus").val(data.kfiStatus);
-                $("#kfiId").val(kfiId);
-            }
-
+        success: function (data) {
+            $("#kfiName").val(data.kfiName);
+            $("#companyName").val(data.companyName);
+            $(".currentUnit").val(data.unitId);
+            $(".previousUnit").val(data.unitId);
+            $("#show-multi-branch-update").html(data.textBranch);
+            $("#show-multi-department-update").html(data.textDepartment);
+            $(".unit-" + parseInt(data.unitId)).css("background-color", "#3366FF");
+            $(".unit-" + data.unitId).css("color", "white");
+            $("#periodDate-update").val(data.periodCheck);
+			$("#nextCheckDate-update").val(data.nextCheckDate);
+            $("#targetAmount").val(data.targetAmount);
+            $("#kfiDetail").val(data.detail);
+            $("#quantRatio").val(data.quantRatio);
+            $("#monthName").val(data.monthName);
+            $("#amountType").val(data.amountType);
+            $("#code").val(data.code);
+            $("#kfiStatus").val(data.kfiStatus);
+            $("#kfiId").val(kfiId);
         }
     });
+}
+function branchMultiDepartmentUpdateKfi() {
+	var multiBranch = [];
+	var sumBranch = totalBranchUpdate();
+	var i = 0;
+		$("#multi-check-update:checked").each(function () {
+			multiBranch[i] = $(this).val();
+			i++;
+		});
+	if (sumBranch != multiBranch.length) {
+		$("#check-all-branch-update").prop("checked", false);
+	} else { 
+		$("#check-all-branch-update").prop("checked", true);
+	}
+	var url = $url + 'kfi/management/branch-multi-department';
+	var acType = $("#acType").val();
+	var kfiId=$("#kfiId").val();
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { multiBranch: multiBranch, acType: acType,kfiId:kfiId },
+		success: function (data) {
+			if (data.status) {
+				$("#show-multi-department-update").html(data.textDepartment);
+			} else {
+				$("#show-multi-department-update").html('');
+			}
+		}
+	});
+}
+function totalBranchUpdate() { 
+	var totalBranch = 0;
+	var data = [];
+	var i = 0;
+	$('input[id="multi-check-update"').each(function () {
+		data[i] = $(this).val();
+		i++;
+	});
+	totalBranch=data.length;
+	return totalBranch;
+}
+function departmentMultiTeamUpdateKfi(branchId) { 
+	var sumDepartment = totalDepartmentUpdate(branchId);
+	var multiDepartmentBranch = [];
+	var multiDepartment = [];
+	var multiBranch = [];
+	var i = 0;
+		$("#multi-check-"+branchId+"-update:checked").each(function () {
+			multiDepartmentBranch[i] = $(this).val();
+			i++;
+		});
+		$("#multi-check-update:checked").each(function () {
+			multiBranch[i] = $(this).val();
+			i++;
+		});
+		$(".multi-check-department-update:checked").each(function () {
+			multiDepartment[i] = $(this).val();
+			i++;
+		});
+	if (sumDepartment != multiDepartmentBranch.length) {
+		$("#multi-check-all-" + branchId+"-update").prop("checked", false);
+	} else { 
+		$("#multi-check-all-" + branchId+"-update").prop("checked", true);
+	}
+
+}
+function totalDepartmentUpdate(branchId) {
+	var totalDepartment = 0;
+	var data = [];
+	var i = 0;
+	$('input[id="multi-check-' + branchId + '-update"').each(function () {
+		data[i] = $(this).val();
+		i++;
+	});
+	totalDepartment = data.length;
+	return totalDepartment;
 }
 
 function resetUnit() {
@@ -258,4 +335,23 @@ function showSelectFileName(kfiIssueId) {
 function showAttachFileName(kfiId) { 
     var message = "Attached : " + $("#attachKfiFile").val();
     $("#attachFile-" + kfiId).html(message);
+}
+function kfiFilter() {
+	var companyId = $("#company-filter").val();
+	var branchId = $("#branch-filter").val();
+	// var teamId = $("#team-filter").val();
+	var month = $("#month-filter").val();
+	var status = $("#status-filter").val();
+	var date = $("#date-filter").val();
+	var type = $("#type").val();
+	var url = $url + 'kfi/management/search-kfi';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { companyId: companyId,branchId: branchId,month: month,status: status,date: date,type:type },
+		success: function (data) {
+			
+		}
+	});
 }

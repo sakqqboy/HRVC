@@ -1,4 +1,4 @@
-<div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop1" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header" style="height: 90px;">
@@ -20,7 +20,7 @@
 						</div>
 						<div class="col-12 pt-5">
 							<label for="input" class="form-label"><strong class="red">*</strong> Company</label>
-							<select class="form-select" name="company" id="company-create-kfi" onchange="javascript:companyBranchKfi()" required>
+							<select class="form-select" name="company" id="companyId" onchange="javascript:companyMultiBrach()" required>
 								<option value="">Select Company</option>
 								<?php
 								if (isset($companies) && count($companies) > 0) {
@@ -33,17 +33,24 @@
 
 							</select>
 						</div>
-						<div class="col-12 pt-5">
+						<div class="col-12 mt-10">
 							<label for="input" class="form-label"><strong class="red">*</strong> Branch</label>
-							<select class="form-select" name="branch" disabled id="branch-create-kfi" required onchange="javascript:branchDepartmentKfi()">
-								<option value="">Select Branch</option>
-							</select>
+
+							<div class="col-12 form-control">
+								Select branch
+								<i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
+							</div>
+							<div class="col-12" id="show-multi-branch"></div>
+
+
 						</div>
-						<div class="col-12 pt-5">
+						<div class="col-12 mt-10">
 							<label for="input" class="form-label"><strong class="red">*</strong> Department</label>
-							<select class="form-select" name="department" disabled id="department-create-kfi" required>
-								<option value="">Select Department</option>
-							</select>
+							<div class="col-12 form-control">
+								Select Department
+								<i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
+							</div>
+							<div class="col-12" id="show-multi-department"></div>
 						</div>
 						<div class="col-12 pt-10">
 							<label for="input" class="form-label"><strong class="red">*</strong> Check Unit</label>
@@ -51,7 +58,7 @@
 								<?php
 								if (isset($units) && count($units) > 0) {
 									$i = 1;
-									foreach ($units as $unitId => $unit) :
+									foreach ($units as $unit) :
 										$style = "";
 										$default = "";
 										if ($i == 4) {
@@ -62,8 +69,8 @@
 											$default = 'btn-primary';
 										}
 								?>
-										<button type="button" id="unit-<?= $unitId ?>" class="btn border col-3  font-size-12 <?= $default ?>" onclick="javascript:selectUnit(<?= $unitId ?>)" style="<?= $style ?>">
-											<?= $unit ?>
+										<button type="button" id="unit-<?= $unit['unitId'] ?>" class="btn border col-3  font-size-12 <?= $default ?>" onclick="javascript:selectUnit(<?= $unit['unitId'] ?>)" style="<?= $style ?>">
+											<?= $unit["unitName"] ?>
 										</button>
 								<?php
 										$i++;

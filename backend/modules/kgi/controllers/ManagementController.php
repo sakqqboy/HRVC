@@ -273,4 +273,54 @@ class ManagementController extends Controller
 		}
 		return json_encode($data);
 	}
+	public function actionKgiFilter($companyId, $branchId, $teamId, $month, $status, $date)
+	{
+		$data = [];
+		$kgis = Kgi::find()
+			->select('kgi.*')
+			->JOIN("LEFT JOIN", "kgi_branch kb", "kb.kgiId=kgi.kgiId")
+			->JOIN("LEFT JOIN", "kgi_team kt", "kt.kgiId=kgi.kgiId")
+			->where(["kgi.status" => [1, 4]])
+			->andFilterWhere([
+				"kgi.companyId" => $companyId,
+				"kb.branchId" => $branchId,
+				"kt.teamId" => $teamId,
+				"kgi.month" => $month,
+				"kgi.status" => $status,
+			])
+			->orderBy('kgi.createDateTime ASC')
+			->all();
+		if (count($kgis) > 0) {
+			foreach ($kgis as $kgi) :
+				$ratio = 0;
+				if ($kgi["targetAmount"] != '' && $kgi["targetAmount"] != 0 && $kgi["targetAmount"] != null) {
+					$ratio = ($kgi["result"] / $kgi["targetAmount"]) * 100;
+				}
+				$data[$kgi["kgiId"]] = [
+					"kgiName" => $kgi["kgiName"],
+					"companyName" => Company::companyName($kgi["companyId"]),
+					"branch" => KgiBranch::kgiBranch($kgi["kgiId"]),
+					"quantRatio" => $kgi["quantRatio"],
+					"targetAmount" => number_format($kgi["targetAmount"], 2),
+					"code" => $kgi["code"],
+					"result" => number_format($kgi["result"], 2),
+					"unit" => Unit::unitName($kgi["unitId"]),
+					"month" => ModelMaster::monthEng($kgi['month'], 1),
+					"priority" => $kgi["priority"],
+					"ratio" => number_format($ratio, 2),
+					"periodCheck" => ModelMaster::engDate($kgi["periodDate"], 2),
+					"nextCheck" => Kgi::nextCheckDate($kgi['kgiId']),
+					"countTeam" => KgiTeam::kgiTeam($kgi["kgiId"]),
+					"flag" => Country::countryFlagBycompany($kgi["companyId"]),
+					"employee" => "",
+					"status" => $kgi["status"],
+					"countryName" => Country::countryNameBycompany($kgi['companyId']),
+					"issue" => KgiIssue::lastestIssue($kgi["kgiId"])["issue"],
+					"solution" => KgiIssue::lastestIssue($kgi["kgiId"])["solution"],
+					"employee" => KgiTeam::employeeTeam($kgi['kgiId'])
+				];
+			endforeach;
+		}
+		return json_encode($data);
+	}
 }

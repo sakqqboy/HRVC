@@ -318,4 +318,55 @@ class ManagementController extends Controller
 		}
 		return json_encode($data);
 	}
+	public function actionKpiFilter($companyId, $branchId, $teamId, $month, $status, $date)
+	{
+		$data = [];
+		$kpis = Kpi::find()
+			->select('kpi.*')
+			->JOIN("LEFT JOIN", "kpi_branch kb", "kb.kpiId=kpi.kpiId")
+			->JOIN("LEFT JOIN", "kpi_team kt", "kt.kpiId=kpi.kpiId")
+			->where(["kpi.status" => [1, 4]])
+			->andFilterWhere([
+				"kpi.companyId" => $companyId,
+				"kb.branchId" => $branchId,
+				"kt.teamId" => $teamId,
+				"kpi.month" => $month,
+				"kpi.status" => $status,
+
+			])
+			->orderBy('kpi.createDateTime ASC')
+			->all();
+		if (count($kpis) > 0) {
+			foreach ($kpis as $kpi) :
+				$ratio = 0;
+				if ($kpi["targetAmount"] != '' && $kpi["targetAmount"] != 0 && $kpi["targetAmount"] != null) {
+					$ratio = ($kpi["result"] / $kpi["targetAmount"]) * 100;
+				}
+				$data[$kpi["kpiId"]] = [
+					"kpiName" => $kpi["kpiName"],
+					"companyName" => Company::companyName($kpi["companyId"]),
+					"branch" => KpiBranch::kpiBranch($kpi["kpiId"]),
+					"quantRatio" => $kpi["quantRatio"],
+					"targetAmount" => number_format($kpi["targetAmount"], 2),
+					"code" => $kpi["code"],
+					"result" => number_format($kpi["result"], 2),
+					"unit" => Unit::unitName($kpi["unitId"]),
+					"month" => ModelMaster::monthEng($kpi['month'], 1),
+					"priority" => $kpi["priority"],
+					"ratio" => number_format($ratio, 2),
+					"periodCheck" => ModelMaster::engDate($kpi["periodDate"], 2),
+					"nextCheck" => Kpi::nextCheckDate($kpi['kpiId']),
+					"countTeam" => KpiTeam::kpiTeam($kpi["kpiId"]),
+					"flag" => Country::countryFlagBycompany($kpi["companyId"]),
+					"employee" => "",
+					"status" => $kpi["status"],
+					"countryName" => Country::countryNameBycompany($kpi['companyId']),
+					"issue" => KpiIssue::lastestIssue($kpi["kpiId"])["issue"],
+					"solution" => KpiIssue::lastestIssue($kpi["kpiId"])["solution"],
+					"employee" => KpiTeam::employeeTeam($kpi['kpiId'])
+				];
+			endforeach;
+		}
+		return json_encode($data);
+	}
 }

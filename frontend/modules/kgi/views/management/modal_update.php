@@ -37,8 +37,6 @@
 								<i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
 							</div>
 							<div class="col-12" id="show-multi-branch-update"></div>
-
-
 						</div>
 						<div class="col-12 mt-10">
 							<label for="input" class="form-label"><strong class="red">*</strong> Department</label>

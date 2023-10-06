@@ -5,6 +5,7 @@ namespace frontend\modules\kpi\controllers;
 use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
+use frontend\models\hrvc\Department;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Kpi;
 use frontend\models\hrvc\KpiBranch;
@@ -13,6 +14,7 @@ use frontend\models\hrvc\KpiHistory;
 use frontend\models\hrvc\KpiIssue;
 use frontend\models\hrvc\KpiSolution;
 use frontend\models\hrvc\KpiTeam;
+use frontend\models\hrvc\Team;
 use frontend\models\hrvc\User;
 use Yii;
 use yii\db\Expression;
@@ -496,6 +498,190 @@ class ManagementController extends Controller
                 "fileName" => $fileName
             ]);
             $res["status"] = true;
+        }
+        return json_encode($res);
+    }
+    public function actionSearchKpi()
+    {
+        $companyId = isset($_POST["companyId"]) && $_POST["companyId"] != null ? $_POST["companyId"] : null;
+        $branchId = isset($_POST["branchId"]) && $_POST["branchId"] != null ? $_POST["branchId"] : null;
+        $teamId = isset($_POST["teamId"]) && $_POST["teamId"] != null ? $_POST["teamId"] : null;
+        $month = isset($_POST["month"]) && $_POST["month"] != null ? $_POST["month"] : null;
+        $status = isset($_POST["status"]) && $_POST["status"] != null ? $_POST["status"] : null;
+        $date = isset($_POST["date"]) && $_POST["date"] != null ? $_POST["date"] : null;
+        $type = $_POST["type"];
+        return $this->redirect(Yii::$app->homeUrl . 'kpi/management/kpi-search-result/' . ModelMaster::encodeParams([
+            "companyId" => $companyId,
+            "branchId" => $branchId,
+            "teamId" => $teamId,
+            "month" => $month,
+            "status" => $status,
+            "date" => $date,
+            "type" => $type
+        ]));
+    }
+    public function actionKpiSearchResult($hash)
+    {
+        $param = ModelMaster::decodeParams($hash);
+        $companyId = $param["companyId"];
+        $branchId = $param["branchId"];
+        $teamId = $param["teamId"];
+        $month = $param["month"];
+        $status = $param["status"];
+        $date = $param["date"];
+        $type = $param["type"];
+        $branches = [];
+        $teams = [];
+        if ($companyId == "" && $branchId == "" && $teamId == "" && $month == "" && $status == "" && $status == "") {
+            if ($type == "list") {
+                return $this->redirect(Yii::$app->homeUrl . 'kpi/management/index');
+            } else {
+                return $this->redirect(Yii::$app->homeUrl . 'kpi/management/grid');
+            }
+        }
+        $paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&teamId=' . $teamId . '&&month=' . $month . '&&status=' . $status . '&&date=' . $date;
+        $groupId = Group::currentGroupId();
+        if ($groupId == null) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+        }
+
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-filter?' . $paramText);
+        $kpis = curl_exec($api);
+        $kpis = json_decode($kpis, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+        $companies = curl_exec($api);
+        $companies = json_decode($companies, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
+        $units = curl_exec($api);
+        $units = json_decode($units, true);
+
+        if ($companyId != "") {
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
+            $branches = curl_exec($api);
+            $branches = json_decode($branches, true);
+        }
+        if ($branchId != "") {
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-team?id=' . $branchId);
+            $teams = curl_exec($api);
+            $teams = json_decode($teams, true);
+        }
+
+        curl_close($api);
+        $months = ModelMaster::monthFull(1);
+        if ($type == "list") {
+            $file = "kpi_search_result";
+        } else {
+            $file = "kpi_search_result_grid";
+        }
+        return $this->render($file, [
+            "units" => $units,
+            "companies" => $companies,
+            "months" => $months,
+            "kpis" => $kpis,
+            "companyId" => $companyId,
+            "branchId" => $branchId,
+            "teamId" => $teamId,
+            "month" => $month,
+            "status" => $status,
+            "date" => $date,
+            "branches" => $branches,
+            "teams" => $teams
+        ]);
+    }
+    public function actionDepartmentMultiTeam()
+    {
+        $res["status"] = false;
+        $t = [];
+        $textTeam = '';
+        $branchDepartment = [];
+        $acType = $_POST["acType"];
+        if (isset($_POST["multiBranch"]) && count($_POST["multiBranch"]) > 0) {
+            foreach ($_POST["multiBranch"] as $branchId) :
+                if (isset($_POST["multiDepartment"]) && count($_POST["multiDepartment"]) > 0) {
+                    foreach ($_POST["multiDepartment"] as $departmentId) :
+                        if ($branchId != '') {
+                            $department = Department::find()
+                                ->where(["departmentId" => $departmentId, "branchId" => $branchId])
+                                ->one();
+                            if (isset($department) && !empty($department)) {
+                                $branchDepartment[$branchId][$departmentId] = $departmentId;
+                            }
+                        }
+                    endforeach;
+                }
+            endforeach;
+        }
+        if (count($branchDepartment) > 0) {
+
+            foreach ($branchDepartment as $branchId => $departments) :
+
+                foreach ($departments as $dId => $id) :
+                    $teams = Team::find()
+                        ->where(["departmentId" => $dId])
+                        ->asArray()
+                        ->orderBy("teamName")
+                        ->all();
+                    if (isset($teams) && count($teams) > 0) {
+                        foreach ($teams as $team) :
+                            $t[$dId][$team["teamId"]] = $team["teamName"];
+                        endforeach;
+                    }
+                endforeach;
+            endforeach;
+            //throw new Exception(print_r($t, true));
+            if ($acType == "create") {
+                $textTeam .= $this->renderAjax('multi_team', [
+                    "t" => $t,
+                ]);
+            } else {
+                $kpiId = $_POST["kpiId"];
+                $textTeam .= $this->renderAjax('multi_team_update', [
+                    "t" => $t,
+                    "kpiId" => $kpiId
+                ]);
+            }
+            $res["status"] = true;
+            $res["textTeam"] = $textTeam;
+        }
+        return json_encode($res);
+    }
+    public function actionBranchMultiDepartment()
+    {
+        $res["status"] = false;
+        $acType = $_POST["acType"];
+        if (isset($_POST["multiBranch"]) && count($_POST["multiBranch"]) > 0) {
+            //throw new Exception(print_r($_POST["multiBranch"], true));
+            $branchIdArr = $_POST["multiBranch"];
+            $d = [];
+            if (count($branchIdArr) > 0) {
+                $i = 0;
+                foreach ($branchIdArr as $branchId) :
+                    $department = Department::find()->where(["branchId" => $branchId, "status" => 1])->asArray()->all();
+                    if (isset($department) && count($department) > 0) {
+                        foreach ($department as $dep) :
+                            $d[$dep["branchId"]][$dep["departmentId"]] = $dep["departmentName"];
+                        endforeach;
+                    }
+                endforeach;
+            }
+            if ($acType == "create") {
+                $textDepartment = $this->renderAjax('multi_department', [
+                    "d" => $d,
+                ]);
+            } else {
+                $kpiId = $_POST["kpiId"];
+                $textDepartment = $this->renderAjax('multi_department_update', [
+                    "d" => $d,
+                    "kpiId" => $kpiId
+                ]);
+            }
+            $res["status"] = true;
+            $res["textDepartment"] = $textDepartment;
         }
         return json_encode($res);
     }
