@@ -107,6 +107,7 @@ use common\models\ModelMaster;
                         <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/" class="no-underline"><i class="fa fa-history pr-10 mt-20" aria-hidden="true"></i> 360 Degree Evaluetion</a></div>
                         <div class="col-12 haeder-Evalution"> REPORTS</div>
                         <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/analysis" class="no-underline"><i class="fa fa-pie-chart pr-10 mt-20" aria-hidden="true"></i> Analysis</a></div>
+                        <div class="col-12 haeder-Evalution"> Financial Planning</div>
                         <div class="col-12 haeder-Evalution"> ADMIN SETTINGS</div>
                         <div class="col-12"> <a href="" class="no-underline"><i class="fa fa-user pr-10 mt-20" aria-hidden="true"></i> Admin</a></div>
                         <div class="col-12"> <a href="" class="no-underline"><i class="fa fa-sun-o pr-10 mt-20" aria-hidden="true"></i> Super admin</a></div>

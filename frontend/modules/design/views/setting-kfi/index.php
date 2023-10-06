@@ -73,7 +73,7 @@ $this->title = 'Setting KFI';
                     </thead>
                     <tbody>
                         <tr class="setting-fontsize">
-                            <td>Increase sales in a way that company gains</td>
+                            <td><span class="badge bg-settingkfi">PL</span> Increase sales in a way that company gains</td>
                             <td>
                                 <div class="row">
                                     <div class="col-5">
@@ -137,7 +137,7 @@ $this->title = 'Setting KFI';
                     </tbody>
                     <tbody>
                         <tr class="setting-fontsize">
-                            <td>Increase sales in a way that company gains</td>
+                            <td><span class="badge bg-settingkfi">PL</span> Increase sales in a way that company gains</td>
                             <td>
                                 <div class="row">
                                     <div class="col-5">
@@ -188,7 +188,7 @@ $this->title = 'Setting KFI';
                                     </div>
                                 </div>
                             </td>
-                            <td><?= number_format(52) ?></td>
+                            <td><?= number_format(52) ?>%</td>
                             <td>January</td>
                             <td class="text-danger">In Active</td>
                         </tr>

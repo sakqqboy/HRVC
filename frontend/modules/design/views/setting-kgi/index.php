@@ -187,7 +187,7 @@ $this->title = 'Setting KGI';
                                     </div>
                                 </div>
                             </td>
-                            <td><?= number_format(52) ?></td>
+                            <td><?= number_format(52) ?>%</td>
                             <td> C</td>
                             <td>
                                 <div class="row">
@@ -211,9 +211,6 @@ $this->title = 'Setting KGI';
                                             </button>
                                         </span>
                                     </div>
-                                    <div class="col-12">
-
-                                    </div>
                                     <div class="col-5">
                                         <div class="setting-upload">
                                             <i class="fa fa-users font-size-10 pl-3" aria-hidden="true"></i>
@@ -229,6 +226,17 @@ $this->title = 'Setting KGI';
                 </table>
             </div>
         </div>
+    </div>
+    <div class="col-12 navigation-next">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link page-navigation" href="#"><i class="fa fa-chevron-left" aria-hidden="true"></i> Previous</a></li>
+                <li class="page-item"><a class="page-link page-navigation" href="#">1</a></li>
+                <li class="page-item"><a class="page-link page-navigation" href="#">2</a></li>
+                <li class="page-item"><a class="page-link page-navigation" href="#">3</a></li>
+                <li class="page-item"><a class="page-link page-navigation" href="#">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
+            </ul>
+        </nav>
     </div>
 </div>
 <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
