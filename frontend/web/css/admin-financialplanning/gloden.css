@@ -100,7 +100,7 @@
 }
 
 .line {
-    width: 170px;
+    width: 150px;
     height: 0;
     border: 1px solid #C4C4C4;
     margin: 3px;
@@ -176,4 +176,9 @@
     border-left: rgb(207, 207, 207) 2px solid;
     height: 35px;
     margin-top: 4px;
+}
+
+.p-Gross {
+    font-weight: 600;
+    font-size: 12px;
 }

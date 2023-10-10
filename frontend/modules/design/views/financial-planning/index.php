@@ -94,8 +94,120 @@ $this->title = 'Gloden';
             </div>
             <div class="col-lg-5 alert alert-secondary secondary-itemss">
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 p-Gross">
                         Sales
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="progress-solid">
+                            <div class="progress-primary">75%</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="progress-solid">
+                            <div class="progress-success">75%</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="progress-solid">
+                            <div class="progress-warning">100%</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="progress-solid">
+                            <div class="progress-primary">100%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="col-lg-5">
+            <div class="col-lg-5 alert alert-secondary secondary-itemss">
+                <div class="row">
+                    <div class="col-lg-3 p-Gross">
+                        Variable Expense
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="progress-solid">
+                            <div class="progress-primary">75%</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="progress-solid">
+                            <div class="progress-success">75%</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="progress-solid">
+                            <div class="progress-warning">100%</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="progress-solid">
+                            <div class="progress-primary">100%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="col-lg-5">
+            <div class="col-lg-5 alert alert-secondary secondary-itemss">
+                <div class="row">
+                    <div class="col-lg-3 p-Gross">
+                        Gross Profit (or Loss)
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="progress-solid">
+                            <div class="progress-primary">75%</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="progress-solid">
+                            <div class="progress-success">75%</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="progress-solid">
+                            <div class="progress-warning">100%</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="progress-solid">
+                            <div class="progress-primary">100%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="col-lg-5">
+            <div class="col-lg-5 alert alert-secondary secondary-itemss">
+                <div class="row">
+                    <div class="col-lg-3 p-Gross">
+                        Labor Cost
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="progress-solid">
+                            <div class="progress-primary">75%</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="progress-solid">
+                            <div class="progress-success">75%</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="progress-solid">
+                            <div class="progress-warning">100%</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="progress-solid">
+                            <div class="progress-primary">100%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="col-lg-5">
+            <div class="col-lg-5 alert alert-secondary secondary-itemss">
+                <div class="row">
+                    <div class="col-lg-3 p-Gross">
+                        Labor Cost
                     </div>
                     <div class="col-lg-2">
                         <div class="progress-solid">
@@ -232,7 +344,7 @@ $this->title = 'Gloden';
                             </label>
                         </div>
                     </div>
-                    <div class="text-Done" data-bs-dismiss="modal" aria-label="done">
+                    <div class="col-12 text-Done" data-bs-dismiss="modal" aria-label="done">
                         Done
                     </div>
                 </div>
