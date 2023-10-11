@@ -132,6 +132,7 @@
     border: none;
     border-radius: 3px;
     background-color: rgb(241, 241, 241);
+    margin-top: -5px;
 }
 
 .AAR-2022 {
@@ -193,4 +194,8 @@
 
 .pt-table {
     margin-top: -5px;
+}
+
+.hr-top {
+    margin-top: -10px;
 }

@@ -5,7 +5,7 @@ $this->title = 'group profile';
 
 <div class="col-12" style="margin-top: 60px;">
     <div class="col-12">
-        <img src="<?= Yii::$app->homeUrl ?>image/Artboard-6.jpg" class="sad-1">
+        <img src="<?= Yii::$app->homeUrl ?>image/sadd-1.png" class="sad-1">
     </div>
     <div class="col-12 edit-update">
         <button type="button" class="btn btn-light"> <i class="fa fa-pencil" aria-hidden="true"></i> Update</button>

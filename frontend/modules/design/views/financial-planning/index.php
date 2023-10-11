@@ -53,7 +53,7 @@ $this->title = 'Gloden';
                 <div class="col-lg-4 col-12 alert alert-secondary secondary-CurrentYear">
                     <div class="row">
                         <div class="col-lg-4 text-secondary">
-                            <img src="<?= Yii::$app->homeUrl ?>image/calendar.png" style="width: 15px;"> &nbsp; Current Year
+                            <img src="<?= Yii::$app->homeUrl ?>image/calendar.png" style="width: 13px;"> &nbsp; <span class="font-size-12"> Current Year</span>
                         </div>
                         <div class="col-lg-3">
                             <select class="form-select text-primary font-size-12" aria-label="Default select example">
@@ -73,7 +73,7 @@ $this->title = 'Gloden';
                     <div class="line"></div>
                 </div>
                 <div class="col-lg-1 co-12 lert alert-secondary secondary-CurrentYear">
-                    <div class="alert alert-secondary mt-70 pt-70" style="border: none;">
+                    <div class="alert alert-secondary mt-80 pt-80" style="border: none;">
                         <div class="col-12 text-center">
                             1
                         </div>
@@ -127,162 +127,30 @@ $this->title = 'Gloden';
                     <div class="line1"></div>
                 </div>
             </div>
-            <div class="col-lg-4 alert alert-secondary secondary-items mt-30">
-                <div class="row">
-                    <div class="col-lg-3 item">
-                        items
-                    </div>
-                    <div class="col-lg-2 AAR-2022">
-                        <span class="badge bg-primary">AAR</span> <strong>2022</strong>
-                    </div>
-                    <div class="col-lg-2 AAR-2022">
-                        <span class="badge bg-primary">AAR</span> <strong>2023</strong>
-                    </div>
-                    <div class="col-lg-3 AAR-2022">
-                        <span class="badge bg-warning text-dark">AT</span> <strong>2023</strong> <span class="badge bg-warning text-dark">ATR</span>
-                    </div>
-                    <div class="col-lg-2 AAR-2022">
-                        <span class="badge bg-primary">ATR</span> <strong>2024</strong>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 alert alert-secondary secondary-itemss">
-                <div class="row">
-                    <div class="col-lg-3 p-Gross">
-                        Sales
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="progress-solid">
-                            <div class="progress-primary">75%</div>
+            <div class="row">
+                <div class="col-lg-4 alert alert-secondary secondary-items mt-30">
+                    <div class="row">
+                        <div class="col-lg-3 item">
+                            items
                         </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="progress-solid">
-                            <div class="progress-success">75%</div>
+                        <div class="col-lg-2 AAR-2022">
+                            <span class="badge bg-primary">AAR</span> <strong>2022</strong>
                         </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="progress-solid">
-                            <div class="progress-warning">100%</div>
+                        <div class="col-lg-2 AAR-2022">
+                            <span class="badge bg-primary">AAR</span> <strong>2023</strong>
                         </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="progress-solid">
-                            <div class="progress-primary">100%</div>
+                        <div class="col-lg-3 AAR-2022">
+                            <span class="badge bg-warning text-dark">AT</span> <strong>2023</strong> <span class="badge bg-warning text-dark">ATR</span>
+                        </div>
+                        <div class="col-lg-2 AAR-2022">
+                            <span class="badge bg-primary">ATR</span> <strong>2024</strong>
                         </div>
                     </div>
                 </div>
-            </div>
-            <hr class="col-lg-4">
-            <div class="col-lg-4 alert alert-secondary secondary-itemss">
-                <div class="row">
-                    <div class="col-lg-3 p-Gross">
-                        Variable Expense
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="progress-solid">
-                            <div class="progress-primary">75%</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="progress-solid">
-                            <div class="progress-success">75%</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="progress-solid">
-                            <div class="progress-warning">100%</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="progress-solid">
-                            <div class="progress-primary">100%</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr class="col-lg-4">
-            <div class="col-lg-4 alert alert-secondary secondary-itemss">
-                <div class="row">
-                    <div class="col-lg-3 p-Gross">
-                        Gross Profit (or Loss)
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="progress-solid">
-                            <div class="progress-primary">75%</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="progress-solid">
-                            <div class="progress-success">75%</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="progress-solid">
-                            <div class="progress-warning">100%</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="progress-solid">
-                            <div class="progress-primary">100%</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr class="col-lg-4">
-            <div class="col-lg-4 alert alert-secondary secondary-itemss">
-                <div class="row">
-                    <div class="col-lg-3 p-Gross">
-                        Labor Cost
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="progress-solid">
-                            <div class="progress-primary">75%</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="progress-solid">
-                            <div class="progress-success">75%</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="progress-solid">
-                            <div class="progress-warning">100%</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="progress-solid">
-                            <div class="progress-primary">100%</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr class="col-lg-4">
-            <div class="col-lg-4 alert alert-secondary secondary-itemss">
-                <div class="row">
-                    <div class="col-lg-3 p-Gross">
-                        Labor Cost
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="progress-solid">
-                            <div class="progress-primary">75%</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="progress-solid">
-                            <div class="progress-success">75%</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="progress-solid">
-                            <div class="progress-warning">100%</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="progress-solid">
-                            <div class="progress-primary">100%</div>
-                        </div>
-                    </div>
+
+                <div class="col-lg-1"></div>
+                <div class="col-lg-7 alert alert-secondary mt-30">
+                    jvkdlfjvoidfjd
                 </div>
             </div>
         </div>
@@ -402,6 +270,169 @@ $this->title = 'Gloden';
                         Done
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="col-lg-4 alert alert-secondary secondary-items mt-30">
+    <div class="row">
+        <div class="col-lg-3 item">
+            items
+        </div>
+        <div class="col-lg-2 AAR-2022">
+            <span class="badge bg-primary">AAR</span> <strong>2022</strong>
+        </div>
+        <div class="col-lg-2 AAR-2022">
+            <span class="badge bg-primary">AAR</span> <strong>2023</strong>
+        </div>
+        <div class="col-lg-3 AAR-2022">
+            <span class="badge bg-warning text-dark">AT</span> <strong>2023</strong> <span class="badge bg-warning text-dark">ATR</span>
+        </div>
+        <div class="col-lg-2 AAR-2022">
+            <span class="badge bg-primary">ATR</span> <strong>2024</strong>
+        </div>
+    </div>
+</div>
+<div class="col-lg-4 alert alert-secondary secondary-itemss">
+    <div class="row">
+        <div class="col-lg-3 p-Gross">
+            Sales
+        </div>
+        <div class="col-lg-2">
+            <div class="progress-solid">
+                <div class="progress-primary">75%</div>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="progress-solid">
+                <div class="progress-success">75%</div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="progress-solid">
+                <div class="progress-warning">100%</div>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="progress-solid">
+                <div class="progress-primary">100%</div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="col-lg-4 hr-top">
+<div class="col-lg-4 alert alert-secondary secondary-itemss">
+    <div class="row">
+        <div class="col-lg-3 p-Gross">
+            Variable Expense
+        </div>
+        <div class="col-lg-2">
+            <div class="progress-solid">
+                <div class="progress-primary">75%</div>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="progress-solid">
+                <div class="progress-success">75%</div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="progress-solid">
+                <div class="progress-warning">100%</div>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="progress-solid">
+                <div class="progress-primary">100%</div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="col-lg-4 hr-top">
+<div class="col-lg-4 alert alert-secondary secondary-itemss">
+    <div class="row">
+        <div class="col-lg-3 p-Gross">
+            Gross Profit (or Loss)
+        </div>
+        <div class="col-lg-2">
+            <div class="progress-solid">
+                <div class="progress-primary">75%</div>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="progress-solid">
+                <div class="progress-success">75%</div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="progress-solid">
+                <div class="progress-warning">100%</div>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="progress-solid">
+                <div class="progress-primary">100%</div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="col-lg-4 hr-top">
+<div class="col-lg-4 alert alert-secondary secondary-itemss">
+    <div class="row">
+        <div class="col-lg-3 p-Gross">
+            Labor Cost
+        </div>
+        <div class="col-lg-2">
+            <div class="progress-solid">
+                <div class="progress-primary">75%</div>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="progress-solid">
+                <div class="progress-success">75%</div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="progress-solid">
+                <div class="progress-warning">100%</div>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="progress-solid">
+                <div class="progress-primary">100%</div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="col-lg-4 hr-top">
+<div class="col-lg-4 alert alert-secondary secondary-itemss">
+    <div class="row">
+        <div class="col-lg-3 p-Gross">
+            Labor Cost
+        </div>
+        <div class="col-lg-2">
+            <div class="progress-solid">
+                <div class="progress-primary">75%</div>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="progress-solid">
+                <div class="progress-success">75%</div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="progress-solid">
+                <div class="progress-warning">100%</div>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="progress-solid">
+                <div class="progress-primary">100%</div>
             </div>
         </div>
     </div>
