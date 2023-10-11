@@ -50,7 +50,7 @@ $this->title = 'Gloden';
                 </div>
             </div>
             <div class="row mt-10">
-                <div class="col-lg-5 col-12 alert alert-secondary secondary-CurrentYear">
+                <div class="col-lg-4 col-12 alert alert-secondary secondary-CurrentYear">
                     <div class="row">
                         <div class="col-lg-4 text-secondary">
                             <img src="<?= Yii::$app->homeUrl ?>image/calendar.png" style="width: 15px;"> &nbsp; Current Year
@@ -72,8 +72,62 @@ $this->title = 'Gloden';
                     <div style="display:inline-block;font-size:11px;">ANNUAL SUMMARY</div>
                     <div class="line"></div>
                 </div>
+                <div class="col-lg-1 co-12 lert alert-secondary secondary-CurrentYear">
+                    <div class="alert alert-secondary mt-70 pt-70" style="border: none;">
+                        <div class="col-12 text-center">
+                            1
+                        </div>
+                        <div class="col-12 text-center">
+                            1
+                        </div>
+                        <div class="col-12 text-center">
+                            1
+                        </div>
+                        <div class="col-12 text-center">
+                            1
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-12 alert alert-secondary secondary-CurrentYear">
+                    <div class="row">
+                        <div class="col-lg-2 text-secondary">
+                            BTH (฿)
+                        </div>
+                        <div class="col-lg-3">
+                            <select class="form-select text-primary font-size-12" aria-label="Default select example">
+                                <option selected value="">None</option>
+                                <option value="1">2020</option>
+                                <option value="2">2021</option>
+                                <option value="3">2022</option>
+                                <option value="4">2024</option>
+                            </select>
+                        </div>
+                        <div class="col-2 badge bg-light text-primary pt-9" style="height: 30px;">
+                            <i class="fa fa-usd" aria-hidden="true"></i> Currency
+                        </div>
+                        <div class="col-lg-5">
+                            <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                                <div class="col-3 nav-item" role="presentation">
+                                    <a class="nav-link pt-table text-dark" id="pills-All-tab" data-bs-toggle="pill" data-bs-target="#pills-All" type="button" role="tab" aria-controls="pills-All" aria-selected="true"> All</a>
+                                </div>
+                                <div class="col-3 nav-item" role="presentation">
+                                    <a class="nav-link pt-table text-dark" id="pills-Q1-tab" data-bs-toggle="pill" data-bs-target="#pills-Q1" type="button" role="tab" aria-controls="pills-Q1" aria-selected="false"> Q1</a>
+                                </div>
+                                <div class="col-3 nav-item" role="presentation">
+                                    <a class="nav-link pt-table text-dark" id="pills-Q2-tab" data-bs-toggle="pill" data-bs-target="#pills-Q2" type="button" role="tab" aria-controls="pills-Q2" aria-selected="false"> Q2</a>
+                                </div>
+                                <div class="col-3 nav-item" role="presentation">
+                                    <a class="nav-link pt-table text-dark" id="pills-Q3-tab" data-bs-toggle="pill" data-bs-target="#pills-Q3" type="button" role="tab" aria-controls="pills-Q3" aria-selected="false"> Q3</a>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="line1"></div>
+                    <div style="display:inline-block;font-size:11px;">QUARTERLY</div>
+                    <div class="line1"></div>
+                </div>
             </div>
-            <div class="col-lg-5 alert alert-secondary secondary-items mt-20">
+            <div class="col-lg-4 alert alert-secondary secondary-items mt-30">
                 <div class="row">
                     <div class="col-lg-3 item">
                         items
@@ -92,7 +146,7 @@ $this->title = 'Gloden';
                     </div>
                 </div>
             </div>
-            <div class="col-lg-5 alert alert-secondary secondary-itemss">
+            <div class="col-lg-4 alert alert-secondary secondary-itemss">
                 <div class="row">
                     <div class="col-lg-3 p-Gross">
                         Sales
@@ -119,8 +173,8 @@ $this->title = 'Gloden';
                     </div>
                 </div>
             </div>
-            <hr class="col-lg-5">
-            <div class="col-lg-5 alert alert-secondary secondary-itemss">
+            <hr class="col-lg-4">
+            <div class="col-lg-4 alert alert-secondary secondary-itemss">
                 <div class="row">
                     <div class="col-lg-3 p-Gross">
                         Variable Expense
@@ -147,8 +201,8 @@ $this->title = 'Gloden';
                     </div>
                 </div>
             </div>
-            <hr class="col-lg-5">
-            <div class="col-lg-5 alert alert-secondary secondary-itemss">
+            <hr class="col-lg-4">
+            <div class="col-lg-4 alert alert-secondary secondary-itemss">
                 <div class="row">
                     <div class="col-lg-3 p-Gross">
                         Gross Profit (or Loss)
@@ -175,8 +229,8 @@ $this->title = 'Gloden';
                     </div>
                 </div>
             </div>
-            <hr class="col-lg-5">
-            <div class="col-lg-5 alert alert-secondary secondary-itemss">
+            <hr class="col-lg-4">
+            <div class="col-lg-4 alert alert-secondary secondary-itemss">
                 <div class="row">
                     <div class="col-lg-3 p-Gross">
                         Labor Cost
@@ -203,8 +257,8 @@ $this->title = 'Gloden';
                     </div>
                 </div>
             </div>
-            <hr class="col-lg-5">
-            <div class="col-lg-5 alert alert-secondary secondary-itemss">
+            <hr class="col-lg-4">
+            <div class="col-lg-4 alert alert-secondary secondary-itemss">
                 <div class="row">
                     <div class="col-lg-3 p-Gross">
                         Labor Cost

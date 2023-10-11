@@ -100,7 +100,7 @@
 }
 
 .line {
-    width: 150px;
+    width: 110px;
     height: 0;
     border: 1px solid #C4C4C4;
     margin: 3px;
@@ -108,6 +108,14 @@
     margin-top: 20px;
 }
 
+.line1 {
+    width: 270px;
+    height: 0;
+    border: 1px solid #C4C4C4;
+    margin: 3px;
+    display: inline-block;
+    margin-top: 20px;
+}
 
 .item {
     text-transform: uppercase;
@@ -181,4 +189,8 @@
 .p-Gross {
     font-weight: 600;
     font-size: 12px;
+}
+
+.pt-table {
+    margin-top: -5px;
 }
