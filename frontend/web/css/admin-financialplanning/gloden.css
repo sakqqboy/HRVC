@@ -3,6 +3,11 @@
     border-radius: 3px;
 }
 
+.planning {
+    font-size: 25px;
+    font-weight: 600;
+}
+
 .alert2-secondary3 {
     background-color: rgb(255, 255, 255);
 }
@@ -60,7 +65,7 @@
 }
 
 .AC-Success {
-    background-color: #0fb90f;
+    background-color: #0eaa0e;
     color: white;
     border-radius: 3px;
     padding-left: 2px;
@@ -198,4 +203,28 @@
 
 .hr-top {
     margin-top: -10px;
+}
+
+.caret-square {
+    text-align: end;
+    cursor: pointer;
+}
+
+.BTH-Month {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.m-calendar {
+    border-bottom: rgb(181, 181, 181) 1px solid;
+}
+
+#DataDistionaryLabel {
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.modal-DataDistionary {
+    margin-top: 250px;
+    margin-left: -220px;
 }
