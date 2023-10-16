@@ -71,6 +71,7 @@ $this->title = 'view';
                             <a class="link-2" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Attachments</a>
                             <a class="link-2" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Salary & Allowance</a>
                             <a class="link-2" id="v-pills-details-tab" data-bs-toggle="pill" data-bs-target="#v-pills-details" type="button" role="tab" aria-controls="v-pills-details" aria-selected="false">Evaluation</a>
+                            <a class="link-2" id="v-pills-skill-tab" data-bs-toggle="pill" data-bs-target="#v-pills-skill" type="button" role="tab" aria-controls="v-pills-skill" aria-selected="false">Skill & License</a>
                         </div>
                     </div>
                     <div class="col-lg-9 col-md-3 col-sm-6 col-12 alert-personal-information">
@@ -503,6 +504,92 @@ $this->title = 'view';
                                             });
                                         </script>
 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="v-pills-skill" role="tabpanel" aria-labelledby="v-pills-skill-tab">
+                                <!-- <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-12 padding-work font-size-17 pl-20">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/certificate.png" class="img-ertificate"> Licenses & certifications
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-12 padding-work font-size-17">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/certificate.png" class="img-ertificate"> Skills
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-lg-2 col-md-6 col-12 mt-30 pl-20">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/cia.png" class="image-cia">
+                                        </div>
+                                        <div class="col-lg-3 col-md-6 col-12">
+                                            <div class="col-12 mt-30">
+                                                <p><strong class="font-size-13"> Certified Internal Auditor</strong></p>
+                                                <p class="textweight"> The Institute of Internal Auditor</p>
+                                                <p class="textweight">Issued Nov 2023 . Expires Nov 2025
+                                                <div class="alert alert-light Show-Credentials"> Show Credentials &nbsp; <i class="fa fa-external-link" aria-hidden="true"></i></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-md-6 col-12">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/Sample.png" class="image-Sample">
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-12">
+                                        <div class="col-12 pl-20 font-size-17 pt-60">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/certificate.png" class="img-ertificate"> Licenses & certifications
+                                        </div>
+                                        <hr>
+                                        <div class="row pl-10">
+                                            <div class="col-lg-4 col-md-3 col-3 pt-20 pl-20">
+                                                <img src="<?= Yii::$app->homeUrl ?>image/pngaaa.png" class="img-thumbnail">
+                                            </div>
+                                            <div class="col-lg-5 col-md-5 col-5 pt-20">
+                                                <strong class="font-size-12"> Certified Internal Auditor</strong>
+                                                <div class="textweight"> The Institute of Internal Auditor</div>
+                                                <div class="textweight">Issued Nov 2023 . Expires Nov 2025 </div>
+                                                <div class="alert alert-light Show-Credentials"> Show Credentials &nbsp; <i class="fa fa-external-link" aria-hidden="true"></i></div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-4">
+                                                <img src="<?= Yii::$app->homeUrl ?>image/Sample.png" class="image-Sample">
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row pl-10">
+                                            <div class="col-lg-4 col-md-3 col-3 pt-20 pl-20">
+                                                <img src="<?= Yii::$app->homeUrl ?>image/google.png" class="img-thumbnail">
+                                            </div>
+                                            <div class=" col-lg-5 col-md-5 col-5 pt-20">
+                                                <strong class="font-size-12"> Python Specialist </strong>
+                                                <div class="textweight"> Google</div>
+                                                <div class="textweight">Issued Nov 2023 . No Expire </div>
+                                                <div class="alert alert-light Show-Credentials"> Show Credentials &nbsp; <i class="fa fa-external-link" aria-hidden="true"></i></div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-4">
+                                                <img src="<?= Yii::$app->homeUrl ?>image/search-google.png" class="image-Sample">
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row pl-10">
+                                            <div class="col-lg-4 col-md-3 col-3 pt-20 pl-20">
+                                                <img src="<?= Yii::$app->homeUrl ?>image/lghrvc1.png" class="img-thumbnail">
+                                            </div>
+                                            <div class=" col-lg-5 col-md-5 col-5 pt-20">
+                                                <strong class="font-size-12"> 延喜式掃除名人</strong>
+                                                <div class="textweight"> The Institute of Internal Auditor</div>
+                                                <div class="textweight">Issued Nov 2023 . Expires Nov 2025 </div>
+                                                <div class="alert alert-light Show-Credentials"> Show Credentials &nbsp; <i class="fa fa-external-link" aria-hidden="true"></i></div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-4">
+                                                <img src="<?= Yii::$app->homeUrl ?>image/食品衛生者養成講習会.png" class="image-Sample">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-12 form-pdf">
+                                        <div class="col-12">
+                                            <div class="myIframe">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
