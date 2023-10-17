@@ -1,0 +1,23 @@
+.pencil-edit {
+    margin-top: -70px;
+}
+
+.edit-numbermonth {
+    font-size: 9px;
+    width: 3.8rem;
+}
+
+.imagedollar {
+    width: 14px;
+}
+
+.button-link {
+    color: rgb(32, 140, 249);
+    font-weight: 500;
+}
+
+.button-link:hover {
+    border-bottom: rgb(32, 140, 249) 3px solid;
+    background-color: rgb(242, 242, 242);
+    border-radius: 3px;
+}
