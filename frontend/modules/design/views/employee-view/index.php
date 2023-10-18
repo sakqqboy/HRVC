@@ -536,58 +536,179 @@ $this->title = 'view';
                                 </div> -->
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-12">
-                                        <div class="col-12 pl-20 font-size-17 pt-60">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/certificate.png" class="img-ertificate"> Licenses & certifications
-                                        </div>
-                                        <hr>
-                                        <div class="row pl-10">
-                                            <div class="col-lg-4 col-md-3 col-3 pt-20 pl-20">
-                                                <img src="<?= Yii::$app->homeUrl ?>image/pngaaa.png" class="img-thumbnail">
+                                        <div class="col-12 pl-20 font-size-17 pt-20">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="col-12">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/certificate.png" class="img-ertificate"><span class="font-size-13"> Licenses & certifications</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 pt-5">
+                                                    <div class="col-12 font-size-13 text-end Remove">
+                                                        <i class="fa fa-plus-square-o" aria-hidden="true"></i> Remove
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 pt-5">
+                                                    <div class="col-12 font-size-13 text-end Add">
+                                                        <i class="fa fa-plus-square-o" aria-hidden="true"></i> Add
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-lg-5 col-md-5 col-5 pt-20">
-                                                <strong class="font-size-12"> Certified Internal Auditor</strong>
-                                                <div class="textweight"> The Institute of Internal Auditor</div>
-                                                <div class="textweight">Issued Nov 2023 . Expires Nov 2025 </div>
-                                                <div class="alert alert-light Show-Credentials"> Show Credentials &nbsp; <i class="fa fa-external-link" aria-hidden="true"></i></div>
+                                            <hr>
+                                            <div class="row pl-10">
+                                                <div class="col-lg-4 col-md-3 col-3 pt-20 pl-20">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/pngaaa.png" class="img-thumbnail">
+                                                </div>
+                                                <div class="col-lg-5 col-md-5 col-5 pt-20">
+                                                    <strong class="font-size-12"> Certified Internal Auditor</strong>
+                                                    <div class="textweight"> The Institute of Internal Auditor</div>
+                                                    <div class="textweight">Issued Nov 2023 . Expires Nov 2025 </div>
+                                                    <div class="alert alert-light Show-Credentials"> Show Credentials &nbsp; <i class="fa fa-external-link" aria-hidden="true"></i></div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4 col-4">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/Sample.png" class="image-Sample">
+                                                </div>
                                             </div>
-                                            <div class="col-lg-3 col-md-4 col-4">
-                                                <img src="<?= Yii::$app->homeUrl ?>image/Sample.png" class="image-Sample">
+                                            <hr>
+                                            <div class="row pl-10">
+                                                <div class="col-lg-4 col-md-3 col-3 pt-20 pl-20">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/google.png" class="img-thumbnail">
+                                                </div>
+                                                <div class=" col-lg-5 col-md-5 col-5 pt-20">
+                                                    <strong class="font-size-12"> Python Specialist </strong>
+                                                    <div class="textweight"> Google</div>
+                                                    <div class="textweight">Issued Nov 2023 . No Expire </div>
+                                                    <div class="alert alert-light Show-Credentials"> Show Credentials &nbsp; <i class="fa fa-external-link" aria-hidden="true"></i></div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4 col-4">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/search-google.png" class="image-Sample">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <hr>
-                                        <div class="row pl-10">
-                                            <div class="col-lg-4 col-md-3 col-3 pt-20 pl-20">
-                                                <img src="<?= Yii::$app->homeUrl ?>image/google.png" class="img-thumbnail">
-                                            </div>
-                                            <div class=" col-lg-5 col-md-5 col-5 pt-20">
-                                                <strong class="font-size-12"> Python Specialist </strong>
-                                                <div class="textweight"> Google</div>
-                                                <div class="textweight">Issued Nov 2023 . No Expire </div>
-                                                <div class="alert alert-light Show-Credentials"> Show Credentials &nbsp; <i class="fa fa-external-link" aria-hidden="true"></i></div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-4">
-                                                <img src="<?= Yii::$app->homeUrl ?>image/search-google.png" class="image-Sample">
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="row pl-10">
-                                            <div class="col-lg-4 col-md-3 col-3 pt-20 pl-20">
-                                                <img src="<?= Yii::$app->homeUrl ?>image/lghrvc1.png" class="img-thumbnail">
-                                            </div>
-                                            <div class=" col-lg-5 col-md-5 col-5 pt-20">
-                                                <strong class="font-size-12"> 延喜式掃除名人</strong>
-                                                <div class="textweight"> The Institute of Internal Auditor</div>
-                                                <div class="textweight">Issued Nov 2023 . Expires Nov 2025 </div>
-                                                <div class="alert alert-light Show-Credentials"> Show Credentials &nbsp; <i class="fa fa-external-link" aria-hidden="true"></i></div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-4">
-                                                <img src="<?= Yii::$app->homeUrl ?>image/食品衛生者養成講習会.png" class="image-Sample">
+                                            <hr>
+                                            <div class="row pl-10">
+                                                <div class="col-lg-4 col-md-3 col-3 pt-20 pl-20">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/lghrvc1.png" class="img-thumbnail">
+                                                </div>
+                                                <div class=" col-lg-5 col-md-5 col-5 pt-20">
+                                                    <strong class="font-size-12"> 延喜式掃除名人</strong>
+                                                    <div class="textweight"> The Institute of Internal Auditor</div>
+                                                    <div class="textweight">Issued Nov 2023 . Expires Nov 2025 </div>
+                                                    <div class="alert alert-light Show-Credentials"> Show Credentials &nbsp; <i class="fa fa-external-link" aria-hidden="true"></i></div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4 col-4">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/食品衛生者養成講習会.png" class="image-Sample">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-12 form-pdf">
-                                        <div class="col-12">
-                                            <div class="myIframe">
+                                    <div class="col-lg-6 col-md-6 col-12 pt-22">
+                                        <div class="row">
+                                            <div class="col-lg-7">
+                                                <div class="col-12 font-size-13">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/certificate.png" class="img-ertificate"> Skills
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <div class="col-12">
+                                                    <span class="dropdown font-size-13 Add pl-80" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> Add <i class="fa fa-plus-square-o" aria-hidden="true"></i> </span>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                        <li>
+                                                            <a class="dropdown-item" type="button"> Add</a>
+                                                        </li>
+                                                        <li>
+                                                            <hr class="dropdown-divider">
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item" type="button"> Create New</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="col-12 font-size-13 pt-15">
+                                            <strong> Verbal Communication</strong>
+                                        </div>
+                                        <div class="row pl-10">
+                                            <div class="col-lg-4 pt-20">
+                                                <div class="col-12">
+                                                    <span class="badge rounded-pill bg verb-background">Verbal Communication</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 pt-20 text-center">
+                                                <div class="col-12">
+                                                    <span class="badge rounded-pill bg verb-background">Active Listening</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 pt-20">
+                                                <div class="col-12">
+                                                    <span class="badge rounded-pill bg verb-background">Active Listening</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 pt-20">
+                                                <div class="col-12">
+                                                    <span class="badge rounded-pill bg verb-background">Public Speaking</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 font-size-13 pt-15">
+                                            <strong>Interpersonal Communication</strong>
+                                        </div>
+                                        <div class="row pl-10">
+                                            <div class="col-lg-4 pt-20">
+                                                <div class="col-12">
+                                                    <span class="badge rounded-pill bg verb-background">Relationship Building</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 pt-20 text-center">
+                                                <div class="col-12">
+                                                    <span class="badge rounded-pill bg verb-background">Conflict Resolution</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 pt-20">
+                                                <div class="col-12">
+                                                    <span class="badge rounded-pill bg verb-background">Networking</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 font-size-13 pt-15">
+                                            <strong> Strategic Leadership</strong>
+                                        </div>
+                                        <div class="row pl-10">
+                                            <div class="col-lg-4 pt-20">
+                                                <div class="col-12">
+                                                    <span class="badge rounded-pill bg verb-background">Visionary Thinking</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5 pt-20 text-center">
+                                                <div class="col-12">
+                                                    <span class="badge rounded-pill bg verb-background">Decision Making</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 pt-20">
+                                                <div class="col-12">
+                                                    <span class="badge rounded-pill bg verb-background">Change Management</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 font-size-13 pt-15">
+                                            <strong> Team Leadership</strong>
+                                        </div>
+                                        <div class="row pl-10">
+                                            <div class="col-lg-3 pt-20">
+                                                <div class="col-12">
+                                                    <span class="badge rounded-pill bg verb-background">Team Building</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 pt-20 text-center">
+                                                <div class="col-12">
+                                                    <span class="badge rounded-pill bg verb-background">Delegation</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 pt-20">
+                                                <div class="col-12">
+                                                    <span class="badge rounded-pill bg verb-background">Motivation</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -599,4 +720,3 @@ $this->title = 'view';
             </div>
         </div>
     </div>
-</div>

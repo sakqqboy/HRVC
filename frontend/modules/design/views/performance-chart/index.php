@@ -30,10 +30,10 @@ $this->title = 'Performance Chart';
                 <div class="col-lg-8 col-12 text-end">
                     <button type="button" class="btn btn-light Data" data-bs-toggle="modal" data-bs-target="#DataDistionary"><i class="fa fa-info-circle" aria-hidden="true"></i> Data Dictionary</button>
                     <div class="btn-group" role="group" aria-label="Basic outlined example">
-                        <button type="button" class="btn btn-outline-secondary"><i class="fa fa-bar-chart" aria-hidden="true"></i></button>
-                        <button type="button" class="btn btn-outline-secondary">Performance Chart</button>
-                        <button type="button" class="btn btn-outline-secondary">IPL Analysis</button>
-                        <button type="button" class="btn btn-outline-secondary">PLF Overview</button>
+                        <button type="button" class="btn btn-outline-secondary font-size-12"><i class="fa fa-bar-chart" aria-hidden="true"></i></button>
+                        <button type="button" class="btn btn-outline-secondary font-size-12">Performance Chart</button>
+                        <button type="button" class="btn btn-outline-secondary font-size-12">IPL Analysis</button>
+                        <button type="button" class="btn btn-outline-secondary font-size-12">PLF Overview</button>
                     </div>
                 </div>
             </div>
@@ -94,35 +94,36 @@ $this->title = 'Performance Chart';
             <div class="col-12 mt-30">
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
-                <div class="col-12 text-center">
+                <div class="col-12 text-center font-size-18">
                     <strong>PLF 3-Years Performance Chart</strong>
                 </div>
 
                 <body>
                     <canvas id="myChart" style="width:100%;max-width:100%"></canvas>
-
                     <script>
-                        const xValues = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
+                        const xValues = ["Jan", "Feb", "Mar", "Apr", "Jun", "Jul", "Aug", "May", "Sep", "Oct", "Nov", "Dec"];
+                        const yValues = [7, 8, 8, 9, 9, 9, 10, 11, 14, 14, 15];
+
 
                         new Chart("myChart", {
                             type: "line",
                             data: {
                                 labels: xValues,
                                 datasets: [{
-                                    data: [860, 1140, 1060, 1060, 1070, 1110, 1330, 2210, 7830, 2478],
+                                    data: [700000, 750000, 800000, 750000, 740000, 750000, 800000, 850000, 1000000, 1200000, 1400000, 1500000],
+                                    borderColor: "rgb(227, 175, 3)",
+                                    fill: false
+                                }, {
+                                    data: [1100000, 1000000, 1200000, 1200000, 1310000, 1350000, 1250000, 1450000, 1490000, 1520000, 1550000, 1570000],
+                                    borderColor: "#3430FF",
+                                    fill: false
+                                }, {
+                                    data: [500000, 550000, 540000, 530000, 600000, 540000, 520000, 520000, 540000, 690000, 800000, 1000000],
                                     borderColor: "rgb(21, 121, 215)",
                                     fill: false
                                 }, {
-                                    data: [1600, 1700, 1700, 1900, 2000, 2700, 4000, 5000, 6000, 7000],
+                                    data: [100000, 150000, 240000, 240000, 300000, 240000, 290000, 290000, 290000, 280000, 270000, 260000, 250000],
                                     borderColor: "green",
-                                    fill: false
-                                }, {
-                                    data: [300, 700, 2000, 5000, 6000, 4000, 2000, 1000, 200, 100],
-                                    borderColor: "blue",
-                                    fill: false
-                                }, {
-                                    data: [400, 200, 1000, 6000, 6000, 1000, 2000, 3000, 100, 500],
-                                    borderColor: "rgb(227, 175, 3)",
                                     fill: false
                                 }]
                             },
@@ -133,7 +134,6 @@ $this->title = 'Performance Chart';
                             }
                         });
                     </script>
-
             </div>
         </div>
     </div>
