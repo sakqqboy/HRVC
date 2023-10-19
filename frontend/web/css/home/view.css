@@ -244,6 +244,21 @@
     cursor: pointer;
 }
 
+.purpose {
+    font-weight: 500;
+}
+
+.details-purpose {
+    font-size: 13px;
+}
+
+.details-purpose1 {
+    font-size: 13px;
+    list-style-position: inside;
+    margin-left: -28px;
+}
+
+
 
 @media(max-width:992px) {
     .box-shareprofile {

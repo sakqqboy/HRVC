@@ -99,19 +99,20 @@ $this->title = 'Performance Chart';
                 </div>
 
                 <body>
-                    <canvas id="myChart" style="width:100%;max-width:100%"></canvas>
+                    <canvas id="mylineChart" style="width:100%;max-width:100%"></canvas>
                     <script>
-                        const xValues = ["Jan", "Feb", "Mar", "Apr", "Jun", "Jul", "Aug", "May", "Sep", "Oct", "Nov", "Dec"];
-                        const yValues = [7, 8, 8, 9, 9, 9, 10, 11, 14, 14, 15];
+                        const xValues = [950000, 1000000, 110000, 1200000, 1300000, 1400000, 1500000, 1600000, 1700000, 1800000, 1900000, 2000000];
+                        const yValues = ["Jan", "Feb", "Mar", "Apr", "Jun", "Jul", "Aug", "May", "Sep", "Oct", "Nov", "Dec"];
 
-
-                        new Chart("myChart", {
+                        new Chart("mylineChart", {
                             type: "line",
                             data: {
                                 labels: xValues,
+                                labels: yValues,
                                 datasets: [{
                                     data: [700000, 750000, 800000, 750000, 740000, 750000, 800000, 850000, 1000000, 1200000, 1400000, 1500000],
                                     borderColor: "rgb(227, 175, 3)",
+
                                     fill: false
                                 }, {
                                     data: [1100000, 1000000, 1200000, 1200000, 1310000, 1350000, 1250000, 1450000, 1490000, 1520000, 1550000, 1570000],
@@ -134,6 +135,195 @@ $this->title = 'Performance Chart';
                             }
                         });
                     </script>
+                </body>
+            </div>
+            <div class="col-12 mt-30">
+                <div class="alert  light-shadow-2" role="alert">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="alert light-shadow-3">
+                                <div class="row">
+                                    <div class="col-10 font-size-12">
+                                        <strong> Variable Expense</strong>
+                                    </div>
+                                    <div class="col-2">
+                                        <div>
+                                            <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card" style="border:none;">
+                                <div class="row font-size-12">
+                                    <div class="col-7 pl-20">
+                                        Actual
+                                    </div>
+                                    <div class="col-5">
+                                        <div class="slidecontainer">
+                                            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                                        </div>
+                                    </div>
+                                    <div class="col-7 pl-20">
+                                        Forecasted
+                                    </div>
+                                    <div class="col-5">
+                                        fjhtjkokg
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="alert light-shadow-3">
+                                <div class="row">
+                                    <div class="col-10 font-size-12">
+                                        <strong> Gross Profit</strong>
+                                    </div>
+                                    <div class="col-2">
+                                        <div>
+                                            <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card" style="border:none;">
+                                <div class="row font-size-12">
+                                    <div class="col-7 pl-20">
+                                        Actual
+                                    </div>
+                                    <div class="col-5">
+                                        yjhut7u
+                                    </div>
+                                    <div class="col-7 pl-20">
+                                        Forecasted
+                                    </div>
+                                    <div class="col-5">
+                                        yjhut7u
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="alert light-shadow-3">
+                                <div class="row">
+                                    <div class="col-10 font-size-12">
+                                        <strong> Labor Cost</strong>
+                                    </div>
+                                    <div class="col-2">
+                                        <div>
+                                            <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card" style="border:none;">
+                                <div class="row font-size-12">
+                                    <div class="col-7 pl-20">
+                                        Actual
+                                    </div>
+                                    <div class="col-5">
+                                        yjhut7u
+                                    </div>
+                                    <div class="col-7 pl-20">
+                                        Forecasted
+                                    </div>
+                                    <div class="col-5">
+                                        yjhut7u
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="alert light-shadow-3">
+                                <div class="row">
+                                    <div class="col-10 font-size-12">
+                                        <strong> Fixed Expense....</strong>
+                                    </div>
+                                    <div class="col-2">
+                                        <div>
+                                            <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card" style="border:none;">
+                                <div class="row font-size-12">
+                                    <div class="col-7 pl-20">
+                                        Actual
+                                    </div>
+                                    <div class="col-5">
+                                        yjhut7u
+                                    </div>
+                                    <div class="col-7 pl-20">
+                                        Forecasted
+                                    </div>
+                                    <div class="col-5">
+                                        yjhut7u
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="alert light-shadow-3">
+                                <div class="row">
+                                    <div class="col-10 font-size-12">
+                                        <strong> Non-Operating</strong>
+                                    </div>
+                                    <div class="col-2">
+                                        <div>
+                                            <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card" style="border:none;">
+                                <div class="row font-size-12">
+                                    <div class="col-7 pl-20">
+                                        Actual
+                                    </div>
+                                    <div class="col-5">
+                                        yjhut7u
+                                    </div>
+                                    <div class="col-7 pl-20">
+                                        Forecasted
+                                    </div>
+                                    <div class="col-5">
+                                        yjhut7u
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="alert light-shadow-3">
+                                <div class="row">
+                                    <div class="col-10 font-size-12">
+                                        <strong> Operating Profit</strong>
+                                    </div>
+                                    <div class="col-2">
+                                        <div>
+                                            <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card" style="border:none;">
+                                <div class="row font-size-12">
+                                    <div class="col-7 pl-20">
+                                        Actual
+                                    </div>
+                                    <div class="col-5">
+                                        yjhut7u
+                                    </div>
+                                    <div class="col-7 pl-20">
+                                        Forecasted
+                                    </div>
+                                    <div class="col-5">
+                                        yjhut7u
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

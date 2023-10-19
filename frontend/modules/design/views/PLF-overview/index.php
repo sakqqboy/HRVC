@@ -61,30 +61,30 @@ $this->title = 'PLF Overview';
                 </div>
             </div>
             <div class="col-12 text-primary">
-                <i class="fa fa-chevron-left" aria-hidden="true"></i> Data Table
+                <a href="" class="linedatatable"> <i class="fa fa-chevron-left" aria-hidden="true"></i> Data Table</a>
             </div>
             <div class="col-12 text-center">
                 <strong> Annual Comparison Chart</strong>
             </div>
             <div class="row">
-                <div class="col-lg-1 mt-30">
+                <div class="col-lg-1 mt-60">
                     <div class="col-6 text-center">
                         <img src="<?= Yii::$app->homeUrl ?>image/network.png">
                     </div>
                     <div class="col-12 mt-5">
                         <span class="badge bg-primary">AAR</span>
                     </div>
-                    <div class="col-12 mt-5">
+                    <div class="col-12 mt-20">
                         <span class="badge bg-success">AAR</span>
                     </div>
-                    <div class="col-12 mt-5">
+                    <div class="col-12 mt-20">
                         <span class="badge bg-warning text-dark">ATR</span>
                     </div>
-                    <div class="col-12 mt-5">
+                    <div class="col-12 mt-20">
                         <span class="badge bg-primary">ATR</span>
                     </div>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-5">
                     <div class="shadow p-3 mb-5 bg-body rounded mt-40">
                         <div class="col-12 badge bg light-shadow text-dark text-start">
                             Sales
@@ -95,50 +95,50 @@ $this->title = 'PLF Overview';
                             </div>
                             <div class="col-lg-7 pt-5">
                                 <div class="progress progress-thin" style="height: 10px;">
-                                    <div class="progress-bar bg-bar-background-1" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-bar-background-1" role="progressbar" style="width: 26%" aria-valuenow="26" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                             <div class="col-lg-2 font-size-12">
-                                75%
+                                26%
                             </div>
                             <div class="col-lg-3 font-size-12">
                                 2023
                             </div>
                             <div class="col-lg-7 pt-5">
                                 <div class="progress progress-thin" style="height: 10px;">
-                                    <div class="progress-bar bg-bar-background-2" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-bar-background-2" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                             <div class="col-lg-2 font-size-12">
-                                65%
+                                100%
                             </div>
                             <div class="col-lg-3 font-size-12">
                                 2023 <span class="badge bg-primary font-size-10">C</span>
                             </div>
                             <div class="col-lg-7 pt-5">
                                 <div class="progress progress-thin" style="height: 10px;">
-                                    <div class="progress-bar bg-bar-background-3" role="progressbar" style="width: 43%" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-bar-background-3" role="progressbar" style="width: 82%" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                             <div class="col-lg-2 font-size-12">
-                                43%
+                                82%
                             </div>
                             <div class="col-lg-3 font-size-12">
                                 2024
                             </div>
                             <div class="col-lg-7 pt-5">
                                 <div class="progress progress-thin" style="height: 10px;">
-                                    <div class="progress-bar bg-bar-background-4" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-bar-background-4" role="progressbar" style="width: 93%" aria-valuenow="93" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                             <div class="col-lg-2 font-size-12">
-                                100%
+                                93%
                             </div>
                             <hr>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-5">
                     <div class="shadow p-3  mb-5  bg-body rounded mt-40">
                         <div class="col-12 badge bg light-shadow text-dark text-start">
                             Sales
@@ -192,7 +192,80 @@ $this->title = 'PLF Overview';
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3">
+            </div>
+            <div class="row">
+                <div class="col-lg-1 mt-60">
+                    <div class="col-6 text-center">
+                        <img src="<?= Yii::$app->homeUrl ?>image/network.png">
+                    </div>
+                    <div class="col-12 mt-5">
+                        <span class="badge bg-primary">AAR</span>
+                    </div>
+                    <div class="col-12 mt-20">
+                        <span class="badge bg-success">AAR</span>
+                    </div>
+                    <div class="col-12 mt-20">
+                        <span class="badge bg-warning text-dark">ATR</span>
+                    </div>
+                    <div class="col-12 mt-20">
+                        <span class="badge bg-primary">ATR</span>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="shadow p-3 mb-5 bg-body rounded mt-40">
+                        <div class="col-12 badge bg light-shadow text-dark text-start">
+                            Sales
+                        </div>
+                        <div class="row mt-10">
+                            <div class="col-lg-3 font-size-12">
+                                2022
+                            </div>
+                            <div class="col-lg-7 pt-5">
+                                <div class="progress progress-thin" style="height: 10px;">
+                                    <div class="progress-bar bg-bar-background-1" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 font-size-12">
+                                75%
+                            </div>
+                            <div class="col-lg-3 font-size-12">
+                                2023
+                            </div>
+                            <div class="col-lg-7 pt-5">
+                                <div class="progress progress-thin" style="height: 10px;">
+                                    <div class="progress-bar bg-bar-background-2" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 font-size-12">
+                                65%
+                            </div>
+                            <div class="col-lg-3 font-size-12">
+                                2023 <span class="badge bg-primary font-size-10">C</span>
+                            </div>
+                            <div class="col-lg-7 pt-5">
+                                <div class="progress progress-thin" style="height: 10px;">
+                                    <div class="progress-bar bg-bar-background-3" role="progressbar" style="width: 43%" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 font-size-12">
+                                43%
+                            </div>
+                            <div class="col-lg-3 font-size-12">
+                                2024
+                            </div>
+                            <div class="col-lg-7 pt-5">
+                                <div class="progress progress-thin" style="height: 10px;">
+                                    <div class="progress-bar bg-bar-background-4" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 font-size-12">
+                                100%
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
                     <div class="shadow p-3  mb-5  bg-body rounded mt-40">
                         <div class="col-12 badge bg light-shadow text-dark text-start">
                             Sales
