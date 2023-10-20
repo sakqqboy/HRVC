@@ -95,7 +95,7 @@ $this->title = 'Performance Chart';
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
                 <div class="col-12 text-center font-size-18">
-                    <strong>PLF 3-Years Performance Chart</strong>
+                    <strong> PLF 3-Years Performance Chart</strong>
                 </div>
 
                 <body>
@@ -191,7 +191,9 @@ $this->title = 'Performance Chart';
                                         Actual
                                     </div>
                                     <div class="col-5">
-                                        yjhut7u
+                                        <div class="chrome">
+                                            <input id="myinput" min="0" max="60" type="range" value="30" />
+                                        </div>
                                     </div>
                                     <div class="col-7 pl-20">
                                         Forecasted
@@ -251,7 +253,7 @@ $this->title = 'Performance Chart';
                                         Actual
                                     </div>
                                     <div class="col-5">
-                                        yjhut7u
+                                        jiytjuygj
                                     </div>
                                     <div class="col-7 pl-20">
                                         Forecasted

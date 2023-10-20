@@ -508,6 +508,99 @@ $this->title = 'view';
                                     </div>
                                 </div>
                             </div>
+                            <div class="tab-pane fade" id="v-pills-Jobdescription" role="tabpanel" aria-labelledby="v-pills-Jobdescription-tab">
+                                <div class="col-12 pt-20 pl-20">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/certificate.png" class="img-ertificate"><span class="font-size-13"> Job Description </span>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-lg-6 pl-20 pt-10">
+                                        <div class="col-12 purpose">
+                                            Purpose of the Job
+                                        </div>
+                                        <div class="col-12 pt-10  details-purpose">
+                                            The purpose of this role is to support the General Manager in driving the sales and marketing
+                                            activities within the dynamic market of Bangladesh. The key focus areas encompass fostering
+                                            and nurturing robust relationships with factories, industrial parks, general contractors,
+                                            and engineering companies. The role necessitates diligent collection of vital information
+                                            from a diverse range of stakeholders, including customers and relevant governmental authorities
+                                        </div>
+                                        <div class="col-12 pt-10 purpose">
+                                            Core Responsibility
+                                        </div>
+                                        <div class="col-12 pt-10 details-purpose1">
+                                            <ol>
+                                                <li>
+                                                    Support the general manager in sales & and marketing activities in Bangladesh, especially in creating a good relationship with factories, industrial parks, general contractors, and engineering companies.
+                                                </li>
+                                                <li>
+                                                    Collect the necessary information from customers (factories, industrial parks, general contractors), and national government/local government/related authorities.
+                                                </li>
+                                                <li>
+                                                    Prepare the necessary application and get approval from the concerned authorities.
+                                                </li>
+                                                <li>
+                                                    Control documentary and filing system for the sales department
+                                                </li>
+                                                <li>
+                                                    Prepare estimations, contracts, and reports.
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 pt-10">
+                                        <div class="col-12 purpose">
+                                            Key Responsibility
+                                        </div>
+                                        <div class="col-12 details-purpose pt-10">
+                                            <ul>
+                                                <li>
+                                                    Maintain existing customers and expand new customers (concentrate in National/Local Public projects)
+                                                </li>
+                                                <li>
+                                                    Prepare visit plans and visit report.
+                                                </li>
+                                                <li>
+                                                    Approach & present information to customers about the company’s products and services.
+                                                </li>
+                                                <li>
+                                                    Prepare and submit quotation to customer.
+                                                </li>
+                                                <li>
+                                                    Maintain and create relationships with customers.
+                                                </li>
+                                                <li>
+                                                    Survey market and report to General Manager.
+                                                </li>
+                                                <li>
+                                                    Maintain gross profit as assigned.
+                                                </li>
+                                                <li>
+                                                    Negotiate with customers on price and service to achieve gross profit.
+                                                </li>
+                                                <li>
+                                                    Take good care of customers.
+                                                </li>
+                                                <li>
+                                                    Response to customer complaints and comments.
+                                                </li>
+                                                <li>
+                                                    Keep on time appointments.
+                                                </li>
+                                                <li>
+                                                    Coordinate and communicate correct customer’s inquiry to engineering department.
+                                                </li>
+                                                <li>
+                                                    Initiative and improve own work process and cross functional with other section to achieve company objectives.
+                                                </li>
+                                                <li>
+                                                    Performing the jobs assigned by superior.
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="tab-pane fade" id="v-pills-skill" role="tabpanel" aria-labelledby="v-pills-skill-tab">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-12">
@@ -587,13 +680,13 @@ $this->title = 'view';
                                                 <div class="col-12">
                                                     <span class="dropdown font-size-13 Add pl-80" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> Add <i class="fa fa-plus-square-o" aria-hidden="true"></i> </span>
                                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                        <li>
+                                                        <li data-bs-toggle="modal" data-bs-target="#staticAddDetails">
                                                             <a class="dropdown-item" type="button"> Add</a>
                                                         </li>
                                                         <li>
                                                             <hr class="dropdown-divider">
                                                         </li>
-                                                        <li>
+                                                        <li data>
                                                             <a class="dropdown-item" type="button"> Create New</a>
                                                         </li>
                                                     </ul>
@@ -689,102 +782,99 @@ $this->title = 'view';
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="v-pills-Jobdescription" role="tabpanel" aria-labelledby="v-pills-Jobdescription-tab">
-                                <div class="col-12 pt-20 pl-20">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/certificate.png" class="img-ertificate"><span class="font-size-13"> Job Description </span>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-lg-6 pl-20 pt-10">
-                                        <div class="col-12 purpose">
-                                            Purpose of the Job
-                                        </div>
-                                        <div class="col-12 pt-10  details-purpose">
-                                            The purpose of this role is to support the General Manager in driving the sales and marketing
-                                            activities within the dynamic market of Bangladesh. The key focus areas encompass fostering
-                                            and nurturing robust relationships with factories, industrial parks, general contractors,
-                                            and engineering companies. The role necessitates diligent collection of vital information
-                                            from a diverse range of stakeholders, including customers and relevant governmental authorities
-                                        </div>
-                                        <div class="col-12 pt-10 purpose">
-                                            Core Responsibility
-                                        </div>
-                                        <div class="col-12 pt-10 details-purpose1">
-                                            <ol>
-                                                <li>
-                                                    Support the general manager in sales & and marketing activities in Bangladesh, especially in creating a good relationship with factories, industrial parks, general contractors, and engineering companies.
-                                                </li>
-                                                <li>
-                                                    Collect the necessary information from customers (factories, industrial parks, general contractors), and national government/local government/related authorities.
-                                                </li>
-                                                <li>
-                                                    Prepare the necessary application and get approval from the concerned authorities.
-                                                </li>
-                                                <li>
-                                                    Control documentary and filing system for the sales department
-                                                </li>
-                                                <li>
-                                                    Prepare estimations, contracts, and reports.
-                                                </li>
-                                            </ol>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 pt-10">
-                                        <div class="col-12 purpose">
-                                            Key Responsibility
-                                        </div>
-                                        <div class="col-12 details-purpose pt-10">
-                                            <ul>
-                                                <li>
-                                                    Maintain existing customers and expand new customers (concentrate in National/Local Public projects)
-                                                </li>
-                                                <li>
-                                                    Prepare visit plans and visit report.
-                                                </li>
-                                                <li>
-                                                    Approach & present information to customers about the company’s products and services.
-                                                </li>
-                                                <li>
-                                                    Prepare and submit quotation to customer.
-                                                </li>
-                                                <li>
-                                                    Maintain and create relationships with customers.
-                                                </li>
-                                                <li>
-                                                    Survey market and report to General Manager.
-                                                </li>
-                                                <li>
-                                                    Maintain gross profit as assigned.
-                                                </li>
-                                                <li>
-                                                    Negotiate with customers on price and service to achieve gross profit.
-                                                </li>
-                                                <li>
-                                                    Take good care of customers.
-                                                </li>
-                                                <li>
-                                                    Response to customer complaints and comments.
-                                                </li>
-                                                <li>
-                                                    Keep on time appointments.
-                                                </li>
-                                                <li>
-                                                    Coordinate and communicate correct customer’s inquiry to engineering department.
-                                                </li>
-                                                <li>
-                                                    Initiative and improve own work process and cross functional with other section to achieve company objectives.
-                                                </li>
-                                                <li>
-                                                    Performing the jobs assigned by superior.
-                                                </li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                                            </ul>
-                                        </div>
+
+
+    <!-- modal add/create -->
+
+    <div class="modal fade" id="staticAddDetails" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="container">
+                    <div id="staticBackdropLabel">
+                        <div class="col-12 mt-10  Add-Certificate">
+                            <i class="fa fa-magic" aria-hidden="true"></i> Add Certificate
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="col-12 mb-3 pt-10">
+                                <label for="exampleFormControlInput1" class="form-label font-size-14 fn-w"><span class="text-danger">*</span> Name</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="col-12 mb-3 mt-10">
+                                <label for="exampleFormControlInput1" class="form-label font-size-14 fn-w"><span class="text-danger">*</span> Issuing Organization</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="col-12 URL">
+                                <label for="exampleFormControlInput1" class="form-label font-size-14 fn-w"> Credential URL</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="col-12 mt-80 pl-50">
+                                <div class="dashed acceptable">
+                                    <div class="accep-choose">
+                                        <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                        <p class="font-size-12"> Upload Company Photo</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 text-center pt-5 font-size-14">
+                                <div class="col-12">Acceptable file types: <strong>JPEG, PNG,</strong></div>
+                                <div class="col-12">Maximum file Size: 1 MB</div>
+                            </div>
+                            <div class="col-12 mt-20">
+                                <label for="exampleFormControlInput1" class="form-label font-size-14 fn-w"><span class="text-danger">*</span> Issue & Expiary Date</label>
+                                <input type="date" class="form-control" id="">
+                            </div>
+                            <div class="col-12 mt-15">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="">
+                                    <label class="form-check-label text-secondary" for="flexCheckDefault"> license has no Expiry</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-20"></div>
+                        <hr>
+                        <div class="col-12">
+                            <strong>Evidence Panel</strong>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="col-12 mt-15">
+                                Attachments
+                            </div>
+                            <div class="dashed">
+                                <div class="row">
+                                    <div class="col-lg-2 col-md-6 col-12 pt-20">
+                                        <label for="files" class="btn choosefile">File</label>
+                                        <input id="files" style="display:none;" type="file">
+                                    </div>
+                                    <div class="col-lg-5 col-md-6 col-12 pt-20">
+                                        <label for="name">Upload Resume</label>
+                                        <div class="text-secondary font-size-13">Supported Files <span class="text-dark font-size-10">-.pdf, .doc, .docx</span></div>
+                                        <div class="text-secondary font-size-13">Maximum File Size 5 MB</div>
+                                    </div>
+                                    <div class="col-lg-1 col-md-6 col-12 show2"></div>
+                                    <div class="col-lg-4 col-md-6 col-12 pt-30">
+                                        <button type="button" class="btn btn-info text-white"> Upload</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="modal-footer col-12 text-end" style="border: none;">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
                 </div>
             </div>
         </div>

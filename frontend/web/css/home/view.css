@@ -258,6 +258,32 @@
     margin-left: -28px;
 }
 
+.Add-Certificate {
+    font-weight: 600;
+    color: #1e97de;
+}
+
+.fn-w {
+    font-weight: 600;
+}
+
+.acceptable {
+    border-style: dashed;
+    border-radius: 7px;
+    height: 170px;
+    color: black;
+    width: 210px;
+}
+
+.accep-choose {
+    text-align: center;
+    font-size: 40px;
+    padding-top: 40px;
+}
+
+.URL {
+    padding-top: 110px;
+}
 
 
 @media(max-width:992px) {
