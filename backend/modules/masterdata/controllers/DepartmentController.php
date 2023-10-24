@@ -36,6 +36,18 @@ class DepartmentController extends Controller
 		//throw  new Exception(print_r($department, true));
 		return json_encode($department);
 	}
+	public function actionDepartmentDetail($id)
+	{
+
+		$department = [];
+		$department = Department::find()
+			->where(["departmentId" => $id])
+			->asArray()
+			->orderBy('departmentName')
+			->one();
+		//throw  new Exception(print_r($department, true));
+		return json_encode($department);
+	}
 	public function actionBranchDepartment($id)
 	{
 		$department = [];
@@ -43,6 +55,23 @@ class DepartmentController extends Controller
 			->where(["status" => 1, "branchId" => $id])
 			->asArray()
 			->orderBy('departmentName')
+			->all();
+		return json_encode($department);
+	}
+	public function actionBranchDepartmentFilter($branchId, $companyId)
+	{
+		$department = [];
+		$department = Department::find()
+			->select('department.*')
+			->JOIN("LEFT JOIN", "branch b", "b.branchId=department.branchId")
+			->JOIN("LEFT JOIN", "company c", "c.companyId=b.companyId")
+			->where(["department.status" => 1])
+			->andFilterWhere([
+				"department.branchId" => $branchId,
+				"b.companyId" => $companyId
+			])
+			->asArray()
+			->orderBy('department.departmentName')
 			->all();
 		return json_encode($department);
 	}

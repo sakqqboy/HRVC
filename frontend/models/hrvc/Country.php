@@ -47,6 +47,10 @@ class Country extends \frontend\models\hrvc\master\CountryMaster
     {
         $country = Country::find()->select('countryName')
             ->where(["countryId" => $countryId])->asArray()->one();
-        return $country["countryName"];
+        if (isset($country) && !empty($country)) {
+            return $country["countryName"];
+        } else {
+            return "";
+        }
     }
 }

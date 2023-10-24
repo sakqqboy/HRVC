@@ -373,4 +373,15 @@ class ModelMaster extends \yii\db\ActiveRecord
         }
         return $month;
     }
+    public static function isOverDuedate($dueDate)
+    {
+        $today = date('Y-m-d');
+        $now = strtotime($today);
+        $due = strtotime($dueDate);
+        if ($now > $due) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }

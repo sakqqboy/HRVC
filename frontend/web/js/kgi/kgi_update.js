@@ -30,7 +30,7 @@ function checkAllBranchUpdate() {
 	//alert(sumBranch);
 	if ($("#check-all-branch-update").prop("checked") == true) {
 		var i = 1;
-		$('input[id="multi-check-update"').each(function () {
+		$('input[id="multi-check-update"]').each(function () {
 			if (i < sumBranch) {
 				$(this).prop("checked", true);
 			} else { 
@@ -40,7 +40,7 @@ function checkAllBranchUpdate() {
 		});
 	} else { 
 		var i = 1;
-		$('input[id="multi-check-update"').each(function () {
+		$('input[id="multi-check-update"]').each(function () {
 			if (i != sumBranch) {
 				$(this).prop("checked", false);
 			} else {
@@ -85,7 +85,7 @@ function totalBranchUpdate() {
 	var totalBranch = 0;
 	var data = [];
 	var i = 0;
-	$('input[id="multi-check-update"').each(function () {
+	$('input[id="multi-check-update"]').each(function () {
 		data[i] = $(this).val();
 		i++;
 	});
@@ -96,7 +96,7 @@ function allDepartmentUpdate(branchId) {
 	var sumDepartment = totalDepartmentUpdate(branchId);
 	if ($("#multi-check-all-"+branchId+"-update").prop("checked") == true) {
 		var i = 1;
-		$('input[id="multi-check-' + branchId + '-update"').each(function () {
+		$('input[id="multi-check-' + branchId + '-update"]').each(function () {
 			if (i < sumDepartment) {
 				$(this).prop("checked", true);
 			} else {
@@ -108,7 +108,7 @@ function allDepartmentUpdate(branchId) {
 	} else { 
 		var i = 1;
 		
-		$('input[id="multi-check-' + branchId + '-update"').each(function () {
+		$('input[id="multi-check-' + branchId + '-update"]').each(function () {
 			if (i != sumDepartment) {
 				$(this).prop("checked", false);
 			} else {
@@ -164,7 +164,7 @@ function totalDepartmentUpdate(branchId) {
 	var totalDepartment = 0;
 	var data = [];
 	var i = 0;
-	$('input[id="multi-check-' + branchId + '-update"').each(function () {
+	$('input[id="multi-check-' + branchId + '-update"]').each(function () {
 		data[i] = $(this).val();
 		i++;
 	});

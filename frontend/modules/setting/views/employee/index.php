@@ -7,36 +7,68 @@ $this->title = 'Employee';
 
 <div class="col-12 mt-90 all-employee0">
 	<div class="row">
-		<div class="col-lg-2 col-md-12 col-6">
+		<div class="col-2">
 			<div class="col-12 employee-one">
 				Employee
 			</div>
 		</div>
-		<div class="col-lg-2 col-md-12 col-12">
+		<div class="col-10 text-end">
 			<div class="col-12 mt-10">
 				<a href="<?= Yii::$app->homeUrl ?>setting/employee/create" class="btn btn-success"><i class="fa fa-user" aria-hidden="true"></i> Create</a>
 			</div>
 		</div>
-		<div class="col-lg-2 col-md-2 col-2 mt-10 fil0">
-			<button type="button" class="btn btn-outline-secondary"><i class="fa fa-filter" aria-hidden="true"></i></button>
-		</div>
-		<div class="col-lg-3 col-md-4 col-10 mt-10">
-			<div class="input-group mb-3 input-group0">
-				<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</button>
-				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="#">Action</a></li>
-					<li><a class="dropdown-item" href="#">Another action</a></li>
-					<li><a class="dropdown-item" href="#">Something else here</a></li>
-					<li><a class="dropdown-item" href="#">Separated link</a></li>
-				</ul>
-				<input type="text" class="form-control" aria-label="Text input with dropdown button">
+
+		<div class="col-lg-3 col-md-4 col-12 mt-10">
+			<div class="input-group">
+				<button class="btn btn-outline-secondary" type="button">Company</button>
+				<select class="form-control font-size-14" id="company-team" onchange="javascript:branchCompany()">
+					<option value="">Select Company</option>
+					<?php
+					if (isset($companies) && count($companies) > 0) {
+					?>
+						<?php
+						foreach ($companies as $company) : ?>
+							<option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
+						<?php
+						endforeach; ?>
+
+					<?php
+					}
+					?>
+				</select>
 			</div>
 		</div>
-		<div class="col-lg-3 col-md-6 col-12 mt-10">
+		<div class="col-lg-3 col-md-4 col-12 mt-10">
+			<div class="input-group">
+
+				<button class="btn btn-outline-secondary" type="button">Branch</button>
+				<select class="form-control font-size-14" id="branch-team" onchange="javascript:departmentBranch()" disabled></select>
+			</div>
+		</div>
+		<div class="col-lg-3 col-md-4 col-12 mt-10">
+			<div class="input-group">
+
+				<button class="btn btn-outline-secondary" type="button">Department</button>
+				<select class="form-control font-size-14" id="department-team" onchange="javascript:teamDepartment()" disabled></select>
+
+			</div>
+		</div>
+		<div class="col-lg-3 col-md-4 col-12 mt-10">
+			<div class="input-group">
+
+				<button class="btn btn-outline-secondary" type="button">Team</button>
+				<select class="form-control font-size-14" id="team-department" disabled></select>
+				<button type="button" class="btn btn-outline-dark" onclick="javascrip:filterEmployee()">
+					<i class="fa fa-filter" aria-hidden="true"></i>
+				</button>
+			</div>
+		</div>
+		<div class="col-lg-12 col-md-6 col-12 mt-10 text-end">
 			<div class="btn-group" role="group" aria-label="Basic example">
-				<button type="button" class="btn btn-primary btn-curr">All</button>
-				<button type="button" class="btn btn-primary btn-curr"><i class="fa fa-briefcase" aria-hidden="true"></i> Current</button>
-				<button type="button" class="btn btn-primary btn-curr">Resigned <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></button>
+				<button type="button" class="btn btn-primary btn-curr" id="btn-0" onclick="javascript:employeeType(0)">All</button>
+				<button type="button" class="btn btn-primary" id="btn-1" onclick="javascript:employeeType(1)"><i class="fa fa-briefcase" aria-hidden="true"></i> Current</button>
+				<button type="button" class="btn btn-primary btn-curr" id="btn-2" onclick="javascript:employeeType(2)">Resigned <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></button>
+				<input type="hidden" id="status" value="1">
 			</div>
 		</div>
 	</div>
@@ -48,7 +80,7 @@ $this->title = 'Employee';
 					if (isset($employees) && count($employees) > 0) {
 						foreach ($employees as $employee) :
 					?>
-							<div class="col-lg-2 col-md-6 col-8">
+							<div class="col-lg-2 col-md-6 col-8" id="employee-<?= $employee['employeeId'] ?>">
 								<div class="alert alert-employee pr-10 pl-10" role="alert">
 									<div class="row" style="margin-top: -13px;">
 										<div class="col-lg-10 col-md-10 col-10 text-end">
@@ -61,10 +93,20 @@ $this->title = 'Employee';
 											?>
 											<span class="badge rounded-pill bg-<?= $text ?>" style="font-size: 7px;"><?= $employee["statusName"] ?></span>
 										</div>
-										<div class="col-lg-2 col-md-2 col-2 text-end">
+										<div class="col-lg-2 col-md-2 col-2 text-end" onclick="javascript:showAction(<?= $employee['employeeId'] ?>)" style="cursor: pointer;">
 											<div class="col-12 employee-ellipsis">
 												<strong><i class="fa fa-ellipsis-v" aria-hidden="true"></i></strong>
 											</div>
+										</div>
+
+										<div class="employee-action" id="employee-action-<?= $employee['employeeId'] ?>">
+											<a href="<?= Yii::$app->homeUrl ?>setting/employee/update/<?= ModelMaster::encodeParams(['employeeId' => $employee['employeeId']]) ?>" class="btn btn-outline-dark btn-sm font-size-12">
+												<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+											</a>
+											<a href="javascript:deleteEmployee(<?= $employee['employeeId'] ?>)" class="btn btn-outline-danger btn-sm font-size-14 mt-5">
+												<i class="fa fa-trash" aria-hidden="true"></i>
+											</a>
+
 										</div>
 									</div>
 									<div class="row">
@@ -156,6 +198,7 @@ $this->title = 'Employee';
 					}
 					?>
 				</div>
+				<input type="hidden" id="show-action" value="">
 			</div>
 		</div>
 	</div>

@@ -68,7 +68,7 @@ $this->title = 'Update Group';
 					</div>
 					<div class="mt-20"></div>
 					<div class="col-5">
-						Tag line
+						Philosophy
 					</div>
 					<div class="col-7">
 						<input type="text" class="form-control" name="tagLine" value="<?= $group['tagLine'] ?>">
@@ -172,7 +172,7 @@ $this->title = 'Update Group';
 									<input type="text" name="founded" class="form-control" value="<?= $group['founded'] ?>">
 								</div>
 								<div class="col-2">
-									Contact <span class="profile-moon">*</span>
+									Phone <span class="profile-moon">*</span>
 								</div>
 								<div class="col-3">
 									<input type="text" class="form-control" name="contact" value="<?= $group['contact'] ?>">

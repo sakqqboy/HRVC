@@ -13,7 +13,7 @@ $this->title = 'Group profile';
 			<img src="<?= Yii::$app->homeUrl . $group['banner'] ?>" class="sad-1">
 		<?php
 		} else { ?>
-
+			<img src="<?= Yii::$app->homeUrl . 'image/group.jpg' ?>" class="sad-1">
 		<?php
 		}
 		?>
@@ -32,6 +32,8 @@ $this->title = 'Group profile';
 					<?php
 					} else { ?>
 
+
+						<img src="<?= Yii::$app->homeUrl . 'image/groupProfile.jpg' ?>" class="company-group-picture">
 					<?php
 					}
 					?>
@@ -100,7 +102,7 @@ $this->title = 'Group profile';
 					<i class="fa fa-clipboard clipboard0 " aria-hidden="true" onclick="javascript:copyToClipboard('<?= $group['email'] ?>')"></i>
 				</div>
 				<div class="col-lg-5 col-md-6 col-12 name-head mt-10">
-					Contact
+					Phone
 				</div>
 				<div class="col-lg-7 col-md-6 col-12 name-head0 mt-10">
 					<?= $group["contact"] ?>&nbsp;&nbsp;
@@ -119,47 +121,7 @@ $this->title = 'Group profile';
 				</div>
 				<hr class="mt-20">
 			</div>
-			<div class="row">
-				<div class="col-lg-6 col-md-6 col-6">
-					<div class="alert alert-secondary-background" role="alert">
-						<div class="row">
-							<div class="col-4">
-								<i class="fa fa-users" aria-hidden="true" style="font-size: 25px;padding-top: 18px;"></i>
-							</div>
-							<div class="col-2">
-								<a href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" style="text-decoration: none;">
-									<div class="col-12 text-primary">
-										Employee
-									</div>
-									<div class="col-2 number-bold text-black">
-										<?= $totalEmployees ?>
-									</div>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6 col-md-6 col-6">
-					<div class="alert alert-secondary-background" role="alert">
-						<div class="row">
-							<div class="col-4">
-								<i class="fa fa-users" aria-hidden="true" style="font-size: 25px;padding-top: 18px;"></i>
-							</div>
-							<div class="col-2">
-								<a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" style="text-decoration: none;">
-									<div class="col-12 text-primary">
-										Branch
-									</div>
-									<div class="col-2 number-bold text-black">
-										<?= $totalBranches ?>
-									</div>
-								</a>
-							</div>
 
-						</div>
-					</div>
-				</div>
-			</div>
 		</div>
 		<div class="col-lg-5 col-md-4 col-12 box-about0">
 			<div class="col-12 ABOUT-NAME mb-20">
@@ -231,5 +193,87 @@ $this->title = 'Group profile';
 
 			</div>
 		</div>
+	</div>
+	<div class="row mt-10">
+		<div class="col-lg-3 col-md-4 col-6">
+			<div class="alert alert-secondary-background" role="alert">
+				<div class="row">
+					<div class="col-4">
+						<i class="fa fa-users" aria-hidden="true" style="font-size: 25px;padding-top: 18px;"></i>
+					</div>
+					<div class="col-2">
+						<a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" style="text-decoration: none;">
+							<div class="col-12 text-primary">
+								Branch
+							</div>
+							<div class="col-2 number-bold text-black">
+								<?= $totalBranches ?>
+							</div>
+						</a>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-3 col-md-4 col-6">
+			<div class="alert alert-secondary-background" role="alert">
+				<div class="row">
+					<div class="col-4">
+						<i class="fa fa-users" aria-hidden="true" style="font-size: 25px;padding-top: 18px;"></i>
+					</div>
+					<div class="col-2">
+						<a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" style="text-decoration: none;">
+							<div class="col-12 text-primary">
+								Department
+							</div>
+							<div class="col-2 number-bold text-black">
+								<?= $totalDepartment ?>
+							</div>
+						</a>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-3 col-md-4 col-6">
+			<div class="alert alert-secondary-background" role="alert">
+				<div class="row">
+					<div class="col-4">
+						<i class="fa fa-users" aria-hidden="true" style="font-size: 25px;padding-top: 18px;"></i>
+					</div>
+					<div class="col-2">
+						<a href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" style="text-decoration: none;">
+							<div class="col-12 text-primary">
+								Team
+							</div>
+							<div class="col-2 number-bold text-black">
+								<?= $totalTeam ?>
+							</div>
+						</a>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-3 col-md-4 col-6">
+			<div class="alert alert-secondary-background" role="alert">
+				<div class="row">
+					<div class="col-4">
+						<i class="fa fa-users" aria-hidden="true" style="font-size: 25px;padding-top: 18px;"></i>
+					</div>
+					<div class="col-2">
+						<a href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" style="text-decoration: none;">
+							<div class="col-12 text-primary">
+								Employee
+							</div>
+							<div class="col-2 number-bold text-black">
+								<?= $totalEmployees ?>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</div>
 </div>

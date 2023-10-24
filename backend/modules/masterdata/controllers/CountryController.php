@@ -3,6 +3,7 @@
 namespace backend\modules\masterdata\controllers;
 
 use backend\models\hrvc\Country;
+use backend\models\hrvc\Nationality;
 use Exception;
 use yii\web\Controller;
 
@@ -45,5 +46,10 @@ class CountryController extends Controller
             ->asArray()
             ->one();
         return json_encode($country);
+    }
+    public function actionNationality()
+    {
+        $nation = Nationality::find()->select('numCode,nationalityName')->where(1)->asArray()->orderBy('nationalityName')->all();
+        return json_encode($nation);
     }
 }

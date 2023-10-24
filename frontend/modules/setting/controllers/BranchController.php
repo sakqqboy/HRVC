@@ -6,7 +6,10 @@ use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
 use frontend\models\hrvc\Branch;
+use frontend\models\hrvc\Department;
+use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Group;
+use frontend\models\hrvc\Team;
 use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
@@ -45,6 +48,9 @@ class BranchController extends Controller
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
         }
         $company = [];
+        $totalEmployees = 0;
+        $totalDepartment = 0;
+        $totalTeam = 0;
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -58,6 +64,11 @@ class BranchController extends Controller
             $branchJson = curl_exec($api);
             $branches = json_decode($branchJson, true);
 
+            $branchess = Branch::find()
+                ->where(["status" => 1, "companyId" => $companyId])
+                ->asArray()
+                ->all();
+
             // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/country-detail?id=' . $company["countryId"]);
             // $resultCountryDetail = curl_exec($api);
             // $companyCountry = json_decode($resultCountryDetail, true);
@@ -65,6 +76,11 @@ class BranchController extends Controller
             curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch');
             $branchJson = curl_exec($api);
             $branches = json_decode($branchJson, true);
+
+            $branchess = Branch::find()
+                ->where(["status" => 1])
+                ->asArray()
+                ->all();
         }
         //  throw new Exception(print_r($companies, true));
 
@@ -73,12 +89,43 @@ class BranchController extends Controller
         $companyGroup = json_decode($companyJson, true);
         curl_close($api);
 
+
+        if (isset($branchess) && count($branchess) > 0) {
+            foreach ($branchess as $branch) :
+                $departments = Department::find()
+                    ->where(["branchId" => $branch["branchId"], "status" => 1])
+                    ->asArray()
+                    ->all();
+                foreach ($departments as $department) :
+                    $teams = Team::find()
+                        ->where(["departmentId" => $department["departmentId"], "status" => 1])
+                        ->asArray()
+                        ->all();
+                    if (isset($teams) && count($teams) > 0) {
+                        foreach ($teams as $team) :
+                            $employees = Employee::find()
+                                ->where(["status" => 1, "teamId" => $team["teamId"]])
+                                ->asArray()
+                                ->all();
+                            $totalEmployees += count($employees);
+                        endforeach;
+                    }
+                    $totalTeam += count($teams);
+                endforeach;
+                $totalDepartment += count($departments);
+            endforeach;
+        }
+
         return $this->render('create', [
             "company" => $company,
             "companies" => $companyGroup,
             "branches" => $branches,
             // "country" => $companyCountry,
-            "companyId" => $companyId
+            "companyId" => $companyId,
+            "totalEmployees" => $totalEmployees,
+            "totalDepartment" => $totalDepartment,
+            "totalTeam" => $totalTeam,
+
         ]);
     }
     public function actionSaveCreateBranch()

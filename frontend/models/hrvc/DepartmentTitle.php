@@ -38,10 +38,10 @@ class DepartmentTitle extends \frontend\models\hrvc\master\DepartmentTitleMaster
         $titleDepartments = DepartmentTitle::find()
             ->select('t.titleName')
             ->JOIN("LEFT JOIN", "title t", "t.titleId=department_title.titleId")
-            ->where(["department_title.departmentId" => $departmentId])
+            ->JOIN("LEFT JOIN", "department d", "d.departmentId=department_title.departmentId")
+            ->where(["department_title.departmentId" => $departmentId, "t.status" => 1, "d.status" => 1])
             ->orderBy('department_title.titleId')
             ->asArray()
-
             ->all();
         return  $titleDepartments;
     }

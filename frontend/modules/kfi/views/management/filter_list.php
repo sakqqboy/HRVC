@@ -19,6 +19,7 @@
 		<!-- <select class="form-select font-size-13" id="team-filter" disabled>
 			<option value="">Team</option>
 		</select> -->
+
 		<select class="form-select font-size-13" id="month-filter">
 			<option value="">Month</option>
 			<?php
@@ -27,6 +28,21 @@
 					<option value="<?= $value ?>"><?= $month ?></option>
 			<?php
 				endforeach;
+			}
+			?>
+		</select>
+		<select class="form-select font-size-13" id="year-filter">
+
+			<option value="">Year</option>
+			<?php
+			$year = 2022;
+			$i = 1;
+			while ($i < 20) {
+			?>
+				<option value="<?= $year ?>"><?= $year ?></option>
+			<?php
+				$year += 1;
+				$i++;
 			}
 			?>
 		</select>

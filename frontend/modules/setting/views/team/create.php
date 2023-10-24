@@ -1,5 +1,6 @@
 <?php
 
+use common\models\ModelMaster;
 use frontend\models\hrvc\Team;
 
 $this->title = 'Team';
@@ -17,47 +18,37 @@ $this->title = 'Team';
 		</div> -->
 		<div class="col-lg-3 col-md-4 col-12 mt-10">
 			<div class="input-group">
-				<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Company</button>
-				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="#">Action</a></li>
-					<li><a class="dropdown-item" href="#">Another action</a></li>
-					<li><a class="dropdown-item" href="#">Something else here</a></li>
-					<li>
-						<hr class="dropdown-divider">
-					</li>
-					<li><a class="dropdown-item" href="#">Separated link</a></li>
-				</ul>
-				<input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="">
+				<button class="btn btn-outline-secondary" type="button">Company</button>
+				<select class="form-control font-size-14" id="company-team-filter" onchange="javascript:branchCompanyFilter()">
+					<option value="">Select Company</option>
+					<?php
+					if (isset($companies) && count($companies) > 0) {
+					?>
+						<?php
+						foreach ($companies as $company) : ?>
+							<option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
+						<?php
+						endforeach; ?>
+
+					<?php
+					}
+					?>
+				</select>
 			</div>
 		</div>
 		<div class="col-lg-3 col-md-4 col-12 mt-10">
 			<div class="input-group">
-				<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Branch</button>
-				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="#">Action</a></li>
-					<li><a class="dropdown-item" href="#">Another action</a></li>
-					<li><a class="dropdown-item" href="#">Something else here</a></li>
-					<li>
-						<hr class="dropdown-divider">
-					</li>
-					<li><a class="dropdown-item" href="#">Separated link</a></li>
-				</ul>
-				<input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="">
+				<button class="btn btn-outline-secondary" type="button">Branch</button>
+				<select class="form-control font-size-14" id="branch-team-filter" onchange="javascript:departmentBranchFilter()" disabled></select>
 			</div>
 		</div>
 		<div class="col-lg-3 col-md-4 col-12 mt-10">
 			<div class="input-group">
-				<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Department</button>
-				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="#">Action</a></li>
-					<li><a class="dropdown-item" href="#">Another action</a></li>
-					<li><a class="dropdown-item" href="#">Something else here</a></li>
-					<li>
-						<hr class="dropdown-divider">
-					</li>
-					<li><a class="dropdown-item" href="#">Separated link</a></li>
-				</ul>
-				<input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="">
+				<button class="btn btn-outline-secondary" type="button">Department</button>
+				<select class="form-control font-size-14" id="department-team-filter" disabled></select>
+				<button type="button" class="btn btn-outline-dark" onclick="javascrip:filterTeam()">
+					<i class="fa fa-filter" aria-hidden="true"></i>
+				</button>
 			</div>
 		</div>
 	</div>
@@ -125,29 +116,6 @@ $this->title = 'Team';
 						<input type="text" class="form-control Company-select" id="teamName" placeholder="">
 					</div>
 				</div>
-
-				<!-- <div class="col-lg-2 col-md-6 col-12">
-					<div class="col-12">
-						<label for="exampleFormControlInput1" class="form-label" style="font-size: 13px;font-weight:700;"> Assign Employee</label>
-						<select class="form-select Company-select" aria-label="Default select example">
-							<option selected>Select Employee</option>
-							<option value="1">Hamish Marsh</option>
-							<option value="2">IT</option>
-							<option value="3">Accountting</option>
-						</select>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-6 col-12">
-					<div class="col-12">
-						<label for="exampleFormControlInput1" class="form-label" style="font-size: 13px;font-weight:700;"> Team Title</label>
-						<select class="form-select Company-select" aria-label="Default select example">
-							<option selected>Select set titles</option>
-							<option value="1">Leader</option>
-							<option value="2">IT</option>
-							<option value="3">Accountting</option>
-						</select>
-					</div>
-				</div> -->
 				<div class="col-lg-1 col-md-2 col-12 team-create0 mt-10 pr-0 pl-0 text-end">
 					<a href="javascript:saveCreateTeam()" class="btn btn-success" id="create-team"><i class="fa fa-plus" aria-hidden="true"></i> Create</a>
 					<a class="btn btn-sm btn-warning font-size-12 mr-5 " id="update-team" style="display:none;">
@@ -199,9 +167,9 @@ $this->title = 'Team';
 											</div>
 											<div class="col-9 ">
 												<div class="col-12 font-size-12 font-b"> LEADER</div>
-												<div class="font-size-11 mt-5 pl-15"> Employee Name</div>
+												<div class="font-size-11 mt-5 pl-15"> <?= Team::teamLeader($team['teamId'], 1) ?></div>
 												<div class="font-size-12 mt-10 font-b"> SUB LEADER</div>
-												<div class="font-size-11 mt-5 pl-15">Leighton Kramer > Staff</div>
+												<div class="font-size-11 mt-5 pl-15"><?= Team::teamLeader($team['teamId'], 2) ?></div>
 												<div class="row mt-10">
 													<div class="col-8 text-start font-size-12 font-b">
 														Employees
@@ -225,6 +193,71 @@ $this->title = 'Team';
 					<?php
 					}
 					?>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-3 col-md-4 col-6">
+				<div class="alert alert-secondary-background" role="alert">
+					<div class="row">
+						<div class="col-4">
+							<i class="fa fa-users" aria-hidden="true" style="font-size: 25px;padding-top: 18px;"></i>
+						</div>
+						<div class="col-2">
+							<a href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" style="text-decoration: none;">
+								<div class="col-12 text-primary">
+									Branch
+								</div>
+								<div class="col-2 number-bold text-black">
+									<?= $totalBranch
+									?>
+								</div>
+							</a>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-4 col-6">
+				<div class="alert alert-secondary-background" role="alert">
+					<div class="row">
+						<div class="col-4">
+							<i class="fa fa-users" aria-hidden="true" style="font-size: 25px;padding-top: 18px;"></i>
+						</div>
+						<div class="col-2">
+							<a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" style="text-decoration: none;">
+								<div class="col-12 text-primary">
+									Department
+								</div>
+								<div class="col-2 number-bold text-black">
+									<?= $totalDepartment
+									?>
+								</div>
+							</a>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-6">
+				<div class="alert alert-secondary-background" role="alert">
+					<div class="row">
+						<div class="col-4">
+							<i class="fa fa-users" aria-hidden="true" style="font-size: 25px;padding-top: 18px;"></i>
+						</div>
+						<div class="col-2">
+							<a href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" style="text-decoration: none;">
+								<div class="col-12 text-primary">
+									Employee
+								</div>
+								<div class="col-2 number-bold text-black">
+									<?= $totalEmployee
+									?>
+								</div>
+							</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

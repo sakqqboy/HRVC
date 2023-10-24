@@ -52,13 +52,6 @@ use common\models\ModelMaster;
                                 </a>
                         </div>
                         <div class="col-12">
-                                <a href="<?= Yii::$app->homeUrl ?>setting/layer/index" class="no-underline">
-                                        <i class="fa fa-users pr-10 mt-20" aria-hidden="true">
-
-                                        </i> Title </a>
-                        </div>
-
-                        <div class="col-12">
                                 <a href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" class="no-underline">
                                         <i class="fa fa-users pr-10 mt-20" aria-hidden="true">
 
@@ -69,6 +62,11 @@ use common\models\ModelMaster;
                                         <i class="fa fa-user pr-10 mt-20" aria-hidden="true"></i>
                                         Employee
                                 </a>
+                        </div>
+                        <div class="col-12">
+                                <a href="<?= Yii::$app->homeUrl ?>setting/title/index" class="no-underline">
+                                        <i class="fa fa-users pr-10 mt-20" aria-hidden="true">
+                                        </i> Title </a>
                         </div>
                         <div class="col-12">
                                 <a href="<?= Yii::$app->homeUrl ?>setting/layer/index" class="no-underline">

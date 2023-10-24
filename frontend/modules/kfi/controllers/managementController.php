@@ -120,6 +120,7 @@ class ManagementController extends Controller
 			$kfi->unitId = $_POST["unit"];
 			$kfi->targetAmount = $_POST["amount"];
 			$kfi->month = $_POST["month"];
+			$kfi->year = $_POST["year"];
 			$kfi->kfiDetail = $_POST["detail"];
 			$kfi->createrId = 1;
 			$kfi->status = 1;
@@ -515,7 +516,7 @@ class ManagementController extends Controller
 		// $teamId = isset($_POST["teamId"]) && $_POST["teamId"] != null ? $_POST["teamId"] : null;
 		$month = isset($_POST["month"]) && $_POST["month"] != null ? $_POST["month"] : null;
 		$status = isset($_POST["status"]) && $_POST["status"] != null ? $_POST["status"] : null;
-		$date = isset($_POST["date"]) && $_POST["date"] != null ? $_POST["date"] : null;
+		$year = isset($_POST["year"]) && $_POST["year"] != null ? $_POST["year"] : null;
 		$type = $_POST["type"];
 		return $this->redirect(Yii::$app->homeUrl . 'kfi/management/kfi-search-result/' . ModelMaster::encodeParams([
 			"companyId" => $companyId,
@@ -523,7 +524,7 @@ class ManagementController extends Controller
 			// "teamId" => $teamId,
 			"month" => $month,
 			"status" => $status,
-			"date" => $date,
+			"year" => $year,
 			"type" => $type
 		]));
 	}
@@ -535,18 +536,18 @@ class ManagementController extends Controller
 		// $teamId = $param["teamId"];
 		$month = $param["month"];
 		$status = $param["status"];
-		$date = $param["date"];
+		$year = $param["year"];
 		$type = $param["type"];
 		$branches = [];
 		$teams = [];
-		if ($companyId == "" && $branchId == "" && $month == "" && $status == "" && $status == "") {
+		if ($companyId == "" && $branchId == "" && $month == "" && $status == "" && $year == "") {
 			if ($type == "list") {
 				return $this->redirect(Yii::$app->homeUrl . 'kfi/management/index');
 			} else {
 				return $this->redirect(Yii::$app->homeUrl . 'kfi/management/grid');
 			}
 		}
-		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&month=' . $month . '&&status=' . $status . '&&date=' . $date;
+		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&month=' . $month . '&&status=' . $status . '&&year=' . $year;
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
@@ -596,8 +597,31 @@ class ManagementController extends Controller
 			// "teamId" => $teamId,
 			"month" => $month,
 			"status" => $status,
-			"date" => $date,
+			"year" => $year,
 			"branches" => $branches,
 		]);
+	}
+	public function actionCompanyMultiBranch()
+	{
+		$companyId = $_POST["companyId"];
+		$acType = $_POST["acType"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
+		$branches = curl_exec($api);
+		$branches = json_decode($branches, true);
+		if ($acType == "create") {
+			$branchText = $this->renderAjax('multi_branch', ["branches" => $branches]);
+		} else {
+			$kfiId = $_POST["kfiId"];
+			$branchText = $this->renderAjax('multi_branch_update', [
+				"branches" => $branches,
+				"kfiId" => $kfiId
+			]);
+		}
+		curl_close($api);
+		$res["status"] = true;
+		$res["branchText"] = $branchText;
+		return json_encode($res);
 	}
 }

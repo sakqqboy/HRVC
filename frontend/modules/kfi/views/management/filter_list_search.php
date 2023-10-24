@@ -63,7 +63,28 @@ use frontend\models\hrvc\Team;
 			}
 			?>
 		</select>
-
+		<select class="form-select font-size-13" id="year-filter">
+			<?php
+			if (isset($yearSelected) && $yearSelected != "") { ?>
+				<option value="<?= $yearSelected ?>"><?= $yearSelected ?></option>
+			<?php
+			}
+			?>
+			<option value="">Year</option>
+			<?php
+			$year = 2022;
+			$i = 1;
+			while ($i < 20) {
+				if ($year != $yearSelected) {
+			?>
+					<option value="<?= $year ?>"><?= $year ?></option>
+			<?php
+				}
+				$year += 1;
+				$i++;
+			}
+			?>
+		</select>
 		<select class="form-select font-size-13" id="status-filter">
 			<?php
 			if (isset($status) && $status != "") { ?>

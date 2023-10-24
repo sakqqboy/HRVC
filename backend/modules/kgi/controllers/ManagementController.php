@@ -273,7 +273,7 @@ class ManagementController extends Controller
 		}
 		return json_encode($data);
 	}
-	public function actionKgiFilter($companyId, $branchId, $teamId, $month, $status, $date)
+	public function actionKgiFilter($companyId, $branchId, $teamId, $month, $status, $year)
 	{
 		$data = [];
 		$kgis = Kgi::find()
@@ -287,6 +287,7 @@ class ManagementController extends Controller
 				"kt.teamId" => $teamId,
 				"kgi.month" => $month,
 				"kgi.status" => $status,
+				"kgi.year" => $year,
 			])
 			->orderBy('kgi.createDateTime ASC')
 			->all();
@@ -317,7 +318,8 @@ class ManagementController extends Controller
 					"countryName" => Country::countryNameBycompany($kgi['companyId']),
 					"issue" => KgiIssue::lastestIssue($kgi["kgiId"])["issue"],
 					"solution" => KgiIssue::lastestIssue($kgi["kgiId"])["solution"],
-					"employee" => KgiTeam::employeeTeam($kgi['kgiId'])
+					"employee" => KgiTeam::employeeTeam($kgi['kgiId']),
+					"year" => $kgi["year"],
 				];
 			endforeach;
 		}

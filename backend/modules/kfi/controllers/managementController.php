@@ -49,7 +49,9 @@ class ManagementController extends Controller
 					"status" => $kfi['status'],
 					"nextCheck" => "",
 					"checkDate" => "",
-					"countryName" => Country::countryNameBycompany($kfi['companyId'])
+					"countryName" => Country::countryNameBycompany($kfi['companyId']),
+					"flag" => Country::countryFlagBycompany($kfi['companyId']),
+					"isOver" => 0,
 				];
 				$kfiHistory = KfiHistory::find()
 					->where(["kfiId" => $kfi["kfiId"], "status" => [1, 4]])
@@ -75,7 +77,9 @@ class ManagementController extends Controller
 						"nextCheck" => ModelMaster::engDate($kfiHistory["nextCheckDate"], 2),
 						"checkDate" => ModelMaster::engDate($kfiHistory["checkPeriodDate"], 2),
 						"amountType" => $kfiHistory["amountType"],
-						"countryName" => Country::countryNameBycompany($kfi['companyId'])
+						"countryName" => Country::countryNameBycompany($kfi['companyId']),
+						"flag" => Country::countryFlagBycompany($kfi['companyId']),
+						"isOver" => ModelMaster::isOverDuedate($kfiHistory["nextCheckDate"]),
 					];
 				}
 
@@ -88,6 +92,7 @@ class ManagementController extends Controller
 	{
 		$kfi = Kfi::find()->where(["kfiId" => $kfiId])->asArray()->one();
 		$res["kfiName"] = $kfi["kfiName"];
+		$res["year"] = $kfi["year"];
 		$res["companyName"] = Company::companyName($kfi['companyId']);
 		$res["companyId"] = $kfi['companyId'];
 		$res["branchName"] = Branch::kfiBranchName($kfiId);
@@ -96,6 +101,7 @@ class ManagementController extends Controller
 		$res["targetAmount"] = number_format($kfi["targetAmount"], 2);
 		$res["status"] = $kfi["status"];
 		$res["monthName"] = strtoupper(ModelMaster::monthEng($kfi['month'], 1));
+		$res["month"] = $kfi['month'];
 		$res["unit"] = Unit::unitName($kfi['unitId']);
 		$res["countryName"] = Country::countryNameBycompany($kfi['companyId']);
 		$res["flag"] = Country::countryFlagBycompany($kfi["companyId"]);
@@ -201,7 +207,7 @@ class ManagementController extends Controller
 		}
 		return json_encode($data);
 	}
-	public function actionKfiFilter($companyId, $branchId, $month, $status, $date)
+	public function actionKfiFilter($companyId, $branchId, $month, $status, $year)
 	{
 		$data = [];
 		//$kfis = Kfi::find()->where(["status" => [1, 2]])->asArray()->all();
@@ -214,6 +220,7 @@ class ManagementController extends Controller
 				"kb.branchId" => $branchId,
 				"kfi.month" => $month,
 				"kfi.status" => $status,
+				"kfi.year" => $year
 			])
 			->orderBy('kfi.createDateTime ASC')
 			->all();
@@ -234,7 +241,9 @@ class ManagementController extends Controller
 					"status" => $kfi['status'],
 					"nextCheck" => "",
 					"checkDate" => "",
-					"countryName" => Country::countryNameBycompany($kfi['companyId'])
+					"countryName" => Country::countryNameBycompany($kfi['companyId']),
+					"flag" => Country::countryFlagBycompany($kfi['companyId']),
+					"year" => $year
 				];
 				$kfiHistory = KfiHistory::find()
 					->where(["kfiId" => $kfi["kfiId"], "status" => [1, 4]])
@@ -260,7 +269,9 @@ class ManagementController extends Controller
 						"nextCheck" => ModelMaster::engDate($kfiHistory["nextCheckDate"], 2),
 						"checkDate" => ModelMaster::engDate($kfiHistory["checkPeriodDate"], 2),
 						"amountType" => $kfiHistory["amountType"],
-						"countryName" => Country::countryNameBycompany($kfi['companyId'])
+						"countryName" => Country::countryNameBycompany($kfi['companyId']),
+						"flag" => Country::countryFlagBycompany($kfi['companyId']),
+						"year" => $year
 					];
 				}
 

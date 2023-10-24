@@ -6,8 +6,11 @@ use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
 use frontend\models\hrvc\Branch;
+use frontend\models\hrvc\Company;
+use frontend\models\hrvc\Department;
 use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Group;
+use frontend\models\hrvc\Team;
 use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
@@ -115,29 +118,71 @@ class GroupController extends Controller
 
         $param = ModelMaster::decodeParams($hash);
         $groupId = $param["groupId"];
+        $totalBranches = 0;
+        $totalDepartment = 0;
+        $totalTeam = 0;
+        $totalEmployees = 0;
+
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/group-detail?id=' . $groupId);
         $groupJson = curl_exec($api);
-        curl_close($api);
         $group = json_decode($groupJson, true);
 
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
         $companyJson = curl_exec($api);
-        curl_close($api);
         $companyGroup = json_decode($companyJson, true);
+
+        curl_close($api);
         $employees = Employee::find()->select('employeeId')->where(["status" => 1])->all();
+        $companies = Company::find()->where(["groupId" => $groupId, "status" => 1])->asArray()->all();
+        if (isset($companies) && count($companies) > 0) {
+            foreach ($companies as $company) :
+                $branches = Branch::find()
+                    ->where(["status" => 1, "companyId" => $company["companyId"]])
+                    ->asArray()
+                    ->all();
+                if (isset($branches) && count($branches) > 0) {
+                    foreach ($branches as $branch) :
+                        $departments = Department::find()
+                            ->where(["branchId" => $branch["branchId"], "status" => 1])
+                            ->asArray()
+                            ->all();
+                        foreach ($departments as $department) :
+                            $teams = Team::find()
+                                ->where(["departmentId" => $department["departmentId"], "status" => 1])
+                                ->asArray()
+                                ->all();
+                            if (isset($teams) && count($teams) > 0) {
+                                foreach ($teams as $team) :
+                                    $employees = Employee::find()
+                                        ->where(["status" => 1, "teamId" => $team["teamId"]])
+                                        ->asArray()
+                                        ->all();
+                                    $totalEmployees += count($employees);
+                                endforeach;
+                            }
+                            $totalTeam += count($teams);
+                        endforeach;
+                        $totalDepartment += count($departments);
+                    endforeach;
+                }
+                $totalBranches += count($branches);
+            endforeach;
+        }
         $branches = Branch::find()->select('branchId')->where(["status" => 1])->all();
+
+
 
         return $this->render('group_view', [
             "group" => $group,
             "companyGroup" => $companyGroup,
-            "totalEmployees" => count($employees),
-            "totalBranches" => count($branches)
+            "totalEmployees" => $totalEmployees,
+            "totalBranches" => $totalBranches,
+            "totalDepartment" => $totalDepartment,
+            "totalTeam" => $totalTeam
         ]);
     }
     public function actionUpdateGroup($hash)

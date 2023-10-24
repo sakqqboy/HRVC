@@ -28,7 +28,7 @@ class Path
 	public static function frontendUrl()
 	{
 		if ($_SERVER['HTTP_HOST'] == "localhost") {
-			$url = 'http://localhost/HEVC/frontend/web/';
+			$url = 'http://localhost/HRVC/frontend/web/';
 		} else {
 			$url = 'https://tcg-management-system.com/';
 		}

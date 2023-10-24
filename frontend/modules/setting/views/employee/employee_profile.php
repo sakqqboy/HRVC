@@ -7,7 +7,7 @@ $this->title = 'view';
 
 <div class="col-12 mt-90">
 	<div class="col-12 view-goback">
-		<a href="<?= Yii::$app->homeUrl ?>setting/employee/index" class="no-underline-black">
+		<a href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => $employee['companyId']]) ?>" class="no-underline-black">
 			<i class="fa fa-caret-left font-size-22" aria-hidden="true"></i> &nbsp;Go Back
 		</a>
 	</div>
@@ -16,7 +16,16 @@ $this->title = 'view';
 			<div class="alert alert-light mr-10 ml-10" style="border: none;">
 				<div class="row">
 					<div class="col-lg-2 col-md-6 col-12">
-						<img src="<?= Yii::$app->homeUrl . $employee['picture'] ?>" class="imageView">
+						<?php
+						if ($employee['picture'] == '') { ?>
+							<img src="<?= Yii::$app->homeUrl . 'image/user.png' ?>" class="imageView">
+						<?php
+						} else { ?>
+							<img src="<?= Yii::$app->homeUrl . $employee['picture'] ?>" class="imageView">
+						<?php
+						}
+						?>
+
 					</div>
 					<div class="col-lg-10 col-md-6 col-12">
 						<div class="con-12 mt-30">
@@ -51,20 +60,48 @@ $this->title = 'view';
 							</div>
 						</div>
 						<div class="row mt-20">
-							<div class="col-lg-12 col-md-6 col-12 box-shareprofile">
+							<div class="col-lg-12 col-md-6 col-12">
 								<div class="row">
-									<div class="col-4 font-size-14 share-pointer">
+									<div class="col-3"></div>
+									<div class="col-2 font-size-14 share-pointer">
 										<i class="fa fa-share-alt" aria-hidden="true"></i> Share Profile
 									</div>
-									<div class="col-2 font-size-14 share-pointer">
+									<div class="col-1 font-size-14 share-pointer">
 										<i class="fa fa-print" aria-hidden="true"></i> Print
 									</div>
-									<div class="col-4 font-size-14 share-pointer">
-										<a href="<?= Yii::$app->homeUrl . $employee['resume'] ?>" target="_blank" style="text-decoration:none;">
-											<i class="fa fa-cloud-download" aria-hidden="true"></i> Download CV
-										</a>
-									</div>
 									<div class="col-2 font-size-14 share-pointer">
+										<?php
+										if ($employee['resume'] != '') { ?>
+											<a href="<?= Yii::$app->homeUrl . $employee['resume'] ?>" target="_blank" style="text-decoration:none;">
+												<i class="fa fa-cloud-download" aria-hidden="true"></i> Download CV
+											</a>
+										<?php
+										} else { ?>
+											<a href="#" target="_blank" style="text-decoration:none;">
+												<i class="fa fa-cloud-download" aria-hidden="true"></i> Download CV
+											</a>
+										<?php
+										}
+										?>
+									</div>
+									<div class="col-3 font-size-14 share-pointer text-center">
+
+										<?php
+										if ($employee['employeeAgreement'] != '') { ?>
+											<a href="<?= Yii::$app->homeUrl . $employee['employeeAgreement'] ?>" target="_blank" style="text-decoration:none;">
+												<i class="fa fa-cloud-download" aria-hidden="true"></i> Download Agreement
+											</a>
+										<?php
+										} else { ?>
+											<a href="<?= Yii::$app->homeUrl . $employee['employeeAgreement'] ?>" target="_blank" style="text-decoration:none;">
+												<i class="fa fa-cloud-download" aria-hidden="true"></i> Download Agreement
+											</a>
+										<?php
+										}
+										?>
+
+									</div>
+									<div class="col-1 font-size-14 share-pointer">
 										<a href="<?= Yii::$app->homeUrl ?>setting/employee/update/<?= ModelMaster::encodeParams(['employeeId' => $employee['employeeId']]) ?>" style="text-decoration:none;">
 											<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
 										</a>

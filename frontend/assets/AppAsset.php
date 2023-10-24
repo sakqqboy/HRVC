@@ -78,6 +78,7 @@ class AppAsset extends AssetBundle
         'js/setting/team.js',
         'js/setting/employee.js',
         'js/setting/company.js',
+        'js/setting/title.js',
         'js/setting/layer.js',
         'js/kfi/kfi.js',
         'js/kgi/kgi.js',

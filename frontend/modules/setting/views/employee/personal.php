@@ -27,7 +27,7 @@ use common\models\ModelMaster;
 				Nationality
 			</div>
 			<div class="col-7 mt-20 view-font-bold">
-				<?= $employee['countryName'] ?>
+				<?= $employee['nationalityName'] ?>
 			</div>
 			<div class="col-5 mt-20">
 				Date of Birth

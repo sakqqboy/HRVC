@@ -49,8 +49,7 @@
 }
 
 .alert-vector {
-    width: 60%;
-    margin-top: 20px;
+    width: 120%;
 }
 
 .show-Management {
@@ -60,7 +59,8 @@
 
 .sub-later0 {
     font-weight: 700;
-    margin-top: 20px;
+    /* margin-top: 20px; */
+    padding-top: 40%;
     font-size: 12px;
 }
 
@@ -90,25 +90,25 @@
 }
 
 .basic-layer {
-    width: 350%;
+    width: 95%;
     height: 100px;
-    margin-top: 10px;
-    margin-left: -470px;
+    /* margin-left: -470px; */
 }
 
 .basic-layer-text {
-    margin-top: -55px;
-    position: absolute;
-    margin-left: -212px;
-    font-size: 14px;
+    margin-top: -47px;
+    /* position: absolute; */
+    /* margin-left: -212px; */
+    font-size: 12px;
     font-weight: bold;
+    /* margin-top: 5px; */
 }
 
 .advance-layer {
-    width: 200%;
-    height: 90px;
-    margin-top: 10px;
-    margin-left: -190px;
+    width: 95%;
+    height: 100px;
+    margin-top: 5px;
+    /* margin-left: -190px; */
     font-size: 12px;
 }
 
@@ -125,7 +125,8 @@
 .advance-layer-text {
     margin-top: -55px;
     position: absolute;
-    margin-left: -215px;
+    /* margin-left: -215px; */
+    margin-left: -15px;
     font-size: 12px;
     font-weight: bold;
 }

@@ -24,7 +24,7 @@ $this->title = 'KPI Grid View';
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-5 col-md-12 col-12 New-KFI">
+				<div class="col-lg-7 col-md-12 col-12 New-KFI">
 					<?= $this->render('filter_list_search', [
 						"companies" => $companies,
 						"months" => $months,
@@ -33,21 +33,16 @@ $this->title = 'KPI Grid View';
 						"teamId" => $teamId,
 						"month" => $month,
 						"status" => $status,
-						"date" => $date,
+						"yearSelected" => $year,
 						"branches" => $branches,
 						"teams" => $teams
 					]) ?>
 					<input type="hidden" id="type" value="grid">
 				</div>
-				<div class="col-lg-3 col-md-6 col-12 New-date">
+				<div class="col-lg-1 col-md-6 col-12 New-date">
 					<div class="row">
-						<div class="col-8">
-							<div class="input-group">
-								<label class="input-group-text font-size-13" for="">Date</label>
-								<input type="date" class="form-control font-size-13" name="birthday" id="">
-							</div>
-						</div>
-						<div class="col-4 new-light-4">
+
+						<div class="col-12 new-light-4">
 							<div class="btn-group" role="group" aria-label="Basic example">
 								<a href="<?= Yii::$app->homeUrl ?>kpi/management/index" class="btn btn-outline-primary font-size-13">
 									<i class="fa fa-list-ul" aria-hidden="true"></i>

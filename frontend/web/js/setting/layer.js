@@ -6,27 +6,7 @@ if (window.location.host == 'localhost') {
 }
 $url = $baseUrl;
 
-function addSubLayer(layerId) {
-    var url = $url + 'setting/layer/add-sub-layer';
-    var sublayerName = $("#sublayer-" + layerId).val();
-    $.ajax({
-        type: "POST",
-        dataType: 'json',
-        url: url,
-        data: { layerId: layerId, sublayerName: sublayerName },
-        success: function(data) {
-            if (data.status) {
-                alert("Added Sublayer " + sublayerName);
-                $("#sub-layer-tag-" + layerId).html(data.tag);
-                $("#sublayer-" + layerId).val('');
-            } else {
-                alert(sublayerName + " is existing.");
-                $("#sublayer-" + layerId).val('');
-            }
 
-        }
-    });
-}
 
 function updateLayerName(layerId) {
     var layerName = $("#layerName" + layerId).val();
@@ -146,18 +126,19 @@ function deleteLayer(layerId) {
         });
     }
 }
-
-function showSubLayer(layerId) {
-    var url = $url + 'setting/layer/show-sub-layer';
+function filterLayerTitle() { 
+    var branchId = $("#branch-team").val();
+    var departmentId = $("#department-team").val();
+    var url = $url + 'setting/layer/filter-layer-title';
     $.ajax({
         type: "POST",
         dataType: 'json',
         url: url,
-        data: { layerId: layerId },
+        data: { branchId: branchId,departmentId:departmentId },
         success: function(data) {
             if (data.status) {
-                $("#sub_layer").html(data.subLayerText);
-            }
+                $("#layer-result").html(data.textResult);
+            } 
 
         }
     });

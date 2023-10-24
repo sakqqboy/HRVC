@@ -38,7 +38,7 @@ $this->title = 'company';
 						<tr class="tr-font" id="company-<?= $company['companyId'] ?>">
 							<td class="text-center"><?= $i ?></td>
 							<td><?= $company['groupName'] ?></td>
-							<td><img src="<?= Yii::$app->homeUrl ?>image/aa.png" class="width-aa"> <?= $company['companyName'] ?></td>
+							<td><img src="<?= Yii::$app->homeUrl ?><?= $company['picture'] ?>" class="width-aa"> <?= $company['companyName'] ?></td>
 							<td><img src="<?= Yii::$app->homeUrl ?><?= $company['flag'] ?>" class="bangladresh-hrvc"> <?= $company['city'] ?>, <?= $company['countryName'] ?></td>
 							<td><?= $company['industries'] ?></td>
 							<td>

@@ -1,6 +1,8 @@
 <?php
 
-use frontend\models\hrvc\SubLayer;
+use frontend\models\hrvc\Branch;
+use frontend\models\hrvc\Department;
+use frontend\models\hrvc\Layer;
 
 $this->title = 'Management Layer';
 ?>
@@ -12,25 +14,18 @@ $this->title = 'Management Layer';
 		</div>
 	</div>
 	<div class="col-12 mt-30">
-		<div class="col-lg-5 col-md-6 col-4">
-			<div class="alert alert-secondary backtitle" role="alert">
-				<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-					<li class="nav-item">
-						<button class="nav-link title1-top" id="pills-title-tab" data-bs-toggle="pill" data-bs-target="#pills-title" type="button" role="tab" aria-controls="pills-title" aria-selected="true">Title</button>
-					</li>
-					<li class="nav-item">
-						<button class="nav-link title1-top" id="pills-Management-tab" data-bs-toggle="pill" data-bs-target="#pills-Management-Layer" type="button" role="tab" aria-controls="pills-Management-Layer" aria-selected="false">Management Layer</button>
-					</li>
-				</ul>
+		<div class="col-lg-2 col-3">
+			<div class="alert alert-secondary text-center font-size-18 font-b">
+				<a href="<?= Yii::$app->homeUrl ?>setting/title/index" class="nav-link">Title</a>
 			</div>
 		</div>
 	</div>
 	<div class="col-12">
 		<div class="row">
 			<div class="col-lg-8 col-md-12 col-12">
-				<div class="alert alert-layer" role="alert">
+				<div class="alert alert-layer">
 					<div class="row">
-						<div class="col-lg-6 col-md-6 col-12 text-center mt-50">
+						<div class="col-12 text-center mt-20 mb-20">
 							<?php
 							$i = 1;
 							if (isset($layers) && count($layers) <= 2) {
@@ -43,16 +38,14 @@ $this->title = 'Management Layer';
 							if (isset($layers) && count($layers) > 0) {
 								foreach ($layers as $layer) :
 							?>
-									<div class="col-12 text-center" onclick="javascript:showSubLayer(<?= $layer['layerId'] ?>)" style="cursor: pointer;">
+									<div class="col-12 ">
 
 										<img src="<?= Yii::$app->homeUrl ?>image/shape-<?= $i ?>.png" class="<?= $class1 ?>">
 										<?php
 										$arr = explode(" ", $layer['layerName']);
 										?>
 										<div class="<?= $class2 ?> col-12" id="layerName-<?= $layer['layerId'] ?>">
-
 											<?= $arr[0] ?>
-
 											<p>
 												<?php
 												if (isset($arr[1])) { ?>
@@ -85,76 +78,115 @@ $this->title = 'Management Layer';
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-6 col-md-6 col-12 top-layer-all">
-							<?php
-							if (isset($layers) && count($layers) > 0) {
-								foreach ($layers as $layer) : ?>
-									<div class="alert alert-light pb-30" role="alert" style="border-radius: 10px;">
-										<div class="col-12 Top-sub-Layer ">
-											<span id="right-layer-<?= $layer['layerId'] ?>"><?= $layer['layerName'] ?></span> Sub Layer
-										</div>
-										<div class="row pl-30 pr-30">
-											<div class="col-10 mt-10 ">
-												<input class="form-control me-2" id="sublayer-<?= $layer['layerId'] ?>" type="text" placeholder="" aria-label="">
-											</div>
-											<div class="col-2 mt-10">
-												<a href="javascript:addSubLayer(<?= $layer['layerId'] ?>)" class="btn btn-success">Add</a>
-											</div>
-										</div>
-									</div>
-
-							<?php
-								endforeach;
-							}
-							?>
-						</div>
 					</div>
-					<div class="col-12 mt-20">
-						<div class="row">
-							<?php
-							if (isset($layers) && count($layers) > 0) {
-								foreach ($layers as $layer) : ?>
 
-									<div class="col-lg-4 col-md-6 col-12">
-										<div class="alert alert-light" role="alert" style="border-radius: 10px;padding-bottom:30px;min-height:200px;">
-											<div class="col-12 pr-0 text-end">
-												<a href="javascript:deleteLayer(<?= $layer['layerId'] ?>)" class="btn btn-outline-danger btn-sm">
-													<i class="fa fa-trash-o" aria-hidden="true"></i>
-												</a>
-											</div>
-											<div class="col-12 big-management" id="bottom-layer-<?= $layer['layerId'] ?>">
-												<a href="javascript:showSubLayer(<?= $layer['layerId'] ?>)" class="no-underline-black">
-													<?= $layer['layerName'] ?>
-												</a>
-											</div>
-											<div class="row mt-10">
-												<div class="col-3 text-center" style="border-right: lightgray solid thin;">
-													<img src="<?= Yii::$app->homeUrl ?>image/Vector.png" class="alert-vector">
-												</div>
-
-												<div class="col-5 sub-later0">
-													SUB-LAYER
-												</div>
-												<div class="col-3 TM font-size-16" id="sub-layer-tag-<?= $layer['layerId'] ?>">
-													<?= SubLayer::subLayerInLayer($layer['layerId']) ?>
-												</div>
-											</div>
-										</div>
-									</div>
-							<?php
-								endforeach;
-							}
-							?>
-						</div>
-					</div>
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-12 col-12">
 				<?= $this->render('layer_title', [
 					"layers" => $layers
 				]) ?>
-				<?= $this->render('sub_layer') ?>
 
+
+			</div>
+			<div class="col-12 mt-10">
+				<div class="row">
+					<div class="offset-lg-6 col-lg-3 col-md-4 col-12 mt-10">
+						<div class="input-group">
+
+							<button class="btn btn-outline-secondary" type="button">Branch</button>
+							<select class="form-select font-size-14" id="branch-team" onchange="javascript:departmentBranch()">
+								<?php
+								if (isset($branchId) && $branchId != '') {
+								?>
+									<option value="<?= $branchId ?>"><?= Branch::branchName($branchId) ?></option>
+								<?php
+								}
+								?>
+								<option value="">Select Branch</option>
+								<?php
+								if (isset($branches) && count($branches) > 0) {
+									foreach ($branches as $branch) : ?>
+										<option value="<?= $branch['branchId'] ?>"><?= $branch['branchName'] ?></option>
+								<?php
+									endforeach;
+								}
+								?>
+							</select>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-4 col-12 mt-10">
+						<div class="input-group">
+
+							<button class="btn btn-outline-secondary" type="button">Department</button>
+							<select class="form-select font-size-14" id="department-team" <?= isset($departments) && count($departments) > 0 ? '' : 'disabled' ?>>
+								<?php
+								if (isset($departmentId) && $departmentId != '') {
+								?>
+									<option value="<?= $departmentId ?>"><?= Department::departmentNAme($departmentId) ?></option>
+								<?php
+								}
+								?>
+								<option value="">Select Department</option>
+								<?php
+								if (isset($departments) && count($departments) > 0) {
+									foreach ($departments as $deparment) : ?>
+										<option value="<?= $deparment['departmentId'] ?>"><?= $deparment['departmentName'] ?></option>
+								<?php
+									endforeach;
+								}
+								?>
+							</select>
+							<button type="button" class="btn btn-outline-dark" onclick="javascrip:filterLayerTitle()">
+								<i class="fa fa-filter" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="row mt-10" id="layer-result">
+					<div class="row mb-10">
+						<div class="col-12 font-size-16 font-b">
+							<?= Branch::branchName($branchId) ?>, <?= Department::departmentNAme($departmentId) ?>
+						</div>
+					</div>
+					<?php
+					if (isset($layers) && count($layers) > 0) {
+
+						if (isset($departmentId)) {
+							$filterDepartmentId = $departmentId;
+						} else {
+							$filterDepartmentId = '';
+						}
+						foreach ($layers as $layer) : ?>
+
+							<div class="col-lg-3 col-md-6 col-12">
+								<div class="alert alert-light pb-30" role="alert" style="border-radius: 10px;min-height:300px;">
+									<div class="col-12 pr-0 text-end">
+										<a href="javascript:deleteLayer(<?= $layer['layerId'] ?>)" class="btn btn-outline-danger btn-sm">
+											<i class="fa fa-trash-o" aria-hidden="true"></i>
+										</a>
+									</div>
+									<div class="col-12 big-management" id="bottom-layer-<?= $layer['layerId'] ?>">
+										<?= $layer['layerName'] ?>
+									</div>
+									<div class="row mt-10">
+										<div class="col-3 font-b text-center" style="border-right: lightgray solid thin;padding-top:37%;min-height:200px;">
+											Title
+										</div>
+
+										<div class="col-9 TM font-size-14 pl-10" id="sub-layer-tag-<?= $layer['layerId'] ?>">
+											<div class="row">
+												<?= Layer::titileInLayer($layer['layerId'], $filterDepartmentId) ?>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+					<?php
+						endforeach;
+					}
+					?>
+				</div>
 			</div>
 
 		</div>

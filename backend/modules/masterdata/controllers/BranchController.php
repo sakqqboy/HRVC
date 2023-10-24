@@ -32,7 +32,8 @@ class BranchController extends Controller
 			->JOIN("LEFT JOIN", "country co", "co.countryId=c.countryId")
 			->where(["branch.status" => 1, "branch.companyId" => $id])
 			->orderBy('branch.branchName')
-			->asArray()->all();
+			->asArray()
+			->all();
 		return json_encode($branch);
 	}
 	public function actionActiveBranch()
@@ -45,6 +46,17 @@ class BranchController extends Controller
 			->where(["branch.status" => 1])
 			->orderBy('branch.branchName')
 			->asArray()->all();
+		return json_encode($branch);
+	}
+	public function actionBranchDetail($id)
+	{
+
+		$branch = [];
+		$branch = Branch::find()
+			->where(["branchId" => $id])
+			->asArray()
+			->orderBy('branchName')
+			->one();
 		return json_encode($branch);
 	}
 	public function actionBranchTeam($id)

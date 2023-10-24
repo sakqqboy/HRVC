@@ -22,6 +22,7 @@ class LayerController extends Controller
 			->where(["status" => 1])
 			->orderBy('priority')
 			->asArray()
+			->orderBy('layerId ASC')
 			->all();
 		return json_encode($layer);
 	}

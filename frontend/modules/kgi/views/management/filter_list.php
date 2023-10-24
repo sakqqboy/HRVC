@@ -30,6 +30,21 @@
 			}
 			?>
 		</select>
+		<select class="form-select font-size-13" id="year-filter">
+
+			<option value="">Year</option>
+			<?php
+			$year = 2022;
+			$i = 1;
+			while ($i < 20) {
+			?>
+				<option value="<?= $year ?>"><?= $year ?></option>
+			<?php
+				$year += 1;
+				$i++;
+			}
+			?>
+		</select>
 
 		<select class="form-select font-size-13" id="status-filter">
 			<option value="">Status</option>

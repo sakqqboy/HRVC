@@ -34,20 +34,4 @@ class SubLayer extends \frontend\models\hrvc\master\SubLayerMaster
     {
         return array_merge(parent::attributeLabels(), []);
     }
-    public static function subLayerInLayer($layerId)
-    {
-        $textSub = '';
-        $subLayers = SubLayer::find()
-            ->select('shortTag')
-            ->where(["layerId" => $layerId])
-            ->orderBy('shortTag')
-            ->asArray()
-            ->all();
-        if (isset($subLayers) && count($subLayers) > 0) {
-            foreach ($subLayers as $sub) :
-                $textSub .= $sub["shortTag"] . '<br>';
-            endforeach;
-        }
-        return $textSub;
-    }
 }

@@ -3,6 +3,9 @@
 namespace frontend\modules\setting\controllers;
 
 use common\helpers\Path;
+use common\models\ModelMaster;
+use frontend\models\hrvc\Branch;
+use frontend\models\hrvc\Department;
 use frontend\models\hrvc\Layer;
 use frontend\models\hrvc\SubLayer;
 use Yii;
@@ -31,62 +34,139 @@ class LayerController extends Controller
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/layer/all-layer');
 		$layers = curl_exec($api);
-		curl_close($api);
 		$layers = json_decode($layers, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch');
+		$branches = curl_exec($api);
+		$branches = json_decode($branches, true);
+
+		$departmentId = null;
+
+		$firstBranch = Branch::find()
+			->select('branchId')
+			->where(["status" => 1])
+			->asArray()
+			->orderBy('branchName')
+			->one();
+		if (isset($firstBranch) && !empty($firstBranch)) {
+			$branchId = $firstBranch["branchId"];
+			$firstDepartment = Department::find()
+				->select('departmentId')
+				->where(["branchId" => $branchId, "status" => 1])
+				->orderBy('departmentName')
+				->asArray()
+				->one();
+			if (isset($firstDepartment) && !empty($firstDepartment)) {
+				$departmentId = $firstDepartment["departmentId"];
+			}
+		} else {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/branch/' . ModelMaster::encodeParams(["companyId" => '']));
+		}
+
+		curl_close($api);
 		return $this->render('index', [
-			"layers" => $layers
+			"layers" => $layers,
+			"branches" => $branches,
+			"departments" => [],
+			"branchId" => $branchId,
+			"departmentId" => $departmentId
 		]);
 	}
-	public function actionAddSubLayer()
+	public function actionFilterLayerTitle()
 	{
+		$departmentId = $_POST["departmentId"];
+		$branchId = $_POST["branchId"];
+		$departments = [];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		$layerId = $_POST["layerId"];
-		$subLayerName = $_POST["sublayerName"];
-		$check = SubLayer::find()
-			->select('subLayerId')
-			->where(["layerId" => $layerId, "subLayerName" => $subLayerName])
-			->asArray()
-			->one();
-		if (isset($check) && !empty($check)) {
-			$res["status"] = false;
-		} else {
-			$tagArr = explode(' ', $subLayerName);
-			if (count($tagArr) > 1) {
-				$firstDigit = substr($tagArr[0], 0, 1);
-				$secondDigit = substr($tagArr[1], 0, 1);
-				$tag = strtoupper($firstDigit) . strtoupper($secondDigit);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/layer/all-layer');
+		$layers = curl_exec($api);
+		$layers = json_decode($layers, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch');
+		$branches = curl_exec($api);
+		$branches = json_decode($branches, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' . $branchId);
+		$departments = curl_exec($api);
+		$departments = json_decode($departments, true);
+		curl_close($api);
+		if ($branchId == '') {
+			$firstBranch = Branch::find()
+				->select('branchId')
+				->where(["status" => 1])
+				->asArray()
+				->orderBy('branchName')
+				->one();
+			if (isset($firstBranch) && !empty($firstBranch)) {
+				$branchId = $firstBranch["branchId"];
 			} else {
-				$firstDigit = substr($tagArr[0], 0, 1);
-				$secondDigit = substr($tagArr[0], 1, 1);
-				$tag = strtoupper($firstDigit) . strtoupper($secondDigit);
+				return $this->redirect(Yii::$app->homeUrl . 'setting/branch/' . ModelMaster::encodeParams(["companyId" => '']));
 			}
-			$subLayer = new SubLayer();
-			$subLayer->layerId = $layerId;
-			$subLayer->subLayerName = $subLayerName;
-			$subLayer->shortTag = $tag;
-			$subLayer->status = 1;
-			$subLayer->createDateTime = new Expression('NOW()');
-			$subLayer->updateDateTime = new Expression('NOW()');
-			$subLayer->save(false);
-			$res["status"] = true;
 		}
-		$textSub = '';
-		$subLayers = SubLayer::find()
-			->select('shortTag')
-			->where(["layerId" => $layerId])
-			->orderBy('shortTag')
-			->asArray()
-			->all();
-		if (isset($subLayers) && count($subLayers) > 0) {
-			foreach ($subLayers as $sub) :
-				$textSub .= $sub["shortTag"] . '<br>';
-			endforeach;
+		if ($departmentId == '') {
+			$department = Department::find()
+				->select('departmentId')
+				->where(["branchId" => $branchId, "status" => 1])
+				->orderBy('departmentId')
+				->asArray()
+				->one();
+			if (isset($department) && !empty($department)) {
+				$departmentId = $department["departmentId"];
+			} else {
+				$departmentId = null;
+			}
 		}
-		$res["tag"] = $textSub;
+
+		$text = $this->renderAjax('filter_result', [
+			"layers" => $layers,
+			"branchId" => $branchId,
+			"departmentId" => $departmentId,
+		]);
+		$res["textResult"] = $text;
+		$res["status"] = true;
 		return json_encode($res);
+		// return $this->redirect(Yii::$app->homeUrl . 'setting/layer/result-layer-title/' . ModelMaster::encodeParams([
+		// 	"branchId" => $branchId,
+		// 	"departmentId" => $departmentId,
+		// ]));
 	}
+	public function actionResultLayerTitle($hash)
+	{
+		$param = ModelMaster::decodeParams($hash);
+		$branchId = $param["branchId"];
+		$departmentId = $param["departmentId"];
+		$departments = [];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/layer/all-layer');
+		$layers = curl_exec($api);
+		$layers = json_decode($layers, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch');
+		$branches = curl_exec($api);
+		$branches = json_decode($branches, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' . $branchId);
+		$departments = curl_exec($api);
+		$departments = json_decode($departments, true);
+		curl_close($api);
+		return $this->render('index', [
+			"layers" => $layers,
+			"branches" => $branches,
+			"branchId" => $branchId,
+			"departmentId" => $departmentId,
+			"departments" => $departments
+		]);
+	}
+
 	public function actionUpdateLayerName()
 	{
 		$layerId = $_POST["layerId"];
@@ -162,25 +242,6 @@ class LayerController extends Controller
 		} else {
 			$res["status"] = false;
 		}
-		return json_encode($res);
-	}
-	public function actionShowSubLayer()
-	{
-		$text = '';
-		$layerId = $_POST["layerId"];
-		$subLayers = SubLayer::find()->where(["layerId" => $layerId, "status" => 1])->all();
-		$layer = Layer::find()->select('layerName')->where(["layerId" => $layerId])->asArray()->one();
-		if (count($subLayers) > 0) {
-			$text = $this->renderAjax('update_sub', [
-				"subLayers" => $subLayers,
-				"layerId" => $layerId,
-				"layerName" => $layer["layerName"]
-			]);
-		}
-
-		$res["status"] = true;
-		$res["subLayerText"] = $text;
-
 		return json_encode($res);
 	}
 	public function actionUpdateSubLayerName()

@@ -71,11 +71,11 @@ $this->title = 'Update Employee';
 							<?php
 							}
 							?>
-
+							<option value="">Select Nationality</option>
 							<?php
-							if (isset($countries) && count($countries) > 0) {
-								foreach ($countries as $countryId => $countryName) : ?>
-									<option value="<?= $countryId ?>"><?= $countryName ?></option>
+							if (isset($nationalities) && count($nationalities) > 0) {
+								foreach ($nationalities as $nation) : ?>
+									<option value="<?= $nation['numCode'] ?>"><?= $nation['nationalityName'] ?></option>
 							<?php
 								endforeach;
 							}
@@ -96,19 +96,37 @@ $this->title = 'Update Employee';
 						</label>
 						<input type="date" id="birthday" class="form-control font-size-14" name="birthDate" required value="<?= $employee['birthDate'] ?>">
 					</div>
-					<div class="col-lg-5 col-md-6 col-12 mt-10">
+					<div class="col-lg-4 col-md-6 col-12 mt-10">
 						<label class="form-label font-size-13">
-							<strong class="text-danger">*</strong> Address 1
+							<strong class="text-danger">*</strong> Country
 						</label>
-						<textarea name="address1" class="form-control font-size-14" required><?= $employee['address1'] ?></textarea>
+						<select class="form-select font-size-14" name="country" id="country" required>
+							<?php
+							if (isset($oldData["country"])) { ?>
+
+								<option value="<?= $oldData['country']['id'] ?>"><?= $oldData['country']['name'] ?></option>
+							<?php
+							}
+							?>
+							<option value="">Select country</option>
+							<?php
+							if (isset($countries) && count($countries) > 0) {
+								foreach ($countries as $countryId => $countryName) : ?>
+									<option value="<?= $countryId ?>"><?= $countryName ?></option>
+							<?php
+								endforeach;
+							}
+							?>
+						</select>
+
 					</div>
-					<div class="col-lg-5 col-md-6 col-12 mt-10">
+					<div class="col-lg-4 col-md-6 col-12 mt-10">
 						<label class="form-label font-size-13">
-							<strong class="text-danger">*</strong> Address 2
+							<strong class="text-danger"></strong> Address Detail
 						</label>
-						<textarea name="address2" class="form-control font-size-14" required><?= $employee['address2'] ?></textarea>
+						<textarea class="form-control font-size-12" name="address1"></textarea>
 					</div>
-					<div class="col-lg-2 col-md-6 col-12 mt-10">
+					<div class="col-lg-4 col-md-6 col-12 mt-10">
 						<label class="form-label font-size-13">
 							<strong class="text-danger">*</strong> Gender
 						</label>
@@ -138,23 +156,20 @@ $this->title = 'Update Employee';
 			<hr class="col-lg-10 col-12">
 		</div>
 		<div class="row">
-			<div class="col-lg-3 col-md-6 col-12">
+			<div class="col-lg-4 col-md-6 col-12">
 				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Contact Number</label>
 				<input type="text" class="form-control font-size-14" name="telephoneNumber" required value="<?= $employee['telephoneNumber'] ?>">
 			</div>
-			<div class="col-lg-3 col-md-6 col-12">
+			<div class="col-lg-4 col-md-6 col-12">
 				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Emergency Contact Number</label>
 				<input type="text" class="form-control font-size-14" name="emergencyTel" required value="<?= $employee['emergencyTel'] ?>">
 
 			</div>
-			<div class="col-lg-3 col-md-6 col-12">
+			<div class="col-lg-4 col-md-6 col-12">
 				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Company Email</label>
 				<input type="email" class="form-control font-size-14" name="companyEmail" required value="<?= $employee['companyEmail'] ?>">
 			</div>
-			<div class="col-lg-3 col-md-6 col-12">
-				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Personal Email</label>
-				<input type="email" class="form-control font-size-14" name="personalEmail" required value="<?= $employee['email'] ?>">
-			</div>
+
 		</div>
 		<div class="col-12 mt-30 font-size-16" style="font-weight: 700;">
 			Work Information
@@ -195,6 +210,14 @@ $this->title = 'Update Employee';
 					<?php
 					}
 					?>
+					<?php
+					if (isset($branches) && count($branches) > 0) {
+						foreach ($branches as $branch) : ?>
+							<option value="<?= $branch['branchId'] ?>"><?= $branch['branchName'] ?></option>
+					<?php
+						endforeach;
+					}
+					?>
 				</select>
 			</div>
 			<div class="col-lg-3 col-md-6 col-12">
@@ -205,6 +228,14 @@ $this->title = 'Update Employee';
 
 						<option value="<?= $oldData['department']['id'] ?>"><?= $oldData['department']['name'] ?></option>
 					<?php
+					}
+					?>
+					<?php
+					if (isset($departments) && count($departments) > 0) {
+						foreach ($departments as $department) : ?>
+							<option value="<?= $department['departmentId'] ?>"><?= $department['departmentName'] ?></option>
+					<?php
+						endforeach;
 					}
 					?>
 				</select>
@@ -219,11 +250,41 @@ $this->title = 'Update Employee';
 					<?php
 					}
 					?>
+					<?php
+					if (isset($teams) && count($teams) > 0) {
+						foreach ($teams as $team) : ?>
+							<option value="<?= $team['teamId'] ?>"><?= $team['teamName'] ?></option>
+					<?php
+						endforeach;
+					}
+					?>
+				</select>
+			</div>
+			<div class="col-lg-3 col-md-6 col-12 mt-10">
+				<label class="form-label font-size-13">Team Position</label>
+				<select class="form-select font-size-14" name="teamPosition" id="team-position">
+					<?php
+					if (isset($oldData["teamPosition"])) { ?>
+
+						<option value="<?= $oldData['teamPosition']['id'] ?>"><?= $oldData['teamPosition']['name'] ?></option>
+					<?php
+					}
+					?>
+					<option value="">Select Team Position</option>
+					<?php
+					if (isset($teamPosition) && count($teamPosition) > 0) {
+						foreach ($teamPosition as $position) : ?>
+							<option value="<?= $position['teamPositionId'] ?>"><?= $position['teamPositionName'] ?></option>
+					<?php
+						endforeach;
+					}
+					?>
+
 				</select>
 			</div>
 			<div class="col-lg-3 col-md-6 col-12 mt-10">
 				<label class="form-label font-size-13"><strong class="text-danger">*</strong>Title</label>
-				<select class="form-select font-size-14" name="title">
+				<select class="form-select font-size-14" name="title" id="title-department">
 					<?php
 					if (isset($oldData["title"])) { ?>
 
@@ -423,10 +484,11 @@ $this->title = 'Update Employee';
 					<label class="form-label font-size-13">Languages Spoken</label>
 					<input type="text" class="form-control font-size-14" name="language" value="<?= $employee['spoken'] ?>">
 				</div>
-				<div class="col-12 mt-10">
+				<!-- <div class="col-12 mt-10">
 					<label class="form-label font-size-13">Social Links</label>
-					<input type="text" class="form-control font-size-14" name="socialLink" value="<?= $employee['socialLink'] ?>">
-				</div>
+					<input type="text" class="form-control font-size-14" name="socialLink" value="<?php // $employee['socialLink'] 
+																	?>">
+				</div> -->
 			</div>
 			<div class="col-lg-6 col-12 z-1">
 				<div class="row">

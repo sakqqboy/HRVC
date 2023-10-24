@@ -318,7 +318,7 @@ class ManagementController extends Controller
 		}
 		return json_encode($data);
 	}
-	public function actionKpiFilter($companyId, $branchId, $teamId, $month, $status, $date)
+	public function actionKpiFilter($companyId, $branchId, $teamId, $month, $status, $year)
 	{
 		$data = [];
 		$kpis = Kpi::find()
@@ -332,6 +332,7 @@ class ManagementController extends Controller
 				"kt.teamId" => $teamId,
 				"kpi.month" => $month,
 				"kpi.status" => $status,
+				"kpi.year" => $year,
 
 			])
 			->orderBy('kpi.createDateTime ASC')
@@ -363,7 +364,8 @@ class ManagementController extends Controller
 					"countryName" => Country::countryNameBycompany($kpi['companyId']),
 					"issue" => KpiIssue::lastestIssue($kpi["kpiId"])["issue"],
 					"solution" => KpiIssue::lastestIssue($kpi["kpiId"])["solution"],
-					"employee" => KpiTeam::employeeTeam($kpi['kpiId'])
+					"employee" => KpiTeam::employeeTeam($kpi['kpiId']),
+					"year" => $kpi["year"],
 				];
 			endforeach;
 		}

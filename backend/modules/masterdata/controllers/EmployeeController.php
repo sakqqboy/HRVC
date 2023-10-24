@@ -19,10 +19,12 @@ class EmployeeController extends Controller
 	public function actionEmployeeDetail($id)
 	{
 		$employee = Employee::find()
-			->select('employee.*,c.companyName,co.countryName,co.flag,t.titleName,condition.employeeConditionName,s.statusName')
+			->select('employee.*,c.companyName,co.countryName,co.flag,t.titleName,
+			condition.employeeConditionName,s.statusName,na.nationalityName')
 			->JOIN("LEFT JOIN", "company c", "c.companyId=employee.companyId")
 			->JOIN("LEFT JOIN", "title t", "t.titleId=employee.titleId")
 			->JOIN("LEFT JOIN", "country co", "co.countryId=c.countryId")
+			->JOIN("LEFT JOIN", "nationality na", "na.numCode=employee.nationalityId")
 			->JOIN("LEFT JOIN", "employee_status es", "es.employeeId=employee.employeeId")
 			->JOIN("LEFT JOIN", "status s", "s.statusId=es.statusId")
 			->JOIN("LEFT JOIN", "employee_condition condition", "condition.employeeConditionId=employee.employeeConditionId")
@@ -34,10 +36,12 @@ class EmployeeController extends Controller
 	public function actionAllEmployeeDetail($companyId)
 	{
 		$employee = Employee::find()
-			->select('employee.*,c.companyName,co.countryName,co.flag,t.titleName,condition.employeeConditionName,s.statusName')
+			->select('employee.*,c.companyName,co.countryName,co.flag,t.titleName,
+			condition.employeeConditionName,s.statusName,na.nationalityName')
 			->JOIN("LEFT JOIN", "company c", "c.companyId=employee.companyId")
 			->JOIN("LEFT JOIN", "title t", "t.titleId=employee.titleId")
 			->JOIN("LEFT JOIN", "country co", "co.countryId=c.countryId")
+			->JOIN("LEFT JOIN", "nationality na", "na.numCode=employee.nationalityId")
 			->JOIN("LEFT JOIN", "employee_status es", "es.employeeId=employee.employeeId")
 			->JOIN("LEFT JOIN", "status s", "s.statusId=es.statusId")
 			->JOIN("LEFT JOIN", "employee_condition condition", "condition.employeeConditionId=employee.employeeConditionId")

@@ -12,7 +12,7 @@ $this->title = 'company profile';
 			<img src="<?= Yii::$app->homeUrl . $company['banner'] ?>" class="sad-1">
 		<?php
 		} else { ?>
-
+			<img src="<?= Yii::$app->homeUrl . 'image/company.jpg' ?>" class="sad-1">
 		<?php
 		}
 		?>
@@ -29,7 +29,7 @@ $this->title = 'company profile';
 						<img src="<?= Yii::$app->homeUrl . $company['picture'] ?>" class="company-group-picture">
 					<?php
 					} else { ?>
-
+						<img src="<?= Yii::$app->homeUrl . 'image/userProfile.png' ?>" class="company-group-picture">
 					<?php
 					}
 					?>

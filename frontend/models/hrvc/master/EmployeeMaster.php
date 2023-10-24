@@ -23,8 +23,10 @@ use Yii;
     * @property integer $departmentId
     * @property integer $titleId
     * @property integer $teamId
+    * @property integer $teamPositionId
     * @property string $joinDate
     * @property string $hireDate
+    * @property integer $countryId
     * @property integer $employeeConditionId
     * @property string $address1
     * @property string $address2
@@ -57,9 +59,9 @@ return 'employee';
 public function rules()
 {
 return [
-            [['employeeNumber', 'employeeFirstname', 'employeeSurename', 'gender', 'birthDate', 'email', 'telephoneNumber', 'companyId', 'branchId', 'departmentId', 'titleId', 'employeeConditionId'], 'required'],
+            [['employeeNumber', 'employeeFirstname', 'employeeSurename', 'gender', 'birthDate', 'email', 'telephoneNumber', 'companyId', 'branchId', 'departmentId', 'titleId', 'countryId', 'employeeConditionId'], 'required'],
             [['birthDate', 'joinDate', 'hireDate', 'createDateTime', 'updateDateTime'], 'safe'],
-            [['companyId', 'branchId', 'departmentId', 'titleId', 'teamId', 'employeeConditionId', 'nationalityId', 'workingTime'], 'integer'],
+            [['companyId', 'branchId', 'departmentId', 'titleId', 'teamId', 'teamPositionId', 'countryId', 'employeeConditionId', 'nationalityId', 'workingTime'], 'integer'],
             [['address1', 'address2', 'spoken', 'socialLink', 'remark'], 'string'],
             [['employeeNumber', 'employeeFirstname', 'employeeSurename', 'employeeNickname', 'email', 'contact'], 'string', 'max' => 100],
             [['gender', 'status'], 'string', 'max' => 10],
@@ -89,8 +91,10 @@ return [
     'departmentId' => 'Department ID',
     'titleId' => 'Title ID',
     'teamId' => 'Team ID',
+    'teamPositionId' => 'Team Position ID',
     'joinDate' => 'Join Date',
     'hireDate' => 'Hire Date',
+    'countryId' => 'Country ID',
     'employeeConditionId' => 'Employee Condition ID',
     'address1' => 'Address1',
     'address2' => 'Address2',

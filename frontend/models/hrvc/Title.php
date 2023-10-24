@@ -42,4 +42,9 @@ class Title extends \frontend\models\hrvc\master\TitleMaster
             return '';
         }
     }
+    public static function  shortName($titleId)
+    {
+        $title = Title::find()->where(["titleId" => $titleId])->asArray()->one();
+        return $title["shortTag"];
+    }
 }

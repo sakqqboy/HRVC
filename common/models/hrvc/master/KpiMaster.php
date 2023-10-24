@@ -14,6 +14,7 @@ use Yii;
     * @property string $periodDate
     * @property string $targetAmount
     * @property string $month
+    * @property string $year
     * @property string $kpiDetail
     * @property integer $quantRatio
     * @property string $priority
@@ -47,7 +48,7 @@ return [
             [['targetAmount', 'result'], 'number'],
             [['kpiDetail'], 'string'],
             [['kpiName'], 'string', 'max' => 255],
-            [['month', 'priority', 'code'], 'string', 'max' => 45],
+            [['month', 'year', 'priority', 'code'], 'string', 'max' => 45],
             [['quantRatio', 'amountType', 'status'], 'string', 'max' => 10],
         ];
 }
@@ -65,6 +66,7 @@ return [
     'periodDate' => 'Period Date',
     'targetAmount' => 'Target Amount',
     'month' => 'Month',
+    'year' => 'Year',
     'kpiDetail' => 'Kpi Detail',
     'quantRatio' => 'Quant Ratio',
     'priority' => 'Priority',

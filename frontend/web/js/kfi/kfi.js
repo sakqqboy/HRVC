@@ -25,6 +25,34 @@ function companyBranchKfi() {
         }
     });
 }
+function companyMultiBrachKfi() { 
+	clearEveryShow();
+    var acType = $("#acType").val();
+    if (acType == "update") {
+        var companyId = $("#companyId-update").val();
+    } else { 
+        var companyId = $("#companyId").val();
+    }
+    var kfiId = $("#kfiId").val();
+	var url = $url + 'kfi/management/company-multi-branch';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { companyId: companyId, acType: acType,kfiId:kfiId },
+		success: function(data) {
+            if (data.status) {
+                if (acType == "update") {
+                    $("#show-multi-branch-update").html(data.branchText);
+                    
+                } else { 
+                    $("#show-multi-branch").html(data.branchText);
+                }
+		    }
+		}
+	   });
+}
+
 function branchDepartmentKfi() { 
     var branchId = $("#branch-create-kfi").val();
     var url = $url + 'kfi/management/branch-department';
@@ -83,7 +111,7 @@ function updateKfi(kfiId) {
         data: { kfiId: kfiId },
         success: function (data) {
             $("#kfiName").val(data.kfiName);
-            $("#companyName").val(data.companyName);
+            $("#companyId-update").val(data.companyId);
             $(".currentUnit").val(data.unitId);
             $(".previousUnit").val(data.unitId);
             $("#show-multi-branch-update").html(data.textBranch);
@@ -95,7 +123,8 @@ function updateKfi(kfiId) {
             $("#targetAmount").val(data.targetAmount);
             $("#kfiDetail").val(data.detail);
             $("#quantRatio").val(data.quantRatio);
-            $("#monthName").val(data.monthName);
+            $("#monthName").val(data.month);
+            $("#year").val(data.year);
             $("#amountType").val(data.amountType);
             $("#code").val(data.code);
             $("#kfiStatus").val(data.kfiStatus);
@@ -137,7 +166,7 @@ function totalBranchUpdate() {
 	var totalBranch = 0;
 	var data = [];
 	var i = 0;
-	$('input[id="multi-check-update"').each(function () {
+	$('input[id="multi-check-update"]').each(function () {
 		data[i] = $(this).val();
 		i++;
 	});
@@ -173,7 +202,7 @@ function totalDepartmentUpdate(branchId) {
 	var totalDepartment = 0;
 	var data = [];
 	var i = 0;
-	$('input[id="multi-check-' + branchId + '-update"').each(function () {
+	$('input[id="multi-check-' + branchId + '-update"]').each(function () {
 		data[i] = $(this).val();
 		i++;
 	});
@@ -337,21 +366,27 @@ function showAttachFileName(kfiId) {
     $("#attachFile-" + kfiId).html(message);
 }
 function kfiFilter() {
-	var companyId = $("#company-filter").val();
-	var branchId = $("#branch-filter").val();
-	// var teamId = $("#team-filter").val();
-	var month = $("#month-filter").val();
-	var status = $("#status-filter").val();
-	var date = $("#date-filter").val();
-	var type = $("#type").val();
-	var url = $url + 'kfi/management/search-kfi';
-	$.ajax({
-		type: "POST",
-		dataType: 'json',
-		url: url,
-		data: { companyId: companyId,branchId: branchId,month: month,status: status,date: date,type:type },
-		success: function (data) {
+    var companyId = $("#company-filter").val();
+    var branchId = $("#branch-filter").val();
+    var year = $("#year-filter").val();
+    var month = $("#month-filter").val();
+    var status = $("#status-filter").val();
+    var type = $("#type").val();
+    var url = $url + 'kfi/management/search-kfi';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { companyId: companyId, branchId: branchId, month: month, status: status, year: year, type: type },
+        success: function (data) {
 			
-		}
-	});
+        }
+    });
+}
+function changeAcType(type) { 
+    if (type == 1) {
+        $("#acType").val("create");
+    } else { 
+        $("#acType").val("update");
+    }
 }

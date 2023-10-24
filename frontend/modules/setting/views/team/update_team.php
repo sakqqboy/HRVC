@@ -1,8 +1,18 @@
+<?php
+
+use frontend\models\hrvc\Team;
+?>
 <div class="card" style="border: none;">
 	<div class="card-body">
 		<div class="row">
 			<div class="col-8 font-size-14 font-b ">
 				<?= $team['teamName'] ?>
+				<span class="font-size-14 text-success">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</span>
+				<span class="font-size-12 text-primary">
+					updated
+				</span>
 			</div>
 			<div class="col-4  pl-0 pr-0 text-end">
 				<a href="javascript:updateTeam(<?= $teamId + 543 ?>)" class="btn btn-outline-dark mr-5 font-size-10">
@@ -13,11 +23,14 @@
 				</a>
 			</div>
 		</div>
-		<div class="col-12 mt-10 font-size-12">
+		<div class="col-12 mt-5 font-size-12">
 			<?= $team["companyName"] ?>
 		</div>
-		<div class="col-12 mt-10 bangladresh-hrvc2">
+		<div class="col-12 mt-5 bangladresh-hrvc2">
 			Branch: <img src="<?= Yii::$app->homeUrl ?><?= $team['flag'] ?>" class="bangladresh-hrvc1 mr-5"> <?= $team["branchName"] ?>, <?= $team["countryName"] ?>
+		</div>
+		<div class="col-12 mt-5 font-size-12">
+			Department: <?= $team["departmentName"] ?>
 		</div>
 		<div class="row mt-20">
 
@@ -35,7 +48,7 @@
 					</div>
 					<div class="col-4 text-end font-size-12 font-b">
 						<a href="" class="no-underline-black">
-							8
+							<?= Team::employeeInTeam($team['teamId']) ?>
 						</a>
 					</div>
 				</div>

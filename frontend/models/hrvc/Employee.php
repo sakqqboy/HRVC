@@ -55,8 +55,8 @@ class Employee extends \frontend\models\hrvc\master\EmployeeMaster
             $diffDate = floor($diff / 86400); //จำนวนวันที่ต่างกัน
             $years = floor($diffDate / 365);
             $diffYear = $diffDate % 365;
-            $month = floor($diffYear / 12);
-            $diffMonth = $month % 12;
+            $month = floor($diffYear / 30);
+            $diffMonth = $month % 30;
             return $years . " Years " . $month . " months " . $diffMonth . " days";
         } else {
             return 0;

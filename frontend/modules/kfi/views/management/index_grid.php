@@ -26,21 +26,16 @@ $this->title = 'KFI Grid View';
 					</div>
 				</div>
 
-				<div class="col-lg-5 col-md-12 col-12 New-KFI">
+				<div class="col-lg-7 col-md-12 col-12 New-KFI">
 					<?= $this->render('filter_list', [
 						"companies" => $companies,
 						"months" => $months
 					]) ?>
 					<input type="hidden" id="type" value="grid">
 				</div>
-				<div class="col-lg-3 col-md-6 col-12 New-date">
+				<div class="col-lg-1 col-md-6 col-12 New-date">
 					<div class="row">
-						<div class="col-8">
-							<div class="input-group">
-								<label class="input-group-text font-size-13" for="">Date</label>
-								<input type="date" class="form-control font-size-13" name="birthday" id="">
-							</div>
-						</div>
+
 						<div class="col-4 new-light-4">
 							<div class="btn-group" role="group" aria-label="Basic example">
 								<a href="<?= Yii::$app->homeUrl . 'kfi/management/index' ?>" class="btn btn-outline-primary font-size-13"><i class="fa fa-list-ul" aria-hidden="true"></i></a>
@@ -81,14 +76,14 @@ $this->title = 'KFI Grid View';
 														</div>
 														<div class="col-8 text-start pl-0">
 															<span class="badge rounded-pill bg-deadline0 ml-5" style="width:100%;">
-																<span class="deadline-orange"> Deadline</span> <span class="mon-dark">: <?= $kfi['checkDate'] == "" ? 'Not set' : $kfi['checkDate'] ?></span>
+																<span class="deadline-orange"> Term</span> <span class="mon-dark">: <?= $kfi['checkDate'] == "" ? 'Not set' : $kfi['checkDate'] ?></span>
 															</span>
 														</div>
 													</div>
 
 												</div>
 												<div class="col-9 mt-10 font-size-12">
-													<img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="image-is mr-3"> <?= $kfi["branchName"] ?>, Bangladesh
+													<img src="<?= Yii::$app->homeUrl ?><?= $kfi["flag"] ?>" class="image-is mr-3"> <?= $kfi["branchName"] ?>, Bangladesh
 												</div>
 												<div class="col-3 t-10">
 													<span class="badge rounded-pill <?= $kfi['status'] == 1 ? 'bg-warning text-dark' : 'bg-success' ?>"> <?= $kfi['status'] == 1 ? 'In process' : 'Completed' ?></span>
@@ -157,7 +152,9 @@ $this->title = 'KFI Grid View';
 																<i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i>
 															</span> &nbsp;
 															<span class="text-primary font-size-12">Next Update</span>
-															<strong class="font-size-12"><?= $kfi['nextCheck'] == "" ? 'Not set' : $kfi['nextCheck'] ?></strong>
+															<strong class="font-size-12 <?= $kfi['nextCheck'] == "" || $kfi['isOver'] == 1 ? 'text-danger' : '' ?>">
+																<?= $kfi['nextCheck'] == "" ? 'Not set' : $kfi['nextCheck'] ?>
+															</strong>
 														</div>
 
 													</div>

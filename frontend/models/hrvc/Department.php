@@ -35,7 +35,11 @@ class Department extends \frontend\models\hrvc\master\DepartmentMaster
     }
     public static function departmentNAme($departmentId)
     {
-        $department = Department::find()->select('departmentName')->where(["departmentId" => $departmentId])->asArray()->one();
-        return $department["departmentName"];
+        $departmentName = "";
+        if ($departmentId != '') {
+            $department = Department::find()->select('departmentName')->where(["departmentId" => $departmentId])->asArray()->one();
+            $departmentName = $department["departmentName"];
+        }
+        return   $departmentName;
     }
 }

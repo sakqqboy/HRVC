@@ -244,14 +244,14 @@ function kpiFilter() {
 	var teamId = $("#team-filter").val();
 	var month = $("#month-filter").val();
 	var status = $("#status-filter").val();
-	var date = $("#date-filter").val();
+	var year = $("#year-filter").val();
 	var type = $("#type").val();
 	var url = $url + 'kpi/management/search-kpi';
 	$.ajax({
 		type: "POST",
 		dataType: 'json',
 		url: url,
-		data: { companyId: companyId,branchId: branchId,teamId: teamId,month: month,status: status,date: date,type:type },
+		data: { companyId: companyId,branchId: branchId,teamId: teamId,month: month,status: status,year: year,type:type },
 		success: function (data) {
 			
 		}
@@ -332,7 +332,7 @@ function totalBranchUpdate() {
 	var totalBranch = 0;
 	var data = [];
 	var i = 0;
-	$('input[id="multi-check-update"').each(function () {
+	$('input[id="multi-check-update"]').each(function () {
 		data[i] = $(this).val();
 		i++;
 	});

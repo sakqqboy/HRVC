@@ -9,7 +9,6 @@ $url = $baseUrl;
 function branchCompany() {
     var companyId = $("#company-team").val();
     var url = $url + 'setting/team/company-branch';
-    $("#department-team").attr("disabled", "true");
     $.ajax({
         type: "POST",
         dataType: 'json',
@@ -48,6 +47,54 @@ function teamDepartment() {
         success: function(data) {
             $("#team-department").removeAttr("disabled", "true");
             $("#team-department").html(data.textSelect);
+            $("#title-department").removeAttr("disabled", "true");
+            $("#title-department").html(data.textSelectTitle);
+        }
+    });
+}
+
+function branchCompanyFilter() {
+    var companyId = $("#company-team-filter").val();
+    var url = $url + 'setting/team/company-branch';
+    $("#department-team-filter").attr("disabled", "true");
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { companyId: companyId },
+        success: function(data) {
+            $("#branch-team-filter").removeAttr("disabled", "true");
+            $("#branch-team-filter").html(data.textSelect);
+        }
+    });
+}
+
+function departmentBranchFilter() {
+    var branchId = $("#branch-team-filter").val();
+    var url = $url + 'setting/team/branch-department';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { branchId: branchId },
+        success: function(data) {
+            $("#department-team-filter").removeAttr("disabled", "true");
+            $("#department-team-filter").html(data.textSelect);
+        }
+    });
+}
+
+function teamDepartmentFilter() {
+    var departmentId = $("#department-team-filter").val();
+    var url = $url + 'setting/team/department-team';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { departmentId: departmentId },
+        success: function(data) {
+            $("#team-department-filter").removeAttr("disabled", "true");
+            $("#team-department-filter").html(data.textSelect);
         }
     });
 }
@@ -198,4 +245,20 @@ function deleteTeam(teamId) {
             }
         });
     }
+}
+function filterTeam() { 
+    var companyId = $("#company-team-filter").val();
+    var branchId = $("#branch-team-filter").val();
+    var departmentId = $("#department-team-filter").val();
+    var url = $url + 'setting/team/filter-team';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { companyId: companyId,branchId:branchId,departmentId:departmentId },
+        success: function(data) {
+           
+
+        }
+    });
 }

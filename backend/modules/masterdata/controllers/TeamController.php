@@ -37,6 +37,21 @@ class TeamController extends Controller
 			->all();
 		return json_encode($teams);
 	}
+	public function actionCompanyTeam($id)
+	{
+		$teams = [];
+		$teams = Team::find()
+			->select('team.teamName,d.departmentName,b.branchName,c.companyName,co.flag,team.teamId,co.countryName')
+			->JOIN("LEFT JOIN", "department d", "d.departmentId=team.departmentId")
+			->JOIN("LEFT JOIN", "branch b", "b.branchId=d.branchId")
+			->JOIN("LEFT JOIN", "company c", "c.companyId=b.companyId")
+			->JOIN("LEFT JOIN", "country co", "co.countryId=c.countryId")
+			->where(["team.status" => 1, "c.companyId" => $id])
+			->orderBy('team.teamName')
+			->asArray()
+			->all();
+		return json_encode($teams);
+	}
 	public function actionTeamDetail($id)
 	{
 		$teams = [];
@@ -57,21 +72,6 @@ class TeamController extends Controller
 		$teams = Team::find()
 			->select("teamName,teamId")
 			->where(["departmentId" => $id, "status" => 1])
-			->asArray()
-			->all();
-		return json_encode($teams);
-	}
-	public function actionCompanyTeam($id)
-	{
-		$teams = [];
-		$teams = Team::find()
-			->select('team.teamName,d.departmentName,b.branchName,c.companyName,co.flag,team.teamId,co.countryName')
-			->JOIN("LEFT JOIN", "department d", "d.departmentId=team.departmentId")
-			->JOIN("LEFT JOIN", "branch b", "b.branchId=d.branchId")
-			->JOIN("LEFT JOIN", "company c", "c.companyId=b.companyId")
-			->JOIN("LEFT JOIN", "country co", "co.countryId=c.countryId")
-			->where(["team.status" => 1, "c.companyId" => $id])
-			->orderBy('team.teamName')
 			->asArray()
 			->all();
 		return json_encode($teams);

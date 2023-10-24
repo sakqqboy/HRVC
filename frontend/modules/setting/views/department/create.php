@@ -1,6 +1,8 @@
 <?php
 
 use common\models\ModelMaster;
+use frontend\models\hrvc\Branch;
+use frontend\models\hrvc\Company;
 
 $this->title = 'Department';
 ?>
@@ -17,32 +19,60 @@ $this->title = 'Department';
 		</div> -->
 		<div class="col-lg-3 col-md-6 col-12 mt-10">
 			<div class="input-group">
-				<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Branch</button>
-				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="#">Action</a></li>
-					<li><a class="dropdown-item" href="#">Another action</a></li>
-					<li><a class="dropdown-item" href="#">Something else here</a></li>
-					<li>
-						<hr class="dropdown-divider">
-					</li>
-					<li><a class="dropdown-item" href="#">Separated link</a></li>
-				</ul>
-				<input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="Tokyo Consulting Firm Pvt. Ltd">
+				<button class="btn btn-outline-secondary" type="button">Company</button>
+				<select class="form-control font-size-14" id="company-team-filter" onchange="javascript:branchCompanyFilter()">
+					<?php
+					if (isset($companyIdSearch) && $companyIdSearch != '') { ?>
+						<option value="<?= $companyIdSearch ?>"><?= Company::companyName($companyIdSearch) ?></option>
+					<?php
+
+					}
+					?>
+					<option value="">Select Company</option>
+					<?php
+					if (isset($companies) && count($companies) > 0) {
+					?>
+						<?php
+						foreach ($companies as $company) : ?>
+							<option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
+						<?php
+						endforeach; ?>
+
+					<?php
+					}
+					?>
+				</select>
 			</div>
 		</div>
 		<div class="col-lg-3 col-md-6 col-12 mt-10">
 			<div class="input-group">
-				<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Company</button>
-				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="#">Action</a></li>
-					<li><a class="dropdown-item" href="#">Another action</a></li>
-					<li><a class="dropdown-item" href="#">Something else here</a></li>
-					<li>
-						<hr class="dropdown-divider">
-					</li>
-					<li><a class="dropdown-item" href="#">Separated link</a></li>
-				</ul>
-				<input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="Tokyo Consulting Firm Pvt. Ltd">
+
+				<button class="btn btn-outline-secondary" type="button">Branch</button>
+				<select class="form-control font-size-14" id="branch-team-filter" <?= isset($branchSearch) && count($branchSearch) > 0 ? '' : 'disabled' ?>>
+					<?php
+					if (isset($branchIdSearch) && $branchIdSearch != '') { ?>
+						<option value="<?= $branchIdSearch ?>"><?= Branch::branchName($branchIdSearch) ?></option>
+					<?php
+
+					}
+					?>
+					<option value="">Select Branch</option>
+					<?php
+					if (isset($branchSearch) && count($branchSearch) > 0) {
+					?>
+						<?php
+						foreach ($branchSearch as $branchs) : ?>
+							<option value="<?= $branchs['branchId'] ?>"><?= $branchs['branchName'] ?></option>
+						<?php
+						endforeach; ?>
+
+					<?php
+					}
+					?>
+				</select>
+				<button type="button" class="btn btn-outline-dark" onclick="javascrip:filterDepartment()">
+					<i class="fa fa-filter" aria-hidden="true"></i>
+				</button>
 			</div>
 		</div>
 	</div>
@@ -149,15 +179,16 @@ $this->title = 'Department';
 											</div>
 										</div>
 										<div class="row mt-10">
-											<div class="col-5 show-height text-center font-b" style="padding-top:23%;">
-												<a href="javascript:showTitleList(<?= $departmentId + 543 ?>)" class="no-underline-black">
-													<i class="fa fa-plus-circle" aria-hidden="true"></i> Title
-												</a>
-												<div class="title-list text-start" id="title-list-<?= $departmentId + 543 ?>">
-
-												</div>
+											<div class="col-3 show-height text-center font-b" style="padding-top:15%;">
+												<!-- <a href="javascript:showTitleList(<?php // $departmentId + 543 
+																		?>)" class="no-underline-black"> -->
+												Title
+												<!-- </a> -->
+												<!-- <div class="title-list text-start" id="title-list-<?php // $departmentId + 543 
+																				?>">
+												</div> -->
 											</div>
-											<div class="col-7 department-sizesmall" id="title-department-<?= $departmentId + 543 ?>">
+											<div class="col-9 department-sizesmall" id="title-department-<?= $departmentId + 543 ?>">
 												<?php
 												if (isset($dpm["titleDepartments"]) && count($dpm["titleDepartments"]) > 0) {
 													foreach ($dpm["titleDepartments"] as $dpm2) : ?>
@@ -180,6 +211,68 @@ $this->title = 'Department';
 					<?php
 					}
 					?>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-3 col-md-4 col-6">
+			<div class="alert alert-secondary-background" role="alert">
+				<div class="row">
+					<div class="col-4">
+						<i class="fa fa-users" aria-hidden="true" style="font-size: 25px;padding-top: 18px;"></i>
+					</div>
+					<div class="col-2">
+						<a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" style="text-decoration: none;">
+							<div class="col-12 text-primary">
+								Branch
+							</div>
+							<div class="col-2 number-bold text-black">
+								<?= $totalBranches ?>
+							</div>
+						</a>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-3 col-md-4 col-6">
+			<div class="alert alert-secondary-background" role="alert">
+				<div class="row">
+					<div class="col-4">
+						<i class="fa fa-users" aria-hidden="true" style="font-size: 25px;padding-top: 18px;"></i>
+					</div>
+					<div class="col-2">
+						<a href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" style="text-decoration: none;">
+							<div class="col-12 text-primary">
+								Team
+							</div>
+							<div class="col-2 number-bold text-black">
+								<?= $totalTeam ?>
+							</div>
+						</a>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-3 col-md-4 col-6">
+			<div class="alert alert-secondary-background" role="alert">
+				<div class="row">
+					<div class="col-4">
+						<i class="fa fa-users" aria-hidden="true" style="font-size: 25px;padding-top: 18px;"></i>
+					</div>
+					<div class="col-2">
+						<a href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" style="text-decoration: none;">
+							<div class="col-12 text-primary">
+								Employee
+							</div>
+							<div class="col-2 number-bold text-black">
+								<?= $totalEmployees
+								?>
+							</div>
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>

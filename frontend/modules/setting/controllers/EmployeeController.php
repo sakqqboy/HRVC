@@ -13,8 +13,10 @@ use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\EmployeeCondition;
 use frontend\models\hrvc\EmployeeStatus;
 use frontend\models\hrvc\Group;
+use frontend\models\hrvc\Nationality;
 use frontend\models\hrvc\Status;
 use frontend\models\hrvc\Team;
+use frontend\models\hrvc\TeamPosition;
 use frontend\models\hrvc\Title;
 use frontend\models\hrvc\User;
 use frontend\models\hrvc\UserRole;
@@ -51,15 +53,24 @@ class EmployeeController extends Controller
         if ($companyId == '') {
             $companyId = null;
         }
+        $groupId = Group::currentGroupId();
+        if ($groupId == null) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+        }
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/all-employee-detail?companyId=' . $companyId);
         $employees = curl_exec($api);
         $employees = json_decode($employees, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+        $companies = curl_exec($api);
+        $companies = json_decode($companies, true);
         curl_close($api);
         return $this->render('index', [
-            "employees" => $employees
+            "employees" => $employees,
+            "companies" => $companies
         ]);
     }
     public function actionCreate()
@@ -95,6 +106,15 @@ class EmployeeController extends Controller
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/role/active-role');
         $roles = curl_exec($api);
         $roles = json_decode($roles, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team-position/index');
+        $teamPosition = curl_exec($api);
+        $teamPosition = json_decode($teamPosition, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/nationality');
+        $nationalities = curl_exec($api);
+        $nationalities = json_decode($nationalities, true);
+
         curl_close($api);
 
         return $this->render('create', [
@@ -103,7 +123,9 @@ class EmployeeController extends Controller
             "titles" => $titles,
             "status" => $status,
             "conditions" => $conditions,
-            "roles" => $roles
+            "roles" => $roles,
+            "teamPosition" => $teamPosition,
+            "nationalities" => $nationalities
         ]);
     }
     public function actionSaveCreateEmployee()
@@ -119,21 +141,22 @@ class EmployeeController extends Controller
             $employee->hireDate = $_POST["joinDate"];
             $employee->nationalityId = $_POST["nationality"];
             $employee->address1 = $_POST["address1"];
-            $employee->address2 = $_POST["address2"];
+            $employee->countryId = $_POST["country"];
             $employee->gender = $_POST["gender"];
             $employee->telephoneNumber = $_POST["telephoneNumber"];
             $employee->emergencyTel = $_POST["emergencyTel"];
             $employee->companyEmail = $_POST["companyEmail"];
-            $employee->email = $_POST["personalEmail"];
+            $employee->email = $_POST["companyEmail"];
             $employee->companyId = $_POST["company"];
             $employee->branchId = $_POST["branch"];
             $employee->departmentId = $_POST["department"];
             $employee->teamId = $_POST["team"];
+            $employee->teamPositionId = $_POST["teamPosition"];
             $employee->titleId = $_POST["title"];
             //$employee->workingTime = $_POST["workTime"];
             $employee->employeeConditionId = $_POST["condition"];
             $employee->spoken = $_POST["language"];
-            $employee->socialLink = $_POST["socialLink"];
+            //$employee->socialLink = $_POST["socialLink"];
             $pictureProfile = UploadedFile::getInstanceByName("picture");
             if (isset($pictureProfile) && !empty($pictureProfile)) {
                 $path = Path::getHost() . 'images/employee/profile/';
@@ -147,6 +170,8 @@ class EmployeeController extends Controller
                 $pathSave = $path . $fileName;
                 $pictureProfile->saveAs($pathSave);
                 $employee->picture = 'images/employee/profile/' . $fileName;
+            } else {
+                $employee->picture = 'image/user.png';
             }
             $fileResume = UploadedFile::getInstanceByName("resume");
             if (isset($fileResume) && !empty($fileResume)) {
@@ -216,7 +241,7 @@ class EmployeeController extends Controller
         $employee["titleName"] = Title::titleName($employee['titleId']);
         $employee["conditionName"] = EmployeeCondition::conditionName($employee['employeeConditionId']);
         $employee["status"] = EmployeeStatus::employeeStatus($employee['employeeId']);
-        // throw new Exception(print_r($employee, true));
+        //throw new Exception(print_r($employee, true));
         return $this->render('employee_profile', [
             "employee" => $employee
         ]);
@@ -259,7 +284,7 @@ class EmployeeController extends Controller
             $userId = $user->userId;
         }
 
-        $user->userName = $userName;
+        $user->username = $userName;
         $user->password_hash = md5($email);
         $user->employeeId = $employeeId;
         $user->updateDateTime = new Expression('NOW()');
@@ -290,7 +315,7 @@ class EmployeeController extends Controller
         $companies = curl_exec($api);
         $companies = json_decode($companies, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/title/title-list');
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/title/title-department');
         $titles = curl_exec($api);
         $titles = json_decode($titles, true);
 
@@ -314,6 +339,26 @@ class EmployeeController extends Controller
         $userRoles = curl_exec($api);
         $userRoles = json_decode($userRoles, true);
 
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $employee['companyId']);
+        $branches = curl_exec($api);
+        $branches = json_decode($branches, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' . $employee['branchId']);
+        $departments = curl_exec($api);
+        $departments = json_decode($departments, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/department-team?id=' . $employee['departmentId']);
+        $teams = curl_exec($api);
+        $teams = json_decode($teams, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team-position/index');
+        $teamPosition = curl_exec($api);
+        $teamPosition = json_decode($teamPosition, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/nationality');
+        $nationalities = curl_exec($api);
+        $nationalities = json_decode($nationalities, true);
+
         curl_close($api);
 
         $oldData["company"] = [
@@ -322,7 +367,11 @@ class EmployeeController extends Controller
         ];
         $oldData["nationality"] = [
             "id" => $employee['nationalityId'],
-            "name" => Country::countryName($employee['nationalityId'])
+            "name" => Nationality::nationalityName($employee['nationalityId'])
+        ];
+        $oldData["country"] = [
+            "id" => $employee['countryId'],
+            "name" => Country::countryName($employee['countryId'])
         ];
         $oldData["branch"] = [
             "id" => $employee['branchId'],
@@ -335,6 +384,10 @@ class EmployeeController extends Controller
         $oldData["team"] = [
             "id" => $employee['teamId'],
             "name" => Team::teamName($employee['teamId'])
+        ];
+        $oldData["teamPosition"] = [
+            "id" => $employee['teamPositionId'],
+            "name" => TeamPosition::teamPositionName($employee['teamPositionId'])
         ];
         $oldData["title"] = [
             "id" => $employee['titleId'],
@@ -355,7 +408,12 @@ class EmployeeController extends Controller
             "roles" => $roles,
             "employee" => $employee,
             "oldData" => $oldData,
-            "userRoles" => $userRoles
+            "userRoles" => $userRoles,
+            "branches" => $branches,
+            "departments" => $departments,
+            "teams" => $teams,
+            "teamPosition" => $teamPosition,
+            "nationalities" => $nationalities
 
         ]);
     }
@@ -375,21 +433,22 @@ class EmployeeController extends Controller
             $employee->hireDate = $_POST["joinDate"];
             $employee->nationalityId = $_POST["nationality"];
             $employee->address1 = $_POST["address1"];
-            $employee->address2 = $_POST["address2"];
+            $employee->countryId = $_POST["country"];
             $employee->gender = $_POST["gender"];
             $employee->telephoneNumber = $_POST["telephoneNumber"];
             $employee->emergencyTel = $_POST["emergencyTel"];
             $employee->companyEmail = $_POST["companyEmail"];
-            $employee->email = $_POST["personalEmail"];
+            $employee->email = $_POST["companyEmail"];
             $employee->companyId = $_POST["company"];
             $employee->branchId = $_POST["branch"];
             $employee->departmentId = $_POST["department"];
             $employee->teamId = $_POST["team"];
+            $employee->teamPositionId = $_POST["teamPosition"];
             $employee->titleId = $_POST["title"];
             //$employee->workingTime = $_POST["workTime"];
             $employee->employeeConditionId = $_POST["condition"];
             $employee->spoken = $_POST["language"];
-            $employee->socialLink = $_POST["socialLink"];
+            //$employee->socialLink = $_POST["socialLink"];
             $pictureProfile = UploadedFile::getInstanceByName("picture");
             if (isset($pictureProfile) && !empty($pictureProfile)) {
 
@@ -460,5 +519,91 @@ class EmployeeController extends Controller
                 return $this->redirect(Yii::$app->homeUrl . 'setting/employee/employee-profile/' . ModelMaster::encodeParams(["employeeId" => $employeeId]));
             }
         }
+    }
+    public function actionFilterEmployee()
+    {
+        $companyId = $_POST["companyId"] != '' ? $_POST["companyId"] : null;
+        $branchId = $_POST["branchId"] != '' ? $_POST["branchId"] : null;
+        $departmentId = $_POST["departmentId"] != '' ? $_POST["departmentId"] : null;
+        $teamId = $_POST["teamId"] != '' ? $_POST["teamId"] : null;
+        $status = $_POST["status"];
+
+        return $this->redirect(Yii::$app->homeUrl . 'setting/employee/employee-result/' . ModelMaster::encodeParams([
+            "companyId" => $companyId,
+            "branchId" => $branchId,
+            "departmentId" => $departmentId,
+            "teamId" => $teamId,
+            "status" => $status
+        ]));
+    }
+    public function actionEmployeeResult($hash)
+    {
+        $param = ModelMaster::decodeParams($hash);
+        $companyId = $param["companyId"];
+        $branchId = $param["branchId"];
+        $departmentId = $param["departmentId"];
+        $teamId = $param["teamId"];
+        $status = $param["status"];
+        if ($status == 0) {
+            $status = null;
+        }
+        $branches = [];
+        $departments = [];
+        $teams = [];
+        $groupId = Group::currentGroupId();
+        $employees = Employee::find()->where(["status" => [1, 0, 2]])
+            ->andFilterWhere([
+                "companyId" => $companyId,
+                "branchId" => $branchId,
+                "departmentId" => $departmentId,
+                "status" => $status,
+                "teamId" => $teamId,
+            ])
+            ->asArray()
+            ->orderBy("employeeFirstname")
+            ->all();
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+        $companies = curl_exec($api);
+        $companies = json_decode($companies, true);
+
+        if ($companyId != '') {
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
+            $branches = curl_exec($api);
+            $branches = json_decode($branches, true);
+        }
+        if ($branchId != '') {
+            $departments = Department::find()->select('departmentId,departmentName')
+                ->where(["branchId" => $branchId, "status" => 1])->asArray()->orderBy('departmentName')->all();
+        }
+        if ($departmentId != '') {
+            $teams = Team::find()->select('teamId,teamName')
+                ->where(["departmentId" => $departmentId, "status" => 1])->asArray()->orderBy('teamName')->all();
+        }
+        curl_close($api);
+        //throw new Exception(print_r($param, true));
+        return $this->render('search_result', [
+            "employees" => $employees,
+            "companies" => $companies,
+            "companyId" => $companyId,
+            "branchId" => $branchId,
+            "teamId" => $teamId,
+            "departmentId" => $departmentId,
+            "status" => $status == null ? 0 : $status,
+            "branches" => $branches,
+            "departments" => $departments,
+            "teams" => $teams
+        ]);
+    }
+    public function actionDeleteEmployee()
+    {
+        User::updateAll(["status" => 99], ["employeeId" => $_POST["employeeId"]]);
+        Employee::updateAll(["status" => 99], ["employeeId" => $_POST["employeeId"]]);
+        $res["status"] = true;
+        return json_encode($res);
     }
 }

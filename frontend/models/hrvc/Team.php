@@ -47,4 +47,27 @@ class Team extends \frontend\models\hrvc\master\TeamMaster
         $employee = Employee::find()->where(["teamId" => $teamId])->asArray()->all();
         return count($employee);
     }
+    public static function  teamLeader($teamId, $position)
+    {
+        $text = "";
+        $employee = Employee::find()->select('employeeFirstname,employeeSurename')
+            ->JOIN("LEFT JOIN", "team t", "t.teamId=employee.teamId")
+            ->where(["employee.teamId" => $teamId, "employee.teamPositionId" => $position])
+            ->orderBy('employee.employeeFirstname')
+            ->asArray()
+            ->all();
+        if (isset($employee) && count($employee) > 0) {
+            $i = 1;
+            foreach ($employee as $em) :
+                $text .= $em["employeeFirstname"] . " " . $em["employeeSurename"];
+                if (count($employee) > 1 && $i != count($employee)) {
+                    $text .= "<br>";
+                }
+                $i++;
+            endforeach;
+        } else {
+            $text = "Not set";
+        }
+        return $text;
+    }
 }

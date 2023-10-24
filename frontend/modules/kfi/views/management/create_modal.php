@@ -15,12 +15,12 @@
 				<div class="row">
 					<div class="col-lg-6 col-md-6 col-6">
 						<div class="col-12">
-							<label for="exampleFormControlInput1" class="form-label"><strong class="red">*</strong> KFI Contents</label>
+							<label class="form-label font-size-12"><strong class="red">*</strong> KFI Contents</label>
 							<input type="text" class="form-control" id="" name="kfiName" required>
 						</div>
 						<div class="col-12 pt-5">
-							<label for="input" class="form-label"><strong class="red">*</strong> Company</label>
-							<select class="form-select" name="company" id="companyId" onchange="javascript:companyMultiBrach()" required>
+							<label class="form-label font-size-12"><strong class="red">*</strong> Company</label>
+							<select class="form-select" name="company" id="companyId" onchange="javascript:companyMultiBrachKfi()" required>
 								<option value="">Select Company</option>
 								<?php
 								if (isset($companies) && count($companies) > 0) {
@@ -34,7 +34,7 @@
 							</select>
 						</div>
 						<div class="col-12 mt-10">
-							<label for="input" class="form-label"><strong class="red">*</strong> Branch</label>
+							<label for="input" class="form-label font-size-12"><strong class="red">*</strong> Branch</label>
 
 							<div class="col-12 form-control">
 								Select branch
@@ -45,7 +45,7 @@
 
 						</div>
 						<div class="col-12 mt-10">
-							<label for="input" class="form-label"><strong class="red">*</strong> Department</label>
+							<label for="input" class="form-label font-size-12"><strong class="red">*</strong> Department</label>
 							<div class="col-12 form-control">
 								Select Department
 								<i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
@@ -53,7 +53,7 @@
 							<div class="col-12" id="show-multi-department"></div>
 						</div>
 						<div class="col-12 pt-10">
-							<label for="input" class="form-label"><strong class="red">*</strong> Check Unit</label>
+							<label for="input" class="form-label font-size-12"><strong class="red">*</strong> Check Unit</label>
 							<div class="btn-group  col-12" role="group" aria-label="Basic outlined example">
 								<?php
 								if (isset($units) && count($units) > 0) {
@@ -86,16 +86,16 @@
 					</div>
 					<div class="col-lg-6 col-md-6 col-6">
 						<div class="col-12">
-							<label for="exampleFormControlTextarea1" class="form-label"> KFI Details</label>
+							<label class="form-label font-size-12"> KFI Details</label>
 							<textarea class="form-control" name="detail" rows="9"></textarea>
 						</div>
 						<div class="row">
-							<div class="col-lg-6 col-md-6 col-6 pt-10">
-								<label for="exampleFormControl" class="form-label"><strong class="red">*</strong> Target Amount</label>
+							<div class="col-12 pt-10">
+								<label class="form-label font-size-12"><strong class="red">*</strong> Target Amount</label>
 								<input type="number" class="form-control" name="amount" step="any" required>
 							</div>
 							<div class="col-lg-6 col-md-6 col-6 pt-10">
-								<label for="exampleFormControl" class="form-label"><strong class="red">*</strong> Month</label>
+								<label class="form-label font-size-12"><strong class="red">*</strong> Month</label>
 								<select class="form-select" required name="month">
 									<option value="">Select Month</option>
 									<?php
@@ -105,6 +105,21 @@
 									<?php
 
 										endforeach;
+									}
+									?>
+								</select>
+							</div>
+							<div class="col-lg-6 col-md-6 col-6 pt-10">
+								<label class="form-label font-size-12"><strong class="red">*</strong> Year</label>
+								<select class="form-select" required name="year">
+									<option value="">Select Year</option>
+									<?php
+									$year = 2020;
+									$thisYear = date('Y');
+									while ($year < ($thisYear + 10)) { ?>
+										<option value="<?= $year ?>"><?= $year ?></option>
+									<?php
+										$year++;
 									}
 									?>
 								</select>

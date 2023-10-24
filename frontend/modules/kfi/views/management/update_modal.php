@@ -16,11 +16,22 @@
 					<div class="col-lg-6 col-md-6 col-6 font-size-14">
 						<div class="col-12">
 							<label for="exampleFormControlInput1" class="form-label">KFI Contents</label>
-							<input type="text" class="form-control" value="" disabled id="kfiName">
+							<input type="text" class="form-control" value="" id="kfiName">
 						</div>
 						<div class="col-12 pt-5 mt-5">
 							<label for="input" class="form-label">Company</label>
-							<input type="text" class="form-control" value="" disabled id="companyName">
+							<select class="form-select" name="company" id="companyId-update" onchange="javascript:companyMultiBrachKfi()" required>
+								<option value="">Select Company</option>
+								<?php
+								if (isset($companies) && count($companies) > 0) {
+									foreach ($companies as $company) : ?>
+										<option value="<?= $company["companyId"] ?>"><?= $company["companyName"] ?></option>
+								<?php
+									endforeach;
+								}
+								?>
+
+							</select>
 						</div>
 						<div class="col-12 mt-10">
 							<label for="input" class="form-label"><strong class="red">*</strong> Branch</label>
@@ -40,7 +51,7 @@
 							<div class="col-12" id="show-multi-department-update"></div>
 						</div>
 						<div class="col-12 mt-15">
-							<label for="input" class="form-label"><strong class="red">*</strong> Progress title</label>
+							<label for="input" class="form-label"><strong class="red">*</strong> Update Detail</label>
 							<input type="text" class="form-control" name="progressTitle" required>
 						</div>
 						<div class="col-12 pt-10 mt-5">
@@ -116,7 +127,7 @@
 									<option value=">">&nbsp;&nbsp;>&nbsp;&nbsp;</option>
 								</select>
 							</div>
-							<div class="col-lg-6 col-md-6 col-6 pt-10  mt-3">
+							<div class="col-lg-12 col-md-6 col-6 pt-10  mt-3">
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Status</label>
 								<select class="form-select font-size-13" id="kfiStatus" name="status" required>
 									<option value="">Active/Finished</option>
@@ -126,7 +137,33 @@
 							</div>
 							<div class="col-lg-6 col-md-6 col-6 pt-10  mt-3">
 								<label for="exampleFormControl" class="form-label font-size-13">Month</label>
-								<input type="text" class="form-control" value="" disabled id="monthName" name="month">
+								<select class="form-select" required name="month" id="monthName">
+									<option value="">Select Month</option>
+									<?php
+									if (isset($months) && count($months) > 0) {
+										foreach ($months as $value => $month) : ?>
+											<option value="<?= $value ?>"><?= $month ?></option>
+									<?php
+
+										endforeach;
+									}
+									?>
+								</select>
+							</div>
+							<div class="col-lg-6 col-md-6 col-6 pt-10  mt-3">
+								<label for="exampleFormControl" class="form-label font-size-13">Year</label>
+								<select class="form-select" required name="year" id="year">
+									<option value="">Select Year</option>
+									<?php
+									$year = 2020;
+									$thisYear = date('Y');
+									while ($year < ($thisYear + 10)) { ?>
+										<option value="<?= $year ?>"><?= $year ?></option>
+									<?php
+										$year++;
+									}
+									?>
+								</select>
 							</div>
 							<div class="col-12  mt-15">
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Result</label>

@@ -31,11 +31,7 @@
 }
 
 .width-aa {
-    width: 10%;
-}
-
-@media(max-width: 768px) {
-    .width-aa {
-        width: 30%;
-    }
+    width: 25px;
+    height: 25px;
+    border-radius: 3px;
 }

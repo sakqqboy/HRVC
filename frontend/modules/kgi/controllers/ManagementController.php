@@ -626,7 +626,7 @@ class ManagementController extends Controller
 		$teamId = isset($_POST["teamId"]) && $_POST["teamId"] != null ? $_POST["teamId"] : null;
 		$month = isset($_POST["month"]) && $_POST["month"] != null ? $_POST["month"] : null;
 		$status = isset($_POST["status"]) && $_POST["status"] != null ? $_POST["status"] : null;
-		$date = isset($_POST["date"]) && $_POST["date"] != null ? $_POST["date"] : null;
+		$year = isset($_POST["year"]) && $_POST["year"] != null ? $_POST["year"] : null;
 		$type = $_POST["type"];
 		return $this->redirect(Yii::$app->homeUrl . 'kgi/management/kgi-search-result/' . ModelMaster::encodeParams([
 			"companyId" => $companyId,
@@ -634,7 +634,7 @@ class ManagementController extends Controller
 			"teamId" => $teamId,
 			"month" => $month,
 			"status" => $status,
-			"date" => $date,
+			"year" => $year,
 			"type" => $type
 		]));
 	}
@@ -646,18 +646,18 @@ class ManagementController extends Controller
 		$teamId = $param["teamId"];
 		$month = $param["month"];
 		$status = $param["status"];
-		$date = $param["date"];
+		$year = $param["year"];
 		$type = $param["type"];
 		$branches = [];
 		$teams = [];
-		if ($companyId == "" && $branchId == "" && $teamId == "" && $month == "" && $status == "" && $status == "") {
+		if ($companyId == "" && $branchId == "" && $teamId == "" && $month == "" && $status == "" && $year == "") {
 			if ($type == "list") {
 				return $this->redirect(Yii::$app->homeUrl . 'kgi/management/index');
 			} else {
 				return $this->redirect(Yii::$app->homeUrl . 'kgi/management/grid');
 			}
 		}
-		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&teamId=' . $teamId . '&&month=' . $month . '&&status=' . $status . '&&date=' . $date;
+		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&teamId=' . $teamId . '&&month=' . $month . '&&status=' . $status . '&&year=' . $year;
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
@@ -707,7 +707,7 @@ class ManagementController extends Controller
 			"teamId" => $teamId,
 			"month" => $month,
 			"status" => $status,
-			"date" => $date,
+			"year" => $year,
 			"branches" => $branches,
 			"teams" => $teams
 		]);

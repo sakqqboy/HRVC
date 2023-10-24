@@ -1,5 +1,7 @@
 <?php
 
+use common\models\ModelMaster;
+
 $this->title = 'Branch';
 ?>
 
@@ -179,6 +181,70 @@ $this->title = 'Branch';
 					<?php
 					}
 					?>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-3 col-md-4 col-6">
+				<div class="alert alert-secondary-background" role="alert">
+					<div class="row">
+						<div class="col-4">
+							<i class="fa fa-users" aria-hidden="true" style="font-size: 25px;padding-top: 18px;"></i>
+						</div>
+						<div class="col-2">
+							<a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" style="text-decoration: none;">
+								<div class="col-12 text-primary">
+									Department
+								</div>
+								<div class="col-2 number-bold text-black">
+									<?= $totalDepartment
+									?>
+								</div>
+							</a>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-4 col-6">
+				<div class="alert alert-secondary-background" role="alert">
+					<div class="row">
+						<div class="col-4">
+							<i class="fa fa-users" aria-hidden="true" style="font-size: 25px;padding-top: 18px;"></i>
+						</div>
+						<div class="col-2">
+							<a href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" style="text-decoration: none;">
+								<div class="col-12 text-primary">
+									Team
+								</div>
+								<div class="col-2 number-bold text-black">
+									<?= $totalTeam
+									?>
+								</div>
+							</a>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-4 col-6">
+				<div class="alert alert-secondary-background" role="alert">
+					<div class="row">
+						<div class="col-4">
+							<i class="fa fa-users" aria-hidden="true" style="font-size: 25px;padding-top: 18px;"></i>
+						</div>
+						<div class="col-2">
+							<a href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" style="text-decoration: none;">
+								<div class="col-12 text-primary">
+									Employee
+								</div>
+								<div class="col-2 number-bold text-black">
+									<?= $totalEmployees
+									?>
+								</div>
+							</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
