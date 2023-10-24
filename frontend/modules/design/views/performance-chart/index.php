@@ -167,7 +167,9 @@ $this->title = 'Performance Chart';
                                         Forecasted
                                     </div>
                                     <div class="col-5">
-                                        fjhtjkokg
+                                        <button type="button" class="examplebox"></button>
+                                        <button type="button" class="examplebox"></button>
+                                        <button type="button" class="examplebox"></button>
                                     </div>
                                 </div>
                             </div>
