@@ -2,6 +2,8 @@
 $this->title = 'Setting KPI';
 ?>
 
+
+
 <div class="col-12 mt-90">
     <div class="col-12">
         <i class="fa fa-tachometer font-size-20" aria-hidden="true"></i> <strong class="font-size-20"> Assign Management</strong>
@@ -27,7 +29,7 @@ $this->title = 'Setting KPI';
             <div class="row">
                 <div class="col-lg-9 col-md-6 col-12">
                     <div class="col-12">
-                        Key Performance Indicator
+                        Key Goal Indicator
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
@@ -76,7 +78,7 @@ $this->title = 'Setting KPI';
                     </thead>
                     <tbody>
                         <tr class="setting-fontsize">
-                            <td>Increase sales in a way that company gains</td>
+                            <td class="over-blue">Increase sales in a way that company gains</td>
                             <td>Total Sales, sales is important, focus</td>
                             <td>
                                 <img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="imaFlag0"> Izmir, Turkey
@@ -121,12 +123,12 @@ $this->title = 'Setting KPI';
                     </tbody>
                     <tbody>
                         <tr class="setting-fontsize">
-                            <td>Total Sales, sales is important, focus</td>
+                            <td class="over-blue">Total Sales, sales is important, focus</td>
                             <td>Tokyo Consulting Firm Danışmanlık </td>
                             <td>
                                 <img src="<?= Yii::$app->homeUrl ?>image/Flag-Turkey.png" class="imaFlag0"> Izmir, Turkey
                             </td>
-                            <td><?= number_format(52) ?></td>
+                            <td><?= number_format(52) ?>%</td>
                             <td> C</td>
                             <td>
                                 <div class="row">

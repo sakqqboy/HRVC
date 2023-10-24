@@ -19,6 +19,7 @@ $this->title = 'group profile';
                 </div>
                 <div class="avatar-preview">
                     <div id="imagePreview">
+
                     </div>
                 </div>
             </div>

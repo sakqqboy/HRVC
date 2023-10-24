@@ -1,0 +1,67 @@
+.pencil-edit {
+    margin-top: -70px;
+}
+
+.edit-numbermonth {
+    font-size: 9px;
+    width: 3.8rem;
+}
+
+.imagedollar {
+    width: 14px;
+}
+
+.button-link {
+    color: rgb(32, 140, 249);
+    font-weight: 500;
+}
+
+.button-link:hover {
+    border-bottom: rgb(32, 140, 249) 3px solid;
+    background-color: rgb(242, 242, 242);
+    border-radius: 3px;
+}
+
+.light-shadow {
+    background-color: rgb(245, 245, 245);
+    border-radius: 2px;
+}
+
+.light-shadow-2 {
+    background-color: rgb(246 245 245);
+}
+
+.light-shadow-3 {
+    background-color: rgb(236 236 236);
+}
+
+.bg-bar-background-1 {
+    background-color: #B4D2EE;
+}
+
+.bg-bar-background-2 {
+    background-color: #8FCFF2;
+
+}
+
+.bg-bar-background-3 {
+    background-color: #0077BB;
+
+}
+
+.bg-bar-background-4 {
+    background-color: #005485;
+
+}
+
+.linedatatable {
+    text-decoration: none;
+}
+
+.slidecontainer {
+    width: 100%;
+}
+
+.slider {
+    width: 40px;
+}

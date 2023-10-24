@@ -15,7 +15,7 @@ $this->title = 'view';
                     </div>
                     <div class="col-lg-10 col-md-8 col-9">
                         <div class="con-12 mt-30">
-                            <span class="name-Tadawoki">Tadawoki Watanabe</span><span class="badge bg-success font-size-16 ml-10">Active</span>
+                            <span class="name-Tadawoki">Tadawoki Watanabe</span><span class="badge rounded-pill bg-success font-size-16 ml-10"> Active</span>
                         </div>
                         <div class="row">
                             <div class="col-lg-8 col-md-8 col-12">
@@ -25,7 +25,7 @@ $this->title = 'view';
                                 <div class="col-12 pt-20 font-size-14">
                                     <i class="fa fa-calendar-o" aria-hidden="true"></i> &nbsp;<span class="text-dark">Joined on </span><strong> 02-05-2023</strong>
                                     <span class="view-solid"></span> <i class="fa fa-birthday-cake pl-10" aria-hidden="true"></i> <span class="text-dark"> Age</span><strong> 34</strong>
-                                    <span class="badge bg-secondary"> Permanent</span>
+                                    <span class="badge rounded-pill bg-secondary"> Permanent</span>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-12 text-end">
@@ -71,6 +71,8 @@ $this->title = 'view';
                             <a class="link-2" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Attachments</a>
                             <a class="link-2" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Salary & Allowance</a>
                             <a class="link-2" id="v-pills-details-tab" data-bs-toggle="pill" data-bs-target="#v-pills-details" type="button" role="tab" aria-controls="v-pills-details" aria-selected="false">Evaluation</a>
+                            <a class="link-2" id="v-pills-Jobdescription-tab" data-bs-toggle="pill" data-bs-target="#v-pills-Jobdescription" type="button" role="tab" aria-controls="v-pills-Jobdescription" aria-selected="false">Job Description</a>
+                            <a class="link-2" id="v-pills-skill-tab" data-bs-toggle="pill" data-bs-target="#v-pills-skill" type="button" role="tab" aria-controls="v-pills-skill" aria-selected="false">Licenses & certifications</a>
                         </div>
                     </div>
                     <div class="col-lg-9 col-md-3 col-sm-6 col-12 alert-personal-information">
@@ -506,10 +508,374 @@ $this->title = 'view';
                                     </div>
                                 </div>
                             </div>
+                            <div class="tab-pane fade" id="v-pills-Jobdescription" role="tabpanel" aria-labelledby="v-pills-Jobdescription-tab">
+                                <div class="col-12 pt-20 pl-20">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/certificate.png" class="img-ertificate"><span class="font-size-13"> Job Description </span>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-lg-6 pl-20 pt-10">
+                                        <div class="col-12 purpose">
+                                            Purpose of the Job
+                                        </div>
+                                        <div class="col-12 pt-10  details-purpose">
+                                            The purpose of this role is to support the General Manager in driving the sales and marketing
+                                            activities within the dynamic market of Bangladesh. The key focus areas encompass fostering
+                                            and nurturing robust relationships with factories, industrial parks, general contractors,
+                                            and engineering companies. The role necessitates diligent collection of vital information
+                                            from a diverse range of stakeholders, including customers and relevant governmental authorities
+                                        </div>
+                                        <div class="col-12 pt-10 purpose">
+                                            Core Responsibility
+                                        </div>
+                                        <div class="col-12 pt-10 details-purpose1">
+                                            <ol>
+                                                <li>
+                                                    Support the general manager in sales & and marketing activities in Bangladesh, especially in creating a good relationship with factories, industrial parks, general contractors, and engineering companies.
+                                                </li>
+                                                <li>
+                                                    Collect the necessary information from customers (factories, industrial parks, general contractors), and national government/local government/related authorities.
+                                                </li>
+                                                <li>
+                                                    Prepare the necessary application and get approval from the concerned authorities.
+                                                </li>
+                                                <li>
+                                                    Control documentary and filing system for the sales department
+                                                </li>
+                                                <li>
+                                                    Prepare estimations, contracts, and reports.
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 pt-10">
+                                        <div class="col-12 purpose">
+                                            Key Responsibility
+                                        </div>
+                                        <div class="col-12 details-purpose pt-10">
+                                            <ul>
+                                                <li>
+                                                    Maintain existing customers and expand new customers (concentrate in National/Local Public projects)
+                                                </li>
+                                                <li>
+                                                    Prepare visit plans and visit report.
+                                                </li>
+                                                <li>
+                                                    Approach & present information to customers about the company’s products and services.
+                                                </li>
+                                                <li>
+                                                    Prepare and submit quotation to customer.
+                                                </li>
+                                                <li>
+                                                    Maintain and create relationships with customers.
+                                                </li>
+                                                <li>
+                                                    Survey market and report to General Manager.
+                                                </li>
+                                                <li>
+                                                    Maintain gross profit as assigned.
+                                                </li>
+                                                <li>
+                                                    Negotiate with customers on price and service to achieve gross profit.
+                                                </li>
+                                                <li>
+                                                    Take good care of customers.
+                                                </li>
+                                                <li>
+                                                    Response to customer complaints and comments.
+                                                </li>
+                                                <li>
+                                                    Keep on time appointments.
+                                                </li>
+                                                <li>
+                                                    Coordinate and communicate correct customer’s inquiry to engineering department.
+                                                </li>
+                                                <li>
+                                                    Initiative and improve own work process and cross functional with other section to achieve company objectives.
+                                                </li>
+                                                <li>
+                                                    Performing the jobs assigned by superior.
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="v-pills-skill" role="tabpanel" aria-labelledby="v-pills-skill-tab">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-12">
+                                        <div class="col-12 pl-20 font-size-17 pt-20">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="col-12">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/certificate.png" class="img-ertificate"><span class="font-size-13"> Licenses & certifications</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 pt-5">
+                                                    <div class="col-12 font-size-13 text-end Remove">
+                                                        <i class="fa fa-plus-square-o" aria-hidden="true"></i> Remove
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 pt-5">
+                                                    <div class="col-12 font-size-13 text-end Add">
+                                                        <i class="fa fa-plus-square-o" aria-hidden="true"></i> Add
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row pl-10">
+                                                <div class="col-lg-4 col-md-3 col-3 pt-20 pl-20">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/pngaaa.png" class="img-thumbnail">
+                                                </div>
+                                                <div class="col-lg-5 col-md-5 col-5 pt-20">
+                                                    <strong class="font-size-12"> Certified Internal Auditor</strong>
+                                                    <div class="textweight"> The Institute of Internal Auditor</div>
+                                                    <div class="textweight">Issued Nov 2023 . Expires Nov 2025 </div>
+                                                    <div class="alert alert-light Show-Credentials"> Show Credentials &nbsp; <i class="fa fa-external-link" aria-hidden="true"></i></div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4 col-4">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/Sample.png" class="image-Sample">
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row pl-10">
+                                                <div class="col-lg-4 col-md-3 col-3 pt-20 pl-20">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/google.png" class="img-thumbnail">
+                                                </div>
+                                                <div class=" col-lg-5 col-md-5 col-5 pt-20">
+                                                    <strong class="font-size-12"> Python Specialist </strong>
+                                                    <div class="textweight"> Google</div>
+                                                    <div class="textweight">Issued Nov 2023 . No Expire </div>
+                                                    <div class="alert alert-light Show-Credentials"> Show Credentials &nbsp; <i class="fa fa-external-link" aria-hidden="true"></i></div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4 col-4">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/search-google.png" class="image-Sample">
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row pl-10">
+                                                <div class="col-lg-4 col-md-3 col-3 pt-20 pl-20">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/lghrvc1.png" class="img-thumbnail">
+                                                </div>
+                                                <div class=" col-lg-5 col-md-5 col-5 pt-20">
+                                                    <strong class="font-size-12"> 延喜式掃除名人</strong>
+                                                    <div class="textweight"> The Institute of Internal Auditor</div>
+                                                    <div class="textweight">Issued Nov 2023 . Expires Nov 2025 </div>
+                                                    <div class="alert alert-light Show-Credentials"> Show Credentials &nbsp; <i class="fa fa-external-link" aria-hidden="true"></i></div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4 col-4">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/食品衛生者養成講習会.png" class="image-Sample">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-12 pt-22">
+                                        <div class="row">
+                                            <div class="col-lg-7">
+                                                <div class="col-12 font-size-13">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/certificate.png" class="img-ertificate"> Skills
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <div class="col-12">
+                                                    <span class="dropdown font-size-13 Add pl-80" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> Add <i class="fa fa-plus-square-o" aria-hidden="true"></i> </span>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                        <li data-bs-toggle="modal" data-bs-target="#staticAddDetails">
+                                                            <a class="dropdown-item" type="button"> Add</a>
+                                                        </li>
+                                                        <li>
+                                                            <hr class="dropdown-divider">
+                                                        </li>
+                                                        <li data>
+                                                            <a class="dropdown-item" type="button"> Create New</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="col-12 font-size-13 pt-15">
+                                            <strong> Verbal Communication</strong>
+                                        </div>
+                                        <div class="row pl-10">
+                                            <div class="col-lg-4 pt-20">
+                                                <div class="col-12">
+                                                    <span class="badge rounded-pill bg verb-background">Verbal Communication</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 pt-20 text-center">
+                                                <div class="col-12">
+                                                    <span class="badge rounded-pill bg verb-background">Active Listening</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 pt-20">
+                                                <div class="col-12">
+                                                    <span class="badge rounded-pill bg verb-background">Active Listening</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 pt-20">
+                                                <div class="col-12">
+                                                    <span class="badge rounded-pill bg verb-background">Public Speaking</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 font-size-13 pt-15">
+                                            <strong>Interpersonal Communication</strong>
+                                        </div>
+                                        <div class="row pl-10">
+                                            <div class="col-lg-4 pt-20">
+                                                <div class="col-12">
+                                                    <span class="badge rounded-pill bg verb-background">Relationship Building</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 pt-20 text-center">
+                                                <div class="col-12">
+                                                    <span class="badge rounded-pill bg verb-background">Conflict Resolution</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 pt-20">
+                                                <div class="col-12">
+                                                    <span class="badge rounded-pill bg verb-background">Networking</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 font-size-13 pt-15">
+                                            <strong> Strategic Leadership</strong>
+                                        </div>
+                                        <div class="row pl-10">
+                                            <div class="col-lg-4 pt-20">
+                                                <div class="col-12">
+                                                    <span class="badge rounded-pill bg verb-background">Visionary Thinking</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5 pt-20 text-center">
+                                                <div class="col-12">
+                                                    <span class="badge rounded-pill bg verb-background">Decision Making</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 pt-20">
+                                                <div class="col-12">
+                                                    <span class="badge rounded-pill bg verb-background">Change Management</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 font-size-13 pt-15">
+                                            <strong> Team Leadership</strong>
+                                        </div>
+                                        <div class="row pl-10">
+                                            <div class="col-lg-3 pt-20">
+                                                <div class="col-12">
+                                                    <span class="badge rounded-pill bg verb-background">Team Building</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 pt-20 text-center">
+                                                <div class="col-12">
+                                                    <span class="badge rounded-pill bg verb-background">Delegation</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 pt-20">
+                                                <div class="col-12">
+                                                    <span class="badge rounded-pill bg verb-background">Motivation</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+
+
+    <!-- modal add/create -->
+
+    <div class="modal fade" id="staticAddDetails" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="container">
+                    <div id="staticBackdropLabel">
+                        <div class="col-12 mt-10  Add-Certificate">
+                            <i class="fa fa-magic" aria-hidden="true"></i> Add Certificate
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="col-12 mb-3 pt-10">
+                                <label for="exampleFormControlInput1" class="form-label font-size-14 fn-w"><span class="text-danger">*</span> Name</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="col-12 mb-3 mt-10">
+                                <label for="exampleFormControlInput1" class="form-label font-size-14 fn-w"><span class="text-danger">*</span> Issuing Organization</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="col-12 URL">
+                                <label for="exampleFormControlInput1" class="form-label font-size-14 fn-w"> Credential URL</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="col-12 mt-80 pl-50">
+                                <div class="dashed acceptable">
+                                    <div class="accep-choose">
+                                        <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                        <p class="font-size-12"> Upload Company Photo</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 text-center pt-5 font-size-14">
+                                <div class="col-12">Acceptable file types: <strong>JPEG, PNG,</strong></div>
+                                <div class="col-12">Maximum file Size: 1 MB</div>
+                            </div>
+                            <div class="col-12 mt-20">
+                                <label for="exampleFormControlInput1" class="form-label font-size-14 fn-w"><span class="text-danger">*</span> Issue & Expiary Date</label>
+                                <input type="date" class="form-control" id="">
+                            </div>
+                            <div class="col-12 mt-15">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="">
+                                    <label class="form-check-label text-secondary" for="flexCheckDefault"> license has no Expiry</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-20"></div>
+                        <hr>
+                        <div class="col-12">
+                            <strong>Evidence Panel</strong>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="col-12 mt-15">
+                                Attachments
+                            </div>
+                            <div class="dashed">
+                                <div class="row">
+                                    <div class="col-lg-2 col-md-6 col-12 pt-20">
+                                        <label for="files" class="btn choosefile">File</label>
+                                        <input id="files" style="display:none;" type="file">
+                                    </div>
+                                    <div class="col-lg-5 col-md-6 col-12 pt-20">
+                                        <label for="name">Upload Resume</label>
+                                        <div class="text-secondary font-size-13">Supported Files <span class="text-dark font-size-10">-.pdf, .doc, .docx</span></div>
+                                        <div class="text-secondary font-size-13">Maximum File Size 5 MB</div>
+                                    </div>
+                                    <div class="col-lg-1 col-md-6 col-12 show2"></div>
+                                    <div class="col-lg-4 col-md-6 col-12 pt-30">
+                                        <button type="button" class="btn btn-info text-white"> Upload</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer col-12 text-end" style="border: none;">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>

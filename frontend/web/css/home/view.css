@@ -156,9 +156,6 @@
     color: rgb(30, 116, 237);
 }
 
-.form-pdf {
-    margin-top: 20px;
-}
 
 .link-2 {
     transition: 0.6s;
@@ -206,6 +203,88 @@
     height: 400px;
     width: 100%;
 }
+
+.img-ertificate {
+    width: 15px;
+    margin-top: -5px;
+}
+
+
+.image-Sample {
+    width: 100%;
+    margin-top: 30px;
+}
+
+
+.Show-Credentials {
+    border-radius: 30px;
+    color: black;
+    font-weight: 500;
+    width: 150px;
+    height: 15px;
+    font-size: 12px;
+    margin-top: 10px;
+    padding-top: 0px;
+}
+
+.textweight {
+    font-weight: 500;
+    font-size: 10px;
+}
+
+.verb-background {
+    background-color: #D3EAFF;
+    color: black;
+    font-weight: 500;
+}
+
+.Remove,
+.Add {
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.purpose {
+    font-weight: 500;
+}
+
+.details-purpose {
+    font-size: 13px;
+}
+
+.details-purpose1 {
+    font-size: 13px;
+    list-style-position: inside;
+    margin-left: -28px;
+}
+
+.Add-Certificate {
+    font-weight: 600;
+    color: #1e97de;
+}
+
+.fn-w {
+    font-weight: 600;
+}
+
+.acceptable {
+    border-style: dashed;
+    border-radius: 7px;
+    height: 170px;
+    color: black;
+    width: 210px;
+}
+
+.accep-choose {
+    text-align: center;
+    font-size: 40px;
+    padding-top: 40px;
+}
+
+.URL {
+    padding-top: 110px;
+}
+
 
 @media(max-width:992px) {
     .box-shareprofile {
