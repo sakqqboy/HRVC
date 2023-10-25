@@ -68,6 +68,7 @@ class AppAsset extends AssetBundle
         'css/adminsetting/setting-kpi.css',
         'css/admin-financialplanning/gloden.css',
         'css/admin-financialplanning/edit.css',
+        'css/admin-financialplanning/performance.css',
 
     ];
     public $js = [

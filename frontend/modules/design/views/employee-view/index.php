@@ -824,32 +824,23 @@ $this->title = 'view';
                     </div>
                     <div class="col-lg-5">
                         <div class="col-12 mt-50 pl-50">
-                            <!-- <div class="dashed acceptable">
+                            <div class="dashed acceptable">
                                 <div class="accep-choose">
                                     <i class="fa fa-plus-square-o" aria-hidden="true"></i>
                                     <p class="font-size-12"> Upload Company Photo</p>
                                 </div>
-                            </div> -->
-                            <div id="image-container">
+                            </div>
+
+                            <canvas id="canv1"></canvas>
+                            <p>
+                                Filename:
+                                <input type="file" multiple="false" accept="image/*" id=finput onchange="upload()">
+                                <!-- <div id="image-container">
                                 <div id="image-slot">
                                     Upload Company Photo
                                     <input type="file" id="image-upload" multiple style="display: none;">
                                 </div>
-                            </div>
-
-                            <div id="fullscreen-modal">
-                                <img id="fullscreen-image" src="" alt="">
-                                <button id="prev-image">&#10094;</button>
-                                <button id="next-image">&#10095;</button>
-                                <button id="close-modal">X</button>
-                            </div>
-
-                            <div id="toast" style="display: none;">
-                                Sólo es posible cargar hasta 8 imágenes
-                            </div>
-
-                            <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
-                            <script src="path_to_your_js_file.js"></script>
+                            </div> -->
                         </div>
                         <div class="col-12 text-center pt-5 font-size-14">
                             <div class="col-12">Acceptable file types: <strong>JPEG, PNG,</strong></div>

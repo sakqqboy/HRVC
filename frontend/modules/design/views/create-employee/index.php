@@ -22,7 +22,7 @@ $this->title = 'Create Employee';
                         </div>
                     </div>
                 </div>
-                <div class="col-12 acceptable">
+                <div class="col-12">
                     <p> Acceptable file types: <strong> JPEG, PNG,</strong> </p>
                     <p class="pl-10">Maximum file Size: 1 MB</p>
                 </div>
