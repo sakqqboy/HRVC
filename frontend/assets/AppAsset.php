@@ -69,13 +69,13 @@ class AppAsset extends AssetBundle
         'css/admin-financialplanning/gloden.css',
         'css/admin-financialplanning/edit.css',
         'css/admin-financialplanning/performance.css',
+        'css/home/multi_select.css',
 
     ];
     public $js = [
         'js/content.js',
         'js/index.js',
         'js/share.js',
-        'js/assign_kfi.js',
         'js/setting/branch.js',
         'js/setting/department.js',
         'js/setting/team.js',
@@ -83,6 +83,7 @@ class AppAsset extends AssetBundle
         'js/setting/company.js',
         'js/setting/title.js',
         'js/setting/layer.js',
+        'js/setting/multi_select.js',
         'js/kfi/kfi.js',
         'js/kgi/kgi.js',
         'js/kgi/kgi_update.js',

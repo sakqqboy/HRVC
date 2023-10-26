@@ -350,14 +350,3 @@ $this->title = 'Performance Chart';
         </div>
     </div>
 </div>
-
-
-<label for="tag-typer">
-    <div id="tags">
-        <span class="tag"> such tage <span class="close"> &times;</span></span>
-        <span class="tag">so color <span class="close"> &times;</span> </span>
-        <span class="tag"> many type <span class="close"> &times;</span></span>
-        <span class="tag"> wow <span class="close"> &times;</span></span>
-        <input id="tag-typer" type="text">
-    </div>
-</label>
