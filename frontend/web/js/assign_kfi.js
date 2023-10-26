@@ -12,7 +12,7 @@ $(document).ready(function () {
             event.preventDefault();
             var tag = $(this).val();
             if (tag.length > 0) {
-                $("<span class='tag' style='display:none'><span class='close'>&times;</span>" + tag + " </span>").insertBefore(this).fadeIn(100);
+                $("<span class='tag' style='display:none'><span class='close'> &times;</span> " + tag + " </span>").insertBefore(this).fadeIn(100);
                 $(this).val("");
             }
         }
