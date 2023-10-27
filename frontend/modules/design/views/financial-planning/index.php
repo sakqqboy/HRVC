@@ -4,7 +4,7 @@ $this->title = 'Gloden';
 
 <div class="col-12 mt-90 alert background-Planning">
     <div class="col-12 planning">
-        <i class="fa fa-database" aria-hidden="true"></i> Financial Planning
+        <i class="fa fa-database fa-6x" aria-hidden="true"></i> Financial Planning
     </div>
     <div class="col-12 mt-20">
         <div class="shadow p-3 mb-5 bg-body rounded alert2-secondary3">
@@ -1998,3 +1998,18 @@ $this->title = 'Gloden';
         </div>
     </div>
 </div>
+<div class="nt-50"></div>
+<label>
+    Default
+    <input mbsc-input id="my-input" data-dropdown="true" />
+</label>
+<select id="my-select">
+    <option value="atl">Atlanta</option>
+    <option value="ber">Berlin</option>
+    <option value="bos">Boston</option>
+    <option value="chi">Chicago</option>
+    <option value="lon">London</option>
+    <option value="bangladresh">bangladresh</option>
+    <option value="thailand"> thailand</option>
+    <option value="japn">japan</option>
+</select>
