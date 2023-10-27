@@ -40,16 +40,19 @@ $this->title = 'view';
                         <div class="mt-30">
                             <div class="col-lg-12 col-md-12 col-12 box-shareprofile">
                                 <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-4 font-size-14 share-pointer">
+                                    <div class="col-lg-3 font-size-13 share-pointer">
                                         <i class="fa fa-share-alt" aria-hidden="true"></i> Share Profile
                                     </div>
-                                    <div class="col-lg-2 col-md-2 col-2 font-size-14 share-pointer">
+                                    <div class="col-lg-2  font-size-13 share-pointer">
                                         <i class="fa fa-print" aria-hidden="true"></i> Print
                                     </div>
-                                    <div class="col-lg-4 col-md-3 col-3 font-size-14 share-pointer">
-                                        <i class="fa fa-cloud-download" aria-hidden="true"></i> Download CV
+                                    <div class="col-lg-2  font-size-13 share-pointer">
+                                        <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i> Resume
                                     </div>
-                                    <div class="col-lg-2 col-md-2 col-2 font-size-14 share-pointer">
+                                    <div class="col-lg-3  font-size-13 share-pointer">
+                                        <i class="fa fa-file-text-o" aria-hidden="true"></i> Employee Agreement
+                                    </div>
+                                    <div class="col-lg-2  font-size-13 share-pointer">
                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
                                     </div>
                                 </div>
@@ -510,7 +513,7 @@ $this->title = 'view';
                             </div>
                             <div class="tab-pane fade" id="v-pills-Jobdescription" role="tabpanel" aria-labelledby="v-pills-Jobdescription-tab">
                                 <div class="col-12 pt-20 pl-20">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/certificate.png" class="img-ertificate"><span class="font-size-13"> Job Description </span>
+                                    <img src="<?= Yii::$app->homeUrl ?>image/certificate.png" class="img-ertificate" data-bs-toggle="modal" data-bs-target="#JopDescription"><span class="font-size-13"> Job Description </span>
                                 </div>
                                 <hr>
                                 <div class="row">
@@ -686,7 +689,7 @@ $this->title = 'view';
                                                         <li>
                                                             <hr class="dropdown-divider">
                                                         </li>
-                                                        <li data>
+                                                        <li data-bs-toggle="modal" data-bs-target="#Create-new">
                                                             <a class="dropdown-item" type="button"> Create New</a>
                                                         </li>
                                                     </ul>
@@ -788,94 +791,419 @@ $this->title = 'view';
             </div>
         </div>
     </div>
+</div>
 
 
+<!-- modal add/create -->
 
-    <!-- modal add/create -->
-
-    <div class="modal fade" id="staticAddDetails" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="container">
-                    <div id="staticBackdropLabel">
-                        <div class="col-12 mt-10  Add-Certificate">
-                            <i class="fa fa-magic" aria-hidden="true"></i> Add Certificate
-                        </div>
+<div class="modal fade" id="staticAddDetails" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="container">
+                <div id="staticBackdropLabel">
+                    <div class="col-12 mt-10  Add-Certificate">
+                        <i class="fa fa-magic" aria-hidden="true"></i> Add Certificate
                     </div>
                 </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-7">
-                            <div class="col-12 mb-3 pt-10">
-                                <label for="exampleFormControlInput1" class="form-label font-size-14 fn-w"><span class="text-danger">*</span> Name</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                            <div class="col-12 mb-3 mt-10">
-                                <label for="exampleFormControlInput1" class="form-label font-size-14 fn-w"><span class="text-danger">*</span> Issuing Organization</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                            <div class="col-12 URL">
-                                <label for="exampleFormControlInput1" class="form-label font-size-14 fn-w"> Credential URL</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <div class="col-12 mb-3 pt-10">
+                            <label for="exampleFormControlInput1" class="form-label font-size-14 fn-w"><span class="text-danger">*</span> Name</label>
+                            <input type="text" class="form-control" id="">
                         </div>
-                        <div class="col-lg-5">
-                            <div class="col-12 mt-80 pl-50">
-                                <div class="dashed acceptable">
-                                    <div class="accep-choose">
-                                        <i class="fa fa-plus-square-o" aria-hidden="true"></i>
-                                        <p class="font-size-12"> Upload Company Photo</p>
-                                    </div>
+                        <div class="col-12 mb-3 mt-10">
+                            <label for="exampleFormControlInput1" class="form-label font-size-14 fn-w"><span class="text-danger">*</span> Issuing Organization</label>
+                            <input type="text" class="form-control" id="">
+                        </div>
+                        <div class="col-12 URL">
+                            <label for="exampleFormControlInput1" class="form-label font-size-14 fn-w"> Credential URL</label>
+                            <input type="text" class="form-control" id="">
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="col-12 mt-50 pl-50">
+                            <div class="dashed acceptable">
+                                <div class="accep-choose">
+                                    <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                    <p class="font-size-12"> Upload Company Photo</p>
                                 </div>
                             </div>
-                            <div class="col-12 text-center pt-5 font-size-14">
-                                <div class="col-12">Acceptable file types: <strong>JPEG, PNG,</strong></div>
-                                <div class="col-12">Maximum file Size: 1 MB</div>
-                            </div>
-                            <div class="col-12 mt-20">
-                                <label for="exampleFormControlInput1" class="form-label font-size-14 fn-w"><span class="text-danger">*</span> Issue & Expiary Date</label>
-                                <input type="date" class="form-control" id="">
-                            </div>
-                            <div class="col-12 mt-15">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="">
-                                    <label class="form-check-label text-secondary" for="flexCheckDefault"> license has no Expiry</label>
+
+                            <canvas id="canv1"></canvas>
+                            <p>
+                                Filename:
+                                <input type="file" multiple="false" accept="image/*" id=finput onchange="upload()">
+                                <!-- <div id="image-container">
+                                <div id="image-slot">
+                                    Upload Company Photo
+                                    <input type="file" id="image-upload" multiple style="display: none;">
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
-                        <div class="mt-20"></div>
-                        <hr>
-                        <div class="col-12">
-                            <strong>Evidence Panel</strong>
+                        <div class="col-12 text-center pt-5 font-size-14">
+                            <div class="col-12">Acceptable file types: <strong>JPEG, PNG,</strong></div>
+                            <div class="col-12">Maximum file Size: 1 MB</div>
                         </div>
-                        <div class="col-lg-7">
-                            <div class="col-12 mt-15">
-                                Attachments
-                            </div>
-                            <div class="dashed">
-                                <div class="row">
-                                    <div class="col-lg-2 col-md-6 col-12 pt-20">
-                                        <label for="files" class="btn choosefile">File</label>
-                                        <input id="files" style="display:none;" type="file">
-                                    </div>
-                                    <div class="col-lg-5 col-md-6 col-12 pt-20">
-                                        <label for="name">Upload Resume</label>
-                                        <div class="text-secondary font-size-13">Supported Files <span class="text-dark font-size-10">-.pdf, .doc, .docx</span></div>
-                                        <div class="text-secondary font-size-13">Maximum File Size 5 MB</div>
-                                    </div>
-                                    <div class="col-lg-1 col-md-6 col-12 show2"></div>
-                                    <div class="col-lg-4 col-md-6 col-12 pt-30">
-                                        <button type="button" class="btn btn-info text-white"> Upload</button>
-                                    </div>
-                                </div>
+                        <div class="col-12 mt-20">
+                            <label for="exampleFormControlInput1" class="form-label font-size-14 fn-w"><span class="text-danger">*</span> Issue & Expiary Date</label>
+                            <input type="date" class="form-control" id="">
+                        </div>
+                        <div class="col-12 mt-15">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="">
+                                <label class="form-check-label text-secondary" for="flexCheckDefault"> license has no Expiry</label>
                             </div>
                         </div>
                     </div>
+                    <div class="mt-20"></div>
+                    <hr>
+                    <div class="col-12">
+                        <strong>Evidence Panel</strong>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="col-12 mt-15">
+                            Attachments
+                        </div>
+                        <div class="dashed">
+                            <div class="row">
+                                <div class="col-lg-2 col-md-6 col-12 pt-20">
+                                    <label for="files" class="btn choosefile">File</label>
+                                    <input id="files" style="display:none;" type="file">
+                                </div>
+                                <div class="col-lg-5 col-md-6 col-12 pt-20">
+                                    <label for="name">Upload Resume</label>
+                                    <div class="text-secondary font-size-13">Supported Files <span class="text-dark font-size-10">-.pdf, .doc, .docx</span></div>
+                                    <div class="text-secondary font-size-13">Maximum File Size 5 MB</div>
+                                </div>
+                                <div class="col-lg-1 col-md-6 col-12 show2"></div>
+                                <div class="col-lg-4 col-md-6 col-12 pt-30">
+                                    <button type="button" class="btn btn-info text-white"> Upload</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-footer col-12 text-end" style="border: none;">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Create</button>
-                </div>
+            </div>
+            <div class="modal-footer col-12 text-end" style="border: none;">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Create</button>
             </div>
         </div>
     </div>
+</div>
+
+<!-- modal create new -->
+
+<div class="modal fade" id="Create-new" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="container">
+                <div class="row mt-10">
+                    <div class="col-lg-11 font-size-20 Add-Certificate">
+                        <i class="fa fa-magic" aria-hidden="true"></i> Create
+                    </div>
+                    <div class="col-lg-1 text-end">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                </div>
+                <div class="mt-8 font-size-13">
+                    <strong><i class="fa fa-clock-o" aria-hidden="true"></i> Key Performance Indicator</strong>
+                </div>
+                <hr>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-6">
+                        <div class="col-12">
+                            <label for="exampleFormControlInput1" class="form-label"><strong class="red">*</strong> Company KPI Contents</label>
+                            <input type="text" class="form-control font-size-14" placeholder="">
+                        </div>
+                        <div class="col-12 pt-5">
+                            <label for="input" class="form-label"><strong class="red">*</strong> Company (Single)</label>
+                            <select class="form-select font-size-14" aria-label="Default select example">
+                                <option selected value="">Select Company</option>
+                                <option value="1">Tokyo Consulting Firm Danışmanlık</option>
+                                <option value="2">Tokyo Consulting Firm Pvt. Ltd.</option>
+                                <option value="3">Tokyo Consulting Firm PLC</option>
+                                <option value="4">Tokyo Consulting Firm Pt.</option>
+                                <option value="5">Tokyo Consulting Firm</option>
+                            </select>
+                        </div>
+                        <div class="col-12 pt-5">
+                            <label for="input" class="form-label"><strong class="red">*</strong> Branch (Single)</label>
+                            <select class="form-select font-size-14" aria-label="Default select example">
+                                <option selected value="">Select Branch</option>
+                                <option value="1">Branch 1</option>
+                                <option value="2">Branch 2</option>
+                                <option value="3">Branch 3</option>
+                                <option value="4">Branch 4</option>
+                                <option value="5">Branch 5</option>
+                            </select>
+                        </div>
+                        <div class="col-12 pt-10">
+                            <label for="input" class="form-label"><strong class="red">*</strong> Check Unit</label>
+                            <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                <button type="button" class="btn btn-outline-secondary font-size-14">Monthly</button>
+                                <button type="button" class="btn btn-outline-secondary font-size-14">Weekly</button>
+                                <button type="button" class="btn btn-outline-secondary font-size-14">Quaterly</button>
+                                <button type="button" class="btn btn-outline-secondary font-size-14">Daily</button>
+                            </div>
+                        </div>
+                        <div class="col-12 pt-5">
+                            <div class="row">
+                                <div class="col-md-6 mt-10">
+                                    <div class="input-group">
+                                        <label for="input" class="form-label font-size-13"><strong class="red">*</strong> Select Period</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text font-size-12"><i class="fa fa-calendar-o" aria-hidden="true"></i> &nbsp;&nbsp; Date</span>
+                                            <input type="date" aria-label="" class="form-control font-size-12">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mt-10">
+                                    <div class="input-group">
+                                        <label for="input" class="form-label font-size-13"><strong class="red">*</strong> Next Check Date</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text font-size-12"><i class="fa fa-calendar-o" aria-hidden="true"></i> &nbsp;&nbsp; Date</span>
+                                            <input type="date" aria-label="" class="form-control font-size-12">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 pt-5">
+                            <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Target Amount</label>
+                            <input type="number" class="form-control font-size-13 text-end">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-6">
+                        <div class="col-12">
+                            <label for="exampleFormControlTextarea1" class="form-label"> KPI Details</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-6 pt-10">
+                                <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Quant Ratio</label>
+                                <select class="form-select font-size-13" aria-label="Default select example">
+                                    <option selected value="">Quantity or Quality</option>
+                                    <option value="1">January</option>
+                                    <option value="2">June</option>
+                                    <option value="3">July</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-6 pt-10">
+                                <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Priority</label>
+                                <select class="form-select font-size-13" aria-label="Default select example">
+                                    <option selected value="">A/B/C</option>
+                                    <option value="1"></option>
+                                    <option value="2"></option>
+                                    <option value="3"></option>
+                                </select>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-6 pt-10">
+                                <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Amount Type</label>
+                                <select class="form-select font-size-13" aria-label="Default select example">
+                                    <option selected value="">% or Number</option>
+                                    <option value="1"></option>
+                                    <option value="2"></option>
+                                    <option value="3"></option>
+                                </select>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-6 pt-10">
+                                <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Code</label>
+                                <select class="form-select font-size-13" aria-label="Default select example">
+                                    <option selected value="">
+                                        <=>
+                                    </option>
+                                    <option value="1"></option>
+                                    <option value="2"></option>
+                                    <option value="3"></option>
+                                </select>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-6 pt-10">
+                                <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Status</label>
+                                <select class="form-select font-size-13" aria-label="Default select example">
+                                    <option selected value="">Active/Finished</option>
+                                    <option value="1"></option>
+                                    <option value="2"></option>
+                                    <option value="3"></option>
+                                </select>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-6 pt-10">
+                                <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Month</label>
+                                <select class="form-select font-size-13" aria-label="Default select example">
+                                    <option selected value="">Select Month</option>
+                                    <option value="1">January</option>
+                                    <option value="2"></option>
+                                    <option value="3"></option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Result</label>
+                                <input type="number" class="form-control font-size-13 text-end">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 pt-10">
+                    Set Ratio Formula
+                </div>
+                <div class="col-12 pt-10">
+                    <select class="form-select font-size-12 alert-primary-12 text-dark" aria-label="Default select example">
+                        <option selected>Use Custom Formula</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="alert alert-primary-12 mt-10" role="alert">
+                    <div class="alert alert-light">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <a href="#"> <span class="badge bg-secondary text-white font-size-14"> <i class="fa fa-bullseye" aria-hidden="true"></i> Target</span></a>
+                                <a href="#"> <span class="badge bg-secondary text-white font-size-14"> <i class="fa fa-trophy" aria-hidden="true"></i> Result </span></a>
+                            </div>
+                            <div class="col-lg-8 col-md-6 col-12 targrt-small">
+                                <a href="#"><span class="badge bg-primary text-white pl-10 pr-10"> +</span></a>
+
+                                <a href="#"> <span class="badge bg-primary text-white pl-10 pr-10"> - </button></a>
+
+                                <a href="#"> <span class="badge bg-primary text-white pl-10 pr-10"> / </span></a>
+
+                                <a href="#"> <span class="badge bg-primary text-white pl-10 pr-10"> x </span></a>
+
+                                <a href="#"> <span class="badge bg-secondary text-white pl-10 pr-10"> ( </span></a>
+
+                                <a href="#"> <span class="badge bg-secondary text-white  pl-10 pr-10"> ) </span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="alert alert-ligh text-end">
+                        <div class="col-12 ">
+                            <input type="text" class="form-control" style="border: none;" placeholder="( [ Target ] + [ Result ] - [ Target ] )">
+                        </div>
+                        <div class="mt-50"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border: none;">
+                <button type=" button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal Jop Description -->
+
+<div class="modal fade" id="JopDescription" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="container">
+                <div id="exampleModalLabel">
+                    <div class="col-12 mt-10  Add-Certificate">
+                        <i class="fa fa-magic" aria-hidden="true"></i> Job Description Template
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="col-12 mb-3 pt-10">
+                            <label for="exampleFormControlInput1" class="form-label font-size-14 fn-w"><span class="text-danger">*</span> Company</label>
+                            <select class="form-select font-size-13" aria-label="Default select example">
+                                <option selected value="">Select Company</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                        <div class="col-12 mb-3 mt-30">
+                            <label for="exampleFormControlInput1" class="form-label font-size-14 fn-w"><span class="text-danger">*</span> Jop Description Name</label>
+                            <input type="text" class="form-control font-size-14" id="">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="col-12 mb-3 pt-10">
+                            <label for="exampleFormControlInput1" class="form-label font-size-14 fn-w"><span class="text-danger">*</span> Branch</label>
+                            <select class="form-select font-size-14" aria-label="Default select example">
+                                <option selected value="">Select Branch</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="col-12 mt-30">
+                                    <label for="exampleFormControlInput1" class="form-label font-size-14 fn-w"><span class="text-danger">*</span> Department</label>
+                                    <select class="form-select font-size-13" aria-label="Default select example">
+                                        <option selected value="">Select Department</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="col-12 mt-30">
+                                    <label for="exampleFormControlInput1" class="form-label font-size-14 fn-w"><span class="text-danger">*</span> Title</label>
+                                    <select class="form-select font-size-13" aria-label="Default select example">
+                                        <option selected value="">Select Title</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 mt-50">
+                    <label for="exampleFormControlInput1" class="form-label fn-w"> <span class="text-danger">*</span> Job Description Panel</label>
+                </div>
+                <hr>
+                <div class="col-12 mb-3 mt-40">
+                    <label for="exampleFormControlTextarea1" class="form-label fn-w"> Purpose of the Job</label>
+                    <textarea class="form-control font-size-13" id="exampleFormControlTextarea1" rows="4">The purpose of this role is to support the General Manager in driving the sales and marketing activities within the dynamic market of Bangladesh. The key focus areas encompass fostering and nurturing robust relationships with factories, industrial parks, general contractors, and engineering companies. The role necessitates diligent collection of vital information from a diverse range of stakeholders, including customers and relevant governmental authorities</textarea>
+                </div>
+                <div class="col-12 mb-3 mt-20">
+                    <label for="exampleFormControlTextarea1" class="form-label fn-w"> Core Responsibility</label>
+                    <textarea class="form-control font-size-13" id="exampleFormControlTextarea1" rows="7">
+1. Support the general manager in sales & and marketing activities in Bangladesh, especially in creating a good relationship with factories, industrial parks, general contractors, and engineering companies.
+2. Collect the necessary information from customers (factories, industrial parks, general contractors), and national government/local government/related authorities.
+3. Prepare the necessary application and get approval from the concerned authorities.
+4. Control documentary and filing system for the sales department
+5. Prepare estimations, contracts, and reports.
+                        </textarea>
+                </div>
+                <div class="col-12 mb-3 mt-20">
+                    <label for="exampleFormControlTextarea1" class="form-label fn-w"> Key Responsibility</label>
+                    <textarea class="form-control font-size-13" id="exampleFormControlTextarea1" rows="10">
+
+Maintain existing customers and expand new customers (concentrate in National/Local Public projects)
+Prepare visit plans and visit report.
+Approach & present information to customers about the company's products and services.
+Prepare and submit quotation to customer.
+Maintain and create relationships with customers.
+Survey market and report to General Manager.
+Maintain gross profit as assigned.
+Negotiate with customers on price and service to achieve gross profit.
+Take good care of customers.
+Response to customer complaints and comments.
+Keep on time appointments.
+Coordinate and communicate correct customer's inquiry to engineering department.
+Initiative and improve own work process and cross functional with other section to achieve company objectives.
+Performing the jobs assigned by superior.
+                    </textarea>
+                </div>
+            </div>
+            <div class="modal-footer col-12 text-end" style="border: none;">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </div>
+</div>

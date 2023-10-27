@@ -22,12 +22,12 @@
 
 .share-pointer {
     cursor: pointer;
-    color: rgb(45, 111, 243);
+    color: rgb(22 142 236);
     text-align: end;
 }
 
 .box-shareprofile {
-    padding-left: 40%;
+    padding-left: 30%;
 }
 
 .name-Tadawoki {
@@ -207,6 +207,7 @@
 .img-ertificate {
     width: 15px;
     margin-top: -5px;
+    cursor: pointer;
 }
 
 
@@ -260,7 +261,7 @@
 
 .Add-Certificate {
     font-weight: 600;
-    color: #1e97de;
+    color: #2580D3;
 }
 
 .fn-w {
@@ -282,8 +283,64 @@
 }
 
 .URL {
-    padding-top: 110px;
+    padding-top: 125px;
 }
+
+#image-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+
+#image-slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: #f7f7f7; */
+    border: 2px dashed #ccc;
+    cursor: pointer;
+    font-size: 12px;
+    border-radius: 5px;
+    width: 80%;
+    height: 170px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @media(max-width:992px) {

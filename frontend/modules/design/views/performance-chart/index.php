@@ -93,7 +93,6 @@ $this->title = 'Performance Chart';
             </div>
             <div class="col-12 mt-30">
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-
                 <div class="col-12 text-center font-size-18">
                     <strong> PLF 3-Years Performance Chart</strong>
                 </div>
@@ -160,14 +159,16 @@ $this->title = 'Performance Chart';
                                     </div>
                                     <div class="col-5">
                                         <div class="slidecontainer">
-                                            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                                            <input type="range" min="1" max="100" value="50" class="slider-warning" id="myRange">
                                         </div>
                                     </div>
-                                    <div class="col-7 pl-20">
+                                    <div class="col-7 pl-20 pt-10">
                                         Forecasted
                                     </div>
-                                    <div class="col-5">
-                                        fjhtjkokg
+                                    <div class="col-5 pt-10">
+                                        <button type="button" class="examplebox-warning"></button>
+                                        <button type="button" class="examplebox-warning"></button>
+                                        <button type="button" class="examplebox-warning"></button>
                                     </div>
                                 </div>
                             </div>
@@ -191,15 +192,17 @@ $this->title = 'Performance Chart';
                                         Actual
                                     </div>
                                     <div class="col-5">
-                                        <div class="chrome">
-                                            <input id="myinput" min="0" max="60" type="range" value="30" />
+                                        <div class="slidecontainer">
+                                            <input type="range" min="1" max="100" value="50" class="slider-blue" id="myRange">
                                         </div>
                                     </div>
-                                    <div class="col-7 pl-20">
+                                    <div class="col-7 pl-20 pt-10">
                                         Forecasted
                                     </div>
-                                    <div class="col-5">
-                                        yjhut7u
+                                    <div class="col-5 pt-10">
+                                        <button type="button" class="examplebox-blue"></button>
+                                        <button type="button" class="examplebox-blue"></button>
+                                        <button type="button" class="examplebox-blue"></button>
                                     </div>
                                 </div>
                             </div>
@@ -223,13 +226,17 @@ $this->title = 'Performance Chart';
                                         Actual
                                     </div>
                                     <div class="col-5">
-                                        yjhut7u
+                                        <div class="slidecontainer">
+                                            <input type="range" min="1" max="100" value="50" class="slider-green" id="myRange">
+                                        </div>
                                     </div>
-                                    <div class="col-7 pl-20">
+                                    <div class="col-7 pl-20 pt-10">
                                         Forecasted
                                     </div>
-                                    <div class="col-5">
-                                        yjhut7u
+                                    <div class="col-5 pt-10">
+                                        <button type="button" class="examplebox-green"></button>
+                                        <button type="button" class="examplebox-green"></button>
+                                        <button type="button" class="examplebox-green"></button>
                                     </div>
                                 </div>
                             </div>
@@ -238,7 +245,7 @@ $this->title = 'Performance Chart';
                             <div class="alert light-shadow-3">
                                 <div class="row">
                                     <div class="col-10 font-size-12">
-                                        <strong> Fixed Expense....</strong>
+                                        <strong> Fixed Expense</strong>
                                     </div>
                                     <div class="col-2">
                                         <div>
@@ -253,13 +260,17 @@ $this->title = 'Performance Chart';
                                         Actual
                                     </div>
                                     <div class="col-5">
-                                        jiytjuygj
+                                        <div class="slidecontainer">
+                                            <input type="range" min="1" max="100" value="50" class="slider-purple" id="myRange">
+                                        </div>
                                     </div>
-                                    <div class="col-7 pl-20">
+                                    <div class="col-7 pl-20 pt-10">
                                         Forecasted
                                     </div>
-                                    <div class="col-5">
-                                        yjhut7u
+                                    <div class="col-5 pt-10">
+                                        <button type="button" class="examplebox-purple"></button>
+                                        <button type="button" class="examplebox-purple"></button>
+                                        <button type="button" class="examplebox-purple"></button>
                                     </div>
                                 </div>
                             </div>
@@ -283,13 +294,18 @@ $this->title = 'Performance Chart';
                                         Actual
                                     </div>
                                     <div class="col-5">
-                                        yjhut7u
+                                        <div class="slidecontainer">
+                                            <input type="range" min="1" max="100" value="50" class="slider-blue" id="myRange">
+                                        </div>
                                     </div>
-                                    <div class="col-7 pl-20">
+                                    <div class="col-7 pl-20 pt-10">
                                         Forecasted
                                     </div>
-                                    <div class="col-5">
-                                        yjhut7u
+                                    <div class="col-5 pt-10">
+                                        <button type="button" class="examplebox-blue"></button>
+                                        <button type="button" class="examplebox-blue"></button>
+                                        <button type="button" class="examplebox-blue"></button>
+
                                     </div>
                                 </div>
                             </div>
@@ -308,18 +324,22 @@ $this->title = 'Performance Chart';
                                 </div>
                             </div>
                             <div class="card" style="border:none;">
-                                <div class="row font-size-12">
+                                <div class="row font-size-12" disabled>
                                     <div class="col-7 pl-20">
                                         Actual
                                     </div>
                                     <div class="col-5">
-                                        yjhut7u
+                                        <div class="slidecontainer">
+                                            <input type="range" min="1" max="100" value="50" class="slider-blue" id="myRange">
+                                        </div>
                                     </div>
-                                    <div class="col-7 pl-20">
+                                    <div class="col-7 pl-20 pt-10">
                                         Forecasted
                                     </div>
-                                    <div class="col-5">
-                                        yjhut7u
+                                    <div class="col-5 pt-10">
+                                        <button type="button" class="examplebox-blue"></button>
+                                        <button type="button" class="examplebox-blue"></button>
+                                        <button type="button" class="examplebox-blue"></button>
                                     </div>
                                 </div>
                             </div>
