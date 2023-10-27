@@ -51,10 +51,6 @@ class TitleController extends Controller
         $title = curl_exec($api);
         $title = json_decode($title, true);
 
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/layer/all-layer');
-        // $layer = curl_exec($api);
-        // $layer = json_decode($layer, true);
-
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
         $companies = curl_exec($api);
         $companies = json_decode($companies, true);
@@ -71,7 +67,6 @@ class TitleController extends Controller
         curl_close($api);
         return $this->render('index', [
             "title" => $title,
-            // "layer" => $layer,
             "companies" => $companies,
             "departments" => $departments,
         ]);
@@ -101,7 +96,7 @@ class TitleController extends Controller
             "layer" => $layer,
         ]);
     }
-    public function actionSaveCreateTitle()
+    public function actionCheckDupplicateTitle()
     {
         $title = Title::find()
             ->where([
@@ -112,46 +107,55 @@ class TitleController extends Controller
             ->one();
         if (isset($title) && !empty($title)) {
             $res["status"] = false;
-            $res["errorText"] = 'Can not create dupplicate Title name "' . $_POST["titleName"] . '"';
+            $res["errorText"] = 'Existing Title name "' . $_POST["titleName"] . '"';
         } else {
-            $title = new Title();
-            $title->titleName = $_POST["titleName"];
-            $title->layerId = $_POST["layer"];
-            $title->departmentId = $_POST["departmentId"];
-            $title->jobDescription = $_POST["jobDescription"];
-            $title->shortTag = $_POST["shortTag"];
-            $title->status = 1;
-            $title->createDateTime = new Expression('NOW()');
-            $title->updateDateTime = new Expression('NOW()');
-            if ($title->save(false)) {
-                $titleId = Yii::$app->db->lastInsertID;
-                $departmentTitle = new DepartmentTitle();
-                $departmentTitle->titleId = $titleId;
-                $departmentTitle->departmentId = $_POST["departmentId"];
-                $departmentTitle->status = 1;
-                $departmentTitle->createDateTime = new Expression('NOW()');
-                $departmentTitle->updateDateTime = new Expression('NOW()');
-                $departmentTitle->save(false);
-                $api = curl_init();
-                curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
-                curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-detail?id=' . $_POST["departmentId"]);
-                $department = curl_exec($api);
-                $department = json_decode($department, true);
-                curl_close($api);
-                $res["status"] = true;
-                $res["newTitle"] = $this->renderAjax('new_title', [
-                    "titleName" => $_POST["titleName"],
-                    "layerName" => Layer::layerName($_POST['layer']),
-                    "tShort" => Title::shortName($titleId),
-                    "lShort" => Layer::shortName($_POST['layer']),
-                    "titleId" => $titleId,
-                    "branchName" => Branch::branchName($department["branchId"]),
-                    "departmentName" => Department::departmentNAme($_POST["departmentId"])
-                ]);
-            }
+            $res["status"] = true;
         }
-        return json_encode($res);
+    }
+    public function actionSaveCreateTitle()
+    {
+
+        $title = new Title();
+        $title->titleName = $_POST["titleName"];
+        $title->layerId = $_POST["layer"];
+        $title->departmentId = $_POST["departmentId"];
+        $title->jobDescription = $_POST["jobDescription"];
+        $title->purpose = $_POST["purpose"];
+        $title->keyResponsibility = $_POST["keyResponsibility"];
+        $title->requireSkill = $_POST["requireSkill"];
+        $title->shortTag = $_POST["shortTag"];
+        $title->status = 1;
+        $title->createDateTime = new Expression('NOW()');
+        $title->updateDateTime = new Expression('NOW()');
+        if ($title->save(false)) {
+            // $titleId = Yii::$app->db->lastInsertID;
+            // $departmentTitle = new DepartmentTitle();
+            // $departmentTitle->titleId = $titleId;
+            // $departmentTitle->departmentId = $_POST["departmentId"];
+            // $departmentTitle->status = 1;
+            // $departmentTitle->createDateTime = new Expression('NOW()');
+            // $departmentTitle->updateDateTime = new Expression('NOW()');
+            // $departmentTitle->save(false);
+            // $api = curl_init();
+            // curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+            // curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+            // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-detail?id=' . $_POST["departmentId"]);
+            // $department = curl_exec($api);
+            // $department = json_decode($department, true);
+            // curl_close($api);
+            // $res["status"] = true;
+            // $res["newTitle"] = $this->renderAjax('new_title', [
+            //     "titleName" => $_POST["titleName"],
+            //     "layerName" => Layer::layerName($_POST['layer']),
+            //     "tShort" => Title::shortName($titleId),
+            //     "lShort" => Layer::shortName($_POST['layer']),
+            //     "titleId" => $titleId,
+            //     "branchName" => Branch::branchName($department["branchId"]),
+            //     "departmentName" => Department::departmentNAme($_POST["departmentId"])
+            // ]);
+        }
+
+        return $this->redirect(Yii::$app->homeUrl . 'setting/title/index');
     }
     public function actionUpdateTitle()
     {

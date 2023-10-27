@@ -5,42 +5,23 @@ if (window.location.host == 'localhost') {
     $baseUrl = window.location.protocol + "//" + window.location.host + '/';
 }
 $url = $baseUrl;
-function createTitle() {
+function checkDupplicateTitle() {
 	var titleName = $("#titleName").val();
-	var shortTag = $("#shortTag").val();
-	var departmentId = $("#departmentId").val();
-	var jobDescription = $("#jobDescription").val();
-	var layer = $("#layer").val();
-	if ($.trim(titleName) == '') {
-		alert("Title name can not be null");
-	} else if (layer == '' || layer == null) {
-		alert('Please select Layer.');
-	} else if (departmentId == '') { 
-		alert('Please select Department.');
-	} else{
-		var url = $url + 'setting/title/save-create-title';
+		var url = $url + 'setting/title/check-dupplicate-title';
 		$.ajax({
 			type: "POST",
 			dataType: 'json',
 			url: url,
-			data: { titleName: titleName, shortTag: shortTag, layer: layer,departmentId:departmentId,jobDescription:jobDescription},
+			data: { titleName: titleName},
 			success: function (data) {
 				if (data.status) {
-					$("#titleName").val('');
-					$("#shortTag").val('');
-					$("#layer").val('')
-					$("#company-team").val('');
-					$("#branch-team").val('');
-					$("#department-team").val('');
-					$("#jobDescription").val('')
-					$("#departmentId").val('');
-					$("#all-title-list").prepend(data.newTitle);
+					$("#create-title").submit();
 				} else {
 					alert(data.errorText);
 				}
 			}
 		});
-	}
+	
 }
 function updateTitle(titleId) {
 	$("#titleId").val(titleId);
