@@ -25,13 +25,13 @@ $form = ActiveForm::begin([
 					<label class="form-label font-size-12 font-b">
 						<span class="text-danger mr-5"><b>*</b></span>Title
 					</label>
-					<input type="text" name="titleName" id="titleName" class="form-control">
+					<input type="text" name="titleName" id="titleName" class="form-control" required>
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-6 col-12">
 				<div class="col-12">
 					<label class="form-label font-size-12 font-b"><span class="text-danger mr-5"><b>*</b></span>Select Associate Layer</label>
-					<select class="form-select" id="layer">
+					<select class="form-select" id="layer" required>
 						<option value="">Select Layer</option>
 						<?php
 						if (isset($layer) && count($layer) > 0) {
@@ -51,12 +51,12 @@ $form = ActiveForm::begin([
 			<div class="col-lg-3 col-md-6 col-12">
 				<div class="col-12">
 					<label class="form-label font-size-12 font-b"><span class="text-danger mr-5"><b>*</b></span>Shot Tag </label>
-					<input type="text" name="shortTag" id="shortTag" class="form-control">
+					<input type="text" name="shortTag" id="shortTag" class="form-control" required>
 				</div>
 			</div>
 			<div class="col-lg-3 col-6 mt-10">
 				<label class="form-label font-size-12 font-b"><span class="text-danger mr-5"><b>*</b></span>Company </label>
-				<select class="form-select" id="company-team" onchange="javascript:branchCompany()">
+				<select class="form-select" id="company-team" onchange="javascript:branchCompany()" required>
 					<option value="">Select Company</option>
 					<?php
 					if (isset($companies) && count($companies) > 0) {
@@ -74,14 +74,14 @@ $form = ActiveForm::begin([
 			</div>
 			<div class="col-lg-3 col-6 mt-10">
 				<label class="form-label font-size-12 font-b"><span class="text-danger mr-5"><b>*</b></span>Branch </label>
-				<select class="form-select" id="branch-team" onchange="javascript:departmentBranch()" disabled required>
+				<select class="form-select" id="branch-team" onchange="javascript:departmentBranch()" required>
 					<option value="">Select Branch</option>
 
 				</select>
 			</div>
 			<div class="col-lg-3 col-6 mt-10">
 				<label class="form-label font-size-12 font-b"><span class="text-danger mr-5"><b>*</b></span>Department </label>
-				<select class="form-select" id="department-team" disabled required onchange="javascript:addDepartmentId()">
+				<select class="form-select" id="department-team" required onchange="javascript:addDepartmentId()">
 					<option value="">Select Department</option>
 
 				</select>
@@ -93,7 +93,7 @@ $form = ActiveForm::begin([
 			</div>
 			<div class="col-12 mt-10">
 				<label class="form-label font-size-12 font-b"><span class="text-danger mr-5"><b>*</b></span>Job Description Name</label>
-				<input type="text" name="jobDescription" id="jobDescription" class="form-control">
+				<input type="text" name="jobDescription" id="jobDescription" class="form-control" required>
 			</div>
 			<div class="col-12 mt-10">
 				<label class="form-label font-size-12 font-b">Purpose of the Job</label>
@@ -112,8 +112,8 @@ $form = ActiveForm::begin([
 			<div class="col-lg-12 col-md-2 col-12 pt-30 text-end pr-1 pl-0 text-end">
 				<button type="reset" class="btn btn-secondary" id="create-title">Cancel
 				</button>
-				<button type="submit" class="btn btn-primary" id="create-title">Create
-				</button>
+				<a href="javascript:checkDupplicateTitle()" class="btn btn-primary" id="create-title">Create
+				</a>
 
 			</div>
 		</div>
