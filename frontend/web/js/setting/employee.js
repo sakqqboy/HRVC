@@ -14,6 +14,8 @@ function showFile(index) {
         if ($("#file1").length > 0) {
             $("#file2").css("display", "none");
             $("#file" + index).show();
+            $("#file" + index).document.querySelector("label[for=name]");
+
         } else {
             alert("Employee resume did't upload yet.");
         }
@@ -27,7 +29,7 @@ function showFile(index) {
     }
 
 }
-function filterEmployee() { 
+function filterEmployee() {
     var companyId = $("#company-team").val();
     var branchId = $("#branch-team").val();
     var departmentId = $("#department-team").val();
@@ -38,12 +40,12 @@ function filterEmployee() {
         type: "POST",
         dataType: 'json',
         url: url,
-        data: { companyId: companyId,branchId:branchId,departmentId:departmentId,teamId:teamId,status:status },
-        success: function(data) {
-           
+        data: { companyId: companyId, branchId: branchId, departmentId: departmentId, teamId: teamId, status: status },
+        success: function (data) {
+
 
         }
-    }); 
+    });
 
 }
 function employeeType(status) {
@@ -53,15 +55,15 @@ function employeeType(status) {
     $("#btn-" + 2).addClass('btn-curr');
     $("#btn-" + status).removeClass('btn-curr');
 }
-function showAction(employeeId) { 
+function showAction(employeeId) {
     var showingId = $("#show-action").val();
     $("#employee-action-" + employeeId).show();
     if (showingId != '') {
         $("#employee-action-" + showingId).hide();
-        
+
     }
     $("#show-action").val(employeeId);
-    if (showingId == employeeId) { 
+    if (showingId == employeeId) {
         $("#show-action").val('');
     }
 
@@ -74,7 +76,7 @@ function deleteEmployee(employeeId) {
             type: "POST",
             dataType: 'json',
             url: url,
-            data: { employeeId: employeeId},
+            data: { employeeId: employeeId },
             success: function (data) {
                 if (data.status) {
                     $("#employee-" + employeeId).hide();
@@ -83,12 +85,12 @@ function deleteEmployee(employeeId) {
         });
     }
 }
-function checkUploadFile(type) { 
+function checkUploadFile(type) {
     if (type == 1) {
         if ($("#resume").length > 0) {
             $("#hasResume").val(1);
             $("#resume-check").show()
-        } else { 
+        } else {
             $("#hasResume").val('');
             $("#resume-check").hide()
         }
@@ -97,9 +99,9 @@ function checkUploadFile(type) {
         if ($("#agreement").length > 0) {
             $("#hasAgreement").val(1);
             $("#agreement-check").show()
-        } else { 
+        } else {
             $("#hasAgreement").val('');
             $("#agreement-check").hide()
         }
-     }
+    }
 }

@@ -1909,7 +1909,7 @@ $this->title = 'Gloden';
                 <div class="card">
                     <div class="col-12 mt-20">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="Previous">
+                            <input class="form-check-input" type="checkbox" id="Previous">
                             <label class="form-check-label" for="flexCheckDefault">
                                 <span class="AC-Primary"> AC </span> &nbsp;&nbsp; Previous Year Actual
                             </label>
@@ -1998,18 +1998,3 @@ $this->title = 'Gloden';
         </div>
     </div>
 </div>
-<div class="nt-50"></div>
-<label>
-    Default
-    <input mbsc-input id="my-input" data-dropdown="true" />
-</label>
-<select id="my-select">
-    <option value="atl">Atlanta</option>
-    <option value="ber">Berlin</option>
-    <option value="bos">Boston</option>
-    <option value="chi">Chicago</option>
-    <option value="lon">London</option>
-    <option value="bangladresh">bangladresh</option>
-    <option value="thailand"> thailand</option>
-    <option value="japn">japan</option>
-</select>
