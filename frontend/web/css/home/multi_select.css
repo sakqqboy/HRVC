@@ -4,8 +4,10 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 5px;
-    box-shadow: 2px 2px 5px #00000033;
-    width: 50%;
+    /* box-shadow: 2px 2px 5px #00000033;*/
+    width: 100%;
+    min-height: 60px;
+    padding-top: 10px;
 }
 
 .tags-input ul {
@@ -16,7 +18,8 @@
 
 .tags-input li {
     display: inline-block;
-    background-color: #D3EAFF;
+    /* background-color: #D3EAFF; */
+    background-color: #99d7fc;
     font-weight: 400;
     color: #000000;
     border-radius: 15px;
@@ -48,7 +51,7 @@
     cursor: pointer;
     margin-left: 10px;
     margin-top: -5px;
-    font-size: 12px;
+    font-size: 13px;
     color: black;
     padding-left: 5px;
     padding-right: 5px;

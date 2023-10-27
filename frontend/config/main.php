@@ -76,6 +76,8 @@ return [
                 'setting/layer/result-layer-title/<hash>' => 'setting/layer/result-layer-title',
                 'setting/employee/employee-result/<hash>' => 'setting/employee/employee-result',
                 'setting/title/search-result/<hash>' => 'setting/title/search-result',
+                'setting/title/update-title/<hash>' => 'setting/title/update-title',
+                'setting/title/title-detail/<hash>' => 'setting/title/title-detail',
                 'kpi/management/kpi-search-result/<hash>' => 'kpi/management/kpi-search-result',
                 'kgi/management/kgi-search-result/<hash>' => 'kgi/management/kgi-search-result',
                 'kfi/management/kfi-search-result/<hash>' => 'kfi/management/kfi-search-result',

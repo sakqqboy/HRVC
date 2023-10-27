@@ -7,12 +7,13 @@ if (window.location.host == 'localhost') {
 $url = $baseUrl;
 function checkDupplicateTitle() {
 	var titleName = $("#titleName").val();
+	var departmentId = $("#department-team").val();
 		var url = $url + 'setting/title/check-dupplicate-title';
 		$.ajax({
 			type: "POST",
 			dataType: 'json',
 			url: url,
-			data: { titleName: titleName},
+			data: { titleName: titleName,departmentId:departmentId},
 			success: function (data) {
 				if (data.status) {
 					$("#create-title").submit();
@@ -22,6 +23,25 @@ function checkDupplicateTitle() {
 			}
 		});
 	
+}
+function checkDupplicateTitleUpdate() { 
+	var titleName = $("#titleName").val();
+	var titleId=$("#titleId").val();
+	var departmentId = $("#department-team").val();
+		var url = $url + 'setting/title/check-dupplicate-title-update';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { titleName: titleName,departmentId:departmentId,titleId:titleId},
+			success: function (data) {
+				if (data.status) {
+					$("#update-title-form").submit();
+				} else {
+					alert(data.errorText);
+				}
+			}
+		});
 }
 function updateTitle(titleId) {
 	$("#titleId").val(titleId);
@@ -98,11 +118,13 @@ $("#reset-title").click(function (e) {
 function deleteTitle(titleId) {
 	if (confirm("Are you sure to delete this title")) {
 		var url = $url + 'setting/title/delete-title?';
+		var redirect = $("#redirect").val();
+		var preUrl = $("#preUrl").val();
 		$.ajax({
 			type: "POST",
 			dataType: 'json',
 			url: url,
-			data: { titleId: titleId },
+			data: { titleId: titleId,redirect:redirect,preUrl:preUrl },
 			success: function (data) {
 				if (data.status) {
 					$("#title-" + titleId).hide(200);

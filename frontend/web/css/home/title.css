@@ -43,6 +43,12 @@
 .title-description-box{
     min-height: 100px;
     border-left: gray solid thin;
+    word-wrap: break-word;
+}
+.view-show-tag{
+    min-height: 150px;
+    padding-left: 10px;
+    border-left: lightgray solid thin;
 }
 
 @media(max-width: 992px) {

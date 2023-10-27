@@ -111,6 +111,25 @@ class TitleController extends Controller
         } else {
             $res["status"] = true;
         }
+        return json_encode($res);
+    }
+    public function actionCheckDupplicateTitleUpdate()
+    {
+        $title = Title::find()
+            ->where([
+                "titleName" => $_POST["titleName"],
+                "departmentId" => $_POST["departmentId"],
+                "status" => 1
+            ])
+            ->andWhere("titleId!=" . $_POST['titleId'])
+            ->one();
+        if (isset($title) && !empty($title)) {
+            $res["status"] = false;
+            $res["errorText"] = 'Existing Title name "' . $_POST["titleName"] . '"';
+        } else {
+            $res["status"] = true;
+        }
+        return json_encode($res);
     }
     public function actionSaveCreateTitle()
     {
@@ -122,11 +141,20 @@ class TitleController extends Controller
         $title->jobDescription = $_POST["jobDescription"];
         $title->purpose = $_POST["purpose"];
         $title->keyResponsibility = $_POST["keyResponsibility"];
-        $title->requireSkill = $_POST["requireSkill"];
         $title->shortTag = $_POST["shortTag"];
         $title->status = 1;
         $title->createDateTime = new Expression('NOW()');
         $title->updateDateTime = new Expression('NOW()');
+        if (isset($_POST["tags"]) && count($_POST["tags"]) > 0) {
+            $tags = '';
+            foreach ($_POST["tags"] as $tag) :
+                $tags .= $tag . ',';
+            endforeach;
+            if ($tags != '') {
+                $tags = substr($tags, 0, -1);
+                $title->requireSkill = $tags;
+            }
+        }
         if ($title->save(false)) {
             // $titleId = Yii::$app->db->lastInsertID;
             // $departmentTitle = new DepartmentTitle();
@@ -157,14 +185,16 @@ class TitleController extends Controller
 
         return $this->redirect(Yii::$app->homeUrl . 'setting/title/index');
     }
-    public function actionUpdateTitle()
+    public function actionUpdateTitle($hash)
     {
+        $param = ModelMaster::decodeParams($hash);
+        $titleId = $param["titleId"];
         $groupId = Group::currentGroupId();
         if ($groupId == '') {
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
         }
 
-        $titleId = $_POST["titleId"];
+        $titleId = $param["titleId"];
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -175,8 +205,7 @@ class TitleController extends Controller
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-detail?id=' . $title["departmentId"]);
         $department = curl_exec($api);
         $department = json_decode($department, true);
-        $textDepartment = '<option value="' . $department["departmentId"] . '">' . $department["departmentName"] . '</option>';
-        $textDepartment .= '<option value="">Select Department</option>';
+
         $departments = Department::find()
             ->select('departmentId,departmentName')
             ->where(["branchId" => $department["branchId"]])
@@ -184,41 +213,123 @@ class TitleController extends Controller
             ->asArray()
             ->orderBy("departmentName")
             ->all();
-        if (isset($departments) && count($departments) > 0) {
-            foreach ($departments as $dep) :
-                $textDepartment .= '<option value="' . $dep["departmentId"] . '">' . $dep["departmentName"] . '</option>';
-            endforeach;
-        }
-
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-detail?id=' . $department["branchId"]);
         $branch = curl_exec($api);
         $branch = json_decode($branch, true);
-        $textBranch = '<option value="' . $branch["branchId"] . '">' . $branch["branchName"] . '</option>';
-        $textBranch .= '<option value="">Select Branch</option>';
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $branch["companyId"]);
+
         $branches = Branch::find()
             ->where(["status" => 1, "companyId" => $branch["companyId"]])
             ->andWhere("branchId!=" . $branch['branchId'])
             ->asArray()
             ->orderBy("branchName")
             ->all();
-        if (isset($branches) && count($branches) > 0) {
-            foreach ($branches as $b) :
-                $textBranch .= '<option value="' . $b["branchId"] . '">' . $b["branchName"] . '</option>';
-            endforeach;
-        }
+
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $branch["companyId"]);
         $company = curl_exec($api);
         $company = json_decode($company, true);
 
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+        $companies = curl_exec($api);
+        $companies = json_decode($companies, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/layer/all-layer');
+        $layer = curl_exec($api);
+        $layer = json_decode($layer, true);
+
         curl_close($api);
-        $res["title"] = $title;
-        $res["department"] = $textDepartment;
-        $res["branch"] = $textBranch;
-        $res["companyId"] = $company["companyId"];
-        return json_encode($res);
+        $skillArr = [];
+        if ($title["requireSkill"] != '') {
+            $skillArr = explode(',', $title["requireSkill"]);
+        }
+        return $this->render('update', [
+            "departments" => $departments,
+            "branches" => $branches,
+            "companies" => $companies,
+            "departmentId" => $title["departmentId"],
+            "branchId" => $department["branchId"],
+            "companyId" => $branch["companyId"],
+            "layer" => $layer,
+            "title" => $title,
+            "skillArr" => $skillArr,
+            "preUrl" => Yii::$app->request->referrer
+        ]);
+    }
+    public function actionSaveUpdateTitle()
+    {
+        $titleId = $_POST["titleId"];
+        $title = Title::find()->where(["titleId" => $titleId])->one();
+        /* $oldDepartmentId = $title->departmentId;
+        if ($oldDepartmentId != $_POST["departmentId"]) {
+            DepartmentTitle::deleteAll(["titleId" => $titleId, "departmentId" => $oldDepartmentId]);
+            $departmentTitle = new DepartmentTitle();
+            $departmentTitle->titleId = $titleId;
+            $departmentTitle->departmentId = $_POST["departmentId"];
+            $departmentTitle->status = 1;
+            $departmentTitle->createDateTime = new Expression('NOW()');
+            $departmentTitle->updateDateTime = new Expression('NOW()');
+            $departmentTitle->save(false);
+        }*/
+        $title->titleName = $_POST["titleName"];
+        $title->layerId = $_POST["layer"];
+        $title->shortTag = $_POST["shortTag"];
+        $title->departmentId = $_POST["departmentId"];
+        $title->jobDescription = $_POST["jobDescription"];
+        $title->purpose = $_POST["purpose"];
+        $title->keyResponsibility = $_POST["keyResponsibility"];
+        $title->jobDescription = $_POST["jobDescription"];
+        $title->status = 1;
+        $title->updateDateTime = new Expression('NOW()');
+        if (isset($_POST["tags"]) && count($_POST["tags"]) > 0) {
+            $tags = '';
+            foreach ($_POST["tags"] as $tag) :
+                $tags .= $tag . ',';
+            endforeach;
+            if ($tags != '') {
+                $tags = substr($tags, 0, -1);
+                $title->requireSkill = $tags;
+            }
+        }
+        $title->save(false);
+
+        return $this->redirect($_POST["preUrl"]);
+    }
+    public function actionTitleDetail($hash)
+    {
+        $param = ModelMaster::decodeParams($hash);
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/title/title-detail?id=' . $param["titleId"]);
+        $title = curl_exec($api);
+        $title = json_decode($title, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-detail?id=' . $title["departmentId"]);
+        $department = curl_exec($api);
+        $department = json_decode($department, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-detail?id=' . $department["branchId"]);
+        $branch = curl_exec($api);
+        $branch = json_decode($branch, true);
+
+        $flag = Branch::branchFlag($department['branchId']);
+
+        curl_close($api);
+
+        $skillArr = [];
+        if ($title["requireSkill"] != '') {
+            $skillArr = explode(',', $title["requireSkill"]);
+        }
+        return $this->render('view', [
+            "title" => $title,
+            "departmentId" => $title["departmentId"],
+            "branchId" => $department["branchId"],
+            "companyId" => $branch["companyId"],
+            "flag" => $flag,
+            "skillArr" => $skillArr,
+            "preUrl" => Yii::$app->request->referrer
+        ]);
     }
     public function actionDeleteTitle()
     {
@@ -229,49 +340,13 @@ class TitleController extends Controller
         if ($title->save(false)) {
             $res["status"] = true;
         }
-        return json_encode($res);
-    }
-    public function actionSaveUpdateTitle()
-    {
-        $titleId = $_POST["titleId"];
-        $title = Title::find()->where(["titleId" => $titleId])->one();
-        $oldDepartmentId = $title->departmentId;
-        if ($oldDepartmentId != $_POST["departmentId"]) {
-            DepartmentTitle::deleteAll(["titleId" => $titleId, "departmentId" => $oldDepartmentId]);
-            $departmentTitle = new DepartmentTitle();
-            $departmentTitle->titleId = $titleId;
-            $departmentTitle->departmentId = $_POST["departmentId"];
-            $departmentTitle->status = 1;
-            $departmentTitle->createDateTime = new Expression('NOW()');
-            $departmentTitle->updateDateTime = new Expression('NOW()');
-            $departmentTitle->save(false);
+        if ($_POST["redirect"] == 1) {
+            // return $this->redirect($_POST["preUrl"]);
+            return $this->redirect(Yii::$app->homeUrl . 'setting/title/index');
         }
-        $title->titleName = $_POST["titleName"];
-        $title->layerId = $_POST["layer"];
-        $title->shortTag = $_POST["shortTag"];
-        $title->departmentId = $_POST["departmentId"];
-        $title->jobDescription = $_POST["jobDescription"];
-        $title->status = 1;
-        $title->updateDateTime = new Expression('NOW()');
-        $title->save(false);
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-detail?id=' . $_POST["departmentId"]);
-        $department = curl_exec($api);
-        $department = json_decode($department, true);
-        curl_close($api);
-        $res["textUpdate"] = $this->renderAjax('update_title', [
-            "titleName" => $_POST["titleName"],
-            "layerName" => Layer::layerName($_POST['layer']),
-            "tShort" => $_POST['shortTag'],
-            "lShort" => Layer::shortName($_POST['layer']),
-            "titleId" => $titleId,
-            "departmentName" => Department::departmentNAme($_POST["departmentId"]),
-            "branchName" => Branch::branchName($department["branchId"])
-        ]);
         return json_encode($res);
     }
+
     public function actionUploadImage()
     {
         if (isset($_FILES['upload']['name'])) {
