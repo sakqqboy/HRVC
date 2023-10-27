@@ -13,16 +13,71 @@ $this->title = 'Management Layer';
 			Management Layer
 		</div>
 	</div>
-	<div class="col-12 mt-30">
-		<div class="col-lg-2 col-3">
-			<div class="alert alert-secondary text-center font-size-18 font-b">
-				<a href="<?= Yii::$app->homeUrl ?>setting/title/index" class="nav-link">Title</a>
+	<div class="col-12 mt-20 layer-link pl-40 pt-10 pb-10">
+		<div class="row">
+			<div class="col-lg-2 col-3 link-item-active">
+				<i class="fa fa-bars mr-2" aria-hidden="true"></i>
+				Hierarchy Layer
+			</div>
+			<div class="col-lg-2 col-3 link-item">
+
+				<a href="<?= Yii::$app->homeUrl ?>setting/title/index" class="no-underline-black ">
+					<i class="fa fa-list-ul mr-2" aria-hidden="true"></i>
+					Title
+				</a>
 			</div>
 		</div>
 	</div>
-	<div class="col-12">
+	<div class="col-12 mt-10">
 		<div class="row">
-			<div class="col-lg-8 col-md-12 col-12">
+			<div class="offset-lg-4 col-lg-4 col-md-4 col-12 mt-10">
+				<div class="input-group">
+					<button class="btn btn-secondary" type="button">Branch</button>
+					<select class="form-select font-size-14" id="branch-team" onchange="javascript:departmentBranch()">
+
+						<option value="">Select Branch</option>
+						<?php
+						if (isset($branches) && count($branches) > 0) {
+							foreach ($branches as $branch) : ?>
+								<option value="<?= $branch['branchId'] ?>"><?= $branch['branchName'] ?></option>
+						<?php
+							endforeach;
+						}
+						?>
+					</select>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-4 col-12 mt-10">
+				<div class="input-group">
+					<button class="btn btn-secondary" type="button">Department</button>
+					<select class="form-select font-size-14" id="department-team" <?= isset($departments) && count($departments) > 0 ? '' : 'disabled' ?>>
+						<?php
+						if (isset($departmentId) && $departmentId != '') {
+						?>
+							<option value="<?= $departmentId ?>"><?= Department::departmentNAme($departmentId) ?></option>
+						<?php
+						}
+						?>
+						<option value="">Select Department</option>
+						<?php
+						if (isset($departments) && count($departments) > 0) {
+							foreach ($departments as $deparment) : ?>
+								<option value="<?= $deparment['departmentId'] ?>"><?= $deparment['departmentName'] ?></option>
+						<?php
+							endforeach;
+						}
+						?>
+					</select>
+					<button type="button" class="btn btn-outline-dark" onclick="javascrip:filterLayerTitle()">
+						<i class="fa fa-filter" aria-hidden="true"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-12 mt-20">
+		<div class="row">
+			<div class="col-lg-5 col-md-12 col-12">
 				<div class="alert alert-layer">
 					<div class="row">
 						<div class="col-12 text-center mt-20 mb-20">
@@ -82,72 +137,18 @@ $this->title = 'Management Layer';
 
 				</div>
 			</div>
-			<div class="col-lg-4 col-md-12 col-12">
+			<div class="col-lg-3 col-md-12 col-12">
 				<?= $this->render('layer_title', [
 					"layers" => $layers
 				]) ?>
 
 
 			</div>
-			<div class="col-12 mt-10">
-				<div class="row">
-					<div class="offset-lg-6 col-lg-3 col-md-4 col-12 mt-10">
-						<div class="input-group">
-
-							<button class="btn btn-outline-secondary" type="button">Branch</button>
-							<select class="form-select font-size-14" id="branch-team" onchange="javascript:departmentBranch()">
-								<?php
-								if (isset($branchId) && $branchId != '') {
-								?>
-									<option value="<?= $branchId ?>"><?= Branch::branchName($branchId) ?></option>
-								<?php
-								}
-								?>
-								<option value="">Select Branch</option>
-								<?php
-								if (isset($branches) && count($branches) > 0) {
-									foreach ($branches as $branch) : ?>
-										<option value="<?= $branch['branchId'] ?>"><?= $branch['branchName'] ?></option>
-								<?php
-									endforeach;
-								}
-								?>
-							</select>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 col-12 mt-10">
-						<div class="input-group">
-
-							<button class="btn btn-outline-secondary" type="button">Department</button>
-							<select class="form-select font-size-14" id="department-team" <?= isset($departments) && count($departments) > 0 ? '' : 'disabled' ?>>
-								<?php
-								if (isset($departmentId) && $departmentId != '') {
-								?>
-									<option value="<?= $departmentId ?>"><?= Department::departmentNAme($departmentId) ?></option>
-								<?php
-								}
-								?>
-								<option value="">Select Department</option>
-								<?php
-								if (isset($departments) && count($departments) > 0) {
-									foreach ($departments as $deparment) : ?>
-										<option value="<?= $deparment['departmentId'] ?>"><?= $deparment['departmentName'] ?></option>
-								<?php
-									endforeach;
-								}
-								?>
-							</select>
-							<button type="button" class="btn btn-outline-dark" onclick="javascrip:filterLayerTitle()">
-								<i class="fa fa-filter" aria-hidden="true"></i>
-							</button>
-						</div>
-					</div>
-				</div>
-				<div class="row mt-10" id="layer-result">
-					<div class="row mb-10">
-						<div class="col-12 font-size-16 font-b">
-							<?= Branch::branchName($branchId) ?>, <?= Department::departmentNAme($departmentId) ?>
-						</div>
+			<div class="col-lg-4 col-md-12 col-12">
+				<div class="alert alert-layer1" id="layer-result">
+					<div class="row mb-10 leyer-Editor">
+						<div class="col-6 text-start">Layer Management</div>
+						<div class="col-6 text-end "><?= isset($departmentName) ? $departmentName : "All" ?></div>
 					</div>
 					<?php
 					if (isset($layers) && count($layers) > 0) {
@@ -159,22 +160,33 @@ $this->title = 'Management Layer';
 						}
 						foreach ($layers as $layer) : ?>
 
-							<div class="col-lg-3 col-md-6 col-12">
-								<div class="alert alert-light pb-30" role="alert" style="border-radius: 10px;min-height:300px;">
+							<div class="col-lg-12 col-md-6 col-12">
+								<div class="alert alert-light pb-30" role="alert" style="border-radius: 10px;min-height:150px;">
 									<div class="col-12 pr-0 text-end">
 										<a href="javascript:deleteLayer(<?= $layer['layerId'] ?>)" class="btn btn-outline-danger btn-sm">
 											<i class="fa fa-trash-o" aria-hidden="true"></i>
 										</a>
 									</div>
 									<div class="col-12 big-management" id="bottom-layer-<?= $layer['layerId'] ?>">
-										<?= $layer['layerName'] ?>
+
 									</div>
 									<div class="row mt-10">
-										<div class="col-3 font-b text-center" style="border-right: lightgray solid thin;padding-top:37%;min-height:200px;">
-											Title
+										<div class="col-4 text-center" style="border-right: lightgray solid thin;min-height:100px;">
+											<div class="col-12  big-management" id="bottom-layer-<?= $layer['layerId'] ?>">
+												<i class="fa fa-bars mr-2" aria-hidden="true"></i>
+												Layer
+											</div>
+											<div class="col-12 font-size-14" style="line-height: 20px;margin-top:30%;">
+												<?= $layer['layerName'] ?>
+											</div>
+
 										</div>
 
-										<div class="col-9 TM font-size-14 pl-10" id="sub-layer-tag-<?= $layer['layerId'] ?>">
+										<div class="col-8 TM font-size-14 pl-10" id="sub-layer-tag-<?= $layer['layerId'] ?>">
+											<div class="col-12 text-left pl-20 big-management" id="bottom-layer-<?= $layer['layerId'] ?>">
+												<img src="<?= Yii::$app->homeUrl ?>image/Vector.png" class="mr-2" style="width:18px;height:18px;">
+												Title
+											</div>
 											<div class="row">
 												<?= Layer::titileInLayer($layer['layerId'], $filterDepartmentId) ?>
 											</div>
@@ -188,7 +200,6 @@ $this->title = 'Management Layer';
 					?>
 				</div>
 			</div>
-
 		</div>
 	</div>
 </div>

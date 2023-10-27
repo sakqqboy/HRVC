@@ -66,4 +66,27 @@ class Branch extends \frontend\models\hrvc\master\BranchMaster
         }
         return $branchName;
     }
+    public static function branchFlag($branchId)
+    {
+        $branch = Branch::find()
+            ->select('companyId')
+            ->where(["branchId" => $branchId])
+            ->asArray()
+            ->one();
+        $company = Company::find()
+            ->select('countryId')
+            ->where(["companyId" => $branch["companyId"]])
+            ->asArray()
+            ->one();
+        $country = Country::find()
+            ->select('flag')
+            ->where(["countryId" => $company["countryId"]])
+            ->asArray()
+            ->one();
+        if ($country["flag"] != '') {
+            return $country["flag"];
+        } else {
+            return "";
+        }
+    }
 }

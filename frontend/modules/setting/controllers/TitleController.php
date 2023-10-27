@@ -51,9 +51,9 @@ class TitleController extends Controller
         $title = curl_exec($api);
         $title = json_decode($title, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/layer/all-layer');
-        $layer = curl_exec($api);
-        $layer = json_decode($layer, true);
+        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/layer/all-layer');
+        // $layer = curl_exec($api);
+        // $layer = json_decode($layer, true);
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
         $companies = curl_exec($api);
@@ -63,12 +63,42 @@ class TitleController extends Controller
         $departments = curl_exec($api);
         $departments = json_decode($departments, true);
 
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+        $companies = curl_exec($api);
+        $companies = json_decode($companies, true);
+
+
         curl_close($api);
         return $this->render('index', [
             "title" => $title,
-            "layer" => $layer,
+            // "layer" => $layer,
             "companies" => $companies,
-            "departments" => $departments
+            "departments" => $departments,
+        ]);
+    }
+    public function actionCreate()
+    {
+        $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
+        if (!isset($group) && !empty($group)) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
+        }
+        $groupId = $group["groupId"];
+
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+        $companies = curl_exec($api);
+        $companies = json_decode($companies, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/layer/all-layer');
+        $layer = curl_exec($api);
+        $layer = json_decode($layer, true);
+
+        curl_close($api);
+        return $this->render('create', [
+            "companies" => $companies,
+            "layer" => $layer,
         ]);
     }
     public function actionSaveCreateTitle()
@@ -272,50 +302,80 @@ class TitleController extends Controller
     public function actionFilterTitle()
     {
         $departmentId = $_POST["departmentId"];
-        if ($departmentId == "") {
+        $branchId = $_POST["branchId"];
+        $companyId = $_POST["companyId"];
+        if ($departmentId == "" && $branchId == "" && $companyId == "") {
             return $this->redirect(Yii::$app->homeUrl . 'setting/title/index');
         } else {
             return $this->redirect(Yii::$app->homeUrl . 'setting/title/search-result/' . ModelMaster::encodeParams([
-                "departmentId" => $departmentId
+                "departmentId" => $departmentId,
+                "branchId" => $branchId,
+                "companyId" => $companyId
             ]));
         }
     }
     public function actionSearchResult($hash)
     {
         $param = ModelMaster::decodeParams($hash);
-        $departmentId = $param["departmentId"];
+        $departmentId = $param["departmentId"] == "" ? null : $param["departmentId"];
+        $branchId = $param["branchId"] == "" ? null : $param["branchId"];
+        $companyId = $param["companyId"] == "" ? null : $param["companyId"];
         $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
         if (!isset($group) && !empty($group)) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
         }
         $groupId = $group["groupId"];
+        $departments = [];
+        $branches = [];
 
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/title/search-title-list?departmentId=' . $departmentId);
-        $title = curl_exec($api);
-        $title = json_decode($title, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/layer/all-layer');
-        $layer = curl_exec($api);
-        $layer = json_decode($layer, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
+        $branches = curl_exec($api);
+        $branches = json_decode($branches, true);
+
+        if ($branchId != null) {
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' . $branchId);
+            $departments = curl_exec($api);
+            $departments = json_decode($departments, true);
+        }
+
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
         $companies = curl_exec($api);
         $companies = json_decode($companies, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/all-department');
-        $departments = curl_exec($api);
-        $departments = json_decode($departments, true);
 
         curl_close($api);
+
+        $title = Title::find()
+            ->select('title.titleId,title.titleName,title.layerId,title.jobDescription,l.layerName,l.shortTag as lShort,
+			title.shortTag as tShort,d.departmentName,title.departmentId,b.branchName,b.branchId')
+            ->JOIN("LEFT JOIN", "department d", "d.departmentId=title.departmentId")
+            ->JOIN("LEFT JOIN", "layer l", "l.layerId=title.layerId")
+            ->JOIN("LEFT JOIN", "branch b", "b.branchId=d.branchId")
+            ->JOIN("LEFT JOIN", "company c", "c.companyId=b.companyId")
+            ->where(["title.status" => 1])
+            ->andFilterWhere([
+                "title.departmentId" => $departmentId,
+                "d.branchId" => $branchId,
+                "b.companyId" => $companyId
+            ])
+            ->asArray()
+            ->orderBy("title.titleName")
+            ->all();
+
+
         return $this->render('index', [
             "title" => $title,
-            "layer" => $layer,
             "companies" => $companies,
             "departments" => $departments,
-            "departmentId" => $departmentId
+            "branches" => $branches,
+            "departmentId" => $departmentId,
+            "branchId" => $branchId,
+            "companyId" => $companyId
         ]);
     }
 }

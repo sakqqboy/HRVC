@@ -138,13 +138,15 @@ function addDepartmentId() {
 	$("#departmentId").val(departmentId);
 }
 function filterTitle() { 
-	var departmentId = $("#department-filter").val();
+	var departmentId = $("#department-team").val();
+	var branchId = $("#branch-team").val();
+	var companyId = $("#company-team").val();
 	var url = $url + 'setting/title/filter-title?';
 	$.ajax({
 		type: "POST",
 		dataType: 'json',
 		url: url,
-		data: { departmentId: departmentId },
+		data: { departmentId: departmentId,branchId:branchId,companyId:companyId },
 		success: function (data) {
 			
 

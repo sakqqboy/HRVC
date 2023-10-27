@@ -130,16 +130,20 @@ function filterLayerTitle() {
     var branchId = $("#branch-team").val();
     var departmentId = $("#department-team").val();
     var url = $url + 'setting/layer/filter-layer-title';
-    $.ajax({
-        type: "POST",
-        dataType: 'json',
-        url: url,
-        data: { branchId: branchId,departmentId:departmentId },
-        success: function(data) {
-            if (data.status) {
-                $("#layer-result").html(data.textResult);
-            } 
+    if (departmentId != "") {
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            url: url,
+            data: { branchId: branchId, departmentId: departmentId },
+            success: function (data) {
+                if (data.status) {
+                    $("#layer-result").html(data.textResult);
+                }
 
-        }
-    });
+            }
+        });
+    } else { 
+        alert("Please select Department");
+    }
 }

@@ -4,6 +4,8 @@ use common\helpers\Path;
 use common\models\ModelMaster;
 use dosamigos\ckeditor\CKEditor;
 use dosamigos\ckeditor\CKEditorInline;
+use frontend\models\hrvc\Branch;
+use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Department;
 use kartik\editors\Summernote;
 use yii\bootstrap5\Widget;
@@ -11,171 +13,179 @@ use yii\bootstrap5\Widget;
 $this->title = 'Title';
 ?>
 <div class="col-12 department-one" style="margin-top: 90px;">
-	<div class="row">
-		<div class="col-lg-9 col-md-6 col-12">
-			<div class="col-12 branch-title">
+
+	<div class="col-lg-9 col-md-6 col-12">
+		<div class="col-12 branch-title">
+			Title
+		</div>
+	</div>
+	<div class="col-12 mt-20 layer-link pl-40 pt-10 pb-10">
+		<div class="row">
+			<div class="col-lg-2 col-3 link-item">
+				<a href="<?= Yii::$app->homeUrl ?>setting/layer/index" class="no-underline-black ">
+					<i class="fa fa-bars mr-2" aria-hidden="true"></i>
+					Hierarchy Layer
+				</a>
+			</div>
+			<div class="col-lg-2 col-3 link-item-active">
+				<i class="fa fa-list-ul mr-2" aria-hidden="true"></i>
 				Title
 			</div>
 		</div>
-
-		<!-- <div class="col-lg-3 col-md-6 col-12 mt-10">
-			<button type="button" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Create</button>
-		</div> -->
-		<div class="col-lg-3 col-md-6 col-12 mt-10">
+	</div>
+	<div class="row  mt-20">
+		<div class="col-3 pl-20">
+			<b class="mr-10">Title</b>
+			<span class="font-size-12">
+				<a href="<?= Yii::$app->homeUrl ?>setting/title/create/" class="btn btn-primary btn-sm">
+					<i class="fa fa-magic" aria-hidden="true"></i> Register
+				</a>
+			</span>
+		</div>
+		<div class="col-lg-3 col-md-4 col-12">
 			<div class="input-group">
+				<button class="btn btn-secondary" type="button">Company</button>
+				<select class="form-control font-size-14" id="company-team" onchange="javascript:branchCompany()">
+					<?php
+					if (isset($companyId) && $companyId != "") { ?>
+						<option value="<?= $companyId ?>"><?= Company::companyName($companyId) ?></option>
+					<?php
 
-				<button class="btn btn-outline-secondary" type="button">Department</button>
-				<select class="form-control font-size-14" id="department-filter" onchange="javascript:filterTitle()">
+					}
+					?>
+					<option value="">All Company</option>
 					<?php
-					if (isset($departmentId) && $departmentId != '') { ?>
-						<option value="<?= $departmentId ?>"><?= Department::departmentNAme($departmentId) ?></option>
-					<?php
+					if (isset($companies) && count($companies) > 0) {
 
-					} ?>
-					<option value="">Search by Department</option>
-					<?php
-					if (isset($departments) && count($departments) > 0) {
-						foreach ($departments as $department) : ?>
-							<option value="<?= $department["departmentId"] ?>"><?= $department["departmentName"] ?></option>
+						foreach ($companies as $company) : ?>
+							<option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
 					<?php
 						endforeach;
 					}
 					?>
 				</select>
-
 			</div>
 		</div>
+		<div class="col-lg-3 col-md-4 col-12">
+			<div class="input-group">
+				<button class="btn btn-secondary" type="button">Branch</button>
+				<select class="form-select font-size-14" id="branch-team" onchange="javascript:departmentBranch()">
+					<?php
+					if (isset($branchId) && $branchId != "") { ?>
+						<option value="<?= $branchId ?>"><?= Branch::branchName($branchId) ?></option>
+					<?php
+
+					}
+					?>
+					<option value="">All Branch</option>
+					<?php
+					if (isset($branches) && count($branches) > 0) {
+						foreach ($branches as $branch) : ?>
+							<option value="<?= $branch['branchId'] ?>"><?= $branch['branchName'] ?></option>
+					<?php
+						endforeach;
+					}
+					?>
+				</select>
+			</div>
+		</div>
+		<div class="col-lg-3 col-md-4 col-12">
+			<div class="input-group">
+				<button class="btn btn-secondary" type="button">Department</button>
+				<select class="form-select font-size-14" id="department-team">
+					<?php
+					if (isset($departmentId) && $departmentId != "") { ?>
+						<option value="<?= $departmentId ?>"><?= Department::departmentNAme($departmentId) ?></option>
+					<?php
+
+					}
+					?>
+					<option value="">All Department</option>
+					<?php
+					if (isset($departments) && count($departments) > 0) {
+						foreach ($departments as $department) : ?>
+							<option value="<?= $department['departmentId'] ?>"><?= $department['departmentName'] ?></option>
+					<?php
+						endforeach;
+					}
+					?>
+				</select>
+				<button type="button" class="btn btn-outline-dark" onclick="javascrip:filterTitle()">
+					<i class="fa fa-filter" aria-hidden="true"></i>
+				</button>
+			</div>
+		</div>
+
 	</div>
-	<div class="col-12 mt-30">
-		<div class="alert alert-secondary" role="alert">
-			<div class="row">
-				<div class="col-lg-4">
-					<label class="form-label font-size-12 font-b"> Company </label>
-					<select class="form-select" id="company-team" onchange="javascript:branchCompany()">
-						<option value="">Select Company</option>
-						<?php
-						if (isset($companies) && count($companies) > 0) {
-						?>
-							<?php
-							foreach ($companies as $company) : ?>
-								<option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
-							<?php
-							endforeach; ?>
-
-						<?php
-						}
-						?>
-					</select>
-				</div>
-				<div class="col-lg-4">
-					<label class="form-label font-size-12 font-b"> Branch </label>
-					<select class="form-select" id="branch-team" onchange="javascript:departmentBranch()" disabled required>
-						<option value="">Select Branch</option>
-
-					</select>
-				</div>
-				<div class="col-lg-4">
-					<label class="form-label font-size-12 font-b"> Department </label>
-					<select class="form-select" id="department-team" disabled required onchange="javascript:addDepartmentId()">
-						<option value="">Select Department</option>
-
-					</select>
-					<input type="hidden" id="departmentId" value="">
-				</div>
-
-			</div>
-			<div class="row">
-				<div class="col-12 mt-10">
-					<label class="form-label font-size-12 font-b"> Job Description </label>
-					<textarea name="jobDescription" id="jobDescription" class="form-control" style="white-space: pre-wrap;height:150px;"></textarea>
-				</div>
-				<div class="col-12 mt-10">
-					<hr>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-3 col-md-6 col-12">
-					<div class="col-12">
-						<label class="form-label font-size-12 font-b"> Title </label>
-						<input type="text" name="titleName" id="titleName" class="form-control">
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 col-12">
-					<div class="col-12">
-						<label class="form-label font-size-12 font-b"> Shot Tag </label>
-						<input type="text" name="shortTag" id="shortTag" class="form-control">
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 col-12">
-					<div class="col-12">
-						<label class="form-label font-size-12 font-b"> Select Associate Layer</label>
-						<select class="form-select" id="layer">
-							<option value="">Select Layer</option>
-							<?php
-							if (isset($layer) && count($layer) > 0) {
-							?>
-								<?php
-								foreach ($layer as $l) : ?>
-									<option value="<?= $l['layerId'] ?>"><?= $l['layerName'] ?></option>
-								<?php
-								endforeach; ?>
-
-							<?php
-							}
-							?>
-						</select>
-					</div>
-				</div>
-
-				<div class="col-lg-2 col-md-2 col-12 pt-30 text-end pr-1 pl-0 text-end">
-
-					<a href="javascript:createTitle()" class="btn btn-success" id="create-title">
-						<i class="fa fa-plus" aria-hidden="true"></i> Create
-					</a>
-					<a class="btn btn-sm btn-warning font-size-12 mr-5 p-2" id="update-title" style="display:none;">
-						<i class="fa fa-check" aria-hidden="true"></i> Save
-					</a>
-					<a class="btn btn-sm btn-danger font-size-12 p-2" id="reset-title" style="display:none;">
-						<i class="fa fa-times" aria-hidden="true"></i> Cancel
-					</a>
-					<input type="hidden" value="" id="titleId">
-				</div>
-			</div>
-		</div>
+	<div class="col-12 mt-20">
 		<div class="col-12">
-			<div class="alert alert-branch" role="alert">
+			<div class="alert alert-layer" role="alert">
+
 				<div class="row" id="all-title-list">
 					<?php
 					if (isset($title) && count($title) > 0) {
 						foreach ($title as $t) :
 					?>
-							<div class="col-lg-3 col-md-5 col-sm-3 col-12" id="title-<?= $t['titleId'] ?>">
-								<div class="card" style="border: none;border-radius:10px;">
-									<div class="card-body">
-										<div class="col-12 txt-bold ">
-											<?= $t['titleName'] ?><?= $t['tShort'] != null ? '&nbsp;&nbsp;&nbsp;(' . $t['tShort'] . ')' : '' ?>
+							<div class="col-lg-6 col-md-6 col-12 mt-10">
+								<div class="title-box" style="border: none;border-radius:10px;">
+									<div class="col-12">
+										<div class="col-12 text-end pr-0">
+											<a href="javascript:updateTitle(<?= $t['titleId'] ?>)" class="btn btn-sm btn-outline-dark mr-5 font-size-12">
+												<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+											</a>
+											<a href="javascript:deleteTitle(<?= $t['titleId'] ?>)" class="btn btn-sm btn-outline-danger font-size-12">
+												<i class="fa fa-trash" aria-hidden="true"></i>
+											</a>
 										</div>
-										<div class="col-12  mt-10 font-size-13">
-											<b>Layer</b> :<?= $t['layerName'] ?><?= $t['lShort'] != null ? '&nbsp;&nbsp;&nbsp;(' . $t['lShort'] . ')' : '' ?>
-										</div>
-										<div class="col-12  mt-10 font-size-13">
-											<b>Branch</b> : <?= $t["branchName"] ?>
-										</div>
-										<div class="col-12  mt-10 font-size-13">
-											<b>Department</b> : <?= $t["departmentName"] ?>
-										</div>
-										<div class="row">
-											<div class="col-12 text-end pr-0 mt-15" style="margin-bottom: -10px;">
 
-												<a href="javascript:updateTitle(<?= $t['titleId'] ?>)" class="btn btn-sm btn-outline-dark mr-5 font-size-12">
-													<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-												</a>
-												<a href="javascript:deleteTitle(<?= $t['titleId'] ?>)" class="btn btn-sm btn-outline-danger font-size-12">
-													<i class="fa fa-trash" aria-hidden="true"></i>
-												</a>
+									</div>
+									<div class="row" style="margin-top: -25px;">
+										<div class="col-5">
+
+											<div class="col-12 font-size-14 font-b">
+												<?= $t['titleName'] ?><?= $t['tShort'] != null ? '&nbsp;&nbsp;<span class="badge rounded-pill bg-primary">&nbsp;&nbsp;' . $t['tShort'] . '&nbsp;&nbsp;</span>'  : '' ?>
+											</div>
+											<div class="row mt-20">
+												<div class="col-5 font-size-12">
+													<b>Layer : </b>
+												</div>
+												<div class="col-7 font-size-10">
+													<?= $t['layerName'] ?> <?= $t['lShort'] != null ? ' (' . $t['lShort'] . ')' : '' ?>
+												</div>
+												<div class="col-5 font-size-12 mt-7">
+													<b>Branch : </b>
+												</div>
+												<div class="col-7 font-size-10 mt-7">
+													<?php
+													$flag = Branch::branchFlag($t["branchId"]);
+													if ($flag != "") { ?>
+														<img src="<?= Yii::$app->homeUrl . $flag ?>" class="card-round mr-5">
+													<?php
+													}
+													?>
+													<?= $t["branchName"] ?>
+												</div>
+												<div class="col-5 font-size-12 mt-7">
+													<b>Department : </b>
+												</div>
+												<div class="col-7 font-size-10 mt-7">
+													<?= $t["departmentName"] ?>
+												</div>
 											</div>
 										</div>
-
+										<div class="col-7">
+											<div class="col-12 font-size-14 font-b pl-20">
+												Job Description
+											</div>
+											<div class="col-12 mt-20 font-size-12 title-description-box pl-20">
+												<?= $t["jobDescription"] ?>
+											</div>
+										</div>
+									</div>
+									<div class="col-12 text-end font-size-12" style="font-weight: 500;">
+										<a href="<?= Yii::$app->homeUrl ?>setting/title/title-detail/<?= ModelMaster::encodeParams(['titleId' => $t['titleId']]) ?>" class="no-underline text-primary">
+											View More
+										</a>
 									</div>
 								</div>
 							</div>

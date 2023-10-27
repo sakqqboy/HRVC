@@ -42,37 +42,11 @@ class LayerController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch');
 		$branches = curl_exec($api);
 		$branches = json_decode($branches, true);
-
-		$departmentId = null;
-
-		$firstBranch = Branch::find()
-			->select('branchId')
-			->where(["status" => 1])
-			->asArray()
-			->orderBy('branchName')
-			->one();
-		if (isset($firstBranch) && !empty($firstBranch)) {
-			$branchId = $firstBranch["branchId"];
-			$firstDepartment = Department::find()
-				->select('departmentId')
-				->where(["branchId" => $branchId, "status" => 1])
-				->orderBy('departmentName')
-				->asArray()
-				->one();
-			if (isset($firstDepartment) && !empty($firstDepartment)) {
-				$departmentId = $firstDepartment["departmentId"];
-			}
-		} else {
-			return $this->redirect(Yii::$app->homeUrl . 'setting/branch/' . ModelMaster::encodeParams(["companyId" => '']));
-		}
-
 		curl_close($api);
 		return $this->render('index', [
 			"layers" => $layers,
 			"branches" => $branches,
 			"departments" => [],
-			"branchId" => $branchId,
-			"departmentId" => $departmentId
 		]);
 	}
 	public function actionFilterLayerTitle()
@@ -87,54 +61,16 @@ class LayerController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/layer/all-layer');
 		$layers = curl_exec($api);
 		$layers = json_decode($layers, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch');
-		$branches = curl_exec($api);
-		$branches = json_decode($branches, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' . $branchId);
-		$departments = curl_exec($api);
-		$departments = json_decode($departments, true);
 		curl_close($api);
-		if ($branchId == '') {
-			$firstBranch = Branch::find()
-				->select('branchId')
-				->where(["status" => 1])
-				->asArray()
-				->orderBy('branchName')
-				->one();
-			if (isset($firstBranch) && !empty($firstBranch)) {
-				$branchId = $firstBranch["branchId"];
-			} else {
-				return $this->redirect(Yii::$app->homeUrl . 'setting/branch/' . ModelMaster::encodeParams(["companyId" => '']));
-			}
-		}
-		if ($departmentId == '') {
-			$department = Department::find()
-				->select('departmentId')
-				->where(["branchId" => $branchId, "status" => 1])
-				->orderBy('departmentId')
-				->asArray()
-				->one();
-			if (isset($department) && !empty($department)) {
-				$departmentId = $department["departmentId"];
-			} else {
-				$departmentId = null;
-			}
-		}
-
 		$text = $this->renderAjax('filter_result', [
 			"layers" => $layers,
 			"branchId" => $branchId,
 			"departmentId" => $departmentId,
+			"departmentName" => Department::departmentNAme($departmentId)
 		]);
 		$res["textResult"] = $text;
 		$res["status"] = true;
 		return json_encode($res);
-		// return $this->redirect(Yii::$app->homeUrl . 'setting/layer/result-layer-title/' . ModelMaster::encodeParams([
-		// 	"branchId" => $branchId,
-		// 	"departmentId" => $departmentId,
-		// ]));
 	}
 	public function actionResultLayerTitle($hash)
 	{

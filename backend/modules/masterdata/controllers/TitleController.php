@@ -19,7 +19,7 @@ class TitleController extends Controller
 	public function actionTitleList()
 	{
 		$titles = Title::find()
-			->select('title.titleId,title.titleName,title.layerId,l.layerName,l.shortTag as lShort,
+			->select('title.titleId,title.titleName,title.layerId,title.jobDescription,l.layerName,l.shortTag as lShort,
 			title.shortTag as tShort,d.departmentName,title.departmentId,b.branchName,b.branchId')
 			->JOIN("LEFT JOIN", "layer l", "l.layerId=title.layerId")
 			->JOIN("LEFT JOIN", "department d", "d.departmentId=title.departmentId")
