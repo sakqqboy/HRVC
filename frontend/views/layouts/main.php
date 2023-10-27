@@ -45,7 +45,7 @@ AppAsset::register($this);
 
     </header> -->
 
-    <main role="main" class="flex-shrink-0 pr12">
+    <main role="main" class="flex-shrink-0 pr-12">
         <div class="row">
             <div class="col-lg-2">
                 <?= $this->render("@frontend/views/site/header")
@@ -54,7 +54,7 @@ AppAsset::register($this);
             <div class="col-lg-10">
                 <?= $this->render("@frontend/views/layouts/headernavbar")
                 ?>
-                <div class="col-12 pr-15">
+                <div class="col-12">
                     <?= $content ?>
                 </div>
             </div>

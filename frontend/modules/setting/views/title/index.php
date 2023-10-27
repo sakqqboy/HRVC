@@ -120,22 +120,23 @@ $this->title = 'Title';
 	<div class="col-12 mt-20">
 		<div class="col-12">
 			<div class="alert alert-layer" role="alert">
-
+				<input type="hidden" id="preUrl" name="preUrl" value="">
 				<div class="row" id="all-title-list">
 					<?php
 					if (isset($title) && count($title) > 0) {
 						foreach ($title as $t) :
 					?>
-							<div class="col-lg-6 col-md-6 col-12 mt-10">
+							<div class="col-lg-6 col-md-6 col-12 mt-10" id="title-<?= $t['titleId'] ?>">
 								<div class="title-box" style="border: none;border-radius:10px;">
 									<div class="col-12">
 										<div class="col-12 text-end pr-0">
-											<a href="javascript:updateTitle(<?= $t['titleId'] ?>)" class="btn btn-sm btn-outline-dark mr-5 font-size-12">
+											<a href="<?= Yii::$app->homeUrl ?>setting/title/update-title/<?= ModelMaster::encodeParams(['titleId' => $t['titleId']]) ?>" class="btn btn-sm btn-outline-dark mr-5 font-size-12">
 												<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 											</a>
 											<a href="javascript:deleteTitle(<?= $t['titleId'] ?>)" class="btn btn-sm btn-outline-danger font-size-12">
 												<i class="fa fa-trash" aria-hidden="true"></i>
 											</a>
+											<input type="hidden" id="redirect" value="0">
 										</div>
 
 									</div>
@@ -178,7 +179,7 @@ $this->title = 'Title';
 												Job Description
 											</div>
 											<div class="col-12 mt-20 font-size-12 title-description-box pl-20">
-												<?= $t["jobDescription"] ?>
+												<?= substr($t["jobDescription"], 0, 190) ?><?= strlen($t["jobDescription"]) > 190 ? '...' : '' ?>
 											</div>
 										</div>
 									</div>
