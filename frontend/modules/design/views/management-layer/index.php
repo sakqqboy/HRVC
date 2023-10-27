@@ -193,7 +193,10 @@ $this->title = 'Management Layer';
 </div>
 
 
+
 <div class="tags-input">
-    <ul id="tags"></ul>
-    <input type="text" id="input-tag" placeholder="Add Tag..." />
+    <ul id="tags">
+        <span id="show-text"></span>
+        <input type="text" id="input-tag">
+    </ul>
 </div>

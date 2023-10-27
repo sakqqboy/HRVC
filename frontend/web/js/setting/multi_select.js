@@ -13,8 +13,10 @@ input.addEventListener('keydown', function (event) {
         if (tagContent !== '') {
 
             tag.innerText = tagContent;
-            tag.innerHTML += '<button class="delete-button">x</button></button>';
-            tags.appendChild(tag);
+            tag.innerHTML += '<span class="delete-button">X</span>';
+            // tags.appendChild(tag);
+            $("#show-text").append(tag);
+            //input.appendChild(tag);
             input.value = '';
         }
     }
