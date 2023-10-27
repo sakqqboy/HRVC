@@ -153,7 +153,7 @@ $form = ActiveForm::begin([
 								}
 								?>
 							</span>
-							<input type="text" id="input-tag">
+							<input type="text" id="input-tag" class="border form-control mt-10" placeholder="Add required skill(s)">
 						</div>
 					</div>
 				</div>

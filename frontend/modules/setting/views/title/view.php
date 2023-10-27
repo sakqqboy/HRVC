@@ -12,6 +12,9 @@ $this->title = $title["titleName"];
 	<div class="col-12">
 		<div class="row">
 			<div class="col-10 branch-title">
+				<a href="<?= Yii::$app->homeUrl ?>setting/title/index" class="btn btn-sm btn-outline-primary font-size-18 mr-10" style="margin-top: -10px;">
+					<i class="fa fa-angle-left ml-10 mr-10" aria-hidden="true"></i>
+				</a>
 				<?= $title['titleName'] ?>
 				<?php
 				if ($title["shortTag"] != '') { ?>
@@ -24,12 +27,14 @@ $this->title = $title["titleName"];
 				<?= $title["shortTag"] == "" ? '' : '' ?>
 			</div>
 			<div class="col-2 pt-15 text-end">
+
 				<a href="<?= Yii::$app->homeUrl ?>setting/title/update-title/<?= ModelMaster::encodeParams(['titleId' => $title['titleId']]) ?>" class="btn btn-sm btn-outline-dark mr-5 font-size-12">
 					<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 				</a>
 				<a href="javascript:deleteTitle(<?= $title['titleId'] ?>)" class="btn btn-sm btn-outline-danger font-size-12">
 					<i class="fa fa-trash" aria-hidden="true"></i>
 				</a>
+
 				<input type="hidden" id="redirect" value="1">
 				<input type="hidden" id="preUrl" name="preUrl" value="<?= $preUrl ?>">
 			</div>

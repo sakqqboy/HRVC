@@ -289,7 +289,11 @@ class TitleController extends Controller
             if ($tags != '') {
                 $tags = substr($tags, 0, -1);
                 $title->requireSkill = $tags;
+            } else {
+                $title->requireSkill = null;
             }
+        } else {
+            $title->requireSkill = null;
         }
         $title->save(false);
 
