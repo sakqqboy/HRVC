@@ -293,7 +293,6 @@ $this->title = 'Create Employee';
 						<div class="row pt-10 pb-10">
 							<div class="col-lg-2 col-md-6 col-12 text-center">
 								<div class="choosefile text-dark">File</div>
-
 							</div>
 							<div class="col-lg-6 col-md-6 col-12" style="border-right:lightgray solid thin;">
 								<label for="name">Upload Employee Agreement</label>

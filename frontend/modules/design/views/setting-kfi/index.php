@@ -20,6 +20,9 @@ $this->title = 'Setting KFI';
                 <li class="nav-item" role="presentation">
                     <a class="nav-link text-dark" id="pills-Action-tab" data-bs-toggle="pill" data-bs-target="#pills-Action" type="button" role="tab" aria-controls="pills-Action" aria-selected="false"><i class="fa fa-list-ul" aria-hidden="true"></i> Key Action Indicator</a>
                 </li>
+                <li class="nav-item presentation-end" role="presentation">
+                    <a href="<?= Yii::$app->homeUrl ?>kfi/management/index"> <span class="badge bg kfi-assignpage text-end" type="submit"> KFI </span></a>
+                </li>
             </ul>
         </div>
         <div class="alert alert-white-5">
