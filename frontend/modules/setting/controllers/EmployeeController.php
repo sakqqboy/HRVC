@@ -613,6 +613,7 @@ class EmployeeController extends Controller
     {
         $error = [];
         $isError = 0;
+        $success = 0;
         if (isset($_POST["employeeFile"])) {
             $imageObj = UploadedFile::getInstanceByName("employeeFile");
             if (isset($imageObj) && !empty($imageObj)) {
@@ -756,6 +757,9 @@ class EmployeeController extends Controller
                                     //$employee->workingTime = $_POST["workTime"];
                                     $employee->employeeConditionId = $_POST["condition"];
                                     $employee->spoken = $_POST["language"];
+                                    if ($employee->save(false)) {
+                                        $success++;
+                                    }
                                 }
                             }
                             $i++;
@@ -773,6 +777,9 @@ class EmployeeController extends Controller
                 unlink($pathSave);
             }
         }
-        return $this->render('import');
+        return $this->render('import', [
+            "error" => $error,
+            "success" => $success
+        ]);
     }
 }
