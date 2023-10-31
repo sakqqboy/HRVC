@@ -40,7 +40,8 @@ $this->title = 'Performance Chart';
             <div class="alert alert-secondary secondary-CurrentYear mt-20">
                 <div class="row">
                     <div class="col-2 text-secondary">
-                        <img src="<?= Yii::$app->homeUrl ?>image/calendar.png" style="width: 13px;"> &nbsp; <span class="font-size-12"> Current Year</span>
+                        <img src="<?= Yii::$app->homeUrl ?>image/calendar.png" style="width: 13px;">
+                        &nbsp; <span class="font-size-12"> Current Year</span>
                     </div>
                     <div class="col-1">
                         <select class="form-select text-primary font-size-12" aria-label="Default select example" style="width: 6rem;">
@@ -53,6 +54,7 @@ $this->title = 'Performance Chart';
                     </div>
                     <div class="col-2 font-size-12 text-secondary pt-5 pl-25">
                         <img src="<?= Yii::$app->homeUrl ?>image/dollar.png" class="imagedollar"> Currency
+                        <!-- <div class="usd-border"><i class="fa fa-usd fa-1x pl-5" aria-hidden="true"></i></div>  -->
                     </div>
                     <div class="col-1">
                         <select class="form-select text-primary font-size-12" aria-label="Default select example" style="width: 6rem;">
@@ -337,9 +339,11 @@ $this->title = 'Performance Chart';
                                         Forecasted
                                     </div>
                                     <div class="col-5 pt-10">
+
                                         <button type="button" class="examplebox-blue"></button>
                                         <button type="button" class="examplebox-blue"></button>
                                         <button type="button" class="examplebox-blue"></button>
+
                                     </div>
                                 </div>
                             </div>
@@ -349,4 +353,5 @@ $this->title = 'Performance Chart';
             </div>
         </div>
     </div>
+</div>
 </div>

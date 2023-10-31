@@ -13,7 +13,6 @@ use common\models\ModelMaster;
                         </a>
                 </div>
                 <div class="col-12 navbar-header">
-
                         <div class="col-12">
                                 <a href="<?= Yii::$app->homeUrl ?>site/dashboard" class="no-underline">
                                         <i class="fa fa-th-large pr-10 mt-10" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tooltip on bottom"></i>

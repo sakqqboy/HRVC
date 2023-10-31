@@ -215,3 +215,10 @@
     background-color: rgb(77, 199, 247);
     font-size: 10px;
 }
+
+.kfi-assignpage {
+    background-color: #EAEFF4;
+    color: #82A9ED;
+    font-size: 19px;
+    border-radius: 3px;
+}

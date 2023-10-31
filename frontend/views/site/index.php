@@ -5,7 +5,7 @@ $this->title = 'index';
 ?>
 
 
-<div class="col-12 all-index" id="main">
+<div class="col-12 all-index">
     <div class="row">
         <div class="col-12">
             <div class="col-12 mt-50">

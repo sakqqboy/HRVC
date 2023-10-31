@@ -36,7 +36,7 @@ $this->title = 'Create Employee';
 						</div>
 					</div>
 				</div>
-				<div class="col-12 acceptable font-size-12 text-center">
+				<div class="col-12  font-size-12 text-center">
 					<div class="col-12"> Acceptable file types: <strong> JPEG, PNG,</strong> </div>
 					<div class="col-12 mt-2">Maximum file Size: 1 MB</div>
 				</div>
@@ -276,7 +276,7 @@ $this->title = 'Create Employee';
 								<div class="text-secondary font-size-14">Maximum File Size 5 MB</div>
 							</div>
 							<div class="col-lg-4 col-md-6 col-12 text-center pt-13">
-								<label type="button" for="resume" class="btn btn-info text-white"> Upload</label>
+								<label type="button" for="resume" class="btn btn-primary text-white"> Upload</label>
 								<span class="ml-5 text-success" id="resume-check" style="display:none;">
 									<i class="fa fa-check" aria-hidden="true"></i>
 								</span>
@@ -293,7 +293,6 @@ $this->title = 'Create Employee';
 						<div class="row pt-10 pb-10">
 							<div class="col-lg-2 col-md-6 col-12 text-center">
 								<div class="choosefile text-dark">File</div>
-
 							</div>
 							<div class="col-lg-6 col-md-6 col-12" style="border-right:lightgray solid thin;">
 								<label for="name">Upload Employee Agreement</label>
@@ -301,7 +300,7 @@ $this->title = 'Create Employee';
 								<div class="text-secondary font-size-14">Maximum File Size 5 MB</div>
 							</div>
 							<div class="col-lg-4 col-md-6 col-12 text-center pt-13">
-								<label type="button" for="agreement" class="btn btn-info text-white"> Upload</label>
+								<label type="button" for="agreement" class="btn btn-primary text-white"> Upload</label>
 								<span class="ml-5 text-success" id="agreement-check" style="display:none;">
 									<i class="fa fa-check" aria-hidden="true"></i>
 								</span>

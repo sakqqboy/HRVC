@@ -314,3 +314,7 @@ div[role="progressbar1"]::before {
 .number-solidd {
     border-bottom: lightgray 1px solid;
 }
+
+input[type="checkbox"]:checked+label {
+    font-weight: bold;
+}

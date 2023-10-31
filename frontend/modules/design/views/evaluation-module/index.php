@@ -119,7 +119,7 @@ $this->title = 'module';
                                         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
-                                                    <div class="modal-header">
+                                                    <div class="modal-header" style="border: none;">
                                                         <div class="modal-title score-table1" id="staticBackdropLabel">Rank Details</div>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
@@ -132,19 +132,19 @@ $this->title = 'module';
                                                                 <div class="col-lg-6">
                                                                     Evaluation Score
                                                                 </div>
-                                                                <div class="col-lg-3">
+                                                                <div class="col-lg-3 text-start">
                                                                     Increasement
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-2 number-eng">
-                                                                <p>F</p>
-                                                                <p>E</p>
-                                                                <p>D</p>
-                                                                <p>C</p>
-                                                                <p>B</p>
-                                                                <p>B+</p>
+                                                                <div class="">F</div>
+                                                                <div class="mt-20">E</div>
+                                                                <div class="mt-20">D</div>
+                                                                <div class="mt-20">C</div>
+                                                                <div class="mt-20">B</div>
+                                                                <div class="mt-25">B+</div>
                                                             </div>
                                                             <div class="col-lg-8">
                                                                 <div class="row">
@@ -188,19 +188,27 @@ $this->title = 'module';
                                                                             <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                                                         </div>
                                                                     </div>
+                                                                    <div class="col-2 font-size-11">
+                                                                        <p>41-50</p>
+                                                                    </div>
+                                                                    <div class="col-10">
+                                                                        <div class="progress" style="height: 10px;font-size:15px;">
+                                                                            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-2 eng-solid">
-                                                                <p>0.0</p>
-                                                                <p>0.5</p>
-                                                                <p>1.5</p>
-                                                                <p>2.0</p>
-                                                                <p>2.5</p>
-                                                                <p>3.0</p>
+                                                                <div class="">0.0</div>
+                                                                <div class="mt-20">0.5</div>
+                                                                <div class="mt-20">1.5</div>
+                                                                <div class="mt-20">2.0</div>
+                                                                <div class="mt-20">2.5</div>
+                                                                <div class="mt-25">3.0</div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class=" modal-footer">
+                                                    <div class=" modal-footer" style="border: none;">
                                                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
                                                     </div>
                                                 </div>
@@ -296,52 +304,68 @@ $this->title = 'module';
                 </div>
             </div>
             <div class="alert al-secondary">
-                <div class="col-12">
-                    <strong class="font-size-32 text-dark"> Competency</strong> <span class="badge rounded-pill bg-primary text-white font-size-14"> Weight 20%</span>
-                </div>
-                <div class="col-12 text-primary">
-                    Long Term Perspactive Category
+                <div class="row">
+                    <div class="col-lg-8 col-md-6 col-12">
+                        <div class="col-12">
+                            <strong class="font-size-32 text-dark"> KFI </strong> <span class="badge rounded-pill bg-primary text-white font-size-14"> Weight 20%</span>
+                        </div>
+                        <div class="col-12 text-primary">
+                            Long Term Perspactive Category
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-12 text-end">
+                        <div class="col-12">
+                            <div class="font-size-14 pr-10"> Radio</div>
+                            <span class="badge rounded-pill bg-success font-size-18"> 75%</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-12 text-start">
+                        <div class="col-12">
+                            <div class="font-size-14 pr-10">Sub-Total</div>
+                            <span class="badge rounded-pill bg-success font-size-18"> 15</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="accordion mt-20" id="accordionExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingOne">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                1. Calmness <span class="badge rounded-pill bg-primary text-white"> Category A</span>
+                                1. Calmness &nbsp;<span class="badge rounded-pill bg-primary text-white"> Category A</span>
                             </button>
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-6 col-sm-4 col-4">
+                                    <div class="col-lg-2 col-md-6 col-sm-4 col-4">
                                         <div class="col-12 bold-goalbal">
                                             Goal Settings (By Employee)
                                         </div>
                                         <div class="alert cc-secondary mt-20" style="border:none;">
-                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text, ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived.
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 col-md-6 col-sm-4 col-4">
+                                    <div class="col-lg-2 col-md-6 col-sm-4 col-4">
                                         <div class="col-12 bold-goalbal">
                                             Intermediate Review
                                         </div>
                                         <div class="alert cc-secondary mt-20" style="border:none;">
-                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text, ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived.
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 col-md-6 col-sm-4 col-4">
+                                    <div class="col-lg-2 col-md-6 col-sm-4 col-4">
                                         <div class="col-12 bold-goalbal">
                                             Self Review
                                         </div>
                                         <div class="alert cc-secondary mt-20" style="border:none;">
-                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text, ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived.
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 col-md-6 col-sm-4 col-4">
+                                    <div class="col-lg-2 col-md-6 col-sm-4 col-4">
                                         <div class="col-12 bold-goalbal">
                                             Evaluator Review
                                         </div>
                                         <div class="alert cc-secondary mt-20" style="border:none;">
-                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text, ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived.
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                                         </div>
                                     </div>
                                 </div>
