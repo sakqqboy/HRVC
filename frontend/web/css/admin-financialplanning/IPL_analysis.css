@@ -1,0 +1,41 @@
+.bg-primary-sec {
+    background-color: #F0F2F4;
+    border-radius: 5px;
+    color: black;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.bg-primary-sec1 {
+    background-color: #F0F2F4;
+    border-radius: 5px;
+    color: black;
+    padding-top: 20px;
+    padding-bottom: 1px;
+}
+
+.image-current-year {
+    width: 15px;
+}
+
+.select-secondate {
+    width: 6rem;
+    height: 30px;
+    margin-top: -10px;
+    font-size: 12px;
+    color: rgb(37, 142, 218);
+}
+
+.form-check-input[id=checkboxPL] {
+    border-radius: 5em;
+    padding-top: 10px;
+}
+
+#shadowPL {
+    border: none;
+}
+
+.bg-sky {
+    background-color: #aeccf9;
+    color: rgb(56, 235, 175);
+}

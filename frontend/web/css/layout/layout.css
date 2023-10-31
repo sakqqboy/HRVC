@@ -3235,6 +3235,11 @@
     color: black;
 }
 
+.no-underline-primary {
+    text-decoration: none;
+    color: #2580D3;
+}
+
 .close-box {
     cursor: pointer;
 }
@@ -3243,15 +3248,19 @@
     word-wrap: break-word;
     ;
 }
-ิ.boder-top{
+
+ิ.boder-top {
     border-top: lightgray solid thin;
 }
-ิ.boder-bottom{
+
+ิ.boder-bottom {
     border-bottom: lightgray solid thin;
 }
-ิ.boder-left{
+
+ิ.boder-left {
     border-left: lightgray solid thin;
 }
-ิ.boder-right{
+
+ิ.boder-right {
     border-right: lightgray solid thin;
 }

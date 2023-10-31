@@ -30,10 +30,10 @@ $this->title = 'Performance Chart';
                 <div class="col-lg-8 col-12 text-end">
                     <button type="button" class="btn btn-light Data" data-bs-toggle="modal" data-bs-target="#DataDistionary"><i class="fa fa-info-circle" aria-hidden="true"></i> Data Dictionary</button>
                     <div class="btn-group" role="group" aria-label="Basic outlined example">
-                        <button type="button" class="btn btn-outline-secondary font-size-12"><i class="fa fa-bar-chart" aria-hidden="true"></i></button>
-                        <button type="button" class="btn btn-outline-secondary font-size-12">Performance Chart</button>
-                        <button type="button" class="btn btn-outline-secondary font-size-12">IPL Analysis</button>
-                        <button type="button" class="btn btn-outline-secondary font-size-12">PLF Overview</button>
+                        <button id="performancechart" type="button" class="btn btn-outline-secondary"><i class="fa fa-bar-chart" aria-hidden="true"></i></button>
+                        <button id="performancechart" type="button" class="btn btn-outline-secondary">Performance Chart</button>
+                        <button id="performancechart" type="button" class="btn btn-outline-secondary">IPL Analysis</button>
+                        <button id="performancechart" type="button" class="btn btn-outline-secondary">PLF Overview</button>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,6 @@ $this->title = 'Performance Chart';
                     </div>
                     <div class="col-2 font-size-12 text-secondary pt-5 pl-25">
                         <img src="<?= Yii::$app->homeUrl ?>image/dollar.png" class="imagedollar"> Currency
-                        <!-- <div class="usd-border"><i class="fa fa-usd fa-1x pl-5" aria-hidden="true"></i></div>  -->
                     </div>
                     <div class="col-1">
                         <select class="form-select text-primary font-size-12" aria-label="Default select example" style="width: 6rem;">
@@ -85,7 +84,7 @@ $this->title = 'Performance Chart';
             <div class="row mt-30">
                 <div class="col-lg-9">
                     <div class="col-12 text-primary">
-                        <i class="fa fa-chevron-left" aria-hidden="true"></i> Data Table
+                        <a href="" class="no-underline-primary"> <i class="fa fa-chevron-left" aria-hidden="true"></i> Data Table</a>
                     </div>
                 </div>
                 <div class="col-lg-3 text-end">
@@ -339,11 +338,9 @@ $this->title = 'Performance Chart';
                                         Forecasted
                                     </div>
                                     <div class="col-5 pt-10">
-
                                         <button type="button" class="examplebox-blue"></button>
                                         <button type="button" class="examplebox-blue"></button>
                                         <button type="button" class="examplebox-blue"></button>
-
                                     </div>
                                 </div>
                             </div>
