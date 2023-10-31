@@ -41,4 +41,16 @@ class TeamPosition extends \frontend\models\hrvc\master\TeamPositionMaster
         }
         return  $teampositionName;
     }
+    public static function teamPositionId($teamPositionName)
+    {
+        $teamPosition = TeamPosition::find()
+            ->where(["teamPositionName" => $teamPositionName, "status" => 1])
+            ->asArray()
+            ->one();
+        if (isset($teamPosition) && !empty($teamPosition)) {
+            return $teamPosition["teamPositionId"];
+        } else {
+            return '';
+        }
+    }
 }

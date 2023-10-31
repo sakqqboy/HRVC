@@ -70,4 +70,16 @@ class Team extends \frontend\models\hrvc\master\TeamMaster
         }
         return $text;
     }
+    public static function departmentTeam($departmentId, $teamName)
+    {
+        $team = Team::find()
+            ->where(["departmentId" => $departmentId, "teamName" => $teamName, "status" => 1])
+            ->asArray()
+            ->one();
+        if (isset($team) && !empty($team)) {
+            return $team["teamId"];
+        } else {
+            return '';
+        }
+    }
 }

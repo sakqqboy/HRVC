@@ -14,12 +14,14 @@ use frontend\models\hrvc\EmployeeCondition;
 use frontend\models\hrvc\EmployeeStatus;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Nationality;
+use frontend\models\hrvc\Role;
 use frontend\models\hrvc\Status;
 use frontend\models\hrvc\Team;
 use frontend\models\hrvc\TeamPosition;
 use frontend\models\hrvc\Title;
 use frontend\models\hrvc\User;
 use frontend\models\hrvc\UserRole;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
@@ -68,6 +70,7 @@ class EmployeeController extends Controller
         $companies = curl_exec($api);
         $companies = json_decode($companies, true);
         curl_close($api);
+
         return $this->render('index', [
             "employees" => $employees,
             "companies" => $companies
@@ -605,5 +608,171 @@ class EmployeeController extends Controller
         Employee::updateAll(["status" => 99], ["employeeId" => $_POST["employeeId"]]);
         $res["status"] = true;
         return json_encode($res);
+    }
+    public function actionImport()
+    {
+        $error = [];
+        $isError = 0;
+        if (isset($_POST["employeeFile"])) {
+            $imageObj = UploadedFile::getInstanceByName("employeeFile");
+            if (isset($imageObj) && !empty($imageObj)) {
+                $urlFolder = Path::getHost() . 'file/import/employee';
+                if (!file_exists($urlFolder)) {
+                    mkdir($urlFolder, 0777, true);
+                }
+                $file = $imageObj->name;
+                $filenameArray = explode('.', $file);
+                $countArrayFile = count($filenameArray);
+                $fileType = $filenameArray[$countArrayFile - 1];
+                if ($fileType == 'xlsx' || $fileType == 'xls') {
+                    $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
+                    $pathSave = $urlFolder . $fileName;
+                    if ($imageObj->saveAs($pathSave)) {
+                        $reader = new Xlsx();
+                        $spreadsheet = $reader->load($pathSave);
+                        $sheetData = $spreadsheet->getActiveSheet()->toArray();
+                        unset($sheetData[0]);
+                        $i = 0;
+                        $transaction = Yii::$app->db->beginTransaction();
+                        foreach ($sheetData as $data) :
+                            $line = $i;
+                            $error[$i] = "";
+                            $companyId = '';
+                            $companyName = '';
+                            $branchId = '';
+                            $branchName = '';
+                            $departmentId = '';
+                            $departmentName = '';
+                            $teamId = '';
+                            $teamName = '';
+                            $teamPositionId = '';
+                            $teamPositionName = '';
+                            if ($i >= 1) {
+                                if (trim($data[0]) == "") {
+                                    $isError = 1;
+                                    $error[$i] .= '- firstname<br>';
+                                }
+                                if (trim($data[1]) == "") {
+                                    $isError = 1;
+                                    $error[$i] .= '- Surename<br>';
+                                }
+                                if (trim($data[3]) == "") {
+                                    $isError = 1;
+                                    $error[$i] .= '- Email<br>';
+                                }
+                                if (trim($data[7]) == "") {
+                                    $isError = 1;
+                                    $error[$i] .= '- Telephone<br>';
+                                }
+                                if (trim($data[9]) == "") {
+                                    $isError = 1;
+                                    $error[$i] .= '- Company<br>';
+                                } else {
+                                    $companyId = Company::companyId($data[9]);
+                                    if ($companyId == '') {
+                                        $isError = 1;
+                                        $error[$i] .= '- Company name "' . $data[9] . '" not found in database<br>';
+                                    }
+                                }
+                                if (trim($data[10]) == "") {
+                                    $isError = 1;
+                                    $error[$i] .= '- Branch<br>';
+                                } else {
+                                    if ($companyId != '') {
+                                        $branchId = Branch::companyBranch($companyId, $data[10]);
+                                        if ($branchId == '') {
+                                            $isError = 1;
+                                            $error[$i] .= '- branch name "' . $data[10] . '" not found in company "' . $data[9] . '"<br>';
+                                        }
+                                    }
+                                }
+
+                                if (trim($data[11]) == "") {
+                                    $isError = 1;
+                                    $error[$i] .= '- Department, ';
+                                } else {
+                                    if ($branchId != '') {
+                                        $departmentId = Department::branchDepartment($branchId, $data[11]);
+                                        if ($departmentId == '') {
+                                            $isError = 1;
+                                            $error[$i] .= '- Department name "' . $data[11] . '" not found in branch "' . $data[10] . '"<br>';
+                                        }
+                                    }
+                                }
+                                if (trim($data[12]) == "") {
+                                    $isError = 1;
+                                    $error[$i] .= '- Team, ';
+                                } else {
+                                    if ($departmentId != '') {
+                                        $teamId = Team::departmentTeam($departmentId, $data[12]);
+                                        if ($teamId == '') {
+                                            $isError = 1;
+                                            $error[$i] .= '- Team name "' . $data[12] . '" not found in department "' . $data[11] . '"<br>';
+                                        }
+                                    }
+                                }
+                                if (trim($data[13]) == "") {
+                                    $isError = 1;
+                                    $error[$i] .= '- Team Position';
+                                } else {
+                                    $teamPositionId = TeamPosition::teamPositionId($data[13]);
+                                    if ($teamPositionId == '') {
+                                        $isError = 1;
+                                        $error[$i] .= '- Team Position name "' . $data[13] . '" not found in database <br>';
+                                    }
+                                }
+                                if (trim($data[17]) == "") {
+                                    $isError = 1;
+                                    $error[$i] .= '- Right';
+                                } else {
+                                    $right = Role::roleId($data[17]);
+                                    if ($right == '') {
+                                        $isError = 1;
+                                        $error[$i] .= '- Right name "' . $data[17] . '" not found in database <br>';
+                                    }
+                                }
+                                if ($error == 0) {
+                                    $employee = new Employee();
+                                    $employee->employeeFirstname = $data[0];
+                                    $employee->employeeSurename = $data[1];
+                                    $employee->employeeNumber =  $data[2];
+                                    $employee->joinDate = $_POST["joinDate"] . " 00:00:00";
+                                    $employee->birthDate = $_POST["birthDate"];
+                                    $employee->hireDate = $_POST["joinDate"];
+                                    $employee->nationalityId = $_POST["nationality"];
+                                    $employee->address1 = $_POST["address1"];
+                                    $employee->countryId = $_POST["country"];
+                                    $employee->gender = $_POST["gender"];
+                                    $employee->telephoneNumber = $_POST["telephoneNumber"];
+                                    $employee->emergencyTel = $_POST["emergencyTel"];
+                                    $employee->companyEmail = $_POST["companyEmail"];
+                                    $employee->email = $_POST["companyEmail"];
+                                    $employee->companyId = $_POST["company"];
+                                    $employee->branchId = $_POST["branch"];
+                                    $employee->departmentId = $_POST["department"];
+                                    $employee->teamId = $_POST["team"];
+                                    $employee->teamPositionId = $_POST["teamPosition"];
+                                    $employee->titleId = $_POST["title"];
+                                    //$employee->workingTime = $_POST["workTime"];
+                                    $employee->employeeConditionId = $_POST["condition"];
+                                    $employee->spoken = $_POST["language"];
+                                }
+                            }
+                            $i++;
+                        endforeach;
+                        if ($isError = 0) {
+                            $transaction->commit();
+                        } else {
+                            $transaction->rollBack();
+                        }
+                    }
+                } else {
+                    $error[0] = "Please select .xlsx or .xls file";
+                }
+
+                unlink($pathSave);
+            }
+        }
+        return $this->render('import');
     }
 }

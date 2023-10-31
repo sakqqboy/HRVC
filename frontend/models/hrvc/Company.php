@@ -58,4 +58,13 @@ class Company extends \frontend\models\hrvc\master\CompanyMaster
         $employees = Employee::find()->select('employeeId')->where(["companyId" => $companyId])->asArray()->all();
         return count($employees);
     }
+    public static function companyId($companyName)
+    {
+        $company = Company::find()->where(["companyName" => $companyName, "status" => 1])->asArray()->one();
+        if (isset($company) && !empty($company)) {
+            return $company["companyId"];
+        } else {
+            return '';
+        }
+    }
 }
