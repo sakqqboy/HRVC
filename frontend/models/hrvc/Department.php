@@ -42,4 +42,16 @@ class Department extends \frontend\models\hrvc\master\DepartmentMaster
         }
         return   $departmentName;
     }
+    public static function branchDepartment($branchId, $departmentName)
+    {
+        $department = Department::find()
+            ->where(["branchId" => $branchId, "departmentName" => $departmentName, "status" => 1])
+            ->asArray()
+            ->one();
+        if (isset($department) && !empty($department)) {
+            return $department['departmentId'];
+        } else {
+            return "";
+        }
+    }
 }

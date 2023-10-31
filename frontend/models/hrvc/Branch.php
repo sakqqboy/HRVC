@@ -89,4 +89,16 @@ class Branch extends \frontend\models\hrvc\master\BranchMaster
             return "";
         }
     }
+    public static function companyBranch($companyId, $branchName)
+    {
+        $branch = Branch::find()
+            ->where(["companyId" => $companyId, "branchName" => $branchName, "status" => 1])
+            ->asArray()
+            ->one();
+        if (isset($branch) && !empty($branch)) {
+            return $branch["branchId"];
+        } else {
+            return '';
+        }
+    }
 }
