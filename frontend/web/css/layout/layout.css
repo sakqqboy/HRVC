@@ -3243,3 +3243,15 @@
     word-wrap: break-word;
     ;
 }
+ิ.boder-top{
+    border-top: lightgray solid thin;
+}
+ิ.boder-bottom{
+    border-bottom: lightgray solid thin;
+}
+ิ.boder-left{
+    border-left: lightgray solid thin;
+}
+ิ.boder-right{
+    border-right: lightgray solid thin;
+}

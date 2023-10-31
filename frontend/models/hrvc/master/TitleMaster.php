@@ -12,6 +12,9 @@ use Yii;
     * @property integer $layerId
     * @property integer $departmentId
     * @property string $jobDescription
+    * @property string $purpose
+    * @property string $keyResponsibility
+    * @property string $requireSkill
     * @property string $shortTag
     * @property integer $status
     * @property string $createDateTime
@@ -35,9 +38,9 @@ public function rules()
 return [
             [['titleName', 'departmentId'], 'required'],
             [['layerId', 'departmentId'], 'integer'],
-            [['jobDescription'], 'string'],
+            [['jobDescription', 'purpose', 'keyResponsibility'], 'string'],
             [['createDateTime', 'updateDateTime'], 'safe'],
-            [['titleName'], 'string', 'max' => 255],
+            [['titleName', 'requireSkill'], 'string', 'max' => 255],
             [['shortTag'], 'string', 'max' => 45],
             [['status'], 'string', 'max' => 10],
         ];
@@ -54,6 +57,9 @@ return [
     'layerId' => 'Layer ID',
     'departmentId' => 'Department ID',
     'jobDescription' => 'Job Description',
+    'purpose' => 'Purpose',
+    'keyResponsibility' => 'Key Responsibility',
+    'requireSkill' => 'Require Skill',
     'shortTag' => 'Short Tag',
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',

@@ -54,19 +54,11 @@ $this->title = 'KFI Grid View';
 								foreach ($kfis as $kfiId => $kfi) :
 							?>
 									<div class="col-lg-4 col-md-6 col-sm-5 col-12 mt-20">
-										<div class="col-12 border pl-20 pr-20 pt-20 pb-5" style="background-color:white;border-radius:10px;box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;">
+										<div class="col-12 border pl-20 pr-20 pt-10 pb-5" style="background-color:white;border-radius:10px;box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;">
 											<div class="row">
-												<div class="col-lg-5 col-md-6 col-6">
-													<div class="col-12 linechart-increase">
-														<i class="fa fa-line-chart mr-5" aria-hidden="true"></i> <?= $kfi["kfiName"] ?>
-													</div>
-													<div class="col-12  ting-size mt-5">
-														<?= $kfi["companyName"] ?>
-													</div>
-												</div>
-												<div class="col-lg-7 col-md-6 col-6 pl-0 text-end">
+												<div class="col-12">
 													<div class="row">
-														<div class="col-4 pr-0">
+														<div class="col-12 text-end pr-0">
 															<a class="btn btn-xs btn-outline-secondary pt-0" style="margin-left: 0px;" data-bs-toggle="modal" data-bs-target="#staticBackdrop3" onclick="javascript:kfiHistory(<?= $kfiId ?>)">
 																<i class="fa fa-eye mt-6" aria-hidden="true" style="margin-left: -5px"></i>
 															</a>
@@ -74,23 +66,33 @@ $this->title = 'KFI Grid View';
 																<i class="fa fa-trash-o mt-6" aria-hidden="true" style="margin-left: -5px;"></i>
 															</a>
 														</div>
-														<div class="col-8 text-start pl-0">
-															<span class="badge rounded-pill bg-deadline0 ml-5" style="width:100%;">
-																<span class="deadline-orange"> Term</span> <span class="mon-dark">: <?= $kfi['checkDate'] == "" ? 'Not set' : $kfi['checkDate'] ?></span>
-															</span>
+														<div class="col-9 linechart-increase" style="margin-top: -25px;">
+															<i class="fa fa-line-chart mr-5" aria-hidden="true"></i> <?= $kfi["kfiName"] ?>
+															<div class="col-12  ting-size mt-5">
+																<?= $kfi["companyName"] ?>
+															</div>
+															<div class="col-12 font-size-12 mt-5">
+																<img src="<?= Yii::$app->homeUrl ?><?= $kfi["flag"] ?>" class="image-is mr-3"> <?= $kfi["branchName"] ?>
+															</div>
+
 														</div>
 													</div>
-
 												</div>
-												<div class="col-9 mt-10 font-size-12">
-													<img src="<?= Yii::$app->homeUrl ?><?= $kfi["flag"] ?>" class="image-is mr-3"> <?= $kfi["branchName"] ?>, Bangladesh
+												<div class="col-12 pl-0 text-end  pr-5 " style="margin-top:-35px;">
+													<div class="offset-6 col-6 text-end pl-0 pr-0">
+														<span class="badge rounded-pill bg-deadline0 ml-5" style="width:100%;">
+															<span class="deadline-orange"> Term</span>
+															<span class="font-size-10 text-dark" style="font-weight: 700;">: <?= $kfi['fromDate'] == "" ? 'Not set' : $kfi['fromDate'] ?> - </span>
+															<span class="font-size-10 text-dark" style="font-weight: 700;"><?= $kfi['toDate'] == "" ? 'Not set' : $kfi['toDate'] ?></span>
+														</span>
+													</div>
 												</div>
-												<div class="col-3 t-10">
+												<div class="col-12 text-end pr-0 " style="margin-top:-8px;">
 													<span class="badge rounded-pill <?= $kfi['status'] == 1 ? 'bg-warning text-dark' : 'bg-success' ?>"> <?= $kfi['status'] == 1 ? 'In process' : 'Completed' ?></span>
 												</div>
-												<div class="col-12 mt-10">
+												<div class="col-12 mt-15">
 													<div class="row">
-														<div class="col-lg-2 col-md-6 col-2 font-size-16 pt-30" style="font-weight: 500;">
+														<div class="col-lg-1 col-md-6 col-2 font-size-14 pt-30 pr-0 pl-0 text-center" style="font-weight: 500;">
 															<?= strtoupper(substr($kfi['month'], 0, 3)) ?>
 														</div>
 														<div class="col-lg-3 col-md-6 col-3">
@@ -110,7 +112,7 @@ $this->title = 'KFI Grid View';
 																<?= number_format($kfi["target"], 2) ?>
 															</div>
 														</div>
-														<div class="col-lg-1 col-md-6 col-3 pt-13">
+														<div class="col-lg-2 col-md-6 col-3 pt-13">
 
 															<?= $kfi["code"] ?>
 														</div>
@@ -123,7 +125,7 @@ $this->title = 'KFI Grid View';
 															</div>
 														</div>
 
-														<div class="col-lg-2 col-md-6 col-6"></div>
+														<div class="col-lg-1 col-md-6 col-6"></div>
 														<div class="col-lg-4 col-md-6 col-6">
 															<div class="col-12 padding-update">
 																Update Interval
@@ -132,17 +134,17 @@ $this->title = 'KFI Grid View';
 																<?= $kfi["unit"] ?>
 															</div>
 														</div>
-														<div class="col-lg-6 col-md-6 col-6 pr-0">
+														<div class="col-lg-7 col-md-6 col-6 pr-0">
 															<div class="col-12 pr-0 pt-8">
 																<div class="progress">
-																	<div class="progress-bar" style="width:<?= number_format($kfi['ratio']) ?>%; background:#2F80ED;"></div>
+																	<div class="progress-bar" style="width:<?= $kfi['ratio'] ?>%; background:#2F80ED;"></div>
 																	<span class="badge rounded-pill  pro-load0"><?= $kfi['ratio'] ?>%</span>
 																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-												<div class="col-12">
+												<div class="col-12" style="margin-top:-10px;">
 													<div class="row">
 														<div class="col-lg-12 text-end pr-0">
 															<span data-bs-toggle="modal" data-bs-target="#kfi-issue" onclick="javascript:showKfiComment(<?= $kfiId ?>)">
@@ -199,6 +201,8 @@ $this->title = 'KFI Grid View';
 	]); ?>
 	<?= $this->render('update_modal', [
 		"units" => $units,
+		"companies" => $companies,
+		"months" => $months
 	]) ?>
 
 	<?php ActiveForm::end(); ?>

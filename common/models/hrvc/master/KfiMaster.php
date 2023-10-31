@@ -17,6 +17,8 @@ use Yii;
     * @property string $kfiDetail
     * @property integer $createrId
     * @property string $periodDate
+    * @property string $fromDate
+    * @property string $toDate
     * @property integer $status
     * @property string $createDateTime
     * @property string $updateDateTime
@@ -40,7 +42,7 @@ return [
             [['kfiName', 'companyId', 'unitId', 'createrId'], 'required'],
             [['companyId', 'unitId', 'targetAmount', 'createrId'], 'integer'],
             [['kfiDetail'], 'string'],
-            [['periodDate', 'createDateTime', 'updateDateTime'], 'safe'],
+            [['periodDate', 'fromDate', 'toDate', 'createDateTime', 'updateDateTime'], 'safe'],
             [['kfiName', 'month', 'year'], 'string', 'max' => 45],
             [['status'], 'string', 'max' => 10],
         ];
@@ -62,6 +64,8 @@ return [
     'kfiDetail' => 'Kfi Detail',
     'createrId' => 'Creater ID',
     'periodDate' => 'Period Date',
+    'fromDate' => 'From Date',
+    'toDate' => 'To Date',
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',
     'updateDateTime' => 'Update Date Time',

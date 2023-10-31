@@ -13,6 +13,8 @@ use Yii;
     * @property integer $unitId
     * @property string $checkPeriodDate
     * @property string $nextCheckDate
+    * @property string $fromDate
+    * @property string $toDate
     * @property string $quantRatio
     * @property integer $amountType
     * @property string $code
@@ -44,7 +46,7 @@ public function rules()
 return [
             [['kfiId', 'unitId', 'checkPeriodDate', 'nextCheckDate', 'quantRatio', 'amountType', 'code', 'historyStatus'], 'required'],
             [['kfiId'], 'integer'],
-            [['checkPeriodDate', 'nextCheckDate', 'createDateTime', 'updateDateTime'], 'safe'],
+            [['checkPeriodDate', 'nextCheckDate', 'fromDate', 'toDate', 'createDateTime', 'updateDateTime'], 'safe'],
             [['result'], 'number'],
             [['description', 'remark'], 'string'],
             [['kfiHistoryName', 'formular', 'titleProgress'], 'string', 'max' => 255],
@@ -65,6 +67,8 @@ return [
     'unitId' => 'Unit ID',
     'checkPeriodDate' => 'Check Period Date',
     'nextCheckDate' => 'Next Check Date',
+    'fromDate' => 'From Date',
+    'toDate' => 'To Date',
     'quantRatio' => 'Quant Ratio',
     'amountType' => 'Amount Type',
     'code' => 'Code',

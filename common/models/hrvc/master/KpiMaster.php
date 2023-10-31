@@ -12,6 +12,8 @@ use Yii;
     * @property integer $companyId
     * @property integer $unitId
     * @property string $periodDate
+    * @property string $fromDate
+    * @property string $toDate
     * @property string $targetAmount
     * @property string $month
     * @property string $year
@@ -44,7 +46,7 @@ public function rules()
 return [
             [['kpiName', 'companyId', 'unitId', 'periodDate', 'targetAmount', 'month', 'quantRatio', 'priority', 'amountType', 'code', 'result', 'createrId'], 'required'],
             [['companyId', 'unitId', 'createrId'], 'integer'],
-            [['periodDate', 'createDateTime', 'updateDateTime'], 'safe'],
+            [['periodDate', 'fromDate', 'toDate', 'createDateTime', 'updateDateTime'], 'safe'],
             [['targetAmount', 'result'], 'number'],
             [['kpiDetail'], 'string'],
             [['kpiName'], 'string', 'max' => 255],
@@ -64,6 +66,8 @@ return [
     'companyId' => 'Company ID',
     'unitId' => 'Unit ID',
     'periodDate' => 'Period Date',
+    'fromDate' => 'From Date',
+    'toDate' => 'To Date',
     'targetAmount' => 'Target Amount',
     'month' => 'Month',
     'year' => 'Year',

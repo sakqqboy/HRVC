@@ -67,16 +67,29 @@
 						</div>
 						<div class="col-12 pt-5 mt-15 font-size-14">
 							<div class="row">
-								<div class="col-lg-6 col-md-6 col-12">
+								<div class="col-12 border-bottom">
+									<label for="input" class="form-label"><strong class="red">*</strong> Select Period</label>
+
+								</div>
+								<div class="col-lg-6 col-md-6 col-12 mt-10">
 									<div class="input-group">
-										<label for="input" class="form-label"><strong class="red">*</strong> Select Period</label>
+
 										<div class="input-group">
-											<span class="input-group-text font-size-12"><i class="fa fa-calendar-o" aria-hidden="true"></i> &nbsp;&nbsp; Date</span>
-											<input type="date" aria-label="" class="form-control font-size-12" required name="periodDate" id="periodDate-update">
+											<span class="input-group-text font-size-12"><i class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp;From</span>
+											<input type="date" aria-label="" class="form-control font-size-12" required name="fromDate" id="from-date">
 										</div>
 									</div>
 								</div>
-								<div class="col-lg-6 col-md-6 col-12">
+								<div class="col-lg-6 col-md-6 col-12 mt-10">
+									<div class="input-group">
+
+										<div class="input-group">
+											<span class="input-group-text font-size-12"><i class="fa fa-calendar-o" aria-hidden="true"></i> &nbsp;&nbsp;To</span>
+											<input type="date" aria-label="" class="form-control font-size-12" required name="toDate" id="to-date">
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-12 col-md-6 col-12 mt-10">
 									<div class="input-group">
 										<label for="input" class="form-label"><strong class="red">*</strong> Next Check Date</label>
 										<div class="input-group">

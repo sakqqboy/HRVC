@@ -52,6 +52,8 @@ class ManagementController extends Controller
 					"countryName" => Country::countryNameBycompany($kfi['companyId']),
 					"flag" => Country::countryFlagBycompany($kfi['companyId']),
 					"isOver" => 0,
+					"fromDate" => "",
+					"toDate" => ""
 				];
 				$kfiHistory = KfiHistory::find()
 					->where(["kfiId" => $kfi["kfiId"], "status" => [1, 4]])
@@ -80,6 +82,8 @@ class ManagementController extends Controller
 						"countryName" => Country::countryNameBycompany($kfi['companyId']),
 						"flag" => Country::countryFlagBycompany($kfi['companyId']),
 						"isOver" => ModelMaster::isOverDuedate($kfiHistory["nextCheckDate"]),
+						"fromDate" => ModelMaster::engDate($kfiHistory["fromDate"], 2),
+						"toDate" => ModelMaster::engDate($kfiHistory["toDate"], 2),
 					];
 				}
 
@@ -119,7 +123,9 @@ class ManagementController extends Controller
 			$res2["nextCheck"] = ModelMaster::engDate($kfiHistory["nextCheckDate"], 2);
 			$res2["checkDate"] = ModelMaster::engDate($kfiHistory["checkPeriodDate"], 2);
 			$res2["nextCheckDate"] = $kfiHistory["nextCheckDate"];
-			$res2["periodCheck"] = $kfiHistory["checkPeriodDate"];
+			//$res2["periodCheck"] = $kfiHistory["checkPeriodDate"];
+			$res2["fromDate"] = $kfiHistory["fromDate"];
+			$res2["toDate"] = $kfiHistory["toDate"];
 
 			if ($kfi["targetAmount"] == null || $kfi["targetAmount"] == '' || $kfi["targetAmount"] == 0) {
 				$ratio = 0;
@@ -137,7 +143,9 @@ class ManagementController extends Controller
 			$res2["nextCheck"] = "";
 			$res2["checkDate"] = "";
 			$res2["nextCheckDate"] = null;
-			$res2["periodCheck"] = $kfi["periodDate"];
+			$res2["fromDate"] = null;
+			$res2["toDate"] = null;
+			//$res2["periodCheck"] = $kfi["periodDate"];
 		}
 		$res3 = array_merge($res, $res2);
 		return json_encode($res3);
@@ -243,7 +251,10 @@ class ManagementController extends Controller
 					"checkDate" => "",
 					"countryName" => Country::countryNameBycompany($kfi['companyId']),
 					"flag" => Country::countryFlagBycompany($kfi['companyId']),
-					"year" => $year
+					"year" => $year,
+					"fromDate" => "",
+					"isOver" => 0,
+					"toDate" => "",
 				];
 				$kfiHistory = KfiHistory::find()
 					->where(["kfiId" => $kfi["kfiId"], "status" => [1, 4]])
@@ -271,7 +282,10 @@ class ManagementController extends Controller
 						"amountType" => $kfiHistory["amountType"],
 						"countryName" => Country::countryNameBycompany($kfi['companyId']),
 						"flag" => Country::countryFlagBycompany($kfi['companyId']),
-						"year" => $year
+						"year" => $year,
+						"fromDate" => ModelMaster::engDate($kfiHistory["fromDate"], 2),
+						"toDate" => ModelMaster::engDate($kfiHistory["toDate"], 2),
+						"isOver" => ModelMaster::isOverDuedate($kfiHistory["nextCheckDate"]),
 					];
 				}
 

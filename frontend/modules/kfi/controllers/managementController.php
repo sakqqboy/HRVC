@@ -92,7 +92,7 @@ class ManagementController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index');
 		$kfis = curl_exec($api);
 		$kfis = json_decode($kfis, true);
-		//throw new Exception(print_r($kfis, true));
+		// throw new Exception(print_r($kfis, true));
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
 		$units = curl_exec($api);
@@ -151,7 +151,9 @@ class ManagementController extends Controller
 			$kfiHistory->kfiId = $_POST["kfiId"];
 			$kfiHistory->titleProgress = $_POST["progressTitle"];
 			$kfiHistory->remark = $_POST["progressTitle"];
-			$kfiHistory->checkPeriodDate = $_POST["periodDate"];
+			//$kfiHistory->checkPeriodDate = $_POST["periodDate"];
+			$kfiHistory->fromDate = $_POST["fromDate"];
+			$kfiHistory->toDate = $_POST["toDate"];
 			$kfiHistory->nextCheckDate = $_POST["nextCheckDate"];
 			$kfiHistory->amountType = $_POST["amountType"];
 			$kfiHistory->code = $_POST["code"];

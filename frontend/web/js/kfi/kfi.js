@@ -118,7 +118,9 @@ function updateKfi(kfiId) {
             $("#show-multi-department-update").html(data.textDepartment);
             $(".unit-" + parseInt(data.unitId)).css("background-color", "#3366FF");
             $(".unit-" + data.unitId).css("color", "white");
-            $("#periodDate-update").val(data.periodCheck);
+            // $("#periodDate-update").val(data.periodCheck);
+            $("#from-date").val(data.fromDate);
+            $("#to-date").val(data.toDate);
 			$("#nextCheckDate-update").val(data.nextCheckDate);
             $("#targetAmount").val(data.targetAmount);
             $("#kfiDetail").val(data.detail);
