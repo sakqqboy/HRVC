@@ -226,43 +226,81 @@ $this->title = 'IPL Analysis';
                         </div>
                     </div>
                     <div class="col-12 mt-30">
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-                        <canvas id="mylineChart" style="width:100%;max-width:100%"></canvas>
-                        <script>
-                            const xValues = [950000, 1000000, 110000, 1200000, 1300000, 1400000, 1500000, 1600000, 1700000, 1800000, 1900000, 2000000];
-                            const yValues = ["Jan", "Feb", "Mar", "Apr", "Jun", "Jul", "Aug", "May", "Sep", "Oct", "Nov", "Dec"];
 
-                            new Chart("mylineChart", {
-                                type: "line",
-                                data: {
-                                    labels: xValues,
-                                    labels: yValues,
-                                    datasets: [{
-                                        data: [700000, 750000, 800000, 750000, 740000, 750000, 800000, 850000, 1000000, 1200000, 1400000, 1500000],
-                                        borderColor: "rgb(227, 175, 3)",
 
-                                        fill: false
-                                    }, {
-                                        data: [1100000, 1000000, 1200000, 1200000, 1310000, 1350000, 1250000, 1450000, 1490000, 1520000, 1550000, 1570000],
-                                        borderColor: "#3430FF",
-                                        fill: false
-                                    }, {
-                                        data: [500000, 550000, 540000, 530000, 600000, 540000, 520000, 520000, 540000, 690000, 800000, 1000000],
-                                        borderColor: "rgb(21, 121, 215)",
-                                        fill: false
-                                    }, {
-                                        data: [100000, 150000, 240000, 240000, 300000, 240000, 290000, 290000, 290000, 280000, 270000, 260000, 250000],
-                                        borderColor: "green",
-                                        fill: false
-                                    }]
-                                },
-                                options: {
-                                    legend: {
-                                        display: false
-                                    }
-                                }
-                            });
-                        </script>
+                    </div>
+                    <div class="col-12 mt-50">
+                        <div class="alert  light-shadow-2" role="alert">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="alert light-shadow-3">
+                                        <div class="col-12 font-size-12">
+                                            <strong> Current Year-2022</strong>
+                                        </div>
+                                    </div>
+
+                                    <div class="card" style="border:none;">
+                                        <div class="row font-size-12">
+                                            <div class="col-7 pl-20 pt-8">
+                                                Actual
+                                            </div>
+                                            <div class="col-5">
+                                                <div class="col-12 pt-8">
+                                                    <button type="button" class="example-iplAnalysis1"></button>
+                                                </div>
+                                            </div>
+                                            <div class="col-7 pl-20 pt-10">
+                                                Target
+                                            </div>
+                                            <div class="col-5 pt-10">
+                                                <div class="col-12">
+                                                    <button type="button" class="example-iplAnalysis2"></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="alert light-shadow-3">
+                                        <div class="col-10 font-size-12">
+                                            <strong> Previous Year</strong>
+                                        </div>
+                                    </div>
+                                    <div class="card" style="border:none;">
+                                        <div class="row font-size-12">
+                                            <div class="col-7 pl-20 pt-8">
+                                                Actual
+                                            </div>
+                                            <div class="col-5 pt-8">
+                                                <div class="col-12">
+                                                    <a href=""> <img src="<?= Yii::$app->homeUrl ?>image/graph.png" class="graph-linechart"></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="alert light-shadow-3">
+                                        <div class="col-10 font-size-12">
+                                            <strong> Forecasted Year</strong>
+                                        </div>
+                                    </div>
+                                    <div class="card" style="border:none;">
+                                        <div class="row font-size-12">
+                                            <div class="col-5 pl-20 pt-8">
+                                                Target
+                                            </div>
+                                            <div class="col-7 pt-8">
+                                                <button type="button" class="examplebox-red"></button>
+                                                <button type="button" class="examplebox-red"></button>
+                                                <button type="button" class="examplebox-red"></button>
+                                                <button type="button" class="examplebox-red"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

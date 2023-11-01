@@ -351,4 +351,3 @@ $this->title = 'Performance Chart';
         </div>
     </div>
 </div>
-</div>

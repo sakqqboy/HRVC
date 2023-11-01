@@ -34,6 +34,13 @@
     font-size: 12px;
 }
 
+.example-tok1 {
+    border-radius: 20px;
+    background-color: #f2f2f2;
+    font-size: 15px;
+    font-weight: 500;
+}
+
 .content-Fitter {
     font-size: 9px;
     margin-left: -9px;
@@ -317,4 +324,20 @@ div[role="progressbar1"]::before {
 
 input[type="checkbox"]:checked+label {
     font-weight: bold;
+}
+
+.link-Ideal {
+    text-decoration: none;
+    color: #6A7383;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.link-Ideal:hover {
+    color: rgb(40, 133, 213);
+    background-color: white;
+    padding-left: 7px;
+    padding-right: 7px;
+    border-radius: 3px;
+    border-bottom: 3px solid #4DACF0;
 }
