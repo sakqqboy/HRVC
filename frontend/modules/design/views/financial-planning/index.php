@@ -531,7 +531,7 @@ $this->title = 'Gloden';
                                     <option value="4">2024</option>
                                 </select>
                             </div>
-                            <div class="col-2 badge bg-light text-primary pt-9" style="height: 30px;">
+                            <div class="col-2 badge bg-light text-primary pt-9" data-bs-toggle="modal" data-bs-target="#staticBackdropCurrency" style="height: 30px; cursor: pointer;">
                                 <i class="fa fa-usd" aria-hidden="true"></i> Currency
                             </div>
                             <div class="col-lg-5">
@@ -1994,6 +1994,32 @@ $this->title = 'Gloden';
                     <span class="T-Warning font-size-11"> T </span> &nbsp;&nbsp; Target
                 </div>
                 <hr>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="staticBackdropCurrency" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabelCurrency" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="container">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel"> Currency Conversion Rate</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6 pl-20">
+                        <div class="col-12">
+                            from
+                        </div>
+                        <div class="col-12">
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
