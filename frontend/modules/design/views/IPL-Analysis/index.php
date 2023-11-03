@@ -99,7 +99,7 @@ $this->title = 'IPL Analysis';
                     <div class="shadow-none p-3 mb-5 bg-gray rounded">
                         <div class="row">
                             <div class="col-10">
-                                <input type="text" class="shadow bg rounded" id="shadowPL" placeholder="Sales">
+                                <input type="text" class="shadow bg rounded" id="shadowPL">
                             </div>
                             <div class="col-2 form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="checkboxPL">
@@ -107,7 +107,7 @@ $this->title = 'IPL Analysis';
                         </div>
                     </div>
                     <!-- display;:none -->
-                    <div class="shadow-none p-3 mb-5 bg-sky rounded" style="display:none;">
+                    <div class="shadow-none p-3 mb-5 bg-sky rounded">
                         <div class="row">
                             <div class="col-2 form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="checkboxPL">
@@ -121,7 +121,7 @@ $this->title = 'IPL Analysis';
                     <div class="shadow-none p-3 mb-5 bg-gray rounded">
                         <div class="row">
                             <div class="col-10">
-                                <input type="text" class="shadow bg rounded" id="shadowPL" placeholder="Variable Expense">
+                                <input type="text" class="shadow bg rounded" id="shadowPL">
                             </div>
                             <div class="col-2 form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="checkboxPL">
@@ -226,10 +226,8 @@ $this->title = 'IPL Analysis';
                         </div>
                     </div>
                     <div class="col-12 mt-30">
-                        <script src="https://code.highcharts.com/highcharts.js"></script>
-                        <script src="https://code.highcharts.com/modules/exporting.js"></script>
-                        <div id="container" style="min-width: 300px; height: 600px; margin: 0 auto"></div>
-
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+                        <canvas id="mixed-chart" width="800" height="450"></canvas>
                     </div>
                     <div class="col-12 mt-50">
                         <div class="alert  light-shadow-2" role="alert">
@@ -275,7 +273,7 @@ $this->title = 'IPL Analysis';
                                             </div>
                                             <div class="col-5 pt-8">
                                                 <div class="col-12">
-                                                    <a href=""> <img src="<?= Yii::$app->homeUrl ?>image/graph.png" class="graph-linechart"></a>
+                                                    <a href=""> <img src="<?= Yii::$app->homeUrl ?>image/graphlinechart.png" class="graph-linechart"></a>
                                                 </div>
                                             </div>
                                         </div>

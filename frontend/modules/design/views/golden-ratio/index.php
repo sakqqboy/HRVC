@@ -103,6 +103,21 @@ $this->title = 'Golden';
                         </div>
                     </div>
                 </div>
+                <div class="col-12">
+                    <div class="row mt-20">
+                        <div class="col-lg-3 col-md-6 col-12 alert alert-info al-pad">
+                            <div class="col-12 text-center">
+                                <p> Sales</p>
+                                <p class="font-size-18"> <?= number_format(100.0) ?>%</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-6 col-12 alert alert-alinfo">
+                            <div class="col-12">
+                                Variable Expense <span><?= number_format(25.0) ?>%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

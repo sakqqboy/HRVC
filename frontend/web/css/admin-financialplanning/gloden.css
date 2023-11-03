@@ -341,3 +341,11 @@ input[type="checkbox"]:checked+label {
     border-radius: 3px;
     border-bottom: 3px solid #4DACF0;
 }
+
+.al-pad {
+    height: 500px;
+}
+
+.alert-alinfo {
+    background-color: #b0d9f6;
+}

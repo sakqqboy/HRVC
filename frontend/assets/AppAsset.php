@@ -70,7 +70,6 @@ class AppAsset extends AssetBundle
         'css/admin-financialplanning/edit.css',
         'css/admin-financialplanning/performance.css',
         'css/admin-financialplanning/IPL_analysis.css',
-        'css/admin-financialplanning/styles.css',
         'css/home/multi_select.css',
 
     ];
