@@ -2,6 +2,7 @@
 $this->title = 'Actual Last Year';
 ?>
 
+
 <div class="col-12 mt-90 alert background-Planning">
     <div class="col-12 planning">
         <i class="fa fa-database" aria-hidden="true"></i> Financial Planning
@@ -110,24 +111,28 @@ $this->title = 'Actual Last Year';
                                 <span class="badge bg-lig1 text-dark"> Sales</span>
                             </div>
                             <div class="col-12 text-center pt-30">
-                                Sales
+                                <strong> <?= number_format(4793595) ?></strong>
                             </div>
                             <div class="col-12 text-center">
-                                <strong> <?= number_format(100.0) ?>%</strong>
+                                Sales
+                            </div>
+                            <div class="col-12 allshadow-sales">
+                                <div class="shadow-sm p-2 al-pad-copy rounded"> Gross Profit Ratio <span class="badge bg-lig1-sale text-dark"> <?= number_format(76.7) ?>%</span></div>
                             </div>
                         </div>
-                        <div class="col-lg-9 col-md-6 col-12 ">
+                        <div class="col-lg-9 col-md-6 col-12">
                             <div class="card alert-alinfo">
                                 <div class="col-12 text-end">
                                     <span class="badge bg-lig1 text-dark"> Variable Expense</span>
                                 </div>
-                                <div class="row">
-                                    <div class="col-4">
-                                        Variable Expense
-                                    </div>
-                                    <div class="col-3">
-                                        <strong><?= number_format(25.0) ?>%</strong>
-                                    </div>
+                                <div class="col-12 text-center">
+                                    <strong><?= number_format(4793595) ?></strong>
+                                </div>
+                                <div class="col-12 text-center">
+                                    Variable Expense
+                                </div>
+                                <div class="col-5 allshadow-variableExpense">
+                                    <div class="shadow-sm p-2 alert-alinfo-copy rounded"> Variable Expense Ratio <span class="badge bg-lig1-copy text-dark"> <?= number_format(45) ?>%</span></div>
                                 </div>
                             </div>
                             <div class="row">
@@ -137,10 +142,13 @@ $this->title = 'Actual Last Year';
                                             <span class="badge bg-lig1 text-dark"> Gross Profit</span>
                                         </div>
                                         <div class="col-12 text-center pt-20">
-                                            Gross Profit
+                                            <strong> <?= number_format(4793595) ?></strong>
                                         </div>
                                         <div class="col-12 text-center">
-                                            <strong> <?= number_format(75.5) ?>%</strong>
+                                            Gross Profit
+                                        </div>
+                                        <div class="col-12 allshadow-GrossProfit">
+                                            <div class="shadow-sm p-2 alert-alpri1-copy rounded"> Gross Profit Ratio <span class="badge bg-lig1-Gross text-dark"> <?= number_format(53) ?>%</span></div>
                                         </div>
                                         <div class="col-12 pt-100"></div>
                                     </div>
@@ -150,13 +158,14 @@ $this->title = 'Actual Last Year';
                                         <div class="col-12 text-end">
                                             <span class="badge bg-lig1 text-dark"> Labor Cost</span>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-5">
-                                                Labor Cost
-                                            </div>
-                                            <div class="col-3">
-                                                <strong> <?= number_format(35.0) ?>%</strong>
-                                            </div>
+                                        <div class="col-12 text-center">
+                                            <strong> <?= number_format(8385679) ?></strong>
+                                        </div>
+                                        <div class="col-12 text-center">
+                                            Labor Cost
+                                        </div>
+                                        <div class="col-7 allshadow-LaborCost">
+                                            <div class="shadow-sm p-2 alert-alpri2-copy rounded">Labor Cost Ratio <span class="badge bg-lig1-LaborCost text-dark"> <?= number_format(76.7) ?>%</span></div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -165,13 +174,14 @@ $this->title = 'Actual Last Year';
                                                 <div class="col-12 text-end">
                                                     <span class="badge bg-lig1 text-dark"> Fixed Expense (Others)</span>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-5">
-                                                        Fixed Expense (Others)
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <strong> <?= number_format(35.0) ?>%</strong>
-                                                    </div>
+                                                <div class="col-12 text-center">
+                                                    <strong> <?= number_format(35.0) ?>%</strong>
+                                                </div>
+                                                <div class="col-12 text-center">
+                                                    Fixed Expense (Others)
+                                                </div>
+                                                <div class="col-7 allshadow-FixedExpense">
+                                                    <div class="shadow-sm p-2 alert-alpri3-copy rounded">Labor Cost Ratio <span class="badge bg-lig1-FixedExpense text-dark"> <?= number_format(76.7) ?>%</span></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -180,13 +190,14 @@ $this->title = 'Actual Last Year';
                                                 <div class="col-12 text-end">
                                                     <span class="badge bg-lig1 text-dark"> Operating Profit</span>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-5">
-                                                        Operating Profit
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <strong> <?= number_format(5.0) ?>%</strong>
-                                                    </div>
+                                                <div class="col-12 text-center">
+                                                    <strong> <?= number_format(-118417) ?></strong>
+                                                </div>
+                                                <div class="col-12 text-center">
+                                                    Operating Profit
+                                                </div>
+                                                <div class="col-8 allshadow-Operating-Profit">
+                                                    <div class="shadow-sm p-2  alert-alpri4-copy rounded"> Operating Profit Ratio <span class="badge bg-lig1-Operating text-dark"> <?= number_format(-0.6) ?>%</span></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -198,14 +209,27 @@ $this->title = 'Actual Last Year';
                     <div class="row">
                         <div class="col-lg-3 col-md-6 col-12 card alert-alpri5">
                             <div class="col-12 text-center">
-                                Ideal Golden Ratio
+                                Next Year Target
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-6 col-12 ">
                             <div class="card alert-alpri6">
-                                <div class="Ideal-solid">
-                                    &nbsp; Total
-                                    <div role="progressbar4" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="--value:100"></div>
+                                <div class="row">
+                                    <div class="col-1">
+                                        Total
+                                    </div>
+                                    <div class="col-1 Ideal-solid"></div>
+                                    <div class="col-2">
+                                        <span class="badge p-2  bg-white text-dark"><?= number_format(100) ?>%</span>
+                                    </div>
+                                    <div class="col-5 text-end">
+                                        <span class="badge bg-white text-dark">
+                                            <i class="fa fa-line-chart" aria-hidden="true"></i> &nbsp;&nbsp; Sales Growth Ratio
+                                        </span>
+                                    </div>
+                                    <div class="col-3">
+                                        <div role="progressbar4" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0" style="--value:0"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

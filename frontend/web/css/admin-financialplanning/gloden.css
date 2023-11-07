@@ -344,11 +344,10 @@ input[type="checkbox"]:checked+label {
 
 .bg-lig1 {
     background-color: white;
-    border-radius: 2px;
+    border-radius: 3px;
 }
 
 .al-pad {
-
     background-color: #CCEDFF;
 }
 
@@ -382,5 +381,101 @@ input[type="checkbox"]:checked+label {
 }
 
 .Ideal-solid {
-    border-left: 1px rgb(178, 178, 178) solid;
+    border-right: rgb(207, 207, 207) 1px solid;
+}
+
+.allshadow-sales {
+    margin-left: 100px;
+    margin-top: 20px;
+    z-index: 3;
+}
+
+.al-pad-copy {
+    background-color: #9ee1fe;
+}
+
+.allshadow-variableExpense {
+    margin-left: -50px;
+}
+
+.alert-alinfo-copy {
+    background-color: #cff4f4;
+    margin-top: -30px;
+}
+
+.bg-lig1-copy {
+    background-color: #78eeee;
+    border-radius: 3px;
+}
+
+.allshadow-GrossProfit {
+    margin-left: -50px;
+}
+
+.alert-alpri1-copy {
+    background-color: #f1e4fe;
+    z-index: 3;
+}
+
+.bg-lig1-Gross {
+    background-color: #e4c6ff;
+    border-radius: 3px;
+}
+
+.allshadow-Operating-Profit {
+    margin-left: -80px;
+}
+
+.alert-alpri4-copy {
+    background-color: #c2ffc2;
+}
+
+.bg-lig1-Operating {
+    background-color: #8af58a;
+    border-radius: 3px;
+}
+
+.allshadow-LaborCost {
+    margin-left: -50px;
+}
+
+.alert-alpri2-copy {
+    background-color: #d9d9d9;
+}
+
+.bg-lig1-LaborCost {
+    background-color: #b6b6b6;
+    border-radius: 3px;
+}
+
+.allshadow-FixedExpense {
+    margin-left: -50px;
+}
+
+.alert-alpri3-copy {
+    background-color: #c6d9f3;
+}
+
+.bg-lig1-FixedExpense {
+    background-color: #8ebeff;
+    border-radius: 3px;
+}
+
+.bg-lig1-sales {
+    background-color: #4ac5f3;
+    border-radius: 3px;
+}
+
+.circledollar {
+    border: 2px solid;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    color: #2377C6;
+    margin-top: -3px;
+
+}
+
+.Curr {
+    padding-left: 15px;
 }

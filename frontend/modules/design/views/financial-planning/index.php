@@ -531,8 +531,10 @@ $this->title = 'Financial Planning';
                                     <option value="4">2024</option>
                                 </select>
                             </div>
-                            <div class="col-2 badge bg-light text-primary pt-9" data-bs-toggle="modal" data-bs-target="#staticBackdropCurrency" style="height: 30px; cursor: pointer;">
-                                <i class="fa fa-usd" aria-hidden="true"></i> Currency
+                            <div class="col-2 badge bg-light  pt-9" data-bs-toggle="modal" data-bs-target="#staticBackdropCurrency" style="height: 30px; cursor: pointer;">
+                                <div class="circledollar">
+                                    <i class="fa fa-usd pl-4" aria-hidden="true"></i><span class="Curr">Currency</span>
+                                </div>
                             </div>
                             <div class="col-lg-5">
                                 <ul class="nav nav-pills" id="pills-tab" role="tablist">

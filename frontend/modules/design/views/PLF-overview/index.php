@@ -30,10 +30,10 @@ $this->title = 'PLF Overview';
                 <div class="col-lg-8 col-12 text-end">
                     <button type="button" class="btn btn-light Data" data-bs-toggle="modal" data-bs-target="#DataDistionary"><i class="fa fa-info-circle" aria-hidden="true"></i> Data Dictionary</button>
                     <div class="btn-group" role="group" aria-label="Basic outlined example">
-                        <button type="button" class="btn btn-outline-secondary font-size-12"><i class="fa fa-bar-chart" aria-hidden="true"></i></button>
-                        <button type="button" class="btn btn-outline-secondary font-size-12">Performance Chart</button>
-                        <button type="button" class="btn btn-outline-secondary font-size-12">IPL Analysis</button>
-                        <button type="button" class="btn btn-outline-secondary font-size-12">PLF Overview</button>
+                        <button id="performancechart" type="button" class="btn btn-outline-secondary font-size-12"><i class="fa fa-bar-chart" aria-hidden="true"></i></button>
+                        <button id="performancechart" type="button" class="btn btn-outline-secondary font-size-12">Performance Chart</button>
+                        <button id="performancechart" type="button" class="btn btn-outline-secondary font-size-12">IPL Analysis</button>
+                        <button id="performancechart" type="button" class="btn btn-outline-secondary font-size-12">PLF Overview</button>
                     </div>
                 </div>
             </div>

@@ -203,9 +203,12 @@ $this->title = 'Ideal Golden Ratio';
                         </div>
                         <div class="col-lg-9 col-md-6 col-12 ">
                             <div class="card alert-alpri6">
-                                <div class="Ideal-solid">
-                                    &nbsp; Total
-                                    <div role="progressbar4" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="--value:100"></div>
+                                <div class="row">
+                                    <div class="col-5 Ideal-solid border"></div>
+                                    <div class="col-3 border">Total</div>
+                                    <div class="col-4">
+                                        <div role="progressbar4" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="--value:100"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
