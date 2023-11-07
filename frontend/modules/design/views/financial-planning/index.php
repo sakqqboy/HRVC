@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Gloden';
+$this->title = 'Financial Planning';
 ?>
 
 <div class="col-12 mt-90 alert background-Planning">

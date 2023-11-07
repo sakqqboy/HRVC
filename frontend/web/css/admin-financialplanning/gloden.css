@@ -288,7 +288,7 @@ div[role="progressbar3"]::before {
     content: counter(percentage) '%';
 }
 
-div[role="progressbar1"] {
+div[role="progressbar4"] {
     width: 30px;
     height: 30px;
     margin-left: 8px;
@@ -307,7 +307,7 @@ div[role="progressbar1"] {
     color: var(--fg);
 }
 
-div[role="progressbar1"]::before {
+div[role="progressbar4"]::before {
     counter-reset: percentage var(--value);
     content: counter(percentage) '%';
 }
@@ -342,10 +342,45 @@ input[type="checkbox"]:checked+label {
     border-bottom: 3px solid #4DACF0;
 }
 
+.bg-lig1 {
+    background-color: white;
+    border-radius: 2px;
+}
+
 .al-pad {
-    height: 500px;
+
+    background-color: #CCEDFF;
 }
 
 .alert-alinfo {
-    background-color: #b0d9f6;
+    background-color: #F5FFFF;
+}
+
+.alert-alpri1 {
+    background-color: #FAF5FF;
+}
+
+.alert-alpri2 {
+    background-color: #F2F2F2;
+}
+
+.alert-alpri3 {
+    background-color: #E5F0FF;
+}
+
+.alert-alpri4 {
+    background-color: #E5FFE5;
+}
+
+.alert-alpri5 {
+    background-color: #F9FCFF;
+    color: #85B6E2;
+}
+
+.alert-alpri6 {
+    background-color: #F0F2F4;
+}
+
+.Ideal-solid {
+    border-left: 1px rgb(178, 178, 178) solid;
 }

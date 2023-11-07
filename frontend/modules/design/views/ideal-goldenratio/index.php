@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Golden';
+$this->title = 'Ideal Golden Ratio';
 ?>
 
 <div class="col-12 mt-90 alert background-Planning">
@@ -105,15 +105,108 @@ $this->title = 'Golden';
                 </div>
                 <div class="col-12">
                     <div class="row mt-20">
-                        <div class="col-lg-3 col-md-6 col-12 alert alert-info al-pad">
+                        <div class="col-lg-3 col-md-6 col-12 card al-pad">
+                            <div class="col-12 text-end">
+                                <span class="badge bg-lig1 text-dark"> Sales</span>
+                            </div>
+                            <div class="col-12 text-center pt-30">
+                                Sales
+                            </div>
                             <div class="col-12 text-center">
-                                <p> Sales</p>
-                                <p class="font-size-18"> <?= number_format(100.0) ?>%</p>
+                                <strong> <?= number_format(100.0) ?>%</strong>
                             </div>
                         </div>
-                        <div class="col-lg-9 col-md-6 col-12 alert alert-alinfo">
-                            <div class="col-12">
-                                Variable Expense <span><?= number_format(25.0) ?>%</span>
+                        <div class="col-lg-9 col-md-6 col-12 ">
+                            <div class="card alert-alinfo">
+                                <div class="col-12 text-end">
+                                    <span class="badge bg-lig1 text-dark"> Variable Expense</span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        Variable Expense
+                                    </div>
+                                    <div class="col-3">
+                                        <strong><?= number_format(25.0) ?>%</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 col-12">
+                                    <div class="card alert-alpri1">
+                                        <div class="col-12 text-end">
+                                            <span class="badge bg-lig1 text-dark"> Gross Profit</span>
+                                        </div>
+                                        <div class="col-12 text-center pt-20">
+                                            Gross Profit
+                                        </div>
+                                        <div class="col-12 text-center">
+                                            <strong> <?= number_format(75.5) ?>%</strong>
+                                        </div>
+                                        <div class="col-12 pt-100"></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-6 col-12 ">
+                                    <div class="card alert-alpri2">
+                                        <div class="col-12 text-end">
+                                            <span class="badge bg-lig1 text-dark"> Labor Cost</span>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-5">
+                                                Labor Cost
+                                            </div>
+                                            <div class="col-3">
+                                                <strong> <?= number_format(35.0) ?>%</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="card alert-alpri3">
+                                                <div class="col-12 text-end">
+                                                    <span class="badge bg-lig1 text-dark"> Fixed Expense (Others)</span>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-5">
+                                                        Fixed Expense (Others)
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <strong> <?= number_format(35.0) ?>%</strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="card alert-alpri4">
+                                                <div class="col-12 text-end">
+                                                    <span class="badge bg-lig1 text-dark"> Operating Profit</span>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-5">
+                                                        Operating Profit
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <strong> <?= number_format(5.0) ?>%</strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 col-12 card alert-alpri5">
+                            <div class="col-12 text-center">
+                                Ideal Golden Ratio
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-6 col-12 ">
+                            <div class="card alert-alpri6">
+                                <div class="Ideal-solid">
+                                    &nbsp; Total
+                                    <div role="progressbar4" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="--value:100"></div>
+                                </div>
                             </div>
                         </div>
                     </div>

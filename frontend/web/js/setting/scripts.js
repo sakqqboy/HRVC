@@ -32,9 +32,7 @@ new Chart(document.getElementById("mixed-chart"), {
     },
     options: {
         title: {
-            display: true,
-            text: ''
-
+            display: true
         },
         legend: { display: false }
     }

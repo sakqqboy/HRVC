@@ -7,7 +7,7 @@ use yii\web\Controller;
 /**
  * Default controller for the `designfront` module
  */
-class GoldenRatioController extends Controller
+class ActualLastyearController extends Controller
 {
     /**
      * Renders the index view for the module
