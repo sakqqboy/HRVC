@@ -1,0 +1,39 @@
+.bg-backgroundforecastaccounts {
+    margin-top: 30px;
+    background-color: #F4F6F9;
+}
+
+.image-pp {
+    width: 100%;
+    padding-top: 20px;
+    margin-left: 10px;
+}
+
+.Product-Appeal {
+    font-size: 8px;
+}
+
+.Sensitivity {
+    font-size: 8px;
+    padding-top: 10px;
+}
+
+.forecast-price {
+    font-size: 11px;
+    padding-top: 20px;
+}
+
+.Rank {
+    font-size: 10px;
+}
+
+.forecast-solid {
+    border-right: 2px lightgray solid;
+}
+
+/* .forecast-solid-display {
+    border-left: 0.5px lightgray solid;
+} */
+.alert-backgroundforecastaccountss {
+    background-color: #e4e8ec61;
+}
