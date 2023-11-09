@@ -126,7 +126,7 @@ $this->title = 'Current Year Target';
                                     <span class="badge bg-lig1 text-dark"> Variable Expense</span>
                                 </div>
                                 <div class="col-12 text-center">
-                                    <strong><?= number_format(4793595) ?></strong>
+                                    <strong><?= number_format(793595) ?></strong>
                                 </div>
                                 <div class="col-12 text-center">
                                     Variable Expense
@@ -153,7 +153,7 @@ $this->title = 'Current Year Target';
                                         <div class="col-12 pt-100"></div>
                                     </div>
                                 </div>
-                                <div class="col-lg-8 col-md-6 col-12 ">
+                                <div class="col-lg-8 col-md-6 col-12">
                                     <div class="card alert-alpri2">
                                         <div class="col-12 text-end">
                                             <span class="badge bg-lig1 text-dark"> Labor Cost</span>

@@ -3,11 +3,6 @@
     background-color: #F4F6F9;
 }
 
-.image-pp {
-    width: 100%;
-    padding-top: 20px;
-    margin-left: 10px;
-}
 
 .Product-Appeal {
     font-size: 8px;
@@ -36,4 +31,153 @@
 } */
 .alert-backgroundforecastaccountss {
     background-color: #e4e8ec61;
+}
+
+.frt-cur {
+    font-size: 12px;
+}
+
+.pr-forecast {
+    margin-left: -35px;
+    width: 130px;
+}
+
+.small-Annual {
+    font-size: 12px;
+}
+
+.small-Annual:hover {
+    color: rgb(40, 133, 213);
+    background-color: white;
+    border-radius: 3px;
+    border-bottom: 2px solid #4DACF0;
+}
+
+.Future-solid {
+    border-left: 2px lightgray solid;
+    padding-left: -10px;
+}
+
+.Business-color {
+    color: gray;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.Body-Sales {
+    background-color: #FFF2DB;
+    border: none;
+}
+
+.Sales-sp {
+    border-radius: 4px;
+    color: black;
+    font-weight: 400;
+}
+
+.Body-ExPense {
+    background-color: #F5FFFF;
+    border: none;
+}
+
+.body-purple {
+    background-color: #FAF5FF;
+    border: none;
+}
+
+.Gross-square {
+    background-color: rgb(255, 213, 0);
+    color: black;
+    border-radius: 4px;
+    font-size: 11px;
+}
+
+.square-blue {
+    background-color: rgb(68 19 188);
+    color: white;
+    border-radius: 4px;
+    font-size: 11px;
+}
+
+.square-blue1 {
+    background-color: rgb(68 19 188);
+    color: white;
+    border-radius: 4px;
+    margin-top: 30px;
+    margin-left: 10px;
+}
+
+.square-red {
+    background-color: rgb(255 38 38);
+    color: white;
+    border-radius: 4px;
+    font-size: 11px;
+}
+
+.square-red1 {
+    background-color: rgb(255 38 38);
+    color: white;
+    border-radius: 4px;
+    margin-top: 30px;
+    margin-left: 10px;
+}
+
+.square-green {
+    background-color: rgb(20 141 135);
+    color: white;
+    border-radius: 4px;
+    font-size: 11px;
+}
+
+.square-green1 {
+    background-color: rgb(20 141 135);
+    color: white;
+    border-radius: 4px;
+    margin-top: 30px;
+    margin-left: 10px;
+}
+
+.square-grey {
+    background-color: rgb(164 166 166);
+    color: white;
+    border-radius: 4px;
+    margin-top: 30px;
+    margin-left: 10px;
+}
+
+.body-lightgrey {
+    background-color: #eeeeee;
+    border: none;
+}
+
+.Fixedother-solid {
+    border-left: 2px lightgrey solid;
+    font-size: 10px
+}
+
+.ss-solid {
+    border-right: 2px lightgray solid;
+    font-size: 13px;
+}
+
+.Super-solid {
+    border-right: 2px lightgray solid;
+    font-size: 13px;
+}
+
+.excellent {
+    font-size: 15px;
+    line-height: 20px;
+}
+
+.cardexcellent:hover {
+    background-color: rgb(247, 236, 125);
+    font-weight: 600;
+    font-size: 16px;
+    cursor: default;
+}
+
+.users-solid1 {
+    border-bottom: 1px rgb(184, 184, 184) solid;
+    text-align: center;
 }
