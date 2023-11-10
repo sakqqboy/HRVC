@@ -34,6 +34,13 @@
     font-size: 12px;
 }
 
+.example-tok1 {
+    border-radius: 20px;
+    background-color: #f2f2f2;
+    font-size: 15px;
+    font-weight: 500;
+}
+
 .content-Fitter {
     font-size: 9px;
     margin-left: -9px;
@@ -281,7 +288,7 @@ div[role="progressbar3"]::before {
     content: counter(percentage) '%';
 }
 
-div[role="progressbar1"] {
+div[role="progressbar4"] {
     width: 30px;
     height: 30px;
     margin-left: 8px;
@@ -300,7 +307,7 @@ div[role="progressbar1"] {
     color: var(--fg);
 }
 
-div[role="progressbar1"]::before {
+div[role="progressbar4"]::before {
     counter-reset: percentage var(--value);
     content: counter(percentage) '%';
 }
@@ -317,4 +324,158 @@ div[role="progressbar1"]::before {
 
 input[type="checkbox"]:checked+label {
     font-weight: bold;
+}
+
+.link-Ideal {
+    text-decoration: none;
+    color: #6A7383;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.link-Ideal:hover {
+    color: rgb(40, 133, 213);
+    background-color: white;
+    padding-left: 7px;
+    padding-right: 7px;
+    border-radius: 3px;
+    border-bottom: 3px solid #4DACF0;
+}
+
+.bg-lig1 {
+    background-color: white;
+    border-radius: 3px;
+}
+
+.al-pad {
+    background-color: #CCEDFF;
+}
+
+.alert-alinfo {
+    background-color: #F5FFFF;
+}
+
+.alert-alpri1 {
+    background-color: #FAF5FF;
+}
+
+.alert-alpri2 {
+    background-color: #F2F2F2;
+}
+
+.alert-alpri3 {
+    background-color: #E5F0FF;
+}
+
+.alert-alpri4 {
+    background-color: #E5FFE5;
+}
+
+.alert-alpri5 {
+    background-color: #F9FCFF;
+    color: #85B6E2;
+}
+
+.alert-alpri6 {
+    background-color: #F0F2F4;
+}
+
+.Ideal-solid {
+    border-right: rgb(207, 207, 207) 1px solid;
+}
+
+.allshadow-sales {
+    margin-left: 100px;
+    margin-top: 20px;
+    z-index: 3;
+}
+
+.al-pad-copy {
+    background-color: #9ee1fe;
+}
+
+.allshadow-variableExpense {
+    margin-left: -50px;
+}
+
+.alert-alinfo-copy {
+    background-color: #cff4f4;
+    margin-top: -30px;
+}
+
+.bg-lig1-copy {
+    background-color: #78eeee;
+    border-radius: 3px;
+}
+
+.allshadow-GrossProfit {
+    margin-left: -50px;
+}
+
+.alert-alpri1-copy {
+    background-color: #f1e4fe;
+    z-index: 3;
+}
+
+.bg-lig1-Gross {
+    background-color: #e4c6ff;
+    border-radius: 3px;
+}
+
+.allshadow-Operating-Profit {
+    margin-left: -80px;
+}
+
+.alert-alpri4-copy {
+    background-color: #c2ffc2;
+}
+
+.bg-lig1-Operating {
+    background-color: #8af58a;
+    border-radius: 3px;
+}
+
+.allshadow-LaborCost {
+    margin-left: -50px;
+}
+
+.alert-alpri2-copy {
+    background-color: #d9d9d9;
+}
+
+.bg-lig1-LaborCost {
+    background-color: #b6b6b6;
+    border-radius: 3px;
+}
+
+.allshadow-FixedExpense {
+    margin-left: -50px;
+}
+
+.alert-alpri3-copy {
+    background-color: #c6d9f3;
+}
+
+.bg-lig1-FixedExpense {
+    background-color: #8ebeff;
+    border-radius: 3px;
+}
+
+.bg-lig1-sales {
+    background-color: #4ac5f3;
+    border-radius: 3px;
+}
+
+.circledollar {
+    border: 2px solid;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    color: #2377C6;
+    margin-top: -3px;
+
+}
+
+.Curr {
+    padding-left: 15px;
 }

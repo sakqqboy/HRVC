@@ -69,7 +69,10 @@ class AppAsset extends AssetBundle
         'css/admin-financialplanning/gloden.css',
         'css/admin-financialplanning/edit.css',
         'css/admin-financialplanning/performance.css',
+        'css/admin-financialplanning/IPL_analysis.css',
+        'css/admin-financialplanning/forecast_accounts.css',
         'css/home/multi_select.css',
+
 
     ];
     public $js = [
@@ -89,6 +92,8 @@ class AppAsset extends AssetBundle
         'js/kgi/kgi_update.js',
         'js/kpi/kpi_update.js',
         'js/filter/kpi.js',
+        'js/setting/scripts.js',
+
 
 
     ];

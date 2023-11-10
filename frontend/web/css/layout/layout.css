@@ -3246,9 +3246,34 @@
     color: black;
 }
 
+.no-underline-primary {
+    text-decoration: none;
+    color: #2580D3;
+}
+
 .close-box {
     cursor: pointer;
 }
 .word-fit {
     word-wrap: break-word;
+<<<<<<< HEAD
+    ;
+}
+
+ิ.boder-top {
+    border-top: lightgray solid thin;
+}
+
+ิ.boder-bottom {
+    border-bottom: lightgray solid thin;
+}
+
+ิ.boder-left {
+    border-left: lightgray solid thin;
+}
+
+ิ.boder-right {
+    border-right: lightgray solid thin;
+=======
+>>>>>>> 0fa3a303f60dc540dd67f36ad28577e81958b2f5
 }
