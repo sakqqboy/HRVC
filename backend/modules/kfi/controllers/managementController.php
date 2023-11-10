@@ -9,6 +9,7 @@ use backend\models\hrvc\Employee;
 use backend\models\hrvc\Kfi;
 use backend\models\hrvc\KfiBranch;
 use backend\models\hrvc\KfiDepartment;
+use backend\models\hrvc\KfiEmployee;
 use backend\models\hrvc\KfiHistory;
 use backend\models\hrvc\KfiSolution;
 use backend\models\hrvc\Unit;
@@ -38,8 +39,10 @@ class ManagementController extends Controller
 				$data[$kfi["kfiId"]] = [
 					"kfiName" => $kfi["kfiName"],
 					"companyName" => Company::companyName($kfi['companyId']),
+					"companyId" => $kfi['companyId'],
 					"branchName" => Branch::kfiBranchName($kfi["kfiId"]),
 					"kfiBranch" => KfiBranch::kfiBranch($kfi["kfiId"]),
+					"kfiEmployee" => KfiEmployee::kfiEmployee($kfi["kfiId"]),
 					"quantRatio" => "",
 					"creater" => User::employeeNameByuserId($kfi["createrId"]),
 					"target" => $kfi['targetAmount'],
@@ -74,7 +77,9 @@ class ManagementController extends Controller
 					$data[$kfi["kfiId"]] = [
 						"kfiName" => $kfi["kfiName"],
 						"companyName" => Company::companyName($kfi['companyId']),
+						"companyId" => $kfi['companyId'],
 						"branchName" => Branch::kfiBranchName($kfi["kfiId"]),
+						"kfiEmployee" => KfiEmployee::kfiEmployee($kfi["kfiId"]),
 						"kfiBranch" => KfiBranch::kfiBranch($kfi["kfiId"]),
 						"target" => $kfi['targetAmount'],
 						"unit" => Unit::unitName($kfi['unitId']),
