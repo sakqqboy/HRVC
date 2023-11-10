@@ -408,3 +408,17 @@ function showAllTitle(departmentId) {
 function closeAllTitle(departmentId) { 
     $("#all-title-"+departmentId).css("display","none");
 }
+function kfiCompanyBranch(companyId,kfiId) { 
+    var url = $url + 'kfi/management/kfi-branch';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { companyId: companyId,kfiId:kfiId},
+        success: function (data) {
+            $("#kfi-branch").html(data.textBranch);
+            $("#kfiName").html(data.kfiName);
+            $("#companyName").html(data.companyName);
+        }
+    });
+}

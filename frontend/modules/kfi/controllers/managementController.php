@@ -13,6 +13,7 @@ use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Kfi;
 use frontend\models\hrvc\KfiBranch;
 use frontend\models\hrvc\KfiDepartment;
+use frontend\models\hrvc\KfiEmployee;
 use frontend\models\hrvc\KfiHistory;
 use frontend\models\hrvc\KfiIssue;
 use frontend\models\hrvc\KfiSolution;
@@ -718,6 +719,31 @@ class ManagementController extends Controller
 
 		]);
 	}
+	public function actionKfiBranch()
+	{
+		$companyId = $_POST["companyId"];
+		$kfiId = $_POST["kfiId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
+		$branches = curl_exec($api);
+		$branches = json_decode($branches, true);
+		$textBranch = "";
+		$textBranch .= $this->renderAjax('company_branch', ["branches" => $branches, "kfiId" => $kfiId]);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId);
+		$kfi = curl_exec($api);
+		$kfi = json_decode($kfi, true);
+		$res["kfiName"] = $kfi["kfiName"];
+		$res["companyName"] = $kfi["companyName"];
+		$res["textBranch"] = $textBranch;
+		if ($textBranch != "") {
+			$res["status"] = true;
+		} else {
+			$res["status"] = false;
+		}
+		return json_encode($res);
+	}
 	public function setDefault()
 	{
 		$deletedCompany = Company::find()->where(["status" => 99])->asArray()->all();
@@ -737,5 +763,36 @@ class ManagementController extends Controller
 		KfiHistory::updateAll(["createrId" => 7]);
 		KgiHistory::updateAll(["createrId" => 7]);
 		KpiHistory::updateAll(["createrId" => 7]);
+	}
+	public function actionKfiEmployee()
+	{
+		$kfi = Kfi::find()->where(["status" => [1, 2]])->asArray()->all();
+		if (isset($kfi) && count($kfi) > 0) {
+			foreach ($kfi as $k) :
+				$kfiDeartment = KfiDepartment::find()
+					->where(["kfiId" => $k["kfiId"], "status" => 1])
+					->asArray()
+					->all();
+				if (isset($kfiDeartment) && count($kfiDeartment) > 0) {
+					foreach ($kfiDeartment as $kd) :
+						$employee = Employee::find()
+							->where(["departmentId" => $kd["departmentId"], "status" => 1])
+							->asArray()
+							->all();
+						if (isset($employee) && count($employee) > 0) {
+							foreach ($employee as $em) :
+								$kfiEmployee = new KfiEmployee();
+								$kfiEmployee->employeeId = $em["employeeId"];
+								$kfiEmployee->kfiId = $k["kfiId"];
+								$kfiEmployee->status = 1;
+								$kfiEmployee->createDateTime = new Expression('NOW()');
+								$kfiEmployee->updateDateTime = new Expression('NOW()');
+								$kfiEmployee->save(false);
+							endforeach;
+						}
+					endforeach;
+				}
+			endforeach;
+		}
 	}
 }
