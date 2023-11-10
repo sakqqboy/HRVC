@@ -70,6 +70,7 @@ return [
                 'setting/department/search-result/<hash>' => 'setting/department/search-result',
                 'setting/employee/employee-profile/<hash>' => 'setting/employee/employee-profile',
                 'setting/employee/update/<hash>' => 'setting/employee/update',
+                'setting/employee/export-employee/<hash>' => 'setting/employee/export-employee',
                 'setting/employee/index/<hash>' => 'setting/employee/index',
                 'setting/team/create/<hash>' => 'setting/team/create',
                 'setting/team/team-result/<hash>' => 'setting/team/team-result',

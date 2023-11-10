@@ -24,7 +24,7 @@ $this->title = 'Title';
 			<div class="col-lg-2 col-3 link-item">
 				<a href="<?= Yii::$app->homeUrl ?>setting/layer/index" class="no-underline-black ">
 					<i class="fa fa-bars mr-2" aria-hidden="true"></i>
-					Hierarchy Layer
+					Management Layer
 				</a>
 			</div>
 			<div class="col-lg-2 col-3 link-item-active">
@@ -37,8 +37,11 @@ $this->title = 'Title';
 		<div class="col-3 pl-20">
 			<b class="mr-10">Title</b>
 			<span class="font-size-12">
-				<a href="<?= Yii::$app->homeUrl ?>setting/title/create/" class="btn btn-primary btn-sm">
+				<a href="<?= Yii::$app->homeUrl ?>setting/title/create/" class="btn btn-primary btn-sm mr-5">
 					<i class="fa fa-magic" aria-hidden="true"></i> Register
+				</a>
+				<a href="<?= Yii::$app->homeUrl ?>setting/title/import" class="btn btn-secondary btn-sm">
+					<i class="fa fa-upload mr-5" aria-hidden="true"></i> Import
 				</a>
 			</span>
 		</div>

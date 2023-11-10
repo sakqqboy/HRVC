@@ -61,12 +61,12 @@ $this->title = 'New Company';
 						<input type="text" class="form-control" id="colFormLabel" name="companyName" required>
 					</div>
 					<div class="mt-20"></div>
-					<div class="col-5">
+					<!-- <div class="col-5">
 						Tag line
 					</div>
 					<div class="col-7">
 						<input type="text" class="form-control" id="colFormLabel" name="tagLine">
-					</div>
+					</div> -->
 					<div class="mt-20"></div>
 					<?php
 					if (isset($headQuater) && !empty($headQuater)) { ?>

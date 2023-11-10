@@ -16,6 +16,7 @@ use backend\models\hrvc\KpiHistory;
 use backend\models\hrvc\KpiSolution;
 use common\helpers\Path;
 use backend\models\hrvc\Employee;
+use backend\models\hrvc\User;
 use yii\web\Controller;
 
 /**
@@ -30,17 +31,22 @@ class ManagementController extends Controller
 {
 	public function actionIndex()
 	{
-		$kpis = Kpi::find()->where(["status" => [1, 4]])->asArray()->all();
+		$kpis = Kpi::find()->where(["status" => [1, 2]])->asArray()->all();
 		$data = [];
 		if (count($kpis) > 0) {
 			foreach ($kpis as $kpi) :
 				$ratio = 0;
 				if ($kpi["targetAmount"] != '' && $kpi["targetAmount"] != 0 && $kpi["targetAmount"] != null) {
-					$ratio = ($kpi["result"] / $kpi["targetAmount"]) * 100;
+					if ($kpi["code"] == '<' || $kpi["code"] == '=') {
+						$ratio = ($kpi["result"] / $kpi["targetAmount"]) * 100;
+					} else {
+						$ratio = ($kpi["targetAmount"] / $kpi["result"]) * 100;
+					}
 				}
 				$data[$kpi["kpiId"]] = [
 					"kpiName" => $kpi["kpiName"],
 					"companyName" => Company::companyName($kpi["companyId"]),
+					"creater" => User::employeeNameByuserId($kpi["createrId"]),
 					"branch" => KpiBranch::kpiBranch($kpi["kpiId"]),
 					"quantRatio" => $kpi["quantRatio"],
 					"targetAmount" => number_format($kpi["targetAmount"], 2),
@@ -59,65 +65,71 @@ class ManagementController extends Controller
 					"countryName" => Country::countryNameBycompany($kpi['companyId']),
 					"issue" => KpiIssue::lastestIssue($kpi["kpiId"])["issue"],
 					"solution" => KpiIssue::lastestIssue($kpi["kpiId"])["solution"],
-					"employee" => KpiTeam::employeeTeam($kpi['kpiId'])
+					"employee" => KpiTeam::employeeTeam($kpi['kpiId']),
+					"fromDate" => ModelMaster::engDate($kpi["fromDate"], 2),
+					"toDate" => ModelMaster::engDate($kpi["toDate"], 2)
 				];
 			endforeach;
 		}
 		return json_encode($data);
 	}
-	public function actionPrepareUpdate()
-	{
-		$kpiId = $_POST["kpiId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId);
-		$kpi = curl_exec($api);
-		$kpi = json_decode($kpi, true);
+	// public function actionPrepareUpdate()
+	// {
+	// 	$kpiId = $_POST["kpiId"];
+	// 	$api = curl_init();
+	// 	curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+	// 	curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId);
+	// 	$kpi = curl_exec($api);
+	// 	$kpi = json_decode($kpi, true);
 
-		$companyId = $kpi["companyId"];
-		$kpiBranchText = '';
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
-		$kpiBranch = curl_exec($api);
-		$kpiBranch = json_decode($kpiBranch, true);
-		$kpiBranchText = $this->renderAjax('multi_branch_update', [
-			"branches" => $kpiBranch,
-			"kpiId" => $kpiId
-		]);
-		$branch["textBranch"] = $kpiBranchText;
+	// 	$companyId = $kpi["companyId"];
+	// 	$kpiBranchText = '';
+	// 	curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
+	// 	$kpiBranch = curl_exec($api);
+	// 	$kpiBranch = json_decode($kpiBranch, true);
+	// 	$kpiBranchText = $this->renderAjax('multi_branch_update', [
+	// 		"branches" => $kpiBranch,
+	// 		"kpiId" => $kpiId
+	// 	]);
+	// 	$branch["textBranch"] = $kpiBranchText;
 
-		$kpiDepartmentText = '';
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-department?id=' . $kpiId);
-		$kpiDepartment = curl_exec($api);
-		$kpiDepartment = json_decode($kpiDepartment, true);
-		$kpiDepartmentText = $this->renderAjax('multi_department_update', [
-			"d" => $kpiDepartment,
-			"kpiId" => $kpiId
-		]);
-		$department["textDepartment"] = $kpiDepartmentText;
-
-
-		$kpiTeamText = '';
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-team?id=' . $kpiId);
-		$kpiTeam = curl_exec($api);
-		$kpiTeam = json_decode($kpiTeam, true);
-		$kpiTeamText = $this->renderAjax('multi_team_update', [
-			"t" => $kpiTeam,
-			"kpiId" => $kpiId
-		]);
-		$team["textTeam"] = $kpiTeamText;
+	// 	$kpiDepartmentText = '';
+	// 	curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-department?id=' . $kpiId);
+	// 	$kpiDepartment = curl_exec($api);
+	// 	$kpiDepartment = json_decode($kpiDepartment, true);
+	// 	$kpiDepartmentText = $this->renderAjax('multi_department_update', [
+	// 		"d" => $kpiDepartment,
+	// 		"kpiId" => $kpiId
+	// 	]);
+	// 	$department["textDepartment"] = $kpiDepartmentText;
 
 
-		$data = array_merge($kpi, $branch, $department, $team);
-		curl_close($api);
-		return json_encode($data);
-	}
+	// 	$kpiTeamText = '';
+	// 	curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-team?id=' . $kpiId);
+	// 	$kpiTeam = curl_exec($api);
+	// 	$kpiTeam = json_decode($kpiTeam, true);
+	// 	$kpiTeamText = $this->renderAjax('multi_team_update', [
+	// 		"t" => $kpiTeam,
+	// 		"kpiId" => $kpiId
+	// 	]);
+	// 	$team["textTeam"] = $kpiTeamText;
+
+
+	// 	$data = array_merge($kpi, $branch, $department, $team);
+	// 	curl_close($api);
+	// 	return json_encode($data);
+	// }
 	public function actionKpiDetail($id)
 	{
-		$kpiHistory = KpiHistory::find()->where(["status" => [1, 4], "kpiId" => $id])->orderBy('kpiHistoryId DESC')->asArray()->one();
+		$kpiHistory = KpiHistory::find()->where(["status" => [1, 2], "kpiId" => $id])->orderBy('kpiHistoryId DESC')->asArray()->one();
 		if (isset($kpiHistory) && !empty($kpiHistory)) { //wait edit
 			$kpi = Kpi::find()->where(["kpiId" => $id])->asArray()->one();
 			if ($kpi["targetAmount"] != '' && $kpi["targetAmount"] != 0) {
-				$ratio = ($kpi["result"] / $kpi["targetAmount"]) * 100;
+				if ($kpi["code"] == '<' || $kpi["code"] == '=') {
+					$ratio = ($kpi["result"] / $kpi["targetAmount"]) * 100;
+				} else {
+					$ratio = ($kpi["targetAmount"] / $kpi["result"]) * 100;
+				}
 			} else {
 				$ratio = 0;
 			}
@@ -127,6 +139,7 @@ class ManagementController extends Controller
 				"detail" => $kpiHistory['description'],
 				"quantRatio" => $kpiHistory["quantRatio"],
 				"targetAmount" => $kpiHistory["targetAmount"],
+				"creater" => User::employeeNameByuserId($kpiHistory["createrId"]),
 				"amountType" => $kpiHistory["amountType"],
 				"code" => $kpiHistory["code"],
 				"result" => $kpiHistory["result"],
@@ -149,17 +162,24 @@ class ManagementController extends Controller
 				"resultText" =>  number_format($kpiHistory["result"], 2),
 				"ratio" => number_format($ratio, 2),
 				"unitText" => Unit::unitName($kpiHistory["unitId"]),
+				"fromDate" => $kpiHistory["fromDate"],
+				"toDate" => $kpiHistory["toDate"],
 			];
 		} else {
 			$kpi = Kpi::find()->where(["kpiId" => $id])->asArray()->one();
 			if (isset($kpi) && $kpi["targetAmount"] != '' && $kpi["targetAmount"] != 0 && $kpi["targetAmount"] != null) {
-				$ratio = ($kpi["result"] / $kpi["targetAmount"]) * 100;
+				if ($kpi["code"] == '<' || $kpi["code"] == '=') {
+					$ratio = ($kpi["result"] / $kpi["targetAmount"]) * 100;
+				} else {
+					$ratio = ($kpi["targetAmount"] / $kpi["result"]) * 100;
+				}
 			} else {
 				$ratio = 0;
 			}
 			$data = [
 				"kpiName" => $kpi["kpiName"],
 				"companyId" => $kpi["companyId"],
+				"creater" => User::employeeNameByuserId($kpi["createrId"]),
 				"detail" => $kpi['kpiDetail'],
 				"quantRatio" => $kpi["quantRatio"],
 				"targetAmount" => $kpi["targetAmount"],
@@ -185,6 +205,8 @@ class ManagementController extends Controller
 				"resultText" =>  number_format($kpi["result"], 2),
 				"ratio" => number_format($ratio, 2),
 				"unitText" => Unit::unitName($kpi["unitId"]),
+				"fromDate" => $kpi["fromDate"],
+				"toDate" => $kpi["toDate"],
 			];
 		}
 
@@ -251,17 +273,26 @@ class ManagementController extends Controller
 		$data = [];
 		if (isset($kpiTeams) && count($kpiTeams) > 0) {
 			foreach ($kpiTeams as $team) :
-				$employee = Employee::find()->select('employeeFirstname,employeeSurename,employeeNumber,employeeId,picture')
+				$employee = Employee::find()->select('employeeFirstname,employeeSurename,employeeNumber,employeeId,picture,gender')
 					->where(["teamId" => $team["teamId"], "status" => 1])
 					->asArray()
 					->orderBy('employeeNumber')
 					->all();
 				if (isset($employee) && count($employee) > 0) {
 					foreach ($employee as $em) :
+						if ($em['picture'] == "") {
+							if ($em['gender'] == 1) {
+								$picture = 'image/user.png';
+							} else {
+								$picture = 'image/lady.jpg';
+							}
+						} else {
+							$picture = $em['picture'];
+						}
 						$data[$em["employeeId"]] = [
 							"firstname" => $em["employeeFirstname"],
 							"surename" => $em["employeeSurename"],
-							"image" => $em["picture"],
+							"image" => $picture,
 						];
 					endforeach;
 				}
@@ -274,7 +305,7 @@ class ManagementController extends Controller
 	public function actionKpiHistory($kpiId)
 	{
 		$kpiHistory = KpiHistory::find()
-			->where(["kpiId" => $kpiId, "status" => [1, 4]])
+			->where(["kpiId" => $kpiId, "status" => [1, 2]])
 			->orderBy('kpiHistoryId DESC')
 			->asArray()
 			->all();
@@ -288,7 +319,8 @@ class ManagementController extends Controller
 					"result" => $history["result"],
 					"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
 					"time" => ModelMaster::timeText($time[1]),
-					"status" => $history["status"]
+					"status" => $history["status"],
+					"creater" => User::employeeNameByuserId($history["createrId"]),
 				];
 			endforeach;
 		}
@@ -297,7 +329,7 @@ class ManagementController extends Controller
 	public function actionKpiIssue($kpiId)
 	{
 		$kpiIssue = KpiIssue::find()
-			->where(["status" => [1, 4], "kpiId" => $kpiId])
+			->where(["status" => [1, 2], "kpiId" => $kpiId])
 			->orderBy("kpiIssueId")
 			->asArray()
 			->all();
@@ -325,7 +357,7 @@ class ManagementController extends Controller
 			->select('kpi.*')
 			->JOIN("LEFT JOIN", "kpi_branch kb", "kb.kpiId=kpi.kpiId")
 			->JOIN("LEFT JOIN", "kpi_team kt", "kt.kpiId=kpi.kpiId")
-			->where(["kpi.status" => [1, 4]])
+			->where(["kpi.status" => [1, 2]])
 			->andFilterWhere([
 				"kpi.companyId" => $companyId,
 				"kb.branchId" => $branchId,
@@ -341,7 +373,11 @@ class ManagementController extends Controller
 			foreach ($kpis as $kpi) :
 				$ratio = 0;
 				if ($kpi["targetAmount"] != '' && $kpi["targetAmount"] != 0 && $kpi["targetAmount"] != null) {
-					$ratio = ($kpi["result"] / $kpi["targetAmount"]) * 100;
+					if ($kpi["code"] == '<' || $kpi["code"] == '=') {
+						$ratio = ($kpi["result"] / $kpi["targetAmount"]) * 100;
+					} else {
+						$ratio = ($kpi["targetAmount"] / $kpi["result"]) * 100;
+					}
 				}
 				$data[$kpi["kpiId"]] = [
 					"kpiName" => $kpi["kpiName"],
@@ -365,6 +401,8 @@ class ManagementController extends Controller
 					"issue" => KpiIssue::lastestIssue($kpi["kpiId"])["issue"],
 					"solution" => KpiIssue::lastestIssue($kpi["kpiId"])["solution"],
 					"employee" => KpiTeam::employeeTeam($kpi['kpiId']),
+					"fromDate" => ModelMaster::engDate($kpi["fromDate"], 2),
+					"toDate" => ModelMaster::engDate($kpi["toDate"], 2),
 					"year" => $kpi["year"],
 				];
 			endforeach;

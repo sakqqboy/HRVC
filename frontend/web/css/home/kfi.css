@@ -91,7 +91,9 @@
 }
 
 .presentation-end {
-    margin-left: 190px;
+    /* margin-left: 190px; */
+    position: absolute;
+    right: 0;
 }
 
 .over-blue {

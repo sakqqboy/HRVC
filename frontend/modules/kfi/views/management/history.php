@@ -24,7 +24,7 @@ if (isset($history) && count($history)) {
 				</div>
 				<div class="col-lg-3 col-md-6 col-12">
 					<div class="col-12 text-secondary font-size-12">
-						<i class="fa fa-bullseye" aria-hidden="true"></i> <?= $his["remark"] ?>
+						<i class="fa fa-user" aria-hidden="true"></i> <?= $his["creater"] ?>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 col-12">

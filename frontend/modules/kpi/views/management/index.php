@@ -81,7 +81,7 @@ $this->title = 'KPI';
 					foreach ($kpis as $kpiId => $kpi) :
 				?>
 						<tr class="border-bottom-white2" id="kpi-<?= $kpiId ?>">
-							<td class="over-blue"><?= $kpi['kpiName'] ?></td>
+							<td class="<?= $kpi["status"] == 1 ? 'over-blue' : 'over-yellow' ?>"><?= $kpi['kpiName'] ?></td>
 							<td><?= $kpi['companyName'] ?></td>
 							<td><img src="<?= Yii::$app->homeUrl ?><?= $kpi['flag'] ?>" class="Flag-Turkey"> <?= $kpi['branch'] ?>, <?= $kpi['countryName'] ?></td>
 							<td></td>
@@ -123,7 +123,7 @@ $this->title = 'KPI';
 							<td><?= $kpi["month"] ?></td>
 							<td><?= $kpi["unit"] ?></td>
 							<td><?= $kpi["periodCheck"] ?></td>
-							<td><?= $kpi["nextCheck"] ?></td>
+							<td><?= $kpi["status"] == 1 ? $kpi["nextCheck"] : '' ?></td>
 							<td colspan="row">
 								<span data-bs-toggle="modal" data-bs-target="#kpi-issue" onclick="javascript:showKpiComment(<?= $kpiId ?>)">
 									<img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown">
@@ -136,6 +136,11 @@ $this->title = 'KPI';
 									</li>
 									<li data-bs-toggle="modal" data-bs-target="#kpi-view" onclick="javascript:kpiHistory(<?= $kpiId ?>)">
 										<a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
+									</li>
+									<li onclick="javascript:copyKpi(<?= $kpiId ?>)" title="Copy">
+										<a class="dropdown-item" href="#">
+											<i class="fa fa-copy" aria-hidden="true"></i>
+										</a>
 									</li>
 									<li data-bs-toggle="modal" data-bs-target="#delete-kpi" onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)">
 										<a class="dropdown-item"><i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
@@ -192,7 +197,8 @@ $form = ActiveForm::begin([
 <?= $this->render('modal_update', [
 	"units" => $units,
 	"companies" => $companies,
-	"months" => $months
+	"months" => $months,
+	"isManager" => $isManager
 ]) ?>
 <?php ActiveForm::end(); ?>
 <?= $this->render('modal_delete') ?>

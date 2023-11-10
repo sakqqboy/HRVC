@@ -44,7 +44,7 @@ return 'kpi';
 public function rules()
 {
 return [
-            [['kpiName', 'companyId', 'unitId', 'periodDate', 'targetAmount', 'month', 'quantRatio', 'priority', 'amountType', 'code', 'result', 'createrId'], 'required'],
+            [['kpiName', 'companyId', 'unitId', 'targetAmount', 'month', 'quantRatio', 'priority', 'amountType', 'code', 'result', 'createrId'], 'required'],
             [['companyId', 'unitId', 'createrId'], 'integer'],
             [['periodDate', 'fromDate', 'toDate', 'createDateTime', 'updateDateTime'], 'safe'],
             [['targetAmount', 'result'], 'number'],

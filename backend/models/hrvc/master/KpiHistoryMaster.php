@@ -12,6 +12,8 @@ use Yii;
     * @property string $kpiHistoryName
     * @property integer $unitId
     * @property string $periodDate
+    * @property string $fromDate
+    * @property string $toDate
     * @property string $nextCheckDate
     * @property string $targetAmount
     * @property string $month
@@ -44,9 +46,9 @@ return 'kpi_history';
 public function rules()
 {
 return [
-            [['kpiId', 'kpiHistoryName', 'unitId', 'periodDate', 'nextCheckDate', 'targetAmount', 'month', 'titleProcess', 'quantRatio', 'priority', 'amountType', 'code', 'result', 'createrId'], 'required'],
+            [['kpiId', 'kpiHistoryName', 'unitId', 'nextCheckDate', 'targetAmount', 'month', 'titleProcess', 'quantRatio', 'priority', 'amountType', 'code', 'result', 'createrId'], 'required'],
             [['kpiId', 'unitId', 'createrId'], 'integer'],
-            [['periodDate', 'nextCheckDate', 'createDateTime', 'updateDateTime'], 'safe'],
+            [['periodDate', 'fromDate', 'toDate', 'nextCheckDate', 'createDateTime', 'updateDateTime'], 'safe'],
             [['targetAmount', 'result'], 'number'],
             [['description', 'remark'], 'string'],
             [['kpiHistoryName', 'titleProcess'], 'string', 'max' => 255],
@@ -66,6 +68,8 @@ return [
     'kpiHistoryName' => 'Kpi History Name',
     'unitId' => 'Unit ID',
     'periodDate' => 'Period Date',
+    'fromDate' => 'From Date',
+    'toDate' => 'To Date',
     'nextCheckDate' => 'Next Check Date',
     'targetAmount' => 'Target Amount',
     'month' => 'Month',

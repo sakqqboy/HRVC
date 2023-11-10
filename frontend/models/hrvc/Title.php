@@ -47,4 +47,16 @@ class Title extends \frontend\models\hrvc\master\TitleMaster
         $title = Title::find()->where(["titleId" => $titleId])->asArray()->one();
         return $title["shortTag"];
     }
+    public static function titleId($departmentId, $titleName)
+    {
+        $title = Title::find()
+            ->where(["departmentId" => $departmentId, "titleName" => $titleName, "status" => 1])
+            ->asArray()
+            ->one();
+        if (isset($title) && !empty($title)) {
+            return $title["titleId"];
+        } else {
+            return '';
+        }
+    }
 }

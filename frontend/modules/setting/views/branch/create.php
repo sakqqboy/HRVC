@@ -136,7 +136,16 @@ $this->title = 'Branch';
 									<div class="card-body">
 										<div class="row">
 											<div class="col-3">
-												<img src="<?= Yii::$app->homeUrl ?><?= $branch["picture"] ?>" class="card-tcf">
+												<?php
+												if ($branch["picture"] != '') {
+												?>
+													<img src="<?= Yii::$app->homeUrl ?><?= $branch["picture"] ?>" class="card-tcf">
+												<?php
+												} else { ?>
+													<img src="<?= Yii::$app->homeUrl . 'image/userProfile.png' ?>" class="card-tcf">
+												<?php
+												}
+												?>
 											</div>
 											<div class="col-9">
 												<div class="row">

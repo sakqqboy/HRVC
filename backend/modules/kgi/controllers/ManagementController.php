@@ -14,6 +14,7 @@ use backend\models\hrvc\KgiIssue;
 use backend\models\hrvc\KgiSolution;
 use backend\models\hrvc\KgiTeam;
 use backend\models\hrvc\Unit;
+use backend\models\hrvc\User;
 use common\models\ModelMaster;
 use Exception;
 use yii\web\Controller;
@@ -30,7 +31,7 @@ class ManagementController extends Controller
 {
 	public function actionIndex()
 	{
-		$kgis = Kgi::find()->where(["status" => [1, 4]])->asArray()->all();
+		$kgis = Kgi::find()->where(["status" => [1, 2]])->asArray()->all();
 		$data = [];
 		if (count($kgis) > 0) {
 			foreach ($kgis as $kgi) :
@@ -43,6 +44,7 @@ class ManagementController extends Controller
 					"companyName" => Company::companyName($kgi["companyId"]),
 					"branch" => KgiBranch::kgiBranch($kgi["kgiId"]),
 					"quantRatio" => $kgi["quantRatio"],
+					"creater" => User::employeeNameByuserId($kgi["createrId"]),
 					"targetAmount" => number_format($kgi["targetAmount"], 2),
 					"code" => $kgi["code"],
 					"result" => number_format($kgi["result"], 2),
@@ -54,12 +56,13 @@ class ManagementController extends Controller
 					"nextCheck" => Kgi::nextCheckDate($kgi['kgiId']),
 					"countTeam" => KgiTeam::kgiTeam($kgi["kgiId"]),
 					"flag" => Country::countryFlagBycompany($kgi["companyId"]),
-					"employee" => "",
 					"status" => $kgi["status"],
 					"countryName" => Country::countryNameBycompany($kgi['companyId']),
 					"issue" => KgiIssue::lastestIssue($kgi["kgiId"])["issue"],
 					"solution" => KgiIssue::lastestIssue($kgi["kgiId"])["solution"],
-					"employee" => KgiTeam::employeeTeam($kgi['kgiId'])
+					"employee" => KgiTeam::employeeTeam($kgi['kgiId']),
+					"fromDate" => ModelMaster::engDate($kgi["fromDate"], 2),
+					"toDate" => ModelMaster::engDate($kgi["toDate"], 2)
 				];
 			endforeach;
 		}
@@ -67,11 +70,15 @@ class ManagementController extends Controller
 	}
 	public function actionKgiDetail($id)
 	{
-		$kgiHistory = KgiHistory::find()->where(["status" => [1, 4], "kgiId" => $id])->orderBy('kgiHistoryId DESC')->asArray()->one();
+		$kgiHistory = KgiHistory::find()->where(["status" => [1, 2], "kgiId" => $id])->orderBy('kgiHistoryId DESC')->asArray()->one();
 		if (isset($kgiHistory) && !empty($kgiHistory)) { //wait edit
 			$kgi = Kgi::find()->where(["kgiId" => $id])->asArray()->one();
 			if ($kgi["targetAmount"] != '' && $kgi["targetAmount"] != 0) {
-				$ratio = ($kgi["result"] / $kgi["targetAmount"]) * 100;
+				if ($kgiHistory["code"] == '<' || $kgiHistory["code"] == '=') {
+					$ratio = ($kgi["result"] / $kgi["targetAmount"]) * 100;
+				} else {
+					$ratio = ($kgi["targetAmount"] / $kgi["result"]) * 100;
+				}
 			} else {
 				$ratio = 0;
 			}
@@ -81,6 +88,7 @@ class ManagementController extends Controller
 				"detail" => $kgiHistory['description'],
 				"quantRatio" => $kgiHistory["quantRatio"],
 				"targetAmount" => $kgiHistory["targetAmount"],
+				"creater" => User::employeeNameByuserId($kgiHistory["createrId"]),
 				"amountType" => $kgiHistory["amountType"],
 				"code" => $kgiHistory["code"],
 				"result" => $kgiHistory["result"],
@@ -103,17 +111,24 @@ class ManagementController extends Controller
 				"resultText" =>  number_format($kgiHistory["result"], 2),
 				"ratio" => number_format($ratio, 2),
 				"unitText" => Unit::unitName($kgiHistory["unitId"]),
+				"fromDate" => $kgiHistory["fromDate"],
+				"toDate" => $kgiHistory["toDate"],
 			];
 		} else {
 			$kgi = Kgi::find()->where(["kgiId" => $id])->asArray()->one();
 			if ($kgi["targetAmount"] != '' && $kgi["targetAmount"] != 0) {
-				$ratio = ($kgi["result"] / $kgi["targetAmount"]) * 100;
+				if ($kgi["code"] == '<' || $kgi["code"] == '=') {
+					$ratio = ($kgi["result"] / $kgi["targetAmount"]) * 100;
+				} else {
+					$ratio = ($kgi["targetAmount"] / $kgi["result"]) * 100;
+				}
 			} else {
 				$ratio = 0;
 			}
 			$data = [
 				"kgiName" => $kgi["kgiName"],
 				"companyId" => $kgi["companyId"],
+				"creater" => User::employeeNameByuserId($kgi["createrId"]),
 				"detail" => $kgi['kgiDetail'],
 				"quantRatio" => $kgi["quantRatio"],
 				"targetAmount" => $kgi["targetAmount"],
@@ -139,6 +154,8 @@ class ManagementController extends Controller
 				"resultText" =>  number_format($kgi["result"], 2),
 				"ratio" => number_format($ratio, 2),
 				"unitText" => Unit::unitName($kgi["unitId"]),
+				"fromDate" => $kgi["fromDate"],
+				"toDate" => $kgi["toDate"],
 			];
 		}
 
@@ -185,7 +202,7 @@ class ManagementController extends Controller
 		$kgiTeams = KgiTeam::find()
 			->select('kgi_team.teamId,t.teamName,t.departmentId')
 			->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
-			->where(["kgi_team.kgiId" => $id])
+			->where(["kgi_team.kgiId" => $id, "kgi_team.status" => 1])
 			->asArray()
 			->all();
 		$data = [];
@@ -206,17 +223,26 @@ class ManagementController extends Controller
 		$data = [];
 		if (isset($kgiTeams) && count($kgiTeams) > 0) {
 			foreach ($kgiTeams as $team) :
-				$employee = Employee::find()->select('employeeFirstname,employeeSurename,employeeNumber,employeeId,picture')
+				$employee = Employee::find()->select('employeeFirstname,employeeSurename,employeeNumber,employeeId,picture,gender')
 					->where(["teamId" => $team["teamId"], "status" => 1])
 					->asArray()
 					->orderBy('employeeNumber')
 					->all();
 				if (isset($employee) && count($employee) > 0) {
 					foreach ($employee as $em) :
+						if ($em['picture'] == "") {
+							if ($em['gender'] == 1) {
+								$picture = 'image/user.png';
+							} else {
+								$picture = 'image/lady.jpg';
+							}
+						} else {
+							$picture = $em['picture'];
+						}
 						$data[$em["employeeId"]] = [
 							"firstname" => $em["employeeFirstname"],
 							"surename" => $em["employeeSurename"],
-							"image" => $em["picture"],
+							"image" => $picture,
 						];
 					endforeach;
 				}
@@ -229,7 +255,7 @@ class ManagementController extends Controller
 	public function actionKgiHistory($kgiId)
 	{
 		$kgiHistory = KgiHistory::find()
-			->where(["kgiId" => $kgiId, "status" => [1, 4]])
+			->where(["kgiId" => $kgiId, "status" => [1, 2]])
 			->orderBy('kgiHistoryId DESC')
 			->asArray()
 			->all();
@@ -241,6 +267,7 @@ class ManagementController extends Controller
 					"title" => $history["titleProcess"],
 					"remark" => $history["remark"],
 					"result" => $history["result"],
+					"creater" => User::employeeNameByuserId($history["createrId"]),
 					"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
 					"time" => ModelMaster::timeText($time[1]),
 					"status" => $history["status"]
@@ -252,7 +279,7 @@ class ManagementController extends Controller
 	public function actionKgiIssue($kgiId)
 	{
 		$kgiIssue = KgiIssue::find()
-			->where(["status" => [1, 4], "kgiId" => $kgiId])
+			->where(["status" => [1, 2], "kgiId" => $kgiId])
 			->orderBy("kgiIssueId")
 			->asArray()
 			->all();
@@ -280,7 +307,7 @@ class ManagementController extends Controller
 			->select('kgi.*')
 			->JOIN("LEFT JOIN", "kgi_branch kb", "kb.kgiId=kgi.kgiId")
 			->JOIN("LEFT JOIN", "kgi_team kt", "kt.kgiId=kgi.kgiId")
-			->where(["kgi.status" => [1, 4]])
+			->where(["kgi.status" => [1, 2]])
 			->andFilterWhere([
 				"kgi.companyId" => $companyId,
 				"kb.branchId" => $branchId,
@@ -295,7 +322,11 @@ class ManagementController extends Controller
 			foreach ($kgis as $kgi) :
 				$ratio = 0;
 				if ($kgi["targetAmount"] != '' && $kgi["targetAmount"] != 0 && $kgi["targetAmount"] != null) {
-					$ratio = ($kgi["result"] / $kgi["targetAmount"]) * 100;
+					if ($kgi["code"] == '<' || $kgi["code"] == '=') {
+						$ratio = ($kgi["result"] / $kgi["targetAmount"]) * 100;
+					} else {
+						$ratio = ($kgi["targetAmount"] / $kgi["result"]) * 100;
+					}
 				}
 				$data[$kgi["kgiId"]] = [
 					"kgiName" => $kgi["kgiName"],
@@ -320,6 +351,8 @@ class ManagementController extends Controller
 					"solution" => KgiIssue::lastestIssue($kgi["kgiId"])["solution"],
 					"employee" => KgiTeam::employeeTeam($kgi['kgiId']),
 					"year" => $kgi["year"],
+					"fromDate" => ModelMaster::engDate($kgi["fromDate"], 2),
+					"toDate" => ModelMaster::engDate($kgi["toDate"], 2)
 				];
 			endforeach;
 		}

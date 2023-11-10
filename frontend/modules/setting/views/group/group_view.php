@@ -160,7 +160,17 @@ $this->title = 'Group profile';
 								]) ?>" class="no-underline" style="color:black;">
 							<div class="row <?= $i > 0 ? 'mt-10' : '' ?> affiliated-list">
 								<div class="col-lg-3 col-md-4 col-4">
-									<img src="<?= Yii::$app->homeUrl . $company['picture'] ?>" class="width-TCF-BD">
+									<?php
+									if ($company['picture'] != "") {
+									?>
+										<img src="<?= Yii::$app->homeUrl . $company['picture'] ?>" class="width-TCF-BD">
+									<?php
+									} else {
+									?>
+										<img src="<?= Yii::$app->homeUrl . 'image/userProfile.png' ?>" class="width-TCF-BD">
+									<?php
+									}
+									?>
 								</div>
 								<div class="col-lg-9 col-md-8 col-8">
 									<div class="tokyoconsultinggroup">

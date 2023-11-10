@@ -118,7 +118,18 @@ $this->title = 'Employee';
 									<div class="row">
 										<div class="col-lg-6 col-md-6 col-6">
 											<div class="col-12">
-												<img src="<?= Yii::$app->homeUrl ?><?= $employee["picture"] ?>" class="image-employee">
+												<?php
+												if ($employee['picture'] == "") {
+													if ($employee['gender'] == 1) {
+														$picture = 'image/user.png';
+													} else {
+														$picture = 'image/lady.jpg';
+													}
+												} else {
+													$picture = $employee['picture'];
+												}
+												?>
+												<img src="<?= Yii::$app->homeUrl . $picture ?>" class="image-employee">
 											</div>
 										</div>
 										<div class="col-lg-6 col-md-6 col-6">

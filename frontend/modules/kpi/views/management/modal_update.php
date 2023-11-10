@@ -13,7 +13,7 @@
 					<div class="col-lg-6 col-md-6 col-6 font-size-14">
 						<div class="col-12">
 							<label for="exampleFormControlInput1" class="form-label"><strong class="red">*</strong>KPI Contents</label>
-							<input type="text" class="form-control" id="kpiName-update" name="kpiName" disabled>
+							<input type="text" class="form-control" id="kpiName-update" name="kpiName">
 						</div>
 						<div class="col-12 mt-10">
 							<label for="input" class="form-label"><strong class="red">*</strong> Company</label>
@@ -90,19 +90,31 @@
 								<input type="hidden" value="" id="previousUnit" class="previousUnit" required>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-6 mt-10">
+						<div class="row mt-15">
+							<div class="col-12 border-bottom">
+								<label for="input" class="form-label">
+									<strong class="red">*</strong> Select Period
+								</label>
+							</div>
+							<div class="col-lg-6 col-md-6 col-12 mt-10">
 								<div class="input-group">
-									<label for="input" class="form-label"><strong class="red">*</strong> Select Period</label>
 									<div class="input-group">
-										<span class="input-group-text font-size-12">
-											<i class="fa fa-calendar-o" aria-hidden="true"></i> &nbsp;&nbsp; Date</span>
-										<input type="date" aria-label="" class="form-control font-size-12" id="periodDate-update" required name="periodDate">
+										<span class="input-group-text font-size-12"><i class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp;From</span>
+										<input type="date" aria-label="" class="form-control font-size-12" required name="fromDate" id="from-date-update">
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 col-12 mt-10">
+								<div class="input-group">
+
+									<div class="input-group">
+										<span class="input-group-text font-size-12"><i class="fa fa-calendar-o" aria-hidden="true"></i> &nbsp;&nbsp;To</span>
+										<input type="date" aria-label="" class="form-control font-size-12" required name="toDate" id="to-date-update">
 									</div>
 								</div>
 							</div>
 
-							<div class="col-6 mt-10">
+							<div class="col-12 mt-10">
 								<div class="input-group">
 									<label for="input" class="form-label"><strong class="red">*</strong> Next Check Date</label>
 									<div class="input-group">
@@ -115,7 +127,7 @@
 						</div>
 						<div class="col-12 pt-5">
 							<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Target Amount</label>
-							<input type="number" class="form-control font-size-13 text-end" id="targetAmount-update" name="targetAmount">
+							<input type="number" class="form-control font-size-13 text-end" id="targetAmount-update" name="targetAmount" <?= $isManager == 0 ? 'disabled' : '' ?>>
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-6 col-6">
@@ -141,7 +153,7 @@
 									<option value="C">C</option>
 								</select>
 							</div>
-							<div class="col-lg-6 col-md-6 col-6 pt-10">
+							<div class="col-lg-4 col-md-6 col-6 pt-10">
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Amount Type</label>
 								<select class="form-select font-size-13" aria-label="Default select example" name="amountType" id="amountType-update">
 									<option value="">% or Number</option>
@@ -149,15 +161,15 @@
 									<option value="2">Number</option>
 								</select>
 							</div>
-							<div class="col-lg-6 col-md-6 col-6 pt-10">
+							<div class="col-lg-8 col-md-6 col-6 pt-10">
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Code</label>
 								<select class="form-select font-size-13" aria-label="Default select example" name="code" id="code-update">
 									<option value="">
 										<&nbsp;&nbsp;=&nbsp;&nbsp;>
 									</option>
-									<option value="<">&nbsp;&nbsp;<?= '<' ?>&nbsp;&nbsp;</option>
-									<option value="=">&nbsp;&nbsp;=&nbsp;&nbsp;</option>
-									<option value=">">&nbsp;&nbsp;>&nbsp;&nbsp;</option>
+									<option value="<">&nbsp;&nbsp;<?= '<' ?>&nbsp;&nbsp;Result more than target</option>
+									<option value="=">&nbsp;&nbsp;=&nbsp;&nbsp;Result equal target</option>
+									<option value=">">&nbsp;&nbsp;>&nbsp;&nbsp;Result less than target</option>
 								</select>
 							</div>
 							<div class="col-lg-6 col-md-6 col-6 pt-10">

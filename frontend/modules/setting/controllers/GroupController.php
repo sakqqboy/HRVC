@@ -155,15 +155,15 @@ class GroupController extends Controller
                                 ->where(["departmentId" => $department["departmentId"], "status" => 1])
                                 ->asArray()
                                 ->all();
-                            if (isset($teams) && count($teams) > 0) {
-                                foreach ($teams as $team) :
-                                    $employees = Employee::find()
-                                        ->where(["status" => 1, "teamId" => $team["teamId"]])
-                                        ->asArray()
-                                        ->all();
-                                    $totalEmployees += count($employees);
-                                endforeach;
-                            }
+                            // if (isset($teams) && count($teams) > 0) {
+                            //     foreach ($teams as $team) :
+                            //         $employees = Employee::find()
+                            //             ->where(["status" => 1, "teamId" => $team["teamId"]])
+                            //             ->asArray()
+                            //             ->all();
+                            //         $totalEmployees += count($employees);
+                            //     endforeach;
+                            // }
                             $totalTeam += count($teams);
                         endforeach;
                         $totalDepartment += count($departments);
@@ -172,6 +172,11 @@ class GroupController extends Controller
                 $totalBranches += count($branches);
             endforeach;
         }
+        $employees = Employee::find()
+            ->where(["status" => 1])
+            ->asArray()
+            ->all();
+        $totalEmployees = count($employees);
         $branches = Branch::find()->select('branchId')->where(["status" => 1])->all();
 
 

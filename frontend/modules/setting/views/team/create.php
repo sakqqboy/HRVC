@@ -11,6 +11,9 @@ $this->title = 'Team';
 		<div class="col-lg-3 col-md-6 col-12">
 			<div class="col-12 branch-title">
 				Team
+				<a href="<?= Yii::$app->homeUrl ?>setting/team/import" class="btn btn-secondary  pull-right mt-10">
+					<i class="fa fa-upload mr-5" aria-hidden="true"></i> Import
+				</a>
 			</div>
 		</div>
 		<!-- <div class="col-lg-2 col-md-6 col-12 mt-10">

@@ -4,7 +4,7 @@ use frontend\models\hrvc\KgiBranch;
 
 if (isset($branches) && count($branches) > 0) { ?>
 	<div class="col-12 multi-select pl-30 pt-10 pb-5">
-		<input type="checkbox" id="check-all-branch-update" name="allBranch[]" class="checkbox-md mr-5 multiCheck-<?= $branch['branchId'] ?>" value="all" onchange="javascript:checkAllBranchUpdate()">
+		<input type="checkbox" id="check-all-branch-update" name="allBranch[]" class="checkbox-md mr-5" value="all" onchange="javascript:checkAllBranchUpdate()">
 		All
 	</div>
 	<?php

@@ -72,8 +72,8 @@ $this->title = "KGI";
 						if (count($kgis) > 0) {
 							foreach ($kgis as $kgiId => $kgi) :
 						?>
-								<tr class="border-bottom-white2" id='<?= $kgiId ?>' id="kgi-<?= $kgiId ?>">
-									<td class="over-blue"><?= $kgi["kgiName"] ?></td>
+								<tr class="border-bottom-white2" id="kgi-<?= $kgiId ?>">
+									<td class="<?= $kgi["status"] == 1 ? 'over-blue' : 'over-yellow' ?>"><?= $kgi["kgiName"] ?></td>
 									<td><?= $kgi["companyName"] ?></td>
 									<td><img src="<?= Yii::$app->homeUrl . $kgi['flag'] ?>" class="Flag-Turkey"> <?= $kgi["branch"] ?>, <?= $kgi["countryName"] ?></td>
 									<td></td>
@@ -83,7 +83,9 @@ $this->title = "KGI";
 											<?php
 											if (isset($kgi["employee"]) && count($kgi["employee"]) > 0) {
 												$e = 1;
-												foreach ($kgi["employee"] as $emp) : ?>
+												foreach ($kgi["employee"] as $emp) :
+
+											?>
 													<img class="image-grid" src="<?= Yii::$app->homeUrl . $emp ?>">
 											<?php
 													if ($e == 3) {
@@ -113,7 +115,7 @@ $this->title = "KGI";
 									<td><?= $kgi["month"] ?></td>
 									<td><?= $kgi["unit"] ?></td>
 									<td><?= $kgi["periodCheck"] ?></td>
-									<td><?= $kgi["nextCheck"] ?></td>
+									<td><?= $kgi["status"] == 1 ? $kgi["nextCheck"] : '' ?></td>
 									<td colspan="row">
 										<span data-bs-toggle="modal" data-bs-target="#kgi-issue" onclick="javascript:showKgiComment(<?= $kgiId ?>)">
 											<img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown">
@@ -125,6 +127,11 @@ $this->title = "KGI";
 											</li>
 											<li data-bs-toggle="modal" data-bs-target="#kgi-view" onclick="javascript:kgiHistory(<?= $kgiId ?>)">
 												<a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
+											</li>
+											<li onclick="javascript:copyKgi(<?= $kgiId ?>)" title="Copy">
+												<a class="dropdown-item" href="#">
+													<i class="fa fa-copy" aria-hidden="true"></i>
+												</a>
 											</li>
 											<li data-bs-toggle="modal" data-bs-target="#delete-kgi" onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)">
 												<a class="dropdown-item"><i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
@@ -184,7 +191,8 @@ $this->title = "KGI";
 	<?= $this->render('modal_update', [
 		"units" => $units,
 		"companies" => $companies,
-		"months" => $months
+		"months" => $months,
+		"isManager" => $isManager
 	]) ?>
 	<?php ActiveForm::end(); ?>
 	<?= $this->render('modal_view') ?>

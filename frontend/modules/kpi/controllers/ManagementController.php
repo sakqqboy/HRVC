@@ -5,8 +5,11 @@ namespace frontend\modules\kpi\controllers;
 use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
+use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Department;
 use frontend\models\hrvc\Group;
+use frontend\models\hrvc\Kfi;
+use frontend\models\hrvc\Kgi;
 use frontend\models\hrvc\Kpi;
 use frontend\models\hrvc\KpiBranch;
 use frontend\models\hrvc\KpiDepartment;
@@ -16,6 +19,7 @@ use frontend\models\hrvc\KpiSolution;
 use frontend\models\hrvc\KpiTeam;
 use frontend\models\hrvc\Team;
 use frontend\models\hrvc\User;
+use frontend\models\hrvc\UserRole;
 use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
@@ -35,6 +39,7 @@ class ManagementController extends Controller
         if (!Yii::$app->user->id) {
             return $this->redirect(Yii::$app->homeUrl . 'site/login');
         }
+        $this->setDefault();
         return true;
     }
     public function actionIndex()
@@ -61,11 +66,13 @@ class ManagementController extends Controller
 
         curl_close($api);
         $months = ModelMaster::monthFull(1);
+        $isManager = UserRole::isManager();
         return $this->render('index', [
             "units" => $units,
             "companies" => $companies,
             "months" => $months,
-            "kpis" => $kpis
+            "kpis" => $kpis,
+            "isManager" => $isManager
         ]);
     }
     public function actionGrid()
@@ -92,11 +99,13 @@ class ManagementController extends Controller
 
         curl_close($api);
         $months = ModelMaster::monthFull(1);
+        $isManager = UserRole::isManager();
         return $this->render('kpi_grid', [
             "units" => $units,
             "companies" => $companies,
             "months" => $months,
-            "kpis" => $kpis
+            "kpis" => $kpis,
+            "isManager" => $isManager
         ]);
     }
     public function actionCreateKpi()
@@ -106,7 +115,9 @@ class ManagementController extends Controller
             $kpi->kpiName = $_POST["kpiName"];
             $kpi->companyId = $_POST["companyId"];
             $kpi->unitId = $_POST["unit"];
-            $kpi->periodDate = $_POST["periodDate"];
+            // $kpi->periodDate = $_POST["periodDate"];
+            $kpi->fromDate = $_POST["fromDate"];
+            $kpi->toDate = $_POST["toDate"];
             $kpi->targetAmount = $_POST["targetAmount"];
             $kpi->kpiDetail = $_POST["detail"];
             $kpi->quantRatio = $_POST["quantRatio"];
@@ -116,7 +127,7 @@ class ManagementController extends Controller
             $kpi->status = $_POST["status"];
             $kpi->month = $_POST["month"];
             $kpi->result = $_POST["result"];
-            $kpi->createrId = 1;
+            $kpi->createrId = Yii::$app->user->id;
             $kpi->createDateTime = new Expression('NOW()');
             $kpi->updateDateTime = new Expression('NOW()');
             if ($kpi->save(false)) {
@@ -285,15 +296,27 @@ class ManagementController extends Controller
     }
     public function actionUpdateKpi()
     {
+        $isManager = UserRole::isManager();
         if (isset($_POST["kpiId"]) && $_POST["kpiId"] != "") {
             $kpiId = $_POST["kpiId"];
             //throw new Exception(print_r(Yii::$app->request->post(), true));
             $kpi = Kpi::find()->where(["kpiId" => $kpiId])->one();
-            //$kpi->kpiName = $_POST["kpiName"];
+            $kpi->kpiName = $_POST["kpiName"];
             $kpi->companyId = $_POST["companyId"];
             $kpi->unitId = $_POST["unit"];
-            $kpi->periodDate = $_POST["periodDate"];
-            $kpi->targetAmount = $_POST["targetAmount"];
+            // $kpi->periodDate = $_POST["periodDate"];
+            $kpi->fromDate = $_POST["fromDate"];
+            $kpi->toDate = $_POST["toDate"];
+            if ($kpi->fromDate == "") {
+                $kpi->fromDate = $_POST["fromDate"];
+            }
+            if ($kpi->toDate == "") {
+                $kpi->toDate = $_POST["toDate"];
+            }
+            if ($isManager == 1 && $kpi->targetAmount == "") {
+                $kpi->targetAmount = $_POST["targetAmount"];
+            }
+            // $kpi->targetAmount = $_POST["targetAmount"];
             $kpi->kpiDetail = $_POST["detail"];
             $kpi->quantRatio = $_POST["quantRatio"];
             $kpi->priority = $_POST["priority"];
@@ -302,7 +325,7 @@ class ManagementController extends Controller
             $kpi->status = $_POST["status"];
             $kpi->month = $_POST["month"];
             $kpi->result = $_POST["result"];
-            $kpi->createrId = 1;
+            $kpi->createrId = Yii::$app->user->id;
             $kpi->updateDateTime = new Expression('NOW()');
             if ($kpi->save(false)) {
                 $kpiHistory = new KpiHistory();
@@ -310,9 +333,13 @@ class ManagementController extends Controller
                 $kpiHistory->kpiHistoryName = $_POST["historyName"];
                 $kpiHistory->titleProcess = $_POST["historyName"];
                 $kpiHistory->unitId = $_POST["unit"];
-                $kpiHistory->periodDate = $_POST["periodDate"];
+                // $kpiHistory->periodDate = $_POST["periodDate"];
                 $kpiHistory->nextCheckDate = $_POST["nextDate"];
-                $kpiHistory->targetAmount = $_POST["targetAmount"];
+                if ($isManager == 1) {
+                    $kpiHistory->targetAmount = $_POST["targetAmount"];
+                } else {
+                    $kpiHistory->targetAmount = $kpi->targetAmount;
+                }
                 $kpiHistory->description = $_POST["detail"];
                 $kpiHistory->remark = $_POST["remark"];
                 $kpiHistory->quantRatio = $_POST["quantRatio"];
@@ -322,9 +349,11 @@ class ManagementController extends Controller
                 $kpiHistory->status = $_POST["status"];
                 $kpiHistory->month = $_POST["month"];
                 $kpiHistory->result = $_POST["result"];
-                $kpiHistory->createrId = 1;
+                $kpiHistory->createrId = Yii::$app->user->id;
                 $kpiHistory->createDateTime = new Expression('NOW()');
                 $kpiHistory->updateDateTime = new Expression('NOW()');
+                $kpiHistory->fromDate = $_POST["fromDate"];
+                $kpiHistory->toDate = $_POST["toDate"];
                 $kpiHistory->save(false);
                 if (isset($_POST["branch"]) && count($_POST["branch"]) > 0) {
                     $this->savekpiBranch($_POST["branch"], $kpiId);
@@ -578,6 +607,7 @@ class ManagementController extends Controller
         } else {
             $file = "kpi_search_result_grid";
         }
+        $isManager = UserRole::isManager();
         return $this->render($file, [
             "units" => $units,
             "companies" => $companies,
@@ -590,7 +620,8 @@ class ManagementController extends Controller
             "status" => $status,
             "branches" => $branches,
             "teams" => $teams,
-            "year" => $year
+            "year" => $year,
+            "isManager" => $isManager
         ]);
     }
     public function actionDepartmentMultiTeam()
@@ -684,5 +715,102 @@ class ManagementController extends Controller
             $res["textDepartment"] = $textDepartment;
         }
         return json_encode($res);
+    }
+    public function actionCopyKpi($kpiId)
+    {
+        $kpi = Kpi::find()->where(["kpiId" => $kpiId])->asArray()->one();
+        $copy = new Kpi();
+        $copy->kpiName = $kpi["kpiName"] . ' copy';
+        $copy->companyId = $kpi["companyId"];
+        $copy->unitId = $kpi["unitId"];
+        // $kpi->periodDate = $_POST["periodDate"];
+        $copy->fromDate = $kpi["fromDate"];
+        $copy->toDate = $kpi["toDate"];
+        $copy->targetAmount = $kpi["targetAmount"];
+        $copy->kpiDetail = $kpi["kpiDetail"];
+        $copy->quantRatio = $kpi["quantRatio"];
+        $copy->priority = $kpi["priority"];
+        $copy->amountType = $kpi["amountType"];
+        $copy->code = $kpi["code"];
+        $copy->status = $kpi["status"];
+        $copy->month = $kpi["month"];
+        $copy->result = $kpi["result"];
+        $copy->createrId = Yii::$app->user->id;
+        $copy->createDateTime = new Expression('NOW()');
+        $copy->updateDateTime = new Expression('NOW()');
+        if ($copy->save(false)) {
+            $kpiCopyId = Yii::$app->db->lastInsertID;
+
+            if (isset($_POST["branch"]) && count($_POST["branch"]) > 0) {
+                $this->saveKpiBranch($_POST["branch"], $kpiId);
+            }
+            if (isset($_POST["department"]) && count($_POST["department"]) > 0) {
+                $this->saveKpiDepartment($_POST["department"], $kpiId);
+            }
+            if (isset($_POST["team"]) && count($_POST["team"]) > 0) {
+                $this->saveKpiTeam($_POST["team"], $kpiId);
+            }
+
+            $branch = [];
+            $branches = KpiBranch::find()
+                ->select('branchId')
+                ->where(["kpiId" => $kpiId])
+                ->asArray()
+                ->all();
+            if (count($branches) > 0) {
+                $i = 0;
+                foreach ($branches as $b) :
+                    $branch[$i] = $b["branchId"];
+                    $i++;
+                endforeach;
+            }
+            if (count($branch) > 0) {
+                $this->saveKpiBranch($branch, $kpiCopyId);
+            }
+            $department = [];
+            $departments = KpiDepartment::find()
+                ->select('departmentId')
+                ->where(["kpiId" => $kpiId])
+                ->asArray()
+                ->all();
+            if (count($departments) > 0) {
+                $i = 0;
+                foreach ($departments as $d) :
+                    $department[$i] = $d["departmentId"];
+                    $i++;
+                endforeach;
+            }
+            if (count($department) > 0) {
+                $this->saveKpiDepartment($department, $kpiCopyId);
+            }
+            $team = [];
+            $teams = KpiTeam::find()
+                ->select('teamId')
+                ->where(["kpiId" => $kpiId])
+                ->asArray()
+                ->all();
+            if (count($teams) > 0) {
+                $i = 0;
+                foreach ($teams as $t) :
+                    $team[$i] = $t["teamId"];
+                    $i++;
+                endforeach;
+            }
+            if (count($team) > 0) {
+                $this->saveKpiTeam($team, $kpiCopyId);
+            }
+            return $this->redirect('index');
+        }
+    }
+    public function setDefault()
+    {
+        $deletedCompany = Company::find()->where(["status" => 99])->asArray()->all();
+        if (isset($deletedCompany) && count($deletedCompany) > 0) {
+            foreach ($deletedCompany as $company) :
+                Kfi::updateAll(["status" => 99], ["companyId" => $company["companyId"]]);
+                Kgi::updateAll(["status" => 99], ["companyId" => $company["companyId"]]);
+                Kpi::updateAll(["status" => 99], ["companyId" => $company["companyId"]]);
+            endforeach;
+        }
     }
 }

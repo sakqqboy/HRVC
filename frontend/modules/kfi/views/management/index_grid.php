@@ -53,7 +53,7 @@ $this->title = 'KFI Grid View';
 							if (isset($kfis) && count($kfis) > 0) {
 								foreach ($kfis as $kfiId => $kfi) :
 							?>
-									<div class="col-lg-4 col-md-6 col-sm-5 col-12 mt-20">
+									<div class="col-lg-4 col-md-6 col-sm-5 col-12 mt-20" id="kfi-<?= $kfiId ?>">
 										<div class="col-12 border pl-20 pr-20 pt-10 pb-5" style="background-color:white;border-radius:10px;box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;">
 											<div class="row">
 												<div class="col-12">
@@ -202,7 +202,8 @@ $this->title = 'KFI Grid View';
 	<?= $this->render('update_modal', [
 		"units" => $units,
 		"companies" => $companies,
-		"months" => $months
+		"months" => $months,
+		"isManager" => $isManager
 	]) ?>
 
 	<?php ActiveForm::end(); ?>

@@ -69,7 +69,6 @@
 							<div class="row">
 								<div class="col-12 border-bottom">
 									<label for="input" class="form-label"><strong class="red">*</strong> Select Period</label>
-
 								</div>
 								<div class="col-lg-6 col-md-6 col-12 mt-10">
 									<div class="input-group">
@@ -99,11 +98,10 @@
 									</div>
 								</div>
 							</div>
-
 						</div>
 						<div class="col-12 pt-5 pt-5 mt-10">
 							<label for="exampleFormControl" class="form-label font-size-13">Target Amount</label>
-							<input type="text" class="form-control text-end" value="" disabled id="targetAmount">
+							<input type="text" class="form-control text-end" name="targetAmount" value="" id="targetAmount" <?= $isManager == 0 ? 'disabled' : '' ?>>
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-6 col-6 font-size-14">
@@ -121,7 +119,7 @@
 								</select>
 								<input type="hidden" name="kfiId" id="kfiId" value="">
 							</div>
-							<div class="col-lg-6 col-md-6 col-6 pt-10 mt-17">
+							<div class="col-lg-4 col-md-6 col-6 pt-10 mt-17">
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Amount Type</label>
 								<select class="form-select font-size-13" id="amountType" name="amountType" required>
 									<option value="">% or Number</option>
@@ -129,15 +127,15 @@
 									<option value="2">Number</option>
 								</select>
 							</div>
-							<div class="col-lg-6 col-md-6 col-6 pt-10  mt-17">
+							<div class="col-lg-8 col-md-6 col-6 pt-10  mt-17">
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Code</label>
 								<select class="form-select font-size-13" id="code" name="code" required>
 									<option value="">
 										<&nbsp;&nbsp;=&nbsp;&nbsp;>
 									</option>
-									<option value="<">&nbsp;&nbsp;<?= '<' ?>&nbsp;&nbsp;</option>
-									<option value="=">&nbsp;&nbsp;=&nbsp;&nbsp;</option>
-									<option value=">">&nbsp;&nbsp;>&nbsp;&nbsp;</option>
+									<option value="<">&nbsp;&nbsp;<?= '<' ?>&nbsp;&nbsp;Result more than target</option>
+									<option value="=">&nbsp;&nbsp;=&nbsp;&nbsp;Result equal target</option>
+									<option value=">">&nbsp;&nbsp;>&nbsp;&nbsp;Result less than target</option>
 								</select>
 							</div>
 							<div class="col-lg-12 col-md-6 col-6 pt-10  mt-3">

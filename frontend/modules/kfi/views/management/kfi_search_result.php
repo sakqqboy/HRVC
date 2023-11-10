@@ -98,7 +98,7 @@ $this->title = 'KFI';
 												</td>
 												<td></td>
 												<td><?= $kfi["month"] ?></td>
-												<td><?= $kfi["nextCheck"] ?></td>
+												<td><?= $kfi["status"] == 1 ? $kfi["nextCheck"] : '' ?></td>
 												<td colspan="row">
 													<span data-bs-toggle="modal" data-bs-target="#kfi-issue" onclick="javascript:showKfiComment(<?= $kfiId ?>)">
 														<img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td">
@@ -114,6 +114,11 @@ $this->title = 'KFI';
 														<li data-bs-toggle="modal" data-bs-target="#staticBackdrop3" onclick="javascript:kfiHistory(<?= $kfiId ?>)">
 															<a class="dropdown-item" href="#">
 																<i class="fa fa-eye" aria-hidden="true"></i>
+															</a>
+														</li>
+														<li onclick="javascript:copyKfi(<?= $kfiId ?>)" title="Copy">
+															<a class="dropdown-item" href="#">
+																<i class="fa fa-copy" aria-hidden="true"></i>
 															</a>
 														</li>
 														<li data-bs-toggle="modal" data-bs-target="#staticBackdrop4" onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)">
@@ -176,6 +181,10 @@ $this->title = 'KFI';
 	]); ?>
 	<?= $this->render('update_modal', [
 		"units" => $units,
+		"isManager" => $isManager,
+		"units" => $units,
+		"months" => $months,
+		"companies" => $companies,
 	]) ?>
 	<?php ActiveForm::end(); ?>
 

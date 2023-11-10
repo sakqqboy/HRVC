@@ -17,8 +17,15 @@ $this->title = 'view';
 				<div class="row">
 					<div class="col-lg-2 col-md-6 col-12">
 						<?php
-						if ($employee['picture'] == '') { ?>
-							<img src="<?= Yii::$app->homeUrl . 'image/user.png' ?>" class="imageView">
+						if ($employee['picture'] == '') {
+							if ($employee['gender'] == 1) {
+								$picture = 'image/user.png';
+							} else {
+								$picture = 'image/lady.jpg';
+							}
+						?>
+
+							<img src="<?= Yii::$app->homeUrl . $picture ?>" class="imageView">
 						<?php
 						} else { ?>
 							<img src="<?= Yii::$app->homeUrl . $employee['picture'] ?>" class="imageView">
@@ -37,7 +44,7 @@ $this->title = 'view';
 								$text = "danger";
 							}
 							?>
-							<span class="badge bg-<?= $text ?> font-size-14 ml-20">Active</span>
+							<span class="badge bg-<?= $text ?> font-size-14 ml-20"><?= $employee["statusName"] ?></span>
 						</div>
 						<div class="row">
 							<div class="col-lg-6 col-lg-6 col-12">
@@ -64,10 +71,12 @@ $this->title = 'view';
 								<div class="row">
 									<div class="col-3"></div>
 									<div class="col-2 font-size-14 share-pointer">
-										<i class="fa fa-share-alt" aria-hidden="true"></i> Share Profile
+										<!-- <i class="fa fa-share-alt" aria-hidden="true"></i> Share Profile -->
 									</div>
 									<div class="col-1 font-size-14 share-pointer">
-										<i class="fa fa-print" aria-hidden="true"></i> Print
+										<a href="<?= Yii::$app->homeUrl ?>setting/employee/export-employee/<?= ModelMaster::encodeParams(["employeeId" => $employee["employeeId"]]) ?>" target="_blank" style="text-decoration:none;">
+											<i class="fa fa-print" aria-hidden="true"></i> Print
+										</a>
 									</div>
 									<div class="col-2 font-size-14 share-pointer">
 										<?php
@@ -125,8 +134,14 @@ $this->title = 'view';
 									<a href="javascript:showEmployeeView(1)" class="link-2 font-b" id="link1">Personal & Contact Details</a>
 									<a href="javascript:showEmployeeView(2)" class="link-2" id="link2">Work Information</a>
 									<a href="javascript:showEmployeeView(3)" class="link-2" id="link3">Attachments</a>
-									<a href="javascript:showEmployeeView(4)" class="link-2" id="link4">Salary & Allowance</a>
-									<a href="javascript:showEmployeeView(5)" class="link-2" id="link5">Evaluation</a>
+									<?php
+									if (isset($canUseSalary) && $canUseSalary == 1) {
+									?>
+										<a href="javascript:showEmployeeView(4)" class="link-2" id="link4">Salary & Allowance</a>
+										<a href="javascript:showEmployeeView(5)" class="link-2" id="link5">Evaluation</a>
+									<?php
+									}
+									?>
 									<input type="hidden" value="1" id="currentShow">
 								</div>
 							</div>

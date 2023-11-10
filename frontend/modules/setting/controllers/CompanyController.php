@@ -89,7 +89,7 @@ class CompanyController extends Controller
 		if (isset($_POST["companyName"]) && trim($_POST["companyName"]) != '') {
 			$company = new Company();
 			$company->companyName = $_POST["companyName"];
-			$company->tagLine = $_POST["tagLine"];
+			//$company->tagLine = $_POST["tagLine"];
 			if (isset($_POST["headQuaterId"])) {
 				$company->headQuaterId = $_POST["headQuaterId"] - 534;
 			}
@@ -238,7 +238,7 @@ class CompanyController extends Controller
 			$oldBanner = $company->banner;
 			$oldImage = $company->picture;
 			$company->companyName = $_POST["companyName"];
-			$company->tagLine = $_POST["tagLine"];
+			// $company->tagLine = $_POST["tagLine"];
 			$company->displayName = $_POST["displayName"];
 			$company->website = $_POST["website"];
 			$company->location = $_POST["location"];

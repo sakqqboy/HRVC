@@ -47,9 +47,10 @@ $this->title = 'company profile';
 				}
 				?>
 			</div>
-			<div class="col-12 tokyo-small pl-30">
-				<?= $company['tagLine'] ?>
-			</div>
+			<!-- <div class="col-12 tokyo-small pl-30">
+				<?php // $company['tagLine'] 
+				?>
+			</div> -->
 		</div>
 		<div class="col-lg-5 col-md-6 col-12 tcg-edit0 mt-40">
 			<span class="tcg-edit"><?= $company['displayName'] ?> </span>

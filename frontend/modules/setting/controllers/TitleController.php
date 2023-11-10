@@ -11,9 +11,14 @@ use frontend\models\hrvc\DepartmentTitle;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Layer;
 use frontend\models\hrvc\Title;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Reader\Html;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
+use yii\web\UploadedFile;
 
 /**
  * Default controller for the `setting` module
@@ -460,5 +465,186 @@ class TitleController extends Controller
             "branchId" => $branchId,
             "companyId" => $companyId
         ]);
+    }
+    public function actionImport()
+    {
+        $error = [];
+        $isError = 0;
+        $correct = [];
+        $success = 0;
+        $totalError = 0;
+        //throw new Exception(print_r(Yii::$app->request->post(), true));
+        // if (isset($_POST["employeeFile"])) {
+
+        $imageObj = UploadedFile::getInstanceByName("titleFile");
+        if (isset($imageObj) && !empty($imageObj)) {
+            $urlFolder = Path::getHost() . 'file/import/title';
+            if (!file_exists($urlFolder)) {
+                mkdir($urlFolder, 0777, true);
+            }
+            $file = $imageObj->name;
+            $filenameArray = explode('.', $file);
+            $countArrayFile = count($filenameArray);
+            $fileType = $filenameArray[$countArrayFile - 1];
+            if ($fileType == 'xlsx' || $fileType == 'xls') {
+
+                $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
+                $pathSave = $urlFolder . '/' . $fileName;
+                if ($imageObj->saveAs($pathSave)) {
+
+                    $reader = new Xlsx();
+                    $spreadsheet = $reader->load($pathSave);
+                    $sheetData = $spreadsheet->getActiveSheet()->toArray();
+                    // unset($sheetData[0]);
+                    $i = 0;
+                    $transaction = Yii::$app->db->beginTransaction();
+                    foreach ($sheetData as $data) :
+                        $layerId = '';
+                        $departmentId = '';
+                        $isError = 0;
+                        $error[$i] = "";
+                        if ($i >= 1) {
+
+                            // throw new exception('2222');
+                            if (trim($data[0]) == "") {
+                                $isError = 1;
+                                $error[$i] .= '- Title name<br>';
+                            }
+                            if (trim($data[1]) == "") {
+                                $isError = 1;
+                                $error[$i] .= '- Please select layer <br>';
+                            } else {
+                                $layerId = Layer::layerId($data[1]);
+                                if ($layerId == "") {
+                                    $isError = 1;
+                                    $error[$i] .= '- Layer not found, need to contact administrator<br>';
+                                }
+                            }
+                            if (trim($data[2]) == "") {
+                                $isError = 1;
+                                $error[$i] .= '- Please select department<br>';
+                            } else {
+                                $departmentId = Department::branchNameWithDepartmentName($data[2]);
+                                if ($departmentId == "") {
+                                    $isError = 1;
+                                    $error[$i] .= '- Department not found, need to contact administrator<br>';
+                                }
+                            }
+                            if ($isError == 0) {
+                                $title = new Title();
+                                $title->titleName = $data[0];
+                                $title->layerId = $layerId;
+                                $title->departmentId =  $departmentId;
+                                $title->jobDescription = $data[3];
+                                $title->status = 1;
+                                $title->createDateTime = new Expression('NOW()');
+                                $title->updateDateTime = new Expression('NOW()');
+                                if ($title->save(false)) {
+                                    $success++;
+                                    $correct[$i] = [
+                                        "name" => $data[0],
+                                        "department" => $data[2],
+                                    ];
+                                }
+                            }
+                        }
+                        if ($isError == 0) {
+                            $totalError++;
+                            unset($error[$i]); // if there is no error delete this index
+                        }
+                        $i++;
+                    endforeach;
+                    if (count($error) == 0) {
+                        $transaction->commit();
+                    } else {
+                        $transaction->rollBack();
+                    }
+                }
+            } else {
+                $error[0] = "Please select .xlsx or .xls file";
+            }
+
+            unlink($pathSave);
+        }
+        return $this->render('import', [
+            "errors" => $error,
+            "success" => $success,
+            "corrects" => $correct
+        ]);
+    }
+    public function actionExport()
+    {
+        $layers = Layer::find()
+            ->select('layerName')
+            ->where(["status" => 1])
+            ->asArray()
+            ->groupBy('layerName')
+            ->orderBy('layerName')
+            ->all();
+        $departments = Department::find()
+            ->select('departmentName,branchId')
+            ->where(["status" => 1])
+            ->asArray()
+            ->orderBy('departmentName')
+            ->all();
+        $de = [];
+        if (isset($departments) && count($departments) > 0) {
+            $i = 0;
+            foreach ($departments as $d) :
+                $de[$i] = $d["departmentName"] . "(Branch::" . Branch::branchName($d["branchId"]) . ")";
+                $i++;
+            endforeach;
+        }
+
+        $htmlExcel = $this->renderPartial('export', [
+            "layers" => $layers,
+            "departments" => $de,
+
+        ]);
+        //throw new exception($htmlExcel);
+        $urlFolder = Path::getHost() . 'file/import/title/';
+        $fileName = 'title.xlsx';
+        $filePath = $urlFolder . $fileName;
+        $reader = new Xlsx();
+
+
+        $spreadsheet = new Spreadsheet;
+        $reader2 = new Html();
+
+        $spreadsheet->createSheet();
+
+        $reader2->setSheetIndex(1);
+        $spreadsheet = $reader2->loadFromString($htmlExcel);
+        $spreadsheet->getActiveSheet(1)->setTitle('data');
+
+        $spreadsheet1 = $reader->load($filePath);
+        $reader2->setSheetIndex(0);
+        $clonedWorksheet = clone $spreadsheet1->getSheetByName('title');
+        $clonedWorksheet->setTitle('title');
+        $spreadsheet->addExternalSheet($clonedWorksheet);
+
+        $fileName = 'Import Title format' . date('Y-m-d');
+
+        $spreadsheet->removeSheetByIndex(
+            $spreadsheet->getIndex(
+                $spreadsheet->getSheetByName('Worksheet')
+            )
+        );
+        //  $spreadsheet->getActiveSheet()->setTitle('employee');
+
+        $spreadsheet->setActiveSheetIndex(1);
+        $folderName = "export";
+        $urlFolder = Path::getHost() . 'file/' . $folderName . "/" . $fileName;
+        $folder_path = Path::getHost() . 'file/' . $folderName;
+        $files = glob($folder_path . '/*');
+        foreach ($files as $file) {
+            if (is_file($file)) {
+                unlink($file);
+            }
+        }
+
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $writer->save($urlFolder);
+        return Yii::$app->response->sendFile($urlFolder, $fileName . '.xlsx');
     }
 }

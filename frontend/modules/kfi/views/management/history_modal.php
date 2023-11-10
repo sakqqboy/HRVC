@@ -89,7 +89,7 @@
 
 				</div>
 				<div class="col-12 History-Backdrop3">
-					History
+					Update Description
 				</div>
 				<div class="col-12 mt-15" id="showHistory"></div>
 				<div class="col-12 mt-15" id="showIssue"></div>

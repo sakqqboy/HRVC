@@ -225,7 +225,12 @@ function kgiHistory(kgiId) {
 				$("#status-view").css("color", "white !important");
 			}
 			$("#period-date-view").html(data.kgi.periodCheckText);
-			$("#next-date-view").html(data.kgi.nextCheckText);
+			if (data.kgi.status == 1) {
+				$("#next-date-view").html(data.kgi.nextCheckText);
+			} else {
+				$("#next-date-view").html('-');
+			}
+			
 			$("#company-name-view").html(data.kgi.companyName);
 			$("#quantRatio-view").html(data.kgi.quantRatioText);
 			$("#code-view").html(data.kgi.code);
@@ -351,3 +356,9 @@ function kgiFilter() {
 		}
 	});
 }
+function copyKgi(kgiId) { 
+	if (confirm('Do you want to make a copy?')) { 
+	    var url = $url + 'kgi/management/copy-kgi?kgiId='+kgiId;
+	    window.location.href=url;
+	}
+   }

@@ -94,7 +94,7 @@ use frontend\models\hrvc\Team;
 			?>
 			<option value="">Status</option>
 			<option value="1">Active</option>
-			<option value="4">Finished</option>
+			<option value="2">Finished</option>
 		</select>
 	</div>
 </div>

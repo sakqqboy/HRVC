@@ -56,7 +56,7 @@ $this->title = 'KPI Grid View';
 							?>
 									<div class="col-12 card card-radius" id="kpi-<?= $kpiId ?>">
 										<div class="row">
-											<div class="col-lg-4 col-md-6 col-12 clients-employee">
+											<div class="col-lg-4 col-md-6 col-12 clients-employee pl-0">
 												<i class="fa fa-flag" aria-hidden="true"></i> <?= $kpi["kpiName"] ?>
 											</div>
 											<div class="col-lg-1 col-md-6 col-12">
@@ -102,10 +102,10 @@ $this->title = 'KPI Grid View';
 													<i class="fa fa-trash-o" aria-hidden="true"></i>
 												</button>
 											</div>
-											<div class="col-lg-2 col-md-6 col-12">
+											<div class="col-lg-2 col-md-6 col-12 pl-0">
 												<div class="col-12">
 													<span class="badge rounded-pill slds-badge">
-														Deadline <span class="text-dark font-size-10">: <?= $kpi["periodCheck"] ?></span>
+														Term <span class="text-dark font-size-10">: <?= $kpi["fromDate"] ?> - <?= $kpi["toDate"] ?></span>
 													</span>
 												</div>
 												<div class="col-12 top-teamcontent">
@@ -259,7 +259,8 @@ $form = ActiveForm::begin([
 <?= $this->render('modal_update', [
 	"units" => $units,
 	"companies" => $companies,
-	"months" => $months
+	"months" => $months,
+	"isManager" => $isManager
 ]) ?>
 <?php ActiveForm::end(); ?>
 <?= $this->render('modal_delete') ?>

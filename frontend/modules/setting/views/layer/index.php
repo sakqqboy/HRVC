@@ -17,7 +17,7 @@ $this->title = 'Management Layer';
 		<div class="row">
 			<div class="col-lg-2 col-3 link-item-active">
 				<i class="fa fa-bars mr-2" aria-hidden="true"></i>
-				Hierarchy Layer
+				Management Layer
 			</div>
 			<div class="col-lg-2 col-3 link-item">
 

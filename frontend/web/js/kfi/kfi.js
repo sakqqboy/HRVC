@@ -266,7 +266,11 @@ function kfiHistory(kfiId) {
                 $("#decimalHistory").html(data.kfi.ratio);
                 $("#detailHistory").html(data.kfi.detail);
                 $("#deadlineHistory").html(data.kfi.checkDate);
-                $("#NextCheckDateHistory").html(data.kfi.nextCheck);
+                if (data.kfi.status == 1) {
+                    $("#NextCheckDateHistory").html(data.kfi.nextCheck);
+                } else { 
+                    $("#NextCheckDateHistory").html('-');
+                }
                 $("#unitHistory").html(data.kfi.unit);
                 $("#countryHistory").html(data.kfi.countryName);
                 $("#showHistory").html(data.history);
@@ -391,4 +395,16 @@ function changeAcType(type) {
     } else { 
         $("#acType").val("update");
     }
+}
+function copyKfi(kfiId) { 
+    if (confirm('Do you want to make a copy?')) { 
+        var url = $url + 'kfi/management/copy-kfi?kfiId='+kfiId;
+        window.location.href=url;
+    }
+}
+function showAllTitle(departmentId) { 
+    $("#all-title-"+departmentId).show();
+}
+function closeAllTitle(departmentId) { 
+    $("#all-title-"+departmentId).css("display","none");
 }

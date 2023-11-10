@@ -109,7 +109,7 @@ class LayerController extends Controller
 		$layerName = $_POST["layerName"];
 		$check = Layer::find()
 			->select('layerId')
-			->where(["layerName" => $layerName])
+			->where(["layerName" => $layerName, "status" => 1])
 			->andWhere("layerId!=$layerId")
 			->asArray()
 			->one();
@@ -187,7 +187,7 @@ class LayerController extends Controller
 		$layerId = $_POST["layerId"];
 		$check = SubLayer::find()
 			->select('subLayerId')
-			->where(["subLayerName" => $subLayerName, "layerId" => $layerId])
+			->where(["subLayerName" => $subLayerName, "layerId" => $layerId, "status" => 1])
 			->andWhere("subLayerId!=$subLayerId")
 			->asArray()
 			->one();

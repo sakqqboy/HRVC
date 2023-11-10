@@ -87,11 +87,26 @@
 							</div>
 						</div>
 						<div class="col-12 mt-10">
-							<div class="input-group">
-								<label for="input" class="form-label"><strong class="red">*</strong> Select Period</label>
-								<div class="input-group">
-									<span class="input-group-text font-size-12"><i class="fa fa-calendar-o" aria-hidden="true"></i> &nbsp;&nbsp; Date</span>
-									<input type="date" aria-label="" class="form-control font-size-12" name="periodDate">
+							<div class="row">
+								<div class="col-12 border-bottom">
+									<label for="input" class="form-label"><strong class="red">*</strong> Select Period</label>
+								</div>
+								<div class="col-lg-6 col-md-6 col-12 mt-10">
+									<div class="input-group">
+
+										<div class="input-group">
+											<span class="input-group-text font-size-12"><i class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp;From</span>
+											<input type="date" aria-label="" class="form-control font-size-12" required name="fromDate" id="from-date">
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-12 mt-10">
+									<div class="input-group">
+										<div class="input-group">
+											<span class="input-group-text font-size-12"><i class="fa fa-calendar-o" aria-hidden="true"></i> &nbsp;&nbsp;To</span>
+											<input type="date" aria-label="" class="form-control font-size-12" required name="toDate" id="to-date">
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -123,7 +138,7 @@
 									<option value="C">C</option>
 								</select>
 							</div>
-							<div class="col-lg-6 col-md-6 col-6 pt-10">
+							<div class="col-lg-4 col-md-6 col-6 pt-10">
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Amount Type</label>
 								<select class="form-select font-size-13" aria-label="Default select example" name="amountType">
 									<option value="">% or Number</option>
@@ -131,15 +146,15 @@
 									<option value="2">Number</option>
 								</select>
 							</div>
-							<div class="col-lg-6 col-md-6 col-6 pt-10">
+							<div class="col-lg-8 col-md-6 col-6 pt-10">
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Code</label>
 								<select class="form-select font-size-13" aria-label="Default select example" name="code">
 									<option value="">
 										<&nbsp;&nbsp;=&nbsp;&nbsp;>
 									</option>
-									<option value="<">&nbsp;&nbsp;<?= '<' ?>&nbsp;&nbsp;</option>
-									<option value="=">&nbsp;&nbsp;=&nbsp;&nbsp;</option>
-									<option value=">">&nbsp;&nbsp;>&nbsp;&nbsp;</option>
+									<option value="<">&nbsp;&nbsp;<?= '<' ?>&nbsp;&nbsp;Result more than target</option>
+									<option value="=">&nbsp;&nbsp;=&nbsp;&nbsp;Result equal target</option>
+									<option value=">">&nbsp;&nbsp;>&nbsp;&nbsp;Result less than target</option>
 								</select>
 							</div>
 							<div class="col-lg-6 col-md-6 col-6 pt-10">

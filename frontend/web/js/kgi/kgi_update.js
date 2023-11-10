@@ -207,7 +207,9 @@ function updateKgi(kgiId) {
 			$(".previousUnit").val(data.unitId);
 			$(".unit-" + parseInt(data.unitId)).css("background-color", "#3366FF");
 			$(".unit-" + data.unitId).css("color", "white");
-			$("#periodDate-update").val(data.periodCheck);
+			//$("#periodDate-update").val(data.periodCheck);
+			$("#from-date-update").val(data.fromDate);
+			$("#to-date-update").val(data.toDate);
 			$("#nextCheckDate-update").val(data.nextCheck);
 			$("#targetAmount-update").val(data.targetAmount);
 			$("#detail-update").val(data.detail);

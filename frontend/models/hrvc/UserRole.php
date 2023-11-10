@@ -6,30 +6,48 @@ use Yii;
 use \frontend\models\hrvc\master\UserRoleMaster;
 
 /**
-* This is the model class for table "user_role".
-*
-* @property integer $userRoleId
-* @property integer $roleId
-* @property integer $userId
-* @property integer $status
-* @property string $createDateTime
-* @property string $updateDateTime
-*/
+ * This is the model class for table "user_role".
+ *
+ * @property integer $userRoleId
+ * @property integer $roleId
+ * @property integer $userId
+ * @property integer $status
+ * @property string $createDateTime
+ * @property string $updateDateTime
+ */
 
-class UserRole extends \frontend\models\hrvc\master\UserRoleMaster{
+class UserRole extends \frontend\models\hrvc\master\UserRoleMaster
+{
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function rules()
     {
         return array_merge(parent::rules(), []);
     }
 
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return array_merge(parent::attributeLabels(), []);
+    }
+    public static function isManager()
+    {
+        $userId = Yii::$app->user->id;
+        $userRole = UserRole::find()
+            ->JOIN("LEFT JOIN", "role r", "r.roleId=user_role.roleId")
+            ->where([
+                "user_role.userId" => $userId,
+                "user_role.roleId" => [1, 2, 3]
+            ])
+            ->asArray()
+            ->all();
+        if (count($userRole) > 0) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

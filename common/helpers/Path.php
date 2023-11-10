@@ -30,7 +30,7 @@ class Path
 		if ($_SERVER['HTTP_HOST'] == "localhost") {
 			$url = 'http://localhost/HRVC/frontend/web/';
 		} else {
-			$url = 'https://tcg-management-system.com/';
+			$url = 'https://tcg-hrvc-system.com/';
 		}
 		return $url;
 	}

@@ -60,4 +60,13 @@ class Layer extends \frontend\models\hrvc\master\LayerMaster
         }
         return $textTitle;
     }
+    public static function layerId($layerName)
+    {
+        $layer = Layer::find()->select('layerId')->where(["layerName" => $layerName, "status" => 1])->asArray()->one();
+        if (isset($layer) && !empty($layer)) {
+            return $layer["layerId"];
+        } else {
+            return "";
+        }
+    }
 }

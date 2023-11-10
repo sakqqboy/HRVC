@@ -9,10 +9,13 @@ use Yii;
 *
     * @property integer $kfiHistoryId
     * @property integer $kfiId
+    * @property integer $createrId
     * @property string $kfiHistoryName
     * @property integer $unitId
     * @property string $checkPeriodDate
     * @property string $nextCheckDate
+    * @property string $fromDate
+    * @property string $toDate
     * @property string $quantRatio
     * @property integer $amountType
     * @property string $code
@@ -42,9 +45,9 @@ return 'kfi_history';
 public function rules()
 {
 return [
-            [['kfiId', 'unitId', 'checkPeriodDate', 'nextCheckDate', 'quantRatio', 'amountType', 'code', 'historyStatus'], 'required'],
-            [['kfiId'], 'integer'],
-            [['checkPeriodDate', 'nextCheckDate', 'createDateTime', 'updateDateTime'], 'safe'],
+            [['kfiId', 'unitId', 'nextCheckDate', 'quantRatio', 'amountType', 'code', 'historyStatus'], 'required'],
+            [['kfiId', 'createrId'], 'integer'],
+            [['checkPeriodDate', 'nextCheckDate', 'fromDate', 'toDate', 'createDateTime', 'updateDateTime'], 'safe'],
             [['result'], 'number'],
             [['description', 'remark'], 'string'],
             [['kfiHistoryName', 'formular', 'titleProgress'], 'string', 'max' => 255],
@@ -61,10 +64,13 @@ public function attributeLabels()
 return [
     'kfiHistoryId' => 'Kfi History ID',
     'kfiId' => 'Kfi ID',
+    'createrId' => 'Creater ID',
     'kfiHistoryName' => 'Kfi History Name',
     'unitId' => 'Unit ID',
     'checkPeriodDate' => 'Check Period Date',
     'nextCheckDate' => 'Next Check Date',
+    'fromDate' => 'From Date',
+    'toDate' => 'To Date',
     'quantRatio' => 'Quant Ratio',
     'amountType' => 'Amount Type',
     'code' => 'Code',

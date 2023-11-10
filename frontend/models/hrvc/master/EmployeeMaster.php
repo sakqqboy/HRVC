@@ -59,7 +59,7 @@ return 'employee';
 public function rules()
 {
 return [
-            [['employeeNumber', 'employeeFirstname', 'employeeSurename', 'gender', 'birthDate', 'email', 'telephoneNumber', 'companyId', 'branchId', 'departmentId', 'titleId', 'countryId', 'employeeConditionId'], 'required'],
+            [['employeeFirstname', 'employeeSurename', 'gender', 'email', 'telephoneNumber', 'companyId', 'branchId', 'departmentId', 'employeeConditionId'], 'required'],
             [['birthDate', 'joinDate', 'hireDate', 'createDateTime', 'updateDateTime'], 'safe'],
             [['companyId', 'branchId', 'departmentId', 'titleId', 'teamId', 'teamPositionId', 'countryId', 'employeeConditionId', 'nationalityId', 'workingTime'], 'integer'],
             [['address1', 'address2', 'spoken', 'socialLink', 'remark'], 'string'],

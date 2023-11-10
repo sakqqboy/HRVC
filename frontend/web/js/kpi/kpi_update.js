@@ -22,7 +22,9 @@ function updateKpi(kpiId) {
 			$(".previousUnit").val(data.unitId);
 			$(".unit-" + parseInt(data.unitId)).css("background-color", "#3366FF");
 			$(".unit-" + data.unitId).css("color", "white");
-			$("#periodDate-update").val(data.periodCheck);
+			//$("#periodDate-update").val(data.periodCheck);
+			$("#from-date-update").val(data.fromDate);
+			$("#to-date-update").val(data.toDate);
 			$("#nextCheckDate-update").val(data.nextCheck);
 			$("#targetAmount-update").val(data.targetAmount);
 			$("#detail-update").val(data.detail);
@@ -131,7 +133,12 @@ function kpiHistory(kpiId) {
 				$("#status-view").css("color", "white !important");
 			}
 			$("#period-date-view").html(data.kpi.periodCheckText);
-			$("#next-date-view").html(data.kpi.nextCheckText);
+			if (data.kpi.status == 1) {
+				$("#next-date-view").html(data.kpi.nextCheckText);
+			} else {
+				$("#next-date-view").html('-');
+			}
+			
 			$("#company-name-view").html(data.kpi.companyName);
 			$("#quantRatio-view").html(data.kpi.quantRatioText);
 			$("#code-view").html(data.kpi.code);
@@ -339,3 +346,9 @@ function totalBranchUpdate() {
 	totalBranch=data.length;
 	return totalBranch;
 }
+function copyKpi(kpiId) { 
+	if (confirm('Do you want to make a copy?')) { 
+	    var url = $url + 'kpi/management/copy-kpi?kpiId='+kpiId;
+	    window.location.href=url;
+	}
+   }

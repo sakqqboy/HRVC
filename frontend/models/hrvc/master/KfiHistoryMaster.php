@@ -9,6 +9,7 @@ use Yii;
 *
     * @property integer $kfiHistoryId
     * @property integer $kfiId
+    * @property integer $createrId
     * @property string $kfiHistoryName
     * @property integer $unitId
     * @property string $checkPeriodDate
@@ -44,8 +45,8 @@ return 'kfi_history';
 public function rules()
 {
 return [
-            [['kfiId', 'unitId', 'checkPeriodDate', 'nextCheckDate', 'quantRatio', 'amountType', 'code', 'historyStatus'], 'required'],
-            [['kfiId'], 'integer'],
+            [['kfiId', 'unitId', 'nextCheckDate', 'quantRatio', 'amountType', 'code', 'historyStatus'], 'required'],
+            [['kfiId', 'createrId'], 'integer'],
             [['checkPeriodDate', 'nextCheckDate', 'fromDate', 'toDate', 'createDateTime', 'updateDateTime'], 'safe'],
             [['result'], 'number'],
             [['description', 'remark'], 'string'],
@@ -63,6 +64,7 @@ public function attributeLabels()
 return [
     'kfiHistoryId' => 'Kfi History ID',
     'kfiId' => 'Kfi ID',
+    'createrId' => 'Creater ID',
     'kfiHistoryName' => 'Kfi History Name',
     'unitId' => 'Unit ID',
     'checkPeriodDate' => 'Check Period Date',

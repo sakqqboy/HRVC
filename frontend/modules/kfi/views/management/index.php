@@ -93,25 +93,33 @@ $this->title = 'KFI';
 												</td>
 												<td></td>
 												<td><?= $kfi["month"] ?></td>
-												<td class="<?= $kfi['isOver'] == 1 ? 'text-danger' : '' ?>"><?= $kfi["nextCheck"] ?></td>
+												<td class="<?= $kfi['isOver'] == 1 ? 'text-danger' : '' ?>">
+
+													<?= $kfi["status"] == 1 ? $kfi["nextCheck"] : '' ?>
+												</td>
 												<td colspan="row">
 													<span data-bs-toggle="modal" data-bs-target="#kfi-issue" onclick="javascript:showKfiComment(<?= $kfiId ?>)">
 														<img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td">
 													</span>&nbsp;&nbsp;
 													<span class="dropdown" href="#" role="but ton" id="dropdownMenuLink-<?= $kfiId ?>" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
 													<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kfiId ?>">
-														<li data-bs-toggle="modal" data-bs-target="#staticBackdrop2" onclick="javascript:updateKfi(<?= $kfiId ?>)">
+														<li data-bs-toggle="modal" data-bs-target="#staticBackdrop2" onclick="javascript:updateKfi(<?= $kfiId ?>)" title="Update">
 															<a class="dropdown-item" href="#">
 																<i class="fa fa-file-text-o" aria-hidden="true"></i>
 																<strong class="red">*</strong>
 															</a>
 														</li>
-														<li data-bs-toggle="modal" data-bs-target="#staticBackdrop3" onclick="javascript:kfiHistory(<?= $kfiId ?>)">
+														<li data-bs-toggle="modal" data-bs-target="#staticBackdrop3" onclick="javascript:kfiHistory(<?= $kfiId ?>)" title="View">
 															<a class="dropdown-item" href="#">
 																<i class="fa fa-eye" aria-hidden="true"></i>
 															</a>
 														</li>
-														<li data-bs-toggle="modal" data-bs-target="#staticBackdrop4" onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)">
+														<li onclick="javascript:copyKfi(<?= $kfiId ?>)" title="Copy">
+															<a class="dropdown-item" href="#">
+																<i class="fa fa-copy" aria-hidden="true"></i>
+															</a>
+														</li>
+														<li data-bs-toggle="modal" data-bs-target="#staticBackdrop4" onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)" title="Delete">
 															<a class="dropdown-item" href="#">
 																<i class="fa fa-trash-o" aria-hidden="true"></i>
 															</a>
@@ -172,7 +180,8 @@ $this->title = 'KFI';
 	<?= $this->render('update_modal', [
 		"companies" => $companies,
 		"units" => $units,
-		"months" => $months
+		"months" => $months,
+		"isManager" => $isManager
 	]) ?>
 	<?php ActiveForm::end(); ?>
 

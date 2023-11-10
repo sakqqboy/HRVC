@@ -188,17 +188,49 @@ $this->title = 'Department';
 																				?>">
 												</div> -->
 											</div>
-											<div class="col-9 department-sizesmall" id="title-department-<?= $departmentId + 543 ?>">
+											<div class="col-9 department-sizesmall department-title-box" id="title-department-<?= $departmentId + 543 ?>">
 												<?php
+
 												if (isset($dpm["titleDepartments"]) && count($dpm["titleDepartments"]) > 0) {
-													foreach ($dpm["titleDepartments"] as $dpm2) : ?>
-														<div class="col-12 mt-5">
-															<?= $dpm2["titleName"] ?>
-														</div>
-												<?php
+													$count = 0;
+													foreach ($dpm["titleDepartments"] as $dpm2) :
+														if ($count < 7) {
+												?>
+															<div class="col-12 mt-5">
+																<?= $dpm2["titleName"] ?>
+															</div>
+													<?php
+														}
+														$count++;
 													endforeach;
 												}
+												if (count($dpm["titleDepartments"]) > 7) { ?>
+													<div class="col-12 font-size-13 text-end">
+														<a href="javascript:showAllTitle(<?= $departmentId ?>)" style="text-decoration: none;">
+															All Titles
+														</a>
+													</div>
+												<?php
+
+												}
 												?>
+												<div class="border all-title-box" id="all-title-<?= $departmentId ?>">
+													<div class="col-12 text-end text-danger font-size-18" style="margin-bottom: -10px;">
+														<a href="javascript:closeAllTitle(<?= $departmentId ?>)">
+															<i class="fa fa-times-circle" aria-hidden="true"></i>
+														</a>
+													</div>
+													<?php
+													if (isset($dpm["titleDepartments"]) && count($dpm["titleDepartments"]) > 0) {
+														foreach ($dpm["titleDepartments"] as $dpm2) : ?>
+															<div class="col-12 mt-5">
+																<?= $dpm2["titleName"] ?>
+															</div>
+													<?php
+														endforeach;
+													}
+													?>
+												</div>
 											</div>
 										</div>
 									</div>

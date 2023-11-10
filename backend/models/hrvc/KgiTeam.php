@@ -49,12 +49,21 @@ class KgiTeam extends \backend\models\hrvc\master\KgiTeamMaster
         $data = [];
         if (isset($kgiTeam) && count($kgiTeam) > 0) {
             foreach ($kgiTeam as $team) :
-                $employee = Employee::find()->select('picture,employeeId')
+                $employee = Employee::find()->select('picture,employeeId,gender')
                     ->where(["teamId" => $team["teamId"]])
                     ->asArray()->all();
                 if (isset($employee) && count($employee) > 0) {
                     foreach ($employee as $emp) :
-                        $data[$emp["employeeId"]] = $emp["picture"];
+                        if ($emp['picture'] == "") {
+                            if ($emp['gender'] == 1) {
+                                $picture = 'image/user.png';
+                            } else {
+                                $picture = 'image/lady.jpg';
+                            }
+                        } else {
+                            $picture = $emp['picture'];
+                        }
+                        $data[$emp["employeeId"]] = $picture;
                     endforeach;
                 }
             endforeach;

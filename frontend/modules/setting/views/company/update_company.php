@@ -79,12 +79,13 @@ $this->title = 'New Company';
 						<input type="text" class="form-control" id="colFormLabel" name="companyName" value="<?= $company['companyName'] ?>" required>
 					</div>
 					<div class="mt-20"></div>
-					<div class="col-5">
+					<!-- <div class="col-5">
 						Tag line
 					</div>
 					<div class="col-7">
-						<input type="text" class="form-control" id="colFormLabel" name="tagLine" value="<?= $company['tagLine'] ?>">
-					</div>
+						<input type="text" class="form-control" id="colFormLabel" name="tagLine" value="<?php // $company['tagLine'] 
+																		?>">
+					</div> -->
 					<div class="mt-20"></div>
 					<?php
 					if ($company['headQuaterId'] != null) { ?>

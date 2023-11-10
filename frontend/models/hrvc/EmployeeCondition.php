@@ -45,4 +45,20 @@ class EmployeeCondition extends \frontend\models\hrvc\master\EmployeeConditionMa
             return '';
         }
     }
+    public static function employeeConditionId($employeeConditionName)
+    {
+        if ($employeeConditionName != '') {
+            $employeeCondition = EmployeeCondition::find()
+                ->where(["employeeConditionName" => $employeeConditionName, "status" => 1])
+                ->asArray()
+                ->one();
+            if (isset($employeeCondition) && !empty($employeeCondition)) {
+                return $employeeCondition["employeeConditionId"];
+            } else {
+                return "";
+            }
+        } else {
+            return "";
+        }
+    }
 }

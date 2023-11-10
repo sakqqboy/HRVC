@@ -114,7 +114,7 @@ $this->title = 'KPI Grid View';
 											<div class="col-lg-2 col-md-6 col-12">
 												<div class="col-12">
 													<span class="badge rounded-pill slds-badge">
-														Deadline <span class="text-dark font-size-10">: <?= $kpi["periodCheck"] ?></span>
+														Term <span class="text-dark font-size-10">: <?= $kpi["fromDate"] ?> - <?= $kpi["toDate"] ?></span>
 													</span>
 												</div>
 												<div class="col-12 top-teamcontent">
@@ -268,7 +268,8 @@ $form = ActiveForm::begin([
 <?= $this->render('modal_update', [
 	"units" => $units,
 	"companies" => $companies,
-	"months" => $months
+	"months" => $months,
+	"isManager" => $isManager
 ]) ?>
 <?php ActiveForm::end(); ?>
 <?= $this->render('modal_delete') ?>

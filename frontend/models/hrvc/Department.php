@@ -54,4 +54,24 @@ class Department extends \frontend\models\hrvc\master\DepartmentMaster
             return "";
         }
     }
+    public static function branchNameWithDepartmentName($text)
+    {
+        $textArr = explode('(Branch::', $text);
+        $departmentName = $textArr[0];
+        $branchName = substr($textArr[1], 0, -1);
+        $department = Department::find()
+            ->select('department.departmentId')
+            ->JOIN("LEFT JOIN", "branch b", "b.branchId=department.branchId")
+            ->where([
+                "department.departmentName" => $departmentName,
+                "b.branchName" => $branchName
+            ])
+            ->asArray()
+            ->one();
+        if (isset($department) && !empty($department)) {
+            return $department["departmentId"];
+        } else {
+            return "";
+        }
+    }
 }

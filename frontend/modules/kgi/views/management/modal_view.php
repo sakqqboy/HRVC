@@ -121,7 +121,7 @@
 					</div>
 				</div>
 				<div class="col-12 History-Backdrop3">
-					History
+					Update Description
 				</div>
 				<hr>
 				<div class="col-12" id="kgi-history"></div>

@@ -44,7 +44,7 @@ class BranchController extends Controller
 			->JOIN("LEFT JOIN", "company c", "branch.companyId=c.companyId")
 			->JOIN("LEFT JOIN", "country co", "co.countryId=c.countryId")
 			->where(["branch.status" => 1])
-			->orderBy('branch.branchName')
+			->orderBy('c.companyName')
 			->asArray()->all();
 		return json_encode($branch);
 	}

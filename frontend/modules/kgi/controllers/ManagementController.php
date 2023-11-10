@@ -5,8 +5,10 @@ namespace frontend\modules\kgi\controllers;
 use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
+use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Department;
 use frontend\models\hrvc\Group;
+use frontend\models\hrvc\Kfi;
 use frontend\models\hrvc\Kgi;
 use frontend\models\hrvc\KgiBranch;
 use frontend\models\hrvc\KgiDepartment;
@@ -14,8 +16,10 @@ use frontend\models\hrvc\KgiHistory;
 use frontend\models\hrvc\KgiIssue;
 use frontend\models\hrvc\KgiSolution;
 use frontend\models\hrvc\KgiTeam;
+use frontend\models\hrvc\Kpi;
 use frontend\models\hrvc\Team;
 use frontend\models\hrvc\User;
+use frontend\models\hrvc\UserRole;
 use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
@@ -36,6 +40,7 @@ class ManagementController extends Controller
 		if (!Yii::$app->user->id) {
 			return $this->redirect(Yii::$app->homeUrl . 'site/login');
 		}
+		$this->setDefault();
 		return true;
 	}
 	public function actionIndex()
@@ -62,11 +67,13 @@ class ManagementController extends Controller
 
 		curl_close($api);
 		$months = ModelMaster::monthFull(1);
+		$isManager = UserRole::isManager();
 		return $this->render('index', [
 			"units" => $units,
 			"companies" => $companies,
 			"months" => $months,
-			"kgis" => $kgis
+			"kgis" => $kgis,
+			"isManager" => $isManager
 		]);
 	}
 	public function actionGrid()
@@ -93,21 +100,26 @@ class ManagementController extends Controller
 
 		curl_close($api);
 		$months = ModelMaster::monthFull(1);
+		$isManager = UserRole::isManager();
 		return $this->render('kgi_grid', [
 			"units" => $units,
 			"companies" => $companies,
 			"months" => $months,
-			"kgis" => $kgis
+			"kgis" => $kgis,
+			"isManager" => $isManager
 		]);
 	}
 	public function actionCreateKgi()
 	{
+
 		if (isset($_POST["kgiName"]) && trim($_POST["kgiName"])) {
 			$kgi = new Kgi();
 			$kgi->kgiName = $_POST["kgiName"];
 			$kgi->companyId = $_POST["companyId"];
 			$kgi->unitId = $_POST["unit"];
-			$kgi->periodDate = $_POST["periodDate"];
+			//$kgi->periodDate = $_POST["periodDate"];
+			$kgi->fromDate = $_POST["fromDate"];
+			$kgi->toDate = $_POST["toDate"];
 			$kgi->targetAmount = $_POST["targetAmount"];
 			$kgi->kgiDetail = $_POST["detail"];
 			$kgi->quantRatio = $_POST["quantRatio"];
@@ -117,7 +129,7 @@ class ManagementController extends Controller
 			$kgi->status = $_POST["status"];
 			$kgi->month = $_POST["month"];
 			$kgi->result = $_POST["result"];
-			$kgi->createrId = 1;
+			$kgi->createrId = Yii::$app->user->id;
 			$kgi->createDateTime = new Expression('NOW()');
 			$kgi->updateDateTime = new Expression('NOW()');
 			if ($kgi->save(false)) {
@@ -402,15 +414,24 @@ class ManagementController extends Controller
 	public function actionUpdateKgi()
 	{
 		//throw new Exception(print_r(Yii::$app->request->post(), true));
+		$isManager = UserRole::isManager();
 		if (isset($_POST["kgiId"]) && $_POST["kgiId"] != "") {
 			$kgiId = $_POST["kgiId"];
 			//throw new Exception(print_r(Yii::$app->request->post(), true));
 			$kgi = Kgi::find()->where(["kgiId" => $kgiId])->one();
-			//$kgi->kgiName = $_POST["kgiName"];
+			$kgi->kgiName = $_POST["kgiName"];
 			$kgi->companyId = $_POST["companyId"];
 			$kgi->unitId = $_POST["unit"];
-			$kgi->periodDate = $_POST["periodDate"];
-			$kgi->targetAmount = $_POST["targetAmount"];
+			//$kgi->periodDate = $_POST["periodDate"];
+			if ($kgi->fromDate == "") {
+				$kgi->fromDate = $_POST["fromDate"];
+			}
+			if ($kgi->toDate == "") {
+				$kgi->toDate = $_POST["toDate"];
+			}
+			if ($isManager == 1 && $kgi->targetAmount == "") {
+				$kgi->targetAmount = $_POST["targetAmount"];
+			}
 			$kgi->kgiDetail = $_POST["detail"];
 			$kgi->quantRatio = $_POST["quantRatio"];
 			$kgi->priority = $_POST["priority"];
@@ -419,17 +440,21 @@ class ManagementController extends Controller
 			$kgi->status = $_POST["status"];
 			$kgi->month = $_POST["month"];
 			$kgi->result = $_POST["result"];
-			$kgi->createrId = 1;
 			$kgi->updateDateTime = new Expression('NOW()');
 			if ($kgi->save(false)) {
 				$kgiHistory = new KgiHistory();
 				$kgiHistory->kgiId = $_POST["kgiId"];
+				$kgiHistory->updaterId = Yii::$app->user->id;
 				$kgiHistory->kgiHistoryName = $_POST["historyName"];
 				$kgiHistory->titleProcess = $_POST["historyName"];
 				$kgiHistory->unitId = $_POST["unit"];
-				$kgiHistory->periodDate = $_POST["periodDate"];
+				//$kgiHistory->periodDate = $_POST["periodDate"];
 				$kgiHistory->nextCheckDate = $_POST["nextDate"];
-				$kgiHistory->targetAmount = $_POST["targetAmount"];
+				if ($isManager == 1) {
+					$kgiHistory->targetAmount = $_POST["targetAmount"];
+				} else {
+					$kgiHistory->targetAmount = $kgi->targetAmount;
+				}
 				$kgiHistory->description = $_POST["detail"];
 				$kgiHistory->remark = $_POST["remark"];
 				$kgiHistory->quantRatio = $_POST["quantRatio"];
@@ -439,9 +464,11 @@ class ManagementController extends Controller
 				$kgiHistory->status = $_POST["status"];
 				$kgiHistory->month = $_POST["month"];
 				$kgiHistory->result = $_POST["result"];
-				$kgiHistory->createrId = 1;
+				$kgiHistory->createrId = Yii::$app->user->id;
 				$kgiHistory->createDateTime = new Expression('NOW()');
 				$kgiHistory->updateDateTime = new Expression('NOW()');
+				$kgiHistory->fromDate = $_POST["fromDate"];
+				$kgiHistory->toDate = $_POST["toDate"];
 				$kgiHistory->save(false);
 				if (isset($_POST["branch"]) && count($_POST["branch"]) > 0) {
 					$this->saveKgiBranch($_POST["branch"], $kgiId);
@@ -696,7 +723,7 @@ class ManagementController extends Controller
 		} else {
 			$file = "kgi_search_result_grid";
 		}
-
+		$isManager = UserRole::isManager();
 		return $this->render($file, [
 			"units" => $units,
 			"companies" => $companies,
@@ -709,7 +736,95 @@ class ManagementController extends Controller
 			"status" => $status,
 			"year" => $year,
 			"branches" => $branches,
-			"teams" => $teams
+			"teams" => $teams,
+			"isManager" => $isManager
 		]);
+	}
+	public function actionCopyKgi($kgiId)
+	{
+		$kgi = Kgi::find()->where(["kgiId" => $kgiId])->asArray()->one();
+		$copy = new Kgi();
+
+		$copy->kgiName = $kgi["kgiName"] . ' copy';
+		$copy->companyId = $kgi["companyId"];
+		$copy->unitId = $kgi["unitId"];
+		//$kgi->periodDate = $_POST["periodDate"];
+		$copy->fromDate = $kgi["fromDate"];
+		$copy->toDate = $kgi["toDate"];
+		$copy->targetAmount = $kgi["targetAmount"];
+		$copy->kgiDetail = $kgi["kgiDetail"];
+		$copy->quantRatio = $kgi["quantRatio"];
+		$copy->priority = $kgi["priority"];
+		$copy->amountType = $kgi["amountType"];
+		$copy->code = $kgi["code"];
+		$copy->status = $kgi["status"];
+		$copy->month = $kgi["month"];
+		$copy->result = $kgi["result"];
+		$copy->createrId = Yii::$app->user->id;
+		$copy->createDateTime = new Expression('NOW()');
+		$copy->updateDateTime = new Expression('NOW()');
+		if ($copy->save(false)) {
+			$kgiCopyId = Yii::$app->db->lastInsertID;
+			$branch = [];
+			$branches = KgiBranch::find()
+				->select('branchId')
+				->where(["kgiId" => $kgiId])
+				->asArray()
+				->all();
+			if (count($branches) > 0) {
+				$i = 0;
+				foreach ($branches as $b) :
+					$branch[$i] = $b["branchId"];
+					$i++;
+				endforeach;
+			}
+			if (count($branch) > 0) {
+				$this->saveKgiBranch($branch, $kgiCopyId);
+			}
+			$department = [];
+			$departments = KgiDepartment::find()
+				->select('departmentId')
+				->where(["kgiId" => $kgiId])
+				->asArray()
+				->all();
+			if (count($departments) > 0) {
+				$i = 0;
+				foreach ($departments as $d) :
+					$department[$i] = $d["departmentId"];
+					$i++;
+				endforeach;
+			}
+			if (count($department) > 0) {
+				$this->saveKgiDepartment($department, $kgiCopyId);
+			}
+			$team = [];
+			$teams = KgiTeam::find()
+				->select('teamId')
+				->where(["kgiId" => $kgiId])
+				->asArray()
+				->all();
+			if (count($teams) > 0) {
+				$i = 0;
+				foreach ($teams as $t) :
+					$team[$i] = $t["teamId"];
+					$i++;
+				endforeach;
+			}
+			if (count($team) > 0) {
+				$this->saveKgiTeam($team, $kgiCopyId);
+			}
+			return $this->redirect('index');
+		}
+	}
+	public function setDefault()
+	{
+		$deletedCompany = Company::find()->where(["status" => 99])->asArray()->all();
+		if (isset($deletedCompany) && count($deletedCompany) > 0) {
+			foreach ($deletedCompany as $company) :
+				Kfi::updateAll(["status" => 99], ["companyId" => $company["companyId"]]);
+				Kgi::updateAll(["status" => 99], ["companyId" => $company["companyId"]]);
+				Kpi::updateAll(["status" => 99], ["companyId" => $company["companyId"]]);
+			endforeach;
+		}
 	}
 }

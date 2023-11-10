@@ -16,7 +16,12 @@ use frontend\models\hrvc\KfiDepartment;
 use frontend\models\hrvc\KfiHistory;
 use frontend\models\hrvc\KfiIssue;
 use frontend\models\hrvc\KfiSolution;
+use frontend\models\hrvc\Kgi;
+use frontend\models\hrvc\KgiHistory;
+use frontend\models\hrvc\Kpi;
+use frontend\models\hrvc\KpiHistory;
 use frontend\models\hrvc\User;
+use frontend\models\hrvc\UserRole;
 use Yii;
 use yii\base\Model;
 use yii\db\Expression;
@@ -42,6 +47,7 @@ class ManagementController extends Controller
 		if (!Yii::$app->user->id) {
 			return $this->redirect(Yii::$app->homeUrl . 'site/login');
 		}
+		$this->setDefault();
 		return true; //go to origin request
 	}
 	public function actionIndex()
@@ -64,6 +70,8 @@ class ManagementController extends Controller
 		$units = curl_exec($api);
 		$units = json_decode($units, true);
 
+		$isManager = UserRole::isManager();
+
 		curl_close($api);
 		//throw new Exception(print_r($kfis, true));
 
@@ -73,7 +81,8 @@ class ManagementController extends Controller
 			"companies" => $companies,
 			"units" => $units,
 			"months" => $months,
-			"kfis" => $kfis
+			"kfis" => $kfis,
+			"isManager" => $isManager
 
 		]);
 	}
@@ -101,12 +110,14 @@ class ManagementController extends Controller
 		curl_close($api);
 		// $units = ["1" => "Monthly", "2" => "Weekly", "3" => "QuaterLy", "4" => "Daily"];
 		$months = ModelMaster::monthFull(1);
+		$isManager = UserRole::isManager();
 		//throw new Exception(print_r($kfis, true));
 		return $this->render('index_grid', [
 			"companies" => $companies,
 			"units" => $units,
 			"months" => $months,
-			"kfis" => $kfis
+			"kfis" => $kfis,
+			"isManager" => $isManager
 
 		]);
 	}
@@ -122,7 +133,7 @@ class ManagementController extends Controller
 			$kfi->month = $_POST["month"];
 			$kfi->year = $_POST["year"];
 			$kfi->kfiDetail = $_POST["detail"];
-			$kfi->createrId = 1;
+			$kfi->createrId = Yii::$app->user->id;
 			$kfi->status = 1;
 			$kfi->createDateTime = new Expression('NOW()');
 			$kfi->updateDateTime = new Expression('NOW()');
@@ -140,15 +151,20 @@ class ManagementController extends Controller
 	}
 	public function actionSaveUpdateKfi()
 	{
+		$isManager = UserRole::isManager();
 		if (isset($_POST["kfiId"])) {
 			//throw new Exception(print_r(Yii::$app->request->post(), true));
 			$kfi = Kfi::find()->where(["kfiId" => $_POST["kfiId"]])->one();
 			$kfi->unitId = $_POST["unit"];
 			$kfi->kfiDetail = $_POST["detail"];
 			$kfi->status = $_POST["status"];
+			if ($isManager == 1) {
+				$kfi->targetAmount = $_POST["targetAmount"];
+			}
 			$kfi->save(false);
 			$kfiHistory = new KfiHistory();
 			$kfiHistory->kfiId = $_POST["kfiId"];
+			$kfiHistory->createrId = Yii::$app->user->id;
 			$kfiHistory->titleProgress = $_POST["progressTitle"];
 			$kfiHistory->remark = $_POST["progressTitle"];
 			//$kfiHistory->checkPeriodDate = $_POST["periodDate"];
@@ -588,6 +604,7 @@ class ManagementController extends Controller
 		} else {
 			$file = "kfi_search_result_grid";
 		}
+		$isManager = UserRole::isManager();
 
 		return $this->render($file, [
 			"units" => $units,
@@ -601,6 +618,7 @@ class ManagementController extends Controller
 			"status" => $status,
 			"year" => $year,
 			"branches" => $branches,
+			"isManager" => $isManager
 		]);
 	}
 	public function actionCompanyMultiBranch()
@@ -625,5 +643,99 @@ class ManagementController extends Controller
 		$res["status"] = true;
 		$res["branchText"] = $branchText;
 		return json_encode($res);
+	}
+	public function actionCopyKfi($kfiId)
+	{
+		$kfi = Kfi::find()->where(["kfiId" => $kfiId])->asArray()->one();
+		$copy = new Kfi();
+		$copy->kfiName = $kfi["kfiName"] . ' (copy)';
+		$copy->companyId = $kfi["companyId"];
+		$copy->unitId = $kfi["unitId"];
+		$copy->targetAmount = $kfi["targetAmount"];
+		$copy->month = $kfi["month"];
+		$copy->year = $kfi["year"];
+		$copy->kfiDetail = $kfi["kfiDetail"];
+		$copy->createrId = Yii::$app->user->id;
+		$copy->status = 1;
+		$copy->createDateTime = new Expression('NOW()');
+		$copy->updateDateTime = new Expression('NOW()');
+		if ($copy->save(false)) {
+			$kfiCoypId = Yii::$app->db->lastInsertID;
+			$branch = [];
+			$branches = KfiBranch::find()
+				->select('branchId')
+				->where(["kfiId" => $kfiId])
+				->asArray()
+				->all();
+			if (count($branches) > 0) {
+				$i = 0;
+				foreach ($branches as $b) :
+					$branch[$i] = $b["branchId"];
+					$i++;
+				endforeach;
+			}
+			if (count($branch) > 0) {
+				$this->saveKfiBranch($branch, $kfiCoypId);
+			}
+			$department = [];
+			$departments = KfiDepartment::find()
+				->select('departmentId')
+				->where(["kfiId" => $kfiId])
+				->asArray()
+				->all();
+			if (count($departments) > 0) {
+				$i = 0;
+				foreach ($departments as $d) :
+					$department[$i] = $d["departmentId"];
+					$i++;
+				endforeach;
+			}
+			if (count($department) > 0) {
+				$this->saveKfiDepartment($department, $kfiCoypId);
+			}
+			return $this->redirect('index');
+		}
+	}
+	public function actionAssignKfi()
+	{
+		$groupId = Group::currentGroupId();
+		if ($groupId == null) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+		}
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index');
+		$kfis = curl_exec($api);
+		$kfis = json_decode($kfis, true);
+
+		$isManager = UserRole::isManager();
+		curl_close($api);
+		$months = ModelMaster::monthFull(1);
+		return $this->render('assign', [
+			"months" => $months,
+			"kfis" => $kfis,
+			"isManager" => $isManager
+
+		]);
+	}
+	public function setDefault()
+	{
+		$deletedCompany = Company::find()->where(["status" => 99])->asArray()->all();
+		if (isset($deletedCompany) && count($deletedCompany) > 0) {
+			foreach ($deletedCompany as $company) :
+				Kfi::updateAll(["status" => 99], ["companyId" => $company["companyId"]]);
+				Kgi::updateAll(["status" => 99], ["companyId" => $company["companyId"]]);
+				Kpi::updateAll(["status" => 99], ["companyId" => $company["companyId"]]);
+			endforeach;
+		}
+	}
+	public function actionSetDefaultCreater()
+	{
+		Kfi::updateAll(["createrId" => 7]);
+		Kgi::updateAll(["createrId" => 7]);
+		Kpi::updateAll(["createrId" => 7]);
+		KfiHistory::updateAll(["createrId" => 7]);
+		KgiHistory::updateAll(["createrId" => 7]);
+		KpiHistory::updateAll(["createrId" => 7]);
 	}
 }

@@ -7,6 +7,7 @@ use backend\models\hrvc\Company;
 use backend\models\hrvc\Country;
 use backend\models\hrvc\Employee;
 use backend\models\hrvc\Kfi;
+use backend\models\hrvc\KfiBranch;
 use backend\models\hrvc\KfiDepartment;
 use backend\models\hrvc\KfiHistory;
 use backend\models\hrvc\KfiSolution;
@@ -14,7 +15,7 @@ use backend\models\hrvc\Unit;
 use backend\models\hrvc\User;
 use common\models\ModelMaster;
 use Exception;
-use frontend\models\hrvc\KfiIssue;
+use backend\models\hrvc\KfiIssue;
 use yii\db\Expression;
 use yii\web\Controller;
 
@@ -31,14 +32,16 @@ class ManagementController extends Controller
 	public function actionIndex()
 	{
 		$data = [];
-		$kfis = Kfi::find()->where(["status" => [1, 2]])->asArray()->all();
+		$kfis = Kfi::find()->where(["status" => [1, 2]])->asArray()->orderBy('updateDateTime DESC')->all();
 		if (isset($kfis) && count($kfis) > 0) {
 			foreach ($kfis as $kfi) :
 				$data[$kfi["kfiId"]] = [
 					"kfiName" => $kfi["kfiName"],
 					"companyName" => Company::companyName($kfi['companyId']),
 					"branchName" => Branch::kfiBranchName($kfi["kfiId"]),
+					"kfiBranch" => KfiBranch::kfiBranch($kfi["kfiId"]),
 					"quantRatio" => "",
+					"creater" => User::employeeNameByuserId($kfi["createrId"]),
 					"target" => $kfi['targetAmount'],
 					"code" => "",
 					"result" => "",
@@ -56,21 +59,27 @@ class ManagementController extends Controller
 					"toDate" => ""
 				];
 				$kfiHistory = KfiHistory::find()
-					->where(["kfiId" => $kfi["kfiId"], "status" => [1, 4]])
+					->where(["kfiId" => $kfi["kfiId"], "status" => [1, 2]])
 					->orderBy('kfiHistoryId DESC')->one();
 				if (isset($kfiHistory) && !empty($kfiHistory)) {
 					if ($kfi["targetAmount"] == null || $kfi["targetAmount"] == '' || $kfi["targetAmount"] == 0) {
 						$ratio = 0;
 					} else {
-						$ratio = ((int)$kfiHistory['result'] / (int)$kfi["targetAmount"]) * 100;
+						if ($kfiHistory["code"] == '<' || $kfiHistory["code"] == '=') {
+							$ratio = ((int)$kfiHistory['result'] / (int)$kfi["targetAmount"]) * 100;
+						} else {
+							$ratio = ((int)$kfi['targetAmount'] / (int)$kfiHistory["result"]) * 100;
+						}
 					}
 					$data[$kfi["kfiId"]] = [
 						"kfiName" => $kfi["kfiName"],
 						"companyName" => Company::companyName($kfi['companyId']),
 						"branchName" => Branch::kfiBranchName($kfi["kfiId"]),
+						"kfiBranch" => KfiBranch::kfiBranch($kfi["kfiId"]),
 						"target" => $kfi['targetAmount'],
 						"unit" => Unit::unitName($kfi['unitId']),
 						"month" => ModelMaster::monthEng($kfi['month'], 1),
+						"creater" => User::employeeNameByuserId($kfiHistory["createrId"]),
 						"status" => $kfi['status'],
 						"quantRatio" => $kfiHistory["quantRatio"],
 						"code" =>  $kfiHistory["code"],
@@ -100,17 +109,19 @@ class ManagementController extends Controller
 		$res["companyName"] = Company::companyName($kfi['companyId']);
 		$res["companyId"] = $kfi['companyId'];
 		$res["branchName"] = Branch::kfiBranchName($kfiId);
+		$res["kfiBranch"] = KfiBranch::kfiBranch($kfiId);
 		$res["unitId"] = $kfi["unitId"];
 		$res["detail"] = $kfi["kfiDetail"];
 		$res["targetAmount"] = number_format($kfi["targetAmount"], 2);
 		$res["status"] = $kfi["status"];
+		$res["creater"] = User::employeeNameByuserId($kfi["createrId"]);
 		$res["monthName"] = strtoupper(ModelMaster::monthEng($kfi['month'], 1));
 		$res["month"] = $kfi['month'];
 		$res["unit"] = Unit::unitName($kfi['unitId']);
 		$res["countryName"] = Country::countryNameBycompany($kfi['companyId']);
 		$res["flag"] = Country::countryFlagBycompany($kfi["companyId"]);
 		$kfiHistory = KfiHistory::find()
-			->where(["kfiId" => $kfiId, "status" => [1, 4]])
+			->where(["kfiId" => $kfiId, "status" => [1, 2]])
 			->orderBy('kfiHistoryId DESC')
 			->asArray()
 			->one();
@@ -123,6 +134,7 @@ class ManagementController extends Controller
 			$res2["nextCheck"] = ModelMaster::engDate($kfiHistory["nextCheckDate"], 2);
 			$res2["checkDate"] = ModelMaster::engDate($kfiHistory["checkPeriodDate"], 2);
 			$res2["nextCheckDate"] = $kfiHistory["nextCheckDate"];
+			$res["creater"] = User::employeeNameByuserId($kfiHistory["createrId"]);
 			//$res2["periodCheck"] = $kfiHistory["checkPeriodDate"];
 			$res2["fromDate"] = $kfiHistory["fromDate"];
 			$res2["toDate"] = $kfiHistory["toDate"];
@@ -130,7 +142,11 @@ class ManagementController extends Controller
 			if ($kfi["targetAmount"] == null || $kfi["targetAmount"] == '' || $kfi["targetAmount"] == 0) {
 				$ratio = 0;
 			} else {
-				$ratio = ((int)$kfiHistory['result'] / (int)$kfi["targetAmount"]) * 100;
+				if ($kfiHistory["code"] == '<' || $kfiHistory["code"] == '=') {
+					$ratio = ((int)$kfiHistory['result'] / (int)$kfi["targetAmount"]) * 100;
+				} else {
+					$ratio = ((int)$kfi["targetAmount"] / (int)$kfiHistory['result']) * 100;
+				}
 			}
 			$res2["ratio"] = number_format($ratio, 2);
 		} else {
@@ -169,7 +185,8 @@ class ManagementController extends Controller
 					"result" => $history["result"],
 					"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
 					"time" => ModelMaster::timeText($time[1]),
-					"status" => $history["historyStatus"]
+					"status" => $history["historyStatus"],
+					"creater" => User::employeeNameByuserId($history["createrId"])
 				];
 			endforeach;
 		}
@@ -178,7 +195,7 @@ class ManagementController extends Controller
 	public function actionKfiIssue($kfiId)
 	{
 		$kfiIssue = KfiIssue::find()
-			->where(["status" => [1, 4], "kfiId" => $kfiId])
+			->where(["status" => [1, 2], "kfiId" => $kfiId])
 			->orderBy("kfiIssueId")
 			->asArray()
 			->all();
@@ -222,7 +239,9 @@ class ManagementController extends Controller
 		$kfis = Kfi::find()
 			->select('kfi.*')
 			->JOIN("LEFT JOIN", "kfi_branch kb", "kb.kfiId=kfi.kfiId")
-			->where(["kfi.status" => [1, 4]])
+			->JOIN("LEFT JOIN", "company c", "c.companyId=kfi.companyId")
+			->where(["c.status" => 1])
+			->andWhere("kfi.status!=99")
 			->andFilterWhere([
 				"kfi.companyId" => $companyId,
 				"kb.branchId" => $branchId,
@@ -238,6 +257,7 @@ class ManagementController extends Controller
 					"kfiName" => $kfi["kfiName"],
 					"companyName" => Company::companyName($kfi['companyId']),
 					"branchName" => Branch::kfiBranchName($kfi["kfiId"]),
+					"creater" => User::employeeNameByuserId($kfi["createrId"]),
 					"quantRatio" => "",
 					"target" => $kfi['targetAmount'],
 					"code" => "",
@@ -257,13 +277,17 @@ class ManagementController extends Controller
 					"toDate" => "",
 				];
 				$kfiHistory = KfiHistory::find()
-					->where(["kfiId" => $kfi["kfiId"], "status" => [1, 4]])
+					->where(["kfiId" => $kfi["kfiId"], "status" => [1, 2]])
 					->orderBy('kfiHistoryId DESC')->one();
 				if (isset($kfiHistory) && !empty($kfiHistory)) {
 					if ($kfi["targetAmount"] == null || $kfi["targetAmount"] == '' || $kfi["targetAmount"] == 0) {
 						$ratio = 0;
 					} else {
-						$ratio = ((int)$kfiHistory['result'] / (int)$kfi["targetAmount"]) * 100;
+						if ($kfiHistory["code"] == '<' || $kfiHistory["code"] == '=') {
+							$ratio = ((int)$kfiHistory['result'] / (int)$kfi["targetAmount"]) * 100;
+						} else {
+							$ratio = ((int)$kfi["targetAmount"] / (int)$kfiHistory['result']) * 100;
+						}
 					}
 					$data[$kfi["kfiId"]] = [
 						"kfiName" => $kfi["kfiName"],
@@ -279,6 +303,7 @@ class ManagementController extends Controller
 						"ratio" => number_format($ratio, 2),
 						"nextCheck" => ModelMaster::engDate($kfiHistory["nextCheckDate"], 2),
 						"checkDate" => ModelMaster::engDate($kfiHistory["checkPeriodDate"], 2),
+						"creater" => User::employeeNameByuserId($kfiHistory["createrId"]),
 						"amountType" => $kfiHistory["amountType"],
 						"countryName" => Country::countryNameBycompany($kfi['companyId']),
 						"flag" => Country::countryFlagBycompany($kfi['companyId']),
