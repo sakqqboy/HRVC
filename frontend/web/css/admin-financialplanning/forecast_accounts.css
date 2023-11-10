@@ -146,7 +146,7 @@
 }
 
 .body-lightgrey {
-    background-color: #eeeeee;
+    background-color: #F2F2F2;
     border: none;
 }
 
@@ -179,5 +179,25 @@
 
 .users-solid1 {
     border-bottom: 1px rgb(184, 184, 184) solid;
+    text-align: center;
+}
+
+.Body-greenborder {
+    background-color: #E5FFE5;
+    border: none;
+}
+
+.f-caret-up {
+    color: #007C00;
+    font-size: 40px;
+}
+
+.dark-green {
+    background-color: #007C00;
+    border-radius: 4px;
+}
+
+.Total-Creativity {
+    font-size: 13px;
     text-align: center;
 }

@@ -242,7 +242,7 @@ $this->title = 'Forecast Accounts';
                                         <div class="col-12 pt-90 text-center">
                                             <strong> <?= number_format(45877745) ?></strong>
                                         </div>
-                                        <div class="col-12 text-center pt-10">
+                                        <div class="col-12 text-center pt-10 font-size-13">
                                             <span class="badge square-red">P</span>
                                             <span class="badge square-blue">Q</span> Sales
                                         </div>
@@ -270,7 +270,7 @@ $this->title = 'Forecast Accounts';
                                                 <div class="col-12 text-center pt-60">
                                                     <strong> <?= number_format(4793595) ?></strong>
                                                 </div>
-                                                <div class="col-12 text-center">
+                                                <div class="col-12 text-center font-size-13">
                                                     <span class="badge Gross-square">M</span>
                                                     <span class="badge square-blue">Q</span> Gross Profit
                                                 </div>
@@ -282,25 +282,41 @@ $this->title = 'Forecast Accounts';
                                                     <span class="badge bg-white Sales-sp">Fixed Expense</span>
                                                 </div>
                                                 <div class="row mt-30">
-                                                    <div class="col-6">
+                                                    <div class="col-5">
                                                         <div class="col-12 text-center">
                                                             <strong> <?= number_format(840000) ?></strong>
                                                         </div>
-                                                        <div class="col-12 text-center">
-                                                            Fixed Expense (Others)
+                                                        <div class="col-12 text-center font-size-13">
+                                                            <span class="badge square-grey">F</span> Fixed Expense (Others)
                                                         </div>
                                                     </div>
-                                                    <div class="col-6">
+                                                    <div class="col-7">
                                                         <div class="col-12 Fixedother-solid">
-                                                            <span class="badge bg-white text-dark"><i class="fa fa-users" aria-hidden="true"></i> Human Resource <?= number_format(2343) ?> </span>
-                                                            <div class="users-solid1">
+                                                            <span class="badge bg-white text-dark" style="border-radius: 2px;"><i class=" fa fa-users" aria-hidden="true"></i> Human Resource <?= number_format(2343) ?> </span>
+                                                            <div class="users-solid1 mt-5">
                                                                 Labor Share <span><?= number_format(36.2) ?>%</span>
                                                             </div>
                                                             <div class="users-solid1">
                                                                 Labor Share <span><?= number_format(2.76) ?>%</span>
                                                             </div>
+                                                            <span class="badge bg-white text-dark mt-10" style="border-radius: 2px;"><i class="fa fa-cube" aria-hidden="true"></i> Goods <?= number_format(5486) ?> </span>
+                                                            <span class="badge bg-white text-dark mt-10" style="border-radius: 2px;"><i class="fa fa-codepen" aria-hidden="true"></i> Interest <?= number_format(2678) ?> </span>
                                                         </div>
                                                     </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 card Body-greenborder">
+                                                <div class="col-12 text-end">
+                                                    <span class="badge bg-white Sales-sp">Operating Profit</span>
+                                                </div>
+                                                <div class="col-12 text-center">
+                                                    <i class="fa fa-caret-up f-caret-up" aria-hidden="true"></i> <strong><?= number_format(576) ?></strong>
+                                                </div>
+                                                <div class="col-12 text-center pt-10 font-size-13">
+                                                    <span class="badge dark-green">G</span> Operating Profit
+                                                </div>
+                                                <div class="col-12 Total-Creativity">
+                                                    Total Creativity by all Employees
                                                 </div>
                                             </div>
                                         </div>
