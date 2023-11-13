@@ -5,7 +5,7 @@ $this->title = 'Annual Future Accounts';
 
 <div class="col-12 mt-90 alert background-Planning">
     <div class="col-12 planning">
-        <i class="fa fa-database" aria-hidden="true"></i> Financial Planning
+        <i class="fa fa-database" aria-hidden="true"></i> Financial Analysis
     </div>
     <div class="col-12 mt-20">
         <div class="shadow p-3 mb-5 bg-body rounded alert2-secondary3">
@@ -203,13 +203,13 @@ $this->title = 'Annual Future Accounts';
             </div>
             <div class="alert bg-backgroundforecastaccounts">
                 <div class="row">
-                    <div class="col-lg-7 col-md-6 col-12">
+                    <div class="col-lg-9 col-md-6 col-12">
                         <div class="alert alert-backgroundforecastaccountss">
                             <div class="row">
                                 <div class="col-3">
                                     <img src="<?= Yii::$app->homeUrl ?>image/calendar.png" style="width: 13px;"> <span class="frt-cur"> Select Financial Year</span>
                                 </div>
-                                <div class="col-5">
+                                <div class="col-4">
                                     <select class="form-select annual-monthly" aria-label="Default select example">
                                         <option selected value=""> F.Y [Ang 2023 - July 2024]</option>
                                         <option value="1"> F.Y [Jan 2020 - Feb 2021]</option>
@@ -219,13 +219,13 @@ $this->title = 'Annual Future Accounts';
                                         <option value="5"> F.Y [Jan 2024 - Nov 2025]</option>
                                     </select>
                                 </div>
-                                <div class="col-3 text-end">
-                                    <a href="" class="no-underline-black small-Annual"> Current Month</a>
+                                <div class="col-2">
+                                    <a href="" class="no-underline-black small-Annual"> Current&nbsp;Month</a>
                                 </div>
                                 <div class="col-1">
                                     <a href="" class="no-underline-black small-Annual"> Annual</a>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-2">
                                     <a href="" class="no-underline-black small-Annual"> Comparison</a>
                                 </div>
                             </div>
@@ -323,7 +323,7 @@ $this->title = 'Annual Future Accounts';
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-5 col-md-6 col-12 Future-solid">
+                    <div class="col-lg-3 col-md-6 col-12 Future-solid">
                         <div class="alert alert-backgroundforecastaccountss">
                             <div class="col-12 Business-color">
                                 Future & Business Competitiveness Rank

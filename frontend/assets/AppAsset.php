@@ -71,7 +71,8 @@ class AppAsset extends AssetBundle
         'css/admin-financialplanning/performance.css',
         'css/admin-financialplanning/IPL_analysis.css',
         'css/admin-financialplanning/forecast_accounts.css',
-        'css/admin-financialplanning/annual.css',
+        'css/admin-financialplanning/annual_accounts.css',
+        'css/admin-financialplanning/comparison_accounts.css',
         'css/home/multi_select.css',
 
 

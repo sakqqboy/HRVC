@@ -1,4 +1,4 @@
-.bg-backgroundforecastaccounts {
+.backgroundforecastaccounts {
     margin-top: 30px;
     background-color: #F4F6F9;
 }
@@ -60,7 +60,7 @@
 
 .Business-color {
     color: gray;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 500;
 }
 
@@ -157,23 +157,23 @@
 
 .ss-solid {
     border-right: 2px lightgray solid;
-    font-size: 13px;
+    font-size: 11px;
 }
 
 .Super-solid {
     border-right: 2px lightgray solid;
-    font-size: 13px;
+    font-size: 11px;
 }
 
 .excellent {
-    font-size: 15px;
+    font-size: 13px;
     line-height: 20px;
 }
 
 .cardexcellent:hover {
     background-color: rgb(247, 236, 125);
     font-weight: 600;
-    font-size: 16px;
+    font-size: 11px;
     cursor: default;
 }
 

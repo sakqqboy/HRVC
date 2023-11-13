@@ -1,8 +1,6 @@
 <?php
 
-use Faker\Core\Number;
-
-$this->title = 'Forecast Accounts';
+$this->title = 'Comparison Accounts';
 ?>
 
 <div class="col-12 mt-90 alert background-Planning">
@@ -27,10 +25,13 @@ $this->title = 'Forecast Accounts';
     <div class="col-12 mt-50">
         <div class="alert alert2-secondary3">
             <div class="row">
-                <div class="col-lg-9 col-md-6 col-12">
+                <div class="col-lg-4 col-md-6 col-12">
                     <div class="col-12">
-                        Monthly Forecasted Accounts
+                        Future Accounts Comparison
                     </div>
+                </div>
+                <div class="col-lg-5 text-end comparison-solid">
+                    <button type="button" class="btn btn-light text-primary"><i class="fa fa-line-chart" aria-hidden="true"></i> Comparison Charts</button>
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                     <div class="col-12 text-end">
@@ -43,7 +44,7 @@ $this->title = 'Forecast Accounts';
                     </div>
                 </div>
             </div>
-            <div class="alert backgroundforecastaccounts">
+            <div class="alert bg-backgroundforecastaccounts">
                 <div class="row">
                     <div class="col-lg-3 col-md-3 col-3 forecast-solid">
                         <div class="card" style="border:none;">
@@ -51,7 +52,7 @@ $this->title = 'Forecast Accounts';
                                 <div class="col-lg-2 col-md-6 col-12">
                                     <span class="badge square-red1">P</span>
                                 </div>
-                                <div class="col-lg-4 col-md-6 col-12">
+                                <div class="col-lg-3 col-md-6 col-12">
                                     <div class="col-12 forecast-price">
                                         <strong>Price</strong>
                                     </div>
@@ -59,24 +60,35 @@ $this->title = 'Forecast Accounts';
                                         (Product Appeal)
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-12">
+                                <div class="col-lg-7 col-md-6 col-12">
                                     <div class="row">
-                                        <div class="col-7 Sensitivity">
-                                            Sensitivity ratio
-                                        </div>
                                         <div class="col-5 Sensitivity">
+                                            Sensitivity
+                                        </div>
+                                        <div class="col-3 Sensitivity twoI-solid pl-5">
                                             <strong> <?= number_format(23.0) ?>%</strong>
                                         </div>
-                                        <div class="col-7 Sensitivity">
-                                            Sensitivity Rank
+                                        <div class="col-3 Sensitivity twoII-solid pl-5">
+                                            <strong> <?= number_format(23.0) ?>%</strong>
                                         </div>
+                                        <div class="mt-10"></div>
                                         <div class="col-5 Sensitivity">
+                                            Sensitivity
+                                        </div>
+                                        <div class="col-3 Sensitivity twoI-solid pl-5">
                                             <strong> <?= number_format(2) ?></strong>
                                         </div>
-                                        <div class="col-7 Sensitivity">
-                                            Strategic Rank
+                                        <div class="col-3 Sensitivity twoII-solid pl-5">
+                                            <strong> <?= number_format(23.0) ?></strong>
                                         </div>
+                                        <div class="mt-10"></div>
                                         <div class="col-5 Sensitivity">
+                                            Strategic
+                                        </div>
+                                        <div class="col-3 Sensitivity twoI-solid pl-5">
+                                            <strong> N/A</strong>
+                                        </div>
+                                        <div class="col-3 Sensitivity twoII-solid pl-5">
                                             <strong> N/A</strong>
                                         </div>
                                     </div>
@@ -90,7 +102,7 @@ $this->title = 'Forecast Accounts';
                                 <div class="col-lg-2 col-md-6 col-12">
                                     <span class="badge square-blue1">Q</span>
                                 </div>
-                                <div class="col-lg-4 col-md-6 col-12">
+                                <div class="col-lg-3 col-md-6 col-12">
                                     <div class="col-12 forecast-price">
                                         <strong>Quantity</strong>
                                     </div>
@@ -98,24 +110,35 @@ $this->title = 'Forecast Accounts';
                                         (Sale Force)
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-12">
+                                <div class="col-lg-7 col-md-6 col-12">
                                     <div class="row">
-                                        <div class="col-7 Sensitivity">
-                                            Sensitivity ratio
-                                        </div>
                                         <div class="col-5 Sensitivity">
+                                            Sensitivity
+                                        </div>
+                                        <div class="col-3 Sensitivity twoI-solid pl-5">
                                             <strong> <?= number_format(23.0) ?>%</strong>
                                         </div>
-                                        <div class="col-7 Sensitivity">
-                                            Sensitivity Rank
+                                        <div class="col-3 Sensitivity twoII-solid pl-5">
+                                            <strong> <?= number_format(23.0) ?>%</strong>
                                         </div>
+                                        <div class="mt-10"></div>
                                         <div class="col-5 Sensitivity">
+                                            Sensitivity
+                                        </div>
+                                        <div class="col-3 Sensitivity twoI-solid pl-5">
                                             <strong> <?= number_format(2) ?></strong>
                                         </div>
-                                        <div class="col-7 Sensitivity">
-                                            Strategic Rank
+                                        <div class="col-3 Sensitivity twoII-solid pl-5">
+                                            <strong> <?= number_format(23.0) ?></strong>
                                         </div>
+                                        <div class="mt-10"></div>
                                         <div class="col-5 Sensitivity">
+                                            Strategic
+                                        </div>
+                                        <div class="col-3 Sensitivity twoI-solid pl-5">
+                                            <strong> N/A</strong>
+                                        </div>
+                                        <div class="col-3 Sensitivity twoII-solid pl-5">
                                             <strong> N/A</strong>
                                         </div>
                                     </div>
@@ -129,7 +152,7 @@ $this->title = 'Forecast Accounts';
                                 <div class="col-lg-2 col-md-6 col-12">
                                     <span class="badge square-grey">F</span>
                                 </div>
-                                <div class="col-lg-4 col-md-6 col-12">
+                                <div class="col-lg-3 col-md-6 col-12">
                                     <div class="col-12 forecast-price">
                                         <strong>Fixed Expense</strong>
                                     </div>
@@ -137,24 +160,35 @@ $this->title = 'Forecast Accounts';
                                         (Power)
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-12">
+                                <div class="col-lg-7 col-md-6 col-12">
                                     <div class="row">
-                                        <div class="col-7 Sensitivity">
-                                            Sensitivity ratio
-                                        </div>
                                         <div class="col-5 Sensitivity">
+                                            Sensitivity
+                                        </div>
+                                        <div class="col-3 Sensitivity twoI-solid pl-5">
                                             <strong> <?= number_format(23.0) ?>%</strong>
                                         </div>
-                                        <div class="col-7 Sensitivity">
-                                            Sensitivity Rank
+                                        <div class="col-3 Sensitivity twoII-solid pl-5">
+                                            <strong> <?= number_format(23.0) ?>%</strong>
                                         </div>
+                                        <div class="mt-10"></div>
                                         <div class="col-5 Sensitivity">
+                                            Sensitivity
+                                        </div>
+                                        <div class="col-3 Sensitivity twoI-solid pl-5">
                                             <strong> <?= number_format(2) ?></strong>
                                         </div>
-                                        <div class="col-7 Sensitivity">
-                                            Strategic Rank
+                                        <div class="col-3 Sensitivity twoII-solid pl-5">
+                                            <strong> <?= number_format(2) ?></strong>
                                         </div>
+                                        <div class="mt-10"></div>
                                         <div class="col-5 Sensitivity">
+                                            Strategic
+                                        </div>
+                                        <div class="col-3 Sensitivity twoI-solid pl-5">
+                                            <strong> N/A</strong>
+                                        </div>
+                                        <div class="col-3 Sensitivity twoII-solid pl-5">
                                             <strong> N/A</strong>
                                         </div>
                                     </div>
@@ -168,7 +202,7 @@ $this->title = 'Forecast Accounts';
                                 <div class="col-lg-2 col-md-6 col-12">
                                     <span class="badge square-green1">V</span>
                                 </div>
-                                <div class="col-lg-4 col-md-6 col-12">
+                                <div class="col-lg-3 col-md-6 col-12">
                                     <div class="col-12 forecast-price">
                                         <strong>Variable Expense</strong>
                                     </div>
@@ -176,24 +210,35 @@ $this->title = 'Forecast Accounts';
                                         (Negotiation & Technical Ability)
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-12">
+                                <div class="col-lg-7 col-md-6 col-12">
                                     <div class="row">
-                                        <div class="col-7 Sensitivity">
-                                            Sensitivity ratio
-                                        </div>
                                         <div class="col-5 Sensitivity">
+                                            Sensitivity
+                                        </div>
+                                        <div class="col-3 Sensitivity twoI-solid pl-5">
                                             <strong> <?= number_format(23.0) ?>%</strong>
                                         </div>
-                                        <div class="col-7 Sensitivity">
-                                            Sensitivity Rank
+                                        <div class="col-3 Sensitivity twoII-solid pl-5">
+                                            <strong> <?= number_format(23.0) ?>%</strong>
                                         </div>
+                                        <div class="mt-10"></div>
                                         <div class="col-5 Sensitivity">
+                                            Sensitivity
+                                        </div>
+                                        <div class="col-3 Sensitivity  twoI-solid pl-5">
                                             <strong> <?= number_format(2) ?></strong>
                                         </div>
-                                        <div class="col-7 Sensitivity">
-                                            Strategic Rank
+                                        <div class="col-3 Sensitivity twoII-solid pl-5">
+                                            <strong> <?= number_format(2) ?></strong>
                                         </div>
+                                        <div class="mt-10"></div>
                                         <div class="col-5 Sensitivity">
+                                            Strategic
+                                        </div>
+                                        <div class="col-3 Sensitivity twoI-solid pl-5">
+                                            <strong> N/A</strong>
+                                        </div>
+                                        <div class="col-3 Sensitivity twoII-solid pl-5">
                                             <strong> N/A</strong>
                                         </div>
                                     </div>
@@ -203,18 +248,28 @@ $this->title = 'Forecast Accounts';
                     </div>
                 </div>
             </div>
-            <div class="col-12 alert bg-backgroundforecastaccounts">
-                ulpoyj
-            </div>
-            <!-- <div class="alert bg-backgroundforecastaccounts">
+            <div class="alert bg-backgroundforecastaccounts">
                 <div class="row">
                     <div class="col-lg-9 col-md-6 col-12">
                         <div class="alert alert-backgroundforecastaccountss">
                             <div class="row">
                                 <div class="col-3">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/calendar.png" style="width: 13px;"> <span class="frt-cur"> Select Financial Year</span>
+                                </div>
+                                <div class="col-3">
+                                    <select class="form-select annual-monthly" aria-label="Default select example">
+                                        <option selected value=""> F.Y [Ang 2023 - July 2024]</option>
+                                        <option value="1"> F.Y [Jan 2020 - Feb 2021]</option>
+                                        <option value="2"> F.Y [Jan 2021 - Dec 2022]</option>
+                                        <option value="3"> F.Y [Jan 2022 - Oct 2023]</option>
+                                        <option value="4"> F.Y [Jan 2023 - Jul 2024]</option>
+                                        <option value="5"> F.Y [Jan 2024 - Nov 2025]</option>
+                                    </select>
+                                </div>
+                                <div class="col-3">
                                     <img src="<?= Yii::$app->homeUrl ?>image/calendar.png" style="width: 13px;"> <span class="frt-cur"> Current Month</span>
                                 </div>
-                                <div class="col-3 pr-forecast">
+                                <div class="col-2 pr-forecast">
                                     <select class="form-select annual-monthly" aria-label="Default select example">
                                         <option selected value=""> July 2023</option>
                                         <option value="1">2020</option>
@@ -225,29 +280,46 @@ $this->title = 'Forecast Accounts';
                                     </select>
                                 </div>
                                 <div class="col-2 text-end">
-                                    <a href="" class="no-underline-black small-Annual"> Current Month</a>
+                                    <a href="" class="no-underline-black small-Annual"> Current&nbsp;Month</a>
                                 </div>
-                                <div class="col-1 text-end">
+                                <div class="col-1">
                                     <a href="" class="no-underline-black small-Annual"> Annual</a>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-2">
                                     <a href="" class="no-underline-black small-Annual"> Comparison</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="row">
-                                <div class="col-lg-3 col-md-6 col-12">
-                                    <div class="card Body-Sales">
+                                <div class="col-lg-3 col-md-6 col-12 card Body-Sales">
+                                    <div class="">
                                         <div class="col-12 text-end">
                                             <span class="badge bg-white Sales-sp">Sales</span>
                                         </div>
-                                        <div class="col-12 pt-90 text-center">
-                                            <strong> <?= number_format(45877745) ?></strong>
+                                        <div class="col-12 mt-40">
+                                            <div class="row">
+                                                <div class="col-1">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/calendar.png" style="width:12px;">
+                                                </div>
+                                                <div class="col-4 font-size-12 pt-5 twoI-solid">
+                                                    <strong> <?= number_format(1218) ?> </strong>
+                                                </div>
+                                                <div class="col-5 font-size-12 pt-5 twoII-solid">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/calendar.png" style="width:12px;">
+                                                    <strong> <?= number_format(21781) ?> </strong>
+                                                </div>
+                                            </div>
+                                            <hr>
                                         </div>
                                         <div class="col-12 text-center pt-10 font-size-13">
                                             <span class="badge square-red">P</span>
                                             <span class="badge square-blue">Q</span> Sales
+                                        </div>
+                                        <div class="col-12 padding-badgeshadow">
+                                            <div class="shadow-sm p-2 comparison-orange rounded">
+                                                <span class="badge Gross-square">M</span><span> Gross Profit Ratio</span> <span class="badge comparison-orange-copy"> 45%</span> <span class="twoI-solid"></span> <span class="twoII-solid"> &nbsp; <span class="badge comparison-orange-copy"> 45%</span></span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -276,6 +348,11 @@ $this->title = 'Forecast Accounts';
                                                 <div class="col-12 text-center font-size-13">
                                                     <span class="badge Gross-square">M</span>
                                                     <span class="badge square-blue">Q</span> Gross Profit
+                                                </div>
+                                                <div class="col-12 padding-badgeshadow">
+                                                    <div class="shadow-sm p-2 comparison-purple">
+
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -334,7 +411,7 @@ $this->title = 'Forecast Accounts';
                                 Future & Business Competitiveness Rank
                             </div>
                         </div>
-                        <div class="col-12 card cardexcellent">
+                        <div class="col-12 card cardcomparison">
                             <div class="col-7 excellent">
                                 Super excellent company, has a
                                 great reserve of energy
@@ -348,12 +425,12 @@ $this->title = 'Forecast Accounts';
                                     <strong> <?= number_format(52) ?>&nbsp;times</strong>
                                     <p>Fixed Expense Productivity</p>
                                 </div>
-                                <div class="col-4 pt-20 text-center font-size-18">
+                                <div class="col-4 pt-20 text-center font-size-20">
                                     "SS"
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 card cardexcellent">
+                        <div class="col-12 card cardcomparison">
                             <div class="col-7 excellent">
                                 Excellent company, has some reserve
                                 of energy
@@ -372,7 +449,7 @@ $this->title = 'Forecast Accounts';
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 card cardexcellent">
+                        <div class="col-12 card cardcomparison-green">
                             <div class="col-7 excellent">
                                 Sound management company,
                                 has well competitiveness
@@ -391,7 +468,7 @@ $this->title = 'Forecast Accounts';
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 card cardexcellent">
+                        <div class="col-12 card cardcomparison-green">
                             <div class="col-7 excellent">
                                 Breakeven point company, cannot be
                                 careless at all
@@ -410,7 +487,7 @@ $this->title = 'Forecast Accounts';
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 card cardexcellent">
+                        <div class="col-12 card cardcomparison-green">
                             <div class="col-7 excellent">
                                 Deficit-ridden company, unsure future
                             </div>
@@ -430,7 +507,7 @@ $this->title = 'Forecast Accounts';
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
         </div>
     </div>
 </div>

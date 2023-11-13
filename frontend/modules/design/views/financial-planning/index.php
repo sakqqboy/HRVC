@@ -2032,7 +2032,7 @@ $this->title = 'Financial Planning';
 </div>
 
 <div class="modal fade" id="RoundUp" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropRoundUp" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="row">
@@ -2041,8 +2041,15 @@ $this->title = 'Financial Planning';
                             <i class="fa fa-clock-o" aria-hidden="true"></i> Round Up
                         </div>
                     </div>
-                    <div class="col-lg-6 pt-20">
-                        pop up
+                    <div class="col-lg-6 pt-10">
+                        <form>
+                            <input class="chosen-value" type="text" value="" placeholder="Search">
+                            <ul class="valua-list">
+                                <li>K</li>
+                                <li>M</li>
+                                <li>B</li>
+                            </ul>
+                        </form>
                     </div>
                 </div>
             </div>
