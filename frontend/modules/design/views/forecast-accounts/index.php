@@ -43,7 +43,7 @@ $this->title = 'Forecast Accounts';
                     </div>
                 </div>
             </div>
-            <div class="alert backgroundforecastaccounts">
+            <div class="col-12 alert backgroundforecastaccounts">
                 <div class="row">
                     <div class="col-lg-3 col-md-3 col-3 forecast-solid">
                         <div class="card" style="border:none;">
@@ -203,18 +203,15 @@ $this->title = 'Forecast Accounts';
                     </div>
                 </div>
             </div>
-            <div class="col-12 alert bg-backgroundforecastaccounts">
-                ulpoyj
-            </div>
-            <!-- <div class="alert bg-backgroundforecastaccounts">
+            <div class="col-12 alert backgroundforecastaccounts">
                 <div class="row">
                     <div class="col-lg-9 col-md-6 col-12">
-                        <div class="alert alert-backgroundforecastaccountss">
+                        <div class="alert backgroundforecastaccounts1">
                             <div class="row">
-                                <div class="col-3">
+                                <div class="col-2" style="margin-top:-6px;">
                                     <img src="<?= Yii::$app->homeUrl ?>image/calendar.png" style="width: 13px;"> <span class="frt-cur"> Current Month</span>
                                 </div>
-                                <div class="col-3 pr-forecast">
+                                <div class="col-2 pr-forecast" style="margin-top:-6px;">
                                     <select class="form-select annual-monthly" aria-label="Default select example">
                                         <option selected value=""> July 2023</option>
                                         <option value="1">2020</option>
@@ -224,13 +221,9 @@ $this->title = 'Forecast Accounts';
                                         <option value="5">2024</option>
                                     </select>
                                 </div>
-                                <div class="col-2 text-end">
-                                    <a href="" class="no-underline-black small-Annual"> Current Month</a>
-                                </div>
-                                <div class="col-1 text-end">
-                                    <a href="" class="no-underline-black small-Annual"> Annual</a>
-                                </div>
-                                <div class="col-3">
+                                <div class="col-8 text-end" style="margin-top:-6px;">
+                                    <a href="" class="no-underline-black small-Annual"> Current Month</a> &nbsp;
+                                    <a href="" class="no-underline-black small-Annual"> Annual</a> &nbsp;
                                     <a href="" class="no-underline-black small-Annual"> Comparison</a>
                                 </div>
                             </div>
@@ -242,12 +235,25 @@ $this->title = 'Forecast Accounts';
                                         <div class="col-12 text-end">
                                             <span class="badge bg-white Sales-sp">Sales</span>
                                         </div>
-                                        <div class="col-12 pt-90 text-center">
+                                        <div class="col-12 pt-100 text-center">
                                             <strong> <?= number_format(45877745) ?></strong>
                                         </div>
                                         <div class="col-12 text-center pt-10 font-size-13">
                                             <span class="badge square-red">P</span>
                                             <span class="badge square-blue">Q</span> Sales
+                                        </div>
+                                    </div>
+                                    <div class="col-12 card c-blacksale">
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <span class="badge Gross-square">M</span>
+                                            </div>
+                                            <div class="col-5 font-size-12 pt-5">
+                                                Gross Profit Ratio
+                                            </div>
+                                            <div class="col-2">
+                                                <span class="badge yn"> <?= number_format(45) ?>%</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -263,6 +269,19 @@ $this->title = 'Forecast Accounts';
                                             <span class="badge square-green">V</span>
                                             <span class="badge square-blue">Q</span> Variable Expense
                                         </div>
+                                        <div class="col-12 card c-ExPense">
+                                            <div class="row">
+                                                <div class="col-1">
+                                                    <span class="badge square-green">V</span>
+                                                </div>
+                                                <div class="col-6 font-size-12 pt-5">
+                                                    Variable Expense Ratio
+                                                </div>
+                                                <div class="col-2">
+                                                    <span class="badge pv"> <?= number_format(45) ?>%</span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-4 col-md-6 col-12">
@@ -276,6 +295,25 @@ $this->title = 'Forecast Accounts';
                                                 <div class="col-12 text-center font-size-13">
                                                     <span class="badge Gross-square">M</span>
                                                     <span class="badge square-blue">Q</span> Gross Profit
+                                                </div>
+                                                <div class="col-12 card c-f">
+                                                    <div class="row">
+                                                        <div class="col-1">
+                                                            <span class="badge square-grey1">F</span>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            / <span class="badge Gross-square">M</span> *
+                                                        </div>
+                                                        <div class="col-1">
+                                                            <span class="badge square-blue2">Q</span>
+                                                        </div>
+                                                        <div class="col-5 pt-5 font-size-12">
+                                                            Break-Even Point Ratio
+                                                        </div>
+                                                        <div class="col-2">
+                                                            <span class="badge cf"><?= number_format(121.1) ?>%</span>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -295,15 +333,21 @@ $this->title = 'Forecast Accounts';
                                                     </div>
                                                     <div class="col-7">
                                                         <div class="col-12 Fixedother-solid">
-                                                            <span class="badge bg-white text-dark" style="border-radius: 2px;"><i class=" fa fa-users" aria-hidden="true"></i> Human Resource <?= number_format(2343) ?> </span>
+                                                            <div class="col-12">
+                                                                <span class="badge bg-white text-dark" style="border-radius: 2px;"><i class=" fa fa-users" aria-hidden="true"></i> Human Resource <?= number_format(2343) ?> </span>
+                                                            </div>
                                                             <div class="users-solid1 mt-5">
                                                                 Labor Share <span><?= number_format(36.2) ?>%</span>
                                                             </div>
                                                             <div class="users-solid1">
                                                                 Labor Share <span><?= number_format(2.76) ?>%</span>
                                                             </div>
-                                                            <span class="badge bg-white text-dark mt-10" style="border-radius: 2px;"><i class="fa fa-cube" aria-hidden="true"></i> Goods <?= number_format(5486) ?> </span>
-                                                            <span class="badge bg-white text-dark mt-10" style="border-radius: 2px;"><i class="fa fa-codepen" aria-hidden="true"></i> Interest <?= number_format(2678) ?> </span>
+                                                            <div class="col-12">
+                                                                <span class="badge bg-white text-dark mt-10" style="border-radius: 2px;"><i class="fa fa-cube" aria-hidden="true"></i> Goods <?= number_format(5486) ?> </span>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <span class="badge bg-white text-dark mt-10" style="border-radius: 2px;"><i class="fa fa-codepen" aria-hidden="true"></i> Interest <?= number_format(2678) ?> </span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -312,8 +356,21 @@ $this->title = 'Forecast Accounts';
                                                 <div class="col-12 text-end">
                                                     <span class="badge bg-white Sales-sp">Operating Profit</span>
                                                 </div>
+                                                <div class="col-12 card c-blackgreen">
+                                                    <div class="row">
+                                                        <div class="col-1">
+                                                            <span class="badge dark-green">G</span>
+                                                        </div>
+                                                        <div class="col-7 font-size-12 pt-5">
+                                                            Ordinary Profit to Net Sales Ratio
+                                                        </div>
+                                                        <div class="col-2">
+                                                            <span class="badge bg-white sh">-<?= number_format(45) ?>% </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div class="col-12 text-center">
-                                                    <i class="fa fa-caret-up f-caret-up" aria-hidden="true"></i> <strong><?= number_format(576) ?></strong>
+                                                    <i class="fa fa-caret-up f-caret-up" aria-hidden="true"></i> <strong><?= number_format(1200000) ?></strong>
                                                 </div>
                                                 <div class="col-12 text-center pt-10 font-size-13">
                                                     <span class="badge dark-green">G</span> Operating Profit
@@ -329,108 +386,127 @@ $this->title = 'Forecast Accounts';
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 col-12 Future-solid">
-                        <div class="alert alert-backgroundforecastaccountss">
+                        <div class="alert backgroundforecastaccountss">
                             <div class="col-12 Business-color">
                                 Future & Business Competitiveness Rank
                             </div>
                         </div>
                         <div class="col-12 card cardexcellent">
-                            <div class="col-7 excellent">
+                            <div class="col-9 excellent">
                                 Super excellent company, has a
                                 great reserve of energy
                             </div>
                             <div class="row">
                                 <div class="col-4 pt-20 Super-solid">
-                                    <strong><span>Under-</span><?= number_format(60) ?>%</strong>
+                                    <strong>Under-<?= number_format(60) ?>%</strong>
                                     <p> BEP Ratio</p>
                                 </div>
                                 <div class="col-4 pt-20 ss-solid">
-                                    <strong> <?= number_format(52) ?>&nbsp;times</strong>
+                                    <strong> <?= number_format(52) ?> - <?= number_format(60) ?> &nbsp;times</strong>
                                     <p>Fixed Expense Productivity</p>
                                 </div>
-                                <div class="col-4 pt-20 text-center font-size-18">
+                                <div class="col-4 pt-20 text-center font-size-14">
                                     "SS"
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 card cardexcellent">
-                            <div class="col-7 excellent">
+                            <div class="col-9 excellent">
                                 Excellent company, has some reserve
                                 of energy
                             </div>
                             <div class="row">
                                 <div class="col-4 pt-20 Super-solid">
-                                    <strong><span>Under-</span><?= number_format(60) ?>%</strong>
+                                    <strong><?= number_format(60) ?>% - <?= number_format(60) ?>% </strong>
                                     <p> BEP Ratio</p>
                                 </div>
                                 <div class="col-4 pt-20 ss-solid">
-                                    <strong> <?= number_format(164) ?>&nbsp;times</strong>
+                                    <strong> <?= number_format(52) ?> - <?= number_format(60) ?> &nbsp;times</strong>
                                     <p>Fixed Expense Productivity</p>
                                 </div>
-                                <div class="col-4 pt-20 text-center font-size-20">
+                                <div class="col-4 pt-20 text-center font-size-14">
                                     "S"
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 card cardexcellent">
-                            <div class="col-7 excellent">
+                            <div class="col-9 excellent">
                                 Sound management company,
                                 has well competitiveness
                             </div>
                             <div class="row">
                                 <div class="col-4 pt-20 Super-solid">
-                                    <strong><span>Under-</span><?= number_format(60) ?>%</strong>
+                                    <strong><?= number_format(81) ?>% - <?= number_format(90) ?>% </strong>
                                     <p> BEP Ratio</p>
                                 </div>
                                 <div class="col-4 pt-20 ss-solid">
-                                    <strong> <?= number_format(350) ?>&nbsp;times</strong>
+                                    <strong> <?= number_format(52) ?> - <?= number_format(60) ?> &nbsp;times</strong>
                                     <p>Fixed Expense Productivity</p>
                                 </div>
-                                <div class="col-4 pt-20 text-center font-size-20">
+                                <div class="col-4 pt-20 text-center font-size-14">
                                     "A"
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 card cardexcellent">
-                            <div class="col-7 excellent">
+                            <div class="col-9 excellent">
                                 Breakeven point company, cannot be
                                 careless at all
                             </div>
                             <div class="row">
                                 <div class="col-4 pt-20 Super-solid">
-                                    <strong><span>Under-</span><?= number_format(60) ?>%</strong>
+                                    <strong><?= number_format(91) ?>% - <?= number_format(100) ?>% </strong>
                                     <p> BEP Ratio</p>
                                 </div>
                                 <div class="col-4 pt-20 ss-solid">
-                                    <strong> <?= number_format(350) ?>&nbsp;times</strong>
+                                    <strong> <?= number_format(52) ?> - <?= number_format(60) ?> &nbsp;times</strong>
                                     <p>Fixed Expense Productivity</p>
                                 </div>
-                                <div class="col-4 pt-20 text-center font-size-20">
+                                <div class="col-4 pt-20 text-center font-size-14">
                                     "B"
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 card cardexcellent">
-                            <div class="col-7 excellent">
+                            <div class="col-9 excellent">
                                 Deficit-ridden company, unsure future
                             </div>
                             <div class="row">
                                 <div class="col-4 pt-20 Super-solid">
-                                    <strong><span>Under-</span><?= number_format(60) ?>%</strong>
+                                    <strong><?= number_format(101) ?>% - <?= number_format(200) ?>% </strong>
                                     <p> BEP Ratio</p>
                                 </div>
                                 <div class="col-4 pt-20 ss-solid">
-                                    <strong> <?= number_format(133) ?>&nbsp;times</strong>
+                                    <strong> <?= number_format(52) ?> - <?= number_format(60) ?> &nbsp;times</strong>
                                     <p>Fixed Expense Productivity</p>
                                 </div>
-                                <div class="col-4 pt-20 text-center font-size-20">
+                                <div class="col-4 pt-20 text-center font-size-14">
                                     "C"
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 card cardexcellent">
+                            <div class="col-9 excellent">
+                                Breakeven point company, cannot be
+                                careless at all
+                            </div>
+                            <div class="row">
+                                <div class="col-4 pt-20 Super-solid">
+                                    <strong>Over <?= number_format(200) ?>%</strong>
+                                    <p> BEP Ratio</p>
+                                </div>
+                                <div class="col-4 pt-20 ss-solid">
+                                    <strong> <?= number_format(52) ?> - <?= number_format(60) ?> &nbsp;times</strong>
+                                    <p>Fixed Expense Productivity</p>
+                                </div>
+                                <div class="col-4 pt-20 text-center font-size-14">
+                                    "D"
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
         </div>
     </div>
 </div>

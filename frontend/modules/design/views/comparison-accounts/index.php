@@ -31,7 +31,7 @@ $this->title = 'Comparison Accounts';
                     </div>
                 </div>
                 <div class="col-lg-5 text-end comparison-solid">
-                    <button type="button" class="btn btn-light text-primary"><i class="fa fa-line-chart" aria-hidden="true"></i> Comparison Charts</button>
+                    <button type="button" class="btn btn-light text-primary font-size-13"><i class="fa fa-line-chart" aria-hidden="true"></i> Comparison Charts</button>
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                     <div class="col-12 text-end">
@@ -44,7 +44,7 @@ $this->title = 'Comparison Accounts';
                     </div>
                 </div>
             </div>
-            <div class="alert bg-backgroundforecastaccounts">
+            <div class="col-12 alert backgroundforecastaccounts">
                 <div class="row">
                     <div class="col-lg-3 col-md-3 col-3 forecast-solid">
                         <div class="card" style="border:none;">
@@ -248,28 +248,28 @@ $this->title = 'Comparison Accounts';
                     </div>
                 </div>
             </div>
-            <div class="alert bg-backgroundforecastaccounts">
+            <div class="alert backgroundforecastaccounts">
                 <div class="row">
                     <div class="col-lg-9 col-md-6 col-12">
-                        <div class="alert alert-backgroundforecastaccountss">
+                        <div class="alert backgroundforecastaccounts1">
                             <div class="row">
                                 <div class="col-3">
                                     <img src="<?= Yii::$app->homeUrl ?>image/calendar.png" style="width: 13px;"> <span class="frt-cur"> Select Financial Year</span>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-2" style="margin-left: -55px;">
                                     <select class="form-select annual-monthly" aria-label="Default select example">
                                         <option selected value=""> F.Y [Ang 2023 - July 2024]</option>
-                                        <option value="1"> F.Y [Jan 2020 - Feb 2021]</option>
-                                        <option value="2"> F.Y [Jan 2021 - Dec 2022]</option>
-                                        <option value="3"> F.Y [Jan 2022 - Oct 2023]</option>
-                                        <option value="4"> F.Y [Jan 2023 - Jul 2024]</option>
-                                        <option value="5"> F.Y [Jan 2024 - Nov 2025]</option>
+                                        <option value="1">[Jan 2020 - Feb 2021]</option>
+                                        <option value="2">[Jan 2021 - Dec 2022]</option>
+                                        <option value="3">[Jan 2022 - Oct 2023]</option>
+                                        <option value="4">[Jan 2023 - Jul 2024]</option>
+                                        <option value="5">[Jan 2024 - Nov 2025]</option>
                                     </select>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-2" style="margin-left: -10px;">
                                     <img src="<?= Yii::$app->homeUrl ?>image/calendar.png" style="width: 13px;"> <span class="frt-cur"> Current Month</span>
                                 </div>
-                                <div class="col-2 pr-forecast">
+                                <div class="col-1 pr-forecast" style="margin-left: -20px;">
                                     <select class="form-select annual-monthly" aria-label="Default select example">
                                         <option selected value=""> July 2023</option>
                                         <option value="1">2020</option>
@@ -279,13 +279,9 @@ $this->title = 'Comparison Accounts';
                                         <option value="5">2024</option>
                                     </select>
                                 </div>
-                                <div class="col-2 text-end">
-                                    <a href="" class="no-underline-black small-Annual"> Current&nbsp;Month</a>
-                                </div>
-                                <div class="col-1">
-                                    <a href="" class="no-underline-black small-Annual"> Annual</a>
-                                </div>
-                                <div class="col-2">
+                                <div class="col-4 text-end">
+                                    <a href="" class="no-underline-black small-Annual"> Current&nbsp;Month</a> &nbsp;
+                                    <a href="" class="no-underline-black small-Annual"> Annual</a> &nbsp;
                                     <a href="" class="no-underline-black small-Annual"> Comparison</a>
                                 </div>
                             </div>
@@ -406,13 +402,13 @@ $this->title = 'Comparison Accounts';
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 col-12 Future-solid">
-                        <div class="alert alert-backgroundforecastaccountss">
+                        <div class="alert backgroundforecastaccountss">
                             <div class="col-12 Business-color">
                                 Future & Business Competitiveness Rank
                             </div>
                         </div>
                         <div class="col-12 card cardcomparison">
-                            <div class="col-7 excellent">
+                            <div class="col-9 excellent">
                                 Super excellent company, has a
                                 great reserve of energy
                             </div>
@@ -431,7 +427,7 @@ $this->title = 'Comparison Accounts';
                             </div>
                         </div>
                         <div class="col-12 card cardcomparison">
-                            <div class="col-7 excellent">
+                            <div class="col-9 excellent">
                                 Excellent company, has some reserve
                                 of energy
                             </div>
@@ -450,7 +446,7 @@ $this->title = 'Comparison Accounts';
                             </div>
                         </div>
                         <div class="col-12 card cardcomparison-green">
-                            <div class="col-7 excellent">
+                            <div class="col-9 excellent">
                                 Sound management company,
                                 has well competitiveness
                             </div>
@@ -469,7 +465,7 @@ $this->title = 'Comparison Accounts';
                             </div>
                         </div>
                         <div class="col-12 card cardcomparison-green">
-                            <div class="col-7 excellent">
+                            <div class="col-9 excellent">
                                 Breakeven point company, cannot be
                                 careless at all
                             </div>
@@ -488,7 +484,7 @@ $this->title = 'Comparison Accounts';
                             </div>
                         </div>
                         <div class="col-12 card cardcomparison-green">
-                            <div class="col-7 excellent">
+                            <div class="col-9 excellent">
                                 Deficit-ridden company, unsure future
                             </div>
                             <div class="row">
