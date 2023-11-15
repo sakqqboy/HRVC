@@ -55,7 +55,7 @@ class AppAsset extends AssetBundle
         'css/form/checkbox.css',
         'css/home/view.css',
         'css/home/salary-view.css',
-        'css/home/evaluation-module.css',
+        'css/home/evaluation_module.css',
         'css/home/kfi.css',
         'css/home/kfi-grid.css',
         'css/home/kgi-grid.css',
