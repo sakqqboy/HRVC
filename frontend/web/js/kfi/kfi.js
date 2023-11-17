@@ -385,7 +385,7 @@ function kfiFilter() {
         url: url,
         data: { companyId: companyId, branchId: branchId, month: month, status: status, year: year, type: type },
         success: function (data) {
-			
+            $("#assign-search-result").html(data.kfiText);
         }
     });
 }
@@ -421,4 +421,128 @@ function kfiCompanyBranch(companyId,kfiId) {
             $("#companyName").html(data.companyName);
         }
     });
+}
+function assignKfiBranch(kfiId, branchId) {
+    var checked = 0;
+    if ($("#assign-branch-kfi-" + kfiId + '-' + branchId).prop("checked") == true) {
+        checked = 1;
+    }
+    var url = $url + 'kfi/management/kfi-assign-branch';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { branchId: branchId,kfiId:kfiId,checked,checked},
+        success: function (data) {
+            if (data.status) { 
+                $("#total-branch-" + kfiId).html(data.totalBranch);
+            }
+        }
+    });
+}
+function kfiCompanyEmployee(kfiId) { 
+    var url = $url + 'kfi/management/kfi-employee';
+    $("#kfiId").val(kfiId);
+    $("#employeeInBranch").html('');
+    $("#search-employee-box").css("display", "none");
+    $("#search-employee-kfi").val('');
+    $("#search-employee-department").val('')
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: {kfiId:kfiId},
+        success: function (data) {
+            if (data.status) { 
+                $("#search-employee-department").html(data.departmentText);
+                $("#employeeInBranch").html(data.textEmployee);
+
+            }
+        }
+    });
+}
+function kfiEmployee(employeeId, kfiId) { 
+   
+    var url = $url + 'kfi/management/kfi-assign-employee';
+    var checked = 0;
+    if ($("#kfi-employee-" + employeeId + '-' + kfiId).prop("checked") == true) {
+        checked = 1;
+    }
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: {kfiId:kfiId,employeeId:employeeId,checked:checked},
+        success: function (data) {
+            if (data.status) { 
+                $("#totalEmployee-"+kfiId).html(data.totalEmployee);
+            }
+        }
+    });
+}
+function searchKfiEmployee() { 
+    var kfiId = $("#kfiId").val();
+    $("#search-employee-box").html('');
+    var searchText = $("#search-employee-kfi").val();
+    var departmentId=$("#search-employee-department").val();
+    var url = $url + 'kfi/management/search-kfi-employee';
+    // if ($.trim(searchText) != '') {
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            url: url,
+            data: { kfiId: kfiId, searchText: searchText,departmentId:departmentId },
+            success: function (data) {
+                if (data.status) {
+                    $("#search-employee-box").show();
+                    $("#search-employee-box").html(data.textEmployee);
+                }
+            }
+        });
+    // } else { 
+    //     $("#search-employee-box").html('');
+    //     $("#search-employee-box").css("display","none");
+    // }
+}
+function closeSearchBox() { 
+    $("#search-employee-box").css("display", "none");
+    $("#search-employee-kfi").val('');
+}
+function changeKfiStatus(status,kfiId) { 
+    if (status == 1) { 
+        var text = 'Active';
+    } else {
+        var text = 'In Active';
+    }
+    var url = $url + 'kfi/management/change-kfi-status';
+    if (confirm('Are you sure to change this KFI to ' + text)) { 
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            url: url,
+            data: { kfiId: kfiId, status: status },
+            success: function (data) {
+                if (data.status) {
+                    $("#active-" + kfiId).html(data.newButton);
+                }
+            }
+        });
+    }
+}
+function searchAssignKfi() { 
+    var month = $("#kfiMonthFilter").val();
+    var active = $("#kfiStatusFilter").val();
+    var url = $url + 'kfi/management/search-assign-kfi';
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            url: url,
+            data: { month: month, active: active },
+            success: function (data) {
+                if (data.status) {
+                    $("#assign-search-result").html(data.kfiText);
+                }
+            }
+        });
+    
 }

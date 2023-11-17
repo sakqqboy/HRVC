@@ -38,7 +38,7 @@ class KfiEmployee extends \backend\models\hrvc\master\KfiEmployeeMaster
         $kfiEmployee = Employee::find()
             ->select('employee.picture,employee.employeeId,employee.gender')
             ->JOIN("LEFT JOIN", "kfi_employee ke", "employee.employeeId=ke.employeeId")
-            ->where(["ke.kfiId" => $kfiId])
+            ->where(["ke.kfiId" => $kfiId, "ke.status" => 1])
             ->asArray()
             ->all();
         $employee = [];

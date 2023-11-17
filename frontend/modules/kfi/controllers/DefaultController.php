@@ -18,3 +18,15 @@ class DefaultController extends Controller
         return $this->render('index');
     }
 }
+if ($trainTypeId == 1) {
+    $trainName = "รถจักร";
+}
+if ($trainTypeId == 2) {
+    $trainName = "รถดีเซลราง";
+}
+if ($trainTypeId == 3) {
+    $trainName = "รถโดยสาร";
+}
+if ($trainTypeId == 4) {
+    $trainName = "รถสินค้า";
+}

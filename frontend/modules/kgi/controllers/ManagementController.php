@@ -5,19 +5,23 @@ namespace frontend\modules\kgi\controllers;
 use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
+use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Department;
+use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Kfi;
 use frontend\models\hrvc\Kgi;
 use frontend\models\hrvc\KgiBranch;
 use frontend\models\hrvc\KgiDepartment;
+use frontend\models\hrvc\KgiEmployee;
 use frontend\models\hrvc\KgiHistory;
 use frontend\models\hrvc\KgiIssue;
 use frontend\models\hrvc\KgiSolution;
 use frontend\models\hrvc\KgiTeam;
 use frontend\models\hrvc\Kpi;
 use frontend\models\hrvc\Team;
+use frontend\models\hrvc\Title;
 use frontend\models\hrvc\User;
 use frontend\models\hrvc\UserRole;
 use Yii;
@@ -815,6 +819,246 @@ class ManagementController extends Controller
 			}
 			return $this->redirect('index');
 		}
+	}
+	public function actionAssignKgi()
+	{
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/index');
+		$kgis = curl_exec($api);
+		$kgis = json_decode($kgis, true);
+
+		curl_close($api);
+		$months = ModelMaster::monthFull(1);
+		return $this->render('assign', [
+			"kgis" => $kgis,
+			"months" => $months
+		]);
+	}
+	public function actionKgiBranch()
+	{
+		$companyId = $_POST["companyId"];
+		$kgiId = $_POST["kgiId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
+		$branches = curl_exec($api);
+		$branches = json_decode($branches, true);
+		$textBranch = "";
+		$textBranch .= $this->renderAjax('company_branch', ["branches" => $branches, "kgiId" => $kgiId]);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
+		$kgi = curl_exec($api);
+		$kgi = json_decode($kgi, true);
+		$res["kgiName"] = $kgi["kgiName"];
+		$res["companyName"] = $kgi["companyName"];
+		$res["textBranch"] = $textBranch;
+		if ($textBranch != "") {
+			$res["status"] = true;
+		} else {
+			$res["status"] = false;
+		}
+		return json_encode($res);
+	}
+	public function actionKgiAssignBranch()
+	{
+		$kgiId = $_POST["kgiId"];
+		$branchId = $_POST["branchId"];
+		$checked = $_POST["checked"];
+		if ($checked == 1) {
+			$kgiBranch = KgiBranch::find()
+				->where(["kgiId" => $kgiId, "branchId" => $branchId])
+				->one();
+			if (isset($kgiBranch) && !empty($kgiBranch)) {
+				$kgiBranch->status = 1;
+			} else {
+				$kgiBranch = new KgiBranch();
+				$kgiBranch->branchId = $branchId;
+				$kgiBranch->kgiId = $kgiId;
+				$kgiBranch->status = 1;
+				$kgiBranch->createDateTime = new Expression('NOW()');
+				$kgiBranch->updateDateTime = new Expression('NOW()');
+			}
+			$kgiBranch->save(false);
+		} else {
+			KgiBranch::updateAll(["status" => 99], ["branchId" => $branchId, "kgiId" => $kgiId]);
+		}
+		$kgiBranch = KgiBranch::find()
+			->where(["kgiId" => $kgiId, "status" => 1])
+			->asArray()
+			->all();
+		$res["status"] = true;
+		$res["totalBranch"] = count($kgiBranch);
+		return json_encode($res);
+	}
+	public function actionKgiEmployee()
+	{
+		$kgiId = $_POST["kgiId"];
+		$kgiBranch = KgiBranch::find()
+			->where(["kgiId" => $kgiId, "status" => 1])
+			->asArray()
+			->all();
+		$employees = [];
+		$departmentText = '<option value="">Department</option>';
+		if (isset($kgiBranch) && count($kgiBranch) > 0) {
+			$i = 0;
+			foreach ($kgiBranch as $kb) :
+				$employee = Employee::find()
+					->where(["branchId" => $kb["branchId"], "status" => 1])
+					->asArray()
+					->orderBy('branchId,titleId')
+					->all();
+				if (isset($employee) && count($employee) > 0) {
+					foreach ($employee as $em) :
+						if ($em["picture"] != "") {
+							$picture = $em['picture'];
+						} else {
+							if ($em['gender'] == 1) {
+								$picture = 'image/user.png';
+							} else {
+								$picture = 'image/lady.jpg';
+							}
+						}
+						$employees[$i] = [
+							"name" => $em["employeeFirstname"] . ' ' . $em["employeeSurename"],
+							"id" => $em["employeeId"],
+							"branch" => Branch::branchName($em["branchId"]),
+							"department" => Department::departmentNAme($em["departmentId"]),
+							"team" => Team::teamName($em["teamId"]),
+							"picture" => $picture,
+							"title" => Title::titleName($em["titleId"])
+						];
+						$i++;
+					endforeach;
+				}
+				$departments = Department::find()
+					->select('departmentId,departmentName')
+					->where(["branchId" => $kb["branchId"], "status" => 1])->asArray()
+					->orderBy("departmentName")
+					->all();
+				if (isset($departments) && count($departments) > 0) {
+					foreach ($departments as $dp) :
+						$departmentText .= '<option value="' . $dp["departmentId"] . '">' . $dp["departmentName"] . '</option>';
+					endforeach;
+				}
+
+			endforeach;
+		}
+
+		$textEmployee = $this->renderAjax('branch_employee', ["employees" => $employees, "kgiId" => $kgiId]);
+		$res["status"] = true;
+		$res["textEmployee"] = $textEmployee;
+		$res["departmentText"] = $departmentText;
+		return json_encode($res);
+	}
+	public function actionKgiAssignEmployee()
+	{
+		$kgiId = $_POST["kgiId"];
+		$employeeId = $_POST["employeeId"];
+		$checked = $_POST["checked"];
+		if ($checked == 1) {
+			$kgiEmployee = KgiEmployee::find()
+				->where(["kgiId" => $kgiId, "employeeId" => $employeeId])
+				->one();
+			if (isset($kgiEmployee) && !empty($kgiEmployee)) {
+				$kgiEmployee->status = 1;
+			} else {
+				$kgiEmployee = new KgiEmployee();
+				$kgiEmployee->employeeId = $employeeId;
+				$kgiEmployee->kgiId = $kgiId;
+				$kgiEmployee->status = 1;
+				$kgiEmployee->createDateTime = new Expression('NOW()');
+				$kgiEmployee->updateDateTime = new Expression('NOW()');
+			}
+			$kgiEmployee->save(false);
+		} else {
+			KgiEmployee::updateAll(["status" => 99], ["employeeId" => $employeeId, "kgiId" => $kgiId]);
+		}
+		$kgiEmployee = KgiEmployee::find()
+			->where(["kgiId" => $kgiId, "status" => 1])
+			->asArray()
+			->all();
+		$res["status"] = true;
+		$res["totalEmployee"] = count($kgiEmployee);
+		return json_encode($res);
+	}
+	public function actionSearchKgiEmployee()
+	{
+		$searchText = $_POST["searchText"];
+		$kgiId = $_POST["kgiId"];
+		$kgiBranch = KgiBranch::find()
+			->where(["kgiId" => $kgiId, "status" => 1])
+			->asArray()
+			->all();
+		$employees = [];
+		if (isset($kgiBranch) && count($kgiBranch) > 0) {
+			$i = 0;
+			foreach ($kgiBranch as $kb) :
+				$employee = Employee::find()
+					->where(["status" => 1, "branchId" => $kb["branchId"]])
+					->andWhere("employeeFirstName LIKE '" . $searchText . "%' or employeeSureName LIKE '" . $searchText . "%'")
+					->andFilterWhere([
+						"departmentId" => $_POST["departmentId"]
+					])
+					->orderBy('branchId,titleId')
+					->asArray()
+					->all();
+				if (isset($employee) && count($employee) > 0) {
+					$i = 0;
+					foreach ($employee as $em) :
+						if ($em["picture"] != "") {
+							$picture = $em['picture'];
+						} else {
+							if ($em['gender'] == 1) {
+								$picture = 'image/user.png';
+							} else {
+								$picture = 'image/lady.jpg';
+							}
+						}
+						$employees[$i] = [
+							"name" => $em["employeeFirstname"] . ' ' . $em["employeeSurename"],
+							"id" => $em["employeeId"],
+							"branch" => Branch::branchName($em["branchId"]),
+							"department" => Department::departmentNAme($em["departmentId"]),
+							"team" => Team::teamName($em["teamId"]),
+							"picture" => $picture,
+							"title" => Title::titleName($em["titleId"])
+						];
+						$i++;
+					endforeach;
+				}
+			endforeach;
+		}
+		$textSearch = $this->renderAjax('search_employee', [
+			"employees" => $employees,
+			"kgiId" => $kgiId
+		]);
+		$res["status"] = true;
+		$res["textEmployee"] = $textSearch;
+		return json_encode($res);
+	}
+	public function actionSearchAssignKgi()
+	{
+		$month = $_POST['month'];
+		$paramText = 'companyId=&&branchId=&&teamId=&&month=' . $month . '&&status=&&year=';
+		$groupId = Group::currentGroupId();
+		if ($groupId == null) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+		}
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-filter?' . $paramText);
+		$kgis = curl_exec($api);
+		$kgis = json_decode($kgis, true);
+		curl_close($api);
+		//throw new exception(print_r($paramText, true));
+		$kgiText = $this->renderAjax('assign_search', [
+			"kgis" => $kgis
+		]);
+		$res["kgiText"] = $kgiText;
+		$res["status"] = true;
+		return json_encode($res);
 	}
 	public function setDefault()
 	{

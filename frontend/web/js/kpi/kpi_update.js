@@ -320,12 +320,12 @@ function branchMultiDepartmentUpdateKpi() {
 	}
 	var url = $url + 'kpi/management/branch-multi-department';
 	var acType = $("#acType").val();
-	var kgiId=$("#kgiId").val();
+	var kpiId=$("#kpiId").val();
 	$.ajax({
 		type: "POST",
 		dataType: 'json',
 		url: url,
-		data: { multiBranch: multiBranch, acType: acType,kgiId:kgiId },
+		data: { multiBranch: multiBranch, acType: acType,kpiId:kpiId },
 		success: function (data) {
 			if (data.status) {
 				$("#show-multi-department-update").html(data.textDepartment);
@@ -351,4 +351,115 @@ function copyKpi(kpiId) {
 	    var url = $url + 'kpi/management/copy-kpi?kpiId='+kpiId;
 	    window.location.href=url;
 	}
-   }
+}
+function kpiCompanyBranch(companyId,kpiId) { 
+	var url = $url + 'kpi/management/kpi-branch';
+	$.ajax({
+	    type: "POST",
+	    dataType: 'json',
+	    url: url,
+	    data: { companyId: companyId,kpiId:kpiId},
+	    success: function (data) {
+		 $("#kpi-branch").html(data.textBranch);
+		 $("#kpiName").html(data.kpiName);
+		 $("#companyName").html(data.companyName);
+	    }
+	});
+}
+function assignKpiBranch(kpiId,branchId) { 
+	var checked = 0;
+	if ($("#assign-branch-kpi-" + kpiId + '-' + branchId).prop("checked") == true) {
+	    checked = 1;
+	}
+	var url = $url + 'kpi/management/kpi-assign-branch';
+	$.ajax({
+	    type: "POST",
+	    dataType: 'json',
+	    url: url,
+	    data: { branchId: branchId,kpiId:kpiId,checked,checked},
+	    success: function (data) {
+		 if (data.status) { 
+		     $("#total-branch-" + kpiId).html(data.totalBranch);
+		 }
+	    }
+	});
+}
+function kpiCompanyEmployee(kpiId) { 
+	var url = $url + 'kpi/management/kpi-employee';
+	$("#kpiId").val(kpiId);
+	$("#employeeInBranch").html('');
+	$("#search-employee-box").css("display", "none");
+	$("#search-employee-kpi").val('');
+	$("#search-employee-department").val('')
+	$.ajax({
+	    type: "POST",
+	    dataType: 'json',
+	    url: url,
+	    data: {kpiId:kpiId},
+	    success: function (data) {
+		 if (data.status) { 
+		     $("#search-employee-department").html(data.departmentText);
+		     $("#employeeInBranch").html(data.textEmployee);
+   
+		 }
+	    }
+	});
+}
+function kpiEmployee(employeeId, kpiId) { 
+   
+	var url = $url + 'kpi/management/kpi-assign-employee';
+	var checked = 0;
+	if ($("#kpi-employee-" + employeeId + '-' + kpiId).prop("checked") == true) {
+	    checked = 1;
+	}
+	$.ajax({
+	    type: "POST",
+	    dataType: 'json',
+	    url: url,
+	    data: {kpiId:kpiId,employeeId:employeeId,checked:checked},
+	    success: function (data) {
+		 if (data.status) { 
+		     $("#totalEmployee-"+kpiId).html(data.totalEmployee);
+		 }
+	    }
+	});
+}
+function searchKpiEmployee() { 
+	var kpiId = $("#kpiId").val();
+	$("#search-employee-box").html('');
+	var searchText = $("#search-employee-kpi").val();
+	var departmentId=$("#search-employee-department").val();
+	var url = $url + 'kpi/management/search-kpi-employee';
+	// if ($.trim(searchText) != '') {
+	    $.ajax({
+		 type: "POST",
+		 dataType: 'json',
+		 url: url,
+		 data: { kpiId: kpiId, searchText: searchText,departmentId:departmentId },
+		 success: function (data) {
+		     if (data.status) {
+			  $("#search-employee-box").show();
+			  $("#search-employee-box").html(data.textEmployee);
+		     }
+		 }
+	    });
+	// } else { 
+	//     $("#search-employee-box").html('');
+	//     $("#search-employee-box").css("display","none");
+	// }
+}
+function searchAssignKpi() { 
+	var month = $("#kpiMonthFilter").val();
+	var url = $url + 'kpi/management/search-assign-kpi';
+	    $.ajax({
+		 type: "POST",
+		 dataType: 'json',
+		 url: url,
+		 data: { month: month},
+		 success: function (data) {
+		     if (data.status) {
+			  $("#assign-search-result").html(data.kpiText);
+		     }
+		 }
+	    });
+}

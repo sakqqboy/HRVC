@@ -361,4 +361,116 @@ function copyKgi(kgiId) {
 	    var url = $url + 'kgi/management/copy-kgi?kgiId='+kgiId;
 	    window.location.href=url;
 	}
-   }
+}
+function kgiCompanyBranch(companyId,kgiId) { 
+	var url = $url + 'kgi/management/kgi-branch';
+	$.ajax({
+	    type: "POST",
+	    dataType: 'json',
+	    url: url,
+	    data: { companyId: companyId,kgiId:kgiId},
+	    success: function (data) {
+		 $("#kgi-branch").html(data.textBranch);
+		 $("#kgiName").html(data.kgiName);
+		 $("#companyName").html(data.companyName);
+	    }
+	});
+}
+function assignKgiBranch(kgiId,branchId) { 
+	var checked = 0;
+	if ($("#assign-branch-kgi-" + kgiId + '-' + branchId).prop("checked") == true) {
+	    checked = 1;
+	}
+	var url = $url + 'kgi/management/kgi-assign-branch';
+	$.ajax({
+	    type: "POST",
+	    dataType: 'json',
+	    url: url,
+	    data: { branchId: branchId,kgiId:kgiId,checked,checked},
+	    success: function (data) {
+		 if (data.status) { 
+		     $("#total-branch-" + kgiId).html(data.totalBranch);
+		 }
+	    }
+	});
+}
+function kgiCompanyEmployee(kgiId) { 
+	var url = $url + 'kgi/management/kgi-employee';
+	$("#kgiId").val(kgiId);
+	$("#employeeInBranch").html('');
+	$("#search-employee-box").css("display", "none");
+	$("#search-employee-kgi").val('');
+	$("#search-employee-department").val('')
+	$.ajax({
+	    type: "POST",
+	    dataType: 'json',
+	    url: url,
+	    data: {kgiId:kgiId},
+	    success: function (data) {
+		 if (data.status) { 
+		     $("#search-employee-department").html(data.departmentText);
+		     $("#employeeInBranch").html(data.textEmployee);
+   
+		 }
+	    }
+	});
+}
+function kgiEmployee(employeeId, kgiId) { 
+   
+	var url = $url + 'kgi/management/kgi-assign-employee';
+	var checked = 0;
+	if ($("#kgi-employee-" + employeeId + '-' + kgiId).prop("checked") == true) {
+	    checked = 1;
+	}
+	$.ajax({
+	    type: "POST",
+	    dataType: 'json',
+	    url: url,
+	    data: {kgiId:kgiId,employeeId:employeeId,checked:checked},
+	    success: function (data) {
+		 if (data.status) { 
+		     $("#totalEmployee-"+kgiId).html(data.totalEmployee);
+		 }
+	    }
+	});
+}
+function searchKgiEmployee() { 
+	var kgiId = $("#kgiId").val();
+	$("#search-employee-box").html('');
+	var searchText = $("#search-employee-kgi").val();
+	var departmentId=$("#search-employee-department").val();
+	var url = $url + 'kgi/management/search-kgi-employee';
+	// if ($.trim(searchText) != '') {
+	    $.ajax({
+		 type: "POST",
+		 dataType: 'json',
+		 url: url,
+		 data: { kgiId: kgiId, searchText: searchText,departmentId:departmentId },
+		 success: function (data) {
+		     if (data.status) {
+			  $("#search-employee-box").show();
+			  $("#search-employee-box").html(data.textEmployee);
+		     }
+		 }
+	    });
+	// } else { 
+	//     $("#search-employee-box").html('');
+	//     $("#search-employee-box").css("display","none");
+	// }
+}
+function searchAssignKgi() { 
+	var month = $("#kgiMonthFilter").val();
+	var url = $url + 'kgi/management/search-assign-kgi';
+	    $.ajax({
+		 type: "POST",
+		 dataType: 'json',
+		 url: url,
+		 data: { month: month},
+		 success: function (data) {
+		     if (data.status) {
+			  $("#assign-search-result").html(data.kgiText);
+		     }
+		 }
+	    });
+}
+   

@@ -37,7 +37,7 @@ class KfiBranch extends \backend\models\hrvc\master\KfiBranchMaster
     {
         $kfiBranch = KfiBranch::find()->select('b.branchName,b.branchId')
             ->JOIN("LEFT JOIN", "branch b", "b.branchId=kfi_branch.branchId")
-            ->where(["kfi_branch.kfiId" => $kfiId])
+            ->where(["kfi_branch.kfiId" => $kfiId, "kfi_branch.status" => 1])
             ->asArray()
             ->orderBy("b.branchName")
             ->all();

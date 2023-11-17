@@ -25,7 +25,7 @@
 			</a>
 		</li>
 		<li class="nav-item presentation-end" role="presentation">
-			<a class="nav-link text-dark" id="pills-Setting-tab" type="button" role="tab" aria-controls="pills-Action" aria-selected="false">
+			<a href="<?= Yii::$app->homeUrl ?>kgi/management/assign-kgi" class="nav-link text-dark" id="pills-Setting-tab" type="button" role="tab" aria-controls="pills-Action" aria-selected="false">
 				<i class="fa fa-cog" aria-hidden="true"></i>
 				Assign
 			</a>

@@ -59,7 +59,8 @@ class ManagementController extends Controller
 					"flag" => Country::countryFlagBycompany($kfi['companyId']),
 					"isOver" => 0,
 					"fromDate" => "",
-					"toDate" => ""
+					"toDate" => "",
+					"active" => $kfi["active"]
 				];
 				$kfiHistory = KfiHistory::find()
 					->where(["kfiId" => $kfi["kfiId"], "status" => [1, 2]])
@@ -98,6 +99,7 @@ class ManagementController extends Controller
 						"isOver" => ModelMaster::isOverDuedate($kfiHistory["nextCheckDate"]),
 						"fromDate" => ModelMaster::engDate($kfiHistory["fromDate"], 2),
 						"toDate" => ModelMaster::engDate($kfiHistory["toDate"], 2),
+						"active" => $kfi["active"]
 					];
 				}
 
@@ -125,6 +127,7 @@ class ManagementController extends Controller
 		$res["unit"] = Unit::unitName($kfi['unitId']);
 		$res["countryName"] = Country::countryNameBycompany($kfi['companyId']);
 		$res["flag"] = Country::countryFlagBycompany($kfi["companyId"]);
+		$res["active"] = $kfi["active"];
 		$kfiHistory = KfiHistory::find()
 			->where(["kfiId" => $kfiId, "status" => [1, 2]])
 			->orderBy('kfiHistoryId DESC')
@@ -237,7 +240,7 @@ class ManagementController extends Controller
 		}
 		return json_encode($data);
 	}
-	public function actionKfiFilter($companyId, $branchId, $month, $status, $year)
+	public function actionKfiFilter($companyId, $branchId, $month, $status, $year, $active)
 	{
 		$data = [];
 		//$kfis = Kfi::find()->where(["status" => [1, 2]])->asArray()->all();
@@ -252,7 +255,8 @@ class ManagementController extends Controller
 				"kb.branchId" => $branchId,
 				"kfi.month" => $month,
 				"kfi.status" => $status,
-				"kfi.year" => $year
+				"kfi.year" => $year,
+				"kfi.active" => isset($active) ? $active : null
 			])
 			->orderBy('kfi.createDateTime ASC')
 			->all();
@@ -262,6 +266,9 @@ class ManagementController extends Controller
 					"kfiName" => $kfi["kfiName"],
 					"companyName" => Company::companyName($kfi['companyId']),
 					"branchName" => Branch::kfiBranchName($kfi["kfiId"]),
+					"companyId" => $kfi['companyId'],
+					"kfiBranch" => KfiBranch::kfiBranch($kfi["kfiId"]),
+					"kfiEmployee" => KfiEmployee::kfiEmployee($kfi["kfiId"]),
 					"creater" => User::employeeNameByuserId($kfi["createrId"]),
 					"quantRatio" => "",
 					"target" => $kfi['targetAmount'],
@@ -280,6 +287,7 @@ class ManagementController extends Controller
 					"fromDate" => "",
 					"isOver" => 0,
 					"toDate" => "",
+					"active" => $kfi["active"]
 				];
 				$kfiHistory = KfiHistory::find()
 					->where(["kfiId" => $kfi["kfiId"], "status" => [1, 2]])
@@ -298,6 +306,9 @@ class ManagementController extends Controller
 						"kfiName" => $kfi["kfiName"],
 						"companyName" => Company::companyName($kfi['companyId']),
 						"branchName" => Branch::kfiBranchName($kfi["kfiId"]),
+						"companyId" => $kfi['companyId'],
+						"kfiBranch" => KfiBranch::kfiBranch($kfi["kfiId"]),
+						"kfiEmployee" => KfiEmployee::kfiEmployee($kfi["kfiId"]),
 						"target" => $kfi['targetAmount'],
 						"unit" => Unit::unitName($kfi['unitId']),
 						"month" => ModelMaster::monthEng($kfi['month'], 1),
@@ -316,6 +327,7 @@ class ManagementController extends Controller
 						"fromDate" => ModelMaster::engDate($kfiHistory["fromDate"], 2),
 						"toDate" => ModelMaster::engDate($kfiHistory["toDate"], 2),
 						"isOver" => ModelMaster::isOverDuedate($kfiHistory["nextCheckDate"]),
+						"active" => $kfi["active"]
 					];
 				}
 

@@ -21,6 +21,8 @@ use frontend\models\hrvc\Kgi;
 use frontend\models\hrvc\KgiHistory;
 use frontend\models\hrvc\Kpi;
 use frontend\models\hrvc\KpiHistory;
+use frontend\models\hrvc\Team;
+use frontend\models\hrvc\Title;
 use frontend\models\hrvc\User;
 use frontend\models\hrvc\UserRole;
 use Yii;
@@ -122,6 +124,7 @@ class ManagementController extends Controller
 
 		]);
 	}
+
 	public function actionCreateKfi()
 	{
 		if (isset($_POST["kfiName"])) {
@@ -566,12 +569,12 @@ class ManagementController extends Controller
 				return $this->redirect(Yii::$app->homeUrl . 'kfi/management/grid');
 			}
 		}
-		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&month=' . $month . '&&status=' . $status . '&&year=' . $year;
+		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&month=' . $month . '&&status=' . $status . '&&year=' . $year . '&&active';
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
-
+		//throw new exception($paramText);
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -744,6 +747,226 @@ class ManagementController extends Controller
 		}
 		return json_encode($res);
 	}
+	public function actionKfiAssignBranch()
+	{
+		$kfiId = $_POST["kfiId"];
+		$branchId = $_POST["branchId"];
+		$checked = $_POST["checked"];
+		if ($checked == 1) {
+			$kfiBranch = KfiBranch::find()
+				->where(["kfiId" => $kfiId, "branchId" => $branchId])
+				->one();
+			if (isset($kfiBranch) && !empty($kfiBranch)) {
+				$kfiBranch->status = 1;
+			} else {
+				$kfiBranch = new KfiBranch();
+				$kfiBranch->branchId = $branchId;
+				$kfiBranch->kfiId = $kfiId;
+				$kfiBranch->status = 1;
+				$kfiBranch->createDateTime = new Expression('NOW()');
+				$kfiBranch->updateDateTime = new Expression('NOW()');
+			}
+			$kfiBranch->save(false);
+		} else {
+			KfiBranch::updateAll(["status" => 99], ["branchId" => $branchId, "kfiId" => $kfiId]);
+		}
+		$kfiBranch = KfiBranch::find()
+			->where(["kfiId" => $kfiId, "status" => 1])
+			->asArray()
+			->all();
+		$res["status"] = true;
+		$res["totalBranch"] = count($kfiBranch);
+		return json_encode($res);
+	}
+	public function actionKfiEmployee()
+	{
+		$kfiId = $_POST["kfiId"];
+		$kfiBranch = KfiBranch::find()
+			->where(["kfiId" => $kfiId, "status" => 1])
+			->asArray()
+			->all();
+		$employees = [];
+		$departmentText = '<option value="">Department</option>';
+		if (isset($kfiBranch) && count($kfiBranch) > 0) {
+			$i = 0;
+			foreach ($kfiBranch as $kb) :
+				$employee = Employee::find()
+					->where(["branchId" => $kb["branchId"], "status" => 1])
+					->asArray()
+					->orderBy('branchId,titleId')
+					->all();
+				if (isset($employee) && count($employee) > 0) {
+					foreach ($employee as $em) :
+						if ($em["picture"] != "") {
+							$picture = $em['picture'];
+						} else {
+							if ($em['gender'] == 1) {
+								$picture = 'image/user.png';
+							} else {
+								$picture = 'image/lady.jpg';
+							}
+						}
+						$employees[$i] = [
+							"name" => $em["employeeFirstname"] . ' ' . $em["employeeSurename"],
+							"id" => $em["employeeId"],
+							"branch" => Branch::branchName($em["branchId"]),
+							"department" => Department::departmentNAme($em["departmentId"]),
+							"team" => Team::teamName($em["teamId"]),
+							"picture" => $picture,
+							"title" => Title::titleName($em["titleId"])
+						];
+						$i++;
+					endforeach;
+				}
+				$departments = Department::find()
+					->select('departmentId,departmentName')
+					->where(["branchId" => $kb["branchId"], "status" => 1])->asArray()
+					->orderBy("departmentName")
+					->all();
+				if (isset($departments) && count($departments) > 0) {
+					foreach ($departments as $dp) :
+						$departmentText .= '<option value="' . $dp["departmentId"] . '">' . $dp["departmentName"] . '</option>';
+					endforeach;
+				}
+
+			endforeach;
+		}
+
+		$textEmployee = $this->renderAjax('branch_employee', ["employees" => $employees, "kfiId" => $kfiId]);
+		$res["status"] = true;
+		$res["textEmployee"] = $textEmployee;
+		$res["departmentText"] = $departmentText;
+		return json_encode($res);
+	}
+	public function actionKfiAssignEmployee()
+	{
+		$kfiId = $_POST["kfiId"];
+		$employeeId = $_POST["employeeId"];
+		$checked = $_POST["checked"];
+		if ($checked == 1) {
+			$kfiEmployee = KfiEmployee::find()
+				->where(["kfiId" => $kfiId, "employeeId" => $employeeId])
+				->one();
+			if (isset($kfiBranch) && !empty($kfiBranch)) {
+				$kfiEmployee->status = 1;
+			} else {
+				$kfiEmployee = new KfiEmployee();
+				$kfiEmployee->employeeId = $employeeId;
+				$kfiEmployee->kfiId = $kfiId;
+				$kfiEmployee->status = 1;
+				$kfiEmployee->createDateTime = new Expression('NOW()');
+				$kfiEmployee->updateDateTime = new Expression('NOW()');
+			}
+			$kfiEmployee->save(false);
+		} else {
+			KfiEmployee::updateAll(["status" => 99], ["employeeId" => $employeeId, "kfiId" => $kfiId]);
+		}
+		$kfiEmployee = KfiEmployee::find()
+			->where(["kfiId" => $kfiId, "status" => 1])
+			->asArray()
+			->all();
+		$res["status"] = true;
+		$res["totalEmployee"] = count($kfiEmployee);
+		return json_encode($res);
+	}
+	public function actionSearchKfiEmployee()
+	{
+		$searchText = $_POST["searchText"];
+		$kfiId = $_POST["kfiId"];
+		$kfiBranch = KfiBranch::find()
+			->where(["kfiId" => $kfiId, "status" => 1])
+			->asArray()
+			->all();
+		$employees = [];
+		if (isset($kfiBranch) && count($kfiBranch) > 0) {
+			$i = 0;
+			foreach ($kfiBranch as $kb) :
+				$employee = Employee::find()
+					->where(["status" => 1, "branchId" => $kb["branchId"]])
+					->andWhere("employeeFirstName LIKE '" . $searchText . "%' or employeeSureName LIKE '" . $searchText . "%'")
+					->andFilterWhere([
+						"departmentId" => $_POST["departmentId"]
+					])
+					->orderBy('branchId,titleId')
+					->asArray()
+					->all();
+				if (isset($employee) && count($employee) > 0) {
+					$i = 0;
+					foreach ($employee as $em) :
+						if ($em["picture"] != "") {
+							$picture = $em['picture'];
+						} else {
+							if ($em['gender'] == 1) {
+								$picture = 'image/user.png';
+							} else {
+								$picture = 'image/lady.jpg';
+							}
+						}
+						$employees[$i] = [
+							"name" => $em["employeeFirstname"] . ' ' . $em["employeeSurename"],
+							"id" => $em["employeeId"],
+							"branch" => Branch::branchName($em["branchId"]),
+							"department" => Department::departmentNAme($em["departmentId"]),
+							"team" => Team::teamName($em["teamId"]),
+							"picture" => $picture,
+							"title" => Title::titleName($em["titleId"])
+						];
+						$i++;
+					endforeach;
+				}
+			endforeach;
+		}
+		$textSearch = $this->renderAjax('search_employee', [
+			"employees" => $employees,
+			"kfiId" => $kfiId
+		]);
+		$res["status"] = true;
+		$res["textEmployee"] = $textSearch;
+		return json_encode($res);
+	}
+	public function actionChangeKfiStatus()
+	{
+		$status = $_POST["status"];
+		$kfiId = $_POST["kfiId"];
+		$kfi = Kfi::find()->where(["kfiId" => $kfiId])->one();
+		$kfi->active = $status;
+		if ($kfi->save(false)) {
+			$res["status"] = true;
+			if ($status == 1) {
+				$res["newButton"] = '<a href="javascript:changeKfiStatus(0,' . $kfiId . ')" class="btn btn-primary btn-sm font-size-12">Active</a>';
+			} else {
+				$res["newButton"] = '<a href="javascript:changeKfiStatus(1,' . $kfiId . ')" class="btn btn-danger btn-sm font-size-12">In Active</a>';
+			}
+		} else {
+			$res["status"] = false;
+		}
+		return json_encode($res);
+	}
+	public function actionSearchAssignKfi()
+	{
+		$month = $_POST['month'];
+		$active = $_POST['active'];
+		$paramText = 'companyId=&&branchId=&&month=' . $month . '&&status=&&year=&&active=' . $active;
+		$groupId = Group::currentGroupId();
+		if ($groupId == null) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+		}
+		//throw new exception($paramText);
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-filter?' . $paramText);
+		$kfis = curl_exec($api);
+		$kfis = json_decode($kfis, true);
+		curl_close($api);
+		//throw new exception(print_r($kfis, true));
+		$kfiText = $this->renderAjax('assign_search', [
+			"kfis" => $kfis
+		]);
+		$res["kfiText"] = $kfiText;
+		$res["status"] = true;
+		return json_encode($res);
+	}
 	public function setDefault()
 	{
 		$deletedCompany = Company::find()->where(["status" => 99])->asArray()->all();
@@ -764,7 +987,7 @@ class ManagementController extends Controller
 		KgiHistory::updateAll(["createrId" => 7]);
 		KpiHistory::updateAll(["createrId" => 7]);
 	}
-	public function actionKfiEmployee()
+	public function actionKfiDefaultEmployee()
 	{
 		$kfi = Kfi::find()->where(["status" => [1, 2]])->asArray()->all();
 		if (isset($kfi) && count($kfi) > 0) {

@@ -658,7 +658,7 @@ class EmployeeController extends Controller
                         $teamPositionId = '';
                         $isError = 0;
                         $error[$i] = "";
-                        if ($i >= 1) {
+                        if ($i >= 1 && trim($data[0]) != "" && trim($data[1]) != "" && trim($data[2]) != "") {
 
                             // throw new exception('2222');
                             if (trim($data[0]) == "") {
