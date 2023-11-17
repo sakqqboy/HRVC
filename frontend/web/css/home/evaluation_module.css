@@ -1,0 +1,106 @@
+.al-sky {
+    background-color: #eef1f2;
+}
+
+.companyweight {
+    font-weight: 500;
+    font-size: 17px;
+    color: black;
+}
+
+.but-fontCreate {
+    font-size: 13px;
+}
+
+.search-pr {
+    margin-left: -340px;
+    margin-top: 5px;
+}
+
+.bbg-blue {
+    background-color: #E2EFFF;
+    border-radius: 5px;
+}
+
+.mark1 {
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.Pvt {
+    margin-top: 20px;
+    color: black;
+    font-size: 17px;
+}
+
+.imagePvt {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.Activegreen {
+    color: green;
+    font-size: 12px;
+    text-align: center;
+}
+
+.InActivered {
+    color: red;
+    font-size: 12px;
+    text-align: center;
+}
+
+.ac-p {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.card-InActive {
+    border-color: rgb(25, 67, 139);
+}
+
+.Phase {
+    font-size: 13px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.solid-cog {
+    border-right: 3px rgb(30, 120, 210) solid;
+}
+
+.SetConfiguration {
+    color: rgb(30, 120, 210);
+    cursor: pointer;
+}
+
+.solid-Matrices {
+    border-right: 2px lightgray solid;
+    margin-top: 30px;
+    font-size: 13px;
+}
+
+.borderKeyfinancial {
+    border: 2px rgb(43, 128, 226) solid;
+    border-radius: 10px;
+    margin-top: 20px;
+    width: 30%;
+    height: 240px;
+}
+
+.bg-title {
+    border-top: 10px #748EE9 solid;
+    width: 100%;
+    height: 250px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.Indicator {
+    font-size: 13px;
+}

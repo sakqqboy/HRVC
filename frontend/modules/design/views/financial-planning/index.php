@@ -519,10 +519,13 @@ $this->title = 'Financial Planning';
                 <div class="col-lg-7">
                     <div class="alert alert-secondary secondary-CurrentYear">
                         <div class="row">
-                            <div class="col-lg-2 text-secondary">
+                            <div class="col-2 text-dark font-size-13 pt-5">
                                 BTH (฿)
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-2 text-secondary font-size-12 pt-5">
+                                <i class="fa fa-clock-o" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#RoundUp"></i> Round Up
+                            </div>
+                            <div class="col-2 font-size-12">
                                 <select class="form-select text-primary font-size-12" aria-label="Default select example">
                                     <option selected value="">None</option>
                                     <option value="1">2020</option>
@@ -530,13 +533,14 @@ $this->title = 'Financial Planning';
                                     <option value="3">2022</option>
                                     <option value="4">2024</option>
                                 </select>
+
                             </div>
                             <div class="col-2 badge bg-light  pt-9" data-bs-toggle="modal" data-bs-target="#staticBackdropCurrency" style="height: 30px; cursor: pointer;">
                                 <div class="circledollar">
                                     <i class="fa fa-usd pl-4" aria-hidden="true"></i><span class="Curr">Currency</span>
                                 </div>
                             </div>
-                            <div class="col-lg-5">
+                            <div class="col-4 font-size-12 pt-5">
                                 <ul class="nav nav-pills" id="pills-tab" role="tablist">
                                     <div class="col-3 nav-item" role="presentation">
                                         <a class="nav-link pt-table text-dark" id="pills-All-tab" data-bs-toggle="pill" data-bs-target="#pills-All" type="button" role="tab" aria-controls="pills-All" aria-selected="true"> All</a>
@@ -2002,7 +2006,7 @@ $this->title = 'Financial Planning';
 </div>
 
 
-<div class="modal fade" id="staticBackdropCurrency" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabelCurrency" aria-hidden="true">
+<div class="modal fade" id="staticBackdropCurrency" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabelCurrency" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="container">
@@ -2018,8 +2022,34 @@ $this->title = 'Financial Planning';
                             from
                         </div>
                         <div class="col-12">
-
+                            151114
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="RoundUp" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropRoundUp" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="col-12 pt-20">
+                            <i class="fa fa-clock-o" aria-hidden="true"></i> Round Up
+                        </div>
+                    </div>
+                    <div class="col-lg-6 pt-10">
+                        <form>
+                            <input class="chosen-value" type="text" value="" placeholder="Search">
+                            <ul class="valua-list">
+                                <li>K</li>
+                                <li>M</li>
+                                <li>B</li>
+                            </ul>
+                        </form>
                     </div>
                 </div>
             </div>

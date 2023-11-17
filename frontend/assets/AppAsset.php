@@ -55,7 +55,7 @@ class AppAsset extends AssetBundle
         'css/form/checkbox.css',
         'css/home/view.css',
         'css/home/salary-view.css',
-        'css/home/evaluation-module.css',
+        'css/home/evaluation_module.css',
         'css/home/kfi.css',
         'css/home/kfi-grid.css',
         'css/home/kgi-grid.css',
@@ -71,6 +71,8 @@ class AppAsset extends AssetBundle
         'css/admin-financialplanning/performance.css',
         'css/admin-financialplanning/IPL_analysis.css',
         'css/admin-financialplanning/forecast_accounts.css',
+        'css/admin-financialplanning/annual_accounts.css',
+        'css/admin-financialplanning/comparison_accounts.css',
         'css/home/multi_select.css',
 
 

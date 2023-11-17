@@ -1,0 +1,45 @@
+.comparison-solid {
+    border-right: 2px lightgray solid;
+}
+
+.twoI-solid {
+    border-right: 2px #A9EC9F solid;
+}
+
+.twoII-solid {
+    border-left: 2px #008000 solid;
+    margin-left: 3px;
+}
+
+.cardcomparison:hover {
+    background-color: #E6FFE2;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: default;
+}
+
+.cardcomparison-green:hover {
+    background-color: #B4F2DE;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: default;
+}
+
+.comparison-orange {
+    background-color: #FFF9DB;
+}
+
+.comparison-orange-copy {
+    background-color: #FFEB88;
+    color: black;
+}
+
+.comparison-purple {
+    background-color: #F1E1FF;
+    margin-top: -130px;
+}
+
+.padding-badgeshadow {
+    padding-left: 50px;
+    padding-top: 50px;
+}

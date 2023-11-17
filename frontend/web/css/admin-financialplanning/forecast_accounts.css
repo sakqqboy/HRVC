@@ -1,6 +1,6 @@
-.bg-backgroundforecastaccounts {
+.backgroundforecastaccounts {
     margin-top: 30px;
-    background-color: #F4F6F9;
+    background-color: #FAFAFA;
 }
 
 
@@ -29,8 +29,13 @@
 /* .forecast-solid-display {
     border-left: 0.5px lightgray solid;
 } */
-.alert-backgroundforecastaccountss {
-    background-color: #e4e8ec61;
+.backgroundforecastaccountss {
+    background-color: #F0F2F4;
+}
+
+.backgroundforecastaccounts1 {
+    background-color: #F0F2F4;
+    height: 50px;
 }
 
 .frt-cur {
@@ -38,7 +43,7 @@
 }
 
 .pr-forecast {
-    margin-left: -35px;
+    /* margin-left: -40px; */
     width: 130px;
 }
 
@@ -59,14 +64,15 @@
 }
 
 .Business-color {
-    color: gray;
-    font-size: 12px;
-    font-weight: 500;
+    /* color: gray; */
+    font-size: 11.5px;
+    /* padding-top: 10px; */
 }
 
 .Body-Sales {
     background-color: #FFF2DB;
     border: none;
+    height: 100%;
 }
 
 .Sales-sp {
@@ -83,6 +89,7 @@
 .body-purple {
     background-color: #FAF5FF;
     border: none;
+    height: 100%;
 }
 
 .Gross-square {
@@ -105,6 +112,14 @@
     border-radius: 4px;
     margin-top: 30px;
     margin-left: 10px;
+}
+
+.square-blue2 {
+    background-color: rgb(68 19 188);
+    color: white;
+    border-radius: 4px;
+    font-size: 11px;
+    margin-left: -25px;
 }
 
 .square-red {
@@ -145,35 +160,43 @@
     margin-left: 10px;
 }
 
+.square-grey1 {
+    background-color: rgb(164 166 166);
+    color: white;
+    border-radius: 4px;
+}
+
 .body-lightgrey {
     background-color: #F2F2F2;
     border: none;
+    height: 300px;
 }
 
 .Fixedother-solid {
     border-left: 2px lightgrey solid;
-    font-size: 10px
+    font-size: 9px;
+    padding-left: 10px;
 }
 
 .ss-solid {
     border-right: 2px lightgray solid;
-    font-size: 13px;
+    font-size: 9px;
 }
 
 .Super-solid {
     border-right: 2px lightgray solid;
-    font-size: 13px;
+    font-size: 9px;
 }
 
 .excellent {
-    font-size: 15px;
-    line-height: 20px;
+    font-size: 11px;
+    line-height: 16px;
 }
 
 .cardexcellent:hover {
     background-color: rgb(247, 236, 125);
     font-weight: 600;
-    font-size: 16px;
+    font-size: 11px;
     cursor: default;
 }
 
@@ -200,4 +223,51 @@
 .Total-Creativity {
     font-size: 13px;
     text-align: center;
+}
+
+.c-blackgreen {
+    background-color: #B4FFB4;
+    margin-left: -280px;
+}
+
+.c-blacksale {
+    background-color: #FFF9DB;
+    margin-top: -70px;
+    margin-left: 50px;
+    z-index: 3;
+    width: 300px;
+}
+
+.c-ExPense {
+    background-color: #DAFFFF;
+    width: 350px;
+    margin-left: -60px;
+}
+
+.c-f {
+    background-color: #F1E1FF;
+    width: 390px;
+    z-index: 3;
+    margin-top: 50px;
+}
+
+.sh {
+    color: rgb(214, 12, 12);
+    font-weight: 500;
+}
+
+.yn {
+    background-color: rgb(255, 213, 0);
+    color: black;
+}
+
+.pv {
+    background-color: #80E1E1;
+    color: black;
+}
+
+.cf {
+    background-color: #DCB5FF;
+    color: black;
+    margin-left: -5px;
 }
