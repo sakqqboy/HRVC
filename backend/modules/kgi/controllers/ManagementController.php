@@ -9,6 +9,7 @@ use backend\models\hrvc\Employee;
 use backend\models\hrvc\Kgi;
 use backend\models\hrvc\KgiBranch;
 use backend\models\hrvc\KgiDepartment;
+use backend\models\hrvc\KgiEmployee;
 use backend\models\hrvc\KgiHistory;
 use backend\models\hrvc\KgiIssue;
 use backend\models\hrvc\KgiSolution;
@@ -41,8 +42,11 @@ class ManagementController extends Controller
 				}
 				$data[$kgi["kgiId"]] = [
 					"kgiName" => $kgi["kgiName"],
+					"companyId" => $kgi['companyId'],
 					"companyName" => Company::companyName($kgi["companyId"]),
 					"branch" => KgiBranch::kgiBranch($kgi["kgiId"]),
+					"kgiBranch" => KgiBranch::kgiBranches($kgi["kgiId"]),
+					"kgiEmployee" => KgiEmployee::kgiEmployee($kgi["kgiId"]),
 					"quantRatio" => $kgi["quantRatio"],
 					"creater" => User::employeeNameByuserId($kgi["createrId"]),
 					"targetAmount" => number_format($kgi["targetAmount"], 2),
@@ -331,7 +335,10 @@ class ManagementController extends Controller
 				$data[$kgi["kgiId"]] = [
 					"kgiName" => $kgi["kgiName"],
 					"companyName" => Company::companyName($kgi["companyId"]),
+					"companyId" => $kgi["companyId"],
 					"branch" => KgiBranch::kgiBranch($kgi["kgiId"]),
+					"kgiBranch" => KgiBranch::kgiBranches($kgi["kgiId"]),
+					"kgiEmployee" => KgiEmployee::kgiEmployee($kgi["kgiId"]),
 					"quantRatio" => $kgi["quantRatio"],
 					"targetAmount" => number_format($kgi["targetAmount"], 2),
 					"code" => $kgi["code"],
@@ -352,7 +359,7 @@ class ManagementController extends Controller
 					"employee" => KgiTeam::employeeTeam($kgi['kgiId']),
 					"year" => $kgi["year"],
 					"fromDate" => ModelMaster::engDate($kgi["fromDate"], 2),
-					"toDate" => ModelMaster::engDate($kgi["toDate"], 2)
+					"toDate" => ModelMaster::engDate($kgi["toDate"], 2),
 				];
 			endforeach;
 		}

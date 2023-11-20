@@ -16,6 +16,7 @@ use backend\models\hrvc\KpiHistory;
 use backend\models\hrvc\KpiSolution;
 use common\helpers\Path;
 use backend\models\hrvc\Employee;
+use backend\models\hrvc\KpiEmployee;
 use backend\models\hrvc\User;
 use yii\web\Controller;
 
@@ -46,8 +47,11 @@ class ManagementController extends Controller
 				$data[$kpi["kpiId"]] = [
 					"kpiName" => $kpi["kpiName"],
 					"companyName" => Company::companyName($kpi["companyId"]),
+					"companyId" => $kpi['companyId'],
 					"creater" => User::employeeNameByuserId($kpi["createrId"]),
 					"branch" => KpiBranch::kpiBranch($kpi["kpiId"]),
+					"kpiBranch" => KpiBranch::kpiBranches($kpi["kpiId"]),
+					"kpiEmployee" => KpiEmployee::kpiEmployee($kpi["kpiId"]),
 					"quantRatio" => $kpi["quantRatio"],
 					"targetAmount" => number_format($kpi["targetAmount"], 2),
 					"code" => $kpi["code"],
@@ -382,7 +386,10 @@ class ManagementController extends Controller
 				$data[$kpi["kpiId"]] = [
 					"kpiName" => $kpi["kpiName"],
 					"companyName" => Company::companyName($kpi["companyId"]),
+					"companyId" => $kpi["companyId"],
 					"branch" => KpiBranch::kpiBranch($kpi["kpiId"]),
+					"kpiBranch" => KpiBranch::kpiBranches($kpi["kpiId"]),
+					"kpiEmployee" => KpiEmployee::kpiEmployee($kpi["kpiId"]),
 					"quantRatio" => $kpi["quantRatio"],
 					"targetAmount" => number_format($kpi["targetAmount"], 2),
 					"code" => $kpi["code"],

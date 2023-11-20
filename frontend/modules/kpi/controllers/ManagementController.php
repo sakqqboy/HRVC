@@ -5,19 +5,23 @@ namespace frontend\modules\kpi\controllers;
 use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
+use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Department;
+use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Kfi;
 use frontend\models\hrvc\Kgi;
 use frontend\models\hrvc\Kpi;
 use frontend\models\hrvc\KpiBranch;
 use frontend\models\hrvc\KpiDepartment;
+use frontend\models\hrvc\KpiEmployee;
 use frontend\models\hrvc\KpiHistory;
 use frontend\models\hrvc\KpiIssue;
 use frontend\models\hrvc\KpiSolution;
 use frontend\models\hrvc\KpiTeam;
 use frontend\models\hrvc\Team;
+use frontend\models\hrvc\Title;
 use frontend\models\hrvc\User;
 use frontend\models\hrvc\UserRole;
 use Yii;
@@ -801,6 +805,246 @@ class ManagementController extends Controller
             }
             return $this->redirect('index');
         }
+    }
+    public function actionAssignKpi()
+    {
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/index');
+        $kpis = curl_exec($api);
+        $kpis = json_decode($kpis, true);
+
+        curl_close($api);
+        $months = ModelMaster::monthFull(1);
+        return $this->render('assign', [
+            "kpis" => $kpis,
+            "months" => $months
+        ]);
+    }
+    public function actionKpiBranch()
+    {
+        $companyId = $_POST["companyId"];
+        $kpiId = $_POST["kpiId"];
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
+        $branches = curl_exec($api);
+        $branches = json_decode($branches, true);
+        $textBranch = "";
+        $textBranch .= $this->renderAjax('company_branch', ["branches" => $branches, "kpiId" => $kpiId]);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId);
+        $kpi = curl_exec($api);
+        $kpi = json_decode($kpi, true);
+        $res["kpiName"] = $kpi["kpiName"];
+        $res["companyName"] = $kpi["companyName"];
+        $res["textBranch"] = $textBranch;
+        if ($textBranch != "") {
+            $res["status"] = true;
+        } else {
+            $res["status"] = false;
+        }
+        return json_encode($res);
+    }
+    public function actionKpiAssignBranch()
+    {
+        $kpiId = $_POST["kpiId"];
+        $branchId = $_POST["branchId"];
+        $checked = $_POST["checked"];
+        if ($checked == 1) {
+            $kpiBranch = KpiBranch::find()
+                ->where(["kpiId" => $kpiId, "branchId" => $branchId])
+                ->one();
+            if (isset($kpiBranch) && !empty($kpiBranch)) {
+                $kpiBranch->status = 1;
+            } else {
+                $kpiBranch = new KpiBranch();
+                $kpiBranch->branchId = $branchId;
+                $kpiBranch->kpiId = $kpiId;
+                $kpiBranch->status = 1;
+                $kpiBranch->createDateTime = new Expression('NOW()');
+                $kpiBranch->updateDateTime = new Expression('NOW()');
+            }
+            $kpiBranch->save(false);
+        } else {
+            KpiBranch::updateAll(["status" => 99], ["branchId" => $branchId, "kpiId" => $kpiId]);
+        }
+        $kpiBranch = KpiBranch::find()
+            ->where(["kpiId" => $kpiId, "status" => 1])
+            ->asArray()
+            ->all();
+        $res["status"] = true;
+        $res["totalBranch"] = count($kpiBranch);
+        return json_encode($res);
+    }
+    public function actionKpiEmployee()
+    {
+        $kpiId = $_POST["kpiId"];
+        $kpiBranch = KpiBranch::find()
+            ->where(["kpiId" => $kpiId, "status" => 1])
+            ->asArray()
+            ->all();
+        $employees = [];
+        $departmentText = '<option value="">Department</option>';
+        if (isset($kpiBranch) && count($kpiBranch) > 0) {
+            $i = 0;
+            foreach ($kpiBranch as $kb) :
+                $employee = Employee::find()
+                    ->where(["branchId" => $kb["branchId"], "status" => 1])
+                    ->asArray()
+                    ->orderBy('branchId,titleId')
+                    ->all();
+                if (isset($employee) && count($employee) > 0) {
+                    foreach ($employee as $em) :
+                        if ($em["picture"] != "") {
+                            $picture = $em['picture'];
+                        } else {
+                            if ($em['gender'] == 1) {
+                                $picture = 'image/user.png';
+                            } else {
+                                $picture = 'image/lady.jpg';
+                            }
+                        }
+                        $employees[$i] = [
+                            "name" => $em["employeeFirstname"] . ' ' . $em["employeeSurename"],
+                            "id" => $em["employeeId"],
+                            "branch" => Branch::branchName($em["branchId"]),
+                            "department" => Department::departmentNAme($em["departmentId"]),
+                            "team" => Team::teamName($em["teamId"]),
+                            "picture" => $picture,
+                            "title" => Title::titleName($em["titleId"])
+                        ];
+                        $i++;
+                    endforeach;
+                }
+                $departments = Department::find()
+                    ->select('departmentId,departmentName')
+                    ->where(["branchId" => $kb["branchId"], "status" => 1])->asArray()
+                    ->orderBy("departmentName")
+                    ->all();
+                if (isset($departments) && count($departments) > 0) {
+                    foreach ($departments as $dp) :
+                        $departmentText .= '<option value="' . $dp["departmentId"] . '">' . $dp["departmentName"] . '</option>';
+                    endforeach;
+                }
+
+            endforeach;
+        }
+
+        $textEmployee = $this->renderAjax('branch_employee', ["employees" => $employees, "kpiId" => $kpiId]);
+        $res["status"] = true;
+        $res["textEmployee"] = $textEmployee;
+        $res["departmentText"] = $departmentText;
+        return json_encode($res);
+    }
+    public function actionKpiAssignEmployee()
+    {
+        $kpiId = $_POST["kpiId"];
+        $employeeId = $_POST["employeeId"];
+        $checked = $_POST["checked"];
+        if ($checked == 1) {
+            $kpiEmployee = KpiEmployee::find()
+                ->where(["kpiId" => $kpiId, "employeeId" => $employeeId])
+                ->one();
+            if (isset($kpiEmployee) && !empty($kpiEmployee)) {
+                $kpiEmployee->status = 1;
+            } else {
+                $kpiEmployee = new KpiEmployee();
+                $kpiEmployee->employeeId = $employeeId;
+                $kpiEmployee->kpiId = $kpiId;
+                $kpiEmployee->status = 1;
+                $kpiEmployee->createDateTime = new Expression('NOW()');
+                $kpiEmployee->updateDateTime = new Expression('NOW()');
+            }
+            $kpiEmployee->save(false);
+        } else {
+            KpiEmployee::updateAll(["status" => 99], ["employeeId" => $employeeId, "kpiId" => $kpiId]);
+        }
+        $kpiEmployee = KpiEmployee::find()
+            ->where(["kpiId" => $kpiId, "status" => 1])
+            ->asArray()
+            ->all();
+        $res["status"] = true;
+        $res["totalEmployee"] = count($kpiEmployee);
+        return json_encode($res);
+    }
+    public function actionSearchKpiEmployee()
+    {
+        $searchText = $_POST["searchText"];
+        $kpiId = $_POST["kpiId"];
+        $kpiBranch = KpiBranch::find()
+            ->where(["kpiId" => $kpiId, "status" => 1])
+            ->asArray()
+            ->all();
+        $employees = [];
+        if (isset($kpiBranch) && count($kpiBranch) > 0) {
+            $i = 0;
+            foreach ($kpiBranch as $kb) :
+                $employee = Employee::find()
+                    ->where(["status" => 1, "branchId" => $kb["branchId"]])
+                    ->andWhere("employeeFirstName LIKE '" . $searchText . "%' or employeeSureName LIKE '" . $searchText . "%'")
+                    ->andFilterWhere([
+                        "departmentId" => $_POST["departmentId"]
+                    ])
+                    ->orderBy('branchId,titleId')
+                    ->asArray()
+                    ->all();
+                if (isset($employee) && count($employee) > 0) {
+                    $i = 0;
+                    foreach ($employee as $em) :
+                        if ($em["picture"] != "") {
+                            $picture = $em['picture'];
+                        } else {
+                            if ($em['gender'] == 1) {
+                                $picture = 'image/user.png';
+                            } else {
+                                $picture = 'image/lady.jpg';
+                            }
+                        }
+                        $employees[$i] = [
+                            "name" => $em["employeeFirstname"] . ' ' . $em["employeeSurename"],
+                            "id" => $em["employeeId"],
+                            "branch" => Branch::branchName($em["branchId"]),
+                            "department" => Department::departmentNAme($em["departmentId"]),
+                            "team" => Team::teamName($em["teamId"]),
+                            "picture" => $picture,
+                            "title" => Title::titleName($em["titleId"])
+                        ];
+                        $i++;
+                    endforeach;
+                }
+            endforeach;
+        }
+        $textSearch = $this->renderAjax('search_employee', [
+            "employees" => $employees,
+            "kpiId" => $kpiId
+        ]);
+        $res["status"] = true;
+        $res["textEmployee"] = $textSearch;
+        return json_encode($res);
+    }
+    public function actionSearchAssignKpi()
+    {
+        $month = $_POST['month'];
+        $paramText = 'companyId=&&branchId=&&teamId=&&month=' . $month . '&&status=&&year=';
+        $groupId = Group::currentGroupId();
+        if ($groupId == null) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+        }
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-filter?' . $paramText);
+        $kpis = curl_exec($api);
+        $kpis = json_decode($kpis, true);
+        curl_close($api);
+        //throw new exception(print_r($paramText, true));
+        $kpiText = $this->renderAjax('assign_search', [
+            "kpis" => $kpis
+        ]);
+        $res["kpiText"] = $kpiText;
+        $res["status"] = true;
+        return json_encode($res);
     }
     public function setDefault()
     {

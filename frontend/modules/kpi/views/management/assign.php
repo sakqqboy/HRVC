@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Assign KFI';
+$this->title = 'Assign KPI';
 ?>
 <div class="col-12 mt-90">
 	<div class="col-12">
@@ -11,16 +11,16 @@ $this->title = 'Assign KFI';
 			<div class="row">
 				<div class="col-lg-9 col-md-6 col-12">
 					<div class="col-12">
-						Key Financial Indicator
+						Key Performance Indicator
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 col-12">
 					<div class="col-12">
 						<div class="input-group mb-3">
-							<span class="input-group-text" id="basic-addon1" onclick="javascript:searchAssignKfi()">
+							<span class="input-group-text" id="basic-addon1" onclick="javascript:searchAssignKpi()">
 								<i class="fa fa-filter" aria-hidden="true"></i>
 							</span>
-							<select class="form-select font-size-13" aria-label="Default select example" id="kfiMonthFilter">
+							<select class="form-select font-size-13" aria-label="Default select example" id="kpiMonthFilter">
 								<option selected value="">Month</option>
 								<?php
 								if (isset($months) && count($months) > 0) {
@@ -32,11 +32,7 @@ $this->title = 'Assign KFI';
 								}
 								?>
 							</select>
-							<select class="form-select font-size-13" aria-label="Default select example" id="kfiStatusFilter">
-								<option selected value="">Status</option>
-								<option value="1">Active</option>
-								<option value="2">In Active</option>
-							</select>
+
 						</div>
 					</div>
 				</div>
@@ -45,35 +41,36 @@ $this->title = 'Assign KFI';
 				<table class="table table-striped">
 					<thead class="table table-secondary">
 						<tr class="secondary-setting">
-							<th>KFI Contents</th>
+							<th>KPI Contents</th>
 							<th>Company</th>
 							<th>Branch</th>
-							<th>Assign Employee</th>
-							<th>Target</th>
+							<th>Employee</th>
+							<th>Team</th>
+							<!-- <th>Target</th> -->
 							<th>Month</th>
 							<!-- <th>Status</th> -->
 						</tr>
 					</thead>
 					<tbody id="assign-search-result">
 						<?php
-						if (isset($kfis) && count($kfis) > 0) {
-							foreach ($kfis as $kfiId => $kfi) :
+						if (isset($kpis) && count($kpis) > 0) {
+							foreach ($kpis as $kpiId => $kpi) :
 						?>
-								<tr style="border-bottom: 10px white !important;" id="kfi-<?= $kfiId ?>">
+								<tr style="border-bottom: 10px white !important;" id="kpi-<?= $kpiId ?>">
 									<td>
-										<?= $kfi["kfiName"] ?>
+										<?= $kpi["kpiName"] ?>
 									</td>
-									<td><?= $kfi["companyName"] ?></td>
+									<td><?= $kpi["companyName"] ?></td>
 									<td>
 
 										<div class="row">
 											<div class="col-6 badge rounded-pill bg-setting">
-												<img class="Image-Description" src="<?= Yii::$app->homeUrl . $kfi["flag"] ?>">
+												<img class="Image-Description" src="<?= Yii::$app->homeUrl . $kpi["flag"] ?>">
 												<button id="hs-dropdown-avatar-more" class="number-rounded">
-													<span class="font-medium leading-none" id="total-branch-<?= $kfiId ?>"><?= count($kfi["kfiBranch"]) ?></span>
+													<span class="font-medium leading-none" id="total-branch-<?= $kpiId ?>"><?= count($kpi["kpiBranch"]) ?></span>
 												</button>
 											</div>
-											<div class="col-3 dashedshare mt-2 ml-2" onclick="javascript:kfiCompanyBranch(<?= $kfi['companyId'] ?>,<?= $kfiId ?>)" data-bs-toggle="modal" data-bs-target="#modalBranch">
+											<div class="col-3 dashedshare mt-2 ml-2" onclick="javascript:kpiCompanyBranch(<?= $kpi['companyId'] ?>,<?= $kpiId ?>)" data-bs-toggle="modal" data-bs-target="#modalBranch">
 												<i class="fa fa-share-alt share-alt-setting" aria-hidden="true"></i>
 											</div>
 										</div>
@@ -82,9 +79,9 @@ $this->title = 'Assign KFI';
 										<div class="row">
 											<div class="col-5 badge rounded-pill bg-setting text-start">
 												<?php
-												if (isset($kfi["kfiEmployee"]) && count($kfi["kfiEmployee"]) > 0) {
+												if (isset($kpi["kpiEmployee"]) && count($kpi["kpiEmployee"]) > 0) {
 													$e = 0;
-													foreach ($kfi["kfiEmployee"] as $employeeId => $emPic) :
+													foreach ($kpi["kpiEmployee"] as $employeeId => $emPic) :
 														if ($e < 2) { ?>
 															<img class="Image-Description" src="<?= Yii::$app->homeUrl . $emPic ?>">
 												<?php
@@ -94,11 +91,11 @@ $this->title = 'Assign KFI';
 												}
 												?>
 												<button id="hs-dropdown-avatar-more" class="number-rounded">
-													<span class="font-medium leading-none" id="totalEmployee-<?= $kfiId ?>"><?= count($kfi["kfiEmployee"]) ?></span>
+													<span class="font-medium leading-none" id="totalEmployee-<?= $kpiId ?>"><?= count($kpi["kpiEmployee"]) ?></span>
 												</button>
 											</div>
 
-											<div class="col-3 dashedshare mt-2 ml-5" data-bs-target="#kfi-employee-modal" data-bs-toggle="modal" onclick="javascript:kfiCompanyEmployee(<?= $kfiId ?>)">
+											<div class="col-3 dashedshare mt-2 ml-5" data-bs-target="#kpi-employee-modal" data-bs-toggle="modal" onclick="javascript:kpiCompanyEmployee(<?= $kpiId ?>)">
 												<i class="fa fa-user share-alt-setting" aria-hidden="true"></i>
 												<i class="fa fa-plus-circle circle5"></i>
 											</div>
@@ -107,8 +104,8 @@ $this->title = 'Assign KFI';
 											</div>
 										</div>
 									</td>
-									<td class="text-start"><?= $kfi["code"] ?> <?= number_format($kfi["target"], 2) ?></td>
-									<td><?= $kfi["month"] ?></td>
+									<td class="text-start"><?= $kpi["code"] ?> <?= $kpi["targetAmount"] ?></td>
+									<td><?= $kpi["month"] ?></td>
 									<!-- <td id='active-<?php //$kfiId 
 												?>'> -->
 									<?php

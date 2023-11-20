@@ -26,7 +26,7 @@
 			</div>
 			<div class="modal-body">
 				<div class="card">
-					<div class="col-12 pt-10" id="kfi-branch"></div>
+					<div class="col-12 pt-10" id="kpi-branch"></div>
 					<div class="col-12">
 						<div class="Resolve" data-bs-dismiss="modal">Resolve</div>
 					</div>
