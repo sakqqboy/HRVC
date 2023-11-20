@@ -95,8 +95,7 @@ class AppAsset extends AssetBundle
         'js/kpi/kpi_update.js',
         'js/filter/kpi.js',
         'js/setting/scripts.js',
-
-
+        'js/setting/doughnut.js',
 
     ];
     public $depends = [
