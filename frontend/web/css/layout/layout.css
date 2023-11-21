@@ -3229,18 +3229,23 @@
 .mr-100 {
     margin-right: 100px;
 }
-.border-left{
+
+.border-left {
     border-left: lightgray solid thin;
 }
-.border-right{
+
+.border-right {
     border-right: lightgray solid thin;
 }
-.border-top{
+
+.border-top {
     border-top: lightgray solid thin;
 }
-.border-buttom{
+
+.border-buttom {
     border-bottom: lightgray solid thin;
 }
+
 .no-underline-black {
     text-decoration: none;
     color: black;
@@ -3254,10 +3259,9 @@
 .close-box {
     cursor: pointer;
 }
+
 .word-fit {
     word-wrap: break-word;
-<<<<<<< HEAD
-    ;
 }
 
 ิ.boder-top {
@@ -3274,6 +3278,6 @@
 
 ิ.boder-right {
     border-right: lightgray solid thin;
-=======
->>>>>>> 0fa3a303f60dc540dd67f36ad28577e81958b2f5
+
+
 }
