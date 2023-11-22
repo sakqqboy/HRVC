@@ -3,7 +3,7 @@
 }
 
 .setEvaluator {
-    font-size: 20px;
+    font-size: 18px;
     color: black;
     font-weight: 700;
     line-height: 25px;
@@ -79,8 +79,10 @@
 }
 
 .formFrameE1 {
-    font-size: 15px;
-    border-radius: 3px;
+    font-size: 12px;
+    border-radius: 2px;
+    font-weight: 500;
+    padding-left: 1px;
 }
 
 .Evaluator-ALL {

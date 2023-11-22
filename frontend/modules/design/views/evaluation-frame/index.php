@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Set Evaluator';
+$this->title = 'Evaluation Frame';
 ?>
 
 <div class="col-12 mt-90 alert alert-Evaluator">
@@ -29,26 +29,43 @@ $this->title = 'Set Evaluator';
                     </div>
                     <hr>
                     <div class="col-12">
-                        <ul>
-                            <a href="" class="no-underline-primary">
-                                <li class="set-li">Evaluation Frame</li>
-                            </a>
-                            <a href="" class="no-underline-primary">
-                                <li class="set-li">PMI Weight Allocation</li>
-                            </a>
-                            <a href="" class="no-underline-primary">
-                                <li class="set-li">Rank & Increasement</li>
-                            </a>
-                            <a href="" class="no-underline-primary">
-                                <li class="set-li">Salary & Allowance Range</li>
-                            </a>
-                            <a href="" class="no-underline-primary">
-                                <li class="set-li">Bonus calculation</li>
-                            </a>
-                            <a href="" class="no-underline-primary">
-                                <li class="set-li">Promption</li>
-                            </a>
-                        </ul>
+                        <div>
+                            <label class="rad-label">
+                                <input type="radio" class="rad-input" name="rad">
+                                <div class="rad-design"></div>
+                                <div class="rad-text"> Evaluation Frame</div>
+                            </label>
+
+                            <label class="rad-label">
+                                <input type="radio" class="rad-input" name="rad">
+                                <div class="rad-design"></div>
+                                <div class="rad-text"> PMI Weight Allocation</div>
+                            </label>
+
+                            <label class="rad-label">
+                                <input type="radio" class="rad-input" name="rad">
+                                <div class="rad-design"></div>
+                                <div class="rad-text">Rank & Increasement</div>
+                            </label>
+
+                            <label class="rad-label">
+                                <input type="radio" class="rad-input" name="rad">
+                                <div class="rad-design"></div>
+                                <div class="rad-text"> Salary & Allowance Range</div>
+                            </label>
+
+                            <label class="rad-label">
+                                <input type="radio" class="rad-input" name="rad">
+                                <div class="rad-design"></div>
+                                <div class="rad-text"> Bonus calculation</div>
+                            </label>
+
+                            <label class="rad-label">
+                                <input type="radio" class="rad-input" name="rad">
+                                <div class="rad-design"></div>
+                                <div class="rad-text"> Promotion</div>
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
