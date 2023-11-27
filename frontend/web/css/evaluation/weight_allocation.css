@@ -34,6 +34,14 @@
     z-index: -1;
 }
 
+.Evaluationdeshed {
+    border-left: 2px #d8d8d8 dashed;
+    height: 300px;
+    margin-top: -24px;
+    margin-left: 26px;
+    position: absolute;
+}
+
 .rad-design {
     width: 22px;
     height: 22px;
@@ -41,6 +49,7 @@
     background: linear-gradient(to right bottom, hsl(144, 63%, 37%), hsl(115, 58%, 49%));
     position: relative;
     content: "\f00c";
+    color: white;
     font-family: FontAwesome;
     font-style: normal;
     font-weight: normal;
@@ -62,7 +71,11 @@
 }
 
 .rad-input:checked+.rad-design::before {
-    transform: scale(0);
+    /* transform: scale(0); */
+    content: "\f00c";
+    color: white;
+    text-align: center;
+    background: linear-gradient(to right bottom, hsl(144, 63%, 37%), hsl(115, 58%, 49%));
 }
 
 .rad-text {
@@ -94,16 +107,25 @@
 
 .bg-chartpurple {
     background-color: #748EE9;
+    margin-left: -18px;
 }
 
 .bg-chartwarn {
     background-color: #F8BF27;
+    margin-left: -18px;
 }
+
+
+.bg-cha {
+    background-color: #FF715B;
+    margin-left: -18px;
+}
+
 
 .silly_scrollbar {
     overflow-y: scroll;
     overflow-x: hidden;
-    height: 400px;
+    height: 510px;
 }
 
 .silly_scrollbar::-webkit-scrollbar {
@@ -131,5 +153,41 @@
 .bg-lighttotal {
     background-color: rgb(222, 222, 222);
     border-radius: 2px;
+    font-size: 10px;
+}
+
+.txt-Weight {
+    font-weight: 500;
     font-size: 12px;
+}
+
+.border-edit {
+    font-size: 10px;
+}
+
+.weight-pencil {
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.weight-trash {
+    cursor: pointer;
+    color: red;
+    font-size: 12px;
+}
+
+.fonTotal {
+    font-size: 10px;
+}
+
+.icons-KGI {
+    width: 20px;
+}
+
+.icons-KGI2 {
+    width: 15px;
+}
+
+.solid-typeradio {
+    border-left: 3px lightgrey solid dashed;
 }

@@ -76,6 +76,8 @@ class AppAsset extends AssetBundle
         'css/home/multi_select.css',
         'css/evaluation/evaluator.css',
         'css/evaluation/weight_allocation.css',
+        'css/evaluation/rank_increasement.css',
+        'css/evaluation/evaluation.css',
 
 
     ];

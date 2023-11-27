@@ -35,6 +35,7 @@ $this->title = 'Evaluation Frame';
                                 <div class="rad-design"></div>
                                 <div class="rad-text"> Evaluation Frame</div>
                             </label>
+                            <div class="Evaluationdeshed"></div>
 
                             <label class="rad-label">
                                 <input type="radio" class="rad-input" name="rad">
@@ -80,7 +81,7 @@ $this->title = 'Evaluation Frame';
                         <button type="submit" class="btn btn-primary"> Save</button>
                     </div>
                     <div class="col-4 text-end">
-                        <button type="submit" class="btn btn-danger dangeredit"> Edit</button>
+                        <button type="submit" class="bg dangeredit"> Edit</button>
                     </div>
                     <div class="col-2 text-end">
                         <div class="col-12">
