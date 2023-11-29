@@ -78,6 +78,7 @@ class AppAsset extends AssetBundle
         'css/evaluation/weight_allocation.css',
         'css/evaluation/rank_increasement.css',
         'css/evaluation/evaluation.css',
+        'css/evaluation/accordion.css',
 
 
     ];
@@ -100,6 +101,7 @@ class AppAsset extends AssetBundle
         'js/filter/kpi.js',
         'js/setting/scripts.js',
         'js/setting/doughnut.js',
+        'js/setting/accordion.js',
 
     ];
     public $depends = [
