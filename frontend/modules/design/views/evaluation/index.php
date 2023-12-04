@@ -62,7 +62,7 @@ $this->title = 'Evaluation';
                                             </div>
                                             <div class="col-3">
                                                 <div class="col-12 Toa">
-                                                    ToTal
+                                                    Total
                                                 </div>
                                             </div>
                                             <div class="col-3">

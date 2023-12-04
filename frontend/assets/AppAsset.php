@@ -79,6 +79,7 @@ class AppAsset extends AssetBundle
         'css/evaluation/rank_increasement.css',
         'css/evaluation/evaluation.css',
         'css/evaluation/accordion.css',
+        'css/evaluation/frame_dashboard.css',
 
 
     ];
