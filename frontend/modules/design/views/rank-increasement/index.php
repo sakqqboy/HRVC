@@ -76,16 +76,16 @@ $this->title = 'Rank Increasement';
         <div class="col-lg-9 col-md-6 col-12">
             <div class="alert aler-ALLDepartment">
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <div class="col-12 FrameEvaluation">
                             Rank & Incasement
                         </div>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 mt-5">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Create(Small).png" class="Createsmall"><span class="adRank"> ADD RANK</span>
                     </div>
-                    <div class="col-lg-5 text-end">
-                        <button type="button" class="btn btn-primary font-size-13"> Save</button>
+                    <div class="col-lg-6 text-end">
+                        <span type="button" class="badge primarysave"> Save</span>
                     </div>
                 </div>
                 <div class="col-12">
@@ -131,6 +131,84 @@ $this->title = 'Rank Increasement';
                             </div>
                             <div class="col-lg-1 ScoreSolid">
                                 <?= number_format(0.0) ?>
+                            </div>
+                            <div class="col-lg-2 ScoreSolid">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Delete(Round).png" class="DeleteRound">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="alert p-2 trantRow">
+                        <div class="row">
+                            <div class="col-lg-1">
+                                E
+                            </div>
+                            <div class="col-lg-1 ScoreSolid">
+                                <?= number_format(11) ?>-<?= number_format(20) ?>
+                            </div>
+                            <div class="col-lg-5 ScoreSolid">
+                                <div class="progressRank">
+                                    <div class="barent" style="width:15%">
+                                        <span class="percent">F</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 ScoreSolid">
+                                <?= number_format(0.0) ?>
+                            </div>
+                            <div class="col-lg-1 ScoreSolid">
+                                <?= number_format(0.0) ?>
+                            </div>
+                            <div class="col-lg-2 ScoreSolid">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Delete(Round).png" class="DeleteRound">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="alert p-2 trantRow">
+                        <div class="row">
+                            <div class="col-lg-1">
+                                D
+                            </div>
+                            <div class="col-lg-1 ScoreSolid">
+                                <?= number_format(21) ?>-<?= number_format(30) ?>
+                            </div>
+                            <div class="col-lg-5 ScoreSolid">
+                                <div class="progressRank">
+                                    <div class="barent" style="width:15%">
+                                        <span class="percent">F</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 ScoreSolid">
+                                <?= number_format(0.0) ?>
+                            </div>
+                            <div class="col-lg-1 ScoreSolid">
+                                <?= number_format(0.0) ?>
+                            </div>
+                            <div class="col-lg-2 ScoreSolid">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Delete(Round).png" class="DeleteRound">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="alert p-2 trantRow">
+                        <div class="row">
+                            <div class="col-lg-1">
+                                C
+                            </div>
+                            <div class="col-lg-1 ScoreSolid">
+                                <?= number_format(31) ?>-<?= number_format(40) ?>
+                            </div>
+                            <div class="col-lg-5 ScoreSolid">
+                                <div class="progressRank">
+                                    <div class="barent" style="width:15%">
+                                        <span class="percent">F</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 ScoreSolid">
+                                <?= number_format(1.5) ?>
+                            </div>
+                            <div class="col-lg-1 ScoreSolid">
+                                <?= number_format(0.5) ?>
                             </div>
                             <div class="col-lg-2 ScoreSolid">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Delete(Round).png" class="DeleteRound">

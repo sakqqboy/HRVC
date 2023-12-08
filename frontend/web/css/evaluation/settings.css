@@ -1,0 +1,338 @@
+.Evaluator-Settings {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.text-Participating {
+    font-size: 11px;
+    width: 10rem;
+    color: gray;
+    padding-top: 5px;
+    margin-left: -35px;
+}
+
+.imagessettingsTerm1 {
+    width: 17px;
+}
+
+.settingssearch {
+    margin-top: 12px;
+    z-index: 2;
+    margin-left: -60px;
+}
+
+.settingssearch-radius {
+    border-radius: 30px;
+    width: 100rem;
+}
+
+.viewlog {
+    margin-left: -30px;
+    margin-top: 3px;
+}
+
+.imagessettingsFillerPlus {
+    width: 20px;
+    margin-left: 20px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.Term1Employees {
+    padding-top: 5px;
+    margin-left: 15px;
+}
+
+.bgcradlightgray {
+    background-color: #F0F2F4;
+    border: none;
+    margin-top: 10px;
+}
+
+.Row-bgcradlightgray {
+    text-transform: uppercase;
+    color: #646464;
+    font-size: 8px;
+}
+
+.crdEmployeeslight1 {
+    background-color: #FAFAFA;
+    border: none;
+    border-radius: 3px;
+    height: 40px;
+}
+
+.crdEmployeeslight2 {
+    background-color: #F3FAFF;
+    border: none;
+    border-radius: 3px;
+    height: 40px;
+}
+
+.crdEmployeeslight3 {
+    background-color: #FFF6DE;
+    border: none;
+    border-radius: 3px;
+    height: 40px;
+}
+
+.crdEmployeeslight4 {
+    background-color: #FFEAE7;
+    border: none;
+    border-radius: 3px;
+    height: 40px;
+}
+
+.images1 {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.images2 {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-top: 5px;
+    margin-left: -5px;
+}
+
+.images3 {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.nameimages1 {
+    font-size: 8px;
+}
+
+.nameimages2 {
+    font-size: 8px;
+}
+
+.stsolid {
+    border-left: 2px lightgray solid;
+}
+
+/* .form-check-input-checkEmployees1:checked {
+    border-radius: 50%;
+} */
+
+.check-circle-Employees1 {
+    background-color: #3994FF;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+}
+
+.check-circle-Employees2 {
+    background-color: #FDCA40;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+}
+
+.check-circle-Employees3 {
+    background-color: #FF6939;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+}
+
+.check-circle-close {
+    border-radius: 50%;
+    background-color: #FF7373;
+    width: 15px;
+    height: 15px;
+}
+
+.form-check-input[value=InputEmployees] {
+    border-radius: 50%;
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+/* .form-check-input-checkEmployees2:checked {
+    border-radius: 50%;
+    background-color: #FDCA40;
+} */
+
+/* .form-check-input[value=InputEmployees2] {
+    border-radius: 50%;
+    border: #FDCA40;
+    font-size: 13px;
+    margin-top: 8px;
+} */
+
+.form-check-input-checkEmployees3:checked {
+    border-radius: 50%;
+    background-color: #FF6939;
+}
+
+.form-check-input[value=InputEmployees3] {
+    border-radius: 50%;
+    border: #FF6939;
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+.LabelEmployees {
+    font-size: 8px;
+    border-right: 2px #2580D3 solid;
+}
+
+.LabelEmployees2 {
+    font-size: 8px;
+    border-right: 2px #FDCA40 solid;
+}
+
+.LabelEmployees3 {
+    font-size: 8px;
+    border-right: 2px #FF6939 solid;
+}
+
+.group-btnprimary {
+    background-color: #C7EBFF;
+    font-size: 8px;
+}
+
+.group-controltext {
+    font-size: 8px;
+}
+
+.Directorfontsmall1 {
+    font-size: 8px;
+    margin-left: -10px;
+}
+
+.Directorfontsmall2 {
+    font-size: 8px;
+    margin-left: -2px;
+}
+
+
+.imagesAssingLight {
+    width: 20px;
+}
+
+.timesnotset {
+    color: #FF7373;
+    font-size: 15px;
+    padding-left: 6px;
+}
+
+.Not-Set {
+    color: #A4A2A2;
+    font-size: 11px;
+}
+
+div[role="progressbarprimary"] {
+    --fg: #2580D3;
+    --bg: #D0E2FF;
+    animation: growProgressBar 3s 1 forwards;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: radial-gradient(closest-side, white 80%, transparent 0 99.9%, white 0), conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0);
+    font-size: 10px;
+    color: black;
+    margin-top: -23px;
+    margin-left: 70px;
+}
+
+div[role="progressbarprimary"]::before {
+    counter-reset: percentage var(--value);
+    content: counter(percentage) '%';
+}
+
+div[role="progressbarprimary"]::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%) rotate(calc(var(--pgPercentage) / 100 * 360deg));
+    transform-origin: 50% 100%;
+    animation: growProgressBar 3s 1 forwards;
+    z-index: 1;
+    background-image: radial-gradient(var(--fg) 0 50%, transparent 50% 100%);
+    background-repeat: no-repeat;
+    background-position: 0px 0;
+    background-size: 40px 40px;
+}
+
+div[role="progressbaryellow"] {
+    --fg: #FDCA40;
+    --bg: #FFE9AE;
+    animation: growProgressBar 3s 1 forwards;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: radial-gradient(closest-side, white 80%, transparent 0 99.9%, white 0), conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0);
+    font-size: 10px;
+    color: black;
+    margin-top: -23px;
+    margin-left: 70px;
+}
+
+div[role="progressbaryellow"]::before {
+    counter-reset: percentage var(--value);
+    content: counter(percentage) '%';
+}
+
+div[role="progressbaryellow"]::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%) rotate(calc(var(--pgPercentage) / 100 * 360deg));
+    transform-origin: 50% 100%;
+    animation: growProgressBar 3s 1 forwards;
+    z-index: 1;
+    background-image: radial-gradient(var(--fg) 0 50%, transparent 50% 100%);
+    background-repeat: no-repeat;
+    background-position: 0px 0;
+    background-size: 40px 40px;
+}
+
+div[role="progressbarred"] {
+    --fg: #FF6939;
+    --bg: #FFC3AF;
+    animation: growProgressBar 3s 1 forwards;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: radial-gradient(closest-side, white 80%, transparent 0 99.9%, white 0), conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0);
+    font-size: 10px;
+    color: black;
+    margin-top: -23px;
+    margin-left: 75px;
+}
+
+div[role="progressbarred"]::before {
+    counter-reset: percentage var(--value);
+    content: counter(percentage) '%';
+}
+
+div[role="progressbarred"]::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%) rotate(calc(var(--pgPercentage) / 100 * 360deg));
+    transform-origin: 50% 100%;
+    animation: growProgressBar 3s 1 forwards;
+    z-index: 1;
+    background-image: radial-gradient(var(--fg) 0 50%, transparent 50% 100%);
+    background-repeat: no-repeat;
+    background-position: 0px 0;
+    background-size: 40px 40px;
+}

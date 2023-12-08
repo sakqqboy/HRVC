@@ -41,7 +41,7 @@ $this->title = 'frame Dasdboard';
                     </div>
                 </div>
                 <div class="col-4 text-end">
-                    <button type="submit" class="btn btn-light Dashboardblue"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/Dashboard.png" class="imagesiconssDashboard"> Dashboard</button>
+                    <button type="submit" class="btn btn-light Dashboardblue"><i class="fa fa-th-large" aria-hidden="true"></i> Dashboard</button>
                 </div>
             </div>
         </div>

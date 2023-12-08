@@ -21,7 +21,7 @@
 .rad-label:hover,
 .rad-label:focus-within {
     background: hsla(0, 0%, 80%, .14);
-    border-left: 3px #B2CCFA solid;
+    border-left: 5px #B2CCFA solid;
 }
 
 .rad-input {
@@ -36,7 +36,7 @@
 
 .Evaluationdeshed {
     border-left: 2px #d8d8d8 dashed;
-    height: 300px;
+    height: 350px;
     margin-top: -24px;
     margin-left: 26px;
     position: absolute;

@@ -16,6 +16,13 @@
     background-color: #F4F6F9;
 }
 
+.primarysave {
+    background-color: #2580D3;
+    border-radius: 4px;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
 .trantRankColor {
     border-radius: 6px;
     font-size: 11px;

@@ -80,6 +80,7 @@ class AppAsset extends AssetBundle
         'css/evaluation/evaluation.css',
         'css/evaluation/accordion.css',
         'css/evaluation/frame_dashboard.css',
+        'css/evaluation/settings.css',
 
 
     ];
