@@ -10,6 +10,20 @@ use frontend\models\hrvc\KgiEmployee;
 </div>
 <?php
 if (count($employees) > 0) {
+	$totalkgiEmployee = KgiEmployee::totalEmployee($kgiId);
+	if ($totalkgiEmployee == count($employees)) {
+		$checkAll = 'checked';
+	} else {
+		$checkAll = '';
+	}
+?>
+	<div class="row">
+		<div class="col-12 text-start">
+			<input class="form-check-input" type="checkbox" onchange="javascript:checkAllKgiEmployee(<?= $kgiId ?>)" id="all-kgi-employee-<?= $kgiId ?>" <?= $checkAll ?>>
+			<span class="font-size-12 ml-25">All </span>
+		</div>
+	</div>
+	<?php
 	foreach ($employees as $em) :
 
 		$isCheck = "";
@@ -17,7 +31,7 @@ if (count($employees) > 0) {
 		if ($kgiEmployee == 1) {
 			$isCheck = "checked";
 		}
-?>
+	?>
 		<div class="row">
 			<div class="col-4">
 				<div class=" form-check mt-10">

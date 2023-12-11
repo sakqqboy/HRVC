@@ -523,4 +523,11 @@ class DepartmentController extends Controller
             "branchSearch" => $branchSearch
         ]);
     }
+    public function actionBranchDepartment()
+    {
+        $branchId = $_POST["branchId"];
+        $departments = Department::find()->where(["status" => 1, "branchId" => $branchId])->asArray()->all();
+        $res["totalDepartments"] = count($departments);
+        return json_encode($res);
+    }
 }

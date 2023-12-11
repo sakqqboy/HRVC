@@ -19,7 +19,7 @@
 					<span class="font-size-11" id="NextCheckDateHistory"> </span>
 				</span>
 			</div>
-			<div class="view-show-name" id="companyHistory">Tokyo Consulting Firm Limited </div>
+			<!-- <div class="view-show-name" id="companyHistory">Tokyo Consulting Firm Limited </div> -->
 			<div class="country-show-name">
 				<img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="is-bangladresh2"> <span id="branchHistory"></span>, <span id="countryHistory"></span>
 			</div>

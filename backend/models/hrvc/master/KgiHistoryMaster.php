@@ -46,7 +46,7 @@ return 'kgi_history';
 public function rules()
 {
 return [
-            [['kgiId', 'kgiHistoryName', 'unitId', 'nextCheckDate', 'targetAmount', 'month', 'titleProcess', 'quantRatio', 'priority', 'amountType', 'code', 'result', 'createrId'], 'required'],
+            [['kgiId', 'unitId', 'nextCheckDate', 'targetAmount', 'month', 'quantRatio', 'priority', 'amountType', 'code', 'result', 'createrId'], 'required'],
             [['kgiId', 'unitId', 'createrId'], 'integer'],
             [['periodDate', 'fromDate', 'toDate', 'nextCheckDate', 'createDateTime', 'updateDateTime'], 'safe'],
             [['targetAmount', 'result'], 'number'],

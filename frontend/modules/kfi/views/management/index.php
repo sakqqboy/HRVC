@@ -10,7 +10,9 @@ $this->title = 'KFI';
 		<i class="fa fa-tachometer font-size-20" aria-hidden="true"></i> <strong class="font-size-20"> Performance Indicator Matrices (PIM)</strong>
 	</div>
 	<div class="col-12 mt-20">
-		<?= $this->render('header_filter') ?>
+		<?= $this->render('header_filter', [
+			"role" => $role
+		]) ?>
 		<div class="alert alert-light-4">
 			<div class="row">
 				<div class="col-lg-4 col-md-6 col-12 key1">
@@ -19,10 +21,15 @@ $this->title = 'KFI';
 							Key Financial Indicators
 						</div>
 						<div class="col-6">
-							<button type="button" class="btn btn-primary font-size-14" data-bs-toggle="modal" data-bs-target="#staticBackdrop1" onclick="javascription:changeAcType(1)">
-								<i class="fa fa-magic" aria-hidden="true"></i> Create New KFI
-							</button>
-
+							<?php
+							if ($role >= 3) {
+							?>
+								<button type="button" class="btn btn-primary font-size-14" data-bs-toggle="modal" data-bs-target="#staticBackdrop1" onclick="javascription:changeAcType(1)">
+									<i class="fa fa-magic" aria-hidden="true"></i> Create New KFI
+								</button>
+							<?php
+							}
+							?>
 						</div>
 					</div>
 				</div>
@@ -82,9 +89,41 @@ $this->title = 'KFI';
 													<?= $kfi["branchName"] ?>, <?= $kfi['countryName'] ?>
 												</td>
 												<td><?= $kfi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?></td>
-												<td class="text-end"><?= number_format($kfi["target"], 2) ?></td>
+												<td class="text-end">
+													<?php
+													$decimal = explode('.', $kfi["target"]);
+													if (isset($decimal[1])) {
+														if ($decimal[1] == '00') {
+															$show = number_format($decimal[0]);
+														} else {
+															$show = number_format($kfi["target"], 2);
+														}
+													} else {
+														$show = number_format($kfi["target"]);
+													}
+													?>
+													<?= $show ?>
+												</td>
 												<td class="text-center"><?= $kfi["code"] ?></td>
-												<td><?= number_format((int)$kfi["result"], 2) ?></td>
+												<td>
+													<?php
+													if ($kfi["result"] != '') {
+														$decimalResult = explode('.', $kfi["result"]);
+														if (isset($decimalResult[1])) {
+															if ($decimalResult[1] == '00') {
+																$showResult = number_format($decimalResult[0]);
+															} else {
+																$showResult = number_format($kfi["result"], 2);
+															}
+														} else {
+															$showResult = number_format($kfi["result"]);
+														}
+													} else {
+														$showResult = 0;
+													}
+													?>
+													<?= $showResult ?>
+												</td>
 												<td>
 													<div id="progress1">
 														<div data-num="<?= $kfi["ratio"] == '' ? 0 : $kfi["ratio"] ?>" class="progress-item1"></div>
@@ -102,27 +141,40 @@ $this->title = 'KFI';
 													</span>&nbsp;&nbsp;
 													<span class="dropdown" href="#" role="but ton" id="dropdownMenuLink-<?= $kfiId ?>" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
 													<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kfiId ?>">
-														<li data-bs-toggle="modal" data-bs-target="#staticBackdrop2" onclick="javascript:updateKfi(<?= $kfiId ?>)" title="Update">
-															<a class="dropdown-item" href="#">
-																<i class="fa fa-file-text-o" aria-hidden="true"></i>
-																<strong class="red">*</strong>
-															</a>
-														</li>
+														<?php
+														if ($role >= 3) {
+														?>
+															<li data-bs-toggle="modal" data-bs-target="#staticBackdrop2" onclick="javascript:updateKfi(<?= $kfiId ?>)" title="Update">
+																<a class="dropdown-item" href="#">
+																	<i class="fa fa-file-text-o" aria-hidden="true"></i>
+																	<strong class="red">*</strong>
+																</a>
+															</li>
+														<?php
+														}
+														?>
 														<li data-bs-toggle="modal" data-bs-target="#staticBackdrop3" onclick="javascript:kfiHistory(<?= $kfiId ?>)" title="View">
 															<a class="dropdown-item" href="#">
 																<i class="fa fa-eye" aria-hidden="true"></i>
 															</a>
 														</li>
-														<li onclick="javascript:copyKfi(<?= $kfiId ?>)" title="Copy">
-															<a class="dropdown-item" href="#">
-																<i class="fa fa-copy" aria-hidden="true"></i>
-															</a>
-														</li>
-														<li data-bs-toggle="modal" data-bs-target="#staticBackdrop4" onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)" title="Delete">
-															<a class="dropdown-item" href="#">
-																<i class="fa fa-trash-o" aria-hidden="true"></i>
-															</a>
-														</li>
+														<?php
+														if ($role >= 3) {
+														?>
+															<li onclick="javascript:copyKfi(<?= $kfiId ?>)" title="Copy">
+																<a class="dropdown-item" href="#">
+																	<i class="fa fa-copy" aria-hidden="true"></i>
+																</a>
+															</li>
+
+															<li data-bs-toggle="modal" data-bs-target="#staticBackdrop4" onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)" title="Delete">
+																<a class="dropdown-item" href="#">
+																	<i class="fa fa-trash-o" aria-hidden="true"></i>
+																</a>
+															</li>
+														<?php
+														}
+														?>
 													</ul>
 												</td>
 											</tr>

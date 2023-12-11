@@ -50,4 +50,13 @@ class Employee extends \backend\models\hrvc\master\EmployeeMaster
         $employee = Employee::find()->where(["employeeId" => $employeeId])->asArray()->one();
         return $employee;
     }
+    public static function employeeId($userId)
+    {
+        $user = User::find()
+            ->select('employeeId')
+            ->where(["userId" => $userId])
+            ->asArray()
+            ->one();
+        return $user["employeeId"];
+    }
 }

@@ -6,41 +6,47 @@ use Yii;
 use \frontend\models\hrvc\master\KgiMaster;
 
 /**
-* This is the model class for table "kgi".
-*
-* @property integer $kgiId
-* @property string $kgiName
-* @property integer $companyId
-* @property integer $unitId
-* @property string $periodDate
-* @property string $targetAmount
-* @property string $month
-* @property string $kgiDetail
-* @property integer $quantRatio
-* @property string $priority
-* @property integer $amountType
-* @property string $code
-* @property string $result
-* @property integer $createrId
-* @property integer $status
-* @property string $createDateTime
-* @property string $updateDateTime
-*/
+ * This is the model class for table "kgi".
+ *
+ * @property integer $kgiId
+ * @property string $kgiName
+ * @property integer $companyId
+ * @property integer $unitId
+ * @property string $periodDate
+ * @property string $targetAmount
+ * @property string $month
+ * @property string $kgiDetail
+ * @property integer $quantRatio
+ * @property string $priority
+ * @property integer $amountType
+ * @property string $code
+ * @property string $result
+ * @property integer $createrId
+ * @property integer $status
+ * @property string $createDateTime
+ * @property string $updateDateTime
+ */
 
-class Kgi extends \frontend\models\hrvc\master\KgiMaster{
+class Kgi extends \frontend\models\hrvc\master\KgiMaster
+{
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function rules()
     {
         return array_merge(parent::rules(), []);
     }
 
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return array_merge(parent::attributeLabels(), []);
+    }
+    public static function kgiName($kgiId)
+    {
+        $kgi = Kgi::find()->select('kgiName')->where(["kgiId" => $kgiId])->asArray()->one();
+        return $kgi["kgiName"];
     }
 }

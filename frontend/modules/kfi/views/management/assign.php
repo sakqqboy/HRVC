@@ -1,4 +1,7 @@
 <?php
+
+use common\models\ModelMaster;
+
 $this->title = 'Assign KFI';
 ?>
 <div class="col-12 mt-90">
@@ -51,6 +54,7 @@ $this->title = 'Assign KFI';
 							<th>Assign Employee</th>
 							<th>Target</th>
 							<th>Month</th>
+							<th>KGI</th>
 							<!-- <th>Status</th> -->
 						</tr>
 					</thead>
@@ -109,6 +113,11 @@ $this->title = 'Assign KFI';
 									</td>
 									<td class="text-start"><?= $kfi["code"] ?> <?= number_format($kfi["target"], 2) ?></td>
 									<td><?= $kfi["month"] ?></td>
+									<td>
+										<a href="<?= Yii::$app->homeUrl ?>kfi/management/kfi-kgi/<?= ModelMaster::encodeParams(['kfiId' => $kfiId]) ?>" class="no-underline-black">
+											<b><?= $kfi["countKfiHasKgi"] ?></b>
+										</a>
+									</td>
 									<!-- <td id='active-<?php //$kfiId 
 												?>'> -->
 									<?php

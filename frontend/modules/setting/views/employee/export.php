@@ -19,7 +19,16 @@
 			<td><?= isset($departments[$i]) ? $departments[$i]["departmentName"] : '' ?></td>
 			<td><?= isset($teams[$i]) ? $teams[$i]["teamName"] : '' ?></td>
 			<td><?= isset($teamPositions[$i]) ? $teamPositions[$i]["teamPositionName"] : '' ?></td>
-			<td><?= isset($titles[$i]) ? $titles[$i]["titleName"] : '' ?></td>
+			<td>
+				<?php
+				if (isset($titles[$i])) {
+					$textTitle = $titles[$i]["titleName"] . ':' . $titles[$i]["departmentName"];
+				} else {
+					$textTitle = "";
+				}
+				?>
+				<?= $textTitle ?>
+			</td>
 			<td><?= isset($employeeCondition[$i]) ? $employeeCondition[$i]["employeeConditionName"] : '' ?></td>
 			<td><?= isset($rights[$i]) ? $rights[$i]["roleName"] : '' ?></td>
 			<td><?= isset($gender[$i]) ? $gender[$i] : '' ?></td>

@@ -14,6 +14,7 @@ use frontend\models\hrvc\Kfi;
 use frontend\models\hrvc\KfiBranch;
 use frontend\models\hrvc\KfiDepartment;
 use frontend\models\hrvc\KfiEmployee;
+use frontend\models\hrvc\KfiHasKgi;
 use frontend\models\hrvc\KfiHistory;
 use frontend\models\hrvc\KfiIssue;
 use frontend\models\hrvc\KfiSolution;
@@ -26,7 +27,6 @@ use frontend\models\hrvc\Title;
 use frontend\models\hrvc\User;
 use frontend\models\hrvc\UserRole;
 use Yii;
-use yii\base\Model;
 use yii\db\Expression;
 use yii\web\Controller;
 use yii\web\UploadedFile;
@@ -59,13 +59,30 @@ class ManagementController extends Controller
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
+		$role = UserRole::userRight();
+		$adminId = '';
+		$managerId = '';
+		$supervisorId = '';
+		$staffId = '';
+		if ($role == 5) {
+			$adminId = Yii::$app->user->id;
+		}
+		if ($role == 4) {
+			$managerId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 1 || $role == 2) {
+			$staffId = Yii::$app->user->id;
+		}
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index');
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId);
 		$kfis = curl_exec($api);
 		$kfis = json_decode($kfis, true);
 
@@ -80,20 +97,39 @@ class ManagementController extends Controller
 
 		// $units = ["1" => "Monthly", "2" => "Weekly", "3" => "QuaterLy", "4" => "Daily"];
 		$months = ModelMaster::monthFull(1);
+
 		return $this->render('index', [
 			"companies" => $companies,
 			"units" => $units,
 			"months" => $months,
 			"kfis" => $kfis,
-			"isManager" => $isManager
+			"isManager" => $isManager,
+			"role" => $role
 
 		]);
 	}
 	public function actionGrid()
 	{
 		$groupId = Group::currentGroupId();
+		$role = UserRole::userRight();
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+		}
+		$adminId = '';
+		$managerId = '';
+		$supervisorId = '';
+		$staffId = '';
+		if ($role == 5) {
+			$adminId = Yii::$app->user->id;
+		}
+		if ($role == 4) {
+			$managerId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 1 || $role == 2) {
+			$staffId = Yii::$app->user->id;
 		}
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -101,7 +137,7 @@ class ManagementController extends Controller
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index');
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId);
 		$kfis = curl_exec($api);
 		$kfis = json_decode($kfis, true);
 		// throw new Exception(print_r($kfis, true));
@@ -114,13 +150,15 @@ class ManagementController extends Controller
 		// $units = ["1" => "Monthly", "2" => "Weekly", "3" => "QuaterLy", "4" => "Daily"];
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
+
 		//throw new Exception(print_r($kfis, true));
 		return $this->render('index_grid', [
 			"companies" => $companies,
 			"units" => $units,
 			"months" => $months,
 			"kfis" => $kfis,
-			"isManager" => $isManager
+			"isManager" => $isManager,
+			"role" => $role
 
 		]);
 	}
@@ -143,6 +181,22 @@ class ManagementController extends Controller
 			$kfi->updateDateTime = new Expression('NOW()');
 			if ($kfi->save(false)) {
 				$kfiId = Yii::$app->db->lastInsertID;
+				$kfiHistory = new KfiHistory();
+				$kfiHistory->kfiId = $kfiId;
+				$kfiHistory->createrId = Yii::$app->user->id;
+				$kfiHistory->nextCheckDate = $_POST["nextCheckDate"];
+				$kfiHistory->amountType = $_POST["amountType"];
+				$kfiHistory->code = $_POST["code"];
+				$kfiHistory->status = 1;
+				$kfiHistory->quantRatio = $_POST["quanRatio"];
+				$kfiHistory->historyStatus = 1;
+				$kfiHistory->result =  0;
+				$kfiHistory->unitId =  $_POST["unit"];
+				//$kfiHistory->formular = $_POST["formular"];
+				$kfiHistory->description = $_POST["detail"];
+				$kfiHistory->createDateTime = new Expression('NOW()');
+				$kfiHistory->updateDateTime = new Expression('NOW()');
+				$kfiHistory->save(false);
 				if (isset($_POST["branch"]) && count($_POST["branch"]) > 0) {
 					$this->saveKfiBranch($_POST["branch"], $kfiId);
 				}
@@ -163,7 +217,7 @@ class ManagementController extends Controller
 			$kfi->kfiDetail = $_POST["detail"];
 			$kfi->status = $_POST["status"];
 			if ($isManager == 1) {
-				$kfi->targetAmount = $_POST["targetAmount"];
+				$kfi->targetAmount = str_replace(",", "", $_POST["targetAmount"]);
 			}
 			$kfi->save(false);
 			$kfiHistory = new KfiHistory();
@@ -180,9 +234,9 @@ class ManagementController extends Controller
 			$kfiHistory->status = 1;
 			$kfiHistory->quantRatio = $_POST["quanRatio"];
 			$kfiHistory->historyStatus = $_POST["status"];
-			$kfiHistory->result =  $_POST["result"];
+			$kfiHistory->result =  str_replace(",", "", $_POST["result"]);
 			$kfiHistory->unitId =  $_POST["unit"];
-			$kfiHistory->formular = $_POST["formular"];
+			//$kfiHistory->formular = $_POST["formular"];
 			$kfiHistory->description = $_POST["detail"];
 			$kfiHistory->createDateTime = new Expression('NOW()');
 			$kfiHistory->updateDateTime = new Expression('NOW()');
@@ -570,11 +624,31 @@ class ManagementController extends Controller
 			}
 		}
 		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&month=' . $month . '&&status=' . $status . '&&year=' . $year . '&&active';
+
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
 		//throw new exception($paramText);
+		$role = UserRole::userRight();
+		$adminId = '';
+		$managerId = '';
+		$supervisorId = '';
+		$staffId = '';
+		if ($role == 5) {
+			$adminId = Yii::$app->user->id;
+		}
+		if ($role == 4) {
+			$managerId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 1 || $role == 2) {
+			$staffId = Yii::$app->user->id;
+		}
+		$paramText .= '&&adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId;
+		//throw new Exception($paramText);
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -609,7 +683,6 @@ class ManagementController extends Controller
 			$file = "kfi_search_result_grid";
 		}
 		$isManager = UserRole::isManager();
-
 		return $this->render($file, [
 			"units" => $units,
 			"companies" => $companies,
@@ -622,7 +695,8 @@ class ManagementController extends Controller
 			"status" => $status,
 			"year" => $year,
 			"branches" => $branches,
-			"isManager" => $isManager
+			"isManager" => $isManager,
+			"role" => $role,
 		]);
 	}
 	public function actionCompanyMultiBranch()
@@ -650,6 +724,10 @@ class ManagementController extends Controller
 	}
 	public function actionCopyKfi($kfiId)
 	{
+		$role = UserRole::userRight();
+		if ($role < 3) {
+			return $this->redirect(Yii::$app->homeUrl . 'kfi/management/index');
+		}
 		$kfi = Kfi::find()->where(["kfiId" => $kfiId])->asArray()->one();
 		$copy = new Kfi();
 		$copy->kfiName = $kfi["kfiName"] . ' (copy)';
@@ -702,13 +780,34 @@ class ManagementController extends Controller
 	}
 	public function actionAssignKfi()
 	{
+		$role = UserRole::userRight();
+		if ($role < 3) {
+			return $this->redirect(Yii::$app->homeUrl . 'kfi/management/index');
+		}
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
+		$role = UserRole::userRight();
+		$adminId = '';
+		$managerId = '';
+		$supervisorId = '';
+		$staffId = '';
+		if ($role == 5) {
+			$adminId = Yii::$app->user->id;
+		}
+		if ($role == 4) {
+			$managerId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 1 || $role == 2) {
+			$staffId = Yii::$app->user->id;
+		}
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index');
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId);
 		$kfis = curl_exec($api);
 		$kfis = json_decode($kfis, true);
 
@@ -836,6 +935,33 @@ class ManagementController extends Controller
 		$res["status"] = true;
 		$res["textEmployee"] = $textEmployee;
 		$res["departmentText"] = $departmentText;
+		return json_encode($res);
+	}
+	public function actionCheckAllKfiEmployee()
+	{
+		$kfiId = $_POST["kfiId"];
+		$kfiBranch = KfiBranch::find()
+			->where(["kfiId" => $kfiId, "status" => 1])
+			->asArray()
+			->all();
+		$employees = [];
+		if (isset($kfiBranch) && count($kfiBranch) > 0) {
+			$i = 0;
+			foreach ($kfiBranch as $kb) :
+				$employee = Employee::find()
+					->where(["branchId" => $kb["branchId"], "status" => 1])
+					->asArray()
+					->orderBy('branchId,titleId')
+					->all();
+				if (isset($employee) && count($employee) > 0) {
+					foreach ($employee as $em) :
+						$employees[$i] = $em["employeeId"];
+						$i++;
+					endforeach;
+				}
+			endforeach;
+		}
+		$res["employeeId"] = $employees;
 		return json_encode($res);
 	}
 	public function actionKfiAssignEmployee()
@@ -966,6 +1092,89 @@ class ManagementController extends Controller
 		$res["kfiText"] = $kfiText;
 		$res["status"] = true;
 		return json_encode($res);
+	}
+	public function actionKfiKgi($hash)
+	{
+		$param = ModelMaster::decodeParams($hash);
+		$kfiId = $param["kfiId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-has-kgi?kfiId=' . $kfiId);
+		$kfiHasKgi = curl_exec($api);
+		$kfiHasKgi = json_decode($kfiHasKgi, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId);
+		$kfiDetail = curl_exec($api);
+		$kfiDetail = json_decode($kfiDetail, true);
+		curl_close($api);
+		return $this->render('kfi_kgi', [
+			"kfiHasKgi" => $kfiHasKgi,
+			"kfiId" => $kfiId,
+			"kfiDetail" => $kfiDetail
+		]);
+	}
+	public function actionAssignKgi($hash)
+	{
+		$param = ModelMaster::decodeParams($hash);
+		$kfiId = $param["kfiId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-branch?kfiId=' . $kfiId);
+		$kfiBranch = curl_exec($api);
+		$kfiBranch = json_decode($kfiBranch, true);
+
+		curl_close($api);
+		$kfiName = Kfi::kfiName($kfiId);
+		return $this->render('assign_kgi', [
+			"kfiBranch" => $kfiBranch,
+			"kfiName" => $kfiName,
+			"kfiId" => $kfiId
+		]);
+	}
+	public function actionKgiBranch()
+	{
+		$branchId = $_POST["branchId"];
+		$kfiId = $_POST["kfiId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/branch-kgi?branchId=' . $branchId);
+		$kgiBranch = curl_exec($api);
+		$kgiBranch = json_decode($kgiBranch, true);
+		curl_close($api);
+		$kgiText = $this->renderAjax('branch_kgi', [
+			"kgiBranch" => $kgiBranch,
+			"branchId" => $branchId,
+			"kfiId" => $kfiId
+		]);
+		$res["status"] = true;
+		$res["kgiText"] = $kgiText;
+		return json_encode($res);
+	}
+	public function actionAssignKgiToKfi()
+	{
+		$kfiId = $_POST["kfiId"];
+		$kgiId = $_POST["kgiId"];
+		$type = $_POST["type"];
+		$kfiKgi = KfiHasKgi::find()->where(["kfiId" => $kfiId, "kgiId" => $kgiId])->one();
+		if (isset($kfiKgi) && !empty($kfiKgi)) {
+			if ($type == 1) {
+				$kfiKgi->status = 1;
+			} else {
+				$kfiKgi->status = 99;
+			}
+			$kfiKgi->save(false);
+		} else {
+			$kfiKgi = new KfiHasKgi();
+			$kfiKgi->kfiId = $kfiId;
+			$kfiKgi->kgiId = $kgiId;
+			$kfiKgi->status = 1;
+			$kfiKgi->createDateTime = new Expression('NOW()');
+			$kfiKgi->updateDateTime = new Expression('NOW()');
+			$kfiKgi->save(false);
+		}
 	}
 	public function setDefault()
 	{

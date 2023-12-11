@@ -3256,7 +3256,6 @@
 }
 .word-fit {
     word-wrap: break-word;
-<<<<<<< HEAD
     ;
 }
 
@@ -3274,6 +3273,7 @@
 
 ิ.boder-right {
     border-right: lightgray solid thin;
-=======
->>>>>>> 0fa3a303f60dc540dd67f36ad28577e81958b2f5
+}
+.bg-over{
+    background-color:#FFCCCC ;
 }

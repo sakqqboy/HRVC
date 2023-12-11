@@ -16,6 +16,7 @@ use backend\models\hrvc\KpiHistory;
 use backend\models\hrvc\KpiSolution;
 use common\helpers\Path;
 use backend\models\hrvc\Employee;
+use backend\models\hrvc\KgiHasKpi;
 use backend\models\hrvc\KpiEmployee;
 use backend\models\hrvc\User;
 use yii\web\Controller;
@@ -62,6 +63,7 @@ class ManagementController extends Controller
 					"ratio" => number_format($ratio, 2),
 					"periodCheck" => ModelMaster::engDate($kpi["periodDate"], 2),
 					"nextCheck" => Kpi::nextCheckDate($kpi['kpiId']),
+					"isOver" => ModelMaster::isOverDuedate(Kpi::nextCheckDate($kpi['kpiId'])),
 					"countTeam" => KpiTeam::kpiTeam($kpi["kpiId"]),
 					"flag" => Country::countryFlagBycompany($kpi["companyId"]),
 					"employee" => "",
@@ -71,7 +73,8 @@ class ManagementController extends Controller
 					"solution" => KpiIssue::lastestIssue($kpi["kpiId"])["solution"],
 					"employee" => KpiTeam::employeeTeam($kpi['kpiId']),
 					"fromDate" => ModelMaster::engDate($kpi["fromDate"], 2),
-					"toDate" => ModelMaster::engDate($kpi["toDate"], 2)
+					"toDate" => ModelMaster::engDate($kpi["toDate"], 2),
+					"countKgiInKpi" => KgiHasKpi::countKgiWithKpi($kpi['kpiId']),
 				];
 			endforeach;
 		}
@@ -400,6 +403,7 @@ class ManagementController extends Controller
 					"ratio" => number_format($ratio, 2),
 					"periodCheck" => ModelMaster::engDate($kpi["periodDate"], 2),
 					"nextCheck" => Kpi::nextCheckDate($kpi['kpiId']),
+					"isOver" => ModelMaster::isOverDuedate(Kpi::nextCheckDate($kpi['kpiId'])),
 					"countTeam" => KpiTeam::kpiTeam($kpi["kpiId"]),
 					"flag" => Country::countryFlagBycompany($kpi["companyId"]),
 					"employee" => "",
@@ -411,9 +415,26 @@ class ManagementController extends Controller
 					"fromDate" => ModelMaster::engDate($kpi["fromDate"], 2),
 					"toDate" => ModelMaster::engDate($kpi["toDate"], 2),
 					"year" => $kpi["year"],
+					"countKgiInKpi" => KgiHasKpi::countKgiWithKpi($kpi['kpiId']),
 				];
 			endforeach;
 		}
 		return json_encode($data);
+	}
+	public function actionBranchKpi($branchId)
+	{
+		$kpiBranch = KpiBranch::branchKpi($branchId);
+		return json_encode($kpiBranch);
+	}
+	public function actionKgiKpi($kpiId)
+	{
+		$kfiHaskgi = KgiHasKpi::find()
+			->select('kgi.kgiId,kgi.kgiName,kgi.unitId,kgi.targetAmount,kgi.month')
+			->JOIN("LEFT JOIN", "kpi", "kpi.kpiId=kgi_has_kpi.kpiId")
+			->JOIN("LEFT JOIN", "kgi", "kgi.kgiId=kgi_has_kpi.kgiId")
+			->where(["kgi_has_kpi.kpiId" => $kpiId, "kgi_has_kpi.status" => 1, "kgi.status" => 1, "kpi.status" => 1])
+			->asArray()
+			->all();
+		return json_encode($kfiHaskgi);
 	}
 }

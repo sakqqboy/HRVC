@@ -42,4 +42,13 @@ class KpiEmployee extends \frontend\models\hrvc\master\KpiEmployeeMaster
             return 0;
         }
     }
+    public static function totalEmployee($kpiId)
+    {
+        $kpiEmployee = KpiEmployee::find()->where(["kpiId" => $kpiId, "status" => 1])->asArray()->all();
+        if (isset($kpiEmployee) && count($kpiEmployee) > 0) {
+            return count($kpiEmployee);
+        } else {
+            return 0;
+        }
+    }
 }

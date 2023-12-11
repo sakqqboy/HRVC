@@ -1,4 +1,7 @@
 <?php
+
+use common\models\ModelMaster;
+
 if (isset($kgis) && count($kgis) > 0) {
 	foreach ($kgis as $kgiId => $kgi) :
 ?>
@@ -52,6 +55,16 @@ if (isset($kgis) && count($kgis) > 0) {
 			</td>
 			<td class="text-start"><?= $kgi["code"] ?> <?= $kgi["targetAmount"] ?></td>
 			<td><?= $kgi["month"] ?></td>
+			<td>
+				<a href="<?= Yii::$app->homeUrl ?>kgi/management/kgi-kfi/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>" class="no-underline-black">
+					<b><?= $kgi["countKgiHasKfi"] ?></b>
+				</a>
+			</td>
+			<td>
+				<a href="<?= Yii::$app->homeUrl ?>kgi/management/kgi-kpi/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>" class="no-underline-black">
+					<b><?= $kgi["countKgiHasKpi"] ?></b>
+				</a>
+			</td>
 		</tr>
 <?php
 	endforeach;

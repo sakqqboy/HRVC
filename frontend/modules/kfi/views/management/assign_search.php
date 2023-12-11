@@ -1,4 +1,7 @@
 <?php
+
+use common\models\ModelMaster;
+
 if (isset($kfis) && count($kfis) > 0) {
 	foreach ($kfis as $kfiId => $kfi) :
 ?>
@@ -52,8 +55,11 @@ if (isset($kfis) && count($kfis) > 0) {
 			</td>
 			<td class="text-start"><?= $kfi["code"] ?> <?= number_format($kfi["target"], 2) ?></td>
 			<td><?= $kfi["month"] ?></td>
-
-
+			<td>
+				<a href="<?= Yii::$app->homeUrl ?>kfi/management/kfi-kgi/<?= ModelMaster::encodeParams(['kfiId' => $kfiId]) ?>" class="no-underline-black">
+					<b><?= $kfi["countKfiHasKgi"] ?></b>
+				</a>
+			</td>
 		</tr>
 <?php
 	endforeach;

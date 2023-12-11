@@ -19,7 +19,8 @@ function companyMultiBrachUpdate() {
 		data: { companyId: companyId, acType: acType,kgiId:kgiId },
 		success: function(data) {
 		    if (data.status) {
-			$("#show-multi-branch-update").html(data.branchText);
+			    $("#show-multi-branch-update").html(data.branchText);
+			    $("#kgi-group-update").html(data.kgiGroup);
 		    }
       
 		}
@@ -211,7 +212,7 @@ function updateKgi(kgiId) {
 			$("#from-date-update").val(data.fromDate);
 			$("#to-date-update").val(data.toDate);
 			$("#nextCheckDate-update").val(data.nextCheck);
-			$("#targetAmount-update").val(data.targetAmount);
+			$("#targetAmount-update").val(data.targetAmountText);
 			$("#detail-update").val(data.detail);
 			$("#quantRatio-update").val(data.quantRatio);
 			$("#priority-update").val(data.priority);
@@ -219,10 +220,11 @@ function updateKgi(kgiId) {
 			$("#code-update").val(data.code);
 			$("#status-update").val(data.status);
 			$("#month-update").val(data.month);
-			$("#result-update").val(data.result);
+			$("#result-update").val(data.resultText);
 			$("#show-multi-branch-update").html(data.textBranch);
 			$("#show-multi-department-update").html(data.textDepartment);
 			$("#show-multi-team-update").html(data.textTeam);
+			$("#kgi-group-update").html(data.textGroup);
 		}
 	});
 }
@@ -262,9 +264,13 @@ function checkRequiredUpdate() {
 			});
 			checkedDepartment = multiDepartment.length;
 			if (checkedDepartment == 0) {
-				alert("Please select at least 1 department for each selected branch.");
-				isError++;
-				return false;
+				
+				var branchDepartment = checkBranchDepartment(multiBranch[a]);
+				if (branchDepartment > 0) {
+					isError++;
+					alert("Please select at least 1 department for each selected branch.");
+					return false;
+				}
 			} else { 
 				for (c = 0; c < multiDepartment.length; c++) {
 					var multiTeam = [];
@@ -301,3 +307,16 @@ function checkRequiredUpdate() {
 	}
 	//
 }
+function checkBranchDepartment(branchId) { 
+	var url = $url + 'setting/department/branch-department';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { branchId: branchId},
+		success: function (data) {
+			return data.totalDepartments
+		}
+	});
+}
+ 

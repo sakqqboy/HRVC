@@ -69,4 +69,14 @@ class KgiBranch extends \backend\models\hrvc\master\KgiBranchMaster
         }
         return $branches;
     }
+    public static function branchKgi($branchId)
+    {
+        $kgiBranch = KgiBranch::find()
+            ->select('kgi_branch.kgiId,kgi_branch.branchId,kgi.kgiName,
+            kgi.unitId,kgi.targetAmount,kgi.month,kgi.code')
+            ->JOIN("LEFT JOIN", "kgi", "kgi.kgiId=kgi_branch.kgiId")
+            ->where(["kgi_branch.branchId" => $branchId, "kgi_branch.status" => 1, "kgi.status" => 1])
+            ->asArray()->all();
+        return $kgiBranch;
+    }
 }

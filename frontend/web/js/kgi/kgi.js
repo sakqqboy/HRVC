@@ -23,6 +23,7 @@ function companyMultiBrach() {
 		success: function (data) {
 			if (data.status) {
 				$("#show-multi-branch").html(data.branchText);
+				$("#kgi-group-create").html(data.kgiGroup);
 			}
 		}
 	   });
@@ -177,6 +178,54 @@ function departmentMultiTeam(branchId) {
 		}
 	});
 }
+function multiTeam(departmentId) {
+	var sumTeam = totalTeam(departmentId);
+	var multiTeamDepartment = [];
+	var i = 0;
+	$("#multi-check-team-"+departmentId+":checked").each(function () {
+		multiTeamDepartment[i] = $(this).val();
+		i++;
+	});
+	//alert(sumTeam + '=>' + multiTeamDepartment.length);
+	if (sumTeam != multiTeamDepartment.length) {
+		$("#multi-check-all-team-" + departmentId).prop("checked", false);
+	} else { 
+		$("#multi-check-all-team-" + departmentId).prop("checked", true);
+	}
+	if (multiTeamDepartment.length > 0) {
+		$('input[id="multi-check-team-'+departmentId+'"]').each(function () {
+			$(".multiTeam-department-"+$(this).val()).removeAttr('required');
+		});
+	} else { 
+		$('input[id="multi-check-team-'+departmentId+'"]').each(function () {
+			$(".multiTeam-department-"+$(this).val()).prop('required',true);
+		});
+	}
+}
+function multiTeamUpdate(departmentId) {
+	var sumTeam = totalTeamUpdate(departmentId);
+	var multiTeamDepartment = [];
+	var i = 0;
+	$("#multi-check-team-"+departmentId+"-update:checked").each(function () {
+		multiTeamDepartment[i] = $(this).val();
+		i++;
+	});
+	//alert(sumTeam + '=>' + multiTeamDepartment.length);
+	if (sumTeam != multiTeamDepartment.length) {
+		$("#multi-check-all-team-" + departmentId + '-update').prop("checked", false);
+	} else { 
+		$("#multi-check-all-team-" + departmentId + '-update').prop("checked", true);
+	}
+	if (multiTeamDepartment.length > 0) {
+		$('input[id="multi-check-team-'+departmentId+'-update"]').each(function () {
+			$(".multiTeam-department-update-"+$(this).val()).removeAttr('required');
+		});
+	} else { 
+		$('input[id="multi-check-team-'+departmentId+'-update"]').each(function () {
+			$(".multiTeam-department-update-"+$(this).val()).prop('required',true);
+		});
+	}
+}
 function totalDepartment(branchId) {
 	var totalDepartment = 0;
 	var data = [];
@@ -188,10 +237,34 @@ function totalDepartment(branchId) {
 	totalDepartment = data.length;
 	return totalDepartment;
 }
+function totalTeam(departmentId) {
+	var totalTeam = 0;
+	var data = [];
+	var i = 0;
+	$('input[id="multi-check-team-' + departmentId + '"]').each(function () {
+		data[i] = $(this).val();
+		i++;
+	});
+	totalTeam = data.length;
+	return totalTeam;
+}
+function totalTeamUpdate(departmentId) {
+	var totalTeam = 0;
+	var data = [];
+	var i = 0;
+	$('input[id="multi-check-team-' + departmentId + '-update"]').each(function () {
+		data[i] = $(this).val();
+		i++;
+	});
+	totalTeam = data.length;
+	return totalTeam;
+}
 function clearEveryShow() { 
 	$("#show-multi-department").html('');
 	$("#show-multi-team").html('');
 	$("#show-multi-department").html('');
+	$("#kgi-group-create").html('');
+	$("#kgi-group-update").html('');
 	
 }
 function allTeam(departmentId) { 
@@ -472,5 +545,66 @@ function searchAssignKgi() {
 		     }
 		 }
 	    });
+}
+function kpiInBranchForKpi(kgiId,branchId) { 
+	var url = $url + 'kgi/management/kpi-branch';
+	$("#kpi-branch").html('');
+	$.ajax({
+	    type: "POST",
+	    dataType: 'json',
+	    url: url,
+	    data: { kgiId: kgiId, branchId: branchId },
+	    success: function (data) {
+		 if (data.status) {
+		     $("#kpi-branch").html(data.kpiText);
+		 }
+	    }
+	});
+}
+function assignKpiTokgi(kpiId, kgiId) { 
+	var url = $url + 'kgi/management/assign-kpi-to-kgi';
+	if ($("#kpi-branch-" + kpiId).prop("checked") == true) {
+	    var type = 1;
+	} else { 
+	    var type = 0;
+	}
+	$.ajax({
+	    type: "POST",
+	    dataType: 'json',
+	    url: url,
+	    data: { kgiId: kgiId, kpiId: kpiId, type: type },
+	    success: function (data) {
+		 if (data.status) {
+		 }
+	    }
+	});
+}
+function checkAllKgiEmployee(kgiId) {
+	var url = $url + 'kgi/management/check-all-kgi-employee';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { kgiId: kgiId },
+		success: function (data) {
+			if ($("#all-kgi-employee-" + kgiId).prop("checked") == true) {
+	 
+				$.each(data.employeeId, function (key, value) {
+					if ($("#kgi-employee-" + value + '-' + kgiId).prop("checked") == false) {
+						$("#kgi-employee-" + value + '-' + kgiId).prop("checked", true);
+						kgiEmployee(value, kgiId);
+					}
+				});
+			} else {
+		    
+				$.each(data.employeeId, function (key, value) {
+					if ($("#kgi-employee-" + value + '-' + kgiId).prop("checked") == true) {
+						$("#kgi-employee-" + value + '-' + kgiId).prop("checked", false);
+						kgiEmployee(value, kgiId);
+					}
+				});
+			}
+		}
+	});
 }
    

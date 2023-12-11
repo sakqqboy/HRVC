@@ -58,9 +58,9 @@
 							<label for="input" class="form-label"><strong class="red">*</strong> Check Unit</label>
 							<div class="btn-group mt-5 col-12" role="group" aria-label="Basic outlined example">
 								<button type="button" class="btn btn border col-3  font-size-12 unit-1" onclick="javascript:selectUnitUpdate(1)">Monthly</button>
-								<button type="button" class="btn btn border col-3  font-size-12 unit-2" onclick="javascript:selectUnitUpdate(2)">Weekly</button>
-								<button type="button" class="btn btn border col-3  font-size-12 unit-3" onclick="javascript:selectUnitUpdate(3)">Quaterly</button>
-								<button type="button" class="btn btn border col-3  font-size-12 unit-4" onclick="javascript:selectUnitUpdate(4)">Daily</button>
+								<button type="button" class="btn btn border col-3  font-size-12 unit-2" onclick="javascript:selectUnitUpdate(2)">Quaterly</button>
+								<button type="button" class="btn btn border col-3  font-size-12 unit-3" onclick="javascript:selectUnitUpdate(3)">Half year</button>
+								<button type="button" class="btn btn border col-3  font-size-12 unit-4" onclick="javascript:selectUnitUpdate(4)">Yearly</button>
 								<input type="hidden" value="" class="currentUnit" name="unit" required>
 								<input type="hidden" value="" class="previousUnit" required>
 							</div>
@@ -93,16 +93,13 @@
 										<label for="input" class="form-label"><strong class="red">*</strong> Next Check Date</label>
 										<div class="input-group">
 											<span class="input-group-text font-size-12"><i class="fa fa-calendar-o" aria-hidden="true"></i> &nbsp;&nbsp; Date</span>
-											<input type="date" aria-label="" class="form-control font-size-12" required name="nextCheckDate" id="nextCheckDate-update">
+											<input type="date" aria-label="" class="form-control font-size-12" required name="nextCheckDate" id="nextCheckDate-create">
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="col-12 pt-5 pt-5 mt-10">
-							<label for="exampleFormControl" class="form-label font-size-13">Target Amount</label>
-							<input type="text" class="form-control text-end" name="targetAmount" value="" id="targetAmount" <?= $isManager == 0 ? 'disabled' : '' ?>>
-						</div>
+
 					</div>
 					<div class="col-lg-6 col-md-6 col-6 font-size-14">
 						<div class="col-12">
@@ -176,9 +173,13 @@
 									?>
 								</select>
 							</div>
+							<div class="col-12 mt-15">
+								<label for="exampleFormControl" class="form-label font-size-13">Target Amount</label>
+								<input type="text" class="form-control text-end" name="targetAmount" value="" id="targetAmount" <?= $isManager == 0 ? 'disabled' : '' ?>>
+							</div>
 							<div class="col-12  mt-15">
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Result</label>
-								<input type="number" step="any" class="form-control font-size-13 text-end" id="result" name="result" required>
+								<input type="text" class="form-control font-size-13 text-end" id="result" value="" name="result" required>
 							</div>
 							<div class="col-12 mt-10">
 								<label class="form-label font-size-13">Remark</label>
@@ -187,7 +188,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-12 pt-10">
+				<!-- <div class="col-12 pt-10">
 					Set Ratio Formula
 				</div>
 				<div class="col-12 pt-10">
@@ -233,7 +234,7 @@
 						</div>
 						<div class="mt-50"></div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 			<div class="modal-footer">
 				<button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

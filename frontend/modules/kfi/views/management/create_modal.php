@@ -83,6 +83,15 @@
 								<input type="hidden" value="1" id="previousUnit" required>
 							</div>
 						</div>
+						<div class="col-lg-12 col-md-6 col-12 mt-10">
+							<div class="input-group">
+								<label for="input" class="form-label font-size-12"><strong class="red">*</strong> Next Check Date</label>
+								<div class="input-group">
+									<span class="input-group-text font-size-12"><i class="fa fa-calendar-o" aria-hidden="true"></i> &nbsp;&nbsp; Date</span>
+									<input type="date" aria-label="" class="form-control font-size-12" required name="nextCheckDate" id="nextCheckDate-create">
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="col-lg-6 col-md-6 col-6">
 						<div class="col-12">
@@ -91,12 +100,40 @@
 						</div>
 						<div class="row">
 							<div class="col-12 pt-10">
+								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Quant Ratio</label>
+								<select class="form-select font-size-13" id="quantRatio-create" name="quanRatio" required>
+									<option value="">Quantity or Quality</option>
+									<option value="1">Quantity</option>
+									<option value="2">Quality</option>
+								</select>
+								<input type="hidden" name="kfiId" id="kfiId" value="">
+							</div>
+							<div class="col-lg-4 col-md-6 col-6 mt-10">
+								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Amount Type</label>
+								<select class="form-select font-size-12" id="amountType-create" name="amountType" required>
+									<option value="">% or Number</option>
+									<option value="1">%</option>
+									<option value="2">Number</option>
+								</select>
+							</div>
+							<div class="col-lg-8 col-md-6 col-6   mt-10">
+								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Code</label>
+								<select class="form-select font-size-13" id="code-create" name="code" required>
+									<option value="">
+										<&nbsp;&nbsp;=&nbsp;&nbsp;>
+									</option>
+									<option value="<">&nbsp;&nbsp;<?= '<' ?>&nbsp;&nbsp;Result more than target</option>
+									<option value="=">&nbsp;&nbsp;=&nbsp;&nbsp;Result equal target</option>
+									<option value=">">&nbsp;&nbsp;>&nbsp;&nbsp;Result less than target</option>
+								</select>
+							</div>
+							<div class="col-12 pt-10">
 								<label class="form-label font-size-12"><strong class="red">*</strong> Target Amount</label>
 								<input type="number" class="form-control" name="amount" step="any" required>
 							</div>
 							<div class="col-lg-6 col-md-6 col-6 pt-10">
 								<label class="form-label font-size-12"><strong class="red">*</strong> Month</label>
-								<select class="form-select" required name="month">
+								<select class="form-select font-size-12" required name="month">
 									<option value="">Select Month</option>
 									<?php
 									if (isset($months) && count($months) > 0) {
@@ -111,7 +148,7 @@
 							</div>
 							<div class="col-lg-6 col-md-6 col-6 pt-10">
 								<label class="form-label font-size-12"><strong class="red">*</strong> Year</label>
-								<select class="form-select" required name="year">
+								<select class="form-select font-size-12" required name="year">
 									<option value="">Select Year</option>
 									<?php
 									$year = 2020;

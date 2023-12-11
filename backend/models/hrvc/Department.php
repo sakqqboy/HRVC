@@ -6,30 +6,41 @@ use Yii;
 use \backend\models\hrvc\master\DepartmentMaster;
 
 /**
-* This is the model class for table "department".
-*
-* @property integer $departmentId
-* @property string $departmentName
-* @property integer $branchId
-* @property integer $status
-* @property string $createDateTime
-* @property string $updateDateTime
-*/
+ * This is the model class for table "department".
+ *
+ * @property integer $departmentId
+ * @property string $departmentName
+ * @property integer $branchId
+ * @property integer $status
+ * @property string $createDateTime
+ * @property string $updateDateTime
+ */
 
-class Department extends \backend\models\hrvc\master\DepartmentMaster{
+class Department extends \backend\models\hrvc\master\DepartmentMaster
+{
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function rules()
     {
         return array_merge(parent::rules(), []);
     }
 
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return array_merge(parent::attributeLabels(), []);
+    }
+    public static function userDepartmentId($userId)
+    {
+        $user = User::find()
+            ->select('employeeId')
+            ->where(["userId" => $userId])
+            ->asArray()
+            ->one();
+        $employee = Employee::find()->select('departmentId')->where(["employeeId" => $user["employeeId"]])->asArray()->one();
+        return $employee["departmentId"];
     }
 }

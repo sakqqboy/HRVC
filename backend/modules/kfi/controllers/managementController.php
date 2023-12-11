@@ -5,11 +5,13 @@ namespace backend\modules\kfi\controllers;
 use backend\models\hrvc\Branch;
 use backend\models\hrvc\Company;
 use backend\models\hrvc\Country;
+use backend\models\hrvc\Department;
 use backend\models\hrvc\Employee;
 use backend\models\hrvc\Kfi;
 use backend\models\hrvc\KfiBranch;
 use backend\models\hrvc\KfiDepartment;
 use backend\models\hrvc\KfiEmployee;
+use backend\models\hrvc\KfiHasKgi;
 use backend\models\hrvc\KfiHistory;
 use backend\models\hrvc\KfiSolution;
 use backend\models\hrvc\Unit;
@@ -30,10 +32,46 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 class ManagementController extends Controller
 {
-	public function actionIndex()
+	public function actionIndex($adminId, $managerId, $supervisorId, $staffId)
 	{
 		$data = [];
-		$kfis = Kfi::find()->where(["status" => [1, 2]])->asArray()->orderBy('updateDateTime DESC')->all();
+		if ($adminId != '') {
+			$kfis = Kfi::find()
+				->where(["status" => [1, 2, 4]])
+				->asArray()
+				->orderBy('updateDateTime DESC')
+				->all();
+		}
+		if ($managerId != '') { //see in their branch
+			$branchId = Branch::userBranchId($managerId);
+			$kfis = Kfi::find()
+				->select('kfi.*')
+				->JOIN("LEFT JOIN", "kfi_branch kb", "kb.kfiId=kfi.kfiId")
+				->where(["kfi.status" => [1, 2, 4], "kb.status" => 1, "kb.branchId" => $branchId])
+				->asArray()
+				->orderBy('kfi.updateDateTime DESC')
+				->all();
+		}
+		if ($supervisorId != '') { //see in their department
+			$departmentId = Department::userDepartmentId($supervisorId);
+			$kfis = Kfi::find()
+				->select('kfi.*')
+				->JOIN("LEFT JOIN", "kfi_department kd", "kd.kfiId=kfi.kfiId")
+				->where(["kfi.status" => [1, 2, 4], "kd.status" => 1, "kd.departmentId" => $departmentId])
+				->asArray()
+				->orderBy('kfi.updateDateTime DESC')
+				->all();
+		}
+		if ($staffId != '') { //see just their kfi
+			$employeeId = Employee::employeeId($staffId);
+			$kfis = Kfi::find()
+				->select('kfi.*')
+				->JOIN("LEFT JOIN", "kfi_employee ke", "ke.kfiId=kfi.kfiId")
+				->where(["kfi.status" => [1, 2, 4], "ke.status" => 1, "ke.employeeId" => $employeeId])
+				->asArray()
+				->orderBy('kfi.updateDateTime DESC')
+				->all();
+		}
 		if (isset($kfis) && count($kfis) > 0) {
 			foreach ($kfis as $kfi) :
 				$data[$kfi["kfiId"]] = [
@@ -60,7 +98,8 @@ class ManagementController extends Controller
 					"isOver" => 0,
 					"fromDate" => "",
 					"toDate" => "",
-					"active" => $kfi["active"]
+					"active" => $kfi["active"],
+					"countKfiHasKgi" => KfiHasKgi::countKgiInkfi($kfi["kfiId"])
 				];
 				$kfiHistory = KfiHistory::find()
 					->where(["kfiId" => $kfi["kfiId"], "status" => [1, 2]])
@@ -99,7 +138,8 @@ class ManagementController extends Controller
 						"isOver" => ModelMaster::isOverDuedate($kfiHistory["nextCheckDate"]),
 						"fromDate" => ModelMaster::engDate($kfiHistory["fromDate"], 2),
 						"toDate" => ModelMaster::engDate($kfiHistory["toDate"], 2),
-						"active" => $kfi["active"]
+						"active" => $kfi["active"],
+						"countKfiHasKgi" => KfiHasKgi::countKgiInkfi($kfi["kfiId"])
 					];
 				}
 
@@ -240,26 +280,87 @@ class ManagementController extends Controller
 		}
 		return json_encode($data);
 	}
-	public function actionKfiFilter($companyId, $branchId, $month, $status, $year, $active)
+	public function actionKfiFilter($companyId, $branchId, $month, $status, $year, $active, $adminId, $managerId, $supervisorId, $staffId)
 	{
 		$data = [];
 		//$kfis = Kfi::find()->where(["status" => [1, 2]])->asArray()->all();
-		$kfis = Kfi::find()
-			->select('kfi.*')
-			->JOIN("LEFT JOIN", "kfi_branch kb", "kb.kfiId=kfi.kfiId")
-			->JOIN("LEFT JOIN", "company c", "c.companyId=kfi.companyId")
-			->where(["c.status" => 1])
-			->andWhere("kfi.status!=99")
-			->andFilterWhere([
-				"kfi.companyId" => $companyId,
-				"kb.branchId" => $branchId,
-				"kfi.month" => $month,
-				"kfi.status" => $status,
-				"kfi.year" => $year,
-				"kfi.active" => isset($active) ? $active : null
-			])
-			->orderBy('kfi.createDateTime ASC')
-			->all();
+		if ($adminId != '') {
+			$kfis = Kfi::find()
+				->select('kfi.*')
+				->JOIN("LEFT JOIN", "kfi_branch kb", "kb.kfiId=kfi.kfiId")
+				->JOIN("LEFT JOIN", "company c", "c.companyId=kfi.companyId")
+				->where(["c.status" => 1])
+				->andWhere("kfi.status!=99")
+				->andFilterWhere([
+					"kfi.companyId" => $companyId,
+					"kb.branchId" => $branchId,
+					"kfi.month" => $month,
+					"kfi.status" => $status,
+					"kfi.year" => $year,
+					"kfi.active" => isset($active) ? $active : null
+				])
+				->orderBy('kfi.createDateTime ASC')
+				->all();
+		}
+		if ($managerId != '') {
+			$mBranchId = Branch::userBranchId($managerId);
+			$kfis = Kfi::find()
+				->select('kfi.*')
+				->JOIN("LEFT JOIN", "kfi_branch kb", "kb.kfiId=kfi.kfiId")
+				->JOIN("LEFT JOIN", "company c", "c.companyId=kfi.companyId")
+				->where(["c.status" => 1, 'kb.status' => 1, 'kb.branchId' => $mBranchId])
+				->andWhere("kfi.status!=99")
+				->andFilterWhere([
+					"kfi.companyId" => $companyId,
+					"kb.branchId" => $branchId,
+					"kfi.month" => $month,
+					"kfi.status" => $status,
+					"kfi.year" => $year,
+					"kfi.active" => isset($active) ? $active : null
+				])
+				->orderBy('kfi.createDateTime ASC')
+				->all();
+		}
+		if ($supervisorId != '') {
+			$mDepartmentId = Department::userDepartmentId($supervisorId);
+			$kfis = Kfi::find()
+				->select('kfi.*')
+				->JOIN("LEFT JOIN", "kfi_branch kb", "kb.kfiId=kfi.kfiId")
+				->JOIN("LEFT JOIN", "kfi_department kd", "kd.kfiId=kfi.kfiId")
+				->JOIN("LEFT JOIN", "company c", "c.companyId=kfi.companyId")
+				->where(["c.status" => 1, "kd.status" => 1, "kd.departmentId" => $mDepartmentId])
+				->andWhere("kfi.status!=99")
+				->andFilterWhere([
+					"kfi.companyId" => $companyId,
+					"kb.branchId" => $branchId,
+					"kfi.month" => $month,
+					"kfi.status" => $status,
+					"kfi.year" => $year,
+					"kfi.active" => isset($active) ? $active : null
+				])
+				->orderBy('kfi.createDateTime ASC')
+				->all();
+		}
+		if ($staffId != '') {
+			$employeeId = Employee::employeeId($staffId);
+			$kfis = Kfi::find()
+				->select('kfi.*')
+				->JOIN("LEFT JOIN", "kfi_branch kb", "kb.kfiId=kfi.kfiId")
+				->JOIN("LEFT JOIN", "kfi_employee ke", "ke.kfiId=kfi.kfiId")
+				->JOIN("LEFT JOIN", "company c", "c.companyId=kfi.companyId")
+				->where(["c.status" => 1, "ke.status" => 1, "ke.employeeId" => $employeeId])
+				->andWhere("kfi.status!=99")
+				->andFilterWhere([
+					"kfi.companyId" => $companyId,
+					"kb.branchId" => $branchId,
+					"kfi.month" => $month,
+					"kfi.status" => $status,
+					"kfi.year" => $year,
+					"kfi.active" => isset($active) ? $active : null
+				])
+				->orderBy('kfi.createDateTime ASC')
+				->all();
+		}
 		if (isset($kfis) && count($kfis) > 0) {
 			foreach ($kfis as $kfi) :
 				$data[$kfi["kfiId"]] = [
@@ -287,7 +388,8 @@ class ManagementController extends Controller
 					"fromDate" => "",
 					"isOver" => 0,
 					"toDate" => "",
-					"active" => $kfi["active"]
+					"active" => $kfi["active"],
+					"countKfiHasKgi" => KfiHasKgi::countKgiInkfi($kfi["kfiId"])
 				];
 				$kfiHistory = KfiHistory::find()
 					->where(["kfiId" => $kfi["kfiId"], "status" => [1, 2]])
@@ -327,7 +429,8 @@ class ManagementController extends Controller
 						"fromDate" => ModelMaster::engDate($kfiHistory["fromDate"], 2),
 						"toDate" => ModelMaster::engDate($kfiHistory["toDate"], 2),
 						"isOver" => ModelMaster::isOverDuedate($kfiHistory["nextCheckDate"]),
-						"active" => $kfi["active"]
+						"active" => $kfi["active"],
+						"countKfiHasKgi" => KfiHasKgi::countKgiInkfi($kfi["kfiId"])
 					];
 				}
 
@@ -335,5 +438,24 @@ class ManagementController extends Controller
 		}
 		//throw new Exception(print_r($data, true));
 		return json_encode($data);
+	}
+	public function actionKfiHasKgi($kfiId)
+	{
+		$kfiHasKgi = KfiHasKgi::find()
+			->select('kgi.kgiName,kgi.kgiId,kgi.unitId,kgi.targetAmount,kgi.month,kgi.code')
+			->JOIN("LEFT JOIN", "kgi", "kgi.kgiId=kfi_has_kgi.kgiId")
+			->where([
+				"kfi_has_kgi.kfiId" => $kfiId,
+				"kfi_has_kgi.status" => 1,
+				"kgi.status" => 1,
+			])
+			->asArray()
+			->all();
+		return json_encode($kfiHasKgi);
+	}
+	public function actionKfiBranch($kfiId)
+	{
+		$kfiBranch = KfiBranch::kfiBranch($kfiId);
+		return json_encode($kfiBranch);
 	}
 }

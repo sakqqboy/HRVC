@@ -61,4 +61,14 @@ class Branch extends \backend\models\hrvc\master\BranchMaster
         }
         return $branchName;
     }
+    public static function userBranchId($userId)
+    {
+        $user = User::find()
+            ->select('employeeId')
+            ->where(["userId" => $userId])
+            ->asArray()
+            ->one();
+        $employee = Employee::find()->select('branchId')->where(["employeeId" => $user["employeeId"]])->asArray()->one();
+        return $employee["branchId"];
+    }
 }

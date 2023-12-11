@@ -42,4 +42,13 @@ class KgiEmployee extends \frontend\models\hrvc\master\KgiEmployeeMaster
             return 0;
         }
     }
+    public static function totalEmployee($kgiId)
+    {
+        $kgiEmployee = KgiEmployee::find()->where(["kgiId" => $kgiId, "status" => 1])->asArray()->all();
+        if (isset($kgiEmployee) && count($kgiEmployee) > 0) {
+            return count($kgiEmployee);
+        } else {
+            return 0;
+        }
+    }
 }

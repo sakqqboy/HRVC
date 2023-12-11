@@ -10,7 +10,6 @@
 						</div>
 						<input type="hidden" id="kfiId" value="">
 						<div class="col-1 pr-0 mt-20 text-end" style="margin-top:-15px;">
-
 							<div class="Resolve-c text-center">
 								<i class="fa fa-user font-size-11" aria-hidden="true"></i>
 							</div>

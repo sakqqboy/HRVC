@@ -42,4 +42,13 @@ class KfiEmployee extends \frontend\models\hrvc\master\KfiEmployeeMaster
             return 0;
         }
     }
+    public static function totalEmployee($kfiId)
+    {
+        $kfiEmployee = KfiEmployee::find()->where(["kfiId" => $kfiId, "status" => 1])->asArray()->all();
+        if (isset($kfiEmployee) && count($kfiEmployee) > 0) {
+            return count($kfiEmployee);
+        } else {
+            return 0;
+        }
+    }
 }
