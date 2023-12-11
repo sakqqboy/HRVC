@@ -25,10 +25,16 @@
 			</a>
 		</li>
 		<li class="nav-item presentation-end" role="presentation">
-			<a href="<?= Yii::$app->homeUrl ?>kgi/management/assign-kgi" class="nav-link text-dark" id="pills-Setting-tab" type="button" role="tab" aria-controls="pills-Action" aria-selected="false">
-				<i class="fa fa-cog" aria-hidden="true"></i>
-				Assign
-			</a>
+			<?php
+			if ($role >= 3) {
+			?>
+				<a href="<?= Yii::$app->homeUrl ?>kgi/management/assign-kgi" class="nav-link text-dark" id="pills-Setting-tab" type="button" role="tab" aria-controls="pills-Action" aria-selected="false">
+					<i class="fa fa-cog" aria-hidden="true"></i>
+					Assign
+				</a>
+			<?php
+			}
+			?>
 		</li>
 	</ul>
 </div>

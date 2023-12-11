@@ -11,7 +11,7 @@ use Yii;
     * @property string $kfiName
     * @property integer $companyId
     * @property integer $unitId
-    * @property integer $targetAmount
+    * @property string $targetAmount
     * @property string $month
     * @property string $year
     * @property string $kfiDetail
@@ -19,6 +19,7 @@ use Yii;
     * @property string $periodDate
     * @property string $fromDate
     * @property string $toDate
+    * @property integer $active
     * @property integer $status
     * @property string $createDateTime
     * @property string $updateDateTime
@@ -40,11 +41,12 @@ public function rules()
 {
 return [
             [['kfiName', 'companyId', 'unitId', 'createrId'], 'required'],
-            [['companyId', 'unitId', 'targetAmount', 'createrId'], 'integer'],
+            [['companyId', 'unitId', 'createrId'], 'integer'],
+            [['targetAmount'], 'number'],
             [['kfiDetail'], 'string'],
             [['periodDate', 'fromDate', 'toDate', 'createDateTime', 'updateDateTime'], 'safe'],
             [['kfiName', 'month', 'year'], 'string', 'max' => 45],
-            [['status'], 'string', 'max' => 10],
+            [['active', 'status'], 'string', 'max' => 10],
         ];
 }
 
@@ -66,6 +68,7 @@ return [
     'periodDate' => 'Period Date',
     'fromDate' => 'From Date',
     'toDate' => 'To Date',
+    'active' => 'Active',
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',
     'updateDateTime' => 'Update Date Time',

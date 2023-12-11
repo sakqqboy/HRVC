@@ -2,6 +2,7 @@
 
 namespace frontend\models\hrvc;
 
+use Exception;
 use Yii;
 use \frontend\models\hrvc\master\UserRoleMaster;
 
@@ -46,6 +47,36 @@ class UserRole extends \frontend\models\hrvc\master\UserRoleMaster
             ->all();
         if (count($userRole) > 0) {
             return 1;
+        } else {
+            return 0;
+        }
+    }
+    public static function userRight()
+    {
+        if (isset(Yii::$app->user->id)) {
+            $userRole = UserRole::find()
+                ->select('roleId')
+                ->where(["userId" => Yii::$app->user->id])
+                ->orderBy("roleId ASC")
+                ->asArray()
+                ->one();
+            if (isset($userRole) && !empty($userRole)) {
+                if ($userRole["roleId"] == 1 || $userRole["roleId"] == 2) {
+                    return 5;
+                }
+                if ($userRole["roleId"] == 3) {
+                    return 4;
+                }
+                if ($userRole["roleId"] == 4) {
+                    return 3;
+                }
+                if ($userRole["roleId"] == 5) {
+                    return 2;
+                }
+                if ($userRole["roleId"] == 6) {
+                    return 1;
+                }
+            }
         } else {
             return 0;
         }

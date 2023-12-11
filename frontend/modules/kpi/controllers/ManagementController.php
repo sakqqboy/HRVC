@@ -136,6 +136,26 @@ class ManagementController extends Controller
             $kpi->updateDateTime = new Expression('NOW()');
             if ($kpi->save(false)) {
                 $kpiId = Yii::$app->db->lastInsertID;
+                $kpiHistory = new KpiHistory();
+                $kpiHistory->kpiId = $kpiId;
+                $kpiHistory->unitId = $_POST["unit"];
+                // $kpiHistory->periodDate = $_POST["periodDate"];
+                $kpiHistory->nextCheckDate = $_POST["nextDate"];
+                $kpiHistory->targetAmount = $_POST["targetAmount"];
+                $kpiHistory->description = $_POST["detail"];
+                $kpiHistory->quantRatio = $_POST["quantRatio"];
+                $kpiHistory->priority = $_POST["priority"];
+                $kpiHistory->amountType = $_POST["amountType"];
+                $kpiHistory->code = $_POST["code"];
+                $kpiHistory->status = $_POST["status"];
+                $kpiHistory->month = $_POST["month"];
+                $kpiHistory->result = $_POST["result"];
+                $kpiHistory->createrId = Yii::$app->user->id;
+                $kpiHistory->createDateTime = new Expression('NOW()');
+                $kpiHistory->updateDateTime = new Expression('NOW()');
+                $kpiHistory->fromDate = $_POST["fromDate"];
+                $kpiHistory->toDate = $_POST["toDate"];
+                $kpiHistory->save(false);
                 if (isset($_POST["branch"]) && count($_POST["branch"]) > 0) {
                     $this->saveKpiBranch($_POST["branch"], $kpiId);
                 }
@@ -318,7 +338,7 @@ class ManagementController extends Controller
                 $kpi->toDate = $_POST["toDate"];
             }
             if ($isManager == 1 && $kpi->targetAmount == "") {
-                $kpi->targetAmount = $_POST["targetAmount"];
+                $kpi->targetAmount = str_replace(",", "", $_POST["targetAmount"]);
             }
             // $kpi->targetAmount = $_POST["targetAmount"];
             $kpi->kpiDetail = $_POST["detail"];
@@ -328,7 +348,7 @@ class ManagementController extends Controller
             $kpi->code = $_POST["code"];
             $kpi->status = $_POST["status"];
             $kpi->month = $_POST["month"];
-            $kpi->result = $_POST["result"];
+            $kpi->result = str_replace(",", "", $_POST["result"]);
             $kpi->createrId = Yii::$app->user->id;
             $kpi->updateDateTime = new Expression('NOW()');
             if ($kpi->save(false)) {
@@ -340,7 +360,7 @@ class ManagementController extends Controller
                 // $kpiHistory->periodDate = $_POST["periodDate"];
                 $kpiHistory->nextCheckDate = $_POST["nextDate"];
                 if ($isManager == 1) {
-                    $kpiHistory->targetAmount = $_POST["targetAmount"];
+                    $kpiHistory->targetAmount = str_replace(",", "", $_POST["targetAmount"]);
                 } else {
                     $kpiHistory->targetAmount = $kpi->targetAmount;
                 }
@@ -352,7 +372,7 @@ class ManagementController extends Controller
                 $kpiHistory->code = $_POST["code"];
                 $kpiHistory->status = $_POST["status"];
                 $kpiHistory->month = $_POST["month"];
-                $kpiHistory->result = $_POST["result"];
+                $kpiHistory->result = str_replace(",", "", $_POST["result"]);
                 $kpiHistory->createrId = Yii::$app->user->id;
                 $kpiHistory->createDateTime = new Expression('NOW()');
                 $kpiHistory->updateDateTime = new Expression('NOW()');
@@ -937,6 +957,33 @@ class ManagementController extends Controller
         $res["departmentText"] = $departmentText;
         return json_encode($res);
     }
+    public function actionCheckAllKpiEmployee()
+    {
+        $kpiId = $_POST["kpiId"];
+        $kpiBranch = KpiBranch::find()
+            ->where(["kpiId" => $kpiId, "status" => 1])
+            ->asArray()
+            ->all();
+        $employees = [];
+        if (isset($kpiBranch) && count($kpiBranch) > 0) {
+            $i = 0;
+            foreach ($kpiBranch as $kb) :
+                $employee = Employee::find()
+                    ->where(["branchId" => $kb["branchId"], "status" => 1])
+                    ->asArray()
+                    ->orderBy('branchId,titleId')
+                    ->all();
+                if (isset($employee) && count($employee) > 0) {
+                    foreach ($employee as $em) :
+                        $employees[$i] = $em["employeeId"];
+                        $i++;
+                    endforeach;
+                }
+            endforeach;
+        }
+        $res["employeeId"] = $employees;
+        return json_encode($res);
+    }
     public function actionKpiAssignEmployee()
     {
         $kpiId = $_POST["kpiId"];
@@ -1045,6 +1092,26 @@ class ManagementController extends Controller
         $res["kpiText"] = $kpiText;
         $res["status"] = true;
         return json_encode($res);
+    }
+    public function actionKpiKgi($hash)
+    {
+        $param = ModelMaster::decodeParams($hash);
+        $kpiId = $param["kpiId"];
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kgi-kpi?kpiId=' . $kpiId);
+        $kpiHasKgi = curl_exec($api);
+        $kpiHasKgi = json_decode($kpiHasKgi, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId);
+        $kpiDetail = curl_exec($api);
+        $kpiDetail = json_decode($kpiDetail, true);
+        curl_close($api);
+        return $this->render('kgi_kpi', [
+            "kpiDetail" => $kpiDetail,
+            "kpiHasKgi" => $kpiHasKgi
+        ]);
     }
     public function setDefault()
     {

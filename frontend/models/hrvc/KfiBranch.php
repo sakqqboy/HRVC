@@ -42,4 +42,15 @@ class KfiBranch extends \frontend\models\hrvc\master\KfiBranchMaster
         }
         return $has;
     }
+    public static function kfiBranch($kfiId)
+    {
+        $kfiBranch = KfiBranch::find()
+            ->select('b.branchId,b.branchName')
+            ->JOIN("LEFT JOIN", "kfi", "kfi.kfiId=kfi_branch.kfiId")
+            ->JOIN("LEFT JOIN", "branch b", "b.branchId=kfi_branch.branchId")
+            ->where(["kfi_branch.kfiId" => $kfiId, "kfi.status" => 1, "kfi_branch.status" => 1])
+            ->asArray()
+            ->all();
+        return $kfiBranch;
+    }
 }

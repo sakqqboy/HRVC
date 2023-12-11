@@ -26,7 +26,7 @@ function updateKpi(kpiId) {
 			$("#from-date-update").val(data.fromDate);
 			$("#to-date-update").val(data.toDate);
 			$("#nextCheckDate-update").val(data.nextCheck);
-			$("#targetAmount-update").val(data.targetAmount);
+			$("#targetAmount-update").val(data.targetAmountText);
 			$("#detail-update").val(data.detail);
 			$("#quantRatio-update").val(data.quantRatio);
 			$("#priority-update").val(data.priority);
@@ -34,7 +34,7 @@ function updateKpi(kpiId) {
 			$("#code-update").val(data.code);
 			$("#status-update").val(data.status);
 			$("#month-update").val(data.month);
-			$("#result-update").val(data.result);
+			$("#result-update").val(data.resultText);
 			$("#show-multi-branch-update").html(data.textBranch);
 			$("#show-multi-department-update").html(data.textDepartment);
 			$("#show-multi-team-update").html(data.textTeam);
@@ -462,4 +462,32 @@ function searchAssignKpi() {
 		     }
 		 }
 	    });
+}
+function checkAllKpiEmployee(kpiId) {
+	var url = $url + 'kpi/management/check-all-kpi-employee';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { kpiId: kpiId },
+		success: function (data) {
+			if ($("#all-kpi-employee-" + kpiId).prop("checked") == true) {
+	 
+				$.each(data.employeeId, function (key, value) {
+					if ($("#kpi-employee-" + value + '-' + kpiId).prop("checked") == false) {
+						$("#kpi-employee-" + value + '-' + kpiId).prop("checked", true);
+						kpiEmployee(value, kpiId);
+					}
+				});
+			} else {
+		    
+				$.each(data.employeeId, function (key, value) {
+					if ($("#kpi-employee-" + value + '-' + kpiId).prop("checked") == true) {
+						$("#kpi-employee-" + value + '-' + kpiId).prop("checked", false);
+						kpiEmployee(value, kpiId);
+					}
+				});
+			}
+		}
+	});
 }

@@ -54,7 +54,7 @@ $this->title = 'KPI Grid View';
 							if (count($kpis) > 0) {
 								foreach ($kpis as $kpiId => $kpi) :
 							?>
-									<div class="col-12 card card-radius" id="kpi-<?= $kpiId ?>">
+									<div class="col-12 card card-radius <?= $kpi['isOver'] == 1 ? 'bg-over' : 'bg-white' ?>" id="kpi-<?= $kpiId ?>">
 										<div class="row">
 											<div class="col-lg-4 col-md-6 col-12 clients-employee pl-0">
 												<i class="fa fa-flag" aria-hidden="true"></i> <?= $kpi["kpiName"] ?>
@@ -143,25 +143,54 @@ $this->title = 'KPI Grid View';
 											</div>
 											<div class="col-lg-3 col-md-6 col-12 progress-bordersolid">
 												<div class="row">
-													<div class="col-md-4">
+													<div class="col-md-5">
 														<div class="col-12 target-progress">
 															<i class="fa fa-bullseye" aria-hidden="true"></i> Target
 														</div>
 														<div class="col-12 target-million">
-															<?= $kpi["targetAmount"] ?>
+															<?php
+															$decimal = explode('.', $kpi["targetAmount"]);
+															if (isset($decimal[1])) {
+																if ($decimal[1] == '00') {
+																	$show = $decimal[0];
+																} else {
+																	$show = $kpi["targetAmount"];
+																}
+															} else {
+																$show = $kpi["targetAmount"];
+															}
+															?>
+															<?= $show ?>
+
 														</div>
 													</div>
-													<div class="col-md-4">
+													<div class="col-md-2">
 														<div class="col-12 target-plush">
 															<?= $kpi["code"] ?>
 														</div>
 													</div>
-													<div class="col-md-4">
+													<div class="col-md-5">
 														<div class="col-12 target-progress">
 															Result <i class="fa fa-trophy" aria-hidden="true"></i>
 														</div>
 														<div class="col-12 target-million">
-															<?= $kpi["result"] ?>
+															<?php
+															if ($kpi["result"] != '') {
+																$decimalResult = explode('.', $kpi["result"]);
+																if (isset($decimalResult[1])) {
+																	if ($decimalResult[1] == '00') {
+																		$showResult = $decimalResult[0];
+																	} else {
+																		$showResult = $kpi["result"];
+																	}
+																} else {
+																	$showResult = $kpi["result"];
+																}
+															} else {
+																$showResult = 0;
+															}
+															?>
+															<?= $showResult ?>
 														</div>
 													</div>
 												</div>
@@ -184,7 +213,7 @@ $this->title = 'KPI Grid View';
 														<div class="col-12 pencil-nextupdate" data-bs-toggle="modal" data-bs-target="#update-kpi-modal" onclick="javascript:updateKpi(<?= $kpiId ?>)">
 															Next Update <i class="fa fa-pencil-square-o ml-5" aria-hidden="true"></i>
 														</div>
-														<div class="col-12 font-size-12 pt-5 text-end" style="font-weight: 700;">
+														<div class="col-12 font-size-12 pt-5 text-end <?= $kpi['isOver'] == 1 ? 'text-danger' : '' ?>" style="font-weight: 700;">
 															<?= $kpi['nextCheck'] ?>
 														</div>
 													</div>

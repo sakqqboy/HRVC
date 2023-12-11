@@ -125,10 +125,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-12 pt-5">
-							<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Target Amount</label>
-							<input type="number" class="form-control font-size-13 text-end" id="targetAmount-update" name="targetAmount" <?= $isManager == 0 ? 'disabled' : '' ?>>
-						</div>
+
 					</div>
 					<div class="col-lg-6 col-md-6 col-6">
 						<div class="col-12">
@@ -194,9 +191,13 @@
 									?>
 								</select>
 							</div>
+							<div class="col-12 mt-10">
+								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Target Amount</label>
+								<input type="text" class="form-control font-size-13 text-end" id="targetAmount-update" name="targetAmount" <?= $isManager == 0 ? 'disabled' : '' ?>>
+							</div>
 							<div class="col-12">
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Result</label>
-								<input type="text" class="form-control font-size-13" name="result" id="result-update">
+								<input type="text" class="form-control font-size-13 text-end" name="result" id="result-update">
 							</div>
 							<div class="col-12 mt-10">
 								<label for="exampleFormControlTextarea1" class="form-label font-size-13"> Remark</label>
@@ -205,7 +206,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-12 pt-10">
+				<!-- <div class="col-12 pt-10">
 					Set Ratio Formula
 				</div>
 				<div class="col-12 pt-10">
@@ -245,7 +246,7 @@
 						</div>
 						<div class="mt-50"></div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 			<div class="modal-footer" style="border: none;">
 				<button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

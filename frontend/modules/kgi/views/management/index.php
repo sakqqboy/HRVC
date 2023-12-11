@@ -9,7 +9,9 @@ $this->title = "KGI";
 		<i class="fa fa-tachometer font-size-20" aria-hidden="true"></i> <strong class="font-size-20"> Performance Indicator Matrices (PIM)</strong>
 	</div>
 	<div class="col-12 mt-20">
-		<?= $this->render('header_filter') ?>
+		<?= $this->render('header_filter', [
+			"role" => $role
+		]) ?>
 
 		<div class="alert alert-white-4">
 			<div class="row">
@@ -19,9 +21,15 @@ $this->title = "KGI";
 							Key Goal Indicators
 						</div>
 						<div class="col-6">
-							<button type="button" class="btn btn-primary font-size-14" data-bs-toggle="modal" data-bs-target="#staticBackdrop5" onclick="javascript:changeType()">
-								<i class="fa fa-magic" aria-hidden="true"></i> Create New KGI</button>
-
+							<?php
+							if ($role >= 3) {
+							?>
+								<button type="button" class="btn btn-primary font-size-14" data-bs-toggle="modal" data-bs-target="#staticBackdrop5" onclick="javascript:changeType()">
+									<i class="fa fa-magic" aria-hidden="true"></i> Create New KGI
+								</button>
+							<?php
+							}
+							?>
 						</div>
 					</div>
 				</div>
@@ -43,6 +51,19 @@ $this->title = "KGI";
 						</div>
 					</div>
 				</div>
+				<?php
+				if ($role >= 3) {
+				?>
+					<div class="col-12 mt-10 text-end">
+
+						<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-group/index" class="font-size-14 no-underline-primary">
+							<i class="fa fa-list-alt mr-5" aria-hidden="true"></i>
+							KGI GROUP
+						</a>
+					</div>
+				<?php
+				}
+				?>
 			</div>
 			<div class="col-12">
 				<table class="table table-striped">
@@ -51,7 +72,7 @@ $this->title = "KGI";
 							<th>KGI Contents</th>
 							<th>Company</th>
 							<th>Branch</th>
-							<th>Team KGI Contents</th>
+							<!-- <th>Team KGI Contents</th> -->
 							<th>Priority</th>
 							<th>Employees</th>
 							<th>Team</th>
@@ -102,11 +123,43 @@ $this->title = "KGI";
 										<span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users" aria-hidden="true"></i> <?= $kgi["countTeam"] ?></span>
 									</td>
 									<td><?= $kgi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?></td>
-									<td><?= $kgi["targetAmount"] ?></td>
+									<td>
+										<?php
+										$decimal = explode('.', $kgi["targetAmount"]);
+										if (isset($decimal[1])) {
+											if ($decimal[1] == '00') {
+												$show = $decimal[0];
+											} else {
+												$show = $kgi["targetAmount"];
+											}
+										} else {
+											$show = $kgi["targetAmount"];
+										}
+										?>
+										<?= $show ?>
+									</td>
 									<td>
 										<?= $kgi["code"] ?>
 									</td>
-									<td><?= $kgi["result"] ?></td>
+									<td>
+										<?php
+										if ($kgi["result"] != '') {
+											$decimalResult = explode('.', $kgi["result"]);
+											if (isset($decimalResult[1])) {
+												if ($decimalResult[1] == '00') {
+													$showResult = $decimalResult[0];
+												} else {
+													$showResult = $kgi["result"];
+												}
+											} else {
+												$showResult = $kgi["result"];
+											}
+										} else {
+											$showResult = 0;
+										}
+										?>
+										<?= $showResult ?>
+									</td>
 									<td>
 										<div id="progress1">
 											<div data-num="<?= $kgi["ratio"] ?>" class="progress-item1"></div>
@@ -115,27 +168,41 @@ $this->title = "KGI";
 									<td><?= $kgi["month"] ?></td>
 									<td><?= $kgi["unit"] ?></td>
 									<td><?= $kgi["periodCheck"] ?></td>
-									<td><?= $kgi["status"] == 1 ? $kgi["nextCheck"] : '' ?></td>
+									<td class="<?= $kgi['isOver'] == 1 ? 'text-danger' : '' ?>">
+										<?= $kgi["status"] == 1 ? $kgi["nextCheck"] : '' ?>
+									</td>
 									<td colspan="row">
 										<span data-bs-toggle="modal" data-bs-target="#kgi-issue" onclick="javascript:showKgiComment(<?= $kgiId ?>)">
 											<img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown">
 										</span>
 										<span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
 										<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-											<li data-bs-toggle="modal" data-bs-target="#update-kgi-modal" onclick="javascript:updateKgi(<?= $kgiId ?>)">
-												<a class="dropdown-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-											</li>
+											<?php
+											if ($role >= 3) {
+											?>
+												<li data-bs-toggle="modal" data-bs-target="#update-kgi-modal" onclick="javascript:updateKgi(<?= $kgiId ?>)">
+													<a class="dropdown-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+												</li>
+											<?php
+											}
+											?>
 											<li data-bs-toggle="modal" data-bs-target="#kgi-view" onclick="javascript:kgiHistory(<?= $kgiId ?>)">
 												<a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
 											</li>
-											<li onclick="javascript:copyKgi(<?= $kgiId ?>)" title="Copy">
-												<a class="dropdown-item" href="#">
-													<i class="fa fa-copy" aria-hidden="true"></i>
-												</a>
-											</li>
-											<li data-bs-toggle="modal" data-bs-target="#delete-kgi" onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)">
-												<a class="dropdown-item"><i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
-											</li>
+											<?php
+											if ($role >= 3) {
+											?>
+												<li onclick="javascript:copyKgi(<?= $kgiId ?>)" title="Copy">
+													<a class="dropdown-item" href="#">
+														<i class="fa fa-copy" aria-hidden="true"></i>
+													</a>
+												</li>
+												<li data-bs-toggle="modal" data-bs-target="#delete-kgi" onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)">
+													<a class="dropdown-item"><i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
+												</li>
+											<?php
+											}
+											?>
 										</ul>
 									</td>
 								</tr>

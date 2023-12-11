@@ -123,6 +123,7 @@ function updateKfi(kfiId) {
             $("#to-date").val(data.toDate);
 			$("#nextCheckDate-update").val(data.nextCheckDate);
             $("#targetAmount").val(data.targetAmount);
+            $("#result").val(data.result);
             $("#kfiDetail").val(data.detail);
             $("#quantRatio").val(data.quantRatio);
             $("#monthName").val(data.month);
@@ -529,20 +530,81 @@ function changeKfiStatus(status,kfiId) {
         });
     }
 }
-function searchAssignKfi() { 
+function searchAssignKfi() {
     var month = $("#kfiMonthFilter").val();
     var active = $("#kfiStatusFilter").val();
     var url = $url + 'kfi/management/search-assign-kfi';
-        $.ajax({
-            type: "POST",
-            dataType: 'json',
-            url: url,
-            data: { month: month, active: active },
-            success: function (data) {
-                if (data.status) {
-                    $("#assign-search-result").html(data.kfiText);
-                }
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { month: month, active: active },
+        success: function (data) {
+            if (data.status) {
+                $("#assign-search-result").html(data.kfiText);
             }
-        });
+        }
+    });
     
 }
+function kgiInBranchForKfi(kfiId, branchId) {
+    var url = $url + 'kfi/management/kgi-branch';
+    $("#kgi-branch").html('');
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { kfiId: kfiId, branchId: branchId },
+        success: function (data) {
+            if (data.status) {
+                $("#kgi-branch").html(data.kgiText);
+            }
+        }
+    });
+}
+function assignKgiTokfi(kgiId, kfiId) { 
+    var url = $url + 'kfi/management/assign-kgi-to-kfi';
+    if ($("#kgi-branch-" + kgiId).prop("checked") == true) {
+        var type = 1;
+    } else { 
+        var type = 0;
+    }
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { kgiId: kgiId, kfiId: kfiId, type: type },
+        success: function (data) {
+            if (data.status) {
+            }
+        }
+    });
+}
+function checkAllkfiEmployee(kfiId) {
+    var url = $url + 'kfi/management/check-all-kfi-employee';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: {kfiId: kfiId},
+        success: function (data) {
+            if ($("#all-kfi-employee-" + kfiId).prop("checked") == true) {
+     
+                $.each(data.employeeId, function (key, value) {
+                    if ($("#kfi-employee-" + value + '-' + kfiId).prop("checked") == false) {
+                        $("#kfi-employee-" + value + '-' + kfiId).prop("checked", true);
+                        kfiEmployee(value, kfiId);
+                    }
+                });
+            } else {
+               
+                $.each(data.employeeId, function (key, value) {
+                    if ($("#kfi-employee-" + value + '-' + kfiId).prop("checked") == true) {
+                        $("#kfi-employee-" + value + '-' + kfiId).prop("checked", false);
+                        kfiEmployee(value, kfiId);
+                    }
+                });
+            }
+        }
+    });
+ }

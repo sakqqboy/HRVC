@@ -10,7 +10,9 @@ $this->title = 'KGI Grid View';
 		<i class="fa fa-tachometer font-size-20" aria-hidden="true"></i> <strong class="font-size-20"> Performance Indicator Matrices (PIM)</strong>
 	</div>
 	<div class="col-12 mt-20">
-		<?= $this->render('header_filter') ?>
+		<?= $this->render('header_filter', [
+			"role" => $role
+		]) ?>
 
 		<div class="alert alert-white-4">
 			<div class="row">
@@ -19,9 +21,15 @@ $this->title = 'KGI Grid View';
 						<div class="col-6 key1">
 							Key Goal Indicators
 						</div>
-						<div class="col-6">
-							<button type="button" class="btn btn-primary font-size-14" data-bs-toggle="modal" data-bs-target="#staticBackdrop5"><i class="fa fa-magic" aria-hidden="true"></i> Create New KGI</button>
-						</div>
+						<?php
+						if ($role >= 3) {
+						?>
+							<div class="col-6">
+								<button type="button" class="btn btn-primary font-size-14" data-bs-toggle="modal" data-bs-target="#staticBackdrop5"><i class="fa fa-magic" aria-hidden="true"></i> Create New KGI</button>
+							</div>
+						<?php
+						}
+						?>
 					</div>
 				</div>
 				<div class="col-lg-7 col-md-12 col-12 New-KFI">
@@ -53,8 +61,9 @@ $this->title = 'KGI Grid View';
 							<?php
 							if (count($kgis) > 0) {
 								foreach ($kgis as $kgiId => $kgi) :
+									//throw new exception(print_r($kgi, true));
 							?>
-									<div class="col-12 card card-radius" id="kgi-<?= $kgiId ?>">
+									<div class="col-12 card card-radius <?= $kgi['isOver'] == 1 ? 'bg-over' : 'bg-white' ?>" id="kgi-<?= $kgiId ?>">
 										<div class="row">
 											<div class="col-lg-4 col-md-6 col-12 clients-employee pl-0">
 												<i class="fa fa-flag" aria-hidden="true"></i> <?= $kgi["kgiName"] ?>
@@ -98,9 +107,15 @@ $this->title = 'KGI Grid View';
 												<button class="btn btn-outline-secondary font-size-10" data-bs-toggle="modal" data-bs-target="#kgi-view" onclick="javascript:kgiHistory(<?= $kgiId ?>)">
 													<i class="fa fa-eye" aria-hidden="true"></i>
 												</button>
-												<button class="btn btn-outline-danger font-size-10" data-bs-toggle="modal" data-bs-target="#delete-kgi" onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)">
-													<i class="fa fa-trash-o" aria-hidden="true"></i>
-												</button>
+												<?php
+												if ($role >= 3) {
+												?>
+													<button class="btn btn-outline-danger font-size-10" data-bs-toggle="modal" data-bs-target="#delete-kgi" onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)">
+														<i class="fa fa-trash-o" aria-hidden="true"></i>
+													</button>
+												<?php
+												}
+												?>
 											</div>
 											<div class="col-lg-2 col-md-6 col-12 pl-0">
 												<div class="col-12">
@@ -143,25 +158,53 @@ $this->title = 'KGI Grid View';
 											</div>
 											<div class="col-lg-3 col-md-6 col-12 progress-bordersolid">
 												<div class="row">
-													<div class="col-md-4">
+													<div class="col-md-5">
 														<div class="col-12 target-progress">
 															<i class="fa fa-bullseye" aria-hidden="true"></i> Target
 														</div>
 														<div class="col-12 target-million">
-															<?= $kgi["targetAmount"] ?>
+															<?php
+															$decimal = explode('.', $kgi["targetAmount"]);
+															if (isset($decimal[1])) {
+																if ($decimal[1] == '00') {
+																	$show = $decimal[0];
+																} else {
+																	$show = $kgi["targetAmount"];
+																}
+															} else {
+																$show = $kgi["targetAmount"];
+															}
+															?>
+															<?= $show ?>
 														</div>
 													</div>
-													<div class="col-md-4">
-														<div class="col-12 target-plush">
+													<div class="col-md-2">
+														<div class="col-12 target-plush mt-15">
 															<?= $kgi["code"] ?>
 														</div>
 													</div>
-													<div class="col-md-4">
+													<div class="col-md-5">
 														<div class="col-12 target-progress">
-															Result <i class="fa fa-trophy" aria-hidden="true"></i>
+															<i class="fa fa-trophy" aria-hidden="true"></i> Result
 														</div>
 														<div class="col-12 target-million">
-															<?= $kgi["result"] ?>
+															<?php
+															if ($kgi["result"] != '') {
+																$decimalResult = explode('.', $kgi["result"]);
+																if (isset($decimalResult[1])) {
+																	if ($decimalResult[1] == '00') {
+																		$showResult = $decimalResult[0];
+																	} else {
+																		$showResult = $kgi["result"];
+																	}
+																} else {
+																	$showResult = $kgi["result"];
+																}
+															} else {
+																$showResult = 0;
+															}
+															?>
+															<?= $showResult ?>
 														</div>
 													</div>
 												</div>
@@ -181,10 +224,27 @@ $this->title = 'KGI Grid View';
 														</div>
 													</div>
 													<div class="col-md-6">
-														<div class="col-12 pencil-nextupdate" data-bs-toggle="modal" data-bs-target="#update-kgi-modal" onclick="javascript:updateKgi(<?= $kgiId ?>)">
-															Next Update <i class="fa fa-pencil-square-o ml-5" aria-hidden="true"></i>
+														<div class="row">
+															<?php
+															if ($role >= 3) {
+																$col = 9;
+															} else {
+																$col = 12;
+															} ?>
+															<div class="col-<?= $col ?> font-size-12 font-b text-end">
+																Next Update
+															</div>
+															<?php
+															if ($role >= 3) {
+															?>
+																<div class="col-3 pencil-nextupdate text-center" data-bs-toggle="modal" data-bs-target="#update-kgi-modal" onclick="javascript:updateKgi(<?= $kgiId ?>)">
+																	<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+																</div>
+															<?php
+															}
+															?>
 														</div>
-														<div class="col-12 font-size-12 pt-5 text-end" style="font-weight: 700;">
+														<div class="col-12 font-size-12 pt-5 text-end <?= $kgi['isOver'] == 1 ? 'text-danger' : '' ?>" style="font-weight: 700;">
 															<?= $kgi['nextCheck'] ?>
 														</div>
 													</div>

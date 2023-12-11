@@ -118,11 +118,40 @@ $this->title = 'KPI';
 								<span class="badge rounded-pill bg-secondary-bsc1"><i class="fa fa-users" aria-hidden="true"></i> <?= $kpi['countTeam'] ?></span>
 							</td>
 							<td><?= $kpi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?></td>
-							<td><?= $kpi["targetAmount"] ?></td>
+							<td><?php
+								$decimal = explode('.', $kpi["targetAmount"]);
+								if (isset($decimal[1])) {
+									if ($decimal[1] == '00') {
+										$show = $decimal[0];
+									} else {
+										$show = $kpi["targetAmount"];
+									}
+								} else {
+									$show = $kpi["targetAmount"];
+								}
+								?>
+								<?= $show ?>
+							</td>
 							<td>
 								<?= $kpi["code"] ?>
 							</td>
-							<td><?= $kpi["result"] ?></td>
+							<td><?php
+								if ($kpi["result"] != '') {
+									$decimalResult = explode('.', $kpi["result"]);
+									if (isset($decimalResult[1])) {
+										if ($decimalResult[1] == '00') {
+											$showResult = $decimalResult[0];
+										} else {
+											$showResult = $kpi["result"];
+										}
+									} else {
+										$showResult = $kpi["result"];
+									}
+								} else {
+									$showResult = 0;
+								}
+								?>
+								<?= $showResult ?></td>
 							<td>
 								<div id="progress1">
 									<div data-num="<?= (int)$kpi["ratio"] ?>" class="progress-item1"></div>

@@ -69,4 +69,15 @@ class KpiBranch extends \backend\models\hrvc\master\KpiBranchMaster
         }
         return $branches;
     }
+    public static function branchKpi($branchId)
+    {
+        $kpiBranch = KpiBranch::find()
+            ->select('kpi_branch.kpiId,kpi_branch.branchId,kpi.kpiName,
+            kpi.unitId,kpi.targetAmount,kpi.month,kpi.code')
+            ->JOIN("LEFT JOIN", "kpi", "kpi.kpiId=kpi_branch.kpiId")
+            ->where(["kpi_branch.branchId" => $branchId, "kpi_branch.status" => 1, "kpi.status" => 1])
+            ->asArray()
+            ->all();
+        return $kpiBranch;
+    }
 }

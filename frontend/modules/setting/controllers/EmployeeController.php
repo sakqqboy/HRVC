@@ -715,7 +715,8 @@ class EmployeeController extends Controller
                             }
                             if (trim($data[14]) != '') {
                                 if ($departmentId != '') {
-                                    $titleId = Title::titleId($departmentId, $data[14]);
+                                    $titleName = explode(':', $data[14]);
+                                    $titleId = Title::titleId($departmentId, $titleName[0]);
                                 } else {
                                     $isError = 1;
                                     $error[$i] .= "- Title and deparment did't match.<br>";
@@ -785,8 +786,20 @@ class EmployeeController extends Controller
                                 $employee->employeeFirstname = $data[0];
                                 $employee->employeeSurename = $data[1];
                                 $employee->employeeNumber =  $data[2];
-                                $employee->joinDate = $data[4];
-                                $employee->birthDate = $data[5];
+                                if (trim($data[4]) != '') {
+                                    $joinDateArr = explode('/', $data[4]);
+                                    if (count($joinDateArr) == 3) {
+                                        $employee->joinDate = $joinDateArr[2] . '-' . $joinDateArr[1] . '-' . $joinDateArr[0];
+                                    }
+                                }
+                                if (trim($data[5]) != '') {
+                                    $birthDateArr = explode('/', $data[5]);
+                                    if (count($birthDateArr) == 3) {
+                                        $employee->birthDate = $birthDateArr[2] . '-' . $birthDateArr[1] . '-' . $birthDateArr[0];
+                                    }
+                                }
+                                // $employee->joinDate = $data[4];
+                                // $employee->birthDate = $data[5];
                                 // $employee->nationalityId = $_POST["nationality"];
                                 // $employee->address1 = $_POST["address1"];
                                 // $employee->countryId = $_POST["country"];
@@ -812,6 +825,7 @@ class EmployeeController extends Controller
                                     $success++;
                                     $employeeId = Yii::$app->db->lastInsertID;
                                     $userId = $this->createUser($employeeId, $data[3]);
+                                    $titleName = explode(':', $data[14]);
                                     if ($isExisting == 0) {
                                         $correct[$i] = [
                                             "name" => $data[0] . ' ' . $data[1],
@@ -819,7 +833,7 @@ class EmployeeController extends Controller
                                             "company" => $data[9],
                                             "branch" => $data[10],
                                             "department" => $data[11],
-                                            "title" => $data[14],
+                                            "title" => $titleName[0],
                                         ];
                                     }
                                     if ($isExisting == 1) {
@@ -830,7 +844,7 @@ class EmployeeController extends Controller
                                             "company" => $data[9],
                                             "branch" => $data[10],
                                             "department" => $data[11],
-                                            "title" => $data[14],
+                                            "title" => $titleName[0],
                                         ];
                                     }
                                 }
@@ -919,11 +933,12 @@ class EmployeeController extends Controller
             ->orderBy('teamPositionName')
             ->all();
         $titles = Title::find()
-            ->select('titleName')
-            ->where(["status" => 1])
+            ->select('title.titleName,d.departmentName')
+            ->JOIN("LEFT JOIN", "department d", "d.departmentId=title.departmentId")
+            ->where(["d.status" => 1, "title.status" => 1])
             ->asArray()
-            ->groupBy('titleName')
-            ->orderBy('titleName')
+            // ->groupBy('titleName')
+            ->orderBy('title.titleName')
             ->all();
         $employeeCondition = EmployeeCondition::find()
             ->select('employeeConditionName')
@@ -939,7 +954,7 @@ class EmployeeController extends Controller
             ->all();
         $gender[0] = "Male";
         $gender[1] = "Female";
-        //throw new exception(print_r($employeeCondition, true));
+        //throw new exception(print_r($titles, true));
         $htmlExcel = $this->renderPartial('export', [
             "companies" => $companies,
             "branches" => $branches,
@@ -1053,6 +1068,24 @@ class EmployeeController extends Controller
                     $newUser->createDateTime = new Expression('NOW()');
                     $newUser->updateDateTime = new Expression('NOW()');
                     $newUser->save(false);
+                }
+            endforeach;
+        }
+    }
+    public function actionUpdateUserRole()
+    {
+        $users = User::find()->where(["status" => 1])->asArray()->all();
+        if (isset($users) && count($users) > 0) {
+            foreach ($users as $user) :
+                $userRole = UserRole::find()->where(["userId" => $user["userId"]])->one();
+                if (!isset($userRole) || empty($userRole)) {
+                    $ur = new UserRole();
+                    $ur->userId = $user["userId"];
+                    $ur->roleId = 6;
+                    $ur->status = 1;
+                    $ur->createDateTime = new Expression('NOW()');
+                    $ur->updateDateTime = new Expression('NOW()');
+                    $ur->save(false);
                 }
             endforeach;
         }

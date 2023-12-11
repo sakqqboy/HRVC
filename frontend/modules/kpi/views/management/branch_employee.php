@@ -10,6 +10,20 @@ use frontend\models\hrvc\KpiEmployee;
 </div>
 <?php
 if (count($employees) > 0) {
+	$totalkpiEmployee = KpiEmployee::totalEmployee($kpiId);
+	if ($totalkpiEmployee == count($employees)) {
+		$checkAll = 'checked';
+	} else {
+		$checkAll = '';
+	}
+?>
+	<div class="row">
+		<div class="col-12 text-start">
+			<input class="form-check-input" type="checkbox" onchange="javascript:checkAllKpiEmployee(<?= $kpiId ?>)" id="all-kpi-employee-<?= $kpiId ?>" <?= $checkAll ?>>
+			<span class="font-size-12 ml-25">All </span>
+		</div>
+	</div>
+	<?php
 	foreach ($employees as $em) :
 
 		$isCheck = "";
@@ -17,7 +31,7 @@ if (count($employees) > 0) {
 		if ($kpiEmployee == 1) {
 			$isCheck = "checked";
 		}
-?>
+	?>
 		<div class="row">
 			<div class="col-4">
 				<div class=" form-check mt-10">

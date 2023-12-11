@@ -10,7 +10,9 @@ $this->title = 'KFI Grid View';
 		<i class="fa fa-tachometer font-size-20" aria-hidden="true"></i> <strong class="font-size-20"> Performance Indicator Matrices (PIM)</strong>
 	</div>
 	<div class="col-12 mt-20">
-		<?= $this->render('header_filter') ?>
+		<?= $this->render('header_filter', [
+			"role" => $role
+		]) ?>
 
 		<div class="alert alert-light-4">
 			<div class="row">
@@ -20,8 +22,13 @@ $this->title = 'KFI Grid View';
 							Key Financial Indicators
 						</div>
 						<div class="col-6">
-							<button type="button" class="btn btn-primary font-size-14" data-bs-toggle="modal" data-bs-target="#staticBackdrop1"><i class="fa fa-magic" aria-hidden="true"></i> Create New KFI</button>
-
+							<?php
+							if ($role >= 3) {
+							?>
+								<button type="button" class="btn btn-primary font-size-14" data-bs-toggle="modal" data-bs-target="#staticBackdrop1"><i class="fa fa-magic" aria-hidden="true"></i> Create New KFI</button>
+							<?php
+							}
+							?>
 						</div>
 					</div>
 				</div>
@@ -60,17 +67,23 @@ $this->title = 'KFI Grid View';
 								foreach ($kfis as $kfiId => $kfi) :
 							?>
 									<div class="col-lg-4 col-md-6 col-sm-5 col-12 mt-20" id="kfi-<?= $kfiId ?>">
-										<div class="col-12 border pl-20 pr-20 pt-10 pb-5" style="background-color:white;border-radius:10px;box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;">
+										<div class="col-12 border pl-20 pr-20 pt-10 pb-5 <?= $kfi['isOver'] == 1 ? 'bg-over' : 'bg-white' ?>" style="border-radius:10px;box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;">
 											<div class="row">
 												<div class="col-12">
 													<div class="row">
 														<div class="col-12 text-end pr-0">
 															<a class="btn btn-xs btn-outline-secondary pt-0" style="margin-left: 0px;" data-bs-toggle="modal" data-bs-target="#staticBackdrop3" onclick="javascript:kfiHistory(<?= $kfiId ?>)">
-																<i class="fa fa-eye mt-6" aria-hidden="true" style="margin-left: -5px"></i>
+																<i class="fa fa-eye mt-6" aria-hidden="true" style="margin-left: -6px"></i>
 															</a>
-															<a class="btn btn-xs btn-outline-danger ml-5 pt-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop4" onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)">
-																<i class="fa fa-trash-o mt-6" aria-hidden="true" style="margin-left: -5px;"></i>
-															</a>
+															<?php
+															if ($role >= 3) {
+															?>
+																<a class="btn btn-xs btn-outline-danger ml-5 pt-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop4" onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)">
+																	<i class="fa fa-trash-o mt-6" aria-hidden="true" style="margin-left: -5px;"></i>
+																</a>
+															<?php
+															}
+															?>
 														</div>
 														<div class="col-9 linechart-increase" style="margin-top: -25px;">
 															<i class="fa fa-line-chart mr-5" aria-hidden="true"></i> <?= $kfi["kfiName"] ?>
@@ -101,7 +114,7 @@ $this->title = 'KFI Grid View';
 														<div class="col-lg-1 col-md-6 col-2 font-size-14 pt-30 pr-0 pl-0 text-center" style="font-weight: 500;">
 															<?= strtoupper(substr($kfi['month'], 0, 3)) ?>
 														</div>
-														<div class="col-lg-3 col-md-6 col-3">
+														<div class="col-lg-4 col-md-6 col-3">
 															<div class="col-12 Quant-ratio">
 																Quant Ratio
 															</div>
@@ -114,11 +127,23 @@ $this->title = 'KFI Grid View';
 															<div class="col-12 bullseye-con">
 																<i class="fa fa-bullseye" aria-hidden="true"></i> Target
 															</div>
-															<div class="col-12" style="font-weight: 500;">
-																<?= number_format($kfi["target"], 2) ?>
+															<div class="col-12 million-number" style="font-weight: 500;">
+																<?php
+																$decimal = explode('.', $kfi["target"]);
+																if (isset($decimal[1])) {
+																	if ($decimal[1] == '00') {
+																		$show = number_format($decimal[0]);
+																	} else {
+																		$show = number_format($kfi["target"], 2);
+																	}
+																} else {
+																	$show = number_format($kfi["target"]);
+																}
+																?>
+																<?= $show ?>
 															</div>
 														</div>
-														<div class="col-lg-2 col-md-6 col-3 pt-13">
+														<div class="col-lg-1 col-md-6 col-3 pt-10 text-center">
 
 															<?= $kfi["code"] ?>
 														</div>
@@ -127,7 +152,22 @@ $this->title = 'KFI Grid View';
 																<i class="fa fa-trophy" aria-hidden="true"></i> Result
 															</div>
 															<div class="col-12 million-number" style="font-weight: 500;">
-																<?= $kfi["result"] == '' ? '0' : $kfi["result"] ?>
+																<?php
+																if ($kfi["result"] != '') {
+																	$decimalResult = explode('.', $kfi["result"]);
+																	if (isset($decimalResult[1])) {
+																		if ($decimalResult[1] == '00') {
+																			$showResult = number_format($decimalResult[0]);
+																		} else {
+																			$showResult = number_format($kfi["result"], 2);
+																		}
+																	} else {
+																		$showResult = number_format($kfi["result"]);
+																	}
+																} else {
+																	$showResult = 0;
+																}
+																?>
 															</div>
 														</div>
 
@@ -156,9 +196,15 @@ $this->title = 'KFI Grid View';
 															<span data-bs-toggle="modal" data-bs-target="#kfi-issue" onclick="javascript:showKfiComment(<?= $kfiId ?>)">
 																<img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima" style="margin-top: -5px;cursor:pointer;">
 															</span>&nbsp;&nbsp;
-															<span class="next-update-span" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" onclick=" javascript:updateKfi(<?= $kfiId ?>)">
-																<i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i>
-															</span> &nbsp;
+															<?php
+															if ($role >= 3) {
+															?>
+																<span class="next-update-span" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" onclick=" javascript:updateKfi(<?= $kfiId ?>)">
+																	<i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i>
+																</span> &nbsp;
+															<?php
+															}
+															?>
 															<span class="text-primary font-size-12">Next Update</span>
 															<strong class="font-size-12 <?= $kfi['nextCheck'] == "" || $kfi['isOver'] == 1 ? 'text-danger' : '' ?>">
 																<?= $kfi['nextCheck'] == "" ? 'Not set' : $kfi['nextCheck'] ?>

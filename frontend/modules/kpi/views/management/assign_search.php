@@ -1,4 +1,7 @@
 <?php
+
+use common\models\ModelMaster;
+
 if (isset($kpis) && count($kpis) > 0) {
 	foreach ($kpis as $kpiId => $kpi) :
 ?>
@@ -52,6 +55,11 @@ if (isset($kpis) && count($kpis) > 0) {
 			</td>
 			<td class="text-start"><?= $kpi["code"] ?> <?= $kpi["targetAmount"] ?></td>
 			<td><?= $kpi["month"] ?></td>
+			<td>
+				<a href="<?= Yii::$app->homeUrl ?>kpi/management/kpi-kgi/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>" class="no-underline-black">
+					<b><?= $kpi["countKgiInKpi"] ?></b>
+				</a>
+			</td>
 		</tr>
 <?php
 	endforeach;

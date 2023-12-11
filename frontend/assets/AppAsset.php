@@ -102,6 +102,7 @@ class AppAsset extends AssetBundle
         'js/kpi/kpi_update.js',
         'js/filter/kpi.js',
         'js/setting/scripts.js',
+        'js/kgi/kgi_group.js',
         'js/setting/doughnut.js',
         'js/setting/accordion.js',
 

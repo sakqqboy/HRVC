@@ -5,11 +5,14 @@ namespace backend\modules\kgi\controllers;
 use backend\models\hrvc\Branch;
 use backend\models\hrvc\Company;
 use backend\models\hrvc\Country;
+use backend\models\hrvc\Department;
 use backend\models\hrvc\Employee;
+use backend\models\hrvc\KfiHasKgi;
 use backend\models\hrvc\Kgi;
 use backend\models\hrvc\KgiBranch;
 use backend\models\hrvc\KgiDepartment;
 use backend\models\hrvc\KgiEmployee;
+use backend\models\hrvc\KgiHasKpi;
 use backend\models\hrvc\KgiHistory;
 use backend\models\hrvc\KgiIssue;
 use backend\models\hrvc\KgiSolution;
@@ -30,9 +33,43 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 class ManagementController extends Controller
 {
-	public function actionIndex()
+	public function actionIndex($adminId, $managerId, $supervisorId, $staffId)
 	{
-		$kgis = Kgi::find()->where(["status" => [1, 2]])->asArray()->all();
+		if ($adminId != '') {
+			$kgis = Kgi::find()
+				->where(["status" => [1, 2, 4]])
+				->asArray()->all();
+		}
+		if ($managerId != '') { //see in their branch
+			$branchId = Branch::userBranchId($managerId);
+			$kgis = Kgi::find()
+				->select('kgi.*')
+				->JOIN("LEFT JOIN", "kgi_branch kb", "kb.kgiId=kgi.kgiId")
+				->where(["kgi.status" => [1, 2, 4], "kb.status" => 1, "kb.branchId" => $branchId])
+				->asArray()
+				->orderBy('kgi.updateDateTime DESC')
+				->all();
+		}
+		if ($supervisorId != '') { //see in their department
+			$departmentId = Department::userDepartmentId($supervisorId);
+			$kgis = Kgi::find()
+				->select('kgi.*')
+				->JOIN("LEFT JOIN", "kgi_department kd", "kd.kgiId=kgi.kgiId")
+				->where(["kgi.status" => [1, 2, 4], "kd.status" => 1, "kd.departmentId" => $departmentId])
+				->asArray()
+				->orderBy('kgi.updateDateTime DESC')
+				->all();
+		}
+		if ($staffId != '') { //see just their kfi
+			$employeeId = Employee::employeeId($staffId);
+			$kgis = Kgi::find()
+				->select('kgi.*')
+				->JOIN("LEFT JOIN", "kgi_employee ke", "ke.kgiId=kgi.kgiId")
+				->where(["kgi.status" => [1, 2, 4], "ke.status" => 1, "ke.employeeId" => $employeeId])
+				->asArray()
+				->orderBy('kgi.updateDateTime DESC')
+				->all();
+		}
 		$data = [];
 		if (count($kgis) > 0) {
 			foreach ($kgis as $kgi) :
@@ -66,7 +103,10 @@ class ManagementController extends Controller
 					"solution" => KgiIssue::lastestIssue($kgi["kgiId"])["solution"],
 					"employee" => KgiTeam::employeeTeam($kgi['kgiId']),
 					"fromDate" => ModelMaster::engDate($kgi["fromDate"], 2),
-					"toDate" => ModelMaster::engDate($kgi["toDate"], 2)
+					"toDate" => ModelMaster::engDate($kgi["toDate"], 2),
+					"isOver" => ModelMaster::isOverDuedate(Kgi::nextCheckDate($kgi['kgiId'])),
+					"countKgiHasKfi" => KfiHasKgi::countKfiWithKgi($kgi['kgiId']),
+					"countKgiHasKpi" => KgiHasKpi::countKgiHasKpi($kgi['kgiId']),
 				];
 			endforeach;
 		}
@@ -170,7 +210,7 @@ class ManagementController extends Controller
 		$kgiBranches = KgiBranch::find()
 			->select('kgi_branch.branchId,b.branchName')
 			->JOIN("LEFT JOIN", "branch b", "b.branchId=kgi_branch.branchId")
-			->where(["kgi_branch.kgiId" => $id])
+			->where(["kgi_branch.kgiId" => $id, "b.status" => 1])
 			->asArray()
 			->all();
 		$data = [];
@@ -304,24 +344,82 @@ class ManagementController extends Controller
 		}
 		return json_encode($data);
 	}
-	public function actionKgiFilter($companyId, $branchId, $teamId, $month, $status, $year)
+	public function actionKgiFilter($companyId, $branchId, $teamId, $month, $status, $year, $adminId, $managerId, $supervisorId, $staffId)
 	{
 		$data = [];
-		$kgis = Kgi::find()
-			->select('kgi.*')
-			->JOIN("LEFT JOIN", "kgi_branch kb", "kb.kgiId=kgi.kgiId")
-			->JOIN("LEFT JOIN", "kgi_team kt", "kt.kgiId=kgi.kgiId")
-			->where(["kgi.status" => [1, 2]])
-			->andFilterWhere([
-				"kgi.companyId" => $companyId,
-				"kb.branchId" => $branchId,
-				"kt.teamId" => $teamId,
-				"kgi.month" => $month,
-				"kgi.status" => $status,
-				"kgi.year" => $year,
-			])
-			->orderBy('kgi.createDateTime ASC')
-			->all();
+		if ($adminId != '') {
+			$kgis = Kgi::find()
+				->select('kgi.*')
+				->JOIN("LEFT JOIN", "kgi_branch kb", "kb.kgiId=kgi.kgiId")
+				->JOIN("LEFT JOIN", "kgi_team kt", "kt.kgiId=kgi.kgiId")
+				->where(["kgi.status" => [1, 2, 4]])
+				->andFilterWhere([
+					"kgi.companyId" => $companyId,
+					"kb.branchId" => $branchId,
+					"kt.teamId" => $teamId,
+					"kgi.month" => $month,
+					"kgi.status" => $status,
+					"kgi.year" => $year,
+				])
+				->orderBy('kgi.createDateTime ASC')
+				->all();
+		}
+		if ($managerId != '') {
+			$mBranchId = Branch::userBranchId($managerId);
+			$kgis = Kgi::find()
+				->select('kgi.*')
+				->JOIN("LEFT JOIN", "kgi_branch kb", "kb.kgiId=kgi.kgiId")
+				->JOIN("LEFT JOIN", "kgi_team kt", "kt.kgiId=kgi.kgiId")
+				->where(["kgi.status" => [1, 2, 4], "kb.branchId" => $mBranchId])
+				->andFilterWhere([
+					"kgi.companyId" => $companyId,
+					"kb.branchId" => $branchId,
+					"kt.teamId" => $teamId,
+					"kgi.month" => $month,
+					"kgi.status" => $status,
+					"kgi.year" => $year,
+				])
+				->orderBy('kgi.createDateTime ASC')
+				->all();
+		}
+		if ($supervisorId != '') {
+			$mDepartmentId = Department::userDepartmentId($supervisorId);
+			$kgis = Kgi::find()
+				->select('kgi.*')
+				->JOIN("LEFT JOIN", "kgi_branch kb", "kb.kgiId=kgi.kgiId")
+				->JOIN("LEFT JOIN", "kgi_department kd", "kd.kgiId=kgi.kgiId")
+				->JOIN("LEFT JOIN", "kgi_team kt", "kt.kgiId=kgi.kgiId")
+				->where(["kgi.status" => [1, 2, 4], "kd.departmentId" => $mDepartmentId])
+				->andFilterWhere([
+					"kgi.companyId" => $companyId,
+					"kb.branchId" => $branchId,
+					"kt.teamId" => $teamId,
+					"kgi.month" => $month,
+					"kgi.status" => $status,
+					"kgi.year" => $year,
+				])
+				->orderBy('kgi.createDateTime ASC')
+				->all();
+		}
+		if ($staffId != '') {
+			$employeeId = Employee::employeeId($staffId);
+			$kgis = Kgi::find()
+				->select('kgi.*')
+				->JOIN("LEFT JOIN", "kgi_branch kb", "kb.kgiId=kgi.kgiId")
+				->JOIN("LEFT JOIN", "kgi_employee ke", "ke.kgiId=kgi.kgiId")
+				->JOIN("LEFT JOIN", "kgi_team kt", "kt.kgiId=kgi.kgiId")
+				->where(["kgi.status" => [1, 2, 4], "ke.employeeId" => $employeeId])
+				->andFilterWhere([
+					"kgi.companyId" => $companyId,
+					"kb.branchId" => $branchId,
+					"kt.teamId" => $teamId,
+					"kgi.month" => $month,
+					"kgi.status" => $status,
+					"kgi.year" => $year,
+				])
+				->orderBy('kgi.createDateTime ASC')
+				->all();
+		}
 		if (count($kgis) > 0) {
 			foreach ($kgis as $kgi) :
 				$ratio = 0;
@@ -360,9 +458,45 @@ class ManagementController extends Controller
 					"year" => $kgi["year"],
 					"fromDate" => ModelMaster::engDate($kgi["fromDate"], 2),
 					"toDate" => ModelMaster::engDate($kgi["toDate"], 2),
+					"isOver" => ModelMaster::isOverDuedate(Kgi::nextCheckDate($kgi['kgiId'])),
+					"countKgiHasKfi" => KfiHasKgi::countKfiWithKgi($kgi['kgiId']),
+					"countKgiHasKpi" => KgiHasKpi::countKgiHasKpi($kgi['kgiId']),
 				];
 			endforeach;
 		}
 		return json_encode($data);
+	}
+
+	public function actionBranchKgi($branchId)
+	{
+		$kgiBranch = KgiBranch::branchKgi($branchId);
+		return json_encode($kgiBranch);
+	}
+	public function actionKfiKgi($kgiId)
+	{
+		$kfiHaskgi = KfiHasKgi::find()
+			->select('kfi.kfiId,kfi.kfiName,kfi.unitId,kfi.targetAmount,kfi.month')
+			->JOIN("LEFT JOIN", "kfi", "kfi.kfiId=kfi_has_kgi.kfiId")
+			->JOIN("LEFT JOIN", "kgi", "kgi.kgiId=kfi_has_kgi.kgiId")
+			->where(["kfi_has_kgi.kgiId" => $kgiId, "kfi_has_kgi.status" => 1, "kfi.status" => 1, "kgi.status" => 1])
+			->asArray()
+			->all();
+		return json_encode($kfiHaskgi);
+	}
+	public function actionKgiHasKpi($kgiId)
+	{
+		$kgiHasKpi = KgiHasKpi::find()
+			->select('kpi.kpiName,kpi.kpiId,kpi.unitId,kpi.targetAmount,kpi.month,kpi.code')
+			->JOIN("LEFT JOIN", "kpi", "kpi.kpiId=kgi_has_kpi.kpiId")
+			->JOIN("LEFT JOIN", "kgi", "kgi.kgiId=kgi_has_kpi.kgiId")
+			->where([
+				"kgi_has_kpi.kgiId" => $kgiId,
+				"kgi_has_kpi.status" => 1,
+				"kgi.status" => 1,
+				"kpi.status" => 1,
+			])
+			->asArray()
+			->all();
+		return json_encode($kgiHasKpi);
 	}
 }
