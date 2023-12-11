@@ -1,10 +1,10 @@
 .al-sky {
-    background-color: #eef1f2;
+    background-color: #f6f8f8;
 }
 
 .companyweight {
     font-weight: 500;
-    font-size: 17px;
+    font-size: 15px;
     color: black;
 }
 
@@ -17,9 +17,17 @@
     margin-top: 5px;
 }
 
-.bbg-blue {
-    background-color: #E2EFFF;
+.headergrayPIM {
+    background-color: #F1FAFF;
+}
+
+/* .bbg-blue {
+    background-color: #f8f8f8;
     border-radius: 5px;
+} */
+.setinfo {
+    background-color: #2580D3;
+    color: white;
 }
 
 .mark1 {
@@ -99,8 +107,184 @@
     height: 250px;
     border-radius: 10px;
     margin-top: 20px;
+    background-color: #F8F8F8;
+    border-color: #748EE9;
+}
+
+.bg-key {
+    border-top: 10px #FDCA40 solid;
+    width: 100%;
+    height: 250px;
+    border-radius: 10px;
+    margin-top: 20px;
+    background-color: #F8F8F8;
+    border-color: #FDCA40;
+}
+
+.bg-cardkeyPerformance {
+    border-top: 10px #FF715B solid;
+    width: 100%;
+    height: 250px;
+    border-radius: 10px;
+    margin-top: 20px;
+    background-color: #F8F8F8;
+    border-color: #FF715B;
 }
 
 .Indicator {
+    font-size: 13px;
+}
+
+#checkboxcorrect {
+    border-radius: 50%;
+}
+
+.bg-PL {
+    background-color: #5793ed;
+}
+
+.colTarget {
+    font-size: 9px;
+    padding-top: 8px;
+}
+
+.colless {
+    font-size: 10px;
+    padding-top: 20px;
+}
+
+.colResult {
+    font-size: 9px;
+    padding-top: 8px;
+}
+
+.colexternalKFI {
+    color: #748EE9;
+    font-weight: 700;
+    text-align: center;
+    font-size: 13px;
+    padding-top: 10px;
+    cursor: pointer;
+}
+
+.colexternalKGI {
+    color: #FDCA40;
+    font-weight: 700;
+    text-align: center;
+    font-size: 13px;
+    padding-top: 10px;
+    cursor: pointer;
+}
+
+.colexternalKPI {
+    color: #FF715B;
+    font-weight: 700;
+    text-align: center;
+    font-size: 13px;
+    padding-top: 10px;
+    cursor: pointer;
+}
+
+.cardcolpurple {
+    border-color: #748EE9;
+}
+
+.cardcolorange {
+    border-color: #FDCA40;
+}
+
+.cardcolred {
+    border-color: #FF715B;
+}
+
+#carouselExampleIndicators {
+    margin-top: 30px;
+}
+
+.example-tok2 {
+    border-radius: 20px;
+    background-color: #ffffff;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.bg-switch {
+    background-color: #F4FCFF;
+    border: none;
+}
+
+.text-Chole {
+    color: #2580D3;
+}
+
+.database-financial {
+    color: gray;
+    padding-top: 10px;
+    font-size: 13px;
+}
+
+.bg-switchgray {
+    background-color: rgb(222, 222, 222);
+    border: none;
+}
+
+.text-Excludedgray {
+    color: rgb(161, 158, 158);
+}
+
+.uer {
+    width: 15px;
+}
+
+.dashcricleEvalue {
+    border-style: dashed;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-top: 8px;
+    margin-left: 30px;
+}
+
+.gbg1 {
+    background-color: #AED9E8;
+}
+
+.gbg2 {
+    background-color: #2C9DC4;
+}
+
+.gbg3 {
+    background-color: #88CEED;
+}
+
+.gbg4 {
+    background-color: #2E8CC1;
+}
+
+.perr {
+    width: 30px;
+}
+
+.Ev {
+    font-weight: 700;
+    color: #0F708A;
+    font-size: 14px;
+}
+
+.Ew {
+    font-weight: 400;
+    color: #0F708A;
+    font-size: 13px;
+}
+
+.PMI {
+    font-weight: 700;
+    color: white;
+    font-size: 14px;
+}
+
+.Ews {
+    font-weight: 400;
+    color: white;
     font-size: 13px;
 }

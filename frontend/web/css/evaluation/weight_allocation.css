@@ -1,0 +1,193 @@
+#boxframe {
+    border-radius: 50%;
+}
+
+.framecheck {
+    padding-left: 40px;
+    padding-top: 20px;
+}
+
+
+.rad-label {
+    display: flex;
+    align-items: center;
+    border-radius: 1px;
+    padding: 14px 16px;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.rad-label:hover,
+.rad-label:focus-within {
+    background: hsla(0, 0%, 80%, .14);
+    border-left: 5px #B2CCFA solid;
+}
+
+.rad-input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    z-index: -1;
+}
+
+.Evaluationdeshed {
+    border-left: 2px #d8d8d8 dashed;
+    height: 350px;
+    margin-top: -24px;
+    margin-left: 26px;
+    position: absolute;
+}
+
+.rad-design {
+    width: 22px;
+    height: 22px;
+    border-radius: 100px;
+    background: linear-gradient(to right bottom, hsl(144, 63%, 37%), hsl(115, 58%, 49%));
+    position: relative;
+    content: "\f00c";
+    color: white;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+
+}
+
+.rad-design::before {
+    content: "";
+    width: inherit;
+    height: inherit;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    display: inline-block;
+    border-radius: inherit;
+    background: hsl(0, 0%, 90%);
+    transform: scale(1.1);
+    transition: .3s;
+}
+
+.rad-input:checked+.rad-design::before {
+    /* transform: scale(0); */
+    content: "\f00c";
+    color: white;
+    text-align: center;
+    background: linear-gradient(to right bottom, hsl(144, 63%, 37%), hsl(115, 58%, 49%));
+}
+
+.rad-text {
+    color: hsl(0, 0%, 29%);
+    margin-left: 14px;
+    letter-spacing: 0px;
+    text-transform: none;
+    font-size: 13px;
+    transition: .3s;
+}
+
+.rad-input:checked~.rad-text {
+    color: #3E87CD;
+    font-weight: 600;
+}
+
+.abs-site-link {
+    position: fixed;
+    bottom: 40px;
+    left: 20px;
+    color: hsla(0, 0%, 0%, .5);
+    font-size: 16px;
+}
+
+.andAccounts {
+    color: black;
+    font-weight: 600;
+}
+
+.bg-chartpurple {
+    background-color: #748EE9;
+    margin-left: -18px;
+}
+
+.bg-chartwarn {
+    background-color: #F8BF27;
+    margin-left: -18px;
+}
+
+
+.bg-cha {
+    background-color: #FF715B;
+    margin-left: -18px;
+}
+
+
+.silly_scrollbar {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 510px;
+}
+
+.silly_scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.silly_scrollbar::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px #9c9c9c;
+    border-radius: 10px;
+}
+
+.silly_scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px #9c9c9c;
+}
+
+.silly_scrollbar::-webkit-scrollbar-thumb:hover {
+    -webkit-box-shadow: inset 0 0 6px #9c9c9c;
+}
+
+.flagkey {
+    font-size: 12px;
+}
+
+.bg-lighttotal {
+    background-color: rgb(222, 222, 222);
+    border-radius: 2px;
+    font-size: 10px;
+}
+
+.txt-Weight {
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.border-edit {
+    font-size: 10px;
+}
+
+.weight-pencil {
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.weight-trash {
+    cursor: pointer;
+    color: red;
+    font-size: 12px;
+}
+
+.fonTotal {
+    font-size: 10px;
+}
+
+.icons-KGI {
+    width: 20px;
+}
+
+.icons-KGI2 {
+    width: 15px;
+}
+
+.solid-typeradio {
+    border-left: 3px lightgrey solid dashed;
+}

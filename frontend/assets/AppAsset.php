@@ -74,6 +74,13 @@ class AppAsset extends AssetBundle
         'css/admin-financialplanning/annual_accounts.css',
         'css/admin-financialplanning/comparison_accounts.css',
         'css/home/multi_select.css',
+        'css/evaluation/evaluator.css',
+        'css/evaluation/weight_allocation.css',
+        'css/evaluation/rank_increasement.css',
+        'css/evaluation/evaluation.css',
+        'css/evaluation/accordion.css',
+        'css/evaluation/frame_dashboard.css',
+        'css/evaluation/settings.css',
 
 
     ];
@@ -96,6 +103,9 @@ class AppAsset extends AssetBundle
         'js/filter/kpi.js',
         'js/setting/scripts.js',
         'js/kgi/kgi_group.js',
+        'js/setting/doughnut.js',
+        'js/setting/accordion.js',
+
     ];
     public $depends = [
         'yii\web\YiiAsset',

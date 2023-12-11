@@ -1,0 +1,170 @@
+.alert-Evaluator {
+    background-color: #F4F6F9;
+}
+
+.setEvaluator {
+    font-size: 18px;
+    color: black;
+    font-weight: 700;
+    line-height: 25px;
+    padding-top: 10px;
+}
+
+.imagealertEvaluator {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.shadowsDeshboard {
+    color: #509CE3;
+}
+
+.Evaluator-country {
+    border-left: 6px #308FFF solid;
+    margin-top: 20px;
+}
+
+.imageEvaluatorcountry {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.Mid-Term {
+    color: rgb(118, 118, 118);
+    text-align: center;
+    font-weight: 600;
+}
+
+.E3 {
+    color: #3266CD;
+    text-align: center;
+    font-weight: 700;
+    font-size: 23px;
+}
+
+.EvaluatorConfiguration {
+    padding-top: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #2377C6;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.set-li {
+    font-size: 17px;
+    color: black;
+    padding-top: 15px;
+}
+
+.FrameEvaluation {
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.plr-filter {
+    margin-left: -5px;
+    font-size: 8px;
+}
+
+.fafil {
+    font-size: 19px;
+}
+
+.formtermname {
+    font-size: 11px;
+    color: black;
+    font-weight: 500;
+}
+
+.formFrameE1 {
+    font-size: 12px;
+    border-radius: 2px;
+    font-weight: 500;
+    padding-left: 1px;
+}
+
+.Evaluator-ALL {
+    color: gray;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.aler-ALLDepartment {
+    background-color: white;
+    margin-top: 20px;
+}
+
+.transform {
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #373737;
+}
+
+.ALL-Departmentform {
+    font-size: 20px;
+    color: gray;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.form-control-color {
+    width: 40px;
+}
+
+.Intermediate-solid {
+    border-right: 2px lightgray solid;
+    font-size: 10px;
+}
+
+/* .share-tfw {
+    color: #308FFF;
+    font-size: 25px;
+}
+
+.AccountsTaxations {
+    font-size: 19px;
+}
+
+.ShadowsParticipating {
+    box-shadow: 10px 5px 5px rgb(253, 215, 215);
+    margin-top: 30px;
+} */
+.datecalendar {
+    font-size: 9px;
+}
+
+.datenumber {
+    font-size: 10px;
+}
+
+.cc-transform {
+    border: none;
+    border-left: 8px rgb(39, 143, 241) solid;
+}
+
+.transform2yellow {
+    border: none;
+    border-left: 8px #FFDB1F solid;
+}
+
+.ADD {
+    font-size: 14px;
+    margin-top: 15px;
+    cursor: pointer;
+    padding-left: 15px;
+}
+
+.AddAnother {
+    font-size: 13px;
+    color: #373737;
+}
+
+.dangeredit {
+    background-color: #D98686;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    width: 60px;
+}
