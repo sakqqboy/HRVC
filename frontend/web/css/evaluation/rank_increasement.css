@@ -59,6 +59,37 @@
     background: #1862e8;
 }
 
+.barent-1 {
+    position: relative;
+    float: left;
+    min-width: 1%;
+    height: 100%;
+    border: 10px;
+    background: #1862e8;
+    margin-left: 35px;
+}
+
+.barent-2 {
+    position: relative;
+    float: left;
+    min-width: 1%;
+    height: 100%;
+    border: 10px;
+    background: #1862e8;
+    margin-left: 70px;
+}
+
+.barent-3 {
+    position: relative;
+    float: left;
+    min-width: 1%;
+    height: 100%;
+    border: 10px;
+    background: #1862e8;
+    margin-left: 105px;
+}
+
+
 .percent {
     position: absolute;
     top: 50%;
@@ -69,8 +100,7 @@
     font-size: 14px;
     font-weight: 500;
     color: white;
-    /* border: 5px #7aa3ed solid;
-    height: 50px; */
+    background-color: rgb(47, 121, 232);
 }
 
 .DeleteRound {

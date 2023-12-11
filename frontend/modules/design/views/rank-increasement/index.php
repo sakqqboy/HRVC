@@ -42,7 +42,13 @@ $this->title = 'Rank Increasement';
                             <label class="rad-label">
                                 <input type="radio" class="rad-input" name="rad">
                                 <div class="rad-design"></div>
-                                <div class="rad-text"> PMI Weight Allocation</div>
+                                <div class="rad-text"> Weight Allocation</div>
+                            </label>
+
+                            <label class="rad-label">
+                                <input type="radio" class="rad-input" name="rad">
+                                <div class="rad-design"></div>
+                                <div class="rad-text"> Evaluator Settings</div>
                             </label>
 
                             <label class="rad-label">
@@ -121,7 +127,7 @@ $this->title = 'Rank Increasement';
                             </div>
                             <div class="col-lg-5 ScoreSolid">
                                 <div class="progressRank">
-                                    <div class="barent" style="width:15%">
+                                    <div class="barent" style="width:10%">
                                         <span class="percent">F</span>
                                     </div>
                                 </div>
@@ -147,8 +153,8 @@ $this->title = 'Rank Increasement';
                             </div>
                             <div class="col-lg-5 ScoreSolid">
                                 <div class="progressRank">
-                                    <div class="barent" style="width:15%">
-                                        <span class="percent">F</span>
+                                    <div class="barent-1" style="width:10%">
+                                        <span class="percent">E</span>
                                     </div>
                                 </div>
                             </div>
@@ -173,8 +179,8 @@ $this->title = 'Rank Increasement';
                             </div>
                             <div class="col-lg-5 ScoreSolid">
                                 <div class="progressRank">
-                                    <div class="barent" style="width:15%">
-                                        <span class="percent">F</span>
+                                    <div class="barent-2" style="width:10%">
+                                        <span class="percent">D</span>
                                     </div>
                                 </div>
                             </div>
@@ -199,8 +205,8 @@ $this->title = 'Rank Increasement';
                             </div>
                             <div class="col-lg-5 ScoreSolid">
                                 <div class="progressRank">
-                                    <div class="barent" style="width:15%">
-                                        <span class="percent">F</span>
+                                    <div class="barent-3" style="width:10%">
+                                        <span class="percent">C </span>
                                     </div>
                                 </div>
                             </div>
@@ -209,6 +215,32 @@ $this->title = 'Rank Increasement';
                             </div>
                             <div class="col-lg-1 ScoreSolid">
                                 <?= number_format(0.5) ?>
+                            </div>
+                            <div class="col-lg-2 ScoreSolid">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Delete(Round).png" class="DeleteRound">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="alert p-2 trantRow">
+                        <div class="row">
+                            <div class="col-lg-1">
+                                <? $niuu_fortoemat ?>images/icons
+                            </div>
+                            <div class="col-lg-1 ScoreSolid">
+                                <?= number_format(31) ?>-<?= number_format(40) ?>
+                            </div>
+                            <div class="col-lg-5 ScoreSolid">
+                                <div class="progressRank">
+                                    <div class="barent-3" style="width:10%">
+                                        <span class="percent">4</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 ScoreSolid">
+                                <?= number_format(1.5) ?>
+                            </div>
+                            <div class="col-lg-1 ScoreSolid">
+                                <?= number_format(1.59) ?>
                             </div>
                             <div class="col-lg-2 ScoreSolid">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Delete(Round).png" class="DeleteRound">

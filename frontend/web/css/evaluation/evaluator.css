@@ -63,108 +63,104 @@
     font-size: 20px;
 }
 
-.plr-filter {
-    margin-left: -5px;
-    font-size: 8px;
-}
+/* @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap") */
 
-.fafil {
-    font-size: 19px;
-}
 
-.formtermname {
-    font-size: 11px;
-    color: black;
-    font-weight: 500;
-}
-
-.formFrameE1 {
-    font-size: 12px;
-    border-radius: 2px;
-    font-weight: 500;
-    padding-left: 1px;
-}
-
-.Evaluator-ALL {
-    color: gray;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.aler-ALLDepartment {
+.calendar-container {
+    height: auto;
+    width: 400px;
     background-color: white;
-    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.4);
+    padding: 20px 20px;
 }
 
-.transform {
-    text-transform: uppercase;
-    font-size: 14px;
-    color: #373737;
+.calendar-week {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    padding-inline-start: 0px;
 }
 
-.ALL-Departmentform {
-    font-size: 20px;
-    color: gray;
-    font-weight: 600;
-    margin-top: 5px;
+.calendar-week-day {
+    max-width: 57.1px;
+    width: 100%;
+    text-align: center;
+    color: #525659;
 }
 
-.form-control-color {
-    width: 40px;
-}
-
-.Intermediate-solid {
-    border-right: 2px lightgray solid;
-    font-size: 10px;
-}
-
-/* .share-tfw {
-    color: #308FFF;
-    font-size: 25px;
-}
-
-.AccountsTaxations {
-    font-size: 19px;
-}
-
-.ShadowsParticipating {
-    box-shadow: 10px 5px 5px rgb(253, 215, 215);
+.calendar-days {
     margin-top: 30px;
-} */
-.datecalendar {
-    font-size: 9px;
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    /* gap: 20px; */
+    padding-inline-start: 0px;
 }
 
-.datenumber {
-    font-size: 10px;
+.calendar-day {
+    text-align: center;
+    color: #525659;
+    padding: 10px;
 }
 
-.cc-transform {
-    border: none;
-    border-left: 8px rgb(39, 143, 241) solid;
+.calendar-month-arrow-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.transform2yellow {
-    border: none;
-    border-left: 8px #FFDB1F solid;
-}
-
-.ADD {
-    font-size: 14px;
-    margin-top: 15px;
+.calendar-month-year-container {
+    padding: 10px 10px 20px 10px;
+    color: #525659;
     cursor: pointer;
-    padding-left: 15px;
 }
 
-.AddAnother {
-    font-size: 13px;
-    color: #373737;
+.calendar-arrow-container {
+    margin-top: -5px;
 }
 
-.dangeredit {
-    background-color: #D98686;
-    color: white;
+.calendar-left-arrow,
+.calendar-right-arrow {
+    height: 30px;
+    width: 30px;
     border: none;
-    border-radius: 4px;
-    width: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #525659;
+}
+
+.calendar-today-button {
+    margin-top: -10px;
+    border-radius: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #525659;
+    padding: 5px 10px;
+}
+
+.calendar-today-button {
+    height: 27px;
+    margin-right: 10px;
+    background-color: #ec7625;
+    color: white;
+}
+
+.calendar-months,
+.calendar-years {
+    flex: 1;
+    border-radius: 10px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    color: #525659;
+    font-size: 15px;
+}
+
+.calendar-day-active {
+    background-color: #ec7625;
+    color: white;
+    border-radius: 50%;
 }

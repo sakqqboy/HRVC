@@ -336,3 +336,48 @@ div[role="progressbarred"]::after {
     background-position: 0px 0;
     background-size: 40px 40px;
 }
+
+.Profiles {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.selectDefaultPrimary {
+    border-radius: 30px;
+    background-color: #F0F2F4;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.cardPrimaryEvaluator {
+    background-color: #E6EDF3;
+    border: none;
+    border-radius: 1px;
+}
+
+.DepartmentAccounts {
+    width: 20px;
+}
+
+.evaluatorIT {
+    margin-left: 30px;
+    margin-top: 10px
+}
+
+.imageDepartmentIT {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
+
+/* .Accountsborderdark {
+    border: black;
+} */
+
+.SET {
+    background-color: #82BBF0;
+    border: none;
+    width: 60px;
+    font-size: 15px;
+}
