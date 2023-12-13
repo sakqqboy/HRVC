@@ -107,48 +107,157 @@ $this->title = 'Evaluation Frame';
                                     </ul>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-8">
-                        <div class="alert alert-Evaluator">
+                            <div class="col-12 TODAY-TRANS">
+                                today 2/27/2023
+                            </div>
                             <div class="col-12">
-                                <div class="stepper-wrapper">
-                                    <span class="ontop">
-                                        <div class="Start-Date">Start Date</div>
-                                        <img src="<?= Yii::$app->homeUrl ?>image/mon.png" class="imagesmon">
-                                    </span>
-                                    <div class="stepper-item completed">
-                                        <div class="step-counter">E1</div>
+                                <div class="badge bg-Today">
+                                    Intermediate Interview
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="col-12">
+                                            <li class="Note-Today1">
+                                                <span class="number-Today">
+                                                    2/27/2023
+                                                </span>
+                                                <div class="notestartdate">
+                                                    Start Date
+                                                </div>
+                                            </li>
+                                        </div>
                                     </div>
-                                    <div class="stepper-item completed">
-                                        <div class="step-counter">E2</div>
+                                    <div class="col-6">
+                                        <div class="col-12">
+                                            <li class="Note-Today2">
+                                                <span class="number-Today">2/27/2023</span>
+                                                <div class="notefinishdate"> Finiish Date</div>
+                                            </li>
+                                        </div>
                                     </div>
-                                    <div class="stepper-item completed">
-                                        <div class="step-counter">E3</div>
+                                </div>
+                                <div class="badge bg-Today">
+                                    1st Evaluator
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="col-12">
+                                            <li class="Note-Today1">
+                                                <span class="number-Today"> 3/12/2023 </span>
+                                                <div class="notestartdate"> Start Date</div>
+                                            </li>
+                                        </div>
                                     </div>
-                                    <div class="stepper-item completed">
-                                        <div class="step-counter">E4</div>
+                                    <div class="col-6">
+                                        <div class="col-12">
+                                            <li class="Note-Today2">
+                                                <span class="number-Today"> 3/12/2023</span>
+                                                <div class="notefinishdate"> Finiish Date</div>
+                                            </li>
+                                        </div>
                                     </div>
-                                    <div class="stepper-item counter">
-                                        <div class="stepber"></div>
+                                </div>
+                                <div class="badge bg-Today">
+                                    2nd Evaluator
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="col-12">
+                                            <li class="Note-Today1">
+                                                <span class="number-Today"> 3/12/2023 </span>
+                                                <div class="notestartdate"> Start Date</div>
+                                            </li>
+                                        </div>
                                     </div>
-                                    <span class="bottomon">
-                                        <div class="Start-Date">End Date</div>
-                                        <img src="<?= Yii::$app->homeUrl ?>image/mon.png" class="imagesmon">
-                                    </span>
+                                    <div class="col-6">
+                                        <div class="col-12">
+                                            <li class="Note-Today2">
+                                                <span class="number-Today"> 3/12/2023 </span>
+                                                <div class="notefinishdate"> Finish Date</div>
+                                            </li>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="badge bg-Today">
+                                    Summarized Report
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="col-12">
+                                            <li class="Note-Today1">
+                                                <span class="number-Today"> 3/12/2023</span>
+                                                <div class="notefinishdate"> Start Date </div>
+                                            </li>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="col-12">
+                                            <li class="Note-Today2">
+                                                <span class="number-Today"> 3/12/2023 </span>
+                                                <div class="notefinishdate"> Finish Date </div>
+                                            </li>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="badge bg-Today">
+                                    Submit Employee Report
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="col-12">
+                                            <li class="Note-Today1">
+                                                <span class="number-Today"> 3/12/2023</span>
+                                                <div class="notefinishdate"> Start Date </div>
+                                            </li>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="col-12">
+                                            <li class="Note-Today2">
+                                                <span class="number-Today"> 3/12/2023 </span>
+                                                <div class="notefinishdate"> Finish Date </div>
+                                            </li>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="alert alert-dashboard">
+                    </div>
+                    <div class="col-lg-8">
+                        <div class=" alert alert-Evaluator">
                             <div class="col-12">
-                                <div class="row rowTearmduration">
-                                    <div class="col-2">TERMS</div>
-                                    <div class="col-5">START</div>
-                                    <div class="col-3">FINISH</div>
-                                    <div class="col-1">DURATION</div>
+                                <div class="cont"><progress id="nprogress-bar" value="0" max="100"></progress>
+                                    <div id="step">
+                                        <span class="first border-change"><i class="fa fa-calendar" aria-hidden="true"></i>Start Date</span>
+                                        <span class="second"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                        <span class="third"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                        <span class="fourth"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                        <div class="row">
+                                            <div id="first"></div>
+                                            <div id="second"> </div>
+                                            <div id="third"></div>
+                                            <div id="fourth"></div>
+                                        </div>
+
+                                        <img src=" col-12 ทฟแ้ฟะรนืนื" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="">
+                                    </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="alert alert-dashboardE1 mt-30">
+                                <div class="col-12">
+                                    <div class="col-lg-4 col-md-6 co-12"></div>
+                                    <div class="row rowTearmduration">
+                                        <div class="col-2">TERMS</div>
+                                        <div class="col-5">START</div>
+                                        <div class="col-3">FINISH</div>
+                                        <div class="col-1">DURATION</div>
+                                    </div>
+                                </div>
+
                                 <div class="col-12 mt-20">
-                                    <div class="alert p-2 trantRankColor">
+                                    <div class="alert p-2 trantRankColorE1">
                                         <div class="row settingDays">
                                             <div class="col-lg-2">
                                                 <div class="col-12 Startsettingsolid">
@@ -181,7 +290,7 @@ $this->title = 'Evaluation Frame';
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="alert p-2 trantRankColor">
+                                    <div class="alert p-2 trantRankColorE1">
                                         <div class="row settingDays">
                                             <div class="col-lg-2">
                                                 <div class="col-12 Startsettingsolid">
@@ -214,7 +323,7 @@ $this->title = 'Evaluation Frame';
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="alert p-2 trantYellowColor">
+                                    <div class="alert p-2 trantYellowColorE1">
                                         <div class="row settingDays">
                                             <div class="col-lg-2">
                                                 <div class="col-12 Startsettingsolid">
@@ -247,7 +356,7 @@ $this->title = 'Evaluation Frame';
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="alert p-2 trantRankColor">
+                                    <div class="alert p-2 trantRankColorE1">
                                         <div class="row settingDays">
                                             <div class="col-lg-2">
                                                 <div class="col-12 Startsettingsolid">

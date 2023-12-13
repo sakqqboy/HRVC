@@ -63,17 +63,7 @@
     font-size: 20px;
 }
 
-/* @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap") */
 
-
-/* .calendar-container {
-    height: auto;
-    width: 400px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.4);
-    padding: 20px 20px;
-} */
 
 .calendar-week {
     display: flex;
@@ -136,9 +126,8 @@
 
 .calendar-today-button {
     margin-top: -10px;
-    border-radius: 10px;
     border: none;
-    border-radius: 10px;
+    border-radius: 20px;
     cursor: pointer;
     color: #525659;
     padding: 5px 10px;
@@ -175,4 +164,164 @@
 
 .aler-ALLDepartment {
     background-color: white;
+}
+
+.TODAY-TRANS {
+    text-transform: uppercase;
+    color: #308FFF;
+}
+
+.bg-Today {
+    margin-top: 10px;
+    background-color: #DAEDFF;
+    border-radius: 3px;
+    color: #09789B;
+    font-weight: 500;
+    width: 180px;
+    text-align: left;
+}
+
+.Note-Today1 {
+    color: #308FFF;
+    margin-top: 10px;
+    font-size: 22px;
+}
+
+.Note-Today2 {
+    color: #fc4aa0;
+    margin-top: 10px;
+    font-size: 22px;
+}
+
+.number-Today {
+    color: #A6A1A1;
+    font-size: 12px;
+    margin-top: -10px;
+}
+
+.notestartdate {
+    font-size: 12px;
+    color: #A6A1A1;
+    padding-left: 30px;
+}
+
+.notefinishdate {
+    font-size: 12px;
+    color: #A6A1A1;
+    padding-left: 30px;
+}
+
+.imgstart-end {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.mon1 {
+    width: 30px;
+}
+
+
+.cont {
+    height: 100%;
+    left: calc(60% - 300px);
+    padding: 0;
+    margin: -5px;
+    position: absolute;
+}
+
+#nprogress-bar {
+    /* -webkit-appearance: none; */
+    width: 470px;
+    color: #CCC;
+    height: 2px;
+    margin: 0 auto;
+}
+
+#first,
+#second,
+#third,
+#fourth {
+    margin: 0px;
+}
+
+
+#step span {
+    height: 30px;
+    width: 30px;
+    border-radius: 10%;
+    border: 1px solid #CCC;
+    background: #CCCCCC;
+    position: absolute;
+    color: #ffffff;
+    top: -10px;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+}
+
+#step {
+    height: 100px;
+    width: 100%;
+}
+
+#step span i {
+    padding: 8px;
+    font-size: 13px;
+}
+
+#step .first {
+    left: -10px;
+}
+
+
+#step .second {
+    left: 150px;
+}
+
+#step .third {
+    left: 300px;
+}
+
+#step .fourth {
+    left: 450px;
+}
+
+.detail {
+    position: relative;
+}
+
+#nprogress-bar::-webkit-progress-value {
+    background: #049dfe;
+    transition: all 0.4s ease-in-out;
+}
+
+#nprogress-bar::-webkit-progress-bar {
+    background: #CCC;
+}
+
+#step .border-change {
+    border-color: #0077c2;
+    background: #049dfe;
+    transition: all 0.4s ease-in-out;
+}
+
+.alert-dashboardE1 {
+    background-color: #F4F6F9;
+}
+
+.trantRankColorE1 {
+    border-radius: 6px;
+    font-size: 11px;
+    color: black;
+    background-color: #ffffff;
+    border-left: 6px #5CAEF9 solid;
+}
+
+.trantYellowColorE1 {
+    border-radius: 6px;
+    font-size: 11px;
+    color: black;
+    background-color: #ffffff;
+    border-left: 6px #FFDB1F solid;
 }
