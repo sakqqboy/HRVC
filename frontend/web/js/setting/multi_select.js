@@ -10,14 +10,14 @@ input.addEventListener('keydown', function (event) {
         const tag = document.createElement('li');
         const tagContent = input.value.trim();
 
-        
+
         if (tagContent !== '') {
             tag.innerText = tagContent;
-            tag.innerHTML += '<span class="delete-button" id="'+currentId+'" onClick="javascript:deleteTags('+currentId+')">X</span>';
+            tag.innerHTML += '<span class="delete-button" id="' + currentId + '" onClick="javascript:deleteTags(' + currentId + ')">X</span>';
             // tags.appendChild(tag);
             $("#show-text").append(tag);
             $("#currentId").val(nextId);
-            var tagValue = '<input type="hiddin" name="tags[]" id="tag-' + currentId + '" value="'+tagContent+'">';
+            var tagValue = '<input type="hiddin" name="tags[]" id="tag-' + currentId + '" value="' + tagContent + '">';
             $("#tag-value").append(tagValue);
             input.value = '';
 
@@ -32,11 +32,11 @@ input.addEventListener('keydown', function (event) {
          event.target.parentNode.remove();
     }
 });*/
-function deleteTags(id) { 
+function deleteTags(id) {
     tags.addEventListener('click', function (event) {
         if (event.target.classList.contains('delete-button')) {
-             event.target.parentNode.remove();
+            event.target.parentNode.remove();
         }
     });
-    $("#tag-"+id).remove();
+    $("#tag-" + id).remove();
 }

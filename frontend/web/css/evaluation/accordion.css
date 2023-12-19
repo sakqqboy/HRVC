@@ -9,21 +9,14 @@
     margin-left: 20px;
 }
 
-.container-accordion {
-    max-width: 100%;
-}
-
-.all {
-    width: 100%;
+.card-accordion {
     background-color: white;
     border: none;
-    outline: none;
-    text-align: left;
-    padding: 15px 20px;
-    font-size: 18px;
-    color: #333;
-    /* cursor: pointer; */
-    /* transition: background-color 0.2s linear; */
+    border-radius: 4px;
+}
+
+.container-accordion {
+    max-width: 100%;
 }
 
 .accordion {
@@ -32,7 +25,8 @@
     border: none;
     outline: none;
     text-align: left;
-    padding: 15px 20px;
+    /* margin-top: -60px; */
+    /* padding: 15px 20px; */
     font-size: 18px;
     color: #333;
     cursor: pointer;
@@ -66,8 +60,8 @@
 
 .accordion-content {
     background-color: white;
-    border-left: 1px solid whitesmoke;
-    border-right: 1px solid whitesmoke;
+    /* border-left: 1px solid whitesmoke; */
+    /* border-right: 1px solid whitesmoke; */
     padding: 0 20px;
     max-height: 0;
     font-size: 13px;
@@ -77,4 +71,72 @@
 
 .accordion-rank1 {
     width: 20px;
+}
+
+.bg-sprank1 {
+    background-color: #D5E5ED;
+}
+
+.Manager {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.bg-primary-MM {
+    background-color: #308FFF;
+}
+
+.accordion-3Dot {
+    width: 15px;
+    margin-top: -6px;
+}
+
+.accordion-dot {
+    width: 15px;
+    text-align: right;
+}
+
+.B {
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.accordion-Included {
+    font-size: 9px;
+    color: #7E7E7E;
+    margin-left: 45px;
+    padding-top: 5px;
+}
+
+.accordion-C9E5FF {
+    border-color: #C9E5FF;
+    font-size: 11px;
+    border-radius: 30px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+.Minimum {
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.accordion-minimum-solid {
+    border-bottom: 1px #000000 dashed;
+    position: absolute;
+    height: 0px;
+    width: 300px;
+    margin-top: 40px;
+}
+
+.accordion-D6FFDF {
+    background-color: #D6FFDF;
+    border-radius: 20px;
+    border-color: #32BD1B;
+    margin-top: 24px;
+    font-size: 11px;
+}
+
+.accordion-UP {
+    width: 6px;
 }

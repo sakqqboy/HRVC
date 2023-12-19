@@ -239,23 +239,123 @@ $this->title = 'Salary Allowance';
 
                     <div class="col-12">
                         <div class="container-accordion">
-                            <div class="all">
-                                <div class="accordion">Website Analytics and Performance</div>
-                            </div>
-                            <div class="accordion-content">
-                                <hr>
-                                <p>
-                                    We believe that in order to have a successful website, you need to constantly adjust and adapt to the data provided by your website visitors. Here at Pierre Web Development, we have narrowed down the specific key performance indicators that will dramatically boost your success with connecting to target markets. We will provide a basic metric dashboard based on how much traffic your site gets, detailed analytical reports that show which parts of your website is the most popular among visitors as well as access to tools you can use to make meaningful decisions based on this data.
-                                </p>
-                            </div>
+                            <div class="col-12 card card-accordion">
+                                <div class="col-6">
+                                    <span class="badge bg-sprank1"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Rank-1.png" class="accordion-rank1"></span> &nbsp;<span class="Manager">Manager</span> &nbsp;<span class="badge rounded-pill bg-primary-MM">MM</span>
+                                </div>
+                                <div class="col-12 mt-20">
+                                    <div class="row">
+                                        <div class="col-lg-1 col-md-6 col-12">
+                                            <span class="badge rounded-pill bg-gray">
+                                                <ul class="try-cricle">
+                                                    <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
+                                                    <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
+                                                    <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar3"></li>
+                                                    <a href="" class="none">
+                                                        <li class="tri-li-number1 pt-3"> 9 </li>
+                                                    </a>
+                                                </ul>
+                                            </span>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6 col-12 accordion-Included">
+                                            Included Employees
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Achievement.png" class="accordion-3Dot"><span class="B">B</span>
+                                        </div>
 
-                            <div class="mt-10"></div>
-                            <button class="accordion">Digital Marketing</button>
-                            <div class="accordion-content">
-                                <hr>
-                                <p>
-                                    We know that every great website focuses on helping you get more business and building a brand that your ideal customers will love and support. We can help you set up a great, SEO-focused content strategy, a paid ads campaign, email marketing integration with Mailchimp as well as a social media marketing campaign. We also use popular website analytic tools to track your site's performance and provide you with weekly analytic reports to help bolster your growth.
-                                </p>
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <div class="col-12 accordion-minimum-solid"></div>
+                                            <div class="row">
+                                                <div class="col-12 Minimum"> Minimum <span class="text-primary">0%</span></div>
+                                                <div class="col-2 card accordion-C9E5FF">
+                                                    <?= number_format(13291) ?>
+                                                </div>
+                                                <div class="col-2 card accordion-C9E5FF">
+                                                    <?= number_format(18017) ?>
+                                                </div>
+                                                <div class="col-2 card accordion-C9E5FF">
+                                                    <?= number_format(22743) ?>
+                                                </div>
+                                                <div class="col-2 card accordion-C9E5FF">
+                                                    <?= number_format(27470) ?>
+                                                </div>
+                                                <div class="col-2 card accordion-C9E5FF">
+                                                    <?= number_format(32196) ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-1 col-md-6 col-12">
+                                            <span class="badge rounded-pill bg-success">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/UP.png" class="accordion-UP"> <?= number_format(638) ?>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion"></div>
+                                <div class="accordion-content">
+                                    <hr>
+                                    <p>fvfioggogkmoi</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-accordion">
+                            <div class="col-12 card card-accordion">
+                                <div class="col-6">
+                                    <span class="badge bg-sprank1"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Rank-1.png" class="accordion-rank1"></span> &nbsp;<span class="Manager">Assistant Manager</span> &nbsp;<span class="badge rounded-pill bg-primary-MM">MM</span>
+                                </div>
+                                <div class="col-12 mt-20">
+                                    <div class="row">
+                                        <div class="col-lg-1 col-md-6 col-12">
+                                            <span class="badge rounded-pill bg-gray">
+                                                <ul class="try-cricle">
+                                                    <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
+                                                    <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
+                                                    <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar3"></li>
+                                                    <a href="" class="none">
+                                                        <li class="tri-li-number1 pt-3"> 9 </li>
+                                                    </a>
+                                                </ul>
+                                            </span>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6 col-12 accordion-Included">
+                                            Included Employees
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Achievement.png" class="accordion-3Dot"><span class="B">B</span>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <div class="col-12 accordion-minimum-solid"></div>
+                                            <div class="row">
+                                                <div class="col-12 Minimum"> Minimum <span class="text-primary">0%</span></div>
+                                                <div class="col-2 card accordion-C9E5FF">
+                                                    <?= number_format(13291) ?>
+                                                </div>
+                                                <div class="col-2 card accordion-C9E5FF">
+                                                    <?= number_format(18017) ?>
+                                                </div>
+                                                <div class="col-2 card accordion-C9E5FF">
+                                                    <?= number_format(22743) ?>
+                                                </div>
+                                                <div class="col-2 card accordion-C9E5FF">
+                                                    <?= number_format(27470) ?>
+                                                </div>
+                                                <div class="col-2 card accordion-C9E5FF">
+                                                    <?= number_format(32196) ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-1 col-md-6 col-12 ">
+                                            <div class="col-12">
+                                                <span class="badge rounded-pill bg-success">
+                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/UP.png" class="accordion-UP"> <?= number_format(638) ?>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion"></div>
+                                <div class="accordion-content">
+                                    <hr>
+                                    <p>fvfioggogkmoi</p>
+                                </div>
                             </div>
                         </div>
                     </div>
