@@ -83,7 +83,7 @@ $this->title = 'Rank Increasement';
             <div class="alert aler-ALLDepartment">
                 <div class="row">
                     <div class="col-lg-3">
-                        <div class="col-12 FrameEvaluation">
+                        <div class="col-12 Framerank">
                             Rank & Incasement
                         </div>
                     </div>
@@ -100,10 +100,10 @@ $this->title = 'Rank Increasement';
                             <div class="col-lg-1">
                                 Rank
                             </div>
-                            <div class="col-lg-1">
+                            <div class="col-lg-3 text-center">
                                 Score
                             </div>
-                            <div class="col-lg-5 text-center">
+                            <div class="col-lg-4 text-center">
                                 evaluation score
                             </div>
                             <div class="col-lg-2">
@@ -112,24 +112,25 @@ $this->title = 'Rank Increasement';
                             <div class="col-lg-1">
                                 bonus
                             </div>
-                            <div class="col-lg-2">
+                            <div class="col-lg-1">
                                 Action
                             </div>
                         </div>
                     </div>
                     <div class="alert p-2 trantRow">
                         <div class="row">
-                            <div class="col-lg-1">
+                            <div class="col-lg-1 letter">
                                 F
                             </div>
-                            <div class="col-lg-1 ScoreSolid">
+                            <div class="col-lg-3 ScoreSolid text-center">
                                 <?= number_format(0) ?>-<?= number_format(11) ?>
                             </div>
-                            <div class="col-lg-5 ScoreSolid">
+                            <div class="col-lg-4 ScoreSolid">
                                 <div class="progressRank">
-                                    <div class="barent" style="width:10%">
-                                        <span class="percent">F</span>
+                                    <div class="barent" style="width:15%">
+                                        <span class="percent"></span>
                                     </div>
+                                    <span class="badge badge-percent">F</span>
                                 </div>
                             </div>
                             <div class="col-lg-2 ScoreSolid">
@@ -138,24 +139,25 @@ $this->title = 'Rank Increasement';
                             <div class="col-lg-1 ScoreSolid">
                                 <?= number_format(0.0) ?>
                             </div>
-                            <div class="col-lg-2 ScoreSolid">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Delete(Round).png" class="DeleteRound">
+                            <div class="col-lg-1 ScoreSolid">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/deletered.png" class="DeleteRound">
                             </div>
                         </div>
                     </div>
                     <div class="alert p-2 trantRow">
                         <div class="row">
-                            <div class="col-lg-1">
+                            <div class="col-lg-1 letter">
                                 E
                             </div>
-                            <div class="col-lg-1 ScoreSolid">
+                            <div class="col-lg-3 ScoreSolid text-center">
                                 <?= number_format(11) ?>-<?= number_format(20) ?>
                             </div>
-                            <div class="col-lg-5 ScoreSolid">
+                            <div class="col-lg-4 ScoreSolid">
                                 <div class="progressRank">
-                                    <div class="barent-1" style="width:10%">
-                                        <span class="percent">E</span>
+                                    <div class="barent-1" style="width:15%">
+                                        <span class="percent"></span>
                                     </div>
+                                    <span class="badge badge-percent">E</span>
                                 </div>
                             </div>
                             <div class="col-lg-2 ScoreSolid">
@@ -164,24 +166,25 @@ $this->title = 'Rank Increasement';
                             <div class="col-lg-1 ScoreSolid">
                                 <?= number_format(0.0) ?>
                             </div>
-                            <div class="col-lg-2 ScoreSolid">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Delete(Round).png" class="DeleteRound">
+                            <div class="col-lg-1 ScoreSolid">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/deletered.png" class="DeleteRound">
                             </div>
                         </div>
                     </div>
                     <div class="alert p-2 trantRow">
                         <div class="row">
-                            <div class="col-lg-1">
+                            <div class="col-lg-1 letter">
                                 D
                             </div>
-                            <div class="col-lg-1 ScoreSolid">
+                            <div class="col-lg-3 ScoreSolid text-center">
                                 <?= number_format(21) ?>-<?= number_format(30) ?>
                             </div>
-                            <div class="col-lg-5 ScoreSolid">
+                            <div class="col-lg-4 ScoreSolid">
                                 <div class="progressRank">
-                                    <div class="barent-2" style="width:10%">
-                                        <span class="percent">D</span>
+                                    <div class="barent-2" style="width:15%">
+                                        <span class="percent"></span>
                                     </div>
+                                    <span class="badge badge-percent">D</span>
                                 </div>
                             </div>
                             <div class="col-lg-2 ScoreSolid">
@@ -190,24 +193,25 @@ $this->title = 'Rank Increasement';
                             <div class="col-lg-1 ScoreSolid">
                                 <?= number_format(0.0) ?>
                             </div>
-                            <div class="col-lg-2 ScoreSolid">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Delete(Round).png" class="DeleteRound">
+                            <div class="col-lg-1 ScoreSolid">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/deletered.png" class="DeleteRound">
                             </div>
                         </div>
                     </div>
                     <div class="alert p-2 trantRow">
                         <div class="row">
-                            <div class="col-lg-1">
+                            <div class="col-lg-1 letter">
                                 C
                             </div>
-                            <div class="col-lg-1 ScoreSolid">
+                            <div class="col-lg-3 ScoreSolid text-center">
                                 <?= number_format(31) ?>-<?= number_format(40) ?>
                             </div>
-                            <div class="col-lg-5 ScoreSolid">
+                            <div class="col-lg-4 ScoreSolid">
                                 <div class="progressRank">
-                                    <div class="barent-3" style="width:10%">
-                                        <span class="percent">C </span>
+                                    <div class="barent-3" style="width:15%">
+                                        <span class="percent"></span>
                                     </div>
+                                    <span class="badge badge-percent">C</span>
                                 </div>
                             </div>
                             <div class="col-lg-2 ScoreSolid">
@@ -216,24 +220,25 @@ $this->title = 'Rank Increasement';
                             <div class="col-lg-1 ScoreSolid">
                                 <?= number_format(0.5) ?>
                             </div>
-                            <div class="col-lg-2 ScoreSolid">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Delete(Round).png" class="DeleteRound">
+                            <div class="col-lg-1 ScoreSolid">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/deletered.png" class="DeleteRound">
                             </div>
                         </div>
                     </div>
                     <div class="alert p-2 trantRow">
                         <div class="row">
-                            <div class="col-lg-1">
-                                <? $niuu_fortoemat ?>images/icons
+                            <div class="col-lg-1 letter">
+                                S
                             </div>
-                            <div class="col-lg-1 ScoreSolid">
+                            <div class="col-lg-3 ScoreSolid text-center">
                                 <?= number_format(31) ?>-<?= number_format(40) ?>
                             </div>
-                            <div class="col-lg-5 ScoreSolid">
+                            <div class="col-lg-4 ScoreSolid">
                                 <div class="progressRank">
-                                    <div class="barent-3" style="width:10%">
-                                        <span class="percent">4</span>
+                                    <div class="barent-4" style="width:15%">
+                                        <span class="percent"></span>
                                     </div>
+                                    <span class="badge badge-percent">S</span>
                                 </div>
                             </div>
                             <div class="col-lg-2 ScoreSolid">
@@ -242,8 +247,41 @@ $this->title = 'Rank Increasement';
                             <div class="col-lg-1 ScoreSolid">
                                 <?= number_format(1.59) ?>
                             </div>
+                            <div class="col-lg-1 ScoreSolid">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/deletered.png" class="DeleteRound">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="alert p-2 trantRow">
+                        <div class="row">
+                            <div class="col-lg-1 letter">
+                                <input type="text" class="form-control numfixletter" placeholder="RANK">
+                            </div>
+                            <div class="col-lg-3 ScoreSolid">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <input type="text" class="form-control numfix" placeholder="Score">
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control numfix" placeholder="Score">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 ScoreSolid">
+                                <div class="progressRank">
+                                    <div class="barent">
+                                        <span class="percent"></span>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-lg-2 ScoreSolid">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Delete(Round).png" class="DeleteRound">
+                                <input type="text" class="form-control numfix" placeholder="Increment">
+                            </div>
+                            <div class="col-lg-1 ScoreSolid">
+                                <input type="text" class="form-control numfixbonus" placeholder="Bonus">
+                            </div>
+                            <div class="col-lg-1 ScoreSolid">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/deletered.png" class="DeleteRound">
                             </div>
                         </div>
                     </div>

@@ -38,6 +38,7 @@
 
 .ScoreSolid {
     border-left: 2px lightgray solid;
+    font-size: 12px;
 }
 
 .progressRank {
@@ -86,9 +87,18 @@
     height: 100%;
     border: 10px;
     background: #1862e8;
-    margin-left: 105px;
+    margin-left: 100px;
 }
 
+.barent-4 {
+    position: relative;
+    float: left;
+    min-width: 1%;
+    height: 100%;
+    border: 10px;
+    background: #1862e8;
+    margin-left: 125px;
+}
 
 .percent {
     position: absolute;
@@ -104,5 +114,45 @@
 }
 
 .DeleteRound {
-    width: 20px;
+    width: 14px;
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+.letter {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.numfix {
+    width: 55px;
+    height: 25px;
+    font-size: 10px;
+}
+
+.numfixletter {
+    width: 35px;
+    height: 25px;
+    font-size: 10px;
+}
+
+.numfixbonus {
+    width: 40px;
+    height: 25px;
+    font-size: 10px;
+}
+
+.Framerank {
+    font-weight: 700;
+    font-size: 18px;
+    padding-top: 3px;
+}
+
+.badge-percent {
+    background-color: #5CAEF9;
+    border-radius: 3px;
+    margin-top: -5px;
+    height: 18px;
+    position: absolute;
+    margin-left: -3%;
 }
