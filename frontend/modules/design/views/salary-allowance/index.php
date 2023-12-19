@@ -179,11 +179,11 @@ $this->title = 'Salary Allowance';
                     <div class="row">
                         <div class="col-3">
                             <div class="col-12">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Vector.png" class="pictureDepartment-salary"> <strong class="font-size-12"> Accounts & Taxation</strong>
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Vector.png" class="pictureDepartment-salary"> <span class="linkAccounts"> Accounts & Taxation</ห>
                             </div>
                         </div>
-                        <div class="col-2">
-                            <span class="badge rounded-pill bg-gray">
+                        <div class="col-1">
+                            <span class="badge rounded-pill bg-gray bordertry-li1">
                                 <ul class="try-cricle">
                                     <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
                                     <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
@@ -193,6 +193,11 @@ $this->title = 'Salary Allowance';
                                     </a>
                                 </ul>
                             </span>
+                        </div>
+                        <div class="col-1">
+                            <div class="salary-Participating">
+                                Participating Employees
+                            </div>
                         </div>
                         <div class="col-4">
                             <div class="alert alert-Achievement1">
@@ -231,14 +236,31 @@ $this->title = 'Salary Allowance';
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Selected-3.png" class="UpdownSelected" type="button">
                         </div>
                     </div>
+
+                    <div class="col-12">
+                        <div class="container-accordion">
+                            <div class="all">
+                                <div class="accordion">Website Analytics and Performance</div>
+                            </div>
+                            <div class="accordion-content">
+                                <hr>
+                                <p>
+                                    We believe that in order to have a successful website, you need to constantly adjust and adapt to the data provided by your website visitors. Here at Pierre Web Development, we have narrowed down the specific key performance indicators that will dramatically boost your success with connecting to target markets. We will provide a basic metric dashboard based on how much traffic your site gets, detailed analytical reports that show which parts of your website is the most popular among visitors as well as access to tools you can use to make meaningful decisions based on this data.
+                                </p>
+                            </div>
+
+                            <div class="mt-10"></div>
+                            <button class="accordion">Digital Marketing</button>
+                            <div class="accordion-content">
+                                <hr>
+                                <p>
+                                    We know that every great website focuses on helping you get more business and building a brand that your ideal customers will love and support. We can help you set up a great, SEO-focused content strategy, a paid ads campaign, email marketing integration with Mailchimp as well as a social media marketing campaign. We also use popular website analytic tools to track your site's performance and provide you with weekly analytic reports to help bolster your growth.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
-<div class="col-9 border pl-40">
-    <div class="salary-Participating">
-        Participating Employees
     </div>
 </div>
