@@ -25,7 +25,7 @@
     border: none;
     outline: none;
     text-align: left;
-    /* margin-top: -60px; */
+    margin-top: 10px;
     /* padding: 15px 20px; */
     font-size: 18px;
     color: #333;
@@ -36,14 +36,12 @@
 .accordion:after {
     font-family: FontAwesome;
     content: "\f106";
-    border: 1px black solid;
+    border: 1px rgb(116, 116, 116) solid;
     border-radius: 4px;
-    padding-left: 8px;
+    padding-left: 5px;
     padding-right: 4px;
-    padding-bottom: 4px;
-    padding-top: 1px;
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 24px;
     font-family: "fontawesome";
     font-size: 18px;
     float: right;
@@ -105,12 +103,12 @@
     font-size: 9px;
     color: #7E7E7E;
     margin-left: 45px;
-    padding-top: 5px;
+    padding-top: 30px;
 }
 
 .accordion-C9E5FF {
     border-color: #C9E5FF;
-    font-size: 11px;
+    font-size: 10px;
     border-radius: 30px;
     text-align: center;
     margin-left: 10px;
@@ -119,6 +117,10 @@
 .Minimum {
     font-size: 10px;
     font-weight: 600;
+}
+
+.accordionpl_minimum {
+    margin-left: -55px;
 }
 
 .accordion-minimum-solid {
@@ -138,7 +140,16 @@
 }
 
 .accordion-UP {
-    width: 6px;
+    width: 11px;
+}
+
+.bg-D6FFDF {
+    margin-top: 30px;
+    padding-bottom: 7px;
+    padding-left: 4px;
+    padding-right: 10px;
+    background-color: #D6FFDF;
+    color: #0E7318;
 }
 
 #salary_scrollbar::-webkit-scrollbar-track {
@@ -213,7 +224,8 @@
 }
 
 .classA {
-    font-size: 9px;
+    font-size: 10px;
+    font-weight: 700;
     text-align: center;
     background-color: #87CDFF;
 }
@@ -232,8 +244,54 @@
     width: 10px;
 }
 
-.classhr {
-    border-style: 2px solid dashed;
-    width: 8px;
-    height: 1px;
+.stepname {
+    font-size: 13px;
+    color: #585858;
+}
+
+.colorAllowance {
+    color: #585858;
+}
+
+input[value="clickAllowance"]:checked+label {
+    font-weight: 500;
+}
+
+input[value="Allowance2"]:checked+label {
+    font-weight: 500;
+}
+
+
+.accordionAddLayer {
+    width: 15px;
+    margin-top: -5px;
+}
+
+.addleyer {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.cursor_AddLayer {
+    cursor: pointer;
+}
+
+.alert-ffff {
+    background-color: white;
+    border-radius: 4px;
+}
+
+.Allowance2-solid {
+    border-left: 1px #B8B8B8 solid;
+    font-size: 8px;
+    padding-top: 5px;
+}
+
+.Qualification-Allowance {
+    font-size: 8px;
+}
+
+.DeleteRound1 {
+    width: 10px;
+    cursor: pointer;
 }

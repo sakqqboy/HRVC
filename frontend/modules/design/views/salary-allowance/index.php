@@ -246,7 +246,7 @@ $this->title = 'Salary Allowance';
                                 <div class="col-12 mt-20">
                                     <div class="row">
                                         <div class="col-lg-1 col-md-6 col-12">
-                                            <span class="badge rounded-pill bg-gray">
+                                            <span class="badge rounded-pill bg-gray mt-30">
                                                 <ul class="try-cricle">
                                                     <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
                                                     <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
@@ -264,7 +264,7 @@ $this->title = 'Salary Allowance';
 
                                         <div class="col-lg-6 col-md-6 col-12">
                                             <div class="col-12 accordion-minimum-solid"></div>
-                                            <div class="row">
+                                            <div class="row accordionpl_minimum">
                                                 <div class="col-12 Minimum"> Minimum <span class="text-primary">0%</span></div>
                                                 <div class="col-2 card accordion-C9E5FF">
                                                     <?= number_format(13291) ?>
@@ -284,7 +284,7 @@ $this->title = 'Salary Allowance';
                                             </div>
                                         </div>
                                         <div class="col-lg-1 col-md-6 col-12">
-                                            <span class="badge rounded-pill bg-success">
+                                            <span class="badge rounded-pill bg-D6FFDF">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/UP.png" class="accordion-UP"> <?= number_format(638) ?>
                                             </span>
                                         </div>
@@ -305,7 +305,7 @@ $this->title = 'Salary Allowance';
                                 <div class="col-12 mt-20">
                                     <div class="row">
                                         <div class="col-lg-1 col-md-6 col-12">
-                                            <span class="badge rounded-pill bg-gray">
+                                            <span class="badge rounded-pill bg-gray mt-30">
                                                 <ul class="try-cricle">
                                                     <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
                                                     <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
@@ -344,7 +344,7 @@ $this->title = 'Salary Allowance';
                                         </div>
                                         <div class="col-lg-1 col-md-6 col-12 ">
                                             <div class="col-12">
-                                                <span class="badge rounded-pill bg-success">
+                                                <span class="badge rounded-pill bg-D6FFDF">
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/UP.png" class="accordion-UP"> <?= number_format(638) ?>
                                                 </span>
                                             </div>
@@ -366,7 +366,7 @@ $this->title = 'Salary Allowance';
                                 <div class="col-12 mt-20">
                                     <div class="row">
                                         <div class="col-lg-1 col-md-6 col-12">
-                                            <span class="badge rounded-pill bg-gray">
+                                            <span class="badge rounded-pill bg-gray mt-30">
                                                 <ul class="try-cricle">
                                                     <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
                                                     <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
@@ -405,7 +405,7 @@ $this->title = 'Salary Allowance';
                                         </div>
                                         <div class="col-lg-1 col-md-6 col-12 ">
                                             <div class="col-12">
-                                                <span class="badge rounded-pill bg-success">
+                                                <span class="badge rounded-pill bg-D6FFDF">
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/UP.png" class="accordion-UP"> <?= number_format(638) ?>
                                                 </span>
                                             </div>
@@ -508,34 +508,91 @@ $this->title = 'Salary Allowance';
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4 col-md-6 col-12 alert alert-F5F5F5">
-                                            <div class="col-12">
+                                        <div class="col-lg-4 col-md-6 col-12  alert alert-Evaluator scrollbar-salaryallowanec" id="salary_scrollbar">
+                                            <div class="col-12 stepname">
                                                 Rank & Salary Increment
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-5 border">
-                                                    <!-- <div class="card text-dark bg-light mb-3" style="border:none;">
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-12">
+                                                    <div class="card" style="width: 4rem;font-size:12px;margin-left:-10px;">
                                                         <div class="card-header classA">A+</div>
-                                                        <div class="card-body">
-                                                            <div class="card-text classtext">
-                                                                <div> <?= number_format(879) ?></div>
-                                                                <div class="classhr"></div>
-                                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/link1.png" class="accordionlink1">
-                                                                <div class="classhr"></div>
-                                                                <div><?= number_format(36) ?>%</div>
+                                                        <div class="card-body text-dark">
+                                                            <div class="col-12 text-center classtext">
+                                                                <?= number_format(879) ?>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="col-12 text-dark text-center pt-10">
+                                                                <?= number_format(35) ?>%
                                                             </div>
                                                         </div>
-                                                    </div> -->
-                                                    <div class="card" style="width: 4rem;font-size:12px;">
-                                                        <div class="card-header fonTotal">Total Sales</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-12">
+                                                    <div class="card" style="width: 4rem;font-size:12px;margin-left:-10px;">
+                                                        <div class="card-header classA">A+</div>
                                                         <div class="card-body text-dark">
-                                                            <div class="col-12 text-center">
-                                                                <span class="badge bg-lighttotal text-primary">
-                                                                    598k
-                                                                </span>
+                                                            <div class="col-12 text-center classtext">
+                                                                <?= number_format(879) ?>
                                                             </div>
-                                                            <div class="col-12 text-primary text-center pt-10">
-                                                                23%
+                                                            <hr>
+                                                            <div class="col-12 text-dark text-center pt-10">
+                                                                <?= number_format(35) ?>%
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4col-sm-4 col-12">
+                                                    <div class="card" style="width: 3.9rem;font-size:12px;margin-left:-10px;">
+                                                        <div class="card-header classA">A+</div>
+                                                        <div class="card-body text-dark">
+                                                            <div class="col-12 text-center classtext">
+                                                                <?= number_format(879) ?>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="col-12 text-dark text-center pt-10">
+                                                                <?= number_format(35) ?>%
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-12">
+                                                    <div class="card" style="width: 4rem;font-size:12px;margin-left:-10px;">
+                                                        <div class="card-header classA">A+</div>
+                                                        <div class="card-body text-dark">
+                                                            <div class="col-12 text-center classtext">
+                                                                <?= number_format(879) ?>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="col-12 text-dark text-center pt-10">
+                                                                <?= number_format(35) ?>%
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-12">
+                                                    <div class="card" style="width: 4rem;font-size:12px;margin-left:-10px;">
+                                                        <div class="card-header classA">A+</div>
+                                                        <div class="card-body text-dark">
+                                                            <div class="col-12 text-center classtext">
+                                                                <?= number_format(879) ?>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="col-12 text-dark text-center pt-10">
+                                                                <?= number_format(35) ?>%
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4col-sm-4 col-12">
+                                                    <div class="card" style="width: 3.9rem;font-size:12px;margin-left:-10px;">
+                                                        <div class="card-header classA">A+</div>
+                                                        <div class="card-body text-dark">
+                                                            <div class="col-12 text-center classtext">
+                                                                <?= number_format(879) ?>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="col-12 text-dark text-center pt-10">
+                                                                <?= number_format(35) ?>%
                                                             </div>
                                                         </div>
                                                     </div>
@@ -543,7 +600,65 @@ $this->title = 'Salary Allowance';
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-6 col-12 alert alert-Evaluator scrollbar-salaryallowanec" id="salary_scrollbar">
-                                            fghgg
+                                            <div class="row ">
+                                                <div class="col-6">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="clickAllowance">
+                                                        <label class="form-check-label colorAllowance" for="inlineCheckbox1">Allowance</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 text-end cursor_AddLayer">
+                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Add-Layer.png" class="accordionAddLayer"><span class="addleyer"> Add</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 p-2 alert alert-ffff">
+                                                <div class="row">
+                                                    <div class="col-lg-7">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="Allowance2" id="">
+                                                            <label class="form-check-label Qualification-Allowance" for=""> Qualification Allowance </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 Allowance2-solid">
+                                                        <?= number_format(1000) ?>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <img src="/HRVC/frontend/web/images/icons/Dark/48px/deletered.png" class="DeleteRound1">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 p-2 alert alert-ffff">
+                                                <div class="row">
+                                                    <div class="col-lg-7">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="Allowance2" id="">
+                                                            <label class="form-check-label Qualification-Allowance" for=""> Food Allowance </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 Allowance2-solid">
+                                                        <?= number_format(250) ?>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <img src="/HRVC/frontend/web/images/icons/Dark/48px/deletered.png" class="DeleteRound1">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 p-2 alert alert-ffff">
+                                                <div class="row">
+                                                    <div class="col-lg-7">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="Allowance2" id="">
+                                                            <label class="form-check-label Qualification-Allowance" for=""> Travelling Allowance </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 Allowance2-solid">
+                                                        <?= number_format(1200) ?>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <img src="/HRVC/frontend/web/images/icons/Dark/48px/deletered.png" class="DeleteRound1">
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
