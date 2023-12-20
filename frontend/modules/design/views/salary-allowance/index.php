@@ -354,7 +354,198 @@ $this->title = 'Salary Allowance';
                                 <div class="accordion"></div>
                                 <div class="accordion-content">
                                     <hr>
-                                    <p>fvfioggogkmoi</p>
+                                    <p>fgkothotlroogokfgk</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-accordion">
+                            <div class="col-12 card card-accordion">
+                                <div class="col-6">
+                                    <span class="badge bg-sprank1"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Rank-1.png" class="accordion-rank1"></span> &nbsp;<span class="Manager">Junior Executive</span> &nbsp;<span class="badge rounded-pill bg-primary-MM">LM</span>
+                                </div>
+                                <div class="col-12 mt-20">
+                                    <div class="row">
+                                        <div class="col-lg-1 col-md-6 col-12">
+                                            <span class="badge rounded-pill bg-gray">
+                                                <ul class="try-cricle">
+                                                    <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
+                                                    <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
+                                                    <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar3"></li>
+                                                    <a href="" class="none">
+                                                        <li class="tri-li-number1 pt-3"> 9 </li>
+                                                    </a>
+                                                </ul>
+                                            </span>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6 col-12 accordion-Included">
+                                            Included Employees
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Achievement.png" class="accordion-3Dot"><span class="B">B</span>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <div class="col-12 accordion-minimum-solid"></div>
+                                            <div class="row">
+                                                <div class="col-12 Minimum"> Minimum <span class="text-primary">0%</span></div>
+                                                <div class="col-2 card accordion-C9E5FF">
+                                                    <?= number_format(13291) ?>
+                                                </div>
+                                                <div class="col-2 card accordion-C9E5FF">
+                                                    <?= number_format(18017) ?>
+                                                </div>
+                                                <div class="col-2 card accordion-C9E5FF">
+                                                    <?= number_format(22743) ?>
+                                                </div>
+                                                <div class="col-2 card accordion-C9E5FF">
+                                                    <?= number_format(27470) ?>
+                                                </div>
+                                                <div class="col-2 card accordion-C9E5FF">
+                                                    <?= number_format(32196) ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-1 col-md-6 col-12 ">
+                                            <div class="col-12">
+                                                <span class="badge rounded-pill bg-success">
+                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/UP.png" class="accordion-UP"> <?= number_format(638) ?>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion"></div>
+                                <div class="accordion-content">
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-6 col-12 alert alert-Evaluator scrollbar-salaryallowanec" id="salary_scrollbar">
+                                            <div class="row">
+                                                <div class="col-md-6 tablesalary1">
+                                                    Employees
+                                                </div>
+                                                <div class="col-md-3 tablesalary1">
+                                                    Current
+                                                </div>
+                                                <div class="col-md-3 tablesalary1">
+                                                    Rank
+                                                </div>
+                                            </div>
+                                            <div class="col-12 alert p-2 salaryalert">
+                                                <div class="row allclass">
+                                                    <div class="col-lg-6 tableclass1">
+                                                        <div class="col-12">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="accordion-profile"><span class="namesalary">Ananta Kumar</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 tableclass1">
+                                                        <?= number_format(1200) ?>
+                                                    </div>
+                                                    <div class="col-lg-3 tableA">
+                                                        A+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-5"></div>
+                                            <div class="col-12 alert p-2 salaryalert">
+                                                <div class="row allclass">
+                                                    <div class="col-lg-6 tableclass1">
+                                                        <div class="col-12">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="accordion-profile"><span class="namesalary">Chalse Vortocharjjo</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 tableclass1">
+                                                        <?= number_format(1200) ?>
+                                                    </div>
+                                                    <div class="col-lg-3 tableA">
+                                                        B+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-5"></div>
+                                            <div class="col-12 alert p-2 salaryalert">
+                                                <div class="row allclass">
+                                                    <div class="col-lg-6 tableclass1">
+                                                        <div class="col-12">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="accordion-profile"><span class="namesalary">Shutra Dhar</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 tableclass1">
+                                                        <?= number_format(1200) ?>
+                                                    </div>
+                                                    <div class="col-lg-3 tableA">
+                                                        SS
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-5"></div>
+                                            <div class="col-12 alert p-2 salaryalert">
+                                                <div class="row allclass">
+                                                    <div class="col-lg-6 tableclass1">
+                                                        <div class="col-12">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="accordion-profile"><span class="namesalary">Kazi Nazrul Islam</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 tableclass1">
+                                                        <?= number_format(22000) ?>
+                                                    </div>
+                                                    <div class="col-lg-3 tableA">
+                                                        S+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-5"></div>
+                                            <div class="col-12 alert p-2 salaryalert">
+                                                <div class="row allclass">
+                                                    <div class="col-lg-6 tableclass1">
+                                                        <div class="col-12">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="accordion-profile"><span class="namesalary">Robindro Nath Thakur</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 tableclass1">
+                                                        <?= number_format(36000) ?>
+                                                    </div>
+                                                    <div class="col-lg-3 tableA">
+                                                        D-
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-12 alert alert-F5F5F5">
+                                            <div class="col-12">
+                                                Rank & Salary Increment
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-5 border">
+                                                    <!-- <div class="card text-dark bg-light mb-3" style="border:none;">
+                                                        <div class="card-header classA">A+</div>
+                                                        <div class="card-body">
+                                                            <div class="card-text classtext">
+                                                                <div> <?= number_format(879) ?></div>
+                                                                <div class="classhr"></div>
+                                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/link1.png" class="accordionlink1">
+                                                                <div class="classhr"></div>
+                                                                <div><?= number_format(36) ?>%</div>
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+                                                    <div class="card" style="width: 4rem;font-size:12px;">
+                                                        <div class="card-header fonTotal">Total Sales</div>
+                                                        <div class="card-body text-dark">
+                                                            <div class="col-12 text-center">
+                                                                <span class="badge bg-lighttotal text-primary">
+                                                                    598k
+                                                                </span>
+                                                            </div>
+                                                            <div class="col-12 text-primary text-center pt-10">
+                                                                23%
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-12 alert alert-Evaluator scrollbar-salaryallowanec" id="salary_scrollbar">
+                                            fghgg
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

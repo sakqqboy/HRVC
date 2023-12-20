@@ -140,3 +140,100 @@
 .accordion-UP {
     width: 6px;
 }
+
+#salary_scrollbar::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+.tablesalary1 {
+    font-size: 8px;
+    font-weight: 600;
+    color: #585858;
+}
+
+.accordion-profile {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.salaryalert {
+    background-color: white;
+    border-left: 6px #308FFF solid;
+}
+
+.namesalary {
+    font-size: 7px;
+    font-weight: 500;
+}
+
+.tableclass1 {
+    border-right: 2px lightgray solid;
+}
+
+.allclass {
+    font-size: 6px;
+}
+
+.tableA {
+    font-size: 7px;
+    font-weight: 500;
+}
+
+.scrollbar-salaryallowanec {
+    float: left;
+    height: 180px;
+    background: #F5F5F5;
+    overflow-y: scroll;
+    margin-bottom: 25px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+#salary_scrollbar::-webkit-scrollbar {
+    width: 5px;
+    background-color: #F5F5F5;
+}
+
+#salary_scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #B0B2BE;
+}
+
+.alert-F5F5F5 {
+    background-color: #F5F5F5;
+    border-color: #bdbdbd;
+}
+
+.classA {
+    font-size: 9px;
+    text-align: center;
+    background-color: #87CDFF;
+}
+
+.classtext {
+    font-size: 10px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.solis-bottom {
+    border-bottom: 2px light solid;
+}
+
+.accordionlink1 {
+    width: 10px;
+}
+
+.classhr {
+    border-style: 2px solid dashed;
+    width: 8px;
+    height: 1px;
+}
