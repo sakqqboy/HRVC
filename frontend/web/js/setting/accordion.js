@@ -157,7 +157,7 @@ function removeAllChildren(parent) {
     }
 }
 
-$('#first').show();
+$('#f rst').show();
 $('#second').hide();
 $('#third').hide();
 $('#fourth').hide();

@@ -236,7 +236,6 @@ $this->title = 'Salary Allowance';
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Selected-3.png" class="UpdownSelected" type="button">
                         </div>
                     </div>
-
                     <div class="col-12">
                         <div class="container-accordion">
                             <div class="col-12 card card-accordion">
