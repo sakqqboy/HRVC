@@ -64,10 +64,10 @@
 }
 
 .progress {
-    height: 15px;
+    height: 10px;
     background: #e9e9ea;
     border-radius: 12px;
-    margin-bottom: 30px;
+    
     overflow: visible;
     position: relative;
 }

@@ -55,6 +55,19 @@
     font-size: 14px;
     text-transform: uppercase;
 }
+.header-pim{
+    
+    font-size: 14px;
+    background-color: rgb(249, 249, 249);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+}
+.header-item{
+    /* height: 30px; */
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
 
 @media(max-width: 768px) {
     .width-hrvc {

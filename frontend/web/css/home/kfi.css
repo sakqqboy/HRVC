@@ -4,6 +4,8 @@
 
 .alert-white-4 {
     background-color: rgb(243, 243, 243);
+    padding-top: 10px;
+    padding-bottom: 0px;
 }
 
 .alert-light-4 {
@@ -12,13 +14,13 @@
 
 .key1 {
     color: #000000;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
 }
 
 .image-grid {
-    width: 17px;
-    height: 17px;
+    width: 13px;
+    height: 13px;
     border-radius: 100%;
 }
 
