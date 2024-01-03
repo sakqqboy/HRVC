@@ -19,7 +19,13 @@ $this->title = 'Employee';
 		</div>
 		<div class="col-10 text-end">
 			<div class="col-12 mt-10">
-				<a href="<?= Yii::$app->homeUrl ?>setting/employee/create" class="btn btn-success"><i class="fa fa-user" aria-hidden="true"></i> Create</a>
+				<a href="<?= Yii::$app->homeUrl ?>setting/employee/import" class="btn btn-secondary">
+					<i class="fa fa-upload mr-5" aria-hidden="true"></i> Import File
+				</a>
+				<a href="<?= Yii::$app->homeUrl ?>setting/employee/create" class="btn btn-success">
+					<i class="fa fa-user-plus mr-5" aria-hidden="true"></i> Create
+				</a>
+
 			</div>
 		</div>
 

@@ -57,4 +57,16 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
         }
         return $employee;
     }
+    public static function kpiEmployeeTarget($kpiId, $employeeId)
+    {
+        $kpiEmployee = KpiEmployee::find()
+            ->where(["kpiId" => $kpiId, "employeeId" => $employeeId, "status" => [1, 2, 4]])
+            ->asArray()
+            ->one();
+        if (isset($kpiEmployee) && !empty($kpiEmployee)) {
+            return $kpiEmployee["target"];
+        } else {
+            return 0;
+        }
+    }
 }

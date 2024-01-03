@@ -62,4 +62,17 @@ class Employee extends \frontend\models\hrvc\master\EmployeeMaster
             return 0;
         }
     }
+    public static function employeeName($employeeId)
+    {
+        if ($employeeId != '') {
+            $employee = Employee::find()
+                ->select('employeeFirstname,employeeSurename')
+                ->where(["employeeId" => $employeeId])
+                ->asArray()
+                ->one();
+            return $employee["employeeFirstname"] . " " . $employee["employeeSurename"];
+        } else {
+            return '';
+        }
+    }
 }

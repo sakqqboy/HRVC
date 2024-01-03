@@ -17,13 +17,20 @@
 							<span class="company-c"> </span>
 						</div>
 						<div class="col-11 mt-20 Employees-0 pt-5" style="margin-top:-15px;"> Employees</div>
-						<div class="col-lg-6 col-12 mt-20">
+						<div class="col-lg-4 col-12 mt-20">
 							<div class="col-12">
 								<select class="form-select " onchange="javascript:searchKgiEmployee()" id="search-employee-department">
 								</select>
 							</div>
 						</div>
-						<div class="col-lg-6 col-12 mt-20">
+						<div class="col-lg-4 col-12 mt-20">
+							<div class="col-12">
+								<select class="form-select " onchange="javascript:searchKgiTeam()" id="search-employee-team">
+									<option value="">Team</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-lg-4 col-12 mt-20">
 							<div class="col-12">
 								<span class="submit-search">
 									<i class="fa fa-search" aria-hidden="true"></i></i>

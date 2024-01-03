@@ -428,21 +428,50 @@ function searchKpiEmployee() {
 	var kpiId = $("#kpiId").val();
 	$("#search-employee-box").html('');
 	var searchText = $("#search-employee-kpi").val();
-	var departmentId=$("#search-employee-department").val();
+	var departmentId = $("#search-employee-department").val();
+	var teamId = $("#search-employee-team").val();
 	var url = $url + 'kpi/management/search-kpi-employee';
 	// if ($.trim(searchText) != '') {
 	    $.ajax({
 		 type: "POST",
 		 dataType: 'json',
 		 url: url,
-		 data: { kpiId: kpiId, searchText: searchText,departmentId:departmentId },
+		 data: { kpiId: kpiId, searchText: searchText,departmentId:departmentId,teamId:teamId },
 		 success: function (data) {
 		     if (data.status) {
-			  $("#search-employee-box").show();
-			  $("#search-employee-box").html(data.textEmployee);
+			//   $("#search-employee-box").show();
+			     //      $("#search-employee-box").html(data.textEmployee);
+			     $("#search-employee-team").html(data.textTeam);
+			     $("#employeeInBranch").html(data.textEmployee);
 		     }
 		 }
 	    });
+	// } else { 
+	//     $("#search-employee-box").html('');
+	//     $("#search-employee-box").css("display","none");
+	// }
+}
+function searchKpiTeam() { 
+	var kpiId = $("#kpiId").val();
+	//$("#search-employee-box").html('');
+	// $("#search-employee-team").html('<option value="">Team</option>');
+	var searchText = $("#search-employee-kpi").val();
+	var departmentId = $("#search-employee-department").val();
+	var teamId = $("#search-employee-team").val();
+	
+		var url = $url + 'kpi/management/search-kpi-employee';
+		// if ($.trim(searchText) != '') {
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { kpiId: kpiId, searchText: searchText, departmentId: departmentId, teamId: teamId },
+			success: function (data) {
+				if (data.status) {
+					$("#employeeInBranch").html(data.textEmployee);
+				}
+			}
+		});
 	// } else { 
 	//     $("#search-employee-box").html('');
 	//     $("#search-employee-box").css("display","none");
@@ -490,4 +519,48 @@ function checkAllKpiEmployee(kpiId) {
 			}
 		}
 	});
+}
+function approveTargetKpiTeam(kpiTeamId, approve) {
+	var url = $url + 'kpi/management/approve-kpi-target';
+	if (approve == 1) {
+		var text = 'Are you sure to approve this target?';
+	} else { 
+		var text = 'Are you sure to reject this target?';
+	}
+	if (confirm(text)) {
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { kpiTeamId: kpiTeamId, approve: approve },
+			success: function (data) {
+				if (data.status) {
+					var url = $url + 'kpi/management/wait-approve';
+					window.location.href = url;
+				}
+			}
+		});
+	}
+}
+function approveTargetKpiEmployee(kpiEmployeeId, approve) {
+	var url = $url + 'kpi/management/approve-kpi-employee-target';
+	if (approve == 1) {
+		var text = 'Are you sure to approve this target?';
+	} else { 
+		var text = 'Are you sure to reject this target?';
+	}
+	if (confirm(text)) {
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { kpiEmployeeId: kpiEmployeeId, approve: approve },
+			success: function (data) {
+				if (data.status) {
+					var url = $url + 'kpi/management/wait-approve';
+					window.location.href = url;
+				}
+			}
+		});
+	}
 }

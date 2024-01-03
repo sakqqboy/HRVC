@@ -60,9 +60,13 @@ class KgiGroupController extends Controller
 			$kgiGroup->kgiGroupName = $_POST["kgiGroupName"];
 			$kgiGroup->companyId = $_POST["company"];
 			$kgiGroup->kgiGroupDetail = $_POST["detail"];
+			$kgiGroup->quantRatio = $_POST["quantRatio"];
+			$kgiGroup->priority = $_POST["priority"];
+			$kgiGroup->amountType = $_POST["amountType"];
+			$kgiGroup->month = $_POST["month"];
 			$kgiGroup->target = $_POST["target"];
 			$kgiGroup->createrId = Yii::$app->user->id;
-			$kgiGroup->status = 1;
+			$kgiGroup->status = $_POST["status"];
 			$kgiGroup->createDateTime = new Expression('NOW()');
 			$kgiGroup->updateDateTime = new Expression('NOW()');
 			if ($kgiGroup->save(false)) {
@@ -75,8 +79,10 @@ class KgiGroupController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
+		$months = ModelMaster::monthFull(1);
 		return $this->render('create', [
-			"companies" => $companies
+			"companies" => $companies,
+			"months" => $months
 		]);
 	}
 	public function actionUpdate($hash)

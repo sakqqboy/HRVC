@@ -67,4 +67,17 @@ class Company extends \frontend\models\hrvc\master\CompanyMaster
             return '';
         }
     }
+    public static function userCompany($userId)
+    {
+        $user = User::find()
+            ->select('employeeId')
+            ->where(["userId" => $userId])
+            ->asArray()
+            ->one();
+        $employee = Employee::find()
+            ->where(["employeeId" => $user["employeeId"]])
+            ->asArray()
+            ->one();
+        return $employee["companyId"];
+    }
 }

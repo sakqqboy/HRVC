@@ -1,0 +1,233 @@
+<?php
+
+namespace frontend\modules\kpi\controllers;
+
+use common\helpers\Path;
+use common\models\ModelMaster;
+use Exception;
+use FFI\Exception as FFIException;
+use frontend\models\hrvc\Group;
+use frontend\models\hrvc\KpiEmployee;
+use frontend\models\hrvc\KpiEmployeeHistory;
+use frontend\models\hrvc\UserRole;
+use Yii;
+use yii\db\Expression;
+use yii\web\Controller;
+
+header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
+header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+class KpiPersonalController extends Controller
+{
+	public function beforeAction($action)
+	{
+		if (!Yii::$app->user->id) {
+			return $this->redirect(Yii::$app->homeUrl . 'site/login');
+		}
+		$groupId = Group::currentGroupId();
+		if ($groupId == null) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+		}
+		return true;
+	}
+	public function actionIndivisualSetting($hash)
+	{
+		$param = ModelMaster::decodeParams($hash);
+		$kpiId = $param["kpiId"];
+		$role = UserRole::userRight();
+		if ($role < 3) {
+			return $this->redirect(Yii::$app->homeUrl . 'kgi/management/index');
+		}
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/kpi-team-employee?kpiId=' . $kpiId);
+		$kpiEmployees = curl_exec($api);
+		$kpiEmployees = json_decode($kpiEmployees, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId);
+		$kpiDetail = curl_exec($api);
+		$kpiDetail = json_decode($kpiDetail, true);
+
+		curl_close($api);
+
+		//throw new Exception(print_r($kpiEmployees, true));
+		return $this->render('indivisual_setting', [
+			"kpiDetail" => $kpiDetail,
+			"kpiId" => $kpiId,
+			"kpiEmployees" => $kpiEmployees,
+			"role" => $role
+		]);
+	}
+	public function actionSetPersonalTarget()
+	{
+		if (isset($_POST["kpiId"])) {
+			if (isset($_POST["target"]) && count($_POST["target"])) {
+				foreach ($_POST["target"] as $employeeId => $target) :
+					if ($target != '') {
+						$target = str_replace(",", "", $target);
+						$kpiEmployee = KpiEmployee::find()
+							->where(["kpiId" => $_POST["kpiId"], "employeeId" => $employeeId])
+							->one();
+						if (isset($kpiEmployee) && !empty($kpiEmployee)) {
+							$kpiEmployee->target = $target;
+							$kpiEmployee->updateDateTime = new Expression('NOW()');
+							$kpiEmployee->createrId = Yii::$app->user->id;
+							$kpiEmployee->save(false);
+						} else {
+							if ($target != '0.00') {
+								$kpiEmployee = new KpiEmployee();
+								$kpiEmployee->target = $target;
+								$kpiEmployee->kpiId = $_POST["kpiId"];
+								$kpiEmployee->employeeId = $employeeId;
+								$kpiEmployee->updateDateTime = new Expression('NOW()');
+								$kpiEmployee->createrId = Yii::$app->user->id;
+								$kpiEmployee->save(false);
+							}
+						}
+					}
+				endforeach;
+			}
+		}
+		return $this->redirect(Yii::$app->homeUrl . 'kpi/management/assign-kpi');
+	}
+	public function actionIndividualKpi()
+	{
+		$groupId = Group::currentGroupId();
+		if ($groupId == null) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+		}
+		$role = UserRole::userRight();
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$companies = curl_exec($api);
+		$companies = json_decode($companies, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
+		$units = curl_exec($api);
+		$units = json_decode($units, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/employee-kpi?userId=' . Yii::$app->user->id);
+		$kpis = curl_exec($api);
+		$kpis = json_decode($kpis, true);
+
+		curl_close($api);
+		$months = ModelMaster::monthFull(1);
+		$isManager = UserRole::isManager();
+		return $this->render('index', [
+			"units" => $units,
+			"companies" => $companies,
+			"months" => $months,
+			"isManager" => $isManager,
+			"role" => $role,
+			"kpis" => $kpis,
+			"userId" => Yii::$app->user->id
+		]);
+	}
+	public function actionUpdatePersonalKpi($hash)
+	{
+		$param = ModelMaster::decodeParams($hash);
+		$kpiEmployeeId = $param["kpiEmployeeId"];
+
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/kpi-employee-detail?kpiEmployeeId=' . $kpiEmployeeId);
+		$kpiEmployeeDetail = curl_exec($api);
+		$kpiEmployeeDetail = json_decode($kpiEmployeeDetail, true);
+
+		curl_close($api);
+		return $this->render('update_personal_kpi', [
+			"kpiEmployeeId" => $kpiEmployeeId,
+			"kpiEmployeeDetail" => $kpiEmployeeDetail
+		]);
+	}
+	public function actionSaveUpdatePersonalKpi()
+	{
+		if (isset($_POST["kpiEmployeeId"])) {
+			$history = KpiEmployeeHistory::find()
+				->where(["kpiEmployeeId" => $_POST["kpiEmployeeId"]])
+				->orderBy('kpiEmployeeHistoryId DESC')
+				->one();
+			$status = $_POST["status"];
+			if (isset($history) && !empty($history)) {
+				$nextCheckDateArr = explode(' ', $history["nextCheckDate"]);
+				$nextCheckDate = $nextCheckDateArr[0];
+				$lastCheck = $history->nextCheckDate;
+				if ($history->target == str_replace(",", "", $_POST["target"]) && $history->result == str_replace(",", "", $_POST["result"]) && $nextCheckDate == $_POST["nextCheckDate"]) {
+					$history->status = $_POST["status"];
+					$history->updateDateTime = new Expression('NOW()');
+				} else {
+					if ($history->target != str_replace(",", "", $_POST["target"])) {
+						$status = 88;
+					}
+					$history = KpiEmployeeHistory::find()
+						->where(["kpiEmployeeId" => $_POST["kpiEmployeeId"], "status" => 88])
+						->one();
+					if (!isset($history) || empty($history)) {
+						$history = new KpiEmployeeHistory();
+					}
+					$history->kpiEmployeeId = $_POST["kpiEmployeeId"];
+					$history->target = str_replace(",", "", $_POST["target"]);
+					$history->result = str_replace(",", "", $_POST["result"]);
+					$history->detail = $_POST["detail"];
+					$history->nextCheckDate = $_POST["nextCheckDate"] . ' 00:00:00';
+					$history->lastCheckDate = $lastCheck;
+					$history->status = $status;
+					$history->createDateTime = new Expression('NOW()');
+					$history->updateDateTime = new Expression('NOW()');
+				}
+			} else {
+				$history = new KpiEmployeeHistory();
+				$history->kpiEmployeeId = $_POST["kpiEmployeeId"];
+				$history->target = str_replace(",", "", $_POST["target"]);
+				$history->result = str_replace(",", "", $_POST["result"]);
+				$history->detail = $_POST["detail"];
+				$history->nextCheckDate = $_POST["nextCheckDate"] . ' 00:00:00';
+				$history->status = $_POST["status"];
+				$history->createDateTime = new Expression('NOW()');
+				$history->updateDateTime = new Expression('NOW()');
+			}
+			$kpiEmployee = KpiEmployee::find()
+				->where(["kpiEmployeeId" => $_POST["kpiEmployeeId"]])
+				->one();
+			if ($status != 88) {
+				$kpiEmployee->target = $_POST["target"];
+				$kpiEmployee->result = $_POST["result"];
+			} else {
+				$kpiEmployee->status = 1;
+			}
+			$kpiEmployee->updateDateTime = new Expression('NOW()');
+			$kpiEmployee->save(false);
+			$history->createrId = Yii::$app->user->id;
+			if ($history->save(false)) {
+				return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
+			}
+		}
+	}
+	public function actionViewPersonalKpi($hash)
+	{
+		$param = ModelMaster::decodeParams($hash);
+		$kpiEmployeeId = $param["kpiEmployeeId"];
+
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/kpi-employee-detail?kpiEmployeeId=' . $kpiEmployeeId);
+		$kpiEmployeeDetail = curl_exec($api);
+		$kpiEmployeeDetail = json_decode($kpiEmployeeDetail, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/kpi-employee-history?kpiEmployeeId=' . $kpiEmployeeId);
+		$kpiEmployeeHistory = curl_exec($api);
+		$kpiEmployeeHistory = json_decode($kpiEmployeeHistory, true);
+
+		curl_close($api);
+		return $this->render('personal_view', [
+			"kpiEmployeeId" => $kpiEmployeeId,
+			"kpiEmployeeDetail" => $kpiEmployeeDetail,
+			"kpiEmployeeHistory" => $kpiEmployeeHistory
+		]);
+	}
+}

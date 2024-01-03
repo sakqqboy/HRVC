@@ -39,8 +39,13 @@ $this->title = 'Assign KGI';
 						</div>
 					</div>
 				</div>
+				<div class="col-col-12">
+					<a href="<?= Yii::$app->homeUrl ?>kgi/management/wait-approve" class="no-underline text-primary">
+						Wait for approve KGI
+					</a>
+				</div>
 			</div>
-			<div class="alert alert-light mt-20" role="alert">
+			<div class="alert alert-light mt-10" role="alert">
 				<table class="table table-striped">
 					<thead class="table table-secondary">
 						<tr class="secondary-setting">
@@ -53,7 +58,9 @@ $this->title = 'Assign KGI';
 							<th>Month</th>
 							<th>KFI</th>
 							<th>KPI</th>
-							<!-- <th>Status</th> -->
+							<th class="text-center font-size-14">
+								<i class="fa fa-cog" aria-hidden="true"></i>
+							</th>
 						</tr>
 					</thead>
 					<tbody id="assign-search-result">
@@ -121,8 +128,14 @@ $this->title = 'Assign KGI';
 											<b><?= $kgi["countKgiHasKpi"] ?></b>
 										</a>
 									</td>
-									<!-- <td id='active-<?php //$kfiId 
-												?>'> -->
+									<td class="text-end">
+										<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/kgi-team-setting/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>" class="btn btn-sm btn-primary mr-3" title="Team KGI setting">
+											<i class="fa fa-users" aria-hidden="true"></i>
+										</a>
+										<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/indivisual-setting/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>" class="btn btn-sm btn-info text-light" title="Indivisual KGI setting">
+											<i class="fa fa-user" aria-hidden="true"></i>
+										</a>
+									</td>
 									<?php
 									// if ($kfi["active"] == 1) { 
 									?>
@@ -137,7 +150,6 @@ $this->title = 'Assign KGI';
 									// }
 									?>
 									<!-- </td> -->
-
 								</tr>
 						<?php
 							endforeach;

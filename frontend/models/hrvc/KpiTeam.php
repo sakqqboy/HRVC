@@ -42,4 +42,14 @@ class KpiTeam extends \frontend\models\hrvc\master\KpiTeamMaster
         }
         return $has;
     }
+    public static function teamTarget($teamId)
+    {
+        $kpiTeam = KpiTeam::find()
+            ->where(["teamId" => $teamId])->asArray()->one();
+        if (isset($kpiTeam) && !empty($kpiTeam)) {
+            return $kpiTeam["target"];
+        } else {
+            return 0;
+        }
+    }
 }

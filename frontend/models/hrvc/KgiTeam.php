@@ -42,4 +42,14 @@ class KgiTeam extends \frontend\models\hrvc\master\KgiTeamMaster
         }
         return $has;
     }
+    public static function teamTarget($teamId)
+    {
+        $kgiTeam = KgiTeam::find()
+            ->where(["teamId" => $teamId])->asArray()->one();
+        if (isset($kgiTeam) && !empty($kgiTeam)) {
+            return $kgiTeam["target"];
+        } else {
+            return 0;
+        }
+    }
 }

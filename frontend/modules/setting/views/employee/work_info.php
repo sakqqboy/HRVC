@@ -35,12 +35,13 @@ use frontend\models\hrvc\Employee;
 			<div class="col-7  font-b  mt-20">
 				<?= $employee["titleName"] ?>
 			</div>
-			<div class="col-5  mt-20">
+			<!-- <div class="col-5  mt-20">
 				Working Hours
 			</div>
 			<div class="col-7  font-b  mt-20">
-				<?= $employee["workingTime"] ?> hrs.
-			</div>
+				<?php // $employee["workingTime"] 
+				?> hrs.
+			</div> -->
 			<div class="col-5  mt-20">
 				Status
 			</div>

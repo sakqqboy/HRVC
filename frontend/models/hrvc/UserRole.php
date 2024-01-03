@@ -61,19 +61,25 @@ class UserRole extends \frontend\models\hrvc\master\UserRoleMaster
                 ->asArray()
                 ->one();
             if (isset($userRole) && !empty($userRole)) {
-                if ($userRole["roleId"] == 1 || $userRole["roleId"] == 2) {
-                    return 5;
+                if ($userRole["roleId"] == 1) {
+                    return 7;
+                }
+                if ($userRole["roleId"] == 2) {
+                    return 6;
                 }
                 if ($userRole["roleId"] == 3) {
-                    return 4;
+                    return 5;
                 }
                 if ($userRole["roleId"] == 4) {
-                    return 3;
+                    return 4;
                 }
                 if ($userRole["roleId"] == 5) {
-                    return 2;
+                    return 3;
                 }
                 if ($userRole["roleId"] == 6) {
+                    return 2;
+                }
+                if ($userRole["roleId"] == 7) {
                     return 1;
                 }
             }
