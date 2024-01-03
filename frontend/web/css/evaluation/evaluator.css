@@ -63,108 +63,265 @@
     font-size: 20px;
 }
 
-.plr-filter {
-    margin-left: -5px;
-    font-size: 8px;
+
+
+.calendar-week {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    padding-inline-start: 0px;
 }
 
-.fafil {
-    font-size: 19px;
-}
-
-.formtermname {
-    font-size: 11px;
-    color: black;
-    font-weight: 500;
-}
-
-.formFrameE1 {
-    font-size: 12px;
-    border-radius: 2px;
-    font-weight: 500;
-    padding-left: 1px;
-}
-
-.Evaluator-ALL {
-    color: gray;
+.calendar-week-day {
+    max-width: 57.1px;
+    width: 100%;
+    text-align: center;
+    color: #525659;
+    text-transform: uppercase;
     font-size: 14px;
-    font-weight: 600;
+}
+
+.calendar-days {
+    margin-top: 30px;
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 5px;
+    padding-inline-start: 0px;
+}
+
+.calendar-day {
+    text-align: center;
+    color: #525659;
+    padding: 5px;
+    font-size: 13px;
+}
+
+.calendar-month-arrow-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.calendar-month-year-container {
+    padding: 10px 10px 20px 10px;
+    color: #525659;
+    cursor: pointer;
+}
+
+.calendar-arrow-container {
+    margin-top: -5px;
+}
+
+.calendar-left-arrow,
+.calendar-right-arrow {
+    height: 20px;
+    width: 20px;
+    font-size: 11px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #525659;
+}
+
+.calendar-today-button {
+    margin-top: -10px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    color: #525659;
+    padding: 5px 10px;
+}
+
+.calendar-today-button {
+    width: 84px;
+    height: 27px;
+    font-size: 13px;
+    margin-right: 10px;
+    background-color: #4294FF;
+    color: white;
+}
+
+.calendar-months,
+.calendar-years {
+    flex: 1;
+    border-radius: 10px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    color: #525659;
+    font-size: 15px;
+}
+
+.calendar-day-active {
+    background-color: #3B82F6;
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
 }
 
 .aler-ALLDepartment {
     background-color: white;
-    margin-top: 20px;
 }
 
-.transform {
+.TODAY-TRANS {
     text-transform: uppercase;
-    font-size: 14px;
-    color: #373737;
-}
-
-.ALL-Departmentform {
-    font-size: 20px;
-    color: gray;
-    font-weight: 600;
-    margin-top: 5px;
-}
-
-.form-control-color {
-    width: 40px;
-}
-
-.Intermediate-solid {
-    border-right: 2px lightgray solid;
-    font-size: 10px;
-}
-
-/* .share-tfw {
     color: #308FFF;
-    font-size: 25px;
 }
 
-.AccountsTaxations {
-    font-size: 19px;
+.bg-Today {
+    margin-top: 10px;
+    background-color: #DAEDFF;
+    border-radius: 3px;
+    color: #09789B;
+    font-weight: 500;
+    width: 180px;
+    text-align: left;
 }
 
-.ShadowsParticipating {
-    box-shadow: 10px 5px 5px rgb(253, 215, 215);
-    margin-top: 30px;
-} */
-.datecalendar {
-    font-size: 9px;
+.Note-Today1 {
+    color: #308FFF;
+    margin-top: 10px;
+    font-size: 22px;
 }
 
-.datenumber {
-    font-size: 10px;
+.Note-Today2 {
+    color: #fc4aa0;
+    margin-top: 10px;
+    font-size: 22px;
 }
 
-.cc-transform {
-    border: none;
-    border-left: 8px rgb(39, 143, 241) solid;
+.number-Today {
+    color: #A6A1A1;
+    font-size: 12px;
+    margin-top: -10px;
 }
 
-.transform2yellow {
-    border: none;
-    border-left: 8px #FFDB1F solid;
+.notestartdate {
+    font-size: 12px;
+    color: #A6A1A1;
+    padding-left: 30px;
 }
 
-.ADD {
-    font-size: 14px;
-    margin-top: 15px;
+.notefinishdate {
+    font-size: 12px;
+    color: #A6A1A1;
+    padding-left: 30px;
+}
+
+.imgstart-end {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.mon1 {
+    width: 30px;
+}
+
+
+.cont {
+    height: 100%;
+    left: calc(60% - 300px);
+    padding: 0;
+    margin: -5px;
+    position: absolute;
+}
+
+#nprogress-bar {
+    /* -webkit-appearance: none; */
+    width: 470px;
+    color: #CCC;
+    height: 2px;
+    margin: 0 auto;
+}
+
+#first,
+#second,
+#third,
+#fourth {
+    margin: 0px;
+}
+
+
+#step span {
+    height: 30px;
+    width: 30px;
+    border-radius: 10%;
+    border: 1px solid #CCC;
+    background: #CCCCCC;
+    position: absolute;
+    color: #ffffff;
+    top: -10px;
     cursor: pointer;
-    padding-left: 15px;
+    transition: all 0.4s ease-in-out;
 }
 
-.AddAnother {
+#step {
+    height: 100px;
+    width: 100%;
+}
+
+#step span i {
+    padding: 8px;
     font-size: 13px;
-    color: #373737;
 }
 
-.dangeredit {
-    background-color: #D98686;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    width: 60px;
+#step .first {
+    left: -10px;
+}
+
+
+#step .second {
+    left: 150px;
+}
+
+#step .third {
+    left: 300px;
+}
+
+#step .fourth {
+    left: 450px;
+}
+
+.detail {
+    position: relative;
+}
+
+#nprogress-bar::-webkit-progress-value {
+    background: #049dfe;
+    transition: all 0.4s ease-in-out;
+}
+
+#nprogress-bar::-webkit-progress-bar {
+    background: #CCC;
+}
+
+#step .border-change {
+    border-color: #0077c2;
+    background: #049dfe;
+    transition: all 0.4s ease-in-out;
+}
+
+.alert-dashboardE1 {
+    background-color: #F4F6F9;
+}
+
+.trantRankColorE1 {
+    border-radius: 6px;
+    font-size: 11px;
+    color: black;
+    background-color: #ffffff;
+    border-left: 6px #5CAEF9 solid;
+}
+
+.trantYellowColorE1 {
+    border-radius: 6px;
+    font-size: 11px;
+    color: black;
+    background-color: #ffffff;
+    border-left: 6px #FFDB1F solid;
 }

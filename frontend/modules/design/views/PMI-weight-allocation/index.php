@@ -42,7 +42,13 @@ $this->title = 'PMI Weight Allocation';
                             <label class="rad-label">
                                 <input type="radio" class="rad-input" name="rad">
                                 <div class="rad-design"></div>
-                                <div class="rad-text"> PMI Weight Allocation</div>
+                                <div class="rad-text"> Weight Allocation</div>
+                            </label>
+
+                            <label class="rad-label">
+                                <input type="radio" class="rad-input" name="rad">
+                                <div class="rad-design"></div>
+                                <div class="rad-text"> Evaluator Settings</div>
                             </label>
 
                             <label class="rad-label">

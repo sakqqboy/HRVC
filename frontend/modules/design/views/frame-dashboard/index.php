@@ -51,18 +51,6 @@ $this->title = 'frame Dasdboard';
             <div class="col-2">
                 <strong>Spring Evaluation</strong>
             </div>
-            <!-- <div class="col-9 SpringEvaluation">
-                <div class="col-12 dashedSpring">
-                    <div class="Start-Date">Start Date</div>
-                    <span> <img src="<?= Yii::$app->homeUrl ?>image/mon.png" class="imagesmon"></span>
-                    <button class="btn btn-bgE1"> E1</button>
-                    <button class="btn btn-bgE1"> E2</button>
-                    <button class="btn btn-bgE1"> E3</button>
-                    <button class="btn btn-bgE1"> E4</button>
-                    <div class="Start-Date">End Date</div>
-                    <span class="pl-90"> <img src="<?= Yii::$app->homeUrl ?>image/mon.png" class="imagesmon"></span>
-                </div>
-            </div> -->
             <div class="col-10 SpringEvaluation">
                 <div class="stepper-wrapper">
                     <span class="ontop">

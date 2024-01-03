@@ -4,10 +4,294 @@
     height: 40px;
 }
 
-/* .accordion-close {
-   border-radius: 20px; 
-}  */
 .images-number2 {
     width: 20px;
     margin-left: 20px;
+}
+
+.card-accordion {
+    background-color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+.container-accordion {
+    max-width: 100%;
+}
+
+.accordion {
+    width: 100%;
+    background-color: white;
+    border: none;
+    outline: none;
+    text-align: left;
+    margin-top: 10px;
+    /* padding: 15px 20px; */
+    font-size: 18px;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.2s linear;
+}
+
+.accordion:after {
+    font-family: FontAwesome;
+    content: "\f106";
+    border: 1px rgb(116, 116, 116) solid;
+    border-radius: 4px;
+    padding-left: 5px;
+    padding-right: 4px;
+    width: 24px;
+    height: 24px;
+    font-family: "fontawesome";
+    font-size: 18px;
+    float: right;
+}
+
+.accordion.is-open:after {
+    content: "\f107";
+}
+
+.accordion:hover,
+.accordion.is-open {
+    background-color: white;
+}
+
+.accordion-content {
+    background-color: white;
+    /* border-left: 1px solid whitesmoke; */
+    /* border-right: 1px solid whitesmoke; */
+    padding: 0 20px;
+    max-height: 0;
+    font-size: 13px;
+    overflow: hidden;
+    transition: max-height 0.2s ease-in-out;
+}
+
+.accordion-rank1 {
+    width: 20px;
+}
+
+.bg-sprank1 {
+    background-color: #D5E5ED;
+}
+
+.Manager {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.bg-primary-MM {
+    background-color: #308FFF;
+}
+
+.accordion-3Dot {
+    width: 15px;
+    margin-top: -6px;
+}
+
+.accordion-dot {
+    width: 15px;
+    text-align: right;
+}
+
+.B {
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.accordion-Included {
+    font-size: 9px;
+    color: #7E7E7E;
+    margin-left: 45px;
+    padding-top: 30px;
+}
+
+.accordion-C9E5FF {
+    border-color: #C9E5FF;
+    font-size: 10px;
+    border-radius: 30px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+.Minimum {
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.accordionpl_minimum {
+    margin-left: -55px;
+}
+
+.accordion-minimum-solid {
+    border-bottom: 1px #000000 dashed;
+    position: absolute;
+    height: 0px;
+    width: 300px;
+    margin-top: 40px;
+}
+
+.accordion-D6FFDF {
+    background-color: #D6FFDF;
+    border-radius: 20px;
+    border-color: #32BD1B;
+    margin-top: 24px;
+    font-size: 11px;
+}
+
+.accordion-UP {
+    width: 11px;
+}
+
+.bg-D6FFDF {
+    margin-top: 30px;
+    padding-bottom: 7px;
+    padding-left: 4px;
+    padding-right: 10px;
+    background-color: #D6FFDF;
+    color: #0E7318;
+}
+
+#salary_scrollbar::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+.tablesalary1 {
+    font-size: 8px;
+    font-weight: 600;
+    color: #585858;
+}
+
+.accordion-profile {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.salaryalert {
+    background-color: white;
+    border-left: 6px #308FFF solid;
+}
+
+.namesalary {
+    font-size: 7px;
+    font-weight: 500;
+}
+
+.tableclass1 {
+    border-right: 2px lightgray solid;
+}
+
+.allclass {
+    font-size: 6px;
+}
+
+.tableA {
+    font-size: 7px;
+    font-weight: 500;
+}
+
+.scrollbar-salaryallowanec {
+    float: left;
+    height: 180px;
+    background: #F5F5F5;
+    overflow-y: scroll;
+    margin-bottom: 25px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+#salary_scrollbar::-webkit-scrollbar {
+    width: 5px;
+    background-color: #F5F5F5;
+}
+
+#salary_scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #B0B2BE;
+}
+
+.alert-F5F5F5 {
+    background-color: #F5F5F5;
+    border-color: #bdbdbd;
+}
+
+.classA {
+    font-size: 10px;
+    font-weight: 700;
+    text-align: center;
+    background-color: #87CDFF;
+}
+
+.classtext {
+    font-size: 10px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.solis-bottom {
+    border-bottom: 2px light solid;
+}
+
+.accordionlink1 {
+    width: 10px;
+}
+
+.stepname {
+    font-size: 13px;
+    color: #585858;
+}
+
+.colorAllowance {
+    color: #585858;
+}
+
+input[value="clickAllowance"]:checked+label {
+    font-weight: 500;
+}
+
+input[value="Allowance2"]:checked+label {
+    font-weight: 500;
+}
+
+
+.accordionAddLayer {
+    width: 15px;
+    margin-top: -5px;
+}
+
+.addleyer {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.cursor_AddLayer {
+    cursor: pointer;
+}
+
+.alert-ffff {
+    background-color: white;
+    border-radius: 4px;
+}
+
+.Allowance2-solid {
+    border-left: 1px #B8B8B8 solid;
+    font-size: 8px;
+    padding-top: 5px;
+}
+
+.Qualification-Allowance {
+    font-size: 8px;
+}
+
+.DeleteRound1 {
+    width: 10px;
+    cursor: pointer;
 }

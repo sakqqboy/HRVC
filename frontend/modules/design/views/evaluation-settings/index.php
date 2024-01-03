@@ -230,8 +230,265 @@ $this->title = 'Evaluation Settings';
                         </div>
                     </div>
                     <div class="col-lg-1 col-md-6 col-12 mt-10">
-                        <span class="btn btn-light" type="submit"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Assign.png" class="imagesAssingLight"></span>
+                        <span class="btn btn-light" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModalAssign"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Assign.png" class="imagesAssingLight"></span>
                     </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalAssign" tabindex="-1" aria-labelledby="exampleModalLabelAssign" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="countheader">
+                                    <div class="row mt-10 pl-20">
+                                        <div class="col-1" id="exampleModalLabelAssign">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/groupProfile.jpg" class="Profiles">
+                                        </div>
+                                        <div class="col-9">
+                                            <div> AMI FARUQ </div>
+                                            <div> Director, Gihu</div>
+                                        </div>
+                                        <div class="col-2 text-center mt-10 pl-50">
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <div class="col-12">
+                                                Primary Evaluator
+                                            </div>
+                                            <div class="col-7 ml-30">
+                                                <select class="form-select selectDefaultPrimary" aria-label="Default select example">
+                                                    <option selected value="">Select this</option>
+                                                    <option value="1">Tokyo Consulting Firm co.th</option>
+                                                    <option value="2">Tokyo Consulting Firm group</option>
+                                                    <option value="3">Tokyo Consulting Firm Limited</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-4 ml-30">
+                                                <select class="form-select selectDefaultPrimary" aria-label="Default select example">
+                                                    <option selected value="">Select this</option>
+                                                    <option value="1">Branch</option>
+                                                    <option value="2">Title</option>
+                                                    <option value="3"> Employees</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12 card cardPrimaryEvaluator">
+                                                <div class="col-12">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Department.png" class="DepartmentAccounts"> Accounts
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-check  evaluatorIT">
+                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check  evaluatorIT">
+                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 mt-10">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Department.png" class="DepartmentAccounts"> IT
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-check  evaluatorIT">
+                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check  evaluatorIT">
+                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 mt-10">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Department.png" class="DepartmentAccounts"> MKT
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-check  evaluatorIT">
+                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check  evaluatorIT">
+                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check  evaluatorIT">
+                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check  evaluatorIT">
+                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check  evaluatorIT">
+                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check  evaluatorIT">
+                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <div class="col-12">
+                                                Final Evaluator
+                                            </div>
+                                            <div class="col-7 ml-30">
+                                                <select class="form-select selectDefaultPrimary" aria-label="Default select example">
+                                                    <option selected value="">Select this</option>
+                                                    <option value="1">Tokyo Consulting Firm co.th</option>
+                                                    <option value="2">Tokyo Consulting Firm group</option>
+                                                    <option value="3">Tokyo Consulting Firm Limited</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-4 ml-30">
+                                                <select class="form-select selectDefaultPrimary" aria-label="Default select example">
+                                                    <option selected value="">Select this</option>
+                                                    <option value="1">Branch</option>
+                                                    <option value="2">Title</option>
+                                                    <option value="3"> Employees</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12 card cardPrimaryEvaluator">
+                                                <div class="col-12">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Department.png" class="DepartmentAccounts"> Accounts
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-check  evaluatorIT">
+                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check  evaluatorIT">
+                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 mt-10">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Department.png" class="DepartmentAccounts"> IT
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-check  evaluatorIT">
+                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check  evaluatorIT">
+                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 mt-10">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Department.png" class="DepartmentAccounts"> MKT
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-check  evaluatorIT">
+                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check  evaluatorIT">
+                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check  evaluatorIT">
+                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check  evaluatorIT">
+                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check  evaluatorIT">
+                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check  evaluatorIT">
+                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 text-end pr-10 pb-10">
+                                    <button class="btn btn-primary SET">SET</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End -->
                 </div>
                 <div class="row">
                     <div class="col-lg-2 col-md-6 col-2">

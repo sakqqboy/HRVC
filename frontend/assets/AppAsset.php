@@ -81,6 +81,7 @@ class AppAsset extends AssetBundle
         'css/evaluation/accordion.css',
         'css/evaluation/frame_dashboard.css',
         'css/evaluation/settings.css',
+        'css/evaluation/salary_allowance.css',
 
 
     ];
