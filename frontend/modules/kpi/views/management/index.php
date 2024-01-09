@@ -1,5 +1,6 @@
 <?php
 
+use frontend\models\hrvc\Kpi;
 use yii\bootstrap5\ActiveForm;
 
 $this->title = 'KPI';
@@ -21,11 +22,16 @@ $this->title = 'KPI';
 						Key Performance Indicator
 					</div>
 					<div class="col-6">
-						<button type="button" class="btn btn-primary font-size-14" data-bs-toggle="modal" data-bs-target="#creat-kpi">
-							<i class="fa fa-magic" aria-hidden="true"></i>
-							Create New KPI
-						</button>
-
+						<?php
+						if ($role >= 3) {
+						?>
+							<button type="button" class="btn btn-primary font-size-14" data-bs-toggle="modal" data-bs-target="#creat-kpi">
+								<i class="fa fa-magic" aria-hidden="true"></i>
+								Create New KPI
+							</button>
+						<?php
+						}
+						?>
 					</div>
 				</div>
 			</div>
@@ -51,6 +57,19 @@ $this->title = 'KPI';
 					</div>
 				</div>
 			</div>
+			<?php
+			if ($role >= 3) {
+			?>
+				<div class="col-12 mt-10 text-end">
+
+					<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi" class="font-size-14 no-underline-primary">
+						<i class="fa fa-user mr-5" aria-hidden="true"></i>
+						Individual
+					</a>
+				</div>
+			<?php
+			}
+			?>
 		</div>
 
 		<table class="table table-striped">
@@ -79,6 +98,12 @@ $this->title = 'KPI';
 				<?php
 				if (count($kpis) > 0) {
 					foreach ($kpis as $kpiId => $kpi) :
+						$show = Kpi::checkPermission($role, $kpiId, $userId);
+						if ($show == 1) {
+							$display = '';
+						} else {
+							$display = 'none';
+						}
 				?>
 						<tr class="border-bottom-white2" id="kpi-<?= $kpiId ?>">
 							<td class="<?= $kpi["status"] == 1 ? 'over-blue' : 'over-yellow' ?>"><?= $kpi['kpiName'] ?></td>
@@ -90,9 +115,9 @@ $this->title = 'KPI';
 								<span class="badge rounded-pill bg-gray">
 									<ul class="try-cricle">
 										<?php
-										if (isset($kpi["employee"]) && count($kpi["employee"]) > 0) {
+										if (isset($kpi["kpiEmployee"]) && count($kpi["kpiEmployee"]) > 0) {
 											$e = 1;
-											foreach ($kpi["employee"] as $emp) : ?>
+											foreach ($kpi["kpiEmployee"] as $emp) : ?>
 												<img class="image-grid" src="<?= Yii::$app->homeUrl . $emp ?>">
 										<?php
 												if ($e == 3) {
@@ -102,7 +127,7 @@ $this->title = 'KPI';
 											endforeach;
 										}
 										?>
-										<a class="no-underline-black ml-2 mt-3" href="#"><?= count($kpi["employee"]) ?></a>
+										<a class="no-underline-black ml-2 mt-3" href="#"><?= count($kpi["kpiEmployee"]) ?></a>
 									</ul>
 								</span>
 							</td>
@@ -161,19 +186,21 @@ $this->title = 'KPI';
 
 								<span class="dropdown menulink" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
 								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-									<li data-bs-toggle="modal" data-bs-target="#update-kpi-modal" onclick="javascript:updateKpi(<?= $kpiId ?>)">
+									<li data-bs-toggle="modal" data-bs-target="#update-kpi-modal" onclick="javascript:updateKpi(<?= $kpiId ?>)" style="display: <?= $display ?>;">
 										<a class="dropdown-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 									</li>
 									<li data-bs-toggle="modal" data-bs-target="#kpi-view" onclick="javascript:kpiHistory(<?= $kpiId ?>)">
 										<a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
 									</li>
-									<li onclick="javascript:copyKpi(<?= $kpiId ?>)" title="Copy">
+									<li onclick="javascript:copyKpi(<?= $kpiId ?>)" title="Copy" style="display: <?= $display ?>;">
 										<a class="dropdown-item" href="#">
 											<i class="fa fa-copy" aria-hidden="true"></i>
 										</a>
 									</li>
-									<li data-bs-toggle="modal" data-bs-target="#delete-kpi" onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)">
-										<a class="dropdown-item"><i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
+									<li data-bs-toggle="modal" data-bs-target="#delete-kpi" onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)" style="display: <?= $display ?>;">
+										<a class="dropdown-item">
+											<i class="fa fa-trash-o text-danger" aria-hidden="true"></i>
+										</a>
 									</li>
 								</ul>
 							</td>

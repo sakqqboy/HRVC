@@ -1,5 +1,6 @@
 <?php
 
+use frontend\models\hrvc\Kgi;
 use yii\bootstrap5\ActiveForm;
 
 $this->title = "KGI";
@@ -64,9 +65,9 @@ $this->title = "KGI";
 				?>
 					<div class="col-12 mt-10 text-end">
 
-						<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-group/index" class="font-size-14 no-underline-primary">
-							<i class="fa fa-list-alt mr-5" aria-hidden="true"></i>
-							KGI GROUP
+						<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi" class="font-size-14 no-underline-primary">
+							<i class="fa fa-user mr-5" aria-hidden="true"></i>
+							Individual
 						</a>
 					</div>
 				<?php
@@ -100,6 +101,12 @@ $this->title = "KGI";
 						<?php
 						if (count($kgis) > 0) {
 							foreach ($kgis as $kgiId => $kgi) :
+								$show = Kgi::checkPermission($role, $kgiId, $userId);
+								if ($show == 1) {
+									$display = '';
+								} else {
+									$display = 'none';
+								}
 						?>
 								<tr class="border-bottom-white2" id="kgi-<?= $kgiId ?>">
 									<td class="<?= $kgi["status"] == 1 ? 'over-blue' : 'over-yellow' ?>"><?= $kgi["kgiName"] ?></td>
@@ -110,9 +117,9 @@ $this->title = "KGI";
 									<td>
 										<div class="flex mb-5 -space-x-4">
 											<?php
-											if (isset($kgi["employee"]) && count($kgi["employee"]) > 0) {
+											if (isset($kgi["kgiEmployee"]) && count($kgi["kgiEmployee"]) > 0) {
 												$e = 1;
-												foreach ($kgi["employee"] as $emp) : ?>
+												foreach ($kgi["kgiEmployee"] as $emp) : ?>
 													<img class="image-grid" src="<?= Yii::$app->homeUrl . $emp ?>">
 											<?php
 													if ($e == 3) {
@@ -122,7 +129,7 @@ $this->title = "KGI";
 												endforeach;
 											}
 											?>
-											<a class="no-underline-black ml-2 mt-3" href="#"><?= count($kgi["employee"]) ?></a>
+											<a class="no-underline-black ml-2 mt-3" href="#"><?= count($kgi["kgiEmployee"]) ?></a>
 										</div>
 									</td>
 									<td>
@@ -182,32 +189,24 @@ $this->title = "KGI";
 										</span>
 										<span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
 										<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-											<?php
-											if ($role >= 3) {
-											?>
-												<li data-bs-toggle="modal" data-bs-target="#update-kgi-modal" onclick="javascript:updateKgi(<?= $kgiId ?>)">
-													<a class="dropdown-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-												</li>
-											<?php
-											}
-											?>
+
+											<li data-bs-toggle="modal" data-bs-target="#update-kgi-modal" onclick="javascript:updateKgi(<?= $kgiId ?>)" style="display: <?= $display ?>;">
+												<a class="dropdown-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+											</li>
+
 											<li data-bs-toggle="modal" data-bs-target="#kgi-view" onclick="javascript:kgiHistory(<?= $kgiId ?>)">
 												<a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
 											</li>
-											<?php
-											if ($role >= 3) {
-											?>
-												<li onclick="javascript:copyKgi(<?= $kgiId ?>)" title="Copy">
-													<a class="dropdown-item" href="#">
-														<i class="fa fa-copy" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li data-bs-toggle="modal" data-bs-target="#delete-kgi" onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)">
-													<a class="dropdown-item"><i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
-												</li>
-											<?php
-											}
-											?>
+
+											<li onclick="javascript:copyKgi(<?= $kgiId ?>)" title="Copy" style="display: <?= $display ?>;">
+												<a class="dropdown-item" href="#">
+													<i class="fa fa-copy" aria-hidden="true"></i>
+												</a>
+											</li>
+											<li data-bs-toggle="modal" data-bs-target="#delete-kgi" onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)" style="display: <?= $display ?>;">
+												<a class="dropdown-item"><i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
+											</li>
+
 										</ul>
 									</td>
 								</tr>

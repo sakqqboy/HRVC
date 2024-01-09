@@ -14,6 +14,16 @@ use frontend\models\hrvc\KgiEmployee;
 </div>
 <?php
 if (isset($employees) && count($employees) > 0) {
+
+
+?>
+	<div class="row">
+		<div class="col-12 text-start">
+			<input class="form-check-input" type="checkbox" onchange="javascript:checkAllKgiEmployee(<?= $kgiId ?>)" id="all-kgi-employee-<?= $kgiId ?>">
+			<span class="font-size-12 ml-25">All </span>
+		</div>
+	</div>
+	<?php
 	foreach ($employees as $em) :
 
 		$isCheck = "";
@@ -21,7 +31,7 @@ if (isset($employees) && count($employees) > 0) {
 		if ($kgiEmployee == 1) {
 			$isCheck = "checked";
 		}
-?>
+	?>
 		<div class="row border-bottom mt-10">
 			<div class="col-5">
 				<div class="form-check">

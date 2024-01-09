@@ -1,17 +1,15 @@
 <?php
 
 use common\models\ModelMaster;
-use Faker\Core\Number;
 use frontend\models\hrvc\Company;
 use frontend\models\hrvc\GroupHasKgi;
-use yii\bootstrap5\ActiveForm;
 
 $this->title = "KGI GROUP";
 ?>
 <div class="col-12 mt-90 pd-Performance">
 	<div class="row">
 		<div class="col-10">
-			<i class="fa fa-list-alt font-size-20" aria-hidden="true"></i>
+			<i class="fa fa-list-alt font-size-20 mr-10" aria-hidden="true"></i>
 			<strong class="font-size-20"> KGI GROUP</strong>
 		</div>
 		<div class="col-2 text-end">
@@ -30,7 +28,9 @@ $this->title = "KGI GROUP";
 					<th>Company</th>
 					<th>Detail</th>
 					<th class="text-center">Target</th>
+					<th>Month</th>
 					<th class="text-center">Total KGI</th>
+					<th>Status</th>
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -46,7 +46,9 @@ $this->title = "KGI GROUP";
 							<td><?= Company::companyName($kgiGroup['companyId']) ?></td>
 							<td><?= $kgiGroup["kgiGroupDetail"] ?></td>
 							<td class="text-center font-b"><?= number_format($kgiGroup["target"]) ?></td>
+							<td><?= ModelMaster::fullMonthText($kgiGroup["month"]) ?></td>
 							<td class="text-center font-b"><?= GroupHasKgi::totalKgi($kgiGroup['kgiGroupId']) ?></td>
+							<td><?= $kgiGroup["status"] == 1 ? 'Active' : 'Finished' ?></td>
 							<td>
 								<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-group/update/<?= ModelMaster::encodeParams(['kgiGroupId' => $kgiGroup['kgiGroupId']]) ?>" class="btn btn-warning font-size-12 mr-5">
 									<i class="fa fa-pencil-square-o" aria-hidden="true"></i>

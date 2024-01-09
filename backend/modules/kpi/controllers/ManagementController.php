@@ -2,6 +2,7 @@
 
 namespace backend\modules\kpi\controllers;
 
+use backend\models\hrvc\Branch;
 use backend\models\hrvc\Company;
 use backend\models\hrvc\Country;
 use backend\models\hrvc\KpiBranch;
@@ -31,9 +32,80 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 class ManagementController extends Controller
 {
-	public function actionIndex()
+	public function actionIndex($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId)
 	{
-		$kpis = Kpi::find()->where(["status" => [1, 2]])->asArray()->all();
+		$kpis = Kpi::find()->where(["status" => [1, 2, 4]])->asArray()->all();
+		if ($adminId != '') {
+			$kpis = Kpi::find()
+				->where(["status" => [1, 2, 4]])
+				->asArray()->all();
+		}
+		if ($gmId != '') { //edit just in their company, see in every companies
+			$kpis = Kpi::find()
+				->where(["status" => [1, 2, 4]])
+				->asArray()->all();
+		}
+		if ($managerId != '') { //see in their company kpi
+			$companyId = Company::userCompany($managerId); //userId
+			$branchId = Branch::companyBranch($companyId);
+			$kpis = Kpi::find()
+				->select('kpi.*')
+				->JOIN("LEFT JOIN", "kpi_branch kb", "kb.kpiId=kpi.kpiId")
+				->where(["kpi.status" => [1, 2, 4], "kb.status" => 1, "kb.branchId" => $branchId])
+				->asArray()
+				->orderBy('kpi.updateDateTime DESC')
+				->all();
+		}
+		if ($supervisorId != '') { //see every KGI in their branch => edit just theitr department
+			//$departmentId = Department::userDepartmentId($supervisorId);
+			$branchId = Branch::userBranchId($supervisorId);
+			$kpis = Kpi::find()
+				->select('kpi.*')
+				//->JOIN("LEFT JOIN", "kgi_department kd", "kd.kgiId=kgi.kgiId")
+				->JOIN("LEFT JOIN", "kpi_branch kb", "kb.kpiId=kpi.kpiId")
+				->where(["kpi.status" => [1, 2, 4], "kb.status" => 1, "kb.branchId" => $branchId])
+				->asArray()
+				->orderBy('kb.branchId')
+				->all();
+		}
+		if ($teamLeaderId != '') { //see kgi in thier branch edit just their team
+			/*$employeeId = Employee::employeeId($staffId);
+			$kgis = Kgi::find()
+				->select('kgi.*')
+				->JOIN("LEFT JOIN", "kgi_employee ke", "ke.kgiId=kgi.kgiId")
+				->where(["kgi.status" => [1, 2, 4], "ke.status" => 1, "ke.employeeId" => $employeeId])
+				->asArray()
+				->orderBy('kgi.updateDateTime DESC')
+				->all();*/
+			$branchId = Branch::userBranchId($teamLeaderId);
+			$kpis = Kpi::find()
+				->select('kpi.*')
+				//->JOIN("LEFT JOIN", "kgi_department kd", "kd.kgiId=kgi.kgiId")
+				->JOIN("LEFT JOIN", "kpi_branch kb", "kb.kpiId=kpi.kpiId")
+				->where(["kpi.status" => [1, 2, 4], "kb.status" => 1, "kb.branchId" => $branchId])
+				->asArray()
+				->orderBy('kb.branchId')
+				->all();
+		}
+		if ($staffId != '') { //see just their kfi
+			/*$employeeId = Employee::employeeId($staffId);
+			$kgis = Kgi::find()
+				->select('kgi.*')
+				->JOIN("LEFT JOIN", "kgi_employee ke", "ke.kgiId=kgi.kgiId")
+				->where(["kgi.status" => [1, 2, 4], "ke.status" => 1, "ke.employeeId" => $employeeId])
+				->asArray()
+				->orderBy('kgi.updateDateTime DESC')
+				->all();*/
+			$branchId = Branch::userBranchId($staffId);
+			$kpis = Kpi::find()
+				->select('kpi.*')
+				//->JOIN("LEFT JOIN", "kgi_department kd", "kd.kgiId=kgi.kgiId")
+				->JOIN("LEFT JOIN", "kpi_Branch kb", "kb.kpiId=kpi.kpiId")
+				->where(["kpi.status" => [1, 2, 4], "kb.status" => 1, "kb.branchId" => $branchId])
+				->asArray()
+				->orderBy('kb.branchId')
+				->all();
+		}
 		$data = [];
 		if (count($kpis) > 0) {
 			foreach ($kpis as $kpi) :
@@ -66,7 +138,6 @@ class ManagementController extends Controller
 					"isOver" => ModelMaster::isOverDuedate(Kpi::nextCheckDate($kpi['kpiId'])),
 					"countTeam" => KpiTeam::kpiTeam($kpi["kpiId"]),
 					"flag" => Country::countryFlagBycompany($kpi["companyId"]),
-					"employee" => "",
 					"status" => $kpi["status"],
 					"countryName" => Country::countryNameBycompany($kpi['companyId']),
 					"issue" => KpiIssue::lastestIssue($kpi["kpiId"])["issue"],
@@ -259,7 +330,7 @@ class ManagementController extends Controller
 		$kpiTeams = KpiTeam::find()
 			->select('kpi_team.teamId,t.teamName,t.departmentId')
 			->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
-			->where(["kpi_team.kpiId" => $id])
+			->where(["kpi_team.kpiId" => $id, "kpi_team.status" => 1, "t.status" => 1])
 			->asArray()
 			->all();
 		$data = [];
@@ -357,10 +428,10 @@ class ManagementController extends Controller
 		}
 		return json_encode($data);
 	}
-	public function actionKpiFilter($companyId, $branchId, $teamId, $month, $status, $year)
+	public function actionKpiFilter($companyId, $branchId, $teamId, $month, $status, $year, $adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId)
 	{
 		$data = [];
-		$kpis = Kpi::find()
+		/*$kpis = Kpi::find()
 			->select('kpi.*')
 			->JOIN("LEFT JOIN", "kpi_branch kb", "kb.kpiId=kpi.kpiId")
 			->JOIN("LEFT JOIN", "kpi_team kt", "kt.kpiId=kpi.kpiId")
@@ -375,7 +446,118 @@ class ManagementController extends Controller
 
 			])
 			->orderBy('kpi.createDateTime ASC')
-			->all();
+			->all();*/
+		if ($adminId != '') {
+			$kpis = Kpi::find()
+				->select('kpi.*')
+				->JOIN("LEFT JOIN", "kpi_branch kb", "kb.kpiId=kpi.kpiId")
+				->JOIN("LEFT JOIN", "kpi_team kt", "kt.kpiId=kpi.kpiId")
+				->where(["kpi.status" => [1, 2, 4]])
+				->andFilterWhere([
+					"kpi.companyId" => $companyId,
+					"kb.branchId" => $branchId,
+					"kt.teamId" => $teamId,
+					"kpi.month" => $month,
+					"kpi.status" => $status,
+					"kpi.year" => $year,
+				])
+				->orderBy('kpi.createDateTime ASC')
+				->all();
+		}
+		if ($gmId != '') { //edit just in their company, see in every companies
+			$kpis = Kpi::find()
+				->select('kpi.*')
+				->JOIN("LEFT JOIN", "kpi_branch kb", "kb.kpiId=kpi.kpiId")
+				->JOIN("LEFT JOIN", "kpi_team kt", "kt.kpiId=kpi.kpiId")
+				->where(["kpi.status" => [1, 2, 4]])
+				->andFilterWhere([
+					"kpi.companyId" => $companyId,
+					"kb.branchId" => $branchId,
+					"kt.teamId" => $teamId,
+					"kpi.month" => $month,
+					"kpi.status" => $status,
+					"kpi.year" => $year,
+				])
+				->orderBy('kpi.createDateTime ASC')
+				->all();
+		}
+		if ($managerId != '') {
+			//$mBranchId = Branch::userBranchId($managerId);
+
+			$mCompanyId = Company::userCompany($managerId); //userId
+			$mBranchId = Branch::companyBranch($mCompanyId);
+			$kpis = Kpi::find()
+				->select('kpi.*')
+				->JOIN("LEFT JOIN", "kpi_branch kb", "kb.kpiId=kpi.kpiId")
+				->JOIN("LEFT JOIN", "kpi_team kt", "kt.kpiId=kpi.kpiId")
+				->where(["kpi.status" => [1, 2, 4], "kb.branchId" => $mBranchId])
+				->andFilterWhere([
+					"kpi.companyId" => $companyId,
+					"kb.branchId" => $branchId,
+					"kt.teamId" => $teamId,
+					"kpi.month" => $month,
+					"kpi.status" => $status,
+					"kpi.year" => $year,
+				])
+				->orderBy('kpi.createDateTime ASC')
+				->all();
+		}
+		if ($supervisorId != '') {
+			//$mDepartmentId = Department::userDepartmentId($supervisorId);
+			$mBranchId = Branch::userBranchId($supervisorId);
+			$kpis = Kpi::find()
+				->select('kpi.*')
+				->JOIN("LEFT JOIN", "kpi_branch kb", "kb.kpiId=kpi.kpiId")
+				->JOIN("LEFT JOIN", "kpi_team kt", "kt.kpiId=kpi.kpiId")
+				->where(["kpi.status" => [1, 2, 4], "kb.branchId" => $mBranchId])
+				->andFilterWhere([
+					"kpi.companyId" => $companyId,
+					"kb.branchId" => $branchId,
+					"kt.teamId" => $teamId,
+					"kpi.month" => $month,
+					"kpi.status" => $status,
+					"kpi.year" => $year,
+				])
+				->orderBy('kpi.createDateTime ASC')
+				->all();
+		}
+		if ($teamLeaderId != '') {
+			$mBranchId = Branch::userBranchId($teamLeaderId);
+			$kpis = Kpi::find()
+				->select('kpi.*')
+				->JOIN("LEFT JOIN", "kpi_branch kb", "kb.kpiId=kpi.kpiId")
+				->JOIN("LEFT JOIN", "kpi_team kt", "kt.kpiId=kpi.kpiId")
+				->where(["kpi.status" => [1, 2, 4], "kb.branchId" => $mBranchId])
+				->andFilterWhere([
+					"kpi.companyId" => $companyId,
+					"kb.branchId" => $branchId,
+					"kt.teamId" => $teamId,
+					"kpi.month" => $month,
+					"kpi.status" => $status,
+					"kpi.year" => $year,
+				])
+				->orderBy('kpi.createDateTime ASC')
+				->all();
+		}
+		if ($staffId != '') {
+			$employeeId = Employee::employeeId($staffId);
+			$kpis = Kpi::find()
+				->select('kpi.*')
+				->JOIN("LEFT JOIN", "kpi_branch kb", "kb.kpiId=kpi.kpiId")
+				->JOIN("LEFT JOIN", "kpi_employee ke", "ke.kpiId=kpi.kpiId")
+				->JOIN("LEFT JOIN", "kpi_team kt", "kt.kpiId=kpi.kpiId")
+				->where(["kpi.status" => [1, 2, 4], "ke.employeeId" => $employeeId])
+				->andFilterWhere([
+					"kpi.companyId" => $companyId,
+					"kb.branchId" => $branchId,
+					"kt.teamId" => $teamId,
+					"kpi.month" => $month,
+					"kpi.status" => $status,
+					"kpi.year" => $year,
+				])
+				->orderBy('kpi.createDateTime ASC')
+				->all();
+		}
 		if (count($kpis) > 0) {
 			foreach ($kpis as $kpi) :
 				$ratio = 0;
@@ -406,7 +588,6 @@ class ManagementController extends Controller
 					"isOver" => ModelMaster::isOverDuedate(Kpi::nextCheckDate($kpi['kpiId'])),
 					"countTeam" => KpiTeam::kpiTeam($kpi["kpiId"]),
 					"flag" => Country::countryFlagBycompany($kpi["companyId"]),
-					"employee" => "",
 					"status" => $kpi["status"],
 					"countryName" => Country::countryNameBycompany($kpi['companyId']),
 					"issue" => KpiIssue::lastestIssue($kpi["kpiId"])["issue"],

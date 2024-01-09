@@ -9,8 +9,15 @@ use Yii;
 *
     * @property integer $kgiGroupId
     * @property string $kgiGroupName
+    * @property integer $companyId
+    * @property integer $createrId
     * @property string $kgiGroupDetail
     * @property string $target
+    * @property integer $quantRatio
+    * @property string $priority
+    * @property integer $amountType
+    * @property string $month
+    * @property string $remark
     * @property integer $status
     * @property string $createDateTime
     * @property string $updateDateTime
@@ -31,13 +38,14 @@ return 'kgi_group';
 public function rules()
 {
 return [
-            [['kgiGroupId', 'kgiGroupName'], 'required'],
-            [['kgiGroupId'], 'integer'],
-            [['kgiGroupDetail'], 'string'],
+            [['kgiGroupName', 'companyId', 'createrId'], 'required'],
+            [['companyId', 'createrId'], 'integer'],
+            [['kgiGroupDetail', 'remark'], 'string'],
             [['target'], 'number'],
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['kgiGroupName'], 'string', 'max' => 255],
-            [['status'], 'string', 'max' => 10],
+            [['quantRatio', 'amountType', 'status'], 'string', 'max' => 10],
+            [['priority', 'month'], 'string', 'max' => 45],
         ];
 }
 
@@ -49,8 +57,15 @@ public function attributeLabels()
 return [
     'kgiGroupId' => 'Kgi Group ID',
     'kgiGroupName' => 'Kgi Group Name',
+    'companyId' => 'Company ID',
+    'createrId' => 'Creater ID',
     'kgiGroupDetail' => 'Kgi Group Detail',
     'target' => 'Target',
+    'quantRatio' => 'Quant Ratio',
+    'priority' => 'Priority',
+    'amountType' => 'Amount Type',
+    'month' => 'Month',
+    'remark' => 'Remark',
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',
     'updateDateTime' => 'Update Date Time',

@@ -39,6 +39,11 @@ $this->title = 'Assign KPI';
 						</div>
 					</div>
 				</div>
+				<div class="col-col-12">
+					<a href="<?= Yii::$app->homeUrl ?>kpi/management/wait-approve" class="no-underline text-primary">
+						Wait for approve KPI
+					</a>
+				</div>
 			</div>
 			<div class="alert alert-light mt-20" role="alert">
 				<table class="table table-striped">
@@ -52,6 +57,9 @@ $this->title = 'Assign KPI';
 							<!-- <th>Target</th> -->
 							<th>Month</th>
 							<th>KGI</th>
+							<th class="text-center font-size-14">
+								<i class="fa fa-cog" aria-hidden="true"></i>
+							</th>
 							<!-- <th>Status</th> -->
 						</tr>
 					</thead>
@@ -113,6 +121,14 @@ $this->title = 'Assign KPI';
 									<td>
 										<a href="<?= Yii::$app->homeUrl ?>kpi/management/kpi-kgi/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>" class="no-underline-black">
 											<b><?= $kpi["countKgiInKpi"] ?></b>
+										</a>
+									</td>
+									<td class="text-end">
+										<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/kpi-team-setting/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>" class="btn btn-sm btn-primary mr-3" title="Team KPI setting">
+											<i class="fa fa-users" aria-hidden="true"></i>
+										</a>
+										<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/indivisual-setting/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>" class="btn btn-sm btn-info text-light" title="Indivisual KPI setting">
+											<i class="fa fa-user" aria-hidden="true"></i>
 										</a>
 									</td>
 									<!-- <td id='active-<?php //$kfiId 

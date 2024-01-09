@@ -16,11 +16,13 @@ use frontend\models\hrvc\Kgi;
 use frontend\models\hrvc\KgiBranch;
 use frontend\models\hrvc\KgiDepartment;
 use frontend\models\hrvc\KgiEmployee;
+use frontend\models\hrvc\KgiEmployeeHistory;
 use frontend\models\hrvc\KgiHasKpi;
 use frontend\models\hrvc\KgiHistory;
 use frontend\models\hrvc\KgiIssue;
 use frontend\models\hrvc\KgiSolution;
 use frontend\models\hrvc\KgiTeam;
+use frontend\models\hrvc\KgiTeamHistory;
 use frontend\models\hrvc\Kpi;
 use frontend\models\hrvc\Team;
 use frontend\models\hrvc\Title;
@@ -57,20 +59,29 @@ class ManagementController extends Controller
 		}
 		$role = UserRole::userRight();
 		$adminId = '';
+		$gmId = '';
+		$teamLeaderId = '';
 		$managerId = '';
 		$supervisorId = '';
 		$staffId = '';
-		if ($role == 5) {
+		if ($role == 7) {
 			$adminId = Yii::$app->user->id;
 		}
-		if ($role == 4) {
+		if ($role == 6) {
+			$gmId = Yii::$app->user->id;
+		}
+		if ($role == 5) {
 			$managerId = Yii::$app->user->id;
 		}
-		if ($role == 3) {
+		if ($role == 4) {
 			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$teamLeaderId = Yii::$app->user->id;
 		}
 		if ($role == 1 || $role == 2) {
 			$staffId = Yii::$app->user->id;
+			return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi');
 		}
 
 		$api = curl_init();
@@ -84,21 +95,24 @@ class ManagementController extends Controller
 		$units = curl_exec($api);
 		$units = json_decode($units, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/index?adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
 		$kgis = curl_exec($api);
 		$kgis = json_decode($kgis, true);
 
 		curl_close($api);
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
-
+		$url = 'kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId;
+		//$branchId = Branch::userBranchId(Yii::$app->user->id);
+		//throw new exception($role);
 		return $this->render('index', [
 			"units" => $units,
 			"companies" => $companies,
 			"months" => $months,
 			"kgis" => $kgis,
 			"isManager" => $isManager,
-			"role" => $role
+			"role" => $role,
+			"userId" => Yii::$app->user->id
 		]);
 	}
 	public function actionGrid()
@@ -109,22 +123,30 @@ class ManagementController extends Controller
 		}
 		$role = UserRole::userRight();
 		$adminId = '';
+		$gmId = '';
+		$teamLeaderId = '';
 		$managerId = '';
 		$supervisorId = '';
 		$staffId = '';
-		if ($role == 5) {
+		if ($role == 7) {
 			$adminId = Yii::$app->user->id;
 		}
-		if ($role == 4) {
+		if ($role == 6) {
+			$gmId = Yii::$app->user->id;
+		}
+		if ($role == 5) {
 			$managerId = Yii::$app->user->id;
 		}
-		if ($role == 3) {
+		if ($role == 4) {
 			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$teamLeaderId = Yii::$app->user->id;
 		}
 		if ($role == 1 || $role == 2) {
 			$staffId = Yii::$app->user->id;
+			return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi-grid'); //not dev yet
 		}
-
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
@@ -136,7 +158,7 @@ class ManagementController extends Controller
 		$units = curl_exec($api);
 		$units = json_decode($units, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/index?adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
 		$kgis = curl_exec($api);
 		$kgis = json_decode($kgis, true);
 
@@ -796,23 +818,32 @@ class ManagementController extends Controller
 		}
 		$role = UserRole::userRight();
 		$adminId = '';
+		$gmId = '';
+		$teamLeaderId = '';
 		$managerId = '';
 		$supervisorId = '';
 		$staffId = '';
-		if ($role == 5) {
+		if ($role == 7) {
 			$adminId = Yii::$app->user->id;
 		}
-		if ($role == 4) {
+		if ($role == 6) {
+			$gmId = Yii::$app->user->id;
+		}
+		if ($role == 5) {
 			$managerId = Yii::$app->user->id;
 		}
-		if ($role == 3) {
+		if ($role == 4) {
 			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$teamLeaderId = Yii::$app->user->id;
 		}
 		if ($role == 1 || $role == 2) {
 			$staffId = Yii::$app->user->id;
+			return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi');
 		}
-		$paramText .= '&&adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId;
-
+		//$paramText .= '&&adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId;
+		$paramText .= '&&adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId;
 
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
@@ -847,6 +878,7 @@ class ManagementController extends Controller
 		} else {
 			$file = "kgi_search_result_grid";
 		}
+		//throw new Exception(print_r($paramText, true));
 		$isManager = UserRole::isManager();
 		return $this->render($file, [
 			"units" => $units,
@@ -862,7 +894,8 @@ class ManagementController extends Controller
 			"branches" => $branches,
 			"teams" => $teams,
 			"isManager" => $isManager,
-			"role" => $role
+			"role" => $role,
+			"userId" => Yii::$app->user->id
 		]);
 	}
 	public function actionCopyKgi($kgiId)
@@ -954,21 +987,31 @@ class ManagementController extends Controller
 		$managerId = '';
 		$supervisorId = '';
 		$staffId = '';
-		if ($role == 5) {
+		$gmId = '';
+		$teamLeaderId = '';
+		if ($role == 7) {
 			$adminId = Yii::$app->user->id;
 		}
-		if ($role == 4) {
+		if ($role == 6) {
+			$gmId = Yii::$app->user->id;
+		}
+		if ($role == 5) {
 			$managerId = Yii::$app->user->id;
 		}
-		if ($role == 3) {
+		if ($role == 4) {
 			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$teamLeaderId = Yii::$app->user->id;
 		}
 		if ($role == 1 || $role == 2) {
 			$staffId = Yii::$app->user->id;
+			return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi');
 		}
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/index?adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
+		//curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/index?adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId);
 		$kgis = curl_exec($api);
 		$kgis = json_decode($kgis, true);
 
@@ -1010,22 +1053,76 @@ class ManagementController extends Controller
 		$branchId = $_POST["branchId"];
 		$checked = $_POST["checked"];
 		if ($checked == 1) {
-			$kgiBranch = KgiBranch::find()
-				->where(["kgiId" => $kgiId, "branchId" => $branchId])
-				->one();
-			if (isset($kgiBranch) && !empty($kgiBranch)) {
-				$kgiBranch->status = 1;
-			} else {
-				$kgiBranch = new KgiBranch();
-				$kgiBranch->branchId = $branchId;
-				$kgiBranch->kgiId = $kgiId;
-				$kgiBranch->status = 1;
-				$kgiBranch->createDateTime = new Expression('NOW()');
-				$kgiBranch->updateDateTime = new Expression('NOW()');
-			}
+			// $kgiBranch = KgiBranch::find()
+			// 	->where(["kgiId" => $kgiId, "branchId" => $branchId])
+			// 	->one();
+			// if (isset($kgiBranch) && !empty($kgiBranch)) {
+			// 	$kgiBranch->status = 1;
+			/*$branchDepartment = Department::find()->where(["branchId" => $branchId])->asArray()->all();
+				if (isset($branchDepartment) && count($branchDepartment) > 0) {
+					foreach ($branchDepartment as $department) :
+						KgiDepartment::updateAll(["status" => 1], ["departmentId" => $department["departmentId"], "kgiId" => $kgiId, "status" => 98]);
+						$teams = Team::find()
+							->where(["departmentId" => $department["departmentId"], "status" => 1])
+							->asArray()
+							->all();
+						if (isset($teams) && count($teams) > 0) {
+							foreach ($teams as $team) :
+								KgiTeam::updateAll(["status" => 1], ["teamId" => $team["teamId"], "kgiId" => $kgiId, "status" => 98]);
+								$employee = Employee::find()
+									->where(["teamId" => $team["teamId"]])
+									->asArray()
+									->all();
+								if (isset($employee) && count($employee) > 0) {
+									foreach ($employee as $em) :
+										KgiEmployee::updateAll(["status" => 1], ["employeeId" => $em["employeeId"], "kgiId" => $kgiId, "status" => 98]);
+									endforeach;
+								}
+
+							endforeach;
+						}
+					endforeach;
+				}*/
+			//} else {
+			$kgiBranch = new KgiBranch();
+			$kgiBranch->branchId = $branchId;
+			$kgiBranch->kgiId = $kgiId;
+			$kgiBranch->status = 1;
+			$kgiBranch->createDateTime = new Expression('NOW()');
+			$kgiBranch->updateDateTime = new Expression('NOW()');
+			//}
 			$kgiBranch->save(false);
 		} else {
-			KgiBranch::updateAll(["status" => 99], ["branchId" => $branchId, "kgiId" => $kgiId]);
+			//KgiBranch::updateAll(["status" => 98], ["branchId" => $branchId, "kgiId" => $kgiId, "status" => 1]);
+			KgiBranch::deleteAll(["branchId" => $branchId, "kgiId" => $kgiId]);
+			$branchDepartment = Department::find()->where(["branchId" => $branchId])->asArray()->all();
+			if (isset($branchDepartment) && count($branchDepartment) > 0) {
+				foreach ($branchDepartment as $department) :
+					//KgiDepartment::updateAll(["status" => 98], ["departmentId" => $department["departmentId"], "kgiId" => $kgiId, "status" => 1]);
+					KgiDepartment::deleteAll(["departmentId" => $department["departmentId"], "kgiId" => $kgiId]);
+					$teams = Team::find()
+						->where(["departmentId" => $department["departmentId"], "status" => 1])
+						->asArray()
+						->all();
+					if (isset($teams) && count($teams) > 0) {
+						foreach ($teams as $team) :
+							//KgiTeam::updateAll(["status" => 98], ["teamId" => $team["teamId"], "kgiId" => $kgiId, "status" => 1]);
+							KgiTeam::deleteAll(["teamId" => $team["teamId"], "kgiId" => $kgiId]);
+							$employee = Employee::find()
+								->where(["teamId" => $team["teamId"]])
+								->asArray()
+								->all();
+							if (isset($employee) && count($employee) > 0) {
+								foreach ($employee as $em) :
+									//KgiEmployee::updateAll(["status" => 98], ["employeeId" => $em["employeeId"], "kgiId" => $kgiId, "status" => 1]);
+									KgiEmployee::deleteAll(["employeeId" => $em["employeeId"], "kgiId" => $kgiId]);
+								endforeach;
+							}
+
+						endforeach;
+					}
+				endforeach;
+			}
 		}
 		$kgiBranch = KgiBranch::find()
 			->where(["kgiId" => $kgiId, "status" => 1])
@@ -1101,22 +1198,54 @@ class ManagementController extends Controller
 		$employeeId = $_POST["employeeId"];
 		$checked = $_POST["checked"];
 		if ($checked == 1) {
-			$kgiEmployee = KgiEmployee::find()
-				->where(["kgiId" => $kgiId, "employeeId" => $employeeId])
-				->one();
-			if (isset($kgiEmployee) && !empty($kgiEmployee)) {
-				$kgiEmployee->status = 1;
-			} else {
-				$kgiEmployee = new KgiEmployee();
-				$kgiEmployee->employeeId = $employeeId;
-				$kgiEmployee->kgiId = $kgiId;
-				$kgiEmployee->status = 1;
-				$kgiEmployee->createDateTime = new Expression('NOW()');
-				$kgiEmployee->updateDateTime = new Expression('NOW()');
-			}
+			// $kgiEmployee = KgiEmployee::find()
+			// 	->where(["kgiId" => $kgiId, "employeeId" => $employeeId])
+			// 	->one();
+			// if (isset($kgiEmployee) && !empty($kgiEmployee)) {
+			// 	$kgiEmployee->status = 1;
+			// } else {
+			$kgiEmployee = new KgiEmployee();
+			$kgiEmployee->employeeId = $employeeId;
+			$kgiEmployee->kgiId = $kgiId;
+			$kgiEmployee->status = 1;
+			$kgiEmployee->createDateTime = new Expression('NOW()');
+			$kgiEmployee->updateDateTime = new Expression('NOW()');
+			//}
 			$kgiEmployee->save(false);
+			$employee = Employee::find()
+				->select('departmentId,teamId')
+				->where(["employeeId" => $employeeId, "status" => 1])
+				->asArray()
+				->one();
+			if (isset($employee) && !empty($employee)) {
+				$kgiDepartment = KgiDepartment::find()
+					->where(["kgiId" => $kgiId, "departmentId" => $employee["departmentId"], "status" => 1])
+					->one();
+				if (!isset($kgiDepartment) || empty($kgiDepartment)) {
+					$kgiDepartment = new KgiDepartment();
+					$kgiDepartment->kgiId = $kgiId;
+					$kgiDepartment->departmentId = $employee["departmentId"];
+					$kgiDepartment->status = 1;
+					$kgiDepartment->createDateTime = new Expression('NOW()');
+					$kgiDepartment->updateDateTime = new Expression('NOW()');
+					$kgiDepartment->save(false);
+				}
+				$kgiTeam = KgiTeam::find()
+					->where(["kgiId" => $kgiId, "teamId" => $employee["teamId"], "status" => 1])
+					->one();
+				if (!isset($kgiTeam) || empty($kgiTeam)) {
+					$kgiTeam = new KgiTeam();
+					$kgiTeam->kgiId = $kgiId;
+					$kgiTeam->teamId = $employee["teamId"];
+					$kgiTeam->createrId = Yii::$app->user->id;
+					$kgiTeam->status = 1;
+					$kgiTeam->createDateTime = new Expression('NOW()');
+					$kgiTeam->updateDateTime = new Expression('NOW()');
+					$kgiTeam->save(false);
+				}
+			}
 		} else {
-			KgiEmployee::updateAll(["status" => 99], ["employeeId" => $employeeId, "kgiId" => $kgiId]);
+			KgiEmployee::deleteAll(["employeeId" => $employeeId, "kgiId" => $kgiId]);
 		}
 		$kgiEmployee = KgiEmployee::find()
 			->where(["kgiId" => $kgiId, "status" => 1])
@@ -1134,6 +1263,16 @@ class ManagementController extends Controller
 			->where(["kgiId" => $kgiId, "status" => 1])
 			->asArray()
 			->all();
+		$teams = Team::find()->where(["status" => 1, "departmentId" => $_POST["departmentId"]])
+			->asArray()
+			->orderBy('teamId')
+			->all();
+		$textTeam = '<option value="">Team</option>';
+		if (isset($teams) && count($teams) > 0) {
+			foreach ($teams as $team) :
+				$textTeam .= '<option value="' . $team["teamId"] . '">' . $team["teamName"] . '</option>';
+			endforeach;
+		}
 		$employees = [];
 		if (isset($kgiBranch) && count($kgiBranch) > 0) {
 			$i = 0;
@@ -1142,7 +1281,8 @@ class ManagementController extends Controller
 					->where(["status" => 1, "branchId" => $kb["branchId"]])
 					->andWhere("employeeFirstName LIKE '" . $searchText . "%' or employeeSureName LIKE '" . $searchText . "%'")
 					->andFilterWhere([
-						"departmentId" => $_POST["departmentId"]
+						"departmentId" => $_POST["departmentId"],
+						"teamId" => $_POST["teamId"]
 					])
 					->orderBy('branchId,titleId')
 					->asArray()
@@ -1173,12 +1313,14 @@ class ManagementController extends Controller
 				}
 			endforeach;
 		}
-		$textSearch = $this->renderAjax('search_employee', [
+		//$textSearch = $this->renderAjax('search_employee', [
+		$textSearch = $this->renderAjax('branch_employee', [
 			"employees" => $employees,
 			"kgiId" => $kgiId
 		]);
 		$res["status"] = true;
 		$res["textEmployee"] = $textSearch;
+		$res["textTeam"] = $textTeam;
 		return json_encode($res);
 	}
 	public function actionCheckAllKgiEmployee()
@@ -1309,6 +1451,221 @@ class ManagementController extends Controller
 		]);
 		$res["status"] = true;
 		$res["kpiText"] = $kpiText;
+		return json_encode($res);
+	}
+	public function actionWaitApprove()
+	{
+		$role = UserRole::userRight();
+		$teamKgis = [];
+		$employeeKgis = [];
+		if ($role < 3) {
+			return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi');
+		}
+		if ($role == 3) { //Team Leader
+			$teamId = User::userTeamId();
+			$kgiEmployees = KgiEmployee::find()
+				->select('kgi_employee.*')
+				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
+				->where(["e.teamId" => $teamId])
+				->asArray()
+				->orderBy('createDateTime')
+				->all();
+
+			if (isset($kgiEmployees) && count($kgiEmployees) > 0) {
+				foreach ($kgiEmployees as $kgiEmployee) :
+					$kgiEmployeeHistory = KgiEmployeeHistory::find()
+						->where(["kgiEmployeeId" => $kgiEmployee["kgiEmployeeId"], "status" => 88])
+						->orderBy("createDateTime DESC")
+						->asArray()
+						->one();
+					if (isset($kgiEmployeeHistory) && !empty($kgiEmployeeHistory)) {
+						$employeeKgis[$kgiEmployeeHistory["kgiEmployeeHistoryId"]] = [
+							"kgiId" => $kgiEmployee["kgiId"],
+							"kgiName" => Kgi::kgiName($kgiEmployee["kgiId"]),
+							"employeeName" => Employee::employeeName($kgiEmployee["employeeId"]),
+							"target" => $kgiEmployee["target"],
+							"newTarget" => $kgiEmployeeHistory["target"],
+							"reson" => $kgiEmployeeHistory["detail"],
+						];
+					}
+				endforeach;
+			}
+		} else {
+			$branchId = User::userBranchId();
+			$departments = Department::find()->where(["branchId" => $branchId])->asArray()->all();
+			if (isset($departments) && count($departments) > 0) {
+				foreach ($departments as $department) :
+					$teams = Team::find()
+						->where(["departmentId" => $department["departmentId"]])
+						->asArray()
+						->all();
+					if (isset($teams) && count($teams) > 0) {
+						foreach ($teams as $team) :
+							$kgiTeams = KgiTeam::find()
+								->where(["teamId" => $team["teamId"]])
+								->asArray()
+								->all();
+							if (isset($kgiTeams) && count($kgiTeams) > 0) {
+								foreach ($kgiTeams as $kgiTeam) :
+									$kgiTeamHistory = KgiTeamHistory::find()
+										->where(["kgiTeamId" => $kgiTeam["kgiTeamId"], "status" => 88])
+										->orderBy("createDateTime DESC")
+										->asArray()
+										->one();
+									if (isset($kgiTeamHistory) && !empty($kgiTeamHistory)) {
+										$teamKgis[$kgiTeamHistory["kgiTeamHistoryId"]] = [
+											"kgiId" => $kgiTeam["kgiId"],
+											"kgiName" => Kgi::kgiName($kgiTeam["kgiId"]),
+											"company" => Branch::companyName($branchId),
+											"branch" => Branch::branchName($branchId),
+											"department" => Department::departmentNAme($department["departmentId"]),
+											"teamId" => $kgiTeam["teamId"],
+											"teamName" => Team::teamName($kgiTeam["teamId"]),
+											"target" => $kgiTeam["target"],
+											"reson" => $kgiTeamHistory["detail"],
+											"newTarget" => $kgiTeamHistory["target"],
+											"creater" => User::employeeNameByuserId($kgiTeamHistory["createrId"]), // userId
+										];
+									}
+								endforeach;
+							}
+						endforeach;
+					}
+				endforeach;
+			}
+		}
+		return $this->render('wait_approve', [
+			"role" => $role,
+			"teamKgis" => $teamKgis,
+			"employeeKgis" => $employeeKgis,
+		]);
+	}
+	public function actionApproveKgiTeam($hash)
+	{
+		$param = ModelMaster::decodeParams($hash);
+
+		$kgiTeamHistory = KgiTeamHistory::find()
+			->where(["kgiTeamHistoryId" => $param["kgiTeamHistoryId"]])
+			->asArray()
+			->one();
+		$kgiTeam = KgiTeam::find()
+			->where(["kgiTeamId" => $kgiTeamHistory["kgiTeamId"]])
+			->asArray()
+			->one();
+
+		$kgiTeamHistories = KgiTeamHistory::find()
+			->where(["kgiTeamId" => $kgiTeamHistory["kgiTeamId"]])
+			->asArray()
+			->orderBy('createDateTime DESC')
+			->all();
+		$allTeams = KgiTeam::find()
+			->select('t.teamName,kgi_team.*')
+			->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
+			->where(["kgiId" => $kgiTeam["kgiId"]])
+			->asArray()
+			->all();
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiTeam["kgiId"]);
+		$kgiDetail = curl_exec($api);
+		$kgiDetail = json_decode($kgiDetail, true);
+
+		curl_close($api);
+
+		return $this->render('kgi_team_history_detail', [
+			"kgiDetail" => $kgiDetail,
+			"teamName" => Team::teamName($kgiTeam["teamId"]),
+			"kgiTeamHistories" => $kgiTeamHistories,
+			"allTeams" => $allTeams,
+			"kgiTeam" => $kgiTeam
+		]);
+	}
+
+	public function actionApproveKgiTarget()
+	{
+		$kgiTeamId = $_POST["kgiTeamId"];
+		$approve = $_POST["approve"];
+		$history = KgiTeamHistory::find()
+			->where(["kgiTeamId" => $kgiTeamId, "status" => 88])
+			->orderBy('createDateTime DESC')
+			->one();
+		if ($approve == 1) {
+			$history->status = 1;
+			$kgiTeam = KgiTeam::find()->where(["kgiTeamId" => $kgiTeamId])->one();
+			$kgiTeam->target = $history["target"];
+			$kgiTeam->status = 1;
+			$kgiTeam->save(false);
+		} else {
+			$history->status = 89;
+		}
+		$history->save(false);
+		$res["status"] = true;
+		return json_encode($res);
+	}
+	public function actionApproveKgiEmployee($hash)
+	{
+		$param = ModelMaster::decodeParams($hash);
+		$kgiEmployeeHistoryId = $param["kgiEmployeeHistoryId"];
+		$teamId = User::userTeamId();
+		$kgiEmployeeHistory = KgiEmployeeHistory::find()
+			->where(["kgiEmployeeHistoryId" => $kgiEmployeeHistoryId])
+			->asArray()
+			->one();
+		$kgiEmployee = KgiEmployee::find()
+			->where(["kgiEmployeeId" => $kgiEmployeeHistory["kgiEmployeeId"]])
+			->asArray()
+			->one();
+		$kgiEmployees = KgiEmployeeHistory::find()
+			->where(["kgiEmployeeId" => $kgiEmployee["kgiEmployeeId"]])
+			->orderBy('createDateTime DESC')
+			->asArray()
+			->all();
+		$allEmployee = KgiEmployee::find()
+			->select('e.employeeFirstname,e.employeeSureName,e.teamId,kgi_employee.*')
+			->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
+			->where(["kgi_employee.kgiId" => $kgiEmployee["kgiId"], "e.teamId" => $teamId])
+			->orderBy('e.employeeFirstname')
+			->asArray()
+			->all();
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiEmployee["kgiId"]);
+		$kgiDetail = curl_exec($api);
+		$kgiDetail = json_decode($kgiDetail, true);
+
+		curl_close($api);
+
+		return $this->render('kgi_employee_history_detail', [
+			"allEmployee" => $allEmployee,
+			"kgiDetail" => $kgiDetail,
+			"employeeName" => Employee::employeeName($kgiEmployee["employeeId"]),
+			"kgiEmployee" => $kgiEmployee,
+			"kgiEmployeeHistory" => $kgiEmployeeHistory,
+			"kgiEmployees" => $kgiEmployees
+		]);
+	}
+	public function actionApproveKgiEmployeeTarget()
+	{
+		$kgiEmployeeId = $_POST["kgiEmployeeId"];
+		$approve = $_POST["approve"];
+		$history = KgiEmployeeHistory::find()
+			->where(["kgiEmployeeId" => $kgiEmployeeId, "status" => 88])
+			->orderBy('createDateTime DESC')
+			->one();
+		if ($approve == 1) {
+			$kgiEmployee = KgiEmployee::find()->where(["kgiEmployeeId" => $kgiEmployeeId])->one();
+			KgiEmployeeHistory::updateAll(["status" => 90], ["status" => [1, 2]]);
+			$history->status = 1;
+			$kgiEmployee->target = $history["target"];
+			$kgiEmployee->status = 1;
+			$kgiEmployee->save(false);
+		} else {
+			$history->status = 89;
+		}
+		$history->save(false);
+		$res["status"] = true;
 		return json_encode($res);
 	}
 	public function actionAssignKpiToKgi()

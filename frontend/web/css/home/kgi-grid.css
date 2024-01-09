@@ -1,22 +1,34 @@
 .example-5 {
     position: relative;
-    overflow-y: scroll;
-    height: 400px;
+    overflow-y: auto;
+    height: 550px;
     width: 100%;
     border: none;
     background-color: #eaeaea;
+    padding-top: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
-
+.rounded-badge{
+    border-radius: 10px;
+}
+.kgi-grid-box{
+    border-radius: 5px;
+    padding-top: 10px;
+    margin-bottom: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
 .month-feb {
     font-size: 12px;
-    padding-top: 5px;
+    /* padding-top: 5px; */
     color: #475569;
     font-weight: 600;
 }
 
 .clients-employee {
-    font-weight: 700;
-    font-size: 17px;
+    font-weight: 600;
+    font-size: 14px;
 }
 
 .bg-bsc {
@@ -36,7 +48,6 @@
 }
 
 .tokyo-ima {
-    text-align: end;
     font-size: 11px;
 }
 
@@ -47,13 +58,13 @@
 .slds-badge {
     background-color: #eaeaea;
     color: black;
-    font-size: 12px;
+    font-size: 10px;
 }
 
 .top-teamcontent {
-    margin-top: 20px;
+    margin-top: 10px;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 12px;
 }
 
 .sample-bordersolid {
@@ -62,14 +73,14 @@
 
 .Quality-diamond {
     font-weight: 700;
-    font-size: 12px;
-    padding-top: 5px;
+    font-size: 10px;
+    /* padding-top: 5px; */
 }
 
 .Quality-monthly0 {
     font-weight: 700;
-    font-size: 13px;
-    padding-top: 5px;
+    font-size: 10px;
+    /* padding-top: 5px; */
 }
 
 .imagecomment {
@@ -82,9 +93,10 @@
     border: 4px solid rgb(52, 153, 224);
     padding-top: 3px;
     background-color: #FFFFFF;
-    height: 40px;
+    height: 30px;
+    width: 30px;
     border-radius: 50%;
-    width: 40px;
+    font-size: 12px;
     font-weight: 500;
     text-align: center;
 }
@@ -94,13 +106,13 @@
 }
 
 .target-progress {
-    font-size: 13px;
+    font-size: 12px;
     color: rgb(107, 107, 107);
 }
 
 .target-million {
     font-weight: 500;
-    font-size: 13px;
+    font-size: 12px;
 }
 
 .target-plush {
@@ -111,22 +123,21 @@
 
 .pro-load2 {
     background: #ffffff;
-    font-size: 9px;
+    font-size: 5px;
     border: 4px solid rgb(52, 153, 224);
     position: relative;
     color: #000000;
-    width: 35px;
-    height: 35px;
-    padding-left: 5px;
+    width: 25px;
+    height: 25px;
+    padding-left: 1px;
     margin-left: -11px;
-    margin-top: -9px;
-    padding-top: 9px;
+    margin-top: -7px;
+    padding-top: 7px;
 }
 
 .refresh0 {
     color: rgb(50, 121, 23);
     font-size: 12px;
-    cursor: pointer;
 }
 
 .pencil-nextupdate {
@@ -145,7 +156,7 @@
     border-radius: 8px;
     color: #abadaf;
     padding-left: 5px;
-    height: 100px;
+    height: 60px;
     padding-bottom: 5px;
 }
 

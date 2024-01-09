@@ -110,13 +110,17 @@ class ModelMaster extends \yii\db\ActiveRecord
     }
     public static function dateNumberDash($dateFull)
     {
-        $d = explode(' ', $dateFull);
-        $days = $d[0];
-        $day = explode('-', $days);
-        $year = $day[0];
-        $month = $day[1];
-        $date = $day[2];
-        return $date . '-' . $month . '-' . $year;
+        if ($dateFull != '') {
+            $d = explode(' ', $dateFull);
+            $days = $d[0];
+            $day = explode('-', $days);
+            $year = $day[0];
+            $month = $day[1];
+            $date = $day[2];
+            return $date . '-' . $month . '-' . $year;
+        } else {
+            return '';
+        }
     }
     public static function dateExcel($dateFull)
     {
@@ -367,6 +371,50 @@ class ModelMaster extends \yii\db\ActiveRecord
                 break;
             case 12:
                 $month = "Dec";
+                break;
+            default:
+                $month = null;
+        }
+        return $month;
+    }
+    public static function fullMonthText($monthValue)
+    {
+        switch ($monthValue) {
+            case 1:
+                $month = "January";
+                break;
+            case 2:
+                $month = "February";
+                break;
+            case 3:
+                $month = "Marh";
+                break;
+            case 4:
+                $month = "April";
+                break;
+            case 5:
+                $month = "May";
+                break;
+            case 6:
+                $month = "June";
+                break;
+            case 7:
+                $month = "July";
+                break;
+            case 8:
+                $month = "August";
+                break;
+            case 9:
+                $month = "September";
+                break;
+            case 10:
+                $month = "October";
+                break;
+            case 11:
+                $month = "November";
+                break;
+            case 12:
+                $month = "December";
                 break;
             default:
                 $month = null;

@@ -474,6 +474,7 @@ function kgiCompanyEmployee(kgiId) {
 	$("#search-employee-box").css("display", "none");
 	$("#search-employee-kgi").val('');
 	$("#search-employee-department").val('')
+	$("#search-employee-team").val('');
 	$.ajax({
 	    type: "POST",
 	    dataType: 'json',
@@ -481,9 +482,8 @@ function kgiCompanyEmployee(kgiId) {
 	    data: {kgiId:kgiId},
 	    success: function (data) {
 		 if (data.status) { 
-		     $("#search-employee-department").html(data.departmentText);
+			 $("#search-employee-department").html(data.departmentText);
 		     $("#employeeInBranch").html(data.textEmployee);
-   
 		 }
 	    }
 	});
@@ -509,23 +509,52 @@ function kgiEmployee(employeeId, kgiId) {
 }
 function searchKgiEmployee() { 
 	var kgiId = $("#kgiId").val();
-	$("#search-employee-box").html('');
+	//$("#search-employee-box").html('');
+	// $("#search-employee-team").html('<option value="">Team</option>');
 	var searchText = $("#search-employee-kgi").val();
-	var departmentId=$("#search-employee-department").val();
-	var url = $url + 'kgi/management/search-kgi-employee';
-	// if ($.trim(searchText) != '') {
-	    $.ajax({
-		 type: "POST",
-		 dataType: 'json',
-		 url: url,
-		 data: { kgiId: kgiId, searchText: searchText,departmentId:departmentId },
-		 success: function (data) {
-		     if (data.status) {
-			  $("#search-employee-box").show();
-			  $("#search-employee-box").html(data.textEmployee);
-		     }
-		 }
-	    });
+	var departmentId = $("#search-employee-department").val();
+	var teamId = $("#search-employee-team").val();
+	
+		var url = $url + 'kgi/management/search-kgi-employee';
+		// if ($.trim(searchText) != '') {
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { kgiId: kgiId, searchText: searchText, departmentId: departmentId, teamId: teamId },
+			success: function (data) {
+				if (data.status) {
+					$("#search-employee-team").html(data.textTeam);
+					$("#employeeInBranch").html(data.textEmployee);
+				}
+			}
+		});
+	// } else { 
+	//     $("#search-employee-box").html('');
+	//     $("#search-employee-box").css("display","none");
+	// }
+}
+function searchKgiTeam() { 
+	var kgiId = $("#kgiId").val();
+	//$("#search-employee-box").html('');
+	// $("#search-employee-team").html('<option value="">Team</option>');
+	var searchText = $("#search-employee-kgi").val();
+	var departmentId = $("#search-employee-department").val();
+	var teamId = $("#search-employee-team").val();
+	
+		var url = $url + 'kgi/management/search-kgi-employee';
+		// if ($.trim(searchText) != '') {
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { kgiId: kgiId, searchText: searchText, departmentId: departmentId, teamId: teamId },
+			success: function (data) {
+				if (data.status) {
+					$("#employeeInBranch").html(data.textEmployee);
+				}
+			}
+		});
 	// } else { 
 	//     $("#search-employee-box").html('');
 	//     $("#search-employee-box").css("display","none");
@@ -607,4 +636,49 @@ function checkAllKgiEmployee(kgiId) {
 		}
 	});
 }
+function approveTargetKgiTeam(kgiTeamId, approve) {
+	var url = $url + 'kgi/management/approve-kgi-target';
+	if (approve == 1) {
+		var text = 'Are you sure to approve this target?';
+	} else { 
+		var text = 'Are you sure to reject this target?';
+	}
+	if (confirm(text)) {
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { kgiTeamId: kgiTeamId, approve: approve },
+			success: function (data) {
+				if (data.status) {
+					var url = $url + 'kgi/management/wait-approve';
+					window.location.href = url;
+				}
+			}
+		});
+	}
+}
+function approveTargetKgiEmployee(kgiEmployeeId, approve) {
+	var url = $url + 'kgi/management/approve-kgi-employee-target';
+	if (approve == 1) {
+		var text = 'Are you sure to approve this target?';
+	} else { 
+		var text = 'Are you sure to reject this target?';
+	}
+	if (confirm(text)) {
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { kgiEmployeeId: kgiEmployeeId, approve: approve },
+			success: function (data) {
+				if (data.status) {
+					var url = $url + 'kgi/management/wait-approve';
+					window.location.href = url;
+				}
+			}
+		});
+	}
+}
+  
    

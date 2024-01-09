@@ -20,6 +20,13 @@ class Role extends \frontend\models\hrvc\master\RoleMaster
     /**
      * @inheritdoc
      */
+    const ROLE_ADMIN = 1;
+    const ROLE_GM = 2;
+    const ROLE_MANAGER = 3;
+    const ROLE_SUPERVISOR = 4;
+    const ROLE_TEAML_EADER = 5;
+    const ROLE_HR = 6;
+    const ROLE_STAFF = 7;
     public function rules()
     {
         return array_merge(parent::rules(), []);

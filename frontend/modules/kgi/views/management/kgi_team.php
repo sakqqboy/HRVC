@@ -4,7 +4,6 @@ use frontend\models\hrvc\Department;
 
 if (isset($kgiTeams) && count($kgiTeams) > 0) {
 ?>
-
 	<div class="row mt-20 Assign-solid">
 		<?php
 		foreach ($kgiTeams as $departmentId => $teams) :
@@ -12,7 +11,7 @@ if (isset($kgiTeams) && count($kgiTeams) > 0) {
 				foreach ($teams as $teamId => $team) :
 
 		?>
-					<div class="col-lg-3 col-md-6 col-12">
+					<div class="col-lg-3 col-3">
 						<div class="col-12">
 							<div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
 						</div>

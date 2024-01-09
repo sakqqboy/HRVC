@@ -68,7 +68,32 @@ class Branch extends \backend\models\hrvc\master\BranchMaster
             ->where(["userId" => $userId])
             ->asArray()
             ->one();
-        $employee = Employee::find()->select('branchId')->where(["employeeId" => $user["employeeId"]])->asArray()->one();
+        $employee = Employee::find()
+            ->select('branchId')
+            ->where(["employeeId" => $user["employeeId"]])
+            ->asArray()
+            ->one();
         return $employee["branchId"];
+    }
+    public static function companyBranch($companyId)
+    {
+        $branches = Branch::find()->select('branchId')
+            ->where(["companyId" => $companyId])
+            ->asArray()
+            ->orderBy('branchId')
+            ->all();
+
+        $branchId = [];
+        if (isset($branches) && count($branches) > 0) {
+            $i = 0;
+            foreach ($branches as $branch) :
+                $branchId[$i] = $branch["branchId"];
+                $i++;
+            endforeach;
+        } else {
+            $branchId[0] = 0;
+        }
+        return $branchId;
+        //throw new Exception(print_r($branches, true));
     }
 }

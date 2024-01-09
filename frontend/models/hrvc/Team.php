@@ -82,4 +82,17 @@ class Team extends \frontend\models\hrvc\master\TeamMaster
             return '';
         }
     }
+    public static function userTeam($userId)
+    {
+        $user = User::find()
+            ->select('employeeId')
+            ->where(["userId" => $userId])
+            ->asArray()
+            ->one();
+        $employee = Employee::find()->select('teamId')
+            ->where(["employeeId" => $user["employeeId"]])
+            ->asArray()
+            ->one();
+        return $employee["teamId"];
+    }
 }
