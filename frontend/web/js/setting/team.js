@@ -14,7 +14,7 @@ function branchCompany() {
         dataType: 'json',
         url: url,
         data: { companyId: companyId },
-        success: function(data) {
+        success: function (data) {
             $("#branch-team").removeAttr("disabled", "true");
             $("#branch-team").html(data.textSelect);
         }
@@ -29,7 +29,7 @@ function departmentBranch() {
         dataType: 'json',
         url: url,
         data: { branchId: branchId },
-        success: function(data) {
+        success: function (data) {
             $("#department-team").removeAttr("disabled", "true");
             $("#department-team").html(data.textSelect);
         }
@@ -44,7 +44,7 @@ function teamDepartment() {
         dataType: 'json',
         url: url,
         data: { departmentId: departmentId },
-        success: function(data) {
+        success: function (data) {
             $("#team-department").removeAttr("disabled", "true");
             $("#team-department").html(data.textSelect);
             $("#title-department").removeAttr("disabled", "true");
@@ -62,7 +62,7 @@ function branchCompanyFilter() {
         dataType: 'json',
         url: url,
         data: { companyId: companyId },
-        success: function(data) {
+        success: function (data) {
             $("#branch-team-filter").removeAttr("disabled", "true");
             $("#branch-team-filter").html(data.textSelect);
         }
@@ -77,7 +77,7 @@ function departmentBranchFilter() {
         dataType: 'json',
         url: url,
         data: { branchId: branchId },
-        success: function(data) {
+        success: function (data) {
             $("#department-team-filter").removeAttr("disabled", "true");
             $("#department-team-filter").html(data.textSelect);
         }
@@ -92,7 +92,7 @@ function teamDepartmentFilter() {
         dataType: 'json',
         url: url,
         data: { departmentId: departmentId },
-        success: function(data) {
+        success: function (data) {
             $("#team-department-filter").removeAttr("disabled", "true");
             $("#team-department-filter").html(data.textSelect);
         }
@@ -128,7 +128,7 @@ function saveCreateTeam() {
             dataType: 'json',
             url: url,
             data: { departmentId: departmentId, teamName: teamName },
-            success: function(data) {
+            success: function (data) {
                 if (data.status) {
 
                     $("#company-team").val('');
@@ -153,7 +153,7 @@ function updateTeam(teamId) {
         dataType: 'json',
         url: url,
         data: { teamId: teamId },
-        success: function(data) {
+        success: function (data) {
             $("#create-team").css("display", "none");
             $("#update-team").show();
             $("#reset-team").show();
@@ -168,7 +168,7 @@ function updateTeam(teamId) {
     });
 }
 
-$("#update-team").click(function(e) {
+$("#update-team").click(function (e) {
     var branchId = $("#branch-team").val();
     var companyId = $("#company-team").val();
     var teamId = $("#teamId").val();
@@ -198,7 +198,7 @@ $("#update-team").click(function(e) {
             dataType: 'json',
             url: url,
             data: { departmentId: departmentId, teamName: teamName, teamId: teamId },
-            success: function(data) {
+            success: function (data) {
                 if (data.status) {
                     $("#company-team").val('');
                     $("#branch-team").val('');
@@ -214,7 +214,7 @@ $("#update-team").click(function(e) {
         });
     }
 });
-$("#reset-team").click(function(e) {
+$("#reset-team").click(function (e) {
     $("#company-team").val('');
     $("#teamId").val('');
     $("#branch-team").val('');
@@ -235,7 +235,7 @@ function deleteTeam(teamId) {
             dataType: 'json',
             url: url,
             data: { teamId: teamId },
-            success: function(data) {
+            success: function (data) {
                 if (data.status) {
                     $("#team-" + teamId).hide(200);
                 } else {
@@ -246,7 +246,7 @@ function deleteTeam(teamId) {
         });
     }
 }
-function filterTeam() { 
+function filterTeam() {
     var companyId = $("#company-team-filter").val();
     var branchId = $("#branch-team-filter").val();
     var departmentId = $("#department-team-filter").val();
@@ -255,9 +255,9 @@ function filterTeam() {
         type: "POST",
         dataType: 'json',
         url: url,
-        data: { companyId: companyId,branchId:branchId,departmentId:departmentId },
-        success: function(data) {
-           
+        data: { companyId: companyId, branchId: branchId, departmentId: departmentId },
+        success: function (data) {
+
 
         }
     });

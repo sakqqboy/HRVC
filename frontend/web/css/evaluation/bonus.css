@@ -1,0 +1,290 @@
+.images-bonuesave {
+    width: 14px;
+    margin-top: -4px;
+}
+
+.picturebonus {
+    color: #F6C516;
+}
+
+.b2solid {
+    border-right: 2px lightgray solid;
+}
+
+.bonus-select {
+    font-size: 12px;
+    border-radius: 15px;
+    background-color: #F0F2F4;
+}
+
+.picture-FilterPlus-bonus {
+    width: 20px;
+}
+
+.bonus-point {
+    width: 18px;
+    cursor: pointer;
+}
+
+.bg-headerbonus {
+    background-color: #87CDFF;
+    font-size: 10px;
+    color: white;
+}
+
+.images-solidbonus1 {
+    width: 25px;
+    padding-top: 10px;
+}
+
+.bonus-sm1 {
+    padding-top: 10px;
+    color: gray;
+    font-size: 10px;
+}
+
+.bonussubmit {
+    background-color: #308FFF;
+    color: white;
+    font-size: 13px;
+    border: none;
+}
+
+.edit-bonusnumber {
+    margin-left: -12px;
+}
+
+.pictureEdit1 {
+    width: 9px;
+    cursor: pointer;
+    margin-left: 7px;
+}
+
+.header1-bonus {
+    font-size: 9px;
+}
+
+.salary1 {
+    font-size: 11px;
+    color: gray;
+    text-align: center;
+}
+
+.salary2 {
+    font-size: 10px;
+    padding-top: 5px;
+    font-weight: 600;
+}
+
+.salary3 {
+    font-size: 7px;
+    color: gray;
+}
+
+.salary4 {
+    font-size: 10px;
+    font-weight: 600;
+    padding-top: 5px;
+}
+
+.salary-bule {
+    font-size: 9px;
+    font-weight: 600;
+    padding-top: 5px;
+    color: #65ADEF;
+}
+
+.salary-red {
+    color: #D80000;
+    font-size: 9px;
+    font-weight: 600;
+}
+
+.salary-bonusAllsolid1 {
+    border-right: 2px lightgray solid;
+}
+
+.salary-bonusAllsolid2 {
+    border-left: 2px lightgray solid;
+}
+
+.salary-bonusAllsolid3 {
+    border-left: 2px lightgray solid;
+}
+
+
+.imagelink-1 {
+    width: 10px;
+    margin-top: 3px;
+}
+
+.like-smile {
+    width: 12px;
+}
+
+.bottomsolid-salarybonus {
+    border-bottom: 2px #6CBDEB solid;
+    font-size: 9px;
+    padding-top: 8px;
+    text-align: center;
+}
+
+.cd-F4F6F9 {
+    background-color: #F4F6F9;
+    margin-top: 10px;
+    border: none;
+    color: #393939;
+}
+
+.bonus-employee1 {
+    text-transform: uppercase;
+    font-size: 10px;
+    margin-left: -5px;
+}
+
+.bonus-title1 {
+    text-transform: uppercase;
+    font-size: 10px;
+    /* margin-left: -5px; */
+}
+
+.bonus-rank1 {
+    text-transform: uppercase;
+    font-size: 10px;
+}
+
+.bonus-Bonus1 {
+    text-transform: uppercase;
+    font-size: 10px;
+}
+
+.bonus-SG1 {
+    text-transform: uppercase;
+    font-size: 10px;
+}
+
+.bonus-Eval1 {
+    text-transform: uppercase;
+    font-size: 10px;
+}
+
+.bonus-Adj1 {
+    text-transform: uppercase;
+    font-size: 10px;
+}
+
+.bonus-Final1 {
+    text-transform: uppercase;
+    font-size: 10px;
+}
+
+.bonus-Pay1 {
+    text-transform: uppercase;
+    font-size: 10px;
+}
+
+
+.bonus-Department {
+    width: 18px;
+}
+
+.F4F6F9-Accounts {
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: -1px;
+}
+
+.fff-white {
+    border: none;
+    background-color: white;
+}
+
+.ladyjpg {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.bonus-user {
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: -0.7px;
+    width: 8rem;
+}
+
+.bonus-Position {
+    border-left: 1px lightgray solid;
+    font-size: 9px;
+    letter-spacing: -0.7px;
+    font-weight: 500;
+}
+
+.bonus-rank {
+    border-left: 1px lightgray solid;
+    font-size: 9px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.bonus-Bonus {
+    border-left: 1px lightgray solid;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: -0.7px;
+    text-align: center;
+}
+
+.bonus-SG {
+    border-left: 1px lightgray solid;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: -0.7px;
+    margin-left: 18px;
+}
+
+.bonus-Eval {
+    border-left: 1px lightgray solid;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: -0.7px;
+    margin-left: 18px;
+}
+
+.bonus-Adjustment {
+    border-left: 1px lightgray solid;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: -0.7px;
+}
+
+.bonus-finaladjustment {
+    border-left: 1px lightgray solid;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: -0.7px;
+    padding-left: 40px;
+}
+
+.bonus-Pay {
+    border-left: 1px lightgray solid;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: -0.7px;
+}
+
+.bonus-Payable {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: -0.7px;
+    /* margin-left: -50px; */
+}
+
+.width1 {
+    width: 15px;
+    margin-left: 3px;
+}
+
+.width2 {
+    width: 12px;
+    margin-left: 8px;
+}

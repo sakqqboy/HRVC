@@ -1,7 +1,5 @@
 <?php
-
-$this->title = 'PMI Weight Allocation';
-
+$this->title = 'Add allocate weight';
 ?>
 
 <div class="col-12 mt-90 alert alert-Evaluator">
@@ -82,27 +80,142 @@ $this->title = 'PMI Weight Allocation';
         <div class="col-lg-9 col-md-6 col-12">
             <div class="alert aler-ALLDepartment">
                 <div class="row">
-                    <div class="col-4">
-                        <div class="FrameEvaluation"> PMI Weight Allocation</div>
+                    <div class="col-5">
+                        <div class="FrameEvaluation"> Weight Configuration Name</div>
                     </div>
                     <div class="col-4">
-                        <button type="submit" class="btn btn-primary"> Allocate Weight</button>
+                        <input type="text" class="form-control" id="exampleInputtext" aria-describedby="">
                     </div>
-                    <div class="col-4 text-end">
-                        <button type="submit" class="btn btn-info Next-1"> Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+                    <div class="col-3 text-end">
+                        <button type="submit" class="btn btn-primary"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/save-2.png" class="Save-2"> SAVE</button>
                     </div>
                 </div>
                 <div class="row mt-20">
-                    <div class="col-lg-9">
-                        <div class="alert alert-Evaluator">
-                            <div class="col-12 andAccounts">
-                                Accounts & Taxation
+                    <div class="col-lg-3 alert alert-Evaluator">
+                        <div class="col-12 alert alert-light">
+                            <span><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Team-1.png" class="widthSave-3"> <span class="Select-add">Select Participants</span></span>
+                            <div class="row mt-10">
+                                <div class="col-lg-5 col-md-6 col-6">
+                                    <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#0496FF" style="width:1.9rem;height:1.9rem;"> <span class="font-size-11"> Title</span>
+                                </div>
+                                <div class="col-lg-7 col-md-6 col-6">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                        <label class="form-check-label inlineDepartment1" for="inlineCheckbox1"> Department</label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        <div class="col-12 controlcheckboxSelect">
+                            <div class="form-check E2F5FF-border">
+                                <input class="form-check-input" type="checkbox" value="" id="">
+                                <label class="form-check-label" for="defaultCheck">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Rank-1.png" class="pictureRank-1"> Manager <span class="badge rounded-pill bg-primary">MM</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12 all-allocateuser">
+                            <div class="form-check">
+                                <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label label-username" for="flexCheckDefault">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="allocate-user"> Charles Bhattacharjya
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12 all-allocateuser">
+                            <div class="form-check">
+                                <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label label-username" for="flexCheckDefault">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="allocate-user"> Charles Bhattacharjya
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12 all-allocateuser">
+                            <div class="form-check">
+                                <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label label-username" for="flexCheckDefault">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="allocate-user"> Charles Bhattacharjya
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12 all-allocateuser">
+                            <div class="form-check">
+                                <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label label-username" for="flexCheckDefault">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="allocate-user"> Charles Bhattacharjya
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12 all-allocateuser">
+                            <div class="form-check">
+                                <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label label-username" for="flexCheckDefault">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="allocate-user"> Charles Bhattacharjya
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12 all-allocateuser">
+                            <div class="form-check">
+                                <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label label-username" for="flexCheckDefault">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="allocate-user"> Charles Bhattacharjya
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12 controlcheckboxSelect">
+                            <div class="form-check E2F5FF-border">
+                                <input class="form-check-input" type="checkbox" value="" id="">
+                                <label class="form-check-label" for="defaultCheck">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Rank-1.png" class="pictureRank-1"> Assistant Manager <span class="badge rounded-pill bg-primary">MM</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12 all-allocateuser">
+                            <div class="form-check">
+                                <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label label-username" for="flexCheckDefault">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="allocate-user"> Charles Bhattacharjya
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12 all-allocateuser">
+                            <div class="form-check">
+                                <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label label-username" for="flexCheckDefault">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="allocate-user"> Charles Bhattacharjya
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12 all-allocateuser">
+                            <div class="form-check">
+                                <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label label-username" for="flexCheckDefault">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="allocate-user"> Charles Bhattacharjya
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12 all-allocateuser">
+                            <div class="form-check">
+                                <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label label-username" for="flexCheckDefault">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="allocate-user"> Charles Bhattacharjya
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12 all-allocateuser">
+                            <div class="form-check">
+                                <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label label-username" for="flexCheckDefault">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="allocate-user"> Charles Bhattacharjya
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
                         <div class="row">
                             <div class="col-lg-2 col-md-6 col-12">
                                 <div class="alert alert-Evaluator">
-                                    <div class="col-12 text.PIM">
+                                    <div class="col-12 PIM-allocate text-center">
                                         PIM
                                     </div>
                                     <div class="col-12 mt-10">
@@ -157,11 +270,21 @@ $this->title = 'PMI Weight Allocation';
                                 <div class="alert alert-Evaluator silly_scrollbar">
                                     <div class="card">
                                         <div class="row">
-                                            <div class="col-5 flagkey">
+                                            <div class="col-3 flagkey">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/KGI.png" class="icons-KGI2"> Key Goal Indicator
                                             </div>
-                                            <div class="col-4 text-end">
-                                                <div class="col-12 flagkey">
+                                            <div class="col-2">
+                                                <div class="col-6 ADD-plus1-allocate">
+                                                    <i class="fa fa-plus-circle" aria-hidden="true"></i> ADD
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="col-6 Edit-plus1-allocate">
+                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> EDIT
+                                                </div>
+                                            </div>
+                                            <div class="col-2 text-end">
+                                                <div class="col-12  AddParticipant">
                                                     Participants
                                                 </div>
                                             </div>
@@ -170,9 +293,8 @@ $this->title = 'PMI Weight Allocation';
                                                     <ul class="try-cricle">
                                                         <li class="tri-li"> <img src="/HRVC/frontend/web/image/avatar1.png" class="image-avatar1"></li>
                                                         <li class="tri-li"> <img src="/HRVC/frontend/web/image/Watanabe.png" class="image-avatar2"></li>
-                                                        <li class="tri-li"> <img src="/HRVC/frontend/web/image/avatar3.png" class="image-avatar3"></li>
                                                         <a href="" class="none">
-                                                            <li class="tri-li-number"> 3 </li>
+                                                            <li class="tri-li-number typenumber"> 27 </li>
                                                         </a>
                                                     </ul>
                                                 </span>
@@ -182,7 +304,7 @@ $this->title = 'PMI Weight Allocation';
                                         <div class="row">
                                             <div class="col-lg-2">
                                                 <div class="card" style="width: 4rem;font-size:12px;">
-                                                    <div class="card-header fonTotal">Total Sales</div>
+                                                    <div class="card-header fonTotal">Total Sales <i class="fa fa-minus-circle add-minus-circle" aria-hidden="true"></i></div>
                                                     <div class="card-body text-dark">
                                                         <div class="col-12">
                                                             <span class="badge bg-lighttotal text-primary">
@@ -197,7 +319,7 @@ $this->title = 'PMI Weight Allocation';
                                             </div>
                                             <div class="col-lg-2">
                                                 <div class="card" style="width: 4rem;font-size:12px;">
-                                                    <div class="card-header fonTotal">Profit</div>
+                                                    <div class="card-header fonTotal">Profit <i class="fa fa-minus-circle add-minus-circle" aria-hidden="true"></i></div>
                                                     <div class="card-body text-dark">
                                                         <div class="col-12">
                                                             <span class="badge bg-lighttotal text-primary">
@@ -212,7 +334,7 @@ $this->title = 'PMI Weight Allocation';
                                             </div>
                                             <div class="col-lg-2">
                                                 <div class="card" style="width: 4rem; font-size:12px;">
-                                                    <div class="card-header fonTotal">Net Profit</div>
+                                                    <div class="card-header fonTotal">Net Profit <i class="fa fa-minus-circle add-minus-circle" aria-hidden="true"></i></div>
                                                     <div class="card-body text-dark">
                                                         <div class="col-12 text-center">
                                                             <span class="badge bg-lighttotal text-primary">
@@ -227,7 +349,7 @@ $this->title = 'PMI Weight Allocation';
                                             </div>
                                             <div class="col-lg-2">
                                                 <div class="card" style="width: 4rem; font-size:12px;">
-                                                    <div class="card-header fonTotal">Cost</div>
+                                                    <div class="card-header fonTotal">Cost <i class="fa fa-minus-circle add-minus-circle" aria-hidden="true"></i></div>
                                                     <div class="card-body text-dark">
                                                         <div class="col-12">
                                                             <span class="badge bg-lighttotal text-primary">
@@ -242,7 +364,7 @@ $this->title = 'PMI Weight Allocation';
                                             </div>
                                             <div class="col-lg-2">
                                                 <div class="card" style="width: 4rem; font-size:12px;">
-                                                    <div class="card-header fonTotal">labor</div>
+                                                    <div class="card-header fonTotal">labor <i class="fa fa-minus-circle add-minus-circle" aria-hidden="true"></i></div>
                                                     <div class="card-body text-dark">
                                                         <div class="col-12">
                                                             <span class="badge bg-lighttotal text-primary">
@@ -257,7 +379,7 @@ $this->title = 'PMI Weight Allocation';
                                             </div>
                                             <div class="col-lg-2">
                                                 <div class="card" style="width: 4rem; font-size:12px;">
-                                                    <div class="card-header fonTotal">Webinar</div>
+                                                    <div class="card-header fonTotal">Webinar <i class="fa fa-minus-circle add-minus-circle" aria-hidden="true"></i></div>
                                                     <div class="card-body text-dark">
                                                         <div class="col-12">
                                                             <span class="badge bg-lighttotal text-primary">
@@ -274,11 +396,21 @@ $this->title = 'PMI Weight Allocation';
                                     </div>
                                     <div class="card">
                                         <div class="row">
-                                            <div class="col-5 flagkey">
+                                            <div class="col-3 flagkey">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/KPI.png" class="icons-KGI2"> Key Performance Indicator
                                             </div>
-                                            <div class="col-4 text-end">
-                                                <div class="col-12 flagkey">
+                                            <div class="col-2">
+                                                <div class="col-12 ADD-plus1-allocate">
+                                                    <i class="fa fa-plus-circle" aria-hidden="true"></i> ADD
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="col-12 Edit-plus1-allocate">
+                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> EDIT
+                                                </div>
+                                            </div>
+                                            <div class="col-2 text-end">
+                                                <div class="col-12  AddParticipant">
                                                     Participants
                                                 </div>
                                             </div>
@@ -287,9 +419,8 @@ $this->title = 'PMI Weight Allocation';
                                                     <ul class="try-cricle">
                                                         <li class="tri-li"> <img src="/HRVC/frontend/web/image/avatar1.png" class="image-avatar1"></li>
                                                         <li class="tri-li"> <img src="/HRVC/frontend/web/image/Watanabe.png" class="image-avatar2"></li>
-                                                        <li class="tri-li"> <img src="/HRVC/frontend/web/image/avatar3.png" class="image-avatar3"></li>
                                                         <a href="" class="none">
-                                                            <li class="tri-li-number"> 3 </li>
+                                                            <li class="tri-li-number typenumber"> 10 </li>
                                                         </a>
                                                     </ul>
                                                 </span>
@@ -297,9 +428,9 @@ $this->title = 'PMI Weight Allocation';
                                         </div>
                                         <hr>
                                         <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="card" style="width: 6rem;font-size:12px;">
-                                                    <div class="card-header fonTotal">Total Sales</div>
+                                            <div class="col-lg-2 col-md-6 col-6">
+                                                <div class="card" style="width: 4rem; font-size:12px;">
+                                                    <div class="card-header fonTotal">Total Sales <i class="fa fa-minus-circle add-minus-circle" aria-hidden="true"></i></div>
                                                     <div class="card-body text-dark">
                                                         <div class="col-12 text-center">
                                                             <span class="badge bg-lighttotal text-primary">
@@ -312,8 +443,8 @@ $this->title = 'PMI Weight Allocation';
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4">
-                                                <div class="card" style="width: 6rem;font-size:12px;">
+                                            <div class="col-lg-2 col-md-6 col-6">
+                                                <div class="card" style="width: 4rem;font-size:12px;">
                                                     <div class="card-header fonTotal">Total Sales</div>
                                                     <div class="card-body text-dark">
                                                         <div class="col-12 text-center">
@@ -327,8 +458,53 @@ $this->title = 'PMI Weight Allocation';
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4">
-                                                <div class="card" style="width: 6rem; font-size:12px;">
+                                            <div class="col-lg-2 col-md-6 col-6">
+                                                <div class="card" style="width: 4rem; font-size:12px;">
+                                                    <div class="card-header fonTotal">Total Sales</div>
+                                                    <div class="card-body text-dark">
+                                                        <div class="col-12 text-center">
+                                                            <span class="badge bg-lighttotal text-primary">
+                                                                <?= number_format(100000) ?>k
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-12 text-primary text-center pt-10">
+                                                            <?= number_format(8) ?>%
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-6 col-6">
+                                                <div class="card" style="width: 4rem; font-size:12px;">
+                                                    <div class="card-header fonTotal">Total Sales</div>
+                                                    <div class="card-body text-dark">
+                                                        <div class="col-12 text-center">
+                                                            <span class="badge bg-lighttotal text-primary">
+                                                                <?= number_format(100000) ?>k
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-12 text-primary text-center pt-10">
+                                                            <?= number_format(8) ?>%
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-6 col-6">
+                                                <div class="card" style="width: 4rem; font-size:12px;">
+                                                    <div class="card-header fonTotal">Total Sales</div>
+                                                    <div class="card-body text-dark">
+                                                        <div class="col-12 text-center">
+                                                            <span class="badge bg-lighttotal text-primary">
+                                                                <?= number_format(100000) ?>k
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-12 text-primary text-center pt-10">
+                                                            <?= number_format(8) ?>%
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-6 col-6">
+                                                <div class="card" style="width: 4rem; font-size:12px;">
                                                     <div class="card-header fonTotal">Total Sales</div>
                                                     <div class="card-body text-dark">
                                                         <div class="col-12 text-center">
@@ -343,71 +519,6 @@ $this->title = 'PMI Weight Allocation';
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-12">
-                        <div class="alert alert-Evaluator">
-                            <div class="col-12 txt-Weight">
-                                <img src="<?= Yii::$app->homeUrl ?>image/weight.png" class="image-weight"> &nbsp; Weight Configurations
-                            </div>
-                            <div class="col-12 alert-white mt-15" style="border: none;">
-                                <div class="row">
-                                    <div class="col-8 border-edit mt-20">
-                                        Accounts & Taxation
-                                    </div>
-                                    <div class="col-4 text-end border-edit mt-20">
-                                        <i class="fa fa-pencil-square-o weight-pencil" aria-hidden="true"></i> <i class="fa fa-trash weight-trash" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="col-8 border-edit mt-20">
-                                        Biki Das
-                                    </div>
-                                    <div class="col-4 text-end border-edit mt-20">
-                                        <i class="fa fa-pencil-square-o weight-pencil" aria-hidden="true"></i> <i class="fa fa-trash weight-trash" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="col-8 border-edit mt-10">
-                                        Internal Control
-                                    </div>
-                                    <div class="col-4 text-end border-edit mt-20">
-                                        <i class="fa fa-pencil-square-o weight-pencil" aria-hidden="true"></i> <i class="fa fa-trash weight-trash" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="col-8 border-edit mt-10">
-                                        Amir San
-                                    </div>
-                                    <div class="col-4 text-end border-edit mt-20">
-                                        <i class="fa fa-pencil-square-o weight-pencil" aria-hidden="true"></i> <i class="fa fa-trash weight-trash" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="col-8 border-edit mt-20">
-                                        Amir San
-                                    </div>
-                                    <div class="col-4 text-end border-edit mt-20">
-                                        <i class="fa fa-pencil-square-o weight-pencil" aria-hidden="true"></i> <i class="fa fa-trash weight-trash" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="col-8 border-edit mt-20">
-                                        Internal Control
-                                    </div>
-                                    <div class="col-4 text-end border-edit mt-20">
-                                        <i class="fa fa-pencil-square-o weight-pencil" aria-hidden="true"></i> <i class="fa fa-trash weight-trash" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="col-8 border-edit mt-20">
-                                        Amir San
-                                    </div>
-                                    <div class="col-4 text-end border-edit mt-20">
-                                        <i class="fa fa-pencil-square-o weight-pencil" aria-hidden="true"></i> <i class="fa fa-trash weight-trash" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="col-8 border-edit mt-20">
-                                        Amir San
-                                    </div>
-                                    <div class="col-4 text-end border-edit mt-20">
-                                        <i class="fa fa-pencil-square-o weight-pencil" aria-hidden="true"></i> <i class="fa fa-trash weight-trash" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="col-8 border-edit mt-20">
-                                        Internal Control
-                                    </div>
-                                    <div class="col-4 text-end border-edit mt-20">
-                                        <i class="fa fa-pencil-square-o weight-pencil" aria-hidden="true"></i> <i class="fa fa-trash weight-trash" aria-hidden="true"></i>
                                     </div>
                                 </div>
                             </div>

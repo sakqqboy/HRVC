@@ -12,18 +12,7 @@
 }
 
 .imagessettingsTerm1 {
-    width: 17px;
-}
-
-.settingssearch {
-    margin-top: 12px;
-    z-index: 2;
-    margin-left: -60px;
-}
-
-.settingssearch-radius {
-    border-radius: 30px;
-    width: 100rem;
+    width: 13px;
 }
 
 .viewlog {
@@ -33,14 +22,15 @@
 
 .imagessettingsFillerPlus {
     width: 20px;
-    margin-left: 20px;
+    margin-left: 50px;
     margin-top: 10px;
     cursor: pointer;
 }
 
 .Term1Employees {
-    padding-top: 5px;
+    padding-top: 10px;
     margin-left: 15px;
+    font-size: 13px;
 }
 
 .bgcradlightgray {
@@ -166,6 +156,58 @@
     font-size: 13px;
     margin-top: 8px;
 } */
+
+.search-box {
+    /* width: 150px; */
+    position: relative;
+    display: flex;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.search-input {
+    width: 250px;
+    font-size: 16px;
+    padding: 15px 45px 15px 15px;
+    background-color: #F0F2F4;
+    color: #6c6c6c;
+    border-radius: 20px;
+    border: none;
+    transition: all .4s;
+    height: 40px;
+}
+
+.search-input:focus {
+    border: none;
+    outline: none;
+    /* box-shadow: 0 1px 12px #b8c6db; */
+    /* -moz-box-shadow: 0 1px 12px #b8c6db; */
+    /* -webkit-box-shadow: 0 1px 12px #b8c6db; */
+}
+
+.search-btn {
+    background-color: transparent;
+    font-size: 18px;
+    padding: 6px 9px;
+    margin-left: -45px;
+    border: none;
+    color: #6c6c6c;
+    transition: all .4s;
+    z-index: 10;
+}
+
+.search-btn:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+    color: black;
+}
+
+.search-btn:focus {
+    outline: none;
+    color: black;
+}
 
 .form-check-input-checkEmployees3:checked {
     border-radius: 50%;
@@ -353,6 +395,7 @@ div[role="progressbarred"]::after {
 .cardPrimaryEvaluator {
     background-color: #E6EDF3;
     border: none;
+    font-size: 12px;
     border-radius: 1px;
 }
 
@@ -367,8 +410,8 @@ div[role="progressbarred"]::after {
 
 .imageDepartmentIT {
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
 }
 
 /* .Accountsborderdark {
