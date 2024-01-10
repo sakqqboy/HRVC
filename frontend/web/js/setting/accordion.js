@@ -143,6 +143,7 @@ function generateCalendarDays(currentDate) {
     calendarYears.value = year;
 }
 
+
 function getTotalDaysInAMonth(year, month) {
     return new Date(year, month + 1, 0).getDate();
 }
@@ -216,3 +217,4 @@ accordionBtns.forEach((accordion) => {
         }
     };
 });
+//end//

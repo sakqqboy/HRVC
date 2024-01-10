@@ -77,7 +77,7 @@
 }
 
 .salary3 {
-    font-size: 7px;
+    font-size: 9px;
     color: gray;
 }
 
@@ -101,20 +101,27 @@
 }
 
 .salary-bonusAllsolid1 {
-    border-right: 2px lightgray solid;
+    border-right: 1px lightgray solid;
+    margin-left: -5px;
 }
 
 .salary-bonusAllsolid2 {
-    border-left: 2px lightgray solid;
+    border-left: 1px lightgray solid;
+    margin-left: -30px;
 }
 
 .salary-bonusAllsolid3 {
-    border-left: 2px lightgray solid;
+    border-left: 1px lightgray solid;
+    /* margin-left: -30px; */
+}
+
+.salary-bonusAllsolid4 {
+    /* margin-left: -30px; */
 }
 
 
 .imagelink-1 {
-    width: 10px;
+    width: 12px;
     margin-top: 3px;
 }
 
@@ -185,12 +192,12 @@
 
 
 .bonus-Department {
-    width: 18px;
+    width: 16px;
 }
 
 .F4F6F9-Accounts {
     font-weight: 600;
-    font-size: 15px;
+    font-size: 13px;
     letter-spacing: -1px;
 }
 
@@ -208,26 +215,27 @@
 .bonus-user {
     font-weight: 500;
     font-size: 11px;
+    border-right: 1px lightgray solid;
     letter-spacing: -0.7px;
     width: 8rem;
 }
 
 .bonus-Position {
-    border-left: 1px lightgray solid;
+    border-right: 1px lightgray solid;
     font-size: 9px;
     letter-spacing: -0.7px;
     font-weight: 500;
 }
 
 .bonus-rank {
-    border-left: 1px lightgray solid;
+    border-right: 1px lightgray solid;
     font-size: 9px;
     font-weight: 500;
     text-align: center;
 }
 
 .bonus-Bonus {
-    border-left: 1px lightgray solid;
+    border-right: 1px lightgray solid;
     font-size: 10px;
     font-weight: 500;
     letter-spacing: -0.7px;
@@ -235,7 +243,7 @@
 }
 
 .bonus-SG {
-    border-left: 1px lightgray solid;
+    border-right: 1px lightgray solid;
     font-size: 9px;
     font-weight: 500;
     letter-spacing: -0.7px;
@@ -243,7 +251,7 @@
 }
 
 .bonus-Eval {
-    border-left: 1px lightgray solid;
+    border-right: 1px lightgray solid;
     font-size: 9px;
     font-weight: 500;
     letter-spacing: -0.7px;
@@ -251,18 +259,17 @@
 }
 
 .bonus-Adjustment {
-    border-left: 1px lightgray solid;
+    border-right: 1px lightgray solid;
     font-size: 9px;
     font-weight: 500;
     letter-spacing: -0.7px;
 }
 
 .bonus-finaladjustment {
-    border-left: 1px lightgray solid;
     font-size: 9px;
     font-weight: 500;
+    width: 90px;
     letter-spacing: -0.7px;
-    padding-left: 40px;
 }
 
 .bonus-Pay {
@@ -270,13 +277,23 @@
     font-size: 9px;
     font-weight: 500;
     letter-spacing: -0.7px;
+    margin-left: -5px;
 }
 
 .bonus-Payable {
     font-size: 9px;
+    border-left: 1px lightgray solid;
     font-weight: 500;
     letter-spacing: -0.7px;
-    /* margin-left: -50px; */
+    margin-left: -7px;
+}
+
+.finaladjustment-ml {
+    margin-left: -5px;
+}
+
+.crd-bonus-notborder {
+    border: none;
 }
 
 .width1 {
@@ -286,5 +303,95 @@
 
 .width2 {
     width: 12px;
+    cursor: pointer;
     margin-left: 8px;
+}
+
+.width3 {
+    width: 12px;
+    cursor: pointer;
+}
+
+.Departments12 {
+    font-size: 9px;
+    font-weight: 500;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* start */
+
+.container-bonus1 {
+    width: 100%;
+    color: white;
+    background: #2979FF;
+    font-family: 'Roboto', sans-serif;
+    margin-top: 20%;
+}
+
+.progressbar-bonus {
+    counter-reset: step;
+    color: black;
+}
+
+.progressbar-bonus li {
+    position: relative;
+    list-style: none;
+    float: left;
+    width: 33.33%;
+    text-align: center;
+}
+
+/* Circles */
+.progressbar-bonus li:before {
+    content: counter(step);
+    counter-increment: step;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #d8d8d8;
+    display: block;
+    text-align: center;
+    margin: 0 auto 10px auto;
+    border-radius: 50%;
+    background-color: #d8d8d8;
+    /* Center # in circle */
+    line-height: 39px;
+}
+
+.progressbar-bonus li:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background: #d8d8d8;
+    top: 20px;
+    /*half of height Parent (li) */
+    left: -50%;
+    z-index: -1;
+}
+
+.progressbar-bonus li:first-child:after {
+    content: none;
+}
+
+.progressbar-bonus li.active:before {
+    background: #0099e6;
+    color: white;
+    content: "E1";
+}
+
+.progressbar-bonus li.active+li:after {
+    background: #0099e6;
 }
