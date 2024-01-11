@@ -1,0 +1,140 @@
+.accordion-rank1-edit {
+    width: 14px;
+}
+
+.accounts-edit1 {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.4px;
+}
+
+.pictureDepartment-salary-edit {
+    width: 23px;
+    background-color: #308FFF;
+    border-radius: 3px;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.alert-F6F6F66 {
+    background-color: #F6F6F6;
+}
+
+.edit-Range {
+    padding-left: 20px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.score-salaryedit {
+    text-transform: uppercase;
+    font-size: 12px;
+    padding-left: 60px;
+    margin-top: 90px;
+    font-weight: 500;
+}
+
+.Increment-salaryedit {
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 50px;
+    width: 15rem;
+}
+
+.header-salaryedit {
+    background-color: #87CDFF;
+    border-radius: 4px 4px 0 0;
+    text-align: center;
+    font-weight: 500;
+    font-size: 12px;
+    width: 3.3rem;
+}
+
+.number-salaryedit {
+    font-size: 12px;
+    width: 3.4rem;
+    border-radius: 3px;
+    font-weight: 500;
+    margin-top: -10px;
+}
+
+.number-salaryedit2 {
+    font-size: 12px;
+    width: 3.4rem;
+    border-radius: 3px;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.set-mrg-salaryedit1 {
+    margin-top: 50px;
+}
+
+.set-mrg-salaryedit2 {
+    margin-top: 25px;
+    margin-left: 110px;
+}
+
+.set-mrg-salaryedit3 {
+    margin-top: 25px;
+    margin-left: 110px;
+}
+
+.linesalaryEdit1 {
+    width: 11px;
+    height: 0;
+    border: 0.9px solid #c4c4c4;
+    display: inline-block;
+}
+
+.linesalaryEdit2 {
+    width: 11px;
+    height: 0;
+    border: 0.9px solid #c4c4c4;
+    display: inline-block;
+}
+
+.images-linesalaryEdit1 {
+    cursor: pointer;
+    width: 15px;
+    margin-top: 4px;
+}
+
+.width-lineblock {
+    width: 3rem;
+}
+
+.font-308FFF {
+    font-size: 11px;
+    background-color: #308FFF;
+    border: none;
+}
+
+.roundedborderedit {
+    border-color: #C9E5FF;
+    border-radius: 30px;
+    text-align: center;
+    font-size: 13px;
+    background-color: white;
+}
+
+.Minimum-0 {
+    font-size: 13px;
+}
+
+.text-308FFF {
+    color: #308FFF;
+    font-weight: 500;
+}
+
+.salaryedit-Allminimumsolid {
+    border-bottom: 1px #000000 dashed;
+    position: absolute;
+    height: 0px;
+    width: 35rem;
+    margin-top: 40px;
+    margin-left: 50px;
+}
