@@ -1,4 +1,7 @@
 <?php
+
+use Faker\Core\Number;
+
 $this->title = 'Salary Dashboard';
 ?>
 
@@ -53,7 +56,7 @@ $this->title = 'Salary Dashboard';
         </div>
         <div class="col-12 alert alert-Evaluator">
             <div class="row">
-                <div class="col-lg-2 col-md-6 col-6 card classform-TokyoLimited">
+                <div class="col-lg-2 col-md-6 col-6 card classform-TokyoLimited border">
                     <div class="col-12">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Group21102.png" class="imagesGroup21102"> Tokyo Consulting Firm Limited
                     </div>
@@ -82,7 +85,7 @@ $this->title = 'Salary Dashboard';
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6 col-6 card border-classemployeeSolid">
+                <div class="col-lg-2 col-md-6 col-6 card border-classemployeeSolid border">
                     <div class="col-12 Achi">
                         Evaluation Achievement
                     </div>
@@ -107,9 +110,9 @@ $this->title = 'Salary Dashboard';
                         <hr class="mt-2">
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6 col-6 card border-classemployeeSolid">
+                <div class="col-lg-2 col-md-6 col-6 card border-classemployeeSolid border">
                     <div class="col-12 Achi">
-                        Evaluation Achievement
+                        Allocated Budget
                     </div>
                     <div class="row mt-20">
                         <div class="col-6">
@@ -132,9 +135,9 @@ $this->title = 'Salary Dashboard';
                         <hr class="mt-2">
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6 col-6 card border-classemployeeSolid">
+                <div class="col-lg-2 col-md-6 col-6 card border-classemployeeSolid border">
                     <div class="col-12 Achi">
-                        Evaluation Achievement
+                        Adjustments
                     </div>
                     <div class="row mt-20">
                         <div class="col-6">
@@ -157,7 +160,46 @@ $this->title = 'Salary Dashboard';
                         <hr class="mt-2">
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6 col-6"></div>
+                <div class="col-lg-3 col-md-6 col-6 card" style="margin-left: 5px;width:20rem;">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="col-12  ft-salary">
+                                Salary
+                            </div>
+                            <div class="row cr-rent">
+                                <div class="col-6 cr-salary">
+                                    current E2
+                                </div>
+                                <div class="col-6 cr-salary">
+                                    ฿ <?= number_format(356956) ?>
+                                </div>
+                                <div class="col-6 cr-salary">
+                                    Basic
+                                </div>
+                                <div class="col-6 cr-salary">
+                                    ฿ <?= number_format(285564) ?>
+                                </div>
+                                <div class="col-6 cr-salary">
+                                    Allowance
+                                </div>
+                                <div class="col-6 cr-salary">
+                                    ฿ <?= number_format(71391) ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 Ev-evaluated">
+                            <div class="col-12 ft-Evaluated">
+                                Evaluated (E3)
+                            </div>
+                            <div class="row">
+                                <div class="col-6 cr-salary">
+                                    <i class="fa fa-caret-up text-success font-size-13" aria-hidden="true"></i> ฿<?= number_format(756123) ?>
+                                    <div class="bathformat1">฿ <?= number_format(25384) ?></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
