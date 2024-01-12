@@ -1,0 +1,114 @@
+.printer-line {
+    font-size: 13px;
+    color: #415A72;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.alert-printerline {
+    background-color: #D6E6FF;
+    border-color: #64B3FC;
+}
+
+.imagespointer {
+    width: 19px;
+}
+
+.SalaryDashboard2 {
+    font-size: 21px;
+    font-weight: 700;
+    padding-top: 10px;
+    letter-spacing: -0.6px;
+}
+
+.BTH-example {
+    font-size: 12px;
+    border-radius: 3px;
+    background-color: #fefefe;
+    margin-top: 20px;
+}
+
+.Rank-wornning-blue {
+    font-size: 12px;
+    width: 5rem;
+    margin-top: 20px;
+    margin-left: -10px;
+    border-color: #e6e6e6;
+    border-radius: 4px;
+}
+
+.wornningblue1 {
+    width: 13px;
+}
+
+.select-accountteam {
+    font-size: 12px;
+    border-radius: 15px;
+    /* background-color: #F0F2F4; */
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.Classform-filter {
+    margin-top: 20px;
+}
+
+.classform-TokyoLimited {
+    border: none;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.imagesGroup21102 {
+    width: 18px;
+    margin-top: -5px;
+}
+
+.classPartici {
+    border-left: 2px lightgray solid;
+}
+
+.class1Employee {
+    font-size: 11px;
+    margin-top: 20px;
+    font-weight: 400;
+    color: rgb(146, 146, 146);
+    letter-spacing: -0.9px;
+}
+
+.border-classemployeeSolid {
+    border-left: 2px lightgray solid;
+    margin-left: 5px;
+    border: none;
+}
+
+.Achi {
+    font-size: 11px;
+    font-weight: 500;
+    border: none
+}
+
+.Accumulated-1 {
+    width: 13px;
+}
+
+.Totall2 {
+    font-size: 11px;
+    letter-spacing: -0.9px;
+}
+
+.classTl {
+    border-left: 2px lightgray solid;
+}
+
+.bathformat {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: -0.9px;
+}
+
+.bathformat1 {
+    font-size: 10px;
+    letter-spacing: -0.9px;
+    color: #737373;
+}

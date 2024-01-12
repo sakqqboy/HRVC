@@ -133,8 +133,49 @@
 .salaryedit-Allminimumsolid {
     border-bottom: 1px #000000 dashed;
     position: absolute;
-    height: 0px;
+    height: 40px;
     width: 35rem;
-    margin-top: 40px;
     margin-left: 50px;
+    margin-top: 4px;
+}
+
+.imagesU-turn {
+    width: 40px;
+    margin-left: 40px;
+}
+
+.imagesU-turn2 {
+    width: 40px;
+    margin-left: -50px;
+}
+
+.clsddMinimum {
+    margin-top: 55px;
+    margin-left: -90px;
+}
+
+.formsMinimum {
+    font-size: 13px;
+    margin-top: 45px;
+    margin-left: -20px;
+}
+
+.classMax {
+    margin-top: 55px;
+    margin-left: -20px;
+}
+
+.classmarginminimum {
+    margin-left: 30px;
+    margin-top: 30px;
+    font-size: 13px;
+}
+
+.images-wornningblue {
+    width: 18px;
+}
+
+.Sample-worrning {
+    margin-top: -100px;
+    margin-left: 620px;
 }

@@ -101,8 +101,7 @@ $this->title = 'Salary Edit';
                     <div class="col-12 edit-Range">
                         Range
                     </div>
-
-                    <div class="row">
+                    <div class="row classmarginminimum">
                         <div class="col-12 salaryedit-Allminimumsolid"></div>
                         <div class="col-lg-2 col-md-6 col-6">
                             <div class="Minimum-0"> Minimumd <span class="text-308FFF">0%</span> </div>
@@ -134,9 +133,28 @@ $this->title = 'Salary Edit';
                                 <?= number_format(13782) ?>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-6 col-6 salaryedit-Allminimumsolid2"></div>
+                        <div class="col-lg-3 col-md-6 col-6">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/U-turn.png" class="imagesU-turn">
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-6 clsddMinimum">
+                            Minimum <span class="text-308FFF"> 0% </span>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-6">
+                            <input type="number" class="form-control formsMinimum">
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-6">
+                            <input type="number" class="form-control formsMinimum">
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-6 classMax">
+                            Max <span class="text-308FFF"> 100% </span>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-6">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/U-trun2.png" class="imagesU-turn2">
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-6 Sample-worrning">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Wornning-blue.png" class="images-wornningblue"> Sample Range
+                        </div>
                     </div>
-
                 </div>
                 <div class="alert alert-F6F6F66">
                     <div class="col-12 edit-Range">
