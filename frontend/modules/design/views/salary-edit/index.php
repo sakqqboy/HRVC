@@ -71,7 +71,7 @@ $this->title = 'Salary Edit';
                             <label class="rad-label">
                                 <input type="radio" class="rad-input" name="rad">
                                 <div class="rad-design"></div>
-                                <div class="rad-text"> Promotion</div>
+                                <div class="rad-text" type cunbmibt> Promotion</div>
                             </label>
                         </div>
                     </div>
