@@ -13,7 +13,7 @@ function showTitleList(departmentId) {
         dataType: 'json',
         url: url,
         data: { departmentId: departmentId },
-        success: function(data) {
+        success: function (data) {
             $("#title-list-" + departmentId).show();
             $("#title-list-" + departmentId).html(data.titleList);
         }
@@ -42,7 +42,7 @@ function createDepartment() {
             dataType: 'json',
             url: url,
             data: { branchId: branchId, companyId: companyId, departmentName: departmentName },
-            success: function(data) {
+            success: function (data) {
                 if (data.status) {
                     $("#branch").val('');
                     $("#departmentName").val('');
@@ -63,7 +63,7 @@ function updateDepartment(departmentId) {
         dataType: 'json',
         url: url,
         data: { departmentId: departmentId },
-        success: function(data) {
+        success: function (data) {
             $("#create-department").css("display", "none");
             $("#update-department").show();
             $("#reset-department").show();
@@ -75,7 +75,7 @@ function updateDepartment(departmentId) {
         }
     });
 }
-$("#update-department").click(function(e) {
+$("#update-department").click(function (e) {
     var url = $url + 'setting/department/save-update-department';
     var departmentName = $("#departmentName").val();
     var branchId = $("#branch").val();
@@ -93,7 +93,7 @@ $("#update-department").click(function(e) {
             dataType: 'json',
             url: url,
             data: { departmentName: departmentName, branchId: branchId, companyId: companyId, departmentId: departmentId },
-            success: function(data) {
+            success: function (data) {
                 if (data.status) {
                     $("#departmentId").val('');
                     $("#departmentName").val('');
@@ -110,7 +110,7 @@ $("#update-department").click(function(e) {
         });
     }
 });
-$("#reset-department").click(function(e) {
+$("#reset-department").click(function (e) {
     $("#departmentId").val('');
     $("#departmentName").val('');
     $("#branch").val('');
@@ -127,7 +127,7 @@ function deleteDepartment(departmentId) {
             dataType: 'json',
             url: url,
             data: { departmentId: departmentId },
-            success: function(data) {
+            success: function (data) {
                 if (data.status) {
                     $("#department-" + departmentId).hide(200);
                 } else {
@@ -151,12 +151,12 @@ function savetitleList(departmentId, titleId) {
         dataType: 'json',
         url: url,
         data: { departmentId: departmentId, titleId: titleId, check: check },
-        success: function(data) {
+        success: function (data) {
             $("#title-department-" + departmentId).html(data.departmentTitle);
         }
     });
 }
-function filterDepartment() { 
+function filterDepartment() {
     var companyId = $("#company-team-filter").val();
     var branchId = $("#branch-team-filter").val();
     var url = $url + 'setting/department/filter-department';
@@ -164,9 +164,9 @@ function filterDepartment() {
         type: "POST",
         dataType: 'json',
         url: url,
-        data: { companyId: companyId, branchId: branchId},
-        success: function(data) {
-         
+        data: { companyId: companyId, branchId: branchId },
+        success: function (data) {
+
         }
     });
 }

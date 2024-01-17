@@ -87,6 +87,7 @@ class AppAsset extends AssetBundle
         'css/evaluation/salary_edit.css',
         'css/evaluation/salary_dashboard.css',
         'css/evaluation/promotion.css',
+        'css/evaluation/processstatus.css',
 
 
     ];

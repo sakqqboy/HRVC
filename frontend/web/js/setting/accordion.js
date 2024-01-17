@@ -218,4 +218,3 @@ accordionBtns.forEach((accordion) => {
     };
 });
 //end//
-

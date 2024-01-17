@@ -270,13 +270,11 @@ $this->title = 'Promotion';
                                     <div class="col-5 set-Promotion">
                                         Set Promotion title
                                     </div>
-                                    <div class="col-5">
+                                    <div class="col-4">
                                         <input type="text" class="form-control setpromotiontitle" value="" id="">
                                     </div>
-                                    <div class="col-2">
-                                        <div class="col-12 FrameSalaryAllowance">
-                                            <button class="btn btn-primary bonussubmit" type="submit">SAVE</button>
-                                        </div>
+                                    <div class="col-3">
+                                        <button class="btn btn-primary rounded-1 font-308FFF" type="submit"><img src="/HRVC/frontend/web/images/icons/Dark/48px/save.png" class="images-bonuesave0">&nbsp; SAVE</button>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -391,31 +389,3 @@ $this->title = 'Promotion';
         </div>
     </div>
 </div>
-<nav class="accordion arrows">
-    <input type="radio" name="accordion" id="cb0" />
-    <section class="box">
-        <label class="box-title cb0" for="cb0">LIGHT SHADES</label>
-        <label class="box-close" for="acc-close"></label>
-        <div class="box-content">Click on an item to open. Click on its header or the list header to close.</div>
-    </section>
-    <input type="radio" name="accordion" id="cb1" />
-    <section class="box">
-        <label class="box-title cb1" for="cb1">MEDIUM SHADES</label>
-        <label class="box-close" for="acc-close"></label>
-        <div class="box-content">Click on an item to open. Click on its header or the list header to close.</div>
-    </section>
-    <input type="radio" name="accordion" id="cb2" />
-    <section class="box">
-        <label class="box-title cb2" for="cb2">TAN SHADES</label>
-        <label class="box-close" for="acc-close"></label>
-        <div class="box-content">Add the class 'arrows' to nav.accordion to add dropdown arrows.</div>
-    </section>
-    <input type="radio" name="accordion" id="cb3" />
-    <section class="box">
-        <label class="box-title cb3" for="cb3">DEEP SHADES</label>
-        <label class="box-close" for="acc-close"></label>
-        <div class="box-content">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque finibus tristique nisi, maximus ullamcorper ante finibus eget.</div>
-    </section>
-
-    <input type="radio" name="accordion" id="acc-close" />
-</nav>
