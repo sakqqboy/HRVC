@@ -48,11 +48,24 @@ $this->title = 'Evaluation Process&Status ';
                 </div>
             </div>
             <div class="col-lg-8 col-md-6 col-6 slp">
-                <div class="col-12 processMid">
-                    Mid Term Evaluation Phase
+                <div class="row">
+                    <div class="col-6 processMidleft">
+                        Mid Term Evaluation Phase
+                    </div>
+                    <div class="col-6 processMidright">
+                        <!-- <div class="btn-group" role="group" aria-label="Basic outlined example">
+                            <button type="button" class="btn groupprocessE3">E3</button>
+                            <button type="button" class="btn groupprocessMid-Term">Mid-Term</button>
+                            <button type="button" class="btn btn-outline-primary">Final Term</button>
+                        </div> -->
+                        <div class="btn-group" role="group" aria-label="Basic outlined example">
+                            <button type="button" class="btn btn-outline-secondary group-mounthly">E3</button>
+                            <button type="button" class="btn btn-outline-secondary group-mounthly">Mid-Term</button>
+                            <button type="button" class="btn btn-outline-secondary group-mounthly">Final Term</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-12 alert alert-primaryweak">
-
                     <!-- <div class="col-sm-2 text-center">
                             <div class="card border-E509CE3 mb-3">
                                 <div class="card-header bg-E509CE3">Start</div>
@@ -62,9 +75,9 @@ $this->title = 'Evaluation Process&Status ';
                                 </div>
                             </div>
                         </div> -->
-                    <div class='progress'>
-                        <div class='progress_inner'>
-                            <div class='progress_inner__step'>
+                    <!-- <div class='progress_status'>
+                        <div class='progress_inner'> -->
+                    <!-- <div class='progress_inner__step'>
                                 <label for='step-1'>Start order</label>
                             </div>
                             <div class='progress_inner__step'>
@@ -85,8 +98,8 @@ $this->title = 'Evaluation Process&Status ';
                             <input id='step-4' name='step' type='radio'>
                             <input id='step-5' name='step' type='radio'>
                             <div class='progress_inner__bar'></div>
-                            <div class='progress_inner__bar--set'></div>
-                            <!-- <div class='progress_inner__tabs'>
+                            <div class='progress_inner__bar--set'></div> -->
+                    <!-- <div class='progress_inner__tabs'>
                                 <div class='tab tab-0'>
                                     <h1>Start order</h1>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tortor ipsum, eleifend vitae massa non, dignissim finibus eros. Maecenas non eros tristique nisl maximus sollicitudin.</p>
@@ -108,7 +121,7 @@ $this->title = 'Evaluation Process&Status ';
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tortor ipsum, eleifend vitae massa non, dignissim finibus eros. Maecenas non eros tristique nisl maximus sollicitudin.</p>
                                 </div>
                             </div> -->
-                            <div class='progress_inner__status'>
+                    <!-- <div class='progress_inner__status'>
                                 <div class='box_base'></div>
                                 <div class='box_lid'></div>
                                 <div class='box_ribbon'></div>
@@ -119,9 +132,9 @@ $this->title = 'Evaluation Process&Status ';
                                 <div class='box_item'></div>
                                 <div class='box_tag'></div>
                                 <div class='box_string'></div>
-                            </div>
-                        </div>
-                    </div>
+                            </div> -->
+                    <!-- </div>
+                    </div> -->
                     <!-- <div class="E509CE3-sol"></div>
                         <div class="col-sm-3">
                             <div class="alert bg-weak"> self submission</div>
@@ -129,7 +142,206 @@ $this->title = 'Evaluation Process&Status ';
                         <div class="col-sm-2">
                             <div class="alert meething"> meething</div>
                         </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 alert bg-white lg-white" role="alert">
+        <div class="row">
+            <div class="col-1">
+                <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="process-username">
 
+            </div>
+            <div class="col-2">
+                <div class="name0dashboardname"> Ananta Kumar</div>
+                <div class="name0dashboardaccount">Junior CEO</div>
+            </div>
+            <div class="col-1 sts-e3">
+                E3, 2023
+            </div>
+            <div class="col-8 sts-solid">
+                <div class="row">
+                    <div class="col-2 alert cta">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="submission"><span class="submissionlabel"> &nbsp;self submission</span>
+                            <div class="completed-label">Completed</div>
+                        </div>
+                    </div>
+                    <div class="col-2 alert cta2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="submission"><span class="submissionlabel"> &nbsp;meeting</span>
+                            <div class="completed-label">Completed</div>
+                        </div>
+                    </div>
+                    <div class="col-2 alert cta2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="submission"><span class="submissionlabel"> &nbsp;primary</span>
+                            <div class="completed-label">Completed</div>
+                        </div>
+                    </div>
+                    <div class="col-2 alert cta2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="submission"><span class="submissionlabel"> &nbsp;primary</span>
+                            <div class="completed-label">Completed</div>
+                        </div>
+                    </div>
+                    <div class="col-2 alert cta3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="submission"><span class="submissionlabel"> &nbsp;completedtion</span>
+                            <div class="completed-label">Completed</div>
+                        </div>
+                    </div>
+                    <div class="col-2 rightCompleted"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 alert bg-white lg-orange" role="alert">
+        <div class="row">
+            <div class="col-1">
+                <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="process-username">
+
+            </div>
+            <div class="col-2">
+                <div class="name0dashboardname"> Ananta Kumar</div>
+                <div class="name0dashboardaccount">Junior CEO</div>
+            </div>
+            <div class="col-1 sts-e3">
+                E3, 2023
+            </div>
+            <div class="col-8 sts-solid">
+                <div class="row">
+                    <div class="col-2 alert cta">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="submission"><span class="submissionlabel"> &nbsp;self submission</span>
+                            <div class="completed-label" for="completed-label">Completed</div>
+                        </div>
+                    </div>
+                    <div class="col-2 alert cgray">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="" id="Inprogress"><span class="submissionlabel"> &nbsp;meeting</span>
+                            <div class="completed-label">In Progress</div>
+                        </div>
+                    </div>
+                    <div class="col-2 alert cgray2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="Inprogress"><span class="submissionlabel"> &nbsp;primary</span>
+                            <div class="completed-label">Waiting</div>
+                        </div>
+                    </div>
+                    <div class="col-2 alert cgray2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="Inprogress"><span class="submissionlabel"> &nbsp;primary</span>
+                            <div class="completed-label">Waiting</div>
+                        </div>
+                    </div>
+                    <div class="col-2 alert cgray3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="Inprogress"><span class="submissionlabel"> &nbsp;completedtion</span>
+                            <div class="completed-label">Waiting</div>
+                        </div>
+                    </div>
+                    <div class="col-2 rightCompleted"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 alert bg-white lg-orange" role="alert">
+        <div class="row">
+            <div class="col-1">
+                <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="process-username">
+
+            </div>
+            <div class="col-2">
+                <div class="name0dashboardname"> Ananta Kumar</div>
+                <div class="name0dashboardaccount">Junior CEO</div>
+            </div>
+            <div class="col-1 sts-e3">
+                E3, 2023
+            </div>
+            <div class="col-8 sts-solid">
+                <div class="row">
+                    <div class="col-2 alert cta">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="submission"><span class="submissionlabel"> &nbsp;self submission</span>
+                            <div class="completed-label" for="completed-label">Completed</div>
+                        </div>
+                    </div>
+                    <div class="col-2 alert cgray">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="" id="Inprogress"><span class="submissionlabel"> &nbsp;meeting</span>
+                            <div class="completed-label">In Progress</div>
+                        </div>
+                    </div>
+                    <div class="col-2 alert cgray2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="Inprogress"><span class="submissionlabel"> &nbsp;primary</span>
+                            <div class="completed-label">Waiting</div>
+                        </div>
+                    </div>
+                    <div class="col-2 alert cgray2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="Inprogress"><span class="submissionlabel"> &nbsp;primary</span>
+                            <div class="completed-label">Waiting</div>
+                        </div>
+                    </div>
+                    <div class="col-2 alert cgray3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="Inprogress"><span class="submissionlabel"> &nbsp;completedtion</span>
+                            <div class="completed-label">Waiting</div>
+                        </div>
+                    </div>
+                    <div class="col-2 rightCompleted"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 alert bg-white lg-orange" role="alert">
+        <div class="row">
+            <div class="col-1">
+                <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="process-username">
+
+            </div>
+            <div class="col-2">
+                <div class="name0dashboardname"> Ananta Kumar</div>
+                <div class="name0dashboardaccount">Junior CEO</div>
+            </div>
+            <div class="col-1 sts-e3">
+                E3, 2023
+            </div>
+            <div class="col-8 sts-solid">
+                <div class="row">
+                    <div class="col-2 alert cta">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="submission"><span class="submissionlabel"> &nbsp;self submission</span>
+                            <div class="completed-label" for="completed-label">Completed</div>
+                        </div>
+                    </div>
+                    <div class="col-2 alert cgray">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="" id="Inprogress"><span class="submissionlabel"> &nbsp;meeting</span>
+                            <div class="completed-label">In Progress</div>
+                        </div>
+                    </div>
+                    <div class="col-2 alert cgray2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="Inprogress"><span class="submissionlabel"> &nbsp;primary</span>
+                            <div class="completed-label">Waiting</div>
+                        </div>
+                    </div>
+                    <div class="col-2 alert cgray2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="Inprogress"><span class="submissionlabel"> &nbsp;primary</span>
+                            <div class="completed-label">Waiting</div>
+                        </div>
+                    </div>
+                    <div class="col-2 alert cgray3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="Inprogress"><span class="submissionlabel"> &nbsp;completedtion</span>
+                            <div class="completed-label">Waiting</div>
+                        </div>
+                    </div>
+                    <div class="col-2 rightCompleted"></div>
                 </div>
             </div>
         </div>
