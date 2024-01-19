@@ -59,14 +59,15 @@ $this->title = 'Evaluation Process&Status ';
                             <button type="button" class="btn btn-outline-primary">Final Term</button>
                         </div> -->
                         <div class="btn-group" role="group" aria-label="Basic outlined example">
-                            <button type="button" class="btn btn-outline-secondary group-mounthly">E3</button>
-                            <button type="button" class="btn btn-outline-secondary group-mounthly">Mid-Term</button>
+                            <button type="button" class="btn bg-light  groupprocessE3">E3</button>
+                            <button type="button" class="btn groupprocessMid-Term">Mid-Term</button>
                             <button type="button" class="btn btn-outline-secondary group-mounthly">Final Term</button>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 alert alert-primaryweak">
-                    <!-- <div class="col-sm-2 text-center">
+                    <div class="row">
+                        <!-- <div class="col-sm-2 text-center">
                             <div class="card border-E509CE3 mb-3">
                                 <div class="card-header bg-E509CE3">Start</div>
                                 <div class="card-body">
@@ -74,74 +75,34 @@ $this->title = 'Evaluation Process&Status ';
                                     <div class="card-text font-size-13">June 23</div>
                                 </div>
                             </div>
-                        </div> -->
-                    <!-- <div class='progress_status'>
-                        <div class='progress_inner'> -->
-                    <!-- <div class='progress_inner__step'>
-                                <label for='step-1'>Start order</label>
-                            </div>
-                            <div class='progress_inner__step'>
-                                <label for='step-2'>Prepare gift</label>
-                            </div>
-                            <div class='progress_inner__step'>
-                                <label for='step-3'>Pack gift</label>
-                            </div>
-                            <div class='progress_inner__step'>
-                                <label for='step-4'>Decorate box</label>
-                            </div>
-                            <div class='progress_inner__step'>
-                                <label for='step-5'>Send gift</label>
-                            </div>
-                            <input checked='checked' id='step-1' name='step' type='radio'>
-                            <input id='step-2' name='step' type='radio'>
-                            <input id='step-3' name='step' type='radio'>
-                            <input id='step-4' name='step' type='radio'>
-                            <input id='step-5' name='step' type='radio'>
-                            <div class='progress_inner__bar'></div>
-                            <div class='progress_inner__bar--set'></div> -->
-                    <!-- <div class='progress_inner__tabs'>
-                                <div class='tab tab-0'>
-                                    <h1>Start order</h1>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tortor ipsum, eleifend vitae massa non, dignissim finibus eros. Maecenas non eros tristique nisl maximus sollicitudin.</p>
-                                </div>
-                                <div class='tab tab-1'>
-                                    <h1>Prepare gift</h1>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tortor ipsum, eleifend vitae massa non, dignissim finibus eros. Maecenas non eros tristique nisl maximus sollicitudin.</p>
-                                </div>
-                                <div class='tab tab-2'>
-                                    <h1>Pack gift</h1>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tortor ipsum, eleifend vitae massa non, dignissim finibus eros. Maecenas non eros tristique nisl maximus sollicitudin.</p>
-                                </div>
-                                <div class='tab tab-3'>
-                                    <h1>Decorate box</h1>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tortor ipsum, eleifend vitae massa non, dignissim finibus eros. Maecenas non eros tristique nisl maximus sollicitudin.</p>
-                                </div>
-                                <div class='tab tab-4'>
-                                    <h1>Send gift</h1>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tortor ipsum, eleifend vitae massa non, dignissim finibus eros. Maecenas non eros tristique nisl maximus sollicitudin.</p>
-                                </div>
-                            </div> -->
-                    <!-- <div class='progress_inner__status'>
-                                <div class='box_base'></div>
-                                <div class='box_lid'></div>
-                                <div class='box_ribbon'></div>
-                                <div class='box_bow'>
-                                    <div class='box_bow__left'></div>
-                                    <div class='box_bow__right'></div>
-                                </div>
-                                <div class='box_item'></div>
-                                <div class='box_tag'></div>
-                                <div class='box_string'></div>
-                            </div> -->
-                    <!-- </div>
-                    </div> -->
-                    <!-- <div class="E509CE3-sol"></div>
+                        </div>
+                        <div class="E509CE3-sol"></div>
                         <div class="col-sm-3">
                             <div class="alert bg-weak"> self submission</div>
                         </div>
                         <div class="col-sm-2">
                             <div class="alert meething"> meething</div>
                         </div> -->
+                        <div class="position-relative m-4">
+                            <div class="progress" style="height: 1px;">
+                                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="position-absolute top-0 start-0 translate-middle">
+                                <div class="card border-E509CE3 mb-3">
+                                    <div class="card-header bg-E509CE3">Start</div>
+                                    <div class="card-body">
+                                        <div class="card-title text-center font-size-13">08</div>
+                                        <div class="card-text font-size-10">June 23</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="position-absolute top-0 start-50 translate-middle" style="width: 1rem; height:2rem;">
+                                <label for="" style="width:6rem;">1 July 23</label>
+                                <span class="badge rounded-pill bg-primary">self submission</span>
+                            </div>
+                            <button type="button" class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill" style="width: 2rem; height:2rem;">3</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -346,4 +307,14 @@ $this->title = 'Evaluation Process&Status ';
             </div>
         </div>
     </div>
+</div>
+
+<div class="containersss">
+    <ul class="progressbar_step">
+        <li class="step_1 active">Step 1</li>
+        <li class="step_1">Step 2</li>
+        <li class="step_1">Step 3</li>
+        <li class="step_1">Step 4</li>
+        <li class="step_1">Step 5</li>
+    </ul>
 </div>

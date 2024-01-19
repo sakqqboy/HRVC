@@ -1,0 +1,154 @@
+.individual_step1 {
+    border: none;
+    height: 95%;
+}
+
+.Individual_step2_name {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.7px;
+    padding-top: 8px;
+    color: black;
+}
+
+.Individual_step3_company {
+    font-size: 12px;
+    font-weight: 400;
+    padding-top: 5px;
+    color: black;
+}
+
+.Individual_step4_country {
+    font-size: 12px;
+    font-weight: 600;
+    color: black;
+    padding-top: 3px;
+}
+
+.imageIndividual_country1 {
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+}
+
+.individual_step2 {
+    border: none;
+}
+
+.individual_stepkey {
+    font-size: 12px;
+    color: #004DB0;
+    font-weight: 600;
+}
+
+.individual_stepcompleted {
+    color: #11C844;
+    font-size: 13px;
+    text-align: end;
+}
+
+.imageindividual_Charts {
+    width: 15px;
+}
+
+.individual_Financial {
+    font-size: 11px;
+    letter-spacing: -0.8px;
+}
+
+.individual_solidkey {
+    border-right: 2px lightgray solid;
+}
+
+
+div[role="progressbar_step_warning"] {
+    --fg: #FEC426;
+    --bg: #FFE9AE;
+    --pgPercentage: var(--value);
+    animation: growProgressBar 3s 1 forwards;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background:
+        radial-gradient(closest-side, white 80%, transparent 0 99.9%, white 0),
+        conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0);
+    font-family: Helvetica, Arial, sans-serif;
+    color: black;
+    font-size: 10px;
+}
+
+div[role="progressbar_step_warning"]::before {
+    counter-reset: percentage var(--value);
+    content: counter(percentage) '%';
+}
+
+div[role="progressbar_step_Blue"] {
+    --fg: #2580D3;
+    --bg: #D0E2FF;
+    --pgPercentage: var(--value);
+    animation: growProgressBar 3s 1 forwards;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background:
+        radial-gradient(closest-side, white 80%, transparent 0 99.9%, white 0),
+        conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0);
+    font-family: Helvetica, Arial, sans-serif;
+    color: black;
+    font-size: 10px;
+}
+
+div[role="progressbar_step_Blue"]::before {
+    counter-reset: percentage var(--value);
+    content: counter(percentage) '%';
+}
+
+div[role="progressbar_step_danger"] {
+    --fg: #FF6939;
+    --bg: #FFC3AF;
+    --pgPercentage: var(--value);
+    animation: growProgressBar 3s 1 forwards;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background:
+        radial-gradient(closest-side, white 80%, transparent 0 99.9%, white 0),
+        conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0);
+    font-family: Helvetica, Arial, sans-serif;
+    color: black;
+    font-size: 10px;
+}
+
+div[role="progressbar_step_danger"]::before {
+    counter-reset: percentage var(--value);
+    content: counter(percentage) '%';
+}
+
+.individual_weight {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.imagesstep_userlog {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.individual_firstname {
+    font-size: 12px;
+    color: #006AA6;
+    font-weight: 500;
+}
+
+.individual_primary {
+    font-size: 13px;
+    letter-spacing: -0.8px;
+    font-weight: 500;
+}
