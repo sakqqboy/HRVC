@@ -104,20 +104,35 @@ $this->title = 'Individual';
             </div>
         </div>
         <div class="col-lg-2 col-md-6 col-6">
-            <div class="col-12 card individual_step3">
+            <div class="col-12 card individual_step3_hraf">
                 <div class="col-12 individual_primary">
                     Primary Evaluator
                 </div>
                 <div class="col-12">
-                    <img src="<?= Yii::$app->homeUrl ?>image/employee2.png" class="imagesstep_userlog"><a href="#"><span class="individual_firstname">&nbsp;Taiki Taninokuchi</span></a>
+                    <img src="<?= Yii::$app->homeUrl ?>image/employee2.png" class="imagesstep_userlog"><a href="#" class="trants_individual_firstname"><span class="individual_firstname">&nbsp;Taiki Taninokuchi</span></a>
                 </div>
                 <div class="col-12 individual_primary">
                     Final Evaluator
                 </div>
                 <div class="col-12">
-                    <img src="<?= Yii::$app->homeUrl ?>image/Mohammed.png" class="imagesstep_userlog"><a href="#"><span class="individual_firstname">&nbsp;Mohammed Foruge</span></a>
+                    <img src="<?= Yii::$app->homeUrl ?>image/Mohammed.png" class="imagesstep_userlog"><a href="#" class="trants_individual_firstname"><span class="individual_firstname">&nbsp;Mohammed Foruge</span></a>
                 </div>
             </div>
         </div>
     </div>
+</div>
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+        <div class="alert-Evaluator">
+            <div class="row">
+                <div class="col-6 My_panel">
+                    My Panel
+                </div>
+                <div class="col-6 Panel-radio">
+                    <span class="ON-Orange"></span> ON GOING (Pending)
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

@@ -18,6 +18,13 @@
     color: black;
 }
 
+.individual_step3_hraf {
+    padding-left: 10px;
+    padding-top: 10px;
+    height: 180px;
+    border: none;
+}
+
 .Individual_step4_country {
     font-size: 12px;
     font-weight: 600;
@@ -151,4 +158,19 @@ div[role="progressbar_step_danger"]::before {
     font-size: 13px;
     letter-spacing: -0.8px;
     font-weight: 500;
+}
+
+.trants_individual_firstname {
+    color: #006AA6;
+}
+
+.My_panel {
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: -0.9px;
+    padding-left: 20px;
+}
+
+.Panel-radio {
+    font-size: 12px;
 }
