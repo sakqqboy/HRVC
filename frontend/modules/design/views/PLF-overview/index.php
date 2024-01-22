@@ -4,7 +4,7 @@ $this->title = 'PLF Overview';
 
 <div class="col-12 mt-90 alert background-Planning">
     <div class="col-12 planning">
-        <i class="fa fa-database" aria-hidden="true"></i> Financial Planning
+    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FinanicalPlanning.png" class="images_Dark_FinanicalPlanning"> Financial Planning
     </div>
     <div class="col-12 mt-20">
         <div class="shadow p-3 mb-5 bg-body rounded alert2-secondary3">

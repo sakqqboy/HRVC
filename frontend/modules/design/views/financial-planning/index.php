@@ -4,7 +4,7 @@ $this->title = 'Financial Planning';
 
 <div class="col-12 mt-90 alert background-Planning">
     <div class="col-12 planning">
-        <i class="fa fa-database fa-6x" aria-hidden="true"></i> Financial Planning
+    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FinanicalPlanning.png" class="images_Dark_FinanicalPlanning"> Financial Planning
     </div>
     <div class="col-12 mt-20">
         <div class="shadow p-3 mb-5 bg-body rounded alert2-secondary3">
@@ -28,25 +28,22 @@ $this->title = 'Financial Planning';
                     <span class="badge bg-primary-summary">PL</span> <span class="Profit-Loss">Profit & Loss Forecast</span>
                 </div>
                 <div class="col-lg-2 col-12">
-                    <button type="button" class="btn btn-primary font-size-12"><i class="fa fa-magic" aria-hidden="true"></i>&nbsp;Register</button>
+                    <button type="button" class="btn btn-primary Register_financial"><i class="fa fa-magic" aria-hidden="true"></i>&nbsp;&nbsp; Register</button>
                 </div>
                 <div class="col-lg-4 col-12">
-                    <button type="button" class="btn btn-light Data" data-bs-toggle="modal" data-bs-target="#DataDistionary"><i class="fa fa-info-circle" aria-hidden="true"></i> Data Dictionary</button>
-                    <button type="button" class="btn btn-light Data"><i class="fa fa-line-chart" aria-hidden="true"></i> Comparison Charts</button>
-                    <button type="button" class="btn btn-light Data"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i> Export</button>
+                    <button type="button" class="btn btn-light Data" data-bs-toggle="modal" data-bs-target="#DataDistionary"><img src="<?= Yii::$app->homeUrl?>images/icons/Dark/48px/Wornning-blue.png" class="images_WornningData_Dictionary"> Data Dictionary</button>
+                    <button type="button" class="btn btn-light Data"> <img src="<?= Yii::$app->homeUrl?>images/icons/Dark/48px/chart-copy.png" class="images_WornningData_Dictionary"> Comparison Charts</button>
+                    <button type="button" class="btn btn-light Data"><img src="<?= Yii::$app->homeUrl?>images/icons/Dark/48px/download-copy.png" class="images_WornningData_Dictionary"> Export</button>
                 </div>
-                <div class="col-lg-2 col-12">
+                <div class="col-lg-2 col-12 select_buttongroup">
                     <select class="form-select example-tok" aria-label="Default select example">
                         <option selected value="">Select</option>
                         <option value="1">Tokyo Consulting Group</option>
                         <option value="2">Tokyo Consulting firm</option>
                     </select>
                 </div>
-                <div class="col-lg-1 col-12 text-end">
-                    <i class="fa fa-filter" aria-hidden="true"></i> <i class="fa fa-plus content-Fitter" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#Modalfitter"></i>
-                </div>
-                <div class="col-lg-1 col-12">
-                    <span class="Fitter-PL">Fitter</span> <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                <div class="col-lg-2 col-12 text-end">
+                     <img src="<?= Yii::$app->homeUrl?>images/icons/Dark/48px/FilterPlus.png" class="picture-FilterPlus-bonus"><span class="financial_filter">Filter</span> <img src="<?= Yii::$app->homeUrl?>images/icons/Dark/48px/3Dot.png" class="bonus-point">
                 </div>
             </div>
             <div class="row mt-10">
@@ -1954,9 +1951,6 @@ $this->title = 'Financial Planning';
     </div>
 </div>
 
-
-
-
 <div class="modal fade" id="DataDistionary" tabindex="-1" aria-labelledby="DataDistionaryLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content modal-DataDistionary">
@@ -1968,37 +1962,29 @@ $this->title = 'Financial Planning';
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-5 text-end font-size-13">
-                        <img src="<?= Yii::$app->homeUrl ?>image/network.png"> Accumulate
+                    <div class="col-6 Accumulate_text">
+                     <img src="<?= Yii::$app->homeUrl?>images/icons/Dark/48px/Accumulated.png" class="Dark_Monthly"> Accumulate
                     </div>
-                    <div class="col-5 text-end font-size-13">
-                        <i class="fa fa-calendar-o" aria-hidden="true"></i> Monthly
+                    <div class="col-6 Accumulate_text">
+                     <img src="<?= Yii::$app->homeUrl?>images/icons/Dark/48px/Monthly.png" class="Dark_Monthly"> Monthly
                     </div>
                     <hr class="mt-5">
                 </div>
-
-                <div class="col-12 mt-20">
-                    <span class="AC-Primary font-size-11"> AAR </span> &nbsp;&nbsp; Accumulate Actual Ratio
+                <div class="row">
+                      <div class="col-4 text-end">
+                           <span class="AC-Primary"> AAR </span>
+                      </div>
+                      <div class="col-8 AC-Accumulate">
+                           Accumulate Actual Ratio
+                      </div>
+                      <div class="col-4 text-end">
+                        <span class="AC-Success"> AAR </span> 
+                      </div>
+                      <div class="col-8 ">
+                         Accumulate Actual Ratio
+                      </div>
                 </div>
-                <div class="col-12 mt-20">
-                    <span class="AC-Success font-size-11"> AAR </span> &nbsp;&nbsp; Accumulate Actual Ratio
-                </div>
-                <div class="col-12 mt-20">
-                    <span class="T-Warning text-dark font-size-11"> AT </span> &nbsp;&nbsp;&nbsp; Accumulate Target
-                </div>
-                <div class="col-12 mt-20">
-                    <span class="T-Warning text-dark font-size-11"> ATR </span> &nbsp;&nbsp; Accumulate Target ratio
-                </div>
-                <div class="col-12 mt-20">
-                    <span class="T-bule font-size-11"> ATR </span> &nbsp;&nbsp; Accumulate Target ratio
-                </div>
-                <hr>
-                <div class="col-12 mt-20">
-                    <span class="AC-Success font-size-11"> AC </span> &nbsp;&nbsp; Actual
-                </div>
-                <div class="col-12 mt-20">
-                    <span class="T-Warning font-size-11"> T </span> &nbsp;&nbsp; Target
-                </div>
+               
                 <hr>
             </div>
         </div>
@@ -2056,3 +2042,26 @@ $this->title = 'Financial Planning';
         </div>
     </div>
 </div>
+
+<div class="col-12 mt-20">
+                     <span class="AC-Primary font-size-11"> AAR </span> &nbsp;&nbsp; 
+                   </div>
+                <div class="col-12 mt-20">
+                    <span class="AC-Success font-size-11"> AAR </span> &nbsp;&nbsp; 
+                </div>
+                <div class="col-12 mt-20">
+                    <span class="T-Warning text-dark font-size-11"> AT </span> &nbsp;&nbsp;&nbsp; Accumulate Target
+                </div>
+                <div class="col-12 mt-20">
+                    <span class="T-Warning text-dark font-size-11"> ATR </span> &nbsp;&nbsp; Accumulate Target ratio
+                </div>
+                <div class="col-12 mt-20">
+                    <span class="T-bule font-size-11"> ATR </span> &nbsp;&nbsp; Accumulate Target ratio
+                </div>
+                <hr>
+                <div class="col-12 mt-20">
+                    <span class="AC-Success font-size-11"> AC </span> &nbsp;&nbsp; Actual
+                </div>
+                <div class="col-12 mt-20">
+                    <span class="T-Warning font-size-11"> T </span> &nbsp;&nbsp; Target
+                </div>

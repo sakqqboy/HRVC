@@ -10,7 +10,7 @@ $this->title = 'IPL Analysis';
         <div class="shadow p-3 mb-5 bg-body rounded alert2-secondary3">
             <ul class="nav nav-pills" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link text-dark" id="pills-Forcast-tab" data-bs-toggle="pill" data-bs-target="#pills-Forcast" type="button" role="tab" aria-controls="pills-Forcast" aria-selected="true"> <i class="fa fa-usd" aria-hidden="true"></i> PL Forcast</a>
+                    <a class="nav-link text-dark" id="pills-Forcast-tab" data-bs-toggle="pill" data-bs-target="#pills-Forcast" type="button" role="tab" aria-controls="pills-Forcast" aria-selected="true"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/PL-Forecast.png" class="images_PLForecast"> PL Forcast</a>
                 </li>
                 <li class="nav-item" role="presentation">
                     <a class="nav-link text-dark" id="pills-Golden-tab" data-bs-toggle="pill" data-bs-target="#pills-Golden" type="button" role="tab" aria-controls="pills-Golden" aria-selected="false"> Golden Ratio</a>
@@ -39,7 +39,7 @@ $this->title = 'IPL Analysis';
             </div>
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-12">
-                    <div class="col-12 badge bg-primary-sec mt-30">
+                    <div class="col-12 badge bg-primary-sec">
                         PL Content
                     </div>
                 </div>
@@ -96,7 +96,7 @@ $this->title = 'IPL Analysis';
             </div>
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-12">
-                    <div class="shadow-none p-3 mb-5 bg-gray rounded">
+                    <div class="shadow-none p-2 mb-12 bg-gray rounded">
                         <div class="row">
                             <div class="col-10">
                                 <input type="text" class="shadow bg rounded" id="shadowPL">
@@ -106,19 +106,19 @@ $this->title = 'IPL Analysis';
                             </div>
                         </div>
                     </div>
-                    <!-- display;:none -->
-                    <div class="shadow-none p-3 mb-5 bg-sky rounded">
+                    <!-- display;:none หน้าแก้ไขแล้วจะเป็นสีฟ้า -->
+                    <div class="shadow-none p-2 mb-12 bg-sky rounded">
                         <div class="row">
                             <div class="col-2 form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="checkboxPL">
+                                <input class="form-check-input" type="checkbox" value="" id="checkboxPLradio">
                             </div>
                             <div class="col-10">
-                                <input type="text" class="shadow bg rounded" id="shadowPL">
+                                <input type="text" class="shadow bg rounded" id="shadowPLinput">
                             </div>
                         </div>
                     </div>
                     <!-- end -->
-                    <div class="shadow-none p-3 mb-5 bg-gray rounded">
+                    <div class="shadow-none p-2 mb-12 bg-gray rounded">
                         <div class="row">
                             <div class="col-10">
                                 <input type="text" class="shadow bg rounded" id="shadowPL">
@@ -128,7 +128,7 @@ $this->title = 'IPL Analysis';
                             </div>
                         </div>
                     </div>
-                    <div class="shadow-none p-3 mb-5 bg-gray rounded">
+                    <div class="shadow-none p-2 mb-12 bg-gray rounded">
                         <div class="row">
                             <div class="col-10">
                                 <input type="text" class="shadow bg rounded" id="shadowPL">
@@ -138,7 +138,7 @@ $this->title = 'IPL Analysis';
                             </div>
                         </div>
                     </div>
-                    <div class="shadow-none p-3 mb-5 bg-gray rounded">
+                    <div class="shadow-none p-2 mb-12 bg-gray rounded">
                         <div class="row">
                             <div class="col-10">
                                 <input type="text" class="shadow bg rounded" id="shadowPL">
@@ -148,7 +148,7 @@ $this->title = 'IPL Analysis';
                             </div>
                         </div>
                     </div>
-                    <div class="shadow-none p-3 mb-5 bg-gray rounded">
+                    <div class="shadow-none p-2 mb-12 bg-gray rounded">
                         <div class="row">
                             <div class="col-10">
                                 <input type="text" class="shadow bg rounded" id="shadowPL">
@@ -158,7 +158,7 @@ $this->title = 'IPL Analysis';
                             </div>
                         </div>
                     </div>
-                    <div class="shadow-none p-3 mb-5 bg-gray rounded">
+                    <div class="shadow-none p-2 mb-12 bg-gray rounded">
                         <div class="row">
                             <div class="col-10">
                                 <input type="text" class="shadow bg rounded" id="shadowPL">
@@ -168,7 +168,7 @@ $this->title = 'IPL Analysis';
                             </div>
                         </div>
                     </div>
-                    <div class="shadow-none p-3 mb-5 bg-gray rounded">
+                    <div class="shadow-none p-2 mb-12 bg-gray rounded">
                         <div class="row">
                             <div class="col-10">
                                 <input type="text" class="shadow bg rounded" id="shadowPL">
@@ -178,7 +178,7 @@ $this->title = 'IPL Analysis';
                             </div>
                         </div>
                     </div>
-                    <div class="shadow-none p-3 mb-5 bg-gray rounded">
+                    <div class="shadow-none p-2 mb-12 bg-gray rounded">
                         <div class="row">
                             <div class="col-10">
                                 <input type="text" class="shadow bg rounded" id="shadowPL">
@@ -188,7 +188,7 @@ $this->title = 'IPL Analysis';
                             </div>
                         </div>
                     </div>
-                    <div class="shadow-none p-3 mb-5 bg-gray rounded">
+                    <div class="shadow-none p-2 mb-12 bg-gray rounded">
                         <div class="row">
                             <div class="col-10">
                                 <input type="text" class="shadow bg rounded" id="shadowPL">
@@ -198,7 +198,57 @@ $this->title = 'IPL Analysis';
                             </div>
                         </div>
                     </div>
-                    <div class="shadow-none p-3 mb-5 bg-gray rounded">
+                    <div class="shadow-none p-2 mb-12 bg-gray rounded">
+                        <div class="row">
+                            <div class="col-10">
+                                <input type="text" class="shadow bg rounded" id="shadowPL">
+                            </div>
+                            <div class="col-2 form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="checkboxPL">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shadow-none p-2 mb-12 bg-gray rounded">
+                        <div class="row">
+                            <div class="col-10">
+                                <input type="text" class="shadow bg rounded" id="shadowPL">
+                            </div>
+                            <div class="col-2 form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="checkboxPL">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shadow-none p-2 mb-12 bg-gray rounded">
+                        <div class="row">
+                            <div class="col-10">
+                                <input type="text" class="shadow bg rounded" id="shadowPL">
+                            </div>
+                            <div class="col-2 form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="checkboxPL">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shadow-none p-2 mb-12 bg-gray rounded">
+                        <div class="row">
+                            <div class="col-10">
+                                <input type="text" class="shadow bg rounded" id="shadowPL">
+                            </div>
+                            <div class="col-2 form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="checkboxPL">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shadow-none p-2 mb-12 bg-gray rounded">
+                        <div class="row">
+                            <div class="col-10">
+                                <input type="text" class="shadow bg rounded" id="shadowPL">
+                            </div>
+                            <div class="col-2 form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="checkboxPL">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shadow-none p-2 mb-12 bg-gray rounded">
                         <div class="row">
                             <div class="col-10">
                                 <input type="text" class="shadow bg rounded" id="shadowPL">
@@ -215,22 +265,22 @@ $this->title = 'IPL Analysis';
                     </div>
                     <div class="row">
                         <div class="col-lg-4">
-                            <div class="col-12 mt-20 font-size-18">
+                            <div class="col-12 pt-30 font-size-18">
                                 Variable Expense
                             </div>
                         </div>
                         <div class="col-lg-8">
-                            <div class="col-12 mt-20 font-size-19 pl-30">
+                            <div class="col-12 pt-30 font-size-19 pl-30">
                                 <strong> Individual P&L Analysis</strong>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 mt-30">
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-                        <canvas id="mixed-chart" width="800" height="450"></canvas>
+                        <canvas id="mixed-chart" width="800" height="500"></canvas>
                     </div>
-                    <div class="col-12 mt-50">
-                        <div class="alert  light-shadow-2" role="alert">
+                    <div class="col-12">
+                        <div class="alert light-shadow-2" role="alert">
                             <div class="row">
                                 <div class="col-lg-3">
                                     <div class="alert light-shadow-3">
