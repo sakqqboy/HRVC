@@ -6,6 +6,7 @@ use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
 use frontend\models\hrvc\Group;
+use frontend\models\hrvc\Kpi;
 use frontend\models\hrvc\KpiTeam;
 use frontend\models\hrvc\KpiTeamHistory;
 use frontend\models\hrvc\UserRole;
@@ -116,5 +117,29 @@ class KpiTeamController extends Controller
 			}
 		}
 		return $this->redirect(Yii::$app->homeUrl . 'kpi/management/assign-kpi');
+	}
+	public function actionTeamProgress()
+	{
+		$kpiId = $_POST["kpiId"];
+		$teamId = $_POST["teamId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/team-detail?id=' . $teamId);
+		$teamDetail = curl_exec($api);
+		$teamDetail = json_decode($teamDetail, true);
+
+
+		$kpi = Kpi::find()->select('kpiName')->where(["kpiId" => $kpiId])->asArray()->one();
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-history?kpiId=' . $kpiId . '&&teamId=' . $teamId);
+		$kpiTeamHistory = curl_exec($api);
+		$kpiTeamHistory = json_decode($kpiTeamHistory, true);
+		curl_close($api);
+		//throw new Exception(print_r($kpiTeamHistory, true));
+		$teamText = $this->renderAjax('team_progress', ["kpiTeamHistory" => $kpiTeamHistory]);
+		//throw new Exception($teamText);
+		$res["teamName"] = $teamDetail["teamName"];
+		$res["kpiName"] = $kpi["kpiName"];
+		$res["history"] = $teamText;
+		return json_encode($res);
 	}
 }

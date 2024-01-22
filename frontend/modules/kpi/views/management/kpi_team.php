@@ -12,7 +12,7 @@ if (isset($kpiTeams) && count($kpiTeams) > 0) {
 				foreach ($teams as $teamId => $team) :
 
 		?>
-					<div class="col-lg-3 col-md-6 col-12">
+					<div class="col-lg-3 col-md-6 col-12" onclick="javascription:openKpiTeamView(<?= $teamId ?>,<?= $kpiId ?>)" style="cursor: pointer;">
 						<div class="col-12">
 							<div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
 						</div>

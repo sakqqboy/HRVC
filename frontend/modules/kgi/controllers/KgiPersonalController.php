@@ -7,6 +7,7 @@ use common\models\ModelMaster;
 use Exception;
 use FFI\Exception as FFIException;
 use frontend\models\hrvc\Group;
+use frontend\models\hrvc\Kgi;
 use frontend\models\hrvc\KgiEmployee;
 use frontend\models\hrvc\KgiEmployeeHistory;
 use frontend\models\hrvc\UserRole;
@@ -76,6 +77,17 @@ class KgiPersonalController extends Controller
 							$kgiEmployee->updateDateTime = new Expression('NOW()');
 							$kgiEmployee->createrId = Yii::$app->user->id;
 							$kgiEmployee->save(false);
+
+							$kgiEmployeeHistory = new KgiEmployeeHistory();
+							$kgiEmployeeHistory->kgiEmployeeId = $kgiEmployee->kgiEmployeeId;
+							$kgiEmployeeHistory->target =  $target;
+							$kgiEmployeeHistory->result = $kgiEmployee->result;;
+							$kgiEmployeeHistory->createrId = Yii::$app->user->id;
+							$kgiEmployeeHistory->status = 1;
+							$kgiEmployeeHistory->createDateTime = new Expression('NOW()');
+							$kgiEmployeeHistory->updateDateTime = new Expression('NOW()');
+							//}
+							$kgiEmployeeHistory->save(false);
 						} else {
 							if ($target != '0.00') {
 								$kgiEmployee = new KgiEmployee();
@@ -85,6 +97,17 @@ class KgiPersonalController extends Controller
 								$kgiEmployee->updateDateTime = new Expression('NOW()');
 								$kgiEmployee->createrId = Yii::$app->user->id;
 								$kgiEmployee->save(false);
+								$kgiEmployeeId = Yii::$app->db->lastInsertID;
+								$kgiEmployeeHistory = new KgiEmployeeHistory();
+								$kgiEmployeeHistory->kgiEmployeeId = $kgiEmployeeId;
+								$kgiEmployeeHistory->target =  $target;
+								$kgiEmployeeHistory->result = null;
+								$kgiEmployeeHistory->createrId = Yii::$app->user->id;
+								$kgiEmployeeHistory->status = 1;
+								$kgiEmployeeHistory->createDateTime = new Expression('NOW()');
+								$kgiEmployeeHistory->updateDateTime = new Expression('NOW()');
+								//}
+								$kgiEmployeeHistory->save(false);
 							}
 						}
 					}
@@ -234,5 +257,30 @@ class KgiPersonalController extends Controller
 			"kgiEmployeeDetail" => $kgiEmployeeDetail,
 			"kgiEmployeeHistory" => $kgiEmployeeHistory
 		]);
+	}
+	public function actionEmployeeProgress()
+	{
+		$kgiId = $_POST["kgiId"];
+		$employeeId = $_POST["employeeId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
+		$employeeDetail = curl_exec($api);
+		$employeeDetail = json_decode($employeeDetail, true);
+
+
+		$kgi = Kgi::find()->select('kgiName')->where(["kgiId" => $kgiId])->asArray()->one();
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/kgi-employee-history-view?kgiId=' . $kgiId . '&&employeeId=' . $employeeId);
+		$kgiEmployeeHistory = curl_exec($api);
+		$kgiEmployeeHistory = json_decode($kgiEmployeeHistory, true);
+		curl_close($api);
+		//throw new Exception(print_r($kgiTeamHistory, true));
+		$teamText = $this->renderAjax('employee_progress', ["kgiEmployeeHistory" => $kgiEmployeeHistory]);
+		//throw new Exception($teamText);
+		$res["employeeName"] = $employeeDetail["employeeFirstname"] . ' ' . $employeeDetail["employeeSurename"];
+		$res["kgiName"] = $kgi["kgiName"];
+		$res["history"] = $teamText;
+		return json_encode($res);
 	}
 }

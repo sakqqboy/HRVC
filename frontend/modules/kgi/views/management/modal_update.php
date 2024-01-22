@@ -201,19 +201,7 @@
 								<label for="exampleFormControlTextarea1" class="form-label font-size-13"> Remark</label>
 								<textarea class="form-control" name="remark" rows="4"></textarea>
 							</div>
-							<div class="col-12 mt-10 font-size-12 border-bottom pb-10">
-								KGI Group
-							</div>
-							<div class="row mt-10" id="kgi-group-update">
-								<?php
-								if (isset($kgiGroup) && count($kgiGroup) > 0) {
-								} else { ?>
-									<span class="text-secondary font-size-12"> Please select company ! ! !</span>
-								<?php
-								}
-								?>
 
-							</div>
 						</div>
 					</div>
 				</div>

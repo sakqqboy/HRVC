@@ -156,6 +156,38 @@ function kpiHistory(kpiId) {
 		 }
 	});
 }
+function openKpiTeamView(teamId,kpiId) {
+	$("#team-progress").modal('show');
+	var url = $url + 'kpi/kpi-team/team-progress';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { teamId: teamId,kpiId:kpiId },
+		success: function (data) {
+			$("#kpi-name").html(data.kpiName);
+			$("#team-name").html(data.teamName);
+			$("#kpi-team-progress").html(data.history);
+			
+		}
+	});
+}
+function openKpiEmployeeView(employeeId,kpiId) {
+	$("#employee-progress").modal('show');
+	var url = $url + 'kpi/kpi-personal/employee-progress';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { employeeId: employeeId,kpiId:kpiId },
+		success: function (data) {
+			$("#kpi-name-employee").html(data.kpiName);
+			$("#employee-name").html(data.employeeName);
+			$("#kpi-employee-progress").html(data.history);
+			
+		}
+	});
+}
 function prepareDeleteKpi(kpiId) { 
 	$("#kpiId-modal").val(kpiId);
 }

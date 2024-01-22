@@ -492,7 +492,7 @@ class ManagementController extends Controller
 				->all();
 		}
 		if ($teamLeaderId != '') {
-			$mBranchId = Branch::userBranchId($supervisorId);
+			$mBranchId = Branch::userBranchId($teamLeaderId);
 			$kgis = Kgi::find()
 				->select('kgi.*')
 				->JOIN("LEFT JOIN", "kgi_branch kb", "kb.kgiId=kgi.kgiId")

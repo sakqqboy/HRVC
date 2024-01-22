@@ -61,20 +61,29 @@ class ManagementController extends Controller
 		}
 		$role = UserRole::userRight();
 		$adminId = '';
+		$gmId = '';
+		$teamLeaderId = '';
 		$managerId = '';
 		$supervisorId = '';
 		$staffId = '';
-		if ($role == 5) {
+		if ($role == 7) {
 			$adminId = Yii::$app->user->id;
 		}
-		if ($role == 4) {
+		if ($role == 6) {
+			$gmId = Yii::$app->user->id;
+		}
+		if ($role == 5) {
 			$managerId = Yii::$app->user->id;
 		}
-		if ($role == 3) {
+		if ($role == 4) {
 			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$teamLeaderId = Yii::$app->user->id;
 		}
 		if ($role == 1 || $role == 2) {
 			$staffId = Yii::$app->user->id;
+			return $this->redirect(Yii::$app->homeUrl);
 		}
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -82,7 +91,8 @@ class ManagementController extends Controller
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId);
+		//curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
 		$kfis = curl_exec($api);
 		$kfis = json_decode($kfis, true);
 
@@ -91,7 +101,8 @@ class ManagementController extends Controller
 		$units = json_decode($units, true);
 
 		$isManager = UserRole::isManager();
-
+		$part = Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId;
+		//throw new Exception($part);
 		curl_close($api);
 		//throw new Exception(print_r($kfis, true));
 
@@ -116,20 +127,29 @@ class ManagementController extends Controller
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
 		$adminId = '';
+		$gmId = '';
+		$teamLeaderId = '';
 		$managerId = '';
 		$supervisorId = '';
 		$staffId = '';
-		if ($role == 5) {
+		if ($role == 7) {
 			$adminId = Yii::$app->user->id;
 		}
-		if ($role == 4) {
+		if ($role == 6) {
+			$gmId = Yii::$app->user->id;
+		}
+		if ($role == 5) {
 			$managerId = Yii::$app->user->id;
 		}
-		if ($role == 3) {
+		if ($role == 4) {
 			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$teamLeaderId = Yii::$app->user->id;
 		}
 		if ($role == 1 || $role == 2) {
 			$staffId = Yii::$app->user->id;
+			return $this->redirect(Yii::$app->homeUrl);
 		}
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -137,7 +157,8 @@ class ManagementController extends Controller
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId);
+		//curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
 		$kfis = curl_exec($api);
 		$kfis = json_decode($kfis, true);
 		// throw new Exception(print_r($kfis, true));
@@ -211,8 +232,10 @@ class ManagementController extends Controller
 	{
 		$isManager = UserRole::isManager();
 		if (isset($_POST["kfiId"])) {
+			//throw new Exception($_POST["kfiId"]);
 			//throw new Exception(print_r(Yii::$app->request->post(), true));
 			$kfi = Kfi::find()->where(["kfiId" => $_POST["kfiId"]])->one();
+			$kfi->kfiName = $_POST["kfiName"];
 			$kfi->unitId = $_POST["unit"];
 			$kfi->kfiDetail = $_POST["detail"];
 			$kfi->status = $_POST["status"];
@@ -247,7 +270,7 @@ class ManagementController extends Controller
 			if (isset($_POST["department"]) && count($_POST["department"]) > 0) {
 				$this->saveKfiDepartment($_POST["department"], $_POST["kfiId"]);
 			}
-			return $this->redirect('index');
+			return $this->redirect('grid');
 		}
 	}
 	public function actionUpdateKfi()
@@ -632,22 +655,31 @@ class ManagementController extends Controller
 		//throw new exception($paramText);
 		$role = UserRole::userRight();
 		$adminId = '';
+		$gmId = '';
+		$teamLeaderId = '';
 		$managerId = '';
 		$supervisorId = '';
 		$staffId = '';
-		if ($role == 5) {
+		if ($role == 7) {
 			$adminId = Yii::$app->user->id;
 		}
-		if ($role == 4) {
+		if ($role == 6) {
+			$gmId = Yii::$app->user->id;
+		}
+		if ($role == 5) {
 			$managerId = Yii::$app->user->id;
 		}
-		if ($role == 3) {
+		if ($role == 4) {
 			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$teamLeaderId = Yii::$app->user->id;
 		}
 		if ($role == 1 || $role == 2) {
 			$staffId = Yii::$app->user->id;
+			return $this->redirect(Yii::$app->homeUrl);
 		}
-		$paramText .= '&&adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId;
+		$paramText .= '&&adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId;
 		//throw new Exception($paramText);
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);

@@ -179,6 +179,7 @@ class ManagementController extends Controller
 	{
 
 		if (isset($_POST["kgiName"]) && trim($_POST["kgiName"])) {
+			$result = isset($_POST["result"]) && $_POST["result"] != '' ? $_POST["result"] : 0;
 			$kgi = new Kgi();
 			$kgi->kgiName = $_POST["kgiName"];
 			$kgi->companyId = $_POST["companyId"];
@@ -194,7 +195,7 @@ class ManagementController extends Controller
 			$kgi->code = $_POST["code"];
 			$kgi->status = $_POST["status"];
 			$kgi->month = $_POST["month"];
-			$kgi->result = $_POST["result"];
+			$kgi->result = str_replace(",", "", $result);
 			$kgi->createrId = Yii::$app->user->id;
 			$kgi->createDateTime = new Expression('NOW()');
 			$kgi->updateDateTime = new Expression('NOW()');
@@ -216,7 +217,7 @@ class ManagementController extends Controller
 				$kgiHistory->code = $_POST["code"];
 				$kgiHistory->status = $_POST["status"];
 				$kgiHistory->month = $_POST["month"];
-				$kgiHistory->result = str_replace(",", "", $_POST["result"]);
+				$kgiHistory->result = str_replace(",", "", $result);
 				$kgiHistory->createrId = Yii::$app->user->id;
 				$kgiHistory->createDateTime = new Expression('NOW()');
 				$kgiHistory->updateDateTime = new Expression('NOW()');
@@ -231,11 +232,12 @@ class ManagementController extends Controller
 				}
 				if (isset($_POST["team"]) && count($_POST["team"]) > 0) {
 					$this->saveKgiTeam($_POST["team"], $kgiId);
+					$this->saveKgiEmployee($_POST["team"], $kgiId);
 				}
 				if (isset($_POST["kgiGroup"]) && count($_POST["kgiGroup"]) > 0) {
 					$this->saveKgiGroup($_POST["kgiGroup"], $kgiId);
 				}
-				return $this->redirect('index');
+				return $this->redirect('grid');
 			}
 		}
 	}
@@ -461,6 +463,47 @@ class ManagementController extends Controller
 					$kgiTeam->createDateTime = new Expression('NOW()');
 					$kgiTeam->updateDateTime = new Expression('NOW()');
 					$kgiTeam->save(false);
+					$kgiTeamId = Yii::$app->db->lastInsertID;
+					$kgiTeamHistory = new KgiTeamHistory();
+					$kgiTeamHistory->kgiTeamId = $kgiTeamId;
+					$kgiTeamHistory->target = null;
+					$kgiTeamHistory->result = null;
+					$kgiTeamHistory->createrId = Yii::$app->user->id;
+					$kgiTeamHistory->status = 1;
+					$kgiTeamHistory->createDateTime = new Expression('NOW()');
+					$kgiTeamHistory->updateDateTime = new Expression('NOW()');
+					$kgiTeamHistory->save(false);
+				}
+			endforeach;
+		}
+	}
+	public function saveKgiEmployee($team, $kgiId)
+	{
+		if (count($team) > 0) {
+			foreach ($team as $t) :
+				$employee = Employee::find()->where(["teamId" => $t, "status" => 1])->all();
+				if (isset($employee) && count($employee) > 0) {
+					foreach ($employee as $e) :
+						$kgiEmployee = new KgiEmployee();
+						$kgiEmployee->employeeId = $e->employeeId;
+						$kgiEmployee->kgiId = $kgiId;
+						$kgiEmployee->createrId = Yii::$app->user->id;
+						$kgiEmployee->status = 1;
+						$kgiEmployee->createDateTime = new Expression('NOW()');
+						$kgiEmployee->updateDateTime = new Expression('NOW()');
+
+						$kgiEmployee->save(false);
+						$kgiEmployeeId = Yii::$app->db->lastInsertID;
+						$kgiEmployeeHistory = new KgiEmployeeHistory();
+						$kgiEmployeeHistory->kgiEmployeeId = $kgiEmployeeId;
+						$kgiEmployeeHistory->target = null;
+						$kgiEmployeeHistory->result = null;
+						$kgiEmployeeHistory->createrId = Yii::$app->user->id;
+						$kgiEmployeeHistory->status = 1;
+						$kgiEmployeeHistory->createDateTime = new Expression('NOW()');
+						$kgiEmployeeHistory->updateDateTime = new Expression('NOW()');
+						$kgiEmployeeHistory->save(false);
+					endforeach;
 				}
 			endforeach;
 		}
@@ -521,17 +564,17 @@ class ManagementController extends Controller
 		]);
 		$team["textTeam"] = $kgiTeamText;
 
-		$kgiGroup = '';
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-group/company-kgi-group?companyId=' . $companyId);
-		$kgiGroups = curl_exec($api);
-		$kgiGroups = json_decode($kgiGroups, true);
-		$kgiGroup = $this->renderAjax('kgi_group', [
-			"kgiGroups" => $kgiGroups,
-			"kgiId" => $kgiId
-		]);
-		$group["textGroup"] = $kgiGroup;
+		// $kgiGroup = '';
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-group/company-kgi-group?companyId=' . $companyId);
+		// $kgiGroups = curl_exec($api);
+		// $kgiGroups = json_decode($kgiGroups, true);
+		// $kgiGroup = $this->renderAjax('kgi_group', [
+		// 	"kgiGroups" => $kgiGroups,
+		// 	"kgiId" => $kgiId
+		// ]);
+		// $group["textGroup"] = $kgiGroup;
 
-		$data = array_merge($kgi, $branch, $department, $team, $group);
+		$data = array_merge($kgi, $branch, $department, $team);
 		curl_close($api);
 		return json_encode($data);
 	}
@@ -540,6 +583,7 @@ class ManagementController extends Controller
 		//throw new Exception(print_r(Yii::$app->request->post(), true));
 		$isManager = UserRole::isManager();
 		if (isset($_POST["kgiId"]) && $_POST["kgiId"] != "") {
+			$result = isset($_POST["result"]) && $_POST["result"] != '' ? $_POST["result"] : 0;
 			$kgiId = $_POST["kgiId"];
 			//throw new Exception(print_r(Yii::$app->request->post(), true));
 			$kgi = Kgi::find()->where(["kgiId" => $kgiId])->one();
@@ -563,7 +607,7 @@ class ManagementController extends Controller
 			$kgi->code = $_POST["code"];
 			$kgi->status = $_POST["status"];
 			$kgi->month = $_POST["month"];
-			$kgi->result = str_replace(",", "", $_POST["result"]);
+			$kgi->result = str_replace(",", "", $result);
 			$kgi->updateDateTime = new Expression('NOW()');
 			if ($kgi->save(false)) {
 				$kgiHistory = new KgiHistory();
@@ -587,7 +631,7 @@ class ManagementController extends Controller
 				$kgiHistory->code = $_POST["code"];
 				$kgiHistory->status = $_POST["status"];
 				$kgiHistory->month = $_POST["month"];
-				$kgiHistory->result = str_replace(",", "", $_POST["result"]);
+				$kgiHistory->result = str_replace(",", "", $result);
 				$kgiHistory->createrId = Yii::$app->user->id;
 				$kgiHistory->createDateTime = new Expression('NOW()');
 				$kgiHistory->updateDateTime = new Expression('NOW()');
@@ -606,10 +650,10 @@ class ManagementController extends Controller
 				if (isset($_POST["kgiGroup"]) && count($_POST["kgiGroup"]) > 0) {
 					$this->saveKgiGroup($_POST["kgiGroup"], $kgiId);
 				}
-				return $this->redirect('index');
+				return $this->redirect('grid');
 			}
 		}
-		return $this->redirect('index');
+		return $this->redirect('grid');
 	}
 	public function actionHistory()
 	{
@@ -624,12 +668,12 @@ class ManagementController extends Controller
 		$kgiTeams = curl_exec($api);
 		$kgiTeams = json_decode($kgiTeams, true);
 		//throw new Exception(print_r($kgiTeams, true));
-		$res["teamText"] = $this->renderAjax('kgi_team', ["kgiTeams" => $kgiTeams]);
+		$res["teamText"] = $this->renderAjax('kgi_team', ["kgiTeams" => $kgiTeams, "kgiId" => $kgiId]);
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-employee?id=' . $kgiId);
 		$kgiEmloyee = curl_exec($api);
 		$kgiEmloyee = json_decode($kgiEmloyee, true);
-		$res["employeeText"] = $this->renderAjax('kgi_member', ["kgiEmloyee" => $kgiEmloyee]);
+		$res["employeeText"] = $this->renderAjax('kgi_member', ["kgiEmloyee" => $kgiEmloyee, "kgiId" => $kgiId]);
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-history?kgiId=' . $kgiId);
 		$history = curl_exec($api);
@@ -723,7 +767,7 @@ class ManagementController extends Controller
 			}
 			//throw new Exception(print_r(Yii::$app->request->post(), true));
 			if ($kgiIssue->save(false)) {
-				return $this->redirect('index');
+				return $this->redirect('grid');
 			}
 		}
 	}
@@ -878,7 +922,8 @@ class ManagementController extends Controller
 		} else {
 			$file = "kgi_search_result_grid";
 		}
-		//throw new Exception(print_r($paramText, true));
+		// throw new Exception($paramText);
+		// throw new Exception(print_r($kgis, true));
 		$isManager = UserRole::isManager();
 		return $this->render($file, [
 			"units" => $units,
@@ -974,7 +1019,7 @@ class ManagementController extends Controller
 			if (count($team) > 0) {
 				$this->saveKgiTeam($team, $kgiCopyId);
 			}
-			return $this->redirect('index');
+			return $this->redirect('grid');
 		}
 	}
 	public function actionAssignKgi()
@@ -1207,11 +1252,24 @@ class ManagementController extends Controller
 			$kgiEmployee = new KgiEmployee();
 			$kgiEmployee->employeeId = $employeeId;
 			$kgiEmployee->kgiId = $kgiId;
+			$kgiEmployee->createrId = Yii::$app->user->id;
 			$kgiEmployee->status = 1;
 			$kgiEmployee->createDateTime = new Expression('NOW()');
 			$kgiEmployee->updateDateTime = new Expression('NOW()');
 			//}
 			$kgiEmployee->save(false);
+			$kgiEmployeeId = Yii::$app->db->lastInsertID;
+			$kgiEmployeeHistory = new KgiEmployeeHistory();
+			$kgiEmployeeHistory->kgiEmployeeId = $kgiEmployeeId;
+			$kgiEmployeeHistory->target = null;
+			$kgiEmployeeHistory->result = null;
+			$kgiEmployeeHistory->createrId = Yii::$app->user->id;
+			$kgiEmployeeHistory->status = 1;
+			$kgiEmployeeHistory->createDateTime = new Expression('NOW()');
+			$kgiEmployeeHistory->updateDateTime = new Expression('NOW()');
+			//}
+			$kgiEmployeeHistory->save(false);
+
 			$employee = Employee::find()
 				->select('departmentId,teamId')
 				->where(["employeeId" => $employeeId, "status" => 1])
@@ -1352,6 +1410,7 @@ class ManagementController extends Controller
 	}
 	public function actionSearchAssignKgi()
 	{
+
 		$month = $_POST['month'];
 		$paramText = 'companyId=&&branchId=&&teamId=&&month=' . $month . '&&status=&&year=';
 		$groupId = Group::currentGroupId();
@@ -1591,7 +1650,7 @@ class ManagementController extends Controller
 			->orderBy('createDateTime DESC')
 			->one();
 		if ($approve == 1) {
-			$history->status = 1;
+			$history->status = 3;
 			$kgiTeam = KgiTeam::find()->where(["kgiTeamId" => $kgiTeamId])->one();
 			$kgiTeam->target = $history["target"];
 			$kgiTeam->status = 1;
@@ -1701,5 +1760,9 @@ class ManagementController extends Controller
 				Kpi::updateAll(["status" => 99], ["companyId" => $company["companyId"]]);
 			endforeach;
 		}
+	}
+	public function actionTest()
+	{
+		return $this->render('test');
 	}
 }

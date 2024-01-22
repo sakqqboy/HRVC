@@ -47,6 +47,7 @@ class EmployeeController extends Controller
 			->JOIN("LEFT JOIN", "employee_condition condition", "condition.employeeConditionId=employee.employeeConditionId")
 			->where(["employee.status" => 1])
 			->andFilterWhere(["employee.companyId" => $companyId])
+			->orderBy('employee.employeeFirstname')
 			->asArray()
 			->all();
 		return json_encode($employee);

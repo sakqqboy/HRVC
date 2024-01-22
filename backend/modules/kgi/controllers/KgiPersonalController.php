@@ -213,4 +213,30 @@ class KgiPersonalController extends Controller
 			->all();
 		return json_encode($kgiHistory);
 	}
+	public function actionKgiEmployeeHistoryView($kgiId, $employeeId)
+	{
+		$kgiEmployeeHistory = KgiEmployeeHistory::find()
+			->select('kgi_employee_history.*,e.employeeFirstname,e.employeeSurename')
+			->JOIN("LEFT JOIN", "kgi_employee ke", "ke.kgiEmployeeId=kgi_employee_history.kgiEmployeeId")
+			->JOIN("LEFT JOIN", "employee e", "e.employeeId=ke.employeeId")
+			->where([
+				"ke.kgiId" => $kgiId,
+				"ke.employeeId" => $employeeId
+			])
+			->orderBy('kgi_employee_history.createDateTime DESC')
+			->asArray()
+			->all();
+		if (!isset($kgiEmployeeHistory) || count($kgiEmployeeHistory) == 0) {
+			$kgiEmployeeHistory = KgiEmployee::find()
+				->select('kgi_employee.*,e.employeeFirstname,e.employeeSurename')
+				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
+				->where([
+					"kgi_employee.kgiId" => $kgiId,
+					"kgi_employee.employeeId" => $employeeId
+				])
+				->asArray()
+				->all();
+		}
+		return json_encode($kgiEmployeeHistory);
+	}
 }

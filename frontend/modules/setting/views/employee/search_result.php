@@ -159,10 +159,18 @@ $this->title = 'Employee';
 											?>
 											<span class="badge rounded-pill bg-<?= $text ?>" style="font-size: 7px;"><?= $statusName ?></span>
 										</div>
-										<div class="col-lg-2 col-md-2 col-2 text-end">
+										<div class="col-lg-2 col-md-2 col-2 text-end" onclick="javascript:showAction(<?= $employee['employeeId'] ?>)" style="cursor: pointer;">
 											<div class="col-12 employee-ellipsis">
 												<strong><i class="fa fa-ellipsis-v" aria-hidden="true"></i></strong>
 											</div>
+										</div>
+										<div class="employee-action" id="employee-action-<?= $employee['employeeId'] ?>">
+											<a href="<?= Yii::$app->homeUrl ?>setting/employee/update/<?= ModelMaster::encodeParams(['employeeId' => $employee['employeeId']]) ?>" class="btn btn-outline-dark btn-sm font-size-12">
+												<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+											</a>
+											<a href="javascript:deleteEmployee(<?= $employee['employeeId'] ?>)" class="btn btn-outline-danger btn-sm font-size-14 mt-5">
+												<i class="fa fa-trash" aria-hidden="true"></i>
+											</a>
 										</div>
 									</div>
 									<div class="row">

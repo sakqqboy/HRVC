@@ -11,7 +11,7 @@ if (isset($kgiTeams) && count($kgiTeams) > 0) {
 				foreach ($teams as $teamId => $team) :
 
 		?>
-					<div class="col-lg-3 col-3">
+					<div class="col-lg-3 col-3" onclick="javascription:openTeamView(<?= $teamId ?>,<?= $kgiId ?>)" style="cursor: pointer;">
 						<div class="col-12">
 							<div class="alert team-user"><i class="fa fa-users" aria-hidden="true"></i></div>
 						</div>

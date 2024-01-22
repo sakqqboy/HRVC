@@ -20,7 +20,7 @@ function companyMultiBrachUpdate() {
 		success: function(data) {
 		    if (data.status) {
 			    $("#show-multi-branch-update").html(data.branchText);
-			    $("#kgi-group-update").html(data.kgiGroup);
+			//     $("#kgi-group-update").html(data.kgiGroup);
 		    }
       
 		}
@@ -224,7 +224,7 @@ function updateKgi(kgiId) {
 			$("#show-multi-branch-update").html(data.textBranch);
 			$("#show-multi-department-update").html(data.textDepartment);
 			$("#show-multi-team-update").html(data.textTeam);
-			$("#kgi-group-update").html(data.textGroup);
+			// $("#kgi-group-update").html(data.textGroup);
 		}
 	});
 }

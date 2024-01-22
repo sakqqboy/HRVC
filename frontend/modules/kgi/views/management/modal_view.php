@@ -1,4 +1,4 @@
-<div class="modal fade" id="kgi-view" tabindex="-1" aria-labelledby="exampleModalViewkgi3Label" aria-hidden="true">
+<div class="modal fade" id="kgi-view" tabindex="-1" aria-labelledby="exampleModalViewkgi3Label" aria-hidden="true" role="dialog">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header" style="border: none;">

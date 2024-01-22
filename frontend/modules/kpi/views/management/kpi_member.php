@@ -5,10 +5,10 @@ use frontend\models\hrvc\Department;
 if (isset($kpiEmloyee) && count($kpiEmloyee) > 0) { ?>
 	<div class="row mt-20">
 		<?php
-		foreach ($kpiEmloyee as $employeeName => $employee) :
+		foreach ($kpiEmloyee as $employeeId => $employee) :
 		?>
 
-			<div class="col-lg-3 col-md-6 col-12">
+			<div class="col-lg-3 col-md-6 col-12" onclick="javascription:openKpiEmployeeView(<?= $employeeId ?>,<?= $kpiId ?>)" style="cursor: pointer;">
 				<div class="col-12">
 					<img src="<?= Yii::$app->homeUrl ?><?= $employee["image"] ?>" class="image-AssignMembers">
 				</div>

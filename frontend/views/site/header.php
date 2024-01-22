@@ -86,19 +86,19 @@ use frontend\models\hrvc\UserRole;
                                 KPI & KGI MANAGEMENT
                         </div>
                         <div class="col-12">
-                                <a href="<?= Yii::$app->homeUrl ?>kfi/management/index" class="no-underline">
+                                <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="no-underline">
                                         <i class="fa fa-bar-chart pr-10 mt-20" aria-hidden="true"></i>
                                         KFI Management
                                 </a>
                         </div>
                         <div class="col-12">
-                                <a href="<?= Yii::$app->homeUrl ?>kgi/management/index" class="no-underline">
+                                <a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" class="no-underline">
                                         <i class="fa fa-line-chart pr-10 mt-20" aria-hidden="true"></i>
                                         KGI Management
                                 </a>
                         </div>
                         <div class="col-12">
-                                <a href="<?= Yii::$app->homeUrl ?>kpi/management/index" class="no-underline">
+                                <a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="no-underline">
                                         <i class="fa fa-tachometer pr-10 mt-20" aria-hidden="true"></i>
                                         KPI Management
                                 </a>

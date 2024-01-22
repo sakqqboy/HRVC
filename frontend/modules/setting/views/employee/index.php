@@ -104,7 +104,6 @@ $this->title = 'Employee';
 												<strong><i class="fa fa-ellipsis-v" aria-hidden="true"></i></strong>
 											</div>
 										</div>
-
 										<div class="employee-action" id="employee-action-<?= $employee['employeeId'] ?>">
 											<a href="<?= Yii::$app->homeUrl ?>setting/employee/update/<?= ModelMaster::encodeParams(['employeeId' => $employee['employeeId']]) ?>" class="btn btn-outline-dark btn-sm font-size-12">
 												<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -112,7 +111,6 @@ $this->title = 'Employee';
 											<a href="javascript:deleteEmployee(<?= $employee['employeeId'] ?>)" class="btn btn-outline-danger btn-sm font-size-14 mt-5">
 												<i class="fa fa-trash" aria-hidden="true"></i>
 											</a>
-
 										</div>
 									</div>
 									<div class="row">

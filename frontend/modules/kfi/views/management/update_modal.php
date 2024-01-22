@@ -16,7 +16,7 @@
 					<div class="col-lg-6 col-md-6 col-6 font-size-14">
 						<div class="col-12">
 							<label for="exampleFormControlInput1" class="form-label">KFI Contents</label>
-							<input type="text" class="form-control" value="" id="kfiName">
+							<input type="text" class="form-control" value="" id="kfiName" name="kfiName">
 						</div>
 						<div class="col-12 pt-5 mt-5">
 							<label for="input" class="form-label">Company</label>
@@ -93,7 +93,7 @@
 										<label for="input" class="form-label"><strong class="red">*</strong> Next Check Date</label>
 										<div class="input-group">
 											<span class="input-group-text font-size-12"><i class="fa fa-calendar-o" aria-hidden="true"></i> &nbsp;&nbsp; Date</span>
-											<input type="date" aria-label="" class="form-control font-size-12" required name="nextCheckDate" id="nextCheckDate-create">
+											<input type="date" aria-label="" class="form-control font-size-12" required name="nextCheckDate" id="nextCheckDate-update">
 										</div>
 									</div>
 								</div>
@@ -114,7 +114,7 @@
 									<option value="1">Quantity</option>
 									<option value="2">Quality</option>
 								</select>
-								<input type="hidden" name="kfiId" id="kfiId" value="">
+								<input type="hidden" name="kfiId" id="kfiId-update" value="">
 							</div>
 							<div class="col-lg-4 col-md-6 col-6 pt-10 mt-17">
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Amount Type</label>

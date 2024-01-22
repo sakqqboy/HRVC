@@ -184,4 +184,30 @@ class KpiPersonalController extends Controller
 			->all();
 		return json_encode($kpiHistory);
 	}
+	public function actionKpiEmployeeHistoryView($kpiId, $employeeId)
+	{
+		$kpiEmployeeHistory = KpiEmployeeHistory::find()
+			->select('kpi_employee_history.*,e.employeeFirstname,e.employeeSurename')
+			->JOIN("LEFT JOIN", "kpi_employee ke", "ke.kpiEmployeeId=kpi_employee_history.kpiEmployeeId")
+			->JOIN("LEFT JOIN", "employee e", "e.employeeId=ke.employeeId")
+			->where([
+				"ke.kpiId" => $kpiId,
+				"ke.employeeId" => $employeeId
+			])
+			->orderBy('kpi_employee_history.createDateTime DESC')
+			->asArray()
+			->all();
+		if (!isset($kpiEmployeeHistory) || count($kpiEmployeeHistory) == 0) {
+			$kpiEmployeeHistory = KpiEmployee::find()
+				->select('kpi_employee.*,e.employeeFirstname,e.employeeSurename')
+				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
+				->where([
+					"kpi_employee.kpiId" => $kpiId,
+					"kpi_employee.employeeId" => $employeeId
+				])
+				->asArray()
+				->all();
+		}
+		return json_encode($kpiEmployeeHistory);
+	}
 }

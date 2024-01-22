@@ -130,23 +130,23 @@ $this->title = 'KGI Grid View';
 											Term <span class="text-dark font-size-10">: <?= $kgi["fromDate"] ?> - <?= $kgi["toDate"] ?></span>
 										</span>
 									</div>
-									<div class="col-12 top-teamcontent">
+									<!-- <div class="col-12 top-teamcontent">
 										Team Content
 									</div>
 									<div class="col-12 font-size-12 pt-10">
 										This is a sample KGI content
-									</div>
+									</div> -->
 								</div>
 								<div class="col-lg-2 col-md-6 col-12 sample-bordersolid">
 									<div class="row">
-										<div class="col-md-6 ">
+										<div class="col-md-6">
 											<div class="col-12 font-size-12 pt-5">
 												Quant Ratio
 											</div>
-											<div class="col-12 Quality-diamond ">
+											<div class="col-12 Quality-diamond">
 												<i class="fa fa-diamond" aria-hidden="true"></i> <?= $kgi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?>
 											</div>
-											<div class="col-12 font-size-10 pt-20 " style="width: 10rem;">
+											<div class="col-12 font-size-10 pt-20" style="width: 10rem;">
 												Update Interval
 											</div>
 											<div class="col-12 Quality-monthly0">
@@ -340,4 +340,6 @@ $form = ActiveForm::begin([
 <?php ActiveForm::end(); ?>
 <?= $this->render('modal_delete') ?>
 <?= $this->render('modal_issue') ?>
+<?= $this->render('modal_team_history') ?>
+<?= $this->render('modal_employee_history') ?>
 <!-- end -->

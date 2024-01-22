@@ -5,6 +5,7 @@ namespace backend\modules\kgi\controllers;
 use backend\models\hrvc\GroupHasKgi;
 use backend\models\hrvc\KgiGroup;
 use backend\models\hrvc\KgiTeam;
+use backend\models\hrvc\KgiTeamHistory;
 use common\models\ModelMaster;
 use Exception;
 use yii\web\Controller;
@@ -27,5 +28,33 @@ class KgiTeamController extends Controller
 			->asArray()
 			->all();
 		return json_encode($kgiTeams);
+	}
+	public function actionKgiTeamHistory($kgiId, $teamId)
+	{
+		$kgiTeamHistory = KgiTeamHistory::find()
+			->select('kgi_team_history.*,e.employeeFirstname,e.employeeSurename')
+			->JOIN("LEFT JOIN", "kgi_team kt", "kt.kgiTeamId=kgi_team_history.kgiTeamId")
+			->JOIN("LEFT JOIN", "user u", "u.userId=kgi_team_history.createrId")
+			->JOIN("LEFT JOIN", "employee e", "e.employeeId=u.employeeId")
+			->where([
+				"kt.kgiId" => $kgiId,
+				"kt.teamId" => $teamId
+			])
+			->orderBy('kgi_team_history.createDateTime DESC')
+			->asArray()
+			->all();
+		if (!isset($kgiTeamHistory) || count($kgiTeamHistory) == 0) {
+			$kgiTeamHistory = KgiTeam::find()
+				->select('kgi_team.*,e.employeeFirstname,e.employeeSurename')
+				->JOIN("LEFT JOIN", "user u", "u.userId=kgi_team.createrId")
+				->JOIN("LEFT JOIN", "employee e", "e.employeeId=u.employeeId")
+				->where([
+					"kgi_team..kgiId" => $kgiId,
+					"kgi_team..teamId" => $teamId
+				])
+				->asArray()
+				->all();
+		}
+		return json_encode($kgiTeamHistory);
 	}
 }

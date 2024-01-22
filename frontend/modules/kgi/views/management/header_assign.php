@@ -24,7 +24,7 @@
 			</a>
 		</li>
 		<li class="nav-item presentation-end" role="presentation">
-			<a href="<?= Yii::$app->homeUrl ?>kgi/management/index"> <span class="pl-20 pr-20 badge bg kfi-assignpage text-end" type="submit"> KGI </span></a>
+			<a href="<?= Yii::$app->homeUrl ?>kgi/management/grid"> <span class="pl-20 pr-20 badge bg kfi-assignpage text-end" type="submit"> KGI </span></a>
 		</li>
 
 	</ul>

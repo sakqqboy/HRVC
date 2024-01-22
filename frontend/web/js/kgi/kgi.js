@@ -23,7 +23,7 @@ function companyMultiBrach() {
 		success: function (data) {
 			if (data.status) {
 				$("#show-multi-branch").html(data.branchText);
-				$("#kgi-group-create").html(data.kgiGroup);
+				// $("#kgi-group-create").html(data.kgiGroup);
 			}
 		}
 	   });
@@ -319,6 +319,38 @@ function kgiHistory(kgiId) {
 			$("#employee-view").html(data.employeeText);
 			$("#kgi-history").html(data.historyText);
 		 }
+	});
+}
+function openTeamView(teamId,kgiId) {
+	$("#team-progress").modal('show');
+	var url = $url + 'kgi/kgi-team/team-progress';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { teamId: teamId,kgiId:kgiId },
+		success: function (data) {
+			$("#kgi-name").html(data.kgiName);
+			$("#team-name").html(data.teamName);
+			$("#kgi-team-progress").html(data.history);
+			
+		}
+	});
+}
+function openEmployeeView(employeeId,kgiId) {
+	$("#employee-progress").modal('show');
+	var url = $url + 'kgi/kgi-personal/employee-progress';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { employeeId: employeeId,kgiId:kgiId },
+		success: function (data) {
+			$("#kgi-name-employee").html(data.kgiName);
+			$("#employee-name").html(data.employeeName);
+			$("#kgi-employee-progress").html(data.history);
+			
+		}
 	});
 }
 function prepareDeleteKgi(kgiId) { 

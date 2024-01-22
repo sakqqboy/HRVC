@@ -7,6 +7,7 @@ use common\models\ModelMaster;
 use Exception;
 use FFI\Exception as FFIException;
 use frontend\models\hrvc\Group;
+use frontend\models\hrvc\Kpi;
 use frontend\models\hrvc\KpiEmployee;
 use frontend\models\hrvc\KpiEmployeeHistory;
 use frontend\models\hrvc\UserRole;
@@ -38,7 +39,7 @@ class KpiPersonalController extends Controller
 		$kpiId = $param["kpiId"];
 		$role = UserRole::userRight();
 		if ($role < 3) {
-			return $this->redirect(Yii::$app->homeUrl . 'kgi/management/index');
+			return $this->redirect(Yii::$app->homeUrl . 'kpi/management/index');
 		}
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -229,5 +230,30 @@ class KpiPersonalController extends Controller
 			"kpiEmployeeDetail" => $kpiEmployeeDetail,
 			"kpiEmployeeHistory" => $kpiEmployeeHistory
 		]);
+	}
+	public function actionEmployeeProgress()
+	{
+		$kpiId = $_POST["kpiId"];
+		$employeeId = $_POST["employeeId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
+		$employeeDetail = curl_exec($api);
+		$employeeDetail = json_decode($employeeDetail, true);
+
+
+		$kpi = Kpi::find()->select('kpiName')->where(["kpiId" => $kpiId])->asArray()->one();
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/kpi-employee-history-view?kpiId=' . $kpiId . '&&employeeId=' . $employeeId);
+		$kpiEmployeeHistory = curl_exec($api);
+		$kpiEmployeeHistory = json_decode($kpiEmployeeHistory, true);
+		curl_close($api);
+		//throw new Exception(print_r($kpiTeamHistory, true));
+		$teamText = $this->renderAjax('employee_progress', ["kpiEmployeeHistory" => $kpiEmployeeHistory]);
+		//throw new Exception($teamText);
+		$res["employeeName"] = $employeeDetail["employeeFirstname"] . ' ' . $employeeDetail["employeeSurename"];
+		$res["kpiName"] = $kpi["kpiName"];
+		$res["history"] = $teamText;
+		return json_encode($res);
 	}
 }

@@ -189,18 +189,18 @@
 							</div>
 							<div class="col-12 mt-10">
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Target Amount</label>
-								<input type="text" class="form-control font-size-13" name="targetAmount">
+								<input type="text" class="form-control font-size-13" name="targetAmount" required>
 							</div>
 							<div class="col-12">
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Result</label>
 								<input type="text" class="form-control font-size-13" name="result">
 							</div>
-							<div class="col-12 mt-10 border-bottom pb-10">
+							<!-- <div class="col-12 mt-10 border-bottom pb-10">
 								KGI Group
 							</div>
 							<div class="row mt-10" id="kgi-group-create">
 								<span class="text-secondary"> Please select company ! ! !</span>
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>

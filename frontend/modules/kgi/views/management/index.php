@@ -1,31 +1,32 @@
 <?php
 
 use frontend\models\hrvc\Kgi;
-use frontend\models\hrvc\UserRole;
 use yii\bootstrap5\ActiveForm;
 
 $this->title = "KGI";
 ?>
-<div class="col-12 mt-90 pd-Performance">
+
+<div class="col-12 mt-70">
 	<div class="col-12">
-		<i class="fa fa-tachometer font-size-20" aria-hidden="true"></i> <strong class="font-size-20"> Performance Indicator Matrices (PIM)</strong>
+		<i class="fa fa-tachometer font-size-18" aria-hidden="true"></i>
+		<strong class="font-size-18"> Performance Indicator Matrices (PIM)</strong>
 	</div>
-	<div class="col-12 mt-20">
+	<div class="col-12 mt-10">
 		<?= $this->render('header_filter', [
 			"role" => $role
 		]) ?>
-		<div class="alert alert-white-4">
+		<div class="alert alert-white-4 mt-10">
 			<div class="row">
 				<div class="col-lg-4 col-md-6 col-12 key1">
 					<div class="row">
 						<div class="col-6 key1">
 							Key Goal Indicators
 						</div>
-						<div class="col-6">
+						<div class="col-6 text-center">
 							<?php
 							if ($role >= 3) {
 							?>
-								<button type="button" class="btn btn-primary font-size-14" data-bs-toggle="modal" data-bs-target="#staticBackdrop5" onclick="javascript:changeType()">
+								<button type="button" class="btn btn-primary font-size-12" data-bs-toggle="modal" data-bs-target="#staticBackdrop5" onclick="javascript:changeType()">
 									<i class="fa fa-magic" aria-hidden="true"></i> Create New KGI
 								</button>
 							<?php
@@ -260,3 +261,5 @@ $this->title = "KGI";
 </div>
 <?= $this->render('modal_delete') ?>
 <?= $this->render('modal_issue') ?>
+<?= $this->render('modal_team_history') ?>
+<?= $this->render('modal_employee_history') ?>

@@ -103,6 +103,7 @@ function updateKfi(kfiId) {
     resetUnit();
     $("#staticBackdrop2").show();
     $("#update-kfi")[0].reset();
+    $("#kfiId-update").val(kfiId);
     var url = $url + 'kfi/management/update-kfi';
     $.ajax({
         type: "POST",
@@ -131,7 +132,6 @@ function updateKfi(kfiId) {
             $("#amountType").val(data.amountType);
             $("#code").val(data.code);
             $("#kfiStatus").val(data.kfiStatus);
-            $("#kfiId").val(kfiId);
         }
     });
 }

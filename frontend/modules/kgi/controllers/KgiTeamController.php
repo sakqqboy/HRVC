@@ -6,6 +6,7 @@ use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
 use frontend\models\hrvc\Group;
+use frontend\models\hrvc\Kgi;
 use frontend\models\hrvc\KgiGroup;
 use frontend\models\hrvc\KgiTeam;
 use frontend\models\hrvc\KgiTeamHistory;
@@ -73,6 +74,7 @@ class KgiTeamController extends Controller
 						$kgiTeam = KgiTeam::find()
 							->where(["kgiId" => $_POST["kgiId"], "teamId" => $teamId])
 							->one();
+						$oldTarget = $kgiTeam->target;
 						if ($_POST["role"] != 3) { // higher than Team Leader, don't need to approve
 							$target = str_replace(",", "", $target);
 							$kgiTeam->target = $target;
@@ -80,9 +82,10 @@ class KgiTeamController extends Controller
 							$kgiTeam->createrId = Yii::$app->user->id;
 							$kgiTeam->save(false);
 						}
-						if ($kgiTeam->target != $target) {
+						//throw new Exception($target . "=>" . $oldTarget);
+						if ($oldTarget != $target) {
 							$history = KgiTeamHistory::find()
-								->where(["kpiTeamId" => $kgiTeam->kgiTeamId, "status" => 88])
+								->where(["kgiTeamId" => $kgiTeam->kgiTeamId, "status" => 88])
 								->one();
 							if (!isset($history) || empty($history)) {
 								$history = new KgiTeamHistory();
@@ -101,5 +104,29 @@ class KgiTeamController extends Controller
 			}
 		}
 		return $this->redirect(Yii::$app->homeUrl . 'kgi/management/assign-kgi');
+	}
+	public function actionTeamProgress()
+	{
+		$kgiId = $_POST["kgiId"];
+		$teamId = $_POST["teamId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/team-detail?id=' . $teamId);
+		$teamDetail = curl_exec($api);
+		$teamDetail = json_decode($teamDetail, true);
+
+
+		$kgi = Kgi::find()->select('kgiName')->where(["kgiId" => $kgiId])->asArray()->one();
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-team-history?kgiId=' . $kgiId . '&&teamId=' . $teamId);
+		$kgiTeamHistory = curl_exec($api);
+		$kgiTeamHistory = json_decode($kgiTeamHistory, true);
+		curl_close($api);
+		//throw new Exception(print_r($kgiTeamHistory, true));
+		$teamText = $this->renderAjax('team_progress', ["kgiTeamHistory" => $kgiTeamHistory]);
+		//throw new Exception($teamText);
+		$res["teamName"] = $teamDetail["teamName"];
+		$res["kgiName"] = $kgi["kgiName"];
+		$res["history"] = $teamText;
+		return json_encode($res);
 	}
 }

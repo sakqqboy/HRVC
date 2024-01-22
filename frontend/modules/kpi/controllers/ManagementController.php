@@ -176,6 +176,7 @@ class ManagementController extends Controller
     public function actionCreateKpi()
     {
         if (isset($_POST["kpiName"]) && trim($_POST["kpiName"])) {
+            $result = isset($_POST["result"]) && $_POST["result"] != '' ? $_POST["result"] : 0;
             $kpi = new Kpi();
             $kpi->kpiName = $_POST["kpiName"];
             $kpi->companyId = $_POST["companyId"];
@@ -191,7 +192,7 @@ class ManagementController extends Controller
             $kpi->code = $_POST["code"];
             $kpi->status = $_POST["status"];
             $kpi->month = $_POST["month"];
-            $kpi->result = $_POST["result"];
+            $kpi->result = str_replace(",", "", $result);
             $kpi->createrId = Yii::$app->user->id;
             $kpi->createDateTime = new Expression('NOW()');
             $kpi->updateDateTime = new Expression('NOW()');
@@ -210,7 +211,7 @@ class ManagementController extends Controller
                 $kpiHistory->code = $_POST["code"];
                 $kpiHistory->status = $_POST["status"];
                 $kpiHistory->month = $_POST["month"];
-                $kpiHistory->result = $_POST["result"];
+                $kpiHistory->result = str_replace(",", "", $result);
                 $kpiHistory->createrId = Yii::$app->user->id;
                 $kpiHistory->createDateTime = new Expression('NOW()');
                 $kpiHistory->updateDateTime = new Expression('NOW()');
@@ -225,8 +226,9 @@ class ManagementController extends Controller
                 }
                 if (isset($_POST["team"]) && count($_POST["team"]) > 0) {
                     $this->saveKpiTeam($_POST["team"], $kpiId);
+                    $this->saveKpiEmployee($_POST["team"], $kpiId);
                 }
-                return $this->redirect('index');
+                return $this->redirect('grid');
             }
         }
     }
@@ -328,6 +330,47 @@ class ManagementController extends Controller
                     $kpiTeam->createDateTime = new Expression('NOW()');
                     $kpiTeam->updateDateTime = new Expression('NOW()');
                     $kpiTeam->save(false);
+                    $kpiTeamId = Yii::$app->db->lastInsertID;
+                    $kpiTeamHistory = new KpiTeamHistory();
+                    $kpiTeamHistory->kgiTeamId = $kpiTeamId;
+                    $kpiTeamHistory->target = null;
+                    $kpiTeamHistory->result = null;
+                    $kpiTeamHistory->createrId = Yii::$app->user->id;
+                    $kpiTeamHistory->status = 1;
+                    $kpiTeamHistory->createDateTime = new Expression('NOW()');
+                    $kpiTeamHistory->updateDateTime = new Expression('NOW()');
+                    $kpiTeamHistory->save(false);
+                }
+            endforeach;
+        }
+    }
+    public function saveKpiEmployee($team, $kpiId)
+    {
+        if (count($team) > 0) {
+            foreach ($team as $t) :
+                $employee = Employee::find()->where(["teamId" => $t, "status" => 1])->all();
+                if (isset($employee) && count($employee) > 0) {
+                    foreach ($employee as $e) :
+                        $kpiEmployee = new KpiEmployee();
+                        $kpiEmployee->employeeId = $e->employeeId;
+                        $kpiEmployee->kpiId = $kpiId;
+                        $kpiEmployee->createrId = Yii::$app->user->id;
+                        $kpiEmployee->status = 1;
+                        $kpiEmployee->createDateTime = new Expression('NOW()');
+                        $kpiEmployee->updateDateTime = new Expression('NOW()');
+
+                        $kpiEmployee->save(false);
+                        $kpiEmployeeId = Yii::$app->db->lastInsertID;
+                        $kpiEmployeeHistory = new KpiEmployeeHistory();
+                        $kpiEmployeeHistory->kpiEmployeeId = $kpiEmployeeId;
+                        $kpiEmployeeHistory->target = null;
+                        $kpiEmployeeHistory->result = null;
+                        $kpiEmployeeHistory->createrId = Yii::$app->user->id;
+                        $kpiEmployeeHistory->status = 1;
+                        $kpiEmployeeHistory->createDateTime = new Expression('NOW()');
+                        $kpiEmployeeHistory->updateDateTime = new Expression('NOW()');
+                        $kpiEmployeeHistory->save(false);
+                    endforeach;
                 }
             endforeach;
         }
@@ -383,6 +426,7 @@ class ManagementController extends Controller
     {
         $isManager = UserRole::isManager();
         if (isset($_POST["kpiId"]) && $_POST["kpiId"] != "") {
+            $result = isset($_POST["result"]) && $_POST["result"] != '' ? $_POST["result"] : 0;
             $kpiId = $_POST["kpiId"];
             //throw new Exception(print_r(Yii::$app->request->post(), true));
             $kpi = Kpi::find()->where(["kpiId" => $kpiId])->one();
@@ -409,7 +453,7 @@ class ManagementController extends Controller
             $kpi->code = $_POST["code"];
             $kpi->status = $_POST["status"];
             $kpi->month = $_POST["month"];
-            $kpi->result = str_replace(",", "", $_POST["result"]);
+            $kpi->result = str_replace(",", "", $result);
             $kpi->createrId = Yii::$app->user->id;
             $kpi->updateDateTime = new Expression('NOW()');
             if ($kpi->save(false)) {
@@ -433,7 +477,7 @@ class ManagementController extends Controller
                 $kpiHistory->code = $_POST["code"];
                 $kpiHistory->status = $_POST["status"];
                 $kpiHistory->month = $_POST["month"];
-                $kpiHistory->result = str_replace(",", "", $_POST["result"]);
+                $kpiHistory->result = str_replace(",", "", $result);
                 $kpiHistory->createrId = Yii::$app->user->id;
                 $kpiHistory->createDateTime = new Expression('NOW()');
                 $kpiHistory->updateDateTime = new Expression('NOW()');
@@ -449,10 +493,10 @@ class ManagementController extends Controller
                 if (isset($_POST["team"]) && count($_POST["team"]) > 0) {
                     $this->savekpiTeam($_POST["team"], $kpiId);
                 }
-                return $this->redirect('index');
+                return $this->redirect('grid');
             }
         }
-        return $this->redirect('index');
+        return $this->redirect('grid');
     }
     public function actionHistory()
     {
@@ -467,12 +511,12 @@ class ManagementController extends Controller
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-team?id=' . $kpiId);
         $kpiTeams = curl_exec($api);
         $kpiTeams = json_decode($kpiTeams, true);
-        $res["teamText"] = $this->renderAjax('kpi_team', ["kpiTeams" => $kpiTeams]);
+        $res["teamText"] = $this->renderAjax('kpi_team', ["kpiTeams" => $kpiTeams, "kpiId" => $kpiId]);
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-employee?id=' . $kpiId);
         $kpiEmloyee = curl_exec($api);
         $kpiEmloyee = json_decode($kpiEmloyee, true);
-        $res["employeeText"] = $this->renderAjax('kpi_member', ["kpiEmloyee" => $kpiEmloyee]);
+        $res["employeeText"] = $this->renderAjax('kpi_member', ["kpiEmloyee" => $kpiEmloyee, "kpiId" => $kpiId]);
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-history?kpiId=' . $kpiId);
         $history = curl_exec($api);
@@ -565,7 +609,7 @@ class ManagementController extends Controller
             }
             //throw new Exception(print_r(Yii::$app->request->post(), true));
             if ($kpiIssue->save(false)) {
-                return $this->redirect('index');
+                return $this->redirect('grid');
             }
         }
     }
@@ -916,7 +960,7 @@ class ManagementController extends Controller
             if (count($team) > 0) {
                 $this->saveKpiTeam($team, $kpiCopyId);
             }
-            return $this->redirect('index');
+            return $this->redirect('grid');
         }
     }
     public function actionAssignKpi()
@@ -1181,6 +1225,16 @@ class ManagementController extends Controller
             $kpiEmployee->updateDateTime = new Expression('NOW()');
             //}
             $kpiEmployee->save(false);
+            $kpiEmployeeId = Yii::$app->db->lastInsertID;
+            $kpiEmployeeHistory = new KpiEmployeeHistory();
+            $kpiEmployeeHistory->kgiEmployeeId = $kpiEmployeeId;
+            $kpiEmployeeHistory->target = null;
+            $kpiEmployeeHistory->result = null;
+            $kpiEmployeeHistory->createrId = Yii::$app->user->id;
+            $kpiEmployeeHistory->status = 1;
+            $kpiEmployeeHistory->createDateTime = new Expression('NOW()');
+            $kpiEmployeeHistory->updateDateTime = new Expression('NOW()');
+            $kpiEmployeeHistory->save(false);
             $employee = Employee::find()
                 ->select('departmentId,teamId')
                 ->where(["employeeId" => $employeeId, "status" => 1])
