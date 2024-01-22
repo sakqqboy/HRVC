@@ -8,7 +8,7 @@
 }
 
 .pictureDepartment1 {
-    width: 20px;
+    width: 13px;
 }
 
 .cl-btn {
@@ -58,6 +58,7 @@
     background-color: #DCF0FF;
     font-size: 10px;
     color: black;
+    text-align: center;
 }
 
 .bg-titleBudget {

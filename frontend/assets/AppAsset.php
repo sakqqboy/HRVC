@@ -82,7 +82,13 @@ class AppAsset extends AssetBundle
         'css/evaluation/frame_dashboard.css',
         'css/evaluation/settings.css',
         'css/evaluation/salary_allowance.css',
-
+        'css/evaluation/bonus.css',
+        'css/evaluation/add_allocate_weight.css',
+        'css/evaluation/salary_edit.css',
+        'css/evaluation/salary_dashboard.css',
+        'css/evaluation/promotion.css',
+        'css/evaluation/processstatus.css',
+        'css/evaluation/individual.css'
 
     ];
     public $js = [
@@ -106,6 +112,7 @@ class AppAsset extends AssetBundle
         'js/kgi/kgi_group.js',
         'js/setting/doughnut.js',
         'js/setting/accordion.js',
+        'js/setting/bonus.js',
 
     ];
     public $depends = [

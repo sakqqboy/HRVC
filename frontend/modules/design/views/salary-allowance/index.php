@@ -68,7 +68,7 @@ $this->title = 'Salary Allowance';
                             <label class="rad-label">
                                 <input type="radio" class="rad-input" name="rad">
                                 <div class="rad-design"></div>
-                                <div class="rad-text"> Bonus calculation</div>
+                                <div class="rad-text"> Bonus</div>
                             </label>
 
                             <label class="rad-label">

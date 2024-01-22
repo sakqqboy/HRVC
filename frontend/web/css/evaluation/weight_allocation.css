@@ -153,7 +153,7 @@
 .bg-lighttotal {
     background-color: rgb(222, 222, 222);
     border-radius: 2px;
-    font-size: 10px;
+    font-size: 9px;
 }
 
 .txt-Weight {
@@ -177,7 +177,7 @@
 }
 
 .fonTotal {
-    font-size: 10px;
+    font-size: 8px;
 }
 
 .icons-KGI {
@@ -190,4 +190,15 @@
 
 .solid-typeradio {
     border-left: 3px lightgrey solid dashed;
+}
+
+.image-weight {
+    width: 13px;
+}
+
+.Next-1 {
+    background-color: #1DA5DF;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    color: white;
+    border-radius: 10px;
 }

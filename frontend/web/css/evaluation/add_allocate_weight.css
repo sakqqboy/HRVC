@@ -1,0 +1,82 @@
+.Save-2 {
+    width: 13px;
+    margin-top: -5px;
+}
+
+.widthSave-3 {
+    width: 15px;
+}
+
+.Select-add {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.inlineDepartment1 {
+    font-size: 11px;
+}
+
+.controlcheckboxSelect {
+    font-size: 13px;
+    margin-top: 18px;
+}
+
+.pictureRank-1 {
+    width: 15px;
+}
+
+.allocate-user {
+    width: 18px;
+}
+
+.label-username {
+    font-size: 11px;
+}
+
+.all-allocateuser {
+    margin-left: 20px;
+    margin-top: 8px;
+}
+
+.PIM-allocate {
+    font-size: 13px;
+    margin-top: 20px;
+    font-weight: 500;
+    color: #175690;
+}
+
+.ADD-plus1-allocate {
+    background-color: #2580D3;
+    width: 3rem;
+    border-radius: 4px;
+    padding-right: 2px;
+    padding-left: 2px;
+    font-size: 12px;
+    color: white;
+    cursor: pointer;
+}
+
+.Edit-plus1-allocate {
+    background-color: #F2AFAF;
+    width: 3rem;
+    border-radius: 4px;
+    padding-right: 2px;
+    padding-left: 2px;
+    font-size: 12px;
+    color: white;
+    cursor: pointer;
+}
+
+.typenumber {
+    font-size: 9px;
+}
+
+.AddParticipant {
+    font-size: 10px;
+}
+
+.add-minus-circle {
+    color: #D84C4C;
+    font-size: 13px;
+    cursor: pointer;
+}
