@@ -63,7 +63,7 @@ $this->title = 'Financial edit';
                             </div>
                             <div class="col-12">
                                 <div class="line"></div>
-                                <div style="display:inline-block;font-size:11px;">ANNUAL SUMMARY</div>
+                                <div style="display:inline-block;font-size:10px;">ANNUAL SUMMARY</div>
                                 <div class="line"></div>
                             </div>
                             <div class="col-12  alert alert-secondary secondary-CurrentYear mt-20">
@@ -72,16 +72,17 @@ $this->title = 'Financial edit';
                                         items
                                     </div>
                                     <div class="col-2 AAR-2022">
-                                        <span class="badge bg-primary">AAR</span> <strong>2022</strong>
+                                        <div class="badge dge_AAR">AAR</div><span class="AA-2022">2022</span>
                                     </div>
                                     <div class="col-2 AAR-2022">
-                                        <span class="badge bg-primary">AAR</span> <strong>2023</strong>
+                                        <div class="badge dge_AAR_green">AAR</div> <span class="AA-2022">2023</span>
                                     </div>
                                     <div class="col-3 AAR-2022">
-                                        <span class="badge bg-warning text-dark">AT</span> <strong>2023</strong> <span class="badge bg-warning text-dark">ATR</span>
+                                        <div class="badge dge_AAR_warning">AT</div> <span class="AA-2022">2023</span>
+                                        <div class="badge dge_AAR_warning">ATR</div>
                                     </div>
                                     <div class="col-2 AAR-2022">
-                                        <span class="badge bg-primary">ATR</span> <strong>2024</strong>
+                                        <div class="badge dge_AAR">ATR</div> <span class="AA-2022">2024</span>
                                     </div>
                                 </div>
                             </div>
@@ -93,6 +94,34 @@ $this->title = 'Financial edit';
                                     <div class="col-lg-2">
                                         <div class="progress-solid">
                                             <div role="progressbar1" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" style="--value:35"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="progress-solid">
+                                            <div role="progressbar2" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="--value:75"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="progress-solid">
+                                            <span class="numberrformat"><?= number_format(24700) ?> </span>
+                                            <div role="progressbar3" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="--value:100"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="progress-solid">
+                                            <div role="progressbar1" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="--value:100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 alert alert-secondary secondary-itemss">
+                                <div class="row">
+                                    <div class="col-lg-3 p-Gross">
+                                        Variable Expense
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="progress-solid">
+                                            <div role="progressbar1" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="--value:75"></div>
                                         </div>
                                     </div>
                                     <div class="col-lg-2">
@@ -407,84 +436,84 @@ $this->title = 'Financial edit';
                         <div class="col-lg-1">
                             <div class="alert alert-secondary secondary-CurrentYear" style="border: none;margin-top:130px;padding-top:95px;">
                                 <div class="col-12 text-center pencil-edit">
-                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Edit.png" class="icons_Edits">
                                 </div>
                                 <div class="col-12 text-center pt-50">
-                                    <i class="fa fa-calendar-o font-size-11" aria-hidden="true"></i>
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                                     <div class="m-calendar"></div>
                                 </div>
                                 <div class="col-12 text-center">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/network.png">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                                 </div>
                                 <div class="col-12 text-center pt-50">
-                                    <i class="fa fa-calendar-o font-size-11" aria-hidden="true"></i>
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                                     <div class="m-calendar"></div>
                                 </div>
                                 <div class="col-12 text-center">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/network.png">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                                 </div>
                                 <div class="col-12 text-center pt-50">
-                                    <i class="fa fa-calendar-o font-size-11" aria-hidden="true"></i>
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                                     <div class="m-calendar"></div>
                                 </div>
                                 <div class="col-12 text-center">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/network.png">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                                 </div>
                                 <div class="col-12 text-center pt-50">
-                                    <i class="fa fa-calendar-o font-size-11" aria-hidden="true"></i>
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                                     <div class="m-calendar"></div>
                                 </div>
                                 <div class="col-12 text-center">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/network.png">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                                 </div>
                                 <div class="col-12 text-center pt-50">
-                                    <i class="fa fa-calendar-o font-size-11" aria-hidden="true"></i>
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                                     <div class="m-calendar"></div>
                                 </div>
                                 <div class="col-12 text-center">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/network.png">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                                 </div>
                                 <div class="col-12 text-center pt-50">
-                                    <i class="fa fa-calendar-o font-size-11" aria-hidden="true"></i>
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                                     <div class="m-calendar"></div>
                                 </div>
                                 <div class="col-12 text-center">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/network.png">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                                 </div>
                                 <div class="col-12 text-center pt-50">
-                                    <i class="fa fa-calendar-o font-size-11" aria-hidden="true"></i>
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                                     <div class="m-calendar"></div>
                                 </div>
                                 <div class="col-12 text-center">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/network.png">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                                 </div>
                                 <div class="col-12 text-center pt-25">
-                                    <i class="fa fa-calendar-o font-size-11" aria-hidden="true"></i>
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                                     <div class="m-calendar"></div>
                                 </div>
                                 <div class="col-12 text-center">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/network.png">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                                 </div>
                                 <div class="col-12 text-center pt-30">
-                                    <i class="fa fa-calendar-o font-size-11" aria-hidden="true"></i>
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                                     <div class="m-calendar"></div>
                                 </div>
                                 <div class="col-12 text-center">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/network.png">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                                 </div>
                                 <div class="col-12 text-center pt-30">
-                                    <i class="fa fa-calendar-o font-size-11" aria-hidden="true"></i>
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                                     <div class="m-calendar"></div>
                                 </div>
                                 <div class="col-12 text-center">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/network.png">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                                 </div>
                                 <div class="col-12 text-center pt-30">
-                                    <i class="fa fa-calendar-o font-size-11" aria-hidden="true"></i>
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                                     <div class="m-calendar"></div>
                                 </div>
                                 <div class="col-12 text-center">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/network.png">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                                 </div>
                             </div>
                         </div>
@@ -521,7 +550,7 @@ $this->title = 'Financial edit';
                                 <div class="line1"></div>
                             </div>
                             <div class="row mt-20">
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                     <div class="alert alert-secondary secondary-CurrentYear">
                                         <div class="col-12">
                                             <div class="row">
@@ -529,19 +558,19 @@ $this->title = 'Financial edit';
                                                     January
                                                 </div>
                                                 <div class="col-lg-6 caret-square">
-                                                    <i class="fa fa-caret-square-o-left" aria-hidden="true"></i>
+                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/CoolapseAside.png" class="images_CoolapseAside">
                                                 </div>
                                                 <div class="col-lg-3 font-size-10 mt-3">
-                                                    <span class="badge bg-primary">AC</span> 2022
+                                                    <span class="badge gbb_AC_blue">AC</span> <span class="AA-2022">2022</span>
                                                 </div>
                                                 <div class="col-lg-3 font-size-10 mt-3">
-                                                    <span class="badge bg-success">AC</span> 2023
+                                                    <span class="badge dge_AAR_green">AC</span> <span class="AA-2022">2023</span>
                                                 </div>
                                                 <div class="col-lg-3 font-size-10 mt-3">
-                                                    <span class="badge bg-warning">T</span> 2023
+                                                    <span class="badge dge_AAR_warning">T</span> <span span class="AA-2022">2023</span>
                                                 </div>
                                                 <div class="col-lg-3 font-size-10 mt-3">
-                                                    <span class="badge bg-primary">T</span> 2024
+                                                    <span class="badge gbb_AC_blue">T</span> <span span class="AA-2022">2024</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -549,34 +578,34 @@ $this->title = 'Financial edit';
                                     <div class="alert alert-secondary secondary-itemss">
                                         <div class="row">
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="" placeholder="0">
+                                                <input type="text" class="form-control edit-numbermonth" id="" placeholder="0">
                                             </div>
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="" placeholder="0">
+                                                <input type="text" class="form-control edit-numbermonth" id="" placeholder="0">
                                             </div>
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="" placeholder="0">
+                                                <input type="text" class="form-control edit-numbermonth" id="" placeholder="0">
                                             </div>
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="" placeholder="0">
+                                                <input type="text" class="form-control edit-numbermonth" id="" placeholder="0">
                                             </div>
                                             <div class="number-solidd"></div>
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="" placeholder="0">
+                                                <input type="text" class="form-control edit-numbermonth" id="" placeholder="0">
                                             </div>
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="" placeholder="0">
+                                                <input type="text" class="form-control edit-numbermonth" id="" placeholder="0">
                                             </div>
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="" placeholder="0">
+                                                <input type="text" class="form-control edit-numbermonth" id="" placeholder="0">
                                             </div>
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="" placeholder="0">
+                                                <input type="text" class="form-control edit-numbermonth" id="" placeholder="0">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                     <div class="alert alert-secondary secondary-CurrentYear">
                                         <div class="col-12">
                                             <div class="row">
@@ -584,19 +613,19 @@ $this->title = 'Financial edit';
                                                     February
                                                 </div>
                                                 <div class="col-lg-6 caret-square">
-                                                    <i class="fa fa-caret-square-o-left" aria-hidden="true"></i>
+                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/CoolapseAside.png" class="images_CoolapseAside">
                                                 </div>
                                                 <div class="col-lg-3 font-size-10 mt-3">
-                                                    <span class="badge bg-primary">AC</span> 2022
+                                                    <span class="badge gbb_AC_blue">AC</span> <span class="AA-2022">2022</span>
                                                 </div>
                                                 <div class="col-lg-3 font-size-10 mt-3">
-                                                    <span class="badge bg-success">AC</span> 2023
+                                                    <span class="badge dge_AAR_green">AC</span> <span class="AA-2022">2023</span>
                                                 </div>
                                                 <div class="col-lg-3 font-size-10 mt-3">
-                                                    <span class="badge bg-warning">T</span> 2023
+                                                    <span class="badge dge_AAR_warning">T</span> <span span class="AA-2022">2023</span>
                                                 </div>
                                                 <div class="col-lg-3 font-size-10 mt-3">
-                                                    <span class="badge bg-primary">T</span> 2024
+                                                    <span class="badge gbb_AC_blue">T</span> <span span class="AA-2022">2024</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -604,29 +633,84 @@ $this->title = 'Financial edit';
                                     <div class="alert alert-secondary secondary-itemss">
                                         <div class="row">
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
                                             </div>
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
                                             </div>
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
                                             </div>
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
                                             </div>
                                             <div class="number-solidd"></div>
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
                                             </div>
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
                                             </div>
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
                                             </div>
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="alert alert-secondary secondary-CurrentYear">
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-lg-6 BTH-Month">
+                                                    March
+                                                </div>
+                                                <div class="col-lg-6 caret-square">
+                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/CoolapseAside.png" class="images_CoolapseAside">
+                                                </div>
+                                                <div class="col-lg-3 font-size-10 mt-3">
+                                                    <span class="badge gbb_AC_blue">AC</span> <span class="AA-2022">2022</span>
+                                                </div>
+                                                <div class="col-lg-3 font-size-10 mt-3">
+                                                    <span class="badge dge_AAR_green">AC</span> <span class="AA-2022">2023</span>
+                                                </div>
+                                                <div class="col-lg-3 font-size-10 mt-3">
+                                                    <span class="badge dge_AAR_warning">T</span> <span span class="AA-2022">2023</span>
+                                                </div>
+                                                <div class="col-lg-3 font-size-10 mt-3">
+                                                    <span class="badge gbb_AC_blue">T</span> <span span class="AA-2022">2024</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="alert alert-secondary secondary-itemss">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="number-solidd"></div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
                                             </div>
                                         </div>
                                     </div>
@@ -634,64 +718,671 @@ $this->title = 'Financial edit';
                             </div>
                             <hr class="hr-top" style="margin-top:-10px;">
                             <div class="row mt-20">
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                     <div class="alert alert-secondary secondary-itemss">
                                         <div class="row">
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
                                             </div>
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
                                             </div>
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
                                             </div>
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
                                             </div>
                                             <div class="number-solidd"></div>
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
                                             </div>
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
                                             </div>
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
                                             </div>
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                     <div class="alert alert-secondary secondary-itemss">
                                         <div class="row">
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
                                             </div>
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
                                             </div>
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
                                             </div>
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
                                             </div>
                                             <div class="number-solidd"></div>
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
                                             </div>
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
                                             </div>
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
                                             </div>
                                             <div class="col-3">
-                                                <input type="number" class="form-control edit-numbermonth" id="">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="alert alert-secondary secondary-itemss">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="number-solidd"></div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="hr-top" style="margin-top:-10px;">
+                            <div class="row mt-20">
+                                <div class="col-lg-4">
+                                    <div class="alert alert-secondary secondary-itemss">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="number-solidd"></div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="alert alert-secondary secondary-itemss">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="number-solidd"></div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="alert alert-secondary secondary-itemss">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="number-solidd"></div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="hr-top" style="margin-top:-10px;">
+                            <div class="row mt-20">
+                                <div class="col-lg-4">
+                                    <div class="alert alert-secondary secondary-itemss">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="number-solidd"></div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="alert alert-secondary secondary-itemss">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="number-solidd"></div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="alert alert-secondary secondary-itemss">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="number-solidd"></div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="hr-top" style="margin-top:-10px;">
+                            <div class="row mt-20">
+                                <div class="col-lg-4">
+                                    <div class="alert alert-secondary secondary-itemss">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="number-solidd"></div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="alert alert-secondary secondary-itemss">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="number-solidd"></div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="alert alert-secondary secondary-itemss">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="number-solidd"></div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="hr-top" style="margin-top:-10px;">
+                            <div class="row mt-20">
+                                <div class="col-lg-4">
+                                    <div class="alert alert-secondary secondary-itemss">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="number-solidd"></div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="alert alert-secondary secondary-itemss">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="number-solidd"></div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="alert alert-secondary secondary-itemss">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="number-solidd"></div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="hr-top" style="margin-top:-10px;">
+                            <div class="row mt-20">
+                                <div class="col-lg-4">
+                                    <div class="alert alert-secondary secondary-itemss">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="number-solidd"></div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="alert alert-secondary secondary-itemss">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="number-solidd"></div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="alert alert-secondary secondary-itemss">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="number-solidd"></div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="hr-top" style="margin-top:-10px;">
+                            <div class="row mt-20">
+                                <div class="col-lg-4">
+                                    <div class="alert alert-secondary secondary-itemss">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="number-solidd"></div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="alert alert-secondary secondary-itemss">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="number-solidd"></div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="alert alert-secondary secondary-itemss">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="number-solidd"></div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control edit-numbermonth" id="">
                                             </div>
                                         </div>
                                     </div>

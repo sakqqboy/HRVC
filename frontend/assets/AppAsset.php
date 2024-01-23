@@ -113,7 +113,7 @@ class AppAsset extends AssetBundle
         'js/setting/doughnut.js',
         'js/setting/accordion.js',
         'js/setting/bonus.js',
-
+        'js/setting/select_menycountry.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

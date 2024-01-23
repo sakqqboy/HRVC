@@ -4,19 +4,19 @@ $this->title = 'Financial Planning';
 
 <div class="col-12 mt-90 alert background-Planning">
     <div class="col-12 planning">
-    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FinanicalPlanning.png" class="images_Dark_FinanicalPlanning"> Financial Planning
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FinanicalPlanning.png" class="images_Dark_FinanicalPlanning"> Financial Planning
     </div>
     <div class="col-12 mt-20">
         <div class="shadow p-3 mb-5 bg-body rounded alert2-secondary3">
             <ul class="nav nav-pills" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link text-dark" id="pills-Forcast-tab" data-bs-toggle="pill" data-bs-target="#pills-Forcast" type="button" role="tab" aria-controls="pills-Forcast" aria-selected="true"> <i class="fa fa-usd" aria-hidden="true"></i> PL Forcast</a>
+                    <a class="nav-link text-dark" id="pills-Forcast-tab" data-bs-toggle="pill" data-bs-target="#pills-Forcast" type="button" role="tab" aria-controls="pills-Forcast" aria-selected="true"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/PL-Forecast.png" class="images_performance_PL"> PL Forcast</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link text-dark" id="pills-Golden-tab" data-bs-toggle="pill" data-bs-target="#pills-Golden" type="button" role="tab" aria-controls="pills-Golden" aria-selected="false"> Golden Ratio</a>
+                    <a class="nav-link text-dark" id="pills-Golden-tab" data-bs-toggle="pill" data-bs-target="#pills-Golden" type="button" role="tab" aria-controls="pills-Golden" aria-selected="false"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Golden-Ratio.png" class="images_performance_PL"> Golden Ratio</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link text-dark" id="pills-Accounts-tab" data-bs-toggle="pill" data-bs-target="#pills-Accounts" type="button" role="tab" aria-controls="pills-Accounts" aria-selected="false"> <i class="fa fa-clock-o" aria-hidden="true"></i> Forecast Accounts</a>
+                    <a class="nav-link text-dark" id="pills-Accounts-tab" data-bs-toggle="pill" data-bs-target="#pills-Accounts" type="button" role="tab" aria-controls="pills-Accounts" aria-selected="false"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Designation-1.png" class="images_performance_PL"> Forecast Accounts</a>
                 </li>
             </ul>
         </div>
@@ -31,9 +31,9 @@ $this->title = 'Financial Planning';
                     <button type="button" class="btn btn-primary Register_financial"><i class="fa fa-magic" aria-hidden="true"></i>&nbsp;&nbsp; Register</button>
                 </div>
                 <div class="col-lg-4 col-12">
-                    <button type="button" class="btn btn-light Data" data-bs-toggle="modal" data-bs-target="#DataDistionary"><img src="<?= Yii::$app->homeUrl?>images/icons/Dark/48px/Wornning-blue.png" class="images_WornningData_Dictionary"> Data Dictionary</button>
-                    <button type="button" class="btn btn-light Data"> <img src="<?= Yii::$app->homeUrl?>images/icons/Dark/48px/chart-copy.png" class="images_WornningData_Dictionary"> Comparison Charts</button>
-                    <button type="button" class="btn btn-light Data"><img src="<?= Yii::$app->homeUrl?>images/icons/Dark/48px/download-copy.png" class="images_WornningData_Dictionary"> Export</button>
+                    <button type="button" class="btn btn-light Data" data-bs-toggle="modal" data-bs-target="#DataDistionary"> <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Data Dictionary</button>
+                    <button type="button" class="btn btn-light Data"> <i class="fa fa-line-chart" aria-hidden="true"></i> Comparison Charts</button>
+                    <button type="button" class="btn btn-light Data"> <i class="fa fa-arrow-circle-down" aria-hidden="true"></i> Export</button>
                 </div>
                 <div class="col-lg-2 col-12 select_buttongroup">
                     <select class="form-select example-tok" aria-label="Default select example">
@@ -43,7 +43,7 @@ $this->title = 'Financial Planning';
                     </select>
                 </div>
                 <div class="col-lg-2 col-12 text-end">
-                     <img src="<?= Yii::$app->homeUrl?>images/icons/Dark/48px/FilterPlus.png" class="picture-FilterPlus-bonus"><span class="financial_filter">Filter</span> <img src="<?= Yii::$app->homeUrl?>images/icons/Dark/48px/3Dot.png" class="bonus-point">
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterPlus.png" class="picture-FilterPlus-bonus"><span class="financial_filter" style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#Modalfitter">Filter</span> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.png" class="bonus-point">
                 </div>
             </div>
             <div class="row mt-10">
@@ -79,16 +79,17 @@ $this->title = 'Financial Planning';
                                 items
                             </div>
                             <div class="col-2 AAR-2022">
-                                <span class="badge bg-primary">AAR</span> <strong>2022</strong>
+                                <div class="badge dge_AAR">AAR</div><span class="AA-2022">2022</span>
                             </div>
                             <div class="col-2 AAR-2022">
-                                <span class="badge bg-primary">AAR</span> <strong>2023</strong>
+                                <div class="badge dge_AAR_green">AAR</div> <span class="AA-2022">2023</span>
                             </div>
                             <div class="col-3 AAR-2022">
-                                <span class="badge bg-warning text-dark">AT</span> <strong>2023</strong> <span class="badge bg-warning text-dark">ATR</span>
+                                <div class="badge dge_AAR_warning">AT</div> <span class="AA-2022">2023</span>
+                                <div class="badge dge_AAR_warning">ATR</div>
                             </div>
                             <div class="col-2 AAR-2022">
-                                <span class="badge bg-primary">ATR</span> <strong>2024</strong>
+                                <div class="badge dge_AAR">ATR</div> <span class="AA-2022">2024</span>
                             </div>
                         </div>
                     </div>
@@ -414,113 +415,99 @@ $this->title = 'Financial Planning';
                 <div class="col-lg-1">
                     <div class="alert alert-secondary secondary-CurrentYear" style="border: none;margin-top:130px;padding-top:95px;">
                         <div class="col-12 text-center">
-                            <i class="fa fa-calendar-o font-size-11" aria-hidden="true"></i>
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                             <div class="m-calendar"></div>
                         </div>
                         <div class="col-12 text-center">
-                            <img src="<?= Yii::$app->homeUrl ?>image/network.png">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                         </div>
                         <div class="col-12 text-center pt-30">
-                            <i class="fa fa-calendar-o font-size-11" aria-hidden="true"></i>
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                             <div class="m-calendar"></div>
                         </div>
                         <div class="col-12 text-center">
-                            <img src="<?= Yii::$app->homeUrl ?>image/network.png">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                         </div>
                         <div class="col-12 text-center pt-25">
-                            <i class="fa fa-calendar-o font-size-11" aria-hidden="true"></i>
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                             <div class="m-calendar"></div>
                         </div>
                         <div class="col-12 text-center">
-                            <img src="<?= Yii::$app->homeUrl ?>image/network.png">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                         </div>
                         <div class="col-12 text-center pt-30">
-                            <i class="fa fa-calendar-o font-size-11" aria-hidden="true"></i>
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                             <div class="m-calendar"></div>
                         </div>
                         <div class="col-12 text-center">
-                            <img src="<?= Yii::$app->homeUrl ?>image/network.png">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                         </div>
                         <div class="col-12 text-center pt-25">
-                            <i class="fa fa-calendar-o font-size-11" aria-hidden="true"></i>
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                             <div class="m-calendar"></div>
                         </div>
                         <div class="col-12 text-center">
-                            <img src="<?= Yii::$app->homeUrl ?>image/network.png">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                         </div>
                         <div class="col-12 text-center pt-25">
-                            <i class="fa fa-calendar-o font-size-11" aria-hidden="true"></i>
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                             <div class="m-calendar"></div>
                         </div>
                         <div class="col-12 text-center">
-                            <img src="<?= Yii::$app->homeUrl ?>image/network.png">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                         </div>
                         <div class="col-12 text-center pt-25">
-                            <i class="fa fa-calendar-o font-size-11" aria-hidden="true"></i>
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                             <div class="m-calendar"></div>
                         </div>
                         <div class="col-12 text-center">
-                            <img src="<?= Yii::$app->homeUrl ?>image/network.png">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                         </div>
                         <div class="col-12 text-center pt-25">
-                            <i class="fa fa-calendar-o font-size-11" aria-hidden="true"></i>
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                             <div class="m-calendar"></div>
                         </div>
                         <div class="col-12 text-center">
-                            <img src="<?= Yii::$app->homeUrl ?>image/network.png">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                         </div>
                         <div class="col-12 text-center pt-30">
-                            <i class="fa fa-calendar-o font-size-11" aria-hidden="true"></i>
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                             <div class="m-calendar"></div>
                         </div>
                         <div class="col-12 text-center">
-                            <img src="<?= Yii::$app->homeUrl ?>image/network.png">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                         </div>
                         <div class="col-12 text-center pt-30">
-                            <i class="fa fa-calendar-o font-size-11" aria-hidden="true"></i>
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                             <div class="m-calendar"></div>
                         </div>
                         <div class="col-12 text-center">
-                            <img src="<?= Yii::$app->homeUrl ?>image/network.png">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                         </div>
                         <div class="col-12 text-center pt-30">
-                            <i class="fa fa-calendar-o font-size-11" aria-hidden="true"></i>
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                             <div class="m-calendar"></div>
                         </div>
                         <div class="col-12 text-center">
-                            <img src="<?= Yii::$app->homeUrl ?>image/network.png">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                         </div>
                         <div class="col-12 text-center pt-20">
-                            <i class="fa fa-calendar-o font-size-11" aria-hidden="true"></i>
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                             <div class="m-calendar"></div>
                         </div>
                         <div class="col-12 text-center">
-                            <img src="<?= Yii::$app->homeUrl ?>image/network.png">
-                        </div>
-                        <div class="col-12 text-center pt-20">
-                            <i class="fa fa-calendar-o font-size-11" aria-hidden="true"></i>
-                            <div class="m-calendar"></div>
-                        </div>
-                        <div class="col-12 text-center">
-                            <img src="<?= Yii::$app->homeUrl ?>image/network.png">
-                        </div>
-                        <div class="col-12 text-center pt-20">
-                            <i class="fa fa-calendar-o font-size-11" aria-hidden="true"></i>
-                            <div class="m-calendar"></div>
-                        </div>
-                        <div class="col-12 text-center">
-                            <img src="<?= Yii::$app->homeUrl ?>image/network.png">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-7">
                     <div class="alert alert-secondary secondary-CurrentYear">
                         <div class="row">
-                            <div class="col-2 text-dark font-size-13 pt-5">
+                            <div class="col-2 BTH1">
                                 BTH (฿)
                             </div>
-                            <div class="col-2 text-secondary font-size-12 pt-5">
-                                <i class="fa fa-clock-o" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#RoundUp"></i> Round Up
+                            <div class="col-2 text-secondary financial_all_Roundup">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Round-Up.png" class="images_Round-Up" data-bs-toggle="modal" data-bs-target="#RoundUp"> <span class="text_Roundup1">Round Up</span>
                             </div>
                             <div class="col-2 font-size-12">
                                 <select class="form-select text-primary font-size-12" aria-label="Default select example">
@@ -534,7 +521,7 @@ $this->title = 'Financial Planning';
                             </div>
                             <div class="col-2 badge bg-light  pt-9" data-bs-toggle="modal" data-bs-target="#staticBackdropCurrency" style="height: 30px; cursor: pointer;">
                                 <div class="circledollar">
-                                    <i class="fa fa-usd pl-4" aria-hidden="true"></i><span class="Curr">Currency</span>
+                                    <i class="fa fa-usd pl-4 font-size-10" aria-hidden="true"></i><span class="Curr">Currency</span>
                                 </div>
                             </div>
                             <div class="col-4 font-size-12 pt-5">
@@ -569,19 +556,19 @@ $this->title = 'Financial Planning';
                                             January
                                         </div>
                                         <div class="col-lg-6 caret-square">
-                                            <i class="fa fa-caret-square-o-left" aria-hidden="true"></i>
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/CoolapseAside.png" class="images_CoolapseAside">
                                         </div>
                                         <div class="col-lg-3 font-size-10 mt-3">
-                                            <span class="badge bg-primary">AC</span> 2022
+                                            <span class="badge gbb_AC_blue">AC</span> <span class="AA-2022">2022</span>
                                         </div>
                                         <div class="col-lg-3 font-size-10 mt-3">
-                                            <span class="badge bg-success">AC</span> 2023
+                                            <span class="badge dge_AAR_green">AC</span> <span class="AA-2022">2023</span>
                                         </div>
                                         <div class="col-lg-3 font-size-10 mt-3">
-                                            <span class="badge bg-warning">T</span> 2023
+                                            <span class="badge dge_AAR_warning">T</span> <span span class="AA-2022">2023</span>
                                         </div>
                                         <div class="col-lg-3 font-size-10 mt-3">
-                                            <span class="badge bg-primary">T</span> 2024
+                                            <span class="badge gbb_AC_blue">T</span> <span span class="AA-2022">2024</span>
                                         </div>
                                     </div>
                                 </div>
@@ -624,19 +611,19 @@ $this->title = 'Financial Planning';
                                             February
                                         </div>
                                         <div class="col-lg-6 caret-square">
-                                            <i class="fa fa-caret-square-o-left" aria-hidden="true"></i>
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/CoolapseAside.png" class="images_CoolapseAside">
                                         </div>
                                         <div class="col-lg-3 font-size-10 mt-3">
-                                            <span class="badge bg-primary">AC</span> 2022
+                                            <span class="badge gbb_AC_blue">AC</span> <span class="AA-2022">2022</span>
                                         </div>
                                         <div class="col-lg-3 font-size-10 mt-3">
-                                            <span class="badge bg-success">AC</span> 2023
+                                            <span class="badge dge_AAR_green">AC</span> <span class="AA-2022">2023</span>
                                         </div>
                                         <div class="col-lg-3 font-size-10 mt-3">
-                                            <span class="badge bg-warning">T</span> 2023
+                                            <span class="badge dge_AAR_warning">T</span> <span span class="AA-2022">2023</span>
                                         </div>
                                         <div class="col-lg-3 font-size-10 mt-3">
-                                            <span class="badge bg-primary">T</span> 2024
+                                            <span class="badge gbb_AC_blue">T</span> <span span class="AA-2022">2024</span>
                                         </div>
                                     </div>
                                 </div>
@@ -679,119 +666,23 @@ $this->title = 'Financial Planning';
                                             March
                                         </div>
                                         <div class="col-lg-6 caret-square">
-                                            <i class="fa fa-caret-square-o-left" aria-hidden="true"></i>
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/CoolapseAside.png" class="images_CoolapseAside">
                                         </div>
                                         <div class="col-lg-3 font-size-10 mt-3">
-                                            <span class="badge bg-primary">AC</span> 2022
+                                            <span class="badge gbb_AC_blue">AC</span> <span class="AA-2022">2022</span>
                                         </div>
                                         <div class="col-lg-3 font-size-10 mt-3">
-                                            <span class="badge bg-success">AC</span> 2023
+                                            <span class="badge dge_AAR_green">AC</span> <span class="AA-2022">2023</span>
                                         </div>
                                         <div class="col-lg-3 font-size-10 mt-3">
-                                            <span class="badge bg-warning">T</span> 2023
+                                            <span class="badge dge_AAR_warning">T</span> <span span class="AA-2022">2023</span>
                                         </div>
                                         <div class="col-lg-3 font-size-10 mt-3">
-                                            <span class="badge bg-primary">T</span> 2024
+                                            <span class="badge gbb_AC_blue">T</span> <span span class="AA-2022">2024</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="alert alert-secondary secondary-itemss">
-                                <div class="row">
-                                    <div class="col-3 font-size-10">
-                                        <?= number_format(1000) ?>
-                                    </div>
-                                    <div class="col-3 font-size-10">
-                                        <?= number_format(2000) ?>
-                                    </div>
-                                    <div class="col-3 font-size-10">
-                                        <?= number_format(1800) ?>
-                                    </div>
-                                    <div class="col-3 font-size-10">
-                                        <?= number_format(2500) ?>
-                                    </div>
-                                    <div class="number-solidd"></div>
-                                    <div class="col-3 font-size-10">
-                                        <?= number_format(1000) ?>
-                                    </div>
-                                    <div class="col-3 font-size-10">
-                                        <?= number_format(2000) ?>
-                                    </div>
-                                    <div class="col-3 font-size-10">
-                                        <?= number_format(1800) ?>
-                                    </div>
-                                    <div class="col-3 font-size-10">
-                                        <?= number_format(2500) ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr style="margin-top: -10px;">
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="alert alert-secondary secondary-itemss">
-                                <div class="row">
-                                    <div class="col-3 font-size-10">
-                                        <?= number_format(1000) ?>
-                                    </div>
-                                    <div class="col-3 font-size-10">
-                                        <?= number_format(2000) ?>
-                                    </div>
-                                    <div class="col-3 font-size-10">
-                                        <?= number_format(1800) ?>
-                                    </div>
-                                    <div class="col-3 font-size-10">
-                                        <?= number_format(2500) ?>
-                                    </div>
-                                    <div class="number-solidd"></div>
-                                    <div class="col-3 font-size-10">
-                                        <?= number_format(1000) ?>
-                                    </div>
-                                    <div class="col-3 font-size-10">
-                                        <?= number_format(2000) ?>
-                                    </div>
-                                    <div class="col-3 font-size-10">
-                                        <?= number_format(1800) ?>
-                                    </div>
-                                    <div class="col-3 font-size-10">
-                                        <?= number_format(2500) ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="alert alert-secondary secondary-itemss">
-                                <div class="row">
-                                    <div class="col-3 font-size-10">
-                                        <?= number_format(1000) ?>
-                                    </div>
-                                    <div class="col-3 font-size-10">
-                                        <?= number_format(2000) ?>
-                                    </div>
-                                    <div class="col-3 font-size-10">
-                                        <?= number_format(1800) ?>
-                                    </div>
-                                    <div class="col-3 font-size-10">
-                                        <?= number_format(2500) ?>
-                                    </div>
-                                    <div class="number-solidd"></div>
-                                    <div class="col-3 font-size-10">
-                                        <?= number_format(1000) ?>
-                                    </div>
-                                    <div class="col-3 font-size-10">
-                                        <?= number_format(2000) ?>
-                                    </div>
-                                    <div class="col-3 font-size-10">
-                                        <?= number_format(1800) ?>
-                                    </div>
-                                    <div class="col-3 font-size-10">
-                                        <?= number_format(2500) ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
                             <div class="alert alert-secondary secondary-itemss">
                                 <div class="row">
                                     <div class="col-3 font-size-10">
@@ -1887,24 +1778,12 @@ $this->title = 'Financial Planning';
 </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 <div class="modal fade" id="Modalfitter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content modal-fitter">
             <div class="modal-header" style="border: none;">
                 <div id="ModalfitterLabel">
-                    <i class="fa fa-filter" aria-hidden="true"></i> <i class="fa fa-plus content-Fitter1" aria-hidden="true"></i> &nbsp;&nbsp; Data Filter
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterPlus.png" class="picture-FilterPlus-bonus border-change"> <span class="Data_Filterfinancial1"> Data Filter</span>
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -1938,7 +1817,7 @@ $this->title = 'Financial Planning';
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="Previous">
                             <label class="form-check-label" for="flexCheckDefault">
-                                <span class="T-bule"> T </span> &nbsp;&nbsp; Current Year Target
+                                <span class="T-bule"> T </span> &nbsp;&nbsp; Next year Target
                             </label>
                         </div>
                     </div>
@@ -1963,29 +1842,60 @@ $this->title = 'Financial Planning';
             <div class="modal-body">
                 <div class="row">
                     <div class="col-6 Accumulate_text">
-                     <img src="<?= Yii::$app->homeUrl?>images/icons/Dark/48px/Accumulated.png" class="Dark_Monthly"> Accumulate
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="Dark_Monthly"> Accumulate
                     </div>
                     <div class="col-6 Accumulate_text">
-                     <img src="<?= Yii::$app->homeUrl?>images/icons/Dark/48px/Monthly.png" class="Dark_Monthly"> Monthly
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="Dark_Monthly"> Monthly
                     </div>
                     <hr class="mt-5">
                 </div>
                 <div class="row">
-                      <div class="col-4 text-end">
-                           <span class="AC-Primary"> AAR </span>
-                      </div>
-                      <div class="col-8 AC-Accumulate">
-                           Accumulate Actual Ratio
-                      </div>
-                      <div class="col-4 text-end">
-                        <span class="AC-Success"> AAR </span> 
-                      </div>
-                      <div class="col-8 ">
-                         Accumulate Actual Ratio
-                      </div>
+                    <div class="col-4 text-end">
+                        <span class="AC-Primary"> AAR </span>
+                    </div>
+                    <div class="col-8 AC-Accumulate">
+                        Accumulate Actual Ratio
+                    </div>
+                    <div class="col-4 text-end">
+                        <span class="AC-Success"> AAR </span>
+                    </div>
+                    <div class="col-8 AC-Accumulate">
+                        Accumulate Actual Ratio
+                    </div>
+                    <div class="col-4 text-end">
+                        <span class="T-Warning"> AT </span>
+                    </div>
+                    <div class="col-8 AC-Accumulate">
+                        Accumulate Target
+                    </div>
+                    <div class="col-4 text-end">
+                        <span class="T-Warning"> ATR </span>
+                    </div>
+                    <div class="col-8 AC-Accumulate">
+                        Accumulate Target ratio
+                    </div>
+                    <div class="col-4 text-end">
+                        <span class="T-bule"> ATR </span>
+                    </div>
+                    <div class="col-8 AC-Accumulate">
+                        Accumulate Target ratio
+                    </div>
+                    <hr>
+
+                    <div class="col-4 text-end">
+                        <span class="AC-Success"> AC </span>
+                    </div>
+                    <div class="col-8 AC-Accumulate">
+                        Actual
+                    </div>
+                    <div class="col-4 text-end">
+                        <span class="T-Warning"> T </span>
+                    </div>
+                    <div class="col-8 AC-Accumulate">
+                        Actual
+                    </div>
+                    <hr>
                 </div>
-               
-                <hr>
             </div>
         </div>
     </div>
@@ -2004,11 +1914,15 @@ $this->title = 'Financial Planning';
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-6 pl-20">
-                        <div class="col-12">
-                            from
-                        </div>
-                        <div class="col-12">
-                            151114
+                        <label for="Inputformselectmenu" class="form-label">Form</label>
+                        <div class="input-group mb-3">
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected value=""></option>
+                                <option value="US" data-content="">One</option>
+                                <option value="CA">Two</option>
+                                <option value="TH">Three</option>
+                            </select>
+                            <input type="text" class="form-control" aria-label="" aria-describedby="menucountry">
                         </div>
                     </div>
                 </div>
@@ -2024,17 +1938,12 @@ $this->title = 'Financial Planning';
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="col-12 pt-20">
-                            <i class="fa fa-clock-o" aria-hidden="true"></i> Round Up
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Round-Up.png" class="images_Round-Up"> <span class="text_Roundup">Round Up</span>
                         </div>
                     </div>
                     <div class="col-lg-6 pt-10">
                         <form>
-                            <input class="chosen-value" type="text" value="" placeholder="Search">
-                            <ul class="valua-list">
-                                <li>K</li>
-                                <li>M</li>
-                                <li>B</li>
-                            </ul>
+                            <input class="chosen-value" type="text" value="" id="">
                         </form>
                     </div>
                 </div>
@@ -2042,26 +1951,3 @@ $this->title = 'Financial Planning';
         </div>
     </div>
 </div>
-
-<div class="col-12 mt-20">
-                     <span class="AC-Primary font-size-11"> AAR </span> &nbsp;&nbsp; 
-                   </div>
-                <div class="col-12 mt-20">
-                    <span class="AC-Success font-size-11"> AAR </span> &nbsp;&nbsp; 
-                </div>
-                <div class="col-12 mt-20">
-                    <span class="T-Warning text-dark font-size-11"> AT </span> &nbsp;&nbsp;&nbsp; Accumulate Target
-                </div>
-                <div class="col-12 mt-20">
-                    <span class="T-Warning text-dark font-size-11"> ATR </span> &nbsp;&nbsp; Accumulate Target ratio
-                </div>
-                <div class="col-12 mt-20">
-                    <span class="T-bule font-size-11"> ATR </span> &nbsp;&nbsp; Accumulate Target ratio
-                </div>
-                <hr>
-                <div class="col-12 mt-20">
-                    <span class="AC-Success font-size-11"> AC </span> &nbsp;&nbsp; Actual
-                </div>
-                <div class="col-12 mt-20">
-                    <span class="T-Warning font-size-11"> T </span> &nbsp;&nbsp; Target
-                </div>

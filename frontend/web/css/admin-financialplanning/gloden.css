@@ -38,7 +38,8 @@
     background-color: rgb(232, 232, 232);
     font-size: 12px;
 }
-.select_buttongroup{
+
+.select_buttongroup {
     border-left: 1px lightgray solid;
 }
 
@@ -48,14 +49,17 @@
     font-size: 15px;
     font-weight: 500;
 }
-.Dark_Monthly{
+
+.Dark_Monthly {
     width: 15px;
 }
-.Accumulate_text{
+
+.Accumulate_text {
     font-size: 11px;
     text-transform: uppercase;
     font-weight: 500;
 }
+
 .content-Fitter {
     font-size: 9px;
     margin-left: -9px;
@@ -63,10 +67,10 @@
     cursor: pointer;
 }
 
-.content-Fitter1 {
-    font-size: 10px;
-    margin-left: -10px;
-    position: inherit;
+.Data_Filterfinancial1 {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.8px;
 }
 
 #ModalfitterLabel {
@@ -82,38 +86,46 @@
 .AC-Primary {
     background-color: #2f8fe8;
     color: white;
-    border-radius: 3px;
-    padding-left: 2px;
+    border-radius: 2px;
+    padding-left: 6px;
+    padding-right: 6px;
     font-size: 11px;
 }
 
 .AC-Success {
     background-color: #0eaa0e;
     color: white;
-    border-radius: 3px;
+    border-radius: 2px;
     font-size: 11px;
-    padding-left: 2px;
+    padding-left: 6px;
+    padding-right: 6px;
 }
 
 .T-Warning {
+    padding-left: 8px;
+    padding-right: 8px;
     background-color: #ffd628;
-    color: white;
-    border-radius: 3px;
-    padding-left: 5px;
+    color: black;
+    border-radius: 2px;
+    font-size: 11px;
 }
 
 .T-bule {
     background-color: #76a8e5;
     color: white;
-    border-radius: 3px;
-    padding-left: 5px;
+    border-radius: 2px;
+    padding-left: 6px;
+    padding-right: 6px;
+    font-size: 11px;
 }
-.AC-Accumulate{
+
+.AC-Accumulate {
     text-transform: uppercase;
     font-size: 11px;
     padding-top: 5px;
     letter-spacing: -0.8px;
 }
+
 .text-Done {
     color: #3ab8e6;
     font-weight: 500;
@@ -182,12 +194,17 @@
 }
 
 .p-Gross {
-    font-weight: 600;
-    font-size: 12px;
+    font-weight: 500;
+    font-size: 9px;
+    letter-spacing: -0.9px;
 }
 
 .pt-table {
     margin-top: -5px;
+}
+
+.icons_Monthly {
+    width: 13px;
 }
 
 .hr-top {
@@ -203,6 +220,45 @@
 .BTH-Month {
     font-size: 10px;
     font-weight: 700;
+}
+
+.dge_AAR {
+    border-radius: 2px;
+    background-color: #2580D3;
+    letter-spacing: -0.9px;
+}
+
+.dge_AAR_green {
+    border-radius: 2px;
+    background-color: #00AD1C;
+    letter-spacing: -0.9px;
+}
+
+.dge_AAR_warning {
+    border-radius: 2px;
+    background-color: #F2C80F;
+    color: black;
+    letter-spacing: -0.9px;
+}
+
+.AA-2022 {
+    font-size: 8px;
+    letter-spacing: -0.9px;
+}
+
+.gbb_AC_blue {
+    border-radius: 2px;
+    background-color: #2580D3;
+    letter-spacing: -0.9px;
+    font-size: 7px;
+}
+
+.images_CoolapseAside {
+    width: 12px;
+}
+
+.icons_Edits {
+    width: 15px;
 }
 
 .m-calendar {
@@ -338,7 +394,7 @@ div[role="progressbar4"]::before {
 }
 
 .numberrformat {
-    font-size: 11px;
+    font-size: 9px;
     font-weight: 400;
     padding-left: 5px;
 }
@@ -492,17 +548,27 @@ input[type="checkbox"]:checked+label {
 }
 
 .circledollar {
-    border: 2px solid;
+    border: 1.9px solid;
     border-radius: 50%;
-    width: 18px;
-    height: 18px;
+    width: 17px;
+    height: 17px;
     color: #2377C6;
     margin-top: -3px;
 
 }
 
 .Curr {
-    padding-left: 15px;
+    padding-left: 10px;
+    letter-spacing: -0.7px;
+}
+
+.BTH1 {
+    font-size: 14px;
+    font-weight: 800;
+    color: #6D6E70;
+    font-family: 'sf pro display';
+    letter-spacing: -0.9px;
+    padding-top: 5px;
 }
 
 form {
@@ -525,10 +591,10 @@ form {
     /* letter-spacing: 4px; */
     height: 2rem;
     font-size: 12px;
-    border-radius: 10px;
+    border-radius: 7px;
     padding: 1rem;
     background-color: #f3f3f3;
-    border: 3px solid transparent;
+    border: 1px solid #2f8fe8;
     transition: .3s ease-in-out;
 
     &::-webkit-input-placeholder {
@@ -594,15 +660,33 @@ form {
         }
     }
 }
-.financial_filter{
+
+.financial_filter {
     font-weight: 600;
     font-size: 12px;
 }
-.Register_financial{
+
+.Register_financial {
     background-color: #2580D3;
     font-size: 12px;
 }
-.images_WornningData_Dictionary{
-    width: 13px;
-    margin-top: -3px;
+
+.images_Round-Up {
+    width: 18px;
+}
+
+.financial_all_Roundup {
+    cursor: pointer;
+}
+
+.text_Roundup1 {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: -0.8px;
+}
+
+.text_Roundup {
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: -0.8px;
 }
