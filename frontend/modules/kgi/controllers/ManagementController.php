@@ -1761,6 +1761,44 @@ class ManagementController extends Controller
 		$res["status"] = true;
 		return json_encode($res);
 	}
+	public function actionRelatedKfi()
+	{
+		$kgiId = $_POST["kgiId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kfi-kgi?kgiId=' . $kgiId);
+		$kgiHasKfi = curl_exec($api);
+		$kgiHasKfi = json_decode($kgiHasKfi, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
+		$kgiDetail = curl_exec($api);
+		$kgiDetail = json_decode($kgiDetail, true);
+		curl_close($api);
+		$text = $this->renderAjax('kfi_has_kgi', ["kgiHasKfi" => $kgiHasKfi]);
+		$res["kfiText"] = $text;
+		$res["kgiName"] = $kgiDetail["kgiName"];
+		return json_encode($res);
+	}
+	public function actionRelatedKpi()
+	{
+		$kgiId = $_POST["kgiId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-has-kpi?kgiId=' . $kgiId);
+		$kgiHasKpi = curl_exec($api);
+		$kgiHasKpi = json_decode($kgiHasKpi, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
+		$kgiDetail = curl_exec($api);
+		$kgiDetail = json_decode($kgiDetail, true);
+		curl_close($api);
+		$text = $this->renderAjax('kgi_has_kpi', ["kgiHasKpi" => $kgiHasKpi]);
+		$res["kpiText"] = $text;
+		$res["kgiName"] = $kgiDetail["kgiName"];
+		return json_encode($res);
+	}
 	public function setDefault()
 	{
 		$deletedCompany = Company::find()->where(["status" => 99])->asArray()->all();

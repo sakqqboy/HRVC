@@ -283,6 +283,7 @@ function allTeam(departmentId) {
 }
 function kgiHistory(kgiId) { 
 	var url = $url + 'kgi/management/history';
+	$("#v-kgiId").val(kgiId);
 	$.ajax({
 		type: "POST",
 		dataType: 'json',
@@ -350,6 +351,38 @@ function openEmployeeView(employeeId,kgiId) {
 			$("#employee-name").html(data.employeeName);
 			$("#kgi-employee-progress").html(data.history);
 			
+		}
+	});
+}
+function relatedKfiForKgi() { 
+	var kgiId = $("#v-kgiId").val();
+	$("#modal-kfi").modal('show');
+	var url = $url + 'kgi/management/related-kfi';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { kgiId: kgiId},
+		success: function (data) {
+			$("#related-kfi").html(data.kfiText);
+            $("#kgi-name-v").html(data.kgiName);
+			
+		}
+	});
+	
+}
+function relatedKpiForKgi() { 
+	var kgiId = $("#v-kgiId").val();
+	$("#modal-kpi").modal('show');
+	var url = $url + 'kgi/management/related-kpi';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { kgiId: kgiId},
+		success: function (data) {
+			$("#related-kpi").html(data.kpiText);
+			$("#kgi-name-p").html(data.kgiName);
 		}
 	});
 }

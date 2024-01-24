@@ -355,4 +355,7 @@ $form = ActiveForm::begin([
 <?= $this->render('modal_issue') ?>
 <?= $this->render('modal_team_history') ?>
 <?= $this->render('modal_employee_history') ?>
+<?= $this->render('modal_kfi') ?>
+<?= $this->render('modal_kpi') ?>
+
 <!-- end -->

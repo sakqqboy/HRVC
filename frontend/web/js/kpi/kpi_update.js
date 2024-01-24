@@ -118,6 +118,7 @@ function checkRequiredUpdateKpi() {
 }
 function kpiHistory(kpiId) { 
 	var url = $url + 'kpi/management/history';
+	$("#v-kpiId").val(kpiId);
 	$.ajax({
 		type: "POST",
 		dataType: 'json',
@@ -596,3 +597,18 @@ function approveTargetKpiEmployee(kpiEmployeeId, approve) {
 		});
 	}
 }
+function relatedKgiForKpi() { 
+	var kpiId = $("#v-kpiId").val();
+	$("#modal-kgi").modal('show');
+	var url = $url + 'kpi/management/related-kgi';
+	$.ajax({
+	    type: "POST",
+	    dataType: 'json',
+	    url: url,
+	    data: { kpiId: kpiId },
+	    success: function (data) {
+		 $("#related-kgi").html(data.kgiText);
+		 $("#kpi-name-v").html(data.kpiName);
+	    }
+	});
+   }

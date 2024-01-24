@@ -1,4 +1,4 @@
-<div class="modal fade" id="staticBackdrop3" tabindex="-1" aria-labelledby="staticBackdrop3" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop3" tabindex="-1" aria-labelledby="staticBackdrop3" aria-hidden="true" role="dialog">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header" style="border-bottom:none;">
@@ -25,10 +25,10 @@
 					<div class="col-6 text-start country-show-name">
 						<img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="is-bangladresh2"> <span id="branchHistory"></span>, <span id="countryHistory"></span>
 					</div>
-					<div class="col-6 text-end font-size-12 pr-30">
-						<span class="" style="cursor: pointer;">
-							<i class="fa fa-refresh mr-5" aria-hidden="true"></i>KGI
-						</span>
+					<div class="col-6 text-end font-size-13 pr-30">
+						<a class="no-underline-black " href="javascript:relatedKgiForKfi()" style="cursor: pointer;">
+							<i class="fa fa-refresh mr-5" aria-hidden="true"></i>Related KGI
+						</a>
 					</div>
 				</div>
 			</div>

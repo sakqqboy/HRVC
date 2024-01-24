@@ -1605,6 +1605,26 @@ class ManagementController extends Controller
         $res["status"] = true;
         return json_encode($res);
     }
+    public function actionRelatedKgi()
+    {
+        $kpiId = $_POST["kpiId"];
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kgi-kpi?kpiId=' . $kpiId);
+        $kpiHasKgi = curl_exec($api);
+        $kpiHasKgi = json_decode($kpiHasKgi, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId);
+        $kpiDetail = curl_exec($api);
+        $kpiDetail = json_decode($kpiDetail, true);
+        curl_close($api);
+
+        $text = $this->renderAjax('kpi_has_kgi', ["kpiHasKgi" => $kpiHasKgi]);
+        $res["kgiText"] = $text;
+        $res["kpiName"] = $kpiDetail["kpiName"];
+        return json_encode($res);
+    }
     public function setDefault()
     {
         $deletedCompany = Company::find()->where(["status" => 99])->asArray()->all();

@@ -1228,6 +1228,27 @@ class ManagementController extends Controller
 		$res["status"] = true;
 		return json_encode($res);
 	}
+	public function actionRelatedKgi()
+	{
+		$kfiId = $_POST["kfiId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-has-kgi?kfiId=' . $kfiId);
+		$kfiHasKgi = curl_exec($api);
+		$kfiHasKgi = json_decode($kfiHasKgi, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId);
+		$kfiDetail = curl_exec($api);
+		$kfiDetail = json_decode($kfiDetail, true);
+		curl_close($api);
+		$text = $this->renderAjax('kfi_has_kgi', [
+			"kfiHasKgi" => $kfiHasKgi
+		]);
+		$res["kgiText"] = $text;
+		$res["kfiName"] = $kfiDetail["kfiName"];
+		return json_encode($res);
+	}
 	public function setDefault()
 	{
 		$deletedCompany = Company::find()->where(["status" => 99])->asArray()->all();

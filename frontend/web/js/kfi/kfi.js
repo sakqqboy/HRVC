@@ -227,8 +227,8 @@ function resetUnit() {
 }
 
 function kfiHistory(kfiId) {
-
     var url = $url + 'kfi/management/history';
+    $("#v-kfiId").val(kfiId);
     $.ajax({
         type: "POST",
         dataType: 'json',
@@ -642,4 +642,19 @@ function checkAllkfiEmployee(kfiId) {
             }
         }
     });
- }
+}
+function relatedKgiForKfi() { 
+    var kfiId = $("#v-kfiId").val();
+    $("#modal-kgi").modal('show');
+    var url = $url + 'kfi/management/related-kgi';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { kfiId: kfiId },
+        success: function (data) {
+            $("#related-kgi").html(data.kgiText);
+            $("#kfi-name").html(data.kfiName);
+        }
+    });
+}
