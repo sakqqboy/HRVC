@@ -2,8 +2,12 @@
     background-color: #F0F2F4;
     border-radius: 5px;
     color: black;
+    font-size: 15px;
+    font-family: 'sf pro display';
     padding-top: 20px;
     padding-bottom: 20px;
+    margin-top: 30px;
+    text-align: start;
 }
 
 .bg-primary-sec1 {
@@ -47,12 +51,23 @@
     padding-top: 10px;
 }
 
+.form-check-input[id=checkboxPLradio] {
+    border-radius: 5em;
+    padding-top: 10px;
+    margin-left: -5px;
+}
+
+#shadowPLinput {
+    border: none;
+}
+
 #shadowPL {
     border: none;
 }
 
 .bg-sky {
     background-color: #aeccf9;
+    padding-left: 10px;
 }
 
 .example-iplAnalysis1 {
@@ -74,4 +89,8 @@
 .graph-linechart {
     width: 30px;
     cursor: pointer;
+}
+
+.images_PLForecast {
+    width: 20px;
 }

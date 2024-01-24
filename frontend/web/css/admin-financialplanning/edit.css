@@ -4,7 +4,8 @@
 
 .edit-numbermonth {
     font-size: 9px;
-    width: 3.8rem;
+    width: 2.7rem;
+    margin-left: -10px;
 }
 
 .imagedollar {
@@ -28,11 +29,12 @@
 }
 
 .light-shadow-2 {
-    background-color: rgb(246 245 245);
+    background-color: #F4F6F9;
+    margin-top: 50px;
 }
 
 .light-shadow-3 {
-    background-color: rgb(236 236 236);
+    background-color: #E3EBEF;
 }
 
 .bg-bar-background-1 {
