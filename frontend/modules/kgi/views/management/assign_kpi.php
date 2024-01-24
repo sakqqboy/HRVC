@@ -17,6 +17,9 @@ $this->title = 'Assign KPI';
 			</a>
 		</div>
 	</div>
+	<div class="alert-box text-center">
+		S A V E D ! ! !
+	</div>
 
 	<div class="row mt-40 pr-10">
 		<div class="col-lg-6 col-12">

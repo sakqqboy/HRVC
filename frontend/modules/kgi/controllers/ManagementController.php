@@ -1730,25 +1730,36 @@ class ManagementController extends Controller
 	public function actionAssignKpiToKgi()
 	{
 		$kgiId = $_POST["kgiId"];
-		$kpiId = $_POST["kpiId"];
-		$type = $_POST["type"];
-		$kgiKpi = KgiHasKpi::find()->where(["kgiId" => $kgiId, "kpiId" => $kpiId])->one();
-		if (isset($kgiKpi) && !empty($kgiKpi)) {
-			if ($type == 1) {
-				$kgiKpi->status = 1;
-			} else {
-				$kgiKpi->status = 99;
+		$kpiIds = $_POST["selectedKpi"];
+		$unCheck = $_POST["unCheck"];
+		if ($kpiIds != '') {
+			if (isset($kpiIds) && count($kpiIds) > 0) {
+				foreach ($kpiIds as $kpiId) :
+					$kgiKpi = KgiHasKpi::find()->where(["kpiId" => $kpiId, "kgiId" => $kgiId, "status" => 1])->one();
+					if (!isset($kgiKpi) || empty($kgiKpi)) {
+						$kgiKpi = new KgiHasKpi();
+						$kgiKpi->kgiId = $kgiId;
+						$kgiKpi->kpiId = $kpiId;
+						$kgiKpi->status = 1;
+						$kgiKpi->createDateTime = new Expression('NOW()');
+						$kgiKpi->updateDateTime = new Expression('NOW()');
+						$kgiKpi->save(false);
+					}
+				endforeach;
 			}
-			$kgiKpi->save(false);
-		} else {
-			$kgiKpi = new KgiHasKpi();
-			$kgiKpi->kgiId = $kgiId;
-			$kgiKpi->kpiId = $kpiId;
-			$kgiKpi->status = 1;
-			$kgiKpi->createDateTime = new Expression('NOW()');
-			$kgiKpi->updateDateTime = new Expression('NOW()');
-			$kgiKpi->save(false);
 		}
+		if ($unCheck != "") {
+			$kgiKpi = KgiHasKpi::find()
+				->where(["kgiId" => $kgiId, "status" => 1, "kpiId" => $unCheck])
+				->all();
+			if (isset($kgiKpi) && count($kgiKpi) > 0) {
+				foreach ($kgiKpi as $fg) :
+					$fg->delete();
+				endforeach;
+			}
+		}
+		$res["status"] = true;
+		return json_encode($res);
 	}
 	public function setDefault()
 	{

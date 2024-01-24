@@ -622,6 +622,40 @@ function kpiInBranchForKpi(kgiId,branchId) {
 	    }
 	});
 }
+function saveSelectedKpi(kgiId) { 
+	var selectedKpi = [];
+	$("input[name='kpi']:checked").each(function() {
+		selectedKpi.push($(this).val());
+	});
+	if (selectedKpi.length == 0) {
+	    var selectedKpi = '';
+	}
+	var unCheck = [];
+	$("input[name='kpi']").each(function() {
+	    if (!$(this).prop("checked")) {
+		 unCheck.push($(this).val());
+	    }
+	});
+	if (unCheck.length == 0) {
+	    var unCheck = '';
+	}
+	var url = $url + 'kgi/management/assign-kpi-to-kgi';
+	$.ajax({
+	    type: "POST",
+	    dataType: 'json',
+	    url: url,
+	    data: { kgiId: kgiId, selectedKpi: selectedKpi,unCheck:unCheck },
+	    success: function (data) {
+		 if (data.status) {
+		     $('.alert-box').slideDown(500);
+		     setTimeout(function(){
+			  // Code to be executed after a delay
+			  $('.alert-box').fadeOut(300);
+			}, 3000); 
+		 }
+	    }
+	});
+   }
 function assignKpiTokgi(kpiId, kgiId) { 
 	var url = $url + 'kgi/management/assign-kpi-to-kgi';
 	if ($("#kpi-branch-" + kpiId).prop("checked") == true) {

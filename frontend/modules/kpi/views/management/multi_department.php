@@ -1,6 +1,7 @@
 <?php
 
 use frontend\models\hrvc\Branch;
+use frontend\models\hrvc\Department;
 
 if (isset($d) && count($d) > 0) {
 	foreach ($d as $branchId => $department) : ?>
@@ -15,14 +16,18 @@ if (isset($d) && count($d) > 0) {
 				<input type="checkbox" id='multi-check-all-<?= $branchId ?>' name="allDepartment[]" class="checkbox-md mr-5 " value="all" onchange="javascript:allDepartment(<?= $branchId ?>)">
 				All
 			</div>
-		<?php
+			<?php
 		}
-		foreach ($department as $departmentId => $departmentName) : ?>
-			<div class="col-12 multi-select pl-30 pt-5 pb-5">
-				<input type="checkbox" id='multi-check-<?= $branchId ?>' name="department[]" class="checkbox-md mr-5 multi-check-department" value="<?= $departmentId ?>" onchange="javascript:departmentMultiTeam(<?= $branchId ?>)">
-				<?= $departmentName ?>
-			</div>
+		foreach ($department as $departmentId => $departmentName) :
+			$haveTeam = Department::haveTeam($departmentId);
+			if ($haveTeam == 1) {
+			?>
+				<div class="col-12 multi-select pl-30 pt-5 pb-5">
+					<input type="checkbox" id='multi-check-<?= $branchId ?>' name="department[]" class="checkbox-md mr-5 multi-check-department" value="<?= $departmentId ?>" onchange="javascript:departmentMultiTeam(<?= $branchId ?>)">
+					<?= $departmentName ?>
+				</div>
 <?php
+			}
 		endforeach;
 	endforeach;
 }

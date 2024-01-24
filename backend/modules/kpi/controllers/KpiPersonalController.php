@@ -39,7 +39,7 @@ class KpiPersonalController extends Controller
 					->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
 					->JOIN("LEFT JOIN", "user u", "u.employeeId=e.employeeId")
 					->JOIN("LEFT JOIN", "user_role ur", "ur.userId=u.userId")
-					->where(['e.teamId' => $team["teamId"]])
+					->where(['e.teamId' => $team["teamId"], "kpi_employee.kpiId" => $kpiId])
 					->asArray()
 					->orderBy('ur.roleId,e.employeeFirstname')
 					->all();

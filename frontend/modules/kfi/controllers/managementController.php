@@ -820,26 +820,35 @@ class ManagementController extends Controller
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
-		$role = UserRole::userRight();
 		$adminId = '';
 		$managerId = '';
 		$supervisorId = '';
 		$staffId = '';
-		if ($role == 5) {
+		$gmId = '';
+		$teamLeaderId = '';
+		if ($role == 7) {
 			$adminId = Yii::$app->user->id;
 		}
-		if ($role == 4) {
+		if ($role == 6) {
+			$gmId = Yii::$app->user->id;
+		}
+		if ($role == 5) {
 			$managerId = Yii::$app->user->id;
 		}
-		if ($role == 3) {
+		if ($role == 4) {
 			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$teamLeaderId = Yii::$app->user->id;
 		}
 		if ($role == 1 || $role == 2) {
 			$staffId = Yii::$app->user->id;
+			return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi');
 		}
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId);
+		//curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
 		$kfis = curl_exec($api);
 		$kfis = json_decode($kfis, true);
 
@@ -1188,25 +1197,36 @@ class ManagementController extends Controller
 	public function actionAssignKgiToKfi()
 	{
 		$kfiId = $_POST["kfiId"];
-		$kgiId = $_POST["kgiId"];
-		$type = $_POST["type"];
-		$kfiKgi = KfiHasKgi::find()->where(["kfiId" => $kfiId, "kgiId" => $kgiId])->one();
-		if (isset($kfiKgi) && !empty($kfiKgi)) {
-			if ($type == 1) {
-				$kfiKgi->status = 1;
-			} else {
-				$kfiKgi->status = 99;
+		$kgiIds = $_POST["selectedKgi"];
+		$unCheck = $_POST["unCheck"];
+		if ($kgiIds != '') {
+			if (isset($kgiIds) && count($kgiIds) > 0) {
+				foreach ($kgiIds as $kgiId) :
+					$kfiKgi = KfiHasKgi::find()->where(["kfiId" => $kfiId, "kgiId" => $kgiId, "status" => 1])->one();
+					if (!isset($kfiKgi) || empty($kfiKgi)) {
+						$kfiKgi = new KfiHasKgi();
+						$kfiKgi->kfiId = $kfiId;
+						$kfiKgi->kgiId = $kgiId;
+						$kfiKgi->status = 1;
+						$kfiKgi->createDateTime = new Expression('NOW()');
+						$kfiKgi->updateDateTime = new Expression('NOW()');
+						$kfiKgi->save(false);
+					}
+				endforeach;
 			}
-			$kfiKgi->save(false);
-		} else {
-			$kfiKgi = new KfiHasKgi();
-			$kfiKgi->kfiId = $kfiId;
-			$kfiKgi->kgiId = $kgiId;
-			$kfiKgi->status = 1;
-			$kfiKgi->createDateTime = new Expression('NOW()');
-			$kfiKgi->updateDateTime = new Expression('NOW()');
-			$kfiKgi->save(false);
 		}
+		if ($unCheck != "") {
+			$kfiKgi = KfiHasKgi::find()
+				->where(["kfiId" => $kfiId, "status" => 1, "kgiId" => $unCheck])
+				->all();
+			if (isset($kfiKgi) && count($kfiKgi) > 0) {
+				foreach ($kfiKgi as $fg) :
+					$fg->delete();
+				endforeach;
+			}
+		}
+		$res["status"] = true;
+		return json_encode($res);
 	}
 	public function setDefault()
 	{

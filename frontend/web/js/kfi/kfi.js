@@ -562,6 +562,40 @@ function kgiInBranchForKfi(kfiId, branchId) {
         }
     });
 }
+function saveSelectedKgi(kfiId) { 
+    var selectedKgi = [];
+    $("input[name='kgi']:checked").each(function() {
+        selectedKgi.push($(this).val());
+    });
+    if (selectedKgi.length == 0) {
+        var selectedKgi = '';
+    }
+    var unCheck = [];
+    $("input[name='kgi']").each(function() {
+        if (!$(this).prop("checked")) {
+            unCheck.push($(this).val());
+        }
+    });
+    if (unCheck.length == 0) {
+        var unCheck = '';
+    }
+    var url = $url + 'kfi/management/assign-kgi-to-kfi';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { kfiId: kfiId, selectedKgi: selectedKgi,unCheck:unCheck },
+        success: function (data) {
+            if (data.status) {
+                $('.alert-box').slideDown(500);
+                setTimeout(function(){
+                    // Code to be executed after a delay
+                    $('.alert-box').fadeOut(300);
+                  }, 3000); 
+            }
+        }
+    });
+}
 function assignKgiTokfi(kgiId, kfiId) { 
     var url = $url + 'kfi/management/assign-kgi-to-kfi';
     if ($("#kgi-branch-" + kgiId).prop("checked") == true) {
@@ -576,6 +610,7 @@ function assignKgiTokfi(kgiId, kfiId) {
         data: { kgiId: kgiId, kfiId: kfiId, type: type },
         success: function (data) {
             if (data.status) {
+
             }
         }
     });

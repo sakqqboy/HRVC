@@ -95,6 +95,7 @@ $form = ActiveForm::begin([
 										<td><?= $correct["title"] ?></td>
 									</tr>
 								<?php
+									$i++;
 								endforeach;
 								?>
 							</tbody>
@@ -135,6 +136,7 @@ $form = ActiveForm::begin([
 										<td><?= $up["title"] ?></td>
 									</tr>
 								<?php
+									$i++;
 								endforeach;
 								?>
 							</tbody>

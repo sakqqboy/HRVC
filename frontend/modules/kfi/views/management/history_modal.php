@@ -20,10 +20,20 @@
 				</span>
 			</div>
 			<!-- <div class="view-show-name" id="companyHistory">Tokyo Consulting Firm Limited </div> -->
-			<div class="country-show-name">
-				<img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="is-bangladresh2"> <span id="branchHistory"></span>, <span id="countryHistory"></span>
+			<div class="col-12">
+				<div class="row mt-10">
+					<div class="col-6 text-start country-show-name">
+						<img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="is-bangladresh2"> <span id="branchHistory"></span>, <span id="countryHistory"></span>
+					</div>
+					<div class="col-6 text-end font-size-12 pr-30">
+						<span class="" style="cursor: pointer;">
+							<i class="fa fa-refresh mr-5" aria-hidden="true"></i>KGI
+						</span>
+					</div>
+				</div>
 			</div>
-			<div class="modal-body mt-20">
+
+			<div class="modal-body mt-10">
 				<div class="col-12 dashed-Backdrop3">
 					<div class="row mt-20">
 						<div class="col-lg-2 col-md-6 col-2">
@@ -95,6 +105,7 @@
 				<div class="col-12 mt-15" id="showIssue"></div>
 				<hr>
 				<div class="col-12 text-end">
+					<input id="v-kfiId" value="" type="hidden">
 					<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
 				</div>
 			</div>

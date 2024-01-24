@@ -332,7 +332,7 @@ class ManagementController extends Controller
                     $kpiTeam->save(false);
                     $kpiTeamId = Yii::$app->db->lastInsertID;
                     $kpiTeamHistory = new KpiTeamHistory();
-                    $kpiTeamHistory->kgiTeamId = $kpiTeamId;
+                    $kpiTeamHistory->kpiTeamId = $kpiTeamId;
                     $kpiTeamHistory->target = null;
                     $kpiTeamHistory->result = null;
                     $kpiTeamHistory->createrId = Yii::$app->user->id;
@@ -722,7 +722,7 @@ class ManagementController extends Controller
         }
         if ($role == 1 || $role == 2) {
             $staffId = Yii::$app->user->id;
-            return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi');
+            return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
         }
         //$paramText .= '&&adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId;
         $paramText .= '&&adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId;
@@ -1227,7 +1227,7 @@ class ManagementController extends Controller
             $kpiEmployee->save(false);
             $kpiEmployeeId = Yii::$app->db->lastInsertID;
             $kpiEmployeeHistory = new KpiEmployeeHistory();
-            $kpiEmployeeHistory->kgiEmployeeId = $kpiEmployeeId;
+            $kpiEmployeeHistory->kpiEmployeeId = $kpiEmployeeId;
             $kpiEmployeeHistory->target = null;
             $kpiEmployeeHistory->result = null;
             $kpiEmployeeHistory->createrId = Yii::$app->user->id;

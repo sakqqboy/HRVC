@@ -54,6 +54,19 @@ $this->title = 'KGI Grid View';
 						</div>
 					</div>
 				</div>
+				<?php
+				if ($role >= 3) {
+				?>
+					<div class="col-12 mt-10 text-end">
+
+						<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi" class="font-size-14 no-underline-primary">
+							<i class="fa fa-user mr-5" aria-hidden="true"></i>
+							Individual
+						</a>
+					</div>
+				<?php
+				}
+				?>
 			</div>
 			<!-- <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist"> -->
 			<!-- <div class="tab-content" id="pills-tabContent">

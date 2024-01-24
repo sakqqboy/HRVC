@@ -153,3 +153,5 @@ $this->title = 'KGI KPI';
 	</div>
 </div>
 <?= $this->render('modal_kpi_view') ?>
+<?= $this->render('modal_team_history') ?>
+<?= $this->render('modal_employee_history') ?>

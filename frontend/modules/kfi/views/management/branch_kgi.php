@@ -24,7 +24,7 @@ if (isset($kgiBranch) && count($kgiBranch) > 0) { ?>
 			?>
 				<tr>
 					<td><?= $i ?></td>
-					<td><input type="checkbox" class="form-check-input" id="kgi-branch-<?= $kgi['kgiId'] ?>" value="<?= $kgi['kgiId'] ?>" <?= $check == 1 ? 'checked' : '' ?> onchange="javascript:assignKgiTokfi(<?= $kgi['kgiId'] ?>,<?= $kfiId ?>)"></td>
+					<td><input type="checkbox" name="kgi" class="form-check-input" id="kgi-branch-<?= $kgi['kgiId'] ?>" value="<?= $kgi['kgiId'] ?>" <?= $check == 1 ? 'checked' : '' ?>></td>
 					<td><?= $kgi["kgiName"] ?></td>
 					<td><?= $kgi["code"] ?> <?= number_format($kgi["targetAmount"], 2) ?></td>
 					<td><?= ModelMaster::shotMonthText($kgi["month"]) ?></td>
@@ -36,5 +36,9 @@ if (isset($kgiBranch) && count($kgiBranch) > 0) { ?>
 			?>
 		</tbody>
 	</table>
+	<div class="col-12 mt-20 text-end">
+		<input type="hidden" id="branchId" value="<?= $branchId ?>">
+		<a class="btn btn-primary font-size-12" href="javascript:saveSelectedKgi(<?= $kfiId ?>)">Submit</a>
+	</div>
 <?php
 }

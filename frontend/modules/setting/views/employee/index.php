@@ -1,6 +1,8 @@
 <?php
 
 use common\models\ModelMaster;
+use frontend\models\hrvc\Department;
+use frontend\models\hrvc\Title;
 
 $this->title = 'Employee';
 ?>
@@ -147,10 +149,10 @@ $this->title = 'Employee';
 										<div class="row">
 											<div class="col-lg-6 col-md-6 col-6">
 												<div class="col-12 lead-programmer">
-													lead Programmer
+													<?= Title::titleName($employee["titleId"]) ?>
 												</div>
 												<div class="col-12 lead-it mt-3">
-													IT & Development
+													<?= Department::departmentNAme($employee["departmentId"]) ?>
 												</div>
 											</div>
 											<div class="col-lg-6 col-md-6 col-6">
