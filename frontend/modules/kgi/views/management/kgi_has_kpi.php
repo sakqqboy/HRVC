@@ -20,7 +20,7 @@ use frontend\models\hrvc\Unit;
 			foreach ($kgiHasKpi as $kpi) : ?>
 				<tr>
 					<td><?= $a ?>.
-						<span class="font-b" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#kpi-view" onclick="javascript:kpiHistory(<?= $kpi['kpiId'] ?>)">
+						<span class="font-b">
 							<?= $kpi["kpiName"] ?>
 						</span>
 					</td>

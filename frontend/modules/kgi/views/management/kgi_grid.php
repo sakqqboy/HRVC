@@ -58,10 +58,13 @@ $this->title = 'KGI Grid View';
 				if ($role >= 3) {
 				?>
 					<div class="col-12 mt-10 text-end">
-
+						<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/team-kgi" class="font-size-14 no-underline-primary mr-20">
+							<i class="fa fa-users mr-5" aria-hidden="true"></i>
+							Team KGI
+						</a>
 						<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi" class="font-size-14 no-underline-primary">
 							<i class="fa fa-user mr-5" aria-hidden="true"></i>
-							Individual
+							Individual KGI
 						</a>
 					</div>
 				<?php

@@ -129,4 +129,16 @@ class KgiTeamController extends Controller
 		$res["history"] = $teamText;
 		return json_encode($res);
 	}
+	public function actionTeamKgi()
+	{
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/all-team-kgi');
+		$teamKgis = curl_exec($api);
+		$teamKgis = json_decode($teamKgis, true);
+		curl_close($api);
+
+		return $this->render('team_kgi');
+	}
 }
