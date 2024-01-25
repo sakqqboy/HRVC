@@ -14,8 +14,20 @@
 				<span class="border border-1 border-next-Backdrop7">Next Update <span class="font-size-10 text-dark pr-10"> : <span id="next-date-view"></span></span></span>
 			</div>
 			<div class="tk" id="company-name-view"></div>
-			<div class="col-12 font-size-12 pl-10 pt-5">
-				<img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="Round1"> <span id="branch-view"></span>, <span id="country-view"></span>
+			<div class="col-12">
+				<div class="row mt-10">
+					<div class="col-6 font-size-13 pl-10 pt-5 pl-20">
+						<img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="Round1"> <span id="branch-view"></span>, <span id="country-view"></span>
+					</div>
+					<div class="col-6 text-end font-size-12 pr-20 mt-10">
+						<a class="no-underline-black mr-20" href="javascript:relatedKfiForKgi()" style="cursor: pointer;">
+							<i class="fa fa-refresh mr-5" aria-hidden="true"></i>Related KFI
+						</a>
+						<a class="no-underline-black" href="javascript:relatedKpiForKgi()" style="cursor: pointer;">
+							<i class="fa fa-refresh mr-5" aria-hidden="true"></i>Related KPI
+						</a>
+					</div>
+				</div>
 			</div>
 
 			<div class="modal-body">
@@ -128,4 +140,5 @@
 			</div>
 		</div>
 	</div>
+	<input type="hidden" id="v-kgiId" value="">
 </div>

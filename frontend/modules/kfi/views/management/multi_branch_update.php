@@ -1,5 +1,6 @@
 <?php
 
+use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\KfiBranch;
 
 if (isset($branches) && count($branches) > 0) { ?>
@@ -14,12 +15,15 @@ if (isset($branches) && count($branches) > 0) { ?>
 		if ($has == 1) {
 			$check = 'checked';
 		}
+		$haveDepartment = Branch::haveDepartment($branch["branchId"]);
+		if ($haveDepartment == 1) {
 	?>
-		<div class="col-12 multi-select pl-30 pt-5 pb-5">
-			<input type="checkbox" id='multi-check-update' <?= $check ?> name="branch[]" id="" class="checkbox-md mr-5 multiCheck-<?= $branch['branchId'] ?>" value="<?= $branch['branchId'] ?>" onchange="javascript:branchMultiDepartmentUpdateKfi()">
-			<?= $branch["branchName"] ?>
-		</div>
+			<div class="col-12 multi-select pl-30 pt-5 pb-5">
+				<input type="checkbox" id='multi-check-update' <?= $check ?> name="branch[]" id="" class="checkbox-md mr-5 multiCheck-<?= $branch['branchId'] ?>" value="<?= $branch['branchId'] ?>" onchange="javascript:branchMultiDepartmentUpdateKfi()">
+				<?= $branch["branchName"] ?>
+			</div>
 <?php
+		}
 	endforeach;
 }
 ?>

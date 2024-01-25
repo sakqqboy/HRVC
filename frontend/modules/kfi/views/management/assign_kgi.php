@@ -1,6 +1,7 @@
 <?php
 
 use common\models\ModelMaster;
+use yii\bootstrap5\ActiveForm;
 
 $this->title = 'Assign KGI';
 ?>
@@ -17,7 +18,9 @@ $this->title = 'Assign KGI';
 			</a>
 		</div>
 	</div>
-
+	<div class="alert-box text-center">
+		S A V E D ! ! !
+	</div>
 	<div class="row mt-40 pr-10">
 		<div class="col-lg-6 col-12">
 			<?php
@@ -39,6 +42,7 @@ $this->title = 'Assign KGI';
 				<div class="col-12 font-b font-size-14 mt-10">
 					KGI
 				</div>
+
 				<div class="col-12 mt-10" id="kgi-branch">
 
 				</div>

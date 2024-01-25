@@ -17,7 +17,18 @@
 			<div class="col-12 font-size-12 pl-10 pt-5">
 				<img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="Round1"> <span id="branch-view"></span>, <span id="country-view"></span>
 			</div>
-
+			<div class="col-12">
+				<div class="row mt-10">
+					<div class="col-6 text-start country-show-name">
+						<img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="is-bangladresh2"> <span id="branchHistory"></span>, <span id="countryHistory"></span>
+					</div>
+					<div class="col-6 text-end font-size-13 pr-30">
+						<a class="no-underline-black " href="javascript:relatedKgiForKpi()" style="cursor: pointer;">
+							<i class="fa fa-refresh mr-5" aria-hidden="true"></i>Related KGI
+						</a>
+					</div>
+				</div>
+			</div>
 			<div class="modal-body">
 				<div class="col-12 dashed-Backdrop7">
 					<div class="row mt-20">
@@ -128,4 +139,5 @@
 			</div>
 		</div>
 	</div>
+	<input type="hidden" id="v-kpiId" value="">
 </div>

@@ -53,6 +53,19 @@ $this->title = 'KPI Grid View';
 						</div>
 					</div>
 				</div>
+				<?php
+				if ($role >= 3) {
+				?>
+					<div class="col-12 mt-10 text-end">
+
+						<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi" class="font-size-14 no-underline-primary">
+							<i class="fa fa-user mr-5" aria-hidden="true"></i>
+							Individual
+						</a>
+					</div>
+				<?php
+				}
+				?>
 			</div>
 			<div class="card example-5 scrollbar-ripe-malinka">
 				<?php
@@ -319,4 +332,6 @@ $form = ActiveForm::begin([
 <?php ActiveForm::end(); ?>
 <?= $this->render('modal_delete') ?>
 <?= $this->render('modal_issue') ?>
+<?= $this->render('modal_team_history') ?>
+<?= $this->render('modal_employee_history') ?>
 <!-- end -->

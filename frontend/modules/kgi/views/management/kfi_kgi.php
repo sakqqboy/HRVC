@@ -150,3 +150,5 @@ $this->title = 'KFI KGI';
 	</div>
 </div>
 <?= $this->render('modal_view_kfi') ?>
+<?= $this->render('modal_team_history') ?>
+<?= $this->render('modal_employee_history') ?>

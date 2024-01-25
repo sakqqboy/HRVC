@@ -242,5 +242,7 @@ $this->title = 'KFI';
 	]) ?>
 	<?= $this->render('issue_modal') ?>
 	<?= $this->render('delete_modal') ?>
+	<?= $this->render('modal_kgi') ?>
+	<?= $this->render('modal_kpi') ?>
 
 </div>

@@ -53,7 +53,7 @@ class KgiPersonalController extends Controller
 					->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
 					->JOIN("LEFT JOIN", "user u", "u.employeeId=e.employeeId")
 					->JOIN("LEFT JOIN", "user_role ur", "ur.userId=u.userId")
-					->where(['e.teamId' => $team["teamId"]])
+					->where(['e.teamId' => $team["teamId"], "kgi_employee.status" => 1, "kgi_employee.kgiId" => $kgiId])
 					->asArray()
 					->orderBy('ur.roleId,e.employeeFirstname')
 					->all();

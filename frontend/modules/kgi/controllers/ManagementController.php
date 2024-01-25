@@ -1730,25 +1730,74 @@ class ManagementController extends Controller
 	public function actionAssignKpiToKgi()
 	{
 		$kgiId = $_POST["kgiId"];
-		$kpiId = $_POST["kpiId"];
-		$type = $_POST["type"];
-		$kgiKpi = KgiHasKpi::find()->where(["kgiId" => $kgiId, "kpiId" => $kpiId])->one();
-		if (isset($kgiKpi) && !empty($kgiKpi)) {
-			if ($type == 1) {
-				$kgiKpi->status = 1;
-			} else {
-				$kgiKpi->status = 99;
+		$kpiIds = $_POST["selectedKpi"];
+		$unCheck = $_POST["unCheck"];
+		if ($kpiIds != '') {
+			if (isset($kpiIds) && count($kpiIds) > 0) {
+				foreach ($kpiIds as $kpiId) :
+					$kgiKpi = KgiHasKpi::find()->where(["kpiId" => $kpiId, "kgiId" => $kgiId, "status" => 1])->one();
+					if (!isset($kgiKpi) || empty($kgiKpi)) {
+						$kgiKpi = new KgiHasKpi();
+						$kgiKpi->kgiId = $kgiId;
+						$kgiKpi->kpiId = $kpiId;
+						$kgiKpi->status = 1;
+						$kgiKpi->createDateTime = new Expression('NOW()');
+						$kgiKpi->updateDateTime = new Expression('NOW()');
+						$kgiKpi->save(false);
+					}
+				endforeach;
 			}
-			$kgiKpi->save(false);
-		} else {
-			$kgiKpi = new KgiHasKpi();
-			$kgiKpi->kgiId = $kgiId;
-			$kgiKpi->kpiId = $kpiId;
-			$kgiKpi->status = 1;
-			$kgiKpi->createDateTime = new Expression('NOW()');
-			$kgiKpi->updateDateTime = new Expression('NOW()');
-			$kgiKpi->save(false);
 		}
+		if ($unCheck != "") {
+			$kgiKpi = KgiHasKpi::find()
+				->where(["kgiId" => $kgiId, "status" => 1, "kpiId" => $unCheck])
+				->all();
+			if (isset($kgiKpi) && count($kgiKpi) > 0) {
+				foreach ($kgiKpi as $fg) :
+					$fg->delete();
+				endforeach;
+			}
+		}
+		$res["status"] = true;
+		return json_encode($res);
+	}
+	public function actionRelatedKfi()
+	{
+		$kgiId = $_POST["kgiId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kfi-kgi?kgiId=' . $kgiId);
+		$kgiHasKfi = curl_exec($api);
+		$kgiHasKfi = json_decode($kgiHasKfi, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
+		$kgiDetail = curl_exec($api);
+		$kgiDetail = json_decode($kgiDetail, true);
+		curl_close($api);
+		$text = $this->renderAjax('kfi_has_kgi', ["kgiHasKfi" => $kgiHasKfi]);
+		$res["kfiText"] = $text;
+		$res["kgiName"] = $kgiDetail["kgiName"];
+		return json_encode($res);
+	}
+	public function actionRelatedKpi()
+	{
+		$kgiId = $_POST["kgiId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-has-kpi?kgiId=' . $kgiId);
+		$kgiHasKpi = curl_exec($api);
+		$kgiHasKpi = json_decode($kgiHasKpi, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
+		$kgiDetail = curl_exec($api);
+		$kgiDetail = json_decode($kgiDetail, true);
+		curl_close($api);
+		$text = $this->renderAjax('kgi_has_kpi', ["kgiHasKpi" => $kgiHasKpi]);
+		$res["kpiText"] = $text;
+		$res["kgiName"] = $kgiDetail["kgiName"];
+		return json_encode($res);
 	}
 	public function setDefault()
 	{

@@ -45,6 +45,9 @@ class EmployeeStatus extends \frontend\models\hrvc\master\EmployeeStatusMaster
         if (isset($status) && !empty($status)) {
             $statusArr["id"] = $status["statusId"];
             $statusArr["name"] = $status["statusName"];
+        } else {
+            $statusArr["id"] = null;
+            $statusArr["name"] = null;
         }
         return $statusArr;
     }

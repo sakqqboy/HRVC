@@ -274,4 +274,5 @@ $this->title = 'KFI Grid View';
 		"units" => $units,
 	]) ?>
 	<?= $this->render('issue_modal') ?>
+	<?= $this->render('modal_kgi') ?>
 </div>

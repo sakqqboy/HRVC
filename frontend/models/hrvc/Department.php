@@ -87,4 +87,13 @@ class Department extends \frontend\models\hrvc\master\DepartmentMaster
             ->one();
         return $employee["departmentId"];
     }
+    public static function haveTeam($departmentId)
+    {
+        $teams = Team::find()->where(["departmentId" => $departmentId, "status" => 1])->all();
+        if (isset($teams) && count($teams) > 0) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }

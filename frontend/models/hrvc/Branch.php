@@ -133,4 +133,13 @@ class Branch extends \frontend\models\hrvc\master\BranchMaster
             ->one();
         return $employee["branchId"];
     }
+    public static function haveDepartment($branchId)
+    {
+        $department = Department::find()->where(["branchId" => $branchId, "status" => 1])->all();
+        if (isset($department) && count($department) > 0) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }

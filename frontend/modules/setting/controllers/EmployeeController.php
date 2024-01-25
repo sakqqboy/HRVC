@@ -788,6 +788,7 @@ class EmployeeController extends Controller
                                 $employee->employeeNumber =  $data[2];
                                 if (trim($data[4]) != '') {
                                     $joinDateArr = explode('/', $data[4]);
+                                    //throw new exception(print_r($joinDateArr, true));
                                     if (count($joinDateArr) == 3) {
                                         $employee->joinDate = $joinDateArr[2] . '-' . $joinDateArr[1] . '-' . $joinDateArr[0];
                                     }
@@ -823,8 +824,13 @@ class EmployeeController extends Controller
                                 $employee->updateDateTime = new Expression('NOW()');
                                 if ($employee->save(false)) {
                                     $success++;
-                                    $employeeId = Yii::$app->db->lastInsertID;
+                                    if ($isExisting == 0) {
+                                        $employeeId = Yii::$app->db->lastInsertID;
+                                    } else {
+                                        $employeeId = $employee->employeeId;
+                                    }
                                     $userId = $this->createUser($employeeId, $data[3]);
+                                    $this->saveUserRole($userId, $data[17]);
                                     $titleName = explode(':', $data[14]);
                                     if ($isExisting == 0) {
                                         $correct[$i] = [
@@ -1088,6 +1094,51 @@ class EmployeeController extends Controller
                     $ur->save(false);
                 }
             endforeach;
+        }
+    }
+    public function actionReviseEmployee()
+    {
+        $employee = Employee::find()->where("employeeId>=216")->all();
+        if (isset($employee) && count($employee) > 0) {
+            foreach ($employee as $em) :
+                $firstname = $em->employeeSurename;
+                $surename = $em->employeeNumber;
+                $number = $em->employeeFirstname;
+                $em->employeeFirstname = $firstname;
+                $em->employeeSurename = $surename;
+                $em->employeeNumber = $number;
+                $em->save(false);
+            endforeach;
+        }
+    }
+    public function actionReviseEmployee2()
+    {
+        $employee = Employee::find()->where("status=1")->all();
+        foreach ($employee as $em) :
+            $user = User::find()->where(["employeeId" => $em->employeeId])->one();
+            if (isset($user) && !empty($user)) {
+                $userRole = UserRole::find()->where(["userId" => $user->userId])->one();
+                if (!isset($userRole) || empty($userRole)) {
+                    $user->delete();
+                    $em->delete();
+                }
+            } else {
+                $em->delete();
+            }
+        endforeach;
+    }
+    public function saveUserRole($userId, $roleName)
+    {
+        UserRole::deleteAll(["userId" => $userId]);
+        $role = Role::find()->select('roleId')->where(["roleName" => $roleName])->asArray()->one();
+        if (isset($role) && !empty($role)) {
+            $userRole = new UserRole();
+            $userRole->userId = $userId;
+            $userRole->roleId = $role["roleId"];
+            $userRole->status = 1;
+            $userRole->createDateTime = new Expression('NOW()');
+            $userRole->updateDateTime = new Expression('NOW()');
+            $userRole->save(false);
         }
     }
 }

@@ -46,6 +46,7 @@ class CompanyController extends Controller
 		$branches = Branch::find()
 			->select('branchId,branchName')
 			->where(["companyId" => $id, "status" => 1])
+			->orderBy('branchName')
 			->asArray()->all();
 		return json_encode($branches);
 	}

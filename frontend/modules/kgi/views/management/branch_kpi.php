@@ -25,7 +25,7 @@ if (isset($kpiBranch) && count($kpiBranch) > 0) { ?>
 			?>
 				<tr>
 					<td><?= $i ?></td>
-					<td><input type="checkbox" class="form-check-input" id="kpi-branch-<?= $kpi['kpiId'] ?>" value="<?= $kpi['kpiId'] ?>" <?= $check == 1 ? 'checked' : '' ?> onchange="javascript:assignKpiTokgi(<?= $kpi['kpiId'] ?>,<?= $kgiId ?>)"></td>
+					<td><input type="checkbox" name="kpi" class="form-check-input" id="kpi-branch-<?= $kpi['kpiId'] ?>" value="<?= $kpi['kpiId'] ?>" <?= $check == 1 ? 'checked' : '' ?>></td>
 					<td><?= $kpi["kpiName"] ?></td>
 					<td><?= $kpi["code"] ?> <?= number_format($kpi["targetAmount"], 2) ?></td>
 					<td><?= ModelMaster::shotMonthText($kpi["month"]) ?></td>
@@ -37,5 +37,9 @@ if (isset($kpiBranch) && count($kpiBranch) > 0) { ?>
 			?>
 		</tbody>
 	</table>
+	<div class="col-12 mt-20 text-end">
+		<input type="hidden" id="branchId" value="<?= $branchId ?>">
+		<a class="btn btn-primary font-size-12" href="javascript:saveSelectedKpi(<?= $kgiId ?>)">Submit</a>
+	</div>
 <?php
 }

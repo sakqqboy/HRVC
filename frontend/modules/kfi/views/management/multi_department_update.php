@@ -1,6 +1,7 @@
 <?php
 
 use frontend\models\hrvc\Branch;
+use frontend\models\hrvc\Department;
 use frontend\models\hrvc\KfiDepartment;
 
 if (isset($d) && count($d) > 0) {
@@ -16,21 +17,23 @@ if (isset($d) && count($d) > 0) {
 				<input type="checkbox" id='multi-check-all-<?= $branchId ?>-update' name="allDepartment[]" class="checkbox-md mr-5 " value="all" onchange="javascript:allDepartmentUpdate(<?= $branchId ?>)">
 				All
 			</div>
-		<?php
+			<?php
 		}
 		foreach ($department as $departmentId => $departmentName) :
-
-			$check = '';
-			$has = KfiDepartment::isInThiskfi($departmentId, $kfiId);
-			if ($has == 1) {
-				$check = 'checked';
-			}
-		?>
-			<div class="col-12 multi-select pl-30 pt-5 pb-5">
-				<input type="checkbox" <?= $check ?> id='multi-check-<?= $branchId ?>-update' name="department[]" class="checkbox-md mr-5 multi-check-department-update" value="<?= $departmentId ?>" onchange="javascript:departmentMultiTeamUpdateKfi(<?= $branchId ?>)">
-				<?= $departmentName ?>
-			</div>
+			$haveTeam = Department::haveTeam($departmentId);
+			if ($haveTeam == 1) {
+				$check = '';
+				$has = KfiDepartment::isInThiskfi($departmentId, $kfiId);
+				if ($has == 1) {
+					$check = 'checked';
+				}
+			?>
+				<div class="col-12 multi-select pl-30 pt-5 pb-5">
+					<input type="checkbox" <?= $check ?> id='multi-check-<?= $branchId ?>-update' name="department[]" class="checkbox-md mr-5 multi-check-department-update" value="<?= $departmentId ?>" onchange="javascript:departmentMultiTeamUpdateKfi(<?= $branchId ?>)">
+					<?= $departmentName ?>
+				</div>
 <?php
+			}
 		endforeach;
 	endforeach;
 }
