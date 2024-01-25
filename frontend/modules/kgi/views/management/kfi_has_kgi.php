@@ -20,7 +20,7 @@ use frontend\models\hrvc\Unit;
 			foreach ($kgiHasKfi as $kfi) : ?>
 				<tr>
 					<td><?= $a ?>.
-						<span class="font-b" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#kfi-view" onclick="javascript:kfiHistory(<?= $kfi['kfiId'] ?>)">
+						<span class="font-b">
 							<?= $kfi["kfiName"] ?>
 						</span>
 					</td>

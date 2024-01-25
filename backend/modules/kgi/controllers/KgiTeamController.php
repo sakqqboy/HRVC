@@ -57,4 +57,31 @@ class KgiTeamController extends Controller
 		}
 		return json_encode($kgiTeamHistory);
 	}
+	public function actionAllTeamKgi()
+	{
+		$kgiTeams = KgiTeam::find()
+			->select('k.kgiName,k.unitId,k.quantio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId')
+			->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_team.kgiId")
+			->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
+			->where(["kgi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
+			->orderBy("k.createDateTime DESC,t.teamName ASC")
+			->asArray()
+			->all();
+		if (isset($kgiTeams) && count($kgiTeams) > 0) {
+			foreach ($kgiTeams as $kgiTeam) :
+				$kgiTeamHistory = KgiTeamHistory::find()
+					->where(["kgiTeamId" => $kgiTeam["kgiTeamId"]])
+					->asArray()
+					->orderBy('createDateTime DESC')
+					->one();
+				if (!isset($kgiTeamHistory) || empty($kgiTeamHistory)) {
+					$kgiTeamHistory = KgiTeam::find()
+						->where(["kgiTeamId" => $kgiTeam["kgiTeamId"]])
+						->asArray()
+						->orderBy('createDateTime DESC')
+						->one();
+				}
+			endforeach;
+		}
+	}
 }
