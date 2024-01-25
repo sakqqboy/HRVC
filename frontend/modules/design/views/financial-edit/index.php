@@ -6,19 +6,19 @@ $this->title = 'Financial edit';
 <div class="col-12 mt-90">
     <div class="col-12 mt-90 alert background-Planning">
         <div class="col-12 planning">
-            <i class="fa fa-database" aria-hidden="true"></i> Financial Planning
+            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FinanicalPlanning.png" class="images_Dark_FinanicalPlanning"> Financial Planning
         </div>
         <div class="col-12 mt-20">
             <div class="shadow p-3 mb-5 bg-body rounded alert2-secondary3">
                 <ul class="nav nav-pills" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link text-dark" id="pills-Forcast-tab" data-bs-toggle="pill" data-bs-target="#pills-Forcast" type="button" role="tab" aria-controls="pills-Forcast" aria-selected="true"> <i class="fa fa-usd" aria-hidden="true"></i> PL Forcast</a>
+                        <a class="nav-link text-dark" id="pills-Forcast-tab" data-bs-toggle="pill" data-bs-target="#pills-Forcast" type="button" role="tab" aria-controls="pills-Forcast" aria-selected="true"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/PL-Forecast.png" class="images_performance_PL"> PL Forcast</a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link text-dark" id="pills-Golden-tab" data-bs-toggle="pill" data-bs-target="#pills-Golden" type="button" role="tab" aria-controls="pills-Golden" aria-selected="false"> Golden Ratio</a>
+                        <a class="nav-link text-dark" id="pills-Golden-tab" data-bs-toggle="pill" data-bs-target="#pills-Golden" type="button" role="tab" aria-controls="pills-Golden" aria-selected="false"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Golden-Ratio.png" class="images_performance_PL"> Golden Ratio</a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link text-dark" id="pills-Accounts-tab" data-bs-toggle="pill" data-bs-target="#pills-Accounts" type="button" role="tab" aria-controls="pills-Accounts" aria-selected="false"> <i class="fa fa-clock-o" aria-hidden="true"></i> Forecast Accounts</a>
+                        <a class="nav-link text-dark" id="pills-Accounts-tab" data-bs-toggle="pill" data-bs-target="#pills-Accounts" type="button" role="tab" aria-controls="pills-Accounts" aria-selected="false"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Designation-1.png" class="images_performance_PL"> Forecast Accounts</a>
                     </li>
                 </ul>
             </div>
@@ -30,8 +30,8 @@ $this->title = 'Financial edit';
                         <span class="badge bg-primary-summary">PL</span> <span class="Profit-Loss">Profit & Loss Forecast</span>
                     </div>
                     <div class="col-lg-6 col-12">
-                        <button type="button" class="btn btn-primary font-size-15"> Save</button>
-                        <button type="cancel" class="btn btn-secondary font-size-15"> Cancel</button>
+                        <button type="button" class="btn btn-primary bgrd-save"> Save</button>
+                        <button type="submit" class="btn  bgrd-cancel"> Cancel</button>
                     </div>
                     <div class="col-lg-3 col-12">
                         <select class="form-select example-tok" aria-label="Default select example">

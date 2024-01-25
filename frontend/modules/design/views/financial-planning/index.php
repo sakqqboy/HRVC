@@ -13,10 +13,10 @@ $this->title = 'Financial Planning';
                     <a class="nav-link text-dark" id="pills-Forcast-tab" data-bs-toggle="pill" data-bs-target="#pills-Forcast" type="button" role="tab" aria-controls="pills-Forcast" aria-selected="true"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/PL-Forecast.png" class="images_performance_PL"> PL Forcast</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link text-dark" id="pills-Golden-tab" data-bs-toggle="pill" data-bs-target="#pills-Golden" type="button" role="tab" aria-controls="pills-Golden" aria-selected="false"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Golden-Ratio.png" class="images_performance_PL"> Golden Ratio</a>
+                    <a class="nav-link text-dark" id="pills-Golden-tab" data-bs-toggle="pill" data-bs-target="#pills-Golden" type="button" role="tab" aria-controls="pills-Golden" aria-selected="false"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Golden-Ratio.png" class="images_performance_PL"> Golden Ratio</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link text-dark" id="pills-Accounts-tab" data-bs-toggle="pill" data-bs-target="#pills-Accounts" type="button" role="tab" aria-controls="pills-Accounts" aria-selected="false"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Designation-1.png" class="images_performance_PL"> Forecast Accounts</a>
+                    <a class="nav-link text-dark" id="pills-Accounts-tab" data-bs-toggle="pill" data-bs-target="#pills-Accounts" type="button" role="tab" aria-controls="pills-Accounts" aria-selected="false"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Designation-1.png" class="images_performance_PL"> Forecast Accounts</a>
                 </li>
             </ul>
         </div>
@@ -1913,17 +1913,9 @@ $this->title = 'Financial Planning';
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-lg-6 pl-20">
-                        <label for="Inputformselectmenu" class="form-label">Form</label>
-                        <div class="input-group mb-3">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected value=""></option>
-                                <option value="US" data-content="">One</option>
-                                <option value="CA">Two</option>
-                                <option value="TH">Three</option>
-                            </select>
-                            <input type="text" class="form-control" aria-label="" aria-describedby="menucountry">
-                        </div>
+                    <div class="col-lg-6 col-md-6 col-6 ">
+
+
                     </div>
                 </div>
             </div>
@@ -1951,3 +1943,47 @@ $this->title = 'Financial Planning';
         </div>
     </div>
 </div>
+
+
+
+<div class="br-select">
+    <div class="br-input">
+        <label for="select-simple">Label</label>
+        <input id="select-simple" type="text" placeholder="Selecione o item" />
+        <button class="br-button" type="button" aria-label="Exibir lista" tabindex="-1" data-trigger="data-trigger"><i class="fas fa-angle-down" aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="br-list" tabindex="0">
+        <div class="br-item" tabindex="-1">
+            <div class="br-radio">
+                <input id="rb0" type="radio" name="estados-simples" value="rb0" />
+                <label for="rb0">1 - Acre (AC)</label>
+            </div>
+        </div>
+        <div class="br-item" tabindex="-1">
+            <div class="br-radio">
+                <input id="rb1" type="radio" name="estados-simples" value="rb1" />
+                <label for="rb1">2 - Alagoas (AL)</label>
+            </div>
+        </div>
+        <div class="br-item" tabindex="-1">
+            <div class="br-radio">
+                <input id="rb2" type="radio" name="estados-simples" value="rb2" />
+                <label for="rb2">3 - Amapá (AP)</label>
+            </div>
+        </div>
+        <div class="br-item" tabindex="-1">
+            <div class="br-radio">
+                <input id="rb3" type="radio" name="estados-simples" value="rb3" />
+                <label for="rb3">4 - Amazonas (AM)</label>
+            </div>
+        </div>
+        <div class="br-item" tabindex="-1">
+            <div class="br-radio">
+                <input id="rb4" type="radio" name="estados-simples" value="rb4" />
+                <label for="rb4">5 - Bahia (BA)</label>
+            </div>
+        </div>
+
+    </div>
+</div><span class="feedback warning" role="alert"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i>Texto auxiliar Função de prevenir erros.</span>

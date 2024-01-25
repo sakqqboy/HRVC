@@ -9,7 +9,8 @@
 }
 
 .imagedollar {
-    width: 14px;
+    width: 13px;
+    margin-top: -3px
 }
 
 .button-link {
@@ -55,3 +56,78 @@
     background-color: #005485;
 
 }
+
+.bgrd-save {
+    background-color: #2580D3;
+    font-size: 13px;
+}
+
+.bgrd-cancel {
+    background-color: transparent;
+    font-size: 13px;
+    color: rgb(219, 40, 40);
+    border-color: black;
+}
+
+.Round_radio {
+    width: 15px;
+    margin-top: -3px;
+}
+
+.Roundup_fontsmall {
+    font-size: 12px;
+    letter-spacing: -0.8px;
+    color: #6A7383;
+    font-weight: 500;
+}
+
+.month12_January {
+    font-size: 7px;
+    letter-spacing: -0.9px;
+}
+
+.months_lights {
+    border: none;
+    margin-left: 3px;
+    border-radius: 2px;
+    width: 3.2rem;
+    height: 60px;
+    padding-top: 5px;
+    background-color: #ececec;
+}
+
+.images_CoolapseAside1 {
+    width: 7px;
+    cursor: pointer;
+}
+
+.dge_AAR_green1 {
+    border-radius: 2px;
+    background-color: #00AD1C;
+    letter-spacing: -0.9px;
+}
+
+.AAR-2022-1 {
+    font-size: 7px;
+}
+
+.months12_number {
+    font-size: 10px;
+    padding-top: 15px;
+    letter-spacing: -0.9px;
+    border-bottom: 1px rgb(185, 185, 185) solid;
+}
+
+.months12_number_notsolid {
+    font-size: 10px;
+    letter-spacing: -0.9px;
+}
+
+/* .months_lights_copy1 {
+    border-radius: 3px;
+    background-color: #ececec;
+    border: none;
+    width: 3.2rem;
+    padding-left: 3px;
+    height: 60px;
+} */

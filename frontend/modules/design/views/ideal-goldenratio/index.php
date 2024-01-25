@@ -4,19 +4,19 @@ $this->title = 'Ideal Golden Ratio';
 
 <div class="col-12 mt-90 alert background-Planning">
     <div class="col-12 planning">
-        <i class="fa fa-database" aria-hidden="true"></i> Financial Planning
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FinanicalPlanning.png" class="images_Dark_FinanicalPlanning"> Financial Planning
     </div>
     <div class="col-12 mt-20">
         <div class="shadow p-3 mb-5 bg-body rounded alert2-secondary3">
             <ul class="nav nav-pills" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link text-dark" id="pills-Forcast-tab" data-bs-toggle="pill" data-bs-target="#pills-Forcast" type="button" role="tab" aria-controls="pills-Forcast" aria-selected="true"> <i class="fa fa-usd" aria-hidden="true"></i> PL Forcast</a>
+                    <a class="nav-link text-dark" id="pills-Forcast-tab" data-bs-toggle="pill" data-bs-target="#pills-Forcast" type="button" role="tab" aria-controls="pills-Forcast" aria-selected="true"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/PL-Forecast.png" class="images_performance_PL"> PL Forcast</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link text-dark" id="pills-Golden-tab" data-bs-toggle="pill" data-bs-target="#pills-Golden" type="button" role="tab" aria-controls="pills-Golden" aria-selected="false"> Golden Ratio</a>
+                    <a class="nav-link text-dark" id="pills-Golden-tab" data-bs-toggle="pill" data-bs-target="#pills-Golden" type="button" role="tab" aria-controls="pills-Golden" aria-selected="false"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Golden-Ratio.png" class="images_performance_PL"> Golden Ratio</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link text-dark" id="pills-Accounts-tab" data-bs-toggle="pill" data-bs-target="#pills-Accounts" type="button" role="tab" aria-controls="pills-Accounts" aria-selected="false"> <i class="fa fa-clock-o" aria-hidden="true"></i> Forecast Accounts</a>
+                    <a class="nav-link text-dark" id="pills-Accounts-tab" data-bs-toggle="pill" data-bs-target="#pills-Accounts" type="button" role="tab" aria-controls="pills-Accounts" aria-selected="false"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Designation-1.png" class="images_performance_PL"> Forecast Accounts</a>
                 </li>
             </ul>
         </div>
@@ -25,10 +25,10 @@ $this->title = 'Ideal Golden Ratio';
         <div class="alert alert2-secondary3">
             <div class="row">
                 <div class="col-lg-2 col-md-6 col-12">
-                    <strong class="font-size-19"> Golden Ratio</strong>
+                    <div class="radio_Golden19"> Golden Ratio</div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
-                    <button class="btn btn-primary" type="button"><i class="fa fa-magic" aria-hidden="true"></i> Register</button>
+                    <button class="btn btn-primary bgrd-save" type="button"><i class="fa fa-magic" aria-hidden="true"></i> Register</button>
                 </div>
                 <div class="col-lg-4 col-md-6 col-12">
                     <select class="form-select example-tok1" aria-label="Default select example">
@@ -56,7 +56,7 @@ $this->title = 'Ideal Golden Ratio';
                             </select>
                         </div>
                         <div class="col-5 text-end">
-                            <div class="text-secondary font-size-13">
+                            <div class="text-secondary font-size-12">
                                 <strong> F.Y. 2023</strong>
                             </div>
                         </div>
@@ -65,7 +65,7 @@ $this->title = 'Ideal Golden Ratio';
                 <div class="col-lg-9 col-md-6 col-12 badge bg-primary-sec4 mt-30">
                     <div class="row">
                         <div class="col-1 font-size-12 text-secondary pt-5">
-                            <img src="<?= Yii::$app->homeUrl ?>image/dollar.png" class="imagedollar"> Currency
+                            <img src="<?= Yii::$app->homeUrl ?>image/dollar.png" class="imagedollar"> <span class="Roundup_fontsmall">Currency</span>
                         </div>
                         <div class="col-2 pt-5">
                             <select class="form-select  select-secondate" aria-label="Default select example">
@@ -78,7 +78,7 @@ $this->title = 'Ideal Golden Ratio';
                             </select>
                         </div>
                         <div class="col-1 font-size-12 pt-5 text-secondary" style="margin-left:-35px;">
-                            <img src="<?= Yii::$app->homeUrl ?>image/roundup.png"> Round Up
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Round-Up.png" class="Round_radio"><span class="Roundup_fontsmall">Round Up</span>
                         </div>
                         <div class="col-2 pt-5 pl-15">
                             <select class="form-select select-secondate" aria-label="Default select example">
@@ -142,7 +142,7 @@ $this->title = 'Ideal Golden Ratio';
                                         <div class="col-12 text-center">
                                             <strong> <?= number_format(75.5) ?>%</strong>
                                         </div>
-                                        <div class="col-12 pt-100"></div>
+                                        <div class="col-12 mr_Gross"></div>
                                     </div>
                                 </div>
                                 <div class="col-lg-8 col-md-6 col-12 ">
@@ -204,9 +204,9 @@ $this->title = 'Ideal Golden Ratio';
                         <div class="col-lg-9 col-md-6 col-12 ">
                             <div class="card alert-alpri6">
                                 <div class="row">
-                                    <div class="col-5 Ideal-solid"></div>
-                                    <div class="col-3">Total</div>
-                                    <div class="col-4">
+                                    <div class="col-7  Ideal-solid"></div>
+                                    <div class="col-3 text-end">Total</div>
+                                    <div class="col-2">
                                         <div role="progressbar4" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="--value:100"></div>
                                     </div>
                                 </div>
