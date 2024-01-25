@@ -1908,39 +1908,80 @@ $this->title = 'Financial Planning';
         <div class="modal-content">
             <div class="container">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel"> Currency Conversion Rate</h5>
+                    <div class="modal-title" id="staticBackdropLabel"> <span class="Currency_Conversion_Rate">Currency Conversion Rate</span> </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-6 ">
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="RoundUp" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropRoundUp" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="col-12 pt-20">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Round-Up.png" class="images_Round-Up"> <span class="text_Roundup">Round Up</span>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-6 col-6">
+                            <div class="set_fontFrom">From</div>
+                            <select class="form-select select_Fromplanning" aria-label="Default select example">
+                                <option selected value="">select</option>
+                                <option value="TH">Thailand BTH</option>
+                                <option value="BDT">Bangladresh BDT</option>
+                                <option value="AED">America</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-6">
+                            <div class="col-12 random_country">
+                                <i class="fa fa-exchange To_selectweight" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-6 col-6">
+                            <div class="set_fontFrom">To</div>
+                            <select class="form-select select_Toplanning" aria-label="Default select example">
+                                <option selected value="">select</option>
+                                <option value="TH">Thailand BTH</option>
+                                <option value="BDT">Bangladresh BDT</option>
+                                <option value="AED">America</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="col-lg-6 pt-10">
-                        <form>
-                            <input class="chosen-value" type="text" value="" id="">
-                        </form>
+                    <div class="row mt-30">
+                        <div class="col-lg-5 col-md-5 col-5">
+                            <div class="set_fontFrom">Mount</div>
+                            <input type="text" class="form-control select_Fromplanning" placeholder="1" disabled>
+                        </div>
+                        <div class="col-lg-2  col-md-5 col-5">
+                            <div class="col-12 random_country">
+                                <div class="To_selectweight">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/rendom.png" class="images_random1">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-5 col-5">
+                            <div class="set_fontFrom">Set Amount</div>
+                            <input type="text" class="form-control select_Toplanning" placeholder="115">
+                        </div>
+                    </div>
+                    <div class="col-12 result_country">
+                        1 BTH (฿) = 115 BDT (৳)
+                    </div>
+                    <div class="col-12 text-end">
+                        <span class="bg btn-convert" type="submit"> Convert</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+    <div class="modal fade" id="RoundUp" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropRoundUp" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="col-12 pt-20">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Round-Up.png" class="images_Round-Up"> <span class="text_Roundup">Round Up</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 pt-10">
+                            <form>
+                                <input class="chosen-value" type="text" value="search" id="">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
