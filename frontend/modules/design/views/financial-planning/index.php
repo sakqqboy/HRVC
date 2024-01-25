@@ -411,6 +411,7 @@ $this->title = 'Financial Planning';
                             </div>
                         </div>
                     </div>
+                    <hr>
                 </div>
                 <div class="col-lg-1">
                     <div class="alert alert-secondary secondary-CurrentYear" style="border: none;margin-top:130px;padding-top:95px;">
@@ -521,7 +522,7 @@ $this->title = 'Financial Planning';
                             </div>
                             <div class="col-2 badge bg-light  pt-9" data-bs-toggle="modal" data-bs-target="#staticBackdropCurrency" style="height: 30px; cursor: pointer;">
                                 <div class="circledollar">
-                                    <i class="fa fa-usd pl-4 font-size-10" aria-hidden="true"></i><span class="Curr">Currency</span>
+                                    <i class="fa fa-usd pl-3 font-size-10" aria-hidden="true"></i><span class="Curr">Currency</span>
                                 </div>
                             </div>
                             <div class="col-4 font-size-12 pt-5">
@@ -1943,47 +1944,3 @@ $this->title = 'Financial Planning';
         </div>
     </div>
 </div>
-
-
-
-<div class="br-select">
-    <div class="br-input">
-        <label for="select-simple">Label</label>
-        <input id="select-simple" type="text" placeholder="Selecione o item" />
-        <button class="br-button" type="button" aria-label="Exibir lista" tabindex="-1" data-trigger="data-trigger"><i class="fas fa-angle-down" aria-hidden="true"></i>
-        </button>
-    </div>
-    <div class="br-list" tabindex="0">
-        <div class="br-item" tabindex="-1">
-            <div class="br-radio">
-                <input id="rb0" type="radio" name="estados-simples" value="rb0" />
-                <label for="rb0">1 - Acre (AC)</label>
-            </div>
-        </div>
-        <div class="br-item" tabindex="-1">
-            <div class="br-radio">
-                <input id="rb1" type="radio" name="estados-simples" value="rb1" />
-                <label for="rb1">2 - Alagoas (AL)</label>
-            </div>
-        </div>
-        <div class="br-item" tabindex="-1">
-            <div class="br-radio">
-                <input id="rb2" type="radio" name="estados-simples" value="rb2" />
-                <label for="rb2">3 - Amapá (AP)</label>
-            </div>
-        </div>
-        <div class="br-item" tabindex="-1">
-            <div class="br-radio">
-                <input id="rb3" type="radio" name="estados-simples" value="rb3" />
-                <label for="rb3">4 - Amazonas (AM)</label>
-            </div>
-        </div>
-        <div class="br-item" tabindex="-1">
-            <div class="br-radio">
-                <input id="rb4" type="radio" name="estados-simples" value="rb4" />
-                <label for="rb4">5 - Bahia (BA)</label>
-            </div>
-        </div>
-
-    </div>
-</div><span class="feedback warning" role="alert"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i>Texto auxiliar Função de prevenir erros.</span>

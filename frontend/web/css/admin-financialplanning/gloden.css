@@ -564,8 +564,8 @@ input[type="checkbox"]:checked+label {
 .circledollar {
     border: 1.9px solid;
     border-radius: 50%;
-    width: 17px;
-    height: 17px;
+    width: 15px;
+    height: 15px;
     color: #2377C6;
     margin-top: -3px;
 
