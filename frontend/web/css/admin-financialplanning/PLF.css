@@ -1,0 +1,68 @@
+.PLF_2022 {
+    font-size: 10px;
+    letter-spacing: -0.9px;
+}
+
+.PLF_msr {
+    margin-top: -5px;
+}
+
+.overview_width {
+    margin-top: -10px;
+    letter-spacing: -0.9px;
+    font-size: 10px;
+}
+
+.bdg-2580D3 {
+    background-color: #2580D3;
+    border-radius: 2px;
+}
+
+.mrl_light_shadow {
+    margin-left: -14px;
+    width: 16.8rem;
+    margin-top: 40px;
+}
+
+.bgAAR-1 {
+    background-color: #2580D3;
+    color: white;
+    border-radius: 2px;
+    font-size: 10px;
+    margin-top: 18px;
+    letter-spacing: -0.9px;
+}
+
+.bgAAR1_green {
+    background-color: #00AD1C;
+    color: white;
+    border-radius: 2px;
+    font-size: 10px;
+    letter-spacing: -0.9px;
+    margin-top: 15px;
+}
+
+.bgART1warning {
+    background-color: #F2C80F;
+    color: black;
+    border-radius: 2px;
+    font-size: 10px;
+    letter-spacing: -0.9px;
+    margin-top: 15px;
+}
+
+.bgATRworm {
+    background-color: #7AB0E1;
+    color: white;
+    border-radius: 2px;
+    font-size: 10px;
+    letter-spacing: -0.9px;
+    margin-top: 15px;
+}
+
+.Annual_overview {
+    font-weight: 600;
+    letter-spacing: -0.9px;
+    font-size: 17px;
+    font-family: 'SF Pro display';
+}

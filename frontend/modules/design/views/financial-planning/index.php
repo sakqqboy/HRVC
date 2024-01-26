@@ -1929,11 +1929,52 @@ $this->title = 'Financial Planning';
                         </div>
                         <div class="col-lg-5 col-md-6 col-6">
                             <div class="set_fontFrom">To</div>
-                            <select class="form-select select_Toplanning" aria-label="Default select example">
-                                <option selected value="">select</option>
-                                <option value="TH">Thailand BTH</option>
-                                <option value="BDT">Bangladresh BDT</option>
-                                <option value="AED">America</option>
+                            <select class="form-select select_Fromplanning" aria-label="Default select example">
+                                <option selected value="">Select</option>
+                                <option value='Anaesthesia'>Anaesthesia</option>
+                                <option value='Anatomy and Physiology'>Anatomy and Physiology</option>
+                                <option value='Cardiology'>Cardiology</option>
+                                <option value='Clinical Skills'>Clinical Skills</option>
+                                <option value='Critical Care'>Critical Care</option>
+                                <option value='Dermatology'>Dermatology</option>
+                                <option value='Ear, Nose and Throat'>Ear, Nose and Throat</option>
+                                <option value='Emergency Medicine'>Emergency Medicine</option>
+                                <option value='Emergency Nursing'>Emergency Nursing</option>
+                                <option value='Endocrinology and Diabetes'>Endocrinology and Diabetes</option>
+                                <option value='Gastroenterology'>Gastroenterology</option>
+                                <option value='General Dentistry'>General Dentistry</option>
+                                <option value='General Medicine'>General Medicine</option>
+                                <option value='General Practice'>General Practice</option>
+                                <option value='Geriatrics'>Geriatrics</option>
+                                <option value='Haematology'>Haematology</option>
+                                <option value='Immunology'>Immunology</option>
+                                <option value='Internal Medicine'>Internal Medicine</option>
+                                <option value='Maxillofacial and Plastic Surgery'>Maxillofacial and Plastic Surgery</option>
+                                <option value='Microbiology'>Microbiology</option>
+                                <option value='Midwifery'>Midwifery</option>
+                                <option value='Nephrology'>Nephrology</option>
+                                <option value='Neurology'>Neurology</option>
+                                <option value='Nursing'>Nursing</option>
+                                <option value='Obstetrics and Gynaecology'>Obstetrics and Gynaecology</option>
+                                <option value='Occupational Health'>Occupational Health</option>
+                                <option value='Oncology'>Oncology</option>
+                                <option value='Ophthalmology'>Ophthalmology</option>
+                                <option value='Oral Medicine'>Oral Medicine</option>
+                                <option value='Orthopaedics'>Orthopaedics</option>
+                                <option value='Paediatric Nursing'>Paediatric Nursing</option>
+                                <option value='Paediatrics'>Paediatrics</option>
+                                <option value='Pain Medicine'>Pain Medicine</option>
+                                <option value='Palliative Care'>Palliative Care</option>
+                                <option value='Pathology and Laboratory Medicine'>Pathology and Laboratory Medicine</option>
+                                <option value='Pharmacology'>Pharmacology</option>
+                                <option value='Psychiatry'>Psychiatry</option>
+                                <option value='Public Health'>Public Health</option>
+                                <option value='Radiology'>Radiology</option>
+                                <option value='Respiratory'>Respiratory</option>
+                                <option value='Restorative Dentistry'>Restorative Dentistry</option>
+                                <option value='Rheumatology'>Rheumatology</option>
+                                <option value='Surgery'>Surgery</option>
+                                <option value='Urology'>Urology</option>
                             </select>
                         </div>
                     </div>
@@ -1964,24 +2005,26 @@ $this->title = 'Financial Planning';
             </div>
         </div>
     </div>
+</div>
 
-    <div class="modal fade" id="RoundUp" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropRoundUp" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="col-12 pt-20">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Round-Up.png" class="images_Round-Up"> <span class="text_Roundup">Round Up</span>
-                            </div>
+
+<div class="modal fade" id="RoundUp" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropRoundUp" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="col-12 pt-20">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Round-Up.png" class="images_Round-Up"> <span class="text_Roundup">Round Up</span>
                         </div>
-                        <div class="col-lg-6 pt-10">
-                            <form>
-                                <input class="chosen-value" type="text" value="search" id="">
-                            </form>
-                        </div>
+                    </div>
+                    <div class="col-lg-6 pt-10">
+                        <form>
+                            <input class="chosen-value" type="text" value="search" id="">
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>

@@ -4,19 +4,19 @@ $this->title = 'PLF Overview';
 
 <div class="col-12 mt-90 alert background-Planning">
     <div class="col-12 planning">
-    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FinanicalPlanning.png" class="images_Dark_FinanicalPlanning"> Financial Planning
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FinanicalPlanning.png" class="images_Dark_FinanicalPlanning"> Financial Planning
     </div>
     <div class="col-12 mt-20">
         <div class="shadow p-3 mb-5 bg-body rounded alert2-secondary3">
             <ul class="nav nav-pills" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link text-dark" id="pills-Forcast-tab" data-bs-toggle="pill" data-bs-target="#pills-Forcast" type="button" role="tab" aria-controls="pills-Forcast" aria-selected="true"> <i class="fa fa-usd" aria-hidden="true"></i> PL Forcast</a>
+                    <a class="nav-link text-dark" id="pills-Forcast-tab" data-bs-toggle="pill" data-bs-target="#pills-Forcast" type="button" role="tab" aria-controls="pills-Forcast" aria-selected="true"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/PL-Forecast.png" class="images_performance_PL"> PL Forcast</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link text-dark" id="pills-Golden-tab" data-bs-toggle="pill" data-bs-target="#pills-Golden" type="button" role="tab" aria-controls="pills-Golden" aria-selected="false"> Golden Ratio</a>
+                    <a class="nav-link text-dark" id="pills-Golden-tab" data-bs-toggle="pill" data-bs-target="#pills-Golden" type="button" role="tab" aria-controls="pills-Golden" aria-selected="false"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Golden-Ratio.png" class="images_performance_PL"> Golden Ratio</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link text-dark" id="pills-Accounts-tab" data-bs-toggle="pill" data-bs-target="#pills-Accounts" type="button" role="tab" aria-controls="pills-Accounts" aria-selected="false"> <i class="fa fa-clock-o" aria-hidden="true"></i> Forecast Accounts</a>
+                    <a class="nav-link text-dark" id="pills-Accounts-tab" data-bs-toggle="pill" data-bs-target="#pills-Accounts" type="button" role="tab" aria-controls="pills-Accounts" aria-selected="false"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Designation-1.png" class="images_performance_PL"> Forecast Accounts</a>
                 </li>
             </ul>
         </div>
@@ -64,260 +64,1018 @@ $this->title = 'PLF Overview';
                 <a href="" class="linedatatable"> <i class="fa fa-chevron-left" aria-hidden="true"></i> Data Table</a>
             </div>
             <div class="col-12 text-center">
-                <strong> Annual Comparison Chart</strong>
+                <div class="Annual_overview"> Annual Comparison Chart</div>
             </div>
             <div class="row">
-                <div class="col-lg-1 mt-60">
+                <div class="col-lg-1 mt-40">
                     <div class="col-6 text-center">
-                        <img src="<?= Yii::$app->homeUrl ?>image/network.png">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                     </div>
-                    <div class="col-12 mt-5">
-                        <span class="badge bg-primary">AAR</span>
+                    <div class="col-12">
+                        <span class="badge bgAAR-1">AAR</span>
                     </div>
-                    <div class="col-12 mt-20">
-                        <span class="badge bg-success">AAR</span>
+                    <div class="col-12">
+                        <span class="badge bgAAR1_green">AAR</span>
                     </div>
-                    <div class="col-12 mt-20">
-                        <span class="badge bg-warning text-dark">ATR</span>
+                    <div class="col-12">
+                        <span class="badge bgART1warning">ATR</span>
                     </div>
-                    <div class="col-12 mt-20">
-                        <span class="badge bg-primary">ATR</span>
+                    <div class="col-12">
+                        <span class="badge bgATRworm">ATR</span>
                     </div>
                 </div>
-                <div class="col-lg-5">
-                    <div class="shadow p-3 mb-5 bg-body rounded mt-40">
+                <div class="col-lg-3 mrl_light_shadow">
+                    <div class="shadow p-2 bg-body rounded">
                         <div class="col-12 badge bg light-shadow text-dark text-start">
                             Sales
                         </div>
                         <div class="row mt-10">
-                            <div class="col-lg-3 font-size-12">
+                            <div class="col-lg-3 PLF_2022">
                                 2022
                             </div>
-                            <div class="col-lg-7 pt-5">
-                                <div class="progress progress-thin" style="height: 10px;">
-                                    <div class="progress-bar bg-bar-background-1" role="progressbar" style="width: 26%" aria-valuenow="26" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="col-lg-7 pt-4">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-1" role="progressbar" style="width: 26%;" aria-valuenow="26" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
-                            <div class="col-lg-2 font-size-12">
+                            <div class="col-lg-2 PLF_2022">
                                 26%
                             </div>
-                            <div class="col-lg-3 font-size-12">
+                            <div class="col-lg-3 overview_width">
                                 2023
                             </div>
-                            <div class="col-lg-7 pt-5">
-                                <div class="progress progress-thin" style="height: 10px;">
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
                                     <div class="progress-bar bg-bar-background-2" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
-                            <div class="col-lg-2 font-size-12">
+                            <div class="col-lg-2 overview_width">
                                 100%
                             </div>
-                            <div class="col-lg-3 font-size-12">
-                                2023 <span class="badge bg-primary font-size-10">C</span>
+                            <div class="col-lg-3 overview_width">
+                                2023 <span class="badge bdg-2580D3">C</span>
                             </div>
-                            <div class="col-lg-7 pt-5">
-                                <div class="progress progress-thin" style="height: 10px;">
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
                                     <div class="progress-bar bg-bar-background-3" role="progressbar" style="width: 82%" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
-                            <div class="col-lg-2 font-size-12">
+                            <div class="col-lg-2 overview_width">
                                 82%
                             </div>
-                            <div class="col-lg-3 font-size-12">
+                            <div class="col-lg-3 overview_width">
                                 2024
                             </div>
-                            <div class="col-lg-7 pt-5">
-                                <div class="progress progress-thin" style="height: 10px;">
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
                                     <div class="progress-bar bg-bar-background-4" role="progressbar" style="width: 93%" aria-valuenow="93" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
-                            <div class="col-lg-2 font-size-12">
+                            <div class="col-lg-2 overview_width">
                                 93%
                             </div>
-                            <hr>
                         </div>
+                        <div class="border-bottom"></div>
                     </div>
                 </div>
-                <div class="col-lg-5">
-                    <div class="shadow p-3  mb-5  bg-body rounded mt-40">
+                <div class="col-lg-3 mrl_light_shadow">
+                    <div class="shadow p-2 bg-body rounded">
                         <div class="col-12 badge bg light-shadow text-dark text-start">
                             Sales
                         </div>
                         <div class="row mt-10">
-                            <div class="col-lg-3 font-size-12">
+                            <div class="col-lg-3 PLF_2022">
                                 2022
                             </div>
-                            <div class="col-lg-7 pt-5">
-                                <div class="progress progress-thin" style="height: 10px;">
-                                    <div class="progress-bar bg-bar-background-1" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="col-lg-7 pt-4">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-1" role="progressbar" style="width: 26%;" aria-valuenow="26" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
-                            <div class="col-lg-2 font-size-12">
-                                75%
+                            <div class="col-lg-2 PLF_2022">
+                                26%
                             </div>
-                            <div class="col-lg-3 font-size-12">
+                            <div class="col-lg-3 overview_width">
                                 2023
                             </div>
-                            <div class="col-lg-7 pt-5">
-                                <div class="progress progress-thin" style="height: 10px;">
-                                    <div class="progress-bar bg-bar-background-2" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-2" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
-                            <div class="col-lg-2 font-size-12">
-                                65%
-                            </div>
-                            <div class="col-lg-3 font-size-12">
-                                2023 <span class="badge bg-primary font-size-10">C</span>
-                            </div>
-                            <div class="col-lg-7 pt-5">
-                                <div class="progress progress-thin" style="height: 10px;">
-                                    <div class="progress-bar bg-bar-background-3" role="progressbar" style="width: 43%" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 font-size-12">
-                                43%
-                            </div>
-                            <div class="col-lg-3 font-size-12">
-                                2024
-                            </div>
-                            <div class="col-lg-7 pt-5">
-                                <div class="progress progress-thin" style="height: 10px;">
-                                    <div class="progress-bar bg-bar-background-4" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 font-size-12">
+                            <div class="col-lg-2 overview_width">
                                 100%
                             </div>
-                            <hr>
+                            <div class="col-lg-3 overview_width">
+                                2023 <span class="badge bdg-2580D3">C</span>
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-3" role="progressbar" style="width: 82%" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                82%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2024
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-4" role="progressbar" style="width: 93%" aria-valuenow="93" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                93%
+                            </div>
                         </div>
+                        <div class="border-bottom"></div>
+                    </div>
+                </div>
+                <div class="col-lg-3 mrl_light_shadow">
+                    <div class="shadow p-2 bg-body rounded">
+                        <div class="col-12 badge bg light-shadow text-dark text-start">
+                            Sales
+                        </div>
+                        <div class="row mt-10">
+                            <div class="col-lg-3 PLF_2022">
+                                2022
+                            </div>
+                            <div class="col-lg-7 pt-4">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-1" role="progressbar" style="width: 26%;" aria-valuenow="26" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 PLF_2022">
+                                26%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2023
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-2" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                100%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2023 <span class="badge bdg-2580D3">C</span>
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-3" role="progressbar" style="width: 82%" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                82%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2024
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-4" role="progressbar" style="width: 93%" aria-valuenow="93" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                93%
+                            </div>
+                        </div>
+                        <div class="border-bottom"></div>
+                    </div>
+                </div>
+                <div class="col-lg-2 mrl_light_shadow">
+                    <div class="shadow p-2 bg-body rounded">
+                        <div class="col-12 badge bg light-shadow text-dark text-start">
+                            Sales
+                        </div>
+                        <div class="row mt-10">
+                            <div class="col-lg-3 PLF_2022">
+                                2022
+                            </div>
+                            <div class="col-lg-7 pt-4">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-1" role="progressbar" style="width: 26%;" aria-valuenow="26" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 PLF_2022">
+                                26%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2023
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-2" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                100%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2023 <span class="badge bdg-2580D3">C</span>
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-3" role="progressbar" style="width: 82%" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                82%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2024
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-4" role="progressbar" style="width: 93%" aria-valuenow="93" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                93%
+                            </div>
+                        </div>
+                        <div class="border-bottom"></div>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-1 mt-60">
+                <div class="col-lg-1 mt-40">
                     <div class="col-6 text-center">
-                        <img src="<?= Yii::$app->homeUrl ?>image/network.png">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                     </div>
-                    <div class="col-12 mt-5">
-                        <span class="badge bg-primary">AAR</span>
+                    <div class="col-12">
+                        <span class="badge bgAAR-1">AAR</span>
                     </div>
-                    <div class="col-12 mt-20">
-                        <span class="badge bg-success">AAR</span>
+                    <div class="col-12">
+                        <span class="badge bgAAR1_green">AAR</span>
                     </div>
-                    <div class="col-12 mt-20">
-                        <span class="badge bg-warning text-dark">ATR</span>
+                    <div class="col-12">
+                        <span class="badge bgART1warning">ATR</span>
                     </div>
-                    <div class="col-12 mt-20">
-                        <span class="badge bg-primary">ATR</span>
+                    <div class="col-12">
+                        <span class="badge bgATRworm">ATR</span>
                     </div>
                 </div>
-                <div class="col-lg-5">
-                    <div class="shadow p-3 mb-5 bg-body rounded mt-40">
+                <div class="col-lg-3 mrl_light_shadow">
+                    <div class="shadow p-2 bg-body rounded">
                         <div class="col-12 badge bg light-shadow text-dark text-start">
                             Sales
                         </div>
                         <div class="row mt-10">
-                            <div class="col-lg-3 font-size-12">
+                            <div class="col-lg-3 PLF_2022">
                                 2022
                             </div>
-                            <div class="col-lg-7 pt-5">
-                                <div class="progress progress-thin" style="height: 10px;">
-                                    <div class="progress-bar bg-bar-background-1" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="col-lg-7 pt-4">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-1" role="progressbar" style="width: 26%;" aria-valuenow="26" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
-                            <div class="col-lg-2 font-size-12">
-                                75%
+                            <div class="col-lg-2 PLF_2022">
+                                26%
                             </div>
-                            <div class="col-lg-3 font-size-12">
+                            <div class="col-lg-3 overview_width">
                                 2023
                             </div>
-                            <div class="col-lg-7 pt-5">
-                                <div class="progress progress-thin" style="height: 10px;">
-                                    <div class="progress-bar bg-bar-background-2" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-2" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
-                            <div class="col-lg-2 font-size-12">
-                                65%
-                            </div>
-                            <div class="col-lg-3 font-size-12">
-                                2023 <span class="badge bg-primary font-size-10">C</span>
-                            </div>
-                            <div class="col-lg-7 pt-5">
-                                <div class="progress progress-thin" style="height: 10px;">
-                                    <div class="progress-bar bg-bar-background-3" role="progressbar" style="width: 43%" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 font-size-12">
-                                43%
-                            </div>
-                            <div class="col-lg-3 font-size-12">
-                                2024
-                            </div>
-                            <div class="col-lg-7 pt-5">
-                                <div class="progress progress-thin" style="height: 10px;">
-                                    <div class="progress-bar bg-bar-background-4" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 font-size-12">
+                            <div class="col-lg-2 overview_width">
                                 100%
                             </div>
-                            <hr>
+                            <div class="col-lg-3 overview_width">
+                                2023 <span class="badge bdg-2580D3">C</span>
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-3" role="progressbar" style="width: 82%" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                82%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2024
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-4" role="progressbar" style="width: 93%" aria-valuenow="93" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                93%
+                            </div>
                         </div>
+                        <div class="border-bottom"></div>
                     </div>
                 </div>
-                <div class="col-lg-5">
-                    <div class="shadow p-3  mb-5  bg-body rounded mt-40">
+                <div class="col-lg-3 mrl_light_shadow">
+                    <div class="shadow p-2 bg-body rounded">
                         <div class="col-12 badge bg light-shadow text-dark text-start">
                             Sales
                         </div>
                         <div class="row mt-10">
-                            <div class="col-lg-3 font-size-12">
+                            <div class="col-lg-3 PLF_2022">
                                 2022
                             </div>
-                            <div class="col-lg-7 pt-5">
-                                <div class="progress progress-thin" style="height: 10px;">
-                                    <div class="progress-bar bg-bar-background-1" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="col-lg-7 pt-4">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-1" role="progressbar" style="width: 26%;" aria-valuenow="26" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
-                            <div class="col-lg-2 font-size-12">
-                                75%
+                            <div class="col-lg-2 PLF_2022">
+                                26%
                             </div>
-                            <div class="col-lg-3 font-size-12">
+                            <div class="col-lg-3 overview_width">
                                 2023
                             </div>
-                            <div class="col-lg-7 pt-5">
-                                <div class="progress progress-thin" style="height: 10px;">
-                                    <div class="progress-bar bg-bar-background-2" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-2" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
-                            <div class="col-lg-2 font-size-12">
-                                65%
-                            </div>
-                            <div class="col-lg-3 font-size-12">
-                                2023 <span class="badge bg-primary font-size-10">C</span>
-                            </div>
-                            <div class="col-lg-7 pt-5">
-                                <div class="progress progress-thin" style="height: 10px;">
-                                    <div class="progress-bar bg-bar-background-3" role="progressbar" style="width: 43%" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 font-size-12">
-                                43%
-                            </div>
-                            <div class="col-lg-3 font-size-12">
-                                2024
-                            </div>
-                            <div class="col-lg-7 pt-5">
-                                <div class="progress progress-thin" style="height: 10px;">
-                                    <div class="progress-bar bg-bar-background-4" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 font-size-12">
+                            <div class="col-lg-2 overview_width">
                                 100%
                             </div>
-                            <hr>
+                            <div class="col-lg-3 overview_width">
+                                2023 <span class="badge bdg-2580D3">C</span>
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-3" role="progressbar" style="width: 82%" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                82%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2024
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-4" role="progressbar" style="width: 93%" aria-valuenow="93" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                93%
+                            </div>
                         </div>
+                        <div class="border-bottom"></div>
                     </div>
+                </div>
+                <div class="col-lg-3 mrl_light_shadow">
+                    <div class="shadow p-2 bg-body rounded">
+                        <div class="col-12 badge bg light-shadow text-dark text-start">
+                            Sales
+                        </div>
+                        <div class="row mt-10">
+                            <div class="col-lg-3 PLF_2022">
+                                2022
+                            </div>
+                            <div class="col-lg-7 pt-4">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-1" role="progressbar" style="width: 26%;" aria-valuenow="26" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 PLF_2022">
+                                26%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2023
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-2" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                100%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2023 <span class="badge bdg-2580D3">C</span>
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-3" role="progressbar" style="width: 82%" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                82%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2024
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-4" role="progressbar" style="width: 93%" aria-valuenow="93" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                93%
+                            </div>
+                        </div>
+                        <div class="border-bottom"></div>
+                    </div>
+                </div>
+                <div class="col-lg-2 mrl_light_shadow">
+                    <div class="shadow p-2 bg-body rounded">
+                        <div class="col-12 badge bg light-shadow text-dark text-start">
+                            Sales
+                        </div>
+                        <div class="row mt-10">
+                            <div class="col-lg-3 PLF_2022">
+                                2022
+                            </div>
+                            <div class="col-lg-7 pt-4">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-1" role="progressbar" style="width: 26%;" aria-valuenow="26" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 PLF_2022">
+                                26%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2023
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-2" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                100%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2023 <span class="badge bdg-2580D3">C</span>
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-3" role="progressbar" style="width: 82%" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                82%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2024
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-4" role="progressbar" style="width: 93%" aria-valuenow="93" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                93%
+                            </div>
+                        </div>
+                        <div class="border-bottom"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1 mt-40">
+                    <div class="col-6 text-center">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
+                    </div>
+                    <div class="col-12">
+                        <span class="badge bgAAR-1">AAR</span>
+                    </div>
+                    <div class="col-12">
+                        <span class="badge bgAAR1_green">AAR</span>
+                    </div>
+                    <div class="col-12">
+                        <span class="badge bgART1warning">ATR</span>
+                    </div>
+                    <div class="col-12">
+                        <span class="badge bgATRworm">ATR</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 mrl_light_shadow">
+                    <div class="shadow p-2 bg-body rounded">
+                        <div class="col-12 badge bg light-shadow text-dark text-start">
+                            Sales
+                        </div>
+                        <div class="row mt-10">
+                            <div class="col-lg-3 PLF_2022">
+                                2022
+                            </div>
+                            <div class="col-lg-7 pt-4">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-1" role="progressbar" style="width: 26%;" aria-valuenow="26" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 PLF_2022">
+                                26%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2023
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-2" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                100%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2023 <span class="badge bdg-2580D3">C</span>
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-3" role="progressbar" style="width: 82%" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                82%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2024
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-4" role="progressbar" style="width: 93%" aria-valuenow="93" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                93%
+                            </div>
+                        </div>
+                        <div class="border-bottom"></div>
+                    </div>
+                </div>
+                <div class="col-lg-3 mrl_light_shadow">
+                    <div class="shadow p-2 bg-body rounded">
+                        <div class="col-12 badge bg light-shadow text-dark text-start">
+                            Sales
+                        </div>
+                        <div class="row mt-10">
+                            <div class="col-lg-3 PLF_2022">
+                                2022
+                            </div>
+                            <div class="col-lg-7 pt-4">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-1" role="progressbar" style="width: 26%;" aria-valuenow="26" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 PLF_2022">
+                                26%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2023
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-2" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                100%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2023 <span class="badge bdg-2580D3">C</span>
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-3" role="progressbar" style="width: 82%" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                82%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2024
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-4" role="progressbar" style="width: 93%" aria-valuenow="93" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                93%
+                            </div>
+                        </div>
+                        <div class="border-bottom"></div>
+                    </div>
+                </div>
+                <div class="col-lg-3 mrl_light_shadow">
+                    <div class="shadow p-2 bg-body rounded">
+                        <div class="col-12 badge bg light-shadow text-dark text-start">
+                            Sales
+                        </div>
+                        <div class="row mt-10">
+                            <div class="col-lg-3 PLF_2022">
+                                2022
+                            </div>
+                            <div class="col-lg-7 pt-4">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-1" role="progressbar" style="width: 26%;" aria-valuenow="26" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 PLF_2022">
+                                26%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2023
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-2" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                100%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2023 <span class="badge bdg-2580D3">C</span>
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-3" role="progressbar" style="width: 82%" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                82%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2024
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-4" role="progressbar" style="width: 93%" aria-valuenow="93" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                93%
+                            </div>
+                        </div>
+                        <div class="border-bottom"></div>
+                    </div>
+                </div>
+                <div class="col-lg-2 mrl_light_shadow">
+                    <div class="shadow p-2 bg-body rounded">
+                        <div class="col-12 badge bg light-shadow text-dark text-start">
+                            Sales
+                        </div>
+                        <div class="row mt-10">
+                            <div class="col-lg-3 PLF_2022">
+                                2022
+                            </div>
+                            <div class="col-lg-7 pt-4">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-1" role="progressbar" style="width: 26%;" aria-valuenow="26" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 PLF_2022">
+                                26%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2023
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-2" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                100%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2023 <span class="badge bdg-2580D3">C</span>
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-3" role="progressbar" style="width: 82%" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                82%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2024
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-4" role="progressbar" style="width: 93%" aria-valuenow="93" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                93%
+                            </div>
+                        </div>
+                        <div class="border-bottom"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1 mt-40">
+                    <div class="col-6 text-center">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
+                    </div>
+                    <div class="col-12">
+                        <span class="badge bgAAR-1">AAR</span>
+                    </div>
+                    <div class="col-12">
+                        <span class="badge bgAAR1_green">AAR</span>
+                    </div>
+                    <div class="col-12">
+                        <span class="badge bgART1warning">ATR</span>
+                    </div>
+                    <div class="col-12">
+                        <span class="badge bgATRworm">ATR</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 mrl_light_shadow">
+                    <div class="shadow p-2 bg-body rounded">
+                        <div class="col-12 badge bg light-shadow text-dark text-start">
+                            Sales
+                        </div>
+                        <div class="row mt-10">
+                            <div class="col-lg-3 PLF_2022">
+                                2022
+                            </div>
+                            <div class="col-lg-7 pt-4">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-1" role="progressbar" style="width: 26%;" aria-valuenow="26" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 PLF_2022">
+                                26%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2023
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-2" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                100%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2023 <span class="badge bdg-2580D3">C</span>
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-3" role="progressbar" style="width: 82%" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                82%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2024
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-4" role="progressbar" style="width: 93%" aria-valuenow="93" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                93%
+                            </div>
+                        </div>
+                        <div class="border-bottom"></div>
+                    </div>
+                </div>
+                <div class="col-lg-3 mrl_light_shadow">
+                    <div class="shadow p-2 bg-body rounded">
+                        <div class="col-12 badge bg light-shadow text-dark text-start">
+                            Sales
+                        </div>
+                        <div class="row mt-10">
+                            <div class="col-lg-3 PLF_2022">
+                                2022
+                            </div>
+                            <div class="col-lg-7 pt-4">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-1" role="progressbar" style="width: 26%;" aria-valuenow="26" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 PLF_2022">
+                                26%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2023
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-2" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                100%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2023 <span class="badge bdg-2580D3">C</span>
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-3" role="progressbar" style="width: 82%" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                82%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2024
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-4" role="progressbar" style="width: 93%" aria-valuenow="93" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                93%
+                            </div>
+                        </div>
+                        <div class="border-bottom"></div>
+                    </div>
+                </div>
+                <div class="col-lg-3 mrl_light_shadow">
+                    <div class="shadow p-2 bg-body rounded">
+                        <div class="col-12 badge bg light-shadow text-dark text-start">
+                            Sales
+                        </div>
+                        <div class="row mt-10">
+                            <div class="col-lg-3 PLF_2022">
+                                2022
+                            </div>
+                            <div class="col-lg-7 pt-4">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-1" role="progressbar" style="width: 26%;" aria-valuenow="26" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 PLF_2022">
+                                26%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2023
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-2" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                100%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2023 <span class="badge bdg-2580D3">C</span>
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-3" role="progressbar" style="width: 82%" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                82%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2024
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-4" role="progressbar" style="width: 93%" aria-valuenow="93" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                93%
+                            </div>
+                        </div>
+                        <div class="border-bottom"></div>
+                    </div>
+                </div>
+                <div class="col-lg-2 mrl_light_shadow">
+                    <div class="shadow p-2 bg-body rounded">
+                        <div class="col-12 badge bg light-shadow text-dark text-start">
+                            Sales
+                        </div>
+                        <div class="row mt-10">
+                            <div class="col-lg-3 PLF_2022">
+                                2022
+                            </div>
+                            <div class="col-lg-7 pt-4">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-1" role="progressbar" style="width: 26%;" aria-valuenow="26" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 PLF_2022">
+                                26%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2023
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-2" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                100%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2023 <span class="badge bdg-2580D3">C</span>
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-3" role="progressbar" style="width: 82%" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                82%
+                            </div>
+                            <div class="col-lg-3 overview_width">
+                                2024
+                            </div>
+                            <div class="col-lg-7 PLF_msr">
+                                <div class="progress progress-thin" style="height: 8px;">
+                                    <div class="progress-bar bg-bar-background-4" role="progressbar" style="width: 93%" aria-valuenow="93" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 overview_width">
+                                93%
+                            </div>
+                        </div>
+                        <div class="border-bottom"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="DataDistionary" tabindex="-1" aria-labelledby="DataDistionaryLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content modal-DataDistionary">
+            <div class="modal-header" style="border: none;">
+                <div id="DataDistionaryLabel">
+                    Data Dictionary
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6 Accumulate_text">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="Dark_Monthly"> Accumulate
+                    </div>
+                    <div class="col-6 Accumulate_text">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="Dark_Monthly"> Monthly
+                    </div>
+                    <hr class="mt-5">
+                </div>
+                <div class="row">
+                    <div class="col-4 text-end">
+                        <span class="AC-Primary"> AAR </span>
+                    </div>
+                    <div class="col-8 AC-Accumulate">
+                        Accumulate Actual Ratio
+                    </div>
+                    <div class="col-4 text-end">
+                        <span class="AC-Success"> AAR </span>
+                    </div>
+                    <div class="col-8 AC-Accumulate">
+                        Accumulate Actual Ratio
+                    </div>
+                    <div class="col-4 text-end">
+                        <span class="T-Warning"> AT </span>
+                    </div>
+                    <div class="col-8 AC-Accumulate">
+                        Accumulate Target
+                    </div>
+                    <div class="col-4 text-end">
+                        <span class="T-Warning"> ATR </span>
+                    </div>
+                    <div class="col-8 AC-Accumulate">
+                        Accumulate Target ratio
+                    </div>
+                    <div class="col-4 text-end">
+                        <span class="T-bule"> ATR </span>
+                    </div>
+                    <div class="col-8 AC-Accumulate">
+                        Accumulate Target ratio
+                    </div>
+                    <hr>
+
+                    <div class="col-4 text-end">
+                        <span class="AC-Success"> AC </span>
+                    </div>
+                    <div class="col-8 AC-Accumulate">
+                        Actual
+                    </div>
+                    <div class="col-4 text-end">
+                        <span class="T-Warning"> T </span>
+                    </div>
+                    <div class="col-8 AC-Accumulate">
+                        Actual
+                    </div>
+                    <hr>
                 </div>
             </div>
         </div>
