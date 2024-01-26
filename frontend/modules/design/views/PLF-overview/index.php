@@ -43,10 +43,10 @@ $this->title = 'PLF Overview';
                         <strong>PL Contents</strong>
                     </div>
                     <div class="col-2 text-secondary">
-                        <img src="<?= Yii::$app->homeUrl ?>image/calendar.png" style="width: 13px;"> &nbsp; <span class="font-size-12"> Current Year</span>
+                        <img src="<?= Yii::$app->homeUrl ?>image/calendar.png" style="width: 13px;margin-left:-40px;"> &nbsp; <span class="font-size-12"> Current Year</span>
                     </div>
                     <div class="col-2">
-                        <select class="form-select text-primary font-size-12" aria-label="Default select example" style="width: 6rem;">
+                        <select class="form-select text-primary font-size-12" aria-label="Default select example" style="width: 6rem;margin-left:-100px;">
                             <option selected value="">Select</option>
                             <option value="1">2020</option>
                             <option value="2">2021</option>
@@ -54,7 +54,6 @@ $this->title = 'PLF Overview';
                             <option value="4">2024</option>
                         </select>
                     </div>
-
                     <div class="col-6 text-secondary font-size-12 pt-5 text-end">
                         <strong> F.Y. 2023 (Annual)</strong>
                     </div>

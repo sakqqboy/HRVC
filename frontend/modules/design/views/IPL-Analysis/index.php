@@ -4,7 +4,7 @@ $this->title = 'IPL Analysis';
 
 <div class="col-12 mt-90 alert background-Planning">
     <div class="col-12 planning">
-        <i class="fa fa-database" aria-hidden="true"></i> Financial Planning
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FinanicalPlanning.png" class="images_Dark_FinanicalPlanning"> Financial Planning
     </div>
     <div class="col-12 mt-20">
         <div class="shadow p-3 mb-5 bg-body rounded alert2-secondary3">
@@ -13,10 +13,10 @@ $this->title = 'IPL Analysis';
                     <a class="nav-link text-dark" id="pills-Forcast-tab" data-bs-toggle="pill" data-bs-target="#pills-Forcast" type="button" role="tab" aria-controls="pills-Forcast" aria-selected="true"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/PL-Forecast.png" class="images_PLForecast"> PL Forcast</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link text-dark" id="pills-Golden-tab" data-bs-toggle="pill" data-bs-target="#pills-Golden" type="button" role="tab" aria-controls="pills-Golden" aria-selected="false"> Golden Ratio</a>
+                    <a class="nav-link text-dark" id="pills-Golden-tab" data-bs-toggle="pill" data-bs-target="#pills-Golden" type="button" role="tab" aria-controls="pills-Golden" aria-selected="false"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Golden-Ratio.png" class="images_performance_PL"> Golden Ratio</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link text-dark" id="pills-Accounts-tab" data-bs-toggle="pill" data-bs-target="#pills-Accounts" type="button" role="tab" aria-controls="pills-Accounts" aria-selected="false"> <i class="fa fa-clock-o" aria-hidden="true"></i> Forecast Accounts</a>
+                    <a class="nav-link text-dark" id="pills-Accounts-tab" data-bs-toggle="pill" data-bs-target="#pills-Accounts" type="button" role="tab" aria-controls="pills-Accounts" aria-selected="false"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Designation-1.png" class="images_performance_PL"> Forecast Accounts</a>
                 </li>
             </ul>
         </div>
@@ -261,7 +261,7 @@ $this->title = 'IPL Analysis';
                 </div>
                 <div class="col-lg-9 col-md-6 col-12">
                     <div class="col-12 text-primary">
-                        <a href="" class="no-underline-primary"> <i class="fa fa-chevron-left" aria-hidden="true"></i> Data Table</a>
+                        <a href="" class="no-underline-primary font-size-13"> <i class="fa fa-chevron-left" aria-hidden="true"></i> Data Table</a>
                     </div>
                     <div class="row">
                         <div class="col-lg-4">
@@ -352,6 +352,77 @@ $this->title = 'IPL Analysis';
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="DataDistionary" tabindex="-1" aria-labelledby="DataDistionaryLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content modal-DataDistionary">
+            <div class="modal-header" style="border: none;">
+                <div id="DataDistionaryLabel">
+                    Data Dictionary
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6 Accumulate_text">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="Dark_Monthly"> Accumulate
+                    </div>
+                    <div class="col-6 Accumulate_text">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="Dark_Monthly"> Monthly
+                    </div>
+                    <hr class="mt-5">
+                </div>
+                <div class="row">
+                    <div class="col-4 text-end">
+                        <span class="AC-Primary"> AAR </span>
+                    </div>
+                    <div class="col-8 AC-Accumulate">
+                        Accumulate Actual Ratio
+                    </div>
+                    <div class="col-4 text-end">
+                        <span class="AC-Success"> AAR </span>
+                    </div>
+                    <div class="col-8 AC-Accumulate">
+                        Accumulate Actual Ratio
+                    </div>
+                    <div class="col-4 text-end">
+                        <span class="T-Warning"> AT </span>
+                    </div>
+                    <div class="col-8 AC-Accumulate">
+                        Accumulate Target
+                    </div>
+                    <div class="col-4 text-end">
+                        <span class="T-Warning"> ATR </span>
+                    </div>
+                    <div class="col-8 AC-Accumulate">
+                        Accumulate Target ratio
+                    </div>
+                    <div class="col-4 text-end">
+                        <span class="T-bule"> ATR </span>
+                    </div>
+                    <div class="col-8 AC-Accumulate">
+                        Accumulate Target ratio
+                    </div>
+                    <hr>
+
+                    <div class="col-4 text-end">
+                        <span class="AC-Success"> AC </span>
+                    </div>
+                    <div class="col-8 AC-Accumulate">
+                        Actual
+                    </div>
+                    <div class="col-4 text-end">
+                        <span class="T-Warning"> T </span>
+                    </div>
+                    <div class="col-8 AC-Accumulate">
+                        Actual
+                    </div>
+                    <hr>
                 </div>
             </div>
         </div>

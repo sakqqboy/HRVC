@@ -16,6 +16,8 @@
 .button-link {
     color: rgb(32, 140, 249);
     font-weight: 500;
+    padding-left: 3px;
+    padding-right: 3px;
 }
 
 .button-link:hover {
