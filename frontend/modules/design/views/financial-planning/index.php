@@ -1914,13 +1914,26 @@ $this->title = 'Financial Planning';
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-lg-5 col-md-6 col-6">
-                            <div class="set_fontFrom">From</div>
-                            <select class="form-select select_Fromplanning" aria-label="Default select example">
-                                <option selected value="">select</option>
-                                <option value="TH">Thailand BTH</option>
-                                <option value="BDT">Bangladresh BDT</option>
-                                <option value="AED">America</option>
-                            </select>
+                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.3/css/bootstrap-select.css" />
+                            <div class="select_picker">
+                                <div class="select_Fromplanning">
+                                    <div class="set_fontFrom">From</div>
+                                </div>
+                                <div class="row">
+                                    <select class="selectpicker" data-show-subtext="true" data-live-search="true">
+                                        <option>John Smith</option>
+                                        <option>Alex Johnson</option>
+                                        <option>Kevin Warren</option>
+                                        <option>Super Mario</option>
+                                        <option>Allen Martinez</option>
+                                        <option>Marvin Liberty</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+                            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.3/js/bootstrap-select.js"></script>
                         </div>
                         <div class="col-lg-2 col-md-6 col-6">
                             <div class="col-12 random_country">
@@ -1928,54 +1941,21 @@ $this->title = 'Financial Planning';
                             </div>
                         </div>
                         <div class="col-lg-5 col-md-6 col-6">
-                            <div class="set_fontFrom">To</div>
-                            <select class="form-select select_Fromplanning" aria-label="Default select example">
-                                <option selected value="">Select</option>
-                                <option value='Anaesthesia'>Anaesthesia</option>
-                                <option value='Anatomy and Physiology'>Anatomy and Physiology</option>
-                                <option value='Cardiology'>Cardiology</option>
-                                <option value='Clinical Skills'>Clinical Skills</option>
-                                <option value='Critical Care'>Critical Care</option>
-                                <option value='Dermatology'>Dermatology</option>
-                                <option value='Ear, Nose and Throat'>Ear, Nose and Throat</option>
-                                <option value='Emergency Medicine'>Emergency Medicine</option>
-                                <option value='Emergency Nursing'>Emergency Nursing</option>
-                                <option value='Endocrinology and Diabetes'>Endocrinology and Diabetes</option>
-                                <option value='Gastroenterology'>Gastroenterology</option>
-                                <option value='General Dentistry'>General Dentistry</option>
-                                <option value='General Medicine'>General Medicine</option>
-                                <option value='General Practice'>General Practice</option>
-                                <option value='Geriatrics'>Geriatrics</option>
-                                <option value='Haematology'>Haematology</option>
-                                <option value='Immunology'>Immunology</option>
-                                <option value='Internal Medicine'>Internal Medicine</option>
-                                <option value='Maxillofacial and Plastic Surgery'>Maxillofacial and Plastic Surgery</option>
-                                <option value='Microbiology'>Microbiology</option>
-                                <option value='Midwifery'>Midwifery</option>
-                                <option value='Nephrology'>Nephrology</option>
-                                <option value='Neurology'>Neurology</option>
-                                <option value='Nursing'>Nursing</option>
-                                <option value='Obstetrics and Gynaecology'>Obstetrics and Gynaecology</option>
-                                <option value='Occupational Health'>Occupational Health</option>
-                                <option value='Oncology'>Oncology</option>
-                                <option value='Ophthalmology'>Ophthalmology</option>
-                                <option value='Oral Medicine'>Oral Medicine</option>
-                                <option value='Orthopaedics'>Orthopaedics</option>
-                                <option value='Paediatric Nursing'>Paediatric Nursing</option>
-                                <option value='Paediatrics'>Paediatrics</option>
-                                <option value='Pain Medicine'>Pain Medicine</option>
-                                <option value='Palliative Care'>Palliative Care</option>
-                                <option value='Pathology and Laboratory Medicine'>Pathology and Laboratory Medicine</option>
-                                <option value='Pharmacology'>Pharmacology</option>
-                                <option value='Psychiatry'>Psychiatry</option>
-                                <option value='Public Health'>Public Health</option>
-                                <option value='Radiology'>Radiology</option>
-                                <option value='Respiratory'>Respiratory</option>
-                                <option value='Restorative Dentistry'>Restorative Dentistry</option>
-                                <option value='Rheumatology'>Rheumatology</option>
-                                <option value='Surgery'>Surgery</option>
-                                <option value='Urology'>Urology</option>
-                            </select>
+                            <div class="select_picker">
+                                <div class="select_Fromplanning">
+                                    <div class="set_fontFrom">To</div>
+                                </div>
+                                <div class="row">
+                                    <select class="selectpicker" data-show-subtext="true" data-live-search="true">
+                                        <option>John Smith</option>
+                                        <option>Alex Johnson</option>
+                                        <option>Kevin Warren</option>
+                                        <option>Super Mario</option>
+                                        <option>Allen Martinez</option>
+                                        <option>Marvin Liberty</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row mt-30">

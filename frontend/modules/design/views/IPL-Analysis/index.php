@@ -284,8 +284,8 @@ $this->title = 'IPL Analysis';
                             <div class="row">
                                 <div class="col-lg-3">
                                     <div class="alert light-shadow-3">
-                                        <div class="col-12 font-size-12">
-                                            <strong> Current Year-2022</strong>
+                                        <div class="col-12">
+                                            <div class="Variable_Ex"> Current Year-2022</div>
                                         </div>
                                     </div>
 
@@ -312,11 +312,11 @@ $this->title = 'IPL Analysis';
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="alert light-shadow-3">
-                                        <div class="col-10 font-size-12">
-                                            <strong> Previous Year</strong>
+                                        <div class="col-10">
+                                            <div class="Variable_Ex"> Previous Year</div>
                                         </div>
                                     </div>
-                                    <div class="card" style="border:none;">
+                                    <div class="card" style="border:none;height:4.6rem;">
                                         <div class="row font-size-12">
                                             <div class="col-7 pl-20 pt-8">
                                                 Actual
@@ -331,11 +331,11 @@ $this->title = 'IPL Analysis';
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="alert light-shadow-3">
-                                        <div class="col-10 font-size-12">
-                                            <strong> Forecasted Year</strong>
+                                        <div class="col-10">
+                                            <div class="Variable_Ex"> Forecasted Year</div>
                                         </div>
                                     </div>
-                                    <div class="card" style="border:none;">
+                                    <div class="card" style="border:none;height:4.6rem;">
                                         <div class="row font-size-12">
                                             <div class="col-5 pl-20 pt-8">
                                                 Target

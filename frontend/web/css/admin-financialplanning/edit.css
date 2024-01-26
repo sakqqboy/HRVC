@@ -88,6 +88,18 @@
     letter-spacing: -0.9px;
 }
 
+.months_lights_page {
+    border: none;
+    margin-left: 3px;
+    border-radius: 4px;
+    width: 3.2rem;
+    height: 60px;
+    padding-top: 5px;
+    background-color: #ececec;
+}
+
+
+
 .months_lights {
     border: none;
     margin-left: 3px;
@@ -95,7 +107,7 @@
     width: 3.2rem;
     height: 60px;
     padding-top: 5px;
-    background-color: #ececec;
+    background-color: #FAFAFA;
 }
 
 .images_CoolapseAside1 {
@@ -150,12 +162,12 @@
     padding-top: 8px;
 }
 
-.select_Fromplanning {
+/* .select_Fromplanning {
     font-size: 13px;
     margin-top: 5px;
     letter-spacing: -0.8px;
     font-family: 'Sf pro display';
-}
+} */
 
 .select_Toplanning {
     font-size: 13px;
@@ -177,7 +189,7 @@
 .result_country {
     margin-top: 30px;
     font-size: 13px;
-    letter-spacing: -0.7px;
+    letter-spacing: -0.5px;
     font-family: 'Sf pro display';
 }
 

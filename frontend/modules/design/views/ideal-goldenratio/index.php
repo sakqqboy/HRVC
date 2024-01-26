@@ -40,80 +40,86 @@ $this->title = 'Ideal Golden Ratio';
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-12 mt-30 badge bg-primary-sec3">
-                    <div class="row">
-                        <div class="col-4 text-secondary">
-                            <img src="<?= Yii::$app->homeUrl ?>image/calendar.png" class="image-current-year">
-                            <span class="font-size-12"> Current Year </span>
-                        </div>
-                        <div class="col-3 pl-20">
-                            <select class="form-select select-secondate" aria-label="Default select example">
-                                <option selected value="">Select</option>
-                                <option value="1">2020</option>
-                                <option value="2">2021</option>
-                                <option value="3">2022</option>
-                                <option value="4">2024</option>
-                            </select>
-                        </div>
-                        <div class="col-5 text-end">
-                            <div class="text-secondary font-size-12">
-                                <strong> F.Y. 2023</strong>
+                <div class="col-lg-3 col-md-6 col-12 mt-30">
+                    <div class="badge bg-primary-sec3">
+                        <div class="row">
+                            <div class="col-4 text-secondary">
+                                <img src="<?= Yii::$app->homeUrl ?>image/calendar.png" class="image-current-year">
+                                <span class="font-size-12"> Current Year </span>
+                            </div>
+                            <div class="col-3 pl-20">
+                                <select class="form-select select-secondate" aria-label="Default select example">
+                                    <option selected value="">Select</option>
+                                    <option value="1">2020</option>
+                                    <option value="2">2021</option>
+                                    <option value="3">2022</option>
+                                    <option value="4">2024</option>
+                                </select>
+                            </div>
+                            <div class="col-5 text-end">
+                                <div class="text-secondary font-size-12">
+                                    <div class="FY"> F.Y. 2023</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-9 col-md-6 col-12 badge bg-primary-sec4 mt-30">
-                    <div class="row">
-                        <div class="col-1 font-size-12 text-secondary pt-5">
-                            <img src="<?= Yii::$app->homeUrl ?>image/dollar.png" class="imagedollar"> <span class="Roundup_fontsmall">Currency</span>
-                        </div>
-                        <div class="col-2 pt-5">
-                            <select class="form-select  select-secondate" aria-label="Default select example">
-                                <option selected value=""> BTH (฿)</option>
-                                <option value="1">2020</option>
-                                <option value="2">2021</option>
-                                <option value="3">2022</option>
-                                <option value="4">2023</option>
-                                <option value="5">2024</option>
-                            </select>
-                        </div>
-                        <div class="col-1 font-size-12 pt-5 text-secondary" style="margin-left:-35px;">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Round-Up.png" class="Round_radio"><span class="Roundup_fontsmall">Round Up</span>
-                        </div>
-                        <div class="col-2 pt-5 pl-15">
-                            <select class="form-select select-secondate" aria-label="Default select example">
-                                <option selected value=""> None</option>
-                                <option value="1">2020</option>
-                                <option value="2">2021</option>
-                                <option value="3">2022</option>
-                                <option value="4">2024</option>
-                            </select>
-                        </div>
-                        <div class="col-2" style="margin-left:-35px;">
-                            <a href="" class="no-underline-black link-Ideal"> Ideal Golden Ratio</a>
-                        </div>
-                        <div class="col-2" style="margin-left:-30px;">
-                            <a href="" class="no-underline-black link-Ideal"> Actual Last Year</a>
-                        </div>
-                        <div class="col-1" style="margin-left:-25px;">
-                            <a href="" class="no-underline-black link-Ideal"> Current Year Target</a>
-                        </div>
-                        <div class="col-1" style="margin-left:55px;">
-                            <a href="" class="no-underline-black link-Ideal"> Next Year Target</a>
+                <div class="col-lg-9 col-md-6 col-12 mt-30">
+                    <div class=" badge bg-primary-sec4">
+                        <div class="row">
+                            <div class="col-1 font-size-12 text-secondary pt-5">
+                                <img src="<?= Yii::$app->homeUrl ?>image/dollar.png" class="imagedollar"> <span class="Roundup_fontsmall">Currency</span>
+                            </div>
+                            <div class="col-2 pt-5">
+                                <select class="form-select  select-secondate" aria-label="Default select example">
+                                    <option selected value=""> BTH (฿)</option>
+                                    <option value="1">2020</option>
+                                    <option value="2">2021</option>
+                                    <option value="3">2022</option>
+                                    <option value="4">2023</option>
+                                    <option value="5">2024</option>
+                                </select>
+                            </div>
+                            <div class="col-1 font-size-12 pt-5 text-secondary" style="margin-left:-35px;">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Round-Up.png" class="Round_radio"><span class="Roundup_fontsmall">Round Up</span>
+                            </div>
+                            <div class="col-2 pt-5 pl-15">
+                                <select class="form-select select-secondate" aria-label="Default select example">
+                                    <option selected value=""> None</option>
+                                    <option value="1">2020</option>
+                                    <option value="2">2021</option>
+                                    <option value="3">2022</option>
+                                    <option value="4">2024</option>
+                                </select>
+                            </div>
+                            <div class="col-2" style="margin-left:-35px;">
+                                <a href="" class="no-underline-black link-Ideal"> Ideal Golden Ratio</a>
+                            </div>
+                            <div class="col-2" style="margin-left:-30px;">
+                                <a href="" class="no-underline-black link-Ideal"> Actual Last Year</a>
+                            </div>
+                            <div class="col-1" style="margin-left:-25px;">
+                                <a href="" class="no-underline-black link-Ideal"> Current Year Target</a>
+                            </div>
+                            <div class="col-1" style="margin-left:55px;">
+                                <a href="" class="no-underline-black link-Ideal"> Next Year Target</a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="row mt-20">
-                        <div class="col-lg-3 col-md-6 col-12 card al-pad">
-                            <div class="col-12 text-end">
-                                <span class="badge bg-lig1 text-dark"> Sales</span>
-                            </div>
-                            <div class="col-12 text-center pt-30">
-                                Sales
-                            </div>
-                            <div class="col-12 text-center">
-                                <strong> <?= number_format(100.0) ?>%</strong>
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <div class="card al-pad">
+                                <div class="col-12 text-end">
+                                    <span class="badge bg-lig1 text-dark"> Sales</span>
+                                </div>
+                                <div class="col-12 text-center pt-80">
+                                    Sales
+                                </div>
+                                <div class="col-12 text-center">
+                                    <strong> <?= number_format(100.0) ?>%</strong>
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-6 col-12 ">
@@ -136,7 +142,7 @@ $this->title = 'Ideal Golden Ratio';
                                         <div class="col-12 text-end">
                                             <span class="badge bg-lig1 text-dark"> Gross Profit</span>
                                         </div>
-                                        <div class="col-12 text-center pt-20">
+                                        <div class="col-12 text-center pt-80">
                                             Gross Profit
                                         </div>
                                         <div class="col-12 text-center">
@@ -196,17 +202,22 @@ $this->title = 'Ideal Golden Ratio';
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-3 col-md-6 col-12 card alert-alpri5">
-                            <div class="col-12 text-center">
-                                Ideal Golden Ratio
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <div class="card alert-alpri5">
+                                <div class="col-12 text-center pt-10">
+                                    Ideal Golden Ratio
+                                </div>
                             </div>
                         </div>
-                        <div class="col-lg-9 col-md-6 col-12 ">
+                        <div class="col-lg-9 col-md-6 col-12">
                             <div class="card alert-alpri6">
                                 <div class="row">
-                                    <div class="col-7  Ideal-solid"></div>
-                                    <div class="col-3 text-end">Total</div>
-                                    <div class="col-2">
+                                    <div class="col-2"></div>
+                                    <div class="col-8 Ideal-solid"></div>
+                                    <div class="col-1">
+                                        Total
+                                    </div>
+                                    <div class="col-1">
                                         <div role="progressbar4" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="--value:100"></div>
                                     </div>
                                 </div>

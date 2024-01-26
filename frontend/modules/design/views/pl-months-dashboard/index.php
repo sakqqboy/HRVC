@@ -429,70 +429,63 @@ $this->title = 'Default 12 Months Dashboard';
                         <div class="col-12 text-center">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                         </div>
-                        <div class="col-12 text-center pt-25">
+                        <div class="col-12 text-center pt-35">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                             <div class="m-calendar"></div>
                         </div>
                         <div class="col-12 text-center">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                         </div>
-                        <div class="col-12 text-center pt-30">
+                        <div class="col-12 text-center pt-35">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                             <div class="m-calendar"></div>
                         </div>
                         <div class="col-12 text-center">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                         </div>
-                        <div class="col-12 text-center pt-25">
+                        <div class="col-12 text-center pt-35">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                             <div class="m-calendar"></div>
                         </div>
                         <div class="col-12 text-center">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                         </div>
-                        <div class="col-12 text-center pt-25">
+                        <div class="col-12 text-center pt-35">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                             <div class="m-calendar"></div>
                         </div>
                         <div class="col-12 text-center">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                         </div>
-                        <div class="col-12 text-center pt-25">
+                        <div class="col-12 text-center pt-35">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                             <div class="m-calendar"></div>
                         </div>
                         <div class="col-12 text-center">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                         </div>
-                        <div class="col-12 text-center pt-25">
+                        <div class="col-12 text-center pt-35">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                             <div class="m-calendar"></div>
                         </div>
                         <div class="col-12 text-center">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                         </div>
-                        <div class="col-12 text-center pt-30">
+                        <div class="col-12 text-center pt-35">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                             <div class="m-calendar"></div>
                         </div>
                         <div class="col-12 text-center">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                         </div>
-                        <div class="col-12 text-center pt-30">
+                        <div class="col-12 text-center pt-38">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                             <div class="m-calendar"></div>
                         </div>
                         <div class="col-12 text-center">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
                         </div>
-                        <div class="col-12 text-center pt-30">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
-                            <div class="m-calendar"></div>
-                        </div>
-                        <div class="col-12 text-center">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="icons_Monthly">
-                        </div>
-                        <div class="col-12 text-center pt-20">
+                        <div class="col-12 text-center pt-38">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="icons_Monthly">
                             <div class="m-calendar"></div>
                         </div>
@@ -550,7 +543,7 @@ $this->title = 'Default 12 Months Dashboard';
                     </div>
                     <div class="col-12">
                         <div class="row">
-                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 card months_lights mt-15">
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 card months_lights_page mt-15">
                                 <div class="col-12 month12_January">
                                     January <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/ExpandAside.png" class="images_CoolapseAside1">
                                 </div>
@@ -558,7 +551,7 @@ $this->title = 'Default 12 Months Dashboard';
                                     <div class="badge dge_AAR_green1">AC</div> <span class="AA-2022">2023</span>
                                 </div>
                             </div>
-                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 card months_lights mt-15">
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 card months_lights_page mt-15">
                                 <div class="col-12 month12_January">
                                     February <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/ExpandAside.png" class="images_CoolapseAside1">
                                 </div>
@@ -566,7 +559,7 @@ $this->title = 'Default 12 Months Dashboard';
                                     <div class="badge dge_AAR_green1">AC</div> <span class="AA-2022">2023</span>
                                 </div>
                             </div>
-                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 card months_lights mt-15">
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 card months_lights_page mt-15">
                                 <div class="col-12 month12_January">
                                     March <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/ExpandAside.png" class="images_CoolapseAside1">
                                 </div>
@@ -574,7 +567,7 @@ $this->title = 'Default 12 Months Dashboard';
                                     <div class="badge dge_AAR_green">AC</div> <span class="AA-2022">2023</span>
                                 </div>
                             </div>
-                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 card months_lights mt-15">
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 card months_lights_page mt-15">
                                 <div class="col-12 month12_January">
                                     April <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/ExpandAside.png" class="images_CoolapseAside1">
                                 </div>
@@ -582,7 +575,7 @@ $this->title = 'Default 12 Months Dashboard';
                                     <div class="badge dge_AAR_green">AC</div> <span class="AA-2022">2023</span>
                                 </div>
                             </div>
-                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 card months_lights mt-15">
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 card months_lights_page mt-15">
                                 <div class="col-12 month12_January">
                                     May <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/ExpandAside.png" class="images_CoolapseAside1">
                                 </div>
@@ -590,7 +583,7 @@ $this->title = 'Default 12 Months Dashboard';
                                     <div class="badge dge_AAR_green">AC</div> <span class="AA-2022">2023</span>
                                 </div>
                             </div>
-                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 card months_lights mt-15">
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 card months_lights_page mt-15">
                                 <div class="col-12 month12_January">
                                     June <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/ExpandAside.png" class="images_CoolapseAside1">
                                 </div>
@@ -598,7 +591,7 @@ $this->title = 'Default 12 Months Dashboard';
                                     <div class="badge dge_AAR_green">AC</div> <span class="AA-2022">2023</span>
                                 </div>
                             </div>
-                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 card months_lights mt-15">
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 card months_lights_page mt-15">
                                 <div class="col-12 month12_January">
                                     July <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/ExpandAside.png" class="images_CoolapseAside1">
                                 </div>
@@ -606,7 +599,7 @@ $this->title = 'Default 12 Months Dashboard';
                                     <div class="badge dge_AAR_green">AC</div> <span class="AA-2022">2023</span>
                                 </div>
                             </div>
-                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 card months_lights mt-15">
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 card months_lights_page mt-15">
                                 <div class="col-12 month12_January">
                                     August <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/ExpandAside.png" class="images_CoolapseAside1">
                                 </div>
@@ -614,7 +607,7 @@ $this->title = 'Default 12 Months Dashboard';
                                     <div class="badge dge_AAR_green">AC</div> <span class="AA-2022">2023</span>
                                 </div>
                             </div>
-                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 card months_lights mt-15">
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 card months_lights_page mt-15">
                                 <div class="col-12 month12_January">
                                     September <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/ExpandAside.png" class="images_CoolapseAside1">
                                 </div>
@@ -622,7 +615,7 @@ $this->title = 'Default 12 Months Dashboard';
                                     <div class="badge dge_AAR_green">AC</div> <span class="AA-2022">2023</span>
                                 </div>
                             </div>
-                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 card months_lights mt-15">
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 card months_lights_page mt-15">
                                 <div class="col-12 month12_January">
                                     October <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/ExpandAside.png" class="images_CoolapseAside1">
                                 </div>
@@ -630,7 +623,7 @@ $this->title = 'Default 12 Months Dashboard';
                                     <div class="badge dge_AAR_green">AC</div> <span class="AA-2022">2023</span>
                                 </div>
                             </div>
-                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 card months_lights mt-15">
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 card months_lights_page mt-15">
                                 <div class="col-12 month12_January">
                                     November <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/ExpandAside.png" class="images_CoolapseAside1">
                                 </div>
@@ -638,7 +631,7 @@ $this->title = 'Default 12 Months Dashboard';
                                     <div class="badge dge_AAR_green">AC</div> <span class="AA-2022">2023</span>
                                 </div>
                             </div>
-                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 card months_lights mt-15">
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-1 card months_lights_page mt-15">
                                 <div class="col-12 month12_January">
                                     December <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/ExpandAside.png" class="images_CoolapseAside1">
                                 </div>
@@ -1873,15 +1866,78 @@ $this->title = 'Default 12 Months Dashboard';
         <div class="modal-content">
             <div class="container">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel"> Currency Conversion Rate</h5>
+                    <div class="modal-title" id="staticBackdropLabel"> <span class="Currency_Conversion_Rate">Currency Conversion Rate</span> </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-6 ">
-
-
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-6 col-6">
+                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.3/css/bootstrap-select.css" />
+                            <div class="select_picker">
+                                <div class="select_Fromplanning">
+                                    <div class="set_fontFrom">From</div>
+                                </div>
+                                <div class="row">
+                                    <select class="selectpicker" data-show-subtext="true" data-live-search="true">
+                                        <option>John Smith</option>
+                                        <option>Alex Johnson</option>
+                                        <option>Kevin Warren</option>
+                                        <option>Super Mario</option>
+                                        <option>Allen Martinez</option>
+                                        <option>Marvin Liberty</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+                            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.3/js/bootstrap-select.js"></script>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-6">
+                            <div class="col-12 random_country">
+                                <i class="fa fa-exchange To_selectweight" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-6 col-6">
+                            <div class="select_picker">
+                                <div class="select_Fromplanning">
+                                    <div class="set_fontFrom">To</div>
+                                </div>
+                                <div class="row">
+                                    <select class="selectpicker" data-show-subtext="true" data-live-search="true">
+                                        <option>John Smith</option>
+                                        <option>Alex Johnson</option>
+                                        <option>Kevin Warren</option>
+                                        <option>Super Mario</option>
+                                        <option>Allen Martinez</option>
+                                        <option>Marvin Liberty</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-30">
+                        <div class="col-lg-5 col-md-5 col-5">
+                            <div class="set_fontFrom">Mount</div>
+                            <input type="text" class="form-control select_Fromplanning" placeholder="1" disabled>
+                        </div>
+                        <div class="col-lg-2  col-md-5 col-5">
+                            <div class="col-12 random_country">
+                                <div class="To_selectweight">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/rendom.png" class="images_random1">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-5 col-5">
+                            <div class="set_fontFrom">Set Amount</div>
+                            <input type="text" class="form-control select_Toplanning" placeholder="115">
+                        </div>
+                    </div>
+                    <div class="col-12 result_country">
+                        1 BTH (฿) = 115 BDT (৳)
+                    </div>
+                    <div class="col-12 text-end">
+                        <span class="bg btn-convert" type="submit"> Convert</span>
                     </div>
                 </div>
             </div>
