@@ -91,7 +91,7 @@ $this->title = 'Current Year Target';
                                 </select>
                             </div>
                             <div class="col-2" style="margin-left:-35px;">
-                                <a href="" class="no-underline-black link-Ideal"> Ideal Golden Ratio</a>
+                                <a href="" class="no-underline-black link-Ideal" data-bs-toggle="modal" data-bs-target="#ModalIdealInput"> Ideal Golden Ratio</a>
                             </div>
                             <div class="col-2" style="margin-left:-30px;">
                                 <a href="" class="no-underline-black link-Ideal"> Actual Last Year</a>
@@ -258,19 +258,60 @@ $this->title = 'Current Year Target';
                 <div class="row mt-20 pr-20 pl-20">
                     <div class="col-sm-6">
                         <label for="exampleInputname" class="form-label Expense_Ratio">Variable Expense Ratio</label>
-                        <input type="number" class="form-control Expense_input" id="exampleInputNumberPersen" aria-describedby="">
+                        <input type="number" class="form-control Expense_input" id="exampleInputNumberPersen" aria-describedby="" placeholder=".................................%">
                     </div>
                     <div class="col-sm-6">
                         <label for="exampleInputname" class="form-label Expense_Ratio">Labor Cost Ratio</label>
-                        <input type="number" class="form-control Expense_input" id="exampleInputNumberPersen" aria-describedby="">
+                        <input type="number" class="form-control Expense_input" id="exampleInputNumberPersen" aria-describedby="" placeholder=".................................%">
                     </div>
                     <div class="col-sm-6 mt-20">
                         <label for="exampleInputname" class="form-label Expense_Ratio">Fixed Expense (Other) Ratio</label>
-                        <input type="number" class="form-control Expense_input" id="exampleInputNumberPersen" aria-describedby="">
+                        <input type="number" class="form-control Expense_input" id="exampleInputNumberPersen" aria-describedby="" placeholder=".................................%">
                     </div>
                     <div class="col-sm-6 mt-20">
                         <label for="exampleInputname" class="form-label Expense_Ratio">Operating Profit Ratio</label>
-                        <input type="number" class="form-control Expense_input" id="exampleInputNumberPersen" aria-describedby="">
+                        <input type="number" class="form-control Expense_input" id="exampleInputNumberPersen" aria-describedby="" placeholder=".................................%">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer pr-30" style="border:none;" data-bs-dismiss="modal">
+                <div type="button" class="badge bgCancelbodyfooter">Cancel</div>
+                <div type="button" class="badge bgCreatefooter">Create</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end -->
+
+<!-- Modal Ideal Input -->
+<div class="modal fade" id="ModalIdealInput" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="margin-top: 370px;margin-left:80px;">
+            <div class="modal-header">
+                <div class="modal-title F_Y_Input pr-20 pl-20" id="ModalIdealInput"><i class="fa fa-magic" aria-hidden="true"></i>&nbsp;&nbsp; Ideal Input</div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mt-20 pr-20 pl-20">
+                    <div class="col-sm-6">
+                        <label for="exampleInputname" class="form-label Expense_Ratio">Sales</label>
+                        <input type="number" class="form-control Expense_input" id="exampleInputNumberPersen" aria-describedby="" placeholder=".................................%">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="exampleInputname" class="form-label Expense_Ratio">Fixed Expense (Other) Ratio</label>
+                        <input type="number" class="form-control Expense_input" id="exampleInputNumberPersen" aria-describedby="" placeholder=".................................%">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="exampleInputname" class="form-label Expense_Ratio">Variable Expense Ratio</label>
+                        <input type="number" class="form-control Expense_input" id="exampleInputNumberPersen" aria-describedby="" placeholder=".................................%">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="exampleInputname" class="form-label Expense_Ratio">Operating Profit Ratio</label>
+                        <input type="number" class="form-control Expense_input" id="exampleInputNumberPersen" aria-describedby="" placeholder=".................................%">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="exampleInputname" class="form-label Expense_Ratio">Labor Cost</label>
+                        <input type="number" class="form-control Expense_input" id="exampleInputNumberPersen" aria-describedby="" placeholder=".................................%">
                     </div>
                 </div>
             </div>
