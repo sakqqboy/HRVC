@@ -332,7 +332,7 @@ $this->title = 'Forecast Accounts';
                                                     <div class="col-7">
                                                         <div class="col-12 Fixedother-solid">
                                                             <div class="col-12">
-                                                                <span class="badge bg-white Text_HumanResource"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Team.png" class="imagesTeam_Human"> Human Resource &nbsp;&nbsp; <?= number_format(2343) ?> </span>
+                                                                <span class="badge  bg-white Text_HumanResource"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Team.png" class="imagesTeam_Human"> Human Resource &nbsp;&nbsp; <?= number_format(2343) ?> </span>
                                                             </div>
                                                             <div class="col-8 users-solid1 text-end">
                                                                 Labor Share <span class="left_LaborShare"><?= number_format(36.2) ?>%</span>
@@ -340,11 +340,11 @@ $this->title = 'Forecast Accounts';
                                                             <div class="col-8 users-solid1 text-end">
                                                                 Labor Productivity <span class="left_LaborShare"><?= number_format(2.76) ?>%</span>
                                                             </div>
-                                                            <div class="col-12">
-                                                                <span class="badge bg-white Text_HumanResource"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Good.png" class="images_Goods"> Goods &nbsp;&nbsp; <?= number_format(5486) ?> </span>
+                                                            <div class="col-12 mt-10">
+                                                                <span class="badge bg-white Text_HumanResource"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Good.png" class="images_Goods"> Goods &nbsp;&nbsp; <span class="mr-50"></span> <?= number_format(5486) ?></span>
                                                             </div>
                                                             <div class="col-12">
-                                                                <span class="badge bg-white Text_HumanResource"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/imagelink-1.png" class="imagesTeam_Interest"> &nbsp; Interest <?= number_format(2678) ?> </span>
+                                                                <span class="badge bg-white Text_HumanResource"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/imagelink-1.png" class="imagesTeam_Interest"> Interest &nbsp;&nbsp; <span class="mr-50"></span><?= number_format(2678) ?> </span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -368,7 +368,7 @@ $this->title = 'Forecast Accounts';
                                                     </div>
                                                 </div>
                                                 <div class="col-12 text-center">
-                                                    <i class="fa fa-caret-up f-caret-up" aria-hidden="true"></i> <strong><?= number_format(1200000) ?></strong>
+                                                    <i class="fa fa-caret-up f-caret-up" aria-hidden="true"></i><strong> <?= number_format(1200000) ?></strong>
                                                 </div>
                                                 <div class="col-12 text-center pt-10 font-size-13">
                                                     <span class="badge dark-green">G</span> Operating Profit
@@ -390,7 +390,7 @@ $this->title = 'Forecast Accounts';
                             </div>
                         </div>
                         <div class="col-12 card cardexcellent">
-                            <div class="col-9 excellent">
+                            <div class="col-10 excellent">
                                 Super excellent company, has a
                                 great reserve of energy
                             </div>
@@ -404,12 +404,13 @@ $this->title = 'Forecast Accounts';
                                     <div class="excellent">Fixed Expense Productivity</div>
                                 </div>
                                 <div class="col-4 pt-20 text-center font-size-12">
+                                    <div class="badge bg-white Achieved_border"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Achieved.png"> Achieved</div>
                                     "SS"
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 card cardexcellent">
-                            <div class="col-9 excellent">
+                            <div class="col-10 excellent">
                                 Excellent company, has some reserve
                                 of energy
                             </div>
@@ -428,7 +429,7 @@ $this->title = 'Forecast Accounts';
                             </div>
                         </div>
                         <div class="col-12 card cardexcellent">
-                            <div class="col-9 excellent">
+                            <div class="col-10 excellent">
                                 Sound management company,
                                 has well competitiveness
                             </div>
@@ -447,7 +448,7 @@ $this->title = 'Forecast Accounts';
                             </div>
                         </div>
                         <div class="col-12 card cardexcellent">
-                            <div class="col-9 excellent">
+                            <div class="col-10 excellent">
                                 Breakeven point company, cannot be
                                 careless at all
                             </div>
@@ -466,7 +467,7 @@ $this->title = 'Forecast Accounts';
                             </div>
                         </div>
                         <div class="col-12 card cardexcellent">
-                            <div class="col-9 excellent">
+                            <div class="col-10 excellent">
                                 Deficit-ridden company, unsure future
                             </div>
                             <div class="row">
@@ -484,7 +485,7 @@ $this->title = 'Forecast Accounts';
                             </div>
                         </div>
                         <div class="col-12 card cardexcellent">
-                            <div class="col-9 excellent">
+                            <div class="col-10 excellent">
                                 Breakeven point company, cannot be
                                 careless at all
                             </div>

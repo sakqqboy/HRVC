@@ -37,3 +37,4 @@ new Chart(document.getElementById("mixed-chart"), {
         legend: { display: false }
     }
 });
+
