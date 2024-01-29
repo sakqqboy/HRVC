@@ -7,19 +7,19 @@ $this->title = 'Forecast Accounts';
 
 <div class="col-12 mt-90 alert background-Planning">
     <div class="col-12 planning">
-        <i class="fa fa-database" aria-hidden="true"></i> Financial Analysis
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FinanicalPlanning.png" class="images_Dark_FinanicalPlanning"> Financial Analysis
     </div>
     <div class="col-12 mt-20">
         <div class="shadow p-3 mb-5 bg-body rounded alert2-secondary3">
             <ul class="nav nav-pills" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link text-dark" id="pills-Forcast-tab" data-bs-toggle="pill" data-bs-target="#pills-Forcast" type="button" role="tab" aria-controls="pills-Forcast" aria-selected="true"> <i class="fa fa-usd" aria-hidden="true"></i> PL Forcast</a>
+                    <a class="nav-link text-dark" id="pills-Forcast-tab" data-bs-toggle="pill" data-bs-target="#pills-Forcast" type="button" role="tab" aria-controls="pills-Forcast" aria-selected="true"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/PL-Forecast.png" class="images_performance_PL"> PL Forcast</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link text-dark" id="pills-Golden-tab" data-bs-toggle="pill" data-bs-target="#pills-Golden" type="button" role="tab" aria-controls="pills-Golden" aria-selected="false"> Golden Ratio</a>
+                    <a class="nav-link text-dark" id="pills-Golden-tab" data-bs-toggle="pill" data-bs-target="#pills-Golden" type="button" role="tab" aria-controls="pills-Golden" aria-selected="false"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Golden-Ratio.png" class="images_performance_PL"> Golden Ratio</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link text-dark" id="pills-Accounts-tab" data-bs-toggle="pill" data-bs-target="#pills-Accounts" type="button" role="tab" aria-controls="pills-Accounts" aria-selected="false"> <i class="fa fa-clock-o" aria-hidden="true"></i> Forecast Accounts</a>
+                    <a class="nav-link text-dark" id="pills-Accounts-tab" data-bs-toggle="pill" data-bs-target="#pills-Accounts" type="button" role="tab" aria-controls="pills-Accounts" aria-selected="false"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Designation-1.png" class="images_performance_PL"> Forecast Accounts</a>
                 </li>
             </ul>
         </div>
@@ -27,20 +27,18 @@ $this->title = 'Forecast Accounts';
     <div class="col-12 mt-50">
         <div class="alert alert2-secondary3">
             <div class="row">
-                <div class="col-lg-9 col-md-6 col-12">
+                <div class="col-lg-8 col-md-6 col-12">
                     <div class="col-12">
-                        Monthly Forecasted Accounts
+                        <div class="radio_Golden19"> Monthly Forecasted Accounts </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <div class="col-12 text-end">
-                        <select class="form-select example-tok1" aria-label="Default select example">
-                            <option selected value="">Select</option>
-                            <option value="1">Tokyo Consulting firm</option>
-                            <option value="2">Tokyo Consulting Group</option>
-                            <option value="3">Tokyo Consulting Group</option>
-                        </select>
-                    </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <select class="form-select example-tok1" aria-label="Default select example">
+                        <option selected value="">Select</option>
+                        <option value="1">Tokyo Consulting firm</option>
+                        <option value="2">Tokyo Consulting Group</option>
+                        <option value="3">Tokyo Consulting Group</option>
+                    </select>
                 </div>
             </div>
             <div class="col-12 alert backgroundforecastaccounts">
@@ -334,19 +332,19 @@ $this->title = 'Forecast Accounts';
                                                     <div class="col-7">
                                                         <div class="col-12 Fixedother-solid">
                                                             <div class="col-12">
-                                                                <span class="badge bg-white text-dark" style="border-radius: 2px;"><i class=" fa fa-users" aria-hidden="true"></i> Human Resource <?= number_format(2343) ?> </span>
+                                                                <span class="badge bg-white Text_HumanResource"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Team.png" class="imagesTeam_Human"> Human Resource &nbsp;&nbsp; <?= number_format(2343) ?> </span>
                                                             </div>
-                                                            <div class="users-solid1 mt-5">
-                                                                Labor Share <span><?= number_format(36.2) ?>%</span>
+                                                            <div class="col-8 users-solid1 text-end">
+                                                                Labor Share <span class="left_LaborShare"><?= number_format(36.2) ?>%</span>
                                                             </div>
-                                                            <div class="users-solid1">
-                                                                Labor Share <span><?= number_format(2.76) ?>%</span>
-                                                            </div>
-                                                            <div class="col-12">
-                                                                <span class="badge bg-white text-dark mt-10" style="border-radius: 2px;"><i class="fa fa-cube" aria-hidden="true"></i> Goods <?= number_format(5486) ?> </span>
+                                                            <div class="col-8 users-solid1 text-end">
+                                                                Labor Productivity <span class="left_LaborShare"><?= number_format(2.76) ?>%</span>
                                                             </div>
                                                             <div class="col-12">
-                                                                <span class="badge bg-white text-dark mt-10" style="border-radius: 2px;"><i class="fa fa-codepen" aria-hidden="true"></i> Interest <?= number_format(2678) ?> </span>
+                                                                <span class="badge bg-white Text_HumanResource"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Good.png" class="images_Goods"> Goods &nbsp;&nbsp; <?= number_format(5486) ?> </span>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <span class="badge bg-white Text_HumanResource"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/imagelink-1.png" class="imagesTeam_Interest"> &nbsp; Interest <?= number_format(2678) ?> </span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -403,9 +401,9 @@ $this->title = 'Forecast Accounts';
                                 </div>
                                 <div class="col-4 pt-20 ss-solid">
                                     <strong> <?= number_format(52) ?> - <?= number_format(60) ?> &nbsp;times</strong>
-                                    <p>Fixed Expense Productivity</p>
+                                    <div class="excellent">Fixed Expense Productivity</div>
                                 </div>
-                                <div class="col-4 pt-20 text-center font-size-14">
+                                <div class="col-4 pt-20 text-center font-size-12">
                                     "SS"
                                 </div>
                             </div>
@@ -422,9 +420,9 @@ $this->title = 'Forecast Accounts';
                                 </div>
                                 <div class="col-4 pt-20 ss-solid">
                                     <strong> <?= number_format(52) ?> - <?= number_format(60) ?> &nbsp;times</strong>
-                                    <p>Fixed Expense Productivity</p>
+                                    <div class="excellent">Fixed Expense Productivity</div>
                                 </div>
-                                <div class="col-4 pt-20 text-center font-size-14">
+                                <div class="col-4 pt-20 text-center font-size-12">
                                     "S"
                                 </div>
                             </div>
@@ -441,9 +439,9 @@ $this->title = 'Forecast Accounts';
                                 </div>
                                 <div class="col-4 pt-20 ss-solid">
                                     <strong> <?= number_format(52) ?> - <?= number_format(60) ?> &nbsp;times</strong>
-                                    <p>Fixed Expense Productivity</p>
+                                    <div class="excellent">Fixed Expense Productivity</div>
                                 </div>
-                                <div class="col-4 pt-20 text-center font-size-14">
+                                <div class="col-4 pt-20 text-center font-size-12">
                                     "A"
                                 </div>
                             </div>
@@ -460,9 +458,9 @@ $this->title = 'Forecast Accounts';
                                 </div>
                                 <div class="col-4 pt-20 ss-solid">
                                     <strong> <?= number_format(52) ?> - <?= number_format(60) ?> &nbsp;times</strong>
-                                    <p>Fixed Expense Productivity</p>
+                                    <div class="excellent">Fixed Expense Productivity</div>
                                 </div>
-                                <div class="col-4 pt-20 text-center font-size-14">
+                                <div class="col-4 pt-20 text-center font-size-12">
                                     "B"
                                 </div>
                             </div>
@@ -478,9 +476,9 @@ $this->title = 'Forecast Accounts';
                                 </div>
                                 <div class="col-4 pt-20 ss-solid">
                                     <strong> <?= number_format(52) ?> - <?= number_format(60) ?> &nbsp;times</strong>
-                                    <p>Fixed Expense Productivity</p>
+                                    <div class="excellent">Fixed Expense Productivity</div>
                                 </div>
-                                <div class="col-4 pt-20 text-center font-size-14">
+                                <div class="col-4 pt-20 text-center font-size-12">
                                     "C"
                                 </div>
                             </div>
@@ -497,9 +495,9 @@ $this->title = 'Forecast Accounts';
                                 </div>
                                 <div class="col-4 pt-20 ss-solid">
                                     <strong> <?= number_format(52) ?> - <?= number_format(60) ?> &nbsp;times</strong>
-                                    <p>Fixed Expense Productivity</p>
+                                    <div class="excellent">Fixed Expense Productivity</div>
                                 </div>
-                                <div class="col-4 pt-20 text-center font-size-14">
+                                <div class="col-4 pt-20 text-center font-size-12">
                                     "D"
                                 </div>
                             </div>

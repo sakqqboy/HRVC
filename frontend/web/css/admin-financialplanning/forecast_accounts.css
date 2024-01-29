@@ -1,21 +1,24 @@
 .backgroundforecastaccounts {
     margin-top: 30px;
-    background-color: #FAFAFA;
+    background-color: #F4F6F9;
 }
 
 
 .Product-Appeal {
     font-size: 8px;
+    letter-spacing: -0.9px;
 }
 
 .Sensitivity {
     font-size: 8px;
     padding-top: 10px;
+    letter-spacing: -0.9px;
 }
 
 .forecast-price {
     font-size: 11px;
     padding-top: 20px;
+    letter-spacing: -0.9px;
 }
 
 .Rank {
@@ -26,9 +29,6 @@
     border-right: 2px lightgray solid;
 }
 
-/* .forecast-solid-display {
-    border-left: 0.5px lightgray solid;
-} */
 .backgroundforecastaccountss {
     background-color: #F0F2F4;
 }
@@ -43,12 +43,15 @@
 }
 
 .pr-forecast {
-    /* margin-left: -40px; */
     width: 130px;
 }
 
 .small-Annual {
     font-size: 12px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .small-Annual:hover {
@@ -64,9 +67,8 @@
 }
 
 .Business-color {
-    /* color: gray; */
-    font-size: 11.5px;
-    /* padding-top: 10px; */
+    font-size: 11px;
+    letter-spacing: -0.9px;
 }
 
 .Body-Sales {
@@ -179,30 +181,31 @@
 }
 
 .ss-solid {
-    border-right: 2px lightgray solid;
+    border-right: 1px lightgray solid;
     font-size: 9px;
 }
 
 .Super-solid {
-    border-right: 2px lightgray solid;
+    border-right: 1px lightgray solid;
     font-size: 9px;
+    letter-spacing: -0.9px;
 }
 
 .excellent {
-    font-size: 11px;
-    line-height: 16px;
+    font-size: 9px;
+    letter-spacing: -0.9px;
 }
 
 .cardexcellent:hover {
     background-color: rgb(247, 236, 125);
-    font-weight: 600;
-    font-size: 11px;
+    font-weight: 500;
+    font-size: 9px;
     cursor: default;
 }
 
 .users-solid1 {
     border-bottom: 1px rgb(184, 184, 184) solid;
-    text-align: center;
+    margin-top: 10px;
 }
 
 .Body-greenborder {
@@ -232,7 +235,7 @@
 
 .c-blacksale {
     background-color: #FFF9DB;
-    margin-top: -70px;
+    margin-top: -200px;
     margin-left: 50px;
     z-index: 3;
     width: 300px;
@@ -248,7 +251,7 @@
     background-color: #F1E1FF;
     width: 390px;
     z-index: 3;
-    margin-top: 50px;
+    margin-top: 120px;
 }
 
 .sh {
@@ -270,4 +273,28 @@
     background-color: #DCB5FF;
     color: black;
     margin-left: -5px;
+}
+
+.imagesTeam_Human {
+    width: 18px;
+}
+
+.Text_HumanResource {
+    font-size: 11px;
+    letter-spacing: -0.9px;
+    color: black;
+    margin-top: 10px;
+    border-radius: 2px;
+}
+
+.left_LaborShare {
+    margin-left: 20px;
+}
+
+.images_Goods {
+    width: 15px;
+}
+
+.imagesTeam_Interest {
+    width: 12px;
 }
