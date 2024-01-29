@@ -43,7 +43,7 @@ $this->title = 'Actual Last Year';
                         <div class="row">
                             <div class="col-4 text-secondary">
                                 <img src="<?= Yii::$app->homeUrl ?>image/calendar.png" class="image-current-year">
-                                <span class="font-size-12"> Current Year </span>
+                                <span class="Roundup_fontsmall"> Current Year </span>
                             </div>
                             <div class="col-3 pl-20">
                                 <select class="form-select select-secondate" aria-label="Default select example">
@@ -55,8 +55,8 @@ $this->title = 'Actual Last Year';
                                 </select>
                             </div>
                             <div class="col-5 text-end">
-                                <div class="text-secondary font-size-12">
-                                    <div class="FY"> F.Y. 2023</div>
+                                <div class="text-secondary">
+                                    <div class="FY" data-bs-toggle="modal" data-bs-target="#ModalFY"> F.Y. 2023</div>
                                 </div>
                             </div>
                         </div>
@@ -65,8 +65,8 @@ $this->title = 'Actual Last Year';
                 <div class="col-lg-9 col-md-6 col-12 mt-30">
                     <div class="badge bg-primary-sec4">
                         <div class="row">
-                            <div class="col-1 font-size-11 text-secondary pt-5">
-                                <img src="<?= Yii::$app->homeUrl ?>image/dollar.png" class="imagedollar"> Currency
+                            <div class="col-1 font-size-12 text-secondary pt-5">
+                                <img src="<?= Yii::$app->homeUrl ?>image/dollar.png" class="imagedollar"> <span class="Roundup_fontsmall">Currency</span>
                             </div>
                             <div class="col-2 pt-5">
                                 <select class="form-select  select-secondate" aria-label="Default select example">
@@ -79,7 +79,7 @@ $this->title = 'Actual Last Year';
                                 </select>
                             </div>
                             <div class="col-1 font-size-12 pt-5 text-secondary" style="margin-left:-35px;">
-                                <img src="<?= Yii::$app->homeUrl ?>image/roundup.png"> Round Up
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Round-Up.png" class="Round_radio"><span class="Roundup_fontsmall">Round Up</span>
                             </div>
                             <div class="col-2 pt-5 pl-15">
                                 <select class="form-select select-secondate" aria-label="Default select example">
@@ -111,7 +111,7 @@ $this->title = 'Actual Last Year';
                             <div class="col-12 text-end">
                                 <span class="badge bg-lig1 text-dark"> Sales</span>
                             </div>
-                            <div class="col-12 text-center pt-30">
+                            <div class="col-12 text-center pt-100">
                                 <strong> <?= number_format(4793595) ?></strong>
                             </div>
                             <div class="col-12 text-center">
@@ -142,7 +142,7 @@ $this->title = 'Actual Last Year';
                                         <div class="col-12 text-end">
                                             <span class="badge bg-lig1 text-dark"> Gross Profit</span>
                                         </div>
-                                        <div class="col-12 text-center pt-60">
+                                        <div class="col-12 text-center pt-100">
                                             <strong> <?= number_format(4793595) ?></strong>
                                         </div>
                                         <div class="col-12 text-center">
@@ -166,7 +166,10 @@ $this->title = 'Actual Last Year';
                                             Labor Cost
                                         </div>
                                         <div class="col-7 allshadow-LaborCost">
-                                            <div class="shadow-sm p-2 alert-alpri2-copy rounded">Labor Cost Ratio <span class="badge bg-lig1-LaborCost text-dark"> <?= number_format(76.7) ?>%</span></div>
+                                            <div class="shadow-sm p-2 alert-alpri2-copy rounded">Labor Cost Ratio <span class="badge bg-lig1-LaborCost text-dark"> <?= number_format(40.7) ?>%</span></div>
+                                        </div>
+                                        <div class="col-7 allshadow-LaborCost1">
+                                            <div class="shadow-sm p-2 alert-alpri2-copy rounded">Labor Ratio <span class="badge bg-lig1-LaborCost text-dark"> <?= number_format(76.7) ?>%</span></div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -182,7 +185,7 @@ $this->title = 'Actual Last Year';
                                                     Fixed Expense (Others)
                                                 </div>
                                                 <div class="col-7 allshadow-FixedExpense">
-                                                    <div class="shadow-sm p-2 alert-alpri3-copy rounded">Labor Cost Ratio <span class="badge bg-lig1-FixedExpense text-dark"> <?= number_format(76.7) ?>%</span></div>
+                                                    <div class="shadow-sm p-2 alert-alpri3-copy rounded">Fixed Expense (Others) Radio<span class="badge bg-lig1-FixedExpense text-dark"> <?= number_format(76.7) ?>%</span></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -191,7 +194,7 @@ $this->title = 'Actual Last Year';
                                                 <div class="col-12 text-end">
                                                     <span class="badge bg-lig1 text-dark"> Operating Profit</span>
                                                 </div>
-                                                <div class="col-12 text-center">
+                                                <div class="col-12 text-center text-danger">
                                                     <strong> <?= number_format(-118417) ?></strong>
                                                 </div>
                                                 <div class="col-12 text-center">
@@ -210,7 +213,7 @@ $this->title = 'Actual Last Year';
                     <div class="row">
                         <div class="col-lg-3 col-md-6 col-12 card alert-alpri5">
                             <div class="col-12 text-center">
-                                Next Year Target
+                                Actual Last Year
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-6 col-12 ">
@@ -219,17 +222,16 @@ $this->title = 'Actual Last Year';
                                     <div class="col-1">
                                         Total
                                     </div>
-                                    <div class="col-1 Ideal-solid"></div>
-                                    <div class="col-2">
-                                        <span class="badge p-2  bg-white text-dark"><?= number_format(100) ?>%</span>
+                                    <div class="col-2 Ideal-solid">
+                                        <span class="badge p-1 bg-white text-dark"><?= number_format(100) ?>%</span>
                                     </div>
-                                    <div class="col-5 text-end">
+                                    <div class="col-8 text-end">
                                         <span class="badge bg-white text-dark">
-                                            <i class="fa fa-line-chart" aria-hidden="true"></i> &nbsp;&nbsp; Sales Growth Ratio
+                                            <i class="fa fa-line-chart" aria-hidden="true"></i>&nbsp; Sales Growth Ratio
                                         </span>
                                     </div>
-                                    <div class="col-3">
-                                        <div role="progressbar4" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0" style="--value:0"></div>
+                                    <div class="col-1">
+                                        <span class="badge p-1 alpri4 text-danger"><?= number_format(-23) ?>%</span>
                                     </div>
                                 </div>
                             </div>
@@ -240,3 +242,41 @@ $this->title = 'Actual Last Year';
         </div>
     </div>
 </div>
+
+
+<!-- Modal F.Y -->
+<div class="modal fade" id="ModalFY" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="margin-top: 370px;margin-left:80px;">
+            <div class="modal-header">
+                <div class="modal-title F_Y_Input pr-20 pl-20" id="ModalFY"><i class="fa fa-magic" aria-hidden="true"></i>&nbsp;&nbsp; FY Input</div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mt-20 pr-20 pl-20">
+                    <div class="col-sm-6">
+                        <label for="exampleInputname" class="form-label Expense_Ratio">Variable Expense Ratio</label>
+                        <input type="number" class="form-control Expense_input" id="exampleInputNumberPersen" aria-describedby="">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="exampleInputname" class="form-label Expense_Ratio">Labor Cost Ratio</label>
+                        <input type="number" class="form-control Expense_input" id="exampleInputNumberPersen" aria-describedby="">
+                    </div>
+                    <div class="col-sm-6 mt-20">
+                        <label for="exampleInputname" class="form-label Expense_Ratio">Fixed Expense (Other) Ratio</label>
+                        <input type="number" class="form-control Expense_input" id="exampleInputNumberPersen" aria-describedby="">
+                    </div>
+                    <div class="col-sm-6 mt-20">
+                        <label for="exampleInputname" class="form-label Expense_Ratio">Operating Profit Ratio</label>
+                        <input type="number" class="form-control Expense_input" id="exampleInputNumberPersen" aria-describedby="">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer pr-30" style="border:none;" data-bs-dismiss="modal">
+                <div type="button" class="badge bgCancelbodyfooter">Cancel</div>
+                <div type="button" class="badge bgCreatefooter">Create</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end -->

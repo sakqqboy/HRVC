@@ -54,6 +54,11 @@
 
 .FY {
     font-size: 10px;
+    cursor: pointer;
+}
+
+.name_annual {
+    color: #2580D3;
 }
 
 .radio_Golden19 {
@@ -489,6 +494,10 @@ input[type="checkbox"]:checked+label {
 }
 
 .Ideal-solid {
+    border-left: 1px rgb(207, 207, 207) solid;
+}
+
+.Ideal-solid-right {
     border-right: 1px rgb(207, 207, 207) solid;
 }
 
@@ -519,7 +528,7 @@ input[type="checkbox"]:checked+label {
 .allshadow-GrossProfit {
     margin-left: 60px;
     z-index: 3;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .alert-alpri1-copy {
@@ -547,7 +556,13 @@ input[type="checkbox"]:checked+label {
 }
 
 .allshadow-LaborCost {
-    margin-left: -50px;
+    margin-left: -180px;
+    margin-top: -50px;
+}
+
+.allshadow-LaborCost1 {
+    margin-left: -100px;
+    margin-top: 20px;
 }
 
 .alert-alpri2-copy {
@@ -725,6 +740,6 @@ form {
     font-size: 13px;
 }
 
-/* .lf_nav {
-    padding-left: 40px;
-} */
+.alpri4 {
+    background-color: #E8FFE8;
+}

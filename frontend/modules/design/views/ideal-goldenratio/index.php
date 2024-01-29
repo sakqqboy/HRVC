@@ -45,7 +45,7 @@ $this->title = 'Ideal Golden Ratio';
                         <div class="row">
                             <div class="col-4 text-secondary">
                                 <img src="<?= Yii::$app->homeUrl ?>image/calendar.png" class="image-current-year">
-                                <span class="font-size-12"> Current Year </span>
+                                <span class="Roundup_fontsmall"> Current Year </span>
                             </div>
                             <div class="col-3 pl-20">
                                 <select class="form-select select-secondate" aria-label="Default select example">
@@ -57,8 +57,8 @@ $this->title = 'Ideal Golden Ratio';
                                 </select>
                             </div>
                             <div class="col-5 text-end">
-                                <div class="text-secondary font-size-12">
-                                    <div class="FY"> F.Y. 2023</div>
+                                <div class="text-secondary">
+                                    <div class="FY" data-bs-toggle="modal" data-bs-target="#ModalFY"> F.Y. 2023</div>
                                 </div>
                             </div>
                         </div>
@@ -212,11 +212,8 @@ $this->title = 'Ideal Golden Ratio';
                         <div class="col-lg-9 col-md-6 col-12">
                             <div class="card alert-alpri6">
                                 <div class="row">
-                                    <div class="col-2"></div>
-                                    <div class="col-8 Ideal-solid"></div>
-                                    <div class="col-1">
-                                        Total
-                                    </div>
+                                    <div class="col-10 Ideal-solid-right"></div>
+                                    <div class="col-1">Total</div>
                                     <div class="col-1">
                                         <div role="progressbar4" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="--value:100"></div>
                                     </div>
@@ -229,3 +226,40 @@ $this->title = 'Ideal Golden Ratio';
         </div>
     </div>
 </div>
+
+<!-- Modal F.Y -->
+<div class="modal fade" id="ModalFY" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="margin-top: 370px;margin-left:80px;">
+            <div class="modal-header">
+                <div class="modal-title F_Y_Input pr-20 pl-20" id="ModalFY"><i class="fa fa-magic" aria-hidden="true"></i>&nbsp;&nbsp; FY Input</div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mt-20 pr-20 pl-20">
+                    <div class="col-sm-6">
+                        <label for="exampleInputname" class="form-label Expense_Ratio">Variable Expense Ratio</label>
+                        <input type="number" class="form-control Expense_input" id="exampleInputNumberPersen" aria-describedby="">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="exampleInputname" class="form-label Expense_Ratio">Labor Cost Ratio</label>
+                        <input type="number" class="form-control Expense_input" id="exampleInputNumberPersen" aria-describedby="">
+                    </div>
+                    <div class="col-sm-6 mt-20">
+                        <label for="exampleInputname" class="form-label Expense_Ratio">Fixed Expense (Other) Ratio</label>
+                        <input type="number" class="form-control Expense_input" id="exampleInputNumberPersen" aria-describedby="">
+                    </div>
+                    <div class="col-sm-6 mt-20">
+                        <label for="exampleInputname" class="form-label Expense_Ratio">Operating Profit Ratio</label>
+                        <input type="number" class="form-control Expense_input" id="exampleInputNumberPersen" aria-describedby="">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer pr-30" style="border:none;" data-bs-dismiss="modal">
+                <div type="button" class="badge bgCancelbodyfooter">Cancel</div>
+                <div type="button" class="badge bgCreatefooter">Create</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end -->
