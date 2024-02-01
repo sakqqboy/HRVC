@@ -74,6 +74,8 @@ class AppAsset extends AssetBundle
         'css/admin-financialplanning/forecast_accounts.css',
         'css/admin-financialplanning/annual_accounts.css',
         'css/admin-financialplanning/comparison_accounts.css',
+        'css/admin-financialplanning/PLF.css',
+        'css/admin-financialplanning/Modal_FY.css',
         'css/home/multi_select.css',
         'css/evaluation/evaluator.css',
         'css/evaluation/weight_allocation.css',
@@ -90,6 +92,7 @@ class AppAsset extends AssetBundle
         'css/evaluation/promotion.css',
         'css/evaluation/processstatus.css',
         'css/evaluation/individual.css',
+
 
 
     ];
@@ -118,6 +121,7 @@ class AppAsset extends AssetBundle
         'js/setting/accordion.js',
         'js/setting/bonus.js',
         'js/setting/select_menycountry.js'
+
     ];
     public $depends = [
         'yii\web\YiiAsset',

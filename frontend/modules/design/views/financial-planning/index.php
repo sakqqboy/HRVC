@@ -411,6 +411,7 @@ $this->title = 'Financial Planning';
                             </div>
                         </div>
                     </div>
+                    <hr>
                 </div>
                 <div class="col-lg-1">
                     <div class="alert alert-secondary secondary-CurrentYear" style="border: none;margin-top:130px;padding-top:95px;">
@@ -521,7 +522,7 @@ $this->title = 'Financial Planning';
                             </div>
                             <div class="col-2 badge bg-light  pt-9" data-bs-toggle="modal" data-bs-target="#staticBackdropCurrency" style="height: 30px; cursor: pointer;">
                                 <div class="circledollar">
-                                    <i class="fa fa-usd pl-4 font-size-10" aria-hidden="true"></i><span class="Curr">Currency</span>
+                                    <i class="fa fa-usd pl-3 font-size-10" aria-hidden="true"></i><span class="Curr">Currency</span>
                                 </div>
                             </div>
                             <div class="col-4 font-size-12 pt-5">
@@ -1907,21 +1908,85 @@ $this->title = 'Financial Planning';
         <div class="modal-content">
             <div class="container">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel"> Currency Conversion Rate</h5>
+                    <div class="modal-title" id="staticBackdropLabel"> <span class="Currency_Conversion_Rate">Currency Conversion Rate</span> </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-6 ">
-
-
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-6 col-6">
+                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.3/css/bootstrap-select.css" />
+                            <div class="select_picker">
+                                <div class="select_Fromplanning">
+                                    <div class="set_fontFrom">From</div>
+                                </div>
+                                <div class="row">
+                                    <select class="selectpicker" data-show-subtext="true" data-live-search="true">
+                                        <option>John Smith</option>
+                                        <option>Alex Johnson</option>
+                                        <option>Kevin Warren</option>
+                                        <option>Super Mario</option>
+                                        <option>Allen Martinez</option>
+                                        <option>Marvin Liberty</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+                            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.3/js/bootstrap-select.js"></script>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-6">
+                            <div class="col-12 random_country">
+                                <i class="fa fa-exchange To_selectweight" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-6 col-6">
+                            <div class="select_picker">
+                                <div class="select_Fromplanning">
+                                    <div class="set_fontFrom">To</div>
+                                </div>
+                                <div class="row">
+                                    <select class="selectpicker" data-show-subtext="true" data-live-search="true">
+                                        <option>John Smith</option>
+                                        <option>Alex Johnson</option>
+                                        <option>Kevin Warren</option>
+                                        <option>Super Mario</option>
+                                        <option>Allen Martinez</option>
+                                        <option>Marvin Liberty</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-30">
+                        <div class="col-lg-5 col-md-5 col-5">
+                            <div class="set_fontFrom">Mount</div>
+                            <input type="text" class="form-control select_Fromplanning" placeholder="1" disabled>
+                        </div>
+                        <div class="col-lg-2  col-md-5 col-5">
+                            <div class="col-12 random_country">
+                                <div class="To_selectweight">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/rendom.png" class="images_random1">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-5 col-5">
+                            <div class="set_fontFrom">Set Amount</div>
+                            <input type="text" class="form-control select_Toplanning" placeholder="115">
+                        </div>
+                    </div>
+                    <div class="col-12 result_country">
+                        1 BTH (฿) = 115 BDT (৳)
+                    </div>
+                    <div class="col-12 text-end">
+                        <span class="bg btn-convert" type="submit"> Convert</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 <div class="modal fade" id="RoundUp" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropRoundUp" aria-hidden="true">
     <div class="modal-dialog modal-sm">
@@ -1935,7 +2000,7 @@ $this->title = 'Financial Planning';
                     </div>
                     <div class="col-lg-6 pt-10">
                         <form>
-                            <input class="chosen-value" type="text" value="" id="">
+                            <input class="chosen-value" type="text" value="search" id="">
                         </form>
                     </div>
                 </div>
@@ -1943,47 +2008,3 @@ $this->title = 'Financial Planning';
         </div>
     </div>
 </div>
-
-
-
-<div class="br-select">
-    <div class="br-input">
-        <label for="select-simple">Label</label>
-        <input id="select-simple" type="text" placeholder="Selecione o item" />
-        <button class="br-button" type="button" aria-label="Exibir lista" tabindex="-1" data-trigger="data-trigger"><i class="fas fa-angle-down" aria-hidden="true"></i>
-        </button>
-    </div>
-    <div class="br-list" tabindex="0">
-        <div class="br-item" tabindex="-1">
-            <div class="br-radio">
-                <input id="rb0" type="radio" name="estados-simples" value="rb0" />
-                <label for="rb0">1 - Acre (AC)</label>
-            </div>
-        </div>
-        <div class="br-item" tabindex="-1">
-            <div class="br-radio">
-                <input id="rb1" type="radio" name="estados-simples" value="rb1" />
-                <label for="rb1">2 - Alagoas (AL)</label>
-            </div>
-        </div>
-        <div class="br-item" tabindex="-1">
-            <div class="br-radio">
-                <input id="rb2" type="radio" name="estados-simples" value="rb2" />
-                <label for="rb2">3 - Amapá (AP)</label>
-            </div>
-        </div>
-        <div class="br-item" tabindex="-1">
-            <div class="br-radio">
-                <input id="rb3" type="radio" name="estados-simples" value="rb3" />
-                <label for="rb3">4 - Amazonas (AM)</label>
-            </div>
-        </div>
-        <div class="br-item" tabindex="-1">
-            <div class="br-radio">
-                <input id="rb4" type="radio" name="estados-simples" value="rb4" />
-                <label for="rb4">5 - Bahia (BA)</label>
-            </div>
-        </div>
-
-    </div>
-</div><span class="feedback warning" role="alert"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i>Texto auxiliar Função de prevenir erros.</span>

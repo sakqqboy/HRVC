@@ -16,6 +16,8 @@
 .button-link {
     color: rgb(32, 140, 249);
     font-weight: 500;
+    padding-left: 3px;
+    padding-right: 3px;
 }
 
 .button-link:hover {
@@ -86,6 +88,18 @@
     letter-spacing: -0.9px;
 }
 
+.months_lights_page {
+    border: none;
+    margin-left: 3px;
+    border-radius: 4px;
+    width: 3.2rem;
+    height: 60px;
+    padding-top: 5px;
+    background-color: #ececec;
+}
+
+
+
 .months_lights {
     border: none;
     margin-left: 3px;
@@ -93,7 +107,7 @@
     width: 3.2rem;
     height: 60px;
     padding-top: 5px;
-    background-color: #ececec;
+    background-color: #FAFAFA;
 }
 
 .images_CoolapseAside1 {
@@ -123,11 +137,70 @@
     letter-spacing: -0.9px;
 }
 
-/* .months_lights_copy1 {
-    border-radius: 3px;
-    background-color: #ececec;
-    border: none;
-    width: 3.2rem;
-    padding-left: 3px;
-    height: 60px;
+.Currency_Conversion_Rate {
+    font-size: 18px;
+    font-family: 'sf pro display';
+    letter-spacing: -0.8px;
+    color: #1B1D20;
+    font-weight: 600;
+}
+
+.random_country {
+    border-radius: 50%;
+    background-color: rgb(234, 234, 234);
+    width: 35px;
+    height: 35px;
+    margin-top: 24px;
+    cursor: pointer;
+}
+
+.To_selectweight {
+    color: #006CE0;
+    font-weight: 400;
+    margin-left: 10px;
+    font-size: 15px;
+    padding-top: 8px;
+}
+
+/* .select_Fromplanning {
+    font-size: 13px;
+    margin-top: 5px;
+    letter-spacing: -0.8px;
+    font-family: 'Sf pro display';
 } */
+
+.select_Toplanning {
+    font-size: 13px;
+    margin-top: 5px;
+    font-family: 'Sf pro display';
+}
+
+.images_random1 {
+    width: 15px;
+    margin-top: -5px;
+}
+
+.set_fontFrom {
+    font-size: 13px;
+    letter-spacing: -0.8px;
+    font-family: 'Sf pro display';
+}
+
+.result_country {
+    margin-top: 30px;
+    font-size: 13px;
+    letter-spacing: -0.5px;
+    font-family: 'Sf pro display';
+}
+
+.btn-convert {
+    background: #2580D3;
+    color: white;
+    border-radius: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    letter-spacing: -0.7px;
+    margin-top: 20px;
+}

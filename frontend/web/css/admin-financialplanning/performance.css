@@ -1,5 +1,6 @@
 .linedatatable {
     text-decoration: none;
+    font-size: 13px;
 }
 
 .slidecontainer {
@@ -285,6 +286,33 @@
 .images_performance_PL {
     width: 18px;
 }
-.images_Dark_FinanicalPlanning{
+
+.images_Dark_FinanicalPlanning {
     width: 40px;
+}
+
+.chart_select1 {
+    margin-left: -50px;
+}
+
+.BTH_1 {
+    margin-left: -70px;
+}
+
+.None_2 {
+    margin-left: -80px;
+}
+
+.F_Y {
+    font-size: 12px;
+    padding-top: 5px;
+    margin-left: 190px;
+}
+
+.Variable_Ex {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: -0.8px;
+    padding-top: 3px;
+
 }

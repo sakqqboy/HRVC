@@ -4,7 +4,7 @@ $this->title = 'Performance Chart';
 
 <div class="col-12 mt-90 alert background-Planning">
     <div class="col-12 planning">
-      <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FinanicalPlanning.png" class="images_Dark_FinanicalPlanning"> Financial Planning
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FinanicalPlanning.png" class="images_Dark_FinanicalPlanning"> Financial Planning
     </div>
     <div class="col-12 mt-20">
         <div class="shadow p-3 mb-5 bg-body rounded alert2-secondary3">
@@ -43,7 +43,7 @@ $this->title = 'Performance Chart';
                         <img src="<?= Yii::$app->homeUrl ?>image/calendar.png" style="width: 13px;">
                         &nbsp; <span class="font-size-12"> Current Year</span>
                     </div>
-                    <div class="col-1">
+                    <div class="col-1 chart_select1">
                         <select class="form-select text-primary font-size-12" aria-label="Default select example" style="width: 6rem;">
                             <option selected value="">Select</option>
                             <option value="1">2020</option>
@@ -55,7 +55,7 @@ $this->title = 'Performance Chart';
                     <div class="col-2 font-size-12 text-secondary pt-5 pl-25">
                         <img src="<?= Yii::$app->homeUrl ?>image/dollar.png" class="imagedollar"> Currency
                     </div>
-                    <div class="col-1">
+                    <div class="col-1 BTH_1">
                         <select class="form-select text-primary font-size-12" aria-label="Default select example" style="width: 6rem;">
                             <option selected value=""> BTH (฿)</option>
                             <option value="1">2020</option>
@@ -67,7 +67,7 @@ $this->title = 'Performance Chart';
                     <div class="col-2 font-size-12 pt-5 pl-25">
                         <img src="<?= Yii::$app->homeUrl ?>image/roundup.png"> Round Up
                     </div>
-                    <div class="col-1">
+                    <div class="col-1 None_2">
                         <select class="form-select text-primary font-size-12" aria-label="Default select example" style="width: 6rem;">
                             <option selected value=""> None</option>
                             <option value="1">2020</option>
@@ -76,7 +76,7 @@ $this->title = 'Performance Chart';
                             <option value="4">2024</option>
                         </select>
                     </div>
-                    <div class="col-3 text-secondary font-size-12 pt-5 text-end">
+                    <div class="col-3 text-secondary  text-end F_Y">
                         <strong> F.Y. 2023 (Annual)</strong>
                     </div>
                 </div>
@@ -84,7 +84,7 @@ $this->title = 'Performance Chart';
             <div class="row mt-30">
                 <div class="col-lg-9">
                     <div class="col-12 text-primary">
-                        <a href="" class="no-underline-primary"> <i class="fa fa-chevron-left" aria-hidden="true"></i> Data Table</a>
+                        <a href="" class="no-underline-primary font-size-13"> <i class="fa fa-chevron-left" aria-hidden="true"></i> Data Table</a>
                     </div>
                 </div>
                 <div class="col-lg-3 text-end">
@@ -94,7 +94,7 @@ $this->title = 'Performance Chart';
             </div>
             <div class="col-12 mt-30">
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-                <div class="col-12 text-center font-size-18">
+                <div class="col-12 text-center font-size-16">
                     <strong> PLF 3-Years Performance Chart</strong>
                 </div>
 
@@ -143,10 +143,10 @@ $this->title = 'Performance Chart';
                         <div class="col-lg-2">
                             <div class="alert light-shadow-3">
                                 <div class="row">
-                                    <div class="col-10 font-size-12">
-                                        <strong> Variable Expense</strong>
+                                    <div class="col-9 font-size-12">
+                                        <div class="Variable_Ex"> Variable Expense</div>
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-3">
                                         <div>
                                             <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="">
                                         </div>
@@ -177,10 +177,10 @@ $this->title = 'Performance Chart';
                         <div class="col-lg-2">
                             <div class="alert light-shadow-3">
                                 <div class="row">
-                                    <div class="col-10 font-size-12">
-                                        <strong> Gross Profit</strong>
+                                    <div class="col-9">
+                                        <div class="Variable_Ex"> Gross Profit</div>
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-3">
                                         <div>
                                             <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="">
                                         </div>
@@ -211,10 +211,10 @@ $this->title = 'Performance Chart';
                         <div class="col-lg-2">
                             <div class="alert light-shadow-3">
                                 <div class="row">
-                                    <div class="col-10 font-size-12">
-                                        <strong> Labor Cost</strong>
+                                    <div class="col-9">
+                                        <div class="Variable_Ex"> Labor Cost</div>
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-3">
                                         <div>
                                             <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="">
                                         </div>
@@ -245,10 +245,10 @@ $this->title = 'Performance Chart';
                         <div class="col-lg-2">
                             <div class="alert light-shadow-3">
                                 <div class="row">
-                                    <div class="col-10 font-size-12">
-                                        <strong> Fixed Expense</strong>
+                                    <div class="col-9">
+                                        <div class="Variable_Ex"> Fixed Expense</div>
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-3">
                                         <div>
                                             <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="">
                                         </div>
@@ -279,10 +279,10 @@ $this->title = 'Performance Chart';
                         <div class="col-lg-2">
                             <div class="alert light-shadow-3">
                                 <div class="row">
-                                    <div class="col-10 font-size-12">
-                                        <strong> Non-Operating</strong>
+                                    <div class="col-9">
+                                        <div class="Variable_Ex"> Non-Operating</div>
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-3">
                                         <div>
                                             <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="">
                                         </div>
@@ -314,10 +314,10 @@ $this->title = 'Performance Chart';
                         <div class="col-lg-2">
                             <div class="alert light-shadow-3">
                                 <div class="row">
-                                    <div class="col-10 font-size-12">
-                                        <strong> Operating Profit</strong>
+                                    <div class="col-9">
+                                        <div class="Variable_Ex"> Operating Profit</div>
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-3">
                                         <div>
                                             <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
                                         </div>
@@ -346,6 +346,77 @@ $this->title = 'Performance Chart';
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="DataDistionary" tabindex="-1" aria-labelledby="DataDistionaryLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content modal-DataDistionary">
+            <div class="modal-header" style="border: none;">
+                <div id="DataDistionaryLabel">
+                    Data Dictionary
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6 Accumulate_text">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="Dark_Monthly"> Accumulate
+                    </div>
+                    <div class="col-6 Accumulate_text">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="Dark_Monthly"> Monthly
+                    </div>
+                    <hr class="mt-5">
+                </div>
+                <div class="row">
+                    <div class="col-4 text-end">
+                        <span class="AC-Primary"> AAR </span>
+                    </div>
+                    <div class="col-8 AC-Accumulate">
+                        Accumulate Actual Ratio
+                    </div>
+                    <div class="col-4 text-end">
+                        <span class="AC-Success"> AAR </span>
+                    </div>
+                    <div class="col-8 AC-Accumulate">
+                        Accumulate Actual Ratio
+                    </div>
+                    <div class="col-4 text-end">
+                        <span class="T-Warning"> AT </span>
+                    </div>
+                    <div class="col-8 AC-Accumulate">
+                        Accumulate Target
+                    </div>
+                    <div class="col-4 text-end">
+                        <span class="T-Warning"> ATR </span>
+                    </div>
+                    <div class="col-8 AC-Accumulate">
+                        Accumulate Target ratio
+                    </div>
+                    <div class="col-4 text-end">
+                        <span class="T-bule"> ATR </span>
+                    </div>
+                    <div class="col-8 AC-Accumulate">
+                        Accumulate Target ratio
+                    </div>
+                    <hr>
+
+                    <div class="col-4 text-end">
+                        <span class="AC-Success"> AC </span>
+                    </div>
+                    <div class="col-8 AC-Accumulate">
+                        Actual
+                    </div>
+                    <div class="col-4 text-end">
+                        <span class="T-Warning"> T </span>
+                    </div>
+                    <div class="col-8 AC-Accumulate">
+                        Actual
+                    </div>
+                    <hr>
                 </div>
             </div>
         </div>
