@@ -1,10 +1,11 @@
 .header1 {
     background-color: #111727;
     padding-top: 20px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 15px;
+    font-family: 'SF Pro display';
+    font-size: 14px;
     position: fixed;
-    overflow-x: scroll;
+    overflow-y: scroll;
+    letter-spacing: -0.6px;
     z-index: 1;
     width: 15.5%;
 }
@@ -18,7 +19,8 @@
 
 .width-hrvc {
     margin-top: 20px;
-    width: 100%;
+    margin-left: 6px;
+    width: 90%;
 }
 
 .no-underline {
@@ -34,8 +36,12 @@
 .navbar-header a:hover {
     background-color: rgb(220, 228, 229);
     color: rgb(25, 116, 201);
-    border-radius: 4px;
-    font-weight: 700;
+    border-radius: 3px;
+    font-weight: 600;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 6px;
+    padding-top: 6px;
 }
 
 .haeder-company {
@@ -55,15 +61,17 @@
     font-size: 14px;
     text-transform: uppercase;
 }
-.header-pim{
-    
+
+.header-pim {
+
     font-size: 14px;
     background-color: rgb(249, 249, 249);
     padding-top: 5px;
     padding-bottom: 5px;
     border-radius: 5px;
 }
-.header-item{
+
+.header-item {
     /* height: 30px; */
     padding-top: 3px;
     padding-bottom: 3px;
