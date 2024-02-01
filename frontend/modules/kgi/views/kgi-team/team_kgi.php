@@ -1,0 +1,219 @@
+<?php
+
+use frontend\models\hrvc\Kgi;
+use frontend\models\hrvc\KgiTeam;
+use yii\bootstrap5\ActiveForm;
+
+$this->title = "KGI";
+?>
+
+<div class="col-12 mt-70">
+	<div class="col-12">
+		<i class="fa fa-tachometer font-size-18" aria-hidden="true"></i>
+		<strong class="font-size-18"> TEAM KEY GOAL INDICATORS </strong>
+	</div>
+	<div class="col-12 mt-10">
+		<div class="alert alert-white-4 mt-10">
+			<div class="col-12 New-KFI">
+				<?= $this->render('filter_list', [
+					"companies" => $companies,
+					"months" => $months,
+					"companyId" => $companyId,
+					"branchId" => $branchId,
+					"teamId" => $teamId,
+					"month" => $month,
+					"status" => $status,
+					"year" => $year,
+				]) ?>
+				<input type="hidden" id="type" value="list">
+			</div>
+			<?php
+			//if ($role >= 3) {
+			?>
+			<div class="col-12 mt-10 text-end">
+				<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi" class="font-size-14 no-underline-primary">
+					<i class="fa fa-user mr-5" aria-hidden="true"></i>
+					Individual
+				</a>
+			</div>
+			<?php
+			//}
+			?>
+			<div class="col-12">
+				<table class="table table-striped">
+					<thead class="table-secondary">
+						<tr class="transform-none">
+							<th>KGI Contents</th>
+							<th>Company</th>
+							<th>Branch</th>
+							<th>Priority</th>
+							<th>Employees</th>
+							<th>Team</th>
+							<th>QR</th>
+							<th>target</th>
+							<th>Code</th>
+							<th>result</th>
+							<th>ratio</th>
+							<th>month</th>
+							<th>Unit</th>
+							<th>next</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+						if (count($teamKgis) > 0) {
+							foreach ($teamKgis as $kgiTeamId => $kgi) :
+								$show = KgiTeam::checkPermission($role, $kgiTeamId, $userId);
+
+								if ($show == 1) {
+									$display = '';
+								} else {
+									$display = 'none';
+								}
+						?>
+								<tr class="border-bottom-white2" id="kgi-<?= $kgiTeamId ?>">
+									<td class="<?= $kgi["status"] == 1 ? 'over-blue' : 'over-yellow' ?>"><?= $kgi["kgiName"] ?></td>
+									<td><?= $role . $kgi["companyName"] ?></td>
+									<td><img src="<?= Yii::$app->homeUrl . $kgi['flag'] ?>" class="Flag-Turkey"> <?= $kgi["branch"] ?>, <?= $kgi["countryName"] ?></td>
+
+									<td class="text-center"><?= $kgi["priority"] ?></td>
+									<td>
+										<div class="flex mb-5 -space-x-4">
+											<?php
+											if (isset($kgi["kgiEmployee"]) && count($kgi["kgiEmployee"]) > 0) {
+												$e = 1;
+												foreach ($kgi["kgiEmployee"] as $emp) :
+											?>
+													<img class="image-grid" src="<?= Yii::$app->homeUrl . $emp ?>">
+											<?php
+													if ($e == 3) {
+														break;
+													}
+													$e++;
+												endforeach;
+											}
+											?>
+											<a class="no-underline-black ml-2 mt-3" href="#"><?= count($kgi["kgiEmployee"]) ?></a>
+										</div>
+									</td>
+									<td>
+										<span class=""> <?= $kgi["teamName"] ?></span>
+									</td>
+									<td><?= $kgi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?></td>
+									<td>
+										<?php
+										$decimal = explode('.', $kgi["target"]);
+										if (isset($decimal[1])) {
+											if ($decimal[1] == '00') {
+												$show = $decimal[0];
+											} else {
+												$show = $kgi["target"];
+											}
+										} else {
+											$show = $kgi["target"];
+										}
+										?>
+										<?= $show ?>
+									</td>
+									<td>
+										<?= $kgi["code"] ?>
+									</td>
+									<td>
+										<?php
+										if ($kgi["result"] != '') {
+											$decimalResult = explode('.', $kgi["result"]);
+											if (isset($decimalResult[1])) {
+												if ($decimalResult[1] == '00') {
+													$showResult = $decimalResult[0];
+												} else {
+													$showResult = $kgi["result"];
+												}
+											} else {
+												$showResult = $kgi["result"];
+											}
+										} else {
+											$showResult = 0;
+										}
+										?>
+										<?= $showResult ?>
+									</td>
+									<td>
+										<div id="progress1">
+											<div data-num="<?= $kgi["ratio"] ?>" class="progress-item1"></div>
+										</div>
+									</td>
+									<td><?= $kgi["month"] ?></td>
+									<td><?= $kgi["unit"] ?></td>
+									<!-- <td><?php // $kgi["periodCheck"] 
+											?></td> -->
+									<td class="<?= $kgi['isOver'] == 1 ? 'text-danger' : '' ?>">
+										<?= $kgi["status"] == 1 ? $kgi["nextCheckDate"] : '' ?>
+									</td>
+									<td colspan="row">
+
+										<span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
+										<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+											<?php
+											if ($role > 3) {
+											?>
+												<li data-bs-toggle="modal" data-bs-target="#update-kgi-modal-team" onclick="javascript:updateTeamKgi(<?= $kgiTeamId ?>)" style="display: <?= $display ?>;">
+													<a class="dropdown-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+												</li>
+												<?php
+											} else {
+												if ($role == 3 && ($kgi["teamId"] == $userTeamId)) { ?>
+													<li data-bs-toggle="modal" data-bs-target="#update-kgi-modal-team" onclick="javascript:updateTeamKgi(<?= $kgiTeamId ?>)" style="display: <?= $display ?>;">
+														<a class="dropdown-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+													</li>
+											<?php
+												}
+											}
+											?>
+											<li data-bs-toggle="modal" data-bs-target="#kgi-view-team" onclick="javascript:kgiTeamHistory(<?= $kgiTeamId ?>)">
+												<a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
+											</li>
+										</ul>
+									</td>
+								</tr>
+						<?php
+							endforeach;
+						}
+						?>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- <div class="col-12 navigation-next">
+			<nav aria-label="Page navigation example">
+				<ul class="pagination">
+					<li class="page-item"><a class="page-link page-navigation" href="#"><i class="fa fa-chevron-left" aria-hidden="true"></i> Previous</a></li>
+					<li class="page-item"><a class="page-link page-navigation" href="#">1</a></li>
+					<li class="page-item"><a class="page-link page-navigation" href="#">2</a></li>
+					<li class="page-item"><a class="page-link page-navigation" href="#">3</a></li>
+					<li class="page-item"><a class="page-link page-navigation" href="#">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
+				</ul>
+			</nav>
+		</div> -->
+	</div>
+
+</div>
+<?php
+$form = ActiveForm::begin([
+	'id' => 'update-kgi',
+	'method' => 'post',
+	'options' => [
+		'enctype' => 'multipart/form-data',
+	],
+	'action' => Yii::$app->homeUrl . 'kgi/kgi-team/update-kgi-team'
+
+]); ?>
+<?= $this->render('modal_update', [
+	"units" => $units,
+	"isManager" => $isManager,
+	"months" => $months,
+]) ?>
+<?php ActiveForm::end(); ?>
+<?= $this->render('modal_view', [
+	"isManager" => $isManager
+]) ?>

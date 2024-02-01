@@ -62,17 +62,20 @@ $this->title = "KGI";
 					</div>
 				</div>
 				<?php
-				if ($role >= 3) {
+				//if ($role >= 3) {
 				?>
-					<div class="col-12 mt-10 text-end">
-
-						<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi" class="font-size-14 no-underline-primary">
-							<i class="fa fa-user mr-5" aria-hidden="true"></i>
-							Individual
-						</a>
-					</div>
+				<div class="col-12 mt-10 text-end">
+					<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/team-kgi" class="font-size-14 no-underline-primary mr-20">
+						<i class="fa fa-users mr-5" aria-hidden="true"></i>
+						Team KGI
+					</a>
+					<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi" class="font-size-14 no-underline-primary">
+						<i class="fa fa-user mr-5" aria-hidden="true"></i>
+						Individual
+					</a>
+				</div>
 				<?php
-				}
+				//}
 				?>
 			</div>
 			<div class="col-12">
@@ -82,7 +85,7 @@ $this->title = "KGI";
 							<th>KGI Contents</th>
 							<th>Company</th>
 							<th>Branch</th>
-							<th>Team KGI Contents</th>
+							<!-- <th>Team KGI Contents</th> -->
 							<th>Priority</th>
 							<th>Employees</th>
 							<th>Team</th>
@@ -102,8 +105,13 @@ $this->title = "KGI";
 						<?php
 						if (count($kgis) > 0) {
 							foreach ($kgis as $kgiId => $kgi) :
-								$show = Kgi::checkPermission($role, $kgiId, $userId);
+								/*$show = Kgi::checkPermission($role, $kgiId, $userId);
 								if ($show == 1) {
+									$display = '';
+								} else {
+									$display = 'none';
+								}*/
+								if ($role >= 4) {
 									$display = '';
 								} else {
 									$display = 'none';
@@ -113,7 +121,7 @@ $this->title = "KGI";
 									<td class="<?= $kgi["status"] == 1 ? 'over-blue' : 'over-yellow' ?>"><?= $kgi["kgiName"] ?></td>
 									<td><?= $kgi["companyName"] ?></td>
 									<td><img src="<?= Yii::$app->homeUrl . $kgi['flag'] ?>" class="Flag-Turkey"> <?= $kgi["branch"] ?>, <?= $kgi["countryName"] ?></td>
-									<td></td>
+									<!-- <td></td> -->
 									<td class="text-center"><?= $kgi["priority"] ?></td>
 									<td>
 										<div class="flex mb-5 -space-x-4">
@@ -150,7 +158,7 @@ $this->title = "KGI";
 											$show = $kgi["targetAmount"];
 										}
 										?>
-										<?= $show ?>
+										<?= $show ?><?= $kgi["amountType"] == 1 ? '%' : '' ?>
 									</td>
 									<td>
 										<?= $kgi["code"] ?>
@@ -171,7 +179,7 @@ $this->title = "KGI";
 											$showResult = 0;
 										}
 										?>
-										<?= $showResult ?>
+										<?= $showResult ?><?= $kgi["amountType"] == 1 ? '%' : '' ?>
 									</td>
 									<td>
 										<div id="progress1">

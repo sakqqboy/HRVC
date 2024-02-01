@@ -95,4 +95,17 @@ class Team extends \frontend\models\hrvc\master\TeamMaster
             ->one();
         return $employee["teamId"];
     }
+    public static function teamInBranch($branchId)
+    {
+        $teams = [];
+        $teams = Team::find()
+            ->select('team.teamName,team.teamId')
+            ->JOIN("LEFT JOIN", "department d", "d.departmentId=team.departmentId")
+            ->JOIN("LEFT JOIN", "branch b", "b.branchId=d.branchId")
+            ->where(["b.branchId" => $branchId, "team.status" => 1])
+            ->asArray()
+            ->orderBy('team.teamName')
+            ->all();
+        return $teams;
+    }
 }

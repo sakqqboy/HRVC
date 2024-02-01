@@ -36,7 +36,7 @@ class ManagementController extends Controller
 {
 	public function actionIndex($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId)
 	{
-		if ($adminId != '') {
+		/*if ($adminId != '') {
 			$kgis = Kgi::find()
 				->where(["status" => [1, 2, 4]])
 				->asArray()->all();
@@ -72,14 +72,7 @@ class ManagementController extends Controller
 				->all();
 		}
 		if ($teamLeaderId != '') { //see kgi in thier branch edit just their team
-			/*$employeeId = Employee::employeeId($staffId);
-			$kgis = Kgi::find()
-				->select('kgi.*')
-				->JOIN("LEFT JOIN", "kgi_employee ke", "ke.kgiId=kgi.kgiId")
-				->where(["kgi.status" => [1, 2, 4], "ke.status" => 1, "ke.employeeId" => $employeeId])
-				->asArray()
-				->orderBy('kgi.updateDateTime DESC')
-				->all();*/
+			
 			$branchId = Branch::userBranchId($teamLeaderId);
 			$kgis = Kgi::find()
 				->select('kgi.*')
@@ -91,14 +84,7 @@ class ManagementController extends Controller
 				->all();
 		}
 		if ($staffId != '') { //see just their kfi
-			/*$employeeId = Employee::employeeId($staffId);
-			$kgis = Kgi::find()
-				->select('kgi.*')
-				->JOIN("LEFT JOIN", "kgi_employee ke", "ke.kgiId=kgi.kgiId")
-				->where(["kgi.status" => [1, 2, 4], "ke.status" => 1, "ke.employeeId" => $employeeId])
-				->asArray()
-				->orderBy('kgi.updateDateTime DESC')
-				->all();*/
+		
 			$branchId = Branch::userBranchId($staffId);
 			$kgis = Kgi::find()
 				->select('kgi.*')
@@ -108,8 +94,11 @@ class ManagementController extends Controller
 				->asArray()
 				->orderBy('kb.branchId')
 				->all();
-		}
+		}*/
 		$data = [];
+		$kgis = Kgi::find()
+			->where(["status" => [1, 2, 4]])
+			->asArray()->all();
 		if (count($kgis) > 0) {
 			foreach ($kgis as $kgi) :
 				$ratio = 0;
@@ -169,11 +158,14 @@ class ManagementController extends Controller
 			$data = [
 				"kgiName" => $kgi["kgiName"],
 				"companyId" => $kgi["companyId"],
+				"branch" => KgiBranch::kgiBranch($kgi["kgiId"]),
+				"kgiEmployee" => KgiEmployee::kgiEmployee($kgi["kgiId"]),
 				"detail" => $kgiHistory['description'],
 				"quantRatio" => $kgiHistory["quantRatio"],
 				"targetAmount" => $kgiHistory["targetAmount"],
 				"creater" => User::employeeNameByuserId($kgiHistory["createrId"]),
 				"amountType" => $kgiHistory["amountType"],
+				"countTeam" => KgiTeam::kgiTeam($kgi["kgiId"]),
 				"code" => $kgiHistory["code"],
 				"result" => $kgiHistory["result"],
 				"unitId" => $kgiHistory["unitId"],
@@ -197,7 +189,9 @@ class ManagementController extends Controller
 				"unitText" => Unit::unitName($kgiHistory["unitId"]),
 				"fromDate" => $kgiHistory["fromDate"],
 				"toDate" => $kgiHistory["toDate"],
-				"amountType" => $kgiHistory["amountType"]
+				"fromDateDetail" => ModelMaster::engDate($kgiHistory["fromDate"], 2),
+				"toDateDetail" => ModelMaster::engDate($kgiHistory["toDate"], 2),
+				"isOver" => ModelMaster::isOverDuedate(Kgi::nextCheckDate($kgi['kgiId'])),
 			];
 		} else {
 			$kgi = Kgi::find()->where(["kgiId" => $id])->asArray()->one();
@@ -213,10 +207,13 @@ class ManagementController extends Controller
 			$data = [
 				"kgiName" => $kgi["kgiName"],
 				"companyId" => $kgi["companyId"],
+				"branch" => KgiBranch::kgiBranch($kgi["kgiId"]),
+				"kgiEmployee" => KgiEmployee::kgiEmployee($kgi["kgiId"]),
 				"creater" => User::employeeNameByuserId($kgi["createrId"]),
 				"detail" => $kgi['kgiDetail'],
 				"quantRatio" => $kgi["quantRatio"],
 				"targetAmount" => $kgi["targetAmount"],
+				"countTeam" => KgiTeam::kgiTeam($kgi["kgiId"]),
 				"amountType" => $kgi["amountType"],
 				"code" => $kgi["code"],
 				"result" => $kgi["result"],
@@ -241,7 +238,9 @@ class ManagementController extends Controller
 				"unitText" => Unit::unitName($kgi["unitId"]),
 				"fromDate" => $kgi["fromDate"],
 				"toDate" => $kgi["toDate"],
-				"amountType" => $kgi["amountType"]
+				"fromDateDetail" => ModelMaster::engDate($kgi["fromDate"], 2),
+				"toDateDetail" => ModelMaster::engDate($kgi["toDate"], 2),
+				"isOver" => ModelMaster::isOverDuedate(Kgi::nextCheckDate($kgi['kgiId'])),
 			];
 		}
 
@@ -417,7 +416,7 @@ class ManagementController extends Controller
 	public function actionKgiFilter($companyId, $branchId, $teamId, $month, $status, $year, $adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId)
 	{
 		$data = [];
-		if ($adminId != '') {
+		/*if ($adminId != '') {
 			$kgis = Kgi::find()
 				->select('kgi.*')
 				->JOIN("LEFT JOIN", "kgi_branch kb", "kb.kgiId=kgi.kgiId")
@@ -527,7 +526,22 @@ class ManagementController extends Controller
 				])
 				->orderBy('kgi.createDateTime ASC')
 				->all();
-		}
+		}*/
+		$kgis = Kgi::find()
+			->select('kgi.*')
+			->JOIN("LEFT JOIN", "kgi_branch kb", "kb.kgiId=kgi.kgiId")
+			->JOIN("LEFT JOIN", "kgi_team kt", "kt.kgiId=kgi.kgiId")
+			->where(["kgi.status" => [1, 2, 4]])
+			->andFilterWhere([
+				"kgi.companyId" => $companyId,
+				"kb.branchId" => $branchId,
+				"kt.teamId" => $teamId,
+				"kgi.month" => $month,
+				"kgi.status" => $status,
+				"kgi.year" => $year,
+			])
+			->orderBy('kgi.createDateTime ASC')
+			->all();
 		if (count($kgis) > 0) {
 			foreach ($kgis as $kgi) :
 				$ratio = 0;
@@ -568,6 +582,7 @@ class ManagementController extends Controller
 					"isOver" => ModelMaster::isOverDuedate(Kgi::nextCheckDate($kgi['kgiId'])),
 					"countKgiHasKfi" => KfiHasKgi::countKfiWithKgi($kgi['kgiId']),
 					"countKgiHasKpi" => KgiHasKpi::countKgiHasKpi($kgi['kgiId']),
+					"amountType" => $kgi["amountType"]
 				];
 			endforeach;
 		}

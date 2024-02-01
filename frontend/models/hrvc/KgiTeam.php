@@ -52,4 +52,61 @@ class KgiTeam extends \frontend\models\hrvc\master\KgiTeamMaster
             return 0;
         }
     }
+    public static function checkPermission($role, $kgiTeamId, $userId)
+    {
+        $show = 0;
+        if ($role == 7) {
+            $show = 1;
+        }
+        $kgiTeam = KgiTeam::find()->where(["kgiTeamId" => $kgiTeamId])->asArray()->one();
+        $kgiId = $kgiTeam["kgiTeamId"];
+        if ($role == 6) { //GM edit their company KGI
+            $companyId = Company::userCompany($userId); //userId
+            $branchId = Branch::checkCompanyBranch($companyId);
+            $kgiBranch = KgiBranch::find()
+                ->select('kgiBranchId')
+                ->where(["kgiId" => $kgiId, "branchId" => $branchId, "status" => [1, 4]])
+                ->asArray()
+                ->one();
+            if (isset($kgiBranch) && !empty($kgiBranch)) {
+                $show = 1;
+            }
+        }
+        if ($role == 5) { //Manager edit their company KGI
+            $companyId = Company::userCompany($userId); //userId
+            $branchId = Branch::checkCompanyBranch($companyId);
+            $kgiBranch = KgiBranch::find()
+                ->select('kgiBranchId')
+                ->where(["kgiId" => $kgiId, "branchId" => $branchId, "status" => [1, 4]])
+                ->asArray()
+                ->one();
+            if (isset($kgiBranch) && !empty($kgiBranch)) {
+                $show = 1;
+            }
+        }
+        if ($role == 4) { //Supervisor edit their department KGI
+            $departmentId = Department::userDepartmentId($userId);
+            $kgiDepartment = KgiDepartment::find()
+                ->where(["kgiId" => $kgiId, "status" => [1, 4], "departmentId" => $departmentId])
+                ->asArray()
+                ->one();
+            if (isset($kgiDepartment) && !empty($kgiDepartment)) {
+                $show = 1;
+            }
+        }
+        if ($role == 3) { //Team Leader edit their Team
+            //$teamId = Team::userTeam($userId);
+            $kgiTeam = KgiTeam::find()
+                ->where(["kgiTeamId" => $kgiTeamId, "status" => [1, 4]])
+                ->asArray()
+                ->one();
+            if (isset($kgiTeam) && !empty($kgiTeam)) {
+                $show = 1;
+            }
+        }
+        if ($role == 2 || $role == 1) {
+            $show = 0;
+        }
+        return $show;
+    }
 }

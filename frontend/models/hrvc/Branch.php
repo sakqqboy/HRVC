@@ -101,6 +101,20 @@ class Branch extends \frontend\models\hrvc\master\BranchMaster
             return '';
         }
     }
+    public static function branchInCompany($companyId)
+    {
+        $branches = [];
+        $branches = Branch::find()
+            ->where(["companyId" => $companyId, "status" => 1])
+            ->asArray()
+            ->orderBy('branchName')
+            ->all();
+        if (isset($branches) && !empty($branches)) {
+            return $branches;
+        } else {
+            return;
+        }
+    }
     public static function checkCompanyBranch($companyId)
     {
         $branches = Branch::find()->select('branchId')

@@ -26,7 +26,7 @@
 		<li class="header-item presentation-end pr-20">
 			<a href="<?= Yii::$app->homeUrl ?>kpi/management/assign-kpi" class="nav-link text-dark" id="pills-Setting-tab" type="button" role="tab" aria-controls="pills-Action" aria-selected="false">
 				<i class="fa fa-cog" aria-hidden="true"></i>
-				Assign
+				Assign and approval
 			</a>
 		</li>
 	</ul>

@@ -29,7 +29,7 @@
 			?>
 				<a href="<?= Yii::$app->homeUrl ?>kfi/management/assign-kfi" class="nav-link text-dark" id="pills-Setting-tab" type="button" role="tab" aria-controls="pills-Action" aria-selected="false">
 					<i class="fa fa-cog" aria-hidden="true"></i>
-					Assign
+					Assign and approval
 				</a>
 			<?php
 			}

@@ -56,4 +56,18 @@ class Kgi extends \backend\models\hrvc\master\KgiMaster
         }
         return $date;
     }
+    public static function codeDetail($code)
+    {
+        $detail = '';
+        if ($code == '<') {
+            $detail = 'Result should be more than target';
+        }
+        if ($code == '>') {
+            $detail = 'Result should be less than target';
+        }
+        if ($code == '=') {
+            $detail = 'Result should be equal target';
+        }
+        return $detail;
+    }
 }

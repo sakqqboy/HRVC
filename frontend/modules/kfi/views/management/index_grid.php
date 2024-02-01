@@ -70,7 +70,7 @@ $this->title = 'KFI Grid View';
 																<i class="fa fa-eye mt-6" aria-hidden="true" style="margin-left: -5px"></i>
 															</a>
 															<?php
-															if ($role >= 3) {
+															if ($role >= 5) {
 															?>
 																<a class="btn btn-xs btn-outline-danger ml-5 pt-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop4" onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)">
 																	<i class="fa fa-trash-o mt-6" aria-hidden="true" style="margin-left: -5px;"></i>
@@ -134,7 +134,7 @@ $this->title = 'KFI Grid View';
 																	$show = number_format($kfi["target"]);
 																}
 																?>
-																<?= $show ?>
+																<?= $show ?><?= $kfi["amountType"] == 1 ? '%' : '' ?>
 															</div>
 														</div>
 														<div class="col-lg-1 col-md-6 col-3 pt-10  text-center">
@@ -162,7 +162,7 @@ $this->title = 'KFI Grid View';
 																	$showResult = 0;
 																}
 																?>
-																<?= $showResult ?>
+																<?= $showResult ?><?= $kfi["amountType"] == 1 ? '%' : '' ?>
 															</div>
 														</div>
 
@@ -204,7 +204,7 @@ $this->title = 'KFI Grid View';
 																<img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima" style="margin-top: -5px;cursor:pointer;">
 															</span>&nbsp;&nbsp;
 															<?php
-															if ($role >= 3) {
+															if ($role >= 5) {
 															?>
 																<span class="next-update-span" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" onclick="javascript:updateKfi(<?= $kfiId ?>)">
 																	<i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i>

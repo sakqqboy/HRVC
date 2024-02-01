@@ -84,7 +84,7 @@ $this->title = 'KFI';
 									if (isset($kfis) && count($kfis) > 0) {
 										foreach ($kfis as $kfiId => $kfi) :
 									?>
-											<tr style="border-bottom: 10px white !important;" id="kfi-<?= $kfiId ?>">
+											<tr style="border-bottom: 10px white !important;" id="kfi-<?= $kfiId ?>" class="font-size-12">
 												<td class="<?= $kfi["status"] == 1 ? 'over-blue' : 'over-yellow' ?>">
 													<!-- <span class="badge bg-info text-white">PL</span> --> <?= $kfi["kfiName"] ?>
 
@@ -108,7 +108,7 @@ $this->title = 'KFI';
 														$show = number_format($kfi["target"]);
 													}
 													?>
-													<?= $show ?>
+													<?= $show ?><?= $kfi["amountType"] == 1 ? '%' : '' ?>
 												</td>
 												<td class="text-center"><?= $kfi["code"] ?></td>
 												<td><?php
@@ -127,7 +127,8 @@ $this->title = 'KFI';
 														$showResult = 0;
 													}
 													?>
-													<?= $showResult ?></td>
+													<?= $showResult ?><?= $kfi["amountType"] == 1 ? '%' : '' ?>
+												</td>
 												<td>
 													<div id="progress1">
 														<div data-num="<?= $kfi["ratio"] == '' ? 0 : $kfi["ratio"] ?>" class="progress-item1"></div>
@@ -142,27 +143,39 @@ $this->title = 'KFI';
 													</span>&nbsp;&nbsp;
 													<span class="dropdown" href="#" role="but ton" id="dropdownMenuLink-<?= $kfiId ?>" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
 													<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kfiId ?>">
-														<li data-bs-toggle="modal" data-bs-target="#staticBackdrop2" onclick="javascript:updateKfi(<?= $kfiId ?>)">
-															<a class="dropdown-item" href="#">
-																<i class="fa fa-file-text-o" aria-hidden="true"></i>
-																<strong class="red">*</strong>
-															</a>
-														</li>
+														<?php
+														if ($role >= 5) {
+														?>
+															<li data-bs-toggle="modal" data-bs-target="#staticBackdrop2" onclick="javascript:updateKfi(<?= $kfiId ?>)">
+																<a class="dropdown-item" href="#">
+																	<i class="fa fa-file-text-o" aria-hidden="true"></i>
+																	<strong class="red">*</strong>
+																</a>
+															</li>
+														<?php
+														}
+														?>
 														<li data-bs-toggle="modal" data-bs-target="#staticBackdrop3" onclick="javascript:kfiHistory(<?= $kfiId ?>)">
 															<a class="dropdown-item" href="#">
 																<i class="fa fa-eye" aria-hidden="true"></i>
 															</a>
 														</li>
-														<li onclick="javascript:copyKfi(<?= $kfiId ?>)" title="Copy">
-															<a class="dropdown-item" href="#">
-																<i class="fa fa-copy" aria-hidden="true"></i>
-															</a>
-														</li>
-														<li data-bs-toggle="modal" data-bs-target="#staticBackdrop4" onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)">
-															<a class="dropdown-item" href="#">
-																<i class="fa fa-trash-o" aria-hidden="true"></i>
-															</a>
-														</li>
+														<?php
+														if ($role >= 5) {
+														?>
+															<li onclick="javascript:copyKfi(<?= $kfiId ?>)" title="Copy">
+																<a class="dropdown-item" href="#">
+																	<i class="fa fa-copy" aria-hidden="true"></i>
+																</a>
+															</li>
+															<li data-bs-toggle="modal" data-bs-target="#staticBackdrop4" onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)">
+																<a class="dropdown-item" href="#">
+																	<i class="fa fa-trash-o" aria-hidden="true"></i>
+																</a>
+															</li>
+														<?php
+														}
+														?>
 													</ul>
 												</td>
 											</tr>

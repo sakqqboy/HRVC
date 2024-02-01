@@ -19,10 +19,13 @@ use frontend\models\hrvc\Unit;
 			$a = 1;
 			foreach ($kfiHasKgi as $kgi) : ?>
 				<tr>
-					<td><?= $a ?>.
-						<span class="font-b">
-							<?= $kgi["kgiName"] ?>
-						</span>
+					<td>
+						<a class="no-underline-black" href="<?= Yii::$app->homeUrl . 'kgi/management/kgi-detail/' . ModelMaster::encodeParams(["kgiId" => $kgi['kgiId']]) ?>" style="cursor: pointer;">
+							<?= $a ?>.
+							<span class="font-b">
+								<?= $kgi["kgiName"] ?>
+							</span>
+						</a>
 					</td>
 					<td><?= $kgi["code"] ?> <?= number_format($kgi["targetAmount"], 2) ?></td>
 					<td><?= ModelMaster::shotMonthText($kgi["month"]) ?></td>

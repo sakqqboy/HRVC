@@ -137,8 +137,8 @@ $this->title = 'Create Employee';
 				<input type="text" class="form-control font-size-14" name="telephoneNumber" required>
 			</div>
 			<div class="col-lg-4 col-md-6 col-12">
-				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Emergency Contact Number</label>
-				<input type="text" class="form-control font-size-14" name="emergencyTel" required>
+				<label class="form-label font-size-13">Emergency Contact Number</label>
+				<input type="text" class="form-control font-size-14" name="emergencyTel">
 
 			</div>
 			<div class="col-lg-4 col-md-6 col-12">
@@ -220,8 +220,8 @@ $this->title = 'Create Employee';
 				</select>
 			</div> -->
 			<div class="col-lg-3 col-md-6 col-12 mt-10">
-				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Employee Condition</label>
-				<select class="form-select font-size-14" name="condition" required>
+				<label class="form-label font-size-13">Employee Condition</label>
+				<select class="form-select font-size-14" name="condition">
 					<option value="">Select</option>
 					<?php
 					if (isset($conditions) && count($conditions) > 0) {

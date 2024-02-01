@@ -49,4 +49,24 @@ class KfiBranch extends \backend\models\hrvc\master\KfiBranchMaster
         }
         return $branches;
     }
+    public static function kfiBranchShort($kfiId)
+    {
+        $kfiBranch = KfiBranch::find()
+            ->select('b.branchName,kfi_branch.branchId')
+            ->JOIN("LEFT JOIN", "branch b", "b.branchId=kfi_branch.branchId")
+            ->where(["b.status" => 1, "kfi_branch.status" => 1, "kfi_branch.kfiId" => $kfiId])
+            ->asArray()
+            ->all();
+        $branchName = '';
+        if (count($kfiBranch) > 0) {
+            if (count($kfiBranch) == 1) {
+                foreach ($kfiBranch as $branch) :
+                    $branchName = $branch["branchName"];
+                endforeach;
+            } else {
+                $branchName = count($kfiBranch) . " Branches";
+            }
+        }
+        return $branchName;
+    }
 }

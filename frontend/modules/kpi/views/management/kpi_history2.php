@@ -6,6 +6,15 @@
 	if (isset($kpiIssue) && count($kpiIssue) > 0) {
 		$i = 1;
 		foreach ($kpiIssue as $kpiIssueId => $issue) :
+			if ($issue['image'] == '') {
+				if ($issue["gender"] == 1) {
+					$answerImage = 'image/user.png';
+				} else {
+					$answerImage = 'image/lady.jpg';
+				}
+			} else {
+				$answerImage = $issue['image'];
+			}
 	?>
 			<li class="li-circle">
 				<img src="<?= Yii::$app->homeUrl ?><?= $issue['image'] ?>" class="image-circle1">
@@ -25,7 +34,7 @@
 
 				<?php
 
-				if ($issue["file"] != "") {
+				if ($issue["file"] != "" && file_exists($issue["file"])) {
 					$fileSize = filesize($issue["file"]) / 1000000;
 				?>
 					<div class="col-12 pr-10 mr-10  pb-10 text-end">
@@ -46,10 +55,20 @@
 				<div class="col-12 mt-5" id="solution-<?= $kpiIssueId ?>">
 					<?php
 					if (isset($issue["solutionList"]) && count($issue["solutionList"]) > 0) {
-						foreach ($issue["solutionList"] as $kpiSolutionId => $data) : ?>
+						foreach ($issue["solutionList"] as $kpiSolutionId => $data) :
+							if ($data['image'] == '') {
+								if ($data["gender"] == 1) {
+									$answerImage = 'image/user.png';
+								} else {
+									$answerImage = 'image/lady.jpg';
+								}
+							} else {
+								$answerImage = $data['image'];
+							}
+					?>
 							<div class="col-12 pl-30" style="margin-top: -10px;">
 								<div class="col-12 comment-box">
-									<img src="<?= Yii::$app->homeUrl ?><?= $data['image'] ?>" class="image-circle1">&nbsp;
+									<img src="<?= Yii::$app->homeUrl ?><?= $answerImage ?>" class="image-circle1">&nbsp;
 									<span class="font-size-14"><?= $data['name'] ?></span>
 									<span class="Report-Issue"> <?= $data['createDateTime'] ?>
 										<i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i>
@@ -59,7 +78,7 @@
 											<?= $data['solution'] ?>
 										</span>
 										<?php
-										if ($data["file"] != "") {
+										if ($data["file"] != "" && file_exists($data["file"])) {
 											$fileSize = filesize($data["file"]) / 1000000;
 										?>
 											<div class="pr-10 mr-10 mt-10 pb-10" style="background-color:#F5F5F5;border-radius:5px;">

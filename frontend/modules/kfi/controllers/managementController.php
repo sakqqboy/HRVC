@@ -83,7 +83,7 @@ class ManagementController extends Controller
 		}
 		if ($role == 1 || $role == 2) {
 			$staffId = Yii::$app->user->id;
-			return $this->redirect(Yii::$app->homeUrl);
+			//return $this->redirect(Yii::$app->homeUrl);
 		}
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -149,7 +149,7 @@ class ManagementController extends Controller
 		}
 		if ($role == 1 || $role == 2) {
 			$staffId = Yii::$app->user->id;
-			return $this->redirect(Yii::$app->homeUrl);
+			//return $this->redirect(Yii::$app->homeUrl);
 		}
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -677,7 +677,7 @@ class ManagementController extends Controller
 		}
 		if ($role == 1 || $role == 2) {
 			$staffId = Yii::$app->user->id;
-			return $this->redirect(Yii::$app->homeUrl);
+			//return $this->redirect(Yii::$app->homeUrl);
 		}
 		$paramText .= '&&adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId;
 		//throw new Exception($paramText);
@@ -1248,6 +1248,41 @@ class ManagementController extends Controller
 		$res["kgiText"] = $text;
 		$res["kfiName"] = $kfiDetail["kfiName"];
 		return json_encode($res);
+	}
+	public function actionKfiDetail($hash)
+	{
+		$param = ModelMaster::decodeParams($hash);
+		$kfiId = $param["kfiId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId);
+		$kfi = curl_exec($api);
+		$kfi = json_decode($kfi, true);
+
+
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-history?kfiId=' . $kfiId);
+		$history = curl_exec($api);
+		$history = json_decode($history, true);
+		$res["historyText"] = $this->renderAjax('history', ["history" => $history]);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-issue?kfiId=' . $kfiId);
+		$kfiIssue = curl_exec($api);
+		$kfiIssue = json_decode($kfiIssue, true);
+		$res["issueText"] =  $this->renderAjax('kfi_issue_detail', [
+			"kfiIssue" => $kfiIssue,
+			"kfiId" => $kfiId,
+		]);
+
+		curl_close($api);
+
+		$role = UserRole::userRight();
+		return $this->render('kfi_detail', [
+			'kfi' => $kfi,
+			"kfiId" => $kfiId,
+			"role" => $role,
+			"res" => $res
+		]);
 	}
 	public function setDefault()
 	{

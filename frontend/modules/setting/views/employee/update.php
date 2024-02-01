@@ -37,7 +37,7 @@ $this->title = 'Update Employee';
 						</div>
 					</div>
 				</div>
-				<div class="col-12 acceptable font-size-12 text-center">
+				<div class="col-12 font-size-12 text-center" style="margin-top: -40px;">
 					<div class="col-12"> Acceptable file types: <strong> JPEG, PNG,</strong> </div>
 					<div class="col-12 mt-2">Maximum file Size: 1 MB</div>
 				</div>
@@ -161,8 +161,8 @@ $this->title = 'Update Employee';
 				<input type="text" class="form-control font-size-14" name="telephoneNumber" required value="<?= $employee['telephoneNumber'] ?>">
 			</div>
 			<div class="col-lg-4 col-md-6 col-12">
-				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Emergency Contact Number</label>
-				<input type="text" class="form-control font-size-14" name="emergencyTel" required value="<?= $employee['emergencyTel'] ?>">
+				<label class="form-label font-size-13"> Emergency Contact Number</label>
+				<input type="text" class="form-control font-size-14" name="emergencyTel" value="<?= $employee['emergencyTel'] ?>">
 
 			</div>
 			<div class="col-lg-4 col-md-6 col-12">
@@ -310,8 +310,8 @@ $this->title = 'Update Employee';
 				</select>
 			</div> -->
 			<div class="col-lg-3 col-md-6 col-12 mt-10">
-				<label class="form-label font-size-13"><strong class="text-danger">*</strong> Employee Condition</label>
-				<select class="form-select font-size-14" name="condition" required>
+				<label class="form-label font-size-13">Employee Condition</label>
+				<select class="form-select font-size-14" name="condition">
 					<?php
 					if (isset($oldData["condition"])) { ?>
 

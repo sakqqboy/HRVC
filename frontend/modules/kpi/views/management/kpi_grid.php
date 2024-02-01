@@ -46,17 +46,20 @@ $this->title = 'KPI Grid View';
 					</div>
 				</div>
 				<?php
-				if ($role >= 3) {
+				//if ($role >= 3) {
 				?>
-					<div class="col-12 mt-10 text-end">
-
-						<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi" class="font-size-14 no-underline-primary">
-							<i class="fa fa-user mr-5" aria-hidden="true"></i>
-							Individual
-						</a>
-					</div>
+				<div class="col-12 mt-10 text-end">
+					<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/team-kpi" class="font-size-14 no-underline-primary mr-20">
+						<i class="fa fa-users mr-5" aria-hidden="true"></i>
+						Team KPI
+					</a>
+					<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi" class="font-size-14 no-underline-primary">
+						<i class="fa fa-user mr-5" aria-hidden="true"></i>
+						Individual
+					</a>
+				</div>
 				<?php
-				}
+				//}
 				?>
 			</div>
 			<!-- <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -114,7 +117,7 @@ $this->title = 'KPI Grid View';
 												<i class="fa fa-eye" aria-hidden="true"></i>
 											</button>
 											<?php
-											if ($role >= 3) {
+											if ($role >= 4) {
 											?>
 												<button class="btn btn-sm btn-outline-danger font-size-10" data-bs-toggle="modal" data-bs-target="#delete-kpi" onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)">
 													<i class="fa fa-trash-o" aria-hidden="true"></i>
@@ -185,8 +188,7 @@ $this->title = 'KPI Grid View';
 													$show = $kpi["targetAmount"];
 												}
 												?>
-												<?= $show ?>
-
+												<?= $show ?><?= $kpi["amountType"] == 1 ? '%' : '' ?>
 											</div>
 										</div>
 										<div class="col-md-2 text-center">
@@ -215,7 +217,7 @@ $this->title = 'KPI Grid View';
 													$showResult = 0;
 												}
 												?>
-												<?= $showResult ?>
+												<?= $showResult ?><?= $kpi["amountType"] == 1 ? '%' : '' ?>
 											</div>
 										</div>
 									</div>
@@ -245,9 +247,15 @@ $this->title = 'KPI Grid View';
 										<div class="col-md-6">
 											<div class="col-12 font-size-10 font-b text-end">
 												Next Update
-												<span class="col-12 pencil-nextupdate" data-bs-toggle="modal" data-bs-target="#update-kpi-modal" onclick="javascript:updateKpi(<?= $kpiId ?>)">
-													<i class="fa fa-pencil-square-o ml-3" aria-hidden="true"></i>
-												</span>
+												<?php
+												if ($role >= 4) {
+												?>
+													<span class="col-12 pencil-nextupdate" data-bs-toggle="modal" data-bs-target="#update-kpi-modal" onclick="javascript:updateKpi(<?= $kpiId ?>)">
+														<i class="fa fa-pencil-square-o ml-3" aria-hidden="true"></i>
+													</span>
+												<?php
+												}
+												?>
 											</div>
 											<div class="col-12 font-size-10 text-end <?= $kpi['isOver'] == 1 ? 'text-danger' : '' ?>" style="font-weight: 700;">
 												<?= $kpi['nextCheck'] ?>

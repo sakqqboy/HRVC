@@ -18,11 +18,14 @@ use frontend\models\hrvc\Unit;
 		if (isset($kgiHasKfi) && count($kgiHasKfi) > 0) {
 			$a = 1;
 			foreach ($kgiHasKfi as $kfi) : ?>
-				<tr>
-					<td><?= $a ?>.
-						<span class="font-b">
-							<?= $kfi["kfiName"] ?>
-						</span>
+				<tr class="font-size-12">
+					<td>
+						<a class="no-underline-black" href="<?= Yii::$app->homeUrl . 'kfi/management/kfi-detail/' . ModelMaster::encodeParams(["kfiId" => $kfi['kfiId']]) ?>" style="cursor: pointer;">
+							<?= $a ?>.
+							<span class="font-b">
+								<?= $kfi["kfiName"] ?>
+							</span>
+						</a>
 					</td>
 					<td><?= number_format($kfi["targetAmount"], 2) ?></td>
 					<td><?= ModelMaster::shotMonthText($kfi["month"]) ?></td>

@@ -52,4 +52,61 @@ class KpiTeam extends \frontend\models\hrvc\master\KpiTeamMaster
             return 0;
         }
     }
+    public static function checkPermission($role, $kpiTeamId, $userId)
+    {
+        $show = 0;
+        if ($role == 7) {
+            $show = 1;
+        }
+        $kpiTeam = KpiTeam::find()->where(["kpiTeamId" => $kpiTeamId])->asArray()->one();
+        $kpiId = $kpiTeam["kpiTeamId"];
+        if ($role == 6) { //GM edit their company kpi
+            $companyId = Company::userCompany($userId); //userId
+            $branchId = Branch::checkCompanyBranch($companyId);
+            $kpiBranch = KpiBranch::find()
+                ->select('kpiBranchId')
+                ->where(["kpiId" => $kpiId, "branchId" => $branchId, "status" => [1, 4]])
+                ->asArray()
+                ->one();
+            if (isset($kpiBranch) && !empty($kpiBranch)) {
+                $show = 1;
+            }
+        }
+        if ($role == 5) { //Manager edit their company kpi
+            $companyId = Company::userCompany($userId); //userId
+            $branchId = Branch::checkCompanyBranch($companyId);
+            $kpiBranch = KpiBranch::find()
+                ->select('kpiBranchId')
+                ->where(["kpiId" => $kpiId, "branchId" => $branchId, "status" => [1, 4]])
+                ->asArray()
+                ->one();
+            if (isset($kpiBranch) && !empty($kpiBranch)) {
+                $show = 1;
+            }
+        }
+        if ($role == 4) { //Supervisor edit their department kpi
+            $departmentId = Department::userDepartmentId($userId);
+            $kpiDepartment = KpiDepartment::find()
+                ->where(["kpiId" => $kpiId, "status" => [1, 4], "departmentId" => $departmentId])
+                ->asArray()
+                ->one();
+            if (isset($kpiDepartment) && !empty($kpiDepartment)) {
+                $show = 1;
+            }
+        }
+        if ($role == 3) { //Team Leader edit their Team
+            //$teamId = Team::userTeam($userId);
+            $kpiTeam = KpiTeam::find()
+                ->where(["kpiTeamId" => $kpiTeamId, "status" => [1, 4]])
+                ->asArray()
+                ->one();
+            if (isset($kpiTeam) && !empty($kpiTeam)) {
+                $show = 1;
+            }
+        }
+        if ($role == 2 || $role == 1) {
+            $show = 0;
+        }
+        return $show;
+    }
 }

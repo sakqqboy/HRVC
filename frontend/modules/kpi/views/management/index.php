@@ -58,17 +58,20 @@ $this->title = 'KPI';
 				</div>
 			</div>
 			<?php
-			if ($role >= 3) {
+			//if ($role >= 3) {
 			?>
-				<div class="col-12 mt-10 text-end">
-
-					<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi" class="font-size-14 no-underline-primary">
-						<i class="fa fa-user mr-5" aria-hidden="true"></i>
-						Individual
-					</a>
-				</div>
+			<div class="col-12 mt-10 text-end">
+				<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/team-kpi" class="font-size-14 no-underline-primary mr-20">
+					<i class="fa fa-users mr-5" aria-hidden="true"></i>
+					Team KPI
+				</a>
+				<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi" class="font-size-14 no-underline-primary">
+					<i class="fa fa-user mr-5" aria-hidden="true"></i>
+					Individual
+				</a>
+			</div>
 			<?php
-			}
+			//}
 			?>
 		</div>
 
@@ -99,7 +102,12 @@ $this->title = 'KPI';
 				if (count($kpis) > 0) {
 					foreach ($kpis as $kpiId => $kpi) :
 						$show = Kpi::checkPermission($role, $kpiId, $userId);
-						if ($show == 1) {
+						/*if ($show == 1) {
+							$display = '';
+						} else {
+							$display = 'none';
+						}*/
+						if ($role >= 4) {
 							$display = '';
 						} else {
 							$display = 'none';
@@ -148,7 +156,7 @@ $this->title = 'KPI';
 									$show = $kpi["targetAmount"];
 								}
 								?>
-								<?= $show ?>
+								<?= $show ?><?= $kpi["amountType"] == 1 ? '%' : '' ?>
 							<td>
 								<?= $kpi["code"] ?>
 							</td>
@@ -168,7 +176,7 @@ $this->title = 'KPI';
 									$showResult = 0;
 								}
 								?>
-								<?= $showResult ?>
+								<?= $showResult ?><?= $kpi["amountType"] == 1 ? '%' : '' ?>
 							</td>
 							<td>
 								<div id="progress1">

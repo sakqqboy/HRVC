@@ -78,7 +78,7 @@ $this->title = 'KFI';
 									if (isset($kfis) && count($kfis) > 0) {
 										foreach ($kfis as $kfiId => $kfi) :
 									?>
-											<tr style="border-bottom: 10px white !important;" id="kfi-<?= $kfiId ?>">
+											<tr style="border-bottom: 10px white !important;" id="kfi-<?= $kfiId ?>" class="font-size-12">
 												<td class="<?= $kfi["status"] == 1 ? 'over-blue' : 'over-yellow' ?>">
 													<!-- <span class="badge bg-info text-white">PL</span> --> <?= $kfi["kfiName"] ?>
 
@@ -102,7 +102,7 @@ $this->title = 'KFI';
 														$show = number_format($kfi["target"]);
 													}
 													?>
-													<?= $show ?>
+													<?= $show ?><?= $kfi["amountType"] == 1 ? '%' : '' ?>
 												</td>
 												<td class="text-center"><?= $kfi["code"] ?></td>
 												<td>
@@ -122,7 +122,7 @@ $this->title = 'KFI';
 														$showResult = 0;
 													}
 													?>
-													<?= $showResult ?>
+													<?= $showResult ?><?= $kfi["amountType"] == 1 ? '%' : '' ?>
 												</td>
 												<td>
 													<div id="progress1">
@@ -142,7 +142,7 @@ $this->title = 'KFI';
 													<span class="dropdown" href="#" role="but ton" id="dropdownMenuLink-<?= $kfiId ?>" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
 													<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kfiId ?>">
 														<?php
-														if ($role >= 3) {
+														if ($role >= 5) {
 														?>
 															<li data-bs-toggle="modal" data-bs-target="#staticBackdrop2" onclick="javascript:updateKfi(<?= $kfiId ?>)" title="Update">
 																<a class="dropdown-item" href="#">
@@ -159,7 +159,7 @@ $this->title = 'KFI';
 															</a>
 														</li>
 														<?php
-														if ($role >= 3) {
+														if ($role >= 5) {
 														?>
 															<li onclick="javascript:copyKfi(<?= $kfiId ?>)" title="Copy">
 																<a class="dropdown-item" href="#">
@@ -243,6 +243,5 @@ $this->title = 'KFI';
 	<?= $this->render('issue_modal') ?>
 	<?= $this->render('delete_modal') ?>
 	<?= $this->render('modal_kgi') ?>
-	<?= $this->render('modal_kpi') ?>
 
 </div>

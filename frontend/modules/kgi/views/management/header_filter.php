@@ -30,7 +30,7 @@
 			?>
 				<a href="<?= Yii::$app->homeUrl ?>kgi/management/assign-kgi" class="nav-link text-dark" id="pills-Setting-tab" type="button" role="tab" aria-controls="pills-Action" aria-selected="false">
 					<i class="fa fa-cog" aria-hidden="true"></i>
-					Assign
+					Assign and approval
 				</a>
 			<?php
 			}

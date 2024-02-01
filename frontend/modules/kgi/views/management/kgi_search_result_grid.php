@@ -63,17 +63,20 @@ $this->title = 'KGI Grid View';
 					</div>
 				</div>
 				<?php
-				if ($role >= 3) {
+				//if ($role >= 3) {
 				?>
-					<div class="col-12 mt-10 text-end">
-
-						<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi" class="font-size-14 no-underline-primary">
-							<i class="fa fa-user mr-5" aria-hidden="true"></i>
-							Individual
-						</a>
-					</div>
+				<div class="col-12 mt-10 text-end">
+					<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/team-kgi" class="font-size-14 no-underline-primary mr-20">
+						<i class="fa fa-users mr-5" aria-hidden="true"></i>
+						Team KGI
+					</a>
+					<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi" class="font-size-14 no-underline-primary">
+						<i class="fa fa-user mr-5" aria-hidden="true"></i>
+						Individual
+					</a>
+				</div>
 				<?php
-				}
+				//}
 				?>
 			</div>
 			<!-- <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist"> -->
@@ -132,7 +135,7 @@ $this->title = 'KGI Grid View';
 												<i class="fa fa-eye" aria-hidden="true"></i>
 											</button>
 											<?php
-											if ($role >= 3) {
+											if ($role >= 4) {
 											?>
 												<button class="btn btn-sm btn-outline-danger font-size-10" data-bs-toggle="modal" data-bs-target="#delete-kgi" onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)">
 													<i class="fa fa-trash-o" aria-hidden="true"></i>
@@ -203,7 +206,7 @@ $this->title = 'KGI Grid View';
 													$show = $kgi["targetAmount"];
 												}
 												?>
-												<?= $show ?>
+												<?= $show ?><?= $kgi["amountType"] == 1 ? '%' : '' ?>
 											</div>
 										</div>
 										<div class="col-md-2 text-center">
@@ -232,7 +235,7 @@ $this->title = 'KGI Grid View';
 													$showResult = 0;
 												}
 												?>
-												<?= $showResult ?>
+												<?= $showResult ?><?= $kgi["amountType"] == 1 ? '%' : '' ?>
 											</div>
 										</div>
 									</div>
@@ -262,7 +265,7 @@ $this->title = 'KGI Grid View';
 										<div class="col-md-6">
 											<div class="row">
 												<?php
-												if ($role >= 3) {
+												if ($role >= 4) {
 													$col = 9;
 												} else {
 													$col = 12;
@@ -270,7 +273,7 @@ $this->title = 'KGI Grid View';
 												<div class="col-12 font-size-10 font-b text-end">
 													Next Update
 													<?php
-													if ($role >= 3) {
+													if ($role >= 4) {
 													?>
 														<span class="pencil-nextupdate text-center ml-3" data-bs-toggle="modal" data-bs-target="#update-kgi-modal" onclick="javascript:updateKgi(<?= $kgiId ?>)">
 															<i class="fa fa-pencil-square-o" aria-hidden="true"></i>

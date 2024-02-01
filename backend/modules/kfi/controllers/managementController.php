@@ -35,7 +35,7 @@ class ManagementController extends Controller
 	public function actionIndex($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId)
 	{
 		$data = [];
-		if ($adminId != '') {
+		/*if ($adminId != '') {
 			$kfis = Kfi::find()
 				->where(["status" => [1, 2, 4]])
 				->asArray()
@@ -104,7 +104,12 @@ class ManagementController extends Controller
 			// 	->asArray()
 			// 	->orderBy('kfi.updateDateTime DESC')
 			// 	->all();
-		}
+		}*/
+		$kfis = Kfi::find()
+			->where(["status" => [1, 2, 4]])
+			->asArray()
+			->orderBy('updateDateTime DESC')
+			->all();
 		if (isset($kfis) && count($kfis) > 0) {
 			foreach ($kfis as $kfi) :
 				$data[$kfi["kfiId"]] = [
@@ -132,7 +137,8 @@ class ManagementController extends Controller
 					"fromDate" => "",
 					"toDate" => "",
 					"active" => $kfi["active"],
-					"countKfiHasKgi" => KfiHasKgi::countKgiInkfi($kfi["kfiId"])
+					"countKfiHasKgi" => KfiHasKgi::countKgiInkfi($kfi["kfiId"]),
+
 				];
 				$kfiHistory = KfiHistory::find()
 					->where(["kfiId" => $kfi["kfiId"], "status" => [1, 2]])
@@ -192,7 +198,7 @@ class ManagementController extends Controller
 		$res["kfiBranch"] = KfiBranch::kfiBranch($kfiId);
 		$res["unitId"] = $kfi["unitId"];
 		$res["detail"] = $kfi["kfiDetail"];
-		$res["targetAmount"] = number_format($kfi["targetAmount"], 2);
+		$res["targetAmount"] = $kfi["targetAmount"];
 		$res["status"] = $kfi["status"];
 		$res["creater"] = User::employeeNameByuserId($kfi["createrId"]);
 		$res["monthName"] = strtoupper(ModelMaster::monthEng($kfi['month'], 1));
@@ -201,6 +207,7 @@ class ManagementController extends Controller
 		$res["countryName"] = Country::countryNameBycompany($kfi['companyId']);
 		$res["flag"] = Country::countryFlagBycompany($kfi["companyId"]);
 		$res["active"] = $kfi["active"];
+		$res["branch"] = KfiBranch::kfiBranchShort($kfiId);
 		$kfiHistory = KfiHistory::find()
 			->where(["kfiId" => $kfiId, "status" => [1, 2]])
 			->orderBy('kfiHistoryId DESC')
@@ -209,17 +216,19 @@ class ManagementController extends Controller
 		if (isset($kfiHistory) && !empty($kfiHistory)) {
 			$res2["quantRatio"] = $kfiHistory["quantRatio"];
 			$res2["code"] =  $kfiHistory["code"];
-			$res2["result"] = number_format($kfiHistory["result"], 2);
+			$res2["result"] = $kfiHistory["result"];
 			$res2["amountType"] = $kfiHistory["amountType"];
 			$res2["kfiStatus"] = $kfiHistory["historyStatus"];
 			$res2["nextCheck"] = ModelMaster::engDate($kfiHistory["nextCheckDate"], 2);
 			$res2["checkDate"] = ModelMaster::engDate($kfiHistory["checkPeriodDate"], 2);
 			$res2["nextCheckDate"] = $kfiHistory["nextCheckDate"];
+			$res2["isOver"] = ModelMaster::isOverDuedate(Kfi::nextCheckDate($kfiHistory['kfiId']));
 			$res["creater"] = User::employeeNameByuserId($kfiHistory["createrId"]);
 			//$res2["periodCheck"] = $kfiHistory["checkPeriodDate"];
 			$res2["fromDate"] = $kfiHistory["fromDate"];
 			$res2["toDate"] = $kfiHistory["toDate"];
-
+			$res2["fromDateDetail"] = ModelMaster::engDate($kfiHistory["fromDate"], 2);
+			$res2["toDateDetail"] = ModelMaster::engDate($kfiHistory["toDate"], 2);
 			if ($kfi["targetAmount"] == null || $kfi["targetAmount"] == '' || $kfi["targetAmount"] == 0) {
 				$ratio = 0;
 			} else {
@@ -242,6 +251,7 @@ class ManagementController extends Controller
 			$res2["nextCheckDate"] = null;
 			$res2["fromDate"] = null;
 			$res2["toDate"] = null;
+			$res2["isOver"] = 1;
 			//$res2["periodCheck"] = $kfi["periodDate"];
 		}
 		$res3 = array_merge($res, $res2);
@@ -256,8 +266,6 @@ class ManagementController extends Controller
 			->all();
 		$data = [];
 		if (isset($kfiHistory) && count($kfiHistory) > 0) {
-
-
 			foreach ($kfiHistory as $history) :
 				$time = explode(' ', $history["createDateTime"]);
 				$data[$history["kfiHistoryId"]] = [
@@ -317,7 +325,7 @@ class ManagementController extends Controller
 	{
 		$data = [];
 		//$kfis = Kfi::find()->where(["status" => [1, 2]])->asArray()->all();
-		if ($adminId != '') {
+		/*if ($adminId != '') {
 			$kfis = Kfi::find()
 				->select('kfi.*')
 				->JOIN("LEFT JOIN", "kfi_branch kb", "kb.kfiId=kfi.kfiId")
@@ -430,7 +438,23 @@ class ManagementController extends Controller
 				])
 				->orderBy('kfi.createDateTime ASC')
 				->all();
-		}
+		}*/
+		$kfis = Kfi::find()
+			->select('kfi.*')
+			->JOIN("LEFT JOIN", "kfi_branch kb", "kb.kfiId=kfi.kfiId")
+			->JOIN("LEFT JOIN", "company c", "c.companyId=kfi.companyId")
+			->where(["c.status" => 1])
+			->andWhere("kfi.status!=99")
+			->andFilterWhere([
+				"kfi.companyId" => $companyId,
+				"kb.branchId" => $branchId,
+				"kfi.month" => $month,
+				"kfi.status" => $status,
+				"kfi.year" => $year,
+				"kfi.active" => isset($active) ? $active : null
+			])
+			->orderBy('kfi.createDateTime ASC')
+			->all();
 		if (isset($kfis) && count($kfis) > 0) {
 			foreach ($kfis as $kfi) :
 				$data[$kfi["kfiId"]] = [

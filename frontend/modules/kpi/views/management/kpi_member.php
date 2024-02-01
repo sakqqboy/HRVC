@@ -1,7 +1,4 @@
 <?php
-
-use frontend\models\hrvc\Department;
-
 if (isset($kpiEmloyee) && count($kpiEmloyee) > 0) { ?>
 	<div class="row mt-20">
 		<?php
@@ -14,7 +11,7 @@ if (isset($kpiEmloyee) && count($kpiEmloyee) > 0) { ?>
 				</div>
 				<div class="col-12">
 					<strong class="font-size-10"> <?= $employee["firstname"] ?> <?= $employee["surename"] ?></strong>
-					<div class="font-size-10"><?= 'Position Name' ?></div>
+					<div class="font-size-10"><?= $employee["position"] ?></div>
 				</div>
 			</div>
 

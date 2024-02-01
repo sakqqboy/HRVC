@@ -81,7 +81,7 @@ class ManagementController extends Controller
 		}
 		if ($role == 1 || $role == 2) {
 			$staffId = Yii::$app->user->id;
-			return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi');
+			//return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi');
 		}
 
 		$api = curl_init();
@@ -145,7 +145,8 @@ class ManagementController extends Controller
 		}
 		if ($role == 1 || $role == 2) {
 			$staffId = Yii::$app->user->id;
-			return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi-grid'); //not dev yet
+			//return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi-grid'); //not dev yet
+			//return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi');
 		}
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -884,7 +885,7 @@ class ManagementController extends Controller
 		}
 		if ($role == 1 || $role == 2) {
 			$staffId = Yii::$app->user->id;
-			return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi');
+			//return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi');
 		}
 		//$paramText .= '&&adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId;
 		$paramText .= '&&adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId;
@@ -1798,6 +1799,52 @@ class ManagementController extends Controller
 		$res["kpiText"] = $text;
 		$res["kgiName"] = $kgiDetail["kgiName"];
 		return json_encode($res);
+	}
+	public function actionKgiDetail($hash)
+	{
+		$param = ModelMaster::decodeParams($hash);
+		$kgiId = $param["kgiId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
+		$kgi = curl_exec($api);
+		$kgi = json_decode($kgi, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-team?id=' . $kgiId);
+		$kgiTeams = curl_exec($api);
+		$kgiTeams = json_decode($kgiTeams, true);
+		$res["teamText"] = $this->renderAjax('kgi_team', ["kgiTeams" => $kgiTeams, "kgiId" => $kgiId]);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-employee?id=' . $kgiId);
+		$kgiEmployee = curl_exec($api);
+		$kgiEmployee = json_decode($kgiEmployee, true);
+		$res["employeeText"] = $this->renderAjax('kgi_member', ["kgiEmloyee" => $kgiEmployee, "kgiId" => $kgiId]);
+		//throw new exception($kgiId);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-history?kgiId=' . $kgiId);
+		$history = curl_exec($api);
+		$history = json_decode($history, true);
+		$res["historyText"] = $this->renderAjax('kgi_history', ["history" => $history]);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-issue?kgiId=' . $kgiId);
+		$kgiIssue = curl_exec($api);
+		$kgiIssue = json_decode($kgiIssue, true);
+		$res["issueText"] =  $this->renderAjax('kgi_issue_detail', [
+			"kgiIssue" => $kgiIssue,
+			"kgiId" => $kgiId,
+		]);
+
+		curl_close($api);
+
+		$role = UserRole::userRight();
+		return $this->render('kgi_detail', [
+			'kgi' => $kgi,
+			"kgiId" => $kgiId,
+			"role" => $role,
+			"kgiTeams" => $kgiTeams,
+			"kgiEmloyee" => $kgiEmployee,
+			"res" => $res
+		]);
 	}
 	public function setDefault()
 	{

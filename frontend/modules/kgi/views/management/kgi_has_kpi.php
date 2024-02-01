@@ -18,11 +18,14 @@ use frontend\models\hrvc\Unit;
 		if (isset($kgiHasKpi) && count($kgiHasKpi) > 0) {
 			$a = 1;
 			foreach ($kgiHasKpi as $kpi) : ?>
-				<tr>
-					<td><?= $a ?>.
-						<span class="font-b">
-							<?= $kpi["kpiName"] ?>
-						</span>
+				<tr class="font-size-12">
+					<td>
+						<a class="no-underline-black" href="<?= Yii::$app->homeUrl . 'kpi/management/kpi-detail/' . ModelMaster::encodeParams(["kpiId" => $kpi['kpiId']]) ?>" style="cursor: pointer;">
+							<?= $a ?>.
+							<span class="font-b">
+								<?= $kpi["kpiName"] ?>
+							</span>
+						</a>
 					</td>
 					<td><?= number_format($kpi["targetAmount"], 2) ?></td>
 					<td><?= ModelMaster::shotMonthText($kpi["month"]) ?></td>

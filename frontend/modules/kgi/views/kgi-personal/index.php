@@ -12,9 +12,7 @@ $this->title = "Individual KGI";
 		<i class="fa fa-tachometer font-size-20" aria-hidden="true"></i> <strong class="font-size-20"> Performance Indicator Matrices (PIM)</strong>
 	</div>
 	<div class="col-12 mt-20">
-		<?= $this->render('header_filter', [
-			"role" => $role
-		]) ?>
+
 		<div class="alert alert-white-4">
 			<div class="row">
 				<div class="col-lg-4 col-md-6 col-12 key1">
@@ -25,30 +23,16 @@ $this->title = "Individual KGI";
 
 					</div>
 				</div>
-				<div class="col-lg-7 col-md-12 col-12 New-KFI">
-					<?= $this->render('filter_list', [
-						"companies" => $companies,
-						"months" => $months
-					]) ?>
-					<input type="hidden" id="type" value="list">
-				</div>
-				<div class="col-lg-1 col-md-6 col-12 New-date">
-					<div class="row">
-						<div class="col-12 new-light-4">
-							<div class="btn-group" role="group" aria-label="Basic example">
-								<a class="btn btn-primary font-size-13"><i class="fa fa-list-ul" aria-hidden="true"></i></a>
-								<a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" class="btn btn-outline-primary font-size-13"><i class="fa fa-th-large" aria-hidden="true"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
 				<?php
 				if ($role >= 3) {
 				?>
 					<div class="col-12 mt-10 text-end">
-
+						<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/team-kgi" class="font-size-14 no-underline-primary">
+							<i class="fa fa-users mr-5" aria-hidden="true"></i>
+							Team KGI
+						</a>
 						<a href="<?= Yii::$app->homeUrl ?>kgi/management/index" class="font-size-14 no-underline-primary">
-							<i class="fa fa-cog mr-5" aria-hidden="true"></i>
+							<i class="fa fa-cog ml-10 mr-5" aria-hidden="true"></i>
 							KGI Setting
 						</a>
 					</div>
@@ -61,7 +45,6 @@ $this->title = "Individual KGI";
 					<thead class="table-secondary">
 						<tr class="transform-none">
 							<th>KGI Contents</th>
-
 							<th>Priority</th>
 							<th>Employees</th>
 							<th>Team</th>

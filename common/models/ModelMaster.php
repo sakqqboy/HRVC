@@ -218,8 +218,12 @@ class ModelMaster extends \yii\db\ActiveRecord
             'Nov',
             'Dec',
         ];
-        $month = ($type == self::DATE_THAI_TYPE_FULL) ? $monthFullEng[(int) $month] : $monthShortEng[(int) $month];
-        return $month;
+        if ($month != '') {
+            $month = ($type == self::DATE_THAI_TYPE_FULL) ? $monthFullEng[(int) $month] : $monthShortEng[(int) $month];
+            return $month;
+        } else {
+            return null;
+        }
     }
     public function getMonthText($month, $type = 1)
     {

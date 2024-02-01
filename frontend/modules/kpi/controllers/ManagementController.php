@@ -78,9 +78,8 @@ class ManagementController extends Controller
         }
         if ($role == 1 || $role == 2) {
             $staffId = Yii::$app->user->id;
-            return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
+            //return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
         }
-
         $api = curl_init();
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
@@ -141,7 +140,7 @@ class ManagementController extends Controller
         }
         if ($role == 1 || $role == 2) {
             $staffId = Yii::$app->user->id;
-            return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
+            //return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
         }
 
         $api = curl_init();
@@ -163,6 +162,7 @@ class ManagementController extends Controller
         curl_close($api);
         $months = ModelMaster::monthFull(1);
         $isManager = UserRole::isManager();
+        //throw new exception(print_r($kpis, true));
         return $this->render('kpi_grid', [
             "units" => $units,
             "companies" => $companies,
@@ -722,7 +722,7 @@ class ManagementController extends Controller
         }
         if ($role == 1 || $role == 2) {
             $staffId = Yii::$app->user->id;
-            return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
+            //return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
         }
         //$paramText .= '&&adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId;
         $paramText .= '&&adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId;
@@ -1624,6 +1624,52 @@ class ManagementController extends Controller
         $res["kgiText"] = $text;
         $res["kpiName"] = $kpiDetail["kpiName"];
         return json_encode($res);
+    }
+    public function actionKpiDetail($hash)
+    {
+        $param = ModelMaster::decodeParams($hash);
+        $kpiId = $param["kpiId"];
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId);
+        $kpi = curl_exec($api);
+        $kpi = json_decode($kpi, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-team?id=' . $kpiId);
+        $kpiTeams = curl_exec($api);
+        $kpiTeams = json_decode($kpiTeams, true);
+        $res["teamText"] = $this->renderAjax('kpi_team', ["kpiTeams" => $kpiTeams, "kpiId" => $kpiId]);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-employee?id=' . $kpiId);
+        $kpiEmployee = curl_exec($api);
+        $kpiEmployee = json_decode($kpiEmployee, true);
+        $res["employeeText"] = $this->renderAjax('kpi_member', ["kpiEmloyee" => $kpiEmployee, "kpiId" => $kpiId]);
+        //throw new exception($kpiId);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-history?kpiId=' . $kpiId);
+        $history = curl_exec($api);
+        $history = json_decode($history, true);
+        $res["historyText"] = $this->renderAjax('kpi_history', ["history" => $history]);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-issue?kpiId=' . $kpiId);
+        $kpiIssue = curl_exec($api);
+        $kpiIssue = json_decode($kpiIssue, true);
+        $res["issueText"] =  $this->renderAjax('kpi_issue_detail', [
+            "kpiIssue" => $kpiIssue,
+            "kpiId" => $kpiId,
+        ]);
+
+        curl_close($api);
+
+        $role = UserRole::userRight();
+        return $this->render('kpi_detail', [
+            'kpi' => $kpi,
+            "kpiId" => $kpiId,
+            "role" => $role,
+            "kpiTeams" => $kpiTeams,
+            "kpiEmloyee" => $kpiEmployee,
+            "res" => $res
+        ]);
     }
     public function setDefault()
     {

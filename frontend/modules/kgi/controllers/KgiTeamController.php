@@ -10,6 +10,7 @@ use frontend\models\hrvc\Kgi;
 use frontend\models\hrvc\KgiGroup;
 use frontend\models\hrvc\KgiTeam;
 use frontend\models\hrvc\KgiTeamHistory;
+use frontend\models\hrvc\Team;
 use frontend\models\hrvc\UserRole;
 use Yii;
 use yii\db\Expression;
@@ -131,14 +132,196 @@ class KgiTeamController extends Controller
 	}
 	public function actionTeamKgi()
 	{
+		$role = UserRole::userRight();
+		if ($role < 3) {
+			//return $this->redirect(Yii::$app->homeUrl . 'kgi/management/grid');
+		}
+		$groupId = Group::currentGroupId();
+		if ($groupId == null) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+		}
+		$userId = Yii::$app->user->id;
+		$userTeamId = Team::userTeam($userId);
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/all-team-kgi');
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/all-team-kgi?userId=' . $userId . '&&role=' . $role);
 		$teamKgis = curl_exec($api);
 		$teamKgis = json_decode($teamKgis, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
+		$units = curl_exec($api);
+		$units = json_decode($units, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$companies = curl_exec($api);
+		$companies = json_decode($companies, true);
+
+		curl_close($api);
+		//throw new Exception($role);
+		$isManager = UserRole::isManager();
+		$months = ModelMaster::monthFull(1);
+		return $this->render('team_kgi', [
+			"units" => $units,
+			"months" => $months,
+			"teamKgis" => $teamKgis,
+			"role" => $role,
+			"userId" => Yii::$app->user->id,
+			"isManager" => $isManager,
+			"companies" => $companies,
+			"userTeamId" => $userTeamId,
+			"companyId" => null,
+			"branchId" => null,
+			"teamId" => null,
+			"month" => null,
+			"status" => null,
+			"year" => null,
+		]);
+	}
+	public function actionSearchKgiTeam()
+	{
+		$companyId = isset($_POST["companyId"]) && $_POST["companyId"] != null ? $_POST["companyId"] : null;
+		$branchId = isset($_POST["branchId"]) && $_POST["branchId"] != null ? $_POST["branchId"] : null;
+		$teamId = isset($_POST["teamId"]) && $_POST["teamId"] != null ? $_POST["teamId"] : null;
+		$month = isset($_POST["month"]) && $_POST["month"] != null ? $_POST["month"] : null;
+		$status = isset($_POST["status"]) && $_POST["status"] != null ? $_POST["status"] : null;
+		$year = isset($_POST["year"]) && $_POST["year"] != null ? $_POST["year"] : null;
+		$type = $_POST["type"];
+		return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-team/kgi-team-search-result/' . ModelMaster::encodeParams([
+			"companyId" => $companyId,
+			"branchId" => $branchId,
+			"teamId" => $teamId,
+			"month" => $month,
+			"status" => $status,
+			"year" => $year,
+			"type" => $type
+		]));
+	}
+	public function actionKgiTeamSearchResult($hash)
+	{
+		$param = ModelMaster::decodeParams($hash);
+		$companyId = $param["companyId"];
+		$branchId = $param["branchId"];
+		$teamId = $param["teamId"];
+		$month = $param["month"];
+		$status = $param["status"];
+		$year = $param["year"];
+		$type = $param["type"];
+		if ($companyId == "" && $branchId == "" && $teamId == "" && $month == "" && $status == "" && $year == "") {
+			if ($type == "list") {
+				return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-team/team-kgi');
+			} else {
+				return $this->redirect(Yii::$app->homeUrl . 'kgi/management/grid');
+			}
+		}
+		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&teamId=' . $teamId . '&&month=' . $month . '&&status=' . $status . '&&year=' . $year;
+		$groupId = Group::currentGroupId();
+		if ($groupId == null) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+		}
+		$userId = Yii::$app->user->id;
+		$userTeamId = Team::userTeam($userId);
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-team-filter?' . $paramText);
+		$teamKgis = curl_exec($api);
+		$teamKgis = json_decode($teamKgis, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
+		$units = curl_exec($api);
+		$units = json_decode($units, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$companies = curl_exec($api);
+		$companies = json_decode($companies, true);
+
+		curl_close($api);
+		//throw new exception(print_r($teamKgis, true));
+		if ($type == "list") {
+			$file = "team_kgi";
+		} else {
+			$file = "kgi_team_search_result_grid";
+		}
+		$months = ModelMaster::monthFull(1);
+		$role = UserRole::userRight();
+		$isManager = UserRole::isManager();
+		return $this->render($file, [
+			"units" => $units,
+			"months" => $months,
+			"teamKgis" => $teamKgis,
+			"role" => $role,
+			"userId" => $userId,
+			"userTeamId" => $userTeamId,
+			"isManager" => $isManager,
+			"companies" => $companies,
+			"companyId" => $companyId,
+			"branchId" => $branchId,
+			"teamId" => $teamId,
+			"month" => $month,
+			"status" => $status,
+			"year" => $year,
+		]);
+	}
+	public function actionPrepareUpdate()
+	{
+		$kgiTeamId = $_POST["kgiTeamId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-team-detail?kgiTeamId=' . $kgiTeamId);
+		$kgiTeam = curl_exec($api);
+		$kgiTeam = json_decode($kgiTeam, true);
+		curl_close($api);
+		$res["kgiTeam"] = $kgiTeam;
+		return json_encode($res);
+	}
+	public function actionUpdateKgiTeam()
+	{
+		$kgiTeamId = $_POST["kgiTeamId"];
+		$kgiTeamHistory = new KgiTeamHistory();
+		$kgiTeamHistory->kgiTeamId = $kgiTeamId;
+		$kgiTeamHistory->result = $_POST["result"];
+		$kgiTeamHistory->status = $_POST["status"];
+		$kgiTeamHistory->month = $_POST["month"];
+		$kgiTeamHistory->fromDate = $_POST["fromDate"];
+		$kgiTeamHistory->toDate = $_POST["toDate"];
+		$kgiTeamHistory->nextCheckDate = $_POST["nextDate"];
+		$kgiTeamHistory->detail = $_POST["remark"];
+		$kgiTeamHistory->createrId = Yii::$app->user->id;
+		$kgiTeamHistory->createDateTime = new Expression('NOW()');
+		$kgiTeamHistory->updateDateTime = new Expression('NOW()');
+		if ($kgiTeamHistory->save(false)) {
+			$teamKgi = KgiTeam::find()->where(["kgiTeamId" => $kgiTeamId])->one();
+			$teamKgi->status = $_POST["status"];
+			$teamKgi->month = $_POST["month"];
+			$teamKgi->result = $_POST["result"];
+			$teamKgi->fromDate = $_POST["fromDate"];
+			$teamKgi->toDate = $_POST["toDate"];
+			$teamKgi->nextCheckDate = $_POST["nextDate"];
+			$teamKgi->updateDateTime = new Expression('NOW()');
+			$teamKgi->save(false);
+		}
+		return $this->redirect('team-kgi');
+	}
+	public function actionKgiTeamView()
+	{
+		$kgiTeamId = $_POST["kgiTeamId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-team-detail?kgiTeamId=' . $kgiTeamId);
+		$kgiTeam = curl_exec($api);
+		$kgiTeam = json_decode($kgiTeam, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-team-history-view?kgiTeamId=' . $kgiTeamId);
+		$kgiTeamHistory = curl_exec($api);
+		$kgiTeamHistory = json_decode($kgiTeamHistory, true);
+
 		curl_close($api);
 
-		return $this->render('team_kgi');
+		$teamText = $this->renderAjax('team_history', ["kgiTeamHistory" => $kgiTeamHistory]);
+		$res["kgiTeam"] = $kgiTeam;
+		$res["history"] = $teamText;
+		return json_encode($res);
 	}
 }

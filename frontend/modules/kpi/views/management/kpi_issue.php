@@ -25,7 +25,7 @@
 
 				<?php
 
-				if ($issue["file"] != "") {
+				if ($issue["file"] != "" && file_exists($issue["file"])) {
 					$fileSize = filesize($issue["file"]) / 1000000;
 				?>
 					<div class="col-12 pr-10 mr-10  pb-10" style="background-color:#F5F5F5;border-radius:5px;">
@@ -66,7 +66,7 @@
 											<?= $data['solution'] ?>
 										</span>
 										<?php
-										if ($data["file"] != "") {
+										if ($data["file"] != "" && file_exists($data["file"])) {
 											$fileSize = filesize($data["file"]) / 1000000;
 
 										?>

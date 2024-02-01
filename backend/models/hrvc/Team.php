@@ -6,30 +6,40 @@ use Yii;
 use \backend\models\hrvc\master\TeamMaster;
 
 /**
-* This is the model class for table "team".
-*
-* @property integer $teamId
-* @property string $teamName
-* @property integer $branchId
-* @property integer $status
-* @property string $createDateTime
-* @property string $updateDateTime
-*/
+ * This is the model class for table "team".
+ *
+ * @property integer $teamId
+ * @property string $teamName
+ * @property integer $branchId
+ * @property integer $status
+ * @property string $createDateTime
+ * @property string $updateDateTime
+ */
 
-class Team extends \backend\models\hrvc\master\TeamMaster{
+class Team extends \backend\models\hrvc\master\TeamMaster
+{
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function rules()
     {
         return array_merge(parent::rules(), []);
     }
 
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return array_merge(parent::attributeLabels(), []);
+    }
+    public static function teamName($teamId)
+    {
+        if ($teamId != '') {
+            $team = Team::find()->select('teamName')->where(["teamId" => $teamId])->one();
+            return $team["teamName"];
+        } else {
+            return null;
+        }
     }
 }

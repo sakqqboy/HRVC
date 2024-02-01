@@ -465,7 +465,7 @@ class EmployeeController extends Controller
                     mkdir($path, 0777, true);
                 }
                 $oldProfilePic = Path::getHost() . $oldPicture;
-                if (file_exists($oldProfilePic) && $oldProfilePic != '') {
+                if (file_exists($oldProfilePic) && $oldProfilePic != '' && $oldPicture != '') {
                     unlink($oldProfilePic);
                 }
                 $file = $pictureProfile->name;
@@ -1140,5 +1140,20 @@ class EmployeeController extends Controller
             $userRole->updateDateTime = new Expression('NOW()');
             $userRole->save(false);
         }
+    }
+    public function actionResetPassword()
+    {
+        $employee = Employee::find()->where(["status" => 1])->asArray()->all();
+        if (isset($employee) && count($employee) > 0) {
+            foreach ($employee as $em) :
+                $user = User::find()->where(["status" => 1, "username" => $em["companyEmail"]])->one();
+                if (isset($user) && !empty($user)) {
+                    $passwordArr = explode('@', $user->username);
+                    $user->password_hash = md5($passwordArr[0]);
+                    $user->save(false);
+                }
+            endforeach;
+        }
+        User::deleteAll(["status" => 99]);
     }
 }

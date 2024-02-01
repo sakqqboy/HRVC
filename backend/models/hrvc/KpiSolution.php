@@ -51,6 +51,7 @@ class KpiSolution extends \backend\models\hrvc\master\KpiSolutionMaster
                 $data[$solution["kpiSolutionId"]] = [
                     "name" => $employee["employeeFirstname"] . ' ' . $employee["employeeSurename"],
                     "image" => Employee::EmployeeDetail($solution["employeeId"])["picture"],
+                    "gender" => Employee::EmployeeDetail($solution["employeeId"])["gender"],
                     "createDateTime" => ModelMaster::engDate($solution["createDateTime"], 2),
                     "solution" => $solution["solution"],
                     "file" => $solution["file"],

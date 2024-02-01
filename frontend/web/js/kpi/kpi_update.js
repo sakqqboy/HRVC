@@ -597,18 +597,18 @@ function approveTargetKpiEmployee(kpiEmployeeId, approve) {
 		});
 	}
 }
-function relatedKgiForKpi() { 
+function relatedKgiForKpi() {
 	var kpiId = $("#v-kpiId").val();
 	$("#modal-kgi").modal('show');
 	var url = $url + 'kpi/management/related-kgi';
 	$.ajax({
-	    type: "POST",
-	    dataType: 'json',
-	    url: url,
-	    data: { kpiId: kpiId },
-	    success: function (data) {
-		 $("#related-kgi").html(data.kgiText);
-		 $("#kpi-name-v").html(data.kpiName);
-	    }
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { kpiId: kpiId },
+		success: function (data) {
+			$("#related-kgi").html(data.kgiText);
+			$("#kpi-name-v").html(data.kpiName);
+		}
 	});
-   }
+}
