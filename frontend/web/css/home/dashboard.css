@@ -8,12 +8,12 @@
 
 .title-Update {
     margin-top: 25px;
-    font-size: 15px;
+    font-size: 12px;
 }
 
 .title-Respiratory {
     margin-top: 25px;
-    font-size: 15px;
+    font-size: 12px;
 }
 
 .table-All {
@@ -78,45 +78,23 @@
     font-size: 12px;
 }
 
-.title-calendar1 {
-    margin-top: 25px;
-}
-
-.title-calendar3 {
-    margin-top: 25px;
-
-}
 
 .title-calendar2 {
     margin-top: 25px;
 
 }
 
-.title-refresh {
-    margin-top: 25px;
-    cursor: pointer;
-}
-
-.table-font-small {
-    font-size: 14px;
-    font-weight: 700;
-}
 
 .width-Round-table {
-    width: 20px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
 }
 
 .buttton-eye {
     cursor: pointer;
     font-size: 22px;
     color: grey;
-}
-
-.button-pencil {
-    cursor: pointer;
-    font-size: 22px;
-    color: grey;
-    padding-left: 10px;
 }
 
 .button-plus {
