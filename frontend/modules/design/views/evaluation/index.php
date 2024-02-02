@@ -3,7 +3,7 @@ $this->title = 'Evaluation';
 ?>
 
 <div class="col-12 mt-90 alert alert-Evaluator">
-    <div class="alert alert-white">
+    <div class="alert alert-light">
         <div class="row">
             <div class="col-lg-3 col-md-6 col-12">
                 <div class="col-12 Environment">
@@ -37,23 +37,144 @@ $this->title = 'Evaluation';
                 </div>
             </div>
         </div>
-        <div class="col-12 card">
+        <div class="col-lg-12">
             <div class="row">
-                <div class="col-lg-1">
-                    <img src="<?= Yii::$app->homeUrl ?>image/Maskgroup.png" class="imageslogoMaskTCF">
-                </div>
-                <div class="col-3 namelogoMask">
-                    <div class="col-12 collapseTokyo">
-                        Tokyo Consulting Firm Pvt. Ltd
+                <div class="col-lg-12 col-xs-12">
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default" id="collapseOne_container">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <div class="row">
+                                    <div class="col-lg-1">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/Maskgroup.png" class="imageslogoMaskTCF">
+                                    </div>
+                                    <div class="col-lg-3 namelogoMask">
+                                        <div class="col-12 collapseTokyo">
+                                            Tokyo Consulting Firm Pvt. Ltd
+                                        </div>
+                                        <div class="col-12 font-size-11">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/Thailand.png" class="imageEvaluatorcountry1"> Thailand
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/half.png" class="half_css">
+                                        <div class="col-12 halfleft">Frames</div>
+                                        <div class="col-12 Toa"> Total</div>
+                                        <div class="col-12 circle_6">&nbsp;6</div>
+                                        <div class="col-12 borderscan pl-5 pr-7 pb-5"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/bar-scan.png" class="imagescan"> <span class="text539DF3_1"> Create Frame</span></div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/half.png" class="half_css">
+                                        <div class="col-12 halfleft">Salary</div>
+                                        <div class="col-12 Toa"> TotaL</div>
+                                        <div class="col-12 Toa_Registered"> Registered</div>
+                                        <div class="col-12 circle_6">&nbsp;9</div>
+                                        <div class="col-12 borderscan pl-3 pr-3 pb-3"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Salary_1.png" class="imagescan"> <span class="text539DF3_1"> Register Salary</span></div>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Edit.png" class="iconsDarkedit-1">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Delete.png" class="iconsDarkedelete-1">
+
+                                    </div>
+                                    <div class="col-lg-1 panel-title mt-15">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Selected-2.png" class="img_select24">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="panel-body">
+                                    <table class="table badge-gray-table">
+                                        <thead>
+                                            <tr id="tablebr-<?= $tabletr['tabletrId'] ?>">
+                                            <?php
+                                            while(isset($table) && count($tabletr) >0 ){
+                                                
+                                                <td scope="col">name</td>
+                                                <td scope="col">timeline</td>
+                                                <td scope="col">Attribute</td>
+                                                <td scope="col">TERM</td>
+                                                <td scope="col">MID</td>
+                                                <td scope="col">Bonus</td>
+                                                <td scope="col">Set Evaluator</td>
+                                                <td scope="col">Progress</td>
+                                                <td scope="col">Action</td>
+                                                 }
+                                                ?>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="trantRankColor">
+                                                <td>1</td>
+                                                <td>Mark</td>
+                                                <td>Otto</td>
+                                                <td>@mdo</td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>Jacob</td>
+                                                <td>Thornton</td>
+                                                <td>@fat</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Larry the Bird</td>
+                                                <td>@twitter</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-12 font-size-11">
-                        <img src="<?= Yii::$app->homeUrl ?>image/Thailand.png" class="imageEvaluatorcountry1"> Thailand
+                    <div class="panel panel-default" id="collapseTwo_Container">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <div class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Selected-2.png" class="img_select24">
+                                </a>
+                            </div>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body">
+                                <p>Snakes are elongated, legless, carnivorous reptiles of the suborder Serpentes that can be distinguished from legless lizards by their lack of eyelids and external ears. Like all squamates, snakes are ectothermic, amniote vertebrates
+                                    covered in overlapping scales. Many species of snakes have skulls with several more joints than their lizard ancestors, enabling them to swallow prey much larger than their heads with their highly mobile jaws. To accommodate their
+                                    narrow bodies, snakes' paired organs (such as kidneys) appear one in front of the other instead of side by side, and most have only one functional lung. Some species retain a pelvic girdle with a pair of vestigial claws on either
+                                    side of the cloaca.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default" id="collapseThree_Container">
+                        <div class="panel-heading" role="tab" id="headingThree">
+                            <div class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Selected-2.png" class="img_select24">
+                                </a>
+                            </div>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
+                            <div class="panel-body">
+                                <p>The meerkat or suricate (Suricata suricatta) is a small carnivoran belonging to the mongoose family (Herpestidae). It is the only member of the genus Suricata. Meerkats live in all parts of the Kalahari Desert in Botswana, in much
+                                    of the Namib Desert in Namibia and southwestern Angola, and in South Africa. A group of meerkats is called a "mob", "gang" or "clan". A meerkat clan often contains about 20 meerkats, but some super-families have 50 or more members.
+                                    In captivity, meerkats have an average life span of 12–14 years, and about half this in the wild.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+
+
 
 <!-- <div class="col-12 mt-20"> -->
 <!-- <div class="col-12 mt-20"> -->
