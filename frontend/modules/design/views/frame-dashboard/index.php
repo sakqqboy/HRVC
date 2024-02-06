@@ -5,43 +5,64 @@ $this->title = 'frame Dasdboard';
 <div class="col-12 mt-90 alert alert-FramDashboard">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-12">
-            <div class="col-12 text-start  Dasdboard-start">
+            <div class="col-12 text-start Dasdboard-start">
                 Frame Dasdboard
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-12">
             <div class="row">
-                <div class="col-8">
+                <div class="col-9">
                     <div class="col-12 text-center">
-                        <strong> Choose Your Frame To Display</strong> <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-2.png" class="imagesLightSelectFromCheckboxs-2">
+                        <div class="YourChoose">Choose Your Frame To Display &nbsp;<i class="fa fa-exclamation-circle text-warning font-size-16" aria-hidden="true"></i></div>
                     </div>
-                    <div class="form-check form-check-inline mt-5">
-                        <div class="form-check">
-                            <input class="form-check-input form-check-input-checkE1" type="checkbox" value="checkE1" id="">
-                            <label class="form-check-label form-check-input-checkE1" for="flexCheckDefault"> E1 </label>
+                    <div class="row ml-100">
+                        <div class="col-2 form-check">
+                            <input class="form-check-input form-check-input-labelblack1" type="checkbox" value="labelblack1">
+                            <?php
+                            $season = array("E1");
+
+                            foreach ($season as $element) {
+                                echo "$element";
+                            }
+                            ?>
                         </div>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <div class="form-check">
-                            <input class="form-check-input form-check-input-checkE2" type="checkbox" value="checkE2" id="">
-                            <label class="form-check-label form-check-input-checkE2" for="flexCheckDefault"> E2 </label>
+                        <div class="col-2 form-check">
+                            <input class="form-check-input form-check-input-labelblack1" type="checkbox" value="labelblack1">
+                            <?php
+                            $season = array("E2");
+
+                            foreach ($season as $element) {
+                                echo "$element";
+                            }
+                            ?>
                         </div>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <div class="form-check">
-                            <input class="form-check-input form-check-input-checkE3" type="checkbox" value="checkE3" id="">
-                            <label class="form-check-label form-check-input-checkE3" for="flexCheckDefault"> E3 </label>
+                        <div class="col-2 form-check">
+                            <input class="form-check-input form-check-input-labelblack1" type="checkbox" value="labelblack1">
+                            <?php
+                            $season  = array("E3");
+
+                            foreach ($season as $element) {
+                                echo "$element";
+                            }
+
+                            ?>
                         </div>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <div class="form-check">
-                            <input class="form-check-input form-check-input-checkE4" type="checkbox" value="checkE4" id="">
-                            <label class="form-check-label form-check-input-checkE4" for="flexCheckDefault"> E4 </label>
+                        <div class="col-2 form-check">
+                            <input class="form-check-input form-check-input-labelblack1" type="checkbox" value="labelblack1">
+                            <?php
+                            $senson = array("E4");
+
+                            foreach ($senson as $element) {
+                                echo "$element";
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
-                <div class="col-4 text-end">
-                    <button type="submit" class="btn btn-light Dashboardblue"><i class="fa fa-th-large" aria-hidden="true"></i> Dashboard</button>
+                <div class="col-3 text-end">
+                    <button type="submit" class="btn btn-light Dashboardblue1"><i class="fa fa-th-large" aria-hidden="true"></i> Dashboard</button>
+
+
                 </div>
             </div>
         </div>
@@ -638,3 +659,31 @@ $this->title = 'frame Dasdboard';
         </div>
     </div>
 </div>
+
+
+
+
+<!-- <div class="form-check form-check-inline mt-5">
+                        <div class="form-check">
+                            <input class="form-check-input form-check-input-checkE1" type="checkbox" value="checkE1" id="">
+                            <label class="form-check-label form-check-input-checkE1" for="flexCheckDefault"> E1 </label>
+                        </div>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <div class="form-check">
+                            <input class="form-check-input form-check-input-checkE2" type="checkbox" value="checkE2" id="">
+                            <label class="form-check-label form-check-input-checkE2" for="flexCheckDefault"> E2 </label>
+                        </div>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <div class="form-check">
+                            <input class="form-check-input form-check-input-checkE3" type="checkbox" value="checkE3" id="">
+                            <label class="form-check-label form-check-input-checkE3" for="flexCheckDefault"> E3 </label>
+                        </div>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <div class="form-check">
+                            <input class="form-check-input form-check-input-checkE4" type="checkbox" value="checkE4" id="">
+                            <label class="form-check-label form-check-input-checkE4" for="flexCheckDefault"> E4 </label>
+                        </div>
+                    </div> -->

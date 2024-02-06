@@ -37,7 +37,7 @@ $this->title = 'Evaluation';
                 </div>
             </div>
         </div>
-        <div class="col-lg-12">
+        <!-- <div class="col-lg-12">
             <div class="row">
                 <div class="col-lg-12 col-xs-12">
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -45,9 +45,9 @@ $this->title = 'Evaluation';
                             <div class="panel-heading" role="tab" id="headingOne">
                                 <div class="row">
                                     <div class="col-lg-1">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/Maskgroup.png" class="imageslogoMaskTCF">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/Maskgroup.png" class="imageslogoMask1">
                                     </div>
-                                    <div class="col-lg-3 namelogoMask">
+                                    <div class="col-lg-2 namelogoMask">
                                         <div class="col-12 collapseTokyo">
                                             Tokyo Consulting Firm Pvt. Ltd
                                         </div>
@@ -70,12 +70,13 @@ $this->title = 'Evaluation';
                                         <div class="col-12 circle_6">&nbsp;9</div>
                                         <div class="col-12 borderscan pl-3 pr-3 pb-3"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Salary_1.png" class="imagescan"> <span class="text539DF3_1"> Register Salary</span></div>
                                     </div>
-                                    <div class="col-lg-1">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Edit.png" class="iconsDarkedit-1">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Delete.png" class="iconsDarkedelete-1">
-
+                                    <div class="col-lg-1 text-end mt-10">
+                                        <button class="btn btn-light"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Edit.png" class="iconsDarkedit-1"></button>
                                     </div>
-                                    <div class="col-lg-1 panel-title mt-15">
+                                    <div class="col-lg-1 mt-10">
+                                        <button class="btn btn-light"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Delete.png" class="iconsDarkedelete-1"></button>
+                                    </div>
+                                    <div class="col-lg-1 panel-title mt-20">
                                         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Selected-2.png" class="img_select24">
                                         </a>
@@ -84,45 +85,7 @@ $this->title = 'Evaluation';
                             </div>
                             <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                                 <div class="panel-body">
-                                    <table class="table badge-gray-table">
-                                        <thead>
-                                            <tr id="tablebr-<?= $tabletr['tabletrId'] ?>">
-                                            <?php
-                                            while(isset($table) && count($tabletr) >0 ){
-                                                
-                                                <td scope="col">name</td>
-                                                <td scope="col">timeline</td>
-                                                <td scope="col">Attribute</td>
-                                                <td scope="col">TERM</td>
-                                                <td scope="col">MID</td>
-                                                <td scope="col">Bonus</td>
-                                                <td scope="col">Set Evaluator</td>
-                                                <td scope="col">Progress</td>
-                                                <td scope="col">Action</td>
-                                                 }
-                                                ?>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class="trantRankColor">
-                                                <td>1</td>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Larry the Bird</td>
-                                                <td>@twitter</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    vtg5rg
                                 </div>
                             </div>
                         </div>
@@ -140,7 +103,8 @@ $this->title = 'Evaluation';
                                 <p>Snakes are elongated, legless, carnivorous reptiles of the suborder Serpentes that can be distinguished from legless lizards by their lack of eyelids and external ears. Like all squamates, snakes are ectothermic, amniote vertebrates
                                     covered in overlapping scales. Many species of snakes have skulls with several more joints than their lizard ancestors, enabling them to swallow prey much larger than their heads with their highly mobile jaws. To accommodate their
                                     narrow bodies, snakes' paired organs (such as kidneys) appear one in front of the other instead of side by side, and most have only one functional lung. Some species retain a pelvic girdle with a pair of vestigial claws on either
-                                    side of the cloaca.</p>
+                                </p>
+                                <div class="col-12"></div>
                             </div>
                         </div>
                     </div>
@@ -162,7 +126,7 @@ $this->title = 'Evaluation';
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 
