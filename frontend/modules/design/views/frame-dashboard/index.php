@@ -2,7 +2,7 @@
 $this->title = 'frame Dasdboard';
 ?>
 
-<div class="col-12 mt-90 alert alert-FramDashboard">
+<div class="col-12 mt-90 alert alert-Evaluator">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-12">
             <div class="col-12 text-start Dasdboard-start">
@@ -61,8 +61,6 @@ $this->title = 'frame Dasdboard';
                 </div>
                 <div class="col-3 text-end">
                     <button type="submit" class="btn btn-light Dashboardblue1"><i class="fa fa-th-large" aria-hidden="true"></i> Dashboard</button>
-
-
                 </div>
             </div>
         </div>
