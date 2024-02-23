@@ -260,9 +260,9 @@ class KpiTeamController extends Controller
 			->andFilterWhere([
 				"kb.branchId" => $branchId,
 				"kpi_team.teamId" => $teamId,
-				"kpi_team.month" => $month,
-				"kpi_team.year" => $year,
-				"kpi_team.status" => $status,
+				//"kpi_team.month" => $month,
+				//"kpi_team.year" => $year,
+				//"kpi_team.status" => $status,
 			])
 			->orderBy("k.createDateTime DESC,t.teamName ASC")
 			->asArray()
@@ -285,7 +285,7 @@ class KpiTeamController extends Controller
 						"kpi_team_history.status" => $status,
 					])
 					->asArray()
-					->orderBy('createDateTime DESC')
+					->orderBy('kpi_team_history.createDateTime DESC')
 					->one();
 				if (!isset($kpiTeamHistory) || empty($kpiTeamHistory)) {
 					$kpiTeamHistory = KpiTeam::find()

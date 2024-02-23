@@ -264,9 +264,9 @@ class KgiTeamController extends Controller
 			->andFilterWhere([
 				"kb.branchId" => $branchId,
 				"kgi_team.teamId" => $teamId,
-				"kgi_team.month" => $month,
-				"kgi_team.year" => $year,
-				"kgi_team.status" => $status,
+				//"kgi_team.month" => $month,
+				//"kgi_team.year" => $year,
+				//"kgi_team.status" => $status,
 			])
 			->orderBy("k.createDateTime DESC,t.teamName ASC")
 			->asArray()
@@ -289,7 +289,7 @@ class KgiTeamController extends Controller
 						"kgi_team_history.status" => $status,
 					])
 					->asArray()
-					->orderBy('createDateTime DESC')
+					->orderBy('kgi_team_history.createDateTime DESC')
 					->one();
 				if (!isset($kgiTeamHistory) || empty($kgiTeamHistory)) {
 					$kgiTeamHistory = KgiTeam::find()

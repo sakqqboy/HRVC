@@ -268,9 +268,9 @@ class KpiPersonalController extends Controller
 				"kb.branchId" => $branchId,
 				"e.teamId" => $teamId,
 				"kpi_employee.employeeId" => $employeeId,
-				"kpi_employee.month" => $month,
-				"kpi_employee.year" => $year,
-				"kpi_employee.status" => $status,
+				//"kpi_employee.month" => $month,
+				//"kpi_employee.year" => $year,
+				//"kpi_employee.status" => $status,
 			])
 			->orderBy("k.createDateTime DESC")
 			->asArray()

@@ -288,9 +288,9 @@ class KgiPersonalController extends Controller
 				"kb.branchId" => $branchId,
 				"e.teamId" => $teamId,
 				"kgi_employee.employeeId" => $employeeId,
-				"kgi_employee.month" => $month,
-				"kgi_employee.year" => $year,
-				"kgi_employee.status" => $status,
+				//"kgi_employee.month" => $month,
+				//"kgi_employee.year" => $year,
+				//"kgi_employee.status" => $status,
 			])
 			->orderBy("k.createDateTime DESC")
 			->asArray()
