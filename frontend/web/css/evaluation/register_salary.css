@@ -1,0 +1,123 @@
+.alert-updated {
+    background-color: #F4F6F9;
+    color: black;
+    border-radius: 6px;
+}
+
+.ADD-register {
+    background-color: #2580D3;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    font-family: 'sf pro display';
+    font-size: 13px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    letter-spacing: -0.7px;
+}
+
+.picregister-add {
+    width: 15px;
+    margin-top: -5px;
+}
+
+.updated_registersalary {
+    font-size: 16px;
+    font-family: 'sf pro display';
+    letter-spacing: -0.8px;
+    font-weight: 700;
+}
+
+.import_updated {
+    background-color: rgb(224, 224, 224);
+    border: none;
+    border-radius: 30px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 3px;
+    padding-bottom: px;
+    font-family: 'sf pro display';
+    font-size: 13px;
+    letter-spacing: -0.8px;
+    font-weight: 500;
+    color: #5E5F60;
+    margin-top: 7px;
+}
+
+.pic_updateddownload1 {
+    margin-top: -5px;
+    width: 13px;
+}
+
+.slec_updated {
+    font-size: 12px;
+    border-radius: 20px;
+}
+
+.updated_evaluationQ {
+    font-size: 12px;
+    letter-spacing: -0.9px;
+    padding-top: 8px
+}
+
+.Dark_filterupdated {
+    width: 16px;
+}
+
+.background_updateline {
+    background-color: white;
+    margin-top: 10px;
+}
+
+.gray_update {
+    background-color: #F6F6F6;
+}
+
+.update_humanresource {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: -0.9px;
+    color: #606060;
+}
+
+.Assiociate_updated {
+    font-size: 10px;
+}
+
+.update1_totaltitle1 {
+    font-size: 12px;
+    color: #585858;
+    font-weight: 500;
+    letter-spacing: -0.9px;
+}
+
+.update1_totaltitle2 {
+    font-size: 12px;
+    color: #000000;
+    font-weight: 500;
+    letter-spacing: -0.9px;
+}
+
+.Mini_updated1 {
+    font-size: 9px;
+    letter-spacing: -0.9px;
+    width: 50px;
+    font-family: 'sf pro display';
+}
+
+.badgeUp_dateborder {
+    border-color: #C9E5FF;
+    font-size: 9px;
+    border-radius: 30px;
+    width: 50px;
+    letter-spacing: -0.9px;
+    text-align: center;
+}
+
+.type_update1number {
+    border-bottom: 1px rgb(62, 61, 61) solid dashed;
+    width: 60px;
+    margin-top: 50px;
+}

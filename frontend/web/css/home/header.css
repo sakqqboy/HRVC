@@ -56,8 +56,12 @@
 .navbar-header a:hover {
     background-color: rgb(220, 228, 229);
     color: rgb(25, 116, 201);
-    border-radius: 4px;
-    font-weight: 700;
+    border-radius: 3px;
+    font-weight: 600;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 6px;
+    padding-top: 6px;
 }
 
 .haeder-company {
@@ -77,15 +81,17 @@
     font-size: 14px;
     text-transform: uppercase;
 }
-.header-pim{
-    
+
+.header-pim {
+
     font-size: 14px;
     background-color: rgb(249, 249, 249);
     padding-top: 5px;
     padding-bottom: 5px;
     border-radius: 5px;
 }
-.header-item{
+
+.header-item {
     /* height: 30px; */
     padding-top: 3px;
     padding-bottom: 3px;

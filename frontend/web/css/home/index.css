@@ -1,6 +1,6 @@
 .width-dashboard {
-    width: 30%;
-    margin-top: 50px;
+    width: 20%;
+    margin-top: 30px;
 }
 
 .bag-bell {
@@ -27,7 +27,7 @@
 }
 
 .width-risk {
-    width: 190px;
+    width: 150px;
 }
 
 .width-risk1 {
@@ -58,7 +58,7 @@
 .title-KPI {
     color: #265AA7;
     font-weight: 700;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'sf pro display';
     padding-top: 30px;
     font-style: normal;
     font-size: 12px;
@@ -66,20 +66,13 @@
 
 .title-Dashboard-Welcome {
     font-style: normal;
-    color: black;
-    padding-top: 50px;
+    font-size: 14px;
+    padding-top: 30px;
+    line-height: 17px;
+    font-weight: 500;
+    font-family: 'sf pro display';
 
 }
-
-.nav-align {
-    margin-top: 10px;
-    cursor: pointer;
-}
-
-.no-underline {
-    text-decoration: none;
-}
-
 
 @media(max-width:768px) {
     .nav-align {

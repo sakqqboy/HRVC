@@ -135,7 +135,7 @@ $this->title = 'Dashboard';
                             <td>458,764,554</td>
                             <td>3</td>
                             <td>4</td>
-                            <td>
+                            <!-- <td>
                                 <i class="fa fa-eye buttton-eye" aria-hidden="true"></i>
                                 <i class="fa fa-pencil-square-o button-pencil" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"></i>
                                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -292,7 +292,7 @@ $this->title = 'Dashboard';
                                         </div>
                                     </div>
                                 </div>
-                            </td>
+                            </td> -->
                         </tr>
                         <tr>
                             <td>1</td>
@@ -306,7 +306,7 @@ $this->title = 'Dashboard';
                             <td>458,764,554</td>
                             <td>3</td>
                             <td>4</td>
-                            <td>
+                            <!-- <td>
                                 <i class="fa fa-eye buttton-eye" aria-hidden="true"></i>
                                 <i class="fa fa-pencil-square-o button-pencil" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"></i>
                                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -462,7 +462,7 @@ $this->title = 'Dashboard';
                                         </div>
                                     </div>
                                 </div>
-                            </td>
+                            </td> -->
                         </tr>
                         <tr>
                             <td>1</td>
@@ -476,7 +476,7 @@ $this->title = 'Dashboard';
                             <td>458,764,554</td>
                             <td>3</td>
                             <td>4</td>
-                            <td>
+                            <!-- <td>
                                 <i class="fa fa-eye buttton-eye" aria-hidden="true"></i>
                                 <i class="fa fa-pencil-square-o button-pencil" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"></i>
                                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -632,7 +632,7 @@ $this->title = 'Dashboard';
                                         </div>
                                     </div>
                                 </div>
-                            </td>
+                            </td> -->
                         </tr>
                         <tr>
                             <td>1</td>
@@ -646,7 +646,7 @@ $this->title = 'Dashboard';
                             <td>458,764,554</td>
                             <td>3</td>
                             <td>4</td>
-                            <td>
+                            <!-- <td>
                                 <i class="fa fa-eye buttton-eye" aria-hidden="true"></i>
 
                                 <i class="fa fa-pencil-square-o button-pencil" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"></i>
@@ -803,7 +803,7 @@ $this->title = 'Dashboard';
                                         </div>
                                     </div>
                                 </div>
-                            </td>
+                            </td> -->
                         </tr>
                         <tr>
                             <td>1</td>
@@ -817,7 +817,7 @@ $this->title = 'Dashboard';
                             <td>458,764,554</td>
                             <td>3</td>
                             <td>4</td>
-                            <td>
+                            <!-- <td>
                                 <i class="fa fa-eye buttton-eye" aria-hidden="true"></i>
                                 <i class="fa fa-pencil-square-o button-pencil" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"></i>
                                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -973,7 +973,7 @@ $this->title = 'Dashboard';
                                         </div>
                                     </div>
                                 </div>
-                            </td>
+                            </td> -->
                         </tr>
                         <tr>
                             <td>1</td>
@@ -987,7 +987,7 @@ $this->title = 'Dashboard';
                             <td>458,764,554</td>
                             <td>3</td>
                             <td>4</td>
-                            <td>
+                            <!-- <td>
                                 <i class="fa fa-eye buttton-eye" aria-hidden="true"></i>
                                 <i class="fa fa-pencil-square-o button-pencil" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"></i>
                                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1143,7 +1143,7 @@ $this->title = 'Dashboard';
                                         </div>
                                     </div>
                                 </div>
-                            </td>
+                            </td> -->
                         </tr>
                         <tr>
                             <td>1</td>
@@ -1157,7 +1157,7 @@ $this->title = 'Dashboard';
                             <td>458,764,554</td>
                             <td>3</td>
                             <td>4</td>
-                            <td>
+                            <!-- <td>
                                 <i class="fa fa-eye buttton-eye" aria-hidden="true"></i>
                                 <i class="fa fa-pencil-square-o button-pencil" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"></i>
                                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1313,7 +1313,7 @@ $this->title = 'Dashboard';
                                         </div>
                                     </div>
                                 </div>
-                            </td>
+                            </td> -->
                         </tr>
                         <tr>
                             <td>1</td>
@@ -1327,7 +1327,7 @@ $this->title = 'Dashboard';
                             <td>458,764,554</td>
                             <td>3</td>
                             <td>4</td>
-                            <td>
+                            <!-- <td>
                                 <i class="fa fa-eye buttton-eye" aria-hidden="true"></i>
                                 <i class="fa fa-pencil-square-o button-pencil" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"></i>
                                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1483,7 +1483,7 @@ $this->title = 'Dashboard';
                                         </div>
                                     </div>
                                 </div>
-                            </td>
+                            </td> -->
                         </tr>
                         <tr>
                             <td>1</td>
@@ -1497,7 +1497,7 @@ $this->title = 'Dashboard';
                             <td>458,764,554</td>
                             <td>3</td>
                             <td>4</td>
-                            <td>
+                            <!-- <td>
                                 <i class="fa fa-eye buttton-eye" aria-hidden="true"></i>
                                 <i class="fa fa-pencil-square-o button-pencil" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"></i>
                                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1653,7 +1653,7 @@ $this->title = 'Dashboard';
                                         </div>
                                     </div>
                                 </div>
-                            </td>
+                            </td> -->
                         </tr>
                         <tr>
                             <td>1</td>
@@ -1667,7 +1667,7 @@ $this->title = 'Dashboard';
                             <td>458,764,554</td>
                             <td>3</td>
                             <td>4</td>
-                            <td>
+                            <!-- <td>
                                 <i class="fa fa-eye buttton-eye" aria-hidden="true"></i>
                                 <i class="fa fa-pencil-square-o button-pencil" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"></i>
                                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1823,12 +1823,10 @@ $this->title = 'Dashboard';
                                         </div>
                                     </div>
                                 </div>
-                            </td>
+                            </td> -->
                         </tr>
                     </tbody>
                 </table>
-                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
             </div>
         </div>
     </div>

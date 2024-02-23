@@ -23,13 +23,11 @@ class AppAsset extends AssetBundle
         'css/home/kpi-summary.css',
         'css/home/department.css',
         'css/home/calendar.css',
-        'css/home/respiratory1.css',
         'css/home/evaluation.css',
         'css/home/dashboard-kpi2.css',
         'css/home/kgimanagement.css',
         'css/home/kpimanagement.css',
         'css/home/headernavbar.css',
-        'css/home/create1.css',
         'css/home/dashboard-edit.css',
         'css/home/dashboard-delete.css',
         'css/home/analysis.css',
@@ -92,9 +90,7 @@ class AppAsset extends AssetBundle
         'css/evaluation/promotion.css',
         'css/evaluation/processstatus.css',
         'css/evaluation/individual.css',
-
-
-
+        'css/evaluation/register_salary.css',
     ];
     public $js = [
         'js/content.js',
