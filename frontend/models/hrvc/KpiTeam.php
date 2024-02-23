@@ -42,10 +42,10 @@ class KpiTeam extends \frontend\models\hrvc\master\KpiTeamMaster
         }
         return $has;
     }
-    public static function teamTarget($teamId)
+    public static function teamTarget($teamId, $kpiId)
     {
         $kpiTeam = KpiTeam::find()
-            ->where(["teamId" => $teamId])->asArray()->one();
+            ->where(["teamId" => $teamId, "kpiId" => $kpiId])->asArray()->one();
         if (isset($kpiTeam) && !empty($kpiTeam)) {
             return $kpiTeam["target"];
         } else {
@@ -108,5 +108,17 @@ class KpiTeam extends \frontend\models\hrvc\master\KpiTeamMaster
             $show = 0;
         }
         return $show;
+    }
+    public static function kpiTeam($kpiId)
+    {
+        $kpiTeam = KpiTeam::find()
+            ->select('t.teamName,t.teamId')
+            //->JOIN("LEFT JOIN", "kpi", "kpi.kpiId=kpi_branch.kpiId")
+            ->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
+            ->where(["kpi_team.kpiId" => $kpiId, "kpi_team.status" => 1])
+            ->orderBy('t.teamName')
+            ->asArray()
+            ->all();
+        return $kpiTeam;
     }
 }

@@ -220,6 +220,7 @@ function updateKgi(kgiId) {
 			$("#code-update").val(data.code);
 			$("#status-update").val(data.status);
 			$("#month-update").val(data.month);
+			$("#year-update").val(data.year);
 			$("#result-update").val(data.resultText);
 			$("#show-multi-branch-update").html(data.textBranch);
 			$("#show-multi-department-update").html(data.textDepartment);

@@ -34,6 +34,7 @@ function updateKpi(kpiId) {
 			$("#code-update").val(data.code);
 			$("#status-update").val(data.status);
 			$("#month-update").val(data.month);
+			$("#year-update").val(data.year);
 			$("#result-update").val(data.resultText);
 			$("#show-multi-branch-update").html(data.textBranch);
 			$("#show-multi-department-update").html(data.textDepartment);
@@ -141,6 +142,7 @@ function kpiHistory(kpiId) {
 			}
 			
 			$("#company-name-view").html(data.kpi.companyName);
+			$("#modal-branch-flag").attr("src", $url + data.kpi.flag);
 			$("#quantRatio-view").html(data.kpi.quantRatioText);
 			$("#code-view").html(data.kpi.code);
 			$("#target-view").html(data.kpi.targetAmountText);
@@ -274,6 +276,8 @@ function answerKpiIssue(kpiIssueId) {
 			if (data.status) {
 				$("#solution-" + kpiIssueId).append(data.commentText);
 				$("#answer-" + kpiIssueId).val('');
+				$("#lastest-issue-" + data.kpiId).html(data.issue);
+				$("#lastest-solution-" + data.kpiId).html(data.solution);
 			}
 		}
 	});
@@ -510,20 +514,21 @@ function searchKpiTeam() {
 	//     $("#search-employee-box").css("display","none");
 	// }
 }
-function searchAssignKpi() { 
+function searchAssignKpi() {
 	var month = $("#kpiMonthFilter").val();
+	var year = $("#kpiYearFilter").val();
 	var url = $url + 'kpi/management/search-assign-kpi';
-	    $.ajax({
-		 type: "POST",
-		 dataType: 'json',
-		 url: url,
-		 data: { month: month},
-		 success: function (data) {
-		     if (data.status) {
-			  $("#assign-search-result").html(data.kpiText);
-		     }
-		 }
-	    });
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { month: month, year: year },
+		success: function (data) {
+			if (data.status) {
+				$("#assign-search-result").html(data.kpiText);
+			}
+		}
+	});
 }
 function checkAllKpiEmployee(kpiId) {
 	var url = $url + 'kpi/management/check-all-kpi-employee';

@@ -7,7 +7,7 @@
 				</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
-			<div class="col-12 font-b" style="margin-top: -35px; padding-left:20px; font-size: 16px;">
+			<div class="col-12 font-b" style="margin-top: -30px; padding-left:20px; font-size: 14px;">
 				<i class="fa fa-flag" aria-hidden="true"></i> <span id="kfi-name"></span>
 			</div>
 			<div class="modal-body pb-20 mb-20" id="related-kgi">

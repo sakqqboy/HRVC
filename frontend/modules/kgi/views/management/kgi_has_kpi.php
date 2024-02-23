@@ -2,22 +2,48 @@
 
 use common\models\ModelMaster;
 use frontend\models\hrvc\KpiBranch;
+use frontend\models\hrvc\KpiTeam;
 use frontend\models\hrvc\Unit;
 
 ?>
 <table class="table table-responsive-lg">
 	<thead>
-		<th>KPI Name</th>
-		<th>Target</th>
-		<th>Month</th>
-		<th>Unit</th>
-		<th>Branch(es)</th>
+		<tr class="font-size-12">
+			<th>KPI Name</th>
+			<th>Month</th>
+			<th>Unit</th>
+			<th>Ratio</th>
+			<th>Team</th>
+		</tr>
 	</thead>
 	<tbody>
 		<?php
 		if (isset($kgiHasKpi) && count($kgiHasKpi) > 0) {
 			$a = 1;
-			foreach ($kgiHasKpi as $kpi) : ?>
+			foreach ($kgiHasKpi as $kpi) :
+				if ($kpi["targetAmount"] != '' && $kpi["targetAmount"] != 0 && $kpi["targetAmount"] != null) {
+					if ($kpi["code"] == '<' || $kpi["code"] == '=') {
+						$ratio = ($kpi["result"] / $kpi["targetAmount"]) * 100;
+					} else {
+						if ($kpi["result"] != '' && $kpi["result"] != 0) {
+							$ratio = ($kpi["targetAmount"] / $kgi["result"]) * 100;
+						} else {
+							$ratio = 0;
+						}
+					}
+				} else {
+					$ratio = 0;
+				}
+				$decimal = explode(".", $ratio);
+				if (isset($decimal[1]) && $decimal[1] != '00') {
+					$number = number_format($ratio, 2);
+				} else {
+					$number = $ratio;
+				}
+				if ($number > 0) {
+					$number .= ' %';
+				}
+		?>
 				<tr class="font-size-12">
 					<td>
 						<a class="no-underline-black" href="<?= Yii::$app->homeUrl . 'kpi/management/kpi-detail/' . ModelMaster::encodeParams(["kpiId" => $kpi['kpiId']]) ?>" style="cursor: pointer;">
@@ -27,18 +53,23 @@ use frontend\models\hrvc\Unit;
 							</span>
 						</a>
 					</td>
-					<td><?= number_format($kpi["targetAmount"], 2) ?></td>
+
 					<td><?= ModelMaster::shotMonthText($kpi["month"]) ?></td>
 					<td><?= Unit::unitName($kpi["unitId"]) ?></td>
+					<td class="text-center">
+						<span class="pro-load-table">
+							<?= $number ?>
+						</span>
+					</td>
 					<td>
-						<div class="col-12" style="line-height: 30px;">
+						<div class="col-12" style="line-height: 25px;">
 							<?php
-							$kpiBranch = KpiBranch::kpiBranch($kpi["kpiId"]);
-							if (isset($kpiBranch) && count($kpiBranch) > 0) {
+							$kpiTeam = KpiTeam::kpiTeam($kpi["kpiId"]);
+							if (isset($kpiTeam) && count($kpiTeam) > 0) {
 								$i = 1;
-								foreach ($kpiBranch as $branch) :
-									echo $i . '. ' . $branch["branchName"];
-									if ($i < (count($kpiBranch))) {
+								foreach ($kpiTeam as $team) :
+									echo $i . '. ' . $team["teamName"];
+									if ($i < (count($kpiTeam))) {
 										echo '<br>';
 									}
 									$i++;

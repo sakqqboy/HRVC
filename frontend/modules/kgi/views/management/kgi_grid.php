@@ -1,5 +1,6 @@
 <?php
 
+use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
 $this->title = 'KGI Grid View';
@@ -58,11 +59,11 @@ $this->title = 'KGI Grid View';
 				//if ($role >= 3) {
 				?>
 				<div class="col-12 mt-10 text-end">
-					<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/team-kgi" class="font-size-14 no-underline-primary mr-20">
+					<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/team-kgi-grid" class="font-size-14 no-underline-primary mr-20">
 						<i class="fa fa-users mr-5" aria-hidden="true"></i>
 						Team KGI
 					</a>
-					<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi" class="font-size-14 no-underline-primary">
+					<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi-grid" class="font-size-14 no-underline-primary">
 						<i class="fa fa-user mr-5" aria-hidden="true"></i>
 						Individual KGI
 					</a>
@@ -76,9 +77,8 @@ $this->title = 'KGI Grid View';
 				<div id="pills-Group" role="tabpanel" aria-labelledby="pills-Group-tab"> -->
 			<div class="card example-5 scrollbar-ripe-malinka">
 				<?php
-				if (count($kgis) > 0) {
+				if (isset($kgis) && count($kgis) > 0) {
 					foreach ($kgis as $kgiId => $kgi) :
-						//throw new exception(print_r($kgi, true));
 				?>
 						<div class="col-12 kgi-grid-box <?= $kgi['isOver'] == 1 ? 'bg-over' : 'bg-white' ?>" id="kgi-<?= $kgiId ?>">
 							<div class="row">
@@ -145,13 +145,25 @@ $this->title = 'KGI Grid View';
 										<span class="badge rounded-pill slds-badge">
 											Term <span class="text-dark font-size-10">: <?= $kgi["fromDate"] ?> - <?= $kgi["toDate"] ?></span>
 										</span>
+										<?php
+										if ($role >= 3) {
+										?>
+											<div class="col-12 font-size-12 text-center mt-5">
+												Assign
+											</div>
+											<div class="col-12 pt-8 text-center">
+												<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/kgi-team-setting/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>" class="btn btn-sm btn-primary mr-20 font-size-10" title="Team KGI setting">
+													<i class="fa fa-users mr-3" aria-hidden="true"></i> Team
+												</a>
+												<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/indivisual-setting/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>" class="btn btn-sm btn-info text-light font-size-10" title="Indivisual KGI setting">
+													<i class="fa fa-user mr-3" aria-hidden="true"></i> Person
+												</a>
+											</div>
+										<?php
+										}
+										?>
 									</div>
-									<!-- <div class="col-12 top-teamcontent">
-										Team Content
-									</div>
-									<div class="col-12 font-size-12 pt-10">
-										This is a sample KGI content
-									</div> -->
+
 								</div>
 								<div class="col-lg-2 col-md-6 col-12 sample-bordersolid">
 									<div class="row">
@@ -287,13 +299,13 @@ $this->title = 'KGI Grid View';
 										<div class="col-md-6">
 											<div class="col-12 dashed1" style="word-wrap: break-word;">
 												<span class="text-dark font-size-11"> Issue</span>
-												<p class="font-size-10 text-dark"><?= $kgi["issue"] ?></p>
+												<p class="font-size-10 text-dark" id="lastest-issue-<?= $kgiId ?>"><?= $kgi["issue"] ?></p>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="col-12 dashed1" style="word-wrap: break-word;">
 												<span class="text-dark font-size-11"> Solution</span>
-												<p class="font-size-10 text-dark"><?= $kgi["solution"] ?></p>
+												<p class="font-size-10 text-dark" id="lastest-solution-<?= $kgiId ?>"><?= $kgi["solution"] ?></p>
 											</div>
 										</div>
 										<div class="col-12 text-end font-size-10 mt-3">

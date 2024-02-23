@@ -8,6 +8,7 @@ use Exception;
 use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Department;
+use frontend\models\hrvc\DepartmentTitle;
 use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Team;
@@ -19,11 +20,11 @@ use yii\web\UploadedFile;
 /**
  * Default controller for the `setting` module
  */
-header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
-header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
+// header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
+// header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+// header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+// header("Cache-Control: post-check=0, pre-check=0", false);
+// header("Pragma: no-cache");
 class CompanyController extends Controller
 {
 	/**
@@ -45,7 +46,7 @@ class CompanyController extends Controller
 		}
 		$groupId = $group["groupId"];
 		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$companies = curl_exec($api);
@@ -61,22 +62,20 @@ class CompanyController extends Controller
 	{
 		$param = ModelMaster::decodeParams($hash);
 		$groupId = $param["groupId"];
-		$ch1 = curl_init();
-		curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch1, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
-		$result1 = curl_exec($ch1);
-		curl_close($ch1);
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
+		$result1 = curl_exec($api);
 		$countries = json_decode($result1, true);
 
-		$headQuaterApi = curl_init();
-		curl_setopt($headQuaterApi, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($headQuaterApi, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($headQuaterApi, CURLOPT_URL, Path::Api() . 'masterdata/company/header?id=' . $groupId);
-		$headQuater = curl_exec($headQuaterApi);
-		curl_close($headQuaterApi);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/header?id=' . $groupId);
+		$headQuater = curl_exec($api);
 		$headQuater = json_decode($headQuater, true);
 
+		curl_close($api);
 
 		return $this->render('create', [
 			"countries" => $countries,
@@ -149,12 +148,13 @@ class CompanyController extends Controller
 		$param = ModelMaster::decodeParams($hash);
 		$companyId = $param["companyId"];
 		$apiCompany = curl_init();
-		curl_setopt($apiCompany, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($apiCompany, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($apiCompany, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($apiCompany, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
 		$groupJson = curl_exec($apiCompany);
-		curl_close($apiCompany);
 		$company = json_decode($groupJson, true);
+
+		curl_close($apiCompany);
 
 		$totalDepartment = 0;
 		$totalTeam = 0;
@@ -191,37 +191,29 @@ class CompanyController extends Controller
 		$param = ModelMaster::decodeParams($hash);
 		$companyId = $param["companyId"];
 
-		$apiCountry = curl_init();
-		curl_setopt($apiCountry, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($apiCountry, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($apiCountry, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
-		$resultCountry = curl_exec($apiCountry);
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
+		$resultCountry = curl_exec($api);
 		$countries = json_decode($resultCountry, true);
-		curl_close($apiCountry);
 
-		$apiCompany = curl_init();
-		curl_setopt($apiCompany, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($apiCompany, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($apiCompany, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
-		$company = curl_exec($apiCompany);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
+		$company = curl_exec($api);
 		$company = json_decode($company, true);
-		curl_close($apiCompany);
 
-		$headQuaterApi = curl_init();
-		curl_setopt($headQuaterApi, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($headQuaterApi, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($headQuaterApi, CURLOPT_URL, Path::Api() . 'masterdata/company/header?id=' . $company['groupId']);
-		$headQuater = curl_exec($headQuaterApi);
-		curl_close($headQuaterApi);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/header?id=' . $company['groupId']);
+		$headQuater = curl_exec($api);
 		$headQuater = json_decode($headQuater, true);
 
-		$apiCountry = curl_init();
-		curl_setopt($apiCountry, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($apiCountry, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($apiCountry, CURLOPT_URL, Path::Api() . 'masterdata/country/country-detail?id=' . $company["countryId"]);
-		$resultCountryDetail = curl_exec($apiCountry);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/country-detail?id=' . $company["countryId"]);
+		$resultCountryDetail = curl_exec($api);
 		$companyCountry = json_decode($resultCountryDetail, true);
-		curl_close($apiCountry);
+
+		curl_close($api);
 
 		return $this->render('update_company', [
 			"countries" => $countries,
@@ -303,12 +295,14 @@ class CompanyController extends Controller
 		$companyId = $_POST["companyId"];
 		$text = "<option value=''>Select Branch</option>";
 		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
 		$branch = curl_exec($api);
 		$branch = json_decode($branch, true);
+
 		curl_close($api);
+
 		$res["status"] = false;
 		if (isset($branch) && count($branch) > 0) {
 			$res["status"] = true;
@@ -326,8 +320,73 @@ class CompanyController extends Controller
 		$company->updateDateTime = new Expression('NOW()');
 		$res["status"] = false;
 		if ($company->save(false)) {
+			$branch = Branch::find()->where(["companyId" => $_POST["companyId"]])->all();
+			if (isset($branch) && count($branch) > 0) {
+				foreach ($branch as $b) :
+					$b->status = 99;
+					$b->save(false);
+					$department = Department::find()->where(["branchId" => $b->branchId])->all();
+					if (isset($department) && count($department) > 0) {
+						foreach ($department as $dp) :
+							DepartmentTitle::deleteAll(["departmentId" => $dp->departmentId]);
+							$dp->status = 99;
+							$dp->save(false);
+							$teams = Team::find()->where(["departmentId" => $dp->departmentId])->all();
+							if (isset($teams) && count($teams) > 0) {
+								foreach ($teams as $t) :
+									$t->status = 99;
+									$t->save(false);
+								endforeach;
+							}
+						endforeach;
+					}
+				endforeach;
+			}
 			$res["status"] = true;
 		}
 		return json_encode($res);
+	}
+	public function actionClearData()
+	{
+		$company = Company::find()->where(["status" => 99])->all();
+		if (isset($company) && count($company) > 0) {
+			foreach ($company as $c) :
+				$branch = Branch::find()->where(["companyId" => $c->companyId])->all();
+				if (isset($branch) && count($branch) > 0) {
+					foreach ($branch as $b) :
+						$b->status = 99;
+						$b->save(false);
+						$department = Department::find()->where(["branchId" => $b->branchId])->all();
+
+					endforeach;
+				}
+			endforeach;
+		}
+		$branch = Branch::find()->where(["status" => 99])->all();
+		if (isset($branch) && count($branch) > 0) {
+			foreach ($branch as $b) :
+				$department = Department::find()->where(["branchId" => $b->branchId])->all();
+				if (isset($department) && count($department) > 0) {
+					foreach ($department as $dp) :
+						DepartmentTitle::deleteAll(["departmentId" => $dp->departmentId]);
+						$dp->status = 99;
+						$dp->save(false);
+					endforeach;
+				}
+			endforeach;
+		}
+		$department = Department::find()->where(["status" => 99])->all();
+		if (isset($department) && count($department) > 0) {
+			foreach ($department as $dp) :
+				DepartmentTitle::deleteAll(["departmentId" => $dp->departmentId]);
+				$teams = Team::find()->where(["departmentId" => $dp->departmentId])->all();
+				if (isset($teams) && count($teams) > 0) {
+					foreach ($teams as $t) :
+						$t->status = 99;
+						$t->save(false);
+					endforeach;
+				}
+			endforeach;
+		}
 	}
 }

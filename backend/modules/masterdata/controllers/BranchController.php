@@ -23,7 +23,7 @@ class BranchController extends Controller
 	{
 		// return $this->render('index');
 	}
-	public function actionCompanyBranch($id)
+	public function actionCompanyBranch($id) //companyId
 	{
 		$branch = [];
 		$branch = Branch::find()

@@ -1,5 +1,6 @@
 <?php
 
+use common\models\ModelMaster;
 use frontend\models\hrvc\Kgi;
 use yii\bootstrap5\ActiveForm;
 
@@ -54,19 +55,14 @@ $this->title = "KGI";
 				</div>
 
 				<div class="col-12 mt-10 text-end">
-					<?php
-					//if ($role >= 3) {
-					?>
-					<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/team-kgi" class="font-size-14 no-underline-primary mr-20">
+
+					<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/team-kgi-grid" class="font-size-14 no-underline-primary mr-20">
 						<i class="fa fa-users mr-5" aria-hidden="true"></i>
 						Team KGI
 					</a>
-					<?php
-					//}
-					?>
-					<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi" class="font-size-14 no-underline-primary">
+					<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi-grid" class="font-size-14 no-underline-primary">
 						<i class="fa fa-user mr-5" aria-hidden="true"></i>
-						Individual
+						Individual KGI
 					</a>
 				</div>
 
@@ -204,6 +200,22 @@ $this->title = "KGI";
 													<i class="fa fa-copy" aria-hidden="true"></i>
 												</a>
 											</li>
+											<?php
+											if ($role >= 3) {
+											?>
+												<li>
+													<a class="dropdown-item" href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/kgi-team-setting/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>">
+														<i class="fa fa-users" aria-hidden="true"></i>
+													</a>
+												</li>
+												<li>
+													<a class="dropdown-item" href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/indivisual-setting/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>">
+														<i class="fa fa-user" aria-hidden="true"></i>
+													</a>
+												</li>
+											<?php
+											}
+											?>
 											<li data-bs-toggle="modal" data-bs-target="#delete-kgi" onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)" style="display: <?= $display ?>;">
 												<a class="dropdown-item"><i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
 											</li>

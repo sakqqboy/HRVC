@@ -31,11 +31,11 @@ use yii\db\Expression;
 use yii\web\Controller;
 use yii\web\UploadedFile;
 
-header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
-header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
+// header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
+// header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+// header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+// header("Cache-Control: post-check=0, pre-check=0", false);
+// header("Pragma: no-cache");
 /**
  * Default controller for the `kfi` module
  */
@@ -86,7 +86,9 @@ class ManagementController extends Controller
 			//return $this->redirect(Yii::$app->homeUrl);
 		}
 		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
@@ -152,7 +154,9 @@ class ManagementController extends Controller
 			//return $this->redirect(Yii::$app->homeUrl);
 		}
 		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
@@ -224,7 +228,8 @@ class ManagementController extends Controller
 				if (isset($_POST["department"]) && count($_POST["department"]) > 0) {
 					$this->saveKfiDepartment($_POST["department"], $kfiId);
 				}
-				return $this->redirect('index');
+				return $this->redirect(Yii::$app->request->referrer);
+				//return $this->redirect('index');
 			}
 		}
 	}
@@ -270,6 +275,7 @@ class ManagementController extends Controller
 			if (isset($_POST["department"]) && count($_POST["department"]) > 0) {
 				$this->saveKfiDepartment($_POST["department"], $_POST["kfiId"]);
 			}
+			return $this->redirect(Yii::$app->request->referrer);
 			return $this->redirect('grid');
 		}
 	}
@@ -277,7 +283,9 @@ class ManagementController extends Controller
 	{
 		$kfiId = $_POST["kfiId"];
 		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId);
 		$kfi = curl_exec($api);
 		$kfi = json_decode($kfi, true);
@@ -417,7 +425,9 @@ class ManagementController extends Controller
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
 		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId);
 		$kfi = curl_exec($api);
@@ -451,7 +461,7 @@ class ManagementController extends Controller
 		$companyId = $_POST["companyId"];
 		$text = "<option value=''>Select Branch</option>";
 		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
 		$branch = curl_exec($api);
@@ -473,7 +483,7 @@ class ManagementController extends Controller
 		$branchId = $_POST["branchId"];
 		$text = "<option value=''>Select Department</option>";
 		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' . $branchId);
 		$departments = curl_exec($api);
@@ -496,8 +506,9 @@ class ManagementController extends Controller
 		$employeeId = User::employeeIdFromUserId($userId);
 		$kfiId = $_POST["kfiId"];
 		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId);
 		$kfi = curl_exec($api);
 		$kfi = json_decode($kfi, true);
@@ -646,7 +657,7 @@ class ManagementController extends Controller
 				return $this->redirect(Yii::$app->homeUrl . 'kfi/management/grid');
 			}
 		}
-		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&month=' . $month . '&&status=' . $status . '&&year=' . $year . '&&active';
+		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&month=' . $month . '&&status=' . $status . '&&year=' . $year . '&&active=';
 
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
@@ -682,8 +693,9 @@ class ManagementController extends Controller
 		$paramText .= '&&adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId;
 		//throw new Exception($paramText);
 		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-filter?' . $paramText);
 		$kfis = curl_exec($api);
 		$kfis = json_decode($kfis, true);
@@ -736,7 +748,9 @@ class ManagementController extends Controller
 		$companyId = $_POST["companyId"];
 		$acType = $_POST["acType"];
 		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
 		$branches = curl_exec($api);
 		$branches = json_decode($branches, true);
@@ -846,7 +860,9 @@ class ManagementController extends Controller
 			return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi');
 		}
 		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
 		//curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
 		$kfis = curl_exec($api);
@@ -867,7 +883,9 @@ class ManagementController extends Controller
 		$companyId = $_POST["companyId"];
 		$kfiId = $_POST["kfiId"];
 		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
 		$branches = curl_exec($api);
 		$branches = json_decode($branches, true);
@@ -877,6 +895,8 @@ class ManagementController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId);
 		$kfi = curl_exec($api);
 		$kfi = json_decode($kfi, true);
+
+		curl_close($api);
 		$res["kfiName"] = $kfi["kfiName"];
 		$res["companyName"] = $kfi["companyName"];
 		$res["textBranch"] = $textBranch;
@@ -1120,8 +1140,9 @@ class ManagementController extends Controller
 		}
 		//throw new exception($paramText);
 		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-filter?' . $paramText);
 		$kfis = curl_exec($api);
 		$kfis = json_decode($kfis, true);
@@ -1139,7 +1160,7 @@ class ManagementController extends Controller
 		$param = ModelMaster::decodeParams($hash);
 		$kfiId = $param["kfiId"];
 		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-has-kgi?kfiId=' . $kfiId);
 		$kfiHasKgi = curl_exec($api);
@@ -1160,7 +1181,7 @@ class ManagementController extends Controller
 		$param = ModelMaster::decodeParams($hash);
 		$kfiId = $param["kfiId"];
 		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-branch?kfiId=' . $kfiId);
 		$kfiBranch = curl_exec($api);
@@ -1179,8 +1200,9 @@ class ManagementController extends Controller
 		$branchId = $_POST["branchId"];
 		$kfiId = $_POST["kfiId"];
 		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/branch-kgi?branchId=' . $branchId);
 		$kgiBranch = curl_exec($api);
 		$kgiBranch = json_decode($kgiBranch, true);
@@ -1232,7 +1254,7 @@ class ManagementController extends Controller
 	{
 		$kfiId = $_POST["kfiId"];
 		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-has-kgi?kfiId=' . $kfiId);
 		$kfiHasKgi = curl_exec($api);
@@ -1254,6 +1276,7 @@ class ManagementController extends Controller
 		$param = ModelMaster::decodeParams($hash);
 		$kfiId = $param["kfiId"];
 		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId);
 		$kfi = curl_exec($api);

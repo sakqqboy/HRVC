@@ -3,11 +3,9 @@
 /** @var \yii\web\View $this */
 /** @var string $content */
 
-use common\widgets\Alert;
+
 use frontend\assets\AppAsset;
-use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
-use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
 
 AppAsset::register($this);
@@ -45,17 +43,20 @@ AppAsset::register($this);
 
     </header> -->
 
-    <main role="main" class="flex-shrink-0 pr-12">
+    <main role="main" class="pr-12">
         <div class="row">
             <div class="col-lg-2">
                 <?= $this->render("@frontend/views/site/header")
                 ?>
             </div>
-            <div class="col-lg-10">
-                <?= $this->render("@frontend/views/layouts/headernavbar")
-                ?>
-                <div class="col-12">
-                    <?= $content ?>
+            <div class="col-lg-10 pl-10">
+                <div class="row">
+                    <div class="header-top">
+                        <?= $this->render("@frontend/views/layouts/headernavbar") ?>
+                    </div>
+                    <div class="col-12">
+                        <?= $content ?>
+                    </div>
                 </div>
             </div>
         </div>

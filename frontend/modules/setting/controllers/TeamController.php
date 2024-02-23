@@ -23,11 +23,11 @@ use yii\web\UploadedFile;
 /**
  * Default controller for the `setting` module
  */
-header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
-header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
+// header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
+// header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+// header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+// header("Cache-Control: post-check=0, pre-check=0", false);
+// header("Pragma: no-cache");
 class TeamController extends Controller
 {
     /**
@@ -58,7 +58,7 @@ class TeamController extends Controller
         $totalBranch = 0;
 
         $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
 
@@ -142,7 +142,7 @@ class TeamController extends Controller
     {
         $companyId = $_POST["companyId"];
         $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
         $branch = curl_exec($api);
@@ -162,7 +162,7 @@ class TeamController extends Controller
     {
         $branchId = $_POST["branchId"];
         $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' . $branchId);
         $department = curl_exec($api);
@@ -182,7 +182,7 @@ class TeamController extends Controller
     {
         $departmentId = $_POST["departmentId"];
         $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/department-team?id=' . $departmentId);
         $team = curl_exec($api);
@@ -232,11 +232,12 @@ class TeamController extends Controller
             if ($team->save(false)) {
                 $teamId = Yii::$app->db->lastInsertID;
                 $api = curl_init();
-                curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
                 curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/team-detail?id=' . $teamId);
                 $teamDetail = curl_exec($api);
                 $teamDetail = json_decode($teamDetail, true);
+                curl_close($api);
                 $textNewTeam = $this->renderAjax('new_team', [
                     "teamId" => $teamId,
                     "team" => $teamDetail
@@ -269,7 +270,7 @@ class TeamController extends Controller
             ->asArray()
             ->one();
         $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
         $companies = curl_exec($api);
@@ -339,11 +340,12 @@ class TeamController extends Controller
             $team->updateDateTime = new Expression('NOW()');
             if ($team->save(false)) {
                 $api = curl_init();
-                curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
                 curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/team-detail?id=' . $teamId);
                 $teamDetail = curl_exec($api);
                 $teamDetail = json_decode($teamDetail, true);
+                curl_close($api);
                 $textUpdateTeam = $this->renderAjax('update_team', [
                     "teamId" => $teamId,
                     "team" => $teamDetail
@@ -395,7 +397,7 @@ class TeamController extends Controller
         $totalBranch = 0;
 
         $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
 

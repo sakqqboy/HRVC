@@ -14,16 +14,14 @@
 				<span class="border border-1 border-next-Backdrop7">Next Update <span class="font-size-10 text-dark pr-10"> : <span id="next-date-view"></span></span></span>
 			</div>
 			<div class="tk" id="company-name-view"></div>
-			<div class="col-12 font-size-12 pl-10 pt-5">
-				<img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="Round1"> <span id="branch-view"></span>, <span id="country-view"></span>
-			</div>
 			<div class="col-12">
-				<div class="row mt-10">
-					<div class="col-6 text-start country-show-name">
-						<img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="is-bangladresh2"> <span id="branchHistory"></span>, <span id="countryHistory"></span>
+				<div class="row mt-15">
+					<div class="col-6 text-start country-show-name pl-20">
+						<img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="Round1" id='modal-branch-flag'>
+						<span id="branch-view"></span>, <span id="country-view"></span>
 					</div>
-					<div class="col-6 text-end font-size-13 pr-30">
-						<a class="no-underline-black " href="javascript:relatedKgiForKpi()" style="cursor: pointer;">
+					<div class="col-6 text-end pr-30 mt-10">
+						<a class="no-underline-black btn btn-info btn-sm font-size-12 text-light" href="javascript:relatedKgiForKpi()" style="cursor: pointer;text-shadow:black 1px 1px 2px;">
 							<i class="fa fa-refresh mr-5" aria-hidden="true"></i>Related KGI
 						</a>
 					</div>
@@ -34,10 +32,10 @@
 					<div class="row mt-20">
 						<div class="col-lg-3 col-md-6 col-12">
 							<div class="col-12 content-kpi">
-								Team kpi Contents
+
 							</div>
 							<div class="col-12 kpi-Clients">
-								Ten Clients employee
+
 							</div>
 						</div>
 						<div class="col-lg-2 col-md-6 col-3">
@@ -78,7 +76,7 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-lg-3 col-md-6 col-12">
+							<div class="col-lg-3 col-md-6 col-12" style="margin-top: -40px;">
 								<div class="col-12">
 									<p class="Priority1">Priority</p>
 									<div class="circle-Priority" id="prirority-view"></div>

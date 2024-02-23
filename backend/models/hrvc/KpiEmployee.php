@@ -4,6 +4,7 @@ namespace backend\models\hrvc;
 
 use Yii;
 use \backend\models\hrvc\master\KpiEmployeeMaster;
+use common\models\ModelMaster;
 
 /**
  * This is the model class for table "kpi_employee".
@@ -68,5 +69,43 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
         } else {
             return 0;
         }
+    }
+    public static function lastestCheckDate($kpiEmployeeId)
+    {
+        $kpiEmployeeHistory = KpiEmployeeHistory::find()
+            ->select('kpiEmployeeId,nextCheckDate,kpiEmployeeHistoryId')
+            ->where(["kpiEmployeeId" => $kpiEmployeeId])
+            ->orderBy("kpiEmployeeHistoryId DESC")
+            ->asArray()
+            ->one();
+        if (isset($kpiEmployeeHistory) && !empty($kpiEmployeeHistory) && $kpiEmployeeHistory["nextCheckDate"] != '') {
+            //throw new Exception(print_r($kpiTeamHistory, true));
+            $lastCheckDate = KpiEmployeeHistory::find()
+                ->select('nextCheckDate,kpiEmployeeHistoryId')
+                ->where(["kpiEmployeeId" => $kpiEmployeeId, "status" => [1, 2]])
+                ->andWhere("kpiEmployeeHistoryId<" . $kpiEmployeeHistory["kpiEmployeeHistoryId"] . " and nextCheckDate!='" . $kpiEmployeeHistory["nextCheckDate"] . "'")
+                ->orderBy("kpiEmployeeHistoryId DESC")
+                ->asArray()
+                ->one();
+            if (isset($lastCheckDate) && !empty($lastCheckDate)) {
+                return $lastCheckDate["nextCheckDate"];
+            }
+        } else {
+            return '';
+        }
+    }
+    public static function nextCheckDate($kpiEmployeeId)
+    {
+        $date = '';
+        $kpiHistory = KpiEmployeeHistory::find()
+            ->select('nextCheckDate')
+            ->where(["kpiEmployeeId" => $kpiEmployeeId, "status" => [1, 4]])
+            ->orderBy('kpiEmployeeHistoryId DESC')
+            ->asArray()
+            ->one();
+        if (isset($kpiHistory) && !empty($kpiHistory) && $kpiHistory["nextCheckDate"] != '') {
+            $date = ModelMaster::engDate($kpiHistory["nextCheckDate"], 2);
+        }
+        return $date;
     }
 }

@@ -40,7 +40,7 @@ class KgiIssue extends \backend\models\hrvc\master\KgiIssueMaster
             "issue" => "",
             "solution" => ""
         ];
-        $issue = KgiIssue::find()->where(["kgiId" => $kgiId])->asArray()->orderBy('kgiIssueId DESC')->one();
+        $issue = KgiIssue::find()->where(["kgiId" => $kgiId])->asArray()->orderBy('updateDateTime DESC')->one();
         if (isset($issue) && !empty($issue)) {
             $issueLength = strlen($issue["issue"]);
             if ($issueLength > 140) {

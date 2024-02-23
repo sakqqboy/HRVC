@@ -19,6 +19,11 @@ use frontend\models\ContactForm;
 /**
  * Site controller
  */
+header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
+header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 class SiteController extends Controller
 {
     /**
@@ -75,10 +80,17 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render("index");
+        if (!Yii::$app->user->id) {
+            return $this->redirect(Yii::$app->homeUrl . "site/login");
+        } else {
+            return $this->redirect(Yii::$app->homeUrl . 'site/dashboard');
+        }
     }
     public function actionDashboard()
     {
+        if (!Yii::$app->user->id) {
+            return $this->redirect(Yii::$app->homeUrl . "site/login");
+        }
         return $this->render("dashboard");
     }
     public function actionUpdate()
@@ -165,7 +177,6 @@ class SiteController extends Controller
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->redirect(Yii::$app->homeUrl . 'site/dashboard');
-            return $this->goBack();
         }
 
         $model->password = '';

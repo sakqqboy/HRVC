@@ -2,43 +2,78 @@
 
 use common\models\ModelMaster;
 use frontend\models\hrvc\KgiBranch;
+use frontend\models\hrvc\KgiTeam;
 use frontend\models\hrvc\Unit;
 
 ?>
 <table class="table table-responsive-lg">
 	<thead>
-		<th>KGI Name</th>
-		<th>Target</th>
-		<th>Month</th>
-		<th>Unit</th>
-		<th>Branch(es)</th>
+		<tr class="font-size-12">
+			<th>KGI Name</th>
+			<th>Month</th>
+			<th>Unit</th>
+			<th>Ratio</th>
+			<th>Teams</th>
+		</tr>
 	</thead>
 	<tbody>
 		<?php
 		if (isset($kfiHasKgi) && count($kfiHasKgi) > 0) {
 			$a = 1;
-			foreach ($kfiHasKgi as $kgi) : ?>
-				<tr>
+			//throw new exception(print_r($kfiHasKgi, true));
+			foreach ($kfiHasKgi as $kgi) :
+				if ($kgi["targetAmount"] != '' && $kgi["targetAmount"] != 0 && $kgi["targetAmount"] != null) {
+					if ($kgi["code"] == '<' || $kgi["code"] == '=') {
+						$ratio = ($kgi["result"] / $kgi["targetAmount"]) * 100;
+					} else {
+						if ($kgi["result"] != '' && $kgi["result"] != 0) {
+							$ratio = ($kgi["targetAmount"] / $kgi["result"]) * 100;
+						} else {
+							$ratio = 0;
+						}
+					}
+				} else {
+					$ratio = 0;
+				}
+				$decimal = explode(".", $ratio);
+				if (isset($decimal[1]) && $decimal[1] != '00') {
+					$number = number_format($ratio, 2);
+				} else {
+					$number = $ratio;
+				}
+				if ($number > 0) {
+					$number .= ' %';
+				}
+		?>
+				<tr class="font-size-12">
 					<td>
 						<a class="no-underline-black" href="<?= Yii::$app->homeUrl . 'kgi/management/kgi-detail/' . ModelMaster::encodeParams(["kgiId" => $kgi['kgiId']]) ?>" style="cursor: pointer;">
 							<?= $a ?>.
-							<span class="font-b">
+							<span style="font-weight: 500;">
 								<?= $kgi["kgiName"] ?>
 							</span>
 						</a>
 					</td>
-					<td><?= $kgi["code"] ?> <?= number_format($kgi["targetAmount"], 2) ?></td>
+					<!-- <td><?php // $kgi["code"] 
+							?> <?php // number_format($kgi["targetAmount"], 2) 
+								?></td> -->
 					<td><?= ModelMaster::shotMonthText($kgi["month"]) ?></td>
 					<td><?= Unit::unitName($kgi["unitId"]) ?></td>
+					<td class="text-center">
+						<span class="pro-load-table">
+							<?= $number ?>
+						</span>
+					</td>
 					<td>
-						<div class="col-12" style="line-height: 30px;">
+						<div class="col-12" style="line-height: 20px;">
 							<?php
-							$kgiBranch = KgiBranch::kgiBranch($kgi["kgiId"]);
-							if (isset($kgiBranch) && count($kgiBranch) > 0) {
+							//$kgiBranch = KgiBranch::kgiBranch($kgi["kgiId"]);
+							$kgiTeam = KgiTeam::kgiTeam($kgi["kgiId"]);
+							if (isset($kgiTeam) && count($kgiTeam) > 0) {
 								$i = 1;
-								foreach ($kgiBranch as $branch) :
-									echo $i . '. ' . $branch["branchName"];
-									if ($i < (count($kgiBranch))) {
+								foreach ($kgiTeam as $team) :
+									echo $i . '. ' . $team["teamName"];
+									if ($i < (count($kgiTeam))) {
 										echo '<br>';
 									}
 									$i++;

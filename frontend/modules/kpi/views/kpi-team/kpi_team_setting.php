@@ -11,7 +11,7 @@ $this->title = "KPI Team Setting";
 			<i class="fa fa-users font-size-20" aria-hidden="true"></i> <strong class="font-size-20"> Team KPI Setting</strong>
 		</div>
 		<div class="col-4 text-end pr-15">
-			<a href="<?= Yii::$app->homeUrl ?>kpi/management/assign-kpi" class="btn btn-secondary font-size-12">
+			<a href="<?= Yii::$app->request->referrer ?>" class="btn btn-secondary font-size-12">
 				<i class="fa fa-chevron-left mr-5" aria-hidden="true"></i>
 				Back
 			</a>
@@ -127,8 +127,15 @@ $this->title = "KPI Team Setting";
 				<div class="col-3 border-bottom pb-10">
 					<input type="text" class="form-control text-end font-size-14" <?= $disabled ?> placeholder="Set Target" name="teamTerget[<?= $team['teamId'] ?>]" value="<?= (int)$team['target'] == 0 ? '' : number_format($team['target'], 2) ?>">
 				</div>
-				<div class="col-5 border-bottom pb-10">
-					<textarea class="form-control font-size-14" name="remark[<?= $team['teamId'] ?>]" <?= $disabled ?>></textarea>
+				<div class="col-4 border-bottom pb-10">
+					<textarea class="form-control font-size-14" name="remark[<?= $team['teamId'] ?>]" id="remark-<?= $team['teamId'] ?>" <?= $disabled ?>></textarea>
+				</div>
+				<div class="col-1 border-bottom mt-15 pb-10 text-center">
+					<a href="javascript:setSameKpiTeamRemark(<?= $team['teamId'] ?>,<?= $kpiId ?>)">
+						<i class="fa fa-clipboard mr-5 text-secondary font-size-14" aria-hidden="true"></i>
+					</a>
+					<div class="col-12 text-center font-size-10">Same Remark</div>
+
 				</div>
 			</div>
 		<?php

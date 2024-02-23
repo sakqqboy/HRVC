@@ -34,6 +34,11 @@ use yii\web\UploadedFile;
 /**
  * Default controller for the `kpi` module
  */
+//header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
+// header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+// header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+// header("Cache-Control: post-check=0, pre-check=0", false);
+// header("Pragma: no-cache");
 class ManagementController extends Controller
 {
     /**
@@ -81,6 +86,7 @@ class ManagementController extends Controller
             //return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
         }
         $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
@@ -144,6 +150,7 @@ class ManagementController extends Controller
         }
 
         $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
@@ -192,6 +199,7 @@ class ManagementController extends Controller
             $kpi->code = $_POST["code"];
             $kpi->status = $_POST["status"];
             $kpi->month = $_POST["month"];
+            $kpi->year = $_POST["year"];
             $kpi->result = str_replace(",", "", $result);
             $kpi->createrId = Yii::$app->user->id;
             $kpi->createDateTime = new Expression('NOW()');
@@ -211,6 +219,7 @@ class ManagementController extends Controller
                 $kpiHistory->code = $_POST["code"];
                 $kpiHistory->status = $_POST["status"];
                 $kpiHistory->month = $_POST["month"];
+                $kpiHistory->year = $_POST["year"];
                 $kpiHistory->result = str_replace(",", "", $result);
                 $kpiHistory->createrId = Yii::$app->user->id;
                 $kpiHistory->createDateTime = new Expression('NOW()');
@@ -228,7 +237,8 @@ class ManagementController extends Controller
                     $this->saveKpiTeam($_POST["team"], $kpiId);
                     $this->saveKpiEmployee($_POST["team"], $kpiId);
                 }
-                return $this->redirect('grid');
+                return $this->redirect(Yii::$app->request->referrer);
+                //return $this->redirect('grid');
             }
         }
     }
@@ -379,6 +389,7 @@ class ManagementController extends Controller
     {
         $kpiId = $_POST["kpiId"];
         $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId);
         $kpi = curl_exec($api);
@@ -496,13 +507,15 @@ class ManagementController extends Controller
                 return $this->redirect('grid');
             }
         }
-        return $this->redirect('grid');
+        return $this->redirect(Yii::$app->request->referrer);
+        //return $this->redirect('grid');
     }
     public function actionHistory()
     {
 
         $kpiId = $_POST["kpiId"];
         $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId);
         $kpi = curl_exec($api);
@@ -547,7 +560,7 @@ class ManagementController extends Controller
         $employeeId = User::employeeIdFromUserId($userId);
         $kpiId = $_POST["kpiId"];
         $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId);
         $kpi = curl_exec($api);
@@ -646,6 +659,12 @@ class ManagementController extends Controller
         $answer->updateDateTime = new Expression('NOW()');
         $createDateTime = date('Y-m-d');
         if ($answer->save(false)) {
+            $kpiIssue = KpiIssue::find()
+                ->select('kpiId,issue')
+                ->where(["kpiIssueId" => $kpiIssueId])
+                ->one();
+            $kpiIssue->updateDateTime = new Expression('NOW()');
+            $kpiId = $kpiIssue->kpiId;
             $res["commentText"] = $this->renderAjax('comment', [
                 "name" => User::userHeaderName(),
                 "image" => User::userHeaderImage(),
@@ -655,6 +674,9 @@ class ManagementController extends Controller
                 "file" => $file,
                 "fileName" => $fileName
             ]);
+            $res["issue"] = $kpiIssue["issue"];
+            $res["solution"] = $solution;
+            $res["kpiId"] = $kpiId;
             $res["status"] = true;
         }
         return json_encode($res);
@@ -734,8 +756,9 @@ class ManagementController extends Controller
         }
 
         $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-filter?' . $paramText);
         $kpis = curl_exec($api);
         $kpis = json_decode($kpis, true);
@@ -996,6 +1019,7 @@ class ManagementController extends Controller
         }
 
         $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
         //curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/index');
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
@@ -1014,6 +1038,7 @@ class ManagementController extends Controller
         $companyId = $_POST["companyId"];
         $kpiId = $_POST["kpiId"];
         $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
         $branches = curl_exec($api);
@@ -1024,6 +1049,8 @@ class ManagementController extends Controller
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId);
         $kpi = curl_exec($api);
         $kpi = json_decode($kpi, true);
+
+        curl_close($api);
         $res["kpiName"] = $kpi["kpiName"];
         $res["companyName"] = $kpi["companyName"];
         $res["textBranch"] = $textBranch;
@@ -1349,13 +1376,40 @@ class ManagementController extends Controller
     public function actionSearchAssignKpi()
     {
         $month = $_POST['month'];
-        $paramText = 'companyId=&&branchId=&&teamId=&&month=' . $month . '&&status=&&year=';
+        $year = $_POST['year'];
+        $paramText = 'companyId=&&branchId=&&teamId=&&month=' . $month . '&&status=&&year=' . $year;
         $groupId = Group::currentGroupId();
         if ($groupId == null) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
         }
+        $role = UserRole::userRight();
+        $adminId = '';
+        $gmId = '';
+        $teamLeaderId = '';
+        $managerId = '';
+        $supervisorId = '';
+        $staffId = '';
+        if ($role == 7) {
+            $adminId = Yii::$app->user->id;
+        }
+        if ($role == 6) {
+            $gmId = Yii::$app->user->id;
+        }
+        if ($role == 5) {
+            $managerId = Yii::$app->user->id;
+        }
+        if ($role == 4) {
+            $supervisorId = Yii::$app->user->id;
+        }
+        if ($role == 3) {
+            $teamLeaderId = Yii::$app->user->id;
+        }
+        if ($role == 1 || $role == 2) {
+            $staffId = Yii::$app->user->id;
+        }
+        $paramText .= '&&adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId;
         $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-filter?' . $paramText);
         $kpis = curl_exec($api);
@@ -1374,7 +1428,7 @@ class ManagementController extends Controller
         $param = ModelMaster::decodeParams($hash);
         $kpiId = $param["kpiId"];
         $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kgi-kpi?kpiId=' . $kpiId);
         $kpiHasKgi = curl_exec($api);
@@ -1503,6 +1557,7 @@ class ManagementController extends Controller
             ->asArray()
             ->all();
         $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiTeam["kpiId"]);
@@ -1566,6 +1621,7 @@ class ManagementController extends Controller
             ->asArray()
             ->all();
         $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiEmployee["kpiId"]);
@@ -1609,7 +1665,7 @@ class ManagementController extends Controller
     {
         $kpiId = $_POST["kpiId"];
         $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kgi-kpi?kpiId=' . $kpiId);
         $kpiHasKgi = curl_exec($api);
@@ -1630,6 +1686,7 @@ class ManagementController extends Controller
         $param = ModelMaster::decodeParams($hash);
         $kpiId = $param["kpiId"];
         $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId);
         $kpi = curl_exec($api);
@@ -1670,6 +1727,14 @@ class ManagementController extends Controller
             "kpiEmloyee" => $kpiEmployee,
             "res" => $res
         ]);
+    }
+    public function actionDeleteKpiTeam()
+    {
+        $kpiTeamId = $_POST["kpiTeamId"];
+        KpiTeam::updateAll(["status" => 99], ["kpiId" => $kpiTeamId]);
+        KpiTeamHistory::updateAll(["status" => 99], ["kpiTeamId" => $kpiTeamId]);
+        $res["status"] = true;
+        return json_encode($res);
     }
     public function setDefault()
     {

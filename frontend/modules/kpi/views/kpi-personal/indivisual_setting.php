@@ -16,7 +16,7 @@ $this->title = "KPI Individual Setting";
 			</strong>
 		</div>
 		<div class="col-4 text-end pr-15">
-			<a href="<?= Yii::$app->homeUrl ?>kpi/management/assign-kpi" class="btn btn-secondary font-size-12">
+			<a href="<?= Yii::$app->request->referrer ?>" class="btn btn-secondary font-size-12">
 				<i class="fa fa-chevron-left mr-5" aria-hidden="true"></i>
 				Back
 			</a>
@@ -117,7 +117,7 @@ $this->title = "KPI Individual Setting";
 						<?= $i ?>. <?= Team::teamName($teamId) ?>
 					</div>
 					<div class="col-5 text-end font-size-16 font-b mt-10 mb-10 border-bottom pb-10">
-						Target : : <?= number_format(KpiTeam::teamTarget($teamId), 2) ?>
+						Target : : <?= number_format(KpiTeam::teamTarget($teamId, $kpiId), 2) ?>
 					</div>
 				</div>
 				<?php
@@ -133,6 +133,9 @@ $this->title = "KPI Individual Setting";
 							<div class="col-3 mr-10 border-bottom pb-10 mt-10">
 								<input class="form-control text-end" type="text" name="target[<?= $employee["employeeId"] ?>]" value="<?= number_format($employee['target'], 2) ?>" <?= $disabled ?>>
 							</div>
+							<div class="col-3 mr-10 border-bottom pb-10 mt-10">
+								<textarea class="form-control font-size-14" name="remark[<?= $employee['employeeId'] ?>]"><?= $employee['remark'] ?></textarea>
+							</div>
 						</div>
 			<?php
 						$j++;
@@ -140,7 +143,7 @@ $this->title = "KPI Individual Setting";
 				}
 				$i++;
 			endforeach; ?>
-			<div class="col-10 text-end mt-20 pr-10">
+			<div class="col-11 text-end mt-20">
 				<input type="hidden" name="kpiId" value="<?= $kpiId ?>">
 				<button type="submit" class="btn btn-primary" style="letter-spacing: 1px;">SAVE</button>
 			</div>

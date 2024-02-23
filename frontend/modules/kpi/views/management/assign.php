@@ -12,15 +12,15 @@ $this->title = 'Assign KPI';
 		<?= $this->render('header_assign') ?>
 		<div class="alert alert-white-5">
 			<div class="row">
-				<div class="col-lg-9 col-md-6 col-12">
+				<div class="col-lg-6 col-md-6 col-12">
 					<div class="col-12">
 						Key Performance Indicator
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-6 col-12">
+				<div class="col-lg-6 col-md-6 col-12">
 					<div class="col-12">
 						<div class="input-group mb-3">
-							<span class="input-group-text" id="basic-addon1" onclick="javascript:searchAssignKpi()">
+							<span class="input-group-text" id="basic-addon1" onclick="javascript:searchAssignKpi()" style="cursor: pointer;">
 								<i class="fa fa-filter" aria-hidden="true"></i>
 							</span>
 							<select class="form-select font-size-13" aria-label="Default select example" id="kpiMonthFilter">
@@ -35,7 +35,21 @@ $this->title = 'Assign KPI';
 								}
 								?>
 							</select>
-
+							<select class="form-select font-size-13" aria-label="Default select example" id="kpiYearFilter">
+								<option selected value="">Year</option>
+								<option value="">Year</option>
+								<?php
+								$year = 2022;
+								$i = 1;
+								while ($i < 20) {
+								?>
+									<option value="<?= $year ?>"><?= $year ?></option>
+								<?php
+									$year += 1;
+									$i++;
+								}
+								?>
+							</select>
 						</div>
 					</div>
 				</div>
@@ -124,29 +138,16 @@ $this->title = 'Assign KPI';
 										</a>
 									</td>
 									<td class="text-end">
-										<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/kpi-team-setting/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>" class="btn btn-sm btn-primary mr-3" title="Team KPI setting">
+										<!-- <a href="<?php // Yii::$app->homeUrl 
+												?>kpi/kpi-team/kpi-team-setting/<?php //ModelMaster::encodeParams(['kpiId' => $kpiId]) 
+																	?>" class="btn btn-sm btn-primary mr-3" title="Team KPI setting">
 											<i class="fa fa-users" aria-hidden="true"></i>
-										</a>
+										</a> -->
 										<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/indivisual-setting/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>" class="btn btn-sm btn-info text-light" title="Indivisual KPI setting">
 											<i class="fa fa-user" aria-hidden="true"></i>
 										</a>
 									</td>
-									<!-- <td id='active-<?php //$kfiId 
-												?>'> -->
-									<?php
-									// if ($kfi["active"] == 1) { 
-									?>
-									<!-- <a href="javascript:changeKfiStatus(0,<?php // $kfiId 
-																?>)" class="btn btn-primary btn-sm font-size-12">Active</a> -->
-									<?php
-									//} else { 
-									?>
-									<!-- <a href="javascript:changeKfiStatus(1,<?php // $kfiId 
-																?>)" class="btn btn-danger btn-sm font-size-12">In Active</a> -->
-									<?php
-									// }
-									?>
-									<!-- </td> -->
+
 
 								</tr>
 						<?php

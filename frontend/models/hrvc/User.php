@@ -50,8 +50,20 @@ class User extends \frontend\models\hrvc\master\UserMaster
     {
         if (Yii::$app->user->id) {
             $user = User::find()->where(["userId" => Yii::$app->user->id, "status" => 1])->asArray()->one();
-            $employee = Employee::find()->where(["employeeId" => $user["employeeId"]])->asArray()->one();
-            return $employee["picture"];
+            $employee = Employee::find()
+                ->where(["employeeId" => $user["employeeId"]])
+                ->asArray()
+                ->one();
+            if ($employee["picture"] == '') {
+                if ($employee["gender"] == '1') {
+                    $picture = 'image/user.png';
+                } else {
+                    $picture = 'image/lady.jpg';
+                }
+                return $picture;
+            } else {
+                return $employee["picture"];
+            }
         }
     }
     public static function employeeIdFromUserId()
@@ -98,5 +110,17 @@ class User extends \frontend\models\hrvc\master\UserMaster
             }
         }
         return '';
+    }
+    public static function userIdByEmployeeId($employeeId)
+    {
+        $user = User::find()->select('userId')
+            ->where(["employeeId" => $employeeId, "status" => 1])
+            ->asArray()
+            ->one();
+        if (isset($user) && !empty($user)) {
+            return $user["userId"];
+        } else {
+            return  null;
+        }
     }
 }

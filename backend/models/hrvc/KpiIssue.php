@@ -40,7 +40,7 @@ class KpiIssue extends \backend\models\hrvc\master\KpiIssueMaster
             "issue" => "",
             "solution" => ""
         ];
-        $issue = KpiIssue::find()->where(["kpiId" => $kpiId])->asArray()->orderBy('kpiIssueId DESC')->one();
+        $issue = KpiIssue::find()->where(["kpiId" => $kpiId])->asArray()->orderBy('updateDateTime DESC')->one();
         if (isset($issue) && !empty($issue)) {
             $issueLength = strlen($issue["issue"]);
             if ($issueLength > 140) {

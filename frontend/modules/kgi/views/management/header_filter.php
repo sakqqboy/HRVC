@@ -18,12 +18,12 @@
 				Key Performance Indicator
 			</a>
 		</li>
-		<li class="header-item">
+		<!-- <li class="header-item">
 			<a class="nav-link text-dark" id="pills-Action-tab" type="button" role="tab" aria-controls="pills-Action" aria-selected="false">
 				<i class="fa fa-list-ul" aria-hidden="true"></i>
 				Key Action Indicator
 			</a>
-		</li>
+		</li> -->
 		<li class="header-item presentation-end pr-20">
 			<?php
 			if ($role >= 3) {

@@ -306,6 +306,7 @@ function kgiHistory(kgiId) {
 			}
 			
 			$("#company-name-view").html(data.kgi.companyName);
+			$("#modal-branch-flag").attr("src", $url+data.kgi.flag);
 			$("#quantRatio-view").html(data.kgi.quantRatioText);
 			$("#code-view").html(data.kgi.code);
 			$("#target-view").html(data.kgi.targetAmountText);
@@ -471,6 +472,8 @@ function answerKgiIssue(kgiIssueId) {
 			if (data.status) {
 				$("#solution-" + kgiIssueId).append(data.commentText);
 				$("#answer-" + kgiIssueId).val('');
+				$("#lastest-issue-" + data.kgiId).html(data.issue);
+				$("#lastest-solution-" + data.kgiId).html(data.solution);
 			}
 		}
 	});
@@ -627,12 +630,13 @@ function searchKgiTeam() {
 }
 function searchAssignKgi() { 
 	var month = $("#kgiMonthFilter").val();
+	var year = $("#kgiYearFilter").val();
 	var url = $url + 'kgi/management/search-assign-kgi';
 	    $.ajax({
 		 type: "POST",
 		 dataType: 'json',
 		 url: url,
-		 data: { month: month},
+		 data: { month: month,year:year},
 		 success: function (data) {
 		     if (data.status) {
 			  $("#assign-search-result").html(data.kgiText);
@@ -724,7 +728,6 @@ function checkAllKgiEmployee(kgiId) {
 					}
 				});
 			} else {
-		    
 				$.each(data.employeeId, function (key, value) {
 					if ($("#kgi-employee-" + value + '-' + kgiId).prop("checked") == true) {
 						$("#kgi-employee-" + value + '-' + kgiId).prop("checked", false);
@@ -778,6 +781,27 @@ function approveTargetKgiEmployee(kgiEmployeeId, approve) {
 			}
 		});
 	}
+}
+function setSameKgiTeamRemark(teamId, kgiId) {
+	var url = $url + 'kgi/kgi-team/kgi-team';
+	var remark = $("#remark-" + teamId).val();
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { kgiId: kgiId },
+		success: function (data) {
+			if (data.status) {
+				$.each(data.kgiId, function (key, value) {
+					$("#remark-" + value).val(remark);
+					
+				});
+			} else { 
+				alert('123');
+			}
+		}
+	});
+	
 }
   
    

@@ -4,6 +4,7 @@ namespace backend\models\hrvc;
 
 use Yii;
 use \backend\models\hrvc\master\KgiEmployeeMaster;
+use common\models\ModelMaster;
 
 /**
  * This is the model class for table "kgi_employee".
@@ -44,7 +45,7 @@ class KgiEmployee extends \backend\models\hrvc\master\KgiEmployeeMaster
         $kgiEmployee = KgiEmployee::find()
             ->select('e.picture,e.employeeId,e.gender')
             ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
-            ->where(["kgi_employee.status" => [1, 2], "kgi_employee.kgiId" => $kgiId, "e.status" => 1])
+            ->where(["kgi_employee.status" => [1, 2, 4], "kgi_employee.kgiId" => $kgiId, "e.status" => 1])
             ->andWhere("kgi_employee.employeeId is not null")
             ->asArray()
             ->all();
@@ -75,5 +76,43 @@ class KgiEmployee extends \backend\models\hrvc\master\KgiEmployeeMaster
         } else {
             return 0;
         }
+    }
+    public static function lastestCheckDate($kgiEmployeeId)
+    {
+        $kgiEmployeeHistory = KgiEmployeeHistory::find()
+            ->select('kgiEmployeeId,nextCheckDate,kgiEmployeeHistoryId')
+            ->where(["kgiEmployeeId" => $kgiEmployeeId])
+            ->orderBy("kgiEmployeeHistoryId DESC")
+            ->asArray()
+            ->one();
+        if (isset($kgiEmployeeHistory) && !empty($kgiEmployeeHistory) && $kgiEmployeeHistory["nextCheckDate"] != '') {
+            //throw new Exception(print_r($kgiTeamHistory, true));
+            $lastCheckDate = KgiEmployeeHistory::find()
+                ->select('nextCheckDate,kgiEmployeeHistoryId')
+                ->where(["kgiEmployeeId" => $kgiEmployeeId, "status" => [1, 2]])
+                ->andWhere("kgiEmployeeHistoryId<" . $kgiEmployeeHistory["kgiEmployeeHistoryId"] . " and nextCheckDate!='" . $kgiEmployeeHistory["nextCheckDate"] . "'")
+                ->orderBy("kgiEmployeeHistoryId DESC")
+                ->asArray()
+                ->one();
+            if (isset($lastCheckDate) && !empty($lastCheckDate)) {
+                return $lastCheckDate["nextCheckDate"];
+            }
+        } else {
+            return '';
+        }
+    }
+    public static function nextCheckDate($kgiEmployeeId)
+    {
+        $date = '';
+        $kgiHistory = KgiEmployeeHistory::find()
+            ->select('nextCheckDate')
+            ->where(["kgiEmployeeId" => $kgiEmployeeId, "status" => [1, 4]])
+            ->orderBy('kgiEmployeeHistoryId DESC')
+            ->asArray()
+            ->one();
+        if (isset($kgiHistory) && !empty($kgiHistory) && $kgiHistory["nextCheckDate"] != '') {
+            $date = ModelMaster::engDate($kgiHistory["nextCheckDate"], 2);
+        }
+        return $date;
     }
 }

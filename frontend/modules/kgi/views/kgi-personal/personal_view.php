@@ -13,7 +13,7 @@ $this->title = "Individual KGI Detail";
 			</strong>
 		</div>
 		<div class="col-4 text-end pr-15">
-			<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi" class="btn btn-secondary font-size-12">
+			<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi-grid" class="btn btn-secondary font-size-12">
 				<i class="fa fa-chevron-left mr-5" aria-hidden="true"></i>
 				Back
 			</a>
@@ -76,7 +76,7 @@ $this->title = "Individual KGI Detail";
 				<div class="col-lg-6 col-md-6 col-6" style="margin-top:-20px;">
 					<div class="col-12 pt-20">
 						<div class="progress">
-							<div class="progress-bar" id="progressHistory" style="background: rgb(47, 128, 237); margin-left: -50px; width:<?= (float)$kgiEmployeeDetail["ratio"] > 100 ? '100' : $kgiEmployeeDetail["ratio"] ?>%;"></div>
+							<div class="progress-bar" id="progressHistory" style="background: rgb(47, 128, 237); width:<?= (float)$kgiEmployeeDetail["ratio"] > 100 ? '100' : $kgiEmployeeDetail["ratio"] ?>%;"></div>
 							<span class="badge rounded-pill  pro-load-Backdrop3" id="decimalHistory"><?= $kgiEmployeeDetail["ratio"] ?>%</span>
 						</div>
 					</div>
@@ -84,11 +84,17 @@ $this->title = "Individual KGI Detail";
 			</div>
 		</div>
 	</div>
-	<div class="col-12 mt-20 font-size-16 font-b">
+	<div class="col-12 mt-20 font-size-14 font-b">
+		Remark
+	</div>
+	<div class="col-12 mt-10">
+		<?= $kgiEmployeeDetail["remark"] == '' ? '-' : $kgiEmployeeDetail["remark"] ?>
+	</div>
+	<div class="col-12 mt-20 font-size-14 font-b">
 		Update Description
 	</div>
-	<div class="col-12 mt-40">
-		<div class="row border-buttom font-b mb-20">
+	<div class="col-12 mt-10">
+		<div class="row border-buttom font-b mb-20 font-size-14">
 			<div class="col-4 pb-10">Progress</div>
 			<div class="col-2 pb-10 text-end">Target</div>
 			<div class="col-2 pb-10 text-end">Result</div>

@@ -106,7 +106,7 @@
 					Update Histories
 				</div>
 				<hr>
-				<div class="col-12" id="kpi-history">
+				<div class="col-12 history-box" id="kpi-history">
 
 				</div>
 			</div>

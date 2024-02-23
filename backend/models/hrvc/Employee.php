@@ -4,6 +4,7 @@ namespace backend\models\hrvc;
 
 use Yii;
 use \backend\models\hrvc\master\EmployeeMaster;
+use Exception;
 
 /**
  * This is the model class for table "employee".
@@ -57,6 +58,10 @@ class Employee extends \backend\models\hrvc\master\EmployeeMaster
             ->where(["userId" => $userId])
             ->asArray()
             ->one();
-        return $user["employeeId"];
+        if (isset($user) && !empty($user)) {
+            return $user["employeeId"];
+        } else {
+            return null;
+        }
     }
 }

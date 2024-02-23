@@ -11,7 +11,7 @@ $this->title = "KGI Team Setting";
 			<i class="fa fa-users font-size-20" aria-hidden="true"></i> <strong class="font-size-20"> Team KGI Setting</strong>
 		</div>
 		<div class="col-4 text-end pr-15">
-			<a href="<?= Yii::$app->homeUrl ?>kgi/management/assign-kgi" class="btn btn-secondary font-size-12">
+			<a href="<?= Yii::$app->request->referrer ?>" class="btn btn-secondary font-size-12">
 				<i class="fa fa-chevron-left mr-5" aria-hidden="true"></i>
 				Back
 			</a>
@@ -84,14 +84,17 @@ $this->title = "KGI Team Setting";
 
 	</div>
 	<div class="row">
-		<div class="col-4 font-size-16 font-b mt-20 mb-10 text-center border-bottom pb-10">
+		<div class="col-4 font-size-14 font-b mt-20 mb-10 text-center border-bottom pb-10">
 			TEAM
 		</div>
-		<div class="col-3 font-size-16 font-b mt-20 mb-10 text-center border-bottom pb-10">
+		<div class="col-3 font-size-14 font-b mt-20 mb-10 text-center border-bottom pb-10">
 			Target
 		</div>
-		<div class="col-5 font-size-16 font-b mt-20 mb-10 text-center border-bottom pb-10">
+		<div class="col-4 font-size-14 font-b mt-20 mb-10 text-center border-bottom pb-10">
 			Remark
+		</div>
+		<div class="col-1 mt-20 mb-10 text-center border-bottom pb-10">
+
 		</div>
 	</div>
 
@@ -128,8 +131,15 @@ $this->title = "KGI Team Setting";
 				<div class="col-3 border-bottom pb-10">
 					<input type="text" class="form-control text-end font-size-14" placeholder="Set Target" name="teamTerget[<?= $team['teamId'] ?>]" value="<?= (int)$team['target'] == 0 ? '' : number_format($team['target'], 2) ?>" <?= $disabled ?>>
 				</div>
-				<div class="col-5 border-bottom pb-10">
-					<textarea class="form-control font-size-14" name="remark[<?= $team['teamId'] ?>]" <?= $disabled ?>></textarea>
+				<div class="col-4 border-bottom pb-10">
+					<textarea class="form-control font-size-14" name="remark[<?= $team['teamId'] ?>]" <?= $disabled ?> id="remark-<?= $team['teamId'] ?>"><?= $team['remark'] ?></textarea>
+				</div>
+				<div class="col-1 border-bottom mt-15 pb-10 text-center">
+					<a href="javascript:setSameKgiTeamRemark(<?= $team['teamId'] ?>,<?= $kgiId ?>)">
+						<i class="fa fa-clipboard mr-5 text-secondary font-size-14" aria-hidden="true"></i>
+					</a>
+					<div class="col-12 text-center font-size-10">Same Remark</div>
+
 				</div>
 			</div>
 	<?php

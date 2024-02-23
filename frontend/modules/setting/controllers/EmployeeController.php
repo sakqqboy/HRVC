@@ -35,11 +35,11 @@ use yii\web\UploadedFile;
 /**
  * Default controller for the `setting` module
  */
-header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
-header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
+// header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
+// header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+// header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+// header("Cache-Control: post-check=0, pre-check=0", false);
+// header("Pragma: no-cache");
 class EmployeeController extends Controller
 {
     /**
@@ -65,7 +65,7 @@ class EmployeeController extends Controller
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
         }
         $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/all-employee-detail?companyId=' . $companyId);
         $employees = curl_exec($api);
@@ -89,7 +89,7 @@ class EmployeeController extends Controller
         }
         $groupId = $group["groupId"];
         $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
         $countries = curl_exec($api);
@@ -229,7 +229,7 @@ class EmployeeController extends Controller
         $param = ModelMaster::decodeParams($hash);
         $employeeId = $param["employeeId"];
         $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
         $employee = curl_exec($api);
@@ -256,13 +256,28 @@ class EmployeeController extends Controller
     }
     public function saveEmployeeStatus($employeeId, $statusId)
     {
-        $status = new EmployeeStatus();
-        $status->employeeId = $employeeId;
-        $status->statusId = $statusId;
-        $status->status = 1;
-        $status->createDateTime = new Expression('NOW()');
-        $status->updateDateTime = new Expression('NOW()');
-        $status->save(false);
+        $employeeStatus = EmployeeStatus::find()
+            ->where(["employeeId" => $employeeId])->orderBy('createDateTime DESC')
+            ->one();
+        if (isset($employeeStatus) && !empty($employeeStatus)) {
+            if ($employeeStatus["statusId"] != $statusId) {
+                $status = new EmployeeStatus();
+                $status->employeeId = $employeeId;
+                $status->statusId = $statusId;
+                $status->status = 1;
+                $status->createDateTime = new Expression('NOW()');
+                $status->updateDateTime = new Expression('NOW()');
+                $status->save(false);
+            }
+        } else {
+            $status = new EmployeeStatus();
+            $status->employeeId = $employeeId;
+            $status->statusId = $statusId;
+            $status->status = 1;
+            $status->createDateTime = new Expression('NOW()');
+            $status->updateDateTime = new Expression('NOW()');
+            $status->save(false);
+        }
     }
     public function saveRole($roles, $userId)
     {
@@ -313,7 +328,7 @@ class EmployeeController extends Controller
         }
         $groupId = $group["groupId"];
         $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
         $countries = curl_exec($api);
@@ -406,6 +421,7 @@ class EmployeeController extends Controller
             "name" => EmployeeCondition::conditionName($employee['employeeConditionId'])
         ];
         $oldData["status"] = EmployeeStatus::employeeStatus($employee['employeeId']);
+        $role = UserRole::userRight();
         // throw new Exception(print_r($userRoles, true));
         return $this->render('update', [
             "countries" => $countries,
@@ -421,7 +437,8 @@ class EmployeeController extends Controller
             "departments" => $departments,
             "teams" => $teams,
             "teamPosition" => $teamPosition,
-            "nationalities" => $nationalities
+            "nationalities" => $nationalities,
+            "role" => $role
 
         ]);
     }
@@ -571,7 +588,7 @@ class EmployeeController extends Controller
             ->orderBy("employeeFirstname")
             ->all();
         $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
 
@@ -1023,7 +1040,7 @@ class EmployeeController extends Controller
         $param = ModelMaster::decodeParams($hash);
         $employeeId = $param["employeeId"];
         $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
         $employee = curl_exec($api);

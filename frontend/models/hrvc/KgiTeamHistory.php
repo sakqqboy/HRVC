@@ -48,4 +48,15 @@ class KgiTeamHistory extends \frontend\models\hrvc\master\KgiTeamHistoryMaster
         }
         return '';
     }
+    public static function checkFinished($kgiTeamHistoryId, $kgiTeamId)
+    {
+        $kgiTeamHistory = KgiTeamHistory::find()->where(["kgiTeamId" => $kgiTeamId, "status" => 2])
+            ->andWhere("kgiTeamHistoryId>$kgiTeamHistoryId")
+            ->one();
+        if (isset($kgiTeamHistory) && !empty($kgiTeamHistory)) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
 }

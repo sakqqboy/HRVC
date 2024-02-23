@@ -14,7 +14,11 @@
 				<div class="col-12">
 					<div class="col-12">
 						<label for="exampleFormControlTextarea1" class="form-label font-size-13"> kpi Description</label>
-						<div class="col-12 border mt-5 pt-10 pl-10 text-secondary" style="min-height: 100px;border-radius:5px;" id="kpi-detail"></div>
+						<div class="col-12 border pt-5 pl-10 pb-5 text-secondary" style="min-height: 100px;border-radius:5px;" id="kpi-detail"></div>
+					</div>
+					<div class="col-12 mt-10">
+						<label for="exampleFormControlTextarea1" class="form-label font-size-13"> Team Remark</label>
+						<div class="col-12 border  pt-5 pl-10 pb-5 text-secondary font-size-12" style="min-height: 50px;border-radius:5px;" id="kpi-remark"></div>
 					</div>
 					<div class="row">
 						<div class="col-6 pt-10">
@@ -74,24 +78,43 @@
 						<div class="col-lg-6 col-md-6 col-6 pt-10">
 							<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Status</label>
 							<select class="form-select font-size-13" aria-label="Default select example" required name="status" id="status-update">
-								<option value="">Active / Finished</option>
+
 								<option value="1">Active</option>
 								<option value="2">Finished</option>
 							</select>
 						</div>
-						<div class="col-lg-6 col-md-6 col-6 pt-10">
-							<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Month</label>
-							<select class="form-select font-size-13" required aria-label="Default select example" name="month" id="month-update">
-								<option value="">Select Month</option>
-								<?php
-								if (isset($months) && count($months) > 0) {
-									foreach ($months as $value => $month) : ?>
-										<option value="<?= $value ?>"><?= $month ?></option>
-								<?php
-									endforeach;
-								}
-								?>
-							</select>
+						<div class="col-6">
+							<div class="row">
+								<div class="col-lg-6 col-md-6 col-6 pt-10">
+									<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Month</label>
+									<select class="form-select font-size-13" required aria-label="Default select example" name="month" id="month-update">
+										<option value="">Month</option>
+										<?php
+										if (isset($months) && count($months) > 0) {
+											foreach ($months as $value => $month) : ?>
+												<option value="<?= $value ?>"><?= $month ?></option>
+										<?php
+											endforeach;
+										}
+										?>
+									</select>
+								</div>
+								<div class="col-lg-6 col-md-6 col-6 pt-10">
+									<label class="form-label font-size-12"><strong class="red">*</strong> Year</label>
+									<select class="form-select font-size-12" required name="year" id="year-update">
+										<option value="">Year</option>
+										<?php
+										$year = 2020;
+										$thisYear = date('Y');
+										while ($year < ($thisYear + 10)) { ?>
+											<option value="<?= $year ?>"><?= $year ?></option>
+										<?php
+											$year++;
+										}
+										?>
+									</select>
+								</div>
+							</div>
 						</div>
 						<div class="col-6 mt-10">
 							<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Target Amount</label>

@@ -21,11 +21,11 @@ use yii\web\Controller;
 /**
  * Default controller for the `setting` module
  */
-header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
-header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
+// header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
+// header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+// header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+// header("Cache-Control: post-check=0, pre-check=0", false);
+// header("Pragma: no-cache");
 class DepartmentController extends Controller
 {
     /**
@@ -68,7 +68,7 @@ class DepartmentController extends Controller
         }
 
         $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
 
@@ -233,7 +233,7 @@ class DepartmentController extends Controller
         $res["companyId"] = $branch["companyId"];
         $text = "<option value=''>Select Branch</option>";
         $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $branch["companyId"]);
         $branch = curl_exec($api);
@@ -302,7 +302,7 @@ class DepartmentController extends Controller
     public function actionTitleList()
     {
         $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/title/title-list');
         $titleList = curl_exec($api);
@@ -406,7 +406,7 @@ class DepartmentController extends Controller
         }
 
         $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
 

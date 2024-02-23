@@ -18,6 +18,7 @@ function updateTeamKpi(kpiTeamId) {
             $("#kpi-name").html(data.kpiTeam.kpiName);
             $("#team-name").html(data.kpiTeam.teamName);
             $("#kpi-detail").html(data.kpiTeam.kpiDetail);
+            $("#kpi-remark").html(data.kpiTeam.remark);
             $("#quant-ratio").html(data.kpiTeam.quantRatio);
             $("#priority").html(data.kpiTeam.priority);
             $("#amount-type").html(data.kpiTeam.amountType);
@@ -28,6 +29,7 @@ function updateTeamKpi(kpiTeamId) {
             $(".unit-" + parseInt(data.kpiTeam.unitId)).css("color", "white");
             $("#status-update").val(data.kpiTeam.status);
             $("#month-update").val(data.kpiTeam.month);
+            $("#year-update").val(data.kpiTeam.year);
             $("#target-amount").val(data.kpiTeam.target);
             $("#result").val(data.kpiTeam.result);
             $("#from-date-update").val(data.kpiTeam.fromDate);
@@ -63,6 +65,39 @@ function kpiTeamHistory(kpiTeamId) {
     });
 
 }
+function kpiTeamHistory2(teamId, kpiId) {
+	//
+	var url = $url + 'kpi/kpi-team/kpi-team-view2';
+	resetUnit();
+	$.ajax({
+	    type: "POST",
+	    dataType: 'json',
+	    url: url,
+	    data: { teamId: teamId,kpiId:kpiId },
+	    success: function (data) {
+		 if (data.status) {
+	    //        alert(data.status);
+		     $("#next-date-team").html(data.kpiTeam.nextCheckDateText);
+		     $("#kpi-name-team").html(data.kpiTeam.kpiName);
+		     $("#team-name").html(data.kpiTeam.teamName);
+		     $("#prirority-team").html(data.kpiTeam.priority);
+		     $("#quantRatio-team").html(data.kpiTeam.quantRatio);
+		     $("#unit-team").html(data.kpiTeam.unit);
+		     $("#target-team").html(data.kpiTeam.target);
+		     $("#result-team").html(data.kpiTeam.result);
+		     $("#percentRatio-team").css("width", data.kpiTeam.ratio + '%');
+		     $("#ratio-team").html(data.kpiTeam.ratio);
+		     $("#code-team").html(data.kpiTeam.code);
+		     $("#decription-team").html(data.kpiTeam.kpiDetail);
+		     $("#kpi-history-team").html(data.history);
+		     $("#kpi-view-team").modal('show');
+		 } else { 
+   
+		 }
+	    
+	    }
+	});
+   }
 function resetUnit() {
     $(".unit-1").css("color", "black");
     $(".unit-1").css("background-color", "white");
@@ -93,4 +128,44 @@ function kpiFilterForTeam() {
 			
 		}
 	});
+}
+function prepareDeletekpiTeam(kpiTeamId) { 
+	$("#kpiTeamId-modal").val(kpiTeamId);
+}
+function deleteKpiTeam() { 
+	var kpiTeamId = $("#kpiTeamId-modal").val();
+	var url = $url + 'kpi/kpi-team/delete-kpi-team';
+	$.ajax({
+	    type: "POST",
+	    dataType: 'json',
+	    url: url,
+	    data: { kpiTeamId: kpiTeamId },
+	    success: function(data) {
+		 if (data.status) {
+		     $("#delete-kpi-team").modal("hide");
+		     $("#kpi-team-" + kpiTeamId).hide();
+		 }
+	    }
+	});
+}
+function setSameKpiTeamRemark(teamId, kpiId) {
+	var url = $url + 'kpi/kpi-team/kpi-team';
+	var remark = $("#remark-" + teamId).val();
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { kpiId: kpiId },
+		success: function (data) {
+			if (data.status) {
+				$.each(data.kpiId, function (key, value) {
+					$("#remark-" + value).val(remark);
+					
+				});
+			} else { 
+				alert('123');
+			}
+		}
+	});
+	
 }

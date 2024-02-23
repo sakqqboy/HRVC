@@ -87,4 +87,17 @@ class UserRole extends \frontend\models\hrvc\master\UserRoleMaster
             return 0;
         }
     }
+    public static function isHr()
+    {
+        if (isset(Yii::$app->user->id)) {
+            $userRole = UserRole::find()->where(["roleId" => 6, "userId" => Yii::$app->user->id])->one();
+            if (isset($userRole) && !empty($userRole)) {
+                return 1;
+            } else {
+                return 0;
+            }
+        } else {
+            return 0;
+        }
+    }
 }

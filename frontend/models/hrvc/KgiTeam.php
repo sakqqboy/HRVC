@@ -42,10 +42,10 @@ class KgiTeam extends \frontend\models\hrvc\master\KgiTeamMaster
         }
         return $has;
     }
-    public static function teamTarget($teamId)
+    public static function teamTarget($teamId, $kgiId)
     {
         $kgiTeam = KgiTeam::find()
-            ->where(["teamId" => $teamId])->asArray()->one();
+            ->where(["teamId" => $teamId, "kgiId" => $kgiId])->asArray()->one();
         if (isset($kgiTeam) && !empty($kgiTeam)) {
             return $kgiTeam["target"];
         } else {
@@ -108,5 +108,26 @@ class KgiTeam extends \frontend\models\hrvc\master\KgiTeamMaster
             $show = 0;
         }
         return $show;
+    }
+    public static function isHasTeam($teamId, $kgiId)
+    {
+        $kgiTeam = KgiTeam::find()->where(["kgiId" => $kgiId, "teamId" => $teamId, "status" => [1, 2, 4]])->one();
+        if (isset($kgiTeam) && !empty($kgiTeam)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+    public static function kgiTeam($kgiId)
+    {
+        $kgiTeam = KgiTeam::find()
+            ->select('t.teamName,t.teamId')
+            //->JOIN("LEFT JOIN", "kgi", "kgi.kgiId=kgi_branch.kgiId")
+            ->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
+            ->where(["kgi_team.kgiId" => $kgiId, "kgi_team.status" => 1])
+            ->orderBy('t.teamName')
+            ->asArray()
+            ->all();
+        return $kgiTeam;
     }
 }

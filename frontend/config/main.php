@@ -90,6 +90,7 @@ return [
                 'kgi/kgi-personal/indivisual-setting/<hash>' => 'kgi/kgi-personal/indivisual-setting',
                 'kgi/kgi-personal/update-personal-kgi/<hash>' => 'kgi/kgi-personal/update-personal-kgi',
                 'kgi/kgi-personal/view-personal-kgi/<hash>' => 'kgi/kgi-personal/view-personal-kgi',
+                'kgi/kgi-personal/kgi-personal-search-result/<hash>' => 'kgi/kgi-personal/kgi-personal-search-result',
                 'kgi/management/assign-kpi/<hash>' => 'kgi/management/assign-kpi',
                 'kgi/management/kgi-detail/<hash>' => 'kgi/management/kgi-detail',
                 'kgi/kgi-team/kgi-team-search-result/<hash>' => 'kgi/kgi-team/kgi-team-search-result',
@@ -107,6 +108,7 @@ return [
                 'kpi/management/approve-kpi-employee/<hash>' => 'kpi/management/approve-kpi-employee',
                 'kpi/management/kpi-detail/<hash>' => 'kpi/management/kpi-detail',
                 'kpi/kpi-team/kpi-team-search-result/<hash>' => 'kpi/kpi-team/kpi-team-search-result',
+                'kpi/kpi-personal/kpi-personal-search-result/<hash>' => 'kpi/kpi-personal/kpi-personal-search-result',
 
             ],
         ],

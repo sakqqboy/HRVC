@@ -15,15 +15,15 @@
 			</div>
 			<div class="tk" id="company-name-view"></div>
 			<div class="col-12">
-				<div class="row mt-10">
+				<div class="row mt-15">
 					<div class="col-6 font-size-13 pl-10 pt-5 pl-20">
-						<img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="Round1"> <span id="branch-view"></span>, <span id="country-view"></span>
+						<img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="Round1" id="modal-branch-flag"> <span id="branch-view"></span>, <span id="country-view"></span>
 					</div>
-					<div class="col-6 text-end font-size-12 pr-20 mt-10">
-						<a class="no-underline-black mr-20" href="javascript:relatedKfiForKgi()" style="cursor: pointer;">
+					<div class="col-6 text-end pr-20 mt-10">
+						<a class="no-underline-black mr-20 btn btn-info btn-sm font-size-12 text-light" href="javascript:relatedKfiForKgi()" style="cursor: pointer;text-shadow:black 1px 1px 2px;">
 							<i class="fa fa-refresh mr-5" aria-hidden="true"></i>Related KFI
 						</a>
-						<a class="no-underline-black" href="javascript:relatedKpiForKgi()" style="cursor: pointer;">
+						<a class="no-underline-black btn btn-primary btn-sm font-size-12 text-light" href="javascript:relatedKpiForKgi()" style="cursor: pointer;text-shadow:black 1px 1px 2px;">
 							<i class="fa fa-refresh mr-5" aria-hidden="true"></i>Related KPI
 						</a>
 					</div>
@@ -35,10 +35,10 @@
 					<div class="row mt-20">
 						<div class="col-lg-3 col-md-6 col-12">
 							<div class="col-12 content-KGI">
-								Team KGI Contents
+
 							</div>
 							<div class="col-12 KGI-Clients">
-								Ten Clients employee
+
 							</div>
 						</div>
 						<div class="col-lg-2 col-md-6 col-3">
@@ -79,7 +79,7 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-lg-3 col-md-6 col-12">
+							<div class="col-lg-3 col-md-6 col-12" style="margin-top: -40px;">
 								<div class="col-12">
 									<p class="Priority1">Priority</p>
 									<div class="circle-Priority" id="prirority-view"></div>

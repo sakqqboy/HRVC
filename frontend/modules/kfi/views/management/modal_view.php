@@ -15,7 +15,9 @@
 			</div>
 			<div class="tk" id="company-name-view"></div>
 			<div class="col-12 font-size-12 pl-10 pt-5">
-				<img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="Round1"> <span id="branch-view"></span>, <span id="country-view"></span>
+				<img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="Round1" id="kfi-branch-flag">
+				<span id="branch-view"></span>,
+				<span id="country-view"></span>
 			</div>
 
 			<div class="modal-body">

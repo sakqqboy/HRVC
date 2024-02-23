@@ -1,5 +1,6 @@
 <?php
 
+use frontend\models\hrvc\UserRole;
 use yii\bootstrap5\ActiveForm;
 
 $this->title = 'Update Employee';
@@ -132,7 +133,7 @@ $this->title = 'Update Employee';
 						</label>
 						<select class="form-select font-size-14" name="gender" required>
 							<?php
-							if ($employee['gender'] = 1) { ?>
+							if ($employee['gender'] == 1) { ?>
 								<option value="1">Male</option>
 								<option value="2">Female</option>
 							<?php
@@ -490,45 +491,52 @@ $this->title = 'Update Employee';
 																	?>">
 				</div> -->
 			</div>
-			<div class="col-lg-6 col-12 z-1">
-				<div class="row">
-					<div class="col-12">
-						<label class="form-label font-size-13">Employee right</label>
-					</div>
-					<?php
+			<?php
+			$isHr = UserRole::isHr();
+			if ($role >= 4 || $isHr == 1) {
+			?>
+				<div class="col-lg-6 col-12 z-1">
+					<div class="row">
+						<div class="col-12">
+							<label class="form-label font-size-13">Employee right</label>
+						</div>
+						<?php
 
-					if (isset($roles) && count($roles) > 0) {
-						$i = 0;
-						foreach ($roles as $role) :
-							$check = '';
-							if (($i % 2) == 0) {
-								$class = "col-4";
-							} else {
-								$class = "col-6";
-							}
-							if (isset($userRoles[$role["roleId"]])) {
-								$check = "checked";
-							}
+						if (isset($roles) && count($roles) > 0) {
+							$i = 0;
+							foreach ($roles as $role) :
+								$check = '';
+								if (($i % 2) == 0) {
+									$class = "col-4";
+								} else {
+									$class = "col-6";
+								}
+								if (isset($userRoles[$role["roleId"]])) {
+									$check = "checked";
+								}
 
-					?>
-							<div class="<?= $class ?> mt-10 font-size-14">
-								<input type="checkbox" name="role[]" class="checkbox-md mr-5" value="<?= $role['roleId'] ?>" <?= $check ?>> <?= $role["roleName"] ?>
+						?>
+								<div class="<?= $class ?> mt-10 font-size-14">
+									<input type="checkbox" name="role[]" class="checkbox-md mr-5" value="<?= $role['roleId'] ?>" <?= $check ?>> <?= $role["roleName"] ?>
+								</div>
+							<?php
+								$i++;
+							endforeach;
+						} else {
+							?>
+							<div class="col-12 text-center mt-20 font-size-84">
+								Cantact Administrator
 							</div>
 						<?php
-							$i++;
-						endforeach;
-					} else {
+						}
 						?>
-						<div class="col-12 text-center mt-20 font-size-84">
-							Cantact Administrator
-						</div>
-					<?php
-					}
-					?>
 
 
+					</div>
 				</div>
-			</div>
+			<?php
+			}
+			?>
 			<div class="col-12 text-end z-0" style="margin-top: -40px;">
 				<button type="submit" class="btn btn-warning text-white"> Update</button>
 			</div>

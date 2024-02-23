@@ -13,20 +13,6 @@
 			<div class="col-12 text-end">
 				<span class="border border-1 border-next-Backdrop7">Next Update <span class="font-size-10 text-dark pr-10"> : <span id="next-date-view"></span></span></span>
 			</div>
-			<!-- <div class="tk" id="company-name-view"></div> -->
-			<!-- <div class="col-12">
-				<div class="row mt-10">
-					<div class="col-6 text-end font-size-12 pr-20 mt-10">
-						<a class="no-underline-black mr-20" href="javascript:relatedKfiForKgi()" style="cursor: pointer;">
-							<i class="fa fa-refresh mr-5" aria-hidden="true"></i>Related KFI
-						</a>
-						<a class="no-underline-black" href="javascript:relatedKpiForKgi()" style="cursor: pointer;">
-							<i class="fa fa-refresh mr-5" aria-hidden="true"></i>Related KPI
-						</a>
-					</div>
-				</div>
-			</div> -->
-
 			<div class="modal-body">
 				<div class="col-12 dashed-Backdrop7">
 					<div class="row mt-20">
@@ -41,11 +27,6 @@
 								<i class="fa fa-diamond mr-5" aria-hidden="true"></i> <span id="quantRatio-view"></span>
 							</div>
 						</div>
-						<!-- <div class="col-lg-1 col-md-6 col-2">
-							<div class="col-12 padding-FEB-Backdrop7">
-								<span id="month-view"></span>
-							</div>
-						</div> -->
 						<div class="col-3 text-center">
 							<div class="col-12 bullseye-con-Backdrop3">
 								<i class="fa fa-bullseye" aria-hidden="true"></i> Target
@@ -106,7 +87,7 @@
 					Update Histories
 				</div>
 				<hr>
-				<div class="col-12" id="kgi-history">
+				<div class="col-12 history-box" id="kgi-history">
 
 				</div>
 			</div>

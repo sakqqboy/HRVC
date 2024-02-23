@@ -51,4 +51,35 @@ class KpiEmployee extends \frontend\models\hrvc\master\KpiEmployeeMaster
             return 0;
         }
     }
+    public static function canEdit($role, $kpiEmployeeId)
+    {
+        $canEdit = 0;
+
+        if ($role >= 4) {
+            $canEdit = 1;
+        } else {
+            $employeeId = User::employeeIdFromUserId();
+            if ($role == 3) { //Team leader can Edit in their team
+                $kpiEmployee = KpiEmployee::find()
+                    ->select('e.teamId')
+                    ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
+                    ->where(["kpi_employee.kpiEmployeeId" => $kpiEmployeeId])
+                    ->asArray()
+                    ->one();
+                $employee = Employee::find()
+                    ->select('teamId')
+                    ->where(["employeeId" => $employeeId])
+                    ->asArray()
+                    ->one();
+                if (isset($kpiEmployee) && isset($employee) && !empty($employee) && !empty($kpiEmployee)) {
+                    if ($kpiEmployee["teamId"] == $employee["teamId"]) {
+                        $canEdit = 1;
+                    }
+                }
+            } else { //staff
+                $canEdit = 1; //see only their kgi
+            }
+        }
+        return $canEdit;
+    }
 }

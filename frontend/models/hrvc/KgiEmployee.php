@@ -51,4 +51,35 @@ class KgiEmployee extends \frontend\models\hrvc\master\KgiEmployeeMaster
             return 0;
         }
     }
+    public static function canEdit($role, $kgiEmployeeId)
+    {
+        $canEdit = 0;
+
+        if ($role >= 4) {
+            $canEdit = 1;
+        } else {
+            $employeeId = User::employeeIdFromUserId();
+            if ($role == 3) { //Team leader can Edit in their team
+                $kgiEmployee = KgiEmployee::find()
+                    ->select('e.teamId')
+                    ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
+                    ->where(["kgi_employee.kgiEmployeeId" => $kgiEmployeeId])
+                    ->asArray()
+                    ->one();
+                $employee = Employee::find()
+                    ->select('teamId')
+                    ->where(["employeeId" => $employeeId])
+                    ->asArray()
+                    ->one();
+                if (isset($kgiEmployee) && isset($employee) && !empty($employee) && !empty($kgiEmployee)) {
+                    if ($kgiEmployee["teamId"] == $employee["teamId"]) {
+                        $canEdit = 1;
+                    }
+                }
+            } else { //staff
+                $canEdit = 1; //see only their kgi
+            }
+        }
+        return $canEdit;
+    }
 }

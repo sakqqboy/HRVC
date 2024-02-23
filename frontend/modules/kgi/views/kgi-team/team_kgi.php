@@ -4,36 +4,56 @@ use frontend\models\hrvc\Kgi;
 use frontend\models\hrvc\KgiTeam;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = "KGI";
+$this->title = "TEAM KGI";
 ?>
 
 <div class="col-12 mt-70">
 	<div class="col-12">
 		<i class="fa fa-tachometer font-size-18" aria-hidden="true"></i>
-		<strong class="font-size-18"> TEAM KEY GOAL INDICATORS </strong>
+		<strong class="font-size-18"> Team Key Goal Indicators </strong>
 	</div>
 	<div class="col-12 mt-10">
+		<?= $this->render('header_filter', [
+			"role" => $role
+		]) ?>
 		<div class="alert alert-white-4 mt-10">
-			<div class="col-12 New-KFI">
-				<?= $this->render('filter_list', [
-					"companies" => $companies,
-					"months" => $months,
-					"companyId" => $companyId,
-					"branchId" => $branchId,
-					"teamId" => $teamId,
-					"month" => $month,
-					"status" => $status,
-					"year" => $year,
-				]) ?>
-				<input type="hidden" id="type" value="list">
+			<div class="row">
+				<div class="col-11 New-KFI">
+					<?= $this->render('filter_list', [
+						"companies" => $companies,
+						"months" => $months,
+						"companyId" => $companyId,
+						"branchId" => $branchId,
+						"teamId" => $teamId,
+						"month" => $month,
+						"status" => $status,
+						"year" => $year,
+					]) ?>
+					<input type="hidden" id="type" value="list">
+				</div>
+				<div class="col-lg-1 col-md-6 col-12 New-date">
+					<div class="row">
+						<div class="col-12 new-light-4">
+							<div class="btn-group" role="group" aria-label="Basic example">
+								<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/team-kgi" class="btn btn-primary font-size-13"><i class="fa fa-list-ul" aria-hidden="true"></i></a>
+								<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/team-kgi-grid" class="btn btn-outline-primary font-size-13"><i class="fa fa-th-large" aria-hidden="true"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
+
 			<?php
 			//if ($role >= 3) {
 			?>
 			<div class="col-12 mt-10 text-end">
-				<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi" class="font-size-14 no-underline-primary">
+				<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi-grid" class="font-size-14 no-underline-primary">
 					<i class="fa fa-user mr-5" aria-hidden="true"></i>
-					Individual
+					Individual KGI
+				</a>
+				<a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" class="font-size-14 no-underline-primary ml-10">
+					<i class="fa fa-cog mr-5" aria-hidden="true"></i>
+					KGI Setting
 				</a>
 			</div>
 			<?php
@@ -81,9 +101,9 @@ $this->title = "KGI";
 									<td>
 										<div class="flex mb-5 -space-x-4">
 											<?php
-											if (isset($kgi["kgiEmployee"]) && count($kgi["kgiEmployee"]) > 0) {
+											if (isset($kgi["employee"]) && count($kgi["employee"]) > 0) {
 												$e = 1;
-												foreach ($kgi["kgiEmployee"] as $emp) :
+												foreach ($kgi["employee"] as $emp) :
 											?>
 													<img class="image-grid" src="<?= Yii::$app->homeUrl . $emp ?>">
 											<?php
@@ -94,7 +114,7 @@ $this->title = "KGI";
 												endforeach;
 											}
 											?>
-											<a class="no-underline-black ml-2 mt-3" href="#"><?= count($kgi["kgiEmployee"]) ?></a>
+											<a class="no-underline-black ml-2 mt-3" href="#"><?= count($kgi["employee"]) ?></a>
 										</div>
 									</td>
 									<td>
@@ -106,12 +126,12 @@ $this->title = "KGI";
 										$decimal = explode('.', $kgi["target"]);
 										if (isset($decimal[1])) {
 											if ($decimal[1] == '00') {
-												$show = $decimal[0];
+												$show = number_format($decimal[0]);
 											} else {
-												$show = $kgi["target"];
+												$show = number_format($kgi["target"], 2);
 											}
 										} else {
-											$show = $kgi["target"];
+											$show = number_format($kgi["target"]);
 										}
 										?>
 										<?= $show ?>
@@ -125,12 +145,12 @@ $this->title = "KGI";
 											$decimalResult = explode('.', $kgi["result"]);
 											if (isset($decimalResult[1])) {
 												if ($decimalResult[1] == '00') {
-													$showResult = $decimalResult[0];
+													$showResult = number_format($decimalResult[0]);
 												} else {
-													$showResult = $kgi["result"];
+													$showResult = number_format($kgi["result"], 2);
 												}
 											} else {
-												$showResult = $kgi["result"];
+												$showResult = number_format($kgi["result"]);
 											}
 										} else {
 											$showResult = 0;

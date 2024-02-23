@@ -1,5 +1,6 @@
 <?php
 
+use common\models\ModelMaster;
 use frontend\models\hrvc\Kpi;
 use yii\bootstrap5\ActiveForm;
 
@@ -11,8 +12,9 @@ $this->title = 'KPI';
 		<strong class="font-size-18"> Performance Indicator Matrices (PIM)</strong>
 	</div>
 	<div class="col-12 mt-10">
-		<?= $this->render('header_filter') ?>
-
+		<?= $this->render('header_filter', [
+			"role" => $role
+		]) ?>
 	</div>
 	<div class="alert alert-white-4 mt-10">
 		<div class="row">
@@ -61,13 +63,13 @@ $this->title = 'KPI';
 			//if ($role >= 3) {
 			?>
 			<div class="col-12 mt-10 text-end">
-				<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/team-kpi" class="font-size-14 no-underline-primary mr-20">
+				<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/team-kpi-grid" class="font-size-14 no-underline-primary mr-20">
 					<i class="fa fa-users mr-5" aria-hidden="true"></i>
 					Team KPI
 				</a>
-				<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi" class="font-size-14 no-underline-primary">
+				<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi-grid" class="font-size-14 no-underline-primary">
 					<i class="fa fa-user mr-5" aria-hidden="true"></i>
-					Individual
+					Individual KPI
 				</a>
 			</div>
 			<?php
@@ -205,6 +207,22 @@ $this->title = 'KPI';
 											<i class="fa fa-copy" aria-hidden="true"></i>
 										</a>
 									</li>
+									<?php
+									if ($role >= 3) {
+									?>
+										<li>
+											<a class="dropdown-item" href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/kpi-team-setting/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>">
+												<i class="fa fa-users" aria-hidden="true"></i>
+											</a>
+										</li>
+										<li>
+											<a class="dropdown-item" href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/indivisual-setting/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>">
+												<i class="fa fa-user" aria-hidden="true"></i>
+											</a>
+										</li>
+									<?php
+									}
+									?>
 									<li data-bs-toggle="modal" data-bs-target="#delete-kpi" onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)" style="display: <?= $display ?>;">
 										<a class="dropdown-item">
 											<i class="fa fa-trash-o text-danger" aria-hidden="true"></i>
@@ -220,7 +238,7 @@ $this->title = 'KPI';
 			</tbody>
 		</table>
 	</div>
-	<div class="col-12 navigation-next">
+	<!-- <div class="col-12 navigation-next">
 		<nav aria-label="Page navigation example">
 			<ul class="pagination">
 				<li class="page-item"><a class="page-link page-navigation" href="#"><i class="fa fa-chevron-left" aria-hidden="true"></i> Previous</a></li>
@@ -230,7 +248,7 @@ $this->title = 'KPI';
 				<li class="page-item"><a class="page-link page-navigation" href="#">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
 			</ul>
 		</nav>
-	</div>
+	</div> -->
 </div>
 <input type="hidden" value="create" id="acType">
 <?php

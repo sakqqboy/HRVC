@@ -36,11 +36,11 @@ use yii\web\UploadedFile;
 /**
  * Default controller for the `kgi` module
  */
-header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
-header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
+// header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
+// header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+// header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+// header("Cache-Control: post-check=0, pre-check=0", false);
+// header("Pragma: no-cache");
 class ManagementController extends Controller
 {
 	public function beforeAction($action)
@@ -85,6 +85,7 @@ class ManagementController extends Controller
 		}
 
 		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
@@ -149,6 +150,7 @@ class ManagementController extends Controller
 			//return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi');
 		}
 		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
@@ -196,6 +198,7 @@ class ManagementController extends Controller
 			$kgi->code = $_POST["code"];
 			$kgi->status = $_POST["status"];
 			$kgi->month = $_POST["month"];
+			$kgi->year = $_POST["year"];
 			$kgi->result = str_replace(",", "", $result);
 			$kgi->createrId = Yii::$app->user->id;
 			$kgi->createDateTime = new Expression('NOW()');
@@ -217,6 +220,7 @@ class ManagementController extends Controller
 				$kgiHistory->amountType = $_POST["amountType"];
 				$kgiHistory->code = $_POST["code"];
 				$kgiHistory->status = $_POST["status"];
+				$kgiHistory->year = $_POST["year"];
 				$kgiHistory->month = $_POST["month"];
 				$kgiHistory->result = str_replace(",", "", $result);
 				$kgiHistory->createrId = Yii::$app->user->id;
@@ -238,7 +242,8 @@ class ManagementController extends Controller
 				if (isset($_POST["kgiGroup"]) && count($_POST["kgiGroup"]) > 0) {
 					$this->saveKgiGroup($_POST["kgiGroup"], $kgiId);
 				}
-				return $this->redirect('grid');
+				return $this->redirect(Yii::$app->request->referrer);
+				//return $this->redirect('grid');
 			}
 		}
 	}
@@ -247,6 +252,7 @@ class ManagementController extends Controller
 		$companyId = $_POST["companyId"];
 		$acType = $_POST["acType"];
 		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
 		$branches = curl_exec($api);
@@ -323,6 +329,7 @@ class ManagementController extends Controller
 						if ($branchId != '') {
 							$department = Department::find()
 								->where(["departmentId" => $departmentId, "branchId" => $branchId])
+								->andWhere("status!=99")
 								->one();
 							if (isset($department) && !empty($department)) {
 								$branchDepartment[$branchId][$departmentId] = $departmentId;
@@ -339,6 +346,7 @@ class ManagementController extends Controller
 				foreach ($departments as $dId => $id) :
 					$teams = Team::find()
 						->where(["departmentId" => $dId])
+						->andWhere("status!=99")
 						->asArray()
 						->orderBy("teamName")
 						->all();
@@ -528,6 +536,7 @@ class ManagementController extends Controller
 	{
 		$kgiId = $_POST["kgiId"];
 		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
 		$kgi = curl_exec($api);
@@ -608,6 +617,7 @@ class ManagementController extends Controller
 			$kgi->code = $_POST["code"];
 			$kgi->status = $_POST["status"];
 			$kgi->month = $_POST["month"];
+			$kgi->year = $_POST["year"];
 			$kgi->result = str_replace(",", "", $result);
 			$kgi->updateDateTime = new Expression('NOW()');
 			if ($kgi->save(false)) {
@@ -632,6 +642,7 @@ class ManagementController extends Controller
 				$kgiHistory->code = $_POST["code"];
 				$kgiHistory->status = $_POST["status"];
 				$kgiHistory->month = $_POST["month"];
+				$kgiHistory->year = $_POST["year"];
 				$kgiHistory->result = str_replace(",", "", $result);
 				$kgiHistory->createrId = Yii::$app->user->id;
 				$kgiHistory->createDateTime = new Expression('NOW()');
@@ -651,7 +662,8 @@ class ManagementController extends Controller
 				if (isset($_POST["kgiGroup"]) && count($_POST["kgiGroup"]) > 0) {
 					$this->saveKgiGroup($_POST["kgiGroup"], $kgiId);
 				}
-				return $this->redirect('grid');
+				return $this->redirect(Yii::$app->request->referrer);
+				//return $this->redirect('grid');
 			}
 		}
 		return $this->redirect('grid');
@@ -660,6 +672,7 @@ class ManagementController extends Controller
 	{
 		$kgiId = $_POST["kgiId"];
 		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
 		$kgi = curl_exec($api);
@@ -706,7 +719,7 @@ class ManagementController extends Controller
 		$employeeId = User::employeeIdFromUserId($userId);
 		$kgiId = $_POST["kgiId"];
 		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
 		$kgi = curl_exec($api);
@@ -805,6 +818,13 @@ class ManagementController extends Controller
 		$answer->updateDateTime = new Expression('NOW()');
 		$createDateTime = date('Y-m-d');
 		if ($answer->save(false)) {
+			$kgiIssue = KgiIssue::find()
+				->select('kgiId,issue')
+				->where(["kgiIssueId" => $kgiIssueId])
+				->one();
+			$kgiIssue->updateDateTime = new Expression('NOW()');
+			$kgiId = $kgiIssue->kgiId;
+			$kgiIssue->save(false);
 			$res["commentText"] = $this->renderAjax('comment', [
 				"name" => User::userHeaderName(),
 				"image" => User::userHeaderImage(),
@@ -812,10 +832,14 @@ class ManagementController extends Controller
 				"createDateTime" => ModelMaster::engDate($createDateTime, 2),
 				"kgiIssueId" => $kgiIssueId,
 				"file" => $file,
-				"fileName" => $fileName
+				"fileName" => $fileName,
 			]);
 			$res["status"] = true;
+			$res["issue"] = $kgiIssue["issue"];
+			$res["solution"] = $solution;
+			$res["kgiId"] = $kgiId;
 		}
+
 		return json_encode($res);
 	}
 	public function actionSearchKgi()
@@ -891,7 +915,7 @@ class ManagementController extends Controller
 		$paramText .= '&&adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId;
 
 		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-filter?' . $paramText);
 		$kgis = curl_exec($api);
@@ -1055,6 +1079,7 @@ class ManagementController extends Controller
 			return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi');
 		}
 		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
 		//curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/index?adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId);
@@ -1073,6 +1098,7 @@ class ManagementController extends Controller
 		$companyId = $_POST["companyId"];
 		$kgiId = $_POST["kgiId"];
 		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
 		$branches = curl_exec($api);
@@ -1083,6 +1109,8 @@ class ManagementController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
 		$kgi = curl_exec($api);
 		$kgi = json_decode($kgi, true);
+
+		curl_close($api);
 		$res["kgiName"] = $kgi["kgiName"];
 		$res["companyName"] = $kgi["companyName"];
 		$res["textBranch"] = $textBranch;
@@ -1413,13 +1441,49 @@ class ManagementController extends Controller
 	{
 
 		$month = $_POST['month'];
-		$paramText = 'companyId=&&branchId=&&teamId=&&month=' . $month . '&&status=&&year=';
+		$year = $_POST['year'];
+		$paramText = 'companyId=&&branchId=&&teamId=&&month=' . $month . '&&status=&&year=' . $year;
+		$groupId = Group::currentGroupId();
+		if ($groupId == null) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+		}
+		$role = UserRole::userRight();
+		$adminId = '';
+		$gmId = '';
+		$teamLeaderId = '';
+		$managerId = '';
+		$supervisorId = '';
+		$staffId = '';
+		if ($role == 7) {
+			$adminId = Yii::$app->user->id;
+		}
+		if ($role == 6) {
+			$gmId = Yii::$app->user->id;
+		}
+		if ($role == 5) {
+			$managerId = Yii::$app->user->id;
+		}
+		if ($role == 4) {
+			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$teamLeaderId = Yii::$app->user->id;
+		}
+		if ($role == 1 || $role == 2) {
+			$staffId = Yii::$app->user->id;
+			//return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi');
+		}
+		if ($month == '' && $year == '') {
+			return $this->redirect(Yii::$app->homeUrl . 'kgi/management/assign-kgi');
+		}
+		//$paramText .= '&&adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId;
+		$paramText .= '&&adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId;
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
 		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-filter?' . $paramText);
 		$kgis = curl_exec($api);
@@ -1438,7 +1502,7 @@ class ManagementController extends Controller
 		$param = ModelMaster::decodeParams($hash);
 		$kgiId = $param["kgiId"];
 		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kfi-kgi?kgiId=' . $kgiId);
 		$kgiHasKfi = curl_exec($api);
@@ -1458,7 +1522,7 @@ class ManagementController extends Controller
 		$param = ModelMaster::decodeParams($hash);
 		$kgiId = $param["kgiId"];
 		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-has-kpi?kgiId=' . $kgiId);
 		$kgiHasKpi = curl_exec($api);
@@ -1479,7 +1543,7 @@ class ManagementController extends Controller
 		$param = ModelMaster::decodeParams($hash);
 		$kgiId = $param["kgiId"];
 		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-branch?id=' . $kgiId);
 		$kgiBranch = curl_exec($api);
@@ -1498,7 +1562,7 @@ class ManagementController extends Controller
 		$branchId = $_POST["branchId"];
 		$kgiId = $_POST["kgiId"];
 		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/branch-kpi?branchId=' . $branchId);
 		$kpiBranch = curl_exec($api);
@@ -1625,6 +1689,7 @@ class ManagementController extends Controller
 			->asArray()
 			->all();
 		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiTeam["kgiId"]);
@@ -1689,6 +1754,7 @@ class ManagementController extends Controller
 			->asArray()
 			->all();
 		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiEmployee["kgiId"]);
@@ -1766,7 +1832,7 @@ class ManagementController extends Controller
 	{
 		$kgiId = $_POST["kgiId"];
 		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kfi-kgi?kgiId=' . $kgiId);
 		$kgiHasKfi = curl_exec($api);
@@ -1785,7 +1851,7 @@ class ManagementController extends Controller
 	{
 		$kgiId = $_POST["kgiId"];
 		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-has-kpi?kgiId=' . $kgiId);
 		$kgiHasKpi = curl_exec($api);
@@ -1805,6 +1871,7 @@ class ManagementController extends Controller
 		$param = ModelMaster::decodeParams($hash);
 		$kgiId = $param["kgiId"];
 		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
 		$kgi = curl_exec($api);

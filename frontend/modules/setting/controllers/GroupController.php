@@ -19,11 +19,11 @@ use yii\web\UploadedFile;
 /**
  * Default controller for the `setting` module
  */
-header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
-header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
+// header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
+// header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+// header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+// header("Cache-Control: post-check=0, pre-check=0", false);
+// header("Pragma: no-cache");
 class GroupController extends Controller
 {
     /**
@@ -103,7 +103,7 @@ class GroupController extends Controller
         }
         //
         $ch1 = curl_init();
-        curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch1, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
         $result1 = curl_exec($ch1);
@@ -124,7 +124,7 @@ class GroupController extends Controller
         $totalEmployees = 0;
 
         $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/group-detail?id=' . $groupId);
         $groupJson = curl_exec($api);
@@ -195,29 +195,24 @@ class GroupController extends Controller
         $param = ModelMaster::decodeParams($hash);
         $groupId = $param["groupId"];
 
-        $apiCountry = curl_init();
-        curl_setopt($apiCountry, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($apiCountry, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($apiCountry, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
-        $resultCountry = curl_exec($apiCountry);
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
+        $resultCountry = curl_exec($api);
         $countries = json_decode($resultCountry, true);
-        curl_close($apiCountry);
 
-        $apiGroup = curl_init();
-        curl_setopt($apiGroup, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($apiGroup, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($apiGroup, CURLOPT_URL, Path::Api() . 'masterdata/group/group-detail?id=' . $groupId);
-        $groupJson = curl_exec($apiGroup);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/group-detail?id=' . $groupId);
+        $groupJson = curl_exec($api);
         $group = json_decode($groupJson, true);
-        curl_close($apiGroup);
 
-        $apiCountry = curl_init();
-        curl_setopt($apiCountry, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($apiCountry, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($apiCountry, CURLOPT_URL, Path::Api() . 'masterdata/country/country-detail?id=' . $group["countryId"]);
-        $resultCountryDetail = curl_exec($apiCountry);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/country-detail?id=' . $group["countryId"]);
+        $resultCountryDetail = curl_exec($api);
         $groupCountry = json_decode($resultCountryDetail, true);
-        curl_close($apiCountry);
+
+        curl_close($api);
         return $this->render('update_group', [
             "countries" => $countries,
             "group" => $group,

@@ -138,13 +138,17 @@ class ModelMaster extends \yii\db\ActiveRecord
     }
     public static function dateNumberShort($dateFull)
     {
-        $d = explode(' ', $dateFull);
-        $days = $d[0];
-        $day = explode('-', $days);
-        $year = substr($day[0], -2);
-        $month = $day[1];
-        $date = $day[2];
-        return $date . '/' . $month . '/' . $year;
+        if ($dateFull != '') {
+            $d = explode(' ', $dateFull);
+            $days = $d[0];
+            $day = explode('-', $days);
+            $year = substr($day[0], -2);
+            $month = $day[1];
+            $date = $day[2];
+            return $date . '/' . $month . '/' . $year;
+        } else {
+            return null;
+        }
     }
     public static function engDateHr($date, $type = self::DATE_THAI_TYPE_FULL)
     {
@@ -427,6 +431,7 @@ class ModelMaster extends \yii\db\ActiveRecord
     }
     public static function isOverDuedate($dueDate)
     {
+
         $today = date('Y-m-d');
         $now = strtotime($today);
         $due = strtotime($dueDate);

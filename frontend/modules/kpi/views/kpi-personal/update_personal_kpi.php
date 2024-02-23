@@ -1,5 +1,6 @@
 <?php
 
+use common\models\ModelMaster;
 use Faker\Core\Number;
 use yii\bootstrap5\ActiveForm;
 
@@ -21,7 +22,7 @@ $form = ActiveForm::begin([
 			<strong class="font-size-20">Update Individual KPI</strong>
 		</div>
 		<div class="col-2 text-end">
-			<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi" class="btn btn-secondary font-size-12">
+			<a href="<?= Yii::$app->request->referrer ?>" class="btn btn-secondary font-size-12">
 				<i class="fa fa-chevron-left mr-5" aria-hidden="true"></i>
 				Back
 			</a>
@@ -45,6 +46,51 @@ $form = ActiveForm::begin([
 				<div class="col-6 mt-10">
 					<label for="exampleFormControl" class="form-label font-size-13">Result</label>
 					<input class="form-control text-end" name="result" type="text" value="<?= number_format($kpiEmployeeDetail['result'], 2) ?>">
+				</div>
+				<div class="col-6 pt-10">
+					<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Month</label>
+					<select class="form-select font-size-13" required aria-label="Default select example" name="month" id="month-update">
+						<?php
+						if (isset($kpiEmployeeDetail["month"]) && $kpiEmployeeDetail["month"] != '') { ?>
+							<option value="<?= $kpiEmployeeDetail["month"] ?>">
+								<?= ModelMaster::monthFull()[$kpiEmployeeDetail["month"]] ?>
+							</option>
+						<?php
+
+						}
+						?>
+						<option value="">Month</option>
+						<?php
+						if (isset($months) && count($months) > 0) {
+							foreach ($months as $value => $month) : ?>
+								<option value="<?= $value ?>"><?= $month ?></option>
+						<?php
+							endforeach;
+						}
+						?>
+					</select>
+				</div>
+				<div class="col-6 pt-10">
+					<label class="form-label font-size-12"><strong class="red">*</strong> Year</label>
+					<select class="form-select font-size-12" required name="year" id="year-update">
+						<?php
+						if (isset($kpiEmployeeDetail["year"]) && $kpiEmployeeDetail["year"] != '') { ?>
+							<option value="<?= $kpiEmployeeDetail["year"] ?>"><?= $kpiEmployeeDetail["year"] ?></option>
+						<?php
+
+						}
+						?>
+						<option value="">Year</option>
+						<?php
+						$year = 2020;
+						$thisYear = date('Y');
+						while ($year < ($thisYear + 10)) { ?>
+							<option value="<?= $year ?>"><?= $year ?></option>
+						<?php
+							$year++;
+						}
+						?>
+					</select>
 				</div>
 				<div class="col-6 mt-10">
 					<label for="exampleFormControl" class="form-label font-size-13">Next Check Date</label>
@@ -94,6 +140,7 @@ $form = ActiveForm::begin([
 			</div>
 			<div class="col-12 mt-15 text-end">
 				<input type="hidden" name="kpiEmployeeId" value="<?= $kpiEmployeeId ?>">
+				<input type="hidden" name="url" value="<?= Yii::$app->request->referrer ?>">
 				<button type="submit" class="btn btn-warning">Update</button>
 			</div>
 

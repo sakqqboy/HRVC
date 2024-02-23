@@ -186,7 +186,7 @@ $this->title = 'KFI';
 							</table>
 						</div>
 					</div>
-					<div class="col-12 content-navitem">
+					<!-- <div class="col-12 content-navitem">
 						<nav aria-label="Page navigation example">
 							<ul class="pagination">
 								<li class="page-item"><a class="page-link" href="#"><i class="fa fa-chevron-left" aria-hidden="true"></i> Previous</a></li>
@@ -196,7 +196,7 @@ $this->title = 'KFI';
 								<li class="page-item"><a class="page-link" href="#">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
 							</ul>
 						</nav>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>

@@ -1,5 +1,6 @@
 <?php
 
+use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
 $this->title = 'KPI Grid View';
@@ -10,7 +11,9 @@ $this->title = 'KPI Grid View';
 		<i class="fa fa-tachometer font-size-18" aria-hidden="true"></i> <strong class="font-size-18"> Performance Indicator Matrices (PIM)</strong>
 	</div>
 	<div class="col-12 mt-10">
-		<?= $this->render('header_filter') ?>
+		<?= $this->render('header_filter', [
+			"role" => $role
+		]) ?>
 
 		<div class="alert alert-white-4 mt-10">
 			<div class="row">
@@ -57,13 +60,13 @@ $this->title = 'KPI Grid View';
 				//if ($role >= 3) {
 				?>
 				<div class="col-12 mt-10 text-end">
-					<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/team-kpi" class="font-size-14 no-underline-primary mr-20">
+					<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/team-kpi-grid" class="font-size-14 no-underline-primary mr-20">
 						<i class="fa fa-users mr-5" aria-hidden="true"></i>
 						Team KPI
 					</a>
-					<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi" class="font-size-14 no-underline-primary">
+					<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi-grid" class="font-size-14 no-underline-primary">
 						<i class="fa fa-user mr-5" aria-hidden="true"></i>
-						Individual
+						Individual KPI
 					</a>
 				</div>
 				<?php
@@ -140,6 +143,21 @@ $this->title = 'KPI Grid View';
 										<span class="badge rounded-pill slds-badge">
 											Term <span class="text-dark font-size-10">: <?= $kpi["fromDate"] ?> - <?= $kpi["toDate"] ?></span>
 										</span>
+										<?php
+										if ($role >= 3) {
+										?>
+											<div class="col-12 font-size-12 text-center mt-5">
+												Assign
+											</div>
+											<div class="col-12 pt-8 text-center">
+
+												<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/indivisual-setting/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>" class="btn btn-sm btn-info text-light font-size-10" title="Indivisual KPI setting">
+													<i class="fa fa-user mr-3" aria-hidden="true"></i> Person
+												</a>
+											</div>
+										<?php
+										}
+										?>
 									</div>
 									<!-- <div class="col-12 top-teamcontent">
 										Team Content
@@ -274,13 +292,13 @@ $this->title = 'KPI Grid View';
 										<div class="col-md-6">
 											<div class="col-12 dashed1" style="word-wrap: break-word;">
 												<span class="text-dark font-size-11"> Issue</span>
-												<p class="font-size-11 text-dark"><?= $kpi["issue"] ?></p>
+												<p class="font-size-11 text-dark" id="lastest-issue-<?= $kpiId ?>"><?= $kpi["issue"] ?></p>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="col-12 dashed1" style="word-wrap: break-word;">
 												<span class="text-dark font-size-11"> Solution</span>
-												<p class="font-size-11 text-dark"><?= $kpi["solution"] ?></p>
+												<p class="font-size-11 text-dark" id="lastest-solution-<?= $kpiId ?>"><?= $kpi["solution"] ?></p>
 											</div>
 										</div>
 										<div class="col-12 text-end font-size-10 mt-3">

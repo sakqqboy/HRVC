@@ -149,7 +149,7 @@
 							</div>
 							<div class="col-lg-4 col-md-6 col-6 pt-10">
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Amount Type</label>
-								<select class="form-select font-size-13" aria-label="Default select example" name="amountType" id="amountType-update">
+								<select class="form-select font-size-13" aria-label="Default select example" name="amountType" id="amountType-update" required>
 									<option value="">% or Number</option>
 									<option value="1">%</option>
 									<option value="2">Number</option>
@@ -157,7 +157,7 @@
 							</div>
 							<div class="col-lg-8 col-md-6 col-6 pt-10">
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Code</label>
-								<select class="form-select font-size-13" aria-label="Default select example" name="code" id="code-update">
+								<select class="form-select font-size-13" aria-label="Default select example" name="code" id="code-update" required>
 									<option value="">
 										<&nbsp;&nbsp;=&nbsp;&nbsp;>
 									</option>
@@ -166,24 +166,38 @@
 									<option value=">">&nbsp;&nbsp;>&nbsp;&nbsp;Result less than target</option>
 								</select>
 							</div>
-							<div class="col-lg-6 col-md-6 col-6 pt-10">
+							<div class="col-lg-4 col-md-4 col-6 pt-10">
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Status</label>
-								<select class="form-select font-size-13" aria-label="Default select example" name="status" id="status-update">
-									<option value="">Active / Finished</option>
+								<select class="form-select font-size-13" aria-label="Default select example" name="status" id="status-update" required>
 									<option value="1">Active</option>
 									<option value="2">Finished</option>
 								</select>
 							</div>
-							<div class="col-lg-6 col-md-6 col-6 pt-10">
+							<div class="col-lg-4 col-md-4 col-6 pt-10">
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Month</label>
-								<select class="form-select font-size-13" aria-label="Default select example" name="month" id="month-update">
-									<option value="">Select Month</option>
+								<select class="form-select font-size-13" aria-label="Default select example" name="month" id="month-update" required>
+									<option value="">Month</option>
 									<?php
 									if (isset($months) && count($months) > 0) {
 										foreach ($months as $value => $month) : ?>
 											<option value="<?= $value ?>"><?= $month ?></option>
 									<?php
 										endforeach;
+									}
+									?>
+								</select>
+							</div>
+							<div class="col-lg-4 col-md-6 col-6 pt-10">
+								<label class="form-label font-size-12"><strong class="red">*</strong> Year</label>
+								<select class="form-select font-size-12" required name="year" id="year-update">
+									<option value="">Year</option>
+									<?php
+									$year = 2020;
+									$thisYear = date('Y');
+									while ($year < ($thisYear + 10)) { ?>
+										<option value="<?= $year ?>"><?= $year ?></option>
+									<?php
+										$year++;
 									}
 									?>
 								</select>

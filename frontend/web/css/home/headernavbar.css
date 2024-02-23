@@ -31,9 +31,7 @@
         font-size: 16px;
     }
 
-    .but-massenge {
-        margin-left: 60px;
-    }
+    
 
 }
 
@@ -44,28 +42,15 @@
         font-size: 12px;
     }
 
-    .shadow-header {
-        margin-left: -88px;
-    }
-
-    .but-massenge {
-        margin-left: 108px;
-    }
-
+    
     .Googday {
         font-size: 10px;
-        margin-left: -55px;
     }
-
-    strong {
-        font-size: 12px;
-    }
-
     .width-ehsan-small {
-        margin-left: 55%;
+        /* margin-left: 55%; */
         width: 30px;
+        height: 30px;
     }
-
     .search-input2 {
         font-size: 12px;
     }

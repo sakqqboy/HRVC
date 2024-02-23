@@ -7,6 +7,7 @@ use common\models\ModelMaster;
 use Exception;
 use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\Department;
+use frontend\models\hrvc\DepartmentTitle;
 use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Team;
@@ -17,11 +18,11 @@ use yii\web\Controller;
 /**
  * Default controller for the `setting` module
  */
-header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
-header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
+// header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
+// header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+// header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+// header("Cache-Control: post-check=0, pre-check=0", false);
+// header("Pragma: no-cache");
 class BranchController extends Controller
 {
     /**
@@ -52,7 +53,7 @@ class BranchController extends Controller
         $totalDepartment = 0;
         $totalTeam = 0;
         $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
         if ($companyId != '') {
@@ -87,8 +88,8 @@ class BranchController extends Controller
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $group["groupId"]);
         $companyJson = curl_exec($api);
         $companyGroup = json_decode($companyJson, true);
-        curl_close($api);
 
+        curl_close($api);
 
         if (isset($branchess) && count($branchess) > 0) {
             foreach ($branchess as $branch) :
@@ -145,7 +146,7 @@ class BranchController extends Controller
             if ($branch->save(false)) {
                 $branchId = Yii::$app->db->lastInsertID + 543;
                 $api = curl_init();
-                curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
                 curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $_POST["companyId"]);
                 $company = curl_exec($api);
@@ -174,12 +175,27 @@ class BranchController extends Controller
         $branchId = $_POST["branchId"] - 543;
         $branch = Branch::find()->where(["branchId" => $branchId])->one();
         $branch->status = 99;
-
-        if ($branch->save(false)) {
-            $res["status"] = true;
-        } else {
-            $res["status"] = false;
+        $branch->save(false);
+        $department = Department::find()->where(["branchId" => $branchId])->all();
+        if (isset($department) && count($department) > 0) {
+            foreach ($department as $dp) :
+                DepartmentTitle::deleteAll(["departmentId" => $dp->departmentId]);
+                $dp->status = 99;
+                $dp->save(false);
+                $teams = Team::find()->where(["departmentId" => $dp->departmentId])->all();
+                if (isset($teams) && count($teams) > 0) {
+                    foreach ($teams as $t) :
+                        $t->status = 99;
+                        $t->save(false);
+                    endforeach;
+                }
+            endforeach;
         }
+        // if ($branch->save(false)) {
+        $res["status"] = true;
+        // } else {
+        //     $res["status"] = false;
+        // }
         return json_encode($res);
     }
     public function actionUpdateBranch()
@@ -211,8 +227,9 @@ class BranchController extends Controller
             $companyId = $branch->companyId;
             if ($branch->save(false)) {
                 $api = curl_init();
-                curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
                 curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
                 curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
                 $company = curl_exec($api);
                 $company = json_decode($company, true);

@@ -75,4 +75,15 @@ class Employee extends \frontend\models\hrvc\master\EmployeeMaster
             return '';
         }
     }
+    public static function employeeDetailByUserId($userId)
+    {
+        $employee = [];
+        if ($userId != '') {
+            $user = User::find()->where(["userId" => $userId])->asArray()->one();
+            if (isset($user) && !empty($user)) {
+                $employee = Employee::find()->select('branchId')->where(["employeeId" => $user["employeeId"]])->asArray()->one();
+            }
+        }
+        return $employee;
+    }
 }

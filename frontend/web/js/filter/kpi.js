@@ -37,3 +37,19 @@ $("#branch-filter").change(function () {
 		}
 	   });
 });
+$("#team-filter").change(function () {
+	var teamId = $("#team-filter").val();
+	var url = $url + 'setting/filter/employee-team';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { teamId: teamId},
+		success: function (data) {
+			if (data.status) {
+				 $("#employee-filter").removeAttr("disabled");
+				$("#employee-filter").html(data.text);
+			}
+		}
+	   });
+});

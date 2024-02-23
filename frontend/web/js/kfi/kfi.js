@@ -238,6 +238,7 @@ function kfiHistory(kfiId) {
             if (data.status) {
 
                 $("#kfiNameHistory").html(data.kfi.kfiName);
+                $("#kfi-branch-flag").attr("src", $url+data.kfi.flag);
                 // alert(data.kfi.status);
                 if (data.kfi.status == 1) {
                     $("#statusHistory").html('Inprocess');

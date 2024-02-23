@@ -21,18 +21,17 @@
 			</div>
 			<!-- <div class="view-show-name" id="companyHistory">Tokyo Consulting Firm Limited </div> -->
 			<div class="col-12">
-				<div class="row mt-10">
+				<div class="row mt-15">
 					<div class="col-6 text-start country-show-name">
-						<img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="is-bangladresh2"> <span id="branchHistory"></span>, <span id="countryHistory"></span>
+						<img src="<?= Yii::$app->homeUrl ?>image/is.jpg" class="is-bangladresh2" id="kfi-branch-flag"> <span id="branchHistory"></span>, <span id="countryHistory"></span>
 					</div>
-					<div class="col-6 text-end font-size-13 pr-30">
-						<a class="no-underline-black " href="javascript:relatedKgiForKfi()" style="cursor: pointer;">
+					<div class="col-6 text-end pr-30">
+						<a class="no-underline-black btn btn-info btn-sm font-size-12 text-light" href="javascript:relatedKgiForKfi()" style="cursor: pointer;text-shadow:black 1px 1px 2px;">
 							<i class="fa fa-refresh mr-5" aria-hidden="true"></i>Related KGI
 						</a>
 					</div>
 				</div>
 			</div>
-
 			<div class="modal-body mt-10">
 				<div class="col-12 dashed-Backdrop3">
 					<div class="row mt-20">

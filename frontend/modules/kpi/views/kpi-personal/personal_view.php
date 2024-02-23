@@ -76,7 +76,7 @@ $this->title = "Individual KPI Detail";
 				<div class="col-lg-6 col-md-6 col-6" style="margin-top:-20px;">
 					<div class="col-12 pt-20">
 						<div class="progress">
-							<div class="progress-bar" id="progressHistory" style="background: rgb(47, 128, 237); margin-left: -50px; width:<?= (float)$kpiEmployeeDetail["ratio"] > 100 ? '100' : $kpiEmployeeDetail["ratio"] ?>%;"></div>
+							<div class="progress-bar" id="progressHistory" style="background: rgb(47, 128, 237);width:<?= (float)$kpiEmployeeDetail["ratio"] > 100 ? '100' : $kpiEmployeeDetail["ratio"] ?>%;"></div>
 							<span class="badge rounded-pill  pro-load-Backdrop3" id="decimalHistory"><?= $kpiEmployeeDetail["ratio"] ?>%</span>
 						</div>
 					</div>
@@ -84,10 +84,16 @@ $this->title = "Individual KPI Detail";
 			</div>
 		</div>
 	</div>
-	<div class="col-12 mt-20 font-size-16 font-b">
+	<div class="col-12 mt-20 font-size-14 font-b">
+		Remark
+	</div>
+	<div class="col-12 mt-10">
+		<?= $kpiEmployeeDetail["remark"] == '' ? '-' : $kpiEmployeeDetail["remark"] ?>
+	</div>
+	<div class="col-12 mt-20 font-size-14 font-b">
 		Update Description
 	</div>
-	<div class="col-12 mt-40">
+	<div class="col-12 mt-10">
 		<div class="row border-buttom font-b mb-20">
 			<div class="col-4 pb-10">Progress</div>
 			<div class="col-2 pb-10 text-end">Target</div>

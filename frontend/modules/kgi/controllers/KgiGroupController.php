@@ -12,11 +12,11 @@ use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
 
-header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
-header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
+// header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
+// header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+// header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+// header("Cache-Control: post-check=0, pre-check=0", false);
+// header("Pragma: no-cache");
 class KgiGroupController extends Controller
 {
 	public function beforeAction($action)
@@ -42,6 +42,7 @@ class KgiGroupController extends Controller
 	public function actionIndex()
 	{
 		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-group/index');
@@ -75,6 +76,7 @@ class KgiGroupController extends Controller
 		}
 		$groupId = Group::currentGroupId();
 		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$companies = curl_exec($api);
@@ -91,6 +93,7 @@ class KgiGroupController extends Controller
 		$kgiGroupId = $param["kgiGroupId"];
 		$groupId = Group::currentGroupId();
 		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-group/kgi-group-detail?kgiGroupId=' . $kgiGroupId);
 		$kgiGroup = curl_exec($api);

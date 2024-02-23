@@ -62,6 +62,18 @@
     margin-top: -9px;
     padding-top: 9px;
 }
+.pro-load-table {
+    background: #ffffff;
+    font-size: 9px;
+    border: 3px solid rgb(52, 153, 224);
+    display: inline-block;
+    color: #000000;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    padding-top: 12px;
+    margin-top: 10px;
+}
 
 .progress {
     height: 10px;

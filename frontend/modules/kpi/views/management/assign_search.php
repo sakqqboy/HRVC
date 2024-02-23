@@ -60,6 +60,16 @@ if (isset($kpis) && count($kpis) > 0) {
 					<b><?= $kpi["countKgiInKpi"] ?></b>
 				</a>
 			</td>
+			<td class="text-end">
+				<!-- <a href="<?php // Yii::$app->homeUrl 
+						?>kpi/kpi-team/kpi-team-setting/<?php // ModelMaster::encodeParams(['kpiId' => $kpiId]) 
+											?>" class="btn btn-sm btn-primary mr-3" title="Team KPI setting">
+					<i class="fa fa-users" aria-hidden="true"></i>
+				</a> -->
+				<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/indivisual-setting/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>" class="btn btn-sm btn-info text-light" title="Indivisual KPI setting">
+					<i class="fa fa-user" aria-hidden="true"></i>
+				</a>
+			</td>
 		</tr>
 <?php
 	endforeach;

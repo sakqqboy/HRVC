@@ -47,6 +47,15 @@ class Team extends \frontend\models\hrvc\master\TeamMaster
         $employee = Employee::find()->where(["teamId" => $teamId])->asArray()->all();
         return count($employee);
     }
+    public static function  employeeInTeamDetail($teamId)
+    {
+        $employee = Employee::find()->select('employeeFirstname,employeeSurename,employeeId')
+            ->where(["teamId" => $teamId])
+            ->orderBy('employeeFirstname')
+            ->asArray()
+            ->all();
+        return $employee;
+    }
     public static function  teamLeader($teamId, $position)
     {
         $text = "";
@@ -89,7 +98,8 @@ class Team extends \frontend\models\hrvc\master\TeamMaster
             ->where(["userId" => $userId])
             ->asArray()
             ->one();
-        $employee = Employee::find()->select('teamId')
+        $employee = Employee::find()
+            ->select('teamId')
             ->where(["employeeId" => $user["employeeId"]])
             ->asArray()
             ->one();

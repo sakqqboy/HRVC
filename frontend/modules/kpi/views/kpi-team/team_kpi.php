@@ -10,35 +10,57 @@ $this->title = "KPI";
 <div class="col-12 mt-70">
 	<div class="col-12">
 		<i class="fa fa-tachometer font-size-18" aria-hidden="true"></i>
-		<strong class="font-size-18"> TEAM KEY PERFORMAMCE INDICATORS </strong>
+		<strong class="font-size-18"> Team Key Preformance Indicators </strong>
 	</div>
 	<div class="col-12 mt-10">
-		<div class="col-12 New-KFI">
-			<?= $this->render('filter_list', [
-				"companies" => $companies,
-				"months" => $months,
-				"companyId" => $companyId,
-				"branchId" => $branchId,
-				"teamId" => $teamId,
-				"month" => $month,
-				"status" => $status,
-				"year" => $year,
-			]) ?>
-			<input type="hidden" id="type" value="list">
-		</div>
-		<?php
-		//if ($role >= 3) {
-		?>
-		<div class="col-12 mt-10 text-end">
-			<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi" class="font-size-14 no-underline-primary">
-				<i class="fa fa-user mr-5" aria-hidden="true"></i>
-				Individual
-			</a>
-		</div>
-		<?php
-		//}
-		?>
+		<?= $this->render('header_filter', [
+			"role" => $role
+		]) ?>
 		<div class="alert alert-white-4 mt-10">
+			<div class="row">
+				<div class="col-11">
+					<?= $this->render('filter_list', [
+						"companies" => $companies,
+						"months" => $months,
+						"companyId" => $companyId,
+						"branchId" => $branchId,
+						"teamId" => $teamId,
+						"month" => $month,
+						"status" => $status,
+						"year" => $year,
+					]) ?>
+				</div>
+				<div class="col-1">
+					<div class="row">
+						<div class="col-12 new-light-4">
+							<div class="btn-group" role="group" aria-label="Basic example">
+								<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/team-kpi" class="btn btn-primary font-size-13"><i class="fa fa-list-ul" aria-hidden="true"></i></a>
+								<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/team-kpi-grid" class="btn btn-outline-primary font-size-13"><i class="fa fa-th-large" aria-hidden="true"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<input type="hidden" id="type" value="list">
+
+			<?php
+			//if ($role >= 3) {
+			?>
+			<div class="col-12 mt-10 text-end">
+				<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi-grid" class="font-size-14 no-underline-primary">
+					<i class="fa fa-user mr-5" aria-hidden="true"></i>
+					Individual KPI
+				</a>
+				<a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="font-size-14 no-underline-primary ml-10">
+					<i class="fa fa-cog mr-5" aria-hidden="true"></i>
+					KPI Setting
+				</a>
+			</div>
+			<?php
+			//}
+			?>
+
 			<div class="col-12">
 				<table class="table table-striped">
 					<thead class="table-secondary">
@@ -106,12 +128,12 @@ $this->title = "KPI";
 										$decimal = explode('.', $kpi["target"]);
 										if (isset($decimal[1])) {
 											if ($decimal[1] == '00') {
-												$show = $decimal[0];
+												$show = number_format($decimal[0]);
 											} else {
-												$show = $kpi["target"];
+												$show = number_format($kpi["target"], 2);
 											}
 										} else {
-											$show = $kpi["target"];
+											$show = number_format($kpi["target"]);
 										}
 										?>
 										<?= $show ?>
@@ -125,12 +147,12 @@ $this->title = "KPI";
 											$decimalResult = explode('.', $kpi["result"]);
 											if (isset($decimalResult[1])) {
 												if ($decimalResult[1] == '00') {
-													$showResult = $decimalResult[0];
+													$showResult = number_format($decimalResult[0]);
 												} else {
-													$showResult = $kpi["result"];
+													$showResult = number_format($kpi["result"], 2);
 												}
 											} else {
-												$showResult = $kpi["result"];
+												$showResult = number_format($kpi["result"]);
 											}
 										} else {
 											$showResult = 0;
@@ -157,13 +179,13 @@ $this->title = "KPI";
 											<?php
 											if ($role > 3) {
 											?>
-												<li data-bs-toggle="modal" data-bs-target="#update-kgi-modal-team" onclick="javascript:updateTeamKpi(<?= $kpiTeamId ?>)" style="display: <?= $display ?>;">
+												<li data-bs-toggle="modal" data-bs-target="#update-kpi-modal-team" onclick="javascript:updateTeamKpi(<?= $kpiTeamId ?>)" style="display: <?= $display ?>;">
 													<a class="dropdown-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 												</li>
 												<?php
 											} else {
 												if ($role == 3 && ($kpi["teamId"] == $userTeamId)) { ?>
-													<li data-bs-toggle="modal" data-bs-target="#update-kgi-modal-team" onclick="javascript:updateTeamKpi(<?= $kpiTeamId ?>)" style="display: <?= $display ?>;">
+													<li data-bs-toggle="modal" data-bs-target="#update-kpi-modal-team" onclick="javascript:updateTeamKpi(<?= $kpiTeamId ?>)" style="display: <?= $display ?>;">
 														<a class="dropdown-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 													</li>
 											<?php

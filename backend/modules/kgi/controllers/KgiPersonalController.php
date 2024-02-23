@@ -2,13 +2,17 @@
 
 namespace backend\modules\kgi\controllers;
 
+use backend\models\hrvc\Company;
+use backend\models\hrvc\Country;
 use backend\models\hrvc\Employee;
 use backend\models\hrvc\Kgi;
+use backend\models\hrvc\KgiBranch;
 use backend\models\hrvc\KgiEmployee;
 use backend\models\hrvc\KgiEmployeeHistory;
 use backend\models\hrvc\KgiIssue;
 use backend\models\hrvc\KgiTeam;
 use backend\models\hrvc\Unit;
+use backend\models\hrvc\User;
 use common\models\ModelMaster;
 use Exception;
 use yii\web\Controller;
@@ -49,11 +53,16 @@ class KgiPersonalController extends Controller
 				// 	->orderBy('employeeFirstname')
 				// 	->all();
 				$kgiEmployee = KgiEmployee::find()
-					->select('e.employeeId,e.employeeFirstname,e.employeeSurename')
+					->select('e.employeeId,e.employeeFirstname,e.employeeSurename,kgi_employee.remark')
 					->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
 					->JOIN("LEFT JOIN", "user u", "u.employeeId=e.employeeId")
 					->JOIN("LEFT JOIN", "user_role ur", "ur.userId=u.userId")
-					->where(['e.teamId' => $team["teamId"], "kgi_employee.status" => 1, "kgi_employee.kgiId" => $kgiId])
+					->where([
+						'e.teamId' => $team["teamId"],
+						"kgi_employee.status" => 1,
+						"kgi_employee.kgiId" => $kgiId
+					])
+					->andWhere("e.status!=99")
 					->asArray()
 					->orderBy('ur.roleId,e.employeeFirstname')
 					->all();
@@ -63,6 +72,7 @@ class KgiPersonalController extends Controller
 							"employeeId" => $employee["employeeId"],
 							"target" => KgiEmployee::kgiEmployeeTarget($kgiId, $employee["employeeId"]),
 							"employeeName" => $employee["employeeFirstname"] . " " . $employee["employeeSurename"],
+							"remark" => $employee["remark"],
 						];
 					endforeach;
 				}
@@ -82,43 +92,54 @@ class KgiPersonalController extends Controller
 			->all();*/
 		$kgiEmployee = KgiEmployee::find()
 			->select('k.kgiName,k.priority,k.quantRatio,k.amountType,k.code,kgi_employee.target,kgi_employee.result,
-			kgi_employee.status,k.unitId,k.month,k.kgiId,k.fromDate,k.toDate,k.companyId,k.periodDate,
-			kgi_employee.kgiEmployeeId')
+			kgi_employee.status,k.unitId,kgi_employee.month,kgi_employee.year,k.kgiId,k.companyId,
+			kgi_employee.kgiEmployeeId,e.employeeFirstname,e.employeeSurename')
 			->JOIN("LEFT JOIN", "kgi k", "kgi_employee.kgiId=k.kgiId")
-			->where(["kgi_employee.status" => [1, 2, 4], "kgi_employee.employeeId" => $employeeId])
+			->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
+			->where(["kgi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "kgi_employee.employeeId" => $employeeId])
 			->orderby('k.createDateTime')
 			->asArray()
 			->all();
 		$data = [];
 		if (count($kgiEmployee) > 0) {
 			foreach ($kgiEmployee as $kgi) :
-				// $ratio = 0;
-				// if ($kgi["target"] != '' && $kgi["target"] != 0 && $kgi["target"] != null) {
-				// 	$ratio = ($kgi["result"] / $kgi["target"]) * 100;
-				// }
-
+				$kgiEmployeeHistory = KgiEmployeeHistory::find()
+					->where(["kgiEmployeeId" => $kgi["kgiEmployeeId"], "status" => [1, 2, 4]])
+					->asArray()
+					->orderBy('createDateTime DESC')
+					->one();
+				if (!isset($kgiEmployeeHistory) || empty($kgiEmployeeHistory)) {
+					$kgiEmployeeHistory = KgiEmployee::find()
+						->where(["kgiEmployeeId" => $kgi["kgiEmployeeId"], "status" => [1, 2, 4]])
+						->asArray()
+						->orderBy('createDateTime DESC')
+						->one();
+				}
+				$ratio = 0;
 				if ($kgi["target"] != '' && $kgi["target"] != 0) {
 					if ($kgi["code"] == '<' || $kgi["code"] == '=') {
 						$ratio = ($kgi["result"] / $kgi["target"]) * 100;
 					} else {
-						$ratio = ($kgi["target"] / $kgi["result"]) * 100;
+						if ($kgi["result"] != '' && $kgi["result"] != 0) {
+							$ratio = ($kgi["target"] / $kgi["result"]) * 100;
+						} else {
+							$ratio = 0;
+						}
 					}
 				} else {
 					$ratio = 0;
 				}
 
-
-
-				$data[$kgi["kgiId"]] = [
+				$data[$kgi["kgiEmployeeId"]] = [
+					"kgiId" => $kgi["kgiId"],
 					"kgiName" => $kgi["kgiName"],
 					"companyId" => $kgi['companyId'],
 					"kgiEmployeeId" => $kgi["kgiEmployeeId"],
-					//"companyName" => Company::companyName($kgi["companyId"]),
-					//"branch" => KgiBranch::kgiBranch($kgi["kgiId"]),
-					//"kgiBranch" => KgiBranch::kgiBranches($kgi["kgiId"]),
-					"kgiEmployee" => KgiEmployee::kgiEmployee($kgi["kgiId"]),
+					"employeeName" => $kgi["employeeFirstname"] . ' ' . $kgi["employeeSurename"],
+					"companyName" => Company::companyName($kgi["companyId"]),
+					"branch" => KgiBranch::kgiBranch($kgi["kgiId"]),
+					"employee" => KgiEmployee::kgiEmployee($kgi["kgiId"]),
 					"quantRatio" => $kgi["quantRatio"],
-					//"creater" => User::employeeNameByuserId($kgi["createrId"]),
 					"targetAmount" => $kgi["target"],
 					"code" => $kgi["code"],
 					"result" => $kgi["result"],
@@ -126,21 +147,20 @@ class KgiPersonalController extends Controller
 					"month" => ModelMaster::monthEng($kgi['month'], 1),
 					"priority" => $kgi["priority"],
 					"ratio" => number_format($ratio, 2),
-					"periodCheck" => ModelMaster::engDate($kgi["periodDate"], 2),
-					"nextCheck" => Kgi::nextCheckDate($kgi['kgiId']),
+					"periodCheck" => ModelMaster::engDate(KgiEmployee::lastestCheckDate($kgiEmployeeHistory["kgiEmployeeId"]), 2),
+					"nextCheck" =>  ModelMaster::engDate($kgiEmployeeHistory["nextCheckDate"], 2),
 					"countTeam" => KgiTeam::kgiTeam($kgi["kgiId"]),
-					//"flag" => Country::countryFlagBycompany($kgi["companyId"]),
-					"status" => $kgi["status"],
-					//"countryName" => Country::countryNameBycompany($kgi['companyId']),
+					"flag" => Country::countryFlagBycompany($kgi["companyId"]),
+					"status" => $kgiEmployeeHistory["status"],
+					"countryName" => Country::countryNameBycompany($kgi['companyId']),
 					"issue" => KgiIssue::lastestIssue($kgi["kgiId"])["issue"],
 					"solution" => KgiIssue::lastestIssue($kgi["kgiId"])["solution"],
-					"employee" => KgiTeam::employeeTeam($kgi['kgiId']),
-					"fromDate" => ModelMaster::engDate($kgi["fromDate"], 2),
-					"toDate" => ModelMaster::engDate($kgi["toDate"], 2),
-					"isOver" => ModelMaster::isOverDuedate(Kgi::nextCheckDate($kgi['kgiId'])),
-					//"countKgiHasKfi" => KfiHasKgi::countKfiWithKgi($kgi['kgiId']),
-					//"countKgiHasKpi" => KgiHasKpi::countKgiHasKpi($kgi['kgiId']),
-					"amountType" => $kgi["amountType"]
+					"fromDate" => ModelMaster::engDate($kgiEmployeeHistory["fromDate"], 2),
+					"toDate" => ModelMaster::engDate($kgiEmployeeHistory["toDate"], 2),
+					//"isOver" => ModelMaster::isOverDuedate(Kgi::nextCheckDate($kgi['kgiId'])),
+					"isOver" => ModelMaster::isOverDuedate(KgiEmployee::nextCheckDate($kgiEmployeeHistory['kgiEmployeeId'])),
+					"amountType" => $kgi["amountType"],
+					"canEdit" => 1,
 				];
 			endforeach;
 		}
@@ -148,18 +168,22 @@ class KgiPersonalController extends Controller
 	}
 	public function actionKgiEmployeeDetail($kgiEmployeeId)
 	{
-		/*$kgiEmployee = KgiEmployeeHistory::find()
-			->where(["kgiEmployeeId" => $kgiEmployeeId])
-			->orderBy('kgiEmployeeHistoryId DESC')
+		$kgiEmployee = KgiEmployeeHistory::find()
+			->select('ke.target,kgi_employee_history.result,kgi_employee_history.kgiEmployeeId,ke.employeeId,
+			kgi_employee_history.lastCheckDate,kgi_employee_history.nextCheckDate,kgi_employee_history.detail,
+			kgi_employee_history.status,kgi_employee_history.month,kgi_employee_history.year,ke.remark')
+			->JOIN("LEFT JOIN", "kgi_employee ke", "ke.kgiEmployeeId=kgi_employee_history.kgiEmployeeId")
+			->where(["kgi_employee_history.kgiEmployeeId" => $kgiEmployeeId])
+			->orderBy('kgi_employee_history.kgiEmployeeHistoryId DESC')
 			->asArray()
-			->one();*/
-		//if (!isset($kgiEmployee) || empty($kgiEmployee)) {
-		$kgiEmployee = KgiEmployee::find()
-			->where(["kgiEmployeeId" => $kgiEmployeeId])
 			->one();
-		$kgiId = $kgiEmployee["kgiId"];
-		$employeeId = $kgiEmployee["employeeId"];
-		/*} else {
+		if (!isset($kgiEmployee) || empty($kgiEmployee)) {
+			$kgiEmployee = KgiEmployee::find()
+				->where(["kgiEmployeeId" => $kgiEmployeeId])
+				->one();
+			$kgiId = $kgiEmployee["kgiId"];
+			$employeeId = $kgiEmployee["employeeId"];
+		} else {
 			$kgiE = KgiEmployee::find()
 				->select('kgiId,employeeId')
 				->where(["kgiEmployeeId" => $kgiEmployee["kgiEmployeeId"]])
@@ -167,18 +191,23 @@ class KgiPersonalController extends Controller
 				->one();
 			$kgiId = $kgiE["kgiId"];
 			$employeeId = $kgiE["employeeId"];
-		}*/
+		}
 		$data = [];
+		$ratio = 0;
 		$kgiDetail = Kgi::find()
 			//->select('kgiName')
 			->where(["kgiId" => $kgiId])
 			->one();
 		if (isset($kgiEmployee) && !empty($kgiEmployee)) {
-			if ($kgiEmployee["target"] != '' && $kgiEmployee["target"] != 0) {
+			if ($kgiEmployee["target"] != '' && $kgiEmployee["target"] != 0 && $kgiEmployee["target"] != null) {
 				if ($kgiDetail["code"] == '<' || $kgiDetail["code"] == '=') {
 					$ratio = ($kgiEmployee["result"] / $kgiEmployee["target"]) * 100;
 				} else {
-					$ratio = ($kgiEmployee["target"] / $kgiEmployee["result"]) * 100;
+					if ($kgiEmployee["result"] != '' && $kgiEmployee["result"] != 0) {
+						$ratio = ($kgiEmployee["target"] / $kgiEmployee["result"]) * 100;
+					} else {
+						$ratio = 0;
+					}
 				}
 			} else {
 				$ratio = 0;
@@ -199,7 +228,10 @@ class KgiPersonalController extends Controller
 				"nextCheckDate" => isset($kgiEmployee["nextCheckDate"]) ? $kgiEmployee["nextCheckDate"] : null,
 				"lastCheckDate" => isset($kgiEmployee["lastCheckDate"]) ? $kgiEmployee["lastCheckDate"] : null,
 				"status" => $kgiEmployee["status"],
-				"employeeName" => $employee["employeeFirstname"] . " " . $employee["employeeSurename"]
+				"employeeName" => $employee["employeeFirstname"] . " " . $employee["employeeSurename"],
+				"month" => $kgiEmployee["month"],
+				"year" => $kgiEmployee["year"],
+				"remark" => $kgiEmployee["remark"]
 			];
 		}
 		return json_encode($data);
@@ -238,5 +270,90 @@ class KgiPersonalController extends Controller
 				->all();
 		}
 		return json_encode($kgiEmployeeHistory);
+	}
+	public function actionKgiPersonalFilter($companyId, $branchId, $teamId, $month, $status, $year, $userId)
+	{
+		$employeeId = Employee::employeeId($userId);
+		$kgiEmployees = KgiEmployee::find()
+			->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_employee.kgiEmployeeId,k.companyId,
+			kgi_employee.employeeId,kgi_employee.target,kgi_employee.month,e.employeeFirstname,e.employeeSurename')
+			->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_employee.kgiId")
+			->JOIN("LEFT JOIN", "kgi_branch kb", "kb.kgiId=k.kgiId")
+			->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
+			->where("kgi_employee.status!=99 and k.status!=99")
+			->andFilterWhere([
+				"kb.branchId" => $branchId,
+				"e.teamId" => $teamId,
+				"kgi_employee.employeeId" => $employeeId,
+				"kgi_employee.month" => $month,
+				"kgi_employee.year" => $year,
+				"kgi_employee.status" => $status,
+			])
+			->orderBy("k.createDateTime DESC")
+			->asArray()
+			->all();
+		$data = [];
+		if (isset($kgiEmployees) && count($kgiEmployees) > 0) {
+			foreach ($kgiEmployees as $kgiEmployee) :
+				$kgiEmployeeHistory = KgiEmployeeHistory::find()
+					->where(["kgiEmployeeId" => $kgiEmployee["kgiEmployeeId"]])
+					->asArray()
+					->orderBy('createDateTime DESC')
+					->one();
+				if (!isset($kgiEmployeeHistory) || empty($kgiEmployeeHistory)) {
+					$kgiEmployeeHistory = KgiEmployee::find()
+						->where(["kgiEmployeeId" => $kgiEmployee["kgiEmployeeId"]])
+						->asArray()
+						->orderBy('createDateTime DESC')
+						->one();
+				}
+				$ratio = 0;
+				if ($kgiEmployee["target"] != '' && $kgiEmployee["target"] != 0 && $kgiEmployee["target"] != null) {
+					if ($kgiEmployee["code"] == '<' || $kgiEmployee["code"] == '=') {
+						$ratio = ($kgiEmployeeHistory["result"] / $kgiEmployee["target"]) * 100;
+					} else {
+						if ($kgiEmployeeHistory["result"] != '' && $kgiEmployeeHistory["result"] != 0) {
+							$ratio = ($kgiEmployee["target"] / $kgiEmployeeHistory["result"]) * 100;
+						} else {
+							$ratio = 0;
+						}
+					}
+				} else {
+					$ratio = 0;
+				}
+				$data[$kgiEmployee["kgiEmployeeId"]] = [
+					"kgiName" => $kgiEmployee["kgiName"],
+					"kgiId" => $kgiEmployee["kgiId"],
+					"companyName" => Company::companyName($kgiEmployee["companyId"]),
+					"employee" => KgiEmployee::kgiEmployee($kgiEmployee["kgiId"]),
+					"employeeName" => $kgiEmployee["employeeFirstname"] . ' ' . $kgiEmployee["employeeSurename"],
+					"branch" => KgiBranch::kgiBranch($kgiEmployee["kgiId"]),
+					"priority" => $kgiEmployee["priority"],
+					"unit" => Unit::unitName($kgiEmployee["unitId"]),
+					"quantRatio" => $kgiEmployee["quantRatio"],
+					"targetAmount" => $kgiEmployee["target"],
+					"result" => $kgiEmployeeHistory["result"],
+					"code" => $kgiEmployee["code"],
+					"month" =>  ModelMaster::monthEng($kgiEmployeeHistory['month'], 1),
+					"year" => $kgiEmployeeHistory['year'],
+					"fromDate" => ModelMaster::engDate($kgiEmployeeHistory["fromDate"], 2),
+					"toDate" => ModelMaster::engDate($kgiEmployeeHistory["toDate"], 2),
+					//"periodCheck" => ModelMaster::engDate(KgiTeam::lastestCheckDate($kgiEmployeeHistory["kgiTeamId"]), 2),
+					"periodCheck" => ModelMaster::engDate(KgiEmployee::lastestCheckDate($kgiEmployee["kgiEmployeeId"]), 2),
+					"nextCheck" =>  ModelMaster::engDate($kgiEmployeeHistory["nextCheckDate"], 2),
+					"status" => $kgiEmployeeHistory["status"],
+					"flag" => Country::countryFlagBycompany($kgiEmployee["companyId"]),
+					"countryName" => Country::countryNameBycompany($kgiEmployee['companyId']),
+					"kgiEmployee" => KgiEmployee::kgiEmployee($kgiEmployee["kgiId"]),
+					"ratio" => number_format($ratio, 2),
+					"isOver" => ModelMaster::isOverDuedate(KgiEmployee::nextCheckDate($kgiEmployeeHistory['kgiEmployeeId'])),
+					"amountType" => $kgiEmployee["amountType"],
+					"issue" => KgiIssue::lastestIssue($kgiEmployee["kgiId"])["issue"],
+					"solution" => KgiIssue::lastestIssue($kgiEmployee["kgiId"])["solution"],
+					"countTeam" => KgiTeam::kgiTeam($kgiEmployee["kgiId"]),
+				];
+			endforeach;
+		}
+		return json_encode($data);
 	}
 }

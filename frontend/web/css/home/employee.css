@@ -7,7 +7,8 @@
     background-color: white;
     border: black;
     /* margin-top: 20px; */
-    height: 200px;
+    /* height: 180px; */
+    padding-bottom: 10px;
 }
 
 .scrollbar-ripe-malinka::-webkit-scrollbar-track {
@@ -55,7 +56,7 @@
 }
 
 .emplo-tadawoki {
-    margin-left: -25px;
+    margin-left: -10px;
     font-size: 8px;
     line-height: 8px;
     font-weight: 700;
@@ -63,8 +64,8 @@
 }
 
 .emplo-permanent {
-    font-size: 5px;
-    margin-left: -25px;
+    font-size: 8px;
+    margin-left: -10px;
     border-radius: 50%;
     cursor: default;
     margin-top: 5px;
@@ -110,9 +111,8 @@
     color: #3B7FF9;
     text-align: end;
     cursor: pointer;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 9px;
-    margin-top: -8px;
 }
 .employee-action{
    background-color: white;
@@ -124,7 +124,7 @@
     z-index: 20;
     border-radius: 3px;
     float: right !important;
-    margin-left: 170px;
+    margin-left: 155px;
     display: none;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
