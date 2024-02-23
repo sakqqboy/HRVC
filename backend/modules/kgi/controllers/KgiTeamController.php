@@ -277,7 +277,10 @@ class KgiTeamController extends Controller
 				$kgiTeamHistory = KgiTeamHistory::find()
 					->select('kgi_team_history.*')
 					->JOIN("LEFT JOIN", "kgi_team kt", "kt.kgiTeamId=kgi_team_history.kgiTeamId")
-					->where(["kgiTeamId" => $kgiTeam["kgiTeamId"]])
+					->where([
+						"kgi_team_history.kgiTeamId" => $kgiTeam["kgiTeamId"],
+						"kgi_team_history.status" => [1, 2]
+					])
 					->andFilterWhere([
 						//"kb.branchId" => $branchId,
 						"kt.teamId" => $teamId,
@@ -291,6 +294,12 @@ class KgiTeamController extends Controller
 				if (!isset($kgiTeamHistory) || empty($kgiTeamHistory)) {
 					$kgiTeamHistory = KgiTeam::find()
 						->where(["kgiTeamId" => $kgiTeam["kgiTeamId"]])
+						->andFilterWhere([
+							"teamId" => $teamId,
+							"month" => $month,
+							"year" => $year,
+							"status" => $status,
+						])
 						->asArray()
 						->orderBy('createDateTime DESC')
 						->one();
@@ -319,7 +328,7 @@ class KgiTeamController extends Controller
 					"unit" => Unit::unitName($kgiTeam["unitId"]),
 					"teamName" => Team::teamName($kgiTeam["teamId"]),
 					"quantRatio" => $kgiTeam["quantRatio"],
-					"target" => $kgiTeam["target"],
+					"target" => $kgiTeamHistory["target"],
 					"result" => $kgiTeamHistory["result"],
 					"code" => $kgiTeam["code"],
 					"month" =>  ModelMaster::monthEng($kgiTeamHistory['month'], 1),

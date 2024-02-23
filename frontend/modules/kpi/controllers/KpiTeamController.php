@@ -278,7 +278,7 @@ class KpiTeamController extends Controller
 			if ($type == "list") {
 				return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi');
 			} else {
-				return $this->redirect(Yii::$app->homeUrl . 'kpi/management/grid');
+				return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
 			}
 		}
 		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&teamId=' . $teamId . '&&month=' . $month . '&&status=' . $status . '&&year=' . $year;

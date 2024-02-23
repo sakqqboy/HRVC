@@ -272,13 +272,30 @@ class KpiTeamController extends Controller
 		if (isset($kpiTeams) && count($kpiTeams) > 0) {
 			foreach ($kpiTeams as $kpiTeam) :
 				$kpiTeamHistory = KpiTeamHistory::find()
-					->where(["kpiTeamId" => $kpiTeam["kpiTeamId"]])
+					->select('kpi_team_history.*')
+					->JOIN("LEFT JOIN", "kpi_team kt", "kt.kpiTeamId=kpi_team_history.kpiTeamId")
+					->where([
+						"kpi_team_history.kpiTeamId" => $kpiTeam["kpiTeamId"],
+						"kpi_team_history.status" => [1, 2]
+					])
+					->andFilterWhere([
+						"kt.teamId" => $teamId,
+						"kpi_team_history.month" => $month,
+						"kpi_team_history.year" => $year,
+						"kpi_team_history.status" => $status,
+					])
 					->asArray()
 					->orderBy('createDateTime DESC')
 					->one();
 				if (!isset($kpiTeamHistory) || empty($kpiTeamHistory)) {
 					$kpiTeamHistory = KpiTeam::find()
 						->where(["kpiTeamId" => $kpiTeam["kpiTeamId"]])
+						->andFilterWhere([
+							"teamId" => $teamId,
+							"month" => $month,
+							"year" => $year,
+							"status" => $status,
+						])
 						->asArray()
 						->orderBy('createDateTime DESC')
 						->one();

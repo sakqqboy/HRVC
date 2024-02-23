@@ -267,7 +267,7 @@ class KgiTeamController extends Controller
 			if ($type == "list") {
 				return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-team/team-kgi');
 			} else {
-				return $this->redirect(Yii::$app->homeUrl . 'kgi/management/grid');
+				return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-team/team-kgi-grid');
 			}
 		}
 		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&teamId=' . $teamId . '&&month=' . $month . '&&status=' . $status . '&&year=' . $year;

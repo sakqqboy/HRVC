@@ -94,11 +94,13 @@ $this->title = "Individual KGI Detail";
 		Update Description
 	</div>
 	<div class="col-12 mt-10">
-		<div class="row border-buttom font-b mb-20 font-size-14">
-			<div class="col-4 pb-10">Progress</div>
+		<div class="row border-buttom font-b mb-20 font-size-12">
+			<div class="col-2 pb-10">Progress</div>
 			<div class="col-2 pb-10 text-end">Target</div>
 			<div class="col-2 pb-10 text-end">Result</div>
-			<div class="col-2 pb-10 text-center">Status</div>
+			<div class="col-2 pb-10 text-center">Ratio</div>
+			<div class="col-1 pb-10 text-center">Month</div>
+			<div class="col-1 pb-10 text-center">Status</div>
 			<div class="col-2 pb-10">Date</div>
 		</div>
 		<?php
@@ -125,12 +127,39 @@ $this->title = "Individual KGI Detail";
 					$status = 'Reject';
 					$fontB = '';
 				}
+				$ratio = 0;
+				if ($history["target"] != '' && $history["target"] != 0 && $history["target"] != null) {
+					if ($history["code"] == '<' || $history["code"] == '=') {
+						$ratio = ($history["result"] / $history["target"]) * 100;
+					} else {
+						if ($history["result"] != '' && $history["result"] != 0) {
+							$ratio = ($kgiTeam["target"] / $history["result"]) * 100;
+						} else {
+							$ratio = 0;
+						}
+					}
+				} else {
+					$ratio = 0;
+				}
+
+				$decimal = explode('.', $ratio);
+				if (isset($decimal[1])) {
+					if ($decimal[1] == '00') {
+						$number = number_format($decimal[0]) . '%';
+					} else {
+						$number = number_format($ratio, 2) . '%';
+					}
+				} else {
+					$number = number_format($ratio) . '%';
+				}
 		?>
-				<div class="row alert <?= $alert ?> <?= $fontB ?>">
-					<div class="col-4"><?= $i ?>&nbsp;&nbsp;&nbsp;<?= $history["detail"] ?></div>
+				<div class="row alert <?= $alert ?> <?= $fontB ?> font-size-10">
+					<div class="col-2"><?= $i ?>&nbsp;&nbsp;&nbsp;<?= $history["detail"] ?></div>
 					<div class="col-2 text-end"><?= number_format($history["target"], 2) ?></div>
 					<div class="col-2 text-end"><?= number_format($history["result"], 2) ?></div>
-					<div class="col-2 text-center"><?= $status ?></div>
+					<div class="col-2 text-center"><?= $number ?></div>
+					<div class="col-1 text-center"><?= ModelMaster::shotMonthText($history["month"]) ?></div>
+					<div class="col-1 text-center"><?= $status ?></div>
 					<div class="col-2"><?= ModelMaster::engDate($history["createDateTime"], 2) ?></div>
 				</div>
 			<?php

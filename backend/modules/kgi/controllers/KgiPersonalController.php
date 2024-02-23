@@ -239,9 +239,12 @@ class KgiPersonalController extends Controller
 	public function actionKgiEmployeeHistory($kgiEmployeeId)
 	{
 		$kgiHistory = KgiEmployeeHistory::find()
-			->where(["kgiEmployeeId" => $kgiEmployeeId, "status" => [1, 2, 4, 88, 89]])
+			->select('kgi_employee_history.*,k.code')
+			->JOIN("LEFT JOIN", "kgi_employee ke", "ke.kgiEmployeeId=kgi_employee_history.kgiEmployeeId")
+			->JOIN("LEFT JOIN", "kgi k", "k.kgiId=ke.kgiId")
+			->where(["kgi_employee_history.kgiEmployeeId" => $kgiEmployeeId, "kgi_employee_history.status" => [1, 2, 4, 88, 89]])
 			->asArray()
-			->orderBy("createDateTime DESC")
+			->orderBy("kgi_employee_history.createDateTime DESC")
 			->all();
 		return json_encode($kgiHistory);
 	}
@@ -273,7 +276,7 @@ class KgiPersonalController extends Controller
 	}
 	public function actionKgiPersonalFilter($companyId, $branchId, $teamId, $month, $status, $year, $userId)
 	{
-		$employeeId = Employee::employeeId($userId);
+		$employeeId = Employee::employeeId2($userId);
 		$kgiEmployees = KgiEmployee::find()
 			->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_employee.kgiEmployeeId,k.companyId,
 			kgi_employee.employeeId,kgi_employee.target,kgi_employee.month,e.employeeFirstname,e.employeeSurename')
@@ -296,13 +299,35 @@ class KgiPersonalController extends Controller
 		if (isset($kgiEmployees) && count($kgiEmployees) > 0) {
 			foreach ($kgiEmployees as $kgiEmployee) :
 				$kgiEmployeeHistory = KgiEmployeeHistory::find()
-					->where(["kgiEmployeeId" => $kgiEmployee["kgiEmployeeId"]])
+					->select('kgi_employee_history.*')
+					->JOIN("LEFT JOIN", "kgi_employee ke", "ke.kgiEmployeeId=kgi_employee_history.kgiEmployeeId")
+					->JOIN("LEFT JOIN", "employee e", "e.employeeId=ke.employeeId")
+					->where([
+						"kgi_employee_history.kgiEmployeeId" => $kgiEmployee["kgiEmployeeId"],
+						"kgi_employee_history.status" => [1, 2],
+					])
+					->andFilterWhere([
+						"e.teamId" => $teamId,
+						"ke.employeeId" => $employeeId,
+						"kgi_employee_history.month" => $month,
+						"kgi_employee_history.year" => $year,
+						"kgi_employee_history.status" => $status,
+					])
 					->asArray()
-					->orderBy('createDateTime DESC')
+					->orderBy('kgi_employee_history.createDateTime DESC')
 					->one();
 				if (!isset($kgiEmployeeHistory) || empty($kgiEmployeeHistory)) {
+					throw new exception(1111);
 					$kgiEmployeeHistory = KgiEmployee::find()
-						->where(["kgiEmployeeId" => $kgiEmployee["kgiEmployeeId"]])
+						->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
+						->where(["kgi_employee.kgiEmployeeId" => $kgiEmployee["kgiEmployeeId"], "kgi_employee.status" => [1, 2]])
+						->andFilterWhere([
+							"e.teamId" => $teamId,
+							"e.employeeId" => $employeeId,
+							"kgi_employee.month" => $month,
+							"kgi_employee.year" => $year,
+							"kgi_employee.status" => $status,
+						])
 						->asArray()
 						->orderBy('createDateTime DESC')
 						->one();

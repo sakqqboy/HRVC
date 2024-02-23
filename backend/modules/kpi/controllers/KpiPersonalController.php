@@ -219,9 +219,12 @@ class KpiPersonalController extends Controller
 	public function actionKpiEmployeeHistory($kpiEmployeeId)
 	{
 		$kpiHistory = KpiEmployeeHistory::find()
-			->where(["kpiEmployeeId" => $kpiEmployeeId, "status" => [1, 2, 4, 88, 89]])
+			->select('kpi_employee_history.*,k.code')
+			->JOIN("LEFT JOIN", "kpi_employee ke", "ke.kpiEmployeeId=kpi_employee_history.kpiEmployeeId")
+			->JOIN("LEFT JOIN", "kpi k", "k.kpiId=ke.kpiId")
+			->where(["kpi_employee_history.kpiEmployeeId" => $kpiEmployeeId, "kpi_employee_history.status" => [1, 2, 4, 88, 89]])
 			->asArray()
-			->orderBy("createDateTime DESC")
+			->orderBy("kpi_employee_history.createDateTime DESC")
 			->all();
 		return json_encode($kpiHistory);
 	}
@@ -253,7 +256,7 @@ class KpiPersonalController extends Controller
 	}
 	public function actionKpiPersonalFilter($companyId, $branchId, $teamId, $month, $status, $year, $userId)
 	{
-		$employeeId = Employee::employeeId($userId);
+		$employeeId = Employee::employeeId2($userId);
 		$kpiEmployees = KpiEmployee::find()
 			->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_employee.kpiEmployeeId,k.companyId,
 			kpi_employee.employeeId,kpi_employee.target,kpi_employee.month,e.employeeFirstname,e.employeeSurename')
@@ -276,13 +279,35 @@ class KpiPersonalController extends Controller
 		if (isset($kpiEmployees) && count($kpiEmployees) > 0) {
 			foreach ($kpiEmployees as $kpiEmployee) :
 				$kpiEmployeeHistory = KpiEmployeeHistory::find()
-					->where(["kpiEmployeeId" => $kpiEmployee["kpiEmployeeId"]])
+					->select('kpi_employee_history.*')
+					->JOIN("LEFT JOIN", "kpi_employee ke", "ke.kpiEmployeeId=kpi_employee_history.kpiEmployeeId")
+					->JOIN("LEFT JOIN", "employee e", "e.employeeId=ke.employeeId")
+					->where([
+						"kpi_employee_history.kpiEmployeeId" => $kpiEmployee["kpiEmployeeId"],
+						"kpi_employee_history.status" => [1, 2],
+					])
+					->andFilterWhere([
+						"e.teamId" => $teamId,
+						"ke.employeeId" => $employeeId,
+						"kpi_employee_history.month" => $month,
+						"kpi_employee_history.year" => $year,
+						"kpi_employee_history.status" => $status,
+					])
 					->asArray()
-					->orderBy('createDateTime DESC')
+					->orderBy('kpi_employee_history.createDateTime DESC')
 					->one();
 				if (!isset($kpiEmployeeHistory) || empty($kpiEmployeeHistory)) {
+					throw new exception(1111);
 					$kpiEmployeeHistory = KpiEmployee::find()
-						->where(["kpiEmployeeId" => $kpiEmployee["kpiEmployeeId"]])
+						->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
+						->where(["kpi_employee.kpiEmployeeId" => $kpiEmployee["kpiEmployeeId"], "kpi_employee.status" => [1, 2]])
+						->andFilterWhere([
+							"e.teamId" => $teamId,
+							"e.employeeId" => $employeeId,
+							"kpi_employee.month" => $month,
+							"kpi_employee.year" => $year,
+							"kpi_employee.status" => $status,
+						])
 						->asArray()
 						->orderBy('createDateTime DESC')
 						->one();

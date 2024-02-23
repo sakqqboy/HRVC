@@ -64,4 +64,20 @@ class Employee extends \backend\models\hrvc\master\EmployeeMaster
             return null;
         }
     }
+    public static function employeeId2($userId)
+    {
+        if ($userId == null) {
+            return null;
+        }
+        $user = User::find()
+            ->select('employeeId')
+            ->where(["userId" => $userId])
+            ->asArray()
+            ->one();
+        if (isset($user) && !empty($user)) {
+            return $user["employeeId"];
+        } else {
+            return 0;
+        }
+    }
 }
