@@ -48,7 +48,7 @@ return 'company';
 public function rules()
 {
 return [
-            [['companyName', 'groupId', 'countryId', 'displayName', 'location', 'industries', 'director'], 'required'],
+            [['companyName', 'groupId', 'displayName', 'location', 'industries', 'director'], 'required'],
             [['groupId', 'countryId', 'headQuaterId'], 'integer'],
             [['location', 'industries', 'contact', 'specialties', 'socialTag', 'about'], 'string'],
             [['createDateTime', 'updateDateTime'], 'safe'],

@@ -11,8 +11,13 @@ use Yii;
     * @property integer $kpiEmployeeId
     * @property string $target
     * @property string $result
+    * @property string $fromDate
+    * @property string $toDate
     * @property string $detail
+    * @property integer $createrId
     * @property string $nextCheckDate
+    * @property string $month
+    * @property string $year
     * @property string $lastCheckDate
     * @property integer $status
     * @property string $createDateTime
@@ -34,11 +39,12 @@ return 'kpi_employee_history';
 public function rules()
 {
 return [
-            [['kpiEmployeeId', 'target', 'result'], 'required'],
-            [['kpiEmployeeId'], 'integer'],
+            [['kpiEmployeeId'], 'required'],
+            [['kpiEmployeeId', 'createrId'], 'integer'],
             [['target', 'result'], 'number'],
+            [['fromDate', 'toDate', 'nextCheckDate', 'lastCheckDate', 'createDateTime', 'updateDateTime'], 'safe'],
             [['detail'], 'string'],
-            [['nextCheckDate', 'lastCheckDate', 'createDateTime', 'updateDateTime'], 'safe'],
+            [['month', 'year'], 'string', 'max' => 45],
             [['status'], 'string', 'max' => 10],
         ];
 }
@@ -53,8 +59,13 @@ return [
     'kpiEmployeeId' => 'Kpi Employee ID',
     'target' => 'Target',
     'result' => 'Result',
+    'fromDate' => 'From Date',
+    'toDate' => 'To Date',
     'detail' => 'Detail',
+    'createrId' => 'Creater ID',
     'nextCheckDate' => 'Next Check Date',
+    'month' => 'Month',
+    'year' => 'Year',
     'lastCheckDate' => 'Last Check Date',
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',

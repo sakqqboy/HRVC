@@ -20,11 +20,14 @@ use Yii;
     * @property integer $amountType
     * @property string $code
     * @property integer $historyStatus
+    * @property string $target
     * @property string $result
     * @property string $formular
     * @property string $titleProgress
     * @property string $description
     * @property string $remark
+    * @property string $month
+    * @property string $year
     * @property integer $status
     * @property string $createDateTime
     * @property string $updateDateTime
@@ -48,11 +51,11 @@ return [
             [['kfiId', 'unitId', 'nextCheckDate', 'quantRatio', 'amountType', 'code', 'historyStatus'], 'required'],
             [['kfiId', 'createrId'], 'integer'],
             [['checkPeriodDate', 'nextCheckDate', 'fromDate', 'toDate', 'createDateTime', 'updateDateTime'], 'safe'],
-            [['result'], 'number'],
+            [['target', 'result'], 'number'],
             [['description', 'remark'], 'string'],
             [['kfiHistoryName', 'formular', 'titleProgress'], 'string', 'max' => 255],
             [['unitId', 'amountType', 'historyStatus', 'status'], 'string', 'max' => 10],
-            [['quantRatio', 'code'], 'string', 'max' => 45],
+            [['quantRatio', 'code', 'month', 'year'], 'string', 'max' => 45],
         ];
 }
 
@@ -75,11 +78,14 @@ return [
     'amountType' => 'Amount Type',
     'code' => 'Code',
     'historyStatus' => 'History Status',
+    'target' => 'Target',
     'result' => 'Result',
     'formular' => 'Formular',
     'titleProgress' => 'Title Progress',
     'description' => 'Description',
     'remark' => 'Remark',
+    'month' => 'Month',
+    'year' => 'Year',
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',
     'updateDateTime' => 'Update Date Time',

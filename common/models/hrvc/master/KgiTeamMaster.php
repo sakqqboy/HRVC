@@ -12,6 +12,12 @@ use Yii;
     * @property integer $teamId
     * @property string $target
     * @property string $result
+    * @property string $fromDate
+    * @property string $toDate
+    * @property string $nextCheckDate
+    * @property string $month
+    * @property string $year
+    * @property string $remark
     * @property integer $createrId
     * @property integer $status
     * @property string $createDateTime
@@ -36,7 +42,9 @@ return [
             [['kgiId', 'teamId'], 'required'],
             [['kgiId', 'teamId', 'createrId'], 'integer'],
             [['target', 'result'], 'number'],
-            [['createDateTime', 'updateDateTime'], 'safe'],
+            [['fromDate', 'toDate', 'nextCheckDate', 'createDateTime', 'updateDateTime'], 'safe'],
+            [['remark'], 'string'],
+            [['month', 'year'], 'string', 'max' => 45],
             [['status'], 'string', 'max' => 20],
         ];
 }
@@ -52,6 +60,12 @@ return [
     'teamId' => 'Team ID',
     'target' => 'Target',
     'result' => 'Result',
+    'fromDate' => 'From Date',
+    'toDate' => 'To Date',
+    'nextCheckDate' => 'Next Check Date',
+    'month' => 'Month',
+    'year' => 'Year',
+    'remark' => 'Remark',
     'createrId' => 'Creater ID',
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',

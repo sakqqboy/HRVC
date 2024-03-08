@@ -7,9 +7,9 @@ use Yii;
 /**
 * This is the model class for table "kgi_has_kpi".
 *
-    * @property integer $kgiHasKpiId
-    * @property integer $kgiId
+    * @property integer $kfiHasKgiId
     * @property integer $kpiId
+    * @property integer $kgiId
     * @property integer $status
     * @property string $createDateTime
     * @property string $updateDateTime
@@ -30,8 +30,8 @@ return 'kgi_has_kpi';
 public function rules()
 {
 return [
-            [['kgiId', 'kpiId'], 'required'],
-            [['kgiId', 'kpiId'], 'integer'],
+            [['kpiId', 'kgiId'], 'required'],
+            [['kpiId', 'kgiId'], 'integer'],
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['status'], 'string', 'max' => 20],
         ];
@@ -43,9 +43,9 @@ return [
 public function attributeLabels()
 {
 return [
-    'kgiHasKpiId' => 'Kgi Has Kpi ID',
-    'kgiId' => 'Kgi ID',
+    'kfiHasKgiId' => 'Kfi Has Kgi ID',
     'kpiId' => 'Kpi ID',
+    'kgiId' => 'Kgi ID',
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',
     'updateDateTime' => 'Update Date Time',

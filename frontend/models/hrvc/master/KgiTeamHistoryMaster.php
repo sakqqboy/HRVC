@@ -12,6 +12,12 @@ use Yii;
     * @property string $target
     * @property string $result
     * @property string $detail
+    * @property string $fromDate
+    * @property string $toDate
+    * @property string $nextCheckDate
+    * @property string $month
+    * @property string $year
+    * @property integer $createrId
     * @property integer $status
     * @property string $createDateTime
     * @property string $updateDateTime
@@ -32,11 +38,12 @@ return 'kgi_team_history';
 public function rules()
 {
 return [
-            [['kgiTeamId', 'target', 'result'], 'required'],
-            [['kgiTeamId'], 'integer'],
+            [['kgiTeamId'], 'required'],
+            [['kgiTeamId', 'createrId'], 'integer'],
             [['target', 'result'], 'number'],
             [['detail'], 'string'],
-            [['createDateTime', 'updateDateTime'], 'safe'],
+            [['fromDate', 'toDate', 'nextCheckDate', 'createDateTime', 'updateDateTime'], 'safe'],
+            [['month', 'year'], 'string', 'max' => 45],
             [['status'], 'string', 'max' => 10],
         ];
 }
@@ -52,6 +59,12 @@ return [
     'target' => 'Target',
     'result' => 'Result',
     'detail' => 'Detail',
+    'fromDate' => 'From Date',
+    'toDate' => 'To Date',
+    'nextCheckDate' => 'Next Check Date',
+    'month' => 'Month',
+    'year' => 'Year',
+    'createrId' => 'Creater ID',
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',
     'updateDateTime' => 'Update Date Time',

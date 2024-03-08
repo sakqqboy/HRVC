@@ -1,0 +1,59 @@
+<?php
+
+namespace backend\models\hrvc\master;
+
+use Yii;
+
+/**
+* This is the model class for table "term_item".
+*
+    * @property integer $termItemId
+    * @property integer $termId
+    * @property string $itemName
+    * @property string $startDate
+    * @property string $finishDate
+    * @property integer $status
+    * @property string $createDateTime
+    * @property string $updateDateTime
+*/
+class TermItemMaster extends \common\models\ModelMaster
+{
+/**
+* @inheritdoc
+*/
+public static function tableName()
+{
+return 'term_item';
+}
+
+/**
+* @inheritdoc
+*/
+public function rules()
+{
+return [
+            [['termId', 'itemName'], 'required'],
+            [['termId'], 'integer'],
+            [['startDate', 'finishDate', 'createDateTime', 'updateDateTime'], 'safe'],
+            [['itemName'], 'string', 'max' => 100],
+            [['status'], 'string', 'max' => 10],
+        ];
+}
+
+/**
+* @inheritdoc
+*/
+public function attributeLabels()
+{
+return [
+    'termItemId' => 'Term Item ID',
+    'termId' => 'Term ID',
+    'itemName' => 'Item Name',
+    'startDate' => 'Start Date',
+    'finishDate' => 'Finish Date',
+    'status' => 'Status',
+    'createDateTime' => 'Create Date Time',
+    'updateDateTime' => 'Update Date Time',
+];
+}
+}

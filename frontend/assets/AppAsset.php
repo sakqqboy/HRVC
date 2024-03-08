@@ -45,6 +45,8 @@ class AppAsset extends AssetBundle
         'css/home/branch.css',
         'css/home/team.css',
         'css/component/button.css',
+        'css/component/icon.css',
+        'css/component/calendar.css',
         'css/home/title.css',
         'css/home/management-layer.css',
         'css/home/employee.css',
@@ -116,7 +118,7 @@ class AppAsset extends AssetBundle
         'js/setting/scripts.js',
         'js/kgi/kgi_group.js',
         'js/setting/doughnut.js',
-        'js/setting/accordion.js',
+        //'js/setting/accordion.js',
         'js/setting/bonus.js',
         'js/setting/select_menycountry.js'
 

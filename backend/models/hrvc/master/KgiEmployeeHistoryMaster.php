@@ -11,9 +11,14 @@ use Yii;
     * @property integer $kgiEmployeeId
     * @property string $target
     * @property string $result
+    * @property string $fromDate
+    * @property string $toDate
     * @property string $detail
     * @property string $nextCheckDate
+    * @property string $month
+    * @property string $year
     * @property string $lastCheckDate
+    * @property integer $createrId
     * @property integer $status
     * @property string $createDateTime
     * @property string $updateDateTime
@@ -34,11 +39,12 @@ return 'kgi_employee_history';
 public function rules()
 {
 return [
-            [['kgiEmployeeId', 'target', 'result'], 'required'],
-            [['kgiEmployeeId'], 'integer'],
+            [['kgiEmployeeId'], 'required'],
+            [['kgiEmployeeId', 'createrId'], 'integer'],
             [['target', 'result'], 'number'],
+            [['fromDate', 'toDate', 'nextCheckDate', 'lastCheckDate', 'createDateTime', 'updateDateTime'], 'safe'],
             [['detail'], 'string'],
-            [['nextCheckDate', 'lastCheckDate', 'createDateTime', 'updateDateTime'], 'safe'],
+            [['month', 'year'], 'string', 'max' => 45],
             [['status'], 'string', 'max' => 10],
         ];
 }
@@ -53,9 +59,14 @@ return [
     'kgiEmployeeId' => 'Kgi Employee ID',
     'target' => 'Target',
     'result' => 'Result',
+    'fromDate' => 'From Date',
+    'toDate' => 'To Date',
     'detail' => 'Detail',
     'nextCheckDate' => 'Next Check Date',
+    'month' => 'Month',
+    'year' => 'Year',
     'lastCheckDate' => 'Last Check Date',
+    'createrId' => 'Creater ID',
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',
     'updateDateTime' => 'Update Date Time',

@@ -17,6 +17,7 @@ use Yii;
     * @property string $nextCheckDate
     * @property string $targetAmount
     * @property string $month
+    * @property string $year
     * @property string $titleProcess
     * @property string $description
     * @property string $remark
@@ -46,13 +47,13 @@ return 'kpi_history';
 public function rules()
 {
 return [
-            [['kpiId', 'unitId', 'nextCheckDate', 'targetAmount', 'month', 'quantRatio', 'priority', 'amountType', 'code', 'result', 'createrId'], 'required'],
+            [['kpiId', 'unitId', 'nextCheckDate', 'targetAmount', 'month', 'year', 'quantRatio', 'priority', 'amountType', 'code', 'result', 'createrId'], 'required'],
             [['kpiId', 'unitId', 'createrId'], 'integer'],
             [['periodDate', 'fromDate', 'toDate', 'nextCheckDate', 'createDateTime', 'updateDateTime'], 'safe'],
             [['targetAmount', 'result'], 'number'],
             [['description', 'remark'], 'string'],
             [['kpiHistoryName', 'titleProcess'], 'string', 'max' => 255],
-            [['month', 'priority', 'code'], 'string', 'max' => 45],
+            [['month', 'year', 'priority', 'code'], 'string', 'max' => 45],
             [['quantRatio', 'amountType', 'status'], 'string', 'max' => 10],
         ];
 }
@@ -73,6 +74,7 @@ return [
     'nextCheckDate' => 'Next Check Date',
     'targetAmount' => 'Target Amount',
     'month' => 'Month',
+    'year' => 'Year',
     'titleProcess' => 'Title Process',
     'description' => 'Description',
     'remark' => 'Remark',

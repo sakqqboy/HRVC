@@ -17,6 +17,7 @@ use Yii;
     * @property string $nextCheckDate
     * @property string $targetAmount
     * @property string $month
+    * @property string $year
     * @property string $titleProcess
     * @property string $description
     * @property string $remark
@@ -52,7 +53,7 @@ return [
             [['targetAmount', 'result'], 'number'],
             [['description', 'remark'], 'string'],
             [['kgiHistoryName', 'titleProcess'], 'string', 'max' => 255],
-            [['month', 'priority', 'code'], 'string', 'max' => 45],
+            [['month', 'year', 'priority', 'code'], 'string', 'max' => 45],
             [['quantRatio', 'amountType', 'status'], 'string', 'max' => 10],
         ];
 }
@@ -73,6 +74,7 @@ return [
     'nextCheckDate' => 'Next Check Date',
     'targetAmount' => 'Target Amount',
     'month' => 'Month',
+    'year' => 'Year',
     'titleProcess' => 'Title Process',
     'description' => 'Description',
     'remark' => 'Remark',
