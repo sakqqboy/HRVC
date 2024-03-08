@@ -27,6 +27,9 @@ return [
         'kpi' => [
             'class' => 'frontend\modules\kpi\kpi',
         ],
+        'evaluation' => [
+            'class' => 'frontend\modules\evaluation\evaluation',
+        ],
     ],
     'components' => [
         'request' => [

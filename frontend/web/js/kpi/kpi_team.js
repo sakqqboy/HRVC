@@ -169,3 +169,78 @@ function setSameKpiTeamRemark(teamId, kpiId) {
 	});
 	
 }
+function assignKpiTeam(kpiId) { 
+	$("#kpiId-team").val(kpiId);
+	var url = $url + 'kpi/kpi-team/assign-kpi-team';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { kpiId: kpiId },
+		success: function(data) {
+		 $("#teamInDepartment").html(data.textTeam);
+		 $("#department-search-team").html(data.textDepartment);
+		}
+	   });
+   }
+   function searchKpiTeam() { 
+	var departmentId = $("#department-search-team").val();
+	var teamName = $("#search-team-name").val();
+	var kpiId = $("#kpiId-team").val();
+	var url = $url + 'kpi/kpi-team/search-team';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { departmentId: departmentId,teamName:teamName,kpiId:kpiId },
+		success: function(data) {
+		 $("#teamInDepartment").html(data.textTeam);
+		}
+	   });
+   }
+   function checkKpiTeam(teamId,kpiId) { 
+	var url = $url + 'kpi/kpi-team/kpi-assign-team';
+	   var checked = 0;
+	   if ($("#kpi-team-" + teamId + '-' + kpiId).prop("checked") == true) {
+		checked = 1;
+	   }
+	   $.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: {kpiId:kpiId,teamId:teamId,checked:checked},
+		success: function (data) {
+		    if (data.status) { 
+		  // $("#totalEmployee-" + kpiId).html(data.totalEmployee);
+		  $("#totalTeam-" + kpiId).html(data.countTeam);
+		    }
+		}
+	   });
+   }
+   function checkAllKpiTeam(kpiId) {
+	    var url = $url + 'kpi/kpi-team/check-all-kpi-team';
+	    $.ajax({
+		   type: "POST",
+		   dataType: 'json',
+		   url: url,
+		   //data: { kpiId: kpiId },
+		   success: function (data) {
+			   if ($("#all-kpi-team-" + kpiId).prop("checked") == true) {
+				   $.each(data.team, function (key, value) {
+					   if ($("#kpi-team-" + value + '-' + kpiId).prop("checked") == false) {
+						   $("#kpi-team-" + value + '-' + kpiId).prop("checked", true);
+			      checkKpiTeam(value,kpiId);
+					   }
+				   });
+			   } else {
+			
+				   $.each(data.team, function (key, value) {
+					   if ($("#kpi-team-" + value + '-' + kpiId).prop("checked") == true) {
+						   $("#kpi-team-" + value + '-' + kpiId).prop("checked", false);
+			      checkKpiTeam(value,kpiId);
+					   }
+				   });
+			   }
+		   }
+	   });
+   }

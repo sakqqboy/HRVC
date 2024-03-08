@@ -1,8 +1,7 @@
-.Environment {
-    font-weight: 700;
-    font-size: 17px;
-    letter-spacing: -0.8px;
-    font-family: 'SF Pro display';
+.environment {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 10px;
+    background-color: #F5F5F5;
 }
 
 .lightCreate {
@@ -11,6 +10,8 @@
 
 .but_createeva {
     padding-top: 1px;
+    padding-bottom: 3px;
+    margin-left: 15px;
 }
 
 .img_select24 {
@@ -20,11 +21,8 @@
 .example-Dha {
     border-radius: 20px;
     background-color: #F0F2F4;
-    font-family: 'SF Pro display';
     font-size: 12px;
     color: black;
-    font-weight: 500;
-    letter-spacing: -0.8px;
 }
 
 .imagesFilterPlus {
@@ -39,7 +37,6 @@
 
 .Moretop {
     font-weight: 600;
-    letter-spacing: -0.8px;
     font-size: 12px;
 }
 
@@ -174,17 +171,13 @@
 
 
 .imagescan {
-    width: 13px;
+    width: 15px;
 }
 
 .borderscan {
-    position: absolute;
     color: black;
-    width: auto;
-    margin-left: 140px;
-    border-radius: 5px;
-    margin-top: -45px;
-    box-shadow: #e0e0e0 0px 0px 5px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
 
 .circle_6 {
@@ -200,25 +193,14 @@
 }
 
 
-.Framee {
-    border-left: 60px #BCD7FF solid;
-}
 
 .halfleft {
     font-weight: 600;
     color: #2376f1;
-    font-size: 13px;
-    margin-top: -40px;
-    padding-left: 15px;
-    position: absolute;
-}
-
-.Toa {
-    margin-left: 82px;
-    color: #A8A6A6;
-    margin-top: -35px;
-    position: absolute;
-    font-size: 10px;
+    font-size: 12px;
+    background-color: #BCD7FF;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
 }
 
 .imageslogoMask1 {
@@ -240,6 +222,10 @@
 .iconsDarkedit-1 {
     cursor: pointer;
     width: 18px;
+}
+.number-circle{
+    border-radius: 100%;
+    border-color: slategrey;
 }
 
 .Dark-edit {
@@ -299,4 +285,15 @@
 
 .half_css {
     width: 100%;
+}
+.data1 {
+    font-weight: 700;
+    margin-top: 30px;
+    color: black;
+}
+
+.between1 {
+    color: black;
+    font-size: 12px;
+    padding-top: 5px;
 }

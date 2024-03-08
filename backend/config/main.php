@@ -27,6 +27,9 @@ return [
         'kpi' => [
             'class' => 'backend\modules\kpi\kpi',
         ],
+        'evaluation' => [
+            'class' => 'backend\modules\evaluation\evaluation',
+        ],
     ],
     'components' => [
         'request' => [

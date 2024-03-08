@@ -121,4 +121,13 @@ class KpiTeam extends \frontend\models\hrvc\master\KpiTeamMaster
             ->all();
         return $kpiTeam;
     }
+    public static function isHasTeam($teamId, $kpiId)
+    {
+        $kpiTeam = KpiTeam::find()->where(["kpiId" => $kpiId, "teamId" => $teamId, "status" => [1, 2, 4]])->one();
+        if (isset($kpiTeam) && !empty($kpiTeam)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }

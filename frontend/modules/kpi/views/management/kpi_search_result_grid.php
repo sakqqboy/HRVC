@@ -150,7 +150,9 @@ $this->title = 'KPI Grid View';
 												Assign
 											</div>
 											<div class="col-12 pt-8 text-center">
-
+												<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/kpi-team-setting/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>" class="btn btn-sm btn-primary text-light font-size-10" title="Indivisual KPI setting">
+													<i class="fa fa-users mr-3" aria-hidden="true"></i> Team
+												</a>
 												<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/indivisual-setting/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>" class="btn btn-sm btn-info text-light font-size-10" title="Indivisual KPI setting">
 													<i class="fa fa-user mr-3" aria-hidden="true"></i> Person
 												</a>

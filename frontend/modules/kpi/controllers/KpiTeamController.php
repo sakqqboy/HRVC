@@ -5,6 +5,7 @@ namespace frontend\modules\kpi\controllers;
 use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
+use frontend\models\hrvc\Department;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Kpi;
 use frontend\models\hrvc\KpiTeam;
@@ -462,6 +463,92 @@ class KpiTeamController extends Controller
 		$teamText = $this->renderAjax('team_history', ["kpiTeamHistory" => $kpiTeamHistory]);
 		$res["kpiTeam"] = $kpiTeam;
 		$res["history"] = $teamText;
+		return json_encode($res);
+	}
+	public function actionAssignKpiTeam()
+	{
+		$kpiId = $_POST["kpiId"];
+		$teams = Team::find()
+			->where(["status" => 1])
+			->orderBy("departmentId,teamName")
+			->all();
+		$textTeam = $this->renderAjax('team', ["teams" => $teams, "kpiId" => $kpiId, "checkAll" => '']);
+		$departmentText = '<option value="">Deparment</option>';
+		$departments = Department::find()
+			->where(["status" => 1])
+			->orderBy("departmentName")
+			->asArray()
+			->all();
+		if (isset($departments) && count($departments)) {
+			foreach ($departments as $dep) :
+				$departmentText .= '<option value="' . $dep['departmentId'] . '">' . $dep['departmentName'] . '</option>';
+			endforeach;
+		}
+		$res["textTeam"] = $textTeam;
+		$res["textDepartment"] = $departmentText;
+		return json_encode($res);
+	}
+	public function actionSearchTeam()
+	{
+		$teamName = $_POST["teamName"];
+		$kpiId = $_POST["kpiId"];
+		$departmentId = $_POST["departmentId"];
+		$teams = Team::find()
+			->where(["status" => 1])
+			->andWhere("teamName LIKE  '" . $teamName . "%'")
+			->andFilterWhere(["departmentId" => $departmentId])
+			->orderBy("departmentId,teamName")
+			->all();
+		$textTeam = $this->renderAjax('team', ["teams" => $teams, "kpiId" => $kpiId, "checkAll" => '']);
+		$res["textTeam"] = $textTeam;
+		return json_encode($res);
+	}
+	public function actionKpiAssignTeam()
+	{
+		$teamId = $_POST["teamId"];
+		$kpiId = $_POST["kpiId"];
+		$checked = $_POST["checked"];
+		$kpiTeam = KpiTeam::find()
+			->where(["kpiId" => $kpiId, "teamId" => $teamId, "status" => [1, 2]])
+			->one();
+		if (isset($kpiTeam) && !empty($kpiTeam)) {
+			if ($checked == 1) {
+				KpiTeam::updateAll(["status" => 1], ["kpiId" => $kpiId, "teamId" => $teamId]);
+			} else {
+				$kpiTeam->delete();
+			}
+		} else {
+			$kpiTeam = new KpiTeam();
+			$kpiTeam->kpiId = $kpiId;
+			$kpiTeam->teamId = $teamId;
+			$kpiTeam->status = 1;
+			$kpiTeam->createDateTime = new Expression('NOW()');
+			$kpiTeam->updateDateTime = new Expression('NOW()');
+			$kpiTeam->save(false);
+		}
+		$kpiTeams = KpiTeam::find()
+			->where(["kpiId" => $kpiId, "status" => [1, 2, 4]])
+			->asArray()
+			->all();
+		$res["status"] = true;
+		$res["countTeam"] = count($kpiTeams);
+		return json_encode($res);
+	}
+	public function actionCheckAllKpiTeam()
+	{
+		$teams = Team::find()
+			->where(["status" => 1])
+			->asArray()
+			->all();
+		$team = [];
+		if (isset($teams) && count($teams) > 0) {
+			$i = 0;
+			foreach ($teams as $t) :
+				$team[$i] = $t["teamId"];
+				$i++;
+			endforeach;
+		}
+		$res["team"] = $team;
 		return json_encode($res);
 	}
 }

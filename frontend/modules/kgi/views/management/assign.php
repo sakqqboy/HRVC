@@ -134,7 +134,6 @@ $this->title = 'Assign KGI';
 												<i class="fa fa-users share-alt-setting" aria-hidden="true"></i>
 												<i class="fa fa-plus-circle circle5"></i>
 											</div>
-
 										</div>
 									</td>
 									<td>
