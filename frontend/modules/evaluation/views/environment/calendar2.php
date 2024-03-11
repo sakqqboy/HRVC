@@ -8,7 +8,7 @@
 	<div class="title-day text-danger">Sat</div>
 </div>
 <div class="row">
-	<div class="col-12 pt-5 pb-15" id="result-date">
+	<div class="col-12 pt-5 pb-15">
 		<?php
 		if (isset($dateValue) && count($dateValue) > 0) {
 			$totalCount = 0;
@@ -24,7 +24,7 @@
 					<?php
 				}
 					?>
-					<div class="day-box text-center mt-10">
+					<div class="day-box text-center mt-5 mouse-day pr-0 pl-0" id="<?= '2' . $day . (int)$month . $year ?>" onclick="javascript:selectDate(2,<?= $day ?>,<?= (int)$month ?>,<?= $year ?>)">
 						<?= $day ?>
 					</div>
 					<?php

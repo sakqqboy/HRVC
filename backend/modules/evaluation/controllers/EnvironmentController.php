@@ -2,6 +2,7 @@
 
 namespace backend\modules\evaluation\controllers;
 
+use backend\models\hrvc\Attribute;
 use backend\models\hrvc\Environment;
 use backend\models\hrvc\Frame;
 use yii\web\Controller;
@@ -40,5 +41,14 @@ class EnvironmentController extends Controller
 			endforeach;
 		}
 		return json_encode($data);
+	}
+	public function actionAttribute()
+	{
+		$attribute = Attribute::find()->where(["status" => 1])
+			->select('attributeName,round,attributeId')
+			->asArray()
+			->orderBy('attributeId ASC')
+			->all();
+		return json_encode($attribute);
 	}
 }

@@ -118,9 +118,10 @@ class AppAsset extends AssetBundle
         'js/setting/scripts.js',
         'js/kgi/kgi_group.js',
         'js/setting/doughnut.js',
-        //'js/setting/accordion.js',
         'js/setting/bonus.js',
-        'js/setting/select_menycountry.js'
+        'js/setting/select_menycountry.js',
+        'js/evaluation/calendar.js',
+        'js/evaluation/evaluation.js'
 
     ];
     public $depends = [

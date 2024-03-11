@@ -6,6 +6,7 @@ use common\carlendar\Carlendar;
 use common\helpers\Path;
 use common\models\ModelMaster;
 use frontend\models\hrvc\Environment;
+use frontend\models\hrvc\Frame;
 use frontend\models\hrvc\Group;
 use Yii;
 use yii\db\Expression;
@@ -39,6 +40,11 @@ class EnvironmentController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/index');
 		$environments = curl_exec($api);
 		$environments = json_decode($environments, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/attribute');
+		$attribute = curl_exec($api);
+		$attribute = json_decode($attribute, true);
+
 		curl_close($api);
 
 		$date = date('Y-m-d');
@@ -64,6 +70,56 @@ class EnvironmentController extends Controller
 			"dateValue" => $dateValue,
 			"thisMonth" => $thisMonth,
 			"thisYear" => $thisYear,
+			"attribute" => $attribute
 		]);
+	}
+	public function actionCreateFrame()
+	{
+		$frame = new Frame();
+		$frame->frameName = $_POST["frameName"];
+	}
+	public function actionCalendar()
+	{
+		$year = $_POST["year"];
+		$month = $_POST["month"];
+		$type = $_POST["type"];
+		if ($month < 10) {
+			$month = "0" . $month;
+		}
+		$day = date('d');
+		$date = $year . "-" . $month . "-" . $day;
+		$dateValue = Carlendar::currentMonth($date);
+		//$selectMonth = $month;
+		//$selectDate = ModelMaster::engDate($date, 1);
+		$thisMonth = ModelMaster::monthEng($month, 1);
+		$file = 'calendar' . $type;
+		$textCalendar = $this->renderAjax($file, [
+			"dateValue" => $dateValue
+		]);
+		$res["status"] = true;
+		$res["newCalendar"] = $textCalendar;
+		$res["monthYear"] = $thisMonth . '&nbsp;&nbsp;&nbsp;' . $year;
+		return json_encode($res);
+	}
+	public function actionInputDate()
+	{
+		$day = $_POST["day"];
+		$month = $_POST["month"];
+		$year = $_POST["year"];
+		$lastDigit = substr($day, -1);
+		if ($lastDigit == 1) {
+			$day .= '<sup>st</sup>';
+		} else if ($lastDigit == 2) {
+			$day .= '<sup>nd</sup>';
+		} else if ($lastDigit == 3) {
+			$day .= '<sup>rd</sup>';
+		} else {
+			$day .= '<sup>th</sup>';
+		}
+		$fullMonth = ModelMaster::monthEng($month, 1);
+		$fullText = $day . "&nbsp;" . $fullMonth . "&nbsp;" . $year;
+		$res["fullDate"] = $fullText;
+		$res["status"] = true;
+		return json_encode($res);
 	}
 }

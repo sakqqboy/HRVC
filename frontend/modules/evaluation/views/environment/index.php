@@ -76,7 +76,7 @@ $this->title = 'Evaluation';
 						</div>
 
 						<div class="col-5 borderscan bg-white pt-11 pb-8 border-left pr-5 pl-5">
-							<div class="col-12 pt-0 pb-3 text-center bg-light text-primary" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;cursor:pointer;" data-bs-target="#create_frame" data-bs-toggle="modal">
+							<div class="col-12 pt-0 pb-3 text-center bg-light text-primary" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;cursor:pointer;" data-bs-target="#create_frame" data-bs-toggle="modal" onclick="javascript:environmentFrame(<?= $environmentId['environmentId'] ?>)">
 								<img src="<?= Yii::$app->homeUrl ?>image/scan.png" class="imagescan mr-5">
 								<span class="font-size-10"> Create Frame</span>
 							</div>
@@ -129,12 +129,24 @@ $this->title = 'Evaluation';
 	<?php
 	endforeach;
 	?>
+	<?php
+	$form = ActiveForm::begin([
+		'id' => 'create-frame',
+		'method' => 'post',
+		'options' => [
+			'enctype' => 'multipart/form-data',
+		],
+		'action' => Yii::$app->homeUrl . 'evaluation/environment/create-frame'
+
+	]); ?>
 	<?= $this->render('modal_create_frame', [
 		"companies" => $companies,
 		"dateValue" => $dateValue,
 		"thisMonth" => $thisMonth,
 		"thisYear" => $thisYear,
+		"attribute" => $attribute
 	]) ?>
+	<?php ActiveForm::end(); ?>
 </div>
 
 
