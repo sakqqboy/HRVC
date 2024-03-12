@@ -153,7 +153,7 @@ $this->title = 'Salary Register';
                                                 </div>
                                             </div>
                                         </div>
-                                      
+
                                     <?php
                                     }
                                     ?>
@@ -304,7 +304,7 @@ $this->title = 'Salary Register';
 <div class="modal fade" id="salaryRegistration" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="row pl-20 pr-20 pt-">dfjdhf
+            <div class="row pl-20 pr-20 pt-">
                 <div class="col-2">
                     <div class="modal-title" id="exampleModalLabel">
                         <img src="<?= Yii::$app->homeUrl ?>image/Roof.png" class="logo_regis">
