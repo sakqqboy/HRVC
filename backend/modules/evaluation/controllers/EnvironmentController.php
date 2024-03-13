@@ -5,6 +5,9 @@ namespace backend\modules\evaluation\controllers;
 use backend\models\hrvc\Attribute;
 use backend\models\hrvc\Environment;
 use backend\models\hrvc\Frame;
+use backend\models\hrvc\FrameTerm;
+use backend\models\hrvc\TermItem;
+use common\models\ModelMaster;
 use yii\web\Controller;
 
 header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
@@ -50,5 +53,88 @@ class EnvironmentController extends Controller
 			->orderBy('attributeId ASC')
 			->all();
 		return json_encode($attribute);
+	}
+	public function actionEnvironmentFrame($environmentId)
+	{
+		$frames = Frame::find()
+			->select('frame.*,a.attributeName,a.attributeId')
+			->JOIN("LEFT JOIN", "attribute a", "a.attributeId=frame.attributeId")
+			->where(["frame.environmentId" => $environmentId])
+			->asArray()
+			->orderBy('frame.createDateTime')
+			->all();
+		return json_encode($frames);
+	}
+	public function actionFrameTermWithItems($frameId)
+	{
+		$terms = FrameTerm::find()
+			->where(["frameId" => $frameId])
+			->asArray()
+			->orderBy('sort')
+			->all();
+		$data = [];
+		if (isset($terms) && count($terms) > 0) {
+			foreach ($terms as $term) :
+				$termItems = TermItem::find()
+					->select('ts.stepName,term_item.*')
+					->JOIN("LEFT JOIN", "term_step ts", "ts.stepId=term_item.stepId")
+					->where(["term_item.termId" => $term["termId"]])
+					->orderBy('ts.sort')
+					->asArray()
+					->all();
+				$items = [];
+				if (isset($termItems) && count($termItems) > 0) {
+					foreach ($termItems as $item) :
+						$items[$item["termItemId"]] = [
+							"termId" => $item["termId"],
+							"stepId" => $item["stepId"],
+							"stepName" => $item["stepName"],
+							"startDate" => ModelMaster::dateFullFormat($item["startDate"]),
+							"finishDate" => ModelMaster::dateFullFormat($item["finishDate"]),
+							"status" => $item["status"],
+							"duration" => ModelMaster::dateDuration($item["startDate"], $item["finishDate"])
+						];
+					endforeach;
+				}
+				$data[$term["termId"]] = [
+					"termName" => $term["termName"],
+					"startDate" => ModelMaster::dateFullFormat($term["startDate"]),
+					"finishDate" => ModelMaster::dateFullFormat($term["endDate"]),
+					"startDateValue" => $term["startDate"],
+					"finishDateValue" => $term["endDate"],
+					"midDateValue" => $term["midDate"],
+					"minDate" => ModelMaster::dateFullFormat($term["midDate"]),
+					"isBonus" => (int)$term["isIncludeBonus"],
+					"items" => $items
+				];
+			endforeach;
+		}
+		return json_encode($data);
+	}
+	public function actionFrameDetail($frameId)
+	{
+		$frame = Frame::find()->where(["frameId" => $frameId])->asArray()->one();
+		$terms = FrameTerm::find()
+			->where(["frameId" => $frameId])
+			->asArray()
+			->orderBy('sort')
+			->all();
+		$allTerm = [];
+		if (isset($terms) && count($terms) > 0) {
+			foreach ($terms as $term) :
+				$allTerm[$term["termId"]] = [
+					"termName" => $term["termName"],
+					"status" => $term["status"]
+				];
+			endforeach;
+		}
+		$data = [
+			"frameName" => $frame["frameName"],
+			"startDate" => ModelMaster::engDate($frame["startDate"], 2),
+			"finishDate" => ModelMaster::engDate($frame["endDate"], 2),
+			"status" => $frame["status"],
+			"allTerm" => $allTerm
+		];
+		return json_encode($data);
 	}
 }

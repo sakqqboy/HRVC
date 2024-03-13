@@ -14,7 +14,7 @@ use Yii;
     * @property string $startDate
     * @property string $endDate
     * @property string $midDate
-    * @property integer $isIncludeBous
+    * @property integer $isIncludeBonus
     * @property integer $status
     * @property string $createDateTime
     * @property string $updateDateTime
@@ -35,11 +35,11 @@ return 'frame_term';
 public function rules()
 {
 return [
-            [['termName', 'frameId', 'startDate', 'endDate'], 'required'],
+            [['termName', 'frameId'], 'required'],
             [['frameId'], 'integer'],
             [['startDate', 'endDate', 'midDate', 'createDateTime', 'updateDateTime'], 'safe'],
             [['termName'], 'string', 'max' => 100],
-            [['sort', 'isIncludeBous', 'status'], 'string', 'max' => 10],
+            [['sort', 'isIncludeBonus', 'status'], 'string', 'max' => 10],
         ];
 }
 
@@ -56,7 +56,7 @@ return [
     'startDate' => 'Start Date',
     'endDate' => 'End Date',
     'midDate' => 'Mid Date',
-    'isIncludeBous' => 'Is Include Bous',
+    'isIncludeBonus' => 'Is Include Bonus',
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',
     'updateDateTime' => 'Update Date Time',

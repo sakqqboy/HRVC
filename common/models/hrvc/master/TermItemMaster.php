@@ -9,7 +9,7 @@ use Yii;
 *
     * @property integer $termItemId
     * @property integer $termId
-    * @property string $itemName
+    * @property integer $stepId
     * @property string $startDate
     * @property string $finishDate
     * @property integer $status
@@ -32,10 +32,9 @@ return 'term_item';
 public function rules()
 {
 return [
-            [['termId', 'itemName'], 'required'],
-            [['termId'], 'integer'],
+            [['termId', 'stepId'], 'required'],
+            [['termId', 'stepId'], 'integer'],
             [['startDate', 'finishDate', 'createDateTime', 'updateDateTime'], 'safe'],
-            [['itemName'], 'string', 'max' => 100],
             [['status'], 'string', 'max' => 10],
         ];
 }
@@ -48,7 +47,7 @@ public function attributeLabels()
 return [
     'termItemId' => 'Term Item ID',
     'termId' => 'Term ID',
-    'itemName' => 'Item Name',
+    'stepId' => 'Step ID',
     'startDate' => 'Start Date',
     'finishDate' => 'Finish Date',
     'status' => 'Status',

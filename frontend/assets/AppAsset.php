@@ -23,7 +23,7 @@ class AppAsset extends AssetBundle
         'css/home/kpi-summary.css',
         'css/home/department.css',
         'css/home/calendar.css',
-        'css/home/evaluation.css',
+        //'css/home/evaluation.css',
         'css/home/dashboard-kpi2.css',
         'css/home/kgimanagement.css',
         'css/home/kpimanagement.css',
