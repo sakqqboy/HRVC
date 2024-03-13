@@ -42,7 +42,8 @@ $this->title = 'Evaluation';
 		</div>
 	</div>
 	<?php
-	foreach ($environments as $environment) :
+	$i = 1;
+	foreach ($environments as $environmentId => $environment) :
 	?>
 		<div class="col-12 mt-15 environment ">
 			<div class="row">
@@ -76,7 +77,7 @@ $this->title = 'Evaluation';
 						</div>
 
 						<div class="col-5 borderscan bg-white pt-11 pb-8 border-left pr-5 pl-5">
-							<div class="col-12 pt-0 pb-3 text-center bg-light text-primary" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;cursor:pointer;" data-bs-target="#create_frame" data-bs-toggle="modal" onclick="javascript:environmentFrame(<?= $environmentId['environmentId'] ?>)">
+							<div class="col-12 pt-0 pb-3 text-center bg-light text-primary" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;cursor:pointer;" data-bs-target="#create_frame" data-bs-toggle="modal" onclick="javascript:environmentFrame(<?= $environmentId ?>)">
 								<img src="<?= Yii::$app->homeUrl ?>image/scan.png" class="imagescan mr-5">
 								<span class="font-size-10"> Create Frame</span>
 							</div>
@@ -116,19 +117,23 @@ $this->title = 'Evaluation';
 					</a>
 				</div>
 				<div class="col-lg-1 col-2 border-left text-center pt-13">
-					<a href="" class="btn-primary btn font-size-12 pl-0 pr-0" style="width:35px;height:35px;display:none;">
+					<a href="javascript:hideFrame(<?= $environmentId ?>)" id="hide-frame-<?= $environmentId ?>" class="btn-primary btn font-size-12 pl-0 pr-0" style="width:35px;height:35px;display:none;">
 						<i class="fa fa-chevron-up" aria-hidden="true"></i>
 					</a>
-					<a href="" class="btn-primary btn font-size-12 pl-0 pr-0" style="width:35px;height:35px;">
+					<a href="javascript:showFrame(<?= $environmentId ?>)" id="show-frame-<?= $environmentId ?>" class="btn-primary btn font-size-12 pl-0 pr-0" style="width:35px;height:35px;">
 						<i class="fa fa-chevron-down" aria-hidden="true"></i>
 					</a>
 				</div>
 			</div>
 
 		</div>
+		<div class="col-12 pl-20 pr-20" id="environment-frame-<?= $environmentId ?>"></div>
+
 	<?php
+		$i++;
 	endforeach;
 	?>
+	<input type="hidden" id="current-show" value="">
 	<?php
 	$form = ActiveForm::begin([
 		'id' => 'create-frame',
@@ -146,6 +151,7 @@ $this->title = 'Evaluation';
 		"thisYear" => $thisYear,
 		"attribute" => $attribute
 	]) ?>
+	<input type="hidden" value="<?= Yii::$app->request->url ?>" name="previousUrl">
 	<?php ActiveForm::end(); ?>
 </div>
 

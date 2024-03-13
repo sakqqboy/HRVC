@@ -10,9 +10,10 @@ use Yii;
     * @property integer $environmentId
     * @property integer $companyId
     * @property integer $branchId
+    * @property integer $isAllEmployee
     * @property integer $status
     * @property string $createDateTime
-    * @property string $udpateDateTime
+    * @property string $updateDateTime
 */
 class EnvironmentMaster extends \common\models\ModelMaster
 {
@@ -32,8 +33,8 @@ public function rules()
 return [
             [['companyId', 'branchId'], 'required'],
             [['companyId', 'branchId'], 'integer'],
-            [['createDateTime', 'udpateDateTime'], 'safe'],
-            [['status'], 'string', 'max' => 10],
+            [['createDateTime', 'updateDateTime'], 'safe'],
+            [['isAllEmployee', 'status'], 'string', 'max' => 10],
         ];
 }
 
@@ -46,9 +47,10 @@ return [
     'environmentId' => 'Environment ID',
     'companyId' => 'Company ID',
     'branchId' => 'Branch ID',
+    'isAllEmployee' => 'Is All Employee',
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',
-    'udpateDateTime' => 'Udpate Date Time',
+    'updateDateTime' => 'Update Date Time',
 ];
 }
 }

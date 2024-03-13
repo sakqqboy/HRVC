@@ -57,10 +57,13 @@ function nextMonth(type) {
 }
 
 
-
-
-
 console.clear();
+// idle
+// -> onPointerDown
+// dragging
+// -> onPointerMove / onPointerOver
+// <- onPointerUp
+/* NOTE: We retooled the data to be based on first selection and second selection. We'll calculate which is the start & end date later in the `updateDOM` function. */
 const data = {
 	firstDate: null,
 	secondDate: null
@@ -103,13 +106,14 @@ function send(event) {
 		updateDOM();
 	}
 }
-
+/* ---------------------------------- */
 const allDayEls = document.querySelectorAll('[data-day]');
 allDayEls.forEach(dayEl => {
 	dayEl.addEventListener('pointerdown', send);
 	dayEl.addEventListener('pointerover', send);
 });
 document.body.addEventListener('pointerup', send);
+/* ---------------------------------- */
 function updateDOM() {
 	document.querySelectorAll('[data-selected]')
 		.forEach(el => {
@@ -126,3 +130,5 @@ function updateDOM() {
 		endDateEl.dataset.selected = "end";
 	}
 }
+
+

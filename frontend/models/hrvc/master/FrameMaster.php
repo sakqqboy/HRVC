@@ -9,6 +9,7 @@ use Yii;
 *
     * @property integer $frameId
     * @property string $frameName
+    * @property integer $environmentId
     * @property string $startDate
     * @property string $endDate
     * @property integer $attributeId
@@ -33,9 +34,9 @@ return 'frame';
 public function rules()
 {
 return [
-            [['frameName', 'attributeId'], 'required'],
+            [['frameName', 'environmentId', 'attributeId'], 'required'],
+            [['environmentId', 'attributeId'], 'integer'],
             [['startDate', 'endDate', 'createDateTime', 'updateDateTime'], 'safe'],
-            [['attributeId'], 'integer'],
             [['frameName'], 'string', 'max' => 255],
             [['isMid', 'status'], 'string', 'max' => 10],
         ];
@@ -49,6 +50,7 @@ public function attributeLabels()
 return [
     'frameId' => 'Frame ID',
     'frameName' => 'Frame Name',
+    'environmentId' => 'Environment ID',
     'startDate' => 'Start Date',
     'endDate' => 'End Date',
     'attributeId' => 'Attribute ID',

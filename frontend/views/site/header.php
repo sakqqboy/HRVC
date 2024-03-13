@@ -120,7 +120,7 @@ use frontend\models\hrvc\UserRole;
                         </div>
                         <div class="col-12 haeder-Evalution"> EVALUTION SETTINGS</div>
                         <div class="col-12">
-                                <a href="<?= Yii::$app->homeUrl ?>site/master-dashboard" class="no-underline">
+                                <a href="<?= Yii::$app->homeUrl ?>evaluation/environment" class="no-underline">
                                         <i class="fa fa-pencil-square-o pr-10 mt-20" aria-hidden="true"></i>
                                         Evaluetion
                                 </a>

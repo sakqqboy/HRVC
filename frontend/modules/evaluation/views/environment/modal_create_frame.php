@@ -6,7 +6,7 @@
 					<div class="row">
 						<div class="col-4 font-b font-size-14 pl-30 pt-10 pr-0">Evaluation Time Frame</div>
 						<div class="col-8  pt-10">
-							<input type="text" class="form-control font-size-14" style="height: 30px;" id="frameName" name="frameNAme" required>
+							<input type="text" class="form-control font-size-14" style="height: 30px;" id="frameName" name="frameName" required>
 						</div>
 					</div>
 				</div>
@@ -64,8 +64,8 @@
 								<div class="col-12 pb-10 pt-10 pl-20 font-size-12" style="background-color: #F0F2F4;border-radius:10px;">
 									<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Calender.png" class="imagescan mr-5">
 									From <span class="ml-10 mr-10" id="fromDate"> - </span>To<span class="ml-10" id="toDate">-</span>
-									<input type="hidden" id="fromDateVal" value="" required>
-									<input type="hidden" id="toDateVal" value="" required>
+									<input type="hidden" id="fromDateVal" value="" required name="fromDate">
+									<input type="hidden" id="toDateVal" value="" required name="toDate">
 
 								</div>
 							</div>
@@ -78,7 +78,7 @@
 							foreach ($attribute as $atr) : ?>
 								<div class="row mt-20">
 									<div class="col-2 pr-0 text-end">
-										<input type="radio" class="form-check-input" name="attribute" required>
+										<input type="radio" class="form-check-input" name="attribute" required value="<?= $atr['attributeId'] ?>">
 									</div>
 									<div class="col-3 mt-12 border-top"></div>
 									<div class="col-6 border pt-3 pb-3 pr-0 pl-5 text-center font-size-11" style="margin-top: -1px;"><?= $atr["attributeName"] ?></div>
@@ -90,12 +90,12 @@
 						<div class="col-12 mt-30 font-size-12">
 							<span class="text-danger font-b">*</span> MidTerm Review
 							<div class="col-12 mt-10">
-								<input type="radio" class="form-check-input" name="isMid" required> Yes
-								<input type="radio" class="form-check-input ml-20" name="isMid" required> No
+								<input type="radio" class="form-check-input" name="isMid" required value="1"> Yes
+								<input type="radio" class="form-check-input ml-20" name="isMid" required value="0"> No
 							</div>
 						</div>
 						<div class="col-12 text-end pr-10 pt-10 pb-5">
-							<input type="hidden" id="environmentId" value="">
+							<input type="hidden" id="environmentId" value="" name="environmentId">
 							<button type="submit" class="btn btn-primary font-size-14">Create</button>
 							<!-- <a href="javascript:checkFrameRequire()" class="btn btn-primary font-size-14">Create</a> -->
 						</div>

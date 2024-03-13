@@ -441,4 +441,41 @@ class ModelMaster extends \yii\db\ActiveRecord
             return 0;
         }
     }
+    public static function dateFullFormat($date)
+    {
+        if ($date != '') {
+            $dateArr = explode('-', $date);
+            $day = $dateArr[2];
+            $month = $dateArr[1];
+            $year = $dateArr[0];
+            $lastDigit = substr($day, -1);
+            if ($lastDigit == 1) {
+                $day .= '<sup>st</sup>';
+            } else if ($lastDigit == 2) {
+                $day .= '<sup>nd</sup>';
+            } else if ($lastDigit == 3) {
+                $day .= '<sup>rd</sup>';
+            } else {
+                $day .= '<sup>th</sup>';
+            }
+            $fullMonth = ModelMaster::monthEng($month, 1);
+            $fullText = $day . "&nbsp;" . $fullMonth . "&nbsp;" . $year;
+            return $fullText;
+        } else {
+            return null;
+        }
+    }
+    public static function dateDuration($from, $to)
+    {
+        if ($from != '' && $to != '') {
+            $fromDate = strtotime($from);
+            $toDate = strtotime($to);
+            //if ($toDate > $fromDate) {
+            $diff = $toDate - $fromDate;
+            $diffDate = floor($diff / 86400); //จำนวนวันที่ต่างกัน
+            return $diffDate;
+        } else {
+            return 0;
+        }
+    }
 }

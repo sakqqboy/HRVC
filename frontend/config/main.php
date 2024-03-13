@@ -112,6 +112,7 @@ return [
                 'kpi/management/kpi-detail/<hash>' => 'kpi/management/kpi-detail',
                 'kpi/kpi-team/kpi-team-search-result/<hash>' => 'kpi/kpi-team/kpi-team-search-result',
                 'kpi/kpi-personal/kpi-personal-search-result/<hash>' => 'kpi/kpi-personal/kpi-personal-search-result',
+                'evaluation/environment/frame-setting/<hash>' => 'evaluation/environment/frame-setting',
 
             ],
         ],
