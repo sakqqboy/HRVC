@@ -86,23 +86,21 @@ $this->title = 'PMI Weight Allocation';
                         <div class="FrameEvaluation"> PMI Weight Allocation</div>
                     </div>
                     <div class="col-4">
-                        <button type="submit" class="btn btn-primary"> Allocate Weight</button>
+                        <button type="submit" class="btn text-white pt-4 pb-4" style="border-radius: 3px;background-color:#2580D3;font-size:13px;"> Allocate Weight</button>
                     </div>
                     <div class="col-4 text-end">
-                        <button type="submit" class="btn btn-info Next-1"> Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+                        <button type="submit" class="btn btn-info Next-1 pt-4 pb-4"> Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
                     </div>
                 </div>
                 <div class="row mt-20">
                     <div class="col-lg-9">
-                        <div class="alert alert-Evaluator">
-                            <div class="col-12 andAccounts">
-                                Accounts & Taxation
-                            </div>
+                        <div class="col-12 andAccounts">
+                            Accounts & Taxation
                         </div>
-                        <div class="row">
+                        <div class="row mt-20">
                             <div class="col-lg-2 col-md-6 col-12">
                                 <div class="alert alert-Evaluator">
-                                    <div class="col-12 text.PIM">
+                                    <div class="col-12 text_PIM">
                                         PIM
                                     </div>
                                     <div class="col-12 mt-10">
@@ -166,13 +164,12 @@ $this->title = 'PMI Weight Allocation';
                                                 </div>
                                             </div>
                                             <div class="col-3 text-end">
-                                                <span class="badge rounded-pill bg-gray">
+                                                <span class="badge rounded-pill bg-gray pt-2 pb-2">
                                                     <ul class="try-cricle">
-                                                        <li class="tri-li"> <img src="/HRVC/frontend/web/image/avatar1.png" class="image-avatar1"></li>
-                                                        <li class="tri-li"> <img src="/HRVC/frontend/web/image/Watanabe.png" class="image-avatar2"></li>
-                                                        <li class="tri-li"> <img src="/HRVC/frontend/web/image/avatar3.png" class="image-avatar3"></li>
+                                                        <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
+                                                        <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
                                                         <a href="" class="none">
-                                                            <li class="tri-li-number"> 3 </li>
+                                                            <li class="tri-li-number"> 2 </li>
                                                         </a>
                                                     </ul>
                                                 </span>
@@ -180,22 +177,30 @@ $this->title = 'PMI Weight Allocation';
                                         </div>
                                         <hr>
                                         <div class="row">
-                                            <div class="col-lg-2">
-                                                <div class="card" style="width: 4rem;font-size:12px;">
-                                                    <div class="card-header fonTotal">Total Sales</div>
-                                                    <div class="card-body text-dark">
-                                                        <div class="col-12">
-                                                            <span class="badge bg-lighttotal text-primary">
-                                                                <?= number_format(598) ?>k
-                                                            </span>
-                                                        </div>
-                                                        <div class="col-12 text-primary text-center pt-10">
-                                                            <?= number_format(23) ?>%
+                                            <?php
+                                            for ($i = 1; $i <= 6; $i++) {
+                                            ?>
+
+                                                <div class="col-lg-2">
+                                                    <div class="card font-size-12" style="width: 3rem;margin-left:-3px;">
+                                                        <div class="card-header fonTotal">Total Sales</div>
+                                                        <div class="card-body text-dark">
+                                                            <div class="col-12">
+                                                                <span class="badge bg-lighttotal text-primary">
+                                                                    <?= number_format(598) ?>k
+                                                                </span>
+                                                            </div>
+                                                            <div class="col-12 text-primary text-center pt-10" style="font-size:9px;">
+                                                                <?= number_format(23) ?>%
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-2">
+
+                                            <?php
+                                            }
+                                            ?>
+                                            <!-- <div class="col-lg-2">
                                                 <div class="card" style="width: 4rem;font-size:12px;">
                                                     <div class="card-header fonTotal">Profit</div>
                                                     <div class="card-body text-dark">
@@ -269,7 +274,7 @@ $this->title = 'PMI Weight Allocation';
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                     <div class="card">
@@ -283,13 +288,12 @@ $this->title = 'PMI Weight Allocation';
                                                 </div>
                                             </div>
                                             <div class="col-3 text-end">
-                                                <span class="badge rounded-pill bg-gray">
+                                                <span class="badge rounded-pill bg-gray pt-2 pb-2">
                                                     <ul class="try-cricle">
-                                                        <li class="tri-li"> <img src="/HRVC/frontend/web/image/avatar1.png" class="image-avatar1"></li>
-                                                        <li class="tri-li"> <img src="/HRVC/frontend/web/image/Watanabe.png" class="image-avatar2"></li>
-                                                        <li class="tri-li"> <img src="/HRVC/frontend/web/image/avatar3.png" class="image-avatar3"></li>
+                                                        <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
+                                                        <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
                                                         <a href="" class="none">
-                                                            <li class="tri-li-number"> 3 </li>
+                                                            <li class="tri-li-number"> 2 </li>
                                                         </a>
                                                     </ul>
                                                 </span>
@@ -348,68 +352,36 @@ $this->title = 'PMI Weight Allocation';
                             </div>
                         </div>
                     </div>
+
                     <div class="col-lg-3 col-md-6 col-12">
-                        <div class="alert alert-Evaluator">
-                            <div class="col-12 txt-Weight">
-                                <img src="<?= Yii::$app->homeUrl ?>image/weight.png" class="image-weight"> &nbsp; Weight Configurations
-                            </div>
-                            <div class="col-12 alert-white mt-15" style="border: none;">
-                                <div class="row">
-                                    <div class="col-8 border-edit mt-20">
-                                        Accounts & Taxation
+                        <div class="col-12 txt-Weight mt-10">
+                            <img src="<?= Yii::$app->homeUrl ?>image/weight.png" class="image-weight"> &nbsp; Weight Configurations
+                        </div>
+                        <div class="alert alert-Evaluator mt-15">
+                            <div class="card background_E7F0FE pl-10 pr-10">
+
+                                <?php
+                                for ($i = 1; $i <= 8; $i++) {
+                                ?>
+
+                                    <div class="badge bg-white mt-10 pt-7 pb-7" style="border-radius: 1px;">
+                                        <div class="row">
+                                            <div class="col-10 border-edit  text-start">
+                                                Internal Control
+                                            </div>
+                                            <div class="col-1">
+                                                <i class="fa fa-pencil-square-o weight-pencil" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="col-1">
+                                                <i class="fa fa-trash weight-trash" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-4 text-end border-edit mt-20">
-                                        <i class="fa fa-pencil-square-o weight-pencil" aria-hidden="true"></i> <i class="fa fa-trash weight-trash" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="col-8 border-edit mt-20">
-                                        Biki Das
-                                    </div>
-                                    <div class="col-4 text-end border-edit mt-20">
-                                        <i class="fa fa-pencil-square-o weight-pencil" aria-hidden="true"></i> <i class="fa fa-trash weight-trash" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="col-8 border-edit mt-10">
-                                        Internal Control
-                                    </div>
-                                    <div class="col-4 text-end border-edit mt-20">
-                                        <i class="fa fa-pencil-square-o weight-pencil" aria-hidden="true"></i> <i class="fa fa-trash weight-trash" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="col-8 border-edit mt-10">
-                                        Amir San
-                                    </div>
-                                    <div class="col-4 text-end border-edit mt-20">
-                                        <i class="fa fa-pencil-square-o weight-pencil" aria-hidden="true"></i> <i class="fa fa-trash weight-trash" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="col-8 border-edit mt-20">
-                                        Amir San
-                                    </div>
-                                    <div class="col-4 text-end border-edit mt-20">
-                                        <i class="fa fa-pencil-square-o weight-pencil" aria-hidden="true"></i> <i class="fa fa-trash weight-trash" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="col-8 border-edit mt-20">
-                                        Internal Control
-                                    </div>
-                                    <div class="col-4 text-end border-edit mt-20">
-                                        <i class="fa fa-pencil-square-o weight-pencil" aria-hidden="true"></i> <i class="fa fa-trash weight-trash" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="col-8 border-edit mt-20">
-                                        Amir San
-                                    </div>
-                                    <div class="col-4 text-end border-edit mt-20">
-                                        <i class="fa fa-pencil-square-o weight-pencil" aria-hidden="true"></i> <i class="fa fa-trash weight-trash" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="col-8 border-edit mt-20">
-                                        Amir San
-                                    </div>
-                                    <div class="col-4 text-end border-edit mt-20">
-                                        <i class="fa fa-pencil-square-o weight-pencil" aria-hidden="true"></i> <i class="fa fa-trash weight-trash" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="col-8 border-edit mt-20">
-                                        Internal Control
-                                    </div>
-                                    <div class="col-4 text-end border-edit mt-20">
-                                        <i class="fa fa-pencil-square-o weight-pencil" aria-hidden="true"></i> <i class="fa fa-trash weight-trash" aria-hidden="true"></i>
-                                    </div>
-                                </div>
+
+                                <?php
+                                }
+                                ?>
+
                             </div>
                         </div>
                     </div>

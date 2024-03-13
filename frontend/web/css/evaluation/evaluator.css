@@ -2,11 +2,15 @@
     background-color: #F4F6F9;
 }
 
+.alert-dashboardE1 {
+    background-color: #F4F6F9;
+}
+
 .setEvaluator {
-    font-size: 18px;
+    font-size: 16px;
     color: black;
     font-weight: 700;
-    line-height: 25px;
+    line-height: 20px;
     padding-top: 10px;
 }
 
@@ -60,98 +64,7 @@
 
 .FrameEvaluation {
     font-weight: 700;
-    font-size: 20px;
-}
-
-
-
-.calendar-week {
-    display: flex;
-    list-style: none;
-    align-items: center;
-    padding-inline-start: 0px;
-}
-
-.calendar-week-day {
-    max-width: 57.1px;
-    width: 100%;
-    text-align: center;
-    color: #525659;
-    text-transform: uppercase;
-    font-size: 14px;
-}
-
-.calendar-days {
-    margin-top: 30px;
-    list-style: none;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    gap: 5px;
-    padding-inline-start: 0px;
-}
-
-.calendar-day {
-    text-align: center;
-    color: #525659;
-    padding: 5px;
-    font-size: 13px;
-}
-
-.calendar-month-arrow-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.calendar-month-year-container {
-    padding: 10px 10px 20px 10px;
-    color: #525659;
-    cursor: pointer;
-}
-
-.calendar-arrow-container {
-    margin-top: -5px;
-}
-
-.calendar-left-arrow,
-.calendar-right-arrow {
-    height: 20px;
-    width: 20px;
-    font-size: 11px;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    color: #525659;
-}
-
-.calendar-today-button {
-    margin-top: -10px;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    color: #525659;
-    padding: 5px 10px;
-}
-
-.calendar-today-button {
-    width: 84px;
-    height: 27px;
-    font-size: 13px;
-    margin-right: 10px;
-    background-color: #4294FF;
-    color: white;
-}
-
-.calendar-months,
-.calendar-years {
-    flex: 1;
-    border-radius: 10px;
-    height: 30px;
-    border: none;
-    cursor: pointer;
-    outline: none;
-    color: #525659;
-    font-size: 15px;
+    font-size: 17px;
 }
 
 .calendar-day-active {
@@ -169,6 +82,7 @@
 .TODAY-TRANS {
     text-transform: uppercase;
     color: #308FFF;
+    font-size: 12px;
 }
 
 .bg-Today {
@@ -184,131 +98,15 @@
 .Note-Today1 {
     color: #308FFF;
     margin-top: 10px;
-    font-size: 22px;
+    font-size: 15px;
 }
 
 .Note-Today2 {
     color: #fc4aa0;
     margin-top: 10px;
-    font-size: 22px;
+    font-size: 15px;
 }
 
-.number-Today {
-    color: #A6A1A1;
-    font-size: 12px;
-    margin-top: -10px;
-}
-
-.notestartdate {
-    font-size: 12px;
-    color: #A6A1A1;
-    padding-left: 30px;
-}
-
-.notefinishdate {
-    font-size: 12px;
-    color: #A6A1A1;
-    padding-left: 30px;
-}
-
-.imgstart-end {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-}
-
-.mon1 {
-    width: 30px;
-}
-
-
-.cont {
-    height: 100%;
-    left: calc(60% - 300px);
-    padding: 0;
-    margin: -5px;
-    position: absolute;
-}
-
-#nprogress-bar {
-    /* -webkit-appearance: none; */
-    width: 470px;
-    color: #CCC;
-    height: 2px;
-    margin: 0 auto;
-}
-
-#first,
-#second,
-#third,
-#fourth {
-    margin: 0px;
-}
-
-
-#step span {
-    height: 30px;
-    width: 30px;
-    border-radius: 10%;
-    border: 1px solid #CCC;
-    background: #CCCCCC;
-    position: absolute;
-    color: #ffffff;
-    top: -10px;
-    cursor: pointer;
-    transition: all 0.4s ease-in-out;
-}
-
-#step {
-    height: 100px;
-    width: 100%;
-}
-
-#step span i {
-    padding: 8px;
-    font-size: 13px;
-}
-
-#step .first {
-    left: -10px;
-}
-
-
-#step .second {
-    left: 150px;
-}
-
-#step .third {
-    left: 300px;
-}
-
-#step .fourth {
-    left: 450px;
-}
-
-.detail {
-    position: relative;
-}
-
-#nprogress-bar::-webkit-progress-value {
-    background: #049dfe;
-    transition: all 0.4s ease-in-out;
-}
-
-#nprogress-bar::-webkit-progress-bar {
-    background: #CCC;
-}
-
-#step .border-change {
-    border-color: #0077c2;
-    background: #049dfe;
-    transition: all 0.4s ease-in-out;
-}
-
-.alert-dashboardE1 {
-    background-color: #F4F6F9;
-}
 
 .trantRankColorE1 {
     border-radius: 6px;
@@ -324,4 +122,116 @@
     color: black;
     background-color: #ffffff;
     border-left: 6px #FFDB1F solid;
+}
+
+*,
+*::before,
+*::after {
+    position: relative;
+    box-sizing: border-box;
+}
+
+:root {
+    --color-primary: #509CE3;
+}
+
+.calendar {
+    font-size: 12px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 0;
+    margin: auto;
+    padding: 1em;
+    /* border-radius: 50px; */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+}
+
+.months_day1 {
+    font-size: 10px;
+    font-weight: 500;
+    color: rgb(76, 76, 76);
+    padding-left: 3px;
+}
+
+
+.day:first-child {
+    grid-column-start: 1;
+}
+
+.day {
+    padding: 0.5em;
+    text-align: center;
+}
+
+.day::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+}
+
+.day[data-selected]::before {
+    border-radius: 50px;
+    height: 25px;
+}
+
+.day[data-selected="start"]::before {
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+.day[data-selected],
+.day[data-selected]~.day {
+    color: white;
+}
+
+.day[data-selected]::before,
+.day[data-selected]~.day::before {
+    background-color: var(--color-primary);
+}
+
+.day[data-selected="start"]~.day:not([data-selected="end"])::before {
+    opacity: 0.5;
+}
+
+.day[data-selected="end"][data-selected="end"]::before {
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
+
+
+.day[data-selected="end"]~.day {
+    color: inherit;
+}
+
+.day[data-selected="end"]~.day::before {
+    background-color: transparent;
+}
+
+.row-e1 {
+    border-top: 1.4px #509CE3 solid;
+    width: 60px;
+    font-size: 12px;
+    color: #509CE3;
+    margin-top: -15px;
+    position: static;
+}
+
+.left_right_evaluation {
+    width: 15%;
+    /* height: 60px; */
+    background: linear-gradient(to top,
+
+            #ffffff 0%,
+            #ffffff 50%,
+            #509CE3 50%,
+            #509CE3 100%);
+    border-radius: 4px 4px 4px 4px;
 }

@@ -100,9 +100,16 @@
     font-size: 16px;
 }
 
+.text_PIM {
+    color: #175690;
+    font-weight: 500;
+    font-size: 15px;
+}
+
 .andAccounts {
     color: black;
     font-weight: 600;
+    font-size: 13px;
 }
 
 .bg-chartpurple {
@@ -147,7 +154,8 @@
 }
 
 .flagkey {
-    font-size: 12px;
+    font-size: 10px;
+    letter-spacing: 0.1px;
 }
 
 .bg-lighttotal {
@@ -162,12 +170,15 @@
 }
 
 .border-edit {
-    font-size: 10px;
+    font-size: 9px;
+    color: rgb(45, 45, 45);
+    font-weight: 400;
 }
 
 .weight-pencil {
     cursor: pointer;
     font-size: 12px;
+    color: black;
 }
 
 .weight-trash {
@@ -177,7 +188,7 @@
 }
 
 .fonTotal {
-    font-size: 8px;
+    font-size: 7px;
 }
 
 .icons-KGI {
@@ -200,5 +211,11 @@
     background-color: #1DA5DF;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     color: white;
-    border-radius: 10px;
+    border-radius: 7px;
+    font-size: 13px;
+}
+
+.background_E7F0FE {
+    background-color: #E7F0FE;
+    border: none;
 }
