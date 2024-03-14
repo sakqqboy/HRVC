@@ -113,6 +113,7 @@ return [
                 'kpi/kpi-team/kpi-team-search-result/<hash>' => 'kpi/kpi-team/kpi-team-search-result',
                 'kpi/kpi-personal/kpi-personal-search-result/<hash>' => 'kpi/kpi-personal/kpi-personal-search-result',
                 'evaluation/environment/frame-setting/<hash>' => 'evaluation/environment/frame-setting',
+                'evaluation/environment/term-detail/<hash>' => 'evaluation/environment/term-detail',
 
             ],
         ],
