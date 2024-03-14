@@ -86,7 +86,7 @@ $this->title = 'PMI Weight Allocation';
                         <div class="FrameEvaluation"> PMI Weight Allocation</div>
                     </div>
                     <div class="col-4">
-                        <button type="submit" class="btn text-white pt-4 pb-4" style="border-radius: 3px;background-color:#2580D3;font-size:13px;"> Allocate Weight</button>
+                        <button type="submit" class="btn text-white pt-3 pb-3" style="border-radius: 3px;background-color:#2580D3;font-size:13px;"> Allocate Weight</button>
                     </div>
                     <div class="col-4 text-end">
                         <button type="submit" class="btn btn-info Next-1 pt-4 pb-4"> Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
@@ -116,6 +116,7 @@ $this->title = 'PMI Weight Allocation';
                                             </div>
                                         </div>
                                         <div class="col-12">
+                                            <div class=""></div>
                                             <span class="badge bg-chartpurple">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/24px/charts.png" class="icons-KGI">
                                                 <div class="mt-5"> KFI</div>

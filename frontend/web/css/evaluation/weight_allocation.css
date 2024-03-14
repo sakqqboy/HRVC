@@ -10,10 +10,10 @@
 
 .rad-label {
     display: flex;
-    align-items: center;
-    border-radius: 1px;
-    padding: 14px 16px;
-    margin: 10px 0;
+    /* align-items: center; */
+    /* border-radius: 1px; */
+    /* padding: 14px 16px; */
+    /* margin: 5px; */
     cursor: pointer;
     transition: .3s;
 }
@@ -22,6 +22,8 @@
 .rad-label:focus-within {
     background: hsla(0, 0%, 80%, .14);
     border-left: 5px #B2CCFA solid;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 
 .rad-input {
@@ -36,9 +38,9 @@
 
 .Evaluationdeshed {
     border-left: 2px #d8d8d8 dashed;
-    height: 350px;
+    height: 150px;
     margin-top: -24px;
-    margin-left: 26px;
+    margin-left: 20px;
     position: absolute;
 }
 
@@ -53,7 +55,7 @@
     font-family: FontAwesome;
     font-style: normal;
     font-weight: normal;
-
+    margin-left: 8px;
 }
 
 .rad-design::before {
@@ -80,11 +82,13 @@
 
 .rad-text {
     color: hsl(0, 0%, 29%);
-    margin-left: 14px;
+    margin-left: 12px;
     letter-spacing: 0px;
     text-transform: none;
-    font-size: 13px;
+    font-size: 12px;
     transition: .3s;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 
 .rad-input:checked~.rad-text {
