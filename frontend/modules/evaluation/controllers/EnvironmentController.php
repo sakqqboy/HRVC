@@ -230,7 +230,15 @@ class EnvironmentController extends Controller
 	{
 		$param = ModelMaster::decodeParams($hash);
 		$termId = $param["termId"];
-		return $this->render('term_detail');
+		$date = date('Y-m-d');
+		$thisMonth = ModelMaster::monthEng(date('m'), 1);
+		$thisYear = date('Y');
+		$dateValue = Carlendar::currentMonth($date);
+		return $this->render('term_detail', [
+			"dateValue" => $dateValue,
+			"thisMonth" => $thisMonth,
+			"thisYear" => $thisYear,
+		]);
 	}
 	public function actionAddTermItem()
 	{
