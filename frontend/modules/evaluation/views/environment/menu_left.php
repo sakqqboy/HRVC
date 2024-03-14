@@ -18,12 +18,12 @@
 	</div>
 </div>
 
-<div class="col-12 bg-white rounded-1 mt-40 pb-10">
+<div class="col-12 bg-white rounded-1 mt-20 pb-10">
 	<div class="col-12 EvaluatorConfiguration pt-20 pl-10 border-bottom pb-20">
 		<i class="fa fa-cog mr-5" aria-hidden="true"></i>Set Configuration
 	</div>
 	<div class="col-12 mt-20">
-		<div class="rad-label pl-0 mt-10 pr-0">
+		<div class="rad-label pl-0 mt-10 pr-0" style="background-color:#D7EBFF;border-left: 5px #B2CCFA solid;">
 			<div class="col-12 pl-5 rad-text pr-3">
 				<i class="fa fa-check-circle-o text-success mr-10 font-size-18" aria-hidden="true"></i>
 				<span class="text-dark font-weight-500 ">Evaluation Frame</span>

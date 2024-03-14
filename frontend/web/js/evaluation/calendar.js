@@ -55,6 +55,73 @@ function nextMonth(type) {
 		}
 	});
 }
+function selectDate(type, day, month, year) {
+	var lastSelect = $("#current-select-" + type).val();
+	if (lastSelect != '') {
+		$("#" + lastSelect).css("background-color", "white");
+		$("#" + lastSelect).css("color", "gray");
+	}
+	if (type == 1) {
+		$("#" + type + day + month + year).css("background-color", "#6666FF");
+	} else {
+		$("#" + type + day + month + year).css("background-color", "#FF6633");
+	}
+	$("#" + type + day + month + year).css("color", "white");
+	$("#current-select-" + type).val('' + type + '' + day + '' + month + '' + year);
+	var termItemId = $("#termItemId").val();
+	var url = $url + 'evaluation/environment/input-date';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { day: day, month: month, year: year },
+		success: function (data) {
+			if (data.status) {
+				var dateText = day + '/' + month + '/' + year;
+				if (type == 1) {
+					$("#fromDate").html(data.fullDate);
+					$("#fromDateVal").val(dateText);
+					if (termItemId != '') {
+						$("#start-date-" + termItemId).html(data.fullDate);
+						var url = $url + 'evaluation/environment/set-term-item-date';
+						var type2 = '1';
+						$.ajax({
+							type: "POST",
+							dataType: 'json',
+							url: url,
+							data: { termItemId: termItemId, type2: type2, dateText: dateText },
+							success: function (data) {
+								if (data.status) {
+									$("#duration-date-" + termItemId).html(data.duration);
+								}
+							}
+						});
+					}
+				} else {
+					$("#toDate").html(data.fullDate);
+					$("#toDateVal").val(dateText);
+					if (termItemId != '') {
+						$("#finish-date-" + termItemId).html(data.fullDate);
+						var url = $url + 'evaluation/environment/set-term-item-date';
+						var type2 = '2';
+						$.ajax({
+							type: "POST",
+							dataType: 'json',
+							url: url,
+							data: { termItemId: termItemId, type2: type2, dateText: dateText },
+							success: function (data) {
+								if (data.status) {
+									$("#duration-date-" + termItemId).html(data.duration);
+								}
+							}
+						});
+					}
+				}
+
+			}
+		}
+	});
+}
 
 
 console.clear();

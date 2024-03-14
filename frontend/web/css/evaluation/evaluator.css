@@ -80,40 +80,23 @@
     height: 30px;
 }
 
-.aler-ALLDepartment {
-    background-color: white;
-    margin-top: 10px;
-    border-radius: 5px;
-    padding-left: 20px;
-    padding-top: 60px;
-}
-
-.TODAY-TRANS {
-    text-transform: uppercase;
-    color: #308FFF;
-    font-size: 12px;
-}
-
 .bg-Today {
-    margin-top: 10px;
+    margin-top: 5px;
     background-color: #DAEDFF;
     border-radius: 3px;
     color: #09789B;
     font-weight: 500;
-    width: 180px;
     text-align: left;
 }
 
 .Note-Today1 {
     color: #308FFF;
-    margin-top: 10px;
-    font-size: 15px;
+    font-size: 12px;
 }
 
 .Note-Today2 {
     color: #fc4aa0;
-    margin-top: 10px;
-    font-size: 15px;
+    font-size: 12px;
 }
 
 
