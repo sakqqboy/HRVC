@@ -3,7 +3,7 @@ $this->title = 'Term Detail';
 ?>
 <div class="col-12 mt-70 environment pt-10 pr-10 pl-20">
 	<div class="row">
-		<div class="col-lg-2 col-md-6 col-12 border">
+		<div class="col-2 pr-0 pl-5">
 			<?= $this->render('menu_left') ?>
 		</div>
 		<div class="col-lg-10 col-md-6 col-12">
