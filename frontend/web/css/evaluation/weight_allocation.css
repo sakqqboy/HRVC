@@ -107,29 +107,48 @@
 .text_PIM {
     color: #175690;
     font-weight: 500;
-    font-size: 15px;
+    font-size: 14px;
+    text-align: center;
+    padding-top: 10px;
 }
 
 .andAccounts {
     color: black;
-    font-weight: 600;
-    font-size: 13px;
+    font-weight: 500;
+    font-size: 12px;
+    margin-top: 30px;
+    padding-left: 5px;
 }
 
 .bg-chartpurple {
     background-color: #748EE9;
-    margin-left: -18px;
+    text-align: center;
+    border-radius: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 3px;
+    margin-right: 3px;
 }
 
 .bg-chartwarn {
     background-color: #F8BF27;
-    margin-left: -18px;
+    text-align: center;
+    border-radius: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 3px;
+    margin-right: 3px;
 }
 
 
 .bg-cha {
     background-color: #FF715B;
-    margin-left: -18px;
+    text-align: center;
+    border-radius: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 3px;
+    margin-right: 3px;
 }
 
 
@@ -137,6 +156,8 @@
     overflow-y: scroll;
     overflow-x: hidden;
     height: 505px;
+    padding-bottom: 20px;
+    margin-top: 44px;
 }
 
 .silly_scrollbar::-webkit-scrollbar {
@@ -172,6 +193,7 @@
 .Blueformat {
     color: #2580D3;
     font-weight: 500;
+    font-size: 10px;
 }
 
 .txt-Weight {
@@ -202,7 +224,7 @@
 }
 
 .icons-KGI {
-    width: 20px;
+    width: 15px;
 }
 
 .icons-KGI2 {
@@ -244,6 +266,63 @@
     -webkit-transition: .2s ease;
     transition: .2s ease;
     text-align: center;
-    padding-top: 3px;
+    font-size: 10px;
+    padding-top: 5px;
     margin-top: 1px;
+}
+
+.silly_evaluator {
+    background-color: white;
+    border-radius: 5px;
+}
+
+.Evalua_tor1 {
+    background-color: #F4F6F9;
+    margin-top: 44px;
+    border-radius: 5px;
+}
+
+.Evalua_tor2 {
+    background-color: #F4F6F9;
+    border-radius: 10px;
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.Evalua_tor3 {
+    background-color: #F4F6F9;
+    border-radius: 10px;
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.white-kfi3 {
+    background-color: white;
+    padding-bottom: 20px;
+    border-radius: 5px;
+    margin-top: 50px;
+}
+
+.PMI1 {
+    border-radius: 2px;
+    background-color: #2580D3;
+    color: white;
+    font-size: 13px;
+    padding-top: 3px;
+    padding-left: 10px;
+    padding-bottom: 3px;
+}
+
+.holder {
+    border-top-style: solid;
+    border-left-style: solid;
+    border-bottom-style: solid 10px;
+    width: 510px;
+    height: 100px;
+    position: static;
+    margin-top: -70px;
+    margin-left: -290px;
+    border-radius: 12px;
 }
