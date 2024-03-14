@@ -1,4 +1,7 @@
 <?php
+
+use common\models\ModelMaster;
+
 $this->title = "Frame Setting";
 ?>
 <div class="col-12 mt-70">
@@ -263,9 +266,7 @@ $this->title = "Frame Setting";
 															&nbsp;No
 														</label>
 													</div>
-													<!-- <div class="col-12 text-secondary" style="margin-top: -3px;">
-														<hr>
-													</div> -->
+
 												</div>
 												<!-- <div class="col-12 text-center font-size-12" style="margin-top: -3px;">
 													Select Bonus Month
@@ -306,18 +307,49 @@ $this->title = "Frame Setting";
 									Available Evaluation Modules
 								</div>
 								<div class="col-12 mt-10">
-									<div class="col-12 pl-10"> <i class="fa fa-check checkgreenbox" aria-hidden="true"></i> &nbsp;&nbsp; <span class="liEvaluation">Evaluation Frame</span></div>
-									<div class="col-12 pl-10 mt-8"> <i class="fa fa-check checkgreenbox" aria-hidden="true"></i> &nbsp;&nbsp; <span class="liEvaluation">Weight Allocation</span></div>
-									<div class="col-12 pl-10 mt-8"> <i class="fa fa-check checkgreenbox" aria-hidden="true"></i> &nbsp;&nbsp; <span class="liEvaluation">Evaluator Settings</span></div>
-									<div class="col-12 pl-10 mt-8"> <i class="fa fa-check checkgreenbox" aria-hidden="true"></i> &nbsp;&nbsp; <span class="liEvaluation">Salary & Allowance</span></div>
-									<div class="col-12 pl-10 mt-8"> <i class="fa fa-check checkgreenbox" aria-hidden="true"></i> &nbsp;&nbsp; <span class="liEvaluation">Bonus Configuration</span></div>
-									<div class="col-12 pl-10 mt-8"> <i class="fa fa-check checkgreenbox" aria-hidden="true"></i> &nbsp;&nbsp; <span class="liEvaluation">Promotion</span></div>
+									<div class="col-12 pl-10">
+										<i class="fa fa-check checkgreenbox" aria-hidden="true"></i> &nbsp;&nbsp;
+										<span class="liEvaluation">Evaluation Frame</span>
+									</div>
+									<div class="col-12 pl-10 mt-8">
+										<i class="fa fa-check checkgreenbox" aria-hidden="true"></i> &nbsp;&nbsp;
+										<span class="liEvaluation">Weight Allocation</span>
+									</div>
+									<div class="col-12 pl-10 mt-8">
+										<i class="fa fa-check checkgreenbox" aria-hidden="true"></i> &nbsp;&nbsp;
+										<span class="liEvaluation">Evaluator Settings</span>
+									</div>
+									<div class="col-12 pl-10 mt-8">
+										<i class="fa fa-check checkgreenbox" aria-hidden="true"></i> &nbsp;&nbsp;
+										<span class="liEvaluation">Salary & Allowance</span>
+									</div>
+									<div class="col-12 pl-10 mt-8">
+										<i class="fa fa-check checkgreenbox" aria-hidden="true"></i> &nbsp;&nbsp;
+										<?php
+										if ($term['isBonus'] == 1) { ?>
+											<span class="liEvaluation" id="hasBonus">Bonus Configuration</span>
+										<?php
+										} else { ?>
+											<del><span class="liEvaluation" id="hasBonus">Bonus Configuration</span></del>
+										<?php
+										}
+										?>
+									</div>
+									<div class="col-12 pl-10 mt-8">
+										<i class="fa fa-check checkgreenbox" aria-hidden="true"></i> &nbsp;&nbsp;
+										<span class="liEvaluation">Promotion</span>
+									</div>
 								</div>
 								<div class="d-grid gap-2 col-12 mx-auto mt-13 pr-10 pl-10">
+
 									<span class="ApllySubmit text-center pt-5 pb-5 pr-10">
-										<span class="ml-35">Configure Modules</span>
-										<span class="rounded-5 border  pr-6 pl-6 border-primary float-end"><i class="fa fa-chevron-right" aria-hidden="true"></i></span>
+										<a href="<?= Yii::$app->homeUrl ?>evaluation/environment/term-detail/<?= ModelMaster::encodeParams(['termId' => $termId]) ?>" class="no-underline" style="color:#1F5594;">
+											<span class="ml-35">Configure Modules</span>
+											<span class="rounded-5 border  pr-6 pl-6 border-primary float-end">
+												<i class="fa fa-chevron-right" aria-hidden="true"></i></span>
+										</a>
 									</span>
+
 								</div>
 							</div>
 						</div>

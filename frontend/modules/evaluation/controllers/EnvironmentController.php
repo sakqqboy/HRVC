@@ -226,6 +226,12 @@ class EnvironmentController extends Controller
 		$res["status"] = true;
 		return json_encode($res);
 	}
+	public function actionTermDetail($hash)
+	{
+		$param = ModelMaster::decodeParams($hash);
+		$termId = $param["termId"];
+		return $this->render('term_detail');
+	}
 	public function actionAddTermItem()
 	{
 		$frameTerms = FrameTerm::find()->where("1")->asArray()->all();
