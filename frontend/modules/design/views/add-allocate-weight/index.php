@@ -97,26 +97,20 @@ $this->title = 'Add allocate weight';
                 <div class="row">
                     <div class="col-lg-2 Participants_border">
                         <div class="col-12 pt-20 pl-3 pr-3">
-                            <div class="bg-white pl-5 pr-5">
+                            <div class="bg-white pl-5 pr-5" style="border-radius: 3px;">
                                 <div class="col-12">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Team-1.png" class="widthSave-3"> <span class="Select-add">Select Participants</span></span>
                                 </div>
                                 <div class="row mt-10">
                                     <div class="col-lg-4 col-md-6 col-6">
-                                        <!-- <div class="put_title pl-3">
-                                            Title
-                                        </div> -->
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="" id="" checked style="border-radius:4px;width:10px;">
-                                            <label class="form-check-label" for="">
-                                                Title
-                                            </label>
+                                        <div class="font-size-10">
+                                            <div class="put_title"><span class="pl-15">Title</span></div>
                                         </div>
                                     </div>
                                     <div class="col-lg-8 col-md-6 col-6">
                                         <div class="form-check font-size-10">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
+                                            <input class="form-check-input" type="checkbox" value="" id="">
+                                            <label class="form-check-label" for="">
                                                 Dapartment
                                             </label>
                                         </div>
@@ -156,7 +150,7 @@ $this->title = 'Add allocate weight';
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="">
                                 <label class="form-check-label" for="">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Rank-1.png" class="pictureRank-1"><span style="font-size: 10px; letter-spacing: -0.1px;"> Assistant Manager </span><span class="badge rounded-pill bg-primary">MM</span>
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Rank-1.png" class="pictureRank-1"> Assistant Manager<span class="badge rounded-pill bg-primary">MM</span>
                                 </label>
                             </div>
                         </div>
@@ -180,259 +174,180 @@ $this->title = 'Add allocate weight';
                         ?>
 
                     </div>
-
-                    <div class="col-lg-10 col-md-6 col-12">
-                        <div class="alert alert-Evaluator silly_scrollbar">
-                            <div class="card">
-                                <div class="row">
-                                    <div class="col-3 flagkey">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/KGI.png" class="icons-KGI2"> Key Goal Indicator
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="col-6 ADD-plus1-allocate">
-                                            <i class="fa fa-plus-circle" aria-hidden="true"></i> ADD
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="col-6 Edit-plus1-allocate">
-                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> EDIT
-                                        </div>
-                                    </div>
-                                    <div class="col-2 text-end">
-                                        <div class="col-12  AddParticipant">
-                                            Participants
-                                        </div>
-                                    </div>
-                                    <div class="col-3 text-end">
-                                        <span class="badge rounded-pill bg-gray">
-                                            <ul class="try-cricle">
-                                                <li class="tri-li"> <img src="/HRVC/frontend/web/image/avatar1.png" class="image-avatar1"></li>
-                                                <li class="tri-li"> <img src="/HRVC/frontend/web/image/Watanabe.png" class="image-avatar2"></li>
-                                                <a href="" class="none">
-                                                    <li class="tri-li-number typenumber"> 27 </li>
-                                                </a>
-                                            </ul>
-                                        </span>
+                    <div class="col-lg-1 col-md-6 col-12">
+                        <div class="add_allocate_gray pt-5">
+                            <div class="col-12 text_PIM">
+                                PIM
+                            </div>
+                            <div class="col-12">
+                                <div id="progress1">
+                                    <div data-num="85" class="progress-item1" data-value="85%" style="background: conic-gradient(rgb(41, 140, 233) calc(35%), rgb(219, 239, 247) 0deg);width: 35px;height:35px;">85%</div>
+                                </div>
+                            </div>
+                            <div class="white-kfi3">
+                                <div class="col-12 pt-30">
+                                    <div class="form-check pl-43">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                 </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-lg-2">
-                                        <div class="card" style="width: 4rem;font-size:12px;">
-                                            <div class="card-header fonTotal">Total Sales <i class="fa fa-minus-circle add-minus-circle" aria-hidden="true"></i></div>
-                                            <div class="card-body text-dark">
-                                                <div class="col-12">
-                                                    <span class="badge bg-lighttotal text-primary">
-                                                        <?= number_format(598) ?>k
-                                                    </span>
-                                                </div>
-                                                <div class="col-12 text-primary text-center pt-10">
-                                                    <?= number_format(23) ?>%
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div class="col-12">
+                                    <div class="bg-chartpurple">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/Charts.png" class="icons-KGI">
+                                        <div class="font-size-10 text-white font-b"> KFI</div>
+                                        <div class="font-size-10 text-white font-b">20%</div>
                                     </div>
-                                    <div class="col-lg-2">
-                                        <div class="card" style="width: 4rem;font-size:12px;">
-                                            <div class="card-header fonTotal">Profit <i class="fa fa-minus-circle add-minus-circle" aria-hidden="true"></i></div>
-                                            <div class="card-body text-dark">
-                                                <div class="col-12">
-                                                    <span class="badge bg-lighttotal text-primary">
-                                                        <?= number_format(562) ?>k
-                                                    </span>
-                                                </div>
-                                                <div class="col-12 text-primary text-center pt-10">
-                                                    <?= number_format(11) ?>%
-                                                </div>
-                                            </div>
-                                        </div>
+                                </div>
+                                <div class="col-12 mt-30">
+                                    <div class="form-check pl-43">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
-                                    <div class="col-lg-2">
-                                        <div class="card" style="width: 4rem; font-size:12px;">
-                                            <div class="card-header fonTotal">Net Profit <i class="fa fa-minus-circle add-minus-circle" aria-hidden="true"></i></div>
-                                            <div class="card-body text-dark">
-                                                <div class="col-12 text-center">
-                                                    <span class="badge bg-lighttotal text-primary">
-                                                        <?= number_format(100000) ?>k
-                                                    </span>
-                                                </div>
-                                                <div class="col-12 text-primary text-center pt-10">
-                                                    <?= number_format(8) ?>%
-                                                </div>
-                                            </div>
-                                        </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="bg-chartwarn">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/KGI.png" class="icons-KGI">
+                                        <div class="font-size-10 text-white font-b"> KGI</div>
+                                        <div class="font-size-10 text-white font-b">20%</div>
                                     </div>
-                                    <div class="col-lg-2">
-                                        <div class="card" style="width: 4rem; font-size:12px;">
-                                            <div class="card-header fonTotal">Cost <i class="fa fa-minus-circle add-minus-circle" aria-hidden="true"></i></div>
-                                            <div class="card-body text-dark">
-                                                <div class="col-12">
-                                                    <span class="badge bg-lighttotal text-primary">
-                                                        <?= number_format(15) ?>%
-                                                    </span>
-                                                </div>
-                                                <div class="col-12 text-primary text-center pt-10">
-                                                    <?= number_format(8) ?>%
-                                                </div>
-                                            </div>
-                                        </div>
+                                </div>
+                                <div class="col-12 mt-30">
+                                    <div class="form-check pl-43">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
-                                    <div class="col-lg-2">
-                                        <div class="card" style="width: 4rem; font-size:12px;">
-                                            <div class="card-header fonTotal">labor <i class="fa fa-minus-circle add-minus-circle" aria-hidden="true"></i></div>
-                                            <div class="card-body text-dark">
-                                                <div class="col-12">
-                                                    <span class="badge bg-lighttotal text-primary">
-                                                        5 Times
-                                                    </span>
-                                                </div>
-                                                <div class="col-12 text-primary text-center pt-10">
-                                                    <?= number_format(8) ?>%
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <div class="card" style="width: 4rem; font-size:12px;">
-                                            <div class="card-header fonTotal">Webinar <i class="fa fa-minus-circle add-minus-circle" aria-hidden="true"></i></div>
-                                            <div class="card-body text-dark">
-                                                <div class="col-12">
-                                                    <span class="badge bg-lighttotal text-primary">
-                                                        <?= number_format(458) ?>k
-                                                    </span>
-                                                </div>
-                                                <div class="col-12 text-primary text-center pt-10">
-                                                    <?= number_format(8) ?>%
-                                                </div>
-                                            </div>
-                                        </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="bg-cha">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/KPI.png" class="icons-KGI">
+                                        <div class="font-size-10 text-white font-b"> KPI</div>
+                                        <div class="font-size-10 text-white font-b">20%</div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card">
-                                <div class="row">
-                                    <div class="col-3 flagkey">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/KPI.png" class="icons-KGI2"> Key Performance Indicator
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-6 col-12">
+                        <div class="add_allocate1 silly_scrollbar">
+                            <div class="silly_evaluator">
+                                <div class="row pl-15 pr-15 pt-15 pb-15">
+                                    <div class="col-4 flagkey">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/KGI.png" class="icons-KGI2"> Key Goal Indicator
                                     </div>
                                     <div class="col-2">
-                                        <div class="col-12 ADD-plus1-allocate">
-                                            <i class="fa fa-plus-circle" aria-hidden="true"></i> ADD
+                                        <div class="ADD-plus1-allocate" type="submit">
+                                            <i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;ADD
                                         </div>
                                     </div>
                                     <div class="col-2">
-                                        <div class="col-12 Edit-plus1-allocate">
-                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> EDIT
+                                        <div class="Edit-plus1-allocate" type="submit">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> &nbsp;EDIT
                                         </div>
                                     </div>
-                                    <div class="col-2 text-end">
+                                    <div class="col-1">
                                         <div class="col-12  AddParticipant">
                                             Participants
                                         </div>
                                     </div>
                                     <div class="col-3 text-end">
-                                        <span class="badge rounded-pill bg-gray">
+                                        <span class="badge rounded-pill bg-gray pt-2 pb-2">
                                             <ul class="try-cricle">
-                                                <li class="tri-li"> <img src="/HRVC/frontend/web/image/avatar1.png" class="image-avatar1"></li>
-                                                <li class="tri-li"> <img src="/HRVC/frontend/web/image/Watanabe.png" class="image-avatar2"></li>
+                                                <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
+                                                <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
                                                 <a href="" class="none">
-                                                    <li class="tri-li-number typenumber"> 10 </li>
+                                                    <li class="number_user"> 99 </li>
                                                 </a>
                                             </ul>
                                         </span>
                                     </div>
+                                    <hr class="mt-5">
                                 </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-lg-2 col-md-6 col-6">
-                                        <div class="card" style="width: 4rem; font-size:12px;">
-                                            <div class="card-header fonTotal">Total Sales <i class="fa fa-minus-circle add-minus-circle" aria-hidden="true"></i></div>
-                                            <div class="card-body text-dark">
+
+                                <div class="row pl-15 pr-10 pb-20">
+
+                                    <?php
+                                    for ($i = 1; $i <= 12; $i++) {
+                                    ?>
+
+                                        <div class="col-lg-2">
+                                            <div class="card font-size-12">
+                                                <div class="card-header fonTotal pl-2 pr-2">
+                                                    Totalsales <span class="ml-15"><i class="fa fa-minus-circle add-minus-circle" aria-hidden="true"></i></span>
+                                                </div>
                                                 <div class="col-12 text-center">
-                                                    <span class="badge bg-lighttotal text-primary">
-                                                        <?= number_format(598) ?>k
+                                                    <span class="badge bg-lighttotal">
+                                                        <?= number_format(5888) ?>k
                                                     </span>
                                                 </div>
-                                                <div class="col-12 text-primary text-center pt-10">
+                                                <div class="col-12 text-center pt-10 Blueformat">
                                                     <?= number_format(23) ?>%
                                                 </div>
                                             </div>
                                         </div>
+
+                                    <?php
+                                    }
+                                    ?>
+                                    <div class="holder"></div>
+
+                                </div>
+                            </div>
+                            <div class="silly_evaluator mt-20">
+                                <div class="row pl-15 pr-15 pt-15 pb-15">
+                                    <div class="col-4 flagkey">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/KPI.png" class="icons-KGI2"> Key Performance Indicator
                                     </div>
-                                    <div class="col-lg-2 col-md-6 col-6">
-                                        <div class="card" style="width: 4rem;font-size:12px;">
-                                            <div class="card-header fonTotal">Total Sales</div>
-                                            <div class="card-body text-dark">
+                                    <div class="col-2">
+                                        <div class="ADD-plus1-allocate" type="submit">
+                                            <i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;ADD
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="Edit-plus1-allocate" type="submit">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;EDIT
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <div class="col-12 AddParticipant">
+                                            Participants
+                                        </div>
+                                    </div>
+                                    <div class="col-3 text-end">
+                                        <span class="badge rounded-pill bg-gray pt-2 pb-2">
+                                            <ul class="try-cricle">
+                                                <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
+                                                <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
+                                                <a href="" class="none">
+                                                    <li class="number_user"> 2 </li>
+                                                </a>
+                                            </ul>
+                                        </span>
+                                    </div>
+                                    <hr class="mt-5">
+                                </div>
+
+                                <div class="row pl-15 pr-10 pb-20">
+
+                                    <?php
+                                    for ($i = 1; $i <= 12; $i++) {
+                                    ?>
+
+                                        <div class="col-lg-2">
+                                            <div class="card font-size-12">
+                                                <div class="card-header fonTotal pl-2 pr-2">
+                                                    Totalsales <span class="ml-15"><i class="fa fa-minus-circle add-minus-circle" aria-hidden="true"></i></span>
+                                                </div>
                                                 <div class="col-12 text-center">
-                                                    <span class="badge bg-lighttotal text-primary">
-                                                        <?= number_format(562) ?>k
+                                                    <span class="badge bg-lighttotal">
+                                                        <?= number_format(5888) ?>k
                                                     </span>
                                                 </div>
-                                                <div class="col-12 text-primary text-center pt-10">
-                                                    <?= number_format(11) ?>%
+                                                <div class="col-12 text-center pt-10 Blueformat">
+                                                    <?= number_format(23) ?>%
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-2 col-md-6 col-6">
-                                        <div class="card" style="width: 4rem; font-size:12px;">
-                                            <div class="card-header fonTotal">Total Sales</div>
-                                            <div class="card-body text-dark">
-                                                <div class="col-12 text-center">
-                                                    <span class="badge bg-lighttotal text-primary">
-                                                        <?= number_format(100000) ?>k
-                                                    </span>
-                                                </div>
-                                                <div class="col-12 text-primary text-center pt-10">
-                                                    <?= number_format(8) ?>%
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 col-md-6 col-6">
-                                        <div class="card" style="width: 4rem; font-size:12px;">
-                                            <div class="card-header fonTotal">Total Sales</div>
-                                            <div class="card-body text-dark">
-                                                <div class="col-12 text-center">
-                                                    <span class="badge bg-lighttotal text-primary">
-                                                        <?= number_format(100000) ?>k
-                                                    </span>
-                                                </div>
-                                                <div class="col-12 text-primary text-center pt-10">
-                                                    <?= number_format(8) ?>%
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 col-md-6 col-6">
-                                        <div class="card" style="width: 4rem; font-size:12px;">
-                                            <div class="card-header fonTotal">Total Sales</div>
-                                            <div class="card-body text-dark">
-                                                <div class="col-12 text-center">
-                                                    <span class="badge bg-lighttotal text-primary">
-                                                        <?= number_format(100000) ?>k
-                                                    </span>
-                                                </div>
-                                                <div class="col-12 text-primary text-center pt-10">
-                                                    <?= number_format(8) ?>%
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 col-md-6 col-6">
-                                        <div class="card" style="width: 4rem; font-size:12px;">
-                                            <div class="card-header fonTotal">Total Sales</div>
-                                            <div class="card-body text-dark">
-                                                <div class="col-12 text-center">
-                                                    <span class="badge bg-lighttotal text-primary">
-                                                        <?= number_format(100000) ?>k
-                                                    </span>
-                                                </div>
-                                                <div class="col-12 text-primary text-center pt-10">
-                                                    <?= number_format(8) ?>%
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <?php
+                                    }
+                                    ?>
+                                    <div class="holder"></div>
                                 </div>
                             </div>
                         </div>

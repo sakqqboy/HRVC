@@ -56,24 +56,22 @@
 
 .ADD-plus1-allocate {
     background-color: #2580D3;
-    width: 3rem;
-    border-radius: 4px;
-    padding-right: 2px;
-    padding-left: 2px;
+    border-radius: 3px;
     font-size: 12px;
     color: white;
-    cursor: pointer;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 8px;
 }
 
 .Edit-plus1-allocate {
     background-color: #F2AFAF;
-    width: 3rem;
-    border-radius: 4px;
-    padding-right: 2px;
-    padding-left: 2px;
+    border-radius: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 8px;
     font-size: 12px;
     color: white;
-    cursor: pointer;
 }
 
 .typenumber {
@@ -86,7 +84,7 @@
 
 .add-minus-circle {
     color: #D84C4C;
-    font-size: 13px;
+    font-size: 11px;
     cursor: pointer;
 }
 
@@ -97,9 +95,26 @@
 }
 
 .put_title {
-    /* border: thick solid #32a1ce; */
-    background-color: #32a1ce;
-    width: 14px;
-    height: 14px;
     border-radius: 3px;
+    background-color: #32a1ce;
+    width: 12px;
+    height: 13px;
+}
+
+.add_allocate_gray {
+    background-color: #F4F6F9;
+    border-radius: 5px;
+    margin-top: 10px;
+    width: 60px;
+    height: 580px;
+}
+
+.add_allocate1 {
+    background-color: #F4F6F9;
+    margin-top: 10px;
+    border-radius: 5px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 580px;
 }
