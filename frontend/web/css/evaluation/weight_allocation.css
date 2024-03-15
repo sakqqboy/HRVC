@@ -49,7 +49,8 @@
     font-weight: 500;
     font-size: 14px;
     text-align: center;
-    padding-top: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .andAccounts {
@@ -64,8 +65,8 @@
     background-color: #748EE9;
     text-align: center;
     border-radius: 3px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 3px;
+    padding-right: 3px;
     margin-left: 3px;
     margin-right: 3px;
 }
@@ -121,6 +122,7 @@
 .flagkey {
     font-size: 10px;
     letter-spacing: 0.1px;
+    padding-top: 3px;
 }
 
 .bg-lighttotal {
@@ -137,7 +139,6 @@
 }
 
 .txt-Weight {
-    font-weight: 500;
     font-size: 10px;
 }
 
@@ -185,7 +186,7 @@
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     color: white;
     border-radius: 7px;
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .background_E7F0FE {
@@ -217,14 +218,17 @@
 
 .Evalua_tor1 {
     background-color: #F4F6F9;
-    margin-top: 20px;
+    margin-top: 40px;
     border-radius: 5px;
+    padding-left: 1px;
+    padding-right: 1px;
+    width: 60px;
 }
 
 .Evalua_tor2 {
     background-color: #F4F6F9;
-    border-radius: 10px;
-    margin-top: 20px;
+    border-radius: 5px;
+    margin-top: 40px;
     padding-top: 20px;
     padding-left: 20px;
     padding-right: 20px;
@@ -233,17 +237,21 @@
 .Evalua_tor3 {
     background-color: #F4F6F9;
     border-radius: 5px;
+    margin-left: -15px;
     padding-top: 10px;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 140px;
+    padding-bottom: 30px;
 }
 
 .white-kfi3 {
     background-color: white;
     padding-bottom: 20px;
     border-radius: 5px;
-    margin-top: 50px;
+    margin-top: 15px;
+    margin-left: 4px;
+    margin-right: 4px;
 }
 
 .PMI1 {
@@ -261,10 +269,18 @@
     border-left-style: solid;
     border-bottom-style: solid;
     width: 510px;
-    height: 100px;
+    height: 90px;
     position: static;
-    margin-top: -170px;
+    margin-top: -150px;
     margin-left: 3px;
     border-radius: 7px;
     color: lightgray;
+}
+
+.pmi_bakgru {
+    border-radius: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
