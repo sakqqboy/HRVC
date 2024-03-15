@@ -82,192 +82,105 @@ $this->title = 'Add allocate weight';
             </div>
         </div>
         <div class="col-lg-10 col-md-6 col-12">
-            <div class="aler-ALLDepartment">
+            <div class="bg-white pmi_bakgru">
                 <div class="row">
-                    <div class="col-4">
-                        <div class="FrameEvaluation"> Weight Configuration Name</div>
+                    <div class="col-3">
+                        <div class="WeightConfigurationName"> Weight Configuration Name</div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-4">
                         <input type="text" class="form-control pt-3 pb-3 font-size-14 text-secondary" id="" aria-describedby="" style="border-radius: 3px;">
                     </div>
-                    <div class="col-2 text-center">
-                        <div type="submit" class="PMI1"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/save-2.png" class="Save-2">&nbsp;&nbsp; SAVE</div>
+                    <div class="col-5 text-end">
+                        <div type="submit" class="btn btn-primary PMI1"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/save-2.png" class="Save-2">&nbsp;&nbsp; SAVE</div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-2 Participants_border">
-                        <div class="col-12">
-                            <span><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Team-1.png" class="widthSave-3"> <span class="Select-add">Select Participants</span></span>
-                            <div class="row mt-10">
-                                <div class="col-lg-5 col-md-6 col-6">
-                                    <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#0496FF" style="width:1.9rem;height:1.9rem;"> <span class="font-size-11"> Title</span>
+                        <div class="col-12 pt-20 pl-3 pr-3">
+                            <div class="bg-white pl-5 pr-5">
+                                <div class="col-12">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Team-1.png" class="widthSave-3"> <span class="Select-add">Select Participants</span></span>
                                 </div>
-                                <div class="col-lg-7 col-md-6 col-6">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                        <label class="form-check-label inlineDepartment1" for="inlineCheckbox1"> Department</label>
+                                <div class="row mt-10">
+                                    <div class="col-lg-4 col-md-6 col-6">
+                                        <!-- <div class="put_title pl-3">
+                                            Title
+                                        </div> -->
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="" id="" checked style="border-radius:4px;width:10px;">
+                                            <label class="form-check-label" for="">
+                                                Title
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8 col-md-6 col-6">
+                                        <div class="form-check font-size-10">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Dapartment
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 controlcheckboxSelect">
-                            <div class="form-check E2F5FF-border">
+                            <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="">
-                                <label class="form-check-label" for="defaultCheck">
+                                <label class="form-check-label" for="">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Rank-1.png" class="pictureRank-1"> Manager <span class="badge rounded-pill bg-primary">MM</span>
                                 </label>
                             </div>
                         </div>
-                        <div class="col-12 all-allocateuser">
-                            <div class="form-check">
-                                <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label label-username" for="flexCheckDefault">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="allocate-user"> Charles Bhattacharjya
-                                </label>
+
+                        <?php
+
+                        for ($i = 1; $i <= 7; $i++) {
+
+                        ?>
+
+                            <div class="col-12 all-allocateuser">
+                                <div class="form-check">
+                                    <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="">
+                                    <label class="form-check-label label-username" for="">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="allocate-user"> <span style="font-size: 8px; letter-spacing: -0.1px;">Charles Bhattacharjya</span>
+                                    </label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-12 all-allocateuser">
-                            <div class="form-check">
-                                <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label label-username" for="flexCheckDefault">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="allocate-user"> Charles Bhattacharjya
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-12 all-allocateuser">
-                            <div class="form-check">
-                                <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label label-username" for="flexCheckDefault">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="allocate-user"> Charles Bhattacharjya
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-12 all-allocateuser">
-                            <div class="form-check">
-                                <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label label-username" for="flexCheckDefault">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="allocate-user"> Charles Bhattacharjya
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-12 all-allocateuser">
-                            <div class="form-check">
-                                <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label label-username" for="flexCheckDefault">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="allocate-user"> Charles Bhattacharjya
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-12 all-allocateuser">
-                            <div class="form-check">
-                                <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label label-username" for="flexCheckDefault">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="allocate-user"> Charles Bhattacharjya
-                                </label>
-                            </div>
-                        </div>
+
+                        <?php
+                        }
+                        ?>
+
                         <div class="col-12 controlcheckboxSelect">
-                            <div class="form-check E2F5FF-border">
+                            <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="">
-                                <label class="form-check-label" for="defaultCheck">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Rank-1.png" class="pictureRank-1"> Assistant Manager <span class="badge rounded-pill bg-primary">MM</span>
+                                <label class="form-check-label" for="">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Rank-1.png" class="pictureRank-1"><span style="font-size: 10px; letter-spacing: -0.1px;"> Assistant Manager </span><span class="badge rounded-pill bg-primary">MM</span>
                                 </label>
                             </div>
                         </div>
-                        <div class="col-12 all-allocateuser">
-                            <div class="form-check">
-                                <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label label-username" for="flexCheckDefault">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="allocate-user"> Charles Bhattacharjya
-                                </label>
+                        <?php
+
+                        for ($i = 1; $i <= 5; $i++) {
+
+                        ?>
+
+                            <div class="col-12 all-allocateuser">
+                                <div class="form-check">
+                                    <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="">
+                                    <label class="form-check-label label-username" for="">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="allocate-user"> <span style="font-size: 8px; letter-spacing: -0.1px;">Charles Bhattacharjya</span>
+                                    </label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-12 all-allocateuser">
-                            <div class="form-check">
-                                <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label label-username" for="flexCheckDefault">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="allocate-user"> Charles Bhattacharjya
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-12 all-allocateuser">
-                            <div class="form-check">
-                                <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label label-username" for="flexCheckDefault">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="allocate-user"> Charles Bhattacharjya
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-12 all-allocateuser">
-                            <div class="form-check">
-                                <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label label-username" for="flexCheckDefault">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="allocate-user"> Charles Bhattacharjya
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-12 all-allocateuser">
-                            <div class="form-check">
-                                <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label label-username" for="flexCheckDefault">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="allocate-user"> Charles Bhattacharjya
-                                </label>
-                            </div>
-                        </div>
+
+                        <?php
+                        }
+                        ?>
+
                     </div>
-                    <div class="col-lg-1">
-                        <div class="">
-                            <div class="col-12 PIM-allocate">
-                                PIM
-                            </div>
-                            <div class="col-12 mt-10">
-                                <div id="progress1">
-                                    <div data-num="85" class="progress-item1" data-value="85%" style="background: conic-gradient(rgb(41, 140, 233) calc(35%), rgb(219, 239, 247) 0deg);">85%</div>
-                                </div>
-                            </div>
-                            <div class="alert alert-white">
-                                <div class="col-12 mt-30">
-                                    <div class="form-check" style="margin-left: -5px;">
-                                        <input class="form-check-input" type="checkbox" value="" id="" checked>
-                                        <label class="form-check-label" for="flexCheckChecked"></label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <span class="badge bg-chartpurple">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/24px/charts.png" class="icons-KGI">
-                                        <div class="mt-5"> KFI</div>
-                                        <div class="mt-5">60%</div>
-                                    </span>
-                                </div>
-                                <div class="col-12 mt-30">
-                                    <div class="form-check" style="margin-left: -5px;">
-                                        <input class="form-check-input" type="checkbox" value="" id="" checked>
-                                        <label class="form-check-label" for="flexCheckChecked"></label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <span class="badge bg-chartwarn">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/KGI.png" class="icons-KGI">
-                                        <div class="mt-5"> KGI</div>
-                                        <div class="mt-5">20%</div>
-                                    </span>
-                                </div>
-                                <div class="col-12 mt-30">
-                                    <div class="form-check" style="margin-left: -5px;">
-                                        <input class="form-check-input" type="checkbox" value="" id="" checked>
-                                        <label class="form-check-label" for="flexCheckChecked"></label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <span class="badge bg-cha">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/KPI.png" class="icons-KGI">
-                                        <div class="mt-5"> KPI</div>
-                                        <div class=" mt-5">20%</div>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="col-lg-10 col-md-6 col-12">
                         <div class="alert alert-Evaluator silly_scrollbar">
                             <div class="card">

@@ -16,6 +16,7 @@
     border-radius: 5px;
     padding-left: 5px;
     padding-right: 5px;
+    margin-top: 10px;
 }
 
 .inlineDepartment1 {
@@ -23,8 +24,9 @@
 }
 
 .controlcheckboxSelect {
-    font-size: 13px;
-    margin-top: 18px;
+    font-size: 12px;
+    margin-top: 20px;
+    padding-left: 3px;
 }
 
 .pictureRank-1 {
@@ -32,7 +34,7 @@
 }
 
 .allocate-user {
-    width: 18px;
+    width: 14px;
 }
 
 .label-username {
@@ -40,8 +42,9 @@
 }
 
 .all-allocateuser {
-    margin-left: 20px;
-    margin-top: 8px;
+    padding-left: 10px;
+    margin-top: 5px;
+    font-size: 12px;
 }
 
 .PIM-allocate {
@@ -85,4 +88,18 @@
     color: #D84C4C;
     font-size: 13px;
     cursor: pointer;
+}
+
+.WeightConfigurationName {
+    font-size: 14px;
+    font-weight: 500;
+    color: black;
+}
+
+.put_title {
+    /* border: thick solid #32a1ce; */
+    background-color: #32a1ce;
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
 }
