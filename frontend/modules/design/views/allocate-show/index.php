@@ -106,16 +106,57 @@ $this->title = 'Weight Allocation';
                                 Do You Want Level 3 As Default Target ?
                             </div>
                         </div>
-                        <div class="col-2">
-                            <input type="radio" id="" class="custom-radio" name="yes" value="">
-                            <label for=""> YES</label>
-                            <input type="radio" id="" class="custom-radio" name="yes" value="">
-                            <label for=""> NO</label>
+                        <div class="col-3 pt-20">
+                            <input type="radio" name="fruit"><span class="font-size-12 pl-2"> YES</span>
+                            <span class="pl-20"></span>
+                            <input type="radio" name="fruit"><span class="font-size-12 pl-2"> NO</span>
                         </div>
-                        <div class="col-6 custom_bottom">
+                        <!-- <div class="col-6 custom_bottom">
                             <div class="col-12">
                                 Choose Target Level <input type="radio" name="fruit"><span class="target_level"> Level1</span>&nbsp;<input type="radio" name="fruit"><span class="target_level"> Level2</span>
-                                &nbsp;<input type="radio" name="fruit"><span class="target_level"> Level3</span>&nbsp;<input type="radio" name="fruit"><span class="target_level"> Level4</span>
+                                &nbsp;<input type="radio" name="fruit"><span class="target_level"> Level3</span>&nbsp;<input type="radio" name="fruit"><span class="target_level"> Level4</span> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/save-trck.png" class="save-trck">
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="col-12 mt-20">
+                    <div class="row">
+                        <div class="col-1">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="">
+                            </div>
+                        </div>
+                        <!-- <div class="col-11 level_setup">
+                            <div class="row">
+                                <div class="col-3 border-right font-size-13">
+                                    <span class="set_PL">PL</span> Gross Profit Ratio
+                                </div>
+
+                                <div class="col-1 border-right">
+                                    <div class="col-12 text-secondary font-size-14">
+                                        Target
+                                    </div>
+                                    <div class="col-12 font-size-13 pt-3">
+                                        <?= number_format(85485) ?>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="checkbox-wrapper-18">
+                                        <div class="round">
+                                            <input type="checkbox" id="checkbox-18" />
+                                            <label for="checkbox-18"></label>
+                                        </div>
+                                    </div>
+                                    <div class="input-group pt-2 pb-2 pl-2 pr-2 font-size-10">
+                                        <span class="input-group-text" id="basic-Level1">Level1</span>
+                                        <input type="text" class="form-control" aria-label="number" placeholder="<?= number_format(10265) ?>" aria-describedby="basic-Level1">
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="col-12">
+                            <div class="alert alert-primary" role="alert">
+
                             </div>
                         </div>
                     </div>
@@ -123,5 +164,4 @@ $this->title = 'Weight Allocation';
             </div>
         </div>
     </div>
-</div>
 </div>

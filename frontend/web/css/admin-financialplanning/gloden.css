@@ -424,7 +424,7 @@ div[role="progressbar4"]::before {
 }
 
 input[type="checkbox"]:checked+label {
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .link-Ideal {
