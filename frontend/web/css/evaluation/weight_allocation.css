@@ -255,7 +255,7 @@
 }
 
 .PMI1 {
-    border-radius: 2px;
+    border-radius: 3px;
     background-color: #2580D3;
     color: white;
     font-size: 13px;
@@ -283,4 +283,92 @@
     padding-right: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
+}
+
+.custom-radio[type="radio"] {
+    appearance: none;
+    border: 1px solid #d3d3d3;
+    width: 18px;
+    height: 18px;
+    content: none;
+    outline: none;
+    border-radius: 50%;
+    margin: 0;
+
+}
+
+.custom-radio[type="radio"]:checked {
+    appearance: none;
+    border-radius: 50%;
+    outline: none;
+    padding: 0;
+}
+
+.custom-radio[type="radio"]:checked::before {
+    position: absolute;
+    background: #0c1332;
+    accent-color: blue;
+    border-radius: 50%;
+    color: white !important;
+    content: "\00A0\2713\00A0" !important;
+    border: 1px solid #d3d3d3;
+    font-weight: bolder;
+    font-size: 13px;
+}
+
+.custom_bottom {
+    background-color: #FAFAFA;
+    border-radius: 5px;
+    color: #636470;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    font-size: 13px;
+}
+
+.target_level {
+    font-size: 12px;
+    color: #787878;
+    background-color: #EBEBEB;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 2px;
+    padding-right: 3px;
+    border-radius: 3px;
+}
+
+
+/* css */
+.label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type=radio] {
+    appearance: none;
+    background-color: #fff;
+    width: 15px;
+    height: 15px;
+    border: 2px solid #ccc;
+    border-radius: 50px;
+    display: inline-grid;
+    place-content: center;
+}
+
+input[type=radio]::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    transform: scale(0);
+    transform-origin: bottom left;
+    background-color: #fff;
+    clip-path: polygon(13% 50%, 34% 66%, 81% 2%, 100% 18%, 39% 100%, 0 71%);
+}
+
+input[type=radio]:checked::before {
+    transform: scale(1);
+}
+
+input[type=radio]:checked {
+    background-color: #000000;
+    border: 2px solid #000000;
 }
