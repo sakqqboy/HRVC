@@ -43,14 +43,16 @@
 .input-group {
     z-index: 0;
 }
-.department-title-box{
+
+.department-title-box {
     height: 160px;
 }
-.all-title-box{
-    width:200px;
-    min-height:210px;
-    background-color:white;
-    position:absolute;
+
+.all-title-box {
+    width: 200px;
+    min-height: 210px;
+    background-color: white;
+    position: absolute;
     margin-top: -200px;
     margin-left: 20px;
     padding-left: 20px;
@@ -60,7 +62,7 @@
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     z-index: 2;
     display: none;
-    
+
 }
 
 @media(max-width: 922px) {
@@ -73,6 +75,7 @@
     .department-one {
         padding-left: 20px;
     }
+
     .image-vector {
         width: 60px;
     }

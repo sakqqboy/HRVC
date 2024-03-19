@@ -625,7 +625,7 @@ $this->title = 'Evaluation Settings';
                                 ?>
 
                             </div>
-                            <div class="col-12 mt-10 l-10">
+                            <div class="col-12 mt-10">
                                 <div class="form-check">
                                     <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="">
                                     <label class="form-check-label" for="">

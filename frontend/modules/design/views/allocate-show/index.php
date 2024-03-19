@@ -91,7 +91,7 @@ $this->title = 'Weight Allocation';
                             Key Financial Indicator
                         </div>
                         <div class="col-2">
-                            <div type=" submit" class="PMI1"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/save-2.png" class="Save-2"> APPLY SAVE</div>
+                            <div type="submit" class="PMI1"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/save-2.png" class="Save-2"> APPLY SAVE</div>
                         </div>
                         <div class="col-7 text-end">
                             <div type="submit" class="btn btn-primary pt-3 pb-3 font-size-13"><i class="fa fa-th-large text-white" aria-hidden="true"></i>&nbsp; KFI Dashboard</div>
@@ -106,10 +106,10 @@ $this->title = 'Weight Allocation';
                                 Do You Want Level 3 As Default Target ?
                             </div>
                         </div>
-                        <div class="col-3 pt-20">
-                            <input type="radio" name="fruit"><span class="font-size-12 pl-2"> YES</span>
-                            <span class="pl-20"></span>
-                            <input type="radio" name="fruit"><span class="font-size-12 pl-2"> NO</span>
+                        <div class="col-2 pt-15">
+                            <input type="radio" name="fruit"><span class="font-size-11"> YES</span>
+                            <span class="pl-12"></span>
+                            <input type="radio" name="fruit"><span class="font-size-11"> NO</span>
                         </div>
                         <!-- <div class="col-6 custom_bottom">
                             <div class="col-12">
@@ -117,49 +117,107 @@ $this->title = 'Weight Allocation';
                                 &nbsp;<input type="radio" name="fruit"><span class="target_level"> Level3</span>&nbsp;<input type="radio" name="fruit"><span class="target_level"> Level4</span> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/save-trck.png" class="save-trck">
                             </div>
                         </div> -->
-                    </div>
-                </div>
-                <div class="col-12 mt-20">
-                    <div class="row">
-                        <div class="col-1">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="">
-                            </div>
-                        </div>
-                        <!-- <div class="col-11 level_setup">
+                        <div class="col-7 pt-15 text-end">
                             <div class="row">
-                                <div class="col-3 border-right font-size-13">
-                                    <span class="set_PL">PL</span> Gross Profit Ratio
-                                </div>
-
-                                <div class="col-1 border-right">
-                                    <div class="col-12 text-secondary font-size-14">
-                                        Target
+                                <div class="col-10">
+                                    <div class="col-12 font-size-12 text-end">
+                                        Allocate percentage to all the selected
                                     </div>
-                                    <div class="col-12 font-size-13 pt-3">
-                                        <?= number_format(85485) ?>
+                                    <div class="col-12 font-size-12 text-end">
+                                        KFI contents to continue
                                     </div>
                                 </div>
                                 <div class="col-2">
-                                    <div class="checkbox-wrapper-18">
-                                        <div class="round">
-                                            <input type="checkbox" id="checkbox-18" />
-                                            <label for="checkbox-18"></label>
-                                        </div>
-                                    </div>
-                                    <div class="input-group pt-2 pb-2 pl-2 pr-2 font-size-10">
-                                        <span class="input-group-text" id="basic-Level1">Level1</span>
-                                        <input type="text" class="form-control" aria-label="number" placeholder="<?= number_format(10265) ?>" aria-describedby="basic-Level1">
-                                    </div>
+                                    <div class="procresscircle_deg">100%</div>
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Wornning-blue.png" class="wb-progress">
                                 </div>
-                            </div>
-                        </div> -->
-                        <div class="col-12">
-                            <div class="alert alert-primary" role="alert">
-
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="col-12">
+                    <?php
+                    for ($i = 1; $i <= 5; $i++) {
+                    ?>
+
+                        <div class="row">
+                            <div class="col-1">
+                                <label class="checkbox style-c">
+                                    <input type="checkbox" />
+                                    <div class="checkbox__checkmark"></div>
+                                    <div class="checkbox__body"></div>
+                                </label>
+                            </div>
+                            <div class="col-11 level_setup">
+                                <div class="row">
+                                    <div class="col-2 border-right pt-10">
+                                        <span class="set_PL">PL</span>
+                                        <span class="font-size-11"> Gross Profit Ratio</span>
+                                    </div>
+                                    <div class="col-1 border-right">
+                                        <div class="col-12 text-secondary font-size-12">
+                                            Target
+                                        </div>
+                                        <div class="col-12 font-size-10 pt-3 text-secondary font-b">
+                                            <?= number_format(854812) ?>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <label class="checkbox style-f">
+                                            <input type="checkbox" />
+                                            <div class="checkbox__checkmark"></div>
+                                            <div class="checkbox__body"></div>
+                                        </label>
+                                        <div class="input-group" style="margin-top: -16px;margin-left:5px;">
+                                            <span class=" input-group-text Level-txt" id="inputGroup-sizing-sm">Level1</span>
+                                            <input type="text" class="form-control Level-txtinput" aria-label="Sizing example input">
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <label class="checkbox style-f">
+                                            <input type="checkbox" />
+                                            <div class="checkbox__checkmark"></div>
+                                            <div class="checkbox__body"></div>
+                                        </label>
+                                        <div class="input-group" style="margin-top: -16px;margin-left:5px;">
+                                            <span class="input-group-text Level-txt" id="inputGroup-sizing-sm">Level2</span>
+                                            <input type="text" class="form-control Level-txtinput" aria-label="Sizing example input">
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <label class="checkbox style-f">
+                                            <input type="checkbox" />
+                                            <div class="checkbox__checkmark"></div>
+                                            <div class="checkbox__body"></div>
+                                        </label>
+                                        <div class="input-group" style="margin-top: -16px;margin-left:5px;">
+                                            <span class=" input-group-text Level-txt" id="inputGroup-sizing-sm">Level3</span>
+                                            <input type="text" class="form-control Level-txtinput" aria-label="Sizing example input">
+                                        </div>
+                                    </div>
+                                    <div class="col-2 border-right">
+                                        <label class="checkbox style-f">
+                                            <input type="checkbox" />
+                                            <div class="checkbox__checkmark"></div>
+                                            <div class="checkbox__body"></div>
+                                        </label>
+                                        <div class="input-group" style="margin-top: -16px;margin-left:5px;">
+                                            <span class=" input-group-text Level-txt" id="inputGroup-sizing-sm">Level4</span>
+                                            <input type="text" class="form-control Level-txtinput" aria-label="Sizing example input">
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/setting(Round).png" class="setting_png"> <span class="font-size-10"> Weight</span>
+                                        <input class="form-control form-control-sm weight_round" type="text" placeholder="25%">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    <?php
+                    }
+                    ?>
+
                 </div>
             </div>
         </div>
