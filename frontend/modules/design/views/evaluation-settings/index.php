@@ -2,1008 +2,785 @@
 $this->title = 'Evaluation Settings';
 ?>
 
-<div class="col-12 mt-90 alert alert-Evaluator">
+<div class="col-12 mt-70 environment pt-10 pr-10 pl-20">
     <div class="row">
-        <div class="col-lg-3 col-md-6 col-12">
-            <div class="row">
-                <div class="col-5">
-                    <img src="<?= Yii::$app->homeUrl ?>image/BD.jpg" class="imagealertEvaluator">
-                </div>
-                <div class="col-7 setEvaluator">
-                    Tokyo Consulting Firm Pvt. Ltd
+        <div class="col-lg-2 col-md-6 col-12 pr-0 pl-5">
+            <div class="border-bottom pb-20">
+                <div class="row">
+                    <div class="col-5 text-center pr-5 pl-5">
+                        <img src="<?= Yii::$app->homeUrl ?>image/BD.jpg" class="imagealertEvaluator">
+                    </div>
+                    <div class="col-7 font-size-14 font-b pr-5 pl-10 pt-0">
+                        Tokyo Consulting Firm Pvt. Ltd
+                    </div>
                 </div>
             </div>
-            <div class="col-12 Evaluator-country">
+            <div class="col-12 Evaluator-country font-size-12 mt-10">
                 &nbsp;&nbsp; <img src="<?= Yii::$app->homeUrl ?>image/Thailand.png" class="imageEvaluatorcountry"> Bangkok, Thailand
             </div>
-            <div class="col-12">
-                <div class="shadow-sm p-3 mb-5 bg-body rounded mt-30">
-                    <div class="Mid-Term"> Mid Term Evaluation Phase</div>
-                    <div class="E3"> E3 </div>
+            <div class="col-12 mt-20">
+                <div class="mb-5 bg-body rounded-1 text-center font-size-12 pt-5 pr-5 pl-5 pb-5 font-weight-500 text-black-50">
+                    Mid Term Evaluation Phase
+                    <div class="E3 mt-5"> E3 </div>
                 </div>
             </div>
-            <div class="card" style="border:none;">
-                <div class="col-12">
-                    <div class="col-12 EvaluatorConfiguration">
-                        <i class="fa fa-cog" aria-hidden="true"></i> &nbsp; Set Configuration
+
+            <div class="col-12 bg-white rounded-1 mt-40 pb-10">
+                <div class="col-12 EvaluatorConfiguration pt-20 pl-10 border-bottom pb-20">
+                    <i class="fa fa-cog mr-5" aria-hidden="true"></i>Set Configuration
+                </div>
+                <div class="col-12 mt-20">
+                    <div class="rad-label pl-0 mt-10 pr-0">
+                        <div class="col-12 pl-5 rad-text pr-3">
+                            <i class="fa fa-check-circle-o text-success mr-10 font-size-18" aria-hidden="true"></i>
+                            <span class="text-dark font-weight-500 ">Evaluation Frame</span>
+                        </div>
                     </div>
-                    <hr>
-                    <div class="col-12">
-                        <div>
-                            <label class="rad-label">
-                                <input type="radio" class="rad-input" name="rad">
-                                <div class="rad-design"></div>
-                                <div class="rad-text"> Evaluation Frame</div>
-                            </label>
-                            <div class="Evaluationdeshed"></div>
-
-                            <label class="rad-label">
-                                <input type="radio" class="rad-input" name="rad">
-                                <div class="rad-design"></div>
-                                <div class="rad-text"> Weight Allocation</div>
-                            </label>
-
-                            <label class="rad-label">
-                                <input type="radio" class="rad-input" name="rad">
-                                <div class="rad-design"></div>
-                                <div class="rad-text"> Evaluator Settings</div>
-                            </label>
-
-                            <label class="rad-label">
-                                <input type="radio" class="rad-input" name="rad">
-                                <div class="rad-design"></div>
-                                <div class="rad-text">Rank & Increasement</div>
-                            </label>
-
-                            <label class="rad-label">
-                                <input type="radio" class="rad-input" name="rad">
-                                <div class="rad-design"></div>
-                                <div class="rad-text"> Salary & Allowance Range</div>
-                            </label>
-
-                            <label class="rad-label">
-                                <input type="radio" class="rad-input" name="rad">
-                                <div class="rad-design"></div>
-                                <div class="rad-text"> Bonus calculation</div>
-                            </label>
-
-                            <label class="rad-label">
-                                <input type="radio" class="rad-input" name="rad">
-                                <div class="rad-design"></div>
-                                <div class="rad-text"> Promotion</div>
-                            </label>
+                    <div class="Evaluationdeshed"></div>
+                    <div class="rad-label pl-0 pr-0 pt-0">
+                        <div class="col-12 pl-5 rad-text pr-3">
+                            <i class="fa fa-circle mr-10 font-size-18 text-secondary" aria-hidden="true"></i>
+                            <span class="text-dark font-weight-500">Weight Allocation</span>
+                        </div>
+                    </div>
+                    <div class="Evaluationdeshed"></div>
+                    <div class="rad-label pl-0 pr-0">
+                        <div class="col-12 pl-5 rad-text pr-3">
+                            <i class="fa fa-circle mr-10 font-size-18 text-secondary" aria-hidden="true"></i>
+                            <span class="text-dark font-weight-500">Evaluator Settings</span>
+                        </div>
+                    </div>
+                    <div class="Evaluationdeshed"></div>
+                    <div class="rad-label pl-0 pr-0">
+                        <div class="col-12 pl-5 rad-text pr-3">
+                            <i class="fa fa-circle mr-10 font-size-18 text-secondary" aria-hidden="true"></i>
+                            <span class="text-dark font-weight-500">Rank & Increasement</span>
+                        </div>
+                    </div>
+                    <div class="Evaluationdeshed"></div>
+                    <div class="rad-label pl-0 pr-0">
+                        <div class="col-12 pl-5 rad-text pr-3">
+                            <i class="fa fa-circle mr-10 font-size-18 text-secondary" aria-hidden="true"></i>
+                            <span class="text-dark font-weight-500">Salary & Allowance Range</span>
+                        </div>
+                    </div>
+                    <div class="Evaluationdeshed"></div>
+                    <div class="rad-label pl-0 pr-0">
+                        <div class="col-12 pl-5 rad-text pr-3">
+                            <i class="fa fa-circle mr-10 font-size-18 text-secondary" aria-hidden="true"></i>
+                            <span class="text-dark font-weight-500">Bonus calculation</span>
+                        </div>
+                    </div>
+                    <div class="Evaluationdeshed"></div>
+                    <div class="rad-label pl-0 pr-0">
+                        <div class="col-12 pl-5 rad-text pr-3">
+                            <i class="fa fa-circle mr-10 font-size-18 text-secondary" aria-hidden="true"></i>
+                            <span class="text-dark font-weight-500">Promotion</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-9 col-md-6 col-12">
-            <div class="alert aler-ALLDepartment">
-                <div class="row">
-                    <div class="col-3">
-                        <div class="Evaluator-Settings"> Evaluator Settings</div>
-                    </div>
-                    <div class="col-2 text-Participating">
-                        Participating Employees
-                    </div>
-                    <div class="col-1 viewlog">
-                        <span class="badge rounded-pill bg-gray">
-                            <ul class="try-cricle">
-                                <li class="tri-li"> <img src="/HRVC/frontend/web/image/avatar1.png" class="image-avatar1"></li>
-                                <li class="tri-li"> <img src="/HRVC/frontend/web/image/Watanabe.png" class="image-avatar2"></li>
-                                <li class="tri-li"> <img src="/HRVC/frontend/web/image/avatar3.png" class="image-avatar3"></li>
-                                <a href="" class="none">
-                                    <li class="tri-li-number1"> 5 </li>
-                                </a>
-                            </ul>
-                        </span>
-                    </div>
-                    <div class="col-2 text-end Term1Employees">
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Team-1.png" class="imagessettingsTerm1"> Employees
-                    </div>
-                    <div class="col-3">
-                        <!-- <form class="d-flex">
+        <div class="col-lg-10 col-md-6 col-12">
+            <div class="bg-white pmi_bakgru">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="Evaluator-Settings"> Evaluator Settings</div>
+                        </div>
+                        <div class="col-2 text-Participating">
+                            Participating Employees
+                        </div>
+                        <div class="col-1 viewlog">
+                            <span class="badge rounded-pill bg-gray">
+                                <ul class="try-cricle">
+                                    <li class="tri-li"> <img src="/HRVC/frontend/web/image/avatar1.png" class="image-avatar1"></li>
+                                    <li class="tri-li"> <img src="/HRVC/frontend/web/image/Watanabe.png" class="image-avatar2"></li>
+                                    <li class="tri-li"> <img src="/HRVC/frontend/web/image/avatar3.png" class="image-avatar3"></li>
+                                    <a href="" class="none">
+                                        <li class="tri-li-number1"> 5 </li>
+                                    </a>
+                                </ul>
+                            </span>
+                        </div>
+                        <div class="col-2 text-end Term1Employees">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Team-1.png" class="imagessettingsTerm1"> Employees
+                        </div>
+                        <div class="col-3">
+                            <!-- <form class="d-flex">
                             <input class="form-control me-2 settingssearch-radius" type="search" placeholder="Search" aria-label="Search">
                             <i class="fa fa-search settingssearch" aria-hidden="true" type="submit"></i>
                         </form> -->
-                        <div class="search-box">
-                            <input class="search-input" type="text" placeholder="Search">
-                            <button class="search-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
-                        </div>
-                    </div>
-                    <div class="col-1">
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterPlus.png" class="imagessettingsFillerPlus">
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="card bgcradlightgray">
-                        <div class="row Row-bgcradlightgray">
-                            <div class="col-lg-2 col-md-6 col-2">
-                                <div class="col-12">
-                                    employee
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-md-6 col-2">
-                                <div class="col-12">
-                                    key Financial Indicator
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-md-6 col-2">
-                                <div class="col-12">
-                                    key Group Indicator
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-md-6 col-2">
-                                <div class="col-12">
-                                    key Performance Indicator
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-md-6 col-2">
-                                <div class="col-12">
-                                    Primary Evaluator
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-md-6 col-2">
-                                <div class="col-12">
-                                    FINAL Evaluator
-                                </div>
+                            <div class="search-box">
+                                <input class="search-input" type="text" placeholder="Search">
+                                <button class="search-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-2 col-md-6 col-2">
-                        <div class="card crdEmployeeslight1">
-                            <div class="col-12">
-                                <img src="<?= Yii::$app->homeUrl ?>image/lghrvc1.png" class="images1"> <span class="nameimages1"> Charles Bhattacharjya</span>
-                            </div>
+                        <div class="col-1">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterPlus.png" class="imagessettingsFillerPlus">
                         </div>
                     </div>
-                    <div class="col-lg-2 col-md-6 col-2">
-                        <div class="card crdEmployeeslight2">
-                            <div class="text-group">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-3.png" class="check-circle-Employees1">
-                                <!-- <input class="form-check-input form-check-input-checkEmployees1" type="checkbox" value="InputEmployees" id=""> -->
-                                <label class="form-check-label LabelEmployees" for="defaultCheck1">6 Assigned &nbsp;</label>
-                                <span>
-                                    <div role="progressbarprimary" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="--value:20"></div>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-2">
-                        <div class="card crdEmployeeslight3">
-                            <div class="text-group">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-3.png" class="check-circle-Employees2">
-                                <!-- <input class="form-check-input form-check-input-checkEmployees2" type="checkbox" value="InputEmployees2" id=""> -->
-                                <label class="form-check-label LabelEmployees2" for="defaultCheck2">2 Assigned &nbsp;</label>
-                                <span>
-                                    <div role="progressbaryellow" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="--value:80"></div>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-2">
-                        <div class="card crdEmployeeslight4">
-                            <div class="text-group">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-3.png" class="check-circle-Employees3">
-                                <!-- <input class="form-check-input form-check-input-checkEmployees3" type="checkbox" value="InputEmployees3" id=""> -->
-                                <label class="form-check-label LabelEmployees3" for="defaultCheck2">12 Assigned &nbsp;</label>
-                                <span>
-                                    <div role="progressbarred" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="--value:40"></div>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-2 mt-10">
-                        <div class="col-12">
-                            <div class="input-group mb-3">
-                                <span class="input-group-text group-btnprimary">1st</span>
-                                <span class="form-control group-controltext">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <div class="col-1">
-                                                    <img src="<?= Yii::$app->homeUrl ?>image/thai.jpg" class="images2">
-                                                </div>
-                                                <div class="col-5">
-                                                    <span class="nameimages2">
-                                                        <div class="Directorfontsmall1"> Guru</div>
-                                                        <div class="Directorfontsmall1"> Director</div>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <div class="col-5">
-                                                    <span class="nameimages2">
-                                                        <div class="Directorfontsmall2"> Vikrant</div>
-                                                        <div class="Directorfontsmall2"> Title</div>
-                                                    </span>
-                                                </div>
-                                                <div class="col-1">
-                                                    <img src="<?= Yii::$app->homeUrl ?>image/thai.jpg" class="images3">
-                                                </div>
-                                            </div>
-                                        </div>
+                    <div class="col-12">
+                        <div class="bgcradlightgray">
+                            <div class="row Row-bgcradlightgray">
+                                <div class="col-lg-2 col-md-6 col-2">
+                                    <div class="col-12">
+                                        employee
                                     </div>
-                                </span>
-                                <span class="input-group-text group-btnprimary">2nd</span>
+                                </div>
+                                <div class="col-lg-2 col-md-6 col-2">
+                                    <div class="col-12">
+                                        key Financial Indicator
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-6 col-2">
+                                    <div class="col-12">
+                                        key Group Indicator
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-6 col-2">
+                                    <div class="col-12">
+                                        key Performance Indicator
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-6 col-2">
+                                    <div class="col-12">
+                                        Primary Evaluator
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-6 col-2">
+                                    <div class="col-12">
+                                        FINAL Evaluator
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-1 col-md-6 col-12 mt-10">
-                        <span class="btn btn-light" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModalAssign"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Assign.png" class="imagesAssingLight"></span>
-                    </div>
+                    <div class="row">
+                        <div class="col-lg-2 col-md-6 col-2">
+                            <div class="crdEmployeeslight1">
+                                <div class="col-12">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="images1"> <span class="nameimages1"> Charles Bhattacharjya</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-2">
+                            <div class="crdEmployeeslight2">
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModalAssign" tabindex="-1" aria-labelledby="exampleModalLabelAssign" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="countheader">
-                                    <div class="row mt-10 pl-20">
-                                        <div class="col-1" id="exampleModalLabelAssign">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/groupProfile.jpg" class="Profiles">
-                                        </div>
-                                        <div class="col-9">
-                                            <div> AMI FARUQ </div>
-                                            <div> Director, Gihu</div>
-                                        </div>
-                                        <div class="col-2 text-center mt-10 pl-50">
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-12">
-                                            <div class="col-12">
-                                                Primary Evaluator
-                                            </div>
-                                            <div class="col-7 ml-30">
-                                                <select class="form-select selectDefaultPrimary" aria-label="Default select example">
-                                                    <option selected value="">Select this</option>
-                                                    <option value="1">Tokyo Consulting Firm co.th</option>
-                                                    <option value="2">Tokyo Consulting Firm group</option>
-                                                    <option value="3">Tokyo Consulting Firm Limited</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-4 ml-30">
-                                                <select class="form-select selectDefaultPrimary" aria-label="Default select example">
-                                                    <option selected value="">Select this</option>
-                                                    <option value="1">Branch</option>
-                                                    <option value="2">Title</option>
-                                                    <option value="3"> Employees</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-12 card cardPrimaryEvaluator">
-                                                <div class="col-12">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Department.png" class="DepartmentAccounts"> Accounts
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 mt-10">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Department.png" class="DepartmentAccounts"> IT
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 mt-10">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Department.png" class="DepartmentAccounts"> MKT
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-12">
-                                            <div class="col-12">
-                                                Final Evaluator
-                                            </div>
-                                            <div class="col-7 ml-30">
-                                                <select class="form-select selectDefaultPrimary" aria-label="Default select example">
-                                                    <option selected value="">Select this</option>
-                                                    <option value="1">Tokyo Consulting Firm co.th</option>
-                                                    <option value="2">Tokyo Consulting Firm group</option>
-                                                    <option value="3">Tokyo Consulting Firm Limited</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-4 ml-30">
-                                                <select class="form-select selectDefaultPrimary" aria-label="Default select example">
-                                                    <option selected value="">Select this</option>
-                                                    <option value="1">Branch</option>
-                                                    <option value="2">Title</option>
-                                                    <option value="3"> Employees</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-12 card cardPrimaryEvaluator">
-                                                <div class="col-12">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Department.png" class="DepartmentAccounts"> Accounts
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 mt-10">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Department.png" class="DepartmentAccounts"> IT
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 mt-10">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Department.png" class="DepartmentAccounts"> MKT
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div class="checkbox-wrapper-18">
+                                    <div class="round">
+                                        <input type="checkbox" id="checkbox-18" />
+                                        <label for="checkbox-18"></label>
                                     </div>
                                 </div>
-                                <div class="col-12 text-end pr-10 pb-10">
-                                    <button class="btn btn-primary SET">SET</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End -->
-                </div>
-                <div class="row">
-                    <div class="col-lg-2 col-md-6 col-2">
-                        <div class="card crdEmployeeslight1">
-                            <div class="col-12">
-                                <img src="<?= Yii::$app->homeUrl ?>image/lghrvc1.png" class="images1"> <span class="nameimages1"> Charles Bhattacharjya</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-2">
-                        <div class="card crdEmployeeslight2">
-                            <div class="text-group">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-3.png" class="check-circle-Employees1">
-                                <!-- <input class="form-check-input form-check-input-checkEmployees1" type="checkbox" value="InputEmployees" id=""> -->
-                                <label class="form-check-label LabelEmployees" for="defaultCheck1">6 Assigned &nbsp;</label>
-                                <span>
-                                    <div role="progressbarprimary" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="--value:20"></div>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-2">
-                        <div class="card crdEmployeeslight3">
-                            <div class="text-group">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-3.png" class="check-circle-Employees2">
-                                <!-- <input class="form-check-input form-check-input-checkEmployees2" type="checkbox" value="InputEmployees2" id=""> -->
-                                <label class="form-check-label LabelEmployees2" for="defaultCheck2">2 Assigned &nbsp;</label>
-                                <span>
-                                    <div role="progressbaryellow" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="--value:80"></div>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-2">
-                        <div class="card crdEmployeeslight4">
-                            <div class="text-group">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-3.png" class="check-circle-Employees3">
-                                <!-- <input class="form-check-input form-check-input-checkEmployees3" type="checkbox" value="InputEmployees3" id=""> -->
-                                <label class="form-check-label LabelEmployees3" for="defaultCheck2">12 Assigned &nbsp;</label>
-                                <span>
-                                    <div role="progressbarred" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="--value:40"></div>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-2 mt-10">
-                        <div class="col-12">
-                            <div class="input-group mb-3">
-                                <span class="input-group-text group-btnprimary">1st</span>
-                                <span class="form-control group-controltext">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <div class="col-1">
-                                                    <img src="<?= Yii::$app->homeUrl ?>image/thai.jpg" class="images2">
-                                                </div>
-                                                <div class="col-5">
-                                                    <span class="nameimages2">
-                                                        <div class="Directorfontsmall1"> Guru</div>
-                                                        <div class="Directorfontsmall1"> Director</div>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <div class="col-5">
-                                                    <span class="nameimages2">
-                                                        <div class="Directorfontsmall2"> Vikrant</div>
-                                                        <div class="Directorfontsmall2"> Title</div>
-                                                    </span>
-                                                </div>
-                                                <div class="col-1">
-                                                    <img src="<?= Yii::$app->homeUrl ?>image/thai.jpg" class="images3">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </span>
-                                <span class="input-group-text group-btnprimary">2nd</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-1 col-md-6 col-12 mt-10">
-                        <span class="btn btn-light" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModalAssign"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Assign.png" class="imagesAssingLight"></span>
-                    </div>
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModalAssign" tabindex="-1" aria-labelledby="exampleModalLabelAssign" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="countheader">
-                                    <div class="row mt-10 pl-20">
-                                        <div class="col-1" id="exampleModalLabelAssign">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/groupProfile.jpg" class="Profiles">
-                                        </div>
-                                        <div class="col-9">
-                                            <div> AMI FARUQ </div>
-                                            <div> Director, Gihu</div>
-                                        </div>
-                                        <div class="col-2 text-center mt-10 pl-50">
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-12">
-                                            <div class="col-12">
-                                                Primary Evaluator
-                                            </div>
-                                            <div class="col-7 ml-30">
-                                                <select class="form-select selectDefaultPrimary" aria-label="Default select example">
-                                                    <option selected value="">Select this</option>
-                                                    <option value="1">Tokyo Consulting Firm co.th</option>
-                                                    <option value="2">Tokyo Consulting Firm group</option>
-                                                    <option value="3">Tokyo Consulting Firm Limited</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-4 ml-30">
-                                                <select class="form-select selectDefaultPrimary" aria-label="Default select example">
-                                                    <option selected value="">Select this</option>
-                                                    <option value="1">Branch</option>
-                                                    <option value="2">Title</option>
-                                                    <option value="3"> Employees</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-12 card cardPrimaryEvaluator">
-                                                <div class="col-12">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Department.png" class="DepartmentAccounts"> Accounts
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 mt-10">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Department.png" class="DepartmentAccounts"> IT
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 mt-10">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Department.png" class="DepartmentAccounts"> MKT
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-12">
-                                            <div class="col-12">
-                                                Final Evaluator
-                                            </div>
-                                            <div class="col-7 ml-30">
-                                                <select class="form-select selectDefaultPrimary" aria-label="Default select example">
-                                                    <option selected value="">Select this</option>
-                                                    <option value="1">Tokyo Consulting Firm co.th</option>
-                                                    <option value="2">Tokyo Consulting Firm group</option>
-                                                    <option value="3">Tokyo Consulting Firm Limited</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-4 ml-30">
-                                                <select class="form-select selectDefaultPrimary" aria-label="Default select example">
-                                                    <option selected value="">Select this</option>
-                                                    <option value="1">Branch</option>
-                                                    <option value="2">Title</option>
-                                                    <option value="3"> Employees</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-12 card cardPrimaryEvaluator">
-                                                <div class="col-12">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Department.png" class="DepartmentAccounts"> Accounts
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 mt-10">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Department.png" class="DepartmentAccounts"> IT
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 mt-10">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Department.png" class="DepartmentAccounts"> MKT
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check  evaluatorIT">
-                                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="imageDepartmentIT"> Biki Das
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 text-end pr-10 pb-10">
-                                    <button class="btn btn-primary SET">SET</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End -->
-                </div>
-                <div class="row">
-                    <div class="col-lg-2 col-md-6 col-2">
-                        <div class="card crdEmployeeslight1">
-                            <div class="col-12">
-                                <img src="<?= Yii::$app->homeUrl ?>image/lghrvc1.png" class="images1"> <span class="nameimages1"> Tomas Shutradhar</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-2">
-                        <div class="card crdEmployeeslight2">
-                            <div class="text-group">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-3.png" class="check-circle-Employees1">
                                 <label class="form-check-label LabelEmployees" for="defaultCheck1">6 Assigned &nbsp;</label>
                                 <span>
-                                    <div role="progressbarprimary" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="--value:20"></div>
+                                    <div role="progressbarprimary" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="--value:20;"></div>
                                 </span>
+
+
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-2">
-                        <div class="card crdEmployeeslight3">
-                            <div class="text-group">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-3.png" class="check-circle-Employees2">
-                                <label class="form-check-label LabelEmployees2" for="defaultCheck2">2 Assigned &nbsp;</label>
-                                <span>
-                                    <div role="progressbaryellow" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="--value:80"></div>
-                                </span>
+                        <div class="col-lg-2 col-md-6 col-2">
+                            <div class="card crdEmployeeslight3">
+                                <div class="text-group">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-3.png" class="check-circle-Employees2">
+                                    <!-- <input class="form-check-input form-check-input-checkEmployees2" type="checkbox" value="InputEmployees2" id=""> -->
+                                    <label class="form-check-label LabelEmployees2" for="defaultCheck2">2 Assigned &nbsp;</label>
+                                    <span>
+                                        <div role="progressbaryellow" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="--value:80"></div>
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-2">
-                        <div class="card crdEmployeeslight4">
-                            <div class="text-group">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-3.png" class="check-circle-Employees3">
-                                <label class="form-check-label LabelEmployees3" for="defaultCheck2">12 Assigned &nbsp;</label>
-                                <span>
-                                    <div role="progressbarred" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="--value:40"></div>
-                                </span>
+                        <div class="col-lg-2 col-md-6 col-2">
+                            <div class="card crdEmployeeslight4">
+                                <div class="text-group">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-3.png" class="check-circle-Employees3">
+                                    <!-- <input class="form-check-input form-check-input-checkEmployees3" type="checkbox" value="InputEmployees3" id=""> -->
+                                    <label class="form-check-label LabelEmployees3" for="defaultCheck2">12 Assigned &nbsp;</label>
+                                    <span>
+                                        <div role="progressbarred" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="--value:40"></div>
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-2 mt-10">
-                        <div class="col-12">
-                            <div class="input-group mb-3">
-                                <span class="input-group-text group-btnprimary">1st</span>
-                                <span class="form-control group-controltext">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <div class="col-1">
-                                                    <img src="<?= Yii::$app->homeUrl ?>image/thai.jpg" class="images2">
-                                                </div>
-                                                <div class="col-5">
-                                                    <span class="nameimages2">
-                                                        <div class="Directorfontsmall1"> Guru</div>
-                                                        <div class="Directorfontsmall1"> Director</div>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <div class="col-5">
-                                                    <span class="nameimages2">
-                                                        <div class="Directorfontsmall2"> Vikrant</div>
-                                                        <div class="Directorfontsmall2"> Title</div>
-                                                    </span>
-                                                </div>
-                                                <div class="col-1">
-                                                    <img src="<?= Yii::$app->homeUrl ?>image/thai.jpg" class="images3">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </span>
-                                <span class="input-group-text group-btnprimary">2nd</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-1 col-md-6 col-12 mt-10">
-                        <span class="btn btn-light" type="submit"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Assign.png" class="imagesAssingLight"></span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-2 col-md-6 col-2">
-                        <div class="card crdEmployeeslight1">
+                        <div class="col-lg-3 col-md-6 col-2 mt-10">
                             <div class="col-12">
-                                <img src="<?= Yii::$app->homeUrl ?>image/lghrvc1.png" class="images1"> <span class="nameimages1"> Charles Bhattacharjya</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-2">
-                        <div class="card crdEmployeeslight2">
-                            <div class="text-group">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-4.png" class="check-circle-close">
-                                <label class="form-check-label LabelEmployees" for="defaultCheck1"> <span class="Not-Set "> Not set &nbsp;</span></label>
-                                <span>
-                                    <div role="progressbarprimary" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="--value:0"></div>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-2">
-                        <div class="card crdEmployeeslight3">
-                            <div class="text-group">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-4.png" class="check-circle-close">
-                                <label class="form-check-label LabelEmployees2" for="defaultCheck1"> <span class="Not-Set "> Not set &nbsp;</span></label>
-                                <span>
-                                    <div role="progressbaryellow" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="--value:0"></div>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-2">
-                        <div class="card crdEmployeeslight4">
-                            <div class="text-group">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-4.png" class="check-circle-close">
-                                <label class="form-check-label LabelEmployees3" for="defaultCheck1"> <span class="Not-Set "> Not set &nbsp;</span></label>
-                                <span>
-                                    <div role="progressbarred" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="--value:0"></div>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-2 mt-10">
-                        <div class="col-12">
-                            <div class="input-group mb-3">
-                                <span class="input-group-text group-btnprimary">1st</span>
-                                <span class="form-control group-controltext">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <div class="col-1" style="display: none;">
-                                                    <img src="<?= Yii::$app->homeUrl ?>image/thai.jpg" class="images2">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text group-btnprimary">1st</span>
+                                    <span class="form-control group-controltext">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-1">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/thai.jpg" class="images2">
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <span class="nameimages2">
+                                                            <div class="Directorfontsmall1"> Guru</div>
+                                                            <div class="Directorfontsmall1"> Director</div>
+                                                        </span>
+                                                    </div>
                                                 </div>
-                                                <div class="col-5">
-                                                    <span class="nameimages2">
-                                                        <div class="Directorfontsmall1"></div>
-                                                        <div class="Directorfontsmall1"> </div>
-                                                    </span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-5">
+                                                        <span class="nameimages2">
+                                                            <div class="Directorfontsmall2"> Vikrant</div>
+                                                            <div class="Directorfontsmall2"> Title</div>
+                                                        </span>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/thai.jpg" class="images3">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <div class="col-3">
-                                                    <span class="nameimages2">
-                                                        <div class="Directorfontsmall2"> </div>
-                                                        <div class="Directorfontsmall2"> </div>
-                                                    </span>
+                                    </span>
+                                    <span class="input-group-text group-btnprimary">2nd</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-1 col-md-6 col-12 mt-10">
+                            <span class="btn btn-light" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModalAssign"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Assign.png" class="imagesAssingLight"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2 col-md-6 col-2">
+                            <div class="card crdEmployeeslight1">
+                                <div class="col-12">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/lghrvc1.png" class="images1"> <span class="nameimages1"> Charles Bhattacharjya</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-2">
+                            <div class="card crdEmployeeslight2">
+                                <div class="text-group">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-3.png" class="check-circle-Employees1">
+                                    <!-- <input class="form-check-input form-check-input-checkEmployees1" type="checkbox" value="InputEmployees" id=""> -->
+                                    <label class="form-check-label LabelEmployees" for="defaultCheck1">6 Assigned &nbsp;</label>
+                                    <span>
+                                        <div role="progressbarprimary" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="--value:20"></div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-2">
+                            <div class="card crdEmployeeslight3">
+                                <div class="text-group">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-3.png" class="check-circle-Employees2">
+                                    <!-- <input class="form-check-input form-check-input-checkEmployees2" type="checkbox" value="InputEmployees2" id=""> -->
+                                    <label class="form-check-label LabelEmployees2" for="defaultCheck2">2 Assigned &nbsp;</label>
+                                    <span>
+                                        <div role="progressbaryellow" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="--value:80"></div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-2">
+                            <div class="card crdEmployeeslight4">
+                                <div class="text-group">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-3.png" class="check-circle-Employees3">
+                                    <!-- <input class="form-check-input form-check-input-checkEmployees3" type="checkbox" value="InputEmployees3" id=""> -->
+                                    <label class="form-check-label LabelEmployees3" for="defaultCheck2">12 Assigned &nbsp;</label>
+                                    <span>
+                                        <div role="progressbarred" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="--value:40"></div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-2 mt-10">
+                            <div class="col-12">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text group-btnprimary">1st</span>
+                                    <span class="form-control group-controltext">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-1">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/thai.jpg" class="images2">
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <span class="nameimages2">
+                                                            <div class="Directorfontsmall1"> Guru</div>
+                                                            <div class="Directorfontsmall1"> Director</div>
+                                                        </span>
+                                                    </div>
                                                 </div>
-                                                <div class="col-1" style="display: none;">
-                                                    <img src="<?= Yii::$app->homeUrl ?>image/thai.jpg" class="images3">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-5">
+                                                        <span class="nameimages2">
+                                                            <div class="Directorfontsmall2"> Vikrant</div>
+                                                            <div class="Directorfontsmall2"> Title</div>
+                                                        </span>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/thai.jpg" class="images3">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </span>
-                                <span class="input-group-text group-btnprimary">2nd</span>
+                                    </span>
+                                    <span class="input-group-text group-btnprimary">2nd</span>
+                                </div>
                             </div>
                         </div>
+                        <div class="col-lg-1 col-md-6 col-12 mt-10">
+                            <span class="btn btn-light" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModalAssign"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Assign.png" class="imagesAssingLight"></span>
+                        </div>
                     </div>
-                    <div class="col-lg-1 col-md-6 col-12 mt-10">
-                        <span class="btn btn-light" type="submit"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Assign.png" class="imagesAssingLight"></span>
+                    <div class="row">
+                        <div class="col-lg-2 col-md-6 col-2">
+                            <div class="card crdEmployeeslight1">
+                                <div class="col-12">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/lghrvc1.png" class="images1"> <span class="nameimages1"> Tomas Shutradhar</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-2">
+                            <div class="card crdEmployeeslight2">
+                                <div class="text-group">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-3.png" class="check-circle-Employees1">
+                                    <label class="form-check-label LabelEmployees" for="defaultCheck1">6 Assigned &nbsp;</label>
+                                    <span>
+                                        <div role="progressbarprimary" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="--value:20"></div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-2">
+                            <div class="card crdEmployeeslight3">
+                                <div class="text-group">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-3.png" class="check-circle-Employees2">
+                                    <label class="form-check-label LabelEmployees2" for="defaultCheck2">2 Assigned &nbsp;</label>
+                                    <span>
+                                        <div role="progressbaryellow" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="--value:80"></div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-2">
+                            <div class="card crdEmployeeslight4">
+                                <div class="text-group">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-3.png" class="check-circle-Employees3">
+                                    <label class="form-check-label LabelEmployees3" for="defaultCheck2">12 Assigned &nbsp;</label>
+                                    <span>
+                                        <div role="progressbarred" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="--value:40"></div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-2 mt-10">
+                            <div class="col-12">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text group-btnprimary">1st</span>
+                                    <span class="form-control group-controltext">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-1">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/thai.jpg" class="images2">
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <span class="nameimages2">
+                                                            <div class="Directorfontsmall1"> Guru</div>
+                                                            <div class="Directorfontsmall1"> Director</div>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-5">
+                                                        <span class="nameimages2">
+                                                            <div class="Directorfontsmall2"> Vikrant</div>
+                                                            <div class="Directorfontsmall2"> Title</div>
+                                                        </span>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/thai.jpg" class="images3">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </span>
+                                    <span class="input-group-text group-btnprimary">2nd</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-1 col-md-6 col-12 mt-10">
+                            <span class="btn btn-light" type="submit"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Assign.png" class="imagesAssingLight"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2 col-md-6 col-2">
+                            <div class="card crdEmployeeslight1">
+                                <div class="col-12">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/lghrvc1.png" class="images1"> <span class="nameimages1"> Charles Bhattacharjya</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-2">
+                            <div class="card crdEmployeeslight2">
+                                <div class="text-group">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-4.png" class="check-circle-close">
+                                    <label class="form-check-label LabelEmployees" for="defaultCheck1"> <span class="Not-Set "> Not set &nbsp;</span></label>
+                                    <span>
+                                        <div role="progressbarprimary" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="--value:0"></div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-2">
+                            <div class="card crdEmployeeslight3">
+                                <div class="text-group">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-4.png" class="check-circle-close">
+                                    <label class="form-check-label LabelEmployees2" for="defaultCheck1"> <span class="Not-Set "> Not set &nbsp;</span></label>
+                                    <span>
+                                        <div role="progressbaryellow" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="--value:0"></div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-2">
+                            <div class="card crdEmployeeslight4">
+                                <div class="text-group">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-4.png" class="check-circle-close">
+                                    <label class="form-check-label LabelEmployees3" for="defaultCheck1"> <span class="Not-Set "> Not set &nbsp;</span></label>
+                                    <span>
+                                        <div role="progressbarred" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="--value:0"></div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-2 mt-10">
+                            <div class="col-12">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text group-btnprimary">1st</span>
+                                    <span class="form-control group-controltext">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-1" style="display: none;">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/thai.jpg" class="images2">
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <span class="nameimages2">
+                                                            <div class="Directorfontsmall1"></div>
+                                                            <div class="Directorfontsmall1"> </div>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <span class="nameimages2">
+                                                            <div class="Directorfontsmall2"> </div>
+                                                            <div class="Directorfontsmall2"> </div>
+                                                        </span>
+                                                    </div>
+                                                    <div class="col-1" style="display: none;">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/thai.jpg" class="images3">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </span>
+                                    <span class="input-group-text group-btnprimary">2nd</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-1 col-md-6 col-12 mt-10">
+                            <span class="btn btn-light" type="submit"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Assign.png" class="imagesAssingLight"></span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+<style>
+    .checkbox-wrapper-18 .round {
+        position: relative;
+    }
+
+    .checkbox-wrapper-18 .round label {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 50%;
+        cursor: pointer;
+        height: 15px;
+        width: 15px;
+        display: block;
+    }
+
+    .checkbox-wrapper-18 .round label:after {
+        border: 2px solid #fff;
+        border-top: none;
+        border-right: none;
+        content: "";
+        height: 6px;
+        left: 2px;
+        opacity: 0;
+        position: absolute;
+        top: 2.5px;
+        transform: rotate(-45deg);
+        width: 9px;
+    }
+
+    .checkbox-wrapper-18 .round input[type="checkbox"] {
+        visibility: hidden;
+        display: none;
+        opacity: 0;
+    }
+
+    .checkbox-wrapper-18 .round input[type="checkbox"]:checked+label {
+        background-color: #3994FF;
+        border-color: #3994FF;
+    }
+
+    .checkbox-wrapper-18 .round input[type="checkbox"]:checked+label:after {
+        opacity: 1;
+    }
+</style>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalAssign" tabindex="-1" aria-labelledby="exampleModalLabelAssign" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="countheader">
+                <div class="row pl-10 pr-10 pt-15">
+                    <div class="col-1" id="exampleModalLabelAssign">
+                        <img src="<?= Yii::$app->homeUrl ?>image/groupProfile.jpg" class="Profiles">
+                    </div>
+                    <div class="col-9 pl-20">
+                        <div class="font-size-13 font-b"> AMI FARUQ </div>
+                        <div class="font-size-12"> Director, Gihu</div>
+                    </div>
+                    <div class="col-2 text-end font-size-13 pr-20 pt-10">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <hr class="mt-15">
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <div class="col-12 font-size-13 font-b" style="margin-top: -20px;">
+                            Primary Evaluator
+                        </div>
+                        <div class="col-7 ml-30">
+                            <select class="form-select selectDefaultPrimary" aria-label="Default select example">
+                                <option selected value="">Select this</option>
+                                <option value="1">Tokyo Consulting Firm co.th</option>
+                                <option value="2">Tokyo Consulting Firm group</option>
+                                <option value="3">Tokyo Consulting Firm Limited</option>
+                            </select>
+                        </div>
+                        <div class="col-4 ml-30">
+                            <select class="form-select selectDefaultPrimary" aria-label="Default select example">
+                                <option selected value="">Select this</option>
+                                <option value="1">Branch</option>
+                                <option value="2">Title</option>
+                                <option value="3"> Employees</option>
+                            </select>
+                        </div>
+                        <div class="col-12 card cardPrimaryEvaluator">
+                            <div class="col-12 pl-10">
+                                <div class="form-check">
+                                    <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Department.png" class="DepartmentAccounts"> Accounts
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+
+                                <?php
+                                for ($i = 1; $i <= 2; $i++) {
+                                ?>
+                                    <div class="form-check evaluatorIT">
+                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="">
+                                        <label class="form-check-label" for="">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
+                                        </label>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+
+                            </div>
+                            <div class="col-12 mt-10 l-10">
+                                <div class="form-check">
+                                    <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="">
+                                    <label class="form-check-label" for="">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Department.png" class="DepartmentAccounts"> IT
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+
+                                <?php
+                                for ($i = 1; $i <= 2; $i++) {
+                                ?>
+                                    <div class="form-check evaluatorIT">
+                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="">
+                                        <label class="form-check-label" for="">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
+                                        </label>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+
+                            </div>
+                            <div class="col-12 mt-10 pl-10">
+                                <div class="form-check">
+                                    <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="">
+                                    <label class="form-check-label" for="">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Department.png" class="DepartmentAccounts"> MKT
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <?php
+                                for ($i = 1; $i <= 5; $i++) {
+                                ?>
+                                    <div class="form-check evaluatorIT">
+                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="">
+                                        <label class="form-check-label" for="">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
+                                        </label>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <div class="col-12 font-size-13 font-b" style="margin-top: -20px;">
+                            Final Evaluator
+                        </div>
+                        <div class="col-7 ml-30">
+                            <select class="form-select selectDefaultPrimary" aria-label="Default select example">
+                                <option selected value="">Select this</option>
+                                <option value="1">Tokyo Consulting Firm co.th</option>
+                                <option value="2">Tokyo Consulting Firm group</option>
+                                <option value="3">Tokyo Consulting Firm Limited</option>
+                            </select>
+                        </div>
+                        <div class="col-4 ml-30">
+                            <select class="form-select selectDefaultPrimary" aria-label="Default select example">
+                                <option selected value="">Select this</option>
+                                <option value="1">Branch</option>
+                                <option value="2">Title</option>
+                                <option value="3"> Employees</option>
+                            </select>
+                        </div>
+                        <div class="col-12 card cardPrimaryEvaluator">
+                            <div class="col-12">
+                                <div class="form-check">
+                                    <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Department.png" class="DepartmentAccounts"> Accounts
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+
+                                <?php
+                                for ($i = 1; $i <= 2; $i++) {
+                                ?>
+
+                                    <div class="form-check  evaluatorIT">
+                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
+                                        </label>
+                                    </div>
+
+                                <?php
+                                }
+                                ?>
+
+                            </div>
+                            <div class="col-12 mt-10">
+                                <div class="form-check">
+                                    <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Department.png" class="DepartmentAccounts"> IT
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+
+                                <?php
+                                for ($i = 1; $i <= 2; $i++) {
+                                ?>
+                                    <div class="form-check  evaluatorIT">
+                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
+                                        </label>
+                                    </div>
+
+                                <?php
+                                }
+                                ?>
+
+                            </div>
+                            <div class="col-12 mt-10">
+                                <div class="form-check">
+                                    <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Department.png" class="DepartmentAccounts"> MKT
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+
+                                <?php
+                                for ($i = 1; $i <= 5; $i++) {
+                                ?>
+                                    <div class="form-check  evaluatorIT">
+                                        <input class="form-check-input Accountsborderdark" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="imageDepartmentIT"> Charles Bhattacharjya
+                                        </label>
+                                    </div>
+
+                                <?php
+                                }
+                                ?>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 text-end pr-10 pb-10">
+                <div type="submit" class="btn btn-primary SET">SET</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End -->

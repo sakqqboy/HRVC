@@ -6,10 +6,12 @@
     padding-left: 40px;
     padding-top: 20px;
 }
-.rad-label{
+
+.rad-label {
     border-left: 5px white solid;
 }
-.rad-label:hover{
+
+.rad-label:hover {
     /* background-color: ; */
     border-left: 5px #B2CCFA solid;
     background-color: #D7EBFF;
@@ -22,8 +24,10 @@
     height: 23px;
     margin-top: -3px;
     margin-left: 17px;
-    z-index: 99;margin-bottom: -3px;
+    z-index: 99;
+    margin-bottom: -3px;
 }
+
 .rad-text {
     letter-spacing: 0px;
     text-transform: none;
@@ -45,7 +49,8 @@
     font-weight: 500;
     font-size: 14px;
     text-align: center;
-    padding-top: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .andAccounts {
@@ -60,8 +65,8 @@
     background-color: #748EE9;
     text-align: center;
     border-radius: 3px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 3px;
+    padding-right: 3px;
     margin-left: 3px;
     margin-right: 3px;
 }
@@ -117,6 +122,7 @@
 .flagkey {
     font-size: 10px;
     letter-spacing: 0.1px;
+    padding-top: 3px;
 }
 
 .bg-lighttotal {
@@ -133,14 +139,14 @@
 }
 
 .txt-Weight {
-    font-weight: 500;
-    font-size: 12px;
+    font-size: 10px;
 }
 
 .border-edit {
     font-size: 9px;
     color: rgb(45, 45, 45);
     font-weight: 400;
+    padding-top: 5px;
 }
 
 .weight-pencil {
@@ -172,7 +178,7 @@
 }
 
 .image-weight {
-    width: 13px;
+    width: 10px;
 }
 
 .Next-1 {
@@ -185,8 +191,6 @@
 
 .background_E7F0FE {
     background-color: #E7F0FE;
-    border: none;
-    height: 29rem;
 }
 
 .number_user {
@@ -214,35 +218,44 @@
 
 .Evalua_tor1 {
     background-color: #F4F6F9;
-    margin-top: 44px;
+    margin-top: 40px;
     border-radius: 5px;
+    padding-left: 1px;
+    padding-right: 1px;
+    width: 60px;
 }
 
 .Evalua_tor2 {
     background-color: #F4F6F9;
-    border-radius: 10px;
+    border-radius: 5px;
+    margin-top: 40px;
     padding-top: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .Evalua_tor3 {
     background-color: #F4F6F9;
-    border-radius: 10px;
-    padding-top: 20px;
+    border-radius: 5px;
+    margin-left: -15px;
+    padding-top: 10px;
     padding-left: 10px;
     padding-right: 10px;
+    width: 140px;
+    padding-bottom: 30px;
 }
 
 .white-kfi3 {
     background-color: white;
     padding-bottom: 20px;
     border-radius: 5px;
-    margin-top: 50px;
+    margin-top: 15px;
+    margin-left: 4px;
+    margin-right: 4px;
 }
 
 .PMI1 {
-    border-radius: 2px;
+    border-radius: 3px;
     background-color: #2580D3;
     color: white;
     font-size: 13px;
@@ -254,11 +267,174 @@
 .holder {
     border-top-style: solid;
     border-left-style: solid;
-    border-bottom-style: solid 10px;
+    border-bottom-style: solid;
     width: 510px;
-    height: 100px;
+    height: 90px;
     position: static;
-    margin-top: -70px;
-    margin-left: -290px;
-    border-radius: 12px;
+    margin-top: -150px;
+    margin-left: 3px;
+    border-radius: 7px;
+    color: lightgray;
+}
+
+.pmi_bakgru {
+    border-radius: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.custom-radio[type="radio"] {
+    appearance: none;
+    border: 1px solid #d3d3d3;
+    width: 18px;
+    height: 18px;
+    content: none;
+    outline: none;
+    border-radius: 50%;
+    margin: 0;
+
+}
+
+.custom-radio[type="radio"]:checked {
+    appearance: none;
+    border-radius: 50%;
+    outline: none;
+    padding: 0;
+}
+
+.custom-radio[type="radio"]:checked::before {
+    position: absolute;
+    background: #0c1332;
+    accent-color: blue;
+    border-radius: 50%;
+    color: white !important;
+    content: "\00A0\2713\00A0" !important;
+    border: 1px solid #d3d3d3;
+    font-weight: bolder;
+    font-size: 13px;
+}
+
+.custom_bottom {
+    background-color: #FAFAFA;
+    border-radius: 5px;
+    border: #175690;
+    color: #636470;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    font-size: 13px;
+}
+
+.target_level {
+    font-size: 12px;
+    color: #787878;
+    background-color: #EBEBEB;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 2px;
+    padding-right: 3px;
+    border-radius: 3px;
+}
+
+.save-trck {
+    width: 15px;
+    cursor: pointer;
+}
+
+.level_setup {
+    background-color: #FAFAFA;
+    border-radius: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.set_PL {
+    background-color: #79B0F0;
+    color: #FFFFFF;
+    font-size: 12px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-radius: 3px;
+    border: 1px #6483D2 solid;
+}
+
+/* css */
+.label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type=radio] {
+    appearance: none;
+    background-color: #fff;
+    width: 15px;
+    height: 15px;
+    border: 2px solid #ccc;
+    border-radius: 50px;
+    display: inline-grid;
+    place-content: center;
+}
+
+input[type=radio]::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    transform: scale(0);
+    transform-origin: bottom left;
+    background-color: #fff;
+    clip-path: polygon(13% 50%, 34% 66%, 81% 2%, 100% 18%, 39% 100%, 0 71%);
+}
+
+input[type=radio]:checked::before {
+    transform: scale(1);
+}
+
+input[type=radio]:checked {
+    background-color: #000000;
+    border: 2px solid #000000;
+}
+
+/* css2 */
+.checkbox-wrapper-18 .round {
+    position: relative;
+}
+
+.checkbox-wrapper-18 .round label {
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    display: block;
+}
+
+.checkbox-wrapper-18 .round label:after {
+    border: 2px solid #fff;
+    border-top: none;
+    border-right: none;
+    height: 6px;
+    left: 8px;
+    opacity: 0;
+    position: absolute;
+    top: 9px;
+    transform: rotate(-45deg);
+    width: 12px;
+}
+
+.checkbox-wrapper-18 .round input[type="checkbox"] {
+    visibility: hidden;
+    display: none;
+    opacity: 0;
+}
+
+.checkbox-wrapper-18 .round input[type="checkbox"]:checked+label {
+    background-color: #6CBCE7;
+    border-color: #6CBCE7;
+}
+
+.checkbox-wrapper-18 .round input[type="checkbox"]:checked+label:after {
+    opacity: 1;
 }

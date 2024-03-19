@@ -37,6 +37,11 @@
     background-color: #F0F2F4;
     border: none;
     margin-top: 10px;
+    border-radius: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
 }
 
 .Row-bgcradlightgray {
@@ -49,14 +54,22 @@
     background-color: #FAFAFA;
     border: none;
     border-radius: 3px;
-    height: 40px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .crdEmployeeslight2 {
     background-color: #F3FAFF;
     border: none;
     border-radius: 3px;
-    height: 40px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 10px;
+    padding-left: 3px;
+    padding-right: 3px;
 }
 
 .crdEmployeeslight3 {
@@ -223,17 +236,17 @@
 
 .LabelEmployees {
     font-size: 8px;
-    border-right: 2px #2580D3 solid;
+    border-right: 1px #2580D3 solid;
 }
 
 .LabelEmployees2 {
     font-size: 8px;
-    border-right: 2px #FDCA40 solid;
+    border-right: 1px #FDCA40 solid;
 }
 
 .LabelEmployees3 {
     font-size: 8px;
-    border-right: 2px #FF6939 solid;
+    border-right: 1px #FF6939 solid;
 }
 
 .group-btnprimary {
@@ -380,15 +393,15 @@ div[role="progressbarred"]::after {
 }
 
 .Profiles {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
 }
 
 .selectDefaultPrimary {
     border-radius: 30px;
     background-color: #F0F2F4;
-    font-size: 12px;
+    font-size: 10px;
     margin-top: 10px;
 }
 
@@ -400,18 +413,18 @@ div[role="progressbarred"]::after {
 }
 
 .DepartmentAccounts {
-    width: 20px;
+    width: 15px;
 }
 
 .evaluatorIT {
     margin-left: 30px;
-    margin-top: 10px
+    margin-top: 5px
 }
 
 .imageDepartmentIT {
     border-radius: 50%;
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
 }
 
 /* .Accountsborderdark {
@@ -420,7 +433,11 @@ div[role="progressbarred"]::after {
 
 .SET {
     background-color: #82BBF0;
+    border-radius: 3px;
     border: none;
-    width: 60px;
-    font-size: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    font-size: 13px;
 }

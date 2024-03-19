@@ -1,15 +1,22 @@
 .Save-2 {
-    width: 13px;
+    width: 12px;
     margin-top: -5px;
 }
 
 .widthSave-3 {
-    width: 15px;
+    width: 12px;
 }
 
 .Select-add {
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 11px;
+}
+
+.Participants_border {
+    background-color: #F4F6F9;
+    border-radius: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 10px;
 }
 
 .inlineDepartment1 {
@@ -17,8 +24,9 @@
 }
 
 .controlcheckboxSelect {
-    font-size: 13px;
-    margin-top: 18px;
+    font-size: 12px;
+    margin-top: 20px;
+    padding-left: 3px;
 }
 
 .pictureRank-1 {
@@ -26,7 +34,7 @@
 }
 
 .allocate-user {
-    width: 18px;
+    width: 14px;
 }
 
 .label-username {
@@ -34,8 +42,9 @@
 }
 
 .all-allocateuser {
-    margin-left: 20px;
-    margin-top: 8px;
+    padding-left: 10px;
+    margin-top: 5px;
+    font-size: 12px;
 }
 
 .PIM-allocate {
@@ -47,24 +56,22 @@
 
 .ADD-plus1-allocate {
     background-color: #2580D3;
-    width: 3rem;
-    border-radius: 4px;
-    padding-right: 2px;
-    padding-left: 2px;
+    border-radius: 3px;
     font-size: 12px;
     color: white;
-    cursor: pointer;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 8px;
 }
 
 .Edit-plus1-allocate {
     background-color: #F2AFAF;
-    width: 3rem;
-    border-radius: 4px;
-    padding-right: 2px;
-    padding-left: 2px;
+    border-radius: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 8px;
     font-size: 12px;
     color: white;
-    cursor: pointer;
 }
 
 .typenumber {
@@ -77,6 +84,37 @@
 
 .add-minus-circle {
     color: #D84C4C;
-    font-size: 13px;
+    font-size: 11px;
     cursor: pointer;
+}
+
+.WeightConfigurationName {
+    font-size: 14px;
+    font-weight: 500;
+    color: black;
+}
+
+.put_title {
+    border-radius: 3px;
+    background-color: #32a1ce;
+    width: 12px;
+    height: 13px;
+}
+
+.add_allocate_gray {
+    background-color: #F4F6F9;
+    border-radius: 5px;
+    margin-top: 10px;
+    width: 60px;
+    height: 580px;
+}
+
+.add_allocate1 {
+    background-color: #F4F6F9;
+    margin-top: 10px;
+    border-radius: 5px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 580px;
 }
