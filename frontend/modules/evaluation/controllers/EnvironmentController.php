@@ -8,6 +8,8 @@ use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
 use frontend\models\hrvc\Attribute;
+use frontend\models\hrvc\Branch;
+use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Environment;
 use frontend\models\hrvc\Frame;
 use frontend\models\hrvc\FrameTerm;
@@ -228,8 +230,27 @@ class EnvironmentController extends Controller
 	}
 	public function actionTermDetail($hash)
 	{
+
 		$param = ModelMaster::decodeParams($hash);
 		$termId = $param["termId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/term-detail?termId=' . $termId);
+		$terms = curl_exec($api);
+		$terms = json_decode($terms, true);
+
+
+		$frameId = $terms["frameId"];
+		$frameName = Frame::frameName($frameId);
+		$environmentId = Frame::getEnvironmentId($frameId);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/environment-detail?environmentId=' . $environmentId);
+		$environmentDetail = curl_exec($api);
+		$environmentDetail = json_decode($environmentDetail, true);
+		curl_close($api);
+		//throw new Exception(print_r($terms, true));
 		$date = date('Y-m-d');
 		$thisMonth = ModelMaster::monthEng(date('m'), 1);
 		$thisYear = date('Y');
@@ -238,6 +259,9 @@ class EnvironmentController extends Controller
 			"dateValue" => $dateValue,
 			"thisMonth" => $thisMonth,
 			"thisYear" => $thisYear,
+			"terms" => $terms,
+			"environmentDetail" => $environmentDetail,
+			"frameName" => $frameName
 		]);
 	}
 	public function actionAddTermItem()
