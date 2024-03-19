@@ -1,20 +1,20 @@
 <div class="border-bottom pb-20">
 	<div class="row">
 		<div class="col-5  text-center pr-5 pl-5">
-			<img src="<?= Yii::$app->homeUrl ?>image/BD.jpg" class="imagealertEvaluator">
+			<img src="<?= Yii::$app->homeUrl ?><?= $environmentDetail['picture'] ?>" class="imagealertEvaluator">
 		</div>
 		<div class="col-7 font-size-14 font-b pr-5 pl-10 pt-0">
-			Tokyo Consulting Firm Pvt. Ltd
+			<?= $environmentDetail['companyName'] ?>
 		</div>
 	</div>
 </div>
 <div class="col-12 Evaluator-country font-size-12 mt-10">
-	&nbsp;&nbsp; <img src="<?= Yii::$app->homeUrl ?>image/Thailand.png" class="imageEvaluatorcountry"> Bangkok, Thailand
+	&nbsp;&nbsp; <img src="<?= Yii::$app->homeUrl ?><?= $environmentDetail['flag'] ?>" class="imageEvaluatorcountry"> <?= $environmentDetail['city'] ?>, <?= $environmentDetail['countryName'] ?>
 </div>
 <div class="col-12 mt-20">
 	<div class="mb-5 bg-body rounded-1 text-center font-size-12 pt-5 pr-5 pl-5 pb-5 font-weight-500 text-black-50">
-		Mid Term Evaluation Phase
-		<div class="E3 mt-5"> E3 </div>
+		<?= $frameName ?>
+		<div class="E3 mt-5"> <?= $terms["termName"] ?> </div>
 	</div>
 </div>
 

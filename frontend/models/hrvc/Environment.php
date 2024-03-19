@@ -6,30 +6,39 @@ use Yii;
 use \frontend\models\hrvc\master\EnvironmentMaster;
 
 /**
-* This is the model class for table "environment".
-*
-* @property integer $environmentId
-* @property integer $companyId
-* @property integer $branchId
-* @property integer $status
-* @property string $createDateTime
-* @property string $udpateDateTime
-*/
+ * This is the model class for table "environment".
+ *
+ * @property integer $environmentId
+ * @property integer $companyId
+ * @property integer $branchId
+ * @property integer $status
+ * @property string $createDateTime
+ * @property string $udpateDateTime
+ */
 
-class Environment extends \frontend\models\hrvc\master\EnvironmentMaster{
+class Environment extends \frontend\models\hrvc\master\EnvironmentMaster
+{
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function rules()
     {
         return array_merge(parent::rules(), []);
     }
 
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return array_merge(parent::attributeLabels(), []);
+    }
+    public static function getCompanyId($environmentId)
+    {
+        return Environment::findOne(['environmentId' => $environmentId])->companyId;
+    }
+    public static function getBranchId($environmentId)
+    {
+        return Environment::findOne(['environmentId' => $environmentId])->branchId;
     }
 }
