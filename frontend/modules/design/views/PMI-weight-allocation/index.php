@@ -266,7 +266,7 @@ $this->title = 'PMI Weight Allocation';
                                 <img src="<?= Yii::$app->homeUrl ?>image/weight.png" class="image-weight"> Weight Configurations
                             </div>
 
-                            <div class="col-12 Evalua_tor3 mt-23">
+                            <div class="col-12 Evalua_tor3 mt-5">
                                 <div class="col-12 background_E7F0FE pt-3 pl-10 pr-10 pb-20">
                                     <?php
                                     for ($i = 1; $i <= 13; $i++) {
@@ -280,7 +280,6 @@ $this->title = 'PMI Weight Allocation';
                                                 <div class="col-5">
                                                     <i class="fa fa-pencil-square-o weight-pencil" aria-hidden="true"></i> <i class="fa fa-trash weight-trash" aria-hidden="true"></i>
                                                 </div>
-
                                             </div>
                                         </div>
 

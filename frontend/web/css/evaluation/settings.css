@@ -76,14 +76,22 @@
     background-color: #FFF6DE;
     border: none;
     border-radius: 3px;
-    height: 40px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 10px;
+    padding-left: 3px;
+    padding-right: 3px;
 }
 
 .crdEmployeeslight4 {
     background-color: #FFEAE7;
     border: none;
     border-radius: 3px;
-    height: 40px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 10px;
+    padding-left: 3px;
+    padding-right: 3px;
 }
 
 .images1 {
