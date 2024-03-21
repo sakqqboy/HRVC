@@ -150,19 +150,19 @@ $this->title = 'Weight Allocation';
                             </div>
                             <div class="col-11 level_setup">
                                 <div class="row">
-                                    <div class="col-2 border-right pt-10">
+                                    <div class="col-2 border-right pt-5 pl-12">
                                         <span class="set_PL">PL</span>
                                         <span class="font-size-11"> Gross Profit Ratio</span>
                                     </div>
                                     <div class="col-1 border-right">
-                                        <div class="col-12 text-secondary font-size-12">
+                                        <div class="col-12 text-secondary font-size-11 text-center">
                                             Target
                                         </div>
-                                        <div class="col-12 font-size-10 pt-3 text-secondary font-b">
-                                            <?= number_format(854812) ?>
+                                        <div class="col-12 font-size-10 pt-3 text-secondary font-b text-center">
+                                            <?= number_format(5846852) ?>
                                         </div>
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-2 pr-25" style="margin-left:5px;">
                                         <label class="checkbox style-f">
                                             <input type="checkbox" />
                                             <div class="checkbox__checkmark"></div>
@@ -173,7 +173,7 @@ $this->title = 'Weight Allocation';
                                             <input type="text" class="form-control Level-txtinput" aria-label="Sizing example input">
                                         </div>
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-2 pr-25" style="margin-left:-10px;">
                                         <label class="checkbox style-f">
                                             <input type="checkbox" />
                                             <div class="checkbox__checkmark"></div>
@@ -184,7 +184,7 @@ $this->title = 'Weight Allocation';
                                             <input type="text" class="form-control Level-txtinput" aria-label="Sizing example input">
                                         </div>
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-2 pr-25" style="margin-left:-10px;">
                                         <label class="checkbox style-f">
                                             <input type="checkbox" />
                                             <div class="checkbox__checkmark"></div>
@@ -195,7 +195,7 @@ $this->title = 'Weight Allocation';
                                             <input type="text" class="form-control Level-txtinput" aria-label="Sizing example input">
                                         </div>
                                     </div>
-                                    <div class="col-2 border-right">
+                                    <div class="col-2 border-right pr-25" style="margin-left:-10px;">
                                         <label class="checkbox style-f">
                                             <input type="checkbox" />
                                             <div class="checkbox__checkmark"></div>
@@ -206,8 +206,8 @@ $this->title = 'Weight Allocation';
                                             <input type="text" class="form-control Level-txtinput" aria-label="Sizing example input">
                                         </div>
                                     </div>
-                                    <div class="col-1">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/setting(Round).png" class="setting_png"> <span class="font-size-10"> Weight</span>
+                                    <div class="col-1 pt-8" style="font-size: 9px;margin-left:0px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/setting(Round).png" class="setting_png"> Weight
                                         <input class="form-control form-control-sm weight_round" type="text" placeholder="25%">
                                     </div>
                                 </div>
