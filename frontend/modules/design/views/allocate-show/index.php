@@ -109,14 +109,14 @@ $this->title = 'Weight Allocation';
                         <div class="col-2 pt-15">
                             <input type="radio" name="fruit"><span class="font-size-11"> YES</span>
                             <span class="pl-12"></span>
-                            <input type="radio" name="fruit"><span class="font-size-11"> NO</span>
+                            <input type="radio" name="fruit" onclick="javascript:showclickno()"><span class="font-size-11"> NO</span>
                         </div>
-                        <!-- <div class="col-6 custom_bottom">
+                        <div class="col-6 custom_bottom" id="showlevel">
                             <div class="col-12">
                                 Choose Target Level <input type="radio" name="fruit"><span class="target_level"> Level1</span>&nbsp;<input type="radio" name="fruit"><span class="target_level"> Level2</span>
                                 &nbsp;<input type="radio" name="fruit"><span class="target_level"> Level3</span>&nbsp;<input type="radio" name="fruit"><span class="target_level"> Level4</span> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/save-trck.png" class="save-trck">
                             </div>
-                        </div> -->
+                        </div>
                         <div class="col-7 pt-15 text-end">
                             <div class="row">
                                 <div class="col-10">
