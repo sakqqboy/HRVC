@@ -110,11 +110,11 @@
 }
 
 .images3 {
-    width: 10px;
-    height: 10px;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
-    margin-top: 5px;
-    margin-left: 5px;
+    margin-top: 1px;
+    margin-left: -3px;
 }
 
 .nameimages1 {
@@ -195,29 +195,47 @@
 .group-btnprimary {
     background-color: #C7EBFF;
     font-size: 8px;
+    border-radius: 2px;
+    border: none
 }
 
 .group-controltext {
     font-size: 8px;
+    background-color: #F0F2F4;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: none;
+}
+
+.b-bggray {
+    background-color: #F0F2F4;
+    border-radius: 2px;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 5px;
+    padding-bottom: 8px;
 }
 
 .Directorfontsmall1 {
     font-size: 6px;
     font-weight: 500;
     color: gray;
-    /* margin-left: -5px; */
     padding-top: 2px;
     width: 60px;
 }
 
 .Directorfontsmall2 {
-    font-size: 8px;
-    margin-left: -2px;
+    font-size: 6px;
+    font-weight: 500;
+    color: gray;
+    padding-top: 2px;
+    width: 60px;
+    margin-left: -8px;
 }
 
 
 .imagesAssingLight {
-    width: 20px;
+    width: 16px;
 }
 
 .timesnotset {
@@ -249,6 +267,10 @@
     border: none;
     font-size: 12px;
     border-radius: 1px;
+}
+
+.check-circle-close {
+    width: 15px;
 }
 
 .DepartmentAccounts {
