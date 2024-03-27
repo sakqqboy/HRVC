@@ -12,7 +12,6 @@
 }
 
 .rad-label:hover {
-    /* background-color: ; */
     border-left: 5px #B2CCFA solid;
     background-color: #D7EBFF;
     cursor: pointer;
@@ -258,7 +257,7 @@
     border-radius: 3px;
     background-color: #2580D3;
     color: white;
-    font-size: 13px;
+    font-size: 12px;
     padding-top: 3px;
     padding-left: 10px;
     padding-bottom: 3px;
@@ -323,22 +322,24 @@
     color: #636470;
     padding-top: 4px;
     padding-bottom: 4px;
-    font-size: 13px;
+    font-size: 10px;
+    margin-left: -5px;
+    height: 40px;
 }
 
 .target_level {
-    font-size: 12px;
+    font-size: 10px;
     color: #787878;
     background-color: #EBEBEB;
     padding-top: 3px;
     padding-bottom: 3px;
-    padding-left: 2px;
-    padding-right: 3px;
+    padding-right: 8px;
     border-radius: 3px;
 }
 
 .save-trck {
-    width: 15px;
+    width: 12px;
+    margin-left: 6px;
     cursor: pointer;
 }
 
@@ -350,29 +351,44 @@
     padding-left: 6px;
     padding-right: 3px;
     margin-top: 10px;
-    /* margin-left: -10px; */
 }
 
 .set_PL {
     background-color: #79B0F0;
     color: #FFFFFF;
-    font-size: 9px;
+    font-size: 7px;
+    border-radius: 2px;
     padding-left: 2px;
     padding-right: 2px;
-    border-radius: 3px;
     border: 1px #6483D2 solid;
 }
 
+.set-page {
+    font-size: 9px;
+    margin-top: -5px;
+}
+
+.nm_berformat {
+    font-size: 9px;
+    text-align: center;
+    font-weight: 700;
+}
+
 .setting_png {
-    width: 15px;
+    width: 12px;
     cursor: pointer;
+    font-size: 10px;
+}
+
+.Want-Level {
+    font-size: 9px;
 }
 
 .Level-txt {
     padding-left: 5px;
     padding-right: 5px;
     height: 23px;
-    font-size: 10px;
+    font-size: 9px;
     background-color: #EBEBEB;
     color: #787878;
     border-radius: 3px;
@@ -381,7 +397,7 @@
 .Level-txtinput {
     padding-left: 5px;
     padding-right: 5px;
-    font-size: 11px;
+    font-size: 9px;
     color: #787878;
     height: 23px;
     border-radius: 3px;
@@ -391,22 +407,24 @@
     border: 1px #1DA5DF solid;
     border-radius: 3px;
     font-size: 9px;
-    padding-right: 5px;
     padding-top: 1px;
     padding-bottom: 1px;
+    margin-top: -15px;
+    margin-left: 50px;
+    width: 3rem;
 }
 
 .wb-progress {
-    width: 14px;
-    margin-top: -70px;
-    margin-left: 10px;
+    width: 13px;
+    margin-top: -68px;
+    margin-left: 20px;
 }
 
 input[type=radio] {
     appearance: none;
     background-color: #fff;
-    width: 13px;
-    height: 13px;
+    width: 12px;
+    height: 12px;
     border: 1px solid #1a1a1a;
     border-radius: 50px;
     display: inline-grid;
@@ -415,8 +433,8 @@ input[type=radio] {
 
 input[type=radio]::before {
     content: "";
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
     transform: scale(0);
     transform-origin: bottom left;
     background-color: #fff;
@@ -469,11 +487,11 @@ input[type=radio]:checked {
 
 .checkbox.style-c .checkbox__checkmark {
     position: absolute;
-    margin-top: 10px;
+    margin-top: -13px;
     left: 0;
-    height: 20px;
-    width: 20px;
-    background-color: #eee;
+    height: 15px;
+    width: 15px;
+    background-color: #e4e4e4;
     transition: background-color 0.25s ease;
     border-radius: 4px;
 }
@@ -481,10 +499,10 @@ input[type=radio]:checked {
 .checkbox.style-c .checkbox__checkmark:after {
     content: "";
     position: absolute;
-    left: 7px;
-    top: 3px;
-    width: 5px;
-    height: 10px;
+    left: 5px;
+    top: 2px;
+    width: 4px;
+    height: 9px;
     border: solid #14AF1A;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
@@ -533,7 +551,7 @@ input[type=radio]:checked {
 
 .checkbox.style-f .checkbox__checkmark {
     position: absolute;
-    margin-top: -3px;
+    margin-top: -5px;
     left: 0;
     height: 12px;
     width: 12px;
@@ -558,16 +576,31 @@ input[type=radio]:checked {
 
 .procresscircle_deg {
     display: flex;
-    width: 35px;
-    height: 35px;
-    border: 5px #2580D3 solid;
+    width: 38px;
+    height: 38px;
+    border: 4px #2580D3 solid;
     border-radius: 50%;
     font-size: 9px;
-    text-align: center;
-    padding-top: 5px;
-    padding-left: 2px;
+    padding-top: 7px;
+    padding-left: 4px;
+    margin-left: -21px;
+    margin-top: -5px;
+}
+
+.TYPEYES {
+    font-size: 10px;
 }
 
 .all_allocate-show-weight {
     font-size: 9px;
+}
+
+.table-striped {
+    background-color: #f4f4f4;
+}
+
+.percentage {
+    font-size: 8px;
+    letter-spacing: -0.3px;
+    text-align: end;
 }

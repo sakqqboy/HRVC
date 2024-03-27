@@ -85,13 +85,13 @@ $this->title = 'Evaluation Settings';
             <div class="bg-white pmi_bakgru">
                 <div class="col-12">
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-3 border">
                             <div class="Evaluator-Settings"> Evaluator Settings</div>
                         </div>
-                        <div class="col-2 text-Participating">
+                        <div class="col-2 text-Participating border">
                             Participating Employees
                         </div>
-                        <div class="col-1 viewlog">
+                        <div class="col-2 viewlog border">
                             <span class="badge rounded-pill bg-gray">
                                 <ul class="try-cricle">
                                     <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
@@ -103,18 +103,18 @@ $this->title = 'Evaluation Settings';
                                 </ul>
                             </span>
                         </div>
-                        <div class="col-2 text-end Term1Employees">
+                        <!-- <div class="col-2 text-end Term1Employees border">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Team-1.png" class="imagessettingsTerm1"> Employees
                         </div>
-                        <div class="col-3">
+                        <div class="col-3 border">
                             <div class="search-box">
                                 <input class="search-input" type="text" placeholder="Search">
                                 <button class="search-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
                             </div>
                         </div>
-                        <div class="col-1">
+                        <div class="col-1 border">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterPlus.png" class="imagessettingsFillerPlus">
-                        </div>
+                        </div> -->
                     </div>
                     <div class="col-12">
                         <div class="bgcradlightgray">
@@ -249,14 +249,15 @@ $this->title = 'Evaluation Settings';
                             <div class="col-lg-2 col-md-6 col-2">
                                 <div class="card crdEmployeeslight1">
                                     <div class="col-12">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/lghrvc1.png" class="images1"> <span class="nameimages1"> Charles Bhattacharjya</span>
+                                        <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="images1"> <span class="nameimages1"> Charles Bhattacharjya</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-2 col-md-6 col-2">
                                 <div class="card crdEmployeeslight2">
                                     <div class="text-group">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-4.png" class="check-circle-close">
+                                        <!-- <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-4.png" class="check-circle-close"> -->
+                                        <i class="fa fa-times-circle text-danger" aria-hidden="true"></i>
                                         <label class="form-check-label LabelEmployees" for="defaultCheck1"> <span class="Not-Set "> Not set &nbsp;</span></label>
                                         <span>
                                             <div role="progressbarprimary" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="--value:0"></div>
@@ -267,7 +268,8 @@ $this->title = 'Evaluation Settings';
                             <div class="col-lg-2 col-md-6 col-2">
                                 <div class="card crdEmployeeslight3">
                                     <div class="text-group">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-4.png" class="check-circle-close">
+                                        <!-- <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-4.png" class="check-circle-close"> -->
+                                        <i class="fa fa-times-circle text-danger" aria-hidden="true"></i>
                                         <label class="form-check-label LabelEmployees2" for="defaultCheck1"> <span class="Not-Set "> Not set &nbsp;</span></label>
                                         <span>
                                             <div role="progressbaryellow" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="--value:0"></div>
@@ -278,7 +280,8 @@ $this->title = 'Evaluation Settings';
                             <div class="col-lg-2 col-md-6 col-2">
                                 <div class="card crdEmployeeslight4">
                                     <div class="text-group">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-4.png" class="check-circle-close">
+                                        <!-- <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-4.png" class="check-circle-close"> -->
+                                        <i class="fa fa-times-circle text-danger" aria-hidden="true"></i>
                                         <label class="form-check-label LabelEmployees3" for="defaultCheck1"> <span class="Not-Set "> Not set &nbsp;</span></label>
                                         <span>
                                             <div role="progressbarred" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="--value:0"></div>
@@ -299,8 +302,8 @@ $this->title = 'Evaluation Settings';
                                                         </div>
                                                         <div class="col-5">
                                                             <span class="nameimages2">
-                                                                <div class="Directorfontsmall1">mxljx</div>
-                                                                <div class="Directorfontsmall1">clkokcx</div>
+                                                                <div class="Directorfontsmall1">bbbbbbb</div>
+                                                                <div class="Directorfontsmall1">ffffff</div>
                                                             </span>
                                                         </div>
                                                     </div>
@@ -309,8 +312,8 @@ $this->title = 'Evaluation Settings';
                                                     <div class="row">
                                                         <div class="col-5">
                                                             <span class="nameimages2">
-                                                                <div class="Directorfontsmall2">klfhhoft</div>
-                                                                <div class="Directorfontsmall2">jkfgiuxj</div>
+                                                                <div class="Directorfontsmall2">ttttttt</div>
+                                                                <div class="Directorfontsmall2">fffff</div>
                                                             </span>
                                                         </div>
                                                         <div class="col-1">
@@ -337,7 +340,7 @@ $this->title = 'Evaluation Settings';
     </div>
 </div>
 
-
+<!-- Modal -->
 <div class="modal fade" id="exampleModalAssign" tabindex="-1" aria-labelledby="exampleModalLabelAssign" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

@@ -91,7 +91,9 @@ $this->title = 'PMI Weight Allocation';
                             PMI Weight Allocation
                         </div>
                         <div class="col-2">
-                            <div type="submit" class="PMI1"> Allocate Weight</div>
+                            <a href="<?= Yii::$app->homeUrl ?>designfront/add-allocate-weight" class="no-underline">
+                                <div type="submit" class="PMI1"> Allocate Weight</div>
+                            </a>
                         </div>
                         <div class="col-7 text-end">
                             <div type="submit" class="btn btn-info text-white Next-1 pt-4 pb-4"> Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></div>

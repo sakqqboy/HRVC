@@ -5,11 +5,11 @@
 }
 
 .text-Participating {
-    font-size: 11px;
-    width: 10rem;
+    font-size: 10px;
+    /* width: 10rem; */
     color: gray;
     padding-top: 5px;
-    margin-left: -35px;
+    /* margin-left: -35px; */
 }
 
 .imagessettingsTerm1 {
@@ -17,7 +17,7 @@
 }
 
 .viewlog {
-    margin-left: -30px;
+    /* margin-left: -30px; */
     margin-top: 3px;
 }
 
@@ -145,6 +145,7 @@
     background-color: #F0F2F4;
     color: #6c6c6c;
     border-radius: 20px;
+    font-size: 12px;
     border: none;
     transition: all .4s;
     height: 40px;
@@ -161,6 +162,7 @@
     padding: 6px 9px;
     margin-left: -45px;
     border: none;
+    font-size: 12px;
     color: #6c6c6c;
     transition: all .4s;
     z-index: 10;
@@ -269,9 +271,9 @@
     border-radius: 1px;
 }
 
-.check-circle-close {
+/* .check-circle-close {
     width: 15px;
-}
+} */
 
 .DepartmentAccounts {
     width: 15px;

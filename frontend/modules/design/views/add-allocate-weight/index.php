@@ -94,7 +94,7 @@ $this->title = 'Add allocate weight';
                         <div type="submit" class="btn btn-primary PMI1"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/save-2.png" class="Save-2">&nbsp;&nbsp; SAVE</div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row mt-10">
                     <div class="col-lg-2 Participants_border">
                         <div class="col-12 pt-20 pl-3 pr-3">
                             <div class="bg-white pl-5 pr-5" style="border-radius: 3px;">
@@ -233,7 +233,7 @@ $this->title = 'Add allocate weight';
                                     </div>
                                     <div class="col-2">
                                         <div class="ADD-plus1-allocate" type="submit">
-                                            <i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;ADD
+                                            <a href="<?= Yii::$app->homeUrl ?>designfront/allocate-show" class="no-underline"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;ADD</a>
                                         </div>
                                     </div>
                                     <div class="col-2">
@@ -296,7 +296,7 @@ $this->title = 'Add allocate weight';
                                     </div>
                                     <div class="col-2">
                                         <div class="ADD-plus1-allocate" type="submit">
-                                            <i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;ADD
+                                            <a href="<?= Yii::$app->homeUrl ?>designfront/allocate-show" class="no-underline"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;ADD</a>
                                         </div>
                                     </div>
                                     <div class="col-2">
