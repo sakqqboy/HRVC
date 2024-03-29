@@ -145,7 +145,7 @@
     font-size: 9px;
     color: rgb(45, 45, 45);
     font-weight: 400;
-    padding-top: 5px;
+    padding-top: 6px;
 }
 
 .weight-pencil {
@@ -375,9 +375,7 @@
 }
 
 .setting_png {
-    width: 12px;
-    cursor: pointer;
-    font-size: 10px;
+    width: 14px;
 }
 
 .Want-Level {

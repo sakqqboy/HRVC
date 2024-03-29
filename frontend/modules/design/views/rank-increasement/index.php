@@ -4,119 +4,113 @@ $this->title = 'Rank Increasement';
 
 ?>
 
-<div class="col-12 mt-90 alert alert-Evaluator">
+<div class="col-12 mt-70 environment pt-10 pr-10 pl-20">
     <div class="row">
-        <div class="col-lg-3 col-md-6 col-12">
-            <div class="row">
-                <div class="col-5">
-                    <img src="<?= Yii::$app->homeUrl ?>image/BD.jpg" class="imagealertEvaluator">
-                </div>
-                <div class="col-7 setEvaluator">
-                    Tokyo Consulting Firm Pvt. Ltd
+        <div class="col-lg-2 col-md-6 col-12 pr-0 pl-5">
+            <div class="border-bottom pb-20">
+                <div class="row">
+                    <div class="col-5 text-center pr-5 pl-5">
+                        <img src="<?= Yii::$app->homeUrl ?>image/BD.jpg" class="imagealertEvaluator">
+                    </div>
+                    <div class="col-7 font-size-14 font-b pr-5 pl-10 pt-0">
+                        Tokyo Consulting Firm Pvt. Ltd
+                    </div>
                 </div>
             </div>
-            <div class="col-12 Evaluator-country">
+            <div class="col-12 Evaluator-country font-size-12 mt-10">
                 &nbsp;&nbsp; <img src="<?= Yii::$app->homeUrl ?>image/Thailand.png" class="imageEvaluatorcountry"> Bangkok, Thailand
             </div>
-            <div class="col-12">
-                <div class="shadow-sm p-3 mb-5 bg-body rounded mt-30">
-                    <div class="Mid-Term"> Mid Term Evaluation Phase</div>
-                    <div class="E3"> E3 </div>
+            <div class="col-12 mt-20">
+                <div class="mb-5 bg-body rounded-1 text-center font-size-12 pt-5 pr-5 pl-5 pb-5 font-weight-500 text-black-50">
+                    Mid Term Evaluation Phase
+                    <div class="E3 mt-5"> E3 </div>
                 </div>
             </div>
-            <div class="card" style="border:none;">
-                <div class="col-12">
-                    <div class="col-12 EvaluatorConfiguration">
-                        <i class="fa fa-cog" aria-hidden="true"></i> &nbsp; Set Configuration
+
+            <div class="col-12 bg-white rounded-1 mt-40 pb-10">
+                <div class="col-12 EvaluatorConfiguration pt-20 pl-10 border-bottom pb-20">
+                    <i class="fa fa-cog mr-5" aria-hidden="true"></i>Set Configuration
+                </div>
+                <div class="col-12 mt-20">
+                    <div class="rad-label pl-0 mt-10 pr-0">
+                        <div class="col-12 pl-5 rad-text pr-3">
+                            <i class="fa fa-check-circle-o text-success mr-10 font-size-18" aria-hidden="true"></i>
+                            <span class="text-dark font-weight-500 ">Evaluation Frame</span>
+                        </div>
                     </div>
-                    <hr>
-                    <div class="col-12">
-                        <div>
-                            <label class="rad-label">
-                                <input type="radio" class="rad-input" name="rad">
-                                <div class="rad-design"></div>
-                                <div class="rad-text"> Evaluation Frame</div>
-                            </label>
-                            <div class="Evaluationdeshed"></div>
-
-                            <label class="rad-label">
-                                <input type="radio" class="rad-input" name="rad">
-                                <div class="rad-design"></div>
-                                <div class="rad-text"> Weight Allocation</div>
-                            </label>
-
-                            <label class="rad-label">
-                                <input type="radio" class="rad-input" name="rad">
-                                <div class="rad-design"></div>
-                                <div class="rad-text"> Evaluator Settings</div>
-                            </label>
-
-                            <label class="rad-label">
-                                <input type="radio" class="rad-input" name="rad">
-                                <div class="rad-design"></div>
-                                <div class="rad-text">Rank & Increasement</div>
-                            </label>
-
-                            <label class="rad-label">
-                                <input type="radio" class="rad-input" name="rad">
-                                <div class="rad-design"></div>
-                                <div class="rad-text"> Salary & Allowance Range</div>
-                            </label>
-
-                            <label class="rad-label">
-                                <input type="radio" class="rad-input" name="rad">
-                                <div class="rad-design"></div>
-                                <div class="rad-text"> Bonus calculation</div>
-                            </label>
-
-                            <label class="rad-label">
-                                <input type="radio" class="rad-input" name="rad">
-                                <div class="rad-design"></div>
-                                <div class="rad-text"> Promotion</div>
-                            </label>
+                    <div class="Evaluationdeshed"></div>
+                    <div class="rad-label pl-0 pr-0 pt-0">
+                        <div class="col-12 pl-5 rad-text pr-3">
+                            <i class="fa fa-circle mr-10 font-size-18 text-secondary" aria-hidden="true"></i>
+                            <span class="text-dark font-weight-500">Weight Allocation</span>
+                        </div>
+                    </div>
+                    <div class="Evaluationdeshed"></div>
+                    <div class="rad-label pl-0 pr-0">
+                        <div class="col-12 pl-5 rad-text pr-3">
+                            <i class="fa fa-circle mr-10 font-size-18 text-secondary" aria-hidden="true"></i>
+                            <span class="text-dark font-weight-500">Evaluator Settings</span>
+                        </div>
+                    </div>
+                    <div class="Evaluationdeshed"></div>
+                    <div class="rad-label pl-0 pr-0">
+                        <div class="col-12 pl-5 rad-text pr-3">
+                            <i class="fa fa-circle mr-10 font-size-18 text-secondary" aria-hidden="true"></i>
+                            <span class="text-dark font-weight-500">Rank & Increasement</span>
+                        </div>
+                    </div>
+                    <div class="Evaluationdeshed"></div>
+                    <div class="rad-label pl-0 pr-0">
+                        <div class="col-12 pl-5 rad-text pr-3">
+                            <i class="fa fa-circle mr-10 font-size-18 text-secondary" aria-hidden="true"></i>
+                            <span class="text-dark font-weight-500">Salary & Allowance Range</span>
+                        </div>
+                    </div>
+                    <div class="Evaluationdeshed"></div>
+                    <div class="rad-label pl-0 pr-0">
+                        <div class="col-12 pl-5 rad-text pr-3">
+                            <i class="fa fa-circle mr-10 font-size-18 text-secondary" aria-hidden="true"></i>
+                            <span class="text-dark font-weight-500">Bonus calculation</span>
+                        </div>
+                    </div>
+                    <div class="Evaluationdeshed"></div>
+                    <div class="rad-label pl-0 pr-0">
+                        <div class="col-12 pl-5 rad-text pr-3">
+                            <i class="fa fa-circle mr-10 font-size-18 text-secondary" aria-hidden="true"></i>
+                            <span class="text-dark font-weight-500">Promotion</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-9 col-md-6 col-12">
-            <div class="alert aler-ALLDepartment">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <div class="col-12 Framerank">
-                            Rank & Incasement
+        <div class="col-lg-10 col-md-6 col-12">
+            <div class="bg-white pmi_bakgru">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="col-12 Framerank">
+                                Rank & Incasement
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3 mt-5">
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Create(Small).png" class="Createsmall"><span class="adRank"> ADD RANK</span>
-                    </div>
-                    <div class="col-lg-6 text-end">
-                        <span type="button" class="badge primarysave"> Save</span>
+                        <div class="col-lg-3 mt-5" style="cursor:pointer;">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Create(Small).png" class="Createsmall"><span class="adRank"> ADD RANK</span>
+                        </div>
+                        <div class="col-lg-6 text-end">
+                            <div type="button" class="badge primarysave"> Save</div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-12">
-                    <div class="alert p-2 trantRank mt-20">
-                        <div class="row">
-                            <div class="col-lg-1">
-                                Rank
-                            </div>
-                            <div class="col-lg-3 text-center">
-                                Score
-                            </div>
-                            <div class="col-lg-4 text-center">
-                                evaluation score
-                            </div>
-                            <div class="col-lg-2">
-                                Increment
-                            </div>
-                            <div class="col-lg-1">
-                                bonus
-                            </div>
-                            <div class="col-lg-1">
-                                Action
-                            </div>
-                        </div>
-                    </div>
+                    <table class="table p-2 trantRank mt-20">
+                        <thead class="font-size-10">
+                            <th>Rank</th>
+                            <th>Score</th>
+                            <th>evaluation score </th>
+                            <th>Increment</th>
+                            <th>bonus</th>
+                            <th>Action</th>
+                        </thead>
+                    </table>
                     <div class="alert p-2 trantRow">
                         <div class="row">
                             <div class="col-lg-1 letter">

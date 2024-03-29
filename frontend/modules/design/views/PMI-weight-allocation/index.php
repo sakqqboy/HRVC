@@ -279,7 +279,7 @@ $this->title = 'PMI Weight Allocation';
                                                 <div class="col-7 border-edit">
                                                     Internal
                                                 </div>
-                                                <div class="col-5">
+                                                <div class="col-5 pb-6">
                                                     <i class="fa fa-pencil-square-o weight-pencil" aria-hidden="true"></i> <i class="fa fa-trash weight-trash" aria-hidden="true"></i>
                                                 </div>
                                             </div>

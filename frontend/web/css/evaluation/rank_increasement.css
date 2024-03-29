@@ -1,26 +1,26 @@
 .Createsmall {
-    width: 20px;
-    cursor: pointer;
+    width: 16px;
 }
 
 .adRank {
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .trantRank {
     text-transform: uppercase;
-    border-radius: 6px;
-    font-weight: 500;
-    font-size: 11px;
+    font-size: 10px;
     color: black;
     background-color: #F4F6F9;
 }
 
 .primarysave {
     background-color: #2580D3;
-    border-radius: 4px;
-    font-size: 15px;
-    margin-bottom: 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    padding-bottom: 7px;
+    padding-top: 7px;
+    padding-right: 15px;
+    padding-left: 15px;
 }
 
 .trantRankColor {

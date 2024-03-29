@@ -228,7 +228,6 @@ $this->title = 'Weight Allocation';
                                                 </div>
                                             </div>
                                         </td>
-
                                         <td>
                                             <div class="col-12 pt-8 all_allocate-show-weight pr-10">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/setting(Round).png" class="setting_png"> Weight
@@ -238,7 +237,6 @@ $this->title = 'Weight Allocation';
                                     </tr>
                                 </tbody>
                             </table>
-
                         <?php
                         }
                         ?>
