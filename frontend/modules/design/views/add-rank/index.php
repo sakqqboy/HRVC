@@ -1,6 +1,6 @@
 <?php
 
-$this->title = 'Rank Increasement';
+$this->title = 'Add Rank Increasement';
 
 ?>
 
@@ -85,65 +85,47 @@ $this->title = 'Rank Increasement';
         </div>
         <div class="col-lg-10 col-md-6 col-12">
             <div class="bg-white pmi_bakgru">
-                <div class="col-12">
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <div class="col-12 Framerank">
-                                Rank & Incasement
-                            </div>
-                        </div>
-                        <div class="col-lg-3 mt-5">
-                            <a href="<?= Yii::$app->homeUrl ?>designfront/add-rank" class="no-underline text-dark">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Create(Small).png" class="Createsmall"><span class="adRank"> ADD RANK</span>
-                            </a>
-                        </div>
-                        <div class="col-lg-6 text-end">
-                            <div type="button" class="badge primarysave"> Save</div>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-12 mt-20">
-                    <table class="table table-borderless table-striped">
-                        <thead>
-                            <th class="increasement-rank">Rank</th>
-                            <th class="increasement-rank">Score</th>
-                            <th class="increasement-rank">evaluation score </th>
-                            <th class="increasement-rank">Increment</th>
-                            <th class="increasement-rank">bonus</th>
-                            <th class="increasement-rank">Action</th>
-                        </thead>
-                        <tbody>
+                    <?php
+                    for ($i = 1; $i <= 4; $i++) {
+                    ?>
 
-                            <?php
-                            for ($i = 1; $i <= 4; $i++) {
-                            ?>
+                        <table class="table table-borderless table-striped">
+                            <tbody>
                                 <tr>
                                     <td>
-                                        <div class="col-12 letter border-right">
-                                            F
+                                        <div class="col-12">
+                                            <input type="text" class="form-control font-size-10" id="" placeholder="RANK">
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="col-12 border-right text-center">
-                                            <?= number_format(0) ?>-<?= number_format(11) ?>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="progressRank border-right">
-                                            <div class="barent" style="width:70%">
-                                                <span class="percent"></span>
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <input type="text" class="form-control font-size-10" id="" placeholder="SCORE">
                                             </div>
-                                            <span class="badge badge-percent">F</span>
+                                            <div class="col-1 font-b">
+                                                -
+                                            </div>
+                                            <div class="col-4">
+                                                <input type="text" class="form-control font-size-10" id="" placeholder="SCORE">
+                                            </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="col-12 border-right text-center">
-                                            <?= number_format(0.0) ?>
+                                        <div class="col-12">
+                                            <div class="progress" style="height: 10px;width:180px;">
+                                                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="col-12 border-right text-center">
-                                            <?= number_format(0.0) ?>
+                                        <div class="col-12">
+                                            <input type="text" class="form-control font-size-10" id="" placeholder="INCREMENT">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="col-12">
+                                            <input type="text" class="form-control font-size-10" id="" placeholder="BONUS">
                                         </div>
                                     </td>
                                     <td>
@@ -152,13 +134,13 @@ $this->title = 'Rank Increasement';
                                         </div>
                                     </td>
                                 </tr>
+                            </tbody>
+                        </table>
 
-                            <?php
-                            }
-                            ?>
+                    <?php
+                    }
+                    ?>
 
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>
