@@ -1,10 +1,11 @@
 .FrameSalaryAllowance {
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 700;
+
 }
 
 .pictureFilterFull {
-    width: 13px;
+    width: 16px;
 }
 
 .pictureDepartment1 {
@@ -12,51 +13,63 @@
 }
 
 .cl-btn {
-    font-size: 12px;
+    background-color: #F4F4F4;
+    border: 1px rgb(212, 212, 212) solid;
+    border-radius: 3px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 8px;
+    cursor: pointer;
 }
 
 .b1 {
-    font-size: 12px;
+    font-size: 11px;
     border-radius: 15px;
+    padding-top: 4px;
+    padding-bottom: 4px;
     background-color: #F0F2F4;
 }
 
 .b2solid {
-    border-left: 2px lightgray solid;
+    border-left: 1px lightgray solid;
 }
 
 .b3 {
-    width: 105px;
-    font-size: 12px;
+    font-size: 11px;
     border-radius: 15px;
+    padding-top: 4px;
+    padding-bottom: 4px;
     background-color: #F0F2F4;
 }
 
 .pictureCurrency3 {
-    width: 15px;
+    width: 13px;
 }
 
 .b4 {
     background-color: #F9FBFF;
-    border: none;
     border-radius: 6px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 10px;
 }
 
 .b4weight {
     font-weight: 700;
-    font-size: 14px;
+    font-size: 12px;
     color: #3266CD;
 }
 
 .b4E3 {
     color: #7E7E7E;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
 }
 
 .bg-headerBudget {
     background-color: #DCF0FF;
-    font-size: 10px;
+    font-size: 8px;
     color: black;
     text-align: center;
 }
@@ -69,12 +82,13 @@
 }
 
 .pictureEdit {
-    width: 12px;
+    width: 15px;
+    margin-left: 8px;
     cursor: pointer;
 }
 
 .b4solid {
-    border-right: 2px lightgray solid;
+    border-right: 1px lightgray solid;
 }
 
 .pictureDepartment-salary {
@@ -97,7 +111,7 @@
 }
 
 .linkAccounts {
-    letter-spacing: -1px;
+    letter-spacing: -0.1px;
     font-size: 11px;
     font-weight: 500;
 }
@@ -107,12 +121,19 @@
 }
 
 .pictureAchievement-salary {
-    width: 10px;
+    width: 15px;
 }
 
 .alert-Achievement1 {
     background-color: white;
-    border-color: #308FFF;
+    border: 1px #308FFF solid;
+    border-radius: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+
 }
 
 .Achievement1 {
@@ -158,4 +179,117 @@
 .printerpointer {
     width: 15px;
     margin-top: -5px;
+}
+
+.Department6A {
+    color: #6A7383;
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.Currency6A {
+    color: #6A7383;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.example-background {
+    background-color: #F4F6F9;
+    border-radius: 4px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    margin-top: 15px;
+}
+
+@import "//fonts.googleapis.com/css?family=Open+Sans";
+
+.steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    color: darken(#e6e6e6, 33%);
+    height: 4rem;
+
+    >.step {
+        position: relative;
+        display: table-cell;
+        text-align: center;
+        font-size: 0.875rem;
+        color: #6D6875;
+
+        &:before {
+            content: attr(data-step);
+            display: block;
+            margin: 0 auto;
+            background: #ffffff;
+            border: 2px solid #e6e6e6;
+            color: #e6e6e6;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            margin-bottom: -4.2rem;
+            line-height: 1.9rem;
+            border-radius: 100%;
+            position: relative;
+            z-index: 1;
+            font-weight: 500;
+            font-size: 13px;
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            display: block;
+            background: #e6e6e6;
+            width: 100%;
+            height: 0.125rem;
+            top: 1rem;
+            left: 50%;
+        }
+
+        &:last-child:after {
+            display: none;
+        }
+
+        &.is-complete {
+            color: #6D6875;
+
+            &:before {
+                content: '\2713';
+                color: #3288de;
+                background: #fef0e2;
+                border: 2px solid #3288de;
+            }
+
+            &:after {
+                background: #3288de;
+            }
+        }
+
+        &.is-active {
+            font-size: 1.5rem;
+
+            &:before {
+                color: #FFF;
+                border: 2px solid #3288de;
+                background: #3288de;
+                margin-bottom: -4.9rem;
+            }
+        }
+    }
+}
+
+*,
+*:after,
+*:before {
+    box-sizing: border-box;
+}
+
+.steps {
+    margin-bottom: 3em;
 }

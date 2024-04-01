@@ -104,7 +104,7 @@ $this->title = 'Rank Increasement';
                 </div>
                 <div class="col-12 mt-20">
                     <table class="table table-borderless table-striped">
-                        <thead>
+                        <thead class="font-size-10">
                             <th class="increasement-rank">Rank</th>
                             <th class="increasement-rank">Score</th>
                             <th class="increasement-rank">evaluation score </th>

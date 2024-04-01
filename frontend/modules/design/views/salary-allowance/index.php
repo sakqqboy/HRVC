@@ -6,96 +6,102 @@ $this->title = 'Salary Allowance';
 
 ?>
 
-<div class="col-12 mt-90 alert alert-Evaluator">
+<div class="col-12 mt-70 environment pt-10 pr-10 pl-20">
     <div class="row">
-        <div class="col-lg-3 col-md-6 col-12">
-            <div class="row">
-                <div class="col-5">
-                    <img src="<?= Yii::$app->homeUrl ?>image/BD.jpg" class="imagealertEvaluator">
-                </div>
-                <div class="col-7 setEvaluator">
-                    Tokyo Consulting Firm Pvt. Ltd
+        <div class="col-lg-2 col-md-6 col-12 pr-0 pl-5">
+            <div class="border-bottom pb-20">
+                <div class="row">
+                    <div class="col-5 text-center pr-5 pl-5">
+                        <img src="<?= Yii::$app->homeUrl ?>image/BD.jpg" class="imagealertEvaluator">
+                    </div>
+                    <div class="col-7 font-size-14 font-b pr-5 pl-10 pt-0">
+                        Tokyo Consulting Firm Pvt. Ltd
+                    </div>
                 </div>
             </div>
-            <div class="col-12 Evaluator-country">
+            <div class="col-12 Evaluator-country font-size-12 mt-10">
                 &nbsp;&nbsp; <img src="<?= Yii::$app->homeUrl ?>image/Thailand.png" class="imageEvaluatorcountry"> Bangkok, Thailand
             </div>
-            <div class="col-12">
-                <div class="shadow-sm p-3 mb-5 bg-body rounded mt-30">
-                    <div class="Mid-Term"> Mid Term Evaluation Phase</div>
-                    <div class="E3"> E3 </div>
+            <div class="col-12 mt-20">
+                <div class="mb-5 bg-body rounded-1 text-center font-size-12 pt-5 pr-5 pl-5 pb-5 font-weight-500 text-black-50">
+                    Mid Term Evaluation Phase
+                    <div class="E3 mt-5"> E3 </div>
                 </div>
             </div>
-            <div class="card" style="border:none;">
-                <div class="col-12">
-                    <div class="col-12 EvaluatorConfiguration">
-                        <i class="fa fa-cog" aria-hidden="true"></i> &nbsp; Set Configuration
+
+            <div class="col-12 bg-white rounded-1 mt-40 pb-10">
+                <div class="col-12 EvaluatorConfiguration pt-20 pl-10 border-bottom pb-20">
+                    <i class="fa fa-cog mr-5" aria-hidden="true"></i>Set Configuration
+                </div>
+                <div class="col-12 mt-20">
+                    <div class="rad-label pl-0 mt-10 pr-0">
+                        <div class="col-12 pl-5 rad-text pr-3">
+                            <i class="fa fa-check-circle-o text-success mr-10 font-size-18" aria-hidden="true"></i>
+                            <span class="text-dark font-weight-500 ">Evaluation Frame</span>
+                        </div>
                     </div>
-                    <hr>
-                    <div class="col-12">
-                        <div>
-                            <label class="rad-label">
-                                <input type="radio" class="rad-input" name="rad">
-                                <div class="rad-design"></div>
-                                <div class="rad-text"> Evaluation Frame</div>
-                            </label>
-                            <div class="Evaluationdeshed"></div>
-
-                            <label class="rad-label">
-                                <input type="radio" class="rad-input" name="rad">
-                                <div class="rad-design"></div>
-                                <div class="rad-text"> Weight Allocation</div>
-                            </label>
-
-                            <label class="rad-label">
-                                <input type="radio" class="rad-input" name="rad">
-                                <div class="rad-design"></div>
-                                <div class="rad-text"> Evaluator Settings</div>
-                            </label>
-
-                            <label class="rad-label">
-                                <input type="radio" class="rad-input" name="rad">
-                                <div class="rad-design"></div>
-                                <div class="rad-text">Rank & Increasement</div>
-                            </label>
-
-                            <label class="rad-label">
-                                <input type="radio" class="rad-input" name="rad">
-                                <div class="rad-design"></div>
-                                <div class="rad-text"> Salary & Allowance Range</div>
-                            </label>
-
-                            <label class="rad-label">
-                                <input type="radio" class="rad-input" name="rad">
-                                <div class="rad-design"></div>
-                                <div class="rad-text"> Bonus</div>
-                            </label>
-
-                            <label class="rad-label">
-                                <input type="radio" class="rad-input" name="rad">
-                                <div class="rad-design"></div>
-                                <div class="rad-text"> Promotion</div>
-                            </label>
+                    <div class="Evaluationdeshed"></div>
+                    <div class="rad-label pl-0 pr-0 pt-0">
+                        <div class="col-12 pl-5 rad-text pr-3">
+                            <i class="fa fa-circle mr-10 font-size-18 text-secondary" aria-hidden="true"></i>
+                            <span class="text-dark font-weight-500">Weight Allocation</span>
+                        </div>
+                    </div>
+                    <div class="Evaluationdeshed"></div>
+                    <div class="rad-label pl-0 pr-0">
+                        <div class="col-12 pl-5 rad-text pr-3">
+                            <i class="fa fa-circle mr-10 font-size-18 text-secondary" aria-hidden="true"></i>
+                            <span class="text-dark font-weight-500">Evaluator Settings</span>
+                        </div>
+                    </div>
+                    <div class="Evaluationdeshed"></div>
+                    <div class="rad-label pl-0 pr-0">
+                        <div class="col-12 pl-5 rad-text pr-3">
+                            <i class="fa fa-circle mr-10 font-size-18 text-secondary" aria-hidden="true"></i>
+                            <span class="text-dark font-weight-500">Rank & Increasement</span>
+                        </div>
+                    </div>
+                    <div class="Evaluationdeshed"></div>
+                    <div class="rad-label pl-0 pr-0">
+                        <div class="col-12 pl-5 rad-text pr-3">
+                            <i class="fa fa-circle mr-10 font-size-18 text-secondary" aria-hidden="true"></i>
+                            <span class="text-dark font-weight-500">Salary & Allowance Range</span>
+                        </div>
+                    </div>
+                    <div class="Evaluationdeshed"></div>
+                    <div class="rad-label pl-0 pr-0">
+                        <div class="col-12 pl-5 rad-text pr-3">
+                            <i class="fa fa-circle mr-10 font-size-18 text-secondary" aria-hidden="true"></i>
+                            <span class="text-dark font-weight-500">Bonus calculation</span>
+                        </div>
+                    </div>
+                    <div class="Evaluationdeshed"></div>
+                    <div class="rad-label pl-0 pr-0">
+                        <div class="col-12 pl-5 rad-text pr-3">
+                            <i class="fa fa-circle mr-10 font-size-18 text-secondary" aria-hidden="true"></i>
+                            <span class="text-dark font-weight-500">Promotion</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-9 col-md-6 col-12">
-            <div class="alert aler-ALLDepartment">
+        <div class="col-lg-10 col-md-6 col-12">
+            <div class="bg-white pmi_bakgru">
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="col-12 FrameSalaryAllowance">
-                            Salary & Allowance
+                            Salary Increment
                         </div>
                     </div>
                     <div class="col-lg-1">
-                        <button class="form-control cl-btn" type="button"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterFull.png" class="pictureFilterFull"></button>
+                        <div class="badge  cl-btn">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterFull.png" class="pictureFilterFull">
+                        </div>
                     </div>
                     <div class="col-lg-2">
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Department.png" class="pictureDepartment1"> <span class="font-size-12">Department</span>
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/link-gy.png" class="pictureDepartment1"> <span class="Department6A"> Department</span>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-2">
                         <select class="form-select b1" aria-label="Default select example">
                             <option selected value="">Select menu</option>
                             <option value="1">Accounts & Taxation</option>
@@ -103,8 +109,8 @@ $this->title = 'Salary Allowance';
                             <option value="3">Management</option>
                         </select>
                     </div>
-                    <div class="col-lg-1 b2solid">
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Currency.png" class="pictureCurrency3"><span class="font-size-10">Currency</span>
+                    <div class="col-lg-2 b2solid">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/currency-gy.png" class="pictureCurrency3"> <span class="Currency6A"> Currency</span>
                     </div>
                     <div class="col-lg-2">
                         <select class="form-select b3" aria-label="Default select example">
@@ -115,67 +121,48 @@ $this->title = 'Salary Allowance';
                         </select>
                     </div>
                 </div>
-                <div class="alert alert-Evaluator mt-20">
+                <div class="example-background">
                     <div class="row">
                         <div class="col-md-4 b4solid">
-                            <div class="card b4">
+                            <div class="b4">
                                 <div class="col-12">
                                     <span class="b4weight">E3</span><span class="b4E3"> Final Evaluation Phase</span>
                                 </div>
                                 <hr>
-                                <div class="position-relative m-4">
-                                    <div class="progress" style="height: 1px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <button type="button" class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-primary rounded-pill" style="width: 2rem; height:2rem;">1</button>
-                                    <button type="button" class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-primary rounded-pill" style="width: 2rem; height:2rem;">2</button>
-                                    <button type="button" class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill" style="width: 2rem; height:2rem;">3</button>
-                                </div>
+                                <ol class="steps">
+                                    <span class="font-size-10">Start</span>
+                                    <li class="step is-active" data-step="1"></li>
+                                    <li class="step" data-step="2"></li>
+                                    <li class="step" data-step="3"> </li>
+                                    <span class="font-size-10">Finish</span>
+                                </ol>
+
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <div class="card text-white mb-3" style="max-width: 18rem;border:none;">
-                                <div class="card-header bg-headerBudget">Total Budget <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Edit.png" class="pictureEdit"></div>
-                                <div class="card-body bg-titleBudget">
-                                    <div class="card-title">
-                                        ฿ <?= number_format(39489) ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="card text-white mb-3" style="max-width: 18rem;border:none;">
-                                <div class="card-header bg-headerBudget">Evaluated Salary <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Edit.png" class="pictureEdit"></div>
-                                <div class="card-body bg-titleBudget">
-                                    <div class="card-title">
-                                        ฿ <?= number_format(39489) ?>
+
+                        <?php
+                        for ($i = 1; $i <= 4; $i++) {
+                        ?>
+
+                            <div class="col-md-2">
+                                <div class="card text-white mb-3" style="max-width: 18rem;border:none;">
+                                    <div class="card-header bg-headerBudget">Total Budget <i class="fa fa-pencil-square-o pictureEdit" aria-hidden="true"></i></div>
+                                    <!-- <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Edit.png" class="pictureEdit"> -->
+                                    <div class="card-body bg-titleBudget">
+                                        <div class="card-title font-size-10 text-center">
+                                            ฿ <?= number_format(39489) ?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="card text-white mb-3" style="max-width: 18rem;border:none;">
-                                <div class="card-header bg-headerBudget">TAdjustment <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Edit.png" class="pictureEdit"></div>
-                                <div class="card-body bg-titleBudget">
-                                    <div class="card-title">
-                                        ฿ <?= number_format(39489) ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="card text-white mb-3" style="max-width: 18rem;border:none;">
-                                <div class="card-header bg-headerBudget">Total New Salary<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Edit.png" class="pictureEdit"></div>
-                                <div class="card-body bg-titleBudget">
-                                    <div class="card-title">
-                                        ฿ <?= number_format(39489) ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+                        <?php
+                        }
+                        ?>
+
                     </div>
                 </div>
-                <div class="alert alert-Evaluator mt-20">
+                <div class="mt-20">
                     <div class="row">
                         <div class="col-3">
                             <div class="col-12">
@@ -189,7 +176,7 @@ $this->title = 'Salary Allowance';
                                     <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
                                     <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar3"></li>
                                     <a href="" class="none">
-                                        <li class="tri-li-number1 pt-3"> 27 </li>
+                                        <li class="tri-li-number1 pt-3"> 8 </li>
                                     </a>
                                 </ul>
                             </span>
@@ -200,7 +187,7 @@ $this->title = 'Salary Allowance';
                             </div>
                         </div>
                         <div class="col-4">
-                            <div class="alert alert-Achievement1">
+                            <div class="alert-Achievement1">
                                 <div class="row">
                                     <div class="col-sm-1">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Achievement.png" class="pictureAchievement-salary">
