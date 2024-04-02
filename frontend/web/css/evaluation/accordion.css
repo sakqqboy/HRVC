@@ -30,6 +30,8 @@
 
 .bg-primary-MM {
     background-color: #308FFF;
+    font-size: 9px;
+    font-weight: 400;
 }
 
 .accordion-3Dot {
@@ -56,15 +58,19 @@
 
 .accordion-C9E5FF {
     border-color: #C9E5FF;
-    font-size: 10px;
+    font-size: 9px;
     border-radius: 30px;
     text-align: center;
     margin-left: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    width: 50px;
 }
 
 .Minimum {
-    font-size: 10px;
-    font-weight: 600;
+    font-size: 8px;
+    text-align: center;
+
 }
 
 .accordionpl_minimum {
@@ -76,7 +82,7 @@
     position: absolute;
     height: 0px;
     width: 300px;
-    margin-top: 40px;
+    margin-top: 32px;
 }
 
 .accordion-D6FFDF {
@@ -88,7 +94,8 @@
 }
 
 .accordion-UP {
-    width: 11px;
+    font-size: 14px;
+    color: #32BD1B;
 }
 
 .bg-D6FFDF {

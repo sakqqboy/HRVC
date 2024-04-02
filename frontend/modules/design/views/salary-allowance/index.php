@@ -215,7 +215,7 @@ $this->title = 'Salary Allowance';
                             </div>
                         </div>
                         <div class="col-2">
-                            <div class="alert alert-D6E6FF">
+                            <div class="alert-D6E6FF">
                                 <span class="printer"> Generate Report &nbsp;&nbsp; <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/printer.png" class="printerpointer"></span>
                             </div>
                         </div>
@@ -225,65 +225,87 @@ $this->title = 'Salary Allowance';
                     </div>
                     <div class="col-12">
                         <div class="container-accordion">
-                            <div class="col-12 card card-accordion">
-                                <div class="col-6">
-                                    <span class="badge bg-sprank1"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Rank-1.png" class="accordion-rank1"></span> &nbsp;<span class="Manager">Manager</span> &nbsp;<span class="badge rounded-pill bg-primary-MM">MM</span>
-                                </div>
-                                <div class="col-12 mt-20">
-                                    <div class="row">
-                                        <div class="col-lg-1 col-md-6 col-12">
-                                            <span class="badge rounded-pill bg-gray mt-30">
-                                                <ul class="try-cricle">
-                                                    <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
-                                                    <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
-                                                    <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar3"></li>
-                                                    <a href="" class="none">
-                                                        <li class="tri-li-number1 pt-3"> 9 </li>
-                                                    </a>
-                                                </ul>
-                                            </span>
-                                        </div>
-                                        <div class="col-lg-3 col-md-6 col-12 accordion-Included">
-                                            Included Employees
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Achievement.png" class="accordion-3Dot"><span class="B">B</span>
-                                        </div>
+                            <?php
+                            for ($i = 1; $i <= 3; $i++) {
+                            ?>
 
-                                        <div class="col-lg-6 col-md-6 col-12">
-                                            <div class="col-12 accordion-minimum-solid"></div>
-                                            <div class="row accordionpl_minimum">
-                                                <div class="col-12 Minimum"> Minimum <span class="text-primary">0%</span></div>
-                                                <div class="col-2 card accordion-C9E5FF">
-                                                    <?= number_format(13291) ?>
-                                                </div>
-                                                <div class="col-2 card accordion-C9E5FF">
-                                                    <?= number_format(18017) ?>
-                                                </div>
-                                                <div class="col-2 card accordion-C9E5FF">
-                                                    <?= number_format(22743) ?>
-                                                </div>
-                                                <div class="col-2 card accordion-C9E5FF">
-                                                    <?= number_format(27470) ?>
-                                                </div>
-                                                <div class="col-2 card accordion-C9E5FF">
-                                                    <?= number_format(32196) ?>
+                                <div class="col-12 card card-accordion">
+                                    <div class="col-6">
+                                        <span class="badge bg-sprank1"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Rank-1.png" class="accordion-rank1"></span> &nbsp;<span class="Manager">Manager</span> &nbsp;<span class="badge rounded-pill bg-primary-MM">MM</span>
+                                    </div>
+                                    <div class="col-12 mt-20">
+                                        <div class="row">
+                                            <div class="col-lg-1 col-md-6 col-12">
+                                                <span class="badge rounded-pill bg-gray mt-30">
+                                                    <ul class="try-cricle">
+                                                        <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
+                                                        <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
+                                                        <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar3"></li>
+                                                        <a href="" class="none">
+                                                            <li class="tri-li-number1 pt-3"> 9 </li>
+                                                        </a>
+                                                    </ul>
+                                                </span>
+                                            </div>
+                                            <div class="col-lg-3 col-md-6 col-12 accordion-Included">
+                                                Included Employees
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Achievement.png" class="accordion-3Dot"><span class="B">B</span>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-12">
+                                                <div class="col-12 accordion-minimum-solid"></div>
+                                                <div class="row accordionpl_minimum">
+                                                    <div class="col-2">
+                                                        <div class="Minimum"> Minimum <span class="text-primary">0%</span></div>
+                                                        <div class="card accordion-C9E5FF">
+                                                            <?= number_format(13291) ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <div class="Minimum"> Low <span class="text-primary">25%</span></div>
+                                                        <div class="card accordion-C9E5FF">
+                                                            <?= number_format(18017) ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <div class="Minimum"> Medium <span class="text-primary">50%</span></div>
+                                                        <div class="card accordion-C9E5FF">
+                                                            <?= number_format(22743) ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <div class="Minimum"> High <span class="text-primary">75%</span></div>
+                                                        <div class="card accordion-C9E5FF">
+                                                            <?= number_format(27470) ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <div class="Minimum"> Max <span class="text-primary">100%</span></div>
+                                                        <div class="card accordion-C9E5FF">
+                                                            <?= number_format(32196) ?>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-1 col-md-6 col-12">
-                                            <span class="badge rounded-pill bg-D6FFDF">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/UP.png" class="accordion-UP"> <?= number_format(638) ?>
-                                            </span>
+
+                                            <div class=" col-lg-1 col-md-6 col-12">
+                                                <span class="badge rounded-pill bg-D6FFDF">
+                                                    <!-- <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/UP.png" class="accordion-UP">  -->
+                                                    <i class="fa fa-caret-up accordion-UP" aria-hidden="true"></i> <?= number_format(638) ?>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="accordion"></div>
+                                    <div class="accordion-content">
+                                        <hr>
+                                        <p class="col-2">fvfioggogkmoi</p>
+                                    </div>
                                 </div>
-                                <div class="accordion"></div>
-                                <div class="accordion-content">
-                                    <hr>
-                                    <p>fvfioggogkmoi</p>
-                                </div>
-                            </div>
+                            <?php
+                            }
+                            ?>
                         </div>
-                        <div class="container-accordion">
+                        <!-- <div class="container-accordion">
                             <div class="col-12 card card-accordion">
                                 <div class="col-6">
                                     <span class="badge bg-sprank1"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Rank-1.png" class="accordion-rank1"></span> &nbsp;<span class="Manager">Assistant Manager</span> &nbsp;<span class="badge rounded-pill bg-primary-MM">MM</span>
@@ -343,8 +365,8 @@ $this->title = 'Salary Allowance';
                                     <p>fgkothotlroogokfgk</p>
                                 </div>
                             </div>
-                        </div>
-                        <div class="container-accordion">
+                        </div> -->
+                        <!-- <div class="container-accordion">
                             <div class="col-12 card card-accordion">
                                 <div class="col-6">
                                     <span class="badge bg-sprank1"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Rank-1.png" class="accordion-rank1"></span> &nbsp;<span class="Manager">Junior Executive</span> &nbsp;<span class="badge rounded-pill bg-primary-MM">LM</span>
@@ -649,7 +671,7 @@ $this->title = 'Salary Allowance';
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

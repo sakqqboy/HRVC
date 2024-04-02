@@ -54,10 +54,12 @@
 }
 
 .number-salaryedit {
-    font-size: 12px;
-    width: 3.4rem;
+    font-size: 10px;
+    width: 3.3rem;
     border-radius: 3px;
     font-weight: 500;
+    padding-top: 3px;
+    padding-bottom: 3px;
     margin-top: -10px;
 }
 
@@ -177,5 +179,4 @@
 
 .Sample-worrning {
     margin-top: -100px;
-    margin-left: 620px;
 }

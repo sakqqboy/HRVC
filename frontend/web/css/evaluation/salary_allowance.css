@@ -165,15 +165,18 @@
 
 .alert-D6E6FF {
     background-color: #D6E6FF;
-    border-color: #64B3FC;
-    width: 120px;
-
+    border: 1px #64B3FC solid;
+    border-radius: 4px;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    cursor: pointer;
 }
 
 .printer {
-    font-size: 8px;
-    font-weight: 600;
-    cursor: pointer;
+    font-size: 9px;
+    font-weight: 500;
 }
 
 .printerpointer {
