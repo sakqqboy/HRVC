@@ -158,7 +158,7 @@ function removeAllChildren(parent) {
     }
 }
 
-$('#f rst').show();
+$('#first').show();
 $('#second').hide();
 $('#third').hide();
 $('#fourth').hide();
@@ -218,3 +218,4 @@ accordionBtns.forEach((accordion) => {
     };
 });
 //end//
+

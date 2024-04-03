@@ -35,7 +35,7 @@
 }
 
 .accordion-3Dot {
-    width: 15px;
+    width: 11px;
     margin-top: -6px;
 }
 
@@ -45,8 +45,8 @@
 }
 
 .B {
-    font-weight: 600;
-    font-size: 17px;
+    font-weight: 500;
+    font-size: 13px;
 }
 
 .accordion-Included {
@@ -61,7 +61,6 @@
     font-size: 9px;
     border-radius: 30px;
     text-align: center;
-    margin-left: 10px;
     padding-top: 2px;
     padding-bottom: 2px;
     width: 50px;
@@ -69,12 +68,12 @@
 
 .Minimum {
     font-size: 8px;
-    text-align: center;
+    width: 90px;
 
 }
 
 .accordionpl_minimum {
-    margin-left: -55px;
+    margin-top: 5px;
 }
 
 .accordion-minimum-solid {
@@ -82,7 +81,7 @@
     position: absolute;
     height: 0px;
     width: 300px;
-    margin-top: 32px;
+    margin-top: 37px;
 }
 
 .accordion-D6FFDF {
@@ -99,12 +98,19 @@
 }
 
 .bg-D6FFDF {
-    margin-top: 30px;
-    padding-bottom: 7px;
-    padding-left: 4px;
-    padding-right: 10px;
+    margin-top: 10px;
     background-color: #D6FFDF;
+    border-radius: 30px;
+    border: 1px #31BD1B solid;
     color: #0E7318;
+    font-size: 10px;
+}
+
+.Unit-Increment {
+    font-size: 10px;
+    color: #363636;
+    width: 80px;
+    margin-left: -10px;
 }
 
 #salary_scrollbar::-webkit-scrollbar-track {
@@ -249,4 +255,23 @@ input[value="Allowance2"]:checked+label {
 .DeleteRound1 {
     width: 10px;
     cursor: pointer;
+}
+
+.tb-borderless-salary {
+    font-size: 13px;
+    color: #585858;
+    font-weight: 400;
+}
+
+.accordion_user {
+    border-radius: 50px;
+    width: 20px;
+    height: 20px;
+}
+
+.table-borderless-background-gray {
+    background-color: #ECECEC;
+    border-radius: 3px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
