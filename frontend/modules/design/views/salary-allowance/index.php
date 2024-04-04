@@ -315,35 +315,73 @@ $this->title = 'Salary Allowance';
                                     <div class="card-body">
                                         <div class="col-12">
                                             <div class="row">
-                                                <div class="col-lg-6 table-borderless-background-gray">
-                                                    <div class="col-12">
-                                                        <table class="table-borderless">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th class="tb-borderless-salary">Employees</th>
-                                                                    <th class="tb-borderless-salary">Current</th>
-                                                                    <th class="tb-borderless-salary">Rank</th>
-                                                                </tr>
-                                                            </thead>
+                                                <div class="col-lg-5 table-borderless-background-gray">
+                                                    <div class="col-12 silly_table-gray">
+                                                        <div class="col-11  ">
+                                                            <div class="row tb-borderless-salary">
+                                                                <div class="col-5">
+                                                                    Employees
+                                                                </div>
+                                                                <div class="col-3">
+                                                                    Current
+                                                                </div>
+                                                                <div class="col-3">
+                                                                    Rank
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="col-12 border-right">
+                                                        <?php
+                                                        for ($i = 1; $i <= 6; $i++) {
+                                                        ?>
+                                                            <div class="col-11 bg-white bg_userTable">
+                                                                <div class="row">
+                                                                    <div class="col-5">
                                                                         <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="accordion_user"> Ananta Kumar
                                                                     </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="col-12 text-dark border-right">
-                                                                        12,000
+                                                                    <div class="col-3 border-left">
+                                                                        <?= number_format(12000) ?>
                                                                     </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="col-12 font-b font-size-12">
+                                                                    <div class="col-3 border-left">
                                                                         A+
                                                                     </div>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
+                                                                </div>
+                                                            </div>
+
+                                                        <?php
+                                                        }
+                                                        ?>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-7 table-borderless-background-gray">
+                                                    <div class="col-12 font-size-12">
+                                                        Rank & Salary Increment
+                                                    </div>
+                                                    <div class="row">
+                                                        <?php
+                                                        for ($i = 1; $i <= 6; $i++) {
+                                                        ?>
+
+                                                            <div class="col-lg-2 pl-20" style="margin-left: -18px; width:90px;">
+                                                                <div class="card font-size-12">
+                                                                    <div class="card-header Rank-salary">F</div>
+                                                                    <div class="col-12 text-center font-size-10">
+                                                                        <?= number_format(325) ?>
+                                                                    </div>
+                                                                    <div class="col-12 text-center">
+                                                                        <div class="linesalaryEdit1"></div>
+                                                                        <div style="display: inline-block;font-size:11px;"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/uploadlink.png" class="images-linesalaryEdit1"></div>
+                                                                        <div class="linesalaryEdit2"></div>
+                                                                    </div>
+                                                                    <div class="col-12 text-center pt-10 font-size-10">
+                                                                        <?= number_format(35) ?>%
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        <?php
+                                                        }
+                                                        ?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -351,6 +389,7 @@ $this->title = 'Salary Allowance';
                                     </div>
                                 </div>
                             </div>
+
                         <?php
                         }
                         ?>

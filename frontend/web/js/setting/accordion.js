@@ -217,5 +217,5 @@ accordionBtns.forEach((accordion) => {
         }
     };
 });
-//end//
+
 
