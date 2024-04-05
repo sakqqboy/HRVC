@@ -87,7 +87,7 @@ $this->title = 'Salary Edit';
                 <div class="col-12 FrameSalaryAllowance">
                     Salary & Allowance
                 </div>
-                <div class="alert alert-Evaluator mt-20">
+                <div class="bg-Salary-edit">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-3 col-6">
                             <div class="col-12">
@@ -101,42 +101,46 @@ $this->title = 'Salary Edit';
                         </div>
                     </div>
                 </div>
-                <div class="alert alert-F6F6F66">
+                <div class="alert-F6F6F66">
                     <div class="col-12 edit-Range">
                         Range
                     </div>
                     <div class="row classmarginminimum">
                         <div class="col-12 salaryedit-Allminimumsolid"></div>
-                        <div class="col-lg-2 col-md-6 col-6">
-                            <div class="Minimum-0"> Minimumd <span class="text-308FFF">0%</span> </div>
+                        <div class="col-lg-2 col-md-6 col-2">
+                            <div class="Minimum-0"> Minimum <span class="text-308FFF">0%</span> </div>
                             <div class="card roundedborderedit">
                                 <?= number_format(13782) ?>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-6 col-6">
+                        <div class="col-lg-2 col-md-6 col-2">
                             <div class="Minimum-0"> Low <span class="text-308FFF">25%</span></div>
                             <div class="card roundedborderedit">
                                 <?= number_format(13782) ?>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-6 col-6">
+                        <div class="col-lg-2 col-md-6 col-2">
                             <div class="Minimum-0"> Medium <span class="text-308FFF">50%</span></div>
                             <div class="card roundedborderedit">
                                 <?= number_format(13782) ?>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-6 col-6">
+                        <div class="col-lg-2 col-md-6 col-2">
                             <div class="Minimum-0"> Hight <span class="text-308FFF">75%</span></div>
                             <div class="card roundedborderedit">
                                 <?= number_format(13782) ?>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-6 col-6">
+                        <div class="col-lg-2 col-md-6 col-2">
                             <div class="Minimum-0"> Max <span class="text-308FFF">100%</span></div>
                             <div class="card roundedborderedit">
                                 <?= number_format(13782) ?>
                             </div>
                         </div>
+                        <div class="col-lg-2 col-md-6 col-2 Sample-worrning">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Wornning-blue.png" class="images-wornningblue"> Sample Range
+                        </div>
+
                         <div class="col-lg-3 col-md-6 col-6">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/U-turn.png" class="imagesU-turn">
                         </div>
@@ -155,12 +159,9 @@ $this->title = 'Salary Edit';
                         <div class="col-lg-2 col-md-6 col-6">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/U-trun2.png" class="imagesU-turn2">
                         </div>
-                        <!-- <div class="col-lg-3 col-md-6 col-6 Sample-worrning">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Wornning-blue.png" class="images-wornningblue"> Sample Range
-                        </div> -->
                     </div>
                 </div>
-                <div class="alert alert-F6F6F66">
+                <div class="alert-F6F6F66">
                     <div class="col-12 edit-Range">
                         Rank & Salary Increment
                     </div>
@@ -173,7 +174,6 @@ $this->title = 'Salary Edit';
                                 Bonus Increment %
                             </div>
                         </div>
-
                         <?php
                         for ($i = 1; $i <= 10; $i++) {
                         ?>
@@ -200,7 +200,7 @@ $this->title = 'Salary Edit';
 
                     </div>
                 </div>
-                <div class="col-12 text-end">
+                <div class="col-12 text-end mt-10">
                     <button class="btn btn-primary rounded-1 font-308FFF" type="submit"><img src="/HRVC/frontend/web/images/icons/Dark/48px/save.png" class="images-bonuesave">&nbsp; SAVE</button>
                 </div>
             </div>

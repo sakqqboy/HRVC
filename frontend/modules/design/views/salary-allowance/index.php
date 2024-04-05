@@ -235,171 +235,167 @@ $this->title = 'Salary Allowance';
                                 </div>
                             </div>
                         </div>
-                        <?php
-                        for ($i = 1; $i <= 3; $i++) {
-                        ?>
 
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="col-6">
-                                        <span class="badge bg-sprank1"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Rank-1.png" class="accordion-rank1"></span> &nbsp;<span class="Manager">Manager</span> &nbsp;<span class="badge rounded-pill bg-primary-MM">MM</span>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-lg-1 col-md-6 col-12">
-                                                <span class="badge rounded-pill bg-gray mt-30">
-                                                    <ul class="try-cricle">
-                                                        <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
-                                                        <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
-                                                        <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar3"></li>
-                                                        <a href="" class="none">
-                                                            <li class="tri-li-number1 pt-3"> 10 </li>
-                                                        </a>
-                                                    </ul>
-                                                </span>
-                                            </div>
-                                            <div class="col-lg-2 col-md-6 col-12 accordion-Included">
-                                                Included Employees <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Achievement.png" class="accordion-3Dot"><span class="B">B</span>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-12">
-                                                <div class="col-12 accordion-minimum-solid"></div>
-                                                <div class="row accordionpl_minimum">
-                                                    <div class="col-2">
-                                                        <div class="Minimum"> Minimum <span class="text-primary">0%</span></div>
-                                                        <div class="card accordion-C9E5FF">
-                                                            <?= number_format(13291) ?>
-                                                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="col-6">
+                                    <span class="badge bg-sprank1"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Rank-1.png" class="accordion-rank1"></span> &nbsp;<span class="Manager">Manager</span> &nbsp;<span class="badge rounded-pill bg-primary-MM">MM</span>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-lg-1 col-md-6 col-12">
+                                            <span class="badge rounded-pill bg-gray mt-30">
+                                                <ul class="try-cricle">
+                                                    <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
+                                                    <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
+                                                    <li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar3.png" class="image-avatar3"></li>
+                                                    <a href="" class="none">
+                                                        <li class="tri-li-number1 pt-3"> 10 </li>
+                                                    </a>
+                                                </ul>
+                                            </span>
+                                        </div>
+                                        <div class="col-lg-2 col-md-6 col-12 accordion-Included">
+                                            Included Employees <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Achievement.png" class="accordion-3Dot"><span class="B">B</span>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <div class="col-12 accordion-minimum-solid"></div>
+                                            <div class="row accordionpl_minimum">
+                                                <div class="col-2">
+                                                    <div class="Minimum"> Minimum <span class="text-primary">0%</span></div>
+                                                    <div class="card accordion-C9E5FF">
+                                                        <?= number_format(13291) ?>
                                                     </div>
-                                                    <div class="col-2">
-                                                        <div class="Minimum"> Low <span class="text-primary">25%</span></div>
-                                                        <div class="card accordion-C9E5FF">
-                                                            <?= number_format(18017) ?>
-                                                        </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="Minimum"> Low <span class="text-primary">25%</span></div>
+                                                    <div class="card accordion-C9E5FF">
+                                                        <?= number_format(18017) ?>
                                                     </div>
-                                                    <div class="col-2">
-                                                        <div class="Minimum"> Medium <span class="text-primary">50%</span></div>
-                                                        <div class="card accordion-C9E5FF">
-                                                            <?= number_format(22743) ?>
-                                                        </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="Minimum"> Medium <span class="text-primary">50%</span></div>
+                                                    <div class="card accordion-C9E5FF">
+                                                        <?= number_format(22743) ?>
                                                     </div>
-                                                    <div class="col-2">
-                                                        <div class="Minimum"> High <span class="text-primary">75%</span></div>
-                                                        <div class="card accordion-C9E5FF">
-                                                            <?= number_format(27470) ?>
-                                                        </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="Minimum"> High <span class="text-primary">75%</span></div>
+                                                    <div class="card accordion-C9E5FF">
+                                                        <?= number_format(27470) ?>
                                                     </div>
-                                                    <div class="col-2">
-                                                        <div class="Minimum pl-8"> Max <span class="text-primary">100%</span></div>
-                                                        <div class="card accordion-C9E5FF">
-                                                            <?= number_format(32196) ?>
-                                                        </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="Minimum pl-8"> Max <span class="text-primary">100%</span></div>
+                                                    <div class="card accordion-C9E5FF">
+                                                        <?= number_format(32196) ?>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-1 col-md-6 col-12" style="margin-left:-20px;width:100px;">
-                                                <div class="Unit-Increment">Increment Unit</div>
-                                                <span class="badge bg-D6FFDF">
-                                                    <i class="fa fa-caret-up accordion-UP" aria-hidden="true"></i> <?= number_format(638) ?>
-                                                </span>
-                                                <i class="fa fa-ellipsis-v pl-25 font-size-12" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="col-1">
-                                                <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseTwo">
-                                                    <i class="fa fa-chevron-down font-size-12 pt-22" aria-hidden="true"></i>
-                                                </a>
-                                            </div>
+                                        </div>
+                                        <div class="col-lg-1 col-md-6 col-12" style="margin-left:-20px;width:100px;">
+                                            <div class="Unit-Increment">Increment Unit</div>
+                                            <span class="badge bg-D6FFDF">
+                                                <i class="fa fa-caret-up accordion-UP" aria-hidden="true"></i> <?= number_format(638) ?>
+                                            </span>
+                                            <i class="fa fa-ellipsis-v pl-25 font-size-12" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="col-1">
+                                            <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseTwo">
+                                                <i class="fa fa-chevron-down font-size-12 pt-22" aria-hidden="true"></i>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
-                                <div id="collapseTwo" class="collapse" data-bs-parent="#accordion">
-                                    <div class="card-body">
-                                        <div class="col-12">
-                                            <div class="row">
-                                                <div class="col-lg-5 table-borderless-background-gray">
-                                                    <div class="col-12 silly_table-gray">
-                                                        <div class="col-11  ">
-                                                            <div class="row tb-borderless-salary">
+                            </div>
+                            <div id="collapseTwo" class="collapse" data-bs-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-lg-5 table-borderless-background-gray">
+                                                <div class="col-12 silly_table-gray">
+                                                    <div class="col-11  ">
+                                                        <div class="row tb-borderless-salary">
+                                                            <div class="col-5">
+                                                                Employees
+                                                            </div>
+                                                            <div class="col-3">
+                                                                Current
+                                                            </div>
+                                                            <div class="col-3">
+                                                                Rank
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <?php
+                                                    for ($i = 1; $i <= 6; $i++) {
+                                                    ?>
+                                                        <div class="col-11 bg-white bg_userTable">
+                                                            <div class="row">
                                                                 <div class="col-5">
-                                                                    Employees
+                                                                    <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="accordion_user"> Ananta Kumar
                                                                 </div>
-                                                                <div class="col-3">
-                                                                    Current
+                                                                <div class="col-3 border-left">
+                                                                    <?= number_format(12000) ?>
                                                                 </div>
-                                                                <div class="col-3">
-                                                                    Rank
+                                                                <div class="col-3 border-left">
+                                                                    A+
                                                                 </div>
                                                             </div>
                                                         </div>
 
-                                                        <?php
-                                                        for ($i = 1; $i <= 6; $i++) {
-                                                        ?>
-                                                            <div class="col-11 bg-white bg_userTable">
-                                                                <div class="row">
-                                                                    <div class="col-5">
-                                                                        <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="accordion_user"> Ananta Kumar
-                                                                    </div>
-                                                                    <div class="col-3 border-left">
-                                                                        <?= number_format(12000) ?>
-                                                                    </div>
-                                                                    <div class="col-3 border-left">
-                                                                        A+
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                    <?php
+                                                    }
+                                                    ?>
 
-                                                        <?php
-                                                        }
-                                                        ?>
-
-                                                    </div>
                                                 </div>
-                                                <div class="col-lg-7 table-borderless-background-gray">
-                                                    <div class="col-12 font-size-12">
-                                                        Rank & Salary Increment
-                                                    </div>
-                                                    <div class="row">
-                                                        <?php
-                                                        for ($i = 1; $i <= 6; $i++) {
-                                                        ?>
+                                            </div>
+                                            <div class="col-lg-7 table-borderless-background-gray">
+                                                <div class="col-12 font-size-12">
+                                                    Rank & Salary Increment
+                                                </div>
+                                                <div class="row">
+                                                    <?php
+                                                    for ($i = 1; $i <= 6; $i++) {
+                                                    ?>
 
-                                                            <div class="col-lg-2 pl-20" style="margin-left: -18px; width:90px;">
-                                                                <div class="card font-size-12">
-                                                                    <div class="card-header Rank-salary">F</div>
-                                                                    <div class="col-12 text-center font-size-10">
-                                                                        <?= number_format(325) ?>
-                                                                    </div>
-                                                                    <div class="col-12 text-center">
-                                                                        <div class="linesalaryEdit1"></div>
-                                                                        <div style="display: inline-block;font-size:11px;"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/uploadlink.png" class="images-linesalaryEdit1"></div>
-                                                                        <div class="linesalaryEdit2"></div>
-                                                                    </div>
-                                                                    <div class="col-12 text-center pt-10 font-size-10">
-                                                                        <?= number_format(35) ?>%
-                                                                    </div>
+                                                        <div class="col-lg-2 pl-20" style="margin-left: -18px; width:90px;">
+                                                            <div class="card font-size-12">
+                                                                <div class="card-header Rank-salary">F</div>
+                                                                <div class="col-12 text-center font-size-10">
+                                                                    <?= number_format(325) ?>
+                                                                </div>
+                                                                <div class="col-12 text-center">
+                                                                    <div class="linesalaryEdit1"></div>
+                                                                    <div style="display: inline-block;font-size:11px;"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/uploadlink.png" class="images-linesalaryEdit1"></div>
+                                                                    <div class="linesalaryEdit2"></div>
+                                                                </div>
+                                                                <div class="col-12 text-center pt-10 font-size-10">
+                                                                    <?= number_format(35) ?>%
                                                                 </div>
                                                             </div>
-                                                        <?php
-                                                        }
-                                                        ?>
-                                                    </div>
+                                                        </div>
+
+                                                    <?php
+                                                    }
+                                                    ?>
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                        <?php
-                        }
-                        ?>
-
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 
 

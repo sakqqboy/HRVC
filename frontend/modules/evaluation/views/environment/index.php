@@ -45,7 +45,7 @@ $this->title = 'Evaluation';
 	$i = 1;
 	foreach ($environments as $environmentId => $environment) :
 	?>
-		<div class="col-12 mt-15 environment ">
+		<div class="col-12 mt-15 environment">
 			<div class="row">
 				<div class="col-lg-1 col-2 text-center pt-5">
 					<img src="<?= Yii::$app->homeUrl ?><?= $environment['picture'] ?>" class="imageslogoMaskTCF">
