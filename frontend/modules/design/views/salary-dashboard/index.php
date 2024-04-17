@@ -5,21 +5,21 @@ use Faker\Core\Number;
 $this->title = 'Salary Dashboard';
 ?>
 
-<div class="col-12 mt-90 alert alert-Evaluator">
-    <div class="alert aler-ALLDepartment">
+<div class="col-12 mt-70 environment pt-10 pr-10 pl-20">
+    <div class="salary_dashwhite">
         <div class="row">
             <div class="col-lg-2 col-md-6 col-6 SalaryDashboard2">
-                Salary Dashboard
+                Salary Increment
             </div>
             <div class="col-lg-2 col-md-6 col-6">
-                <div class="alert alert-printerline">
-                    <span class="printer-line"> Generate Report &nbsp;&nbsp; <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/printer.png" class="imagespointer"></span>
+                <div class="alert-printerline">
+                    <span class="printer-line"> Generate Report <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/printer.png" class="imagespointer"></span>
                 </div>
             </div>
             <div class="col-lg-8 col-md-6 col-6  text-end">
                 <div class="row">
                     <div class="col-2 pt-20">
-                        <img src="<?= Yii::$app->homeUrl ?>/images/icons/Dark/48px/Currency.png" class="pictureCurrency3"><span class="font-size-12">Currency</span>
+                        <img src="<?= Yii::$app->homeUrl ?>/images/icons/Dark/48px/Currency.png" class="pictureCurrency_print"><span class="font-size-11">Currency</span>
                     </div>
                     <div class="col-2">
                         <select class="form-select BTH-example" aria-label="Default select example">
@@ -49,14 +49,14 @@ $this->title = 'Salary Dashboard';
                         </select>
                     </div>
                     <div class="col-2 Classform-filter">
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterPlus.png" class="picture-FilterPlus-bonus"> <strong class="font-size-13">More</strong> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.png" class="bonus-point">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterPlus.png" class="FilterMore"> <span class="font-size-12">More</span> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.png" class="More-point">
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-12 alert alert-Evaluator">
+        <div class="col-12 BGdashboard-secondary">
             <div class="row">
-                <div class="col-lg-2 col-md-6 col-6 card classform-TokyoLimited border">
+                <div class="col-lg-3 col-md-6 col-6 classform-TokyoLimited">
                     <div class="col-12">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Group21102.png" class="imagesGroup21102"> Tokyo Consulting Firm Limited
                     </div>
@@ -85,109 +85,72 @@ $this->title = 'Salary Dashboard';
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6 col-6 card border-classemployeeSolid border">
-                    <div class="col-12 Achi">
-                        Evaluation Achievement
-                    </div>
-                    <div class="row mt-20">
-                        <div class="col-6">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="Accumulated-1"> <span class="Totall2"> Total</span>
-                        </div>
-                        <div class="col-6 classTl">
-                            <i class="fa fa-caret-up text-success font-size-12" aria-hidden="true"></i> <span class="bathformat">฿<?= number_format(157956) ?></span>
-                            <div class="bathformat1">฿<?= number_format(110582) ?> (E2)</div>
-                        </div>
-                        <hr class="mt-2">
-                    </div>
-                    <div class="row mt-20">
-                        <div class="col-6">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="Accumulated-1"> <span class="Totall2"> Monthly</span>
-                        </div>
-                        <div class="col-6 classTl">
-                            <i class="fa fa-caret-up text-success font-size-13" aria-hidden="true"></i> <span class="bathformat">฿<?= number_format(39489) ?></span>
-                            <div class="bathformat1">฿<?= number_format(36860) ?> (E2)</div>
-                        </div>
-                        <hr class="mt-2">
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6 col-6 card border-classemployeeSolid border">
-                    <div class="col-12 Achi">
-                        Allocated Budget
-                    </div>
-                    <div class="row mt-20">
-                        <div class="col-6">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="Accumulated-1"> <span class="Totall2"> Total</span>
-                        </div>
-                        <div class="col-6 classTl">
-                            <i class="fa fa-caret-up text-success font-size-12" aria-hidden="true"></i> <span class="bathformat">฿<?= number_format(157956) ?></span>
-                            <div class="bathformat1">฿<?= number_format(110582) ?> (E2)</div>
-                        </div>
-                        <hr class="mt-2">
-                    </div>
-                    <div class="row mt-20">
-                        <div class="col-6">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="Accumulated-1"> <span class="Totall2"> Monthly</span>
-                        </div>
-                        <div class="col-6 classTl">
-                            <i class="fa fa-caret-up text-success font-size-13" aria-hidden="true"></i> <span class="bathformat">฿<?= number_format(39489) ?></span>
-                            <div class="bathformat1">฿<?= number_format(36860) ?> (E2)</div>
-                        </div>
-                        <hr class="mt-2">
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6 col-6 card border-classemployeeSolid border">
-                    <div class="col-12 Achi">
-                        Adjustments
-                    </div>
-                    <div class="row mt-20">
-                        <div class="col-6">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="Accumulated-1"> <span class="Totall2"> Total</span>
-                        </div>
-                        <div class="col-6 classTl">
-                            <i class="fa fa-caret-up text-success font-size-12" aria-hidden="true"></i> <span class="bathformat">฿<?= number_format(157956) ?></span>
-                            <div class="bathformat1">฿<?= number_format(110582) ?> (E2)</div>
-                        </div>
-                        <hr class="mt-2">
-                    </div>
-                    <div class="row mt-20">
-                        <div class="col-6">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="Accumulated-1"> <span class="Totall2"> Monthly</span>
-                        </div>
-                        <div class="col-6 classTl">
-                            <i class="fa fa-caret-up text-success font-size-13" aria-hidden="true"></i> <span class="bathformat">฿<?= number_format(39489) ?></span>
-                            <div class="bathformat1">฿<?= number_format(36860) ?> (E2)</div>
-                        </div>
-                        <hr class="mt-2">
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-6 card" style="margin-left: 5px;width:21rem;">
+                <div class="col-lg-5 col-md-6 col-6">
                     <div class="row">
-                        <div class="col-5">
+                        <?php
+                        for ($i = 1; $i <= 3; $i++) {
+                        ?>
+
+                            <div class="col-4 classform-TokyoLimited1">
+                                <div class="col-12 Achi">
+                                    Evaluation Achievement
+                                </div>
+                                <div class="row mt-5">
+                                    <div class="col-5 classTl">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Accumulated.png" class="Accumulated-1"> <span class="Totall2"> Total</span>
+                                    </div>
+                                    <div class="col-7">
+                                        <i class="fa fa-caret-up text-success font-size-12" aria-hidden="true"></i> <span class="bathformat">฿<?= number_format(157956) ?></span>
+                                        <div class="bathformat1">฿<?= number_format(110582) ?> (E2)</div>
+                                    </div>
+                                    <hr class="col-10 ml-5 mt-5">
+                                </div>
+                                <div class="row">
+                                    <div class="col-5 classTl">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Monthly.png" class="Accumulated-1"> <span class="Totall2"> Monthly</span>
+                                    </div>
+                                    <div class="col-7">
+                                        <i class="fa fa-caret-up text-success font-size-11" aria-hidden="true"></i> <span class="bathformat">฿<?= number_format(39489) ?></span>
+                                        <div class="bathformat1">฿<?= number_format(36860) ?> (E2)</div>
+                                    </div>
+                                    <hr class="col-10 ml-5 mt-5">
+                                </div>
+                            </div>
+
+                        <?php
+                        }
+                        ?>
+
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-6 classform-TokyoLimited2">
+                    <div class="row">
+                        <div class="col-6">
                             <div class="col-12  ft-salary">
                                 Salary
                             </div>
                             <div class="row cr-rent">
-                                <div class="col-4 cr-salary">
+                                <div class="col-5 cr-salary">
                                     current E2
                                 </div>
-                                <div class="col-6 cr-salary">
+                                <div class="col-7 cr-salary">
                                     ฿ <?= number_format(356956) ?>
                                 </div>
-                                <div class="col-4 cr-salary">
+                                <div class="col-5 pt-10">
                                     Basic
                                 </div>
-                                <div class="col-6 cr-salary">
+                                <div class="col-7 pt-10">
                                     ฿ <?= number_format(285564) ?>
                                 </div>
-                                <div class="col-4 cr-salary">
+                                <div class="col-5 pt-3">
                                     Allowance
                                 </div>
-                                <div class="col-6 cr-salary">
+                                <div class="col-7 pt-3">
                                     ฿ <?= number_format(71391) ?>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-7 Ev-evaluated">
+                        <div class="col-6 Ev-evaluated">
                             <div class="col-12 ft-Evaluated">
                                 Evaluated (E3)
                             </div>

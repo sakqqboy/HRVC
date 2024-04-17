@@ -140,24 +140,25 @@ $this->title = 'Salary Edit';
                         <div class="col-lg-2 col-md-6 col-2 Sample-worrning">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Wornning-blue.png" class="images-wornningblue"> Sample Range
                         </div>
-
-                        <div class="col-lg-3 col-md-6 col-6">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/U-turn.png" class="imagesU-turn">
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-6 clsddMinimum">
-                            Minimum <span class="text-308FFF"> 0% </span>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-6">
-                            <input type="number" class="form-control formsMinimum">
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-6">
-                            <input type="number" class="form-control formsMinimum">
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-6 classMax">
-                            Max <span class="text-308FFF"> 100% </span>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-6">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/U-trun2.png" class="imagesU-turn2">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-6 col-2">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/U-turn.png" class="imagesU-turn">
+                            </div>
+                            <div class="col-lg-2 col-md-6 col-2 clsddMinimum">
+                                Minimum <span class="text-308FFF"> 0% </span>
+                            </div>
+                            <div class="col-lg-2 col-md-5 col-2">
+                                <input type="text" class="form-control formsMinimum">
+                            </div>
+                            <div class="col-lg-2 col-md-6 col-2">
+                                <input type="text" class="form-control formsMinimum">
+                            </div>
+                            <div class="col-lg-2 col-md-6 col-2 classMax">
+                                Max <span class="text-308FFF"> 100% </span>
+                            </div>
+                            <div class="col-lg-2 col-md-6 col-2">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/U-trun2.png" class="imagesU-turn2">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -166,7 +167,7 @@ $this->title = 'Salary Edit';
                         Rank & Salary Increment
                     </div>
                     <div class="row">
-                        <div class="col-lg-2 col-md-6 col-6">
+                        <div class="col-lg-2 col-md-6 col-2">
                             <div class="col-12 score-salaryedit">
                                 score
                             </div>
@@ -178,7 +179,7 @@ $this->title = 'Salary Edit';
                         for ($i = 1; $i <= 10; $i++) {
                         ?>
 
-                            <div class="col-lg-1 col-md-6 col-6 set-mrg-salaryedit1">
+                            <div class="col-lg-1 col-md-6 col-2 set-mrg-salaryedit1">
                                 <div class="col-1 header-salaryedit">
                                     F
                                 </div>&nbsp;
