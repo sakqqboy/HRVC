@@ -125,7 +125,7 @@ $this->title = 'Salary Dashboard';
                 </div>
                 <div class="col-lg-3 col-md-6 col-6 classform-TokyoLimited2">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-5">
                             <div class="col-12  ft-salary">
                                 Salary
                             </div>
@@ -150,7 +150,7 @@ $this->title = 'Salary Dashboard';
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6 Ev-evaluated">
+                        <div class="col-7 Ev-evaluated">
                             <div class="col-12 ft-Evaluated">
                                 Evaluated (E3)
                             </div>
@@ -171,23 +171,23 @@ $this->title = 'Salary Dashboard';
             </div>
         </div>
         <div class="col-12">
-            <div class="row">
+            <div class="row pt-20">
                 <div class="col-lg-6 col-md-6 col-6 text-start">
-                    <div class="col-12">
+                    <div class="col-12 txt-Breakdown">
                         Individual Performance Breakdown
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-6 text-end">
                     <div class="col-12">
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-outline-primary font-size-13"><i class="fa fa-list-ul" aria-hidden="true"></i></button>
-                            <button type="button" class="btn btn-outline-primary font-size-13"><i class="fa fa-th-large" aria-hidden="true"></i></button>
+                            <button type="button" class="btn btn-outline-primary font-size-12"><i class="fa fa-list-ul" aria-hidden="true"></i></button>
+                            <button type="button" class="btn btn-outline-primary font-size-12"><i class="fa fa-th-large" aria-hidden="true"></i></button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-12 alert alert-secondarydashboard">
+        <div class="col-12 alert-secondarydashboard">
             <div class="row">
                 <div class="col-lg-2 col-md-6 col-6 Employee-dashborad">
                     Employee
@@ -221,149 +221,51 @@ $this->title = 'Salary Dashboard';
                 </div>
             </div>
         </div>
-        <div class="col-12 alert alert-lightdashboard">
-            <div class="row">
-                <div class="col-lg-2 col-md-6 col-6">
-                    <img src="<?= Yii::$app->homeUrl ?>image/lady.jpg" class="user0dashboard"> <span class="name0dashboard">Ananta Kumar</span>
-                </div>
-                <div class="col-lg-2 col-md-6 col-6 title0dashboard">
-                    Manager
-                </div>
-                <div class="col-lg-1 col-md-6 col-6 department0dashboard">
-                    Accounts
-                </div>
-                <div class="col-lg-1 col-md-6 col-6 department0dashboard">
-                    A
-                </div>
-                <div class="col-lg-1 col-md-6 col-6 department0dashboard">
-                    <?= number_format(20000) ?>
-                </div>
-                <div class="col-lg-1 col-md-6 col-6 department0dashboard">
-                    <?= number_format(2000) ?>
-                </div>
-                <div class="col-lg-1 col-md-6 col-6 Adjustment0dashboard">
-                    (202)
-                </div>
-                <div class="col-lg-1 col-md-6 col-6 department0dashboard">
-                    <?= number_format(19798) ?>
-                </div>
-                <div class="col-lg-1 col-md-6 col-6">
-                    <div id="progress1">
-                        <div data-num="35" class="progress-item1" data-value="35%" style="background: conic-gradient(rgb(41, 140, 233) calc(35%), rgb(219, 239, 247) 0deg);">35%</div>
+
+        <?php
+        for ($i = 1; $i <= 5; $i++) {
+        ?>
+
+            <div class="col-12 alert-lightdashboard">
+                <div class="row">
+                    <div class="col-lg-2 col-md-6 col-6">
+                        <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="user0dashboard"> <span class="name0dashboard"> zCharles Bhattacharjya</span>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-6 title0dashboard">
+                        Manager
+                    </div>
+                    <div class="col-lg-1 col-md-6 col-6 department0dashboard">
+                        Accounts
+                    </div>
+                    <div class="col-lg-1 col-md-6 col-6 department0dashboard text-center">
+                        A
+                    </div>
+                    <div class="col-lg-1 col-md-6 col-6 department0dashboard">
+                        <?= number_format(20000) ?>
+                    </div>
+                    <div class="col-lg-1 col-md-6 col-6 department0dashboard">
+                        <?= number_format(2000) ?>
+                    </div>
+                    <div class="col-lg-1 col-md-6 col-6 Adjustment0dashboard">
+                        (202)
+                    </div>
+                    <div class="col-lg-1 col-md-6 col-6 department0dashboard">
+                        <?= number_format(19798) ?>
+                    </div>
+                    <div class="col-lg-1 col-md-6 col-6">
+                        <div id="progress1">
+                            <div data-num="35" class="progress-item1" data-value="35%" style="background: conic-gradient(rgb(41, 140, 233) calc(35%), rgb(219, 239, 247) 0deg);">35%</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 col-md-6 col-6 text-center">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/userfix.png" class="images-userfix">
                     </div>
                 </div>
-                <div class="col-lg-1 col-md-6 col-6 text-center">
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/userfix.png" class="images-userfix">
-                </div>
             </div>
-        </div>
-        <div class="col-12 alert alert-lightdashboard">
-            <div class="row">
-                <div class="col-lg-2 col-md-6 col-6">
-                    <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="user0dashboard"> <span class="name0dashboard">Biki Das</span>
-                </div>
-                <div class="col-lg-2 col-md-6 col-6 title0dashboard">
-                    Assistant Manager
-                </div>
-                <div class="col-lg-1 col-md-6 col-6 department0dashboard">
-                    Marketing
-                </div>
-                <div class="col-lg-1 col-md-6 col-6 department0dashboard">
-                    B
-                </div>
-                <div class="col-lg-1 col-md-6 col-6 department0dashboard">
-                    <?= number_format(10000) ?>
-                </div>
-                <div class="col-lg-1 col-md-6 col-6 department0dashboard">
-                    <?= number_format(1450) ?>
-                </div>
-                <div class="col-lg-1 col-md-6 col-6 department0dashboard">
-                    101
-                </div>
-                <div class="col-lg-1 col-md-6 col-6 department0dashboard">
-                    <?= number_format(11551) ?>
-                </div>
-                <div class="col-lg-1 col-md-6 col-6">
-                    <div id="progress1">
-                        <div data-num="75" class="progress-item1" data-value="75%" style="background: conic-gradient(rgb(41, 140, 233) calc(35%), rgb(219, 239, 247) 0deg);">75%</div>
-                    </div>
-                </div>
-                <div class="col-lg-1 col-md-6 col-6 text-center">
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/userfix.png" class="images-userfix">
-                </div>
-            </div>
-        </div>
-        <div class="col-12 alert alert-lightdashboard">
-            <div class="row">
-                <div class="col-lg-2 col-md-6 col-6">
-                    <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="user0dashboard"> <span class="name0dashboard">Charles Bhattacharjya</span>
-                </div>
-                <div class="col-lg-2 col-md-6 col-6 title0dashboard">
-                    Junior Executive
-                </div>
-                <div class="col-lg-1 col-md-6 col-6 department0dashboard">
-                    Human Resource
-                </div>
-                <div class="col-lg-1 col-md-6 col-6 department0dashboard">
-                    F
-                </div>
-                <div class="col-lg-1 col-md-6 col-6 department0dashboard">
-                    <?= number_format(5589) ?>
-                </div>
-                <div class="col-lg-1 col-md-6 col-6 department0dashboard">
-                    <?= number_format(456) ?>
-                </div>
-                <div class="col-lg-1 col-md-6 col-6 department0dashboard">
-                    50
-                </div>
-                <div class="col-lg-1 col-md-6 col-6 department0dashboard">
-                    <?= number_format(6095) ?>
-                </div>
-                <div class="col-lg-1 col-md-6 col-6">
-                    <div id="progress1">
-                        <div data-num="100" class="progress-item1" data-value="100%" style="background: conic-gradient(rgb(41, 140, 233) calc(35%), rgb(219, 239, 247) 0deg);">100%</div>
-                    </div>
-                </div>
-                <div class="col-lg-1 col-md-6 col-6 text-center">
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/userfix.png" class="images-userfix">
-                </div>
-            </div>
-        </div>
-        <div class="col-12 alert alert-lightdashboard">
-            <div class="row">
-                <div class="col-lg-2 col-md-6 col-6">
-                    <img src="<?= Yii::$app->homeUrl ?>image/dipbo.png" class="user0dashboard"> <span class="name0dashboard">Drake San </span>
-                </div>
-                <div class="col-lg-2 col-md-6 col-6 title0dashboard">
-                    Senior Musician
-                </div>
-                <div class="col-lg-1 col-md-6 col-6 department0dashboard">
-                    Sound Department
-                </div>
-                <div class="col-lg-1 col-md-6 col-6 department0dashboard">
-                    SS+
-                </div>
-                <div class="col-lg-1 col-md-6 col-6 department0dashboard">
-                    <?= number_format(34000) ?>
-                </div>
-                <div class="col-lg-1 col-md-6 col-6 department0dashboard">
-                    <?= number_format(2000) ?>
-                </div>
-                <div class="col-lg-1 col-md-6 col-6 department0dashboard">
-                    1504
-                </div>
-                <div class="col-lg-1 col-md-6 col-6 department0dashboard">
-                    <?= number_format(42093) ?>
-                </div>
-                <div class="col-lg-1 col-md-6 col-6">
-                    <div id="progress1">
-                        <div data-num="75" class="progress-item1" data-value="75%" style="background: conic-gradient(rgb(41, 140, 233) calc(35%), rgb(219, 239, 247) 0deg);">75%</div>
-                    </div>
-                </div>
-                <div class="col-lg-1 col-md-6 col-6 text-center">
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/userfix.png" class="images-userfix">
-                </div>
-            </div>
-        </div>
+
+        <?php
+        }
+        ?>
+
     </div>
 </div>

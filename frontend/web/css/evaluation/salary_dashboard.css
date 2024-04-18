@@ -213,7 +213,12 @@
 
 .alert-secondarydashboard {
     background-color: #F0F2F4;
-    margin-top: 30px;
+    margin-top: 10px;
+    border-radius: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .Employee-dashborad {
@@ -224,40 +229,50 @@
 
 .alert-lightdashboard {
     background-color: #FAFAFA;
+    border-radius: 5px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 5px;
 }
 
 .user0dashboard {
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
 }
 
 .name0dashboard {
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 500;
-    letter-spacing: -0.9px;
+    letter-spacing: -0.5px;
 }
 
 .title0dashboard {
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 500;
-    letter-spacing: -0.8px;
+    letter-spacing: -0.5px;
+    padding-top: 5px;
 }
 
 .department0dashboard {
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 500;
-    letter-spacing: -0.8px;
+    letter-spacing: -0.5px;
+    padding-top: 5px;
 }
 
 .Adjustment0dashboard {
-    font-size: 12px;
+    font-size: 10px;
     color: red;
     font-weight: 500;
+    padding-top: 5px;
 }
 
 .images-userfix {
     width: 13px;
+    cursor: pointer;
 }
 
 .imagesdownloadPDF {
@@ -295,4 +310,9 @@
     font-weight: 700;
     font-size: 19px;
     letter-spacing: -0.9px;
+}
+
+.txt-Breakdown {
+    font-weight: 500;
+    font-size: 15px;
 }
