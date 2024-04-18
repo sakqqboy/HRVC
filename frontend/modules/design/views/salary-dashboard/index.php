@@ -8,20 +8,20 @@ $this->title = 'Salary Dashboard';
 <div class="col-12 mt-70 environment pt-10 pr-10 pl-20">
     <div class="salary_dashwhite">
         <div class="row">
-            <div class="col-lg-2 col-md-6 col-6 SalaryDashboard2">
+            <div class="col-lg-2 col-md-6 col-7 SalaryDashboard2">
                 Salary Increment
             </div>
-            <div class="col-lg-2 col-md-6 col-6">
+            <div class="col-lg-2 col-md-6 col-5">
                 <div class="alert-printerline">
                     <span class="printer-line"> Generate Report <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/printer.png" class="imagespointer"></span>
                 </div>
             </div>
-            <div class="col-lg-8 col-md-6 col-6  text-end">
+            <div class="col-lg-8 col-md-6 col-12">
                 <div class="row">
-                    <div class="col-2 pt-20">
+                    <div class="col-lg-2 col-md-6 col-3 pt-20">
                         <img src="<?= Yii::$app->homeUrl ?>/images/icons/Dark/48px/Currency.png" class="pictureCurrency_print"><span class="font-size-11">Currency</span>
                     </div>
-                    <div class="col-2">
+                    <div class="col-lg-2 col-md-6 col-3">
                         <select class="form-select BTH-example" aria-label="Default select example">
                             <option selected="" value="">Select</option>
                             <option value="1">BTH (฿) </option>
@@ -29,10 +29,10 @@ $this->title = 'Salary Dashboard';
                             <option value="3">BTH (฿) </option>
                         </select>
                     </div>
-                    <div class="col-1">
+                    <div class="col-lg-1 col-md-6 col-3">
                         <button class="form-control Rank-wornning-blue" type="button"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Wornning-blue.png" class="wornningblue1"> Rank</button>
                     </div>
-                    <div class="col-3">
+                    <div class="col-lg-3 col-md-6 col-3">
                         <select class="form-select select-accountteam" aria-label="Default select example">
                             <option selected="" value="">Select menu</option>
                             <option value="1">Accounts &amp; Taxation</option>
@@ -40,15 +40,15 @@ $this->title = 'Salary Dashboard';
                             <option value="3">Management</option>
                         </select>
                     </div>
-                    <div class="col-2">
-                        <select class="form-select select-accountteam" aria-label="Default select example">
+                    <div class="col-lg-2 col-md-6 col-3">
+                        <select class="form-select select-accountteam1" aria-label="Default select example">
                             <option selected="" value="">Evaluation Term</option>
                             <option value="1">Team A</option>
                             <option value="2">IT</option>
                             <option value="3">Management</option>
                         </select>
                     </div>
-                    <div class="col-2 Classform-filter">
+                    <div class="col-lg-2 col-md-6 col-6 Classform-filter">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterPlus.png" class="FilterMore"> <span class="font-size-12">More</span> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.png" class="More-point">
                     </div>
                 </div>
@@ -56,7 +56,7 @@ $this->title = 'Salary Dashboard';
         </div>
         <div class="col-12 BGdashboard-secondary">
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-6 classform-TokyoLimited">
+                <div class="col-lg-3 col-md-6 col-12 classform-TokyoLimited">
                     <div class="col-12">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Group21102.png" class="imagesGroup21102"> Tokyo Consulting Firm Limited
                     </div>
@@ -85,7 +85,7 @@ $this->title = 'Salary Dashboard';
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-5 col-md-6 col-6">
+                <div class="col-lg-5 col-md-6 col-">
                     <div class="row">
                         <?php
                         for ($i = 1; $i <= 3; $i++) {
@@ -172,12 +172,12 @@ $this->title = 'Salary Dashboard';
         </div>
         <div class="col-12">
             <div class="row pt-20">
-                <div class="col-lg-6 col-md-6 col-6 text-start">
+                <div class="col-lg-6 col-md-6 col-8 text-start">
                     <div class="col-12 txt-Breakdown">
                         Individual Performance Breakdown
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-6 text-end">
+                <div class="col-lg-6 col-md-6 col-4 text-end">
                     <div class="col-12">
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <button type="button" class="btn btn-outline-primary font-size-12"><i class="fa fa-list-ul" aria-hidden="true"></i></button>
@@ -187,85 +187,124 @@ $this->title = 'Salary Dashboard';
                 </div>
             </div>
         </div>
-        <div class="col-12 alert-secondarydashboard">
+
+        <table class="table">
+            <thead class="table-secondary">
+                <tr>
+                    <td>Employees</td>
+                    <td>Title</td>
+                    <td>Department</td>
+                    <td>Rank</td>
+                    <td>Salary(฿)</td>
+                    <td>achievement (฿)</td>
+                    <td>Adjustment (฿)</td>
+                    <td>New Salary (฿)</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- <div class="col-12 alert-secondarydashboard">
             <div class="row">
-                <div class="col-lg-2 col-md-6 col-6 Employee-dashborad">
+                <div class="col-lg-2 col-md-6 col-2 Employee-dashborad">
                     Employee
                 </div>
-                <div class="col-lg-2 col-md-6 col-6 Employee-dashborad">
+                <div class="col-lg-2 col-md-6 col-2 Employee-dashborad">
                     Title
                 </div>
-                <div class="col-lg-1 col-md-6 col-6 Employee-dashborad">
+                <div class="col-lg-1 col-md-6 col-1 Employee-dashborad">
                     Department
                 </div>
-                <div class="col-lg-1 col-md-6 col-6 Employee-dashborad">
+                <div class="col-lg-1 col-md-6 col-1 Employee-dashborad">
                     rank
                 </div>
-                <div class="col-lg-1 col-md-6 col-6 Employee-dashborad">
+                <div class="col-lg-1 col-md-6 col-1 Employee-dashborad">
                     Salary(฿)
                 </div>
-                <div class="col-lg-1 col-md-6 col-6 Employee-dashborad">
+                <div class="col-lg-1 col-md-6 col-1 Employee-dashborad">
                     achievement (฿)
                 </div>
-                <div class="col-lg-1 col-md-6 col-6 Employee-dashborad">
+                <div class="col-lg-1 col-md-6 col-1 Employee-dashborad">
                     Adjustment (฿)
                 </div>
-                <div class="col-lg-1 col-md-6 col-6 Employee-dashborad">
+                <div class="col-lg-1 col-md-6 col-1 Employee-dashborad">
                     New Salary (฿)
                 </div>
-                <div class="col-lg-1 col-md-6 col-6 Employee-dashborad">
+                <div class="col-lg-1 col-md-6 col-1 Employee-dashborad">
                     Ratio
                 </div>
-                <div class="col-lg-1 col-md-6 col-6 Employee-dashborad">
+                <div class="col-lg-1 col-md-6 col-1 Employee-dashborad">
                     Action
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        <?php
-        for ($i = 1; $i <= 5; $i++) {
-        ?>
+        <!-- <?php
+                for ($i = 1; $i <= 5; $i++) {
+                ?>
 
             <div class="col-12 alert-lightdashboard">
                 <div class="row">
-                    <div class="col-lg-2 col-md-6 col-6">
-                        <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="user0dashboard"> <span class="name0dashboard"> zCharles Bhattacharjya</span>
+                    <div class="col-lg-2 col-md-6 col-2">
+                        <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="user0dashboard"> <span class="name0dashboard"> Charles Bhattacharjya</span>
                     </div>
-                    <div class="col-lg-2 col-md-6 col-6 title0dashboard">
+                    <div class="col-lg-2 col-md-6 col-2 title0dashboard">
                         Manager
                     </div>
-                    <div class="col-lg-1 col-md-6 col-6 department0dashboard">
+                    <div class="col-lg-1 col-md-6 col-1 department0dashboard">
                         Accounts
                     </div>
-                    <div class="col-lg-1 col-md-6 col-6 department0dashboard text-center">
+                    <div class="col-lg-1 col-md-6 col-1 department0dashboard text-center">
                         A
                     </div>
-                    <div class="col-lg-1 col-md-6 col-6 department0dashboard">
+                    <div class="col-lg-1 col-md-6 col-1 department0dashboard">
                         <?= number_format(20000) ?>
                     </div>
-                    <div class="col-lg-1 col-md-6 col-6 department0dashboard">
+                    <div class="col-lg-1 col-md-6 col-1 department0dashboard">
                         <?= number_format(2000) ?>
                     </div>
-                    <div class="col-lg-1 col-md-6 col-6 Adjustment0dashboard">
+                    <div class="col-lg-1 col-md-6 col-1 Adjustment0dashboard">
                         (202)
                     </div>
-                    <div class="col-lg-1 col-md-6 col-6 department0dashboard">
+                    <div class="col-lg-1 col-md-6 col-1 department0dashboard">
                         <?= number_format(19798) ?>
                     </div>
-                    <div class="col-lg-1 col-md-6 col-6">
+                    <div class="col-lg-1 col-md-6 col-1">
                         <div id="progress1">
                             <div data-num="35" class="progress-item1" data-value="35%" style="background: conic-gradient(rgb(41, 140, 233) calc(35%), rgb(219, 239, 247) 0deg);">35%</div>
                         </div>
                     </div>
-                    <div class="col-lg-1 col-md-6 col-6 text-center">
+                    <div class="col-lg-1 col-md-6 col-1 text-center">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/userfix.png" class="images-userfix">
                     </div>
                 </div>
             </div>
 
         <?php
-        }
-        ?>
+                }
+        ?> -->
 
     </div>
 </div>
