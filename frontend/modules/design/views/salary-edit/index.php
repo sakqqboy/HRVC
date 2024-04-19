@@ -198,7 +198,6 @@ $this->title = 'Salary Edit';
                         <?php
                         }
                         ?>
-
                     </div>
                 </div>
                 <div class="col-12 text-end mt-10">

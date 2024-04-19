@@ -220,18 +220,8 @@
     font-size: 10px;
 }
 
-.alert-secondarydashboard {
-    background-color: #F0F2F4;
-    margin-top: 10px;
-    border-radius: 3px;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-
 .Employee-dashborad {
-    font-size: 11px;
+    font-size: 10px;
     text-transform: uppercase;
     font-weight: 500;
 }
@@ -270,6 +260,7 @@
     font-weight: 500;
     letter-spacing: -0.5px;
     padding-top: 5px;
+    padding-left: 12px;
 }
 
 .Adjustment0dashboard {
@@ -277,11 +268,13 @@
     color: red;
     font-weight: 500;
     padding-top: 5px;
+    padding-left: 12px;
 }
 
 .images-userfix {
     width: 13px;
     cursor: pointer;
+    margin-left: 15px;
 }
 
 .imagesdownloadPDF {
