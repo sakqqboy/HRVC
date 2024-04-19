@@ -30,6 +30,9 @@ return [
         'evaluation' => [
             'class' => 'frontend\modules\evaluation\evaluation',
         ],
+        'fs' => [
+            'class' => 'frontend\modules\fs\fs',
+        ],
     ],
     'components' => [
         'request' => [
@@ -114,7 +117,16 @@ return [
                 'kpi/kpi-personal/kpi-personal-search-result/<hash>' => 'kpi/kpi-personal/kpi-personal-search-result',
                 'evaluation/environment/frame-setting/<hash>' => 'evaluation/environment/frame-setting',
                 'evaluation/environment/term-detail/<hash>' => 'evaluation/environment/term-detail',
-
+                'evaluation/environment/evaluator-setting/<hash>' => 'evaluation/environment/evaluator-setting',
+                'evaluation/environment/weight-allocate/<hash>' => 'evaluation/environment/weight-allocate',
+                'evaluation/environment/weight-allocate-setting/<hash>' => 'evaluation/environment/weight-allocate-setting',
+                'evaluation/environment/kfi-weight-allocate/<hash>' => 'evaluation/environment/kfi-weight-allocate',
+                'evaluation/environment/kgi-weight-allocate/<hash>' => 'evaluation/environment/kgi-weight-allocate',
+                'evaluation/environment/kpi-weight-allocate/<hash>' => 'evaluation/environment/kpi-weight-allocate',
+                'evaluation/salary/register/<hash>' => 'evaluation/salary/register',
+                'evaluation/salary/filter-salary-result/<hash>' => 'evaluation/salary/filter-salary-result',
+                'evaluation/salary/filter-salary-register-result/<hash>' => 'evaluation/salary/filter-salary-register-result',
+                'evaluation/salary/update-company-salary/<hash>' => 'evaluation/salary/update-company-salary',
             ],
         ],
         'assetManager' => [

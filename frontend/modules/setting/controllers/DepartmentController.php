@@ -530,4 +530,26 @@ class DepartmentController extends Controller
         $res["totalDepartments"] = count($departments);
         return json_encode($res);
     }
+    public function actionDepartmentTitle()
+    {
+        $departmentId = $_POST["departmentId"];
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-title?id=' . $departmentId);
+        $titles = curl_exec($api);
+        $titles = json_decode($titles, true);
+        curl_close($api);
+        $option = '<option value="">Title</option>';
+        $res["status"] = false;
+        $res["title"] = '';
+        if (isset($titles) && count($titles) > 0) {
+            $res["status"] = true;
+            foreach ($titles as $title) :
+                $option .= '<option value="' . $title["titleId"] . '">' . $title["titleName"] . '</option>';
+            endforeach;
+            $res["title"] = $option;
+        }
+        return json_encode($res);
+    }
 }

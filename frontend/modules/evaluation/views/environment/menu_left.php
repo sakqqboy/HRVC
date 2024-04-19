@@ -1,3 +1,7 @@
+<?php
+
+use common\models\ModelMaster;
+?>
 <div class="border-bottom pb-20">
 	<div class="row">
 		<div class="col-5  text-center pr-5 pl-5">
@@ -23,25 +27,59 @@
 		<i class="fa fa-cog mr-5" aria-hidden="true"></i>Set Configuration
 	</div>
 	<div class="col-12 mt-20">
-		<div class="rad-label pl-0 mt-10 pr-0" style="background-color:#D7EBFF;border-left: 5px #B2CCFA solid;">
-			<div class="col-12 pl-5 rad-text pr-3">
-				<i class="fa fa-check-circle-o text-success mr-10 font-size-18" aria-hidden="true"></i>
-				<span class="text-dark font-weight-500 ">Evaluation Frame</span>
-			</div>
+		<?php
+		$selected = 'style="background-color:#D7EBFF;border-left: 5px #B2CCFA solid;"';
+		?>
+		<div class="rad-label pl-0 mt-10 pr-0" <?= Yii::$app->controller->action->id == 'term-detail' ? $selected : '' ?>>
+			<a href="<?= Yii::$app->homeUrl . 'evaluation/environment/term-detail/' . ModelMaster::encodeParams(['termId' => $termId]) ?>" class="no-underline">
+				<div class="col-12 pl-5 rad-text pr-3">
+					<?php
+					if (Yii::$app->controller->action->id == 'term-detail') { ?>
+						<i class="fa fa-check-circle-o text-success mr-10 font-size-18" aria-hidden="true"></i>
+					<?php
+					} else { ?>
+						<i class="fa fa-circle mr-10 font-size-18 text-secondary" aria-hidden="true"></i>
+					<?php
+					}
+					?>
+					<span class="text-dark font-weight-500 ">Evaluation Frame</span>
+				</div>
+			</a>
 		</div>
 		<div class="Evaluationdeshed"></div>
-		<div class="rad-label pl-0 pr-0 pt-0">
-			<div class="col-12 pl-5 rad-text pr-3">
-				<i class="fa fa-circle mr-10 font-size-18 text-secondary" aria-hidden="true"></i>
-				<span class="text-dark font-weight-500">Weight Allocation</span>
-			</div>
+		<div class="rad-label pl-0 pr-0 pt-0" <?= Yii::$app->controller->action->id == 'weight-allocate' || Yii::$app->controller->action->id == 'weight-allocate-setting' ? $selected : '' ?>>
+			<a href="<?= Yii::$app->homeUrl . 'evaluation/environment/weight-allocate/' . ModelMaster::encodeParams(['termId' => $termId]) ?>" class="no-underline">
+				<div class="col-12 pl-5 rad-text pr-3">
+					<?php
+					$action = ["weight-allocate", "weight-allocate-setting", "kfi-weight-allocate", "kgi-weight-allocate", "kpi-weight-allocate"];
+					if (Yii::$app->controller->action->id == 'weight-allocate' || Yii::$app->controller->action->id == 'weight-allocate-setting') { ?>
+						<i class="fa fa-check-circle-o text-success mr-10 font-size-18" aria-hidden="true"></i>
+					<?php
+					} else { ?>
+						<i class="fa fa-circle mr-10 font-size-18 text-secondary" aria-hidden="true"></i>
+					<?php
+					}
+					?>
+					<span class="text-dark font-weight-500">Weight Allocation</span>
+				</div>
+			</a>
 		</div>
 		<div class="Evaluationdeshed"></div>
-		<div class="rad-label pl-0 pr-0">
-			<div class="col-12 pl-5 rad-text pr-3">
-				<i class="fa fa-circle mr-10 font-size-18 text-secondary" aria-hidden="true"></i>
-				<span class="text-dark font-weight-500">Evaluator Settings</span>
-			</div>
+		<div class="rad-label pl-0 pr-0" <?= Yii::$app->controller->action->id == 'evaluator-setting' ? $selected : '' ?>>
+			<a href="<?= Yii::$app->homeUrl . 'evaluation/environment/evaluator-setting/' . ModelMaster::encodeParams(['termId' => $termId]) ?>" class="no-underline">
+				<div class="col-12 pl-5 rad-text pr-3">
+					<?php
+					if (Yii::$app->controller->action->id == 'evaluator-setting') { ?>
+						<i class="fa fa-check-circle-o text-success mr-10 font-size-18" aria-hidden="true"></i>
+					<?php
+					} else { ?>
+						<i class="fa fa-circle mr-10 font-size-18 text-secondary" aria-hidden="true"></i>
+					<?php
+					}
+					?>
+					<span class="text-dark font-weight-500">Evaluator Settings</span>
+				</div>
+			</a>
 		</div>
 		<div class="Evaluationdeshed"></div>
 		<div class="rad-label pl-0 pr-0">

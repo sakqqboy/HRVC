@@ -30,6 +30,9 @@ return [
         'evaluation' => [
             'class' => 'backend\modules\evaluation\evaluation',
         ],
+        'fs' => [
+            'class' => 'backend\modules\fs\fs',
+        ],
     ],
     'components' => [
         'request' => [

@@ -7,11 +7,12 @@ $this->title = 'Term Detail';
 			<?= $this->render('menu_left', [
 				"terms" => $terms,
 				"environmentDetail" => $environmentDetail,
-				"frameName" => $frameName
+				"frameName" => $frameName,
+				"termId" => $termId
 			]) ?>
 		</div>
 		<div class="col-lg-10 col-md-6 col-12 environment">
-			<div class="col-12 bg-white pr-15 pl-15 pt-10 rounded-2">
+			<div class="bg-white pmi_bakgru">
 				<div class="col-12">
 					<div class="FrameEvaluation"> Evaluation Frame</div>
 				</div>

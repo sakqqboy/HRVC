@@ -5,32 +5,22 @@
 
 .text-Participating {
     font-size: 11px;
-    width: 10rem;
     color: gray;
-    padding-top: 5px;
-    margin-left: -35px;
 }
 
 .imagessettingsTerm1 {
     width: 13px;
+    margin-top: -5px;
 }
 
 .viewlog {
-    margin-left: -30px;
     margin-top: 3px;
 }
 
 .imagessettingsFillerPlus {
     width: 20px;
-    margin-left: 50px;
-    margin-top: 10px;
+    margin-top: 8px;
     cursor: pointer;
-}
-
-.Term1Employees {
-    padding-top: 10px;
-    margin-left: 15px;
-    font-size: 13px;
 }
 
 .bgcradlightgray {
@@ -52,13 +42,6 @@
 
 .crdEmployeeslight1 {
     background-color: #FAFAFA;
-    border: none;
-    border-radius: 3px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin-top: 10px;
-    padding-left: 5px;
-    padding-right: 5px;
 }
 
 .crdEmployeeslight2 {
@@ -67,7 +50,7 @@
     border-radius: 3px;
     padding-top: 5px;
     padding-bottom: 5px;
-    margin-top: 10px;
+    margin-top: 0px;
     padding-left: 3px;
     padding-right: 3px;
 }
@@ -76,14 +59,22 @@
     background-color: #FFF6DE;
     border: none;
     border-radius: 3px;
-    height: 40px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 0px;
+    padding-left: 3px;
+    padding-right: 3px;
 }
 
 .crdEmployeeslight4 {
     background-color: #FFEAE7;
     border: none;
     border-radius: 3px;
-    height: 40px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 0px;
+    padding-left: 3px;
+    padding-right: 3px;
 }
 
 .images1 {
@@ -109,7 +100,7 @@
 }
 
 .nameimages1 {
-    font-size: 8px;
+    font-size: 10px;
 }
 
 .nameimages2 {
@@ -170,57 +161,34 @@
     margin-top: 8px;
 } */
 
-.search-box {
-    /* width: 150px; */
-    position: relative;
-    display: flex;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-}
+
 
 .search-input {
-    width: 250px;
-    font-size: 16px;
-    padding: 15px 45px 15px 15px;
+    font-size: 14px;
     background-color: #F0F2F4;
     color: #6c6c6c;
     border-radius: 20px;
     border: none;
-    transition: all .4s;
-    height: 40px;
+    width:95%;
+    height: 35px;
+    padding-left: 15px;
 }
 
 .search-input:focus {
     border: none;
     outline: none;
-    /* box-shadow: 0 1px 12px #b8c6db; */
-    /* -moz-box-shadow: 0 1px 12px #b8c6db; */
-    /* -webkit-box-shadow: 0 1px 12px #b8c6db; */
 }
 
 .search-btn {
     background-color: transparent;
-    font-size: 18px;
+    font-size: 14px;
     padding: 6px 9px;
-    margin-left: -45px;
+    margin-left: -35px;
     border: none;
     color: #6c6c6c;
-    transition: all .4s;
     z-index: 10;
 }
 
-.search-btn:hover {
-    transform: scale(1.2);
-    cursor: pointer;
-    color: black;
-}
-
-.search-btn:focus {
-    outline: none;
-    color: black;
-}
 
 .form-check-input-checkEmployees3:checked {
     border-radius: 50%;
@@ -270,7 +238,7 @@
 
 
 .imagesAssingLight {
-    width: 20px;
+    width: 15px;
 }
 
 .timesnotset {
@@ -282,6 +250,10 @@
 .Not-Set {
     color: #A4A2A2;
     font-size: 11px;
+}
+.thead-evaluator{
+    font-weight: 500 !important;
+letter-spacing: 0.2px;
 }
 
 div[role="progressbarprimary"] {

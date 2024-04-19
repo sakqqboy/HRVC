@@ -389,4 +389,26 @@ class CompanyController extends Controller
 			endforeach;
 		}
 	}
+	public function actionCompanyDepartment()
+	{
+		$companyId = $_POST["companyId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/company-department?id=' . $companyId);
+		$departments = curl_exec($api);
+		$departments = json_decode($departments, true);
+		curl_close($api);
+		$option = '<option value="">Department</option>';
+		$res["status"] = false;
+		$res["department"] = '';
+		if (isset($departments) && count($departments) > 0) {
+			$res["status"] = true;
+			foreach ($departments as $department) :
+				$option .= '<option value="' . $department["departmentId"] . '">' . $department["departmentName"] . '</option>';
+			endforeach;
+			$res["department"] = $option;
+		}
+		return json_encode($res);
+	}
 }

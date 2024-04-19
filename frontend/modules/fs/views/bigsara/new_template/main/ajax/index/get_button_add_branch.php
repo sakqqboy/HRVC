@@ -1,0 +1,1 @@
+<button class="btn btn-primary btn-Create-sb pb-2 pt-2 pl-10" type="button" onclick="getModalAddBranch()"><img src="../images/icons/Light/Light/24px/Create(Big).png" class="module_CreateBig"> Add New Company</button>

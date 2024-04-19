@@ -28,7 +28,10 @@ class CompanyController extends Controller
 	public function actionCompanyDetail($id)
 	{
 		$company = [];
-		$company = Company::find()->where(["companyId" => $id])->asArray()->one();
+		$company = Company::find()
+			->where(["companyId" => $id])
+			->asArray()
+			->one();
 		return json_encode($company);
 	}
 	public function actionHeader($id)
