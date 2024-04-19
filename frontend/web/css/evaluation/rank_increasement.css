@@ -1,26 +1,20 @@
 .Createsmall {
-    width: 20px;
-    cursor: pointer;
+    width: 16px;
 }
 
 .adRank {
-    font-size: 14px;
-}
-
-.trantRank {
-    text-transform: uppercase;
-    border-radius: 6px;
+    font-size: 12px;
     font-weight: 500;
-    font-size: 11px;
-    color: black;
-    background-color: #F4F6F9;
 }
 
 .primarysave {
     background-color: #2580D3;
-    border-radius: 4px;
-    font-size: 15px;
-    margin-bottom: 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    padding-bottom: 7px;
+    padding-top: 7px;
+    padding-right: 15px;
+    padding-left: 15px;
 }
 
 .trantRankColor {
@@ -29,16 +23,6 @@
     color: black;
     background-color: #F4F6F9;
     border-left: 6px #5CAEF9 solid;
-}
-
-.trantRow {
-    border-radius: 6px;
-    background-color: #F4F6F9;
-}
-
-.ScoreSolid {
-    border-left: 2px lightgray solid;
-    font-size: 12px;
 }
 
 .progressRank {
@@ -114,33 +98,15 @@
 }
 
 .DeleteRound {
-    width: 14px;
+    width: 12px;
     cursor: pointer;
-    margin-left: 15px;
 }
 
 .letter {
-    font-weight: 500;
-    font-size: 14px;
+    font-size: 12px;
+    text-align: center;
 }
 
-.numfix {
-    width: 55px;
-    height: 25px;
-    font-size: 10px;
-}
-
-.numfixletter {
-    width: 35px;
-    height: 25px;
-    font-size: 10px;
-}
-
-.numfixbonus {
-    width: 40px;
-    height: 25px;
-    font-size: 10px;
-}
 
 .Framerank {
     font-weight: 700;
@@ -155,4 +121,10 @@
     height: 18px;
     position: absolute;
     margin-left: -3%;
+}
+
+.increasement-rank {
+    font-size: 10px;
+    text-align: center;
+    text-transform: uppercase;
 }

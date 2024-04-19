@@ -91,10 +91,12 @@ $this->title = 'PMI Weight Allocation';
                             PMI Weight Allocation
                         </div>
                         <div class="col-2">
-                            <div type=" submit" class="PMI1"> Allocate Weight</div>
+                            <a href="<?= Yii::$app->homeUrl ?>designfront/add-allocate-weight" class="no-underline">
+                                <div type="submit" class="PMI1"> Allocate Weight</div>
+                            </a>
                         </div>
                         <div class="col-7 text-end">
-                            <div type="submit" class="btn btn-info Next-1 pt-4 pb-4"> Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
+                            <div type="submit" class="btn btn-info text-white Next-1 pt-4 pb-4"> Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
                         </div>
                     </div>
                 </div>
@@ -266,7 +268,7 @@ $this->title = 'PMI Weight Allocation';
                                 <img src="<?= Yii::$app->homeUrl ?>image/weight.png" class="image-weight"> Weight Configurations
                             </div>
 
-                            <div class="col-12 Evalua_tor3 mt-23">
+                            <div class="col-12 Evalua_tor3 mt-5">
                                 <div class="col-12 background_E7F0FE pt-3 pl-10 pr-10 pb-20">
                                     <?php
                                     for ($i = 1; $i <= 13; $i++) {
@@ -277,10 +279,9 @@ $this->title = 'PMI Weight Allocation';
                                                 <div class="col-7 border-edit">
                                                     Internal
                                                 </div>
-                                                <div class="col-5">
+                                                <div class="col-5 pb-6">
                                                     <i class="fa fa-pencil-square-o weight-pencil" aria-hidden="true"></i> <i class="fa fa-trash weight-trash" aria-hidden="true"></i>
                                                 </div>
-
                                             </div>
                                         </div>
 

@@ -1,15 +1,24 @@
+.bg-Salary-edit {
+    background-color: #F4F6F9;
+    border-radius: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 20px;
+}
+
 .accordion-rank1-edit {
-    width: 14px;
+    width: 12px;
 }
 
 .accounts-edit1 {
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: -0.4px;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .pictureDepartment-salary-edit {
-    width: 23px;
+    width: 20px;
     background-color: #308FFF;
     border-radius: 3px;
     padding-left: 4px;
@@ -20,28 +29,35 @@
 
 .alert-F6F6F66 {
     background-color: #F6F6F6;
+    border-radius: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 20px;
 }
 
 .edit-Range {
-    padding-left: 20px;
+    padding-left: 10px;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 700;
+    color: #4B4B4B;
 }
 
 .score-salaryedit {
     text-transform: uppercase;
-    font-size: 12px;
-    padding-left: 60px;
-    margin-top: 90px;
+    font-size: 10px;
+    /* padding-left: 60px; */
+    text-align: end;
+    padding-top: 90px;
     font-weight: 500;
 }
 
 .Increment-salaryedit {
     text-transform: uppercase;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 500;
-    margin-top: 50px;
-    width: 15rem;
+    margin-top: 40px;
 }
 
 .header-salaryedit {
@@ -50,23 +66,27 @@
     text-align: center;
     font-weight: 500;
     font-size: 12px;
-    width: 3.3rem;
+    width: 3rem;
 }
 
 .number-salaryedit {
-    font-size: 12px;
-    width: 3.4rem;
+    font-size: 10px;
+    width: 3rem;
     border-radius: 3px;
     font-weight: 500;
+    padding-top: 3px;
+    padding-bottom: 3px;
     margin-top: -10px;
 }
 
 .number-salaryedit2 {
-    font-size: 12px;
-    width: 3.4rem;
+    font-size: 11px;
+    width: 3rem;
     border-radius: 3px;
     font-weight: 500;
     margin-top: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 
 .set-mrg-salaryedit1 {
@@ -122,60 +142,166 @@
 }
 
 .Minimum-0 {
-    font-size: 13px;
+    font-size: 12px;
+    padding-left: 10px;
 }
 
 .text-308FFF {
     color: #308FFF;
     font-weight: 500;
+    font-size: 11px;
 }
 
 .salaryedit-Allminimumsolid {
     border-bottom: 1px #000000 dashed;
     position: absolute;
     height: 40px;
-    width: 35rem;
+    width: 30rem;
     margin-left: 50px;
     margin-top: 4px;
 }
 
 .imagesU-turn {
-    width: 40px;
+    width: 38px;
     margin-left: 40px;
 }
 
 .imagesU-turn2 {
-    width: 40px;
-    margin-left: -50px;
+    width: 38px;
+    margin-left: -40px;
 }
 
 .clsddMinimum {
-    margin-top: 55px;
-    margin-left: -90px;
-}
-
-.formsMinimum {
-    font-size: 13px;
-    margin-top: 45px;
+    margin-top: 50px;
     margin-left: -20px;
 }
 
+.formsMinimum {
+    font-size: 11px;
+    margin-top: 45px;
+    margin-left: -20px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
 .classMax {
-    margin-top: 55px;
+    margin-top: 50px;
     margin-left: -20px;
 }
 
 .classmarginminimum {
-    margin-left: 30px;
-    margin-top: 30px;
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-top: 20px;
+    padding-bottom: 10px;
     font-size: 13px;
 }
 
 .images-wornningblue {
-    width: 18px;
+    width: 10px;
 }
 
 .Sample-worrning {
-    margin-top: -100px;
-    margin-left: 620px;
+    text-align: end;
+    padding-top: 25px;
+    font-size: 12px;
+}
+
+@media(max-width :768px) {
+    .FrameSalaryAllowance {
+        font-size: 14px;
+    }
+
+    .salaryedit-Allminimumsolid {
+        width: 17rem;
+        margin-top: -8px;
+    }
+
+    .alert-F6F6F66 {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .roundedborderedit {
+        font-size: 8px;
+        margin-left: 5px;
+    }
+
+    .Minimum-0 {
+        font-size: 9px;
+        width: 20rem;
+    }
+
+    .text-308FFF {
+        font-size: 10px;
+    }
+
+    .imagesU-turn {
+        margin-top: -60px;
+        width: 20px;
+        margin-left: 10px;
+    }
+
+    .imagesU-turn2 {
+        width: 20px;
+        margin-top: -60px;
+        margin-left: 10px;
+    }
+
+    .classmarginminimum {
+        padding-left: 10px;
+    }
+
+    .salaryedit-Allminimumsolid {
+        width: 200px;
+    }
+
+    .clsddMinimum {
+        font-size: 9px;
+        margin-top: -10px;
+        padding-left: -50px;
+    }
+
+    .formsMinimum {
+        padding-bottom: 3px;
+        padding-top: 3px;
+        font-size: 12px;
+        margin-top: -20px;
+        margin-left: 5px;
+        width: 48px;
+    }
+
+    .text-308FFF {
+        font-size: 9px;
+    }
+
+    .classMax {
+        font-size: 9px;
+        margin-top: -10px;
+        padding-left: 40px;
+    }
+
+    .Sample-worrning {
+        font-size: 9px;
+    }
+
+    .score-salaryedit {
+        text-align: left;
+        font-size: 8px;
+    }
+
+    .Increment-salaryedit {
+        text-align: left;
+        font-size: 8px;
+    }
+
+    .images-bonuesave {
+        width: 12px;
+    }
+
+    .font-308FFF {
+        font-size: 10px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+    }
 }

@@ -1,6 +1,7 @@
 .Evaluator-Settings {
-    font-weight: 500;
-    font-size: 16px;
+    font-weight: 600;
+    color: black;
+    font-size: 15px;
 }
 
 .text-Participating {
@@ -21,6 +22,8 @@
     width: 20px;
     margin-top: 8px;
     cursor: pointer;
+    margin-left: 30px;
+    margin-top: 10px;
 }
 
 .bgcradlightgray {
@@ -37,7 +40,7 @@
 .Row-bgcradlightgray {
     text-transform: uppercase;
     color: #646464;
-    font-size: 8px;
+    font-size: 10px;
 }
 
 .crdEmployeeslight1 {
@@ -84,19 +87,19 @@
 }
 
 .images2 {
-    width: 10px;
-    height: 10px;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
-    margin-top: 5px;
+    margin-top: 1px;
     margin-left: -5px;
 }
 
 .images3 {
-    width: 10px;
-    height: 10px;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
-    margin-top: 5px;
-    margin-left: 5px;
+    margin-top: 1px;
+    margin-left: -3px;
 }
 
 .nameimages1 {
@@ -162,12 +165,20 @@
 } */
 
 
+.search-box {
+    position: relative;
+    display: flex;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
 
 .search-input {
     font-size: 14px;
     background-color: #F0F2F4;
     color: #6c6c6c;
     border-radius: 20px;
+    font-size: 12px;
     border: none;
     width:95%;
     height: 35px;
@@ -185,22 +196,11 @@
     padding: 6px 9px;
     margin-left: -35px;
     border: none;
+    font-size: 12px;
     color: #6c6c6c;
     z-index: 10;
 }
 
-
-.form-check-input-checkEmployees3:checked {
-    border-radius: 50%;
-    background-color: #FF6939;
-}
-
-.form-check-input[value=InputEmployees3] {
-    border-radius: 50%;
-    border: #FF6939;
-    font-size: 13px;
-    margin-top: 8px;
-}
 
 .LabelEmployees {
     font-size: 8px;
@@ -220,20 +220,42 @@
 .group-btnprimary {
     background-color: #C7EBFF;
     font-size: 8px;
+    border-radius: 2px;
+    border: none
 }
 
 .group-controltext {
     font-size: 8px;
+    background-color: #F0F2F4;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: none;
+}
+
+.b-bggray {
+    background-color: #F0F2F4;
+    border-radius: 2px;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 5px;
+    padding-bottom: 8px;
 }
 
 .Directorfontsmall1 {
-    font-size: 8px;
-    margin-left: -10px;
+    font-size: 6px;
+    font-weight: 500;
+    color: gray;
+    padding-top: 2px;
+    width: 60px;
 }
 
 .Directorfontsmall2 {
-    font-size: 8px;
-    margin-left: -2px;
+    font-size: 6px;
+    font-weight: 500;
+    color: gray;
+    padding-top: 2px;
+    width: 60px;
+    margin-left: -8px;
 }
 
 
@@ -256,114 +278,6 @@
 letter-spacing: 0.2px;
 }
 
-div[role="progressbarprimary"] {
-    --fg: #2580D3;
-    --bg: #D0E2FF;
-    animation: growProgressBar 3s 1 forwards;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    background: radial-gradient(closest-side, white 80%, transparent 0 99.9%, white 0), conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0);
-    font-size: 10px;
-    color: black;
-    margin-top: -23px;
-    margin-left: 70px;
-}
-
-div[role="progressbarprimary"]::before {
-    counter-reset: percentage var(--value);
-    content: counter(percentage) '%';
-}
-
-div[role="progressbarprimary"]::after {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%) rotate(calc(var(--pgPercentage) / 100 * 360deg));
-    transform-origin: 50% 100%;
-    animation: growProgressBar 3s 1 forwards;
-    z-index: 1;
-    background-image: radial-gradient(var(--fg) 0 50%, transparent 50% 100%);
-    background-repeat: no-repeat;
-    background-position: 0px 0;
-    background-size: 40px 40px;
-}
-
-div[role="progressbaryellow"] {
-    --fg: #FDCA40;
-    --bg: #FFE9AE;
-    animation: growProgressBar 3s 1 forwards;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    background: radial-gradient(closest-side, white 80%, transparent 0 99.9%, white 0), conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0);
-    font-size: 10px;
-    color: black;
-    margin-top: -23px;
-    margin-left: 70px;
-}
-
-div[role="progressbaryellow"]::before {
-    counter-reset: percentage var(--value);
-    content: counter(percentage) '%';
-}
-
-div[role="progressbaryellow"]::after {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%) rotate(calc(var(--pgPercentage) / 100 * 360deg));
-    transform-origin: 50% 100%;
-    animation: growProgressBar 3s 1 forwards;
-    z-index: 1;
-    background-image: radial-gradient(var(--fg) 0 50%, transparent 50% 100%);
-    background-repeat: no-repeat;
-    background-position: 0px 0;
-    background-size: 40px 40px;
-}
-
-div[role="progressbarred"] {
-    --fg: #FF6939;
-    --bg: #FFC3AF;
-    animation: growProgressBar 3s 1 forwards;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    background: radial-gradient(closest-side, white 80%, transparent 0 99.9%, white 0), conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0);
-    font-size: 10px;
-    color: black;
-    margin-top: -23px;
-    margin-left: 75px;
-}
-
-div[role="progressbarred"]::before {
-    counter-reset: percentage var(--value);
-    content: counter(percentage) '%';
-}
-
-div[role="progressbarred"]::after {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%) rotate(calc(var(--pgPercentage) / 100 * 360deg));
-    transform-origin: 50% 100%;
-    animation: growProgressBar 3s 1 forwards;
-    z-index: 1;
-    background-image: radial-gradient(var(--fg) 0 50%, transparent 50% 100%);
-    background-repeat: no-repeat;
-    background-position: 0px 0;
-    background-size: 40px 40px;
-}
-
 .Profiles {
     width: 40px;
     height: 40px;
@@ -383,6 +297,10 @@ div[role="progressbarred"]::after {
     font-size: 12px;
     border-radius: 1px;
 }
+
+/* .check-circle-close {
+    width: 15px;
+} */
 
 .DepartmentAccounts {
     width: 15px;
@@ -412,4 +330,94 @@ div[role="progressbarred"]::after {
     padding-top: 3px;
     padding-bottom: 3px;
     font-size: 13px;
+}
+
+.checkbox-wrapper-4 * {
+    box-sizing: border-box;
+}
+
+.checkbox-wrapper-4 .cbx {
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    padding: 6px 8px;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+
+.checkbox-wrapper-4 .cbx:not(:last-child) {
+    margin-right: 6px;
+}
+
+/* .checkbox-wrapper-4 .cbx:hover {
+            background: rgba(0, 119, 255, 0.06);
+        } */
+
+.checkbox-wrapper-4 .cbx span {
+    float: left;
+    vertical-align: middle;
+    transform: translate3d(0, 0, 0);
+}
+
+.checkbox-wrapper-4 .cbx span:first-child {
+    position: relative;
+    width: 16px;
+    height: 16px;
+    border-radius: 50px;
+    transform: scale(1);
+    border: 1px solid #cccfdb;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 1px rgba(0, 16, 75, 0.05);
+}
+
+.checkbox-wrapper-4 .cbx span:first-child svg {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 13px;
+    stroke-dashoffset: 13px;
+    transition: all 0.3s ease;
+    transition-delay: 0.1s;
+    transform: translate3d(0, 0, 0);
+}
+
+.checkbox-wrapper-4 .cbx span:last-child {
+    padding-left: 7px;
+    line-height: 16px;
+    font-weight: 400;
+    font-size: 10px;
+}
+
+.checkbox-wrapper-4 .cbx:hover span:first-child {
+    border-color: #07f;
+}
+
+.checkbox-wrapper-4 .inp-cbx {
+    position: absolute;
+    visibility: hidden;
+}
+
+.checkbox-wrapper-4 .inp-cbx:checked+.cbx span:first-child {
+    background: #07f;
+    border-color: #07f;
+    animation: wave-4 0.4s ease;
+}
+
+.checkbox-wrapper-4 .inp-cbx:checked+.cbx span:first-child svg {
+    stroke-dashoffset: 0;
+}
+
+.checkbox-wrapper-4 .inline-svg {
+    position: absolute;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    user-select: none;
 }

@@ -44,3 +44,8 @@ function setPassword(i) {
     $("#password").attr("type", "password");
 }
 
+
+function showclickno() {
+    $("#showlevel").show();
+}
+

@@ -1,38 +1,76 @@
 .printer-line {
-    font-size: 13px;
+    font-size: 12px;
     color: #415A72;
     font-weight: 500;
-    cursor: pointer;
 }
 
 .alert-printerline {
     background-color: #D6E6FF;
-    border-color: #64B3FC;
+    border: 1px #64B3FC solid;
+    cursor: pointer;
+    border-radius: 3px;
+    padding-left: 8px;
+    padding-bottom: 4px;
+    margin-top: 10px;
+}
+
+.salary_dashwhite {
+    background-color: #ffffff;
+    border-radius: 4px;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 20px;
+    margin-left: 5px;
+}
+
+.BGdashboard-secondary {
+    background-color: #F4F6F9;
+    border-radius: 4px;
+    margin-top: 20px;
+    padding-bottom: 10px;
 }
 
 .imagespointer {
-    width: 18px;
+    width: 15px;
+    margin-left: 5px;
 }
 
 .SalaryDashboard2 {
-    font-size: 21px;
+    font-size: 17px;
     font-weight: 700;
     padding-top: 10px;
-    letter-spacing: -0.6px;
+}
+
+.pictureCurrency_print {
+    width: 19px;
+}
+
+.FilterMore {
+    width: 12px;
+}
+
+.More-point {
+    width: 15px;
+    cursor: pointer;
 }
 
 .BTH-example {
-    font-size: 12px;
-    border-radius: 3px;
+    font-size: 10px;
+    border-radius: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
     background-color: #fefefe;
     margin-top: 20px;
 }
 
 .Rank-wornning-blue {
-    font-size: 12px;
+    font-size: 10px;
     width: 5rem;
     margin-top: 20px;
     margin-left: -10px;
+    padding-top: 4px;
+    padding-bottom: 4px;
     border-color: #e6e6e6;
     border-radius: 4px;
 }
@@ -42,11 +80,22 @@
 }
 
 .select-accountteam {
-    font-size: 12px;
+    font-size: 10px;
     border-radius: 15px;
-    /* background-color: #F0F2F4; */
+    background-color: #F0F2F4;
     margin-left: 20px;
     margin-top: 20px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.select-accountteam1 {
+    font-size: 10px;
+    border-radius: 15px;
+    background-color: #F0F2F4;
+    margin-top: 20px;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 
 .Classform-filter {
@@ -55,8 +104,37 @@
 
 .classform-TokyoLimited {
     border: none;
+    background-color: #ffffff;
+    border-radius: 5px;
     font-size: 11px;
     font-weight: 500;
+    padding-top: 10px;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.classform-TokyoLimited1 {
+    border: none;
+    background-color: #ffffff;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 500;
+    padding-top: 10px;
+    margin-top: 10px;
+    margin-left: 5px;
+    width: 110px;
+}
+
+.classform-TokyoLimited2 {
+    border: none;
+    background-color: #ffffff;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 500;
+    padding-top: 10px;
+    margin-top: 10px;
+    margin-left: -60px;
+    width: 21.8rem;
 }
 
 .imagesGroup21102 {
@@ -83,35 +161,33 @@
 }
 
 .Achi {
-    font-size: 11px;
+    font-size: 8px;
     font-weight: 500;
-    border: none
+    letter-spacing: -0.3px;
 }
 
 .Accumulated-1 {
-    width: 13px;
+    width: 8px;
 }
 
 .Totall2 {
-    font-size: 11px;
-    letter-spacing: -0.9px;
+    font-size: 7px;
+    letter-spacing: -0.4px;
 }
 
 .classTl {
-    border-left: 2px lightgray solid;
+    border-right: 1px lightgray solid;
 }
 
 .bathformat {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: -0.9px;
+    font-size: 8px;
+    letter-spacing: -0.3px;
 }
 
 .bathformat1 {
-    font-size: 10px;
-    letter-spacing: -0.9px;
+    font-size: 7px;
+    letter-spacing: -0.2px;
     color: #737373;
-    padding-left: 5px;
 }
 
 .ft-salary {
@@ -141,11 +217,17 @@
 
 .cr-salary {
     margin-top: 4px;
+    font-size: 10px;
 }
 
 .alert-secondarydashboard {
     background-color: #F0F2F4;
-    margin-top: 30px;
+    margin-top: 10px;
+    border-radius: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .Employee-dashborad {
@@ -156,40 +238,50 @@
 
 .alert-lightdashboard {
     background-color: #FAFAFA;
+    border-radius: 5px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 5px;
 }
 
 .user0dashboard {
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
 }
 
 .name0dashboard {
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 500;
-    letter-spacing: -0.9px;
+    letter-spacing: -0.5px;
 }
 
 .title0dashboard {
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 500;
-    letter-spacing: -0.8px;
+    letter-spacing: -0.5px;
+    padding-top: 5px;
 }
 
 .department0dashboard {
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 500;
-    letter-spacing: -0.8px;
+    letter-spacing: -0.5px;
+    padding-top: 5px;
 }
 
 .Adjustment0dashboard {
-    font-size: 12px;
+    font-size: 10px;
     color: red;
     font-weight: 500;
+    padding-top: 5px;
 }
 
 .images-userfix {
     width: 13px;
+    cursor: pointer;
 }
 
 .imagesdownloadPDF {
@@ -227,4 +319,41 @@
     font-weight: 700;
     font-size: 19px;
     letter-spacing: -0.9px;
+}
+
+.txt-Breakdown {
+    font-weight: 500;
+    font-size: 15px;
+}
+
+@media (max-width :768px) {
+    .pictureCurrency_print {
+        width: 14px;
+    }
+
+    .select-accountteam {
+        margin-left: -20px;
+    }
+
+    .classform-TokyoLimited {
+        padding-bottom: 10px;
+        width: 370px;
+    }
+
+    .classform-TokyoLimited1 {
+        margin-left: 20px;
+    }
+
+    .classform-TokyoLimited2 {
+        margin-left: 20px;
+        width: 370px;
+        padding-bottom: 10px;
+    }
+
+    .user0dashboard {
+        width: 15px;
+        height: 15px;
+        border-radius: 50px;
+    }
+
 }
