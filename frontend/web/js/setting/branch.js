@@ -113,15 +113,15 @@ $("#reset-branch").click(function(e) {
 });
 
 function filterBranchCompany() {
-    var companyId = $("#filter-branch").val();
-    var url = $url + 'setting/branch/search-branch';
+    var companyId = $("#company-filter").val();
+    var url = $url + 'setting/branch/company-branch-filter';
     $.ajax({
         type: "POST",
         dataType: 'json',
         url: url,
         data: { companyId: companyId },
         success: function(data) {
-
+            $("#branch-company").html(data.branch);
         }
     });
 }

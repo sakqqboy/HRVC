@@ -5,14 +5,13 @@
 }
 
 .text-Participating {
-    font-size: 10px;
-    letter-spacing: -0.2px;
+    font-size: 11px;
     color: gray;
-    padding-top: 5px;
 }
 
 .imagessettingsTerm1 {
-    width: 10px;
+    width: 13px;
+    margin-top: -5px;
 }
 
 .viewlog {
@@ -20,16 +19,11 @@
 }
 
 .imagessettingsFillerPlus {
-    width: 25px;
+    width: 20px;
+    margin-top: 8px;
     cursor: pointer;
     margin-left: 30px;
     margin-top: 10px;
-}
-
-.Term1Employees {
-    padding-top: 10px;
-    text-align: end;
-    font-size: 10px;
 }
 
 .bgcradlightgray {
@@ -51,13 +45,6 @@
 
 .crdEmployeeslight1 {
     background-color: #FAFAFA;
-    border: none;
-    border-radius: 3px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin-top: 10px;
-    padding-left: 5px;
-    padding-right: 5px;
 }
 
 .crdEmployeeslight2 {
@@ -66,7 +53,7 @@
     border-radius: 3px;
     padding-top: 5px;
     padding-bottom: 5px;
-    margin-top: 10px;
+    margin-top: 0px;
     padding-left: 3px;
     padding-right: 3px;
 }
@@ -77,7 +64,7 @@
     border-radius: 3px;
     padding-top: 5px;
     padding-bottom: 5px;
-    margin-top: 10px;
+    margin-top: 0px;
     padding-left: 3px;
     padding-right: 3px;
 }
@@ -88,7 +75,7 @@
     border-radius: 3px;
     padding-top: 5px;
     padding-bottom: 5px;
-    margin-top: 10px;
+    margin-top: 0px;
     padding-left: 3px;
     padding-right: 3px;
 }
@@ -116,7 +103,7 @@
 }
 
 .nameimages1 {
-    font-size: 8px;
+    font-size: 10px;
 }
 
 .nameimages2 {
@@ -127,6 +114,57 @@
     border-left: 2px lightgray solid;
 }
 
+/* .form-check-input-checkEmployees1:checked {
+    border-radius: 50%;
+} */
+
+.check-circle-Employees1 {
+    background-color: #3994FF;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+}
+
+.check-circle-Employees2 {
+    background-color: #FDCA40;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+}
+
+.check-circle-Employees3 {
+    background-color: #FF6939;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+}
+
+.check-circle-close {
+    border-radius: 50%;
+    background-color: #FF7373;
+    width: 15px;
+    height: 15px;
+}
+
+.form-check-input[value=InputEmployees] {
+    border-radius: 50%;
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+/* .form-check-input-checkEmployees2:checked {
+    border-radius: 50%;
+    background-color: #FDCA40;
+} */
+
+/* .form-check-input[value=InputEmployees2] {
+    border-radius: 50%;
+    border: #FDCA40;
+    font-size: 13px;
+    margin-top: 8px;
+} */
+
+
 .search-box {
     position: relative;
     display: flex;
@@ -136,16 +174,15 @@
 }
 
 .search-input {
-    width: 250px;
-    font-size: 16px;
-    padding: 15px 45px 15px 15px;
+    font-size: 14px;
     background-color: #F0F2F4;
     color: #6c6c6c;
     border-radius: 20px;
     font-size: 12px;
     border: none;
-    transition: all .4s;
-    height: 40px;
+    width:95%;
+    height: 35px;
+    padding-left: 15px;
 }
 
 .search-input:focus {
@@ -155,26 +192,15 @@
 
 .search-btn {
     background-color: transparent;
-    font-size: 18px;
+    font-size: 14px;
     padding: 6px 9px;
-    margin-left: -45px;
+    margin-left: -35px;
     border: none;
     font-size: 12px;
     color: #6c6c6c;
-    transition: all .4s;
     z-index: 10;
 }
 
-.search-btn:hover {
-    transform: scale(1.2);
-    cursor: pointer;
-    color: black;
-}
-
-.search-btn:focus {
-    outline: none;
-    color: black;
-}
 
 .LabelEmployees {
     font-size: 8px;
@@ -234,7 +260,7 @@
 
 
 .imagesAssingLight {
-    width: 16px;
+    width: 15px;
 }
 
 .timesnotset {
@@ -246,6 +272,10 @@
 .Not-Set {
     color: #A4A2A2;
     font-size: 11px;
+}
+.thead-evaluator{
+    font-weight: 500 !important;
+letter-spacing: 0.2px;
 }
 
 .Profiles {

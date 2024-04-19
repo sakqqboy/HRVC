@@ -119,6 +119,19 @@ class EnvironmentController extends Controller
 					$frameTerm->createDateTime = new Expression('NOW()');
 					$frameTerm->updateDateTime = new Expression('NOW()');
 					$frameTerm->save(false);
+					$termId = Yii::$app->db->lastInsertID;
+					$steps = TermStep::find()->where(["status" => 1])->asArray()->orderBy('sort')->all();
+					if (isset($steps) && count($steps) > 0) {
+						foreach ($steps as $step) :
+							$termItem = new TermItem();
+							$termItem->termId = $termId;
+							$termItem->stepId = $step["stepId"];
+							$termItem->status = 1;
+							$termItem->createDateTime = new Expression('NOW()');
+							$termItem->updateDateTime = new Expression('NOW()');
+							$termItem->save(false);
+						endforeach;
+					}
 				}
 			}
 		}
@@ -230,7 +243,6 @@ class EnvironmentController extends Controller
 	}
 	public function actionTermDetail($hash)
 	{
-
 		$param = ModelMaster::decodeParams($hash);
 		$termId = $param["termId"];
 		$api = curl_init();
@@ -261,7 +273,8 @@ class EnvironmentController extends Controller
 			"thisYear" => $thisYear,
 			"terms" => $terms,
 			"environmentDetail" => $environmentDetail,
-			"frameName" => $frameName
+			"frameName" => $frameName,
+			"termId" => $termId
 		]);
 	}
 	public function actionAddTermItem()
@@ -283,6 +296,200 @@ class EnvironmentController extends Controller
 				}
 			endforeach;
 		}
+	}
+	public function actionEvaluatorSetting($hash)
+	{
+		$param = ModelMaster::decodeParams($hash);
+		$termId = $param["termId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/term-detail?termId=' . $termId);
+		$terms = curl_exec($api);
+		$terms = json_decode($terms, true);
+
+
+		$frameId = $terms["frameId"];
+		$frameName = Frame::frameName($frameId);
+		$environmentId = Frame::getEnvironmentId($frameId);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/environment-detail?environmentId=' . $environmentId);
+		$environmentDetail = curl_exec($api);
+		$environmentDetail = json_decode($environmentDetail, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/company-employee-pim?companyId=' . $environmentDetail["companyId"]);
+		$employeePim = curl_exec($api);
+		$employeePim = json_decode($employeePim, true);
+
+		curl_close($api);
+		//throw new Exception(print_r($environmentDetail, true));
+		$date = date('Y-m-d');
+		$thisMonth = ModelMaster::monthEng(date('m'), 1);
+		$thisYear = date('Y');
+		$dateValue = Carlendar::currentMonth($date);
+		return $this->render('evaluator_setting', [
+			"dateValue" => $dateValue,
+			"thisMonth" => $thisMonth,
+			"thisYear" => $thisYear,
+			"terms" => $terms,
+			"environmentDetail" => $environmentDetail,
+			"frameName" => $frameName,
+			"termId" => $termId,
+			"employeePim" => $employeePim
+		]);
+	}
+	public function actionWeightAllocate($hash)
+	{
+		$param = ModelMaster::decodeParams($hash);
+		$termId = $param["termId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/term-detail?termId=' . $termId);
+		$terms = curl_exec($api);
+		$terms = json_decode($terms, true);
+
+		$frameId = $terms["frameId"];
+		$frameName = Frame::frameName($frameId);
+		$environmentId = Frame::getEnvironmentId($frameId);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/environment-detail?environmentId=' . $environmentId);
+		$environmentDetail = curl_exec($api);
+		$environmentDetail = json_decode($environmentDetail, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/pim-term?termId=' . $termId);
+		$pimTerm = curl_exec($api);
+		$pimTerm = json_decode($pimTerm, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/master-kfi?termId=' . $termId);
+		$masterKfi = curl_exec($api);
+		$masterKfi = json_decode($masterKfi, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/master-kgi?termId=' . $termId);
+		$masterKgi = curl_exec($api);
+		$masterKgi = json_decode($masterKgi, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/master-kpi?termId=' . $termId);
+		$masterKpi = curl_exec($api);
+		$masterKpi = json_decode($masterKpi, true);
+
+		curl_close($api);
+
+		return $this->render('weight_allocate', [
+			"terms" => $terms,
+			"environmentDetail" => $environmentDetail,
+			"frameName" => $frameName,
+			"termId" => $termId,
+			"pimTerm" => $pimTerm,
+			"masterKpi" => $masterKpi,
+			"masterKfi" => $masterKfi,
+			"masterKgi" => $masterKgi,
+		]);
+	}
+	public function actionWeightAllocateSetting($hash)
+	{
+		$param = ModelMaster::decodeParams($hash);
+		$termId = $param["termId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/term-detail?termId=' . $termId);
+		$terms = curl_exec($api);
+		$terms = json_decode($terms, true);
+
+		$frameId = $terms["frameId"];
+		$frameName = Frame::frameName($frameId);
+		$environmentId = Frame::getEnvironmentId($frameId);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/environment-detail?environmentId=' . $environmentId);
+		$environmentDetail = curl_exec($api);
+		$environmentDetail = json_decode($environmentDetail, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/pim-term?termId=' . $termId);
+		$pimTerm = curl_exec($api);
+		$pimTerm = json_decode($pimTerm, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/master-kfi?termId=' . $termId);
+		$masterKfi = curl_exec($api);
+		$masterKfi = json_decode($masterKfi, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/master-kgi?termId=' . $termId);
+		$masterKgi = curl_exec($api);
+		$masterKgi = json_decode($masterKgi, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/master-kpi?termId=' . $termId);
+		$masterKpi = curl_exec($api);
+		$masterKpi = json_decode($masterKpi, true);
+
+		$branchId = FrameTerm::findDepartmentId($termId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-title-by-branch?branchId=' . $branchId);
+		$employees = curl_exec($api);
+		$employees = json_decode($employees, true);
+
+		curl_close($api);
+		//throw new Exception($branchId);
+		//throw new Exception(print_r($employees, true));
+		return $this->render('weight_allocate_setting', [
+			"terms" => $terms,
+			"environmentDetail" => $environmentDetail,
+			"frameName" => $frameName,
+			"termId" => $termId,
+			"pimTerm" => $pimTerm,
+			"masterKpi" => $masterKpi,
+			"masterKfi" => $masterKfi,
+			"masterKgi" => $masterKgi,
+			"employees" => $employees
+		]);
+	}
+	public function actionKfiWeightAllocate($hash)
+	{
+		$param = ModelMaster::decodeParams($hash);
+		$termId = $param["termId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/term-detail?termId=' . $termId);
+		$terms = curl_exec($api);
+		$terms = json_decode($terms, true);
+
+		$frameId = $terms["frameId"];
+		$frameName = Frame::frameName($frameId);
+		$environmentId = Frame::getEnvironmentId($frameId);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/environment-detail?environmentId=' . $environmentId);
+		$environmentDetail = curl_exec($api);
+		$environmentDetail = json_decode($environmentDetail, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/pim-term?termId=' . $termId);
+		$pimTerm = curl_exec($api);
+		$pimTerm = json_decode($pimTerm, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/master-kfi?termId=' . $termId);
+		$masterKfi = curl_exec($api);
+		$masterKfi = json_decode($masterKfi, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/master-kgi?termId=' . $termId);
+		$masterKgi = curl_exec($api);
+		$masterKgi = json_decode($masterKgi, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/master-kpi?termId=' . $termId);
+		$masterKpi = curl_exec($api);
+		$masterKpi = json_decode($masterKpi, true);
+		curl_close($api);
+		return $this->render('kfi_weight_allocate', [
+			"terms" => $terms,
+			"environmentDetail" => $environmentDetail,
+			"frameName" => $frameName,
+			"termId" => $termId,
+			"pimTerm" => $pimTerm,
+			"masterKpi" => $masterKpi,
+			"masterKfi" => $masterKfi,
+			"masterKgi" => $masterKgi,
+		]);
 	}
 	public function actionCalendar()
 	{

@@ -43,4 +43,9 @@ class Department extends \backend\models\hrvc\master\DepartmentMaster
         $employee = Employee::find()->select('departmentId')->where(["employeeId" => $user["employeeId"]])->asArray()->one();
         return $employee["departmentId"];
     }
+    public static function departmentName($departmentId)
+    {
+        $department = Department::find()->select('departmentName')->where(["departmentId" => $departmentId])->asArray()->one();
+        return $department["departmentName"];
+    }
 }

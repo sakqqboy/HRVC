@@ -43,3 +43,19 @@ function companyBranch() {
         }
     });
 }
+function companyDepartment() {
+    var companyId = $("#company").val();
+    var url = $url + 'setting/company/company-department';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { companyId: companyId },
+        success: function(data) {
+            if (data.status) {
+                $("#department").html(data.department);
+            }
+
+        }
+    });
+}

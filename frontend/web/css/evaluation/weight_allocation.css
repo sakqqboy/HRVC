@@ -49,15 +49,6 @@
     font-size: 14px;
     text-align: center;
     padding-top: 20px;
-    padding-bottom: 20px;
-}
-
-.andAccounts {
-    color: black;
-    font-weight: 500;
-    font-size: 12px;
-    margin-top: 15px;
-    padding-left: 5px;
 }
 
 .bg-chartpurple {
@@ -66,18 +57,20 @@
     border-radius: 3px;
     padding-left: 3px;
     padding-right: 3px;
-    margin-left: 5px;
-    margin-right: 5px;
+    padding-bottom: 3px;
+    margin-left: 3px;
+    margin-right: 3px;
 }
 
 .bg-chartwarn {
     background-color: #F8BF27;
     text-align: center;
     border-radius: 3px;
-    padding-left: 3px;
-    padding-right: 3px;
-    margin-left: 5px;
-    margin-right: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 3px;
+    margin-right: 3px;
+    padding-bottom: 3px;
 }
 
 
@@ -85,19 +78,18 @@
     background-color: #FF715B;
     text-align: center;
     border-radius: 3px;
-    padding-left: 3px;
-    padding-right: 3px;
-    margin-left: 5px;
-    margin-right: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 3px;
+    margin-right: 3px;
+    padding-bottom: 3px;
 }
 
 
 .silly_scrollbar {
     overflow-y: scroll;
     overflow-x: hidden;
-    height: 505px;
     padding-bottom: 20px;
-    margin-top: 44px;
 }
 
 .silly_scrollbar::-webkit-scrollbar {
@@ -161,7 +153,9 @@
 }
 
 .fonTotal {
-    font-size: 7px;
+    font-size: 8px;
+    background-color: #E2E2E2;
+    letter-spacing: 0.1px;
 }
 
 .icons-KGI {
@@ -206,7 +200,7 @@
     transition: .2s ease;
     text-align: center;
     font-size: 10px;
-    padding-top: 5px;
+    padding-top: 4px;
     margin-top: 1px;
 }
 
@@ -217,30 +211,22 @@
 
 .Evalua_tor1 {
     background-color: #F4F6F9;
-    margin-top: 20px;
     border-radius: 5px;
-    padding-left: 1px;
-    padding-right: 1px;
-    width: 60px;
 }
 
 .Evalua_tor2 {
     background-color: #F4F6F9;
     border-radius: 5px;
-    margin-top: 20px;
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
 }
 
 .Evalua_tor3 {
     background-color: #F4F6F9;
     border-radius: 5px;
-    margin-left: -15px;
+    /* margin-left: -15px; */
     padding-top: 10px;
     padding-left: 10px;
     padding-right: 10px;
-    width: 140px;
+    /* width: 140px; */
     padding-bottom: 30px;
 }
 
@@ -248,9 +234,7 @@
     background-color: white;
     padding-bottom: 20px;
     border-radius: 5px;
-    margin-top: 15px;
-    margin-left: 4px;
-    margin-right: 4px;
+    margin-top: 10px;
 }
 
 .PMI1 {
@@ -267,13 +251,13 @@
     border-top-style: solid;
     border-left-style: solid;
     border-bottom-style: solid;
-    width: 510px;
-    height: 90px;
+    height: 73px;
     position: static;
-    margin-top: -150px;
-    margin-left: 3px;
+    margin-top: -195px;
     border-radius: 7px;
     color: lightgray;
+    margin-left: -10px;
+    border-right: 0;
 }
 
 .pmi_bakgru {

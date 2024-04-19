@@ -3304,3 +3304,20 @@ background-color: #D0F4DE;
     margin-top: -40px;
     display: none;
 }
+.alert-box2{
+    /* float: right; */
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    background-color: #d0f8ce;
+    width: 250px;
+    height: 50px;
+    padding-top: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    position:absolute;
+    cursor: pointer;
+    right: 0;
+    margin-right: 10px;
+    /* margin-top: -40px; */
+    display: none;
+    z-index: 20;
+}

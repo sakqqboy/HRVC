@@ -257,4 +257,22 @@ class BranchController extends Controller
         $companyId = $_POST["companyId"];
         return $this->redirect(Yii::$app->homeUrl . 'setting/branch/create/' . ModelMaster::encodeParams(["companyId" => $companyId]));
     }
+    public function actionCompanyBranchFilter()
+    {
+        $companyId = $_POST["companyId"];
+        $text = '<option value="">Branch</option>';
+        $branches = Branch::find()
+            ->select('branchId,branchName')
+            ->where(["companyId" => $companyId, "status" => 1])
+            ->orderBy('branchName')
+            ->asArray()
+            ->all();
+        if (isset($branches) && count($branches) > 0) {
+            foreach ($branches as $branch) :
+                $text .= '<option value="' . $branch["branchId"] . '">' . $branch["branchName"] . '</option>';
+            endforeach;
+        }
+        $res["branch"] = $text;
+        return json_encode($res);
+    }
 }

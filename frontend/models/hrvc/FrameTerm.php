@@ -68,4 +68,11 @@ class FrameTerm extends \frontend\models\hrvc\master\FrameTermMaster
             return 0;
         }
     }
+    public static function findDepartmentId($termId)
+    {
+        $term = FrameTerm::find()->where(["termId" => $termId])->one();
+        $frame = Frame::find()->where(["frameId" => $term->frameId])->one();
+        $environment = Environment::find()->where(["environmentId" => $frame->environmentId])->one();
+        return $environment->branchId;
+    }
 }

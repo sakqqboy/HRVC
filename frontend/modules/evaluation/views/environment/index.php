@@ -1,5 +1,6 @@
 <?php
 
+use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
 $this->title = 'Evaluation';
@@ -102,8 +103,10 @@ $this->title = 'Evaluation';
 
 						<div class="col-5 borderscan bg-white pt-11 pb-8 border-left pr-5 pl-5">
 							<div class="col-12 pt-0 pb-3 text-center bg-light text-primary" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;cursor:pointer;">
-								<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Salary.png" class="imagescan mr-5">
-								<span class="font-size-10">Register salary</span>
+								<a href="<?= Yii::$app->homeUrl ?>evaluation/salary/register/<?= ModelMaster::encodeParams(['companyId' => $environment['companyId'], "environmentId" => $environmentId]) ?>" class="no-underline text-primary">
+									<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Salary.png" class="imagescan mr-5">
+									<span class="font-size-10">Register salary</span>
+								</a>
 							</div>
 						</div>
 					</div>

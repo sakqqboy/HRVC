@@ -3,6 +3,7 @@
 namespace backend\modules\masterdata\controllers;
 
 use backend\models\hrvc\Country;
+use backend\models\hrvc\Currency;
 use backend\models\hrvc\Nationality;
 use Exception;
 use yii\web\Controller;
@@ -51,5 +52,16 @@ class CountryController extends Controller
     {
         $nation = Nationality::find()->select('numCode,nationalityName')->where(1)->asArray()->orderBy('nationalityName')->all();
         return json_encode($nation);
+    }
+    public function actionAllCurrency()
+    {
+        $currency = Currency::find()
+            ->select('code,symbol,currencyId')
+            ->where(["status" => 1])
+            ->andWhere('currencyId!=1')
+            ->asArray()
+            ->orderBy('')
+            ->all();
+        return json_encode($currency);
     }
 }

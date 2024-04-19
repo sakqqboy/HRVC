@@ -4,6 +4,7 @@ namespace backend\modules\masterdata\controllers;
 
 
 use backend\models\hrvc\Department;
+use backend\models\hrvc\Title;
 use Exception;
 use Yii;
 use yii\web\Controller;
@@ -88,5 +89,15 @@ class DepartmentController extends Controller
 			->all();
 		//throw  new Exception(print_r($department, true));
 		return json_encode($department);
+	}
+	public function actionDepartmentTitle($id)
+	{
+		$title = Title::find()
+			->select('titleId,titleName')
+			->where(["departmentId" => $id, "status" => 1])
+			->orderBy('layerId')
+			->asArray()
+			->all();
+		return json_encode($title);
 	}
 }

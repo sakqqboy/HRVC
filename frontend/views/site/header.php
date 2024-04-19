@@ -122,13 +122,23 @@ use frontend\models\hrvc\UserRole;
                         <div class="col-12">
                                 <a href="<?= Yii::$app->homeUrl ?>evaluation/environment" class="no-underline">
                                         <i class="fa fa-pencil-square-o pr-10 mt-20" aria-hidden="true"></i>
-                                        Evaluetion
+                                        Evaluation
+                                </a>
+                        </div>
+                        <div class="col-12">
+                                <a href="<?= Yii::$app->homeUrl ?>evaluation/salary/index" class="no-underline">
+                                        <i class="fa fa-usd pr-10 mt-20" aria-hidden="true"></i>
+                                        Salary
                                 </a>
                         </div>
                         <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/" class="no-underline"><i class="fa fa-history pr-10 mt-20" aria-hidden="true"></i> 360 Degree Evaluetion</a></div>
                         <div class="col-12 haeder-Evalution"> REPORTS</div>
                         <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/analysis" class="no-underline"><i class="fa fa-pie-chart pr-10 mt-20" aria-hidden="true"></i> Analysis</a></div>
-                        <div class="col-12 haeder-Evalution"> Financial Planning</div>
+                        <div class="col-12 haeder-Evalution">
+                                <a href="<?= Yii::$app->homeUrl ?>fs/bigsara/index" class="no-underline">
+                                        Financial Planning
+                                </a>
+                        </div>
                         <div class="col-12 haeder-Evalution"> ADMIN SETTINGS</div>
                         <div class="col-12"> <a href="" class="no-underline"><i class="fa fa-user pr-10 mt-20" aria-hidden="true"></i> Admin</a></div>
                         <div class="col-12"> <a href="" class="no-underline"><i class="fa fa-sun-o pr-10 mt-20" aria-hidden="true"></i> Super admin</a></div>

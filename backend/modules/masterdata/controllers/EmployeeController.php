@@ -2,7 +2,10 @@
 
 namespace backend\modules\masterdata\controllers;
 
+use backend\models\hrvc\Department;
 use backend\models\hrvc\Employee;
+use backend\models\hrvc\EmployeeSalary;
+use backend\models\hrvc\Title;
 use Exception;
 use yii\web\Controller;
 
@@ -51,5 +54,64 @@ class EmployeeController extends Controller
 			->asArray()
 			->all();
 		return json_encode($employee);
+	}
+	public function actionEmployeeDepartmentTitleByDepartment($departmentId)
+	{
+		$department = Department::find()
+			->select('departmentId,departmentName')
+			->where(["departmentId" => $departmentId])
+			->asArray()
+			->one();
+		$data = [];
+		if (isset($department) && !empty($department) > 0) {
+			$titles = Title::find()
+				->where(["departmentId" => $department["departmentId"]])
+				->asArray()
+				->orderBy('layerId')
+				->all();
+			if (isset($titles) && count($titles) > 0) {
+				foreach ($titles as $title) :
+					$employees = Employee::find()
+						->select('employeeFirstname,employeeSurename,employeeId,picture')
+						->where(["titleId" => $title["titleId"], "status" => 1])
+						->asArray()
+						->orderBy('employeeFirstname')
+						->all();
+					if (isset($employees) && count($employees) > 0) {
+						foreach ($employees as $em) :
+							$data[$title["titleId"]][$em["employeeId"]] = [
+								"firstName" => $em["employeeFirstname"],
+								"sureName" => $em["employeeSurename"],
+								"picture" => $em["picture"],
+								"setSalary" => EmployeeSalary::isSetSalary($em["employeeId"])
+							];
+						endforeach;
+					}
+				endforeach;
+			}
+		}
+		return json_encode($data);
+	}
+	public function actionEmployeeTitleByBranch($branchId)
+	{
+		$employees = Employee::find()
+			->select('employee.employeeFirstname,employee.employeeSurename,employee.employeeId,employee.picture,t.titleName,t.layerId')
+			->JOIN("LEFT JOIN", "department d", "d.departmentId=employee.departmentId")
+			->JOIN("LEFT JOIN", "title t", "t.titleId=employee.titleId")
+			->where(["employee.branchId" => $branchId, "employee.status" => 1])
+			->asArray()
+			->orderBy('t.layerId,employee.employeeFirstname')
+			->all();
+		$data = [];
+		if (isset($employees) && count($employees) > 0) {
+			foreach ($employees as $em) :
+				$data[$em["titleName"]][$em["employeeId"]] = [
+					"firstName" => $em["employeeFirstname"],
+					"sureName" => $em["employeeSurename"],
+					"picture" => $em["picture"],
+				];
+			endforeach;
+		}
+		return json_encode($data);
 	}
 }

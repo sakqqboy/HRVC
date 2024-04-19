@@ -1,0 +1,145 @@
+.menu-head {
+	font-size: 14px;
+	height: 35px;
+	padding-top: 10px;
+	color: lightgray;
+	padding-left: 20px;
+}
+
+.menu-head-select {
+	font-size: 14px;
+	height: 35px;
+	padding-top: 10px;
+	color: green;
+	border-left: 8px solid #3399FF;
+	background-color: #ADD8E6;
+	z-index: 0;
+}
+
+.menu-content {
+	padding-top: 9px;
+	font-size: 12px;
+	letter-spacing: 0.5px;
+
+}
+
+.menu-content-select {
+	padding-top: 9px;
+	font-size: 12px;
+	letter-spacing: 0.5px;
+	background-color: #ADD8E6;
+	color: #3366FF;
+	text-shadow: white 1px 1px 1px;
+	font-weight: 600;
+}
+
+.line-process {
+	height: 50px;
+	margin-top: -12px;
+	margin-bottom: -36px;
+	width: 25%;
+	margin-left: 24px;
+	z-index: 99 !important;
+	position: relative;
+	border-left: 1px solid darkgrey;
+}
+
+.content-box {
+	border-radius: 10px;
+	background-color: #F5F5F5;
+	padding-top: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-bottom: 15px;
+}
+
+.nav-top-menu-pl {
+	font-size: 14px;
+	background-color: white;
+	border-radius: 20px;
+	letter-spacing: 0.5px;
+	box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+}
+
+.drop-zone {
+	/* border: 2px dashed #cccccc; */
+	border-radius: 5px;
+	padding: 20px;
+	text-align: center;
+	font-family: Arial, sans-serif;
+	color: black;
+	cursor: pointer;
+	font-weight: 600;
+	background-color: #F8F8FF;
+}
+
+.drop-zone__prompt {
+	font-size: 14px;
+	/* color: #aaaaaa; */
+}
+
+.drop-zone:hover {
+	background-color: #f0f0f0;
+}
+
+.import-button {
+	background-color: #3333FF;
+	font-family: Arial, sans-serif;
+	color: white;
+	font-size: 14px;
+	font-weight: 700;
+	border-radius: 25px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 40px;
+	padding-right: 40px;
+	border: 0;
+	letter-spacing: 1px;
+}
+
+.download-progress {
+	background-color: #F8F8FF;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.purple-button {
+	background-color: #191970;
+	color: white;
+	font-weight: 700;
+}
+
+.purple-button:hover {
+	color: white;
+}
+
+.pl-item {
+	border: lightgray solid thin;
+	color: #191970;
+	font-weight: 700;
+	border-radius: 3px;
+}
+
+.selected-pl {
+	margin-bottom: -12px;
+	z-index: 99;
+	background-color: white;
+	position: relative;
+	margin-left: -5px;
+	margin-top: -17px;
+}
+
+.pl_textsale {
+	text-transform: uppercase;
+	font-size: 12px;
+	padding-left: 10px;
+	padding-top: 5px;
+}
+
+.btn-purple {
+	background-color: #5630AF;
+}

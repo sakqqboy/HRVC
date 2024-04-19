@@ -19,7 +19,7 @@
 							Company
 						</div>
 						<div class="col-7">
-							<select class="form-select" onchange="javascript:kgiFilter()()" required id="company-filter" name="companyId">
+							<select class="form-select" onchange="javascript:filterBranchCompany()" required id="company-filter" name="companyId">
 								<option value="">Company</option>
 								<?php
 								if (isset($companies) && count($companies) > 0) {

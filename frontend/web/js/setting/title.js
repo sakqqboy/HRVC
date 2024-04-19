@@ -157,3 +157,20 @@ function filterTitle() {
 	});
 
 }
+function departmentTitle() {
+	var departmentId = $("#department").val();
+    var url = $url + 'setting/department/department-title';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { departmentId: departmentId },
+	    success: function (data) {
+		   
+		    if (data.status) {
+			    $("#title").html(data.title);
+		    } 
+
+        }
+    });
+}
