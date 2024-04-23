@@ -18,7 +18,7 @@ $this->title = 'Salary Dashboard';
             </div>
             <div class="col-lg-8 col-md-6 col-12">
                 <div class="row">
-                    <div class="col-lg-2 col-md-6 col-3 pt-20">
+                    <div class="col-lg-2 col-md-6 col-3 pt-15">
                         <img src="<?= Yii::$app->homeUrl ?>/images/icons/Dark/48px/Currency.png" class="pictureCurrency_print"><span class="font-size-11">Currency</span>
                     </div>
                     <div class="col-lg-2 col-md-6 col-3">
@@ -30,7 +30,7 @@ $this->title = 'Salary Dashboard';
                         </select>
                     </div>
                     <div class="col-lg-1 col-md-6 col-3">
-                        <button class="form-control Rank-wornning-blue" type="button"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Wornning-blue.png" class="wornningblue1"> Rank</button>
+                        <button class="form-control Rank-wornning-blue" type="button"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Wornning-blue.png" class="wornningblue1">&nbsp; Rank</button>
                     </div>
                     <div class="col-lg-3 col-md-6 col-3">
                         <select class="form-select select-accountteam" aria-label="Default select example">
