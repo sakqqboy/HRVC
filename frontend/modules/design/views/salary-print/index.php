@@ -36,7 +36,7 @@ $this->title = 'Generate Report';
                     </div>
                 </div>
                 <div class="col-lg-1 col-md-6 col-6">
-                    <div class="col-12">
+                    <div class="col-12" style="width: 60px;">
                         <div class="filedownloadPDF">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/printer.png" class="imagesdownloadPDF"> Print
                         </div>
@@ -58,8 +58,9 @@ $this->title = 'Generate Report';
                         <option value="3">Management</option>
                     </select>
                 </div>
-                <div class="col-2 dashboard-filter">
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterPlus.png" class="picture-FilterPlus-bonus"> <strong class="font-size-13">More</strong> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.png" class="bonus-point">
+                <div class="col-2">
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterPlus.png" class="picture-FilterPlus-bonus">
+                    <span class="font-size-10 font-b">More</span> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.png" class="bonus-point">
                 </div>
             </div>
         </div>
@@ -139,6 +140,20 @@ $this->title = 'Generate Report';
             }
             ?>
         </table>
+
+        <div class="col-lg-5 col-md-6 col-12">
+            <div class="col-12">
+                <?php
+                for ($i = 1; $i <= 5; $i++) {
+                ?>
+
+
+
+                <?php
+                }
+                ?>
+            </div>
+        </div>
         <!-- <div class="col-12 alert alert-secondarydashboard">
             <div class="row">
                 <div class="col-lg-2 col-md-6 col-6 Employee-dashborad">
