@@ -301,6 +301,7 @@ $this->title = 'Salary Allowance';
                                             </span>
                                             <i class="fa fa-ellipsis-v pl-25 font-size-12" aria-hidden="true"></i>
                                         </div>
+
                                         <div class="col-1">
                                             <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseTwo">
                                                 <i class="fa fa-chevron-down font-size-12 pt-22" aria-hidden="true"></i>
