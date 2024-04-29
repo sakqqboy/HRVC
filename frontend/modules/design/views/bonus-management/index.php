@@ -87,35 +87,36 @@ $this->title = 'Bonus Management';
         </div>
         <div class="col-lg-10 col-md-6 col-12">
             <div class="bg-white pmi_bakgru">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="col-12 FrameSalaryAllowance">
-                            Bonus <button class="btn btn-primary bonussubmit" type="submit"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/save.png" class="images-bonuesave">&nbsp; SAVE</button>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-2">
+                            <div class="col-12 FrameSalaryAllowance">
+                                Bonus <button class="btn btn-primary bonussubmit" type="submit"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/save.png" class="images-bonuesave">&nbsp; SAVE</button>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-2">
+                            <i class="fa fa-exclamation-triangle picturebonus" aria-hidden="true"></i> <span class="font-size-10">16 Issues Pending</span>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-2 border-left">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Currency.png" class="pictureCurrency3"><span class="font-size-10"> Currency</span>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-2">
+                            <select class="form-select bonus-select" aria-label="Default select example">
+                                <option selected value="">Select menu</option>
+                                <option value="1">BTH (฿) </option>
+                                <option value="2">BTH (฿) </option>
+                                <option value="3">BTH (฿) </option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-2 border-left">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterPlus.png" class="picture-FilterPlus-bonus"> <strong class="font-size-10"> More</strong> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.png" class="bonus-point">
                         </div>
                     </div>
-                    <div class="col-lg-2">
-                        <i class="fa fa-exclamation-triangle picturebonus" aria-hidden="true"></i> <span class="font-size-10">16 Issues Pending</span>
-                    </div>
-
-                    <div class="col-lg-2">
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Currency.png" class="pictureCurrency3"><span class="font-size-10"> Currency</span>
-                    </div>
-                    <div class="col-lg-2">
-                        <select class="form-select bonus-select" aria-label="Default select example">
-                            <option selected value="">Select menu</option>
-                            <option value="1">BTH (฿) </option>
-                            <option value="2">BTH (฿) </option>
-                            <option value="3">BTH (฿) </option>
-                        </select>
-                    </div>
-                    <div class="col-lg-2 border-left">
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterPlus.png" class="picture-FilterPlus-bonus"> <strong class="font-size-10"> More</strong> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.png" class="bonus-point">
-                    </div>
                 </div>
-                <div class="mt-20">
-                    <div class="row b4solid">
-                        <div class="col-md-3">
-                            <div class="b4">
+                <div class="col-12 BG-bonusgray">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="alert BB-E3">
                                 <div class="col-12">
                                     <span class="b4weight">E3</span><span class="b4E3"> Final Evaluation Phase</span>
                                 </div>
@@ -129,7 +130,7 @@ $this->title = 'Bonus Management';
                                     <button type="button" class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill" style="width: 2rem; height:2rem;">3</button>
                                 </div>
                             </div>
-                            <div class="b4">
+                            <div class="alert BB-E3">
                                 <div class="row">
                                     <div class="col-lg-7 col-md-6 col-6">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Depaertment-blue.png" class="pictureDepartment1"> <span class="Departments12">12 Departments</span>
@@ -140,14 +141,13 @@ $this->title = 'Bonus Management';
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-9 border-left">
+                        <div class="col-lg-9 border-left">
                             <div class="row mt-10">
+
                                 <?php
                                 for ($i = 1; $i <= 12; $i++) {
                                 ?>
                                     <div class="col-lg-1">
-
-
                                         <div class="card-header bg-headerbonus">F</div>
                                         <div class="card-body bg-titleBudget">
                                             <div class="card-title">
@@ -171,94 +171,52 @@ $this->title = 'Bonus Management';
 
                             </div>
                             <div class="row">
-                                <div class="col-lg-3">
-                                    <div class="card text-white mb-3" style="max-width: 8rem;border:none;">
-                                        <div class="card-header bg-headerBudget">Total Budget <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/save-black.png" class="pictureEdit1"></div>
-                                        <div class="card-body bg-titleBudget">
-                                            <div class="card-title">
-                                                <div class="row">
-                                                    <div class="col-1">
-                                                        ฿
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <input type="number" style="width: 5rem;" class="edit-bonusnumber">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="card text-white mb-3" style="max-width: 8rem;border:none;">
-                                        <div class="card-header bg-headerBudget"><span class="header1-bonus">Evaluated Bonus</span><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/save-black.png" class="pictureEdit1"></div>
-                                        <div class="card-body bg-titleBudget">
-                                            <div class="card-title">
-                                                <div class="row">
-                                                    <div class="col-1">
-                                                        ฿
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <input type="number" style="width: 5rem;" class="edit-bonusnumber">
+                                <?php
+                                for ($i = 1; $i <= 4; $i++) {
+                                ?>
+
+                                    <div class="col-lg-3">
+                                        <div class="card text-white mb-3" style="border:none;">
+                                            <div class="card-header bg-headerBudget">Total Budget <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/save-black.png" class="pictureEdit1"></div>
+                                            <div class="card-body bg-titleBudget">
+                                                <div class="card-title">
+                                                    <div class="row">
+                                                        <div class="col-1">
+                                                            ฿
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <input type="number" style="width: 4rem;" class="edit-bonusnumber">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="card text-white mb-3" style="max-width: 8rem;border:none;">
-                                        <div class="card-header bg-headerBudget">Adjustment <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/save-black.png" class="pictureEdit1"></div>
-                                        <div class="card-body bg-titleBudget">
-                                            <div class="card-title">
-                                                <div class="row">
-                                                    <div class="col-1">
-                                                        ฿
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <input type="number" style="width: 5rem;" class="edit-bonusnumber">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="card text-white mb-3" style="max-width: 8rem;border:none;">
-                                        <div class="card-header bg-headerBudget">Payable Bonus <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/save-black.png" class="pictureEdit1"></div>
-                                        <div class="card-body bg-titleBudget">
-                                            <div class="card-title">
-                                                <div class="row">
-                                                    <div class="col-1">
-                                                        ฿
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <input type="number" style="width: 5rem;" class="edit-bonusnumber">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
+                                <?php
+                                }
+                                ?>
+
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="card">
+                <div class="col-12 card">
                     <div class="row">
                         <div class="col-lg-1 col-md-6 col-6 salary-bonusAllsolid1">
-                            <div class="col-12 salary1">Salary</div>
-                            <div class="col-12 salary2">฿ <?= number_format(20000) ?> </div>
+                            <div class="salary1">Salary</div>
+                            <div class="salary2">฿ <?= number_format(20000) ?> </div>
                         </div>
-                        <div class="col-lg-2 col-md-6 col-6">
+                        <div class="col-lg-2 col-md-6 col-6 border-right">
                             <div class="row">
-                                <div class="col-sm-1">
+                                <div class="col-1">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/imagelink-1.png" class="imagelink-1">
                                 </div>
-                                <div class="col-sm-4 salary3">
+                                <div class="col-6 salary3">
                                     Evaluation
                                     Bonus
                                 </div>
-                                <div class="col-sm-6 salary4">
+                                <div class="col-5 salary4">
                                     ฿ <span class="salary-red">(<?= number_format(53486) ?>)</span>
                                 </div>
                             </div>
@@ -307,480 +265,104 @@ $this->title = 'Bonus Management';
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="row">
-                        <div class="col-lg-1 col-md-6 col-6 salary-bonusAllsolid1">
-                            <div class="col-12 salary1">Salary</div>
-                            <div class="col-12 salary2">฿ <?= number_format(20000) ?> </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-6">
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/imagelink-1.png" class="imagelink-1">
-                                </div>
-                                <div class="col-sm-4 salary3">
-                                    Evaluation
-                                    Bonus
-                                </div>
-                                <div class="col-sm-6 salary4">
-                                    ฿ <span class="salary-red">(<?= number_format(53486) ?>)</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-6  salary-bonusAllsolid2">
-                            <div class="row">
-                                <div class="col-sm-1">
-                                    <i class="fa fa-align-center" aria-hidden="true"></i>
-                                </div>
-                                <div class="col-sm-5 salary3">
-                                    Budget
-                                    adjustment
-                                </div>
-                                <div class="col-sm-5 salary4">
-                                    ฿ <span class="salary-red">(<?= number_format(53486) ?>)</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-6 salary-bonusAllsolid3">
-                            <div class="row">
-                                <div class="col-sm-1">
-                                    <i class="fa fa-align-center" aria-hidden="true"></i>
-                                </div>
-                                <div class="col-sm-2 salary3">
-                                    Final
-                                    adjustment
-                                </div>
-                                <div class="col-sm-2 salary4">
-                                    ฿ <span class="salary-bule">(<?= number_format(53486) ?>)</span>
-                                </div>
-                                <div class="col-sm-2">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/like-smile.png" class="like-smile"><span class="font-size-10">Final Bonus</span>
-                                </div>
-                                <div class="col-sm-2">
-                                    <div class="col-12 bottomsolid-salarybonus">
-                                        <?= number_format(271537) ?>
-                                    </div>
-                                </div>
-                                <div class="col-sm-2">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/like-smile.png" class="like-smile"><span class="font-size-10">Payable Bonus Ratio</span>
-                                </div>
-                                <div class="col-sm-1">
-                                    <div class="col-12 bottomsolid-salarybonus">
-                                        <?= number_format(2) ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
                     </div>
                 </div>
-                <div class="alert cd-F4F6F9">
+                <div class="cd-F4F6F9">
                     <div class="row">
-                        <div class="col-sm-1"></div>
-                        <div class="col-sm-2  bonus-employee1">
+                        <div class="col-lg-3 col-md-6 col-3 bonus-employee1">
                             employee
                         </div>
-                        <div class="col-sm-1  bonus-title1">
+                        <div class="col-lg-1 col-md-6 col-1  bonus-title1">
                             title
                         </div>
-                        <div class="col-sm-1  bonus-rank1">
+                        <div class="col-lg-1 col-md-6 col-1 bonus-rank1">
                             rank
                         </div>
-                        <div class="col-sm-1  bonus-Bonus1">
+                        <div class="col-lg-1 col-md-6 col-1 bonus-Bonus1">
                             Bonus
                         </div>
-                        <div class="col-sm-1  bonus-SG1">
-                            <span class="dropdown" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> Salary (SG) <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Selected-info.png" class="width3"> </span>
+                        <div class="col-lg-1 col-md-6 col-1  bonus-SG1">
+                            <span class="dropdown" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> Salary (SG) <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Selected-info.png" class="width3"></span>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">1</a> </li>
-                                <li><a class="dropdown-item" href="#">2</a></li>
-                                <li><a class="dropdown-item" href="#">3</a></li>
+                                <li class="font-size-10"><a class="dropdown-item" href="#">1</a> </li>
+                                <li class="font-size-10"><a class="dropdown-item" href="#">2</a></li>
+                                <li class="font-size-10"><a class="dropdown-item" href="#">3</a></li>
                             </ul>
                         </div>
-                        <div class="col-sm-1  bonus-Eval1">
+                        <div class="col-lg-1 col-md-6 col-1  bonus-Eval1">
                             Eval.Bonus
                         </div>
-                        <div class="col-sm-1  bonus-Adj1">
+                        <div class="col-lg-1 col-md-6 col-1  bonus-Adj1">
                             Adjustment
                         </div>
-                        <div class="col-sm-1  bonus-Final1">
+                        <div class="col-lg-1 col-md-6 col-1  bonus-Final1">
                             Final Adjustment
                         </div>
-                        <div class="col-sm-1  bonus-Pay1">
+                        <div class="col-lg-1 col-md-6 col-1  bonus-Pay1">
                             Payable Bonus
                         </div>
-                        <div class="col-sm-1  bonus-Pay1">
+                        <div class="col-lg-1 col-md-6 col-1  bonus-Pay1">
                             Payable Bonus
                         </div>
                     </div>
                 </div>
+
+
+
                 <div class="alert cd-F4F6F9">
-                    <div class="row">
-                        <div class="col-lg-1 col-md-6 col-6">
-                            <span class="badge bg-primary">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/24px/Department.png" class="bonus-Department">
-                            </span>
-                            <span class="F4F6F9-Accounts"> Accounts &Taxation</span>
-                        </div>
-                        <div class="alert alert-light col-lg-11 col-md-6 col-6 crd-bonus-notborder">
-                            <div class="row">
-                                <div class="col-lg-2 bonus-user">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/man.png" class="ladyjpg"> Ananta Kumar
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Position">
-                                    Junior Associate
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-rank">
-                                    A
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Bonus">
-                                    1.2 X
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-SG">
-                                    <?= number_format(66910) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Eval">
-                                    <?= number_format(80293) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Adjustment">
-                                    <i class="fa fa-caret-down text-danger font-size-12" aria-hidden="true"></i><span class="text-danger"> (<?= number_format(13209) ?>)</span>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-finaladjustment">
-                                    <span class="finaladjustment-ml"> <?= number_format(80293) ?> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/ture.png" class="width1"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/save-black.png" class="width2"></span>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Pay">
-                                    <?= number_format(67083) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Payable">
-                                    1.01 X
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-1 col-md-6 col-6"></div>
-                        <div class="alert alert-light col-lg-11 col-md-6 col-6 crd-bonus-notborder">
-                            <div class="row">
-                                <div class="col-lg-2 bonus-user">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/man.png" class="ladyjpg"> Ananta Kumar
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Position">
-                                    Senior Associate
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-rank">
-                                    B
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Bonus">
-                                    0.4 X
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-SG">
-                                    <?= number_format(66910) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Eval">
-                                    <?= number_format(80293) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Adjustment">
-                                    <i class="fa fa-caret-down text-danger font-size-12" aria-hidden="true"></i><span class="text-danger"> (<?= number_format(13209) ?>)</span>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-finaladjustment">
-                                    <span class="finaladjustment-ml"> <?= number_format(80293) ?> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/ture.png" class="width1"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/save-black.png" class="width2"></span>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Pay">
-                                    <?= number_format(67083) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Payable">
-                                    0.6 X
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-1 col-md-6 col-6"></div>
-                        <div class="alert alert-light col-lg-11 col-md-6 col-6 crd-bonus-notborder">
-                            <div class="row">
-                                <div class="col-lg-2 bonus-user">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/man.png" class="ladyjpg"> Shutra Dhar
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Position">
-                                    Manager
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-rank">
-                                    S
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Bonus">
-                                    2.7 X
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-SG">
-                                    <?= number_format(66910) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Eval">
-                                    <?= number_format(80293) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Adjustment">
-                                    <i class="fa fa-caret-down text-danger font-size-12" aria-hidden="true"></i><span class="text-danger"> (<?= number_format(13209) ?>)</span>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-finaladjustment">
-                                    <span class="finaladjustment-ml"> <?= number_format(80293) ?> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/ture.png" class="width1"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/save-black.png" class="width2"></span>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Pay">
-                                    <?= number_format(67083) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Payable">
-                                    2.5 X
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-1 col-md-6 col-6"></div>
-                        <div class="alert alert-light col-lg-11 col-md-6 col-6 crd-bonus-notborder">
-                            <div class="row">
-                                <div class="col-lg-2 bonus-user">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/man.png" class="ladyjpg"> Kazi Nazrul Islam
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Position">
-                                    Assistant Manager
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-rank">
-                                    SS
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Bonus">
-                                    2.7 X
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-SG">
-                                    <?= number_format(66910) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Eval">
-                                    <?= number_format(80293) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Adjustment">
-                                    <i class="fa fa-caret-down text-danger font-size-12" aria-hidden="true"></i><span class="text-danger"> (<?= number_format(13209) ?>)</span>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-finaladjustment">
-                                    <span class="finaladjustment-ml"> <?= number_format(80293) ?> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/ture.png" class="width1"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/save-black.png" class="width2"></span>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Pay">
-                                    <?= number_format(67083) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Payable">
-                                    2.5 X
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-1 col-md-6 col-6"></div>
-                        <div class="alert alert-light col-lg-11 col-md-6 col-6 crd-bonus-notborder">
-                            <div class="row">
-                                <div class="col-lg-2 bonus-user">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/man.png" class="ladyjpg"> Robindro Nath Thakur
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Position">
-                                    Associate
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-rank">
-                                    C
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Bonus">
-                                    2.7 X
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-SG">
-                                    <?= number_format(66910) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Eval">
-                                    <?= number_format(80293) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Adjustment">
-                                    <i class="fa fa-caret-down text-danger font-size-12" aria-hidden="true"></i><span class="text-danger"> (<?= number_format(13209) ?>)</span>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-finaladjustment">
-                                    <span class="finaladjustment-ml"> <?= number_format(80293) ?> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/ture.png" class="width1"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/save-black.png" class="width2"></span>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Pay">
-                                    <?= number_format(67083) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Payable">
-                                    0.5 X
-                                </div>
-                            </div>
-                        </div>
+
+                    <div class="col-12">
+                        <span class="badge bg-primary">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/24px/Department.png" class="bonus-Department">
+                        </span>
+                        <span class="F4F6F9-Accounts"> Accounts &Taxation</span>
                     </div>
-                </div>
-                <div class="alert cd-F4F6F9">
-                    <div class="row">
-                        <div class="col-lg-1 col-md-6 col-6">
-                            <span class="badge bg-primary">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/24px/Department.png" class="bonus-Department">
-                            </span>
-                            <span class="F4F6F9-Accounts"> Accounts &Taxation</span>
-                        </div>
-                        <div class="alert alert-light col-lg-11 col-md-6 col-6 crd-bonus-notborder">
-                            <div class="row">
-                                <div class="col-lg-2 bonus-user">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/man.png" class="ladyjpg"> Ananta Kumar
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Position">
-                                    Junior Associate
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-rank">
-                                    A
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Bonus">
-                                    1.2 X
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-SG">
-                                    <?= number_format(66910) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Eval">
-                                    <?= number_format(80293) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Adjustment">
-                                    <i class="fa fa-caret-down text-danger font-size-12" aria-hidden="true"></i><span class="text-danger"> (<?= number_format(13209) ?>)</span>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-finaladjustment">
-                                    <span class="finaladjustment-ml"> <?= number_format(80293) ?> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/ture.png" class="width1"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/save-black.png" class="width2"></span>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Pay">
-                                    <?= number_format(67083) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Payable">
-                                    1.01 X
+
+                    <?php
+                    for ($i = 1; $i <= 6; $i++) {
+                    ?>
+
+                        <div class="row pt-20">
+                            <div class="alert alert-light col-lg-12 col-md-6 col-12 crd-bonus-notborder">
+                                <div class="row">
+                                    <div class="col-lg-2 bonus-user">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/man.png" class="ladyjpg"> Ananta Kumar
+                                    </div>
+                                    <div class="col-lg-1 col-md-6 col-6 bonus-Position">
+                                        Junior Associate
+                                    </div>
+                                    <div class="col-lg-1 col-md-6 col-6 bonus-rank">
+                                        A
+                                    </div>
+                                    <div class="col-lg-1 col-md-6 col-6 bonus-Bonus">
+                                        1.2 X
+                                    </div>
+                                    <div class="col-lg-1 col-md-6 col-6 bonus-SG">
+                                        <?= number_format(66910) ?>
+                                    </div>
+                                    <div class="col-lg-1 col-md-6 col-6 bonus-Eval">
+                                        <?= number_format(80293) ?>
+                                    </div>
+                                    <div class="col-lg-1 col-md-6 col-6 bonus-Adjustment">
+                                        <i class="fa fa-caret-down text-danger font-size-12" aria-hidden="true"></i><span class="text-danger"> (<?= number_format(13209) ?>)</span>
+                                    </div>
+                                    <div class="col-lg-1 col-md-6 col-6 bonus-finaladjustment">
+                                        <span class="finaladjustment-ml"> <?= number_format(80293) ?> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/ture.png" class="width1"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/save-black.png" class="width2"></span>
+                                    </div>
+                                    <div class="col-lg-1 col-md-6 col-6 bonus-Pay">
+                                        <?= number_format(67083) ?>
+                                    </div>
+                                    <div class="col-lg-1 col-md-6 col-6 bonus-Payable">
+                                        1.01 X
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-1 col-md-6 col-6"></div>
-                        <div class="alert alert-light col-lg-11 col-md-6 col-6 crd-bonus-notborder">
-                            <div class="row">
-                                <div class="col-lg-2 bonus-user">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/man.png" class="ladyjpg"> Ananta Kumar
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Position">
-                                    Senior Associate
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-rank">
-                                    B
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Bonus">
-                                    0.4 X
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-SG">
-                                    <?= number_format(66910) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Eval">
-                                    <?= number_format(80293) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Adjustment">
-                                    <i class="fa fa-caret-down text-danger font-size-12" aria-hidden="true"></i><span class="text-danger"> (<?= number_format(13209) ?>)</span>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-finaladjustment">
-                                    <span class="finaladjustment-ml"> <?= number_format(80293) ?> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/ture.png" class="width1"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/save-black.png" class="width2"></span>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Pay">
-                                    <?= number_format(67083) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Payable">
-                                    0.6 X
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-1 col-md-6 col-6"></div>
-                        <div class="alert alert-light col-lg-11 col-md-6 col-6 crd-bonus-notborder">
-                            <div class="row">
-                                <div class="col-lg-2 bonus-user">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/man.png" class="ladyjpg"> Shutra Dhar
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Position">
-                                    Manager
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-rank">
-                                    S
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Bonus">
-                                    2.7 X
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-SG">
-                                    <?= number_format(66910) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Eval">
-                                    <?= number_format(80293) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Adjustment">
-                                    <i class="fa fa-caret-down text-danger font-size-12" aria-hidden="true"></i><span class="text-danger"> (<?= number_format(13209) ?>)</span>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-finaladjustment">
-                                    <span class="finaladjustment-ml"> <?= number_format(80293) ?> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/ture.png" class="width1"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/save-black.png" class="width2"></span>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Pay">
-                                    <?= number_format(67083) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Payable">
-                                    2.5 X
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-1 col-md-6 col-6"></div>
-                        <div class="alert alert-light col-lg-11 col-md-6 col-6 crd-bonus-notborder">
-                            <div class="row">
-                                <div class="col-lg-2 bonus-user">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/man.png" class="ladyjpg"> Kazi Nazrul Islam
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Position">
-                                    Assistant Manager
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-rank">
-                                    SS
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Bonus">
-                                    2.7 X
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-SG">
-                                    <?= number_format(66910) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Eval">
-                                    <?= number_format(80293) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Adjustment">
-                                    <i class="fa fa-caret-down text-danger font-size-12" aria-hidden="true"></i><span class="text-danger"> (<?= number_format(13209) ?>)</span>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-finaladjustment">
-                                    <span class="finaladjustment-ml"> <?= number_format(80293) ?> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/ture.png" class="width1"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/save-black.png" class="width2"></span>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Pay">
-                                    <?= number_format(67083) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Payable">
-                                    2.5 X
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-1 col-md-6 col-6"></div>
-                        <div class="alert alert-light col-lg-11 col-md-6 col-6 crd-bonus-notborder">
-                            <div class="row">
-                                <div class="col-lg-2 bonus-user">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/man.png" class="ladyjpg"> Robindro Nath Thakur
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Position">
-                                    Associate
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-rank">
-                                    C
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Bonus">
-                                    2.7 X
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-SG">
-                                    <?= number_format(66910) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Eval">
-                                    <?= number_format(80293) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Adjustment">
-                                    <i class="fa fa-caret-down text-danger font-size-12" aria-hidden="true"></i><span class="text-danger"> (<?= number_format(13209) ?>)</span>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-finaladjustment">
-                                    <span class="finaladjustment-ml"> <?= number_format(80293) ?> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/ture.png" class="width1"> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/save-black.png" class="width2"></span>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Pay">
-                                    <?= number_format(67083) ?>
-                                </div>
-                                <div class="col-lg-1 col-md-6 col-6 bonus-Payable">
-                                    0.5 X
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
         </div>
     </div>
+</div>
