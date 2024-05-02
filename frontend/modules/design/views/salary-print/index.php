@@ -14,25 +14,32 @@ $this->title = 'Generate Report';
                         Reporting Center
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6 col-6 text-end">
+                <div class="col-lg-2 col-md-6 col-6" style="margin-top:-15px;">
                     <div class="col-12">
-                        <span class="badge filedownloadPDF">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/downloadPDF.png" class="imagesdownloadPDF"> Download PDF
-                        </span>
+                        <div class="alert-printerline">
+                            <span class="printer-line"> Generate Report <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/printer.png" class="imagespointer"></span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-6 col-6">
                     <div class="col-12">
-                        <span class="badge filedownloadPDF">
+                        <div class="filedownloadPDF">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/downloadPDF.png" class="imagesdownloadPDF"> Download PDF
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-6">
+                    <div class="col-12">
+                        <div class="filedownloadPDF">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/downloadXL.png" class="imagesdownloadPDF"> Download PDF
-                        </span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-1 col-md-6 col-6">
-                    <div class="col-12">
-                        <span class="badge filedownloadPDF">
+                    <div class="col-12" style="width: 60px;">
+                        <div class="filedownloadPDF">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/printer.png" class="imagesdownloadPDF"> Print
-                        </span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-1 col-md-6 col-6">
@@ -51,12 +58,103 @@ $this->title = 'Generate Report';
                         <option value="3">Management</option>
                     </select>
                 </div>
-                <div class="col-2 dashboard-filter text-end">
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterPlus.png" class="picture-FilterPlus-bonus"> <strong class="font-size-13">More</strong> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.png" class="bonus-point">
+                <div class="col-2">
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterPlus.png" class="picture-FilterPlus-bonus">
+                    <span class="font-size-10 font-b">More</span> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.png" class="bonus-point">
                 </div>
             </div>
         </div>
-        <div class="col-12 alert alert-secondarydashboard">
+        <table class="table mt-10">
+            <thead class="table-secondary">
+                <tr class="Employee-dashborad">
+                    <td>title</td>
+                    <td>Department</td>
+                    <td>minimum</td>
+                    <td>low</td>
+                    <td>average</td>
+                    <td>high</td>
+                    <td>max</td>
+                    <td>achievement(฿)</td>
+                    <td>total Adjustment(฿)</td>
+                    <td>new salary(฿)</td>
+                </tr>
+            </thead>
+
+            <?php
+            for ($i = 1; $i <= 6; $i++) {
+            ?>
+
+                <tbody class="table-light mt-10">
+                    <tr>
+                        <td>
+                            <div class="name0dashboard"> Manager</div>
+                        </td>
+                        <td>
+                            <div class="col-12 title0dashboard">
+                                marketing
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-12 department0dashboard">
+                                <?= number_format(20000) ?>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-12 department0dashboard border-left">
+                                <?= number_format(20000) ?>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-12 department0dashboard">
+                                <?= number_format(2000) ?>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-12 department0dashboard">
+                                <?= number_format(2000) ?>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-12 department0dashboard border-left">
+                                <?= number_format(19798) ?>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-12 department0dashboard border-left">
+                                <?= number_format(19798) ?>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-12 Adjustment0dashboard border-left">
+                                (202)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-12 department0dashboard border-left">
+                                <?= number_format(19798) ?>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            <?php
+            }
+            ?>
+        </table>
+
+        <div class="col-lg-5 col-md-6 col-12">
+            <div class="col-12">
+                <?php
+                for ($i = 1; $i <= 5; $i++) {
+                ?>
+
+
+
+                <?php
+                }
+                ?>
+            </div>
+        </div>
+        <!-- <div class="col-12 alert alert-secondarydashboard">
             <div class="row">
                 <div class="col-lg-2 col-md-6 col-6 Employee-dashborad">
                     Title
@@ -92,8 +190,8 @@ $this->title = 'Generate Report';
                     New Salary (฿)
                 </div>
             </div>
-        </div>
-        <div class="col-12 alert alert-lightdashboard">
+        </div> -->
+        <!-- <div class="col-12 alert alert-lightdashboard">
             <div class="row">
                 <div class="col-lg-2 col-md-6 col-6 title0dashboard">
                     Manager
@@ -129,8 +227,8 @@ $this->title = 'Generate Report';
                     <?= number_format(19798) ?>
                 </div>
             </div>
-        </div>
-        <div class="col-12 alert alert-lightdashboard">
+        </div> -->
+        <!-- <div class="col-12 alert alert-lightdashboard">
             <div class="row">
                 <div class="col-lg-2 col-md-6 col-6 title0dashboard">
                     Assistant Manager
@@ -166,8 +264,8 @@ $this->title = 'Generate Report';
                     <?= number_format(11551) ?>
                 </div>
             </div>
-        </div>
-        <div class="col-12 alert alert-lightdashboard">
+        </div> -->
+        <!-- <div class="col-12 alert alert-lightdashboard">
             <div class="row">
                 <div class="col-lg-2 col-md-6 col-6 title0dashboard">
                     Junior Executive
@@ -203,8 +301,8 @@ $this->title = 'Generate Report';
                     <?= number_format(6095) ?>
                 </div>
             </div>
-        </div>
-        <div class="col-12 alert alert-lightdashboard">
+        </div> -->
+        <!-- <div class="col-12 alert alert-lightdashboard">
             <div class="row">
                 <div class="col-lg-2 col-md-6 col-6 title0dashboard">
                     Senior Musician
@@ -240,6 +338,6 @@ $this->title = 'Generate Report';
                     <?= number_format(42093) ?>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>

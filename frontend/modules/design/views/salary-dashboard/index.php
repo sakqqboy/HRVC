@@ -18,7 +18,7 @@ $this->title = 'Salary Dashboard';
             </div>
             <div class="col-lg-8 col-md-6 col-12">
                 <div class="row">
-                    <div class="col-lg-2 col-md-6 col-3 pt-20">
+                    <div class="col-lg-2 col-md-6 col-3 pt-15">
                         <img src="<?= Yii::$app->homeUrl ?>/images/icons/Dark/48px/Currency.png" class="pictureCurrency_print"><span class="font-size-11">Currency</span>
                     </div>
                     <div class="col-lg-2 col-md-6 col-3">
@@ -30,7 +30,7 @@ $this->title = 'Salary Dashboard';
                         </select>
                     </div>
                     <div class="col-lg-1 col-md-6 col-3">
-                        <button class="form-control Rank-wornning-blue" type="button"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Wornning-blue.png" class="wornningblue1"> Rank</button>
+                        <button class="form-control Rank-wornning-blue" type="button"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Wornning-blue.png" class="wornningblue1">&nbsp; Rank</button>
                     </div>
                     <div class="col-lg-3 col-md-6 col-3">
                         <select class="form-select select-accountteam" aria-label="Default select example">
@@ -187,10 +187,9 @@ $this->title = 'Salary Dashboard';
                 </div>
             </div>
         </div>
-
-        <table class="table">
+        <table class="table mt-10">
             <thead class="table-secondary">
-                <tr>
+                <tr class="Employee-dashborad">
                     <td>Employees</td>
                     <td>Title</td>
                     <td>Department</td>
@@ -199,112 +198,68 @@ $this->title = 'Salary Dashboard';
                     <td>achievement (฿)</td>
                     <td>Adjustment (฿)</td>
                     <td>New Salary (฿)</td>
+                    <td>Ratio</td>
+                    <td>Action</td>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
 
-                </tr>
-            </tbody>
+            <?php
+            for ($i = 1; $i <= 6; $i++) {
+            ?>
+
+                <tbody class="table-light mt-10">
+                    <tr>
+                        <td>
+                            <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="user0dashboard"> <span class="name0dashboard"> Charles Bhattacharjya</span>
+                        </td>
+                        <td>
+                            <div class="col-12 title0dashboard">
+                                Junior Executive
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-12 department0dashboard">
+                                Accounts
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-12 department0dashboard">
+                                A
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-12 department0dashboard">
+                                <?= number_format(20000) ?>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-12 department0dashboard">
+                                <?= number_format(2000) ?>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-12 Adjustment0dashboard">
+                                (202)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-12 department0dashboard">
+                                <?= number_format(19798) ?>
+                            </div>
+                        </td>
+                        <td>
+                            <div id="progress1">
+                                <div data-num="35" class="progress-item1" data-value="35%" style="background: conic-gradient(rgb(41, 140, 233) calc(35%), rgb(219, 239, 247) 0deg);">35%</div>
+                            </div>
+                        </td>
+                        <td>
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/userfix.png" class="images-userfix">
+                        </td>
+                    </tr>
+                </tbody>
+            <?php
+            }
+            ?>
         </table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <!-- <div class="col-12 alert-secondarydashboard">
-            <div class="row">
-                <div class="col-lg-2 col-md-6 col-2 Employee-dashborad">
-                    Employee
-                </div>
-                <div class="col-lg-2 col-md-6 col-2 Employee-dashborad">
-                    Title
-                </div>
-                <div class="col-lg-1 col-md-6 col-1 Employee-dashborad">
-                    Department
-                </div>
-                <div class="col-lg-1 col-md-6 col-1 Employee-dashborad">
-                    rank
-                </div>
-                <div class="col-lg-1 col-md-6 col-1 Employee-dashborad">
-                    Salary(฿)
-                </div>
-                <div class="col-lg-1 col-md-6 col-1 Employee-dashborad">
-                    achievement (฿)
-                </div>
-                <div class="col-lg-1 col-md-6 col-1 Employee-dashborad">
-                    Adjustment (฿)
-                </div>
-                <div class="col-lg-1 col-md-6 col-1 Employee-dashborad">
-                    New Salary (฿)
-                </div>
-                <div class="col-lg-1 col-md-6 col-1 Employee-dashborad">
-                    Ratio
-                </div>
-                <div class="col-lg-1 col-md-6 col-1 Employee-dashborad">
-                    Action
-                </div>
-            </div>
-        </div> -->
-
-        <!-- <?php
-                for ($i = 1; $i <= 5; $i++) {
-                ?>
-
-            <div class="col-12 alert-lightdashboard">
-                <div class="row">
-                    <div class="col-lg-2 col-md-6 col-2">
-                        <img src="<?= Yii::$app->homeUrl ?>image/employee3.png" class="user0dashboard"> <span class="name0dashboard"> Charles Bhattacharjya</span>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-2 title0dashboard">
-                        Manager
-                    </div>
-                    <div class="col-lg-1 col-md-6 col-1 department0dashboard">
-                        Accounts
-                    </div>
-                    <div class="col-lg-1 col-md-6 col-1 department0dashboard text-center">
-                        A
-                    </div>
-                    <div class="col-lg-1 col-md-6 col-1 department0dashboard">
-                        <?= number_format(20000) ?>
-                    </div>
-                    <div class="col-lg-1 col-md-6 col-1 department0dashboard">
-                        <?= number_format(2000) ?>
-                    </div>
-                    <div class="col-lg-1 col-md-6 col-1 Adjustment0dashboard">
-                        (202)
-                    </div>
-                    <div class="col-lg-1 col-md-6 col-1 department0dashboard">
-                        <?= number_format(19798) ?>
-                    </div>
-                    <div class="col-lg-1 col-md-6 col-1">
-                        <div id="progress1">
-                            <div data-num="35" class="progress-item1" data-value="35%" style="background: conic-gradient(rgb(41, 140, 233) calc(35%), rgb(219, 239, 247) 0deg);">35%</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-1 col-md-6 col-1 text-center">
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/userfix.png" class="images-userfix">
-                    </div>
-                </div>
-            </div>
-
-        <?php
-                }
-        ?> -->
-
     </div>
 </div>

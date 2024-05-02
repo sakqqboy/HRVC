@@ -178,7 +178,6 @@ $this->title = 'Salary Edit';
                         <?php
                         for ($i = 1; $i <= 10; $i++) {
                         ?>
-
                             <div class="col-lg-1 col-md-6 col-2 set-mrg-salaryedit1">
                                 <div class="col-1 header-salaryedit">
                                     F
@@ -198,7 +197,6 @@ $this->title = 'Salary Edit';
                         <?php
                         }
                         ?>
-
                     </div>
                 </div>
                 <div class="col-12 text-end mt-10">
