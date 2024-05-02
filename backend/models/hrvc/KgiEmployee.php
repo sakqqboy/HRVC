@@ -115,4 +115,12 @@ class KgiEmployee extends \backend\models\hrvc\master\KgiEmployeeMaster
         }
         return $date;
     }
+    public static function countKgiFromEmployee($employeeId)
+    {
+        $kgiEmployee = KgiEmployee::find()
+            ->where(["employeeId" => $employeeId, "status" => [1, 2, 4]])
+            ->asArray()
+            ->all();
+        return count($kgiEmployee);
+    }
 }

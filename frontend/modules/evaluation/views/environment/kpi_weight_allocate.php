@@ -1,10 +1,20 @@
 <?php
 
 use common\models\ModelMaster;
+use yii\bootstrap5\ActiveForm;
 
 $this->title = 'Weight Allocation';
 ?>
 <div class="col-12 mt-70 environment pt-10 pr-10 pl-20">
+	<?php
+	$form = ActiveForm::begin([
+		'id' => 'save-kpi-weight',
+		'method' => 'post',
+		'options' => [
+			'enctype' => 'multipart/form-data',
+		],
+		'action' => Yii::$app->homeUrl . 'evaluation/environment/save-kpi-weight-allocate'
+	]); ?>
 	<div class="row">
 		<div class="col-2 pr-0 pl-5">
 			<?= $this->render('menu_left', [
@@ -18,281 +28,191 @@ $this->title = 'Weight Allocation';
 			<div class="bg-white pmi_bakgru">
 				<div class="col-12">
 					<div class="row">
-						<div class="col-6 FrameEvaluation">
-							PIM Weight Allocation
+						<div class="col-4 FrameEvaluation">
+							Key Performance Indicator
 						</div>
-						<div class="col-6 text-end">
-							<a class="btn btn-primary font-size-12 pt-3 pb-3" style="letter-spacing: 0.5px;">
-								<i class="fa fa-floppy-o mr-3" aria-hidden="true"></i>
-								SAVE
-							</a>
+						<div class="col-8 text-end">
+							<div class="row">
+								<div class="col-6 text-start">
+									<a class="btn btn-primary font-size-12 pt-3 pb-3" style="letter-spacing: 0.5px;" href="javascript:checkKpiPercent()">
+										<i class="fa fa-floppy-o mr-3" aria-hidden="true"></i>
+										APPLY SAVE
+									</a>
+									<input type="hidden" id="termId" value="<?= $termId ?>" name="termId">
+								</div>
+								<div class="col-6 text-end">
+									<a class="btn btn-info font-size-12 pt-3 pb-3" style="letter-spacing: 0.5px;color:white;">
+										<i class="fa fa-th-large mr-3" aria-hidden="true"></i>
+										KPI Dashboard
+									</a>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="row mt-5">
-					<div class="col-lg-3 col-md-6 col-12" style="margin-top: -16px;">
-						<div class="col-12 Evalua_tor3 mt-25">
-							<?php
-							if (isset($employees) && count($employees) > 0) {
-								foreach ($employees as $titleName => $employeeTitle) :
-							?>
-									<div class="col-12 pt-10 mb-5">
-										<input type="checkbox" id="check-title-<?= $titleName ?>">
-										<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Rank-1.png" style="width:15px;">
-										<span class="font-b font-size-13" style="margin-left: -5px;">
-											<?= $titleName ?>
-										</span>
-									</div>
-									<?php
-									if (isset($employeeTitle) && count($employeeTitle) > 0) {
-										foreach ($employeeTitle as $employeeId => $employee) :
-									?>
-											<div class="col-12 font-size-11 pl-15 pr-1 pb-3 mb-8 border-bottom" id="select-employee-<?= $employeeId ?>">
-												<input type="checkbox" class="checkbox-sm mr-3" style="width: 12px;height:12px;">
-												<img src="<?= Yii::$app->homeUrl ?><?= $employee['picture'] ?>" class="Log_name" style="margin-top:-5px;">
-												<?= $employee["firstName"] ?> <?= $employee["sureName"] ?>
-											</div>
-							<?php
-										endforeach;
-									}
-								endforeach;
-							}
-							?>
+				<div class="row pt-30">
+					<div class="col-4">
+						<div class="col-12">
+							<span class="text-danger">*</span><span class="font-size-11">Achievement Target Setup</span>
+						</div>
+						<div class="col-12 Want-Level">
+							Do You Want Level 3 As Default Target ? &nbsp;<input type="radio" name="fruit"><span class="TYPEYES"> YES</span> <span class="pl-3"></span><input type="radio" name="fruit"><span class="TYPEYES"> NO</span>
 						</div>
 					</div>
-					<div class="col-lg-1 col-md-6 col-12 pr-0 pl-0">
-						<div class="Evalua_tor1 pb-30 mt-10 pr-5 pl-5">
-							<div class="col-12 text_PIM">
-								PIM
-							</div>
-							<div class="col-12 mt-10">
-								<div id="progress1">
-									<div data-num="85" class="progress-item1 " data-value="85%" style="background: conic-gradient(rgb(41, 140, 233) calc(35%), rgb(219, 239, 247) 0deg);width: 40px;height:40px;">85%</div>
+					<div class="col-8 pt-5">
+						<div class="row">
+							<div class="col-10 pr-2">
+								<div class="col-12 text-end font-size-10 pr-2">
+									Allocate percentage to all the selected
+								</div>
+								<div class="col-12 text-end font-size-10 pr-2">
+									KPI contents to continue
 								</div>
 							</div>
-							<div class="white-kfi3  pt-20 pr-3 pl-3">
-								<div class="col-12 text-center">
-									<input class="form-check-input checkbox-md" type="checkbox" value="" id="check-kfi" onchange="javascript:showEvaluationDetail('kfi')" checked>
-								</div>
-								<div class="col-12">
-									<div class="bg-chartpurple">
-										<img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/Charts.png" class="icons-KGI">
-										<div class="font-size-10 text-white font-b"> KFI</div>
-										<div class="font-size-10 text-white font-b"><?= $pimTerm["kfi"] ?>%</div>
+							<div class="col-2">
+								<div class="row">
+									<div class="col-7 pr-0 pl-10 text-center">
+										<div class="procresscircle_deg pr-0 pl-0 pt-8 text-center">
+											<span id="total-weight">
+												<?= $totalPercent ?>
+											</span>
+											%
+										</div>
+									</div>
+									<div class="col-5 text-start pr-0 pl-0">
+										<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Wornning-blue.png" class="wb-progress">
 									</div>
 								</div>
-								<div class="col-12 mt-20 text-center">
-									<input class="form-check-input checkbox-md" type="checkbox" value="" id="check-kgi" onchange="javascript:showEvaluationDetail('kgi')">
-								</div>
-								<div class="col-12">
-									<div class="bg-chartwarn">
-										<img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/KGI.png" class="icons-KGI">
-										<div class="font-size-10 text-white font-b"> KGI</div>
-										<div class="font-size-10 text-white font-b"><?= $pimTerm["kgi"] ?>%</div>
-									</div>
-								</div>
-								<div class="col-12 mt-20 text-center">
-									<input class="form-check-input checkbox-md" type="checkbox" value="" id="check-kpi" onchange="javascript:showEvaluationDetail('kpi')">
-								</div>
-								<div class="col-12">
-									<div class="bg-cha">
-										<img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/KPI.png" class="icons-KGI">
-										<div class="font-size-10 text-white font-b"> KPI</div>
-										<div class="font-size-10 text-white font-b"><?= $pimTerm["kpi"] ?>%</div>
-									</div>
-								</div>
+								<input type="hidden" id="sumPercent" value="<?= $totalPercent ?>">
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-8 col-md-6 col-12">
-						<div class="Evalua_tor2 silly_scrollbar pr-10 pl-10 pt-10 mt-10">
-							<div class="silly_evaluator mb-20" id="kfi">
-								<div class="row pl-15 pr-15 pt-10">
-									<div class="col-7 flagkey">
-										<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/KPI.png" class="icons-KGI2"> Key Financial Indicator
-										<span>
-											<a href="<?= Yii::$app->homeUrl ?>evaluation/environmen/kfi-weight-allocate/<?= ModelMaster::encodeParams(['termId' => $termId]) ?>" class="font-size-10 btn btn-primary mr-10 ml-10 pt-3 pb-3 pr-5 pl-5">
-												<i class="fa fa-plus-circle mr-3" aria-hidden="true"></i>
-												ADD
-											</a>
-											<a class="font-size-10 btn btn-danger pt-3 pb-3 pr-5 pl-5">
-												<i class="fa fa-pencil-square-o mr-3" aria-hidden="true"></i>
-												EDIT
-											</a>
-										</span>
-									</div>
-									<div class="col-5 text-end">
-										<span class="flagkey mr-10">
-											Participants
-										</span>
-										<span class="badge rounded-pill bg-gray pt-2 pb-2">
-											<ul class="try-cricle">
-												<li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
-												<li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
-												<a href="" class="none">
-													<li class="number_user"> 2 </li>
-												</a>
-											</ul>
-										</span>
-									</div>
-									<hr class="mt-5 mb-0">
-								</div>
-								<div class="row pl-15 pr-15 pb-20 mt-5 pt-0" id="kfi-eva">
+				</div>
+				<div class="row">
+					<div class="col-12 mt-10">
+						<?php
+						if (isset($kpiWeight) && count($kpiWeight) > 0) {
+						?>
+							<table class="table">
+								<thead class="text-secondary">
+									<tr class="font-size-10 text-center">
+										<th></th>
+										<th>Kpi</th>
+										<th>Target</th>
+										<th>Level 1</th>
+										<th>Level 2</th>
+										<th>Level 3</th>
+										<th>Level 4</th>
+										<th>Weight</th>
+									</tr>
+								</thead>
+								<tbody>
 									<?php
-									if (isset($masterKfi) && count($masterKfi) > 0) {
-										foreach ($masterKfi as $kfi) :
+									$i = 0;
+									foreach ($kpiWeight as $kpiId => $kpi) :
+										if ($kpi["status"] == 1) {
+											$checked = 1;
+										} else {
+											$checked = 0;
+										}
 									?>
-											<div class="col-2">
-												<div class="card font-size-12 mt-5 mb-5 pt-0 pr-0 pl-0" style="border-color:#E2E2E2;">
-													<div class="fonTotal text-center  pt-3 pb-3"><?= $kfi["target"] ?></div>
-													<div class="col-12 text-center ">
-														<span class="badge bg-lighttotal">
-															<?= number_format($kfi["target"] / 1000) ?>k
-														</span>
+										<input type="hidden" name="kpiIds[]" value="<?= $kpiId ?>">
+										<tr style="height: 10px;"></tr>
+										<tr>
+											<td style="width:50px;" class="pr-10 pl-10">
+												<label class="checkbox style-c">
+													<input type="checkbox" <?= $checked == 1 ? 'checked' : '' ?> id="kpi-check-<?= $kpiId ?>" name="checkKpi[<?= $kpiId ?>]" onchange="javascript:calculateKpiPercent(<?= $kpiId ?>,2)" value="<?= $kpiId ?>">
+													<div class="checkbox__checkmark"></div>
+													<div class="checkbox__body"></div>
+												</label>
+											</td>
+											<td style="background-color: #edeaea;" class="font-size-10 text-secondary">
+												<?= $kpi['kpiName'] ?>
+											</td>
+											<td style="background-color: #edeaea;">
+												<div class="col-12 border-right pr-12">
+													<div class="col-12 text-secondary font-size-10 text-center">
+														Target
 													</div>
-													<div class="col-12 text-center pt-5 pb-5 Blueformat">
-														<?= number_format($kfi["weight"]) ?>%
-													</div>
-												</div>
-											</div>
-										<?php
-										endforeach;
-									} else { ?>
-										<div class="col-12 text-center font-size-13 mt-10">
-											Please click "ADD" to set KFI
-										</div>
-									<?php
-									}
-									?>
-								</div>
-							</div>
-							<div class="silly_evaluator mb-20" id="kgi" style="display:none;">
-								<div class="row pl-15 pr-15 pt-10">
-									<div class="col-7 flagkey">
-										<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/KGI.png" class="icons-KGI2"> Key Goal Indicator
-										<span>
-											<a href="<?= Yii::$app->homeUrl ?>evaluation/environmen/kgi-weight-allocate/<?= ModelMaster::encodeParams(['termId' => $termId]) ?>" class="font-size-10 btn btn-primary mr-10 ml-10 pt-3 pb-3 pr-5 pl-5">
-												<i class="fa fa-plus-circle mr-3" aria-hidden="true"></i>
-												ADD
-											</a>
-											<a class="font-size-10 btn btn-danger pt-3 pb-3 pr-3 pl-3">
-												<i class="fa fa-pencil-square-o mr-3" aria-hidden="true"></i>
-												EDIT</a>
-										</span>
-									</div>
-									<div class="col-5 text-end">
-										<span class="flagkey mr-10 ">
-											Participants
-										</span>
-										<span class="badge rounded-pill bg-gray pt-2 pb-2">
-											<ul class="try-cricle">
-												<li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
-												<li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
-												<a href="" class="">
-													<li class="number_user"> 99 </li>
-												</a>
-											</ul>
-										</span>
-									</div>
-									<hr class="mt-5 mb-0">
-								</div>
-								<div class="row pl-15 pr-15 pb-20 mt-5 pt-0" id="kgi-eva">
-									<?php
-									if (isset($masterKgi) && count($masterKgi) > 0) {
-										foreach ($masterKgi as $kgi) :
-									?>
-											<div class="col-2">
-												<div class="card font-size-12 mt-5 mb-5 pt-0 pr-0 pl-0" style="border-color:#E2E2E2;">
-													<div class="fonTotal text-center  pt-3 pb-3"><?= $kgi["kgiName"] ?></div>
-													<div class="col-12 text-center ">
-														<span class="badge bg-lighttotal">
-															<?= number_format($kgi["target"] / 1000) ?>k
-														</span>
-													</div>
-													<div class="col-12 text-center pt-5 pb-5 Blueformat">
-														<?= number_format($kgi["weight"]) ?>%
+													<div class="col-12 nm_berformat text-secondary mt-5">
+														<?= number_format($kpi['target']) ?>
 													</div>
 												</div>
-											</div>
-										<?php
-										endforeach;
-									} else { ?>
-										<div class="col-12 text-center font-size-13 mt-10">
-											Please click "ADD" to set KGI
-										</div>
-									<?php
-									}
-									?>
-								</div>
-							</div>
-							<div class="silly_evaluator mb-20" id="kpi" style="display:none;">
-								<div class="row pl-15 pr-15 pt-10">
-									<div class="col-7 flagkey">
-										<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/KPI.png" class="icons-KGI2"> Key Performance Indicator
-										<span>
-											<a href="<?= Yii::$app->homeUrl ?>evaluation/environmen/kpi-weight-allocate/<?= ModelMaster::encodeParams(['termId' => $termId]) ?>" class="font-size-10 btn btn-primary mr-10 ml-10 pt-3 pb-3 pr-5 pl-5">
-												<i class="fa fa-plus-circle mr-3" aria-hidden="true"></i>
-												ADD
-											</a>
-											<a class="font-size-10 btn btn-danger pt-3 pb-3 pr-5 pl-5">
-												<i class="fa fa-pencil-square-o mr-3" aria-hidden="true"></i>
-												EDIT</a>
-										</span>
-									</div>
-									<div class="col-5 text-end">
-										<span class="flagkey mr-10 ">
-											Participants
-										</span>
-										<span class="badge rounded-pill bg-gray pt-2 pb-2">
-											<ul class="try-cricle">
-												<li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
-												<li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
-												<a href="" class="none">
-													<li class="number_user"> 2 </li>
-												</a>
-											</ul>
-										</span>
-									</div>
-									<hr class="mt-5 mb-0">
-								</div>
-								<div class="row pl-15 pr-15 pb-20 mt-5 pt-0" id="kpi-eva">
-									<?php
-									if (isset($masterKpi) && count($masterKpi) > 0) {
-										foreach ($masterKpi as $kpi) :
-									?>
-											<div class="col-2">
-												<div class="card font-size-12 mt-5 mb-5 pt-0 pr-0 pl-0" style="border-color:#E2E2E2;">
-													<div class="fonTotal text-center  pt-3 pb-3"><?= $kpi["kpiName"] ?></div>
-													<div class="col-12 text-center ">
-														<span class="badge bg-lighttotal">
-															<?= number_format($kpi["target"] / 1000) ?>k
-														</span>
-													</div>
-													<div class="col-12 text-center pt-5 pb-5 Blueformat">
-														<?= number_format($kpi["weight"]) ?>%
+											</td>
+											<td style="background-color: #edeaea;">
+												<div class="pr-10">
+													<label class="checkbox style-f">
+														<input type="checkbox" />
+														<div class="checkbox__checkmark"></div>
+														<div class="checkbox__body"></div>
+													</label>
+													<div class="input-group" style="margin-top: -16px;margin-left:5px;">
+														<!-- <span class=" input-group-text Level-txt" id="inputGroup-sizing-sm">Level 1</span> -->
+														<input type="text" class="form-control Level-txtinput text-end" name="level1[<?= $kpiId ?>]" value="<?= $kpi['level1'] ?>">
 													</div>
 												</div>
-											</div>
-										<?php
-										endforeach;
-									} else { ?>
-										<div class="col-12 text-center font-size-13 mt-10">
-											Please click "ADD" to set KPI
-										</div>
+											</td>
+											<td style="background-color: #edeaea;">
+												<div class="pr-15 pl-15">
+													<label class="checkbox style-f">
+														<input type="checkbox" />
+														<div class="checkbox__checkmark"></div>
+														<div class="checkbox__body"></div>
+													</label>
+													<div class="input-group" style="margin-top: -16px;margin-left:5px;">
+														<!-- <span class="input-group-text Level-txt" id="inputGroup-sizing-sm">Level 2</span> -->
+														<input type="text" class="form-control Level-txtinput text-end" name="level2[<?= $kpiId ?>]" value="<?= $kpi['level2'] ?>">
+													</div>
+												</div>
+											</td>
+											<td style="background-color: #edeaea;">
+												<div class="pr-10">
+													<label class="checkbox style-f">
+														<input type="checkbox" />
+														<div class="checkbox__checkmark"></div>
+														<div class="checkbox__body"></div>
+													</label>
+													<div class="input-group" style="margin-top: -16px;margin-left:5px;">
+														<!-- <span class="input-group-text Level-txt" id="inputGroup-sizing-sm">Level 3</span> -->
+														<input type="text" class="form-control Level-txtinput text-end" name="level3[<?= $kpiId ?>]" value="<?= $kpi['level3'] ?>">
+													</div>
+												</div>
+											</td>
+											<td style="background-color: #edeaea;">
+												<div class="col-12 pr-10 border-right">
+													<label class="checkbox style-f">
+														<input type="checkbox" />
+														<div class="checkbox__checkmark"></div>
+														<div class="checkbox__body"></div>
+													</label>
+													<div class="input-group" style="margin-top: -16px;margin-left:5px;">
+														<!-- <span class="input-group-text Level-txt" id="inputGroup-sizing-sm">Level 4</span> -->
+														<input type="text" class="form-control Level-txtinput text-end" name="level4[<?= $kpiId ?>]" value="<?= $kpi['level4'] ?>">
+													</div>
+												</div>
+											</td>
+											<td style="background-color: #edeaea;">
+												<div class="col-12 pt-5">
+													<!-- <img src="<?php // Yii::$app->homeUrl 
+																?>images/icons/Dark/48px/setting(Round).png" class="setting_png"> Weight -->
+													<input class="weight_round text-end pr-5 pl-5" type="text" value="<?= $kpi['weight'] ?>" id="weight-kpi-<?= $kpiId ?>" name="weight-kpi[<?= $kpiId ?>]" onkeyup="javascript:calculateKpiPercent(<?= $kpiId ?>,1)">
+													<span class="font-size-10">%</span>
+												</div>
+											</td>
+										</tr>
 									<?php
-									}
-									?>
-									<!-- <div class="col-12" style="position: static;">
-										<div class="col-12 holder"></div>
-									</div> -->
-								</div>
+										$i++;
+									endforeach; ?>
 
-							</div>
-						</div>
+								</tbody>
+							</table>
+						<?php
+						}
+						?>
 					</div>
-
 				</div>
 			</div>
 		</div>
 	</div>
+	<?php ActiveForm::end(); ?>
 </div>

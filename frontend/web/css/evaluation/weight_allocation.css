@@ -389,17 +389,16 @@
     border: 1px #1DA5DF solid;
     border-radius: 3px;
     font-size: 9px;
-    padding-top: 1px;
-    padding-bottom: 1px;
-    margin-top: -15px;
-    margin-left: 50px;
-    width: 3rem;
+    height: 23px;
+    width: 80%;
+    /* margin-top: -15px;
+    margin-left: 50px; */
+    /* width: 3rem; */
 }
 
 .wb-progress {
     width: 13px;
-    margin-top: -68px;
-    margin-left: 20px;
+    /* margin-top: -68px;*/
 }
 
 input[type=radio] {
@@ -557,32 +556,21 @@ input[type=radio]:checked {
 }
 
 .procresscircle_deg {
-    display: flex;
+    /* display: flex; */
     width: 38px;
     height: 38px;
     border: 4px #2580D3 solid;
     border-radius: 50%;
     font-size: 9px;
-    padding-top: 7px;
+    /* padding-top: 7px;
     padding-left: 4px;
-    margin-left: -21px;
+    margin-left: -21px;*/
     margin-top: -5px;
 }
 
 .TYPEYES {
     font-size: 10px;
 }
-
-.all_allocate-show-weight {
-    font-size: 9px;
-}
-
 .table-striped {
     background-color: #f4f4f4;
-}
-
-.percentage {
-    font-size: 8px;
-    letter-spacing: -0.3px;
-    text-align: end;
 }

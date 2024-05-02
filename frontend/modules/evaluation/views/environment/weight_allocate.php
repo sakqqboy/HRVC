@@ -35,12 +35,18 @@ $this->title = 'Weight Allocation';
 				<div class="row">
 					<div class="col-lg-1 col-md-6 col-12 pr-0 pl-0">
 						<div class="Evalua_tor1 pb-30 mt-10 pr-5 pl-5">
+							<?php
+							$totalPercent = $pimTerm["kfi"] + $pimTerm["kgi"] + $pimTerm["kpi"];
+							?>
 							<div class="col-12 text_PIM">
 								PIM
 							</div>
+
 							<div class="col-12 mt-10">
 								<div id="progress1">
-									<div data-num="85" class="progress-item1 " data-value="85%" style="background: conic-gradient(rgb(41, 140, 233) calc(35%), rgb(219, 239, 247) 0deg);width: 40px;height:40px;">85%</div>
+									<div data-num="<?= $totalPercent ?>" id="data-total-percent" class="progress-item1" data-value="85%" style="background: conic-gradient(rgb(41, 140, 233) calc(35%), rgb(219, 239, 247) 0deg);width: 40px;height:40px;">
+										<span id="totalPercent"><?= $totalPercent ?>%</span>
+									</div>
 								</div>
 							</div>
 							<div class="white-kfi3  pt-20 pr-3 pl-3">
@@ -48,32 +54,36 @@ $this->title = 'Weight Allocation';
 									<input class="form-check-input checkbox-md" type="checkbox" value="" id="check-kfi" onchange="javascript:showEvaluationDetail('kfi')" checked>
 								</div>
 								<div class="col-12">
-									<div class="bg-chartpurple">
+									<div class="bg-chartpurple" style="cursor: pointer;" onclick="javascript:showModalWeight('KFI')">
 										<img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/Charts.png" class="icons-KGI">
 										<div class="font-size-10 text-white font-b"> KFI</div>
-										<div class="font-size-10 text-white font-b"><?= $pimTerm["kfi"] ?>%</div>
+										<div class="font-size-10 text-white font-b"><span id="kfi-d-weight"><?= $pimTerm["kfi"] ?></span>%</div>
+										<input type="hidden" value="<?= $pimTerm["kfi"] ?>" name="kfiWeight" id="kfiWeight">
 									</div>
 								</div>
 								<div class="col-12 mt-20 text-center">
 									<input class="form-check-input checkbox-md" type="checkbox" value="" id="check-kgi" onchange="javascript:showEvaluationDetail('kgi')">
 								</div>
 								<div class="col-12">
-									<div class="bg-chartwarn">
+									<div class="bg-chartwarn" style="cursor: pointer;" onclick="javascript:showModalWeight('KGI')">
 										<img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/KGI.png" class="icons-KGI">
 										<div class="font-size-10 text-white font-b"> KGI</div>
-										<div class="font-size-10 text-white font-b"><?= $pimTerm["kgi"] ?>%</div>
+										<div class="font-size-10 text-white font-b"><span id="kgi-d-weight"><?= $pimTerm["kgi"] ?></span>%</div>
+										<input type="hidden" value="<?= $pimTerm["kgi"] ?>" name="kgiWeight" id="kgiWeight">
 									</div>
 								</div>
 								<div class="col-12 mt-20 text-center">
 									<input class="form-check-input checkbox-md" type="checkbox" value="" id="check-kpi" onchange="javascript:showEvaluationDetail('kpi')">
 								</div>
 								<div class="col-12">
-									<div class="bg-cha">
+									<div class="bg-cha" style="cursor: pointer;" onclick="javascript:showModalWeight('KPI')">
 										<img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/KPI.png" class="icons-KGI">
 										<div class="font-size-10 text-white font-b"> KPI</div>
-										<div class="font-size-10 text-white font-b"><?= $pimTerm["kpi"] ?>%</div>
+										<div class="font-size-10 text-white font-b"><span id="kpi-d-weight"><?= $pimTerm["kpi"] ?></span>%</div>
+										<input type="hidden" value="<?= $pimTerm["kpi"] ?>" name="kpiWeight" id="kpiWeight">
 									</div>
 								</div>
+								<input type="hidden" value="<?= $pimTerm["pimWeightId"] ?>" name="pimWeightId" id="pimWeightId">
 							</div>
 						</div>
 					</div>
@@ -90,10 +100,23 @@ $this->title = 'Weight Allocation';
 										</span>
 										<span class="badge rounded-pill bg-gray pt-2 pb-2">
 											<ul class="try-cricle">
-												<li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
-												<li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
+												<?php
+												if (isset($pimEmployee) && count($pimEmployee) > 0) {
+													$i = 1;
+													foreach ($pimEmployee as $emId => $em) :
+														if ($i <= 3) {
+												?>
+															<li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?><?= $em['picture'] ?>" class="image-avatar1"></li>
+												<?php
+														} else {
+															break;
+														}
+														$i++;
+													endforeach;
+												}
+												?>
 												<a href="" class="none">
-													<li class="number_user"> 2 </li>
+													<li class="number_user"> <?= count($pimEmployee) ?> </li>
 												</a>
 											</ul>
 										</span>
@@ -107,7 +130,7 @@ $this->title = 'Weight Allocation';
 									?>
 											<div class="col-2">
 												<div class="card font-size-12 mt-5 mb-5 pt-0 pr-0 pl-0" style="border-color:#E2E2E2;">
-													<div class="fonTotal text-center  pt-3 pb-3"><?= $kfi["target"] ?></div>
+													<div class="fonTotal text-center  pt-3 pb-3"><?= $kfi["kfiName"] ?></div>
 													<div class="col-12 text-center ">
 														<span class="badge bg-lighttotal">
 															<?= number_format($kfi["target"] / 1000) ?>k
@@ -127,11 +150,7 @@ $this->title = 'Weight Allocation';
 									<?php
 									}
 									?>
-									<!-- <div class="col-12" style="position: static;">
-										<div class="col-12 holder"></div>
-									</div> -->
 								</div>
-
 							</div>
 							<div class="silly_evaluator mb-20" id="kgi" style="display:none;">
 								<div class="row pl-15 pr-15 pt-10">
@@ -145,10 +164,23 @@ $this->title = 'Weight Allocation';
 										</span>
 										<span class="badge rounded-pill bg-gray pt-2 pb-2">
 											<ul class="try-cricle">
-												<li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
-												<li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
+												<?php
+												if (isset($pimEmployee) && count($pimEmployee) > 0) {
+													$i = 1;
+													foreach ($pimEmployee as $emId => $em) :
+														if ($i <= 3) {
+												?>
+															<li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?><?= $em['picture'] ?>" class="image-avatar<?= $i ?>"></li>
+												<?php
+														} else {
+															break;
+														}
+														$i++;
+													endforeach;
+												}
+												?>
 												<a href="" class="">
-													<li class="number_user"> 99 </li>
+													<li class="number_user"> <?= count($pimEmployee) ?> </li>
 												</a>
 											</ul>
 										</span>
@@ -182,10 +214,6 @@ $this->title = 'Weight Allocation';
 									<?php
 									}
 									?>
-									<!-- <div class="col-12" style="position: static;">
-										<div class="col-12 holder"></div>
-									</div> -->
-
 								</div>
 							</div>
 							<div class="silly_evaluator mb-20" id="kpi" style="display:none;">
@@ -199,10 +227,23 @@ $this->title = 'Weight Allocation';
 										</span>
 										<span class="badge rounded-pill bg-gray pt-2 pb-2">
 											<ul class="try-cricle">
-												<li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/avatar1.png" class="image-avatar1"></li>
-												<li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="image-avatar2"></li>
+												<?php
+												if (isset($pimEmployee) && count($pimEmployee) > 0) {
+													$i = 1;
+													foreach ($pimEmployee as $emId => $em) :
+														if ($i <= 3) {
+												?>
+															<li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?><?= $em['picture'] ?>" class="image-avatar<?= $i ?>"></li>
+												<?php
+														} else {
+															break;
+														}
+														$i++;
+													endforeach;
+												}
+												?>
 												<a href="" class="none">
-													<li class="number_user"> 2 </li>
+													<li class="number_user"> <?= count($pimEmployee) ?> </li>
 												</a>
 											</ul>
 										</span>
@@ -236,11 +277,7 @@ $this->title = 'Weight Allocation';
 									<?php
 									}
 									?>
-									<!-- <div class="col-12" style="position: static;">
-										<div class="col-12 holder"></div>
-									</div> -->
 								</div>
-
 							</div>
 						</div>
 					</div>
@@ -274,3 +311,4 @@ $this->title = 'Weight Allocation';
 		</div>
 	</div>
 </div>
+<?= $this->render('modal_set_pim_weight') ?>

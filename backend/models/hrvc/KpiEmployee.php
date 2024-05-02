@@ -108,4 +108,12 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
         }
         return $date;
     }
+    public static function countKpiFromEmployee($employeeId)
+    {
+        $kpiEmployee = KpiEmployee::find()
+            ->where(["employeeId" => $employeeId, "status" => [1, 2, 4]])
+            ->asArray()
+            ->all();
+        return count($kpiEmployee);
+    }
 }

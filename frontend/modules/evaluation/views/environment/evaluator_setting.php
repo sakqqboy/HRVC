@@ -22,11 +22,24 @@ $this->title = 'Term Detail';
 					</div>
 					<div class="col-1 pl-0 pt-5">
 						<span class="badge rounded-pill bg-gray">
-							<li class="tri-li"> <img src="/HRVC/frontend/web/image/avatar1.png" class="image-avatar1"></li>
-							<li class="tri-li"> <img src="/HRVC/frontend/web/image/Watanabe.png" class="image-avatar2"></li>
-							<li class="tri-li"> <img src="/HRVC/frontend/web/image/avatar3.png" class="image-avatar3"></li>
+							<?php
+							if (isset($pimEmployee) && count($pimEmployee) > 0) {
+								$i = 1;
+								foreach ($pimEmployee as $emId => $em) :
+									if ($i <= 3) {
+							?>
+										<li class="tri-li"> <img src="<?= Yii::$app->homeUrl ?><?= $em['picture'] ?>" class="image-avatar<?= $i ?>"></li>
+							<?php
+									} else {
+										break;
+									}
+									$i++;
+								endforeach;
+							}
+							?>
+
 							<a href="" class="none">
-								<li class="tri-li-number1"> 5 </li>
+								<li class="tri-li-number1"> <?= count($pimEmployee) ?> </li>
 							</a>
 						</span>
 					</div>
@@ -75,7 +88,7 @@ $this->title = 'Term Detail';
 												<div class="text-group">
 													<img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-3.png" class="check-circle-Employees1">
 													<!-- <input class="form-check-input form-check-input-checkEmployees1" type="checkbox" value="InputEmployees" id=""> -->
-													<label class="form-check-label LabelEmployees" for="defaultCheck1">6 Assigned &nbsp;</label>
+													<label class="form-check-label LabelEmployees" for="defaultCheck1"><?= $em["countAssignedKFI"] ?> Assigned &nbsp;</label>
 													<span>
 														<div role="progressbarprimary" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="--value:20"></div>
 													</span>
@@ -87,7 +100,7 @@ $this->title = 'Term Detail';
 												<div class="text-group">
 													<img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-3.png" class="check-circle-Employees2">
 													<!-- <input class="form-check-input form-check-input-checkEmployees2" type="checkbox" value="InputEmployees2" id=""> -->
-													<label class="form-check-label LabelEmployees2" for="defaultCheck2">2 Assigned &nbsp;</label>
+													<label class="form-check-label LabelEmployees2" for="defaultCheck2"><?= $em["countAssignedKGI"] ?> Assigned &nbsp;</label>
 													<span>
 														<div role="progressbaryellow" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="--value:80"></div>
 													</span>
@@ -99,7 +112,7 @@ $this->title = 'Term Detail';
 												<div class="text-group">
 													<img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-3.png" class="check-circle-Employees3">
 													<!-- <input class="form-check-input form-check-input-checkEmployees3" type="checkbox" value="InputEmployees3" id=""> -->
-													<label class="form-check-label LabelEmployees3" for="defaultCheck2">12 Assigned &nbsp;</label>
+													<label class="form-check-label LabelEmployees3" for="defaultCheck2"><?= $em["countAssignedKPI"] ?> Assigned &nbsp;</label>
 													<span>
 														<div role="progressbarred" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="--value:40"></div>
 													</span>
@@ -142,7 +155,9 @@ $this->title = 'Term Detail';
 												<span class="input-group-text group-btnprimary">2nd</span>
 											</div>
 										</td>
-										<td><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Assign.png" class="imagesAssingLight mt-13"></td>
+										<td>
+											<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Assign.png" class="imagesAssingLight mt-13" data-bs-toggle="modal" data-bs-target="#evaluator-setting" style="cursor:pointer;">
+										</td>
 									</tr>
 							<?php
 								endforeach;
@@ -155,3 +170,4 @@ $this->title = 'Term Detail';
 		</div>
 	</div>
 </div>
+<?= $this->render('modal_evaluator') ?>
