@@ -8,10 +8,8 @@ use Yii;
 * This is the model class for table "employee_kfi_evaluation".
 *
     * @property integer $eKfiId
-    * @property integer $mKfiId
-    * @property integer $kfiId
+    * @property integer $kfiWeightId
     * @property integer $employeeId
-    * @property integer $weight
     * @property integer $status
     * @property string $createDateTime
     * @property string $updateDateTime
@@ -32,8 +30,8 @@ return 'employee_kfi_evaluation';
 public function rules()
 {
 return [
-            [['mKfiId', 'kfiId', 'employeeId'], 'required'],
-            [['mKfiId', 'kfiId', 'employeeId', 'weight'], 'integer'],
+            [['kfiWeightId', 'employeeId'], 'required'],
+            [['kfiWeightId', 'employeeId'], 'integer'],
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['status'], 'string', 'max' => 10],
         ];
@@ -46,10 +44,8 @@ public function attributeLabels()
 {
 return [
     'eKfiId' => 'E Kfi ID',
-    'mKfiId' => 'M Kfi ID',
-    'kfiId' => 'Kfi ID',
+    'kfiWeightId' => 'Kfi Weight ID',
     'employeeId' => 'Employee ID',
-    'weight' => 'Weight',
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',
     'updateDateTime' => 'Update Date Time',

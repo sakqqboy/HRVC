@@ -5,6 +5,7 @@ namespace backend\modules\masterdata\controllers;
 use backend\models\hrvc\Department;
 use backend\models\hrvc\Employee;
 use backend\models\hrvc\EmployeeSalary;
+use backend\models\hrvc\PimWeight;
 use backend\models\hrvc\Title;
 use Exception;
 use yii\web\Controller;
@@ -92,7 +93,7 @@ class EmployeeController extends Controller
 		}
 		return json_encode($data);
 	}
-	public function actionEmployeeTitleByBranch($branchId)
+	public function actionEmployeeTitleByBranch($branchId, $pimWeightId)
 	{
 		$employees = Employee::find()
 			->select('employee.employeeFirstname,employee.employeeSurename,employee.employeeId,employee.picture,t.titleName,t.layerId')
@@ -109,6 +110,7 @@ class EmployeeController extends Controller
 					"firstName" => $em["employeeFirstname"],
 					"sureName" => $em["employeeSurename"],
 					"picture" => $em["picture"],
+					"isInPim" => PimWeight::hasEmployee($em["employeeId"], $pimWeightId)
 				];
 			endforeach;
 		}

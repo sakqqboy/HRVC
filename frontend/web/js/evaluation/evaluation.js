@@ -387,3 +387,222 @@ function showEvaluationDetail(type) {
 		}
 	}
 }
+function calculateKfiPercent(kfiId,type) { 
+	var sum = 0;
+	$('input[name="kfiIds[]"]').each(function () {
+		var weight = $("#weight-kfi-" + $(this).val()).val();
+		//alert($(this).val());
+		if ($("#kfi-check-" + $(this).val()).prop("checked") == true) {
+			//alert(12222);
+			sum += parseInt(weight);
+		}
+		if (sum <= 100) {
+			$("#total-weight").html(sum);
+			$("#sumPercent").val(sum);
+		} else {
+			if (type == 1) {
+				$("#weight-kfi-" + kfiId).val(0);
+			} else { 
+				$("#kfi-check-" + $(this).val()).prop("checked",false);
+			}
+			alert('Total can not over 100%');
+			return false;
+		}
+	});
+
+}
+function calculateKgiPercent(kgiId,type) { 
+	var sum = 0;
+	$('input[name="kgiIds[]"]').each(function () {
+		var weight = $("#weight-kgi-" + $(this).val()).val();
+		if ($("#kgi-check-" + $(this).val()).prop("checked") == true) {
+			sum += parseInt(weight);
+		}
+		if (sum <= 100) {
+			$("#total-weight").html(sum);
+			$("#sumPercent").val(sum);
+		} else {
+			if (type == 1) {
+				$("#weight-kgi-" + kgiId).val(0);
+			} else { 
+				$("#kgi-check-" + $(this).val()).prop("checked",false);
+			}
+			alert('Total can not over 100%');
+			return false;
+		}
+	});
+}
+function calculateKpiPercent(kpiId,type) { 
+	var sum = 0;
+	$('input[name="kpiIds[]"]').each(function () {
+		var weight = $("#weight-kpi-" + $(this).val()).val();
+		if ($("#kpi-check-" + $(this).val()).prop("checked") == true) {
+			sum += parseInt(weight);
+		}
+		if (sum <= 100) {
+			$("#total-weight").html(sum);
+			$("#sumPercent").val(sum);
+		} else {
+			if (type == 1) {
+				$("#weight-kpi-" + kpiId).val(0);
+			} else { 
+				$("#kpi-check-" + $(this).val()).prop("checked",false);
+			}
+			alert('Total can not over 100%');
+			return false;
+		}
+	});
+}
+function checkKfiPercent() { 
+	var sumPercent = $("#sumPercent").val();
+	if (sumPercent == 100) {
+		$("#save-kfi-weight").submit();
+	} else { 
+		alert("Total percent must be equal to 100");
+	}
+}
+function checkKgiPercent() { 
+	var sumPercent = $("#sumPercent").val();
+	if (sumPercent == 100) {
+		$("#save-kgi-weight").submit();
+	} else { 
+		alert("Total percent must be equal to 100");
+	}
+}
+function checkKpiPercent() { 
+	var sumPercent = $("#sumPercent").val();
+	if (sumPercent == 100) {
+		$("#save-kpi-weight").submit();
+	} else { 
+		alert("Total percent must be equal to 100");
+	}
+}
+function checkAllEmployee(titleName) { 
+	var url = $url + 'setting/employee/employee-title-name';
+	var titleReplace=titleName.replace(" ", "");
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { titleName: titleName },
+		success: function (data) {
+			if (data.status) {
+				$.each(data.employeeId, function (index, employeeId) {
+					if ($("#check-title-" + titleReplace).prop("checked") == true) {
+						$("#employee-" + employeeId).prop("checked", true);
+					} else {
+						$("#employee-" + employeeId).prop("checked", false);
+					}
+				});
+			}
+		}
+	});
+}
+function saveEmployeePim(termId) { 
+	var i = 0;
+	var employeeIds = [];
+	var pimWeightId = $("#pimWeightId").val();
+	$('input[name="pimEmployee[]"]').each(function () {
+		
+		if ($("#employee-" + $(this).val()).prop("checked") == true) {
+			employeeIds[i] = $(this).val();
+			i++;
+		}
+
+	});
+	if (employeeIds.length > 0) {
+		var url = $url + 'evaluation/environment/save-employee-pim';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { employeeIds: employeeIds, termId: termId, pimWeightId: pimWeightId },
+			success: function (data) {
+				if (data.status) {
+					$('.alert-box2').slideDown(500);
+					setTimeout(function () {
+						$('.alert-box2').fadeOut(300);
+					}, 3000);
+					
+				}
+			}
+		});
+	} else { 
+		alert("please select the employee(s).")
+	}
+}
+function showModalWeight(type) {
+	
+	if (type == "KGI") { 
+		var weight = $("#kgiWeight").val();
+	}
+	if (type == "KFI") { 
+		var weight = $("#kfiWeight").val();
+	}
+	if (type == "KPI") { 
+		var weight = $("#kpiWeight").val();
+	}
+	$('#set_pim_weight').modal('show');
+	$("#type-weight").html(type + ' Weight Allocate');
+	$("#weight").val(weight);
+	$("#type").val(type);
+}
+function saveWeightAllocate() { 
+	var type = $("#type").val();
+	var pimWeightId = $("#pimWeightId").val();
+	var weight = $("#weight").val();
+	if (type == "KGI") { 
+		var kgiWeight = parseInt($("#weight").val());
+		var kfiWeight = parseInt($("#kfiWeight").val());
+		var kpiWeight = parseInt($("#kpiWeight").val());
+	}
+	if (type == "KFI") { 
+		var kfiWeight = parseInt($("#weight").val());
+		var kgiWeight = parseInt($("#kgiWeight").val());
+		var kpiWeight = parseInt($("#kpiWeight").val());
+	}
+	if (type == "KPI") { 
+		var kpiWeight = parseInt($("#weight").val());
+		var kgiWeight = parseInt($("#kgiWeight").val());
+		var kfiWeight = parseInt($("#kfiWeight").val());
+	}
+	var totalPercent = kgiWeight + kpiWeight + kfiWeight;
+	if (totalPercent > 100) {
+		alert("Total percentage can not over 100.")
+	} else { 
+		if (type == "KGI") { 
+			$("#kgiWeight").val($("#weight").val());
+			$("#kgi-d-weight").html($("#weight").val());
+		}
+		if (type == "KFI") { 
+			$("#kfiWeight").val($("#weight").val());
+			$("#kfi-d-weight").html($("#weight").val());
+		}
+		if (type == "KPI") { 
+			$("#kpiWeight").val($("#weight").val());
+			$("#kpi-d-weight").html($("#weight").val());
+		}
+		var url = $url + 'evaluation/environment/save-pim-allocate';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { type: type, pimWeightId: pimWeightId, weight: weight},
+			success: function (data) {
+				if (data.status) {
+					$('.alert-box2').slideDown(500);
+					setTimeout(function () {
+						$('.alert-box2').fadeOut(300);
+					}, 3000);
+					$('#set_pim_weight').modal('hide');
+					$("#totalPercent").html(totalPercent);
+					$("#data-total-percent").removeAttr('data-num');
+					$("#data-total-percent").attr("data-num", totalPercent);
+					$("#data-total-percent").removeAttr('data-value');
+					$("#data-total-percent").attr("data-value", totalPercent+'%');
+				}
+			}
+		});
+	}
+	
+}

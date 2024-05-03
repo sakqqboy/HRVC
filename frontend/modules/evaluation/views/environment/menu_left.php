@@ -21,7 +21,6 @@ use common\models\ModelMaster;
 		<div class="E3 mt-5"> <?= $terms["termName"] ?> </div>
 	</div>
 </div>
-
 <div class="col-12 bg-white rounded-1 mt-20 pb-10">
 	<div class="col-12 EvaluatorConfiguration pt-20 pl-10 border-bottom pb-20">
 		<i class="fa fa-cog mr-5" aria-hidden="true"></i>Set Configuration
@@ -47,12 +46,15 @@ use common\models\ModelMaster;
 			</a>
 		</div>
 		<div class="Evaluationdeshed"></div>
-		<div class="rad-label pl-0 pr-0 pt-0" <?= Yii::$app->controller->action->id == 'weight-allocate' || Yii::$app->controller->action->id == 'weight-allocate-setting' ? $selected : '' ?>>
+		<?php
+		$action = ["weight-allocate", "weight-allocate-setting", "kfi-weight-allocate", "kgi-weight-allocate", "kpi-weight-allocate"];
+		?>
+		<div class="rad-label pl-0 pr-0 pt-0" <?= in_array(Yii::$app->controller->action->id, $action) ? $selected : '' ?>>
 			<a href="<?= Yii::$app->homeUrl . 'evaluation/environment/weight-allocate/' . ModelMaster::encodeParams(['termId' => $termId]) ?>" class="no-underline">
 				<div class="col-12 pl-5 rad-text pr-3">
 					<?php
-					$action = ["weight-allocate", "weight-allocate-setting", "kfi-weight-allocate", "kgi-weight-allocate", "kpi-weight-allocate"];
-					if (Yii::$app->controller->action->id == 'weight-allocate' || Yii::$app->controller->action->id == 'weight-allocate-setting') { ?>
+
+					if (in_array(Yii::$app->controller->action->id, $action)) { ?>
 						<i class="fa fa-check-circle-o text-success mr-10 font-size-18" aria-hidden="true"></i>
 					<?php
 					} else { ?>

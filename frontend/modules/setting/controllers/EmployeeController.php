@@ -1173,4 +1173,43 @@ class EmployeeController extends Controller
         }
         User::deleteAll(["status" => 99]);
     }
+    public function actionEmployeeTitleName()
+    {
+        $titleName = $_POST["titleName"];
+
+        $titles = Title::find()
+            ->select('titleId')
+            ->where(["titleName" => $titleName, "status" => 1])
+            ->asArray()
+            ->all();
+        //throw new Exception(print_r($titles, true));
+        $titleIds = [];
+        $res = [];
+        $employeeId = [];
+        if (isset($titles) && count($titles) > 0) {
+            $i = 0;
+            foreach ($titles as $title) :
+                $titleIds[$i] = $title["titleId"];
+                $i++;
+            endforeach;
+        }
+        if (count($title) > 0) {
+            $employee = Employee::find()->where(["titleId" => $titleIds])->asArray()->all();
+            if (isset($employee) && count($employee) > 0) {
+                $j = 0;
+                foreach ($employee as $em) :
+                    $employeeId[$j] = $em["employeeId"];
+                    $j++;
+                endforeach;
+            }
+        }
+        if (count($employeeId) > 0) {
+            $res["status"] = true;
+            $res["employeeId"] = $employeeId;
+            //throw new Exception(print_r($employeeId, true));
+        } else {
+            $res["status"] = false;
+        }
+        return json_encode($res);
+    }
 }

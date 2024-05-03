@@ -4,12 +4,19 @@ namespace backend\modules\evaluation\controllers;
 
 use backend\models\hrvc\Attribute;
 use backend\models\hrvc\Employee;
+use backend\models\hrvc\EmployeeEvaluation;
 use backend\models\hrvc\Environment;
 use backend\models\hrvc\Frame;
 use backend\models\hrvc\FrameTerm;
-use backend\models\hrvc\MasterKfiEvaluation;
-use backend\models\hrvc\MasterKgiEvaluation;
-use backend\models\hrvc\MasterKpiEvaluation;
+use backend\models\hrvc\Kfi;
+use backend\models\hrvc\KfiEmployee;
+use backend\models\hrvc\KfiWeight;
+use backend\models\hrvc\Kgi;
+use backend\models\hrvc\KgiEmployee;
+use backend\models\hrvc\KgiWeight;
+use backend\models\hrvc\Kpi;
+use backend\models\hrvc\KpiEmployee;
+use backend\models\hrvc\KpiWeight;
 use backend\models\hrvc\PimWeight;
 use backend\models\hrvc\TermItem;
 use common\models\ModelMaster;
@@ -221,9 +228,9 @@ class EnvironmentController extends Controller
 			foreach ($employees as $em) :
 
 				$data[$em["employeeId"]] = [
-					// "assignedKFI"=>"",
-					// "assignedKFGI"=>"",
-					// "assignedKPI"=>"",
+					"countAssignedKFI" => KfiEmployee::countKfiFromEmployee($em["employeeId"]),
+					"countAssignedKGI" => KgiEmployee::countKgiFromEmployee($em["employeeId"]),
+					"countAssignedKPI" => KpiEmployee::countKpiFromEmployee($em["employeeId"]),
 					"firstName" => $em["employeeFirstname"],
 					"sureName" => $em["employeeSurename"],
 					"picture" => $em["picture"],
@@ -242,6 +249,7 @@ class EnvironmentController extends Controller
 		];
 		if (isset($pimTerm) && !empty($pimTerm)) {
 			$data = [
+				"pimWeightId" => $pimTerm["pimWeightId"],
 				"kfi" => $pimTerm["kfiWeight"],
 				"kgi" =>  $pimTerm["kgiWeight"],
 				"kpi" =>  $pimTerm["kpiWeight"],
@@ -251,91 +259,245 @@ class EnvironmentController extends Controller
 	}
 	public function actionMasterKfi($termId)
 	{
-		$pimTerm = PimWeight::find()->where(["termId" => $termId, "status" => 1])->asArray()->one();
 		$data = [];
-		if (isset($pimTerm) && !empty($pimTerm)) {
-			$pimWeightId = $pimTerm["pimWeightId"];
-			$masterKfi = MasterKfiEvaluation::find()
-				->select('k.kfiId,k.targetAmount,master_kfi_evaluation.weight')
-				->JOIN("LEFT JOIN", "kfi k", "master_kfi_evaluation.kfiId=k.kfiId")
-				->where([
-					"master_kfi_evaluation.pimWeightId" => $pimWeightId,
-					"k.status" => 1,
-					"master_kfi_evaluation.status" => 1,
+		$kfiWeight = KfiWeight::find()
+			->select('k.kfiId,k.targetAmount,kfi_weight.weight,k.createDateTime,k.kfiName')
+			->JOIN("LEFT JOIN", "kfi k", "kfi_weight.kfiId=k.kfiId")
+			->where([
+				"kfi_weight.termId" => $termId,
+				"k.status" => 1,
+				"kfi_weight.status" => 1,
 
-				])
-				->asArray()
-				->orderBy('createDateTime DESC')
-				->all();
-			if (isset($masterKfi) && count($masterKfi) > 0) {
-				foreach ($masterKfi as $kfi) :
-					$data[$kfi["mKfiId"]] = [
-						"kfiName" => $kfi["kfiname"],
-						"target" => $kfi["targetAmount"],
-						"weight" => $kfi["weight"]
-
-					];
-				endforeach;
-			}
+			])
+			->asArray()
+			->orderBy('k.createDateTime DESC')
+			->all();
+		if (isset($kfiWeight) && count($kfiWeight) > 0) {
+			foreach ($kfiWeight as $kfi) :
+				$data[$kfi["kfiId"]] = [
+					"kfiName" => $kfi["kfiName"],
+					"target" => $kfi["targetAmount"],
+					"weight" => $kfi["weight"]
+				];
+			endforeach;
 		}
 		return json_encode($data);
 	}
 	public function actionMasterKgi($termId)
 	{
-		$pimTerm = PimWeight::find()->where(["termId" => $termId, "status" => 1])->asArray()->one();
-		$data = [];
-		if (isset($pimTerm) && !empty($pimTerm)) {
-			$pimWeightId = $pimTerm["pimWeightId"];
-			$masterKgi = MasterKgiEvaluation::find()
-				->select('k.kgiId,k.targetAmount,master_kgi_evaluation.weight')
-				->JOIN("LEFT JOIN", "kgi k", "master_kgi_evaluation.kgiId=k.kgiId")
-				->where([
-					"master_kgi_evaluation.pimWeightId" => $pimWeightId,
-					"k.status" => 1,
-					"master_kgi_evaluation.status" => 1,
+		$kgiWeight = KgiWeight::find()
+			->select('k.kgiId,k.targetAmount,kgi_weight.weight,k.createDateTime,k.kgiName')
+			->JOIN("LEFT JOIN", "kgi k", "kgi_weight.kgiId=k.kgiId")
+			->where([
+				"kgi_weight.termId" => $termId,
+				"k.status" => 1,
+				"kgi_weight.status" => 1,
 
-				])
-				->asArray()
-				->orderBy('createDateTime DESC')
-				->all();
-			if (isset($masterKgi) && count($masterKgi) > 0) {
-				foreach ($masterKgi as $kgi) :
-					$data[$kgi["mKgiId"]] = [
-						"kgiName" => $kgi["kginame"],
-						"target" => $kgi["targetAmount"],
-						"weight" => $kgi["weight"],
-						"code" => $kgi["code"]
-					];
-				endforeach;
-			}
+			])
+			->asArray()
+			->orderBy('k.createDateTime DESC')
+			->all();
+		if (isset($kgiWeight) && count($kgiWeight) > 0) {
+			foreach ($kgiWeight as $kgi) :
+				$data[$kgi["kgiId"]] = [
+					"kgiName" => $kgi["kgiName"],
+					"target" => $kgi["targetAmount"],
+					"weight" => $kgi["weight"]
+				];
+			endforeach;
 		}
 		return json_encode($data);
 	}
 	public function actionMasterKpi($termId)
 	{
-		$pimTerm = PimWeight::find()->where(["termId" => $termId, "status" => 1])->asArray()->one();
-		$data = [];
-		if (isset($pimTerm) && !empty($pimTerm)) {
-			$pimWeightId = $pimTerm["pimWeightId"];
-			$masterKpi = MasterKpiEvaluation::find()
-				->select('k.kpiId,k.targetAmount,master_kpi_evaluation.weight')
-				->JOIN("LEFT JOIN", "kpi k", "master_kpi_evaluation.kpiId=k.kpiId")
-				->where([
-					"master_kpi_evaluation.pimWeightId" => $pimWeightId,
-					"k.status" => 1,
-					"master_kpi_evaluation.status" => 1,
+		$kpiWeight = KpiWeight::find()
+			->select('k.kpiId,k.targetAmount,kpi_weight.weight,k.createDateTime,k.kpiName')
+			->JOIN("LEFT JOIN", "kpi k", "kpi_weight.kpiId=k.kpiId")
+			->where([
+				"kpi_weight.termId" => $termId,
+				"k.status" => 1,
+				"kpi_weight.status" => 1,
 
-				])
+			])
+			->asArray()
+			->orderBy('k.createDateTime DESC')
+			->all();
+		if (isset($kpiWeight) && count($kpiWeight) > 0) {
+			foreach ($kpiWeight as $kpi) :
+				$data[$kpi["kpiId"]] = [
+					"kpiName" => $kpi["kpiName"],
+					"target" => $kpi["targetAmount"],
+					"weight" => $kpi["weight"]
+				];
+			endforeach;
+		}
+		return json_encode($data);
+	}
+	public function actionPimWeight($termId)
+	{
+		$pimWeight = PimWeight::find()->where(["termId" => $termId])->asArray()->one();
+		if (isset($pimWeight) && !empty($pimWeight)) {
+			$data = [
+				"kfi" => $pimWeight["kfiWeight"],
+				"kgi" => $pimWeight["kgiWeight"],
+				"kpi" => $pimWeight["kpiWeight"]
+			];
+		} else {
+			$data = [
+				"kfi" => 0,
+				"kgi" => 0,
+				"kpi" => 0
+			];
+		}
+		return json_encode($data);
+	}
+	public function actionKfiWeight($termId)
+	{
+		$kfis = Kfi::find()->where(["status" => [1, 4]])
+			->asArray()
+			->orderBy("createDateTime")
+			->all();
+		$data = [];
+		if (isset($kfis) && count($kfis) > 0) {
+			foreach ($kfis as $kfi) :
+				$level1 = '';
+				$level2 = '';
+				$level3 = '';
+				$level4 = '';
+				$level5 = '';
+				$level6 = '';
+				$weight = 0;
+				$status = 0;
+				$kfiWeight = KfiWeight::find()
+					->where(["kfiId" => $kfi["kfiId"], "termId" => $termId])
+					->asArray()
+					->one();
+				if (isset($kfiWeight) && !empty($kfiWeight)) {
+					$level1 = $kfiWeight["level1"];
+					$level2 = $kfiWeight["level2"];
+					$level3 = $kfiWeight["level3"];
+					$level4 = $kfiWeight["level4"];
+					$level5 = $kfiWeight["level5"];
+					$level6 = $kfiWeight["level6"];
+					$weight = $kfiWeight["weight"];
+					$status = $kfiWeight["status"];
+				}
+				$data[$kfi["kfiId"]] = [
+					"kfiName" => $kfi["kfiName"],
+					"target" => $kfi["targetAmount"],
+					"level1" => $level1,
+					"level2" => $level2,
+					"level3" => $level3,
+					"level4" => $level4,
+					"level5" => $level5,
+					"level6" => $level6,
+					"weight" => $weight,
+					"status" => $status
+				];
+			endforeach;
+		}
+		return json_encode($data);
+	}
+	public function actionKgiWeight($termId)
+	{
+		$kgis = Kgi::find()->where(["status" => [1, 4]])
+			->asArray()
+			->orderBy("createDateTime")
+			->all();
+		$data = [];
+		if (isset($kgis) && count($kgis) > 0) {
+			foreach ($kgis as $kgi) :
+				$level1 = '';
+				$level2 = '';
+				$level3 = '';
+				$level4 = '';
+				$weight = 0;
+				$status = 0;
+				$kgiWeight = KgiWeight::find()
+					->where(["kgiId" => $kgi["kgiId"], "termId" => $termId])
+					->asArray()
+					->one();
+				if (isset($kfiWeight) && !empty($kfiWeight)) {
+					$level1 = $kgiWeight["level1"];
+					$level2 = $kgiWeight["level2"];
+					$level3 = $kgiWeight["level3"];
+					$level4 = $kgiWeight["level4"];
+					$weight = $kgiWeight["weight"];
+					$status = $kgiWeight["status"];
+				}
+				$data[$kgi["kgiId"]] = [
+					"kgiName" => $kgi["kgiName"],
+					"target" => $kgi["targetAmount"],
+					"level1" => $level1,
+					"level2" => $level2,
+					"level3" => $level3,
+					"level4" => $level4,
+					"weight" => $weight,
+					"status" => $status
+				];
+			endforeach;
+		}
+		return json_encode($data);
+	}
+	public function actionKpiWeight($termId)
+	{
+		$kpis = Kpi::find()->where(["status" => [1, 4]])
+			->asArray()
+			->orderBy("createDateTime")
+			->all();
+		$data = [];
+		if (isset($kpis) && count($kpis) > 0) {
+			foreach ($kpis as $kpi) :
+				$level1 = '';
+				$level2 = '';
+				$level3 = '';
+				$level4 = '';
+				$weight = 0;
+				$status = 0;
+				$kpiWeight = KpiWeight::find()
+					->where(["kpiId" => $kpi["kpiId"], "termId" => $termId])
+					->asArray()
+					->one();
+				if (isset($kfiWeight) && !empty($kfiWeight)) {
+					$level1 = $kpiWeight["level1"];
+					$level2 = $kpiWeight["level2"];
+					$level3 = $kpiWeight["level3"];
+					$level4 = $kpiWeight["level4"];
+					$weight = $kpiWeight["weight"];
+					$status = $kpiWeight["status"];
+				}
+				$data[$kpi["kpiId"]] = [
+					"kpiName" => $kpi["kpiName"],
+					"target" => $kpi["targetAmount"],
+					"level1" => $level1,
+					"level2" => $level2,
+					"level3" => $level3,
+					"level4" => $level4,
+					"weight" => $weight,
+					"status" => $status
+				];
+			endforeach;
+		}
+		return json_encode($data);
+	}
+	public function actionPimCountEmployee($termId)
+	{
+		$pimWeight = PimWeight::find()->select('pimWeightId')
+			->where(["termId" => $termId])
+			->asArray()
+			->one();
+		$data = [];
+		if (isset($pimWeight) && !empty($pimWeight)) {
+			$employee = EmployeeEvaluation::find()
+				->select('e.picture,e.employeeId')
+				->JOIN("LEFT JOIN", "employee e", "e.employeeId=employee_evaluation.employeeId")
+				->where(["pimWeightId" => $pimWeight["pimWeightId"]])
 				->asArray()
-				->orderBy('createDateTime DESC')
 				->all();
-			if (isset($masterKpi) && count($masterKpi) > 0) {
-				foreach ($masterKpi as $kpi) :
-					$data[$kpi["mKpiId"]] = [
-						"kpiName" => $kpi["kpiname"],
-						"target" => $kpi["targetAmount"],
-						"weight" => $kpi["weight"],
-						"code" => $kpi["code"]
+			if (isset($employee) && count($employee) > 0) {
+				foreach ($employee as $em) :
+					$data[$em["employeeId"]] = [
+						"picture" => $em["picture"]
 					];
 				endforeach;
 			}

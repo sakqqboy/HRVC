@@ -57,4 +57,12 @@ class KfiEmployee extends \backend\models\hrvc\master\KfiEmployeeMaster
         }
         return $employee;
     }
+    public static function countKfiFromEmployee($employeeId)
+    {
+        $kfiEmployee = KfiEmployee::find()
+            ->where(["employeeId" => $employeeId, "status" => [1, 2, 4]])
+            ->asArray()
+            ->all();
+        return count($kfiEmployee);
+    }
 }
