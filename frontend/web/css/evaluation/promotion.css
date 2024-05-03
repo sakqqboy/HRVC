@@ -1,8 +1,9 @@
 .set-Promotion {
-    font-size: 13px;
+    font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.4px;
     font-weight: 500;
+    margin-top: 20px;
 }
 
 .promotion-save {
@@ -10,7 +11,11 @@
 }
 
 .setpromotiontitle {
-    font-size: 12px;
+    font-size: 11px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-radius: 3px;
+    margin-top: 20px;
 }
 
 .PromotionAdd-Layer {
@@ -101,5 +106,78 @@
 }
 
 .images-bonuesave0 {
-    width: 12px;
+    width: 10px;
+}
+
+.BGPromotion {
+    background-color: #F0F2F4;
+    border-radius: 3px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    margin-top: 20px;
+}
+
+.BGPhase {
+    background-color: #F9FBFF;
+    border-radius: 3px;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    width: 30rem;
+    text-align: left;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.font-Blu {
+    color: #3266CD;
+    font-size: 15px;
+    font-weight: 600;
+    padding-left: 15px;
+}
+
+.PROMO-SET {
+    background-color: #F0F2F4;
+    border-radius: 5px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 10px;
+}
+
+.setpromotion-light {
+    background-color: white;
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 5px;
+}
+
+.promotioncolortitle {
+    border: 2px #32a1ce solid thin;
+    background-color: #32a1ce;
+    border-radius: 5px;
+    height: 15px;
+    width: 15px;
+}
+
+.fnt-promotiontitle {
+    font-size: 8px;
+}
+
+.promotionMM {
+    font-size: 8px;
+}
+
+.promotionbox-manager {
+    font-size: 10px;
+}
+
+.font-FFFsave {
+    font-size: 10px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    margin-top: 20px;
 }

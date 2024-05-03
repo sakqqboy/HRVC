@@ -171,6 +171,7 @@ $this->title = 'Bonus Management';
 
                             </div>
                             <div class="row">
+
                                 <?php
                                 for ($i = 1; $i <= 4; $i++) {
                                 ?>
@@ -207,17 +208,17 @@ $this->title = 'Bonus Management';
                             <div class="salary1">Salary</div>
                             <div class="salary2">฿ <?= number_format(20000) ?> </div>
                         </div>
-                        <div class="col-lg-2 col-md-6 col-6 border-right">
+                        <div class="col-lg-3 col-md-6 col-6 border-right">
                             <div class="row">
-                                <div class="col-1">
+                                <div class="col-2">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/imagelink-1.png" class="imagelink-1">
                                 </div>
-                                <div class="col-6 salary3">
+                                <div class="col-4 salary3">
                                     Evaluation
                                     Bonus
                                 </div>
-                                <div class="col-5 salary4">
-                                    ฿ <span class="salary-red">(<?= number_format(53486) ?>)</span>
+                                <div class="col-6 salary4">
+                                    ฿ <span class="text-dark"><?= number_format(53486) ?></span>
                                 </div>
                             </div>
                         </div>
@@ -235,7 +236,7 @@ $this->title = 'Bonus Management';
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-6 salary-bonusAllsolid4">
+                        <div class="col-lg-5 col-md-6 col-6 salary-bonusAllsolid4">
                             <div class="row">
                                 <div class="col-sm-1">
                                     <i class="fa fa-align-center" aria-hidden="true"></i>
@@ -315,7 +316,7 @@ $this->title = 'Bonus Management';
                         <span class="badge bg-primary">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/24px/Department.png" class="bonus-Department">
                         </span>
-                        <span class="F4F6F9-Accounts"> Accounts &Taxation</span>
+                        <span class="F4F6F9-Accounts"> Accounts & Taxation</span>
                     </div>
 
                     <?php
