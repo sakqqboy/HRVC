@@ -131,10 +131,10 @@ $this->title = 'Promotion';
                                 <div class="col-12 setpromotion-light">
                                     <span><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/Team-1.png" class="widthSave-3"> <span class="Select-add">Select Participants</span></span>
                                     <div class="row mt-5">
-                                        <div class="col-lg-6 col-md-6 col-6 border">
+                                        <div class="col-lg-6 col-md-6 col-6">
                                             <div class="promotioncolortitle"></div> <span class="fnt-promotiontitle">Title</span>
                                         </div>
-                                        <div class="col-lg-6 col-md-6 col-6 border">
+                                        <div class="col-lg-6 col-md-6 col-6">
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
                                                 <label class="form-check-label inlineDepartment1" for="inlineCheckbox1"> Department</label>
@@ -153,7 +153,7 @@ $this->title = 'Promotion';
                                 </div>
 
                                 <?php
-                                for ($i = 1; $i <= 6; $i++) {
+                                for ($i = 1; $i <= 5; $i++) {
                                 ?>
 
                                     <div class=" col-12 all-allocateuser">
@@ -208,7 +208,7 @@ $this->title = 'Promotion';
                                 for ($i = 1; $i <= 3; $i++) {
                                 ?>
 
-                                    <div class=" col-12 all-allocateuser">
+                                    <div class="col-12 all-allocateuser">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                             <label class="form-check-label label-username" for="flexCheckDefault">
@@ -231,15 +231,15 @@ $this->title = 'Promotion';
                                 <div class="col-5">
                                     <input type="text" class="form-control setpromotiontitle" value="" id="">
                                 </div>
-                                <div class="col-3">
+                                <div class="col-3 text-end">
                                     <button class="btn btn-primary rounded-1 font-FFFsave" type="submit"><img src="<?= Yii::$app->homeUrl ?>/images/icons/Dark/48px/save.png" class="images-bonuesave0"> SAVE</button>
                                 </div>
                             </div>
 
-                            <div class="col-12">
-                                <div class="alert-light mt-20">
+                            <div class="col-12 borderprotiongry">
+                                <div class="alert-light">
                                     <div class="col-12">
-                                        <span class="Promotion-Contents"> Promotion Contents</span> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Add-Layer.png" class="PromotionAdd-Layer">
+                                        <span class="Promotion-Contents"> Promotion Contents</span> <i class="fa fa-plus-square-o PromotionAdd-Layer"></i>
                                     </div>
                                     <div class="col-12 PromotionSolid">
                                         <div class="row">
@@ -255,7 +255,7 @@ $this->title = 'Promotion';
                                                 <div class="badge bg-conditionSet">Condition Set</div>
                                             </div>
                                             <div class="col-lg-1 col-md-6 col-sm-4 col-6">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Edit.png" class="Promotion-Edit">
+                                                <i class="fa fa-edit Promotion-Edit"></i>
                                             </div>
                                             <div class="col-lg-1 col-md-6 col-sm-4 col-6">
                                                 <i class="fa fa-trash Promotiontrash-danger" aria-hidden="true"></i>
@@ -272,7 +272,7 @@ $this->title = 'Promotion';
                                                 <div class="badge bg-conditionSetdanger">Condition Not Set</div>
                                             </div>
                                             <div class="col-lg-1 col-md-6 col-sm-4 col-6">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Edit.png" class="Promotion-Edit">
+                                                <i class="fa fa-edit Promotion-Edit"></i>
                                             </div>
                                             <div class="col-lg-1 col-md-6 col-sm-4 col-6">
                                                 <i class="fa fa-trash Promotiontrash-danger" aria-hidden="true"></i>
@@ -282,12 +282,242 @@ $this->title = 'Promotion';
                                 </div>
                             </div>
                         </div>
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <div class="PROMO-SET">
+                                <span class="col-12 Set-Contents-Promotion">Set Contents</span> <span class="Weighttxtprimary">Weight</span>
+                                <span class="Weighttxtprimary">Achievement</span>
+                                <div class="bg-white mt-10 pb-5 pl-5 pr-5">
+                                    <div class="alert aler-ALLDepartment">
+                                        <div class="row">
+                                            <div class="col-2 Pro-p1">
+                                                P1
+                                            </div>
+                                            <div class="col-1 p1solid"></div>
+                                            <div class="col-2 Pro-p1">
+                                                40%
+                                            </div>
+                                            <div class="col-1 p1solid"></div>
+                                            <div class="col-2 Pro-p1">
+                                                60%
+                                            </div>
+                                            <hr class="positionp1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 bg-ht">
+                                        <div class="row">
+                                            <div class="col-6 text-center">
+                                                <div class="col-12 TOTAL-WEIGHT">
+                                                    TOTAL WEIGHT
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="font-size-13"><?= number_format(100) ?>%</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6 text-center">
+                                                <div class="col-12 TOTAL-WEIGHT">
+                                                    TOTAL ACHIEVEMENT
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="font-size-13"><?= number_format(70) ?>%</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <div class="mt-20">
+                    <table class="table table-light">
+                        <td>
+                            Title
+                        </td>
+                        <td>
+                            Promotion Contents
+                        </td>
+                        <td>
+                            Achievement
+                        </td>
+                        <td>
+                            Weight
+                        </td>
+                    </table>
+                </div>
+                <table class="table table-primary mt-10">
+                    <thead>
+                        <tr>
+                            <td scope="col"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/rankb.png" class="wdranks"> Manager <span class="badge bg-primary">MM</span></td>
+                            <td>
+                                <table class="table table-light">
+                                    <td>
+                                        <span class="font-size-11">KPI Score more than 40 3 times continues</span>
+                                        <span class="checkbox-wrapper-33">
+                                            <label class="checkbox">
+                                                <input class="checkbox__trigger visuallyhidden" type="checkbox" />
+                                                <span class="checkbox__symbol">
+                                                    <svg aria-hidden="true" class="icon-checkbox" width="28px" height="28px" viewBox="0 0 28 28" version="1" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M4 14l8 7L24 7"></path>
+                                                    </svg>
+                                                </span>
+                                                <p class="checkbox__textwrapper">Times</p>
+                                            </label>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        40%
+                                    </td>
+                                    <td>
+                                        60%
+                                    </td>
+                                    <td>
+                                        <i class="fa fa-save"></i> <i class="fa fa-edit"></i>
+                                    </td>
+                                    <style>
+                                        .checkbox-wrapper-33 {
+                                            --s-xsmall: 0.625em;
+                                            --s-small: 1.2em;
+                                            --border-width: 1px;
+                                            --c-primary: #308FFF;
+                                            --c-primary-20-percent-opacity: rgb(95 17 232 / 20%);
+                                            --c-primary-10-percent-opacity: rgb(95 17 232 / 10%);
+                                            --t-base: 0.4s;
+                                            --t-fast: 0.2s;
+                                            --e-in: ease-in;
+                                            --e-out: cubic-bezier(.11, .29, .18, .98);
+                                        }
+
+                                        .checkbox-wrapper-33 .visuallyhidden {
+                                            border: 0;
+                                            clip: rect(0 0 0 0);
+                                            height: 1px;
+                                            margin: -1px;
+                                            overflow: hidden;
+                                            padding: 0;
+                                            position: absolute;
+                                            width: 1px;
+                                        }
+
+                                        .checkbox-wrapper-33 .checkbox {
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: flex-start;
+                                        }
+
+                                        .checkbox-wrapper-33 .checkbox+.checkbox {
+                                            margin-top: var(--s-small);
+                                        }
+
+                                        .checkbox-wrapper-33 .checkbox__symbol {
+                                            display: inline-block;
+                                            display: flex;
+                                            margin-right: calc(var(--s-small) * 0.7);
+                                            border: var(--border-width) solid var(--c-primary);
+                                            position: relative;
+                                            border-radius: 0.1em;
+                                            width: 1em;
+                                            height: 1em;
+                                            transition: box-shadow var(--t-base) var(--e-out), background-color var(--t-base);
+                                            box-shadow: 0 0 0 0 var(--c-primary-10-percent-opacity);
+                                        }
+
+                                        .checkbox-wrapper-33 .checkbox__symbol:after {
+                                            content: "";
+                                            position: absolute;
+                                            top: 0.5em;
+                                            left: 0.5em;
+                                            width: 0.10em;
+                                            height: 0.10em;
+                                            background-color: var(--c-primary-20-percent-opacity);
+                                            opacity: 0;
+                                            border-radius: 3em;
+                                            transform: scale(1);
+                                            transform-origin: 50% 50%;
+                                        }
+
+                                        .checkbox-wrapper-33 .checkbox .icon-checkbox {
+                                            width: 0.7em;
+                                            height: 0.7em;
+                                            margin: auto;
+                                            fill: none;
+                                            stroke-width: 3;
+                                            stroke: currentColor;
+                                            stroke-linecap: round;
+                                            stroke-linejoin: round;
+                                            stroke-miterlimit: 10;
+                                            color: var(--c-primary);
+                                            display: inline-block;
+                                        }
+
+                                        .checkbox-wrapper-33 .checkbox .icon-checkbox path {
+                                            transition: stroke-dashoffset var(--t-fast) var(--e-in);
+                                            stroke-dasharray: 30px, 31px;
+                                            stroke-dashoffset: 31px;
+                                        }
+
+                                        .checkbox-wrapper-33 .checkbox__textwrapper {
+                                            margin: 0;
+                                        }
+
+                                        .checkbox-wrapper-33 .checkbox__trigger:checked+.checkbox__symbol:after {
+                                            -webkit-animation: ripple-33 1.5s var(--e-out);
+                                            animation: ripple-33 1.5s var(--e-out);
+                                        }
+
+                                        .checkbox-wrapper-33 .checkbox__trigger:checked+.checkbox__symbol .icon-checkbox path {
+                                            transition: stroke-dashoffset var(--t-base) var(--e-out);
+                                            stroke-dashoffset: 0px;
+                                        }
+
+                                        .checkbox-wrapper-33 .checkbox__trigger:focus+.checkbox__symbol {
+                                            box-shadow: 0 0 0 0.25em var(--c-primary-20-percent-opacity);
+                                        }
+
+                                        @-webkit-keyframes ripple-33 {
+                                            from {
+                                                transform: scale(0);
+                                                opacity: 1;
+                                            }
+
+                                            to {
+                                                opacity: 0;
+                                                transform: scale(20);
+                                            }
+                                        }
+
+                                        @keyframes ripple-33 {
+                                            from {
+                                                transform: scale(0);
+                                                opacity: 1;
+                                            }
+
+                                            to {
+                                                opacity: 0;
+                                                transform: scale(20);
+                                            }
+                                        }
+                                    </style>
+
+                                </table>
+                            </td>
+
+
+                        </tr>
+                    </thead>
+                </table>
             </div>
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
 
 
 

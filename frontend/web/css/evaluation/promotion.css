@@ -19,7 +19,9 @@
 }
 
 .PromotionAdd-Layer {
-    width: 15px;
+    width: 13px;
+    color: gray;
+    margin-left: 15px;
 }
 
 .Promotion-Contents {
@@ -29,6 +31,7 @@
 
 .PromotionSolid {
     border-left: 1px lightgray solid;
+    padding-top: 10px
 }
 
 .input-promotion-checkbox1 {
@@ -39,28 +42,40 @@
 
 .bg-conditionSet {
     border-radius: 3px;
-    cursor: pointer;
     font-weight: 400;
+    font-size: 11px;
     color: black;
     background-color: #A0DDC7;
 }
 
 .bg-conditionSetdanger {
     border-radius: 3px;
-    cursor: pointer;
+    font-size: 11px;
     color: black;
     font-weight: 400;
     background-color: #E8A69D;
 }
 
 .Promotion-Edit {
-    width: 13px;
     cursor: pointer;
+    color: gray;
+    font-size: 13px;
+}
+
+.borderprotiongry {
+    border: 0.5px #F0F2F4 solid;
+    border-radius: 5px;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
 .Promotiontrash-danger {
     cursor: pointer;
-    color: red;
+    color: #f87e7e;
+    font-size: 13px;
 }
 
 .Evaluator-SetContents {
@@ -102,7 +117,7 @@
 }
 
 .TOTAL-WEIGHT {
-    font-size: 7px;
+    font-size: 6px;
 }
 
 .images-bonuesave0 {
@@ -180,4 +195,32 @@
     padding-top: 4px;
     padding-bottom: 4px;
     margin-top: 20px;
+}
+
+.Set-Contents-Promotion {
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.Weighttxtprimary {
+    background-color: #98C5EE;
+    border-radius: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 3px;
+    padding-right: 3px;
+    font-size: 9px;
+}
+
+.balrt-promotioncontents {
+    background-color: #F0F2F4;
+    border-radius: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.wdranks {
+    width: 13px;
 }
