@@ -26,7 +26,6 @@ $this->title = 'PMI Weight Allocation';
                     <div class="E3 mt-5"> E3 </div>
                 </div>
             </div>
-
             <div class="col-12 bg-white rounded-1 mt-40 pb-10">
                 <div class="col-12 EvaluatorConfiguration pt-20 pl-10 border-bottom pb-20">
                     <i class="fa fa-cog mr-5" aria-hidden="true"></i>Set Configuration
