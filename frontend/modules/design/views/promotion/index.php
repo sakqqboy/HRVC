@@ -104,8 +104,8 @@ $this->title = 'Promotion';
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterPlus.png" class="picture-FilterPlus-bonus"> <strong class="font-size-13">More</strong> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.png" class="bonus-point">
                         </div>
                     </div>
-                    <div class="col-12 BGPromotion">
-                        <div class="row">
+                    <div class="col-12 BGPromotion" stream_bucket_make_writeable matgin->
+                        div <div class="row">
                             <div class="col-3">
                                 <div class="col-12 BGPhase">
                                     <span class="font-Blu">E3</span><span class="b4E3"> Final Evaluation Phase</span>
@@ -121,6 +121,7 @@ $this->title = 'Promotion';
                                     <button type="button" class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill" style="width: 2rem; height:2rem;">E3</button>
                                 </div>
                             </div>
+                            <div class="col-12"></div>
                         </div>
                     </div>
                 </div>
@@ -333,14 +334,17 @@ $this->title = 'Promotion';
                         <td>Title</td>
                         <td>Promotion Contents </td>
                         <td>Achievement </td>
-                        <td>Weight </td>
+                        <td>Weight</td>
                     </table>
-                    <table class="table table-primary mt-10">
+                    <table class="table table-light mt-10">
                         <thead>
                             <tr>
-                                <td scope="col"><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/rankb.png" class="wdranks"><span class="font-size-12 font-b">&nbsp; Manager</span> <span class="MM308FFF" style="font-size:8px;">MM</span></td>
+                                <td><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/rankb.png" class="wdranks"><span class="font-size-12 font-b">&nbsp; Manager</span> <span class="MM308FFF" style="font-size:8px;">MM</span></td>
+
                                 <td>
                                     <span class="font-size-11">KPI Score more than 40 3 times continues</span>
+                                </td>
+                                <td>
                                     <span class="checkbox-wrapper-33">
                                         <label class="checkbox">
                                             <input class="checkbox__trigger visuallyhidden" type="checkbox" />
@@ -349,7 +353,20 @@ $this->title = 'Promotion';
                                                     <path d="M4 14l8 7L24 7"></path>
                                                 </svg>
                                             </span>
-                                            <p class="checkbox__textwrapper">Times</p> <input type="text" class="form-control pt-3 pb-3">
+                                            <p class="checkbox__textwrapper">Times</p> <input type="text" class="form-control Timesinput">
+                                        </label>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="checkbox-wrapper-34">
+                                        <label class="checkbox">
+                                            <input class="checkbox__trigger visuallyhidden" type="checkbox" />
+                                            <span class="checkbox__symbol">
+                                                <svg aria-hidden="true" class="icon-checkbox" width="28px" height="28px" viewBox="0 0 28 28" version="1">
+                                                    <path d="M4 14l8 7L24 7"></path>
+                                                </svg>
+                                            </span>
+                                            <p class="checkbox__textwrapper">Limit</p> <input type="text" class="form-control Timesinput">
                                         </label>
                                     </span>
                                 </td>
@@ -371,121 +388,108 @@ $this->title = 'Promotion';
     </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- <div class="col-12">
-    <div class="row">
-       
-        <div class="col-lg-6 col-md-6 col-6">
-          
-            <div class="col-12">
-                <div class="card alert-light mt-20">
-                    <div class="col-12">
-                        <span class="Promotion-Contents"> Promotion Contents</span> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Add-Layer.png" class="PromotionAdd-Layer">
-                    </div>
-                    <div class="col-12 PromotionSolid">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-4 col-6">
-                                <div class="form-check input-promotion-checkbox1">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck">
-                                    <label class="form-check-label" for="defaultCheck1">
-                                        KPI Score more than 40 3 times continues
-                                    </label>
-                                </div>
+<div class="row">
+
+    <div class="col-lg-6 col-md-6 col-6">
+
+        <div class="col-12">
+            <div class="card alert-light mt-20">
+                <div class="col-12">
+                    <span class="Promotion-Contents"> Promotion Contents</span> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Add-Layer.png" class="PromotionAdd-Layer">
+                </div>
+                <div class="col-12 PromotionSolid">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-4 col-6">
+                            <div class="form-check input-promotion-checkbox1">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck">
+                                <label class="form-check-label" for="defaultCheck1">
+                                    KPI Score more than 40 3 times continues
+                                </label>
                             </div>
-                            <div class="col-lg-4 col-md-6 col-sm-4 col-12 text-end">
-                                <div class="badge bg-conditionSet">Condition Set</div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-4 col-12 text-end">
+                            <div class="badge bg-conditionSet">Condition Set</div>
+                        </div>
+                        <div class="col-lg-1 col-md-6 col-sm-4 col-6">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Edit.png" class="Promotion-Edit">
+                        </div>
+                        <div class="col-lg-1 col-md-6 col-sm-4 col-6">
+                            <i class="fa fa-trash Promotiontrash-danger" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-4 col-6">
+                            <div class="form-check input-promotion-checkbox1">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck">
+                                <label class="form-check-label" for="defaultCheck1">
+                                    Skill Checking
+                                </label>
                             </div>
-                            <div class="col-lg-1 col-md-6 col-sm-4 col-6">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Edit.png" class="Promotion-Edit">
-                            </div>
-                            <div class="col-lg-1 col-md-6 col-sm-4 col-6">
-                                <i class="fa fa-trash Promotiontrash-danger" aria-hidden="true"></i>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-4 col-6">
-                                <div class="form-check input-promotion-checkbox1">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck">
-                                    <label class="form-check-label" for="defaultCheck1">
-                                        Skill Checking
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-4 col-12 text-end">
-                                <div class="badge bg-conditionSetdanger">Condition Not Set</div>
-                            </div>
-                            <div class="col-lg-1 col-md-6 col-sm-4 col-6">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Edit.png" class="Promotion-Edit">
-                            </div>
-                            <div class="col-lg-1 col-md-6 col-sm-4 col-6">
-                                <i class="fa fa-trash Promotiontrash-danger" aria-hidden="true"></i>
-                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-4 col-12 text-end">
+                            <div class="badge bg-conditionSetdanger">Condition Not Set</div>
+                        </div>
+                        <div class="col-lg-1 col-md-6 col-sm-4 col-6">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Edit.png" class="Promotion-Edit">
+                        </div>
+                        <div class="col-lg-1 col-md-6 col-sm-4 col-6">
+                            <i class="fa fa-trash Promotiontrash-danger" aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 col-6">
-            <div class="alert alert-Evaluator">
-                <div class="col-12">
-                    <span class="Evaluator-SetContents">Set Contents</span> <span class="badge bg-blue">Weight</span> <span class="badge bg-blue">Achievement</span>
-                </div>
-                <div class="mt-10">
-                    <div class="alert aler-ALLDepartment">
+    </div>
+    <div class="col-lg-3 col-md-6 col-6">
+        <div class="alert alert-Evaluator">
+            <div class="col-12">
+                <span class="Evaluator-SetContents">Set Contents</span> <span class="badge bg-blue">Weight</span> <span class="badge bg-blue">Achievement</span>
+            </div>
+            <div class="mt-10">
+                <div class="alert aler-ALLDepartment">
+                    <div class="row">
+                        <div class="col-2 Pro-p1">
+                            P1
+                        </div>
+                        <div class="col-1 p1solid"></div>
+                        <div class="col-2 Pro-p1">
+                            40%
+                        </div>
+                        <div class="col-1 p1solid"></div>
+                        <div class="col-2 Pro-p1">
+                            60%
+                        </div>
+                        <hr class="positionp1">
+                    </div>
+                    <div class="row" style="margin-top:-420px">
+                        <div class="col-2 Pro-p1">
+                            P2
+                        </div>
+                        <div class="col-1 p1solid"></div>
+                        <div class="col-2 Pro-p1">
+                            40%
+                        </div>
+                        <div class="col-1 p1solid"></div>
+                        <div class="col-2 Pro-p1">
+                            60%
+                        </div>
+                        <hr class="positionp1">
+                    </div>
+                    <div class="col-12 bg-ht">
                         <div class="row">
-                            <div class="col-2 Pro-p1">
-                                P1
-                            </div>
-                            <div class="col-1 p1solid"></div>
-                            <div class="col-2 Pro-p1">
-                                40%
-                            </div>
-                            <div class="col-1 p1solid"></div>
-                            <div class="col-2 Pro-p1">
-                                60%
-                            </div>
-                            <hr class="positionp1">
-                        </div>
-                        <div class="row" style="margin-top:-420px">
-                            <div class="col-2 Pro-p1">
-                                P2
-                            </div>
-                            <div class="col-1 p1solid"></div>
-                            <div class="col-2 Pro-p1">
-                                40%
-                            </div>
-                            <div class="col-1 p1solid"></div>
-                            <div class="col-2 Pro-p1">
-                                60%
-                            </div>
-                            <hr class="positionp1">
-                        </div>
-                        <div class="col-12 bg-ht">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="col-12 TOTAL-WEIGHT">
-                                        TOTAL WEIGHT
-                                    </div>
-                                    <div class="col-12">
-                                        <div class=""><?= number_format(100) ?>%</div>
-                                    </div>
+                            <div class="col-6">
+                                <div class="col-12 TOTAL-WEIGHT">
+                                    TOTAL WEIGHT
                                 </div>
-                                <div class="col-6">
-                                    <div class="col-12 TOTAL-WEIGHT">
-                                        TOTAL ACHIEVEMENT
-                                    </div>
-                                    <div class="col-12">
-                                        <div class=""><?= number_format(70) ?>%</div>
-                                    </div>
+                                <div class="col-12">
+                                    <div class=""><?= number_format(100) ?>%</div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="col-12 TOTAL-WEIGHT">
+                                    TOTAL ACHIEVEMENT
+                                </div>
+                                <div class="col-12">
+                                    <div class=""><?= number_format(70) ?>%</div>
                                 </div>
                             </div>
                         </div>
@@ -494,4 +498,5 @@ $this->title = 'Promotion';
             </div>
         </div>
     </div>
+</div>
 </div> -->

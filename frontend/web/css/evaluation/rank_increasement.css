@@ -25,24 +25,24 @@
     border-left: 6px #5CAEF9 solid;
 }
 
-.progressRank {
+/* .progressRank {
     margin-top: 5px;
     padding: 0;
-    width: 90%;
+    width: 10px;
     height: 10px;
     overflow: hidden;
     background: #e5e5e5;
     border-radius: 6px;
-}
+} */
 
-.barent {
+/* .barent {
     position: relative;
     float: left;
     min-width: 1%;
     height: 100%;
     border: 10px;
     background: #1862e8;
-}
+} */
 
 .barent-1 {
     position: relative;
@@ -52,6 +52,27 @@
     border: 10px;
     background: #1862e8;
     margin-left: 35px;
+}
+
+.barent-copy {
+    background-color: #0159A9;
+    width: 150px;
+    height: 10px;
+    border-left: 3px #42A4FF solid;
+    border-right: 3px #42A4FF solid;
+    position: relative;
+    margin-top: 7px;
+}
+
+.language-font {
+    font-size: 10px;
+    background-color: #4CA0EE;
+    color: white;
+    border-radius: 3px;
+    margin-top: -15px;
+    position: absolute;
+    margin-left: 20px;
+
 }
 
 .barent-2 {
@@ -84,7 +105,7 @@
     margin-left: 125px;
 }
 
-.percent {
+/* .percent {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -95,7 +116,7 @@
     font-weight: 500;
     color: white;
     background-color: rgb(47, 121, 232);
-}
+} */
 
 .DeleteRound {
     width: 12px;
@@ -119,8 +140,7 @@
     border-radius: 3px;
     margin-top: -5px;
     height: 18px;
-    position: absolute;
-    margin-left: -3%;
+    position: fixed;
 }
 
 .increasement-rank {

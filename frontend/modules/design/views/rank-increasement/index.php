@@ -129,11 +129,10 @@ $this->title = 'Rank Increasement';
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="progressRank border-right">
-                                            <div class="barent" style="width:70%">
-                                                <span class="percent"></span>
-                                            </div>
-                                            <span class="badge badge-percent">F</span>
+                                        <div class="progressRank">
+                                            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                            <!--  <div class="barent-copy"></div> -->
+                                            <div class="badge language-font">F</div>
                                         </div>
                                     </td>
                                     <td>
