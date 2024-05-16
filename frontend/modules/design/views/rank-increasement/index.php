@@ -113,49 +113,181 @@ $this->title = 'Rank Increasement';
                             <th class="increasement-rank">Action</th>
                         </thead>
                         <tbody>
-
-                            <?php
-                            for ($i = 1; $i <= 4; $i++) {
-                            ?>
-                                <tr>
-                                    <td>
-                                        <div class="col-12 letter border-right">
-                                            F
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="col-12 border-right text-center">
-                                            <?= number_format(0) ?>-<?= number_format(11) ?>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="progressRank">
-                                            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                                            <!--  <div class="barent-copy"></div> -->
+                            <tr>
+                                <td>
+                                    <div class="col-12 letter border-right">
+                                        F
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="col-12 border-right text-center">
+                                        <?= number_format(0) ?>-<?= number_format(11) ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="wrapper">
+                                        <div class="progressrank">
                                             <div class="badge language-font">F</div>
                                         </div>
-                                    </td>
-                                    <td>
-                                        <div class="col-12 border-right text-center">
-                                            <?= number_format(0.0) ?>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="col-12 border-right text-center">
-                                            <?= number_format(0.0) ?>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="col-12 text-center">
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/deletered.png" class="DeleteRound">
-                                        </div>
-                                    </td>
-                                </tr>
+                                    </div>
 
-                            <?php
-                            }
-                            ?>
+                                </td>
+                                <td>
+                                    <div class="col-12 border-right text-center">
+                                        <?= number_format(0.0) ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="col-12 border-right text-center">
+                                        <?= number_format(0.0) ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="col-12 text-center">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/deletered.png" class="DeleteRound">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="col-12 letter border-right">
+                                        E
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="col-12 border-right text-center">
+                                        <?= number_format(0) ?>-<?= number_format(11) ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="wrapper">
+                                        <div class="progressrank-E">
+                                            <div class="badge language-font">E</div>
+                                        </div>
+                                    </div>
 
+                                </td>
+                                <td>
+                                    <div class="col-12 border-right text-center">
+                                        <?= number_format(0.0) ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="col-12 border-right text-center">
+                                        <?= number_format(0.0) ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="col-12 text-center">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/deletered.png" class="DeleteRound">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="col-12 letter border-right">
+                                        D
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="col-12 border-right text-center">
+                                        <?= number_format(0) ?>-<?= number_format(11) ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="wrapper">
+                                        <div class="progressrank-D">
+                                            <div class="badge language-font">D</div>
+                                        </div>
+                                    </div>
+
+                                </td>
+                                <td>
+                                    <div class="col-12 border-right text-center">
+                                        <?= number_format(0.0) ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="col-12 border-right text-center">
+                                        <?= number_format(0.0) ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="col-12 text-center">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/deletered.png" class="DeleteRound">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="col-12 letter border-right">
+                                        B
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="col-12 border-right text-center">
+                                        <?= number_format(0) ?>-<?= number_format(11) ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="wrapper">
+                                        <div class="progressrank-B">
+                                            <div class="badge language-font">B</div>
+                                        </div>
+                                    </div>
+
+                                </td>
+                                <td>
+                                    <div class="col-12 border-right text-center">
+                                        <?= number_format(0.0) ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="col-12 border-right text-center">
+                                        <?= number_format(0.0) ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="col-12 text-center">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/deletered.png" class="DeleteRound">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="col-12 letter border-right">
+                                        C
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="col-12 border-right text-center">
+                                        <?= number_format(0) ?>-<?= number_format(11) ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="wrapper">
+                                        <div class="progressrank-C">
+                                            <div class="badge language-font">C</div>
+                                        </div>
+                                    </div>
+
+                                </td>
+                                <td>
+                                    <div class="col-12 border-right text-center">
+                                        <?= number_format(0.0) ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="col-12 border-right text-center">
+                                        <?= number_format(0.0) ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="col-12 text-center">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/deletered.png" class="DeleteRound">
+                                    </div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
