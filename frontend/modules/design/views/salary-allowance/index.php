@@ -123,7 +123,7 @@ $this->title = 'Salary Allowance';
                 </div>
                 <div class="example-background">
                     <div class="row">
-                        <div class="col-md-4 b4solid">
+                        <div class="col-md-4">
                             <div class="b4">
                                 <div class="col-12">
                                     <span class="b4weight">E3</span><span class="b4E3"> Final Evaluation Phase</span>
@@ -133,10 +133,9 @@ $this->title = 'Salary Allowance';
                                     <span class="font-size-10">Start</span>
                                     <li class="step is-active" data-step="1"></li>
                                     <li class="step" data-step="2"></li>
-                                    <li class="step" data-step="3"> </li>
+                                    <li class="step" data-step="3"></li>
                                     <span class="font-size-10">Finish</span>
                                 </ol>
-
                             </div>
                         </div>
 
