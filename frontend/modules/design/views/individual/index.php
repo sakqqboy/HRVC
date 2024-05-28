@@ -121,7 +121,7 @@ $this->title = 'Individual';
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-12">
             <div class="col-12 individual_Mypanel">
                 <div class="row">
                     <div class="col-3 My_panel">
@@ -171,7 +171,7 @@ $this->title = 'Individual';
                                 <div class="font-size-11">Final Evaluation</div>
                                 <div class="ON-info"></div><span class="font-size-10">Waiting</span>
                             </div>
-                            <div class="col-2">
+                            <div class="col-2 border">
                                 <button type="submit" class="btn_My_panel_New">New</button><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/sendgry.png" class="sendcompleted">
                             </div>
                         </div>
@@ -223,7 +223,7 @@ $this->title = 'Individual';
                             </div>
                             <div class="col-2">
                                 <div class="font-size-11">Mid</div>
-                                <span class="badge rounded-pill on_procressing"></span><span class="font-size-10">ON GOING</span>
+                                <div class="ON-Orange"></div><span class="font-size-10">ON GOING</span>
                             </div>
                             <div class="col-3">
                                 <div class="font-size-11">Final Evaluation</div>
@@ -243,7 +243,7 @@ $this->title = 'Individual';
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/mouse.png" class="mouse1e">
                     </div>
                     <div class="col-5 text-end">
-                        <a href="" class="text-primary"> See All</a>
+                        <a href="" class="textprimary"> See All</a>
                     </div>
                 </div>
             </div>
