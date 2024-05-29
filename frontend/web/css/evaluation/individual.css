@@ -1,30 +1,33 @@
 .individual_step1 {
     background-color: white;
     border-radius: 7px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 170px;
 }
 
 .individual_step2 {
     background-color: white;
     border-radius: 7px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 170px;
 }
 
 .individual_userlogin {
-    width: 55px;
-    height: 55px;
+    width: 50px;
+    height: 50px;
     border-radius: 50px;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .Individual_step2_name {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.1px;
+    font-size: 13px;
+    font-weight: 600;
     padding-top: 8px;
     color: black;
 }
@@ -44,13 +47,14 @@
     padding-bottom: 20px;
     padding-left: 5px;
     padding-right: 5px;
+    height: 170px;
 }
 
 .Individual_step4_country {
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 500;
     color: black;
-    padding-top: 3px;
+    padding-top: 5px;
 }
 
 .imageIndividual_country1 {
@@ -84,7 +88,7 @@
 }
 
 .imageindividual_Charts {
-    width: 15px;
+    width: 12px;
 }
 
 .individual_Financial {
@@ -177,12 +181,6 @@ div[role="progressbar_step_danger"]::before {
     border-radius: 50%;
 }
 
-.individual_firstname {
-    font-size: 12px;
-    color: #006AA6;
-    font-weight: 500;
-}
-
 .individual_primary {
     font-size: 13px;
     letter-spacing: -0.8px;
@@ -191,7 +189,9 @@ div[role="progressbar_step_danger"]::before {
 }
 
 .trants_individual_firstname {
+    font-size: 12px;
     color: #006AA6;
+    font-weight: 500;
 }
 
 .My_panel {
@@ -205,12 +205,12 @@ div[role="progressbar_step_danger"]::before {
 }
 
 .individual_Mypanel {
-    background-color: #fcfeff;
-    border-radius: 7px;
+    background-color: #ecf0f6;
+    border-radius: 8px;
     padding-top: 10px;
     padding-bottom: 10px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
     margin-top: 20px;
 }
 
@@ -221,66 +221,81 @@ div[role="progressbar_step_danger"]::before {
     border-radius: 50px;
 }
 
-.ON-Orange {
-    width: 8px;
-    height: 8px;
-    background-color: #FEC426;
-    border-radius: 50px;
-}
-
 .font-onorange {
-    font-size: 10px;
+    font-size: 9px;
 }
 
-.ON-info {
-    background-color: #C7EBFF;
-    border-radius: 50px;
+.imagesEllipse {
     width: 8px;
-    height: 8px;
-
 }
 
-.ON-green {
-    background-color: #06B217;
-    border-radius: 50px;
-    width: 8px;
-    height: 8px;
+.completed_textgreen {
+    color: #06B217;
+    font-size: 11px;
 }
 
 .tb_mypanel {
     border-radius: 5px;
-    background-color: #F4F6F9;
-    border-left: 6px orange solid;
+    background-color: white;
+    border-left: 6px #FFA620 solid;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.tb_mypanel_blue {
+    border-radius: 5px;
+    background-color: white;
+    border-left: 6px #5CAEF9 solid;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .tb_mypanel_none {
     border-radius: 5px;
-    background-color: #F4F6F9;
+    background-color: white;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
-.sendcompleted {
+.sendcompleted1 {
     width: 22px;
+    padding-top: 15px;
+    margin-left: -10px;
+}
+
+.sendcompleted2 {
+    width: 22px;
+    padding-top: 15px;
 }
 
 .tb_mypanel_e4 {
     background-color: #D1E5F9;
     border-radius: 3px;
     color: #004DB0;
-    width: 38px;
     padding-top: 1px;
     padding-bottom: 1px;
     padding-left: 2px;
     padding-right: 2px;
-    margin-left: 2px;
+    margin-left: 3px;
     margin-top: 5px;
+    width: 35px;
 }
 
 .btn_My_panel_New {
-    font-size: 10px;
+    font-size: 11px;
     background-color: #33aff7;
     color: #ffffff;
     border-radius: 4px;
     border: none;
+    margin-top: 14px;
+    margin-left: -9px;
+    padding-bottom: 2px;
 }
 
 .E41_weight {
@@ -313,13 +328,17 @@ div[role="progressbar_step_danger"]::before {
 }
 
 .position_name {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 500;
 }
 
 .spring {
-    padding-top: 15px;
-    padding-left: 5px;
+    padding-top: 10px;
     font-size: 11px;
     font-weight: 500;
+}
+
+.fontSeeAll {
+    color: #2580D3;
+    font-size: 14px;
 }

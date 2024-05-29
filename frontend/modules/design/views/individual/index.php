@@ -6,15 +6,15 @@ use Faker\Extension\NumberExtension;
 $this->title = 'Individual';
 ?>
 
-<div class="col-12 mt-70 environment pt-10 pr-10 pl-20">
+<div class="col-12 mt-70 environment pt-10 pr-10 pl-10">
     <div class="row">
-        <div class="col-lg-3 col-md-6 col-6">
+        <div class="col-lg-3 col-md-6 col-12">
             <div class="col-12 individual_step1">
-                <div class="row">
+                <div class="row mt-30">
                     <div class="col-2">
                         <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="individual_userlogin">
                     </div>
-                    <div class="col-10 pl-30 pt-5">
+                    <div class="col-10 pl-25 pt-5">
                         <div class="Individual_step2_name">Teriyaki Bickleton</div>
                         <div class="Individual_step3_company"> Tokyo Consulting Firm Limited</div>
                         <div class="Individual_step4_country"><img src="<?= Yii::$app->homeUrl ?>image/Thailand.png" class="imageIndividual_country1"> Dhaka, Bangladesh</div>
@@ -22,7 +22,7 @@ $this->title = 'Individual';
                 </div>
             </div>
         </div>
-        <div class="col-lg-7 col-md-6 col-6">
+        <div class="col-lg-7 col-md-6 col-12">
             <div class="individual_step2">
                 <div class="row">
                     <div class="col-3">
@@ -103,19 +103,19 @@ $this->title = 'Individual';
                 </div>
             </div>
         </div>
-        <div class="col-lg-2 col-md-6 col-6">
+        <div class="col-lg-2 col-md-6 col-12">
             <div class="col-12 individual_step3_hraf">
                 <div class="col-12 individual_primary">
                     Primary Evaluator
                 </div>
                 <div class="col-12 mt-5">
-                    <img src="<?= Yii::$app->homeUrl ?>image/employee2.png" class="imagesstep_userlog"><a href="#" class="trants_individual_firstname"><span class="individual_firstname">&nbsp;Taiki Taninokuchi</span></a>
+                    <img src="<?= Yii::$app->homeUrl ?>image/employee2.png" class="imagesstep_userlog"><a href="#" class="trants_individual_firstname">Taiki Taninokuchi</a>
                 </div>
                 <div class="col-12 individual_primary">
                     Final Evaluator
                 </div>
                 <div class="col-12 mt-5">
-                    <img src="<?= Yii::$app->homeUrl ?>image/Mohammed.png" class="imagesstep_userlog"><a href="#" class="trants_individual_firstname"><span class="individual_firstname">&nbsp;Mohammed Foruge</span></a>
+                    <img src="<?= Yii::$app->homeUrl ?>image/Mohammed.png" class="imagesstep_userlog"><a href="#" class="trants_individual_firstname">Mohammed Foruge</a>
                 </div>
             </div>
         </div>
@@ -130,17 +130,16 @@ $this->title = 'Individual';
                     <div class="col-9 Panel-radio">
                         <div class="row">
                             <div class="col-4">
-                                <div class="ON-Orange"></div> <span class="font-onorange"> ON GOING (Pending)</span>
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Ellipseorange.png" class="imagesEllipse">
+                                <span class="font-onorange"> ON GOING (Pending)</span>
                             </div>
                             <div class="col-5">
-                                <div class="ON-info"></div>
-                                <div class="font-onorange"> Waiting For Mid Approval </div>
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Ellipseblue.png" class="imagesEllipse">
+                                <span class="font-onorange"> Waiting For Mid Approval </span>
                             </div>
-                            <div class="col-2">
-                                <div class="ON-green"></div>
-                                <div class="font-onorange"> Completed</div>
-                            </div>
-                            <div class="col-1">
+                            <div class="col-3">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Ellipsegreen.png" class="imagesEllipse">
+                                <span class="font-onorange"> Completed</span>&nbsp;
                                 <i class="fa fa-info text-primary"></i>
                             </div>
                         </div>
@@ -149,7 +148,7 @@ $this->title = 'Individual';
                 <hr>
 
                 <?php
-                for ($i = 1; $i <= 6; $i++) {
+                for ($i = 1; $i <= 2; $i++) {
                 ?>
 
                     <div class="tb_mypanel mt-20">
@@ -160,19 +159,22 @@ $this->title = 'Individual';
                                     <div class="E42_weight">2023</div>
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-3">
                                 <div class="spring">Spring Evaluation Ban</div>
                             </div>
-                            <div class="col-2">
+                            <div class="col-3">
                                 <div class="font-size-11">Mid</div>
-                                <span class="ON-Orange"></span><span class="font-size-10">ON GOING</span>
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Ellipseorange.png" class="imagesEllipse"><span class="font-size-10"> ON GOING</span>
                             </div>
                             <div class="col-3">
                                 <div class="font-size-11">Final Evaluation</div>
-                                <div class="ON-info"></div><span class="font-size-10">Waiting</span>
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Ellipseblue.png" class="imagesEllipse"><span class="font-size-10"> Waiting</span>
                             </div>
-                            <div class="col-2 border">
-                                <button type="submit" class="btn_My_panel_New">New</button><img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/sendgry.png" class="sendcompleted">
+                            <div class="col-1">
+                                <button type="submit" class="btn_My_panel_New">New</button>
+                            </div>
+                            <div class="col-1">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/sendgry.png" class="sendcompleted1">
                             </div>
                         </div>
                     </div>
@@ -180,12 +182,49 @@ $this->title = 'Individual';
                 <?php
                 }
                 ?>
+
+                <?php
+                for ($i = 1; $i <= 4; $i++) {
+                ?>
+
+                    <div class="tb_mypanel_blue mt-20">
+                        <div class="row">
+                            <div class="col-1">
+                                <div class="tb_mypanel_e4">
+                                    <div class="E41_weight">E4</div>
+                                    <div class="E42_weight">2023</div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="spring">Spring Evaluation Ban</div>
+                            </div>
+                            <div class="col-3">
+                                <div class="font-size-11">Mid</div>
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Ellipseorange.png" class="imagesEllipse"><span class="font-size-10"> ON GOING</span>
+                            </div>
+                            <div class="col-3">
+                                <div class="font-size-11">Final Evaluation</div>
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Ellipseblue.png" class="imagesEllipse"><span class="font-size-10"> Waiting</span>
+                            </div>
+                            <div class="col-1">
+                                <button type="submit" class="btn_My_panel_New">New</button>
+                            </div>
+                            <div class="col-1">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/sendgry.png" class="sendcompleted1">
+                            </div>
+                        </div>
+                    </div>
+
+                <?php
+                }
+                ?>
+
                 <div class="row mt-10">
                     <div class="col-7 text-end">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/mouse.png" class="mouse1e">
                     </div>
                     <div class="col-5 text-end">
-                        <a href="" class="text-primary"> See All</a>
+                        <a href="" class="fontSeeAll"> See All</a>
                     </div>
                 </div>
 
@@ -210,9 +249,9 @@ $this->title = 'Individual';
                                     <div class="E42_weight">2023</div>
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-5 pl-15">
                                 <div class="row">
-                                    <div class="col-3">
+                                    <div class="col-3 text-end">
                                         <img src="<?= Yii::$app->homeUrl ?>image/catt.jpg" class="IMG">
                                     </div>
                                     <div class="col-9 pt-5">
@@ -221,16 +260,12 @@ $this->title = 'Individual';
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-2">
-                                <div class="font-size-11">Mid</div>
-                                <div class="ON-Orange"></div><span class="font-size-10">ON GOING</span>
-                            </div>
-                            <div class="col-3">
-                                <div class="font-size-11">Final Evaluation</div>
-                                <span class="font-size-10">Waiting</span>
+                            <div class="col-4">
+                                <div class="font-size-11">Primary Evaluation</div>
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Ellipsegreen.png"> <span class="completed_textgreen">Completed</span>
                             </div>
                             <div class="col-2">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/sendgry.png" class="sendcompleted">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/sendgry.png" class="sendcompleted2">
                             </div>
                         </div>
                     </div>
@@ -243,9 +278,10 @@ $this->title = 'Individual';
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/mouse.png" class="mouse1e">
                     </div>
                     <div class="col-5 text-end">
-                        <a href="" class="textprimary"> See All</a>
+                        <a href="" class="fontSeeAll"> See All</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
