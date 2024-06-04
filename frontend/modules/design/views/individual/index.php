@@ -11,10 +11,10 @@ $this->title = 'Individual';
         <div class="col-lg-3 col-md-6 col-12">
             <div class="col-12 individual_step1">
                 <div class="row mt-30">
-                    <div class="col-2">
+                    <div class="col-lg-2 col-md-6 col-3">
                         <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="individual_userlogin">
                     </div>
-                    <div class="col-10 pl-25 pt-5">
+                    <div class="col-lg-10 col-md-6 col-9">
                         <div class="Individual_step2_name">Teriyaki Bickleton</div>
                         <div class="Individual_step3_company"> Tokyo Consulting Firm Limited</div>
                         <div class="Individual_step4_country"><img src="<?= Yii::$app->homeUrl ?>image/Thailand.png" class="imageIndividual_country1"> Dhaka, Bangladesh</div>
@@ -25,14 +25,14 @@ $this->title = 'Individual';
         <div class="col-lg-7 col-md-6 col-12">
             <div class="individual_step2">
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-lg-3 col-md-6 col-3">
                         <div class="individual_stepkey">E3</div>
                         <div class="individual_stepkey_number">2022</div>
                     </div>
-                    <div class="col-lg-6 col-6 col-6 performance_individual">
+                    <div class="col-lg-6 col-md-6 col-6 performance_individual">
                         Performance Indicator Matrices
                     </div>
-                    <div class="col-lg-3 col-md-6 col-6 individual_stepcompleted">
+                    <div class="col-lg-3 col-md-6 col-3 individual_stepcompleted">
                         Completed
                     </div>
                 </div>

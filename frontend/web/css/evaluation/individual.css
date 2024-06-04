@@ -19,10 +19,10 @@
 }
 
 .individual_userlogin {
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     border-radius: 50px;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 .Individual_step2_name {
@@ -30,6 +30,7 @@
     font-weight: 600;
     padding-top: 8px;
     color: black;
+    padding-left: 16px;
 }
 
 .Individual_step3_company {
@@ -38,6 +39,7 @@
     font-weight: 400;
     padding-top: 5px;
     color: black;
+    padding-left: 16px;
 }
 
 .individual_step3_hraf {
@@ -55,12 +57,14 @@
     font-weight: 500;
     color: black;
     padding-top: 5px;
+    padding-left: 16px;
 }
 
 .imageIndividual_country1 {
     border-radius: 50%;
     width: 13px;
     height: 13px;
+    margin-top: -5px;
 }
 
 .individual_stepkey {
@@ -341,4 +345,48 @@ div[role="progressbar_step_danger"]::before {
 .fontSeeAll {
     color: #2580D3;
     font-size: 14px;
+}
+
+@media (max-width: 768px) {
+
+    .individual_step1 {
+        margin-top: 20px;
+    }
+
+    .individual_step2 {
+        margin-top: 20px;
+        height: auto;
+    }
+
+    .individual_userlogin {
+        width: 100px;
+        height: 100px;
+        margin-top: -7px;
+    }
+
+    .Individual_step2_name {
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    .Individual_step3_company {
+        font-size: 15px;
+        padding-top: 6px;
+    }
+
+    .Individual_step4_country {
+        padding-top: 10px;
+        font-size: 13px;
+    }
+
+    .imageIndividual_country1 {
+        margin-top: -5px;
+    }
+
+    .individual_step3_hraf {
+        margin-top: 20px;
+    }
+
+    .individual_solidkey {}
+
 }
