@@ -347,6 +347,88 @@ div[role="progressbar_step_danger"]::before {
     font-size: 14px;
 }
 
+
+@media (max-width: 998px) {
+    .individual_step2 {
+        height: auto;
+        margin-top: 15px;
+    }
+
+    .individual_userlogin {
+        width: 100px;
+        height: 100px;
+        margin-top: -8px;
+        margin-left: 150px;
+    }
+
+    .Individual_step2_name {
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: -0.1px;
+        line-height: 35px;
+    }
+
+    .Individual_step3_company {
+        font-size: 13px;
+        font-weight: 500;
+    }
+
+    .Individual_step4_country {
+        padding-top: 8px;
+    }
+
+    .individual_step3_hraf {
+        margin-top: 15px;
+    }
+
+    .imagesstep_userlog {
+        width: 40px;
+        height: 40px;
+    }
+
+    .trants_individual_firstname {
+        padding-left: 9px;
+    }
+
+    .individual_primary {
+        margin-top: -5px;
+    }
+}
+
+@media (max-width:1010px) {
+    .individual_userlogin {
+        width: 45px;
+        height: 45px;
+    }
+
+    .Individual_step2_name {
+        font-size: 11px;
+    }
+
+    .Individual_step3_company {
+        font-size: 9px;
+    }
+
+    .Individual_step4_country {
+        font-size: 9px;
+    }
+
+    .imageIndividual_country1 {
+        width: 9px;
+        height: 9px;
+        margin-top: -3px;
+    }
+
+    .individual_stepkey {
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .individual_stepkey_number {
+        font-size: 10px;
+    }
+}
+
 @media (max-width: 768px) {
 
     .individual_step1 {
@@ -387,6 +469,39 @@ div[role="progressbar_step_danger"]::before {
         margin-top: 20px;
     }
 
-    .individual_solidkey {}
+    .individual_primary {
+        font-size: 15px;
+        padding-top: 12px;
+    }
 
+    .imagesstep_userlog {
+        width: 30px;
+        height: 30px;
+    }
+
+    .trants_individual_firstname {
+        padding-left: 10px;
+    }
+
+    .tb_mypanel_e4 {
+        width: 30px;
+    }
+
+    .E41_weight {
+        font-size: 12px;
+    }
+
+    .E42_weight {
+        font-size: 10px;
+    }
+
+    .spring {
+        margin-top: -5px;
+        font-size: 10px;
+        font-weight: 500;
+    }
+
+    .btn_My_panel_New {
+        font-size: 10px;
+    }
 }

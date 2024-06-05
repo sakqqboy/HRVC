@@ -8,13 +8,13 @@ $this->title = 'Individual';
 
 <div class="col-12 mt-70 environment pt-10 pr-10 pl-10">
     <div class="row">
-        <div class="col-lg-3 col-md-6 col-12">
+        <div class="col-lg-3 col-md-12 col-12">
             <div class="col-12 individual_step1">
                 <div class="row mt-30">
-                    <div class="col-lg-2 col-md-6 col-3">
+                    <div class="col-lg-2 col-md-4 col-3">
                         <img src="<?= Yii::$app->homeUrl ?>image/Watanabe.png" class="individual_userlogin">
                     </div>
-                    <div class="col-lg-10 col-md-6 col-9">
+                    <div class="col-lg-10 col-md-8 col-9">
                         <div class="Individual_step2_name">Teriyaki Bickleton</div>
                         <div class="Individual_step3_company"> Tokyo Consulting Firm Limited</div>
                         <div class="Individual_step4_country"><img src="<?= Yii::$app->homeUrl ?>image/Thailand.png" class="imageIndividual_country1"> Dhaka, Bangladesh</div>
@@ -22,7 +22,7 @@ $this->title = 'Individual';
                 </div>
             </div>
         </div>
-        <div class="col-lg-7 col-md-6 col-12">
+        <div class="col-lg-7 col-md-12 col-12">
             <div class="individual_step2">
                 <div class="row">
                     <div class="col-lg-3 col-md-6 col-3">
@@ -103,7 +103,7 @@ $this->title = 'Individual';
                 </div>
             </div>
         </div>
-        <div class="col-lg-2 col-md-6 col-12">
+        <div class="col-lg-2 col-md-12 col-12">
             <div class="col-12 individual_step3_hraf">
                 <div class="col-12 individual_primary">
                     Primary Evaluator
@@ -121,13 +121,13 @@ $this->title = 'Individual';
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+        <div class="col-lg-6 col-md-12 col-sm-6 col-12">
             <div class="col-12 individual_Mypanel">
                 <div class="row">
-                    <div class="col-3 My_panel">
+                    <div class="col-lg-3 col-md-6 col-3 My_panel">
                         My Panel
                     </div>
-                    <div class="col-9 Panel-radio">
+                    <div class="col-lg-9 col-md-6 col-9 Panel-radio">
                         <div class="row">
                             <div class="col-4">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Ellipseorange.png" class="imagesEllipse">
@@ -230,7 +230,7 @@ $this->title = 'Individual';
 
             </div>
         </div>
-        <div class="col-lg-6 col-md-6 col-12">
+        <div class="col-lg-6 col-md-12 col-12">
             <div class="col-12 individual_Mypanel">
                 <div class="col-12 My_panel">
                     Subordinate Panel
