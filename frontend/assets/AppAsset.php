@@ -92,6 +92,7 @@ class AppAsset extends AssetBundle
         'css/evaluation/promotion.css',
         'css/evaluation/processstatus.css',
         'css/evaluation/individual.css',
+        'css/evaluation/individual_procress.css',
         'css/evaluation/register_salary.css',
     ];
     public $js = [

@@ -1,0 +1,216 @@
+.individual_procress_step1 {
+    background-color: #F4F6F9;
+    border-radius: 7px;
+    margin-top: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.individual_procress_image1 {
+    border-radius: 50px;
+    width: 60px;
+    height: 60px;
+}
+
+.procress_step_name {
+    font-weight: 700;
+    font-size: 15px;
+    padding-top: 10px;
+}
+
+.procress_step_namecompany {
+    font-size: 10px;
+    letter-spacing: -0.2px;
+    color: black;
+}
+
+.procress_step_country {
+    font-size: 11px;
+    font-weight: 500;
+    padding-top: 5px;
+}
+
+.individual_procress_image2 {
+    width: 13px;
+    height: 13px;
+    border-radius: 50px;
+}
+
+.individual_procress_step2 {
+    background-color: #F4F6F9;
+    border-radius: 7px;
+    margin-top: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.individual_procress_step3 {
+    background-color: #F4F6F9;
+    border-radius: 7px;
+    margin-top: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.procress1_mid {
+    font-size: 14px;
+    font-weight: 500;
+    color: #7E7E7E;
+    text-align: center;
+}
+
+.procress2_approval {
+    font-size: 11px;
+    text-align: center;
+}
+
+/* css */
+
+.stepper-wrapper {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.stepper-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+
+    @media (max-width: 768px) {
+        font-size: 12px;
+    }
+}
+
+.stepper-item::before {
+    position: absolute;
+    content: "";
+    border-bottom: 2px solid #1d8fd5;
+    width: 100%;
+    top: 20px;
+    left: -50%;
+    z-index: 2;
+}
+
+.stepper-item::after {
+    position: absolute;
+    content: "";
+    border-bottom: 2px solid #e9eaec;
+    width: 100%;
+    top: 20px;
+    left: 50%;
+    z-index: 2;
+}
+
+.stepper-item .step-counter {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #e9eaec;
+    margin-bottom: 6px;
+}
+
+.stepper-item.active {
+    font-weight: bold;
+}
+
+.stepper-item.completed .step-counter {
+    background-color: hsl(199, 78%, 68%);
+}
+
+.stepper-item.completed::after {
+    position: absolute;
+    content: "";
+    border-bottom: 2px solid hsl(199, 78%, 68%);
+    width: 100%;
+    top: 20px;
+    left: 50%;
+    z-index: 3;
+}
+
+.stepper-item:first-child::before {
+    content: none;
+}
+
+.stepper-item:last-child::after {
+    content: none;
+}
+
+.submit_bcg {
+    background-color: #F4F6F9;
+    border-radius: 5px;
+    margin-top: 20px;
+
+}
+
+.procress_step_card {
+    background-color: #f2f2f2;
+    border-radius: 6px;
+    margin-left: 50px;
+    margin-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.individual_step_kgi {
+    width: 20px;
+}
+
+.shadow_badgewhite {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+    background-color: #ffff;
+    border-radius: 3px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.right_cir {
+    color: #06B217;
+    font-size: 20px;
+}
+
+.right_cir_1st {
+    color: #06B217;
+    font-size: 13px;
+}
+
+.right_cir_nf {
+    color: #C7EBFF;
+    font-size: 20px;
+}
+
+.right_cir_1st_nf {
+    color: #C7EBFF;
+    font-size: 13px;
+}
+
+.Submit_Progress1 {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.individual_procress_kfi {
+    font-size: 15px;
+    font-weight: 500;
+    padding-left: 20px;
+}
