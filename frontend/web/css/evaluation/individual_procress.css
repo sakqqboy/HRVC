@@ -152,7 +152,7 @@
 
 .submit_bcg {
     background-color: #F4F6F9;
-    border-radius: 5px;
+    border-radius: 7px;
     margin-top: 20px;
 
 }
@@ -205,12 +205,41 @@
 }
 
 .Submit_Progress1 {
-    font-size: 15px;
-    font-weight: 600;
+    font-size: 13px;
+    font-weight: 700;
 }
 
 .individual_procress_kfi {
     font-size: 15px;
     font-weight: 500;
     padding-left: 20px;
+}
+
+.submitprogress_arrow {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 9px;
+    padding-right: 9px;
+    border-radius: 3px;
+    background-color: #D1E5F9;
+    border: none;
+    color: #004DB0;
+    font-weight: 700;
+    letter-spacing: -0.7px;
+}
+
+.text_b_kgi {
+    font-weight: 700;
+    color: #004DB0;
+    font-size: 15px;
+}
+
+.progressindividual_deadline_day {
+    border: 1px lightgray solid;
+    border-radius: 30px;
+    margin-top: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-right: 4px;
+    font-size: 9px;
 }

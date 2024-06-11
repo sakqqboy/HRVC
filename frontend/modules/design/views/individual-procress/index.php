@@ -62,7 +62,19 @@ $this->title = 'Individual Procress';
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                <div class="input-group mb-3">
+                <div class="row mt-15">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                        <div class="col-12 font-size-10 font-b">
+                            Primary Evaluator
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                        <div class="col-12 font-size-10 font-b">
+                            Final Evaluator
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3 mt-15">
                     <span class="input-group-text group-btnprimary pl-4 pr-5">1st</span>
                     <span class="form-control group-controltext">
                         <div class="row">
@@ -97,6 +109,11 @@ $this->title = 'Individual Procress';
                     </span>
                     <span class="input-group-text group-btnprimary pr-3 pl-2">2nd</span>
                 </div>
+                <span class="badge rounded-pill text-end progressindividual_deadline_day">
+                    <span class="text-danger">deadline</span>
+                    <span class="text-secondary">: Mon,</span>
+                    <span class="text-dark">Feb 28,2024</span>
+                </span>
             </div>
         </div>
     </div>
@@ -104,17 +121,28 @@ $this->title = 'Individual Procress';
         <div class="row">
             <div class="col-lg-8 col-md-6 col-sm-6 col-6">
                 <div class="col-12">
-                    <span class="Submit_Progress1">Submit Progress</span> <span class="font-size-11 pl-15 text-secondary"> <i class="fa fa-check-circle right_cir_1st" aria-hidden="true"></i> 3 of 4 steps completed</span>
+                    <span class="Submit_Progress1">Submit Progress</span>
+                    <span id="myP" class=""><i class="fa fa-check-circle-o right_cir_1st" aria-hidden="true"></i> <span id="number_steps_first">0</span> of 3 completed</span>
                 </div>
-                <div class="col-12">
-                    KFI
+                <div class="col-12 pt-10 pl-10">
+                    <span class="text_b_kgi"> KFI</span> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/arrow-solid.png">
+                    <span class="text_b_kgi"> KGI</span> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/arrow-solid.png">
+                    <span class="text_b_kgi"> KPI</span> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/arrow-solid.png">
+                    <button class="submitprogress_arrow" onclick="move();this.disabled='true'">Submit</button>
+                </div>
+
+                <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+                <div class="w3-light-grey">
+                    <div id="myBarprogress_steps" class="w3-blue" style="height:12px;width:0%;border-radius:6px;margin-top:15px;">
+                    </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-6 col-6 text-end text-primary">
                 <a href="#" class="no-underline-primary"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Back</a>
             </div>
         </div>
-        <div class="col-12">
+        <div class="d-grid mx-auto mt-20">
             <div class="submit_bcg">
                 <div class="row">
                     <?php
