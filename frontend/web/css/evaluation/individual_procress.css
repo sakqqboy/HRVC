@@ -243,3 +243,51 @@
     padding-right: 4px;
     font-size: 9px;
 }
+
+.individual_pim_step1 {
+    background-color: #F4F6F9;
+    border-radius: 5px;
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.MY_PIM_PANEL {
+    color: #004DB0;
+    font-size: 17px;
+    font-weight: 700;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.button1_dualpim {
+    background-color: #D1E5F9;
+    border-radius: 3px;
+    margin-left: 5px;
+}
+
+.color-004DB0-E2 {
+    color: #004DB0;
+    font-weight: 700;
+    font-size: 15px;
+    text-align: center;
+}
+
+.color-004DB0-none {
+    color: #004DB0;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.pim1-imageslinegroup {
+    width: 10px;
+}
+
+.pim1_formatnumkfi {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #D1E5F9;
+    color: #004DB0;
+    border-radius: 3px;
+    font-size: 14px;
+}
