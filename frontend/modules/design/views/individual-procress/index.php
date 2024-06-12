@@ -131,8 +131,6 @@ $this->title = 'Individual Procress';
                     <button class="submitprogress_arrow" onclick="move();this.disabled='true'">Submit</button>
                 </div>
 
-                <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
                 <div class="w3-light-grey">
                     <div id="myBarprogress_steps" class="w3-blue" style="height:12px;width:0%;border-radius:6px;margin-top:15px;">
                     </div>

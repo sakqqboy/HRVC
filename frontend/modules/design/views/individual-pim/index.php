@@ -51,39 +51,105 @@ $this->title = 'Individual Procress';
                         KFI &nbsp; <span class="text-danger"><?= number_format(60) ?>%</span>
                     </div>
                     <div class="col-12 mt-10">
-                        <table class="table table-white">
-                            <tr>
-                                <td>
+                        <div class="col-12 bg-white">
+                            <div class="row">
+                                <div class="col-2 border">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/linegroup-4.png" class="pim1-imageslinegroup"> <span class="font-size-11 text-secondary font-b">Sales</span>
-                                </td>
-                                <td>
-                                    Priority
-                                </td>
-                                <td>
-                                    target 456686
-                                </td>
-                                <td>
+                                </div>
+                                <div class="col-3 border">
+                                    <span class="name-priority">Priority</span>
+                                    <span>
+                                        <div class="Priority"><span class="pl-8 font-size-10">A</span></div>
+                                    </span>
+                                </div>
+                                <div class="col-2 border">
+                                    <div class="col-12">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Target.png" class="individual_PIM_target1"><span class="font-size-10">Target</span>
+                                    </div>
+                                </div>
+                                <div class="col-2 border font-size-10">
                                     Update
-                                </td>
-                                <td>
-                                    21-Dec-23
-                                </td>
-                            </tr>
-                        </table>
+                                </div>
+                                <div class="col-3 border font-size-10">
+                                    <!-- <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/cal.png" class=""> -->
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                    <div class="text-danger font-size-10">21-Dec-23</div>
+                                </div>
+                            </div>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                <div class="individual_pim_step1">
-                    <div class="col-12">
-                        ghfgj
+                <div class="individual_pim_step1 pt-10 pb-10">
+                    <div class="col-3 badge pim1_formatnumkfi">
+                        KGI &nbsp; <span class="text-danger"><?= number_format(60) ?>%</span>
+                    </div>
+                    <div class="col-12 mt-10">
+                        <div class="col-12 bg-white">
+                            <div class="row">
+                                <div class="col-2 border">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/linegroup-4.png" class="pim1-imageslinegroup"> <span class="font-size-11 text-secondary font-b">Sales</span>
+                                </div>
+                                <div class="col-3 border">
+                                    <span class="name-priority">Priority</span>
+                                    <span>
+                                        <div class="Priority"><span class="pl-8 font-size-10">A</span></div>
+                                    </span>
+                                </div>
+                                <div class="col-2 border">
+                                    <div class="col-12">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Target.png" class="individual_PIM_target1"><span class="font-size-10">Target</span>
+                                    </div>
+                                </div>
+                                <div class="col-2 border font-size-10">
+                                    Update
+                                </div>
+                                <div class="col-3 border font-size-10">
+                                    <!-- <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/cal.png" class=""> -->
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                    <div class="text-danger font-size-10">21-Dec-23</div>
+                                </div>
+                            </div>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                <div class="individual_pim_step1">
-                    <div class="col-12">
-                        ghfgjfghgyf
+                <div class="individual_pim_step1 pt-10 pb-10">
+                    <div class="col-3 badge pim1_formatnumkfi">
+                        KPI &nbsp; <span class="text-danger"><?= number_format(60) ?>%</span>
+                    </div>
+                    <div class="col-12 mt-10">
+                        <div class="col-12 bg-white">
+                            <div class="row">
+                                <div class="col-2 border">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/linegroup-4.png" class="pim1-imageslinegroup"> <span class="font-size-11 text-secondary font-b">Sales</span>
+                                </div>
+                                <div class="col-3 border">
+                                    <span class="name-priority">Priority</span>
+                                    <span>
+                                        <div class="Priority"><span class="pl-8 font-size-10">A</span></div>
+                                    </span>
+                                </div>
+                                <div class="col-2 border">
+                                    <div class="col-12">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Target.png" class="individual_PIM_target1"><span class="font-size-10">Target</span>
+                                    </div>
+                                </div>
+                                <div class="col-2 border font-size-10">
+                                    Update
+                                </div>
+                                <div class="col-3 border font-size-10">
+                                    <!-- <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/cal.png" class=""> -->
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                    <div class="text-danger font-size-10">21-Dec-23</div>
+                                </div>
+                            </div>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
