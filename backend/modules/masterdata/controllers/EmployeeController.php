@@ -23,9 +23,10 @@ class EmployeeController extends Controller
 	public function actionEmployeeDetail($id)
 	{
 		$employee = Employee::find()
-			->select('employee.*,c.companyName,co.countryName,co.flag,t.titleName,
-			condition.employeeConditionName,s.statusName,na.nationalityName')
+			->select('employee.*,c.companyName,co.countryName,co.flag,t.titleName,b.branchName,
+			condition.employeeConditionName,s.statusName,na.nationalityName,c.city')
 			->JOIN("LEFT JOIN", "company c", "c.companyId=employee.companyId")
+			->JOIN("LEFT JOIN", "branch b", "b.branchId=employee.branchId")
 			->JOIN("LEFT JOIN", "title t", "t.titleId=employee.titleId")
 			->JOIN("LEFT JOIN", "country co", "co.countryId=c.countryId")
 			->JOIN("LEFT JOIN", "nationality na", "na.numCode=employee.nationalityId")
@@ -111,6 +112,29 @@ class EmployeeController extends Controller
 					"sureName" => $em["employeeSurename"],
 					"picture" => $em["picture"],
 					"isInPim" => PimWeight::hasEmployee($em["employeeId"], $pimWeightId)
+				];
+			endforeach;
+		}
+		return json_encode($data);
+	}
+	public function actionAllEmployee()
+	{
+		$employees = Employee::find()
+			->select('employee.employeeFirstname,employee.employeeSurename,employee.employeeId,employee.picture,t.titleName,t.layerId,d.departmentName')
+			->JOIN("LEFT JOIN", "department d", "d.departmentId=employee.departmentId")
+			->JOIN("LEFT JOIN", "title t", "t.titleId=employee.titleId")
+			->where(["d.status" => 1, "employee.status" => 1, 't.layerId' => [1], "t.status" => 1])
+			->asArray()
+			->orderBy('d.departmentId,t.layerId,employee.employeeFirstname')
+			->all();
+		$data = [];
+		if (isset($employees) && count($employees) > 0) {
+			foreach ($employees as $em) :
+				$data[$em["departmentName"]][$em["employeeId"]] = [
+					"firstName" => $em["employeeFirstname"],
+					"sureName" => $em["employeeSurename"],
+					"picture" => $em["picture"],
+					//"isInPim" => PimWeight::hasEmployee($em["employeeId"], $pimWeightId)
 				];
 			endforeach;
 		}

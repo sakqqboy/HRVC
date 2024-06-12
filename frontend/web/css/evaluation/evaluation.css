@@ -61,6 +61,83 @@
 .collapsebackground {
     background-color: #D1E5F9;
 }
+.number-circle2{
+    height: 20px;
+    width: 20px;
+    font-size: 12px;
+    border-radius: 100%;
+    border: 2px;
+    border-style: solid;
+    border-color: #23b3f1 !important;
+    text-align: center;
+}
+.number-circle-achived{
+    height: 21px;
+    width: 21px;
+    font-size: 12px;
+    border-radius: 100%;
+    border: 3px;
+    border-style: solid;
+    border-color: #f1c423 !important;
+    font-weight: 500;
+    text-align: center;
+}
+.term-circle-pass{
+    height: 25px;
+    width: 25px;
+    font-size: 12px;
+    border-radius: 100%;
+    border: 2px;
+    border-style: solid;
+    border-color: #23b3f1 !important;
+    background-color: #23b3f1  ;
+    color: white;
+    text-align: center;
+}
+.term-circle-running{
+    height: 25px;
+    width: 25px;
+    font-size: 12px;
+    border-radius: 100%;
+    border: 2px;
+    border-style: solid;
+    border-color: #23b3f1 !important;
+    text-align: center;
+}
+.term-circle-next{
+    height: 25px;
+    width: 25px;
+    font-size: 12px;
+    border-radius: 100%;
+    border: 2px;
+    border-style:dotted;
+    border-color: #23b3f1 !important;
+    text-align: center;
+}
+.step-line-term{
+    border-style: solid;
+    border-color: #23b3f1 !important;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 0px;
+    margin-top: 12px;
+}
+.step-line-term-next{
+    border-style: dotted;
+    border-color: #23b3f1 !important;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 0px;
+    margin-top: 12px;
+}
+.step-line{
+    border-style: solid;
+    border-color: #23b3f1 !important;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 0px;
+    margin-top: 8px;
+}
 
 #gradbox {
     height: 40px;

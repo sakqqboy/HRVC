@@ -65,4 +65,50 @@ class KfiEmployee extends \backend\models\hrvc\master\KfiEmployeeMaster
             ->all();
         return count($kfiEmployee);
     }
+    public static function employeeKfiRatio($employeeId)
+    {
+        $kfiEmployee = KfiEmployee::find()
+            ->where(["employeeId" => $employeeId, "status" => [1, 2, 4]])
+            ->asArray()
+            ->all();
+        $totalRatio = 0;
+        $totalKfi = 0;
+        if (isset($kfiEmployee) && count($kfiEmployee) > 0) {
+            $totalKfi = count($kfiEmployee);
+            foreach ($kfiEmployee as $ke) :
+                $ratio = 0;
+                $kfi = Kfi::find()
+                    ->where(["status" => [1, 2, 4], "kfiId" => $ke["kfiId"]])
+                    ->asArray()
+                    ->one();
+                $kfiHistory = KfiHistory::find()
+                    ->where(["kfiId" => $ke["kfiId"], "status" => [1, 2, 4]])
+                    ->asArray()
+                    ->orderBy("createDateTime DESC")
+                    ->one();
+                if (isset($kfiHistory) && !empty($kfiHistory)) {
+                    if ($kfi["targetAmount"] == null || $kfi["targetAmount"] == '' || $kfi["targetAmount"] == 0) {
+                        $ratio = 0;
+                    } else {
+                        if ($kfiHistory["code"] == '<' || $kfiHistory["code"] == '=') {
+                            $ratio = ((int)$kfiHistory['result'] / (int)$kfi["targetAmount"]) * 100;
+                        } else {
+                            if ($kfiHistory["result"] != '' && $kfiHistory["result"] != 0) {
+                                $ratio = ((int)$kfi["targetAmount"] / (int)$kfiHistory["result"]) * 100;
+                            } else {
+                                $ratio = 0;
+                            }
+                        }
+                    }
+                    $totalRatio += $ratio;
+                }
+            endforeach;
+        }
+        if ($totalKfi > 0) {
+            $percent = $totalRatio / $totalKfi;
+        } else {
+            $percent = 0;
+        }
+        return $percent;
+    }
 }

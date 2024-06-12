@@ -1,3 +1,15 @@
+<?php
+include("../config/main_function.php");
+
+if (checkUser($_SESSION["__id"]) == 0) {
+    echo "<script>alert('Session expired. Please log in again.'); location.href = 'https://bigsara-fordev.com/tokyo_new/new_template/';</script>";
+}
+
+if (checkBranch($_GET['branch'], $_SESSION["__id"]) == 0) {
+    echo "<script>alert('You do not have permission to access this page.  Please log in again.'); location.href = 'https://bigsara-fordev.com/tokyo_new/new_template/';</script>";
+}
+?>
+
 <html>
 
 <title>PL register flow</title>

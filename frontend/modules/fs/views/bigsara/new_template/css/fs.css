@@ -8,43 +8,36 @@
     font-size: 20px;
     font-weight: 600;
 }
-
 ::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     background-color: #F5F5F5;
 }
-
 .Register_financial {
     background-color: #2580D3;
     font-size: 12px;
     height: 25px;
 }
-
 .Data {
     background-color: rgb(240, 240, 240);
     color: #2580D3;
-    font-size: 10px;
-    letter-spacing: 0.1px;
+    font-size: 12px;
+    letter-spacing: 0.5px;
     font-weight: 600;
 }
-
 .example-tok {
     border-radius: 15px;
     background-color: rgb(232, 232, 232);
     font-size: 12px;
 }
-
 .bonus-point {
-    width: 14px;
+    width: 18px;
     cursor: pointer;
 }
-
 .line {
     height: 0;
     border: 1px solid #C4C4C4;
 }
-
 .line1 {
     width: 270px;
     height: 0;
@@ -54,21 +47,11 @@
     margin-top: 20px;
 }
 
-.download-up_png {
-    width: 12px;
-}
-
-.btn-420A7A {
-    background-color: #420A7A;
-    color: white;
-}
-
 .item {
     text-transform: uppercase;
     font-weight: 600;
     font-size: 12px;
 }
-
 .bth_AAR {
     border-radius: 2px;
     background-color: #2580D3;
@@ -85,7 +68,6 @@
     background-color: rgb(96, 151, 254);
     letter-spacing: 1px;
 }
-
 .picture-FilterPlus-bonus {
     width: 20px;
 }
@@ -109,19 +91,16 @@
     background-color: #2580D3;
     font-size: 8px;
 }
-
 .p-Gross {
     font-weight: 600;
     font-size: 10px;
     letter-spacing: 0.5px;
 }
-
 .progress-solid {
     border-left: rgb(207, 207, 207) 1px solid;
     height: 35px;
     margin-top: 4px;
 }
-
 div[role="progressbar1"] {
     width: 30px;
     height: 30px;
@@ -140,12 +119,10 @@ div[role="progressbar1"] {
     font-family: Helvetica, Arial, sans-serif;
     color: var(--fg);
 }
-
 div[role="progressbar1"]::before {
     counter-reset: percentage var(--value);
     content: counter(percentage) '%';
 }
-
 div[role="progressbar2"] {
     width: 30px;
     height: 30px;
@@ -169,7 +146,6 @@ div[role="progressbar2"]::before {
     counter-reset: percentage var(--value);
     content: counter(percentage) '%';
 }
-
 div[role="progressbar3"] {
     width: 30px;
     height: 30px;
@@ -218,76 +194,61 @@ div[role="progressbar4"]::before {
     counter-reset: percentage var(--value);
     content: counter(percentage) '%';
 }
-
 .hr-top {
     margin-top: -10px;
 }
-
 .secondary-items {
     border: none;
     border-radius: 4px;
     margin-top: 10px;
 }
-
 .secondary-itemss {
     border: none;
     border-radius: 3px;
     background-color: rgb(246 246 246);
     margin-top: -10px;
 }
-
 .secondary-CurrentYear {
     border: none;
     background-color: #ececec;
 }
-
 .icons_Monthly {
     width: 13px;
 }
-
 .m-calendar {
     border-bottom: rgb(181, 181, 181) 1px solid;
 }
-
 .BTH-Month {
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.5px;
 }
-
 .caret-square {
     cursor: pointer;
     font-size: 10px;
 }
-
 .images_CoolapseAside {
     width: 12px;
     cursor: pointer;
 }
-
 .number-solidd {
     border-bottom: lightgray 1px solid;
 }
-
 .images_performance_PL {
     width: 18px;
 }
-
 .select_buttongroup {
     border-left: 1px lightgray solid;
 }
-
 .Data_Filterfinancial1 {
     font-size: 14px;
     font-weight: 500;
     letter-spacing: -0.8px;
 }
-
 #ModalfitterLabel {
     font-size: 19px;
     font-weight: 600;
 }
-
 .AC-Primary {
     background-color: #2f8fe8;
     color: white;
@@ -296,12 +257,10 @@ div[role="progressbar4"]::before {
     padding-right: 6px;
     font-size: 11px;
 }
-
 .card {
     margin-top: 10px;
     padding: 2%;
 }
-
 .T-bule {
     background-color: #76a8e5;
     color: white;
@@ -310,7 +269,6 @@ div[role="progressbar4"]::before {
     padding-right: 6px;
     font-size: 11px;
 }
-
 .T-Warning {
     padding-left: 8px;
     padding-right: 8px;
@@ -319,7 +277,6 @@ div[role="progressbar4"]::before {
     border-radius: 2px;
     font-size: 11px;
 }
-
 .AC-Success {
     background-color: #0eaa0e;
     color: white;
@@ -328,7 +285,6 @@ div[role="progressbar4"]::before {
     padding-left: 6px;
     padding-right: 6px;
 }
-
 .text-Done {
     color: #3ab8e6;
     font-weight: 500;
@@ -337,7 +293,6 @@ div[role="progressbar4"]::before {
     font-size: 13px;
     text-align: end;
 }
-
 .BTH1 {
     font-size: 14px;
     font-weight: 800;
@@ -346,27 +301,22 @@ div[role="progressbar4"]::before {
     letter-spacing: -0.9px;
     padding-top: 5px;
 }
-
 .financial_all_Roundup {
     cursor: pointer;
 }
-
 .images_Round-Up {
     width: 18px;
 }
-
 .text_Roundup1 {
     font-size: 12px;
     font-weight: 500;
     letter-spacing: -0.8px;
 }
-
 .text_Roundup {
     font-size: 15px;
     font-weight: 500;
     letter-spacing: -0.8px;
 }
-
 #DataDistionaryLabel {
     font-size: 16px;
     letter-spacing: -0.8px;
@@ -397,7 +347,6 @@ div[role="progressbar4"]::before {
     inherits: false;
     initial-value: 0;
 }
-
 .numberrformat {
     font-size: 9px;
     font-weight: 400;
@@ -584,7 +533,7 @@ input[type="checkbox"]:checked+label {
 }
 
 .Curr {
-    color: #2377C6;
+    
     letter-spacing: 0.5px;
 }
 
@@ -708,7 +657,6 @@ form {
 .alpri4 {
     background-color: #E8FFE8;
 }
-
 .alert2-secondary3 {
     background-color: rgb(255, 255, 255);
 }
@@ -724,7 +672,6 @@ form {
     letter-spacing: -0.9px;
     color: #30313D;
 }
-
 .example-tok1 {
     border-radius: 20px;
     background-color: #f2f2f2;
@@ -733,69 +680,56 @@ form {
     width: 15rem;
     margin-left: 110px;
 }
-
 .FY {
     font-size: 10px;
     cursor: pointer;
 }
-
 .name_annual {
     color: #2580D3;
 }
-
 .radio_Golden19 {
     font-size: 20px;
     font-weight: 600;
     letter-spacing: -0.7px;
     font-family: 'sf pro display';
 }
-
 .Dark_Monthly {
     width: 15px;
 }
-
 .Accumulate_text {
     font-size: 11px;
     text-transform: uppercase;
     font-weight: 500;
 }
-
 .content-Fitter {
     font-size: 9px;
     margin-left: -9px;
     position: inherit;
     cursor: pointer;
 }
-
 .modal-fitter {
     margin-top: 250px;
     margin-left: 250px;
 }
-
 .AC-Accumulate {
     text-transform: uppercase;
     font-size: 11px;
     padding-top: 5px;
     letter-spacing: -0.8px;
 }
-
 .Fitter-PL {
     font-weight: 600;
 }
-
 .pt-table {
     margin-top: -5px;
 }
-
 .icons_Edits {
     width: 15px;
     cursor: pointer;
 }
-
 .images_Dark_FinanicalPlanning {
     width: 30px;
 }
-
 .nav-pills {
     --bs-nav-pills-link-active-bg: #e1e1e1;
 }
@@ -868,7 +802,7 @@ form {
     color: rgb(219, 40, 40);
     border-color: black;
     letter-spacing: 1px;
-    width: 85px;
+    width:85px;
 }
 
 .Round_radio {
@@ -887,7 +821,7 @@ form {
 
 .months_lights_page {
     border: none;
-    padding-right: 15px;
+    padding-right:15px;
     padding-left: 15px;
 
 }
@@ -908,12 +842,10 @@ form {
     border-radius: 2px;
     background-color: #00AD1C;
 }
-
 .dge_AAR_blue {
     border-radius: 2px;
     background-color: #2580D3;
 }
-
 .AAR-2022-1 {
     font-size: 7px;
 }

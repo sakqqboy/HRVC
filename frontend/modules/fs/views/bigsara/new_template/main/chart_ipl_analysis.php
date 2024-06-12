@@ -4,32 +4,38 @@
 
 <Head>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="../css/layout/font.css?v=<?= date("YmdHis"); ?>" rel="stylesheet">
 	<link href="../css/layout/layout.css?v=<?= date("YmdHis"); ?>" rel="stylesheet">
 	<link href="../css/fs.css?v=<?= date("YmdHis"); ?>" rel="stylesheet">
+	<link href="../css/pl.css?v=<?= date("YmdHis"); ?>" rel="stylesheet">
 	<link href="../css/chart.css?v=<?= date("YmdHis"); ?>" rel="stylesheet">
-
+	<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.min.css" rel="stylesheet">
 </Head>
 
-<body>
+<body class="background-Planning">
 	<div class="col-12">
-		<div class="col-12 alert background-Planning">
-			<div class="col-12 planning">
-				<img src="../images/icons/Dark/48px/FinanicalPlanning.png" class="images_Dark_FinanicalPlanning"> Financial Planning
+		<div class="col-12 alert ">
+			<div class="row">
+				<div class="col-6 planning" style="cursor: pointer;" onclick="window.location.href='https://bigsara-fordev.com/tokyo_new/new_template/main/index.php'">
+					<img src="../images/icons/Dark/48px/FinanicalPlanning.png" class="images_Dark_FinanicalPlanning">
+					Financial Planning
+				</div>
+				<div class="col-6 d-flex justify-content-end align-content-center" id="show_branch">
+
+				</div>
 			</div>
 			<div class="col-12 mt-10">
 				<div class="shadow pb-5 pt-5 mb-5 bg-body rounded alert2-secondary3">
 					<ul class="nav nav-pills" id="pills-tab" role="tablist">
 						<li class="nav-item" role="presentation">
-							<a class="nav-link text-dark" id="pills-Forcast-tab" data-bs-toggle="pill" data-bs-target="#pills-Forcast" type="button" role="tab" aria-controls="pills-Forcast" aria-selected="true"><img src="../images/icons/Dark/48px/PL-Forecast.png" class="images_performance_PL"> PL Forcast</a>
+							<a href="index.php" class="nav-link active"><img src="../images/icons/Light/Light/48px/PL-Forecast.png" class="images_performance_PL"> PL Forcast</a>
 						</li>
 						<li class="nav-item" role="presentation">
-							<a class="nav-link text-dark" id="pills-Golden-tab" data-bs-toggle="pill" data-bs-target="#pills-Golden" type="button" role="tab" aria-controls="pills-Golden" aria-selected="false"><img src="../images/icons/Dark/48px/Golden-Ratio.png" class="images_performance_PL"> Golden Ratio</a>
+							<a href="golden_ratio.php?branch=<?php echo $_GET['branch']; ?>" class="nav-link text-dark"><img src="../images/icons/Dark/48px/Golden-Ratio.png" class="images_performance_PL"> Golden Ratio</a>
 						</li>
 						<li class="nav-item" role="presentation">
-							<a class="nav-link text-dark" id="pills-Accounts-tab" data-bs-toggle="pill" data-bs-target="#pills-Accounts" type="button" role="tab" aria-controls="pills-Accounts" aria-selected="false"><img src="../images/icons/Dark/48px/Designation-1.png" class="images_performance_PL"> Forecast Accounts</a>
+							<a href="future_account_comparison.php?branch=<?php echo $_GET['branch']; ?>" class="nav-link text-dark"><img src="../images/icons/Dark/48px/Designation-1.png" class="images_performance_PL"> Forecast Accounts</a>
 						</li>
 					</ul>
 				</div>
@@ -52,51 +58,47 @@
 								<i class="fa fa-info-circle" aria-hidden="true"></i> Data Dictionary
 							</button>
 							<div class="btn-group ml-15 " role="group">
-								<button type="button" class="btn btn-outline-secondary font-size-12" style="border-color:lightgray;">
+								<a href="annual_graph.php?branch=<?php echo $_GET['branch']; ?>" type="button" class="btn btn-outline-secondary font-size-12" style="border-color:lightgray;">
 									<i class="fa fa-bar-chart" aria-hidden="true"></i>
-								</button>
-								<button type="button" class="btn btn-outline-secondary font-size-12" style="border-color:lightgray;">
+								</a>
+								<a type="button" class="btn btn-outline-secondary font-size-12" style="border-color:lightgray;">
 									Performance Chart
-								</button>
-								<button type="button" class="btn btn-outline-secondary font-size-12" style="border-left: 0;border-right:0;border-color:lightgray;">IPL Analysis</button>
-								<button type="button" class="btn btn-outline-secondary font-size-12" style="border-color:lightgray;">PLF Overview</button>
+								</a>
+								<a href="chart_ipl_analysis.php?branch=<?php echo $_GET['branch']; ?>" type="button" class="btn btn-outline-primary font-size-12" style="border-color:blue;">IPL Analysis</a>
+								<a href="chart_annual_compare.php?branch=<?php echo $_GET['branch']; ?>" type="button" class="btn btn-outline-secondary font-size-12" style="border-left: 0;border-color:lightgray;">PLF Overview</a>
 							</div>
 						</div>
 
 					</div>
-					<div class="row mt-15">
-						<div class="col-lg-3 col-12 pl-0">
+					<div class="row mt-10">
+						<div class="col-lg-2 col-12 pl-0">
 							<div class="col-12 alert-secondary secondary-CurrentYear font-b font-size-12 mb-15 pt-8 pr-10 pb-10 pl-15">
 								PL Content
 							</div>
-							<div class="shadow-none rounded pt-4 pb-4 pl-4 mb-10" style="background-color: lightgray;">
-								<div class="row">
-									<div class="col-2  text-center pl-20">
-										<input class="form-check-input" type="checkbox" value="" style="border-radius: 100%;">
-									</div>
-									<div class="col-10 pr-20">
-										<input type="text" class="shadow rounded pl-input">
-									</div>
-								</div>
-							</div>
+
 							<?php
-							for ($i; $i < 15; $i++) {
+							$categories = ["Sales", "Variable Expense", "Gross Profit (or Loss)", "Labor Cost", "Fixed Expense (Other)", "Fixed Expense", "Operating Profit (or Loss)", "Non-Operating Income", "Non-Operating Expense", "Ordinary Profit (or Loss)", "Break-Even Sales", "Marginal Profit Ratio"];
+
+							$i = 0;
+							foreach ($categories as $value) {
 							?>
-								<div class="shadow-none rounded pt-4 pb-4 pl-4 mb-10" style="background-color: lightgray;">
+								<div class="breakdown p-1 mb-10 <?php echo $i == 0 ? ' border border-primary' : ''; ?>" style="background-color: lightgray;cursor: pointer;" id="div_breakdown_<?php echo $i; ?>" onclick="check_breakdown(<?php echo $i; ?>);">
 									<div class="row">
 										<div class="col-10 pl-20">
-											<input type="text" class="shadow rounded pl-input">
+											<?php echo $value; ?>
 										</div>
-										<div class="col-2 pr-20 text-center ">
-											<input class="form-check-input" type="checkbox" value="" style="border-radius: 100%;">
+										<div class="col-2 pr-20 text-center">
+											<input class="form-check-input" type="radio" id="breakdown_index_<?php echo $i; ?>" name="breakdown_index" value="<?php echo $i; ?>" style="border-radius: 100%;" <?php echo $i == 0 ? 'checked' : ''; ?>>
 										</div>
 									</div>
 								</div>
 							<?php
+								$i++;
 							}
 							?>
+
 						</div>
-						<div class="col-lg-9 col-12 pr-0 pl-0">
+						<div class="col-lg-10 col-12 pr-0 pl-0">
 							<div class="col-12 pl-10 pr-0 alert-secondary secondary-CurrentYear">
 								<div class="row">
 									<div class="col-3 text-secondary pb-6">
@@ -105,30 +107,8 @@
 												<img src="../image/calendar.png" style="width: 13px;">
 												Current Year
 											</div>
-											<div class="col-6 pt-5 pl-0">
-												<select class="form-select text-primary font-size-10" aria-label="Default select example" style="height: 25px;">
-													<option selected value="">Select</option>
-													<option value="1">2020</option>
-													<option value="2">2021</option>
-													<option value="3">2022</option>
-													<option value="4">2024</option>
-												</select>
-											</div>
-										</div>
-									</div>
-									<div class="col-3 text-secondary">
-										<div class="row">
-											<div class="col-6 pt-8 pl-18 pr-10 font-size-12 text-end">
-												<img src="../image/dollar.png" class="imagedollar"> Currency
-											</div>
-											<div class="col-6 pt-5 pl-0">
-												<select class="form-select text-primary font-size-10" aria-label="Default select example" style="height: 25px;">
-													<option selected value=""> BTH (฿)</option>
-													<option value="1">2020</option>
-													<option value="2">2021</option>
-													<option value="3">2022</option>
-													<option value="4">2024</option>>
-												</select>
+											<div class="col-6 pt-5 pl-0" id="show_year">
+
 											</div>
 										</div>
 									</div>
@@ -138,26 +118,22 @@
 												<img src="../image/roundup.png"> Round Up
 											</div>
 											<div class="col-6 pt-5 pl-0">
-												<select class="form-select text-primary font-size-10" aria-label="Default select example" style="height: 25px;">
-													<option selected value=""> None</option>
-													<option value="1">2020</option>
-													<option value="2">2021</option>
-													<option value="3">2022</option>
-													<option value="4">2024</option>>
+												<select class="form-select text-primary" style="height: 25px;font-size:10px;" id="rate" name="rate" onchange="getChart()">
+													<option value="1">Normal</option>
+													<option value="1000">Thousand</option>
+													<option value="1000000">Million</option>
 												</select>
 											</div>
 										</div>
 									</div>
-									<div class="col-3 text-secondary text-end pt-8 font-size-12 pr-20">
-										<strong> F.Y. 2023 (Annual)</strong>
-									</div>
 								</div>
 							</div>
-							<div class="row mt-15">
-								<div class="col-lg-9">
-									<div class="col-12 text-primary">
-										<a href="" class="no-underline-primary font-size-13"> <i class="fa fa-chevron-left" aria-hidden="true"></i> Data Table</a>
-									</div>
+							<div class="row mt-10">
+								<div class="col-lg-3 text-primary">
+									<a href="fs_index.php?branch=<?php echo $_GET['branch']; ?>" class="no-underline-primary font-size-13"> <i class="fa fa-chevron-left" aria-hidden="true"></i> Data Table</a>
+								</div>
+								<div class="col font-size-16 text-center">
+									<strong> Individual P&L Analysis</strong>
 								</div>
 								<div class="col-lg-3 text-end">
 									<a href="" class="button-link border-buttom pb-5 bg-light no-underline-black ">
@@ -168,73 +144,22 @@
 									</a>
 								</div>
 							</div>
-							<div class="row" style="margin-top: -25px;">
-								<div class="col-12  font-size-16 text-center">
-									<strong> Individual P&L Analysis</strong>
-								</div>
-								<div class="col-12 font-size-16" style="margin-top: -5px;">
-									Variable Expense
-								</div>
-
-							</div>
-							<div class="col-12 mt-30 ">
-								<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-								<div class="col-12" style="height: 350px;">
-									<canvas id="mixed-chart"></canvas>
-									<script>
-										new Chart(document.getElementById("mixed-chart"), {
-											type: 'bar',
-											data: {
-												labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-												datasets: [{
-													label: "Jan",
-													type: "line",
-													borderColor: "#008BF0", //ฟ้า//
-													data: [400, 450, 600, 734, 660, 750, 673, 750, 483, 598, 750, 800],
-													fill: true,
-												}, {
-													label: "Feb",
-													type: "line",
-													data: [430, 600, 850, 930, 900, 920, 900, 970, 960, 850, 850, 950],
-													fill: true,
-													backgroundColor: "transparent",
-													borderColor: "red", ///แดง/
-													borderDash: [4, 4],
-												}, {
-													label: "Mar",
-													type: "bar",
-													backgroundColor: "#A9EC9F", //เขียวอ่อน///
-													data: [350, 547, 675, 905, 653, 899, 790, 950, 483, 598, 788, 940],
-												}, {
-													label: "Apr",
-													type: "bar",
-													backgroundColor: "#01724E", //เขียวเข้ม//
-													backgroundColorHover: "#3e95cd",
-													data: [360, 547, 783, 905, 653, 899, 690, 950, 483, 598, 788, 940],
-												}]
-											},
-											options: {
-												title: {
-													display: true
-												},
-												legend: {
-													display: false
-												},
-												responsive: true,
-												maintainAspectRatio: false
-											}
-										});
-									</script>
+							<div class="col-12">
+								<div class="col-12" style="height: 350px;" id="show_chart">
+									<canvas id="mixed_chart"></canvas>
 								</div>
 							</div>
 							<div class="col-12">
 								<div class="alert light-shadow-2" role="alert">
 									<div class="row">
-										<div class="col-lg-3">
-											<div class="light-shadow-3 pt-3 pb-5 pl-10">
+										<div class="col-lg-3" onclick="check_graph('current');">
+											<div class="light-shadow-3 pt-3 pb-5 pl-10 pr-10">
 												<div class="row">
-													<div class="col-12 pt-5 font-size-14 font-b">
+													<div class="col-9 pt-5 font-size-14 font-b">
 														Current Year-2022
+													</div>
+													<div class="col-3 text-end pt-5">
+														<input type="checkbox" checked name="current" id="current">
 													</div>
 												</div>
 											</div>
@@ -259,11 +184,14 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-lg-3">
-											<div class="light-shadow-3 pt-3 pb-5 pl-10">
+										<div class="col-lg-3" onclick="check_graph('previous');">
+											<div class="light-shadow-3 pt-3 pb-5 pl-10 pr-10">
 												<div class="row">
-													<div class="col-12 pt-5 font-size-14 font-b">
+													<div class="col-9 pt-5 font-size-14 font-b">
 														Previous Year
+													</div>
+													<div class="col-3 text-end pt-5">
+														<input type="checkbox" checked name="previous" id="previous">
 													</div>
 												</div>
 											</div>
@@ -279,11 +207,14 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-lg-3">
-											<div class="light-shadow-3 pt-3 pb-5 pl-10">
+										<div class="col-lg-3" onclick="check_graph('forecasted');">
+											<div class="light-shadow-3 pt-3 pb-5 pl-10 pr-10">
 												<div class="row">
-													<div class="col-12 pt-5 font-size-14 font-b">
+													<div class="col-9 pt-5 font-size-14 font-b">
 														Forecasted Year
+													</div>
+													<div class="col-3 text-end pt-5">
+														<input type="checkbox" checked name="forecasted" id="forecasted">
 													</div>
 												</div>
 											</div>
@@ -310,6 +241,8 @@
 			</div>
 		</div>
 	</div>
+
+
 	<div class="modal fade" id="DataDistionary" tabindex="-1" aria-labelledby="DataDistionaryLabel" aria-hidden="true">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content modal-DataDistionary">
@@ -381,3 +314,257 @@
 		</div>
 	</div>
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	const branchId = urlParams.get('branch');
+	const start_year_url = urlParams.get('start_year');
+
+	$(document).ready(function() {
+		getBarnch();
+		get_year();
+	});
+
+	function getBarnch() {
+		$.ajax({
+			type: "post",
+			url: "ajax/fs_index/get_branch.php",
+			data: {
+				branchId: branchId
+			},
+			dataType: "json",
+			success: function(response) {
+				if (response.result == 1) {
+					let text = `<h5 class='text-dark'>${response.companyName} -</h5> &nbsp;<h5 class='text-primary'>${response.branchName}</h5>`;
+					$('#show_branch').html(text);
+				}
+			},
+			error: function(jqXHR, exception) {
+				var msg = '';
+				if (jqXHR.status === 0) {
+					msg = 'Not connect. Verify Network.';
+				} else if (jqXHR.status == 404) {
+					msg = 'Requested page not found. [404]';
+				} else if (jqXHR.status == 500) {
+					msg = 'Internal Server Error [500].';
+				} else if (exception === 'parsererror') {
+					msg = 'Requested JSON parse failed.';
+				} else if (exception === 'timeout') {
+					msg = 'Time out error.';
+				} else if (exception === 'abort') {
+					msg = 'Ajax request aborted.';
+				} else {
+					msg = 'Uncaught Error. ' + jqXHR.responseText;
+				}
+
+				Swal.fire({
+					title: 'Warning !',
+					text: "There was a recording problem. Please contact the system administrator. " + msg,
+					icon: 'error',
+					showConfirmButton: false,
+					timer: 1500
+				});
+			}
+		});
+	}
+
+	function get_year() {
+		$.ajax({
+			beforeSend: function() {
+				swal.fire({
+					html: '<img src="../image/loading.gif" width="200px" height="200px" /><br/><h5 style="color:#93dbe9;">... LOADING ...</h5>',
+					showConfirmButton: false,
+					onRender: function() {
+						$('.swal2-content').prepend(sweet_loader);
+					}
+				});
+			},
+			url: 'ajax/chart_ipl_analysis/get_year.php',
+			type: 'POST',
+			dataType: 'html',
+			data: {
+				branchId: branchId,
+				start_year: start_year_url
+			},
+			success: function(data) {
+				Swal.close();
+				$('#show_year').html(data);
+				getChart();
+			},
+			error: function(jqXHR, exception) {
+				var msg = '';
+				if (jqXHR.status === 0) {
+					msg = 'Not connect. Verify Network.';
+				} else if (jqXHR.status == 404) {
+					msg = 'Requested page not found. [404]';
+				} else if (jqXHR.status == 500) {
+					msg = 'Internal Server Error [500].';
+				} else if (exception === 'parsererror') {
+					msg = 'Requested JSON parse failed.';
+				} else if (exception === 'timeout') {
+					msg = 'Time out error.';
+				} else if (exception === 'abort') {
+					msg = 'Ajax request aborted.';
+				} else {
+					msg = 'Uncaught Error. ' + jqXHR.responseText;
+				}
+
+				Swal.fire({
+					title: 'Warning !',
+					text: "There was a recording problem. Please contact the system administrator. " + msg,
+					icon: 'error',
+					showConfirmButton: false,
+					timer: 1500
+				});
+			}
+		});
+	}
+
+	function getChart() {
+
+		var start_year = $('#start_year').val();
+		var rate = $('#rate').val();
+		var breakdown_index = parseInt($("input[name='breakdown_index']:checked").val());
+
+		$.ajax({
+			beforeSend: function() {
+				swal.fire({
+					html: '<img src="../image/loading.gif" width="200px" height="200px" /><br/><h5 style="color:#93dbe9;">... LOADING ...</h5>',
+					showConfirmButton: false,
+					onRender: function() {
+						$('.swal2-content').prepend(sweet_loader);
+					}
+				});
+			},
+			url: 'ajax/chart_ipl_analysis/get_data.php',
+			type: 'POST',
+			dataType: 'json',
+			data: {
+				start_year: start_year,
+				branchId: branchId,
+				rate: rate,
+				breakdown_index: breakdown_index
+			},
+			success: function(data) {
+
+				Swal.close();
+				var array_data = data;
+				var array_datasets = [];
+
+				if ($('#previous').is(':checked')) {
+					array_datasets.push({
+						label: "Actual of Previous Year",
+						type: "line",
+						data: array_data.last_actual_amount,
+						fill: true,
+						borderColor: "#008BF0",
+						tension: 0.4
+					});
+				}
+
+				if ($('#forecasted').is(':checked')) {
+					array_datasets.push({
+						label: "Target of Forcasted Year",
+						type: "line",
+						data: array_data.next_target_amount,
+						fill: false,
+						backgroundColor: "transparent",
+						borderColor: "red", ///แดง/
+						borderDash: [4, 4],
+						tension: 0.4
+					});
+				}
+
+				if ($('#current').is(':checked')) {
+					array_datasets.push({
+						type: "bar",
+						label: "Actual of Current Year",
+						data: array_data.actual_amount,
+						backgroundColor: "#A9EC9F", //เขียวอ่อน///
+					}, {
+						type: "bar",
+						label: "Target of Current Year",
+						data: array_data.target_amount,
+						backgroundColor: "#01724E", //เขียวเข้ม//
+						backgroundColorHover: "#3e95cd"
+					});
+				}
+
+				var data = {
+					labels: array_data.monthName,
+					datasets: array_datasets
+				};
+
+				$('#mixed_chart').remove();
+				$('#show_chart').append('<canvas id="mixed_chart"><canvas>');
+				var ctx2 = document.getElementById("mixed_chart").getContext("2d");
+				new Chart(ctx2, {
+					type: 'scatter',
+					data: data,
+					options: {
+						scales: {
+							y: {
+								beginAtZero: true
+							}
+						},
+						legend: {
+							display: false
+						},
+						responsive: true,
+						maintainAspectRatio: false,
+					}
+				});
+			},
+			error: function(jqXHR, exception) {
+				var msg = '';
+				if (jqXHR.status === 0) {
+					msg = 'Not connect. Verify Network.';
+				} else if (jqXHR.status == 404) {
+					msg = 'Requested page not found. [404]';
+				} else if (jqXHR.status == 500) {
+					msg = 'Internal Server Error [500].';
+				} else if (exception === 'parsererror') {
+					msg = 'Requested JSON parse failed.';
+				} else if (exception === 'timeout') {
+					msg = 'Time out error.';
+				} else if (exception === 'abort') {
+					msg = 'Ajax request aborted.';
+				} else {
+					msg = 'Uncaught Error. ' + jqXHR.responseText;
+				}
+
+				Swal.fire({
+					title: 'Warning !',
+					text: "There was a recording problem. Please contact the system administrator. " + msg,
+					icon: 'error',
+					showConfirmButton: false,
+					timer: 1500
+				});
+			}
+		});
+	}
+
+	function check_breakdown(breakdown_index) {
+		$('#breakdown_index_' + breakdown_index).prop('checked', true);
+		$(".breakdown").removeClass("border border-primary");
+		$('#div_breakdown_' + breakdown_index).addClass("border border-primary");
+
+		getChart();
+	}
+
+	function check_graph(type) {
+		if ($('#' + type).is(':checked')) {
+			$('#' + type).prop('checked', false);
+		} else {
+			$('#' + type).prop('checked', true);
+		}
+		getChart();
+	}
+</script>

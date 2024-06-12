@@ -60,13 +60,13 @@ $this->title = 'Term Detail';
 						<thead>
 							<tr class="frame-table-header thead-evaluator">
 								<td class="text-start" style="border-top-left-radius:3px;">EMPLOYEES</td>
-								<td class="text-center"> KEY FINANCIAL INDICATOR</td>
-								<td class="text-center"> KEY GROUP INDICATOR</td>
-								<td class="text-center"> KEY PERFORMANCE INDICATOR</td>
+								<td class="text-center" style="width:17%;"> KFI</td>
+								<td class="text-center" style="width:17%;"> KGI</td>
+								<td class="text-center" style="width:17%;"> KPI</td>
 								<td class="text-center">
-									<div class="row">
-										<div class="col-6 text-start">PRIMARY EVALUATOR</div>
-										<div class="col-6 text-End">FINAL EVALUATOR</div>
+									<div class="row ">
+										<div class="col-6 text-start">1<sup>st</sup> EVALUATOR</div>
+										<div class="col-6 text-End pr-0">2<sup>rd</sup> EVALUATOR</div>
 									</div>
 								</td>
 								<td class="text-center" style="border-top-right-radius:3px;"> </td>
@@ -75,7 +75,7 @@ $this->title = 'Term Detail';
 						<tbody>
 							<?php
 							if (isset($employeePim) && count($employeePim) > 0) {
-								foreach ($employeePim as $em) :
+								foreach ($employeePim as $employeeId => $em) :
 							?>
 									<tr>
 										<td>
@@ -85,37 +85,54 @@ $this->title = 'Term Detail';
 										</td>
 										<td>
 											<div class="card crdEmployeeslight2">
-												<div class="text-group">
-													<img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-3.png" class="check-circle-Employees1">
-													<!-- <input class="form-check-input form-check-input-checkEmployees1" type="checkbox" value="InputEmployees" id=""> -->
-													<label class="form-check-label LabelEmployees" for="defaultCheck1"><?= $em["countAssignedKFI"] ?> Assigned &nbsp;</label>
-													<span>
-														<div role="progressbarprimary" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="--value:20"></div>
-													</span>
+												<div class="row">
+													<div class="col-8 text-center pr-0 pl-10" style="border-right:#2580D3 solid thin;">
+														<img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-3.png" class="check-circle-Employees1">
+														<label class="form-check-label LabelEmployees" for="defaultCheck1"><?= $em["countAssignedKFI"] ?> Assigned &nbsp;</label>
+													</div>
+													<div class="col-3 pl-5 pr-5">
+														<div id="">
+															<div data-num="<?= $em['ratioKFI'] ?>" id="data-total-percent" class="progress-item1" data-value="<?= $em['ratioKFI'] ?>%" style="background: conic-gradient(rgb(41, 140, 233) calc(<?= $em['ratioKFI'] ?>%), rgb(219, 239, 247) 0deg);">
+																<span id="totalPercent"><?= $em['ratioKFI'] ?>%</span>
+															</div>
+														</div>
+													</div>
 												</div>
 											</div>
 										</td>
 										<td>
 											<div class="card crdEmployeeslight3">
-												<div class="text-group">
-													<img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-3.png" class="check-circle-Employees2">
-													<!-- <input class="form-check-input form-check-input-checkEmployees2" type="checkbox" value="InputEmployees2" id=""> -->
-													<label class="form-check-label LabelEmployees2" for="defaultCheck2"><?= $em["countAssignedKGI"] ?> Assigned &nbsp;</label>
-													<span>
-														<div role="progressbaryellow" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="--value:80"></div>
-													</span>
+												<div class="row">
+													<div class="col-8 text-center pr-0 pl-10" style="border-right: #FDCA40 solid thin;">
+														<img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-3.png" class="check-circle-Employees2">
+														<label class="form-check-label LabelEmployees2" for=""><?= $em["countAssignedKGI"] ?> Assigned &nbsp;</label>
+													</div>
+													<div class="col-3 pl-5 pr-5">
+
+														<div id="">
+															<div data-num="<?= $em['ratioKFI'] ?>" id="data-total-percent2" class="progress-item2" data-value2="<?= number_format($em['ratioKGI']) ?>%" style="background: conic-gradient(rgb(233,183,41) calc(<?= number_format($em['ratioKGI']) ?>%), rgb(247,245,219) 0deg);animation: .4s ease-out reverse;">
+																<span id="totalPercent"><?= number_format($em['ratioKGI']) ?>%</span>
+															</div>
+														</div>
+													</div>
 												</div>
 											</div>
 										</td>
 										<td>
 											<div class="card crdEmployeeslight4">
-												<div class="text-group">
-													<img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-3.png" class="check-circle-Employees3">
-													<!-- <input class="form-check-input form-check-input-checkEmployees3" type="checkbox" value="InputEmployees3" id=""> -->
-													<label class="form-check-label LabelEmployees3" for="defaultCheck2"><?= $em["countAssignedKPI"] ?> Assigned &nbsp;</label>
-													<span>
-														<div role="progressbarred" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="--value:40"></div>
-													</span>
+												<div class="row">
+													<div class="col-8 text-center pr-0 pl-10" style="border-right: #FF6939 solid thin;">
+														<img src="<?= Yii::$app->homeUrl ?>images/icons/Light/Light/48px/SelectFromCheckboxs-3.png" class="check-circle-Employees3">
+														<label class="form-check-label LabelEmployees3" for="defaultCheck2"><?= $em["countAssignedKPI"] ?> Assigned &nbsp;</label>
+													</div>
+													<div class="col-3 pl-5 pr-5">
+
+														<div id="">
+															<div data-num="<?= $em['ratioKPI'] ?>" id="data-total-percent2" class="progress-item3" data-value3="<?= number_format($em['ratioKPI']) ?>%" style="background: conic-gradient(rgb(239,39,58) calc(<?= number_format($em['ratioKPI']) ?>%), rgb(253,239,242) 0deg);animation: .4s ease-out reverse;">
+																<span id="totalPercent"><?= number_format($em['ratioKPI']) ?>%</span>
+															</div>
+														</div>
+													</div>
 												</div>
 											</div>
 										</td>
@@ -129,23 +146,23 @@ $this->title = 'Term Detail';
 																<div class="col-1">
 																	<img src="<?= Yii::$app->homeUrl ?>image/thai.jpg" class="images2">
 																</div>
-																<div class="col-5">
+																<div class="col-8 pl-5 pr-0">
 																	<span class="nameimages2">
-																		<div class="Directorfontsmall1"> Guru</div>
-																		<div class="Directorfontsmall1"> Director</div>
+																		<div class="Directorfontsmall1" id="primary-<?= $employeeId ?>"><?= $em["primaryName"] ?></div>
+																		<div class="Directorfontsmall1" id="primary-title-<?= $employeeId ?>"><?= $em["primaryTitle"] ?><?= $em["primaryTitle"] == '' ? '' : ', ' . $em["primaryBranch"] ?></div>
 																	</span>
 																</div>
 															</div>
 														</div>
 														<div class="col-md-6">
 															<div class="row">
-																<div class="col-5">
+																<div class="col-7">
 																	<span class="nameimages2">
-																		<div class="Directorfontsmall2"> Vikrant</div>
-																		<div class="Directorfontsmall2"> Title</div>
+																		<div class="Directorfontsmall2" id="final-<?= $employeeId ?>"><?= $em["finalName"] ?></div>
+																		<div class="Directorfontsmall2" id="final-title-<?= $employeeId ?>"><?= $em["finalTitle"] ?><?= $em["finalTitle"] == '' ? '' : ', ' . $em["finalBranch"] ?></div>
 																	</span>
 																</div>
-																<div class="col-1">
+																<div class="col-1 pr-10 pl-10">
 																	<img src="<?= Yii::$app->homeUrl ?>image/thai.jpg" class="images3">
 																</div>
 															</div>
@@ -156,7 +173,7 @@ $this->title = 'Term Detail';
 											</div>
 										</td>
 										<td>
-											<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Assign.png" class="imagesAssingLight mt-13" data-bs-toggle="modal" data-bs-target="#evaluator-setting" style="cursor:pointer;">
+											<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Assign.png" class="imagesAssingLight mt-13" style="cursor:pointer;" onclick="javascript:setEvaluator(<?= $employeeId ?>)">
 										</td>
 									</tr>
 							<?php
@@ -170,4 +187,8 @@ $this->title = 'Term Detail';
 		</div>
 	</div>
 </div>
-<?= $this->render('modal_evaluator') ?>
+<?= $this->render('modal_evaluator', [
+	"companies" => $companies,
+	"employees" => $employees,
+	"termId" => $termId
+]) ?>

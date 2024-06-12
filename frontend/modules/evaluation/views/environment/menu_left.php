@@ -50,7 +50,7 @@ use common\models\ModelMaster;
 		$action = ["weight-allocate", "weight-allocate-setting", "kfi-weight-allocate", "kgi-weight-allocate", "kpi-weight-allocate"];
 		?>
 		<div class="rad-label pl-0 pr-0 pt-0" <?= in_array(Yii::$app->controller->action->id, $action) ? $selected : '' ?>>
-			<a href="<?= Yii::$app->homeUrl . 'evaluation/environment/weight-allocate/' . ModelMaster::encodeParams(['termId' => $termId]) ?>" class="no-underline">
+			<a href="<?= Yii::$app->homeUrl . 'evaluation/environment/weight-allocate-setting/' . ModelMaster::encodeParams(['termId' => $termId]) ?>" class="no-underline">
 				<div class="col-12 pl-5 rad-text pr-3">
 					<?php
 
@@ -84,11 +84,13 @@ use common\models\ModelMaster;
 			</a>
 		</div>
 		<div class="Evaluationdeshed"></div>
-		<div class="rad-label pl-0 pr-0">
-			<div class="col-12 pl-5 rad-text pr-3">
-				<i class="fa fa-circle mr-10 font-size-18 text-secondary" aria-hidden="true"></i>
-				<span class="text-dark font-weight-500">Rank & Increasement</span>
-			</div>
+		<div class="rad-label pl-0 pr-0" <?= Yii::$app->controller->action->id == 'index' ? $selected : '' ?>>
+			<a href="<?= Yii::$app->homeUrl . 'evaluation/rank/index/' . ModelMaster::encodeParams(['termId' => $termId]) ?>" class="no-underline">
+				<div class="col-12 pl-5 rad-text pr-3">
+					<i class="fa fa-circle mr-10 font-size-18 text-secondary" aria-hidden="true"></i>
+					<span class="text-dark font-weight-500">Rank & Increasement</span>
+				</div>
+			</a>
 		</div>
 		<div class="Evaluationdeshed"></div>
 		<div class="rad-label pl-0 pr-0">

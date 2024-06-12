@@ -83,7 +83,7 @@ class SiteController extends Controller
         if (!Yii::$app->user->id) {
             return $this->redirect(Yii::$app->homeUrl . "site/login");
         } else {
-            return $this->redirect(Yii::$app->homeUrl . 'site/dashboard');
+            return $this->redirect(Yii::$app->homeUrl . 'home/dashboard');
         }
     }
     public function actionDashboard()
@@ -176,7 +176,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->redirect(Yii::$app->homeUrl . 'site/dashboard');
+            return $this->redirect(Yii::$app->homeUrl . 'home/dashboard');
         }
 
         $model->password = '';

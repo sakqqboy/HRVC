@@ -198,7 +198,9 @@ $this->title = 'Term Detail';
 												<td class="border-left text-center td-frame">
 													<span id="start-date-"><?= $item["startDate"] ?></span>
 
-													<span class="badge bg-clder float-end" style="cursor:pointer;" data-bs-target="#set_term_date" data-bs-toggle="modal" onclick="javascript:setTermDate()">
+													<!-- <span class="badge bg-clder float-end" style="cursor:pointer;" data-bs-target="#set_term_date" data-bs-toggle="modal" onclick="javascript:setTermDate()"> -->
+													<span class="badge bg-clder float-end">
+
 														<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Calender.png" class="cenler-arrows">
 														<img src="<?= Yii::$app->homeUrl ?>image/arrowss.png" class="iconsarrowss">
 														<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Calender.png" class="cenler-arrows">

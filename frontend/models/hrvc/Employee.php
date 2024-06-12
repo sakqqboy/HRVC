@@ -81,9 +81,38 @@ class Employee extends \frontend\models\hrvc\master\EmployeeMaster
         if ($userId != '') {
             $user = User::find()->where(["userId" => $userId])->asArray()->one();
             if (isset($user) && !empty($user)) {
-                $employee = Employee::find()->select('branchId')->where(["employeeId" => $user["employeeId"]])->asArray()->one();
+                $employee = Employee::find()->select('branchId')
+                    ->where(["employeeId" => $user["employeeId"]])->asArray()->one();
             }
         }
         return $employee;
+    }
+    public static function employeeTitle($employeeId)
+    {
+        if ($employeeId != '') {
+            $employee = Employee::find()
+                ->select('t.titleName')
+                ->JOIN("LEFT JOIN", "title t", "t.titleId=employee.titleId")
+                ->where(["employee.employeeId" => $employeeId])
+                ->asArray()
+                ->one();
+            return $employee["titleName"];
+        } else {
+            return '';
+        }
+    }
+    public static function employeeBranch($employeeId)
+    {
+        if ($employeeId != '') {
+            $employee = Employee::find()
+                ->select('b.branchName')
+                ->JOIN("LEFT JOIN", "branch b", "b.branchId=employee.branchId")
+                ->where(["employee.employeeId" => $employeeId])
+                ->asArray()
+                ->one();
+            return $employee["branchName"];
+        } else {
+            return '';
+        }
     }
 }

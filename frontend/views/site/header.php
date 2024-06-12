@@ -16,7 +16,7 @@ use frontend\models\hrvc\UserRole;
                 </div>
                 <div class="col-12 navbar-header pl-15">
                         <div class="col-12">
-                                <a href="<?= Yii::$app->homeUrl ?>site/dashboard" class="no-underline">
+                                <a href="<?= Yii::$app->homeUrl ?>home/dashboard" class="no-underline">
                                         <i class="fa fa-th-large pr-10 mt-10" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tooltip on bottom"></i>
                                         Dashboard
                                 </a>
@@ -135,7 +135,7 @@ use frontend\models\hrvc\UserRole;
                         <div class="col-12 haeder-Evalution"> REPORTS</div>
                         <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/analysis" class="no-underline"><i class="fa fa-pie-chart pr-10 mt-20" aria-hidden="true"></i> Analysis</a></div>
                         <div class="col-12 haeder-Evalution">
-                                <a href="<?= Yii::$app->homeUrl ?>fs/bigsara/index" class="no-underline">
+                                <a href="http://localhost/system/index.php?__id=<?= Yii::$app->user->id ?>" class="no-underline">
                                         Financial Planning
                                 </a>
                         </div>

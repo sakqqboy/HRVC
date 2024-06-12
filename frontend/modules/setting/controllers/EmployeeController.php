@@ -1212,4 +1212,65 @@ class EmployeeController extends Controller
         }
         return json_encode($res);
     }
+    public function actionEmployeeDepartmentName()
+    {
+        $departmentName = $_POST["departmentName"];
+
+        $departments = Department::find()
+            ->select('departmentId')
+            ->where(["departmentName" => $departmentName, "status" => 1])
+            ->asArray()
+            ->all();
+        //throw new Exception(print_r($titles, true));
+        $departmentIds = [];
+        $res = [];
+        $employeeIds = [];
+        if (isset($departments) && count($departments) > 0) {
+            $i = 0;
+            foreach ($departments as $department) :
+                $departmentIds[$i] = $department["departmentId"];
+                $i++;
+            endforeach;
+        }
+        if (count($departments) > 0) {
+            $employee = Employee::find()
+                ->select('employee.employeeId,t.layerId')
+                ->JOIN("LEFT JOIN", "title t", "t.titleId=employee.titleId")
+                ->where([
+                    "employee.departmentId" => $departmentIds,
+                    "t.layerId" => 1,
+                    "t.status" => 1,
+                    "employee.status" => 1
+                ])
+                ->asArray()
+                ->all();
+            if (isset($employee) && count($employee) > 0) {
+                $j = 0;
+                foreach ($employee as $em) :
+                    $employeeIds[$j] = $em["employeeId"];
+                    $j++;
+                endforeach;
+            }
+        }
+        if (count($employeeIds) > 0) {
+            $res["status"] = true;
+            $res["employeeIds"] = $employeeIds;
+            //throw new Exception(print_r($employeeId, true));
+        } else {
+            $res["status"] = false;
+        }
+        return json_encode($res);
+    }
+    public function actionEmployeeDetail2()
+    {
+        $employeeId = $_POST["employeeId"];
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
+        $employee = curl_exec($api);
+        $employee = json_decode($employee, true);
+        curl_close($api);
+        return json_encode($employee);
+    }
 }

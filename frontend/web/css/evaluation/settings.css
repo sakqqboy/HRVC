@@ -87,16 +87,16 @@
 }
 
 .images2 {
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     margin-top: 1px;
     margin-left: -5px;
 }
 
 .images3 {
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     margin-top: 1px;
     margin-left: -3px;
@@ -203,18 +203,16 @@
 
 
 .LabelEmployees {
-    font-size: 8px;
-    border-right: 1px #2580D3 solid;
+    font-size: 10px;
+    
 }
 
 .LabelEmployees2 {
     font-size: 8px;
-    border-right: 1px #FDCA40 solid;
 }
 
 .LabelEmployees3 {
     font-size: 8px;
-    border-right: 1px #FF6939 solid;
 }
 
 .group-btnprimary {
@@ -316,6 +314,7 @@ letter-spacing: 0.2px;
     width: 20px;
     height: 20px;
 }
+
 
 /* .Accountsborderdark {
     border: black;
