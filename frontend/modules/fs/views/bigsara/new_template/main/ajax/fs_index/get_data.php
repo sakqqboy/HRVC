@@ -13,7 +13,7 @@ function calculateDivide($numerator, $denominator)
     return $denominator == 0 ? 0 : $numerator / $denominator;
 }
 
-$list_breakdown = ["Sales", "Variable Expense", "Gross Profit (or Loss)", "Labor Cost", "Fixed Expense (Other)", "Fixed Expense", "Operating Profit (or Loss)", "Non-Operating Income", "Non-Operating Expense", "Ordinary Profit (or Loss)", "Break-Even Point", "Marginal Profit Ratio"];
+$list_breakdown = ["Sales", "Variable Expense", "Gross Profit (or Loss)", "Labor Cost", "Fixed Expense (Other)", "Fixed Expense", "Operating Profit (or Loss)", "Non-Operating Income", "Non-Operating Expense", "Ordinary Profit (or Loss)", "Break-Even Sales", "Marginal Profit Ratio"];
 $list_breakdown_data = array();
 for ($i = 0; $i < 12; $i++) {
     $list_breakdown_data[] = array(
@@ -574,56 +574,56 @@ $listHead[11]['data'][] = array(
                         ?>
                                         <div class="row mb-7 pt-4 pb-4 border-buttom-bold" style="background-color: rgb(246 246 246);font-size: 10px;text-align: right;">
                                             <div class="col-3 border-buttom mb-2 pb-2">
-                                                <?php echo number_format($row_detail['last_actual_amount'], 2) . ' %'; ?>
-                                            </div>
-                                            <div class="col-3 border-buttom mb-2 pb-2">
-                                                <?php echo number_format($row_detail['actual_amount'], 2) . ' %'; ?>
-                                            </div>
-                                            <div class="col-3 border-buttom mb-2 pb-2">
-                                                <?php echo number_format($row_detail['target_amount'], 2) . ' %'; ?>
-                                            </div>
-                                            <div class="col-3 border-buttom mb-2 pb-2">
-                                                <?php echo number_format($row_detail['next_target_amount'], 2) . ' %'; ?>
-                                            </div>
-                                            <div class="col-3">
                                                 <?php echo number_format($row_detail['accum_last_act'], 2) . ' %'; ?>
                                             </div>
-                                            <div class="col-3">
+                                            <div class="col-3 border-buttom mb-2 pb-2">
                                                 <?php echo number_format($row_detail['accum_act'], 2) . ' %'; ?>
                                             </div>
-                                            <div class="col-3">
+                                            <div class="col-3 border-buttom mb-2 pb-2">
                                                 <?php echo number_format($row_detail['accum_tar'], 2) . ' %'; ?>
                                             </div>
-                                            <div class="col-3">
+                                            <div class="col-3 border-buttom mb-2 pb-2">
                                                 <?php echo number_format($row_detail['accum_next_tar'], 2) . ' %'; ?>
+                                            </div>
+                                            <div class="col-3">
+                                                &nbsp
+                                            </div>
+                                            <div class="col-3">
+                                                &nbsp
+                                            </div>
+                                            <div class="col-3">
+                                                &nbsp
+                                            </div>
+                                            <div class="col-3">
+                                                &nbsp
                                             </div>
                                         </div>
                                     <?php } else {
                                     ?>
                                         <div class="row mb-7 pt-4 pb-4 border-buttom-bold" style="background-color: rgb(246 246 246);font-size: 10px;text-align: right;">
                                             <div class="col-3 border-buttom mb-2 pb-2">
-                                                <?php echo number_format($row_detail['last_actual_amount'], 2); ?>
-                                            </div>
-                                            <div class="col-3 border-buttom mb-2 pb-2">
-                                                <?php echo number_format($row_detail['actual_amount'], 2); ?>
-                                            </div>
-                                            <div class="col-3 border-buttom mb-2 pb-2">
-                                                <?php echo number_format($row_detail['target_amount'], 2); ?>
-                                            </div>
-                                            <div class="col-3 border-buttom mb-2 pb-2">
-                                                <?php echo number_format($row_detail['next_target_amount'], 2); ?>
-                                            </div>
-                                            <div class="col-3">
                                                 <?php echo number_format($row_detail['accum_last_act'], 2); ?>
                                             </div>
-                                            <div class="col-3">
+                                            <div class="col-3 border-buttom mb-2 pb-2">
                                                 <?php echo number_format($row_detail['accum_act'], 2); ?>
                                             </div>
-                                            <div class="col-3">
+                                            <div class="col-3 border-buttom mb-2 pb-2">
                                                 <?php echo number_format($row_detail['accum_tar'], 2); ?>
                                             </div>
-                                            <div class="col-3">
+                                            <div class="col-3 border-buttom mb-2 pb-2">
                                                 <?php echo number_format($row_detail['accum_next_tar'], 2); ?>
+                                            </div>
+                                            <div class="col-3">
+                                                &nbsp
+                                            </div>
+                                            <div class="col-3">
+                                                &nbsp
+                                            </div>
+                                            <div class="col-3">
+                                                &nbsp
+                                            </div>
+                                            <div class="col-3">
+                                                &nbsp
                                             </div>
                                         </div>
                         <?php
@@ -690,16 +690,24 @@ $listHead[11]['data'][] = array(
                             ?>
                                             <div class="row mb-7 pt-4 pb-4 border-buttom-bold" style="background-color: rgb(246 246 246);font-size: 10px;text-align: right;">
                                                 <div class="col-3 border-buttom mb-2 pb-2">
-                                                    <?php echo number_format($row_detail['last_actual_amount'], 2) . ' %'; ?>
+                                                    <?php
+                                                    echo number_format($row_detail['last_actual_amount'], 2) . ' %';
+                                                    ?>
                                                 </div>
                                                 <div class="col-3 border-buttom mb-2 pb-2">
-                                                    <?php echo number_format($row_detail['actual_amount'], 2) . ' %'; ?>
+                                                    <?php
+                                                    echo number_format($row_detail['actual_amount'], 2) . ' %';
+                                                    ?>
                                                 </div>
                                                 <div class="col-3 border-buttom mb-2 pb-2">
-                                                    <?php echo number_format($row_detail['target_amount'], 2) . ' %'; ?>
+                                                    <?php
+                                                    echo number_format($row_detail['target_amount'], 2) . ' %';
+                                                    ?>
                                                 </div>
                                                 <div class="col-3 border-buttom mb-2 pb-2">
-                                                    <?php echo number_format($row_detail['next_target_amount'], 2) . ' %'; ?>
+                                                    <?php
+                                                    echo number_format($row_detail['next_target_amount'], 2) . ' %';
+                                                    ?>
                                                 </div>
                                                 <div class="col-3">
                                                     <?php echo number_format($row_detail['accum_last_act'], 2) . ' %'; ?>

@@ -124,7 +124,7 @@ $this->title = 'Rank Increasement';
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="col-12 border-right text-center">
+                                        <div class="col-12 border-right text-center font-size-12">
                                             <?= number_format(0) ?>-<?= number_format(11) ?>
                                         </div>
                                     </td>

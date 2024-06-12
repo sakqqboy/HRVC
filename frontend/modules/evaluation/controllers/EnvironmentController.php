@@ -10,13 +10,18 @@ use Exception;
 use frontend\models\hrvc\Attribute;
 use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\Company;
+use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\EmployeeEvaluation;
+use frontend\models\hrvc\EmployeeEvaluator;
+use frontend\models\hrvc\EmployeePimWeight;
 use frontend\models\hrvc\Environment;
 use frontend\models\hrvc\Frame;
 use frontend\models\hrvc\FrameTerm;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\KfiWeight;
+use frontend\models\hrvc\KgiEmployeeWeight;
 use frontend\models\hrvc\KgiWeight;
+use frontend\models\hrvc\KpiTeamWeight;
 use frontend\models\hrvc\KpiWeight;
 use frontend\models\hrvc\PimWeight;
 use frontend\models\hrvc\TermItem;
@@ -332,7 +337,7 @@ class EnvironmentController extends Controller
 		$environmentDetail = curl_exec($api);
 		$environmentDetail = json_decode($environmentDetail, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/company-employee-pim?companyId=' . $environmentDetail["companyId"]);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/company-employee-pim?companyId=' . $environmentDetail["companyId"] . '&&termId=' . $termId);
 		$employeePim = curl_exec($api);
 		$employeePim = json_decode($employeePim, true);
 
@@ -340,8 +345,17 @@ class EnvironmentController extends Controller
 		$pimEmployee = curl_exec($api);
 		$pimEmployee = json_decode($pimEmployee, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$companies = curl_exec($api);
+		$companies = json_decode($companies, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/all-employee');
+		$employees = curl_exec($api);
+		$employees = json_decode($employees, true);
+
 		curl_close($api);
-		//throw new Exception(print_r($environmentDetail, true));
+		//throw new Exception($termId);
+		//throw new Exception(print_r($employeePim, true));
 		$date = date('Y-m-d');
 		$thisMonth = ModelMaster::monthEng(date('m'), 1);
 		$thisYear = date('Y');
@@ -355,7 +369,9 @@ class EnvironmentController extends Controller
 			"frameName" => $frameName,
 			"termId" => $termId,
 			"employeePim" => $employeePim,
-			"pimEmployee" => $pimEmployee
+			"pimEmployee" => $pimEmployee,
+			"companies" => $companies,
+			"employees" => $employees
 		]);
 	}
 	public function actionWeightAllocate($hash)
@@ -457,6 +473,7 @@ class EnvironmentController extends Controller
 		$pimEmployee = curl_exec($api);
 		$pimEmployee = json_decode($pimEmployee, true);
 		curl_close($api);
+		//throw new exception(print_r($employees, true));
 		return $this->render('weight_allocate_setting', [
 			"terms" => $terms,
 			"environmentDetail" => $environmentDetail,
@@ -469,6 +486,87 @@ class EnvironmentController extends Controller
 			"employees" => $employees,
 			"pimEmployee" => $pimEmployee
 		]);
+	}
+	public function actionEmployeePim()
+	{
+		$termId = $_POST["termId"];
+		$employeeId = $_POST["employeeId"];
+		$employeePim = EmployeePimWeight::find()
+			->where(["employeeId" => $employeeId, "termId" => $termId])
+			->asArray()
+			->one();
+		if (!isset($employeePim) || empty($employeePim)) {
+			$employeePim = new EmployeePimWeight();
+			$employeePim->employeeId = $employeeId;
+			$employeePim->termId = $termId;
+			$employeePim->kfiWeight = 0;
+			$employeePim->kgiWeight = 0;
+			$employeePim->kpiWeight = 0;
+			$employeePim->status = 1;
+			$employeePim->createDateTime = new Expression('NOW()');
+			$employeePim->updateDateTime = new Expression('NOW()');
+			$employeePim->save(false);
+			$employeePim = EmployeePimWeight::find()
+				->where(["employeeId" => $employeeId, "termId" => $termId])
+				->asArray()
+				->one();
+		}
+		$res["status"] = true;
+		$res["totalPimWeight"] = $employeePim["kfiWeight"] + $employeePim["kgiWeight"] + $employeePim["kpiWeight"];
+		$res["kfiWeight"] = number_format($employeePim["kfiWeight"]);
+		$res["kgiWeight"] = number_format($employeePim["kgiWeight"]);
+		$res["kpiWeight"] = number_format($employeePim["kpiWeight"]);
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/pim-count-employee?termId=' . $termId);
+		$pimEmployee = curl_exec($api);
+		$pimEmployee = json_decode($pimEmployee, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/master-kfi?termId=' . $termId . '&&employeeId=' . $employeeId);
+		$masterKfi = curl_exec($api);
+		$masterKfi = json_decode($masterKfi, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/master-kgi?termId=' . $termId . '&&employeeId=' . $employeeId);
+		$masterKgi = curl_exec($api);
+		$masterKgi = json_decode($masterKgi, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/master-kgi-employee?termId=' . $termId . '&&employeeId=' . $employeeId);
+		$masterKgiEmployee = curl_exec($api);
+		$masterKgiEmployee = json_decode($masterKgiEmployee, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/master-kpi?termId=' . $termId . '&&employeeId=' . $employeeId);
+		$masterKpi = curl_exec($api);
+		$masterKpi = json_decode($masterKpi, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/master-kpi-team?termId=' . $termId . '&&employeeId=' . $employeeId);
+		$masterKpiTeam = curl_exec($api);
+		$masterKpiTeam = json_decode($masterKpiTeam, true);
+
+		curl_close($api);
+
+
+
+		$kfiEmployee = KfiWeight::kfiTermEmployee($termId);
+		$kgiEmployee = KgiWeight::kgiTermEmployee($termId);
+		$kpiEmployee = KpiWeight::kpiTermEmployee($termId);
+		$employeePimWeight = $this->renderAjax('all_employee_pim', [
+			"masterKpi" => $masterKpi,
+			"masterKfi" => $masterKfi,
+			"masterKgi" => $masterKgi,
+			"pimEmployee" => $pimEmployee,
+			"termId" => $termId,
+			"employeeId" => $employeeId,
+			"kfiEmployee" => $kfiEmployee,
+			"kgiEmployee" => $kgiEmployee,
+			"kpiEmployee" => $kpiEmployee,
+			"masterKgiEmployee" => $masterKgiEmployee,
+			"masterKpiTeam" => $masterKpiTeam
+		]);
+		$res["employeePimWeight"] = $employeePimWeight;
+		$res["employeePimWeightId"] = $employeePim["employeePimWeightId"];
+
+		return json_encode($res);
 	}
 	public function actionSaveEmployeePim()
 	{
@@ -526,21 +624,21 @@ class EnvironmentController extends Controller
 	{
 		$type = $_POST["type"];
 		$weight = $_POST["weight"];
-		$pimWeightId = $_POST["pimWeightId"];
+		$employeePimWeightId = $_POST["employeePimWeightId"];
 		$res["status"] = false;
-		$pimWeight = PimWeight::find()->where(["pimWeightId" => $pimWeightId])->one();
+		$employeePimWeight = EmployeePimWeight::find()->where(["employeePimWeightId" => $employeePimWeightId])->one();
 		if ($type == "KFI") {
-			$pimWeight->kfiWeight = $weight;
+			$employeePimWeight->kfiWeight = $weight;
 		}
 		if ($type == "KGI") {
-			$pimWeight->kgiWeight = $weight;
+			$employeePimWeight->kgiWeight = $weight;
 		}
 		if ($type == "KPI") {
-			$pimWeight->kpiWeight = $weight;
+			$employeePimWeight->kpiWeight = $weight;
 		}
-		$pimWeight->status = 1;
-		$pimWeight->updateDateTime = new Expression('NOW()');
-		if ($pimWeight->save(false)) {
+		$employeePimWeight->status = 1;
+		$employeePimWeight->updateDateTime = new Expression('NOW()');
+		if ($employeePimWeight->save(false)) {
 			$res["status"] = true;
 		}
 		return json_encode($res);
@@ -549,10 +647,10 @@ class EnvironmentController extends Controller
 	{
 		$param = ModelMaster::decodeParams($hash);
 		$termId = $param["termId"];
+		$employeeId = $param["employeeId"];
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/term-detail?termId=' . $termId);
 		$terms = curl_exec($api);
 		$terms = json_decode($terms, true);
@@ -565,40 +663,43 @@ class EnvironmentController extends Controller
 		$environmentDetail = curl_exec($api);
 		$environmentDetail = json_decode($environmentDetail, true);
 
-		$adminId = '';
-		$gmId = '';
-		$teamLeaderId = '';
-		$managerId = '';
-		$supervisorId = '';
-		$staffId = '';
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
-		$kfis = curl_exec($api);
-		$kfis = json_decode($kfis, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/kfi-weight?termId=' . $termId);
+		// $adminId = '';
+		// $gmId = '';
+		// $teamLeaderId = '';
+		// $managerId = '';
+		// $supervisorId = '';
+		// $staffId = '';
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
+		// $kfis = curl_exec($api);
+		// $kfis = json_decode($kfis, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/kfi-weight?termId=' . $termId . '&&employeeId=' . $employeeId);
 		$kfiWeight = curl_exec($api);
 		$kfiWeight = json_decode($kfiWeight, true);
+		curl_close($api);
 		$totalPercent = 0;
-
 		if (isset($kfiWeight) && count($kfiWeight)) {
 			foreach ($kfiWeight as $weight) :
-				$totalPercent += $weight["weight"];
+				if ($weight["status"] == 1) {
+					$totalPercent += $weight["weight"];
+				}
 			endforeach;
 		}
-		curl_close($api);
+
 		return $this->render('kfi_weight_allocate', [
 			"terms" => $terms,
 			"environmentDetail" => $environmentDetail,
 			"frameName" => $frameName,
 			"termId" => $termId,
 			"kfiWeight" => $kfiWeight,
-			"totalPercent" => $totalPercent
+			"totalPercent" => $totalPercent,
+			"employeeId" => $employeeId
 		]);
 	}
 	public function actionKgiWeightAllocate($hash)
 	{
 		$param = ModelMaster::decodeParams($hash);
 		$termId = $param["termId"];
+		$employeeId = $param["employeeId"];
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -621,34 +722,52 @@ class EnvironmentController extends Controller
 		$managerId = '';
 		$supervisorId = '';
 		$staffId = '';
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
-		$kgis = curl_exec($api);
-		$kgis = json_decode($kgis, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
+		// $kgis = curl_exec($api);
+		// $kgis = json_decode($kgis, true);
 		//throw new Exception(print_r($kfis, true));
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/kgi-weight?termId=' . $termId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/kgi-weight?termId=' . $termId . '&&employeeId=' . $employeeId);
 		$kgiWeight = curl_exec($api);
 		$kgiWeight = json_decode($kgiWeight, true);
 		$totalPercent = 0;
-
 		if (isset($kgiWeight) && count($kgiWeight)) {
 			foreach ($kgiWeight as $weight) :
-				$totalPercent += $weight["weight"];
+				if ($weight["status"] == 1) {
+					$totalPercent += $weight["weight"];
+				}
+			endforeach;
+		}
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/kgi-individual-weight?termId=' . $termId . '&&employeeId=' . $employeeId);
+		$kgiEmployeeWeight = curl_exec($api);
+		$kgiEmployeeWeight = json_decode($kgiEmployeeWeight, true);
+		$totalPercentEmployee = 0;
+		if (isset($kgiEmployeeWeight) && count($kgiEmployeeWeight)) {
+			foreach ($kgiEmployeeWeight as $weightEmployee) :
+				if ($weightEmployee["status"] == 1) {
+					$totalPercentEmployee += $weightEmployee["weight"];
+				}
 			endforeach;
 		}
 		curl_close($api);
+		//throw new Exception($employeeId);
+		//throw new Exception(print_r($kgiEmployeeWeight, true));
 		return $this->render('kgi_weight_allocate', [
 			"terms" => $terms,
 			"environmentDetail" => $environmentDetail,
 			"frameName" => $frameName,
 			"termId" => $termId,
 			"kgiWeight" => $kgiWeight,
-			"totalPercent" => $totalPercent
+			"totalPercent" => $totalPercent,
+			"employeeId" => $employeeId,
+			"kgiEmployeeWeight" => $kgiEmployeeWeight,
+			"totalPercentEmployee" => $totalPercentEmployee
 		]);
 	}
 	public function actionKpiWeightAllocate($hash)
 	{
 		$param = ModelMaster::decodeParams($hash);
 		$termId = $param["termId"];
+		$employeeId = $param["employeeId"];
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -665,26 +784,40 @@ class EnvironmentController extends Controller
 		$environmentDetail = curl_exec($api);
 		$environmentDetail = json_decode($environmentDetail, true);
 
-		$adminId = '';
-		$gmId = '';
-		$teamLeaderId = '';
-		$managerId = '';
-		$supervisorId = '';
-		$staffId = '';
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
-		$kpis = curl_exec($api);
-		$kpis = json_decode($kpis, true);
-		//throw new Exception(print_r($kfis, true));
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/kpi-weight?termId=' . $termId);
+		// $adminId = '';
+		// $gmId = '';
+		// $teamLeaderId = '';
+		// $managerId = '';
+		// $supervisorId = '';
+		// $staffId = '';
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
+		// $kpis = curl_exec($api);
+		// $kpis = json_decode($kpis, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/kpi-weight?termId=' . $termId . '&&employeeId=' . $employeeId);
 		$kpiWeight = curl_exec($api);
 		$kpiWeight = json_decode($kpiWeight, true);
 		$totalPercent = 0;
 
 		if (isset($kpiWeight) && count($kpiWeight)) {
 			foreach ($kpiWeight as $weight) :
-				$totalPercent += $weight["weight"];
+				if ($weight["status"] == 1) {
+					$totalPercent += $weight["weight"];
+				}
 			endforeach;
 		}
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/kpi-team-weight?termId=' . $termId . '&&employeeId=' . $employeeId);
+		$kpiTeamWeight = curl_exec($api);
+		$kpiTeamWeight = json_decode($kpiTeamWeight, true);
+		$totalPercentTeam = 0;
+		if (isset($kpiTeamWeight) && count($kpiTeamWeight)) {
+			foreach ($kpiTeamWeight as $weightTeam) :
+				if ($weightTeam["status"] == 1) {
+					$totalPercentTeam += $weightTeam["weight"];
+				}
+			endforeach;
+		}
+		//throw new exception(print_r($kpiTeamWeight, true));
 		curl_close($api);
 		return $this->render('kpi_weight_allocate', [
 			"terms" => $terms,
@@ -692,19 +825,28 @@ class EnvironmentController extends Controller
 			"frameName" => $frameName,
 			"termId" => $termId,
 			"kpiWeight" => $kpiWeight,
-			"totalPercent" => $totalPercent
+			"totalPercent" => $totalPercent,
+			"employeeId" => $employeeId,
+			"kpiTeamWeight" => $kpiTeamWeight,
+			"totalPercentTeam" => $totalPercentTeam
 		]);
 	}
 	public function actionSaveKfiWeightAllocate()
 	{
 		$termId = $_POST["termId"];
 		$checkKfi = $_POST["checkKfi"];
-		//throw new Exception(print_r($checkKfi, true));
+		$employeeId = $_POST["employeeId"];
 		if (isset($checkKfi) && count($checkKfi) > 0) {
 			$i = 0;
-			KfiWeight::updateAll(["status" => 99], ["termId" => $termId]);
+			KfiWeight::updateAll(["status" => 99], ["termId" => $termId, "employeeId" => $employeeId]);
 			foreach ($checkKfi as $kfiId) :
-				$kfiWeight = KfiWeight::find()->where(["kfiId" => $kfiId, "termId" => $termId])->one();
+				$kfiWeight = KfiWeight::find()
+					->where([
+						"kfiId" => $kfiId,
+						"termId" => $termId,
+						"employeeId" => $employeeId
+					])
+					->one();
 				if (!isset($kfiWeight) || empty($kfiWeight)) {
 					$kfiWeight = new KfiWeight();
 				}
@@ -716,7 +858,14 @@ class EnvironmentController extends Controller
 				$kfiWeight->level4 = isset($_POST["level4"][$kfiId]) ? $_POST["level4"][$kfiId] : 0;
 				$kfiWeight->level5 = isset($_POST["level5"][$kfiId]) ? $_POST["level5"][$kfiId] : 0;
 				$kfiWeight->level6 = isset($_POST["level6"][$kfiId]) ? $_POST["level6"][$kfiId] : 0;
+				$kfiWeight->level1End = isset($_POST["level1End"][$kfiId]) ? $_POST["level1End"][$kfiId] : 0;
+				$kfiWeight->level2End = isset($_POST["level2End"][$kfiId]) ? $_POST["level2End"][$kfiId] : 0;
+				$kfiWeight->level3End = isset($_POST["level3End"][$kfiId]) ? $_POST["level3End"][$kfiId] : 0;
+				$kfiWeight->level4End = isset($_POST["level4End"][$kfiId]) ? $_POST["level4End"][$kfiId] : 0;
+				$kfiWeight->level5End = isset($_POST["level5End"][$kfiId]) ? $_POST["level5End"][$kfiId] : 0;
+				$kfiWeight->level6End = isset($_POST["level6End"][$kfiId]) ? $_POST["level6End"][$kfiId] : 0;
 				$kfiWeight->weight = isset($_POST["weight-kfi"][$kfiId]) ? $_POST["weight-kfi"][$kfiId] : 0;
+				$kfiWeight->employeeId = $employeeId;
 				$kfiWeight->status = 1;
 				$kfiWeight->createDateTime = new Expression('NOW()');
 				$kfiWeight->updateDateTime = new Expression('NOW()');
@@ -726,27 +875,43 @@ class EnvironmentController extends Controller
 			endforeach;
 			//throw new Exception(print_r($data, true));
 		}
-		return $this->redirect(Yii::$app->homeUrl . 'evaluation/environment/weight-allocate/' . ModelMaster::encodeParams(["termId" => $termId]));
+		return $this->redirect(Yii::$app->homeUrl . 'evaluation/environment/weight-allocate-setting/' . ModelMaster::encodeParams(["termId" => $termId]));
 	}
 	public function actionSaveKgiWeightAllocate()
 	{
 		$termId = $_POST["termId"];
 		$checkKgi = $_POST["checkKgi"];
+		$checkKgiEmployee = $_POST["checkKgiEmployee"];
+		$employeeId = $_POST["employeeId"];
 		if (isset($checkKgi) && count($checkKgi) > 0) {
 			$i = 0;
-			KgiWeight::updateAll(["status" => 99], ["termId" => $termId]);
-			foreach ($checkKgi as $kgiId) :
-				$kgiWeight = KgiWeight::find()->where(["kgiId" => $kgiId, "termId" => $termId])->one();
+			KgiWeight::updateAll(["status" => 99], ["termId" => $termId, "employeeId" => $employeeId]);
+			foreach ($checkKgi as $kgiTeamId) :
+				$kgiWeight = KgiWeight::find()
+					->where(
+						[
+							"kgiTeamId" => $kgiTeamId,
+							"termId" => $termId,
+							"employeeId" => $employeeId
+						]
+					)
+					->one();
 				if (!isset($kgiWeight) || empty($kgiWeight)) {
 					$kgiWeight = new KgiWeight();
 				}
-				$kgiWeight->kgiId = $kgiId;
+				$kgiWeight->kgiTeamId = $kgiTeamId;
 				$kgiWeight->termId = $termId;
-				$kgiWeight->level1 = isset($_POST["level1"][$kgiId]) ? $_POST["level1"][$kgiId] : 0;
-				$kgiWeight->level2 = isset($_POST["level2"][$kgiId]) ? $_POST["level2"][$kgiId] : 0;
-				$kgiWeight->level3 = isset($_POST["level3"][$kgiId]) ? $_POST["level3"][$kgiId] : 0;
-				$kgiWeight->level4 = isset($_POST["level4"][$kgiId]) ? $_POST["level4"][$kgiId] : 0;
-				$kgiWeight->weight = isset($_POST["weight-kgi"][$kgiId]) ? $_POST["weight-kgi"][$kgiId] : 0;
+				$kgiWeight->employeeId = $employeeId;
+				$kgiWeight->kgiId = $_POST["kgiIds"][$kgiTeamId];
+				$kgiWeight->level1 = isset($_POST["level1"][$kgiTeamId]) ? $_POST["level1"][$kgiTeamId] : 0;
+				$kgiWeight->level2 = isset($_POST["level2"][$kgiTeamId]) ? $_POST["level2"][$kgiTeamId] : 0;
+				$kgiWeight->level3 = isset($_POST["level3"][$kgiTeamId]) ? $_POST["level3"][$kgiTeamId] : 0;
+				$kgiWeight->level4 = isset($_POST["level4"][$kgiTeamId]) ? $_POST["level4"][$kgiTeamId] : 0;
+				$kgiWeight->level1End = isset($_POST["level1End"][$kgiTeamId]) ? $_POST["level1End"][$kgiTeamId] : 0;
+				$kgiWeight->level2End = isset($_POST["level2End"][$kgiTeamId]) ? $_POST["level2End"][$kgiTeamId] : 0;
+				$kgiWeight->level3End = isset($_POST["level3End"][$kgiTeamId]) ? $_POST["level3End"][$kgiTeamId] : 0;
+				$kgiWeight->level4End = isset($_POST["level4End"][$kgiTeamId]) ? $_POST["level4End"][$kgiTeamId] : 0;
+				$kgiWeight->weight = isset($_POST["weight-kgi"][$kgiTeamId]) ? $_POST["weight-kgi"][$kgiTeamId] : 0;
 				$kgiWeight->status = 1;
 				$kgiWeight->createDateTime = new Expression('NOW()');
 				$kgiWeight->updateDateTime = new Expression('NOW()');
@@ -756,36 +921,157 @@ class EnvironmentController extends Controller
 			endforeach;
 			//throw new Exception(print_r($data, true));
 		}
-		return $this->redirect(Yii::$app->homeUrl . 'evaluation/environment/weight-allocate/' . ModelMaster::encodeParams(["termId" => $termId]));
+		if (isset($checkKgiEmployee) && count($checkKgiEmployee) > 0) {
+			$i = 0;
+			KgiEmployeeWeight::updateAll(["status" => 99], ["termId" => $termId, "employeeId" => $employeeId]);
+			foreach ($checkKgiEmployee as $kgiEmployeeId) :
+				$kgiEmployeeWeight = KgiEmployeeWeight::find()
+					->where(
+						[
+							"kgiEmployeeId" => $kgiEmployeeId,
+							"termId" => $termId,
+							"employeeId" => $employeeId
+						]
+					)
+					->one();
+				if (!isset($kgiEmployeeWeight) || empty($kgiEmployeeWeight)) {
+					$kgiEmployeeWeight = new KgiEmployeeWeight();
+				}
+				$kgiEmployeeWeight->kgiEmployeeId = $kgiEmployeeId;
+				$kgiEmployeeWeight->termId = $termId;
+				$kgiEmployeeWeight->employeeId = $employeeId;
+				$kgiEmployeeWeight->kgiId = $_POST["kgiIds"][$kgiEmployeeId];
+				$kgiEmployeeWeight->level1 = isset($_POST["level1Employee"][$kgiEmployeeId]) ? $_POST["level1Employee"][$kgiEmployeeId] : 0;
+				$kgiEmployeeWeight->level2 = isset($_POST["level2Employee"][$kgiEmployeeId]) ? $_POST["level2Employee"][$kgiEmployeeId] : 0;
+				$kgiEmployeeWeight->level3 = isset($_POST["level3Employee"][$kgiEmployeeId]) ? $_POST["level3Employee"][$kgiEmployeeId] : 0;
+				$kgiEmployeeWeight->level4 = isset($_POST["level4Employee"][$kgiEmployeeId]) ? $_POST["level4Employee"][$kgiEmployeeId] : 0;
+				$kgiEmployeeWeight->level1End = isset($_POST["level1EndEmployee"][$kgiEmployeeId]) ? $_POST["level1EndEmployee"][$kgiEmployeeId] : 0;
+				$kgiEmployeeWeight->level2End = isset($_POST["level2EndEmployee"][$kgiEmployeeId]) ? $_POST["level2EndEmployee"][$kgiEmployeeId] : 0;
+				$kgiEmployeeWeight->level3End = isset($_POST["level3EndEmployee"][$kgiEmployeeId]) ? $_POST["level3EndEmployee"][$kgiEmployeeId] : 0;
+				$kgiEmployeeWeight->level4End = isset($_POST["level4EndEmployee"][$kgiEmployeeId]) ? $_POST["level4EndEmployee"][$kgiEmployeeId] : 0;
+				$kgiEmployeeWeight->weight = isset($_POST["weight-kgi-employee"][$kgiEmployeeId]) ? $_POST["weight-kgi-employee"][$kgiEmployeeId] : 0;
+				$kgiEmployeeWeight->status = 1;
+				$kgiEmployeeWeight->createDateTime = new Expression('NOW()');
+				$kgiEmployeeWeight->updateDateTime = new Expression('NOW()');
+				$kgiEmployeeWeight->save(false);
+			// $data[$i] = $kfiId;
+			// $i++;
+			endforeach;
+			//throw new Exception(print_r($data, true));
+		}
+		return $this->redirect(Yii::$app->homeUrl . 'evaluation/environment/weight-allocate-setting/' . ModelMaster::encodeParams(["termId" => $termId]));
 	}
 	public function actionSaveKpiWeightAllocate()
 	{
 		$termId = $_POST["termId"];
 		$checkKpi = $_POST["checkKpi"];
+		$checkKpiTeam = $_POST["checkKpiTeam"];
+		$employeeId = $_POST["employeeId"];
+		if (isset($checkKpiTeam) && count($checkKpiTeam) > 0) {
+			//throw new exception(1111);
+			KpiTeamWeight::updateAll(["status" => 99], ["termId" => $termId, "employeeId" => $employeeId]);
+			foreach ($checkKpiTeam as $kpiTeamId) :
+				$kpiTeamWeight = KpiTeamWeight::find()
+					->where(["kpiTeamId" => $kpiTeamId, "termId" => $termId, "employeeId" => $employeeId])
+					->one();
+				if (!isset($kpiTeamWeight) || empty($kpiTeamWeight)) {
+					$kpiTeamWeight = new KpiTeamWeight();
+				}
+				$kpiTeamWeight->kpiId = $_POST["kpiIdsTeam"][$kpiTeamId];
+				$kpiTeamWeight->kpiTeamId = $kpiTeamId;
+				$kpiTeamWeight->termId = $termId;
+				$kpiTeamWeight->employeeId = $employeeId;
+				$kpiTeamWeight->level1 = isset($_POST["level1Team"][$kpiTeamId]) ? $_POST["level1Team"][$kpiTeamId] : 0;
+				$kpiTeamWeight->level2 = isset($_POST["level2Team"][$kpiTeamId]) ? $_POST["level2Team"][$kpiTeamId] : 0;
+				$kpiTeamWeight->level3 = isset($_POST["level3Team"][$kpiTeamId]) ? $_POST["level3Team"][$kpiTeamId] : 0;
+				$kpiTeamWeight->level4 = isset($_POST["level4Team"][$kpiTeamId]) ? $_POST["level4Team"][$kpiTeamId] : 0;
+				$kpiTeamWeight->weight = isset($_POST["weight-kpi-team"][$kpiTeamId]) ? $_POST["weight-kpi-team"][$kpiTeamId] : 0;
+				$kpiTeamWeight->level1End = isset($_POST["level1EndTeam"][$kpiTeamId]) ? $_POST["level1EndTeam"][$kpiTeamId] : 0;
+				$kpiTeamWeight->level2End = isset($_POST["level2EndTeam"][$kpiTeamId]) ? $_POST["level2EndTeam"][$kpiTeamId] : 0;
+				$kpiTeamWeight->level3End = isset($_POST["level3EndTeam"][$kpiTeamId]) ? $_POST["level3EndTeam"][$kpiTeamId] : 0;
+				$kpiTeamWeight->level4End = isset($_POST["level4EndTeam"][$kpiTeamId]) ? $_POST["level4EndTeam"][$kpiTeamId] : 0;
+				$kpiTeamWeight->status = 1;
+				$kpiTeamWeight->createDateTime = new Expression('NOW()');
+				$kpiTeamWeight->updateDateTime = new Expression('NOW()');
+				$kpiTeamWeight->save(false);
+			endforeach;
+		}
 		if (isset($checkKpi) && count($checkKpi) > 0) {
-			$i = 0;
-			KpiWeight::updateAll(["status" => 99], ["termId" => $termId]);
-			foreach ($checkKpi as $kpiId) :
-				$kpiWeight = KpiWeight::find()->where(["kpiId" => $kpiId, "termId" => $termId])->one();
+			KpiWeight::updateAll(["status" => 99], ["termId" => $termId, "employeeId" => $employeeId]);
+			foreach ($checkKpi as $kpiEmployeeId) :
+				$kpiWeight = KpiWeight::find()
+					->where(["kpiEmployeeId" => $kpiEmployeeId, "termId" => $termId, "employeeId" => $employeeId])
+					->one();
 				if (!isset($kpiWeight) || empty($kpiWeight)) {
 					$kpiWeight = new KpiWeight();
 				}
-				$kpiWeight->kpiId = $kpiId;
+				$kpiWeight->kpiId = $_POST["kpiIds"][$kpiEmployeeId];
+				$kpiWeight->kpiEmployeeId = $kpiEmployeeId;
 				$kpiWeight->termId = $termId;
-				$kpiWeight->level1 = isset($_POST["level1"][$kpiId]) ? $_POST["level1"][$kpiId] : 0;
-				$kpiWeight->level2 = isset($_POST["level2"][$kpiId]) ? $_POST["level2"][$kpiId] : 0;
-				$kpiWeight->level3 = isset($_POST["level3"][$kpiId]) ? $_POST["level3"][$kpiId] : 0;
-				$kpiWeight->level4 = isset($_POST["level4"][$kpiId]) ? $_POST["level4"][$kpiId] : 0;
-				$kpiWeight->weight = isset($_POST["weight-kpi"][$kpiId]) ? $_POST["weight-kpi"][$kpiId] : 0;
+				$kpiWeight->employeeId = $employeeId;
+				$kpiWeight->level1 = isset($_POST["level1"][$kpiEmployeeId]) ? $_POST["level1"][$kpiEmployeeId] : 0;
+				$kpiWeight->level2 = isset($_POST["level2"][$kpiEmployeeId]) ? $_POST["level2"][$kpiEmployeeId] : 0;
+				$kpiWeight->level3 = isset($_POST["level3"][$kpiEmployeeId]) ? $_POST["level3"][$kpiEmployeeId] : 0;
+				$kpiWeight->level4 = isset($_POST["level4"][$kpiEmployeeId]) ? $_POST["level4"][$kpiEmployeeId] : 0;
+				$kpiWeight->weight = isset($_POST["weight-kpi"][$kpiEmployeeId]) ? $_POST["weight-kpi"][$kpiEmployeeId] : 0;
+				$kpiWeight->level1End = isset($_POST["level1End"][$kpiEmployeeId]) ? $_POST["level1End"][$kpiEmployeeId] : 0;
+				$kpiWeight->level2End = isset($_POST["level2End"][$kpiEmployeeId]) ? $_POST["level2End"][$kpiEmployeeId] : 0;
+				$kpiWeight->level3End = isset($_POST["level3End"][$kpiEmployeeId]) ? $_POST["level3End"][$kpiEmployeeId] : 0;
+				$kpiWeight->level4End = isset($_POST["level4End"][$kpiEmployeeId]) ? $_POST["level4End"][$kpiEmployeeId] : 0;
 				$kpiWeight->status = 1;
 				$kpiWeight->createDateTime = new Expression('NOW()');
 				$kpiWeight->updateDateTime = new Expression('NOW()');
 				$kpiWeight->save(false);
 			endforeach;
 		}
-		return $this->redirect(Yii::$app->homeUrl . 'evaluation/environment/weight-allocate/' . ModelMaster::encodeParams(["termId" => $termId]));
-	}
 
+		return $this->redirect(Yii::$app->homeUrl . 'evaluation/environment/weight-allocate-setting/' . ModelMaster::encodeParams(["termId" => $termId]));
+	}
+	public function actionSaveEvaluator()
+	{
+		$employeeId = $_POST["employeeId"];
+		$primaryId = $_POST["primaryId"];
+		$finalId = isset($_POST["finalId"]) ? $_POST["finalId"] : null;
+		$termId = $_POST["termId"];
+		$res["status"] = false;
+		$evaluator = EmployeeEvaluator::find()->where(["employeeId" => $employeeId, "termId" => $termId])->one();
+		if (!isset($evaluator) || empty($evaluator)) {
+			$evaluator = new EmployeeEvaluator();
+			$evaluator->createDateTime = new Expression('NOW()');
+		}
+		$evaluator->employeeId = $_POST["employeeId"];
+		$evaluator->primaryId = $primaryId;
+		$evaluator->finalId = $finalId;
+		$evaluator->termId = $_POST["termId"];
+		$evaluator->updateDateTime = new Expression('NOW()');
+		if ($evaluator->save(false)) {
+			$res["primaryName"] = Employee::employeeName($primaryId);
+			$res["primaryTitle"] = Employee::employeeTitle($primaryId);
+			$res["primaryBranch"] = Employee::employeeBranch($primaryId);
+			$res["finalName"] = Employee::employeeName($finalId);
+			$res["finalTitle"] = Employee::employeeTitle($finalId);
+			$res["finalBranch"] = Employee::employeeBranch($finalId);
+			$res["status"] = true;
+		}
+		return json_encode($res);
+	}
+	public function actionEmployeeEvaluator()
+	{
+		$employeeId = $_POST["employeeId"];
+		$termId = $_POST["termId"];
+		$employeeEvaluator = EmployeeEvaluator::find()
+			->where(["employeeId" => $employeeId, "termId" => $termId])
+			->asArray()
+			->one();
+		if (isset($employeeEvaluator) && !empty($employeeEvaluator)) {
+			$res["status2"] = true;
+			$res["primaryId"] = $employeeEvaluator["primaryId"];
+			$res["finalId"] = $employeeEvaluator["finalId"];
+		} else {
+			$res["status2"] = false;
+		}
+		return json_encode($res);
+	}
 	public function actionCalendar()
 	{
 		$year = $_POST["year"];

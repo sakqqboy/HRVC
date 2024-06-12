@@ -1,14 +1,11 @@
 <?php
+@session_start();
 
 function connectDB($secure)
 {
 
 	if ($secure == "-%ekla!(m09)%1A7") {
 
-		// $dbhost = "localhost";
-		// $dbuser = "fordev_tk";
-		// $dbpass = "FuySYl7Ku";
-		// $dbname = "fordev_tokyonew";
 		$dbhost = "localhost";
 		$dbuser = "root";
 		$dbpass = "root";
@@ -37,7 +34,60 @@ function url()
 	return $protocol . "://" . $_SERVER['HTTP_HOST'] . "/demo";
 }
 
+function checkUser($userId)
+{
 
+	$secure = "-%ekla!(m09)%1A7";
+	$connection = connectDB($secure);
+
+	if ($connection) {
+
+		$sql = "SELECT count(*) AS count FROM user a 
+        WHERE a.userId = '$userId';";
+		$rs = mysqli_query($connection, $sql);
+		$row = mysqli_fetch_assoc($rs);
+
+		if ($row['count'] > 0) {
+
+			return 1;
+		} else {
+
+			return 0;
+		}
+	} else {
+
+		return 9;
+	}
+}
+
+function checkBranch($branch, $userId)
+{
+
+	$secure = "-%ekla!(m09)%1A7";
+	$connection = connectDB($secure);
+
+	if ($connection) {
+
+		$sql = "SELECT count(*) AS count FROM user a 
+        LEFT JOIN employee b ON a.employeeId = b.employeeId
+        LEFT JOIN company c ON b.companyId = c.companyId
+        LEFT JOIN branch d ON c.companyId = d.companyId
+        WHERE a.userId = '$userId' AND d.branchId = '$branch';";
+		$rs = mysqli_query($connection, $sql);
+		$row = mysqli_fetch_array($rs);
+
+		if ($row['count'] > 0) {
+
+			return 1;
+		} else {
+
+			return 0;
+		}
+	} else {
+
+		return 0;
+	}
+}
 
 function checkAdmin($admin_id)
 {

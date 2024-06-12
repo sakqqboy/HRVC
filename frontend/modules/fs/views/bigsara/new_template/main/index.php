@@ -1,3 +1,12 @@
+<?php
+include("../config/main_function.php");
+@session_start();
+// var_dump($_SESSION);
+// if (checkUser($_SESSION["__id"]) == 0) {
+//     echo "<script>alert('Session expired. Please log in again." . checkUser($_SESSION["__id"]) . "'); location.href = 'https://bigsara-fordev.com/tokyo_new/new_template/';</script>";
+// }
+?>
+
 <html>
 
 <title>Financial Module Dashboard</title>
@@ -16,23 +25,21 @@
 
 </head>
 
-<body>
-    <div class="row pr-0 pl-0">
+<body class="background-Planning">
+    <div class="row">
         <div class="col-12">
-            <div class="col-12 alert background-Planning">
+            <div class="col-12 alert ">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="row">
-                            <div class="col-6 fst1-modulesdashboard">
+                            <div class="col-5 fst1-modulesdashboard">
                                 Financial Module Dashboard
                             </div>
-                            <div class="col-2 pr-0 pl-0">
-                                <button class="btn btn-primary btn-Create-sb pb-2 pt-2 font-size-12" type="submit" data-bs-toggle="modal" data-bs-target="#staticBackdropmodulescreate">
-                                    <img src="../images/icons/Light/Light/24px/Create(Big).png" class="module_CreateBig">
-                                    Create
-                                </button>
+                            <div class="col-2">
+                                <button class="btn btn-primary btn-Create-sb pb-2 pt-2 pl-10" type="submit" data-bs-toggle="modal" data-bs-target="#staticBackdropmodulescreate"> <img src="../images/icons/Light/Light/24px/Create(Big).png" class="module_CreateBig">
+                                    Create</button>
                             </div>
-                            <div class="col-4 pr-0 pl-0" id="showButtonAddCompany"></div>
+                            <div class="col-4" id="showButtonAddCompany"></div>
 
                         </div>
                     </div>

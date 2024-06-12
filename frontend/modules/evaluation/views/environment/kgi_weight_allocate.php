@@ -51,39 +51,32 @@ $this->title = 'Weight Allocation';
 					</div>
 				</div>
 				<div class="row pt-30">
-					<div class="col-4">
-						<div class="col-12">
-							<span class="text-danger">*</span><span class="font-size-11">Achievement Target Setup</span>
-						</div>
-						<div class="col-12 Want-Level">
-							Do You Want Level 3 As Default Target ? &nbsp;<input type="radio" name="fruit"><span class="TYPEYES"> YES</span> <span class="pl-3"></span><input type="radio" name="fruit"><span class="TYPEYES"> NO</span>
-						</div>
-					</div>
-					<div class="col-8 pt-5">
+					<div class="col-12 pt-5 pr-0">
 						<div class="row">
-							<div class="col-10 pr-2">
-								<div class="col-12 text-end font-size-10 pr-2">
-									Allocate percentage to all the selected
-								</div>
-								<div class="col-12 text-end font-size-10 pr-2">
-									KGI contents to continue
-								</div>
-							</div>
-							<div class="col-2">
+							<div class="col-12">
 								<div class="row">
-									<div class="col-7 pr-0 pl-10 text-center">
-										<div class="procresscircle_deg pr-0 pl-0 pt-8 text-center">
+									<div class="col-10">
+										<div class="col-12 text-end font-size-10">
+											Allocate percentage to all the selected
+										</div>
+										<div class="col-12 text-end font-size-10">
+											KGI contents to continue
+										</div>
+									</div>
+									<div class="col-1 pr-5">
+										<div class="procresscircle_deg pr-0 pl-0 pt-8 text-center" style="float: right;">
 											<span id="total-weight">
 												<?= $totalPercent ?>
 											</span>
 											%
 										</div>
 									</div>
-									<div class="col-5 text-start pr-0 pl-0">
+									<div class="col-1 pl-0 text-center">
 										<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Wornning-blue.png" class="wb-progress">
 									</div>
 								</div>
 								<input type="hidden" id="sumPercent" value="<?= $totalPercent ?>">
+								<input type="hidden" id="sumPercentEmployee" value="<?= $totalPercentEmployee ?>">
 							</div>
 						</div>
 					</div>
@@ -107,21 +100,27 @@ $this->title = 'Weight Allocation';
 									</tr>
 								</thead>
 								<tbody>
+									<tr>
+										<td colspan="8" class="font-size-12 font-weight-500">
+											Team KGI
+										</td>
+									</tr>
 									<?php
 									$i = 0;
-									foreach ($kgiWeight as $kgiId => $kgi) :
+									foreach ($kgiWeight as $kgiTeamId => $kgi) :
 										if ($kgi["status"] == 1) {
 											$checked = 1;
 										} else {
 											$checked = 0;
 										}
 									?>
-										<input type="hidden" name="kgiIds[]" value="<?= $kgiId ?>">
+										<input type="hidden" name="kgiIds[<?= $kgiTeamId ?>]" value="<?= $kgi['kgiId'] ?>">
+										<input type="hidden" name="kgiTeamIds[]" value="<?= $kgiTeamId ?>">
 										<tr style="height: 10px;"></tr>
 										<tr>
 											<td style="width:50px;" class="pr-10 pl-10">
 												<label class="checkbox style-c">
-													<input type="checkbox" <?= $checked == 1 ? 'checked' : '' ?> id="kgi-check-<?= $kgiId ?>" name="checkKgi[<?= $kgiId ?>]" onchange="javascript:calculateKgiPercent(<?= $kgiId ?>,2)" value="<?= $kgiId ?>">
+													<input type="checkbox" <?= $checked == 1 ? 'checked' : '' ?> id="kgi-check-<?= $kgiTeamId ?>" name="checkKgi[<?= $kgiTeamId ?>]" onchange="javascript:calculateKgiPercent(<?= $kgiTeamId ?>,2)" value="<?= $kgiTeamId ?>">
 													<div class="checkbox__checkmark"></div>
 													<div class="checkbox__body"></div>
 												</label>
@@ -139,55 +138,47 @@ $this->title = 'Weight Allocation';
 													</div>
 												</div>
 											</td>
-											<td style="background-color: #edeaea;">
-												<div class="pr-10">
-													<label class="checkbox style-f">
-														<input type="checkbox" />
-														<div class="checkbox__checkmark"></div>
-														<div class="checkbox__body"></div>
-													</label>
-													<div class="input-group" style="margin-top: -16px;margin-left:5px;">
-														<!-- <span class=" input-group-text Level-txt" id="inputGroup-sizing-sm">Level 1</span> -->
-														<input type="text" class="form-control Level-txtinput text-end" name="level1[<?= $kgiId ?>]" value="<?= $kgi['level1'] ?>">
+											<td style="background-color: #edeaea;" class="border-right">
+												<div class="row pl-7">
+													<div class="col-5  pr-1 pl-2">
+														<input type="text" class="Level-txtinput form-control text-end pr-1 pl-1" name="level1[<?= $kgiTeamId ?>]" value="<?= $kgi['level1'] ?>">
+													</div>
+													<div class="col-1  pr-0 pl-0 text-center">-</div>
+													<div class="col-5  pr-1 pl-2">
+														<input type="text" class="Level-txtinput form-control  text-end pr-1 pl-1" name="level1End[<?= $kgiTeamId ?>]" value="<?= $kgi['level1End'] ?>">
 													</div>
 												</div>
 											</td>
-											<td style="background-color: #edeaea;">
-												<div class="pr-15 pl-15">
-													<label class="checkbox style-f">
-														<input type="checkbox" />
-														<div class="checkbox__checkmark"></div>
-														<div class="checkbox__body"></div>
-													</label>
-													<div class="input-group" style="margin-top: -16px;margin-left:5px;">
-														<!-- <span class="input-group-text Level-txt" id="inputGroup-sizing-sm">Level 2</span> -->
-														<input type="text" class="form-control Level-txtinput text-end" name="level2[<?= $kgiId ?>]" value="<?= $kgi['level2'] ?>">
+											<td style="background-color: #edeaea;" class="border-right">
+												<div class="row pl-7">
+													<div class="col-5  pr-1 pl-2">
+														<input type="text" class="Level-txtinput form-control text-end pr-1 pl-1" name="level2[<?= $kgiTeamId ?>]" value="<?= $kgi['level2'] ?>">
+													</div>
+													<div class="col-1  pr-0 pl-0 text-center">-
+													</div>
+													<div class="col-5  pr-1 pl-2">
+														<input type="text" class="Level-txtinput form-control  text-end pr-1 pl-1" name="level2End[<?= $kgiTeamId ?>]" value="<?= $kgi['level2End'] ?>">
+													</div>
+											</td>
+											<td style="background-color: #edeaea;" class="border-right">
+												<div class="row pl-7">
+													<div class="col-5  pr-1 pl-2">
+														<input type="text" class="Level-txtinput form-control text-end pr-1 pl-1" name="level3[<?= $kgiTeamId ?>]" value="<?= $kgi['level3'] ?>">
+													</div>
+													<div class="col-1  pr-0 pl-0 text-center">-</div>
+													<div class="col-5  pr-1 pl-2">
+														<input type="text" class="Level-txtinput form-control  text-end pr-1 pl-1" name="level3End[<?= $kgiTeamId ?>]" value="<?= $kgi['level3End'] ?>">
 													</div>
 												</div>
 											</td>
-											<td style="background-color: #edeaea;">
-												<div class="pr-10">
-													<label class="checkbox style-f">
-														<input type="checkbox" />
-														<div class="checkbox__checkmark"></div>
-														<div class="checkbox__body"></div>
-													</label>
-													<div class="input-group" style="margin-top: -16px;margin-left:5px;">
-														<!-- <span class="input-group-text Level-txt" id="inputGroup-sizing-sm">Level 3</span> -->
-														<input type="text" class="form-control Level-txtinput text-end" name="level3[<?= $kgiId ?>]" value="<?= $kgi['level3'] ?>">
+											<td style="background-color: #edeaea;" class="border-right">
+												<div class="row pl-7">
+													<div class="col-5  pr-1 pl-2">
+														<input type="text" class="Level-txtinput form-control text-end pr-1 pl-1" name="level4[<?= $kgiTeamId ?>]" value="<?= $kgi['level4'] ?>">
 													</div>
-												</div>
-											</td>
-											<td style="background-color: #edeaea;">
-												<div class="col-12 pr-10 border-right">
-													<label class="checkbox style-f">
-														<input type="checkbox" />
-														<div class="checkbox__checkmark"></div>
-														<div class="checkbox__body"></div>
-													</label>
-													<div class="input-group" style="margin-top: -16px;margin-left:5px;">
-														<!-- <span class="input-group-text Level-txt" id="inputGroup-sizing-sm">Level 4</span> -->
-														<input type="text" class="form-control Level-txtinput text-end" name="level4[<?= $kgiId ?>]" value="<?= $kgi['level4'] ?>">
+													<div class="col-1  pr-0 pl-0 text-center">-</div>
+													<div class="col-5  pr-1 pl-2">
+														<input type="text" class="Level-txtinput form-control  text-end pr-1 pl-1" name="level4End[<?= $kgiTeamId ?>]" value="<?= $kgi['level4End'] ?>">
 													</div>
 												</div>
 											</td>
@@ -195,7 +186,7 @@ $this->title = 'Weight Allocation';
 												<div class="col-12 pt-5">
 													<!-- <img src="<?php // Yii::$app->homeUrl 
 																?>images/icons/Dark/48px/setting(Round).png" class="setting_png"> Weight -->
-													<input class="weight_round text-end pr-5 pl-5" type="text" value="<?= $kgi['weight'] ?>" id="weight-kgi-<?= $kgiId ?>" name="weight-kgi[<?= $kgiId ?>]" onkeyup="javascript:calculateKgiPercent(<?= $kgiId ?>,1)">
+													<input class="weight_round text-end pr-5 pl-5" type="text" value="<?= $kgi['weight'] ?>" id="weight-kgi-<?= $kgiTeamId ?>" name="weight-kgi[<?= $kgiTeamId ?>]" onkeyup="javascript:calculateKgiPercent(<?= $kgiTeamId ?>,1)">
 													<span class="font-size-10">%</span>
 												</div>
 											</td>
@@ -203,16 +194,111 @@ $this->title = 'Weight Allocation';
 									<?php
 										$i++;
 									endforeach; ?>
-
+									<tr>
+										<td colspan="8" class="font-size-12 font-weight-500">
+											Individual KGI
+										</td>
+									</tr>
+									<?php
+									$i = 0;
+									foreach ($kgiEmployeeWeight as $kgiEmployeeId => $kgi) :
+										if ($kgi["status"] == 1) {
+											$checked = 1;
+										} else {
+											$checked = 0;
+										}
+									?>
+										<input type="hidden" name="kgiIds[<?= $kgiEmployeeId ?>]" value="<?= $kgi['kgiId'] ?>">
+										<input type="hidden" name="kgiEmployeeIds[]" value="<?= $kgiEmployeeId ?>">
+										<tr style="height: 10px;"></tr>
+										<tr>
+											<td style="width:50px;" class="pr-10 pl-10">
+												<label class="checkbox style-c">
+													<input type="checkbox" <?= $checked == 1 ? 'checked' : '' ?> id="kgi-check-employee-<?= $kgiEmployeeId ?>" name="checkKgiEmployee[<?= $kgiEmployeeId ?>]" onchange="javascript:calculateKgiEmployeePercent(<?= $kgiEmployeeId ?>,2)" value="<?= $kgiEmployeeId ?>">
+													<div class="checkbox__checkmark"></div>
+													<div class="checkbox__body"></div>
+												</label>
+											</td>
+											<td style="background-color: #edeaea;" class="font-size-10 text-secondary">
+												<?= $kgi['kgiName'] ?>
+											</td>
+											<td style="background-color: #edeaea;">
+												<div class="col-12 border-right pr-12">
+													<div class="col-12 text-secondary font-size-10 text-center">
+														Target
+													</div>
+													<div class="col-12 nm_berformat text-secondary mt-5">
+														<?= number_format($kgi['target']) ?>
+													</div>
+												</div>
+											</td>
+											<td style="background-color: #edeaea;" class="border-right">
+												<div class="row pl-7">
+													<div class="col-5  pr-1 pl-2">
+														<input type="text" class="Level-txtinput form-control text-end pr-1 pl-1" name="level1Employee[<?= $kgiEmployeeId ?>]" value="<?= $kgi['level1'] ?>">
+													</div>
+													<div class="col-1  pr-0 pl-0 text-center">-</div>
+													<div class="col-5  pr-1 pl-2">
+														<input type="text" class="Level-txtinput form-control  text-end pr-1 pl-1" name="level1EndEmployee[<?= $kgiEmployeeId ?>]" value="<?= $kgi['level1End'] ?>">
+													</div>
+												</div>
+											</td>
+											<td style="background-color: #edeaea;" class="border-right">
+												<div class="row pl-7">
+													<div class="col-5  pr-1 pl-2">
+														<input type="text" class="Level-txtinput form-control text-end pr-1 pl-1" name="level2Employee[<?= $kgiEmployeeId ?>]" value="<?= $kgi['level2'] ?>">
+													</div>
+													<div class="col-1  pr-0 pl-0 text-center">-
+													</div>
+													<div class="col-5  pr-1 pl-2">
+														<input type="text" class="Level-txtinput form-control  text-end pr-1 pl-1" name="level2EndEmployee[<?= $kgiEmployeeId ?>]" value="<?= $kgi['level2End'] ?>">
+													</div>
+											</td>
+											<td style="background-color: #edeaea;" class="border-right">
+												<div class="row pl-7">
+													<div class="col-5  pr-1 pl-2">
+														<input type="text" class="Level-txtinput form-control text-end pr-1 pl-1" name="level3Employee[<?= $kgiEmployeeId ?>]" value="<?= $kgi['level3'] ?>">
+													</div>
+													<div class="col-1  pr-0 pl-0 text-center">-</div>
+													<div class="col-5  pr-1 pl-2">
+														<input type="text" class="Level-txtinput form-control  text-end pr-1 pl-1" name="level3EndEmployee[<?= $kgiEmployeeId ?>]" value="<?= $kgi['level3End'] ?>">
+													</div>
+												</div>
+											</td>
+											<td style="background-color: #edeaea;" class="border-right">
+												<div class="row pl-7">
+													<div class="col-5  pr-1 pl-2">
+														<input type="text" class="Level-txtinput form-control text-end pr-1 pl-1" name="level4Employee[<?= $kgiEmployeeId ?>]" value="<?= $kgi['level4'] ?>">
+													</div>
+													<div class="col-1  pr-0 pl-0 text-center">-</div>
+													<div class="col-5  pr-1 pl-2">
+														<input type="text" class="Level-txtinput form-control  text-end pr-1 pl-1" name="level4EndEmployee[<?= $kgiEmployeeId ?>]" value="<?= $kgi['level4End'] ?>">
+													</div>
+												</div>
+											</td>
+											<td style="background-color: #edeaea;">
+												<div class="col-12 pt-5">
+													<!-- <img src="<?php // Yii::$app->homeUrl 
+																?>images/icons/Dark/48px/setting(Round).png" class="setting_png"> Weight -->
+													<input class="weight_round text-end pr-5 pl-5" type="text" value="<?= $kgi['weight'] ?>" id="weight-kgi-employee-<?= $kgiEmployeeId ?>" name="weight-kgi-employee[<?= $kgiEmployeeId ?>]" onkeyup="javascript:calculateKgiEmployeePercent(<?= $kgiEmployeeId ?>,1)">
+													<span class="font-size-10">%</span>
+												</div>
+											</td>
+										</tr>
+									<?php
+										$i++;
+									endforeach; ?>
 								</tbody>
 							</table>
 						<?php
 						}
 						?>
 					</div>
+
 				</div>
 			</div>
 		</div>
+		<input name="employeeId" value="<?= $employeeId ?>" type="hidden">
+		<?php ActiveForm::end(); ?>
 	</div>
-	<?php ActiveForm::end(); ?>
 </div>

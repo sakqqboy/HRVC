@@ -25,6 +25,13 @@ class CompanyController extends Controller
 	{
 		return $this->render('index');
 	}
+	public function actionAllCompany()
+	{
+		$company = Company::find()
+			->select('companyName,companyId')
+			->where(["status" => 1])->asArray()->orderBy("companyName")->all();
+		return json_encode($company);
+	}
 	public function actionCompanyDetail($id)
 	{
 		$company = [];
@@ -34,6 +41,7 @@ class CompanyController extends Controller
 			->one();
 		return json_encode($company);
 	}
+
 	public function actionHeader($id)
 	{
 		$headQuater = Company::find()

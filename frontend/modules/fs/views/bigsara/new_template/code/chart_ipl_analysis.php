@@ -231,29 +231,27 @@
 								<div class="alert light-shadow-2" role="alert">
 									<div class="row">
 										<div class="col-lg-3">
-											<div class="light-shadow-3 pt-3 pb-5 pl-10">
-												<div class="row">
-													<div class="col-12 pt-5 font-size-14 font-b">
-														Current Year-2022
-													</div>
+											<div class="card">
+												<div class="card-header">
+													Current Year-2022
 												</div>
-											</div>
-											<div class="mt-5 bg-white pt-5 pl-5 pr-3 pb-10" style="border:none;">
-												<div class="row font-size-12">
-													<div class="col-7 pl-20 pt-8">
-														Actual
-													</div>
-													<div class="col-5">
-														<div class="col-12 pt-8 text-center">
-															<button type="button" class="example-iplAnalysis1"></button>
+												<div class="card-body">
+													<div class="row font-size-12">
+														<div class="col-7 pl-20 pt-8">
+															Actual
 														</div>
-													</div>
-													<div class="col-7 pl-20 pt-10">
-														Target
-													</div>
-													<div class="col-5 pt-10">
-														<div class="col-12 text-center">
-															<button type="button" class="example-iplAnalysis2"></button>
+														<div class="col-5">
+															<div class="col-12 pt-8 text-center">
+																<button type="button" class="example-iplAnalysis1"></button>
+															</div>
+														</div>
+														<div class="col-7 pl-20 pt-10">
+															Target
+														</div>
+														<div class="col-5 pt-10">
+															<div class="col-12 text-center">
+																<button type="button" class="example-iplAnalysis2"></button>
+															</div>
 														</div>
 													</div>
 												</div>

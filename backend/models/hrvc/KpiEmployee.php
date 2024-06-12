@@ -116,4 +116,57 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
             ->all();
         return count($kpiEmployee);
     }
+    public static function employeeKpiRatio($employeeId)
+    {
+        $kpiEmployee = KpiEmployee::find()
+            ->select('k.kpiName,k.priority,k.quantRatio,k.amountType,k.code,kpi_employee.target,kpi_employee.result,
+        kpi_employee.status,k.unitId,kpi_employee.month,kpi_employee.year,k.kpiId,k.companyId,
+        kpi_employee.kpiEmployeeId,e.employeeFirstname,e.employeeSurename')
+            ->JOIN("LEFT JOIN", "kpi k", "kpi_employee.kpiId=k.kpiId")
+            ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
+            ->where(["kpi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "kpi_employee.employeeId" => $employeeId])
+            ->orderby('k.createDateTime')
+            ->asArray()
+            ->all();
+        $totalRatio = 0;
+        $totalKpi = 0;
+        if (isset($kpiEmployee) && count($kpiEmployee) > 0) {
+            $totalKpi = count($kpiEmployee);
+            foreach ($kpiEmployee as $kpi) :
+                $ratio = 0;
+                $kpiEmployeeHistory = KpiEmployeeHistory::find()
+                    ->where(["kpiEmployeeId" => $kpi["kpiEmployeeId"], "status" => [1, 2, 4]])
+                    ->asArray()
+                    ->orderBy('createDateTime DESC')
+                    ->one();
+                if (!isset($kpiEmployeeHistory) || empty($kpiEmployeeHistory)) {
+                    $kpiEmployeeHistory = KpiEmployee::find()
+                        ->where(["kpiEmployeeId" => $kpi["kpiEmployeeId"], "status" => [1, 2, 4]])
+                        ->asArray()
+                        ->orderBy('createDateTime DESC')
+                        ->one();
+                }
+                if ($kpi["target"] != '' && $kpi["target"] != 0) {
+                    if ($kpi["code"] == '<' || $kpi["code"] == '=') {
+                        $ratio = ($kpi["result"] / $kpi["target"]) * 100;
+                    } else {
+                        if ($kpi["result"] != '' && $kpi["result"] != 0) {
+                            $ratio = ($kpi["target"] / $kpi["result"]) * 100;
+                        } else {
+                            $ratio = 0;
+                        }
+                    }
+                } else {
+                    $ratio = 0;
+                }
+                $totalRatio += $ratio;
+            endforeach;
+        }
+        if ($totalKpi > 0) {
+            $percent = $totalRatio / $totalKpi;
+        } else {
+            $percent = 0;
+        }
+        return $percent;
+    }
 }

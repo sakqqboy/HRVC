@@ -121,8 +121,8 @@ class AppAsset extends AssetBundle
         'js/setting/bonus.js',
         'js/setting/select_menycountry.js',
         'js/evaluation/calendar.js',
-        'js/evaluation/evaluation.js'
-
+        'js/evaluation/evaluation.js',
+        'js/evaluation/rank.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

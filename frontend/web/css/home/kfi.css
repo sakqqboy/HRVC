@@ -37,8 +37,8 @@
 
 .progress-item1 {
     display: flex;
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     font-size: 0;
     animation: .4s ease-out reverse;
@@ -50,13 +50,55 @@
     justify-content: center;
     flex-direction: column;
     width: 100px;
-    margin: 4px;
+    margin: 2px;
     border-radius: 50%;
     background: white;
-    font-size: 11px;
+    font-size: 10px;
     text-align: center;
 }
 
+.progress-item2 {
+    display:flex;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 0;
+    
+}
+
+.progress-item2::after {
+    content: attr(data-value2);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100px;
+    margin: 2px;
+    border-radius: 50%;
+    background: white;
+    font-size: 10px;
+    text-align: center;
+}
+.progress-item3 {
+    display:flex;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 0;
+    
+}
+
+.progress-item3::after {
+    content: attr(data-value3);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100px;
+    margin: 2px;
+    border-radius: 50%;
+    background: white;
+    font-size: 10px;
+    text-align: center;
+}
 .on-cursor {
     cursor: pointer;
     font-size: 18px;

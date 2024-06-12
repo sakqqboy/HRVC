@@ -20,6 +20,20 @@ function branchCompany() {
         }
     });
 }
+function branchCompany2() {
+    var companyId = $("#company-team2").val();
+    var url = $url + 'setting/team/company-branch';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { companyId: companyId },
+        success: function (data) {
+            $("#branch-team2").removeAttr("disabled", "true");
+            $("#branch-team2").html(data.textSelect);
+        }
+    });
+}
 
 function departmentBranch() {
     var branchId = $("#branch-team").val();

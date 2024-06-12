@@ -123,4 +123,57 @@ class KgiEmployee extends \backend\models\hrvc\master\KgiEmployeeMaster
             ->all();
         return count($kgiEmployee);
     }
+    public static function employeeKgiRatio($employeeId)
+    {
+        $kgiEmployee = KgiEmployee::find()
+            ->select('k.kgiName,k.priority,k.quantRatio,k.amountType,k.code,kgi_employee.target,kgi_employee.result,
+        kgi_employee.status,k.unitId,kgi_employee.month,kgi_employee.year,k.kgiId,k.companyId,
+        kgi_employee.kgiEmployeeId,e.employeeFirstname,e.employeeSurename')
+            ->JOIN("LEFT JOIN", "kgi k", "kgi_employee.kgiId=k.kgiId")
+            ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
+            ->where(["kgi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "kgi_employee.employeeId" => $employeeId])
+            ->orderby('k.createDateTime')
+            ->asArray()
+            ->all();
+        $totalRatio = 0;
+        $totalKgi = 0;
+        if (isset($kgiEmployee) && count($kgiEmployee) > 0) {
+            $totalKgi = count($kgiEmployee);
+            foreach ($kgiEmployee as $kgi) :
+                $ratio = 0;
+                $kgiEmployeeHistory = KgiEmployeeHistory::find()
+                    ->where(["kgiEmployeeId" => $kgi["kgiEmployeeId"], "status" => [1, 2, 4]])
+                    ->asArray()
+                    ->orderBy('createDateTime DESC')
+                    ->one();
+                if (!isset($kgiEmployeeHistory) || empty($kgiEmployeeHistory)) {
+                    $kgiEmployeeHistory = KgiEmployee::find()
+                        ->where(["kgiEmployeeId" => $kgi["kgiEmployeeId"], "status" => [1, 2, 4]])
+                        ->asArray()
+                        ->orderBy('createDateTime DESC')
+                        ->one();
+                }
+                if ($kgi["target"] != '' && $kgi["target"] != 0) {
+                    if ($kgi["code"] == '<' || $kgi["code"] == '=') {
+                        $ratio = ($kgi["result"] / $kgi["target"]) * 100;
+                    } else {
+                        if ($kgi["result"] != '' && $kgi["result"] != 0) {
+                            $ratio = ($kgi["target"] / $kgi["result"]) * 100;
+                        } else {
+                            $ratio = 0;
+                        }
+                    }
+                } else {
+                    $ratio = 0;
+                }
+                $totalRatio += $ratio;
+            endforeach;
+        }
+        if ($totalKgi > 0) {
+            $percent = $totalRatio / $totalKgi;
+        } else {
+            $percent = 0;
+        }
+        return $percent;
+    }
 }

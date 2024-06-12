@@ -39,7 +39,8 @@ function updateTeamKpi(kpiTeamId) {
 	});
 }
 function kpiTeamHistory(kpiTeamId) {
-    var url = $url + 'kpi/kpi-team/kpi-team-view';
+	var url = $url + 'kpi/kpi-team/kpi-team-view';
+	//alert(kpiTeamId);
     resetUnit();
     $.ajax({
         type: "POST",
@@ -59,11 +60,33 @@ function kpiTeamHistory(kpiTeamId) {
             $("#code-view").html(data.kpiTeam.code);
             $("#decription-view").html(data.kpiTeam.kpiDetail);
             $("#kpi-history").html(data.history);
-        
-            
         }
     });
-
+}
+function kpiTeamHistoryEva(kpiTeamId) {
+	var url = $url + 'kpi/kpi-team/kpi-team-view';
+	//alert(kpiTeamId);
+    resetUnit();
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { kpiTeamId: kpiTeamId },
+        success: function (data) {
+            $("#next-date-view-kpi-team").html(data.kpiTeam.nextCheckDateText);
+            $("#kpi-name-view-kpi-team").html(data.kpiTeam.kpiName);
+            $("#prirority-view-kpi-team").html(data.kpiTeam.priority);
+            $("#quantRatio-view-kpi-team").html(data.kpiTeam.quantRatio);
+            $("#unit-view-kpi-team").html(data.kpiTeam.unit);
+            $("#target-view-kpi-team").html(data.kpiTeam.target);
+            $("#result-view-kpi-team").html(data.kpiTeam.result);
+            $("#percentRatio-kpi-team").css("width", data.kpiTeam.ratio + '%');
+            $("#ratio-view-kpi-team").html(data.kpiTeam.ratio);
+            $("#code-view-kpi-team").html(data.kpiTeam.code);
+            $("#decription-view-kpi-team").html(data.kpiTeam.kpiDetail);
+            $("#kpi-history").html(data.history);
+        }
+    });
 }
 function kpiTeamHistory2(teamId, kpiId) {
 	//
