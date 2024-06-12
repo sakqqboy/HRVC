@@ -1,50 +1,87 @@
 .individual_step1 {
-    border: none;
-    height: 95%;
+    background-color: white;
+    border-radius: 7px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 170px;
+}
+
+.individual_step2 {
+    background-color: white;
+    border-radius: 7px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 170px;
+}
+
+.individual_userlogin {
+    width: 55px;
+    height: 55px;
+    border-radius: 50px;
+    margin-top: 10px;
 }
 
 .Individual_step2_name {
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: -0.7px;
+    font-size: 13px;
+    font-weight: 600;
     padding-top: 8px;
     color: black;
+    padding-left: 16px;
 }
 
 .Individual_step3_company {
     font-size: 12px;
+    line-height: 10px;
     font-weight: 400;
     padding-top: 5px;
     color: black;
+    padding-left: 16px;
 }
 
 .individual_step3_hraf {
-    padding-left: 10px;
-    padding-top: 10px;
-    height: 180px;
-    border: none;
+    background-color: white;
+    border-radius: 7px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 170px;
 }
 
 .Individual_step4_country {
-    font-size: 12px;
-    font-weight: 600;
+    font-size: 11px;
+    font-weight: 500;
     color: black;
-    padding-top: 3px;
+    padding-top: 5px;
+    padding-left: 16px;
 }
 
 .imageIndividual_country1 {
     border-radius: 50%;
-    width: 15px;
-    height: 15px;
-}
-
-.individual_step2 {
-    border: none;
+    width: 13px;
+    height: 13px;
+    margin-top: -5px;
 }
 
 .individual_stepkey {
-    font-size: 12px;
+    font-size: 16px;
     color: #004DB0;
+    font-weight: 700;
+}
+
+.individual_stepkey_number {
+    font-size: 13px;
+    line-height: 10px;
+    color: #004DB0;
+    font-weight: 500;
+}
+
+.performance_individual {
+    font-size: 15px;
     font-weight: 600;
 }
 
@@ -55,12 +92,12 @@
 }
 
 .imageindividual_Charts {
-    width: 15px;
+    width: 12px;
 }
 
 .individual_Financial {
-    font-size: 11px;
-    letter-spacing: -0.8px;
+    font-size: 10px;
+    letter-spacing: -0.5px;
 }
 
 .individual_solidkey {
@@ -143,34 +180,328 @@ div[role="progressbar_step_danger"]::before {
 }
 
 .imagesstep_userlog {
-    width: 20px;
-    height: 20px;
+    width: 23px;
+    height: 23px;
     border-radius: 50%;
-}
-
-.individual_firstname {
-    font-size: 12px;
-    color: #006AA6;
-    font-weight: 500;
 }
 
 .individual_primary {
     font-size: 13px;
     letter-spacing: -0.8px;
     font-weight: 500;
+    padding-top: 10px;
 }
 
 .trants_individual_firstname {
+    font-size: 12px;
     color: #006AA6;
+    font-weight: 500;
 }
 
 .My_panel {
     font-weight: 700;
     font-size: 17px;
-    letter-spacing: -0.9px;
-    padding-left: 20px;
+    letter-spacing: -0.6px;
 }
 
 .Panel-radio {
     font-size: 12px;
+}
+
+.individual_Mypanel {
+    background-color: #ecf0f6;
+    border-radius: 8px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 20px;
+}
+
+.on_procressing {
+    width: 8px;
+    height: 8px;
+    background-color: #FEC426;
+    border-radius: 50px;
+}
+
+.font-onorange {
+    font-size: 9px;
+}
+
+.imagesEllipse {
+    width: 8px;
+}
+
+.completed_textgreen {
+    color: #06B217;
+    font-size: 11px;
+}
+
+.tb_mypanel {
+    border-radius: 5px;
+    background-color: white;
+    border-left: 6px #FFA620 solid;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.tb_mypanel_blue {
+    border-radius: 5px;
+    background-color: white;
+    border-left: 6px #5CAEF9 solid;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.tb_mypanel_none {
+    border-radius: 5px;
+    background-color: white;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.sendcompleted1 {
+    width: 22px;
+    padding-top: 15px;
+    margin-left: -10px;
+}
+
+.sendcompleted2 {
+    width: 22px;
+    padding-top: 15px;
+}
+
+.tb_mypanel_e4 {
+    background-color: #D1E5F9;
+    border-radius: 3px;
+    color: #004DB0;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 2px;
+    padding-right: 2px;
+    margin-left: 3px;
+    margin-top: 5px;
+    width: 35px;
+}
+
+.btn_My_panel_New {
+    font-size: 11px;
+    background-color: #33aff7;
+    color: #ffffff;
+    border-radius: 4px;
+    border: none;
+    margin-top: 14px;
+    margin-left: -9px;
+    padding-bottom: 2px;
+}
+
+.E41_weight {
+    font-weight: 700;
+    font-size: 13px;
+    color: #004DB0;
+    text-align: center;
+}
+
+.E42_weight {
+    font-size: 12px;
+    color: #004DB0;
+    text-align: center;
+}
+
+.mouse1 {
+    width: 30px;
+}
+
+.IMG {
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+    margin-top: 7px;
+}
+
+.name_social {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.position_name {
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.spring {
+    padding-top: 10px;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.fontSeeAll {
+    color: #2580D3;
+    font-size: 14px;
+}
+
+
+@media (max-width: 998px) {
+    .individual_step2 {
+        height: auto;
+        margin-top: 15px;
+    }
+
+    .individual_userlogin {
+        width: 100px;
+        height: 100px;
+        margin-top: -8px;
+        margin-left: 150px;
+    }
+
+    .Individual_step2_name {
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: -0.1px;
+        line-height: 35px;
+    }
+
+    .Individual_step3_company {
+        font-size: 13px;
+        font-weight: 500;
+    }
+
+    .Individual_step4_country {
+        padding-top: 8px;
+    }
+
+    .individual_step3_hraf {
+        margin-top: 15px;
+    }
+
+    .imagesstep_userlog {
+        width: 40px;
+        height: 40px;
+    }
+
+    .trants_individual_firstname {
+        padding-left: 9px;
+    }
+
+    .individual_primary {
+        margin-top: -5px;
+    }
+}
+
+@media (max-width:1010px) {
+    .individual_userlogin {
+        width: 45px;
+        height: 45px;
+    }
+
+    .Individual_step2_name {
+        font-size: 11px;
+    }
+
+    .Individual_step3_company {
+        font-size: 9px;
+    }
+
+    .Individual_step4_country {
+        font-size: 9px;
+    }
+
+    .imageIndividual_country1 {
+        width: 9px;
+        height: 9px;
+        margin-top: -3px;
+    }
+
+    .individual_stepkey {
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .individual_stepkey_number {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .individual_step1 {
+        margin-top: 20px;
+    }
+
+    .individual_step2 {
+        margin-top: 20px;
+        height: auto;
+    }
+
+    .individual_userlogin {
+        width: 100px;
+        height: 100px;
+        margin-top: -7px;
+    }
+
+    .Individual_step2_name {
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    .Individual_step3_company {
+        font-size: 15px;
+        padding-top: 6px;
+    }
+
+    .Individual_step4_country {
+        padding-top: 10px;
+        font-size: 13px;
+    }
+
+    .imageIndividual_country1 {
+        margin-top: -5px;
+    }
+
+    .individual_step3_hraf {
+        margin-top: 20px;
+    }
+
+    .individual_primary {
+        font-size: 15px;
+        padding-top: 12px;
+    }
+
+    .imagesstep_userlog {
+        width: 30px;
+        height: 30px;
+    }
+
+    .trants_individual_firstname {
+        padding-left: 10px;
+    }
+
+    .tb_mypanel_e4 {
+        width: 30px;
+    }
+
+    .E41_weight {
+        font-size: 12px;
+    }
+
+    .E42_weight {
+        font-size: 10px;
+    }
+
+    .spring {
+        margin-top: -5px;
+        font-size: 10px;
+        font-weight: 500;
+    }
+
+    .btn_My_panel_New {
+        font-size: 10px;
+    }
 }

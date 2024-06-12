@@ -108,13 +108,13 @@
 }
 
 .salary3 {
-    font-size: 9px;
+    font-size: 8px;
     color: gray;
 }
 
 .salary4 {
-    font-size: 10px;
-    font-weight: 600;
+    font-size: 9px;
+    font-weight: 500;
     padding-top: 5px;
 }
 
@@ -141,11 +141,11 @@
 
 
 .salary-bonusAllsolid4 {
-    margin-left: -30px;
+    margin-left: 0px;
 }
 
 .imagelink-1 {
-    width: 12px;
+    width: 11px;
     margin-top: 3px;
 }
 

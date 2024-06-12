@@ -92,6 +92,7 @@ class AppAsset extends AssetBundle
         'css/evaluation/promotion.css',
         'css/evaluation/processstatus.css',
         'css/evaluation/individual.css',
+        'css/evaluation/individual_procress.css',
         'css/evaluation/register_salary.css',
     ];
     public $js = [
@@ -106,6 +107,7 @@ class AppAsset extends AssetBundle
         'js/setting/title.js',
         'js/setting/layer.js',
         'js/setting/multi_select.js',
+        'js/setting/individual_progress.js',
         'js/kfi/kfi.js',
         'js/kgi/kgi.js',
         'js/kgi/kgi_update.js',

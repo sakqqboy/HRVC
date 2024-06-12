@@ -30,20 +30,23 @@
 }
 
 .pictureRank-1 {
-    width: 15px;
+    width: 16px;
+    margin-top: -3px;
 }
 
 .allocate-user {
-    width: 14px;
+    width: 13px;
+    border-radius: 50px;
+    height: 13px;
 }
 
 .label-username {
-    font-size: 11px;
+    font-size: 10px;
 }
 
 .all-allocateuser {
-    padding-left: 10px;
-    margin-top: 5px;
+    padding-left: 23px;
+    margin-top: 8px;
     font-size: 12px;
 }
 
