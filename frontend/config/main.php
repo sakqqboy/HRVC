@@ -33,6 +33,9 @@ return [
         'fs' => [
             'class' => 'frontend\modules\fs\fs',
         ],
+        'home' => [
+            'class' => 'frontend\modules\home\home',
+        ],
     ],
     'components' => [
         'request' => [

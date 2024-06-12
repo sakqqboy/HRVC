@@ -125,7 +125,7 @@ class EnvironmentController extends Controller
 					$frameTerm->startDate =  $fromDate;
 					$frameTerm->endDate = $toDate;
 					$frameTerm->midDate = null;
-					$frameTerm->status = $i == 1 ? 1 : 2;
+					$frameTerm->status = ($i == 1 ? 1 : 2);
 					$frameTerm->createDateTime = new Expression('NOW()');
 					$frameTerm->updateDateTime = new Expression('NOW()');
 					$frameTerm->save(false);

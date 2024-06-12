@@ -16,7 +16,7 @@ use frontend\models\hrvc\UserRole;
                 </div>
                 <div class="col-12 navbar-header pl-15">
                         <div class="col-12">
-                                <a href="<?= Yii::$app->homeUrl ?>site/dashboard" class="no-underline">
+                                <a href="<?= Yii::$app->homeUrl ?>home/dashboard" class="no-underline">
                                         <i class="fa fa-th-large pr-10 mt-10" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tooltip on bottom"></i>
                                         Dashboard
                                 </a>

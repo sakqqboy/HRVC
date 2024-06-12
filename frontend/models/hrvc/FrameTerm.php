@@ -51,6 +51,29 @@ class FrameTerm extends \frontend\models\hrvc\master\FrameTermMaster
             return null;
         }
     }
+    public static function currentTermId($companyId)
+    {
+        $termId = 0;
+        $environment = Environment::find()->where(["companyId" => $companyId, "status" => 1])->asArray()->one();
+        if (isset($environment) && !empty($environment)) {
+            $frame = Frame::find()
+                ->where(["status" => 1, "environmentId" => $environment["environmentId"]])
+                ->asArray()
+                ->orderBy("frameId")
+                ->one();
+            if (isset($frame) && !empty($frame)) {
+                $term = FrameTerm::find()
+                    ->where(["status" => 1, "frameId" => $frame["frameId"]])
+                    ->asArray()
+                    ->orderBy('createDateTime')
+                    ->one();
+                if (isset($term) && !empty($term)) {
+                    $termId = $term["termId"];
+                }
+            }
+        }
+        return $termId;
+    }
     public static function isIncludeBonus($frameId)
     {
         $term = FrameTerm::find()
