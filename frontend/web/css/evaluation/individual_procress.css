@@ -291,3 +291,18 @@
     border-radius: 3px;
     font-size: 14px;
 }
+
+.Priority {
+    border-radius: 50px;
+    border: 3px #2F80ED solid;
+    width: 30px;
+    height: 30px;
+}
+
+.name-priority {
+    font-size: 10px;
+}
+
+.individual_PIM_target1 {
+    width: 12px;
+}
