@@ -5,6 +5,7 @@ namespace frontend\modules\home\controllers;
 use common\helpers\Path;
 use Exception;
 use frontend\models\hrvc\Employee;
+use frontend\models\hrvc\EmployeePimWeight;
 use frontend\models\hrvc\Frame;
 use frontend\models\hrvc\FrameTerm;
 use frontend\models\hrvc\Group;
@@ -35,7 +36,7 @@ class DashboardController extends Controller
 		$employee = curl_exec($api);
 		$employee = json_decode($employee, true);
 
-		$termId = FrameTerm::currentTermId($employee["companyId"]);
+		$termId = FrameTerm::currentTermId($employee["companyId"], $employee["branchId"]);
 
 		//$termId = 20;
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/employee-evaluator?employeeId=' . $employeeId . '&&termId=' . $termId);
@@ -46,14 +47,30 @@ class DashboardController extends Controller
 		$terms = curl_exec($api);
 		$terms = json_decode($terms, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/eva/employee-pim?employeeId=' . $employeeId . '&&termId=' . $termId);
+		$employeePim = curl_exec($api);
+		$employeePim = json_decode($employeePim, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/eva/all-current-term?employeeId=' . $employeeId . '&&companyId=' . $employee["companyId"] . '&&branchId=' . $employee["branchId"]);
+		$allCurrentTerm = curl_exec($api);
+		$allCurrentTerm = json_decode($allCurrentTerm, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/eva/subordinate-current-term?evaluatorId=' . Yii::$app->user->id);
+		$subordinateTerm = curl_exec($api);
+		$subordinateTerm = json_decode($subordinateTerm, true);
+
 		$frameId = $terms["frameId"];
 		$frameName = Frame::frameName($frameId);
-		//throw new Exception(print_r($terms, true));
+
 		return $this->render('index', [
 			"employee" => $employee,
 			"evaluator" => $evaluator,
 			"terms" => $terms,
 			"frameName" => $frameName,
+			"employeePim" => $employeePim,
+			"allCurrentTerm" => $allCurrentTerm,
+			"termId" => $termId,
+			"subordinateTerm" => $subordinateTerm
 		]);
 	}
 }

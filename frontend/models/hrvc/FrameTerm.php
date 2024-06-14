@@ -51,10 +51,10 @@ class FrameTerm extends \frontend\models\hrvc\master\FrameTermMaster
             return null;
         }
     }
-    public static function currentTermId($companyId)
+    public static function currentTermId($companyId, $branchId)
     {
         $termId = 0;
-        $environment = Environment::find()->where(["companyId" => $companyId, "status" => 1])->asArray()->one();
+        $environment = Environment::find()->where(["companyId" => $companyId, "status" => 1, "branchId" => $branchId])->asArray()->one();
         if (isset($environment) && !empty($environment)) {
             $frame = Frame::find()
                 ->where(["status" => 1, "environmentId" => $environment["environmentId"]])

@@ -941,6 +941,7 @@ function prepareKgiEmployeeEvaluate(kgiId, kgiEmployeeWeigthId) {
 				$("#firstCommentKgiEmployee").html(data.firstComment);
 				$("#finalScoreKgiEmployee").val(data.finalScore);
 				$("#finalCommentKgiEmployee").html(data.finalComment);
+				alert(data.enableFirst);
 				if (data.enableFirst == 1) {
 					$("#firstScoreKgiEmployee").removeAttr("disabled");
 					$("#firstCommentKgiEmployee").removeAttr("disabled");
