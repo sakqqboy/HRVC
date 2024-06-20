@@ -248,8 +248,8 @@
     background-color: #F4F6F9;
     border-radius: 5px;
     margin-top: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .MY_PIM_PANEL {
@@ -280,7 +280,7 @@
 }
 
 .pim1-imageslinegroup {
-    width: 10px;
+    width: 12px;
 }
 
 .pim1_formatnumkfi {
@@ -294,9 +294,10 @@
 
 .Priority {
     border-radius: 50px;
-    border: 3px #2F80ED solid;
-    width: 30px;
-    height: 30px;
+    border: 2px #2F80ED solid;
+    font-size: 10px;
+    font-weight: 400;
+    width: 20px;
 }
 
 .name-priority {
@@ -305,4 +306,33 @@
 
 .individual_PIM_target1 {
     width: 12px;
+}
+
+.width-ccal {
+    width: 13px;
+}
+
+.but_showmore {
+    background-color: #BCE0FD;
+    border-radius: 3px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-top: 60px;
+}
+
+.showmore_pim {
+    color: #1262AF;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+}
+
+.pim_no {
+    font-size: 12px;
+    font-weight: 600;
+    color: gray;
+    text-align: center;
 }

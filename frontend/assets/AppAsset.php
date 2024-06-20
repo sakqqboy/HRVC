@@ -107,7 +107,6 @@ class AppAsset extends AssetBundle
         'js/setting/title.js',
         'js/setting/layer.js',
         'js/setting/multi_select.js',
-        'js/setting/individual_progress.js',
         'js/kfi/kfi.js',
         'js/kgi/kgi.js',
         'js/kgi/kgi_update.js',
