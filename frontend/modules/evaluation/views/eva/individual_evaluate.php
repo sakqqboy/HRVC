@@ -234,7 +234,7 @@ $this->title = "Eva";
 							Total Item<span class="badge bg-info border font-size-14 pt-7 pb-7 pl-7 pr-7 ml-5" id="total-item"><?= count($employeeTermKfi) ?></span>
 						</div>
 						<div class="col-6 text-end">
-							<a href="<?= Yii::$app->homeUrl ?>evaluate/eva/dashboard" class="btn btn-primary text-light font-size-13">
+							<a href="<?= Yii::$app->homeUrl ?>home/dashboard" class="btn btn-primary text-light font-size-13">
 								<i class="fa fa-angle-left mr-5" aria-hidden="true"></i> DASHBOARD
 							</a>
 						</div>

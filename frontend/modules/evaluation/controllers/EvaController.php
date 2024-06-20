@@ -3,7 +3,9 @@
 namespace frontend\modules\evaluation\controllers;
 
 use common\helpers\Path;
+use common\models\ModelMaster;
 use Exception;
+use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\EmployeeEvaluator;
 use frontend\models\hrvc\Frame;
 use frontend\models\hrvc\Group;
@@ -16,6 +18,7 @@ use frontend\models\hrvc\Kpi;
 use frontend\models\hrvc\KpiTeam;
 use frontend\models\hrvc\KpiTeamWeight;
 use frontend\models\hrvc\KpiWeight;
+use frontend\models\hrvc\User;
 use Yii;
 use yii\web\Controller;
 
@@ -35,10 +38,11 @@ class EvaController extends Controller
 	public function actionDashboard()
 	{
 	}
-	public function actionEvaluate()
+	public function actionEvaluate($hash)
 	{
-		$termId = 20;
-		$employeeId = 118;
+		$param = ModelMaster::decodeParams($hash);
+		$termId = $param["termId"];
+		$employeeId = $param["employeeId"];
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -137,7 +141,7 @@ class EvaController extends Controller
 	{
 		$kfiId = $_POST["kfiId"];
 		$kfiWeightId = $_POST["kfiWeightId"];
-		$evaluatorId = Yii::$app->user->id;
+		$evaluatorId = User::employeeIdFromUserId();
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -179,6 +183,8 @@ class EvaController extends Controller
 			$res["finalScore"] = $kfiWeight["finalScore"];
 			$res["firstComment"] = $kfiWeight["firstComment"];
 			$res["finalComment"] = $kfiWeight["finalComment"];
+			$res["employeeId"] = $kfiWeight["employeeId"];
+			$res["evaluatorId"] = $evaluatorId;
 		}
 		return json_encode($res);
 	}
@@ -230,7 +236,7 @@ class EvaController extends Controller
 	public function actionPrepareKgiEmployee()
 	{
 		$kgiId = $_POST["kgiId"];
-		$evaluatorId = Yii::$app->user->id;
+		$evaluatorId = User::employeeIdFromUserId();
 		$kgiEmployeeWeigthId = $_POST["kgiEmployeeWeigthId"];
 
 		$api = curl_init();
@@ -248,8 +254,8 @@ class EvaController extends Controller
 			->one();
 		$res["status"] = true;
 		$res["kgiName"] = $kgi["kgiName"];
-		$res["enablefirst"] = 0;
-		$res["enablefinal"] = 0;
+		$res["enableFirst"] = 0;
+		$res["enableFinal"] = 0;
 		$res["firstScore"] = '';
 		$res["finalScore"] = '';
 		$res["firstComment"] = '';
@@ -261,10 +267,10 @@ class EvaController extends Controller
 				->one();
 			if (isset($evaluator) && !empty($evaluator)) {
 				if ($evaluator["primaryId"] == $evaluatorId) {
-					$res["enablefirst"] = 1;
+					$res["enableFirst"] = 1;
 				}
 				if ($evaluator["finalId"] == $evaluatorId) {
-					$res["enablefinal"] = 1;
+					$res["enableFinal"] = 1;
 				}
 			}
 			$res["firstScore"] = $kgiEmployeeWeight["firstScore"];
@@ -322,7 +328,7 @@ class EvaController extends Controller
 	public function actionPrepareKgiTeam()
 	{
 		$kgiId = $_POST["kgiId"];
-		$evaluatorId = Yii::$app->user->id;
+		$evaluatorId = User::employeeIdFromUserId();
 		$kgiTeamWeigthId = $_POST["kgiTeamWeigthId"];
 
 		$api = curl_init();
@@ -340,8 +346,8 @@ class EvaController extends Controller
 			->one();
 		$res["status"] = true;
 		$res["kgiName"] = $kgi["kgiName"];
-		$res["enablefirst"] = 0;
-		$res["enablefinal"] = 0;
+		$res["enableFirst"] = 0;
+		$res["enableFinal"] = 0;
 		$res["firstScore"] = '';
 		$res["finalScore"] = '';
 		$res["firstComment"] = '';
@@ -353,10 +359,10 @@ class EvaController extends Controller
 				->one();
 			if (isset($evaluator) && !empty($evaluator)) {
 				if ($evaluator["primaryId"] == $evaluatorId) {
-					$res["enablefirst"] = 1;
+					$res["enableFirst"] = 1;
 				}
 				if ($evaluator["finalId"] == $evaluatorId) {
-					$res["enablefinal"] = 1;
+					$res["enableFinal"] = 1;
 				}
 			}
 			$res["firstScore"] = $kgiTeamWeight["firstScore"];
@@ -414,7 +420,7 @@ class EvaController extends Controller
 	public function actionPrepareKpiTeam()
 	{
 		$kpiId = $_POST["kpiId"];
-		$evaluatorId = Yii::$app->user->id;
+		$evaluatorId = User::employeeIdFromUserId();
 		$kpiTeamWeigthId = $_POST["kpiTeamWeigthId"];
 
 		$api = curl_init();
@@ -432,8 +438,8 @@ class EvaController extends Controller
 			->one();
 		$res["status"] = true;
 		$res["kpiName"] = $kpi["kpiName"];
-		$res["enablefirst"] = 0;
-		$res["enablefinal"] = 0;
+		$res["enableFirst"] = 0;
+		$res["enableFinal"] = 0;
 		$res["firstScore"] = '';
 		$res["finalScore"] = '';
 		$res["firstComment"] = '';
@@ -445,10 +451,10 @@ class EvaController extends Controller
 				->one();
 			if (isset($evaluator) && !empty($evaluator)) {
 				if ($evaluator["primaryId"] == $evaluatorId) {
-					$res["enablefirst"] = 1;
+					$res["enableFirst"] = 1;
 				}
 				if ($evaluator["finalId"] == $evaluatorId) {
-					$res["enablefinal"] = 1;
+					$res["enableFinal"] = 1;
 				}
 			}
 			$res["firstScore"] = $kpiTeamWeight["firstScore"];
@@ -506,7 +512,7 @@ class EvaController extends Controller
 	public function actionPrepareKpiEmployee()
 	{
 		$kpiId = $_POST["kpiId"];
-		$evaluatorId = Yii::$app->user->id;
+		$evaluatorId = User::employeeIdFromUserId();
 		$kpiEmployeeWeigthId = $_POST["kpiEmployeeWeigthId"];
 
 		$api = curl_init();
@@ -524,8 +530,8 @@ class EvaController extends Controller
 			->one();
 		$res["status"] = true;
 		$res["kpiName"] = $kpi["kpiName"];
-		$res["enablefirst"] = 0;
-		$res["enablefinal"] = 0;
+		$res["enableFirst"] = 0;
+		$res["enableFinal"] = 0;
 		$res["firstScore"] = '';
 		$res["finalScore"] = '';
 		$res["firstComment"] = '';
@@ -537,10 +543,10 @@ class EvaController extends Controller
 				->one();
 			if (isset($evaluator) && !empty($evaluator)) {
 				if ($evaluator["primaryId"] == $evaluatorId) {
-					$res["enablefirst"] = 1;
+					$res["enableFirst"] = 1;
 				}
 				if ($evaluator["finalId"] == $evaluatorId) {
-					$res["enablefinal"] = 1;
+					$res["enableFinal"] = 1;
 				}
 			}
 			$res["firstScore"] = $kpiEmployeeWeight["firstScore"];

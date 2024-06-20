@@ -126,6 +126,7 @@ return [
                 'evaluation/environment/kfi-weight-allocate/<hash>' => 'evaluation/environment/kfi-weight-allocate',
                 'evaluation/environment/kgi-weight-allocate/<hash>' => 'evaluation/environment/kgi-weight-allocate',
                 'evaluation/environment/kpi-weight-allocate/<hash>' => 'evaluation/environment/kpi-weight-allocate',
+                'evaluation/eva/evaluate/<hash>' => 'evaluation/eva/evaluate',
                 'evaluation/salary/register/<hash>' => 'evaluation/salary/register',
                 'evaluation/salary/filter-salary-result/<hash>' => 'evaluation/salary/filter-salary-result',
                 'evaluation/salary/filter-salary-register-result/<hash>' => 'evaluation/salary/filter-salary-register-result',
