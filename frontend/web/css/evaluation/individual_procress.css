@@ -264,6 +264,7 @@
     background-color: #D1E5F9;
     border-radius: 3px;
     margin-left: 5px;
+    margin-top: 10px;
 }
 
 .color-004DB0-E2 {
@@ -275,8 +276,9 @@
 
 .color-004DB0-none {
     color: #004DB0;
-    font-size: 13px;
-    font-weight: 400;
+    font-size: 11px;
+    padding-top: 5px;
+    font-weight: 500;
 }
 
 .pim1-imageslinegroup {
@@ -335,4 +337,52 @@
     font-weight: 600;
     color: gray;
     text-align: center;
+}
+
+.backgroudwhite-solid {
+    background-color: #ffff;
+    border-radius: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.iamges_usersipm {
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    margin-left: 15px;
+}
+
+.txt_bingname_individualpim {
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.txt_smallname_individualpim {
+    font-size: 12px;
+    padding-top: 3px;
+}
+
+.images_pimtry {
+    width: 13px;
+    height: 13px;
+    border-radius: 50px;
+}
+
+.Thickness {
+    font-weight: 500;
+    font-size: 11px;
+}
+
+.Thickness_company {
+    font-weight: 500;
+}
+
+.select_checkboxright {
+    border-radius: 30px;
+    border: 1px #1d8eec solid;
+    font-size: 13px;
+    color: #004DB0;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
