@@ -109,7 +109,7 @@ $this->title = 'Individual Procress';
                     </span>
                     <span class="input-group-text group-btnprimary pr-3 pl-2">2nd</span>
                 </div>
-                <span class="badge rounded-pill text-end progressindividual_deadline_day">
+                <span class="badge progressindividual_deadline_day">
                     <span class="text-danger">deadline</span>
                     <span class="text-secondary">: Mon,</span>
                     <span class="text-dark">Feb 28,2024</span>
@@ -129,11 +129,6 @@ $this->title = 'Individual Procress';
                     <span class="text_b_kgi"> KGI</span> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/arrow-solid.png">
                     <span class="text_b_kgi"> KPI</span> <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/arrow-solid.png">
                     <button class="submitprogress_arrow" onclick="move();this.disabled='true'">Submit</button>
-                </div>
-
-                <div class="w3-light-grey">
-                    <div id="myBarprogress_steps" class="w3-blue" style="height:12px;width:0%;border-radius:6px;margin-top:15px;">
-                    </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-6 col-6 text-end text-primary">
