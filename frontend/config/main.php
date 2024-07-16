@@ -132,6 +132,7 @@ return [
                 'evaluation/salary/filter-salary-register-result/<hash>' => 'evaluation/salary/filter-salary-register-result',
                 'evaluation/salary/update-company-salary/<hash>' => 'evaluation/salary/update-company-salary',
                 'evaluation/rank/index/<hash>' => 'evaluation/rank/index',
+                'evaluation/bonus/index/<hash>' => 'evaluation/bonus/index',
             ],
         ],
         'assetManager' => [

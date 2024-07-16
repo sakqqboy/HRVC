@@ -43,4 +43,13 @@ class Path
 		}
 		return $url;
 	}
+	public static function fsModule()
+	{
+		if ($_SERVER['HTTP_HOST'] == "localhost") {
+			$url = 'http://localhost/system/index.php';
+		} else {
+			$url = 'https://fs.tcg-hrvc-system.com/index';
+		}
+		return $url;
+	}
 }

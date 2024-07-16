@@ -1,5 +1,6 @@
 <?php
 
+use common\helpers\Path;
 use common\models\ModelMaster;
 use frontend\models\hrvc\UserRole;
 
@@ -135,7 +136,7 @@ use frontend\models\hrvc\UserRole;
                         <div class="col-12 haeder-Evalution"> REPORTS</div>
                         <div class="col-12"> <a href="<?= Yii::$app->homeUrl ?>site/analysis" class="no-underline"><i class="fa fa-pie-chart pr-10 mt-20" aria-hidden="true"></i> Analysis</a></div>
                         <div class="col-12 haeder-Evalution">
-                                <a href="http://localhost/system/index.php?__id=<?= Yii::$app->user->id ?>" class="no-underline">
+                                <a href="<?= Path::fsModule() ?>?__id=<?= Yii::$app->user->id ?>" class="no-underline">
                                         Financial Planning
                                 </a>
                         </div>

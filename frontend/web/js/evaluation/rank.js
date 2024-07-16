@@ -56,3 +56,28 @@ function deleteTermRank(rankId) {
 		});
 	}
 }
+
+function saveBonusTerm(termId) { 
+	var totalBudget = $("#totalBudget").val();
+	var totalBonus = $("#totalBonus").val();
+	var payableBonus = $("#payableBonus").val();
+	if (totalBudget != "") {
+		var url = $url + 'evaluation/bonus/save-bonus-budget';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { termId: termId, totalBudget: totalBudget, totalBonus: totalBonus, payableBonus: payableBonus },
+			success: function (data) {
+				if (data.status) {
+					//$("#rank-" + rankId).hide();
+					$("#totalBudget").val(data.budget);
+					$("#total-bonus").html(totalBonus);
+					$("#adjustment-bonus").html(data.adjustment);
+				}
+			}
+		});
+	} else { 
+		alert("The Total Budget can not be null ! ! !");
+	}
+}

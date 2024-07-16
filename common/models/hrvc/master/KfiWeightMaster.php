@@ -24,6 +24,13 @@ use Yii;
     * @property string $weight
     * @property integer $termId
     * @property integer $employeeId
+    * @property string $result
+    * @property string $midComment
+    * @property string $primaryComment
+    * @property string $firstScore
+    * @property string $finalScore
+    * @property string $firstComment
+    * @property string $finalComment
     * @property integer $status
     * @property string $createDateTime
     * @property string $updateDateTime
@@ -46,7 +53,8 @@ public function rules()
 return [
             [['kfiId', 'termId'], 'required'],
             [['kfiId', 'level6End', 'termId', 'employeeId'], 'integer'],
-            [['level1', 'level1End', 'level2', 'level2End', 'level3', 'level3End', 'level4', 'level4End', 'level5', 'level5End', 'level6', 'weight'], 'number'],
+            [['level1', 'level1End', 'level2', 'level2End', 'level3', 'level3End', 'level4', 'level4End', 'level5', 'level5End', 'level6', 'weight', 'result', 'firstScore', 'finalScore'], 'number'],
+            [['midComment', 'primaryComment', 'firstComment', 'finalComment'], 'string'],
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['status'], 'string', 'max' => 10],
         ];
@@ -75,6 +83,13 @@ return [
     'weight' => 'Weight',
     'termId' => 'Term ID',
     'employeeId' => 'Employee ID',
+    'result' => 'Result',
+    'midComment' => 'Mid Comment',
+    'primaryComment' => 'Primary Comment',
+    'firstScore' => 'First Score',
+    'finalScore' => 'Final Score',
+    'firstComment' => 'First Comment',
+    'finalComment' => 'Final Comment',
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',
     'updateDateTime' => 'Update Date Time',

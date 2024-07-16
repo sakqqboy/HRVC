@@ -7,8 +7,15 @@ use Yii;
 /**
 * This is the model class for table "kgi_employee_weight".
 *
-    * @property integer $kgiEmployeeWeigth
+    * @property integer $kgiEmployeeWeightId
     * @property integer $employeeId
+    * @property string $result
+    * @property string $midComment
+    * @property string $primaryComment
+    * @property string $firstScore
+    * @property string $finalScore
+    * @property string $firstComment
+    * @property string $finalComment
     * @property integer $kgiId
     * @property integer $kgiEmployeeId
     * @property integer $termId
@@ -43,7 +50,8 @@ public function rules()
 return [
             [['employeeId'], 'required'],
             [['employeeId', 'kgiId', 'kgiEmployeeId', 'termId'], 'integer'],
-            [['level1', 'level1End', 'level2', 'level2End', 'level3', 'level3End', 'level4', 'level4End', 'weight'], 'number'],
+            [['result', 'firstScore', 'finalScore', 'level1', 'level1End', 'level2', 'level2End', 'level3', 'level3End', 'level4', 'level4End', 'weight'], 'number'],
+            [['midComment', 'primaryComment', 'firstComment', 'finalComment'], 'string'],
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['status'], 'string', 'max' => 10],
         ];
@@ -55,8 +63,15 @@ return [
 public function attributeLabels()
 {
 return [
-    'kgiEmployeeWeigth' => 'Kgi Employee Weigth',
+    'kgiEmployeeWeightId' => 'Kgi Employee Weight ID',
     'employeeId' => 'Employee ID',
+    'result' => 'Result',
+    'midComment' => 'Mid Comment',
+    'primaryComment' => 'Primary Comment',
+    'firstScore' => 'First Score',
+    'finalScore' => 'Final Score',
+    'firstComment' => 'First Comment',
+    'finalComment' => 'Final Comment',
     'kgiId' => 'Kgi ID',
     'kgiEmployeeId' => 'Kgi Employee ID',
     'termId' => 'Term ID',

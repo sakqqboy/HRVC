@@ -80,4 +80,25 @@ class Employee extends \backend\models\hrvc\master\EmployeeMaster
             return 0;
         }
     }
+    public static function employeeImage($employeeId)
+    {
+        $employee = Employee::find()
+            ->select('picture,gender')
+            ->where(["employeeId" => $employeeId])
+            ->asArray()
+            ->one();
+        $img = "image/user.jpg";
+        if (isset($employee) && !empty($employee)) {
+            if ($employee["picture"] != '') {
+                $img = $employee["picture"];
+            } else {
+                if ($employee["gender"] == 1) {
+                    $img = "image/user.png";
+                } else {
+                    $img = "image/lady.jpg";
+                }
+            }
+        }
+        return $img;
+    }
 }

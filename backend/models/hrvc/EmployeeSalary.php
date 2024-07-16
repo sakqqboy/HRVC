@@ -73,4 +73,27 @@ class EmployeeSalary extends \backend\models\hrvc\master\EmployeeSalaryMaster
         }
         return $data;
     }
+    public static function EmployeeCurrentSalary($employeeId)
+    {
+        $salary = EmployeeSalary::find()->where(["employeeId" => $employeeId, "structureId" => 1, "status" => 1])->one();
+        if (isset($salary) && !empty($salary)) {
+            return $salary["value"];
+        } else {
+            return '-';
+        }
+    }
+    public static function evaluationSalary($employeeId, $termId)
+    {
+        $bonusRecord = BonusRecord::find()->where(["employeeId" => $employeeId, "termId" => $termId])->asArray()->one();
+        $data = [];
+        if (isset($bonusRecord) && !empty($bonusRecord)) {
+            $data["rankId"] = $bonusRecord["rankId"];
+            $data["rankName"] = $bonusRecord["rankName"];
+            $data["salary"] = $bonusRecord["salary"];
+            $data["bomusRate"] = $bonusRecord["bonusRate"];
+            $data["bonus"] = $bonusRecord["bonusRate"] * $bonusRecord["salary"];
+            $data["finalAdjustment"] = $bonusRecord["finalAdjustment"];
+        }
+        return $data;
+    }
 }

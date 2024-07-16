@@ -11,7 +11,7 @@ use backend\models\hrvc\FrameTerm;
 use backend\models\hrvc\TermItem;
 use backend\models\hrvc\Title;
 use common\models\ModelMaster;
-use frontend\models\hrvc\EmployeeEvaluator;
+use backend\models\hrvc\EmployeeEvaluator;
 use yii\web\Controller;
 
 header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
@@ -86,7 +86,7 @@ class EvaController extends Controller
 	}
 	public function actionSubordinateCurrentTerm($evaluatorId)
 	{
-		$employeeId = Employee::employeeId($evaluatorId);
+		$employeeId = $evaluatorId;
 		$employeeEvaluator = EmployeeEvaluator::find()
 			->where(["status" => 1])
 			->andWhere("primaryId=$employeeId or finalId=$employeeId")

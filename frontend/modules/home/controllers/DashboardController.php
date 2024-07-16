@@ -55,13 +55,13 @@ class DashboardController extends Controller
 		$allCurrentTerm = curl_exec($api);
 		$allCurrentTerm = json_decode($allCurrentTerm, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/eva/subordinate-current-term?evaluatorId=' . Yii::$app->user->id);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/eva/subordinate-current-term?evaluatorId=' .  $employeeId);
 		$subordinateTerm = curl_exec($api);
 		$subordinateTerm = json_decode($subordinateTerm, true);
 
 		$frameId = $terms["frameId"];
 		$frameName = Frame::frameName($frameId);
-
+		// throw new exception(print_r($subordinateTerm, true));
 		return $this->render('index', [
 			"employee" => $employee,
 			"evaluator" => $evaluator,
