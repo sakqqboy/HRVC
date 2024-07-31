@@ -90,7 +90,7 @@ class EmployeeSalary extends \backend\models\hrvc\master\EmployeeSalaryMaster
             $data["rankId"] = $bonusRecord["rankId"];
             $data["rankName"] = $bonusRecord["rankName"];
             $data["salary"] = $bonusRecord["salary"];
-            $data["bomusRate"] = $bonusRecord["bonusRate"];
+            $data["bonusRate"] = $bonusRecord["bonusRate"];
             $data["bonus"] = $bonusRecord["bonusRate"] * $bonusRecord["salary"];
             $data["finalAdjustment"] = $bonusRecord["finalAdjustment"];
         }

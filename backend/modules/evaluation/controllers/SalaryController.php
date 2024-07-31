@@ -213,7 +213,7 @@ class SalaryController extends Controller
 	public function actionTitleEmployeeAllowance($departmentId, $titleId)
 	{
 		$employees = Employee::find()
-			->where(["titleId" => $titleId, "status" => 1])
+			->where(["status" => 1, "titleId" => $titleId, "departmentId" => $departmentId])
 			->orderBy('employeeFirstname')
 			->asArray()
 			->all();

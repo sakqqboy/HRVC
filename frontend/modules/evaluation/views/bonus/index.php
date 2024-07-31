@@ -2,7 +2,7 @@
 
 use frontend\models\hrvc\Department;
 
-$this->title = 'Term Detail';
+$this->title = 'Bonus Term';
 ?>
 <div class="col-12 mt-70 environment pt-10 pr-10 pl-20">
 	<div class="row">
@@ -400,6 +400,7 @@ $this->title = 'Term Detail';
 										</td>
 										<td class="pr-0 pl-0 pt-5 pb-0">
 											<div class="col-12 border-right bg-white pt-7 pb-7 pr-5 text-end">
+												<input type="hidden" id="employee-salary-<?= $employeeId ?>" value="<?= $em['currentSalary'] ?>">
 												<?= is_numeric($em["currentSalary"]) ? number_format($em["currentSalary"], 2) : '-' ?>
 											</div>
 										</td>
@@ -431,11 +432,14 @@ $this->title = 'Term Detail';
 											<div class="col-12 border-right bg-white  pt-7 pb-7 text-end pr-5">
 												<?php
 												//$finalAjustment = $evalBonus;
-												$finalAjustment = 0;
+
+												//$finalAdjustment = 0;
 												?>
-												<span class="finaladjustment-ml"> <?= number_format($finalAjustment, 2) ?>
-													<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/ture.png" class="width1">
-													<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/save-black.png" class="width2">
+												<span class="finaladjustment-ml">
+													<input type="text" id="final-adjustment-<?= $employeeId ?>" value="<?= $em['finalAdjustment'] ?>" class="finalAdjust-input" style="display: none;">
+													<span id="text-final-adjustment-<?= $employeeId ?>"><?= number_format($em["finalAdjustment"], 2) ?></span>
+													<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/ture.png" class="width1" onclick="javascript:changeFinalAdjustment(<?= $employeeId ?>)" style="cursor: pointer;">
+													<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/save-black.png" class="width2" onclick="javascript:saveFinancialAdjustment(<?= $employeeId ?>,<?= $termId ?>)">
 												</span>
 											</div>
 										</td>
@@ -448,18 +452,12 @@ $this->title = 'Term Detail';
 													$salary = 0;
 												}
 												?>
-												<?= number_format($salary + $finalAjustment, 2) ?>
+												<span id="payable-bonus-<?= $employeeId ?>"><?= number_format($salary + $em["finalAdjustment"], 2) ?></span>
 											</div>
 										</td>
 										<td class="pr-5 pl-0 pt-5 pb-0 text-center">
-											<?php
-											if ($salary == 0) {
-												$finalBonus = 0;
-											} else {
-												$finalBonus = $finalAjustment / $salary;
-											}
-											?>
-											<div class="col-12 bg-white  pt-7 pb-7"><?= number_format($finalBonus, 2) ?> X</div>
+
+											<div class="col-12 bg-white  pt-7 pb-7" id="true-bonus-rate-<?= $employeeId ?>"><?= number_format($em["trueRateBonus"], 1) ?> X</div>
 										</td>
 									</tr>
 								<?php

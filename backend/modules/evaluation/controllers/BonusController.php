@@ -53,6 +53,7 @@ class BonusController extends Controller
 				$bonus = '-';
 				$rankName = '-';
 				$adjustment = 0.00;
+				$trueBonusRate = '0';
 				if (!isset($currentSalary) || empty($currentSalary)) {
 					$currentSalary["salary"] = EmployeeSalary::EmployeeCurrentSalary($employee["employeeId"]);
 				}
@@ -74,7 +75,15 @@ class BonusController extends Controller
 				if (isset($rank["rankName"])) {
 					$rankName = $rank["rankName"];
 				}
-
+				if (isset($currentSalary["salary"]) && is_numeric($currentSalary["salary"]) && isset($currentSalary["finalAdjustment"]) && $currentSalary["salary"] != 0) {
+					$trueBonusRate = $currentSalary["finalAdjustment"] / $currentSalary["salary"];
+				}
+				if ($trueBonusRate == 0 && isset($currentSalary["bonusRate"])) {
+					$trueBonusRate = $currentSalary["bonusRate"];
+					if (isset($currentSalary["finalAdjustment"]) && $currentSalary["finalAdjustment"] == 0.00) {
+						$trueBonusRate = $currentSalary["bonusRate"];
+					}
+				}
 				$data[$employee["departmentId"]][$employee["employeeId"]] = [
 					"firstname" => $employee["employeeFirstname"],
 					"surename" => $employee["employeeSurename"],
@@ -88,9 +97,9 @@ class BonusController extends Controller
 					"bonus" =>  isset($currentSalary["bonus"]) ? $currentSalary["bonus"] : $bonus,
 					"bonusRate" =>  isset($currentSalary["bonusRate"]) ? $currentSalary["bonusRate"] : $bonusRate,
 					"adjustment" => $adjustment, //
-					//"finalAdjustment" => isset($currentSalary["finalAdjustment"]) ? $currentSalary["finalAdjustment"] : EmployeeSalary::EmployeeCurrentSalary($employee["employeeId"]), //salary+final Adjustment
-					"payableBonus" => "", //salary+final Adjustment,
-					"trueRateBonus" => ""
+					"finalAdjustment" => isset($currentSalary["finalAdjustment"]) ? $currentSalary["finalAdjustment"] : 0,
+					"payableBonus" => "", isset($currentSalary["finalAdjustment"]) ? $currentSalary["finalAdjustment"] : 0,
+					"trueRateBonus" => $trueBonusRate
 				];
 			endforeach;
 		}
@@ -109,7 +118,9 @@ class BonusController extends Controller
 			"budget" => 0,
 			"totalBonus" => 0,
 			"totalAdjust" => 0,
-			"totalPayable" => 0
+			"totalPayable" => 0,
+			"totalSalary" => 0,
+			"bonusRatio" => 0
 		];
 		$employees = Employee::find()
 			->select('employeeId')

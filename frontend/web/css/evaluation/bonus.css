@@ -6,7 +6,18 @@
 .picturebonus {
     color: #F6C516;
 }
+.finalAdjust-input{
+    border-radius: 3px;
+    height: 15px;
+    width:50px;
+    border: lightgray solid thin;
+    text-align: right;
+padding-right: 5px;
+}
 
+.finalAdjust-input:focus{
+    border: gray solid thin !important;
+}
 .b2solid {
     border-right: 1px lightgray solid;
 }

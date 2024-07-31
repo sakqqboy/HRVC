@@ -6,6 +6,8 @@ use backend\models\hrvc\BonusTerm;
 use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
+use frontend\models\hrvc\BonusRecord;
+use frontend\models\hrvc\EmployeeSalary;
 use frontend\models\hrvc\Frame;
 use frontend\models\hrvc\Group;
 use Yii;
@@ -114,6 +116,39 @@ class BonusController extends Controller
 		$res["status"] = true;
 		$res["adjustment"] = $adjustmentAmount;
 		$res["budget"] = number_format($budget, 2);
+		return json_encode($res);
+	}
+	public function actionSaveFinalAdjustment()
+	{
+		$employeeId = $_POST["employeeId"];
+		$termId = $_POST["termId"];
+		$adjustValue = $_POST["adjustmentValue"];
+		$trueBonusRate = 0;
+		$bonusRecord = BonusRecord::find()->where(["employeeId" => $employeeId, "termId" => $termId])->one();
+		if (isset($bonusRecord) && !empty($bonusRecord)) {
+			$bonusRecord->finalAdjustment = $_POST["adjustmentValue"];
+			$bonusRecord->creator = Yii::$app->user->id;
+			$bonusRecord->save(false);
+			$salary = $bonusRecord->salary;
+			$res["realBonus"] = $bonusRecord->bonusRate * $bonusRecord->salary;
+		} else {
+			$bonusRecord = new BonusRecord();
+			$bonusRecord->termId = $termId;
+			$bonusRecord->salary = EmployeeSalary::EmployeeCurrentSalary($employeeId);
+			$bonusRecord->employeeId = $employeeId;
+			$bonusRecord->finalAdjustment = $adjustValue;
+			$bonusRecord->creator = Yii::$app->user->id;
+			$bonusRecord->createDateTime = new Expression('NOW()');
+			$bonusRecord->updateDateTime = new Expression('NOW()');
+			$salary = $bonusRecord->salary;
+			$bonusRecord->save(false);
+		}
+		if ($salary != 0) {
+			$trueBonusRate = number_format($adjustValue / $salary, 1);
+		}
+		$res["status"] = true;
+		$res["trueBonusRate"] = $trueBonusRate;
+		$res["adjustValue"] = $adjustValue;
 		return json_encode($res);
 	}
 }
