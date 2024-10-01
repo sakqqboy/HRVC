@@ -11,6 +11,7 @@ use frontend\models\hrvc\Kpi;
 use frontend\models\hrvc\KpiTeam;
 use frontend\models\hrvc\KpiTeamHistory;
 use frontend\models\hrvc\Team;
+use frontend\models\hrvc\Unit;
 use frontend\models\hrvc\UserRole;
 use Yii;
 use yii\db\Expression;
@@ -550,5 +551,41 @@ class KpiTeamController extends Controller
 		}
 		$res["team"] = $team;
 		return json_encode($res);
+	}
+	public function actionNextKpiTeamHistory()
+	{
+		$kpiTeamHistoryId = $_POST["kpiTeamHistoryId"];
+		$currentHistory = KpiTeamHistory::find()->where(["kpiTeamHistoryId" => $kpiTeamHistoryId])->asArray()->one();
+		$kpiTeam = KpiTeam::find()->where(["kpiTeamId" => $currentHistory["kpiTeamId"]])->asArray()->one();
+		$kpi = Kpi::find()->where(["kpiId" => $kpiTeam["kpiId"]])->asArray()->one();
+		$unit = Unit::find()->where(["unitId" => $kpi["unitId"]])->asArray()->one();
+		if ($currentHistory["month"] != "" && $currentHistory["year"] != "") {
+			$nextTargetMonthYear = ModelMaster::nextTargetMonthYear($unit["unitName"], $currentHistory["month"], $currentHistory["year"]);
+			$nextMonth = $nextTargetMonthYear["nextMonth"];
+			$nextYear = $nextTargetMonthYear["nextYear"];
+		} else {
+			$nextMonth = null;
+			$nextYear = null;
+		}
+		$kpiTeamHistory = new KpiTeamHistory();
+		$kpiTeamHistory->kpiTeamId = $currentHistory["kpiTeamId"];
+		$kpiTeamHistory->detail = 'New target';
+		$kpiTeamHistory->nextCheckDate = null;
+		$kpiTeamHistory->status = 1;
+		$kpiTeamHistory->target = $currentHistory["target"];
+		$kpiTeamHistory->result = 0;
+		$kpiTeamHistory->month = $nextMonth;
+		$kpiTeamHistory->year = $nextYear;
+		$kpiTeamHistory->createDateTime = new Expression('NOW()');
+		$kpiTeamHistory->updateDateTime = new Expression('NOW()');
+		if ($kpiTeamHistory->save(false)) {
+			$kpiTeam = KpiTeam::find()->where(["kpiTeamId" => $currentHistory["kpiTeamId"]])->one();
+			$kpiTeam->status = 1;
+			$kpiTeam->month = $nextMonth;
+			$kpiTeam->year = $nextYear;
+			$kpiTeam->updateDateTime = new Expression('NOW()');
+			$kpiTeam->save(false);
+		}
+		return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
 	}
 }

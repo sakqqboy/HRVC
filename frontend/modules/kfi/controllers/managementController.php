@@ -24,6 +24,7 @@ use frontend\models\hrvc\Kpi;
 use frontend\models\hrvc\KpiHistory;
 use frontend\models\hrvc\Team;
 use frontend\models\hrvc\Title;
+use frontend\models\hrvc\Unit;
 use frontend\models\hrvc\User;
 use frontend\models\hrvc\UserRole;
 use Yii;
@@ -165,7 +166,7 @@ class ManagementController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
 		$kfis = curl_exec($api);
 		$kfis = json_decode($kfis, true);
-		// throw new Exception(print_r($kfis, true));
+		//throw new Exception(Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
 		$units = curl_exec($api);
@@ -217,6 +218,8 @@ class ManagementController extends Controller
 				$kfiHistory->historyStatus = 1;
 				$kfiHistory->result =  0;
 				$kfiHistory->unitId =  $_POST["unit"];
+				$kfiHistory->month = $_POST["month"];
+				$kfiHistory->year = $_POST["year"];
 				//$kfiHistory->formular = $_POST["formular"];
 				$kfiHistory->description = $_POST["detail"];
 				$kfiHistory->createDateTime = new Expression('NOW()');
@@ -259,11 +262,14 @@ class ManagementController extends Controller
 			$kfiHistory->nextCheckDate = $_POST["nextCheckDate"];
 			$kfiHistory->amountType = $_POST["amountType"];
 			$kfiHistory->code = $_POST["code"];
-			$kfiHistory->status = 1;
+			$kfiHistory->status = $_POST["status"];
 			$kfiHistory->quantRatio = $_POST["quanRatio"];
 			$kfiHistory->historyStatus = $_POST["status"];
+			$kfiHistory->target =  str_replace(",", "", $_POST["targetAmount"]);
 			$kfiHistory->result =  str_replace(",", "", $_POST["result"]);
 			$kfiHistory->unitId =  $_POST["unit"];
+			$kfiHistory->month = $_POST["month"];
+			$kfiHistory->year = $_POST["year"];
 			//$kfiHistory->formular = $_POST["formular"];
 			$kfiHistory->description = $_POST["detail"];
 			$kfiHistory->createDateTime = new Expression('NOW()');
@@ -313,6 +319,7 @@ class ManagementController extends Controller
 		curl_close($api);
 
 		$data = array_merge($kfi, $branch, $department);
+		//throw new exception(print_r($kfi, true));
 		return json_encode($data);
 	}
 	public function actionBranchMultiDepartment()
@@ -1357,5 +1364,83 @@ class ManagementController extends Controller
 				}
 			endforeach;
 		}
+	}
+	public function actionUpdateTeamKfi()
+	{
+		//throw new exception(print_r($_POST["employee"], true));
+		if (isset($_POST["employee"]) && count($_POST["employee"]) > 0) {
+			$i = 0;
+			foreach ($_POST["employee"] as $employeeId => $type):
+				$kfiEmployee = KfiEmployee::find()
+					->where(["kfiId" => $_POST["kfiId"], "employeeId" => $employeeId])
+					->andWhere("status!=99")
+					->one();
+				if (!isset($kfiEmployee) || empty($kfiEmployee)) {
+					$kfiEmployee = new KfiEmployee();
+					$kfiEmployee->kfiId = $_POST["kfiId"];
+					$kfiEmployee->employeeId = $employeeId;
+					$kfiEmployee->status = 1;
+					$kfiEmployee->createDateTime = new Expression('NOW()');
+					$kfiEmployee->updateDateTime = new Expression('NOW()');
+					$kfiEmployee->save(false);
+				}
+				$employeeIds[$i] = $employeeId;
+				$i++;
+			endforeach;
+		}
+		//throw new exception(print_r($employeeIds, true));
+		$deleteKfiEmployee = KfiEmployee::find()
+			->where(['not in', 'employeeId', $employeeIds])
+			->andWhere(["kfiId" => $_POST["kfiId"]])
+			->all();
+		if (isset($deleteKfiEmployee) && count($deleteKfiEmployee) > 0) {
+			foreach ($deleteKfiEmployee as $delKfi):
+				$delKfi->delete(false);
+			//throw new exception(1111);
+			endforeach;
+		}
+		//throw new exception(count($deleteKfiEmployee));
+		return $this->redirect(Yii::$app->homeUrl . 'kfi/assign/assign/' . ModelMaster::encodeParams(['kfiId' => $_POST["kfiId"], "companyId" => $_POST["companyId"]]));
+	}
+	public function actionNextKfiHistory()
+	{
+		$kfiHistoryId = $_POST["kfiHistoryId"];
+		$currentHistory = KfiHistory::find()->where(["kfiHistoryId" => $kfiHistoryId])->asArray()->one();
+		$unit = Unit::find()->where(["unitId" => $currentHistory["unitId"]])->asArray()->one();
+		if ($currentHistory["month"] != "" && $currentHistory["year"] != "") {
+			//throw new exception($unit["unitName"]);
+			$nextTargetMonthYear = ModelMaster::nextTargetMonthYear($unit["unitName"], $currentHistory["month"], $currentHistory["year"]);
+			$nextMonth = $nextTargetMonthYear["nextMonth"];
+			$nextYear = $nextTargetMonthYear["nextYear"];
+		} else {
+			$nextMonth = null;
+			$nextYear = null;
+		}
+		$kfiHistory = new KfiHistory();
+		$kfiHistory->kfiId = $currentHistory["kfiId"];
+		$kfiHistory->createrId = Yii::$app->user->id;
+		$kfiHistory->titleProgress = 'New target';
+		$kfiHistory->nextCheckDate = $currentHistory["nextCheckDate"];
+		$kfiHistory->amountType = $currentHistory["amountType"];
+		$kfiHistory->code = $currentHistory["code"];
+		$kfiHistory->status = 1;
+		$kfiHistory->quantRatio = $currentHistory["quantRatio"];
+		$kfiHistory->historyStatus = 1;
+		$kfiHistory->target = $currentHistory["target"];
+		$kfiHistory->result = 0;
+		$kfiHistory->unitId =  $currentHistory["unitId"];
+		$kfiHistory->month = $nextMonth;
+		$kfiHistory->year = $nextYear;
+		$kfiHistory->createDateTime = new Expression('NOW()');
+		$kfiHistory->updateDateTime = new Expression('NOW()');
+		if ($kfiHistory->save(false)) {
+			$kfi = Kfi::find()->where(["kfiId" => $currentHistory["kfiId"]])->one();
+			$kfi->status = 1;
+			$kfi->month = $nextMonth;
+			$kfi->year = $nextYear;
+			$kfi->updateDateTime = new Expression('NOW()');
+			$kfi->save(false);
+		}
+		return $this->redirect(Yii::$app->homeUrl . 'kfi/management/grid');
 	}
 }

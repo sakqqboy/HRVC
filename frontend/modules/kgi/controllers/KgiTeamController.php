@@ -14,6 +14,7 @@ use frontend\models\hrvc\KgiGroup;
 use frontend\models\hrvc\KgiTeam;
 use frontend\models\hrvc\KgiTeamHistory;
 use frontend\models\hrvc\Team;
+use frontend\models\hrvc\Unit;
 use frontend\models\hrvc\UserRole;
 use Yii;
 use yii\db\Expression;
@@ -553,5 +554,41 @@ class KgiTeamController extends Controller
 		}
 		$res["team"] = $team;
 		return json_encode($res);
+	}
+	public function actionNextKgiTeamHistory()
+	{
+		$kgiTeamHistoryId = $_POST["kgiTeamHistoryId"];
+		$currentHistory = KgiTeamHistory::find()->where(["kgiTeamHistoryId" => $kgiTeamHistoryId])->asArray()->one();
+		$kgiTeam = KgiTeam::find()->where(["kgiTeamId" => $currentHistory["kgiTeamId"]])->asArray()->one();
+		$kgi = Kgi::find()->where(["kgiId" => $kgiTeam["kgiId"]])->asArray()->one();
+		$unit = Unit::find()->where(["unitId" => $kgi["unitId"]])->asArray()->one();
+		if ($currentHistory["month"] != "" && $currentHistory["year"] != "") {
+			$nextTargetMonthYear = ModelMaster::nextTargetMonthYear($unit["unitName"], $currentHistory["month"], $currentHistory["year"]);
+			$nextMonth = $nextTargetMonthYear["nextMonth"];
+			$nextYear = $nextTargetMonthYear["nextYear"];
+		} else {
+			$nextMonth = null;
+			$nextYear = null;
+		}
+		$kgiTeamHistory = new KgiTeamHistory();
+		$kgiTeamHistory->kgiTeamId = $currentHistory["kgiTeamId"];
+		$kgiTeamHistory->detail = 'New target';
+		$kgiTeamHistory->nextCheckDate = null;
+		$kgiTeamHistory->status = 1;
+		$kgiTeamHistory->target = $currentHistory["target"];
+		$kgiTeamHistory->result = 0;
+		$kgiTeamHistory->month = $nextMonth;
+		$kgiTeamHistory->year = $nextYear;
+		$kgiTeamHistory->createDateTime = new Expression('NOW()');
+		$kgiTeamHistory->updateDateTime = new Expression('NOW()');
+		if ($kgiTeamHistory->save(false)) {
+			$kgiTeam = KgiTeam::find()->where(["kgiTeamId" => $currentHistory["kgiTeamId"]])->one();
+			$kgiTeam->status = 1;
+			$kgiTeam->month = $nextMonth;
+			$kgiTeam->year = $nextYear;
+			$kgiTeam->updateDateTime = new Expression('NOW()');
+			$kgiTeam->save(false);
+		}
+		return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-team/team-kgi-grid');
 	}
 }

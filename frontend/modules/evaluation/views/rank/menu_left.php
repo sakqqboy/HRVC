@@ -84,11 +84,11 @@ use common\models\ModelMaster;
 			</a>
 		</div>
 		<div class="Evaluationdeshed"></div>
-		<div class="rad-label pl-0 pr-0" <?= Yii::$app->controller->action->id == 'index' ? $selected : '' ?>>
+		<div class="rad-label pl-0 pr-0" <?= (Yii::$app->controller->id == 'rank' && Yii::$app->controller->action->id == 'index') ? $selected : '' ?>>
 			<a href="<?= Yii::$app->homeUrl . 'evaluation/rank/index/' . ModelMaster::encodeParams(['termId' => $termId]) ?>" class="no-underline">
 				<div class="col-12 pl-5 rad-text pr-3">
 					<?php
-					if (Yii::$app->controller->action->id == 'index') { ?>
+					if (Yii::$app->controller->id == 'rank' && Yii::$app->controller->action->id == 'index') { ?>
 						<i class="fa fa-check-circle-o text-success mr-10 font-size-18" aria-hidden="true"></i>
 					<?php
 					} else { ?>
@@ -104,15 +104,25 @@ use common\models\ModelMaster;
 		<div class="rad-label pl-0 pr-0">
 			<div class="col-12 pl-5 rad-text pr-3">
 				<i class="fa fa-circle mr-10 font-size-18 text-secondary" aria-hidden="true"></i>
-				<span class="text-dark font-weight-500">Salary & Allowance Range</span>
+				<span class="text-dark font-weight-500">Salary & Allowance</span>
 			</div>
 		</div>
 		<div class="Evaluationdeshed"></div>
-		<div class="rad-label pl-0 pr-0">
-			<div class="col-12 pl-5 rad-text pr-3">
-				<i class="fa fa-circle mr-10 font-size-18 text-secondary" aria-hidden="true"></i>
-				<span class="text-dark font-weight-500">Bonus calculation</span>
-			</div>
+		<div class="rad-label pl-0 pr-0" <?= (Yii::$app->controller->id == 'bonus' && Yii::$app->controller->action->id == 'index') ? $selected : '' ?>>
+			<a href="<?= Yii::$app->homeUrl . 'evaluation/bonus/index/' . ModelMaster::encodeParams(['termId' => $termId]) ?>" class="no-underline">
+				<div class="col-12 pl-5 rad-text pr-3">
+					<?php
+					if (Yii::$app->controller->action->id == 'index' && Yii::$app->controller->id == 'bonus') { ?>
+						<i class="fa fa-check-circle-o text-success mr-10 font-size-18" aria-hidden="true"></i>
+					<?php
+					} else { ?>
+						<i class="fa fa-circle mr-10 font-size-18 text-secondary" aria-hidden="true"></i>
+					<?php
+					}
+					?>
+					<span class="text-dark font-weight-500">Bonus</span>
+				</div>
+			</a>
 		</div>
 		<div class="Evaluationdeshed"></div>
 		<div class="rad-label pl-0 pr-0">

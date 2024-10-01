@@ -3,17 +3,21 @@
 use common\models\ModelMaster;
 use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\Company;
+use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Team;
 
 ?>
-<div class="col-12">
-	<div class="input-group">
-		<span class="input-group-text" style="cursor: pointer;" onclick="javascript:kpiFilterForEmployee()">
-			<i class="fa fa-filter" aria-hidden="true"></i></span>
-		<?php
-		if ($role > 3) {
-		?>
-			<select class="form-select font-size-13" id="company-filter">
+<div class="row">
+	<div class="col-1 pr-10 text-end">
+		<span>
+			<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterPlus.png" class="pim-search-icon" style="cursor: pointer;" onclick="javascript:kpiFilterForEmployee()">
+		</span>
+	</div>
+	<?php
+	if ($role > 3) {
+	?>
+		<div class="col-2 pr-5 pl-1">
+			<select class="form-select font-size-12 select-pim" id="company-filter">
 				<?php
 				if (isset($companyId) && $companyId != "") { ?>
 					<option value="<?= $companyId ?>"><?= Company::companyName($companyId) ?></option>
@@ -31,7 +35,9 @@ use frontend\models\hrvc\Team;
 				}
 				?>
 			</select>
-			<select class="form-select font-size-13" id="branch-filter" <?= $companyId == "" ? 'disabled' : '' ?>>
+		</div>
+		<div class="col-2 pr-5 pl-1">
+			<select class="form-select font-size-12 select-pim" id="branch-filter" <?= $companyId == "" ? 'disabled' : '' ?>>
 				<?php
 				if (isset($branchId) && $branchId != "") { ?>
 					<option value="<?= $branchId ?>"><?= Branch::branchName($branchId) ?></option>
@@ -50,7 +56,9 @@ use frontend\models\hrvc\Team;
 				?>
 
 			</select>
-			<select class="form-select font-size-13" id="team-filter" <?= $branchId == "" ? 'disabled' : '' ?>>
+		</div>
+		<div class="col-2 pr-5 pl-1">
+			<select class="form-select font-size-12 select-pim" id="team-filter" <?= $branchId == "" ? 'disabled' : '' ?>>
 				<?php
 				if (isset($teamId) && $teamId != "") { ?>
 					<option value="<?= $teamId ?>"><?= Team::teamName($teamId) ?></option>
@@ -67,10 +75,44 @@ use frontend\models\hrvc\Team;
 				}
 				?>
 			</select>
-		<?php
-		}
-		if ($role == 3) { ?>
-			<select class="form-select font-size-13" id="team-filter">
+		</div>
+	<?php
+	}
+	if (isset($teamId) && $teamId != null) {
+		$disabled = '';
+	} else {
+		$disabled = "disabled";
+	}
+	if ($role >= 3) {
+	?>
+		<div class="col-2 pr-5 pl-1">
+			<select class="form-select font-size-12 select-pim" id="employee-filter" <?= $disabled ?>>
+				<?php
+				if (isset($employeeId) && $employeeId != null) { ?>
+					<option value="<?= $employeeId ?>"><?= Employee::employeeName($employeeId) ?></option>
+				<?php
+				}
+				?>
+				<option value="">Employee</option>
+				<?php
+				if (isset($employees) && count($employees) > 0) {
+					foreach ($employees as $employee) : ?>
+						<option value="<?= $employee['employeeId'] ?>"><?= $employee["employeeFirstname"] ?> <?= $employee["employeeSurename"] ?></option>
+				<?php
+					endforeach;
+				}
+				?>
+			</select>
+		</div>
+	<?php
+	}
+	?>
+	<?php
+
+	if ($role == 3) { ?>
+
+		<div class="col-2 pr-5 pl-1">
+			<select class="form-select font-size-12 select-pim"" id=" team-filter">
 				<?php
 				if (isset($teamId) && $teamId != "") { ?>
 					<option value="<?= $teamId ?>"><?= Team::teamName($teamId) ?></option>
@@ -87,11 +129,14 @@ use frontend\models\hrvc\Team;
 				}
 				?>
 			</select>
-		<?php
+		</div>
+	<?php
 
-		}
-		?>
-		<select class="form-select font-size-13" id="month-filter">
+	}
+	?>
+
+	<div class="col-1 pr-5 pl-1">
+		<select class="form-select font-size-12 select-pim" id="month-filter">
 			<?php
 
 			if (isset($month) && $month != "") { ?>
@@ -109,7 +154,9 @@ use frontend\models\hrvc\Team;
 			}
 			?>
 		</select>
-		<select class="form-select font-size-13" id="year-filter">
+	</div>
+	<div class="col-1 pr-5 pl-1">
+		<select class="form-select font-size-12 select-pim" id="year-filter">
 			<?php
 			if (isset($year) && $year != "") { ?>
 				<option value="<?= $year ?>"><?= $year ?></option>
@@ -129,8 +176,9 @@ use frontend\models\hrvc\Team;
 			}
 			?>
 		</select>
-
-		<select class="form-select font-size-13" id="status-filter">
+	</div>
+	<div class="col-1 pr-5 pl-1">
+		<select class="form-select font-size-12 select-pim" id="status-filter">
 			<option value="">Status</option>
 			<option value="1">Active</option>
 			<option value="2">Finished</option>

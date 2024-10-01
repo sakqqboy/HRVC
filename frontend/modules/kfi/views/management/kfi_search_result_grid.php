@@ -1,38 +1,47 @@
 <?php
 
+use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
 $this->title = 'KFI Grid View';
 ?>
 
-<div class="col-12 mt-70">
+<div class="col-12">
 	<div class="col-12">
-		<i class="fa fa-tachometer font-size-18" aria-hidden="true"></i> <strong class="font-size-18"> Performance Indicator Matrices (PIM)</strong>
+		<img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.png" class="home-icon mr-5" style="margin-top: -3px;">
+		<strong class="pim-head-text"> Performance Indicator Matrices (PIM)</strong>
 	</div>
 	<div class="col-12 mt-10">
 		<?= $this->render('header_filter', [
 			"role" => $role
 		]) ?>
 
-		<div class="alert alert-white-4 mt-10">
+		<div class="alert  mt-10 pim-body bg-white">
 			<div class="row">
 				<div class="col-lg-4 col-md-6 col-12 key1">
 					<div class="row">
-						<div class="col-6 key1">
-							Key Financial Indicators
+						<div class="col-7">
+							<div class="row">
+								<div class="col-5 pim-type-tab-selected pr-0 pl-0 text-center">
+									Company KFI
+
+								</div>
+								<div class="col-7">
+									<?php
+									if ($role >= 3) {
+									?>
+										<button type="button" class="btn-create font-size-10" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
+											Create New KFI <i class="fa fa-magic ml-3" aria-hidden="true"></i>
+										</button>
+									<?php
+									}
+									?>
+								</div>
+							</div>
 						</div>
-						<div class="col-6 text-center">
-							<?php
-							if ($role >= 3) {
-							?>
-								<button type="button" class="btn btn-primary font-size-12" data-bs-toggle="modal" data-bs-target="#staticBackdrop1"><i class="fa fa-magic" aria-hidden="true"></i> Create New KFI</button>
-							<?php
-							}
-							?>
-						</div>
+
 					</div>
 				</div>
-
 				<div class="col-lg-7 col-md-12 col-12 New-KFI">
 					<?= $this->render('filter_list_search', [
 						"companies" => $companies,
@@ -46,183 +55,261 @@ $this->title = 'KFI Grid View';
 					]) ?>
 					<input type="hidden" id="type" value="grid">
 				</div>
-				<div class="col-lg-1 col-md-6 col-12 New-date">
-					<div class="row">
+				<div class="col-lg-1 col-md-6 col-12 pr-0 text-end">
+					<div class="btn-group" role="group">
+						<a href="#" class="btn btn-primary font-size-12 pim-change-mode">
+							<i class="fa fa-th-large" aria-hidden="true"></i>
+						</a>
+						<a href="<?= Yii::$app->homeUrl . 'kfi/management/index' ?>" class="btn btn-outline-primary font-size-12 pim-change-mode">
+							<i class="fa fa-list-ul" aria-hidden="true"></i>
+						</a>
 
-						<div class="col-4 new-light-4">
-							<div class="btn-group" role="group" aria-label="Basic example">
-								<a href="<?= Yii::$app->homeUrl . 'kfi/management/index' ?>" class="btn btn-outline-primary font-size-13"><i class="fa fa-list-ul" aria-hidden="true"></i></a>
-								<a href="#" class="btn btn-primary font-size-13"><i class="fa fa-th-large" aria-hidden="true"></i></a>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
-			<div class="nav nav-pills mb-3 col-12" id="pills-tab" role="tablist">
-				<div class="col-12 tab-content" id="pills-tabContent">
-					<div class="tab-pane fade show active pl-10 pr-10" id="pills-Financial" role="tabpanel" aria-labelledby="pills-Financial-tab">
-						<div class="row">
-							<?php
-							if (isset($kfis) && count($kfis) > 0) {
-								foreach ($kfis as $kfiId => $kfi) :
-							?>
-									<div class="col-lg-4 col-md-6 col-sm-5 col-12 mt-20" id="kfi-<?= $kfiId ?>">
-										<div class="col-12 border pl-20 pr-20 pt-10 pb-5 <?= $kfi['isOver'] == 1 ? 'bg-over' : 'bg-white' ?>" style="border-radius:10px;box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;">
-											<div class="row">
-												<div class="col-12">
+			<div class="col-12 mt-5">
+				<div class="row">
+					<?php
+					if (isset($kfis) && count($kfis) > 0) {
+						foreach ($kfis as $kfiId => $kfi) :
+							if ($kfi["isOver"] == 1 && $kfi["status"] != 2) {
+								$colorFormat = 'over';
+							} else {
+								if ($kfi["status"] == 1) {
+									$colorFormat = 'inprogress';
+								} else {
+									$colorFormat = 'complete';
+								}
+							}
+					?>
+							<div class="col-12 mt-10 mb-5 pim-big-box pim-<?= $colorFormat ?>" id="kfi-<?= $kfiId ?>">
+								<div class="row">
+									<div class="col-lg-3 col-md-5 col-12 pim-name">
+										<?= $kfi["kfiName"] ?>
+									</div>
+									<div class="col-lg-1 col-md-2 col-4 text-center">
+										<div class="<?= $colorFormat ?>-tag text-center">
+											<?= $kfi['status'] == 1 ? 'In process' : 'Completed' ?>
+										</div>
+									</div>
+									<div class=" col-lg-3 col-md-3 col-4 pl-30">
+										<div class="row">
+											<div class="col-4 month-<?= $colorFormat ?>"><?= $kfi['month'] ?></div>
+											<div class="col-8 term-<?= $colorFormat ?>">
+												<?= $kfi['fromDate'] == "" ? 'Not set' : $kfi['fromDate'] ?> -
+												<?= $kfi['toDate'] == "" ? 'Not set' : $kfi['toDate'] ?>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-5 col-md-2 col-4 text-end pr-20">
+										<a href="<?= Yii::$app->homeUrl ?>kfi/view/index/<?= ModelMaster::encodeParams(["kfiId" => $kfiId]) ?>" class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+											<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History" class="pim-icon" style="margin-top: -1px;">
+										</a>
+										<a href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(['kfiId' => $kfiId]) ?>" class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+											<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png" alt="History" class="pim-icon">
+										</a>
+										<!-- <a class="btn btn-bg-white-xs mr-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop3" onclick="javascript:kfiHistory(<?php // $kfiId 
+																													?>)" style="margin-top: -3px;">
+											<img src="<?php // Yii::$app->homeUrl 
+													?>images/icons/Settings/comment.png" alt="History" class="pim-icon">
+										</a> -->
+										<a href="<?= Yii::$app->homeUrl ?>kfi/chart/company-chart/<?= ModelMaster::encodeParams(['kfiId' => $kfiId]) ?>" class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+											<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="History" class="pim-icon mr-3" style="margin-top: -2px;">Chart
+										</a>
+										<?php
+										if ($role >= 5) {
+										?>
+											<a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#staticBackdrop4" onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)" style="margin-top: -3px;">
+												<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/bin.png" alt="History" class="pim-icon" style="margin-top: -2px;">
+											</a>
+										<?php
+										}
+										?>
+									</div>
+									<div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?> mt-5">
+										<div class="row">
+											<div class="col-12 text-start pl-22">
+												Assign on
+											</div>
+											<div class="col-9 pl-20 pr-0">
+												<div class="col-12 <?= $colorFormat ?>-assign  mt-5 pt-2 pb-1">
 													<div class="row">
-														<div class="col-12 text-end pr-0">
-															<a class="btn btn-xs btn-outline-secondary pt-0" style="margin-left: 0px;" data-bs-toggle="modal" data-bs-target="#staticBackdrop3" onclick="javascript:kfiHistory(<?= $kfiId ?>)">
-																<i class="fa fa-eye mt-6" aria-hidden="true" style="margin-left: -6px"></i>
-															</a>
-															<?php
-															if ($role >= 5) {
-															?>
-																<a class="btn btn-xs btn-outline-danger ml-5 pt-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop4" onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)">
-																	<i class="fa fa-trash-o mt-6" aria-hidden="true" style="margin-left: -5px;"></i>
-																</a>
-															<?php
-															}
-															?>
-														</div>
-														<div class="col-9 linechart-increase" style="margin-top: -25px;">
-															<i class="fa fa-line-chart mr-5" aria-hidden="true"></i> <?= $kfi["kfiName"] ?>
-															<div class="col-12  ting-size mt-5">
-																<?= $kfi["companyName"] ?>
-															</div>
-															<div class="col-12 font-size-12 mt-5">
-																<img src="<?= Yii::$app->homeUrl ?><?= $kfi["flag"] ?>" class="image-is mr-3"> <?= $kfi["branchName"] ?>
-															</div>
-
-														</div>
-													</div>
-												</div>
-												<div class="col-12 pl-0 text-end  pr-5 " style="margin-top:-35px;">
-													<div class="offset-6 col-6 text-end pl-0 pr-0">
-														<span class="badge rounded-pill bg-deadline0 ml-5" style="width:100%;">
-															<span class="deadline-orange"> Term</span>
-															<span class="font-size-10 text-dark" style="font-weight: 700;">: <?= $kfi['fromDate'] == "" ? 'Not set' : $kfi['fromDate'] ?> - </span>
-															<span class="font-size-10 text-dark" style="font-weight: 700;"><?= $kfi['toDate'] == "" ? 'Not set' : $kfi['toDate'] ?></span>
-														</span>
-													</div>
-												</div>
-												<div class="col-12 text-end pr-0 " style="margin-top:-8px;">
-													<span class="badge rounded-pill <?= $kfi['status'] == 1 ? 'bg-warning text-dark' : 'bg-success' ?>"> <?= $kfi['status'] == 1 ? 'In process' : 'Completed' ?></span>
-												</div>
-												<div class="col-12 mt-15">
-													<div class="row">
-														<div class="col-lg-1 col-md-6 col-2 font-size-14 pt-30 pr-0 pl-0 text-center" style="font-weight: 500;">
-															<?= strtoupper(substr($kfi['month'], 0, 3)) ?>
-														</div>
-														<div class="col-lg-4 col-md-6 col-3">
-															<div class="col-12 Quant-ratio">
-																Quant Ratio
-															</div>
-															<div class="col-12 font-size-10 mt-3">
-																<i class="fa fa-diamond" aria-hidden="true"></i> <?= $kfi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?>
-															</div>
-														</div>
-
-														<div class="col-lg-3 col-md-6 col-3">
-															<div class="col-12 bullseye-con">
-																<i class="fa fa-bullseye" aria-hidden="true"></i> Target
-															</div>
-															<div class="col-12 million-number" style="font-weight: 500;">
-																<?php
-																$decimal = explode('.', $kfi["target"]);
-																if (isset($decimal[1])) {
-																	if ($decimal[1] == '00') {
-																		$show = number_format($decimal[0]);
-																	} else {
-																		$show = number_format($kfi["target"], 2);
+														<div class="col-5 border-right-<?= $colorFormat ?>">
+															<div class="row">
+																<div class="col-2">
+																	<?php
+																	if (isset($kfi['kfiEmployee'][0])) {
+																	?>
+																		<img src="<?= Yii::$app->homeUrl . $kfi['kfiEmployee'][0] ?>" class="pim-pic-grid">
+																	<?php
 																	}
-																} else {
-																	$show = number_format($kfi["target"]);
-																}
-																?>
-																<?= $show ?><?= $kfi["amountType"] == 1 ? '%' : '' ?>
-															</div>
-														</div>
-														<div class="col-lg-1 col-md-6 col-3 pt-10 text-center">
-
-															<?= $kfi["code"] ?>
-														</div>
-														<div class="col-lg-3 cl-md-6 col-3">
-															<div class="col-12 trophy-con">
-																<i class="fa fa-trophy" aria-hidden="true"></i> Result
-															</div>
-															<div class="col-12 million-number" style="font-weight: 500;">
-																<?php
-																if ($kfi["result"] != '') {
-																	$decimalResult = explode('.', $kfi["result"]);
-																	if (isset($decimalResult[1])) {
-																		if ($decimalResult[1] == '00') {
-																			$showResult = number_format($decimalResult[0]);
-																		} else {
-																			$showResult = number_format($kfi["result"], 2);
-																		}
-																	} else {
-																		$showResult = number_format($kfi["result"]);
+																	?>
+																</div>
+																<div class="col-2 pic-after pt-0">
+																	<?php
+																	if (isset($kfi['kfiEmployee'][1])) {
+																	?>
+																		<img src="<?= Yii::$app->homeUrl . $kfi['kfiEmployee'][1] ?>" class="pim-pic-grid">
+																	<?php
 																	}
-																} else {
-																	$showResult = 0;
-																}
-																?>
-																<?= $showResult ?><?= $kfi["amountType"] == 1 ? '%' : '' ?>
-															</div>
-														</div>
-
-														<div class="col-lg-1 col-md-6 col-6"></div>
-														<div class="col-lg-4 col-md-6 col-6">
-															<div class="col-12 padding-update">
-																Update Interval
-															</div>
-															<div class="col-12 update-mouth mt-5">
-																<?= $kfi["unit"] ?>
-															</div>
-														</div>
-														<div class="col-lg-7 col-md-6 col-6 pr-0">
-															<div class="col-12 pr-0 pt-8">
-																<div class="progress">
-																	<div class="progress-bar" style="width:<?= number_format($kfi['ratio']) ?>%; background:#2F80ED;"></div>
-																	<span class="badge rounded-pill  pro-load0"><?= $kfi['ratio'] ?>%</span>
+																	?>
+																</div>
+																<div class="col-2 pic-after pt-0">
+																	<?php
+																	if (isset($kfi['kfiEmployee'][2])) {
+																	?>
+																		<img src="<?= Yii::$app->homeUrl . $kfi['kfiEmployee'][2] ?>" class="pim-pic-grid">
+																	<?php
+																	}
+																	?>
+																</div>
+																<div class="col-5 number-tag load-<?= $colorFormat ?> pr-0 pl-0 pt-1" style="margin-left: -3px;height:18px;width: 30px;margin-top: 1px;">
+																	<?= $kfi["countEmployee"] ?>
 																</div>
 															</div>
 														</div>
-													</div>
-												</div>
-												<div class="col-12" style="margin-top:-10px;">
-													<div class="row">
-														<div class="col-lg-12 text-end pr-0">
-															<span data-bs-toggle="modal" data-bs-target="#kfi-issue" onclick="javascript:showKfiComment(<?= $kfiId ?>)">
-																<img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-ima" style="margin-top: -5px;cursor:pointer;">
-															</span>&nbsp;&nbsp;
+														<div class="col-7 pl-5 pt-3 pr-15">
 															<?php
 															if ($role >= 5) {
 															?>
-																<span class="next-update-span" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" onclick="javascript:updateKfi(<?= $kfiId ?>)">
-																	<i class="fa fa-pencil-square-o font-size-19" aria-hidden="true"></i>
-																</span> &nbsp;
+																<a href="<?= Yii::$app->homeUrl ?>kfi/assign/assign/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, "companyId" => $kfi['companyId']]) ?>" class="font-<?= $colorFormat ?>">
+																	Assign Person
+																</a>
+															<?php
+															} else { ?>
+																<span class="font-<?= $colorFormat ?>">
+																	Assign Person
+																</span>
 															<?php
 															}
 															?>
-															<span class="text-primary font-size-12">Next Update</span>
-															<strong class="font-size-12 <?= $kfi['nextCheck'] == "" || $kfi['isOver'] == 1 ? 'text-danger' : '' ?>">
-																<?= $kfi['nextCheck'] == "" ? 'Not set' : $kfi['nextCheck'] ?>
-															</strong>
+															<span class="pull-right">
+																<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.png" class="home-icon" style="margin-top: -3px;">
+															</span>
 														</div>
-
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-							<?php
-								endforeach;
-							}
-							?>
-						</div>
-					</div>
+									<div class="col-lg-1 pim-subheader-font border-right-<?= $colorFormat ?> mt-5 pl-10 pr-10">
+										<div class="col-12">Quant Ratio</div>
+										<div class="col-12 border-bottom-<?= $colorFormat ?> pb-10 pim-duedate">
+											<i class="fa fa-diamond" aria-hidden="true"></i> <?= $kfi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?>
+										</div>
+										<div class="col-12 pr-0 pt-10">update Interval</div>
+										<div class="col-12  pim-duedate">
+											<?= $kfi["unit"] ?>
+										</div>
+									</div>
+									<div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?> mt-5 pr-15 pl-15">
+										<div class="row">
+											<div class="col-5 text-start">
+												<div class="col-12">Target</div>
+												<div class="col-12 mt-3 number-pim">
+													<?php
+													$decimal = explode('.', $kfi["target"]);
+													if (isset($decimal[1])) {
+														if ($decimal[1] == '00') {
+															$show = number_format($decimal[0]);
+														} else {
+															$show = number_format($kfi["target"], 2);
+														}
+													} else {
+														$show = number_format($kfi["target"]);
+													}
+													?>
+													<?= $show ?><?= $kfi["amountType"] == 1 ? '%' : '' ?>
+												</div>
+											</div>
+											<div class="col-2 symbol-pim text-center">
+												<div class="col-12 pt-17"><?= $kfi["code"] ?></div>
+											</div>
+											<div class="col-5  text-end">
+												<div class="col-12">Result</div>
+												<div class="col-12 mt-3 number-pim">
+													<?php
+													if ($kfi["result"] != '') {
+														$decimalResult = explode('.', $kfi["result"]);
+														if (isset($decimalResult[1])) {
+															if ($decimalResult[1] == '00') {
+																$showResult = number_format($decimalResult[0]);
+															} else {
+																$showResult = number_format($kfi["result"], 2);
+															}
+														} else {
+															$showResult = number_format($kfi["result"]);
+														}
+													} else {
+														$showResult = 0;
+													}
+													?>
+													<?= $showResult ?><?= $kfi["amountType"] == 1 ? '%' : '' ?>
+												</div>
+											</div>
+											<div class="col-12 pl-15 pr-10">
+												<?php
+												$percent = explode('.', $kfi['ratio']);
+												if (isset($percent[1])) {
+													if ($percent[1] != '00') {
+														//$showPercent = $kfi['ratio'];
+														$showPercent = $percent[1];
+													} else {
+														$showPercent = $percent[0];
+													}
+												} else {
+													$showPercent = $percent[0];
+												}
+												?>
+												<div class="progress">
+													<div class="progress-bar-<?= $colorFormat ?>" style="width:<?= $showPercent ?>%;"></div>
+													<span class="progress-load load-<?= $colorFormat ?>"><?= $showPercent ?>%</span>
+												</div>
+											</div>
+											<div class="col-4 pl-5 pr-5 mt-10">
+												<div class="col-12 text-start ">Last Updated on</div>
+												<div class="col-12 text-start pim-duedate"><?= $kfi['nextCheck'] == "" ? 'Not set' : $kfi['nextCheck'] ?></div>
+											</div>
+											<div class="col-4 text-center mt-10 pt-6">
+												<?php
+												if ($role >= 5) {
+												?>
+													<div onclick="javascript:updateKfi(<?= $kfiId ?>)" class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+														<i class="fa fa-refresh" aria-hidden="true"></i> Update
+													</div>
+												<?php
+												}
+												?>
+											</div>
+											<div class="col-4 pl-0 pr-5 mt-10">
+												<div class="col-12 text-end font-<?= $colorFormat ?>">Next Update Date</div>
+												<div class="col-12 text-end pim-duedate"><?= $kfi['nextCheck'] == "" ? 'Not set' : $kfi['nextCheck'] ?></div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-5 pim-subheader-font mt-5">
+										<div class="row">
+											<div class="col-lg-6 col-md-6 col-12 pr-3 pl-20">
+												<div class="col-12 head-letter head-<?= $colorFormat ?>">Issue</div>
+												<div class="col-12 body-letter body-letter-<?= $colorFormat ?>">
+													Now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions.
+												</div>
+											</div>
+											<div class="col-lg-6 col-md-6 col-12 pl-5 pr-20">
+												<div class="col-12 head-letter head-<?= $colorFormat ?>">Solution</div>
+												<div class="col-12 body-letter body-letter-<?= $colorFormat ?>">Now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions.
+
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+					<?php
+						endforeach;
+					}
+					?>
 				</div>
 			</div>
 		</div>

@@ -56,3 +56,61 @@ function deleteTermRank(rankId) {
 		});
 	}
 }
+
+function saveBonusTerm(termId) { 
+	var totalBudget = $("#totalBudget").val();
+	var totalBonus = $("#totalBonus").val();
+	var payableBonus = $("#payableBonus").val();
+	if (totalBudget != "") {
+		var url = $url + 'evaluation/bonus/save-bonus-budget';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { termId: termId, totalBudget: totalBudget, totalBonus: totalBonus, payableBonus: payableBonus },
+			success: function (data) {
+				if (data.status) {
+					//$("#rank-" + rankId).hide();
+					$("#totalBudget").val(data.budget);
+					$("#total-bonus").html(totalBonus);
+					$("#adjustment-bonus").html(data.adjustment);
+				}
+			}
+		});
+	} else { 
+		alert("The Total Budget can not be null ! ! !");
+	}
+}
+function changeFinalAdjustment(employeeId) { 
+	var employeeSalary = $("#employee-salary-" + employeeId).val();
+	if ($.isNumeric(employeeSalary)) {
+		$("#final-adjustment-" + employeeId).show();
+		$("#text-final-adjustment-" + employeeId).hide();
+	} else { 
+		alert("Please set the employee salary");
+	}
+}
+function saveFinancialAdjustment(employeeId, termId) { 
+	var adjustmentValue = $("#final-adjustment-" + employeeId).val();
+	var employeeSalary = $("#employee-salary-" + employeeId).val();
+	var url = $url + 'evaluation/bonus/save-final-adjustment';
+	if ($.isNumeric(employeeSalary)) {
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { employeeId: employeeId, termId: termId, adjustmentValue: adjustmentValue },
+			success: function (data) {
+				if (data.status) {
+					$("#final-adjustment-" + employeeId).hide();
+					$("#text-final-adjustment-" + employeeId).html(data.adjustValue);
+					$("#text-final-adjustment-" + employeeId).show();
+					$("#payable-bonus-" + employeeId).html(data.adjustValue);
+					$("#true-bonus-rate-" + employeeId).html(data.trueBonusRate+' X');
+				}
+			}
+		});
+	} else { 
+			alert("Please set the employee salary");
+		}
+}

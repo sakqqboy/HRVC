@@ -5,7 +5,7 @@ use common\models\ModelMaster;
 $this->title = 'Branch';
 ?>
 
-<div class="col-12 branch-one" style="margin-top: 90px;">
+<div class="col-12 branch-one">
 	<div class="row all-row">
 		<div class="col-lg-8 col-md-3 col-3">
 			<div class="col-12 branch-title">

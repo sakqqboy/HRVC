@@ -6,36 +6,49 @@ use yii\bootstrap5\ActiveForm;
 
 $this->title = "KGI";
 ?>
-<div class="col-12 mt-70 pd-Performance">
+<div class="col-12">
 	<div class="col-12">
-		<i class="fa fa-tachometer font-size-18" aria-hidden="true"></i>
-		<strong class="font-size-18"> Performance Indicator Matrices (PIM)</strong>
+		<img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.png" class="home-icon mr-5" style="margin-top: -3px;">
+		<strong class="pim-head-text"> Performance Indicator Matrices (PIM)</strong>
 	</div>
 	<div class="col-12 mt-10">
 		<?= $this->render('header_filter', [
 			"role" => $role
 		]) ?>
-
-		<div class="alert alert-white-4 mt-10">
+		<div class="alert pim-body bg-white mt-10">
 			<div class="row">
-				<div class="col-lg-4 col-md-6 col-12 key1">
+				<div class="col-lg-4 col-md-6 col-12  pr-0">
 					<div class="row">
-						<div class="col-6 key1">
-							Key Goal Indicators
+						<div class="col-7">
+							<div class="row">
+								<div class="col-4 pim-type-tab-selected pr-0 pl-0">
+									Company KGI
+								</div>
+								<div class="col-4 pim-type-tab">
+									<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/team-kgi-grid" class="no-underline-black ">
+										Team KGI
+									</a>
+								</div>
+								<div class="col-4 pim-type-tab">
+									<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi-grid" class="no-underline-black">
+										Self KGI
+									</a>
+								</div>
+							</div>
 						</div>
-						<div class="col-6 text-center">
+						<div class="col-5 text-end">
 							<?php
 							if ($role >= 3) {
 							?>
-								<button type="button" class="btn btn-primary font-size-12" data-bs-toggle="modal" data-bs-target="#staticBackdrop5" onclick="javascript:changeType()">
-									<i class="fa fa-magic" aria-hidden="true"></i> Create New KGI</button>
+								<button type="button" class="btn-create font-size-10" data-bs-toggle="modal" data-bs-target="#staticBackdrop5">
+									Create New KGI <i class="fa fa-magic ml-2" aria-hidden="true"></i>
+								</button>
 							<?php
 							}
 							?>
 						</div>
 					</div>
 				</div>
-
 				<div class="col-lg-7 col-md-12 col-12 New-KFI">
 					<?= $this->render('filter_list_search', [
 						"companies" => $companies,
@@ -51,201 +64,216 @@ $this->title = "KGI";
 					]) ?>
 					<input type="hidden" id="type" value="list">
 				</div>
-				<div class="col-lg-1 col-md-6 col-12 New-date">
-					<div class="row">
+				<div class="col-lg-1 col-md-6 col-12 pr-0 text-end">
+					<div class="btn-group" role="group">
+						<a href="<?= Yii::$app->homeUrl . 'kgi/management/grid' ?>" class="btn btn-outline-primary font-size-12 pim-change-mode">
+							<i class="fa fa-th-large" aria-hidden="true"></i>
+						</a>
+						<a href="#" class="btn btn-primary font-size-12 pim-change-mode">
+							<i class="fa fa-list-ul" aria-hidden="true"></i>
+						</a>
 
-						<div class="col-12 new-light-4">
-							<div class="btn-group" role="group" aria-label="Basic example">
-								<a class="btn btn-primary font-size-13"><i class="fa fa-list-ul" aria-hidden="true"></i></a>
-								<a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" class="btn btn-outline-primary font-size-13"><i class="fa fa-th-large" aria-hidden="true"></i></a>
-							</div>
-						</div>
 					</div>
 				</div>
-				<?php
-				//if ($role >= 3) {
-				?>
-				<div class="col-12 mt-10 text-end">
-					<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/team-kgi-grid" class="font-size-14 no-underline-primary mr-20">
-						<i class="fa fa-users mr-5" aria-hidden="true"></i>
-						Team KGI
-					</a>
-					<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi-grid" class="font-size-14 no-underline-primary">
-						<i class="fa fa-user mr-5" aria-hidden="true"></i>
-						Individual KGI
-					</a>
-				</div>
-				<?php
-				//}
-				?>
+
 			</div>
-			<div class="col-12">
-				<table class="table table-striped">
-					<thead class="table-secondary">
-						<tr class="transform-none">
-							<th>KGI Contents</th>
-							<th>Company</th>
-							<th>Branch</th>
-							<!-- <th>Team KGI Contents</th> -->
-							<th>Priority</th>
-							<th>Employees</th>
-							<th>Team</th>
-							<th>QR</th>
-							<th>target</th>
-							<th>Code</th>
-							<th>result</th>
-							<th>ratio</th>
-							<th>month</th>
-							<th>Unit</th>
-							<th>Last</th>
-							<th>next</th>
-							<th colspan="row"></th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php
-						if (count($kgis) > 0) {
-							foreach ($kgis as $kgiId => $kgi) :
-								/*$show = Kgi::checkPermission($role, $kgiId, $userId);
+			<div class="col-12 mt-15">
+				<div class="row">
+					<table class="">
+						<thead>
+							<tr class="pim-table-header">
+								<td class="pl-10" style="width:15%">KGI Contents</td>
+								<td style="width:10%">Company Name</td>
+								<td style="width:10%">Branch</td>
+								<td style="width:3%">Priority</td>
+								<td style="width:10%">Employees</td>
+								<td style="width:5%">Team</td>
+								<td style="width:5%">QR</td>
+								<td class="text-center" style="width:5%">Target</td>
+								<td class="text-center" style="width:2%">Code</td>
+								<td class="text-center" style="width:5%">Result</td>
+								<!-- <td class="text-center">Quant Ratio</td> -->
+								<td class="text-center" style="width:5%">Ratio</td>
+								<td class="text-center" style="width:2%">Month</td>
+								<td class="text-center" style="width:5%">Unit</td>
+								<td class="text-center">Last</td>
+								<td class="text-center">Next</td>
+								<td style="width:5%"></td>
+							</tr>
+						</thead>
+						<tbody>
+							<?php
+							if (isset($kgis) && count($kgis) > 0) {
+								foreach ($kgis as $kgiId => $kgi) :
+									/*$show = Kgi::checkPermission($role, $kgiId, $userId);
 								if ($show == 1) {
 									$display = '';
 								} else {
 									$display = 'none';
 								}*/
-								if ($role >= 4) {
-									$display = '';
-								} else {
-									$display = 'none';
-								}
-						?>
-								<tr class="border-bottom-white2" id="kgi-<?= $kgiId ?>">
-									<td class="<?= $kgi["status"] == 1 ? 'over-blue' : 'over-yellow' ?>"><?= $kgi["kgiName"] ?></td>
-									<td><?= $kgi["companyName"] ?></td>
-									<td><img src="<?= Yii::$app->homeUrl . $kgi['flag'] ?>" class="Flag-Turkey"> <?= $kgi["branch"] ?>, <?= $kgi["countryName"] ?></td>
-									<!-- <td></td> -->
-									<td class="text-center"><?= $kgi["priority"] ?></td>
-									<td>
-										<div class="flex mb-5 -space-x-4">
+									if ($kgi["isOver"] == 1 && $kgi["status"] != 2) {
+										$colorFormat = 'over';
+									} else {
+										if ($kgi["status"] == 1) {
+											$colorFormat = 'inprogress';
+										} else {
+											$colorFormat = 'complete';
+										}
+									}
+
+									if ($role >= 4) {
+										$display = '';
+									} else {
+										$display = 'none';
+									}
+							?>
+									<tr height="10">
+
+									</tr>
+									<tr id="kgi-<?= $kgiId ?>" class="pim-bg-<?= $colorFormat ?> pim-table-text">
+										<td>
+											<div class="col-12 border-left-<?= $colorFormat ?> pim-div-border pb-5">
+												<?= $kgi["kgiName"] ?>
+											</div>
+										</td>
+										<td><?= $kgi["companyName"] ?></td>
+										<td><img src="<?= Yii::$app->homeUrl . $kgi['flag'] ?>" class="Flag-Turkey"> <?= $kgi["branch"] ?>, <?= $kgi["countryName"] ?></td>
+										<!-- <td></td> -->
+										<td class="text-center"><?= $kgi["priority"] ?></td>
+										<td>
+											<div class="flex mb-5 -space-x-4">
+												<?php
+												if (isset($kgi["kgiEmployee"]) && count($kgi["kgiEmployee"]) > 0) {
+													$e = 1;
+													foreach ($kgi["kgiEmployee"] as $emp) :
+												?>
+														<img class="image-grid" src="<?= Yii::$app->homeUrl . $emp ?>">
+												<?php
+														if ($e == 3) {
+															break;
+														}
+														$e++;
+													endforeach;
+												}
+												?>
+												<a class="no-underline-black ml-2 mt-3" href="#"><?= count($kgi["kgiEmployee"]) ?></a>
+											</div>
+										</td>
+										<td>
+											<span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users" aria-hidden="true"></i> <?= $kgi["countTeam"] ?></span>
+										</td>
+										<td><?= $kgi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?></td>
+										<td class="text-start">
 											<?php
-											if (isset($kgi["kgiEmployee"]) && count($kgi["kgiEmployee"]) > 0) {
-												$e = 1;
-												foreach ($kgi["kgiEmployee"] as $emp) : ?>
-													<img class="image-grid" src="<?= Yii::$app->homeUrl . $emp ?>">
-											<?php
-													if ($e == 3) {
-														break;
-													}
-													$e++;
-												endforeach;
-											}
-											?>
-											<a class="no-underline-black ml-2 mt-3" href="#"><?= count($kgi["kgiEmployee"]) ?></a>
-										</div>
-									</td>
-									<td>
-										<span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users" aria-hidden="true"></i> <?= $kgi["countTeam"] ?></span>
-									</td>
-									<td><?= $kgi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?></td>
-									<td>
-										<?php
-										$decimal = explode('.', $kgi["targetAmount"]);
-										if (isset($decimal[1])) {
-											if ($decimal[1] == '00') {
-												$show = $decimal[0];
+											$decimal = explode('.', $kgi["targetAmount"]);
+											if (isset($decimal[1])) {
+												if ($decimal[1] == '00') {
+													$show = $decimal[0];
+												} else {
+													$show = $kgi["targetAmount"];
+												}
 											} else {
 												$show = $kgi["targetAmount"];
 											}
-										} else {
-											$show = $kgi["targetAmount"];
-										}
-										?>
-										<?= $show ?><?= $kgi["amountType"] == 1 ? '%' : '' ?>
-									</td>
-									<td>
-										<?= $kgi["code"] ?>
-									</td>
-									<td><?php
-										if ($kgi["result"] != '') {
-											$decimalResult = explode('.', $kgi["result"]);
-											if (isset($decimalResult[1])) {
-												if ($decimalResult[1] == '00') {
-													$showResult = $decimalResult[0];
+											?>
+											<?= $show ?><?= $kgi["amountType"] == 1 ? '%' : '' ?>
+										</td>
+										<td class="text-center">
+											<?= $kgi["code"] ?>
+										</td>
+										<td class="text-end">
+											<?php
+											if ($kgi["result"] != '') {
+												$decimalResult = explode('.', $kgi["result"]);
+												if (isset($decimalResult[1])) {
+													if ($decimalResult[1] == '00') {
+														$showResult = $decimalResult[0];
+													} else {
+														$showResult = $kgi["result"];
+													}
 												} else {
 													$showResult = $kgi["result"];
 												}
 											} else {
-												$showResult = $kgi["result"];
-											}
-										} else {
-											$showResult = 0;
-										}
-										?>
-										<?= $showResult ?><?= $kgi["amountType"] == 1 ? '%' : '' ?>
-									</td>
-									<td>
-										<div id="progress1">
-											<div data-num="<?= $kgi["ratio"] ?>" class="progress-item1"></div>
-										</div>
-									</td>
-									<td><?= $kgi["month"] ?></td>
-									<td><?= $kgi["unit"] ?></td>
-									<td><?= $kgi["periodCheck"] ?></td>
-									<td class="<?= $kgi['isOver'] == 1 ? 'text-danger' : '' ?>">
-										<?= $kgi["status"] == 1 ? $kgi["nextCheck"] : '' ?>
-									</td>
-									<td colspan="row">
-										<span data-bs-toggle="modal" data-bs-target="#kgi-issue" onclick="javascript:showKgiComment(<?= $kgiId ?>)">
-											<img src="<?= Yii::$app->homeUrl ?>image/comment.png" class="comment-td-dropdown">
-										</span>
-										<span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-										<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-
-											<li data-bs-toggle="modal" data-bs-target="#update-kgi-modal" onclick="javascript:updateKgi(<?= $kgiId ?>)" style="display: <?= $display ?>;">
-												<a class="dropdown-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-											</li>
-
-											<li data-bs-toggle="modal" data-bs-target="#kgi-view" onclick="javascript:kgiHistory(<?= $kgiId ?>)">
-												<a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
-											</li>
-
-											<li onclick="javascript:copyKgi(<?= $kgiId ?>)" title="Copy" style="display: <?= $display ?>;">
-												<a class="dropdown-item" href="#">
-													<i class="fa fa-copy" aria-hidden="true"></i>
-												</a>
-											</li>
-											<?php
-											if ($role >= 3) {
-											?>
-												<li>
-													<a class="dropdown-item" href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/kgi-team-setting/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>">
-														<i class="fa fa-users" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li>
-													<a class="dropdown-item" href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/indivisual-setting/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>">
-														<i class="fa fa-user" aria-hidden="true"></i>
-													</a>
-												</li>
-											<?php
+												$showResult = 0;
 											}
 											?>
-											<li data-bs-toggle="modal" data-bs-target="#delete-kgi" onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)" style="display: <?= $display ?>;">
-												<a class="dropdown-item"><i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
-											</li>
+											<?= $showResult ?><?= $kgi["amountType"] == 1 ? '%' : '' ?>
+										</td>
+										<td>
+											<div id="progress1">
+												<div data-num="<?= $kgi["ratio"] == '' ? 0 : $kgi["ratio"] ?>" class="progress-pim-table progress-circle-<?= $colorFormat ?>"></div>
+											</div>
 
-										</ul>
-									</td>
-								</tr>
-						<?php
-							endforeach;
-						}
-						?>
-					</tbody>
+										</td>
+										<td><?= $kgi["month"] ?></td>
+										<td><?= $kgi["unit"] ?></td>
+										<td><?= $kgi["periodCheck"] ?></td>
+										<td class="<?= $kgi['isOver'] == 1 ? 'text-danger' : '' ?>">
+											<?= $kgi["status"] == 1 ? $kgi["nextCheck"] : '' ?>
+										</td>
+										<td class="text-center">
+											<!-- <span data-bs-toggle="modal" data-bs-target="#kgi-issue" onclick="javascript:showKgiComment(<?php // $kgiId 
+																									?>)">
+												<img src="<?php // Yii::$app->homeUrl 
+														?>image/comment.png" class="comment-td-dropdown">
+											</span>
+											<span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+												<i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i>
+											</span> -->
 
-				</table>
+
+											<span data-bs-toggle="modal" data-bs-target="#kgi-issue" onclick="javascript:showKgiComment(<?= $kgiId ?>)" class="btn btn-bg-white-xs pr-2 pl-2 pt-1 pb-1">
+												<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.png" class="icon-table on-cursor">
+											</span>
+											<span class="dropdown" href="#" id="dropdownMenuLink-<?= $kgiId ?>" data-bs-toggle="dropdown">
+												<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.png" class="icon-table on-cursor">
+											</span>
+											<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kgiId ?>">
+												<li data-bs-toggle="modal" data-bs-target="#update-kgi-modal" onclick="javascript:updateKgi(<?= $kgiId ?>)" style="display: <?= $display ?>;">
+													<a class="dropdown-item"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+												</li>
+												<li data-bs-toggle="modal" data-bs-target="#kgi-view" onclick="javascript:kgiHistory(<?= $kgiId ?>)">
+													<a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
+												</li>
+												<li onclick="javascript:copyKgi(<?= $kgiId ?>)" title="Copy" style="display: <?= $display ?>;">
+													<a class="dropdown-item" href="#">
+														<i class="fa fa-copy" aria-hidden="true"></i>
+													</a>
+												</li>
+												<?php
+												if ($role >= 3) {
+												?>
+													<li>
+														<a class="dropdown-item" href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/kgi-team-setting/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>">
+															<i class="fa fa-users" aria-hidden="true"></i>
+														</a>
+													</li>
+													<li>
+														<a class="dropdown-item" href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/indivisual-setting/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>">
+															<i class="fa fa-user" aria-hidden="true"></i>
+														</a>
+													</li>
+												<?php
+												}
+												?>
+												<li data-bs-toggle="modal" data-bs-target="#delete-kgi" onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)" style="display: <?= $display ?>;">
+													<a class="dropdown-item"><i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
+												</li>
+
+											</ul>
+										</td>
+									</tr>
+							<?php
+								endforeach;
+							}
+							?>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
-		<div class="col-12 navigation-next">
+		<!-- <div class="col-12 navigation-next">
 			<nav aria-label="Page navigation example">
 				<ul class="pagination">
 					<li class="page-item"><a class="page-link page-navigation" href="#"><i class="fa fa-chevron-left" aria-hidden="true"></i> Previous</a></li>
@@ -255,7 +283,7 @@ $this->title = "KGI";
 					<li class="page-item"><a class="page-link page-navigation" href="#">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
 				</ul>
 			</nav>
-		</div>
+		</div> -->
 	</div>
 	<input type="hidden" value="create" id="acType">
 	<?php

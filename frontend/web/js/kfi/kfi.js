@@ -659,3 +659,111 @@ function relatedKgiForKfi() {
         }
     });
 }
+function prepareKfiNextTarget(kfiHistoryId) { 
+    $("#copy").modal('show');
+    $("#kfiHistoryId").val(kfiHistoryId);
+}
+function kfiNextTarget() { 
+    var kfiHistoryId = $("#kfiHistoryId").val();
+    var url = $url + 'kfi/management/next-kfi-history';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: {kfiHistoryId:kfiHistoryId},
+        success: function (data) {
+            
+        }
+    });
+}
+function viewTabKfi(tabId) { 
+	var currentTabId = $("#currentTab").val();
+	//alert(currentTabId + '==' + tabId);
+	var kfiId = $("#kfiId").val();
+	//alert(kfiId);
+	$("#tab-" + currentTabId).removeClass("view-tab-active");
+	$("#tab-" + currentTabId).addClass("view-tab");
+	$("#tab-" + tabId).removeClass("view-tab");
+	$("#tab-" + tabId).addClass("view-tab-active");
+	$("#tab-" + currentTabId + "-blue").hide();
+	$("#tab-" + currentTabId + "-black").show();
+	$("#tab-" + tabId + "-blue").show();
+	$("#tab-" + tabId + "-black").hide();
+	$("#currentTab").val(tabId);
+	if (tabId == 1) {
+		var url = $url + 'kfi/view/kfi-employee';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { kfiId: kfiId },
+			success: function (data) {kfiId
+				$("#show-content").html(data.kfiEmployeeTeam);
+			}
+		});
+	}
+	if (tabId == 2) {
+		var url = $url + 'kfi/view/all-kfi-history';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { kfiId: kfiId },
+			success: function (data) {
+				$("#show-content").html(data.monthlyDetailHistoryText);
+			}
+		});
+	}
+	if (tabId == 3) {
+		var url = $url + 'kfi/view/kfi-issue';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { kfiId: kfiId },
+			success: function (data) {
+				$("#show-content").html(data.kfiIssue);
+			}
+		});
+	}
+	if (tabId == 4) {
+		var url = $url + 'kfi/view/kfi-chart';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { kfiId: kfiId },
+			success: function (data) {
+				$("#show-content").html(data.kfiChart);
+			}
+		});
+	}
+	if (tabId == 5) { 
+		var url = $url + 'kfi/view/kfi-kgi';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { kfiId: kfiId },
+			success: function (data) {
+				$("#show-content").html(data.kpi);
+			}
+		});
+	}
+}
+function showEditRelateKgi(type,kfiId) {
+	if (type == 1) {
+		$("#editRelateKgi").hide();
+		$("#saveRelateKgi").show();
+		$('input[id="check-relate-kgi"]').each(function () {
+				$(this).show();
+		});
+	} else { 
+		$("#editRelateKgi").show();
+		$("#saveRelateKgi").hide();
+		$('input[id="check-relate-kgi"]').each(function () {
+			$(this).hide();
+		});
+        saveSelectedKgi(kfiId);
+	}
+ }

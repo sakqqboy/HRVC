@@ -256,6 +256,7 @@ function showAttachFileNameKpi(kpiId) {
 }
 function answerKpiIssue(kpiIssueId) {
 	var answer = $("#answer-" + kpiIssueId).val();
+	//alert(answer);
 	var fd = new FormData();
 	var files = $("#attachKpiFileAnswer-" + kpiIssueId)[0].files;
 	if (files.length > 0) {
@@ -278,6 +279,10 @@ function answerKpiIssue(kpiIssueId) {
 				$("#answer-" + kpiIssueId).val('');
 				$("#lastest-issue-" + data.kpiId).html(data.issue);
 				$("#lastest-solution-" + data.kpiId).html(data.solution);
+				if (data.lastest != 0) { 
+					$("#kpi-solution-" + data.lastest).addClass('border-left-bottom-radius');
+				}
+				$("#fileName-" + kpiIssueId).html('');
 			}
 		}
 	});
@@ -295,7 +300,7 @@ function kpiFilter() {
 		type: "POST",
 		dataType: 'json',
 		url: url,
-		data: { companyId: companyId,branchId: branchId,teamId: teamId,month: month,status: status,year: year,type:type },
+		data: { companyId: companyId, branchId: branchId, teamId: teamId, month: month, status: status, year: year, type: type },
 		success: function (data) {
 			
 		}
@@ -584,7 +589,7 @@ function approveTargetKpiEmployee(kpiEmployeeId, approve) {
 	var url = $url + 'kpi/management/approve-kpi-employee-target';
 	if (approve == 1) {
 		var text = 'Are you sure to approve this target?';
-	} else { 
+	} else {
 		var text = 'Are you sure to reject this target?';
 	}
 	if (confirm(text)) {
@@ -617,3 +622,55 @@ function relatedKgiForKpi() {
 		}
 	});
 }
+function prepareKpiNextTarget(kpiHistoryId) {
+	$("#copy").modal('show');
+	$("#kpiHistoryId").val(kpiHistoryId);
+}
+function prepareKpiTeamNextTarget(kpiTeamHistoryId) {
+	$("#copy").modal('show');
+	$("#kpiTeamHistoryId").val(kpiTeamHistoryId);
+}
+function prepareKpiEmployeeNextTarget(kpiEmployeeHistoryId) {
+	$("#copy").modal('show');
+	$("#kpiEmployeeHistoryId").val(kpiEmployeeHistoryId);
+}
+function kpiNextTarget() {
+	var kpiHistoryId = $("#kpiHistoryId").val();
+	var url = $url + 'kpi/management/next-kpi-history';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { kpiHistoryId: kpiHistoryId },
+		success: function (data) {
+		 
+		}
+	});
+}
+function kpiTeamNextTarget() {
+	var kpiTeamHistoryId = $("#kpiTeamHistoryId").val();
+	var url = $url + 'kpi/kpi-team/next-kpi-team-history';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { kpiTeamHistoryId: kpiTeamHistoryId },
+		success: function (data) {
+		 
+		}
+	});
+}
+function kpiEmployeeNextTarget() {
+	var kpiEmployeeHistoryId = $("#kpiEmployeeHistoryId").val();
+	var url = $url + 'kpi/kpi-personal/next-kpi-employee-history';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { kpiEmployeeHistoryId: kpiEmployeeHistoryId },
+		success: function (data) {
+		 
+		}
+	});
+}
+

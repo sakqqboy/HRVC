@@ -575,7 +575,7 @@ class SalaryController extends Controller
 	{
 		return $this->redirect(Yii::$app->homeUrl . 'evaluation/salary/filter-salary-register-result/' . ModelMaster::encodeParams([
 			"departmentId" => isset($_POST["departmentId"]) ? $_POST["departmentId"] : null,
-			"titleId" => isset($_POST["titleId"]) ? $_POST["titleId"] : null,
+			"titleId" => isset($_POST["titleId"]) ? $_POST["titleId"] : "",
 			"companyId" => isset($_POST["companyId"]) ? $_POST["companyId"] : null,
 		]));
 	}
@@ -591,16 +591,26 @@ class SalaryController extends Controller
 		$departments = [];
 		$totalEmployeeSalary = 0;
 		$departmentTitleAllowances = [];
+		//throw new Exception($param["titleId"]);
 		$salary = Salary::find()
 			->where(["departmentId" => $param["departmentId"], "titleId" => $param["titleId"], "status" => 1])
 			->asArray()
 			->one();
-		$titles = Title::find()->select('titleId,titleName')
-			->where(["departmentId" => $param['departmentId'], "status" => 1])
-			->andWhere("titleId!=" . $param["titleId"])
-			->asArray()
-			->orderBy('titleName')
-			->all();
+		if ($param["titleId"] != '') {
+			$titles = Title::find()->select('titleId,titleName')
+				->where(["departmentId" => $param['departmentId'], "status" => 1])
+				->andWhere("titleId!=" . $param["titleId"])
+				//->andFilterWhere(["titleId" => $param["titleId"]])
+				->asArray()
+				->orderBy('titleName')
+				->all();
+		} else {
+			$titles = Title::find()->select('titleId,titleName')
+				->where(["departmentId" => $param['departmentId'], "status" => 1])
+				->asArray()
+				->orderBy('titleName')
+				->all();
+		}
 
 		$company = Company::find()
 			->select('company.*,c.flag,c.countryName')

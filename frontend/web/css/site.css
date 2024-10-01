@@ -1,6 +1,117 @@
-main > .container, main > .container-fluid
-{
+main>.container,
+main>.container-fluid {
     padding: 70px 15px 20px;
+}
+
+@font-face {
+    font-family: "SF Pro Text";
+    font-style: normal;
+    font-weight: 300;
+    src: url("https://raw.githubusercontent.com/blaisck/sfwin/master/SFPro/TrueType/SFProText-Light.ttf");
+}
+
+@font-face {
+    font-family: "SF Pro Text";
+    font-style: normal;
+    font-weight: 400;
+    src: url("https://raw.githubusercontent.com/blaisck/sfwin/master/SFPro/TrueType/SFProText-Regular.ttf");
+}
+
+@font-face {
+    font-family: "SF Pro Text";
+    font-style: normal;
+    font-weight: 500;
+    src: url("https://raw.githubusercontent.com/blaisck/sfwin/master/SFPro/TrueType/SFProText-Medium.ttf");
+}
+
+@font-face {
+    font-family: "SF Pro Text";
+    font-style: normal;
+    font-weight: 600;
+    src: url("https://raw.githubusercontent.com/blaisck/sfwin/master/SFPro/TrueType/SFProText-SemiBold.ttf");
+}
+
+@font-face {
+    font-family: "SF Pro Text";
+    font-style: normal;
+    font-weight: 700;
+    src: url("https://raw.githubusercontent.com/blaisck/sfwin/master/SFPro/TrueType/SFProText-Bold.ttf");
+}
+
+@font-face {
+    font-family: "SF Pro Text";
+    font-style: normal;
+    font-weight: 900;
+    src: url("https://raw.githubusercontent.com/blaisck/sfwin/master/SFPro/TrueType/SFProText-Heavy.ttf");
+}
+
+@font-face {
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: 100;
+    src: url("https://raw.githubusercontent.com/blaisck/sfwin/master/SFPro/TrueType/SFProDisplay-Ultralight.ttf");
+}
+
+@font-face {
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: 200;
+    src: url("https://raw.githubusercontent.com/blaisck/sfwin/master/SFPro/TrueType/SFProDisplay-Thin.ttf");
+}
+
+@font-face {
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: 300;
+    src: url("https://raw.githubusercontent.com/blaisck/sfwin/master/SFPro/TrueType/SFProDisplay-Light.ttf");
+}
+
+@font-face {
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: 400;
+    src: url("https://raw.githubusercontent.com/blaisck/sfwin/master/SFPro/TrueType/SFProDisplay-Regular.ttf");
+}
+
+@font-face {
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: 500;
+    src: url("https://raw.githubusercontent.com/blaisck/sfwin/master/SFPro/TrueType/SFProDisplay-Medium.ttf");
+}
+
+@font-face {
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: 600;
+    src: url("https://raw.githubusercontent.com/blaisck/sfwin/master/SFPro/TrueType/SFProDisplay-SemiBold.ttf");
+}
+
+@font-face {
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: 700;
+    src: url("https://raw.githubusercontent.com/blaisck/sfwin/master/SFPro/TrueType/SFProDisplay-Bold.ttf");
+}
+
+@font-face {
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: 800;
+    src: url("https://raw.githubusercontent.com/blaisck/sfwin/master/SFPro/TrueType/SFProDisplay-Black.ttf");
+}
+
+@font-face {
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: 900;
+    src: url("https://raw.githubusercontent.com/blaisck/sfwin/master/SFPro/TrueType/SFProDisplay-Heavy.ttf");
+}
+
+body {
+    font-family: "SF Pro Display";
+    font-weight: 300;
+    background-color: #F0F2F4;
 }
 
 .footer {
@@ -9,7 +120,8 @@ main > .container, main > .container-fluid
     height: 60px;
 }
 
-.footer > .container, .footer > .container-fluid {
+.footer>.container,
+.footer>.container-fluid {
     padding-right: 15px;
     padding-left: 15px;
 }
@@ -20,7 +132,8 @@ main > .container, main > .container-fluid
 }
 
 /* add sorting icons to gridview sort links */
-a.asc:after, a.desc:after {
+a.asc:after,
+a.desc:after {
     content: '';
     left: 3px;
     display: inline-block;
@@ -66,27 +179,27 @@ a.desc:after {
 }
 
 /* align the logout "link" (button in form) of the navbar */
-.navbar form > button.logout {
+.navbar form>button.logout {
     padding-top: 7px;
     color: rgba(255, 255, 255, 0.5);
 }
 
 @media(max-width:767px) {
-    .navbar form > button.logout {
-        display:block;
+    .navbar form>button.logout {
+        display: block;
         text-align: left;
         width: 100%;
         padding: 10px 0;
     }
 }
 
-.navbar form > button.logout:focus,
-.navbar form > button.logout:hover {
+.navbar form>button.logout:focus,
+.navbar form>button.logout:hover {
     text-decoration: none;
     color: rgba(255, 255, 255, 0.75);
 }
 
-.navbar form > button.logout:focus {
+.navbar form>button.logout:focus {
     outline: none;
 }
 
@@ -97,7 +210,6 @@ a.desc:after {
     padding: .75rem 1rem;
 }
 
-.breadcrumb-item > a
-{
+.breadcrumb-item>a {
     text-decoration: none;
 }

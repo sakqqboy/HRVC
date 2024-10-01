@@ -18,10 +18,14 @@ AppAsset::register($this);
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <link rel="shortcut icon" href="<?= Yii::$app->request->baseUrl; ?>/image/logo-hrvc.png?v=1" type="image/x-icon" />
+    <link href="https://fonts.cdnfonts.com/css/sf-pro-display?styles=98774,98777" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+
+
+
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -46,17 +50,18 @@ AppAsset::register($this);
     </header> -->
 
     <main role="main" class="pr-12">
-        <div class="row">
-            <div class="col-lg-2">
-                <?= $this->render("@frontend/views/site/header")
-                ?>
-            </div>
-            <div class="col-lg-10 pl-10">
-                <div class="row">
-                    <div class="header-top">
+        <div class="col-12">
+            <div class="row">
+                <div class="menu-left-side">
+                    <?= $this->render("@frontend/views/site/menu_left")
+                    ?>
+                </div>
+
+                <div class="main-content">
+                    <div class="">
                         <?= $this->render("@frontend/views/layouts/headernavbar") ?>
                     </div>
-                    <div class="col-12">
+                    <div class="submain-content">
                         <?= $content ?>
                     </div>
                 </div>

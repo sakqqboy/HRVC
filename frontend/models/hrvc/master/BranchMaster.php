@@ -14,6 +14,7 @@ use Yii;
     * @property integer $status
     * @property string $createDateTime
     * @property string $updateDateTime
+    * @property integer $financial_start_month
 */
 class BranchMaster extends \common\models\ModelMaster
 {
@@ -32,7 +33,7 @@ public function rules()
 {
 return [
             [['branchName', 'companyId'], 'required'],
-            [['companyId'], 'integer'],
+            [['companyId', 'financial_start_month'], 'integer'],
             [['description'], 'string'],
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['branchName'], 'string', 'max' => 255],
@@ -53,6 +54,7 @@ return [
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',
     'updateDateTime' => 'Update Date Time',
+    'financial_start_month' => 'Financial Start Month',
 ];
 }
 }

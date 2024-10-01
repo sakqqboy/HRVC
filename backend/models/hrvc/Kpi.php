@@ -50,7 +50,7 @@ class Kpi extends \backend\models\hrvc\master\KpiMaster
         $date = '';
         $kpiHistory = KpiHistory::find()
             ->select('nextCheckDate')
-            ->where(["kpiId" => $kpiId, "status" => [1, 4]])->orderBy('kpiHistoryId DESC')->asArray()->one();
+            ->where(["kpiId" => $kpiId, "status" => [1, 2, 4]])->orderBy('kpiHistoryId DESC')->asArray()->one();
         if (isset($kpiHistory) && !empty($kpiHistory) && $kpiHistory["nextCheckDate"] != '') {
             $date = ModelMaster::engDate($kpiHistory["nextCheckDate"], 2);
         }

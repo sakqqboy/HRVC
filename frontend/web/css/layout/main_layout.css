@@ -1,0 +1,66 @@
+.menu-left-side {
+    width: 20%;
+    background-color: #072033;
+    font-family: 'SF Pro Display', 'sans-serif';
+    font-size: 14px;
+    top: 0;
+    max-height: 100%;
+    overflow-y: auto;
+    scrollbar-width: none;
+    position: fixed;
+    min-height: 100%;
+
+}
+
+.main-content {
+    width: 80%;
+    padding-left: 0;
+    position: relative;
+    margin-left: 20%;
+    right: 0 !important;
+
+}
+
+.header-top {
+    top: 0;
+    position: fixed;
+    z-index: 5;
+    height: 45px;
+    width: 80.7%;
+    padding-top: 5px;
+
+}
+
+.submain-content {
+    width: 100%;
+    padding-left: 10px;
+    position: relative !important;
+    margin-top: 30px;
+}
+
+.small-content {
+    border-radius: 6px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.ligth-gray-box {
+    background-color: #F4F6F9;
+    border-radius: 10px;
+    padding: 5px 10px 10px 10px;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    display: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #043A5C;
+    border-radius: 3px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #072033;
+}

@@ -1,3 +1,15 @@
+.font-size-5 {
+    font-size: 5px;
+}
+
+.font-size-8 {
+    font-size: 8px;
+}
+
+.font-size-9 {
+    font-size: 9px;
+}
+
 .font-size-10 {
     font-size: 10px;
 }
@@ -369,6 +381,7 @@
 .font-bb {
     font-weight: bolder;
 }
-.font-weight-500{
+
+.font-weight-500 {
     font-weight: 500;
 }

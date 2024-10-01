@@ -6,7 +6,7 @@ use frontend\models\hrvc\Company;
 $this->title = 'Group profile';
 ?>
 
-<div class="col-12" style="margin-top: 60px;">
+<div class="col-12">
 	<div class="col-12" style="height: 180px;background-color:gray;">
 		<?php
 		if ($group["banner"] != null) { ?>

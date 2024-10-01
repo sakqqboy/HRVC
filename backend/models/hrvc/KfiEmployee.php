@@ -111,4 +111,33 @@ class KfiEmployee extends \backend\models\hrvc\master\KfiEmployeeMaster
         }
         return $percent;
     }
+    public static function kfiEmployeeDetail($kfiId)
+    {
+        $kfiEmployee = KfiEmployee::find()
+            ->select('e.picture,e.employeeId,e.gender,t.titleName,e.employeeFirstname,e.employeeSurename')
+            ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kfi_employee.employeeId")
+            ->JOIN("LEFT JOIN", "title t", "t.titleId=e.titleId")
+            ->where(["kfi_employee.status" => [1, 2, 4], "kfi_employee.kfiId" => $kfiId, "e.status" => 1])
+            ->andWhere("kfi_employee.employeeId is not null")
+            ->asArray()
+            ->all();
+        $employee = [];
+        if (isset($kfiEmployee) && count($kfiEmployee) > 0) {
+            foreach ($kfiEmployee as $ke) :
+                if ($ke["picture"] != "") {
+                    $employee[$ke["employeeId"]]["picture"] = $ke["picture"];
+                } else {
+                    if ($ke["gender"] == 1) {
+                        $employee[$ke["employeeId"]]["picture"] = 'image/user.png';
+                    } else {
+
+                        $employee[$ke["employeeId"]]["picture"] = 'image/lady.jpg';
+                    }
+                }
+                $employee[$ke["employeeId"]]["name"] = $ke["employeeFirstname"] . ' ' . $ke["employeeSurename"];
+                $employee[$ke["employeeId"]]["title"] = $ke["titleName"];
+            endforeach;
+        }
+        return $employee;
+    }
 }

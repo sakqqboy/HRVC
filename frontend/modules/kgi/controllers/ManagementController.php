@@ -26,6 +26,7 @@ use frontend\models\hrvc\KgiTeamHistory;
 use frontend\models\hrvc\Kpi;
 use frontend\models\hrvc\Team;
 use frontend\models\hrvc\Title;
+use frontend\models\hrvc\Unit;
 use frontend\models\hrvc\User;
 use frontend\models\hrvc\UserRole;
 use Yii;
@@ -146,8 +147,6 @@ class ManagementController extends Controller
 		}
 		if ($role == 1 || $role == 2) {
 			$staffId = Yii::$app->user->id;
-			//return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi-grid'); //not dev yet
-			//return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi');
 		}
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -199,7 +198,7 @@ class ManagementController extends Controller
 			$kgi->status = $_POST["status"];
 			$kgi->month = $_POST["month"];
 			$kgi->year = $_POST["year"];
-			$kgi->result = str_replace(",", "", $result);
+			//$kgi->result = str_replace(",", "", $result);
 			$kgi->createrId = Yii::$app->user->id;
 			$kgi->createDateTime = new Expression('NOW()');
 			$kgi->updateDateTime = new Expression('NOW()');
@@ -222,7 +221,7 @@ class ManagementController extends Controller
 				$kgiHistory->status = $_POST["status"];
 				$kgiHistory->year = $_POST["year"];
 				$kgiHistory->month = $_POST["month"];
-				$kgiHistory->result = str_replace(",", "", $result);
+				//$kgiHistory->result = str_replace(",", "", $result);
 				$kgiHistory->createrId = Yii::$app->user->id;
 				$kgiHistory->createDateTime = new Expression('NOW()');
 				$kgiHistory->updateDateTime = new Expression('NOW()');
@@ -610,6 +609,7 @@ class ManagementController extends Controller
 			if ($isManager == 1 && $kgi->targetAmount == "") {
 				$kgi->targetAmount = str_replace(",", "", $_POST["targetAmount"]);
 			}
+			//$kgi->targetAmount = $_POST["targetAmount"];
 			$kgi->kgiDetail = $_POST["detail"];
 			$kgi->quantRatio = $_POST["quantRatio"];
 			$kgi->priority = $_POST["priority"];
@@ -753,11 +753,10 @@ class ManagementController extends Controller
 
 		return json_encode($res);
 	}
-	public function actionCreateNewIssue()
+	/*public function actionCreateNewIssue()
 	{
 		if (isset($_POST["newIssue"]) && trim($_POST["newIssue"]) != "") {
 			$kgiIssue = new KgiIssue();
-
 			$kgiIssue->issue = $_POST["newIssue"];
 			$kgiIssue->kgiId = $_POST["kgiId"];
 			$kgiIssue->employeeId = $_POST["employeeId"];
@@ -781,9 +780,54 @@ class ManagementController extends Controller
 			}
 			//throw new Exception(print_r(Yii::$app->request->post(), true));
 			if ($kgiIssue->save(false)) {
-				return $this->redirect('grid');
+				//return $this->redirect('grid');
 			}
 		}
+	}*/
+	public function actionCreateNewIssue()
+	{
+		$kgiIssue = new KgiIssue();
+		$kgiIssue->issue = $_POST["issue"];
+		$kgiIssue->description = $_POST["description"];
+		$kgiIssue->kgiId = $_POST["kgiId"];
+		$kgiIssue->employeeId = $_POST["employeeId"];
+		$kgiIssue->status = 1;
+		$kgiIssue->createDateTime = new Expression('NOW()');
+		$kgiIssue->updateDateTime = new Expression('NOW()');
+		$file = '';
+		$fileName = '';
+		$res = [];
+		if (isset($_FILES['file']['name'])) {
+			$fileObj = UploadedFile::getInstanceByName("file");
+			$filename = $_FILES['file']['name'];
+			$path = Path::getHost() . 'file/kgi/';
+			if (!file_exists($path)) {
+				mkdir($path, 0777, true);
+			}
+			$filenameArray = explode('.', $filename);
+			$fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[1];
+			$pathSave = $path . $fileName;
+			$fileObj->saveAs($pathSave);
+			$kgiIssue->file = 'file/kgi/' . $fileName;
+			$file = 'file/kgi/' . $fileName;
+		}
+		if ($kgiIssue->save(false)) {
+			$res["status"] = true;
+			$api = curl_init();
+			curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+			curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-issue?kgiId=' . $_POST["kgiId"]);
+			$kgiIssue = curl_exec($api);
+			$kgiIssue = json_decode($kgiIssue, true);
+
+			curl_close($api);
+			$res["text"] = $this->renderAjax("issue_history", [
+				"kgiIssue" => $kgiIssue,
+				"kgiId" => $_POST["kgiId"],
+				"employeeId" => $_POST["employeeId"]
+			]);
+		}
+		return json_encode($res);
 	}
 	public function actionSaveKgiAnswer()
 	{
@@ -794,6 +838,16 @@ class ManagementController extends Controller
 		$res["status"] = false;
 		$file = '';
 		$fileName = '';
+		$lastestKgiIssue = KgiSolution::find()
+			->where(["kgiIssueId" => $kgiIssueId])
+			->orderBy('kgiSolutionId DESC')
+			->asArray()
+			->one();
+		if (isset($lastestKgiIssue)) {
+			$res["lastest"] = $lastestKgiIssue["kgiSolutionId"];
+		} else {
+			$res["lastest"] = 0;
+		}
 		if (isset($_FILES['file']['name'])) {
 			$fileObj = UploadedFile::getInstanceByName("file");
 			$filename = $_FILES['file']['name'];
@@ -816,8 +870,9 @@ class ManagementController extends Controller
 		$answer->status = 1;
 		$answer->createDateTime = new Expression('NOW()');
 		$answer->updateDateTime = new Expression('NOW()');
-		$createDateTime = date('Y-m-d');
+		$createDateTime = date('Y-m-d H:i:s');
 		if ($answer->save(false)) {
+			$kgiSolutionId = Yii::$app->db->lastInsertID;
 			$kgiIssue = KgiIssue::find()
 				->select('kgiId,issue')
 				->where(["kgiIssueId" => $kgiIssueId])
@@ -825,14 +880,17 @@ class ManagementController extends Controller
 			$kgiIssue->updateDateTime = new Expression('NOW()');
 			$kgiId = $kgiIssue->kgiId;
 			$kgiIssue->save(false);
+
 			$res["commentText"] = $this->renderAjax('comment', [
 				"name" => User::userHeaderName(),
 				"image" => User::userHeaderImage(),
 				"answer" => $solution,
-				"createDateTime" => ModelMaster::engDate($createDateTime, 2),
+				"createDateTime" => ModelMaster::timeMonthDateYear($createDateTime),
 				"kgiIssueId" => $kgiIssueId,
 				"file" => $file,
 				"fileName" => $fileName,
+				"lastestKgiSolutionId" => $res["lastest"],
+				"kgiSolutionId" => $kgiSolutionId
 			]);
 			$res["status"] = true;
 			$res["issue"] = $kgiIssue["issue"];
@@ -1924,8 +1982,45 @@ class ManagementController extends Controller
 			endforeach;
 		}
 	}
-	public function actionTest()
+
+	public function actionNextKgiHistory()
 	{
-		return $this->render('test');
+		$kgiHistoryId = $_POST["kgiHistoryId"];
+		$currentHistory = KgiHistory::find()->where(["kgiHistoryId" => $kgiHistoryId])->asArray()->one();
+		$unit = Unit::find()->where(["unitId" => $currentHistory["unitId"]])->asArray()->one();
+		if ($currentHistory["month"] != "" && $currentHistory["year"] != "") {
+			$nextTargetMonthYear = ModelMaster::nextTargetMonthYear($unit["unitName"], $currentHistory["month"], $currentHistory["year"]);
+			$nextMonth = $nextTargetMonthYear["nextMonth"];
+			$nextYear = $nextTargetMonthYear["nextYear"];
+		} else {
+			$nextMonth = null;
+			$nextYear = null;
+		}
+		$kgiHistory = new KgiHistory();
+		$kgiHistory->kgiId = $currentHistory["kgiId"];
+		$kgiHistory->createrId = Yii::$app->user->id;
+		$kgiHistory->titleProcess = 'New target';
+		$kgiHistory->nextCheckDate = null;
+		$kgiHistory->amountType = $currentHistory["amountType"];
+		$kgiHistory->code = $currentHistory["code"];
+		$kgiHistory->status = 1;
+		$kgiHistory->quantRatio = $currentHistory["quantRatio"];
+		$kgiHistory->targetAmount = $currentHistory["targetAmount"];
+		$kgiHistory->result = 0;
+		$kgiHistory->priority = $currentHistory["priority"];
+		$kgiHistory->unitId =  $currentHistory["unitId"];
+		$kgiHistory->month = $nextMonth;
+		$kgiHistory->year = $nextYear;
+		$kgiHistory->createDateTime = new Expression('NOW()');
+		$kgiHistory->updateDateTime = new Expression('NOW()');
+		if ($kgiHistory->save(false)) {
+			$kgi = Kgi::find()->where(["kgiId" => $currentHistory["kgiId"]])->one();
+			$kgi->status = 1;
+			$kgi->month = $nextMonth;
+			$kgi->year = $nextYear;
+			$kgi->updateDateTime = new Expression('NOW()');
+			$kgi->save(false);
+		}
+		return $this->redirect(Yii::$app->homeUrl . 'kgi/management/grid');
 	}
 }

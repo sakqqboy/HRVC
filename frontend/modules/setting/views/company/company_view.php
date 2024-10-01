@@ -5,7 +5,7 @@ use common\models\ModelMaster;
 $this->title = 'company profile';
 ?>
 
-<div class="col-12" style="margin-top: 60px;">
+<div class="col-12">
 	<div class="col-12" style="height: 180px;background-color:gray;">
 		<?php
 		if ($company["banner"] != null) { ?>

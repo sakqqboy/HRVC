@@ -6,11 +6,14 @@ use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Team;
 
 ?>
-<div class="col-12">
-	<div class="input-group">
-		<span class="input-group-text" style="cursor: pointer;" onclick="javascript:kpiFilter()">
-			<i class="fa fa-filter" aria-hidden="true"></i></span>
-		<select class="form-select font-size-13" id="company-filter">
+<div class="row">
+	<div class="col-1 pr-10 text-end">
+		<span>
+			<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterPlus.png" class="pim-search-icon" style="cursor: pointer;" onclick="javascript:kpiFilter()">
+		</span>
+	</div>
+	<div class="col-3 pr-5 pl-1">
+		<select class="form-select font-size-13 select-pim" id="company-filter">
 			<?php
 			if (isset($companyId) && $companyId != "") { ?>
 				<option value="<?= $companyId ?>"><?= Company::companyName($companyId) ?></option>
@@ -27,7 +30,9 @@ use frontend\models\hrvc\Team;
 			}
 			?>
 		</select>
-		<select class="form-select font-size-13" id="branch-filter" <?= $companyId == "" ? 'disabled' : '' ?>>
+	</div>
+	<div class="col-2 pr-5 pl-1">
+		<select class="form-select font-size-12 select-pim" id="branch-filter" <?= $companyId == "" ? 'disabled' : '' ?>>
 			<?php
 			if (isset($branchId) && $branchId != "") { ?>
 				<option value="<?= $branchId ?>"><?= Branch::branchName($branchId) ?></option>
@@ -45,23 +50,32 @@ use frontend\models\hrvc\Team;
 			?>
 
 		</select>
-		<select class="form-select font-size-13" id="team-filter" <?= $branchId == "" ? 'disabled' : '' ?>>
-			<?php
-			if (isset($teamId) && $teamId != "") { ?>
-				<option value="<?= $teamId ?>"><?= Team::teamName($teamId) ?></option>
-			<?php
-			} ?>
-			<option value="">Team</option>
-			<?php
-			if (isset($teams) && count($teams) > 0) {
-				foreach ($teams as $team) : ?>
-					<option value="<?= $team['teamId'] ?>"><?= $team['teamName'] ?></option>
-			<?php
-				endforeach;
-			}
-			?>
-		</select>
-		<select class="form-select font-size-13" id="month-filter">
+	</div>
+	<!-- <select class="form-select font-size-13" id="team-filter" <?= $branchId == "" ? 'disabled' : '' ?>>
+		<?php
+		//if (isset($teamId) && $teamId != "") { 
+		?>
+			<option value="<?php // $teamId 
+						?>"><?php // Team::teamName($teamId) 
+							?></option>
+		<?php
+		//} 
+		?>
+		<option value="">Team</option>
+		<?php
+		//if (isset($teams) && count($teams) > 0) {
+		//	foreach ($teams as $team) : 
+		?>
+				<option value="<?php // $team['teamId'] 
+							?>"><?php // $team['teamName'] 
+								?></option>
+		<?php
+		//endforeach;
+		//	}
+		?>
+	</select> -->
+	<div class="col-2 pr-5 pl-1">
+		<select class="form-select font-size-12  select-pim" id="month-filter">
 			<?php
 			if (isset($month) && $month != "") { ?>
 				<option value="<?= $month ?>"><?= ModelMaster::monthFull()[$month] ?></option>
@@ -78,7 +92,9 @@ use frontend\models\hrvc\Team;
 			}
 			?>
 		</select>
-		<select class="form-select font-size-13" id="year-filter">
+	</div>
+	<div class="col-2 pr-5 pl-1">
+		<select class="form-select font-size-12 select-pim" id="year-filter">
 			<?php
 			if (isset($yearSelected) && $yearSelected != "") { ?>
 				<option value="<?= $yearSelected ?>"><?= $yearSelected ?></option>
@@ -100,8 +116,9 @@ use frontend\models\hrvc\Team;
 			}
 			?>
 		</select>
-
-		<select class="form-select font-size-13" id="status-filter">
+	</div>
+	<div class="col-2 pr-1 pl-1">
+		<select class="font-size-12 select-pim form-select" id="status-filter">
 			<?php
 			if (isset($status) && $status != "") { ?>
 				<option value="<?= $status ?>"><?= $status == 1 ? "Active" : "Finished" ?></option>

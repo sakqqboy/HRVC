@@ -450,8 +450,48 @@ function showAttachFileNameKgi(kgiId) {
 	var message = "Attached : " + $("#attachKgiFile").val();
 	$("#attachFile-" + kgiId).html(message);
 }
+function createNewIssue(kgiId) { 
+	var issue = $("#issue").val();
+	var description = $("#description").val();
+	var employeeId = $("#employeeId").val();
+	var fd = new FormData();
+	var files = $("#attachKgiFile")[0].files;
+	if (files.length > 0) {
+		fd.append('file', files[0]);
+   
+	}
+	fd.append('issue', issue);
+	fd.append('kgiId', kgiId);
+	fd.append('employeeId', employeeId);
+	fd.append('description', description);
+	var url = $url + 'kgi/management/create-new-issue';
+	if (issue != '') {
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: fd,
+			contentType: false,
+			processData: false,
+			success: function (data) {
+				if (data.status) {
+					// $("#solution-" + kgiIssueId).append(data.commentText);
+					// $("#answer-" + kgiIssueId).val('');
+					// $("#lastest-issue-" + data.kgiId).html(data.issue);
+					// $("#lastest-solution-" + data.kgiId).html(data.solution);
+					$("#issue").val('');
+					$("#description").val('');
+					$("#updated-issue").html(data.text);
+				}
+			}
+		});
+	} else { 
+		alert('Please fill in the headline!');
+	}
+}
 function answerKgiIssue(kgiIssueId) {
 	var answer = $("#answer-" + kgiIssueId).val();
+	//alert(answer);
 	var fd = new FormData();
 	var files = $("#attachKgiFileAnswer-" + kgiIssueId)[0].files;
 	if (files.length > 0) {
@@ -474,6 +514,10 @@ function answerKgiIssue(kgiIssueId) {
 				$("#answer-" + kgiIssueId).val('');
 				$("#lastest-issue-" + data.kgiId).html(data.issue);
 				$("#lastest-solution-" + data.kgiId).html(data.solution);
+				if (data.lastest != 0) { 
+					$("#kgi-solution-" + data.lastest).addClass('border-left-bottom-radius');
+				}
+				$("#fileName-" + kgiIssueId).html('');
 			}
 		}
 	});
@@ -659,40 +703,40 @@ function kpiInBranchForKpi(kgiId,branchId) {
 	    }
 	});
 }
-function saveSelectedKpi(kgiId) { 
+function saveSelectedKpi(kgiId) {
 	var selectedKpi = [];
-	$("input[name='kpi']:checked").each(function() {
+	$("input[name='kpi']:checked").each(function () {
 		selectedKpi.push($(this).val());
 	});
 	if (selectedKpi.length == 0) {
-	    var selectedKpi = '';
+		var selectedKpi = '';
 	}
 	var unCheck = [];
-	$("input[name='kpi']").each(function() {
-	    if (!$(this).prop("checked")) {
-		 unCheck.push($(this).val());
-	    }
+	$("input[name='kpi']").each(function () {
+		if (!$(this).prop("checked")) {
+			unCheck.push($(this).val());
+		}
 	});
 	if (unCheck.length == 0) {
-	    var unCheck = '';
+		var unCheck = '';
 	}
 	var url = $url + 'kgi/management/assign-kpi-to-kgi';
 	$.ajax({
-	    type: "POST",
-	    dataType: 'json',
-	    url: url,
-	    data: { kgiId: kgiId, selectedKpi: selectedKpi,unCheck:unCheck },
-	    success: function (data) {
-		 if (data.status) {
-		     $('.alert-box').slideDown(500);
-		     setTimeout(function(){
-			  // Code to be executed after a delay
-			  $('.alert-box').fadeOut(300);
-			}, 3000); 
-		 }
-	    }
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { kgiId: kgiId, selectedKpi: selectedKpi, unCheck: unCheck },
+		success: function (data) {
+			if (data.status) {
+				$('.alert-box').slideDown(500);
+				setTimeout(function () {
+					// Code to be executed after a delay
+					$('.alert-box').fadeOut(300);
+				}, 3000);
+			}
+		}
 	});
-   }
+}
 function assignKpiTokgi(kpiId, kgiId) { 
 	var url = $url + 'kgi/management/assign-kpi-to-kgi';
 	if ($("#kpi-branch-" + kpiId).prop("checked") == true) {
@@ -803,5 +847,179 @@ function setSameKgiTeamRemark(teamId, kgiId) {
 	});
 	
 }
-  
+function prepareKgiNextTarget(kgiHistoryId) {
+	$("#copy").modal('show');
+	$("#kgiHistoryId").val(kgiHistoryId);
+}
+function prepareKgiTeamNextTarget(kgiTeamHistoryId) {
+	$("#copy").modal('show');
+	$("#kgiTeamHistoryId").val(kgiTeamHistoryId);
+}
+function prepareKgiEmployeeNextTarget(kgiEmployeeHistoryId) {
+	$("#copy").modal('show');
+	$("#kgiEmployeeHistoryId").val(kgiEmployeeHistoryId);
+}
+   function kgiNextTarget() { 
+	var kgiHistoryId = $("#kgiHistoryId").val();
+	var url = $url + 'kgi/management/next-kgi-history';
+	$.ajax({
+	    type: "POST",
+	    dataType: 'json',
+	    url: url,
+	    data: {kgiHistoryId:kgiHistoryId},
+	    success: function (data) {
+		 
+	    }
+	});
+   }
+   function kgiTeamNextTarget() {
+	var kgiTeamHistoryId = $("#kgiTeamHistoryId").val();
+	var url = $url + 'kgi/kgi-team/next-kgi-team-history';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { kgiTeamHistoryId: kgiTeamHistoryId },
+		success: function (data) {
+		 
+		}
+	});
+}
+function kgiEmployeeNextTarget() {
+	var kgiEmployeeHistoryId = $("#kgiEmployeeHistoryId").val();
+	var url = $url + 'kgi/kgi-personal/next-kgi-employee-history';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { kgiEmployeeHistoryId: kgiEmployeeHistoryId },
+		success: function (data) {
+		 
+		}
+	});
+}
+function viewTabKgi(tabId) { 
+	var currentTabId = $("#currentTab").val();
+	//alert(currentTabId + '==' + tabId);
+	var kgiId = $("#kgiId").val();
+	//alert(kgiId);
+	$("#tab-" + currentTabId).removeClass("view-tab-active");
+	$("#tab-" + currentTabId).addClass("view-tab");
+	$("#tab-" + tabId).removeClass("view-tab");
+	$("#tab-" + tabId).addClass("view-tab-active");
+	$("#tab-" + currentTabId + "-blue").hide();
+	$("#tab-" + currentTabId + "-black").show();
+	$("#tab-" + tabId + "-blue").show();
+	$("#tab-" + tabId + "-black").hide();
+	$("#currentTab").val(tabId);
+	if (tabId == 1) {
+		var url = $url + 'kgi/view/kgi-team-employee';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { kgiId: kgiId },
+			success: function (data) {kgiId
+				$("#show-content").html(data.kgiEmployeeTeam);
+			}
+		});
+	}
+	if (tabId == 2) {
+		var url = $url + 'kgi/view/all-kgi-history';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { kgiId: kgiId },
+			success: function (data) {
+				$("#show-content").html(data.monthlyDetailHistoryText);
+			}
+		});
+	}
+	if (tabId == 3) {
+		var url = $url + 'kgi/view/kgi-issue';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { kgiId: kgiId },
+			success: function (data) {
+				$("#show-content").html(data.kgiIssue);
+			}
+		});
+	}
+	if (tabId == 4) {
+		var url = $url + 'kgi/view/kgi-chart';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { kgiId: kgiId },
+			success: function (data) {
+				$("#show-content").html(data.kgiChart);
+			}
+		});
+	}
+	if (tabId == 5) { 
+		var url = $url + 'kgi/view/kgi-kpi';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { kgiId: kgiId },
+			success: function (data) {
+				$("#show-content").html(data.kpi);
+			}
+		});
+	}
+}
    
+function showAnswer(kgiIssueId, show) { 
+	if (show == 1) {
+		$("#answer-site-" + kgiIssueId).show();
+		$("#reply-" +  kgiIssueId).hide();
+		$("#cancel-" + kgiIssueId).show();
+	} else { 
+		$("#answer-site-" + kgiIssueId).hide();
+		$("#reply-" +  kgiIssueId).show();
+		$("#cancel-" + kgiIssueId).hide();
+	}
+}
+function showTeamKpi(kpiId,type) { 
+	if (type == 1) {
+		$("#kpi-team-" + kpiId).show();
+		$("#hide-" + kpiId).show();
+		$("#show-" + kpiId).hide();
+		var url = $url + 'kgi/view/kpi-team';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { kpiId: kpiId },
+			success: function (data) {
+				$("#kpi-team-"+kpiId).html(data.kpiTeam);
+			}
+		});
+	} else { 
+		$("#kpi-team-" + kpiId).hide();
+		$("#hide-" + kpiId).hide();
+		$("#show-" + kpiId).show();
+	}
+}
+
+function showEditRelateKpi(type,kgiId) {
+	if (type == 1) {
+		$("#editRelateKpi").hide();
+		$("#saveRelateKpi").show();
+		$('input[id="check-relate-kpi"]').each(function () {
+				$(this).show();
+		});
+	} else { 
+		$("#editRelateKpi").show();
+		$("#saveRelateKpi").hide();
+		$('input[id="check-relate-kpi"]').each(function () {
+			$(this).hide();
+		});
+		saveSelectedKpi(kgiId)
+	}
+ }

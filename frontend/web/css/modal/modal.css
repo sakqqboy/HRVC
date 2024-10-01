@@ -43,30 +43,28 @@
     color: #000000;
     font-weight: 500;
 }
+
 .card-dashed-gray {
-    border-style: dashed;
     border-radius: 5px;
     color: rgb(28, 28, 28);
-    margin-top: 20px;
     padding-left: 10px;
     padding-top: 10px;
-    font-weight: 500;
-    border-color: lightgray;
+    font-weight: 400;
+    border: lightgray 1px dashed;
 }
-.comment-box{
+
+.comment-box {
     border-radius: 5px;
-    margin-top: 20px;
-    padding-left: 10px;
-    padding-top: 10px;
     color: #000000;
 }
+
 .image-hashed {
     width: 30px;
 }
 
 .image-circle1 {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 100%;
 }
 
@@ -96,18 +94,20 @@
     padding-top: -20px;
 }
 
-.li-name {
-    font-size: 16px;
+.poster-name {
+    font-size: 12px;
     color: #000000;
-    font-weight: 600;
-    /* padding-left: 15px; */
+    font-weight: 400;
+    letter-spacing: 0.3px;
 }
-.border-left-dash{
-    border-left: 2px dashed rgb(212, 212, 212); 
+
+.border-left-dash {
+    border-left: 2px dashed rgb(212, 212, 212);
     margin-left: -22px;
     margin-top: -10px;
     padding-left: 35px;
 }
+
 .style-circle-li {
     /* border-left: 2px dashed rgb(212, 212, 212); */
     /* min-height: 80px; */
@@ -131,8 +131,8 @@
 }
 
 .pdf-down {
-    width: 30px;
-    height: 30px;
+    width: 17px;
+    height: 17px;
 }
 
 .badge-pdf0 {
@@ -419,9 +419,9 @@
 }
 
 .image-AssignMembers {
-    width: 40px;
-    height: 40px;
-    border-radius: 30%;
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
 }
 
 .Assign-solid {

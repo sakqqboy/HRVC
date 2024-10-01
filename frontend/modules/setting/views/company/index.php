@@ -5,7 +5,7 @@ use common\models\ModelMaster;
 $this->title = 'company';
 ?>
 
-<div class="col-12" style="margin-top: 90px;">
+<div class="col-12">
 	<div class="col-12 company-table">
 		Company
 	</div>

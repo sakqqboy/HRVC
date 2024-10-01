@@ -55,4 +55,13 @@ class EmployeeSalary extends \frontend\models\hrvc\master\EmployeeSalaryMaster
         }
         return $total;
     }
+    public static function EmployeeCurrentSalary($employeeId)
+    {
+        $salary = EmployeeSalary::find()->where(["employeeId" => $employeeId, "structureId" => 1, "status" => 1])->one();
+        if (isset($salary) && !empty($salary)) {
+            return $salary["value"];
+        } else {
+            return null;
+        }
+    }
 }

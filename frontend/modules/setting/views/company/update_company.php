@@ -14,7 +14,7 @@ $this->title = 'New Company';
 	'action' => Yii::$app->homeUrl . 'setting/company/save-update-company'
 
 ]); ?>
-<div class="col-12" style="margin-top: 60px;background-color:white;padding-bottom:20px;">
+<div class="col-12" style="background-color:white;padding-bottom:20px;">
 	<div class="col-12" style="height: 180px;background-color:gray;">
 		<div class="col-12" id="imagePreviewBanner" style="height: 180px;background-color:gray;">
 			<?php

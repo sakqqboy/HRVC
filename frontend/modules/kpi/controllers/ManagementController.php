@@ -24,6 +24,7 @@ use frontend\models\hrvc\KpiTeam;
 use frontend\models\hrvc\KpiTeamHistory;
 use frontend\models\hrvc\Team;
 use frontend\models\hrvc\Title;
+use frontend\models\hrvc\Unit;
 use frontend\models\hrvc\User;
 use frontend\models\hrvc\UserRole;
 use Yii;
@@ -170,6 +171,7 @@ class ManagementController extends Controller
         $months = ModelMaster::monthFull(1);
         $isManager = UserRole::isManager();
         //throw new exception(print_r($kpis, true));
+        //throw new exception(print_r($kpis, true));
         return $this->render('kpi_grid', [
             "units" => $units,
             "companies" => $companies,
@@ -190,6 +192,7 @@ class ManagementController extends Controller
             $kpi->unitId = $_POST["unit"];
             // $kpi->periodDate = $_POST["periodDate"];
             $kpi->fromDate = $_POST["fromDate"];
+            $kpi->targetAmount = $_POST["targetAmount"];
             $kpi->toDate = $_POST["toDate"];
             $kpi->targetAmount = $_POST["targetAmount"];
             $kpi->kpiDetail = $_POST["detail"];
@@ -200,7 +203,7 @@ class ManagementController extends Controller
             $kpi->status = $_POST["status"];
             $kpi->month = $_POST["month"];
             $kpi->year = $_POST["year"];
-            $kpi->result = str_replace(",", "", $result);
+            //$kpi->result = str_replace(",", "", $result);
             $kpi->createrId = Yii::$app->user->id;
             $kpi->createDateTime = new Expression('NOW()');
             $kpi->updateDateTime = new Expression('NOW()');
@@ -220,7 +223,7 @@ class ManagementController extends Controller
                 $kpiHistory->status = $_POST["status"];
                 $kpiHistory->month = $_POST["month"];
                 $kpiHistory->year = $_POST["year"];
-                $kpiHistory->result = str_replace(",", "", $result);
+                //$kpiHistory->result = str_replace(",", "", $result);
                 $kpiHistory->createrId = Yii::$app->user->id;
                 $kpiHistory->createDateTime = new Expression('NOW()');
                 $kpiHistory->updateDateTime = new Expression('NOW()');
@@ -488,6 +491,7 @@ class ManagementController extends Controller
                 $kpiHistory->code = $_POST["code"];
                 $kpiHistory->status = $_POST["status"];
                 $kpiHistory->month = $_POST["month"];
+                $kpiHistory->year = $_POST["year"];
                 $kpiHistory->result = str_replace(",", "", $result);
                 $kpiHistory->createrId = Yii::$app->user->id;
                 $kpiHistory->createDateTime = new Expression('NOW()');
@@ -596,35 +600,48 @@ class ManagementController extends Controller
     }
     public function actionCreateNewIssue()
     {
-        if (isset($_POST["newIssue"]) && trim($_POST["newIssue"]) != "") {
-            $kpiIssue = new KpiIssue();
-
-            $kpiIssue->issue = $_POST["newIssue"];
-            $kpiIssue->kpiId = $_POST["kpiId"];
-            $kpiIssue->employeeId = $_POST["employeeId"];
-            $kpiIssue->status = 1;
-            $kpiIssue->createDateTime = new Expression('NOW()');
-            $kpiIssue->updateDateTime = new Expression('NOW()');
-            $fileObj = UploadedFile::getInstanceByName("attachkpiFile");
-            if (isset($fileObj) && !empty($fileObj)) {
-                //throw new Exception("asdfad");
-                $path = Path::getHost() . 'file/kpi/';
-                if (!file_exists($path)) {
-                    mkdir($path, 0777, true);
-                }
-                $file = $fileObj->name;
-                $filenameArray = explode('.', $file);
-                $countArrayFile = count($filenameArray);
-                $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
-                $pathSave = $path . $fileName;
-                $fileObj->saveAs($pathSave);
-                $kpiIssue->file = 'file/kpi/' . $fileName;
+        $kpiIssue = new KpiIssue();
+        $kpiIssue->issue = $_POST["issue"];
+        $kpiIssue->description = $_POST["description"];
+        $kpiIssue->kpiId = $_POST["kpiId"];
+        $kpiIssue->employeeId = $_POST["employeeId"];
+        $kpiIssue->status = 1;
+        $kpiIssue->createDateTime = new Expression('NOW()');
+        $kpiIssue->updateDateTime = new Expression('NOW()');
+        $file = '';
+        $fileName = '';
+        $res = [];
+        if (isset($_FILES['file']['name'])) {
+            $fileObj = UploadedFile::getInstanceByName("file");
+            $filename = $_FILES['file']['name'];
+            $path = Path::getHost() . 'file/kpi/';
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
             }
-            //throw new Exception(print_r(Yii::$app->request->post(), true));
-            if ($kpiIssue->save(false)) {
-                return $this->redirect('grid');
-            }
+            $filenameArray = explode('.', $filename);
+            $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[1];
+            $pathSave = $path . $fileName;
+            $fileObj->saveAs($pathSave);
+            $kpiIssue->file = 'file/kpi/' . $fileName;
+            $file = 'file/kpi/' . $fileName;
         }
+        if ($kpiIssue->save(false)) {
+            $res["status"] = true;
+            $api = curl_init();
+            curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+            curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-issue?kpiId=' . $_POST["kpiId"]);
+            $kpiIssue = curl_exec($api);
+            $kpiIssue = json_decode($kpiIssue, true);
+
+            curl_close($api);
+            $res["text"] = $this->renderAjax("issue_history", [
+                "kpiIssue" => $kpiIssue,
+                "kpiId" => $_POST["kpiId"],
+                "employeeId" => $_POST["employeeId"]
+            ]);
+        }
+        return json_encode($res);
     }
     public function actionSaveKpiAnswer()
     {
@@ -635,6 +652,16 @@ class ManagementController extends Controller
         $res["status"] = false;
         $file = '';
         $fileName = '';
+        $lastestKpiIssue = KpiSolution::find()
+            ->where(["kpiIssueId" => $kpiIssueId])
+            ->orderBy('kpiSolutionId DESC')
+            ->asArray()
+            ->one();
+        if (isset($lastestKpiIssue)) {
+            $res["lastest"] = $lastestKpiIssue["kpiSolutionId"];
+        } else {
+            $res["lastest"] = 0;
+        }
         if (isset($_FILES['file']['name'])) {
             $fileObj = UploadedFile::getInstanceByName("file");
             $filename = $_FILES['file']['name'];
@@ -657,28 +684,34 @@ class ManagementController extends Controller
         $answer->status = 1;
         $answer->createDateTime = new Expression('NOW()');
         $answer->updateDateTime = new Expression('NOW()');
-        $createDateTime = date('Y-m-d');
+        $createDateTime = date('Y-m-d H:i:s');
         if ($answer->save(false)) {
+            $kpiSolutionId = Yii::$app->db->lastInsertID;
             $kpiIssue = KpiIssue::find()
                 ->select('kpiId,issue')
                 ->where(["kpiIssueId" => $kpiIssueId])
                 ->one();
             $kpiIssue->updateDateTime = new Expression('NOW()');
             $kpiId = $kpiIssue->kpiId;
+            $kpiIssue->save(false);
+
             $res["commentText"] = $this->renderAjax('comment', [
                 "name" => User::userHeaderName(),
                 "image" => User::userHeaderImage(),
                 "answer" => $solution,
-                "createDateTime" => ModelMaster::engDate($createDateTime, 2),
+                "createDateTime" => ModelMaster::timeMonthDateYear($createDateTime),
                 "kpiIssueId" => $kpiIssueId,
                 "file" => $file,
-                "fileName" => $fileName
+                "fileName" => $fileName,
+                "lastestKpiSolutionId" => $res["lastest"],
+                "kpiSolutionId" => $kpiSolutionId
             ]);
+            $res["status"] = true;
             $res["issue"] = $kpiIssue["issue"];
             $res["solution"] = $solution;
             $res["kpiId"] = $kpiId;
-            $res["status"] = true;
         }
+
         return json_encode($res);
     }
     public function actionSearchKpi()
@@ -1746,5 +1779,45 @@ class ManagementController extends Controller
                 Kpi::updateAll(["status" => 99], ["companyId" => $company["companyId"]]);
             endforeach;
         }
+    }
+    public function actionNextKpiHistory()
+    {
+        $kpiHistoryId = $_POST["kpiHistoryId"];
+        $currentHistory = KpiHistory::find()->where(["kpiHistoryId" => $kpiHistoryId])->asArray()->one();
+        $unit = Unit::find()->where(["unitId" => $currentHistory["unitId"]])->asArray()->one();
+        if ($currentHistory["month"] != "" && $currentHistory["year"] != "") {
+            $nextTargetMonthYear = ModelMaster::nextTargetMonthYear($unit["unitName"], $currentHistory["month"], $currentHistory["year"]);
+            $nextMonth = $nextTargetMonthYear["nextMonth"];
+            $nextYear = $nextTargetMonthYear["nextYear"];
+        } else {
+            $nextMonth = null;
+            $nextYear = null;
+        }
+        $kpiHistory = new KpiHistory();
+        $kpiHistory->kpiId = $currentHistory["kpiId"];
+        $kpiHistory->createrId = Yii::$app->user->id;
+        $kpiHistory->titleProcess = 'New target';
+        $kpiHistory->nextCheckDate = null;
+        $kpiHistory->amountType = $currentHistory["amountType"];
+        $kpiHistory->code = $currentHistory["code"];
+        $kpiHistory->status = 1;
+        $kpiHistory->quantRatio = $currentHistory["quantRatio"];
+        $kpiHistory->targetAmount = $currentHistory["targetAmount"];
+        $kpiHistory->result = 0;
+        $kpiHistory->priority = $currentHistory["priority"];
+        $kpiHistory->unitId =  $currentHistory["unitId"];
+        $kpiHistory->month = $nextMonth;
+        $kpiHistory->year = $nextYear;
+        $kpiHistory->createDateTime = new Expression('NOW()');
+        $kpiHistory->updateDateTime = new Expression('NOW()');
+        if ($kpiHistory->save(false)) {
+            $kpi = Kpi::find()->where(["kpiId" => $currentHistory["kpiId"]])->one();
+            $kpi->status = 1;
+            $kpi->month = $nextMonth;
+            $kpi->year = $nextYear;
+            $kpi->updateDateTime = new Expression('NOW()');
+            $kpi->save(false);
+        }
+        return $this->redirect(Yii::$app->homeUrl . 'kpi/management/grid');
     }
 }
