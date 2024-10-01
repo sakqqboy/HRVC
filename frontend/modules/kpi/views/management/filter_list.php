@@ -1,8 +1,11 @@
-<div class="col-12">
-	<div class="input-group">
-		<span class="input-group-text" style="cursor: pointer;" onclick="javascript:kpiFilter()">
-			<i class="fa fa-filter" aria-hidden="true"></i></span>
-		<select class="form-select font-size-13" id="company-filter">
+<div class="row">
+	<div class="col-1 pr-10 text-end">
+		<span>
+			<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterPlus.png" class="pim-search-icon" style="cursor: pointer;" onclick="javascript:kpiFilter()">
+		</span>
+	</div>
+	<div class="col-3 pr-5 pl-1">
+		<select class="form-select font-size-12 select-pim" id="company-filter">
 			<option value="">Company</option>
 			<?php
 			if (isset($companies) && count($companies) > 0) {
@@ -13,13 +16,17 @@
 			}
 			?>
 		</select>
-		<select class="form-select font-size-13" id="branch-filter" disabled>
+	</div>
+	<div class="col-2 pr-5 pl-1">
+		<select class="form-select font-size-12 select-pim" id="branch-filter" disabled>
 			<option value="">Branch</option>
 		</select>
-		<select class="form-select font-size-13" id="team-filter" disabled>
+	</div>
+	<!-- <select class="form-select font-size-13" id="team-filter" disabled>
 			<option value="">Team</option>
-		</select>
-		<select class="form-select font-size-13" id="month-filter">
+		</select> -->
+	<div class="col-2 pr-5 pl-1">
+		<select class="form-select font-size-12  select-pim" id="month-filter">
 			<option value="">Month</option>
 			<?php
 			if (isset($months) && count($months) > 0) {
@@ -30,7 +37,9 @@
 			}
 			?>
 		</select>
-		<select class="form-select font-size-13" id="year-filter">
+	</div>
+	<div class="col-2 pr-5 pl-1">
+		<select class="form-select font-size-12 select-pim" id="year-filter">
 
 			<option value="">Year</option>
 			<?php
@@ -45,10 +54,13 @@
 			}
 			?>
 		</select>
-		<select class="form-select font-size-13" id="status-filter">
+	</div>
+	<div class="col-2 pr-1 pl-1">
+		<select class="font-size-12 select-pim form-select" id="status-filter">
 			<option value="">Status</option>
 			<option value="1">Active</option>
 			<option value="2">Finished</option>
 		</select>
 	</div>
+	<!-- </div> -->
 </div>

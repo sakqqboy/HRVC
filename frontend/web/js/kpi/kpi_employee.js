@@ -44,3 +44,23 @@ function kpiFilterForEmployee() {
 		}
 	});
 }
+function assignKpiToEmployeeInTeam(teamId,kpiId) { 
+	var url = $url + 'kpi/assign/employee-in-team-target';
+	if ($("#team-" + teamId).prop("checked") == true) {
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { teamId: teamId, kpiId: kpiId },
+			success: function (data) {
+				if (data.status) {
+					$("#team-employee-target").append(data.textHtml);
+				}
+			}
+		});
+	} else { 
+	
+		$("#team-employee-" + teamId).remove();
+		$("#employee-in-team-"+teamId).remove();
+	}
+}

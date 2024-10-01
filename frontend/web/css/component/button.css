@@ -15,8 +15,112 @@
     overflow: hidden;
 }
 
+.btn-bg-white-xs {
+    border: lightgray solid thin;
+    text-align: center;
+    color: #000;
+    font-size: 13px;
+    height: 22px;
+    min-width: 22px;
+    border-radius: 3px;
+    padding-left: 3px;
+    padding-top: 0px;
+    padding-right: 3px;
+    background-color: white;
+}
+
+.btn-bg-red-xs {
+    border: #BB2020 solid thin;
+    text-align: center;
+    color: #BB2020;
+    font-size: 13px;
+    height: 22px;
+    min-width: 22px;
+    border-radius: 3px;
+    padding-left: 3px;
+    padding-top: 0px;
+    padding-right: 3px;
+    background-color: #FFE3E3;
+}
+
+.btn-bg-red-xs:hover {
+    border: gray solid thin;
+}
+
+.btn-bg-white-xs:hover {
+    border: gray solid thin;
+    background-color: white;
+}
+
 .btn-xs {
-    width: 15px;
-    height: 25px;
+    width: 22px;
+    height: 22px;
     font-size: 12px;
+    /* padding: 0.5% 1% 2% 1%; */
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 1px;
+    text-align: center;
+    margin-left: 5px;
+}
+
+.pim-btn-over {
+    font-size: 11px;
+    color: white;
+    text-align: center;
+    background-color: #E05757;
+    padding: 2px 3px 2px 3px;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.pim-btn-inprogress {
+    font-size: 10px;
+    color: white;
+    text-align: center;
+    background-color: #2F42ED;
+    padding: 2px 3px 2px 3px;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.pim-btn-complete {
+    font-size: 11px;
+    color: white;
+    text-align: center;
+    background-color: #2D7F06;
+    padding: 2px 3px 2px 3px;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.pim-btn-disable {
+    font-size: 11px;
+    color: black;
+    text-align: center;
+    background-color: #C0C0C0;
+    padding: 2px 3px 2px 3px;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-create {
+    background-color: #2580D3;
+    color: white;
+    border-radius: 3px;
+    padding: 3px 3px 3px 3px;
+    border: 0;
+
+}
+
+.btn-reply {
+    background-color: #2580D3;
+    color: white;
+    border-radius: 3px;
+    padding: 4px 5px 4px 5px;
+    border: 0;
 }

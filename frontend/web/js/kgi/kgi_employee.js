@@ -44,3 +44,41 @@ function kgiFilterForEmployee() {
 		}
 	});
 }
+function assignKgiToEmployeeInTeam(teamId,kgiId) { 
+	var url = $url + 'kgi/assign/employee-in-team-target';
+	if ($("#team-" + teamId).prop("checked") == true) {
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { teamId: teamId, kgiId: kgiId },
+			success: function (data) {
+				if (data.status) {
+					$("#team-employee-target").append(data.textHtml);
+				}
+			}
+		});
+	} else { 
+	
+		$("#team-employee-" + teamId).remove();
+		$("#employee-in-team-"+teamId).remove();
+	}
+}
+function calculateEmployeeTargetValue(teamId) { 
+	var total = 0;
+	$('input[id="employee-target-' + teamId + '"]').each(function () {
+		let currentValue = $(this).val().replace(',', '');
+		total=total+ parseFloat(currentValue);
+	});
+	$("#total-team-target-" + teamId).html(total.toLocaleString());
+}
+function showEmployeeTeamTarget(teamId) { 
+	$("#employee-in-team-" + teamId).show();
+	$("#show-" + teamId).hide();
+	$("#hide-" + teamId).show();
+}
+function hideEmployeeTeamTarget(teamId) { 
+	$("#employee-in-team-" + teamId).hide();
+	$("#show-" + teamId).show();
+	$("#hide-" + teamId).hide();
+}

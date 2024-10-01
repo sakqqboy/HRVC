@@ -11,6 +11,7 @@ use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Kpi;
 use frontend\models\hrvc\KpiEmployee;
 use frontend\models\hrvc\KpiEmployeeHistory;
+use frontend\models\hrvc\Unit;
 use frontend\models\hrvc\User;
 use frontend\models\hrvc\UserRole;
 use Yii;
@@ -461,5 +462,41 @@ class KpiPersonalController extends Controller
 			"employeeId" => $employeeId,
 			"employees" => $employees
 		]);
+	}
+	public function actionNextKpiEmployeeHistory()
+	{
+		$kpiEmployeeHistoryId = $_POST["kpiEmployeeHistoryId"];
+		$currentHistory = KpiEmployeeHistory::find()->where(["kpiEmployeeHistoryId" => $kpiEmployeeHistoryId])->asArray()->one();
+		$kpiTeam = KpiEmployee::find()->where(["kpiEmployeeId" => $currentHistory["kpiEmployeeId"]])->asArray()->one();
+		$kpi = Kpi::find()->where(["kpiId" => $kpiTeam["kpiId"]])->asArray()->one();
+		$unit = Unit::find()->where(["unitId" => $kpi["unitId"]])->asArray()->one();
+		if ($currentHistory["month"] != "" && $currentHistory["year"] != "") {
+			$nextTargetMonthYear = ModelMaster::nextTargetMonthYear($unit["unitName"], $currentHistory["month"], $currentHistory["year"]);
+			$nextMonth = $nextTargetMonthYear["nextMonth"];
+			$nextYear = $nextTargetMonthYear["nextYear"];
+		} else {
+			$nextMonth = null;
+			$nextYear = null;
+		}
+		$kpiEmployeeHistory = new KpiEmployeeHistory();
+		$kpiEmployeeHistory->kpiEmployeeId = $currentHistory["kpiEmployeeId"];
+		$kpiEmployeeHistory->detail = 'New target';
+		$kpiEmployeeHistory->nextCheckDate = null;
+		$kpiEmployeeHistory->status = 1;
+		$kpiEmployeeHistory->target = $currentHistory["target"];
+		$kpiEmployeeHistory->result = 0;
+		$kpiEmployeeHistory->month = $nextMonth;
+		$kpiEmployeeHistory->year = $nextYear;
+		$kpiEmployeeHistory->createDateTime = new Expression('NOW()');
+		$kpiEmployeeHistory->updateDateTime = new Expression('NOW()');
+		if ($kpiEmployeeHistory->save(false)) {
+			$kpiEmployee = KpiEmployee::find()->where(["kpiEmployeeId" => $currentHistory["kpiEmployeeId"]])->one();
+			$kpiEmployee->status = 1;
+			$kpiEmployee->month = $nextMonth;
+			$kpiEmployee->year = $nextYear;
+			$kpiEmployee->updateDateTime = new Expression('NOW()');
+			$kpiEmployee->save(false);
+		}
+		return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
 	}
 }

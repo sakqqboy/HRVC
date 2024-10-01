@@ -52,7 +52,7 @@ class KgiSolution extends \backend\models\hrvc\master\KgiSolutionMaster
                 $data[$solution["kgiSolutionId"]] = [
                     "name" => $employee["employeeFirstname"] . ' ' . $employee["employeeSurename"],
                     "image" => Employee::EmployeeDetail($solution["employeeId"])["picture"],
-                    "createDateTime" => ModelMaster::engDate($solution["createDateTime"], 2),
+                    "createDateTime" => ModelMaster::timeMonthDateYear($solution["createDateTime"]),
                     "solution" => $solution["solution"],
                     "file" => $solution["file"],
                 ];

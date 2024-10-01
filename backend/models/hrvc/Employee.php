@@ -87,7 +87,7 @@ class Employee extends \backend\models\hrvc\master\EmployeeMaster
             ->where(["employeeId" => $employeeId])
             ->asArray()
             ->one();
-        $img = "image/user.jpg";
+        $img = "image/user.png";
         if (isset($employee) && !empty($employee)) {
             if ($employee["picture"] != '') {
                 $img = $employee["picture"];
@@ -95,7 +95,7 @@ class Employee extends \backend\models\hrvc\master\EmployeeMaster
                 if ($employee["gender"] == 1) {
                     $img = "image/user.png";
                 } else {
-                    $img = "image/lady.jpg";
+                    $img = "image/lady.png";
                 }
             }
         }

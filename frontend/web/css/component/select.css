@@ -1,0 +1,13 @@
+.select-pim {
+	padding-top: 2px;
+	border-radius: 20px;
+	height: 25px;
+	font-family: "SF Pro Display";
+	font-weight: 300;
+	padding-left: 10px;
+	letter-spacing: 0.5px;
+}
+
+.select-pim.option {
+	font-weight: 300;
+}

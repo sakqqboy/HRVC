@@ -51,8 +51,8 @@
 							<div class="col-12" id="show-multi-department-update"></div>
 						</div>
 						<div class="col-12 mt-15">
-							<label for="input" class="form-label"><strong class="red">*</strong> Update Detail</label>
-							<input type="text" class="form-control" name="progressTitle" required>
+							<label for="input" class="form-label"> Update Detail</label>
+							<input type="text" class="form-control" name="progressTitle">
 						</div>
 						<div class="col-12 pt-10 mt-5">
 							<label for="input" class="form-label"><strong class="red">*</strong> Check Unit</label>

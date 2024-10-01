@@ -12,8 +12,8 @@
 }
 
 .width-ehsan-small {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
 }
 
@@ -31,8 +31,6 @@
         font-size: 16px;
     }
 
-    
-
 }
 
 @media(max-width: 768px) {
@@ -42,15 +40,15 @@
         font-size: 12px;
     }
 
-    
     .Googday {
         font-size: 10px;
     }
+
     .width-ehsan-small {
-        /* margin-left: 55%; */
         width: 30px;
         height: 30px;
     }
+
     .search-input2 {
         font-size: 12px;
     }

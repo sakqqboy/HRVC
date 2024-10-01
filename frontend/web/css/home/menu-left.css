@@ -1,0 +1,206 @@
+/* @font-face {
+    font-family: 'SF Pro Display', 'sans-serif';
+    src: url('C:/MAMP/htdocs/HRVC/frontend/web/fonts/sf-pro/SF-Pro.ttf');
+  } */
+@font-face {
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: 300;
+    src: url("https://raw.githubusercontent.com/blaisck/sfwin/master/SFPro/TrueType/SFProDisplay-Light.ttf");
+}
+
+@font-face {
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: 100;
+    src: url("https://raw.githubusercontent.com/blaisck/sfwin/master/SFPro/TrueType/SFProDisplay-Ultralight.ttf");
+}
+
+@font-face {
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: 200;
+    src: url("https://raw.githubusercontent.com/blaisck/sfwin/master/SFPro/TrueType/SFProDisplay-Thin.ttf");
+}
+
+
+.scroll-container {
+    overflow: auto;
+    /* Hides scrollbar */
+}
+
+.scroll-container::-webkit-scrollbar {
+    display: none;
+}
+
+
+.caret-left {
+    color: white;
+    font-size: 15px;
+    margin-left: 190px;
+    cursor: pointer;
+}
+
+.hrvc-logo {
+    width: 80%;
+}
+
+.text-under-logo {
+    letter-spacing: 1px;
+    font-size: 11px;
+    margin-top: 10px;
+    padding-left: 10px;
+    color: #ADBED6 !important;
+    font-weight: 300;
+}
+
+.hrvc-head-name {
+    color: #e1e2e4;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.no-underline {
+    text-decoration: none;
+    color: white;
+}
+
+.navbar-header {
+    padding-left: 10px;
+    padding-top: 20px;
+}
+
+.navbar-header a:hover {
+    background-color: rgb(220, 228, 229);
+    color: rgb(25, 116, 201);
+    border-radius: 3px;
+    font-weight: 600;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 6px;
+    padding-top: 6px;
+}
+
+.haeder-company {
+    color: #94989F;
+    margin-top: 20px;
+    text-transform: uppercase;
+}
+
+.haeder-kpi {
+    color: #94989F;
+    margin-top: 20px;
+}
+
+.haeder-Evalution {
+    color: #94989F;
+    margin-top: 20px;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.header-pim {
+    font-size: 14px;
+    background-color: rgb(249, 249, 249);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+}
+
+.box-bnt-home {
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+.btn-hrvc-home {
+    background-color: #043A5C;
+    color: white;
+    width: 100%;
+    font-size: 16px;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    letter-spacing: 1px;
+    text-align: center;
+    border-radius: 3px;
+}
+
+.btn-group-menu {
+    background-color: #202940;
+    color: white;
+    width: 100%;
+    font-size: 12px;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    letter-spacing: 0.5px;
+    text-align: center;
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
+.first-layer-manu {
+    padding-left: 20px;
+    padding-right: 0px;
+    margin-top: 10px;
+    font-weight: 200;
+    letter-spacing: 0.8px;
+    color: white;
+}
+
+.second-layer-menu {
+    padding-left: 47px;
+    padding-right: 15px;
+    margin-top: 8px;
+    font-weight: 200;
+    letter-spacing: 0.8px;
+    font-size: 12px;
+    color: white;
+}
+
+.third-layer-menu {
+    padding-left: 25px;
+    padding-right: 0px;
+    margin-top: 8px;
+    font-weight: 200;
+    letter-spacing: 0.8px;
+    font-size: 11px;
+    color: white;
+}
+
+.first-layer-icon {
+    height: 15px;
+    width: 15px;
+    margin-right: 2px;
+}
+
+.first-layer-icon2 {
+    height: 11px;
+    width: 18px;
+    margin-right: 2px;
+}
+
+.home-icon {
+    height: 20px;
+    width: 20px;
+}
+
+.home-icon2 {
+    height: 12px;
+    width: 20px;
+}
+
+@media(max-width: 768px) {
+    .width-hrvc {
+        width: 100%;
+    }
+
+    .header-top {
+        width: 100%;
+    }
+}
+
+@media(max-width:992px) {
+    .header-top {
+        width: 100%;
+    }
+}

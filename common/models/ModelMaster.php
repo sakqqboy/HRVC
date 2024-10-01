@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use Exception;
 use Yii;
 
 class ModelMaster extends \yii\db\ActiveRecord
@@ -65,15 +66,114 @@ class ModelMaster extends \yii\db\ActiveRecord
             'Nov',
             'Dec',
         ];
-
-        $d = explode('-', $date);
-        if (count($d) >= 3) {
-            $year = $d[0];
-            $month = ($type == self::DATE_THAI_TYPE_FULL) ? $monthFullEng[(int) $d[1]] : $monthShortEng[(int) $d[1]];
-            $date = (int) $d[2];
-            return $date . ' ' . $month . ' ' . $year;
+        if ($date != '') {
+            $d = explode('-', $date);
+            if (count($d) >= 3) {
+                $year = $d[0];
+                $month = ($type == self::DATE_THAI_TYPE_FULL) ? $monthFullEng[(int) $d[1]] : $monthShortEng[(int) $d[1]];
+                $date = (int) $d[2];
+                return $date . ' ' . $month . ' ' . $year;
+            } else {
+                return null;
+            }
         } else {
             return null;
+        }
+    }
+    public static function monthDateYearTime($dateTime)
+    {
+        $monthFullEng = [
+            1 => 'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December',
+        ];
+        $textTime = '';
+        if ($dateTime != '') {
+            $dateTimeArr = explode(' ', $dateTime);
+            if (count($dateTimeArr) > 0) {
+                $fullDate = $dateTimeArr[0];
+                if (count($dateTimeArr) > 1) {
+                    $fullTime = $dateTimeArr[1];
+                    $timeArr = explode(':', $fullTime);
+                    if ((int)$timeArr[0] >= 12) {
+                        $textTime = 'PM';
+                        if ((int)$timeArr[0] == 12) {
+                            $textTime = '12:' . $timeArr[1] . ' PM';
+                        } else {
+                            $time = (int)$timeArr[0] - 12;
+                            $textTime = $time . ':' . $timeArr[1] . ' PM';
+                        }
+                    } else {
+                        $textTime = (int)$timeArr[0] . ':' . $timeArr[1] . ' AM';
+                    }
+                }
+                //throw new Exception($fullDate);
+                $dateArr = explode('-', $fullDate);
+                $year = $dateArr[0];
+                $month = $monthFullEng[(int)$dateArr[1]];
+                $date = (int)$dateArr[2];
+                $text = $month . ' ' . $date . ', ' . $year . ' ' . $textTime;
+                return $text;
+            }
+        } else {
+            return '';
+        }
+    }
+    public static function timeMonthDateYear($dateTime)
+    {
+        $monthFullEng = [
+            1 => 'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December',
+        ];
+        $textTime = '';
+        if ($dateTime != '') {
+            $dateTimeArr = explode(' ', $dateTime);
+            if (count($dateTimeArr) > 0) {
+                $fullDate = $dateTimeArr[0];
+                if (count($dateTimeArr) > 1) {
+                    $fullTime = $dateTimeArr[1];
+                    $timeArr = explode(':', $fullTime);
+                    if ((int)$timeArr[0] >= 12) {
+                        $textTime = 'PM';
+                        if ((int)$timeArr[0] == 12) {
+                            $textTime = '12:' . $timeArr[1] . ' PM';
+                        } else {
+                            $time = (int)$timeArr[0] - 12;
+                            $textTime = $time . ':' . $timeArr[1] . ' PM';
+                        }
+                    } else {
+                        $textTime = (int)$timeArr[0] . ':' . $timeArr[1] . ' AM';
+                    }
+                }
+                //throw new Exception($fullDate);
+                $dateArr = explode('-', $fullDate);
+                $year = $dateArr[0];
+                $month = $monthFullEng[(int)$dateArr[1]];
+                $date = (int)$dateArr[2];
+                $text = $textTime . ', ' . $month . ' ' . $date . ', ' . $year;
+                return $text;
+            }
+        } else {
+            return '';
         }
     }
     public static function timeText($time)
@@ -434,11 +534,15 @@ class ModelMaster extends \yii\db\ActiveRecord
 
         $today = date('Y-m-d');
         $now = strtotime($today);
-        $due = strtotime($dueDate);
-        if ($now > $due) {
-            return 1;
+        if ($dueDate != '') {
+            $due = strtotime($dueDate);
+            if ($now > $due) {
+                return 1;
+            } else {
+                return 0;
+            }
         } else {
-            return 0;
+            return 2;
         }
     }
     public static function dateFullFormat($date)
@@ -477,5 +581,45 @@ class ModelMaster extends \yii\db\ActiveRecord
         } else {
             return 0;
         }
+    }
+    public static function nextTargetMonthYear($unitName, $month, $year)
+    {
+        if ($unitName == "Monthly") {
+            $nextMonth = (int)$month + 1;
+            if ($nextMonth == 13) {
+                $nextMonth = 1;
+                $nextYear = $year + 1;
+            } else {
+                $nextYear = $year;
+            }
+        }
+        if ($unitName == "Yearly") {
+            $nextYear = $year + 1;
+            $nextMonth = $month;
+        }
+        if ($unitName == "Half year") {
+            $nextMonth = (int)$month + 6;
+            if ($nextMonth > 12) {
+                $nextYear = $year + 1;
+                $nextMonth = $nextMonth - 12;
+            } else {
+                $nextYear = $year;
+            }
+        }
+        if ($unitName == "Quarterly") {
+            $nextMonth = (int)$month + 3;
+            if ($nextMonth > 12) {
+                $nextYear = $year + 1;
+                $nextMonth = $nextMonth - 12;
+            } else {
+                $nextYear = $year;
+            }
+        }
+        if ($nextMonth < 10) {
+            $nextMonth = '0' . $nextMonth;
+        }
+        $data["nextMonth"] = $nextMonth;
+        $data["nextYear"] = $nextYear;
+        return $data;
     }
 }

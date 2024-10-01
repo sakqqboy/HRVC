@@ -93,7 +93,7 @@ $form = ActiveForm::begin([
 					</select>
 				</div>
 				<div class="col-6 mt-10">
-					<label for="exampleFormControl" class="form-label font-size-13">Next Check Date</label>
+					<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Next Check Date</label>
 					<?php
 					if ($kpiEmployeeDetail['nextCheckDate'] != null) {
 						$nextCheckDateArr = explode(' ', $kpiEmployeeDetail["nextCheckDate"]);

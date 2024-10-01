@@ -58,9 +58,39 @@ class KgiEmployee extends \backend\models\hrvc\master\KgiEmployeeMaster
                     if ($ke["gender"] == 1) {
                         $employee[$ke["employeeId"]] = 'image/user.png';
                     } else {
+
                         $employee[$ke["employeeId"]] = 'image/lady.jpg';
                     }
                 }
+            endforeach;
+        }
+        return $employee;
+    }
+    public static function kgiEmployeeDetail($kgiId)
+    {
+        $kgiEmployee = KgiEmployee::find()
+            ->select('e.picture,e.employeeId,e.gender,t.titleName,e.employeeFirstname,e.employeeSurename')
+            ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
+            ->JOIN("LEFT JOIN", "title t", "t.titleId=e.titleId")
+            ->where(["kgi_employee.status" => [1, 2, 4], "kgi_employee.kgiId" => $kgiId, "e.status" => 1])
+            ->andWhere("kgi_employee.employeeId is not null")
+            ->asArray()
+            ->all();
+        $employee = [];
+        if (isset($kgiEmployee) && count($kgiEmployee) > 0) {
+            foreach ($kgiEmployee as $ke) :
+                if ($ke["picture"] != "") {
+                    $employee[$ke["employeeId"]]["picture"] = $ke["picture"];
+                } else {
+                    if ($ke["gender"] == 1) {
+                        $employee[$ke["employeeId"]]["picture"] = 'image/user.png';
+                    } else {
+
+                        $employee[$ke["employeeId"]]["picture"] = 'image/lady.jpg';
+                    }
+                }
+                $employee[$ke["employeeId"]]["name"] = $ke["employeeFirstname"] . ' ' . $ke["employeeSurename"];
+                $employee[$ke["employeeId"]]["title"] = $ke["titleName"];
             endforeach;
         }
         return $employee;
@@ -175,5 +205,49 @@ class KgiEmployee extends \backend\models\hrvc\master\KgiEmployeeMaster
             $percent = 0;
         }
         return $percent;
+    }
+    public static function countKgiFromTeam($kgiId, $teamId)
+    {
+        $kgiEmployee = KgiEmployee::find()
+            ->select('e.picture,e.employeeId,e.gender')
+            ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
+            ->where("kgi_employee.status!=99 and e.status!=99")
+            ->andWhere([
+                "kgi_employee.kgiId" => $kgiId,
+                "e.teamId" => $teamId
+            ])
+            ->asArray()
+            ->all();
+        $employee = [];
+        if (isset($kgiEmployee) && count($kgiEmployee) > 0) {
+            foreach ($kgiEmployee as $ke) :
+                if ($ke["picture"] != "") {
+                    $employee[$ke["employeeId"]] = $ke["picture"];
+                } else {
+                    if ($ke["gender"] == 1) {
+                        $employee[$ke["employeeId"]] = 'image/user.png';
+                    } else {
+
+                        $employee[$ke["employeeId"]] = 'image/lady.jpg';
+                    }
+                }
+            endforeach;
+        }
+        return $employee;
+    }
+    public static function totolEmployeeInTeam($kgiId, $teamId)
+    {
+        $kgiEmployee = KgiEmployee::find()
+            ->select('e.employeeId')
+            ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
+            ->JOIN("LEFT JOIN", "team t", "t.teamId=e.teamId")
+            ->where("kgi_employee.status!=99 and e.status!=99")
+            ->andWhere([
+                "kgi_employee.kgiId" => $kgiId,
+                "e.teamId" => $teamId
+            ])
+            ->asArray()
+            ->all();
+        return count($kgiEmployee);
     }
 }

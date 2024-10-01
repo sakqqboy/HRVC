@@ -58,6 +58,35 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
         }
         return $employee;
     }
+    public static function kpiEmployeeDetail($kpiId)
+    {
+        $kpiEmployee = KpiEmployee::find()
+            ->select('e.picture,e.employeeId,e.gender,t.titleName,e.employeeFirstname,e.employeeSurename')
+            ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
+            ->JOIN("LEFT JOIN", "title t", "t.titleId=e.titleId")
+            ->where(["kpi_employee.status" => [1, 2, 4], "kpi_employee.kpiId" => $kpiId, "e.status" => 1])
+            ->andWhere("kpi_employee.employeeId is not null")
+            ->asArray()
+            ->all();
+        $employee = [];
+        if (isset($kpiEmployee) && count($kpiEmployee) > 0) {
+            foreach ($kpiEmployee as $ke) :
+                if ($ke["picture"] != "") {
+                    $employee[$ke["employeeId"]]["picture"] = $ke["picture"];
+                } else {
+                    if ($ke["gender"] == 1) {
+                        $employee[$ke["employeeId"]]["picture"] = 'image/user.png';
+                    } else {
+
+                        $employee[$ke["employeeId"]]["picture"] = 'image/lady.jpg';
+                    }
+                }
+                $employee[$ke["employeeId"]]["name"] = $ke["employeeFirstname"] . ' ' . $ke["employeeSurename"];
+                $employee[$ke["employeeId"]]["title"] = $ke["titleName"];
+            endforeach;
+        }
+        return $employee;
+    }
     public static function kpiEmployeeTarget($kpiId, $employeeId)
     {
         $kpiEmployee = KpiEmployee::find()
@@ -168,5 +197,49 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
             $percent = 0;
         }
         return $percent;
+    }
+    public static function countKpiFromTeam($kpiId, $teamId)
+    {
+        $kpiEmployee = KpiEmployee::find()
+            ->select('e.picture,e.employeeId,e.gender')
+            ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
+            ->where("kpi_employee.status!=99 and e.status!=99")
+            ->andWhere([
+                "kpi_employee.kpiId" => $kpiId,
+                "e.teamId" => $teamId
+            ])
+            ->asArray()
+            ->all();
+        $employee = [];
+        if (isset($kpiEmployee) && count($kpiEmployee) > 0) {
+            foreach ($kpiEmployee as $ke) :
+                if ($ke["picture"] != "") {
+                    $employee[$ke["employeeId"]] = $ke["picture"];
+                } else {
+                    if ($ke["gender"] == 1) {
+                        $employee[$ke["employeeId"]] = 'image/user.png';
+                    } else {
+
+                        $employee[$ke["employeeId"]] = 'image/lady.jpg';
+                    }
+                }
+            endforeach;
+        }
+        return $employee;
+    }
+    public static function totolEmployeeInTeam($kpiId, $teamId)
+    {
+        $kpiEmployee = KpiEmployee::find()
+            ->select('e.employeeId')
+            ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
+            ->JOIN("LEFT JOIN", "team t", "t.teamId=e.teamId")
+            ->where("kpi_employee.status!=99 and e.status!=99")
+            ->andWhere([
+                "kpi_employee.kpiId" => $kpiId,
+                "e.teamId" => $teamId
+            ])
+            ->asArray()
+            ->all();
+        return count($kpiEmployee);
     }
 }

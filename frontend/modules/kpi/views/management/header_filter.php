@@ -1,39 +1,47 @@
-<div class="header-pim">
-	<ul class="nav nav-pills" id="pills-tab" role="tablist">
-		<li class="header-item">
-			<a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="nav-link text-dark" id="pills-Financial-tab" type="button" role="tab" aria-controls="pills-Financial" aria-selected="true">
-				<i class="fa fa-line-chart" aria-hidden="true"></i>
-				Key Financial Indicator
-			</a>
-		</li>
-		<li class="header-item">
-			<a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" class="nav-link text-dark" id="pills-Group-tab" type="button" role="tab" aria-controls="pills-Group" aria-selected="false">
-				<i class="fa fa-flag-o" aria-hidden="true"></i>
-				Key Goal Indicator</a>
-		</li>
-		<li class="header-item">
-			<a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="nav-link text-dark active" id="pills-Performance-tab" type="button" role="tab" aria-controls="pills-Performance" aria-selected="false">
-				<i class="fa fa-clock-o" aria-hidden="true"></i>
-				Key Performance Indicator
-			</a>
-		</li>
-		<li class="header-item">
-			<a class="nav-link text-dark" id="pills-Action-tab" type="button" role="tab" aria-controls="pills-Action" aria-selected="false">
-				<i class="fa fa-list-ul" aria-hidden="true"></i>
-				Key Action Indicator
-			</a>
-		</li>
-		<?php
-		if ($role >= 3) {
-		?>
-			<li class="header-item presentation-end pr-20">
-				<a href="<?= Yii::$app->homeUrl ?>kpi/management/assign-kpi" class="nav-link text-dark" id="pills-Setting-tab" type="button" role="tab" aria-controls="pills-Action" aria-selected="false">
-					<i class="fa fa-cog" aria-hidden="true"></i>
-					Assign and approval
-				</a>
-			</li>
-		<?php
-		}
-		?>
-	</ul>
+<div class="alert alert-white-4">
+	<div class="row header-filter-pim">
+		<div class="col-10 pt-13 pb-5 pl-0">
+			<div class="row">
+				<div class="col-3 border-right text-center">
+					<a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="header-kfi">
+						<span>
+							<img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group289864.png" class="home-icon mr-5">
+						</span>
+						Key Financial Indicator
+					</a>
+				</div>
+				<div class="col-3 border-right text-center">
+					<a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" class="header-kfi">
+						<span>
+							<img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector-1.png" class="home-icon mr-5">
+						</span>
+						Key Goal Indicator
+					</a>
+				</div>
+				<div class="col-3 text-center">
+					<a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="header-kpi-active">
+						<span>
+							<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/KPI.png" class="home-icon mr-5">
+						</span>
+						Key Performance Indicator
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-2 text-end">
+			<div class="col-12 pt-13">
+				<?php
+				//if ($role >= 4) {
+				?>
+				<!-- <a href="<?php // Yii::$app->homeUrl 
+						?>kpi/management/assign-kpi" class="nav-link text-dark" id="pills-Setting-tab" type="button" role="tab" aria-controls="pills-Action" aria-selected="false">
+						<i class="fa fa-cog" aria-hidden="true"></i>
+						Assign and approval
+					</a> -->
+				<?php
+				//}
+				?>
+			</div>
+		</div>
+	</div>
 </div>

@@ -12,6 +12,7 @@ use frontend\models\hrvc\Kgi;
 use frontend\models\hrvc\KgiEmployee;
 use frontend\models\hrvc\KgiEmployeeHistory;
 use frontend\models\hrvc\Team;
+use frontend\models\hrvc\Unit;
 use frontend\models\hrvc\User;
 use frontend\models\hrvc\UserRole;
 use Yii;
@@ -491,7 +492,7 @@ class KgiPersonalController extends Controller
 		}
 
 		curl_close($api);
-		//throw new exception(print_r($teamKgis, true));
+		//throw new exception($paramText, true);
 		if ($type == "list") {
 			$file = "index";
 		} else {
@@ -520,5 +521,41 @@ class KgiPersonalController extends Controller
 			"employeeId" => $employeeId,
 			"employees" => $employees
 		]);
+	}
+	public function actionNextKgiEmployeeHistory()
+	{
+		$kgiEmployeeHistoryId = $_POST["kgiEmployeeHistoryId"];
+		$currentHistory = KgiEmployeeHistory::find()->where(["kgiEmployeeHistoryId" => $kgiEmployeeHistoryId])->asArray()->one();
+		$kgiTeam = KgiEmployee::find()->where(["kgiEmployeeId" => $currentHistory["kgiEmployeeId"]])->asArray()->one();
+		$kgi = Kgi::find()->where(["kgiId" => $kgiTeam["kgiId"]])->asArray()->one();
+		$unit = Unit::find()->where(["unitId" => $kgi["unitId"]])->asArray()->one();
+		if ($currentHistory["month"] != "" && $currentHistory["year"] != "") {
+			$nextTargetMonthYear = ModelMaster::nextTargetMonthYear($unit["unitName"], $currentHistory["month"], $currentHistory["year"]);
+			$nextMonth = $nextTargetMonthYear["nextMonth"];
+			$nextYear = $nextTargetMonthYear["nextYear"];
+		} else {
+			$nextMonth = null;
+			$nextYear = null;
+		}
+		$kgiEmployeeHistory = new KgiEmployeeHistory();
+		$kgiEmployeeHistory->kgiEmployeeId = $currentHistory["kgiEmployeeId"];
+		$kgiEmployeeHistory->detail = 'New target';
+		$kgiEmployeeHistory->nextCheckDate = null;
+		$kgiEmployeeHistory->status = 1;
+		$kgiEmployeeHistory->target = $currentHistory["target"];
+		$kgiEmployeeHistory->result = 0;
+		$kgiEmployeeHistory->month = $nextMonth;
+		$kgiEmployeeHistory->year = $nextYear;
+		$kgiEmployeeHistory->createDateTime = new Expression('NOW()');
+		$kgiEmployeeHistory->updateDateTime = new Expression('NOW()');
+		if ($kgiEmployeeHistory->save(false)) {
+			$kgiEmployee = KgiEmployee::find()->where(["kgiEmployeeId" => $currentHistory["kgiEmployeeId"]])->one();
+			$kgiEmployee->status = 1;
+			$kgiEmployee->month = $nextMonth;
+			$kgiEmployee->year = $nextYear;
+			$kgiEmployee->updateDateTime = new Expression('NOW()');
+			$kgiEmployee->save(false);
+		}
+		return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi-grid');
 	}
 }

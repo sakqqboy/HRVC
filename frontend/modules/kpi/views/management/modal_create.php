@@ -206,10 +206,10 @@
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Target Amount</label>
 								<input type="text" class="form-control font-size-13" name="targetAmount">
 							</div>
-							<div class="col-12 mt-10">
+							<!-- <div class="col-12 mt-10">
 								<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Result</label>
 								<input type="text" class="form-control font-size-13" name="result">
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>
