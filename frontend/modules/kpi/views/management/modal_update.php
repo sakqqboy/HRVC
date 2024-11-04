@@ -6,7 +6,7 @@
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="col-12 font-b" style="margin-top: -35px; padding-left:20px; font-size: 16px;">
-				<i class="fa fa-flag" aria-hidden="true"></i> Key Goal Indicators
+				<i class="fa fa-flag" aria-hidden="true"></i> Key Performance Indicators
 			</div>
 			<div class="modal-body">
 				<div class="row">

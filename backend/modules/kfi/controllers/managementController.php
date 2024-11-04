@@ -19,6 +19,7 @@ use backend\models\hrvc\User;
 use common\models\ModelMaster;
 use Exception;
 use backend\models\hrvc\KfiIssue;
+use backend\models\hrvc\KgiTeam;
 use yii\db\Expression;
 use yii\web\Controller;
 
@@ -619,7 +620,37 @@ class ManagementController extends Controller
 			])
 			->asArray()
 			->all();
-		return json_encode($kfiHasKgi);
+		$data = [];
+		if (isset($kfiHasKgi) && count($kfiHasKgi) > 0) {
+			foreach ($kfiHasKgi as $kgi):
+				$ratio = 0;
+				if ($kgi["targetAmount"] != '' && $kgi["targetAmount"] != 0 && $kgi["targetAmount"] != null) {
+					if ($kgi["code"] == '<' || $kgi["code"] == '=') {
+						$ratio = ($kgi["result"] / $kgi["targetAmount"]) * 100;
+					} else {
+						if ($kgi["result"] != '' && $kgi["result"] != 0) {
+							$ratio = ($kgi["targetAmount"] / $kgi["result"]) * 100;
+						} else {
+							$ratio = 0;
+						}
+					}
+				}
+				$data[$kgi["kgiId"]] = [
+					"kgiName" => $kgi["kgiName"],
+					"kgiId" => $kgi["kgiId"],
+					"unitId" => $kgi["unitId"],
+					"targetAmount" => number_format($kgi["targetAmount"], 2),
+					"code" => $kgi["code"],
+					"result" => $kgi["result"],
+					"unit" => Unit::unitName($kgi["unitId"]),
+					"month" => ModelMaster::monthEng($kgi['month'], 1),
+					"ratio" => number_format($ratio, 2),
+					"countTeam" => KgiTeam::kgiTeam($kgi["kgiId"]),
+				];
+			endforeach;
+		}
+
+		return json_encode($data);
 	}
 	public function actionKfiBranch($kfiId)
 	{

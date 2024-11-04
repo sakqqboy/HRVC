@@ -385,7 +385,7 @@ class ModelMaster extends \yii\db\ActiveRecord
     {
         $month["01"] = "January";
         $month["02"] = "February";
-        $month["03"] = "Marh";
+        $month["03"] = "March";
         $month["04"] = "April";
         $month["05"] = "May";
         $month["06"] = "June";
@@ -495,7 +495,7 @@ class ModelMaster extends \yii\db\ActiveRecord
                 $month = "February";
                 break;
             case 3:
-                $month = "Marh";
+                $month = "March";
                 break;
             case 4:
                 $month = "April";

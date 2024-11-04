@@ -728,11 +728,7 @@ function saveSelectedKpi(kgiId) {
 		data: { kgiId: kgiId, selectedKpi: selectedKpi, unCheck: unCheck },
 		success: function (data) {
 			if (data.status) {
-				$('.alert-box').slideDown(500);
-				setTimeout(function () {
-					// Code to be executed after a delay
-					$('.alert-box').fadeOut(300);
-				}, 3000);
+				
 			}
 		}
 	});
@@ -803,6 +799,8 @@ function approveTargetKgiTeam(kgiTeamId, approve) {
 			}
 		});
 	}
+}
+function changeTargetKgiTeamReason(kgiTeamId) {
 }
 function approveTargetKgiEmployee(kgiEmployeeId, approve) {
 	var url = $url + 'kgi/management/approve-kgi-employee-target';
@@ -1011,15 +1009,62 @@ function showEditRelateKpi(type,kgiId) {
 	if (type == 1) {
 		$("#editRelateKpi").hide();
 		$("#saveRelateKpi").show();
+		$("#cancelRelateKpi").show();
 		$('input[id="check-relate-kpi"]').each(function () {
-				$(this).show();
+			$(this).show();
 		});
-	} else { 
+		var url = $url + 'kgi/view/kgi-has-kpi';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { kgiId: kgiId },
+			success: function (data) {
+				$("#kpi").html('');
+				$("#kpi").html(data.kpi);
+			}
+		});
+	}
+	if (type == 2) { 
 		$("#editRelateKpi").show();
 		$("#saveRelateKpi").hide();
+		$("#cancelRelateKpi").hide();
 		$('input[id="check-relate-kpi"]').each(function () {
 			$(this).hide();
 		});
-		saveSelectedKpi(kgiId)
+		saveSelectedKpi(kgiId);
+		$("#show-content").html('');
+		var url = $url + 'kgi/view/kgi-kpi';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { kgiId: kgiId },
+			success: function (data) {
+				
+				$("#show-content").html(data.kpi);
+				$('.alert-box').slideDown(500);
+				setTimeout(function () {
+					$('.alert-box').fadeOut(300);
+				}, 1000);
+			}
+		});
+	}
+	if (type == 0) { 
+		$("#editRelateKpi").show();
+		$("#saveRelateKpi").hide();
+		$("#cancelRelateKpi").hide();
+		$("#show-content").html('');
+		var url = $url + 'kgi/view/kgi-kpi';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { kgiId: kgiId },
+			success: function (data) {
+				$("#show-content").html('');
+				$("#show-content").html(data.kpi);
+			}
+		});
 	}
  }

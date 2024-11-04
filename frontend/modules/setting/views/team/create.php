@@ -178,10 +178,7 @@ $this->title = 'Team';
 														Employees
 													</div>
 													<div class="col-4 text-end font-size-12 font-b">
-														<!-- <a href="" class="no-underline-black"> -->
 														<?= Team::employeeInTeam($team['teamId']) ?>
-
-														<!-- </a> -->
 													</div>
 												</div>
 											</div>

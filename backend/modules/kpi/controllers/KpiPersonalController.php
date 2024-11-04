@@ -61,7 +61,7 @@ class KpiPersonalController extends Controller
 		}
 		return json_encode($employeeTeam);
 	}
-	public function actionEmployeeKpi($userId)
+	public function actionEmployeeKpi($userId, $role)
 	{
 		$employeeId = Employee::employeeId($userId);
 		/*$kpis = Kpi::find()
@@ -71,16 +71,29 @@ class KpiPersonalController extends Controller
 			->asArray()
 			->orderBy('kpi.updateDateTime DESC')
 			->all();*/
-		$kpiEmployee = KpiEmployee::find()
-			->select('k.kpiName,k.priority,k.quantRatio,k.amountType,k.code,kpi_employee.target,kpi_employee.result,
+		if ($role <= 3) {
+			$kpiEmployee = KpiEmployee::find()
+				->select('k.kpiName,k.priority,k.quantRatio,k.amountType,k.code,kpi_employee.target,kpi_employee.result,
 			kpi_employee.status,kpi_employee.employeeId,k.unitId,kpi_employee.month,kpi_employee.year,k.kpiId,k.companyId,e.teamId,e.picture,
 			kpi_employee.kpiEmployeeId,e.employeeFirstname,e.employeeSurename')
-			->JOIN("LEFT JOIN", "kpi k", "kpi_employee.kpiId=k.kpiId")
-			->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
-			->where(["kpi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "kpi_employee.employeeId" => $employeeId])
-			->orderby('k.createDateTime')
-			->asArray()
-			->all();
+				->JOIN("LEFT JOIN", "kpi k", "kpi_employee.kpiId=k.kpiId")
+				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
+				->where(["kpi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "kpi_employee.employeeId" => $employeeId])
+				->orderby('k.createDateTime')
+				->asArray()
+				->all();
+		} else {
+			$kpiEmployee = KpiEmployee::find()
+				->select('k.kpiName,k.priority,k.quantRatio,k.amountType,k.code,kpi_employee.target,kpi_employee.result,
+			kpi_employee.status,kpi_employee.employeeId,k.unitId,kpi_employee.month,kpi_employee.year,k.kpiId,k.companyId,e.teamId,e.picture,
+			kpi_employee.kpiEmployeeId,e.employeeFirstname,e.employeeSurename')
+				->JOIN("LEFT JOIN", "kpi k", "kpi_employee.kpiId=k.kpiId")
+				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
+				->where(["kpi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
+				->orderby('k.createDateTime')
+				->asArray()
+				->all();
+		}
 		$data = [];
 		if (count($kpiEmployee) > 0) {
 			foreach ($kpiEmployee as $kpi) :

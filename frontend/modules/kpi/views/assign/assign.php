@@ -6,6 +6,19 @@ use yii\bootstrap5\ActiveForm;
 $this->title = 'KPI Grid View';
 ?>
 <div class="col-12">
+	<?php if (Yii::$app->session->hasFlash('alert-kpi')) : ?>
+		<script>
+			window.onload = function() {
+				$('.alert-box-info').slideDown(500);
+				setTimeout(function() {
+					$('.alert-box-info').fadeOut(300);
+				}, 3000);
+			}
+		</script>
+	<?php endif; ?>
+	<div class="alert-box-info text-center">
+		S A V E D ! ! !
+	</div>
 	<div class="col-12">
 		<img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.png" class="home-icon mr-5" style="margin-top: -3px;">
 		<strong class="pim-head-text"> Performance Indicator Matrices (PIM)</strong>
@@ -83,7 +96,7 @@ $this->title = 'KPI Grid View';
 										<div class="col-12 font-size-10" style="margin-top: -5px;"><?= $team["departmentName"] ?></div>
 									</div>
 									<div class="col-4 pt-9">
-										<input type="text" class="assign-target text-end font-size-12" value="<?= number_format($target, 2) ?>" name="teamTarget[<?= $team['teamId'] ?>]">
+										<input type="text" placeholder="0.00" class="assign-target text-end font-size-12" value="<?= $target > 0 ? number_format($target, 2) : '' ?>" name="teamTarget[<?= $team['teamId'] ?>]">
 									</div>
 								</div>
 							</div>

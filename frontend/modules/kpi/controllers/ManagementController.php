@@ -238,9 +238,10 @@ class ManagementController extends Controller
                 }
                 if (isset($_POST["team"]) && count($_POST["team"]) > 0) {
                     $this->saveKpiTeam($_POST["team"], $kpiId);
-                    $this->saveKpiEmployee($_POST["team"], $kpiId);
+                    //    $this->saveKpiEmployee($_POST["team"], $kpiId);
                 }
-                return $this->redirect(Yii::$app->request->referrer);
+                //return $this->redirect(Yii::$app->request->referrer);
+                return $this->redirect(Yii::$app->homeUrl . 'kgi/assign/assign/' . ModelMaster::encodeParams(["kpiId" => $kpiId, "companyId" => $_POST["companyId"]]));
                 //return $this->redirect('grid');
             }
         }
@@ -456,7 +457,7 @@ class ManagementController extends Controller
             if ($kpi->toDate == "") {
                 $kpi->toDate = $_POST["toDate"];
             }
-            if ($isManager == 1 && $kpi->targetAmount == "") {
+            if ($isManager == 1 &&  $_POST["targetAmount"] != "") {
                 $kpi->targetAmount = str_replace(",", "", $_POST["targetAmount"]);
             }
             // $kpi->targetAmount = $_POST["targetAmount"];

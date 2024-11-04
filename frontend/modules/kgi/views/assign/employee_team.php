@@ -60,7 +60,7 @@ if (isset($kgiTeamEmployee) && count($kgiTeamEmployee) > 0) {
 								</div>
 							</div>
 							<div class="col-3 font-size-12 text-center pt-5">
-								<input type="text" class="assign-target text-end" name="employeeTarget[<?= $employeeId ?>]" placeholder="Target" style="height: 30px;" value="<?= number_format($employee['target'], 2) ?>" id="employee-target-<?= $teamId ?>" onkeyup="javascript:calculateEmployeeTargetValue(<?= $teamId ?>)">
+								<input type="text" class="assign-target text-end" placeholder="0.00" name="employeeTarget[<?= $employeeId ?>]" placeholder="Target" style="height: 30px;" value="<?= $employee['target'] > 0 ? number_format($employee['target'], 2) : '' ?>" id="employee-target-<?= $teamId ?>" onkeyup="javascript:calculateEmployeeTargetValue(<?= $teamId ?>)">
 							</div>
 							<div class="col-4 font-size-12 text-center pt-5">
 								<textarea type="text" class="assign-target" name="employeeRemark[<?= $employeeId ?>]" style="height: 30px;"></textarea>

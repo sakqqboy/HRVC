@@ -44,7 +44,7 @@ class Team extends \frontend\models\hrvc\master\TeamMaster
     }
     public static function  employeeInTeam($teamId)
     {
-        $employee = Employee::find()->where(["teamId" => $teamId])->asArray()->all();
+        $employee = Employee::find()->where(["teamId" => $teamId, "status" => 1])->asArray()->all();
         return count($employee);
     }
     public static function  employeeInTeamDetail($teamId)
@@ -61,7 +61,7 @@ class Team extends \frontend\models\hrvc\master\TeamMaster
         $text = "";
         $employee = Employee::find()->select('employeeFirstname,employeeSurename')
             ->JOIN("LEFT JOIN", "team t", "t.teamId=employee.teamId")
-            ->where(["employee.teamId" => $teamId, "employee.teamPositionId" => $position])
+            ->where(["employee.teamId" => $teamId, "employee.teamPositionId" => $position, "employee.status" => 1])
             ->orderBy('employee.employeeFirstname')
             ->asArray()
             ->all();

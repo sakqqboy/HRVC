@@ -2,14 +2,33 @@
 
 use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
+use yii\bootstrap5\Alert;
+use yii\helpers\ArrayHelper;
 
 $this->title = 'KGI Grid View';
 ?>
-<div class="col-12">
+<div class="col-12" onload="showAlertBox()">
+	<?php if (Yii::$app->session->hasFlash('alert-kgi')) : ?>
+
+		<script>
+			window.onload = function() {
+				$('.alert-box-info').slideDown(500);
+				setTimeout(function() {
+					$('.alert-box-info').fadeOut(300);
+				}, 3000);
+			}
+		</script>
+
+	<?php endif; ?>
+	<div class="alert-box-info text-center">
+		S A V E D ! ! !
+	</div>
+
 	<div class="col-12">
 		<img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.png" class="home-icon mr-5" style="margin-top: -3px;">
 		<strong class="pim-head-text"> Performance Indicator Matrices (PIM)</strong>
 	</div>
+
 	<div class="col-12 mt-10">
 		<?= $this->render('header_filter', [
 			"role" => $role
@@ -36,7 +55,7 @@ $this->title = 'KGI Grid View';
 							Back
 						</a>
 						<span class="">
-							<?= $kgiDetail["kgiName"] ?><?= $kgiId ?>
+							<?= $kgiDetail["kgiName"] ?>
 						</span>
 					</div>
 					<div class="col-2 text-end">
@@ -83,7 +102,7 @@ $this->title = 'KGI Grid View';
 										<div class="col-12 font-size-10" style="margin-top: -5px;"><?= $team["departmentName"] ?></div>
 									</div>
 									<div class="col-4 pt-9">
-										<input type="text" class="assign-target text-end font-size-12" value="<?= number_format($target, 2) ?>" name="teamTarget[<?= $team['teamId'] ?>]">
+										<input type="text" class="assign-target text-end font-size-12" value="<?= $target > 0 ? number_format($target, 2) : '' ?>" name="teamTarget[<?= $team['teamId'] ?>]" placeholder="0.00">
 									</div>
 								</div>
 							</div>
@@ -180,3 +199,17 @@ $this->title = 'KGI Grid View';
 	<input type="hidden" name="companyId" value="<?= $companyId ?>">
 	<?php ActiveForm::end(); ?>
 </div>
+<?php
+//if ($save == 1) {
+?>
+<script>
+	// window.onload = function() {
+	// 	$('.alert-box-info').slideDown(500);
+	// 	setTimeout(function() {
+	// 		$('.alert-box-info').fadeOut(300);
+	// 	}, 3000);
+	// }
+</script>
+<?php
+//}
+?>

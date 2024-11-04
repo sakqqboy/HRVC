@@ -46,7 +46,7 @@ use frontend\models\hrvc\Employee;
 				Status
 			</div>
 			<div class="col-7  mt-20 font-b">
-				<?= $employee["status"]["name"] ?>
+				<?= $employee["statusName"] ?>
 			</div>
 			<div class="col-5  mt-20">
 				Condition

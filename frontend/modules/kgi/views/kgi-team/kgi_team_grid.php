@@ -16,22 +16,38 @@ $this->title = "TEAM KGI";
 		]) ?>
 		<div class="alert mt-10 pim-body bg-white">
 			<div class="row">
-				<div class="col-lg-4 col-md-6 col-12  pr-0">
+				<div class="col-lg-4 col-md-6 col-12">
 					<div class="row">
-						<div class="col-9">
+						<div class="col-12">
 							<div class="row">
-								<div class="col-4 pim-type-tab pr-0 pl-0">
+								<div class="col-3 pim-type-tab pr-0 pl-0">
 									<a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" class="no-underline-black ">
 										Company KGI
 									</a>
 								</div>
-								<div class="col-4 pim-type-tab-selected">
+								<div class="col-3 pim-type-tab-selected">
 									Team KGI
 								</div>
-								<div class="col-4 pim-type-tab">
+								<div class="col-3 pim-type-tab">
 									<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi-grid" class="no-underline-black">
 										Self KGI
 									</a>
+								</div>
+								<div class="col-3 pr-0 pl-3 pt-0">
+
+									<?php
+									if ($role >= 3) {
+									?>
+										<div class="col-12 approval-box text-center">
+											<a href="<?= Yii::$app->homeUrl ?>kgi/management/wait-approve" style="text-decoration: none;color:#2580D3;">
+												<span class="approve-num mr-2">123</span>
+												Approvals
+												<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approve.svg" class="first-layer-icon ml-3 pull-right" style="margin-top:-1px;">
+											</a>
+										</div>
+									<?php
+									}
+									?>
 								</div>
 							</div>
 						</div>
@@ -50,6 +66,7 @@ $this->title = "TEAM KGI";
 					]) ?>
 					<input type="hidden" id="type" value="grid">
 				</div>
+
 
 				<div class="col-lg-1 col-md-6 col-12 pr-0 text-end">
 					<div class="btn-group" role="group">
@@ -111,6 +128,11 @@ $this->title = "TEAM KGI";
 										</div>
 									</div>
 									<div class="col-lg-5 col-md-2 col-4 text-end pr-20">
+
+										<span class="pim-normal-text mr-5">
+											<?= $kgi["teamName"] ?>
+										</span>
+										<img src="<?= Yii::$app->homeUrl . 'images/icons/Settings/team-name.svg' ?>" class="pim-pic-grid mr-5" style="margin-top: -1px;font-size:12px;">
 										<a class="btn btn-bg-white-xs mr-5" href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-team-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], "kgiTeamId" => $kgiTeamId]) ?>" style="margin-top: -3px;">
 											<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History" class="pim-icon" style="margin-top: -1px;">
 										</a>
@@ -323,7 +345,8 @@ $this->title = "TEAM KGI";
 											</div>
 											<div class="col-4 text-center mt-10 pt-6">
 												<?php
-												if ($canEdit == 1 && $kgi["status"] != 2) {
+												//if ($canEdit == 1 && $kgi["status"] != 2) {
+												if ($canEdit == 1) {
 												?>
 													<div data-bs-toggle="modal" data-bs-target="#update-kgi-modal-team" onclick="javascript:updateTeamKgi(<?= $kgiTeamId ?>)" class="pim-btn-<?= $colorFormat ?>">
 														<i class="fa fa-refresh" aria-hidden="true"></i> Update

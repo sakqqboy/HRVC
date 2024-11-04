@@ -6,6 +6,7 @@ use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
 use frontend\models\hrvc\Group;
+use frontend\models\hrvc\KgiEmployee;
 use frontend\models\hrvc\KpiEmployee;
 use frontend\models\hrvc\KpiTeam;
 use frontend\models\hrvc\UserRole;
@@ -204,27 +205,47 @@ class AssignController extends Controller
 					->one();
 				$target = str_replace(",", "", $target);
 				if (isset($kpiEmployee) && !empty($kpiEmployee)) {
-					if ($kpiEmployee->target != $target) {
+					if ($kpiEmployee->target != $target && $target > 0) {
 						$kpiEmployee->target = $target;
 						$kpiEmployee->updateDateTime = new Expression('NOW()');
 						$kpiEmployee->save(false);
 					}
+					if ($target == 0 || $target == 0.00 || trim($target) == "" || $target == null) {
+						KpiEmployee::deleteAll([
+							"employeeId" => $employeeId,
+							"kpiId" => $_POST["kpiId"]
+						]);
+					}
 				} else {
-					$kpiEmployee = new KpiEmployee();
-					$kpiEmployee->kpiId = $_POST["kpiId"];
-					$kpiEmployee->employeeId = $employeeId;
-					$kpiEmployee->target = $target;
-					$kpiEmployee->result = 0;
-					$kpiEmployee->status = 1;
-					$kpiEmployee->createDateTime = new Expression('NOW()');
-					$kpiEmployee->updateDateTime = new Expression('NOW()');
-					$kpiEmployee->save(false);
+					if ($target > 0) {
+						$kpiEmployee = new KpiEmployee();
+						$kpiEmployee->kpiId = $_POST["kpiId"];
+						$kpiEmployee->employeeId = $employeeId;
+						$kpiEmployee->target = $target;
+						$kpiEmployee->result = 0;
+						$kpiEmployee->status = 1;
+						$kpiEmployee->createDateTime = new Expression('NOW()');
+						$kpiEmployee->updateDateTime = new Expression('NOW()');
+						$kpiEmployee->save(false);
+					} else {
+						KpiEmployee::deleteAll([
+							"employeeId" => $employeeId,
+							"kpiId" => $_POST["kpiId"]
+						]);
+					}
 				}
 
 				$employeeIds[$i] = $employeeId;
 				$i++;
 			endforeach;
 		}
+		Yii::$app->getSession()->setFlash('alert-kpi', [
+			'body' => 'S A V E D ! ! !',
+			'options' => [
+				'id' => 'alert-success-add',
+				'class' => 'alert-box-info text-center',
+			]
+		]);
 		if (count($employeeIds) > 0) {
 			$deleteEmployeeKpi = KpiEmployee::find()
 				->where(['not in', 'employeeId', $employeeIds])
@@ -237,5 +258,14 @@ class AssignController extends Controller
 			}
 		}
 		return $this->redirect(Yii::$app->homeUrl . 'kpi/assign/assign/' . ModelMaster::encodeParams(['kpiId' => $_POST["kpiId"], "companyId" => $_POST["companyId"]]));
+	}
+	public function actionDeleteZero()
+	{
+		KpiEmployee::deleteAll([
+			"target" => 0
+		]);
+		KgiEmployee::deleteAll([
+			"target" => 0
+		]);
 	}
 }

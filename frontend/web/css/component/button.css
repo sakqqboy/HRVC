@@ -124,3 +124,46 @@
     padding: 4px 5px 4px 5px;
     border: 0;
 }
+
+.btn-blue {
+    padding: 7px 20px 7px 20px;
+    background-color: #2580D3;
+    color: white;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.btn-blue-sm {
+    padding: 5px 10px 5px 10px;
+    background-color: #2580D3;
+    color: white;
+    border-radius: 4px;
+    font-weight: 400;
+}
+
+.btn-red-sm {
+    padding: 5px 10px 5px 10px;
+    background-color: #FFE3E3;
+    border: #BB2020 solid 1px;
+    color: #BB2020;
+    border-radius: 4px;
+    font-weight: 400;
+}
+
+.approve-btn {
+    background-color: #CCE7FF;
+    color: #2580D3;
+    border: #2580D3 solid 1px;
+    border-radius: 3px;
+    padding: 3px 5px 3px 5px;
+
+}
+
+.decline-btn {
+    background-color: #FFE3E3;
+    color: #F56A6A;
+    border: #F56A6A solid 1px;
+    border-radius: 3px;
+    padding: 3px 5px 3px 5px;
+
+}

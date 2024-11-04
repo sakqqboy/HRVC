@@ -8,7 +8,6 @@ $this->title = 'KPI View';
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
 <div class="col-12">
-
 	<div class="col-12">
 		<img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.png" class="home-icon mr-5" style="margin-top: -3px;">
 		<strong class="pim-head-text"> Performance Indicator Matrices (PIM)</strong>

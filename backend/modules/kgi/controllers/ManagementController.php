@@ -18,6 +18,7 @@ use backend\models\hrvc\KgiHistory;
 use backend\models\hrvc\KgiIssue;
 use backend\models\hrvc\KgiSolution;
 use backend\models\hrvc\KgiTeam;
+use backend\models\hrvc\KpiTeam;
 use backend\models\hrvc\Title;
 use backend\models\hrvc\Unit;
 use backend\models\hrvc\User;
@@ -739,7 +740,37 @@ class ManagementController extends Controller
 			])
 			->asArray()
 			->all();
-		return json_encode($kgiHasKpi);
+		$data = [];
+		if (isset($kgiHasKpi) && count($kgiHasKpi) > 0) {
+			foreach ($kgiHasKpi as $kpi):
+				$ratio = 0;
+				if ($kpi["targetAmount"] != '' && $kpi["targetAmount"] != 0 && $kpi["targetAmount"] != null) {
+					if ($kpi["code"] == '<' || $kpi["code"] == '=') {
+						$ratio = ($kpi["result"] / $kpi["targetAmount"]) * 100;
+					} else {
+						if ($kpi["result"] != '' && $kpi["result"] != 0) {
+							$ratio = ($kpi["targetAmount"] / $kpi["result"]) * 100;
+						} else {
+							$ratio = 0;
+						}
+					}
+				}
+				$data[$kpi["kpiId"]] = [
+					"kpiName" => $kpi["kpiName"],
+					"kpiId" => $kpi["kpiId"],
+					"unitId" => $kpi["unitId"],
+					"targetAmount" => number_format($kpi["targetAmount"], 2),
+					"code" => $kpi["code"],
+					"result" => $kpi["result"],
+					"unit" => Unit::unitName($kpi["unitId"]),
+					"month" => ModelMaster::monthEng($kpi['month'], 1),
+					"ratio" => number_format($ratio, 2),
+					"countTeam" => KpiTeam::kpiTeam($kpi["kpiId"]),
+				];
+			endforeach;
+		}
+
+		return json_encode($data);
 	}
 	public function actionKgiHistorySummarize($kgiId)
 	{

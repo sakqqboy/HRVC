@@ -325,7 +325,8 @@ $this->title = "INDIVIDUAL KGI";
 												</div>
 												<div class="col-4 text-center pt-6 mt-10">
 													<?php
-													if ($canEdit == 1 && $kgi["status"] != 2) {
+													//	if ($canEdit == 1 && $kgi["status"] != 2) {
+													if ($canEdit == 1) {
 													?>
 														<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/update-personal-kgi/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId]) ?>" class="no-underline">
 															<div class="pim-btn-<?= $colorFormat ?>">

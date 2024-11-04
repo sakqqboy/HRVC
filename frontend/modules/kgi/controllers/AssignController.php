@@ -61,6 +61,7 @@ class AssignController extends Controller
 		}
 		$kgiId = $param["kgiId"];
 		$companyId = $param["companyId"];
+		//$save = $param["save"];
 		$role = UserRole::userRight();
 		if ($role < 3) {
 			return $this->redirect(Yii::$app->homeUrl . 'kgi/management/index');
@@ -119,7 +120,7 @@ class AssignController extends Controller
 			"teams" => $teams,
 			"text" => $text,
 			"kgiTeamEmployee" => $kgiTeamEmployee,
-			"companyId" => $companyId
+			"companyId" => $companyId,
 		]);
 	}
 	public function actionEmployeeInTeamTarget()
@@ -204,21 +205,34 @@ class AssignController extends Controller
 					->one();
 				$target = str_replace(",", "", $target);
 				if (isset($kgiEmployee) && !empty($kgiEmployee)) {
-					if ($kgiEmployee->target != $target) {
+					if ($kgiEmployee->target != $target && $target > 0) {
 						$kgiEmployee->target = $target;
 						$kgiEmployee->updateDateTime = new Expression('NOW()');
 						$kgiEmployee->save(false);
 					}
+					if ($target == 0 || $target == 0.00 || trim($target) == "" || $target == null) {
+						KgiEmployee::deleteAll([
+							"employeeId" => $employeeId,
+							"kgiId" => $_POST["kgiId"]
+						]);
+					}
 				} else {
-					$kgiEmployee = new KgiEmployee();
-					$kgiEmployee->kgiId = $_POST["kgiId"];
-					$kgiEmployee->employeeId = $employeeId;
-					$kgiEmployee->target = $target;
-					$kgiEmployee->result = 0;
-					$kgiEmployee->status = 1;
-					$kgiEmployee->createDateTime = new Expression('NOW()');
-					$kgiEmployee->updateDateTime = new Expression('NOW()');
-					$kgiEmployee->save(false);
+					if ($target > 0) {
+						$kgiEmployee = new KgiEmployee();
+						$kgiEmployee->kgiId = $_POST["kgiId"];
+						$kgiEmployee->employeeId = $employeeId;
+						$kgiEmployee->target = $target;
+						$kgiEmployee->result = 0;
+						$kgiEmployee->status = 1;
+						$kgiEmployee->createDateTime = new Expression('NOW()');
+						$kgiEmployee->updateDateTime = new Expression('NOW()');
+						$kgiEmployee->save(false);
+					} else {
+						KgiEmployee::deleteAll([
+							"employeeId" => $employeeId,
+							"kgiId" => $_POST["kgiId"]
+						]);
+					}
 				}
 
 				$employeeIds[$i] = $employeeId;
@@ -236,6 +250,16 @@ class AssignController extends Controller
 				endforeach;
 			}
 		}
-		return $this->redirect(Yii::$app->homeUrl . 'kgi/assign/assign/' . ModelMaster::encodeParams(['kgiId' => $_POST["kgiId"], "companyId" => $_POST["companyId"]]));
+		Yii::$app->getSession()->setFlash('alert-kgi', [
+			'body' => 'S A V E D ! ! !',
+			'options' => [
+				'id' => 'alert-success-add',
+				'class' => 'alert-box-info text-center',
+			]
+		]);
+		return $this->redirect(Yii::$app->homeUrl . 'kgi/assign/assign/' . ModelMaster::encodeParams([
+			'kgiId' => $_POST["kgiId"],
+			"companyId" => $_POST["companyId"],
+		]));
 	}
 }

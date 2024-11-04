@@ -80,19 +80,32 @@ class KgiPersonalController extends Controller
 		}
 		return json_encode($employeeTeam);
 	}
-	public function actionEmployeeKgi($userId)
+	public function actionEmployeeKgi($userId, $role)
 	{
 		$employeeId = Employee::employeeId($userId);
-		$kgiEmployee = KgiEmployee::find()
-			->select('k.kgiName,k.priority,k.quantRatio,k.amountType,k.code,kgi_employee.target,kgi_employee.result,
+		if ($role <= 3) {
+			$kgiEmployee = KgiEmployee::find()
+				->select('k.kgiName,k.priority,k.quantRatio,k.amountType,k.code,kgi_employee.target,kgi_employee.result,
 			kgi_employee.status,kgi_employee.employeeId,k.unitId,kgi_employee.month,kgi_employee.year,k.kgiId,k.companyId,e.teamId,e.picture,
 			kgi_employee.kgiEmployeeId,e.employeeFirstname,e.employeeSurename')
-			->JOIN("LEFT JOIN", "kgi k", "kgi_employee.kgiId=k.kgiId")
-			->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
-			->where(["kgi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "kgi_employee.employeeId" => $employeeId])
-			->orderby('k.createDateTime')
-			->asArray()
-			->all();
+				->JOIN("LEFT JOIN", "kgi k", "kgi_employee.kgiId=k.kgiId")
+				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
+				->where(["kgi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "kgi_employee.employeeId" => $employeeId])
+				->orderby('k.createDateTime')
+				->asArray()
+				->all();
+		} else {
+			$kgiEmployee = KgiEmployee::find()
+				->select('k.kgiName,k.priority,k.quantRatio,k.amountType,k.code,kgi_employee.target,kgi_employee.result,
+			kgi_employee.status,kgi_employee.employeeId,k.unitId,kgi_employee.month,kgi_employee.year,k.kgiId,k.companyId,e.teamId,e.picture,
+			kgi_employee.kgiEmployeeId,e.employeeFirstname,e.employeeSurename')
+				->JOIN("LEFT JOIN", "kgi k", "kgi_employee.kgiId=k.kgiId")
+				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
+				->where(["kgi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
+				->orderby('k.createDateTime')
+				->asArray()
+				->all();
+		}
 		$data = [];
 		if (count($kgiEmployee) > 0) {
 			foreach ($kgiEmployee as $kgi) :

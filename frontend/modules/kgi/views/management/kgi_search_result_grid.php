@@ -185,7 +185,7 @@ $this->title = 'KGI Grid View';
 															<?php
 															if ($role > 3) {
 															?>
-																<a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgi["companyId"]]) ?>" class="font-<?= $colorFormat ?>">
+																<a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgi["companyId"], "save" => 0]) ?>" class="font-<?= $colorFormat ?>">
 																	Assign Person
 																</a>
 															<?php

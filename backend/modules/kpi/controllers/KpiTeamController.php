@@ -178,7 +178,21 @@ class KpiTeamController extends Controller
 	}
 	public function actionAllTeamKpi($userId, $role)
 	{
-		/*if ($role < 3) {
+		$employeeId = Employee::employeeId($userId);
+		$employee = Employee::EmployeeDetail($employeeId);
+		$teamId = $employee["teamId"];
+		if ($role <= 3) {
+			$kpiTeams = KpiTeam::find()
+				->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,
+			kpi_team.teamId,kpi_team.target')
+				->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_team.kpiId")
+				->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
+				->where(["kpi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
+				->andFilterWhere(["kpi_team.teamId" => $teamId])
+				->orderBy("k.createDateTime DESC,t.teamName ASC")
+				->asArray()
+				->all();
+		} else {
 			$kpiTeams = KpiTeam::find()
 				->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,
 			kpi_team.teamId,kpi_team.target')
@@ -188,21 +202,11 @@ class KpiTeamController extends Controller
 				->orderBy("k.createDateTime DESC,t.teamName ASC")
 				->asArray()
 				->all();
-		} else {*/
+		}
 		$employeeId = Employee::employeeId($userId);
 		$employee = Employee::EmployeeDetail($employeeId);
 		$teamId = $employee["teamId"];
-		$kpiTeams = KpiTeam::find()
-			->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,
-			kpi_team.teamId,kpi_team.target')
-			->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_team.kpiId")
-			->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
-			->where(["kpi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
-			->andFilterWhere(["kpi_team.teamId" => $teamId])
-			->orderBy("k.createDateTime DESC,t.teamName ASC")
-			->asArray()
-			->all();
-		//}
+
 		if (isset($kpiTeams) && count($kpiTeams) > 0) {
 			foreach ($kpiTeams as $kpiTeam) :
 				$kpiTeamHistory = KpiTeamHistory::find()
@@ -388,9 +392,9 @@ class KpiTeamController extends Controller
 			->andFilterWhere([
 				"kb.branchId" => $branchId,
 				"kpi_team.teamId" => $teamId,
-				//"kpi_team.month" => $month,
-				//"kpi_team.year" => $year,
-				//"kpi_team.status" => $status,
+				"kpi_team.month" => $month,
+				"kpi_team.year" => $year,
+				"kpi_team.status" => $status,
 			])
 			->orderBy("k.createDateTime DESC,t.teamName ASC")
 			->asArray()

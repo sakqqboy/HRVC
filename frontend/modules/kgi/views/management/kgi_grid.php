@@ -177,7 +177,7 @@ $this->title = 'KGI Grid View';
 															<?php
 															if ($role > 3) {
 															?>
-																<a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgi["companyId"]]) ?>" class="font-<?= $colorFormat ?>">
+																<a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgi["companyId"], "save" => 0]) ?>" class="font-<?= $colorFormat ?>">
 																	Assign Person
 																</a>
 															<?php
@@ -341,7 +341,8 @@ $this->title = 'KGI Grid View';
 											</div>
 											<div class="col-4 text-center mt-10 pt-6">
 												<?php
-												if ($role > 3  && $kgi["status"] == 1) {
+												//if ($role > 3  && $kgi["status"] == 1) {
+												if ($role > 3) {
 												?>
 													<div onclick="javascript:updateKgi(<?= $kgiId ?>)" class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal" data-bs-target="#update-kgi-modal">
 														<i class="fa fa-refresh" aria-hidden="true"></i> Update

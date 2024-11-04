@@ -327,7 +327,8 @@ $this->title = "INDIVIDUAL KPI";
 												</div>
 												<div class="col-4 text-center pt-6 mt-10">
 													<?php
-													if ($canEdit == 1 && $kpi["status"] != 2) {
+													//	if ($canEdit == 1 && $kpi["status"] != 2) {
+													if ($canEdit == 1) {
 													?>
 														<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/update-personal-kpi/<?= ModelMaster::encodeParams(['kpiEmployeeId' => $kpiEmployeeId]) ?>" class="no-underline">
 															<div class="pim-btn-<?= $colorFormat ?>">

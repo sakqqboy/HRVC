@@ -173,16 +173,28 @@ class KgiTeamController extends Controller
 		$employeeId = Employee::employeeId($userId);
 		$employee = Employee::EmployeeDetail($employeeId);
 		$teamId = $employee["teamId"];
-		$kgiTeams = KgiTeam::find()
-			->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,
+		if ($role <= 3) {
+			$kgiTeams = KgiTeam::find()
+				->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,
 			kgi_team.teamId,kgi_team.target')
-			->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_team.kgiId")
-			->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
-			->where(["kgi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
-			->andFilterWhere(["kgi_team.teamId" => $teamId])
-			->orderBy("k.createDateTime DESC,t.teamName ASC")
-			->asArray()
-			->all();
+				->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_team.kgiId")
+				->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
+				->where(["kgi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
+				->andFilterWhere(["kgi_team.teamId" => $teamId])
+				->orderBy("k.createDateTime DESC,t.teamName ASC")
+				->asArray()
+				->all();
+		} else {
+			$kgiTeams = KgiTeam::find()
+				->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,
+			kgi_team.teamId,kgi_team.target')
+				->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_team.kgiId")
+				->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
+				->where(["kgi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
+				->orderBy("k.createDateTime DESC,t.teamName ASC")
+				->asArray()
+				->all();
+		}
 		//}
 		if (isset($kgiTeams) && count($kgiTeams) > 0) {
 			foreach ($kgiTeams as $kgiTeam) :
@@ -371,9 +383,9 @@ class KgiTeamController extends Controller
 			->andFilterWhere([
 				"kb.branchId" => $branchId,
 				"kgi_team.teamId" => $teamId,
-				//"kgi_team.month" => $month,
-				//"kgi_team.year" => $year,
-				//"kgi_team.status" => $status,
+				"kgi_team.month" => $month,
+				"kgi_team.year" => $year,
+				"kgi_team.status" => $status,
 			])
 			->orderBy("k.createDateTime DESC,t.teamName ASC")
 			->asArray()

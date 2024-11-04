@@ -2,6 +2,7 @@
 
 namespace frontend\models\hrvc;
 
+use common\models\ModelMaster;
 use Yii;
 use \frontend\models\hrvc\master\KgiTeamMaster;
 
@@ -129,5 +130,19 @@ class KgiTeam extends \frontend\models\hrvc\master\KgiTeamMaster
             ->asArray()
             ->all();
         return $kgiTeam;
+    }
+    public static function nextCheckDate($kgiTeamId)
+    {
+        $date = '';
+        $kgiHistory = KgiTeamHistory::find()
+            ->select('nextCheckDate')
+            ->where(["kgiTeamId" => $kgiTeamId, "status" => [1, 4]])
+            ->orderBy('kgiTeamHistoryId DESC')
+            ->asArray()
+            ->one();
+        if (isset($kgiHistory) && !empty($kgiHistory) && $kgiHistory["nextCheckDate"] != '') {
+            $date = ModelMaster::engDate($kgiHistory["nextCheckDate"], 2);
+        }
+        return $date;
     }
 }

@@ -375,6 +375,7 @@ class ViewController extends Controller
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-has-kpi?kgiId=' . $kgiId);
 		$kgiHasKpi = curl_exec($api);
 		$kgiHasKpi = json_decode($kgiHasKpi, true);
@@ -389,15 +390,80 @@ class ViewController extends Controller
 
 
 		$ghp = [];
-		if (count($kgiHasKpi) > 0) {
-			foreach ($kgiHasKpi as $gp):
-				$ghp[$gp["kpiId"]] = 1;
-			endforeach;
-		}
+		// if (count($kgiHasKpi) > 0) {
+		// 	foreach ($kgiHasKpi as $gp):
+		// 		$ghp[$gp["kpiId"]] = 1;
+		// 	endforeach;
+		// }
 
 		curl_close($api);
 
 		$res["kpi"] = $this->renderAjax('kgi_kpi', [
+			"kgiHasKpi" => $kgiHasKpi,
+			"kgiId" => $kgiId,
+			"kgiDetail" => $kgiDetail,
+			"kpis" => $kpis,
+			"ghp" => $ghp
+		]);
+
+		return json_encode($res);
+	}
+	public function actionKgiHasKpi()
+	{
+		$role = UserRole::userRight();
+		$adminId = '';
+		$gmId = '';
+		$teamLeaderId = '';
+		$managerId = '';
+		$supervisorId = '';
+		$staffId = '';
+		if ($role == 7) {
+			$adminId = Yii::$app->user->id;
+		}
+		if ($role == 6) {
+			$gmId = Yii::$app->user->id;
+		}
+		if ($role == 5) {
+			$managerId = Yii::$app->user->id;
+		}
+		if ($role == 4) {
+			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$teamLeaderId = Yii::$app->user->id;
+		}
+		if ($role == 1 || $role == 2) {
+			$staffId = Yii::$app->user->id;
+			//return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
+		}
+		$kgiId = $_POST["kgiId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-has-kpi?kgiId=' . $kgiId);
+		$kgiHasKpi = curl_exec($api);
+		$kgiHasKpi = json_decode($kgiHasKpi, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
+		$kgiDetail = curl_exec($api);
+		$kgiDetail = json_decode($kgiDetail, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
+		$kpis = curl_exec($api);
+		$kpis = json_decode($kpis, true);
+
+
+		$ghp = [];
+		// if (count($kgiHasKpi) > 0) {
+		// 	foreach ($kgiHasKpi as $gp):
+		// 		$ghp[$gp["kpiId"]] = 1;
+		// 	endforeach;
+		// }
+
+		curl_close($api);
+
+		$res["kpi"] = $this->renderAjax('kpi', [
 			"kgiHasKpi" => $kgiHasKpi,
 			"kgiId" => $kgiId,
 			"kgiDetail" => $kgiDetail,

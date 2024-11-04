@@ -228,6 +228,7 @@ class ManagementController extends Controller
 				$kgiHistory->fromDate = $_POST["fromDate"];
 				$kgiHistory->toDate = $_POST["toDate"];
 				$kgiHistory->save(false);
+				$kgiId = Yii::$app->db->lastInsertID;
 				if (isset($_POST["branch"]) && count($_POST["branch"]) > 0) {
 					$this->saveKgiBranch($_POST["branch"], $kgiId);
 				}
@@ -236,12 +237,13 @@ class ManagementController extends Controller
 				}
 				if (isset($_POST["team"]) && count($_POST["team"]) > 0) {
 					$this->saveKgiTeam($_POST["team"], $kgiId);
-					$this->saveKgiEmployee($_POST["team"], $kgiId);
+					//$this->saveKgiEmployee($_POST["team"], $kgiId);
 				}
 				if (isset($_POST["kgiGroup"]) && count($_POST["kgiGroup"]) > 0) {
-					$this->saveKgiGroup($_POST["kgiGroup"], $kgiId);
+					//$this->saveKgiGroup($_POST["kgiGroup"], $kgiId);
 				}
-				return $this->redirect(Yii::$app->request->referrer);
+				//return $this->redirect(Yii::$app->request->referrer);
+				return $this->redirect(Yii::$app->homeUrl . 'kgi/assign/assign/' . ModelMaster::encodeParams(["kgiId" => $kgiId, "companyId" => $_POST["companyId"]]));
 				//return $this->redirect('grid');
 			}
 		}
@@ -606,7 +608,8 @@ class ManagementController extends Controller
 			if ($kgi->toDate == "") {
 				$kgi->toDate = $_POST["toDate"];
 			}
-			if ($isManager == 1 && $kgi->targetAmount == "") {
+			//if ($isManager == 1 && $kgi->targetAmount == "") {
+			if ($isManager == 1 &&  $_POST["targetAmount"] != "") {
 				$kgi->targetAmount = str_replace(",", "", $_POST["targetAmount"]);
 			}
 			//$kgi->targetAmount = $_POST["targetAmount"];
@@ -660,7 +663,7 @@ class ManagementController extends Controller
 					$this->saveKgiTeam($_POST["team"], $kgiId);
 				}
 				if (isset($_POST["kgiGroup"]) && count($_POST["kgiGroup"]) > 0) {
-					$this->saveKgiGroup($_POST["kgiGroup"], $kgiId);
+					//$this->saveKgiGroup($_POST["kgiGroup"], $kgiId);
 				}
 				return $this->redirect(Yii::$app->request->referrer);
 				//return $this->redirect('grid');
@@ -1672,19 +1675,24 @@ class ManagementController extends Controller
 					}
 				endforeach;
 			}
-		} else {
+		} else { //over team leader
 			$branchId = User::userBranchId();
-			$departments = Department::find()->where(["branchId" => $branchId])->asArray()->all();
+			//throw new exception(Yii::$app->user->id);
+			//throw new exception($branchId);
+			$departments = Department::find()
+				->where(["branchId" => $branchId, "status" => 1])
+				->asArray()->all();
 			if (isset($departments) && count($departments) > 0) {
 				foreach ($departments as $department) :
 					$teams = Team::find()
-						->where(["departmentId" => $department["departmentId"]])
+						->where(["departmentId" => $department["departmentId"], "status" => 1])
 						->asArray()
 						->all();
 					if (isset($teams) && count($teams) > 0) {
 						foreach ($teams as $team) :
 							$kgiTeams = KgiTeam::find()
 								->where(["teamId" => $team["teamId"]])
+								->andWhere("status!=99")
 								->asArray()
 								->all();
 							if (isset($kgiTeams) && count($kgiTeams) > 0) {
@@ -1694,9 +1702,13 @@ class ManagementController extends Controller
 										->orderBy("createDateTime DESC")
 										->asArray()
 										->one();
+									$mainKgi = Kgi::find()
+										->select('priority,amountType')
+										->where(["kgiId" => $kgiTeam["kgiId"]])->asArray()->one();
 									if (isset($kgiTeamHistory) && !empty($kgiTeamHistory)) {
 										$teamKgis[$kgiTeamHistory["kgiTeamHistoryId"]] = [
 											"kgiId" => $kgiTeam["kgiId"],
+											"kgiTeamId" => $kgiTeam["kgiTeamId"],
 											"kgiName" => Kgi::kgiName($kgiTeam["kgiId"]),
 											"company" => Branch::companyName($branchId),
 											"branch" => Branch::branchName($branchId),
@@ -1707,6 +1719,11 @@ class ManagementController extends Controller
 											"reson" => $kgiTeamHistory["detail"],
 											"newTarget" => $kgiTeamHistory["target"],
 											"creater" => User::employeeNameByuserId($kgiTeamHistory["createrId"]), // userId
+											"isOver" => ModelMaster::isOverDuedate(KgiTeam::nextCheckDate($kgiTeam['kgiTeamId'])),
+											"priority" => $mainKgi["priority"],
+											"month" => ModelMaster::fullMonthText($kgiTeamHistory["month"]),
+											"status" => $kgiTeamHistory["status"],
+											"amountType" => $mainKgi["amountType"]
 										];
 									}
 								endforeach;
@@ -1716,7 +1733,7 @@ class ManagementController extends Controller
 				endforeach;
 			}
 		}
-		return $this->render('wait_approve', [
+		return $this->render('wait_approve1', [
 			"role" => $role,
 			"teamKgis" => $teamKgis,
 			"employeeKgis" => $employeeKgis,

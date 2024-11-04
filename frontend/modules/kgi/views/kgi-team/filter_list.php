@@ -7,7 +7,7 @@ use frontend\models\hrvc\Team;
 
 ?>
 <div class="row">
-	<div class="col-1 pr-10 text-end">
+	<div class="col-1 pr-10 text-end pr-0">
 		<span>
 			<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterPlus.png" class="pim-search-icon" style="cursor: pointer;" onclick="javascript:kgiFilterForTeam()">
 		</span>

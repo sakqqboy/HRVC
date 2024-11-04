@@ -248,7 +248,10 @@ class EmployeeController extends Controller
         $employee["teamName"] =  Team::teamName($employee['teamId']);
         $employee["titleName"] = Title::titleName($employee['titleId']);
         $employee["conditionName"] = EmployeeCondition::conditionName($employee['employeeConditionId']);
-        $employee["status"] = EmployeeStatus::employeeStatus($employee['employeeId']);
+        //$employee["status"] = EmployeeStatus::employeeStatus($employee['employeeId']);
+        //    $status = $employee["status"];
+        $employee["status"] = $employee['statusName'];
+        //    $employee["statusId"] = $status;
         //throw new Exception(print_r($employee, true));
         return $this->render('employee_profile', [
             "employee" => $employee
@@ -532,7 +535,7 @@ class EmployeeController extends Controller
             }
 
             $employee->remark = $_POST["remark"];
-            $employee->status = 1;
+            $employee->status =  $_POST["status"];
             $employee->updateDateTime = new Expression('NOW()');
             if ($employee->save(false)) {
                 $employeeId = $_POST["eId"];
@@ -576,7 +579,7 @@ class EmployeeController extends Controller
         $departments = [];
         $teams = [];
         $groupId = Group::currentGroupId();
-        $employees = Employee::find()->where(["status" => [1, 0, 2]])
+        $employees = Employee::find()->where(["status" => [1, 0]])
             ->andFilterWhere([
                 "companyId" => $companyId,
                 "branchId" => $branchId,
@@ -1272,5 +1275,18 @@ class EmployeeController extends Controller
         $employee = json_decode($employee, true);
         curl_close($api);
         return json_encode($employee);
+    }
+    public function actionUpdateEmployeeStatus()
+    {
+        $employee = Employee::find()->where(1)->all();
+        if (isset($employee) && count($employee) > 0) {
+            foreach ($employee as $em):
+                $employeeStatus = EmployeeStatus::find()->where(["employeeId" => $em->employeeId])->orderBy("employeeStatusId DESC")->one();
+                if (isset($employeeStatus) && !empty($employeeStatus)) {
+                    $em->status = $employeeStatus->statusId;
+                    $em->save(false);
+                }
+            endforeach;
+        }
     }
 }

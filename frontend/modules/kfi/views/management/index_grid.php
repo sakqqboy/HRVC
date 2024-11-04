@@ -269,7 +269,8 @@ $this->title = 'KFI Grid View';
 											</div>
 											<div class="col-4 text-center mt-10 pt-6">
 												<?php
-												if ($role >= 5 && $kfi["status"] == 1) {
+												//if ($role >= 5 && $kfi["status"] == 1) {
+												if ($role >= 5) {
 												?>
 													<div onclick="javascript:updateKfi(<?= $kfiId ?>)" class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
 														<i class="fa fa-refresh" aria-hidden="true"></i> Update

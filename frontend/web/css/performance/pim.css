@@ -867,3 +867,30 @@
 .highcharts-credits {
 	display: none;
 }
+
+.approval-box {
+	width: 100%;
+	font-size: 8px;
+	font-weight: 500;
+	color: #2580D3;
+	background-color: #D7EBFF;
+	border-radius: 15px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 3px;
+}
+
+.approve-num {
+	color: white;
+	background-color: #2580D3;
+	padding: 2px 5px 2px 4px;
+	border-radius: 11.5px;
+}
+
+.approve-zero {
+	color: #2580D3;
+	background-color: white;
+	padding: 2px 5px 2px 4px;
+	border-radius: 11.5px;
+	border-color: #2580D3 solid thin;
+}

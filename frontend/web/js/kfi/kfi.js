@@ -588,11 +588,11 @@ function saveSelectedKgi(kfiId) {
         data: { kfiId: kfiId, selectedKgi: selectedKgi,unCheck:unCheck },
         success: function (data) {
             if (data.status) {
-                $('.alert-box').slideDown(500);
-                setTimeout(function(){
+            //    $('.alert-box').slideDown(500);
+                //setTimeout(function(){
                     // Code to be executed after a delay
-                    $('.alert-box').fadeOut(300);
-                  }, 3000); 
+            //        $('.alert-box').fadeOut(300);
+            //      }, 3000); 
             }
         }
     });
@@ -746,24 +746,70 @@ function viewTabKfi(tabId) {
 			url: url,
 			data: { kfiId: kfiId },
 			success: function (data) {
-				$("#show-content").html(data.kpi);
+				$("#show-content").html(data.kgi);
 			}
 		});
 	}
 }
 function showEditRelateKgi(type,kfiId) {
 	if (type == 1) {
-		$("#editRelateKgi").hide();
+        $("#editRelateKgi").hide();
 		$("#saveRelateKgi").show();
+		$("#cancelRelateKgi").show();
 		$('input[id="check-relate-kgi"]').each(function () {
-				$(this).show();
+			$(this).show();
 		});
-	} else { 
+		var url = $url + 'kfi/view/kfi-has-kgi';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { kfiId: kfiId },
+			success: function (data) {
+				$("#kgi").html('');
+				$("#kgi").html(data.kgi);
+			}
+		});
+    }
+    if (type == 2) { 
 		$("#editRelateKgi").show();
 		$("#saveRelateKgi").hide();
+		$("#cancelRelateKgi").hide();
 		$('input[id="check-relate-kgi"]').each(function () {
 			$(this).hide();
 		});
-        saveSelectedKgi(kfiId);
+		saveSelectedKgi(kfiId);
+		$("#show-content").html('');
+		var url = $url + 'kfi/view/kfi-kgi';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { kfiId: kfiId },
+			success: function (data) {
+				$("#show-content").html(data.kgi);
+				$('.alert-box').slideDown(500);
+				setTimeout(function () {
+					$('.alert-box').fadeOut(300);
+				}, 1000);
+			}
+		});
+	}
+    if (type == 0) { 
+		$("#editRelateKgi").show();
+		$("#saveRelateKgi").hide();
+		$("#cancelRelateKgi").hide();
+		$("#show-content").html('');
+		var url = $url + 'kfi/view/kfi-kgi';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { kfiId: kfiId },
+			success: function (data) {
+				$("#show-content").html('');
+				$("#show-content").html(data.kgi);
+			}
+		});
 	}
  }

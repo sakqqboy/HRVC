@@ -298,7 +298,72 @@ class ViewController extends Controller
 
 		curl_close($api);
 
-		$res["kpi"] = $this->renderAjax('kfi_kgi', [
+		$res["kgi"] = $this->renderAjax('kfi_kgi', [
+			"kfiHasKgi" => $kfiHasKgi,
+			"kfiId" => $kfiId,
+			"kfiDetail" => $kfiDetail,
+			"kgis" => $kgis,
+			"ghp" => $ghp
+		]);
+
+		return json_encode($res);
+	}
+	public function actionKfiHasKgi()
+	{
+		$role = UserRole::userRight();
+		$adminId = '';
+		$gmId = '';
+		$teamLeaderId = '';
+		$managerId = '';
+		$supervisorId = '';
+		$staffId = '';
+		if ($role == 7) {
+			$adminId = Yii::$app->user->id;
+		}
+		if ($role == 6) {
+			$gmId = Yii::$app->user->id;
+		}
+		if ($role == 5) {
+			$managerId = Yii::$app->user->id;
+		}
+		if ($role == 4) {
+			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$teamLeaderId = Yii::$app->user->id;
+		}
+		if ($role == 1 || $role == 2) {
+			$staffId = Yii::$app->user->id;
+			//return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
+		}
+		$kfiId = $_POST["kfiId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-has-kgi?kfiId=' . $kfiId);
+		$kfiHasKgi = curl_exec($api);
+		$kfiHasKgi = json_decode($kfiHasKgi, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?id=' . $kfiId);
+		$kfiDetail = curl_exec($api);
+		$kfiDetail = json_decode($kfiDetail, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
+		$kgis = curl_exec($api);
+		$kgis = json_decode($kgis, true);
+
+
+		$ghp = [];
+		// if (count($kgiHasKpi) > 0) {
+		// 	foreach ($kgiHasKpi as $gp):
+		// 		$ghp[$gp["kpiId"]] = 1;
+		// 	endforeach;
+		// }
+
+		curl_close($api);
+
+		$res["kgi"] = $this->renderAjax('kgi', [
 			"kfiHasKgi" => $kfiHasKgi,
 			"kfiId" => $kfiId,
 			"kfiDetail" => $kfiDetail,

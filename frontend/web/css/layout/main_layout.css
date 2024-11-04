@@ -64,3 +64,16 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #072033;
 }
+
+.on-data-box {
+    background-color: #F9F9F9;
+    border: #A6CAFC dashed 1px;
+    border-radius: 6px;
+    min-height: 300px;
+    padding-top: 50px;
+}
+
+.no-data-img {
+    width: 82px;
+    height: 99px;
+}

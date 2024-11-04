@@ -111,6 +111,10 @@ $this->title = "TEAM KPI";
 										</div>
 									</div>
 									<div class="col-lg-5 col-md-2 col-4 text-end pr-20">
+										<span class="pim-normal-text mr-5">
+											<?= $kpi["teamName"] ?>
+										</span>
+										<img src="<?= Yii::$app->homeUrl . 'images/icons/Settings/team-name.svg' ?>" class="pim-pic-grid mr-5" style="margin-top: -1px;font-size:12px;">
 										<a class="btn btn-bg-white-xs mr-5" href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-team-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId'], "kpiTeamId" => $kpiTeamId]) ?>" style="margin-top: -3px;">
 											<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History" class="pim-icon" style="margin-top: -1px;">
 										</a>
@@ -322,7 +326,8 @@ $this->title = "TEAM KPI";
 											</div>
 											<div class="col-4 text-center mt-10 pt-6">
 												<?php
-												if ($canEdit == 1 && $kpi["status"] != 2) {
+												//if ($canEdit == 1 && $kpi["status"] != 2) {
+												if ($canEdit == 1) {
 												?>
 													<div data-bs-toggle="modal" data-bs-target="#update-kpi-modal-team" onclick="javascript:updateTeamKpi(<?= $kpiTeamId ?>)" class="pim-btn-<?= $colorFormat ?>">
 														<i class="fa fa-refresh" aria-hidden="true"></i> Update
