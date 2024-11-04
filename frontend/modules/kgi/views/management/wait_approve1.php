@@ -178,7 +178,7 @@ $this->title = 'Waiting for approve KGI';
 						endforeach;
 					} else { ?>
 						<tr>
-							<td colspan="9" class="col-12 mt-20 font-size-14 text-secondary"> There are no waiting for approve KGI.</td>
+							<td colspan="9" class="col-12 mt-20 font-size-14 text-secondary"> There are no waiting for approve KGI.555</td>
 						</tr>
 					<?php
 					}
