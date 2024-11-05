@@ -800,7 +800,17 @@ function approveTargetKgiTeam(kgiTeamId, approve) {
 		});
 	}
 }
-function changeTargetKgiTeamReason(kgiTeamId) {
+function changeTargetKgiTeamReason(kgiTeamHistoryId) {
+	var url = $url + 'kgi/management/channge-team-target-reason';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { kgiTeamHistoryId: kgiTeamHistoryId},
+		success: function (data) {
+				$("#kgi-team-reason").html(data.reason);
+		}
+	});
 }
 function approveTargetKgiEmployee(kgiEmployeeId, approve) {
 	var url = $url + 'kgi/management/approve-kgi-employee-target';
