@@ -722,4 +722,13 @@ class KgiTeamController extends Controller
 		}
 		return json_encode($data);
 	}
+	public function actionWaitForApprove()
+	{
+		$kgiTeam = KgiTeamHistory::find()
+			->where(["status" => 88])
+			->asArray()
+			->all();
+		$res["totalReuest"] = count($kgiTeam);
+		return json_encode($res);
+	}
 }

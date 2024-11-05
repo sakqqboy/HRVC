@@ -1677,8 +1677,6 @@ class ManagementController extends Controller
 			}
 		} else { //over team leader
 			$branchId = User::userBranchId();
-			//throw new exception(Yii::$app->user->id);
-			//throw new exception($branchId);
 			$departments = Department::find()
 				->where(["branchId" => $branchId, "status" => 1])
 				->asArray()->all();
