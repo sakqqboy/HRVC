@@ -1649,9 +1649,10 @@ class ManagementController extends Controller
 		if ($role == 3) { //Team Leader
 			$teamId = User::userTeamId();
 			$kgiEmployees = KgiEmployee::find()
-				->select('kgi_employee.*')
+				->select('kgi_employee.*,k.priority')
 				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
-				->where(["e.teamId" => $teamId])
+				->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_employee.kgiId")
+				->where(["e.teamId" => $teamId, "k.status" => [1, 2]])
 				->asArray()
 				->orderBy('createDateTime')
 				->all();
@@ -1671,6 +1672,7 @@ class ManagementController extends Controller
 							"target" => $kgiEmployee["target"],
 							"newTarget" => $kgiEmployeeHistory["target"],
 							"reson" => $kgiEmployeeHistory["detail"],
+							"priority" => $kgiEmployee["priority"],
 						];
 					}
 				endforeach;
@@ -1702,7 +1704,9 @@ class ManagementController extends Controller
 										->one();
 									$mainKgi = Kgi::find()
 										->select('priority,amountType')
-										->where(["kgiId" => $kgiTeam["kgiId"]])->asArray()->one();
+										->where(["kgiId" => $kgiTeam["kgiId"]])
+										->asArray()
+										->one();
 									if (isset($kgiTeamHistory) && !empty($kgiTeamHistory)) {
 										$teamKgis[$kgiTeamHistory["kgiTeamHistoryId"]] = [
 											"kgiId" => $kgiTeam["kgiId"],

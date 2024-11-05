@@ -21,17 +21,15 @@ $this->title = 'Waiting for approve KGI';
 			<table class="">
 				<thead>
 					<tr class="pim-table-header">
-						<th class="pl-10" style="width:15%">Employee</th>
+						<th class="pl-10">Employee</th>
 						<th class="pl-10">KGI Contents</th>
-						<th style="width:10%">Branch</th>
-						<th style="width:3%">Priority</th>
-						<th>Team</th>
-						<th style="width:5%">Previous</th>
+						<th class="text-center">Priority</th>
+						<th>Previous</th>
 						<th class="text-center">New</th>
 						<th class="text-center">Change</th>
 						<th class="text-center">Month</th>
 						<th class="text-center"></th>
-						<th>Last</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
