@@ -166,7 +166,7 @@ $this->title = 'Waiting for approve KGI';
 																?>" class="btn btn-sm btn-primary font-size-10">
 										<i class="fa fa-eye" aria-hidden="true"></i>
 									</a> -->
-									<a href="javascript:changeTargetKgiTeamReason(<?= $kgiTeamHistoryId ?>)" class="btn btn-bg-white-xs mr-5">
+									<a onclick="javascript:changeTargetKgiTeamReason(<?= $kgiTeamHistoryId ?>)" class="btn btn-bg-white-xs mr-5" data-bs-toggle="modal" data-bs-target="#reason">
 										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/question.svg" style="margin-top: -3px;">
 									</a>
 									<a href="<?= Yii::$app->homeUrl ?>kgi/management/approve-kgi-team/<?= ModelMaster::encodeParams(["kgiTeamHistoryId" => $kgiTeamHistoryId]) ?>" class="btn btn-bg-white-xs">

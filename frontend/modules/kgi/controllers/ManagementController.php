@@ -2040,4 +2040,19 @@ class ManagementController extends Controller
 		}
 		return $this->redirect(Yii::$app->homeUrl . 'kgi/management/grid');
 	}
+	public function actionChanngeTeamTargetReason()
+	{
+		$kgiTeamHistoryId = $_POST["kgiTeamHistoryId"];
+		$kgiTeamHistory = KgiTeamHistory::find()
+			->where(["kgiTeamHistoryId" => $kgiTeamHistoryId])
+			->asArray()
+			->one();
+
+		if (isset($kgiTeamHistory) && !empty($kgiTeamHistory)) {
+			$res["reason"] = $kgiTeamHistory["detail"];
+		} else {
+			$res["reason"] = "";
+		}
+		return json_encode($res);
+	}
 }
