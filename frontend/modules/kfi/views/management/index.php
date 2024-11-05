@@ -1,5 +1,6 @@
 <?php
 
+use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
 $this->title = 'KFI';
@@ -156,12 +157,19 @@ $this->title = 'KFI';
                                     <?= $kfi["status"] == 1 ? $kfi["nextCheck"] : '' ?>
                                 </td>
                                 <td>
-                                    <span data-bs-toggle="modal" data-bs-target="#kfi-issue"
+                                    <!-- <span data-bs-toggle="modal" data-bs-target="#kfi-issue"
                                         onclick="javascript:showKfiComment(<?= $kfiId ?>)"
                                         class="btn btn-bg-white-xs pr-2 pl-2 pt-1 pb-1">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.png"
                                             class="icon-table on-cursor">
-                                    </span>
+                                    </span> -->
+
+                                    <a href="<?= Yii::$app->homeUrl ?>kfi/view/index/<?= ModelMaster::encodeParams(['kfiId' => $kfiId]) ?>"
+                                        class="btn btn-bg-white-xs mr-5" style="margin-top: -1px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.png"
+                                            alt="History" class="pim-icon" style="margin-top: -1px;">
+                                    </a>
+
                                     <span class="dropdown" href="#" id="dropdownMenuLink-<?= $kfiId ?>"
                                         data-bs-toggle="dropdown">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.png"
@@ -186,6 +194,31 @@ $this->title = 'KFI';
 														<i class="fa fa-eye" aria-hidden="true"></i>
 													</a>
 												</li> -->
+                                        <?php
+												if ($role >= 3) {
+												?>
+                                        <li>
+                                            <!-- <a class="dropdown-item" href="<?= Yii::$app->homeUrl ?>kfi/kfi-team/kfi-team-setting/<?= ModelMaster::encodeParams(['kfiId' => $kfiId]) ?>">
+															<i class="fa fa-users" aria-hidden="true"></i>
+														</a> -->
+                                            <a class="dropdown-item"
+                                                href="<?= Yii::$app->homeUrl ?>kfi/assign/assign/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, "companyId" => $kfi["companyId"]]) ?>">
+                                                <i class="fa fa-users" aria-hidden="true"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <!-- <a class="dropdown-item" href="<?= Yii::$app->homeUrl ?>kfi/kfi-personal/indivisual-setting/<?= ModelMaster::encodeParams(['kfiId' => $kfiId]) ?>">
+															<i class="fa fa-user" aria-hidden="true"></i>
+														</a> -->
+                                            <a class="dropdown-item"
+                                                href="<?= Yii::$app->homeUrl ?>kfi/assign/assign/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, "companyId" => $kfi["companyId"], "save" => 0]) ?>">
+                                                <i class="fa fa-user" aria-hidden="true"></i>
+                                            </a>
+                                        </li>
+                                        <?php
+												}
+												?>
+
                                         <?php
 												if ($role >= 5) {
 												?>
