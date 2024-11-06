@@ -76,12 +76,22 @@ $this->title = 'Company KFI History';
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Comment.png" alt="History"
                                         class="home-icon">
                                 </a>
+                                <!-- <a href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(['kfiId' => $kfiId]) ?>"
+                                    class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png" alt="History"
+                                        class="pim-icon">
+                                </a> -->
                                 <a class="btn btn-bg-white-xs mr-5" data-bs-toggle="modal"
                                     data-bs-target="#staticBackdrop3"
                                     onclick="javascript:kfiHistory(<?= $kfi['kfiHistoryId'] ?>)">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Charts.png" alt="History"
                                         class="home-icon" style="margin-top: -3px;">
                                 </a>
+                                <!-- <a href="<?= Yii::$app->homeUrl ?>kfi/chart/company-chart/<?= ModelMaster::encodeParams(['kfiId' => $kfiId]) ?>"
+                                    class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="History"
+                                        class="pim-icon mr-3" style="margin-top: -2px;">Chart
+                                </a> -->
                                 <a href="<?= Yii::$app->homeUrl ?>kfi/view/index/<?= ModelMaster::encodeParams(["kfiHistoryId" => $kfi['kfiHistoryId']]) ?>"
                                     class="btn btn-bg-white-xs">
                                     <!-- <i class="fa fa-eye" aria-hidden="true"></i> -->
