@@ -23,20 +23,53 @@ $this->title = "INDIVIDUAL KGI";
 				<div class="row">
 					<div class="col-lg-4 col-md-6 col-12 pr-0">
 						<div class="row">
-							<div class="col-9">
+							<div class="col-12">
 								<div class="row">
-									<div class="col-4 pim-type-tab pr-0 pl-0">
+									<div class="col-3 pim-type-tab pr-0 pl-0">
 										<a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" class="no-underline-black ">
 											Company KGI
 										</a>
 									</div>
-									<div class="col-4 pim-type-tab">
+									<div class="col-3 pim-type-tab">
 										<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/team-kgi-grid" class="no-underline-black ">
 											Team KGI
 										</a>
 									</div>
-									<div class="col-4 pim-type-tab-selected">
+									<div class="col-3 pim-type-tab-selected">
 										Self KGI
+									</div>
+									<div class="col-3 pr-0 pl-3 pt-0">
+										<?php
+										$waitForApprove["totalReuest"] = 3;
+										if ($role >= 3) {
+										?>
+											<div class="col-12 approval-box text-center pr-3">
+												<?php
+												if ($waitForApprove["totalReuest"] > 0) {
+												?>
+													<a href="<?= Yii::$app->homeUrl ?>kgi/management/wait-approve-kgi-personal"
+														style="text-decoration: none;color:#2580D3;">
+														<span class="approve-num mr-2"><?= $waitForApprove["totalReuest"] ?></span>
+														Approvals
+														<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approve.svg"
+															class="first-layer-icon pull-right" style="margin-top:-2px;">
+													</a>
+												<?php
+												} else { ?>
+													<a style="text-decoration: none;color:#2580D3;">
+														<span class="approve-num mr-2"><?= $waitForApprove["totalReuest"] ?></span>
+														Approvals
+														<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approve.svg"
+															class="first-layer-icon pull-right" style="margin-top:-2px;">
+													</a>
+												<?php
+												}
+
+												?>
+											</div>
+										<?php
+										}
+										?>
 									</div>
 								</div>
 							</div>

@@ -1646,6 +1646,76 @@ class ManagementController extends Controller
 		if ($role < 3) {
 			return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi');
 		}
+
+		$branchId = User::userBranchId();
+		$departments = Department::find()
+			->where(["branchId" => $branchId, "status" => 1])
+			->asArray()->all();
+		if (isset($departments) && count($departments) > 0) {
+			foreach ($departments as $department) :
+				$teams = Team::find()
+					->where(["departmentId" => $department["departmentId"], "status" => 1])
+					->asArray()
+					->all();
+				if (isset($teams) && count($teams) > 0) {
+					foreach ($teams as $team) :
+						$kgiTeams = KgiTeam::find()
+							->where(["teamId" => $team["teamId"]])
+							->andWhere("status!=99")
+							->asArray()
+							->all();
+						if (isset($kgiTeams) && count($kgiTeams) > 0) {
+							foreach ($kgiTeams as $kgiTeam) :
+								$kgiTeamHistory = KgiTeamHistory::find()
+									->where(["kgiTeamId" => $kgiTeam["kgiTeamId"], "status" => 88])
+									->orderBy("createDateTime DESC")
+									->asArray()
+									->one();
+								$mainKgi = Kgi::find()
+									->select('priority,amountType')
+									->where(["kgiId" => $kgiTeam["kgiId"]])
+									->asArray()
+									->one();
+								if (isset($kgiTeamHistory) && !empty($kgiTeamHistory)) {
+									$teamKgis[$kgiTeamHistory["kgiTeamHistoryId"]] = [
+										"kgiId" => $kgiTeam["kgiId"],
+										"kgiTeamId" => $kgiTeam["kgiTeamId"],
+										"kgiName" => Kgi::kgiName($kgiTeam["kgiId"]),
+										"company" => Branch::companyName($branchId),
+										"branch" => Branch::branchName($branchId),
+										"department" => Department::departmentNAme($department["departmentId"]),
+										"teamId" => $kgiTeam["teamId"],
+										"teamName" => Team::teamName($kgiTeam["teamId"]),
+										"target" => $kgiTeam["target"],
+										"reson" => $kgiTeamHistory["detail"],
+										"newTarget" => $kgiTeamHistory["target"],
+										"creater" => User::employeeNameByuserId($kgiTeamHistory["createrId"]), // userId
+										"isOver" => ModelMaster::isOverDuedate(KgiTeam::nextCheckDate($kgiTeam['kgiTeamId'])),
+										"priority" => $mainKgi["priority"],
+										"month" => ModelMaster::fullMonthText($kgiTeamHistory["month"]),
+										"status" => $kgiTeamHistory["status"],
+										"amountType" => $mainKgi["amountType"]
+									];
+								}
+							endforeach;
+						}
+					endforeach;
+				}
+			endforeach;
+		}
+		return $this->render('wait_approve1', [
+			"role" => $role,
+			"teamKgis" => $teamKgis,
+			"employeeKgis" => $employeeKgis,
+		]);
+	}
+	public function actionWaitApproveKgiPersonal()
+	{
+		$role = UserRole::userRight();
+		$employeeKgis = [];
+		if ($role < 3) {
+			return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi');
+		}
 		if ($role == 3) { //Team Leader
 			$teamId = User::userTeamId();
 			$kgiEmployees = KgiEmployee::find()
@@ -1656,7 +1726,6 @@ class ManagementController extends Controller
 				->asArray()
 				->orderBy('createDateTime')
 				->all();
-
 			if (isset($kgiEmployees) && count($kgiEmployees) > 0) {
 				foreach ($kgiEmployees as $kgiEmployee) :
 					$kgiEmployeeHistory = KgiEmployeeHistory::find()
@@ -1673,74 +1742,20 @@ class ManagementController extends Controller
 							"newTarget" => $kgiEmployeeHistory["target"],
 							"reson" => $kgiEmployeeHistory["detail"],
 							"priority" => $kgiEmployee["priority"],
+							"isOver" => ModelMaster::isOverDuedate(KgiEmployee::nextCheckDate($kgiEmployee['kgiEmployeeId'])),
+							"month" => ModelMaster::fullMonthText($kgiEmployeeHistory["month"]),
+							"status" => $kgiEmployee["status"],
 						];
 					}
 				endforeach;
 			}
-		} else { //over team leader
-			$branchId = User::userBranchId();
-			$departments = Department::find()
-				->where(["branchId" => $branchId, "status" => 1])
-				->asArray()->all();
-			if (isset($departments) && count($departments) > 0) {
-				foreach ($departments as $department) :
-					$teams = Team::find()
-						->where(["departmentId" => $department["departmentId"], "status" => 1])
-						->asArray()
-						->all();
-					if (isset($teams) && count($teams) > 0) {
-						foreach ($teams as $team) :
-							$kgiTeams = KgiTeam::find()
-								->where(["teamId" => $team["teamId"]])
-								->andWhere("status!=99")
-								->asArray()
-								->all();
-							if (isset($kgiTeams) && count($kgiTeams) > 0) {
-								foreach ($kgiTeams as $kgiTeam) :
-									$kgiTeamHistory = KgiTeamHistory::find()
-										->where(["kgiTeamId" => $kgiTeam["kgiTeamId"], "status" => 88])
-										->orderBy("createDateTime DESC")
-										->asArray()
-										->one();
-									$mainKgi = Kgi::find()
-										->select('priority,amountType')
-										->where(["kgiId" => $kgiTeam["kgiId"]])
-										->asArray()
-										->one();
-									if (isset($kgiTeamHistory) && !empty($kgiTeamHistory)) {
-										$teamKgis[$kgiTeamHistory["kgiTeamHistoryId"]] = [
-											"kgiId" => $kgiTeam["kgiId"],
-											"kgiTeamId" => $kgiTeam["kgiTeamId"],
-											"kgiName" => Kgi::kgiName($kgiTeam["kgiId"]),
-											"company" => Branch::companyName($branchId),
-											"branch" => Branch::branchName($branchId),
-											"department" => Department::departmentNAme($department["departmentId"]),
-											"teamId" => $kgiTeam["teamId"],
-											"teamName" => Team::teamName($kgiTeam["teamId"]),
-											"target" => $kgiTeam["target"],
-											"reson" => $kgiTeamHistory["detail"],
-											"newTarget" => $kgiTeamHistory["target"],
-											"creater" => User::employeeNameByuserId($kgiTeamHistory["createrId"]), // userId
-											"isOver" => ModelMaster::isOverDuedate(KgiTeam::nextCheckDate($kgiTeam['kgiTeamId'])),
-											"priority" => $mainKgi["priority"],
-											"month" => ModelMaster::fullMonthText($kgiTeamHistory["month"]),
-											"status" => $kgiTeamHistory["status"],
-											"amountType" => $mainKgi["amountType"]
-										];
-									}
-								endforeach;
-							}
-						endforeach;
-					}
-				endforeach;
-			}
 		}
-		return $this->render('wait_approve1', [
+		return $this->render('wait_approve_employee', [
 			"role" => $role,
-			"teamKgis" => $teamKgis,
 			"employeeKgis" => $employeeKgis,
 		]);
 	}
+
 	public function actionApproveKgiTeam($hash)
 	{
 		$param = ModelMaster::decodeParams($hash);
