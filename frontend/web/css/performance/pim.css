@@ -125,6 +125,12 @@
 	height: 25px;
 }
 
+.pim-change-modes {
+	padding: 1px 10px 10px 10px !important;
+	border-color: #2F80ED !important;
+	height: 25px;
+}
+
 .pim-big-box {
 	border-radius: 10px;
 	padding: 5px;
@@ -166,6 +172,13 @@
 	height: 20px;
 	width: 20px;
 }
+
+.pim-search-icons {
+	height: 14px;
+	width: 14px;
+}
+
+
 
 .number-pim {
 	font-size: 11px;
@@ -406,6 +419,16 @@
 	background-color: #FFD7D7;
 	border-radius: 26.5px;
 	letter-spacing: 0.5px;
+	padding-left: 5px;
+}
+
+.over-assignKFI {
+	font-weight: 400;
+	font-size: 10px;
+	color: #E05757;
+	background-color: #FFD7D7;
+	border-radius: 26.5px;
+	/* letter-spacing: 0.5px; */
 	padding-left: 5px;
 }
 
@@ -682,22 +705,45 @@
 
 .number-tag {
 	background: #ffffff;
-	font-size: 10px !important;
-	letter-spacing: 0.5px;
+	font-size: 18px !important;
+	letter-spacing: 1.5px;
 	text-align: center;
 	border-radius: 10px;
 	position: relative;
 	color: #000000;
-	margin-top: -3px;
+	margin-top: 1px;
 	z-index: 3;
 }
 
 .pim-pic-grid {
-	width: 20px;
-	height: 20px;
+	width: 33px;
+	height: 33px;
 	border-radius: 100%;
 	border: #FFFFFF solid 0.5px;
+	margin-top: 3px;
 }
+
+.pim-pic-gridNum {
+	margin-left: -3px;
+	width: 33px;
+	height: 33px;
+	border-radius: 100%;
+	margin-top: 3px;
+}
+
+.pim-picgroup {
+	display: flex;
+	align-items: center;
+}
+
+.pim-picgroup img {
+	margin-left: 4px;
+	/* ปรับตามความต้องการ */
+	/* หรือ */
+	transform: translateX(-15px);
+	/* ปรับขนาดได้ตามต้องการ */
+}
+
 
 .pim-duedate {
 	font-weight: 400;
@@ -705,7 +751,7 @@
 }
 
 .pic-after {
-	margin-left: -13px;
+	margin-left: -3px;
 	z-index: 3;
 }
 

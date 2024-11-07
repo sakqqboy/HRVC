@@ -8,6 +8,66 @@
 	letter-spacing: 0.5px;
 }
 
+.select-pimselect {
+	padding-top: 2px;
+	border-radius: 20px;
+	height: 25px;
+	font-family: "SF Pro Display";
+	font-weight: 300;
+	padding-left: 10px;
+	letter-spacing: 0.5px;
+	border-radius: 67px;
+	border: 0.5px solid #2580D3;
+	background: var(--HRVC---Light-Blue, #D7EBFF);
+}
+
+.custom-button-select {
+	--bs-btn-padding-x: 2.0rem;
+	--bs-btn-padding-y: 0.16rem;
+	border-radius: 71px;
+	border: 0.5px solid #CBE2FF;
+	background: #2580D3;
+	color: #FFFFFF;
+	cursor: pointer;
+	transition: background-color 0.3s, border-color 0.3s;
+	/* เพิ่มการเปลี่ยนแปลงอย่างนุ่มนวล */
+}
+
+.custom-button-select:hover {
+	background-color: #CBE2FF;
+	/* สีพื้นหลังเมื่อชี้เมาส์ */
+	border-color: #2F80ED !important
+		/* สีของเส้นขอบเมื่อชี้เมาส์ */
+}
+
+.rounded-top-left {
+	border-top-left-radius: 5px;
+	/* ปรับตามต้องการ */
+}
+
+.custom-select-style {
+	display: flex;
+	width: 130px;
+	height: 30px;
+	padding: 5px 9px;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.btn-group .btn-primary {
+	border-radius: 3px 0px 0px 3px;
+	background: #2580D3;
+	color: #FFFFFF;
+}
+
+.btn-group .btn-outline-primary {
+	border-radius: 0px 3px 3px 0px;
+	border: 0.5px solid #CBD5E1;
+	background: #F6F6F6;
+	color: #000;
+}
+
+
 .select-pim.option {
 	font-weight: 300;
 }
