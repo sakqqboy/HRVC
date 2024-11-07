@@ -78,6 +78,7 @@ class ViewController extends Controller
 		$param = ModelMaster::decodeParams($hash);
 		$role = UserRole::userRight();
 		$kfiId = $param["kfiId"];
+		$openTab = array_key_exists("openTab", $param) ? $param["openTab"] : 0;
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
@@ -106,6 +107,7 @@ class ViewController extends Controller
 			"role" => $role,
 			"kfiDetail" => $kfiDetail,
 			"kfiId" => $kfiId,
+			"openTab" => $openTab,
 			"months" => $months,
 			"isManager" => $isManager,
 			"units" => $units,

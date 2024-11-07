@@ -125,6 +125,12 @@
 	height: 25px;
 }
 
+.pim-change-modes {
+	padding: 1px 10px 10px 10px !important;
+	border-color: #2F80ED !important;
+	height: 25px;
+}
+
 .pim-big-box {
 	border-radius: 10px;
 	padding: 5px;
@@ -166,6 +172,13 @@
 	height: 20px;
 	width: 20px;
 }
+
+.pim-search-icons {
+	height: 14px;
+	width: 14px;
+}
+
+
 
 .number-pim {
 	font-size: 11px;

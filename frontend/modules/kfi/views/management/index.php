@@ -26,7 +26,7 @@ $this->title = 'KFI';
                                 </div>
                             </div>
                         </div>
-                        <div class="col-5 text-end">
+                        <div class="col-5 text-start">
                             <?php
 							if ($role >= 3) {
 							?>
@@ -47,7 +47,7 @@ $this->title = 'KFI';
 					]) ?>
                     <input type="hidden" id="type" value="list">
                 </div>
-                <div class="col-lg-1 col-md-6 col-12 pr-0 text-end">
+                <!-- <div class="col-lg-1 col-md-6 col-12 pr-0 text-end">
                     <div class="btn-group" role="group">
                         <a href="<?= Yii::$app->homeUrl . 'kfi/management/grid' ?>"
                             class="btn btn-outline-primary font-size-12 pim-change-mode">
@@ -58,29 +58,44 @@ $this->title = 'KFI';
                         </a>
 
                     </div>
+                </div> -->
+                <div class="col-lg-1 col-md-6 col-12 pr-0 text-end">
+                    <div class="btn-group" role="group">
+                        <a href="<?= Yii::$app->homeUrl . 'kfi/management/grid' ?>" class=" btn btn-outline-primary
+                            font-size-12 pim-change-modes">
+                            <!-- <i class="fa fa-th-large" aria-hidden="true"></i> -->
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridblack.svg"
+                                style="cursor: pointer;">
+                        </a>
+                        <a href="<?= Yii::$app->homeUrl . 'kfi/management/index' ?>"
+                            class="btn btn-primary font-size-12 pim-change-modes">
+                            <!-- <i class="fa fa-list-ul" aria-hidden="true"></i> -->
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listwhite.svg"
+                                style="cursor: pointer;">
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-12 mt-15">
-                <div class="row">
-                    <table class="">
-                        <thead>
-                            <tr class="pim-table-header">
-                                <td class="pl-10" style="width:20%">KFI Contents</td>
-                                <td style="width:17%">Company Name</td>
-                                <td>Branch</td>
-                                <td class="text-center">Quant Ratio</td>
-                                <td class="text-center">Target</td>
-                                <td class="text-center">Code</td>
-                                <td class="text-center">Result</td>
-                                <td class="text-center" style="width:5%">Ratio</td>
-                                <td class="text-center">Unit</td>
-                                <td class="text-center">Month</td>
-                                <td class="text-center">Next Check</td>
-                                <td></td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
+                <div class="col-12 mt-15">
+                    <div class="row">
+                        <table class="">
+                            <thead>
+                                <tr class="pim-table-header">
+                                    <td class="pl-10" style="width:20%">KFI Contents</td>
+                                    <td style="width:17%">Company Name</td>
+                                    <td>Branch</td>
+                                    <td class="text-center">Quant Ratio</td>
+                                    <td class="text-center">Target</td>
+                                    <td class="text-center">Code</td>
+                                    <td class="text-center">Result</td>
+                                    <td class="text-center" style="width:5%">Ratio</td>
+                                    <td class="text-center">Unit</td>
+                                    <td class="text-center">Month</td>
+                                    <td class="text-center">Next Check</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
 							if (isset($kfis) && count($kfis) > 0) {
 								foreach ($kfis as $kfiId => $kfi) :
 									if ($kfi["isOver"] == 1 && $kfi["status"] != 2) {
@@ -93,24 +108,24 @@ $this->title = 'KFI';
 										}
 									}
 							?>
-                            <tr height="10">
+                                <tr height="10">
 
-                            </tr>
-                            <tr id="kfi-<?= $kfiId ?>" class="pim-bg-<?= $colorFormat ?> pim-table-text">
-                                <td>
-                                    <div class="col-12 border-left-<?= $colorFormat ?> pim-div-border pb-5">
-                                        <?= $kfi["kfiName"] ?></div>
-                                    <!-- <span class="badge bg-info text-white">PL</span> -->
+                                </tr>
+                                <tr id="kfi-<?= $kfiId ?>" class="pim-bg-<?= $colorFormat ?> pim-table-text">
+                                    <td>
+                                        <div class="col-12 border-left-<?= $colorFormat ?> pim-div-border pb-5">
+                                            <?= $kfi["kfiName"] ?></div>
+                                        <!-- <span class="badge bg-info text-white">PL</span> -->
 
-                                </td>
-                                <td><?= $kfi["companyName"] ?></td>
-                                <td>
-                                    <img src="<?= Yii::$app->homeUrl ?><?= $kfi["flag"] ?>" class="Flag-Turkey">
-                                    <?= $kfi["branchName"] ?>, <?= $kfi['countryName'] ?>
-                                </td>
-                                <td class="text-center"><?= $kfi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?></td>
-                                <td class="text-start">
-                                    <?php
+                                    </td>
+                                    <td><?= $kfi["companyName"] ?></td>
+                                    <td>
+                                        <img src="<?= Yii::$app->homeUrl ?><?= $kfi["flag"] ?>" class="Flag-Turkey">
+                                        <?= $kfi["branchName"] ?>, <?= $kfi['countryName'] ?>
+                                    </td>
+                                    <td class="text-center"><?= $kfi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?></td>
+                                    <td class="text-start">
+                                        <?php
 											$decimal = explode('.', $kfi["target"]);
 											if (isset($decimal[1])) {
 												if ($decimal[1] == '00') {
@@ -122,11 +137,11 @@ $this->title = 'KFI';
 												$show = number_format($kfi["target"]);
 											}
 											?>
-                                    <?= $show ?><?= $kfi["amountType"] == 1 ? '%' : '' ?>
-                                </td>
-                                <td class="text-center"><?= $kfi["code"] ?></td>
-                                <td class="text-end">
-                                    <?php
+                                        <?= $show ?><?= $kfi["amountType"] == 1 ? '%' : '' ?>
+                                    </td>
+                                    <td class="text-center"><?= $kfi["code"] ?></td>
+                                    <td class="text-end">
+                                        <?php
 											if ($kfi["result"] != '') {
 												$decimalResult = explode('.', $kfi["result"]);
 												if (isset($decimalResult[1])) {
@@ -142,116 +157,116 @@ $this->title = 'KFI';
 												$showResult = 0;
 											}
 											?>
-                                    <?= $showResult ?><?= $kfi["amountType"] == 1 ? '%' : '' ?>
-                                </td>
-                                <td>
-                                    <div id="progress1">
-                                        <div data-num="<?= $kfi["ratio"] == '' ? 0 : $kfi["ratio"] ?>"
-                                            class="progress-pim-table progress-circle-<?= $colorFormat ?>"></div>
-                                    </div>
-                                </td>
-                                <td class="text-center">Month</td>
-                                <td class="text-center"><?= $kfi["month"] ?></td>
-                                <td class="<?= $kfi['isOver'] == 1 ? 'text-danger' : '' ?> text-center">
+                                        <?= $showResult ?><?= $kfi["amountType"] == 1 ? '%' : '' ?>
+                                    </td>
+                                    <td>
+                                        <div id="progress1">
+                                            <div data-num="<?= $kfi["ratio"] == '' ? 0 : $kfi["ratio"] ?>"
+                                                class="progress-pim-table progress-circle-<?= $colorFormat ?>"></div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">Month</td>
+                                    <td class="text-center"><?= $kfi["month"] ?></td>
+                                    <td class="<?= $kfi['isOver'] == 1 ? 'text-danger' : '' ?> text-center">
 
-                                    <?= $kfi["status"] == 1 ? $kfi["nextCheck"] : '' ?>
-                                </td>
-                                <td>
-                                    <!-- <span data-bs-toggle="modal" data-bs-target="#kfi-issue"
+                                        <?= $kfi["status"] == 1 ? $kfi["nextCheck"] : '' ?>
+                                    </td>
+                                    <td>
+                                        <!-- <span data-bs-toggle="modal" data-bs-target="#kfi-issue"
                                         onclick="javascript:showKfiComment(<?= $kfiId ?>)"
                                         class="btn btn-bg-white-xs pr-2 pl-2 pt-1 pb-1">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.png"
                                             class="icon-table on-cursor">
                                     </span> -->
 
-                                    <a href="<?= Yii::$app->homeUrl ?>kfi/view/index/<?= ModelMaster::encodeParams(['kfiId' => $kfiId]) ?>"
-                                        class="btn btn-bg-white-xs mr-5" style="margin-top: -1px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.png"
-                                            alt="History" class="pim-icon" style="margin-top: -1px;">
-                                    </a>
+                                        <a href="<?= Yii::$app->homeUrl ?>kfi/view/index/<?= ModelMaster::encodeParams(['kfiId' => $kfiId]) ?>"
+                                            class="btn btn-bg-white-xs mr-5" style="margin-top: -1px;">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.png"
+                                                alt="History" class="pim-icon" style="margin-top: -1px;">
+                                        </a>
 
-                                    <span class="dropdown" href="#" id="dropdownMenuLink-<?= $kfiId ?>"
-                                        data-bs-toggle="dropdown">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.png"
-                                            class="icon-table on-cursor">
-                                    </span>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kfiId ?>">
-                                        <?php
+                                        <span class="dropdown" href="#" id="dropdownMenuLink-<?= $kfiId ?>"
+                                            data-bs-toggle="dropdown">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.png"
+                                                class="icon-table on-cursor">
+                                        </span>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kfiId ?>">
+                                            <?php
 												if ($role >= 5) {
 												?>
-                                        <li data-bs-toggle="modal" data-bs-target="#staticBackdrop2"
-                                            onclick="javascript:updateKfi(<?= $kfiId ?>)" title="Update">
-                                            <a class="dropdown-item" href="#">
-                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                                <!-- <strong class="red">*</strong> -->
-                                            </a>
-                                        </li>
-                                        <?php
+                                            <li data-bs-toggle="modal" data-bs-target="#staticBackdrop2"
+                                                onclick="javascript:updateKfi(<?= $kfiId ?>)" title="Update">
+                                                <a class="dropdown-item" href="#">
+                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                    <!-- <strong class="red">*</strong> -->
+                                                </a>
+                                            </li>
+                                            <?php
 												}
 												?>
-                                        <!-- <li data-bs-toggle="modal" data-bs-target="#staticBackdrop3" onclick="javascript:kfiHistory(<?= $kfiId ?>)" title="View">
+                                            <!-- <li data-bs-toggle="modal" data-bs-target="#staticBackdrop3" onclick="javascript:kfiHistory(<?= $kfiId ?>)" title="View">
 													<a class="dropdown-item" href="#">
 														<i class="fa fa-eye" aria-hidden="true"></i>
 													</a>
 												</li> -->
-                                        <?php
+                                            <?php
 												if ($role >= 3) {
 												?>
-                                        <li>
-                                            <!-- <a class="dropdown-item" href="<?= Yii::$app->homeUrl ?>kfi/kfi-team/kfi-team-setting/<?= ModelMaster::encodeParams(['kfiId' => $kfiId]) ?>">
+                                            <li>
+                                                <!-- <a class="dropdown-item" href="<?= Yii::$app->homeUrl ?>kfi/kfi-team/kfi-team-setting/<?= ModelMaster::encodeParams(['kfiId' => $kfiId]) ?>">
 															<i class="fa fa-users" aria-hidden="true"></i>
 														</a> -->
-                                            <a class="dropdown-item"
-                                                href="<?= Yii::$app->homeUrl ?>kfi/assign/assign/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, "companyId" => $kfi["companyId"]]) ?>">
-                                                <i class="fa fa-users" aria-hidden="true"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <!-- <a class="dropdown-item" href="<?= Yii::$app->homeUrl ?>kfi/kfi-personal/indivisual-setting/<?= ModelMaster::encodeParams(['kfiId' => $kfiId]) ?>">
+                                                <a class="dropdown-item"
+                                                    href="<?= Yii::$app->homeUrl ?>kfi/assign/assign/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, "companyId" => $kfi["companyId"]]) ?>">
+                                                    <i class="fa fa-users" aria-hidden="true"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <!-- <a class="dropdown-item" href="<?= Yii::$app->homeUrl ?>kfi/kfi-personal/indivisual-setting/<?= ModelMaster::encodeParams(['kfiId' => $kfiId]) ?>">
 															<i class="fa fa-user" aria-hidden="true"></i>
 														</a> -->
-                                            <a class="dropdown-item"
-                                                href="<?= Yii::$app->homeUrl ?>kfi/assign/assign/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, "companyId" => $kfi["companyId"], "save" => 0]) ?>">
-                                                <i class="fa fa-user" aria-hidden="true"></i>
-                                            </a>
-                                        </li>
-                                        <?php
+                                                <a class="dropdown-item"
+                                                    href="<?= Yii::$app->homeUrl ?>kfi/assign/assign/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, "companyId" => $kfi["companyId"], "save" => 0]) ?>">
+                                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                                </a>
+                                            </li>
+                                            <?php
 												}
 												?>
 
-                                        <?php
+                                            <?php
 												if ($role >= 5) {
 												?>
-                                        <!-- <li onclick="javascript:copyKfi(<?= $kfiId ?>)" title="Copy">
+                                            <!-- <li onclick="javascript:copyKfi(<?= $kfiId ?>)" title="Copy">
 														<a class="dropdown-item" href="#">
 															<i class="fa fa-copy" aria-hidden="true"></i>
 														</a>
 													</li> -->
 
-                                        <li data-bs-toggle="modal" data-bs-target="#staticBackdrop4"
-                                            onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)" title="Delete">
-                                            <a class="dropdown-item" href="#">
-                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                            </a>
-                                        </li>
-                                        <?php
+                                            <li data-bs-toggle="modal" data-bs-target="#staticBackdrop4"
+                                                onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)" title="Delete">
+                                                <a class="dropdown-item" href="#">
+                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                </a>
+                                            </li>
+                                            <?php
 												}
 												?>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <?php
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <?php
 								endforeach;
 							}
 							?>
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <input type="hidden" value="create" id="acType">
-    <?php $form = ActiveForm::begin([
+        <input type="hidden" value="create" id="acType">
+        <?php $form = ActiveForm::begin([
 		'id' => 'create-kfi',
 		'method' => 'post',
 		'options' => [
@@ -260,15 +275,15 @@ $this->title = 'KFI';
 		'action' => Yii::$app->homeUrl . 'kfi/management/create-kfi'
 
 	]); ?>
-    <?= $this->render('create_modal', [
+        <?= $this->render('create_modal', [
 		"companies" => $companies,
 		"units" => $units,
 		"months" => $months
 	]) ?>
-    <?php ActiveForm::end(); ?>
+        <?php ActiveForm::end(); ?>
 
 
-    <?php $form = ActiveForm::begin([
+        <?php $form = ActiveForm::begin([
 		'id' => 'update-kfi',
 		'method' => 'post',
 		'options' => [
@@ -277,20 +292,20 @@ $this->title = 'KFI';
 		'action' => Yii::$app->homeUrl . 'kfi/management/save-update-kfi'
 
 	]); ?>
-    <?= $this->render('update_modal', [
+        <?= $this->render('update_modal', [
 		"companies" => $companies,
 		"units" => $units,
 		"months" => $months,
 		"isManager" => $isManager
 	]) ?>
-    <?php ActiveForm::end(); ?>
+        <?php ActiveForm::end(); ?>
 
 
-    <?= $this->render('history_modal', [
+        <?= $this->render('history_modal', [
 		"units" => $units,
 	]) ?>
-    <?= $this->render('issue_modal') ?>
-    <?= $this->render('delete_modal') ?>
-    <?= $this->render('modal_kgi') ?>
+        <?= $this->render('issue_modal') ?>
+        <?= $this->render('delete_modal') ?>
+        <?= $this->render('modal_kgi') ?>
 
-</div>
+    </div>
