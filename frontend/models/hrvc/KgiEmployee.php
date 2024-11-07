@@ -2,6 +2,7 @@
 
 namespace frontend\models\hrvc;
 
+use common\models\ModelMaster;
 use Yii;
 use \frontend\models\hrvc\master\KgiEmployeeMaster;
 
@@ -81,5 +82,19 @@ class KgiEmployee extends \frontend\models\hrvc\master\KgiEmployeeMaster
             }
         }
         return $canEdit;
+    }
+    public static function nextCheckDate($kgiEmployeeId)
+    {
+        $date = '';
+        $kgiHistory = KgiEmployeeHistory::find()
+            ->select('nextCheckDate')
+            ->where(["kgiEmployeeId" => $kgiEmployeeId, "status" => [1, 4]])
+            ->orderBy('kgiEmployeeId DESC')
+            ->asArray()
+            ->one();
+        if (isset($kgiHistory) && !empty($kgiHistory) && $kgiHistory["nextCheckDate"] != '') {
+            $date = ModelMaster::engDate($kgiHistory["nextCheckDate"], 2);
+        }
+        return $date;
     }
 }
