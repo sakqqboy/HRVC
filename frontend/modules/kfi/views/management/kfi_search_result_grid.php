@@ -19,32 +19,34 @@ $this->title = 'KFI Grid View';
 
         <div class="alert  mt-10 pim-body bg-white">
             <div class="row">
-                <div class="col-lg-4 col-md-6 col-12 key1">
+                <div class="col-lg-4 col-md-6 col-12 pt-2 key1">
                     <div class="row">
-                        <div class="col-7">
+                        <div class="col-3">
                             <div class="row">
-                                <div class="col-5 pim-type-tab-selected pr-0 pl-0 text-center">
+                                <div
+                                    class="col-12 pim-type-tab-selected pr-0 pl-1 pt-4 pb-2 text-center font-size-12 rounded-top-left">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg"
+                                        style="width: 12px; height: 12px; cursor: pointer;">
                                     Company KFI
-
-                                </div>
-                                <div class="col-7">
-                                    <?php
-									if ($role >= 3) {
-									?>
-                                    <button type="button" class="btn-create font-size-10" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop1">
-                                        Create New KFI <i class="fa fa-magic ml-3" aria-hidden="true"></i>
-                                    </button>
-                                    <?php
-									}
-									?>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-9">
+                            <?php
+									if ($role >= 3) {
+									?>
+                            <button type="button" class="btn-create font-size-12" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop1">
+                                Create New KFI <i class="fa fa-magic ml-3" aria-hidden="true"></i>
+                            </button>
+                            <?php
+									}
+							?>
                         </div>
 
                     </div>
                 </div>
-                <div class="col-lg-7 col-md-12 col-12 New-KFI">
+                <div class="col-lg-7 col-md-12 col-12 pt-2 New-KFI">
                     <?= $this->render('filter_list_search', [
 						"companies" => $companies,
 						"months" => $months,
@@ -58,7 +60,7 @@ $this->title = 'KFI Grid View';
                     <input type="hidden" id="type" value="grid">
                 </div>
                 <div class="col-lg-1 col-md-6 col-12 pr-0 text-end">
-                    <div class="btn-group" role="group">
+                    <!-- <div class="btn-group" role="group">
                         <a href="#" class="btn btn-primary font-size-12 pim-change-mode">
                             <i class="fa fa-th-large" aria-hidden="true"></i>
                         </a>
@@ -67,6 +69,17 @@ $this->title = 'KFI Grid View';
                             <i class="fa fa-list-ul" aria-hidden="true"></i>
                         </a>
 
+                    </div> -->
+                    <div class="btn-group" role="group">
+                        <a href="#" class="btn btn-primary font-size-12 pim-change-modes">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridwhite.svg"
+                                style="cursor: pointer;">
+                        </a>
+                        <a href="<?= Yii::$app->homeUrl . 'kfi/management/index' ?>"
+                            class="btn btn-outline-primary font-size-12 pim-change-modes">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listblack.svg"
+                                style="cursor: pointer;">
+                        </a>
                     </div>
                 </div>
             </div>
@@ -153,14 +166,16 @@ $this->title = 'KFI Grid View';
                             </div>
                             <div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?> mt-5">
                                 <div class="row">
-                                    <div class="col-12 text-start pl-22">
+                                    <div class="col-12 text-start pl-22 font-size-12">
                                         Assign on
                                     </div>
-                                    <div class="col-9 pl-20 pr-0">
-                                        <div class="col-12 <?= $colorFormat ?>-assign  mt-5 pt-2 pb-1">
+                                    <div class="col-10 pr-10 pl-30">
+                                        <!-- <div class="col-12 <?= $colorFormat ?>-assign  mt-5 pt-2 pb-1"> -->
+                                        <div class="col-12 mt-5 pt-2 pb-1">
                                             <div class="row">
-                                                <div class="col-5 border-right-<?= $colorFormat ?>">
-                                                    <div class="row">
+                                                <!-- <div class="col-5 border-right-<?= $colorFormat ?>"> -->
+                                                <div class="col-5">
+                                                    <div class="row pim-picgroup">
                                                         <div class="col-2">
                                                             <?php
 																	if (isset($kfi['kfiEmployee'][0])) {
@@ -181,7 +196,7 @@ $this->title = 'KFI Grid View';
 																	}
 																	?>
                                                         </div>
-                                                        <div class="col-2 pic-after pt-0">
+                                                        <!-- <div class="col-2 pic-after pt-0">
                                                             <?php
 																	if (isset($kfi['kfiEmployee'][2])) {
 																	?>
@@ -190,20 +205,28 @@ $this->title = 'KFI Grid View';
                                                             <?php
 																	}
 																	?>
-                                                        </div>
-                                                        <div class="col-5 number-tag load-<?= $colorFormat ?> pr-0 pl-0 pt-1"
+                                                        </div> -->
+                                                        <!-- <div class="col-5 number-tag load-<?= $colorFormat ?> pr-0 pl-0 pt-1"
                                                             style="margin-left: -3px;height:18px;width: 30px;margin-top: 1px;">
+                                                            <?= $kfi["countEmployee"] ?>
+                                                        </div> -->
+                                                        <div
+                                                            class="col-6 number-tag load-<?= $colorFormat ?> pr-0 pl-0 pt-1 pim-pic-gridNum ">
                                                             <?= $kfi["countEmployee"] ?>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-7 pl-5 pt-3 pr-15">
+                                                <div class="col-7 pl-1 pt-10 pr-0 <?= $colorFormat ?>-assignKFI">
+                                                    <span class="pull-left mt-1 pl-2  pr-4">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.svg"
+                                                            class="home-icon" style="margin-top: -3px;">
+                                                    </span>
                                                     <?php
 															if ($role >= 5) {
 															?>
                                                     <a href="<?= Yii::$app->homeUrl ?>kfi/assign/assign/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, "companyId" => $kfi['companyId']]) ?>"
                                                         class="font-<?= $colorFormat ?>">
-                                                        Assign Person
+                                                        Change Assigned
                                                     </a>
                                                     <?php
 															} else { ?>
@@ -213,10 +236,6 @@ $this->title = 'KFI Grid View';
                                                     <?php
 															}
 															?>
-                                                    <span class="pull-right">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.png"
-                                                            class="home-icon" style="margin-top: -3px;">
-                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -224,19 +243,24 @@ $this->title = 'KFI Grid View';
                                 </div>
                             </div>
                             <div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?> mt-5 pl-10 pr-10">
-                                <div class="row">
-                                    <div class="col-6 ">
-                                        <div class="col-12  pr-6 pt-10 text-center">Quant Ratio</div>
-                                        <div class="col-12 border-right-<?= $colorFormat ?>  pl-12 pr-12 text-center">
-                                            <i class="fa fa-diamond" aria-hidden="true"></i>
-                                            <?= $kfi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?>
+                                <div class="col-12 mt-18">
+                                    <div class="row">
+                                        <!-- <div class="col-6 "> -->
+                                        <div class="col-6 border-right-<?= $colorFormat ?>">
+                                            <div class="col-12  pr-6 pt-10 text-center">Quant Ratio</div>
+                                            <div class="text-center mt-2">
+                                                <!-- <div
+                                                class="col-12 border-right-<?= $colorFormat ?>  pl-12 pr-12 text-center"> -->
+                                                <i class="fa fa-diamond" aria-hidden="true"></i>
+                                                <?= $kfi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-6">
-                                        <div class="col-12 pr-0 pt-10 text-center">Update Interval</div>
-                                        <div class="col-12 pim-duedate text-center">
-                                            <?= $kfi["unit"] ?>
+                                        <div class="col-6">
+                                            <div class="col-12 pr-0 pt-10 text-center">Update Interval</div>
+                                            <div class="col-12 pim-duedate text-center mt-2">
+                                                <?= $kfi["unit"] ?>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

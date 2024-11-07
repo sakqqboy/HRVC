@@ -17,30 +17,33 @@ $this->title = 'KFI';
 		]) ?>
         <div class="alert mt-10 pim-body bg-white">
             <div class="row">
-                <div class="col-lg-4 col-md-6 col-12 key1">
+                <div class="col-lg-4 col-md-6 col-12 pt-2 key1">
                     <div class="row">
-                        <div class="col-7">
+                        <div class="col-3">
                             <div class="row">
-                                <div class="col-5 pim-type-tab-selected pr-0 pl-0  text-center">
+                                <div
+                                    class="col-12 pim-type-tab-selected pr-0 pl-1 pt-4 pb-2 text-center font-size-12 rounded-top-left">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg"
+                                        style="width: 12px; height: 12px; cursor: pointer;">
                                     Company KFI
                                 </div>
                             </div>
                         </div>
-                        <div class="col-5 text-start">
+                        <div class="col-9 text-start">
                             <?php
 							if ($role >= 3) {
 							?>
-                            <button type="button" class="btn-create font-size-10" data-bs-toggle="modal"
+                            <button type="button" class="btn-create font-size-12" data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop1">
-                                <i class="fa fa-magic " aria-hidden="true"></i> Create New KFI
+                                Create New KFI <i class="fa fa-magic ml-3" aria-hidden="true"></i>
                             </button>
                             <?php
-							}
+							        }
 							?>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-7 col-md-12 col-12 New-KFI">
+                <div class="col-lg-7 col-md-12 col-12 pt-2 New-KFI">
                     <?= $this->render('filter_list', [
 						"companies" => $companies,
 						"months" => $months

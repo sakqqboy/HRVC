@@ -17,18 +17,25 @@ $this->title = 'KFI';
 		]) ?>
         <div class="alert mt-10 pim-body bg-white">
             <div class="row">
-                <div class="col-lg-4 col-md-6 col-12 key1">
+                <div class="col-lg-4 col-md-6 col-12 pt-2 key1">
                     <div class="row">
-                        <div class="col-6 key1">
-                            Key Financial Indicators
+                        <div class="col-3">
+                            <div class="row">
+                                <div
+                                    class="col-12 pim-type-tab-selected pr-0 pl-1 pt-4 pb-2 text-center font-size-12 rounded-top-left">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg"
+                                        style="width: 12px; height: 12px; cursor: pointer;">
+                                    Company KFI
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-6 text-start">
+                        <div class="col-9 text-start">
                             <?php
 							if ($role >= 3) {
 							?>
                             <button type="button" class="btn-create font-size-12" data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop1">
-                                <i class="fa fa-magic " aria-hidden="true"></i> Create New KFI
+                                Create New KFI <i class="fa fa-magic ml-3" aria-hidden="true"></i>
                             </button>
                             <?php
 							}
@@ -36,7 +43,7 @@ $this->title = 'KFI';
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-7 col-md-12 col-12 New-KFI">
+                <div class="col-lg-7 col-md-12 col-12 pt-2 New-KFI">
                     <?= $this->render('filter_list_search', [
 						"companies" => $companies,
 						"months" => $months,
@@ -51,12 +58,25 @@ $this->title = 'KFI';
                 </div>
                 <div class="col-lg-1 col-md-6 col-12 pr-0 text-end">
                     <div class="btn-group" role="group">
-                        <a href="<?= Yii::$app->homeUrl . 'kfi/management/grid' ?>"
+                        <!-- <a href="<?= Yii::$app->homeUrl . 'kfi/management/grid' ?>"
                             class="btn btn-outline-primary font-size-12 pim-change-mode">
                             <i class="fa fa-th-large" aria-hidden="true"></i>
                         </a>
                         <a href="#" class="btn btn-primary font-size-12 pim-change-mode">
                             <i class="fa fa-list-ul" aria-hidden="true"></i>
+                        </a> -->
+
+                        <a href="<?= Yii::$app->homeUrl . 'kfi/management/grid' ?>" class=" btn btn-outline-primary
+                            font-size-12 pim-change-modes">
+                            <!-- <i class="fa fa-th-large" aria-hidden="true"></i> -->
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridblack.svg"
+                                style="cursor: pointer;">
+                        </a>
+                        <a href="<?= Yii::$app->homeUrl . 'kfi/management/index' ?>"
+                            class="btn btn-primary font-size-12 pim-change-modes">
+                            <!-- <i class="fa fa-list-ul" aria-hidden="true"></i> -->
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listwhite.svg"
+                                style="cursor: pointer;">
                         </a>
 
                     </div>

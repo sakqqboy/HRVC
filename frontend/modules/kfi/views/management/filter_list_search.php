@@ -13,7 +13,7 @@ use frontend\models\hrvc\Team;
 		</span>
 	</div> -->
     <div class="col-2 pr-5 pl-1">
-        <select class="form-select font-size-12 select-pim" id="company-filter">
+        <select class="form-select font-size-12 select-pim" id="company-filter" onchange="applySelectStyle(this)">
             <?php
 			if (isset($companyId) && $companyId != "") { ?>
             <option value="<?= $companyId ?>"><?= Company::companyName($companyId) ?></option>
@@ -32,7 +32,7 @@ use frontend\models\hrvc\Team;
         </select>
     </div>
     <div class="col-2 pr-5 pl-1">
-        <select class="form-select font-size-12 select-pim" id="branch-filter"
+        <select class="form-select font-size-12 select-pim" id="branch-filter" onchange="applySelectStyle(this)"
             <?= $companyId == "" ? 'disabled' : '' ?>>
             <?php
 			if (isset($branchId) && $branchId != "") { ?>
@@ -53,7 +53,7 @@ use frontend\models\hrvc\Team;
         </select>
     </div>
     <div class="col-2 pr-5 pl-1">
-        <select class="form-select font-size-12 select-pim" id="month-filter">
+        <select class="form-select font-size-12 select-pim" id="month-filter" onchange="applySelectStyle(this)">
             <?php
 			if (isset($month) && $month != "") { ?>
             <option value="<?= $month ?>"><?= ModelMaster::monthFull()[$month] ?></option>
@@ -72,7 +72,7 @@ use frontend\models\hrvc\Team;
         </select>
     </div>
     <div class="col-2 pr-5 pl-1">
-        <select class="form-select font-size-12 select-pim" id="year-filter">
+        <select class="form-select font-size-12 select-pim" id="year-filter" onchange="applySelectStyle(this)">
             <?php
 			if (isset($yearSelected) && $yearSelected != "") { ?>
             <option value="<?= $yearSelected ?>"><?= $yearSelected ?></option>
@@ -96,7 +96,7 @@ use frontend\models\hrvc\Team;
         </select>
     </div>
     <div class="col-2 pr-1 pl-1">
-        <select class="form-select font-size-12 select-pim" id="status-filter">
+        <select class="form-select font-size-12 select-pim" id="status-filter" onchange="applySelectStyle(this)">
             <?php
 			if (isset($status) && $status != "") { ?>
             <option value="<?= $status ?>"><?= $status == 1 ? "Active" : "Finished" ?></option>
@@ -116,8 +116,7 @@ use frontend\models\hrvc\Team;
     </div> -->
 
     <div class="col-2 pr-0 text-start">
-        <span class="btn btn-primary font-size-12 justify-content-center d-flex align-items-center"
-            style="--bs-btn-padding-x: 2.0rem; --bs-btn-padding-y: 0.16rem; border-radius: 50px; cursor: pointer;"
+        <span class="btn font-size-12 justify-content-center d-flex align-items-center custom-button-select"
             onclick="javascript:kfiFilter()">
             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterWhite.svg" class="pim-search-icons me-2"
                 style="cursor: pointer;">
@@ -125,3 +124,17 @@ use frontend\models\hrvc\Team;
         </span>
     </div>
 </div>
+
+
+
+<script>
+function applySelectStyle(selectElement) {
+    if (selectElement.value) {
+        selectElement.classList.remove('select-pim');
+        selectElement.classList.add('select-pimselect');
+    } else {
+        selectElement.classList.remove('select-pimselect');
+        selectElement.classList.add('select-pim');
+    }
+}
+</script>
