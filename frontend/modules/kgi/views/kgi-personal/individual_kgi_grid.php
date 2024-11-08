@@ -49,7 +49,7 @@ $this->title = "INDIVIDUAL KGI";
 												?>
 													<a href="<?= Yii::$app->homeUrl ?>kgi/management/wait-approve-kgi-personal"
 														style="text-decoration: none;color:#2580D3;">
-														<span class="approve-num mr-2"><?= $waitForApprove["totalReuest"] ?></span>
+														<span class="approve-num mr-2"><?= $waitForApprove["totalRequest"] ?></span>
 														Approvals
 														<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approve.svg"
 															class="first-layer-icon pull-right" style="margin-top:-2px;">
@@ -57,7 +57,7 @@ $this->title = "INDIVIDUAL KGI";
 												<?php
 												} else { ?>
 													<a style="text-decoration: none;color:#2580D3;">
-														<span class="approve-num mr-2"><?= $waitForApprove["totalReuest"] ?></span>
+														<span class="approve-num mr-2"><?= $waitForApprove["totalRequest"] ?></span>
 														Approvals
 														<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approve.svg"
 															class="first-layer-icon pull-right" style="margin-top:-2px;">

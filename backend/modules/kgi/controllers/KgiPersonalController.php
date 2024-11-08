@@ -473,4 +473,13 @@ class KgiPersonalController extends Controller
 		}
 		return json_encode($data);
 	}
+	public function actionWaitForApprove()
+	{
+		$kgiEmployee = KgiEmployeeHistory::find()
+			->where(["status" => 88])
+			->asArray()
+			->all();
+		$res["totalRequest"] = count($kgiEmployee);
+		return json_encode($res);
+	}
 }
