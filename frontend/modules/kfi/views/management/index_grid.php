@@ -35,7 +35,7 @@ $this->title = 'KFI Grid View';
 									?>
                             <button type="button" class="btn-createKFI pl-7 pr-7 pr-9 font-size-12"
                                 data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
-                                Create New<i class="fa fa-magic ml-3" aria-hidden="true"></i>
+                                Create New <i class="fa fa-magic ml-3" aria-hidden="true"></i>
                             </button>
                             <?php
 									}
@@ -213,7 +213,7 @@ $this->title = 'KFI Grid View';
 																	?>
                                                         </div> -->
                                                         <div
-                                                            class="col-6 number-tag load-<?= $colorFormat ?> pr-0 pl-0 pt-1 pim-pic-gridKFINum ">
+                                                            class="col-6 number-tag load-<?= $colorFormat ?> pr-0 pl-0 pim-pic-gridKFINum ">
                                                             <?= $kfi["countEmployee"] ?>
                                                         </div>
                                                     </div>
@@ -278,7 +278,11 @@ $this->title = 'KFI Grid View';
                             <div class="col-lg-6 pim-subheader-font  mt-5 pr-15 pl-15">
                                 <div class="row">
                                     <div class="col-5 text-start">
-                                        <div class="col-12">Target</div>
+                                        <div class="col-12">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Target.svg"
+                                                class="pim-iconKFI" style="margin-top: 1px; margin-right: 3px;">
+                                            Target
+                                        </div>
                                         <div class="col-12 mt-3 number-pim">
                                             <?php
 													$decimal = explode('.', $kfi["target"]);
@@ -299,7 +303,11 @@ $this->title = 'KFI Grid View';
                                         <div class="col-12 pt-17"><?= $kfi["code"] ?></div>
                                     </div>
                                     <div class="col-5  text-end">
-                                        <div class="col-12">Result</div>
+                                        <div class="col-12">
+                                            Result
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Result.svg"
+                                                class="pim-iconKFI" style="margin-top: 1px; margin-left: 3px;">
+                                        </div>
                                         <div class="col-12 mt-3 number-pim">
                                             <?php
 													if ($kfi["result"] != '') {

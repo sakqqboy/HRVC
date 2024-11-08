@@ -737,10 +737,8 @@
 
 .pim-pic-gridKFINum {
 	background: #ffffff;
-	leading-trim: both;
-	text-edge: cap;
 	font-family: "SF Pro Display";
-	font-size: 18px !important;
+	font-size: 14px !important;
 	font-style: normal;
 	font-weight: 500;
 	text-align: center;
@@ -750,6 +748,7 @@
 	width: 33px;
 	height: 33px;
 	border-radius: 100%;
+	padding-top: 5px;
 	z-index: 3;
 }
 
@@ -901,7 +900,7 @@
 .pim-type-tab-selected {
 	background-color: #D7EBFF;
 	border-bottom: #2580D3 solid 2px;
-	padding-top: 3px;
+	padding-top: 4px;
 	/* padding-bottom: 2px; */
 	font-size: 11px;
 	font-weight: 400;
