@@ -806,6 +806,50 @@
 	z-index: 3;
 }
 
+.dropdown-itemNEW {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 70px;
+	height: 22px;
+	flex-shrink: 0;
+	border-radius: 3px;
+	border: 0.5px solid #BB2020;
+	background: #FFE3E3;
+	color: #000000;
+	/* สีของข้อความในปุ่ม */
+	font-weight: 400;
+	text-align: center;
+	text-decoration: none;
+	white-space: nowrap;
+	font-size: 12px;
+	/* กำจัด padding เพื่อให้ปุ่มพอดีกับขนาด */
+	justify-content: flex-start;
+
+}
+
+.dropdown-itemNEWS {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 70px;
+	height: 22px;
+	flex-shrink: 0;
+	border-radius: 3px;
+	border: 0.5px solid #CBD5E1;
+	background: #FFF;
+	color: #000000;
+	/* สีของข้อความในปุ่ม */
+	font-weight: 400;
+	text-align: center;
+	text-decoration: none;
+	white-space: nowrap;
+	font-size: 12px;
+	/* กำจัด padding เพื่อให้ปุ่มพอดีกับขนาด */
+	justify-content: flex-start;
+
+}
+
 .assign-target {
 	width: 100%;
 	background-color: white;
