@@ -177,6 +177,10 @@ class KpiPersonalController extends Controller
 		$kpis = curl_exec($api);
 		$kpis = json_decode($kpis, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/wait-for-approve');
+		$waitForApprove = curl_exec($api);
+		$waitForApprove = json_decode($waitForApprove, true);
+
 		if ($role == 3) {
 			$em = Employee::employeeDetailByUserId(Yii::$app->user->id);
 			if (isset($em) && !empty($em)) {
@@ -204,7 +208,8 @@ class KpiPersonalController extends Controller
 			"year" => null,
 			"companyId" => null,
 			"branchId" => null,
-			"teamId" => null
+			"teamId" => null,
+			"waitForApprove" => $waitForApprove
 		]);
 	}
 	public function actionUpdatePersonalKpi($hash)

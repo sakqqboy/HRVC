@@ -1485,16 +1485,88 @@ class ManagementController extends Controller
         if ($role < 3) {
             return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
         }
+        $branchId = User::userBranchId();
+        $departments = Department::find()
+            ->where(["branchId" => $branchId, "status" => 1])
+            ->asArray()
+            ->all();
+        if (isset($departments) && count($departments) > 0) {
+            foreach ($departments as $department) :
+                $teams = Team::find()
+                    ->where(["departmentId" => $department["departmentId"], "status" => 1])
+                    ->asArray()
+                    ->all();
+                if (isset($teams) && count($teams) > 0) {
+                    foreach ($teams as $team) :
+                        $kpiTeams = KpiTeam::find()
+                            ->where(["teamId" => $team["teamId"]])
+                            ->andWhere("status!=99")
+                            ->asArray()
+                            ->all();
+                        if (isset($kpiTeams) && count($kpiTeams) > 0) {
+                            foreach ($kpiTeams as $kpiTeam) :
+                                $kpiTeamHistory = KpiTeamHistory::find()
+                                    ->where(["kpiTeamId" => $kpiTeam["kpiTeamId"], "status" => 88])
+                                    ->orderBy("createDateTime DESC")
+                                    ->asArray()
+                                    ->one();
+                                $mainKpi = Kpi::find()
+                                    ->select('priority,amountType')
+                                    ->where(["kpiId" => $kpiTeam["kpiId"]])
+                                    ->asArray()
+                                    ->one();
+                                if (isset($kpiTeamHistory) && !empty($kpiTeamHistory)) {
+                                    $teamKpis[$kpiTeamHistory["kpiTeamHistoryId"]] = [
+                                        "kpiId" => $kpiTeam["kpiId"],
+                                        "kpiTeamId" => $kpiTeam["kpiTeamId"],
+                                        "kpiName" => Kpi::kpiName($kpiTeam["kpiId"]),
+                                        "company" => Branch::companyName($branchId),
+                                        "branch" => Branch::branchName($branchId),
+                                        "department" => Department::departmentNAme($department["departmentId"]),
+                                        "teamId" => $kpiTeam["teamId"],
+                                        "teamName" => Team::teamName($kpiTeam["teamId"]),
+                                        "target" => $kpiTeam["target"],
+                                        "reson" => $kpiTeamHistory["detail"],
+                                        "newTarget" => $kpiTeamHistory["target"],
+                                        "creater" => User::employeeNameByuserId($kpiTeamHistory["createrId"]), // userId
+                                        "isOver" => ModelMaster::isOverDuedate(KpiTeam::nextCheckDate($kpiTeam['kpiTeamId'])),
+                                        "priority" => $mainKpi["priority"],
+                                        "month" => ModelMaster::fullMonthText($kpiTeamHistory["month"]),
+                                        "status" => $kpiTeamHistory["status"],
+                                        "amountType" => $mainKpi["amountType"]
+                                    ];
+                                }
+                            endforeach;
+                        }
+                    endforeach;
+                }
+            endforeach;
+        }
+        //throw new exception(print_r($teamKpis, true));
+        return $this->render('wait_approve1', [
+            "role" => $role,
+            "teamKpis" => $teamKpis,
+            "employeeKpis" => $employeeKpis,
+        ]);
+    }
+    public function actionWaitApproveKpiPersonal()
+    {
+        $role = UserRole::userRight();
+        $employeeKpis = [];
+        if ($role < 3) {
+            return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
+        }
         if ($role == 3) { //Team Leader
             $teamId = User::userTeamId();
             $kpiEmployees = KpiEmployee::find()
-                ->select('kpi_employee.*')
+                ->select('kpi_employee.*,k.priority')
                 ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
-                ->where(["e.teamId" => $teamId])
-                ->orderBy('createDateTime')
+                ->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_employee.kpiId")
+                ->where(["e.teamId" => $teamId, "k.status" => [1, 2]])
                 ->asArray()
+                ->orderBy('createDateTime')
                 ->all();
-
+            //throw new Exception(print_r($kpiEmployees, true));
             if (isset($kpiEmployees) && count($kpiEmployees) > 0) {
                 foreach ($kpiEmployees as $kpiEmployee) :
                     $kpiEmployeeHistory = KpiEmployeeHistory::find()
@@ -1502,67 +1574,25 @@ class ManagementController extends Controller
                         ->orderBy("createDateTime DESC")
                         ->asArray()
                         ->one();
-                    //throw new exception(print_r($kpiEmployeeHistory, true));
                     if (isset($kpiEmployeeHistory) && !empty($kpiEmployeeHistory)) {
                         $employeeKpis[$kpiEmployeeHistory["kpiEmployeeHistoryId"]] = [
                             "kpiId" => $kpiEmployee["kpiId"],
-                            "kpiName" => kpi::kpiName($kpiEmployee["kpiId"]),
+                            "kpiName" => Kpi::kpiName($kpiEmployee["kpiId"]),
                             "employeeName" => Employee::employeeName($kpiEmployee["employeeId"]),
                             "target" => $kpiEmployee["target"],
                             "newTarget" => $kpiEmployeeHistory["target"],
                             "reson" => $kpiEmployeeHistory["detail"],
+                            "priority" => $kpiEmployee["priority"],
+                            "isOver" => ModelMaster::isOverDuedate(KpiEmployee::nextCheckDate($kpiEmployee['kpiEmployeeId'])),
+                            "month" => ModelMaster::fullMonthText($kpiEmployeeHistory["month"]),
+                            "status" => $kpiEmployee["status"],
                         ];
                     }
                 endforeach;
             }
-        } else {
-            $branchId = User::userBranchId();
-            $departments = Department::find()->where(["branchId" => $branchId])->asArray()->all();
-            if (isset($departments) && count($departments) > 0) {
-                foreach ($departments as $department) :
-                    $teams = Team::find()
-                        ->where(["departmentId" => $department["departmentId"]])
-                        ->asArray()
-                        ->all();
-                    if (isset($teams) && count($teams) > 0) {
-                        foreach ($teams as $team) :
-                            $kpiTeams = KpiTeam::find()
-                                ->where(["teamId" => $team["teamId"]])
-                                ->asArray()
-                                ->all();
-                            if (isset($kpiTeams) && count($kpiTeams) > 0) {
-                                foreach ($kpiTeams as $kpiTeam) :
-                                    $kpiTeamHistory = KpiTeamHistory::find()
-                                        ->where(["kpiTeamId" => $kpiTeam["kpiTeamId"], "status" => 88])
-                                        ->orderBy("createDateTime DESC")
-                                        ->asArray()
-                                        ->one();
-                                    if (isset($kpiTeamHistory) && !empty($kpiTeamHistory)) {
-                                        $teamKpis[$kpiTeamHistory["kpiTeamHistoryId"]] = [
-                                            "kpiId" => $kpiTeam["kpiId"],
-                                            "kpiName" => Kpi::kpiName($kpiTeam["kpiId"]),
-                                            "company" => Branch::companyName($branchId),
-                                            "branch" => Branch::branchName($branchId),
-                                            "department" => Department::departmentNAme($department["departmentId"]),
-                                            "teamId" => $kpiTeam["teamId"],
-                                            "teamName" => Team::teamName($kpiTeam["teamId"]),
-                                            "target" => $kpiTeam["target"],
-                                            "reson" => $kpiTeamHistory["detail"],
-                                            "newTarget" => $kpiTeamHistory["target"],
-                                            "creater" => User::employeeNameByuserId($kpiTeamHistory["createrId"]), // userId
-                                        ];
-                                    }
-                                endforeach;
-                            }
-                        endforeach;
-                    }
-                endforeach;
-            }
         }
-        //throw new exception(print_r($employeeKpis, true));
-        return $this->render('wait_approve', [
+        return $this->render('wait_approve_employee', [
             "role" => $role,
-            "teamKpis" => $teamKpis,
             "employeeKpis" => $employeeKpis,
         ]);
     }
@@ -1675,15 +1705,15 @@ class ManagementController extends Controller
     }
     public function actionApproveKpiEmployeeTarget()
     {
-        $kpiEmployeeId = $_POST["kpiEmployeeId"];
+        $kpiEmployeeHistoryId = $_POST["kpiEmployeeHistoryId"];
         $approve = $_POST["approve"];
         $history = KpiEmployeeHistory::find()
-            ->where(["kpiEmployeeId" => $kpiEmployeeId, "status" => 88])
+            ->where(["kpiEmployeeHistoryId" => $kpiEmployeeHistoryId, "status" => 88])
             ->orderBy('createDateTime DESC')
             ->one();
         if ($approve == 1) {
-            $kpiEmployee = KpiEmployee::find()->where(["kpiEmployeeId" => $kpiEmployeeId])->one();
-            KpiEmployeeHistory::updateAll(["status" => 90], ["status" => [1, 2]]);
+            $kpiEmployee = KpiEmployee::find()->where(["kpiEmployeeId" => $history->kpiEmployeeId])->one();
+            //    KpiEmployeeHistory::updateAll(["status" => 90], ["status" => [1, 2]]);
             $history->status = 1;
             $kpiEmployee->target = $history["target"];
             $kpiEmployee->status = 1;
@@ -1820,5 +1850,20 @@ class ManagementController extends Controller
             $kpi->save(false);
         }
         return $this->redirect(Yii::$app->homeUrl . 'kpi/management/grid');
+    }
+    public function actionChanngeTeamTargetReason()
+    {
+        $kpiTeamHistoryId = $_POST["kpiTeamHistoryId"];
+        $kpiTeamHistory = KpiTeamHistory::find()
+            ->where(["kpiTeamHistoryId" => $kpiTeamHistoryId])
+            ->asArray()
+            ->one();
+
+        if (isset($kpiTeamHistory) && !empty($kpiTeamHistory)) {
+            $res["reason"] = $kpiTeamHistory["detail"];
+        } else {
+            $res["reason"] = "";
+        }
+        return json_encode($res);
     }
 }

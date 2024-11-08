@@ -2,6 +2,7 @@
 
 namespace frontend\models\hrvc;
 
+use common\models\ModelMaster;
 use Yii;
 use \frontend\models\hrvc\master\KpiTeamMaster;
 
@@ -129,5 +130,19 @@ class KpiTeam extends \frontend\models\hrvc\master\KpiTeamMaster
         } else {
             return 0;
         }
+    }
+    public static function nextCheckDate($kpiTeamId)
+    {
+        $date = '';
+        $kpiHistory = KpiTeamHistory::find()
+            ->select('nextCheckDate')
+            ->where(["kpiTeamId" => $kpiTeamId, "status" => [1, 4]])
+            ->orderBy('kpiTeamHistoryId DESC')
+            ->asArray()
+            ->one();
+        if (isset($kpiHistory) && !empty($kpiHistory) && $kpiHistory["nextCheckDate"] != '') {
+            $date = ModelMaster::engDate($kpiHistory["nextCheckDate"], 2);
+        }
+        return $date;
     }
 }

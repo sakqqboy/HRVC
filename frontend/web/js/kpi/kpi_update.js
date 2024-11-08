@@ -585,7 +585,7 @@ function approveTargetKpiTeam(kpiTeamId, approve) {
 		});
 	}
 }
-function approveTargetKpiEmployee(kpiEmployeeId, approve) {
+function approveTargetKpiEmployee(kpiEmployeeHistoryId, approve) {
 	var url = $url + 'kpi/management/approve-kpi-employee-target';
 	if (approve == 1) {
 		var text = 'Are you sure to approve this target?';
@@ -597,10 +597,10 @@ function approveTargetKpiEmployee(kpiEmployeeId, approve) {
 			type: "POST",
 			dataType: 'json',
 			url: url,
-			data: { kpiEmployeeId: kpiEmployeeId, approve: approve },
+			data: { kpiEmployeeHistoryId: kpiEmployeeHistoryId, approve: approve },
 			success: function (data) {
 				if (data.status) {
-					var url = $url + 'kpi/management/wait-approve';
+					var url = $url + 'kpi/management/wait-approve-kpi-personal';
 					window.location.href = url;
 				}
 			}

@@ -136,3 +136,15 @@ function showTeamKgi(kgiId,type) {
 		$("#show-" + kgiId).show();
 	}
 }
+function changeTargetKpiTeamReason(kpiTeamHistoryId) {
+	var url = $url + 'kpi/management/channge-team-target-reason';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { kpiTeamHistoryId: kpiTeamHistoryId},
+		success: function (data) {
+				$("#kpi-team-reason").html(data.reason);
+		}
+	});
+}

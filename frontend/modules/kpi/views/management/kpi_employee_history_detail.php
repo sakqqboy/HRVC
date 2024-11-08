@@ -6,7 +6,7 @@ use frontend\models\hrvc\User;
 
 $this->title = 'Employee KPI History';
 ?>
-<div class="col-12 mt-90">
+<div class="col-12">
 	<div class="row">
 		<div class="col-8">
 			<i class="fa fa-users font-size-20" aria-hidden="true"></i> <strong class="font-size-20">
@@ -20,7 +20,7 @@ $this->title = 'Employee KPI History';
 			</a>
 		</div>
 	</div>
-	<div class="col-12 mt-20 pt-10 pl-10 pb-20" style="border-radius: 10px;border-style:dotted;border-color:grey;">
+	<div class="col-12 mt-10 pt-10 pl-10 pb-20 pim-body bg-white" style="border-radius: 10px;border-style:dotted;border-color:grey;">
 		<strong>KPI : <?= $kpiDetail["kpiName"] ?></strong>
 		<div class="row">
 			<div class="col-lg-2 col-md-6 col-2 text-center">
@@ -135,7 +135,7 @@ $this->title = 'Employee KPI History';
 						?>
 							<tr class="font-size-12">
 								<td><?= $a ?></td>
-								<td class="text-end font-b"><?= $decimalTarget[1] == '00' ? number_format($history["target"]) : number_format($history["target"], 2) ?></td>
+								<td class="text-end font-b"><?= isset($decimalTarget[1]) && $decimalTarget[1] == '00' ? number_format($history["target"]) : number_format($history["target"], 2) ?></td>
 								<td style="width: 10%;"><?= $history["detail"] ?></td>
 								<td>&nbsp;<?= User::employeeNameByuserId($history["createrId"]) ?></td>
 								<td class="<?= $class ?>"><?= $textStatus ?></td>
@@ -180,7 +180,7 @@ $this->title = 'Employee KPI History';
 							<tr class="font-size-12">
 								<td><?= $i ?></td>
 								<td class="<?= $employeeName == $name ? 'font-b' : '' ?>"><?= $name ?></td>
-								<td class="text-end border-right <?= $employeeName == $name ? 'font-b' : '' ?>"><?= $decimalTarget[1] == '00' ? number_format($employee["target"]) : number_format($employee["target"], 2) ?></td>
+								<td class="text-end border-right <?= $employeeName == $name ? 'font-b' : '' ?>"><?= isset($decimalTarget[1]) && $decimalTarget[1] == '00' ? number_format($employee["target"]) : number_format($employee["target"], 2) ?></td>
 								<td class="text-end border-right"><?= $decimalResult[1] == '00' ? number_format($employee["result"]) : number_format($employee["result"], 2) ?></td>
 								<td>&nbsp;<?= User::employeeNameByuserId($employee["createrId"]) ?></td>
 							</tr>

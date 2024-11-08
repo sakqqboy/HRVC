@@ -6,12 +6,11 @@ use frontend\models\hrvc\User;
 
 $this->title = 'Team kpi History';
 ?>
-<div class="col-12 mt-90">
+<div class="col-12">
 	<div class="row">
 		<div class="col-8">
-			<i class="fa fa-users font-size-20" aria-hidden="true"></i> <strong class="font-size-20">
-				Request changing KPI Team target
-			</strong>
+			<i class="fa fa-users font-size-20 mr-5" aria-hidden="true"></i>
+			<span class="pim-head-text"> Request changing KPI Team target</span>
 		</div>
 		<div class="col-4 text-end pr-15">
 			<a href="<?= Yii::$app->homeUrl ?>kpi/management/wait-approve" class="btn btn-secondary font-size-12">
@@ -20,7 +19,7 @@ $this->title = 'Team kpi History';
 			</a>
 		</div>
 	</div>
-	<div class="col-12 mt-20 pt-10 pl-10 pb-20" style="border-radius: 10px;border-style:dotted;border-color:grey;">
+	<div class="col-12 mt-10 pt-10 pl-10 pb-20 pim-body bg-white" style="border-radius: 10px;border-style:dotted;border-color:grey;">
 		<strong>KPI : <?= $kpiDetail["kpiName"] ?></strong>
 		<div class="row">
 			<div class="col-lg-2 col-md-6 col-2 text-center">
@@ -86,14 +85,16 @@ $this->title = 'Team kpi History';
 		</div>
 
 	</div>
-	<div class="row mt-20">
-		<div class="col-lg-6 col-md-6 col-12">
+	<div class="row mt-20 pl-15 pr-15">
+		<div class="col-lg-6 col-md-6 col-12 pim-body bg-white" style="border-top-left-radius: 10px;border-bottom-left-radius: 10px;">
 			<div class="row">
-				<div class="col-7 font-b pb-5 border-bottom"><?= $teamName ?></div>
-				<div class="col-5 text-end font-b pb-5 border-bottom font-size-12">
-					<a href="javascript:approveTargetKpiTeam(<?= $kpiTeam['kpiTeamId'] ?>,0)" class="btn btn-sm btn-danger font-size-10 mr-3">Reject</a>
-					<a href="javascript:approveTargetKpiTeam(<?= $kpiTeam['kpiTeamId'] ?>,1)" class="btn btn-sm btn-primary font-size-10">Approve</a>
-				</div>
+				<div class="col-12 font-b pb-5 border-bottom"><?= $teamName ?></div>
+				<!-- <div class="col-5 text-end font-b pb-5 border-bottom font-size-12">
+					<a href="javascript:approveTargetKpiTeam(<?php // $kpiTeam['kpiTeamId'] 
+											?>,0)" class="btn btn-sm btn-danger font-size-10 mr-3">Reject</a>
+					<a href="javascript:approveTargetKpiTeam(<?php // $kpiTeam['kpiTeamId'] 
+											?>,1)" class="btn btn-sm btn-primary font-size-10">Approve</a>
+				</div> -->
 			</div>
 			<?php
 			if (isset($kpiTeamHistories) && count($kpiTeamHistories) > 0) { ?>
@@ -150,7 +151,7 @@ $this->title = 'Team kpi History';
 			}
 			?>
 		</div>
-		<div class="col-lg-6 col-md-6 col-12">
+		<div class="col-lg-6 col-md-6 col-12 pim-body bg-white" style="border-top-right-radius: 10px;border-bottom-right-radius: 10px;">
 			<div class="col-12 font-b pb-5 border-bottom text-end">All teams</div>
 			<?php
 			if (isset($allTeams) && count($allTeams) > 0) {

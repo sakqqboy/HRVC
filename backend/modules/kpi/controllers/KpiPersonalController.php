@@ -459,4 +459,13 @@ class KpiPersonalController extends Controller
 		}
 		return json_encode($data);
 	}
+	public function actionWaitForApprove()
+	{
+		$kpiEmployee = KpiEmployeeHistory::find()
+			->where(["status" => 88])
+			->asArray()
+			->all();
+		$res["totalRequest"] = count($kpiEmployee);
+		return json_encode($res);
+	}
 }

@@ -1646,7 +1646,6 @@ class ManagementController extends Controller
 		if ($role < 3) {
 			return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi');
 		}
-
 		$branchId = User::userBranchId();
 		$departments = Department::find()
 			->where(["branchId" => $branchId, "status" => 1])

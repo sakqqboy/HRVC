@@ -2,6 +2,7 @@
 
 namespace frontend\models\hrvc;
 
+use common\models\ModelMaster;
 use Yii;
 use \frontend\models\hrvc\master\KpiEmployeeMaster;
 
@@ -81,5 +82,19 @@ class KpiEmployee extends \frontend\models\hrvc\master\KpiEmployeeMaster
             }
         }
         return $canEdit;
+    }
+    public static function nextCheckDate($kpiEmployeeId)
+    {
+        $date = '';
+        $kpiHistory = KpiEmployeeHistory::find()
+            ->select('nextCheckDate')
+            ->where(["kpiEmployeeId" => $kpiEmployeeId, "status" => [1, 4]])
+            ->orderBy('kpiEmployeeId DESC')
+            ->asArray()
+            ->one();
+        if (isset($kpiHistory) && !empty($kpiHistory) && $kpiHistory["nextCheckDate"] != '') {
+            $date = ModelMaster::engDate($kpiHistory["nextCheckDate"], 2);
+        }
+        return $date;
     }
 }

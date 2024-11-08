@@ -2,7 +2,7 @@
 
 use common\models\ModelMaster;
 
-$this->title = 'Waiting for approve KGI';
+$this->title = 'Waiting for approve KPI';
 ?>
 <div class="col-12">
 	<div class="col-12">
@@ -19,7 +19,7 @@ $this->title = 'Waiting for approve KGI';
 			<thead>
 				<tr class="pim-table-header">
 					<th class="pl-10">Employee</th>
-					<th style="width:20%;">KGI Contents</th>
+					<th style="width:20%;">KPI Contents</th>
 					<th class="text-center">Priority</th>
 					<th class="text-center">Previous</th>
 					<th class="text-center">New</th>
@@ -32,12 +32,13 @@ $this->title = 'Waiting for approve KGI';
 			</thead>
 			<tbody>
 				<?php
-				if (isset($employeeKgis) && count($employeeKgis) > 0) {
-					foreach ($employeeKgis as $kgiEmployeeHistoryId => $employeeKgi) :
-						if ($employeeKgi["isOver"] == 1 && $employeeKgi["status"] != 2) {
+				//throw new Exception(print_r($employeeKpis, true));
+				if (isset($employeeKpis) && count($employeeKpis) > 0) {
+					foreach ($employeeKpis as $kpiEmployeeHistoryId => $employeeKpi) :
+						if ($employeeKpi["isOver"] == 1 && $employeeKpi["status"] != 2) {
 							$colorFormat = 'over';
 						} else {
-							if ($employeeKgi["status"] == 1) {
+							if ($employeeKpi["status"] == 1) {
 								$colorFormat = 'inprogress';
 							} else {
 								$colorFormat = 'complete';
@@ -49,26 +50,25 @@ $this->title = 'Waiting for approve KGI';
 						<tr class="pim-bg-<?= $colorFormat ?> pim-table-text">
 							<td>
 								<div class="col-12 border-left-<?= $colorFormat ?> pim-div-border pb-5">
-									<?= $employeeKgi["employeeName"] ?>
+									<?= $employeeKpi["employeeName"] ?>
 								</div>
 							</td>
-							<td><?= $employeeKgi["kgiName"] ?></td>
-							<td class="text-center"><?= $employeeKgi["priority"] ?></td>
-							<td class="font-b text-end"><?= number_format($employeeKgi["target"], 2) ?></td>
-							<td class="font-b text-end"><?= number_format($employeeKgi["newTarget"], 2) ?></td>
-							<td class="text-danger text-end"><?= number_format($employeeKgi["newTarget"] - $employeeKgi["target"], 2) ?></td>
-							<td class="text-center"><?= $employeeKgi["month"] ?></td>
-							<td><?= $employeeKgi["reson"] ?></td>
-							<td class="text-center"> <a href="javascript:approveTargetKgiEmployee(<?= $kgiEmployeeHistoryId ?>,1)" class="approve-btn mr-5 no-underline mr-10">
+							<td><?= $employeeKpi["kpiName"] ?></td>
+							<td class="text-center"><?= $employeeKpi["priority"] ?></td>
+							<td class="font-b text-end"><?= number_format($employeeKpi["target"], 2) ?></td>
+							<td class="font-b text-end"><?= number_format($employeeKpi["newTarget"], 2) ?></td>
+							<td class="text-danger text-end"><?= number_format($employeeKpi["newTarget"] - $employeeKpi["target"], 2) ?></td>
+							<td class="text-center"><?= $employeeKpi["month"] ?></td>
+							<td><?= $employeeKpi["reson"] ?></td>
+							<td class="text-center"> <a href="javascript:approveTargetKpiEmployee(<?= $kpiEmployeeHistoryId ?>,1)" class="approve-btn mr-5 no-underline mr-10">
 									<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/circle-check-blue.svg" class="mr-5" style="margin-top: -2px;">Approve
 								</a>
-								<a href="javascript:approveTargetKgiEmployee(<?= $kgiEmployeeHistoryId ?>,0)" class="decline-btn  no-underline">
+								<a href="javascript:approveTargetKpiEmployee(<?= $kpiEmployeeHistoryId ?>,0)" class="decline-btn  no-underline">
 									<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/circle-cancel.svg" class="mr-5" style="margin-top: -2px;">Decline
 								</a>
 							</td>
 							<td class="text-center">
-
-								<a href="<?= Yii::$app->homeUrl ?>kgi/management/approve-kgi-employee/<?= ModelMaster::encodeParams(["kgiEmployeeHistoryId" => $kgiEmployeeHistoryId]) ?>" class="btn btn-bg-white-xs">
+								<a href="<?= Yii::$app->homeUrl ?>kpi/management/approve-kpi-employee/<?= ModelMaster::encodeParams(["kpiEmployeeHistoryId" => $kpiEmployeeHistoryId]) ?>" class="btn btn-bg-white-xs">
 									<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" style="margin-top: -2px;">
 								</a>
 							</td>
@@ -77,7 +77,7 @@ $this->title = 'Waiting for approve KGI';
 					endforeach;
 				} else { ?>
 					<tr>
-						<td colspan="6" class="col-12 mt-20 font-size-14 text-secondary"> There are no waiting for approve KGI.</td>
+						<td colspan="6" class="col-12 mt-20 font-size-14 text-secondary"> There are no waiting for approve KPI.</td>
 					</tr>
 				<?php
 				}
