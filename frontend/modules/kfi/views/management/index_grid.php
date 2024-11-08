@@ -188,33 +188,33 @@ $this->title = 'KFI Grid View';
 																	if (isset($kfi['kfiEmployee'][0])) {
 																	?>
                                                             <img src="<?= Yii::$app->homeUrl . $kfi['kfiEmployee'][0] ?>"
-                                                                class="pim-pic-grid">
+                                                                class="pim-pic-gridKFI">
                                                             <?php
 																	}
 																	?>
                                                         </div>
-                                                        <div class="col-2 pic-after pt-0">
+                                                        <div class="col-2 .pic-afterKFI pt-0">
                                                             <?php
 																	if (isset($kfi['kfiEmployee'][1])) {
 																	?>
                                                             <img src="<?= Yii::$app->homeUrl . $kfi['kfiEmployee'][1] ?>"
-                                                                class="pim-pic-grid">
+                                                                class="pim-pic-gridKFI">
                                                             <?php
 																	}
 																	?>
                                                         </div>
-                                                        <!-- <div class="col-2 pic-after pt-0">
+                                                        <!-- <div class="col-2 .pic-afterKFI pt-0">
                                                             <?php
 																	if (isset($kfi['kfiEmployee'][2])) {
 																	?>
                                                             <img src="<?= Yii::$app->homeUrl . $kfi['kfiEmployee'][2] ?>"
-                                                                class="pim-pic-grid">
+                                                                class="pim-pic-gridKFI">
                                                             <?php
 																	}
 																	?>
                                                         </div> -->
                                                         <div
-                                                            class="col-6 number-tag load-<?= $colorFormat ?> pr-0 pl-0 pt-1 pim-pic-gridNum ">
+                                                            class="col-6 number-tag load-<?= $colorFormat ?> pr-0 pl-0 pt-1 pim-pic-gridKFINum ">
                                                             <?= $kfi["countEmployee"] ?>
                                                         </div>
                                                     </div>

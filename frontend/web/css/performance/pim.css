@@ -428,7 +428,7 @@
 	color: #E05757;
 	background-color: #FFD7D7;
 	border-radius: 26.5px;
-	/* letter-spacing: 0.5px; */
+	letter-spacing: 0.5px;
 	padding-left: 5px;
 }
 
@@ -705,29 +705,47 @@
 
 .number-tag {
 	background: #ffffff;
-	font-size: 18px !important;
-	letter-spacing: 1.5px;
+	font-size: 10px !important;
+	letter-spacing: 0.5px;
 	text-align: center;
 	border-radius: 10px;
 	position: relative;
 	color: #000000;
-	margin-top: 1px;
+	margin-top: -3px;
 	z-index: 3;
 }
 
+.pim-pic-gridKFINum {
+	background: #ffffff;
+	leading-trim: both;
+	text-edge: cap;
+	font-family: "SF Pro Display";
+	font-size: 18px !important;
+	font-style: normal;
+	font-weight: 500;
+	text-align: center;
+	position: relative;
+	color: #000000;
+	margin-top: 3px;
+	width: 33px;
+	height: 33px;
+	border-radius: 100%;
+	z-index: 3;
+}
+
+
 .pim-pic-grid {
+	width: 20px;
+	height: 20px;
+	border-radius: 100%;
+	border: #FFFFFF solid 0.5px;
+}
+
+.pim-pic-gridKFI {
 	width: 33px;
 	height: 33px;
 	border-radius: 100%;
 	border: #FFFFFF solid 0.5px;
-	margin-top: 3px;
-}
-
-.pim-pic-gridNum {
-	margin-left: -3px;
-	width: 33px;
-	height: 33px;
-	border-radius: 100%;
 	margin-top: 3px;
 }
 
@@ -744,6 +762,13 @@
 	/* ปรับขนาดได้ตามต้องการ */
 }
 
+.pim-pic-gridNum {
+	margin-left: -3px;
+	width: 33px;
+	height: 33px;
+	border-radius: 100%;
+	margin-top: 3px;
+}
 
 .pim-duedate {
 	font-weight: 400;
@@ -751,7 +776,12 @@
 }
 
 .pic-after {
-	margin-left: -3px;
+	margin-left: -13px;
+	z-index: 3;
+}
+
+.pic-afterKFI {
+	margin-left: -15px;
 	z-index: 3;
 }
 
