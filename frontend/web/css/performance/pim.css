@@ -432,6 +432,26 @@
 	padding-left: 5px;
 }
 
+.inprogress-assignKFI {
+	font-weight: 400;
+	font-size: 10px;
+	color: #E05757;
+	background-color: #FFD7D7;
+	border-radius: 26.5px;
+	letter-spacing: 0.5px;
+	padding-left: 5px;
+}
+
+.complete-assignKFI {
+	font-weight: 400;
+	font-size: 10px;
+	color: #E05757;
+	background-color: #FFD7D7;
+	border-radius: 26.5px;
+	letter-spacing: 0.5px;
+	padding-left: 5px;
+}
+
 .inprogress-assign {
 	width: 100%;
 	font-weight: 400;
@@ -775,13 +795,18 @@
 	color: #3C3D48;
 }
 
+.pim-duedateKFI {
+	font-weight: 400;
+	color: #3C3D48;
+}
+
 .pic-after {
 	margin-left: -13px;
 	z-index: 3;
 }
 
 .pic-afterKFI {
-	margin-left: -15px;
+	margin-left: -5px;
 	z-index: 3;
 }
 
@@ -879,6 +904,11 @@
 
 .pim-icon {
 	width: 15px;
+}
+
+.pim-iconKFI {
+	height: 10px;
+	width: 10px;
 }
 
 .pim-description {

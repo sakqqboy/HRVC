@@ -193,7 +193,7 @@ $this->title = 'KFI Grid View';
 																	}
 																	?>
                                                         </div>
-                                                        <div class="col-2 .pic-afterKFI pt-0">
+                                                        <div class="col-2 pic-afterKFI pt-0">
                                                             <?php
 																	if (isset($kfi['kfiEmployee'][1])) {
 																	?>
@@ -253,16 +253,21 @@ $this->title = 'KFI Grid View';
                                         <!-- Left Column: Quant Ratio -->
                                         <div class="col-6 border-right-<?= $colorFormat ?>">
                                             <div class="col-12  pr-6 pt-10 text-center">Quant Ratio</div>
-                                            <div class="text-center mt-2">
-                                                <i class="fa fa-diamond" aria-hidden="true"></i>
+                                            <div class="col-12 pim-duedate text-center mt-2">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/diamon.svg"
+                                                    class="pim-iconKFI" style="margin-top: -3px;">
+                                                <!-- <i class="fa fa-diamond" aria-hidden="true"></i> -->
                                                 <?= $kfi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?>
                                             </div>
                                         </div>
 
                                         <!-- Right Column: Update Interval -->
                                         <div class="col-6">
-                                            <div class="col-12 pr-0 pt-10 text-center">Update Interval</div>
+                                            <div class="col-12 pr-0 pt-10 text-center">Update Interval
+                                            </div>
                                             <div class="col-12 pim-duedate text-center mt-2">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/monthly.svg"
+                                                    class="pim-iconKFI" style="margin-top: -3px;">
                                                 <?= $kfi["unit"] ?>
                                             </div>
                                         </div>
