@@ -20,23 +20,22 @@ $this->title = 'KFI Grid View';
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-12 pt-2 key1">
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-4">
                             <div class="row">
                                 <div
-                                    class="col-12 pim-type-tab-selected pr-0 pl-1 pt-4 pb-2 text-center font-size-12 rounded-top-left">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg"
-                                        style="width: 12px; height: 12px; cursor: pointer;">
-                                    Company KFI
+                                    class="col-12 pim-type-tab-selected pl-7 pr-7 pt-4 pb-2  text-center font-size-12 rounded-top-left">
+                                    <img class="mr-8" src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg"
+                                        style="width: 12px; height: 12px; cursor: pointer;">Company KFI
                                 </div>
                             </div>
                         </div>
-                        <div class=" col-9">
+                        <div class=" col-8">
                             <?php
 									if ($role >= 3) {
 									?>
-                            <button type="button" class="btn-create font-size-12" data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop1">
-                                Create New KFI <i class="fa fa-magic ml-3" aria-hidden="true"></i>
+                            <button type="button" class="btn-createKFI pl-7 pr-7 pr-9 font-size-12"
+                                data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
+                                Create New<i class="fa fa-magic ml-3" aria-hidden="true"></i>
                             </button>
                             <?php
 									}

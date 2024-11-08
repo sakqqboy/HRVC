@@ -828,6 +828,14 @@
 
 }
 
+.btn-createKFI {
+	background-color: #2580D3;
+	color: white;
+	border-radius: 3px;
+	padding: 3px 9px 3px 9px;
+	border: 0;
+}
+
 .dropdown-itemNEWS {
 	display: inline-flex;
 	align-items: center;
