@@ -33,7 +33,7 @@ $this->title = 'KFI Grid View';
                             <?php
 									if ($role >= 3) {
 									?>
-                            <button type="button" class="btn-createKFI pl-7 pr-7 pr-9 font-size-12"
+                            <button type="button" class="btn-createnew pl-7 pr-7 pr-9 font-size-12"
                                 data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
                                 Create New <i class="fa fa-magic ml-3" aria-hidden="true"></i>
                             </button>
@@ -44,7 +44,7 @@ $this->title = 'KFI Grid View';
 
                     </div>
                 </div>
-                <div class="col-lg-7 col-md-12 col-12 pt-2 New-KFI">
+                <div class="col-lg-7 col-md-12 col-12 pt-1">
                     <?= $this->render('filter_list', [
 						"companies" => $companies,
 						"months" => $months
@@ -63,7 +63,6 @@ $this->title = 'KFI Grid View';
                                 style="cursor: pointer;">
                         </a>
                     </div>
-
                 </div>
             </div>
             <div class="col-12 mt-5">
