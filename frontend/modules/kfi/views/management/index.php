@@ -200,8 +200,11 @@ $this->title = 'KFI';
                                             <li data-bs-toggle="modal" data-bs-target="#staticBackdrop2"
                                                 onclick="javascript:updateKfi(<?= $kfiId ?>)" title="Update">
                                                 <a class="dropdown-item" href="#">
-                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                    <!-- <i class="fa fa-pencil-square-o" aria-hidden="true"></i> -->
+                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
+                                                        alt="edit" class="pim-icon mr-3" style="margin-top: -2px;">
                                                     <!-- <strong class="red">*</strong> -->
+                                                    Edit
                                                 </a>
                                             </li>
                                             <?php
@@ -217,6 +220,7 @@ $this->title = 'KFI';
                                                 class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png"
                                                     alt="Chart" class="pim-icon mr-3" style="margin-top: -2px;">
+                                                Chart
                                             </a>
                                             <?php
 												if ($role >= 3) {
@@ -255,7 +259,10 @@ $this->title = 'KFI';
                                             <li data-bs-toggle="modal" data-bs-target="#staticBackdrop4"
                                                 onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)" title="Delete">
                                                 <a class="dropdown-item" href="#">
-                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                    <!-- <i class="fa fa-trash-o" aria-hidden="true"></i> -->
+                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/delete.svg"
+                                                        alt="Delete" class="pim-icon mr-3" style="margin-top: -2px;">
+                                                    Delete
                                                 </a>
                                             </li>
                                             <?php
