@@ -20,7 +20,7 @@ $this->title = "KGI";
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-12  pr-0">
                     <div class="row">
-                        <div class="col-7">
+                        <div class="col-8">
                             <div class="row">
                                 <div class="col-4 pim-type-tab-selected pr-0 pl-0">
                                     Company KGI
@@ -39,13 +39,14 @@ $this->title = "KGI";
                                 </div>
                             </div>
                         </div>
-                        <div class="col-5 text-end">
+                        <div class="col-4 pl-4">
                             <?php
 							if ($role >= 3) {
 							?>
-                            <button type="button" class="btn-create font-size-10" data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop5" onclick="javascript:changeType()">
-                                <i class="fa fa-magic" aria-hidden="true"></i> Create New KGI
+                            <button type="button" class="btn-createnew font-size-11" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop5" style="position:absolute;" onclick="
+                                javascript:changeType()">
+                                Create New <i class="fa fa-magic ml-2" aria-hidden="true"></i>
                             </button>
                             <?php
 							}
@@ -53,24 +54,25 @@ $this->title = "KGI";
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-7 col-md-12 col-12 New-KFI">
+                <div class="col-lg-7 col-md-12 col-12 pt-1">
                     <?= $this->render('filter_list', [
 						"companies" => $companies,
 						"months" => $months
 					]) ?>
                     <input type="hidden" id="type" value="list">
                 </div>
-                <div class="col-lg-1 col-md-6 col-12 pr-0 text-end">
-                    <div class="btn-group" role="group">
-                        <a href="<?= Yii::$app->homeUrl . 'kgi/management/grid' ?>"
-                            class="btn btn-outline-primary font-size-12 pim-change-mode">
-                            <i class="fa fa-th-large" aria-hidden="true"></i>
-                        </a>
-                        <a href="#" class="btn btn-primary font-size-12 pim-change-mode">
-                            <i class="fa fa-list-ul" aria-hidden="true"></i>
-                        </a>
-
-                    </div>
+            </div>
+            <div class="col-lg-1 col-md-6 col-12 pr-0 text-end">
+                <div class="btn-group" role="group">
+                    <a href="<?= Yii::$app->homeUrl . 'kgi/management/grid' ?>"
+                        class="btn btn-outline-primary font-size-12 pim-change-modes">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridblack.svg"
+                            style="cursor: pointer;">
+                    </a>
+                    <a href="#" class="btn btn-primary font-size-12 pim-change-modes">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listwhite.svg"
+                            style="cursor: pointer;">
+                    </a>
                 </div>
             </div>
             <div class="col-12 mt-15">
