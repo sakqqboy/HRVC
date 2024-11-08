@@ -212,6 +212,12 @@ $this->title = 'KFI';
 														<i class="fa fa-eye" aria-hidden="true"></i>
 													</a>
 												</li> -->
+                                            <a class="dropdown-item"
+                                                href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, 'openTab' => 4]) ?>"
+                                                class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png"
+                                                    alt="Chart" class="pim-icon mr-3" style="margin-top: -2px;">
+                                            </a>
                                             <?php
 												if ($role >= 3) {
 												?>
@@ -219,19 +225,19 @@ $this->title = 'KFI';
                                                 <!-- <a class="dropdown-item" href="<?= Yii::$app->homeUrl ?>kfi/kfi-team/kfi-team-setting/<?= ModelMaster::encodeParams(['kfiId' => $kfiId]) ?>">
 															<i class="fa fa-users" aria-hidden="true"></i>
 														</a> -->
-                                                <a class="dropdown-item"
+                                                <!-- <a class="dropdown-item"
                                                     href="<?= Yii::$app->homeUrl ?>kfi/assign/assign/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, "companyId" => $kfi["companyId"]]) ?>">
                                                     <i class="fa fa-users" aria-hidden="true"></i>
-                                                </a>
+                                                </a> -->
                                             </li>
                                             <li>
                                                 <!-- <a class="dropdown-item" href="<?= Yii::$app->homeUrl ?>kfi/kfi-personal/indivisual-setting/<?= ModelMaster::encodeParams(['kfiId' => $kfiId]) ?>">
 															<i class="fa fa-user" aria-hidden="true"></i>
 														</a> -->
-                                                <a class="dropdown-item"
+                                                <!-- <a class="dropdown-item"
                                                     href="<?= Yii::$app->homeUrl ?>kfi/assign/assign/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, "companyId" => $kfi["companyId"], "save" => 0]) ?>">
                                                     <i class="fa fa-user" aria-hidden="true"></i>
-                                                </a>
+                                                </a> -->
                                             </li>
                                             <?php
 												}
