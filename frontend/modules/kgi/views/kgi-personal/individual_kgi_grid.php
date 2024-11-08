@@ -40,12 +40,12 @@ $this->title = "INDIVIDUAL KGI";
 									</div>
 									<div class="col-3 pr-0 pl-3 pt-0">
 										<?php
-										$waitForApprove["totalReuest"] = 3;
+										//$waitForApprove["totalReuest"] = 3;
 										if ($role >= 3) {
 										?>
 											<div class="col-12 approval-box text-center pr-3">
 												<?php
-												if ($waitForApprove["totalReuest"] > 0) {
+												if ($waitForApprove["totalRequest"] > 0) {
 												?>
 													<a href="<?= Yii::$app->homeUrl ?>kgi/management/wait-approve-kgi-personal"
 														style="text-decoration: none;color:#2580D3;">

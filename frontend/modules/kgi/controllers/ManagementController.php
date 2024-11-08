@@ -1852,6 +1852,7 @@ class ManagementController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiEmployee["kgiId"]);
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
+		//throw new exception(print_r($kgiEmployees, true));
 
 		curl_close($api);
 
@@ -1866,15 +1867,14 @@ class ManagementController extends Controller
 	}
 	public function actionApproveKgiEmployeeTarget()
 	{
-		$kgiEmployeeId = $_POST["kgiEmployeeId"];
+		$kgiEmployeeHistoryId = $_POST["kgiEmployeeHistoryId"];
 		$approve = $_POST["approve"];
 		$history = KgiEmployeeHistory::find()
-			->where(["kgiEmployeeId" => $kgiEmployeeId, "status" => 88])
-			->orderBy('createDateTime DESC')
+			->where(["kgiEmployeeHistoryId" => $kgiEmployeeHistoryId, "status" => 88])
 			->one();
 		if ($approve == 1) {
-			$kgiEmployee = KgiEmployee::find()->where(["kgiEmployeeId" => $kgiEmployeeId])->one();
-			KgiEmployeeHistory::updateAll(["status" => 90], ["status" => [1, 2]]);
+			$kgiEmployee = KgiEmployee::find()->where(["kgiEmployeeId" => $history->kgiEmployeeId])->one();
+			//KgiEmployeeHistory::updateAll(["status" => 90], ["status" => [1, 2]]);
 			$history->status = 1;
 			$kgiEmployee->target = $history["target"];
 			$kgiEmployee->status = 1;

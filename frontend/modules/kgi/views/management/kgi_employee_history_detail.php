@@ -6,12 +6,11 @@ use frontend\models\hrvc\User;
 
 $this->title = 'Employee KGI History';
 ?>
-<div class="col-12 mt-90">
+<div class="col-12">
 	<div class="row">
 		<div class="col-8">
-			<i class="fa fa-users font-size-20" aria-hidden="true"></i> <strong class="font-size-20">
-				Request changing KGI Team target
-			</strong>
+			<i class="fa fa-users font-size-20 mr-5" aria-hidden="true"></i>
+			<span class="pim-head-text"> Performance Indicator Matrices (PIM)</span>
 		</div>
 		<div class="col-4 text-end pr-15">
 			<a href="<?= Yii::$app->homeUrl ?>kgi/management/wait-approve" class="btn btn-secondary font-size-12">
@@ -20,7 +19,7 @@ $this->title = 'Employee KGI History';
 			</a>
 		</div>
 	</div>
-	<div class="col-12 mt-20 pt-10 pl-10 pb-20" style="border-radius: 10px;border-style:dotted;border-color:grey;">
+	<div class="col-12 mt-10 pt-10 pl-10 pb-20 pim-body bg-white" style="border-radius: 10px;border-style:dotted;border-color:grey;">
 		<strong>KGI : <?= $kgiDetail["kgiName"] ?></strong>
 		<div class="row">
 			<div class="col-lg-2 col-md-6 col-2 text-center">
@@ -86,14 +85,16 @@ $this->title = 'Employee KGI History';
 		</div>
 
 	</div>
-	<div class="row mt-20">
-		<div class="col-lg-6 col-md-6 col-12">
+	<div class="row mt-20 pl-15 pr-15">
+		<div class="col-lg-6 col-md-6 col-12 pim-body bg-white" style="border-top-left-radius: 10px;border-bottom-left-radius: 10px;">
 			<div class="row">
-				<div class="col-7 font-b pb-5 border-bottom"><?= $employeeName ?></div>
-				<div class="col-5 text-end font-b pb-5 border-bottom font-size-12">
-					<a href="javascript:approveTargetKgiEmployee(<?= $kgiEmployee['kgiEmployeeId'] ?>,0)" class="btn btn-sm btn-danger font-size-10 mr-3">Reject</a>
-					<a href="javascript:approveTargetKgiEmployee(<?= $kgiEmployee['kgiEmployeeId'] ?>,1)" class="btn btn-sm btn-primary font-size-10">Approve</a>
-				</div>
+				<div class="col-12 font-b pb-5 border-bottom"><?= $employeeName ?></div>
+				<!-- <div class="col-5 text-end font-b pb-5 border-bottom font-size-12">
+					<a href="javascript:approveTargetKgiEmployee(<?php // $kgiEmployee['kgiEmployeeId'] 
+												?>,0)" class="btn btn-sm btn-danger font-size-10 mr-3">Reject</a>
+					<a href="javascript:approveTargetKgiEmployee(<?php // $kgiEmployee['kgiEmployeeId'] 
+												?>,1)" class="btn btn-sm btn-primary font-size-10">Approve</a>
+				</div> -->
 			</div>
 			<?php
 			if (isset($kgiEmployees) && count($kgiEmployees) > 0) { ?>
@@ -135,7 +136,7 @@ $this->title = 'Employee KGI History';
 						?>
 							<tr class="font-size-12">
 								<td><?= $a ?></td>
-								<td class="text-end font-b"><?= $decimalTarget[1] == '00' ? number_format($history["target"]) : number_format($history["target"], 2) ?></td>
+								<td class="text-end font-b"><?= isset($decimalTarget[1]) && $decimalTarget[1] == '00' ? number_format($history["target"]) : number_format($history["target"], 2) ?></td>
 								<td style="width: 10%;"><?= $history["detail"] ?></td>
 								<td>&nbsp;<?= User::employeeNameByuserId($history["createrId"]) ?></td>
 								<td class="<?= $class ?>"><?= $textStatus ?></td>
@@ -154,7 +155,7 @@ $this->title = 'Employee KGI History';
 			}
 			?>
 		</div>
-		<div class="col-lg-6 col-md-6 col-12">
+		<div class="col-lg-6 col-md-6 col-12 pim-body bg-white" style="border-top-right-radius: 10px;border-bottom-right-radius: 10px;">
 			<div class="col-12 font-b pb-5 border-bottom text-end">Employees</div>
 			<?php
 			if (isset($allEmployee) && count($allEmployee) > 0) {
@@ -180,7 +181,7 @@ $this->title = 'Employee KGI History';
 							<tr class="font-size-12">
 								<td><?= $i ?></td>
 								<td class="<?= $employeeName == $name ? 'font-b' : '' ?>"><?= $name ?></td>
-								<td class="text-end border-right <?= $employeeName == $name ? 'font-b' : '' ?>"><?= $decimalTarget[1] == '00' ? number_format($employee["target"]) : number_format($employee["target"], 2) ?></td>
+								<td class="text-end border-right <?= $employeeName == $name ? 'font-b' : '' ?>"><?= isset($decimalTarget[1]) && $decimalTarget[1] == '00' ? number_format($employee["target"]) : number_format($employee["target"], 2) ?></td>
 								<td class="text-end border-right"><?= $decimalResult[1] == '00' ? number_format($employee["result"]) : number_format($employee["result"], 2) ?></td>
 								<td>&nbsp;<?= User::employeeNameByuserId($employee["createrId"]) ?></td>
 							</tr>

@@ -812,7 +812,7 @@ function changeTargetKgiTeamReason(kgiTeamHistoryId) {
 		}
 	});
 }
-function approveTargetKgiEmployee(kgiEmployeeId, approve) {
+function approveTargetKgiEmployee(kgiEmployeeHistoryId, approve) {
 	var url = $url + 'kgi/management/approve-kgi-employee-target';
 	if (approve == 1) {
 		var text = 'Are you sure to approve this target?';
@@ -824,10 +824,10 @@ function approveTargetKgiEmployee(kgiEmployeeId, approve) {
 			type: "POST",
 			dataType: 'json',
 			url: url,
-			data: { kgiEmployeeId: kgiEmployeeId, approve: approve },
+			data: { kgiEmployeeHistoryId: kgiEmployeeHistoryId, approve: approve },
 			success: function (data) {
 				if (data.status) {
-					var url = $url + 'kgi/management/wait-approve';
+					var url = $url + 'kgi/management/wait-approve-kgi-personal';
 					window.location.href = url;
 				}
 			}
