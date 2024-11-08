@@ -206,12 +206,12 @@ $this->title = 'KFI';
                                                 <strong class="red">*</strong>
                                             </a>
                                         </li> -->
-                                        <li data-bs-toggle="modal" data-bs-target="#staticBackdrop2"
+                                        <li class="pl-4 pr-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop2"
                                             onclick="javascript:updateKfi(<?= $kfiId ?>)" title="Update">
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-itemNEWS pl-4 pr-20 mb-5" href="#">
                                                 <!-- <i class="fa fa-pencil-square-o" aria-hidden="true"></i> -->
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
-                                                    alt="edit" class="pim-icon mr-3" style="margin-top: -2px;">
+                                                    alt="edit" class="pim-icon mr-10" style="margin-top: -2px;">
                                                 <!-- <strong class="red">*</strong> -->
                                                 Edit
                                             </a>
@@ -225,13 +225,15 @@ $this->title = 'KFI';
                                                 <i class="fa fa-eye" aria-hidden="true"></i>
                                             </a>
                                         </li> -->
-                                        <a class="dropdown-item"
-                                            href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, 'openTab' => 4]) ?>"
-                                            class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png"
-                                                alt="Chart" class="pim-icon mr-3" style="margin-top: -2px;">
-                                            Chart
-                                        </a>
+                                        <li class="pl-4 pr-4" data-bs-toggle="modal">
+                                            <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
+                                                href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, 'openTab' => 4]) ?>"
+                                                class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png"
+                                                    alt="Chart" class="pim-icon mr-10" style="margin-top: -2px;">
+                                                Chart
+                                            </a>
+                                        </li>
 
                                         <?php
 												if ($role >= 3) {
@@ -266,13 +268,12 @@ $this->title = 'KFI';
                                                 <i class="fa fa-copy" aria-hidden="true"></i>
                                             </a>
                                         </li> -->
-
-                                        <li data-bs-toggle="modal" data-bs-target="#staticBackdrop4"
+                                        <li class="pl-4 pr-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop4"
                                             onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)" title="Delete">
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-itemNEW pl-4 pr-25" href="#">
                                                 <!-- <i class="fa fa-trash-o" aria-hidden="true"></i> -->
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/delete.svg"
-                                                    alt="Delete" class="pim-icon mr-3" style="margin-top: -2px;">
+                                                    alt="Delete" class="pim-icon mr-10" style="margin-top: -2px;">
                                                 Delete
                                             </a>
                                         </li>
