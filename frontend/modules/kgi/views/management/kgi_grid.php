@@ -18,11 +18,11 @@ $this->title = 'KGI Grid View';
 		]) ?>
         <div class="alert mt-10 pim-body bg-white">
             <div class="row">
-                <div class="col-lg-4 col-md-6 col-12  pr-0">
+                <div class="col-lg-4 col-md-6 col-12  pr-0 pt-1">
                     <div class="row">
                         <div class="col-8">
                             <div class="row">
-                                <div class="col-4 pim-type-tab-selected pr-0 pl-0">
+                                <div class="col-4 pim-type-tab-selected pr-0 pl-0 rounded-top-left">
                                     Company KGI
                                 </div>
                                 <div class="col-4 pim-type-tab">
@@ -31,7 +31,7 @@ $this->title = 'KGI Grid View';
                                         Team KGI
                                     </a>
                                 </div>
-                                <div class="col-4 pim-type-tab">
+                                <div class="col-4 pim-type-tab rounded-top-right">
                                     <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi-grid"
                                         class="no-underline-black">
                                         Self KGI
@@ -60,18 +60,18 @@ $this->title = 'KGI Grid View';
 					]) ?>
                     <input type="hidden" id="type" value="grid">
                 </div>
-            </div>
-            <div class="col-lg-1 col-md-6 col-12 pr-0 text-end">
-                <div class="btn-group" role="group">
-                    <a href="#" class="btn btn-primary font-size-12 pim-change-modes">
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridwhite.svg"
-                            style="cursor: pointer;">
-                    </a>
-                    <a href="<?= Yii::$app->homeUrl . 'kgi/management/index' ?>"
-                        class="btn btn-outline-primary font-size-12 pim-change-modes">
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listblack.svg"
-                            style="cursor: pointer;">
-                    </a>
+                <div class="col-lg-1 col-md-6 col-12 pr-0 text-end">
+                    <div class="btn-group" role="group">
+                        <a href="#" class="btn btn-primary font-size-12 pim-change-modes">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridwhite.svg"
+                                style="cursor: pointer;">
+                        </a>
+                        <a href="<?= Yii::$app->homeUrl . 'kgi/management/index' ?>"
+                            class="btn btn-outline-primary font-size-12 pim-change-modes">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listblack.svg"
+                                style="cursor: pointer;">
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="col-12 mt-5">

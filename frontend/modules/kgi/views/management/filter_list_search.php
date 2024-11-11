@@ -14,7 +14,8 @@ use frontend\models\hrvc\Team;
         </span>
     </div> -->
     <div class="col-2 pr-5 pl-1">
-        <select class="form-select font-size-12 select-pim" id="company-filter" onchange="applySelectStyle(this)">
+        <select class="form-select font-size-12 <?= $companyId!=""?'select-pimselect':'select-pim' ?>"
+            id="company-filter" onchange="applySelectStyle(this)">
             <?php
 			if (isset($companyId) && $companyId != "") { ?>
             <option value="<?= $companyId ?>"><?= Company::companyName($companyId) ?></option>
@@ -33,8 +34,8 @@ use frontend\models\hrvc\Team;
         </select>
     </div>
     <div class="col-2 pr-5 pl-1">
-        <select class="form-select font-size-12 select-pim" id="branch-filter" <?= $companyId == "" ? 'disabled' : '' ?>
-            onchange="applySelectStyle(this)">
+        <select class="form-select font-size-12 <?= $yearSelected!=""?'select-pimselect':'select-pim' ?>"
+            id="branch-filter" <?= $branchId == "" ? 'disabled' : '' ?> onchange="applySelectStyle(this)">
             <?php
 			if (isset($branchId) && $branchId != "") { ?>
             <option value="<?= $branchId ?>"><?= Branch::branchName($branchId) ?></option>
@@ -79,7 +80,8 @@ use frontend\models\hrvc\Team;
 		</select>
 	</div> -->
     <div class="col-2 pr-5 pl-1">
-        <select class="form-select font-size-12 select-pim" id="month-filter" onchange="applySelectStyle(this)">
+        <select class="form-select font-size-12 <?= $month!=""?'select-pimselect':'select-pim' ?>" id="month-filter"
+            onchange="applySelectStyle(this)">
             <?php
 			if (isset($month) && $month != "") { ?>
             <option value="<?= $month ?>"><?= ModelMaster::monthFull()[$month] ?></option>
@@ -98,7 +100,8 @@ use frontend\models\hrvc\Team;
         </select>
     </div>
     <div class="col-2 pr-5 pl-1">
-        <select class="form-select font-size-12 select-pim" id="year-filter" onchange="applySelectStyle(this)">
+        <select class="form-select font-size-12 <?= $yearSelected!=""?'select-pimselect':'select-pim' ?>"
+            id="year-filter" onchange="applySelectStyle(this)">
             <?php
 			if (isset($yearSelected) && $yearSelected != "") { ?>
             <option value="<?= $yearSelected ?>"><?= $yearSelected ?></option>
@@ -122,7 +125,8 @@ use frontend\models\hrvc\Team;
         </select>
     </div>
     <div class="col-2 pr-1 pl-1">
-        <select class="form-select font-size-12 select-pim" id="status-filter" onchange="applySelectStyle(this)">
+        <select class="form-select font-size-12 <?= $status!=""?'select-pimselect':'select-pim' ?>" id="status-filter"
+            onchange="applySelectStyle(this)">
             <?php
 			if (isset($status) && $status != "") { ?>
             <option value="<?= $status ?>"><?= $status == 1 ? "Active" : "Finished" ?></option>
@@ -134,6 +138,7 @@ use frontend\models\hrvc\Team;
             <option value="2">Finished</option>
         </select>
     </div>
+
     <div class="col-2 pr-0 text-start">
         <span class="btn font-size-12 justify-content-center d-flex align-items-center custom-button-select"
             onclick="javascript:kgiFilter()">
@@ -143,16 +148,16 @@ use frontend\models\hrvc\Team;
         </span>
         <!-- </div> -->
     </div>
+</div>
 
-
-    <script>
-    function applySelectStyle(selectElement) {
-        if (selectElement.value) {
-            selectElement.classList.remove('select-pim');
-            selectElement.classList.add('select-pimselect');
-        } else {
-            selectElement.classList.remove('select-pimselect');
-            selectElement.classList.add('select-pim');
-        }
+<script>
+function applySelectStyle(selectElement) {
+    if (selectElement.value) {
+        selectElement.classList.remove('select-pim');
+        selectElement.classList.add('select-pimselect');
+    } else {
+        selectElement.classList.remove('select-pimselect');
+        selectElement.classList.add('select-pim');
     }
-    </script>
+}
+</script>
