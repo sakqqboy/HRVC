@@ -3,18 +3,17 @@
         <select class="form-select font-size-12 select-pim" id="company-filter" onchange="applySelectStyle(this)">
             <option value="">Company</option>
             <?php
-			if (isset($companies) && count($companies) > 0) {
-				foreach ($companies as $company) : ?>
-            <option value=" <?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
+            if (isset($companies) && count($companies) > 0) {
+                foreach ($companies as $company) : ?>
+                    <option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
             <?php
-				endforeach;
-			}
-			?>
+                endforeach;
+            }
+            ?>
         </select>
     </div>
     <div class="col-2 pr-5 pl-1">
-        <select class="form-select font-size-12 select-pim" id="branch-filter" onchange="applySelectStyle(this)"
-            disabled>
+        <select class="form-select font-size-12 select-pim" id="branch-filter" disabled onchange="applySelectStyle(this)">
             <option value="">Branch</option>
         </select>
     </div>
@@ -25,13 +24,13 @@
         <select class="form-select font-size-12 select-pim" id="month-filter" onchange="applySelectStyle(this)">
             <option value="">Month</option>
             <?php
-			if (isset($months) && count($months) > 0) {
-				foreach ($months as $value => $month) : ?>
-            <option value=" <?= $value ?>"><?= $month ?></option>
+            if (isset($months) && count($months) > 0) {
+                foreach ($months as $value => $month) : ?>
+                    <option value="<?= $value ?>"><?= $month ?></option>
             <?php
-				endforeach;
-			}
-			?>
+                endforeach;
+            }
+            ?>
         </select>
     </div>
     <div class="col-2 pr-5 pl-1">
@@ -39,16 +38,16 @@
 
             <option value="">Year</option>
             <?php
-			$year = 2022;
-			$i = 1;
-			while ($i < 20) {
-			?>
-            <option value=" <?= $year ?>"><?= $year ?></option>
+            $year = 2022;
+            $i = 1;
+            while ($i < 20) {
+            ?>
+                <option value=" <?= $year ?>"><?= $year ?></option>
             <?php
-				$year += 1;
-				$i++;
-			}
-			?>
+                $year += 1;
+                $i++;
+            }
+            ?>
         </select>
     </div>
     <div class="col-2 pr-1 pl-1">
@@ -71,13 +70,13 @@
 
 
     <script>
-    function applySelectStyle(selectElement) {
-        if (selectElement.value) {
-            selectElement.classList.remove('select-pim');
-            selectElement.classList.add('select-pimselect');
-        } else {
-            selectElement.classList.remove('select-pimselect');
-            selectElement.classList.add('select-pim');
+        function applySelectStyle(selectElement) {
+            if (selectElement.value) {
+                selectElement.classList.remove('select-pim');
+                selectElement.classList.add('select-pimselect');
+            } else {
+                selectElement.classList.remove('select-pimselect');
+                selectElement.classList.add('select-pim');
+            }
         }
-    }
     </script>
