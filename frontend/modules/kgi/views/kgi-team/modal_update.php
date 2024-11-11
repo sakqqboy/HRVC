@@ -118,7 +118,8 @@
 
 						<div class="col-6 mt-10">
 							<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Target Amount</label>
-							<input type="text" class="form-control font-size-13 text-end" id="target-amount" name="targetAmount" <?= $isManager == 0 ? 'disabled' : '' ?>>
+							<input type="text" class="form-control font-size-13 text-end" id="target-amount" name="targetAmount" <?php // $isManager == 0 ? 'disabled' : '' 
+																						?>>
 						</div>
 						<div class="col-6 mt-10">
 							<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Result</label>

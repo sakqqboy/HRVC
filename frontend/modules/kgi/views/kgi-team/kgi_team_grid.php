@@ -129,7 +129,11 @@ $this->title = "TEAM KGI";
                                         $colorFormat = 'inprogress';
                                     }
                                 } else {
-                                    $colorFormat = 'complete';
+                                    if ($kgi["status"] == 2) {
+                                        $colorFormat = 'complete';
+                                    } else {
+                                        $colorFormat = 'inprogress';
+                                    }
                                 }
                             }
                     ?>
