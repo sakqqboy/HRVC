@@ -52,7 +52,7 @@ $this->title = 'KGI Grid View';
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-7 col-md-12 col-12 New-KFI">
+                <div class="col-lg-7 col-md-12 col-12 pt-1 New-KFI">
                     <?= $this->render('filter_list_search', [
 						"companies" => $companies,
 						"months" => $months,
