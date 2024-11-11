@@ -310,6 +310,10 @@ class KpiTeamController extends Controller
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/wait-for-approve');
+		$waitForApprove = curl_exec($api);
+		$waitForApprove = json_decode($waitForApprove, true);
+
 		curl_close($api);
 		//throw new exception(print_r($teamkpis, true));
 		if ($type == "list") {
@@ -335,6 +339,7 @@ class KpiTeamController extends Controller
 			"month" => $month,
 			"status" => $status,
 			"year" => $year,
+			"waitForApprove" => $waitForApprove
 		]);
 	}
 	public function actionPrepareUpdate()

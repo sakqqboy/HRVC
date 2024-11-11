@@ -487,6 +487,10 @@ class KgiPersonalController extends Controller
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/wait-for-approve');
+		$waitForApprove = curl_exec($api);
+		$waitForApprove = json_decode($waitForApprove, true);
+
 		if ($role == 3) {
 			$em = Employee::employeeDetailByUserId(Yii::$app->user->id);
 			if (isset($em) && !empty($em)) {
@@ -525,7 +529,8 @@ class KgiPersonalController extends Controller
 			"teamId" => $teamId,
 			"month" => $month,
 			"employeeId" => $employeeId,
-			"employees" => $employees
+			"employees" => $employees,
+			"waitForApprove" => $waitForApprove
 		]);
 	}
 	public function actionNextKgiEmployeeHistory()
