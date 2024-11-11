@@ -147,7 +147,7 @@ $this->title = 'KGI Grid View';
                             </div>
                             <div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?> mt-5">
                                 <div class="row">
-                                    <div class="col-12 text-start pl-22">
+                                    <div class="col-12 text-start pl-22 fw-bold text-dark">
                                         Assign on
                                     </div>
                                     <div class="col-9 pl-20 pr-0">
@@ -301,7 +301,11 @@ $this->title = 'KGI Grid View';
                             <div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?> mt-5 pr-15 pl-15">
                                 <div class="row">
                                     <div class="col-5 text-start">
-                                        <div class="col-12">Target</div>
+                                        <div class="col-12">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Target.svg"
+                                                class="pim-iconKFI" style="margin-top: 1px; margin-right: 3px;">
+                                            Target
+                                        </div>
                                         <div class="col-12 mt-3 number-pim">
                                             <?php
 													$decimal = explode('.', $kgi["targetAmount"]);
@@ -322,7 +326,10 @@ $this->title = 'KGI Grid View';
                                         <div class="col-12 pt-17"><?= $kgi["code"] ?></div>
                                     </div>
                                     <div class="col-5  text-end">
-                                        <div class="col-12">Result</div>
+                                        <div class="col-12">Result
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Result.svg"
+                                                class="pim-iconKFI" style="margin-top: 1px; margin-left: 3px;">
+                                        </div>
                                         <div class="col-12 mt-3 number-pim">
                                             <?php
 													if ($kgi["result"] != '') {
@@ -365,8 +372,8 @@ $this->title = 'KGI Grid View';
                                         </div>
                                     </div>
                                     <div class="col-4 pl-5 pr-5 mt-10">
-                                        <div class="col-12 text-start">Last Updated on</div>
-                                        <div class="col-12 text-start pim-duedate">
+                                        <div class="col-12 text-end">Last Updated on</div>
+                                        <div class="col-12 text-end pim-duedate">
                                             <?= $kgi['nextCheck'] == "" ? 'Not set' : $kgi['nextCheck'] ?></div>
                                     </div>
                                     <div class="col-4 text-center mt-10 pt-6">
@@ -384,8 +391,8 @@ $this->title = 'KGI Grid View';
 												?>
                                     </div>
                                     <div class="col-4 pl-0 pr-5 mt-10">
-                                        <div class="col-12 text-end font-<?= $colorFormat ?>">Next Update Date</div>
-                                        <div class="col-12 text-end pim-duedate">
+                                        <div class="col-12 text-start font-<?= $colorFormat ?>">Next Update Date</div>
+                                        <div class="col-12 text-start pim-duedate">
                                             <?= $kgi['nextCheck'] == "" ? 'Not set' : $kgi['nextCheck'] ?></div>
                                     </div>
                                 </div>

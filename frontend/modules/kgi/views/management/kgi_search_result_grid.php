@@ -17,7 +17,7 @@ $this->title = 'KGI Grid View';
 		]) ?>
         <div class="alert mt-10 pim-body bg-white">
             <div class="row">
-                <div class="col-lg-4 col-md-6 col-12  pr-0">
+                <div class="col-lg-4 col-md-6 col-12  pr-0 pt-1">
                     <div class="row">
                         <div class="col-8">
                             <div class="row">
@@ -52,7 +52,7 @@ $this->title = 'KGI Grid View';
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-7 col-md-12 col-12 pt-1 New-KFI">
+                <div class="col-lg-7 col-md-12 col-12 pt-1">
                     <?= $this->render('filter_list_search', [
 						"companies" => $companies,
 						"months" => $months,
@@ -67,20 +67,21 @@ $this->title = 'KGI Grid View';
 					]) ?>
                     <input type="hidden" id="type" value="grid">
                 </div>
-            </div>
-            <div class="col-lg-1 col-md-6 col-12 pr-0 text-end">
-                <div class="btn-group" role="group">
-                    <a href="#" class="btn btn-primary font-size-12 pim-change-modes">
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridwhite.svg"
-                            style="cursor: pointer;">
-                    </a>
-                    <a href="<?= Yii::$app->homeUrl . 'kgi/management/index' ?>"
-                        class="btn btn-outline-primary font-size-12 pim-change-modes">
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listblack.svg"
-                            style="cursor: pointer;">
-                    </a>
+                <div class="col-lg-1 col-md-6 col-12 pr-0 text-end">
+                    <div class="btn-group" role="group">
+                        <a href="#" class="btn btn-primary font-size-12 pim-change-modes">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridwhite.svg"
+                                style="cursor: pointer;">
+                        </a>
+                        <a href="<?= Yii::$app->homeUrl . 'kgi/management/index' ?>"
+                            class="btn btn-outline-primary font-size-12 pim-change-modes">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listblack.svg"
+                                style="cursor: pointer;">
+                        </a>
+                    </div>
                 </div>
             </div>
+
             <div class="col-12 mt-5">
                 <div class="row">
                     <?php
@@ -153,7 +154,7 @@ $this->title = 'KGI Grid View';
                             </div>
                             <div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?> mt-5">
                                 <div class="row">
-                                    <div class="col-12 text-start pl-22">
+                                    <div class="col-12 text-start pl-22 fw-bold text-dark">
                                         Assign on
                                     </div>
                                     <div class="col-9 pl-20 pr-0">
@@ -307,7 +308,11 @@ $this->title = 'KGI Grid View';
                             <div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?> mt-5 pr-15 pl-15">
                                 <div class="row">
                                     <div class="col-5 text-start">
-                                        <div class="col-12">Target</div>
+                                        <div class="col-12">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Target.svg"
+                                                class="pim-iconKFI" style="margin-top: 1px; margin-right: 3px;">
+                                            Target
+                                        </div>
                                         <div class="col-12 mt-3 number-pim">
                                             <?php
 													$decimal = explode('.', $kgi["targetAmount"]);
@@ -328,7 +333,10 @@ $this->title = 'KGI Grid View';
                                         <div class="col-12 pt-17"><?= $kgi["code"] ?></div>
                                     </div>
                                     <div class="col-5  text-end">
-                                        <div class="col-12">Result</div>
+                                        <div class="col-12">Result
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Result.svg"
+                                                class="pim-iconKFI" style="margin-top: 1px; margin-left: 3px;">
+                                        </div>
                                         <div class="col-12 mt-3 number-pim">
                                             <?php
 													if ($kgi["result"] != '') {

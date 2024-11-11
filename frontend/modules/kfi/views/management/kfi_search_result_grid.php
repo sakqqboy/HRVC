@@ -165,7 +165,7 @@ $this->title = 'KFI Grid View';
                             </div>
                             <div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?> mt-5">
                                 <div class="row">
-                                    <div class="col-12 text-start pl-22 font-size-12">
+                                    <div class="col-12 text-start pl-22 font-size-12 fw-bold text-dark">
                                         Assign on
                                     </div>
                                     <div class="col-10 pr-10 pl-30">

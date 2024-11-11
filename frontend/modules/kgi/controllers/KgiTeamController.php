@@ -165,6 +165,11 @@ class KgiTeamController extends Controller
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/wait-for-approve');
+		$waitForApprove = curl_exec($api);
+		$waitForApprove = json_decode($waitForApprove, true);
+
+
 		curl_close($api);
 		//throw new Exception($role);
 		$isManager = UserRole::isManager();
@@ -184,6 +189,8 @@ class KgiTeamController extends Controller
 			"month" => null,
 			"status" => null,
 			"year" => null,
+			"waitForApprove" => $waitForApprove
+
 		]);
 	}
 	public function actionTeamKgiGrid()

@@ -136,14 +136,6 @@ use frontend\models\hrvc\Team;
             Filter
         </span>
     </div>
-    <!-- <div class="col-1 pr-0 text-start">
-        <span class="btn font-size-12 justify-content-center d-flex align-items-center custom-button-select"
-            onclick="javascript:kgiFilterForTeam()">
-            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterWhite.svg" class="pim-search-icons me-2"
-                style="cursor: pointer;">
-            Filter
-        </span>
-    </div> -->
 </div>
 
 

@@ -40,7 +40,36 @@ $this->title = "TEAM KGI";
                             </div>
                         </div>
                         <div class="col-4 pl-4">
+                            <?php
+                                    if ($role > 3) {
+                                    ?>
+                            <div class="col-12 approval-box text-center pr-3">
+                                <?php
+                                            if ($waitForApprove["totalReuest"] > 0) {
+                                            ?>
+                                <a href="<?= Yii::$app->homeUrl ?>kgi/management/wait-approve"
+                                    style="text-decoration: none;color:#2580D3;">
+                                    <span class="approve-num mr-2"><?= $waitForApprove["totalReuest"] ?></span>
+                                    Approvals
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approve.svg"
+                                        class="first-layer-icon pull-right" style="margin-top:-2px;">
+                                </a>
+                                <?php
+                                            } else { ?>
+                                <a style="text-decoration: none;color:#2580D3;">
+                                    <span class="approve-num mr-2"><?= $waitForApprove["totalReuest"] ?></span>
+                                    Approvals
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approve.svg"
+                                        class="first-layer-icon pull-right" style="margin-top:-2px;">
+                                </a>
+                                <?php
+                                            }
 
+                                            ?>
+                            </div>
+                            <?php
+                                    }
+                                    ?>
                         </div>
                     </div>
                 </div>
