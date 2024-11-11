@@ -178,7 +178,8 @@ class KpiTeamController extends Controller
 		$companies = json_decode($companies, true);
 
 		curl_close($api);
-		//throw new Exception($role);
+		// throw new Exception(print_r($teamKpis,true));
+
 		$isManager = UserRole::isManager();
 		$months = ModelMaster::monthFull(1);
 		return $this->render('team_kpi', [

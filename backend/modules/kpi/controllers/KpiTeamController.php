@@ -275,7 +275,7 @@ class KpiTeamController extends Controller
 					"kpiEmployee" => KpiEmployee::kpiEmployee($kpiTeam["kpiId"]),
 					"ratio" => number_format($ratio, 2),
 					"isOver" => ModelMaster::isOverDuedate(KpiTeam::nextCheckDate($kpiTeam['kpiTeamId'])),
-					//"employee" => KpiTeam::kpiTeamEmployee($kpiTeam['kpiId'], $teamId),
+					"employee" => KpiTeam::kpiTeamEmployee($kpiTeam['kpiId'], $teamId),
 					"countTeam" => KpiTeam::kpiTeam($kpiTeam["kpiId"]),
 					"amountType" => $kpiTeam["amountType"],
 					"issue" => KpiIssue::lastestIssue($kpiTeam["kpiId"])["issue"],
