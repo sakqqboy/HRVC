@@ -347,6 +347,15 @@ class KgiTeamController extends Controller
 	public function actionUpdateKgiTeam()
 	{
 		$kgiTeamId = $_POST["kgiTeamId"];
+		$oldKgiTeam = KgiTeam::find()->where(["kgiTeamId" => $kgiTeamId])->orderBy("")->asArray()->one();
+		$status = 1;
+		$role = UserRole::userRight();
+		//throw new exception($oldKgiTeam["target"] . 'เก่าคือ' . $_POST["targetAmount"]);
+		if (isset($oldKgiTeam) && !empty($oldKgiTeam)) {
+			if (($oldKgiTeam["target"] != $_POST["targetAmount"]) && $role == 3) {
+				$status = 88;
+			}
+		}
 		$kgiTeamHistory = new KgiTeamHistory();
 		$kgiTeamHistory->kgiTeamId = $kgiTeamId;
 		$kgiTeamHistory->result = $_POST["result"];
@@ -357,7 +366,8 @@ class KgiTeamController extends Controller
 			$kgiTeamHistory->target = $teamKgi["target"];
 			$teamKgi->save(false);
 		}
-		$kgiTeamHistory->status = $_POST["status"];
+		// $kgiTeamHistory->status = $_POST["status"];
+		$kgiTeamHistory->status = $status;
 		$kgiTeamHistory->month = $_POST["month"];
 		$kgiTeamHistory->year = $_POST["year"];
 		$kgiTeamHistory->fromDate = $_POST["fromDate"];
@@ -372,7 +382,7 @@ class KgiTeamController extends Controller
 			$teamKgi->status = $_POST["status"];
 			$teamKgi->month = $_POST["month"];
 			$teamKgi->year = $_POST["year"];
-			if (isset($_POST["targetAmount"])) {
+			if (isset($_POST["targetAmount"]) && $role > 3) { //if changed by over team leader
 				$teamKgi->target = $_POST["targetAmount"];
 			}
 			$teamKgi->result = $_POST["result"];
