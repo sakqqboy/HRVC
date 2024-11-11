@@ -19,32 +19,32 @@ $this->title = "TEAM KGI";
 		]) ?>
         <div class="alert mt-10 pim-body bg-white">
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-12  pr-0">
+                <div class="col-lg-4 col-md-6 col-12  pr-0 pt-1">
                     <div class="row">
-                        <div class="col-9">
+                        <div class="col-8">
                             <div class="row">
-                                <div class="col-4 pim-type-tab pr-0 pl-0">
-                                    <a href="<?= Yii::$app->homeUrl ?>kgi/management/index" class="no-underline-black ">
+                                <div class="col-4 pim-type-tab pr-0 pl-0 rounded-top-left">
+                                    <a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" class="no-underline-black ">
                                         Company KGI
                                     </a>
                                 </div>
                                 <div class="col-4 pim-type-tab-selected">
                                     Team KGI
                                 </div>
-                                <div class="col-4 pim-type-tab">
-                                    <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi"
+                                <div class="col-4 pim-type-tab rounded-top-right">
+                                    <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi-grid"
                                         class="no-underline-black">
                                         Self KGI
                                     </a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-5 text-end">
+                        <div class="col-4 pl-4">
 
                         </div>
                     </div>
                 </div>
-                <div class="col-8 New-KFI">
+                <div class="col-7 pt-1">
                     <?= $this->render('filter_list', [
 						"companies" => $companies,
 						"months" => $months,
@@ -60,12 +60,15 @@ $this->title = "TEAM KGI";
                 <div class="col-lg-1 col-md-6 col-12 pr-0 text-end">
                     <div class="btn-group" role="group">
                         <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/team-kgi-grid"
-                            class="btn btn-outline-primary font-size-12 pim-change-mode">
-                            <i class="fa fa-th-large" aria-hidden="true"></i>
+                            class="btn btn-outline-primary font-size-12 pim-change-modes">
+                            <!-- <i class="fa fa-th-large" aria-hidden="true"></i> -->
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridblack.svg"
+                                style="cursor: pointer;">
                         </a>
-                        <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/team-kgi"
-                            class="btn btn-primary font-size-12 pim-change-mode">
-                            <i class="fa fa-list-ul" aria-hidden="true"></i>
+                        <a href="#" class="btn btn-primary font-size-12 pim-change-modes">
+                            <!-- <i class="fa fa-list-ul" aria-hidden="true"></i> -->
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listwhite.svg"
+                                style="cursor: pointer;">
                         </a>
 
                     </div>

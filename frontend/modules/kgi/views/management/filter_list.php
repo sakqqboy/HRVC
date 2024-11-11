@@ -5,7 +5,7 @@
             <?php
             if (isset($companies) && count($companies) > 0) {
                 foreach ($companies as $company) : ?>
-                    <option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
+            <option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
             <?php
                 endforeach;
             }
@@ -13,7 +13,8 @@
         </select>
     </div>
     <div class="col-2 pr-5 pl-1">
-        <select class="form-select font-size-12 select-pim" id="branch-filter" disabled onchange="applySelectStyle(this)">
+        <select class="form-select font-size-12 select-pim" id="branch-filter" disabled
+            onchange="applySelectStyle(this)">
             <option value="">Branch</option>
         </select>
     </div>
@@ -26,7 +27,7 @@
             <?php
             if (isset($months) && count($months) > 0) {
                 foreach ($months as $value => $month) : ?>
-                    <option value="<?= $value ?>"><?= $month ?></option>
+            <option value="<?= $value ?>"><?= $month ?></option>
             <?php
                 endforeach;
             }
@@ -42,7 +43,7 @@
             $i = 1;
             while ($i < 20) {
             ?>
-                <option value=" <?= $year ?>"><?= $year ?></option>
+            <option value=" <?= $year ?>"><?= $year ?></option>
             <?php
                 $year += 1;
                 $i++;
@@ -67,16 +68,16 @@
         </span>
         <!-- </div> -->
     </div>
+</div>
 
-
-    <script>
-        function applySelectStyle(selectElement) {
-            if (selectElement.value) {
-                selectElement.classList.remove('select-pim');
-                selectElement.classList.add('select-pimselect');
-            } else {
-                selectElement.classList.remove('select-pimselect');
-                selectElement.classList.add('select-pim');
-            }
-        }
-    </script>
+<script>
+function applySelectStyle(selectElement) {
+    if (selectElement.value) {
+        selectElement.classList.remove('select-pim');
+        selectElement.classList.add('select-pimselect');
+    } else {
+        selectElement.classList.remove('select-pimselect');
+        selectElement.classList.add('select-pim');
+    }
+}
+</script>

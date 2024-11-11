@@ -45,6 +45,11 @@
 	/* ปรับตามต้องการ */
 }
 
+.rounded-top-right {
+	border-top-right-radius: 5px;
+	/* ปรับตามต้องการ */
+}
+
 .custom-select-style {
 	display: flex;
 	width: 130px;
