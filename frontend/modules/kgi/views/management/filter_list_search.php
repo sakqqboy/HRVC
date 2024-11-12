@@ -34,8 +34,8 @@ use frontend\models\hrvc\Team;
         </select>
     </div>
     <div class="col-2 pr-5 pl-1">
-        <select class="form-select font-size-12 <?= $yearSelected!=""?'select-pimselect':'select-pim' ?>"
-            id="branch-filter" <?= $branchId == "" ? 'disabled' : '' ?> onchange="applySelectStyle(this)">
+        <select class="form-select font-size-12 <?= $branchId!=""?'select-pimselect':'select-pim' ?>" id="branch-filter"
+            <?= $branchId == "" ? 'disabled' : '' ?> onchange="applySelectStyle(this)">
             <?php
 			if (isset($branchId) && $branchId != "") { ?>
             <option value="<?= $branchId ?>"><?= Branch::branchName($branchId) ?></option>

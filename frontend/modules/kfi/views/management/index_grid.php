@@ -153,7 +153,7 @@ $this->title = 'KFI Grid View';
                                 <a href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, 'openTab' => 4]) ?>"
                                     class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="Chart"
-                                        class="pim-icon mr-3" style="margin-top: -2px;">
+                                        class="pim-icon mr-3" style="margin-top: -2px;"> Chart
                                 </a>
                                 <?php
 										if ($role >= 5) {
