@@ -121,7 +121,7 @@ $this->title = 'KGI Grid View';
                                 </a>
                                 <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 2]) ?>"
                                     class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="History"
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg" alt="History"
                                         class="pim-icon mr-3" style="margin-top: -2px;">History
                                 </a>
                                 <!-- <a class="btn btn-bg-white-xs mr-5" data-bs-toggle="modal" data-bs-target="#kgi-view" onclick="javascript:kgiHistory(<?php // $kgiId 
