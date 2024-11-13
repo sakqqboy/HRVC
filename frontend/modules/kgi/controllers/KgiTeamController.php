@@ -227,6 +227,7 @@ class KgiTeamController extends Controller
 
 		curl_close($api);
 		//throw new Exception($role);
+		// throw new Exception(print_r($teamKgis,true));
 		$isManager = UserRole::isManager();
 		$months = ModelMaster::monthFull(1);
 		return $this->render('kgi_team_grid', [

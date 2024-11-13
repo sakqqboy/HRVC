@@ -170,7 +170,7 @@ $this->title = "INDIVIDUAL KGI";
                                     <span class="pim-normal-text mr-5">
                                         <?= $kgi["employeeName"] ?>
                                     </span>
-                                    <a class="btn btn-bg-white-xs mr-5"
+                                    <!-- <a class="btn btn-bg-white-xs mr-5"
                                         href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-individual-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], "kgiEmployeeId" => $kgiEmployeeId]) ?>"
                                         style="margin-top: -3px;">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
@@ -189,6 +189,27 @@ $this->title = "INDIVIDUAL KGI";
                                         style="margin-top: -3px;">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png"
                                             alt="History" class="pim-icon mr-3" style="margin-top: -2px;">Chart
+                                    </a> -->
+                                    <a class="btn btn-bg-white-xs mr-5"
+                                        href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/view-personal-kgi/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], "kgiTeamId" => $kgiEmployeeId]) ?>"
+                                        style="margin-top: -3px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
+                                            class="pim-icon" style="margin-top: -1px;">
+                                    </a>
+                                    <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/view-personal-kgi/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiEmployeeId,'kgiId' => $kgi['kgiId'], 'openTab' => 2]) ?>"
+                                        class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg"
+                                            alt="History" class="pim-icon mr-3" style="margin-top: -2px;">History
+                                    </a>
+                                    <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/view-personal-kgi/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiEmployeeId, 'kgiId' => $kgi['kgiId'], 'openTab' => 3]) ?>"
+                                        class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png"
+                                            alt="Chats" class="pim-icon mr-3" style="margin-top: -2px;">Chats
+                                    </a>
+                                    <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/view-personal-kgi/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiEmployeeId, 'kgiId' => $kgi['kgiId'], 'openTab' => 4]) ?>"
+                                        class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="Chart"
+                                            class="pim-icon mr-3" style="margin-top: -2px;">Chart
                                     </a>
                                     <?php
 											if ($role >= 5) {
