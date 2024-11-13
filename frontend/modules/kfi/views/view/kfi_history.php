@@ -20,7 +20,7 @@ $this->title = 'KFI View';
 		]) ?>
         <div class="alert mt-10 pim-body bg-white">
             <div class="row">
-                <div class="col-11 pim-name-detail pr-0 pl-5 text-start">
+                <div class="col-11 pim-name-detail pr-0 pl-5 pt-2  text-start">
                     <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="mr-5 font-size-12">
                         <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
                         Back
@@ -29,11 +29,15 @@ $this->title = 'KFI View';
                 </div>
                 <div class="col-1">
                     <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kfi"
-                        onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)">Delete
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/bin.png" alt="History" class="pim-icon"
-                            style="margin-top: -2px;">
+                        onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)"
+                        onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
+                        onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
+                            class="pim-icon" style="margin-top: -3px; width: 12px; height: 14px;">
+                        Delete
                     </a>
                 </div>
+
             </div>
             <div class="row mt-10">
                 <div class="col-lg-7 col-12">
