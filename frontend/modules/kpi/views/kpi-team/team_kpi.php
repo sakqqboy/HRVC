@@ -20,11 +20,11 @@ $this->title = "KPI";
 		]) ?>
         <div class="alert mt-10 pim-body bg-white">
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-12  pr-0">
+                <div class="col-lg-4 col-md-6 col-12  pr-0 pt-1">
                     <div class="row">
-                        <div class="col-9">
+                        <div class="col-8">
                             <div class="row">
-                                <div class="col-4 pim-type-tab pr-0 pl-0">
+                                <div class="col-4 pim-type-tab pr-0 pl-0 rounded-top-left">
                                     <a href="<?= Yii::$app->homeUrl ?>kpi/management/index" class="no-underline-black ">
                                         Company KPI
                                     </a>
@@ -32,7 +32,7 @@ $this->title = "KPI";
                                 <div class="col-4 pim-type-tab-selected">
                                     Team KPI
                                 </div>
-                                <div class="col-4 pim-type-tab">
+                                <div class="col-4 pim-type-tab rounded-top-right">
                                     <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi"
                                         class="no-underline-black ">
                                         Self KPI
@@ -40,9 +40,40 @@ $this->title = "KPI";
                                 </div>
                             </div>
                         </div>
+                        <div class="col-4 pl-4">
+                            <?php
+                                    if ($role > 3) {
+                                    ?>
+                            <div class="col-12 approval-box text-center pr-3">
+                                <?php
+                                            if ($waitForApprove["totalReuest"] > 0) {
+                                            ?>
+                                <a href="<?= Yii::$app->homeUrl ?>kgi/management/wait-approve"
+                                    style="text-decoration: none;color:#2580D3;">
+                                    <span class="approve-num mr-2"><?= $waitForApprove["totalReuest"] ?></span>
+                                    Approvals
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approve.svg"
+                                        class="first-layer-icon pull-right" style="margin-top:-2px;">
+                                </a>
+                                <?php
+                                            } else { ?>
+                                <a style="text-decoration: none;color:#2580D3;">
+                                    <span class="approve-num mr-2"><?= $waitForApprove["totalReuest"] ?></span>
+                                    Approvals
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approve.svg"
+                                        class="first-layer-icon pull-right" style="margin-top:-2px;">
+                                </a>
+                                <?php
+                                            }
+                                    ?>
+                            </div>
+                            <?php
+                                    }
+                                ?>
+                        </div>
                     </div>
                 </div>
-                <div class="col-8 New-KFI">
+                <div class="col-7 pt-1">
                     <?= $this->render('filter_list', [
 						"companies" => $companies,
 						"months" => $months,
@@ -58,12 +89,14 @@ $this->title = "KPI";
                 <div class="col-lg-1 col-md-6 col-12 pr-0 text-end">
                     <div class="btn-group" role="group">
                         <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/team-kpi-grid"
-                            class="btn btn-outline-primary font-size-12 pim-change-mode">
-                            <i class="fa fa-th-large" aria-hidden="true"></i>
+                            class="btn btn-outline-primary font-size-12 pim-change-modes">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridblack.svg"
+                                style="cursor: pointer;">
                         </a>
                         <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/team-kpi"
-                            class="btn btn-primary font-size-12 pim-change-mode">
-                            <i class="fa fa-list-ul" aria-hidden="true"></i>
+                            class="btn btn-primary font-size-12 pim-change-modes">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listwhite.svg"
+                                style="cursor: pointer;">
                         </a>
 
                     </div>

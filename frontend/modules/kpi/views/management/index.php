@@ -18,11 +18,11 @@ $this->title = 'KPI';
 		]) ?>
         <div class="alert pim-body bg-white mt-10">
             <div class="row">
-                <div class="col-lg-4 col-md-6 col-12 key1">
+                <div class="col-lg-4 col-md-6 col-12  pr-0 pt-1">
                     <div class="row">
-                        <div class="col-lg-7 col-md-6 col-12  pr-0">
+                        <div class="col-8">
                             <div class="row">
-                                <div class="col-4 pim-type-tab-selected pr-0 pl-0">
+                                <div class="col-4 pim-type-tab-selected pr-0 pl-0 rounded-top-left">
                                     Company KPI
                                 </div>
                                 <div class="col-4 pim-type-tab">
@@ -31,7 +31,7 @@ $this->title = 'KPI';
                                         Team KPI
                                     </a>
                                 </div>
-                                <div class="col-4 pim-type-tab">
+                                <div class="col-4 pim-type-tab rounded-top-right">
                                     <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi"
                                         class="no-underline-black ">
                                         Self KPI
@@ -39,13 +39,14 @@ $this->title = 'KPI';
                                 </div>
                             </div>
                         </div>
-                        <div class="col-5 text-start">
+                        <div class="col-4 pl-4">
                             <?php
 							if ($role >= 3) {
 							?>
-                            <button type="button" class="btn-create font-size-10" data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop5" onclick="javascript:changeType()">
-                                <i class="fa fa-magic" aria-hidden="true"></i> Create New KPI
+                            <button type="button" class="btn-createnew font-size-11" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop5" style="position:absolute;">
+                                Create New
+                                <i class="fa fa-magic ml-2" aria-hidden="true"></i>
                             </button>
                             <?php
 							}
@@ -53,7 +54,7 @@ $this->title = 'KPI';
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-7 col-md-12 col-12 New-KFI">
+                <div class="col-lg-7 col-md-12 col-12 pt-1">
                     <?= $this->render('filter_list', [
 						"companies" => $companies,
 						"months" => $months
@@ -63,11 +64,13 @@ $this->title = 'KPI';
                 <div class="col-lg-1 col-md-6 col-12 pr-0 text-end">
                     <div class="btn-group" role="group">
                         <a href="<?= Yii::$app->homeUrl . 'kpi/management/grid' ?>"
-                            class="btn btn-outline-primary font-size-12 pim-change-mode">
-                            <i class="fa fa-th-large" aria-hidden="true"></i>
+                            class="btn btn-outline-primary font-size-12 pim-change-modes">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridblack.svg"
+                                style="cursor: pointer;">
                         </a>
-                        <a href="#" class="btn btn-primary font-size-12 pim-change-mode">
-                            <i class="fa fa-list-ul" aria-hidden="true"></i>
+                        <a href="#" class="btn btn-primary font-size-12 pim-change-modes">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listwhite.svg"
+                                style="cursor: pointer;">
                         </a>
 
                     </div>
