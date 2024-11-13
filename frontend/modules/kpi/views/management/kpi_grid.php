@@ -25,7 +25,7 @@ $this->title = 'KPI Grid View';
                                     Company KPI
                                 </div>
                                 <div class="col-4 pim-type-tab">
-                                    <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/team-kpi"
+                                    <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/team-kpi-grid"
                                         class="no-underline-black ">
                                         Team KPI
                                     </a>
