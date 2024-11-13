@@ -365,16 +365,17 @@ $this->title = 'KGI Grid View';
 											<div class="col-12 pl-15 pr-10">
 												<?php
 												$percent = explode('.', $kgi['ratio']);
-												if (isset($percent[1])) {
-													if ($percent[1] != '00') {
-														$showPercent = $percent[0];
-													} else {
-														$showPercent = $percent[0];
+												if (isset($percent[0]) && $percent[0] == '0') {
+													if (isset($percent[1])) {
+														if ($percent[1] == '00') {
+															$showPercent = 0;
+														} else {
+															$showPercent = round($kgi['ratio'], 1);
+														}
 													}
 												} else {
-													$showPercent = $percent[0];
+													$showPercent = round($kgi['ratio']);
 												}
-												$showPercent = round($kgi['ratio']);
 												?>
 												<div class="progress">
 													<div class="progress-bar-<?= $colorFormat ?>"

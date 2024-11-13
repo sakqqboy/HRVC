@@ -340,7 +340,7 @@ $this->title = 'KFI Grid View';
                                                         }
                                                     }
                                                 } else {
-                                                    $showPercent = round($kfi['ratio'], 1);
+                                                    $showPercent = round($kfi['ratio']);
                                                 }
                                                 ?>
                                                 <div class="progress">
