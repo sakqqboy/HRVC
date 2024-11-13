@@ -99,12 +99,14 @@ $this->title = "INDIVIDUAL KPI";
                     <div class="col-lg-1 col-md-6 col-12 pr-0 text-end">
                         <div class="btn-group" role="group">
                             <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi-grid"
-                                class="btn btn-primary font-size-12 pim-change-mode">
-                                <i class="fa fa-th-large" aria-hidden="true"></i>
+                                class="btn btn-primary font-size-12 pim-change-modes">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridwhite.svg"
+                                    style="cursor: pointer;">
                             </a>
                             <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi"
-                                class="btn btn-outline-primary font-size-12 pim-change-mode">
-                                <i class="fa fa-list-ul" aria-hidden="true"></i>
+                                class="btn btn-outline-primary font-size-12 pim-change-modes">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listblack.svg"
+                                    style="cursor: pointer;">
                             </a>
 
                         </div>
