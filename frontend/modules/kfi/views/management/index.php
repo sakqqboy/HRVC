@@ -173,7 +173,7 @@ $this->title = 'KFI';
                                                         }
                                                     }
                                                 } else {
-                                                    $showPercent = round($kfi['ratio'], 1);
+                                                    $showPercent = round($kfi['ratio']);
                                                 }
                                                 ?>
                                                 <div id="progress1">

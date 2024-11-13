@@ -148,19 +148,17 @@ $this->title = 'KFI';
                                         <td class="text-center"><?= $kfi["code"] ?></td>
                                         <td class="text-end">
                                             <?php
-                                            if ($kfi["result"] != '') {
-                                                $decimalResult = explode('.', $kfi["result"]);
-                                                if (isset($decimalResult[1])) {
-                                                    if ($decimalResult[1] == '00') {
-                                                        $showResult = number_format($decimalResult[0]);
+                                            $percent = explode('.', $kfi['ratio']);
+                                            if (isset($percent[0]) && $percent[0] == '0') {
+                                                if (isset($percent[1])) {
+                                                    if ($percent[1] == '00') {
+                                                        $showPercent = 0;
                                                     } else {
-                                                        $showResult = number_format($kfi["result"], 2);
+                                                        $showPercent = round($kfi['ratio'], 1);
                                                     }
-                                                } else {
-                                                    $showResult = number_format($kfi["result"]);
                                                 }
                                             } else {
-                                                $showResult = 0;
+                                                $showPercent = round($kfi['ratio']);
                                             }
                                             ?>
                                             <?= $showResult ?><?= $kfi["amountType"] == 1 ? '%' : '' ?>
