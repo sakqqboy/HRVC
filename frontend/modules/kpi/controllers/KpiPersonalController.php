@@ -124,6 +124,10 @@ class KpiPersonalController extends Controller
 		$kpis = curl_exec($api);
 		$kpis = json_decode($kpis, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/wait-for-approve');
+		$waitForApprove = curl_exec($api);
+		$waitForApprove = json_decode($waitForApprove, true);
+
 		if ($role == 3) {
 			$em = Employee::employeeDetailByUserId(Yii::$app->user->id);
 			if (isset($em) && !empty($em)) {
@@ -131,9 +135,10 @@ class KpiPersonalController extends Controller
 				$teams = curl_exec($api);
 				$teams = json_decode($teams, true);
 			}
-			//throw new Exception(print_r($teams, true));
 		}
 		curl_close($api);
+		// throw new Exception(print_r($kpis, true));
+
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
 		return $this->render('index', [
@@ -150,7 +155,9 @@ class KpiPersonalController extends Controller
 			"year" => null,
 			"companyId" => null,
 			"branchId" => null,
-			"teamId" => null
+			"teamId" => null,
+			"waitForApprove" => $waitForApprove
+
 		]);
 	}
 	public function actionIndividualKpiGrid()
