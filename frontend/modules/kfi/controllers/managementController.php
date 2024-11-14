@@ -1420,7 +1420,7 @@ class ManagementController extends Controller
 		$kfiHistory->kfiId = $currentHistory["kfiId"];
 		$kfiHistory->createrId = Yii::$app->user->id;
 		$kfiHistory->titleProgress = 'New target';
-		$kfiHistory->nextCheckDate = $currentHistory["nextCheckDate"];
+		// $kfiHistory->nextCheckDate = $currentHistory["nextCheckDate"];
 		$kfiHistory->amountType = $currentHistory["amountType"];
 		$kfiHistory->code = $currentHistory["code"];
 		$kfiHistory->status = 1;

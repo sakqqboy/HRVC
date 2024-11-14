@@ -411,6 +411,49 @@
 	letter-spacing: 0.3px;
 }
 
+.circle-color-over {
+	display: flex;
+	width: 18px;
+	height: 18px;
+	padding: 5px 5px;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	flex-shrink: 0;
+	border-radius: 15px;
+	background: #E05757;
+}
+
+.circle-color-inprogress {
+	display: flex;
+	width: 18px;
+	height: 18px;
+	padding: 5px 5px;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	flex-shrink: 0;
+	border-radius: 15px;
+	background: #2580D3;
+}
+
+.circle-color-complete {
+	display: flex;
+	width: 18px;
+	height: 18px;
+	padding: 5px 5px;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	flex-shrink: 0;
+	border-radius: 15px;
+	background: #2D7F06;
+}
+
+
 .over-assign {
 	width: 100%;
 	font-weight: 400;

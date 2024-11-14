@@ -137,7 +137,7 @@ $this->title = 'KFI Grid View';
                             </div>
                             <div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?> mt-5">
                                 <div class="row">
-                                    <div class="col-12 text-start pl-22 font-size-12 fw-bold text-dark">
+                                    <div class="col-12 text-start pl-22 font-size-12 text-dark">
                                         Assign on
                                     </div>
 
@@ -173,23 +173,32 @@ $this->title = 'KFI Grid View';
                                                     </div>
                                                 </div>
                                                 <div class="col-7 pl-1 pt-10 pr-0 <?= $colorFormat ?>-assignKFI">
+                                                    <?php
+                                                            if ($role >= 5) {
+                                                            ?>
                                                     <span class="pull-left mt-1 pl-2  pr-4"
                                                         style="display:<?= $kfi['isOver'] == 2 ? 'none;' : '' ?>">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.svg"
                                                             class="home-icon" style="margin-top: -3px;">
                                                     </span>
-                                                    <?php
-                                                            if ($role >= 5) {
-                                                            ?>
                                                     <a href="<?= Yii::$app->homeUrl ?>kfi/assign/assign/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, "companyId" => $kfi['companyId']]) ?>"
                                                         class="font-<?= $colorFormat ?>">
                                                         Change Assigned
                                                     </a>
                                                     <?php
                                                             } else { ?>
-                                                    <span class="font-<?= $colorFormat ?>">
-                                                        Change Assigned
-                                                    </span>
+                                                    <div class="d-flex align-items-center" style="margin-left: 9px;">
+                                                        <div class=" circle-color-<?= $colorFormat ?>"
+                                                            style="display:<?= $kfi['isOver'] == 2 ? 'none;' : '' ?>; margin-right: 5px;">
+                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eyewhite.svg"
+                                                                class="home-icon"
+                                                                style="width: 14px; height: 14px; margin-top: -1px;">
+                                                        </div>
+                                                        <a href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(["kfiId" => $kfiId, 'openTab' => 1]) ?>"
+                                                            class="font-<?= $colorFormat ?>">
+                                                            View Assigned
+                                                        </a>
+                                                    </div>
                                                     <?php
                                                             }
                                                             ?>
@@ -311,18 +320,32 @@ $this->title = 'KFI Grid View';
                                             <?= $kfi['nextCheck'] == "" ? 'Not set' : $kfi['nextCheck'] ?></div>
                                     </div>
                                     <div class="col-2 text-center mt-10 pt-6">
+
                                         <?php
-                                                //if ($role >= 5 && $kfi["status"] == 1) {
-                                                if ($role >= 5) {
-                                                ?>
+                                        if ($colorFormat == 'disable') {
+                                        ?>
+                                        <div onclick="javascript:updateKfi(<?= $kfiId ?>)" class="pim-btn-setup"
+                                            data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+                                            <i class="fa fa-refresh" aria-hidden="true"></i> Setup
+                                        </div>
+                                        <?php
+                                            }else if ($colorFormat == 'complete') {
+                                        ?>
+                                        <div onclick="javascript:updateKfi(<?= $kfiId ?>)" class="pim-btn-complete"
+                                            data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+                                            <i class="fa fa-refresh" aria-hidden="true"></i> Edit
+                                        </div>
+                                        <?php
+                                            }else if ($role >= 5){
+                                        ?>
                                         <div onclick="javascript:updateKfi(<?= $kfiId ?>)"
                                             class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
                                             data-bs-target="#staticBackdrop2">
                                             <i class="fa fa-refresh" aria-hidden="true"></i> Update
                                         </div>
                                         <?php
-                                                }
-                                                ?>
+                                            }
+                                        ?>
                                     </div>
                                     <div class="col-5 pl-0 pr-11 mt-10">
                                         <div class="col-12 text-start font-<?= $colorFormat ?>">Next Update Date

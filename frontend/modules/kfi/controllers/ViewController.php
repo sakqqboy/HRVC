@@ -24,6 +24,11 @@ class ViewController extends Controller
 	}
 	public function actionIndex($hash)
 	{
+		$groupId = Group::currentGroupId();
+		if ($groupId == null) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+		}
+		$role = UserRole::userRight();
 		$param = ModelMaster::decodeParams($hash);
 		$kfiId = $param["kfiId"];
 		$role = UserRole::userRight();
@@ -60,17 +65,33 @@ class ViewController extends Controller
 		$kfiDetail = curl_exec($api);
 		$kfiDetail = json_decode($kfiDetail, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$companies = curl_exec($api);
+		$companies = json_decode($companies, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
+		$units = curl_exec($api);
+		$units = json_decode($units, true);
+
+		$months = ModelMaster::monthFull(1);
+		$isManager = UserRole::isManager();
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-history-summarize?kfiId=' . $kfiId);
 		//curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
 		$kfis = curl_exec($api);
 		$kfis = json_decode($kfis, true);
 		curl_close($api);
-		//throw new Exception(print_r($kfis, true));
+		// throw new Exception(print_r($kfis, true));
 
 		return $this->render('kfi_view', [
 			"role" => $role,
 			"kfiDetail" => $kfiDetail,
-			"kfis" => $kfis
+			"kfis" => $kfis,
+			"kfiId" => $kfiId,
+			"companies" => $companies,
+			"units" => $units,
+			"months" => $months,
+			"isManager" => $isManager
 		]);
 	}
 	public function actionKfiHistory($hash)

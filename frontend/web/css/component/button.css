@@ -43,6 +43,20 @@
     background-color: #ffff;
 }
 
+.btn-bg-blue-xs {
+    border: lightgray solid thin;
+    text-align: center;
+    color: #000;
+    font-size: 13px;
+    height: 22px;
+    min-width: 22px;
+    border-radius: 3px;
+    padding-left: 3px;
+    padding-top: 0px;
+    padding-right: 3px;
+    background: var(--Primary-Blue---HRVC, #2580D3);
+}
+
 .btn-bg-red-xsold {
     border: #BB2020 solid thin;
     text-align: center;
@@ -76,6 +90,11 @@
     background-color: white;
 }
 
+.btn-bg-blue-xs:hover {
+    border: gray solid thin;
+    background: var(--Primary-Blue---HRVC, #2580D3);
+}
+
 .btn-xs {
     width: 22px;
     height: 22px;
@@ -104,6 +123,17 @@
     color: white;
     text-align: center;
     background-color: #2F42ED;
+    padding: 2px 3px 2px 3px;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.pim-btn-setup {
+    font-size: 10px;
+    color: white;
+    text-align: center;
+    background-color: #2580D3;
     padding: 2px 3px 2px 3px;
     border-radius: 5px;
     text-decoration: none;
