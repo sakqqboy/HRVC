@@ -15,6 +15,7 @@ use frontend\models\hrvc\KgiTeam;
 use frontend\models\hrvc\KgiTeamHistory;
 use frontend\models\hrvc\Team;
 use frontend\models\hrvc\Unit;
+use frontend\models\hrvc\User;
 use frontend\models\hrvc\UserRole;
 use Yii;
 use yii\db\Expression;
@@ -200,11 +201,13 @@ class KgiTeamController extends Controller
 			//return $this->redirect(Yii::$app->homeUrl . 'kgi/management/grid');
 		}
 		$groupId = Group::currentGroupId();
+		$isAdmin = UserRole::isAdmin();
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
 		$userId = Yii::$app->user->id;
 		$userTeamId = Team::userTeam($userId);
+		$userBranchId = User::userBranchId();
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -221,7 +224,7 @@ class KgiTeamController extends Controller
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/wait-for-approve');
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
 		$waitForApprove = curl_exec($api);
 		$waitForApprove = json_decode($waitForApprove, true);
 

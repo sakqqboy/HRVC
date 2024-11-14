@@ -40,6 +40,7 @@ class AssignController extends Controller
 	public function actionAssign($hash)
 	{
 		$param = ModelMaster::decodeParams($hash);
+
 		$role = UserRole::userRight();
 		if ($role == 7) {
 			$adminId = Yii::$app->user->id;
@@ -83,6 +84,7 @@ class AssignController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
+		//throw new Exception(print_r($param, true));
 		$text = '';
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-team-employee?kgiId=' . $kgiId);

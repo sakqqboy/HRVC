@@ -722,13 +722,29 @@ class KgiTeamController extends Controller
 		}
 		return json_encode($data);
 	}
-	public function actionWaitForApprove()
+	public function actionWaitForApprove($branchId, $isAdmin)
 	{
-		$kgiTeam = KgiTeamHistory::find()
-			->where(["status" => 88])
-			->asArray()
-			->all();
+		if ($isAdmin == 1) {
+			$kgiTeam = KgiTeamHistory::find()
+				->where(["status" => 88])
+				->asArray()
+				->all();
+		} else {
+			$kgiTeam = KgiTeamHistory::find()
+				->select('k.kgiName,k.kgiId,MAX(kgi_team_history.kgiTeamHistoryId)')
+				->JOIN("LEFT JOIN", "kgi_team kg", "kg.kgiTeamId=kgi_team_history.kgiTeamId")
+				->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kg.kgiId")
+				->JOIN("LEFT JOIN", "kgi_branch kb", "kb.kgiId=k.kgiId")
+				->where(["kgi_team_history.status" => 88, "kb.branchId" => $branchId])
+				//->orderBy('kgi_team_history.kgiTeamHistoryId DESC')
+				->groupBy('k.kgiId')
+
+				->asArray()
+				->all();
+		}
+		//	throw new exception(print_r($kgiTeam, true));
 		$res["totalReuest"] = count($kgiTeam);
+
 		return json_encode($res);
 	}
 }
