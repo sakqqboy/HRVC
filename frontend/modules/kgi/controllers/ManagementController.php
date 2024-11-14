@@ -228,7 +228,7 @@ class ManagementController extends Controller
 				$kgiHistory->fromDate = $_POST["fromDate"];
 				$kgiHistory->toDate = $_POST["toDate"];
 				$kgiHistory->save(false);
-				$kgiId = Yii::$app->db->lastInsertID;
+				//$kgiId = Yii::$app->db->lastInsertID;
 				if (isset($_POST["branch"]) && count($_POST["branch"]) > 0) {
 					$this->saveKgiBranch($_POST["branch"], $kgiId);
 				}

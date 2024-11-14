@@ -48,7 +48,7 @@ $this->title = "KPI";
                                     <?php
                                     if ($waitForApprove["totalReuest"] > 0) {
                                     ?>
-                                        <a href="<?= Yii::$app->homeUrl ?>kgi/management/wait-approve"
+                                        <a href="<?= Yii::$app->homeUrl ?>kpi/management/wait-approve"
                                             style="text-decoration: none;color:#2580D3;">
                                             <span class="approve-num mr-2"><?= $waitForApprove["totalReuest"] ?></span>
                                             Approvals

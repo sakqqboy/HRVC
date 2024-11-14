@@ -51,6 +51,23 @@ class UserRole extends \frontend\models\hrvc\master\UserRoleMaster
             return 0;
         }
     }
+    public static function isAdmin()
+    {
+        $userId = Yii::$app->user->id;
+        $userRole = UserRole::find()
+            ->JOIN("LEFT JOIN", "role r", "r.roleId=user_role.roleId")
+            ->where([
+                "user_role.userId" => $userId,
+                "user_role.roleId" => 1
+            ])
+            ->asArray()
+            ->all();
+        if (count($userRole) > 0) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
     public static function userRight()
     {
         if (isset(Yii::$app->user->id)) {
