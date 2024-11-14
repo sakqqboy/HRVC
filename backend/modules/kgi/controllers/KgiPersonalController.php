@@ -122,12 +122,12 @@ class KgiPersonalController extends Controller
 						->one();
 				}
 				$ratio = 0;
-				if ($kgi["target"] != '' && $kgi["target"] != 0) {
+				if ($kgiEmployeeHistory["target"] != '' && $kgiEmployeeHistory["target"] != 0) {
 					if ($kgi["code"] == '<' || $kgi["code"] == '=') {
-						$ratio = ($kgi["result"] / $kgi["target"]) * 100;
+						$ratio = ($kgiEmployeeHistory["result"] / $kgiEmployeeHistory["target"]) * 100;
 					} else {
-						if ($kgi["result"] != '' && $kgi["result"] != 0) {
-							$ratio = ($kgi["target"] / $kgi["result"]) * 100;
+						if ($kgiEmployeeHistory["result"] != '' && $kgiEmployeeHistory["result"] != 0) {
+							$ratio = ($kgiEmployeeHistory["target"] / $kgiEmployeeHistory["result"]) * 100;
 						} else {
 							$ratio = 0;
 						}
@@ -161,9 +161,9 @@ class KgiPersonalController extends Controller
 					"branch" => KgiBranch::kgiBranch($kgi["kgiId"]),
 					"employee" => KgiEmployee::kgiEmployee($kgi["kgiId"]),
 					"quantRatio" => $kgi["quantRatio"],
-					"targetAmount" => $kgi["target"],
+					"targetAmount" => $kgiEmployeeHistory["target"],
 					"code" => $kgi["code"],
-					"result" => $kgi["result"],
+					"result" => $kgiEmployeeHistory["result"],
 					"unit" => Unit::unitName($kgi["unitId"]),
 					"month" => ModelMaster::monthEng($kgi['month'], 1),
 					"priority" => $kgi["priority"],
@@ -357,12 +357,12 @@ class KgiPersonalController extends Controller
 						->one();
 				}
 				$ratio = 0;
-				if ($kgiEmployee["target"] != '' && $kgiEmployee["target"] != 0 && $kgiEmployee["target"] != null) {
+				if ($kgiEmployeeHistory["target"] != '' && $kgiEmployeeHistory["target"] != 0 && $kgiEmployeeHistory["target"] != null) {
 					if ($kgiEmployee["code"] == '<' || $kgiEmployee["code"] == '=') {
-						$ratio = ($kgiEmployeeHistory["result"] / $kgiEmployee["target"]) * 100;
+						$ratio = ($kgiEmployeeHistory["result"] / $kgiEmployeeHistory["target"]) * 100;
 					} else {
 						if ($kgiEmployeeHistory["result"] != '' && $kgiEmployeeHistory["result"] != 0) {
-							$ratio = ($kgiEmployee["target"] / $kgiEmployeeHistory["result"]) * 100;
+							$ratio = ($kgiEmployeeHistory["target"] / $kgiEmployeeHistory["result"]) * 100;
 						} else {
 							$ratio = 0;
 						}

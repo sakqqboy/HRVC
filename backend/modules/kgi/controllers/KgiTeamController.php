@@ -211,12 +211,12 @@ class KgiTeamController extends Controller
 						->one();
 				}
 				$ratio = 0;
-				if ($kgiTeam["target"] != '' && $kgiTeam["target"] != 0 && $kgiTeam["target"] != null) {
+				if ($kgiTeamHistory["target"] != '' && $kgiTeamHistory["target"] != 0 && $kgiTeamHistory["target"] != null) {
 					if ($kgiTeam["code"] == '<' || $kgiTeam["code"] == '=') {
-						$ratio = ($kgiTeamHistory["result"] / $kgiTeam["target"]) * 100;
+						$ratio = ($kgiTeamHistory["result"] / $kgiTeamHistory["target"]) * 100;
 					} else {
 						if ($kgiTeamHistory["result"] != '' && $kgiTeamHistory["result"] != 0) {
-							$ratio = ($kgiTeam["target"] / $kgiTeamHistory["result"]) * 100;
+							$ratio = ($kgiTeamHistory["target"] / $kgiTeamHistory["result"]) * 100;
 						} else {
 							$ratio = 0;
 						}
@@ -249,7 +249,7 @@ class KgiTeamController extends Controller
 					"unit" => Unit::unitName($kgiTeam["unitId"]),
 					"teamName" => Team::teamName($kgiTeam["teamId"]),
 					"quantRatio" => $kgiTeam["quantRatio"],
-					"target" => $kgiTeam["target"],
+					"target" => $kgiTeamHistory["target"],
 					"result" => $kgiTeamHistory["result"],
 					"code" => $kgiTeam["code"],
 					"month" =>  ModelMaster::monthEng($kgiTeamHistory['month'], 1),
@@ -424,12 +424,12 @@ class KgiTeamController extends Controller
 						->one();
 				}
 				$ratio = 0;
-				if ($kgiTeam["target"] != '' && $kgiTeam["target"] != 0 && $kgiTeam["target"] != null) {
+				if ($kgiTeamHistory["target"] != '' && $kgiTeamHistory["target"] != 0 && $kgiTeamHistory["target"] != null) {
 					if ($kgiTeam["code"] == '<' || $kgiTeam["code"] == '=') {
-						$ratio = ($kgiTeamHistory["result"] / $kgiTeam["target"]) * 100;
+						$ratio = ($kgiTeamHistory["result"] / $kgiTeamHistory["target"]) * 100;
 					} else {
 						if ($kgiTeamHistory["result"] != '' && $kgiTeamHistory["result"] != 0) {
-							$ratio = ($kgiTeam["target"] / $kgiTeamHistory["result"]) * 100;
+							$ratio = ($kgiTeamHistory["target"] / $kgiTeamHistory["result"]) * 100;
 						} else {
 							$ratio = 0;
 						}

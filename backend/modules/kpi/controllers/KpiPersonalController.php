@@ -94,6 +94,7 @@ class KpiPersonalController extends Controller
 				->asArray()
 				->all();
 		}
+		//throw new exception(print_r($kpiEmployee, true));
 		$data = [];
 		if (count($kpiEmployee) > 0) {
 			foreach ($kpiEmployee as $kpi) :
@@ -104,7 +105,7 @@ class KpiPersonalController extends Controller
 					->one();
 				if (!isset($kpiEmployeeHistory) || empty($kpiEmployeeHistory)) {
 					$kpiEmployeeHistory = KpiEmployee::find()
-						->where(["kpiEmployeeId" => $kpiEmployee["kpiEmployeeId"], "status" => [1, 2, 4]])
+						->where(["kpiEmployeeId" => $kpi["kpiEmployeeId"], "status" => [1, 2, 4]])
 						->asArray()
 						->orderBy('createDateTime DESC')
 						->one();
@@ -374,7 +375,8 @@ class KpiPersonalController extends Controller
 					"kpiName" => $kpiEmployee["kpiName"],
 					"kpiId" => $kpiEmployee["kpiId"],
 					"companyName" => Company::companyName($kpiEmployee["companyId"]),
-					//"employee" => KpiEmployee::kpiEmployee($kpiEmployee["kpiId"]),
+					"employee" => KpiEmployee::kpiEmployee($kpiEmployee["kpiId"]),
+					//"employee" => KpiEmployee::kpiEmployee($kpi["kpiId"]),
 					"employeeName" => $kpiEmployee["employeeFirstname"] . ' ' . $kpiEmployee["employeeSurename"],
 					"picture" => $picture,
 					"branch" => KpiBranch::kpiBranch($kpiEmployee["kpiId"]),
