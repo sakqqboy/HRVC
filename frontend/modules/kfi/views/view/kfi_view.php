@@ -59,17 +59,7 @@ $this->title = 'Company KFI History';
                         <div class="row">
                             <div class="col-5 pim-name"><?= $kfi["month"] ?> <?= $kfi["year"] ?></div>
                             <div class="col-7 text-end">
-                                <?php
-											if ($i == 0 && $kfi["status"] == 2 && $role >= 5) {
-											?>
-                                <a class="btn btn-bg-white-xs pr-2 pl-3 mr-5"
-                                    onclick="javascript:prepareKfiNextTarget(<?= $kfi['kfiHistoryId'] ?>)">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/copy.png" alt="History"
-                                        class="home-icon">
-                                </a>
-                                <?php
-											}
-											?>
+
                                 <!-- <a class="btn btn-bg-white-xs mr-5" data-bs-toggle="modal"
                                     data-bs-target="#staticBackdrop3"
                                     onclick="javascript:kfiHistory(<?= $kfi['kfiHistoryId'] ?>)">
@@ -116,6 +106,17 @@ $this->title = 'Company KFI History';
                                 <?php
 											//}
 											?>
+                                <?php
+									if ($i == 0 && $kfi["status"] == 2 && $role >= 5) {
+								?>
+                                <a class="btn btn-bg-white-xs pr-2 pl-3 mr-5"
+                                    onclick="javascript:prepareKfiNextTarget(<?= $kfi['kfiHistoryId'] ?>)">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/copy.png" alt="History"
+                                        class="home-icon">
+                                </a>
+                                <?php
+									}
+								?>
                             </div>
                             <div class="col-9 mt-10 pl-28">
                                 <div class="row">

@@ -376,7 +376,6 @@ class KpiPersonalController extends Controller
 					"kpiId" => $kpiEmployee["kpiId"],
 					"companyName" => Company::companyName($kpiEmployee["companyId"]),
 					"employee" => KpiEmployee::kpiEmployee($kpiEmployee["kpiId"]),
-					//"employee" => KpiEmployee::kpiEmployee($kpi["kpiId"]),
 					"employeeName" => $kpiEmployee["employeeFirstname"] . ' ' . $kpiEmployee["employeeSurename"],
 					"picture" => $picture,
 					"branch" => KpiBranch::kpiBranch($kpiEmployee["kpiId"]),
