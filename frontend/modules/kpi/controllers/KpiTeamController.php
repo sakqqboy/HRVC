@@ -11,6 +11,7 @@ use frontend\models\hrvc\Kpi;
 use frontend\models\hrvc\KpiTeam;
 use frontend\models\hrvc\KpiTeamHistory;
 use frontend\models\hrvc\Team;
+use frontend\models\hrvc\User;
 use frontend\models\hrvc\Unit;
 use frontend\models\hrvc\UserRole;
 use Yii;
@@ -216,6 +217,9 @@ class KpiTeamController extends Controller
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
 		$userId = Yii::$app->user->id;
+		$isAdmin = UserRole::isAdmin();
+		$userBranchId = User::userBranchId();
+
 		$userTeamId = Team::userTeam($userId);
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -233,7 +237,7 @@ class KpiTeamController extends Controller
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/wait-for-approve');
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/wait-for-approve?branchId='  . $userBranchId . '&&isAdmin=' . $isAdmin);
 		$waitForApprove = curl_exec($api);
 		$waitForApprove = json_decode($waitForApprove, true);
 
