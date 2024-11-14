@@ -77,7 +77,7 @@ $this->title = 'Company KFI History';
                                         class="pim-icon mr-3" style="margin-top: -2px;">Chart
                                 </a> -->
 
-                                <a href="<?= $colorFormat !== 'disable' ? Yii::$app->homeUrl . 'kfi/view/index/' . ModelMaster::encodeParams(["kfiId" => $kfiId]) : '#' ?>"
+                                <a href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(["kfiId" => $kfiId, 'openTab' => 1]) ?>"
                                     class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs' ?>"
                                     <?= $colorFormat == 'disable' ? 'style="pointer-events: none; opacity: 0.5;"' : '' ?>>
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
