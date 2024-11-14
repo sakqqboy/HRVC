@@ -109,17 +109,20 @@ $this->title = 'KFI Grid View';
                             </div>
                             <div class="col-lg-3 col-md-2 col-4 text-end pr-20">
                                 <a href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(["kfiId" => $kfiId, 'openTab' => 1]) ?>"
-                                    class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?>"
+                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
                                         class="pim-icon" style="margin-top: -1px;">
                                 </a>
                                 <a href="<?= Yii::$app->homeUrl ?>kfi/view/index/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, 'openTab' => 2]) ?>"
-                                    class="btn btn-bg-white-xs mr-5 " style="margin-top: -3px;">
+                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?>"
+                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg" alt="History"
                                         class="pim-icon mr-3" style="margin-top: -2px;">History
                                 </a>
                                 <a href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, 'openTab' => 4]) ?>"
-                                    class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?>"
+                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="Chart"
                                         class="pim-icon mr-3" style="margin-top: -2px;"> Chart
                                 </a>
@@ -127,9 +130,11 @@ $this->title = 'KFI Grid View';
                                         if ($role >= 5) {
                                         ?>
                                 <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#staticBackdrop4"
-                                    onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)" style="margin-top: -3px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/bin.png" alt="History"
-                                        class="pim-icon" style="margin-top: -2px;">
+                                    onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)" style="margin-top: -3px;"
+                                    onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
+                                    onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
+                                        class="pim-icon" style="margin-top: -3px; width: 12px; height: 14px;">
                                 </a>
                                 <?php
                                         }
@@ -176,8 +181,7 @@ $this->title = 'KFI Grid View';
                                                     <?php
                                                             if ($role >= 5) {
                                                             ?>
-                                                    <span class="pull-left mt-1 pl-2  pr-4"
-                                                        style="display:<?= $kfi['isOver'] == 2 ? 'none;' : '' ?>">
+                                                    <span class="pull-left mt-1 pl-2  pr-4">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.svg"
                                                             class="home-icon" style="margin-top: -3px;">
                                                     </span>
@@ -188,9 +192,9 @@ $this->title = 'KFI Grid View';
                                                     <?php
                                                             } else { ?>
                                                     <div class="d-flex align-items-center" style="margin-left: 9px;">
-                                                        <div class=" circle-color-<?= $colorFormat ?>"
-                                                            style="display:<?= $kfi['isOver'] == 2 ? 'none;' : '' ?>; margin-right: 5px;">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eyewhite.svg"
+                                                        <div class=" circle-color-<?=$colorFormat ?>"
+                                                            style=" margin-right: 5px;">
+                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $colorFormat === 'disable' ? 'eye.svg' : 'eyewhite.svg' ?>"
                                                                 class="home-icon"
                                                                 style="width: 14px; height: 14px; margin-top: -1px;">
                                                         </div>

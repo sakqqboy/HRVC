@@ -1,6 +1,8 @@
 <?php
 
 namespace frontend\modules\kfi\controllers;
+use frontend\models\hrvc\KfiHistory;
+use frontend\models\hrvc\Kfi;
 
 use common\helpers\Path;
 use common\models\ModelMaster;
@@ -134,6 +136,14 @@ class ViewController extends Controller
 			"units" => $units,
 			"companies" => $companies,
 		]);
+	}
+	public function actionDeleteKfi()
+	{
+		$kfiId = $_POST["kfiId"];
+		KfiHistory::updateAll(["status" => 99], ["kfiId" => $kfiId]);
+		Kfi::updateAll(["status" => 99], ["kfiId" => $kfiId]);
+		$res["status"] = true;
+		return json_encode($res);
 	}
 	public function actionKfiEmployee()
 	{

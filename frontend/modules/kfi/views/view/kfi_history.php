@@ -28,7 +28,7 @@ $this->title = 'KFI View';
                     <?= $kfiDetail["kfiName"] ?>
                 </div>
                 <div class="col-1">
-                    <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kfi"
+                    <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#staticBackdrop4"
                         onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)"
                         onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
                         onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">

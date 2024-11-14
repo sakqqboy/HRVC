@@ -59,7 +59,6 @@ $this->title = 'Company KFI History';
                         <div class="row">
                             <div class="col-5 pim-name"><?= $kfi["month"] ?> <?= $kfi["year"] ?></div>
                             <div class="col-7 text-end">
-
                                 <!-- <a class="btn btn-bg-white-xs mr-5" data-bs-toggle="modal"
                                     data-bs-target="#staticBackdrop3"
                                     onclick="javascript:kfiHistory(<?= $kfi['kfiHistoryId'] ?>)">
@@ -72,34 +71,41 @@ $this->title = 'Company KFI History';
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png" alt="History"
                                         class="pim-icon">
                                 </a> -->
-                                <a href="<?= Yii::$app->homeUrl ?>kfi/view/index/<?= ModelMaster::encodeParams(["kfiId" => $kfiId]) ?>"
-                                    class="btn btn-bg-white-xs">
-                                    <!-- <i class="fa fa-eye" aria-hidden="true"></i> -->
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
-                                        class="pim-icon" style="margin-top: -1px;">
-                                </a>
-
-                                <a href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(['kfiId' => $kfiId , 'openTab' => 2]) ?>"
-                                    class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png" alt="History"
-                                        class="pim-icon">
-                                </a>
-
-                                <a class="btn btn-bg-white-xs mr-5" data-bs-toggle="modal"
-                                    data-bs-target="#staticBackdrop3" onclick="javascript:kfiHistory(<?= $kfiId ?>)">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Charts.png" alt="History"
-                                        class="home-icon" style="margin-top: -3px;">
-                                </a>
                                 <!-- <a href="<?= Yii::$app->homeUrl ?>kfi/chart/company-chart/<?= ModelMaster::encodeParams(['kfiId' => $kfi['kfiHistoryId']]) ?>"
                                     class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="History"
                                         class="pim-icon mr-3" style="margin-top: -2px;">Chart
                                 </a> -->
+
+                                <a href="<?= $colorFormat !== 'disable' ? Yii::$app->homeUrl . 'kfi/view/index/' . ModelMaster::encodeParams(["kfiId" => $kfiId]) : '#' ?>"
+                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs' ?>"
+                                    <?= $colorFormat == 'disable' ? 'style="pointer-events: none; opacity: 0.5;"' : '' ?>>
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
+                                        class="pim-icon" style="margin-top: -1px;">
+                                </a>
+
+                                <a href="<?= $colorFormat !== 'disable' ? Yii::$app->homeUrl . 'kfi/view/kfi-history/' . ModelMaster::encodeParams(['kfiId' => $kfiId , 'openTab' => 2]) : '#' ?>"
+                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?>"
+                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png" alt="History"
+                                        class="pim-icon">
+                                </a>
+
+                                <a class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?>"
+                                    data-bs-toggle="modal" data-bs-target="#staticBackdrop3"
+                                    onclick="<?= $colorFormat === 'disable' ? 'return false;' : 'javascript:kfiHistory(' . $kfiId . ')' ?>"
+                                    style="<?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Charts.png" alt="History"
+                                        class="home-icon" style="margin-top: -3px;">
+                                </a>
+
+
+
                                 <?php
 									if ($colorFormat == 'disable') {
 								?>
-                                <a class="btn btn-bg-blue-xs pr-2 pl-3 mr-5"
-                                    onclick="javascript:updateKfi(<?= $kfi['kfiHistoryId'] ?>)">
+                                <a class="btn btn-bg-blue-xs pr-2 pl-3 mr-5" data-bs-toggle="modal"
+                                    data-bs-target="#staticBackdrop2" onclick="javascript:updateKfi(<?= $kfiId ?>)">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
                                         alt="History" style="margin-top: -3px; width: 12px; height: 14px;"
                                         class="home-icon">
@@ -193,10 +199,9 @@ $this->title = 'Company KFI History';
                                         </div>
                                         <div class="col-6 pl-1 pt-9 pr-0 <?= $colorFormat ?>-assignKFI">
                                             <?php
-                                                if ($role >= 5) {
+                                                if ($role <= 5) {
                                              ?>
-                                            <span class="pull-left mt-1 pl-2  pr-4"
-                                                style="display:<?= $kfi['isOver'] == 2 ? 'none;' : '' ?>">
+                                            <span class="pull-left mt-1 pl-2  pr-4">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.svg"
                                                     class="home-icon" style="margin-top: -3px;">
                                             </span>
@@ -205,11 +210,11 @@ $this->title = 'Company KFI History';
                                                 Change Assigned
                                             </a>
                                             <?php
-                                                            } else { ?>
+                                              } else { ?>
                                             <div class="d-flex align-items-center" style="margin-left: 9px;">
                                                 <div class=" circle-color-<?= $colorFormat ?>"
-                                                    style="display:<?= $kfi['isOver'] == 2 ? 'none;' : '' ?>; margin-right: 5px;">
-                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eyewhite.svg"
+                                                    style="margin-right: 5px;">
+                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $colorFormat === 'disable' ? 'eye.svg' : 'eyewhite.svg' ?>"
                                                         class="home-icon"
                                                         style="width: 14px; height: 14px; margin-top: -1px;">
                                                 </div>
@@ -238,10 +243,12 @@ $this->title = 'Company KFI History';
                                 </div>
 
                                 <!-- Horizontal line SVG -->
-                                <svg xmlns="http://www.w3.org/2000/svg" width="62" height="1" viewBox="0 0 65 1"
+                                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="62" height="1" viewBox="0 0 65 1"
                                     fill="none" class="mt-2">
                                     <path d="M1 0.5L64 0.5" stroke="#9ABCE9" stroke-linecap="round" />
-                                </svg>
+                                </svg> -->
+                                <div class="col-12 mt-6 mb-6 border-bottom-<?= $colorFormat ?>">
+                                </div>
 
                                 <div class="col-12 pr-0 mt-2 text-end">Update Interval</div>
                                 <div class="col-12 pim-duedate text-center mt-2 text-end">
@@ -341,11 +348,7 @@ $this->title = 'Company KFI History';
 				?>
             </div>
         </div>
-    </div>
-</div>
-<?= $this->render('modal_confirm_next') ?>
-
-<?php $form = ActiveForm::begin([
+        <?php $form = ActiveForm::begin([
             'id' => 'update-kfi',
             'method' => 'post',
             'options' => [
@@ -354,11 +357,16 @@ $this->title = 'Company KFI History';
             'action' => Yii::$app->homeUrl . 'kfi/management/save-update-kfi'
 
         ]); ?>
-<?= $this->render('update_modal', [
+        <?= $this->render('update_modal', [
             "units" => $units,
             "companies" => $companies,
             "months" => $months,
             "isManager" => $isManager
         ]) ?>
 
-<?php ActiveForm::end(); ?>
+        <?php ActiveForm::end(); ?>
+    </div>
+
+
+</div>
+<?= $this->render('modal_confirm_next') ?>
