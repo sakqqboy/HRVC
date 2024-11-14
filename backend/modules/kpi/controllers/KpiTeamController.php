@@ -650,13 +650,40 @@ class KpiTeamController extends Controller
 		}
 		return json_encode($data);
 	}
-	public function actionWaitForApprove()
-	{
+	// public function actionWaitForApprove()
+	// {
+	// 	$kpiTeam = KpiTeamHistory::find()
+	// 		->where(["status" => 88])
+	// 		->asArray()
+	// 		->all();
+	// 	$res["totalRqeuest"] = count($kpiTeam);
+	// 	return json_encode($res);
+	// }
+	
+public function actionWaitForApprove($branchId, $isAdmin)
+{
+	if ($isAdmin == 1) {
 		$kpiTeam = KpiTeamHistory::find()
 			->where(["status" => 88])
 			->asArray()
 			->all();
-		$res["totalReuest"] = count($kpiTeam);
-		return json_encode($res);
+	} else {
+		$kpiTeam = KpiTeamHistory::find()
+			->select('k.kpiName,k.kpiId,MAX(kpi_team_history.kpiTeamHistoryId)')
+			->JOIN("LEFT JOIN", "kpi_team kg", "kg.kpiTeamId=kpi_team_history.kpiTeamId")
+			->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kg.kpiId")
+			->JOIN("LEFT JOIN", "kpi_branch kb", "kb.kpiId=k.kpiId")
+			->where(["kpi_team_history.status" => 88, "kb.branchId" => $branchId])
+			//->orderBy('kpi_team_history.kpiTeamHistoryId DESC')
+			->groupBy('k.kpiId')
+
+			->asArray()
+			->all();
 	}
+	//	throw new exception(print_r($kpiTeam, true));
+	$res["totalRequest"] = count($kpiTeam);
+
+	return json_encode($res);
+}
+
 }

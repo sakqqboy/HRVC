@@ -44,29 +44,29 @@ $this->title = "KPI";
                             <?php
                             if ($role > 3) {
                             ?>
-                                <div class="col-12 approval-box text-center pr-3">
-                                    <?php
-                                    if ($waitForApprove["totalReuest"] > 0) {
+                            <div class="col-12 approval-box text-center pr-3">
+                                <?php
+                                    if ($waitForApprove["totalRequest"] > 0) {
                                     ?>
-                                        <a href="<?= Yii::$app->homeUrl ?>kpi/management/wait-approve"
-                                            style="text-decoration: none;color:#2580D3;">
-                                            <span class="approve-num mr-2"><?= $waitForApprove["totalReuest"] ?></span>
-                                            Approvals
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approve.svg"
-                                                class="first-layer-icon pull-right" style="margin-top:-2px;">
-                                        </a>
-                                    <?php
+                                <a href="<?= Yii::$app->homeUrl ?>kpi/management/wait-approve"
+                                    style="text-decoration: none;color:#2580D3;">
+                                    <span class="approve-num mr-2"><?= $waitForApprove["totalRequest"] ?></span>
+                                    Approvals
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approve.svg"
+                                        class="first-layer-icon pull-right" style="margin-top:-2px;">
+                                </a>
+                                <?php
                                     } else { ?>
-                                        <a style="text-decoration: none;color:#2580D3;">
-                                            <span class="approve-num mr-2"><?= $waitForApprove["totalReuest"] ?></span>
-                                            Approvals
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approve.svg"
-                                                class="first-layer-icon pull-right" style="margin-top:-2px;">
-                                        </a>
-                                    <?php
+                                <a style="text-decoration: none;color:#2580D3;">
+                                    <span class="approve-num mr-2"><?= $waitForApprove["totalRequest"] ?></span>
+                                    Approvals
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approve.svg"
+                                        class="first-layer-icon pull-right" style="margin-top:-2px;">
+                                </a>
+                                <?php
                                     }
                                     ?>
-                                </div>
+                            </div>
                             <?php
                             }
                             ?>
@@ -154,29 +154,29 @@ $this->title = "KPI";
                                     }
 
                             ?>
-                                    <tr height="10">
+                            <tr height="10">
 
-                                    </tr>
-                                    <tr id="kpi-<?= $kpiTeamId ?>" class="pim-bg-<?= $colorFormat ?> pim-table-text">
-                                        <td>
-                                            <div class="col-12 border-left-<?= $colorFormat ?> pim-div-border pb-5">
-                                                <?= $kpi["kpiName"] ?>
-                                            </div>
-                                        </td>
-                                        <td><?= $kpi["companyName"] ?></td>
-                                        <td><img src="<?= Yii::$app->homeUrl . $kpi['flag'] ?>" class="Flag-Turkey">
-                                            <?= $kpi["branch"] ?>, <?= $kpi["countryName"] ?></td>
-                                        <!-- <td></td> -->
-                                        <td class="text-center"><?= $kpi["priority"] ?></td>
-                                        <td>
-                                            <div class="flex mb-5 -space-x-4">
-                                                <?php
+                            </tr>
+                            <tr id="kpi-<?= $kpiTeamId ?>" class="pim-bg-<?= $colorFormat ?> pim-table-text">
+                                <td>
+                                    <div class="col-12 border-left-<?= $colorFormat ?> pim-div-border pb-5">
+                                        <?= $kpi["kpiName"] ?>
+                                    </div>
+                                </td>
+                                <td><?= $kpi["companyName"] ?></td>
+                                <td><img src="<?= Yii::$app->homeUrl . $kpi['flag'] ?>" class="Flag-Turkey">
+                                    <?= $kpi["branch"] ?>, <?= $kpi["countryName"] ?></td>
+                                <!-- <td></td> -->
+                                <td class="text-center"><?= $kpi["priority"] ?></td>
+                                <td>
+                                    <div class="flex mb-5 -space-x-4">
+                                        <?php
                                                 if (isset($kpi["employee"]) && count($kpi["employee"]) > 0) {
                                                     $e = 1;
                                                     foreach ($kpi["employee"] as $emp) :
                                                 ?>
-                                                        <img class="image-grid" src="<?= Yii::$app->homeUrl . $emp ?>">
-                                                <?php
+                                        <img class="image-grid" src="<?= Yii::$app->homeUrl . $emp ?>">
+                                        <?php
                                                         if ($e == 3) {
                                                             break;
                                                         }
@@ -184,17 +184,17 @@ $this->title = "KPI";
                                                     endforeach;
                                                 }
                                                 ?>
-                                                <a class="no-underline-black ml-2 mt-3"
-                                                    href="#"><?= count($kpi["employee"]) ?></a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users"
-                                                    aria-hidden="true"></i> <?= $kpi["countTeam"] ?></span>
-                                        </td>
-                                        <td><?= $kpi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?></td>
-                                        <td class="text-start">
-                                            <?php
+                                        <a class="no-underline-black ml-2 mt-3"
+                                            href="#"><?= count($kpi["employee"]) ?></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users"
+                                            aria-hidden="true"></i> <?= $kpi["countTeam"] ?></span>
+                                </td>
+                                <td><?= $kpi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?></td>
+                                <td class="text-start">
+                                    <?php
                                             if ($kpi["result"] != '') {
                                                 $decimal = explode('.', $kpi["target"]);
                                                 if (isset($decimal[1])) {
@@ -210,13 +210,13 @@ $this->title = "KPI";
                                                 $showResult = 0;
                                             }
                                             ?>
-                                            <?= $show ?><?= $kpi["amountType"] == 1 ? '%' : '' ?>
-                                        </td>
-                                        <td class="text-center">
-                                            <?= $kpi["code"] ?>
-                                        </td>
-                                        <td class="text-end">
-                                            <?php
+                                    <?= $show ?><?= $kpi["amountType"] == 1 ? '%' : '' ?>
+                                </td>
+                                <td class="text-center">
+                                    <?= $kpi["code"] ?>
+                                </td>
+                                <td class="text-end">
+                                    <?php
                                             if ($kpi["result"] != '') {
                                                 $decimalResult = explode('.', $kpi["result"]);
                                                 if (isset($decimalResult[1])) {
@@ -232,10 +232,10 @@ $this->title = "KPI";
                                                 $showResult = 0;
                                             }
                                             ?>
-                                            <?= $showResult ?><?= $kpi["amountType"] == 1 ? '%' : '' ?>
-                                        </td>
-                                        <td>
-                                            <?php
+                                    <?= $showResult ?><?= $kpi["amountType"] == 1 ? '%' : '' ?>
+                                </td>
+                                <td>
+                                    <?php
                                             $percent = explode('.', $kpi['ratio']);
                                             if (isset($percent[0]) && $percent[0] == '0') {
                                                 if (isset($percent[1])) {
@@ -249,52 +249,52 @@ $this->title = "KPI";
                                                 $showPercent = round($kpi['ratio']);
                                             }
                                             ?>
-                                            <div id="progress1">
-                                                <div data-num="<?= $showPercent ?>"
-                                                    class="progress-pim-table progress-circle-<?= $colorFormat ?>"></div>
-                                            </div>
+                                    <div id="progress1">
+                                        <div data-num="<?= $showPercent ?>"
+                                            class="progress-pim-table progress-circle-<?= $colorFormat ?>"></div>
+                                    </div>
 
-                                        </td>
-                                        <td><?= $kpi["month"] ?></td>
-                                        <td><?= $kpi["unit"] ?></td>
-                                        <td><?= $kpi["periodCheck"] ?></td>
-                                        <td class="<?= $kpi['isOver'] == 1 ? 'text-danger' : '' ?>">
-                                            <?= $kpi["status"] == 1 ? $kpi["nextCheckDate"] : '' ?>
-                                        </td>
-                                        <td class="text-center">
-                                            <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink"
-                                                data-bs-toggle="dropdown" aria-expanded="false"> <i
-                                                    class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <?php
+                                </td>
+                                <td><?= $kpi["month"] ?></td>
+                                <td><?= $kpi["unit"] ?></td>
+                                <td><?= $kpi["periodCheck"] ?></td>
+                                <td class="<?= $kpi['isOver'] == 1 ? 'text-danger' : '' ?>">
+                                    <?= $kpi["status"] == 1 ? $kpi["nextCheckDate"] : '' ?>
+                                </td>
+                                <td class="text-center">
+                                    <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink"
+                                        data-bs-toggle="dropdown" aria-expanded="false"> <i
+                                            class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <?php
                                                 if ($role > 3) {
                                                 ?>
-                                                    <li data-bs-toggle="modal" data-bs-target="#update-kpi-modal-team"
-                                                        onclick="javascript:updateTeamKpi(<?= $kpiTeamId ?>)"
-                                                        style="display: <?= $display ?>;">
-                                                        <a class="dropdown-item"><i class="fa fa-pencil-square-o"
-                                                                aria-hidden="true"></i></a>
-                                                    </li>
-                                                    <?php
+                                        <li data-bs-toggle="modal" data-bs-target="#update-kpi-modal-team"
+                                            onclick="javascript:updateTeamKpi(<?= $kpiTeamId ?>)"
+                                            style="display: <?= $display ?>;">
+                                            <a class="dropdown-item"><i class="fa fa-pencil-square-o"
+                                                    aria-hidden="true"></i></a>
+                                        </li>
+                                        <?php
                                                 } else {
                                                     if ($role == 3 && ($kpi["teamId"] == $userTeamId)) { ?>
-                                                        <li data-bs-toggle="modal" data-bs-target="#update-kpi-modal-team"
-                                                            onclick="javascript:updateTeamKpi(<?= $kpiTeamId ?>)"
-                                                            style="display: <?= $display ?>;">
-                                                            <a class="dropdown-item"><i class="fa fa-pencil-square-o"
-                                                                    aria-hidden="true"></i></a>
-                                                        </li>
-                                                <?php
+                                        <li data-bs-toggle="modal" data-bs-target="#update-kpi-modal-team"
+                                            onclick="javascript:updateTeamKpi(<?= $kpiTeamId ?>)"
+                                            style="display: <?= $display ?>;">
+                                            <a class="dropdown-item"><i class="fa fa-pencil-square-o"
+                                                    aria-hidden="true"></i></a>
+                                        </li>
+                                        <?php
                                                     }
                                                 }
                                                 ?>
-                                                <li data-bs-toggle="modal" data-bs-target="#kpi-view-team"
-                                                    onclick="javascript:kpiTeamHistory(<?= $kpiTeamId ?>)">
-                                                    <a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                                </li>
-                                            </ul>
-                                        </td>
-                                    </tr>
+                                        <li data-bs-toggle="modal" data-bs-target="#kpi-view-team"
+                                            onclick="javascript:kpiTeamHistory(<?= $kpiTeamId ?>)">
+                                            <a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
 
                             <?php
                                 endforeach;
