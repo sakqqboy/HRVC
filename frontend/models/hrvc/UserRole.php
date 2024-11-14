@@ -55,14 +55,13 @@ class UserRole extends \frontend\models\hrvc\master\UserRoleMaster
     {
         $userId = Yii::$app->user->id;
         $userRole = UserRole::find()
-            ->JOIN("LEFT JOIN", "role r", "r.roleId=user_role.roleId")
             ->where([
-                "user_role.userId" => $userId,
-                "user_role.roleId" => 1
+                "userId" => $userId,
+                "roleId" => 1
             ])
             ->asArray()
-            ->all();
-        if (count($userRole) > 0) {
+            ->one();
+        if (isset($userRole) && !empty($userRole)) {
             return 1;
         } else {
             return 0;
