@@ -33,9 +33,11 @@ $this->title = 'KFI Grid View';
                             <?php
                             if ($role >= 3) {
                             ?>
-                            <button type="button" class="btn-createnew pl-7 pr-7 pr-9 font-size-12"
+                            <button type="button" class="btn-createnew pl-7 pr-7 pr-9font-size-12"
                                 data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
-                                Create New <i class="fa fa-magic ml-3" aria-hidden="true"></i>
+                                Create New
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="History"
+                                    class="pim-icon ml-3" style="margin-top: -1px;">
                             </button>
                             <?php
                             }
