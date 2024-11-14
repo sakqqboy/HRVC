@@ -149,6 +149,10 @@ class KgiTeamController extends Controller
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
 		$userId = Yii::$app->user->id;
+		$isAdmin = UserRole::isAdmin();
+
+		$userTeamId = Team::userTeam($userId);
+		$userBranchId = User::userBranchId();
 		$userTeamId = Team::userTeam($userId);
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -166,7 +170,7 @@ class KgiTeamController extends Controller
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/wait-for-approve');
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
 		$waitForApprove = curl_exec($api);
 		$waitForApprove = json_decode($waitForApprove, true);
 

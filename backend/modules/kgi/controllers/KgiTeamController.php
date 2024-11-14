@@ -743,7 +743,7 @@ class KgiTeamController extends Controller
 				->all();
 		}
 		//	throw new exception(print_r($kgiTeam, true));
-		$res["totalReuest"] = count($kgiTeam);
+		$res["totalRequest"] = count($kgiTeam);
 
 		return json_encode($res);
 	}

@@ -188,16 +188,18 @@ $this->title = "Individual KGI";
                                 <td><?= $kgi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?></td>
                                 <td>
                                     <?php
-											$decimal = explode('.', $kgi["targetAmount"]);
-											if (isset($decimal[1])) {
-												if ($decimal[1] == '00') {
-													$show = $decimal[0];
-												} else {
-													$show = $kgi["targetAmount"];
-												}
-											} else {
-												$show = $kgi["targetAmount"];
-											}
+											 $targetAmount = $kgi["targetAmount"] ?? ''; // Ensure targetAmount is not null
+
+                                             if ($targetAmount === '') {
+                                                 $show = '0.00';
+                                             } else {
+                                                 $decimal = explode('.', $targetAmount);
+                                                 if (isset($decimal[1])) {
+                                                     $show = ($decimal[1] == '00') ? $decimal[0] : $targetAmount;
+                                                 } else {
+                                                     $show = $targetAmount;
+                                                 }
+                                             }
 											?>
                                     <?= $show ?>
                                 </td>
