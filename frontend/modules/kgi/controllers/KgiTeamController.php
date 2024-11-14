@@ -357,7 +357,7 @@ class KgiTeamController extends Controller
 	{
 		$kgiTeamId = $_POST["kgiTeamId"];
 		$oldKgiTeam = KgiTeam::find()->where(["kgiTeamId" => $kgiTeamId])->orderBy("")->asArray()->one();
-		$status = 1;
+		$status =  $_POST["status"];
 		$role = UserRole::userRight();
 		//throw new exception($oldKgiTeam["target"] . 'เก่าคือ' . $_POST["targetAmount"]);
 		if (isset($oldKgiTeam) && !empty($oldKgiTeam)) {

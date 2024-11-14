@@ -322,7 +322,7 @@ class KpiTeamController extends Controller
 		$waitForApprove = json_decode($waitForApprove, true);
 
 		curl_close($api);
-		
+
 		// throw new exception(print_r($teamkpis, true));
 
 		if ($type == "list") {
@@ -368,6 +368,13 @@ class KpiTeamController extends Controller
 	public function actionUpdateKpiTeam()
 	{
 		$kpiTeamId = $_POST["kpiTeamId"];
+		$role = UserRole::userRight();
+		$status =  $_POST["status"];
+		if (isset($oldKpiTeam) && !empty($oldKpiTeam)) {
+			if (($oldKpiTeam["target"] != $_POST["targetAmount"]) && $role == 3) {
+				$status = 88;
+			}
+		}
 		$kpiTeamHistory = new KpiTeamHistory();
 		$kpiTeamHistory->kpiTeamId = $kpiTeamId;
 		$kpiTeamHistory->result = $_POST["result"];
@@ -378,7 +385,7 @@ class KpiTeamController extends Controller
 			$kpiTeamHistory->target = $teamKpi["target"];
 			$teamKpi->save(false);
 		}
-		$kpiTeamHistory->status = $_POST["status"];
+		$kpiTeamHistory->status = $status;
 		$kpiTeamHistory->month = $_POST["month"];
 		$kpiTeamHistory->fromDate = $_POST["fromDate"];
 		$kpiTeamHistory->toDate = $_POST["toDate"];
