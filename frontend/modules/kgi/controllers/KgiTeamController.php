@@ -289,6 +289,7 @@ class KgiTeamController extends Controller
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
+		//throw new Exception($paramText);
 		$userId = Yii::$app->user->id;
 		$userTeamId = Team::userTeam($userId);
 		$api = curl_init();
