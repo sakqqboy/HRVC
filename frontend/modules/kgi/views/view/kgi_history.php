@@ -384,7 +384,7 @@ $form = ActiveForm::begin([
 
 
 <script>
-function viewTabKfi(tabId) {
+function viewTabKgi(tabId) {
     // Hide all tabs
     for (let i = 1; i <= 5; i++) {
         document.getElementById('tab-' + i).classList.remove('view-tab-active');
@@ -410,9 +410,9 @@ function viewTabKfi(tabId) {
 window.onload = function() {
     let openTab = <?php echo json_encode($openTab); ?>; // PHP value passed to JavaScript
     if (openTab) {
-        viewTabKfi(openTab); // Set the tab based on the PHP value
+        viewTabKgi(openTab); // Set the tab based on the PHP value
     } else {
-        viewTabKfi(1); // Default to tab 1 if no value is passed
+        viewTabKgi(1); // Default to tab 1 if no value is passed
     }
 }
 </script>
