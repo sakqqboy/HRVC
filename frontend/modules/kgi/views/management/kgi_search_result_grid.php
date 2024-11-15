@@ -123,7 +123,7 @@ $this->title = 'KGI Grid View';
                                 </div>
                             </div>
                             <div class="col-lg-5 col-md-2 col-4 text-end pr-20">
-                                <a href="<?= Yii::$app->homeUrl ?>kgi/view/index/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>"
+                                <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>"
                                     class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
                                         class="pim-icon" style="margin-top: -1px;">
@@ -142,7 +142,7 @@ $this->title = 'KGI Grid View';
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="History"
                                         class="pim-icon mr-3" style="margin-top: -2px;">Chart
                                 </a> -->
-                                <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 2]) ?>"
+                                <a href="<?= Yii::$app->homeUrl ?>kgi/view/index/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 2]) ?>"
                                     class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg" alt="History"
                                         class="pim-icon mr-3" style="margin-top: -2px;">History
@@ -161,8 +161,10 @@ $this->title = 'KGI Grid View';
                                         if ($role >= 5) {
                                         ?>
                                 <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kgi"
-                                    onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)" style="margin-top: -3px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/bin.png" alt="History"
+                                    onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)" style="margin-top: -3px;"
+                                    onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
+                                    onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
                                         class="pim-icon" style="margin-top: -2px;">
                                 </a>
                                 <?php
@@ -397,12 +399,42 @@ $this->title = 'KGI Grid View';
                                         </div>
                                     </div>
                                     <div class="col-4 pl-5 pr-5 mt-10">
-                                        <div class="col-12 text-start">Last Updated on</div>
-                                        <div class="col-12 text-start pim-duedate">
+                                        <div class="col-12 text-end">Last Updated on</div>
+                                        <div class="col-12 text-end pim-duedate">
                                             <?= $kgi['nextCheck'] == "" ? 'Not set' : $kgi['nextCheck'] ?></div>
                                     </div>
                                     <div class="col-4 text-center mt-10 pt-6">
+
                                         <?php
+                                        if ($colorFormat == 'disable') {
+                                        ?>
+                                        <div onclick="javascript:updateKfi(<?= $kgiId ?>)" class="pim-btn-setup"
+                                            data-bs-toggle="modal" data-bs-target="#update-kgi-modal">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
+                                                class="mb-2" style="width: 12px; height: 12px;"> Setup
+                                        </div>
+                                        <?php
+                                            }else if ($colorFormat == 'complete') {
+                                        ?>
+                                        <div onclick="javascript:updateKgi(<?= $kgiId ?>)" class="pim-btn-complete"
+                                            data-bs-toggle="modal" data-bs-target="#update-kgi-modal">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
+                                                class="mb-2" style="width: 12px; height: 12px;"> Edit
+                                        </div>
+                                        <?php
+                                            }else if ($role >= 5){
+                                        ?>
+                                        <div onclick=" javascript:updateKgi(<?= $kgiId ?>)"
+                                            class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
+                                            data-bs-target="#update-kgi-modal">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
+                                                class="mb-2" style="width: 12px; height: 12px;"> Update
+                                        </div>
+                                        <?php
+                                            }
+                                        ?>
+
+                                        <!-- <?php
                                                 if ($role > 3) {
                                                 ?>
                                         <div onclick="javascript:updateKgi(<?= $kgiId ?>)"
@@ -412,11 +444,11 @@ $this->title = 'KGI Grid View';
                                         </div>
                                         <?php
                                                 }
-                                                ?>
+                                                ?> -->
                                     </div>
                                     <div class="col-4 pl-0 pr-5 mt-10">
-                                        <div class="col-12 text-end font-<?= $colorFormat ?>">Next Update Date</div>
-                                        <div class="col-12 text-end pim-duedate">
+                                        <div class="col-12 text-start font-<?= $colorFormat ?>">Next Update Date</div>
+                                        <div class="col-12 text-start pim-duedate">
                                             <?= $kgi['nextCheck'] == "" ? 'Not set' : $kgi['nextCheck'] ?></div>
                                     </div>
                                 </div>

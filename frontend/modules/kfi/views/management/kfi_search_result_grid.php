@@ -362,26 +362,29 @@ $this->title = 'KFI Grid View';
                                         ?>
                                         <div onclick="javascript:updateKfi(<?= $kfiId ?>)" class="pim-btn-setup"
                                             data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
-                                            <i class="fa fa-refresh" aria-hidden="true"></i> Setup
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
+                                                class="mb-2" style="width: 12px; height: 12px;"> Setup
                                         </div>
                                         <?php
                                             }else if ($colorFormat == 'complete') {
                                         ?>
                                         <div onclick="javascript:updateKfi(<?= $kfiId ?>)" class="pim-btn-complete"
                                             data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
-                                            <i class="fa fa-refresh" aria-hidden="true"></i> Edit
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
+                                                class="mb-2" style="width: 12px; height: 12px;"> Edit
                                         </div>
                                         <?php
                                             }else if ($role >= 5){
                                         ?>
-                                        <div onclick="javascript:updateKfi(<?= $kfiId ?>)"
+                                        <div onclick=" javascript:updateKfi(<?= $kfiId ?>)"
                                             class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
                                             data-bs-target="#staticBackdrop2">
-                                            <i class="fa fa-refresh" aria-hidden="true"></i> Update
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
+                                                class="mb-2" style="width: 12px; height: 12px;"> Update
                                         </div>
                                         <?php
-                                                }
-                                                ?>
+                                            }
+                                        ?>
                                     </div>
                                     <div class="col-5 pl-0 pr-11 mt-10">
                                         <div class="col-12 text-start font-<?= $colorFormat ?>">Next Update Date</div>
