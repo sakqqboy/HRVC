@@ -91,16 +91,27 @@ class ViewController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-team-history-summarize?kgiTeamId=' . $kgiTeamId);
 		$kgiTeamsHistory = curl_exec($api);
 		$kgiTeamsHistory = json_decode($kgiTeamsHistory, true);
+		
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
+		$units = curl_exec($api);
+		$units = json_decode($units, true);
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
+		$months = ModelMaster::monthFull(1);
+		$isManager = UserRole::isManager();
 		curl_close($api);
 		//  throw new Exception(print_r($kgiTeamsHistory,true));
 		return $this->render('kgi_team_history', [
 			"role" => $role,
 			"kgiDetail" => $kgiDetail,
-			"kgiTeamsHistory" => $kgiTeamsHistory
+			"kgiTeamsHistory" => $kgiTeamsHistory,
+			"kgiId" => $kgiId,
+			"kgiTeamId" => $kgiTeamId,
+			"units" => $units,
+			"months" => $months,
+			"isManager" => $isManager
 		]);
 	}
 	public function actionKgiIndividualHistory($hash)

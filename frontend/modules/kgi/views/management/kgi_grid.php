@@ -141,8 +141,8 @@ $this->title = 'KGI Grid View';
                                         class="pim-icon mr-3" style="margin-top: -2px;">Chart
                                 </a>
                                 <?php
-										if ($role >= 5) {
-										?>
+									if ($role >= 5) {
+								?>
                                 <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kgi"
                                     onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)" style="margin-top: -3px;"
                                     onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
@@ -151,8 +151,8 @@ $this->title = 'KGI Grid View';
                                         class="pim-icon" style="margin-top: -2px;">
                                 </a>
                                 <?php
-										}
-										?>
+									}
+								?>
                             </div>
                             <div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?> mt-5">
                                 <div class="row">
@@ -392,7 +392,7 @@ $this->title = 'KGI Grid View';
                                         <?php
                                         if ($colorFormat == 'disable') {
                                         ?>
-                                        <div onclick="javascript:updateKfi(<?= $kgiId ?>)" class="pim-btn-setup"
+                                        <div onclick="javascript:updateKgi(<?= $kgiId ?>)" class="pim-btn-setup"
                                             data-bs-toggle="modal" data-bs-target="#update-kgi-modal">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
                                                 class="mb-2" style="width: 12px; height: 12px;"> Setup

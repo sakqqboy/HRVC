@@ -59,22 +59,11 @@ $this->title = 'Team KGI History';
                         <div class="row">
                             <div class="col-5 pim-name"><?= $kgi["month"] ?> <?= $kgi["year"] ?></div>
                             <div class="col-7 text-end">
-                                <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], "kgiTeamId" => $kgiTeamId]) ?>"
+                                <!-- <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>"
                                     class="btn btn-bg-white-xs">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Charts.png" alt="History"
                                         class="home-icon" style="margin-top: -3px;">
                                 </a>
-                                <?php
-											if ($i == 0 && $kgi["status"] == 2) {
-											?>
-                                <a class="btn btn-bg-white-xs pr-2 pl-3"
-                                    onclick="javascript:prepareKgiTeamNextTarget(<?= $kgi['kgiTeamHistoryId'] ?>)">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/copy.png" alt="History"
-                                        class="home-icon">
-                                </a>
-                                <?php
-											}
-											?>
                                 <a class="btn btn-bg-white-xs" data-bs-toggle="modal" data-bs-target="#staticBackdrop3"
                                     onclick="javascript:kgiHistory(<?= $kgi['kgiTeamHistoryId'] ?>)">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Comment.png" alt="History"
@@ -84,7 +73,50 @@ $this->title = 'Team KGI History';
                                     onclick="javascript:kgiHistory(<?= $kgi['kgiTeamHistoryId'] ?>)">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Charts.png" alt="History"
                                         class="home-icon" style="margin-top: -3px;">
+                                </a> -->
+                                <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 1]) ?>"
+                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="Chats"
+                                        class="pim-icon " style="margin-top: -2px;">
                                 </a>
+                                <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 3]) ?>"
+                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png" alt="Chats"
+                                        class="pim-icon " style="margin-top: -2px;">
+                                </a>
+                                <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 4]) ?>"
+                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="Chart"
+                                        class="pim-icon" style="margin-top: -2px;">
+                                </a>
+                                <?php
+									if ($colorFormat == 'disable') {
+								?>
+                                <a class="btn btn-bg-blue-xs pr-2 pl-3 mr-5" data-bs-toggle="modal"
+                                    data-bs-target="#update-kgi-modal-team" style="margin-top: -3px; "
+                                    onclick="javascript:updateTeamKgi(<?= $kgiTeamId ?>)">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
+                                        alt="History" style="margin-top: -2px; width: 12px; height: 14px;"
+                                        class="home-icon">
+                                </a>
+                                <?php
+									}
+								?>
+                                <?php
+											if ($i == 0 && $kgi["status"] == 2) {
+											?>
+                                <a class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;"
+                                    onclick="javascript:prepareKgiTeamNextTarget(<?= $kgi['kgiTeamHistoryId'] ?>)">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/coppy.svg" alt="History"
+                                        style="margin-top: -3px; width: 12px; height: 14px;" class="home-icon">
+                                </a>
+                                <?php
+											}
+											?>
+
 
                             </div>
                             <div class="col-9 mt-10 pl-28">
@@ -221,4 +253,21 @@ $this->title = 'Team KGI History';
         </div>
     </div>
 </div>
+<?php
+$form = ActiveForm::begin([
+	'id' => 'update-kgi',
+	'method' => 'post',
+	'options' => [
+		'enctype' => 'multipart/form-data',
+	],
+	'action' => Yii::$app->homeUrl . 'kgi/kgi-team/update-kgi-team'
+
+]); ?>
+<?= $this->render('modal_update', [
+	"units" => $units,
+	"isManager" => $isManager,
+	"months" => $months,
+]) ?>
+<?php ActiveForm::end(); ?>
+
 <?= $this->render('modal_confirm_next_team') ?>

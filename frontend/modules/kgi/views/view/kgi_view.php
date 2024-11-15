@@ -94,7 +94,8 @@ $this->title = 'Company KGI History';
 									if ($colorFormat == 'disable') {
 								?>
                                 <a class="btn btn-bg-blue-xs pr-2 pl-3 mr-5" data-bs-toggle="modal"
-                                    data-bs-target="#staticBackdrop2" onclick="javascript:updateKgi(<?= $kgiId ?>)">
+                                    data-bs-target="#update-kgi-modal-team"
+                                    onclick="javascript:updateKgi(<?= $kgiId ?>)">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
                                         alt="History" style="margin-top: -3px; width: 12px; height: 14px;"
                                         class="home-icon">
