@@ -70,28 +70,40 @@ $this->title = 'Company KGI History';
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Charts.png" alt="History"
                                         class="home-icon" style="margin-top: -3px;">
                                 </a> -->
-                                <a href="<?= Yii::$app->homeUrl ?>kgi/view/index/<?= ModelMaster::encodeParams(["kgiHistoryId" => $kgi['kgiHistoryId']]) ?>"
+                                <a href="<?= Yii::$app->homeUrl ?>kgi/view/index/<?= ModelMaster::encodeParams(["kgiHistoryId" => $kgidI]) ?>"
                                     class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
                                         class="pim-icon " style="margin-top: -2px;">
                                 </a>
-                                <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiHistoryId'], 'openTab' => 3]) ?>"
+                                <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgidI, 'openTab' => 3]) ?>"
                                     class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png" alt="Chats"
                                         class="pim-icon " style="margin-top: -2px;">
                                 </a>
-                                <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiHistoryId'], 'openTab' => 4]) ?>"
+                                <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgidI, 'openTab' => 4]) ?>"
                                     class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="Chart"
                                         class="pim-icon" style="margin-top: -2px;">
                                 </a>
                                 <?php
+									if ($colorFormat == 'disable') {
+								?>
+                                <a class="btn btn-bg-blue-xs pr-2 pl-3 mr-5" data-bs-toggle="modal"
+                                    data-bs-target="#staticBackdrop2" onclick="javascript:updateKgi(<?= $kgidI ?>)">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
+                                        alt="History" style="margin-top: -3px; width: 12px; height: 14px;"
+                                        class="home-icon">
+                                </a>
+                                <?php
+									}
+								?>
+                                <?php
 									if ($i == 0 && $kgi["status"] == 2 && $role >= 5) {
 								?>
-                                <a class="btn btn-bg-white-xs pr-2 pl-3"
+                                <a class="btn btn-bg-white-xs pr-2 pl-3 mr-5"
                                     onclick="javascript:prepareKgiNextTarget(<?= $kgi['kgiHistoryId'] ?>)">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/copy.png" alt="History"
-                                        class="home-icon">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/coppy.svg" alt="History"
+                                        style="margin-top: -3px; width: 12px; height: 14px;" class="home-icon">
                                 </a>
                                 <?php
 									}

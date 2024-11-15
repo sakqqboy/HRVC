@@ -107,9 +107,6 @@ $this->title = 'Company KFI History';
                                         class="home-icon" style="margin-top: -3px;">
                                 </a>
 
-
-
-
                                 <?php
 									if ($colorFormat == 'disable') {
 								?>
@@ -122,16 +119,7 @@ $this->title = 'Company KFI History';
                                 <?php
 									}
 								?>
-                                <?php
-											//if ($role >= 5) {
-											?>
-                                <!-- <a class="btn btn-xs btn-outline-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop4" onclick="javascript:prepareDeleteKfi(<?php // $kfi['kfiHistoryId'] 
-																															?>)">
-													<i class="fa fa-trash-o" aria-hidden="true"></i>
-												</a> -->
-                                <?php
-											//}
-											?>
+
                                 <?php
 									if ($i == 0 && $kfi["status"] == 2 && $role >= 5) {
 								?>
