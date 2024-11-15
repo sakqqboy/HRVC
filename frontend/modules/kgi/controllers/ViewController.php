@@ -74,7 +74,8 @@ class ViewController extends Controller
 		return $this->render('kgi_view', [
 			"role" => $role,
 			"kgiDetail" => $kgiDetail,
-			"kgis" => $kgis
+			"kgis" => $kgis,
+			"kgiId" => $kgiId
 		]);
 	}
 	public function actionKgiTeamHistory($hash)

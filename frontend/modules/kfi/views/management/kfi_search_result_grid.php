@@ -142,19 +142,22 @@ $this->title = 'KFI Grid View';
 											<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="History" class="pim-icon mr-3" style="margin-top: -2px;">Chart
 										</a> -->
                                 <a href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(["kfiId" => $kfiId, 'openTab' => 1]) ?>"
-                                    class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?>"
+                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
                                         class="pim-icon" style="margin-top: -1px;">
                                 </a>
-                                <a href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, 'openTab' => 2]) ?>"
-                                    class="btn btn-bg-white-xs mr-5 " style="margin-top: -3px;">
+                                <a href="<?= Yii::$app->homeUrl ?>kfi/view/index/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, 'openTab' => 2]) ?>"
+                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?>"
+                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg" alt="History"
                                         class="pim-icon mr-3" style="margin-top: -2px;">History
                                 </a>
                                 <a href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, 'openTab' => 4]) ?>"
-                                    class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?>"
+                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="Chart"
-                                        class="pim-icon mr-3" style="margin-top: -2px;">Chart
+                                        class="pim-icon mr-3" style="margin-top: -2px;"> Chart
                                 </a>
                                 <?php
                                         if ($role >= 5) {
