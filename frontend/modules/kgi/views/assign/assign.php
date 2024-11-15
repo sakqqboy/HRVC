@@ -88,11 +88,21 @@ $this->title = 'KGI Grid View';
 									}
 								endforeach;
 							}
+							if ($role == 3 && $team["teamId"] != $userTeamId) {
+								$disableTeam = "disabled";
+							} else {
+								$disableTeam = "";
+							}
 					?>
 							<div class="col-12 bg-white mb-10 pb-0 pt-0 pr-8">
 								<div class="row">
 									<div class="col-1 text-end pr-0 pl-0 pt-12">
-										<input type="checkbox" name="team[<?= $team['teamId'] ?>]" id="team-<?= $team['teamId'] ?>" <?= $checked ?> class="from-check" value="<?= $team['teamId'] ?>" onclick="javasript:assignKgiToEmployeeInTeam(<?= $team['teamId'] ?>,<?= $kgiId ?>)"><!--kgi_employee-->
+										<input type="checkbox" name="team[<?= $team['teamId'] ?>]" id="team-<?= $team['teamId'] ?>" <?= $checked ?> class="from-check" value="<?= $team['teamId'] ?>" onclick="javasript:assignKgiToEmployeeInTeam(<?= $team['teamId'] ?>,<?= $kgiId ?>)" <?= $disableTeam ?> style="display: <?= $role == 3 ? 'none' : '' ?>;"><!--kgi_employee-->
+										<?php
+										if ($role == 3 && $checked == "checked") {
+											echo '<i class="fa fa-check-square text-primary" aria-hidden="true"></i>';
+										}
+										?>
 									</div>
 									<div class="col-2 pr-5 pl-0 text-end pt-3 pb-3">
 										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.png" style="width:40px;">
@@ -102,7 +112,7 @@ $this->title = 'KGI Grid View';
 										<div class="col-12 font-size-10" style="margin-top: -5px;"><?= $team["departmentName"] ?></div>
 									</div>
 									<div class="col-4 pt-9">
-										<input type="text" class="assign-target text-end font-size-12" value="<?= $target > 0 ? number_format($target, 2) : '' ?>" name="teamTarget[<?= $team['teamId'] ?>]" placeholder="0.00">
+										<input type="text" class="assign-target text-end font-size-12" value="<?= $target > 0 ? number_format($target, 2) : '' ?>" name="teamTarget[<?= $team['teamId'] ?>]" placeholder="0.00" <?= $disableTeam ?>>
 									</div>
 								</div>
 							</div>
@@ -188,6 +198,8 @@ $this->title = 'KGI Grid View';
 					<div class="col-12 pr-0 pl-0" id="team-employee-target">
 						<?= $this->render('employee_team', [
 							"kgiTeamEmployee" => $kgiTeamEmployee,
+							"role" => $role,
+							"userTeamId" => $userTeamId
 						]) ?>
 					</div>
 

@@ -1,10 +1,17 @@
 <?php
 if (isset($kgiTeamEmployee) && count($kgiTeamEmployee) > 0) {
 	foreach ($kgiTeamEmployee as $teamId => $kgiEmployee):
+		$show = 0;
+		if ($role == 3 && $teamId == $userTeamId) {
+			$show = 1;
+		}
+		if ($role > 3) {
+			$show = 1;
+		}
 		if (isset($kgiEmployee["team"])) {
 			//throw new Exception(print_r($kgiEmployee["team"], true));
 ?>
-			<div class="col-12 bg-header-assign pb-0 pt-0 pr-8 mt-10" id="team-employee-<?= $teamId ?>">
+			<div class="col-12 bg-header-assign pb-0 pt-0 pr-8 mt-10" id="team-employee-<?= $teamId ?>" style="display: <?= $show == 0 ? 'none' : '' ?>;">
 				<div class="row">
 					<div class="col-5 font-size-12 pt-5 pb-3">
 						<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.png" style="width:15px;margin-top:-3px;" class="ml-5 mr-5">
@@ -73,6 +80,7 @@ if (isset($kgiTeamEmployee) && count($kgiTeamEmployee) > 0) {
 			?>
 		</div>
 <?php
+
 	endforeach;
 }
 ?>

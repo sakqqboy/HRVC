@@ -5,9 +5,11 @@ namespace frontend\modules\kgi\controllers;
 use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
+use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\KgiEmployee;
 use frontend\models\hrvc\KgiTeam;
+use frontend\models\hrvc\Team;
 use frontend\models\hrvc\UserRole;
 use Yii;
 use yii\db\Expression;
@@ -62,6 +64,7 @@ class AssignController extends Controller
 		}
 		$kgiId = $param["kgiId"];
 		$companyId = $param["companyId"];
+		$teamId = Team::userTeam(Yii::$app->user->id);
 		//$save = $param["save"];
 		$role = UserRole::userRight();
 		if ($role < 3) {
@@ -123,6 +126,7 @@ class AssignController extends Controller
 			"text" => $text,
 			"kgiTeamEmployee" => $kgiTeamEmployee,
 			"companyId" => $companyId,
+			"userTeamId" => $teamId
 		]);
 	}
 	public function actionEmployeeInTeamTarget()
