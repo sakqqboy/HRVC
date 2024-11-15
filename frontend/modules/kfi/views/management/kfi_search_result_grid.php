@@ -160,8 +160,10 @@ $this->title = 'KFI Grid View';
                                         if ($role >= 5) {
                                         ?>
                                 <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#staticBackdrop4"
-                                    onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)" style="margin-top: -3px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/bin.png" alt="History"
+                                    onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)" style="margin-top: -3px;"
+                                    onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
+                                    onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
                                         class="pim-icon" style="margin-top: -2px;">
                                 </a>
 
