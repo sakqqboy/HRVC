@@ -97,10 +97,11 @@ $this->title = 'KGI Grid View';
 							<div class="col-12 bg-white mb-10 pb-0 pt-0 pr-8">
 								<div class="row">
 									<div class="col-1 text-end pr-0 pl-0 pt-12">
-										<input type="checkbox" name="team[<?= $team['teamId'] ?>]" id="team-<?= $team['teamId'] ?>" <?= $checked ?> class="from-check" value="<?= $team['teamId'] ?>" onclick="javasript:assignKgiToEmployeeInTeam(<?= $team['teamId'] ?>,<?= $kgiId ?>)" <?= $disableTeam ?> style="display: <?= $role == 3 ? 'none' : '' ?>;"><!--kgi_employee-->
+										<input type="checkbox" name="team[<?= $team['teamId'] ?>]" id="team-<?= $team['teamId'] ?>" <?= $checked ?> class="from-check" value="<?= $team['teamId'] ?>" onclick="javasript:assignKgiToEmployeeInTeam(<?= $team['teamId'] ?>,<?= $kgiId ?>)" style="display: <?= $role == 3 ? 'none' : '' ?>;"><!--kgi_employee-->
 										<?php
-										if ($role == 3 && $checked == "checked") {
-											echo '<i class="fa fa-check-square text-primary" aria-hidden="true"></i>';
+										if ($role == 3 && $checked == "checked") { ?>
+											<i class="fa fa-check-square text-primary" aria-hidden="true"></i>
+										<?php
 										}
 										?>
 									</div>
@@ -112,7 +113,18 @@ $this->title = 'KGI Grid View';
 										<div class="col-12 font-size-10" style="margin-top: -5px;"><?= $team["departmentName"] ?></div>
 									</div>
 									<div class="col-4 pt-9">
-										<input type="text" class="assign-target text-end font-size-12" value="<?= $target > 0 ? number_format($target, 2) : '' ?>" name="teamTarget[<?= $team['teamId'] ?>]" placeholder="0.00" <?= $disableTeam ?>>
+										<?php
+										if ($disableTeam == "") {
+										?>
+											<input type="text" class="assign-target text-end font-size-12" value="<?= $target > 0 ? number_format($target, 2) : '' ?>" name="teamTarget[<?= $team['teamId'] ?>]" placeholder="0.00">
+										<?php
+										} else {
+										?>
+											<input type="text" placeholder="0.00" class="assign-target text-end font-size-12" value="<?= $target > 0 ? number_format($target, 2) : '' ?>" name="teamTarget[<?= $team['teamId'] ?>]" <?= $disableTeam ?>>
+											<input type="hidden" value="<?= $target > 0 ? number_format($target, 2) : '' ?>" name="teamTarget[<?= $team['teamId'] ?>]">
+										<?php
+										}
+										?>
 									</div>
 								</div>
 							</div>

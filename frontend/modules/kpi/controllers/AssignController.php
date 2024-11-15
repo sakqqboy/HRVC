@@ -9,6 +9,7 @@ use frontend\models\hrvc\Group;
 use frontend\models\hrvc\KgiEmployee;
 use frontend\models\hrvc\KpiEmployee;
 use frontend\models\hrvc\KpiTeam;
+use frontend\models\hrvc\Team;
 use frontend\models\hrvc\UserRole;
 use Yii;
 use yii\db\Expression;
@@ -63,6 +64,7 @@ class AssignController extends Controller
 		$kpiId = $param["kpiId"];
 		$companyId = $param["companyId"];
 		$role = UserRole::userRight();
+		$teamId = Team::userTeam(Yii::$app->user->id);
 		if ($role < 3) {
 			return $this->redirect(Yii::$app->homeUrl . 'kpi/management/index');
 		}
@@ -120,7 +122,8 @@ class AssignController extends Controller
 			"teams" => $teams,
 			"text" => $text,
 			"kpiTeamEmployee" => $kpiTeamEmployee,
-			"companyId" => $companyId
+			"companyId" => $companyId,
+			"userTeamId" => $teamId
 		]);
 	}
 	public function actionEmployeeInTeamTarget()

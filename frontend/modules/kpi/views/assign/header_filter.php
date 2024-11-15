@@ -29,18 +29,18 @@
 			</div>
 		</div>
 		<div class="col-2 text-end">
-			<div class="col-12 pt-13">
+			<!-- <div class="col-12 pt-13">
 				<?php
-				if ($role >= 3) {
+				//if ($role >= 3) {
 				?>
 					<a href="<?= Yii::$app->homeUrl ?>kpi/management/wait-approve" class="nav-link text-dark" id="pills-Setting-tab" type="button" role="tab" aria-controls="pills-Action" aria-selected="false">
 						<i class="fa fa-cog" aria-hidden="true"></i>
 						Approval
 					</a>
 				<?php
-				}
+				//}
 				?>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </div>

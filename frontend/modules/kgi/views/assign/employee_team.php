@@ -11,7 +11,7 @@ if (isset($kgiTeamEmployee) && count($kgiTeamEmployee) > 0) {
 		if (isset($kgiEmployee["team"])) {
 			//throw new Exception(print_r($kgiEmployee["team"], true));
 ?>
-			<div class="col-12 bg-header-assign pb-0 pt-0 pr-8 mt-10" id="team-employee-<?= $teamId ?>" style="display: <?= $show == 0 ? 'none' : '' ?>;">
+			<div class="col-12 bg-header-assign pb-0 pt-0 pr-8 mt-10" id="team-employee-<?= $teamId ?>">
 				<div class="row">
 					<div class="col-5 font-size-12 pt-5 pb-3">
 						<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.png" style="width:15px;margin-top:-3px;" class="ml-5 mr-5">
@@ -56,7 +56,19 @@ if (isset($kgiTeamEmployee) && count($kgiTeamEmployee) > 0) {
 							<div class="col-5 font-size-12 pt-5">
 								<div class="row">
 									<div class="col-2 text-center pr-0 pl-0 pt-10">
-										<input type="checkbox" class="from-check ml-10" <?= $employee["checked"] ?>>
+										<?php
+										if ($show == 1) {
+										?>
+											<input type="checkbox" class="from-check ml-10" <?= $employee["checked"] ?>>
+											<?php
+										} else {
+											if ($employee["checked"] == "checked") {
+											?>
+												<i class="fa fa-check-square text-primary font-size-16 ml-10" aria-hidden="true"></i>
+										<?php
+											}
+										}
+										?>
 									</div>
 									<div class="col-2 pr-5 pl-0 text-center">
 										<img src="<?= Yii::$app->homeUrl ?><?= $employee["picture"] ?>" class="employee-pic-circle">
@@ -67,10 +79,30 @@ if (isset($kgiTeamEmployee) && count($kgiTeamEmployee) > 0) {
 								</div>
 							</div>
 							<div class="col-3 font-size-12 text-center pt-5">
-								<input type="text" class="assign-target text-end" placeholder="0.00" name="employeeTarget[<?= $employeeId ?>]" placeholder="Target" style="height: 30px;" value="<?= $employee['target'] > 0 ? number_format($employee['target'], 2) : '' ?>" id="employee-target-<?= $teamId ?>" onkeyup="javascript:calculateEmployeeTargetValue(<?= $teamId ?>)">
+								<?php
+								if ($show == 1) {
+								?>
+									<input type="text" class="assign-target text-end" name="employeeTarget[<?= $employeeId ?>]" placeholder="0.00" style="height: 30px;" value="<?= $employee['target'] > 0 ? number_format($employee['target'], 2) : '' ?>" id="employee-target-<?= $teamId ?>" onkeyup="javascript:calculateEmployeeTargetValue(<?= $teamId ?>)">
+								<?php
+								} else { ?>
+									<input type="text" class="assign-target text-end" name="employeeTarget[<?= $employeeId ?>]" placeholder="0.00" style="height: 30px;" value="<?= $employee['target'] > 0 ? number_format($employee['target'], 2) : '' ?>" id="employee-target-<?= $teamId ?>" disabled>
+									<input type="hidden" name="employeeTarget[<?= $employeeId ?>]" placeholder="0.00" style="height: 30px;" value="<?= $employee['target'] > 0 ? number_format($employee['target'], 2) : '' ?>" id="employee-target-<?= $teamId ?>">
+								<?php
+								}
+								?>
 							</div>
 							<div class="col-4 font-size-12 text-center pt-5">
-								<textarea type="text" class="assign-target" name="employeeRemark[<?= $employeeId ?>]" style="height: 30px;"></textarea>
+								<?php
+								if ($show == 1) {
+								?>
+									<textarea type="text" class="assign-target" name="employeeRemark[<?= $employeeId ?>]" style="height: 30px;"></textarea>
+								<?php
+								} else { ?>
+									<textarea type="text" class="assign-target" name="employeeRemark[<?= $employeeId ?>]" style="height: 30px;" disabled></textarea>
+									<input type="hidden" name="employeeRemark[<?= $employeeId ?>]">
+								<?php
+								}
+								?>
 							</div>
 						</div>
 					</div>
