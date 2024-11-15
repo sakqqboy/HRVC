@@ -93,7 +93,11 @@ $this->title = 'KFI Grid View';
                                 $colorFormat = 'over';
                             } else {
                                 if ($kfi["status"] == 1) {
-                                    $colorFormat = 'inprogress';
+                                    if ($kfi["isOver"] == 2) {
+                                        $colorFormat = 'disable';
+                                    } else {
+                                        $colorFormat = 'inprogress';
+                                    }
                                 } else {
                                     $colorFormat = 'complete';
                                 }
@@ -352,8 +356,22 @@ $this->title = 'KFI Grid View';
                                     </div>
                                     <div class="col-2 text-center mt-10 pt-6">
                                         <?php
-                                                if ($role >= 5) {
-                                                ?>
+                                        if ($colorFormat == 'disable') {
+                                        ?>
+                                        <div onclick="javascript:updateKfi(<?= $kfiId ?>)" class="pim-btn-setup"
+                                            data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+                                            <i class="fa fa-refresh" aria-hidden="true"></i> Setup
+                                        </div>
+                                        <?php
+                                            }else if ($colorFormat == 'complete') {
+                                        ?>
+                                        <div onclick="javascript:updateKfi(<?= $kfiId ?>)" class="pim-btn-complete"
+                                            data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+                                            <i class="fa fa-refresh" aria-hidden="true"></i> Edit
+                                        </div>
+                                        <?php
+                                            }else if ($role >= 5){
+                                        ?>
                                         <div onclick="javascript:updateKfi(<?= $kfiId ?>)"
                                             class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
                                             data-bs-target="#staticBackdrop2">

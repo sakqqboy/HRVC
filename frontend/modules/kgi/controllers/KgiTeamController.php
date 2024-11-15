@@ -277,6 +277,8 @@ class KgiTeamController extends Controller
 	public function actionKgiTeamSearchResult($hash)
 	{
 		$param = ModelMaster::decodeParams($hash);
+		$isAdmin = UserRole::isAdmin();
+		$userBranchId = User::userBranchId();
 		$companyId = $param["companyId"];
 		$branchId = $param["branchId"];
 		$teamId = $param["teamId"];
@@ -314,7 +316,7 @@ class KgiTeamController extends Controller
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/wait-for-approve');
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
 		$waitForApprove = curl_exec($api);
 		$waitForApprove = json_decode($waitForApprove, true);
 

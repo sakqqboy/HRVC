@@ -131,6 +131,8 @@ class KgiPersonalController extends Controller
 		}
 		$teams = [];
 		$role = UserRole::userRight();
+		$isAdmin = UserRole::isAdmin();
+		$userBranchId = User::userBranchId();
 		$adminId = '';
 		$gmId = '';
 		$teamLeaderId = '';
@@ -153,7 +155,7 @@ class KgiPersonalController extends Controller
 		$kgis = curl_exec($api);
 		$kgis = json_decode($kgis, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/wait-for-approve');
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
 		$waitForApprove = curl_exec($api);
 		$waitForApprove = json_decode($waitForApprove, true);
 
@@ -205,6 +207,8 @@ class KgiPersonalController extends Controller
 		$managerId = '';
 		$supervisorId = '';
 		$staffId = Yii::$app->user->id;
+		$isAdmin = UserRole::isAdmin();
+		$userBranchId = User::userBranchId();
 		$teams = [];
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -223,7 +227,7 @@ class KgiPersonalController extends Controller
 		$kgis = curl_exec($api);
 		$kgis = json_decode($kgis, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/wait-for-approve');
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
 		$waitForApprove = curl_exec($api);
 		$waitForApprove = json_decode($waitForApprove, true);
 
@@ -443,6 +447,8 @@ class KgiPersonalController extends Controller
 	public function actionKgiPersonalSearchResult($hash)
 	{
 		$param = ModelMaster::decodeParams($hash);
+		$isAdmin = UserRole::isAdmin();
+		$userBranchId = User::userBranchId();
 		$month = $param["month"];
 		$status = $param["status"];
 		$year = $param["year"];
@@ -494,7 +500,7 @@ class KgiPersonalController extends Controller
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/wait-for-approve');
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
 		$waitForApprove = curl_exec($api);
 		$waitForApprove = json_decode($waitForApprove, true);
 
