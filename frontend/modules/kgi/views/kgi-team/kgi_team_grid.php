@@ -163,36 +163,28 @@ $this->title = "TEAM KGI";
                                 </span>
                                 <img src="<?= Yii::$app->homeUrl . 'images/icons/Settings/team-name.svg' ?>"
                                     class="pim-pic-grid mr-5" style="margin-top: -1px;font-size:12px;">
-                                <a class="btn btn-bg-white-xs mr-5"
-                                    href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-team-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], "kgiTeamId" => $kgiTeamId]) ?>"
-                                    style="margin-top: -3px;">
+                                <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], "kgiTeamId" => $kgiTeamId]) ?>"
+                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
                                         class="pim-icon" style="margin-top: -1px;">
                                 </a>
-                                <!-- <a class="btn btn-bg-white-xs mr-5" data-bs-toggle="modal" data-bs-target="#kgi-issue"
-                                    onclick="javascript:showKgiComment(<?= $kgi['kgiId'] ?>)" style="margin-top: -3px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png" alt="History"
-                                        class="pim-icon">
-                                </a>
-                                <a class="btn btn-bg-white-xs mr-5" data-bs-toggle="modal"
-                                    data-bs-target="#staticBackdrop3" onclick="javascript:kgiHistory(<?= $kgiTeamId ?>)"
-                                    style="margin-top: -3px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="History"
-                                        class="pim-icon mr-3" style="margin-top: -2px;">Chart
-                                </a> -->
 
-                                <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiId' => $kgi['kgiId'], 'openTab' => 2]) ?>"
-                                    class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+                                <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-team-history/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiId' => $kgi['kgiId'], 'openTab' => 2]) ?>"
+                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg" alt="History"
                                         class="pim-icon mr-3" style="margin-top: -2px;">History
                                 </a>
                                 <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiId' => $kgi['kgiId'], 'openTab' => 3]) ?>"
-                                    class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png" alt="Chats"
                                         class="pim-icon mr-3" style="margin-top: -2px;">Chats
                                 </a>
                                 <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiId' => $kgi['kgiId'], 'openTab' => 4]) ?>"
-                                    class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="Chart"
                                         class="pim-icon mr-3" style="margin-top: -2px;">Chart
                                 </a>
@@ -201,8 +193,10 @@ $this->title = "TEAM KGI";
                                         ?>
                                 <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kgi-team"
                                     onclick="javascript:prepareDeleteKgiTeam(<?= $kgiTeamId ?>)"
-                                    style="margin-top: -3px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/bin.png" alt="History"
+                                    style="margin-top: -3px;"
+                                    onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
+                                    onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
                                         class="pim-icon" style="margin-top: -2px;">
                                 </a>
                                 <?php
@@ -428,6 +422,36 @@ $this->title = "TEAM KGI";
                                     </div>
                                     <div class="col-4 text-center mt-10 pt-6">
                                         <?php
+                                        if ($colorFormat == 'disable') {
+                                        ?>
+                                        <div onclick="javascript:updateTeamKgi(<?= $kgiTeamId ?>)" class="pim-btn-setup"
+                                            data-bs-toggle="modal" data-bs-target="#update-kgi-modal-team">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
+                                                class="mb-2" style="width: 12px; height: 12px;"> Setup
+                                        </div>
+                                        <?php
+                                            }else if ($colorFormat == 'complete') {
+                                        ?>
+                                        <div onclick="javascript:updateTeamKgi(<?= $kgiTeamId ?>)"
+                                            class="pim-btn-complete" data-bs-toggle="modal"
+                                            data-bs-target="#update-kgi-modal-team">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
+                                                class="mb-2" style="width: 12px; height: 12px;"> Edit
+                                        </div>
+                                        <?php
+                                            }else if ($canEdit == 1){
+                                        ?>
+                                        <div onclick=" javascript:updateTeamKgi(<?= $kgiTeamId ?>)"
+                                            class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
+                                            data-bs-target="#update-kgi-modal-team">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
+                                                class="mb-2" style="width: 12px; height: 12px;"> Update
+                                        </div>
+                                        <?php
+                                            }
+                                        ?>
+
+                                        <!-- <?php
                                                 //if ($canEdit == 1 && $kgi["status"] != 2) {
                                                 if ($canEdit == 1) {
                                                 ?>
@@ -438,7 +462,7 @@ $this->title = "TEAM KGI";
                                         </div>
                                         <?php
                                                 }
-                                                ?>
+                                                ?> -->
                                     </div>
                                     <div class="col-4 pl-0 pr-5 mt-10">
                                         <div class="col-12 text-end font-<?= $colorFormat ?>">Next Update Date</div>

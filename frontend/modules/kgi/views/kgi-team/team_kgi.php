@@ -251,7 +251,8 @@ $this->title = "TEAM KGI";
                                 </td>
 
                                 <td>
-                                    <a href="" class="btn btn-bg-white-xs mr-5" style="margin-top: -1px;">
+                                    <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], "kgiTeamId" => $kgiTeamId]) ?>"
+                                        class="btn btn-bg-white-xs mr-5" style="margin-top: -1px;">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.png"
                                             alt="History" class="pim-icon" style="margin-top: -1px;">
                                     </a>
