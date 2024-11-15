@@ -78,17 +78,18 @@ $this->title = 'Company KFI History';
                                 </a> -->
 
                                 <a href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(["kfiId" => $kfiId, 'openTab' => 1]) ?>"
-                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs' ?>"
+                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?>"
+                                    style="margin-top: -3px;"
                                     <?= $colorFormat == 'disable' ? 'style="pointer-events: none; opacity: 0.5;"' : '' ?>>
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
-                                        class="pim-icon" style="margin-top: -1px;">
+                                    <img src=" <?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
+                                        class="pim-icon" style="margin-top: -3px;">
                                 </a>
 
                                 <a href="<?= $colorFormat !== 'disable' ? Yii::$app->homeUrl . 'kfi/view/kfi-history/' . ModelMaster::encodeParams(['kfiId' => $kfiId , 'openTab' => 2]) : '#' ?>"
                                     class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?>"
                                     style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png" alt="History"
-                                        class="pim-icon">
+                                        class="pim-icon" style="margin-top: -3px;">
                                 </a>
 
                                 <!-- <a class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?>"

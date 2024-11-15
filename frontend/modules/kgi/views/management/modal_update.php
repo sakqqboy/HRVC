@@ -230,7 +230,7 @@
                                 <label for="exampleFormControl" class="form-label font-size-13"><strong
                                         class="red">*</strong> Target Amount</label>
                                 <input type="text" class="form-control font-size-13 text-end" id="targetAmount-update"
-                                    name="targetAmount" <?= $isManager == 0 ? 'disabled' : '' ?> targetAmount>
+                                    name="targetAmount" <?= $isManager == 0 ? 'disabled' : '' ?> required>
                             </div>
                             <div class="col-12 mt-10">
                                 <label for="exampleFormControl" class="form-label font-size-13"><strong
