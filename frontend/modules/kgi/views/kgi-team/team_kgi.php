@@ -251,7 +251,7 @@ $this->title = "TEAM KGI";
                                 </td>
 
                                 <td>
-                                    <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], "kgiTeamId" => $kgiTeamId]) ?>"
+                                    <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-team-history/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId,'kgiId' => $kgi['kgiId'], 'openTab' => 2]) ?>"
                                         class="btn btn-bg-white-xs mr-5" style="margin-top: -1px;">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.png"
                                             alt="History" class="pim-icon" style="margin-top: -1px;">
@@ -278,7 +278,7 @@ $this->title = "TEAM KGI";
                                         <?php
 												}
 										?>
-                                        <li class="pl-4 pr-4" data-bs-toggle="modal">
+                                        <!-- <li class="pl-4 pr-4" data-bs-toggle="modal">
                                             <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                 href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-team-history/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId,'kgiId' => $kgi['kgiId'], 'openTab' => 2]) ?>"
                                                 class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
@@ -303,7 +303,7 @@ $this->title = "TEAM KGI";
                                                     alt="Chart" class="pim-icon mr-10" style="margin-top: -2px;">
                                                 Chart
                                             </a>
-                                        </li>
+                                        </li> -->
                                         <?php
 											if ($role >= 5) {
 										?>

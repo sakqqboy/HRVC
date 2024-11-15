@@ -136,7 +136,8 @@ class ViewController extends Controller
 		return $this->render('kgi_employee_history', [
 			"role" => $role,
 			"kgiDetail" => $kgiDetail,
-			"kgiEmployeeHistory" => $kgiEmployeeHistory
+			"kgiEmployeeHistory" => $kgiEmployeeHistory,
+			"kgiEmployeeId" =>$kgiEmployeeId 
 		]);
 	}
 	public function actionKgiHistory($hash)
