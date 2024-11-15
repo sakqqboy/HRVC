@@ -294,8 +294,10 @@ $this->title = "Individual KGI";
                                         <?php
 											if ($role >= 5) {
 										?>
-                                        <li class="pl-4 pr-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop4"
-                                            onclick="javascript:prepareDeleteKfi(<?= $kgi['isOver'] ?>)" title="Delete">
+                                        <li class="pl-4 pr-4" data-bs-toggle="modal"
+                                            data-bs-target="#delete-kgi-employee"
+                                            onclick="javascript:prepareDeleteKgiEmployee(<?= $kgiEmployeeId ?>)"
+                                            title="Delete">
                                             <a class="dropdown-itemNEW pl-4 pr-25" href="#">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/delete.svg"
                                                     alt="Delete" class="pim-icon mr-10" style="margin-top: -2px;">
