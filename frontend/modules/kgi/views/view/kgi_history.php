@@ -29,9 +29,13 @@ $this->title = 'KGI View';
                 </div>
                 <div class="col-1">
                     <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kgi"
-                        onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)">Delete
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/bin.png" alt="History" class="pim-icon"
-                            style="margin-top: -2px;">
+                        onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)"
+                        onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
+                        onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
+                            class="pim-icon" style="margin-top: -3px; width: 12px; height: 14px;">
+                        Delete
+
                     </a>
                 </div>
             </div>
