@@ -238,7 +238,7 @@ $this->title = "Individual KGI";
                                     <?= $kgi["status"] == 1 ? $kgi["nextCheck"] : '' ?>
                                 </td>
                                 <td style="width: 53px; height: 50px;">
-                                    <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/update-personal-kgi/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId]) ?>"
+                                    <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-individual-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], "kgiEmployeeId" => $kgiEmployeeId]) ?>"
                                         class="btn btn-bg-white-xs" style="margin-top: -1px;">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.png"
                                             alt="History" class="pim-icon" style="margin-top: -1px;">
@@ -265,7 +265,7 @@ $this->title = "Individual KGI";
                                         <?php
 												}
 										?>
-                                        <li class="pl-4 pr-4" data-bs-toggle="modal">
+                                        <!-- <li class="pl-4 pr-4" data-bs-toggle="modal">
                                             <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                 href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/view-personal-kgi/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId]) ?>"
                                                 class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
@@ -290,7 +290,7 @@ $this->title = "Individual KGI";
                                                     alt="Chart" class="pim-icon mr-10" style="margin-top: -2px;">
                                                 Chart
                                             </a>
-                                        </li>
+                                        </li> -->
                                         <?php
 											if ($role >= 5) {
 										?>

@@ -138,8 +138,8 @@ $this->title = 'Team KGI History';
                                     <div class="col-lg-6">
                                         <div class="col-12 text-center">Quant Ratio</div>
                                         <div class="col-12 font-size-9 text-center mt-1">
-                                            <i class="fa fa-diamond mr-2"
-                                                aria-hidden="true"></i><b><?= $kgi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?></b>
+                                            <i class="fa fa-diamond mr-2" aria-hidden="true"></i>
+                                            <b><?= $kgi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?></b>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 border-left">
@@ -155,9 +155,8 @@ $this->title = 'Team KGI History';
                                 <div class="row">
                                     <div class="col-5 text-start pl-20">
                                         <div class="col-12 font-size-10">
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Achievement.png"
-                                                alt="History" class="home-icon"
-                                                style="margin-top: -3px;margin-left:-5px;">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Target.svg"
+                                                class="pim-iconKFI" style="margin-top: 1px; margin-right: 3px;">
                                             Target
                                         </div>
                                         <div class="col-12 number-pim">
@@ -185,9 +184,8 @@ $this->title = 'Team KGI History';
                                     </div>
                                     <div class="col-5 text-end pr-20">
                                         <div class="col-12 font-size-10">Result
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Achievement.png"
-                                                alt="History" class="home-icon"
-                                                style="margin-top: -3px;margin-left:2px;">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Result.svg"
+                                                class="pim-iconKFI" style="margin-top: 1px; margin-left: 3px;">
                                         </div>
                                         <div class="col-12 number-pim">
                                             <?php
