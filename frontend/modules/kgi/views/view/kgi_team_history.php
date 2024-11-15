@@ -59,6 +59,11 @@ $this->title = 'Team KGI History';
                         <div class="row">
                             <div class="col-5 pim-name"><?= $kgi["month"] ?> <?= $kgi["year"] ?></div>
                             <div class="col-7 text-end">
+                                <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], "kgiTeamId" => $kgiTeamId]) ?>"
+                                    class="btn btn-bg-white-xs">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Charts.png" alt="History"
+                                        class="home-icon" style="margin-top: -3px;">
+                                </a>
                                 <?php
 											if ($i == 0 && $kgi["status"] == 2) {
 											?>
@@ -80,9 +85,7 @@ $this->title = 'Team KGI History';
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Charts.png" alt="History"
                                         class="home-icon" style="margin-top: -3px;">
                                 </a>
-                                <a href="" class="btn btn-bg-white-xs">
-                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                </a>
+
                             </div>
                             <div class="col-9 mt-10 pl-28">
                                 <div class="row">
