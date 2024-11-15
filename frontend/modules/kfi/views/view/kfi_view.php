@@ -91,13 +91,21 @@ $this->title = 'Company KFI History';
                                         class="pim-icon">
                                 </a>
 
-                                <a class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?>"
+                                <!-- <a class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?>"
                                     data-bs-toggle="modal" data-bs-target="#staticBackdrop3"
                                     onclick="<?= $colorFormat === 'disable' ? 'return false;' : 'javascript:kfiHistory(' . $kfiId . ')' ?>"
                                     style="<?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Charts.png" alt="History"
                                         class="home-icon" style="margin-top: -3px;">
+                                </a> -->
+
+                                <a href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, 'openTab' => 4]) ?>"
+                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?>"
+                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Charts.png" alt="History"
+                                        class="home-icon" style="margin-top: -3px;">
                                 </a>
+
 
 
 
