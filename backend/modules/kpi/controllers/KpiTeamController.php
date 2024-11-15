@@ -334,7 +334,7 @@ class KpiTeamController extends Controller
 				"teamName" => Team::teamName($kpiTeamHistory["teamId"]),
 				"quantRatio" => $kpiTeamHistory["quantRatio"] == 1 ? 'Quantity' : 'Quality',
 				"amountType" => $kpiTeamHistory["amountType"] == 1 ? '%' : 'Number',
-				"target" => $kpiTeamHistory["target"] != null ? $kpiTeamHistory["target"] : 'not set',
+				"target" => $kpiTeamHistory["target"] != null ? $kpiTeamHistory["target"] : null,
 				"result" => $kpiTeamHistory["result"],
 				"codeText" => $kpiTeamHistory["code"] . ' &nbsp;(' . Kgi::codeDetail($kpiTeamHistory["code"]) . ')',
 				"code" => $kpiTeamHistory["code"],
@@ -659,31 +659,30 @@ class KpiTeamController extends Controller
 	// 	$res["totalRqeuest"] = count($kpiTeam);
 	// 	return json_encode($res);
 	// }
-	
-public function actionWaitForApprove($branchId, $isAdmin)
-{
-	if ($isAdmin == 1) {
-		$kpiTeam = KpiTeamHistory::find()
-			->where(["status" => 88])
-			->asArray()
-			->all();
-	} else {
-		$kpiTeam = KpiTeamHistory::find()
-			->select('k.kpiName,k.kpiId,MAX(kpi_team_history.kpiTeamHistoryId)')
-			->JOIN("LEFT JOIN", "kpi_team kg", "kg.kpiTeamId=kpi_team_history.kpiTeamId")
-			->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kg.kpiId")
-			->JOIN("LEFT JOIN", "kpi_branch kb", "kb.kpiId=k.kpiId")
-			->where(["kpi_team_history.status" => 88, "kb.branchId" => $branchId])
-			//->orderBy('kpi_team_history.kpiTeamHistoryId DESC')
-			->groupBy('k.kpiId')
 
-			->asArray()
-			->all();
+	public function actionWaitForApprove($branchId, $isAdmin)
+	{
+		if ($isAdmin == 1) {
+			$kpiTeam = KpiTeamHistory::find()
+				->where(["status" => 88])
+				->asArray()
+				->all();
+		} else {
+			$kpiTeam = KpiTeamHistory::find()
+				->select('k.kpiName,k.kpiId,MAX(kpi_team_history.kpiTeamHistoryId)')
+				->JOIN("LEFT JOIN", "kpi_team kg", "kg.kpiTeamId=kpi_team_history.kpiTeamId")
+				->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kg.kpiId")
+				->JOIN("LEFT JOIN", "kpi_branch kb", "kb.kpiId=k.kpiId")
+				->where(["kpi_team_history.status" => 88, "kb.branchId" => $branchId])
+				//->orderBy('kpi_team_history.kpiTeamHistoryId DESC')
+				->groupBy('k.kpiId')
+
+				->asArray()
+				->all();
+		}
+		//	throw new exception(print_r($kpiTeam, true));
+		$res["totalRequest"] = count($kpiTeam);
+
+		return json_encode($res);
 	}
-	//	throw new exception(print_r($kpiTeam, true));
-	$res["totalRequest"] = count($kpiTeam);
-
-	return json_encode($res);
-}
-
 }

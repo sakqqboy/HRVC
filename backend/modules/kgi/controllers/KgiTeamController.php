@@ -324,7 +324,7 @@ class KgiTeamController extends Controller
 				"teamName" => Team::teamName($kgiTeamHistory["teamId"]),
 				"quantRatio" => $kgiTeamHistory["quantRatio"] == 1 ? 'Quantity' : 'Quality',
 				"amountType" => $kgiTeamHistory["amountType"] == 1 ? '%' : 'Number',
-				"target" => $kgiTeamHistory["target"] != null ? $kgiTeamHistory["target"] : 'not set',
+				"target" => $kgiTeamHistory["target"] != null ? $kgiTeamHistory["target"] : null,
 				"result" => $kgiTeamHistory["result"],
 				"codeText" => $kgiTeamHistory["code"] . ' &nbsp;(' . Kgi::codeDetail($kgiTeamHistory["code"]) . ')',
 				"code" => $kgiTeamHistory["code"],
