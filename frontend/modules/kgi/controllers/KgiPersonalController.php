@@ -15,6 +15,7 @@ use frontend\models\hrvc\Team;
 use frontend\models\hrvc\Unit;
 use frontend\models\hrvc\User;
 use frontend\models\hrvc\UserRole;
+use SebastianBergmann\Type\NullType;
 use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
@@ -280,6 +281,7 @@ class KgiPersonalController extends Controller
 		curl_close($api);
 
 		$months = ModelMaster::monthFull(1);
+		//   throw new Exception(print_r($kgiEmployeeDetail,true));
 		return $this->render('update_personal_kgi', [
 			"kgiEmployeeId" => $kgiEmployeeId,
 			"kgiEmployeeDetail" => $kgiEmployeeDetail,
@@ -295,8 +297,14 @@ class KgiPersonalController extends Controller
 				->one();
 			$status = $_POST["status"];
 			if (isset($history) && !empty($history)) {
-				$nextCheckDateArr = explode(' ', $history["nextCheckDate"]);
-				$nextCheckDate = $nextCheckDateArr[0];
+				//   throw new Exception(print_r($history,true));
+				if (!empty($history["nextCheckDate"])){
+					$nextCheckDateArr = explode(' ', $history["nextCheckDate"]);
+					$nextCheckDate = $nextCheckDateArr[0];
+				}else{
+					$nextCheckDate = Null;
+				}
+				
 				$lastCheck = $history->nextCheckDate;
 				if ($history->target == str_replace(",", "", $_POST["target"]) && $history->result == str_replace(",", "", $_POST["result"]) && $nextCheckDate == $_POST["nextCheckDate"]) {
 					$history->status = $_POST["status"];
@@ -314,9 +322,10 @@ class KgiPersonalController extends Controller
 					if (!isset($history) || empty($history)) {
 						$history = new KgiEmployeeHistory();
 					}
+					  
 					$history->kgiEmployeeId = $_POST["kgiEmployeeId"];
-					$history->target = str_replace(",", "", $_POST["target"]);
-					$history->result = str_replace(",", "", $_POST["result"]);
+					$history->target = (float)str_replace(",", "", $_POST["target"]);
+					$history->result = (float)str_replace(",", "", $_POST["result"]);
 					$history->detail = $_POST["detail"];
 					$history->nextCheckDate = $_POST["nextCheckDate"] . ' 00:00:00';
 					$history->lastCheckDate = $lastCheck;
@@ -329,8 +338,8 @@ class KgiPersonalController extends Controller
 			} else {
 				$history = new KgiEmployeeHistory();
 				$history->kgiEmployeeId = $_POST["kgiEmployeeId"];
-				$history->target = str_replace(",", "", $_POST["target"]);
-				$history->result = str_replace(",", "", $_POST["result"]);
+				$history->target = (float)str_replace(",", "", $_POST["target"]);
+				$history->result = (float)str_replace(",", "", $_POST["result"]);
 				$history->detail = $_POST["detail"];
 				$history->nextCheckDate = $_POST["nextCheckDate"] . ' 00:00:00';
 				$history->month = $_POST["month"];
@@ -343,8 +352,8 @@ class KgiPersonalController extends Controller
 				->where(["kgiEmployeeId" => $_POST["kgiEmployeeId"]])
 				->one();
 			if ($status != 88) {
-				$kgiEmployee->target = $_POST["target"];
-				$kgiEmployee->result = $_POST["result"];
+				$kgiEmployee->target = (float)str_replace(",", "", $_POST["target"]);
+				$kgiEmployee->result =(float)str_replace(",", "", $_POST["result"]);
 			} else {
 				$kgiEmployee->status = 1;
 			}
@@ -367,6 +376,7 @@ class KgiPersonalController extends Controller
 	public function actionViewPersonalKgi($hash)
 	{
 		$param = ModelMaster::decodeParams($hash);
+		//   throw new Exception(print_r($param,true));
 		$kgiEmployeeId = $param["kgiEmployeeId"];
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);

@@ -246,7 +246,7 @@ class KgiPersonalController extends Controller
 				"ratio" => $ratio,
 				"unitText" => Unit::unitName($kgiDetail["unitId"]),
 				"target" => $kgiEmployee["target"],
-				"result" => $kgiEmployee["result"],
+				"result" => !empty($kgiEmployee["result"]) ? $kgiEmployee["result"] : 0,
 				"detail" => isset($kgiEmployee["detail"]) ? $kgiEmployee["detail"] : null,
 				"nextCheckDate" => isset($kgiEmployee["nextCheckDate"]) ? $kgiEmployee["nextCheckDate"] : null,
 				"lastCheckDate" => isset($kgiEmployee["lastCheckDate"]) ? $kgiEmployee["lastCheckDate"] : null,
