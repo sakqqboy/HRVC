@@ -241,7 +241,7 @@ $this->title = "KGI";
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.png"
                                             class="icon-table on-cursor">
                                     </span> -->
-                                    <a href="<?= Yii::$app->homeUrl ?>kgi/view/index/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>"
+                                    <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>"
                                         class="btn btn-bg-white-xs mr-5" style="margin-top: -1px;">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.png"
                                             alt="History" class="pim-icon" style="margin-top: -1px;">
@@ -281,7 +281,7 @@ $this->title = "KGI";
                                         </li>
                                         <li class="pl-4 pr-4" data-bs-toggle="modal">
                                             <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
-                                                href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 2]) ?>"
+                                                href="<?= Yii::$app->homeUrl ?>kgi/view/index/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 2]) ?>"
                                                 class="btn btn-bg-white-xs mr-4" style="margin-top: -3px;">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg"
                                                     alt="History" alt="Chart" class="pim-icon mr-10"
@@ -349,7 +349,7 @@ $this->title = "KGI";
                                             <a class="dropdown-item"><i class="fa fa-trash-o text-danger"
                                                     aria-hidden="true"></i></a>
                                         </li> -->
-                                        <li class="pl-4 pr-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop4"
+                                        <li class="pl-4 pr-4" data-bs-toggle="modal" data-bs-target="#delete-kgi"
                                             onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)" title="Delete">
                                             <a class="dropdown-itemNEW pl-4 pr-25" href="#">
                                                 <!-- <i class="fa fa-trash-o" aria-hidden="true"></i> -->

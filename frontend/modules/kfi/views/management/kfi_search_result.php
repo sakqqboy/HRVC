@@ -212,7 +212,7 @@ $this->title = 'KFI';
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.png"
                                             class="icon-table on-cursor">
                                     </span> -->
-                                    <a href="<?= Yii::$app->homeUrl ?>kfi/view/index/<?= ModelMaster::encodeParams(['kfiId' => $kfiId]) ?>"
+                                    <a href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(['kfiId' => $kfiId]) ?>"
                                         class="btn btn-bg-white-xs mr-5" style="margin-top: -1px;">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.png"
                                             alt="History" class="pim-icon" style="margin-top: -1px;">
