@@ -169,30 +169,36 @@ $this->title = "TEAM KPI";
                                 </span>
                                 <img src="<?= Yii::$app->homeUrl . 'images/icons/Settings/team-name.svg' ?>"
                                     class="pim-pic-grid mr-5" style="margin-top: -1px;font-size:12px;">
-                                <a class="btn btn-bg-white-xs mr-5"
-                                    href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-team-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId'], "kpiTeamId" => $kpiTeamId]) ?>"
-                                    style="margin-top: -3px;">
+                                <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-team-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId'], "kpiTeamId" => $kpiTeamId]) ?>"
+                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
                                         class="pim-icon" style="margin-top: -1px;">
                                 </a>
-                                <a class="btn btn-bg-white-xs mr-5" data-bs-toggle="modal" data-bs-target="#kpi-issue"
-                                    onclick="javascript:showKpiComment(<?= $kpi['kpiId'] ?>)" style="margin-top: -3px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png" alt="History"
-                                        class="pim-icon">
+                                <a data-bs-toggle="modal" data-bs-target="#kpi-issue"
+                                    onclick="javascript:showKpiComment(<?= $kpi['kpiId'] ?>)"
+                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png" alt="Chats"
+                                        class="pim-icon"> Chats
                                 </a>
-                                <a class="btn btn-bg-white-xs mr-5" data-bs-toggle="modal"
+                                <!-- <a class="btn btn-bg-white-xs mr-5" data-bs-toggle="modal"
                                     data-bs-target="#staticBackdrop3" onclick="javascript:kpiHistory(<?= $kpiTeamId ?>)"
                                     style="margin-top: -3px;">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="History"
                                         class="pim-icon mr-3" style="margin-top: -2px;">Chart
-                                </a>
+                                </a> -->
                                 <?php
                                         if ($role >= 5) {
                                         ?>
                                 <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kpi-team"
                                     onclick="javascript:prepareDeleteKpiTeam(<?= $kpiTeamId ?>)"
-                                    style="margin-top: -3px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/bin.png" alt="History"
+                                    style="margin-top: -3px;"
+                                    onmouseover="
+                                    this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
+                                    onmouseout="
+                                    this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
+                                    <img src=" <?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
                                         class="pim-icon" style="margin-top: -2px;">
                                 </a>
                                 <?php
@@ -327,15 +333,22 @@ $this->title = "TEAM KPI";
                                     <i class="fa fa-diamond" aria-hidden="true"></i>
                                     <?= $kpi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?>
                                 </div>
-                                <div class="col-12 pr-0 pt-10 pl-0">update Interval</div>
+                                <div class="col-12 pr-0 pt-10 pl-0">
+                                    update Interval</div>
                                 <div class="col-12  pim-normal-text">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/monthly.svg"
+                                        class="pim-iconKFI" style="margin-top: -1px; margin-left: 3px;">
                                     <?= $kpi["unit"] ?>
                                 </div>
                             </div>
                             <div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?>  pr-15 pl-15 mt-5">
                                 <div class="row">
                                     <div class="col-5 text-start">
-                                        <div class="col-12">Target</div>
+                                        <div class="col-12">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Target.svg"
+                                                class="pim-iconKFI" style="margin-top: 1px; margin-right: 3px;">
+                                            Target
+                                        </div>
                                         <div class="col-12 mt-3 number-pim">
                                             <?php
                                                     if ($kpi["target"] != '') {
@@ -360,7 +373,11 @@ $this->title = "TEAM KPI";
                                         <div class="col-12 pt-17"><?= $kpi["code"] ?></div>
                                     </div>
                                     <div class="col-5  text-end">
-                                        <div class="col-12">Result</div>
+                                        <div class="col-12">
+                                            Result
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Result.svg"
+                                                class="pim-iconKFI" style="margin-top: 1px; margin-left: 3px;">
+                                        </div>
                                         <div class="col-12 mt-3 number-pim">
                                             <?php
                                                     if ($kpi["result"] != '') {
@@ -404,13 +421,42 @@ $this->title = "TEAM KPI";
                                         </div>
                                     </div>
                                     <div class="col-4 pl-5 pr-5 mt-10">
-                                        <div class="col-12 text-start">Last Updated on</div>
-                                        <div class="col-12 text-start pim-duedate">
+                                        <div class="col-12 text-end">Last Updated on</div>
+                                        <div class="col-12 text-end pim-duedate">
                                             <?= $kpi['nextCheckDate'] == "" ? 'Not set' : $kpi['nextCheckDate'] ?></div>
                                     </div>
                                     <div class="col-4 text-center mt-10 pt-6">
+
                                         <?php
-                                                //if ($canEdit == 1 && $kpi["status"] != 2) {
+                                        if ($colorFormat == 'disable') {
+                                        ?>
+                                        <div data-bs-toggle="modal" data-bs-target="#update-kpi-modal-team"
+                                            onclick="javascript:updateTeamKpi(<?= $kpiTeamId ?>)" class="pim-btn-setup">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
+                                                class="mb-2" style="width: 12px; height: 12px;"> Setup
+                                        </div>
+                                        <?php
+                                            }else if ($colorFormat == 'complete') {
+                                        ?>
+                                        <div data-bs-toggle="modal" data-bs-target="#update-kpi-modal-team"
+                                            onclick="javascript:updateTeamKpi(<?= $kpiTeamId ?>)"
+                                            class="pim-btn-<?= $colorFormat ?>">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
+                                                class="mb-2" style="width: 12px; height: 12px;"> Edit
+                                        </div>
+                                        <?php
+                                            }else if ($role >= 3){
+                                        ?>
+                                        <div data-bs-toggle="modal" data-bs-target="#update-kpi-modal-team"
+                                            onclick="javascript:updateTeamKpi(<?= $kpiTeamId ?>)"
+                                            class="pim-btn-<?= $colorFormat ?>">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
+                                                class="mb-2" style="width: 12px; height: 12px;"> Update
+                                        </div>
+                                        <?php
+                                            }
+                                        ?>
+                                        <!-- <?php
                                                 if ($canEdit == 1) {
                                                 ?>
                                         <div data-bs-toggle="modal" data-bs-target="#update-kpi-modal-team"
@@ -420,11 +466,11 @@ $this->title = "TEAM KPI";
                                         </div>
                                         <?php
                                                 }
-                                                ?>
+                                                ?> -->
                                     </div>
                                     <div class="col-4 pl-0 pr-5 mt-10">
-                                        <div class="col-12 text-end font-<?= $colorFormat ?>">Next Update Date</div>
-                                        <div class="col-12 text-end pim-duedate">
+                                        <div class="col-12 text-start font-<?= $colorFormat ?>">Next Update Date</div>
+                                        <div class="col-12 text-start pim-duedate">
                                             <?= $kpi['nextCheckDate'] == "" ? 'Not set' : $kpi['nextCheckDate'] ?></div>
                                     </div>
                                 </div>
