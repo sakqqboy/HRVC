@@ -46,7 +46,8 @@ $this->title = 'KPI';
                             <button type="button" class="btn-createnew font-size-11" data-bs-toggle="modal"
                                 data-bs-target="#create-kpi-modal" style="position:absolute;">
                                 Create New
-                                <i class="fa fa-magic ml-2" aria-hidden="true"></i>
+                                <img src=" <?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="History"
+                                    class="pim-icon ml-3" style="margin-top: -1px;">
                             </button>
                             <?php
                             }

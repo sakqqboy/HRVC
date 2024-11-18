@@ -86,7 +86,7 @@ class AssignController extends Controller
 		$kpiDetail = curl_exec($api);
 		$kpiDetail = json_decode($kpiDetail, true);
 		$text = '';
-
+		// throw new Exception('Unexpected API Response: ' . $kpiId);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-employee?kpiId=' . $kpiId);
 		$kpiTeamEmployee = curl_exec($api);
 		$kpiTeamEmployee = json_decode($kpiTeamEmployee, true);

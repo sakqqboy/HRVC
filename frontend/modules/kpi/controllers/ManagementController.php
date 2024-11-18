@@ -192,9 +192,9 @@ class ManagementController extends Controller
             $kpi->unitId = $_POST["unit"];
             // $kpi->periodDate = $_POST["periodDate"];
             $kpi->fromDate = $_POST["fromDate"];
-            $kpi->targetAmount = $_POST["targetAmount"];
+            $kpi->targetAmount = str_replace(",", "", $_POST["targetAmount"]);
             $kpi->toDate = $_POST["toDate"];
-            $kpi->targetAmount = $_POST["targetAmount"];
+            $kpi->targetAmount = str_replace(",", "", $_POST["targetAmount"]);
             $kpi->kpiDetail = $_POST["detail"];
             $kpi->quantRatio = $_POST["quantRatio"];
             $kpi->priority = $_POST["priority"];
@@ -214,7 +214,7 @@ class ManagementController extends Controller
                 $kpiHistory->unitId = $_POST["unit"];
                 // $kpiHistory->periodDate = $_POST["periodDate"];
                 $kpiHistory->nextCheckDate = $_POST["nextDate"];
-                $kpiHistory->targetAmount = $_POST["targetAmount"];
+                $kpiHistory->targetAmount = str_replace(",", "", $_POST["targetAmount"]);
                 $kpiHistory->description = $_POST["detail"];
                 $kpiHistory->quantRatio = $_POST["quantRatio"];
                 $kpiHistory->priority = $_POST["priority"];
@@ -1833,7 +1833,7 @@ class ManagementController extends Controller
         $kpiHistory->code = $currentHistory["code"];
         $kpiHistory->status = 1;
         $kpiHistory->quantRatio = $currentHistory["quantRatio"];
-        $kpiHistory->targetAmount = $currentHistory["targetAmount"];
+        $kpiHistory->targetAmount =  $currentHistory["targetAmount"];
         $kpiHistory->result = 0;
         $kpiHistory->priority = $currentHistory["priority"];
         $kpiHistory->unitId =  $currentHistory["unitId"];
