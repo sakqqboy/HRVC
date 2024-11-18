@@ -331,6 +331,8 @@ $this->title = 'KGI Grid View';
                                 </div>
                                 <div class="col-12 pr-0 pt-10 pl-0">update Interval</div>
                                 <div class="col-12  pim-duedate">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/monthly.svg"
+                                        class="pim-iconKFI" style="margin-top: -1px; margin-left: 3px;">
                                     <?= $kgi["unit"] ?>
                                 </div>
                             </div>

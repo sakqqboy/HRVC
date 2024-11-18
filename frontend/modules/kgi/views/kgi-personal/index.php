@@ -254,9 +254,9 @@ $this->title = "Individual KGI";
 											if ($role >= 5) {
 										?>
                                         <li class="pl-4 pr-4" data-bs-toggle="modal"
-                                            data-bs-target="#update-kgi-modal-team"
-                                            onclick="javascript:updateTeamKgi(<?= $kgiEmployeeId ?>)">
-                                            <a class="dropdown-itemNEWS pl-4 pr-20 mb-5" href="#">
+                                            data-bs-target="#update-kgi-modal-team">
+                                            <a class="dropdown-itemNEWS pl-4 pr-20 mb-5"
+                                                href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/update-personal-kgi/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId]) ?>">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
                                                     alt="edit" class="pim-icon mr-10" style="margin-top: -2px;">
                                                 Edit
@@ -265,6 +265,14 @@ $this->title = "Individual KGI";
                                         <?php
 												}
 										?>
+                                        <li class="pl-4 pr-4" data-bs-toggle="modal" data-bs-target="#kgi-issue"
+                                            onclick="javascript:showKgiComment(<?= $kgi['kgiId'] ?>)">
+                                            <a class="dropdown-itemNEWS pl-4 pr-20 mb-5" href="#">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png"
+                                                    alt="Chats" class="pim-icon mr-10" style="margin-top: -2px;">
+                                                Chats
+                                            </a>
+                                        </li>
                                         <!-- <li class="pl-4 pr-4" data-bs-toggle="modal">
                                             <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                 href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/view-personal-kgi/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId]) ?>"
@@ -296,8 +304,8 @@ $this->title = "Individual KGI";
 										?>
                                         <li class="pl-4 pr-4" data-bs-toggle="modal"
                                             data-bs-target="#delete-kgi-employee"
-                                            onclick="javascript:prepareDeleteKgiEmployee(<?= $kgiEmployeeId ?>)"
-                                            title="Delete">
+                                            onclick="javascript:prepareDeleteKgiEmployee(<?= $kgiEmployeeId ?>)" title="
+                                            Delete">
                                             <a class="dropdown-itemNEW pl-4 pr-25" href="#">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/delete.svg"
                                                     alt="Delete" class="pim-icon mr-10" style="margin-top: -2px;">

@@ -106,7 +106,7 @@ $this->title = 'Company KGI History';
                                 <?php
 									if ($i == 0 && $kgi["status"] == 2 && $role >= 5) {
 								?>
-                                <a class="btn btn-bg-white-xs pr-2 pl-3 mr-5"
+                                <a class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;"
                                     onclick="javascript:prepareKgiNextTarget(<?= $kgi['kgiHistoryId'] ?>)">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/coppy.svg" alt="History"
                                         style="margin-top: -3px; width: 12px; height: 14px;" class="home-icon">
@@ -184,19 +184,36 @@ $this->title = 'Company KGI History';
                                             </div>
                                         </div>
                                         <div class="col-7 pl-5 pt-3">
-                                            Assigned Person
+
+                                            <?php
+												if ($role > 3) {
+											?>
+                                            <a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgi["companyId"], "save" => 0]) ?>"
+                                                class="font-<?= $colorFormat ?>">
+                                                Assigned Person
+                                            </a>
+                                            <?php
+															} else {
+															?>
+                                            <span class="font-<?= $colorFormat ?>">
+                                                Assigned Person
+                                            </span>
+                                            <?php
+												}
+											?>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12 <?= $colorFormat ?>-assign pt-5 pb-2 mt-10">
-                                    <div class="row">
+                                    <!-- <div class="row">
                                         <div class="col-5 border-right-<?= $colorFormat ?> pr-2">
                                             <div class="row">
-                                                <div class="col-2">
-                                                </div>
-                                                <div class="col-2 pic-after pt-5">
+                                                <div class="col-2 pt-3">
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-<?= $colorFormat ?>.png"
                                                         class="first-layer-icon" style="margin-top: -4px;">
+                                                </div>
+                                                <div class="col-2 pic-after pt-5">
+
                                                 </div>
                                                 <div class="col-2 pic-after pt-0">
 
@@ -208,7 +225,58 @@ $this->title = 'Company KGI History';
                                             </div>
                                         </div>
                                         <div class="col-7 pl-5  pt-3 font-<?= $colorFormat ?>">
-                                            Assigned Team
+                                            <?php
+												if ($role > 3) {
+											?>
+                                            <a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgi["companyId"]]) ?>"
+                                                class="font-<?= $colorFormat ?>">
+                                                Assign Team
+                                            </a>
+                                            <?php
+															} else { ?>
+                                            <span class="font-<?= $colorFormat ?>">
+                                                Assign Team
+                                            </span>
+                                            <?php
+													}
+											?>
+                                        </div>
+                                    </div> -->
+                                    <div class="row">
+                                        <div class="col-5 border-right-<?= $colorFormat ?> pl-10">
+                                            <div class="row">
+                                                <div class="col-2 pt-3">
+                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-<?= $colorFormat ?>.png"
+                                                        class="first-layer-icon" style="margin-top: -4px;">
+                                                </div>
+                                                <div class="col-2 pic-after pt-0">
+
+                                                </div>
+                                                <div class="col-2 pic-after pt-0">
+
+                                                </div>
+                                                <div class="col-6 number-tag load-<?= $colorFormat ?> pr-0 pl-0 pt-3"
+                                                    style="margin-left: -3px;height:22px;width: 30px;margin-top: 1px;">
+                                                    <?= $kgi["countTeam"] ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-7 pl-5 pt-3">
+                                            <?php
+												if ($role > 3) {
+											?>
+                                            <a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgi["companyId"]]) ?>"
+                                                class="font-<?= $colorFormat ?>">
+                                                Assign Team
+                                            </a>
+                                            <?php
+															} else { ?>
+                                            <span class="font-<?= $colorFormat ?>">
+                                                Assign Team
+                                            </span>
+                                            <?php
+													}
+											?>
                                         </div>
                                     </div>
                                 </div>

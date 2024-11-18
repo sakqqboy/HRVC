@@ -200,7 +200,7 @@ class ManagementController extends Controller
 				"flag" => Country::countryFlagBycompany($kpi["companyId"]),
 				"quantRatioText" => $kpiHistory["quantRatio"] == 1 ? "Quantity" : "Quality",
 				"targetAmountText" => number_format($kpiHistory["targetAmount"], 2),
-				"resultText" =>  number_format($kpiHistory["result"], 2),
+				"resultText" => $kpiHistory["result"] != '' ? number_format($kpiHistory["result"], 2) : $kpiHistory["result"],
 				"ratio" => number_format($ratio, 2),
 				"unitText" => Unit::unitName($kpiHistory["unitId"]),
 				"fromDate" => $kpiHistory["fromDate"],
