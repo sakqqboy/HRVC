@@ -287,6 +287,8 @@ class KpiTeamController extends Controller
 	public function actionKpiTeamSearchResult($hash)
 	{
 		$param = ModelMaster::decodeParams($hash);
+		$isAdmin = UserRole::isAdmin();
+		$userBranchId = User::userBranchId();
 		$companyId = $param["companyId"];
 		$branchId = $param["branchId"];
 		$teamId = $param["teamId"];
@@ -323,13 +325,13 @@ class KpiTeamController extends Controller
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/wait-for-approve');
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/wait-for-approve?branchId='  . $userBranchId . '&&isAdmin=' . $isAdmin);
 		$waitForApprove = curl_exec($api);
 		$waitForApprove = json_decode($waitForApprove, true);
 
 		curl_close($api);
 
-		// throw new exception(print_r($teamkpis, true));
+		// throw new exception(print_r($waitForApprove, true));
 
 		if ($type == "list") {
 			$file = "team_kpi";
