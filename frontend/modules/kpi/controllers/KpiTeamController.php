@@ -538,6 +538,14 @@ class KpiTeamController extends Controller
 		$res["textTeam"] = $textTeam;
 		return json_encode($res);
 	}
+	public function actionDeleteKpiTeam()
+	{
+		$kpiTeamId = $_POST["kpiTeamId"];
+		KpiTeam::updateAll(["status" => 99], ["kpiTeamId" => $kpiTeamId]);
+		KpiTeamHistory::updateAll(["status" => 99], ["kpiTeamId" => $kpiTeamId]);
+		$res["status"] = true;
+		return json_encode($res);
+	}
 	public function actionKpiAssignTeam()
 	{
 		$teamId = $_POST["teamId"];

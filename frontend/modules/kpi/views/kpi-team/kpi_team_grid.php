@@ -191,8 +191,7 @@ $this->title = "TEAM KPI";
                                 <?php
                                         if ($role >= 5) {
                                         ?>
-                                <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kpi-team"
-                                    onclick="javascript:prepareDeleteKpiTeam(<?= $kpiTeamId ?>)"
+                                <a class="btn btn-bg-red-xs" href="javascript:prepareDeleteKpiTeam(<?= $kpiTeamId ?>)"
                                     style="margin-top: -3px;"
                                     onmouseover="
                                     this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
