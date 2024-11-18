@@ -266,7 +266,7 @@ class ManagementController extends Controller
 			$kfiHistory->quantRatio = $_POST["quanRatio"];
 			$kfiHistory->historyStatus = $_POST["status"];
 			$kfiHistory->target =  str_replace(",", "", $_POST["targetAmount"]);
-			$kfiHistory->result =  str_replace(",", "", $_POST["result"]);
+			//$kfiHistory->result =  str_replace(",", "", $_POST["result"]);
 			$kfiHistory->unitId =  $_POST["unit"];
 			$kfiHistory->month = $_POST["month"];
 			$kfiHistory->year = $_POST["year"];
