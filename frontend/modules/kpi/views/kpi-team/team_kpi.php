@@ -3,6 +3,7 @@
 use frontend\models\hrvc\Kpi;
 use frontend\models\hrvc\KpiTeam;
 use yii\bootstrap5\ActiveForm;
+use common\models\ModelMaster;
 
 $this->title = "KPI";
 ?>
@@ -262,38 +263,90 @@ $this->title = "KPI";
                                     <?= $kpi["status"] == 1 ? $kpi["nextCheckDate"] : '' ?>
                                 </td>
                                 <td class="text-center">
-                                    <span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink"
-                                        data-bs-toggle="dropdown" aria-expanded="false"> <i
-                                            class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i> </span>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <?php
+
+                                    <!-- 
+                                    <li data-bs-toggle="modal" data-bs-target="#kpi-view-team"
+                                        onclick="javascript:kpiTeamHistory(<?= $kpiTeamId ?>)">
+                                        <a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                    </li> -->
+                                    <!-- <a class="btn btn-bg-white-xs mr-5" style="margin-top: -1px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.png"
+                                            alt="History" class="pim-icon" style="margin-top: -1px;">
+                                    </a> -->
+
+                                    <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-team-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId'], "kpiTeamId" => $kpiTeamId]) ?>"
+                                        class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                        style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
+                                            class="pim-icon" style="margin-top: -1px;">
+                                    </a>
+
+                                    <span class="dropdown" href="#" id="dropdownMenuLink-<?= $kpiTeamId ?>"
+                                        data-bs-toggle="dropdown">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.png"
+                                            class="icon-table on-cursor">
+                                    </span>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kpiTeamId ?>">
+                                        <!-- <?php
                                                 if ($role > 3) {
-                                                ?>
-                                        <li data-bs-toggle="modal" data-bs-target="#update-kpi-modal-team"
-                                            onclick="javascript:updateTeamKpi(<?= $kpiTeamId ?>)"
-                                            style="display: <?= $display ?>;">
-                                            <a class="dropdown-item"><i class="fa fa-pencil-square-o"
-                                                    aria-hidden="true"></i></a>
-                                        </li>
-                                        <?php
-                                                } else {
-                                                    if ($role == 3 && ($kpi["teamId"] == $userTeamId)) { ?>
-                                        <li data-bs-toggle="modal" data-bs-target="#update-kpi-modal-team"
-                                            onclick="javascript:updateTeamKpi(<?= $kpiTeamId ?>)"
-                                            style="display: <?= $display ?>;">
-                                            <a class="dropdown-item"><i class="fa fa-pencil-square-o"
-                                                    aria-hidden="true"></i></a>
-                                        </li>
-                                        <?php
+                                                    ?>
+                                            <li data-bs-toggle="modal" data-bs-target="#update-kpi-modal-team"
+                                                onclick="javascript:updateTeamKpi(<?= $kpiTeamId ?>)"
+                                                style="display: <?= $display ?>;">
+                                                <a class="dropdown-item"><i class="fa fa-pencil-square-o"
+                                                        aria-hidden="true"></i></a>
+                                            </li>
+                                            <?php
+                                                    } else {
+                                                        if ($role == 3 && ($kpi["teamId"] == $userTeamId)) { ?>
+                                            <li data-bs-toggle="modal" data-bs-target="#update-kpi-modal-team"
+                                                onclick="javascript:updateTeamKpi(<?= $kpiTeamId ?>)"
+                                                style="display: <?= $display ?>;">
+                                                <a class="dropdown-item"><i class="fa fa-pencil-square-o"
+                                                        aria-hidden="true"></i></a>
+                                            </li>
+                                            <?php
+                                                        }
                                                     }
-                                                }
-                                                ?>
-                                        <li data-bs-toggle="modal" data-bs-target="#kpi-view-team"
-                                            onclick="javascript:kpiTeamHistory(<?= $kpiTeamId ?>)">
-                                            <a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                    ?>
+                                            <li data-bs-toggle="modal" data-bs-target="#kpi-view-team"
+                                                onclick="javascript:kpiTeamHistory(<?= $kpiTeamId ?>)">
+                                                <a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                            </li> -->
+
+                                        <li class="pl-4 pr-4" data-bs-toggle="modal"
+                                            data-bs-target="#update-kpi-modal-team"
+                                            onclick="javascript:updateTeamKpi(<?= $kpiTeamId ?>)"
+                                            style="display: <?= $display ?>;">
+                                            <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
+                                                class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
+                                                    alt="History" alt="Chart" class="pim-icon mr-10"
+                                                    style="margin-top: -2px;">
+                                                Edit
+                                            </a>
                                         </li>
+                                        <li class="pl-4 pr-4" data-bs-toggle="modal" data-bs-target="#kpi-issue"
+                                            onclick="javascript:showKpiComment(<?= $kpi['kpiId'] ?>)">
+                                            <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
+                                                class="btn btn-bg-white-xs mr-4" style="margin-top: -3px;">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png"
+                                                    alt="Chart" class="pim-icon mr-10" style="margin-top: -2px;">
+                                                Chats
+                                            </a>
+                                        </li>
+                                        <li class="pl-4 pr-4">
+                                            <a class="dropdown-itemNEW pl-4 pr-25"
+                                                href="javascript:prepareDeleteKpiTeam(<?= $kpiTeamId ?>)">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/delete.svg"
+                                                    alt="Delete" class="pim-icon mr-10" style="margin-top: -2px;">
+                                                Delete
+                                            </a>
+                                        </li>
+
                                     </ul>
                                 </td>
+
                             </tr>
 
                             <?php
@@ -338,3 +391,6 @@ $form = ActiveForm::begin([
 <?= $this->render('modal_view', [
     "isManager" => $isManager
 ]) ?>
+<?= $this->render('modal_issue') ?>
+
+<?= $this->render('modal_delete') ?>
