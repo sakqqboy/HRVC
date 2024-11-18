@@ -162,15 +162,16 @@ $this->title = 'Self KPI History';
 												<div class="col-12 pl-20 pr-20 pb-8">
 													<?php
 													$percent = explode('.', $kpi['ratio']);
-													if (isset($percent[1])) {
-														if ($percent[1] != '00') {
-															//$showPercent = $kpi['ratio'];
-															$showPercent = $percent[1];
-														} else {
-															$showPercent = $percent[0];
+													if (isset($percent[0]) && $percent[0] == '0') {
+														if (isset($percent[1])) {
+															if ($percent[1] == '00') {
+																$showPercent = 0;
+															} else {
+																$showPercent = round($kpi['ratio'], 1);
+															}
 														}
 													} else {
-														$showPercent = $percent[0];
+														$showPercent = round($kpi['ratio']);
 													}
 													?>
 													<div class="progress">
