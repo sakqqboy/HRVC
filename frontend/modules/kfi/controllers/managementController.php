@@ -247,7 +247,7 @@ class ManagementController extends Controller
 			$kfi->unitId = $_POST["unit"];
 			$kfi->kfiDetail = $_POST["detail"];
 			$kfi->status = $_POST["status"];
-			$kfi->targetAmount = $_POST["targetAmount"];
+			//$kfi->targetAmount = $_POST["targetAmount"];
 			if ($isManager == 1) {
 				$kfi->targetAmount = str_replace(",", "", $_POST["targetAmount"]);
 			}
@@ -1427,7 +1427,7 @@ class ManagementController extends Controller
 		$kfiHistory->status = 1;
 		$kfiHistory->quantRatio = $currentHistory["quantRatio"];
 		$kfiHistory->historyStatus = 1;
-		$kfiHistory->target = $currentHistory["target"];
+		//$kfiHistory->target = $currentHistory["target"];
 		$kfiHistory->result = 0;
 		$kfiHistory->unitId =  $currentHistory["unitId"];
 		$kfiHistory->month = $nextMonth;
