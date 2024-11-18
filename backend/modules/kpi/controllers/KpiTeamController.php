@@ -618,28 +618,28 @@ class KpiTeamController extends Controller
 			foreach ($kpiTeamHistory as $history):
 				$ratio = 0;
 				if ($history["code"] == '<' || $history["code"] == '=') {
-					if ((int)$history["target"] != 0) {
-						$ratio = ((int)$history['result'] / (int)$history["target"]) * 100;
+					if ((float)$history["target"] != 0) {
+						$ratio = ((float)$history['result'] / (float)$history["target"]) * 100;
 					} else {
 						$ratio = 0;
 					}
 				} else {
 					if ($history["result"] != '' && $history["result"] != 0) {
-						$ratio = ((int)$history["target"] / (int)$history["result"]) * 100;
+						$ratio = ((float)$history["target"] / (float)$history["result"]) * 100;
 					} else {
 						$ratio = 0;
 					}
 				}
 				$data[$history["year"]][$history["month"]] = [
 					"kpiTeamHistoryId" => $history["kpiTeamHistoryId"],
-					"target" => $history['target'],
+					"target" => (float)$history['target'],
 					"unit" => Unit::unitName($history['unitId']),
 					"month" => ModelMaster::monthEng($history['month'], 1),
 					"year" => $history["year"],
 					"status" => $history['status'],
 					"quantRatio" => $history["quantRatio"],
 					"code" =>  $history["code"],
-					"result" => $history["result"],
+					"result" => (float)$history["result"],
 					"ratio" => number_format($ratio, 2),
 					"amountType" => $history["amountType"],
 					"isOver" => ModelMaster::isOverDuedate($history["nextCheckDate"]),
