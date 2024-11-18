@@ -31,7 +31,7 @@ $this->title = 'KPI Grid View';
                                     </a>
                                 </div>
                                 <div class="col-4 pim-type-tab rounded-top-right">
-                                    <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi"
+                                    <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi-grid"
                                         class="no-underline-black ">
                                         Self KPI
                                     </a>
