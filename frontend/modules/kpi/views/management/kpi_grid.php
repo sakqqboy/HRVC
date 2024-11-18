@@ -118,7 +118,7 @@ $this->title = 'KPI Grid View';
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-5 col-md-2 col-4 text-end pr-20">
+                        <!-- <div class="col-lg-5 col-md-2 col-4 text-end pr-20">
                             <a href="<?= Yii::$app->homeUrl ?>kpi/view/index/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>"
                                 class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
@@ -129,27 +129,61 @@ $this->title = 'KPI Grid View';
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png" alt="History"
                                     class="pim-icon">
                             </a>
-                            <!-- <a class="btn btn-bg-white-xs mr-5" data-bs-toggle="modal" data-bs-target="#kpi-view" onclick="javascript:kpiHistory(<?php // $kpiId 
-                                                                                                                                                                ?>)" style="margin-top: -3px;">
-											<img src="<?php // Yii::$app->homeUrl 
-                                                        ?>images/icons/Settings/comment.png" alt="History" class="pim-icon">
-										</a> -->
                             <a href="<?= Yii::$app->homeUrl ?>kpi/chart/company-chart/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>"
                                 class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="History"
                                     class="pim-icon mr-3" style="margin-top: -2px;">Chart
                             </a>
                             <?php
-                                    if ($role >= 5) {
-                                    ?>
+                                if ($role >= 5) {
+                            ?>
                             <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kpi"
                                 onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)" style="margin-top: -3px;">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/bin.png" alt="History"
                                     class="pim-icon" style="margin-top: -2px;">
                             </a>
                             <?php
-                                    }
-                                    ?>
+                                }
+                            ?> -->
+
+                        <div class="col-lg-5 col-md-2 col-4 text-end pr-20">
+                            <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>"
+                                class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
+                                    class="pim-icon" style="margin-top: -1px;">
+                            </a>
+                            <a href="<?= Yii::$app->homeUrl ?>kpi/view/index/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 2]) ?>"
+                                class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg" alt="History"
+                                    class="pim-icon mr-3" style="margin-top: -2px;">History
+                            </a>
+                            <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 3]) ?>"
+                                class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png" alt="Chats"
+                                    class="pim-icon mr-3" style="margin-top: -2px;">Chats
+                            </a>
+                            <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 4]) ?>"
+                                class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="Chart"
+                                    class="pim-icon mr-3" style="margin-top: -2px;">Chart
+                            </a>
+                            <?php
+									if ($role >= 5) {
+								?>
+                            <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kpi"
+                                onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)" style="margin-top: -3px;"
+                                onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
+                                onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
+                                    class="pim-icon" style="margin-top: -2px;">
+                            </a>
+                            <?php
+									}
+								?>
                         </div>
                         <div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?> mt-5">
                             <div class="row">
@@ -366,7 +400,8 @@ $this->title = 'KPI Grid View';
                                             ?>
                                     <div class="progress">
                                         <div class="progress-bar-<?= $colorFormat ?>"
-                                            style="width:<?= $showPercent ?>%;"></div>
+                                            style="width:<?= $showPercent ?>%;">
+                                        </div>
                                         <span class="progress-load load-<?= $colorFormat ?>"><?= $showPercent ?>%</span>
                                     </div>
                                 </div>

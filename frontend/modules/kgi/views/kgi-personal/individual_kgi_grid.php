@@ -185,14 +185,15 @@ $this->title = "INDIVIDUAL KGI";
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png"
                                             alt="History" class="pim-icon"> Chats
                                     </a>
-                                    <a class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                    <!-- <a class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
                                         style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>"
                                         data-bs-toggle="modal" data-bs-target="#staticBackdrop3"
                                         onclick="javascript:kgiHistory(<?= $kgiEmployeeId ?>)"
                                         style="margin-top: -3px;">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png"
                                             alt="History" class="pim-icon mr-3" style="margin-top: -2px;">Chart
-                                    </a>
+                                    </a> -->
+
                                     <!-- <a class="btn btn-bg-white-xs mr-5"
                                         href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-individual-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], "kgiEmployeeId" => $kgiEmployeeId]) ?>"
                                         style="margin-top: -3px;">
@@ -464,7 +465,6 @@ $this->title = "INDIVIDUAL KGI";
                                             }else if ($colorFormat == 'complete') {
                                         ?>
 
-
                                             <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/update-personal-kgi/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId]) ?>"
                                                 class="no-underline">
                                                 <div class="pim-btn-<?= $colorFormat ?>">
@@ -475,7 +475,6 @@ $this->title = "INDIVIDUAL KGI";
                                             <?php
                                             }else if ($role >= 5){
                                         ?>
-
                                             <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/update-personal-kgi/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId]) ?>"
                                                 class="no-underline">
                                                 <div class="pim-btn-<?= $colorFormat ?>">

@@ -275,6 +275,24 @@ $this->title = "TEAM KGI";
                                                 Edit
                                             </a>
                                         </li>
+                                        <li class="pl-4 pr-4" data-bs-toggle="modal" data-bs-target="#kgi-issue"
+                                            onclick="javascript:showKgiComment(<?= $kgi['kgiId'] ?>)"
+                                            style="display: <?= $display ?>;">
+                                            <a class="dropdown-itemNEWS pl-4 pr-20 mb-5" href="#">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png"
+                                                    alt="Chats" class="pim-icon mr-10" style="margin-top: -2px;">
+                                                Chats
+                                            </a>
+                                        </li>
+                                        <li class="pl-4 pr-4" data-bs-toggle="modal">
+                                            <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
+                                                href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgi["kgiId"], "companyId" => $kgi["companyId"]]) ?>"
+                                                class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+                                                <i class="fa fa-users pim-icon mr-10" aria-hidden="true" alt="Chart"
+                                                    style="margin-top: -2px;"></i>
+                                                Team
+                                            </a>
+                                        </li>
                                         <?php
 												}
 										?>
@@ -398,4 +416,6 @@ $form = ActiveForm::begin([
 <?= $this->render('modal_view', [
 	"isManager" => $isManager
 ]) ?>
+<?= $this->render('modal_issue') ?>
+
 <?= $this->render('modal_delete') ?>

@@ -241,7 +241,7 @@ class ManagementController extends Controller
                     //    $this->saveKpiEmployee($_POST["team"], $kpiId);
                 }
                 //return $this->redirect(Yii::$app->request->referrer);
-                return $this->redirect(Yii::$app->homeUrl . 'kgi/assign/assign/' . ModelMaster::encodeParams(["kpiId" => $kpiId, "companyId" => $_POST["companyId"]]));
+                return $this->redirect(Yii::$app->homeUrl . 'kpi/assign/assign/' . ModelMaster::encodeParams(["kpiId" => $kpiId, "companyId" => $_POST["companyId"]]));
                 //return $this->redirect('grid');
             }
         }
