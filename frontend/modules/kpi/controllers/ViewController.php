@@ -96,11 +96,23 @@ class ViewController extends Controller
 		$kpiDetail = curl_exec($api);
 		$kpiDetail = json_decode($kpiDetail, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
+		$units = curl_exec($api);
+		$units = json_decode($units, true);
+
+		$isManager = UserRole::isManager();
+		$months = ModelMaster::monthFull(1);
+		
 		curl_close($api);
 		return $this->render('kpi_team_history', [
 			"role" => $role,
 			"kpiDetail" => $kpiDetail,
-			"kpiTeamsHistory" => $kpiTeamsHistory
+			"kpiTeamsHistory" => $kpiTeamsHistory,
+			"kpiTeamId" => $kpiTeamId,
+			"kpiId" => $kpiId,
+			"units" => $units,
+			"isManager" => $isManager,
+			"months" => $months
 		]);
 	}
 	public function actionKpiIndividualHistory($hash)
