@@ -72,7 +72,8 @@ class ViewController extends Controller
 		return $this->render('kpi_view', [
 			"role" => $role,
 			"kpiDetail" => $kpiDetail,
-			"kpis" => $kpis
+			"kpis" => $kpis,
+			"kpiId" => $kpiId
 		]);
 	}
 	public function actionKpiTeamHistory($hash)

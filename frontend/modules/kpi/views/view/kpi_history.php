@@ -28,9 +28,12 @@ $this->title = 'KPI View';
                 </div>
                 <div class="col-1">
                     <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kpi"
-                        onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)">Delete
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/bin.png" alt="History" class="pim-icon"
-                            style="margin-top: -2px;">
+                        onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)"
+                        onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
+                        onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
+                            class="pim-icon" style="margin-top: -3px; width: 12px; height: 14px;"> Delete
+
                     </a>
                 </div>
             </div>
