@@ -420,8 +420,6 @@ $this->title = 'KPI Grid View';
                                             <?= $kpi['nextCheck'] == "" ? 'Not set' : $kpi['nextCheck'] ?></div>
                                     </div>
                                     <div class="col-4 text-center mt-10 pt-6">
-
-
                                         <?php
                                         if ($colorFormat == 'disable') {
                                         ?>
