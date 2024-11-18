@@ -429,8 +429,8 @@ $this->title = "INDIVIDUAL KGI";
                                             </div>
                                         </div>
                                         <div class="col-4 pl-5 pr-5 mt-10">
-                                            <div class="col-12 text-start">Last Updated on</div>
-                                            <div class="col-12 text-start pim-duedate">
+                                            <div class="col-12 text-end">Last Updated on</div>
+                                            <div class="col-12 text-end pim-duedate">
                                                 <?= $kgi['nextCheck'] == "" ? 'Not set' : $kgi['nextCheck'] ?></div>
                                         </div>
                                         <div class="col-4 text-center pt-6 mt-10">
@@ -488,8 +488,9 @@ $this->title = "INDIVIDUAL KGI";
                                         ?>
                                         </div>
                                         <div class="col-4 pl-0 pr-5 mt-10">
-                                            <div class="col-12 text-end font-<?= $colorFormat ?>">Next Update Date</div>
-                                            <div class="col-12 text-end pim-duedate">
+                                            <div class="col-12 text-start font-<?= $colorFormat ?>">Next Update Date
+                                            </div>
+                                            <div class="col-12 text-start pim-duedate">
                                                 <?= $kgi['nextCheck'] == "" ? 'Not set' : $kgi['nextCheck'] ?></div>
                                         </div>
                                     </div>

@@ -440,8 +440,8 @@ $this->title = "TEAM KGI";
                                         </div>
                                     </div>
                                     <div class="col-4 pl-5 pr-5 mt-10">
-                                        <div class="col-12 text-start">Last Updated on</div>
-                                        <div class="col-12 text-start pim-duedate">
+                                        <div class="col-12 text-end">Last Updated on</div>
+                                        <div class="col-12 text-end pim-duedate">
                                             <?= $kgi['nextCheckDate'] == "" ? 'Not set' : $kgi['nextCheckDate'] ?></div>
                                     </div>
                                     <div class="col-4 text-center mt-10 pt-6">
@@ -489,8 +489,8 @@ $this->title = "TEAM KGI";
                                                 ?> -->
                                     </div>
                                     <div class="col-4 pl-0 pr-5 mt-10">
-                                        <div class="col-12 text-end font-<?= $colorFormat ?>">Next Update Date</div>
-                                        <div class="col-12 text-end pim-duedate">
+                                        <div class="col-12 text-start font-<?= $colorFormat ?>">Next Update Date</div>
+                                        <div class="col-12 text-start pim-duedate">
                                             <?= $kgi['nextCheckDate'] == "" ? 'Not set' : $kgi['nextCheckDate'] ?></div>
                                     </div>
                                 </div>
