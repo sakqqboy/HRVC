@@ -247,6 +247,7 @@ class ManagementController extends Controller
 			$kfi->unitId = $_POST["unit"];
 			$kfi->kfiDetail = $_POST["detail"];
 			$kfi->status = $_POST["status"];
+			$kfi->targetAmount = $_POST["targetAmount"];
 			if ($isManager == 1) {
 				$kfi->targetAmount = str_replace(",", "", $_POST["targetAmount"]);
 			}
