@@ -43,11 +43,12 @@ $this->title = 'KPI';
                             <?php
                             if ($role >= 3) {
                             ?>
-                                <button type="button" class="btn-createnew font-size-11" data-bs-toggle="modal"
-                                    data-bs-target="#staticBackdrop5" style="position:absolute;">
-                                    Create New
-                                    <i class="fa fa-magic ml-2" aria-hidden="true"></i>
-                                </button>
+                            <button type="button" class="btn-createnew font-size-11" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop5" style="position:absolute;">
+                                Create New
+                                <img src=" <?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="History"
+                                    class="pim-icon ml-3" style="margin-top: -1px;">
+                            </button>
                             <?php
                             }
                             ?>
@@ -127,28 +128,28 @@ $this->title = 'KPI';
                                         $display = 'none';
                                     }
                             ?>
-                                    <tr height="10">
+                            <tr height="10">
 
-                                    </tr>
-                                    <tr id="kpi-<?= $kpiId ?>" class="pim-bg-<?= $colorFormat ?> pim-table-text">
-                                        <td>
-                                            <div class="col-12 border-left-<?= $colorFormat ?> pim-div-border pb-5">
-                                                <?= $kpi["kpiName"] ?>
-                                            </div>
-                                        </td>
-                                        <td><?= $kpi["companyName"] ?></td>
-                                        <td><img src="<?= Yii::$app->homeUrl . $kpi['flag'] ?>" class="Flag-Turkey">
-                                            <?= $kpi["branch"] ?>, <?= $kpi["countryName"] ?></td>
-                                        <td class="text-center"><?= $kpi["priority"] ?></td>
-                                        <td>
-                                            <div class="flex mb-5 -space-x-4">
-                                                <?php
+                            </tr>
+                            <tr id="kpi-<?= $kpiId ?>" class="pim-bg-<?= $colorFormat ?> pim-table-text">
+                                <td>
+                                    <div class="col-12 border-left-<?= $colorFormat ?> pim-div-border pb-5">
+                                        <?= $kpi["kpiName"] ?>
+                                    </div>
+                                </td>
+                                <td><?= $kpi["companyName"] ?></td>
+                                <td><img src="<?= Yii::$app->homeUrl . $kpi['flag'] ?>" class="Flag-Turkey">
+                                    <?= $kpi["branch"] ?>, <?= $kpi["countryName"] ?></td>
+                                <td class="text-center"><?= $kpi["priority"] ?></td>
+                                <td>
+                                    <div class="flex mb-5 -space-x-4">
+                                        <?php
                                                 if (isset($kpi["kpiEmployee"]) && count($kpi["kpiEmployee"]) > 0) {
                                                     $e = 1;
                                                     foreach ($kpi["kpiEmployee"] as $emp) :
                                                 ?>
-                                                        <img class="image-grid" src="<?= Yii::$app->homeUrl . $emp ?>">
-                                                <?php
+                                        <img class="image-grid" src="<?= Yii::$app->homeUrl . $emp ?>">
+                                        <?php
                                                         if ($e == 3) {
                                                             break;
                                                         }
@@ -156,17 +157,17 @@ $this->title = 'KPI';
                                                     endforeach;
                                                 }
                                                 ?>
-                                                <a class="no-underline-black ml-2 mt-3"
-                                                    href="#"><?= count($kpi["kpiEmployee"]) ?></a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users"
-                                                    aria-hidden="true"></i> <?= $kpi["countTeam"] ?></span>
-                                        </td>
-                                        <td><?= $kpi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?></td>
-                                        <td class="text-start">
-                                            <?php
+                                        <a class="no-underline-black ml-2 mt-3"
+                                            href="#"><?= count($kpi["kpiEmployee"]) ?></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users"
+                                            aria-hidden="true"></i> <?= $kpi["countTeam"] ?></span>
+                                </td>
+                                <td><?= $kpi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?></td>
+                                <td class="text-start">
+                                    <?php
                                             $decimal = explode('.', $kpi["targetAmount"]);
                                             if (isset($decimal[1])) {
                                                 if ($decimal[1] == '00') {
@@ -178,13 +179,13 @@ $this->title = 'KPI';
                                                 $show = $kpi["targetAmount"];
                                             }
                                             ?>
-                                            <?= $show ?><?= $kpi["amountType"] == 1 ? '%' : '' ?>
-                                        </td>
-                                        <td class="text-center">
-                                            <?= $kpi["code"] ?>
-                                        </td>
-                                        <td class="text-end">
-                                            <?php
+                                    <?= $show ?><?= $kpi["amountType"] == 1 ? '%' : '' ?>
+                                </td>
+                                <td class="text-center">
+                                    <?= $kpi["code"] ?>
+                                </td>
+                                <td class="text-end">
+                                    <?php
                                             if ($kpi["result"] != '') {
                                                 $decimalResult = explode('.', $kpi["result"]);
                                                 if (isset($decimalResult[1])) {
@@ -200,10 +201,10 @@ $this->title = 'KPI';
                                                 $showResult = 0;
                                             }
                                             ?>
-                                            <?= $showResult ?><?= $kpi["amountType"] == 1 ? '%' : '' ?>
-                                        </td>
-                                        <td>
-                                            <?php
+                                    <?= $showResult ?><?= $kpi["amountType"] == 1 ? '%' : '' ?>
+                                </td>
+                                <td>
+                                    <?php
                                             $percent = explode('.', $kpi['ratio']);
                                             if (isset($percent[0]) && $percent[0] == '0') {
                                                 if (isset($percent[1])) {
@@ -217,26 +218,26 @@ $this->title = 'KPI';
                                                 $showPercent = round($kpi['ratio']);
                                             }
                                             ?>
-                                            <div id="progress1">
-                                                <div data-num="<?= $showPercent ?>"
-                                                    class="progress-pim-table progress-circle-<?= $colorFormat ?>"></div>
-                                            </div>
+                                    <div id="progress1">
+                                        <div data-num="<?= $showPercent ?>"
+                                            class="progress-pim-table progress-circle-<?= $colorFormat ?>"></div>
+                                    </div>
 
-                                        </td>
-                                        <td><?= $kpi["month"] ?></td>
-                                        <td><?= $kpi["unit"] ?></td>
-                                        <td><?= $kpi["periodCheck"] ?></td>
-                                        <td class="<?= $kpi['isOver'] == 1 ? 'text-danger' : '' ?>">
-                                            <?= $kpi["status"] == 1 ? $kpi["nextCheck"] : '' ?>
-                                        </td>
-                                        <td class="text-center">
-                                            <!-- <span data-bs-toggle="modal" data-bs-target="#kpi-issue"
+                                </td>
+                                <td><?= $kpi["month"] ?></td>
+                                <td><?= $kpi["unit"] ?></td>
+                                <td><?= $kpi["periodCheck"] ?></td>
+                                <td class="<?= $kpi['isOver'] == 1 ? 'text-danger' : '' ?>">
+                                    <?= $kpi["status"] == 1 ? $kpi["nextCheck"] : '' ?>
+                                </td>
+                                <td class="text-center">
+                                    <!-- <span data-bs-toggle="modal" data-bs-target="#kpi-issue"
                                         onclick="javascript:showKpiComment(<?= $kpiId ?>)"
                                         class="btn btn-bg-white-xs pr-2 pl-2 pt-1 pb-1">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.png"
                                             class="icon-table on-cursor">
                                     </span> -->
-                                            <a href="<?= Yii::$app->homeUrl ?>kpi/view/index/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>"
+                                    <!-- <a href="<?= Yii::$app->homeUrl ?>kpi/view/index/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>"
                                                 class="btn btn-bg-white-xs mr-5" style="margin-top: -1px;">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.png"
                                                     alt="History" class="pim-icon" style="margin-top: -1px;">
@@ -252,18 +253,18 @@ $this->title = 'KPI';
                                                     style="display: <?= $display ?>;">
                                                     <a class="dropdown-item"><i class="fa fa-pencil-square-o"
                                                             aria-hidden="true"></i></a>
-                                                </li>
-                                                <!-- <li data-bs-toggle="modal" data-bs-target="#kpi-view"
+                                                </li> -->
+                                    <!-- <li data-bs-toggle="modal" data-bs-target="#kpi-view"
                                             onclick="javascript:kpiHistory(<?= $kpiId ?>)">
                                             <a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                         </li> -->
-                                                <!-- <li onclick="javascript:copyKpi(<?= $kpiId ?>)" title="Copy"
+                                    <!-- <li onclick="javascript:copyKpi(<?= $kpiId ?>)" title="Copy"
                                             style="display: <?= $display ?>;">
                                             <a class="dropdown-item" href="#">
                                                 <i class="fa fa-copy" aria-hidden="true"></i>
                                             </a>
                                         </li> -->
-                                                <?php
+                                    <!-- <?php
                                                 if ($role >= 3) {
                                                 ?>
                                                     <li>
@@ -288,9 +289,99 @@ $this->title = 'KPI';
                                                             aria-hidden="true"></i></a>
                                                 </li>
 
-                                            </ul>
-                                        </td>
-                                    </tr>
+                                            </ul> -->
+
+                                    <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>"
+                                        class="btn btn-bg-white-xs mr-5" style="margin-top: -1px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.png"
+                                            alt="History" class="pim-icon" style="margin-top: -1px;">
+                                    </a>
+
+                                    <span class="dropdown" href="#" id="dropdownMenuLink-<?= $kpiId ?>"
+                                        data-bs-toggle="dropdown">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.png"
+                                            class="icon-table on-cursor">
+                                    </span>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kpiId ?>">
+
+                                        <li class="pl-4 pr-4" data-bs-toggle="modal" data-bs-target="#update-kpi-modal"
+                                            onclick="javascript:updateKpi(<?= $kpiId ?>)"
+                                            style="display: <?= $display ?>;">
+                                            <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
+                                                class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
+                                                    alt="History" alt="Chart" class="pim-icon mr-10"
+                                                    style="margin-top: -2px;">
+                                                Edit
+                                            </a>
+                                        </li>
+
+                                        <li class="pl-4 pr-4" data-bs-toggle="modal">
+                                            <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
+                                                href="<?= Yii::$app->homeUrl ?>kpi/view/index/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 2]) ?>"
+                                                class="btn btn-bg-white-xs mr-4" style="margin-top: -3px;">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg"
+                                                    alt="History" alt="Chart" class="pim-icon mr-10"
+                                                    style="margin-top: -2px;">
+                                                History
+                                            </a>
+                                        </li>
+                                        <li class="pl-4 pr-4" data-bs-toggle="modal">
+                                            <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
+                                                href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 3]) ?>"
+                                                class="btn btn-bg-white-xs mr-4" style="margin-top: -3px;">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png"
+                                                    alt="Chart" class="pim-icon mr-10" style="margin-top: -2px;">
+                                                Chats
+                                            </a>
+                                        </li>
+                                        <li class="pl-4 pr-4" data-bs-toggle="modal">
+                                            <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
+                                                href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 4]) ?>"
+                                                class="btn btn-bg-white-xs mr-4" style="margin-top: -3px;">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png"
+                                                    alt="Chart" class="pim-icon mr-10" style="margin-top: -2px;">
+                                                Chart
+                                            </a>
+                                        </li>
+                                        <?php
+												if ($role >= 3) {
+												?>
+
+                                        <li class="pl-4 pr-4" data-bs-toggle="modal">
+                                            <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
+                                                href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, "companyId" => $kpi["companyId"]]) ?>"
+                                                class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+                                                <i class="fa fa-users pim-icon mr-10" aria-hidden="true" alt="Chart"
+                                                    style="margin-top: -2px;"></i>
+                                                Team
+                                            </a>
+                                        </li>
+                                        <li class="pl-4 pr-4" data-bs-toggle="modal">
+                                            <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
+                                                href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, "companyId" => $kpi["companyId"]]) ?>"
+                                                class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+                                                <i class="fa fa-user pim-icon mr-10" aria-hidden="true" alt="Chart"
+                                                    style="margin-top: -2px;"></i>
+                                                Person
+                                            </a>
+                                        </li>
+                                        <?php
+												}
+												?>
+                                        <li class="pl-4 pr-4" data-bs-toggle="modal" data-bs-target="#delete-kpi"
+                                            onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)" title="Delete">
+                                            <a class="dropdown-itemNEW pl-4 pr-25" href="#">
+                                                <!-- <i class="fa fa-trash-o" aria-hidden="true"></i> -->
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/delete.svg"
+                                                    alt="Delete" class="pim-icon mr-10" style="margin-top: -2px;">
+                                                Delete
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </td>
+                            </tr>
                             <?php
                                 endforeach;
                             }
