@@ -565,7 +565,18 @@
 	padding-left: 5px;
 }
 
+.yenlow-assignNew {
+	font-weight: 390;
+	font-size: 9px;
+	border: 0.1px solid #FFD000;
+	background-color: #FFFAED;
+	border-radius: 26.5px;
+	letter-spacing: 0.5px;
+	padding-left: 5px;
+	padding-top: 2px;
+	padding-bottom: 2px;
 
+}
 
 
 .over-assignNew {
@@ -660,6 +671,10 @@
 
 .font-disable {
 	color: #3C3D48;
+}
+
+.font-black {
+	color: #000000;
 }
 
 .border-right-over {
@@ -788,6 +803,12 @@
 .load-info {
 	border: 1px solid #A6CCFF;
 }
+
+.load-yenlow {
+	border: 1px solid #FFD000;
+	background-color: #FFFAED;
+}
+
 
 .head-letter {
 
