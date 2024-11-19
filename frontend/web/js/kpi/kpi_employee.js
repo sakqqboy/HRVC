@@ -1,27 +1,30 @@
 var $baseUrl = window.location.protocol + "/ / " + window.location.host;
 if (window.location.host == 'localhost') {
-    $baseUrl = window.location.protocol + "//" + window.location.host + '/HRVC/frontend/web/';
+	$baseUrl = window.location.protocol + "//" + window.location.host + '/HRVC/frontend/web/';
 } else {
-    $baseUrl = window.location.protocol + "//" + window.location.host + '/';
+	$baseUrl = window.location.protocol + "//" + window.location.host + '/';
 }
 $url = $baseUrl;
-function prepareDeleteKpiEmployee(kpiEmployeeId) { 
+function prepareDeleteKpiEmployee(kpiEmployeeId) {
+	// $("#kpiEmployeeId-modal").val(kpiEmployeeId);
+	// alert(kpiEmployeeId);
+	// $("#delete-kpi-employee").modal('show');
 	$("#kpiEmployeeId-modal").val(kpiEmployeeId);
 }
-function deleteKpiEmployee() { 
+function deleteKpiEmployee() {
 	var kpiEmployeeId = $("#kpiEmployeeId-modal").val();
-	var url = $url + 'kpi/kpi-team/delete-kpi-team';
+	var url = $url + 'kpi/kpi-personal/delete-kpi-personal';
 	$.ajax({
-	    type: "POST",
-	    dataType: 'json',
-	    url: url,
-	    data: { kpiEmployeeId: kpiEmployeeId },
-	    success: function(data) {
-		 if (data.status) {
-		     $("#delete-kpi-employee").modal("hide");
-		     $("#kpi-employee-" + kpiEmployeeId).hide();
-		 }
-	    }
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { kpiEmployeeId: kpiEmployeeId },
+		success: function (data) {
+			if (data.status) {
+				$("#delete-kpi-personal").modal("hide");
+				$("#kpi-employee-" + kpiEmployeeId).hide();
+			}
+		}
 	});
 }
 function kpiFilterForEmployee() {
@@ -38,13 +41,13 @@ function kpiFilterForEmployee() {
 		type: "POST",
 		dataType: 'json',
 		url: url,
-		data: { companyId: companyId, branchId: branchId, teamId: teamId, month: month, status: status, year: year, type: type, employeeId: employeeId  },
+		data: { companyId: companyId, branchId: branchId, teamId: teamId, month: month, status: status, year: year, type: type, employeeId: employeeId },
 		success: function (data) {
-			   
+
 		}
 	});
 }
-function assignKpiToEmployeeInTeam(teamId,kpiId) { 
+function assignKpiToEmployeeInTeam(teamId, kpiId) {
 	var url = $url + 'kpi/assign/employee-in-team-target';
 	if ($("#team-" + teamId).prop("checked") == true) {
 		$.ajax({
@@ -58,9 +61,9 @@ function assignKpiToEmployeeInTeam(teamId,kpiId) {
 				}
 			}
 		});
-	} else { 
-	
+	} else {
+
 		$("#team-employee-" + teamId).remove();
-		$("#employee-in-team-"+teamId).remove();
+		$("#employee-in-team-" + teamId).remove();
 	}
 }

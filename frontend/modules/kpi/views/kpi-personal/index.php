@@ -369,3 +369,4 @@ $this->title = "Individual KPI";
 <input type="hidden" value="create" id="acType">
 
 <?= $this->render('modal_issue') ?>
+<?= $this->render('modal_delete') ?>

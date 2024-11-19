@@ -100,6 +100,15 @@ class KpiPersonalController extends Controller
 		}
 		return $this->redirect(Yii::$app->homeUrl . 'kpi/management/grid');
 	}
+
+	public function actionDeleteKpiPersonal()
+	{ 
+		$kpiEmployeeId = $_POST["kpiEmployeeId"];
+		KpiEmployee::updateAll(["status" => 99], ["kpiEmployeeId" => $kpiEmployeeId]);
+		KpiEmployeeHistory::updateAll(["status" => 99], ["kpiEmployeeId" => $kpiEmployeeId]);
+		$res["status"] = true;
+		return json_encode($res);
+	}
 	public function actionIndividualKpi()
 	{
 		$groupId = Group::currentGroupId();
