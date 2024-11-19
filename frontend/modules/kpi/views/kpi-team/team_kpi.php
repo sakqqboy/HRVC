@@ -334,9 +334,17 @@ $this->title = "KPI";
                                                 History
                                             </a>
                                         </li>
-                                        <li class="pl-4 pr-4" data-bs-toggle="modal" data-bs-target="#kpi-issue"
+                                        <!-- <li class="pl-4 pr-4" data-bs-toggle="modal" data-bs-target="#kpi-issue"
                                             onclick="javascript:showKpiComment(<?= $kpi['kpiId'] ?>)">
                                             <a class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -3px;">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png"
+                                                    alt="Chats" class="pim-icon mr-10" style="margin-top: -2px;">
+                                                Chats
+                                            </a>
+                                        </li> -->
+                                        <li class="pl-4 pr-4">
+                                            <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId'], 'openTab' => 3]) ?>"
+                                                class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -3px;">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png"
                                                     alt="Chats" class="pim-icon mr-10" style="margin-top: -2px;">
                                                 Chats
