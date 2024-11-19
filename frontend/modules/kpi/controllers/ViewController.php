@@ -138,7 +138,9 @@ class ViewController extends Controller
 		return $this->render('kpi_employee_history', [
 			"role" => $role,
 			"kpiDetail" => $kpiDetail,
-			"kpiEmployeeHistory" => $kpiEmployeeHistory
+			"kpiEmployeeHistory" => $kpiEmployeeHistory,
+			"kpiId" =>  $kpiId,
+			"kpiEmployeeId" =>  $kpiEmployeeId
 		]);
 	}
 	public function actionKpiHistory($hash)
