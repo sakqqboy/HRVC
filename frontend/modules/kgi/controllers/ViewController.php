@@ -28,6 +28,10 @@ class ViewController extends Controller
 	public function actionIndex($hash)
 	{
 		$param = ModelMaster::decodeParams($hash);
+		$groupId = Group::currentGroupId();
+		if ($groupId == null) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+		}
 		$kgiId = $param["kgiId"];
 		$role = UserRole::userRight();
 		$adminId = '';
@@ -63,6 +67,14 @@ class ViewController extends Controller
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$companies = curl_exec($api);
+		$companies = json_decode($companies, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
+		$units = curl_exec($api);
+		$units = json_decode($units, true);
+		
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-history-summarize?kgiId=' . $kgiId);
 		//curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
 		$kgis = curl_exec($api);
@@ -70,12 +82,18 @@ class ViewController extends Controller
 		curl_close($api);
 		//throw new Exception($kgiId);
 		//throw new Exception(print_r($kgiDetail, true));
-
+		$months = ModelMaster::monthFull(1);
+		$isManager = UserRole::isManager();
 		return $this->render('kgi_view', [
 			"role" => $role,
 			"kgiDetail" => $kgiDetail,
 			"kgis" => $kgis,
-			"kgiId" => $kgiId
+			"kgiId" => $kgiId,
+			"units" => $units,
+			"companies" => $companies,
+			"months" => $months,
+			"isManager" => $isManager
+
 		]);
 	}
 	public function actionKgiTeamHistory($hash)
