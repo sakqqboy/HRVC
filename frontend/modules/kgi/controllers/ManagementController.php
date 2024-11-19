@@ -189,7 +189,7 @@ class ManagementController extends Controller
 			//$kgi->periodDate = $_POST["periodDate"];
 			$kgi->fromDate = $_POST["fromDate"];
 			$kgi->toDate = $_POST["toDate"];
-			$kgi->targetAmount = $_POST["targetAmount"];
+			$kgi->targetAmount =  str_replace(",", "", $_POST["targetAmount"]);
 			$kgi->kgiDetail = $_POST["detail"];
 			$kgi->quantRatio = $_POST["quantRatio"];
 			$kgi->priority = $_POST["priority"];
@@ -212,7 +212,7 @@ class ManagementController extends Controller
 				$kgiHistory->unitId = $_POST["unit"];
 				//$kgiHistory->periodDate = $_POST["periodDate"];
 				$kgiHistory->nextCheckDate = $_POST["nextDate"];
-				$kgiHistory->targetAmount =  $_POST["targetAmount"];
+				$kgiHistory->targetAmount =  str_replace(",", "", $_POST["targetAmount"]);
 				$kgiHistory->description = $_POST["detail"];
 				$kgiHistory->quantRatio = $_POST["quantRatio"];
 				$kgiHistory->priority = $_POST["priority"];
