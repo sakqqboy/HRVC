@@ -169,11 +169,17 @@ $this->title = "TEAM KPI";
                                 </span>
                                 <img src="<?= Yii::$app->homeUrl . 'images/icons/Settings/team-name.svg' ?>"
                                     class="pim-pic-grid mr-5" style="margin-top: -1px;font-size:12px;">
-                                <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-team-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId'], "kpiTeamId" => $kpiTeamId]) ?>"
+                                <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId']]) ?>"
                                     class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
                                     style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
                                         class="pim-icon" style="margin-top: -1px;">
+                                </a>
+                                <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-team-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId'], "kpiTeamId" => $kpiTeamId]) ?>"
+                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg" alt="History"
+                                        class="pim-icon mr-3" style="margin-top: -2px;">History
                                 </a>
                                 <a data-bs-toggle="modal" data-bs-target="#kpi-issue"
                                     onclick="javascript:showKpiComment(<?= $kpi['kpiId'] ?>)"
@@ -181,6 +187,12 @@ $this->title = "TEAM KPI";
                                     style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png" alt="Chats"
                                         class="pim-icon"> Chats
+                                </a>
+                                <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId'], 'openTab' => 4]) ?>"
+                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="Chart"
+                                        class="pim-icon mr-3" style="margin-top: -2px;">Chart
                                 </a>
                                 <!-- <a class="btn btn-bg-white-xs mr-5" data-bs-toggle="modal"
                                     data-bs-target="#staticBackdrop3" onclick="javascript:kpiHistory(<?= $kpiTeamId ?>)"
