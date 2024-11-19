@@ -83,19 +83,22 @@ $this->title = 'Team KPI History';
                                 <a href="" class="btn btn-bg-white-xs">
                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                 </a> -->
-                                <a href="" class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+                                <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>"
+                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="Chats"
                                         class="pim-icon " style="margin-top: -2px;">
                                 </a>
-                                <a href="" class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;"
-                                    data-bs-toggle="modal" data-bs-target="#staticBackdrop3"
-                                    onclick="javascript:kpiHistory(<?= $kpi['kpiTeamHistoryId'] ?>)">
+                                <a data-bs-toggle="modal" data-bs-target="#kpi-issue"
+                                    onclick="javascript:showKpiComment(<?= $kpiId ?>)"
+                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png" alt="Chats"
                                         class="pim-icon " style="margin-top: -2px;">
                                 </a>
-                                <a href="" class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;"
-                                    data-bs-toggle="modal" data-bs-target="#staticBackdrop3"
-                                    onclick="javascript:kpiHistory(<?= $kpi['kpiTeamHistoryId'] ?>)">
+                                <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 4]) ?>"
+                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="Chart"
                                         class="pim-icon" style="margin-top: -2px;">
                                 </a>
@@ -160,9 +163,8 @@ $this->title = 'Team KPI History';
                                 <div class="row">
                                     <div class="col-5 text-start pl-20">
                                         <div class="col-12 font-size-10">
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Achievement.png"
-                                                alt="History" class="home-icon"
-                                                style="margin-top: -3px;margin-left:-5px;">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Target.svg"
+                                                class="pim-iconKFI" style="margin-top: 1px; margin-right: 3px;">
                                             Target
                                         </div>
                                         <div class="col-12 number-pim">
@@ -186,9 +188,8 @@ $this->title = 'Team KPI History';
                                     </div>
                                     <div class="col-5 text-end pr-20">
                                         <div class="col-12 font-size-10">Result
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Achievement.png"
-                                                alt="History" class="home-icon"
-                                                style="margin-top: -3px;margin-left:2px;">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Result.svg"
+                                                class="pim-iconKFI" style="margin-top: 1px; margin-left: 3px;">
                                         </div>
                                         <div class="col-12 number-pim">
                                             <?php
@@ -274,4 +275,5 @@ $form = ActiveForm::begin([
 <?= $this->render('modal_view', [
     "isManager" => $isManager
 ]) ?>
+<?= $this->render('modal_issue') ?>
 <?= $this->render('modal_confirm_next_team') ?>
