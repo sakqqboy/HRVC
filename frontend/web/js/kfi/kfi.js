@@ -709,7 +709,7 @@ function viewTabKfi(tabId) {
 			dataType: 'json',
 			url: url,
 			data: { kfiId: kfiId },
-			success: function (data) {
+            success: function (data) {
 				$("#show-content").html(data.monthlyDetailHistoryText);
 			}
 		});
