@@ -210,7 +210,7 @@ $this->title = 'KGI Grid View';
                                                     <?php
 															} else {
 															?>
-                                                    <span class="font-<?= $colorFormat ?> ml-16">
+                                                    <span class="font-<?= $colorFormat ?> ml-16" style="top: 2px;">
                                                         Edit Assigned
                                                     </span>
                                                     <?php
@@ -275,7 +275,7 @@ $this->title = 'KGI Grid View';
                                                     </a>
                                                     <?php
 															} else { ?>
-                                                    <span class="font-<?= $colorFormat ?> ml-16">
+                                                    <span class="font-<?= $colorFormat ?> ml-16" style="top: 2px;">
                                                         Assign Team
                                                     </span>
                                                     <?php
