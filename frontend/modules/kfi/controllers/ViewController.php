@@ -1,6 +1,7 @@
 <?php
 
 namespace frontend\modules\kfi\controllers;
+
 use frontend\models\hrvc\KfiHistory;
 use frontend\models\hrvc\Kfi;
 
@@ -101,6 +102,7 @@ class ViewController extends Controller
 		$param = ModelMaster::decodeParams($hash);
 		$role = UserRole::userRight();
 		$kfiId = $param["kfiId"];
+		//$openTab = $param["openTab"];
 		$openTab = array_key_exists("openTab", $param) ? $param["openTab"] : 0;
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
@@ -125,7 +127,7 @@ class ViewController extends Controller
 		curl_close($api);
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
-		//throw new Exception(print_r($kfiTeams, true));
+		// throw new Exception(print_r($months, true));
 		return $this->render('kfi_history', [
 			"role" => $role,
 			"kfiDetail" => $kfiDetail,

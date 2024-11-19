@@ -16,12 +16,12 @@ $this->title = 'KFI View';
     </div>
     <div class="col-12 mt-10">
         <?= $this->render('kfi_header_filter', [
-			"role" => $role
-		]) ?>
+            "role" => $role
+        ]) ?>
         <div class="alert mt-10 pim-body bg-white">
             <div class="row">
                 <div class="col-11 pim-name-detail pr-0 pl-5 pt-2  text-start">
-                    <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="mr-5 font-size-12">
+                    <a href="<?= Yii::$app->request->referrer ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kfi/management/grid' ?>" class="mr-5 font-size-12">
                         <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
                         Back
                     </a>
@@ -42,20 +42,20 @@ $this->title = 'KFI View';
             <div class="row mt-10">
                 <div class="col-lg-7 col-12">
                     <?php
-					if ($kfiDetail["isOver"] == 1 && $kfiDetail["status"] != 2) {
-						$colorFormat = 'over';
-					} else {
-						if ($kfiDetail["status"] == 1) {
-							if ($kfiDetail["isOver"] == 2) {
-								$colorFormat = 'disable';
-							} else {
-								$colorFormat = 'inprogress';
-							}
-						} else {
-							$colorFormat = 'complete';
-						}
-					}
-					?>
+                    if ($kfiDetail["isOver"] == 1 && $kfiDetail["status"] != 2) {
+                        $colorFormat = 'over';
+                    } else {
+                        if ($kfiDetail["status"] == 1) {
+                            if ($kfiDetail["isOver"] == 2) {
+                                $colorFormat = 'disable';
+                            } else {
+                                $colorFormat = 'inprogress';
+                            }
+                        } else {
+                            $colorFormat = 'complete';
+                        }
+                    }
+                    ?>
                     <div class="row">
                         <div class="col-4 pim-name-detail ">Description</div>
                         <div class="col-2">
@@ -98,17 +98,17 @@ $this->title = 'KFI View';
                                         <div class="col-12">Target</div>
                                         <div class="col-12 mt-3 number-pim">
                                             <?php
-											$decimal = explode('.', $kfiDetail["targetAmount"]);
-											if (isset($decimal[1])) {
-												if ($decimal[1] == '00') {
-													$show = $decimal[0];
-												} else {
-													$show = $kfiDetail["targetAmount"];
-												}
-											} else {
-												$show = $kfiDetail["targetAmount"];
-											}
-											?>
+                                            $decimal = explode('.', $kfiDetail["targetAmount"]);
+                                            if (isset($decimal[1])) {
+                                                if ($decimal[1] == '00') {
+                                                    $show = $decimal[0];
+                                                } else {
+                                                    $show = $kfiDetail["targetAmount"];
+                                                }
+                                            } else {
+                                                $show = $kfiDetail["targetAmount"];
+                                            }
+                                            ?>
                                             <?= $show ?><?= $kfiDetail["amountType"] == 1 ? '%' : '' ?>
                                         </div>
                                     </div>
@@ -119,37 +119,40 @@ $this->title = 'KFI View';
                                         <div class="col-12">Result</div>
                                         <div class="col-12 mt-3 number-pim">
                                             <?php
-											if ($kfiDetail["result"] != '') {
-												$decimalResult = explode('.', $kfiDetail["result"]);
-												if (isset($decimalResult[1])) {
-													if ($decimalResult[1] == '00') {
-														$showResult = number_format($decimalResult[0]);
-													} else {
-														$showResult = number_format($kfiDetail["result"], 2);
-													}
-												} else {
-													$showResult = number_format($kfiDetail["result"]);
-												}
-											} else {
-												$showResult = 0;
-											}
-											?>
+                                            if ($kfiDetail["result"] != '') {
+                                                $decimalResult = explode('.', $kfiDetail["result"]);
+                                                if (isset($decimalResult[1])) {
+                                                    if ($decimalResult[1] == '00') {
+                                                        $showResult = number_format($decimalResult[0]);
+                                                    } else {
+                                                        $showResult = number_format($kfiDetail["result"], 2);
+                                                    }
+                                                } else {
+                                                    $showResult = number_format($kfiDetail["result"]);
+                                                }
+                                            } else {
+                                                $showResult = 0;
+                                            }
+                                            ?>
                                             <?= $showResult ?><?= $kfiDetail["amountType"] == 1 ? '%' : '' ?>
                                         </div>
                                     </div>
                                     <div class="col-12">
+
                                         <?php
-										$percent = explode('.', $kfiDetail['ratio']);
-										if (isset($percent[1])) {
-											if ($percent[1] != '00') {
-												$showPercent = $percent[1];
-											} else {
-												$showPercent = $percent[0];
-											}
-										} else {
-											$showPercent = $percent[0];
-										}
-										?>
+                                        $percent = explode('.', $kfiDetail['ratio']);
+                                        if (isset($percent[0]) && $percent[0] == '0') {
+                                            if (isset($percent[1])) {
+                                                if ($percent[1] == '00') {
+                                                    $showPercent = 0;
+                                                } else {
+                                                    $showPercent = round($kfiDetail['ratio'], 1);
+                                                }
+                                            }
+                                        } else {
+                                            $showPercent = round($kfiDetail['ratio']);
+                                        }
+                                        ?>
                                         <div class="progress">
                                             <div class="progress-bar-<?= $colorFormat ?>"
                                                 style="width:<?= $showPercent ?>%;"></div>
@@ -167,16 +170,16 @@ $this->title = 'KFI View';
                                     </div>
                                     <div class="col-4 text-center mt-5 pt-6 pl-3 pr-3">
                                         <?php
-										if ($role > 3  && $kfiDetail["status"] == 1) {
-										?>
-                                        <div onclick="javascript:updateKfi(<?= $kfiId ?>)"
-                                            class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
-                                            data-bs-target="#update-kfi-modal">
-                                            <i class="fa fa-refresh" aria-hidden="true"></i> Update
-                                        </div>
+                                        if ($role > 3  && $kfiDetail["status"] == 1) {
+                                        ?>
+                                            <div onclick="javascript:updateKfi(<?= $kfiId ?>)"
+                                                class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
+                                                data-bs-target="#update-kfi-modal">
+                                                <i class="fa fa-refresh" aria-hidden="true"></i> Update
+                                            </div>
                                         <?php
-										}
-										?>
+                                        }
+                                        ?>
                                     </div>
                                     <div class="col-4 pl-0 pr-5 mt-5 ">
                                         <div class="col-12 text-end font-<?= $colorFormat ?>"
@@ -211,9 +214,9 @@ $this->title = 'KFI View';
                         </div>
                         <!-- <div class="col-2  view-tab" id="tab-3" onclick="javascript:viewTabKfi(3)">
 							<img src="<?php //Yii::$app->homeUrl 
-									?>images/icons/Settings/comment.png" alt="History" class="pim-icon mr-5" style="margin-top: -2px;" id="tab-3-black">
+                                        ?>images/icons/Settings/comment.png" alt="History" class="pim-icon mr-5" style="margin-top: -2px;" id="tab-3-black">
 							<img src="<?php //Yii::$app->homeUrl 
-									?>images/icons/Settings/comment-blue.png" alt="History" class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-3-blue">
+                                        ?>images/icons/Settings/comment-blue.png" alt="History" class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-3-blue">
 							Chats
 						</div> -->
                         <div class="col-3 view-tab" id="tab-4" onclick="viewTabKfi(4)">
@@ -240,7 +243,6 @@ $this->title = 'KFI View';
                 </div>
             </div>
             <div class="row mt-10" id="show-content">
-
                 <div class="col-lg-12">
                     <div class="col-12 ligth-gray-box">
                         <div class="row pl-15 pr-20">
@@ -253,29 +255,29 @@ $this->title = 'KFI View';
                         <div class="col-12 alert bg-white mt-15 pt-0" style="height:280px;overflow-y: auto;">
                             <div class="row">
                                 <?php
-								if (isset($kfiDetail["kfiEmployeeDetail"]) && count($kfiDetail["kfiEmployeeDetail"]) > 0) {
-									foreach ($kfiDetail["kfiEmployeeDetail"] as $employeeId => $employee): ?>
-                                <div class="col-lg-3 col-md-4 col-12 mt-10 pt-0"
-                                    onclick="javascription:openEmployeeView(134,31)" style="cursor: pointer;">
-                                    <div class="row">
-                                        <div class="col-3 pr-0 pl-0">
-                                            <img src="<?= Yii::$app->homeUrl . $employee['picture'] ?>"
-                                                class="image-AssignMembers">
-                                        </div>
-                                        <div class="col-9 pl-10">
-                                            <div class="col-12 pim-employee-Name pr-0">
-                                                <strong><?= $employee['name'] ?></strong>
+                                if (isset($kfiDetail["kfiEmployeeDetail"]) && count($kfiDetail["kfiEmployeeDetail"]) > 0) {
+                                    foreach ($kfiDetail["kfiEmployeeDetail"] as $employeeId => $employee): ?>
+                                        <div class="col-lg-3 col-md-4 col-12 mt-10 pt-0"
+                                            onclick="javascription:openEmployeeView(134,31)" style="cursor: pointer;">
+                                            <div class="row">
+                                                <div class="col-3 pr-0 pl-0">
+                                                    <img src="<?= Yii::$app->homeUrl . $employee['picture'] ?>"
+                                                        class="image-AssignMembers">
+                                                </div>
+                                                <div class="col-9 pl-10">
+                                                    <div class="col-12 pim-employee-Name pr-0">
+                                                        <strong><?= $employee['name'] ?></strong>
+                                                    </div>
+                                                    <div class="col-12 pim-employee-title">
+                                                        <?= $employee['title'] ?>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-12 pim-employee-title">
-                                                <?= $employee['title'] ?>
-                                            </div>
                                         </div>
-                                    </div>
-                                </div>
                                 <?php
-									endforeach;
-								}
-								?>
+                                    endforeach;
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -288,54 +290,54 @@ $this->title = 'KFI View';
 <input type="hidden" id="kfiId" value="<?= $kfiId ?>">
 <?php
 $form = ActiveForm::begin([
-	'id' => 'update-kfi',
-	'method' => 'post',
-	'options' => [
-		'enctype' => 'multipart/form-data',
-	],
-	'action' => Yii::$app->homeUrl . 'kfi/management/save-update-kfi'
+    'id' => 'update-kfi',
+    'method' => 'post',
+    'options' => [
+        'enctype' => 'multipart/form-data',
+    ],
+    'action' => Yii::$app->homeUrl . 'kfi/management/save-update-kfi'
 
 ]); ?>
 <?= $this->render('modal_update_kfi', [
-	"units" => $units,
-	"companies" => $companies,
-	"months" => $months,
-	"isManager" => $isManager
+    "units" => $units,
+    "companies" => $companies,
+    "months" => $months,
+    "isManager" => $isManager
 ]) ?>
 <?php ActiveForm::end(); ?>
 <?= $this->render('modal_delete') ?>
 <?= $this->render('modal_employee_history') ?>
 
 <script>
-function viewTabKfi(tabId) {
-    // Hide all tabs
-    for (let i = 1; i <= 5; i++) {
-        document.getElementById('tab-' + i).classList.remove('view-tab-active');
-        document.getElementById('tab-' + i + '-blue').style.display = 'none';
-        document.getElementById('tab-' + i + '-black').style.display = 'block';
+    // function viewTabKfi2(tabId) {
+    //     // Hide all tabs
+    //     for (let i = 1; i <= 5; i++) {
+    //         document.getElementById('tab-' + i).classList.remove('view-tab-active');
+    //         document.getElementById('tab-' + i + '-blue').style.display = 'none';
+    //         document.getElementById('tab-' + i + '-black').style.display = 'block';
+    //     }
+
+    //     // Show the clicked tab as active
+    //     document.getElementById('tab-' + tabId).classList.add('view-tab-active');
+    //     document.getElementById('tab-' + tabId + '-blue').style.display = 'block';
+    //     document.getElementById('tab-' + tabId + '-black').style.display = 'none';
+
+    //     // Hide all content
+    //     for (let i = 1; i <= 5; i++) {
+    //         document.getElementById('content-' + i).style.display = 'none';
+    //     }
+
+    //     // Show the content corresponding to the clicked tab
+    //     document.getElementById('content-' + tabId).style.display = 'block';
+    // }
+
+    // Optionally set a default tab to be active on page load
+    window.onload = function() {
+        let openTab = <?= $openTab ?>; // PHP value passed to JavaScript
+        if (openTab) {
+            viewTabKfi(openTab); // Set the tab based on the PHP value
+        } else {
+            viewTabKfi(1); // Default to tab 1 if no value is passed
+        }
     }
-
-    // Show the clicked tab as active
-    document.getElementById('tab-' + tabId).classList.add('view-tab-active');
-    document.getElementById('tab-' + tabId + '-blue').style.display = 'block';
-    document.getElementById('tab-' + tabId + '-black').style.display = 'none';
-
-    // Hide all content
-    for (let i = 1; i <= 5; i++) {
-        document.getElementById('content-' + i).style.display = 'none';
-    }
-
-    // Show the content corresponding to the clicked tab
-    document.getElementById('content-' + tabId).style.display = 'block';
-}
-
-// Optionally set a default tab to be active on page load
-window.onload = function() {
-    let openTab = <?php echo json_encode($openTab); ?>; // PHP value passed to JavaScript
-    if (openTab) {
-        viewTabKfi(openTab); // Set the tab based on the PHP value
-    } else {
-        viewTabKfi(1); // Default to tab 1 if no value is passed
-    }
-}
 </script>
