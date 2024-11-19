@@ -132,7 +132,7 @@ $this->title = 'Company KFI History';
                                             }
                                             ?>
                                         </div>
-                                        <div class="col-9 mt-10 pl-28">
+                                        <div class="col-8 mt-10 pl-25 pr-0">
                                             <div class="row">
                                                 <div class="col-4 month-<?= $colorFormat ?> pt-2">Term</div>
                                                 <div class="col-8 term-<?= $colorFormat ?>  pt-2">
@@ -141,12 +141,12 @@ $this->title = 'Company KFI History';
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-3 mt-10">
+                                        <div class="col-4 mt-10">
                                             <div class="<?= $colorFormat ?>-tag text-center">
                                                 <?= $kfi['status'] == 1 ? 'In process' : 'Completed' ?>
                                             </div>
                                         </div>
-                                        <div class="col-9  pl-15 pr-20 pt-18">
+                                        <div class="col-8  pl-15 pr-20 pt-18">
                                             <div class="col-12 text-start pl-5 font-size-10">
                                                 Assign on
                                             </div>
@@ -230,9 +230,9 @@ $this->title = 'Company KFI History';
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-3 font-size-10 pt-15 text-end">
+                                        <div class="col-4 font-size-10 pt-15 text-end">
                                             <!-- Apply text-end here for overall alignment -->
-                                            <div class="col-12 text-end">Quant Ratio</div>
+                                            <div class="col-12 text-center">Quant Ratio</div>
                                             <div class="col-12 pim-duedate text-center mt-2 text-end">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/diamon.svg"
                                                     class="pim-iconKFI" style="margin-top: -3px; margin-left: 3px;">
@@ -247,11 +247,11 @@ $this->title = 'Company KFI History';
                                             <div class="col-12 mt-6 mb-6 border-bottom-<?= $colorFormat ?>">
                                             </div>
 
-                                            <div class="col-12 pr-0 mt-2 text-end">Update Interval</div>
+                                            <div class="col-12 pr-0 mt-2 text-center">Update Interval</div>
                                             <div class="col-12 pim-duedate text-center mt-2 text-end">
                                                 <b>
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/monthly.svg"
-                                                        class="pim-iconKFI" style="margin-top: -3px; margin-left: 3px;">
+                                                        class="pim-iconKFI mr-3" style="margin-top: -3px; margin-left: 3px;">
                                                     <?= $kfi["unit"] ?>
                                                 </b>
                                             </div>
