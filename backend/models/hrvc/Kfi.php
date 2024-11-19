@@ -44,7 +44,7 @@ class Kfi extends \backend\models\hrvc\master\KfiMaster
         $date = '';
         $kfiHistory = KfiHistory::find()
             ->select('nextCheckDate')
-            ->where(["kfiId" => $kfiId, "status" => [1, 4]])->orderBy('kfiHistoryId DESC')->asArray()->one();
+            ->where(["kfiId" => $kfiId, "status" => [1, 2, 4]])->orderBy('kfiHistoryId DESC')->asArray()->one();
         if (isset($kfiHistory) && !empty($kfiHistory) && $kfiHistory["nextCheckDate"] != '') {
             $date = ModelMaster::engDate($kfiHistory["nextCheckDate"], 2);
         }

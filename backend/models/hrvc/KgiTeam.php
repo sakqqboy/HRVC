@@ -140,7 +140,7 @@ class KgiTeam extends \backend\models\hrvc\master\KgiTeamMaster
         $date = '';
         $kgiHistory = KgiTeamHistory::find()
             ->select('nextCheckDate')
-            ->where(["kgiTeamId" => $kgiTeamId, "status" => [1, 4]])
+            ->where(["kgiTeamId" => $kgiTeamId, "status" => [1, 2, 4]])
             ->orderBy('kgiTeamHistoryId DESC')
             ->asArray()
             ->one();

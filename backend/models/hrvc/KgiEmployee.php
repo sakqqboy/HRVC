@@ -136,7 +136,7 @@ class KgiEmployee extends \backend\models\hrvc\master\KgiEmployeeMaster
         $date = '';
         $kgiHistory = KgiEmployeeHistory::find()
             ->select('nextCheckDate')
-            ->where(["kgiEmployeeId" => $kgiEmployeeId, "status" => [1, 4]])
+            ->where(["kgiEmployeeId" => $kgiEmployeeId, "status" => [1, 2, 4]])
             ->orderBy('kgiEmployeeHistoryId DESC')
             ->asArray()
             ->one();
