@@ -134,7 +134,7 @@ class KpiTeam extends \backend\models\hrvc\master\KpiTeamMaster
         $date = '';
         $kpiHistory = KpiTeamHistory::find()
             ->select('nextCheckDate')
-            ->where(["kpiTeamId" => $kpiTeamId, "status" => [1, 4]])
+            ->where(["kpiTeamId" => $kpiTeamId, "status" => [1, 2, 4]])
             ->orderBy('kpiTeamHistoryId DESC')
             ->asArray()
             ->one();

@@ -256,7 +256,6 @@ $this->title = 'Company KFI History';
                                                 </b>
                                             </div>
                                         </div>
-
                                         <div class="col-12 mt-10">
                                             <div class="row">
                                                 <div class="col-5 text-start pl-20">
