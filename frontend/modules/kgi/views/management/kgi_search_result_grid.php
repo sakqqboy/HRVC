@@ -21,18 +21,24 @@ $this->title = 'KGI Grid View';
                     <div class="row">
                         <div class="col-8">
                             <div class="row">
-                                <div class="col-4 pim-type-tab-selected pr-0 pl-0">
+                                <div class="col-4 pim-type-tab-selected pr-0 pl-0  rounded-top-left">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/company.svg" alt="Company"
+                                        class="pim-icon" style="width: 14px;height: 14px;padding-bottom: 4px;">
                                     Company KGI
                                 </div>
                                 <div class="col-4 pim-type-tab">
                                     <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/team-kgi-grid"
                                         class="no-underline-black ">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg" alt="Team"
+                                            class="pim-icon" style="width: 13px;height: 13px;padding-bottom: 2px;">
                                         Team KGI
                                     </a>
                                 </div>
-                                <div class="col-4 pim-type-tab">
+                                <div class="col-4 pim-type-tab rounded-top-right">
                                     <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi-grid"
                                         class="no-underline-black">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/self.svg" alt="Self"
+                                            class="pim-icon" style="width: 13px;height: 13px;padding-bottom: 3px;">
                                         Self KGI
                                     </a>
                                 </div>
