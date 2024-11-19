@@ -232,6 +232,7 @@ class KpiPersonalController extends Controller
 		$kpiEmployeeDetail = json_decode($kpiEmployeeDetail, true);
 
 		curl_close($api);
+		//   throw new Exception(print_r($kpiEmployeeDetail,true));
 		$months = ModelMaster::monthFull(1);
 		return $this->render('update_personal_kpi', [
 			"kpiEmployeeId" => $kpiEmployeeId,
@@ -248,8 +249,14 @@ class KpiPersonalController extends Controller
 				->one();
 			$status = $_POST["status"];
 			if (isset($history) && !empty($history)) {
-				$nextCheckDateArr = explode(' ', $history["nextCheckDate"]);
-				$nextCheckDate = $nextCheckDateArr[0];
+				// $nextCheckDateArr = explode(' ', $history["nextCheckDate"]);
+				// $nextCheckDate = $nextCheckDateArr[0];
+				if (!empty($history["nextCheckDate"])){
+					$nextCheckDateArr = explode(' ', $history["nextCheckDate"]);
+					$nextCheckDate = $nextCheckDateArr[0];
+				}else{
+					$nextCheckDate = Null;
+				}
 				$lastCheck = $history->nextCheckDate;
 				if ($history->target == str_replace(",", "", $_POST["target"]) && $history->result == str_replace(",", "", $_POST["result"]) && $nextCheckDate == $_POST["nextCheckDate"]) {
 					$history->status = $_POST["status"];
