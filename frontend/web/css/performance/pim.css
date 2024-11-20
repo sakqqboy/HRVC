@@ -587,6 +587,7 @@
 	border-radius: 26.5px;
 	letter-spacing: 0.5px;
 	padding-left: 5px;
+	padding-right: 0px;
 	padding-top: 2px;
 	padding-bottom: 2px;
 
@@ -601,6 +602,7 @@
 	border-radius: 26.5px;
 	letter-spacing: 0.5px;
 	padding-left: 5px;
+	padding-right: 0px;
 	padding-top: 2px;
 	padding-bottom: 2px;
 }
@@ -613,6 +615,7 @@
 	border-radius: 26.5px;
 	letter-spacing: 0.5px;
 	padding-left: 5px;
+	padding-right: 0px;
 	padding-top: 2px;
 	padding-bottom: 2px;
 }
@@ -622,9 +625,11 @@
 	font-size: 10px;
 	color: black;
 	background-color: #E3E3E3;
+	border: 0.1px solid #000000;
 	border-radius: 26.5px;
 	letter-spacing: 0.5px;
 	padding-left: 5px;
+	padding-right: 0px;
 	padding-top: 2px;
 	padding-bottom: 2px;
 }
@@ -797,7 +802,7 @@
 }
 
 .load-disable {
-	border: 1px solid #808080;
+	border: 1px solid #000000;
 }
 
 .load-info {
@@ -970,7 +975,7 @@
 	width: 24px;
 	height: 24px;
 	border-radius: 100%;
-	border: #FFFFFF solid 0.5px;
+	border: #000000 solid 0.5px;
 	background-color: #808080;
 
 }

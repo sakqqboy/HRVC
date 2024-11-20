@@ -292,17 +292,22 @@ $this->title = "TEAM KGI";
                                                                     ?>
                                                         </div>
                                                         <div
-                                                            class="col-5 number-tagNew  <?= $kgi["countTeamEmployee"] == 0 ? 'load-yenlow' : 'load-'  . $colorFormat ?> ">
+                                                            class="col-5 number-tagNew  <?= $kgi["countTeamEmployee"] == 0 && $colorFormat != "disable" ? 'load-yenlow' : 'load-'  . $colorFormat ?> ">
                                                             <?= $kgi["countTeamEmployee"] ?>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div
-                                                    class="col-6 <?= $kgi["countTeamEmployee"] == 0 ? 'yenlow-assignNew' : $colorFormat . '-assignNew' ?>">
+                                                    class="col-6 <?= $kgi["countTeamEmployee"] == 0 && $colorFormat != "disable" ? 'yenlow-assignNew' : $colorFormat . '-assignNew' ?>">
                                                     <?php
 														if ($colorFormat == "disable" || $role < 3) {
 															?>
-                                                    <span class="font-<?= $colorFormat ?> ml-16" style="top: 2px;">
+                                                    <span class="pull-left">
+                                                        <img src="
+                                                        <?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $colorFormat ?>.svg"
+                                                            class="home-icon mr-2">
+                                                    </span>
+                                                    <span class="font-<?= $colorFormat ?>" style="top: 2px;">
                                                         View Assigned
                                                     </span>
                                                     <?php
@@ -419,7 +424,12 @@ $this->title = "TEAM KGI";
                                                     </a>
                                                     <?php
 															} else { ?>
-                                                    <span class="font-<?= $colorFormat ?> ml-16" style="top: 2px;">
+                                                    <span class="pull-left">
+                                                        <img src="
+                                                        <?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $colorFormat ?>.svg"
+                                                            class="home-icon mr-2">
+                                                    </span>
+                                                    <span class="font-<?= $colorFormat ?>" style="top: 2px;">
                                                         View Team
                                                     </span>
                                                     <?php

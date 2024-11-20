@@ -366,13 +366,12 @@ $this->title = "INDIVIDUAL KGI";
                                                         </div>
                                                     </div>
                                                     <div class="col-6 <?= $colorFormat . '-assignNew' ?>">
-                                                        <span class="pull-left"
-                                                            style="display:<?= $kgi['isOver'] == 2 ? 'none;' : '' ?>">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.png"
+                                                        <span class="pull-left">
+                                                            <img src="
+                                                        <?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $colorFormat ?>.svg"
                                                                 class="home-icon mr-2">
                                                         </span>
-                                                        <a class="font-<?= $colorFormat ?> <?= $kgi['isOver'] == 2 ? 'ml-16' : '' ?>"
-                                                            style="top: 2px;">
+                                                        <a class="font-<?= $colorFormat ?>" style="top: 2px;">
                                                             View mate
                                                         </a>
                                                     </div>
@@ -410,13 +409,12 @@ $this->title = "INDIVIDUAL KGI";
 
                                                     </div>
                                                     <div class="col-6 <?= $colorFormat ?>-assignNew ">
-                                                        <span class="pull-left"
-                                                            style="display:<?= $kgi['isOver'] == 2 ? 'none;' : '' ?>">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.png"
+                                                        <span class="pull-left">
+                                                            <img src="
+                                                        <?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $colorFormat ?>.svg"
                                                                 class="home-icon mr-2">
                                                         </span>
-                                                        <a class="font-<?= $colorFormat ?> <?= $kgi['isOver'] == 2 ? 'ml-16' : '' ?>"
-                                                            style="top: 2px;">
+                                                        <a class="font-<?= $colorFormat ?>" style="top: 2px;">
                                                             View Team
                                                         </a>
                                                     </div>
