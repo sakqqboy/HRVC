@@ -49,23 +49,24 @@ $this->title = "TEAM KGI";
                             <?php
                             if ($role > 3) {
                             ?>
-                            <div class="col-12 approval-box text-center pr-3">
+                            <div
+                                class="col-12 <?= $waitForApprove["totalRequest"] > 0 ? 'approval-box' : 'noapproval-box' ?> text-center pr-3">
                                 <?php
                                     if ($waitForApprove["totalRequest"] > 0) {
                                     ?>
                                 <a href="<?= Yii::$app->homeUrl ?>kgi/management/wait-approve"
-                                    style="text-decoration: none;color:#2580D3;">
-                                    <span class="approve-num mr-2"><?= $waitForApprove["totalRequest"] ?></span>
+                                    style="text-decoration: none;color:#000000;">
+                                    <span class="approvals-num mr-2"><?= $waitForApprove["totalRequest"] ?></span>
                                     Approvals
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approve.svg"
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approvals.svg"
                                         class="first-layer-icon pull-right" style="margin-top:-2px;">
                                 </a>
                                 <?php
                                     } else { ?>
-                                <a style="text-decoration: none;color:#2580D3;">
-                                    <span class="approve-num mr-2"><?= $waitForApprove["totalRequest"] ?></span>
-                                    Approvals
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approve.svg"
+                                <a style="text-decoration: none;color:#2D7F06;">
+                                    <span class="noapprovals-num mr-2"><?= $waitForApprove["totalRequest"] ?></span>
+                                    No Approvals
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/check.svg"
                                         class="first-layer-icon pull-right" style="margin-top:-2px;">
                                 </a>
                                 <?php
@@ -114,16 +115,16 @@ $this->title = "TEAM KGI";
                     <table class="">
                         <thead>
                             <tr class="pim-table-header">
-                                <td class="pl-10" style="width:15%">KGI Contents</td>
+                                <td class="pl-10" style="width:13%">KGI Contents</td>
                                 <td style="width:10%">Company Name</td>
-                                <td style="width:10%">Branch</td>
-                                <td style="width:3%">Priority</td>
-                                <td style="width:10%">Employees</td>
-                                <td style="width:5%">Team</td>
+                                <td style="width:13%">Branch</td>
+                                <td style="width:5%">Priority</td>
+                                <td style="width:7%">Employees</td>
+                                <td style="width:4%">Team</td>
                                 <td style="width:5%">QR</td>
-                                <td class="text-center" style="width:5%">Target</td>
-                                <td class="text-center" style="width:2%">Code</td>
-                                <td class="text-center" style="width:5%">Result</td>
+                                <td class="text-end" style="width:5%">Target</td>
+                                <td class="text-center" style="width:6%">Code</td>
+                                <td class="text-start" style="width:5%">Result</td>
                                 <td class="text-center" style="width:5%">Ratio</td>
                                 <td class="text-center" style="width:2%">Month</td>
                                 <td class="text-center" style="width:5%">Unit</td>
@@ -173,10 +174,16 @@ $this->title = "TEAM KGI";
                                 <td><?= $kgi["companyName"] ?></td>
                                 <td><img src="<?= Yii::$app->homeUrl . $kgi['flag'] ?>" class="Flag-Turkey">
                                     <?= $kgi["branch"] ?>, <?= $kgi["countryName"] ?></td>
-                                <!-- <td></td> -->
-                                <td class="text-center"><?= $kgi["priority"] ?></td>
                                 <td>
-                                    <div class="flex mb-5 -space-x-4">
+                                    <div
+                                        style="width: 24px; height: 24px; flex-shrink: 0; border-radius: 4px; background: #2580D3; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                                        <?= $kgi["priority"] ?>
+                                    </div>
+                                </td>
+                                <!-- <td class="text-center"><?= $kgi["priority"] ?></td> -->
+
+                                <td class="text-center">
+                                    <!-- <div class="flex mb-5 -space-x-4">
                                         <?php
                                                 if (isset($kgi["employee"]) && count($kgi["employee"]) > 0) {
                                                     $e = 1;
@@ -192,15 +199,21 @@ $this->title = "TEAM KGI";
                                                 }
                                                 ?>
                                         <a class="no-underline-black ml-2 mt-3"
-                                            href="#"><?= count($kgi["employee"]) ?></a>
+                                            href="#"><?= count($kgi["employee"]) ?></a>                                  
+                                    </div> -->
+                                    <div class="col-5 number-tagNew  <?= 'load-' . $colorFormat ?> ">
+                                        <?= count($kgi["employee"]) ?>
                                     </div>
                                 </td>
-                                <td>
-                                    <span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users"
-                                            aria-hidden="true"></i> <?= $kgi["countTeam"] ?></span>
+                                <td class="text-start">
+                                    <!-- <span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users"
+                                            aria-hidden="true"></i> <?= $kgi["countTeam"] ?></span> -->
+                                    <div class="col-5 number-tagNew  <?= 'load-' . $colorFormat ?> ">
+                                        <?= $kgi["countTeam"] ?>
+                                    </div>
                                 </td>
                                 <td><?= $kgi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?></td>
-                                <td class="text-start">
+                                <td class="text-end">
                                     <?php
                                             if ($kgi["target"] != '') {
                                                 $decimal = explode('.', $kgi["target"]);
@@ -222,7 +235,7 @@ $this->title = "TEAM KGI";
                                 <td class="text-center">
                                     <?= $kgi["code"] ?>
                                 </td>
-                                <td class="text-end">
+                                <td class="text-start">
                                     <?php
                                             if ($kgi["result"] != '') {
                                                 $decimalResult = explode('.', $kgi["result"]);
