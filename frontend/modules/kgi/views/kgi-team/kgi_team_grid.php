@@ -29,7 +29,7 @@ $this->title = "TEAM KGI";
                                         Company KGI
                                     </a>
                                 </div>
-                                <div class="col-4 pim-type-tab-selected">
+                                <div class="col-4 pr-0 pl-0 pim-type-tab-selected text-center">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg" alt="Team"
                                         class="pim-icon" style="width: 13px;height: 13px;padding-bottom: 2px;">
                                     Team KGI
