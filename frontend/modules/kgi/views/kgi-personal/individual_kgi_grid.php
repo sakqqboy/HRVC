@@ -35,7 +35,7 @@ $this->title = "INDIVIDUAL KGI";
                                             Company KGI
                                         </a>
                                     </div>
-                                    <div class="col-4 pim-type-tab">
+                                    <div class="col-4 pr-0 pl-0 pim-type-tab">
                                         <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/team-kgi-grid"
                                             class="no-underline-black ">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg"
@@ -44,7 +44,7 @@ $this->title = "INDIVIDUAL KGI";
                                             Team KGI
                                         </a>
                                     </div>
-                                    <div class="col-4 pim-type-tab-selected rounded-top-right">
+                                    <div class="col-4 pr-0 pl-0 pim-type-tab-selected rounded-top-right">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/self.svg" alt="Self"
                                             class="pim-icon" style="width: 13px;height: 13px;padding-bottom: 3px;">
                                         Self KGI
@@ -416,19 +416,19 @@ $this->title = "INDIVIDUAL KGI";
                                                             <div class="col-2">
                                                                 <div class="pim-pic-<?= $colorFormat ?>">
                                                                     <img
-                                                                        src="<?= Yii::$app->homeUrl ?>images/icons/Settings/teamwhite.svg">
+                                                                        src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $colorFormat == 'disable' ? 'teamblack' : 'teamwhite' ?>.svg">
                                                                 </div>
                                                             </div>
                                                             <div class="col-2 pic-after pt-0">
                                                                 <div class="pim-pic-<?= $colorFormat ?>">
                                                                     <img
-                                                                        src="<?= Yii::$app->homeUrl ?>images/icons/Settings/teamwhite.svg">
+                                                                        src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $colorFormat == 'disable' ? 'teamblack' : 'teamwhite' ?>.svg">
                                                                 </div>
                                                             </div>
                                                             <div class="col-2 pic-after pt-0">
                                                                 <div class="pim-pic-<?= $colorFormat ?>">
                                                                     <img
-                                                                        src="<?= Yii::$app->homeUrl ?>images/icons/Settings/teamwhite.svg">
+                                                                        src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $colorFormat == 'disable' ? 'teamblack' : 'teamwhite' ?>.svg">
                                                                 </div>
                                                             </div>
                                                             <div class="col-5 number-tagNew load-<?= $colorFormat ?>">
