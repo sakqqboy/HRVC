@@ -330,6 +330,7 @@ $this->title = "INDIVIDUAL KGI";
                                                     <div class="col-5 pr-2 pl-13">
                                                         <div class="row d-flex align-items-center"
                                                             style="min-height: 24px;">
+                                                            <?php if ($kgi["countTeamEmployee"] != 0) {?>
                                                             <div class="col-2">
                                                                 <?php
                                                                     if (isset($kgi['teamMate'][0])) {
@@ -364,6 +365,33 @@ $this->title = "INDIVIDUAL KGI";
                                                                 class="col-5 number-tagNew  <?= 'load-'  . $colorFormat ?> ">
                                                                 <?= $kgi["countTeamEmployee"] ?>
                                                             </div>
+                                                            <?php }else {?>
+                                                            <div class="col-2 ">
+                                                                <div
+                                                                    class="<?= $kgi['countTeamEmployee'] == 0 && $colorFormat != 'disable' ? 'pim-pic-yenlow' : 'pim-pic-' . $colorFormat ?>">
+                                                                    <img
+                                                                        src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-2 pic-after pt-0">
+                                                                <div
+                                                                    class="<?= $kgi['countTeamEmployee'] == 0 && $colorFormat != 'disable' ? 'pim-pic-yenlow' : 'pim-pic-' . $colorFormat ?>">
+                                                                    <img
+                                                                        src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-2 pic-after pt-0">
+                                                                <div
+                                                                    class="<?= $kgi['countTeamEmployee'] == 0 && $colorFormat != 'disable' ? 'pim-pic-yenlow' : 'pim-pic-' . $colorFormat ?>">
+                                                                    <img
+                                                                        src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg">
+                                                                </div>
+                                                            </div>
+                                                            <div
+                                                                class="col-5 number-tagNew  <?= $kgi["countTeamEmployee"] == 0 && $colorFormat != "disable"  ? 'load-yenlow' : 'load-'  . $colorFormat ?> ">
+                                                                <?= $kgi["countTeamEmployee"] ?>
+                                                            </div>
+                                                            <?php }?>
                                                         </div>
                                                     </div>
                                                     <div class="col-6 <?= $colorFormat . '-assignNew' ?>">
