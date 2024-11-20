@@ -88,16 +88,16 @@ $this->title = "KGI";
                     <table class="">
                         <thead>
                             <tr class="pim-table-header">
-                                <td class="pl-10" style="width:15%">KGI Contents</td>
+                                <td class="pl-10" style="width:13%">KGI Contents</td>
                                 <td style="width:10%">Company Name</td>
-                                <td style="width:10%">Branch</td>
-                                <td style="width:3%">Priority</td>
-                                <td style="width:10%">Employees</td>
-                                <td style="width:5%">Team</td>
+                                <td style="width:13%">Branch</td>
+                                <td style="width:5%">Priority</td>
+                                <td style="width:7%">Employees</td>
+                                <td style="width:4%">Team</td>
                                 <td style="width:5%">QR</td>
-                                <td class="text-center" style="width:5%">Target</td>
-                                <td class="text-center" style="width:2%">Code</td>
-                                <td class="text-center" style="width:5%">Result</td>
+                                <td class="text-end" style="width:5%">Target</td>
+                                <td class="text-center" style="width:6%">Code</td>
+                                <td class="text-start" style="width:5%">Result</td>
                                 <td class="text-center" style="width:5%">Ratio</td>
                                 <td class="text-center" style="width:2%">Month</td>
                                 <td class="text-center" style="width:5%">Unit</td>
@@ -144,10 +144,14 @@ $this->title = "KGI";
                                 <td><?= $kgi["companyName"] ?></td>
                                 <td><img src="<?= Yii::$app->homeUrl . $kgi['flag'] ?>" class="Flag-Turkey">
                                     <?= $kgi["branch"] ?>, <?= $kgi["countryName"] ?></td>
-                                <!-- <td></td> -->
-                                <td class="text-center"><?= $kgi["priority"] ?></td>
-                                <td>
-                                    <div class="flex mb-5 -space-x-4">
+                                <td class="text-center">
+                                    <div
+                                        style="width: 24px; height: 24px; flex-shrink: 0; border-radius: 4px; background: #2580D3; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                                        <?= $kgi["priority"] ?>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <!-- <div class="flex mb-5 -space-x-4">
                                         <?php
 												if (isset($kgi["kgiEmployee"]) && count($kgi["kgiEmployee"]) > 0) {
 													$e = 1;
@@ -164,14 +168,21 @@ $this->title = "KGI";
 												?>
                                         <a class="no-underline-black ml-2 mt-3"
                                             href="#"><?= count($kgi["kgiEmployee"]) ?></a>
+                                    
+                                    </div> -->
+                                    <div class="col-5 number-tagNew  <?= 'load-' . $colorFormat ?> ">
+                                        <?= count($kgi["kgiEmployee"]) ?>
                                     </div>
                                 </td>
-                                <td>
-                                    <span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users"
-                                            aria-hidden="true"></i> <?= $kgi["countTeam"] ?></span>
+                                <td class="text-start">
+                                    <!-- <span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users"
+                                            aria-hidden="true"></i> <?= $kgi["countTeam"] ?></span> -->
+                                    <div class="col-5 number-tagNew  <?= 'load-' . $colorFormat ?> ">
+                                        <?= $kgi["countTeam"] ?>
+                                    </div>
                                 </td>
                                 <td><?= $kgi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?></td>
-                                <td class="text-start">
+                                <td class="text-end">
                                     <?php
 											$decimal = explode('.', $kgi["targetAmount"]);
 											if (isset($decimal[1])) {
@@ -189,7 +200,7 @@ $this->title = "KGI";
                                 <td class="text-center">
                                     <?= $kgi["code"] ?>
                                 </td>
-                                <td class="text-end">
+                                <td class="text-start">
                                     <?php
 											if ($kgi["result"] != '') {
 												$decimalResult = explode('.', $kgi["result"]);
