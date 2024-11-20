@@ -249,8 +249,8 @@ $this->title = 'Company KGI History';
                                         <div class="col-5 border-right-<?= $colorFormat ?> pl-10">
                                             <div class="row">
                                                 <div class="col-2 pt-3">
-                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-<?= $colorFormat ?>.png"
-                                                        class="first-layer-icon" style="margin-top: -4px;">
+                                                    <img
+                                                        src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-<?= $colorFormat ?>.png">
                                                 </div>
                                                 <div class="col-2 pic-after pt-0">
 
