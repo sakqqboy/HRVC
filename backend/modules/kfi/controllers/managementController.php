@@ -120,6 +120,7 @@ class ManagementController extends Controller
 						"code" =>  $kfiHistory["code"],
 						"result" => $kfiHistory["result"],
 						"ratio" => number_format($ratio, 2),
+						//"ratio" => number_format('1000.00', 2),
 						"nextCheck" => ModelMaster::engDate($kfiHistory["nextCheckDate"], 2),
 						"checkDate" => ModelMaster::engDate($kfiHistory["checkPeriodDate"], 2),
 						"amountType" => $kfiHistory["amountType"],
@@ -140,7 +141,7 @@ class ManagementController extends Controller
 		//throw new Exception(print_r($data, true));
 		return json_encode($data);
 	}
-	public function actionKfiDetail($kfiId)
+	public function actionKfiDetail($kfiId, $kfiHistoryId)
 	{
 		$kfi = Kfi::find()->where(["kfiId" => $kfiId])->asArray()->one();
 		$res["kfiName"] = $kfi["kfiName"];
@@ -162,11 +163,18 @@ class ManagementController extends Controller
 		$res["active"] = $kfi["active"];
 		$res["branch"] = KfiBranch::kfiBranchShort($kfiId);
 		$res["kfiEmployeeDetail"] = KfiEmployee::kfiEmployeeDetail($kfi["kfiId"]);
-		$kfiHistory = KfiHistory::find()
-			->where(["kfiId" => $kfiId, "status" => [1, 2]])
-			->orderBy('kfiHistoryId DESC')
-			->asArray()
-			->one();
+		if ($kfiHistoryId == 0) {
+			$kfiHistory = KfiHistory::find()
+				->where(["kfiId" => $kfiId, "status" => [1, 2]])
+				->orderBy('kfiHistoryId DESC')
+				->asArray()
+				->one();
+		} else {
+			$kfiHistory = KfiHistory::find()
+				->where(["kfiHistoryId" => $kfiHistoryId])
+				->asArray()
+				->one();
+		}
 		if (isset($kfiHistory) && !empty($kfiHistory)) {
 			$res2["quantRatio"] = $kfiHistory["quantRatio"];
 			$res2["code"] =  $kfiHistory["code"];
@@ -183,6 +191,7 @@ class ManagementController extends Controller
 			$res2["toDate"] = $kfiHistory["toDate"];
 			$res2["fromDateDetail"] = ModelMaster::engDate($kfiHistory["fromDate"], 2);
 			$res2["toDateDetail"] = ModelMaster::engDate($kfiHistory["toDate"], 2);
+			$res["status"] = $kfiHistory["status"];
 			if ($kfi["targetAmount"] == null || $kfi["targetAmount"] == '' || $kfi["targetAmount"] == 0) {
 				$ratio = 0;
 			} else {
@@ -216,13 +225,16 @@ class ManagementController extends Controller
 		$res3 = array_merge($res, $res2);
 		return json_encode($res3);
 	}
-	public function actionKfiHistory($kfiId)
+	public function actionKfiHistory($kfiId, $kfiHistoryId)
 	{
-		$kfiHistory = KfiHistory::find()
-			->where(["kfiId" => $kfiId, "status" => [1, 2, 4]])
-			->orderBy('kfiHistoryId DESC')
-			->asArray()
-			->all();
+		if ($kfiHistoryId == 0) {
+			$kfiHistory = KfiHistory::find()
+				->where(["kfiId" => $kfiId, "status" => [1, 2, 4]])
+				->orderBy('kfiHistoryId DESC')
+				->asArray()
+				->all();
+		} else {
+		}
 		$data = [];
 		if (isset($kfiHistory) && count($kfiHistory) > 0) {
 			foreach ($kfiHistory as $history) :

@@ -676,7 +676,7 @@ function kfiNextTarget() {
         }
     });
 }
-function viewTabKfi(tabId) { 
+function viewTabKfi(kfiHistoryId,tabId) { 
 	var currentTabId = $("#currentTab").val();
 	//alert(currentTabId + '==' + tabId);
 	var kfiId = $("#kfiId").val();
@@ -704,15 +704,15 @@ function viewTabKfi(tabId) {
 	}
 	if (tabId == 2) {
 		var url = $url + 'kfi/view/all-kfi-history';
-		$.ajax({
-			type: "POST",
-			dataType: 'json',
-			url: url,
-			data: { kfiId: kfiId },
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            url: url,
+            data: { kfiId: kfiId, kfiHistoryId: kfiHistoryId },
             success: function (data) {
-				$("#show-content").html(data.monthlyDetailHistoryText);
-			}
-		});
+                $("#show-content").html(data.monthlyDetailHistoryText);
+            }
+        });
 	}
 	if (tabId == 3) {
 		var url = $url + 'kfi/view/kfi-issue';

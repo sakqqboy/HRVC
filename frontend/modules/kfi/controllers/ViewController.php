@@ -64,7 +64,7 @@ class ViewController extends Controller
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
 		$kfiDetail = curl_exec($api);
 		$kfiDetail = json_decode($kfiDetail, true);
 
@@ -108,11 +108,17 @@ class ViewController extends Controller
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
+		if (isset($param["kfiHistoryId"])) {
+			$kfiHistoryId = $param["kfiHistoryId"];
+		} else {
+			$kfiHistoryId = 0;
+		}
+		//throw new Exception($kfiHistoryId);
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=" . $kfiHistoryId);
 		$kfiDetail = curl_exec($api);
 		$kfiDetail = json_decode($kfiDetail, true);
 
@@ -127,7 +133,7 @@ class ViewController extends Controller
 		curl_close($api);
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
-		// throw new Exception(print_r($months, true));
+		//throw new Exception(print_r($kfiDetail, true));
 		return $this->render('kfi_history', [
 			"role" => $role,
 			"kfiDetail" => $kfiDetail,
@@ -137,11 +143,13 @@ class ViewController extends Controller
 			"isManager" => $isManager,
 			"units" => $units,
 			"companies" => $companies,
+			"kfiHistoryId" => $kfiHistoryId
 		]);
 	}
 	public function actionDeleteKfi()
 	{
 		$kfiId = $_POST["kfiId"];
+		KfiHistory::updateAll(["status" => 99], ["kfiId" => $kfiId]);
 		KfiHistory::updateAll(["status" => 99], ["kfiId" => $kfiId]);
 		Kfi::updateAll(["status" => 99], ["kfiId" => $kfiId]);
 		$res["status"] = true;
@@ -155,7 +163,7 @@ class ViewController extends Controller
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
 		$kfiDetail = curl_exec($api);
 		$kfiDetail = json_decode($kfiDetail, true);
 		curl_close($api);
@@ -168,11 +176,12 @@ class ViewController extends Controller
 	public function actionAllKfiHistory()
 	{
 		$kfiId = $_POST["kfiId"];
+		$kfiHistoryId = $_POST["kfiHistoryId"];
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-history?kfiId=' . $kfiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-history?kfiId=' . $kfiId . "&&kfiHistoryId=" . $kfiHistoryId);
 		$history = curl_exec($api);
 		$history = json_decode($history, true);
 		curl_close($api);
@@ -221,11 +230,12 @@ class ViewController extends Controller
 	public function actionKfiChart()
 	{
 		$kfiId = $_POST["kfiId"];
+		$kfiHistoryId = $_POST["kfiHistoryId"];
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-history?kfiId=' . $kfiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-history?kfiId=' . $kfiId . "&&kfiHistoryId=" . $kfiHistoryId);
 		$history = curl_exec($api);
 		$history = json_decode($history, true);
 		curl_close($api);
@@ -315,7 +325,7 @@ class ViewController extends Controller
 		$kfiHasKgi = curl_exec($api);
 		$kfiHasKgi = json_decode($kfiHasKgi, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
 		$kfiDetail = curl_exec($api);
 		$kfiDetail = json_decode($kfiDetail, true);
 
@@ -380,7 +390,7 @@ class ViewController extends Controller
 		$kfiHasKgi = curl_exec($api);
 		$kfiHasKgi = json_decode($kfiHasKgi, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?id=' . $kfiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?id=' . $kfiId . "&&kfiHistoryId=0");
 		$kfiDetail = curl_exec($api);
 		$kfiDetail = json_decode($kfiDetail, true);
 
