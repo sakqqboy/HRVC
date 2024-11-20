@@ -184,7 +184,7 @@ $this->title = "TEAM KGI";
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
                                         class="pim-icon" style="margin-top: -1px;">
                                 </a>
-                                <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-team-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], "kgiTeamId" => $kgiTeamId]) ?>"
+                                <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-team-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], "kgiTeamId" => $kgiTeamId,"teamId"=>$kgi['teamId']]) ?>"
                                     class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?>"
                                     style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg" alt="History"
@@ -337,9 +337,9 @@ $this->title = "TEAM KGI";
                                                         <?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $colorFormat ?>.svg"
                                                             class="home-icon mr-2">
                                                     </span>
-                                                    <span class="font-<?= $colorFormat ?>" style="top: 2px;">
+                                                    <a class="font-<?= $colorFormat ?>" style="top: 2px;">
                                                         View Assigned
-                                                    </span>
+                                                    </a>
                                                     <?php
                                                             } elseif ($kgi["countTeamEmployee"] == 0) {
                                                             ?>

@@ -185,7 +185,7 @@ $this->title = "INDIVIDUAL KGI";
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
                                             class="pim-icon" style="margin-top: -1px;">
                                     </a>
-                                    <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-individual-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], "kgiEmployeeId" => $kgiEmployeeId]) ?>"
+                                    <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-individual-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], "kgiEmployeeId" => $kgiEmployeeId, "kgis" => $kgi["countTeamEmployee"]]) ?>"
                                         class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?>"
                                         style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg"

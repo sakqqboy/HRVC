@@ -7,6 +7,7 @@ use common\models\ModelMaster;
 use Exception;
 use FFI\Exception as FFIException;
 use frontend\models\hrvc\Group;
+use frontend\models\hrvc\KgiEmployee;
 use frontend\models\hrvc\User;
 use frontend\models\hrvc\UserRole;
 use Yii;
@@ -81,7 +82,7 @@ class ViewController extends Controller
 		$kgis = json_decode($kgis, true);
 		curl_close($api);
 		//throw new Exception($kgiId);
-		//throw new Exception(print_r($kgiDetail, true));
+		// throw new Exception(print_r($kgiDetail, true));
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
 		return $this->render('kgi_view', [
@@ -101,6 +102,7 @@ class ViewController extends Controller
 		$param = ModelMaster::decodeParams($hash);
 		$role = UserRole::userRight();
 		$kgiTeamId = $param["kgiTeamId"];
+		$teamId = $param["teamId"];
 		$kgiId = $param["kgiId"];
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -119,8 +121,9 @@ class ViewController extends Controller
 		$kgiDetail = json_decode($kgiDetail, true);
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
+		$kgiEmployee=KgiEmployee::countKgiEmployeeInTeam($teamId,$kgiId);
 		curl_close($api);
-		//  throw new Exception(print_r($kgiTeamsHistory,true));
+		 //  throw new Exception(print_r($kgiEmployee,true));
 		return $this->render('kgi_team_history', [
 			"role" => $role,
 			"kgiDetail" => $kgiDetail,
@@ -129,7 +132,8 @@ class ViewController extends Controller
 			"kgiTeamId" => $kgiTeamId,
 			"units" => $units,
 			"months" => $months,
-			"isManager" => $isManager
+			"isManager" => $isManager,
+			"kgiEmployee"=>$kgiEmployee
 		]);
 	}
 	public function actionKgiIndividualHistory($hash)
@@ -138,6 +142,8 @@ class ViewController extends Controller
 		$role = UserRole::userRight();
 		$kgiEmployeeId = $param["kgiEmployeeId"];
 		$kgiId = $param["kgiId"];
+		$kgis = $param["kgis"];
+
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -155,7 +161,10 @@ class ViewController extends Controller
 			"role" => $role,
 			"kgiDetail" => $kgiDetail,
 			"kgiEmployeeHistory" => $kgiEmployeeHistory,
-			"kgiEmployeeId" =>$kgiEmployeeId 
+			"kgiEmployeeId" =>$kgiEmployeeId,
+			"kgiId" =>$kgiId,
+			"kgis" => $kgis
+
 		]);
 	}
 	public function actionKgiHistory($hash)
