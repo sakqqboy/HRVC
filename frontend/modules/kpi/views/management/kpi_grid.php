@@ -42,12 +42,12 @@ $this->title = 'KPI Grid View';
                             <?php
                             if ($role >= 3) {
                             ?>
-                            <button type="button" class="btn-createnew font-size-11" data-bs-toggle="modal"
-                                data-bs-target="#create-kpi-modal" style="position:absolute;"">
+                                <button type="button" class="btn-createnew font-size-11" data-bs-toggle="modal"
+                                    data-bs-target="#create-kpi-modal" style="position:absolute;"">
                                 Create New 
                                 <img src=" <?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="History"
-                                class="pim-icon ml-3" style="margin-top: -1px;">
-                            </button>
+                                    class="pim-icon ml-3" style="margin-top: -1px;">
+                                </button>
                             <?php
                             }
                             ?>
@@ -82,42 +82,42 @@ $this->title = 'KPI Grid View';
             <div class="col-12 mt-5">
                 <div class="row">
                     <?php
-                if (isset($kpis) && count($kpis) > 0) {
-                    foreach ($kpis as $kpiId => $kpi) :
-                        if ($kpi["isOver"] == 1 && $kpi["status"] != 2) {
-                            $colorFormat = 'over';
-                        } else {
-                            if ($kpi["status"] == 1) {
-                                if ($kpi["isOver"] == 2) {
-                                    $colorFormat = 'disable';
-                                } else {
-                                    $colorFormat = 'inprogress';
-                                }
+                    if (isset($kpis) && count($kpis) > 0) {
+                        foreach ($kpis as $kpiId => $kpi) :
+                            if ($kpi["isOver"] == 1 && $kpi["status"] != 2) {
+                                $colorFormat = 'over';
                             } else {
-                                $colorFormat = 'complete';
+                                if ($kpi["status"] == 1) {
+                                    if ($kpi["isOver"] == 2) {
+                                        $colorFormat = 'disable';
+                                    } else {
+                                        $colorFormat = 'inprogress';
+                                    }
+                                } else {
+                                    $colorFormat = 'complete';
+                                }
                             }
-                        }
-                ?>
-                    <div class="col-12 mt-10 mb-5 pim-big-box pim-<?= $colorFormat ?>" id="kpi-<?= $kpiId ?>">
-                        <div class="row">
-                            <div class="col-lg-3 col-md-5 col-12 pim-name pr-0">
-                                <?= $kpi["kpiName"] ?>
-                            </div>
-                            <div class="col-lg-1 col-md-2 col-4 text-center">
-                                <div class="<?= $colorFormat ?>-tag text-center">
-                                    <?= $kpi['status'] == 1 ? 'In process' : 'Completed' ?>
-                                </div>
-                            </div>
-                            <div class=" col-lg-3 col-md-3 col-4 pl-30">
+                    ?>
+                            <div class="col-12 mt-10 mb-5 pim-big-box pim-<?= $colorFormat ?>" id="kpi-<?= $kpiId ?>">
                                 <div class="row">
-                                    <div class="col-4 month-<?= $colorFormat ?>"><?= $kpi['month'] ?></div>
-                                    <div class="col-8 term-<?= $colorFormat ?>">
-                                        <?= $kpi['fromDate'] == "" ? 'Not set' : $kpi['fromDate'] ?> -
-                                        <?= $kpi['toDate'] == "" ? 'Not set' : $kpi['toDate'] ?>
+                                    <div class="col-lg-3 col-md-5 col-12 pim-name pr-0">
+                                        <?= $kpi["kpiName"] ?>
                                     </div>
-                                </div>
-                            </div>
-                            <!-- <div class="col-lg-5 col-md-2 col-4 text-end pr-20">
+                                    <div class="col-lg-1 col-md-2 col-4 text-center">
+                                        <div class="<?= $colorFormat ?>-tag text-center">
+                                            <?= $kpi['status'] == 1 ? 'In process' : 'Completed' ?>
+                                        </div>
+                                    </div>
+                                    <div class=" col-lg-3 col-md-3 col-4 pl-30">
+                                        <div class="row">
+                                            <div class="col-4 month-<?= $colorFormat ?>"><?= $kpi['month'] ?></div>
+                                            <div class="col-8 term-<?= $colorFormat ?>">
+                                                <?= $kpi['fromDate'] == "" ? 'Not set' : $kpi['fromDate'] ?> -
+                                                <?= $kpi['toDate'] == "" ? 'Not set' : $kpi['toDate'] ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-lg-5 col-md-2 col-4 text-end pr-20">
                             <a href="<?= Yii::$app->homeUrl ?>kpi/view/index/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>"
                                 class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
@@ -134,7 +134,7 @@ $this->title = 'KPI Grid View';
                                     class="pim-icon mr-3" style="margin-top: -2px;">Chart
                             </a>
                             <?php
-                                if ($role >= 5) {
+                            if ($role >= 5) {
                             ?>
                             <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kpi"
                                 onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)" style="margin-top: -3px;">
@@ -142,342 +142,342 @@ $this->title = 'KPI Grid View';
                                     class="pim-icon" style="margin-top: -2px;">
                             </a>
                             <?php
-                                }
+                            }
                             ?> -->
 
-                            <div class="col-lg-5 col-md-2 col-4 text-end pr-20">
-                                <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 1]) ?>"
-                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
-                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
-                                        class="pim-icon" style="margin-top: -1px;">
-                                </a>
-                                <a href="<?= Yii::$app->homeUrl ?>kpi/view/index/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 2]) ?>"
-                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
-                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg" alt="History"
-                                        class="pim-icon mr-3" style="margin-top: -2px;">History
-                                </a>
-                                <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 3]) ?>"
-                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
-                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png" alt="Chats"
-                                        class="pim-icon mr-3" style="margin-top: -2px;">Chats
-                                </a>
-                                <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 4]) ?>"
-                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
-                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="Chart"
-                                        class="pim-icon mr-3" style="margin-top: -2px;">Chart
-                                </a>
-                                <?php
-									if ($role >= 5) {
-								?>
-                                <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kpi"
-                                    onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)" style="margin-top: -3px;"
-                                    onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
-                                    onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
-                                        class="pim-icon" style="margin-top: -2px;">
-                                </a>
-                                <?php
-									}
-								?>
-                            </div>
-                            <div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?> mt-5">
-                                <div class="row">
-                                    <div class="col-12 text-start pl-22">
-                                        Assign on
+                                    <div class="col-lg-5 col-md-2 col-4 text-end pr-20">
+                                        <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 1]) ?>"
+                                            class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                            style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
+                                                class="pim-icon" style="margin-top: -1px;">
+                                        </a>
+                                        <a href="<?= Yii::$app->homeUrl ?>kpi/view/index/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 2]) ?>"
+                                            class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                            style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg" alt="History"
+                                                class="pim-icon mr-3" style="margin-top: -2px;">History
+                                        </a>
+                                        <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 3]) ?>"
+                                            class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                            style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png" alt="Chats"
+                                                class="pim-icon mr-3" style="margin-top: -2px;">Chats
+                                        </a>
+                                        <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 4]) ?>"
+                                            class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                            style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="Chart"
+                                                class="pim-icon mr-3" style="margin-top: -2px;">Chart
+                                        </a>
+                                        <?php
+                                        if ($role >= 5) {
+                                        ?>
+                                            <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kpi"
+                                                onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)" style="margin-top: -3px;"
+                                                onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
+                                                onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
+                                                    class="pim-icon" style="margin-top: -2px;">
+                                            </a>
+                                        <?php
+                                        }
+                                        ?>
                                     </div>
-                                    <div class="col-9 pl-20 pr-0">
-                                        <div class="col-12 <?= $colorFormat ?>-assign  mt-5 pt-2 pb-1">
-                                            <div class="row">
-                                                <div class="col-5 border-right-<?= $colorFormat ?> pr-2">
+                                    <div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?> mt-5">
+                                        <div class="row">
+                                            <div class="col-12 text-start pl-22">
+                                                Assign on
+                                            </div>
+                                            <div class="col-9 pl-20 pr-0">
+                                                <div class="col-12 <?= $colorFormat ?>-assign  mt-5 pt-2 pb-1">
                                                     <div class="row">
-                                                        <div class="col-2">
-                                                            <?php
-                                                                if (isset($kpi['kpiEmployee'][0])) {
-                                                                ?>
-                                                            <img src="<?= Yii::$app->homeUrl . $kpi['kpiEmployee'][0] ?>"
-                                                                class="pim-pic-grid">
-                                                            <?php
-                                                                }
-                                                                ?>
+                                                        <div class="col-5 border-right-<?= $colorFormat ?> pr-2">
+                                                            <div class="row">
+                                                                <div class="col-2">
+                                                                    <?php
+                                                                    if (isset($kpi['kpiEmployee'][0])) {
+                                                                    ?>
+                                                                        <img src="<?= Yii::$app->homeUrl . $kpi['kpiEmployee'][0] ?>"
+                                                                            class="pim-pic-grid">
+                                                                    <?php
+                                                                    }
+                                                                    ?>
+                                                                </div>
+                                                                <div class="col-2 pic-after pt-0">
+                                                                    <?php
+                                                                    if (isset($kpi['kpiEmployee'][1])) {
+                                                                    ?>
+                                                                        <img src="<?= Yii::$app->homeUrl . $kpi['kpiEmployee'][1] ?>"
+                                                                            class="pim-pic-grid">
+                                                                    <?php
+                                                                    }
+                                                                    ?>
+                                                                </div>
+                                                                <div class="col-2 pic-after pt-0">
+                                                                    <?php
+                                                                    if (isset($kpi['kpiEmployee'][2])) {
+                                                                    ?>
+                                                                        <img src="<?= Yii::$app->homeUrl . $kpi['kpiEmployee'][2] ?>"
+                                                                            class="pim-pic-grid">
+                                                                    <?php
+                                                                    }
+                                                                    ?>
+                                                                </div>
+                                                                <div class="col-5 number-tag load-<?= $colorFormat ?> pr-0 pl-0 pt-1"
+                                                                    style="margin-left: -3px;height:18px;width:30px;margin-top: 1px;">
+                                                                    <?= $kpi["countEmployee"] ?>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-2 pic-after pt-0">
+                                                        <div class="col-7 pl-3 pt-4 pr-15">
                                                             <?php
-                                                                if (isset($kpi['kpiEmployee'][1])) {
-                                                                ?>
-                                                            <img src="<?= Yii::$app->homeUrl . $kpi['kpiEmployee'][1] ?>"
-                                                                class="pim-pic-grid">
+                                                            if ($role > 3) {
+                                                            ?>
+                                                                <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, "companyId" => $kpi["companyId"]]) ?>"
+                                                                    class="font-<?= $colorFormat ?>">
+                                                                    Assign Person
+                                                                </a>
                                                             <?php
-                                                                }
-                                                                ?>
-                                                        </div>
-                                                        <div class="col-2 pic-after pt-0">
+                                                            } else {
+                                                            ?>
+                                                                <span class="font-<?= $colorFormat ?>">
+                                                                    Assign Person
+                                                                </span>
                                                             <?php
-                                                                if (isset($kpi['kpiEmployee'][2])) {
-                                                                ?>
-                                                            <img src="<?= Yii::$app->homeUrl . $kpi['kpiEmployee'][2] ?>"
-                                                                class="pim-pic-grid">
-                                                            <?php
-                                                                }
-                                                                ?>
-                                                        </div>
-                                                        <div class="col-5 number-tag load-<?= $colorFormat ?> pr-0 pl-0 pt-1"
-                                                            style="margin-left: -3px;height:18px;width:30px;margin-top: 1px;">
-                                                            <?= $kpi["countEmployee"] ?>
+                                                            }
+                                                            ?>
+                                                            <span class="pull-right"
+                                                                style="display:<?= $kpi['isOver'] == 2 ? 'none;' : '' ?>">
+                                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.png"
+                                                                    class="home-icon" style="margin-top: -4px;">
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-7 pl-3 pt-4 pr-15">
+                                                <div class="col-12 <?= $colorFormat ?>-assign  mt-10 pt-5 pb-1">
+                                                    <div class="row">
+                                                        <div class="col-5 border-right-<?= $colorFormat ?> pr-2">
+                                                            <div class="row">
+                                                                <div class="col-4">
+                                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-<?= $colorFormat ?>.png"
+                                                                        class="first-layer-icon ml-3" style="margin-top: -4px;">
+                                                                </div>
+                                                                <div class="col-4 number-tag load-<?= $colorFormat ?> pr-3 pl-3 pt-1 ml-5"
+                                                                    style="height:18px;">
+                                                                    <?= $kpi["countTeam"] ?>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-7 pl-3 pr-15">
+                                                            <?php
+                                                            if ($role > 3) {
+                                                            ?>
+                                                                <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, "companyId" => $kpi["companyId"]]) ?>"
+                                                                    class="font-<?= $colorFormat ?>">
+                                                                    Assign Team
+                                                                </a>
+                                                            <?php
+                                                            } else { ?>
+                                                                <span class="font-<?= $colorFormat ?>">
+                                                                    Assign Team
+                                                                </span>
+                                                            <?php
+                                                            }
+                                                            ?>
+                                                            <span class="pull-right"
+                                                                style="display:<?= $kpi['isOver'] == 2 ? 'none;' : '' ?>">
+                                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.png"
+                                                                    class="home-icon" style="margin-top: -3px;">
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-3" style="margin-top:-5px;">
+                                                <div class="col-12 text-center priority-star">
                                                     <?php
-                                                        if ($role > 3) {
-                                                        ?>
-                                                    <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, "companyId" => $kpi["companyId"]]) ?>"
-                                                        class="font-<?= $colorFormat ?>">
-                                                        Assign Person
-                                                    </a>
+                                                    if ($kpi["priority"] == "A" || $kpi["priority"] == "B") {
+                                                    ?>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
                                                     <?php
+                                                    }
+                                                    if ($kpi["priority"] == "A" || $kpi["priority"] == "C") {
+                                                    ?>
+                                                        <i class="fa fa-star big-star" aria-hidden="true"></i>
+                                                    <?php
+                                                    }
+                                                    if ($kpi["priority"] == "B") {
+                                                    ?>
+                                                        <i class="fa fa-star ml-10" aria-hidden="true"></i>
+                                                    <?php
+                                                    }
+                                                    if ($kpi["priority"] == "A") {
+                                                    ?>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </div>
+                                                <div class="col-12 text-center priority-box">
+                                                    <div class="col-12">Priority</div>
+                                                    <div class="col-12 text-priority"><?= $kpi["priority"] ?></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1 pim-subheader-font border-right-<?= $colorFormat ?> mt-5 pl-10 pr-10">
+                                        <div class="col-12">Quant Ratio</div>
+                                        <div class="col-12 border-bottom-<?= $colorFormat ?> pb-10 pim-duedate">
+                                            <i class="fa fa-diamond" aria-hidden="true"></i>
+                                            <?= $kpi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?>
+                                        </div>
+                                        <div class="col-12 pr-0 pt-10 pl-0">update Interval</div>
+                                        <div class="col-12  pim-duedate">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/monthly.svg"
+                                                class="pim-iconKFI" style="margin-top: -1px; margin-left: 3px;">
+                                            <?= $kpi["unit"] ?>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?> pr-15 pl-15 mt-5">
+                                        <div class="row">
+                                            <div class="col-5 text-start">
+                                                <div class="col-12">
+                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Target.svg"
+                                                        class="pim-iconKFI" style="margin-top: 1px; margin-right: 3px;">
+                                                    Target
+                                                </div>
+                                                <div class="col-12 mt-3 number-pim">
+                                                    <?php
+                                                    $decimal = explode('.', $kpi["targetAmount"]);
+                                                    if (isset($decimal[1])) {
+                                                        if ($decimal[1] == '00') {
+                                                            $show = $decimal[0];
                                                         } else {
-                                                        ?>
-                                                    <span class="font-<?= $colorFormat ?>">
-                                                        Assign Person
-                                                    </span>
-                                                    <?php
+                                                            $show = $kpi["targetAmount"];
                                                         }
-                                                        ?>
-                                                    <span class="pull-right"
-                                                        style="display:<?= $kpi['isOver'] == 2 ? 'none;' : '' ?>">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.png"
-                                                            class="home-icon" style="margin-top: -4px;">
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 <?= $colorFormat ?>-assign  mt-10 pt-5 pb-1">
-                                            <div class="row">
-                                                <div class="col-5 border-right-<?= $colorFormat ?> pr-2">
-                                                    <div class="row">
-                                                        <div class="col-4">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-<?= $colorFormat ?>.png"
-                                                                class="first-layer-icon ml-3" style="margin-top: -4px;">
-                                                        </div>
-                                                        <div class="col-4 number-tag load-<?= $colorFormat ?> pr-3 pl-3 pt-1 ml-5"
-                                                            style="height:18px;">
-                                                            <?= $kpi["countTeam"] ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-7 pl-3 pr-15">
-                                                    <?php
-                                                        if ($role > 3) {
-                                                        ?>
-                                                    <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, "companyId" => $kpi["companyId"]]) ?>"
-                                                        class="font-<?= $colorFormat ?>">
-                                                        Assign Team
-                                                    </a>
-                                                    <?php
-                                                        } else { ?>
-                                                    <span class="font-<?= $colorFormat ?>">
-                                                        Assign Team
-                                                    </span>
-                                                    <?php
-                                                        }
-                                                        ?>
-                                                    <span class="pull-right"
-                                                        style="display:<?= $kpi['isOver'] == 2 ? 'none;' : '' ?>">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.png"
-                                                            class="home-icon" style="margin-top: -3px;">
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-3" style="margin-top:-5px;">
-                                        <div class="col-12 text-center priority-star">
-                                            <?php
-                                                if ($kpi["priority"] == "A" || $kpi["priority"] == "B") {
-                                                ?>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <?php
-                                                }
-                                                if ($kpi["priority"] == "A" || $kpi["priority"] == "C") {
-                                                ?>
-                                            <i class="fa fa-star big-star" aria-hidden="true"></i>
-                                            <?php
-                                                }
-                                                if ($kpi["priority"] == "B") {
-                                                ?>
-                                            <i class="fa fa-star ml-10" aria-hidden="true"></i>
-                                            <?php
-                                                }
-                                                if ($kpi["priority"] == "A") {
-                                                ?>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <?php
-                                                }
-                                                ?>
-                                        </div>
-                                        <div class="col-12 text-center priority-box">
-                                            <div class="col-12">Priority</div>
-                                            <div class="col-12 text-priority"><?= $kpi["priority"] ?></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-1 pim-subheader-font border-right-<?= $colorFormat ?> mt-5 pl-10 pr-10">
-                                <div class="col-12">Quant Ratio</div>
-                                <div class="col-12 border-bottom-<?= $colorFormat ?> pb-10 pim-duedate">
-                                    <i class="fa fa-diamond" aria-hidden="true"></i>
-                                    <?= $kpi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?>
-                                </div>
-                                <div class="col-12 pr-0 pt-10 pl-0">update Interval</div>
-                                <div class="col-12  pim-duedate">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/monthly.svg"
-                                        class="pim-iconKFI" style="margin-top: -1px; margin-left: 3px;">
-                                    <?= $kpi["unit"] ?>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?> pr-15 pl-15 mt-5">
-                                <div class="row">
-                                    <div class="col-5 text-start">
-                                        <div class="col-12">
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Target.svg"
-                                                class="pim-iconKFI" style="margin-top: 1px; margin-right: 3px;">
-                                            Target
-                                        </div>
-                                        <div class="col-12 mt-3 number-pim">
-                                            <?php
-                                                $decimal = explode('.', $kpi["targetAmount"]);
-                                                if (isset($decimal[1])) {
-                                                    if ($decimal[1] == '00') {
-                                                        $show = $decimal[0];
                                                     } else {
                                                         $show = $kpi["targetAmount"];
                                                     }
-                                                } else {
-                                                    $show = $kpi["targetAmount"];
-                                                }
-                                                ?>
-                                            <?= $show ?><?= $kpi["amountType"] == 1 ? '%' : '' ?>
-                                        </div>
-                                    </div>
-                                    <div class="col-2 symbol-pim text-center">
-                                        <div class="col-12 pt-17"><?= $kpi["code"] ?></div>
-                                    </div>
-                                    <div class="col-5  text-end">
-                                        <div class="col-12">Result
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Result.svg"
-                                                class="pim-iconKFI" style="margin-top: 1px; margin-left: 3px;">
-                                        </div>
-                                        <div class="col-12 mt-3 number-pim">
-                                            <?php
-                                                if ($kpi["result"] != '') {
-                                                    $decimalResult = explode('.', $kpi["result"]);
-                                                    if (isset($decimalResult[1])) {
-                                                        if ($decimalResult[1] == '00') {
-                                                            $showResult = number_format($decimalResult[0]);
+                                                    ?>
+                                                    <?= $show ?><?= $kpi["amountType"] == 1 ? '%' : '' ?>
+                                                </div>
+                                            </div>
+                                            <div class="col-2 symbol-pim text-center">
+                                                <div class="col-12 pt-17"><?= $kpi["code"] ?></div>
+                                            </div>
+                                            <div class="col-5  text-end">
+                                                <div class="col-12">Result
+                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Result.svg"
+                                                        class="pim-iconKFI" style="margin-top: 1px; margin-left: 3px;">
+                                                </div>
+                                                <div class="col-12 mt-3 number-pim">
+                                                    <?php
+                                                    if ($kpi["result"] != '') {
+                                                        $decimalResult = explode('.', $kpi["result"]);
+                                                        if (isset($decimalResult[1])) {
+                                                            if ($decimalResult[1] == '00') {
+                                                                $showResult = number_format($decimalResult[0]);
+                                                            } else {
+                                                                $showResult = number_format($kpi["result"], 2);
+                                                            }
                                                         } else {
-                                                            $showResult = number_format($kpi["result"], 2);
+                                                            $showResult = number_format($kpi["result"]);
                                                         }
                                                     } else {
-                                                        $showResult = number_format($kpi["result"]);
+                                                        $showResult = 0;
+                                                    }
+                                                    ?>
+                                                    <?= $showResult ?><?= $kpi["amountType"] == 1 ? '%' : '' ?>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 pl-15 pr-10">
+                                                <?php
+                                                $percent = explode('.', $kpi['ratio']);
+                                                if (isset($percent[0]) && $percent[0] == '0') {
+                                                    if (isset($percent[1])) {
+                                                        if ($percent[1] == '00') {
+                                                            $showPercent = 0;
+                                                        } else {
+                                                            $showPercent = round($kpi['ratio'], 1);
+                                                        }
                                                     }
                                                 } else {
-                                                    $showResult = 0;
+                                                    $showPercent = round($kpi['ratio']);
                                                 }
                                                 ?>
-                                            <?= $showResult ?><?= $kpi["amountType"] == 1 ? '%' : '' ?>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 pl-15 pr-10">
-                                        <?php
-                                            $percent = explode('.', $kpi['ratio']);
-                                            if (isset($percent[0]) && $percent[0] == '0') {
-                                                if (isset($percent[1])) {
-                                                    if ($percent[1] == '00') {
-                                                        $showPercent = 0;
-                                                    } else {
-                                                        $showPercent = round($kpi['ratio'], 1);
-                                                    }
-                                                }
-                                            } else {
-                                                $showPercent = round($kpi['ratio']);
-                                            }
-                                            ?>
-                                        <div class="progress">
-                                            <div class="progress-bar-<?= $colorFormat ?>"
-                                                style="width:<?= $showPercent ?>%;">
+                                                <div class="progress">
+                                                    <div class="progress-bar-<?= $colorFormat ?>"
+                                                        style="width:<?= $showPercent ?>%;">
+                                                    </div>
+                                                    <span
+                                                        class="progress-load load-<?= $colorFormat ?>"><?= $showPercent ?>%</span>
+                                                </div>
                                             </div>
-                                            <span
-                                                class="progress-load load-<?= $colorFormat ?>"><?= $showPercent ?>%</span>
+                                            <div class="col-4 pl-5 pr-5 mt-10">
+                                                <div class="col-12 text-end">Last Updated on</div>
+                                                <div class="col-12 text-end pim-duedate">
+                                                    <?= $kpi['nextCheck'] == "" ? 'Not set' : $kpi['nextCheck'] ?></div>
+                                            </div>
+                                            <div class="col-4 text-center mt-10 pt-6">
+                                                <?php
+                                                if ($colorFormat == 'disable') {
+                                                ?>
+                                                    <div onclick="javascript:updateKpi(<?= $kpiId ?>)" class="pim-btn-setup"
+                                                        data-bs-toggle="modal" data-bs-target="#update-kpi-modal">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
+                                                            class="mb-2" style="width: 12px; height: 12px;"> Setup
+                                                    </div>
+                                                <?php
+                                                } else if ($colorFormat == 'complete') {
+                                                ?>
+                                                    <div onclick="javascript:updateKpi(<?= $kpiId ?>)" class="pim-btn-complete"
+                                                        data-bs-toggle="modal" data-bs-target="#update-kpi-modal">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
+                                                            class="mb-2" style="width: 12px; height: 12px;"> Edit
+                                                    </div>
+                                                <?php
+                                                } else if ($role >= 3) {
+                                                ?>
+                                                    <div onclick=" javascript:updateKpi(<?= $kpiId ?>)"
+                                                        class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
+                                                        data-bs-target="#update-kpi-modal">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
+                                                            class="mb-2" style="width: 12px; height: 12px;"> Update
+                                                    </div>
+                                                <?php
+                                                }
+                                                ?>
+                                            </div>
+                                            <div class="col-4 pl-0 pr-5 mt-10">
+                                                <div class="col-12 text-start font-<?= $colorFormat ?>">Next Update Date</div>
+                                                <div class="col-12 text-start pim-duedate">
+                                                    <?= $kpi['nextCheck'] == "" ? 'Not set' : $kpi['nextCheck'] ?></div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-4 pl-5 pr-5 mt-10">
-                                        <div class="col-12 text-end">Last Updated on</div>
-                                        <div class="col-12 text-end pim-duedate">
-                                            <?= $kpi['nextCheck'] == "" ? 'Not set' : $kpi['nextCheck'] ?></div>
-                                    </div>
-                                    <div class="col-4 text-center mt-10 pt-6">
-                                        <?php
-                                        if ($colorFormat == 'disable') {
-                                        ?>
-                                        <div onclick="javascript:updateKpi(<?= $kpiId ?>)" class="pim-btn-setup"
-                                            data-bs-toggle="modal" data-bs-target="#update-kpi-modal">
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
-                                                class="mb-2" style="width: 12px; height: 12px;"> Setup
+                                    <div class="col-lg-5 pim-subheader-font mt-5">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-12 pr-3 pl-20">
+                                                <div class="col-12 head-letter head-<?= $colorFormat ?>">Issue</div>
+                                                <div class="col-12 body-letter body-letter-<?= $colorFormat ?>">
+                                                    <?= $kpi["issue"] ?>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-12 pl-5 pr-20">
+                                                <div class="col-12 head-letter head-<?= $colorFormat ?>">Solution</div>
+                                                <div class="col-12 body-letter body-letter-<?= $colorFormat ?>">
+                                                    <?= $kpi["solution"] ?>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <?php
-                                            }else if ($colorFormat == 'complete') {
-                                        ?>
-                                        <div onclick="javascript:updateKpi(<?= $kpiId ?>)" class="pim-btn-complete"
-                                            data-bs-toggle="modal" data-bs-target="#update-kpi-modal">
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
-                                                class="mb-2" style="width: 12px; height: 12px;"> Edit
-                                        </div>
-                                        <?php
-                                            }else if ($role >= 3){
-                                        ?>
-                                        <div onclick=" javascript:updateKpi(<?= $kpiId ?>)"
-                                            class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
-                                            data-bs-target="#update-kpi-modal">
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
-                                                class="mb-2" style="width: 12px; height: 12px;"> Update
-                                        </div>
-                                        <?php
-                                            }
-                                        ?>
-                                    </div>
-                                    <div class="col-4 pl-0 pr-5 mt-10">
-                                        <div class="col-12 text-start font-<?= $colorFormat ?>">Next Update Date</div>
-                                        <div class="col-12 text-start pim-duedate">
-                                            <?= $kpi['nextCheck'] == "" ? 'Not set' : $kpi['nextCheck'] ?></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-5 pim-subheader-font mt-5">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-12 pr-3 pl-20">
-                                        <div class="col-12 head-letter head-<?= $colorFormat ?>">Issue</div>
-                                        <div class="col-12 body-letter body-letter-<?= $colorFormat ?>">
-                                            <?= $kpi["issue"] ?>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-12 pl-5 pr-20">
-                                        <div class="col-12 head-letter head-<?= $colorFormat ?>">Solution</div>
-                                        <div class="col-12 body-letter body-letter-<?= $colorFormat ?>">
-                                            <?= $kpi["solution"] ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <?php
-                    endforeach;
-                }
-                ?>
+                        endforeach;
+                    }
+                    ?>
                 </div>
             </div>
         </div>
@@ -526,4 +526,17 @@ $form = ActiveForm::begin([
 <?= $this->render('modal_team_history') ?>
 <?= $this->render('modal_employee_history') ?>
 <?= $this->render('modal_kgi') ?>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(window).on("scroll", function() {
+        const $lastContent = $(".pim-big-box").last();
+        const lastOffset = $lastContent.offset().top + $lastContent.outerHeight();
+        const windowHeight = $(window).height();
+        const scrollPosition = $(window).scrollTop() + windowHeight;
+
+        if (scrollPosition >= lastOffset) {
+                alert('asdfasdfasd');
+        }
+    });
+</script> -->
 <!-- end -->
