@@ -198,14 +198,14 @@ $this->title = 'KFI View';
                 </div>
                 <div class="col-lg-7">
                     <div class="row">
-                        <div class="col-2  view-tab-active" id="tab-1" onclick="javascript:viewTabKfi(1)">
+                        <div class="col-2  view-tab-active" id="tab-1" onclick="javascript:viewTabKfi(<?= $kfiHistoryId ?>,1)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-blue.png" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-1-blue">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.png" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-1-black">
                             Assigned
                         </div>
-                        <div class="col-3  view-tab" id="tab-2" onclick="javascript:viewTabKfi(2)">
+                        <div class="col-3  view-tab" id="tab-2" onclick="javascript:viewTabKfi(<?= $kfiHistoryId ?>,2)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.png" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-2-black">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-blue.png" alt="History"
@@ -219,7 +219,7 @@ $this->title = 'KFI View';
                                         ?>images/icons/Settings/comment-blue.png" alt="History" class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-3-blue">
 							Chats
 						</div> -->
-                        <div class="col-3 view-tab" id="tab-4" onclick="viewTabKfi(4)">
+                        <div class="col-3 view-tab" id="tab-4" onclick="viewTabKfi(<?= $kfiHistoryId ?>,4)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-4-black">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart-blue.png" alt="History"
@@ -229,7 +229,7 @@ $this->title = 'KFI View';
 
 
 
-                        <div class="col-4  view-tab" id="tab-5" onclick="javascript:viewTabKfi(5)">
+                        <div class="col-4  view-tab" id="tab-5" onclick="javascript:viewTabKfi(<?= $kfiHistoryId ?>,5)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate.png" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-5-black">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate-blue.png" alt="History"
@@ -297,9 +297,9 @@ $form = ActiveForm::begin([
     window.onload = function() {
         let openTab = <?= $openTab ?>; // PHP value passed to JavaScript
         if (openTab) {
-            viewTabKfi(openTab); // Set the tab based on the PHP value
+            viewTabKfi(<?= $kfiHistoryId ?>, openTab); // Set the tab based on the PHP value
         } else {
-            viewTabKfi(1); // Default to tab 1 if no value is passed
+            viewTabKfi(<?= $kfiHistoryId ?>, 1); // Default to tab 1 if no value is passed
         }
     }
 </script>

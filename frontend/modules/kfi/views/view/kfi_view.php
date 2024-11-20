@@ -77,19 +77,14 @@ $this->title = 'Company KFI History';
                                         class="pim-icon mr-3" style="margin-top: -2px;">Chart
                                 </a> -->
 
-                                            <a href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(["kfiId" => $kfiId, 'openTab' => 1]) ?>"
-                                                class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?>"
-                                                style="margin-top: -3px;"
+                                            <a href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(["kfiId" => $kfiId, 'kfiHistoryId' => $kfi['kfiHistoryId'], 'openTab' => 1]) ?>"
+                                                class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?>" style="margin-top: -3px;"
                                                 <?= $colorFormat == 'disable' ? 'style="pointer-events: none; opacity: 0.5;"' : '' ?>>
-                                                <img src=" <?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
-                                                    class="pim-icon" style="margin-top: -3px;">
+                                                <img src=" <?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History" class="pim-icon" style="margin-top: -3px;">
                                             </a>
-
-                                            <a href="<?= $colorFormat !== 'disable' ? Yii::$app->homeUrl . 'kfi/view/kfi-history/' . ModelMaster::encodeParams(['kfiId' => $kfiId, 'openTab' => 2]) : '#' ?>"
-                                                class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?>"
-                                                style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.png" alt="History"
-                                                    class="pim-icon">
+                                            <a href="<?= $colorFormat !== 'disable' ? Yii::$app->homeUrl . 'kfi/view/kfi-history/' . ModelMaster::encodeParams(['kfiId' => $kfiId, 'kfiHistoryId' => $kfi['kfiHistoryId'], 'openTab' => 2]) : '#' ?>"
+                                                class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?>" style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.png" alt="History" class="pim-icon">
                                             </a>
 
                                             <!-- <a class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?>"
@@ -100,11 +95,10 @@ $this->title = 'Company KFI History';
                                         class="home-icon" style="margin-top: -3px;">
                                 </a> -->
 
-                                            <a href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, 'openTab' => 4]) ?>"
+                                            <a href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, 'kfiHistoryId' => $kfi['kfiHistoryId'], 'openTab' => 4]) ?>"
                                                 class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?>"
                                                 style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Charts.png" alt="History"
-                                                    class="home-icon" style="margin-top: -3px;">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Charts.png" alt="History" class="home-icon" style="margin-top: -3px;">
                                             </a>
 
                                             <?php
@@ -112,9 +106,7 @@ $this->title = 'Company KFI History';
                                             ?>
                                                 <a class="btn btn-bg-blue-xs pr-2 pl-3 mr-5" data-bs-toggle="modal"
                                                     data-bs-target="#staticBackdrop2" onclick="javascript:updateKfi(<?= $kfiId ?>)">
-                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
-                                                        alt="History" style="margin-top: -3px; width: 12px; height: 14px;"
-                                                        class="home-icon">
+                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg" alt="History" style="margin-top: -3px; width: 12px; height: 14px;" class="home-icon">
                                                 </a>
                                             <?php
                                             }
@@ -125,8 +117,7 @@ $this->title = 'Company KFI History';
                                             ?>
                                                 <a class="btn btn-bg-white-xs pr-2 pl-3 mr-5"
                                                     onclick="javascript:prepareKfiNextTarget(<?= $kfi['kfiHistoryId'] ?>)">
-                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/coppy.svg" alt="History"
-                                                        style="margin-top: -3px; width: 12px; height: 14px;" class="home-icon">
+                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/coppy.svg" alt="History" style="margin-top: -3px; width: 12px; height: 14px;" class="home-icon">
                                                 </a>
                                             <?php
                                             }
