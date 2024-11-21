@@ -27,15 +27,22 @@ $this->title = "KPI";
                             <div class="row">
                                 <div class="col-4 pim-type-tab pr-0 pl-0 rounded-top-left">
                                     <a href="<?= Yii::$app->homeUrl ?>kpi/management/index" class="no-underline-black ">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/company.svg"
+                                            alt="Company" class="pim-icon"
+                                            style="width: 14px;height: 14px;padding-bottom: 4px;">
                                         Company KPI
                                     </a>
                                 </div>
-                                <div class="col-4 pim-type-tab-selected">
+                                <div class="col-4 pim-type-tab-selected pr-0 pl-0">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg" alt="Team"
+                                        class="pim-icon" style="width: 13px;height: 13px;padding-bottom: 2px;">
                                     Team KPI
                                 </div>
-                                <div class="col-4 pim-type-tab rounded-top-right">
+                                <div class="col-4 pim-type-tab pr-0 pl-0 rounded-top-right">
                                     <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi"
                                         class="no-underline-black ">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/self.svg" alt="Self"
+                                            class="pim-icon" style="width: 13px;height: 13px;padding-bottom: 3px;">
                                         Self KPI
                                     </a>
                                 </div>
@@ -45,23 +52,25 @@ $this->title = "KPI";
                             <?php
                             if ($role > 3) {
                             ?>
-                            <div class="col-12 approval-box text-center pr-3">
+                            <div
+                                class="col-12 <?= $waitForApprove["totalRequest"] > 0 ? 'approval-box' : 'noapproval-box' ?> text-center pr-3">
+
                                 <?php
                                     if ($waitForApprove["totalRequest"] > 0) {
                                     ?>
                                 <a href="<?= Yii::$app->homeUrl ?>kpi/management/wait-approve"
-                                    style="text-decoration: none;color:#2580D3;">
-                                    <span class="approve-num mr-2"><?= $waitForApprove["totalRequest"] ?></span>
+                                    style="text-decoration: none;color:#000000;">
+                                    <span class="approvals-num mr-2"><?= $waitForApprove["totalRequest"] ?></span>
                                     Approvals
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approve.svg"
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approvals.svg"
                                         class="first-layer-icon pull-right" style="margin-top:-2px;">
                                 </a>
                                 <?php
                                     } else { ?>
-                                <a style="text-decoration: none;color:#2580D3;">
-                                    <span class="approve-num mr-2"><?= $waitForApprove["totalRequest"] ?></span>
-                                    Approvals
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approve.svg"
+                                <a style="text-decoration: none;color:#2D7F06;">
+                                    <span class="noapprovals-num mr-2"><?= $waitForApprove["totalRequest"] ?></span>
+                                    No Approvals
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/check.svg"
                                         class="first-layer-icon pull-right" style="margin-top:-2px;">
                                 </a>
                                 <?php

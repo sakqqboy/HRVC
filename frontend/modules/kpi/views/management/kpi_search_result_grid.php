@@ -22,17 +22,23 @@ $this->title = 'KPI Grid View';
                         <div class="col-8">
                             <div class="row">
                                 <div class="col-4 pim-type-tab-selected pr-0 pl-0 rounded-top-left">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/company.svg" alt="Company"
+                                        class="pim-icon" style="width: 14px;height: 14px;padding-bottom: 4px;">
                                     Company KPI
                                 </div>
-                                <div class="col-4 pim-type-tab">
-                                    <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/team-kpi"
+                                <div class="col-4  pr-0 pl-0 pim-type-tab">
+                                    <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/team-kpi-grid"
                                         class="no-underline-black ">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg" alt="Team"
+                                            class="pim-icon" style="width: 13px;height: 13px;padding-bottom: 2px;">
                                         Team KPI
                                     </a>
                                 </div>
-                                <div class="col-4 pim-type-tab rounded-top-right">
-                                    <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi"
+                                <div class="col-4 pim-type-tab pr-0 pl-0  rounded-top-right">
+                                    <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi-grid"
                                         class="no-underline-black ">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/self.svg" alt="Self"
+                                            class="pim-icon" style="width: 13px;height: 13px;padding-bottom: 3px;">
                                         Self KPI
                                     </a>
                                 </div>
@@ -305,7 +311,8 @@ $this->title = 'KPI Grid View';
                             <div class="col-lg-1 pim-subheader-font border-right-<?= $colorFormat ?> mt-5 pl-10 pr-10">
                                 <div class="col-12">Quant Ratio</div>
                                 <div class="col-12 border-bottom-<?= $colorFormat ?> pb-10 pim-duedate">
-                                    <i class="fa fa-diamond" aria-hidden="true"></i>
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $kpi["quantRatio"] == 1 ? 'quantity' : 'diamon' ?>.svg"
+                                        class="pim-iconKFI" style="margin-top: -1px; margin-left: 3px;">
                                     <?= $kpi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?>
                                 </div>
                                 <div class="col-12 pr-0 pt-10 pl-0">update Interval</div>

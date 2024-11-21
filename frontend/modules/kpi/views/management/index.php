@@ -23,17 +23,23 @@ $this->title = 'KPI';
                         <div class="col-8">
                             <div class="row">
                                 <div class="col-4 pim-type-tab-selected pr-0 pl-0 rounded-top-left">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/company.svg" alt="Company"
+                                        class="pim-icon" style="width: 14px;height: 14px;padding-bottom: 4px;">
                                     Company KPI
                                 </div>
-                                <div class="col-4 pim-type-tab">
+                                <div class="col-4 pr-0 pl-0 pim-type-tab">
                                     <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/team-kpi"
                                         class="no-underline-black ">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg" alt="Team"
+                                            class="pim-icon" style="width: 13px;height: 13px;padding-bottom: 2px;">
                                         Team KPI
                                     </a>
                                 </div>
-                                <div class="col-4 pim-type-tab rounded-top-right">
+                                <div class="col-4 pim-type-tab pr-0 pl-0 rounded-top-right">
                                     <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi"
                                         class="no-underline-black ">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/self.svg" alt="Self"
+                                            class="pim-icon" style="width: 13px;height: 13px;padding-bottom: 3px;">
                                         Self KPI
                                     </a>
                                 </div>
