@@ -250,7 +250,7 @@ $this->title = "INDIVIDUAL KPI";
                                         <div class="col-12 text-start pl-22">
                                             Assign on
                                         </div>
-                                        <div class="col-9 pl-10 pr-0">
+                                        <!-- <div class="col-9 pl-10 pr-0">
                                             <div class="col-12 disable-assign  mt-5 pt-2 pb-2">
                                                 <div class="row">
                                                     <div class="col-5 border-right pr-2 pl-13">
@@ -314,6 +314,120 @@ $this->title = "INDIVIDUAL KPI";
                                                     </div>
                                                     <div class="col-7 pl-3 pr-13">
                                                         Teams
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                        <div class="col-9 pl-20 pr-0">
+                                            <div class="col-12 mt-5 pt-2 pb-1">
+                                                <div class="row">
+                                                    <div class="col-5 pr-2 pl-13">
+                                                        <div class="row d-flex align-items-center"
+                                                            style="min-height: 24px;">
+                                                            <?php if ($kpi["countTeamEmployee"] != 0) {?>
+                                                            <div class="col-2">
+                                                                <?php if (isset($kpi['teamMate'][0])): ?>
+                                                                <img src="<?= Yii::$app->homeUrl . $kpi['teamMate'][0] ?>"
+                                                                    class="pim-pic-gridNew">
+                                                                <?php endif; ?>
+                                                            </div>
+                                                            <div class="col-2 pic-after pt-0">
+                                                                <?php if (isset($kpi['teamMate'][1])): ?>
+                                                                <img src="<?= Yii::$app->homeUrl . $kpi['teamMate'][1] ?>"
+                                                                    class="pim-pic-gridNew">
+                                                                <?php endif; ?>
+                                                            </div>
+                                                            <div class="col-2 pic-after pt-0">
+                                                                <?php if (isset($kpi['teamMate'][2])): ?>
+                                                                <img src="<?= Yii::$app->homeUrl . $kpi['teamMate'][2] ?>"
+                                                                    class="pim-pic-gridNew">
+                                                                <?php endif; ?>
+                                                            </div>
+                                                            <div
+                                                                class="col-5 number-tagNew  <?= $kpi["countTeamEmployee"] == 0 && $colorFormat != "disable"  ? 'load-yenlow' : 'load-'  . $colorFormat ?> ">
+                                                                <?= $kpi["countTeamEmployee"] ?>
+                                                            </div>
+                                                            <?php }else {?>
+                                                            <div class="col-2 ">
+                                                                <div
+                                                                    class="<?= $kpi['countEmployee'] == 0 && $colorFormat != 'disable' ? 'pim-pic-yenlow' : 'pim-pic-' . $colorFormat ?>">
+                                                                    <img
+                                                                        src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-2 pic-after pt-0">
+                                                                <div
+                                                                    class="<?= $kpi['countEmployee'] == 0 && $colorFormat != 'disable' ? 'pim-pic-yenlow' : 'pim-pic-' . $colorFormat ?>">
+                                                                    <img
+                                                                        src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-2 pic-after pt-0">
+                                                                <div
+                                                                    class="<?= $kpi['countEmployee'] == 0 && $colorFormat != 'disable' ? 'pim-pic-yenlow' : 'pim-pic-' . $colorFormat ?>">
+                                                                    <img
+                                                                        src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg">
+                                                                </div>
+                                                            </div>
+                                                            <div
+                                                                class="col-5 number-tagNew  <?= $kpi["countTeamEmployee"] == 0 && $colorFormat != "disable"  ? 'load-yenlow' : 'load-'  . $colorFormat ?> ">
+                                                                <?= $kpi["countTeamEmployee"] ?>
+                                                            </div>
+                                                            <?php }?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 <?= $colorFormat . '-assignNew' ?>">
+                                                        <span class="pull-left">
+                                                            <img src="
+                                                        <?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $colorFormat ?>.svg"
+                                                                class="home-icon mr-2">
+                                                        </span>
+                                                        <a class="font-<?= $colorFormat ?>" style="top: 2px;">
+                                                            View mate
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mt-10 pt-5 pb-1">
+                                                <div class="row">
+                                                    <div class="col-5 pr-2">
+                                                        <div class="row d-flex align-items-center"
+                                                            style="min-height: 24px;">
+                                                            <div class="col-2">
+                                                                <div class="pim-pic-<?= $colorFormat ?>">
+                                                                    <img
+                                                                        src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $colorFormat == 'disable' ? 'teamblack' : 'teamwhite' ?>.svg">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-2 pic-after pt-0">
+                                                                <div class="pim-pic-<?= $colorFormat ?>">
+                                                                    <img
+                                                                        src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $colorFormat == 'disable' ? 'teamblack' : 'teamwhite' ?>.svg">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-2 pic-after pt-0">
+                                                                <div class="pim-pic-<?= $colorFormat ?>">
+                                                                    <img
+                                                                        src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $colorFormat == 'disable' ? 'teamblack' : 'teamwhite' ?>.svg">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-5 number-tagNew load-<?= $colorFormat ?>">
+                                                                <?= $kpi["countTeam"] ?>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-6 <?= $colorFormat ?>-assignNew ">
+                                                        <span class="pull-left">
+                                                            <img src="
+                                                        <?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $colorFormat ?>.svg"
+                                                                class="home-icon mr-2">
+                                                        </span>
+                                                        <a class="font-<?= $colorFormat ?>" style="top: 2px;">
+                                                            View Team
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-1">
                                                     </div>
                                                 </div>
                                             </div>
