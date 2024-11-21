@@ -163,13 +163,13 @@ $this->title = 'Self KGI History';
                                                         ?>
                                             <a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgiDetail["companyId"]]) ?>"
                                                 class="font-<?= $colorFormat ?> style=" top: 2px;">
-                                                View Person
+                                                View mate
                                             </a>
                                             <?php
                                                         } else {
                                                         ?>
                                             <span class="font-<?= $colorFormat ?>">
-                                                View Person
+                                                View mate
                                             </span>
                                             <?php
                                                         }
@@ -205,12 +205,12 @@ $this->title = 'Self KGI History';
                                                         ?>
                                             <a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgiDetail["companyId"]]) ?>"
                                                 class="font-<?= $colorFormat ?> style=" top: 2px;">
-                                                View Team
+                                                View mate
                                             </a>
                                             <?php
                                                         } else { ?>
                                             <span class="font-<?= $colorFormat ?>">
-                                                View Team
+                                                View mate
                                             </span>
                                             <?php
                                                         }
