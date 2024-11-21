@@ -11,6 +11,7 @@ use backend\models\hrvc\KgiEmployee;
 use backend\models\hrvc\KgiEmployeeHistory;
 use backend\models\hrvc\KgiIssue;
 use backend\models\hrvc\KgiTeam;
+use backend\models\hrvc\Team;
 use backend\models\hrvc\Unit;
 use backend\models\hrvc\User;
 use common\models\ModelMaster;
@@ -181,6 +182,7 @@ class KgiPersonalController extends Controller
 					//"isOver" => ModelMaster::isOverDuedate(Kgi::nextCheckDate($kgi['kgiId'])),
 					"isOver" => ModelMaster::isOverDuedate(KgiEmployee::nextCheckDate($kgiEmployeeHistory['kgiEmployeeId'])),
 					"amountType" => $kgi["amountType"],
+					"teamName" => Team::teamName($kgi["teamId"]),
 					"teamMate" =>  $selectPic,
 					"countTeamEmployee" => $countTeamEmployee,
 					"canEdit" => 1,

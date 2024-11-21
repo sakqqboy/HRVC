@@ -703,7 +703,7 @@ function viewTabKfi(kfiHistoryId,tabId) {
 		});
 	}
 	if (tabId == 2) {
-		var url = $url + 'kfi/view/all-kfi-history';
+        var url = $url + 'kfi/view/all-kfi-history';
         $.ajax({
             type: "POST",
             dataType: 'json',
@@ -720,7 +720,7 @@ function viewTabKfi(kfiHistoryId,tabId) {
 			type: "POST",
 			dataType: 'json',
 			url: url,
-			data: { kfiId: kfiId },
+			data: { kfiId: kfiId, kfiHistoryId: kfiHistoryId },
 			success: function (data) {
 				$("#show-content").html(data.kfiIssue);
 			}
@@ -732,7 +732,7 @@ function viewTabKfi(kfiHistoryId,tabId) {
 			type: "POST",
 			dataType: 'json',
 			url: url,
-			data: { kfiId: kfiId },
+			data: { kfiId: kfiId, kfiHistoryId: kfiHistoryId },
 			success: function (data) {
 				$("#show-content").html(data.kfiChart);
 			}
@@ -744,7 +744,7 @@ function viewTabKfi(kfiHistoryId,tabId) {
 			type: "POST",
 			dataType: 'json',
 			url: url,
-			data: { kfiId: kfiId },
+			data: { kfiId: kfiId, kfiHistoryId: kfiHistoryId },
 			success: function (data) {
 				$("#show-content").html(data.kgi);
 			}

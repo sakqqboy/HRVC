@@ -88,7 +88,9 @@ class ManagementController extends Controller
 				];
 				$kfiHistory = KfiHistory::find()
 					->where(["kfiId" => $kfi["kfiId"], "status" => [1, 2]])
-					->orderBy('kfiHistoryId DESC')->one();
+					->orderBy('year DESC,kfiHistoryId DESC')
+					->asArray()
+					->one();
 				if (isset($kfiHistory) && !empty($kfiHistory)) {
 					if ($kfi["targetAmount"] == null || $kfi["targetAmount"] == '' || $kfi["targetAmount"] == 0) {
 						$ratio = 0;
@@ -115,7 +117,7 @@ class ManagementController extends Controller
 						"unit" => Unit::unitName($kfi['unitId']),
 						"month" => ModelMaster::monthEng($kfi['month'], 1),
 						"creater" => User::employeeNameByuserId($kfiHistory["createrId"]),
-						"status" => $kfi['status'],
+						"status" => $kfiHistory['status'],
 						"quantRatio" => $kfiHistory["quantRatio"],
 						"code" =>  $kfiHistory["code"],
 						"result" => $kfiHistory["result"],
@@ -133,6 +135,7 @@ class ManagementController extends Controller
 						"countKfiHasKgi" => KfiHasKgi::countKgiInkfi($kfi["kfiId"]),
 						"kfiEmployee" => $selectPic,
 						"countEmployee" => count($allEmployee),
+						"aa" => $kfiHistory['kfiHistoryId']
 					];
 				}
 
@@ -230,10 +233,67 @@ class ManagementController extends Controller
 		if ($kfiHistoryId == 0) {
 			$kfiHistory = KfiHistory::find()
 				->where(["kfiId" => $kfiId, "status" => [1, 2, 4]])
-				->orderBy('kfiHistoryId DESC')
+				->orderBy('year DESC,month DESC')
 				->asArray()
 				->all();
 		} else {
+			$mainHistory = KfiHistory::find()
+				->where(["kfiHistoryId" => $kfiHistoryId])
+				->asArray()
+				->one();
+			$month = $mainHistory["month"];
+			$year = $mainHistory["year"];
+			$kfiHistory = KfiHistory::find()
+				->where(["kfiId" => $kfiId, "status" => [1, 2, 4]])
+				->andWhere("year<=$year")
+				->orderBy('year DESC,month DESC')
+				->asArray()
+				->all();
+		}
+		$data = [];
+		if (isset($kfiHistory) && count($kfiHistory) > 0) {
+			foreach ($kfiHistory as $history) :
+				$time = explode(' ', $history["createDateTime"]);
+				$employeeId = Employee::employeeId($history["createrId"]);
+				$data[$history["kfiHistoryId"]] = [
+					"title" => $history["titleProgress"],
+					"remark" => $history["remark"],
+					//"result" => $history["result"],
+					"picture" => Employee::employeeImage($employeeId),
+					"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
+					"time" => ModelMaster::timeText($time[1]),
+					"status" => $history["historyStatus"],
+					"target" => $history["target"],
+					"result" => $history["result"],
+					"month" => $history["month"],
+					"year" => $history["year"],
+					"creater" => User::employeeNameByuserId($history["createrId"]),
+				];
+			endforeach;
+		}
+		return json_encode($data);
+	}
+	public function actionKfiHistoryForChart($kfiId, $kfiHistoryId)
+	{
+		if ($kfiHistoryId == 0) {
+			$kfiHistory = KfiHistory::find()
+				->where(["kfiId" => $kfiId, "status" => [1, 2, 4]])
+				->orderBy('year ASC,month ASC,kfiHistoryId DESC')
+				->asArray()
+				->all();
+		} else {
+			$mainHistory = KfiHistory::find()
+				->where(["kfiHistoryId" => $kfiHistoryId])
+				->asArray()
+				->one();
+			$month = $mainHistory["month"];
+			$year = $mainHistory["year"];
+			$kfiHistory = KfiHistory::find()
+				->where(["kfiId" => $kfiId, "status" => [1, 2, 4]])
+				->andWhere("year<=$year")
+				->orderBy('year ASC,month ASC,kfiHistoryId DESC')
+				->asArray()
+				->all();
 		}
 		$data = [];
 		if (isset($kfiHistory) && count($kfiHistory) > 0) {

@@ -188,38 +188,114 @@ class ViewController extends Controller
 		$monthDetail = [];
 		$summarizeMonth = [];
 		$res["monthlyDetailHistoryText"] = "";
+		if ($kfiHistoryId != 0) {
+			$kfiHistory = KfiHistory::find()
+				->where(["kfiHistoryId" => $kfiHistoryId])
+				->asArray()
+				->one();
+			$year = $kfiHistory["year"];
+			$month = $kfiHistory["month"];
+		} else {
+			$year = '';
+			$month = '';
+		}
 		if (isset($history) && count($history) > 0) {
 			//krsort($history);
 			foreach ($history as $kfiHistoryId => $ht):
-				if (isset($monthDetail[$ht["year"]][$ht["month"]])) {
-					$totalCount = count($monthDetail[$ht["year"]][$ht["month"]]);
-					$monthDetail[$ht["year"]][$ht["month"]][$totalCount] = [
-						"creater" => $ht["creater"],
-						"title" => $ht["title"],
-						"status" => $ht["status"],
-						"picture" => $ht["picture"],
-						"result" => $ht["result"],
-						"createDateTime" => $ht["createDate"]
-					];
-				} else {
-					$monthDetail[$ht["year"]][$ht["month"]][0] = [
-						"creater" => $ht["creater"],
-						"title" => $ht["title"],
-						"status" => $ht["status"],
-						"picture" => $ht["picture"],
-						"result" => $ht["result"],
-						"createDateTime" => $ht["createDate"]
-					];
-					$summarizeMonth[$ht["year"]][$ht["month"]] = [
-						"year" => $ht["year"],
-						"month" => ModelMaster::fullMonthText($ht["month"]),
-						"result" => $ht["result"],
-						"target" => $ht["target"],
-						"kfiHistoryId" => $kfiHistoryId
+				if ($year != '' && $month != '' && $ht["year"] <= $year) {
+					if ($ht["year"] == $year) {
+						if ($ht["month"] <= $month) {
+							if (isset($monthDetail[$ht["year"]][$ht["month"]])) {
+								$totalCount = count($monthDetail[$ht["year"]][$ht["month"]]);
+								$monthDetail[$ht["year"]][$ht["month"]][$totalCount] = [
+									"creater" => $ht["creater"],
+									"title" => $ht["title"],
+									"status" => $ht["status"],
+									"picture" => $ht["picture"],
+									"result" => $ht["result"],
+									"createDateTime" => $ht["createDate"]
+								];
+							} else {
+								$monthDetail[$ht["year"]][$ht["month"]][0] = [
+									"creater" => $ht["creater"],
+									"title" => $ht["title"],
+									"status" => $ht["status"],
+									"picture" => $ht["picture"],
+									"result" => $ht["result"],
+									"createDateTime" => $ht["createDate"]
+								];
+								$summarizeMonth[$ht["year"]][$ht["month"]] = [
+									"year" => $ht["year"],
+									"month" => ModelMaster::fullMonthText($ht["month"]),
+									"result" => $ht["result"],
+									"target" => $ht["target"],
+									"kfiHistoryId" => $kfiHistoryId
 
-					];
+								];
+							}
+						}
+					} else {
+						if (isset($monthDetail[$ht["year"]][$ht["month"]])) {
+							$totalCount = count($monthDetail[$ht["year"]][$ht["month"]]);
+							$monthDetail[$ht["year"]][$ht["month"]][$totalCount] = [
+								"creater" => $ht["creater"],
+								"title" => $ht["title"],
+								"status" => $ht["status"],
+								"picture" => $ht["picture"],
+								"result" => $ht["result"],
+								"createDateTime" => $ht["createDate"]
+							];
+						} else {
+							$monthDetail[$ht["year"]][$ht["month"]][0] = [
+								"creater" => $ht["creater"],
+								"title" => $ht["title"],
+								"status" => $ht["status"],
+								"picture" => $ht["picture"],
+								"result" => $ht["result"],
+								"createDateTime" => $ht["createDate"]
+							];
+							$summarizeMonth[$ht["year"]][$ht["month"]] = [
+								"year" => $ht["year"],
+								"month" => ModelMaster::fullMonthText($ht["month"]),
+								"result" => $ht["result"],
+								"target" => $ht["target"],
+								"kfiHistoryId" => $kfiHistoryId
+
+							];
+						}
+					}
+				} else {
+					if (isset($monthDetail[$ht["year"]][$ht["month"]])) {
+						$totalCount = count($monthDetail[$ht["year"]][$ht["month"]]);
+						$monthDetail[$ht["year"]][$ht["month"]][$totalCount] = [
+							"creater" => $ht["creater"],
+							"title" => $ht["title"],
+							"status" => $ht["status"],
+							"picture" => $ht["picture"],
+							"result" => $ht["result"],
+							"createDateTime" => $ht["createDate"]
+						];
+					} else {
+						$monthDetail[$ht["year"]][$ht["month"]][0] = [
+							"creater" => $ht["creater"],
+							"title" => $ht["title"],
+							"status" => $ht["status"],
+							"picture" => $ht["picture"],
+							"result" => $ht["result"],
+							"createDateTime" => $ht["createDate"]
+						];
+						$summarizeMonth[$ht["year"]][$ht["month"]] = [
+							"year" => $ht["year"],
+							"month" => ModelMaster::fullMonthText($ht["month"]),
+							"result" => $ht["result"],
+							"target" => $ht["target"],
+							"kfiHistoryId" => $kfiHistoryId
+
+						];
+					}
 				}
 			endforeach;
+			//throw new Exception(print_r($monthDetail, true));
 			$res["monthlyDetailHistoryText"] = $this->renderAjax('kfi_update_history', [
 				"monthDetail" => $monthDetail,
 				"summarizeMonth" => $summarizeMonth
@@ -235,7 +311,7 @@ class ViewController extends Controller
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-history?kfiId=' . $kfiId . "&&kfiHistoryId=" . $kfiHistoryId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-history-for-chart?kfiId=' . $kfiId . "&&kfiHistoryId=" . $kfiHistoryId);
 		$history = curl_exec($api);
 		$history = json_decode($history, true);
 		curl_close($api);
@@ -245,43 +321,96 @@ class ViewController extends Controller
 		$months = ModelMaster::month();
 		$monthText = '';
 		$target = [];
+		$summarizeMonth2 = [];
 		$targetText = "";
 		$resultText = "";
 		$result = [];
 		//ksort($month);
 		$res["monthlyDetailHistoryText"] = "";
-
-
+		if ($kfiHistoryId != 0) {
+			$kfiHistory = KfiHistory::find()
+				->where(["kfiHistoryId" => $kfiHistoryId])
+				->asArray()
+				->one();
+			$year = $kfiHistory["year"];
+			$month = $kfiHistory["month"];
+		} else {
+			$year = '';
+			$month = '';
+		}
 		if (isset($history) && count($history) > 0) {
+			$i = 0;
 			foreach ($history as $kfiHistoryId => $ht):
-				if (!isset($summarizeMonth[$ht["year"]][$ht["month"]])) {
-					$summarizeMonth[$ht["year"]][$ht["month"]] = [
-						"year" => $ht["year"],
-						"month" => ModelMaster::fullMonthText($ht["month"]),
-						"result" => $ht["result"],
-						"target" => $ht["target"],
-						"kfiHistoryId" => $kfiHistoryId
-					];
+				if ($year != '' && $month != '' && $ht["year"] <= $year) {
+					if ($ht["year"] == $year) {
+						if ($ht["month"] <= $month) {
+							if (!isset($summarizeMonth[$ht["year"]][$ht["month"]])) {
+								$summarizeMonth[$ht["year"]][$ht["month"]] = [
+									"year" => $ht["year"],
+									"month" => ModelMaster::fullMonthText($ht["month"]),
+									"result" => $ht["result"],
+									"target" => $ht["target"],
+									"kfiHistoryId" => $kfiHistoryId
+								];
+								$summarizeMonth2[$i] = [
+									"year" => $ht["year"],
+									"month" => ModelMaster::fullMonthText($ht["month"]),
+									"result" => $ht["result"],
+									"target" => $ht["target"],
+									"kfiHistoryId" => $kfiHistoryId
+								];
+							}
+						}
+					} else {
+						if (!isset($summarizeMonth[$ht["year"]][$ht["month"]])) {
+							$summarizeMonth[$ht["year"]][$ht["month"]] = [
+								"year" => $ht["year"],
+								"month" => ModelMaster::fullMonthText($ht["month"]),
+								"result" => $ht["result"],
+								"target" => $ht["target"],
+								"kfiHistoryId" => $kfiHistoryId
+							];
+							$summarizeMonth2[$i] = [
+								"year" => $ht["year"],
+								"month" => ModelMaster::fullMonthText($ht["month"]),
+								"result" => $ht["result"],
+								"target" => $ht["target"],
+								"kfiHistoryId" => $kfiHistoryId
+							];
+						}
+					}
+				} else {
+					if (!isset($summarizeMonth[$ht["year"]][$ht["month"]])) {
+						$summarizeMonth[$ht["year"]][$ht["month"]] = [
+							"year" => $ht["year"],
+							"month" => ModelMaster::fullMonthText($ht["month"]),
+							"result" => $ht["result"],
+							"target" => $ht["target"],
+							"kfiHistoryId" => $kfiHistoryId
+						];
+						$summarizeMonth2[$i] = [
+							"year" => $ht["year"],
+							"month" => ModelMaster::fullMonthText($ht["month"]),
+							"result" => $ht["result"],
+							"target" => $ht["target"],
+							"kfiHistoryId" => $kfiHistoryId
+						];
+					}
 				}
+				$i++;
 			endforeach;
 		}
-		foreach ($months as $index => $month):
-			if (isset($summarizeMonth[$year][$index])) {
-				$target[$index] = $summarizeMonth[$year][$index]["target"];
-				$result[$index] = $summarizeMonth[$year][$index]["result"];
-			} else {
-				$target[$index] = 0;
-				$result[$index] = 0;
-			}
+		$summarizeMonth2 = array_slice($summarizeMonth2, -8);
+		foreach ($summarizeMonth2 as $index => $data):
+			$target[$index] = $data["target"];
+			$result[$index] = $data["result"];
 			$targetText .= $target[$index] . ',';
 			$resultText .= $result[$index] . ',';
-			$monthText .= '"' . $month . '",';
+			$monthText .= '"' . substr($data["month"], 0, 3) . substr($data["year"], -2) . '",';
 		endforeach;
 		$monthText = substr($monthText, 0, -1);
 		$targetText = substr($targetText, 0, -1);
 		$resultText = substr($resultText, 0, -1);
-		//throw new Exception($resultText);
-		//throw new Exception(print_r($summarizeMonth, true));
 		$res["kfiChart"] = $this->renderAjax('kfi_chart', [
 			"month" => $monthText,
 			"target" => $targetText,

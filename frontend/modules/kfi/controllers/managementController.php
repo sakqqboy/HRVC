@@ -297,7 +297,7 @@ class ManagementController extends Controller
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
 		$kfi = curl_exec($api);
 		$kfi = json_decode($kfi, true);
 
@@ -441,7 +441,7 @@ class ManagementController extends Controller
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
 		$kfi = curl_exec($api);
 		$kfi = json_decode($kfi, true);
 
@@ -521,7 +521,7 @@ class ManagementController extends Controller
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
 		$kfi = curl_exec($api);
 		$kfi = json_decode($kfi, true);
 
@@ -904,7 +904,7 @@ class ManagementController extends Controller
 		$textBranch = "";
 		$textBranch .= $this->renderAjax('company_branch', ["branches" => $branches, "kfiId" => $kfiId]);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
 		$kfi = curl_exec($api);
 		$kfi = json_decode($kfi, true);
 
@@ -1178,7 +1178,7 @@ class ManagementController extends Controller
 		$kfiHasKgi = curl_exec($api);
 		$kfiHasKgi = json_decode($kfiHasKgi, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
 		$kfiDetail = curl_exec($api);
 		$kfiDetail = json_decode($kfiDetail, true);
 		curl_close($api);
@@ -1272,7 +1272,7 @@ class ManagementController extends Controller
 		$kfiHasKgi = curl_exec($api);
 		$kfiHasKgi = json_decode($kfiHasKgi, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
 		$kfiDetail = curl_exec($api);
 		$kfiDetail = json_decode($kfiDetail, true);
 		curl_close($api);
@@ -1290,7 +1290,7 @@ class ManagementController extends Controller
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
 		$kfi = curl_exec($api);
 		$kfi = json_decode($kfi, true);
 

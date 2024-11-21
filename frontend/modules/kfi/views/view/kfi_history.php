@@ -271,29 +271,6 @@ $form = ActiveForm::begin([
 <?= $this->render('modal_employee_history') ?>
 
 <script>
-    // function viewTabKfi2(tabId) {
-    //     // Hide all tabs
-    //     for (let i = 1; i <= 5; i++) {
-    //         document.getElementById('tab-' + i).classList.remove('view-tab-active');
-    //         document.getElementById('tab-' + i + '-blue').style.display = 'none';
-    //         document.getElementById('tab-' + i + '-black').style.display = 'block';
-    //     }
-
-    //     // Show the clicked tab as active
-    //     document.getElementById('tab-' + tabId).classList.add('view-tab-active');
-    //     document.getElementById('tab-' + tabId + '-blue').style.display = 'block';
-    //     document.getElementById('tab-' + tabId + '-black').style.display = 'none';
-
-    //     // Hide all content
-    //     for (let i = 1; i <= 5; i++) {
-    //         document.getElementById('content-' + i).style.display = 'none';
-    //     }
-
-    //     // Show the content corresponding to the clicked tab
-    //     document.getElementById('content-' + tabId).style.display = 'block';
-    // }
-
-    // Optionally set a default tab to be active on page load
     window.onload = function() {
         let openTab = <?= $openTab ?>; // PHP value passed to JavaScript
         if (openTab) {

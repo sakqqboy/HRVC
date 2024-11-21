@@ -89,7 +89,7 @@ $this->title = 'KFI Grid View';
                             <div class="col-12 mt-10 mb-5 pim-big-box pim-<?= $colorFormat ?>" id="kfi-<?= $kfiId ?>">
                                 <div class="row">
                                     <div class="col-lg-4 col-md-5 col-12 pim-name">
-                                        <?= $kfi["kfiName"] ?>
+                                        <?= $kfi["kfiName"] ?> ==> <?= $kfi["aa"] ?>
                                     </div>
                                     <div class="col-lg-1 col-md-2 col-4 text-center">
                                         <div class="<?= $colorFormat ?>-tag text-center">

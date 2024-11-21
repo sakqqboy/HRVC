@@ -11,6 +11,7 @@ use backend\models\hrvc\KpiEmployee;
 use backend\models\hrvc\KpiEmployeeHistory;
 use backend\models\hrvc\KpiIssue;
 use backend\models\hrvc\KpiTeam;
+use backend\models\hrvc\Team;
 use backend\models\hrvc\Unit;
 use common\models\ModelMaster;
 use Exception;
@@ -64,13 +65,6 @@ class KpiPersonalController extends Controller
 	public function actionEmployeeKpi($userId, $role)
 	{
 		$employeeId = Employee::employeeId($userId);
-		/*$kpis = Kpi::find()
-			->select('kpi.*')
-			->JOIN("LEFT JOIN", "kpi_employee ke", "ke.kpiId=kpi.kpiId")
-			->where(["kpi.status" => [1, 2, 4], "ke.status" => 1, "ke.employeeId" => $employeeId])
-			->asArray()
-			->orderBy('kpi.updateDateTime DESC')
-			->all();*/
 		if ($role <= 3) {
 			$kpiEmployee = KpiEmployee::find()
 				->select('k.kpiName,k.priority,k.quantRatio,k.amountType,k.code,kpi_employee.target,kpi_employee.result,
@@ -169,6 +163,7 @@ class KpiPersonalController extends Controller
 					"toDate" => ModelMaster::engDate($kpiEmployeeHistory["toDate"], 2),
 					"isOver" => ModelMaster::isOverDuedate(KpiEmployee::nextCheckDate($kpiEmployeeHistory['kpiEmployeeId'])),
 					"amountType" => $kpi["amountType"],
+					"teamName" => Team::teamName($kpi["teamId"]),
 					"canEdit" => 1,
 					"teamMate" =>  $selectPic,
 					"countTeamEmployee" => $countTeamEmployee,
@@ -234,7 +229,7 @@ class KpiPersonalController extends Controller
 				"ratio" => $ratio,
 				"unitText" => Unit::unitName($kpiDetail["unitId"]),
 				"target" => !empty($kpiEmployee["target"]) ? $kpiEmployee["target"] : 0,
-				"result" => !empty($kpiEmployee["result"]) ? $kpiEmployee["result"] : 0, 
+				"result" => !empty($kpiEmployee["result"]) ? $kpiEmployee["result"] : 0,
 				"detail" => isset($kpiEmployee["detail"]) ? $kpiEmployee["detail"] : null,
 				"nextCheckDate" => isset($kpiEmployee["nextCheckDate"]) ? $kpiEmployee["nextCheckDate"] : null,
 				"lastCheckDate" => isset($kpiEmployee["lastCheckDate"]) ? $kpiEmployee["lastCheckDate"] : null,
