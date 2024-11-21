@@ -58,7 +58,7 @@ class AssignController extends Controller
 		$teams = json_decode($teams, true);
 		//throw new Exception(print_r($teams, true));
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
 		$kfiDetail = curl_exec($api);
 		$kfiDetail = json_decode($kfiDetail, true);
 		$text = '';

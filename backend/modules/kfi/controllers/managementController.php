@@ -623,7 +623,7 @@ class ManagementController extends Controller
 						"year" => $year,
 						//"kfi.active" => isset($active) ? $active : null
 					])
-					->orderBy('kfiHistoryId DESC')
+					->orderBy('year DESC,kfiHistoryId DESC')
 					->one();
 				if (isset($kfiHistory) && !empty($kfiHistory)) {
 					if ($kfi["targetAmount"] == null || $kfi["targetAmount"] == '' || $kfi["targetAmount"] == 0) {
@@ -651,7 +651,7 @@ class ManagementController extends Controller
 						"target" => $kfi['targetAmount'],
 						"unit" => Unit::unitName($kfi['unitId']),
 						"month" => ModelMaster::monthEng($kfi['month'], 1),
-						"status" => $kfi['status'],
+						"status" => $kfiHistory['status'],
 						"quantRatio" => $kfiHistory["quantRatio"],
 						"code" =>  $kfiHistory["code"],
 						"result" => $kfiHistory["result"],
