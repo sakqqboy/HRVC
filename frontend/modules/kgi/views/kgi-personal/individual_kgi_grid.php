@@ -178,11 +178,11 @@ $this->title = "INDIVIDUAL KGI";
 
                                     <span class="team-wrapper <?= $colorFormat ?>-teamshow pt-4"
                                         style="margin-right: 5px; padding-right: 5px;">
-                                        <span class="team-icon pim-team-<?= $colorFormat ?>">
+                                        <span class="team-icon pim-team-<?= $colorFormat ?>" style="bottom: 2px;">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $colorFormat == 'disable' ? 'teamblack' : 'teamwhite' ?>.svg"
                                                 alt="Team Icon">
                                         </span>
-                                        <span class="team-name"><?= $kgi["teamName"] ?></span>
+                                        <span class="team-name" style="bottom: 2px;"><?= $kgi["teamName"] ?></span>
                                     </span>
                                     <span class="team-wrapper <?= $colorFormat ?>-teamshow pb-4"
                                         style="margin-right: 5px; padding-right: 5px;">
@@ -193,7 +193,8 @@ $this->title = "INDIVIDUAL KGI";
                                         <span class="team-name"><?= $kgi["employeeName"] ?></span>
                                     </span>
 
-                                    <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId']]) ?>"
+                                    <a href="
+                                            <?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId']]) ?>"
                                         class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
                                         style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="History"

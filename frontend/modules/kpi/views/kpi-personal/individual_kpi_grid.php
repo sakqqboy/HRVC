@@ -182,11 +182,11 @@ $this->title = "INDIVIDUAL KPI";
 
                                     <span class="team-wrapper <?= $colorFormat ?>-teamshow pt-4"
                                         style="margin-right: 5px; padding-right: 5px;">
-                                        <span class="team-icon pim-team-<?= $colorFormat ?>">
+                                        <span class="team-icon pim-team-<?= $colorFormat ?>" style="bottom: 2px;">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $colorFormat == 'disable' ? 'teamblack' : 'teamwhite' ?>.svg"
                                                 alt="Team Icon">
                                         </span>
-                                        <span class="team-name"><?= $kpi["teamName"] ?></span>
+                                        <span class="team-name" style="bottom: 2px;"><?= $kpi["teamName"] ?></span>
                                     </span>
 
                                     <span class="team-wrapper <?= $colorFormat ?>-teamshow pb-4"
