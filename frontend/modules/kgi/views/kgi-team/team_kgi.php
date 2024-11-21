@@ -277,12 +277,12 @@ $this->title = "TEAM KGI";
 
                                     <!-- <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-team-history/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiId' => $kgi['kgiId'], 'openTab' => 2]) ?>"
                                         class="btn btn-bg-white-xs mr-5" style="margin-top: -1px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.png"
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.svg"
                                             alt="History" class="pim-icon" style="margin-top: -1px;">
                                     </a> -->
                                     <span class="dropdown" href="#" id="dropdownMenuLink-<?= $kgi['isOver'] ?>"
                                         data-bs-toggle="dropdown">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.png"
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.svg"
                                             class="icon-table on-cursor">
                                     </span>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kgi['isOver'] ?>">

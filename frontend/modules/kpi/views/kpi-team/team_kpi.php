@@ -10,7 +10,7 @@ $this->title = "KPI";
 
 <div class="col-12">
     <div class="col-12">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.png" class="home-icon mr-5"
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
             style="margin-top: -3px;">
         <strong class="pim-head-text"> Team Key Performance Indicators </strong>
     </div>
@@ -291,20 +291,20 @@ $this->title = "KPI";
                                         <a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                     </li> -->
                                     <!-- <a class="btn btn-bg-white-xs mr-5" style="margin-top: -1px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.png"
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.svg"
                                             alt="History" class="pim-icon" style="margin-top: -1px;">
                                     </a> -->
 
                                     <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId']]) ?>"
                                         class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
                                         style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="History"
                                             class="pim-icon" style="margin-top: -1px;">
                                     </a>
 
                                     <span class="dropdown" href="#" id="dropdownMenuLink-<?= $kpiTeamId ?>"
                                         data-bs-toggle="dropdown">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.png"
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.svg"
                                             class="icon-table on-cursor">
                                     </span>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kpiTeamId ?>">
@@ -358,7 +358,7 @@ $this->title = "KPI";
                                         <!-- <li class="pl-4 pr-4" data-bs-toggle="modal" data-bs-target="#kpi-issue"
                                             onclick="javascript:showKpiComment(<?= $kpi['kpiId'] ?>)">
                                             <a class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -3px;">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png"
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
                                                     alt="Chats" class="pim-icon mr-10" style="margin-top: -2px;">
                                                 Chats
                                             </a>
@@ -366,7 +366,7 @@ $this->title = "KPI";
                                         <li class="pl-4 pr-4">
                                             <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId'], 'openTab' => 3]) ?>"
                                                 class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -3px;">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png"
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
                                                     alt="Chats" class="pim-icon mr-10" style="margin-top: -2px;">
                                                 Chats
                                             </a>
@@ -374,7 +374,7 @@ $this->title = "KPI";
                                         <li class="pl-4 pr-4">
                                             <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId'], 'openTab' => 4]) ?>"
                                                 class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -3px;">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Chart.png"
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Chart.svg"
                                                     alt="Chart" class="pim-icon mr-10" style="margin-top: -2px;">
                                                 Chart
                                             </a>

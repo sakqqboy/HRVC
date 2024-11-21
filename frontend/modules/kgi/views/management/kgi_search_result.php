@@ -244,7 +244,7 @@ $this->title = "KGI";
                                     <!-- <span data-bs-toggle="modal" data-bs-target="#kgi-issue" onclick="javascript:showKgiComment(<?php // $kgiId 
 																									?>)">
 												<img src="<?php // Yii::$app->homeUrl 
-														?>image/comment.png" class="comment-td-dropdown">
+														?>image/comment.svg" class="comment-td-dropdown">
 											</span>
 											<span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
 												<i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i>
@@ -252,7 +252,7 @@ $this->title = "KGI";
 
 
                                     <!-- <span data-bs-toggle="modal" data-bs-target="#kgi-issue" onclick="javascript:showKgiComment(<?= $kgiId ?>)" class="btn btn-bg-white-xs pr-2 pl-2 pt-1 pb-1">
-												<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.png" class="icon-table on-cursor">
+												<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.svg" class="icon-table on-cursor">
 											</span> -->
                                     <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>"
                                         class="btn btn-bg-white-xs mr-5" style="margin-top: -1px;">
@@ -261,7 +261,7 @@ $this->title = "KGI";
                                     </a>
                                     <span class="dropdown" href="#" id="dropdownMenuLink-<?= $kgiId ?>"
                                         data-bs-toggle="dropdown">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.png"
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.svg"
                                             class="icon-table on-cursor">
                                     </span>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kgiId ?>">

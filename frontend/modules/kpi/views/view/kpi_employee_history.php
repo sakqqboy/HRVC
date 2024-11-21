@@ -153,9 +153,9 @@ $this->title = 'Self KPI History';
                                             <div class="row">
                                                 <div class="col-2 pt-2">
                                                     <?php
-                                                                if (isset($kpi['kgiEmployee'][0])) {
+                                                                if (isset($teamMate[0])) {
                                                                 ?>
-                                                    <img src="<?= Yii::$app->homeUrl . $kpi['kgiEmployee'][0] ?>"
+                                                    <img src="<?= Yii::$app->homeUrl . $teamMate[0] ?>"
                                                         class="pim-pic-grid ">
                                                     <?php
                                                                 }
@@ -163,9 +163,9 @@ $this->title = 'Self KPI History';
                                                 </div>
                                                 <div class="col-2 pic-after pt-2">
                                                     <?php
-                                                                if (isset($kpi['kgiEmployee'][1])) {
+                                                                if (isset($teamMate[1])) {
                                                                 ?>
-                                                    <img src="<?= Yii::$app->homeUrl . $kpi['kgiEmployee'][1] ?>"
+                                                    <img src="<?= Yii::$app->homeUrl . $teamMate[1] ?>"
                                                         class="pim-pic-grid">
                                                     <?php
                                                                 }
@@ -173,9 +173,9 @@ $this->title = 'Self KPI History';
                                                 </div>
                                                 <div class="col-2 pic-after pt-2">
                                                     <?php
-                                                                if (isset($kpi['kgiEmployee'][2])) {
+                                                                if (isset($teamMate[2])) {
                                                                 ?>
-                                                    <img src="<?= Yii::$app->homeUrl . $kpi['kgiEmployee'][2] ?>"
+                                                    <img src="<?= Yii::$app->homeUrl . $teamMate[2] ?>"
                                                         class="pim-pic-grid">
                                                     <?php
                                                                 }
@@ -183,7 +183,7 @@ $this->title = 'Self KPI History';
                                                 </div>
                                                 <div class="col-6 number-tag load-<?= $colorFormat ?> pr-0 pl-0 pt-3"
                                                     style="margin-left: -3px;height:22px;width: 30px;margin-top: 1px;">
-                                                    ...
+                                                    <?= $countTeamEmployee?>
                                                 </div>
                                             </div>
                                         </div>
