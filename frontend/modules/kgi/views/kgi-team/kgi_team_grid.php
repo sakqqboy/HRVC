@@ -7,7 +7,7 @@ $this->title = "TEAM KGI";
 ?>
 <div class="col-12">
     <div class="col-12">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.png" class="home-icon mr-5"
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
             style="margin-top: -3px;">
         <strong class="pim-head-text"> Team Key Goal Indicators</strong>
     </div>
@@ -174,14 +174,14 @@ $this->title = "TEAM KGI";
                                 <!-- <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], "kgiTeamId" => $kgiTeamId]) ?>"
                                     class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
                                     style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="History"
                                         class="pim-icon" style="margin-top: -1px;">
                                 </a> -->
 
                                 <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId']]) ?>"
                                     class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
                                     style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="History"
                                         class="pim-icon" style="margin-top: -1px;">
                                 </a>
                                 <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-team-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], "kgiTeamId" => $kgiTeamId,"teamId"=>$kgi['teamId']]) ?>"
@@ -200,25 +200,25 @@ $this->title = "TEAM KGI";
                                 <!-- <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiId' => $kgi['kgiId'], 'openTab' => 3]) ?>"
                                     class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
                                     style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png" alt="Chats"
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg" alt="Chats"
                                         class="pim-icon mr-3" style="margin-top: -2px;">Chats
                                 </a>
                                 <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiId' => $kgi['kgiId'], 'openTab' => 4]) ?>"
                                     class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
                                     style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="Chart"
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg" alt="Chart"
                                         class="pim-icon mr-3" style="margin-top: -2px;">Chart
                                 </a> -->
                                 <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], 'openTab' => 3]) ?>"
                                     class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
                                     style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png" alt="Chart"
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg" alt="Chart"
                                         class="pim-icon mr-3" style="margin-top: -2px;">Chats
                                 </a>
                                 <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], 'openTab' => 4]) ?>"
                                     class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
                                     style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="Chart"
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg" alt="Chart"
                                         class="pim-icon mr-3" style="margin-top: -2px;">Chart
                                 </a>
 
@@ -226,14 +226,14 @@ $this->title = "TEAM KGI";
                                             style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>"
                                             data-bs-toggle="modal" data-bs-target="#kgi-issue"
                                             onclick="javascript:showKgiComment(<?= $kgi['kgiId'] ?>)" style="margin-top: -3px;">
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png" alt="History"
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg" alt="History"
                                                 class="pim-icon"> Chats
                                         </a> -->
                                 <!-- <a class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
                                     style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>"
                                     data-bs-toggle="modal" data-bs-target="#staticBackdrop3"
                                     onclick="javascript:kgiHistory(<?= $kgiTeamId ?>)" style="margin-top: -3px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="History"
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg" alt="History"
                                         class="pim-icon mr-3" style="margin-top: -2px;">Chart
                                 </a> -->
                                 <?php
@@ -356,7 +356,7 @@ $this->title = "TEAM KGI";
                                                             ?>
                                                     <span class="pull-left"
                                                         style="display:<?= $kgi['isOver'] == 2 ? 'none;' : '' ?>">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.png"
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.svg"
                                                             class="home-icon mr-2">
                                                     </span>
                                                     <a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgi["kgiId"], "companyId" => $kgi["companyId"]]) ?>"
@@ -368,7 +368,7 @@ $this->title = "TEAM KGI";
                                                             ?>
                                                     <!-- <span class="pull-left"
                                                         style="display:<?= $kgi['isOver'] == 2 ? 'none;' : '' ?>">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.png"
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.svg"
                                                             class="home-icon mr-2">
                                                     </span>
                                                     <?php
@@ -396,7 +396,7 @@ $this->title = "TEAM KGI";
                                                 <div class="col-5 border-right pr-2">
                                                     <div class="row">
                                                         <div class="col-4">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.png"
+                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.svg"
                                                                 class="first-layer-icon ml-5" style="margin-top: -4px;">
                                                         </div>
                                                         <div class="col-4 number-tag load-disble pr-3 pl-3 ml-5"
@@ -442,7 +442,7 @@ $this->title = "TEAM KGI";
                                                 <div class="col-6 <?= $colorFormat ?>-assignNew ">
                                                     <span class="pull-left"
                                                         style="display:<?= $kgi['isOver'] == 2 ? 'none;' : '' ?>">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.png"
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.svg"
                                                             class="home-icon mr-2">
                                                     </span>
                                                     <?php

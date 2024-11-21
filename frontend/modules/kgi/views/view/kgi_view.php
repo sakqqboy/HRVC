@@ -8,7 +8,7 @@ $this->title = 'Company KGI History';
 
 <div class="col-12">
     <div class="col-12">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.png" class="home-icon mr-5"
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
             style="margin-top: -3px;">
         <strong class="pim-head-text"> Performance Indicator Matrices (PIM)</strong>
     </div>
@@ -62,17 +62,17 @@ $this->title = 'Company KGI History';
 
                                 <!-- <a class="btn btn-bg-white-xs" data-bs-toggle="modal" data-bs-target="#staticBackdrop3"
                                     onclick="javascript:kgiHistory(<?= $kgi['kgiHistoryId'] ?>)">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Comment.png" alt="History"
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Comment.svg" alt="History"
                                         class="home-icon">
                                 </a>
                                 <a class="btn btn-bg-white-xs" data-bs-toggle="modal" data-bs-target="#staticBackdrop3"
                                     onclick="javascript:kgiHistory(<?= $kgi['kgiHistoryId'] ?>)">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Charts.png" alt="History"
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Charts.svg" alt="History"
                                         class="home-icon" style="margin-top: -3px;">
                                 </a> -->
                                 <!-- <a href="<?= Yii::$app->homeUrl ?>kgi/view/index/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>"
                                     class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="History"
                                         class="pim-icon " style="margin-top: -2px;">
                                 </a> -->
                                 <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 1]) ?>"
@@ -212,7 +212,7 @@ $this->title = 'Company KGI History';
                                         <div class="col-5 border-right-<?= $colorFormat ?> pr-2">
                                             <div class="row">
                                                 <div class="col-2 pt-3">
-                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-<?= $colorFormat ?>.png"
+                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-<?= $colorFormat ?>.svg"
                                                         class="first-layer-icon" style="margin-top: -4px;">
                                                 </div>
                                                 <div class="col-2 pic-after pt-5">

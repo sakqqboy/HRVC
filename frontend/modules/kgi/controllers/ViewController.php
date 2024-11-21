@@ -142,7 +142,7 @@ class ViewController extends Controller
 		$role = UserRole::userRight();
 		$kgiEmployeeId = $param["kgiEmployeeId"];
 		$kgiId = $param["kgiId"];
-		$kgis = $param["kgis"];
+		// $kgis = $param["kgis"];
 
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -152,10 +152,36 @@ class ViewController extends Controller
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/employee-kgi?userId=' . Yii::$app->user->id . '&&role=' . $role);
+		//throw new exception('kgi/kgi-personal/employee-kgi?userId=' . Yii::$app->user->id . '&&role=' . $role);
+		$kgis = curl_exec($api);
+		$kgis = json_decode($kgis, true);
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/kgi-individual-summarize?kgiEmployeeId=' . $kgiEmployeeId);
 		$kgiEmployeeHistory = curl_exec($api);
 		$kgiEmployeeHistory = json_decode($kgiEmployeeHistory, true);
 
+		// ตรวจสอบว่า $kgis มีข้อมูล
+		$teamMate = [];
+		$countTeamEmployee = 0;
+
+		if (is_array($kgis) && !empty($kgis)) {
+			foreach ($kgis as $key => $value) {
+				// กรองข้อมูลตาม $kgiEmployeeId และ $kgiId
+				if (isset($value['kgiEmployeeId'], $value['kgiId']) &&
+					$value['kgiEmployeeId'] == $kgiEmployeeId &&
+					$value['kgiId'] == $kgiId) {
+					
+					// ดึงค่า teamMate และ countTeamEmployee
+					if (isset($value['teamMate']) && isset($value['countTeamEmployee'])) {
+						$teamMate = $value['teamMate'];
+						$countTeamEmployee = $value['countTeamEmployee'];
+					}
+					break; // ออกจาก loop เมื่อพบข้อมูลที่ต้องการ
+				}
+			}
+		}
+//   throw new Exception(print_r($countTeamEmployee,true));
 		curl_close($api);
 		return $this->render('kgi_employee_history', [
 			"role" => $role,
@@ -163,7 +189,9 @@ class ViewController extends Controller
 			"kgiEmployeeHistory" => $kgiEmployeeHistory,
 			"kgiEmployeeId" =>$kgiEmployeeId,
 			"kgiId" =>$kgiId,
-			"kgis" => $kgis
+			"countTeamEmployee" => $countTeamEmployee,
+			"teamMate" => $teamMate
+
 
 		]);
 	}

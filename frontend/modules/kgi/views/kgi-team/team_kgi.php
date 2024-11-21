@@ -9,7 +9,7 @@ $this->title = "TEAM KGI";
 ?>
 <div class="col-12">
     <div class="col-12">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.png" class="home-icon mr-5"
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
             style="margin-top: -3px;">
         <strong class="pim-head-text"> Team Key Goal Indicators </strong>
     </div>
@@ -31,12 +31,12 @@ $this->title = "TEAM KGI";
                                             style="width: 14px;height: 14px;padding-bottom: 4px;">
                                         Company KGI </a>
                                 </div>
-                                <div class="col-4 pim-type-tab-selected">
+                                <div class="col-4 pim-type-tab-selected pr-0 pl-0">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg" alt="Team"
                                         class="pim-icon" style="width: 13px;height: 13px;padding-bottom: 2px;">
                                     Team KGI
                                 </div>
-                                <div class="col-4 pim-type-tab rounded-top-right">
+                                <div class="col-4 pim-type-tab pr-0 pl-0 rounded-top-right">
                                     <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi"
                                         class="no-underline-black">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/self.svg" alt="Self"
@@ -271,8 +271,8 @@ $this->title = "TEAM KGI";
                                 <td>
                                     <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId']]) ?>"
                                         class="btn btn-bg-white-xs mr-5" style="margin-top: -1px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.png"
-                                            alt="History" class="pim-icon" style="margin-top: -1px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/eye.svg" alt="History"
+                                            class="pim-icon" style="margin-top: -1px;">
                                     </a>
 
                                     <!-- <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-team-history/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiId' => $kgi['kgiId'], 'openTab' => 2]) ?>"
@@ -310,7 +310,7 @@ $this->title = "TEAM KGI";
                                         <li class="pl-4 pr-4">
                                             <a class="dropdown-itemNEWS pl-4 pr-20 mb-5"
                                                 href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], 'openTab' => 3]) ?>">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png"
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
                                                     alt="Chats" class="pim-icon mr-10">
                                                 Chats
                                             </a>
@@ -318,7 +318,7 @@ $this->title = "TEAM KGI";
                                         <li class="pl-4 pr-4">
                                             <a class="dropdown-itemNEWS pl-4 pr-20"
                                                 href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], 'openTab' => 4]) ?>">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png"
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg"
                                                     alt="Chats" class="pim-icon mr-10">
                                                 Chart
                                             </a>
@@ -327,7 +327,7 @@ $this->title = "TEAM KGI";
                                                         onclick="javascript:showKgiComment(<?= $kgi['kgiId'] ?>)"
                                                         style="display: <?= $display ?>;">
                                                         <a class="dropdown-itemNEWS pl-4 pr-20 mb-5" href="#">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png"
+                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
                                                                 alt="Chats" class="pim-icon mr-10" style="margin-top: -2px;">
                                                             Chats
                                                         </a>
@@ -357,7 +357,7 @@ $this->title = "TEAM KGI";
                                             <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                 href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiId' => $kgi['kgiId'], 'openTab' => 2]) ?>"
                                                 class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png"
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
                                                     alt="Chats" class="pim-icon mr-3" style="margin-top: -2px;">Chats
                                             </a>
                                         </li>
@@ -365,7 +365,7 @@ $this->title = "TEAM KGI";
                                             <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                 href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiId' => $kgi['kgiId'], 'openTab' => 2]) ?>"
                                                 class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png"
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg"
                                                     alt="Chart" class="pim-icon mr-10" style="margin-top: -2px;">
                                                 Chart
                                             </a>

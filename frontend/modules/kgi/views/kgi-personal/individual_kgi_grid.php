@@ -11,7 +11,7 @@ $this->title = "INDIVIDUAL KGI";
 ?>
 <div class="col-12">
     <div class="col-12">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.png" class="home-icon mr-5"
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
             style="margin-top: -3px;">
         <strong class="pim-head-text">Individual Key Goal Indicators</strong>
     </div>
@@ -182,10 +182,10 @@ $this->title = "INDIVIDUAL KGI";
                                     <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId']]) ?>"
                                         class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
                                         style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="History"
                                             class="pim-icon" style="margin-top: -1px;">
                                     </a>
-                                    <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-individual-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], "kgiEmployeeId" => $kgiEmployeeId, "kgis" => $kgi["countTeamEmployee"]]) ?>"
+                                    <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-individual-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], "kgiEmployeeId" => $kgiEmployeeId]) ?>"
                                         class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?>"
                                         style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg"
@@ -196,13 +196,13 @@ $this->title = "INDIVIDUAL KGI";
                                         data-bs-toggle="modal" data-bs-target="#kgi-issue"
                                         onclick="javascript:showKgiComment(<?= $kgi['kgiId'] ?>)"
                                         style="margin-top: -3px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png"
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
                                             alt="History" class="pim-icon"> Chats
                                     </a>
                                     <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], 'openTab' => 4]) ?>"
                                         class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
                                         style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="Chart"
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg" alt="Chart"
                                             class="pim-icon mr-3" style="margin-top: -2px;">Chart
                                     </a>
                                     <!-- <a class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
@@ -210,14 +210,14 @@ $this->title = "INDIVIDUAL KGI";
                                         data-bs-toggle="modal" data-bs-target="#staticBackdrop3"
                                         onclick="javascript:kgiHistory(<?= $kgiEmployeeId ?>)"
                                         style="margin-top: -3px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png"
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg"
                                             alt="History" class="pim-icon mr-3" style="margin-top: -2px;">Chart
                                     </a> -->
 
                                     <!-- <a class="btn btn-bg-white-xs mr-5"
                                         href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-individual-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], "kgiEmployeeId" => $kgiEmployeeId]) ?>"
                                         style="margin-top: -3px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="History"
                                             class="pim-icon" style="margin-top: -1px;">
                                     </a>
                                     <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-individual-history/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId, 'kgiId' => $kgi['kgiId'], 'openTab' => 2]) ?>"
@@ -227,12 +227,12 @@ $this->title = "INDIVIDUAL KGI";
                                     </a>
                                     <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/view-personal-kgi/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId, 'kgiId' => $kgi['kgiId'], 'openTab' => 3]) ?>"
                                         class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png"
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
                                             alt="Chats" class="pim-icon mr-3" style="margin-top: -2px;">Chats
                                     </a>
                                     <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/view-personal-kgi/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId, 'kgiId' => $kgi['kgiId'], 'openTab' => 4]) ?>"
                                         class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="Chart"
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg" alt="Chart"
                                             class="pim-icon mr-3" style="margin-top: -2px;">Chart
                                     </a> -->
                                     <?php
@@ -308,7 +308,7 @@ $this->title = "INDIVIDUAL KGI";
                                                     <div class="col-5 border-right pr-2">
                                                         <div class="row">
                                                             <div class="col-4">
-                                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.png"
+                                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.svg"
                                                                     class="first-layer-icon ml-5"
                                                                     style="margin-top: -4px;">
                                                             </div>

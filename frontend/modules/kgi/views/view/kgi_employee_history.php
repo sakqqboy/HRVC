@@ -8,7 +8,7 @@ $this->title = 'Self KGI History';
 
 <div class="col-12">
     <div class="col-12">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.png" class="home-icon mr-5"
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
             style="margin-top: -3px;">
         <strong class="pim-head-text"> Performance Indicator Matrices (PIM)</strong>
     </div>
@@ -41,6 +41,7 @@ $this->title = 'Self KGI History';
                     $i = 0;
                     foreach ($kgiEmployeeHistory as $year => $kgiMonth) :
                         foreach ($kgiMonth as $month => $kgi):
+
                             if ($kgi["isOver"] == 1 && $kgi["status"] != 2) {
                                 $colorFormat = 'over';
                             } else {
@@ -61,7 +62,7 @@ $this->title = 'Self KGI History';
                             <div class="col-5 pim-name"><?= $kgi["month"] ?> <?= $kgi["year"] ?></div>
                             <div class="col-7 text-end">
                                 <a href="" class="btn btn-bg-white-xs">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="Chats"
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="Chats"
                                         class="pim-icon " style="margin-top: -2px;">
                                 </a>
                                 <?php
@@ -76,13 +77,13 @@ $this->title = 'Self KGI History';
                                             ?>
                                 <a class="btn btn-bg-white-xs" data-bs-toggle="modal" data-bs-target="#staticBackdrop3"
                                     onclick="javascript:kgiHistory(<?= $kgi['kgiEmployeeHistoryId'] ?>)">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Comment.png" alt="History"
-                                        class="home-icon">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/comment.svg" alt="History"
+                                        class="home-icon" style="margin-top: -3px; width: 14px; height: 14px;">
                                 </a>
                                 <a class="btn btn-bg-white-xs" data-bs-toggle="modal" data-bs-target="#staticBackdrop3"
                                     onclick="javascript:kgiHistory(<?= $kgi['kgiEmployeeHistoryId'] ?>)">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Charts.png" alt="History"
-                                        class="home-icon" style="margin-top: -3px;">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/charts.svg" alt="History"
+                                        class="home-icon" style="margin-top: -3px; width: 14px; height: 14px;">
                                 </a>
 
                                 <?php
@@ -122,9 +123,9 @@ $this->title = 'Self KGI History';
                                             <div class="row">
                                                 <div class="col-2 pt-2">
                                                     <?php
-                                                                if (isset($kgi['kgiEmployee'][0])) {
+                                                                if (isset($teamMate[0])) {
                                                                 ?>
-                                                    <img src="<?= Yii::$app->homeUrl . $kgi['kgiEmployee'][0] ?>"
+                                                    <img src="<?= Yii::$app->homeUrl . $teamMate[0] ?>"
                                                         class="pim-pic-grid ">
                                                     <?php
                                                                 }
@@ -132,9 +133,9 @@ $this->title = 'Self KGI History';
                                                 </div>
                                                 <div class="col-2 pic-after pt-2">
                                                     <?php
-                                                                if (isset($kgi['kgiEmployee'][1])) {
+                                                                if (isset($teamMate[1])) {
                                                                 ?>
-                                                    <img src="<?= Yii::$app->homeUrl . $kgi['kgiEmployee'][1] ?>"
+                                                    <img src="<?= Yii::$app->homeUrl . $teamMate[1] ?>"
                                                         class="pim-pic-grid">
                                                     <?php
                                                                 }
@@ -142,9 +143,9 @@ $this->title = 'Self KGI History';
                                                 </div>
                                                 <div class="col-2 pic-after pt-2">
                                                     <?php
-                                                                if (isset($kgi['kgiEmployee'][2])) {
+                                                                if (isset($teamMate[2])) {
                                                                 ?>
-                                                    <img src="<?= Yii::$app->homeUrl . $kgi['kgiEmployee'][2] ?>"
+                                                    <img src="<?= Yii::$app->homeUrl . $teamMate[2] ?>"
                                                         class="pim-pic-grid">
                                                     <?php
                                                                 }
@@ -152,7 +153,7 @@ $this->title = 'Self KGI History';
                                                 </div>
                                                 <div class="col-6 number-tag load-<?= $colorFormat ?> pr-0 pl-0 pt-3"
                                                     style="margin-left: -3px;height:22px;width: 30px;margin-top: 1px;">
-                                                    <?= $kgis ?>
+                                                    <?= $countTeamEmployee?>
                                                 </div>
                                             </div>
                                         </div>

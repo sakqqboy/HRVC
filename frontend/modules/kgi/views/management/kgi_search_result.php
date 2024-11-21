@@ -8,7 +8,7 @@ $this->title = "KGI";
 ?>
 <div class="col-12">
     <div class="col-12">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.png" class="home-icon mr-5"
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
             style="margin-top: -3px;">
         <strong class="pim-head-text"> Performance Indicator Matrices (PIM)</strong>
     </div>
@@ -27,7 +27,7 @@ $this->title = "KGI";
                                         class="pim-icon" style="width: 14px;height: 14px;padding-bottom: 4px;">
                                     Company KGI
                                 </div>
-                                <div class="col-4 pim-type-tab">
+                                <div class="col-4 pim-type-tab pr-0 pl-0">
                                     <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/team-kgi-grid"
                                         class="no-underline-black ">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg" alt="Team"
@@ -35,7 +35,7 @@ $this->title = "KGI";
                                         Team KGI
                                     </a>
                                 </div>
-                                <div class="col-4 pim-type-tab rounded-top-right">
+                                <div class="col-4 pim-type-tab pr-0 pl-0 rounded-top-right">
                                     <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi-grid"
                                         class="no-underline-black">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/self.svg" alt="Self"
@@ -256,8 +256,8 @@ $this->title = "KGI";
 											</span> -->
                                     <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>"
                                         class="btn btn-bg-white-xs mr-5" style="margin-top: -1px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.png"
-                                            alt="History" class="pim-icon" style="margin-top: -1px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/eye.svg" alt="History"
+                                            class="pim-icon" style="margin-top: -1px;">
                                     </a>
                                     <span class="dropdown" href="#" id="dropdownMenuLink-<?= $kgiId ?>"
                                         data-bs-toggle="dropdown">
@@ -305,7 +305,7 @@ $this->title = "KGI";
                                             <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                 href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 3]) ?>"
                                                 class="btn btn-bg-white-xs mr-4" style="margin-top: -3px;">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png"
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
                                                     alt="Chart" class="pim-icon mr-10" style="margin-top: -2px;">
                                                 Chats
                                             </a>
@@ -314,7 +314,7 @@ $this->title = "KGI";
                                             <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                 href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 4]) ?>"
                                                 class="btn btn-bg-white-xs mr-4" style="margin-top: -3px;">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png"
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg"
                                                     alt="Chart" class="pim-icon mr-10" style="margin-top: -2px;">
                                                 Chart
                                             </a>
