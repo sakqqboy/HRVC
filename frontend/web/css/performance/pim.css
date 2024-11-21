@@ -1085,8 +1085,8 @@
 }
 
 .team-icon {
-	width: 18px;
-	height: 18px;
+	width: 14px;
+	height: 14px;
 	border-radius: 50%;
 	display: flex;
 	justify-content: center;
@@ -1129,16 +1129,34 @@
 
 /* Icon inside the circle */
 .team-icon img {
-	width: 10px;
-	height: 10px;
+	width: 8px;
+	height: 8px;
 	object-fit: cover;
 }
 
+.pim-pic-icon {
+	/* border-radius: 50%; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/* border: 0.5px solid #FFFFFF; */
+}
+
+.pim-pic-icon img {
+	border-radius: 100%;
+	width: 12px;
+	height: 12px;
+	/* object-fit: cover; */
+}
+
+
+
 .pim-pic-grid {
-	width: 20px;
-	height: 20px;
+	width: 24px;
+	height: 24px;
 	border-radius: 100%;
 	border: #FFFFFF solid 0.5px;
+	object-fit: cover;
 }
 
 .pim-pic-gridKFI {

@@ -180,6 +180,24 @@ $this->title = "INDIVIDUAL KPI";
                                         <?= $kpi["employeeName"] ?>
                                     </span> -->
 
+                                    <span class="team-wrapper <?= $colorFormat ?>-teamshow pt-4"
+                                        style="margin-right: 5px; padding-right: 5px;">
+                                        <span class="team-icon pim-team-<?= $colorFormat ?>">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $colorFormat == 'disable' ? 'teamblack' : 'teamwhite' ?>.svg"
+                                                alt="Team Icon">
+                                        </span>
+                                        <span class="team-name"><?= $kpi["teamName"] ?></span>
+                                    </span>
+
+                                    <span class="team-wrapper <?= $colorFormat ?>-teamshow pb-4"
+                                        style="margin-right: 5px; padding-right: 5px;">
+
+                                        <span class="pim-pic-icon">
+                                            <img src="<?= Yii::$app->homeUrl . $kpi['picture'] ?>">
+                                        </span>
+                                        <span class="team-name"><?= $kpi["employeeName"] ?></span>
+                                    </span>
+
                                     <!-- <a class="btn btn-bg-white-xs mr-5"
                                         href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-individual-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId'], "kpiEmployeeId" => $kpiEmployeeId]) ?>"
                                         style="margin-top: -3px;"

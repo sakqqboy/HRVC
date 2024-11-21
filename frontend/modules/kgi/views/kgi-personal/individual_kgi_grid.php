@@ -175,10 +175,24 @@ $this->title = "INDIVIDUAL KGI";
                                     </div>
                                 </div>
                                 <div class="col-lg-5 col-md-2 col-4 text-end pr-20">
-                                    <img src="<?= Yii::$app->homeUrl . $kgi['picture'] ?>" class="pim-pic-grid">
-                                    <span class="pim-normal-text mr-5">
-                                        <?= $kgi["employeeName"] ?>
+
+                                    <span class="team-wrapper <?= $colorFormat ?>-teamshow pt-4"
+                                        style="margin-right: 5px; padding-right: 5px;">
+                                        <span class="team-icon pim-team-<?= $colorFormat ?>">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $colorFormat == 'disable' ? 'teamblack' : 'teamwhite' ?>.svg"
+                                                alt="Team Icon">
+                                        </span>
+                                        <span class="team-name"><?= $kgi["teamName"] ?></span>
                                     </span>
+                                    <span class="team-wrapper <?= $colorFormat ?>-teamshow pb-4"
+                                        style="margin-right: 5px; padding-right: 5px;">
+
+                                        <span class="pim-pic-icon">
+                                            <img src="<?= Yii::$app->homeUrl . $kgi['picture'] ?>">
+                                        </span>
+                                        <span class="team-name"><?= $kgi["employeeName"] ?></span>
+                                    </span>
+
                                     <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId']]) ?>"
                                         class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
                                         style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
