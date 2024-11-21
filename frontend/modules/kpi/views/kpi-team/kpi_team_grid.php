@@ -174,7 +174,7 @@ $this->title = "TEAM KPI";
                             <div class="col-lg-5 col-md-2 col-4 text-end pr-20">
                                 <span class="team-wrapper <?= $colorFormat ?>-teamshow"
                                     style="margin-right: 5px; padding-right: 5px;">
-                                    <span class="team-icon pim-pic-<?= $colorFormat ?>">
+                                    <span class="team-icon pim-team-<?= $colorFormat ?>">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $colorFormat == 'disable' ? 'teamblack' : 'teamwhite' ?>.svg"
                                             alt="Team Icon">
                                     </span>
