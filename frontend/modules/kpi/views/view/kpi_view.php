@@ -217,7 +217,7 @@ $this->title = 'Company KPI History';
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 <?= $colorFormat ?>-assign pt-5 pb-2 mt-10">
+                                <div class="col-12 <?= $colorFormat ?>-assign pt-2 pb-2 mt-10">
                                     <!-- <div class="row">
                                         <div class="col-5 border-right-<?= $colorFormat ?> pr-2 pl-10">
                                             <div class="row">
@@ -253,7 +253,7 @@ $this->title = 'Company KPI History';
                                     </div> -->
 
                                     <div class="row">
-                                        <div class="col-5 border-right-<?= $colorFormat ?> pr-2 pl-10">
+                                        <!-- <div class="col-5 border-right-<?= $colorFormat ?> pr-2 pl-10">
                                             <div class="row">
                                                 <div class="col-2 pt-3">
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-<?= $colorFormat ?>.png"
@@ -268,6 +268,27 @@ $this->title = 'Company KPI History';
                                                 <div class="col-6 number-tag load-<?= $colorFormat ?> pr-0 pl-0 pt-3"
                                                     style="margin-left: -3px;height:22px;width: 30px;margin-top: 1px;">
                                                     <?= $kpi["countTeam"] ?>
+                                                </div>
+                                            </div>
+                                        </div> -->
+
+                                        <div class="col-5 border-right-<?= $colorFormat ?> pl-10">
+                                            <div class="row">
+                                                <div class="col-2 pl-0 pr-0">
+
+                                                </div>
+                                                <div class="col-2 pl-5 pr-0 pt-3">
+                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-<?= $colorFormat ?>.svg"
+                                                        style="height:12px;width: 15px">
+                                                </div>
+                                                <div class="col-1 pl-0">
+
+                                                </div>
+                                                <div class="col-5 number-tag load-<?= $colorFormat ?> pr-0 pl-0 pt-3"
+                                                    style="margin-left: -3px;height:22px;width: 30px;margin-top: 1px;">
+                                                    <?= $kpi["countTeam"] ?>
+                                                </div>
+                                                <div class="col-2 pl-0 pr-0">
                                                 </div>
                                             </div>
                                         </div>
