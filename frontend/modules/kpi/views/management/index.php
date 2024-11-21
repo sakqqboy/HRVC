@@ -8,7 +8,7 @@ $this->title = 'KPI';
 ?>
 <div class="col-12">
     <div class="col-12">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.png" class="home-icon mr-5"
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
             style="margin-top: -3px;">
         <strong class="pim-head-text"> Performance Indicator Matrices (PIM)</strong>
     </div>
@@ -23,17 +23,23 @@ $this->title = 'KPI';
                         <div class="col-8">
                             <div class="row">
                                 <div class="col-4 pim-type-tab-selected pr-0 pl-0 rounded-top-left">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/company.svg" alt="Company"
+                                        class="pim-icon" style="width: 14px;height: 14px;padding-bottom: 4px;">
                                     Company KPI
                                 </div>
-                                <div class="col-4 pim-type-tab">
+                                <div class="col-4 pr-0 pl-0 pim-type-tab">
                                     <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/team-kpi"
                                         class="no-underline-black ">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg" alt="Team"
+                                            class="pim-icon" style="width: 13px;height: 13px;padding-bottom: 2px;">
                                         Team KPI
                                     </a>
                                 </div>
-                                <div class="col-4 pim-type-tab rounded-top-right">
+                                <div class="col-4 pim-type-tab pr-0 pl-0 rounded-top-right">
                                     <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi"
                                         class="no-underline-black ">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/self.svg" alt="Self"
+                                            class="pim-icon" style="width: 13px;height: 13px;padding-bottom: 3px;">
                                         Self KPI
                                     </a>
                                 </div>
@@ -82,17 +88,16 @@ $this->title = 'KPI';
                     <table class="">
                         <thead>
                             <tr class="pim-table-header">
-                                <td class="pl-10" style="width:15%">KPI Contents</td>
+                                <td class="pl-10" style="width:13%">KGI Contents</td>
                                 <td style="width:10%">Company Name</td>
-                                <td style="width:10%">Branch</td>
-                                <td style="width:3%">Priority</td>
-                                <td style="width:10%">Employees</td>
-                                <td style="width:5%">Team</td>
+                                <td style="width:13%">Branch</td>
+                                <td style="width:5%">Priority</td>
+                                <td style="width:7%">Employees</td>
+                                <td style="width:4%">Team</td>
                                 <td style="width:5%">QR</td>
-                                <td class="text-center" style="width:5%">Target</td>
-                                <td class="text-center" style="width:2%">Code</td>
-                                <td class="text-center" style="width:5%">Result</td>
-                                <!-- <td class="text-center">Quant Ratio</td> -->
+                                <td class="text-end" style="width:5%">Target</td>
+                                <td class="text-center" style="width:6%">Code</td>
+                                <td class="text-start" style="width:5%">Result</td>
                                 <td class="text-center" style="width:5%">Ratio</td>
                                 <td class="text-center" style="width:2%">Month</td>
                                 <td class="text-center" style="width:5%">Unit</td>
@@ -140,9 +145,15 @@ $this->title = 'KPI';
                                 <td><img src="<?= Yii::$app->homeUrl . $kpi['flag'] ?>" class="Flag-Turkey">
                                     <?= $kpi["branch"] ?>, <?= $kpi["countryName"] ?></td>
                                 <!-- <td></td> -->
-                                <td class="text-center"><?= $kpi["priority"] ?></td>
+                                <!-- <td class="text-center"><?= $kpi["priority"] ?></td> -->
+                                <td class="text-center">
+                                    <div
+                                        style="width: 24px; height: 24px; flex-shrink: 0; border-radius: 4px; background: #2580D3; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                                        <?= $kpi["priority"] ?>
+                                    </div>
+                                </td>
                                 <td>
-                                    <div class="flex mb-5 -space-x-4">
+                                    <!-- <div class="flex mb-5 -space-x-4">
                                         <?php
                                                 if (isset($kpi["kpiEmployee"]) && count($kpi["kpiEmployee"]) > 0) {
                                                     $e = 1;
@@ -159,14 +170,20 @@ $this->title = 'KPI';
                                                 ?>
                                         <a class="no-underline-black ml-2 mt-3"
                                             href="#"><?= count($kpi["kpiEmployee"]) ?></a>
+                                    </div> -->
+                                    <div class="col-5 number-tagNew  <?= 'load-' . $colorFormat ?> ">
+                                        <?= count($kpi["kpiEmployee"]) ?>
                                     </div>
                                 </td>
                                 <td>
-                                    <span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users"
-                                            aria-hidden="true"></i> <?= $kpi["countTeam"] ?></span>
+                                    <!-- <span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users"
+                                            aria-hidden="true"></i> <?= $kpi["countTeam"] ?></span> -->
+                                    <div class="col-5 number-tagNew  <?= 'load-' . $colorFormat ?> ">
+                                        <?= $kpi["countTeam"] ?>
+                                    </div>
                                 </td>
                                 <td><?= $kpi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?></td>
-                                <td class="text-start">
+                                <td class="text-end">
                                     <?php
                                             $decimal = explode('.', $kpi["targetAmount"]);
                                             if (isset($decimal[1])) {
@@ -184,7 +201,7 @@ $this->title = 'KPI';
                                 <td class="text-center">
                                     <?= $kpi["code"] ?>
                                 </td>
-                                <td class="text-end">
+                                <td class="text-start">
                                     <?php
                                             if ($kpi["result"] != '') {
                                                 $decimalResult = explode('.', $kpi["result"]);
@@ -234,7 +251,7 @@ $this->title = 'KPI';
                                     <!-- <span data-bs-toggle="modal" data-bs-target="#kpi-issue" onclick="javascript:showKpiComment(<?php // $kpiId 
                                                                                                                                                 ?>)">
 												<img src="<?php // Yii::$app->homeUrl 
-                                                            ?>image/comment.png" class="comment-td-dropdown">
+                                                            ?>image/comment.svg" class="comment-td-dropdown">
 											</span>
 											<span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
 												<i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i>
@@ -244,19 +261,19 @@ $this->title = 'KPI';
                                     <!-- <span data-bs-toggle="modal" data-bs-target="#kpi-issue"
                                         onclick="javascript:showKpiComment(<?= $kpiId ?>)"
                                         class="btn btn-bg-white-xs pr-2 pl-2 pt-1 pb-1">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.png"
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.svg"
                                             class="icon-table on-cursor">
                                     </span> -->
 
                                     <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>"
                                         class="btn btn-bg-white-xs mr-5" style="margin-top: -1px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.png"
-                                            alt="History" class="pim-icon" style="margin-top: -1px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/eye.svg" alt="History"
+                                            class="pim-icon" style="margin-top: -1px;">
                                     </a>
 
                                     <span class="dropdown" href="#" id="dropdownMenuLink-<?= $kpiId ?>"
                                         data-bs-toggle="dropdown">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.png"
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.svg"
                                             class="icon-table on-cursor">
                                     </span>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kpiId ?>">
@@ -327,7 +344,7 @@ $this->title = 'KPI';
                                             <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                 href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 3]) ?>"
                                                 class="btn btn-bg-white-xs mr-4" style="margin-top: -3px;">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png"
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
                                                     alt="Chart" class="pim-icon mr-10" style="margin-top: -2px;">
                                                 Chats
                                             </a>
@@ -336,7 +353,7 @@ $this->title = 'KPI';
                                             <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                 href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 4]) ?>"
                                                 class="btn btn-bg-white-xs mr-4" style="margin-top: -3px;">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png"
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg"
                                                     alt="Chart" class="pim-icon mr-10" style="margin-top: -2px;">
                                                 Chart
                                             </a>

@@ -243,6 +243,8 @@ class KpiTeamController extends Controller
 		$waitForApprove = curl_exec($api);
 		$waitForApprove = json_decode($waitForApprove, true);
 
+		// throw new Exception(print_r($teamKpis, true));
+
 		curl_close($api);
 		//throw new Exception($role);
 		$isManager = UserRole::isManager();

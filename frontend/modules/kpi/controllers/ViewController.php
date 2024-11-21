@@ -4,6 +4,8 @@ namespace frontend\modules\kpi\controllers;
 
 use common\helpers\Path;
 use common\models\ModelMaster;
+use frontend\models\hrvc\KpiEmployee;
+
 use Exception;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\User;
@@ -83,6 +85,7 @@ class ViewController extends Controller
 		$param = ModelMaster::decodeParams($hash);
 		$role = UserRole::userRight();
 		$kpiTeamId = $param["kpiTeamId"];
+		$teamId = $param["teamId"];
 		$kpiId = $param["kpiId"];
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -102,7 +105,8 @@ class ViewController extends Controller
 
 		$isManager = UserRole::isManager();
 		$months = ModelMaster::monthFull(1);
-		
+		$kpiEmployee=KpiEmployee::countKpiEmployeeInTeam($teamId,$kpiId);
+//   throw new Exception(print_r($kpiEmployee,true));
 		curl_close($api);
 		return $this->render('kpi_team_history', [
 			"role" => $role,
@@ -112,7 +116,8 @@ class ViewController extends Controller
 			"kpiId" => $kpiId,
 			"units" => $units,
 			"isManager" => $isManager,
-			"months" => $months
+			"months" => $months,
+			"kpiEmployee" => $kpiEmployee
 		]);
 	}
 	public function actionKpiIndividualHistory($hash)
@@ -132,7 +137,30 @@ class ViewController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/kpi-individual-summarize?kpiEmployeeId=' . $kpiEmployeeId);
 		$kpiEmployeeHistory = curl_exec($api);
 		$kpiEmployeeHistory = json_decode($kpiEmployeeHistory, true);
+		
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/employee-kpi?userId=' . Yii::$app->user->id . '&&role=' . $role);
+		$kpis = curl_exec($api);
+		$kpis = json_decode($kpis, true);
 
+		$teamMate = [];
+		$countTeamEmployee = 0;
+
+		if (is_array($kpis) && !empty($kpis)) {
+			foreach ($kpis as $key => $value) {
+				// กรองข้อมูลตาม $kgiEmployeeId และ $kgiId
+				if (isset($value['kpiEmployeeId'], $value['kpiId']) &&
+					$value['kpiEmployeeId'] == $kpiEmployeeId &&
+					$value['kpiId'] == $kpiId) {
+					
+					// ดึงค่า teamMate และ countTeamEmployee
+					if (isset($value['teamMate']) && isset($value['countTeamEmployee'])) {
+						$teamMate = $value['teamMate'];
+						$countTeamEmployee = $value['countTeamEmployee'];
+					}
+					break; // ออกจาก loop เมื่อพบข้อมูลที่ต้องการ
+				}
+			}
+		}
 
 		curl_close($api);
 		return $this->render('kpi_employee_history', [
@@ -140,7 +168,9 @@ class ViewController extends Controller
 			"kpiDetail" => $kpiDetail,
 			"kpiEmployeeHistory" => $kpiEmployeeHistory,
 			"kpiId" =>  $kpiId,
-			"kpiEmployeeId" =>  $kpiEmployeeId
+			"kpiEmployeeId" =>  $kpiEmployeeId,
+			"teamMate" =>  $teamMate,
+			"countTeamEmployee" =>  $countTeamEmployee
 		]);
 	}
 	public function actionKpiHistory($hash)

@@ -147,7 +147,108 @@ $this->title = 'Team KPI History';
                                     <?= $kpi['status'] == 1 ? 'In process' : 'Completed' ?>
                                 </div>
                             </div>
-                            <div class="col-12 font-size-10 pt-15">
+                            <div class="col-9  pl-15 pr-20 pt-5">
+                                <div class="col-12 text-start pl-5 font-size-10">
+                                    Assign on
+                                </div>
+                                <div class="col-12 <?= $colorFormat ?>-assign pt-2 pb-2">
+                                    <div class="row">
+                                        <div class="col-5 border-right-<?= $colorFormat ?> pl-10">
+                                            <div class="row">
+                                                <div class="col-2 pt-2">
+                                                    <?php
+                                                                if (isset($kpiEmployee['kpiEmployee'][0])) {
+                                                                ?>
+                                                    <img src="<?= Yii::$app->homeUrl . $kpiEmployee['kpiEmployee'][0] ?>"
+                                                        class="pim-pic-grid ">
+                                                    <?php
+                                                                }
+                                                                ?>
+                                                </div>
+                                                <div class="col-2 pic-after pt-2">
+                                                    <?php
+                                                                if (isset($kpiEmployee['kpiEmployee'][1])) {
+                                                                ?>
+                                                    <img src="<?= Yii::$app->homeUrl . $kpiEmployee['kpiEmployee'][1] ?>"
+                                                        class="pim-pic-grid">
+                                                    <?php
+                                                                }
+                                                                ?>
+                                                </div>
+                                                <div class="col-2 pic-after pt-2">
+                                                    <?php
+                                                                if (isset($kpiEmployee['kpiEmployee'][2])) {
+                                                                ?>
+                                                    <img src="<?= Yii::$app->homeUrl . $kpiEmployee['kpiEmployee'][2] ?>"
+                                                        class="pim-pic-grid">
+                                                    <?php
+                                                                }
+                                                                ?>
+                                                </div>
+                                                <div class="col-6 number-tag load-<?= $colorFormat ?> pr-0 pl-0 pt-3"
+                                                    style="margin-left: -3px;height:22px;width: 30px;margin-top: 1px;">
+                                                    <?= empty($kpiEmployee) ? 0 : count($kpiEmployee) ?>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-7 pl-5 pt-3">
+                                            <a class="font-<?= $colorFormat ?>">
+                                                Assigned Person
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 <?= $colorFormat ?>-assign pt-2 pb-2 mt-10">
+                                    <div class="row">
+                                        <div class="col-5 border-right-<?= $colorFormat ?> pl-10">
+                                            <div class="row">
+                                                <div class="col-2 pl-0 pr-0">
+
+                                                </div>
+                                                <div class="col-2 pl-5 pr-0 pt-3">
+                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-<?= $colorFormat ?>.svg"
+                                                        style="height:12px;width: 15px">
+                                                </div>
+                                                <div class="col-1 pl-0">
+
+                                                </div>
+                                                <div class="col-5 number-tag load-<?= $colorFormat ?> pr-0 pl-0 pt-3"
+                                                    style="margin-left: -3px;height:22px;width: 30px;margin-top: 1px;">
+                                                    <?= $kpiDetail["countTeam"] ?>
+                                                </div>
+                                                <div class="col-2 pl-0 pr-0">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-7 pl-5 pt-3">
+                                            <a class="font-<?= $colorFormat ?>">
+                                                Assign Team
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3 font-size-10 pt-15">
+                                <div class="col-12 text-end">Quant Ratio</div>
+                                <div class="col-12   pim-duedate font-size-9 pb-3 text-end">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $kpi["quantRatio"] == 1 ? 'quantity' : 'diamon' ?>.svg"
+                                        class="pim-iconKFI" style="margin-top: -1px; margin-left: 3px;">
+                                    <b><?= $kpi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?></b>
+                                </div>
+                                <div class="col-12 mt-6 mb-6 border-bottom-<?= $colorFormat ?>">
+                                </div>
+                                <div class="col-12  pr-0 mt-2 text-end">update Interval</div>
+                                <div class="col-12   pim-duedate text-end"><b>
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/monthly.svg"
+                                            class="pim-iconKFI" style="margin-top: -3px; margin-left: 3px;">
+                                        <?= $kpi["unit"] ?>
+                                    </b>
+                                </div>
+                            </div>
+                            <!-- <div class="col-12 font-size-10 pt-15">
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="col-12 text-center">Quant Ratio</div>
@@ -164,7 +265,7 @@ $this->title = 'Team KPI History';
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-12 mt-10">
                                 <div class="row">
                                     <div class="col-5 text-start pl-20">

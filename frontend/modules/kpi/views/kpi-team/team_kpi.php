@@ -10,7 +10,7 @@ $this->title = "KPI";
 
 <div class="col-12">
     <div class="col-12">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.png" class="home-icon mr-5"
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
             style="margin-top: -3px;">
         <strong class="pim-head-text"> Team Key Performance Indicators </strong>
     </div>
@@ -27,15 +27,22 @@ $this->title = "KPI";
                             <div class="row">
                                 <div class="col-4 pim-type-tab pr-0 pl-0 rounded-top-left">
                                     <a href="<?= Yii::$app->homeUrl ?>kpi/management/index" class="no-underline-black ">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/company.svg"
+                                            alt="Company" class="pim-icon"
+                                            style="width: 14px;height: 14px;padding-bottom: 4px;">
                                         Company KPI
                                     </a>
                                 </div>
-                                <div class="col-4 pim-type-tab-selected">
+                                <div class="col-4 pim-type-tab-selected pr-0 pl-0">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg" alt="Team"
+                                        class="pim-icon" style="width: 13px;height: 13px;padding-bottom: 2px;">
                                     Team KPI
                                 </div>
-                                <div class="col-4 pim-type-tab rounded-top-right">
+                                <div class="col-4 pim-type-tab pr-0 pl-0 rounded-top-right">
                                     <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi"
                                         class="no-underline-black ">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/self.svg" alt="Self"
+                                            class="pim-icon" style="width: 13px;height: 13px;padding-bottom: 3px;">
                                         Self KPI
                                     </a>
                                 </div>
@@ -45,23 +52,25 @@ $this->title = "KPI";
                             <?php
                             if ($role > 3) {
                             ?>
-                            <div class="col-12 approval-box text-center pr-3">
+                            <div
+                                class="col-12 <?= $waitForApprove["totalRequest"] > 0 ? 'approval-box' : 'noapproval-box' ?> text-center pr-3">
+
                                 <?php
                                     if ($waitForApprove["totalRequest"] > 0) {
                                     ?>
                                 <a href="<?= Yii::$app->homeUrl ?>kpi/management/wait-approve"
-                                    style="text-decoration: none;color:#2580D3;">
-                                    <span class="approve-num mr-2"><?= $waitForApprove["totalRequest"] ?></span>
+                                    style="text-decoration: none;color:#000000;">
+                                    <span class="approvals-num mr-2"><?= $waitForApprove["totalRequest"] ?></span>
                                     Approvals
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approve.svg"
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approvals.svg"
                                         class="first-layer-icon pull-right" style="margin-top:-2px;">
                                 </a>
                                 <?php
                                     } else { ?>
-                                <a style="text-decoration: none;color:#2580D3;">
-                                    <span class="approve-num mr-2"><?= $waitForApprove["totalRequest"] ?></span>
-                                    Approvals
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approve.svg"
+                                <a style="text-decoration: none;color:#2D7F06;">
+                                    <span class="noapprovals-num mr-2"><?= $waitForApprove["totalRequest"] ?></span>
+                                    No Approvals
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/check.svg"
                                         class="first-layer-icon pull-right" style="margin-top:-2px;">
                                 </a>
                                 <?php
@@ -108,16 +117,16 @@ $this->title = "KPI";
                     <table class="">
                         <thead>
                             <tr class="pim-table-header">
-                                <td class="pl-10" style="width:15%">KPI Contents</td>
+                                <td class="pl-10" style="width:13%">KGI Contents</td>
                                 <td style="width:10%">Company Name</td>
-                                <td style="width:10%">Branch</td>
-                                <td style="width:3%">Priority</td>
-                                <td style="width:10%">Employees</td>
-                                <td style="width:5%">Team</td>
+                                <td style="width:13%">Branch</td>
+                                <td style="width:5%">Priority</td>
+                                <td style="width:7%">Employees</td>
+                                <td style="width:4%">Team</td>
                                 <td style="width:5%">QR</td>
-                                <td class="text-center" style="width:5%">Target</td>
-                                <td class="text-center" style="width:2%">Code</td>
-                                <td class="text-center" style="width:5%">Result</td>
+                                <td class="text-end" style="width:5%">Target</td>
+                                <td class="text-center" style="width:6%">Code</td>
+                                <td class="text-start" style="width:5%">Result</td>
                                 <td class="text-center" style="width:5%">Ratio</td>
                                 <td class="text-center" style="width:2%">Month</td>
                                 <td class="text-center" style="width:5%">Unit</td>
@@ -168,10 +177,16 @@ $this->title = "KPI";
                                 <td><img src="<?= Yii::$app->homeUrl . $kpi['flag'] ?>" class="Flag-Turkey">
                                     <?= $kpi["branch"] ?>, <?= $kpi["countryName"] ?></td>
                                 <!-- <td></td> -->
-                                <td class="text-center"><?= $kpi["priority"] ?></td>
+                                <!-- <td class="text-center"><?= $kpi["priority"] ?></td> -->
+                                <td class="text-center">
+                                    <div
+                                        style="width: 24px; height: 24px; flex-shrink: 0; border-radius: 4px; background: #2580D3; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                                        <?= $kpi["priority"] ?>
+                                    </div>
+                                </td>
                                 <td>
-                                    <div class="flex mb-5 -space-x-4">
-                                        <?php
+                                    <!-- <div class="flex mb-5 -space-x-4"> -->
+                                    <!-- <?php
                                                 if (isset($kpi["employee"]) && count($kpi["employee"]) > 0) {
                                                     $e = 1;
                                                     foreach ($kpi["employee"] as $emp) :
@@ -187,14 +202,20 @@ $this->title = "KPI";
                                                 ?>
                                         <a class="no-underline-black ml-2 mt-3"
                                             href="#"><?= count($kpi["employee"]) ?></a>
+                                    </div> -->
+                                    <div class="col-5 number-tagNew  <?= 'load-' . $colorFormat ?> ">
+                                        <?= count($kpi["employee"]) ?>
                                     </div>
                                 </td>
                                 <td>
-                                    <span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users"
-                                            aria-hidden="true"></i> <?= $kpi["countTeam"] ?></span>
+                                    <!-- <span class="badge rounded-pill bg-secondary-bsc"><i class="fa fa-users"
+                                            aria-hidden="true"></i> <?= $kpi["countTeam"] ?></span> -->
+                                    <div class="col-5 number-tagNew  <?= 'load-' . $colorFormat ?> ">
+                                        <?= $kpi["countTeam"] ?>
+                                    </div>
                                 </td>
                                 <td><?= $kpi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?></td>
-                                <td class="text-start">
+                                <td class="text-end">
                                     <?php
                                             if ($kpi["result"] != '') {
                                                 $decimal = explode('.', $kpi["target"]);
@@ -216,7 +237,7 @@ $this->title = "KPI";
                                 <td class="text-center">
                                     <?= $kpi["code"] ?>
                                 </td>
-                                <td class="text-end">
+                                <td class="text-start">
                                     <?php
                                             if ($kpi["result"] != '') {
                                                 $decimalResult = explode('.', $kpi["result"]);
@@ -270,20 +291,20 @@ $this->title = "KPI";
                                         <a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                     </li> -->
                                     <!-- <a class="btn btn-bg-white-xs mr-5" style="margin-top: -1px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.png"
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.svg"
                                             alt="History" class="pim-icon" style="margin-top: -1px;">
                                     </a> -->
 
                                     <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId']]) ?>"
                                         class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
                                         style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="History"
                                             class="pim-icon" style="margin-top: -1px;">
                                     </a>
 
                                     <span class="dropdown" href="#" id="dropdownMenuLink-<?= $kpiTeamId ?>"
                                         data-bs-toggle="dropdown">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.png"
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.svg"
                                             class="icon-table on-cursor">
                                     </span>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kpiTeamId ?>">
@@ -337,7 +358,7 @@ $this->title = "KPI";
                                         <!-- <li class="pl-4 pr-4" data-bs-toggle="modal" data-bs-target="#kpi-issue"
                                             onclick="javascript:showKpiComment(<?= $kpi['kpiId'] ?>)">
                                             <a class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -3px;">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png"
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
                                                     alt="Chats" class="pim-icon mr-10" style="margin-top: -2px;">
                                                 Chats
                                             </a>
@@ -345,7 +366,7 @@ $this->title = "KPI";
                                         <li class="pl-4 pr-4">
                                             <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId'], 'openTab' => 3]) ?>"
                                                 class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -3px;">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png"
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
                                                     alt="Chats" class="pim-icon mr-10" style="margin-top: -2px;">
                                                 Chats
                                             </a>
@@ -353,7 +374,7 @@ $this->title = "KPI";
                                         <li class="pl-4 pr-4">
                                             <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId'], 'openTab' => 4]) ?>"
                                                 class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -3px;">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Chart.png"
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Chart.svg"
                                                     alt="Chart" class="pim-icon mr-10" style="margin-top: -2px;">
                                                 Chart
                                             </a>
