@@ -61,10 +61,40 @@ $this->title = 'Self KGI History';
                         <div class="row">
                             <div class="col-5 pim-name"><?= $kgi["month"] ?> <?= $kgi["year"] ?></div>
                             <div class="col-7 text-end">
-                                <a href="" class="btn btn-bg-white-xs">
+                                <!-- <a href="" class="btn btn-bg-white-xs">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="Chats"
                                         class="pim-icon " style="margin-top: -2px;">
                                 </a>
+                                <a class="btn btn-bg-white-xs" data-bs-toggle="modal" data-bs-target="#staticBackdrop3"
+                                    onclick="javascript:kgiHistory(<?= $kgi['kgiEmployeeHistoryId'] ?>)">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/comment.svg" alt="History"
+                                        class="home-icon" style="margin-top: -3px; width: 14px; height: 14px;">
+                                </a>
+                                <a class="btn btn-bg-white-xs" data-bs-toggle="modal" data-bs-target="#staticBackdrop3"
+                                    onclick="javascript:kgiHistory(<?= $kgi['kgiEmployeeHistoryId'] ?>)">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/charts.svg" alt="History"
+                                        class="home-icon" style="margin-top: -3px; width: 14px; height: 14px;">
+                                </a> -->
+
+                                <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], 'openTab' => 1]) ?>"
+                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="Chats"
+                                        class="pim-icon " style="margin-top: -2px;">
+                                </a>
+                                <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], 'openTab' => 3]) ?>"
+                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg" alt="Chats"
+                                        class="pim-icon " style="margin-top: -2px;">
+                                </a>
+                                <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], 'openTab' => 4]) ?>"
+                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg" alt="Chart"
+                                        class="pim-icon" style="margin-top: -2px;">
+                                </a>
+
                                 <?php
                                             if ($i == 0 && $kgi["status"] == 2) {
                                             ?>
@@ -75,16 +105,6 @@ $this->title = 'Self KGI History';
                                 <?php
                                             }
                                             ?>
-                                <a class="btn btn-bg-white-xs" data-bs-toggle="modal" data-bs-target="#staticBackdrop3"
-                                    onclick="javascript:kgiHistory(<?= $kgi['kgiEmployeeHistoryId'] ?>)">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/comment.svg" alt="History"
-                                        class="home-icon" style="margin-top: -3px; width: 14px; height: 14px;">
-                                </a>
-                                <a class="btn btn-bg-white-xs" data-bs-toggle="modal" data-bs-target="#staticBackdrop3"
-                                    onclick="javascript:kgiHistory(<?= $kgi['kgiEmployeeHistoryId'] ?>)">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/charts.svg" alt="History"
-                                        class="home-icon" style="margin-top: -3px; width: 14px; height: 14px;">
-                                </a>
 
                                 <?php
                                             if ($colorFormat == 'disable') {

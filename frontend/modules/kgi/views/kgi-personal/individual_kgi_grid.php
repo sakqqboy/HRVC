@@ -191,13 +191,19 @@ $this->title = "INDIVIDUAL KGI";
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg"
                                             alt="History" class="pim-icon mr-3" style="margin-top: -2px;">History
                                     </a>
-                                    <a class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                    <!-- <a class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
                                         style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>"
                                         data-bs-toggle="modal" data-bs-target="#kgi-issue"
                                         onclick="javascript:showKgiComment(<?= $kgi['kgiId'] ?>)"
                                         style="margin-top: -3px;">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
                                             alt="History" class="pim-icon"> Chats
+                                    </a> -->
+                                    <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], 'openTab' => 3]) ?>"
+                                        class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                        style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
+                                            alt="Chats" class="pim-icon mr-3" style="margin-top: -2px;">Chats
                                     </a>
                                     <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], 'openTab' => 4]) ?>"
                                         class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
