@@ -175,10 +175,11 @@ $this->title = "INDIVIDUAL KPI";
                                 </div>
                                 <div class="col-lg-5 col-md-2 col-4 text-end pr-20 ">
 
-                                    <img src="<?= Yii::$app->homeUrl . $kpi['picture'] ?>" class="pim-pic-grid">
+                                    <!-- <img src="<?= Yii::$app->homeUrl . $kpi['picture'] ?>" class="pim-pic-grid">
                                     <span class="pim-normal-text mr-5">
                                         <?= $kpi["employeeName"] ?>
-                                    </span>
+                                    </span> -->
+
                                     <!-- <a class="btn btn-bg-white-xs mr-5"
                                         href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-individual-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId'], "kpiEmployeeId" => $kpiEmployeeId]) ?>"
                                         style="margin-top: -3px;"

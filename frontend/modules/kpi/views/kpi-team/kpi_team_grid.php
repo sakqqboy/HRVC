@@ -172,11 +172,20 @@ $this->title = "TEAM KPI";
                                 </div>
                             </div>
                             <div class="col-lg-5 col-md-2 col-4 text-end pr-20">
-                                <span class="pim-normal-text mr-5">
+                                <span class="team-wrapper <?= $colorFormat ?>-teamshow"
+                                    style="margin-right: 5px; padding-right: 5px;">
+                                    <span class="team-icon pim-pic-<?= $colorFormat ?>">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $colorFormat == 'disable' ? 'teamblack' : 'teamwhite' ?>.svg"
+                                            alt="Team Icon">
+                                    </span>
+                                    <span class="team-name"><?= $kpi["teamName"] ?></span>
+                                </span>
+
+                                <!-- <span class="pim-normal-text mr-5">
                                     <?= $kpi["teamName"] ?>
                                 </span>
                                 <img src="<?= Yii::$app->homeUrl . 'images/icons/Settings/team-name.svg' ?>"
-                                    class="pim-pic-grid mr-5" style="margin-top: -1px;font-size:12px;">
+                                    class="pim-pic-grid mr-5" style="margin-top: -1px;font-size:12px;"> -->
                                 <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId']]) ?>"
                                     class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
                                     style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">

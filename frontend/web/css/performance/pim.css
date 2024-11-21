@@ -634,6 +634,82 @@
 	padding-bottom: 2px;
 }
 
+
+
+.yenlow-teamshow {
+	font-weight: 390;
+	font-size: 9px;
+	border: 0.5px solid #d3d325;
+	border: 0.1px solid #000000;
+	background-color: #FFFAED;
+	border-radius: 26.5px;
+	letter-spacing: 0.5px;
+	padding-left: 5px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+
+}
+
+
+.over-teamshow {
+	font-weight: 400;
+	font-size: 10px;
+	color: #000000;
+	border: 0.5px solid #E05757;
+	background-color: #FFD6D6;
+	border-radius: 26.5px;
+	letter-spacing: 0.5px;
+	padding-left: 5px;
+	padding-right: 0px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+
+}
+
+.inprogress-teamshow {
+	font-weight: 400;
+	font-size: 10px;
+	color: #000000;
+	border: 0.5px solid #2580D3;
+	background-color: #D7EBFF;
+	;
+	border-radius: 26.5px;
+	letter-spacing: 0.5px;
+	padding-left: 5px;
+	padding-right: 0px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+.complete-teamshow {
+	font-weight: 400;
+	font-size: 10px;
+	color: #000000;
+	border: 0.5px solid #2D7F06;
+	background-color: #DEFFDF;
+	border-radius: 26.5px;
+	letter-spacing: 0.5px;
+	padding-left: 5px;
+	padding-right: 0px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+.disable-teamshow {
+	font-weight: 400;
+	font-size: 10px;
+	color: black;
+	border: 0.5px solid #C3C3C3;
+	background-color: #fff;
+	border: 0.1px solid #30313D;
+	border-radius: 26.5px;
+	letter-spacing: 0.5px;
+	padding-left: 5px;
+	padding-right: 0px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
 .info-assignNew {
 	font-weight: 400;
 	font-size: 10px;
@@ -1002,6 +1078,61 @@
 	display: block;
 }
 
+.team-wrapper {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.team-icon {
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 0.5px solid #FFFFFF;
+	/* Default border color */
+}
+
+
+/* Specific color formats */
+.pim-pic-new {
+	background-color: #FFFFFF;
+	border-color: #FFFFFF;
+}
+
+.pim-team-over {
+	background-color: #E05757;
+	border-color: #FFFFFF;
+}
+
+.pim-team-inprogress {
+	background-color: #2F42ED;
+	border-color: #FFFFFF;
+}
+
+.pim-team-complete {
+	background-color: #2D7F06;
+	border-color: #FFFFFF;
+}
+
+.pim-team-disable {
+	background-color: #C3C3C3;
+	border-color: #30313D;
+}
+
+.pim-team-yenlow {
+	background-color: #FFFAED;
+	border-color: #FFD000;
+}
+
+/* Icon inside the circle */
+.team-icon img {
+	width: 10px;
+	height: 10px;
+	object-fit: cover;
+}
 
 .pim-pic-grid {
 	width: 20px;
