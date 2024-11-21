@@ -233,7 +233,7 @@ class ManagementController extends Controller
 		if ($kfiHistoryId == 0) {
 			$kfiHistory = KfiHistory::find()
 				->where(["kfiId" => $kfiId, "status" => [1, 2, 4]])
-				->orderBy('year DESC,month DESC')
+				->orderBy('year DESC,month DESC,kfiHistoryId DESC')
 				->asArray()
 				->all();
 		} else {
@@ -246,7 +246,7 @@ class ManagementController extends Controller
 			$kfiHistory = KfiHistory::find()
 				->where(["kfiId" => $kfiId, "status" => [1, 2, 4]])
 				->andWhere("year<=$year")
-				->orderBy('year DESC,month DESC')
+				->orderBy('year DESC,month DESC,kfiHistoryId DESC')
 				->asArray()
 				->all();
 		}
