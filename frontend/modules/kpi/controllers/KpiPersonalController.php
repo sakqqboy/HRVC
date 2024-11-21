@@ -175,6 +175,8 @@ class KpiPersonalController extends Controller
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
+		$userId = Yii::$app->user->id;
+
 		$role = UserRole::userRight();
 		$teams = [];
 		$api = curl_init();

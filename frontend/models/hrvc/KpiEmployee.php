@@ -97,4 +97,32 @@ class KpiEmployee extends \frontend\models\hrvc\master\KpiEmployeeMaster
         }
         return $date;
     }
+    public static function countKpiEmployeeInTeam($teamId,$kgiId){
+        $kpiEmployee=KpiEmployee::find()
+        ->select('e.employeeId,e.picture,e.employeeId,e.gender')
+        ->JOIN("LEFT JOIN","employee e","e.employeeId=kpi_employee.employeeId")
+        ->where(["e.teamId"=>$teamId,"kpi_employee.kpiId"=>$kgiId])
+        ->asArray()
+        ->all();
+        $data=[];
+        if(isset($kpiEmployee) && count( $kpiEmployee)>0){
+            $i=0;
+foreach($kpiEmployee as $employee):
+    if ($employee["picture"] != '') {
+        $img = $employee["picture"];
+    } else {
+        if ($employee["gender"] == 1) {
+            $img = "image/user.png";
+        } else {
+            $img = "image/lady.png";
+        }
+    }
+$data["kpiEmployee"][$i]=$img;
+$i++;
+endforeach;
+        }else{
+            return null;
+        }
+        return $data;
+    }
 }

@@ -211,7 +211,7 @@ $this->title = 'Self KPI History';
                                                 </div>
                                                 <div class="col-5 number-tag load-<?= $colorFormat ?> pr-0 pl-0 pt-3"
                                                     style="margin-left: -3px;height:22px;width: 30px;margin-top: 1px;">
-                                                    ...
+                                                    <?= $kpiDetail["countTeam"] ?>
                                                 </div>
                                                 <div class="col-2 pl-0 pr-0">
                                                 </div>
