@@ -42,7 +42,7 @@ class ManagementController extends Controller
 		$kgis = Kgi::find()
 			->where(["status" => [1, 2, 4]])
 			->asArray()
-			->orderBy('createDateTime DESC')
+			->orderBy('updateDateTime DESC')
 			->all();
 		if (count($kgis) > 0) {
 			foreach ($kgis as $kgi) :
@@ -117,12 +117,18 @@ class ManagementController extends Controller
 		}
 		return json_encode($data);
 	}
-	public function actionKgiDetail($id)
+	public function actionKgiDetail($id, $kgiHistoryId)
 	{
-		$kgiHistory = KgiHistory::find()->where(["status" => [1, 2, 4], "kgiId" => $id])
-			->orderBy('kgiHistoryId DESC')
-			->asArray()
-			->one();
+		if ($kgiHistoryId == 0) {
+			$kgiHistory = KgiHistory::find()->where(["status" => [1, 2, 4], "kgiId" => $id])
+				->orderBy('kgiHistoryId DESC')
+				->asArray()
+				->one();
+		} else {
+			$kgiHistory = KgiHistory::find()->where(["kgiHistoryId" => $kgiHistoryId])
+				->asArray()
+				->one();
+		}
 		$data = [];
 		$ratio = 0;
 		if (isset($kgiHistory) && !empty($kgiHistory)) { //wait edit
@@ -323,13 +329,32 @@ class ManagementController extends Controller
 
 		return json_encode($data);
 	}
-	public function actionKgiHistory($kgiId)
+	public function actionKgiHistory($kgiId, $kgiHistoryId)
 	{
-		$kgiHistory = KgiHistory::find()
-			->where(["kgiId" => $kgiId, "status" => [1, 2]])
-			->orderBy('kgiHistoryId DESC')
-			->asArray()
-			->all();
+		// $kgiHistory = KgiHistory::find()
+		// 	->where(["kgiId" => $kgiId, "status" => [1, 2]])
+		// 	->orderBy('kgiHistoryId DESC')
+		// 	->asArray()
+		// 	->all();
+		if ($kgiHistoryId == 0) {
+			$kgiHistory = KgiHistory::find()
+				->where(["kgiId" => $kgiId, "status" => [1, 2, 4]])
+				->orderBy('year DESC,month DESC,kgiHistoryId DESC')
+				->asArray()
+				->all();
+		} else {
+			$mainHistory = KgiHistory::find()
+				->where(["kgiHistoryId" => $kgiHistoryId])
+				->asArray()
+				->one();
+			$year = $mainHistory["year"];
+			$kgiHistory = KgiHistory::find()
+				->where(["kgiId" => $kgiId, "status" => [1, 2, 4]])
+				->andWhere("year<=$year")
+				->orderBy('year DESC,month DESC,kgiHistoryId DESC')
+				->asArray()
+				->all();
+		}
 		$data = [];
 		if (isset($kgiHistory) && count($kgiHistory) > 0) {
 			foreach ($kgiHistory as $history) :

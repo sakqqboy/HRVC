@@ -906,7 +906,7 @@ function kgiEmployeeNextTarget() {
 		}
 	});
 }
-function viewTabKgi(tabId) { 
+function viewTabKgi(kgiHistoryId,tabId) { 
 	var currentTabId = $("#currentTab").val();
 	//alert(currentTabId + '==' + tabId);
 	var kgiId = $("#kgiId").val();
@@ -938,7 +938,7 @@ function viewTabKgi(tabId) {
 			type: "POST",
 			dataType: 'json',
 			url: url,
-			data: { kgiId: kgiId },
+			data: { kgiId: kgiId, kgiHistoryId: kgiHistoryId },
 			success: function (data) {
 				$("#show-content").html(data.monthlyDetailHistoryText);
 			}
@@ -962,7 +962,7 @@ function viewTabKgi(tabId) {
 			type: "POST",
 			dataType: 'json',
 			url: url,
-			data: { kgiId: kgiId },
+			data: { kgiId: kgiId, kgiHistoryId: kgiHistoryId },
 			success: function (data) {
 				$("#show-content").html(data.kgiChart);
 			}

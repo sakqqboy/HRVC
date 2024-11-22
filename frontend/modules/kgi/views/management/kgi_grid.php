@@ -473,7 +473,7 @@ $this->title = 'KGI Grid View';
                                                 <?php
                                                 if ($colorFormat == 'disable' && $role >= 5) {
                                                 ?>
-                                                    <div onclick="javascript:updateKgi(<?= $kgiId ?>)" class="pim-btn-setup"
+                                                    <div onclick="javascript:updateKgi(<?= $kgiId ?>,0)" class="pim-btn-setup"
                                                         data-bs-toggle="modal" data-bs-target="#update-kgi-modal">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
                                                             class="mb-2" style="width: 12px; height: 12px;"> Setup
@@ -481,7 +481,7 @@ $this->title = 'KGI Grid View';
                                                 <?php
                                                 } else if ($role >= 5) {
                                                 ?>
-                                                    <div onclick=" javascript:updateKgi(<?= $kgiId ?>)"
+                                                    <div onclick=" javascript:updateKgi(<?= $kgiId ?>,0)"
                                                         class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
                                                         data-bs-target="#update-kgi-modal">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"

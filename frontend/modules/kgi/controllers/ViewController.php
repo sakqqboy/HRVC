@@ -8,6 +8,7 @@ use Exception;
 use FFI\Exception as FFIException;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\KgiEmployee;
+use frontend\models\hrvc\KgiHistory;
 use frontend\models\hrvc\User;
 use frontend\models\hrvc\UserRole;
 use Yii;
@@ -32,6 +33,11 @@ class ViewController extends Controller
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+		}
+		if (isset($param["kgiHistoryId"])) {
+			$kgiHistoryId = $param["kgiHistoryId"];
+		} else {
+			$kgiHistoryId = 0;
 		}
 		$kgiId = $param["kgiId"];
 		$role = UserRole::userRight();
@@ -64,7 +70,7 @@ class ViewController extends Controller
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . '&&kgiHistoryId=' . $kgiHistoryId);
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
 
@@ -75,7 +81,7 @@ class ViewController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
 		$units = curl_exec($api);
 		$units = json_decode($units, true);
-		
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-history-summarize?kgiId=' . $kgiId);
 		//curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
 		$kgis = curl_exec($api);
@@ -111,7 +117,7 @@ class ViewController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-team-history-summarize?kgiTeamId=' . $kgiTeamId);
 		$kgiTeamsHistory = curl_exec($api);
 		$kgiTeamsHistory = json_decode($kgiTeamsHistory, true);
-		
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
 		$units = curl_exec($api);
 		$units = json_decode($units, true);
@@ -121,9 +127,9 @@ class ViewController extends Controller
 		$kgiDetail = json_decode($kgiDetail, true);
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
-		$kgiEmployee=KgiEmployee::countKgiEmployeeInTeam($teamId,$kgiId);
+		$kgiEmployee = KgiEmployee::countKgiEmployeeInTeam($teamId, $kgiId);
 		curl_close($api);
-		 //  throw new Exception(print_r($kgiEmployee,true));
+		//  throw new Exception(print_r($kgiEmployee,true));
 		return $this->render('kgi_team_history', [
 			"role" => $role,
 			"kgiDetail" => $kgiDetail,
@@ -133,7 +139,7 @@ class ViewController extends Controller
 			"units" => $units,
 			"months" => $months,
 			"isManager" => $isManager,
-			"kgiEmployee"=>$kgiEmployee
+			"kgiEmployee" => $kgiEmployee
 		]);
 	}
 	public function actionKgiIndividualHistory($hash)
@@ -168,10 +174,12 @@ class ViewController extends Controller
 		if (is_array($kgis) && !empty($kgis)) {
 			foreach ($kgis as $key => $value) {
 				// กรองข้อมูลตาม $kgiEmployeeId และ $kgiId
-				if (isset($value['kgiEmployeeId'], $value['kgiId']) &&
+				if (
+					isset($value['kgiEmployeeId'], $value['kgiId']) &&
 					$value['kgiEmployeeId'] == $kgiEmployeeId &&
-					$value['kgiId'] == $kgiId) {
-					
+					$value['kgiId'] == $kgiId
+				) {
+
 					// ดึงค่า teamMate และ countTeamEmployee
 					if (isset($value['teamMate']) && isset($value['countTeamEmployee'])) {
 						$teamMate = $value['teamMate'];
@@ -181,14 +189,14 @@ class ViewController extends Controller
 				}
 			}
 		}
-//   throw new Exception(print_r($countTeamEmployee,true));
+		//   throw new Exception(print_r($countTeamEmployee,true));
 		curl_close($api);
 		return $this->render('kgi_employee_history', [
 			"role" => $role,
 			"kgiDetail" => $kgiDetail,
 			"kgiEmployeeHistory" => $kgiEmployeeHistory,
-			"kgiEmployeeId" =>$kgiEmployeeId,
-			"kgiId" =>$kgiId,
+			"kgiEmployeeId" => $kgiEmployeeId,
+			"kgiId" => $kgiId,
 			"countTeamEmployee" => $countTeamEmployee,
 			"teamMate" => $teamMate
 
@@ -205,11 +213,16 @@ class ViewController extends Controller
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
+		if (isset($param["kgiHistoryId"])) {
+			$kgiHistoryId = $param["kgiHistoryId"];
+		} else {
+			$kgiHistoryId = 0;
+		}
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . '&&kgiHistoryId=' . $kgiHistoryId);
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
 
@@ -238,12 +251,14 @@ class ViewController extends Controller
 			"isManager" => $isManager,
 			"units" => $units,
 			"companies" => $companies,
-			"kgiTeams" => $kgiTeams
+			"kgiTeams" => $kgiTeams,
+			"kgiHistoryId" => $kgiHistoryId
 		]);
 	}
 	public function actionAllKgiHistory()
 	{
 		$kgiId = $_POST["kgiId"];
+		$kgiHistoryId = $_POST["kgiHistoryId"];
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -251,43 +266,118 @@ class ViewController extends Controller
 		// $kgi = curl_exec($api);
 		// $kgi = json_decode($kgi, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-history?kgiId=' . $kgiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-history?kgiId=' . $kgiId . '&&kgiHistoryId=' . $kgiHistoryId);
 		$history = curl_exec($api);
 		$history = json_decode($history, true);
 		curl_close($api);
 		$monthDetail = [];
 		$summarizeMonth = [];
 		$res["monthlyDetailHistoryText"] = "";
+		if ($kgiHistoryId != 0) {
+			$kgiHistory = KgiHistory::find()
+				->where(["kgiHistoryId" => $kgiHistoryId])
+				->asArray()
+				->one();
+			$year = $kgiHistory["year"];
+			$month = $kgiHistory["month"];
+		} else {
+			$year = '';
+			$month = '';
+		}
 		if (isset($history) && count($history) > 0) {
 			//krsort($history);
 			foreach ($history as $kgiHistoryId => $ht):
-				if (isset($monthDetail[$ht["year"]][$ht["month"]])) {
-					$totalCount = count($monthDetail[$ht["year"]][$ht["month"]]);
-					$monthDetail[$ht["year"]][$ht["month"]][$totalCount] = [
-						"creater" => $ht["creater"],
-						"title" => $ht["title"],
-						"status" => $ht["status"],
-						"picture" => $ht["picture"],
-						"result" => $ht["result"],
-						"createDateTime" => $ht["createDateTime"]
-					];
-				} else {
-					$monthDetail[$ht["year"]][$ht["month"]][0] = [
-						"creater" => $ht["creater"],
-						"title" => $ht["title"],
-						"status" => $ht["status"],
-						"picture" => $ht["picture"],
-						"result" => $ht["result"],
-						"createDateTime" => $ht["createDateTime"]
-					];
-					$summarizeMonth[$ht["year"]][$ht["month"]] = [
-						"year" => $ht["year"],
-						"month" => ModelMaster::fullMonthText($ht["month"]),
-						"result" => $ht["result"],
-						"target" => $ht["target"],
-						"kgiHistoryId" => $kgiHistoryId
+				if ($year != '' && $month != '' && $ht["year"] <= $year) {
+					if ($ht["year"] == $year) {
+						if ($ht["month"] <= $month) {
+							if (isset($monthDetail[$ht["year"]][$ht["month"]])) {
+								$totalCount = count($monthDetail[$ht["year"]][$ht["month"]]);
+								$monthDetail[$ht["year"]][$ht["month"]][$totalCount] = [
+									"creater" => $ht["creater"],
+									"title" => $ht["title"],
+									"status" => $ht["status"],
+									"picture" => $ht["picture"],
+									"result" => $ht["result"],
+									"createDateTime" => $ht["createDateTime"]
+								];
+							} else {
+								$monthDetail[$ht["year"]][$ht["month"]][0] = [
+									"creater" => $ht["creater"],
+									"title" => $ht["title"],
+									"status" => $ht["status"],
+									"picture" => $ht["picture"],
+									"result" => $ht["result"],
+									"createDateTime" => $ht["createDateTime"]
+								];
+								$summarizeMonth[$ht["year"]][$ht["month"]] = [
+									"year" => $ht["year"],
+									"month" => ModelMaster::fullMonthText($ht["month"]),
+									"result" => $ht["result"],
+									"target" => $ht["target"],
+									"kgiHistoryId" => $kgiHistoryId
 
-					];
+								];
+							}
+						}
+					} else {
+						if (isset($monthDetail[$ht["year"]][$ht["month"]])) {
+							$totalCount = count($monthDetail[$ht["year"]][$ht["month"]]);
+							$monthDetail[$ht["year"]][$ht["month"]][$totalCount] = [
+								"creater" => $ht["creater"],
+								"title" => $ht["title"],
+								"status" => $ht["status"],
+								"picture" => $ht["picture"],
+								"result" => $ht["result"],
+								"createDateTime" => $ht["createDateTime"]
+							];
+						} else {
+							$monthDetail[$ht["year"]][$ht["month"]][0] = [
+								"creater" => $ht["creater"],
+								"title" => $ht["title"],
+								"status" => $ht["status"],
+								"picture" => $ht["picture"],
+								"result" => $ht["result"],
+								"createDateTime" => $ht["createDateTime"]
+							];
+							$summarizeMonth[$ht["year"]][$ht["month"]] = [
+								"year" => $ht["year"],
+								"month" => ModelMaster::fullMonthText($ht["month"]),
+								"result" => $ht["result"],
+								"target" => $ht["target"],
+								"kgiHistoryId" => $kgiHistoryId
+
+							];
+						}
+					}
+				} else {
+					if (isset($monthDetail[$ht["year"]][$ht["month"]])) {
+						$totalCount = count($monthDetail[$ht["year"]][$ht["month"]]);
+						$monthDetail[$ht["year"]][$ht["month"]][$totalCount] = [
+							"creater" => $ht["creater"],
+							"title" => $ht["title"],
+							"status" => $ht["status"],
+							"picture" => $ht["picture"],
+							"result" => $ht["result"],
+							"createDateTime" => $ht["createDateTime"]
+						];
+					} else {
+						$monthDetail[$ht["year"]][$ht["month"]][0] = [
+							"creater" => $ht["creater"],
+							"title" => $ht["title"],
+							"status" => $ht["status"],
+							"picture" => $ht["picture"],
+							"result" => $ht["result"],
+							"createDateTime" => $ht["createDateTime"]
+						];
+						$summarizeMonth[$ht["year"]][$ht["month"]] = [
+							"year" => $ht["year"],
+							"month" => ModelMaster::fullMonthText($ht["month"]),
+							"result" => $ht["result"],
+							"target" => $ht["target"],
+							"kgiHistoryId" => $kgiHistoryId
+
+						];
+					}
 				}
 			endforeach;
 			$res["monthlyDetailHistoryText"] = $this->renderAjax('kgi_update_history', [

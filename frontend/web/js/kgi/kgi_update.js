@@ -191,7 +191,7 @@ function allTeamUpdate(departmentId) {
 		
 	}
 }
-function updateKgi(kgiId) { 
+function updateKgi(kgiId, kgiHistoryId) {
 	$("#acType").val('update');
 	$("#kgiId").val(kgiId);
 	resetUnit();
@@ -200,7 +200,7 @@ function updateKgi(kgiId) {
 		type: "POST",
 		dataType: 'json',
 		url: url,
-		data: { kgiId: kgiId},
+		data: { kgiId: kgiId, kgiHistoryId: kgiHistoryId },
 		success: function (data) {
 			$("#kgiName-update").val(data.kgiName);
 			$("#companyId-update").val(data.companyId);

@@ -536,10 +536,11 @@ class ManagementController extends Controller
 	public function actionPrepareUpdate()
 	{
 		$kgiId = $_POST["kgiId"];
+		$kgiHistoryId = $_POST["kgiHistoryId"];
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . '&&kgiHistoryId=' . $kgiHistoryId);
 		$kgi = curl_exec($api);
 		$kgi = json_decode($kgi, true);
 
@@ -574,24 +575,12 @@ class ManagementController extends Controller
 			"kgiId" => $kgiId
 		]);
 		$team["textTeam"] = $kgiTeamText;
-
-		// $kgiGroup = '';
-		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-group/company-kgi-group?companyId=' . $companyId);
-		// $kgiGroups = curl_exec($api);
-		// $kgiGroups = json_decode($kgiGroups, true);
-		// $kgiGroup = $this->renderAjax('kgi_group', [
-		// 	"kgiGroups" => $kgiGroups,
-		// 	"kgiId" => $kgiId
-		// ]);
-		// $group["textGroup"] = $kgiGroup;
-
 		$data = array_merge($kgi, $branch, $department, $team);
 		curl_close($api);
 		return json_encode($data);
 	}
 	public function actionUpdateKgi()
 	{
-		//throw new Exception(print_r(Yii::$app->request->post(), true));
 		$isManager = UserRole::isManager();
 		if (isset($_POST["kgiId"]) && $_POST["kgiId"] != "") {
 			$result = isset($_POST["result"]) && $_POST["result"] != '' ? $_POST["result"] : 0;
@@ -601,14 +590,12 @@ class ManagementController extends Controller
 			$kgi->kgiName = $_POST["kgiName"];
 			$kgi->companyId = $_POST["companyId"];
 			$kgi->unitId = $_POST["unit"];
-			//$kgi->periodDate = $_POST["periodDate"];
 			if ($kgi->fromDate == "") {
 				$kgi->fromDate = $_POST["fromDate"];
 			}
 			if ($kgi->toDate == "") {
 				$kgi->toDate = $_POST["toDate"];
 			}
-			//if ($isManager == 1 && $kgi->targetAmount == "") {
 			if ($isManager == 1 &&  $_POST["targetAmount"] != "") {
 				$kgi->targetAmount = str_replace(",", "", $_POST["targetAmount"]);
 			}
@@ -626,11 +613,9 @@ class ManagementController extends Controller
 			if ($kgi->save(false)) {
 				$kgiHistory = new KgiHistory();
 				$kgiHistory->kgiId = $_POST["kgiId"];
-				//$kgiHistory->updaterId = Yii::$app->user->id;
 				$kgiHistory->kgiHistoryName = $_POST["historyName"];
 				$kgiHistory->titleProcess = $_POST["historyName"];
 				$kgiHistory->unitId = $_POST["unit"];
-				//$kgiHistory->periodDate = $_POST["periodDate"];
 				$kgiHistory->nextCheckDate = $_POST["nextDate"];
 				if ($isManager == 1) {
 					$kgiHistory->targetAmount = str_replace(",", "", $_POST["targetAmount"]);
@@ -663,10 +648,8 @@ class ManagementController extends Controller
 					$this->saveKgiTeam($_POST["team"], $kgiId);
 				}
 				if (isset($_POST["kgiGroup"]) && count($_POST["kgiGroup"]) > 0) {
-					//$this->saveKgiGroup($_POST["kgiGroup"], $kgiId);
 				}
 				return $this->redirect(Yii::$app->request->referrer);
-				//return $this->redirect('grid');
 			}
 		}
 		return $this->redirect('grid');
@@ -677,7 +660,7 @@ class ManagementController extends Controller
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . '&&kgiHistoryId=0');
 		$kgi = curl_exec($api);
 		$kgi = json_decode($kgi, true);
 
@@ -724,7 +707,7 @@ class ManagementController extends Controller
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . '&&kgiHistoryId=0');
 		$kgi = curl_exec($api);
 		$kgi = json_decode($kgi, true);
 
@@ -1167,7 +1150,7 @@ class ManagementController extends Controller
 		$textBranch = "";
 		$textBranch .= $this->renderAjax('company_branch', ["branches" => $branches, "kgiId" => $kgiId]);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . '&&kgiHistoryId=0');
 		$kgi = curl_exec($api);
 		$kgi = json_decode($kgi, true);
 
@@ -1569,7 +1552,7 @@ class ManagementController extends Controller
 		$kgiHasKfi = curl_exec($api);
 		$kgiHasKfi = json_decode($kgiHasKfi, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . '&&kgiHistoryId=0');
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
 		curl_close($api);
@@ -1589,7 +1572,7 @@ class ManagementController extends Controller
 		$kgiHasKpi = curl_exec($api);
 		$kgiHasKpi = json_decode($kgiHasKpi, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . '&&kgiHistoryId=0');
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
 		curl_close($api);
@@ -1783,7 +1766,7 @@ class ManagementController extends Controller
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiTeam["kgiId"]);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiTeam["kgiId"] . '&&kgiHistoryId=0');
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
 
@@ -1848,7 +1831,7 @@ class ManagementController extends Controller
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiEmployee["kgiId"]);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiEmployee["kgiId"] . '&&kgiHistoryId=0');
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
 		//throw new exception(print_r($kgiEmployees, true));
@@ -1929,7 +1912,7 @@ class ManagementController extends Controller
 		$kgiHasKfi = curl_exec($api);
 		$kgiHasKfi = json_decode($kgiHasKfi, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . '&&kgiHistoryId=0');
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
 		curl_close($api);
@@ -1948,7 +1931,7 @@ class ManagementController extends Controller
 		$kgiHasKpi = curl_exec($api);
 		$kgiHasKpi = json_decode($kgiHasKpi, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . '&&kgiHistoryId=0');
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
 		curl_close($api);
@@ -1964,7 +1947,7 @@ class ManagementController extends Controller
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . '&&kgiHistoryId=0');
 		$kgi = curl_exec($api);
 		$kgi = json_decode($kgi, true);
 
