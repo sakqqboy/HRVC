@@ -132,7 +132,7 @@
     text-align: center;
     background-color: #E05757;
     padding: 2px 3px 2px 3px;
-    border-radius: 5px;
+    border-radius: 3px;
     text-decoration: none;
     cursor: pointer;
 }
@@ -143,7 +143,7 @@
     text-align: center;
     background-color: #2F42ED;
     padding: 2px 3px 2px 3px;
-    border-radius: 5px;
+    border-radius: 3px;
     text-decoration: none;
     cursor: pointer;
 }
@@ -154,7 +154,7 @@
     text-align: center;
     background-color: #2580D3;
     padding: 2px 3px 2px 3px;
-    border-radius: 5px;
+    border-radius: 3px;
     text-decoration: none;
     cursor: pointer;
 }
@@ -165,7 +165,7 @@
     text-align: center;
     background-color: #2D7F06;
     padding: 2px 3px 2px 3px;
-    border-radius: 5px;
+    border-radius: 3px;
     text-decoration: none;
     cursor: pointer;
 }
@@ -176,9 +176,8 @@
     text-align: center;
     background-color: #C0C0C0;
     padding: 2px 3px 2px 3px;
-    border-radius: 5px;
+    border-radius: 3px;
     text-decoration: none;
-    cursor: pointer;
 }
 
 .btn-create {
@@ -194,7 +193,8 @@
     background-color: #2580D3;
     color: white;
     border-radius: 3px;
-    padding: 4px 5px 4px 5px;
+    padding: 4px 5px 4px 3px;
+    ;
     border: 0;
 }
 
@@ -202,7 +202,7 @@
     padding: 7px 20px 7px 20px;
     background-color: #2580D3;
     color: white;
-    border-radius: 4px;
+    border-radius: 3px;
     font-weight: 500;
 }
 
@@ -210,7 +210,7 @@
     padding: 5px 10px 5px 10px;
     background-color: #2580D3;
     color: white;
-    border-radius: 4px;
+    border-radius: 3px;
     font-weight: 400;
 }
 
@@ -219,7 +219,7 @@
     background-color: #FFE3E3;
     border: #BB2020 solid 1px;
     color: #BB2020;
-    border-radius: 4px;
+    border-radius: 3px;
     font-weight: 400;
 }
 

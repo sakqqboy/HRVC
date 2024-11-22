@@ -499,7 +499,7 @@ $this->title = 'KGI Grid View';
                                                 } else { ?>
                                                     <div class="pim-btn-disable"
                                                         data-bs-target="#update-kgi-modal">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/lock.svg" style="width: 12px; height: 12px;"> Locked
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/locked.svg" style="width: 12px; height: 12px;"> Locked
                                                     </div>
                                                 <?php
 
