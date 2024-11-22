@@ -1077,6 +1077,8 @@
 	background-color: #FFFAED;
 }
 
+
+
 .pim-pic-over img,
 .pim-pic-inprogress img,
 .pim-pic-complete img,
@@ -1089,6 +1091,38 @@
 	margin-top: 4px;
 	display: block;
 }
+
+
+.pim-pic-yenlowKFI {
+	width: 33px;
+	/* ความกว้างของวงกลม */
+	height: 33px;
+	/* ความสูงของวงกลมเท่ากับความกว้าง */
+	border-radius: 100%;
+	/* ทำให้เป็นวงกลม */
+	background-color: #FFFAED;
+	/* สีพื้นหลังวงกลม */
+	border: 0.5px solid #FFD000;
+	/* สีขอบของวงกลม */
+	display: flex;
+	/* ใช้ Flexbox */
+	justify-content: center;
+	/* จัดตำแหน่งให้อยู่กึ่งกลางแนวนอน */
+	align-items: center;
+	/* จัดตำแหน่งให้อยู่กึ่งกลางแนวตั้ง */
+	margin-top: 2px;
+	/* จัดให้อยู่กึ่งกลาง container */
+	right: 11px;
+}
+
+.pim-pic-yenlowKFI img {
+	width: 18px;
+	/* ขนาดของรูป */
+	height: 18px;
+	/* ขนาดของรูป */
+	left: 12px
+}
+
 
 .team-wrapper {
 	display: inline-flex;

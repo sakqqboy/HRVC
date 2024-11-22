@@ -177,18 +177,16 @@ $this->title = 'KFI Grid View';
                                                                     ?>
                                                         </div>
                                                         <?php }else {?>
-                                                        <div class="col-2  ">
-                                                            <div
-                                                                class="<?= $kfi['countEmployee'] == 0 && $colorFormat != 'disable' ? 'pim-pic-yenlow' : 'pim-pic-' . $colorFormat ?>">
-                                                                <img
-                                                                    src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg">
+                                                        <div class="col-2">
+                                                            <div class="pim-pic-yenlowKFI">
+                                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg"
+                                                                    alt="person icon">
                                                             </div>
                                                         </div>
-                                                        <div class="col-2 pic-afterKFI pt-0">
-                                                            <div
-                                                                class="<?= $kfi['countEmployee'] == 0 && $colorFormat != 'disable' ? 'pim-pic-yenlow' : 'pim-pic-' . $colorFormat ?>">
-                                                                <img
-                                                                    src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg">
+                                                        <div class="col-2">
+                                                            <div class="pim-pic-yenlowKFI">
+                                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg"
+                                                                    alt="person icon">
                                                             </div>
                                                         </div>
                                                         <?php }?>
