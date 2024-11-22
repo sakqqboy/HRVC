@@ -223,22 +223,23 @@ $this->title = 'KFI Grid View';
                                                             <?= $kfi["countEmployee"] ?>
                                                         </div> -->
                                                         <div
-                                                            class="col-6 number-tag load-<?= $colorFormat ?>  pr-0 pl-0 pim-pic-gridKFINum ">
+                                                            class="col-6 number-tag load-<?=  $kfi["countEmployee"] == 0 ? 'yenlow' : $colorFormat ?>  pr-0 pl-0 pim-pic-gridKFINum ">
                                                             <?= $kfi["countEmployee"] ?>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-7 pl-1 pt-10 pr-0 <?= $colorFormat ?>-assignKFI">
+                                                <div
+                                                    class="col-7 pl-1 pt-10 pr-0 <?=  $kfi["countEmployee"] == 0 ? 'yenlow' : $colorFormat ?>-assignKFI">
                                                     <span class="pull-left mt-1 pl-2  pr-4">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.svg"
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?=  $kfi["countEmployee"] == 0 ? 'yenlow' : $colorFormat ?>.svg"
                                                             class="home-icon" style="margin-top: -3px;">
                                                     </span>
                                                     <?php
                                                             if ($role >= 5) {
                                                             ?>
                                                     <a href="<?= Yii::$app->homeUrl ?>kfi/assign/assign/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, "companyId" => $kfi['companyId']]) ?>"
-                                                        class="font-<?= $colorFormat ?>">
-                                                        Change Assigned
+                                                        class="font-<?= $kfi["countEmployee"] == 0 ? 'black' : $colorFormat ?>">
+                                                        <?php echo $kfi["countEmployee"] == 0 ?  "Assign Person" :  "Change Assigned"; ?>
                                                     </a>
                                                     <?php
                                                             } else { ?>
@@ -261,8 +262,8 @@ $this->title = 'KFI Grid View';
                                         <div class="col-6 border-right-<?= $colorFormat ?>">
                                             <div class="col-12  pr-6 pt-10 text-center">Quant Ratio</div>
                                             <div class="col-12 pim-duedate text-center mt-2">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/diamon.svg"
-                                                    class="pim-iconKFI" style="margin-top: -3px;">
+                                                <!-- <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/diamon.svg"
+                                                    class="pim-iconKFI" style="margin-top: -3px;"> -->
                                                 <!-- <div
                                                 class="col-12 border-right-<?= $colorFormat ?>  pl-12 pr-12 text-center"> -->
                                                 <!-- <i class="fa fa-diamond" aria-hidden="true"></i> -->
