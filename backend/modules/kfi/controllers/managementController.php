@@ -56,8 +56,13 @@ class ManagementController extends Controller
 						sort($selectPic);
 					}
 				}
+				if (strlen($kfi["kfiName"]) > 34) {
+					$kfiname = substr($kfi["kfiName"], 0, 34) . '. . .';
+				} else {
+					$kfiname = $kfi["kfiName"];
+				}
 				$data[$kfi["kfiId"]] = [
-					"kfiName" => $kfi["kfiName"],
+					"kfiName" => $kfiname,
 					"companyName" => Company::companyName($kfi['companyId']),
 					"companyId" => $kfi['companyId'],
 					"branchName" => Branch::kfiBranchName($kfi["kfiId"]),
@@ -107,7 +112,7 @@ class ManagementController extends Controller
 						}
 					}
 					$data[$kfi["kfiId"]] = [
-						"kfiName" => $kfi["kfiName"],
+						"kfiName" => $kfiname,
 						"companyName" => Company::companyName($kfi['companyId']),
 						"companyId" => $kfi['companyId'],
 						"branchName" => Branch::kfiBranchName($kfi["kfiId"]),
@@ -430,121 +435,6 @@ class ManagementController extends Controller
 	public function actionKfiFilter($companyId, $branchId, $month, $status, $year, $active, $adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId)
 	{
 		$data = [];
-		//$kfis = Kfi::find()->where(["status" => [1, 2]])->asArray()->all();
-		/*if ($adminId != '') {
-			$kfis = Kfi::find()
-				->select('kfi.*')
-				->JOIN("LEFT JOIN", "kfi_branch kb", "kb.kfiId=kfi.kfiId")
-				->JOIN("LEFT JOIN", "company c", "c.companyId=kfi.companyId")
-				->where(["c.status" => 1])
-				->andWhere("kfi.status!=99")
-				->andFilterWhere([
-					"kfi.companyId" => $companyId,
-					"kb.branchId" => $branchId,
-					"kfi.month" => $month,
-					"kfi.status" => $status,
-					"kfi.year" => $year,
-					"kfi.active" => isset($active) ? $active : null
-				])
-				->orderBy('kfi.createDateTime ASC')
-				->all();
-		}
-		if ($gmId != '') {
-			$kfis = Kfi::find()
-				->select('kfi.*')
-				->JOIN("LEFT JOIN", "kfi_branch kb", "kb.kfiId=kfi.kfiId")
-				->JOIN("LEFT JOIN", "company c", "c.companyId=kfi.companyId")
-				->where(["c.status" => 1])
-				->andWhere("kfi.status!=99")
-				->andFilterWhere([
-					"kfi.companyId" => $companyId,
-					"kb.branchId" => $branchId,
-					"kfi.month" => $month,
-					"kfi.status" => $status,
-					"kfi.year" => $year,
-					"kfi.active" => isset($active) ? $active : null
-				])
-				->orderBy('kfi.createDateTime ASC')
-				->all();
-		}
-		if ($managerId != '') {
-			$mCompanyId = Company::userCompany($managerId); //userId
-			$mBranchId = Branch::companyBranch($mCompanyId);
-			$kfis = Kfi::find()
-				->select('kfi.*')
-				->JOIN("LEFT JOIN", "kfi_branch kb", "kb.kfiId=kfi.kfiId")
-				->JOIN("LEFT JOIN", "company c", "c.companyId=kfi.companyId")
-				->where(["c.status" => 1, 'kb.status' => 1, 'kb.branchId' => $mBranchId])
-				->andWhere("kfi.status!=99")
-				->andFilterWhere([
-					"kfi.companyId" => $companyId,
-					"kb.branchId" => $branchId,
-					"kfi.month" => $month,
-					"kfi.status" => $status,
-					"kfi.year" => $year,
-					"kfi.active" => isset($active) ? $active : null
-				])
-				->orderBy('kfi.createDateTime ASC')
-				->all();
-		}
-		if ($supervisorId != '') {
-			//$mDepartmentId = Department::userDepartmentId($supervisorId);
-			$mBranchId = Branch::userBranchId($supervisorId);
-			$kfis = Kfi::find()
-				->select('kfi.*')
-				->JOIN("LEFT JOIN", "kfi_branch kb", "kb.kfiId=kfi.kfiId")
-				//->JOIN("LEFT JOIN", "kfi_department kd", "kd.kfiId=kfi.kfiId")
-				->JOIN("LEFT JOIN", "company c", "c.companyId=kfi.companyId")
-				//->where(["c.status" => 1, "kd.status" => 1, "kd.departmentId" => $mDepartmentId])
-				->where(["c.status" => 1, "kb.status" => 1, "kb.branchId" => $mBranchId])
-				->andWhere("kfi.status!=99")
-				->andFilterWhere([
-					"kfi.companyId" => $companyId,
-					"kb.branchId" => $branchId,
-					"kfi.month" => $month,
-					"kfi.status" => $status,
-					"kfi.year" => $year,
-					"kfi.active" => isset($active) ? $active : null
-				])
-				->orderBy('kfi.createDateTime ASC')
-				->all();
-		}
-		if ($teamLeaderId != '') {
-			$mBranchId = Branch::userBranchId($supervisorId);
-			$kfis = Kfi::find()
-				->select('kfi.*')
-				->JOIN("LEFT JOIN", "kfi_branch kb", "kb.kfiId=kfi.kfiId")
-				->where(["kgi.status" => [1, 2, 4], "kb.branchId" => $mBranchId])
-				->andFilterWhere([
-					"kgi.companyId" => $companyId,
-					"kb.branchId" => $branchId,
-					"kgi.month" => $month,
-					"kgi.status" => $status,
-					"kgi.year" => $year,
-				])
-				->orderBy('kgi.createDateTime ASC')
-				->all();
-		}
-		if ($staffId != '') {
-			$employeeId = Employee::employeeId($staffId);
-			$kfis = Kfi::find()
-				->select('kfi.*')
-				->JOIN("LEFT JOIN", "kfi_branch kb", "kb.kfiId=kfi.kfiId")
-				->JOIN("LEFT JOIN", "kfi_employee ke", "ke.kfiId=kfi.kfiId")
-				->JOIN("LEFT JOIN", "company c", "c.companyId=kfi.companyId")
-				->where(["c.status" => 1, "ke.status" => 1, "ke.employeeId" => $employeeId])
-				->andWhere("kfi.status!=99")
-				->andFilterWhere([
-					"kfi.companyId" => $companyId,
-					"kb.branchId" => $branchId,
-					"kfi.month" => $month,
-					"kfi.status" => $status,
-					"kfi.year" => $year,
-					"kfi.active" => isset($active) ? $active : null
-				])
-				->orderBy('kfi.createDateTime ASC')
-				->all();
-		}*/
 		$kfis = Kfi::find()
 			->select('kfi.*')
 			->JOIN("LEFT JOIN", "kfi_branch kb", "kb.kfiId=kfi.kfiId")
@@ -559,7 +449,7 @@ class ManagementController extends Controller
 				"kfi.year" => $year,
 				"kfi.active" => isset($active) ? $active : null
 			])
-			->orderBy('kfi.createDateTime ASC')
+			->orderBy('kfi.updateDateTime DESC')
 			//->groupBy('kfi.kfiId')
 			->all();
 		//throw new Exception(print_r($kfis, true));
@@ -578,8 +468,13 @@ class ManagementController extends Controller
 						sort($selectPic);
 					}
 				}
+				if (strlen($kfi["kfiName"]) > 34) {
+					$kfiname = substr($kfi["kfiName"], 0, 34) . '. . .';
+				} else {
+					$kfiname = $kfi["kfiName"];
+				}
 				$data[$kfi["kfiId"]] = [
-					"kfiName" => $kfi["kfiName"],
+					"kfiName" => $kfiname,
 					"companyName" => Company::companyName($kfi['companyId']),
 					//"companyName" => $kfi['companyName'],
 					"branchName" => Branch::kfiBranchName($kfi["kfiId"]),
@@ -641,7 +536,7 @@ class ManagementController extends Controller
 						}
 					}
 					$data[$kfi["kfiId"]] = [
-						"kfiName" => $kfi["kfiName"],
+						"kfiName" => $kfiname,
 						"companyName" => Company::companyName($kfi['companyId']),
 						//"companyName" => $kfi['companyName'],
 						"branchName" => Branch::kfiBranchName($kfi["kfiId"]),

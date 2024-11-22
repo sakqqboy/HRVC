@@ -27,16 +27,6 @@ class KgiPersonalController extends Controller
 {
 	public function actionKgiTeamEmployee($kgiId)
 	{
-		/*$kgiEmployees = KgiEmployee::find()
-			->select('kgi_employee.employeeId,t.teamName,kgi_employee.target,t.teamId,e.employeeFirstname,e.employeeSurename')
-			->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
-			->JOIN("LEFT JOIN", "team t", "t.teamId=e.teamId")
-			->where("kgi_employee.status!=99")
-			->andWhere(["kgi_employee.kgiId" => $kgiId])
-			->orderBy('t.teamName')
-			->asArray()
-			->all();*/
-
 		$kgiTeams = KgiTeam::find()
 			->select('kgi_team.teamId,t.teamName,kgi_team.target')
 			->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
@@ -48,11 +38,6 @@ class KgiPersonalController extends Controller
 		$employeeTeam = [];
 		if (isset($kgiTeams) && count($kgiTeams) > 0) {
 			foreach ($kgiTeams as $team) :
-				// $employees = Employee::find()
-				// 	->where(["status" => 1, "teamId" => $team["teamId"]])
-				// 	->asArray()
-				// 	->orderBy('employeeFirstname')
-				// 	->all();
 				$kgiEmployee = KgiEmployee::find()
 					->select('e.employeeId,e.employeeFirstname,e.employeeSurename,kgi_employee.remark')
 					->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
@@ -150,10 +135,15 @@ class KgiPersonalController extends Controller
 						sort($selectPic);
 					}
 				}
+				if (strlen($kgi["kgiName"]) > 34) {
+					$kginame = substr($kgi["kgiName"], 0, 34) . '. . .';
+				} else {
+					$kginame = $kgi["kgiName"];
+				}
 				$picture = Employee::employeeImage($kgi["employeeId"]);
 				$data[$kgi["kgiEmployeeId"]] = [
 					"kgiId" => $kgi["kgiId"],
-					"kgiName" => $kgi["kgiName"],
+					"kgiName" => $kginame,
 					"companyId" => $kgi['companyId'],
 					"kgiEmployeeId" => $kgi["kgiEmployeeId"],
 					"employeeName" => $kgi["employeeFirstname"] . ' ' . $kgi["employeeSurename"],
@@ -387,8 +377,13 @@ class KgiPersonalController extends Controller
 					}
 				}
 				$picture = Employee::employeeImage($kgiEmployee["employeeId"]);
+				if (strlen($kgiEmployee["kgiName"]) > 34) {
+					$kginame = substr($kgiEmployee["kgiName"], 0, 34) . '. . .';
+				} else {
+					$kginame = $kgiEmployee["kgiName"];
+				}
 				$data[$kgiEmployee["kgiEmployeeId"]] = [
-					"kgiName" => $kgiEmployee["kgiName"],
+					"kgiName" => $kginame,
 					"kgiId" => $kgiEmployee["kgiId"],
 					"companyName" => Company::companyName($kgiEmployee["companyId"]),
 					"employee" => KgiEmployee::kgiEmployee($kgiEmployee["kgiId"]),

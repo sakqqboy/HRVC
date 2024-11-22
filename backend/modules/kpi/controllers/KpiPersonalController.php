@@ -133,9 +133,14 @@ class KpiPersonalController extends Controller
 					}
 				}
 				$picture = Employee::employeeImage($kpi["employeeId"]);
+				if (strlen($kpi["kpiName"]) > 34) {
+					$kpiName = substr($kpi["kpiName"], 0, 34) . '. . .';
+				} else {
+					$kpiName = $kpi["kpiName"];
+				}
 				$data[$kpi["kpiEmployeeId"]] = [
 					"kpiId" => $kpi["kpiId"],
-					"kpiName" => $kpi["kpiName"],
+					"kpiName" => $kpiName,
 					"companyId" => $kpi['companyId'],
 					"kpiEmployeeId" => $kpi["kpiEmployeeId"],
 					"employeeName" => $kpi["employeeFirstname"] . ' ' . $kpi["employeeSurename"],
@@ -366,8 +371,13 @@ class KpiPersonalController extends Controller
 					}
 				}
 				$picture = Employee::employeeImage($kpiEmployee["employeeId"]);
+				if (strlen($kpiEmployee["kpiName"]) > 34) {
+					$kpiName = substr($kpiEmployee["kpiName"], 0, 34) . '. . .';
+				} else {
+					$kpiName = $kpiEmployee["kpiName"];
+				}
 				$data[$kpiEmployee["kpiEmployeeId"]] = [
-					"kpiName" => $kpiEmployee["kpiName"],
+					"kpiName" => $kpiName,
 					"kpiId" => $kpiEmployee["kpiId"],
 					"companyName" => Company::companyName($kpiEmployee["companyId"]),
 					"employee" => KpiEmployee::kpiEmployee($kpiEmployee["kpiId"]),
@@ -397,6 +407,7 @@ class KpiPersonalController extends Controller
 					"issue" => KpiIssue::lastestIssue($kpiEmployee["kpiId"])["issue"],
 					"solution" => KpiIssue::lastestIssue($kpiEmployee["kpiId"])["solution"],
 					"countTeam" => KpiTeam::kpiTeam($kpiEmployee["kpiId"]),
+					"teamName" => Team::teamName($kpiEmployee["teamId"]),
 					"teamMate" =>  $selectPic,
 					"countTeamEmployee" => $countTeamEmployee,
 					"canEdit" => 1,

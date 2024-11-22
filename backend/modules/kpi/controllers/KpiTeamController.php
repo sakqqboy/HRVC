@@ -249,8 +249,13 @@ class KpiTeamController extends Controller
 						sort($selectPic);
 					}
 				}
+				if (strlen($kpiTeam["kpiName"]) > 34) {
+					$kpiName = substr($kpiTeam["kpiName"], 0, 34) . '. . .';
+				} else {
+					$kpiName = $kpiTeam["kpiName"];
+				}
 				$data[$kpiTeam["kpiTeamId"]] = [
-					"kpiName" => $kpiTeam["kpiName"],
+					"kpiName" => $kpiName,
 					"kpiId" => $kpiTeam["kpiId"],
 					"teamId" => $kpiTeam["teamId"],
 					"companyName" => Company::companyName($kpiTeam["companyId"]),
@@ -459,8 +464,13 @@ class KpiTeamController extends Controller
 						sort($selectPic);
 					}
 				}
+				if (strlen($kpiTeam["kpiName"]) > 34) {
+					$kpiName = substr($kpiTeam["kpiName"], 0, 34) . '. . .';
+				} else {
+					$kpiName = $kpiTeam["kpiName"];
+				}
 				$data[$kpiTeam["kpiTeamId"]] = [
-					"kpiName" => $kpiTeam["kpiName"],
+					"kpiName" => $kpiName,
 					"kpiId" => $kpiTeam["kpiId"],
 					"teamId" => $kpiTeam["teamId"],
 					"companyName" => Company::companyName($kpiTeam["companyId"]),

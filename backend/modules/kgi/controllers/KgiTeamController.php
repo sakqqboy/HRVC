@@ -238,8 +238,13 @@ class KgiTeamController extends Controller
 						sort($selectPic);
 					}
 				}
+				if (strlen($kgiTeam["kgiName"]) > 34) {
+					$kginame = substr($kgiTeam["kgiName"], 0, 34) . '. . .';
+				} else {
+					$kginame = $kgiTeam["kgiName"];
+				}
 				$data[$kgiTeam["kgiTeamId"]] = [
-					"kgiName" => $kgiTeam["kgiName"],
+					"kgiName" => $kginame,
 					"kgiId" => $kgiTeam["kgiId"],
 					"teamId" => $kgiTeam["teamId"],
 					"companyName" => Company::companyName($kgiTeam["companyId"]),
@@ -451,8 +456,13 @@ class KgiTeamController extends Controller
 						sort($selectPic);
 					}
 				}
+				if (strlen($kgiTeam["kgiName"]) > 34) {
+					$kginame = substr($kgiTeam["kgiName"], 0, 34) . '. . .';
+				} else {
+					$kginame = $kgiTeam["kgiName"];
+				}
 				$data[$kgiTeam["kgiTeamId"]] = [
-					"kgiName" => $kgiTeam["kgiName"],
+					"kgiName" => $kginame,
 					"kgiId" => $kgiTeam["kgiId"],
 					"teamId" => $kgiTeam["teamId"],
 					"companyName" => Company::companyName($kgiTeam["companyId"]),
