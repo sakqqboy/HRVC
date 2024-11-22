@@ -164,7 +164,8 @@ $this->title = "TEAM KPI";
                             </div>
                             <div class=" col-lg-3 col-md-3 col-4 pl-30">
                                 <div class="row">
-                                    <div class="col-4 month-<?= $colorFormat ?>"><?= $kpi['month'] ?></div>
+                                    <div class="col-4 month-<?= $colorFormat ?>">
+                                        <?= $kpi['month'] == "" ? 'Month' : $kpi['month'] ?></div>
                                     <div class="col-8 term-<?= $colorFormat ?>">
                                         <?= $kpi['fromDate'] == "" ? 'Not set' : $kpi['fromDate'] ?> -
                                         <?= $kpi['toDate'] == "" ? 'Not set' : $kpi['toDate'] ?>

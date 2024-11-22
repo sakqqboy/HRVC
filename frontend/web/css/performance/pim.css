@@ -388,10 +388,10 @@
 }
 
 .month-disable {
-	color: #3C3D48;
+	color: #ffff;
 	font-size: 11px;
-	background-color: #DCDCDC;
-	border: #C0C0C0 solid thin;
+	background-color: #636363;
+	border: #636363 solid thin;
 	border-radius: 30px;
 	text-align: center;
 	z-index: 3;

@@ -167,7 +167,9 @@ $this->title = "INDIVIDUAL KGI";
                                 </div>
                                 <div class=" col-lg-3 col-md-3 col-4 pl-30">
                                     <div class="row">
-                                        <div class="col-4 month-<?= $colorFormat ?>"><?= $kgi['month'] ?></div>
+                                        <div class="col-4 month-<?= $colorFormat ?>">
+                                            <?= $kgi['month'] == "" ? 'Month' : $kgi['month'] ?>
+                                        </div>
                                         <div class="col-8 term-<?= $colorFormat ?>">
                                             <?= $kgi['fromDate'] == "" ? 'Not set' : $kgi['fromDate'] ?> -
                                             <?= $kgi['toDate'] == "" ? 'Not set' : $kgi['toDate'] ?>
@@ -175,7 +177,9 @@ $this->title = "INDIVIDUAL KGI";
                                     </div>
                                 </div>
                                 <div class="col-lg-5 col-md-2 col-4 text-end pr-20">
-
+                                    <?php
+                                if ($role >= 3) {
+                                ?>
                                     <span class="team-wrapper <?= $colorFormat ?>-teamshow pt-4"
                                         style="margin-right: 5px; padding-right: 5px;">
                                         <span class="team-icon pim-team-<?= $colorFormat ?>" style="bottom: 2px;">
@@ -184,6 +188,7 @@ $this->title = "INDIVIDUAL KGI";
                                         </span>
                                         <span class="team-name" style="bottom: 2px;"><?= $kgi["teamName"] ?></span>
                                     </span>
+                                    <? } ?>
                                     <span class="team-wrapper <?= $colorFormat ?>-teamshow pb-4"
                                         style="margin-right: 5px; padding-right: 5px;">
 
