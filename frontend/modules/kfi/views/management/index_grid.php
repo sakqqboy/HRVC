@@ -155,6 +155,7 @@ $this->title = 'KFI Grid View';
                                             <div class="row">
                                                 <div class="col-5">
                                                     <div class="row pim-picgroup">
+                                                        <?php if ($kfi["countEmployee"] != 0) {?>
                                                         <div class="col-2">
                                                             <?php
                                                                     if (isset($kfi['kfiEmployee'][0])) {
@@ -175,6 +176,22 @@ $this->title = 'KFI Grid View';
                                                                     }
                                                                     ?>
                                                         </div>
+                                                        <?php }else {?>
+                                                        <div class="col-2  ">
+                                                            <div
+                                                                class="<?= $kfi['countEmployee'] == 0 && $colorFormat != 'disable' ? 'pim-pic-yenlow' : 'pim-pic-' . $colorFormat ?>">
+                                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg"
+                                                                    class="pim-pic-gridKFI">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-2 pic-afterKFI pt-0">
+                                                            <div
+                                                                class="<?= $kfi['countEmployee'] == 0 && $colorFormat != 'disable' ? 'pim-pic-yenlow' : 'pim-pic-' . $colorFormat ?>">
+                                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg"
+                                                                    class="pim-pic-gridKFI">
+                                                            </div>
+                                                        </div>
+                                                        <?php }?>
                                                         <div
                                                             class="col-6 number-tag load-<?= $kfi["countEmployee"] == 0 ? 'yenlow' : $colorFormat ?> pr-0 pl-0 pim-pic-gridKFINum ">
                                                             <?= $kfi["countEmployee"] ?>
