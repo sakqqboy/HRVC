@@ -585,7 +585,7 @@ $this->title = "INDIVIDUAL KPI";
                                         </div>
                                         <div class="col-4 text-center pt-6 mt-10">
                                             <?php
-                                        if ($colorFormat == 'disable') {
+                                        if ($colorFormat == 'disable'  && $role >= 3) {
                                         ?>
                                             <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/update-personal-kpi/<?= ModelMaster::encodeParams(['kpiEmployeeId' => $kpiEmployeeId]) ?>"
                                                 class="no-underline">
@@ -595,23 +595,23 @@ $this->title = "INDIVIDUAL KPI";
                                                 </div>
                                             </a>
                                             <?php
-                                            }else if ($colorFormat == 'complete') {
-                                        ?>
-                                            <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/update-personal-kpi/<?= ModelMaster::encodeParams(['kpiEmployeeId' => $kpiEmployeeId]) ?>"
-                                                class="no-underline">
-                                                <div class="pim-btn-<?= $colorFormat ?>">
-                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
-                                                        class="mb-2" style="width: 12px; height: 12px;"> Edit
-                                                </div>
-                                            </a>
-                                            <?php
                                             }else if ($role >= 3){
                                         ?>
                                             <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/update-personal-kpi/<?= ModelMaster::encodeParams(['kpiEmployeeId' => $kpiEmployeeId]) ?>"
                                                 class="no-underline">
                                                 <div class="pim-btn-<?= $colorFormat ?>">
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
-                                                        class="mb-2" style="width: 12px; height: 12px;"> Update
+                                                        class="mb-2" style="width: 12px; height: 12px;">
+                                                    <?php if($colorFormat == "complete") { 
+                                                          echo  "Edit";
+                                                         } else if($colorFormat == "over") 
+                                                         { 
+                                                            echo  "Update";
+
+                                                         } else {
+                                                            echo  "Update";
+                                                         }
+                                                         ?>
                                                 </div>
                                             </a>
                                             <?php

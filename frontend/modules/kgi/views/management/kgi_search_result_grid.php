@@ -509,20 +509,12 @@ $this->title = 'KGI Grid View';
                                     <div class="col-4 text-center mt-10 pt-6">
 
                                         <?php
-                                        if ($colorFormat == 'disable') {
+                                        if ($colorFormat == 'disable' && $role >= 5) {
                                         ?>
                                         <div onclick="javascript:updateKfi(<?= $kgiId ?>)" class="pim-btn-setup"
                                             data-bs-toggle="modal" data-bs-target="#update-kgi-modal">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
                                                 class="mb-2" style="width: 12px; height: 12px;"> Setup
-                                        </div>
-                                        <?php
-                                            }else if ($colorFormat == 'complete') {
-                                        ?>
-                                        <div onclick="javascript:updateKgi(<?= $kgiId ?>)" class="pim-btn-complete"
-                                            data-bs-toggle="modal" data-bs-target="#update-kgi-modal">
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
-                                                class="mb-2" style="width: 12px; height: 12px;"> Edit
                                         </div>
                                         <?php
                                             }else if ($role >= 5){
@@ -531,7 +523,18 @@ $this->title = 'KGI Grid View';
                                             class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
                                             data-bs-target="#update-kgi-modal">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
-                                                class="mb-2" style="width: 12px; height: 12px;"> Update
+                                                class="mb-2" style="width: 12px; height: 12px;">
+
+                                            <?php if($colorFormat == "complete") { 
+                                                          echo  "Edit";
+                                                         } else if($colorFormat == "over") 
+                                                         { 
+                                                            echo  "Update";
+
+                                                         } else {
+                                                            echo  "Update";
+                                                         }
+                                                         ?>
                                         </div>
                                         <?php
                                             }

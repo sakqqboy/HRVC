@@ -625,26 +625,13 @@ $this->title = "INDIVIDUAL KGI";
                                             ?> -->
 
                                             <?php
-                                                    if ($colorFormat == 'disable') {
+                                                    if ($colorFormat == 'disable' && $role >= 5 ) {
                                                     ?>
-
-
                                             <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/update-personal-kgi/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId]) ?>"
                                                 class="no-underline">
                                                 <div class="pim-btn-setup">
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
                                                         class="mb-2" style="width: 12px; height: 12px;"> Setup
-                                                </div>
-                                            </a>
-                                            <?php
-                                                    } else if ($colorFormat == 'complete') {
-                                                    ?>
-
-                                            <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/update-personal-kgi/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId]) ?>"
-                                                class="no-underline">
-                                                <div class="pim-btn-<?= $colorFormat ?>">
-                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
-                                                        class="mb-2" style="width: 12px; height: 12px;"> Edit
                                                 </div>
                                             </a>
                                             <?php
@@ -654,7 +641,17 @@ $this->title = "INDIVIDUAL KGI";
                                                 class="no-underline">
                                                 <div class="pim-btn-<?= $colorFormat ?>">
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
-                                                        class="mb-2" style="width: 12px; height: 12px;"> Update
+                                                        class="mb-2" style="width: 12px; height: 12px;">
+                                                    <?php if($colorFormat == "complete") { 
+                                                          echo  "Edit";
+                                                         } else if($colorFormat == "over") 
+                                                         { 
+                                                            echo  "Update";
+
+                                                         } else {
+                                                            echo  "Update";
+                                                         }
+                                                         ?>
                                                 </div>
                                             </a>
                                             <?php
