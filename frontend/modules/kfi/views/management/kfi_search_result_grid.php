@@ -119,7 +119,9 @@ $this->title = 'KFI Grid View';
                             </div>
                             <div class=" col-lg-3 col-md-3 col-4 pl-30">
                                 <div class="row">
-                                    <div class="col-4 month-<?= $colorFormat ?>"><?= $kfi['month'] ?></div>
+                                    <div class="col-4 month-<?= $colorFormat ?>">
+                                        <?= $kfi['month'] == "" ? 'Month' : $kfi['month'] ?>
+                                    </div>
                                     <div class="col-8 term-<?= $colorFormat ?>">
                                         <?= $kfi['fromDate'] == "" ? 'Not set' : $kfi['fromDate'] ?> -
                                         <?= $kfi['toDate'] == "" ? 'Not set' : $kfi['toDate'] ?>
@@ -264,6 +266,8 @@ $this->title = 'KFI Grid View';
                                                 <!-- <div
                                                 class="col-12 border-right-<?= $colorFormat ?>  pl-12 pr-12 text-center"> -->
                                                 <!-- <i class="fa fa-diamond" aria-hidden="true"></i> -->
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $kfi["quantRatio"] == 1 ? 'quantity' : 'diamon' ?>.svg"
+                                                    class="pim-iconKFI" style="margin-top: -1px; margin-left: 3px;">
                                                 <?= $kfi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?>
                                             </div>
                                         </div>

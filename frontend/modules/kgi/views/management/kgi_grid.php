@@ -114,7 +114,9 @@ $this->title = 'KGI Grid View';
                             </div>
                             <div class=" col-lg-3 col-md-3 col-4 pl-30">
                                 <div class="row">
-                                    <div class="col-4 month-<?= $colorFormat ?>"><?= $kgi['month'] ?></div>
+                                    <div class="col-4 month-<?= $colorFormat ?>">
+                                        <?= $kgi['month'] == "" ? 'Month' : $kgi['month'] ?>
+                                    </div>
                                     <div class="col-8 term-<?= $colorFormat ?>">
                                         <?= $kgi['fromDate'] == "" ? 'Not set' : $kgi['fromDate'] ?> -
                                         <?= $kgi['toDate'] == "" ? 'Not set' : $kgi['toDate'] ?>
