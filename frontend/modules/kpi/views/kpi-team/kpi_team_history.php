@@ -17,29 +17,7 @@ $this->title = 'KPI View';
         <?= $this->render('kpi_header_filter', [
 			"role" => $role
 		]) ?>
-        <div class="alert mt-10 pim-body bg-white">
-            <div class="row">
-                <div class="col-11 pim-name-detail pr-0 pl-5 text-start">
-                    <a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="mr-5 font-size-12">
-                        <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
-                        Back
-                    </a>
-                    <?= $kpiDetail["kpiName"] ?>
-                </div>
-                <div class="col-1">
-                    <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kpi"
-                        onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)"
-                        onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
-                        onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
-                            class="pim-icon" style="margin-top: -3px; width: 12px; height: 14px;"> Delete
-
-                    </a>
-                </div>
-            </div>
-            <div class="row mt-10">
-                <div class="col-lg-7 col-12">
-                    <?php
+        <?php
 					if ($kpiDetail["isOver"] == 1 && $kpiDetail["status"] != 2) {
 						$colorFormat = 'over';
 					} else {
@@ -54,6 +32,38 @@ $this->title = 'KPI View';
 						}
 					}
 					?>
+        <div class="alert mt-10 pim-body bg-white">
+            <div class="row">
+                <div class="col-10 pim-name-detail pr-0 pl-5 text-start">
+                    <a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="mr-5 font-size-12">
+                        <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
+                        Back
+                    </a>
+                    <?= $kpiDetail["kpiName"] ?>
+                </div>
+                <div class="col-1">
+                    <span class="team-wrapper <?= $colorFormat ?>-teamshow"
+                        style="margin-right: 5px; padding-right: 5px;">
+                        <span class="team-icon pim-team-<?= $colorFormat ?>">
+                            <img src="/HRVC/frontend/web/images/icons/Settings/teamwhite.svg" alt="Team Icon">
+                        </span>
+                        <span class="team-name"> <?= $teamName['teamName']; ?></span>
+                    </span>
+                </div>
+                <div class="col-1">
+                    <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kpi"
+                        onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)"
+                        onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
+                        onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
+                            class="pim-icon" style="margin-top: -3px; width: 12px; height: 14px;"> Delete
+
+                    </a>
+                </div>
+            </div>
+            <div class="row mt-10">
+                <div class="col-lg-7 col-12">
+
                     <div class="row">
                         <div class="col-4 pim-name-detail ">Description</div>
                         <div class="col-2">
@@ -229,7 +239,7 @@ $this->title = 'KPI View';
                 <div class="col-lg-7">
                     <div class="row">
                         <div class="col-2  view-tab-active" id="tab-1"
-                            onclick="javascript:viewTabTeamKpi(<?= $kpiHistoryId ?>,1)">
+                            onclick="javascript:viewTabTeamKpi(<?= $kpiTeamHistoryId ?>,<?= $kpiTeamId ?>,1)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-blue.png" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-1-blue">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.png" alt="History"
@@ -237,7 +247,7 @@ $this->title = 'KPI View';
                             Assigned
                         </div>
                         <div class="col-3  view-tab" id="tab-2"
-                            onclick="javascript:viewTabTeamKpi(<?= $kpiHistoryId ?>,2)">
+                            onclick="javascript:viewTabTeamKpi(<?= $kpiTeamHistoryId ?>,<?= $kpiTeamId ?>,2)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.png" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-2-black">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-blue.png" alt="History"
@@ -245,7 +255,7 @@ $this->title = 'KPI View';
                             Update History
                         </div>
                         <div class="col-2  view-tab" id="tab-3"
-                            onclick="javascript:viewTabTeamKpi(<?= $kpiHistoryId ?>,3)">
+                            onclick="javascript:viewTabTeamKpi(<?= $kpiTeamHistoryId ?>,<?= $kpiTeamId ?>,3)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-3-black">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment-blue.png" alt="History"
@@ -253,7 +263,7 @@ $this->title = 'KPI View';
                             Chats
                         </div>
                         <div class="col-2  view-tab" id="tab-4"
-                            onclick="javascript:viewTabTeamKpi(<?= $kpiHistoryId ?>,4)">
+                            onclick="javascript:viewTabTeamKpi(<?= $kpiTeamHistoryId ?>,<?= $kpiTeamId ?>,4)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-4-black">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart-blue.png" alt="History"
@@ -261,7 +271,7 @@ $this->title = 'KPI View';
                             Chart
                         </div>
                         <div class="col-3  view-tab" id="tab-5"
-                            onclick="javascript:viewTabTeamKpi(<?= $kpiHistoryId ?>,5)">
+                            onclick="javascript:viewTabTeamKpi(<?= $kpiTeamHistoryId ?>,<?= $kpiTeamId ?>,5)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate.png" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-5-black">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate-blue.png" alt="History"
@@ -392,9 +402,9 @@ $form = ActiveForm::begin([
 window.onload = function() {
     let openTab = <?php echo json_encode($openTab); ?>; // PHP value passed to JavaScript
     if (openTab) {
-        viewTabKpi(<?= $kpiHistoryId ?>, openTab); // Set the tab based on the PHP value
+        viewTabTeamKpi(<?= $kpiTeamHistoryId ?>, <?= $kpiTeamId ?>, openTab); // Set the tab based on the PHP value
     } else {
-        viewTabKpi(<?= $kpiHistoryId ?>, 1); // Default to tab 1 if no value is passed
+        viewTabTeamKpi(<?= $kpiTeamHistoryId ?>, <?= $kpiTeamId ?>, 1); // Default to tab 1 if no value is passed
     }
 }
 </script>

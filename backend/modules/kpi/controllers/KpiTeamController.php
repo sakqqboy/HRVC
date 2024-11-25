@@ -10,11 +10,13 @@ use backend\models\hrvc\Kgi;
 use backend\models\hrvc\Kpi;
 use backend\models\hrvc\KpiBranch;
 use backend\models\hrvc\KpiEmployee;
+use backend\models\hrvc\KpiHistory;
 use backend\models\hrvc\KpiIssue;
 use backend\models\hrvc\KpiTeam;
 use backend\models\hrvc\KpiTeamHistory;
 use backend\models\hrvc\Team;
 use backend\models\hrvc\Unit;
+use backend\models\hrvc\User;
 use common\models\ModelMaster;
 use Exception;
 use yii\web\Controller;
@@ -293,6 +295,85 @@ class KpiTeamController extends Controller
 		}
 		return json_encode($data);
 	}
+
+	public function actionKpiHistoryForChart($kpiId,$kpiTeamId, $kpiTeamHistoryId)
+	{
+		
+		if ($kpiTeamHistoryId == 0) {
+			$kpiTeamHistory = KpiTeamHistory::find()
+				->where(["kpiTeamId" => $kpiTeamId, "status" => [1, 2, 4]])
+				->orderBy('year ASC,month ASC,kpiHistoryId DESC')
+				->asArray()
+				->all();
+		} else {
+			$mainTeamHistory = KpiTeamHistory::find()
+				->where(["kpiTeamHistoryId" => $kpiTeamHistoryId])
+				->asArray()
+				->one();
+			// $month = $mainHistory["month"];
+			$year = $mainTeamHistory["year"];
+			$kpiTeamHistory = KpiTeamHistory::find()
+				->where(["kpiTeamId" => $kpiTeamId, "status" => [1, 2, 4]])
+				->andWhere("year<=$year")
+				->orderBy('year ASC,month ASC,kpiTeamHistoryId DESC')
+				->asArray()
+				->all();
+		}
+
+		$data = [];
+		if (isset($kpiTeamHistory) && count($kpiTeamHistory) > 0) {
+			foreach ($kpiTeamHistory as $teamhistory) :
+				$time = explode(' ', $teamhistory["createDateTime"]);
+				$employeeId = Employee::employeeId($teamhistory["createrId"]);
+				$data[$teamhistory["kpiTeamHistoryId"]] = [
+					// "title" => $teamhistory["titleProcess"],
+					// "remark" => $teamhistory["remark"],
+					//"result" => $history["result"],
+					"picture" => Employee::employeeImage($employeeId),
+					"createDate" => ModelMaster::engDateHr($teamhistory["createDateTime"]),
+					"time" => ModelMaster::timeText($time[1]),
+					"status" => $teamhistory["status"],
+					"target" => $teamhistory["target"],
+					"result" => $teamhistory["result"],
+					"month" => $teamhistory["month"],
+					"year" => $teamhistory["year"],
+					"creater" => User::employeeNameByuserId($teamhistory["createrId"]),
+				];
+			endforeach;
+		}
+
+
+		// $kpiHistory = KpiHistory::find()
+		// ->where(["kpiId" => $kpiId, "status" => [1, 2, 4]])
+		// ->orderBy('year DESC,month DESC,kpiHistoryId DESC')
+		// ->asArray()
+		// ->all();
+
+		
+		// $data = [];
+		// if (isset($kpiHistory) && count($kpiHistory) > 0) {
+		// 	foreach ($kpiHistory as $history) :
+		// 		$time = explode(' ', $history["createDateTime"]);
+		// 		$employeeId = Employee::employeeId($history["createrId"]);
+		// 		$data[$history["kpiTeamHistoryId"]] = [
+		// 			"title" => $history["titleProcess"],
+		// 			"remark" => $history["remark"],
+		// 			//"result" => $history["result"],
+		// 			"picture" => Employee::employeeImage($employeeId),
+		// 			"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
+		// 			"time" => ModelMaster::timeText($time[1]),
+		// 			"status" => $history["status"],
+		// 			"target" => $history["targetAmount"],
+		// 			"result" => $history["result"],
+		// 			"month" => $history["month"],
+		// 			"year" => $history["year"],
+		// 			"creater" => User::employeeNameByuserId($history["createrId"]),
+		// 		];
+		// 	endforeach;
+		// }
+		return json_encode($data);
+	}
+
 	public function actionKpiTeamDetail($kpiTeamId)
 	{
 		$data = [];

@@ -271,7 +271,7 @@ class ViewController extends Controller
 		$history = json_decode($history, true);
 		  //throw new Exception(print_r($history,true));
 		curl_close($api);
-		return json_encode($history);
+		// return json_encode($history);
 		$monthDetail = [];
 		$summarizeMonth = [];
 		$res["monthlyDetailHistoryText"] = "";

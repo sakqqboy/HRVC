@@ -39,11 +39,11 @@ function updateTeamKpi(kpiTeamId) {
 	});
 }
 
-function viewTabTeamKpi(kpiHistoryId, tabId) {
+function viewTabTeamKpi(kpiTeamHistoryId, kpiTeamId, tabId) {
 	var currentTabId = $("#currentTab").val();
 	//alert(currentTabId + '==' + tabId);
 	var kpiId = $("#kpiId").val();
-	//alert(kpiId);
+	// alert(kpiId);
 	$("#tab-" + currentTabId).removeClass("view-tab-active");
 	$("#tab-" + currentTabId).addClass("view-tab");
 	$("#tab-" + tabId).removeClass("view-tab");
@@ -61,7 +61,8 @@ function viewTabTeamKpi(kpiHistoryId, tabId) {
 			url: url,
 			data: {
 				kpiId: kpiId,
-				kpiHistoryId: kpiHistoryId
+				kpiTeamId: kpiTeamId,
+				kpiHistoryId: kpiTeamHistoryId
 			},
 			success: function (data) {
 				$("#show-content").html(data.kpiEmployeeTeam);
@@ -69,14 +70,15 @@ function viewTabTeamKpi(kpiHistoryId, tabId) {
 		});
 	}
 	if (tabId == 2) {
-		var url = $url + 'kpi/view/all-kpi-history';
+		var url = $url + 'kpi/kpi-team/all-kpi-history';
 		$.ajax({
 			type: "POST",
 			dataType: 'json',
 			url: url,
 			data: {
 				kpiId: kpiId,
-				kpiHistoryId: kpiHistoryId
+				kpiTeamId: kpiTeamId,
+				kpiTeamHistoryId: kpiTeamHistoryId
 			},
 			success: function (data) {
 				$("#show-content").html(data.monthlyDetailHistoryText);
@@ -91,7 +93,8 @@ function viewTabTeamKpi(kpiHistoryId, tabId) {
 			url: url,
 			data: {
 				kpiId: kpiId,
-				kpiHistoryId: kpiHistoryId
+				kpiTeamId: kpiTeamId,
+				kpiHistoryId: kpiTeamHistoryId
 			}, success: function (data) {
 				$("#show-content").html(data.kpiIssue);
 			}
@@ -105,7 +108,9 @@ function viewTabTeamKpi(kpiHistoryId, tabId) {
 			url: url,
 			data: {
 				kpiId: kpiId,
-				kpiHistoryId: kpiHistoryId
+				kpiTeamId: kpiTeamId,
+				kpiTeamHistoryId: kpiTeamHistoryId,
+
 			}, success: function (data) {
 				$("#show-content").html(data.kpiChart);
 			}
@@ -119,7 +124,8 @@ function viewTabTeamKpi(kpiHistoryId, tabId) {
 			url: url,
 			data: {
 				kpiId: kpiId,
-				kpiHistoryId: kpiHistoryId
+				kpiTeamId: kpiTeamId,
+				kpiHistoryId: kpiTeamHistoryId
 			}, success: function (data) {
 				$("#show-content").html(data.kgi);
 			}
