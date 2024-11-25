@@ -317,7 +317,7 @@ class ViewController extends Controller
 		curl_close($api);
 		$monthDetail = [];
 		$summarizeMonth = [];
-		$year = 2024;
+		//$year = 2024;
 		$months = ModelMaster::month();
 		$monthText = '';
 		$target = [];

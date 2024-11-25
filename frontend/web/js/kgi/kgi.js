@@ -908,9 +908,7 @@ function kgiEmployeeNextTarget() {
 }
 function viewTabKgi(kgiHistoryId,tabId) { 
 	var currentTabId = $("#currentTab").val();
-	//alert(currentTabId + '==' + tabId);
 	var kgiId = $("#kgiId").val();
-	//alert(kgiId);
 	$("#tab-" + currentTabId).removeClass("view-tab-active");
 	$("#tab-" + currentTabId).addClass("view-tab");
 	$("#tab-" + tabId).removeClass("view-tab");

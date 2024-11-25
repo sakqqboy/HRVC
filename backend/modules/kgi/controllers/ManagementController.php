@@ -378,6 +378,51 @@ class ManagementController extends Controller
 		}
 		return json_encode($data);
 	}
+	public function actionKgiHistoryForChart($kgiId, $kgiHistoryId)
+	{
+		if ($kgiHistoryId == 0) {
+			$kgiHistory = KgiHistory::find()
+				->where(["kgiId" => $kgiId, "status" => [1, 2, 4]])
+				->orderBy('year ASC,month ASC,kgiHistoryId DESC')
+				->asArray()
+				->all();
+		} else {
+			$mainHistory = KgiHistory::find()
+				->where(["kgiHistoryId" => $kgiHistoryId])
+				->asArray()
+				->one();
+			$month = $mainHistory["month"];
+			$year = $mainHistory["year"];
+			$kgiHistory = KgiHistory::find()
+				->where(["kgiId" => $kgiId, "status" => [1, 2, 4]])
+				->andWhere("year<=$year")
+				->orderBy('year ASC,month ASC,kgiHistoryId DESC')
+				->asArray()
+				->all();
+		}
+		$data = [];
+		if (isset($kgiHistory) && count($kgiHistory) > 0) {
+			foreach ($kgiHistory as $history) :
+				$time = explode(' ', $history["createDateTime"]);
+				$employeeId = Employee::employeeId($history["createrId"]);
+				$data[$history["kgiHistoryId"]] = [
+					"title" => $history["titleProcess"],
+					"remark" => $history["remark"],
+					//"result" => $history["result"],
+					"picture" => Employee::employeeImage($employeeId),
+					"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
+					"time" => ModelMaster::timeText($time[1]),
+					"status" => $history["status"],
+					"target" => $history["targetAmount"],
+					"result" => $history["result"],
+					"month" => $history["month"],
+					"year" => $history["year"],
+					"creater" => User::employeeNameByuserId($history["createrId"]),
+				];
+			endforeach;
+		}
+		return json_encode($data);
+	}
 	public function actionKgiIssue($kgiId)
 	{
 		$kgiIssue = KgiIssue::find()

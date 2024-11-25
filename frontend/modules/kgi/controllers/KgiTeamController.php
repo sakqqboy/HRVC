@@ -629,4 +629,11 @@ class KgiTeamController extends Controller
 		}
 		return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-team/team-kgi-grid');
 	}
+	public function actionkgiTeamHistory($hash)
+	{
+		$param = ModelMaster::decodeParams($hash);
+		$kgiId = $param["kgiId"];
+		$kgiTeamHistroyId = $param["kgiTeamHistoryId"];
+		return $this->render('kgi_team_view');
+	}
 }
