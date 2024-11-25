@@ -507,6 +507,7 @@ $this->title = 'KPI Grid View';
                                 <div class="col-12  pim-duedate">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/monthly.svg"
                                         class="pim-iconKFI" style="margin-top: -1px; margin-left: 3px;">
+
                                     <?= $kpi["unit"] ?>
                                 </div>
                             </div>

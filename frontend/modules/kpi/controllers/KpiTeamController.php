@@ -52,7 +52,7 @@ class KpiTeamController extends Controller
 		$kpiTeams = curl_exec($api);
 		$kpiTeams = json_decode($kpiTeams, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . '&&kpiHistoryId=0');
 		$kpiDetail = curl_exec($api);
 		$kpiDetail = json_decode($kpiDetail, true);
 		curl_close($api);
@@ -208,6 +208,68 @@ class KpiTeamController extends Controller
 
 		]);
 	}
+	public function actionKpiTeamHistory($hash)
+	{
+		$param = ModelMaster::decodeParams($hash);
+		$role = UserRole::userRight();
+		$kpiId = $param["kpiId"];
+		$kpiTeamId = $param["kpiTeamId"];
+		$kpiTeamHistoryId = $param["kpiTeamHistoryId"];
+		$groupId = Group::currentGroupId();
+		if ($groupId == null) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+		}
+		if (isset($param["kpiHistoryId"])) {
+			$kpiHistoryId = $param["kpiHistoryId"];
+		} else {
+			$kpiHistoryId = 0;
+		}
+		$openTab = array_key_exists("openTab", $param) ? $param["openTab"] : 0;
+		$groupId = Group::currentGroupId();
+		if ($groupId == null) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+		}
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . "&&kpiHistoryId=" . $kpiHistoryId);
+		$kpiDetail = curl_exec($api);
+		$kpiDetail = json_decode($kpiDetail, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$companies = curl_exec($api);
+		$companies = json_decode($companies, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
+		$units = curl_exec($api);
+		$units = json_decode($units, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-summarize?kpiId=' . $kpiId);
+		$kpiTeams = curl_exec($api);
+		$kpiTeams = json_decode($kpiTeams, true);
+
+		curl_close($api);
+		$months = ModelMaster::monthFull(1);
+		$isManager = UserRole::isManager();
+		// throw new Exception(print_r($kpiId, true));
+		return $this->render('kpi_team_history', [
+			"role" => $role,
+			"kpiDetail" => $kpiDetail,
+			"openTab" => $openTab,
+			"months" => $months,
+			"isManager" => $isManager,
+			"units" => $units,
+			"companies" => $companies,
+			"kpiId" => $kpiId,
+			"kpiTeamId" => $kpiTeamId,
+			"kpiTeams" => $kpiTeams,
+			"kpiHistoryId" => $kpiHistoryId,
+			"kpiTeamHistoryId" => $kpiTeamHistoryId
+
+		]);
+	}
+
 	public function actionTeamKpiGrid()
 	{
 		$role = UserRole::userRight();
@@ -286,6 +348,8 @@ class KpiTeamController extends Controller
 			"type" => $type
 		]));
 	}
+	
+	
 	public function actionKpiTeamSearchResult($hash)
 	{
 		$param = ModelMaster::decodeParams($hash);
@@ -387,12 +451,12 @@ class KpiTeamController extends Controller
 		}
 		$kpiTeamHistory = new KpiTeamHistory();
 		$kpiTeamHistory->kpiTeamId = $kpiTeamId;
-		$kpiTeamHistory->result = $_POST["result"];
+		$kpiTeamHistory->result = str_replace(",", "",  $_POST["result"]); 
 		if (isset($_POST["targetAmount"])) {
-			$kpiTeamHistory->target = $_POST["targetAmount"];
+			$kpiTeamHistory->target = str_replace(",", "",  $_POST["targetAmount"]);
 		} else {
 			$teamKpi = KpiTeam::find()->where(["kpiTeamId" => $kpiTeamId])->one();
-			$kpiTeamHistory->target = $teamKpi["target"];
+			$kpiTeamHistory->target = str_replace(",", "",   $teamKpi["target"]);
 			$teamKpi->save(false);
 		}
 		$kpiTeamHistory->status = $status;
@@ -411,9 +475,9 @@ class KpiTeamController extends Controller
 			$teamkpi->status = $_POST["status"];
 			$teamkpi->month = $_POST["month"];
 			$teamkpi->year = $_POST["year"];
-			$teamkpi->result = $_POST["result"];
+			$teamkpi->result = str_replace(",", "",  $_POST["result"]); 
 			if (isset($_POST["targetAmount"])) {
-				$teamkpi->target = $_POST["targetAmount"];
+				$teamkpi->target = str_replace(",", "",  $_POST["targetAmount"]);
 			}
 			$teamkpi->fromDate = $_POST["fromDate"];
 			$teamkpi->toDate = $_POST["toDate"];

@@ -61,6 +61,28 @@ class Branch extends \backend\models\hrvc\master\BranchMaster
         }
         return $branchName;
     }
+    public static function kpiBranchName($kpiId)
+    {
+        $kpiBranch = KpiBranch::find()->select('b.branchName')
+            ->JOIN("LEFT JOIN", "branch b", "b.branchId=kpi_branch.branchId")
+            ->where(["kpi_branch.kpiId" => $kpiId])
+            ->asArray()
+            ->orderBy("b.branchName")
+            ->all();
+        //throw new Exception(print_r($kfiBranch, true));
+        $branchName = '';
+        if (isset($kfiBranch) && count($kfiBranch) > 0) {
+            foreach ($kfiBranch as $branch) :
+                if (count($kfiBranch) == 1) {
+                    $branchName .= $branch["branchName"];
+                } else {
+                    $branchName .= 'All';
+                    break;
+                }
+            endforeach;
+        }
+        return $branchName;
+    }
     public static function userBranchId($userId)
     {
         $user = User::find()

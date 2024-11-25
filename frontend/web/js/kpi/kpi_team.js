@@ -38,6 +38,94 @@ function updateTeamKpi(kpiTeamId) {
 		}
 	});
 }
+
+function viewTabTeamKpi(kpiHistoryId, tabId) {
+	var currentTabId = $("#currentTab").val();
+	//alert(currentTabId + '==' + tabId);
+	var kpiId = $("#kpiId").val();
+	//alert(kpiId);
+	$("#tab-" + currentTabId).removeClass("view-tab-active");
+	$("#tab-" + currentTabId).addClass("view-tab");
+	$("#tab-" + tabId).removeClass("view-tab");
+	$("#tab-" + tabId).addClass("view-tab-active");
+	$("#tab-" + currentTabId + "-blue").hide();
+	$("#tab-" + currentTabId + "-black").show();
+	$("#tab-" + tabId + "-blue").show();
+	$("#tab-" + tabId + "-black").hide();
+	$("#currentTab").val(tabId);
+	if (tabId == 1) {
+		var url = $url + 'kpi/view/kpi-team-employee';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: {
+				kpiId: kpiId,
+				kpiHistoryId: kpiHistoryId
+			},
+			success: function (data) {
+				$("#show-content").html(data.kpiEmployeeTeam);
+			}
+		});
+	}
+	if (tabId == 2) {
+		var url = $url + 'kpi/view/all-kpi-history';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: {
+				kpiId: kpiId,
+				kpiHistoryId: kpiHistoryId
+			},
+			success: function (data) {
+				$("#show-content").html(data.monthlyDetailHistoryText);
+			}
+		});
+	}
+	if (tabId == 3) {
+		var url = $url + 'kpi/view/kpi-issue';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: {
+				kpiId: kpiId,
+				kpiHistoryId: kpiHistoryId
+			}, success: function (data) {
+				$("#show-content").html(data.kpiIssue);
+			}
+		});
+	}
+	if (tabId == 4) {
+		var url = $url + 'kpi/kpi-team/kpi-chart';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: {
+				kpiId: kpiId,
+				kpiHistoryId: kpiHistoryId
+			}, success: function (data) {
+				$("#show-content").html(data.kpiChart);
+			}
+		});
+	}
+	if (tabId == 5) {
+		var url = $url + 'kpi/view/kpi-kgi';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: {
+				kpiId: kpiId,
+				kpiHistoryId: kpiHistoryId
+			}, success: function (data) {
+				$("#show-content").html(data.kgi);
+			}
+		});
+	}
+}
 function kpiTeamHistory(kpiTeamId) {
 	var url = $url + 'kpi/kpi-team/kpi-team-view';
 	//alert(kpiTeamId);
