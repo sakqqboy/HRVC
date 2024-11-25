@@ -52,7 +52,7 @@ class KpiPersonalController extends Controller
 		$kpiEmployees = curl_exec($api);
 		$kpiEmployees = json_decode($kpiEmployees, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . '&&kpiHistoryId=0');
 		$kpiDetail = curl_exec($api);
 		$kpiDetail = json_decode($kpiDetail, true);
 

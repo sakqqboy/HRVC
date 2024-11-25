@@ -128,6 +128,7 @@ return [
                 'kpi/management/kpi-detail/<hash>' => 'kpi/management/kpi-detail',
                 'kpi/assign/assign/<hash>' => 'kpi/assign/assign',
                 'kpi/kpi-team/kpi-team-search-result/<hash>' => 'kpi/kpi-team/kpi-team-search-result',
+                'kpi/kpi-team/kpi-team-history/<hash>' => 'kpi/kpi-team/kpi-team-history',
                 'kpi/kpi-personal/kpi-personal-search-result/<hash>' => 'kpi/kpi-personal/kpi-personal-search-result',
                 'kpi/view/index/<hash>' => 'kpi/view/index',
                 'kpi/view/kpi-team-history/<hash>' => 'kpi/view/kpi-team-history',

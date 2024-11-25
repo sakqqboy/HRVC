@@ -395,7 +395,7 @@ class ManagementController extends Controller
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . '&&kpiHistoryId=0');
         $kpi = curl_exec($api);
         $kpi = json_decode($kpi, true);
 
@@ -522,7 +522,7 @@ class ManagementController extends Controller
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . '&&kpiHistoryId=0');
         $kpi = curl_exec($api);
         $kpi = json_decode($kpi, true);
 
@@ -567,7 +567,7 @@ class ManagementController extends Controller
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . '&&kpiHistoryId=0');
         $kpi = curl_exec($api);
         $kpi = json_decode($kpi, true);
 
@@ -1080,7 +1080,7 @@ class ManagementController extends Controller
         $textBranch = "";
         $textBranch .= $this->renderAjax('company_branch', ["branches" => $branches, "kpiId" => $kpiId]);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . '&&kpiHistoryId=0');
         $kpi = curl_exec($api);
         $kpi = json_decode($kpi, true);
 
@@ -1464,11 +1464,11 @@ class ManagementController extends Controller
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kgi-kpi?kpiId=' . $kpiId);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kgi-kpi?kpiId=' . $kpiId . '&&kpiHistoryId=0');
         $kpiHasKgi = curl_exec($api);
         $kpiHasKgi = json_decode($kpiHasKgi, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . '&&kpiHistoryId=0');
         $kpiDetail = curl_exec($api);
         $kpiDetail = json_decode($kpiDetail, true);
         curl_close($api);
@@ -1624,7 +1624,7 @@ class ManagementController extends Controller
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiTeam["kpiId"]);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiTeam["kpiId"] . '&&kpiHistoryId=0');
         $kpiDetail = curl_exec($api);
         $kpiDetail = json_decode($kpiDetail, true);
 
@@ -1688,7 +1688,7 @@ class ManagementController extends Controller
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiEmployee["kpiId"]);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiEmployee["kpiId"] . '&&kpiHistoryId=0');
         $kpiDetail = curl_exec($api);
         $kpiDetail = json_decode($kpiDetail, true);
 
@@ -1735,7 +1735,7 @@ class ManagementController extends Controller
         $kpiHasKgi = curl_exec($api);
         $kpiHasKgi = json_decode($kpiHasKgi, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . '&&kpiHistoryId=0');
         $kpiDetail = curl_exec($api);
         $kpiDetail = json_decode($kpiDetail, true);
         curl_close($api);
@@ -1752,7 +1752,7 @@ class ManagementController extends Controller
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . '&&kpiHistoryId=0');
         $kpi = curl_exec($api);
         $kpi = json_decode($kpi, true);
 
