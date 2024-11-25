@@ -84,7 +84,7 @@ class AssignController extends Controller
 		$teams = json_decode($teams, true);
 		//throw new Exception(print_r($teams, true));
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . "&&kgiHistoryId=0");
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
 		//throw new Exception(print_r($param, true));

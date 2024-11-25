@@ -122,14 +122,14 @@ class ViewController extends Controller
 		$units = curl_exec($api);
 		$units = json_decode($units, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . '&&kgiHistoryId=0');
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
 		$kgiEmployee = KgiEmployee::countKgiEmployeeInTeam($teamId, $kgiId);
 		curl_close($api);
-		//  throw new Exception(print_r($kgiEmployee,true));
+		//throw new Exception(print_r($kgiTeamsHistory, true));
 		return $this->render('kgi_team_history', [
 			"role" => $role,
 			"kgiDetail" => $kgiDetail,
@@ -139,7 +139,8 @@ class ViewController extends Controller
 			"units" => $units,
 			"months" => $months,
 			"isManager" => $isManager,
-			"kgiEmployee" => $kgiEmployee
+			"kgiEmployee" => $kgiEmployee,
+			"teamId" => $teamId
 		]);
 	}
 	public function actionKgiIndividualHistory($hash)
@@ -154,7 +155,7 @@ class ViewController extends Controller
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . '&&kgiHistoryId=0');
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
 
@@ -399,7 +400,7 @@ class ViewController extends Controller
 		$kgiTeams = curl_exec($api);
 		$kgiTeams = json_decode($kgiTeams, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . "&&kgiHistoryId=0");
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
 		curl_close($api);
@@ -428,7 +429,7 @@ class ViewController extends Controller
 		$profile = curl_exec($api);
 		$profile = json_decode($profile, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . "&&kgiHistoryId=0");
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
 
@@ -445,17 +446,18 @@ class ViewController extends Controller
 	public function actionKgiChart()
 	{
 		$kgiId = $_POST["kgiId"];
+		$kgiHistoryId = $_POST["kgiHistoryId"];
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-history?kgiId=' . $kgiId);
+		//curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-history?kgiId=' . $kgiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-history-for-chart?kgiId=' . $kgiId . "&&kgiHistoryId=" . $kgiHistoryId);
 		$history = curl_exec($api);
 		$history = json_decode($history, true);
 		curl_close($api);
 		$monthDetail = [];
 		$summarizeMonth = [];
-		$year = 2024;
 		$months = ModelMaster::month();
 		$monthText = '';
 		$target = [];
@@ -464,38 +466,82 @@ class ViewController extends Controller
 		$result = [];
 		//ksort($month);
 		$res["monthlyDetailHistoryText"] = "";
-
+		if ($kgiHistoryId != 0) {
+			$kgiHistory = KgiHistory::find()
+				->where(["kgiHistoryId" => $kgiHistoryId])
+				->asArray()
+				->one();
+			$year = $kgiHistory["year"];
+			$month = $kgiHistory["month"];
+		} else {
+			$year = '';
+			$month = '';
+		}
 
 		if (isset($history) && count($history) > 0) {
+			$i = 0;
 			foreach ($history as $kgiHistoryId => $ht):
-				if (!isset($summarizeMonth[$ht["year"]][$ht["month"]])) {
-					$summarizeMonth[$ht["year"]][$ht["month"]] = [
-						"year" => $ht["year"],
-						"month" => ModelMaster::fullMonthText($ht["month"]),
-						"result" => $ht["result"],
-						"target" => $ht["target"],
-						"kgiHistoryId" => $kgiHistoryId
-					];
+				if ($year != '' && $month != '' && $ht["year"] <= $year) {
+					if ($ht["year"] == $year) {
+						if ($ht["month"] <= $month) {
+							if (!isset($summarizeMonth[$ht["year"]][$ht["month"]])) {
+								$summarizeMonth[$ht["year"]][$ht["month"]] = [
+									"year" => $ht["year"],
+									"kgiHistoryId" => $kgiHistoryId
+								];
+								$summarizeMonth2[$i] = [
+									"year" => $ht["year"],
+									"month" => ModelMaster::fullMonthText($ht["month"]),
+									"result" => $ht["result"],
+									"target" => $ht["target"],
+									"kgiHistoryId" => $kgiHistoryId
+								];
+							}
+						}
+					} else {
+						if (!isset($summarizeMonth[$ht["year"]][$ht["month"]])) {
+							$summarizeMonth[$ht["year"]][$ht["month"]] = [
+								"year" => $ht["year"],
+								"kgiHistoryId" => $kgiHistoryId
+							];
+							$summarizeMonth2[$i] = [
+								"year" => $ht["year"],
+								"month" => ModelMaster::fullMonthText($ht["month"]),
+								"result" => $ht["result"],
+								"target" => $ht["target"],
+								"kgiHistoryId" => $kgiHistoryId
+							];
+						}
+					}
+				} else {
+					if (!isset($summarizeMonth[$ht["year"]][$ht["month"]])) {
+						$summarizeMonth[$ht["year"]][$ht["month"]] = [
+							"year" => $ht["year"],
+							"kgiHistoryId" => $kgiHistoryId
+						];
+						$summarizeMonth2[$i] = [
+							"year" => $ht["year"],
+							"month" => ModelMaster::fullMonthText($ht["month"]),
+							"result" => $ht["result"],
+							"target" => $ht["target"],
+							"kgiHistoryId" => $kgiHistoryId
+						];
+					}
 				}
+				$i++;
 			endforeach;
 		}
-		foreach ($months as $index => $month):
-			if (isset($summarizeMonth[$year][$index])) {
-				$target[$index] = $summarizeMonth[$year][$index]["target"];
-				$result[$index] = $summarizeMonth[$year][$index]["result"];
-			} else {
-				$target[$index] = 0;
-				$result[$index] = 0;
-			}
+		$summarizeMonth2 = array_slice($summarizeMonth2, -8);
+		foreach ($summarizeMonth2 as $index => $data):
+			$target[$index] = $data["target"];
+			$result[$index] = $data["result"];
 			$targetText .= $target[$index] . ',';
 			$resultText .= $result[$index] . ',';
-			$monthText .= '"' . $month . '",';
+			$monthText .= '"' . substr($data["month"], 0, 3) . substr($data["year"], -2) . '",';
 		endforeach;
 		$monthText = substr($monthText, 0, -1);
 		$targetText = substr($targetText, 0, -1);
 		$resultText = substr($resultText, 0, -1);
-		//throw new Exception($resultText);
-		//throw new Exception(print_r($summarizeMonth, true));
 		$res["kgiChart"] = $this->renderAjax('kgi_chart', [
 			"month" => $monthText,
 			"target" => $targetText,
@@ -540,7 +586,7 @@ class ViewController extends Controller
 		$kgiHasKpi = curl_exec($api);
 		$kgiHasKpi = json_decode($kgiHasKpi, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . "&&kgiHistoryId=0");
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
 
@@ -605,7 +651,7 @@ class ViewController extends Controller
 		$kgiHasKpi = curl_exec($api);
 		$kgiHasKpi = json_decode($kgiHasKpi, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . '&&kgiHistoryId=0');
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
 
