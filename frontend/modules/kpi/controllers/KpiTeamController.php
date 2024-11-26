@@ -303,7 +303,6 @@ class KpiTeamController extends Controller
 			$month = '';
 		}
 		if (isset($history) && count($history) > 0) {
-			//krsort($history);
 			foreach ($history as $kpiHistoryId2 => $ht):
 				if ($year != '' && $month != '' && $ht["year"] <= $year) {
 					if ($ht["year"] == $year) {
@@ -312,70 +311,65 @@ class KpiTeamController extends Controller
 								$totalCount = count($monthDetail[$ht["year"]][$ht["month"]]);
 								$monthDetail[$ht["year"]][$ht["month"]][$totalCount] = [
 									"creater" => $ht["creater"],
-									// "title" => $ht["title"],
 									"status" => $ht["status"],
 									"picture" => $ht["picture"],
-									"result" => $ht["result"],
+									"result" => isset($ht["result"]) ? $ht["result"] : 0,
 									"createDateTime" => $ht["createDate"]
 								];
 							} else {
 								$monthDetail[$ht["year"]][$ht["month"]][0] = [
 									"creater" => $ht["creater"],
-									// "title" => $ht["title"],
 									"status" => $ht["status"],
 									"picture" => $ht["picture"],
-									"result" => $ht["result"],
+									"result" => isset($ht["result"]) ? $ht["result"] : 0,
 									"createDateTime" => $ht["createDate"]
 								];
 								$summarizeMonth[$ht["year"]][$ht["month"]] = [
 									"year" => $ht["year"],
 									"month" => ModelMaster::fullMonthText($ht["month"]),
-									"result" => $ht["result"],
-									"target" => $ht["target"],
+									"result" => isset($ht["result"]) ? $ht["result"] : 0,
+									"target" => isset($ht["target"]) ? $ht["target"] : 0,
 									"kpiHistoryId" => $kpiHistoryId2
-
 								];
 							}
 						}
-					}else{
-
 					}
 				} else {
-				if (isset($monthDetail[$ht["year"]][$ht["month"]])) {
-					$totalCount = count($monthDetail[$ht["year"]][$ht["month"]]);
-					$monthDetail[$ht["year"]][$ht["month"]][$totalCount] = [
-						"creater" => $ht["creater"],
-						"title" => $ht["title"],
-						"status" => $ht["status"],
-						"picture" => $ht["picture"],
-						"result" => $ht["result"],
-						"createDateTime" => $ht["createDateTime"]
-					];
-				} else {
-					$monthDetail[$ht["year"]][$ht["month"]][0] = [
-						"creater" => $ht["creater"],
-						"title" => $ht["title"],
-						"status" => $ht["status"],
-						"picture" => $ht["picture"],
-						"result" => $ht["result"],
-						"createDateTime" => $ht["createDateTime"]
-					];
-					$summarizeMonth[$ht["year"]][$ht["month"]] = [
-						"year" => $ht["year"],
-						"month" => ModelMaster::fullMonthText($ht["month"]),
-						"result" => $ht["result"],
-						"target" => $ht["target"],
-						"kpiHistoryId" => $kpiHistoryId2
-
-					];
+					if (isset($monthDetail[$ht["year"]][$ht["month"]])) {
+						$totalCount = count($monthDetail[$ht["year"]][$ht["month"]]);
+						$monthDetail[$ht["year"]][$ht["month"]][$totalCount] = [
+							"creater" => $ht["creater"],
+							"title" => $ht["title"],
+							"status" => $ht["status"],
+							"picture" => $ht["picture"],
+							"result" => isset($ht["result"]) ? $ht["result"] : 0,
+							"createDateTime" => $ht["createDateTime"]
+						];
+					} else {
+						$monthDetail[$ht["year"]][$ht["month"]][0] = [
+							"creater" => $ht["creater"],
+							"title" => $ht["title"],
+							"status" => $ht["status"],
+							"picture" => $ht["picture"],
+							"result" => isset($ht["result"]) ? $ht["result"] : 0,
+							"createDateTime" => $ht["createDateTime"]
+						];
+						$summarizeMonth[$ht["year"]][$ht["month"]] = [
+							"year" => $ht["year"],
+							"month" => ModelMaster::fullMonthText($ht["month"]),
+							"result" => isset($ht["result"]) ? $ht["result"] : 0,
+							"target" => isset($ht["target"]) ? $ht["target"] : 0,
+							"kpiHistoryId" => $kpiHistoryId2
+						];
+					}
 				}
-			}
 			endforeach;
 			$res["monthlyDetailHistoryText"] = $this->renderAjax('kpi_update_history', [
 				"monthDetail" => $monthDetail,
 				"summarizeMonth" => $summarizeMonth
 			]);
 		}
+		
 		return json_encode($res);
 	}
 
@@ -428,15 +422,15 @@ class KpiTeamController extends Controller
 								$summarizeMonth[$ht["year"]][$ht["month"]] = [
 									"year" => $ht["year"],
 									"month" => ModelMaster::fullMonthText($ht["month"]),
-									"result" => $ht["result"],
-									"target" => $ht["target"],
+									"result" => $ht["result"] ?? 0, // ใช้ ?? กำหนดค่าเริ่มต้น
+									"target" => $ht["target"] ?? 0,
 									"kpiHistoryId" => $kpiHistoryId
 								];
 								$summarizeMonth2[$i] = [
 									"year" => $ht["year"],
 									"month" => ModelMaster::fullMonthText($ht["month"]),
-									"result" => $ht["result"],
-									"target" => $ht["target"],
+									"result" => $ht["result"] ?? 0,
+									"target" => $ht["target"] ?? 0,
 									"kpiHistoryId" => $kpiHistoryId
 								];
 							}
@@ -446,15 +440,15 @@ class KpiTeamController extends Controller
 							$summarizeMonth[$ht["year"]][$ht["month"]] = [
 								"year" => $ht["year"],
 								"month" => ModelMaster::fullMonthText($ht["month"]),
-								"result" => $ht["result"],
-								"target" => $ht["target"],
+								"result" => $ht["result"] ?? 0,
+								"target" => $ht["target"] ?? 0,
 								"kpiHistoryId" => $kpiHistoryId
 							];
 							$summarizeMonth2[$i] = [
 								"year" => $ht["year"],
 								"month" => ModelMaster::fullMonthText($ht["month"]),
-								"result" => $ht["result"],
-								"target" => $ht["target"],
+								"result" => $ht["result"] ?? 0,
+								"target" => $ht["target"] ?? 0,
 								"kpiHistoryId" => $kpiHistoryId
 							];
 						}
@@ -464,15 +458,15 @@ class KpiTeamController extends Controller
 						$summarizeMonth[$ht["year"]][$ht["month"]] = [
 							"year" => $ht["year"],
 							"month" => ModelMaster::fullMonthText($ht["month"]),
-							"result" => $ht["result"],
-							"target" => $ht["target"],
-							"kfpHistoryId" => $kpiHistoryId
+							"result" => $ht["result"] ?? 0,
+							"target" => $ht["target"] ?? 0,
+							"kpiHistoryId" => $kpiHistoryId
 						];
 						$summarizeMonth2[$i] = [
 							"year" => $ht["year"],
 							"month" => ModelMaster::fullMonthText($ht["month"]),
-							"result" => $ht["result"],
-							"target" => $ht["target"],
+							"result" => $ht["result"] ?? 0,
+							"target" => $ht["target"] ?? 0,
 							"kpiHistoryId" => $kpiHistoryId
 						];
 					}
@@ -480,6 +474,7 @@ class KpiTeamController extends Controller
 				$i++;
 			endforeach;
 		}
+		
 
 		$summarizeMonth2 = array_slice($summarizeMonth2, -8);
 		foreach ($summarizeMonth2 as $index => $data):
