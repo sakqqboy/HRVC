@@ -144,14 +144,28 @@ $this->title = "TEAM KGI";
                                     } else {
                                         $display = 'none';
                                     }
-
+                                    if ($role > 3) {
+                                        $canEdit = 1;
+                                    } else {
+                                        if ($role == 3 && ($kgi["teamId"] == $userTeamId)) {
+                                            $canEdit = 1;
+                                        }
+                                    }
                                     if ($kgi["isOver"] == 1 && $kgi["status"] != 2) {
                                         $colorFormat = 'over';
                                     } else {
                                         if ($kgi["status"] == 1) {
-                                            $colorFormat = 'inprogress';
+                                            if ($kgi["isOver"] == 2) {
+                                                $colorFormat = 'disable';
+                                            } else {
+                                                $colorFormat = 'inprogress';
+                                            }
                                         } else {
-                                            $colorFormat = 'complete';
+                                            if ($kgi["status"] == 2) {
+                                                $colorFormat = 'complete';
+                                            } else {
+                                                $colorFormat = 'inprogress';
+                                            }
                                         }
                                     }
 
@@ -270,7 +284,7 @@ $this->title = "TEAM KGI";
 
                                         <td>
                                             <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/kgi-team-history/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiTeamHistoryId' => 0, 'kgiId' => $kgi["kgiId"], 'openTab' => 1]) ?>"
-                                                class="btn btn-bg-white-xs mr-5" style="margin-top: -1px;">
+                                                class="btn btn-bg-white-xs mr-5" style="margin-top: -1px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/eye.svg" alt="History"
                                                     class="pim-icon" style="margin-top: -1px;">
                                             </a>
@@ -300,7 +314,7 @@ $this->title = "TEAM KGI";
                                                         </a>
                                                     </li>
                                                     <li class="pl-4 pr-4">
-                                                        <a class="dropdown-itemNEWS pl-4 pr-20 mb-5"
+                                                        <a class="dropdown-itemNEWS pl-4 pr-20 mb-5" style="<?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>"
                                                             href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-team-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], "kgiTeamId" => $kgiTeamId, "teamId" => $kgi['teamId']]) ?>">
                                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg"
                                                                 alt="Chats" class="pim-icon mr-10">
@@ -308,7 +322,7 @@ $this->title = "TEAM KGI";
                                                         </a>
                                                     </li>
                                                     <li class="pl-4 pr-4">
-                                                        <a class="dropdown-itemNEWS pl-4 pr-20 mb-5"
+                                                        <a class="dropdown-itemNEWS pl-4 pr-20 mb-5" style="<?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>"
                                                             href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/kgi-team-history/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiTeamHistoryId' => 0, 'kgiId' => $kgi["kgiId"], 'openTab' => 3]) ?>">
                                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
                                                                 alt="Chats" class="pim-icon mr-10">
@@ -316,7 +330,7 @@ $this->title = "TEAM KGI";
                                                         </a>
                                                     </li>
                                                     <li class="pl-4 pr-4">
-                                                        <a class="dropdown-itemNEWS pl-4 pr-20"
+                                                        <a class="dropdown-itemNEWS pl-4 pr-20" style="<?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>"
                                                             href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/kgi-team-history/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiTeamHistoryId' => 0, 'kgiId' => $kgi["kgiId"], 'openTab' => 4]) ?>">
                                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg"
                                                                 alt="Chats" class="pim-icon mr-10">
