@@ -157,7 +157,11 @@ $this->title = "Individual KPI";
                                         $colorFormat = 'over';
                                     } else {
                                         if ($kpi["status"] == 1) {
-                                            $colorFormat = 'inprogress';
+                                            if ($kpi["isOver"] == 2) {
+                                                $colorFormat = 'disable';
+                                            } else {
+                                                $colorFormat = 'inprogress';
+                                            }
                                         } else {
                                             $colorFormat = 'complete';
                                         }
@@ -335,7 +339,9 @@ $this->title = "Individual KPI";
                                         </li>
                                         <li class="pl-4 pr-4">
                                             <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-individual-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId'], "kpiEmployeeId" => $kpiEmployeeId]) ?>"
-                                                class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -3px;">
+                                                class="dropdown-itemNEWS pl-4  pr-20 mb-5"
+                                                class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs' ?> mr-5"
+                                                style="margin-top: -1px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg"
                                                     alt="History" class="pim-icon mr-10" style="margin-top: -2px;">
                                                 History
@@ -343,7 +349,9 @@ $this->title = "Individual KPI";
                                         </li>
                                         <li class="pl-4 pr-4">
                                             <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/kpi-individual-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId'],'kpiEmployeeHistoryId' => $kpi["kpiEmployeeHistoryId"], 'kpiEmployeeId' => $kpiEmployeeId, 'openTab' => 3]) ?>"
-                                                class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -3px;">
+                                                class="dropdown-itemNEWS pl-4  pr-20 mb-5"
+                                                class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs' ?> mr-5"
+                                                style="margin-top: -1px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
                                                     alt="Chats" class="pim-icon mr-10" style="margin-top: -2px;">
                                                 Chats
@@ -351,7 +359,9 @@ $this->title = "Individual KPI";
                                         </li>
                                         <li class="pl-4 pr-4">
                                             <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/kpi-individual-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId'],'kpiEmployeeHistoryId' => $kpi["kpiEmployeeHistoryId"], 'kpiEmployeeId' => $kpiEmployeeId, 'openTab' => 4]) ?>"
-                                                class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -3px;">
+                                                class="dropdown-itemNEWS pl-4  pr-20 mb-5"
+                                                class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs' ?> mr-5"
+                                                style="margin-top: -1px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Chart.svg"
                                                     alt="Chart" class="pim-icon mr-10" style="margin-top: -2px;">
                                                 Chart

@@ -151,7 +151,11 @@ $this->title = "KPI";
                                         $colorFormat = 'over';
                                     } else {
                                         if ($kpi["status"] == 1) {
-                                            $colorFormat = 'inprogress';
+                                            if ($kpi["isOver"] == 2) {
+                                                $colorFormat = 'disable';
+                                            } else {
+                                                $colorFormat = 'inprogress';
+                                            }
                                         } else {
                                             $colorFormat = 'complete';
                                         }
@@ -339,8 +343,7 @@ $this->title = "KPI";
                                             data-bs-target="#update-kpi-modal-team"
                                             onclick="javascript:updateTeamKpi(<?= $kpiTeamId ?>)"
                                             style="display: <?= $display ?>;">
-                                            <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
-                                                class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+                                            <a class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -3px;">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
                                                     alt="History" alt="Chart" class="pim-icon mr-10"
                                                     style="margin-top: -2px;">
@@ -349,7 +352,9 @@ $this->title = "KPI";
                                         </li>
                                         <li class="pl-4 pr-4">
                                             <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-team-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId'], "kpiTeamId" => $kpiTeamId,"teamId"=>$kpi['teamId']]) ?>"
-                                                class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -3px;">
+                                                class="dropdown-itemNEWS pl-4  pr-20 mb-5"
+                                                class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs' ?> mr-5"
+                                                style="margin-top: -1px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg"
                                                     alt="History" class="pim-icon mr-10" style="margin-top: -2px;">
                                                 History
@@ -365,7 +370,9 @@ $this->title = "KPI";
                                         </li> -->
                                         <li class="pl-4 pr-4">
                                             <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/kpi-team-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId'],'kpiTeamHistoryId' => $kpi['kpiTeamHistoryId'], 'kpiTeamId' => $kpiTeamId, 'openTab' => 3]) ?>"
-                                                class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -3px;">
+                                                class="dropdown-itemNEWS pl-4  pr-20 mb-5"
+                                                class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs' ?> mr-5"
+                                                style="margin-top: -1px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
                                                     alt="Chats" class="pim-icon mr-10" style="margin-top: -2px;">
                                                 Chats
@@ -373,7 +380,9 @@ $this->title = "KPI";
                                         </li>
                                         <li class="pl-4 pr-4">
                                             <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/kpi-team-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId'],'kpiTeamHistoryId' => $kpi['kpiTeamHistoryId'], 'kpiTeamId' => $kpiTeamId, 'openTab' => 4]) ?>"
-                                                class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -3px;">
+                                                class="dropdown-itemNEWS pl-4  pr-20 mb-5"
+                                                class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs' ?> mr-5"
+                                                style="margin-top: -1px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Chart.svg"
                                                     alt="Chart" class="pim-icon mr-10" style="margin-top: -2px;">
                                                 Chart
