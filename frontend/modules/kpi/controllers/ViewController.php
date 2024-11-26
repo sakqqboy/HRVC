@@ -2,7 +2,7 @@
 
 namespace frontend\modules\kpi\controllers;
 
-use backend\models\hrvc\KpiHistory;
+use frontend\models\hrvc\KpiHistory;
 use common\helpers\Path;
 use common\models\ModelMaster;
 use frontend\models\hrvc\KpiEmployee;
