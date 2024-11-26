@@ -100,6 +100,7 @@ return [
                 'kgi/kgi-personal/update-personal-kgi/<hash>' => 'kgi/kgi-personal/update-personal-kgi',
                 'kgi/kgi-personal/view-personal-kgi/<hash>' => 'kgi/kgi-personal/view-personal-kgi',
                 'kgi/kgi-personal/kgi-personal-search-result/<hash>' => 'kgi/kgi-personal/kgi-personal-search-result',
+                'kgi/kgi-personal/kgi-employee-history/<hash>' => 'kgi/kgi-personal/kgi-employee-history',
                 'kgi/management/assign-kpi/<hash>' => 'kgi/management/assign-kpi',
                 'kgi/management/kgi-detail/<hash>' => 'kgi/management/kgi-detail',
                 'kgi/kgi-team/kgi-team-search-result/<hash>' => 'kgi/kgi-team/kgi-team-search-result',

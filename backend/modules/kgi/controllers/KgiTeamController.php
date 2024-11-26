@@ -356,7 +356,7 @@ class KgiTeamController extends Controller
 				"ratio" => number_format($ratio, 2),
 				"kgiDetail" => $kgiTeamHistory["kgiDetail"],
 				"remark" => $kgiTeamHistory["remark"],
-				"isOver" => ModelMaster::isOverDuedate(KgiTeamHistory::nextCheckDate($kgiTeamHistory['kgiTeamHistoryId'])),
+				"isOver" => ModelMaster::isOverDuedate(KgiTeamHistory::nextCheckDate($kgiTeamHistoryId)),
 				//"detail" => $kgiTeamHistory['kgiDetail'],
 
 			];
