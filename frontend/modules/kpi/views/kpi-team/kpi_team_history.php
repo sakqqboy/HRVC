@@ -130,7 +130,7 @@ $this->title = 'KPI View';
                                     <i class="fa fa-diamond" aria-hidden="true"></i>
                                     <?= $kpiDetail["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?>
                                 </div>
-                                <div class="col-12 pr-0 pt-5 pl-0">update Interval</div>
+                                <div class="col-12 pr-0 pt-5 pl-0">Update Interval</div>
                                 <div class="col-12  pim-duedate">
                                     <?= $kpiDetail["unitText"] ?>
                                 </div>

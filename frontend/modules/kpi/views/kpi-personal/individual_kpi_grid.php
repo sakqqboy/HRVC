@@ -191,7 +191,7 @@ $this->title = "INDIVIDUAL KPI";
                                         </span>
                                         <span class="team-name" style="bottom: 2px;"><?= $kpi["teamName"] ?></span>
                                     </span>
-                                    <? } ?>
+                                    <?php } ?>
                                     <span class="team-wrapper <?= $colorFormat ?>-teamshow pb-4"
                                         style="margin-right: 5px; padding-right: 5px;">
 
