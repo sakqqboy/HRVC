@@ -82,3 +82,77 @@ function hideEmployeeTeamTarget(teamId) {
 	$("#show-" + teamId).show();
 	$("#hide-" + teamId).hide();
 }
+function viewTabEmployeeKgi(kgiEmployeeHistoryId,tabId,kgiId,kgiEmployeeId) { 
+	var currentTabId = $("#currentTab").val();
+	   var kgiId = $("#kgiId").val();
+	   $("#tab-" + currentTabId).removeClass("view-tab-active");
+	   $("#tab-" + currentTabId).addClass("view-tab");
+	   $("#tab-" + tabId).removeClass("view-tab");
+	   $("#tab-" + tabId).addClass("view-tab-active");
+	   $("#tab-" + currentTabId + "-blue").hide();
+	   $("#tab-" + currentTabId + "-black").show();
+	   $("#tab-" + tabId + "-blue").show();
+	   $("#tab-" + tabId + "-black").hide();
+	   $("#currentTab").val(tabId);
+	   if (tabId == 1) {
+		   var url = $url + 'kgi/kgi-personal/kgi-team-employee';
+		   $.ajax({
+			   type: "POST",
+			   dataType: 'json',
+			   url: url,
+			   data: { kgiId: kgiId,kgiEmployeeHistoryId:kgiEmployeeHistoryId },
+			   success: function (data) {kgiId
+				   $("#show-content").html(data.kgiEmployeeTeam);
+			   }
+		   });
+	   }
+	   if (tabId == 2) {
+		   var url = $url + 'kgi/kgi-personal/all-kgi-history';
+		   $.ajax({
+			   type: "POST",
+			   dataType: 'json',
+			   url: url,
+			   data: { kgiEmployeeId: kgiEmployeeId, kgiEmployeeHistoryId: kgiEmployeeHistoryId},
+			   success: function (data) {
+				   $("#show-content").html(data.monthlyDetailHistoryText);
+			   }
+		   });
+	   }
+	   if (tabId == 3) {
+		   var url = $url + 'kgi/view/kgi-issue';
+		   $.ajax({
+			   type: "POST",
+			   dataType: 'json',
+			   url: url,
+			   data: { kgiId: kgiId },
+			   success: function (data) {
+				   $("#show-content").html(data.kgiIssue);
+			   }
+		   });
+	   }
+	if (tabId == 4) {
+	//alert(kgiTeamId);
+		   var url = $url + 'kgi/kgi-personal/kgi-employee-chart';
+		   $.ajax({
+			   type: "POST",
+			   dataType: 'json',
+			   url: url,
+			   data: { kgiEmployeeId: kgiEmployeeId, kgiEmployeeHistoryId: kgiEmployeeHistoryId,kgiId: kgiId},
+			   success: function (data) {
+				   $("#show-content").html(data.kgiChart);
+			   }
+		   });
+	   }
+	   if (tabId == 5) { 
+		   var url = $url + 'kgi/view/kgi-kpi';
+		   $.ajax({
+			   type: "POST",
+			   dataType: 'json',
+			   url: url,
+			   data: { kgiId: kgiId },
+			   success: function (data) {
+				   $("#show-content").html(data.kpi);
+			   }
+		   });
+	   }
+   }

@@ -126,7 +126,7 @@
 													<div class="col-2  pl-0 pr-0 middle">
 														<?php
 														if ($data["file"] != "") {
-															$fileSize = filesize($data["file"]) / 1000000;
+															//$fileSize = filesize($data["file"]) / 1000000;
 														?>
 															<a href="<?= Yii::$app->homeUrl . $data['file'] ?>" target="_blank" class="btn btn-bg-white-xs pb-0 pt-3" style="font-size: 10px;font-weight:300;margin:auto;">
 																<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/clip.png" class="attach-icon" style="margin-top:-5px;">

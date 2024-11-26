@@ -20,7 +20,7 @@ $this->title = 'Team KGI History';
             <div class="col-12">
                 <div class="row">
                     <div class="col-6 font-size-12 pim-name pr-0 pl-5 text-start">
-                        <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/team-kgi-grid" class="mr-5 font-size-12">
+                        <a href="<?= isset(Yii::$app->request->referrer) ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kgi/kgi-team/team-kgi-grid' ?>" class="mr-5 font-size-12">
                             <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
                             Back
                         </a>
@@ -59,34 +59,19 @@ $this->title = 'Team KGI History';
                                     <div class="row">
                                         <div class="col-5 pim-name"><?= $kgi["month"] ?> <?= $kgi["year"] ?></div>
                                         <div class="col-7 text-end">
-                                            <!-- <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>"
-                                    class="btn btn-bg-white-xs">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Charts.svg" alt="History"
-                                        class="home-icon" style="margin-top: -3px;">
-                                </a>
-                                <a class="btn btn-bg-white-xs" data-bs-toggle="modal" data-bs-target="#staticBackdrop3"
-                                    onclick="javascript:kgiHistory(<?= $kgi['kgiTeamHistoryId'] ?>)">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Comment.svg" alt="History"
-                                        class="home-icon">
-                                </a>
-                                <a class="btn btn-bg-white-xs" data-bs-toggle="modal" data-bs-target="#staticBackdrop3"
-                                    onclick="javascript:kgiHistory(<?= $kgi['kgiTeamHistoryId'] ?>)">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Charts.svg" alt="History"
-                                        class="home-icon" style="margin-top: -3px;">
-                                </a> -->
-                                            <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/kgi-team-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'kgiTeamHistoryId' => $kgi['kgiTeamHistoryId'], 'openTab' => 1]) ?>"
+                                            <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/kgi-team-history/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiTeamHistoryId' => $kgi['kgiTeamHistoryId'], 'kgiId' => $kgiId, 'openTab' => 1]) ?>"
                                                 class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
                                                 style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="Chats"
                                                     class="pim-icon " style="margin-top: -2px;">
                                             </a>
-                                            <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'kgiTeamHistoryId' => $kgi['kgiTeamHistoryId'], 'openTab' => 3]) ?>"
+                                            <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/kgi-team-history/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiTeamHistoryId' => $kgi['kgiTeamHistoryId'], 'kgiId' => $kgiId, 'openTab' => 3]) ?>"
                                                 class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
                                                 style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg" alt="Chats"
                                                     class="pim-icon " style="margin-top: -2px;">
                                             </a>
-                                            <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'kgiTeamHistoryId' => $kgi['kgiTeamHistoryId'], 'openTab' => 4]) ?>"
+                                            <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/kgi-team-history/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiTeamHistoryId' => $kgi['kgiTeamHistoryId'], 'kgiId' => $kgiId, 'openTab' => 4]) ?>"
                                                 class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
                                                 style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg" alt="Chart"
@@ -182,8 +167,8 @@ $this->title = 'Team KGI History';
                                                         <?php
                                                         if ($role > 3) {
                                                         ?>
-                                                            <a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgiDetail["companyId"]]) ?>"
-                                                                class="font-<?= $colorFormat ?> style=" top: 2px;">
+                                                            <a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'companyId' => $kgiDetail['companyId']]) ?>"
+                                                                class="font-<?= $colorFormat ?>" style=" top: 2px;">
                                                                 Assign Person
                                                             </a>
                                                         <?php
