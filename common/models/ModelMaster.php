@@ -531,7 +531,6 @@ class ModelMaster extends \yii\db\ActiveRecord
     }
     public static function isOverDuedate($dueDate)
     {
-
         $today = date('Y-m-d');
         $now = strtotime($today);
         if ($dueDate != '') {
