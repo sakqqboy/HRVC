@@ -276,30 +276,42 @@ class KgiTeamController extends Controller
 					"solution" => KgiIssue::lastestIssue($kgiTeam["kgiId"])["solution"],
 					"countTeamEmployee" => $countTeamEmployee,
 					"kgiEmployeeSelect" => $selectPic,
-
 				];
 			endforeach;
 		}
 		return json_encode($data);
 	}
-	public function actionKgiTeamDetail($kgiTeamId)
+	public function actionKgiTeamDetail($kgiTeamId, $kgiTeamHistoryId)
 	{
 		$data = [];
 		$ratio = 0;
-		$kgiTeamHistory = KgiTeamHistory::find()
-			->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.companyId,k.code,kt.target,kt.kgiTeamId,
-		kt.teamId,kgi_team_history.result,kgi_team_history.fromDate,kgi_team_history.toDate,kgi_team_history.month,
+		if ($kgiTeamHistoryId != 0) {
+			$kgiTeamHistory = KgiTeamHistory::find()
+				->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.companyId,k.code,kt.target,kt.kgiTeamId,
+		kt.teamId,kgi_team_history.result,kgi_team_history.fromDate,kgi_team_history.toDate,kgi_team_history.month,kgi_team_history.kgiTeamHistoryId,
 		kgi_team_history.status,kgi_team_history.nextCheckDate,k.kgiDetail,kgi_team_history.year,k.amountType,kt.remark')
-			->JOIN("LEFT JOIN", "kgi_team kt", "kt.kgiTeamId=kgi_team_history.kgiTeamId")
-			->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kt.kgiId")
-			->where(["kgi_team_history.kgiTeamId" => $kgiTeamId, "kgi_team_history.status" => [1, 2]])
-			->asArray()
-			->orderBy('kgi_team_history.createDateTime DESC')
-			->one();
+				->JOIN("LEFT JOIN", "kgi_team kt", "kt.kgiTeamId=kgi_team_history.kgiTeamId")
+				->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kt.kgiId")
+				->where(["kgi_team_history.kgiTeamHistoryId" => $kgiTeamHistoryId])
+				->asArray()
+				->one();
+		} else {
+			$kgiTeamHistory = KgiTeamHistory::find()
+				->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.companyId,k.code,kt.target,kt.kgiTeamId,
+		kt.teamId,kgi_team_history.result,kgi_team_history.fromDate,kgi_team_history.toDate,kgi_team_history.month,kgi_team_history.kgiTeamHistoryId,
+		kgi_team_history.status,kgi_team_history.nextCheckDate,k.kgiDetail,kgi_team_history.year,k.amountType,kt.remark')
+				->JOIN("LEFT JOIN", "kgi_team kt", "kt.kgiTeamId=kgi_team_history.kgiTeamId")
+				->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kt.kgiId")
+				->where(["kgi_team_history.kgiTeamId" => $kgiTeamId, "kgi_team_history.status" => [1, 2]])
+				->asArray()
+				->orderBy('kgi_team_history.createDateTime DESC')
+				->one();
+		}
+
 		if (!isset($kgiTeamHistory) || empty($kgiTeamHistory)) {
 			$kgiTeamHistory = KgiTeam::find()
 				->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.companyId,k.code,kgi_team.target,kgi_team.kgiTeamId,
-		kgi_team.teamId,kgi_team.result,kgi_team.fromDate,kgi_team.toDate,kgi_team.month,kgi_team.year,
+		kgi_team.teamId,kgi_team.result,kgi_team.fromDate,kgi_team.toDate,kgi_team.month,kgi_team.year,kgi_team_history.kgiTeamHistoryId,
 		kgi_team.status,kgi_team.nextCheckDate,k.kgiDetail,k.amountType,kgi_team.remark')
 				->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_team.kgiId")
 				->where(["kgi_team.kgiTeamId" => $kgiTeamId, "kgi_team.status" => [1, 2]])
@@ -338,12 +350,15 @@ class KgiTeamController extends Controller
 				"fromDate" => $kgiTeamHistory["fromDate"],
 				"toDate" => $kgiTeamHistory["toDate"],
 				"nextCheckDate" =>  $kgiTeamHistory["nextCheckDate"],
-				"nextCheckDateText" => ModelMaster::engDate($kgiTeamHistory["nextCheckDate"], 2),
+				"nextCheckText" => ModelMaster::engDate($kgiTeamHistory["nextCheckDate"], 2),
 				"status" => $kgiTeamHistory["status"],
 				"kgiEmployee" => KgiEmployee::kgiEmployee($kgiTeamHistory["kgiId"]),
 				"ratio" => number_format($ratio, 2),
 				"kgiDetail" => $kgiTeamHistory["kgiDetail"],
-				"remark" => $kgiTeamHistory["remark"]
+				"remark" => $kgiTeamHistory["remark"],
+				"isOver" => ModelMaster::isOverDuedate(KgiTeamHistory::nextCheckDate($kgiTeamHistory['kgiTeamHistoryId'])),
+				//"detail" => $kgiTeamHistory['kgiDetail'],
+
 			];
 		}
 		return json_encode($data);
@@ -756,5 +771,99 @@ class KgiTeamController extends Controller
 		$res["totalRequest"] = count($kgiTeam);
 
 		return json_encode($res);
+	}
+	public function actionKgiTeamHistory2($kgiTeamId, $kgiTeamHistoryId)
+	{
+		// $kgiHistory = KgiHistory::find()
+		// 	->where(["kgiId" => $kgiId, "status" => [1, 2]])
+		// 	->orderBy('kgiHistoryId DESC')
+		// 	->asArray()
+		// 	->all();
+		if ($kgiTeamHistoryId == 0) {
+			$kgiHistory = KgiTeamHistory::find()
+				->where(["kgiTeamId" => $kgiTeamId, "status" => [1, 2, 4]])
+				->orderBy('year DESC,month DESC,kgiTeamHistoryId DESC')
+				->asArray()
+				->all();
+		} else {
+			$mainHistory = KgiTeamHistory::find()
+				->where(["kgiTeamHistoryId" => $kgiTeamHistoryId])
+				->asArray()
+				->one();
+			$year = $mainHistory["year"];
+			$kgiHistory = KgiTeamHistory::find()
+				->where(["kgiTeamId" => $mainHistory["kgiTeamId"], "status" => [1, 2, 4]])
+				->andWhere("year<=$year")
+				->orderBy('year DESC,month DESC,kgiTeamHistoryId DESC')
+				->asArray()
+				->all();
+		}
+		$data = [];
+		if (isset($kgiHistory) && count($kgiHistory) > 0) {
+			foreach ($kgiHistory as $history) :
+				$time = explode(' ', $history["createDateTime"]);
+				$employeeId = Employee::employeeId($history["createrId"]);
+				$data[$history["kgiTeamHistoryId"]] = [
+					"title" => $history["detail"],
+					// "remark" => $history["remark"],
+					"result" => $history["result"],
+					"creater" => User::employeeNameByuserId($history["createrId"]),
+					"picture" => Employee::employeeImage($employeeId),
+					"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
+					"time" => ModelMaster::timeText($time[1]),
+					"status" => $history["status"],
+					"target" => $history["target"],
+					"month" => $history["month"],
+					"year" => $history["year"],
+					"createDateTime" => ModelMaster::monthDateYearTime($history["createDateTime"])
+				];
+			endforeach;
+		}
+		return json_encode($data);
+	}
+	public function actionKgiTeamHistoryForChart($kgiTeamHistoryId, $kgiTeamId)
+	{
+		if ($kgiTeamHistoryId == 0) {
+			$kgiHistory = KgiTeamHistory::find()
+				->where(["kgiTeamId" => $kgiTeamId, "status" => [1, 2, 4]])
+				->orderBy('year ASC,month ASC,kgiTeamHistoryId DESC')
+				->asArray()
+				->all();
+		} else {
+			$mainHistory = KgiTeamHistory::find()
+				->where(["kgiTeamHistoryId" => $kgiTeamHistoryId])
+				->asArray()
+				->one();
+			$month = $mainHistory["month"];
+			$year = $mainHistory["year"];
+			$kgiHistory = KgiTeamHistory::find()
+				->where(["kgiTeamId" => $kgiTeamId, "status" => [1, 2, 4]])
+				->andWhere("year<=$year")
+				->orderBy('year ASC,month ASC,kgiTeamHistoryId DESC')
+				->asArray()
+				->all();
+		}
+		$data = [];
+		if (isset($kgiHistory) && count($kgiHistory) > 0) {
+			foreach ($kgiHistory as $history) :
+				$time = explode(' ', $history["createDateTime"]);
+				$employeeId = Employee::employeeId($history["createrId"]);
+				$data[$history["kgiTeamHistoryId"]] = [
+					"title" => $history["detail"],
+					//"remark" => $history["remark"],
+					//"result" => $history["result"],
+					"picture" => Employee::employeeImage($employeeId),
+					"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
+					"time" => ModelMaster::timeText($time[1]),
+					"status" => $history["status"],
+					"target" => $history["target"],
+					"result" => $history["result"],
+					"month" => $history["month"],
+					"year" => $history["year"],
+					"creater" => User::employeeNameByuserId($history["createrId"]),
+				];
+			endforeach;
+		}
+		return json_encode($data);
 	}
 }

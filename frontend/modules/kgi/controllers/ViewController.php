@@ -88,7 +88,7 @@ class ViewController extends Controller
 		$kgis = json_decode($kgis, true);
 		curl_close($api);
 		//throw new Exception($kgiId);
-		// throw new Exception(print_r($kgiDetail, true));
+		//throw new Exception(print_r($kgiDetail, true));
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
 		return $this->render('kgi_view', [

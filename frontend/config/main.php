@@ -103,6 +103,7 @@ return [
                 'kgi/management/assign-kpi/<hash>' => 'kgi/management/assign-kpi',
                 'kgi/management/kgi-detail/<hash>' => 'kgi/management/kgi-detail',
                 'kgi/kgi-team/kgi-team-search-result/<hash>' => 'kgi/kgi-team/kgi-team-search-result',
+                'kgi/kgi-team/kgi-team-history/<hash>' => 'kgi/kgi-team/kgi-team-history',
                 'kgi/view/index/<hash>' => 'kgi/view/index',
                 'kgi/view/kgi-team-history/<hash>' => 'kgi/view/kgi-team-history',
                 'kgi/view/kgi-individual-history/<hash>' => 'kgi/view/kgi-individual-history',
