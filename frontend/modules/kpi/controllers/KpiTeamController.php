@@ -274,15 +274,16 @@ class KpiTeamController extends Controller
 
 	public function actionAllKpiHistory()
 	{
-		$kpiId = $_POST["kpiId"];
 		$kpiTeamHistoryId = $_POST["kpiTeamHistoryId"];
+		$kpiId = $_POST["kpiId"];
+		$kpiTeamId = $_POST["kpiTeamId"];
 		
 
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-history?kpiId=' . $kpiId . '&&kpiHistoryId=' . $kpiTeamHistoryId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-history-for-chart?kpiId=' . $kpiId . '&&kpiTeamId=' . $kpiTeamId .'&&kpiTeamHistoryId=' . $kpiTeamHistoryId);
 		$history = curl_exec($api);
 		$history = json_decode($history, true);
 		  //throw new Exception(print_r($history,true));
@@ -312,7 +313,7 @@ class KpiTeamController extends Controller
 								$totalCount = count($monthDetail[$ht["year"]][$ht["month"]]);
 								$monthDetail[$ht["year"]][$ht["month"]][$totalCount] = [
 									"creater" => $ht["creater"],
-									"title" => $ht["title"],
+									// "title" => $ht["title"],
 									"status" => $ht["status"],
 									"picture" => $ht["picture"],
 									"result" => $ht["result"],
@@ -321,7 +322,7 @@ class KpiTeamController extends Controller
 							} else {
 								$monthDetail[$ht["year"]][$ht["month"]][0] = [
 									"creater" => $ht["creater"],
-									"title" => $ht["title"],
+									// "title" => $ht["title"],
 									"status" => $ht["status"],
 									"picture" => $ht["picture"],
 									"result" => $ht["result"],

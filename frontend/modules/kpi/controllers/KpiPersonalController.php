@@ -109,6 +109,7 @@ class KpiPersonalController extends Controller
 		$res["status"] = true;
 		return json_encode($res);
 	}
+	
 	public function actionIndividualKpi()
 	{
 		$groupId = Group::currentGroupId();
@@ -228,6 +229,63 @@ class KpiPersonalController extends Controller
 			"branchId" => null,
 			"teamId" => null,
 			"waitForApprove" => $waitForApprove
+		]);
+	}
+
+	public function actionKpiIndividualHistory($hash)
+	{
+		$param = ModelMaster::decodeParams($hash);
+		$role = UserRole::userRight();
+		$kpiId = $param["kpiId"];
+		$groupId = Group::currentGroupId();
+		if ($groupId == null) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+		}
+		if (isset($param["kpiHistoryId"])) {
+			$kpiHistoryId = $param["kpiHistoryId"];
+		} else {
+			$kpiHistoryId = 0;
+		}
+		$openTab = array_key_exists("openTab", $param) ? $param["openTab"] : 0;
+		$groupId = Group::currentGroupId();
+		if ($groupId == null) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+		}
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . "&&kpiHistoryId=" . $kpiHistoryId);
+		$kpiDetail = curl_exec($api);
+		$kpiDetail = json_decode($kpiDetail, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$companies = curl_exec($api);
+		$companies = json_decode($companies, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
+		$units = curl_exec($api);
+		$units = json_decode($units, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-summarize?kpiId=' . $kpiId);
+		$kpiTeams = curl_exec($api);
+		$kpiTeams = json_decode($kpiTeams, true);
+
+		curl_close($api);
+		$months = ModelMaster::monthFull(1);
+		$isManager = UserRole::isManager();
+		// throw new Exception(print_r($kpiHistoryId, true));
+		return $this->render('kpi_history', [
+			"role" => $role,
+			"kpiDetail" => $kpiDetail,
+			"kpiId" => $kpiId,
+			"openTab" => $openTab,
+			"months" => $months,
+			"isManager" => $isManager,
+			"units" => $units,
+			"companies" => $companies,
+			"kpiTeams" => $kpiTeams,
+			"kpiHistoryId" => $kpiHistoryId
 		]);
 	}
 	public function actionUpdatePersonalKpi($hash)
