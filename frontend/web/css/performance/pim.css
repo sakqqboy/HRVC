@@ -804,6 +804,12 @@
 	border-bottom-left-radius: 5px;
 }
 
+.border-left-disable {
+	border-left: #C0C0C0 solid 7px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
 .border-bottom-over {
 	border-bottom: #feb1b1 solid thin;
 }
