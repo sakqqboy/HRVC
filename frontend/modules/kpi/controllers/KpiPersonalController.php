@@ -109,6 +109,7 @@ class KpiPersonalController extends Controller
 		$res["status"] = true;
 		return json_encode($res);
 	}
+	
 	public function actionIndividualKpi()
 	{
 		$groupId = Group::currentGroupId();
@@ -230,6 +231,301 @@ class KpiPersonalController extends Controller
 			"waitForApprove" => $waitForApprove
 		]);
 	}
+
+	public function actionKpiIndividualHistory($hash)
+	{
+		$param = ModelMaster::decodeParams($hash);
+		$role = UserRole::userRight();
+		$kpiId = $param["kpiId"];
+		$kpiEmployeeId = $param["kpiEmployeeId"];
+		$groupId = Group::currentGroupId();
+		if ($groupId == null) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+		}
+		if (isset($param["kpiEmployeeHistoryId"])) {
+			$kpiEmployeeHistoryId = $param["kpiEmployeeHistoryId"];
+		} else {
+			$kpiEmployeeHistoryId = 0;
+		}
+		// throw new Exception($kpiEmployeeHistoryId);
+		$openTab = array_key_exists("openTab", $param) ? $param["openTab"] : 0;
+		$groupId = Group::currentGroupId();
+		if ($groupId == null) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+		}
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . "&&kpiHistoryId=" . $kpiEmployeeHistoryId);
+		$kpiDetail = curl_exec($api);
+		$kpiDetail = json_decode($kpiDetail, true);
+		// throw new Exception(print_r($kpiDetail, true));
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$companies = curl_exec($api);
+		$companies = json_decode($companies, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
+		$units = curl_exec($api);
+		$units = json_decode($units, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-summarize?kpiId=' . $kpiId);
+		$kpiTeams = curl_exec($api);
+		$kpiTeams = json_decode($kpiTeams, true);
+
+		curl_close($api);
+		$months = ModelMaster::monthFull(1);
+		$isManager = UserRole::isManager();
+		// throw new Exception(print_r($kpiDetail, true));
+		return $this->render('kpi_individual_history', [
+			"role" => $role,
+			"kpiDetail" => $kpiDetail,
+			"kpiId" => $kpiId,
+			"openTab" => $openTab,
+			"months" => $months,
+			"isManager" => $isManager,
+			"units" => $units,
+			"companies" => $companies,
+			"kpiTeams" => $kpiTeams,
+			"kpiEmployeeHistoryId" => $kpiEmployeeHistoryId,
+			"kpiEmployeeId" => $kpiEmployeeId
+		]);
+	}
+	
+	public function actionAllKpiHistory()
+	{
+		
+		$kpiId = $_POST["kpiId"];
+		$kpiEmployeeId = $_POST["kpiEmployeeId"];
+		$kpiEmployeeHistoryId = $_POST["kpiEmployeeHistoryId"];
+		// return json_encode($kpiId);
+
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/kpi-history?kpiId=' . $kpiId . '&&kpiEmployeeId=' . $kpiEmployeeId .'&&kpiEmployeeHistoryId=' . $kpiEmployeeHistoryId);
+		$history = curl_exec($api);
+		$history = json_decode($history, true);
+
+		// throw new Exception(print_r($history,true));
+		curl_close($api);
+		// return json_encode($history);
+		$monthDetail = [];
+		$summarizeMonth = [];
+		$res["monthlyDetailHistoryText"] = "";
+		if ($kpiEmployeeHistoryId != 0) {
+			$kpiEmployeeHistory = KpiEmployeeHistory::find()
+				->where(["kpiEmployeeHistoryId" => $kpiEmployeeHistoryId])
+				->asArray()
+				->one();
+			$year = $kpiEmployeeHistory["year"];
+			$month = $kpiEmployeeHistory["month"];
+		} else {
+			$year = '';
+			$month = '';
+		}
+		if (isset($history) && count($history) > 0) {
+			//krsort($history);
+			foreach ($history as $kpiHistoryId2 => $ht):
+				if ($year != '' && $month != '' && $ht["year"] <= $year) {
+					if ($ht["year"] == $year) {
+						if ($ht["month"] <= $month) {
+							if (isset($monthDetail[$ht["year"]][$ht["month"]])) {
+								$totalCount = count($monthDetail[$ht["year"]][$ht["month"]]);
+								$monthDetail[$ht["year"]][$ht["month"]][$totalCount] = [
+									"creater" => $ht["creater"],
+									// "title" => $ht["title"],
+									"status" => $ht["status"],
+									"picture" => $ht["picture"],
+									"result" => $ht["result"],
+									"createDateTime" => $ht["createDate"]
+								];
+							} else {
+								$monthDetail[$ht["year"]][$ht["month"]][0] = [
+									"creater" => $ht["creater"],
+									// "title" => $ht["title"],
+									"status" => $ht["status"],
+									"picture" => $ht["picture"],
+									"result" => $ht["result"],
+									"createDateTime" => $ht["createDate"]
+								];
+								$summarizeMonth[$ht["year"]][$ht["month"]] = [
+									"year" => $ht["year"],
+									"month" => ModelMaster::fullMonthText($ht["month"]),
+									"result" => $ht["result"],
+									"target" => $ht["target"],
+									"kpiHistoryId" => $kpiHistoryId2
+
+								];
+							}
+						}
+					}else{
+
+					}
+				} else {
+				if (isset($monthDetail[$ht["year"]][$ht["month"]])) {
+					$totalCount = count($monthDetail[$ht["year"]][$ht["month"]]);
+					$monthDetail[$ht["year"]][$ht["month"]][$totalCount] = [
+						"creater" => $ht["creater"],
+						"title" => $ht["title"],
+						"status" => $ht["status"],
+						"picture" => $ht["picture"],
+						"result" => $ht["result"],
+						"createDateTime" => $ht["createDateTime"]
+					];
+				} else {
+					$monthDetail[$ht["year"]][$ht["month"]][0] = [
+						"creater" => $ht["creater"],
+						"title" => $ht["title"],
+						"status" => $ht["status"],
+						"picture" => $ht["picture"],
+						"result" => $ht["result"],
+						"createDateTime" => $ht["createDateTime"]
+					];
+					$summarizeMonth[$ht["year"]][$ht["month"]] = [
+						"year" => $ht["year"],
+						"month" => ModelMaster::fullMonthText($ht["month"]),
+						"result" => $ht["result"],
+						"target" => $ht["target"],
+						"kpiHistoryId" => $kpiHistoryId2
+
+					];
+				}
+			}
+			endforeach;
+			$res["monthlyDetailHistoryText"] = $this->renderAjax('kpi_update_history', [
+				"monthDetail" => $monthDetail,
+				"summarizeMonth" => $summarizeMonth
+			]);
+		}
+		return json_encode($res);
+	}
+
+
+	public function actionKpiChart()
+	{	
+		$kpiId = $_POST["kpiId"];
+		$kpiEmployeeId = $_POST["kpiEmployeeId"];
+		$kpiEmployeeHistoryId = $_POST["kpiEmployeeHistoryId"];
+
+		// return json_encode($kpiId);
+
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/kpi-history-for-chart?kpiId=' . $kpiId . '&&kpiEmployeeId=' . $kpiEmployeeId .'&&kpiEmployeeHistoryId=' . $kpiEmployeeHistoryId);
+		$history = curl_exec($api);
+		$history = json_decode($history, true);
+		curl_close($api);
+		// throw new Exception(print_r($history,true));
+
+		$monthDetail = [];
+		$summarizeMonth = [];
+		$year = 2024;
+		$months = ModelMaster::month();
+		$monthText = '';
+		$target = [];
+		$targetText = "";
+		$resultText = "";
+		$result = [];
+		//ksort($month);
+		$res["monthlyDetailHistoryText"] = "";
+		if ($kpiEmployeeHistoryId != 0) {
+			$kpiEmployeeHistory = KpiEmployeeHistory::find()
+				->where(["kpiEmployeeHistoryId" => $kpiEmployeeHistoryId])
+				->asArray()
+				->one();
+			$year = $kpiEmployeeHistory["year"];
+			$month = $kpiEmployeeHistory["month"];
+		} else {
+			$year = '';
+			$month = '';
+		}
+		if (isset($history) && count($history) > 0) {
+			$i = 0;
+			foreach ($history as $kpiHistoryId => $ht):
+				if ($year != '' && $month != '' && $ht["year"] <= $year) {
+					if ($ht["year"] == $year) {
+						if ($ht["month"] <= $month) {
+							if (!isset($summarizeMonth[$ht["year"]][$ht["month"]])) {
+								$summarizeMonth[$ht["year"]][$ht["month"]] = [
+									"year" => $ht["year"],
+									"month" => ModelMaster::fullMonthText($ht["month"]),
+									"result" => $ht["result"],
+									"target" => $ht["target"],
+									"kpiHistoryId" => $kpiHistoryId
+								];
+								$summarizeMonth2[$i] = [
+									"year" => $ht["year"],
+									"month" => ModelMaster::fullMonthText($ht["month"]),
+									"result" => $ht["result"],
+									"target" => $ht["target"],
+									"kpiHistoryId" => $kpiHistoryId
+								];
+							}
+						}
+					} else {
+						if (!isset($summarizeMonth[$ht["year"]][$ht["month"]])) {
+							$summarizeMonth[$ht["year"]][$ht["month"]] = [
+								"year" => $ht["year"],
+								"month" => ModelMaster::fullMonthText($ht["month"]),
+								"result" => $ht["result"],
+								"target" => $ht["target"],
+								"kpiHistoryId" => $kpiHistoryId
+							];
+							$summarizeMonth2[$i] = [
+								"year" => $ht["year"],
+								"month" => ModelMaster::fullMonthText($ht["month"]),
+								"result" => $ht["result"],
+								"target" => $ht["target"],
+								"kpiHistoryId" => $kpiHistoryId
+							];
+						}
+					}
+				} else {
+					if (!isset($summarizeMonth[$ht["year"]][$ht["month"]])) {
+						$summarizeMonth[$ht["year"]][$ht["month"]] = [
+							"year" => $ht["year"],
+							"month" => ModelMaster::fullMonthText($ht["month"]),
+							"result" => $ht["result"],
+							"target" => $ht["target"],
+							"kfpHistoryId" => $kpiHistoryId
+						];
+						$summarizeMonth2[$i] = [
+							"year" => $ht["year"],
+							"month" => ModelMaster::fullMonthText($ht["month"]),
+							"result" => $ht["result"],
+							"target" => $ht["target"],
+							"kpiHistoryId" => $kpiHistoryId
+						];
+					}
+				}
+				$i++;
+			endforeach;
+		}
+
+		$summarizeMonth2 = array_slice($summarizeMonth2, -8);
+		foreach ($summarizeMonth2 as $index => $data):
+			$target[$index] = $data["target"];
+			$result[$index] = $data["result"];
+			$targetText .= $target[$index] . ',';
+			$resultText .= $result[$index] . ',';
+			$monthText .= '"' . substr($data["month"], 0, 3) . substr($data["year"], -2) . '",';
+		endforeach;
+		$monthText = substr($monthText, 0, -1);
+		$targetText = substr($targetText, 0, -1);
+		$resultText = substr($resultText, 0, -1);
+		$res["kpiChart"] = $this->renderAjax('kpi_chart', [
+			"month" => $monthText,
+			"target" => $targetText,
+			"result" => $resultText
+		]);
+		return json_encode($res);
+	}
+
 	public function actionUpdatePersonalKpi($hash)
 	{
 		$param = ModelMaster::decodeParams($hash);
