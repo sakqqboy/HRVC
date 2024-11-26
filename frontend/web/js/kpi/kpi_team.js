@@ -60,9 +60,9 @@ function viewTabTeamKpi(kpiTeamHistoryId, kpiTeamId, tabId) {
 			dataType: 'json',
 			url: url,
 			data: {
-				kpiId: kpiId,
-				kpiTeamId: kpiTeamId,
-				kpiHistoryId: kpiTeamHistoryId
+				kpiId: kpiId
+				// kpiTeamId: kpiTeamId,
+				// kpiHistoryId: kpiTeamHistoryId
 			},
 			success: function (data) {
 				$("#show-content").html(data.kpiEmployeeTeam);
@@ -81,6 +81,7 @@ function viewTabTeamKpi(kpiTeamHistoryId, kpiTeamId, tabId) {
 				kpiTeamHistoryId: kpiTeamHistoryId
 			},
 			success: function (data) {
+
 				$("#show-content").html(data.monthlyDetailHistoryText);
 			}
 		});
@@ -92,9 +93,9 @@ function viewTabTeamKpi(kpiTeamHistoryId, kpiTeamId, tabId) {
 			dataType: 'json',
 			url: url,
 			data: {
-				kpiId: kpiId,
-				kpiTeamId: kpiTeamId,
-				kpiHistoryId: kpiTeamHistoryId
+				kpiId: kpiId
+				// kpiTeamId: kpiTeamId,
+				// kpiHistoryId: kpiTeamHistoryId
 			}, success: function (data) {
 				$("#show-content").html(data.kpiIssue);
 			}
@@ -123,9 +124,9 @@ function viewTabTeamKpi(kpiTeamHistoryId, kpiTeamId, tabId) {
 			dataType: 'json',
 			url: url,
 			data: {
-				kpiId: kpiId,
-				kpiTeamId: kpiTeamId,
-				kpiHistoryId: kpiTeamHistoryId
+				kpiId: kpiId
+				// kpiTeamId: kpiTeamId,
+				// kpiHistoryId: kpiTeamHistoryId
 			}, success: function (data) {
 				$("#show-content").html(data.kgi);
 			}

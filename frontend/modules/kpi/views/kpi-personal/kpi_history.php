@@ -229,39 +229,35 @@ $this->title = 'KPI View';
                 <div class="col-lg-7">
                     <div class="row">
                         <div class="col-2  view-tab-active" id="tab-1"
-                            onclick="javascript:viewTabEmployeeKpi(<?= $kpiEmployeeHistoryId ?>,<?= $kpiEmployeeId ?>,1)">
+                            onclick="javascript:viewTabKpi(<?= $kpiHistoryId ?>,1)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-blue.png" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-1-blue">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.png" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-1-black">
                             Assigned
                         </div>
-                        <div class="col-3  view-tab" id="tab-2"
-                            onclick="javascript:viewTabEmployeeKpi(<?= $kpiEmployeeHistoryId ?>,<?= $kpiEmployeeId ?>,2)">
+                        <div class="col-3  view-tab" id="tab-2" onclick="javascript:viewTabKpi(<?= $kpiHistoryId ?>,2)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.png" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-2-black">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-blue.png" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-2-blue">
                             Update History
                         </div>
-                        <div class="col-2  view-tab" id="tab-3"
-                            onclick="javascript:viewTabEmployeeKpi(<?= $kpiEmployeeHistoryId ?>,<?= $kpiEmployeeId ?>,3)">
+                        <div class="col-2  view-tab" id="tab-3" onclick="javascript:viewTabKpi(<?= $kpiHistoryId ?>,3)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-3-black">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment-blue.png" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-3-blue">
                             Chats
                         </div>
-                        <div class="col-2  view-tab" id="tab-4"
-                            onclick="javascript:viewTabEmployeeKpi(<?= $kpiEmployeeHistoryId ?>,<?= $kpiEmployeeId ?>,4)">
+                        <div class="col-2  view-tab" id="tab-4" onclick="javascript:viewTabKpi(<?= $kpiHistoryId ?>,4)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-4-black">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart-blue.png" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-4-blue">
                             Chart
                         </div>
-                        <div class="col-3  view-tab" id="tab-5"
-                            onclick="javascript:viewTabEmployeeKpi(<?= $kpiEmployeeHistoryId ?>,<?= $kpiEmployeeId ?>,5)">
+                        <div class="col-3  view-tab" id="tab-5" onclick="javascript:viewTabKpi(<?= $kpiHistoryId ?>,5)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate.png" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-5-black">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate-blue.png" alt="History"
@@ -392,11 +388,9 @@ $form = ActiveForm::begin([
 window.onload = function() {
     let openTab = <?php echo json_encode($openTab); ?>; // PHP value passed to JavaScript
     if (openTab) {
-        viewTabEmployeeKpi(<?= $kpiEmployeeHistoryId ?>,
-        <?= $kpiEmployeeId ?> openTab); // Set the tab based on the PHP value
+        viewTabKpi(<?= $kpiHistoryId ?>, openTab); // Set the tab based on the PHP value
     } else {
-        viewTabEmployeeKpi(<?= $kpiEmployeeHistoryId ?>,
-        <?= $kpiEmployeeId ?> 1); // Default to tab 1 if no value is passed
+        viewTabKpi(<?= $kpiHistoryId ?>, 1); // Default to tab 1 if no value is passed
     }
 }
 </script>

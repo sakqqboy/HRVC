@@ -278,17 +278,16 @@ class KpiTeamController extends Controller
 		$kpiId = $_POST["kpiId"];
 		$kpiTeamId = $_POST["kpiTeamId"];
 		
-
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-history-for-chart?kpiId=' . $kpiId . '&&kpiTeamId=' . $kpiTeamId .'&&kpiTeamHistoryId=' . $kpiTeamHistoryId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-history?kpiId=' . $kpiId . '&&kpiTeamId=' . $kpiTeamId .'&&kpiTeamHistoryId=' . $kpiTeamHistoryId);
 		$history = curl_exec($api);
 		$history = json_decode($history, true);
 		  //throw new Exception(print_r($history,true));
 		curl_close($api);
-		// return json_encode($history);
+		//eturn json_encode($history);
 		$monthDetail = [];
 		$summarizeMonth = [];
 		$res["monthlyDetailHistoryText"] = "";
@@ -396,7 +395,7 @@ class KpiTeamController extends Controller
 		$history = json_decode($history, true);
 		curl_close($api);
 		// throw new Exception($kpiTeamHistoryId);
-		// throw new Exception(print_r($kpiTeamHistoryId,true));
+		// throw new Exception(print_r($history,true));
 		$monthDetail = [];
 		$summarizeMonth = [];
 		$year = 2024;

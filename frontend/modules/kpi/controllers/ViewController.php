@@ -164,7 +164,7 @@ class ViewController extends Controller
 				}
 			}
 		}
-//   throw new Exception(print_r($kpiDetail,true));
+//   throw new Exception(print_r($kpiEmployeeHistory,true));
 		curl_close($api);
 		return $this->render('kpi_employee_history', [
 			"role" => $role,

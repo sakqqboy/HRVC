@@ -239,7 +239,7 @@ $this->title = 'KPI View';
                 <div class="col-lg-7">
                     <div class="row">
                         <div class="col-2  view-tab-active" id="tab-1"
-                            onclick="javascript:viewTabTeamKpi(<?= $kpiTeamHistoryId ?>,<?= $kpiTeamId ?>,1)">
+                            onclick="javascript:viewTabTeamKpi(<?= $kpiTeamHistoryId ?>,<?= $kpiId ?>,1)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-blue.png" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-1-blue">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.png" alt="History"
@@ -247,7 +247,7 @@ $this->title = 'KPI View';
                             Assigned
                         </div>
                         <div class="col-3  view-tab" id="tab-2"
-                            onclick="javascript:viewTabTeamKpi(<?= $kpiTeamHistoryId ?>,<?= $kpiTeamId ?>,2)">
+                            onclick="javascript:viewTabTeamKpi(<?= $kpiTeamHistoryId ?>, <?= $kpiTeamId ?>,2)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.png" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-2-black">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-blue.png" alt="History"
@@ -255,7 +255,7 @@ $this->title = 'KPI View';
                             Update History
                         </div>
                         <div class="col-2  view-tab" id="tab-3"
-                            onclick="javascript:viewTabTeamKpi(<?= $kpiTeamHistoryId ?>,<?= $kpiTeamId ?>,3)">
+                            onclick="javascript:viewTabTeamKpi(<?= $kpiTeamHistoryId ?>, <?= $kpiTeamId ?>,3)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-3-black">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment-blue.png" alt="History"
@@ -263,7 +263,7 @@ $this->title = 'KPI View';
                             Chats
                         </div>
                         <div class="col-2  view-tab" id="tab-4"
-                            onclick="javascript:viewTabTeamKpi(<?= $kpiTeamHistoryId ?>,<?= $kpiTeamId ?>,4)">
+                            onclick="javascript:viewTabTeamKpi(<?= $kpiTeamHistoryId ?>, <?= $kpiTeamId ?>,4)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-4-black">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart-blue.png" alt="History"
@@ -271,7 +271,7 @@ $this->title = 'KPI View';
                             Chart
                         </div>
                         <div class="col-3  view-tab" id="tab-5"
-                            onclick="javascript:viewTabTeamKpi(<?= $kpiTeamHistoryId ?>,<?= $kpiTeamId ?>,5)">
+                            onclick="javascript:viewTabTeamKpi(<?= $kpiTeamHistoryId ?>, <?= $kpiTeamId ?>,5)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate.png" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-5-black">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate-blue.png" alt="History"
