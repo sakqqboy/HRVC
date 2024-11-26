@@ -327,7 +327,6 @@ class KpiPersonalController extends Controller
 			$month = '';
 		}
 		if (isset($history) && count($history) > 0) {
-			//krsort($history);
 			foreach ($history as $kpiHistoryId2 => $ht):
 				if ($year != '' && $month != '' && $ht["year"] <= $year) {
 					if ($ht["year"] == $year) {
@@ -339,7 +338,7 @@ class KpiPersonalController extends Controller
 									// "title" => $ht["title"],
 									"status" => $ht["status"],
 									"picture" => $ht["picture"],
-									"result" => $ht["result"],
+									"result" => $ht["result"] ?? 0, // ใช้ค่าเริ่มต้นเป็น 0
 									"createDateTime" => $ht["createDate"]
 								];
 							} else {
@@ -348,58 +347,54 @@ class KpiPersonalController extends Controller
 									// "title" => $ht["title"],
 									"status" => $ht["status"],
 									"picture" => $ht["picture"],
-									"result" => $ht["result"],
+									"result" => $ht["result"] ?? 0,
 									"createDateTime" => $ht["createDate"]
 								];
 								$summarizeMonth[$ht["year"]][$ht["month"]] = [
 									"year" => $ht["year"],
 									"month" => ModelMaster::fullMonthText($ht["month"]),
-									"result" => $ht["result"],
-									"target" => $ht["target"],
+									"result" => $ht["result"] ?? 0,
+									"target" => $ht["target"] ?? 0, // ใช้ค่าเริ่มต้นเป็น 0
 									"kpiHistoryId" => $kpiHistoryId2
-
 								];
 							}
 						}
-					}else{
-
 					}
 				} else {
-				if (isset($monthDetail[$ht["year"]][$ht["month"]])) {
-					$totalCount = count($monthDetail[$ht["year"]][$ht["month"]]);
-					$monthDetail[$ht["year"]][$ht["month"]][$totalCount] = [
-						"creater" => $ht["creater"],
-						"title" => $ht["title"],
-						"status" => $ht["status"],
-						"picture" => $ht["picture"],
-						"result" => $ht["result"],
-						"createDateTime" => $ht["createDateTime"]
-					];
-				} else {
-					$monthDetail[$ht["year"]][$ht["month"]][0] = [
-						"creater" => $ht["creater"],
-						"title" => $ht["title"],
-						"status" => $ht["status"],
-						"picture" => $ht["picture"],
-						"result" => $ht["result"],
-						"createDateTime" => $ht["createDateTime"]
-					];
-					$summarizeMonth[$ht["year"]][$ht["month"]] = [
-						"year" => $ht["year"],
-						"month" => ModelMaster::fullMonthText($ht["month"]),
-						"result" => $ht["result"],
-						"target" => $ht["target"],
-						"kpiHistoryId" => $kpiHistoryId2
-
-					];
+					if (isset($monthDetail[$ht["year"]][$ht["month"]])) {
+						$totalCount = count($monthDetail[$ht["year"]][$ht["month"]]);
+						$monthDetail[$ht["year"]][$ht["month"]][$totalCount] = [
+							"creater" => $ht["creater"],
+							"title" => $ht["title"],
+							"status" => $ht["status"],
+							"picture" => $ht["picture"],
+							"result" => $ht["result"] ?? 0,
+							"createDateTime" => $ht["createDateTime"]
+						];
+					} else {
+						$monthDetail[$ht["year"]][$ht["month"]][0] = [
+							"creater" => $ht["creater"],
+							"title" => $ht["title"],
+							"status" => $ht["status"],
+							"picture" => $ht["picture"],
+							"result" => $ht["result"] ?? 0,
+							"createDateTime" => $ht["createDateTime"]
+						];
+						$summarizeMonth[$ht["year"]][$ht["month"]] = [
+							"year" => $ht["year"],
+							"month" => ModelMaster::fullMonthText($ht["month"]),
+							"result" => $ht["result"] ?? 0,
+							"target" => $ht["target"] ?? 0,
+							"kpiHistoryId" => $kpiHistoryId2
+						];
+					}
 				}
-			}
 			endforeach;
 			$res["monthlyDetailHistoryText"] = $this->renderAjax('kpi_update_history', [
 				"monthDetail" => $monthDetail,
 				"summarizeMonth" => $summarizeMonth
 			]);
-		}
+		}		
 		return json_encode($res);
 	}
 
@@ -454,15 +449,15 @@ class KpiPersonalController extends Controller
 								$summarizeMonth[$ht["year"]][$ht["month"]] = [
 									"year" => $ht["year"],
 									"month" => ModelMaster::fullMonthText($ht["month"]),
-									"result" => $ht["result"],
-									"target" => $ht["target"],
+									"result" => $ht["result"] ?? 0, // ใช้ค่าเริ่มต้นเป็น 0
+									"target" => $ht["target"] ?? 0, // ใช้ค่าเริ่มต้นเป็น 0
 									"kpiHistoryId" => $kpiHistoryId
 								];
 								$summarizeMonth2[$i] = [
 									"year" => $ht["year"],
 									"month" => ModelMaster::fullMonthText($ht["month"]),
-									"result" => $ht["result"],
-									"target" => $ht["target"],
+									"result" => $ht["result"] ?? 0,
+									"target" => $ht["target"] ?? 0,
 									"kpiHistoryId" => $kpiHistoryId
 								];
 							}
@@ -472,15 +467,15 @@ class KpiPersonalController extends Controller
 							$summarizeMonth[$ht["year"]][$ht["month"]] = [
 								"year" => $ht["year"],
 								"month" => ModelMaster::fullMonthText($ht["month"]),
-								"result" => $ht["result"],
-								"target" => $ht["target"],
+								"result" => $ht["result"] ?? 0,
+								"target" => $ht["target"] ?? 0,
 								"kpiHistoryId" => $kpiHistoryId
 							];
 							$summarizeMonth2[$i] = [
 								"year" => $ht["year"],
 								"month" => ModelMaster::fullMonthText($ht["month"]),
-								"result" => $ht["result"],
-								"target" => $ht["target"],
+								"result" => $ht["result"] ?? 0,
+								"target" => $ht["target"] ?? 0,
 								"kpiHistoryId" => $kpiHistoryId
 							];
 						}
@@ -490,22 +485,22 @@ class KpiPersonalController extends Controller
 						$summarizeMonth[$ht["year"]][$ht["month"]] = [
 							"year" => $ht["year"],
 							"month" => ModelMaster::fullMonthText($ht["month"]),
-							"result" => $ht["result"],
-							"target" => $ht["target"],
-							"kfpHistoryId" => $kpiHistoryId
+							"result" => $ht["result"] ?? 0,
+							"target" => $ht["target"] ?? 0,
+							"kfpHistoryId" => $kpiHistoryId // หมายเหตุ: ตรวจสอบตัวแปรนี้ เนื่องจากชื่อไม่ตรงกันในบางจุด
 						];
 						$summarizeMonth2[$i] = [
 							"year" => $ht["year"],
 							"month" => ModelMaster::fullMonthText($ht["month"]),
-							"result" => $ht["result"],
-							"target" => $ht["target"],
+							"result" => $ht["result"] ?? 0,
+							"target" => $ht["target"] ?? 0,
 							"kpiHistoryId" => $kpiHistoryId
 						];
 					}
 				}
 				$i++;
 			endforeach;
-		}
+		}		
 
 		$summarizeMonth2 = array_slice($summarizeMonth2, -8);
 		foreach ($summarizeMonth2 as $index => $data):

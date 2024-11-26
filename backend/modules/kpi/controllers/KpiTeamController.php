@@ -216,6 +216,7 @@ class KpiTeamController extends Controller
 					->asArray()
 					->orderBy('createDateTime DESC')
 					->one();
+					
 				if (!isset($kpiTeamHistory) || empty($kpiTeamHistory)) {
 					$kpiTeamHistory = KpiTeam::find()
 						->where(["kpiTeamId" => $kpiTeam["kpiTeamId"]])
@@ -277,6 +278,7 @@ class KpiTeamController extends Controller
 					"periodCheck" => ModelMaster::engDate(KpiTeam::lastestCheckDate($kpiTeam["kpiTeamId"]), 2), //lastest check date
 					"nextCheckDate" =>  ModelMaster::engDate($kpiTeamHistory["nextCheckDate"], 2),
 					"status" => $kpiTeamHistory["status"],
+					"kpiTeamHistoryId" => $kpiTeamHistory["kpiTeamHistoryId"] ?? 0,
 					"flag" => Country::countryFlagBycompany($kpiTeam["companyId"]),
 					"countryName" => Country::countryNameBycompany($kpiTeam['companyId']),
 					"kpiEmployee" => KpiEmployee::kpiEmployee($kpiTeam["kpiId"]),
@@ -618,6 +620,7 @@ class KpiTeamController extends Controller
 					"periodCheck" => ModelMaster::engDate(KpiTeam::lastestCheckDate($kpiTeam["kpiTeamId"]), 2),
 					"nextCheckDate" =>  ModelMaster::engDate($kpiTeamHistory["nextCheckDate"], 2),
 					"status" => $kpiTeamHistory["status"],
+					"kpiTeamHistoryId" => $kpiTeamHistory["kpiTeamHistoryId"] ?? 0,
 					"flag" => Country::countryFlagBycompany($kpiTeam["companyId"]),
 					"countryName" => Country::countryNameBycompany($kpiTeam['companyId']),
 					"kpiEmployee" => KpiEmployee::kpiEmployee($kpiTeam["kpiId"]),

@@ -393,10 +393,10 @@ window.onload = function() {
     let openTab = <?php echo json_encode($openTab); ?>; // PHP value passed to JavaScript
     if (openTab) {
         viewTabEmployeeKpi(<?= $kpiEmployeeHistoryId ?>,
-        <?= $kpiEmployeeId ?> openTab); // Set the tab based on the PHP value
+            <?= $kpiEmployeeId ?>, openTab); // Set the tab based on the PHP value
     } else {
         viewTabEmployeeKpi(<?= $kpiEmployeeHistoryId ?>,
-        <?= $kpiEmployeeId ?> 1); // Default to tab 1 if no value is passed
+            <?= $kpiEmployeeId ?>, 1); // Default to tab 1 if no value is passed
     }
 }
 </script>

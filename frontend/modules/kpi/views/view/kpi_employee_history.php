@@ -234,7 +234,7 @@ $this->title = 'Self KPI History';
                                 </div>
                                 <div class="col-12 mt-6 mb-6 border-bottom-<?= $colorFormat ?>">
                                 </div>
-                                <div class="col-12  pr-0 mt-2 text-end">update Interval</div>
+                                <div class="col-12  pr-0 mt-2 text-end">Update Interval</div>
                                 <div class="col-12   pim-duedate text-end"><b>
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/monthly.svg"
                                             class="pim-iconKFI" style="margin-top: -3px; margin-left: 3px;">
@@ -252,7 +252,7 @@ $this->title = 'Self KPI History';
                                         </div>
                                     </div>
                                     <div class="col-lg-6 border-left">
-                                        <div class="col-12 text-center">update Interval</div>
+                                        <div class="col-12 text-center">Update Interval</div>
                                         <div class="col-12 font-size-9 text-center mt-1"><b>
                                                 <?= $kpi["unit"] ?>
                                             </b>
