@@ -9,7 +9,7 @@ use frontend\models\hrvc\UserRole;
         <div class="col-12 pl-5 pr-8 pt-20 text-center">
                 <a href="<?= Yii::$app->homeUrl ?>site/index">
                         <div class="col-12">
-                                <img src="<?= Yii::$app->homeUrl ?>image/logo-hrvc-text.png" class="hrvc-logo">
+                                <img src="<?= Yii::$app->homeUrl ?>image/logo-hrvc-text.svg">
                         </div>
                 </a>
         </div>

@@ -622,7 +622,7 @@ class KgiPersonalController extends Controller
 		$res["kgiEmployee"] = $kgiEmployeeDetail;
 		$isManager = UserRole::isManager();
 		$months = ModelMaster::monthFull(1);
-		//throw new exception($kgiEmployeeHistoryId);
+		//throw new exception(print_r($kgiEmployeeDetail, true));
 		return $this->render('kgi_employee_history', [
 			"role" => $role,
 			"kgiEmployeeDetail" => $kgiEmployeeDetail,

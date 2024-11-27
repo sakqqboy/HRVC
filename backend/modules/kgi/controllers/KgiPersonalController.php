@@ -241,7 +241,7 @@ class KgiPersonalController extends Controller
 			$employee = Employee::EmployeeDetail($employeeId);
 			$data = [
 				"kgiName" => $kgiDetail["kgiName"],
-				"monthName" => ModelMaster::monthEng($kgiDetail['month'], 1),
+				"monthName" => ModelMaster::monthEng($kgiEmployee['month'], 1),
 				"priority" => $kgiDetail["priority"],
 				"quantRatio" => $kgiDetail["quantRatio"],
 				"amountType" => $kgiDetail["amountType"],
