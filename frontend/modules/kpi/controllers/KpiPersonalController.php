@@ -253,14 +253,21 @@ class KpiPersonalController extends Controller
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
+		// $api = curl_init();
+		// curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		// curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . "&&kpiHistoryId=" . $kpiEmployeeHistoryId);
+		// $kpiDetail = curl_exec($api);
+		// $kpiDetail = json_decode($kpiDetail, true);
+		// throw new Exception(print_r($kpiDetail, true));
+
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/kpi-employee-detail?kpiEmployeeId=' . $kpiEmployeeId . '&&kpiEmployeeHistoryId=' . $kpiEmployeeHistoryId);
+		$kpiEmployeeDetail = curl_exec($api);
+		$kpiEmployeeDetail = json_decode($kpiEmployeeDetail, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . "&&kpiHistoryId=" . $kpiEmployeeHistoryId);
-		$kpiDetail = curl_exec($api);
-		$kpiDetail = json_decode($kpiDetail, true);
-		// throw new Exception(print_r($kpiDetail, true));
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$companies = curl_exec($api);
@@ -273,14 +280,15 @@ class KpiPersonalController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-summarize?kpiId=' . $kpiId);
 		$kpiTeams = curl_exec($api);
 		$kpiTeams = json_decode($kpiTeams, true);
+		
 
 		curl_close($api);
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
-		// throw new Exception(print_r($kpiDetail, true));
+		// throw new Exception(print_r($kpiEmployeeHistoryId, true));
 		return $this->render('kpi_individual_history', [
 			"role" => $role,
-			"kpiDetail" => $kpiDetail,
+			"kpiEmployeeDetail" => $kpiEmployeeDetail,
 			"kpiId" => $kpiId,
 			"openTab" => $openTab,
 			"months" => $months,
