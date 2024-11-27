@@ -36,18 +36,31 @@ $this->title = 'Self KGI View';
 		?>
 			<div class="alert mt-10 pim-body bg-white">
 				<div class="row">
-					<div class="col-9 pim-name-detail pr-0 pl-5 text-start">
+					<div class="col-7 pim-name-detail pr-0 pl-5 text-start">
 						<a href="<?= isset(Yii::$app->request->referrer) ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi-grid' ?>" class="mr-5 font-size-12">
 							<i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
 							Back
 						</a>
 						<?= $kgiEmployeeDetail["kgiName"] ?>
 					</div>
-					<div class="col-3 text-end">
+					<div class="col-5 text-end">
+						<?php
+						if (!isset($kgiEmployeeDetail["picture"]) || $kgiEmployeeDetail["picture"] != "") {
+							$kgiEmployeeDetail["picture"] = 'image/user.svg';
+						}
+						?>
 						<span class="team-wrapper <?= $colorFormat ?>-teamshow"
 							style="margin-right: 5px; padding-right: 5px;">
 							<span class="team-icon pim-team-<?= $colorFormat ?>">
 								<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $colorFormat == 'disable' ? 'teamblack' : 'teamwhite' ?>.svg"
+									alt="Team Icon">
+							</span>
+							<span class="team-name"><?= $kgiEmployeeDetail["teamName"] ?></span>
+						</span>
+						<span class="team-wrapper <?= $colorFormat ?>-teamshow"
+							style="margin-right: 5px; padding-right: 5px;">
+							<span class="team-icon pim-team-<?= $colorFormat ?>">
+								<img src="<?= Yii::$app->homeUrl ?><?= $kgiEmployeeDetail['picture'] ?>"
 									alt="Team Icon">
 							</span>
 							<span class="team-name"><?= $kgiEmployeeDetail["employeeName"] ?></span>
