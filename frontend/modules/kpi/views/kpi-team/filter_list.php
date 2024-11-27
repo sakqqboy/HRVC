@@ -9,7 +9,7 @@ use frontend\models\hrvc\Team;
 <div class="row">
     <!-- <div class="col-1 pr-10 text-end">
         <span>
-            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterPlus.png" class="pim-search-icon"
+            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterPlus.svg" class="pim-search-icon"
                 style="cursor: pointer;" onclick="javascript:kpiFilterForTeam()">
         </span>
     </div> -->

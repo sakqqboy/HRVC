@@ -7,7 +7,7 @@ $this->title = 'KFI';
 ?>
 <div class="col-12">
     <div class="col-12">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.png" class="home-icon mr-5"
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
             style="margin-top: -3px;">
         <strong class="pim-head-text"> Performance Indicator Matrices (PIM)</strong>
     </div>
@@ -193,19 +193,19 @@ $this->title = 'KFI';
                                         <!-- <span data-bs-toggle="modal" data-bs-target="#kfi-issue"
                                         onclick="javascript:showKfiComment(<?= $kfiId ?>)"
                                         class="btn btn-bg-white-xs pr-2 pl-2 pt-1 pb-1">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.png"
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.svg"
                                             class="icon-table on-cursor">
                                     </span> -->
 
                                         <a href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(['kfiId' => $kfiId]) ?>"
                                             class="btn btn-bg-white-xs mr-5" style="margin-top: -1px;">
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.png"
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/eye.svg"
                                                 alt="History" class="pim-icon" style="margin-top: -1px;">
                                         </a>
 
                                         <span class="dropdown" href="#" id="dropdownMenuLink-<?= $kfiId ?>"
                                             data-bs-toggle="dropdown">
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.png"
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.svg"
                                                 class="icon-table on-cursor">
                                         </span>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kfiId ?>">
@@ -235,7 +235,7 @@ $this->title = 'KFI';
                                                 <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                     href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, 'openTab' => 4]) ?>"
                                                     class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
-                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png"
+                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg"
                                                         alt="Chart" class="pim-icon mr-10" style="margin-top: -2px;">
                                                     Chart
                                                 </a>

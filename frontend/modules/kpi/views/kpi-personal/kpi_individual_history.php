@@ -83,9 +83,11 @@ $this->title = 'KPI View';
                         </div>
                         <div class="col-6">
                             <div class="row">
-                                <div class="col-4 month-<?= $colorFormat ?> pt-2">Term</div>
+                                <div class="col-4 month-<?= $colorFormat ?> pt-2">
+                                    <?= $kpiEmployeeDetail['monthName'] ?? 'Term' ?>
+                                </div>
                                 <div class="col-8 term-<?= $colorFormat ?>  pt-2">
-                                    <?= $kpiEmployeeDetail['fromDate'] == "" ? 'Not set' : $kpiEmployeeDetail['fromDate'] ?>
+                                    <?= $kpiEmployeeDetail['fromDate'] == "" ? 'Not set' : $kpiEmployeeDetail['monthName'] ?>
                                     &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
                                     <?= $kpiEmployeeDetail['toDate'] == "" ? 'Not set' : $kpiEmployeeDetail['toDate'] ?>
                                 </div>

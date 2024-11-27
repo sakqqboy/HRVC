@@ -55,7 +55,7 @@
 
     <!-- <div class="col-2 pr-10 text-end">
         <span class="font-size-12 buttom-pim">
-            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterPlus.png" class="pim-search-icon"
+            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterPlus.svg" class="pim-search-icon"
                 style="cursor: pointer;" onclick="javascript:kfiFilter()">
         </span>
     </div> -->

@@ -549,6 +549,7 @@ class KpiTeamController extends Controller
 		 		"codeText" => $kpiTeamHistory["code"] . ' &nbsp;(' . Kgi::codeDetail($kpiTeamHistory["code"]) . ')',
 				"code" => $kpiTeamHistory["code"],
 				"month" =>  $kpiTeamHistory['month'],
+				"monthName" => ModelMaster::monthEng($kpiTeamHistory['month'], 1),
 				"year" => $kpiTeamHistory['year'],
 				"fromDate" => $kpiTeamHistory["fromDate"],
 				"toDate" => $kpiTeamHistory["toDate"],

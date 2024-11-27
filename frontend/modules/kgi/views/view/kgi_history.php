@@ -10,7 +10,7 @@ $this->title = 'KGI View';
 <div class="col-12">
 
     <div class="col-12">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.png" class="home-icon mr-5"
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
             style="margin-top: -3px;">
         <strong class="pim-head-text"> Performance Indicator Matrices (PIM)</strong>
     </div>
@@ -88,22 +88,22 @@ $this->title = 'KGI View';
                                             <?php
                                             if ($kgiDetail["priority"] == "A" || $kgiDetail["priority"] == "B") {
                                             ?>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
                                             <?php
                                             }
                                             if ($kgiDetail["priority"] == "A" || $kgiDetail["priority"] == "C") {
                                             ?>
-                                                <i class="fa fa-star big-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star big-star" aria-hidden="true"></i>
                                             <?php
                                             }
                                             if ($kgiDetail["priority"] == "B") {
                                             ?>
-                                                <i class="fa fa-star ml-10" aria-hidden="true"></i>
+                                            <i class="fa fa-star ml-10" aria-hidden="true"></i>
                                             <?php
                                             }
                                             if ($kgiDetail["priority"] == "A") {
                                             ?>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
                                             <?php
                                             }
                                             ?>
@@ -204,11 +204,11 @@ $this->title = 'KGI View';
                                         <?php
                                         if ($role > 3  && $kgiDetail["status"] == 1) {
                                         ?>
-                                            <div onclick="javascript:updateKgi(<?= $kgiId ?>,<?= $kgiHistoryId ?>)"
-                                                class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
-                                                data-bs-target="#update-kgi-modal">
-                                                <i class="fa fa-refresh" aria-hidden="true"></i> Update
-                                            </div>
+                                        <div onclick="javascript:updateKgi(<?= $kgiId ?>,<?= $kgiHistoryId ?>)"
+                                            class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
+                                            data-bs-target="#update-kgi-modal">
+                                            <i class="fa fa-refresh" aria-hidden="true"></i> Update
+                                        </div>
                                         <?php
                                         }
                                         ?>
@@ -230,38 +230,39 @@ $this->title = 'KGI View';
                 </div>
                 <div class="col-lg-7">
                     <div class="row">
-                        <div class="col-2  view-tab-active" id="tab-1" onclick="javascript:viewTabKgi(<?= $kgiHistoryId ?>,1)">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-blue.png" alt="History"
+                        <div class="col-2  view-tab-active" id="tab-1"
+                            onclick="javascript:viewTabKgi(<?= $kgiHistoryId ?>,1)">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-blue.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-1-blue">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.png" alt="History"
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-1-black">
                             Assigned
                         </div>
                         <div class="col-3  view-tab" id="tab-2" onclick="javascript:viewTabKgi(<?= $kgiHistoryId ?>,2)">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.png" alt="History"
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-black.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-2-black">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-blue.png" alt="History"
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-blue.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-2-blue">
                             Update History
                         </div>
                         <div class="col-2  view-tab" id="tab-3" onclick="javascript:viewTabKgi(<?= $kgiHistoryId ?>,3)">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png" alt="History"
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-3-black">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment-blue.png" alt="History"
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment-blue.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-3-blue">
                             Chats
                         </div>
                         <div class="col-2  view-tab" id="tab-4" onclick="javascript:viewTabKgi(<?= $kgiHistoryId ?>,4)">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="History"
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-4-black">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart-blue.png" alt="History"
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart-blue.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-4-blue">
                             Chart
                         </div>
                         <div class="col-3  view-tab" id="tab-5" onclick="javascript:viewTabKgi(<?= $kgiHistoryId ?>,5)">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate.png" alt="History"
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-5-black">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate-blue.png" alt="History"
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate-blue.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-5-blue">
                             Relate KPI
                         </div>
@@ -300,12 +301,12 @@ $form = ActiveForm::begin([
 
 
 <script>
-    window.onload = function() {
-        let openTab = <?= $openTab ?>; // PHP value passed to JavaScript
-        if (openTab) {
-            viewTabKgi(<?= $kgiHistoryId ?>, openTab); // Set the tab based on the PHP value
-        } else {
-            viewTabKgi(<?= $kgiHistoryId ?>, 1); // Default to tab 1 if no value is passed
-        }
+window.onload = function() {
+    let openTab = <?= $openTab ?>; // PHP value passed to JavaScript
+    if (openTab) {
+        viewTabKgi(<?= $kgiHistoryId ?>, openTab); // Set the tab based on the PHP value
+    } else {
+        viewTabKgi(<?= $kgiHistoryId ?>, 1); // Default to tab 1 if no value is passed
     }
+}
 </script>

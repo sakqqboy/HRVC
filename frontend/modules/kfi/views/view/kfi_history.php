@@ -10,7 +10,7 @@ $this->title = 'KFI View';
 <div class="col-12">
 
     <div class="col-12">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.png" class="home-icon mr-5"
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
             style="margin-top: -3px;">
         <strong class="pim-head-text"> Performance Indicator Matrices (PIM)</strong>
     </div>
@@ -21,7 +21,8 @@ $this->title = 'KFI View';
         <div class="alert mt-10 pim-body bg-white">
             <div class="row">
                 <div class="col-11 pim-name-detail pr-0 pl-5 pt-2  text-start">
-                    <a href="<?= Yii::$app->request->referrer ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kfi/management/grid' ?>" class="mr-5 font-size-12">
+                    <a href="<?= Yii::$app->request->referrer ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kfi/management/grid' ?>"
+                        class="mr-5 font-size-12">
                         <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
                         Back
                     </a>
@@ -172,11 +173,11 @@ $this->title = 'KFI View';
                                         <?php
                                         if ($role > 3  && $kfiDetail["status"] == 1) {
                                         ?>
-                                            <div onclick="javascript:updateKfi(<?= $kfiId ?>)"
-                                                class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
-                                                data-bs-target="#update-kfi-modal">
-                                                <i class="fa fa-refresh" aria-hidden="true"></i> Update
-                                            </div>
+                                        <div onclick="javascript:updateKfi(<?= $kfiId ?>)"
+                                            class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
+                                            data-bs-target="#update-kfi-modal">
+                                            <i class="fa fa-refresh" aria-hidden="true"></i> Update
+                                        </div>
                                         <?php
                                         }
                                         ?>
@@ -198,31 +199,32 @@ $this->title = 'KFI View';
                 </div>
                 <div class="col-lg-7">
                     <div class="row">
-                        <div class="col-2  view-tab-active" id="tab-1" onclick="javascript:viewTabKfi(<?= $kfiHistoryId ?>,1)">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-blue.png" alt="History"
+                        <div class="col-2  view-tab-active" id="tab-1"
+                            onclick="javascript:viewTabKfi(<?= $kfiHistoryId ?>,1)">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-blue.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-1-blue">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.png" alt="History"
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-1-black">
                             Assigned
                         </div>
                         <div class="col-3  view-tab" id="tab-2" onclick="javascript:viewTabKfi(<?= $kfiHistoryId ?>,2)">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.png" alt="History"
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-black.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-2-black">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-blue.png" alt="History"
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-blue.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-2-blue">
                             Update History
                         </div>
                         <!-- <div class="col-2  view-tab" id="tab-3" onclick="javascript:viewTabKfi(3)">
 							<img src="<?php //Yii::$app->homeUrl 
-                                        ?>images/icons/Settings/comment.png" alt="History" class="pim-icon mr-5" style="margin-top: -2px;" id="tab-3-black">
+                                        ?>images/icons/Settings/comment.svg" alt="History" class="pim-icon mr-5" style="margin-top: -2px;" id="tab-3-black">
 							<img src="<?php //Yii::$app->homeUrl 
-                                        ?>images/icons/Settings/comment-blue.png" alt="History" class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-3-blue">
+                                        ?>images/icons/Settings/comment-blue.svg" alt="History" class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-3-blue">
 							Chats
 						</div> -->
                         <div class="col-3 view-tab" id="tab-4" onclick="viewTabKfi(<?= $kfiHistoryId ?>,4)">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="History"
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-4-black">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart-blue.png" alt="History"
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart-blue.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px; display: none;" id="tab-4-blue">
                             Chart
                         </div>
@@ -230,9 +232,9 @@ $this->title = 'KFI View';
 
 
                         <div class="col-4  view-tab" id="tab-5" onclick="javascript:viewTabKfi(<?= $kfiHistoryId ?>,5)">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate.png" alt="History"
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-5-black">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate-blue.png" alt="History"
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate-blue.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-5-blue">
                             Relate KGI
                         </div>
@@ -271,12 +273,12 @@ $form = ActiveForm::begin([
 <?= $this->render('modal_employee_history') ?>
 
 <script>
-    window.onload = function() {
-        let openTab = <?= $openTab ?>; // PHP value passed to JavaScript
-        if (openTab) {
-            viewTabKfi(<?= $kfiHistoryId ?>, openTab); // Set the tab based on the PHP value
-        } else {
-            viewTabKfi(<?= $kfiHistoryId ?>, 1); // Default to tab 1 if no value is passed
-        }
+window.onload = function() {
+    let openTab = <?= $openTab ?>; // PHP value passed to JavaScript
+    if (openTab) {
+        viewTabKfi(<?= $kfiHistoryId ?>, openTab); // Set the tab based on the PHP value
+    } else {
+        viewTabKfi(<?= $kfiHistoryId ?>, 1); // Default to tab 1 if no value is passed
     }
+}
 </script>

@@ -258,7 +258,7 @@ class KpiPersonalController extends Controller
 				$time = explode(' ', $employeehistory["createDateTime"]);
 				$employeeId = Employee::employeeId($employeehistory["createrId"]);
 				$data[$employeehistory["kpiEmployeeHistoryId"]] = [
-					// "title" => $teamhistory["titleProcess"],
+					"title" => $employeehistory["detail"],
 					// "remark" => $teamhistory["remark"],
 					//"result" => $history["result"],
 					"picture" => Employee::employeeImage($employeehistory),
@@ -424,7 +424,7 @@ class KpiPersonalController extends Controller
 			$employee = Employee::EmployeeDetail($employeeId);
 			$data = [
 				"kpiName" => $kpiDetail["kpiName"],
-				"monthName" => ModelMaster::monthEng($kpiDetail['month'], 1),
+				"monthName" => ModelMaster::monthEng($kpiEmployee['month'], 1),
 				"priority" => $kpiDetail["priority"],
 				"quantRatio" => $kpiDetail["quantRatio"],
 				"amountType" => $kpiDetail["amountType"],
