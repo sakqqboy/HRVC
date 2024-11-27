@@ -34,14 +34,14 @@ $this->title = 'KPI View';
 					?>
         <div class="alert mt-10 pim-body bg-white">
             <div class="row">
-                <div class="col-10 pim-name-detail pr-0 pl-5 text-start">
+                <div class="col-9 pim-name-detail pr-0 pl-5 text-start">
                     <a href="javascript:history.back()" class="mr-5 font-size-12">
                         <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
                         Back
                     </a>
                     <?= $kpiDetail["kpiName"] ?>
                 </div>
-                <div class="col-1">
+                <div class="col-3 text-end">
                     <span class="team-wrapper <?= $colorFormat ?>-teamshow"
                         style="margin-right: 5px; padding-right: 5px;">
                         <span class="team-icon pim-team-<?= $colorFormat ?>">
@@ -49,8 +49,6 @@ $this->title = 'KPI View';
                         </span>
                         <span class="team-name"> <?= $kpiDetail['teamName']; ?></span>
                     </span>
-                </div>
-                <div class="col-1">
                     <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kpi"
                         onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)"
                         onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"

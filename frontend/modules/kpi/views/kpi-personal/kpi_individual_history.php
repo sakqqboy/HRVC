@@ -34,14 +34,14 @@ $this->title = 'KPI View';
 					?>
         <div class="alert mt-10 pim-body bg-white">
             <div class="row">
-                <div class="col-8 pim-name-detail pr-0 pl-5 text-start">
+                <div class="col-7 pim-name-detail pr-0 pl-5 text-start">
                     <a href="javascript:history.back()" class="mr-5 font-size-12">
                         <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
                         Back
                     </a>
                     <?= $kpiEmployeeDetail["kpiName"] ?>
                 </div>
-                <div class="col-3 text-end">
+                <div class="col-5 text-end">
                     <span class="team-wrapper <?= $colorFormat ?>-teamshow"
                         style="margin-right: 5px; padding-right: 5px;">
                         <span class="team-icon pim-team-<?= $colorFormat ?>">
@@ -52,12 +52,10 @@ $this->title = 'KPI View';
                     <span class="team-wrapper <?= $colorFormat ?>-teamshow"
                         style="margin-right: 5px; padding-right: 5px;">
                         <span class="team-icon pim-team-<?= $colorFormat ?>">
-                            <img src="/HRVC/frontend/web/images/icons/Settings/teamwhite.svg" alt="Team Icon">
+                            <img src="/HRVC/frontend/web/image/user.svg" alt="Team Icon">
                         </span>
                         <span class="team-name"> <?= $kpiEmployeeDetail['employeeName']; ?></span>
                     </span>
-                </div>
-                <div class="col-1">
                     <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kpi"
                         onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)"
                         onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
