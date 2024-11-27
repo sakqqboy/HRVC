@@ -76,7 +76,9 @@ $this->title = 'Team KGI View';
                         </div>
                         <div class="col-6">
                             <div class="row">
-                                <div class="col-4 month-<?= $colorFormat ?> pt-2">Term</div>
+                                <div class="col-4 month-<?= $colorFormat ?> pt-2">
+                                    <?=  $kgiTeamDetail['monthName'] ?>
+                                </div>
                                 <div class="col-8 term-<?= $colorFormat ?>  pt-2">
                                     <?= $kgiTeamDetail['fromDate'] == "" ? 'Not set' : $kgiTeamDetail['fromDate'] ?>
                                     &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
