@@ -8,7 +8,7 @@ $this->title = 'Company KPI History';
 
 <div class="col-12">
     <div class="col-12">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.png" class="home-icon mr-5"
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
             style="margin-top: -3px;">
         <strong class="pim-head-text"> Performance Indicator Matrices (PIM)</strong>
     </div>
@@ -73,17 +73,17 @@ $this->title = 'Company KPI History';
                                 ?>
                                 <a class="btn btn-bg-white-xs" data-bs-toggle="modal" data-bs-target="#staticBackdrop3"
                                     onclick="javascript:kpiHistory(<?= $kpi['kpiHistoryId'] ?>)">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Comment.png" alt="History"
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Comment.svg" alt="History"
                                         class="home-icon">
                                 </a>
                                 <a class="btn btn-bg-white-xs" data-bs-toggle="modal" data-bs-target="#staticBackdrop3"
                                     onclick="javascript:kpiHistory(<?= $kpi['kpiHistoryId'] ?>)">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Charts.png" alt="History"
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/Charts.svg" alt="History"
                                         class="home-icon" style="margin-top: -3px;">
                                 </a>
                                 <a href="<?= Yii::$app->homeUrl ?>kpi/view/index/<?= ModelMaster::encodeParams(["kpiHistoryId" => $kpi['kpiHistoryId']]) ?>"
                                     class="btn btn-bg-white-xs">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="History"
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="History"
                                         class="pim-icon" style="margin-top: -1px;">
                                 </a> -->
                                 <?php
@@ -100,19 +100,19 @@ $this->title = 'Company KPI History';
                                 <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId,'kpiHistoryId' => $kpi['kpiHistoryId'], 'openTab' => 1]) ?>"
                                     class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
                                     style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.png" alt="Chats"
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="Chats"
                                         class="pim-icon " style="margin-top: -2px;">
                                 </a>
                                 <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId,'kpiHistoryId' => $kpi['kpiHistoryId'], 'openTab' => 3]) ?>"
                                     class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
                                     style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png" alt="Chats"
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg" alt="Chats"
                                         class="pim-icon " style="margin-top: -2px;">
                                 </a>
                                 <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId,'kpiHistoryId' => $kpi['kpiHistoryId'], 'openTab' => 4]) ?>"
                                     class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
                                     style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="Chart"
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg" alt="Chart"
                                         class="pim-icon" style="margin-top: -2px;">
                                 </a>
                                 <?php
@@ -222,7 +222,7 @@ $this->title = 'Company KPI History';
                                         <div class="col-5 border-right-<?= $colorFormat ?> pr-2 pl-10">
                                             <div class="row">
                                                 <div class="col-2 pt-3">
-                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-<?= $colorFormat ?>.png"
+                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-<?= $colorFormat ?>.svg"
                                                         class="first-layer-icon" style="margin-top: -4px;">
                                                 </div>
                                                 <div class="col-2">
@@ -256,7 +256,7 @@ $this->title = 'Company KPI History';
                                         <!-- <div class="col-5 border-right-<?= $colorFormat ?> pr-2 pl-10">
                                             <div class="row">
                                                 <div class="col-2 pt-3">
-                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-<?= $colorFormat ?>.png"
+                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-<?= $colorFormat ?>.svg"
                                                         class="first-layer-icon" style="margin-top: -4px;">
                                                 </div>
                                                 <div class="col-2 pic-after pt-0">

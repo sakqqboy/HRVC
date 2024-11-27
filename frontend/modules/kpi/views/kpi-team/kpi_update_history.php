@@ -31,7 +31,7 @@
                         <div class="row">
                             <div class="col-4">
                                 <div class="col-12 font-size-12 pl-0 pt-3 font-b">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/check-black.png"
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/check-black.svg"
                                         class="pim-icon mr-3" style="margin-top: -3px;">
                                     <?php
 														if ($info["status"] == 1) {

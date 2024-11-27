@@ -9,7 +9,7 @@ $this->title = 'KPI View';
 <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
 <div class="col-12">
     <div class="col-12">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.png" class="home-icon mr-5"
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
             style="margin-top: -3px;">
         <strong class="pim-head-text"> Performance Indicator Matrices (PIM)</strong>
     </div>
@@ -240,41 +240,41 @@ $this->title = 'KPI View';
                     <div class="row">
                         <div class="col-2  view-tab-active" id="tab-1"
                             onclick="javascript:viewTabTeamKpi(<?= $kpiTeamHistoryId ?>,<?= $kpiId ?>,1)">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-blue.png" alt="History"
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-blue.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-1-blue">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.png" alt="History"
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-1-black">
                             Assigned
                         </div>
                         <div class="col-3  view-tab" id="tab-2"
                             onclick="javascript:viewTabTeamKpi(<?= $kpiTeamHistoryId ?>, <?= $kpiTeamId ?>,2)">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.png" alt="History"
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-black.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-2-black">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-blue.png" alt="History"
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-blue.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-2-blue">
                             Update History
                         </div>
                         <div class="col-2  view-tab" id="tab-3"
                             onclick="javascript:viewTabTeamKpi(<?= $kpiTeamHistoryId ?>, <?= $kpiTeamId ?>,3)">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.png" alt="History"
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-3-black">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment-blue.png" alt="History"
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment-blue.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-3-blue">
                             Chats
                         </div>
                         <div class="col-2  view-tab" id="tab-4"
                             onclick="javascript:viewTabTeamKpi(<?= $kpiTeamHistoryId ?>, <?= $kpiTeamId ?>,4)">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.png" alt="History"
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-4-black">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart-blue.png" alt="History"
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart-blue.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-4-blue">
                             Chart
                         </div>
                         <div class="col-3  view-tab" id="tab-5"
                             onclick="javascript:viewTabTeamKpi(<?= $kpiTeamHistoryId ?>, <?= $kpiTeamId ?>,5)">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate.png" alt="History"
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-5-black">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate-blue.png" alt="History"
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate-blue.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-5-blue">
                             Relate KGI
                         </div>
@@ -304,7 +304,7 @@ $this->title = 'KPI View';
                                     <div class="col-12 small-content bg-white pl-20">
                                         <div class="row">
                                             <div class="col-2  pl-0 pr-0">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.png"
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg"
                                                     class="image-AssignMembers">
                                             </div>
                                             <div class="col-7 pl-10 border-right">
