@@ -888,7 +888,11 @@ class KgiPersonalController extends Controller
 			$result[$index] = $data["result"];
 			$targetText .= $target[$index] . ',';
 			$resultText .= $result[$index] . ',';
-			$monthText .= '"' . substr($data["month"], 0, 3) . substr($data["year"], -2) . '",';
+			if ($data["month"] != '' && $data["year"] != "") {
+				$monthText .= '"' . substr($data["month"], 0, 3) . substr($data["year"], -2) . '",';
+			} else {
+				$monthText .= '';
+			}
 		endforeach;
 		$monthText = substr($monthText, 0, -1);
 		$targetText = substr($targetText, 0, -1);
