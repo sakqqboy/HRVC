@@ -346,6 +346,7 @@ class KgiTeamController extends Controller
 				"codeText" => $kgiTeamHistory["code"] . ' &nbsp;(' . Kgi::codeDetail($kgiTeamHistory["code"]) . ')',
 				"code" => $kgiTeamHistory["code"],
 				"month" =>  $kgiTeamHistory['month'],
+				"monthName" =>  ModelMaster::monthEng($kgiTeamHistory['month']),
 				"year" => $kgiTeamHistory['year'],
 				"fromDate" => $kgiTeamHistory["fromDate"],
 				"toDate" => $kgiTeamHistory["toDate"],
