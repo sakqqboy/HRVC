@@ -276,25 +276,124 @@ class KpiPersonalController extends Controller
 		return json_encode($data);
 	}
 
-	public function actionKpiEmployeeDetail($kpiEmployeeId)
+	public function actionKpiEmployeeDetail($kpiEmployeeId, $kpiEmployeeHistoryId)
+	// {
+	// 	$kpiEmployee = KpiEmployeeHistory::find()
+	// 		->select('ke.target,kpi_employee_history.result,kpi_employee_history.kpiEmployeeId,ke.employeeId,
+	// 		kpi_employee_history.lastCheckDate,kpi_employee_history.nextCheckDate,kpi_employee_history.detail,kpi_employee_history.fromDate,kpi_employee_history.toDate,
+	// 		kpi_employee_history.status,kpi_employee_history.month,kpi_employee_history.year,ke.remark')
+	// 		->JOIN("LEFT JOIN", "kpi_employee ke", "ke.kpiEmployeeId=kpi_employee_history.kpiEmployeeId")
+	// 		->where(["kpi_employee_history.kpiEmployeeId" => $kpiEmployeeId])
+	// 		->orderBy('kpi_employee_history.kpiEmployeeHistoryId DESC')
+	// 		->asArray()
+	// 		->one();
+	// 	if (!isset($kpiEmployee) || empty($kpiEmployee)) {
+	// 		$kpiEmployee = KpiEmployee::find()
+	// 			->where(["kpiEmployeeId" => $kpiEmployeeId])
+	// 			->one();
+	// 		$kpiId = $kpiEmployee["kpiId"];
+	// 		$employeeId = $kpiEmployee["employeeId"];
+	// 	} else {
+	// 		$kpiE = KpiEmployee::find()
+	// 			->select('kpiId,employeeId')
+	// 			->where(["kpiEmployeeId" => $kpiEmployee["kpiEmployeeId"]])
+	// 			->asArray()
+	// 			->one();
+	// 		$kpiId = $kpiE["kpiId"];
+	// 		$employeeId = $kpiE["employeeId"];
+	// 	}
+	// 	$data = [];
+	// 	if (count($kpiEmployee) > 0) {
+	// 		foreach ($kpiEmployee as $kpi) :
+	// 			// $kpiEmployeeHistory = KpiEmployeeHistory::find()
+	// 			// ->where(["kpiEmployeeId" => $kpi["kpiEmployeeId"], "status" => [1, 2, 4]])
+	// 			// ->asArray()
+	// 			// ->orderBy('createDateTime DESC')
+	// 			// ->one();
+	// 		// if (!isset($kpiEmployeeHistory) || empty($kpiEmployeeHistory)) {
+	// 		// 	$kpiEmployeeHistory = KpiEmployee::find()
+	// 		// 		->where(["kpiEmployeeId" => $kpi["kpiEmployeeId"], "status" => [1, 2, 4]])
+	// 		// 		->asArray()
+	// 		// 		->orderBy('createDateTime DESC')
+	// 		// 		->one();
+	// 		// }
+	// 	$ratio = 0;
+	// 	$kpiDetail = Kpi::find()
+	// 		//->select('kpiName')
+	// 		->where(["kpiId" => $kpiId])
+	// 		->one();
+	// 	if (isset($kpiEmployee) && !empty($kpiEmployee)) {
+	// 		if ($kpiEmployee["target"] != '' && $kpiEmployee["target"] != 0) {
+	// 			if ($kpiDetail["code"] == '<' || $kpiDetail["code"] == '=') {
+	// 				$ratio = ($kpiEmployee["result"] / $kpiEmployee["target"]) * 100;
+	// 			} else {
+	// 				if ($kpiEmployee["result"] != '' && $kpiEmployee["result"] != 0) {
+	// 					$ratio = ($kpiEmployee["target"] / $kpiEmployee["result"]) * 100;
+	// 				} else {
+	// 					$ratio = 0;
+	// 				}
+	// 			}
+	// 		} else {
+	// 			$ratio = 0;
+	// 		}
+	// 		$employee = Employee::EmployeeDetail($employeeId);
+	// 		$data = [
+	// 			"kpiName" => $kpiDetail["kpiName"],
+	// 			"monthName" => ModelMaster::monthEng($kpiDetail['month'], 1),
+	// 			"priority" => $kpiDetail["priority"],
+	// 			"quantRatio" => $kpiDetail["quantRatio"],
+	// 			"amountType" => $kpiDetail["amountType"],
+	// 			"code" => $kpiDetail["code"],
+	// 			"ratio" => $ratio,
+	// 			"unitText" => Unit::unitName($kpiDetail["unitId"]),
+	// 			"target" => !empty($kpiEmployee["target"]) ? $kpiEmployee["target"] : 0,
+	// 			"targetAmount" => !empty($kpiEmployee["target"]) ? $kpiEmployee["target"] : 0,
+	// 			"result" => !empty($kpiEmployee["result"]) ? $kpiEmployee["result"] : 0,
+	// 			"detail" => isset($kpiEmployee["detail"]) ? $kpiEmployee["detail"] : null,
+	// 			"nextCheckText" => ModelMaster::engDate($kpiEmployee["nextCheckDate"], 2),
+	// 			"nextCheckDate" => isset($kpiEmployee["nextCheckDate"]) ? $kpiEmployee["nextCheckDate"] : null,
+	// 			"lastCheckDate" => isset($kpiEmployee["lastCheckDate"]) ? $kpiEmployee["lastCheckDate"] : null,
+	// 			"isOver" => ModelMaster::isOverDuedate(KpiEmployee::nextCheckDate($kpiEmployee['kpiEmployeeId'])),
+	// 			"status" => $kpiEmployee["status"],
+	// 			"fromDate" => ModelMaster::engDate($kpiEmployee["fromDate"], 2),
+	// 			"toDate" => ModelMaster::engDate($kpiEmployee["toDate"], 2),
+	// 			"employeeName" => $employee["employeeFirstname"] . " " . $employee["employeeSurename"],
+	// 			"month" => $kpiEmployee["month"],
+	// 			"year" => $kpiEmployee["year"],
+	// 			"remark" => $kpiEmployee["remark"]
+	// 		];
+	// 	}
+	// endforeach;
+	// }
 	{
-		$kpiEmployee = KpiEmployeeHistory::find()
-			->select('ke.target,kpi_employee_history.result,kpi_employee_history.kpiEmployeeId,ke.employeeId,
-			kpi_employee_history.lastCheckDate,kpi_employee_history.nextCheckDate,kpi_employee_history.detail,
-			kpi_employee_history.status,kpi_employee_history.month,kpi_employee_history.year,ke.remark')
-			->JOIN("LEFT JOIN", "kpi_employee ke", "ke.kpiEmployeeId=kpi_employee_history.kpiEmployeeId")
-			->where(["kpi_employee_history.kpiEmployeeId" => $kpiEmployeeId])
-			->orderBy('kpi_employee_history.kpiEmployeeHistoryId DESC')
-			->asArray()
-			->one();
+		if ($kpiEmployeeHistoryId != 0) {
+			$kpiEmployee = KpiEmployeeHistory::find()
+				->select('ke.target,kpi_employee_history.result,kpi_employee_history.kpiEmployeeId,ke.employeeId,
+			kpi_employee_history.lastCheckDate,kpi_employee_history.nextCheckDate,kpi_employee_history.detail,kpi_employee_history.kpiEmployeeHistoryId,
+			kpi_employee_history.status,kpi_employee_history.month,kpi_employee_history.year,ke.remark,kpi_employee_history.fromDate,kpi_employee_history.toDate')
+				->JOIN("LEFT JOIN", "kpi_employee ke", "ke.kpiEmployeeId=kpi_employee_history.kpiEmployeeId")
+				->where(["kpi_employee_history.kpiEmployeeHistoryId" => $kpiEmployeeHistoryId])
+				->asArray()
+				->one();
+		} else {
+			$kpiEmployee = kpiEmployeeHistory::find()
+				->select('ke.target,kpi_employee_history.result,kpi_employee_history.kpiEmployeeId,ke.employeeId,
+			kpi_employee_history.lastCheckDate,kpi_employee_history.nextCheckDate,kpi_employee_history.detail,kpi_employee_history.kpiEmployeeHistoryId,
+			kpi_employee_history.status,kpi_employee_history.month,kpi_employee_history.year,ke.remark,kpi_employee_history.fromDate,kpi_employee_history.toDate')
+				->JOIN("LEFT JOIN", "kpi_employee ke", "ke.kpiEmployeeId=kpi_employee_history.kpiEmployeeId")
+				->where(["kpi_employee_history.kpiEmployeeId" => $kpiEmployeeId])
+				->orderBy('kpi_employee_history.kpiEmployeeHistoryId DESC')
+				->asArray()
+				->one();
+		}
 		if (!isset($kpiEmployee) || empty($kpiEmployee)) {
-			$kpiEmployee = KpiEmployee::find()
+			$kpiEmployee = kpiEmployee::find()
 				->where(["kpiEmployeeId" => $kpiEmployeeId])
 				->one();
 			$kpiId = $kpiEmployee["kpiId"];
 			$employeeId = $kpiEmployee["employeeId"];
 		} else {
-			$kpiE = KpiEmployee::find()
+			$kpiE = kpiEmployee::find()
 				->select('kpiId,employeeId')
 				->where(["kpiEmployeeId" => $kpiEmployee["kpiEmployeeId"]])
 				->asArray()
@@ -304,12 +403,12 @@ class KpiPersonalController extends Controller
 		}
 		$data = [];
 		$ratio = 0;
-		$kpiDetail = Kpi::find()
+		$kpiDetail = kpi::find()
 			//->select('kpiName')
 			->where(["kpiId" => $kpiId])
 			->one();
 		if (isset($kpiEmployee) && !empty($kpiEmployee)) {
-			if ($kpiEmployee["target"] != '' && $kpiEmployee["target"] != 0) {
+			if ($kpiEmployee["target"] != '' && $kpiEmployee["target"] != 0 && $kpiEmployee["target"] != null) {
 				if ($kpiDetail["code"] == '<' || $kpiDetail["code"] == '=') {
 					$ratio = ($kpiEmployee["result"] / $kpiEmployee["target"]) * 100;
 				} else {
@@ -333,15 +432,22 @@ class KpiPersonalController extends Controller
 				"ratio" => $ratio,
 				"unitText" => Unit::unitName($kpiDetail["unitId"]),
 				"target" => !empty($kpiEmployee["target"]) ? $kpiEmployee["target"] : 0,
+				"targetAmount" => !empty($kpiEmployee["target"]) ? $kpiEmployee["target"] : 0,
 				"result" => !empty($kpiEmployee["result"]) ? $kpiEmployee["result"] : 0,
-				"detail" => isset($kpiEmployee["detail"]) ? $kpiEmployee["detail"] : null,
 				"nextCheckDate" => isset($kpiEmployee["nextCheckDate"]) ? $kpiEmployee["nextCheckDate"] : null,
+				"nextCheckText" => ModelMaster::engDate($kpiEmployee["nextCheckDate"], 2),
 				"lastCheckDate" => isset($kpiEmployee["lastCheckDate"]) ? $kpiEmployee["lastCheckDate"] : null,
+				"fromDate" => $kpiEmployee["fromDate"],
+				"toDate" => $kpiEmployee["toDate"],
 				"status" => $kpiEmployee["status"],
+				"detail" => isset($kpiEmployee["detail"]) ? $kpiEmployee["detail"] : null,
 				"employeeName" => $employee["employeeFirstname"] . " " . $employee["employeeSurename"],
 				"month" => $kpiEmployee["month"],
 				"year" => $kpiEmployee["year"],
-				"remark" => $kpiEmployee["remark"]
+				"remark" => $kpiEmployee["remark"],
+				"teamName"=>Team::teamName($employee["teamId"]),
+				// "teamName" => Team::teamName($kpiEmployee["teamId"]),
+				"isOver" => ModelMaster::isOverDuedate(KpiEmployee::nextCheckDate($kpiEmployee['kpiEmployeeId']))
 			];
 		}
 		return json_encode($data);

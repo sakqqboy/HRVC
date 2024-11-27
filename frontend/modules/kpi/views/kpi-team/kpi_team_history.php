@@ -47,7 +47,7 @@ $this->title = 'KPI View';
                         <span class="team-icon pim-team-<?= $colorFormat ?>">
                             <img src="/HRVC/frontend/web/images/icons/Settings/teamwhite.svg" alt="Team Icon">
                         </span>
-                        <span class="team-name"> <?= $teamName['teamName']; ?></span>
+                        <span class="team-name"> <?= $kpiDetail['teamName']; ?></span>
                     </span>
                 </div>
                 <div class="col-1">
@@ -132,7 +132,7 @@ $this->title = 'KPI View';
                                 </div>
                                 <div class="col-12 pr-0 pt-5 pl-0">Update Interval</div>
                                 <div class="col-12  pim-duedate">
-                                    <?= $kpiDetail["unitText"] ?>
+                                    <?= $kpiDetail["unit"] ?>
                                 </div>
                             </div>
                             <div class="col-lg-7 pim-subheader-font pr-15 pl-15">
