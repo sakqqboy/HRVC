@@ -47,6 +47,9 @@ $this->title = 'Self KGI View';
 						<?php
 						if (!isset($kgiEmployeeDetail["picture"]) || $kgiEmployeeDetail["picture"] != "") {
 							$kgiEmployeeDetail["picture"] = 'image/user.svg';
+							$noPic = "pim-team-" . $colorFormat;
+						} else {
+							$noPic = '';
 						}
 						?>
 						<span class="team-wrapper <?= $colorFormat ?>-teamshow"
@@ -59,7 +62,7 @@ $this->title = 'Self KGI View';
 						</span>
 						<span class="team-wrapper <?= $colorFormat ?>-teamshow"
 							style="margin-right: 5px; padding-right: 5px;">
-							<span class="team-icon pim-team-<?= $colorFormat ?>">
+							<span class="team-icon <?= $noPic ?>">
 								<img src="<?= Yii::$app->homeUrl ?><?= $kgiEmployeeDetail['picture'] ?>"
 									alt="Team Icon">
 							</span>
