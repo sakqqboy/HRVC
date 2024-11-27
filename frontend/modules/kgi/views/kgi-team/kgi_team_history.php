@@ -251,7 +251,7 @@ $this->title = 'Team KGI View';
                         </div>
                         <div class="col-3  view-tab" id="tab-2"
                             onclick="javascript:viewTabTeamKgi(<?= $kgiTeamHistoryId ?>,2,<?= $kgiId ?>,<?= $kgiTeamId ?>)">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg" alt="History"
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-black.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-2-black">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-blue.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-2-blue">
@@ -324,10 +324,10 @@ window.onload = function() {
     let openTab = <?= $openTab ?>; // PHP value passed to JavaScript
     if (openTab) {
         viewTabTeamKgi(<?= $kgiTeamHistoryId ?>, openTab, <?= $kgiId ?>,
-        <?= $kgiTeamId ?>); // Set the tab based on the PHP value
+            <?= $kgiTeamId ?>); // Set the tab based on the PHP value
     } else {
         viewTabTeamKgi(<?= $kgiTeamHistoryId ?>, 1, <?= $kgiId ?>,
-        <?= $kgiTeamId ?>); // Default to tab 1 if no value is passed
+            <?= $kgiTeamId ?>); // Default to tab 1 if no value is passed
     }
 }
 </script>
