@@ -232,10 +232,13 @@ class KpiTeamController extends Controller
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-detail?kpiTeamId=' . $kpiTeamId . '&&kpiTeamHistoryId=' . $kpiTeamHistoryId);
+		$kpiTeamDetail = curl_exec($api);
+		$kpiTeamDetail = json_decode($kpiTeamDetail, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . "&&kpiHistoryId=" . $kpiTeamHistoryId);
-		$kpiDetail = curl_exec($api);
-		$kpiDetail = json_decode($kpiDetail, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . "&&kpiHistoryId=" . $kpiTeamHistoryId);
+		// $kpiDetail = curl_exec($api);
+		// $kpiDetail = json_decode($kpiDetail, true);
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$companies = curl_exec($api);
@@ -252,13 +255,11 @@ class KpiTeamController extends Controller
 		curl_close($api);
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
-		// throw new Exception(print_r($kpiTeams, true));
+		// throw new Exception(print_r($kpiTeamDetail, true));
 		// throw new Exception(print_r($kpiTeams[$kpiId], true));
-		$teamName = array_values($kpiTeams);
-		// throw new Exception(print_r($teamName[0], true));
 		return $this->render('kpi_team_history', [
 			"role" => $role,
-			"kpiDetail" => $kpiDetail,
+			"kpiDetail" => $kpiTeamDetail,
 			"openTab" => $openTab,
 			"months" => $months,
 			"isManager" => $isManager,
@@ -267,8 +268,7 @@ class KpiTeamController extends Controller
 			"kpiId" => $kpiId,
 			"kpiTeamId" => $kpiTeamId,
 			"kpiTeams" => $kpiTeams,
-			"kpiTeamHistoryId" => $kpiTeamHistoryId,
-			"teamName" => $teamName[0]
+			"kpiTeamHistoryId" => $kpiTeamHistoryId
 		]);
 	}
 
