@@ -261,6 +261,8 @@ class KgiPersonalController extends Controller
 				"month" => $kgiEmployee["month"],
 				"year" => $kgiEmployee["year"],
 				"remark" => $kgiEmployee["remark"],
+				"teamName" => Team::teamName($employee["teamId"]),
+				"picture" => $employee["teamId"],
 				"isOver" => ModelMaster::isOverDuedate(KgiEmployeeHistory::nextCheckDate($kgiEmployee["kgiEmployeeHistoryId"])),
 			];
 		}
