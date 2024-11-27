@@ -52,7 +52,12 @@ $this->title = 'KPI View';
                     <span class="team-wrapper <?= $colorFormat ?>-teamshow"
                         style="margin-right: 5px; padding-right: 5px;">
                         <span class="team-icon pim-team-<?= $colorFormat ?>">
+                            <?php if (!empty($kpiEmployeeDetail['picture'])): ?>
+                            <img src="<?= Yii::$app->homeUrl . $kpiEmployeeDetail['picture'] ?>" alt="Team Icon"
+                                style="border-radius: 100%;">
+                            <?php else: ?>
                             <img src="/HRVC/frontend/web/image/user.svg" alt="Team Icon">
+                            <?php endif; ?>
                         </span>
                         <span class="team-name"> <?= $kpiEmployeeDetail['employeeName']; ?></span>
                     </span>

@@ -445,6 +445,7 @@ class KpiPersonalController extends Controller
 				"month" => $kpiEmployee["month"],
 				"year" => $kpiEmployee["year"],
 				"remark" => $kpiEmployee["remark"],
+				"picture" => $employee["picture"],
 				"teamName"=>Team::teamName($employee["teamId"]),
 				// "teamName" => Team::teamName($kpiEmployee["teamId"]),
 				"isOver" => ModelMaster::isOverDuedate(KpiEmployee::nextCheckDate($kpiEmployee['kpiEmployeeId']))
