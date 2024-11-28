@@ -122,6 +122,219 @@
     color: black;
 }
 
+.full-background {
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* File: web/css/dashboard.css */
+/* General */
+.dashboard-title {
+    color: var(--HRVC---Text-Black, #30313D);
+    leading-trim: both;
+    text-edge: cap;
+    font-family: "SF Pro Display";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 21.429px;
+    /* 89.286% */
+}
+
+.dashboard-chart {
+    background-color: #F4F6F9;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 15px;
+}
+
+.chart-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Tabs */
+.dashboard-tabs .nav-link {
+    font-size: 1rem;
+    color: #000;
+    border-radius: 0;
+    text-align: center;
+    font-size: 14px;
+    display: inline-block;
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: #F5F5F5;
+    border-bottom: 3px solid #CBD5E1;
+    /* Remove the default border */
+}
+
+.dashboard-tabs .nav-link.active {
+    background-color: #D7EBFF;
+    border-bottom: 3px solid #2580D3;
+}
+
+/* Cards */
+.dashboard-kpi-card {
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-progress-bar {
+    height: 8px;
+    border-radius: 4px;
+}
+
+/* Profile Section */
+.profile-card {
+    background-color: #F4F6F9;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.profile-name {
+    font-size: 17.6px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.profile-role {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+/* Tabs for Schedule Section */
+.schedule-tabs .nav-link {
+    color: #000;
+    text-align: center;
+    /* ให้ขนาดของปุ่มแท็บเท่ากัน */
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 3px;
+    /* font-size: 12px; */
+
+}
+
+.schedule-tabs .nav-link.active {
+    background-color: #F4F6F9;
+    color: #000;
+    font-size: 12px;
+}
+
+/* Tab Content */
+.tab-content {
+    background-color: #fff;
+    border-radius: 8px;
+    margin-top: 30px;
+    flex-direction: column;
+    gap: 15px;
+    /* เพิ่มระยะห่างระหว่างแต่ละ tab */
+}
+
+.schedule-item {
+    padding: 10.448px 16.717px;
+    gap: 30.3px;
+    border-radius: 6.269px;
+    border: 0.522px solid #E0E0E0;
+    background: var(--Background-Color, #FAFAFA);
+}
+
+.schedule-card {
+    border-radius: 10.448px 10.448px 0px 0px;
+    border: 1.045px solid #F1F1F1;
+    background: var(--Just-White, #FFF);
+    padding: 16px;
+    margin-bottom: 0;
+    /* ลบช่องว่างด้านล่าง */
+    flex-direction: column;
+    /* ทำให้เป็นแนวตั้ง */
+
+}
+
+.schedule-item strong {
+    font-weight: 600;
+}
+
+.schedule-item .text-muted {
+    font-size: 0.85rem;
+}
+
+/* Center Align for "View All" Link */
+.schedule-item .text-center {
+    margin-top: 10px;
+}
+
+#upcoming-schedule,
+#pending-approvals {
+    max-height: 250px;
+    /* กำหนดความสูงสูงสุด */
+    overflow-y: auto;
+    /* เมื่อมีเนื้อหามากกว่าความสูงที่กำหนด ให้สามารถเลื่อนได้ */
+}
+
+.schedule-item {
+    margin-top: 15px;
+    /* ปรับระยะห่างระหว่างรายการ */
+}
+
+.text-ViewAllbutton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10.448px;
+    border-radius: 0px 0px 10.448px 10.448px;
+    border: 1.045px solid #E0E0E0;
+    background: var(--100-white, #FFF);
+    margin-top: 0;
+    /* ให้ช่องว่างด้านบนเป็น 0 */
+    padding: 10.448px;
+    flex-shrink: 0;
+    /* ทำให้ไม่ยุบตัว */
+}
+
+.text-ViewAllbutton a {
+    text-decoration: none;
+    /* ทำให้ลิงค์ไม่เป็นขีดเส้นใต้ */
+    color: #007bff;
+    /* สีของลิงค์ */
+    font-weight: bold;
+}
+
+.custom-hr {
+    border-top: 2px solid #C3BDBD;
+    border-style: dotted;
+}
+
+
+.tab-Navigation .nav {
+    display: flex;
+    padding: 7px 19px;
+    border-radius: 5px;
+    background: var(--100-white, #FFF);
+    box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.10);
+}
+
+.tab-Navigation .nav-item {
+    list-style: none;
+}
+
+.tab-Navigation .nav-link {
+    padding: 5px 15px;
+    font-size: 14px;
+    font-weight: 600;
+    font-size: 12px;
+
+}
+
 @media (max-width: 768px) {
     .show-fade-one {
         font-size: 15px;
