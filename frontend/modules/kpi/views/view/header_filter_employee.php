@@ -14,7 +14,7 @@
                 <div class="col-4 text-center">
                     <a href="<?= Yii::$app->homeUrl ?>ายร/kpi-personal/individual-kpi-grid" class="header-kpi-active">
                         <span>
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/KFI.svg"
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/KPI.svg"
                                 class="home-icon mr-5">
                         </span>
                         Key Performance Self Indicator
