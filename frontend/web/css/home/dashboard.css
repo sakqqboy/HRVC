@@ -180,16 +180,44 @@
 }
 
 /* Cards */
+.dashboard-kfi-card {
+    background-color: #fff;
+    border-radius: 0 0 10px 10px;
+    /* ใช้ radius เฉพาะมุมล่าง */
+    border: 1.166px solid #748EE9;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-kgi-card {
+    background-color: #fff;
+    border-radius: 0 0 10px 10px;
+    /* ใช้ radius เฉพาะมุมล่าง */
+    border: 1.166px solid #FDCA40;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
 .dashboard-kpi-card {
     background-color: #fff;
-    border-radius: 8px;
-    border: 1px solid #e9ecef;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 10px 10px;
+    /* ใช้ radius เฉพาะมุมล่าง */
+    border: 1.166px solid #FF715B;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.progress-bar {
+    border-radius: 5px;
 }
 
 .dashboard-progress-bar {
     height: 8px;
     border-radius: 4px;
+}
+
+h6.dashboard-kpi-title {
+    font-size: 16px;
+    font-weight: bold;
 }
 
 /* Profile Section */
