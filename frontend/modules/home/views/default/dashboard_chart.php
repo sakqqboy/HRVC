@@ -1,14 +1,14 @@
 <div class="chart-container">
     <button id="prevButton" class="chart-nav-button">
-        <img src="/HRVC/frontend/web/images/icons/Settings/left.svg" alt="Previous">
+        <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/left.svg" alt="Previous">
     </button>
     <div id="container" class="chart-graph"></div>
     <button id="nextButton" class="chart-nav-button">
-        <img src="/HRVC/frontend/web/images/icons/Settings/right.svg" alt="Next">
+        <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/right.svg" alt="Next">
     </button>
 
     <div class="chart-company-info">
-        <img src="/HRVC/frontend/web/images/icons/Dark/48px/company.svg" alt="Company Icon">
+        <img src="<?=Yii::$app->homeUrl?>images/icons/Dark/48px/company.svg" alt="Company Icon">
         <span>Company</span>
     </div>
 
@@ -169,11 +169,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 useHTML: true,
                 labelFormatter: function() {
                     if (this.name == 'Actual') {
-                        return '<img src="<?=Yii::$app->homeUrl?>images/icons/Settings/KFI-actual.svg" style="width: 16px; height: 16px; vertical-align: middle;">' +
+                        return '<img src="<?=Yii::$app->homeUrl?>images/icons/Settings/KFI-actual.svg" style="width: 35px; height: 35px; vertical-align: middle;">' +
                             this.name;
 
                     } else if (this.name == 'Target') {
-                        return '<img src="<?=Yii::$app->homeUrl?>images/icons/Settings/KFI-target.svg" style="width: 16px; height: 16px; vertical-align: middle;">' +
+                        return '<img src="<?=Yii::$app->homeUrl?>images/icons/Settings/KFI-target.svg" style="width: 35px; height: 35px; vertical-align: middle;">' +
                             this.name;
                     }
                 },

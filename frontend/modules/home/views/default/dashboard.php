@@ -4,8 +4,8 @@
 <div class="alert mt-10 pim-body bg-white">
     <!-- Dashboard Header -->
     <div class="d-flex align-items-center mb-4">
-        <img src="/HRVC/frontend/web/images/icons/black-icons/FinancialSystem/Group23177.svg" class="me-3" alt="Icon"
-            style="width: 40px;">
+        <img src="<?=Yii::$app->homeUrl?>images/icons/black-icons/FinancialSystem/Group23177.svg" class="me-3"
+            alt="Icon" style="width: 40px;">
         <span class="dashboard-title">Performance Matrices Dashboard</span>
     </div>
 

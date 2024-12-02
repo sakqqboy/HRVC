@@ -9,14 +9,14 @@
 
             <a class="nav-link active" id="company-kpi-tab" data-bs-toggle="tab" href="#company-kpi" role="tab"
                 aria-controls="company-kpi" aria-selected="true">
-                <img src="/HRVC/frontend/web/images/icons/Settings/company.svg" alt="Company" class="pim-icon"
+                <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/company.svg" alt="Company" class="pim-icon"
                     style="width: 14px; height: 14px; padding-bottom: 4px; margin-top: 5px">Company
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="team-kpi-tab" data-bs-toggle="tab" href="#team-kpi" role="tab"
                 aria-controls="team-kpi" aria-selected="false">
-                <img src="/HRVC/frontend/web/images/icons/Settings/team.svg" alt="Team" class="pim-icon"
+                <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/team.svg" alt="Team" class="pim-icon"
                     style="width: 13px; height: 13px; padding-bottom: 2px; margin-top: 2px">
                 Team
             </a>
@@ -24,7 +24,7 @@
         <li class="nav-item">
             <a class="nav-link" id="self-kpi-tab" data-bs-toggle="tab" href="#self-kpi" role="tab"
                 aria-controls="self-kpi" aria-selected="false">
-                <img src="/HRVC/frontend/web/images/icons/Settings/self.svg" alt="Self" class="pim-icon"
+                <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/self.svg" alt="Self" class="pim-icon"
                     style="width: 13px; height: 13px; padding-bottom: 3px; margin-top: 2px">
                 Self
             </a>
@@ -49,7 +49,7 @@
                             <!-- Left Section -->
                             <div class="col-7 text-start">
                                 <span class="key-title">
-                                    <img src="/HRVC/frontend/web/images/icons/black-icons/FinancialSystem/KFI.svg"
+                                    <img src="<?=Yii::$app->homeUrl?>images/icons/black-icons/FinancialSystem/KFI.svg"
                                         class="home-icon mr-5">
                                     Key Financial Indicator
                                 </span>
@@ -86,14 +86,14 @@
                                 <!-- รูปแรก ชิดขวา -->
                                 <span class="toggle-text">
                                     <button class="show-more-btn">
-                                        <img src="/HRVC/frontend/web/images/icons/Settings/btn-KFI-left.svg"
+                                        <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/btn-KFI-left.svg"
                                             style="margin-top: 1px; margin-left: 3px;">
                                     </button>
                                 </span>
                                 <!-- รูปสอง ชิดซ้าย -->
                                 <span class="toggle-text">
                                     <button class="show-more-btn">
-                                        <img src="/HRVC/frontend/web/images/icons/Settings/btn-KFI-right.svg"
+                                        <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/btn-KFI-right.svg"
                                             style="margin-top: 1px; margin-left: 3px;">
                                     </button>
                                 </span>
@@ -107,8 +107,8 @@
                             </div>
                             <div class="col-4 text-start">
                                 <small class="small-text text-muted">
-                                    <img src="/HRVC/frontend/web/images/icons/Settings/Target.svg" class="pim-iconKFI"
-                                        style="margin-top: 1px; margin-right: 3px;">
+                                    <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/Target.svg"
+                                        class="pim-iconKFI" style="margin-top: 1px; margin-right: 3px;">
                                     Target
                                 </small>
                                 <br>
@@ -117,8 +117,8 @@
                             <div class="col-4 text-end">
                                 <small class="small-text text-muted">
                                     Result
-                                    <img src="/HRVC/frontend/web/images/icons/Settings/Result.svg" class="pim-iconKFI"
-                                        style="margin-top: 1px; margin-left: 3px;">
+                                    <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/Result.svg"
+                                        class="pim-iconKFI" style="margin-top: 1px; margin-left: 3px;">
                                 </small>
                                 <br>
                                 <strong class="bold-text">902,566</strong>
@@ -132,7 +132,7 @@
                         </div>
                         <div class="col-4 text-center">
                             <button class="btn-update btn-KFI">
-                                <img src="/HRVC/frontend/web/images/icons/Settings/refresh.svg" class="mb-2"
+                                <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/refresh.svg" class="mb-2"
                                     style="width: 12px; height: 12px;">
                                 Update
                             </button>
@@ -154,7 +154,7 @@
                             <!-- Left Section -->
                             <div class="col-7 text-start">
                                 <span class="key-title">
-                                    <img src="/HRVC/frontend/web/images/icons/black-icons/FinancialSystem/KGI.svg"
+                                    <img src="<?=Yii::$app->homeUrl?>images/icons/black-icons/FinancialSystem/KGI.svg"
                                         class="home-icon mr-5">
                                     Key Goal Indicator
                                 </span>
@@ -191,14 +191,14 @@
                                 <!-- รูปแรก ชิดขวา -->
                                 <span class="toggle-text">
                                     <button class="show-more-btn">
-                                        <img src="/HRVC/frontend/web/images/icons/Settings/btn-KGI-left.svg"
+                                        <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/btn-KGI-left.svg"
                                             style="margin-top: 1px; margin-left: 3px;">
                                     </button>
                                 </span>
                                 <!-- รูปสอง ชิดซ้าย -->
                                 <span class="toggle-text">
                                     <button class="show-more-btn">
-                                        <img src="/HRVC/frontend/web/images/icons/Settings/btn-KGI-right.svg"
+                                        <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/btn-KGI-right.svg"
                                             style="margin-top: 1px; margin-left: 3px;">
                                     </button>
                                 </span>
@@ -212,7 +212,8 @@
                             </div>
                             <div class="col-4 text-start">
                                 <small class="small-text text-muted">
-                                    <img src="/HRVC/frontend/web/images/icons/Settings/Target.svg" class="pim-iconKFI">
+                                    <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/Target.svg"
+                                        class="pim-iconKFI">
                                     Target
                                 </small>
                                 <br>
@@ -221,8 +222,8 @@
                             <div class="col-4 text-end">
                                 <small class="small-text text-muted">
                                     Result
-                                    <img src="/HRVC/frontend/web/images/icons/Settings/Result.svg" class="pim-iconKFI"
-                                        style="margin-top: 1px; margin-left: 3px;">
+                                    <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/Result.svg"
+                                        class="pim-iconKFI" style="margin-top: 1px; margin-left: 3px;">
                                 </small>
                                 <br>
                                 <strong class="bold-text">9</strong>
@@ -236,7 +237,7 @@
                         </div>
                         <div class="col-4 text-center">
                             <button class="btn-update btn-KGI">
-                                <img src="/HRVC/frontend/web/images/icons/Settings/refresh-black.svg" class="mb-2"
+                                <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/refresh-black.svg" class="mb-2"
                                     style="width: 12px; height: 12px;">
                                 Update
                             </button>
@@ -258,7 +259,7 @@
                             <!-- Left Section -->
                             <div class="col-7 text-start">
                                 <span class="key-title">
-                                    <img src="/HRVC/frontend/web/images/icons/black-icons/FinancialSystem/KPI.svg"
+                                    <img src="<?=Yii::$app->homeUrl?>images/icons/black-icons/FinancialSystem/KPI.svg"
                                         class="home-icon mr-5">
                                     Key Performance Indicator
                                 </span>
@@ -295,13 +296,13 @@
                                 <!-- รูปแรก ชิดขวา -->
                                 <span class="toggle-text">
                                     <button class="show-more-btn">
-                                        <img src="/HRVC/frontend/web/images/icons/Settings/btn-KPI-left.svg">
+                                        <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/btn-KPI-left.svg">
                                     </button>
                                 </span>
                                 <!-- รูปสอง ชิดซ้าย -->
                                 <span class="toggle-text">
                                     <button class="show-more-btn">
-                                        <img src="/HRVC/frontend/web/images/icons/Settings/btn-KPI-right.svg">
+                                        <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/btn-KPI-right.svg">
                                     </button>
                                 </span>
                             </div>
@@ -314,7 +315,8 @@
                             </div>
                             <div class="col-4 text-start">
                                 <small class="small-text text-muted">
-                                    <img src="/HRVC/frontend/web/images/icons/Settings/Target.svg" class="pim-iconKFI">
+                                    <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/Target.svg"
+                                        class="pim-iconKFI">
                                     Target
                                 </small>
                                 <br>
@@ -323,8 +325,8 @@
                             <div class="col-4 text-end">
                                 <small class="small-text text-muted">
                                     Result
-                                    <img src="/HRVC/frontend/web/images/icons/Settings/Result.svg" class="pim-iconKFI"
-                                        style="margin-top: 1px; margin-left: 3px;">
+                                    <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/Result.svg"
+                                        class="pim-iconKFI" style="margin-top: 1px; margin-left: 3px;">
                                 </small>
                                 <br>
                                 <strong class="bold-text">50%</strong>
@@ -338,7 +340,7 @@
                         </div>
                         <div class="col-4 text-center d-flex justify-content-center align-items-center">
                             <button class="btn-update btn-KPI">
-                                <img src="/HRVC/frontend/web/images/icons/Settings/refresh.svg" class="mb-2"
+                                <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/refresh.svg" class="mb-2"
                                     style="width: 12px; height: 12px;">
                                 Update
                             </button>
@@ -368,7 +370,7 @@
                                 <!-- Left Section -->
                                 <div class="col-7 text-start">
                                     <span class="key-title">
-                                        <img src="/HRVC/frontend/web/images/icons/black-icons/FinancialSystem/KFI.svg"
+                                        <img src="<?=Yii::$app->homeUrl?>images/icons/black-icons/FinancialSystem/KFI.svg"
                                             class="home-icon mr-5">
                                         Key Financial Indicator
                                     </span>
@@ -405,14 +407,14 @@
                                     <!-- รูปแรก ชิดขวา -->
                                     <span class="toggle-text">
                                         <button class="show-more-btn">
-                                            <img src="/HRVC/frontend/web/images/icons/Settings/btn-KFI-left.svg"
+                                            <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/btn-KFI-left.svg"
                                                 style="margin-top: 1px; margin-left: 3px;">
                                         </button>
                                     </span>
                                     <!-- รูปสอง ชิดซ้าย -->
                                     <span class="toggle-text">
                                         <button class="show-more-btn">
-                                            <img src="/HRVC/frontend/web/images/icons/Settings/btn-KFI-right.svg"
+                                            <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/btn-KFI-right.svg"
                                                 style="margin-top: 1px; margin-left: 3px;">
                                         </button>
                                     </span>
@@ -426,7 +428,7 @@
                                 </div>
                                 <div class="col-4 text-start">
                                     <small class="small-text text-muted">
-                                        <img src="/HRVC/frontend/web/images/icons/Settings/Target.svg"
+                                        <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/Target.svg"
                                             class="pim-iconKFI" style="margin-top: 1px; margin-right: 3px;">
                                         Target
                                     </small>
@@ -436,7 +438,7 @@
                                 <div class="col-4 text-end">
                                     <small class="small-text text-muted">
                                         Result
-                                        <img src="/HRVC/frontend/web/images/icons/Settings/Result.svg"
+                                        <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/Result.svg"
                                             class="pim-iconKFI" style="margin-top: 1px; margin-left: 3px;">
                                     </small>
                                     <br>
@@ -451,7 +453,7 @@
                             </div>
                             <div class="col-4 text-center">
                                 <button class="btn-update btn-KFI">
-                                    <img src="/HRVC/frontend/web/images/icons/Settings/refresh.svg" class="mb-2"
+                                    <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/refresh.svg" class="mb-2"
                                         style="width: 12px; height: 12px;">
                                     Update
                                 </button>
@@ -473,7 +475,7 @@
                                 <!-- Left Section -->
                                 <div class="col-7 text-start">
                                     <span class="key-title">
-                                        <img src="/HRVC/frontend/web/images/icons/black-icons/FinancialSystem/KGI.svg"
+                                        <img src="<?=Yii::$app->homeUrl?>images/icons/black-icons/FinancialSystem/KGI.svg"
                                             class="home-icon mr-5">
                                         Key Goal Indicator
                                     </span>
@@ -510,14 +512,14 @@
                                     <!-- รูปแรก ชิดขวา -->
                                     <span class="toggle-text">
                                         <button class="show-more-btn">
-                                            <img src="/HRVC/frontend/web/images/icons/Settings/btn-KGI-left.svg"
+                                            <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/btn-KGI-left.svg"
                                                 style="margin-top: 1px; margin-left: 3px;">
                                         </button>
                                     </span>
                                     <!-- รูปสอง ชิดซ้าย -->
                                     <span class="toggle-text">
                                         <button class="show-more-btn">
-                                            <img src="/HRVC/frontend/web/images/icons/Settings/btn-KGI-right.svg"
+                                            <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/btn-KGI-right.svg"
                                                 style="margin-top: 1px; margin-left: 3px;">
                                         </button>
                                     </span>
@@ -531,7 +533,7 @@
                                 </div>
                                 <div class="col-4 text-start">
                                     <small class="small-text text-muted">
-                                        <img src="/HRVC/frontend/web/images/icons/Settings/Target.svg"
+                                        <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/Target.svg"
                                             class="pim-iconKFI">
                                         Target
                                     </small>
@@ -541,7 +543,7 @@
                                 <div class="col-4 text-end">
                                     <small class="small-text text-muted">
                                         Result
-                                        <img src="/HRVC/frontend/web/images/icons/Settings/Result.svg"
+                                        <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/Result.svg"
                                             class="pim-iconKFI" style="margin-top: 1px; margin-left: 3px;">
                                     </small>
                                     <br>
@@ -556,8 +558,8 @@
                             </div>
                             <div class="col-4 text-center">
                                 <button class="btn-update btn-KGI">
-                                    <img src="/HRVC/frontend/web/images/icons/Settings/refresh-black.svg" class="mb-2"
-                                        style="width: 12px; height: 12px;">
+                                    <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/refresh-black.svg"
+                                        class="mb-2" style="width: 12px; height: 12px;">
                                     Update
                                 </button>
                             </div>
@@ -578,7 +580,7 @@
                                 <!-- Left Section -->
                                 <div class="col-7 text-start">
                                     <span class="key-title">
-                                        <img src="/HRVC/frontend/web/images/icons/black-icons/FinancialSystem/KPI.svg"
+                                        <img src="<?=Yii::$app->homeUrl?>images/icons/black-icons/FinancialSystem/KPI.svg"
                                             class="home-icon mr-5">
                                         Key Performance Indicator
                                     </span>
@@ -615,13 +617,13 @@
                                     <!-- รูปแรก ชิดขวา -->
                                     <span class="toggle-text">
                                         <button class="show-more-btn">
-                                            <img src="/HRVC/frontend/web/images/icons/Settings/btn-KPI-left.svg">
+                                            <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/btn-KPI-left.svg">
                                         </button>
                                     </span>
                                     <!-- รูปสอง ชิดซ้าย -->
                                     <span class="toggle-text">
                                         <button class="show-more-btn">
-                                            <img src="/HRVC/frontend/web/images/icons/Settings/btn-KPI-right.svg">
+                                            <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/btn-KPI-right.svg">
                                         </button>
                                     </span>
                                 </div>
@@ -634,7 +636,7 @@
                                 </div>
                                 <div class="col-4 text-start">
                                     <small class="small-text text-muted">
-                                        <img src="/HRVC/frontend/web/images/icons/Settings/Target.svg"
+                                        <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/Target.svg"
                                             class="pim-iconKFI">
                                         Target
                                     </small>
@@ -644,7 +646,7 @@
                                 <div class="col-4 text-end">
                                     <small class="small-text text-muted">
                                         Result
-                                        <img src="/HRVC/frontend/web/images/icons/Settings/Result.svg"
+                                        <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/Result.svg"
                                             class="pim-iconKFI" style="margin-top: 1px; margin-left: 3px;">
                                     </small>
                                     <br>
@@ -659,7 +661,7 @@
                             </div>
                             <div class="col-4 text-center d-flex justify-content-center align-items-center">
                                 <button class="btn-update btn-KPI">
-                                    <img src="/HRVC/frontend/web/images/icons/Settings/refresh.svg" class="mb-2"
+                                    <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/refresh.svg" class="mb-2"
                                         style="width: 12px; height: 12px;">
                                     Update
                                 </button>
@@ -688,7 +690,7 @@
                                 <!-- Left Section -->
                                 <div class="col-7 text-start">
                                     <span class="key-title">
-                                        <img src="/HRVC/frontend/web/images/icons/black-icons/FinancialSystem/KFI.svg"
+                                        <img src="<?=Yii::$app->homeUrl?>images/icons/black-icons/FinancialSystem/KFI.svg"
                                             class="home-icon mr-5">
                                         Key Financial Indicator
                                     </span>
@@ -725,14 +727,14 @@
                                     <!-- รูปแรก ชิดขวา -->
                                     <span class="toggle-text">
                                         <button class="show-more-btn">
-                                            <img src="/HRVC/frontend/web/images/icons/Settings/btn-KFI-left.svg"
+                                            <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/btn-KFI-left.svg"
                                                 style="margin-top: 1px; margin-left: 3px;">
                                         </button>
                                     </span>
                                     <!-- รูปสอง ชิดซ้าย -->
                                     <span class="toggle-text">
                                         <button class="show-more-btn">
-                                            <img src="/HRVC/frontend/web/images/icons/Settings/btn-KFI-right.svg"
+                                            <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/btn-KFI-right.svg"
                                                 style="margin-top: 1px; margin-left: 3px;">
                                         </button>
                                     </span>
@@ -746,7 +748,7 @@
                                 </div>
                                 <div class="col-4 text-start">
                                     <small class="small-text text-muted">
-                                        <img src="/HRVC/frontend/web/images/icons/Settings/Target.svg"
+                                        <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/Target.svg"
                                             class="pim-iconKFI" style="margin-top: 1px; margin-right: 3px;">
                                         Target
                                     </small>
@@ -756,7 +758,7 @@
                                 <div class="col-4 text-end">
                                     <small class="small-text text-muted">
                                         Result
-                                        <img src="/HRVC/frontend/web/images/icons/Settings/Result.svg"
+                                        <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/Result.svg"
                                             class="pim-iconKFI" style="margin-top: 1px; margin-left: 3px;">
                                     </small>
                                     <br>
@@ -771,7 +773,7 @@
                             </div>
                             <div class="col-4 text-center">
                                 <button class="btn-update btn-KFI">
-                                    <img src="/HRVC/frontend/web/images/icons/Settings/refresh.svg" class="mb-2"
+                                    <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/refresh.svg" class="mb-2"
                                         style="width: 12px; height: 12px;">
                                     Update
                                 </button>
@@ -793,7 +795,7 @@
                                 <!-- Left Section -->
                                 <div class="col-7 text-start">
                                     <span class="key-title">
-                                        <img src="/HRVC/frontend/web/images/icons/black-icons/FinancialSystem/KGI.svg"
+                                        <img src="<?=Yii::$app->homeUrl?>images/icons/black-icons/FinancialSystem/KGI.svg"
                                             class="home-icon mr-5">
                                         Key Goal Indicator
                                     </span>
@@ -830,14 +832,14 @@
                                     <!-- รูปแรก ชิดขวา -->
                                     <span class="toggle-text">
                                         <button class="show-more-btn">
-                                            <img src="/HRVC/frontend/web/images/icons/Settings/btn-KGI-left.svg"
+                                            <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/btn-KGI-left.svg"
                                                 style="margin-top: 1px; margin-left: 3px;">
                                         </button>
                                     </span>
                                     <!-- รูปสอง ชิดซ้าย -->
                                     <span class="toggle-text">
                                         <button class="show-more-btn">
-                                            <img src="/HRVC/frontend/web/images/icons/Settings/btn-KGI-right.svg"
+                                            <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/btn-KGI-right.svg"
                                                 style="margin-top: 1px; margin-left: 3px;">
                                         </button>
                                     </span>
@@ -851,7 +853,7 @@
                                 </div>
                                 <div class="col-4 text-start">
                                     <small class="small-text text-muted">
-                                        <img src="/HRVC/frontend/web/images/icons/Settings/Target.svg"
+                                        <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/Target.svg"
                                             class="pim-iconKFI">
                                         Target
                                     </small>
@@ -861,7 +863,7 @@
                                 <div class="col-4 text-end">
                                     <small class="small-text text-muted">
                                         Result
-                                        <img src="/HRVC/frontend/web/images/icons/Settings/Result.svg"
+                                        <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/Result.svg"
                                             class="pim-iconKFI" style="margin-top: 1px; margin-left: 3px;">
                                     </small>
                                     <br>
@@ -876,8 +878,8 @@
                             </div>
                             <div class="col-4 text-center">
                                 <button class="btn-update btn-KGI">
-                                    <img src="/HRVC/frontend/web/images/icons/Settings/refresh-black.svg" class="mb-2"
-                                        style="width: 12px; height: 12px;">
+                                    <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/refresh-black.svg"
+                                        class="mb-2" style="width: 12px; height: 12px;">
                                     Update
                                 </button>
                             </div>
@@ -898,7 +900,7 @@
                                 <!-- Left Section -->
                                 <div class="col-7 text-start">
                                     <span class="key-title">
-                                        <img src="/HRVC/frontend/web/images/icons/black-icons/FinancialSystem/KPI.svg"
+                                        <img src="<?=Yii::$app->homeUrl?>images/icons/black-icons/FinancialSystem/KPI.svg"
                                             class="home-icon mr-5">
                                         Key Performance Indicator
                                     </span>
@@ -935,13 +937,13 @@
                                     <!-- รูปแรก ชิดขวา -->
                                     <span class="toggle-text">
                                         <button class="show-more-btn">
-                                            <img src="/HRVC/frontend/web/images/icons/Settings/btn-KPI-left.svg">
+                                            <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/btn-KPI-left.svg">
                                         </button>
                                     </span>
                                     <!-- รูปสอง ชิดซ้าย -->
                                     <span class="toggle-text">
                                         <button class="show-more-btn">
-                                            <img src="/HRVC/frontend/web/images/icons/Settings/btn-KPI-right.svg">
+                                            <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/btn-KPI-right.svg">
                                         </button>
                                     </span>
                                 </div>
@@ -954,7 +956,7 @@
                                 </div>
                                 <div class="col-4 text-start">
                                     <small class="small-text text-muted">
-                                        <img src="/HRVC/frontend/web/images/icons/Settings/Target.svg"
+                                        <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/Target.svg"
                                             class="pim-iconKFI">
                                         Target
                                     </small>
@@ -964,7 +966,7 @@
                                 <div class="col-4 text-end">
                                     <small class="small-text text-muted">
                                         Result
-                                        <img src="/HRVC/frontend/web/images/icons/Settings/Result.svg"
+                                        <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/Result.svg"
                                             class="pim-iconKFI" style="margin-top: 1px; margin-left: 3px;">
                                     </small>
                                     <br>
@@ -979,7 +981,7 @@
                             </div>
                             <div class="col-4 text-center d-flex justify-content-center align-items-center">
                                 <button class="btn-update btn-KPI">
-                                    <img src="/HRVC/frontend/web/images/icons/Settings/refresh.svg" class="mb-2"
+                                    <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/refresh.svg" class="mb-2"
                                         style="width: 12px; height: 12px;">
                                     Update
                                 </button>
