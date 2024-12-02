@@ -103,7 +103,7 @@
 
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="col-4 text-center">
-                                <strong>34%</strong>
+                                <canvas id="pieChartKFI"></canvas> <!-- ปรับขนาด canvas -->
                             </div>
                             <div class="col-4 text-start">
                                 <small class="small-text text-muted">
@@ -208,7 +208,7 @@
 
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="col-4 text-center">
-                                <strong>80%</strong>
+                                <canvas id="pieChartKGI"></canvas>
                             </div>
                             <div class="col-4 text-start">
                                 <small class="small-text text-muted">
@@ -311,7 +311,7 @@
 
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="col-4 text-center">
-                                <strong>79%</strong>
+                                <canvas id="pieChartKPI"></canvas>
                             </div>
                             <div class="col-4 text-start">
                                 <small class="small-text text-muted">
@@ -997,3 +997,70 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/chartjs-plugin-datalabels.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Function to create a pie chart
+    function createPieChart(chartId, percentage, colors) {
+        const ctx = document.getElementById(chartId).getContext('2d');
+
+        const data = {
+            datasets: [{
+                data: [percentage * 100, 100 - percentage * 100], // คำนวณเปอร์เซ็นต์
+                backgroundColor: colors,
+                borderWidth: 0
+            }]
+        };
+
+        const options = {
+            responsive: true,
+            cutoutPercentage: 60, // ลดขนาดของรูตรงกลาง
+            plugins: {
+                tooltip: {
+                    enabled: false // ปิด tooltip
+                },
+                datalabels: {
+                    display: true,
+                    formatter: function(value, context) {
+                        const percentage = context.dataset.data[0];
+                        return `${Math.round(percentage)}%`; // แสดงเปอร์เซ็นต์
+                    },
+                    color: '#000000', // กำหนดสีของข้อความ
+                    font: {
+                        weight: 'bold',
+                        size: 18
+                    },
+                    align: 'center', // ตั้งข้อความให้ตรงกลาง
+                    anchor: 'center' // ตั้งตำแหน่งให้ตรงกลาง
+                }
+            }
+        };
+
+        return new Chart(ctx, {
+            type: 'pie',
+            data: data,
+            options: options
+        });
+    }
+
+    // Set up pie charts with different color schemes and percentages
+    const percentageKFI = 0.34; // Update the percentage as needed
+    const percentageKGI = 0.71; // Update the percentage as needed
+    const percentageKPI = 0.84; // Update the percentage as needed
+
+    // Pie chart KFI
+    createPieChart('pieChartKFI', percentageKFI, ['#748EE9', '#CCD7FF']);
+
+    // Pie chart KGI
+    createPieChart('pieChartKGI', percentageKGI, ['#FDCA40', '#FFF2D6']);
+
+    // Pie chart KPI
+    createPieChart('pieChartKPI', percentageKPI, ['#FF715B', '#FFEAE6']);
+
+    // Update percentage text if necessary (for display elsewhere on the page)
+    document.getElementById('percentageText').textContent = `${Math.round(percentage * 100)}%`;
+});
+</script>
