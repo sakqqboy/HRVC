@@ -11,7 +11,7 @@
 
     <div class="row">
         <!-- Chart & Tabs -->
-        <div class="col-lg-8">
+        <div class="col-lg-9">
             <!-- Chart -->
             <div class="dashboard-chart mb-4 p-3">
                 <!-- Chart Content -->
@@ -26,7 +26,7 @@
         </div>
 
         <!-- rofile & Schedule -->
-        <div class="col-lg-4">
+        <div class="col-lg-3">
             <!-- Profile -->
             <div class="profile-card p-3 mb-4 mt-15">
                 <!-- Profile Content-->

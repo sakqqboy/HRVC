@@ -131,6 +131,51 @@
     box-sizing: border-box;
 }
 
+.small-text {
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-top: 5px;
+}
+
+.small-textKFI {
+    color: #2F42ED;
+    leading-trim: both;
+    text-edge: cap;
+    font-family: "SF Pro Display";
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 600;
+}
+
+.small-textKGI {
+    color: var(--HRVC---Text-Black, #30313D);
+    leading-trim: both;
+    text-edge: cap;
+    font-family: "SF Pro Display";
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 600;
+}
+
+.small-textKPI {
+    color: #FF715B;
+    leading-trim: both;
+    text-edge: cap;
+    font-family: "SF Pro Display";
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 600;
+}
+
+.bold-text {
+    font-size: 14px;
+    line-height: 1.2;
+    display: inline-block;
+    font-weight: 700;
+    margin-top: 5px;
+}
+
 /* File: web/css/dashboard.css */
 /* General */
 .dashboard-title {
@@ -181,37 +226,185 @@
 
 /* Cards */
 .dashboard-kfi-card {
-    background-color: #fff;
+    background-color: #F0F4FF;
     border-radius: 0 0 10px 10px;
     /* ใช้ radius เฉพาะมุมล่าง */
     border: 1.166px solid #748EE9;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+.dashboard-kfi-top {
+    border-radius: 10px 10px 0 0;
+    /* ใช้ radius เฉพาะมุมล่าง */
+    height: 11px;
+    flex-shrink: 0;
+    background: #748EE9;
+
+}
+
+
 .dashboard-kgi-card {
-    background-color: #fff;
+    background-color: #FFF7E0;
     border-radius: 0 0 10px 10px;
     /* ใช้ radius เฉพาะมุมล่าง */
     border: 1.166px solid #FDCA40;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+.dashboard-kgi-top {
+    border-radius: 10px 10px 0 0;
+    /* ใช้ radius เฉพาะมุมล่าง */
+    height: 11px;
+    flex-shrink: 0;
+    background: #FDCA40;
+
+}
+
+.key-title {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.completion-percentage {
+    font-size: 24px;
+    font-weight: bold;
+    display: block;
+}
+
+.total-achievement {
+    font-size: 8px;
+    color: #333;
+    display: block;
+}
+
+.total-progress {
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.total-k {
+    font-size: 10px;
+}
+
+.key-title-container {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+}
+
+.btn-update {
+    padding: 3px 3px 3px 3px;
+    font-size: 12px;
+    border-radius: 3px;
+    border: none;
+    color: #FFF;
+    background: var(--Due-Passed-Red, #E05757);
+}
+
+.btn-KFI {
+    border-radius: 3px;
+    border: none;
+    color: #FFF;
+    background: var(--Due-Passed-Red, #2F42ED);
+}
+
+.btn-KGI {
+    border-radius: 3px;
+    border: none;
+    color: #000;
+    background: var(--Due-Passed-Red, #FDCA40);
+}
+
+.btn-KPI {
+    border-radius: 3px;
+    border: none;
+    color: #FFF;
+    background: var(--Due-Passed-Red, #FF715B);
+}
+
+.key-total {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    max-width: 200px;
+    /* กำหนดความกว้าง */
+    transition: max-width 0.3s ease;
+}
+
+.toggle-text {
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.key-total.expanded {
+    white-space: normal;
+    /* ทำให้ข้อความแสดงเต็ม */
+    max-width: none;
+    /* ทำให้ข้อความไม่จำกัดขนาด */
+}
+
+.show-more-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    height: 8px;
+    width: 8px;
+    padding: 0px 0px 0px 0px;
+}
+
+
+
+
 
 .dashboard-kpi-card {
-    background-color: #fff;
+    background-color: #FFE8E6;
     border-radius: 0 0 10px 10px;
     /* ใช้ radius เฉพาะมุมล่าง */
     border: 1.166px solid #FF715B;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+.dashboard-kpi-top {
+    border-radius: 10px 10px 0 0;
+    /* ใช้ radius เฉพาะมุมล่าง */
+    height: 11px;
+    flex-shrink: 0;
+    background: #FF715B;
+
+}
+
+.progress-dashboard {
+    border-radius: 5px;
+    height: 12px;
+    background-color: #e0e0e0;
+    /* สีพื้นหลังสำหรับแถบความคืบหน้า */
+}
 
 .progress-bar {
     border-radius: 5px;
+    height: 12px;
 }
 
+.bg-KFI {
+    background-color: #748EE9 !important;
+    /* สีสำหรับ KFI */
+}
+
+.bg-KGI {
+    background-color: #FDCA40 !important;
+    /* สีสำหรับ KGI */
+}
+
+.bg-KPI {
+    background-color: #FF715B !important;
+    /* สีสำหรับ KPI */
+}
+
+
+
 .dashboard-progress-bar {
-    height: 8px;
+    height: 12px;
     border-radius: 4px;
 }
 
@@ -340,6 +533,9 @@ h6.dashboard-kpi-title {
 .custom-hr {
     border-top: 2px solid #C3BDBD;
     border-style: dotted;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
 }
 
 
@@ -362,6 +558,157 @@ h6.dashboard-kpi-title {
     font-size: 12px;
 
 }
+
+
+
+/* chart */
+
+.legend-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+}
+
+.legend-item span {
+    margin-left: 5px;
+}
+
+/* Chart Container */
+.chart-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+}
+
+/* Navigation Buttons */
+.chart-nav-button {
+    position: absolute;
+    top: 2%;
+    z-index: 5;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+#prevButton {
+    left: 10px;
+}
+
+#nextButton {
+    left: 40px;
+}
+
+.chart-nav-button img {
+    width: 24px;
+    height: 24px;
+}
+
+/* Graph Area */
+.chart-graph {
+    width: 100%;
+    height: 400px;
+}
+
+/* Company Info */
+.chart-company-info {
+    position: absolute;
+    left: 220px;
+    top: 5%;
+    transform: translateY(-50%);
+    z-index: 5;
+    display: flex;
+    width: 114px;
+    height: 25px;
+    padding: 6px 7px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 41px;
+    background: #D7EBFF;
+    border: none;
+}
+
+.chart-company-info img {
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+}
+
+.chart-company-info span {
+    font-size: 12px;
+    color: #333333;
+}
+
+/* Key Buttons Group */
+.chart-button-group {
+    position: absolute;
+    top: 12%;
+    left: 70%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+}
+
+.chart-button-wrapper {
+    position: relative;
+}
+
+.chart-key-button {
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+    margin-right: 10px;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.kfi {
+    background: #748EE9;
+}
+
+.kgi {
+    background: #FDCA40;
+}
+
+.kpi {
+    background: #FF715B;
+}
+
+.chart-button-wrapper span {
+    position: absolute;
+    top: 40%;
+    left: 80%;
+    transform: translateY(-50%);
+    margin-left: 2px;
+    font-size: 12px;
+    color: #333333;
+}
+
+.highcharts-legend-item {
+    /* display: none; */
+}
+
+/* .highcharts-graph {
+    display: none;
+} */
+
+/* .highcharts-point {
+    display: none;
+} */
+
+/* 
+.highcharts-area {
+    display: none;
+} */
+
+
 
 @media (max-width: 768px) {
     .show-fade-one {

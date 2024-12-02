@@ -4,11 +4,19 @@
         <ul class="nav nav-pills schedule-tabs mb-3" role="tablist">
             <li class="col-6 nav-item text-center">
                 <a class="nav-link active" id="upcoming-schedule-tab" data-bs-toggle="tab" href="#upcoming-schedule"
-                    role="tab" aria-controls="upcoming-schedule" aria-selected="true">Upcoming Schedule</a>
+                    role="tab" aria-controls="upcoming-schedule" aria-selected="true">
+                    <img src="/HRVC/frontend/web/images/icons/Settings/calendar-time.svg" alt="Company" class="pim-icon"
+                        style="width: 14px; height: 14px;">
+                    Upcoming Schedule
+                </a>
             </li>
             <li class="col-6 nav-item text-center">
                 <a class="nav-link" id="pending-approvals-tab" data-bs-toggle="tab" href="#pending-approvals" role="tab"
-                    aria-controls="pending-approvals" aria-selected="false">Pending Approvals</a>
+                    aria-controls="pending-approvals" aria-selected="false">
+                    <img src="/HRVC/frontend/web/images/icons/Settings/3person.svg" alt="Company" class="pim-icon"
+                        style="width: 14px; height: 14px;">
+                    Pending Approvals
+                </a>
             </li>
         </ul>
     </div>
