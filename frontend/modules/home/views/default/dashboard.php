@@ -1,5 +1,5 @@
 <?php
-
+$this->title = "Dashboard"
 ?>
 <div class="alert mt-10 pim-body bg-white">
     <!-- Dashboard Header -->

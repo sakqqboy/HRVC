@@ -1,3 +1,10 @@
+<style>
+.chart-graph.hide-legend-images .highcharts-legend-item .highcharts-area,
+.chart-graph.hide-legend-images .highcharts-legend-item .highcharts-point,
+.chart-graph.hide-legend-images .highcharts-legend-item .highcharts-graph {
+    display: none;
+}
+</style>
 <div class="chart-container">
     <button id="prevButton" class="chart-nav-button">
         <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/left.svg" alt="Previous">
@@ -36,43 +43,30 @@ document.addEventListener("DOMContentLoaded", () => {
     const chartsData = [{
             title: "KFI Performance",
             series: [{
-                    type: 'line',
-                    name: 'Actual',
-                    data: [2.5, 3.2, 4.1, 4.8, 5.0, 5.2, 5.5],
-                    color: '#748EE9',
-                    lineWidth: 2,
-                    marker: {
-                        radius: 4,
-                        fillColor: '#748EE9'
-                    }
-                },
-                {
-                    type: 'area',
-                    name: 'Target',
-                    data: [3.0, 3.5, 4.5, 5.0, 5.3, 5.7, 6.0],
-                    color: '#B4C2F1',
-                    fillOpacity: 0.4,
-                    lineWidth: 0,
-                    marker: {
-                        radius: 3
-                    }
+                type: 'area',
+                name: 'Target',
+                data: [3.0, 3.5, 4.5, 5.0, 5.3, 5.7, 6.0],
+                color: '#B4C2F1',
+                fillOpacity: 0.4,
+                lineWidth: 0,
+                marker: {
+                    radius: 3
                 }
-            ]
+            }, {
+                type: 'line',
+                name: 'Actual',
+                data: [2.5, 3.2, 4.1, 4.8, 5.0, 5.2, 5.5],
+                color: '#748EE9',
+                lineWidth: 2,
+                marker: {
+                    radius: 4,
+                    fillColor: '#748EE9'
+                }
+            }]
         },
         {
             title: "KGI Performance",
             series: [{
-                    type: 'line',
-                    name: 'Actual',
-                    data: [1.8, 2.3, 3.0, 3.5, 4.0, 4.5, 5.0],
-                    color: '#FFD000',
-                    lineWidth: 2,
-                    marker: {
-                        radius: 4,
-                        fillColor: '#FFD000'
-                    }
-                },
-                {
                     type: 'area',
                     name: 'Target',
                     data: [2.0, 2.8, 3.5, 4.0, 4.5, 5.0, 5.7],
@@ -82,23 +76,24 @@ document.addEventListener("DOMContentLoaded", () => {
                     marker: {
                         radius: 3
                     }
+                },
+                {
+                    type: 'line',
+                    name: 'Actual',
+                    data: [1.8, 2.3, 3.0, 3.5, 4.0, 4.5, 5.0],
+                    color: '#FFD000',
+                    lineWidth: 2,
+                    marker: {
+                        radius: 4,
+                        fillColor: '#FFD000'
+                    }
                 }
+
             ]
         },
         {
             title: "KPI Performance",
             series: [{
-                    type: 'line',
-                    name: 'Actual',
-                    data: [3.0, 3.7, 4.4, 5.1, 5.8, 6.5, 7.0],
-                    color: '#FF715B',
-                    lineWidth: 2,
-                    marker: {
-                        radius: 4,
-                        fillColor: '#FF715B'
-                    }
-                },
-                {
                     type: 'area',
                     name: 'Target',
                     data: [3.5, 4.0, 4.8, 5.5, 6.0, 6.5, 7.2],
@@ -107,6 +102,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     lineWidth: 0,
                     marker: {
                         radius: 3
+                    }
+                },
+                {
+                    type: 'line',
+                    name: 'Actual',
+                    data: [3.0, 3.7, 4.4, 5.1, 5.8, 6.5, 7.0],
+                    color: '#FF715B',
+                    lineWidth: 2,
+                    marker: {
+                        radius: 4,
+                        fillColor: '#FF715B'
                     }
                 }
             ]
@@ -117,6 +123,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const renderChart = () => {
         const chartData = chartsData[currentIndex];
+        // เพิ่ม class hide-legend-images
+        document.querySelector('.chart-graph').classList.add('hide-legend-images');
+
         Highcharts.chart('container', {
             chart: {
                 type: 'line',
@@ -150,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             fontWeight: 'bold'
                         }
                     },
-                    zIndex: 3
+                    zIndex: 3,
                 }]
             },
             yAxis: {
@@ -159,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 min: 0,
                 max: 7.5,
-                gridLineColor: '#E6E6E6'
+                gridLineColor: '#E6E6E6',
             },
             legend: {
                 align: 'right',
@@ -168,14 +177,34 @@ document.addEventListener("DOMContentLoaded", () => {
                 symbolRadius: 0,
                 useHTML: true,
                 labelFormatter: function() {
-                    if (this.name == 'Actual') {
-                        return '<img src="<?=Yii::$app->homeUrl?>images/icons/Settings/KFI-actual.svg" style="width: 35px; height: 35px; vertical-align: middle;">' +
-                            this.name;
+                    let iconPath = ''; // Default path
 
-                    } else if (this.name == 'Target') {
-                        return '<img src="<?=Yii::$app->homeUrl?>images/icons/Settings/KFI-target.svg" style="width: 35px; height: 35px; vertical-align: middle;">' +
-                            this.name;
+                    // เลือกรูปภาพตามประเภทกราฟ (KFI, KGI, KPI)
+                    if (currentIndex === 0) { // KFI
+                        if (this.name == 'Actual') {
+                            iconPath = 'KFI-actual.svg';
+                        } else if (this.name == 'Target') {
+                            iconPath = 'KFI-target.svg';
+                        }
+                    } else if (currentIndex === 1) { // KGI
+                        if (this.name == 'Actual') {
+                            iconPath = 'KGI-actual.svg';
+                        } else if (this.name == 'Target') {
+                            iconPath = 'KGI-target.svg';
+                        }
+                    } else if (currentIndex === 2) { // KPI
+                        if (this.name == 'Actual') {
+                            iconPath = 'KPI-actual.svg';
+                        } else if (this.name == 'Target') {
+                            iconPath = 'KPI-target.svg';
+                        }
                     }
+
+                    // แสดงไอคอนใน legend
+                    return '<img src="<?=Yii::$app->homeUrl?>images/icons/Settings/' +
+                        iconPath +
+                        '" style="width: 35px; height: 35px; vertical-align: middle;">' +
+                        this.name;
                 },
                 itemStyle: {
                     fontWeight: 'bold',
@@ -191,6 +220,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     };
+
+
 
     // Event listeners สำหรับปุ่มเลือกกราฟ
     document.getElementById('KFI').addEventListener('click', () => {

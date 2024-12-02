@@ -648,8 +648,8 @@ h6.dashboard-kpi-title {
 /* Key Buttons Group */
 .chart-button-group {
     position: absolute;
-    top: 12%;
-    left: 70%;
+    top: 14%;
+    left: 65%;
     transform: translateX(-50%);
     display: flex;
     gap: 20px;
@@ -690,25 +690,6 @@ h6.dashboard-kpi-title {
     font-size: 12px;
     color: #333333;
 }
-
-.highcharts-legend-item {
-    /* display: none; */
-}
-
-/* .highcharts-graph {
-    display: none;
-} */
-
-/* .highcharts-point {
-    display: none;
-} */
-
-/* 
-.highcharts-area {
-    display: none;
-} */
-
-
 
 @media (max-width: 768px) {
     .show-fade-one {
