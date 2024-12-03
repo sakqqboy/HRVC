@@ -5,11 +5,19 @@
                 class="profile-picture rounded-circle mb-3" alt="User Avatar" style="width: 80px;">
             <span class="badge bg-primary position-absolute bottom-0 start-50 translate-middle-x p-1">
                 Permanent
+                <?php 
+                    // foreach ($kgis as $year => $kgiMonth) :
+                    // endforeach;
+                    // echo $userId;
+                    // echo $userId;
+                    print($employeeId);
+                ?>
             </span>
         </div>
         <div class="col-8 ms-3">
             <h6 class="profile-name mb-0">
-                Shuhei Takahashi</h6>
+                Shuhei Takahashi
+            </h6>
             <p class="profile-role text-muted small mb-0">Chief Executive Officer (CEO)</p>
             <p class="profile-role text-muted small mb-0">Chief Executive Officer</p>
         </div>

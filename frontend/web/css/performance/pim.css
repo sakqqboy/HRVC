@@ -467,6 +467,20 @@
 	background: #2D7F06;
 }
 
+.circle-color-yenlow {
+	display: flex;
+	width: 18px;
+	height: 18px;
+	padding: 5px 5px;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	flex-shrink: 0;
+	border-radius: 15px;
+	background: #FFD000;
+}
+
 
 .over-assignKFI {
 	font-weight: 400;

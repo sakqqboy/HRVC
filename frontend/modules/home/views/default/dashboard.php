@@ -7,6 +7,12 @@ $this->title = "Dashboard"
         <img src="<?=Yii::$app->homeUrl?>images/icons/black-icons/FinancialSystem/Group23177.svg" class="me-3"
             alt="Icon" style="width: 40px;">
         <span class="dashboard-title">Performance Matrices Dashboard</span>
+        <?php 
+                    // foreach ($kgis as $year => $kgiMonth) :
+                    // endforeach;
+                    // echo $userId;
+                    // echo $userId;
+        ?>
     </div>
 
     <div class="row">
@@ -30,7 +36,7 @@ $this->title = "Dashboard"
             <!-- Profile -->
             <div class="profile-card p-3 mb-4 mt-15">
                 <!-- Profile Content-->
-                <?= $this->render('dashbord_profile') ?>
+                <?= $this->render('dashbord_profile', ['employeeId' => $employeeId]) ?>
             </div>
 
             <!-- navigation -->

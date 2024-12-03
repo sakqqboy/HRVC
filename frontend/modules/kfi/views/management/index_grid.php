@@ -212,15 +212,15 @@ $this->title = 'KFI Grid View';
                                                     <?php
                                                             } else { ?>
                                                     <div class="d-flex align-items-center" style="margin-left: 9px;">
-                                                        <div class=" circle-color-<?= $colorFormat ?>"
+                                                        <div class="circle-color-<?= $kfi["countEmployee"] == 0 ? 'yenlow' : $colorFormat ?>"
                                                             style=" margin-right: 5px;">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $colorFormat === 'disable' ? 'eye.svg' : 'eyewhite.svg' ?>"
+                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $colorFormat != 'disable' && $kfi["countEmployee"] != 0 ? 'eyewhite.svg' : 'eye.svg' ?>"
                                                                 class="home-icon"
                                                                 style="width: 14px; height: 14px; margin-top: -1px;">
                                                         </div>
                                                         <a href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(["kfiId" => $kfiId, 'openTab' => 1]) ?>"
-                                                            class="font-<?= $colorFormat ?>">
-                                                            View Assigned
+                                                            class="font-<?= $kfi["countEmployee"] == 0 ? 'black' : $colorFormat ?>">
+                                                            <?php echo $kfi["countEmployee"] == 0 ?  "View Assigned" :  "View Assigned"; ?>
                                                         </a>
                                                     </div>
                                                     <?php
