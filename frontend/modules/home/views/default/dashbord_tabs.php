@@ -103,7 +103,8 @@
 
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="col-4 text-center">
-                                <canvas id="pieChartKFI"></canvas> <!-- ปรับขนาด canvas -->
+                                <canvas id="pieChartKFI"></canvas>
+                                <!-- ปรับขนาด canvas -->
                             </div>
                             <div class="col-4 text-start">
                                 <small class="small-text text-muted">
@@ -529,7 +530,7 @@
 
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="col-4 text-center">
-                                    <strong>80%</strong>
+                                    <canvas id="pieChartKPI"></canvas>
                                 </div>
                                 <div class="col-4 text-start">
                                     <small class="small-text text-muted">
@@ -632,7 +633,7 @@
 
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="col-4 text-center">
-                                    <strong>79%</strong>
+                                    <canvas id="pieChartKGI"></canvas>
                                 </div>
                                 <div class="col-4 text-start">
                                     <small class="small-text text-muted">
@@ -849,7 +850,7 @@
 
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="col-4 text-center">
-                                    <strong>80%</strong>
+                                    <canvas id="pieChartKPI"></canvas>
                                 </div>
                                 <div class="col-4 text-start">
                                     <small class="small-text text-muted">
@@ -952,7 +953,7 @@
 
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="col-4 text-center">
-                                    <strong>79%</strong>
+                                    <canvas id="pieChartKGI"></canvas>
                                 </div>
                                 <div class="col-4 text-start">
                                     <small class="small-text text-muted">
@@ -999,7 +1000,6 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/chartjs-plugin-datalabels.min.js"></script>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -1017,24 +1017,33 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const options = {
             responsive: true,
-            cutoutPercentage: 60, // ลดขนาดของรูตรงกลาง
+            cutoutPercentage: 70, // ลดขนาดของรูตรงกลาง
             plugins: {
                 tooltip: {
                     enabled: false // ปิด tooltip
-                },
-                datalabels: {
-                    display: true,
-                    formatter: function(value, context) {
-                        const percentage = context.dataset.data[0];
-                        return `${Math.round(percentage)}%`; // แสดงเปอร์เซ็นต์
-                    },
-                    color: '#000000', // กำหนดสีของข้อความ
-                    font: {
-                        weight: 'bold',
-                        size: 18
-                    },
-                    align: 'center', // ตั้งข้อความให้ตรงกลาง
-                    anchor: 'center' // ตั้งตำแหน่งให้ตรงกลาง
+                }
+            },
+            // การวาดข้อความในส่วนกลาง
+            animation: {
+                onComplete: function() {
+                    const width = this.chart.width;
+                    const height = this.chart.height;
+                    const ctx = this.chart.ctx;
+
+                    ctx.restore();
+                    ctx.font = "10px "; // กำหนดฟอนต์
+                    ctx.fillStyle = "#000"; // กำหนดสีของข้อความ
+                    ctx.textAlign = "center"; // กำหนดให้อยู่กลาง
+                    ctx.textBaseline = "middle"; // กำหนดแนวตั้งให้อยู่กลาง
+
+                    // คำนวณตำแหน่งกลางของกราฟ
+                    const centerX = width / 1.85;
+                    const centerY = height / 1.65;
+
+                    // แสดงข้อความ (เปอร์เซ็นต์)
+                    const percentageText = `${Math.round(percentage * 100)}%`; // เปอร์เซ็นต์
+                    ctx.fillText(percentageText, centerX, centerY); // วาดข้อความ
+                    ctx.save();
                 }
             }
         };
@@ -1047,20 +1056,13 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Set up pie charts with different color schemes and percentages
-    const percentageKFI = 0.34; // Update the percentage as needed
-    const percentageKGI = 0.71; // Update the percentage as needed
-    const percentageKPI = 0.84; // Update the percentage as needed
+    const percentageKFI = 0.34; // เปอร์เซ็นต์ KFI
+    const percentageKGI = 0.84; // เปอร์เซ็นต์ KGI
+    const percentageKPI = 0.54; // เปอร์เซ็นต์ KPI
 
-    // Pie chart KFI
+    // สร้างกราฟ pie
     createPieChart('pieChartKFI', percentageKFI, ['#748EE9', '#CCD7FF']);
-
-    // Pie chart KGI
     createPieChart('pieChartKGI', percentageKGI, ['#FDCA40', '#FFF2D6']);
-
-    // Pie chart KPI
     createPieChart('pieChartKPI', percentageKPI, ['#FF715B', '#FFEAE6']);
-
-    // Update percentage text if necessary (for display elsewhere on the page)
-    document.getElementById('percentageText').textContent = `${Math.round(percentage * 100)}%`;
 });
 </script>
