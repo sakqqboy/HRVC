@@ -289,8 +289,8 @@ $this->title = "TEAM KGI";
                                                                     ? ($kgi["countTeamEmployee"] == 0 && $colorFormat != "disable" 
                                                                         ? 'pim-pic-yenlow' 
                                                                         : 'pim-pic-'  . $colorFormat) 
-                                                                    : ($kgi["countTeamEmployee"] == 0 
-                                                                        ? 'pim-pic-disable' 
+                                                                    : ($kgi["countTeamEmployee"] == 0 && $colorFormat != "disable" 
+                                                                        ? 'pim-pic-yenlow' 
                                                                         :'pim-pic-'  . $colorFormat) 
                                                                 ?>
                                                                 ">
@@ -304,8 +304,8 @@ $this->title = "TEAM KGI";
                                                                     ? ($kgi["countTeamEmployee"] == 0 && $colorFormat != "disable" 
                                                                         ? 'pim-pic-yenlow' 
                                                                         : 'pim-pic-'  . $colorFormat) 
-                                                                    : ($kgi["countTeamEmployee"] == 0 
-                                                                        ? 'pim-pic-disable' 
+                                                                    : ($kgi["countTeamEmployee"] == 0 && $colorFormat != "disable" 
+                                                                        ? 'pim-pic-yenlow' 
                                                                         :'pim-pic-'  . $colorFormat) 
                                                                 ?>
                                                                 ">
@@ -319,8 +319,8 @@ $this->title = "TEAM KGI";
                                                                     ? ($kgi["countTeamEmployee"] == 0 && $colorFormat != "disable" 
                                                                         ? 'pim-pic-yenlow' 
                                                                         : 'pim-pic-'  . $colorFormat) 
-                                                                    : ($kgi["countTeamEmployee"] == 0 
-                                                                        ? 'pim-pic-disable' 
+                                                                    : ($kgi["countTeamEmployee"] == 0 && $colorFormat != "disable" 
+                                                                        ? 'pim-pic-yenlow' 
                                                                         :'pim-pic-'  . $colorFormat) 
                                                                 ?>
                                                                 ">
@@ -333,8 +333,8 @@ $this->title = "TEAM KGI";
                                                                     ? ($kgi["countTeamEmployee"] == 0 && $colorFormat != "disable" 
                                                                         ? 'load-yenlow' 
                                                                         : 'load-'  . $colorFormat) 
-                                                                    : ($kgi["countTeamEmployee"] == 0 
-                                                                        ? 'load-disable' 
+                                                                    : ($kgi["countTeamEmployee"] == 0 && $colorFormat != "disable" 
+                                                                        ? 'load-yenlow' 
                                                                         :'load-'  . $colorFormat) 
                                                                 ?> ">
                                                             <?= $kgi["countTeamEmployee"] ?>
@@ -346,8 +346,8 @@ $this->title = "TEAM KGI";
                                                         ? ($kgi["countTeamEmployee"] == 0 && $colorFormat != "disable" 
                                                             ? 'yenlow-assignNew' 
                                                             : $colorFormat . '-assignNew') 
-                                                        : ($kgi["countTeamEmployee"] == 0 
-                                                            ? 'disable-assignNew' 
+                                                        : ($kgi["countTeamEmployee"] == 0 && $colorFormat != "disable" 
+                                                            ? 'yenlow-assignNew' 
                                                             : $colorFormat . '-assignNew') 
                                                     ?>">
                                                     <?php
@@ -355,7 +355,7 @@ $this->title = "TEAM KGI";
                                                             ?>
                                                     <span class="pull-left">
                                                         <img src="
-                                                        <?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $kgi["countTeamEmployee"] == 0 ? 'disable' : $colorFormat ?>.svg"
+                                                        <?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $kgi["countTeamEmployee"] == 0  && $colorFormat !=  "disable" ? 'yenlow' : $colorFormat ?>.svg"
                                                             class="home-icon mr-2">
                                                     </span>
                                                     <?php if ($kgi["countTeamEmployee"] != 0) { ?>
@@ -364,7 +364,13 @@ $this->title = "TEAM KGI";
                                                         style="top: 2px;">
                                                         View Assigned
                                                     </a>
-                                                    <?php }else{ echo "View Assigned" ;} ?>
+                                                    <?php }else{ ?>
+                                                    <span style="top: 2px;">
+                                                        Not assigned
+                                                    </span>
+                                                    <?php
+                                                        }  
+                                                    ?>
 
                                                     <?php
                                                             } elseif ($kgi["countTeamEmployee"] == 0) {
@@ -392,50 +398,11 @@ $this->title = "TEAM KGI";
                                                     <?php
                                                             }
                                                             ?>
-                                                    <!-- <span class="pull-left"
-                                                        style="display:<?= $kgi['isOver'] == 2 ? 'none;' : '' ?>">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.svg"
-                                                            class="home-icon mr-2">
-                                                    </span>
-                                                    <?php
-                                                    if ($colorFormat != "disable" && $role >= 3) {
-                                                    ?>
-                                                    <a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgi["kgiId"], "companyId" => $kgi["companyId"]]) ?>"
-                                                        class="font-<?= $colorFormat ?>" style="top: 2px;">
-                                                        Assign Team
-                                                    </a>
-                                                    <?php
-                                                    } else { ?>
-                                                    <span class="font-<?= $colorFormat ?> ml-16" style="top: 2px;">
-                                                        Edit Assigned
-                                                    </span>
-                                                    <?php
-                                                    }
-                                                    ?> -->
                                                 </div>
                                                 <div class="col-1">
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- <div class="col-12 disable-assign  mt-10 pt-5 pb-1">
-                                            <div class="row">
-                                                <div class="col-5 border-right pr-2">
-                                                    <div class="row">
-                                                        <div class="col-4">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.svg"
-                                                                class="first-layer-icon ml-5" style="margin-top: -4px;">
-                                                        </div>
-                                                        <div class="col-4 number-tag load-disble pr-3 pl-3 ml-5"
-                                                            style="height:17px;">
-                                                            <?= $kgi["countTeam"] ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-7 pl-3 pr-13">
-                                                    Teams
-                                                </div>
-                                            </div>
-                                        </div> -->
                                         <div class="col-12 mt-10 pt-5 pb-1">
                                             <div class="row">
                                                 <div class="col-5 pr-2">
@@ -479,7 +446,7 @@ $this->title = "TEAM KGI";
                                                         Assign Team
                                                     </a>
                                                     <?php
-                                                            } else { ?>
+                                                            } else if ($kgi["countTeam"] != 0) { ?>
                                                     <span class="pull-left">
                                                         <img src="
                                                         <?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $colorFormat ?>.svg"
@@ -491,9 +458,18 @@ $this->title = "TEAM KGI";
                                                             View Team
                                                         </a>
                                                     </span>
+                                                    <?php }else{ ?>
+                                                    <span class="pull-left">
+                                                        <img src="
+                                                        <?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $colorFormat ?>.svg"
+                                                            class="home-icon mr-2">
+                                                    </span>
+                                                    <span style="top: 2px;">
+                                                        Not assigned
+                                                    </span>
                                                     <?php
-                                                            }
-                                                            ?>
+                                                        }  
+                                                    ?>
 
                                                 </div>
                                                 <div class="col-1">

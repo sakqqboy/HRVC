@@ -203,8 +203,8 @@ $this->title = 'KGI Grid View';
                                                                     ? ($kgi["countEmployee"] == 0 && $colorFormat != "disable" 
                                                                         ? 'pim-pic-yenlow' 
                                                                         : 'pim-pic-'  . $colorFormat) 
-                                                                    : ($kgi["countEmployee"] == 0 
-                                                                        ? 'pim-pic-disable' 
+                                                                    : ($kgi["countEmployee"] == 0  && $colorFormat != "disable" 
+                                                                        ? 'pim-pic-yenlow' 
                                                                         :'pim-pic-'  . $colorFormat) 
                                                                 ?>
                                                                 ">
@@ -218,8 +218,8 @@ $this->title = 'KGI Grid View';
                                                                     ? ($kgi["countEmployee"] == 0 && $colorFormat != "disable" 
                                                                         ? 'pim-pic-yenlow' 
                                                                         : 'pim-pic-'  . $colorFormat) 
-                                                                    : ($kgi["countEmployee"] == 0 
-                                                                        ? 'pim-pic-disable' 
+                                                                    : ($kgi["countEmployee"] == 0  && $colorFormat != "disable" 
+                                                                        ? 'pim-pic-yenlow' 
                                                                         :'pim-pic-'  . $colorFormat) 
                                                                 ?>
                                                                 ">
@@ -233,8 +233,8 @@ $this->title = 'KGI Grid View';
                                                                     ? ($kgi["countEmployee"] == 0 && $colorFormat != "disable" 
                                                                         ? 'pim-pic-yenlow' 
                                                                         : 'pim-pic-'  . $colorFormat) 
-                                                                    : ($kgi["countEmployee"] == 0 
-                                                                        ? 'pim-pic-disable' 
+                                                                    : ($kgi["countEmployee"] == 0  && $colorFormat != "disable" 
+                                                                        ? 'pim-pic-yenlow' 
                                                                         :'pim-pic-'  . $colorFormat) 
                                                                 ?>
                                                                 ">
@@ -247,8 +247,8 @@ $this->title = 'KGI Grid View';
                                                                     ? ($kgi["countEmployee"] == 0 && $colorFormat != "disable" 
                                                                         ? 'load-yenlow' 
                                                                         : 'load-'  . $colorFormat) 
-                                                                    : ($kgi["countEmployee"] == 0 
-                                                                        ? 'load-disable' 
+                                                                    : ($kgi["countEmployee"] == 0  && $colorFormat != "disable" 
+                                                                        ? 'load-yenlow' 
                                                                         :'load-'  . $colorFormat) 
                                                                 ?>
                                                            ">
@@ -263,8 +263,8 @@ $this->title = 'KGI Grid View';
                                                         ? ($kgi["countEmployee"] == 0 && $colorFormat != "disable" 
                                                             ? 'yenlow-assignNew' 
                                                             : $colorFormat . '-assignNew') 
-                                                        : ($kgi["countEmployee"] == 0 
-                                                            ? 'disable-assignNew' 
+                                                        : ($kgi["countEmployee"] == 0  && $colorFormat != "disable" 
+                                                            ? 'yenlow-assignNew' 
                                                             : $colorFormat . '-assignNew') 
                                                     ?>">
                                                     <?php
@@ -273,7 +273,7 @@ $this->title = 'KGI Grid View';
                                                             ?>
                                                     <span class="pull-left">
                                                         <img src="
-                                                        <?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $kgi["countEmployee"] == 0 ? 'disable' : $colorFormat ?>.svg"
+                                                        <?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $kgi["countEmployee"] == 0  && $colorFormat !=  "disable" ? 'yenlow' : $colorFormat ?>.svg"
                                                             class="home-icon mr-2">
                                                     </span>
                                                     <?php if ($kgi["countEmployee"] != 0) { ?>
@@ -281,7 +281,11 @@ $this->title = 'KGI Grid View';
                                                         href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>">
                                                         View Assigned
                                                     </a>
-                                                    <?php }else{ echo "View Assigned" ;} ?>
+                                                    <?php }else{ ?>
+                                                    <span style="top: 2px;">
+                                                        Not assigned
+                                                    </span>
+                                                    <?    } ?>
                                                     <?php
                                                             } elseif ($kgi["countEmployee"] == 0) {
                                                                 // เงื่อนไข 2: ถ้า $kgi["countEmployee"] เท่ากับ 0
@@ -356,7 +360,7 @@ $this->title = 'KGI Grid View';
                                                         Assign Team
                                                     </a>
                                                     <?php
-                                                            } else { ?>
+                                                            } else if ($kgi["countTeam"] != 0) { ?>
                                                     <span class="pull-left">
                                                         <img src="
                                                         <?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $colorFormat ?>.svg"
@@ -367,10 +371,18 @@ $this->title = 'KGI Grid View';
                                                         style="top: 2px;">
                                                         View Team
                                                     </a>
+                                                    <?php }else{ ?>
+                                                    <span class="pull-left">
+                                                        <img src="
+                                                        <?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $colorFormat ?>.svg"
+                                                            class="home-icon mr-2">
+                                                    </span>
+                                                    <span style="top: 2px;">
+                                                        Not assigned
+                                                    </span>
                                                     <?php
-                                                            }
-                                                            ?>
-
+                                                        }  
+                                                    ?>
                                                 </div>
                                                 <div class="col-1">
                                                 </div>
