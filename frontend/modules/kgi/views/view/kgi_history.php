@@ -28,6 +28,8 @@ $this->title = 'KGI View';
                     <?= $kgiDetail["kgiName"] ?>
                 </div>
                 <div class="col-1">
+                    <?php  if ($role >= 5) {
+                    ?>
                     <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kgi"
                         onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)"
                         onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
@@ -37,6 +39,7 @@ $this->title = 'KGI View';
                         Delete
 
                     </a>
+                    <? } ?>
                 </div>
             </div>
             <div class="row mt-10">

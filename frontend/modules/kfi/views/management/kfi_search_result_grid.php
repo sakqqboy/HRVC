@@ -230,23 +230,32 @@ $this->title = 'KFI Grid View';
                                                     </div>
                                                 </div>
                                                 <div
-                                                    class="col-7 pl-1 pt-10 pr-0 <?=  $kfi["countEmployee"] == 0 ? 'yenlow' : $colorFormat ?>-assignKFI">
+                                                    class="col-7 pl-1 pt-10 pr-0 <?= $kfi["countEmployee"] == 0 ? 'yenlow' : $colorFormat ?>-assignKFI">
+                                                    <?php
+                                                            if ($role >= 5) {
+                                                            ?>
                                                     <span class="pull-left mt-1 pl-2  pr-4">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?=  $kfi["countEmployee"] == 0 ? 'yenlow' : $colorFormat ?>.svg"
                                                             class="home-icon" style="margin-top: -3px;">
                                                     </span>
-                                                    <?php
-                                                            if ($role >= 5) {
-                                                            ?>
                                                     <a href="<?= Yii::$app->homeUrl ?>kfi/assign/assign/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, "companyId" => $kfi['companyId']]) ?>"
                                                         class="font-<?= $kfi["countEmployee"] == 0 ? 'black' : $colorFormat ?>">
                                                         <?php echo $kfi["countEmployee"] == 0 ?  "Assign Person" :  "Change Assigned"; ?>
                                                     </a>
                                                     <?php
                                                             } else { ?>
-                                                    <span class="font-<?= $colorFormat ?>">
-                                                        Assign Person
-                                                    </span>
+                                                    <div class="d-flex align-items-center" style="margin-left: 9px;">
+                                                        <div class="circle-color-<?= $kfi["countEmployee"] == 0 ? 'yenlow' : $colorFormat ?>"
+                                                            style=" margin-right: 5px;">
+                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $colorFormat != 'disable' && $kfi["countEmployee"] != 0 ? 'eyewhite.svg' : 'eye.svg' ?>"
+                                                                class="home-icon"
+                                                                style="width: 14px; height: 14px; margin-top: -1px;">
+                                                        </div>
+                                                        <a href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(["kfiId" => $kfiId, 'openTab' => 1]) ?>"
+                                                            class="font-<?= $kfi["countEmployee"] == 0 ? 'black' : $colorFormat ?>">
+                                                            <?php echo $kfi["countEmployee"] == 0 ?  "View Assigned" :  "View Assigned"; ?>
+                                                        </a>
+                                                    </div>
                                                     <?php
                                                             }
                                                             ?>

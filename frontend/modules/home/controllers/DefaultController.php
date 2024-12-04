@@ -2,6 +2,8 @@
 
 namespace frontend\modules\home\controllers;
 
+use frontend\models\hrvc\User;
+use Yii;
 use yii\web\Controller;
 
 /**
@@ -20,6 +22,9 @@ class DefaultController extends Controller
 
     public function actionDashboard()
     {
-        return $this->render('dashboard');
+        $userId = Yii::$app->user->id;
+        $employeeId = User::employeeIdFromUserId($userId);
+        
+        return $this->render('dashboard', ['employeeId'=> $employeeId,'userId'=> $userId]);
     }
 }

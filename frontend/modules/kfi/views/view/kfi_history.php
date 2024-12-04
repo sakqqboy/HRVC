@@ -28,6 +28,8 @@ $this->title = 'KFI View';
                     </a>
                     <?= $kfiDetail["kfiName"] ?>
                 </div>
+                <?php  if ($role >= 5) {
+                    ?>
                 <div class="col-1">
                     <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#staticBackdrop4"
                         onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)"
@@ -38,7 +40,9 @@ $this->title = 'KFI View';
                         Delete
                     </a>
                 </div>
-
+                <?php
+                }
+            ?>
             </div>
             <div class="row mt-10">
                 <div class="col-lg-7 col-12">

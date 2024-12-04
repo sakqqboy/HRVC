@@ -68,6 +68,8 @@ $this->title = 'Self KGI View';
                         </span>
                         <span class="team-name"><?= $kgiEmployeeDetail["employeeName"] ?></span>
                     </span>
+                    <?php  if ($role >= 5) {
+                    ?>
                     <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kgi"
                         onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)"
                         onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
@@ -77,6 +79,7 @@ $this->title = 'Self KGI View';
                         Delete
 
                     </a>
+                    <? } ?>
                 </div>
             </div>
             <div class="row mt-10">
