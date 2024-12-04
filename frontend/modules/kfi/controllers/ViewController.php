@@ -477,7 +477,8 @@ class ViewController extends Controller
 			"kfiId" => $kfiId,
 			"kfiDetail" => $kfiDetail,
 			"kgis" => $kgis,
-			"ghp" => $ghp
+			"ghp" => $ghp,
+			"role" => $role 
 		]);
 
 		return json_encode($res);

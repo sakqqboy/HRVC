@@ -87,7 +87,7 @@ class ViewController extends Controller
 		$kgis = curl_exec($api);
 		$kgis = json_decode($kgis, true);
 		curl_close($api);
-		//throw new Exception($kgiId);
+		// throw new Exception(Yii::$app->user->id);
 		//throw new Exception(print_r($kgiDetail, true));
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();

@@ -345,16 +345,6 @@ $this->title = "KGI";
                                                 Person
                                             </a>
                                         </li>
-                                        <?php
-												}
-												?>
-                                        <!-- <li data-bs-toggle="modal" data-bs-target="#delete-kgi"
-                                            onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)"
-                                            style="display: <?= $display ?>;">
-                                            <a class="dropdown-item"><i class="fa fa-trash-o text-danger"
-                                                    aria-hidden="true"></i></a>
-                                        </li> -->
-
                                         <li class="pl-4 pr-4" data-bs-toggle="modal" data-bs-target="#delete-kgi"
                                             onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)" title="Delete">
                                             <a class="dropdown-itemNEW pl-4 pr-25" href="#">
@@ -364,7 +354,15 @@ $this->title = "KGI";
                                                 Delete
                                             </a>
                                         </li>
-
+                                        <?php
+												}
+												?>
+                                        <!-- <li data-bs-toggle="modal" data-bs-target="#delete-kgi"
+                                            onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)"
+                                            style="display: <?= $display ?>;">
+                                            <a class="dropdown-item"><i class="fa fa-trash-o text-danger"
+                                                    aria-hidden="true"></i></a>
+                                        </li> -->
                                     </ul>
                                 </td>
                             </tr>

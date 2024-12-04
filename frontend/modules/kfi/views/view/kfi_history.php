@@ -218,13 +218,6 @@ $this->title = 'KFI View';
                                 class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-2-blue">
                             Update History
                         </div>
-                        <!-- <div class="col-2  view-tab" id="tab-3" onclick="javascript:viewTabKfi(3)">
-							<img src="<?php //Yii::$app->homeUrl 
-                                        ?>images/icons/Settings/comment.svg" alt="History" class="pim-icon mr-5" style="margin-top: -2px;" id="tab-3-black">
-							<img src="<?php //Yii::$app->homeUrl 
-                                        ?>images/icons/Settings/comment-blue.svg" alt="History" class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-3-blue">
-							Chats
-						</div> -->
                         <div class="col-3 view-tab" id="tab-4" onclick="viewTabKfi(<?= $kfiHistoryId ?>,4)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-4-black">
@@ -232,10 +225,7 @@ $this->title = 'KFI View';
                                 class="pim-icon mr-5" style="margin-top: -2px; display: none;" id="tab-4-blue">
                             Chart
                         </div>
-
-
-
-                        <div class="col-4  view-tab" id="tab-5" onclick="javascript:viewTabKfi(<?= $kfiHistoryId ?>,5)">
+                        <div class="col-4 view-tab" id="tab-5" onclick="javascript:viewTabKfi(<?= $kfiHistoryId ?>, 5)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-5-black">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate-blue.svg" alt="History"
