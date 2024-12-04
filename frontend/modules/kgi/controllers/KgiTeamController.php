@@ -233,6 +233,8 @@ class KgiTeamController extends Controller
 		$waitForApprove = json_decode($waitForApprove, true);
 
 		curl_close($api);
+		// throw new Exception(Yii::$app->user->id);
+
 		//throw new Exception($role);
 		// throw new Exception(print_r($teamKgis,true));
 		$isManager = UserRole::isManager();

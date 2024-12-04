@@ -265,7 +265,7 @@ $this->title = 'KGI Grid View';
                                                     </div>
                                                 </div>
                                                 <div
-                                                    class="col-6 <?= $kgi["countEmployee"] == 0 && $colorFormat != "disable" ? 'yenlow-assignNew' : $colorFormat . '-assignNew' ?>">
+                                                    class="col-6 <?= $kgi["countEmployee"] == 0 && $colorFormat != "disable" && $role > 3 ? 'yenlow-assignNew' : $colorFormat . '-assignNew' ?>">
                                                     <?php
 														if ($colorFormat == "disable" || $role < 3) {
 															// เงื่อนไข 1: ถ้า $colorFormat ไม่ใช่ "disable"
@@ -275,7 +275,9 @@ $this->title = 'KGI Grid View';
                                                         <?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $colorFormat ?>.svg"
                                                             class="home-icon mr-2">
                                                     </span>
-                                                    <a class="font-<?= $colorFormat ?>" style="top: 2px;">
+                                                    <a class="font-<?= $colorFormat ?>"
+                                                        href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>"
+                                                        style="top: 2px;">
                                                         View Assigned
                                                     </a>
                                                     <?php
@@ -368,7 +370,9 @@ $this->title = 'KGI Grid View';
                                                         <?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $colorFormat ?>.svg"
                                                             class="home-icon mr-2">
                                                     </span>
-                                                    <a class="font-<?= $colorFormat ?>" style="top: 2px;">
+                                                    <a class="font-<?= $colorFormat ?>"
+                                                        href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>"
+                                                        style="top: 2px;">
                                                         View Team
                                                     </a>
                                                     <?php
