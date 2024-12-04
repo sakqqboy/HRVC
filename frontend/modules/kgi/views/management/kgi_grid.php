@@ -258,63 +258,48 @@ $this->title = 'KGI Grid View';
                                                     </div>
                                                 </div>
 
-                                                <div class="col-6 
-                                                    <?= $role >= 3 
-                                                        ? ($kgi["countEmployee"] == 0 && $colorFormat != "disable" 
-                                                            ? 'yenlow-assignNew' 
-                                                            : $colorFormat . '-assignNew') 
-                                                        : ($kgi["countEmployee"] == 0  && $colorFormat != "disable" 
-                                                            ? 'yenlow-assignNew' 
-                                                            : $colorFormat . '-assignNew') 
-                                                    ?>">
-                                                    <?php
-                                                            if ($colorFormat == "disable" || $role < 3) {
-                                                                // เงื่อนไข 1: ถ้า $colorFormat ไม่ใช่ "disable"
-                                                            ?>
+                                                <?php if($role < 4) {?>
+                                                <div
+                                                    class="col-6 <?= $kgi["countEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>-assignNew ">
+
                                                     <span class="pull-left">
-                                                        <img src="
-                                                        <?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $kgi["countEmployee"] == 0  && $colorFormat !=  "disable" ? 'yenlow' : $colorFormat ?>.svg"
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $kgi["countEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>.svg"
                                                             class="home-icon mr-2">
                                                     </span>
-                                                    <?php if ($kgi["countEmployee"] != 0) { ?>
-                                                    <a class="font-<?= $colorFormat ?>" style="top: 2px;"
-                                                        href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>">
+
+                                                    <a href="<?= ($kgi["countEmployee"] > 0 && $colorFormat != 'disable') ? Yii::$app->homeUrl . 'kgi/view/kgi-history/' . ModelMaster::encodeParams(['kgiId' => $kgiId]) : '#' ?>"
+                                                        class="font-<?= $kgi["countEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'black') : $colorFormat ?>"
+                                                        style="<?= ($kgi["countEmployee"] == 0 && $colorFormat == 'disable') ? 'pointer-events: none; color: gray;' : 'top: 2px;' ?>">
+                                                        <?php if ($kgi["countEmployee"] == 0 && $colorFormat == 'disable') { ?>
+                                                        Not Assigned
+                                                        <?php } elseif ($kgi["countEmployee"] == 0) { ?>
                                                         View Assigned
+                                                        <?php } else { ?>
+                                                        View Assigned
+                                                        <?php } ?>
                                                     </a>
-                                                    <?php }else{ ?>
-                                                    <span style="top: 2px;">
-                                                        Not assigned
-                                                    </span>
-                                                    <?    } ?>
-                                                    <?php
-                                                            } elseif ($kgi["countEmployee"] == 0) {
-                                                                // เงื่อนไข 2: ถ้า $kgi["countEmployee"] เท่ากับ 0
-                                                            ?>
-                                                    <span class="pull-left">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-yenlow.svg"
-                                                            class="home-icon mr-2">
-                                                    </span>
-                                                    <a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgi["companyId"], "save" => 0]) ?>"
-                                                        class="font-black" style="top: 2px;">
-                                                        Assign Person
-                                                    </a>
-                                                    <?php
-                                                            } elseif ($role > 3) {
-                                                                // เงื่อนไข 3: ถ้า $role มากกว่า 3
-                                                            ?>
-                                                    <span class="pull-left"
-                                                        style="display:<?= $kgi['isOver'] == 2 ? 'none;' : '' ?>">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.svg"
-                                                            class="home-icon mr-2">
-                                                    </span>
-                                                    <a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgi["companyId"], "save" => 0]) ?>"
-                                                        class="font-<?= $colorFormat ?>" style="top: 2px;">
-                                                        Edit Assigned
-                                                    </a>
-                                                    <?php
-                                                            }
-                                                            ?>
+
                                                 </div>
+                                                <?php  }else { ?>
+                                                <div
+                                                    class="col-6 <?= $kgi["countEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>-assignNew ">
+                                                    <span class="pull-left">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?=  $kgi["countEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>.svg"
+                                                            class="home-icon mr-2">
+                                                    </span>
+                                                    <a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgi["companyId"]]) ?>"
+                                                        class="font-<?=  $kgi["countEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'black') : $colorFormat ?>"
+                                                        style="top: 2px;">
+                                                        <?php if($kgi["countEmployee"] == 0 && $colorFormat == 'disable') {?>
+                                                        Assigned Person
+                                                        <?php  }else if($kgi["countEmployee"] == 0)  { ?>
+                                                        Assigned Person
+                                                        <?php }else{  ?>
+                                                        Edit Assigned
+                                                        <?php } ?>
+                                                    </a>
+                                                </div>
+                                                <?php }  ?>
                                             </div>
                                         </div>
                                         <div class="col-12 mt-10 pt-5 pb-1">
@@ -346,44 +331,48 @@ $this->title = 'KGI Grid View';
                                                     </div>
 
                                                 </div>
-                                                <div class="col-6 <?= $colorFormat ?>-assignNew ">
-                                                    <?php
-                                                            if ($colorFormat != "disable" && $role > 3) {
-                                                            ?>
-                                                    <span class="pull-left"
-                                                        style="display:<?= $kgi['isOver'] == 2 ? 'none;' : '' ?>">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.svg"
-                                                            class="home-icon mr-2">
-                                                    </span>
-                                                    <a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgi["companyId"]]) ?>"
-                                                        class="font-<?= $colorFormat ?>" style="top: 2px;">
-                                                        Assign Team
-                                                    </a>
-                                                    <?php
-                                                            } else if ($kgi["countTeam"] != 0) { ?>
+                                                <?php if($role < 4) {?>
+                                                <div
+                                                    class="col-6 <?= $kgi["countTeam"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>-assignNew ">
+
                                                     <span class="pull-left">
-                                                        <img src="
-                                                        <?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $colorFormat ?>.svg"
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?=  $kgi["countTeam"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>.svg"
                                                             class="home-icon mr-2">
                                                     </span>
-                                                    <a class="font-<?= $colorFormat ?>"
-                                                        href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>"
-                                                        style="top: 2px;">
-                                                        View Team
+
+                                                    <a href="<?= ($kgi["countTeam"] > 0 || $colorFormat != 'disable') ? Yii::$app->homeUrl . 'kgi/view/kgi-history/' . ModelMaster::encodeParams(['kgiId' => $kgiId]) : '#' ?>"
+                                                        class="font-<?= ($kgi["countTeam"] == 0 && $colorFormat == 'disable') ? 'black' : $colorFormat ?>"
+                                                        style="top: 2px; <?= ($kgi["countTeam"] == 0 && $colorFormat == 'disable') ? 'pointer-events: none; color: gray;' : '' ?>">
+                                                        <?php if ($kgi["countTeam"] == 0 && $colorFormat == 'disable') { ?>
+                                                        Not Assigned
+                                                        <?php } elseif ($kgi["countTeam"] == 0) { ?>
+                                                        Not Team
+                                                        <?php } else { ?>
+                                                        View Assigned
+                                                        <?php } ?>
                                                     </a>
-                                                    <?php }else{ ?>
-                                                    <span class="pull-left">
-                                                        <img src="
-                                                        <?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $colorFormat ?>.svg"
-                                                            class="home-icon mr-2">
-                                                    </span>
-                                                    <span style="top: 2px;">
-                                                        Not assigned
-                                                    </span>
-                                                    <?php
-                                                        }  
-                                                    ?>
+
                                                 </div>
+                                                <?php  }else { ?>
+                                                <div
+                                                    class="col-6 <?= $kgi["countTeam"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>-assignNew ">
+                                                    <span class="pull-left">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?=  $kgi["countTeam"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>.svg"
+                                                            class="home-icon mr-2">
+                                                    </span>
+                                                    <a href="<?= ($kgi["countTeam"] > 0 || $colorFormat != 'disable') ? Yii::$app->homeUrl . 'kgi/assign/assign/ '.  ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgi["companyId"]]) : '#' ?>"
+                                                        class="font-<?= ($kgi["countTeam"] == 0 && $colorFormat == 'disable') ? 'black' : $colorFormat ?>"
+                                                        style="top: 2px; <?= ($kgi["countTeam"] == 0 && $colorFormat == 'disable') ? 'pointer-events: none; color: gray;' : '' ?>">
+                                                        <?php if($kgi["countTeam"] == 0 && $colorFormat == 'disable') {?>
+                                                        Assigned Team
+                                                        <?php  }else if($kgi["countTeam"] == 0)  { ?>
+                                                        Assigned Team
+                                                        <?php }else{  ?>
+                                                        Edit Assigned
+                                                        <?php } ?>
+                                                    </a>
+                                                </div>
+                                                <?php }  ?>
                                                 <div class="col-1">
                                                 </div>
                                             </div>

@@ -192,6 +192,7 @@ class AssignController extends Controller
 
 			endforeach;
 		}
+		if (!empty($_POST["team"])) {
 		$deleteTeamKgi = KgiTeam::find()
 			->where(['not in', 'teamId', $_POST["team"]])
 			->andWhere(["kgiId" => $_POST["kgiId"]])
@@ -201,6 +202,7 @@ class AssignController extends Controller
 				$delKgi->delete();
 			endforeach;
 		}
+	} 
 		$employeeIds = [];
 		$i = 0;
 		if (isset($_POST["employeeTarget"]) && count($_POST["employeeTarget"]) > 0) {
