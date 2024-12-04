@@ -196,7 +196,7 @@ $this->title = 'Company KFI History';
                                         </div>
                                         <div class="col-6 pl-1 pt-9 pr-0 <?= $colorFormat ?>-assignKFI">
                                             <?php
-                                                        if ($role <= 5) {
+                                                        if ($role >= 5) {
                                                         ?>
                                             <span class="pull-left mt-1 pl-2  pr-4">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.svg"
@@ -209,7 +209,7 @@ $this->title = 'Company KFI History';
                                             <?php
                                                         } else { ?>
                                             <div class="d-flex align-items-center" style="margin-left: 9px;">
-                                                <div class=" circle-color-<?= $colorFormat ?>"
+                                                <div class="circle-color-<?= $colorFormat ?>"
                                                     style="margin-right: 5px;">
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $colorFormat === 'disable' ? 'eye.svg' : 'eyewhite.svg' ?>"
                                                         class="home-icon"
