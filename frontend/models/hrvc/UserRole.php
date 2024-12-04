@@ -77,25 +77,25 @@ class UserRole extends \frontend\models\hrvc\master\UserRoleMaster
                 ->asArray()
                 ->one();
             if (isset($userRole) && !empty($userRole)) {
-                if ($userRole["roleId"] == 1) {
+                if ($userRole["roleId"] == 1) { //admin
                     return 7;
                 }
-                if ($userRole["roleId"] == 2) {
+                if ($userRole["roleId"] == 2) { //gm
                     return 6;
                 }
-                if ($userRole["roleId"] == 3) {
+                if ($userRole["roleId"] == 3) { //manager
                     return 5;
                 }
-                if ($userRole["roleId"] == 4) {
+                if ($userRole["roleId"] == 4) { //supervisor  ass manager
                     return 4;
                 }
-                if ($userRole["roleId"] == 5) {
+                if ($userRole["roleId"] == 5) { //team leader
                     return 3;
                 }
-                if ($userRole["roleId"] == 6) {
+                if ($userRole["roleId"] == 6) { //hr
                     return 2;
                 }
-                if ($userRole["roleId"] == 7) {
+                if ($userRole["roleId"] == 7) { //staff
                     return 1;
                 }
             }

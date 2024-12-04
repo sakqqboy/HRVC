@@ -25,28 +25,31 @@ use frontend\models\hrvc\UserRole;
                 </div>
         </div>
         <div class="col-12 mt-20 box-bnt-home">
-                <div class="btn-group-menu mb-10">
-                        <div class="row">
-                                <div class="col-2 pl-20">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/branch.svg" class="home-icon" style="margin-top: -3px;">
-                                </div>
-                                <div class="col-8 text-center pr-0 pl-0">Group Management</div>
-                                <div class="col-2 pr-0 pl-5 text-start">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/4.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;display:none;" onclick="javascript:hideGroupMenu('group-management')" id="group-management-hide">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/7.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;" onclick="javascript:showGroupMenu('group-management')" id="group-management-show">
+                <?php
+                $role = UserRole::userRight();
+                if ($role >= 2) {
+                ?>
+                        <div class="btn-group-menu mb-10">
+                                <div class="row">
+                                        <div class="col-2 pl-20">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/MasterSetting/group.svg" class="home-icon" style="margin-top: -3px;">
+                                        </div>
+                                        <div class="col-8 text-center pr-0 pl-0">Group Management</div>
+                                        <div class="col-2 pr-0 pl-5 text-start">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/4.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;display:none;" onclick="javascript:hideGroupMenu('group-management')" id="group-management-hide">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/7.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;" onclick="javascript:showGroupMenu('group-management')" id="group-management-show">
+                                        </div>
                                 </div>
                         </div>
-                </div>
-                <div id="group-management" style="display:none;">
-                        <?php
-                        $role = UserRole::userRight();
-                        if ($role >= 2) {
+                        <div id="group-management" style="display:none;">
+                                <?php
+
                                 if ($role >= 5) {
-                        ?>
+                                ?>
                                         <div class="col-12 first-layer-manu">
                                                 <a href="<?= Yii::$app->homeUrl ?>setting/group/create-group" class="no-underline">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/MasterSetting/group.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                        Group Information
+                                                        Group Configuration
                                                 </a>
                                         </div>
                                         <div class="col-12 first-layer-manu">
@@ -75,7 +78,7 @@ use frontend\models\hrvc\UserRole;
                                 <?php
                                 }
                                 $isHr = UserRole::isHr();
-                                if ($isHr == 1 || $role >= 5) {
+                                if ($isHr == 1 || $role >= 2) {
                                 ?>
                                         <div class="col-12 first-layer-manu">
                                                 <a href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => ''])
@@ -101,11 +104,13 @@ use frontend\models\hrvc\UserRole;
                                                         Management Layer
                                                 </a>
                                         </div>
-                        <?php
+                                <?php
                                 }
-                        }
-                        ?>
-                </div>
+                                ?>
+                        </div>
+                <?php
+                }
+                ?>
         </div>
         <div class="col-12 mt-20 box-bnt-home">
                 <div class="btn-group-menu">
