@@ -3,6 +3,15 @@
         <div class="col-10 pt-13 pb-5 pl-0">
             <div class="row">
                 <div class="col-3 border-right text-center">
+                    <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="header-kfi">
+                        <span>
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/KFI.svg"
+                                class="home-icon mr-5">
+                        </span>
+                        Key Financial Indicator
+                    </a>
+                </div>
+                <div class="col-3 border-right text-center">
                     <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi-grid" class="header-kgi-active">
                         <span>
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/KGI.svg"
