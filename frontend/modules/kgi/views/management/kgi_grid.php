@@ -178,17 +178,26 @@ $this->title = 'KGI Grid View';
                                                             <?php if (isset($kgi['kgiEmployee'][0])): ?>
                                                             <img src="<?= Yii::$app->homeUrl . $kgi['kgiEmployee'][0] ?>"
                                                                 class="pim-pic-gridNew">
+                                                            <? else :?>
+                                                            <img src="<?= Yii::$app->homeUrl . '/image/user.png' ?>"
+                                                                class="pim-pic-gridNew">
                                                             <?php endif; ?>
                                                         </div>
                                                         <div class="col-2 pic-after pt-0">
                                                             <?php if (isset($kgi['kgiEmployee'][1])): ?>
                                                             <img src="<?= Yii::$app->homeUrl . $kgi['kgiEmployee'][1] ?>"
                                                                 class="pim-pic-gridNew">
+                                                            <? else :?>
+                                                            <img src="<?= Yii::$app->homeUrl . '/image/user.png' ?>"
+                                                                class="pim-pic-gridNew">
                                                             <?php endif; ?>
                                                         </div>
                                                         <div class="col-2 pic-after pt-0">
                                                             <?php if (isset($kgi['kgiEmployee'][2])): ?>
                                                             <img src="<?= Yii::$app->homeUrl . $kgi['kgiEmployee'][2] ?>"
+                                                                class="pim-pic-gridNew">
+                                                            <? else :?>
+                                                            <img src="<?= Yii::$app->homeUrl . '/image/user.png' ?>"
                                                                 class="pim-pic-gridNew">
                                                             <?php endif; ?>
                                                         </div>
