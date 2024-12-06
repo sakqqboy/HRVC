@@ -176,12 +176,11 @@ $this->title = 'KPI Grid View';
                                                         <div class="col-5 pr-2 pl-13">
                                                             <div class="row d-flex align-items-center" style="min-height: 24px;">
                                                                 <?php if ($kpi["countEmployee"] != 0) {
-
-                                                                    //throw new Exception(print_r($kpi["kpiEmployee"], true))
                                                                 ?>
                                                                     <div class="col-2">
                                                                         <?php if (isset($kpi['kpiEmployee'][0])):
-                                                                            if (file_exists(Yii::$app->homeUrl . $kpi['kpiEmployee'][0]) == 0) {
+                                                                            $filePath = Yii::getAlias('@webroot') . '/' . $kpi['kpiEmployee'][0];
+                                                                            if (file_exists($filePath) == 0) {
                                                                                 $kpi['kpiEmployee'][0] = 'image/user.svg';
                                                                             }
                                                                         ?>
@@ -191,8 +190,9 @@ $this->title = 'KPI Grid View';
                                                                     </div>
                                                                     <div class="col-2 pic-after pt-0">
                                                                         <?php if (isset($kpi['kpiEmployee'][1])):
-                                                                            if (file_exists(Yii::$app->homeUrl . $kpi['kpiEmployee'][1]) == 0) {
-                                                                                $kpi['kpiEmployee'][1] = 'image/user.png';
+                                                                            $filePath = Yii::getAlias('@webroot') . '/' . $kpi['kpiEmployee'][1];
+                                                                            if (file_exists($filePath) == 0) {
+                                                                                $kpi['kpiEmployee'][1] = 'image/user.svg';
                                                                             }
                                                                         ?>
                                                                             <img src="<?= Yii::$app->homeUrl . $kpi['kpiEmployee'][1] ?>"
@@ -201,8 +201,9 @@ $this->title = 'KPI Grid View';
                                                                     </div>
                                                                     <div class="col-2 pic-after pt-0">
                                                                         <?php if (isset($kpi['kpiEmployee'][2])):
-                                                                            if (file_exists(Yii::$app->homeUrl . $kpi['kpiEmployee'][2]) == 0) {
-                                                                                $kpi['kpiEmployee'][2] = 'image/user.png';
+                                                                            $filePath = Yii::getAlias('@webroot') . '/' . $kpi['kpiEmployee'][2];
+                                                                            if (file_exists($filePath) == 0) {
+                                                                                $kpi['kpiEmployee'][2] = 'image/user.svg';
                                                                             }
                                                                         ?>
                                                                             <img src="<?= Yii::$app->homeUrl . $kpi['kpiEmployee'][2] ?>"
