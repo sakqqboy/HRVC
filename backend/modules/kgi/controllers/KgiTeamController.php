@@ -296,6 +296,7 @@ class KgiTeamController extends Controller
 				->asArray()
 				->one();
 		} else {
+
 			$kgiTeamHistory = KgiTeamHistory::find()
 				->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.companyId,k.code,kt.target,kt.kgiTeamId,
 		kt.teamId,kgi_team_history.result,kgi_team_history.fromDate,kgi_team_history.toDate,kgi_team_history.month,kgi_team_history.kgiTeamHistoryId,
@@ -306,12 +307,14 @@ class KgiTeamController extends Controller
 				->asArray()
 				->orderBy('kgi_team_history.createDateTime DESC')
 				->one();
+
 		}
 
 		if (!isset($kgiTeamHistory) || empty($kgiTeamHistory)) {
+
 			$kgiTeamHistory = KgiTeam::find()
 				->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.companyId,k.code,kgi_team.target,kgi_team.kgiTeamId,
-		kgi_team.teamId,kgi_team.result,kgi_team.fromDate,kgi_team.toDate,kgi_team.month,kgi_team.year,kgi_team_history.kgiTeamHistoryId,
+		kgi_team.teamId,kgi_team.result,kgi_team.fromDate,kgi_team.toDate,kgi_team.month,kgi_team.year,
 		kgi_team.status,kgi_team.nextCheckDate,k.kgiDetail,k.amountType,kgi_team.remark')
 				->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_team.kgiId")
 				->where(["kgi_team.kgiTeamId" => $kgiTeamId, "kgi_team.status" => [1, 2]])

@@ -24,7 +24,7 @@
 	/* ใช้ vw แทน px เพื่อทำให้ responsive */
 	width: 100%;
 	/* ขยายเต็มหน้าจอ */
-	min-height: 100vh;
+	min-height: 80vh;
 	box-sizing: border-box;
 	/* รวม padding ในขนาดองค์ประกอบ */
 }
@@ -34,7 +34,7 @@
 	width: 100%;
 	/* ขยายเต็มหน้าจอ */
 	box-sizing: border-box;
-	min-height: 100vh;
+	min-height: 80vh;
 
 	/* รวม padding ในขนาดองค์ประกอบ */
 }

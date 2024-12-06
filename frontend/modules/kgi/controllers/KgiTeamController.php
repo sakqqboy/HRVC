@@ -360,6 +360,7 @@ class KgiTeamController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-team-detail?kgiTeamId=' . $kgiTeamId . '&&kgiTeamHistoryId=0');
 		$kgiTeam = curl_exec($api);
 		$kgiTeam = json_decode($kgiTeam, true);
+
 		curl_close($api);
 		$res["kgiTeam"] = $kgiTeam;
 		return json_encode($res);
