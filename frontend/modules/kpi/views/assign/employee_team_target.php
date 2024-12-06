@@ -30,7 +30,7 @@
 		</div>
 	</div>
 </div>
-<div class="col-12 pr-0 pl-0" id="employee-in-team-<?= $teamId ?>" style="display:none;">
+<div class="col-12 pr-0 pl-0" id="employee-in-team-<?= $teamId ?>">
 	<?php
 	if (isset($employeeTeamTarget["employee"]) && count($employeeTeamTarget["employee"]) > 0) {
 		foreach ($employeeTeamTarget["employee"] as $employeeId => $employee):
