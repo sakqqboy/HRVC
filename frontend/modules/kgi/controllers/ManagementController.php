@@ -24,6 +24,7 @@ use frontend\models\hrvc\KgiSolution;
 use frontend\models\hrvc\KgiTeam;
 use frontend\models\hrvc\KgiTeamHistory;
 use frontend\models\hrvc\Kpi;
+use frontend\models\hrvc\Role;
 use frontend\models\hrvc\Team;
 use frontend\models\hrvc\Title;
 use frontend\models\hrvc\Unit;
@@ -1630,9 +1631,16 @@ class ManagementController extends Controller
 			return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi');
 		}
 		$branchId = User::userBranchId();
-		$departments = Department::find()
+		$admin = UserRole::isAdmin();
+		if ($admin == 1 ){
+			$departments = Department::find()
+			->where(["status" => 1])
+			->asArray()->all();
+		} else {
+			$departments = Department::find()
 			->where(["branchId" => $branchId, "status" => 1])
 			->asArray()->all();
+		}
 		if (isset($departments) && count($departments) > 0) {
 			foreach ($departments as $department) :
 				$teams = Team::find()
