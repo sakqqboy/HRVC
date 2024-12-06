@@ -48,7 +48,7 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
                 if ($ke["picture"] != "") {
                     $employee[$ke["employeeId"]] = $ke["picture"];
                 } else {
-                    $employee[$ke["employeeId"]] = 'images/icons/Settings/personblack.svg';
+                    $employee[$ke["employeeId"]] = 'image/user.svg';
                     // if ($ke["gender"] == 1) {
                     //     $employee[$ke["employeeId"]] = 'image/user.png';
                     // } else {
