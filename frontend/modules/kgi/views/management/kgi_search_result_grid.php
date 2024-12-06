@@ -187,8 +187,12 @@ $this->title = 'KGI Grid View';
                                                                     ?>
                                                             <img src="<?= Yii::$app->homeUrl . $kgi['kgiEmployee'][0] ?>"
                                                                 class="pim-pic-gridNew">
+                                                            <? else { ?>
+                                                            <img src="<?= Yii::$app->homeUrl . '/images/icons/Settings/personblack.svg' ?>"
+                                                                class="pim-pic-gridNew">
                                                             <?php
-                                                                    }
+                                                                }
+                                                            }
                                                                     ?>
                                                         </div>
                                                         <div class="col-2 pic-after pt-0">

@@ -514,7 +514,7 @@ class KgiPersonalController extends Controller
 		$waitForApprove = curl_exec($api);
 		$waitForApprove = json_decode($waitForApprove, true);
 
-		if ($role == 3) {
+		if ($role >= 3) {
 			$em = Employee::employeeDetailByUserId(Yii::$app->user->id);
 			if (isset($em) && !empty($em)) {
 				curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-team?id=' . $em["branchId"]);
@@ -525,6 +525,8 @@ class KgiPersonalController extends Controller
 		}
 
 		curl_close($api);
+		// throw new Exception(print_r($kgis, true));	
+
 		//throw new exception($paramText, true);
 		if ($type == "list") {
 			$file = "index";

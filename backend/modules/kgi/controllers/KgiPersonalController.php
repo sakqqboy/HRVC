@@ -431,6 +431,7 @@ class KgiPersonalController extends Controller
 					"solution" => KgiIssue::lastestIssue($kgiEmployee["kgiId"])["solution"],
 					"countTeam" => KgiTeam::kgiTeam($kgiEmployee["kgiId"]),
 					"teamMate" =>  $selectPic,
+					"teamName" => Team::teamName($teamId),
 					"countTeamEmployee" => $countTeamEmployee,
 				];
 			endforeach;
