@@ -342,7 +342,7 @@ $this->title = "TEAM KGI";
                                                         <?php } ?>
                                                     </div>
                                                 </div>
-                                                <div class="col-6  <?= $role >= 3 
+                                                <!-- <div class="col-6  <?= $role >= 3 
                                                         ? ($kgi["countTeamEmployee"] == 0 && $colorFormat != "disable" 
                                                             ? 'yenlow-assignNew' 
                                                             : $colorFormat . '-assignNew') 
@@ -398,7 +398,51 @@ $this->title = "TEAM KGI";
                                                     <?php
                                                             }
                                                             ?>
+                                                </div> -->
+
+                                                <?php if($role < 4) {?>
+                                                <div
+                                                    class="col-6 <?= $kgi["countTeamEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>-assignNew ">
+
+                                                    <span class="pull-left">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $kgi["countTeamEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>.svg"
+                                                            class="home-icon mr-2">
+                                                    </span>
+
+                                                    <a href="<?= ($kgi["countTeamEmployee"] > 0 && $colorFormat != 'disable') ? Yii::$app->homeUrl . 'kgi/kgi-team/kgi-team-history/' . ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiTeamHistoryId' => 0, 'kgiId' => $kgi["kgiId"], 'openTab' => 1]) : '#' ?>"
+                                                        class="font-<?= $kgi["countTeamEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'black') : $colorFormat ?>"
+                                                        style="<?= ($kgi["countTeamEmployee"] == 0 || $colorFormat == 'disable') ? 'pointer-events: none; color: black; text-decoration: none; top: 2px;' : 'top: 2px;' ?>">
+                                                        <?php if ($kgi["countTeamEmployee"] == 0 && $colorFormat == 'disable') { ?>
+                                                        Not Assigned
+                                                        <?php } elseif ($kgi["countTeamEmployee"] == 0) { ?>
+                                                        Not Assigned
+                                                        <?php } else { ?>
+                                                        View Assigned
+                                                        <?php } ?>
+                                                    </a>
+
                                                 </div>
+                                                <?php  }else { ?>
+                                                <div
+                                                    class="col-6 <?= $kgi["countTeamEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>-assignNew ">
+                                                    <span class="pull-left">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?=  $kgi["countTeamEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>.svg"
+                                                            class="home-icon mr-2">
+                                                    </span>
+                                                    <a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgi["kgiId"], "companyId" => $kgi["companyId"]]) ?>"
+                                                        class="font-<?=  $kgi["countTeamEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'black') : $colorFormat ?>"
+                                                        style="top: 2px;">
+                                                        <?php if($kgi["countTeamEmployee"] == 0 && $colorFormat == 'disable') {?>
+                                                        Assigned Person
+                                                        <?php  }else if($kgi["countTeamEmployee"] == 0)  { ?>
+                                                        Assigned Person
+                                                        <?php }else{  ?>
+                                                        Edit Assigned
+                                                        <?php } ?>
+                                                    </a>
+                                                </div>
+                                                <?php }  ?>
+
                                                 <div class="col-1">
                                                 </div>
                                             </div>
@@ -432,7 +476,7 @@ $this->title = "TEAM KGI";
                                                     </div>
 
                                                 </div>
-                                                <div class="col-6 <?= $colorFormat ?>-assignNew ">
+                                                <!-- <div class="col-6 <?= $colorFormat ?>-assignNew ">
                                                     <?php
                                                             if ($colorFormat != "disable" && $role > 3) {
                                                             ?>
@@ -471,7 +515,49 @@ $this->title = "TEAM KGI";
                                                         }  
                                                     ?>
 
+                                                </div>-- -->
+                                                <?php if($role < 4) {?>
+                                                <div
+                                                    class="col-6 <?= $kgi["countTeam"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>-assignNew ">
+
+                                                    <span class="pull-left">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?=  $kgi["countTeam"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>.svg"
+                                                            class="home-icon mr-2">
+                                                    </span>
+
+                                                    <a href="<?= ($kgi["countTeam"] > 0 || $colorFormat != 'disable') ? Yii::$app->homeUrl . 'kgi/kgi-team/kgi-team-history/' . ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiTeamHistoryId' => 0, 'kgiId' => $kgi["kgiId"], 'openTab' => 1]) : '#' ?>"
+                                                        class="font-<?= ($kgi["countTeam"] == 0 && $colorFormat == 'disable') ? 'black' : $colorFormat ?>"
+                                                        style="top: 2px; <?= ($kgi["countTeam"] == 0 || $colorFormat == 'disable') ? 'pointer-events: none; color: black; text-decoration: none; top: 2px;'  : '' ?>">
+                                                        <?php if ($kgi["countTeam"] == 0 && $colorFormat == 'disable') { ?>
+                                                        Not Assigned
+                                                        <?php } elseif ($kgi["countTeam"] == 0) { ?>
+                                                        Not Team
+                                                        <?php } else { ?>
+                                                        View Assigned
+                                                        <?php } ?>
+                                                    </a>
+
                                                 </div>
+                                                <?php  }else { ?>
+                                                <div
+                                                    class="col-6 <?= $kgi["countTeam"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>-assignNew ">
+                                                    <span class="pull-left">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?=  $kgi["countTeam"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>.svg"
+                                                            class="home-icon mr-2">
+                                                    </span>
+                                                    <a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgi["kgiId"], "companyId" => $kgi["companyId"]]) ?>"
+                                                        class="font-<?= ($kgi["countTeam"] == 0 && $colorFormat == 'disable') ? 'black' : $colorFormat ?>"
+                                                        style="top: 2px; <?= ($kgi["countTeam"] == 0 && $colorFormat == 'disable') ? : '' ?>">
+                                                        <?php if($kgi["countTeam"] == 0 && $colorFormat == 'disable') {?>
+                                                        Assigned Team
+                                                        <?php  }else if($kgi["countTeam"] == 0)  { ?>
+                                                        Assigned Team
+                                                        <?php }else{  ?>
+                                                        Edit Assigned
+                                                        <?php } ?>
+                                                    </a>
+                                                </div>
+                                                <?php }  ?>
                                                 <div class="col-1">
                                                 </div>
                                             </div>
