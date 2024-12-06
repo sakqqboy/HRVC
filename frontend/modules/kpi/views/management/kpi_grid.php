@@ -280,7 +280,7 @@ $this->title = 'KPI Grid View';
                                                                 <?php
                                                                 } else { ?>
                                                                     <span class="pull-left">
-                                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-yenlow.svg"
+                                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat == 'disable' ? 'disable' : 'yenlow' ?>.svg"
                                                                             class="home-icon mr-2">
                                                                     </span>
                                                                     <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, "companyId" => $kpi["companyId"]]) ?>" class="font-black" style="top: 2px;">
@@ -359,7 +359,7 @@ $this->title = 'KPI Grid View';
                                                                 <?php
                                                                 } else { ?>
                                                                     <span class="pull-left">
-                                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-yenlow.svg"
+                                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat == 'disable' ? 'disable' : 'yenlow' ?>.svg"
                                                                             class="home-icon mr-2">
                                                                     </span>
                                                                     <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, "companyId" => $kpi["companyId"]]) ?>" class="font-black" style="top: 2px;">

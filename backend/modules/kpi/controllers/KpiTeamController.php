@@ -216,7 +216,7 @@ class KpiTeamController extends Controller
 					->asArray()
 					->orderBy('createDateTime DESC')
 					->one();
-					
+
 				if (!isset($kpiTeamHistory) || empty($kpiTeamHistory)) {
 					$kpiTeamHistory = KpiTeam::find()
 						->where(["kpiTeamId" => $kpiTeam["kpiTeamId"]])
@@ -298,8 +298,8 @@ class KpiTeamController extends Controller
 		return json_encode($data);
 	}
 
-	public function actionKpiHistory($kpiId,$kpiTeamId, $kpiTeamHistoryId)
-	{		
+	public function actionKpiHistory($kpiId, $kpiTeamId, $kpiTeamHistoryId)
+	{
 		if ($kpiTeamHistoryId == 0) {
 			$kpiTeamHistory = KpiTeamHistory::find()
 				->where(["kpiTeamId" => $kpiTeamId, "status" => [1, 2, 4]])
@@ -345,9 +345,9 @@ class KpiTeamController extends Controller
 		return json_encode($data);
 	}
 
-	public function actionKpiHistoryForChart($kpiId,$kpiTeamId, $kpiTeamHistoryId)
+	public function actionKpiHistoryForChart($kpiId, $kpiTeamId, $kpiTeamHistoryId)
 	{
-		
+
 		if ($kpiTeamHistoryId == 0) {
 			$kpiTeamHistory = KpiTeamHistory::find()
 				->where(["kpiTeamId" => $kpiTeamId, "status" => [1, 2, 4]])
@@ -390,102 +390,12 @@ class KpiTeamController extends Controller
 				];
 			endforeach;
 		}
-
-
-		// $kpiHistory = KpiHistory::find()
-		// ->where(["kpiId" => $kpiId, "status" => [1, 2, 4]])
-		// ->orderBy('year DESC,month DESC,kpiHistoryId DESC')
-		// ->asArray()
-		// ->all();
-
-		
-		// $data = [];
-		// if (isset($kpiHistory) && count($kpiHistory) > 0) {
-		// 	foreach ($kpiHistory as $history) :
-		// 		$time = explode(' ', $history["createDateTime"]);
-		// 		$employeeId = Employee::employeeId($history["createrId"]);
-		// 		$data[$history["kpiTeamHistoryId"]] = [
-		// 			"title" => $history["titleProcess"],
-		// 			"remark" => $history["remark"],
-		// 			//"result" => $history["result"],
-		// 			"picture" => Employee::employeeImage($employeeId),
-		// 			"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
-		// 			"time" => ModelMaster::timeText($time[1]),
-		// 			"status" => $history["status"],
-		// 			"target" => $history["targetAmount"],
-		// 			"result" => $history["result"],
-		// 			"month" => $history["month"],
-		// 			"year" => $history["year"],
-		// 			"creater" => User::employeeNameByuserId($history["createrId"]),
-		// 		];
-		// 	endforeach;
-		// }
 		return json_encode($data);
 	}
 
-	public function actionKpiTeamDetail($kpiTeamId,$kpiTeamHistoryId)
+	public function actionKpiTeamDetail($kpiTeamId, $kpiTeamHistoryId)
 	{
-		// $data = [];
-		// $ratio = 0;
-		// $kpiTeamHistory = KpiTeamHistory::find()
-		// 	->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.companyId,k.code,kt.target,kt.kpiTeamId,
-		// kt.teamId,kpi_team_history.result,kpi_team_history.fromDate,kpi_team_history.toDate,kpi_team_history.month,
-		// kpi_team_history.status,kpi_team_history.nextCheckDate,k.kpiDetail,kpi_team_history.year,k.amountType,kt.remark')
-		// 	->JOIN("LEFT JOIN", "kpi_team kt", "kt.kpiTeamId=kpi_team_history.kpiTeamId")
-		// 	->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kt.kpiId")
-		// 	->where(["kpi_team_history.kpiTeamId" => $kpiTeamId, "kpi_team_history.status" => [1, 2]])
-		// 	->asArray()
-		// 	->orderBy('kpi_team_history.createDateTime DESC')
-		// 	->one();
-		// if (!isset($kpiTeamHistory) || empty($kpiTeamHistory)) {
-		// 	$kpiTeamHistory = KpiTeam::find()
-		// 		->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.companyId,k.code,kpi_team.target,kpi_team.kpiTeamId,
-		// kpi_team.teamId,kpi_team.result,kpi_team.fromDate,kpi_team.toDate,kpi_team.month,kpi_team.year,
-		// kpi_team.status,kpi_team.nextCheckDate,k.kpiDetail,k.amountType')
-		// 		->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_team.kpiId")
-		// 		->where(["kpi_team.kpiTeamId" => $kpiTeamId, "kpi_team.status" => [1, 2]])
-		// 		->asArray()
-		// 		->one();
-		// }
-		// if (isset($kpiTeamHistory) && !empty($kpiTeamHistory)) {
-		// 	$ratio = 0;
-		// 	if ($kpiTeamHistory["target"] != '' && $kpiTeamHistory["target"] != 0 && $kpiTeamHistory["target"] != null) {
-		// 		if ($kpiTeamHistory["code"] == '<' || $kpiTeamHistory["code"] == '=') {
-		// 			$ratio = ($kpiTeamHistory["result"] / $kpiTeamHistory["target"]) * 100;
-		// 		} else {
-		// 			if ($kpiTeamHistory["result"] != '' && $kpiTeamHistory["result"] != 0) {
-		// 				$ratio = ($kpiTeamHistory["target"] / $kpiTeamHistory["result"]) * 100;
-		// 			} else {
-		// 				$ratio = 0;
-		// 			}
-		// 		}
-		// 	}
-		// 	$data = [
-		// 		"kpiName" => $kpiTeamHistory["kpiName"],
-		// 		"kpiId" => $kpiTeamHistory["kpiId"],
-		// 		"priority" => $kpiTeamHistory["priority"],
-		// 		"unit" => Unit::unitName($kpiTeamHistory["unitId"]),
-		// 		"unitId" => $kpiTeamHistory["unitId"],
-		// 		"teamName" => Team::teamName($kpiTeamHistory["teamId"]),
-		// 		"quantRatio" => $kpiTeamHistory["quantRatio"] == 1 ? 'Quantity' : 'Quality',
-		// 		"amountType" => $kpiTeamHistory["amountType"] == 1 ? '%' : 'Number',
-		// 		"target" => $kpiTeamHistory["target"] != null ? $kpiTeamHistory["target"] : null,
-		// 		"result" => $kpiTeamHistory["result"],
-		// 		"codeText" => $kpiTeamHistory["code"] . ' &nbsp;(' . Kgi::codeDetail($kpiTeamHistory["code"]) . ')',
-		// 		"code" => $kpiTeamHistory["code"],
-		// 		"month" =>  $kpiTeamHistory['month'],
-		// 		"year" => $kpiTeamHistory['year'],
-		// 		"fromDate" => $kpiTeamHistory["fromDate"],
-		// 		"toDate" => $kpiTeamHistory["toDate"],
-		// 		"nextCheckDate" =>  $kpiTeamHistory["nextCheckDate"],
-		// 		"nextCheckDateText" => ModelMaster::engDate($kpiTeamHistory["nextCheckDate"], 2),
-		// 		"status" => $kpiTeamHistory["status"],
-		// 		//"kpiEmployee" => KpiEmployee::kpiEmployee($kpiTeamHistory["kpiId"]),
-		// 		"ratio" => number_format($ratio, 2),
-		// 		"kpiDetail" => $kpiTeamHistory["kpiDetail"],
-		// 		"remark" => $kpiTeamHistory["remark"]
-		// 	];
-		// }
+
 		$data = [];
 		$ratio = 0;
 		if ($kpiTeamHistoryId != 0) {
@@ -514,8 +424,8 @@ class KpiTeamController extends Controller
 		if (!isset($kpiTeamHistory) || empty($kpiTeamHistory)) {
 			$kpiTeamHistory = kpiTeam::find()
 				->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.companyId,k.code,kpi_team.target,kpi_team.kpiTeamId,
-		kpi_team.teamId,kpi_team.result,kpi_team.fromDate,kpi_team.toDate,kpi_team.month,kpi_team.year,kpi_team_history.kpiTeamHistoryId,
-		kpi_team.status,kpi_team.nextCheckDate,k.kpiDetail,k.amountType,kpi_team.remark')
+		kpi_team.teamId,kpi_team.result,kpi_team.fromDate,kpi_team.toDate,kpi_team.month,kpi_team.year,kpi_team.status,kpi_team.nextCheckDate,
+		k.kpiDetail,k.amountType,kpi_team.remark')
 				->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_team.kpiId")
 				->where(["kpi_team.kpiTeamId" => $kpiTeamId, "kpi_team.status" => [1, 2]])
 				->asArray()
@@ -544,9 +454,9 @@ class KpiTeamController extends Controller
 				"teamName" => Team::teamName($kpiTeamHistory["teamId"]),
 				"quantRatio" => $kpiTeamHistory["quantRatio"] == 1 ? 'Quantity' : 'Quality',
 				"amountType" => $kpiTeamHistory["amountType"] == 1 ? '%' : 'Number',
-				"targetAmount" =>  empty($kpiTeamHistory["target"]) ? 0 : $kpiTeamHistory["target"], 
+				"targetAmount" =>  empty($kpiTeamHistory["target"]) ? 0 : $kpiTeamHistory["target"],
 				"result" => $kpiTeamHistory["result"],
-		 		"codeText" => $kpiTeamHistory["code"] . ' &nbsp;(' . Kgi::codeDetail($kpiTeamHistory["code"]) . ')',
+				"codeText" => $kpiTeamHistory["code"] . ' &nbsp;(' . Kgi::codeDetail($kpiTeamHistory["code"]) . ')',
 				"code" => $kpiTeamHistory["code"],
 				"month" =>  $kpiTeamHistory['month'],
 				"monthName" => ModelMaster::monthEng($kpiTeamHistory['month'], 1),

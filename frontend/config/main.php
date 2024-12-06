@@ -160,8 +160,6 @@ return [
             'bundles' => [],
             //            'forceCopy' => TRUE
         ],
-
-
     ],
     'params' => $params,
 ];

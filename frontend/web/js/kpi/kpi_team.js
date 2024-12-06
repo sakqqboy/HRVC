@@ -30,7 +30,7 @@ function updateTeamKpi(kpiTeamId) {
 			$("#status-update").val(data.kpiTeam.status);
 			$("#month-update").val(data.kpiTeam.month);
 			$("#year-update").val(data.kpiTeam.year);
-			$("#target-amount").val(data.kpiTeam.target);
+			$("#target-amount").val(data.kpiTeam.targetAmount);
 			$("#result").val(data.kpiTeam.result);
 			$("#from-date-update").val(data.kpiTeam.fromDate);
 			$("#to-date-update").val(data.kpiTeam.toDate);
