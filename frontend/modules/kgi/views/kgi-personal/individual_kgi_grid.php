@@ -222,36 +222,6 @@ $this->title = "INDIVIDUAL KGI";
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg" alt="Chart"
                                             class="pim-icon mr-3" style="margin-top: -2px;">Chart
                                     </a>
-                                    <!-- <a class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
-                                        style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>"
-                                        data-bs-toggle="modal" data-bs-target="#staticBackdrop3"
-                                        onclick="javascript:kgiHistory(<?= $kgiEmployeeId ?>)"
-                                        style="margin-top: -3px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg"
-                                            alt="History" class="pim-icon mr-3" style="margin-top: -2px;">Chart
-                                    </a> -->
-
-                                    <!-- <a class="btn btn-bg-white-xs mr-5"
-                                        href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-individual-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], "kgiEmployeeId" => $kgiEmployeeId]) ?>"
-                                        style="margin-top: -3px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="History"
-                                            class="pim-icon" style="margin-top: -1px;">
-                                    </a>
-                                    <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-individual-history/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId, 'kgiId' => $kgi['kgiId'], 'openTab' => 2]) ?>"
-                                        class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg"
-                                            alt="History" class="pim-icon mr-3" style="margin-top: -2px;">History
-                                    </a>
-                                    <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/view-personal-kgi/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId, 'kgiId' => $kgi['kgiId'], 'openTab' => 3]) ?>"
-                                        class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
-                                            alt="Chats" class="pim-icon mr-3" style="margin-top: -2px;">Chats
-                                    </a>
-                                    <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/view-personal-kgi/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId, 'kgiId' => $kgi['kgiId'], 'openTab' => 4]) ?>"
-                                        class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg" alt="Chart"
-                                            class="pim-icon mr-3" style="margin-top: -2px;">Chart
-                                    </a> -->
                                     <?php
                                             if ($role >= 5) {
                                             ?>
@@ -273,74 +243,6 @@ $this->title = "INDIVIDUAL KGI";
                                         <div class="col-12 text-start pl-22 fw-bold text-dark">
                                             Assign on
                                         </div>
-                                        <!-- <div class="col-9 pl-10 pr-0">
-                                            <div class="col-12 disable-assign  mt-5 pt-2 pb-2">
-                                                <div class="row">
-                                                    <div class="col-5 border-right pr-2 pl-13">
-                                                        <div class="row">
-                                                            <div class="col-2">
-                                                                <?php
-                                                                if (isset($kgi['teamMate'][0])) {
-                                                                ?>
-                                                                <img src="<?= Yii::$app->homeUrl . $kgi['teamMate'][0] ?>"
-                                                                    class="pim-pic-grid">
-                                                                <?php
-                                                                }
-                                                                ?>
-                                                            </div>
-                                                            <div class="col-2 pic-after pt-0">
-                                                                <?php
-                                                                if (isset($kgi['teamMate'][1])) {
-                                                                ?>
-                                                                <img src="<?= Yii::$app->homeUrl . $kgi['teamMate'][1] ?>"
-                                                                    class="pim-pic-grid">
-                                                                <?php
-                                                                }
-                                                                ?>
-                                                            </div>
-                                                            <div class="col-2 pic-after pt-0">
-                                                                <?php
-                                                                if (isset($kgi['teamMate'][2])) {
-                                                                ?>
-                                                                <img src="<?= Yii::$app->homeUrl . $kgi['teamMate'][2] ?>"
-                                                                    class="pim-pic-grid">
-                                                                <?php
-                                                                }
-                                                                ?>
-                                                            </div>
-                                                            <div class="col-5 number-tag load-disble pr-0 pl-0 pt-1"
-                                                                style="margin-left: -3px;height:18px;width: 30px;margin-top: 1px;">
-                                                                <?= $kgi["countTeamEmployee"]
-                                                                ?>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-7 pl-3 pr-13 pt-2">
-                                                        Assign Teammate
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 disable-assign  mt-10 pt-5 pb-1">
-                                                <div class="row">
-                                                    <div class="col-5 border-right pr-2">
-                                                        <div class="row">
-                                                            <div class="col-4">
-                                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.svg"
-                                                                    class="first-layer-icon ml-5"
-                                                                    style="margin-top: -4px;">
-                                                            </div>
-                                                            <div class="col-4 number-tag load-disble pr-3 pl-3 ml-5"
-                                                                style="height:17px;">
-                                                                <?= $kgi["countTeam"] ?>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-7 pl-3 pr-13">
-                                                        Teams
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> -->
                                         <div class="col-9 pl-20 pr-0">
                                             <div class="col-12 mt-5 pt-2 pb-1">
                                                 <div class="row">
@@ -355,8 +257,11 @@ $this->title = "INDIVIDUAL KGI";
                                                                 <img src="<?= Yii::$app->homeUrl . $kgi['teamMate'][0] ?>"
                                                                     class="pim-pic-gridNew">
                                                                 <?php
-                                                                            }
-                                                                            ?>
+                                                                    }else{
+                                                            ?>
+                                                                <img src="<?= Yii::$app->homeUrl . 'image/user.svg' ?>"
+                                                                    class="pim-pic-gridNew">
+                                                                <?php   }?>
                                                             </div>
                                                             <div class="col-2 pic-after pt-0">
                                                                 <?php
@@ -365,8 +270,11 @@ $this->title = "INDIVIDUAL KGI";
                                                                 <img src="<?= Yii::$app->homeUrl . $kgi['teamMate'][1] ?>"
                                                                     class="pim-pic-gridNew">
                                                                 <?php
-                                                                            }
-                                                                            ?>
+                                                                    }else{
+                                                            ?>
+                                                                <img src="<?= Yii::$app->homeUrl . 'image/user.svg' ?>"
+                                                                    class="pim-pic-gridNew">
+                                                                <?php   }?>
                                                             </div>
                                                             <div class="col-2 pic-after pt-0">
                                                                 <?php
@@ -375,8 +283,11 @@ $this->title = "INDIVIDUAL KGI";
                                                                 <img src="<?= Yii::$app->homeUrl . $kgi['teamMate'][2] ?>"
                                                                     class="pim-pic-gridNew">
                                                                 <?php
-                                                                            }
-                                                                            ?>
+                                                                    }else{
+                                                            ?>
+                                                                <img src="<?= Yii::$app->homeUrl . 'image/user.svg' ?>"
+                                                                    class="pim-pic-gridNew">
+                                                                <?php   }?>
                                                             </div>
                                                             <div
                                                                 class="col-5 number-tagNew  <?= 'load-'  . $colorFormat ?> ">
