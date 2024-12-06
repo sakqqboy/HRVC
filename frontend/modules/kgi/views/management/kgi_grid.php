@@ -263,17 +263,17 @@ $this->title = 'KGI Grid View';
                                                     class="col-6 <?= $kgi["countEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>-assignNew ">
 
                                                     <span class="pull-left">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $kgi["countEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>.svg"
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $kgi["countEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>.svg"
                                                             class="home-icon mr-2">
                                                     </span>
 
                                                     <a href="<?= ($kgi["countEmployee"] > 0 && $colorFormat != 'disable') ? Yii::$app->homeUrl . 'kgi/view/kgi-history/' . ModelMaster::encodeParams(['kgiId' => $kgiId]) : '#' ?>"
                                                         class="font-<?= $kgi["countEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'black') : $colorFormat ?>"
-                                                        style="<?= ($kgi["countEmployee"] == 0 && $colorFormat == 'disable') ? 'pointer-events: none; color: gray;' : 'top: 2px;' ?>">
+                                                        style="<?= ($kgi["countEmployee"] == 0 || $colorFormat == 'disable') ? 'pointer-events: none; color: black; text-decoration: none; top: 2px;' : 'top: 2px;' ?>">
                                                         <?php if ($kgi["countEmployee"] == 0 && $colorFormat == 'disable') { ?>
                                                         Not Assigned
                                                         <?php } elseif ($kgi["countEmployee"] == 0) { ?>
-                                                        View Assigned
+                                                        Not Assigned
                                                         <?php } else { ?>
                                                         View Assigned
                                                         <?php } ?>
@@ -336,13 +336,13 @@ $this->title = 'KGI Grid View';
                                                     class="col-6 <?= $kgi["countTeam"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>-assignNew ">
 
                                                     <span class="pull-left">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?=  $kgi["countTeam"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>.svg"
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?=  $kgi["countTeam"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>.svg"
                                                             class="home-icon mr-2">
                                                     </span>
 
                                                     <a href="<?= ($kgi["countTeam"] > 0 || $colorFormat != 'disable') ? Yii::$app->homeUrl . 'kgi/view/kgi-history/' . ModelMaster::encodeParams(['kgiId' => $kgiId]) : '#' ?>"
                                                         class="font-<?= ($kgi["countTeam"] == 0 && $colorFormat == 'disable') ? 'black' : $colorFormat ?>"
-                                                        style="top: 2px; <?= ($kgi["countTeam"] == 0 && $colorFormat == 'disable') ? 'pointer-events: none; color: gray;' : '' ?>">
+                                                        style="top: 2px; <?= ($kgi["countTeam"] == 0 || $colorFormat == 'disable') ? 'pointer-events: none; color: black; text-decoration: none; top: 2px;'  : '' ?>">
                                                         <?php if ($kgi["countTeam"] == 0 && $colorFormat == 'disable') { ?>
                                                         Not Assigned
                                                         <?php } elseif ($kgi["countTeam"] == 0) { ?>
@@ -360,9 +360,9 @@ $this->title = 'KGI Grid View';
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?=  $kgi["countTeam"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>.svg"
                                                             class="home-icon mr-2">
                                                     </span>
-                                                    <a href="<?= ($kgi["countTeam"] > 0 || $colorFormat != 'disable') ? Yii::$app->homeUrl . 'kgi/assign/assign/ '.  ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgi["companyId"]]) : '#' ?>"
+                                                    <a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgi["companyId"]]) ?>"
                                                         class="font-<?= ($kgi["countTeam"] == 0 && $colorFormat == 'disable') ? 'black' : $colorFormat ?>"
-                                                        style="top: 2px; <?= ($kgi["countTeam"] == 0 && $colorFormat == 'disable') ? 'pointer-events: none; color: gray;' : '' ?>">
+                                                        style="top: 2px; <?= ($kgi["countTeam"] == 0 && $colorFormat == 'disable') ? : '' ?>">
                                                         <?php if($kgi["countTeam"] == 0 && $colorFormat == 'disable') {?>
                                                         Assigned Team
                                                         <?php  }else if($kgi["countTeam"] == 0)  { ?>
