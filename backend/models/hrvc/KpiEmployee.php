@@ -48,11 +48,12 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
                 if ($ke["picture"] != "") {
                     $employee[$ke["employeeId"]] = $ke["picture"];
                 } else {
-                    if ($ke["gender"] == 1) {
-                        $employee[$ke["employeeId"]] = 'image/user.png';
-                    } else {
-                        $employee[$ke["employeeId"]] = 'image/lady.jpg';
-                    }
+                    $employee[$ke["employeeId"]] = 'images/icons/Settings/personblack.svg';
+                    // if ($ke["gender"] == 1) {
+                    //     $employee[$ke["employeeId"]] = 'image/user.png';
+                    // } else {
+                    //     $employee[$ke["employeeId"]] = 'image/lady.jpg';
+                    // }
                 }
             endforeach;
         }
@@ -74,12 +75,13 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
                 if ($ke["picture"] != "") {
                     $employee[$ke["employeeId"]]["picture"] = $ke["picture"];
                 } else {
-                    if ($ke["gender"] == 1) {
-                        $employee[$ke["employeeId"]]["picture"] = 'image/user.png';
-                    } else {
+                    $employee[$ke["employeeId"]]["picture"] = 'images/icons/Settings/personblack.svg';
+                    // if ($ke["gender"] == 1) {
+                    //     $employee[$ke["employeeId"]]["picture"] = 'image/user.png';
+                    // } else {
 
-                        $employee[$ke["employeeId"]]["picture"] = 'image/lady.jpg';
-                    }
+                    //     $employee[$ke["employeeId"]]["picture"] = 'image/lady.jpg';
+                    // }
                 }
                 $employee[$ke["employeeId"]]["name"] = $ke["employeeFirstname"] . ' ' . $ke["employeeSurename"];
                 $employee[$ke["employeeId"]]["title"] = $ke["titleName"];
@@ -216,12 +218,13 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
                 if ($ke["picture"] != "") {
                     $employee[$ke["employeeId"]] = $ke["picture"];
                 } else {
-                    if ($ke["gender"] == 1) {
-                        $employee[$ke["employeeId"]] = 'image/user.png';
-                    } else {
+                    $employee[$ke["employeeId"]] = 'images/icons/Settings/personblack.svg';
+                    // if ($ke["gender"] == 1) {
+                    //     $employee[$ke["employeeId"]] = 'image/user.png';
+                    // } else {
 
-                        $employee[$ke["employeeId"]] = 'image/lady.jpg';
-                    }
+                    //     $employee[$ke["employeeId"]] = 'image/lady.jpg';
+                    // }
                 }
             endforeach;
         }

@@ -36,12 +36,6 @@ class KgiEmployee extends \backend\models\hrvc\master\KgiEmployeeMaster
     }
     public static function kgiEmployee($kgiId)
     {
-        // $kgiEmployee = Employee::find()
-        //     ->select('employee.picture,employee.employeeId,employee.gender')
-        //     ->JOIN("LEFT JOIN", "kgi_employee ke", "employee.employeeId=ke.employeeId")
-        //     ->where(["ke.kgiId" => $kgiId, "ke.status" => 1])
-        //     ->asArray()
-        //     ->all();
         $kgiEmployee = KgiEmployee::find()
             ->select('e.picture,e.employeeId,e.gender')
             ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
@@ -55,12 +49,14 @@ class KgiEmployee extends \backend\models\hrvc\master\KgiEmployeeMaster
                 if ($ke["picture"] != "") {
                     $employee[$ke["employeeId"]] = $ke["picture"];
                 } else {
-                    if ($ke["gender"] == 1) {
-                        $employee[$ke["employeeId"]] = 'image/user.png';
-                    } else {
 
-                        $employee[$ke["employeeId"]] = 'image/lady.jpg';
-                    }
+                    $employee[$ke["employeeId"]] = 'images/icons/Settings/personblack.svg';
+                    // if ($ke["gender"] == 1) {
+                    //     $employee[$ke["employeeId"]] = 'image/user.png';
+                    // } else {
+
+                    //     $employee[$ke["employeeId"]] = 'image/lady.jpg';
+                    // }
                 }
             endforeach;
         }
@@ -82,12 +78,13 @@ class KgiEmployee extends \backend\models\hrvc\master\KgiEmployeeMaster
                 if ($ke["picture"] != "") {
                     $employee[$ke["employeeId"]]["picture"] = $ke["picture"];
                 } else {
-                    if ($ke["gender"] == 1) {
-                        $employee[$ke["employeeId"]]["picture"] = 'image/user.png';
-                    } else {
+                    $employee[$ke["employeeId"]]["picture"] = 'images/icons/Settings/personblack.svg';
+                    // if ($ke["gender"] == 1) {
+                    //     $employee[$ke["employeeId"]]["picture"] = 'image/user.png';
+                    // } else {
 
-                        $employee[$ke["employeeId"]]["picture"] = 'image/lady.jpg';
-                    }
+                    //     $employee[$ke["employeeId"]]["picture"] = 'image/lady.jpg';
+                    // }
                 }
                 $employee[$ke["employeeId"]]["name"] = $ke["employeeFirstname"] . ' ' . $ke["employeeSurename"];
                 $employee[$ke["employeeId"]]["title"] = $ke["titleName"];
