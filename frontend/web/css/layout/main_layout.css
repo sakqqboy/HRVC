@@ -18,7 +18,8 @@
     position: relative;
     margin-left: 20%;
     right: 0 !important;
-
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
 .header-top {
@@ -36,6 +37,8 @@
     padding-left: 10px;
     position: relative !important;
     margin-top: 30px;
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
 .small-content {
