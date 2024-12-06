@@ -211,7 +211,10 @@ class AssignController extends Controller
 					->where(["employeeId" => $employeeId, "kgiId" => $_POST["kgiId"]])
 					->andWhere("status!=99")
 					->one();
-				$target = str_replace(",", "", $target);
+					// throw new Exception(print_r($_POST["employeeTarget"], true));
+
+				$target = str_replace(",", "", $employeeId);
+
 				if (isset($kgiEmployee) && !empty($kgiEmployee)) {
 					if ($kgiEmployee->target != $target && $target > 0) {
 						$kgiEmployee->target = $target;
@@ -225,7 +228,11 @@ class AssignController extends Controller
 						]);
 					}
 				} else {
-					if ($target > 0) {
+
+					// $target = trim($target);
+					// $target = is_numeric($target) ? (float) $target : 0;
+
+					if ($target >= 1) {
 						$kgiEmployee = new KgiEmployee();
 						$kgiEmployee->kgiId = $_POST["kgiId"];
 						$kgiEmployee->employeeId = $employeeId;
@@ -246,6 +253,7 @@ class AssignController extends Controller
 				$employeeIds[$i] = $employeeId;
 				$i++;
 			endforeach;
+
 		}
 		if (count($employeeIds) > 0) {
 			$deleteEmployeeKgi = KgiEmployee::find()
