@@ -20,7 +20,23 @@
 }
 
 .pim-body {
-	padding: 10px 25px 10px 25px;
+	padding: 10px 2vw;
+	/* ใช้ vw แทน px เพื่อทำให้ responsive */
+	width: 100%;
+	/* ขยายเต็มหน้าจอ */
+	min-height: 80vh;
+	box-sizing: border-box;
+	/* รวม padding ในขนาดองค์ประกอบ */
+}
+
+.pim-body-main {
+	/* ใช้ vw แทน px เพื่อทำให้ responsive */
+	width: 100%;
+	/* ขยายเต็มหน้าจอ */
+	box-sizing: border-box;
+	min-height: 80vh;
+
+	/* รวม padding ในขนาดองค์ประกอบ */
 }
 
 .pim-head-text {

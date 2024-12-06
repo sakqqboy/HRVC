@@ -281,7 +281,7 @@ class KgiPersonalController extends Controller
 		curl_close($api);
 
 		$months = ModelMaster::monthFull(1);
-		//throw new Exception(print_r($kgiEmployeeDetail, true));
+		// throw new Exception(print_r($kgiEmployeeId, true));
 		return $this->render('update_personal_kgi', [
 			"kgiEmployeeId" => $kgiEmployeeId,
 			"kgiEmployeeDetail" => $kgiEmployeeDetail,

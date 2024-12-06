@@ -179,7 +179,7 @@ $this->title = 'KGI Grid View';
                                                             <img src="<?= Yii::$app->homeUrl . $kgi['kgiEmployee'][0] ?>"
                                                                 class="pim-pic-gridNew">
                                                             <? else :?>
-                                                            <img src="<?= Yii::$app->homeUrl . '/image/user.png' ?>"
+                                                            <img src="<?= Yii::$app->homeUrl . 'image/user.svg' ?>"
                                                                 class="pim-pic-gridNew">
                                                             <?php endif; ?>
                                                         </div>
@@ -188,7 +188,7 @@ $this->title = 'KGI Grid View';
                                                             <img src="<?= Yii::$app->homeUrl . $kgi['kgiEmployee'][1] ?>"
                                                                 class="pim-pic-gridNew">
                                                             <? else :?>
-                                                            <img src="<?= Yii::$app->homeUrl . '/image/user.png' ?>"
+                                                            <img src="<?= Yii::$app->homeUrl . 'image/user.svg' ?>"
                                                                 class="pim-pic-gridNew">
                                                             <?php endif; ?>
                                                         </div>
@@ -197,7 +197,7 @@ $this->title = 'KGI Grid View';
                                                             <img src="<?= Yii::$app->homeUrl . $kgi['kgiEmployee'][2] ?>"
                                                                 class="pim-pic-gridNew">
                                                             <? else :?>
-                                                            <img src="<?= Yii::$app->homeUrl . '/image/user.png' ?>"
+                                                            <img src="<?= Yii::$app->homeUrl . 'image/user.svg' ?>"
                                                                 class="pim-pic-gridNew">
                                                             <?php endif; ?>
                                                         </div>
@@ -205,7 +205,7 @@ $this->title = 'KGI Grid View';
                                                             class="col-5 number-tagNew  <?= $kgi["countEmployee"] == 0 && $colorFormat != "disable"  ? 'load-yenlow' : 'load-'  . $colorFormat ?> ">
                                                             <?= $kgi["countEmployee"] ?>
                                                         </div>
-                                                        <?php } else { ?>
+                                                        <?php } else{ ?>
                                                         <div class="col-2 ">
                                                             <div class="
                                                                 <?= $role >= 3 
@@ -219,6 +219,7 @@ $this->title = 'KGI Grid View';
                                                                 ">
                                                                 <img
                                                                     src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg">
+
                                                             </div>
                                                         </div>
                                                         <div class="col-2 pic-after pt-0">

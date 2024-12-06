@@ -124,7 +124,7 @@ $this->title = "Individual KPI";
                     <table class="">
                         <thead>
                             <tr class="pim-table-header">
-                                <td class="pl-10" style="width:13%">KGI Contents</td>
+                                <td class="pl-10" style="width:13%">KPI Contents</td>
                                 <td style="width:10%">Company Name</td>
                                 <td style="width:13%">Branch</td>
                                 <td style="width:5%">Priority</td>
