@@ -15,23 +15,23 @@ $this->title = 'KPI View';
     </div>
     <div class="col-12 mt-10">
         <?= $this->render('kpi_header_filter', [
-			"role" => $role
-		]) ?>
+            "role" => $role
+        ]) ?>
         <?php
-					if ($kpiEmployeeDetail["isOver"] == 1 && $kpiEmployeeDetail["status"] != 2) {
-						$colorFormat = 'over';
-					} else {
-						if ($kpiEmployeeDetail["status"] == 1) {
-							if ($kpiEmployeeDetail["isOver"] == 2) {
-								$colorFormat = 'disable';
-							} else {
-								$colorFormat = 'inprogress';
-							}
-						} else {
-							$colorFormat = 'complete';
-						}
-					}
-					?>
+        if ($kpiEmployeeDetail["isOver"] == 1 && $kpiEmployeeDetail["status"] != 2) {
+            $colorFormat = 'over';
+        } else {
+            if ($kpiEmployeeDetail["status"] == 1) {
+                if ($kpiEmployeeDetail["isOver"] == 2) {
+                    $colorFormat = 'disable';
+                } else {
+                    $colorFormat = 'inprogress';
+                }
+            } else {
+                $colorFormat = 'complete';
+            }
+        }
+        ?>
         <div class="alert mt-10 pim-body bg-white">
             <div class="row">
                 <div class="col-7 pim-name-detail pr-0 pl-5 text-start">
@@ -53,25 +53,25 @@ $this->title = 'KPI View';
                         style="margin-right: 5px; padding-right: 5px;">
                         <span class="team-icon pim-team-<?= $colorFormat ?>">
                             <?php if (!empty($kpiEmployeeDetail['picture'])): ?>
-                            <img src="<?= Yii::$app->homeUrl . $kpiEmployeeDetail['picture'] ?>" alt="Team Icon"
-                                style="border-radius: 100%;">
+                                <img src="<?= Yii::$app->homeUrl . $kpiEmployeeDetail['picture'] ?>" alt="Team Icon"
+                                    style="border-radius: 100%;">
                             <?php else: ?>
-                            <img src="/HRVC/frontend/web/image/user.svg" alt="Team Icon">
+                                <img src="/HRVC/frontend/web/image/user.svg" alt="Team Icon">
                             <?php endif; ?>
                         </span>
                         <span class="team-name"> <?= $kpiEmployeeDetail['employeeName']; ?></span>
                     </span>
-                    <?php  if ($role >= 5) {
+                    <?php if ($role >= 5) {
                     ?>
-                    <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kpi"
-                        onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)"
-                        onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
-                        onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
-                            class="pim-icon" style="margin-top: -3px; width: 12px; height: 14px;"> Delete
+                        <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kpi"
+                            onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)"
+                            onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
+                            onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
+                                class="pim-icon" style="margin-top: -3px; width: 12px; height: 14px;"> Delete
 
-                    </a>
-                    <? } ?>
+                        </a>
+                    <?php } ?>
                 </div>
             </div>
             <div class="row mt-10">
@@ -109,27 +109,27 @@ $this->title = 'KPI View';
                                     <div class="offset-1 col-8">
                                         <div class="text-center priority-star">
                                             <?php
-											if ($kpiEmployeeDetail["priority"] == "A" || $kpiEmployeeDetail["priority"] == "B") {
-											?>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            if ($kpiEmployeeDetail["priority"] == "A" || $kpiEmployeeDetail["priority"] == "B") {
+                                            ?>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
                                             <?php
-											}
-											if ($kpiEmployeeDetail["priority"] == "A" || $kpiEmployeeDetail["priority"] == "C") {
-											?>
-                                            <i class="fa fa-star big-star" aria-hidden="true"></i>
+                                            }
+                                            if ($kpiEmployeeDetail["priority"] == "A" || $kpiEmployeeDetail["priority"] == "C") {
+                                            ?>
+                                                <i class="fa fa-star big-star" aria-hidden="true"></i>
                                             <?php
-											}
-											if ($kpiEmployeeDetail["priority"] == "B") {
-											?>
-                                            <i class="fa fa-star ml-10" aria-hidden="true"></i>
+                                            }
+                                            if ($kpiEmployeeDetail["priority"] == "B") {
+                                            ?>
+                                                <i class="fa fa-star ml-10" aria-hidden="true"></i>
                                             <?php
-											}
-											if ($kpiEmployeeDetail["priority"] == "A") {
-											?>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            }
+                                            if ($kpiEmployeeDetail["priority"] == "A") {
+                                            ?>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
                                             <?php
-											}
-											?>
+                                            }
+                                            ?>
                                         </div>
                                         <div class="text-center priority-box">
                                             <div class="col-12">Priority</div>
@@ -157,17 +157,17 @@ $this->title = 'KPI View';
                                         <div class="col-12">Target</div>
                                         <div class="col-12 mt-3 number-pim">
                                             <?php
-											$decimal = explode('.', $kpiEmployeeDetail["targetAmount"]);
-											if (isset($decimal[1])) {
-												if ($decimal[1] == '00') {
-													$show = $decimal[0];
-												} else {
-													$show = $kpiEmployeeDetail["targetAmount"];
-												}
-											} else {
-												$show = $kpiEmployeeDetail["targetAmount"];
-											}
-											?>
+                                            $decimal = explode('.', $kpiEmployeeDetail["targetAmount"]);
+                                            if (isset($decimal[1])) {
+                                                if ($decimal[1] == '00') {
+                                                    $show = $decimal[0];
+                                                } else {
+                                                    $show = $kpiEmployeeDetail["targetAmount"];
+                                                }
+                                            } else {
+                                                $show = $kpiEmployeeDetail["targetAmount"];
+                                            }
+                                            ?>
                                             <?= $show ?><?= $kpiEmployeeDetail["amountType"] == 1 ? '%' : '' ?>
                                         </div>
                                     </div>
@@ -178,37 +178,37 @@ $this->title = 'KPI View';
                                         <div class="col-12">Result</div>
                                         <div class="col-12 mt-3 number-pim">
                                             <?php
-											if ($kpiEmployeeDetail["result"] != '') {
-												$decimalResult = explode('.', $kpiEmployeeDetail["result"]);
-												if (isset($decimalResult[1])) {
-													if ($decimalResult[1] == '00') {
-														$showResult = number_format($decimalResult[0]);
-													} else {
-														$showResult = number_format($kpiEmployeeDetail["result"], 2);
-													}
-												} else {
-													$showResult = number_format($kpiEmployeeDetail["result"]);
-												}
-											} else {
-												$showResult = 0;
-											}
-											?>
+                                            if ($kpiEmployeeDetail["result"] != '') {
+                                                $decimalResult = explode('.', $kpiEmployeeDetail["result"]);
+                                                if (isset($decimalResult[1])) {
+                                                    if ($decimalResult[1] == '00') {
+                                                        $showResult = number_format($decimalResult[0]);
+                                                    } else {
+                                                        $showResult = number_format($kpiEmployeeDetail["result"], 2);
+                                                    }
+                                                } else {
+                                                    $showResult = number_format($kpiEmployeeDetail["result"]);
+                                                }
+                                            } else {
+                                                $showResult = 0;
+                                            }
+                                            ?>
                                             <?= $showResult ?><?= $kpiEmployeeDetail["amountType"] == 1 ? '%' : '' ?>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <?php
-										$percent = explode('.', $kpiEmployeeDetail['ratio']);
-										if (isset($percent[1])) {
-											if ($percent[1] != '00') {
-												$showPercent = $percent[1];
-											} else {
-												$showPercent = $percent[0];
-											}
-										} else {
-											$showPercent = $percent[0];
-										}
-										?>
+                                        $percent = explode('.', $kpiEmployeeDetail['ratio']);
+                                        if (isset($percent[1])) {
+                                            if ($percent[1] != '00') {
+                                                $showPercent = $percent[1];
+                                            } else {
+                                                $showPercent = $percent[0];
+                                            }
+                                        } else {
+                                            $showPercent = $percent[0];
+                                        }
+                                        ?>
                                         <div class="progress">
                                             <div class="progress-bar-<?= $colorFormat ?>"
                                                 style="width:<?= $showPercent ?>%;"></div>
@@ -226,16 +226,16 @@ $this->title = 'KPI View';
                                     </div>
                                     <div class="col-4 text-center mt-5 pt-6 pl-3 pr-3">
                                         <?php
-										if ($role > 3  && $kpiEmployeeDetail["status"] == 1) {
-										?>
-                                        <div onclick="javascript:updateKpi(<?= $kpiId ?>)"
-                                            class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
-                                            data-bs-target="#update-kpi-modal">
-                                            <i class="fa fa-refresh" aria-hidden="true"></i> Update
-                                        </div>
+                                        if ($role > 3  && $kpiEmployeeDetail["status"] == 1) {
+                                        ?>
+                                            <div onclick="javascript:updateKpi(<?= $kpiId ?>)"
+                                                class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
+                                                data-bs-target="#update-kpi-modal">
+                                                <i class="fa fa-refresh" aria-hidden="true"></i> Update
+                                            </div>
                                         <?php
-										}
-										?>
+                                        }
+                                        ?>
                                     </div>
                                     <div class="col-4 pl-0 pr-5 mt-5 ">
                                         <div class="col-12 text-end font-<?= $colorFormat ?>"
@@ -313,36 +313,36 @@ $this->title = 'KPI View';
                         <div class="col-12 mt-15 pt-0" style="height:295px;overflow-y: auto;">
                             <div class="row">
                                 <?php
-								if (isset($kpiTeams) && count($kpiTeams) > 0) {
-									$i = 0;
-									foreach ($kpiTeams as $teamId => $team): ?>
-                                <div class="col-lg-6 col-md-6 col-12 mb-10">
-                                    <div class="col-12 small-content bg-white pl-20">
-                                        <div class="row">
-                                            <div class="col-2  pl-0 pr-0">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg"
-                                                    class="image-AssignMembers">
-                                            </div>
-                                            <div class="col-7 pl-10 border-right">
-                                                <div class="col-12 font-size-12 text-b pr-0">
-                                                    <strong><?= $team['teamName'] ?></strong>
+                                if (isset($kpiTeams) && count($kpiTeams) > 0) {
+                                    $i = 0;
+                                    foreach ($kpiTeams as $teamId => $team): ?>
+                                        <div class="col-lg-6 col-md-6 col-12 mb-10">
+                                            <div class="col-12 small-content bg-white pl-20">
+                                                <div class="row">
+                                                    <div class="col-2  pl-0 pr-0">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg"
+                                                            class="image-AssignMembers">
+                                                    </div>
+                                                    <div class="col-7 pl-10 border-right">
+                                                        <div class="col-12 font-size-12 text-b pr-0">
+                                                            <strong><?= $team['teamName'] ?></strong>
+                                                        </div>
+                                                        <div class="col-12 pim-employee-title"
+                                                            style="font-size: 10px !important;">
+                                                            <?= $team["departmentName"] ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-2 text-center pr-0 pl-0 pt-8" style="font-weight: 400;">
+                                                        <?= $team['totalEmployee'] ?>
+                                                    </div>
                                                 </div>
-                                                <div class="col-12 pim-employee-title"
-                                                    style="font-size: 10px !important;">
-                                                    <?= $team["departmentName"] ?>
-                                                </div>
-                                            </div>
-                                            <div class="col-2 text-center pr-0 pl-0 pt-8" style="font-weight: 400;">
-                                                <?= $team['totalEmployee'] ?>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
                                 <?php
-										$i++;
-									endforeach;
-								}
-								?>
+                                        $i++;
+                                    endforeach;
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -359,30 +359,30 @@ $this->title = 'KPI View';
                         <div class="col-12 alert bg-white mt-15 pt-0" style="height:280px;overflow-y: auto;">
                             <div class="row">
                                 <?php
-								if (isset($kpiEmployeeDetail["kpiEmployeeDetail"]) && count($kpiEmployeeDetail["kpiEmployeeDetail"]) > 0) {
-									foreach ($kpiDetkpiEmployeeDetailail["kpiEmployeeDetail"] as $employeeId => $employee): ?>
-                                <div class="col-lg-4 col-md-6 col-12 mt-10 pt-0"
-                                    onclick="javascription:openKpiEmployeeView(<?= $employeeId ?>,<?= $kpiId ?>)"
-                                    style="cursor: pointer;">
-                                    <div class="row">
-                                        <div class="col-3 pr-0 pl-0">
-                                            <img src="<?= Yii::$app->homeUrl . $employee['picture'] ?>"
-                                                class="image-AssignMembers">
-                                        </div>
-                                        <div class="col-9 pl-10">
-                                            <div class="col-12 pim-employee-Name pr-0">
-                                                <strong><?= $employee['name'] ?></strong>
+                                if (isset($kpiEmployeeDetail["kpiEmployeeDetail"]) && count($kpiEmployeeDetail["kpiEmployeeDetail"]) > 0) {
+                                    foreach ($kpiDetkpiEmployeeDetailail["kpiEmployeeDetail"] as $employeeId => $employee): ?>
+                                        <div class="col-lg-4 col-md-6 col-12 mt-10 pt-0"
+                                            onclick="javascription:openKpiEmployeeView(<?= $employeeId ?>,<?= $kpiId ?>)"
+                                            style="cursor: pointer;">
+                                            <div class="row">
+                                                <div class="col-3 pr-0 pl-0">
+                                                    <img src="<?= Yii::$app->homeUrl . $employee['picture'] ?>"
+                                                        class="image-AssignMembers">
+                                                </div>
+                                                <div class="col-9 pl-10">
+                                                    <div class="col-12 pim-employee-Name pr-0">
+                                                        <strong><?= $employee['name'] ?></strong>
+                                                    </div>
+                                                    <div class="col-12 pim-employee-title">
+                                                        <?= $employee['title'] ?>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-12 pim-employee-title">
-                                                <?= $employee['title'] ?>
-                                            </div>
                                         </div>
-                                    </div>
-                                </div>
                                 <?php
-									endforeach;
-								}
-								?>
+                                    endforeach;
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -394,19 +394,19 @@ $this->title = 'KPI View';
 <input type="hidden" id="kpiId" value="<?= $kpiId ?>">
 <?php
 $form = ActiveForm::begin([
-	'id' => 'update-kpi',
-	'method' => 'post',
-	'options' => [
-		'enctype' => 'multipart/form-data',
-	],
-	'action' => Yii::$app->homeUrl . 'kpi/management/update-kpi'
+    'id' => 'update-kpi',
+    'method' => 'post',
+    'options' => [
+        'enctype' => 'multipart/form-data',
+    ],
+    'action' => Yii::$app->homeUrl . 'kpi/management/update-kpi'
 
 ]); ?>
 <?= $this->render('modal_update_kpi', [
-	"units" => $units,
-	"companies" => $companies,
-	"months" => $months,
-	"isManager" => $isManager
+    "units" => $units,
+    "companies" => $companies,
+    "months" => $months,
+    "isManager" => $isManager
 ]) ?>
 <?php ActiveForm::end(); ?>
 <?= $this->render('modal_delete') ?>
@@ -414,15 +414,15 @@ $form = ActiveForm::begin([
 
 
 <script>
-// Optionally set a default tab to be active on page load
-window.onload = function() {
-    let openTab = <?php echo json_encode($openTab); ?>; // PHP value passed to JavaScript
-    if (openTab) {
-        viewTabEmployeeKpi(<?= $kpiEmployeeHistoryId ?>,
-            <?= $kpiEmployeeId ?>, openTab); // Set the tab based on the PHP value
-    } else {
-        viewTabEmployeeKpi(<?= $kpiEmployeeHistoryId ?>,
-            <?= $kpiEmployeeId ?>, 1); // Default to tab 1 if no value is passed
+    // Optionally set a default tab to be active on page load
+    window.onload = function() {
+        let openTab = <?php echo json_encode($openTab); ?>; // PHP value passed to JavaScript
+        if (openTab) {
+            viewTabEmployeeKpi(<?= $kpiEmployeeHistoryId ?>,
+                <?= $kpiEmployeeId ?>, openTab); // Set the tab based on the PHP value
+        } else {
+            viewTabEmployeeKpi(<?= $kpiEmployeeHistoryId ?>,
+                <?= $kpiEmployeeId ?>, 1); // Default to tab 1 if no value is passed
+        }
     }
-}
 </script>

@@ -90,6 +90,7 @@ $this->title = 'KPI Grid View';
                     <?php
                     if (isset($kpis) && count($kpis) > 0) {
                         foreach ($kpis as $kpiId => $kpi) :
+                            //throw new Exception(print_r($kpi, true));
                             if ($kpi["isOver"] == 1 && $kpi["status"] != 2) {
                                 $colorFormat = 'over';
                             } else {
@@ -125,34 +126,6 @@ $this->title = 'KPI Grid View';
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- <div class="col-lg-5 col-md-2 col-4 text-end pr-20">
-                            <a href="<?= Yii::$app->homeUrl ?>kpi/view/index/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>"
-                                class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="History"
-                                    class="pim-icon" style="margin-top: -1px;">
-                            </a>
-                            <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>"
-                                class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg" alt="History"
-                                    class="pim-icon">
-                            </a>
-                            <a href="<?= Yii::$app->homeUrl ?>kpi/chart/company-chart/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>"
-                                class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg" alt="History"
-                                    class="pim-icon mr-3" style="margin-top: -2px;">Chart
-                            </a>
-                            <?php
-                            if ($role >= 5) {
-                            ?>
-                            <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kpi"
-                                onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)" style="margin-top: -3px;">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/bin.svg" alt="History"
-                                    class="pim-icon" style="margin-top: -2px;">
-                            </a>
-                            <?php
-                            }
-                            ?> -->
-
                                     <div class="col-lg-5 col-md-2 col-4 text-end pr-20">
                                         <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 1]) ?>"
                                             class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
@@ -179,7 +152,7 @@ $this->title = 'KPI Grid View';
                                                 class="pim-icon mr-3" style="margin-top: -2px;">Chart
                                         </a>
                                         <?php
-                                        if ($role >= 5) {
+                                        if ($role >= 4) {
                                         ?>
                                             <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kpi"
                                                 onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)" style="margin-top: -3px;"
@@ -201,24 +174,38 @@ $this->title = 'KPI Grid View';
                                                 <div class="col-12 mt-5 pt-2 pb-1">
                                                     <div class="row">
                                                         <div class="col-5 pr-2 pl-13">
-                                                            <div class="row d-flex align-items-center"
-                                                                style="min-height: 24px;">
-                                                                <?php if ($kpi["countEmployee"] != 0) { ?>
+                                                            <div class="row d-flex align-items-center" style="min-height: 24px;">
+                                                                <?php if ($kpi["countEmployee"] != 0) {
+
+                                                                    //throw new Exception(print_r($kpi["kpiEmployee"], true))
+                                                                ?>
                                                                     <div class="col-2">
-                                                                        <?php if (isset($kpi['kgiEmployee'][0])): ?>
-                                                                            <img src="<?= Yii::$app->homeUrl . $kpi['kgiEmployee'][0] ?>"
+                                                                        <?php if (isset($kpi['kpiEmployee'][0])):
+                                                                            if (file_exists(Yii::$app->homeUrl . $kpi['kpiEmployee'][0]) == 0) {
+                                                                                $kpi['kpiEmployee'][0] = 'image/user.svg';
+                                                                            }
+                                                                        ?>
+                                                                            <img src="<?= Yii::$app->homeUrl . $kpi['kpiEmployee'][0] ?>"
                                                                                 class="pim-pic-gridNew">
                                                                         <?php endif; ?>
                                                                     </div>
                                                                     <div class="col-2 pic-after pt-0">
-                                                                        <?php if (isset($kpi['kgiEmployee'][1])): ?>
-                                                                            <img src="<?= Yii::$app->homeUrl . $kpi['kgiEmployee'][1] ?>"
+                                                                        <?php if (isset($kpi['kpiEmployee'][1])):
+                                                                            if (file_exists(Yii::$app->homeUrl . $kpi['kpiEmployee'][1]) == 0) {
+                                                                                $kpi['kpiEmployee'][1] = 'image/user.png';
+                                                                            }
+                                                                        ?>
+                                                                            <img src="<?= Yii::$app->homeUrl . $kpi['kpiEmployee'][1] ?>"
                                                                                 class="pim-pic-gridNew">
                                                                         <?php endif; ?>
                                                                     </div>
                                                                     <div class="col-2 pic-after pt-0">
-                                                                        <?php if (isset($kpi['kgiEmployee'][2])): ?>
-                                                                            <img src="<?= Yii::$app->homeUrl . $kpi['kgiEmployee'][2] ?>"
+                                                                        <?php if (isset($kpi['kpiEmployee'][2])):
+                                                                            if (file_exists(Yii::$app->homeUrl . $kpi['kpiEmployee'][2]) == 0) {
+                                                                                $kpi['kpiEmployee'][2] = 'image/user.png';
+                                                                            }
+                                                                        ?>
+                                                                            <img src="<?= Yii::$app->homeUrl . $kpi['kpiEmployee'][2] ?>"
                                                                                 class="pim-pic-gridNew">
                                                                         <?php endif; ?>
                                                                     </div>
@@ -255,8 +242,7 @@ $this->title = 'KPI Grid View';
                                                                 <?php } ?>
                                                             </div>
                                                         </div>
-                                                        <div
-                                                            class="col-6 <?= $kpi["countEmployee"] == 0  && $colorFormat != "disable" ? 'yenlow-assignNew' : $colorFormat . '-assignNew' ?>">
+                                                        <div class="col-6 <?= $kpi["countEmployee"] == 0  && $colorFormat != "disable" ? 'yenlow-assignNew' : $colorFormat . '-assignNew' ?>">
                                                             <?php
                                                             if ($role < 4) { // staff to team leader
                                                                 if ($kpi["countEmployee"] > 0) {
@@ -271,7 +257,7 @@ $this->title = 'KPI Grid View';
                                                                 <?php
                                                                 } else { ?>
                                                                     <span class="pull-left">
-                                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-yenlow.svg"
+                                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/view-yenlow.svg"
                                                                             class="home-icon mr-2">
                                                                     </span>
                                                                     <a class="font-black" style="top: 2px;">
@@ -335,144 +321,60 @@ $this->title = 'KPI Grid View';
                                                             </div>
 
                                                         </div>
-                                                        <div class="col-6 <?= $colorFormat ?>-assignNew ">
+                                                        <div class="col-6 <?= $kpi["countTeam"] == 0  && $colorFormat != "disable" ? 'yenlow-assignNew' : $colorFormat . '-assignNew' ?>">
                                                             <?php
-                                                            if ($colorFormat != "disable" && $role > 3) {
+                                                            if ($role < 4) { // staff to team leader
+                                                                if ($kpi["countTeam"] > 0) {
                                                             ?>
-                                                                <span class="pull-left"
-                                                                    style="display:<?= $kpi['isOver'] == 2 ? 'none;' : '' ?>">
-                                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.svg"
-                                                                        class="home-icon mr-2">
-                                                                </span>
-                                                                <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, "companyId" => $kpi["companyId"]]) ?>"
-                                                                    class="font-<?= $colorFormat ?>" style="top: 2px;">
-                                                                    Assign Team
-                                                                </a>
+                                                                    <span class="pull-left">
+                                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $colorFormat ?>.svg"
+                                                                            class="home-icon mr-2">
+                                                                    </span>
+                                                                    <a class="font-<?= $colorFormat ?>" style="top: 2px;" href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 1]) ?>">
+                                                                        View Assigned
+                                                                    </a>
+                                                                <?php
+                                                                } else { ?>
+                                                                    <span class="pull-left">
+                                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/view-yenlow.svg"
+                                                                            class="home-icon mr-2">
+                                                                    </span>
+                                                                    <a class="font-black" style="top: 2px;">
+                                                                        Not Assigned
+                                                                    </a>
+                                                                <?php
+                                                                }
+                                                            } else { // manager and over
+                                                                if ($kpi["countTeam"] > 0) { ?>
+                                                                    <span class="pull-left"
+                                                                        style="display:<?= $kpi['isOver'] == 2 ? 'none;' : '' ?>">
+                                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.svg"
+                                                                            class="home-icon mr-2">
+                                                                    </span>
+                                                                    <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, "companyId" => $kpi["companyId"]]) ?>"
+                                                                        class="font-<?= $colorFormat ?>" style="top: 2px;">
+                                                                        Edit Assigned
+                                                                    </a>
+                                                                <?php
+                                                                } else { ?>
+                                                                    <span class="pull-left">
+                                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-yenlow.svg"
+                                                                            class="home-icon mr-2">
+                                                                    </span>
+                                                                    <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, "companyId" => $kpi["companyId"]]) ?>" class="font-black" style="top: 2px;">
+                                                                        Assign Person
+                                                                    </a>
                                                             <?php
-                                                            } else { ?>
-                                                                <span class="pull-left">
-                                                                    <img src="
-                                                        <?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $colorFormat ?>.svg"
-                                                                        class="home-icon mr-2">
-                                                                </span>
-                                                                <a class="font-<?= $colorFormat ?>" style="top: 2px;">
-                                                                    View Team
-                                                                </a>
-                                                            <?php
+                                                                }
                                                             }
                                                             ?>
-
                                                         </div>
                                                         <div class="col-1">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- <div class="col-9 pl-20 pr-0">
-                                        <div class="col-12 <?= $colorFormat ?>-assign  mt-5 pt-2 pb-1">
-                                            <div class="row">
-                                                <div class="col-5 border-right-<?= $colorFormat ?> pr-2">
-                                                    <div class="row">
-                                                        <div class="col-2">
-                                                            <?php
-                                                            if (isset($kpi['kpiEmployee'][0])) {
-                                                            ?>
-                                                            <img src="<?= Yii::$app->homeUrl . $kpi['kpiEmployee'][0] ?>"
-                                                                class="pim-pic-grid">
-                                                            <?php
-                                                            }
-                                                            ?>
-                                                        </div>
-                                                        <div class="col-2 pic-after pt-0">
-                                                            <?php
-                                                            if (isset($kpi['kpiEmployee'][1])) {
-                                                            ?>
-                                                            <img src="<?= Yii::$app->homeUrl . $kpi['kpiEmployee'][1] ?>"
-                                                                class="pim-pic-grid">
-                                                            <?php
-                                                            }
-                                                            ?>
-                                                        </div>
-                                                        <div class="col-2 pic-after pt-0">
-                                                            <?php
-                                                            if (isset($kpi['kpiEmployee'][2])) {
-                                                            ?>
-                                                            <img src="<?= Yii::$app->homeUrl . $kpi['kpiEmployee'][2] ?>"
-                                                                class="pim-pic-grid">
-                                                            <?php
-                                                            }
-                                                            ?>
-                                                        </div>
-                                                        <div class="col-5 number-tag load-<?= $colorFormat ?> pr-0 pl-0 pt-1"
-                                                            style="margin-left: -3px;height:18px;width:30px;margin-top: 1px;">
-                                                            <?= $kpi["countEmployee"] ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-7 pl-3 pt-4 pr-15">
-                                                    <?php
-                                                    if ($role > 3) {
-                                                    ?>
-                                                    <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, "companyId" => $kpi["companyId"]]) ?>"
-                                                        class="font-<?= $colorFormat ?>">
-                                                        Assign Person
-                                                    </a>
-                                                    <?php
-                                                    } else {
-                                                    ?>
-                                                    <span class="font-<?= $colorFormat ?>">
-                                                        Assign Person
-                                                    </span>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                    <span class="pull-right"
-                                                        style="display:<?= $kpi['isOver'] == 2 ? 'none;' : '' ?>">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.svg"
-                                                            class="home-icon" style="margin-top: -4px;">
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 <?= $colorFormat ?>-assign  mt-10 pt-5 pb-1">
-                                            <div class="row">
-                                                <div class="col-5 border-right-<?= $colorFormat ?> pr-2">
-                                                    <div class="row">
-                                                        <div class="col-4">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-<?= $colorFormat ?>.svg"
-                                                                class="first-layer-icon ml-3" style="margin-top: -4px;">
-                                                        </div>
-                                                        <div class="col-4 number-tag load-<?= $colorFormat ?> pr-3 pl-3 pt-1 ml-5"
-                                                            style="height:18px;">
-                                                            <?= $kpi["countTeam"] ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-7 pl-3 pr-15">
-                                                    <?php
-                                                    if ($role > 3) {
-                                                    ?>
-                                                    <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, "companyId" => $kpi["companyId"]]) ?>"
-                                                        class="font-<?= $colorFormat ?>">
-                                                        Assign Team
-                                                    </a>
-                                                    <?php
-                                                    } else { ?>
-                                                    <span class="font-<?= $colorFormat ?>">
-                                                        Assign Team
-                                                    </span>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                    <span class="pull-right"
-                                                        style="display:<?= $kpi['isOver'] == 2 ? 'none;' : '' ?>">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.svg"
-                                                            class="home-icon" style="margin-top: -3px;">
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
+
                                             <div class="col-3" style="margin-top:-5px;">
                                                 <div class="col-12 text-center priority-star">
                                                     <?php
