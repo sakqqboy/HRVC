@@ -338,7 +338,9 @@ $this->title = "KPI";
                                                 onclick="javascript:kpiTeamHistory(<?= $kpiTeamId ?>)">
                                                 <a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                             </li> -->
-
+                                        <?php
+                                                if ($role >= 5) {
+                                                    ?>
                                         <li class="pl-4 pr-4" data-bs-toggle="modal"
                                             data-bs-target="#update-kpi-modal-team"
                                             onclick="javascript:updateTeamKpi(<?= $kpiTeamId ?>)"
@@ -360,14 +362,6 @@ $this->title = "KPI";
                                                 History
                                             </a>
                                         </li>
-                                        <!-- <li class="pl-4 pr-4" data-bs-toggle="modal" data-bs-target="#kpi-issue"
-                                            onclick="javascript:showKpiComment(<?= $kpi['kpiId'] ?>)">
-                                            <a class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -3px;">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
-                                                    alt="Chats" class="pim-icon mr-10" style="margin-top: -2px;">
-                                                Chats
-                                            </a>
-                                        </li> -->
                                         <li class="pl-4 pr-4">
                                             <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/kpi-team-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId'],'kpiTeamHistoryId' => $kpi['kpiTeamHistoryId'], 'kpiTeamId' => $kpiTeamId, 'openTab' => 3]) ?>"
                                                 class="dropdown-itemNEWS pl-4  pr-20 mb-5"
@@ -396,7 +390,9 @@ $this->title = "KPI";
                                                 Delete
                                             </a>
                                         </li>
-
+                                        <?php
+                                                        }
+                                                    ?>
                                     </ul>
                                 </td>
 
