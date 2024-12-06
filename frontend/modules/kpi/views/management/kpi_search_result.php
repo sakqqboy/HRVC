@@ -394,9 +394,6 @@ $this->title = 'KPI';
                                                 Person
                                             </a>
                                         </li>
-                                        <?php
-												}
-												?>
                                         <li class="pl-4 pr-4" data-bs-toggle="modal" data-bs-target="#delete-kpi"
                                             onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)" title="Delete">
                                             <a class="dropdown-itemNEW pl-4 pr-25" href="#">
@@ -406,6 +403,10 @@ $this->title = 'KPI';
                                                 Delete
                                             </a>
                                         </li>
+                                        <?php
+												}
+												?>
+
 
                                     </ul>
                                 </td>
