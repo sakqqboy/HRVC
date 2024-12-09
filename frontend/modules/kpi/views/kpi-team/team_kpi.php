@@ -147,6 +147,15 @@ $this->title = "KPI";
                                         $display = 'none';
                                     }
 
+                                    $canEdit = 0;
+                                    if ($role > 3) {
+                                        $canEdit = 1;
+                                    } else {
+                                        if ($role == 3 && ($kpi["teamId"] == $userTeamId)) {
+                                            $canEdit = 1;
+                                        }
+                                    }
+
                                     if ($kpi["isOver"] == 1 && $kpi["status"] != 2) {
                                         $colorFormat = 'over';
                                     } else {
@@ -312,34 +321,8 @@ $this->title = "KPI";
                                             class="icon-table on-cursor">
                                     </span>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kpiTeamId ?>">
-                                        <!-- <?php
-                                                if ($role > 3) {
-                                                    ?>
-                                            <li data-bs-toggle="modal" data-bs-target="#update-kpi-modal-team"
-                                                onclick="javascript:updateTeamKpi(<?= $kpiTeamId ?>)"
-                                                style="display: <?= $display ?>;">
-                                                <a class="dropdown-item"><i class="fa fa-pencil-square-o"
-                                                        aria-hidden="true"></i></a>
-                                            </li>
-                                            <?php
-                                                    } else {
-                                                        if ($role == 3 && ($kpi["teamId"] == $userTeamId)) { ?>
-                                            <li data-bs-toggle="modal" data-bs-target="#update-kpi-modal-team"
-                                                onclick="javascript:updateTeamKpi(<?= $kpiTeamId ?>)"
-                                                style="display: <?= $display ?>;">
-                                                <a class="dropdown-item"><i class="fa fa-pencil-square-o"
-                                                        aria-hidden="true"></i></a>
-                                            </li>
-                                            <?php
-                                                        }
-                                                    }
-                                                    ?>
-                                            <li data-bs-toggle="modal" data-bs-target="#kpi-view-team"
-                                                onclick="javascript:kpiTeamHistory(<?= $kpiTeamId ?>)">
-                                                <a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                            </li> -->
                                         <?php
-                                                if ($role >= 5) {
+                                                if ($role >= 3 && $canEdit == 1) {
                                                     ?>
                                         <li class="pl-4 pr-4" data-bs-toggle="modal"
                                             data-bs-target="#update-kpi-modal-team"
@@ -352,15 +335,17 @@ $this->title = "KPI";
                                                 Edit
                                             </a>
                                         </li>
-                                        <li class="pl-4 pr-4">
-                                            <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-team-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId'], "kpiTeamId" => $kpiTeamId,"teamId"=>$kpi['teamId']]) ?>"
-                                                class="dropdown-itemNEWS pl-4  pr-20 mb-5"
-                                                class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs' ?> mr-5"
-                                                style="margin-top: -1px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg"
-                                                    alt="History" class="pim-icon mr-10" style="margin-top: -2px;">
-                                                History
-                                            </a>
+                                        <?php 
+                                        } 
+                                        ?>
+                                        <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-team-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId'], "kpiTeamId" => $kpiTeamId,"teamId"=>$kpi['teamId']]) ?>"
+                                            class="dropdown-itemNEWS pl-4  pr-20 mb-5"
+                                            class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs' ?> mr-5"
+                                            style="margin-top: -1px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg"
+                                                alt="History" class="pim-icon mr-4" style="margin-top: -2px;">
+                                            History
+                                        </a>
                                         </li>
                                         <li class="pl-4 pr-4">
                                             <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/kpi-team-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId'],'kpiTeamHistoryId' => $kpi['kpiTeamHistoryId'], 'kpiTeamId' => $kpiTeamId, 'openTab' => 3]) ?>"
@@ -382,6 +367,10 @@ $this->title = "KPI";
                                                 Chart
                                             </a>
                                         </li>
+
+                                        <?php 
+                                                if ($role >= 5) {
+                                        ?>
                                         <li class="pl-4 pr-4">
                                             <a class="dropdown-itemNEW pl-4 pr-25"
                                                 href="javascript:prepareDeleteKpiTeam(<?= $kpiTeamId ?>)">
@@ -391,8 +380,8 @@ $this->title = "KPI";
                                             </a>
                                         </li>
                                         <?php
-                                                        }
-                                                    ?>
+                                                 }
+                                         ?>
                                     </ul>
                                 </td>
 

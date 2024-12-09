@@ -328,7 +328,7 @@ $this->title = "Individual KPI";
                                     </span>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kpiEmployeeId ?>">
                                         <?php
-                                            if ($role >= 5) {
+                                            if ( $canEdit == 1) {
                                             ?>
                                         <li class="pl-4 pr-4">
                                             <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/update-personal-kpi/<?= ModelMaster::encodeParams(['kpiEmployeeId' => $kpiEmployeeId]) ?>"
@@ -370,6 +370,12 @@ $this->title = "Individual KPI";
                                                 Chart
                                             </a>
                                         </li>
+                                        <?php
+                                        }
+                                        ?>
+                                        <?php
+                                        if ($role >= 5) {
+                                        ?>
                                         <li class="pl-4 pr-4">
                                             <a class="dropdown-itemNEW pl-4 pr-25" data-bs-toggle="modal"
                                                 data-bs-target="#delete-kpi-employee"
