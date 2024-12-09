@@ -154,9 +154,9 @@ class KpiTeamController extends Controller
 	public function actionTeamKpi()
 	{
 		$role = UserRole::userRight();
-		if ($role < 3) {
-			return $this->redirect(Yii::$app->homeUrl . 'kpi/management/grid');
-		}
+		// if ($role < 3) {
+		// 	return $this->redirect(Yii::$app->homeUrl . 'kpi/management/grid');
+		// }
 		$userId = Yii::$app->user->id;
 		$isAdmin = UserRole::isAdmin();
 		$userBranchId = User::userBranchId();
