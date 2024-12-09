@@ -253,65 +253,6 @@ $this->title = 'KPI';
                                     <?= $kpi["status"] == 1 ? $kpi["nextCheck"] : '' ?>
                                 </td>
                                 <td class="text-center">
-                                    <!-- <span data-bs-toggle="modal" data-bs-target="#kpi-issue"
-                                        onclick="javascript:showKpiComment(<?= $kpiId ?>)"
-                                        class="btn btn-bg-white-xs pr-2 pl-2 pt-1 pb-1">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.svg"
-                                            class="icon-table on-cursor">
-                                    </span> -->
-                                    <!-- <a href="<?= Yii::$app->homeUrl ?>kpi/view/index/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>"
-                                                class="btn btn-bg-white-xs mr-5" style="margin-top: -1px;">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.svg"
-                                                    alt="History" class="pim-icon" style="margin-top: -1px;">
-                                            </a>
-                                            <span class="dropdown" href="#" id="dropdownMenuLink-<?= $kpiId ?>"
-                                                data-bs-toggle="dropdown">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.svg"
-                                                    class="icon-table on-cursor">
-                                            </span>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kpiId ?>">
-                                                <li data-bs-toggle="modal" data-bs-target="#update-kpi-modal"
-                                                    onclick="javascript:updateKpi(<?= $kpiId ?>)"
-                                                    style="display: <?= $display ?>;">
-                                                    <a class="dropdown-item"><i class="fa fa-pencil-square-o"
-                                                            aria-hidden="true"></i></a>
-                                                </li> -->
-                                    <!-- <li data-bs-toggle="modal" data-bs-target="#kpi-view"
-                                            onclick="javascript:kpiHistory(<?= $kpiId ?>)">
-                                            <a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                        </li> -->
-                                    <!-- <li onclick="javascript:copyKpi(<?= $kpiId ?>)" title="Copy"
-                                            style="display: <?= $display ?>;">
-                                            <a class="dropdown-item" href="#">
-                                                <i class="fa fa-copy" aria-hidden="true"></i>
-                                            </a>
-                                        </li> -->
-                                    <!-- <?php
-                                                if ($role >= 3) {
-                                                ?>
-                                                    <li>
-                                                        <a class="dropdown-item"
-                                                            href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, "companyId" => $kpi["companyId"]]) ?>">
-                                                            <i class="fa fa-users" aria-hidden="true"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="dropdown-item"
-                                                            href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, "companyId" => $kpi["companyId"]]) ?>">
-                                                            <i class="fa fa-user" aria-hidden="true"></i>
-                                                        </a>
-                                                    </li>
-                                                <?php
-                                                }
-                                                ?>
-                                                <li data-bs-toggle="modal" data-bs-target="#delete-kpi"
-                                                    onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)"
-                                                    style="display: <?= $display ?>;">
-                                                    <a class="dropdown-item"><i class="fa fa-trash-o text-danger"
-                                                            aria-hidden="true"></i></a>
-                                                </li>
-
-                                            </ul> -->
 
                                     <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>"
                                         class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs' ?> mr-5"
@@ -371,7 +312,7 @@ $this->title = 'KPI';
                                             </a>
                                         </li>
                                         <?php
-												if ($role >= 3) {
+												if ($role >= 4) {
 												?>
 
                                         <li class="pl-4 pr-4" data-bs-toggle="modal">

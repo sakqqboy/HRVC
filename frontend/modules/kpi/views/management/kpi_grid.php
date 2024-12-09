@@ -152,7 +152,7 @@ $this->title = 'KPI Grid View';
                                         class="pim-icon mr-3" style="margin-top: -2px;">Chart
                                 </a>
                                 <?php
-                                        if ($role >= 4) {
+                                        if ($role >= 5) {
                                         ?>
                                 <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kpi"
                                     onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)" style="margin-top: -3px;"

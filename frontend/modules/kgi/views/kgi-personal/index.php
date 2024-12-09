@@ -298,7 +298,7 @@ $this->title = "Individual KGI";
                                     </span>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kgi['isOver'] ?>">
                                         <?php
-                                                if ($role >= 5) {
+                                                if ($canEdit == 1) {
                                                 ?>
                                         <li class="pl-4 pr-4" data-bs-toggle="modal"
                                             data-bs-target="#update-kgi-modal-team">
@@ -339,40 +339,6 @@ $this->title = "Individual KGI";
                                                 Chart
                                             </a>
                                         </li>
-                                        <!-- <li class="pl-4 pr-4" data-bs-toggle="modal" data-bs-target="#kgi-issue"
-                                                    onclick="javascript:showKgiComment(<?= $kgi['kgiId'] ?>)">
-                                                    <a class="dropdown-itemNEWS pl-4 pr-20 mb-5" href="#">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
-                                                            alt="Chats" class="pim-icon mr-10" style="margin-top: -2px;">
-                                                        Chats
-                                                    </a>
-                                                </li> -->
-                                        <!-- <li class="pl-4 pr-4" data-bs-toggle="modal">
-                                            <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
-                                                href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/view-personal-kgi/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId]) ?>"
-                                                class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg"
-                                                    alt="History" class="pim-icon mr-3"
-                                                    style="margin-top: -2px;">History
-                                            </a>
-                                        </li>
-                                        <li class="pl-4 pr-4" data-bs-toggle="modal">
-                                            <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
-                                                href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/view-personal-kgi/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId]) ?>"
-                                                class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
-                                                    alt="Chats" class="pim-icon mr-3" style="margin-top: -2px;">Chats
-                                            </a>
-                                        </li>
-                                        <li class="pl-4 pr-4" data-bs-toggle="modal">
-                                            <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
-                                                href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/view-personal-kgi/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId]) ?>"
-                                                class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg"
-                                                    alt="Chart" class="pim-icon mr-10" style="margin-top: -2px;">
-                                                Chart
-                                            </a>
-                                        </li> -->
                                         <?php
                                                 if ($role >= 5) {
                                                 ?>
