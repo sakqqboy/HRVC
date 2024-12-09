@@ -856,6 +856,7 @@ function setSameKgiTeamRemark(teamId, kgiId) {
 
 }
 function prepareKgiNextTarget(kgiHistoryId) {
+	// alert(kgiHistoryId);
 	$("#copy").modal('show');
 	$("#kgiHistoryId").val(kgiHistoryId);
 }
