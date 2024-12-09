@@ -7,7 +7,7 @@ use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Team;
 
 ?>
-<div class="row">
+<div class="row justify-content-end">
     <!-- <div class="col-1 pr-10 text-end">
 		<span>
 			<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterPlus.svg" class="pim-search-icon" style="cursor: pointer;" onclick="javascript:kpiFilterForEmployee()">
