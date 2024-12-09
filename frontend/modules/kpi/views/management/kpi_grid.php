@@ -152,7 +152,7 @@ $this->title = 'KPI Grid View';
                                         class="pim-icon mr-3" style="margin-top: -2px;">Chart
                                 </a>
                                 <?php
-                                        if ($role >= 4) {
+                                        if ($role >= 5) {
                                         ?>
                                 <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kpi"
                                     onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)" style="margin-top: -3px;"
@@ -247,7 +247,7 @@ $this->title = 'KPI Grid View';
                                                 <div
                                                     class="col-6 <?= $kpi["countEmployee"] == 0  && $colorFormat != "disable" ? 'yenlow-assignNew' : $colorFormat . '-assignNew' ?>">
                                                     <?php
-                                                            if ($role < 4) { // staff to team leader
+                                                            if ($role <= 4) { // staff to team leader
                                                                 if ($kpi["countEmployee"] > 0) {
                                                             ?>
                                                     <span class="pull-left">
@@ -328,7 +328,7 @@ $this->title = 'KPI Grid View';
                                                 <div
                                                     class="col-6 <?= $kpi["countTeam"] == 0  && $colorFormat != "disable" ? 'yenlow-assignNew' : $colorFormat . '-assignNew' ?>">
                                                     <?php
-                                                            if ($role < 4) { // staff to team leader
+                                                            if ($role <= 4) { // staff to team leader
                                                                 if ($kpi["countTeam"] > 0) {
                                                             ?>
                                                     <span class="pull-left">
@@ -528,7 +528,7 @@ $this->title = 'KPI Grid View';
                                             <?php if ($colorFormat == "complete") {
                                                             echo  "Edit";
                                                         } else if ($colorFormat == "over") {
-                                                            echo  "Update";
+                                                            echo  "Passed";
                                                         } else {
                                                             echo  "Update";
                                                         }

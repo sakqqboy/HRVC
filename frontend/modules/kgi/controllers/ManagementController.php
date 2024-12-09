@@ -2010,7 +2010,10 @@ class ManagementController extends Controller
 	public function actionNextKgiHistory()
 	{
 		$kgiHistoryId = $_POST["kgiHistoryId"];
+		//   throw new Exception($kgiHistoryId);
 		$currentHistory = KgiHistory::find()->where(["kgiHistoryId" => $kgiHistoryId])->asArray()->one();
+
+		//   throw new Exception(print_r($currentHistory,true));
 		$unit = Unit::find()->where(["unitId" => $currentHistory["unitId"]])->asArray()->one();
 		if ($currentHistory["month"] != "" && $currentHistory["year"] != "") {
 			$nextTargetMonthYear = ModelMaster::nextTargetMonthYear($unit["unitName"], $currentHistory["month"], $currentHistory["year"]);

@@ -496,6 +496,7 @@ class KgiTeamController extends Controller
 	public function actionDeleteKgiTeam()
 	{
 		$kgiTeamId = $_POST["kgiTeamId"];
+		// throw new exception($kgiTeamId);
 		KgiTeam::updateAll(["status" => 99], ["kgiTeamId" => $kgiTeamId]);
 		KgiTeamHistory::updateAll(["status" => 99], ["kgiTeamId" => $kgiTeamId]);
 		$res["status"] = true;

@@ -51,7 +51,7 @@ $this->title = 'KGI Grid View';
             <div class="col-5">
                 <div class="row">
                     <div class="col-10 font-size-12 pim-name pr-0 pl-5 text-start">
-                        <a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" class="mr-5 font-size-12">
+                        <a href="<?= Yii::$app->request->referrer ?>" class="mr-5 font-size-12">
                             <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
                             Back
                         </a>

@@ -536,13 +536,13 @@ $this->title = "INDIVIDUAL KGI";
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
                                                         class="mb-2" style="width: 12px; height: 12px;">
                                                     <?php if ($colorFormat == "complete") {
-                                                                    echo  "Edit";
-                                                                } else if ($colorFormat == "over") {
-                                                                    echo  "Update";
-                                                                } else {
-                                                                    echo  "Update";
-                                                                }
-                                                                ?>
+                                                            echo  "Edit";
+                                                        } else if ($colorFormat == "over") {
+                                                            echo  "Passed";
+                                                        } else {
+                                                            echo  "Update";
+                                                        }
+                                                        ?>
                                                 </div>
                                             </a>
                                             <?php

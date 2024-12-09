@@ -233,19 +233,6 @@ $this->title = "KGI";
                                     <?= $kgi["status"] == 1 ? $kgi["nextCheck"] : '' ?>
                                 </td>
                                 <td class="text-center">
-                                    <!-- <span data-bs-toggle="modal" data-bs-target="#kgi-issue" onclick="javascript:showKgiComment(<?php // $kgiId 
-																									?>)">
-												<img src="<?php // Yii::$app->homeUrl 
-														?>image/comment.svg" class="comment-td-dropdown">
-											</span>
-											<span class="dropdown menulink" href="#" role="but ton" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-												<i class="fa fa-ellipsis-v on-cursor" aria-hidden="true"></i>
-											</span> -->
-
-
-                                    <!-- <span data-bs-toggle="modal" data-bs-target="#kgi-issue" onclick="javascript:showKgiComment(<?= $kgiId ?>)" class="btn btn-bg-white-xs pr-2 pl-2 pt-1 pb-1">
-												<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.svg" class="icon-table on-cursor">
-											</span> -->
                                     <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>"
                                         class="btn btn-bg-white-xs mr-5" style="margin-top: -1px;">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/eye.svg" alt="History"
@@ -257,12 +244,9 @@ $this->title = "KGI";
                                             class="icon-table on-cursor">
                                     </span>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kgiId ?>">
-                                        <!-- <li data-bs-toggle="modal" data-bs-target="#update-kgi-modal"
-                                            onclick="javascript:updateKgi(<?= $kgiId ?>)"
-                                            style="display: <?= $display ?>;">
-                                            <a class="dropdown-item"><i class="fa fa-pencil-square-o"
-                                                    aria-hidden="true"></i></a>
-                                        </li> -->
+                                        <?php
+												if ($role >= 5) {
+												?>
                                         <li class="pl-4 pr-4" data-bs-toggle="modal" data-bs-target="#update-kgi-modal"
                                             onclick="javascript:updateKgi(<?= $kgiId ?>)"
                                             style="display: <?= $display ?>;">
@@ -274,15 +258,9 @@ $this->title = "KGI";
                                                 Edit
                                             </a>
                                         </li>
-                                        <!-- <li data-bs-toggle="modal" data-bs-target="#kgi-view" onclick="javascript:kgiHistory(<?= $kgiId ?>)">
-													<a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
-												</li> -->
-                                        <!-- <li onclick="javascript:copyKgi(<?= $kgiId ?>)" title="Copy" style="display: <?= $display ?>;">
-													<a class="dropdown-item" href="#">
-														<i class="fa fa-copy" aria-hidden="true"></i>
-													</a>
-												</li> -->
-
+                                        <?php
+												}
+												?>
                                         <li class="pl-4 pr-4" data-bs-toggle="modal">
                                             <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                 href="<?= Yii::$app->homeUrl ?>kgi/view/index/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 2]) ?>"
@@ -312,21 +290,8 @@ $this->title = "KGI";
                                             </a>
                                         </li>
                                         <?php
-												if ($role >= 3) {
+												if ($role >= 5) {
 												?>
-                                        <!-- <li>
-                                            <a class="dropdown-item" href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/kgi-team-setting/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>">
-															<i class="fa fa-users" aria-hidden="true"></i>
-														</a>
-                                            
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/indivisual-setting/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>">
-															<i class="fa fa-user" aria-hidden="true"></i>
-														</a>
-                                            
-                                        </li> -->
-
                                         <li class="pl-4 pr-4" data-bs-toggle="modal">
                                             <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                 href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgi["companyId"]]) ?>"
@@ -345,6 +310,12 @@ $this->title = "KGI";
                                                 Person
                                             </a>
                                         </li>
+                                        <?php
+												}
+												?>
+                                        <?php
+												if ($role >= 5) {
+												?>
                                         <li class="pl-4 pr-4" data-bs-toggle="modal" data-bs-target="#delete-kgi"
                                             onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)" title="Delete">
                                             <a class="dropdown-itemNEW pl-4 pr-25" href="#">
@@ -357,12 +328,7 @@ $this->title = "KGI";
                                         <?php
 												}
 												?>
-                                        <!-- <li data-bs-toggle="modal" data-bs-target="#delete-kgi"
-                                            onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)"
-                                            style="display: <?= $display ?>;">
-                                            <a class="dropdown-item"><i class="fa fa-trash-o text-danger"
-                                                    aria-hidden="true"></i></a>
-                                        </li> -->
+
                                     </ul>
                                 </td>
                             </tr>
@@ -375,17 +341,6 @@ $this->title = "KGI";
                 </div>
             </div>
         </div>
-        <!-- <div class="col-12 navigation-next">
-			<nav aria-label="Page navigation example">
-				<ul class="pagination">
-					<li class="page-item"><a class="page-link page-navigation" href="#"><i class="fa fa-chevron-left" aria-hidden="true"></i> Previous</a></li>
-					<li class="page-item"><a class="page-link page-navigation" href="#">1</a></li>
-					<li class="page-item"><a class="page-link page-navigation" href="#">2</a></li>
-					<li class="page-item"><a class="page-link page-navigation" href="#">3</a></li>
-					<li class="page-item"><a class="page-link page-navigation" href="#">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
-				</ul>
-			</nav>
-		</div> -->
     </div>
     <input type="hidden" value="create" id="acType">
     <?php

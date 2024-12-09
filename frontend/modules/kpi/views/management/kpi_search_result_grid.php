@@ -249,7 +249,7 @@ $this->title = 'KPI Grid View';
                                                 <div
                                                     class="col-6 <?= $kpi["countEmployee"] == 0  && $colorFormat != "disable" ? 'yenlow-assignNew' : $colorFormat . '-assignNew' ?>">
                                                     <?php
-                                                            if ($role < 4) { // staff to team leader
+                                                            if ($role <= 4) { // staff to team leader
                                                                 if ($kpi["countEmployee"] > 0) {
                                                             ?>
                                                     <span class="pull-left">
@@ -330,31 +330,52 @@ $this->title = 'KPI Grid View';
                                                 </div>
                                                 <div class="col-6 <?= $colorFormat ?>-assignNew ">
                                                     <?php
-                                                            if ($colorFormat != "disable" && $role > 3) {
+                                                            if ($role <= 4) { // staff to team leader
+                                                                if ($kpi["countTeam"] > 0) {
                                                             ?>
-                                                    <span class="pull-left"
-                                                        style="display:<?= $kpi['isOver'] == 2 ? 'none;' : '' ?>">
+                                                    <span class="pull-left">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $colorFormat ?>.svg"
+                                                            class="home-icon mr-2">
+                                                    </span>
+                                                    <a class="font-<?= $colorFormat ?>" style="top: 2px;"
+                                                        href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 1]) ?>">
+                                                        View Assign
+                                                    </a>
+                                                    <?php
+                                                                } else { ?>
+                                                    <span class="pull-left">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $colorFormat == 'disable' ? 'disable' : 'yenlow' ?>.svg"
+                                                            class="home-icon mr-2">
+                                                    </span>
+                                                    <a class="font-black" style="top: 2px;">
+                                                        Not Assign
+                                                    </a>
+                                                    <?php
+                                                                }
+                                                            } else { // manager and over
+                                                                if ($kpi["countTeam"] > 0) { ?>
+                                                    <span class="pull-left">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.svg"
                                                             class="home-icon mr-2">
                                                     </span>
                                                     <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, "companyId" => $kpi["companyId"]]) ?>"
                                                         class="font-<?= $colorFormat ?>" style="top: 2px;">
-                                                        Assign Team
+                                                        Edit Assign
                                                     </a>
                                                     <?php
-                                                            } else { ?>
+                                                                } else { ?>
                                                     <span class="pull-left">
-                                                        <img src="
-                                                        <?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $colorFormat ?>.svg"
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat == 'disable' ? 'disable' : 'yenlow' ?>.svg"
                                                             class="home-icon mr-2">
                                                     </span>
-                                                    <a class="font-<?= $colorFormat ?>" style="top: 2px;">
-                                                        View Team
+                                                    <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, "companyId" => $kpi["companyId"]]) ?>"
+                                                        class="font-black" style="top: 2px;">
+                                                        Assign Person
                                                     </a>
                                                     <?php
+                                                                }
                                                             }
                                                             ?>
-
                                                 </div>
                                                 <div class="col-1">
                                                 </div>
@@ -507,7 +528,7 @@ $this->title = 'KPI Grid View';
                                             <?php if ($colorFormat == "complete") {
                                                             echo  "Edit";
                                                         } else if ($colorFormat == "over") {
-                                                            echo  "Update";
+                                                            echo  "Passed";
                                                         } else {
                                                             echo  "Update";
                                                         }

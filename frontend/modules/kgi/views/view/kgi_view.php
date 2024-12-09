@@ -95,7 +95,7 @@ $this->title = 'Company KGI History';
                                             if ($i == 0 && $kgi["status"] == 2 && $role >= 5) {
                                             ?>
                                 <a class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;"
-                                    onclick="javascript:prepareKgiNextTarget(<?= $kgi['kgiId'] ?>)">
+                                    onclick="javascript:prepareKgiNextTarget(<?= $kgi['kgiHistoryId'] ?>)">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/coppy.svg" alt="History"
                                         style="margin-top: -3px; width: 12px; height: 14px;" class="home-icon">
                                 </a>

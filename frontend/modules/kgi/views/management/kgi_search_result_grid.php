@@ -285,7 +285,7 @@ $this->title = 'KGI Grid View';
                                                         <?php }?>
                                                     </div>
                                                 </div>
-                                                <?php if($role < 4) {?>
+                                                <?php if($role <= 4) {?>
                                                 <div
                                                     class="col-6 <?= $kgi["countEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>-assignNew ">
 
@@ -358,7 +358,7 @@ $this->title = 'KGI Grid View';
                                                     </div>
 
                                                 </div>
-                                                <?php if($role < 4) {?>
+                                                <?php if($role <= 4) {?>
                                                 <div
                                                     class="col-6 <?= $kgi["countTeam"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>-assignNew ">
 

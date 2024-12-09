@@ -213,7 +213,7 @@ class AssignController extends Controller
 					->one();
 					// throw new Exception(print_r($_POST["employeeTarget"], true));
 
-				$target = str_replace(",", "", $employeeId);
+				$target = str_replace(",", "", $target);
 
 				if (isset($kgiEmployee) && !empty($kgiEmployee)) {
 					if ($kgiEmployee->target != $target && $target > 0) {

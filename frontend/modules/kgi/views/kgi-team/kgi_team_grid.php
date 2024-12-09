@@ -122,9 +122,14 @@ $this->title = "TEAM KGI";
                             $canEdit = 0;
                             if ($role > 3) {
                                 $canEdit = 1;
+                               
                             } else {
+                                // echo "11111";
+                                // exit;
                                 if ($role == 3 && ($kgi["teamId"] == $userTeamId)) {
                                     $canEdit = 1;
+                                    // echo "11111";
+                                    //     exit;
                                 }
                             }
                             if ($kgi["isOver"] == 1 && $kgi["status"] != 2) {
@@ -332,7 +337,7 @@ $this->title = "TEAM KGI";
                                                     </div>
                                                 </div>
 
-                                                <?php if($role < 4) {?>
+                                                <?php if($role < 3) {?>
                                                 <div
                                                     class="col-6 <?= $kgi["countTeamEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>-assignNew ">
 
@@ -408,7 +413,7 @@ $this->title = "TEAM KGI";
                                                     </div>
 
                                                 </div>
-                                                <?php if($role < 4) {?>
+                                                <?php if($role < 3) {?>
                                                 <div
                                                     class="col-6 <?= $kgi["countTeam"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>-assignNew ">
 
@@ -605,7 +610,7 @@ $this->title = "TEAM KGI";
                                             <?php if ($colorFormat == "complete") {
                                                             echo  "Edit";
                                                         } else if ($colorFormat == "over") {
-                                                            echo  "Update";
+                                                            echo  "Passed";
                                                         } else {
                                                             echo  "Update";
                                                         }
