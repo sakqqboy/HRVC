@@ -3,8 +3,8 @@
         <div class="col-5 font-size-12 pt-5 pb-3">
             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.png" style="width:15px;margin-top:-3px;"
                 class="ml-5 mr-5">
-            <b><?= $teamDetail["teamName"] ?>, </b><span
-                class="col-12 font-size-10"><?= $teamDetail["departmentName"] ?></span>
+            <b><?= $teamDetail["teamName"] ?>, </b>
+            <span class="col-12 font-size-10"><?= $teamDetail["departmentName"] ?></span>
         </div>
         <div class="col-3 font-size-12 pt-5 pb-3 text-center">
             <b><span
