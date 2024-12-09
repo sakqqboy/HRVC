@@ -258,7 +258,7 @@ $this->title = 'KPI Grid View';
                                                     </span>
                                                     <a class="font-<?= $colorFormat ?>" style="top: 2px;"
                                                         href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 1]) ?>">
-                                                        View Assigned
+                                                        View Assign
                                                     </a>
                                                     <?php
                                                                 } else { ?>
@@ -267,7 +267,7 @@ $this->title = 'KPI Grid View';
                                                             class="home-icon mr-2">
                                                     </span>
                                                     <a class="font-black" style="top: 2px;">
-                                                        Not Assigned
+                                                        Not Assign
                                                     </a>
                                                     <?php
                                                                 }
@@ -280,7 +280,7 @@ $this->title = 'KPI Grid View';
                                                     </span>
                                                     <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, "companyId" => $kpi["companyId"]]) ?>"
                                                         class="font-<?= $colorFormat ?>" style="top: 2px;">
-                                                        Edit Assigned
+                                                        Edit Assign
                                                     </a>
                                                     <?php
                                                                 } else { ?>

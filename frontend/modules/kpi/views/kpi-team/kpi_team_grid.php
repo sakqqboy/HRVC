@@ -293,7 +293,7 @@ $this->title = "TEAM KPI";
                                                     </span>
                                                     <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/kpi-team-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId'], 'kpiTeamHistoryId' => $kpi['kpiTeamHistoryId'], 'kpiTeamId' => $kpiTeamId]) ?>"
                                                         class="font-<?= $colorFormat ?>" style="top: 2px;">
-                                                        View Assigned
+                                                        View Assign
                                                     </a>
                                                     <?php
                                                                 } else { ?>
@@ -302,7 +302,7 @@ $this->title = "TEAM KPI";
                                                             class="home-icon mr-2">
                                                     </span>
                                                     <a class="font-black" style="top: 2px;">
-                                                        Not Assigned
+                                                        Not Assign
                                                     </a>
                                                     <?php
                                                                 }
@@ -314,7 +314,7 @@ $this->title = "TEAM KPI";
                                                     </span>
                                                     <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpi["kpiId"], "companyId" => $kpi["companyId"]]) ?>"
                                                         class="font-<?= $colorFormat ?>" style="top: 2px;">
-                                                        Edit Assigned
+                                                        Edit Assign
                                                     </a>
                                                     <?php
                                                                 } else {
@@ -375,7 +375,7 @@ $this->title = "TEAM KPI";
                                                     </span>
                                                     <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/kpi-team-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId'], 'kpiTeamHistoryId' => $kpi['kpiTeamHistoryId'], 'kpiTeamId' => $kpiTeamId]) ?>"
                                                         class="font-<?= $colorFormat ?>" style="top: 2px;">
-                                                        View Assigned
+                                                        View Assign
                                                     </a>
                                                     <?php
                                                                 } else { ?>
@@ -384,7 +384,7 @@ $this->title = "TEAM KPI";
                                                             class="home-icon mr-2">
                                                     </span>
                                                     <a class="font-black" style="top: 2px;">
-                                                        Not Assigned
+                                                        Not Assign
                                                     </a>
                                                     <?php
                                                                 }
@@ -396,7 +396,7 @@ $this->title = "TEAM KPI";
                                                     </span>
                                                     <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpi["kpiId"], "companyId" => $kpi["companyId"]]) ?>"
                                                         class="font-<?= $colorFormat ?>" style="top: 2px;">
-                                                        Edit Assigned
+                                                        Edit Assign
                                                     </a>
                                                     <?php
                                                                 } else { ?>

@@ -281,11 +281,11 @@ $this->title = 'KGI Grid View';
                                                         class="font-<?= $kgi["countEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'black') : $colorFormat ?>"
                                                         style="<?= ($kgi["countEmployee"] == 0 || $colorFormat == 'disable') ? 'pointer-events: none; color: black; text-decoration: none; top: 2px;' : 'top: 2px;' ?>">
                                                         <?php if ($kgi["countEmployee"] == 0 && $colorFormat == 'disable') { ?>
-                                                        Not Assigned
+                                                        Not Assign
                                                         <?php } elseif ($kgi["countEmployee"] == 0) { ?>
-                                                        Not Assigned
+                                                        Not Assign
                                                         <?php } else { ?>
-                                                        View Assigned
+                                                        View Assign
                                                         <?php } ?>
                                                     </a>
 
@@ -301,11 +301,11 @@ $this->title = 'KGI Grid View';
                                                         class="font-<?=  $kgi["countEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'black') : $colorFormat ?>"
                                                         style="top: 2px;">
                                                         <?php if($kgi["countEmployee"] == 0 && $colorFormat == 'disable') {?>
-                                                        Assigned Person
+                                                        Assign Person
                                                         <?php  }else if($kgi["countEmployee"] == 0)  { ?>
-                                                        Assigned Person
+                                                        Assign Person
                                                         <?php }else{  ?>
-                                                        Edit Assigned
+                                                        Edit Assign
                                                         <?php } ?>
                                                     </a>
                                                 </div>
@@ -354,11 +354,11 @@ $this->title = 'KGI Grid View';
                                                         class="font-<?= ($kgi["countTeam"] == 0 && $colorFormat == 'disable') ? 'black' : $colorFormat ?>"
                                                         style="top: 2px; <?= ($kgi["countTeam"] == 0 || $colorFormat == 'disable') ? 'pointer-events: none; color: black; text-decoration: none; top: 2px;'  : '' ?>">
                                                         <?php if ($kgi["countTeam"] == 0 && $colorFormat == 'disable') { ?>
-                                                        Not Assigned
+                                                        Not Assign
                                                         <?php } elseif ($kgi["countTeam"] == 0) { ?>
                                                         Not Team
                                                         <?php } else { ?>
-                                                        View Assigned
+                                                        View Assign
                                                         <?php } ?>
                                                     </a>
 
@@ -374,11 +374,11 @@ $this->title = 'KGI Grid View';
                                                         class="font-<?= ($kgi["countTeam"] == 0 && $colorFormat == 'disable') ? 'black' : $colorFormat ?>"
                                                         style="top: 2px; <?= ($kgi["countTeam"] == 0 && $colorFormat == 'disable') ? : '' ?>">
                                                         <?php if($kgi["countTeam"] == 0 && $colorFormat == 'disable') {?>
-                                                        Assigned Team
+                                                        Assign Team
                                                         <?php  }else if($kgi["countTeam"] == 0)  { ?>
-                                                        Assigned Team
+                                                        Assign Team
                                                         <?php }else{  ?>
-                                                        Edit Assigned
+                                                        Edit Assign
                                                         <?php } ?>
                                                     </a>
                                                 </div>
