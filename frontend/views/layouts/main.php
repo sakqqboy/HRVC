@@ -58,7 +58,7 @@ AppAsset::register($this);
                 </div>
 
                 <div class="main-content">
-                    <div class="">
+                    <div>
                         <?= $this->render("@frontend/views/layouts/headernavbar") ?>
                     </div>
                     <div class="submain-content">

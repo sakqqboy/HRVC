@@ -12,13 +12,66 @@
 }
 
 .width-ehsan-small {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
+    margin-top: 1px;
+}
+
+.profile-arrow-menu {
+    cursor: pointer;
+    text-align: center;
+    margin-top: 3px;
+}
+
+.language-text {
+    font-size: 18px;
+    font-weight: 500;
+    margin-right: 5px;
+    color: #3C3D48;
+}
+
+.header-pepartment {
+    font-size: 13px;
+    font-weight: 400;
+    color: #656565;
+    margin-top: -5px;
 }
 
 .box-list-group {
     margin-left: -1120%;
+}
+
+.profile-box-menu {
+    width: 232px;
+    height: 261px;
+    position: absolute;
+    background-color: white;
+    margin-top: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding-top: 22px;
+    padding-left: 22px;
+    padding-right: 22px;
+    padding-bottom: 22px;
+    font-size: 18px;
+    font-weight: 500;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    color: #30313D;
+    display: none;
+}
+
+.profile-menu-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.logout-button {
+    background-color: #CC0000;
+    height: 36px;
+    border-radius: 5px;
+    font-size: 20px;
+    padding-top: 2px;
 }
 
 @media (max-width: 992px) {

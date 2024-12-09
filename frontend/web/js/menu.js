@@ -8,3 +8,6 @@ function showGroupMenu(groupname) {
 	$("#" + groupname + '-show').hide();
 	$("#" + groupname+'-hide').show();
 }
+function showMenu() { 
+	$("#profileMenu").toggle();
+}

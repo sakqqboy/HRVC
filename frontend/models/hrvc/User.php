@@ -2,6 +2,7 @@
 
 namespace frontend\models\hrvc;
 
+use Exception;
 use Yii;
 use \frontend\models\hrvc\master\UserMaster;
 
@@ -122,5 +123,31 @@ class User extends \frontend\models\hrvc\master\UserMaster
         } else {
             return  null;
         }
+    }
+    public static function employeeTitleDepartment()
+    {
+        $titleName = '';
+        if (Yii::$app->user->id) {
+            $user = User::find()->where(["userId" => Yii::$app->user->id])->asArray()->one();
+            $employee = Employee::find()
+                ->where(["employeeId" => $user["employeeId"]])
+                ->asArray()
+                ->one();
+            if (isset($employee) && !empty($employee)) {
+                $title = Title::find()
+                    ->select('titleName')
+                    ->where(["titleId" => $employee["titleId"]])
+                    ->asArray()
+                    ->one();
+                $department = Department::find()
+                    ->where(["departmentId" => $employee["departmentId"]])
+                    ->asArray()
+                    ->one();
+                if (isset($title) && !empty($title) && !empty($department) && isset($department)) {
+                    $titleName = $title["titleName"] . ' ' . $department["departmentName"];
+                }
+            }
+        }
+        return $titleName;
     }
 }

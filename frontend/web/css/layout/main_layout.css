@@ -26,9 +26,10 @@
     top: 0;
     position: fixed;
     z-index: 5;
-    height: 45px;
+    height: 70px;
     width: 80.7%;
-    padding-top: 5px;
+    padding-top: 12px;
+    padding-right: 12px;
 
 }
 
@@ -36,7 +37,7 @@
     width: 100%;
     padding-left: 10px;
     position: relative !important;
-    margin-top: 30px;
+    margin-top: 55px;
     min-height: 80vh;
     box-sizing: border-box;
 }
@@ -79,4 +80,34 @@
 .no-data-img {
     width: 82px;
     height: 99px;
+}
+
+.header-name {
+    text-align: right !important;
+    font-size: 22px;
+    font-weight: 500;
+    margin-top: -5px;
+}
+
+.profile-dropdown {
+    background-color: #DEE9FE;
+    border-radius: 19.5px;
+    height: 40px;
+    padding-left: 4px;
+    padding-top: 3px;
+    width: 67px;
+}
+
+.language-dropdown {
+    background-color: #DEE9FE;
+    border-radius: 19.5px;
+    height: 40px;
+    padding-left: 4px;
+    padding-top: 3px;
+    width: 94px;
+}
+
+.bell-noti {
+    width: 22px;
+    height: 25px;
 }
