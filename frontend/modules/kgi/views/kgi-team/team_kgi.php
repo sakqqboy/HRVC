@@ -137,21 +137,27 @@ $this->title = "TEAM KGI";
                             <?php
                             if (isset($teamKgis) && count($teamKgis) > 0) {
                                 foreach ($teamKgis as $kgiTeamId => $kgi) :
+                                    $canEdit = 0;
+                                    if ($role > 3) {
+                                        $canEdit = 1;
+                                        
+                                    } else {
+                                        // echo "11111";
+                                        // exit;
+                                        if ($role == 3 && ($kgi["teamId"] == $userTeamId)) {
+                                            $canEdit = 1;
+                                        //     echo "11111";
+                                        // exit;
+                                        }
+                                    }
+                                    
                                     $show = KgiTeam::checkPermission($role, $kgiTeamId, $userId);
-
                                     if ($show == 1) {
                                         $display = '';
                                     } else {
                                         $display = 'none';
                                     }
-                                    $canEdit = 0;
-                                    if ($role > 3) {
-                                        $canEdit = 1;
-                                    } else {
-                                        if ($role == 3 && ($kgi["teamId"] == $userTeamId)) {
-                                            $canEdit = 1;
-                                        }
-                                    }
+                                   
                                     if ($kgi["isOver"] == 1 && $kgi["status"] != 2) {
                                         $colorFormat = 'over';
                                     } else {
@@ -297,13 +303,12 @@ $this->title = "TEAM KGI";
                                     </span>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kgi['isOver'] ?>">
                                         <?php
-                                                if ($role >= 4 && $canEdit == 1) {
+                                                if ($canEdit == 1) {
                                                 ?>
                                         <li class="pl-4 pr-4" data-bs-toggle="modal"
                                             data-bs-target="#update-kgi-modal-team"
-                                            onclick="javascript:updateTeamKgi(<?= $kgiTeamId ?>)"
-                                            style="display: <?= $display ?>;">
-                                            <a class="dropdown-itemNEWS pl-4 pr-20 mb-5" href="#">
+                                            onclick="javascript:updateTeamKgi(<?= $kgiTeamId ?>)">
+                                            <a class=" dropdown-itemNEWS pl-4 pr-20 mb-5" href="#">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
                                                     alt="edit" class="pim-icon mr-10" style="margin-top: -2px;">
                                                 Edit

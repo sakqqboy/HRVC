@@ -149,13 +149,13 @@ $this->title = "Individual KGI";
                             if (isset($kgis) && count($kgis) > 0) {
                                 foreach ($kgis as $kgiEmployeeId => $kgi) :
                                     $canEdit = KgiEmployee::canEdit($role, $kgiEmployeeId);
-                                    if ($role > 3) {
-                                        $canEdit = 1;
-                                    } else {
-                                        if ($role == 3 && ($kgi["teamId"] == $userTeamId)) {
-                                            $canEdit = 1;
-                                        }
-                                    }
+                                    // if ($role > 3) {
+                                    //     $canEdit = 1;
+                                    // } else {
+                                    //     if ($role == 3 && ($teamId == $userTeamId)) {
+                                    //         $canEdit = 1;
+                                    //     }
+                                    // }
                                     if ($kgi["isOver"] == 1 && $kgi["status"] != 2) {
                                         $colorFormat = 'over';
                                     } else {

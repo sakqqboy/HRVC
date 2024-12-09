@@ -140,6 +140,7 @@ $this->title = "KPI";
                             if (isset($teamKpis) && count($teamKpis) > 0) {
                                 foreach ($teamKpis as $kpiTeamId => $kpi) :
                                     $show = KpiTeam::checkPermission($role, $kpiTeamId, $userId);
+                                    // $canEdit = KpiEmployee::canEdit($role, $kgiEmployeeId);
 
                                     if ($show == 1) {
                                         $display = '';
@@ -311,12 +312,11 @@ $this->title = "KPI";
                                     </span>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kpiTeamId ?>">
                                         <?php
-                                                if ($role >= 3 && $canEdit == 1) {
+                                                if ($canEdit == 1) {
                                                     ?>
                                         <li class="pl-4 pr-4" data-bs-toggle="modal"
                                             data-bs-target="#update-kpi-modal-team"
-                                            onclick="javascript:updateTeamKpi(<?= $kpiTeamId ?>)"
-                                            style="display: <?= $display ?>;">
+                                            onclick="javascript:updateTeamKpi(<?= $kpiTeamId ?>)">
                                             <a class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -3px;">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
                                                     alt="History" alt="Chart" class="pim-icon mr-10"
