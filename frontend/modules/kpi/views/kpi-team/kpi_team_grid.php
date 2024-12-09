@@ -569,7 +569,7 @@ $this->title = "TEAM KPI";
                                             <?php if ($colorFormat == "complete") {
                                                             echo  "Edit";
                                                         } else if ($colorFormat == "over") {
-                                                            echo  "Update";
+                                                            echo  "Passed";
                                                         } else {
                                                             echo  "Update";
                                                         }

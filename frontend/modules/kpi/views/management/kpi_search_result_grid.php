@@ -528,7 +528,7 @@ $this->title = 'KPI Grid View';
                                             <?php if ($colorFormat == "complete") {
                                                             echo  "Edit";
                                                         } else if ($colorFormat == "over") {
-                                                            echo  "Update";
+                                                            echo  "Passed";
                                                         } else {
                                                             echo  "Update";
                                                         }
