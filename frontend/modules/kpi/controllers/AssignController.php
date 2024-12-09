@@ -143,7 +143,7 @@ class AssignController extends Controller
 		$teamDetail = json_decode($teamDetail, true);
 
 
-		//throw new Exception(print_r($employeeTeamTarget, true));
+		// throw new Exception(print_r($employeeTeamTarget, true));
 		curl_close($api);
 
 		if (isset($employeeTeamTarget) && count($employeeTeamTarget) > 0) {

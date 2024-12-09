@@ -298,6 +298,87 @@ class KpiTeamController extends Controller
 		return json_encode($data);
 	}
 
+	public function actionEachTeamEmployeeKpi($teamId, $kpiId)
+	{
+		$employees = Employee::find()
+			->select('employeeId,employeeFirstname,employeeSurename,picture,gender')
+			->where(["teamId" => $teamId, "status" => 1])
+			->asArray()
+			->orderBy('employeeFirstname')
+			->all();
+		$totalTarget = 0.00;
+		$isMore = 1;
+		$kpiTeam = KpiTeam::find()->select('target')->where(["kpiId" => $kpiId, "teamId" => $teamId])->asArray()->one();
+		if (isset($kpiTeam) && !empty($kpiTeam)) {
+			$teamTarget = $kpiTeam['target'];
+		} else {
+			$teamTarget = 0.00;
+		}
+		$data = [];
+		if (isset($employees) && count($employees) > 0) {
+			foreach ($employees as $employee):
+				if ($employee["picture"] != '') {
+					$img = $employee["picture"];
+				} else {
+					if ($employee["gender"] == 1) {
+						$img = "image/user.png";
+					} else {
+						$img = "image/lady.jpg";
+					}
+				}
+				$employeeTarget = "";
+				$kpiEmployee = KpiEmployee::find()
+					->select('employeeId,target')
+					->where(["kpiId" => $kpiId, "employeeId" => $employee["employeeId"]])
+					->asArray()
+					->orderBy('createDateTime DESC')
+					->one();
+				$checked = 0;
+				if (isset($kpiEmployee) && count($kpiEmployee) > 0) {
+					$employeeTarget = $kpiEmployee["target"];
+					$totalTarget += $employeeTarget;
+					$checked = "checked";
+				} else {
+					$employeeTarget = 0;
+					$checked = "";
+				}
+				$data["employee"][$employee["employeeId"]] = [
+					"employeeFirstname" => $employee["employeeFirstname"],
+					"employeeSurename" => $employee["employeeSurename"],
+					"target" => $employeeTarget,
+					"picture" => $img,
+					"checked" => $checked
+				];
+			endforeach;
+
+			$data["totalTarget"] = $totalTarget;
+
+			if ($totalTarget > $teamTarget) {
+				if ($teamTarget > 0) {
+					$percentage = (($totalTarget / $teamTarget) * 100) - 100;
+				} else {
+					$percentage = 0;
+				}
+				$isMore = 1;
+			} else {
+				if ($teamTarget > 0) {
+					$percentage = 100 - (($totalTarget / $teamTarget) * 100);
+				} else {
+					$percentage = 0;
+				}
+				$isMore = 0;
+				if ($totalTarget == $teamTarget) {
+					$percentage = 0;
+					$isMore = "-";
+				}
+			}
+			$data["percentage"] = $percentage;
+			$data["isMore"] = $isMore;
+		}
+
+		return json_encode($data);
+	}
+
 	public function actionKpiHistory($kpiId, $kpiTeamId, $kpiTeamHistoryId)
 	{
 		if ($kpiTeamHistoryId == 0) {
