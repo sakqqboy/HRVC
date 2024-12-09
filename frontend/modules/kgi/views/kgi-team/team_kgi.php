@@ -345,7 +345,7 @@ $this->title = "TEAM KGI";
                                         <?php
                                                 if ($role >= 4) {
                                                 ?>
-                                        <li class="pl-4 pr-4">
+                                        <!-- <li class="pl-4 pr-4">
                                             <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                 href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgi["kgiId"], "companyId" => $kgi["companyId"]]) ?>"
                                                 class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
@@ -353,7 +353,7 @@ $this->title = "TEAM KGI";
                                                     style="margin-top: -2px;"></i>
                                                 Team
                                             </a>
-                                        </li>
+                                        </li> -->
                                         <?php
                                                 }
                                                 ?>

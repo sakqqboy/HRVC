@@ -297,17 +297,6 @@ $this->title = "KPI";
                                     <?= $kpi["status"] == 1 ? $kpi["nextCheckDate"] : '' ?>
                                 </td>
                                 <td class="text-center">
-
-                                    <!-- 
-                                    <li data-bs-toggle="modal" data-bs-target="#kpi-view-team"
-                                        onclick="javascript:kpiTeamHistory(<?= $kpiTeamId ?>)">
-                                        <a class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                    </li> -->
-                                    <!-- <a class="btn btn-bg-white-xs mr-5" style="margin-top: -1px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/View.svg"
-                                            alt="History" class="pim-icon" style="margin-top: -1px;">
-                                    </a> -->
-
                                     <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/kpi-team-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId'],'kpiTeamHistoryId' => $kpi['kpiTeamHistoryId'], 'kpiTeamId' => $kpiTeamId]) ?>"
                                         class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
                                         style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
@@ -395,17 +384,6 @@ $this->title = "KPI";
                     </table>
                 </div>
             </div>
-            <!-- <div class="col-12 navigation-next">
-			<nav aria-label="Page navigation example">
-				<ul class="pagination">
-					<li class="page-item"><a class="page-link page-navigation" href="#"><i class="fa fa-chevron-left" aria-hidden="true"></i> Previous</a></li>
-					<li class="page-item"><a class="page-link page-navigation" href="#">1</a></li>
-					<li class="page-item"><a class="page-link page-navigation" href="#">2</a></li>
-					<li class="page-item"><a class="page-link page-navigation" href="#">3</a></li>
-					<li class="page-item"><a class="page-link page-navigation" href="#">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
-				</ul>
-			</nav>
-		</div> -->
         </div>
 
     </div>
