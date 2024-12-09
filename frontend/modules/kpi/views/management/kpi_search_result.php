@@ -312,7 +312,7 @@ $this->title = 'KPI';
                                             </a>
                                         </li>
                                         <?php
-												if ($role >= 4) {
+												if ($role >= 5) {
 												?>
 
                                         <li class="pl-4 pr-4" data-bs-toggle="modal">
