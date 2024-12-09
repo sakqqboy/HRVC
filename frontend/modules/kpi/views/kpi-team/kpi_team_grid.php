@@ -298,7 +298,7 @@ $this->title = "TEAM KPI";
                                                     <?php
                                                                 } else { ?>
                                                     <span class="pull-left">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/view-yenlow.svg"
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $colorFormat == 'disable' ? 'disable' : 'yenlow' ?>.svg"
                                                             class="home-icon mr-2">
                                                     </span>
                                                     <a class="font-black" style="top: 2px;">
