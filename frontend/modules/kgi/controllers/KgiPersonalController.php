@@ -426,7 +426,8 @@ class KgiPersonalController extends Controller
 	}
 	public function actionDeleteKgiEmployee()
 	{
-		$kgiEmployeeId = $_POST["kgiEmployeed"];
+		$kgiEmployeeId = $_POST["kgiEmployeeId"];
+		// throw new Exception($kgiEmployeeId);
 		KgiEmployee::updateAll(["status" => 99], ["kgiEmployeeId" => $kgiEmployeeId]);
 		KgiEmployeeHistory::updateAll(["status" => 99], ["kgiEmployeeId" => $kgiEmployeeId]);
 		$res["status"] = true;

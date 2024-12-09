@@ -45,6 +45,7 @@
                         style="width: 14px; height: 14px; margin-right: 5px;">
                     Cancel
                 </button>
+                <input type="hidden" id="kfiId-modal" value="">
                 <a href="javascript:deleteKfi()" class="btn btn-outline-danger"
                     style="width: 100px; display: flex; align-items: center; justify-content: center; margin-left: 10px;"
                     onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
