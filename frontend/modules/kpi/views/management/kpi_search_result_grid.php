@@ -489,7 +489,7 @@ $this->title = 'KPI Grid View';
                                     </div>
                                     <div class="col-4 text-center mt-10 pt-6">
                                         <?php
-                                                if ($colorFormat == 'disable' && $role >= 3) {
+                                                if ($colorFormat == 'disable' && $role >= 5) {
                                                 ?>
                                         <div onclick="javascript:updateKpi(<?= $kpiId ?>)" class="pim-btn-setup"
                                             data-bs-toggle="modal" data-bs-target="#update-kpi-modal">
@@ -497,7 +497,7 @@ $this->title = 'KPI Grid View';
                                                 class="mb-2" style="width: 12px; height: 12px;"> Setup
                                         </div>
                                         <?php
-                                                } else if ($role >= 3) {
+                                                } else if ($role >= 5) {
                                                 ?>
                                         <div onclick=" javascript:updateKpi(<?= $kpiId ?>)"
                                             class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
@@ -514,6 +514,13 @@ $this->title = 'KPI Grid View';
                                                         ?>
                                         </div>
                                         <?php
+                                                } else { ?>
+                                        <div class="pim-btn-disable" data-bs-target="#update-kgi-modal">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/locked.svg"
+                                                style="width: 12px; height: 12px;"> Locked
+                                        </div>
+                                        <?php
+
                                                 }
                                                 ?>
                                     </div>

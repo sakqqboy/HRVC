@@ -561,20 +561,15 @@ $this->title = 'KGI Grid View';
                                                          ?>
                                         </div>
                                         <?php
-                                            }
-                                        ?>
-
-                                        <!-- <?php
-                                                if ($role > 3) {
-                                                ?>
-                                        <div onclick="javascript:updateKgi(<?= $kgiId ?>)"
-                                            class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
-                                            data-bs-target="#update-kgi-modal">
-                                            <i class="fa fa-refresh" aria-hidden="true"></i> Update
+                                                } else { ?>
+                                        <div class="pim-btn-disable" data-bs-target="#update-kgi-modal">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/locked.svg"
+                                                style="width: 12px; height: 12px;"> Locked
                                         </div>
                                         <?php
+
                                                 }
-                                                ?> -->
+                                                ?>
                                     </div>
                                     <div class="col-4 pl-0 pr-5 mt-10">
                                         <div class="col-12 text-start font-<?= $colorFormat ?>">Next Update Date</div>

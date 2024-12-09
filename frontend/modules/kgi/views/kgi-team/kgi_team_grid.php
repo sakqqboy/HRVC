@@ -612,21 +612,14 @@ $this->title = "TEAM KGI";
                                                         ?>
                                         </div>
                                         <?php
-                                                }
-                                                ?>
-
-                                        <!-- <?php
-                                                        //if ($canEdit == 1 && $kgi["status"] != 2) {
-                                                        if ($canEdit == 1) {
-                                                        ?>
-                                        <div data-bs-toggle="modal" data-bs-target="#update-kgi-modal-team"
-                                            onclick="javascript:updateTeamKgi(<?= $kgiTeamId ?>)"
-                                            class="pim-btn-<?= $colorFormat ?>">
-                                            <i class="fa fa-refresh" aria-hidden="true"></i> Update
+                                                } else { ?>
+                                        <div class="pim-btn-disable" data-bs-target="#update-kgi-modal">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/locked.svg"
+                                                style="width: 12px; height: 12px;"> Locked
                                         </div>
                                         <?php
-                                                        }
-                                        ?> -->
+                                                }
+                                        ?>
                                     </div>
                                     <div class="col-4 pl-0 pr-5 mt-10">
                                         <div class="col-12 text-start font-<?= $colorFormat ?>">Next Update Date</div>

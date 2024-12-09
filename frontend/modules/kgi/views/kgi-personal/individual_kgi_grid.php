@@ -516,22 +516,9 @@ $this->title = "INDIVIDUAL KGI";
                                                 <?= $kgi['nextCheck'] == "" ? 'Not set' : $kgi['nextCheck'] ?></div>
                                         </div>
                                         <div class="col-4 text-center pt-6 mt-10">
-                                            <!-- <?php
-                                                            //	if ($canEdit == 1 && $kgi["status"] != 2) {
-                                                            if ($canEdit == 1) {
-                                                            ?>
-                                            <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/update-personal-kgi/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId]) ?>"
-                                                class="no-underline">
-                                                <div class="pim-btn-<?= $colorFormat ?>">
-                                                    <i class="fa fa-refresh" aria-hidden="true"></i> Update
-                                                </div>
-                                            </a>
-                                            <?php
-                                                            }
-                                            ?> -->
 
                                             <?php
-                                                    if ($colorFormat == 'disable' && $role >= 5) {
+                                                    if ($colorFormat == 'disable'  &&  $canEdit == 1 ) {
                                                     ?>
                                             <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/update-personal-kgi/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId]) ?>"
                                                 class="no-underline">
@@ -541,7 +528,7 @@ $this->title = "INDIVIDUAL KGI";
                                                 </div>
                                             </a>
                                             <?php
-                                                    } else if ($role >= 5) {
+                                                    } else if ($canEdit == 1) {
                                                     ?>
                                             <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/update-personal-kgi/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId]) ?>"
                                                 class="no-underline">
