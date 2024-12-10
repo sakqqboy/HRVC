@@ -44,7 +44,7 @@ return [
             [['detail'], 'string'],
             [['fromDate', 'toDate', 'nextCheckDate', 'createDateTime', 'updateDateTime'], 'safe'],
             [['month', 'year'], 'string', 'max' => 45],
-            [['status'], 'string', 'max' => 10],
+            [['status'], 'string', 'max' => 4],
         ];
 }
 

@@ -20,7 +20,7 @@ use frontend\models\hrvc\UserRole;
                 <div class="btn-hrvc-home">
                         <a href="<?= Yii::$app->homeUrl ?>site/index" class="text-light" style="text-decoration: none;"> <span>
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/home.svg" class="home-icon" style="margin-top: -3px;">
-                                </span> Home
+                                </span> <?= Yii::t('app', 'Home') ?>
                         </a>
                 </div>
         </div>

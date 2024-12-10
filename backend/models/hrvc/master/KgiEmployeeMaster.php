@@ -17,8 +17,8 @@ use Yii;
     * @property string $nextCheckDate
     * @property string $month
     * @property string $year
-    * @property integer $createrId
     * @property string $remark
+    * @property integer $createrId
     * @property integer $status
     * @property string $createDateTime
     * @property string $updateDateTime
@@ -45,7 +45,7 @@ return [
             [['fromDate', 'toDate', 'nextCheckDate', 'createDateTime', 'updateDateTime'], 'safe'],
             [['remark'], 'string'],
             [['month', 'year'], 'string', 'max' => 45],
-            [['status'], 'string', 'max' => 10],
+            [['status'], 'string', 'max' => 4],
         ];
 }
 
@@ -65,8 +65,8 @@ return [
     'nextCheckDate' => 'Next Check Date',
     'month' => 'Month',
     'year' => 'Year',
-    'createrId' => 'Creater ID',
     'remark' => 'Remark',
+    'createrId' => 'Creater ID',
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',
     'updateDateTime' => 'Update Date Time',

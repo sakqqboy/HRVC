@@ -35,7 +35,7 @@ return [
             [['structureId', 'value', 'round'], 'required'],
             [['structureId', 'employeeId', 'value'], 'integer'],
             [['createDateTime', 'updateDateTime'], 'safe'],
-            [['round', 'status'], 'string', 'max' => 10],
+            [['round', 'status'], 'string', 'max' => 4],
         ];
 }
 

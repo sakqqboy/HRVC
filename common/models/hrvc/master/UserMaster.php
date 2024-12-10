@@ -36,7 +36,7 @@ return [
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['username'], 'string', 'max' => 100],
             [['password_hash'], 'string', 'max' => 255],
-            [['status'], 'string', 'max' => 10],
+            [['status'], 'string', 'max' => 4],
         ];
 }
 

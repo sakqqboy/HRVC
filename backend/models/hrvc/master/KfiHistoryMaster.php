@@ -48,13 +48,13 @@ return 'kfi_history';
 public function rules()
 {
 return [
-            [['kfiId', 'unitId', 'nextCheckDate', 'quantRatio', 'amountType', 'code', 'historyStatus'], 'required'],
+            [['kfiId', 'unitId', 'quantRatio', 'amountType', 'code', 'historyStatus'], 'required'],
             [['kfiId', 'createrId'], 'integer'],
             [['checkPeriodDate', 'nextCheckDate', 'fromDate', 'toDate', 'createDateTime', 'updateDateTime'], 'safe'],
             [['target', 'result'], 'number'],
             [['description', 'remark'], 'string'],
             [['kfiHistoryName', 'formular', 'titleProgress'], 'string', 'max' => 255],
-            [['unitId', 'amountType', 'historyStatus', 'status'], 'string', 'max' => 10],
+            [['unitId', 'amountType', 'historyStatus', 'status'], 'string', 'max' => 4],
             [['quantRatio', 'code', 'month', 'year'], 'string', 'max' => 45],
         ];
 }

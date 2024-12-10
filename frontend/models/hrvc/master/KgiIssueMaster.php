@@ -9,6 +9,7 @@ use Yii;
 *
     * @property integer $kgiIssueId
     * @property string $issue
+    * @property string $description
     * @property integer $kgiId
     * @property integer $employeeId
     * @property string $file
@@ -33,11 +34,11 @@ public function rules()
 {
 return [
             [['issue', 'kgiId', 'employeeId'], 'required'],
-            [['issue'], 'string'],
+            [['issue', 'description'], 'string'],
             [['kgiId', 'employeeId'], 'integer'],
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['file'], 'string', 'max' => 255],
-            [['status'], 'string', 'max' => 10],
+            [['status'], 'string', 'max' => 4],
         ];
 }
 
@@ -49,6 +50,7 @@ public function attributeLabels()
 return [
     'kgiIssueId' => 'Kgi Issue ID',
     'issue' => 'Issue',
+    'description' => 'Description',
     'kgiId' => 'Kgi ID',
     'employeeId' => 'Employee ID',
     'file' => 'File',

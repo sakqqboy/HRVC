@@ -47,14 +47,14 @@ return 'kpi_history';
 public function rules()
 {
 return [
-            [['kpiId', 'unitId', 'nextCheckDate', 'targetAmount', 'month', 'year', 'quantRatio', 'priority', 'amountType', 'code', 'result', 'createrId'], 'required'],
+            [['kpiId', 'unitId', 'targetAmount', 'month', 'year', 'quantRatio', 'priority', 'amountType', 'code', 'createrId'], 'required'],
             [['kpiId', 'unitId', 'createrId'], 'integer'],
             [['periodDate', 'fromDate', 'toDate', 'nextCheckDate', 'createDateTime', 'updateDateTime'], 'safe'],
             [['targetAmount', 'result'], 'number'],
             [['description', 'remark'], 'string'],
             [['kpiHistoryName', 'titleProcess'], 'string', 'max' => 255],
             [['month', 'year', 'priority', 'code'], 'string', 'max' => 45],
-            [['quantRatio', 'amountType', 'status'], 'string', 'max' => 10],
+            [['quantRatio', 'amountType', 'status'], 'string', 'max' => 4],
         ];
 }
 

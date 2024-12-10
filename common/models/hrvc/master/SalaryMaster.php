@@ -35,7 +35,7 @@ return [
             [['companyId', 'departmentId', 'titleId', 'currencyId'], 'required'],
             [['companyId', 'departmentId', 'titleId', 'currencyId'], 'integer'],
             [['createDateTime', 'updateDateTime'], 'safe'],
-            [['status'], 'string', 'max' => 10],
+            [['status'], 'string', 'max' => 4],
         ];
 }
 

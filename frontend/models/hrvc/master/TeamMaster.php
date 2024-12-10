@@ -34,7 +34,7 @@ return [
             [['departmentId'], 'integer'],
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['teamName'], 'string', 'max' => 100],
-            [['status'], 'string', 'max' => 10],
+            [['status'], 'string', 'max' => 4],
         ];
 }
 

@@ -44,7 +44,7 @@ return [
             [['target'], 'number'],
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['kgiGroupName'], 'string', 'max' => 255],
-            [['quantRatio', 'amountType', 'status'], 'string', 'max' => 10],
+            [['quantRatio', 'amountType', 'status'], 'string', 'max' => 4],
             [['priority', 'month'], 'string', 'max' => 45],
         ];
 }

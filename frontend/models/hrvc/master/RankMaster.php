@@ -39,7 +39,7 @@ return [
             [['max', 'min', 'increasement', 'bonusRate'], 'number'],
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['rankName'], 'string', 'max' => 100],
-            [['status'], 'string', 'max' => 10],
+            [['status'], 'string', 'max' => 4],
         ];
 }
 
