@@ -33,7 +33,7 @@ return [
             [['attributeName'], 'required'],
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['attributeName'], 'string', 'max' => 100],
-            [['round', 'status'], 'string', 'max' => 10],
+            [['round', 'status'], 'string', 'max' => 4],
         ];
 }
 

@@ -34,7 +34,7 @@ return [
             [['layerName', 'priority', 'shortTag'], 'required'],
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['layerName'], 'string', 'max' => 255],
-            [['priority', 'status'], 'string', 'max' => 10],
+            [['priority', 'status'], 'string', 'max' => 4],
             [['shortTag'], 'string', 'max' => 45],
         ];
 }

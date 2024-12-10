@@ -45,7 +45,7 @@ return [
             [['fromDate', 'toDate', 'nextCheckDate', 'createDateTime', 'updateDateTime'], 'safe'],
             [['remark'], 'string'],
             [['month', 'year'], 'string', 'max' => 45],
-            [['status'], 'string', 'max' => 20],
+            [['status'], 'string', 'max' => 4],
         ];
 }
 

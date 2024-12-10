@@ -45,13 +45,13 @@ return 'kgi';
 public function rules()
 {
 return [
-            [['kgiName', 'companyId', 'unitId', 'targetAmount', 'month', 'quantRatio', 'priority', 'amountType', 'code', 'result', 'createrId'], 'required'],
+            [['kgiName', 'companyId', 'unitId', 'targetAmount', 'month', 'quantRatio', 'priority', 'amountType', 'code', 'createrId'], 'required'],
             [['companyId', 'unitId', 'createrId'], 'integer'],
             [['periodDate', 'fromDate', 'toDate', 'createDateTime', 'updateDateTime'], 'safe'],
             [['targetAmount', 'result'], 'number'],
             [['kgiDetail'], 'string'],
             [['kgiName'], 'string', 'max' => 255],
-            [['active', 'quantRatio', 'amountType', 'status'], 'string', 'max' => 10],
+            [['active', 'quantRatio', 'amountType', 'status'], 'string', 'max' => 4],
             [['month', 'year', 'priority', 'code'], 'string', 'max' => 45],
         ];
 }

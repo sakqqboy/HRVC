@@ -35,7 +35,7 @@ return [
             [['kfiWeight', 'kgiWeight', 'kpiWeight', 'termId'], 'integer'],
             [['termId'], 'required'],
             [['createDateTime', 'updateDateTime'], 'safe'],
-            [['status'], 'string', 'max' => 10],
+            [['status'], 'string', 'max' => 4],
         ];
 }
 

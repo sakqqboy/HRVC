@@ -79,25 +79,31 @@ div.
                                 日本語
                             </div>
                         </a>
-                        <a href="<?= Yii::$app->homeUrl ?>" style="text-decoration:none;color:#30313D;">
+                        <a href="?language=en-US" style="text-decoration:none;color:#30313D;">
+                            <div class="col-12 head-list-menu">
+                                <img src="<?= Yii::$app->homeUrl ?>images/flag/usa.svg" class="mr-12 profile-menu-icon">
+                                EN
+                            </div>
+                        </a>
+                        <a href="?language=th" style="text-decoration:none;color:#30313D;">
                             <div class="col-12 head-list-menu">
                                 <img src="<?= Yii::$app->homeUrl ?>images/flag/thailand.svg" class="mr-12 profile-menu-icon">
                                 ไทย
                             </div>
                         </a>
-                        <a href="<?= Yii::$app->homeUrl ?>" style="text-decoration:none;color:#30313D;">
+                        <a href="?language=cn" style="text-decoration:none;color:#30313D;">
                             <div class="col-12 head-list-menu">
                                 <img src="<?= Yii::$app->homeUrl ?>images/flag/china.svg" class="mr-12 profile-menu-icon">
                                 中文
                             </div>
                         </a>
-                        <a href="<?= Yii::$app->homeUrl ?>" style="text-decoration:none;color:#30313D;">
+                        <a href="?language=vt" style="text-decoration:none;color:#30313D;">
                             <div class="col-12 head-list-menu">
                                 <img src="<?= Yii::$app->homeUrl ?>images/flag/vietnam.svg" class="mr-12 profile-menu-icon">
                                 Tiếng Việt
                             </div>
                         </a>
-                        <a href="<?= Yii::$app->homeUrl ?>" style="text-decoration:none;color:#30313D;">
+                        <a href="?language=es" style="text-decoration:none;color:#30313D;">
                             <div class="col-12 head-list-menu" style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;">
                                 <img src="<?= Yii::$app->homeUrl ?>images/flag/bahasa.svg" class="mr-12 profile-menu-icon">
                                 Bahasa

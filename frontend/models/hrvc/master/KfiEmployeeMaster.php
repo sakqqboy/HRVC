@@ -10,6 +10,7 @@ use Yii;
     * @property integer $kfiEmployeeId
     * @property integer $employeeId
     * @property integer $kfiId
+    * @property string $target
     * @property integer $status
     * @property string $createDateTime
     * @property string $updateDateTime
@@ -32,8 +33,9 @@ public function rules()
 return [
             [['employeeId', 'kfiId'], 'required'],
             [['employeeId', 'kfiId'], 'integer'],
+            [['target'], 'number'],
             [['createDateTime', 'updateDateTime'], 'safe'],
-            [['status'], 'string', 'max' => 10],
+            [['status'], 'string', 'max' => 4],
         ];
 }
 
@@ -46,6 +48,7 @@ return [
     'kfiEmployeeId' => 'Kfi Employee ID',
     'employeeId' => 'Employee ID',
     'kfiId' => 'Kfi ID',
+    'target' => 'Target',
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',
     'updateDateTime' => 'Update Date Time',

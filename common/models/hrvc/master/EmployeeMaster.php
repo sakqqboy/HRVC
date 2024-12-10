@@ -64,7 +64,7 @@ return [
             [['companyId', 'branchId', 'departmentId', 'titleId', 'teamId', 'teamPositionId', 'countryId', 'employeeConditionId', 'nationalityId', 'workingTime'], 'integer'],
             [['address1', 'address2', 'spoken', 'socialLink', 'remark'], 'string'],
             [['employeeNumber', 'employeeFirstname', 'employeeSurename', 'employeeNickname', 'email', 'contact'], 'string', 'max' => 100],
-            [['gender', 'status'], 'string', 'max' => 10],
+            [['gender', 'status'], 'string', 'max' => 4],
             [['companyEmail', 'telephoneNumber', 'emergencyTel', 'picture', 'resume', 'employeeAgreement'], 'string', 'max' => 255],
         ];
 }

@@ -54,7 +54,7 @@ return [
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['companyName', 'website', 'displayName', 'tagLine', 'city', 'banner', 'picture'], 'string', 'max' => 255],
             [['postalCode', 'founded', 'director', 'email'], 'string', 'max' => 100],
-            [['status'], 'string', 'max' => 10],
+            [['status'], 'string', 'max' => 4],
         ];
 }
 

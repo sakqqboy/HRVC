@@ -35,7 +35,7 @@ return [
             [['defaultValue'], 'integer'],
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['structureName'], 'string', 'max' => 100],
-            [['type', 'status'], 'string', 'max' => 10],
+            [['type', 'status'], 'string', 'max' => 4],
         ];
 }
 

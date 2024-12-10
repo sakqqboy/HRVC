@@ -56,7 +56,7 @@ return [
             [['level1', 'level1End', 'level2', 'level2End', 'level3', 'level3End', 'level4', 'level4End', 'level5', 'level5End', 'level6', 'weight', 'result', 'firstScore', 'finalScore'], 'number'],
             [['midComment', 'primaryComment', 'firstComment', 'finalComment'], 'string'],
             [['createDateTime', 'updateDateTime'], 'safe'],
-            [['status'], 'string', 'max' => 10],
+            [['status'], 'string', 'max' => 4],
         ];
 }
 

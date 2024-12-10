@@ -34,7 +34,7 @@ return [
             [['employeeId', 'primaryEvaluatorId', 'termId'], 'required'],
             [['employeeId', 'primaryEvaluatorId', 'termId'], 'integer'],
             [['createDateTime', 'updateDateTime'], 'safe'],
-            [['status'], 'string', 'max' => 20],
+            [['status'], 'string', 'max' => 4],
         ];
 }
 

@@ -9,7 +9,15 @@ $params = array_merge(
 return [
     'id' => 'app-frontend-hrvc',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => [
+        'log',
+        [
+            'class' => 'frontend\components\LanguageSelector',
+            'supportedLanguages' => ['en-US', 'jp', 'th', 'cn', 'es', 'vt'], //กำหนดรายการภาษาที่ support หรือใช้ได้
+        ]
+    ],
+    'language' => 'en-US',
+    'sourceLanguage' => 'en-US',
     'controllerNamespace' => 'frontend\controllers',
     'modules' => [
         'designfront' => [
@@ -152,6 +160,7 @@ return [
                 'evaluation/salary/update-company-salary/<hash>' => 'evaluation/salary/update-company-salary',
                 'evaluation/rank/index/<hash>' => 'evaluation/rank/index',
                 'evaluation/bonus/index/<hash>' => 'evaluation/bonus/index',
+                '<lang:(en|th|jp|cn|es|vt)>/<controller>/<action>' => '<controller>/<action>'
             ],
         ],
         'assetManager' => [
@@ -159,6 +168,30 @@ return [
             // 'linkAssets' => true,
             'bundles' => [],
             //            'forceCopy' => TRUE
+        ],
+        'languageSwitcher' => [
+            'class' => 'frontend\components\LanguageSelector',
+        ],
+        'i18n' => [
+            'translations' => [
+                '*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@frontend/messages',
+                    //                    'sourceLanguage' => 'th-TH',
+                ],
+                'app' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    // 'sourceLanguage' => 'jp-JP',
+                    'basePath' => '@frontend/messages',
+                    'fileMap' => [
+                        'app' => 'app.php',
+                        //'app/error' => 'error.php',
+                    ],
+                ],
+
+            ],
+
+            'on missingTranslation' => ['frontend\components\TranslationEventHandler', 'handleMissingTranslation']
         ],
     ],
     'params' => $params,

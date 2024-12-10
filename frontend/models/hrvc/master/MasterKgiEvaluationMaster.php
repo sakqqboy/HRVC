@@ -34,7 +34,7 @@ return [
             [['pimWeightId', 'kgiId'], 'required'],
             [['pimWeightId', 'kgiId', 'weight'], 'integer'],
             [['createDateTime', 'updateDateTime'], 'safe'],
-            [['status'], 'string', 'max' => 20],
+            [['status'], 'string', 'max' => 4],
         ];
 }
 

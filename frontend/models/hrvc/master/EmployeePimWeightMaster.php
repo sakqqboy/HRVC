@@ -37,7 +37,7 @@ return [
             [['employeeId', 'termId'], 'integer'],
             [['kfiWeight', 'kgiWeight', 'kpiWeight'], 'number'],
             [['createDateTime', 'updateDateTime'], 'safe'],
-            [['status'], 'string', 'max' => 10],
+            [['status'], 'string', 'max' => 4],
         ];
 }
 

@@ -33,7 +33,7 @@ return [
             [['kpiId', 'departmentId'], 'required'],
             [['kpiId', 'departmentId'], 'integer'],
             [['createDateTime', 'updateDateTime'], 'safe'],
-            [['status'], 'string', 'max' => 10],
+            [['status'], 'string', 'max' => 4],
         ];
 }
 

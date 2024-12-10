@@ -53,7 +53,7 @@ return [
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['groupName', 'headQuaterName', 'displayName', 'tagLine', 'city', 'industries', 'website', 'picture', 'banner'], 'string', 'max' => 255],
             [['postalCode', 'founded', 'director', 'email', 'contact'], 'string', 'max' => 100],
-            [['status'], 'string', 'max' => 10],
+            [['status'], 'string', 'max' => 4],
         ];
 }
 

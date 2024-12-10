@@ -33,7 +33,7 @@ return [
             [['stepName', 'sort'], 'required'],
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['stepName'], 'string', 'max' => 255],
-            [['sort', 'status'], 'string', 'max' => 10],
+            [['sort', 'status'], 'string', 'max' => 4],
         ];
 }
 

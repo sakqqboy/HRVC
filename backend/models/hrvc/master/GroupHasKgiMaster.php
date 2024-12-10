@@ -33,7 +33,7 @@ return [
             [['kgiGroupId', 'kgiId'], 'required'],
             [['kgiGroupId', 'kgiId'], 'integer'],
             [['createDateTime', 'updateDateTime'], 'safe'],
-            [['status'], 'string', 'max' => 10],
+            [['status'], 'string', 'max' => 4],
         ];
 }
 
