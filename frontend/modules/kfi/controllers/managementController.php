@@ -293,6 +293,9 @@ class ManagementController extends Controller
 	public function actionUpdateKfi()
 	{
 		$kfiId = $_POST["kfiId"];
+		$kfi = [];
+		$branch = [];
+		$department = [];
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -300,8 +303,8 @@ class ManagementController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
 		$kfi = curl_exec($api);
 		$kfi = json_decode($kfi, true);
-
 		$companyId = $kfi["companyId"];
+		//throw new Exception(print_r($kfi, true));
 		$kfiBranchText = '';
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
 		$kfiBranch = curl_exec($api);
@@ -324,7 +327,6 @@ class ManagementController extends Controller
 		curl_close($api);
 
 		$data = array_merge($kfi, $branch, $department);
-		//throw new exception(print_r($kfi, true));
 		return json_encode($data);
 	}
 	public function actionBranchMultiDepartment()

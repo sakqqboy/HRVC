@@ -151,6 +151,8 @@ class ManagementController extends Controller
 	}
 	public function actionKfiDetail($kfiId, $kfiHistoryId)
 	{
+		$res = [];
+		$res2 = [];
 		$kfi = Kfi::find()->where(["kfiId" => $kfiId])->asArray()->one();
 		$res["kfiName"] = $kfi["kfiName"];
 		$res["year"] = $kfi["year"];
@@ -171,6 +173,7 @@ class ManagementController extends Controller
 		$res["active"] = $kfi["active"];
 		$res["branch"] = KfiBranch::kfiBranchShort($kfiId);
 		$res["kfiEmployeeDetail"] = KfiEmployee::kfiEmployeeDetail($kfi["kfiId"]);
+
 		if ($kfiHistoryId == 0) {
 			$kfiHistory = KfiHistory::find()
 				->where(["kfiId" => $kfiId, "status" => [1, 2]])
