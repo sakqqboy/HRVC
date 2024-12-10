@@ -1,4 +1,13 @@
-<div class="tab-pane fade show active" id="tab-content" role="tabpanel">
+<?php if (!empty($contentDetail)): ?>
+<div>
+    <!-- Display the contentDetail dynamically -->
+    <?= print_r($contentDetail, true); ?>
+</div>
+<?php else: ?>
+<p>No data available.</p>
+<?php endif; ?>
+
+<div class="tab-pane fade show active" role="tabpanel" id="tab-content-container">
     <div class="row">
         <!-- Card 1 -->
         <div class="col-md-4 mb-3">
@@ -23,7 +32,7 @@
                         <div class="col-12 pt-3 d-flex justify-content-between">
                             <span class="total-progress">Total Progress</span>
                             <span class="total-k">Total KFI
-                                <strong class="bold-text"></strong>
+                                <strong class="bold-text">15</strong>
                             </span>
                         </div>
                     </div>
@@ -314,3 +323,66 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    function createPieChart(chartId, percentage, colors) {
+        const ctx = document.getElementById(chartId).getContext('2d');
+
+        const data = {
+            datasets: [{
+                data: [percentage * 100, 100 - percentage * 100], // คำนวณเปอร์เซ็นต์
+                backgroundColor: colors,
+                borderWidth: 0
+            }]
+        };
+
+        const options = {
+            responsive: true,
+            cutoutPercentage: 70, // ลดขนาดของรูตรงกลาง
+            plugins: {
+                tooltip: {
+                    enabled: false // ปิด tooltip
+                }
+            },
+            animation: {
+                onComplete: function() {
+                    const width = this.chart.width;
+                    const height = this.chart.height;
+                    const ctx = this.chart.ctx;
+
+                    ctx.restore();
+                    ctx.font = "14px Arial"; // ขนาดฟอนต์
+                    ctx.fillStyle = "#000"; // สีข้อความ
+                    ctx.textAlign = "center"; // กำหนดให้อยู่กลาง
+                    ctx.textBaseline = "middle"; // แนวตั้งกลาง
+
+                    const centerX = width / 2;
+                    const centerY = height / 2;
+
+                    const percentageText = `${Math.round(percentage * 100)}%`;
+                    ctx.fillText(percentageText, centerX, centerY);
+                    ctx.save();
+                }
+            }
+        };
+
+        return new Chart(ctx, {
+            type: 'pie',
+            data: data,
+            options: options
+        });
+    }
+
+    const percentageKFI = 0.34;
+    const percentageKGI = 0.84;
+    const percentageKPI = 0.54;
+
+    createPieChart('pieChartKFI', percentageKFI, ['#748EE9', '#CCD7FF']);
+    createPieChart('pieChartKGI', percentageKGI, ['#FDCA40', '#FFF2D6']);
+    createPieChart('pieChartKPI', percentageKPI, ['#FF715B', '#FFEAE6']);
+
+});
+</script>

@@ -70,9 +70,9 @@ class DashbordController extends Controller
     {
 
         $data = ['1','2'];
-		// $kfi = Kfi::find()->where(["status" != '99','companyId' => $companyId])->asArray()->one();
-		// $kgi = Kgi::find()->where(["status" != '99','companyId' => $companyId])->asArray()->one();
-		// $kpi = Kpi::find()->where(["status" != '99','companyId' => $companyId])->asArray()->one();
+		$kfi = Kfi::find()->where(["status" != '99','companyId' => $companyId])->asArray()->all();
+		// $kgi = Kgi::find()->where(["status" != '99','companyId' => $companyId])->asArray()->all();
+		// $kpi = Kpi::find()->where(["status" != '99','companyId' => $companyId])->asArray()->all();
 
 
        
@@ -84,9 +84,8 @@ class DashbordController extends Controller
     {
 
         $data = ['1','2'];
-		$kgiTeam = KgiTeam::find()->where(["status" != '99','companyId' => $companyId,'teamId' => $teamId])->asArray()->one();
-		$kpiTeam = KpiTeam::find()->where(["status" != '99','companyId' => $companyId,'teamId' => $teamId])->asArray()->one();
-
+		$kgiTeam = KgiTeam::find()->where(["status" != '99','companyId' => $companyId,'teamId' => $teamId])->asArray()->all();
+		$kpiTeam = KpiTeam::find()->where(["status" != '99','companyId' => $companyId,'teamId' => $teamId])->asArray()->all();
 
        
         // ส่งผลลัพธ์เป็น JSON
@@ -97,8 +96,8 @@ class DashbordController extends Controller
     {
 
         $data = ['1','2'];
-		$kgiEmployee = KgiEmployee::find()->where(["status" != '99','companyId' => $companyId,'teamId' => $teamId,'employeeId' => $employeeId])->asArray()->one();
-		$kpiEmployee = KpiEmployee::find()->where(["status" != '99','companyId' => $companyId,'teamId' => $teamId,'employeeId' => $employeeId])->asArray()->one();
+		$kgiEmployee = KgiEmployee::find()->where(["status" != '99','companyId' => $companyId,'teamId' => $teamId,'employeeId' => $employeeId])->asArray()->all();
+		$kpiEmployee = KpiEmployee::find()->where(["status" != '99','companyId' => $companyId,'teamId' => $teamId,'employeeId' => $employeeId])->asArray()->all();
 
 
        
