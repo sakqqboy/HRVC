@@ -16,6 +16,7 @@
     height: 32px;
     border-radius: 50%;
     margin-top: 1px;
+    cursor: pointer;
 }
 
 .profile-arrow-menu {
@@ -50,13 +51,13 @@
     margin-top: 10px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    padding-top: 22px;
-    padding-left: 22px;
-    padding-right: 22px;
+    padding-top: 11px;
+    padding-left: 0px;
+    padding-right: 0px;
     padding-bottom: 22px;
     font-size: 18px;
     font-weight: 500;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     color: #30313D;
     display: none;
 }
@@ -72,6 +73,36 @@
     border-radius: 5px;
     font-size: 20px;
     padding-top: 2px;
+}
+
+.country-box-menu {
+    width: 181px;
+    height: 261px;
+    position: absolute;
+    background-color: white;
+    margin-top: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding-top: 11px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 11px;
+    font-size: 18px;
+    font-weight: 500;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    color: #30313D;
+    display: none;
+}
+
+.head-list-menu {
+    padding-top: 11px;
+    padding-left: 22px;
+    padding-right: 22px;
+    padding-bottom: 11px;
+}
+
+.head-list-menu:hover {
+    background-color: #DEE9FE;
 }
 
 @media (max-width: 992px) {
