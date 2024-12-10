@@ -27,7 +27,7 @@ $this->title = "Dashboard"
             <!-- Tabs -->
             <div class="mb-4 mt-15">
                 <!-- Tab Content -->
-                <?= $this->render('dashbord_tabs') ?>
+                <?= $this->render('dashbord_tabs', ['companyId' => $employeeProfile['companyId'],'teamId' => $employeeProfile['teamId'],'employeeId' => $employeeProfile['employeeId']]) ?>
             </div>
         </div>
 
@@ -36,7 +36,7 @@ $this->title = "Dashboard"
             <!-- Profile -->
             <div class="profile-card p-3 mb-4 mt-15">
                 <!-- Profile Content-->
-                <?= $this->render('dashbord_profile', ['employeeId' => $employeeId]) ?>
+                <?= $this->render('dashbord_profile', ['employeeProfile' => $employeeProfile]) ?>
             </div>
 
             <!-- navigation -->

@@ -24,7 +24,7 @@ class EmployeeController extends Controller
 	{
 		$employee = Employee::find()
 			->select('employee.*,c.companyName,co.countryName,co.flag,t.titleName,b.branchName,
-			condition.employeeConditionName,s.statusName,na.nationalityName,c.city')
+			condition.employeeConditionName,s.statusName,na.nationalityName,c.city,t.shortTag')
 			->JOIN("LEFT JOIN", "company c", "c.companyId=employee.companyId")
 			->JOIN("LEFT JOIN", "branch b", "b.branchId=employee.branchId")
 			->JOIN("LEFT JOIN", "title t", "t.titleId=employee.titleId")
