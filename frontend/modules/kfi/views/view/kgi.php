@@ -4,18 +4,18 @@ if (isset($kgis) && count($kgis) > 0) { ?>
 	<table class="table table-borderless">
 		<thead>
 			<tr class="pim-table-header text-center">
-				<th class="text-start" style="border-top-left-radius: 4px;border-bottom-left-radius: 4px;">RELATED KEY PERFORMANCE INDICATOR</th>
-				<th>MONTH</th>
-				<th>UNIT</th>
-				<th>TARGET</th>
-				<th>CODE</th>
-				<th>RATIO</th>
-				<th style="width: 10%;">TEAM</th>
+				<th class="text-start" style="border-top-left-radius: 4px;border-bottom-left-radius: 4px;"><?= Yii::t('app', 'RELATED KEY PERFORMANCE INDICATOR') ?></th>
+				<th><?= Yii::t('app', 'MONTH') ?></th>
+				<th><?= Yii::t('app', 'UNIT') ?></th>
+				<th><?= Yii::t('app', 'TARGET') ?></th>
+				<th><?= Yii::t('app', 'CODE') ?></th>
+				<th><?= Yii::t('app', 'RATIO') ?></th>
+				<th style="width: 10%;"><?= Yii::t('app', 'TEAM') ?></th>
 				<th style="border-top-right-radius: 4px;border-bottom-right-radius: 4px;" class="text-end">
 					<a class="btn-blue-sm font-size-12 text-center no-underline mr-5 pl-10 pr-10" id="saveRelateKgi" href="javascript:showEditRelateKgi(2,<?= $kfiId ?>)">
-						<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/save.svg" alt="" class="pim-icon mr-3" style="margin-top: -1px;"> Save
+						<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/save.svg" alt="" class="pim-icon mr-3" style="margin-top: -1px;"> <?= Yii::t('app', 'Save') ?>
 					</a>
-					<a class="btn-red-sm font-size-12 text-center no-underline pl-10 pr-10" id="cancelRelateKgi" href="javascript:showEditRelateKgi(0,<?= $kfiId ?>)">Cancel</a>
+					<a class="btn-red-sm font-size-12 text-center no-underline pl-10 pr-10" id="cancelRelateKgi" href="javascript:showEditRelateKgi(0,<?= $kfiId ?>)"><?= Yii::t('app', 'Cancel') ?></a>
 				</th>
 			</tr>
 		</thead>
@@ -34,8 +34,8 @@ if (isset($kgis) && count($kgis) > 0) { ?>
 							<?= $i ?>.
 							<?= $kgi["kgiName"] ?>
 						</td>
-						<td><?= $kgi["month"] ?></td>
-						<td><?= $kgi["unit"] ?></td>
+						<td><?= Yii::t('app', $kgi["month"]) ?></td>
+						<td><?= Yii::t('app', $kgi["unit"]) ?></td>
 						<td class="text-end"><?= $kgi["targetAmount"] ?></td>
 						<td><?= $kgi["code"] ?></td>
 						<td><?= $kgi["ratio"] ?></td>
@@ -59,7 +59,7 @@ if (isset($kgis) && count($kgis) > 0) { ?>
 						<td style="border-top-right-radius: 3px;border-bottom-right-radius: 3px;">
 							<div class="col-12 pt-3" style="background-color: #EDF5FF;color:#003276;cursor:pointer;">
 								<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/detail.png" class="icon-table">
-								Detail
+								<?= Yii::t('app', 'Detail') ?>
 							</div>
 						</td>
 					</tr>
@@ -83,8 +83,8 @@ if (isset($kgis) && count($kgis) > 0) { ?>
 							<?= $i ?>.
 							<?= $kgi["kgiName"] ?>
 						</td>
-						<td><?= $kgi["month"] ?></td>
-						<td><?= $kgi["unit"] ?></td>
+						<td><?= Yii::t('app', $kgi["month"]) ?></td>
+						<td><?= Yii::t('app', $kgi["unit"]) ?></td>
 						<td class="text-end"><?= $kgi["targetAmount"] ?></td>
 						<td><?= $kgi["code"] ?></td>
 						<td><?= $kgi["ratio"] ?></td>
@@ -108,7 +108,7 @@ if (isset($kgis) && count($kgis) > 0) { ?>
 						<td style="border-top-right-radius: 3px;border-bottom-right-radius: 3px;">
 							<div class="col-12 pt-3" style="background-color: #EDF5FF;color:#003276;cursor:pointer;">
 								<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/detail.png" class="icon-table">
-								Detail
+								<?= Yii::t('app', 'Detail') ?>
 							</div>
 						</td>
 					</tr>
@@ -131,16 +131,16 @@ if (isset($kgis) && count($kgis) > 0) { ?>
 			<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/no-data.svg" class="no-data-img">
 		</div>
 		<div class="col-12 font-size-16 font-b mt-5">
-			Looks like there are no KGIs created.
+			<?= Yii::t('app', 'Looks like there are no KGIs created') ?>.
 		</div>
 		<div class="col-12 mt-10 text-secondary">
-			Click "Create KGI" to create KGI.
+			<?= Yii::t('app', 'Click "Create KGI" to create KGI') ?>.
 		</div>
 		<div class="col-12 mt-10">
 
 			<a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" class="btn-blue font-size-14 no-underline">
 				<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-circle.svg" class="pim-icon mr-3" style="margin-top: -1px;">
-				Add KGI
+				<?= Yii::t('app', 'Add KGI') ?>
 			</a>
 		</div>
 	</div>

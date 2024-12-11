@@ -27,7 +27,7 @@
 					</div>
 					<div class="col-6 text-end pr-30">
 						<a class="no-underline-black btn btn-info btn-sm font-size-12 text-light" href="javascript:relatedKgiForKfi()" style="cursor: pointer;text-shadow:black 1px 1px 2px;">
-							<i class="fa fa-refresh mr-5" aria-hidden="true"></i>Related KGI
+							<i class="fa fa-refresh mr-5" aria-hidden="true"></i><?= Yii::t('app', 'Related KGI') ?>
 						</a>
 					</div>
 				</div>
@@ -42,7 +42,7 @@
 						</div>
 						<div class="col-lg-3 col-md-6 col-3">
 							<div class="col-12 Quant-ratio-Backdrop3">
-								Quant Ratio
+								<?= Yii::t('app', 'Quant Ratio') ?>
 							</div>
 							<div class="col-12 diamond-con-Backdrop3 mt-10">
 								<i class="fa fa-diamond" aria-hidden="true"></i>
@@ -51,7 +51,7 @@
 						</div>
 						<div class="col-lg-3 col-md-6 col-3">
 							<div class="col-12 bullseye-con-Backdrop3">
-								<i class="fa fa-bullseye" aria-hidden="true"></i> Target
+								<i class="fa fa-bullseye" aria-hidden="true"></i> <?= Yii::t('app', 'Target') ?>
 							</div>
 							<div class="col-12 million-number-Backdrop3" id="targetHistory">
 
@@ -64,7 +64,7 @@
 						</div>
 						<div class="col-lg-3 cl-md-6 col-3">
 							<div class="col-12 trophy-con-Backdrop3">
-								<i class="fa fa-trophy" aria-hidden="true"></i> Result
+								<i class="fa fa-trophy" aria-hidden="true"></i> <?= Yii::t('app', 'Result') ?>
 							</div>
 							<div class="col-12 million-number-Backdrop3" id="resultHistory">
 
@@ -74,7 +74,7 @@
 							<div class="col-lg-2 col-md-6 col-6"></div>
 							<div class="col-lg-4 col-md-6 col-6">
 								<div class="col-12 padding-update-Backdrop3">
-									Update Interval
+									<?= Yii::t('app', 'Update Interval') ?>
 								</div>
 								<div class="col-12 update-mouth-Backdrop3" id="unitHistory">
 
@@ -92,20 +92,20 @@
 					</div>
 				</div>
 				<div class="col-12 Description-Backdrop3">
-					Description
+					<?= Yii::t('app', 'Description') ?>
 				</div>
 				<div class="col-10 detailsDescription-Backdrop3" id="detailHistory">
 
 				</div>
 				<div class="col-12 History-Backdrop3">
-					Update Description
+					<?= Yii::t('app', 'Update Description') ?>
 				</div>
 				<div class="col-12 mt-15" id="showHistory"></div>
 				<div class="col-12 mt-15" id="showIssue"></div>
 				<hr>
 				<div class="col-12 text-end">
 					<input id="v-kfiId" value="" type="hidden">
-					<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><?= Yii::t('app', 'Close') ?></button>
 				</div>
 			</div>
 		</div>

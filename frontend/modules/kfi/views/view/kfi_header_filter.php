@@ -8,7 +8,7 @@
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/KFI.svg"
                                 class="home-icon mr-5">
                         </span>
-                        Key Financial Indicator
+                        <?= Yii::t('app', 'Key Financial Indicator') ?>
                     </a>
                 </div>
                 <div class="col-3 border-right text-center">
@@ -17,7 +17,7 @@
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/KGI.svg"
                                 class="home-icon mr-5">
                         </span>
-                        Key Goal Indicator
+                        <?= Yii::t('app', 'Key Goal Indicator') ?>
                     </a>
                 </div>
                 <div class="col-3 text-center">
@@ -26,7 +26,7 @@
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/KPI.svg"
                                 class="home-icon mr-5">
                         </span>
-                        Key Performance Indicator
+                        <?= Yii::t('app', 'Key Performance Indicator') ?>
                     </a>
                 </div>
             </div>

@@ -7,7 +7,7 @@
 						<span>
 							<img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group289864.png" class="home-icon mr-5">
 						</span>
-						Key Financial Indicator
+						<?= Yii::t('app', 'Key Financial Indicator)') ?>
 					</a>
 				</div>
 				<div class="col-3 border-right text-center">
@@ -15,7 +15,7 @@
 						<span>
 							<img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector-1.png" class="home-icon mr-5">
 						</span>
-						Key Goal Indicator
+						<?= Yii::t('app', 'Key Goal Indicator') ?>
 					</a>
 				</div>
 				<div class="col-3 text-center">
@@ -23,7 +23,7 @@
 						<span>
 							<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/KPI.png" class="home-icon mr-5">
 						</span>
-						Key Performance Indicator
+						<?= Yii::t('app', 'Key Performance Indicator') ?>
 					</a>
 				</div>
 			</div>
@@ -36,7 +36,7 @@
 				<!-- <a href="<?php // Yii::$app->homeUrl 
 						?>kgi/management/assign-kgi" class="nav-link text-dark" id="pills-Setting-tab" type="button" role="tab" aria-controls="pills-Action" aria-selected="false">
 						<i class="fa fa-cog" aria-hidden="true"></i>
-						Assign and approval
+						<?= Yii::t('app', 'Assign and approval') ?>
 					</a> -->
 				<?php
 				//	}

@@ -3,13 +3,13 @@
 use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'Company KFI Chart';
+$this->title = Yii::t('app', 'Company KFI Chart');
 ?>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <div class="col-12">
 	<div class="col-12">
 		<img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.png" class="home-icon mr-5" style="margin-top: -3px;">
-		<strong class="pim-head-text"> Performance Indicator Matrices (PIM)</strong>
+		<strong class="pim-head-text"> ') <?= Yii::t('app', 'Performance Indicator Matrices (PIM)') ?></strong>
 	</div>
 	<div class="col-12 mt-10">
 		<?= $this->render('header_filter', [
@@ -21,7 +21,7 @@ $this->title = 'Company KFI Chart';
 					<div class="col-6 font-size-12 pim-name pr-0 pl-5 text-start">
 						<a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="mr-5 font-size-12">
 							<i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
-							Back
+							<?= Yii::t('app', 'Back') ?>
 						</a>
 						<span class="">
 							<?= $kfiDetail["kfiName"] ?>
@@ -54,13 +54,13 @@ $this->title = 'Company KFI Chart';
 						},
 						yAxis: {
 							title: {
-								text: 'Amount'
+								text: <?= Yii::t('app', 'Amount') ?>
 							},
 							min: 0
 						},
 						series: [{
 								type: 'line', // Line chart for this series
-								name: 'Actual',
+								name: <?= Yii::t('app', 'Actual') ?>,
 								data: [<?= $result ?>],
 								color: '#FFA800',
 								lineWidth: 1,
@@ -70,7 +70,7 @@ $this->title = 'Company KFI Chart';
 							},
 							{
 								type: 'area', // Area chart for this series
-								name: 'Target',
+								name: <?= Yii::t('app', 'Target') ?>,
 								data: [<?= $target ?>],
 								color: '#FFCA31',
 								fillOpacity: 0.3,

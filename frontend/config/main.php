@@ -13,7 +13,7 @@ return [
         'log',
         [
             'class' => 'frontend\components\LanguageSelector',
-            'supportedLanguages' => ['en-US', 'jp', 'th', 'cn', 'es', 'vt'], //กำหนดรายการภาษาที่ support หรือใช้ได้
+            'supportedLanguages' => ['en-US', 'jp', 'th', 'cn', 'es', 'vt', 'id'], //กำหนดรายการภาษาที่ support หรือใช้ได้
         ]
     ],
     'language' => 'en-US',
@@ -43,6 +43,9 @@ return [
         ],
         'home' => [
             'class' => 'frontend\modules\home\home',
+        ],
+        'language' => [
+            'class' => 'frontend\modules\language\language',
         ],
     ],
     'components' => [

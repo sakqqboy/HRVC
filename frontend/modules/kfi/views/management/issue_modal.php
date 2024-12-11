@@ -13,12 +13,12 @@
 					<div class="row col-12">
 						<div class="col-2 text-center">
 							<span class="link-3 text-primary" style="border-bottom:5px #0d6efd solid;" id="pills-Issues-tab-kfi" data-bs-toggle="pill" data-bs-target="#pills-Issues" type="button" role="tab" aria-controls="pills-Issues" aria-selected="true">
-								Issues
+								<?= Yii::t('app', 'Issues') ?>
 							</span>
 						</div>
 						<div class="col-2 text-center">
 							<span class="link-3" id="pills-History-tab-kfi" data-bs-toggle="pill" data-bs-target="#pills-History" type="button" role="tab" aria-controls="pills-History" aria-selected="false">
-								History
+								<?= Yii::t('app', 'History') ?>
 							</span>
 						</div>
 					</div>

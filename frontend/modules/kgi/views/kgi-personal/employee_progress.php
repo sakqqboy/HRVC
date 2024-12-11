@@ -5,12 +5,12 @@ use frontend\models\hrvc\User;
 
 if (isset($kgiEmployeeHistory) && count($kgiEmployeeHistory) > 0) { ?>
 	<div class="row border-bottom pb-10 mb-10 font-size-13 font-b">
-		<div class="col-2">Target</div>
-		<div class="col-2">Result</div>
-		<div class="col-2">Detail</div>
-		<div class="col-2">Date</div>
-		<div class="col-2">Next update</div>
-		<div class="col-2">By</div>
+		<div class="col-2"><?= Yii::t('app', 'Target') ?></div>
+		<div class="col-2"><?= Yii::t('app', 'Result') ?></div>
+		<div class="col-2"><?= Yii::t('app', 'Detail') ?></div>
+		<div class="col-2"><?= Yii::t('app', 'Date') ?></div>
+		<div class="col-2"><?= Yii::t('app', 'Next update') ?></div>
+		<div class="col-2"><?= Yii::t('app', 'By') ?></div>
 
 	</div>
 	<?php
@@ -33,6 +33,6 @@ if (isset($kgiEmployeeHistory) && count($kgiEmployeeHistory) > 0) { ?>
 <?php
 } else {
 ?>
-	<div class="col-12 mt-20 font-size-16 text-center">Not update yet.</div>
+	<div class="col-12 mt-20 font-size-16 text-center"><?= Yii::t('app', 'Not update yet') ?>.</div>
 <?php
 }

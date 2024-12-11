@@ -31,7 +31,7 @@ AppAsset::register($this);
 <body class="d-flex flex-column h-100">
     <?php $this->beginBody() ?>
     <div class="col-4 alert-box2 text-center mt-20">
-        Saved
+        <?= Yii::t('app', 'Saved') ?>
     </div>
     <!-- <header>
 

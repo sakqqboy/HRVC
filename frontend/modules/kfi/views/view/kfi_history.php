@@ -6,13 +6,12 @@ use yii\bootstrap5\ActiveForm;
 $this->title = 'KFI View';
 ?>
 <script src="https://code.highcharts.com/highcharts.js"></script>
-<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
 <div class="col-12">
 
     <div class="col-12">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
             style="margin-top: -3px;">
-        <strong class="pim-head-text"> Performance Indicator Matrices (PIM)</strong>
+        <strong class="pim-head-text"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</strong>
     </div>
     <div class="col-12 mt-10">
         <?= $this->render('kfi_header_filter', [
@@ -24,25 +23,25 @@ $this->title = 'KFI View';
                     <a href="<?= Yii::$app->request->referrer ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kfi/management/grid' ?>"
                         class="mr-5 font-size-12">
                         <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
-                        Back
+                        <?= Yii::t('app', 'Back') ?>
                     </a>
                     <?= $kfiDetail["kfiName"] ?>
                 </div>
-                <?php  if ($role >= 5) {
-                    ?>
-                <div class="col-1">
-                    <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#staticBackdrop4"
-                        onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)"
-                        onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
-                        onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
-                            class="pim-icon" style="margin-top: -3px; width: 12px; height: 14px;">
-                        Delete
-                    </a>
-                </div>
+                <?php if ($role >= 5) {
+                ?>
+                    <div class="col-1">
+                        <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#staticBackdrop4"
+                            onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)"
+                            onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
+                            onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
+                                class="pim-icon" style="margin-top: -3px; width: 12px; height: 14px;">
+                            <?= Yii::t('app', 'Delete') ?>
+                        </a>
+                    </div>
                 <?php
                 }
-            ?>
+                ?>
             </div>
             <div class="row mt-10">
                 <div class="col-lg-7 col-12">
@@ -62,19 +61,19 @@ $this->title = 'KFI View';
                     }
                     ?>
                     <div class="row">
-                        <div class="col-4 pim-name-detail ">Description</div>
+                        <div class="col-4 pim-name-detail "><?= Yii::t('app', 'Description') ?></div>
                         <div class="col-2">
                             <div class="<?= $colorFormat ?>-tag text-center">
-                                <?= $kfiDetail['status'] == 1 ? 'In process' : 'Completed' ?>
+                                <?= $kfiDetail['status'] == 1 ? Yii::t('app', 'In process') : Yii::t('app', 'Completed') ?>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="row">
-                                <div class="col-4 month-<?= $colorFormat ?> pt-2">Term</div>
+                                <div class="col-4 month-<?= $colorFormat ?> pt-2"><?= Yii::t('app', 'Term') ?></div>
                                 <div class="col-8 term-<?= $colorFormat ?>  pt-2">
-                                    <?= $kfiDetail['fromDate'] == "" ? 'Not set' : $kfiDetail['fromDate'] ?>
+                                    <?= $kfiDetail['fromDate'] == "" ? Yii::t('app', 'Not set') : $kfiDetail['fromDate'] ?>
                                     &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
-                                    <?= $kfiDetail['toDate'] == "" ? 'Not set' : $kfiDetail['toDate'] ?>
+                                    <?= $kfiDetail['toDate'] == "" ? Yii::t('app', 'Not set') : $kfiDetail['toDate'] ?>
                                 </div>
                             </div>
                         </div>
@@ -87,20 +86,20 @@ $this->title = 'KFI View';
                     <div class="col-12 pim-big-box pim-detail-<?= $colorFormat ?>">
                         <div class="row">
                             <div class="col-lg-4 pim-subheader-font border-right-<?= $colorFormat ?> pl-18">
-                                <div class="col-12">Quant Ratio</div>
+                                <div class="col-12"><?= Yii::t('app', 'Quant Ratio') ?></div>
                                 <div class="col-12 border-bottom-<?= $colorFormat ?> pb-5 pim-duedate">
                                     <i class="fa fa-diamond" aria-hidden="true"></i>
-                                    <?= $kfiDetail["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?>
+                                    <?= $kfiDetail["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?>
                                 </div>
-                                <div class="col-12 pr-0 pt-5 pl-0">update Interval</div>
+                                <div class="col-12 pr-0 pt-5 pl-0"><?= Yii::t('app', 'update Interval') ?></div>
                                 <div class="col-12  pim-duedate">
-                                    <?= $kfiDetail["unit"] ?>
+                                    <?= Yii::t('app', $kfiDetail["unit"]) ?>
                                 </div>
                             </div>
                             <div class="col-lg-8 pim-subheader-font pr-15 pl-15">
                                 <div class="row">
                                     <div class="col-5 text-start">
-                                        <div class="col-12">Target</div>
+                                        <div class="col-12"><?= Yii::t('app', 'Target') ?></div>
                                         <div class="col-12 mt-3 number-pim">
                                             <?php
                                             $decimal = explode('.', $kfiDetail["targetAmount"]);
@@ -121,7 +120,7 @@ $this->title = 'KFI View';
                                         <div class="col-12 pt-17"><?= $kfiDetail["code"] ?></div>
                                     </div>
                                     <div class="col-5  text-end">
-                                        <div class="col-12">Result</div>
+                                        <div class="col-12"><?= Yii::t('app', 'Result') ?></div>
                                         <div class="col-12 mt-3 number-pim">
                                             <?php
                                             if ($kfiDetail["result"] != '') {
@@ -167,21 +166,21 @@ $this->title = 'KFI View';
                                     </div>
                                     <div class="col-4 mt-5 pl-0 pr-0 ">
                                         <div class="col-12 text-start" style="letter-spacing:0.3px;font-size:9px;">
-                                            Last Updated on
+                                            <?= Yii::t('app', 'Last Updated on') ?>
                                         </div>
                                         <div class="col-12 text-start pim-duedate">
-                                            <?= $kfiDetail['nextCheck'] == "" ? 'Not set' : $kfiDetail['nextCheck'] ?>
+                                            <?= $kfiDetail['nextCheck'] == "" ? Yii::t('app', 'Not set') : $kfiDetail['nextCheck'] ?>
                                         </div>
                                     </div>
                                     <div class="col-4 text-center mt-5 pt-6 pl-3 pr-3">
                                         <?php
                                         if ($role > 3  && $kfiDetail["status"] == 1) {
                                         ?>
-                                        <div onclick="javascript:updateKfi(<?= $kfiId ?>)"
-                                            class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
-                                            data-bs-target="#update-kfi-modal">
-                                            <i class="fa fa-refresh" aria-hidden="true"></i> Update
-                                        </div>
+                                            <div onclick="javascript:updateKfi(<?= $kfiId ?>)"
+                                                class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
+                                                data-bs-target="#update-kfi-modal">
+                                                <i class="fa fa-refresh" aria-hidden="true"></i> <?= Yii::t('app', 'Update') ?>
+                                            </div>
                                         <?php
                                         }
                                         ?>
@@ -189,10 +188,10 @@ $this->title = 'KFI View';
                                     <div class="col-4 pl-0 pr-5 mt-5 ">
                                         <div class="col-12 text-end font-<?= $colorFormat ?>"
                                             style="letter-spacing:0.3px;font-size:9px;">
-                                            Next Update Date
+                                            <?= Yii::t('app', 'Next Update Date') ?>
                                         </div>
                                         <div class="col-12 text-end pim-duedate">
-                                            <?= $kfiDetail['nextCheck'] == "" ? 'Not set' : $kfiDetail['nextCheck'] ?>
+                                            <?= $kfiDetail['nextCheck'] == "" ? Yii::t('app', 'Not set') : $kfiDetail['nextCheck'] ?>
                                         </div>
                                     </div>
                                 </div>
@@ -209,28 +208,28 @@ $this->title = 'KFI View';
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-1-blue">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-1-black">
-                            Assigned
+                            <?= Yii::t('app', 'Assigned') ?>
                         </div>
                         <div class="col-3  view-tab" id="tab-2" onclick="javascript:viewTabKfi(<?= $kfiHistoryId ?>,2)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-black.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-2-black">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-blue.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-2-blue">
-                            Update History
+                            <?= Yii::t('app', 'Update History') ?>
                         </div>
                         <div class="col-3 view-tab" id="tab-4" onclick="viewTabKfi(<?= $kfiHistoryId ?>,4)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-4-black">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart-blue.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px; display: none;" id="tab-4-blue">
-                            Chart
+                            <?= Yii::t('app', 'Chart') ?>
                         </div>
                         <div class="col-4 view-tab" id="tab-5" onclick="javascript:viewTabKfi(<?= $kfiHistoryId ?>, 5)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-5-black">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate-blue.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-5-blue">
-                            Relate KGI
+                            <?= Yii::t('app', 'Relate KGI') ?>
                         </div>
                         <input type="hidden" id="currentTab" value="1">
                     </div>
@@ -267,12 +266,12 @@ $form = ActiveForm::begin([
 <?= $this->render('modal_employee_history') ?>
 
 <script>
-window.onload = function() {
-    let openTab = <?= $openTab ?>; // PHP value passed to JavaScript
-    if (openTab) {
-        viewTabKfi(<?= $kfiHistoryId ?>, openTab); // Set the tab based on the PHP value
-    } else {
-        viewTabKfi(<?= $kfiHistoryId ?>, 1); // Default to tab 1 if no value is passed
+    window.onload = function() {
+        let openTab = <?= $openTab ?>; // PHP value passed to JavaScript
+        if (openTab) {
+            viewTabKfi(<?= $kfiHistoryId ?>, openTab); // Set the tab based on the PHP value
+        } else {
+            viewTabKfi(<?= $kfiHistoryId ?>, 1); // Default to tab 1 if no value is passed
+        }
     }
-}
 </script>

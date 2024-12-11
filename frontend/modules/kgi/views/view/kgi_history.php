@@ -1,14 +1,11 @@
 <?php
 
-use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
 $this->title = 'KGI View';
 ?>
 <script src="https://code.highcharts.com/highcharts.js"></script>
-<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
 <div class="col-12">
-
     <div class="col-12">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
             style="margin-top: -3px;">
@@ -28,18 +25,18 @@ $this->title = 'KGI View';
                     <?= $kgiDetail["kgiName"] ?>
                 </div>
                 <div class="col-1">
-                    <?php  if ($role >= 5) {
+                    <?php if ($role >= 5) {
                     ?>
-                    <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kgi"
-                        onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)"
-                        onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
-                        onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
-                            class="pim-icon" style="margin-top: -3px; width: 12px; height: 14px;">
-                        Delete
+                        <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kgi"
+                            onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)"
+                            onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
+                            onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
+                                class="pim-icon" style="margin-top: -3px; width: 12px; height: 14px;">
+                            Delete
 
-                    </a>
-                    <? } ?>
+                        </a>
+                    <?php } ?>
                 </div>
             </div>
             <div class="row mt-10">
@@ -91,22 +88,22 @@ $this->title = 'KGI View';
                                             <?php
                                             if ($kgiDetail["priority"] == "A" || $kgiDetail["priority"] == "B") {
                                             ?>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
                                             <?php
                                             }
                                             if ($kgiDetail["priority"] == "A" || $kgiDetail["priority"] == "C") {
                                             ?>
-                                            <i class="fa fa-star big-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star big-star" aria-hidden="true"></i>
                                             <?php
                                             }
                                             if ($kgiDetail["priority"] == "B") {
                                             ?>
-                                            <i class="fa fa-star ml-10" aria-hidden="true"></i>
+                                                <i class="fa fa-star ml-10" aria-hidden="true"></i>
                                             <?php
                                             }
                                             if ($kgiDetail["priority"] == "A") {
                                             ?>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
                                             <?php
                                             }
                                             ?>
@@ -207,11 +204,11 @@ $this->title = 'KGI View';
                                         <?php
                                         if ($role > 3  && $kgiDetail["status"] == 1) {
                                         ?>
-                                        <div onclick="javascript:updateKgi(<?= $kgiId ?>,<?= $kgiHistoryId ?>)"
-                                            class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
-                                            data-bs-target="#update-kgi-modal">
-                                            <i class="fa fa-refresh" aria-hidden="true"></i> Update
-                                        </div>
+                                            <div onclick="javascript:updateKgi(<?= $kgiId ?>,<?= $kgiHistoryId ?>)"
+                                                class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
+                                                data-bs-target="#update-kgi-modal">
+                                                <i class="fa fa-refresh" aria-hidden="true"></i> Update
+                                            </div>
                                         <?php
                                         }
                                         ?>
@@ -304,12 +301,12 @@ $form = ActiveForm::begin([
 
 
 <script>
-window.onload = function() {
-    let openTab = <?= $openTab ?>; // PHP value passed to JavaScript
-    if (openTab) {
-        viewTabKgi(<?= $kgiHistoryId ?>, openTab); // Set the tab based on the PHP value
-    } else {
-        viewTabKgi(<?= $kgiHistoryId ?>, 1); // Default to tab 1 if no value is passed
+    window.onload = function() {
+        let openTab = <?= $openTab ?>; // PHP value passed to JavaScript
+        if (openTab) {
+            viewTabKgi(<?= $kgiHistoryId ?>, openTab); // Set the tab based on the PHP value
+        } else {
+            viewTabKgi(<?= $kgiHistoryId ?>, 1); // Default to tab 1 if no value is passed
+        }
     }
-}
 </script>

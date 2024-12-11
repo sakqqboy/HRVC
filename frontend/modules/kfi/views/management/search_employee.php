@@ -7,10 +7,10 @@ use frontend\models\hrvc\KfiEmployee;
 	</i>
 </div>
 <div class="row mb-10 font-size-12 mt-10">
-	<div class="col-5 font-b text-center">Employee</div>
-	<div class="col-3 font-b">Branch</div>
-	<div class="col-2 font-b">Title</div>
-	<div class="col-2 font-b">Team</div>
+	<div class="col-5 font-b text-center"><?= Yii::t('app', 'Employee') ?></div>
+	<div class="col-3 font-b"><?= Yii::t('app', 'Branch') ?></div>
+	<div class="col-2 font-b"><?= Yii::t('app', 'Title') ?></div>
+	<div class="col-2 font-b"><?= Yii::t('app', 'Team') ?></div>
 </div>
 <?php
 if (isset($employees) && count($employees) > 0) {
@@ -36,7 +36,7 @@ if (isset($employees) && count($employees) > 0) {
 				<?= $em["branch"] ?>
 			</div>
 			<div class="col-2 font-size-10">
-				<?= $em["title"] ?>
+				<?= Yii::t('app', '$em["title"]') ?>
 			</div>
 			<div class="col-2 font-size-10 pb-10">
 				<?= $em["team"] ?>

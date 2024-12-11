@@ -7,7 +7,7 @@ if (isset($kfis) && count($kfis) > 0) {
 ?>
 		<tr style="border-bottom: 10px white !important;" id="kfi-<?= $kfiId ?>">
 			<td>
-				<?= $kfi["kfiName"] ?>
+				<?= Yii::t('app', $kfi["kfiName"]) ?>
 			</td>
 			<td><?= $kfi["companyName"] ?></td>
 			<td>

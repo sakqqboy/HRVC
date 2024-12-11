@@ -14,7 +14,7 @@ use frontend\models\hrvc\UserRole;
                 </a>
         </div>
         <div class="col-12 text-under-logo text-center">
-                GIVES YOU VISIONARY EXPERIENCE
+                <?= Yii::t('app', 'Enchance Visionary Consulting') ?>
         </div>
         <div class="col-12 mt-20 box-bnt-home">
                 <div class="btn-hrvc-home">
@@ -34,7 +34,7 @@ use frontend\models\hrvc\UserRole;
                                         <div class="col-2 pl-20">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/MasterSetting/group.svg" class="home-icon" style="margin-top: -3px;">
                                         </div>
-                                        <div class="col-8 text-center pr-0 pl-0">Group Management</div>
+                                        <div class="col-8 text-start pr-0 pl-5"><?= Yii::t('app', 'Group Management') ?></div>
                                         <div class="col-2 pr-0 pl-5 text-start">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/4.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;display:none;" onclick="javascript:hideGroupMenu('group-management')" id="group-management-hide">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/7.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;" onclick="javascript:showGroupMenu('group-management')" id="group-management-show">
@@ -43,36 +43,36 @@ use frontend\models\hrvc\UserRole;
                         </div>
                         <div id="group-management" style="display:none;">
                                 <?php
-
                                 if ($role >= 5) {
                                 ?>
                                         <div class="col-12 first-layer-manu">
                                                 <a href="<?= Yii::$app->homeUrl ?>setting/group/create-group" class="no-underline">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/MasterSetting/group.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                        Group Configuration
+                                                        <?= Yii::t('app', 'Group Configuration') ?>
                                                 </a>
                                         </div>
                                         <div class="col-12 first-layer-manu">
                                                 <a href="<?= Yii::$app->homeUrl ?>setting/company/index" class="no-underline">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/MasterSetting/company.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                        Company Information
+
+                                                        <?= Yii::t('app', 'Company Information') ?>
                                                 </a>
                                         </div>
                                         <div class="col-12 first-layer-manu">
                                                 <a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" class="no-underline">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/branch.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                        Branch </a>
+                                                        <?= Yii::t('app', 'Branch') ?> </a>
                                         </div>
                                         <div class="col-12 first-layer-manu">
                                                 <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" class="no-underline">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/MasterSetting/department.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                        Department
+                                                        <?= Yii::t('app', 'Department') ?>
                                                 </a>
                                         </div>
                                         <div class="col-12 first-layer-manu">
                                                 <a href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" class="no-underline">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/MasterSetting/team.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                        Team
+                                                        <?= Yii::t('app', 'Team') ?>
                                                 </a>
                                         </div>
                                 <?php
@@ -84,7 +84,7 @@ use frontend\models\hrvc\UserRole;
                                                 <a href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => ''])
                                                                                                                 ?>" class="no-underline">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/BehavioralEvaluation/my_portal.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                        Employee
+                                                        <?= Yii::t('app', 'Employee') ?>
                                                 </a>
                                         </div>
                                 <?php
@@ -94,14 +94,14 @@ use frontend\models\hrvc\UserRole;
                                         <div class="col-12 first-layer-manu">
                                                 <a href="<?= Yii::$app->homeUrl ?>setting/title/index" class="no-underline">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/MasterSetting/title.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                        Title
+                                                        <?= Yii::t('app', 'Title') ?>
                                                 </a>
                                         </div>
 
                                         <div class="col-12 first-layer-manu">
                                                 <a href="<?= Yii::$app->homeUrl ?>setting/layer/index" class="no-underline">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/MasterSetting/layer.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                        Management Layer
+                                                        <?= Yii::t('app', 'Management Layer') ?>
                                                 </a>
                                         </div>
                                 <?php
@@ -118,7 +118,7 @@ use frontend\models\hrvc\UserRole;
                                 <div class="col-2 pl-20">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/FinancialSystem/fs.svg" class="home-icon" style="margin-top: -3px;">
                                 </div>
-                                <div class="col-8 text-center pr-0 pl-0">Financial System</div>
+                                <div class="col-8 text-start pr-0 pl-5"><?= Yii::t('app', 'Financial System') ?></div>
                                 <div class="col-2 pr-0 pl-5 text-start">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/4.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;display:none;" onclick="javascript:hideGroupMenu('financial-system')" id="financial-system-hide">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/7.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;" onclick="javascript:showGroupMenu('financial-system')" id="financial-system-show">
@@ -130,37 +130,37 @@ use frontend\models\hrvc\UserRole;
                                 <div class="col-12">
                                         <a href="<?= Path::fsModule() ?>?__id=<?= Yii::$app->user->id ?>" class="no-underline col-12">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/FinancialSystem/dashboard.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                Dashboard
+                                                <?= Yii::t('app', 'Dashboard') ?>
                                         </a>
                                 </div>
                                 <div class="col-12 mt-10">
                                         <a href="<?= Path::fsModule() ?>?__id=<?= Yii::$app->user->id ?>" class="no-underline">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/FinancialSystem/pl_forecase.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                PL Forecast
+                                                <?= Yii::t('app', 'PL Forecast') ?>
                                         </a>
                                 </div>
                                 <div class="col-12 mt-10">
                                         <a href="<?= Path::fsModule() ?>?__id=<?= Yii::$app->user->id ?>" class="no-underline">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/FinancialSystem/pl_config.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                PL Configuration
+                                                <?= Yii::t('app', 'PL Configuration') ?>
                                         </a>
                                 </div>
                                 <div class="col-12 mt-10">
                                         <a href="<?= Path::fsModule() ?>?__id=<?= Yii::$app->user->id ?>" class="no-underline">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/FinancialSystem/golden.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                Golden Ratio
+                                                <?= Yii::t('app', 'Golden Ratio') ?>
                                         </a>
                                 </div>
                                 <div class="col-12 mt-10">
                                         <a href="<?= Path::fsModule() ?>?__id=<?= Yii::$app->user->id ?>" class="no-underline">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/FinancialSystem/forecast_account.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                Forecast Account
+                                                <?= Yii::t('app', 'Forecast Account') ?>
                                         </a>
                                 </div>
                                 <div class="col-12 mt-10">
                                         <a href="<?= Path::fsModule() ?>?__id=<?= Yii::$app->user->id ?>" class="no-underline">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/FinancialSystem/currency.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                Currency Management
+                                                <?= Yii::t('app', 'Currency Management') ?>
                                         </a>
                                 </div>
                                 <!-- <span style="float: right;">
@@ -196,7 +196,7 @@ use frontend\models\hrvc\UserRole;
                                 <div class="col-2 pl-20">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/Performance.svg" class="home-icon2" style="margin-top: -3px;">
                                 </div>
-                                <div class="col-8 text-center pr-0 pl-0">Performance Matrices</div>
+                                <div class="col-8 text-start pr-0 pl-5"><?= Yii::t('app', 'Performance Matrices') ?></div>
                                 <div class="col-2 pr-0 pl-5 text-start">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/4.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;display:none;" onclick="javascript:hideGroupMenu('performance-matrices')" id="performance-matrices-hide">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/7.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;" onclick="javascript:showGroupMenu('performance-matrices')" id="performance-matrices-show">
@@ -206,7 +206,7 @@ use frontend\models\hrvc\UserRole;
                 <div id="performance-matrices" style="display: none;">
                         <div class="col-12 first-layer-manu">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/performance.svg" class="first-layer-icon2" style="margin-top: -3px;">
-                                Performance Dashboard
+                                <?= Yii::t('app', 'Performance Dashboard') ?>
                                 <span style="float: right;">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:none;" onclick="javascript:hideGroupMenu('performance-dashboard')" id="performance-dashboard-hide">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6-1.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;" onclick="javascript:showGroupMenu('performance-dashboard')" id="performance-dashboard-show">
@@ -216,7 +216,7 @@ use frontend\models\hrvc\UserRole;
                                 <div class="col-12 second-layer-menu">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/KFI.svg" class="first-layer-icon" style="margin-top: -3px;">
                                         <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="no-underline">
-                                                Financials
+                                                <?= Yii::t('app', 'Financials') ?>
                                         </a>
                                         <span style="float: right;">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:none;" onclick="javascript:hideGroupMenu('third-layer-kfi')" id="third-layer-kfi-hide">
@@ -226,7 +226,7 @@ use frontend\models\hrvc\UserRole;
                                                 <div class="col-12 third-layer-menu">
                                                         <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="no-underline">
                                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/KFI.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                                Company KFI
+                                                                <?= Yii::t('app', 'Company KFI') ?>
                                                         </a>
                                                 </div>
                                         </div>
@@ -234,7 +234,7 @@ use frontend\models\hrvc\UserRole;
                                 <div class="col-12 second-layer-menu">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/KGI.svg" class="first-layer-icon" style="margin-top: -3px;">
                                         <a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" class="no-underline">
-                                                Goals
+                                                <?= Yii::t('app', 'Goals') ?>
                                         </a>
                                         <span style="float: right;">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:none;" onclick="javascript:hideGroupMenu('third-layer-kgi')" id="third-layer-kgi-hide">
@@ -244,19 +244,19 @@ use frontend\models\hrvc\UserRole;
                                                 <div class="col-12 third-layer-menu">
                                                         <a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" class="no-underline">
                                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/company.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                                Company KGI
+                                                                <?= Yii::t('app', 'Company KGI') ?>
                                                         </a>
                                                 </div>
                                                 <div class="col-12 third-layer-menu">
                                                         <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/team-kgi-grid" class="no-underline">
                                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/team.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                                Team KGI
+                                                                <?= Yii::t('app', 'Team KGI') ?>
                                                         </a>
                                                 </div>
                                                 <div class="col-12 third-layer-menu">
                                                         <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi-grid" class="no-underline">
                                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/self.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                                Self KGI
+                                                                <?= Yii::t('app', 'Self KGI') ?>
                                                         </a>
                                                 </div>
                                         </div>
@@ -265,7 +265,7 @@ use frontend\models\hrvc\UserRole;
 
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/KPI.svg" class="first-layer-icon" style="margin-top: -3px;">
                                         <a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="no-underline">
-                                                Performance
+                                                <?= Yii::t('app', 'Performance') ?>
                                         </a>
                                         <span style="float: right;">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:none;" onclick="javascript:hideGroupMenu('third-layer-kpi')" id="third-layer-kpi-hide">
@@ -275,19 +275,19 @@ use frontend\models\hrvc\UserRole;
                                                 <div class="col-12 third-layer-menu">
                                                         <a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="no-underline">
                                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/company.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                                Company KPI
+                                                                <?= Yii::t('app', 'Company KPI') ?>
                                                         </a>
                                                 </div>
                                                 <div class="col-12 third-layer-menu">
                                                         <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/team-kpi-grid" class="no-underline">
                                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/team.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                                Team KPI
+                                                                <?= Yii::t('app', 'Team KPI') ?>
                                                         </a>
                                                 </div>
                                                 <div class="col-12 third-layer-menu">
                                                         <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi-grid" class="no-underline">
                                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/self.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                                Self KPI
+                                                                <?= Yii::t('app', 'Self KPI') ?>
                                                         </a>
                                                 </div>
                                         </div>
@@ -301,7 +301,8 @@ use frontend\models\hrvc\UserRole;
                                 <div class="col-2 pl-20">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/Evaluation/evaluation_system.svg" class="home-icon" style="margin-top: -3px;">
                                 </div>
-                                <div class="col-8 text-center pr-0 pl-0">Evaluation System</div>
+                                <div class="col-8 text-start pr-0 pl-5">
+                                        <?= Yii::t('app', 'Evaluation System') ?></div>
                                 <div class="col-2 pr-0 pl-5 text-start">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/4.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;display:none;" onclick="javascript:hideGroupMenu('evaluation-system')" id="evaluation-system-hide">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/7.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;" onclick="javascript:showGroupMenu('evaluation-system')" id="evaluation-system-show">
@@ -312,7 +313,7 @@ use frontend\models\hrvc\UserRole;
                         <div class="col-12 first-layer-manu">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/Evaluation/evaluation_system.svg" class="first-layer-icon" style="margin-top: -3px;">
                                 <a href="<?= Yii::$app->homeUrl ?>evaluation/environment" class="no-underline">
-                                        Evaluation Environment
+                                        <?= Yii::t('app', 'Evaluation Environment') ?>
                                 </a>
                                 <span style="float: right;">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:none;" onclick="javascript:hideGroupMenu('evaluation-environment')" id="evaluation-environment-hide">
@@ -323,19 +324,19 @@ use frontend\models\hrvc\UserRole;
                                 <div class="col-12 second-layer-menu">
                                         <a href="<?= Yii::$app->homeUrl ?>home/dashboard" class="no-underline">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/Evaluation/progress.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                Progress Dashboard
+                                                <?= Yii::t('app', 'Progress Dashboard') ?>
                                         </a>
                                 </div>
                                 <div class="col-12 second-layer-menu">
                                         <a href="<?= Yii::$app->homeUrl ?>evaluation/salary/index" class="no-underline">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/Evaluation/salary.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                Salary Registeration
+                                                <?= Yii::t('app', 'Salary Registeration') ?>
                                         </a>
                                 </div>
                                 <div class="col-12 second-layer-menu">
                                         <a href="" class="no-underline">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/Evaluation/performance.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                Performance
+                                                <?= Yii::t('app', 'Performance') ?>
                                         </a>
                                         <span style="float: right;">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:none;" onclick="javascript:hideGroupMenu('third-layer-performane')" id="third-layer-performane-hide">
@@ -345,13 +346,13 @@ use frontend\models\hrvc\UserRole;
                                                 <div class="col-12 third-layer-menu">
                                                         <a href="" class="no-underline">
                                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/Evaluation/company.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                                Company
+                                                                <?= Yii::t('app', 'Company') ?>
                                                         </a>
                                                 </div>
                                                 <div class="col-12 third-layer-menu">
                                                         <a href="" class="no-underline">
                                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/Evaluation/self.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                                Indevidual
+                                                                <?= Yii::t('app', 'Indevidual') ?>
                                                         </a>
                                                 </div>
                                         </div>
@@ -365,7 +366,7 @@ use frontend\models\hrvc\UserRole;
                                 <div class="col-2 pl-20">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/BehavioralEvaluation/evaluation.svg" class="home-icon" style="margin-top: -3px;">
                                 </div>
-                                <div class="col-8 text-center pr-0 pl-0">Behavioral Evaluation</div>
+                                <div class="col-8 text-start pr-0 pl-5"><?= Yii::t('app', 'Behavioral Evaluation') ?></div>
                                 <div class="col-2 pr-0 pl-5 text-start">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/4.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;display:none;" onclick="javascript:hideGroupMenu('behavioral-evaluation')" id="behavioral-evaluation-hide">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/7.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;" onclick="javascript:showGroupMenu('behavioral-evaluation')" id="behavioral-evaluation-show">
@@ -375,7 +376,7 @@ use frontend\models\hrvc\UserRole;
                 <div id="behavioral-evaluation" style="display: none;">
                         <div class="col-12 first-layer-manu">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/BehavioralEvaluation/evaluation.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                Behavioral Indicator
+                                <?= Yii::t('app', 'Behavioral Indicator') ?>
                                 <span style="float: right;">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:none;" onclick="javascript:hideGroupMenu('behavioral-indicator')" id="behavioral-indicator-hide">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6-1.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;" onclick="javascript:showGroupMenu('behavioral-indicator')" id="behavioral-indicator-show">
@@ -385,23 +386,23 @@ use frontend\models\hrvc\UserRole;
                                 <div class="col-12 second-layer-menu">
                                         <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="no-underline">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/BehavioralEvaluation/evaluation_portal.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                Behavior Portal
+                                                <?= Yii::t('app', 'Behavior Portal') ?>
                                         </a>
                                 </div>
                                 <div class="col-12 second-layer-menu">
                                         <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="no-underline">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/BehavioralEvaluation/registeration.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                Registeration & Config
+                                                <?= Yii::t('app', 'Registeration & Config') ?>
                                         </a>
                                 </div>
                         </div>
                         <div class="col-12 first-layer-manu">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/BehavioralEvaluation/360.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                360 Degree Evaluation
+                                <?= Yii::t('app', '360 Degree Evaluation') ?>
                         </div>
                         <div class="col-12 first-layer-manu">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/BehavioralEvaluation/company_dashboard.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                Company Dashboard
+                                <?= Yii::t('app', 'Company Dashboard') ?>
                                 <span style="float: right;">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:none;" onclick="javascript:hideGroupMenu('company-dashboard')" id="company-dashboard-hide">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6-1.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;" onclick="javascript:showGroupMenu('company-dashboard')" id="company-dashboard-show">
@@ -411,25 +412,25 @@ use frontend\models\hrvc\UserRole;
                                 <div class="col-12 second-layer-menu">
                                         <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="no-underline">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/BehavioralEvaluation/template_board.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                Template Board
+                                                <?= Yii::t('app', 'Template Board') ?>
                                         </a>
                                 </div>
                                 <div class="col-12 second-layer-menu">
                                         <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="no-underline">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/BehavioralEvaluation/question_bank.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                Question Bank
+                                                <?= Yii::t('app', 'Question Bank') ?>
                                         </a>
                                 </div>
                                 <div class="col-12 second-layer-menu">
                                         <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="no-underline">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/BehavioralEvaluation/my_360.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                My 360
+                                                <?= Yii::t('app', 'My 360') ?>
                                         </a>
                                 </div>
                                 <div class="col-12 second-layer-menu">
                                         <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="no-underline">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/BehavioralEvaluation/my_portal.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                My Portal
+                                                <?= Yii::t('app', 'My Portal') ?>
                                         </a>
                                 </div>
                         </div>
@@ -437,45 +438,11 @@ use frontend\models\hrvc\UserRole;
         </div>
         <div class="col-12 mt-20 box-bnt-home mb-10">
                 <div class="btn-hrvc-home">
-                        <a href="<?= Yii::$app->homeUrl ?>site/index" class="text-light" style="text-decoration: none;"> <span>
+                        <a href="<?= Yii::$app->homeUrl ?>site/index" class="text-light" style="text-decoration: none;">
+                                <span>
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/8.svg" class="home-icon" style="margin-top: -3px;">
-                                </span> Setting
+                                </span> <?= Yii::t('app', 'Setting') ?>
                         </a>
                 </div>
         </div>
-        <!-- <div class="col-12 navbar-header pl-15">
-                <div class="col-12 haeder-Evalution"> EVALUTION SETTINGS</div>
-                <div class="col-12">
-                        <a href="<?php // Yii::$app->homeUrl 
-                                        ?>evaluation/environment" class="no-underline">
-                                <i class="fa fa-pencil-square-o pr-10 mt-20" aria-hidden="true"></i>
-                                Evaluation
-                        </a>
-                </div>
-                <div class="col-12">
-                        <a href="<?php // Yii::$app->homeUrl 
-                                        ?>evaluation/salary/index" class="no-underline">
-                                <i class="fa fa-usd pr-10 mt-20" aria-hidden="true"></i>
-                                Salary
-                        </a>
-                </div>
-                <div class="col-12"> <a href="<?php //Yii::$app->homeUrl 
-                                                ?>site/" class="no-underline"><i class="fa fa-history pr-10 mt-20" aria-hidden="true"></i> 360 Degree Evaluetion</a></div>
-                <div class="col-12 haeder-Evalution"> REPORTS</div>
-                <div class="col-12"> <a href="<?php // Yii::$app->homeUrl 
-                                                ?>site/analysis" class="no-underline"><i class="fa fa-pie-chart pr-10 mt-20" aria-hidden="true"></i> Analysis</a></div>
-                <div class="col-12 haeder-Evalution">
-                        <a href="<?php // Path::fsModule() 
-                                        ?>?__id=<?php // Yii::$app->user->id 
-                                                ?>" class="no-underline">
-                                Financial Planning
-                        </a>
-                </div>
-                <div class="col-12 haeder-Evalution"> ADMIN SETTINGS</div>
-                <div class="col-12"> <a href="" class="no-underline"><i class="fa fa-user pr-10 mt-20" aria-hidden="true"></i> Admin</a></div>
-                <div class="col-12"> <a href="" class="no-underline"><i class="fa fa-sun-o pr-10 mt-20" aria-hidden="true"></i> Super admin</a></div>
-                <div class="col-12"> <a href="" class="no-underline"><i class="fa fa-bell-o pr-10 mt-20" aria-hidden="true"></i> Notification Center</a></div>
-        </div> -->
-
-
 </div>
