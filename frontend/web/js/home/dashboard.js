@@ -200,13 +200,3 @@ function setProgress(element, percentage) {
         progressLeft.style.transform = `rotate(${((percentage - 50) / 50) * 180}deg)`;
     }
 }
-
-
-// function formatNumber($number) {
-//     if ($number >= 1000000) {
-//         return number_format($number / 1000000, 2). ' M'; // For millions
-//     } elseif($number >= 1000) {
-//         return number_format($number / 1000, 2). ' K'; // For thousands
-//     }
-//     return number_format($number, 2); // For smaller numbers
-// }
