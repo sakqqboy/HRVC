@@ -14,14 +14,14 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" id="team-tab" data-bs-toggle="tab" role="tab" aria-controls="team" aria-selected="false"
-                onclick="loadTeamTap(<?= $companyId ?>, <?= $teamId ?>); return false;">
+                onclick="loadTeamTap(<?= $teamId ?>); return false;">
                 <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/team.svg" alt="Team" class="pim-icon"
                     style="width: 13px; height: 13px; padding-bottom: 2px; margin-top: 2px"> Team
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="self-tab" data-bs-toggle="tab" role="tab" aria-controls="self" aria-selected="false"
-                onclick="loadSelfTap(<?= $companyId ?>, <?= $teamId ?>, <?= $employeeId ?>); return false;">
+                onclick="loadSelfTap(<?= $employeeId ?>); return false;">
                 <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/self.svg" alt="Self" class="pim-icon"
                     style="width: 13px; height: 13px; padding-bottom: 3px; margin-top: 2px"> Self
             </a>
@@ -37,6 +37,7 @@
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 
 <script>
 $(window).on('load', function() {

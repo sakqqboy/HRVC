@@ -51,36 +51,34 @@ class DefaultController extends Controller
         $dashbordCompany = curl_exec($api);
         $dashbordCompany = json_decode($dashbordCompany, true);
     
-        return $this->renderPartial('dashbord_tabs_content', ['contentDetail' => $dashbordCompany]);
+        return $this->renderPartial('dashbord_tabs_content', ['tab' => 'company','contentDetail' => $dashbordCompany]);
     }
     
     public function actionTeamTab() {
-        $companyId = $_POST['companyId'];
         $teamId = $_POST['teamId'];
     
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'home/dashbord/dashbord-team?companyId=' . $companyId . '&teamId=' . $teamId);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'home/dashbord/dashbord-team?teamId=' . $teamId);
         $dashbordTeam = curl_exec($api);
         $dashbordTeam = json_decode($dashbordTeam, true);
     
-        return $this->renderPartial('dashbord_tabs_content', ['contentDetail' => $dashbordTeam]);
+        return $this->renderPartial('dashbord_tabs_content', ['tab' => 'team','contentDetail' => $dashbordTeam]);
     }
     
     public function actionSelfTab() {
-        $companyId = $_POST['companyId'];
-        $teamId = $_POST['teamId'];
         $employeeId = $_POST['employeeId'];
     
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'home/dashbord/dashbord-employee?companyId=' . $companyId . '&teamId=' . $teamId . '&employeeId=' . $employeeId);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'home/dashbord/dashbord-employee?employeeId=' . $employeeId);
         $dashbordEmployee = curl_exec($api);
         $dashbordEmployee = json_decode($dashbordEmployee, true);
     
-        return $this->renderPartial('dashbord_tabs_content', ['contentDetail' => $dashbordEmployee]);
+        return $this->renderPartial('dashbord_tabs_content', ['tab' => 'self','contentDetail' => $dashbordEmployee]);
+        
     }
     
 }
