@@ -149,6 +149,7 @@ class DashbordController extends Controller
                             "amountType" => $kfiHistory["amountType"],						
                             "active" => $kfi["active"],
                             "id" => $kfiHistory['kfiHistoryId'],
+                            'kfiId'=> $kfi['kfiId'],
                             "due" => ModelMaster::engDate($kfiHistory["nextCheckDate"], 2),
 						    // "last" => ModelMaster::engDate($kfiHistory["checkPeriodDate"], 2),
                             "last" => ModelMaster::engDate($kfiHistory["nextCheckDate"], 2)
@@ -220,6 +221,7 @@ class DashbordController extends Controller
                             "amountType" => $kgiHistory["amountType"],						
                             "active" => $kgi["active"],
                             "id" => $kgiHistory['kgiHistoryId'],
+                            'kgiId'=> $kgi['kgiId'],
                             "due" => ModelMaster::engDate($kgiHistory["nextCheckDate"], 2),
 						    // "last" => ModelMaster::engDate($kfiHistory["checkPeriodDate"], 2)
                             "last" => ModelMaster::engDate($kgiHistory["nextCheckDate"], 2),
@@ -290,6 +292,7 @@ class DashbordController extends Controller
                             "amountType" => $kpiHistory["amountType"],						
                             "active" => $kpi["active"],
                             "id" => $kpiHistory['kpiHistoryId'],
+                            'kpiId'=> $kpi['kpiId'],
                             "due" => ModelMaster::engDate($kpiHistory["nextCheckDate"], 2),
 						    // "last" => ModelMaster::engDate($kfiHistory["checkPeriodDate"], 2),
                             "last" => ModelMaster::engDate($kpiHistory["nextCheckDate"], 2),

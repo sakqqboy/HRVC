@@ -355,7 +355,7 @@ $this->title = 'KFI Grid View';
                                         <?php
                                                 } else if ($role >= 5) {
                                                 ?>
-                                        <div onclick=" javascript:updateKfi(<?= $kfiId ?>)"
+                                        <div onclick="javascript:updateKfi(<?= $kfiId ?>)"
                                             class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
                                             data-bs-target="#staticBackdrop2">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
