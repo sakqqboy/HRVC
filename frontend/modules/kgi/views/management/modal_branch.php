@@ -18,7 +18,7 @@
 										</i>
 									</div>
 								</div>
-								<div class="col-6 text-start pt-10 font-size-16 pl-0">Branch</div>
+								<div class="col-6 text-start pt-10 font-size-16 pl-0"><?= Yii::t('app', 'Branch') ?></div>
 							</div>
 						</div>
 					</div>
@@ -28,7 +28,7 @@
 				<div class="card">
 					<div class="col-12 pt-10" id="kgi-branch"></div>
 					<div class="col-12">
-						<div class="Resolve" data-bs-dismiss="modal">Resolve</div>
+						<div class="Resolve" data-bs-dismiss="modal"><?= Yii::t('app', 'Resolve') ?></div>
 					</div>
 				</div>
 			</div>

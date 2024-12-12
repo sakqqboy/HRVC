@@ -69,14 +69,15 @@ $this->title = 'Waiting for approve KGI';
 			<table class="table table-striped">
 				<thead class="table table-secondary">
 					<tr class="secondary-setting">
-						<th>KGI Contents</th>
-						<th>Company</th>
-						<th>Branch</th>
-						<th>Department</th>
-						<th>Team</th>
-						<th>Target</th>
-						<th>New Target</th>
-						<th>Reson</th>
+						<th> <?= Yii::t('app', 'KGI Contents') ?></th>
+						<th> <?= Yii::t('app', 'Company') ?></th>
+						<th> <?= Yii::t('app', 'Branch') ?></th>
+						<th> <?= Yii::t('app', 'Department') ?></th>
+						<th> <?= Yii::t('app', 'Team') ?></th>
+						<th> <?= Yii::t('app', 'Target') ?></th>
+						<th> <?= Yii::t('app', 'New Target') ?></th>
+						<th> <?= Yii::t('app', 'Reson') ?>
+						<th>
 						<th class="text-center font-size-14">
 							<i class="fa fa-cog" aria-hidden="true"></i>
 						</th>
@@ -106,7 +107,7 @@ $this->title = 'Waiting for approve KGI';
 						endforeach;
 					} else { ?>
 						<tr>
-							<td colspan="9" class="col-12 mt-20 font-size-14 text-secondary"> There are no waiting for approve KPI.</td>
+							<td colspan="9" class="col-12 mt-20 font-size-14 text-secondary"> <?= Yii::t('app', 'There are no waiting for approve KPI') ?>.</td>
 						</tr>
 					<?php
 					}

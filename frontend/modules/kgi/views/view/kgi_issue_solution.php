@@ -3,7 +3,7 @@
 		<div class="row pl-15 pr-20">
 			<div class="col-3  sub-tab-active pl-5">
 				<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/warning-full.png" class="pim-icon mr-3" style="margin-top: -6px;">
-				Report New Issus
+				<?= Yii::t('app', 'Report New Issus') ?>
 			</div>
 			<div class="col-9  sub-tab">
 			</div>
@@ -15,13 +15,13 @@
 		<div class="col-12 alert bg-white mt-15 pt-15 pr-30 pl-30" style="height:320px;overflow-y: auto;">
 			<div class="row">
 				<div class="col-12 head-gray-box pt-0">
-					<span class=" head-gray-box-text">Headline</span>
+					<span class=" head-gray-box-text"><?= Yii::t('app', 'Headline') ?></span>
 					<div class="col-12">
 
 						<input class="form-control font-size-12" name="newIssue" id="issue" required placeholder="Issue Headline">
 					</div>
 					<div class="col-12">
-						<span class=" head-gray-box-text">Description</span>
+						<span class=" head-gray-box-text"><?= Yii::t('app', 'Description') ?></span>
 						<textarea style="height: 150px;" class="form-control font-size-12" id="description" name="kgiDescription"></textarea>
 					</div>
 					<div id="attachFile-<?= $kgiId ?>" class="col-12 text-end font-size-12 mt-5"></div>
@@ -29,12 +29,12 @@
 						<label for="attachKgiFile">
 							<a class="btn btn-bg-white-xs pb-0 pt-3" style="font-size: 10px;font-weight:300;margin:auto;">
 								<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/clip.png" class="attach-icon" style="margin-top:-5px;">
-								Attachment
+								<?= Yii::t('app', 'Attachment') ?>
 							</a>
 						</label>
 						<input id="attachKgiFile" accept=".pdf" type="file" style="display: none;" name="attachKgiFile" onchange="javascript:showAttachFileNameKgi(<?= $kgiId ?>)">
 						<a class="btn-create font-size-12 pr-5 pl-5 mt-5 mb-10 no-underline" href="javascript:createNewIssue(<?= $kgiId ?>)">
-							Post Issue
+							<?= Yii::t('app', 'Post Issue') ?>
 						</a>
 					</div>
 				</div>
@@ -49,7 +49,7 @@
 	<div class="col-12 ligth-gray-box">
 		<div class="row pl-15 pr-20">
 			<div class="col-3  sub-tab-active pl-5">
-				Report History
+				<?= Yii::t('app', 'Report History') ?>
 			</div>
 			<div class="col-9  sub-tab">
 			</div>
@@ -91,7 +91,7 @@
 
 											<a href="<?= Yii::$app->homeUrl . $issue['file'] ?>" target="_blank" class="btn btn-bg-white-xs pb-0 pt-3" style="font-size: 10px;font-weight:300;margin:auto;">
 												<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/clip.png" class="attach-icon" style="margin-top:-5px;">
-												Attachment
+												<?= Yii::t('app', 'Attachment') ?>
 											</a>
 										<?php
 										}
@@ -130,7 +130,7 @@
 														?>
 															<a href="<?= Yii::$app->homeUrl . $data['file'] ?>" target="_blank" class="btn btn-bg-white-xs pb-0 pt-3" style="font-size: 10px;font-weight:300;margin:auto;">
 																<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/clip.png" class="attach-icon" style="margin-top:-5px;">
-																Attachment
+																<?= Yii::t('app', 'Attachment') ?>
 															</a>
 														<?php
 														}
@@ -153,18 +153,18 @@
 								<label for="attachKgiFileAnswer-<?= $kgiIssueId ?>" class="mt-2" style="cursor: pointer;">
 									<a class="btn btn-bg-white-xs pb-0 pt-3" style="font-size: 10px;font-weight:300;margin:auto;">
 										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/clip.png" class="attach-icon" style="margin-top:-5px;">
-										Attachment
+										<?= Yii::t('app', 'Attachment') ?>
 									</a>
 								</label>
 								<input id="attachKgiFileAnswer-<?= $kgiIssueId ?>" accept=".pdf" type="file" style="display: none;" name="attachKgiFileAnswer-<?= $kgiIssueId ?>" onchange="javascript:showSelectFileNameKgi(<?= $kgiIssueId ?>)">
 								<a href="javascript:answerKgiIssue(<?= $kgiIssueId ?>)" class="btn-reply font-size-10 mt-5 mb-10 no-underline" style="height: 25px;">
-									Reply Issue
+									<?= Yii::t('app', 'Reply Issue') ?>
 								</a>
 							</div>
 						</div>
 						<div class="col-12 text-end font-size-10 border-bottom pb-5 mb-15">
-							<a href="javascript:showAnswer(<?= $kgiIssueId ?>,1)" id="reply-<?= $kgiIssueId ?>">Reply</a>
-							<a href="javascript:showAnswer(<?= $kgiIssueId ?>,2)" style="display:none;" id="cancel-<?= $kgiIssueId ?>">Cancel</a>
+							<a href="javascript:showAnswer(<?= $kgiIssueId ?>,1)" id="reply-<?= $kgiIssueId ?>"><?= Yii::t('app', 'Reply') ?></a>
+							<a href="javascript:showAnswer(<?= $kgiIssueId ?>,2)" style="display:none;" id="cancel-<?= $kgiIssueId ?>"><?= Yii::t('app', 'Cancel') ?></a>
 						</div>
 				<?php
 						$i++;

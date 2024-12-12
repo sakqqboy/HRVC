@@ -21,13 +21,13 @@ $this->title = 'Waiting for approve KGI';
 			<table class="">
 				<thead>
 					<tr class="pim-table-header">
-						<th class="pl-10">Employee</th>
-						<th class="pl-10">KGI Contents</th>
-						<th class="text-center">Priority</th>
-						<th>Previous</th>
-						<th class="text-center">New</th>
-						<th class="text-center">Change</th>
-						<th class="text-center">Month</th>
+						<th class="pl-10"><?= Yii::t('app', 'Employee') ?></th>
+						<th class="pl-10"><?= Yii::t('app', 'KGI Contents') ?></th>
+						<th class="text-center"><?= Yii::t('app', 'Priority') ?></th>
+						<th><?= Yii::t('app', 'Previous') ?></th>
+						<th class="text-center"><?= Yii::t('app', 'New') ?></th>
+						<th class="text-center"><?= Yii::t('app', 'Change') ?></th>
+						<th class="text-center"><?= Yii::t('app', 'Month') ?></th>
 						<th class="text-center"></th>
 						<th></th>
 					</tr>
@@ -53,7 +53,7 @@ $this->title = 'Waiting for approve KGI';
 						endforeach;
 					} else { ?>
 						<tr>
-							<td colspan="6" class="col-12 mt-20 font-size-14 text-secondary"> There are no waiting for approve KGI.</td>
+							<td colspan="6" class="col-12 mt-20 font-size-14 text-secondary"> <?= Yii::t('app', 'There are no waiting for approve KGI') ?>.</td>
 						</tr>
 					<?php
 					}
@@ -68,15 +68,15 @@ $this->title = 'Waiting for approve KGI';
 			<table class="" style="width:100%;">
 				<thead>
 					<tr class="pim-table-header">
-						<th class="pl-10">Employee</th>
-						<th class="pl-10">KGI Contents</th>
-						<th>Branch</th>
-						<th class="text-center">Priority</th>
-						<th class="text-center">Team</th>
-						<th>Previous</th>
-						<th class="text-center">New</th>
-						<th class="text-center">Change</th>
-						<th class="text-center">Month</th>
+						<th class="pl-10"><?= Yii::t('app', 'Employee') ?></th>
+						<th class="pl-10"><?= Yii::t('app', 'KGI Contents') ?></th>
+						<th><?= Yii::t('app', 'Branch') ?></th>
+						<th class="text-center"><?= Yii::t('app', 'Priority') ?></th>
+						<th class="text-center"><?= Yii::t('app', 'Team') ?></th>
+						<th><?= Yii::t('app', 'Previous') ?></th>
+						<th class="text-center"><?= Yii::t('app', 'New') ?></th>
+						<th class="text-center"><?= Yii::t('app', 'Change') ?></th>
+						<th class="text-center"><?= Yii::t('app', 'Month') ?></th>
 						<th class="text-center"></th>
 						<th></th>
 					</tr>
@@ -112,10 +112,6 @@ $this->title = 'Waiting for approve KGI';
 								<td><?= $teamKgi["kgiName"] ?></td>
 								<td><?= $teamKgi["branch"] ?></td>
 								<td class="text-center"><?= $teamKgi["priority"] ?></td>
-								<!-- <td><?php // $teamKgi["branch"] 
-										?></td> -->
-								<!-- <td><?php // $teamKgi["department"] 
-										?></td> -->
 								<td class="text-center"><?= $teamKgi["teamName"] ?></td>
 								<td class="text-end">
 									<?php
@@ -152,18 +148,13 @@ $this->title = 'Waiting for approve KGI';
 								<td class="text-center"><?= $teamKgi["month"] ?></td>
 								<td class="text-center">
 									<a href="javascript:approveTargetKgiTeam(<?= $teamKgi['kgiTeamId'] ?>,1)" class="approve-btn mr-5 no-underline mr-10">
-										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/circle-check-blue.svg" class="mr-5" style="margin-top: -2px;">Approve
+										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/circle-check-blue.svg" class="mr-5" style="margin-top: -2px;"><?= Yii::t('app', 'Approve') ?>
 									</a>
 									<a href="javascript:approveTargetKgiTeam(<?= $teamKgi['kgiTeamId'] ?>,0)" class="decline-btn  no-underline">
-										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/circle-cancel.svg" class="mr-5" style="margin-top: -2px;">Decline
+										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/circle-cancel.svg" class="mr-5" style="margin-top: -2px;"><?= Yii::t('app', 'Decline') ?>
 									</a>
 								</td>
 								<td class="text-center">
-									<!-- <a href="<?php // Yii::$app->homeUrl 
-											?>kgi/management/approve-kgi-team/<?php // ModelMaster::encodeParams(["kgiTeamHistoryId" => $kgiTeamHistoryId]) 
-																?>" class="btn btn-sm btn-primary font-size-10">
-										<i class="fa fa-eye" aria-hidden="true"></i>
-									</a> -->
 									<a onclick="javascript:changeTargetKgiTeamReason(<?= $kgiTeamHistoryId ?>)" class="btn btn-bg-white-xs mr-5" data-bs-toggle="modal" data-bs-target="#reason">
 										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/question.svg" style="margin-top: -3px;">
 									</a>
@@ -176,7 +167,7 @@ $this->title = 'Waiting for approve KGI';
 						endforeach;
 					} else { ?>
 						<tr>
-							<td colspan="9" class="col-12 mt-20 font-size-14 text-secondary"> There are no waiting for approve KGI.555</td>
+							<td colspan="9" class="col-12 mt-20 font-size-14 text-secondary"> <?= Yii::t('app', 'There are no waiting for approve KGI') ?>.</td>
 						</tr>
 					<?php
 					}

@@ -10,30 +10,30 @@ $this->title = 'KGI KPI';
     <div class="row">
         <div class="col-9">
             <i class="fa fa-share-alt font-size-20 mr-3" aria-hidden="true"></i>
-            <strong class="font-size-20">Related KPI for KGI</strong>
+            <strong class="font-size-20"><?= Yii::t('app', 'Related KPI for KGI') ?></strong>
         </div>
         <div class="col-3 text-end">
             <a href="<?= Yii::$app->homeUrl ?>kgi/management/assign-kgi" class="font-size-14 btn btn-outline-secondary">
                 <i class="fa fa-chevron-left mr-5" aria-hidden="true"></i>
-                KGI Assign Management
+                <?= Yii::t('app', 'KGI Assign Management') ?>
             </a>
         </div>
         <div class="col-12 text-end mt-15">
             <a href="<?= Yii::$app->homeUrl ?>kgi/management/assign-kpi/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>"
                 class="no-underline-black">
-                <i class="fa fa-cog font-size-26 font-b mr-5" aria-hidden="true"></i>Setting
+                <i class="fa fa-cog font-size-26 font-b mr-5" aria-hidden="true"></i><?= Yii::t('app', 'Setting') ?>
             </a>
         </div>
     </div>
     <div class="col-12 mt-20 pt-10 pl-10 pb-10" style="border-radius: 10px;border-style:dotted;border-color:grey;">
-        <strong>KGI : <?= $kgiDetail["kgiName"] ?></strong>
+        <strong><?= Yii::t('app', 'KGI') ?> : <?= $kgiDetail["kgiName"] ?></strong>
         <div class="row mt-20">
             <div class="col-lg-2 col-md-6 col-2 text-center">
                 <div class="col-12 pt-25 pb-25 font-b font-size-20">
-                    <?= $kgiDetail["monthName"] ?>
+                    <?= Yii::t('app', $kgiDetail["monthName"]) ?>
                 </div>
                 <div class="col-12  text-center">
-                    <p class="font-size-10 mb-20">Priority</p>
+                    <p class="font-size-10 mb-20"><?= Yii::t('app', 'Priority') ?></p>
                     <div class="circle-Priority" style="margin-left: 70px !important;">
                         <?= $kgiDetail["priority"] ?>
                     </div>
@@ -41,16 +41,16 @@ $this->title = 'KGI KPI';
             </div>
             <div class="col-lg-3 col-md-6 col-3">
                 <div class="col-12 Quant-ratio-Backdrop3">
-                    Quant Ratio
+                    <?= Yii::t('app', 'Quant Ratio') ?>
                 </div>
                 <div class="col-12 diamond-con-Backdrop3 mt-10">
                     <i class="fa fa-diamond" aria-hidden="true"></i>
-                    <span id="quanRatioHistory"><?= $kgiDetail["quantRatio"] == 1 ? "Quantity" : "Quality" ?></span>
+                    <span id="quanRatioHistory"><?= $kgiDetail["quantRatio"] == 1 ? Yii::t('app', "Quantity") : Yii::t('app', "Quality") ?></span>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-3 text-center">
                 <div class="col-12 bullseye-con-Backdrop3">
-                    <i class="fa fa-bullseye" aria-hidden="true"></i> Target
+                    <i class="fa fa-bullseye" aria-hidden="true"></i> <?= Yii::t('app', 'Target') ?>
                 </div>
                 <div class="col-12 million-number-Backdrop3 mt-10" id="targetHistory">
                     <?= $kgiDetail["targetAmount"] ?>
@@ -63,7 +63,7 @@ $this->title = 'KGI KPI';
             </div>
             <div class="col-lg-3 cl-md-6 col-3 text-center">
                 <div class="col-12 trophy-con-Backdrop3">
-                    <i class="fa fa-trophy" aria-hidden="true"></i> Result
+                    <i class="fa fa-trophy" aria-hidden="true"></i> <?= Yii::t('app', 'Result') ?>
                 </div>
                 <div class="col-12 million-number-Backdrop3 mt-10 " id="resultHistory">
                     <?= $kgiDetail["result"] ?>
@@ -73,10 +73,10 @@ $this->title = 'KGI KPI';
                 <div class="col-lg-2 col-md-6 col-5"></div>
                 <div class="col-lg-4 col-md-6 col-6">
                     <div class="col-12 padding-update-Backdrop3">
-                        Update Interval
+                        <?= Yii::t('app', 'Update Interval') ?>
                     </div>
                     <div class="col-12 update-mouth-Backdrop3 mt-10" id="unitHistory">
-                        <?= $kgiDetail["unitText"] ?>
+                        <?= Yii::t('app', $kgiDetail["unitText"]) ?>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-6" style="margin-top:-20px;">
@@ -95,17 +95,17 @@ $this->title = 'KGI KPI';
 
     </div>
     <div class="col-12 mt-20">
-        <u><b>Current related KPI (<?= count($kgiHasKpi) ?>)</b></u>
+        <u><b><?= Yii::t('app', 'Current related KPI') ?> (<?= count($kgiHasKpi) ?>)</b></u>
     </div>
     <div class="col-12 mt-20">
 
         <table class="table table-responsive-lg">
             <thead>
-                <th>KPI Name</th>
-                <th>Target</th>
-                <th>Month</th>
-                <th>Unit</th>
-                <th>Branch(es)</th>
+                <th><?= Yii::t('app', 'KPI Name') ?></th>
+                <th><?= Yii::t('app', 'Target') ?></th>
+                <th><?= Yii::t('app', 'Month') ?></th>
+                <th><?= Yii::t('app', 'Unit') ?></th>
+                <th><?= Yii::t('app', 'Branch') ?></th>
             </thead>
             <tbody>
                 <?php
@@ -149,7 +149,7 @@ $this->title = 'KGI KPI';
                 } else { ?>
                     <tr style="line-height: 60px;">
                         <td class="text-center font-size-16" colspan="8">
-                            There are no related KPI for this KGI.
+                            <?= Yii::t('app', 'There are no related KPI for this KGI') ?>.
                         </td>
                     </tr>
                 <?php
@@ -161,7 +161,7 @@ $this->title = 'KGI KPI';
 </div>
 <div class="col-12">
     <div class="alert-box text-center">
-        S A V E D ! ! !
+        <?= Yii::t('app', 'S A V E D ! ! !') ?>
     </div>
     <div class="col-12" id="kpi">
         <?php
@@ -171,31 +171,30 @@ $this->title = 'KGI KPI';
             <table class="table table-borderless">
                 <thead>
                     <tr class="pim-table-header text-center">
-                        <th class="text-start" style="border-top-left-radius: 4px;border-bottom-left-radius: 4px;">RELATED
-                            KEY PERFORMANCE INDICATOR</th>
-                        <th>MONTH</th>
-                        <th>UNIT</th>
-                        <th>TARGET</th>
-                        <th>CODE</th>
-                        <th>RATIO</th>
-                        <th style="width: 10%;">TEAM</th>
+                        <th class="text-start" style="border-top-left-radius: 4px;border-bottom-left-radius: 4px;"><?= Yii::t('app', 'RELATED KEY PERFORMANCE INDICATOR') ?></th>
+                        <th><?= Yii::t('app', 'MONTH') ?></th>
+                        <th><?= Yii::t('app', 'UNIT') ?></th>
+                        <th><?= Yii::t('app', 'TARGET') ?></th>
+                        <th><?= Yii::t('app', 'CODE') ?></th>
+                        <th><?= Yii::t('app', 'RATIO') ?></th>
+                        <th style="width: 10%;"><?= Yii::t('app', 'TEAM') ?></th>
                         <th style="border-top-right-radius: 4px;border-bottom-right-radius: 4px;" class="text-end">
                             <?php if ($role >= 5) { ?>
                                 <a class="btn-blue-sm font-size-12 text-center no-underline" id="editRelateKpi"
                                     style="padding-left: 10px;padding-right:10px;display:<?= count($kgiHasKpi) == 0 ? 'none' : '' ?>"
                                     href="javascript:showEditRelateKpi(1,<?= $kgiId ?>)">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/edit.svg" alt=""
-                                        class="pim-icon mr-3" style="margin-top: -1px;">Add/Remove
+                                        class="pim-icon mr-3" style="margin-top: -1px;"><?= Yii::t('app', 'Add') ?>/<?= Yii::t('app', 'Remove') ?>
                                 </a>
                             <?php } ?>
                             <a class="btn-blue-sm font-size-12 text-center no-underline  mr-5 pl-10 pr-10"
                                 id="saveRelateKpi" style="display:none;"
                                 href="javascript:showEditRelateKpi(2,<?= $kgiId ?>)">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/save.svg" alt=""
-                                    class="pim-icon mr-3" style="margin-top: -1px;"> Save
+                                    class="pim-icon mr-3" style="margin-top: -1px;"> <?= Yii::t('app', 'Save') ?>
                             </a>
                             <a class="btn-red-sm font-size-12 text-center no-underlinepl-10 pr-10" id="cancelRelateKpi"
-                                style="display:none;" href="javascript:showEditRelateKpi(0,<?= $kgiId ?>)">Cancel</a>
+                                style="display:none;" href="javascript:showEditRelateKpi(0,<?= $kgiId ?>)"><?= Yii::t('app', 'Cancel') ?></a>
                         </th>
                     </tr>
                 </thead>
@@ -212,7 +211,7 @@ $this->title = 'KGI KPI';
                                 <?= $kpi["kpiName"] ?>
                             </td>
                             <td><?= $kpi["month"] ?></td>
-                            <td><?= $kpi["unit"] ?></td>
+                            <td><?= Yii::t('app', $kpi["unit"]) ?></td>
                             <td class="text-end"><?= $kpi["targetAmount"] ?></td>
                             <td><?= $kpi["code"] ?></td>
                             <td><?= $kpi["ratio"] ?></td>
@@ -241,7 +240,7 @@ $this->title = 'KGI KPI';
                             <td style="border-top-right-radius: 3px;border-bottom-right-radius: 3px;">
                                 <div class="col-12 pt-3" style="background-color: #EDF5FF;color:#003276;cursor:pointer;">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/detail.png" class="icon-table">
-                                    Detail
+                                    <?= Yii::t('app', 'Detail') ?>
                                 </div>
                             </td>
                         </tr>
@@ -264,17 +263,17 @@ $this->title = 'KGI KPI';
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/no-data.svg" class="no-data-img">
                 </div>
                 <div class="col-12 font-size-16 font-b mt-5">
-                    Looks like there are no KPIs linked to this component yet.
+                    <?= Yii::t('app', 'Looks like there are no KPIs linked to this component yet') ?>.
                 </div>
                 <div class="col-12 mt-10 text-secondary">
-                    Click “Add KPI” to associate relevant metrics and track performance effectively.
+                    <?= Yii::t('app', 'Click “Add KPI” to associate relevant metrics and track performance effectively') ?>.
                 </div>
                 <div class="col-12 mt-10">
                     <?php if ($role >= 5) { ?>
                         <a href="javascript:showEditRelateKpi(1,<?= $kgiId ?>)" class="btn-blue font-size-14 no-underline">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-circle.svg" class="pim-icon mr-3"
                                 style="margin-top: -1px;">
-                            Add KPI
+                            <?= Yii::t('app', 'Add KPI') ?>
                         </a>
                     <?php } ?>
                 </div>

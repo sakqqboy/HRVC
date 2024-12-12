@@ -194,7 +194,7 @@ use frontend\models\hrvc\UserRole;
                 <div class="btn-group-menu">
                         <div class="row">
                                 <div class="col-2 pl-20">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/Performance.svg" class="home-icon2" style="margin-top: -3px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/performance.svg" class="home-icon2" style="margin-top: -3px;">
                                 </div>
                                 <div class="col-8 text-start pr-0 pl-5"><?= Yii::t('app', 'Performance Matrices') ?></div>
                                 <div class="col-2 pr-0 pl-5 text-start">

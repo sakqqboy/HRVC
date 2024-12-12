@@ -6,7 +6,7 @@ $this->title = 'Assign KGI';
 ?>
 <div class="col-12 mt-90">
 	<div class="col-12">
-		<i class="fa fa-tachometer font-size-20" aria-hidden="true"></i> <strong class="font-size-20"> Assign Management</strong>
+		<i class="fa fa-tachometer font-size-20" aria-hidden="true"></i> <strong class="font-size-20"> <?= Yii::t('app', 'Assign Management') ?></strong>
 	</div>
 	<div class="col-12 mt-20">
 		<?= $this->render('header_assign') ?>
@@ -14,7 +14,7 @@ $this->title = 'Assign KGI';
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-12">
 					<div class="col-12">
-						Key Goal Indicator
+						<?= Yii::t('app', 'Key Goal Indicator') ?>
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6 col-12">
@@ -24,20 +24,20 @@ $this->title = 'Assign KGI';
 								<i class="fa fa-filter" aria-hidden="true"></i>
 							</span>
 							<select class="form-select font-size-13" aria-label="Default select example" id="kgiMonthFilter">
-								<option selected value="">Month</option>
+								<option selected value=""><?= Yii::t('app', 'Month') ?></option>
 								<?php
 								if (isset($months) && count($months) > 0) {
 									foreach ($months as $value => $month) :
 								?>
-										<option value="<?= $value ?>"><?= $month ?></option>
+										<option value="<?= $value ?>"><?= Yii::t('app', $month) ?></option>
 								<?php
 									endforeach;
 								}
 								?>
 							</select>
 							<select class="form-select font-size-13" aria-label="Default select example" id="kgiYearFilter">
-								<option selected value="">Year</option>
-								<option value="">Year</option>
+								<option selected value=""><?= Yii::t('app', 'Year') ?></option>
+								<option value=""><?= Yii::t('app', 'Year') ?></option>
 								<?php
 								$year = 2022;
 								$i = 1;
@@ -56,7 +56,7 @@ $this->title = 'Assign KGI';
 
 				<div class="col-col-12">
 					<a href="<?= Yii::$app->homeUrl ?>kgi/management/wait-approve" class="no-underline text-primary">
-						Wait for approve KGI
+						<?= Yii::t('app', 'Wait for approve KGI') ?>
 					</a>
 				</div>
 			</div>
@@ -64,15 +64,14 @@ $this->title = 'Assign KGI';
 				<table class="table table-striped ">
 					<thead class="table table-secondary">
 						<tr class="secondary-setting">
-							<th>KGI Contents</th>
-							<!-- <th>Company</th> -->
-							<th class="text-center">Branch</th>
-							<th class="text-center">Team</th>
-							<th class="text-center">Employee</th>
-							<th class="text-center">Target</th>
-							<th class="text-center">Month</th>
-							<th class="text-center">KFI</th>
-							<th class="text-center">KPI</th>
+							<th><?= Yii::t('app', 'KGI Contents') ?></th>
+							<th class="text-center"><?= Yii::t('app', 'Branch') ?></th>
+							<th class="text-center"><?= Yii::t('app', 'Team') ?></th>
+							<th class="text-center"><?= Yii::t('app', 'Employee') ?></th>
+							<th class="text-center"><?= Yii::t('app', 'Targe') ?>t</th>
+							<th class="text-center"><?= Yii::t('app', 'Month') ?></th>
+							<th class="text-center"><?= Yii::t('app', 'KFI') ?></th>
+							<th class="text-center"><?= Yii::t('app', 'KPI') ?></th>
 							<th class="text-center font-size-14">
 								<i class="fa fa-cog" aria-hidden="true"></i>
 							</th>
@@ -87,8 +86,6 @@ $this->title = 'Assign KGI';
 									<td>
 										<?= $kgi["kgiName"] ?>
 									</td>
-									<!-- <td><?php // $kgi["companyName"] 
-											?></td> -->
 									<td>
 										<div class="col-12">
 											<div class="row">
@@ -107,21 +104,6 @@ $this->title = 'Assign KGI';
 									</td>
 									<td class="text-center">
 										<div class="row">
-											<!-- <div class="col-5 badge rounded-pill bg-setting text-center pt-10"> -->
-											<?php
-											//if (isset($kgi["kgiEmployee"]) && count($kgi["kgiEmployee"]) > 0) {
-											//	$e = 0;
-											//	foreach ($kgi["kgiEmployee"] as $employeeId => $emPic) :
-											//	if ($e < 2) { 
-											?>
-											<!--<img class="Image-Description" src=" --><?php // Yii::$app->homeUrl . $emPic 
-																		?>
-											<?php
-											//}
-											//	$e++;
-											//endforeach;
-											//}
-											?>
 											<div class="col-1">
 											</div>
 											<div class="col-3  mt-2 text-center pr-25 font-size-11">
@@ -129,7 +111,6 @@ $this->title = 'Assign KGI';
 													<?= $kgi["countTeam"] ?>
 												</div>
 											</div>
-											<!-- </div> -->
 											<div class="col-3 dashedshare mt-2 ml-5" data-bs-target="#assign-kgi-team" data-bs-toggle="modal" onclick="javascript:assignKgiTeam(<?= $kgiId ?>)">
 												<i class="fa fa-users share-alt-setting" aria-hidden="true"></i>
 												<i class="fa fa-plus-circle circle5"></i>
@@ -184,20 +165,6 @@ $this->title = 'Assign KGI';
 											<i class="fa fa-user" aria-hidden="true"></i>
 										</a>
 									</td>
-									<?php
-									// if ($kfi["active"] == 1) { 
-									?>
-									<!-- <a href="javascript:changeKfiStatus(0,<?php // $kfiId 
-																?>)" class="btn btn-primary btn-sm font-size-12">Active</a> -->
-									<?php
-									//} else { 
-									?>
-									<!-- <a href="javascript:changeKfiStatus(1,<?php // $kfiId 
-																?>)" class="btn btn-danger btn-sm font-size-12">In Active</a> -->
-									<?php
-									// }
-									?>
-									<!-- </td> -->
 								</tr>
 						<?php
 							endforeach;

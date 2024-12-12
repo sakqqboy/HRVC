@@ -29,7 +29,7 @@ if (isset($kgiIssue) && count($kgiIssue) > 0) {
 
 							<a href="<?= Yii::$app->homeUrl . $issue['file'] ?>" target="_blank" class="btn btn-bg-white-xs pb-0 pt-3" style="font-size: 10px;font-weight:300;margin:auto;">
 								<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/clip.png" class="attach-icon" style="margin-top:-5px;">
-								Attachment
+								<?= Yii::t('app', 'Attachment') ?>
 							</a>
 						<?php
 						}
@@ -68,7 +68,7 @@ if (isset($kgiIssue) && count($kgiIssue) > 0) {
 										?>
 											<a href="<?= Yii::$app->homeUrl . $data['file'] ?>" target="_blank" class="btn btn-bg-white-xs pb-0 pt-3" style="font-size: 10px;font-weight:300;margin:auto;">
 												<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/clip.png" class="attach-icon" style="margin-top:-5px;">
-												Attachment
+												<?= Yii::t('app', 'Attachment') ?>
 											</a>
 										<?php
 										}
@@ -91,18 +91,18 @@ if (isset($kgiIssue) && count($kgiIssue) > 0) {
 				<label for="attachKgiFileAnswer-<?= $kgiIssueId ?>" class="mt-2" style="cursor: pointer;">
 					<a class="btn btn-bg-white-xs pb-0 pt-3" style="font-size: 10px;font-weight:300;margin:auto;">
 						<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/clip.png" class="attach-icon" style="margin-top:-5px;">
-						Attachment
+						<?= Yii::t('app', 'Attachment') ?>
 					</a>
 				</label>
 				<input id="attachKgiFileAnswer-<?= $kgiIssueId ?>" accept=".pdf" type="file" style="display: none;" name="attachKgiFileAnswer-<?= $kgiIssueId ?>" onchange="javascript:showSelectFileNameKgi(<?= $kgiIssueId ?>)">
 				<a href="javascript:answerKgiIssue(<?= $kgiIssueId ?>)" class="btn-reply font-size-10 mt-5 mb-10 no-underline" style="height: 25px;">
-					Reply Issue
+					<?= Yii::t('app', 'Reply Issue') ?>
 				</a>
 			</div>
 		</div>
 		<div class="col-12 text-end font-size-10 border-bottom pb-5 mb-15">
-			<a href="javascript:showAnswer(<?= $kgiIssueId ?>,1)" id="reply-<?= $kgiIssueId ?>">Reply</a>
-			<a href="javascript:showAnswer(<?= $kgiIssueId ?>,2)" style="display:none;" id="cancel-<?= $kgiIssueId ?>">Cancel</a>
+			<a href="javascript:showAnswer(<?= $kgiIssueId ?>,1)" id="reply-<?= $kgiIssueId ?>"><?= Yii::t('app', 'Reply') ?></a>
+			<a href="javascript:showAnswer(<?= $kgiIssueId ?>,2)" style="display:none;" id="cancel-<?= $kgiIssueId ?>"><?= Yii::t('app', 'Cancel') ?></a>
 		</div>
 <?php
 		$i++;

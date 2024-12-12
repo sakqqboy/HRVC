@@ -5,17 +5,17 @@
 				<div class="modal-title Modalfirstone" id="staticBackdrop"><i class="fa fa-line-chart mr-5" aria-hidden="true"></i>
 					<span id="kfiNameHistory"></span>
 				</div>
-				<div class="modal-title badge rounded-pill bg-warning text-dark font-size-14" id="statusHistory">Completed</div>
+				<div class="modal-title badge rounded-pill bg-warning text-dark font-size-14" id="statusHistory"><?= Yii::t('app', 'Completed') ?></div>
 			</div>
 			<div class="text-end mr-20">
 				<span class="border border-1 text-dark pr-10 pl-5" style="border-radius: 15px;">
-					<span class="deadline-Backdrop3">Deadline&nbsp;&nbsp;</span>
+					<span class="deadline-Backdrop3"><?= Yii::t('app', 'Deadline') ?>&nbsp;&nbsp;</span>
 					<span class="font-size-11" id="deadlineHistory"></span>
 				</span>
 			</div>
 			<div class="text-end mt-10 mr-20">
 				<span class="border border-1 text-dark pr-10 pl-5" style="border-radius: 15px;">
-					<span class="NextUpdate-Backdrop3">Next Update&nbsp;&nbsp;</span>
+					<span class="NextUpdate-Backdrop3"><?= Yii::t('app', 'Next Update') ?>&nbsp;&nbsp;</span>
 					<span class="font-size-11" id="NextCheckDateHistory"> </span>
 				</span>
 			</div>
@@ -33,7 +33,7 @@
 						</div>
 						<div class="col-lg-3 col-md-6 col-3">
 							<div class="col-12 Quant-ratio-Backdrop3">
-								Quant Ratio
+								<?= Yii::t('app', 'Quant Ratio') ?>
 							</div>
 							<div class="col-12 diamond-con-Backdrop3 mt-10">
 								<i class="fa fa-diamond" aria-hidden="true"></i>
@@ -42,7 +42,7 @@
 						</div>
 						<div class="col-lg-3 col-md-6 col-3">
 							<div class="col-12 bullseye-con-Backdrop3">
-								<i class="fa fa-bullseye" aria-hidden="true"></i> Target
+								<i class="fa fa-bullseye" aria-hidden="true"></i> <?= Yii::t('app', 'Target') ?>
 							</div>
 							<div class="col-12 million-number-Backdrop3" id="targetHistory">
 
@@ -55,7 +55,7 @@
 						</div>
 						<div class="col-lg-3 cl-md-6 col-3">
 							<div class="col-12 trophy-con-Backdrop3">
-								<i class="fa fa-trophy" aria-hidden="true"></i> Result
+								<i class="fa fa-trophy" aria-hidden="true"></i><?= Yii::t('app', 'Result') ?>
 							</div>
 							<div class="col-12 million-number-Backdrop3" id="resultHistory">
 
@@ -65,7 +65,7 @@
 							<div class="col-lg-2 col-md-6 col-6"></div>
 							<div class="col-lg-4 col-md-6 col-6">
 								<div class="col-12 padding-update-Backdrop3">
-									Update Interval
+									<?= Yii::t('app', 'Update Interval') ?>
 								</div>
 								<div class="col-12 update-mouth-Backdrop3" id="unitHistory">
 
@@ -83,19 +83,19 @@
 					</div>
 				</div>
 				<div class="col-12 Description-Backdrop3">
-					Description
+					<?= Yii::t('app', 'Description') ?>
 				</div>
 				<div class="col-10 detailsDescription-Backdrop3" id="detailHistory">
 
 				</div>
 				<div class="col-12 History-Backdrop3">
-					Update Description
+					<?= Yii::t('app', 'Update Description') ?>
 				</div>
 				<div class="col-12 mt-15" id="showHistory"></div>
 				<div class="col-12 mt-15" id="showIssue"></div>
 				<hr>
 				<div class="col-12 text-end">
-					<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><?= Yii::t('app', 'Close') ?></button>
 				</div>
 			</div>
 		</div>

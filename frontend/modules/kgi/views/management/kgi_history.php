@@ -15,11 +15,6 @@ if (isset($history) && count($history)) {
 						<div class="col-10">
 							<?= $his["title"] ?>
 						</div>
-						<!-- <div class="col-12 pl-60">
-							<img src="<?php //Yii::$app->homeUrl 
-									?>image/Faruque.png" class="name-Backdrop3">
-							<a href="#" class="font-size-12"> Mohammed Sharukh</a> <span class="font-size-12 text-secondary"> Title : Admin</span>
-						</div> -->
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 col-12">
@@ -29,14 +24,10 @@ if (isset($history) && count($history)) {
 				</div>
 				<div class="col-lg-4 col-md-6 col-12">
 					<div class="row">
-						<!-- <div class="col-2">
-							<img src="<?php // Yii::$app->homeUrl 
-									?>image/pdf.png" class="image-pdf-Backdrop3">
-						</div> -->
 						<div class="col-12 PM">
 							<?= $his["createDate"] ?>, <?= $his["time"] ?>
 							<div class="col-12 New mt-5">
-								New Result : <strong> <?= number_format($his["result"]) ?></strong>
+								<?= Yii::t('app', 'New Result') ?> : <strong> <?= number_format($his["result"]) ?></strong>
 							</div>
 						</div>
 					</div>

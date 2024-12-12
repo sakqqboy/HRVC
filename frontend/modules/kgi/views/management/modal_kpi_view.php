@@ -23,15 +23,15 @@
 					<div class="row mt-20">
 						<div class="col-lg-3 col-md-6 col-12">
 							<div class="col-12 content-kpi">
-								Team kpi Contents
+								<?= Yii::t('app', 'Team kpi Contents') ?>
 							</div>
 							<div class="col-12 kpi-Clients">
-								Ten Clients employee
+								<?= Yii::t('app', 'Ten Clients employee') ?>
 							</div>
 						</div>
 						<div class="col-lg-2 col-md-6 col-3">
 							<div class="col-12 Quant-ratio-Backdrop3">
-								Quant Ratio
+								<?= Yii::t('app', 'Quant Ratio') ?>
 							</div>
 							<div class="col-12 diamond-con-Backdrop3">
 								<i class="fa fa-diamond" aria-hidden="true"></i> <span id="quantRatio-view"></span>
@@ -44,7 +44,7 @@
 						</div>
 						<div class="col-lg-2 col-md-6 col-3">
 							<div class="col-12 bullseye-con-Backdrop3">
-								<i class="fa fa-bullseye" aria-hidden="true"></i> Target
+								<i class="fa fa-bullseye" aria-hidden="true"></i> <?= Yii::t('app', 'Target') ?>
 							</div>
 							<div class="col-12 million-number-Backdrop3">
 								<span id="target-view"></span>
@@ -60,7 +60,7 @@
 						</div>
 						<div class="col-lg-2 cl-md-6 col-3">
 							<div class="col-12 trophy-con-Backdrop3">
-								<i class="fa fa-trophy" aria-hidden="true"></i> Result
+								<i class="fa fa-trophy" aria-hidden="true"></i> <?= Yii::t('app', 'Result') ?>
 							</div>
 							<div class="col-12 million-number-Backdrop3">
 								<span id="result-view"></span>
@@ -69,13 +69,13 @@
 						<div class="row">
 							<div class="col-lg-3 col-md-6 col-12">
 								<div class="col-12">
-									<p class="Priority1">Priority</p>
+									<p class="Priority1"><?= Yii::t('app', 'Priority') ?></p>
 									<div class="circle-Priority" id="prirority-view"></div>
 								</div>
 							</div>
 							<div class="col-lg-4 col-md-6 col-6">
 								<div class="col-12 padding-update-Backdrop3">
-									Update Interval
+									<?= Yii::t('app', 'Update Interval') ?>
 								</div>
 								<div class="col-12 update-mouth-Backdrop3" id="unit-view">
 
@@ -94,7 +94,7 @@
 					</div>
 				</div>
 				<div class="col-12 Description-Backdrop7 pl-10">
-					Description
+					<?= Yii::t('app', 'Description') ?>
 				</div>
 				<div class="col-12 detailsDescription-Backdrop3 pl-20" id="decription-view">
 
@@ -104,10 +104,10 @@
 						<div class="row">
 							<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 								<li class="col-lg-6 col-md-6 col-6 pl-20">
-									<a class="link-3" type="button" role="tab" aria-controls="v-pills-team1" aria-selected="true"> Team</a>
+									<a class="link-3" type="button" role="tab" aria-controls="v-pills-team1" aria-selected="true"> <?= Yii::t('app', 'Team') ?></a>
 								</li>
 								<li class="col-lg-6 col-md-6 col-6">
-									<a class="link-3" type="button" role="tab" aria-controls="v-pills-Assign" aria-selected="true"> Assign Members</a>
+									<a class="link-3" type="button" role="tab" aria-controls="v-pills-Assign" aria-selected="true"> <?= Yii::t('app', 'Assign Members') ?></a>
 								</li>
 							</ul>
 							<hr style="margin-top: -8px;">
@@ -121,7 +121,7 @@
 					</div>
 				</div>
 				<div class="col-12 History-Backdrop3">
-					Update Description
+					<?= Yii::t('app', 'Update Description') ?>
 				</div>
 				<hr>
 				<div class="col-12" id="kpi-history"></div>
