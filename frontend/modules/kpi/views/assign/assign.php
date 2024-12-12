@@ -1,6 +1,5 @@
 <?php
 
-use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
 $this->title = 'KPI Grid View';
@@ -46,7 +45,7 @@ $this->title = 'KPI Grid View';
 					<div class="col-10 font-size-12 pim-name pr-0 pl-5 text-start">
 						<a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="mr-5 font-size-12">
 							<i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
-							Back
+							<?= Yii::t('app', 'Back') ?>
 						</a>
 						<span class="">
 							<?= $kpiDetail["kpiName"] ?>
@@ -54,15 +53,15 @@ $this->title = 'KPI Grid View';
 					</div>
 					<div class="col-2 text-end">
 						<button class="btn-create font-size-12" style="text-decoration: none;" type="submit">
-							Save
+							<?= Yii::t('app', 'Save') ?>
 						</button>
 					</div>
 				</div>
 				<div class="col-12  ligth-gray-box mt-10 mb-10">
 					<div class="col-12 bg-white pl-8 pr-8 mt-8 mb-10">
 						<div class="row">
-							<div class="col-6 font-size-12 pt-5 pb-3"><b>Assign Team</b></div>
-							<div class="col-6 text-end  font-size-12 pt-5 pb-3"><b>ALLOCATE TARGET</b></div>
+							<div class="col-6 font-size-12 pt-5 pb-3"><b><?= Yii::t('app', 'Assign Team') ?></b></div>
+							<div class="col-6 text-end  font-size-12 pt-5 pb-3"><b><?= Yii::t('app', 'ALLOCATE TARGET') ?></b></div>
 						</div>
 					</div>
 					<?php
@@ -157,10 +156,10 @@ $this->title = 'KPI Grid View';
 			<div class="col-7">
 				<div class="row">
 					<div class="col-3 font-size-12 border-right pt-5 pl-5 pr-0 text-center">
-						Average/Team <span class="font-size-12 ml-5"><b><?= number_format($teamAverage) ?></b></span>
+						<?= Yii::t('app', 'Average/Team') ?> <span class="font-size-12 ml-5"><b><?= number_format($teamAverage) ?></b></span>
 					</div>
 					<div class="col-4 font-size-12 border-right  pt-5 pl-0 pr-0 text-center">
-						Average/Individual <span class="font-size-12 ml-5"><b><?= number_format($kpiTeamEmployee["base"]["averageTarget"]) ?></b></span>
+						<?= Yii::t('app', 'Average/Individual') ?> <span class="font-size-12 ml-5"><b><?= number_format($kpiTeamEmployee["base"]["averageTarget"]) ?></b></span>
 					</div>
 					<div class="col-3 text-center font-size-12 border-right">
 						<div class="row">
@@ -189,16 +188,16 @@ $this->title = 'KPI Grid View';
 					<div class="col-2 text-center pt-0">
 						<div class="row">
 							<span class="font-size-12"><b><?= number_format($kpiDetail["targetAmount"]) ?></b></span>
-							<div class="col-12 font-size-10" style="margin-top: -5px;">Master & Target</div>
+							<div class="col-12 font-size-10" style="margin-top: -5px;"><?= Yii::t('app', 'Master & Target') ?></div>
 						</div>
 					</div>
 				</div>
 				<div class="col-12 ligth-gray-box mb-10 mt-7">
 					<div class="col-12 bg-white pl-8 pr-8 mt-8 mb-10">
 						<div class="row">
-							<div class="col-5 font-size-12 pt-5 pb-3"><b>Assign Individuals</b></div>
-							<div class="col-3 font-size-12 pt-5 pb-3 text-center">ALLOCATE TARGET</div>
-							<div class="col-4 font-size-12 pt-5 pb-3 text-center">REMARKS</div>
+							<div class="col-5 font-size-12 pt-5 pb-3"><b><?= Yii::t('app', 'Assign Individuals') ?></b></div>
+							<div class="col-3 font-size-12 pt-5 pb-3 text-center"><?= Yii::t('app', 'ALLOCATE TARGET') ?></div>
+							<div class="col-4 font-size-12 pt-5 pb-3 text-center"><?= Yii::t('app', 'REMARKS') ?></div>
 						</div>
 					</div>
 					<div class="col-12 pr-0 pl-0" id="team-employee-target">

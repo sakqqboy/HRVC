@@ -4,10 +4,10 @@ use common\models\ModelMaster;
 
 if (isset($kpiTeamHistory) && count($kpiTeamHistory) > 0) { ?>
 	<div class="row border-bottom pb-10 mb-10">
-		<div class="col-3">Target</div>
-		<div class="col-3">Result</div>
-		<div class="col-3">Updater</div>
-		<div class="col-3">Date</div>
+		<div class="col-3"><?= Yii::t('app', 'Target') ?></div>
+		<div class="col-3"><?= Yii::t('app', 'Result') ?></div>
+		<div class="col-3"><?= Yii::t('app', 'Updater') ?></div>
+		<div class="col-3"><?= Yii::t('app', 'Date') ?></div>
 	</div>
 	<?php
 	foreach ($kpiTeamHistory as $history) : ?>
@@ -24,6 +24,6 @@ if (isset($kpiTeamHistory) && count($kpiTeamHistory) > 0) { ?>
 <?php
 } else {
 ?>
-	<div class="col-12 mt-20 font-size-16 text-center">Not update yet.</div>
+	<div class="col-12 mt-20 font-size-16 text-center"><?= Yii::t('app', 'Not update yet') ?>.</div>
 <?php
 }

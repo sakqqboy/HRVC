@@ -1,7 +1,6 @@
 <?php
 
 use common\models\ModelMaster;
-use Faker\Core\Number;
 use yii\bootstrap5\ActiveForm;
 
 $this->title = "Update Individual KPI";
@@ -19,12 +18,12 @@ $form = ActiveForm::begin([
 	<div class="row">
 		<div class="col-10">
 			<i class="fa fa-list-alt font-size-20" aria-hidden="true"></i>
-			<strong class="font-size-20">Update Individual KPI</strong>
+			<strong class="font-size-20"><?= Yii::t('app', 'Update Individual KPI') ?></strong>
 		</div>
 		<div class="col-2 text-end">
 			<a href="<?= isset(Yii::$app->request->referrer) ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi-grid' ?>" class="btn btn-secondary font-size-12">
 				<i class="fa fa-chevron-left mr-5" aria-hidden="true"></i>
-				Back
+				<?= Yii::t('app', 'Back') ?>
 			</a>
 		</div>
 	</div>
@@ -49,22 +48,22 @@ $form = ActiveForm::begin([
 						<input class="form-control text-end" name="result" type="text" value="<?= number_format($kpiEmployeeDetail['result'], 2) ?>">
 					</div>
 					<div class="col-6 pt-10">
-						<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Month</label>
+						<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> <?= Yii::t('app', 'Month') ?></label>
 						<select class="form-select font-size-13" required aria-label="Default select example" name="month" id="month-update">
 							<?php
 							if (isset($kpiEmployeeDetail["month"]) && $kpiEmployeeDetail["month"] != '') { ?>
 								<option value="<?= $kpiEmployeeDetail["month"] ?>">
-									<?= ModelMaster::monthFull()[$kpiEmployeeDetail["month"]] ?>
+									<?= Yii::t('app',  ModelMaster::monthFull()[$kpiEmployeeDetail["month"]]) ?>
 								</option>
 							<?php
 
 							}
 							?>
-							<option value="">Month</option>
+							<option value=""><?= Yii::t('app', 'Month') ?></option>
 							<?php
 							if (isset($months) && count($months) > 0) {
 								foreach ($months as $value => $month) : ?>
-									<option value="<?= $value ?>"><?= $month ?></option>
+									<option value="<?= $value ?>"><?= Yii::t('app', $month) ?></option>
 							<?php
 								endforeach;
 							}
@@ -72,7 +71,7 @@ $form = ActiveForm::begin([
 						</select>
 					</div>
 					<div class="col-6 pt-10">
-						<label class="form-label font-size-12"><strong class="red">*</strong> Year</label>
+						<label class="form-label font-size-12"><strong class="red">*</strong> <?= Yii::t('app', 'Year') ?></label>
 						<select class="form-select font-size-12" required name="year" id="year-update">
 							<?php
 							if (isset($kpiEmployeeDetail["year"]) && $kpiEmployeeDetail["year"] != '') { ?>
@@ -94,7 +93,7 @@ $form = ActiveForm::begin([
 						</select>
 					</div>
 					<div class="col-6 mt-10">
-						<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Next Check Date</label>
+						<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> <?= Yii::t('app', 'Next Check Date') ?></label>
 						<?php
 						if ($kpiEmployeeDetail['nextCheckDate'] != null) {
 							$nextCheckDateArr = explode(' ', $kpiEmployeeDetail["nextCheckDate"]);
@@ -106,15 +105,15 @@ $form = ActiveForm::begin([
 						<input class="form-control text-end" name="nextCheckDate" type="date" required value="<?= $nextCheckDate ?>">
 					</div>
 					<div class="col-lg-6 col-md-6 col-6 pt-10">
-						<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> Status</label>
+						<label for="exampleFormControl" class="form-label font-size-13"><strong class="red">*</strong> <?= Yii::t('app', 'Status') ?></label>
 						<select class="form-select font-size-13" aria-label="Default select example" required name="status">
 							<?php
 							if ($kpiEmployeeDetail['status'] != null) {
 								if ($kpiEmployeeDetail['status'] == 1) { ?>
-									<option value="1">Active</option>
+									<option value="1"><?= Yii::t('app', 'Active') ?></option>
 								<?php
 								} else { ?>
-									<option value="2">Finished</option>
+									<option value="2"><?= Yii::t('app', 'Finished') ?></option>
 							<?php
 								}
 							}
@@ -122,15 +121,15 @@ $form = ActiveForm::begin([
 							<?php
 							if ($kpiEmployeeDetail['status'] == null) {
 							?>
-								<option value="1">Active</option>
-								<option value="2">Finished</option>
+								<option value="1"><?= Yii::t('app', 'Active') ?></option>
+								<option value="2"><?= Yii::t('app', 'Finished') ?></option>
 								<?php
 							} else {
 								if ($kpiEmployeeDetail['status'] == 1) { ?>
-									<option value="2">Finished</option>
+									<option value="2"><?= Yii::t('app', 'Finished') ?></option>
 								<?php
 								} else { ?>
-									<option value="1">Active</option>
+									<option value="1"><?= Yii::t('app', 'Active') ?></option>
 							<?php
 								}
 							}
@@ -142,7 +141,7 @@ $form = ActiveForm::begin([
 				<div class="col-12 mt-15 text-end">
 					<input type="hidden" name="kpiEmployeeId" value="<?= $kpiEmployeeId ?>">
 					<input type="hidden" name="url" value="<?= Yii::$app->request->referrer ?>">
-					<button type="submit" class="btn btn-warning">Update</button>
+					<button type="submit" class="btn btn-warning"><?= Yii::t('app', 'Update') ?></button>
 				</div>
 			</div>
 		</div>

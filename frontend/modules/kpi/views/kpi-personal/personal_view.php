@@ -9,13 +9,13 @@ $this->title = "Individual KPI Detail";
 		<div class="col-8">
 			<i class="fa fa-users font-size-20" aria-hidden="true"></i>
 			<strong class="font-size-20">
-				Indivisual KPI Setting :: <?= $kpiEmployeeDetail["employeeName"] ?>
+				<?= Yii::t('app', 'Indivisual KPI Setting') ?> :: <?= $kpiEmployeeDetail["employeeName"] ?>
 			</strong>
 		</div>
 		<div class="col-4 text-end pr-15">
 			<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi-grid" class="btn btn-secondary font-size-12">
 				<i class="fa fa-chevron-left mr-5" aria-hidden="true"></i>
-				Back
+				<?= Yii::t('app', 'Back') ?>
 			</a>
 		</div>
 	</div>
@@ -27,7 +27,7 @@ $this->title = "Individual KPI Detail";
 					<?= $kpiEmployeeDetail["monthName"] ?>
 				</div>
 				<div class="col-12  text-center">
-					<p class="font-size-10 mb-20">Priority</p>
+					<p class="font-size-10 mb-20"><?= Yii::t('app', 'Priority') ?></p>
 					<div class="circle-Priority" style="margin-left: 70px !important;">
 						<?= $kpiEmployeeDetail["priority"] ?>
 					</div>
@@ -35,16 +35,16 @@ $this->title = "Individual KPI Detail";
 			</div>
 			<div class="col-lg-3 col-md-6 col-3">
 				<div class="col-12 Quant-ratio-Backdrop3">
-					Quant Ratio
+					<?= Yii::t('app', 'Quant Ratio') ?>
 				</div>
 				<div class="col-12 diamond-con-Backdrop3 mt-10">
 					<i class="fa fa-diamond" aria-hidden="true"></i>
-					<span id="quanRatioHistory"><?= $kpiEmployeeDetail["quantRatio"] == 1 ? "Quantity" : "Quality" ?></span>
+					<span id="quanRatioHistory"><?= $kpiEmployeeDetail["quantRatio"] == 1 ? Yii::t('app', "Quantity") : Yii::t('app', "Quality") ?></span>
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-6 col-3 text-center">
 				<div class="col-12 bullseye-con-Backdrop3">
-					<i class="fa fa-bullseye" aria-hidden="true"></i> Target
+					<i class="fa fa-bullseye" aria-hidden="true"></i> <?= Yii::t('app', 'Target') ?>
 				</div>
 				<div class="col-12 million-number-Backdrop3 mt-10" id="targetHistory">
 					<?= $kpiEmployeeDetail["amountType"] == 1 ? number_format($kpiEmployeeDetail["target"], 2) : number_format($kpiEmployeeDetail["target"]) ?>
@@ -57,7 +57,7 @@ $this->title = "Individual KPI Detail";
 			</div>
 			<div class="col-lg-3 cl-md-6 col-3 text-center">
 				<div class="col-12 trophy-con-Backdrop3">
-					<i class="fa fa-trophy" aria-hidden="true"></i> Result
+					<i class="fa fa-trophy" aria-hidden="true"></i> <?= Yii::t('app', 'Result') ?>
 				</div>
 				<div class="col-12 million-number-Backdrop3 mt-10 " id="resultHistory">
 					<?= $kpiEmployeeDetail["amountType"] == 1 ? number_format($kpiEmployeeDetail["result"], 2) : number_format($kpiEmployeeDetail["result"]) ?>
@@ -67,7 +67,7 @@ $this->title = "Individual KPI Detail";
 				<div class="col-lg-2 col-md-6 col-5"></div>
 				<div class="col-lg-4 col-md-6 col-6">
 					<div class="col-12 padding-update-Backdrop3">
-						Update Interval
+						<?= Yii::t('app', 'Update Interval') ?>
 					</div>
 					<div class="col-12 update-mouth-Backdrop3 mt-10" id="unitHistory">
 						<?= $kpiEmployeeDetail["unitText"] ?>
@@ -85,23 +85,23 @@ $this->title = "Individual KPI Detail";
 		</div>
 	</div>
 	<div class="col-12 mt-20 font-size-14 font-b">
-		Remark
+		<?= Yii::t('app', 'Remark') ?>
 	</div>
 	<div class="col-12 mt-10">
 		<?= $kpiEmployeeDetail["remark"] == '' ? '-' : $kpiEmployeeDetail["remark"] ?>
 	</div>
 	<div class="col-12 mt-20 font-size-14 font-b">
-		Update Description
+		<?= Yii::t('app', 'Update Description') ?>
 	</div>
 	<div class="col-12 mt-10">
 		<div class="row border-buttom font-b mb-20 font-size-12">
-			<div class="col-2 pb-10">Progress</div>
-			<div class="col-2 pb-10 text-end">Target</div>
-			<div class="col-2 pb-10 text-end">Result</div>
-			<div class="col-2 pb-10 text-center">Ratio</div>
-			<div class="col-1 pb-10 text-center">Month</div>
-			<div class="col-1 pb-10 text-center">Status</div>
-			<div class="col-2 pb-10">Date</div>
+			<div class="col-2 pb-10"><?= Yii::t('app', 'Progress') ?></div>
+			<div class="col-2 pb-10 text-end"><?= Yii::t('app', 'Target') ?></div>
+			<div class="col-2 pb-10 text-end"><?= Yii::t('app', 'Result') ?></div>
+			<div class="col-2 pb-10 text-center"><?= Yii::t('app', 'Ratio') ?></div>
+			<div class="col-1 pb-10 text-center"><?= Yii::t('app', 'Month') ?></div>
+			<div class="col-1 pb-10 text-center"><?= Yii::t('app', 'Status') ?></div>
+			<div class="col-2 pb-10"><?= Yii::t('app', 'Date') ?></div>
 		</div>
 		<?php
 		if (isset($kpiEmployeeHistory) && count($kpiEmployeeHistory) > 0) {
@@ -158,15 +158,15 @@ $this->title = "Individual KPI Detail";
 					<div class="col-2 text-end"><?= number_format($history["target"], 2) ?></div>
 					<div class="col-2 text-end"><?= number_format($history["result"], 2) ?></div>
 					<div class="col-2 text-center"><?= $number ?></div>
-					<div class="col-1 text-center"><?= ModelMaster::shotMonthText($history["month"]) ?></div>
-					<div class="col-1 text-center"><?= $status ?></div>
+					<div class="col-1 text-center"><?= Yii::t('app', ModelMaster::shotMonthText($history["month"])) ?></div>
+					<div class="col-1 text-center"><?= Yii::t('app', $status) ?></div>
 					<div class="col-2"><?= ModelMaster::engDate($history["createDateTime"], 2) ?></div>
 				</div>
 			<?php
 				$i++;
 			endforeach;
 		} else { ?>
-			<div class="col-12 mt-20 alert alert-secondary text-center">No updates found</div>
+			<div class="col-12 mt-20 alert alert-secondary text-center"><?= Yii::t('app', 'No updates found') ?></div>
 		<?php
 		}
 		?>
