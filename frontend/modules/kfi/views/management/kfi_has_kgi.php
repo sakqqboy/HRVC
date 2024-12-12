@@ -9,11 +9,11 @@ use frontend\models\hrvc\Unit;
 <table class="table table-responsive-lg">
 	<thead>
 		<tr class="font-size-12">
-			<th>KGI Name</th>
-			<th>Month</th>
-			<th>Unit</th>
-			<th>Ratio</th>
-			<th>Teams</th>
+			<th><?= Yii::t('app', 'KGI Name') ?></th>
+			<th><?= Yii::t('app', 'Month') ?></th>
+			<th><?= Yii::t('app', 'Unit') ?></th>
+			<th><?= Yii::t('app', 'Ratio') ?></th>
+			<th><?= Yii::t('app', 'Teams') ?></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -90,7 +90,7 @@ use frontend\models\hrvc\Unit;
 		} else { ?>
 			<tr style="line-height: 60px;">
 				<td class="text-center font-size-16" colspan="5">
-					There are no related KGI for this KFI.
+					<?= Yii::t('app', 'There are no related KGI for this KFI.') ?>
 				</td>
 			</tr>
 		<?php

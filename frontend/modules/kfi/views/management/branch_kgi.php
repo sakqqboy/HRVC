@@ -8,12 +8,12 @@ use frontend\models\hrvc\Unit;
 if (isset($kgiBranch) && count($kgiBranch) > 0) { ?>
 	<table class="table">
 		<thead>
-			<th>No</th>
+			<th><?= Yii::t('app', 'No') ?></th>
 			<th> </th>
-			<th>Kgi Name</th>
-			<th>Target</th>
-			<th>Month</th>
-			<th>Unit</th>
+			<th><?= Yii::t('app', 'Kgi Name') ?></th>
+			<th><?= Yii::t('app', 'Target') ?></th>
+			<th><?= Yii::t('app', 'Month') ?></th>
+			<th><?= Yii::t('app', 'Unit') ?></th>
 		</thead>
 		<tbody class="font-size-12">
 			<?php
@@ -28,7 +28,7 @@ if (isset($kgiBranch) && count($kgiBranch) > 0) { ?>
 					<td><?= $kgi["kgiName"] ?></td>
 					<td><?= $kgi["code"] ?> <?= number_format($kgi["targetAmount"], 2) ?></td>
 					<td><?= ModelMaster::shotMonthText($kgi["month"]) ?></td>
-					<td><?= Unit::unitName($kgi["unitId"]) ?></td>
+					<td><?= Yii::t('app', Unit::unitName($kgi["unitId"])) ?></td>
 				</tr>
 			<?php
 				$i++;
@@ -38,7 +38,7 @@ if (isset($kgiBranch) && count($kgiBranch) > 0) { ?>
 	</table>
 	<div class="col-12 mt-20 text-end">
 		<input type="hidden" id="branchId" value="<?= $branchId ?>">
-		<a class="btn btn-primary font-size-12" href="javascript:saveSelectedKgi(<?= $kfiId ?>)">Submit</a>
+		<a class="btn btn-primary font-size-12" href="javascript:saveSelectedKgi(<?= $kfiId ?>)"><?= Yii::t('app', 'Submit') ?></a>
 	</div>
 <?php
 }

@@ -2,11 +2,11 @@
 
 use common\models\ModelMaster;
 
-$this->title = 'Assign KFI';
+$this->title = Yii::t('app', 'Assign KFI');
 ?>
 <div class="col-12 mt-90">
 	<div class="col-12">
-		<i class="fa fa-tachometer font-size-20" aria-hidden="true"></i> <strong class="font-size-20"> Assign Management</strong>
+		<i class="fa fa-tachometer font-size-20" aria-hidden="true"></i> <strong class="font-size-20"> <?= Yii::t('app', 'Assign Management') ?></strong>
 	</div>
 	<div class="col-12 mt-20">
 		<?= $this->render('header_assign') ?>
@@ -14,7 +14,7 @@ $this->title = 'Assign KFI';
 			<div class="row">
 				<div class="col-lg-9 col-md-6 col-12">
 					<div class="col-12">
-						Key Financial Indicator
+						<?= Yii::t('app', 'Key Financial Indicator') ?>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 col-12">
@@ -24,21 +24,21 @@ $this->title = 'Assign KFI';
 								<i class="fa fa-filter" aria-hidden="true"></i>
 							</span>
 							<select class="form-select font-size-13" aria-label="Default select example" id="kfiMonthFilter">
-								<option selected value="">Month</option>
+								<option selected value=""><?= Yii::t('app', 'Month') ?></option>
 								<?php
 								if (isset($months) && count($months) > 0) {
 									foreach ($months as $value => $month) :
 								?>
-										<option value="<?= $value ?>"><?= $month ?></option>
+										<option value="<?= $value ?>"><?= Yii::t('app', $month) ?></option>
 								<?php
 									endforeach;
 								}
 								?>
 							</select>
 							<select class="form-select font-size-13" aria-label="Default select example" id="kfiStatusFilter">
-								<option selected value="">Status</option>
-								<option value="1">Active</option>
-								<option value="2">In Active</option>
+								<option selected value=""><?= Yii::t('app', 'Status') ?></option>
+								<option value="1"><?= Yii::t('app', 'Active') ?></option>
+								<option value="2"><?= Yii::t('app', 'In Active') ?></option>
 							</select>
 						</div>
 					</div>
@@ -48,13 +48,13 @@ $this->title = 'Assign KFI';
 				<table class="table table-striped">
 					<thead class="table table-secondary">
 						<tr class="secondary-setting">
-							<th>KFI Contents</th>
-							<th>Company</th>
-							<th>Branch</th>
-							<th>Assign Employee</th>
-							<th>Target</th>
-							<th>Month</th>
-							<th>KGI</th>
+							<th><?= Yii::t('app', 'KFI Contents') ?></th>
+							<th><?= Yii::t('app', 'Company') ?></th>
+							<th><?= Yii::t('app', 'Branch') ?></th>
+							<th><?= Yii::t('app', 'Assign Employee') ?></th>
+							<th><?= Yii::t('app', 'Target') ?></th>
+							<th><?= Yii::t('app', 'Month') ?></th>
+							<th><?= Yii::t('app', 'KGI') ?></th>
 							<!-- <th>Status</th> -->
 						</tr>
 					</thead>
@@ -118,23 +118,6 @@ $this->title = 'Assign KFI';
 											<b><?= $kfi["countKfiHasKgi"] ?></b>
 										</a>
 									</td>
-									<!-- <td id='active-<?php //$kfiId 
-												?>'> -->
-									<?php
-									// if ($kfi["active"] == 1) { 
-									?>
-									<!-- <a href="javascript:changeKfiStatus(0,<?php // $kfiId 
-																?>)" class="btn btn-primary btn-sm font-size-12">Active</a> -->
-									<?php
-									//} else { 
-									?>
-									<!-- <a href="javascript:changeKfiStatus(1,<?php // $kfiId 
-																?>)" class="btn btn-danger btn-sm font-size-12">In Active</a> -->
-									<?php
-									// }
-									?>
-									<!-- </td> -->
-
 								</tr>
 						<?php
 							endforeach;
@@ -149,11 +132,11 @@ $this->title = 'Assign KFI';
 	<div class="col-12 navigation-next">
 		<nav aria-label="Page navigation example">
 			<ul class="pagination">
-				<li class="page-item"><a class="page-link page-navigation" href="#"><i class="fa fa-chevron-left" aria-hidden="true"></i> Previous</a></li>
+				<li class="page-item"><a class="page-link page-navigation" href="#"><i class="fa fa-chevron-left" aria-hidden="true"></i> <?= Yii::t('app', 'Previous') ?></a></li>
 				<li class="page-item"><a class="page-link page-navigation" href="#">1</a></li>
 				<li class="page-item"><a class="page-link page-navigation" href="#">2</a></li>
 				<li class="page-item"><a class="page-link page-navigation" href="#">3</a></li>
-				<li class="page-item"><a class="page-link page-navigation" href="#">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
+				<li class="page-item"><a class="page-link page-navigation" href="#"><?= Yii::t('app', 'Next') ?> <i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
 			</ul>
 		</nav>
 	</div>

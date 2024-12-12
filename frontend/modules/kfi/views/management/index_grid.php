@@ -3,14 +3,14 @@
 use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'KFI Grid View';
+$this->title = Yii::t('app', 'KFI Grid View');
 ?>
 
 <div class="col-12">
     <div class="col-12">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
             style="margin-top: -3px;">
-        <strong class="pim-head-text"> Performance Indicator Matrices (PIM)</strong>
+        <strong class="pim-head-text"> <?= Yii::t('app', 'Performance Indicator Matrices (PIM)') ?></strong>
     </div>
     <div class="col-12 mt-10">
         <?= $this->render('header_filter', [
@@ -25,7 +25,7 @@ $this->title = 'KFI Grid View';
                                 <div
                                     class="col-12 pim-type-tab-selected pl-7 pr-7 pt-4 pb-2  text-center font-size-12 rounded-top-left">
                                     <img class="mr-8" src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg"
-                                        style="width: 12px; height: 12px; cursor: pointer;">Company KFI
+                                        style="width: 12px; height: 12px; cursor: pointer;"><?= Yii::t('app', 'Company KFI') ?>
                                 </div>
                             </div>
                         </div>
@@ -35,7 +35,7 @@ $this->title = 'KFI Grid View';
                             ?>
                             <button type="button" class="btn-createnew pl-7 pr-7 pr-9 font-size-12"
                                 data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
-                                Create New
+                                <?= Yii::t('app', 'Create New') ?>
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="History"
                                     class="pim-icon ml-3" style="margin-top: -1px;">
                             </button>
@@ -93,7 +93,7 @@ $this->title = 'KFI Grid View';
                             </div>
                             <div class="col-lg-1 col-md-2 col-4 text-center">
                                 <div class="<?= $colorFormat ?>-tag text-center">
-                                    <?= $kfi['status'] == 1 ? 'In process' : 'Completed' ?>
+                                    <?= $kfi['status'] == 1 ? Yii::t('app', 'In process') : Yii::t('app', 'Completed') ?>
                                 </div>
                             </div>
                             <div class="col-lg-1 col-md-2 col-4 text-center">
@@ -103,11 +103,11 @@ $this->title = 'KFI Grid View';
                             <div class=" col-lg-3 col-md-3 col-4 pl-30 text-center">
                                 <div class="row">
                                     <div class="col-4 month-<?= $colorFormat ?>">
-                                        <?= $kfi['month'] == "" ? 'Month' : $kfi['month'] ?>
+                                        <?= $kfi['month'] == "" ? Yii::t('app', 'Month') : Yii::t('app', $kfi['month']) ?>
                                     </div>
                                     <div class="col-8 term-<?= $colorFormat ?>">
-                                        <?= $kfi['fromDate'] == "" ? 'Not set' : $kfi['fromDate'] ?> -
-                                        <?= $kfi['toDate'] == "" ? 'Not set' : $kfi['toDate'] ?>
+                                        <?= $kfi['fromDate'] == "" ? Yii::t('app', 'Not set') : $kfi['fromDate'] ?> -
+                                        <?= $kfi['toDate'] == "" ? Yii::t('app', 'Not set') : $kfi['toDate'] ?>
                                     </div>
                                 </div>
                             </div>
@@ -122,13 +122,13 @@ $this->title = 'KFI Grid View';
                                     class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?>"
                                     style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg" alt="History"
-                                        class="pim-icon mr-3" style="margin-top: -2px;">History
+                                        class="pim-icon mr-3" style="margin-top: -2px;"><?= Yii::t('app', 'History') ?>
                                 </a>
                                 <a href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, 'openTab' => 4]) ?>"
                                     class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?>"
                                     style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg" alt="Chart"
-                                        class="pim-icon mr-3" style="margin-top: -2px;"> Chart
+                                        class="pim-icon mr-3" style="margin-top: -2px;"> <?= Yii::t('app', 'Chart') ?>
                                 </a>
                                 <?php
                                         if ($role >= 5) {
@@ -147,7 +147,7 @@ $this->title = 'KFI Grid View';
                             <div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?> mt-5">
                                 <div class="row">
                                     <div class="col-12 text-start pl-22 font-size-12 text-dark">
-                                        Assign on
+                                        <?= Yii::t('app', 'Assign on') ?>
                                     </div>
 
                                     <div class="col-10 pr-10 pl-30">
@@ -155,28 +155,28 @@ $this->title = 'KFI Grid View';
                                             <div class="row">
                                                 <div class="col-5">
                                                     <div class="row pim-picgroup">
-                                                        <?php if ($kfi["countEmployee"] != 0) {?>
+                                                        <?php if ($kfi["countEmployee"] != 0) { ?>
                                                         <div class="col-2">
                                                             <?php
-                                                                    if (isset($kfi['kfiEmployee'][0])) {
-                                                                    ?>
+                                                                        if (isset($kfi['kfiEmployee'][0])) {
+                                                                        ?>
                                                             <img src="<?= Yii::$app->homeUrl . $kfi['kfiEmployee'][0] ?>"
                                                                 class="pim-pic-gridKFI">
                                                             <?php
-                                                                    }
-                                                                    ?>
+                                                                        }
+                                                                        ?>
                                                         </div>
                                                         <div class="col-2 pic-afterKFI pt-0">
                                                             <?php
-                                                                    if (isset($kfi['kfiEmployee'][1])) {
-                                                                    ?>
+                                                                        if (isset($kfi['kfiEmployee'][1])) {
+                                                                        ?>
                                                             <img src="<?= Yii::$app->homeUrl . $kfi['kfiEmployee'][1] ?>"
                                                                 class="pim-pic-gridKFI">
                                                             <?php
-                                                                    }
-                                                                    ?>
+                                                                        }
+                                                                        ?>
                                                         </div>
-                                                        <?php }else {?>
+                                                        <?php } else { ?>
                                                         <div class="col-2">
                                                             <div class="pim-pic-yenlowKFI">
                                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg"
@@ -189,7 +189,7 @@ $this->title = 'KFI Grid View';
                                                                     alt="person icon">
                                                             </div>
                                                         </div>
-                                                        <?php }?>
+                                                        <?php } ?>
                                                         <div
                                                             class="col-6 number-tag load-<?= $kfi["countEmployee"] == 0 ? 'yenlow' : $colorFormat ?> pr-0 pl-0 pim-pic-gridKFINum ">
                                                             <?= $kfi["countEmployee"] ?>
@@ -202,12 +202,12 @@ $this->title = 'KFI Grid View';
                                                             if ($role >= 5) {
                                                             ?>
                                                     <span class="pull-left mt-1 pl-2  pr-4">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?=  $kfi["countEmployee"] == 0 ? 'yenlow' : $colorFormat ?>.svg"
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $kfi["countEmployee"] == 0 ? 'yenlow' : $colorFormat ?>.svg"
                                                             class="home-icon" style="margin-top: -3px;">
                                                     </span>
                                                     <a href="<?= Yii::$app->homeUrl ?>kfi/assign/assign/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, "companyId" => $kfi['companyId']]) ?>"
                                                         class="font-<?= $kfi["countEmployee"] == 0 ? 'black' : $colorFormat ?>">
-                                                        <?php echo $kfi["countEmployee"] == 0 ?  "Assign Person" :  "Change Assigned"; ?>
+                                                        <?php echo $kfi["countEmployee"] == 0 ?  Yii::t('app', 'Assign Person') :  Yii::t('app', 'Change Assigned'); ?>
                                                     </a>
                                                     <?php
                                                             } else { ?>
@@ -220,7 +220,7 @@ $this->title = 'KFI Grid View';
                                                         </div>
                                                         <a href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(["kfiId" => $kfiId, 'openTab' => 1]) ?>"
                                                             class="font-<?= $kfi["countEmployee"] == 0 ? 'black' : $colorFormat ?>">
-                                                            <?php echo $kfi["countEmployee"] == 0 ?  "View Assigned" :  "View Assigned"; ?>
+                                                            <?php echo $kfi["countEmployee"] == 0 ? Yii::t('app', 'View Assigned') :  Yii::t('app', 'View Assigned'); ?>
                                                         </a>
                                                     </div>
                                                     <?php
@@ -234,26 +234,26 @@ $this->title = 'KFI Grid View';
                             </div>
                             <div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?> mt-5 pl-10 pr-10">
                                 <div class="col-12 mt-18">
-                                    <!-- Additional spacing for row container -->
                                     <div class="row">
-                                        <!-- Left Column: Quant Ratio -->
                                         <div class="col-6 border-right-<?= $colorFormat ?>">
-                                            <div class="col-12  pr-6 pt-10 text-center">Quant Ratio</div>
+                                            <div class="col-12  pr-6 pt-10 text-center">
+                                                <?= Yii::t('app', 'Quant Ratio') ?></div>
                                             <div class="col-12 pim-duedate text-center mt-2">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $kfi["quantRatio"] == 1 ? 'quantity' : 'diamon' ?>.svg"
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $kfi["quantRatio"] == 1 ? Yii::t('app', 'quantity') : Yii::t('app', 'diamon') ?>.svg"
                                                     class="pim-iconKFI" style="margin-top: -1px; margin-left: 3px;">
-                                                <?= $kfi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?>
+                                                <?= $kfi["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?>
                                             </div>
                                         </div>
 
                                         <!-- Right Column: Update Interval -->
                                         <div class="col-6">
-                                            <div class="col-12 pr-0 pt-10 text-center">Update Interval
+                                            <div class="col-12 pr-0 pt-10 text-center">
+                                                <?= Yii::t('app', 'Update Interval') ?>
                                             </div>
                                             <div class="col-12 pim-duedate text-center mt-2">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/monthly.svg"
                                                     class="pim-iconKFI" style="margin-top: -3px;">
-                                                <?= $kfi["unit"] ?>
+                                                <?= Yii::t('app', $kfi["unit"]) ?>
                                             </div>
                                         </div>
                                     </div>
@@ -267,7 +267,7 @@ $this->title = 'KFI Grid View';
                                         <div class="col-12">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Target.svg"
                                                 class="pim-iconKFI" style="margin-top: 1px; margin-right: 3px;">
-                                            Target
+                                            <?= Yii::t('app', 'Target') ?>
                                         </div>
                                         <div class="col-12 mt-3 number-pim">
                                             <?php
@@ -291,7 +291,7 @@ $this->title = 'KFI Grid View';
                                     </div>
                                     <div class="col-5  text-end">
                                         <div class="col-12">
-                                            Result
+                                            <?= Yii::t('app', 'Result') ?>
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Result.svg"
                                                 class="pim-iconKFI" style="margin-top: 1px; margin-left: 3px;">
                                         </div>
@@ -340,7 +340,8 @@ $this->title = 'KFI Grid View';
                                     <div class="col-5 pl-5 pr-5 mt-10 ">
                                         <div class="col-12 text-end ">Last Updated on</div>
                                         <div class="col-12 text-end pim-duedate">
-                                            <?= $kfi['nextCheck'] == "" ? 'Not set' : $kfi['nextCheck'] ?></div>
+                                            <?= $kfi['nextCheck'] == "" ? Yii::t('app', 'Not set') : $kfi['nextCheck'] ?>
+                                        </div>
                                     </div>
                                     <div class="col-2 text-center mt-10 pt-6">
 
@@ -350,32 +351,31 @@ $this->title = 'KFI Grid View';
                                         <div onclick="javascript:updateKfi(<?= $kfiId ?>)" class="pim-btn-setup"
                                             data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
-                                                class="mb-2" style="width: 12px; height: 12px;"> Setup
+                                                class="mb-2" style="width: 12px; height: 12px;">
+                                            <?= Yii::t('app', 'Setup') ?>
                                         </div>
                                         <?php
                                                 } else if ($role >= 5) {
                                                 ?>
-                                        <div onclick="javascript:updateKfi(<?= $kfiId ?>)"
+                                        <div onclick=" javascript:updateKfi(<?= $kfiId ?>)"
                                             class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
                                             data-bs-target="#staticBackdrop2">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
                                                 class="mb-2" style="width: 12px; height: 12px;">
-                                            <?php if($colorFormat == "complete") { 
-                                                          echo  "Edit";
-                                                         } else if($colorFormat == "over") 
-                                                         { 
-                                                            echo  "Update";
-
-                                                         } else {
-                                                            echo  "Update";
-                                                         }
-                                                         ?>
+                                            <?php if ($colorFormat == "complete") {
+                                                            echo  "Edit";
+                                                        } else if ($colorFormat == "over") {
+                                                            echo  Yii::t('app', 'Update');
+                                                        } else {
+                                                            echo  Yii::t('app', 'Update');
+                                                        }
+                                                        ?>
                                         </div>
                                         <?php
                                                 } else { ?>
                                         <div class="pim-btn-disable" data-bs-target="#update-kgi-modal">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/locked.svg"
-                                                style="width: 12px; height: 12px;"> Locked
+                                                style="width: 12px; height: 12px;"> <?= Yii::t('app', 'Locked') ?>
                                         </div>
                                         <?php
 
@@ -383,7 +383,8 @@ $this->title = 'KFI Grid View';
                                                 ?>
                                     </div>
                                     <div class=" col-5 pl-0 pr-11 mt-10">
-                                        <div class="col-12 text-start font-<?= $colorFormat ?>">Next Update Date
+                                        <div class="col-12 text-start font-<?= $colorFormat ?>">
+                                            <?= Yii::t('app', 'Next Update Date') ?>
                                         </div>
                                         <div class="col-12 text-start pim-duedate">
                                             <?= $kfi['nextCheck'] == "" ? 'Not set' : $kfi['nextCheck'] ?></div>

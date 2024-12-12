@@ -12,13 +12,13 @@ $this->title = "KGI Individual Setting";
 		<div class="col-8">
 			<i class="fa fa-users font-size-20" aria-hidden="true"></i>
 			<strong class="font-size-20">
-				Indivisual KGI Setting
+				<?= Yii::t('app', 'Indivisual KGI Setting') ?>
 			</strong>
 		</div>
 		<div class="col-4 text-end pr-15">
 			<a href="<?= Yii::$app->request->referrer ?>" class="btn btn-secondary font-size-12">
 				<i class="fa fa-chevron-left mr-5" aria-hidden="true"></i>
-				Back
+				<?= Yii::t('app', 'Back') ?>
 			</a>
 		</div>
 	</div>
@@ -30,7 +30,7 @@ $this->title = "KGI Individual Setting";
 					<?= $kgiDetail["monthName"] ?>
 				</div>
 				<div class="col-12  text-center">
-					<p class="font-size-10 mb-20">Priority</p>
+					<p class="font-size-10 mb-20"><?= Yii::t('app', 'Priority') ?></p>
 					<div class="circle-Priority" style="margin-left: 70px !important;">
 						<?= $kgiDetail["priority"] ?>
 					</div>
@@ -38,16 +38,16 @@ $this->title = "KGI Individual Setting";
 			</div>
 			<div class="col-lg-3 col-md-6 col-3">
 				<div class="col-12 Quant-ratio-Backdrop3">
-					Quant Ratio
+					<?= Yii::t('app', 'Quant Ratio') ?>
 				</div>
 				<div class="col-12 diamond-con-Backdrop3 mt-10">
 					<i class="fa fa-diamond" aria-hidden="true"></i>
-					<span id="quanRatioHistory"><?= $kgiDetail["quantRatio"] == 1 ? "Quantity" : "Quality" ?></span>
+					<span id="quanRatioHistory"><?= $kgiDetail["quantRatio"] == 1 ? Yii::t('app', "Quantity") : Yii::t('app', "Quality") ?></span>
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-6 col-3 text-center">
 				<div class="col-12 bullseye-con-Backdrop3">
-					<i class="fa fa-bullseye" aria-hidden="true"></i> Target
+					<i class="fa fa-bullseye" aria-hidden="true"></i> <?= Yii::t('app', 'Target') ?>
 				</div>
 				<div class="col-12 million-number-Backdrop3 mt-10" id="targetHistory">
 					<?= $kgiDetail["amountType"] == 1 ? number_format($kgiDetail["targetAmount"], 2) : number_format($kgiDetail["targetAmount"]) ?>
@@ -60,7 +60,7 @@ $this->title = "KGI Individual Setting";
 			</div>
 			<div class="col-lg-3 cl-md-6 col-3 text-center">
 				<div class="col-12 trophy-con-Backdrop3">
-					<i class="fa fa-trophy" aria-hidden="true"></i> Result
+					<i class="fa fa-trophy" aria-hidden="true"></i> <?= Yii::t('app', 'Result') ?>
 				</div>
 				<div class="col-12 million-number-Backdrop3 mt-10 " id="resultHistory">
 					<?= $kgiDetail["amountType"] == 1 ? number_format($kgiDetail["result"], 2) : number_format($kgiDetail["result"]) ?>
@@ -70,7 +70,7 @@ $this->title = "KGI Individual Setting";
 				<div class="col-lg-2 col-md-6 col-5"></div>
 				<div class="col-lg-4 col-md-6 col-6">
 					<div class="col-12 padding-update-Backdrop3">
-						Update Interval
+						<?= Yii::t('app', 'Update Interval') ?>
 					</div>
 					<div class="col-12 update-mouth-Backdrop3 mt-10" id="unitHistory">
 						<?= $kgiDetail["unitText"] ?>
@@ -117,7 +117,7 @@ $this->title = "KGI Individual Setting";
 						<?= $i ?>. <?= Team::teamName($teamId) ?>
 					</div>
 					<div class="col-5 text-end font-size-16 font-b mt-10 mb-10 border-bottom pb-10">
-						Target : : <?= number_format(KgiTeam::teamTarget($teamId, $kgiId), 2) ?>
+						<?= Yii::t('app', 'Target') ?> : : <?= number_format(KgiTeam::teamTarget($teamId, $kgiId), 2) ?>
 					</div>
 				</div>
 				<?php
@@ -145,13 +145,13 @@ $this->title = "KGI Individual Setting";
 			endforeach; ?>
 			<div class="col-11 text-end mt-20">
 				<input type="hidden" name="kgiId" value="<?= $kgiId ?>">
-				<button type="submit" class="btn btn-primary" style="letter-spacing: 1px;">SAVE</button>
+				<button type="submit" class="btn btn-primary" style="letter-spacing: 1px;"><?= Yii::t('app', 'SAVE') ?></button>
 			</div>
 
 		<?php
 		} else { ?>
 			<div class="col-12 text-center font-size-14 mt-20">
-				This Kgi haven't assiged to any employee.
+				<?= Yii::t('app', "This Kgi haven't assiged to any employee") ?>.
 			</div>
 		<?php
 		}

@@ -5,13 +5,13 @@ use frontend\models\hrvc\KgiTeamHistory;
 
 if (isset($kgiTeamHistory) && count($kgiTeamHistory) > 0) { ?>
 	<div class="row border-bottom pb-10 mb-10 font-b font-size-12">
-		<div class="col-2 text-center">Target</div>
-		<div class="col-2 text-center">Result</div>
-		<div class="col-1">Ratio</div>
-		<div class="col-1 text-center">Month</div>
-		<div class="col-2 text-center">Update</div>
-		<div class="col-2 ">Updater</div>
-		<div class="col-2">Status</div>
+		<div class="col-2 text-center"><?= Yii::t('app', 'Target') ?></div>
+		<div class="col-2 text-center"><?= Yii::t('app', 'Result') ?></div>
+		<div class="col-1"><?= Yii::t('app', 'Ratio') ?></div>
+		<div class="col-1 text-center"><?= Yii::t('app', 'Month') ?></div>
+		<div class="col-2 text-center"><?= Yii::t('app', 'Update') ?></div>
+		<div class="col-2 "><?= Yii::t('app', 'Updater') ?></div>
+		<div class="col-2"><?= Yii::t('app', 'Status') ?></div>
 	</div>
 	<?php
 	foreach ($kgiTeamHistory as $history) :
@@ -98,7 +98,7 @@ if (isset($kgiTeamHistory) && count($kgiTeamHistory) > 0) { ?>
 			<div class="col-1 text-center"><?= ModelMaster::monthEng($history["month"], 2) ?></div>
 			<div class="col-2 text-center"><?= ModelMaster::dateNumberShort($history["createDateTime"]) ?></div>
 			<div class="col-2"><?= $history["employeeFirstname"] ?> <?= $history["employeeSurename"] ?></div>
-			<div class="col-2 <?= $class == '' ? '' : 'font-b' ?>"><?= $statusText ?></div>
+			<div class="col-2 <?= $class == '' ? '' : 'font-b' ?>"><?= Yii::t('app', $statusText) ?></div>
 		</div>
 	<?php
 	endforeach;
@@ -106,6 +106,6 @@ if (isset($kgiTeamHistory) && count($kgiTeamHistory) > 0) { ?>
 <?php
 } else {
 ?>
-	<div class="col-12 mt-20 font-size-16 text-center">Not update yet.</div>
+	<div class="col-12 mt-20 font-size-16 text-center"><?= Yii::t('app', 'Not update yet') ?>.</div>
 <?php
 }

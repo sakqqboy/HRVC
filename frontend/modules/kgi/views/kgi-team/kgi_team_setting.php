@@ -8,12 +8,12 @@ $this->title = "KGI Team Setting";
 <div class="col-12 mt-90 pd-Performance">
 	<div class="row">
 		<div class="col-8">
-			<i class="fa fa-users font-size-20" aria-hidden="true"></i> <strong class="font-size-20"> Team KGI Setting</strong>
+			<i class="fa fa-users font-size-20" aria-hidden="true"></i> <strong class="font-size-20"> <?= Yii::t('app', 'Team KGI Setting') ?></strong>
 		</div>
 		<div class="col-4 text-end pr-15">
 			<a href="<?= Yii::$app->request->referrer ?>" class="btn btn-secondary font-size-12">
 				<i class="fa fa-chevron-left mr-5" aria-hidden="true"></i>
-				Back
+				<?= Yii::t('app', 'Back') ?>
 			</a>
 		</div>
 	</div>
@@ -25,7 +25,7 @@ $this->title = "KGI Team Setting";
 					<?= $kgiDetail["monthName"] ?>
 				</div>
 				<div class="col-12  text-center">
-					<p class="font-size-10 mb-20">Priority</p>
+					<p class="font-size-10 mb-20"><?= Yii::t('app', 'Priority') ?></p>
 					<div class="circle-Priority" style="margin-left: 70px !important;">
 						<?= $kgiDetail["priority"] ?>
 					</div>
@@ -33,16 +33,16 @@ $this->title = "KGI Team Setting";
 			</div>
 			<div class="col-lg-3 col-md-6 col-3">
 				<div class="col-12 Quant-ratio-Backdrop3">
-					Quant Ratio
+					<?= Yii::t('app', 'Quant Ratio') ?>
 				</div>
 				<div class="col-12 diamond-con-Backdrop3 mt-10">
 					<i class="fa fa-diamond" aria-hidden="true"></i>
-					<span id="quanRatioHistory"><?= $kgiDetail["quantRatio"] == 1 ? "Quantity" : "Quality" ?></span>
+					<span id="quanRatioHistory"><?= $kgiDetail["quantRatio"] == 1 ? Yii::t('app', "Quantity") : Yii::t('app', "Quality") ?></span>
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-6 col-3 text-center">
 				<div class="col-12 bullseye-con-Backdrop3">
-					<i class="fa fa-bullseye" aria-hidden="true"></i> Target
+					<i class="fa fa-bullseye" aria-hidden="true"></i> <?= Yii::t('app', 'Target') ?>
 				</div>
 				<div class="col-12 million-number-Backdrop3 mt-10" id="targetHistory">
 					<?= $kgiDetail["amountType"] == 1 ? number_format($kgiDetail["targetAmount"], 2) : number_format($kgiDetail["targetAmount"]) ?>
@@ -55,7 +55,7 @@ $this->title = "KGI Team Setting";
 			</div>
 			<div class="col-lg-3 cl-md-6 col-3 text-center">
 				<div class="col-12 trophy-con-Backdrop3">
-					<i class="fa fa-trophy" aria-hidden="true"></i> Result
+					<i class="fa fa-trophy" aria-hidden="true"></i> <?= Yii::t('app', 'Result') ?>
 				</div>
 				<div class="col-12 million-number-Backdrop3 mt-10 " id="resultHistory">
 					<?= $kgiDetail["amountType"] == 1 ? number_format($kgiDetail["result"], 2) : number_format($kgiDetail["result"]) ?>
@@ -65,10 +65,10 @@ $this->title = "KGI Team Setting";
 				<div class="col-lg-2 col-md-6 col-5"></div>
 				<div class="col-lg-4 col-md-6 col-6">
 					<div class="col-12 padding-update-Backdrop3">
-						Update Interval
+						<?= Yii::t('app', 'Update Interval') ?>
 					</div>
 					<div class="col-12 update-mouth-Backdrop3 mt-10" id="unitHistory">
-						<?= $kgiDetail["unitText"] ?>
+						<?= Yii::t('app', $kgiDetail["unitText"]) ?>
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6 col-6" style="margin-top:-20px;">
@@ -85,13 +85,13 @@ $this->title = "KGI Team Setting";
 	</div>
 	<div class="row">
 		<div class="col-4 font-size-14 font-b mt-20 mb-10 text-center border-bottom pb-10">
-			TEAM
+			<?= Yii::t('app', 'TEAM') ?>
 		</div>
 		<div class="col-3 font-size-14 font-b mt-20 mb-10 text-center border-bottom pb-10">
-			Target
+			<?= Yii::t('app', 'Target') ?>
 		</div>
 		<div class="col-4 font-size-14 font-b mt-20 mb-10 text-center border-bottom pb-10">
-			Remark
+			<?= Yii::t('app', 'Remark') ?>
 		</div>
 		<div class="col-1 mt-20 mb-10 text-center border-bottom pb-10">
 
@@ -138,7 +138,7 @@ $this->title = "KGI Team Setting";
 					<a href="javascript:setSameKgiTeamRemark(<?= $team['teamId'] ?>,<?= $kgiId ?>)">
 						<i class="fa fa-clipboard mr-5 text-secondary font-size-14" aria-hidden="true"></i>
 					</a>
-					<div class="col-12 text-center font-size-10">Same Remark</div>
+					<div class="col-12 text-center font-size-10"><?= Yii::t('app', 'Same Remark') ?></div>
 
 				</div>
 			</div>
@@ -149,7 +149,7 @@ $this->title = "KGI Team Setting";
 	<div class="col-12 text-end mt-10 pr-10">
 		<input type="hidden" name="kgiId" value="<?= $kgiId ?>">
 		<input type="hidden" name="role" value="<?= $role ?>">
-		<button type="submit" class="btn btn-primary" style="letter-spacing: 1px;">SAVE</button>
+		<button type="submit" class="btn btn-primary" style="letter-spacing: 1px;"><?= Yii::t('app', 'SAVE') ?></button>
 	</div>
 	<?php
 	ActiveForm::end(); ?>

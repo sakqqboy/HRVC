@@ -2,7 +2,7 @@
 	<div class="col-12 ligth-gray-box">
 		<div class="row pl-15 pr-20">
 			<div class="col-3  sub-tab-active pl-5">
-				Assigned Individuals
+				<?= Yii::t('app', 'Assigned Individuals') ?>
 			</div>
 			<div class="col-9  sub-tab">
 			</div>
@@ -23,7 +23,7 @@
 										<strong><?= $employee['name'] ?></strong>
 									</div>
 									<div class="col-12 pim-employee-title">
-										<?= $employee['title'] ?>
+										<?= Yii::t('app', $employee['title']) ?>
 									</div>
 								</div>
 							</div>

@@ -8,10 +8,10 @@
 					<span class="ml-10" id="kgi-name-view"></span>
 				</div>
 				<div class="modal-title border Completed-Backdrop7 badge rounded-pill bg-warning text-dark" id="status-view"></div>
-				<span class="border border-1 border-deadline-Backdrop7">Deadline <span class="font-size-10 text-dark pr-10"> : <span id="period-date-view"></span></span></span>
+				<span class="border border-1 border-deadline-Backdrop7"><?= Yii::t('app', 'Deadline') ?> <span class="font-size-10 text-dark pr-10"> : <span id="period-date-view"></span></span></span>
 			</div>
 			<div class="col-12 text-end">
-				<span class="border border-1 border-next-Backdrop7">Next Update <span class="font-size-10 text-dark pr-10"> : <span id="next-date-view"></span></span></span>
+				<span class="border border-1 border-next-Backdrop7"><?= Yii::t('app', 'Next Update') ?> <span class="font-size-10 text-dark pr-10"> : <span id="next-date-view"></span></span></span>
 			</div>
 			<div class="modal-body">
 				<div class="col-12 dashed-Backdrop7">
@@ -29,7 +29,7 @@
 						</div>
 						<div class="col-3 text-center">
 							<div class="col-12 bullseye-con-Backdrop3">
-								<i class="fa fa-bullseye" aria-hidden="true"></i> Target
+								<i class="fa fa-bullseye" aria-hidden="true"></i> <?= Yii::t('app', 'Target') ?>
 							</div>
 							<div class="col-12 million-number-Backdrop3">
 								<span id="target-view"></span>
@@ -42,7 +42,7 @@
 						</div>
 						<div class="col-3 text-center">
 							<div class="col-12 trophy-con-Backdrop3">
-								<i class="fa fa-trophy" aria-hidden="true"></i> Result
+								<i class="fa fa-trophy" aria-hidden="true"></i> <?= Yii::t('app', 'Result') ?>
 							</div>
 							<div class="col-12 million-number-Backdrop3">
 								<span id="result-view"></span>
@@ -77,14 +77,14 @@
 					</div>
 				</div>
 				<div class="col-12 Description-Backdrop7 pl-10">
-					Description
+					<?= Yii::t('app', 'Description') ?>
 				</div>
 				<div class="col-12 detailsDescription-Backdrop3 pl-20" id="decription-view">
 
 				</div>
 
 				<div class="col-12 Description-Backdrop7 pl-10">
-					Update Histories
+					<?= Yii::t('app', 'Update Histories') ?>
 				</div>
 				<hr>
 				<div class="col-12 history-box" id="kgi-history">

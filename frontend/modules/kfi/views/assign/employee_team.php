@@ -2,7 +2,6 @@
 if (isset($kfiTeamEmployee) && count($kfiTeamEmployee) > 0) {
 	foreach ($kfiTeamEmployee as $teamId => $kfiEmployee):
 		if (isset($kfiEmployee["team"])) {
-			//throw new Exception(print_r($kfiEmployee["team"], true));
 ?>
 			<div class="col-12 bg-header-assign pb-0 pt-0 pr-8 mt-10" id="team-employee-<?= $teamId ?>">
 				<div class="row">
@@ -11,29 +10,6 @@ if (isset($kfiTeamEmployee) && count($kfiTeamEmployee) > 0) {
 						<b><?= $kfiEmployee["team"]["teamName"] ?>, </b><span class="col-12 font-size-10">
 							<?= $kfiEmployee["team"]["departmentName"] ?></span>
 					</div>
-					<!-- <div class="col-2 font-size-12 pt-5 pb-3">
-					</div>
-					<div class="col-3 font-size-12 pt-5 pb-3 text-center"> -->
-					<!-- <b><span id="total-team-target-<?php //$teamId 
-											?>"><?php // number_format($kfiEmployee["team"]["totalTeamTarget"], 2) 
-												?></span></b>
-						<?php
-						//if ($kfiEmployee["team"]["isMore"] == '1') {
-						?>
-							<img src="<?php // Yii::$app->homeUrl 
-									?>images/icons/Settings/arrow-up.png" style="width:8px;margin-top:-3px;" class="ml-5">
-						<?php
-						//}
-						//if ($kfiEmployee["team"]["isMore"] == '0') {
-						?>
-							<img src="<?php // Yii::$app->homeUrl 
-									?>images/icons/Settings/arrow-down.png" style="width:8px;margin-top:-3px;" class="ml-5">
-						<?php
-						//}
-						?>
-						<span class="font-size-10"><?php // number_format($kfiEmployee["team"]["percentage"]) 
-										?> %</span> -->
-					<!-- </div> -->
 					<div class="col-7 font-size-12 pt-5 pb-3 text-center">
 
 						<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/blue-down.png" style="width:15px;margin-top:0px;float:right;cursor:pointer;" class="ml-5" onclick="javascript:showEmployeeTeamTarget(<?= $teamId ?>)" id="show-<?= $teamId ?>">
@@ -65,7 +41,7 @@ if (isset($kfiTeamEmployee) && count($kfiTeamEmployee) > 0) {
 								</div>
 							</div>
 							<div class="col-5 font-size-12 text-start pt-5">
-								<?= $employee["titleName"] ?>
+								<?= Yii::t('app', $employee["titleName"]) ?>
 							</div>
 
 						</div>

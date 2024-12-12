@@ -10,7 +10,7 @@ $this->title = 'Company KFI History';
     <div class="col-12">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
             style="margin-top: -3px;">
-        <strong class="pim-head-text"> Performance Indicator Matrices (PIM)</strong>
+        <strong class="pim-head-text"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</strong>
     </div>
     <div class="col-12 mt-10">
         <?= $this->render('header_filter', [
@@ -23,7 +23,7 @@ $this->title = 'Company KFI History';
                         <a href="<?= Yii::$app->request->referrer ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kfi/management/grid' ?>"
                             class="mr-5 font-size-12">
                             <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
-                            Back
+                            <?= Yii::t('app', 'Back') ?>
                         </a>
                         <span class="">
                             <?= $kfiDetail["kfiName"] ?>
@@ -108,7 +108,7 @@ $this->title = 'Company KFI History';
                                         </div>
                                         <div class="col-8 mt-10 pl-25 pr-0">
                                             <div class="row">
-                                                <div class="col-4 month-<?= $colorFormat ?> pt-2">Term</div>
+                                                <div class="col-4 month-<?= $colorFormat ?> pt-2"><?= Yii::t('app', 'Term') ?></div>
                                                 <div class="col-8 term-<?= $colorFormat ?>  pt-2">
                                                     <?= $kfi['fromDate'] == "" ? 'Not set' : $kfi['fromDate'] ?> -
                                                     <?= $kfi['toDate'] == "" ? 'Not set' : $kfi['toDate'] ?>
@@ -117,12 +117,12 @@ $this->title = 'Company KFI History';
                                         </div>
                                         <div class="col-4 mt-10">
                                             <div class="<?= $colorFormat ?>-tag text-center">
-                                                <?= $kfi['status'] == 1 ? 'In process' : 'Completed' ?>
+                                                <?= $kfi['status'] == 1 ? Yii::t('app', 'In process') : Yii::t('app', 'Completed') ?>
                                             </div>
                                         </div>
                                         <div class="col-8  pl-15 pr-20 pt-18">
                                             <div class="col-12 text-start pl-5 font-size-10">
-                                                Assign on
+                                                <?= Yii::t('app', 'Assign on') ?>
                                             </div>
                                             <div class="col-12 pt-2 pb-2">
                                                 <div class="row">
@@ -148,24 +148,11 @@ $this->title = 'Company KFI History';
                                                                 }
                                                                 ?>
                                                             </div>
-                                                            <!-- <div class="col-2 pic-afterKFI  pt-0">
-                                                    <?php
-                                                    if (isset($kfi['kfiEmployee'][2])) {
-                                                    ?>
-                                                    <img src="<?= Yii::$app->homeUrl . $kfi['kfiEmployee'][2] ?>"
-                                                        class=" pim-pic-gridKFINum">
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </div> -->
                                                             <div
                                                                 class="col-6  number-tag load-<?= $colorFormat ?> pr-0 pl-0 ml-7 pim-pic-gridKFINum ">
                                                                 <?= $kfi["employee"] ?>
                                                             </div>
-                                                            <!-- <div class="number-tag load-<?= $colorFormat ?> pr-0 pl-0 pt-3"
-                                                    style="margin-left: -3px;height:22px;width: 30px;margin-top: 1px;">
-                                                    <?= $kfi["employee"] ?>
-                                                </div> -->
+
                                                         </div>
                                                     </div>
                                                     <div class="col-6 pl-1 pt-9 pr-0 <?= $colorFormat ?>-assignKFI">
@@ -178,7 +165,7 @@ $this->title = 'Company KFI History';
                                                             </span>
                                                             <a href="<?= Yii::$app->homeUrl ?>kfi/assign/assign/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, "companyId" => $kfi['companyId']]) ?>"
                                                                 class="font-<?= $colorFormat ?>">
-                                                                Change Assigned
+                                                                <?= Yii::t('app', 'Change Assigned') ?>
                                                             </a>
                                                         <?php
                                                         } else { ?>
@@ -191,7 +178,7 @@ $this->title = 'Company KFI History';
                                                                 </div>
                                                                 <a href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(["kfiId" => $kfiId, 'openTab' => 1]) ?>"
                                                                     class="font-<?= $colorFormat ?>">
-                                                                    View Assigned
+                                                                    <?= Yii::t('app', 'View Assigned') ?>
                                                                 </a>
                                                             </div>
 
@@ -205,28 +192,21 @@ $this->title = 'Company KFI History';
                                             </div>
                                         </div>
                                         <div class="col-4 font-size-10 pt-15 text-end">
-                                            <!-- Apply text-end here for overall alignment -->
                                             <div class="col-12 text-center">Quant Ratio</div>
                                             <div class="col-12 pim-duedate text-center mt-2 text-end">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/diamon.svg"
                                                     class="pim-iconKFI" style="margin-top: -3px; margin-left: 3px;">
-                                                <b><?= $kfi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?></b>
+                                                <b><?= $kfi["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?></b>
                                             </div>
-
-                                            <!-- Horizontal line SVG -->
-                                            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="62" height="1" viewBox="0 0 65 1"
-                                    fill="none" class="mt-2">
-                                    <path d="M1 0.5L64 0.5" stroke="#9ABCE9" stroke-linecap="round" />
-                                </svg> -->
                                             <div class="col-12 mt-6 mb-6 border-bottom-<?= $colorFormat ?>">
                                             </div>
 
-                                            <div class="col-12 pr-0 mt-2 text-center">Update Interval</div>
+                                            <div class="col-12 pr-0 mt-2 text-center"><?= Yii::t('app', 'Update Interval') ?></div>
                                             <div class="col-12 pim-duedate text-center mt-2 text-end">
                                                 <b>
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/monthly.svg"
                                                         class="pim-iconKFI mr-3" style="margin-top: -3px; margin-left: 3px;">
-                                                    <?= $kfi["unit"] ?>
+                                                    <?= Yii::t('app', $kfi["unit"]) ?>
                                                 </b>
                                             </div>
                                         </div>
@@ -236,7 +216,7 @@ $this->title = 'Company KFI History';
                                                     <div class="col-12 font-size-10">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Target.svg"
                                                             class="pim-iconKFI" style="margin-top: 1px; margin-right: 3px;">
-                                                        Target
+                                                        <?= Yii::t('app', 'Target') ?>
                                                     </div>
                                                     <div class="col-12 number-pim">
                                                         <?php
@@ -258,7 +238,7 @@ $this->title = 'Company KFI History';
                                                     <div class="col-12 pt-13 font-size-12"><?= $kfi["code"] ?></div>
                                                 </div>
                                                 <div class="col-5 text-end pr-20">
-                                                    <div class="col-12 font-size-10">Result
+                                                    <div class="col-12 font-size-10"><?= Yii::t('app', 'Result') ?>
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Result.svg"
                                                             class="pim-iconKFI" style="margin-top: 1px; margin-left: 3px;">
                                                     </div>
@@ -288,7 +268,6 @@ $this->title = 'Company KFI History';
                                                     $percent = explode('.', $kfi['ratio']);
                                                     if (isset($percent[1])) {
                                                         if ($percent[1] != '00') {
-                                                            //$showPercent = $kfi['ratio'];
                                                             $showPercent = $percent[1];
                                                         } else {
                                                             $showPercent = $percent[0];
