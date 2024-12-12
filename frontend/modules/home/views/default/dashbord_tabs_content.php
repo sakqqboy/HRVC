@@ -202,7 +202,8 @@ use yii\bootstrap5\ActiveForm;
                     </div>
                     <div class="col-4 text-center">
                         <button class="btn-update btn-KFI"
-                            onclick="javascript:updateKfi(KFIData[currentKFIIndex].kfiId)">
+                            onclick="javascript:updateKfi(KFIData[currentKFIIndex].kfiId)" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop2">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg" class="mb-2"
                                 style="width: 12px; height: 12px;">
                             Update
@@ -316,7 +317,8 @@ use yii\bootstrap5\ActiveForm;
                     </div>
                     <div class="col-4 text-center">
                         <button class="btn-update btn-KGI"
-                            onclick="javascript:updateKgi(KGIData[currentKGIIndex].kgiId,KGIData[currentKGIIndex].id)">
+                            onclick="javascript:updateKgi(KGIData[currentKGIIndex].kgiId,KGIData[currentKGIIndex].id)"
+                            data-bs-toggle="modal" data-bs-target="#update-kgi-modal">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-black.svg" class="mb-2"
                                 style="width: 12px; height: 12px;">
                             Update
@@ -429,7 +431,8 @@ use yii\bootstrap5\ActiveForm;
                     </div>
                     <div class="col-4 text-center">
                         <button class="btn-update btn-KPI-0"
-                            onclick="javascript:updateKpi(KGIData[currentKGIIndex].id)">
+                            onclick="javascript:updateKpi(KPIData[currentKPIIndex].kpiId)" data-bs-toggle="modal"
+                            data-bs-target="#update-kpi-modal">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg" class="mb-2"
                                 style="width: 12px; height: 12px;">
                             Update
@@ -445,75 +448,32 @@ use yii\bootstrap5\ActiveForm;
         </div>
     </div>
 </div>
-<input type="hidden" value="create" id="acType">
-<?php $form = ActiveForm::begin([
-            'id' => 'create-kfi',
-            'method' => 'post',
-            'options' => [
-                'enctype' => 'multipart/form-data',
-            ],
-            'action' => Yii::$app->homeUrl . 'kfi/management/create-kfi'
-
-        ]); ?>
-<?= $this->render('create_modal', [
-            "companies" => $companies,
-            "units" => $units,
-            "months" => $months
-        ]) ?>
-<?php ActiveForm::end(); ?>
-<?php $form = ActiveForm::begin([
-            'id' => 'update-kfi',
-            'method' => 'post',
-            'options' => [
-                'enctype' => 'multipart/form-data',
-            ],
-            'action' => Yii::$app->homeUrl . 'kfi/management/save-update-kfi'
-
-        ]); ?>
-<?= $this->render('update_modal', [
-            "units" => $units,
-            "companies" => $companies,
-            "months" => $months,
-            "isManager" => $isManager
-        ]) ?>
-
-<?php ActiveForm::end(); ?>
-
-<input type="hidden" value="create" id="acType">
 <?php
-$form = ActiveForm::begin([
-    'id' => 'create-kgi',
-    'method' => 'post',
-    'options' => [
-        'enctype' => 'multipart/form-data',
-    ],
-    'action' => Yii::$app->homeUrl . 'kgi/management/create-kgi'
+function renderForm($formId, $actionUrl, $modalView, $variables, $view) {
+    $form = ActiveForm::begin([
+        'id' => $formId,
+        'method' => 'post',
+        'options' => ['enctype' => 'multipart/form-data'],
+        'action' => Yii::$app->homeUrl . $actionUrl,
+    ]);
 
-]); ?>
-<?= $this->render('modal_create', [
-    "units" => $units,
-    "companies" => $companies,
-    "months" => $months
-]) ?>
-<?php ActiveForm::end(); ?>
+    echo $view->render($modalView, $variables);
 
-<?php
-$form = ActiveForm::begin([
-    'id' => 'update-kgi',
-    'method' => 'post',
-    'options' => [
-        'enctype' => 'multipart/form-data',
-    ],
-    'action' => Yii::$app->homeUrl . 'kgi/management/update-kgi'
+    ActiveForm::end();
+}
 
-]); ?>
-<?= $this->render('modal_update', [
+$commonVariables = [
     "units" => $units,
     "companies" => $companies,
     "months" => $months,
-    "isManager" => $isManager
-]) ?>
-<?php ActiveForm::end(); ?>
+    "isManager" => $isManager ?? null,
+];
+
+// Pass Yii::$app->view to renderForm
+renderForm('update-kfi', 'kfi/management/save-update-kfi', 'modal_update_kfi', $commonVariables, Yii::$app->view);
+renderForm('update-kgi', 'kgi/management/update-kgi', 'modal_update_kgi', $commonVariables, Yii::$app->view);
+renderForm('update-kpi', 'kpi/management/update-kpi', 'modal_update_kpi', $commonVariables, Yii::$app->view);
+?>
 
 
 <script>
