@@ -1,4 +1,9 @@
-<?php if (empty($contentDetail['KFI'] ?? null) && empty($contentDetail['KGI'] ?? null) && empty($contentDetail['KPI'] ?? null)): ?>
+<?php
+
+use yii\bootstrap5\ActiveForm;
+
+ if (empty($contentDetail['KFI'] ?? null) && empty($contentDetail['KGI'] ?? null) && empty($contentDetail['KPI'] ?? null)): 
+ ?>
 <p>No data available.</p>
 <?php else: ?>
 <style>
@@ -90,6 +95,7 @@
 <div class="tab-pane fade show active" role="tabpanel" id="tab-content-container">
     <div class="row">
         <?php 
+        // print_r($units);
             if($tab == 'company') {       
         ?>
         <!-- Card 1 -->
@@ -195,7 +201,9 @@
                         <!-- แก้ไขจาก KFI-lasr-0 เป็น KFI-last-0 -->
                     </div>
                     <div class="col-4 text-center">
-                        <button class="btn-update btn-KFI" onclick="updateKfi(KFIData[currentKFIIndex].id)">
+                        <button class="btn-update btn-KFI"
+                            onclick="javascript:updateKfi(KFIData[currentKFIIndex].kfiId)" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop2">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg" class="mb-2"
                                 style="width: 12px; height: 12px;">
                             Update
@@ -308,7 +316,9 @@
                         <strong class="small-text" id="KGI-last-0">07/19/2024</strong>
                     </div>
                     <div class="col-4 text-center">
-                        <button class="btn-update btn-KGI" onclick="updateKgi(KGIData[currentKGIIndex].id)">
+                        <button class="btn-update btn-KGI"
+                            onclick="javascript:updateKgi(KGIData[currentKGIIndex].kgiId,KGIData[currentKGIIndex].id)"
+                            data-bs-toggle="modal" data-bs-target="#update-kgi-modal">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-black.svg" class="mb-2"
                                 style="width: 12px; height: 12px;">
                             Update
@@ -420,7 +430,9 @@
                         <strong class="small-text" id="KPI-last-0">ดาต้าจากอาเรย์</strong>
                     </div>
                     <div class="col-4 text-center">
-                        <button class="btn-update btn-KPI-0" onclick="updateKpi(KPIData[currentKPIIndex].id)">
+                        <button class="btn-update btn-KPI-0"
+                            onclick="javascript:updateKpi(KPIData[currentKPIIndex].kpiId)" data-bs-toggle="modal"
+                            data-bs-target="#update-kpi-modal">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg" class="mb-2"
                                 style="width: 12px; height: 12px;">
                             Update
@@ -436,94 +448,35 @@
         </div>
     </div>
 </div>
+<?php
+function renderForm($formId, $actionUrl, $modalView, $variables, $view) {
+    $form = ActiveForm::begin([
+        'id' => $formId,
+        'method' => 'post',
+        'options' => ['enctype' => 'multipart/form-data'],
+        'action' => Yii::$app->homeUrl . $actionUrl,
+    ]);
+
+    echo $view->render($modalView, $variables);
+
+    ActiveForm::end();
+}
+
+$commonVariables = [
+    "units" => $units,
+    "companies" => $companies,
+    "months" => $months,
+    "isManager" => $isManager ?? null,
+];
+
+// Pass Yii::$app->view to renderForm
+renderForm('update-kfi', 'kfi/management/save-update-kfi', 'modal_update_kfi', $commonVariables, Yii::$app->view);
+renderForm('update-kgi', 'kgi/management/update-kgi', 'modal_update_kgi', $commonVariables, Yii::$app->view);
+renderForm('update-kpi', 'kpi/management/update-kpi', 'modal_update_kpi', $commonVariables, Yii::$app->view);
+?>
+
+
 <script>
-// const KFIData = [{
-//         target: "1,000 M",
-//         result: "902,566",
-//         percentage: 75,
-//         name: "test KFIData 1",
-//         last: "07/19/2024",
-//         due: "08/19/2024",
-//         id: 1
-//     },
-//     {
-//         target: "2,000 M",
-//         result: "1,800,000",
-//         percentage: 90,
-//         name: "test KFIData 2",
-//         last: "07/18/2024",
-//         due: "08/18/2024",
-//         id: 1
-//     },
-//     {
-//         target: "3,000 M",
-//         result: "2,400,000",
-//         percentage: 80,
-//         name: "test KFIData 3",
-//         last: "07/10/2023",
-//         due: "08/10/2023",
-//         id: 1
-//     },
-// ];
-
-// const KGIData = [{
-//         target: "1,000 M",
-//         result: "902,566",
-//         percentage: 75,
-//         name: "test KGIData 1",
-//         last: "07/19/2024",
-//         due: "08/19/2024",
-//         id: 1
-//     },
-//     {
-//         target: "2,000 M",
-//         result: "1,800,000",
-//         percentage: 90,
-//         name: "test KGIData 2",
-//         last: "07/18/2024",
-//         due: "08/18/2024",
-//         id: 1
-//     },
-//     {
-//         target: "3,000 M",
-//         result: "2,400,000",
-//         percentage: 80,
-//         name: "test KGIData 3",
-//         last: "07/10/2023",
-//         due: "08/10/2023",
-//         id: 1
-//     },
-// ];
-
-// const KPIData = [{
-//         target: "1,000 M",
-//         result: "902,566",
-//         percentage: 75,
-//         name: "test KPIData 1",
-//         last: "07/19/2024",
-//         due: "08/19/2024",
-//         id: 1
-//     },
-//     {
-//         target: "2,000 M",
-//         result: "1,800,000",
-//         percentage: 90,
-//         name: "test KPIData 2",
-//         last: "07/18/2024",
-//         due: "08/18/2024",
-//         id: 1
-//     },
-//     {
-//         target: "3,000 M",
-//         result: "2,400,000",
-//         percentage: 80,
-//         name: "test KPIData 3",
-//         last: "07/10/2023",
-//         due: "08/10/2023",
-//         id: 1
-//     },
-// ];
-
 <?php
 function formatNumber($number) {
     if ($number >= 1000000) {
@@ -548,7 +501,8 @@ foreach ($contentDetail['KFI']['KFIData'] as $item) {
         'name' => $item['name'],
         'last' => $item['last'] ?? '-',
         'due' => $item['due'] ?? '-',
-        'id' => $item['id']
+        'id' => $item['id'],
+        'kfiId' => $item['kfiId']
     ];
 }
 
@@ -561,7 +515,8 @@ foreach ($contentDetail['KGI']['KGIData'] as $item) {
         'name' => $item['name'],
         'last' => $item['last'] ?? '-',
         'due' => $item['due'] ?? '-',
-        'id' => $item['id']
+        'id' => $item['id'],
+        'kgiId' => $item['kgiId']
     ];
 }
 
@@ -574,7 +529,8 @@ foreach ($contentDetail['KPI']['KPIData'] as $item) {
         'name' => $item['name'],
         'last' => $item['last'] ?? '-',
         'due' => $item['due'] ?? '-',
-        'id' => $item['id']
+        'id' => $item['id'],
+        'kpiId' => $item['kpiId']
     ];
 }
 // สร้าง JSON สำหรับฝั่ง JavaScript

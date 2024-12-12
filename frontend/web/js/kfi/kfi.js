@@ -99,6 +99,7 @@ function selectUnitUpdate(currentUnit) {
     $(".unit-" + currentUnit).css("color", "white");
 }
 function updateKfi(kfiId) {
+    // alert(kfiId);
     $("#acType").val('update');
     resetUnit();
     $("#staticBackdrop2").show();
