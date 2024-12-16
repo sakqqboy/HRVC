@@ -301,6 +301,13 @@
     background: var(--Due-Passed-Red, #E05757);
 }
 
+.btn-Locked {
+    border-radius: 3px;
+    border: none;
+    color: #000;
+    background: var(--Due-Passed-Red, #C0C0C0);
+}
+
 .btn-KFI {
     border-radius: 3px;
     border: none;

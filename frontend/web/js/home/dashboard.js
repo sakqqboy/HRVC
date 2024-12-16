@@ -5,9 +5,14 @@ if (window.location.host == 'localhost') {
     $baseUrl = window.location.protocol + "//" + window.location.host + '/';
 }
 $url = $baseUrl;
+
 let currentKFIIndex = 0; // Initial index for KFI
 let currentKGIIndex = 0; // Initial index for KGI
 let currentKPIIndex = 0; // Initial index for KPI
+let KFIData = []; // Declare globally
+let KGIData = []; // Declare globally
+let KPIData = []; // Declare globally
+
 
 function loadCompanyTap(companyId) {
     var url = $baseUrl + 'home/default/company-tab';
@@ -19,16 +24,12 @@ function loadCompanyTap(companyId) {
         data: { companyId: companyId },
         success: function (data) {
             $('#tab-content-container').html(data);
-            updateKFIData(currentKFIIndex);
-            initializeTabContent(); // เรียกฟังก์ชันจัดการเนื้อหาใหม่
-            handleAjaxSuccess()
         },
         error: function (xhr, status, error) {
             console.error('Error:', error);
         }
     });
 }
-
 function loadTeamTap(teamId) {
     var url = $baseUrl + 'home/default/team-tab';
 
@@ -39,8 +40,6 @@ function loadTeamTap(teamId) {
         data: { teamId: teamId },
         success: function (data) {
             $('#tab-content-container').html(data);
-            initializeTabContent(); // เรียกฟังก์ชันจัดการเนื้อหาใหม่
-            handleAjaxSuccess()
         },
         error: function (xhr, status, error) {
             console.error('Error:', error);
@@ -58,8 +57,6 @@ function loadSelfTap(employeeId) {
         data: { employeeId: employeeId },
         success: function (data) {
             $('#tab-content-container').html(data);
-            initializeTabContent(); // เรียกฟังก์ชันจัดการเนื้อหาใหม่
-            handleAjaxSuccess()
         },
         error: function (xhr, status, error) {
             console.error('Error:', error);
@@ -68,12 +65,71 @@ function loadSelfTap(employeeId) {
 }
 
 
-function initializeTabContent() {
-    // ฟังก์ชันที่จะเรียกทุกครั้งเมื่อเนื้อหาใหม่ถูกโหลด
-    updateKPIData(currentKPIIndex);
-    updateKGIData(currentKGIIndex);
+function updateData(index, type) {
+    const data = {
+        'KFI': KFIData,
+        'KGI': KGIData,
+        'KPI': KPIData
+    };
+
+    const dataType = data[type];
+    if (dataType && dataType[index]) {
+        const item = dataType[index]; // ดึงข้อมูลจากดัชนีที่เลือก
+
+        // อัปเดตข้อมูล Progress Bar
+        const progressElement = document.getElementById(`${type}-progress`);
+        progressElement.setAttribute('data-percentage', item.percentage);
+        setProgress(progressElement, item.percentage);
+
+        document.getElementById(`${type}-name-0`).innerText = item.name;
+        document.getElementById(`${type}-target-0`).innerText = item.target;
+        document.getElementById(`${type}-result-0`).innerText = item.result;
+        document.getElementById(`${type}-last-0`).innerText = item.last || '-';
+        document.getElementById(`${type}-due-0`).innerText = item.due || '-';
+        // document.getElementById(`${type}-count-0`).innerText = item.count || '-';
+
+    } else {
+        console.error(`No data found for ${type} with index ${index}`);
+    }
 }
 
+function changeKFIData(direction) {
+    // เปลี่ยนดัชนีตามทิศทางที่คลิก
+    if (direction == 'right') {
+        // ถ้ากดขวา จะเพิ่มดัชนี
+        currentKFIIndex = (currentKFIIndex + 1) % KFIData.length; // ถ้าเกินขอบเขตจะวนกลับไปที่ 0
+    } else if (direction == 'left') {
+        // ถ้ากดซ้าย จะลดดัชนี
+        currentKFIIndex = (currentKFIIndex - 1 + KFIData.length) % KFIData.length; // ถ้าเกินขอบเขตจะวนกลับไปที่ท้ายสุด
+    }
+
+    // ดึงข้อมูลชุดที่เลือกจาก KFIData ตามดัชนีที่ได้
+    // const selectedKFI = KFIData[currentKFIIndex];
+    // alert(`Selected KFI Item: ${JSON.stringify(selectedKFI)}`); // แสดงข้อมูลชุดที่เลือก
+
+    // เรียกใช้ฟังก์ชัน updateData เพื่อนำข้อมูลไปแสดงผล
+    updateData(currentKFIIndex, 'KFI');
+}
+
+// ฟังก์ชันเพื่อเปลี่ยนข้อมูล KGI เมื่อคลิกปุ่มซ้ายหรือขวา
+function changeKGIData(direction) {
+    if (direction == 'right') {
+        currentKGIIndex = (currentKGIIndex + 1) % KGIData.length;
+    } else if (direction == 'left') {
+        currentKGIIndex = (currentKGIIndex - 1 + KGIData.length) % KGIData.length;
+    }
+    updateData(currentKGIIndex, 'KGI');
+}
+
+// ฟังก์ชันเพื่อเปลี่ยนข้อมูล KPI เมื่อคลิกปุ่มซ้ายหรือขวา
+function changeKPIData(direction) {
+    if (direction == 'right') {
+        currentKPIIndex = (currentKPIIndex + 1) % KPIData.length;
+    } else if (direction == 'left') {
+        currentKPIIndex = (currentKPIIndex - 1 + KPIData.length) % KPIData.length;
+    }
+    updateData(currentKPIIndex, 'KPI');
+}
 
 function handleAjaxSuccess() {
     $('.progress').each(function () {
@@ -85,88 +141,6 @@ function handleAjaxSuccess() {
         }
         setProgress(this, percentage);
     });
-}
-
-
-// ฟังก์ชันเพื่ออัปเดตข้อมูล KFI บนหน้าเว็บ
-function updateKFIData(index) {
-    const data = KFIData[index];
-    // อัปเดตเปอร์เซ็นต์ใน progress bar
-    document.getElementById('KFI-progress').setAttribute('data-percentage', data.percentage);
-    document.querySelector('.progress-value').innerText = data.percentage + '%';
-    // อัปเดตค่า target และ result
-    document.getElementById('KFI-name-0').innerText = data.name;
-    document.getElementById('KFI-target-0').innerText = data.target;
-    document.getElementById('KFI-result-0').innerText = data.result;
-    document.getElementById('KFI-last-0').innerText = data.last; // อัปเดตวันที่ Last Updated
-    document.getElementById('KFI-due-0').innerText = data.due; // อัปเดตวันที่ Due Update Date
-}
-
-// เริ่มแสดงข้อมูลชุดแรก
-
-// ฟังก์ชันเพื่ออัปเดตข้อมูล KGI บนหน้าเว็บ
-function updateKGIData(index) {
-    const data = KGIData[index];
-    // อัปเดตเปอร์เซ็นต์ใน progress bar
-    document.getElementById('KGI-progress').setAttribute('data-percentage', data.percentage);
-    document.querySelector('.progress-value').innerText = data.percentage + '%';
-    // อัปเดตค่า target และ result
-    document.getElementById('KGI-name-0').innerText = data.name;
-    document.getElementById('KGI-target-0').innerText = data.target;
-    document.getElementById('KGI-result-0').innerText = data.result;
-    document.getElementById('KGI-last-0').innerText = data.last; // อัปเดตวันที่ Last Updated
-    document.getElementById('KGI-due-0').innerText = data.due; // อัปเดตวันที่ Due Update Date
-}
-
-// ฟังก์ชันเพื่ออัปเดตข้อมูล KPI บนหน้าเว็บ
-function updateKPIData(index) {
-
-    const data = KPIData[index];
-    // อัปเดตเปอร์เซ็นต์ใน progress bar
-    document.getElementById('KPI-progress').setAttribute('data-percentage', data.percentage);
-    document.querySelector('.progress-value').innerText = data.percentage + '%';
-    // อัปเดตค่า target และ result
-    document.getElementById('KPI-name-0').innerText = data.name;
-    document.getElementById('KPI-target-0').innerText = data.target;
-    document.getElementById('KPI-result-0').innerText = data.result;
-    document.getElementById('KPI-last-0').innerText = data.last; // อัปเดตวันที่ Last Updated
-    document.getElementById('KPI-due-0').innerText = data.due; // อัปเดตวันที่ Due Update Date
-}
-
-
-
-// ฟังก์ชันเพื่อเปลี่ยนข้อมูล KFI เมื่อคลิกปุ่มซ้ายหรือขวา
-function changeKFIData(direction) {
-    if (direction === 'right') {
-        currentKFIIndex = (currentKFIIndex + 1) % KFIData.length;
-    } else if (direction === 'left') {
-        currentKFIIndex = (currentKFIIndex - 1 + KFIData.length) % KFIData.length;
-    }
-    updateKFIData(currentKFIIndex);
-}
-
-
-// ฟังก์ชันเพื่อเปลี่ยนข้อมูล KGI เมื่อคลิกปุ่มซ้ายหรือขวา
-function changeKGIData(direction) {
-    if (direction === 'right') {
-        currentKGIIndex = (currentKGIIndex + 1) % KGIData.length;
-    } else if (direction === 'left') {
-        currentKGIIndex = (currentKGIIndex - 1 + KGIData.length) % KGIData.length;
-    }
-    updateKGIData(currentKGIIndex);
-}
-
-
-// ฟังก์ชันเพื่อเปลี่ยนข้อมูล KPI เมื่อคลิกปุ่มซ้ายหรือขวา
-function changeKPIData(direction) {
-
-    if (direction === 'right') {
-        currentKPIIndex = (currentKPIIndex + 1) % KPIData.length;
-    } else if (direction === 'left') {
-        // alert('5555');
-        currentKPIIndex = (currentKPIIndex - 1 + KPIData.length) % KPIData.length;
-    }
-    updateKPIData(currentKPIIndex);
 }
 
 

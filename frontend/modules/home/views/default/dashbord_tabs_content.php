@@ -1,11 +1,45 @@
 <?php
 
+use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
  if (empty($contentDetail['KFI'] ?? null) && empty($contentDetail['KGI'] ?? null) && empty($contentDetail['KPI'] ?? null)): 
  ?>
 <p>No data available.</p>
-<?php else: ?>
+<?php
+ 
+else:
+  
+    $updateClickKFI = 'onclick="javascript:updateKfi(KFIData[currentKFIIndex].kfiId)"';
+    // Default assignments
+$updateClickKGI = sprintf(
+    'onclick="javascript:updateKgi(%s, %s)" data-bs-toggle="modal" data-bs-target="#update-kgi-modal"',
+    'KGIData[currentKGIIndex].kgiId',
+    'KGIData[currentKGIIndex].id'
+);
+
+$updateClickKPI = sprintf(
+    'onclick="javascript:updateKpi(%s)" data-bs-toggle="modal" data-bs-target="#update-kpi-modal"',
+    'KPIData[currentKPIIndex].kpiId'
+);
+
+// Adjust based on the $tab value
+if ($tab == 'team') {
+    $kgiTeamId = 'KGIData[currentKGIIndex].id';
+    $updateClickKGI = sprintf(
+        'onclick="javascript:updateTeamKgi(%s)" data-bs-toggle="modal" data-bs-target="#update-kgi-modal-team"',
+        $kgiTeamId
+    );
+    $kpiTeamId = 'KPIData[currentKPIIndex].id';
+    $updateClickKPI = sprintf(
+        'onclick="javascript:updateTeamKpi(%s)" data-bs-toggle="modal" data-bs-target="#update-kpi-modal-team"',
+        $kpiTeamId 
+    );
+} elseif ($tab == 'self') {
+
+}
+
+?>
 <style>
 .progress {
     width: 40px;
@@ -110,17 +144,17 @@ use yii\bootstrap5\ActiveForm;
                             <span class="key-title">
                                 <img src="<?=Yii::$app->homeUrl?>images/icons/black-icons/FinancialSystem/KFI.svg"
                                     class="home-icon mr-5">
-                                Key Financial Indicator
+                                <?= Yii::t('app', 'Key Financial Indicator') ?>
                             </span>
                         </div>
                         <!-- Right Section -->
                         <div class="col-5 text-end">
                             <span class="completion-percentage"><?= $contentDetail['KFI']['showPercent'] ?>%</span>
-                            <span class="total-achievement">Total Achievement</span>
+                            <span class="total-achievement"><?= Yii::t('app', 'Total Achievement') ?></span>
                         </div>
                         <div class="col-12 pt-3 d-flex justify-content-between">
-                            <span class="total-progress">Total Progress</span>
-                            <span class="total-k">Total KFI
+                            <span class="total-progress"><?= Yii::t('app', 'Total Progress') ?></span>
+                            <span class="total-k"><?= Yii::t('app', 'Total KFI') ?>
                                 <strong class="bold-text"> <?= $contentDetail['KFI']['kfiCount'] ?> </strong>
                             </span>
                         </div>
@@ -138,7 +172,8 @@ use yii\bootstrap5\ActiveForm;
                 <div class="card bg-white" id="KFI" style="border: none;">
                     <div class="key-title-container" id="content-0">
                         <div class="col-9 d-flex">
-                            <span class="key-total" id="KFI-name-0">New Foreign Subscribe Clients</span>
+                            <span class="key-total"
+                                id="KFI-name-0"><?= Yii::t('app', 'New Foreign Subscribe Clients') ?></span>
                         </div>
                         <div class="col-2 d-flex justify-content-between">
                             <span class="toggle-text">
@@ -168,7 +203,7 @@ use yii\bootstrap5\ActiveForm;
                                         <span class="progress-right">
                                             <span class="progress-bar"></span>
                                         </span>
-                                        <div class="progress-value" id="progress-value">0%</div>
+                                        <div class="progress-value" id="">0%</div>
                                     </div>
                                 </div>
                             </div>
@@ -196,21 +231,29 @@ use yii\bootstrap5\ActiveForm;
 
                 <div class="d-flex justify-content-between align-items-center mt-3">
                     <div class="col-4 text-start">
-                        <p class="small-text text-muted mb-0">Last Updated on</p>
+                        <p class="small-text text-muted mb-0"><?= Yii::t('app', 'Last Updated on') ?></p>
                         <strong class="small-text" id="KFI-last-0">ดาต้าจากอาเรย์</strong>
                         <!-- แก้ไขจาก KFI-lasr-0 เป็น KFI-last-0 -->
                     </div>
                     <div class="col-4 text-center">
-                        <button class="btn-update btn-KFI"
-                            onclick="javascript:updateKfi(KFIData[currentKFIIndex].kfiId)" data-bs-toggle="modal"
+                        <?php if($role >= 5){?>
+
+                        <button class="btn-update btn-KFI" <?= $updateClickKFI ?> data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop2">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg" class="mb-2"
                                 style="width: 12px; height: 12px;">
-                            Update
+                            <?= Yii::t('app', 'Update') ?>
                         </button>
+                        <?php }else{?>
+                        <button class="btn-update btn-Locked">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/locked.svg" class="mb-2"
+                                style="width: 12px; height: 12px;">
+                            <?= Yii::t('app', 'Locked') ?>
+                        </button>
+                        <?php } ?>
                     </div>
                     <div class="col-4 text-end">
-                        <p class="small-textKFI mb-0">Due Update Date </p>
+                        <p class="small-textKFI mb-0"><?= Yii::t('app', 'Due Update Date') ?></p>
                         <strong class="small-text" id="KFI-due-0">ดาต้าจากอาเรย์</strong>
                     </div>
                 </div>
@@ -231,17 +274,17 @@ use yii\bootstrap5\ActiveForm;
                             <span class="key-title">
                                 <img src="<?=Yii::$app->homeUrl?>images/icons/black-icons/FinancialSystem/KGI.svg"
                                     class="home-icon mr-5">
-                                Key Goal Indicator
+                                <?= Yii::t('app', 'Key Goal Indicator') ?>
                             </span>
                         </div>
                         <!-- Right Section -->
                         <div class="col-5 text-end">
                             <span class="completion-percentage"><?= $contentDetail['KGI']['showPercent'] ?>%</span>
-                            <span class="total-achievement">Total Achievement</span>
+                            <span class="total-achievement"><?= Yii::t('app', 'Total Achievement') ?></span>
                         </div>
                         <div class="col-12 pt-3 d-flex justify-content-between">
-                            <span class="total-progress">Total Progress</span>
-                            <span class="total-k">Total KGI
+                            <span class="total-progress"><?= Yii::t('app', 'Total Progress') ?></span>
+                            <span class="total-k"><?= Yii::t('app', 'Total KGI') ?>
                                 <strong class="bold-text"> <?= $contentDetail['KGI']['kgiCount'] ?> </strong>
                             </span>
                         </div>
@@ -259,7 +302,7 @@ use yii\bootstrap5\ActiveForm;
                 <div class="card bg-white" id="KGI" style="border: none;">
                     <div class="key-title-container" id="content-KGI">
                         <div class="col-9 d-flex">
-                            <span class="key-total" id="KGI-name-0">Key Goal Indicator</span>
+                            <span class="key-total" id="KGI-name-0"><?= Yii::t('app', 'Key Goal Indicator') ?></span>
                         </div>
                         <div class="col-2 d-flex justify-content-between">
                             <span class="toggle-text">
@@ -284,7 +327,7 @@ use yii\bootstrap5\ActiveForm;
                                         data-color-right="#FDCA40" data-color-after="#FFF2D6">
                                         <span class="progress-left"><span class="progress-bar"></span></span>
                                         <span class="progress-right"><span class="progress-bar"></span></span>
-                                        <div class="progress-value" id="progress-value">0%</div>
+                                        <div class="progress-value" id="">0%</div>
                                     </div>
                                 </div>
                             </div>
@@ -293,14 +336,14 @@ use yii\bootstrap5\ActiveForm;
                             <small class="small-text text-muted">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Target.svg" class="pim-iconKGI"
                                     style="margin-top: 1px; margin-right: 3px;">
-                                Target
+                                <?= Yii::t('app', 'Target') ?>
                             </small>
                             <br>
                             <strong class="bold-text" id="KGI-target-0">ดาต้าจากอาเรย์</strong>
                         </div>
                         <div class="col-4 text-end">
                             <small class="small-text text-muted">
-                                Result
+                                <?= Yii::t('app', 'Result') ?>
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Result.svg" class="pim-iconKGI"
                                     style="margin-top: 1px; margin-left: 3px;">
                             </small>
@@ -312,20 +355,36 @@ use yii\bootstrap5\ActiveForm;
 
                 <div class="d-flex justify-content-between align-items-center mt-3">
                     <div class="col-4 text-start">
-                        <p class="small-text text-muted mb-0">Last Updated on</p>
+                        <p class="small-text text-muted mb-0"><?= Yii::t('app', 'Last Updated on') ?></p>
                         <strong class="small-text" id="KGI-last-0">07/19/2024</strong>
                     </div>
                     <div class="col-4 text-center">
-                        <button class="btn-update btn-KGI"
-                            onclick="javascript:updateKgi(KGIData[currentKGIIndex].kgiId,KGIData[currentKGIIndex].id)"
-                            data-bs-toggle="modal" data-bs-target="#update-kgi-modal">
+                        <?php if($role >= 5){?>
+                        <?php if($tab == 'self'){?>
+                        <button class="btn-update btn-KGI" onclick="chengeButtonKGI(KGIData[currentKGIIndex].id)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-black.svg" class="mb-2"
                                 style="width: 12px; height: 12px;">
-                            Update
+                            <?= Yii::t('app', 'Updated') ?>
                         </button>
+
+                        <?php }else {?>
+                        <button class="btn-update btn-KGI" <?= $updateClickKGI ?>>
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-black.svg" class="mb-2"
+                                style="width: 12px; height: 12px;">
+                            <?= Yii::t('app', 'Update')  ?>
+                        </button>
+                        <?  }?>
+                        <?php }else{?>
+                        <button class="btn-update btn-Locked">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/locked.svg" class="mb-2"
+                                style="width: 12px; height: 12px;">
+                            <?= Yii::t('app', 'Locked') ?>
+                        </button>
+                        <?php } ?>
+                        <!-- <strong class="bold-text" id="KGI-count-0">ดาต้าจากอาเรย์</strong> -->
                     </div>
                     <div class="col-4 text-end">
-                        <p class="small-textKGI mb-0">Due Update Date</p>
+                        <p class="small-textKGI mb-0"><?= Yii::t('app', 'Due Update Date') ?></p>
                         <strong class="small-text" id="KGI-due-0">ดาต้าจากอาเรย์</strong>
                     </div>
                 </div>
@@ -344,17 +403,17 @@ use yii\bootstrap5\ActiveForm;
                             <span class="key-title">
                                 <img src="<?=Yii::$app->homeUrl?>images/icons/black-icons/FinancialSystem/KPI.svg"
                                     class="home-icon mr-5">
-                                Key Performance Indicator
+                                <?= Yii::t('app', 'Key Performance Indicator') ?>
                             </span>
                         </div>
                         <!-- Right Section -->
                         <div class="col-5 text-end">
                             <span class="completion-percentage"><?= $contentDetail['KPI']['showPercent'] ?>%</span>
-                            <span class="total-achievement">Completed</span>
+                            <span class="total-achievement"><?= Yii::t('app', 'Completed') ?></span>
                         </div>
                         <div class="col-12 pt-3 d-flex justify-content-between">
-                            <span class="total-progress">Total Progress</span>
-                            <span class="total-k">Total KPI
+                            <span class="total-progress"><?= Yii::t('app', 'Total Progress') ?></span>
+                            <span class="total-k"><?= Yii::t('app', 'Total KPI') ?>
                                 <strong class="bold-text"> <?= $contentDetail['KPI']['kpiCount'] ?> </strong>
                             </span>
                         </div>
@@ -373,7 +432,8 @@ use yii\bootstrap5\ActiveForm;
                 <div class="card bg-white" id="KPI" style="border: none;">
                     <div class="key-title-container" id="content-KPI">
                         <div class="col-9 d-flex">
-                            <span class="key-total" id="KPI-name-0">Key Performance Indicator</span>
+                            <span class="key-total"
+                                id="KPI-name-0"><?= Yii::t('app', 'Key Performance Indicator') ?></span>
                         </div>
                         <div class="col-2 d-flex justify-content-between">
                             <span class="toggle-text">
@@ -398,7 +458,7 @@ use yii\bootstrap5\ActiveForm;
                                         data-color-right="#FF715B" data-color-after="#FFEAE6">
                                         <span class="progress-left"><span class="progress-bar"></span></span>
                                         <span class="progress-right"><span class="progress-bar"></span></span>
-                                        <div class="progress-value" id="progress-value">0%</div>
+                                        <div class="progress-value" id="">0%</div>
                                     </div>
                                 </div>
                             </div>
@@ -407,14 +467,14 @@ use yii\bootstrap5\ActiveForm;
                             <small class="small-text text-muted">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Target.svg" class="pim-iconKPI"
                                     style="margin-top: 1px; margin-right: 3px;">
-                                Target
+                                <?= Yii::t('app', 'Target') ?>
                             </small>
                             <br>
                             <strong class="bold-text" id="KPI-target-0">ดาต้าจากอาเรย์</strong>
                         </div>
                         <div class="col-4 text-end">
                             <small class="small-text text-muted">
-                                Result
+                                <?= Yii::t('app', 'Result') ?>
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Result.svg" class="pim-iconKPI"
                                     style="margin-top: 1px; margin-left: 3px;">
                             </small>
@@ -426,20 +486,41 @@ use yii\bootstrap5\ActiveForm;
 
                 <div class="d-flex justify-content-between align-items-center mt-3">
                     <div class="col-4 text-start">
-                        <p class="small-text text-muted mb-0">Last Updated on</p>
+                        <p class="small-text text-muted mb-0"><?= Yii::t('app', 'Last Updated on') ?></p>
                         <strong class="small-text" id="KPI-last-0">ดาต้าจากอาเรย์</strong>
                     </div>
                     <div class="col-4 text-center">
-                        <button class="btn-update btn-KPI-0"
-                            onclick="javascript:updateKpi(KPIData[currentKPIIndex].kpiId)" data-bs-toggle="modal"
-                            data-bs-target="#update-kpi-modal">
+                        <?php if($role >= 5){?>
+                        <?php if($tab == 'self'){?>
+                        <!-- 
+                        <a class="btn-update btn-KPI-0" onclick="changeKPIData('left')">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg" class="mb-2"
                                 style="width: 12px; height: 12px;">
-                            Update
+                            <?= Yii::t('app', 'Updated') ?>
+                        </a> -->
+                        <button class="btn-update btn-KPI" onclick="chengeButtonKPI(KPIData[currentKPIIndex].id)">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg" class="mb-2"
+                                style="width: 12px; height: 12px;">
+                            <?= Yii::t('app', 'Updated') ?>
                         </button>
+                        <?php }else {?>
+                        <button class="btn-update btn-KPI-0" <?= $updateClickKPI ?>>
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg" class="mb-2"
+                                style="width: 12px; height: 12px;">
+                            <?= Yii::t('app', 'Update') ?>
+                        </button>
+                        <?php  } ?>
+                        <?php }else{?>
+                        <button class="btn-update btn-Locked">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/locked.svg" class="mb-2"
+                                style="width: 12px; height: 12px;">
+                            <?= Yii::t('app', 'Locked') ?>
+                        </button>
+                        <?php } ?>
+                        <!-- <strong class="bold-text" id="KPI-count-0">ดาต้าจากอาเรย์</strong> -->
                     </div>
                     <div class="col-4 text-end">
-                        <p class="small-textKPI mb-0">Due Update Date</p>
+                        <p class="small-textKPI mb-0"><?= Yii::t('app', 'Due Update Date') ?></p>
                         <strong class="small-text" id="KPI-due-0">ดาต้าจากอาเรย์</strong>
                     </div>
                 </div>
@@ -449,6 +530,7 @@ use yii\bootstrap5\ActiveForm;
     </div>
 </div>
 <?php
+
 function renderForm($formId, $actionUrl, $modalView, $variables, $view) {
     $form = ActiveForm::begin([
         'id' => $formId,
@@ -473,89 +555,156 @@ $commonVariables = [
 renderForm('update-kfi', 'kfi/management/save-update-kfi', 'modal_update_kfi', $commonVariables, Yii::$app->view);
 renderForm('update-kgi', 'kgi/management/update-kgi', 'modal_update_kgi', $commonVariables, Yii::$app->view);
 renderForm('update-kpi', 'kpi/management/update-kpi', 'modal_update_kpi', $commonVariables, Yii::$app->view);
+
+renderForm('update-kgi', 'kgi/kgi-team/update-kgi-team', 'modal_update_kgiteam', $commonVariables, Yii::$app->view);
+renderForm('update-kpi', 'kpi/kpi-team/update-kpi-team', 'modal_update_kpiteam', $commonVariables, Yii::$app->view);
+
 ?>
 
 
 <script>
 <?php
 function formatNumber($number) {
+    if (!is_numeric($number) || $number == null) {
+        return '0.00'; // Return a default value for invalid input
+    }
+    $number = (float) $number; // Ensure the value is treated as a float
+
     if ($number >= 1000000) {
-        return number_format($number / 1000000, 2). ' M'; // For millions
-    } elseif($number >= 1000) {
-        return number_format($number / 1000, 2). ' K'; // For thousands
+        return number_format($number / 1000000, 2) . ' M'; // For millions
+    } elseif ($number >= 1000) {
+        return number_format($number / 1000, 2) . ' K'; // For thousands
     }
     return number_format($number, 2); // For smaller numbers
 }
-
-// แปลง PHP array เป็น JSON สำหรับ JavaScript
+// เตรียมข้อมูลจาก PHP (เหมือนเดิม)
 $kfiData = [];
 $kgiData = [];
 $kpiData = [];
 
-// // เตรียม KFIData
-foreach ($contentDetail['KFI']['KFIData'] as $item) {
-    $kfiData[] = [
-        'target' => formatNumber($item['target'], 2),
-        'result' => formatNumber($item['result'], 2),
-        'percentage' => floatval($item['percentage']),
-        'name' => $item['name'],
-        'last' => $item['last'] ?? '-',
-        'due' => $item['due'] ?? '-',
-        'id' => $item['id'],
-        'kfiId' => $item['kfiId']
-    ];
-}
 
-// เตรียม KGIData
-foreach ($contentDetail['KGI']['KGIData'] as $item) {
-    $kgiData[] = [
-        'target' => formatNumber($item['target'], 2),
-        'result' => formatNumber($item['result'], 2),
-        'percentage' => floatval($item['percentage']),
-        'name' => $item['name'],
-        'last' => $item['last'] ?? '-',
-        'due' => $item['due'] ?? '-',
-        'id' => $item['id'],
-        'kgiId' => $item['kgiId']
-    ];
-}
+    // เตรียม KPIData
+    foreach ($contentDetail['KPI']['KPIData'] as $item) {
+        $kpiData[] = [
+            'target' => formatNumber($item['target'], 2),
+            'result' => formatNumber($item['result'], 2),
+            'percentage' => floatval($item['percentage']),
+            'name' => $item['name'],
+            'last' => $item['last'] ?? '-',
+            'due' => $item['due'] ?? '-',
+            'id' => $item['id'],
+            'kpiId' => $item['kpiId'],
+            'count'=> $contentDetail['KPI']['kpiCount'],
+        ];
+    }
+    
+    // เตรียม KGIData
+    foreach ($contentDetail['KGI']['KGIData'] as $item) {
+        $kgiData[] = [
+            'target' => formatNumber($item['target'], 2),
+            'result' => formatNumber($item['result'], 2),
+            'percentage' => floatval($item['percentage']),
+            'name' => $item['name'],
+            'last' => $item['last'] ?? '-',
+            'due' => $item['due'] ?? '-',
+            'id' => $item['id'],
+            'kgiId' => $item['kgiId'],
+            'count'=> $contentDetail['KGI']['kgiCount'],
+        ];
+    }
 
-// // เตรียม KPIData
-foreach ($contentDetail['KPI']['KPIData'] as $item) {
-    $kpiData[] = [
-        'target' => formatNumber($item['target'], 2),
-        'result' => formatNumber($item['result'], 2),
-        'percentage' => floatval($item['percentage']),
-        'name' => $item['name'],
-        'last' => $item['last'] ?? '-',
-        'due' => $item['due'] ?? '-',
-        'id' => $item['id'],
-        'kpiId' => $item['kpiId']
-    ];
-}
-// สร้าง JSON สำหรับฝั่ง JavaScript
-echo "const KFIData = " . json_encode($kfiData, JSON_PRETTY_PRINT) . ";";
-echo "const KGIData = " . json_encode($kgiData, JSON_PRETTY_PRINT) . ";";
-echo "const KPIData = " . json_encode($kpiData, JSON_PRETTY_PRINT) . ";";
+    if ($tab == 'company') {
+        // เตรียม KFIData
+        foreach ($contentDetail['KFI']['KFIData'] as $item) {
+            $kfiData[] = [
+                'target' => formatNumber($item['target'], 2),
+                'result' => formatNumber($item['result'], 2),
+                'percentage' => floatval($item['percentage']),
+                'name' => $item['name'],
+                'last' => $item['last'] ?? '-',
+                'due' => $item['due'] ?? '-',
+                'id' => $item['id'],
+                'kfiId' => $item['kfiId'],
+                'count'=> $contentDetail['KFI']['kfiCount'],
+            ];
+        }
+    }
+
 ?>
 
 $(document).ready(function() {
-
-    updateKPIData(currentKPIIndex);
-    updateKFIData(currentKFIIndex);
-    updateKGIData(currentKGIIndex);
-
-    // ค้นหา element ทุกตัวที่มี class `.progress`
-    $('.progress').each(function() {
-        const percentage = parseInt($(this).data('percentage'), 10);
-
-        if (isNaN(percentage) || percentage < 0 || percentage > 100) {
-            console.error(`Invalid percentage value: ${percentage}`);
-            return;
-        }
-
-        setProgress(this, percentage);
-    });
+    // alert(`start`); // แสดงข้อมูลชุดที่เลือก
+    chaengeData()
+    handleAjaxSuccess()
 });
+
+function chaengeData() {
+    // alert(`start`);
+    KFIData = <?php echo json_encode($kfiData); ?>;
+    KGIData = <?php echo json_encode($kgiData); ?>;
+    KPIData = <?php echo json_encode($kpiData); ?>;
+    // alert(`start`);
+    // Check and update data if available
+    if (KFIData.length > 0) updateData(currentKFIIndex, 'KFI');
+    if (KGIData.length > 0) updateData(currentKGIIndex, 'KGI');
+    if (KPIData.length > 0) updateData(currentKPIIndex, 'KPI');
+
+}
+
+
+<?php $baseUrl = Yii::$app->homeUrl;?>
+
+function chengeButtonKGI(id) {
+    if (isNaN(id)) {
+        alert("Invalid ID. Please provide a numeric value.");
+        return;
+    }
+    const baseUrl = '<?= $baseUrl ?>'; // Base URL จาก PHP
+    var url = `${baseUrl}home/dashboard/kgi-employee-id`;
+    // alert(url);
+    $.ajax({
+        type: "POST",
+        dataType: 'JSON',
+        url: url,
+        data: {
+            id: id
+        },
+        success: function(data) {
+            // alert(data);
+            kgiEmployeeId = data.kgiEmployeeId;
+            const kgiUrl = `${baseUrl}kgi/kgi-personal/update-personal-kgi/` + kgiEmployeeId;
+            // alert(kgiUrl);
+            window.location.href = kgiUrl;
+        },
+    });
+
+}
+
+function chengeButtonKPI(id) {
+    if (isNaN(id)) {
+        alert("Invalid ID. Please provide a numeric value.");
+        return;
+    }
+    const baseUrl = '<?= $baseUrl ?>'; // Base URL จาก PHP
+    var url = `${baseUrl}home/dashboard/kpi-employee-id`;
+    // alert(url);
+    $.ajax({
+        type: "POST",
+        dataType: 'JSON',
+        url: url,
+        data: {
+            id: id
+        },
+        success: function(data) {
+            // alert(data);
+            kpiEmployeeId = data.kpiEmployeeId;
+            const kpiUrl = `${baseUrl}kpi/kpi-personal/update-personal-kpi/` + kpiEmployeeId;
+            // alert(kpiUrl);
+            window.location.href = kpiUrl;
+        },
+    });
+
+}
 </script>
+
 <?php endif; ?>
