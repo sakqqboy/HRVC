@@ -1,7 +1,6 @@
 <?php
 
 use common\models\ModelMaster;
-use frontend\models\hrvc\KgiBranch;
 use frontend\models\hrvc\KgiTeam;
 use frontend\models\hrvc\Unit;
 
@@ -9,11 +8,11 @@ use frontend\models\hrvc\Unit;
 <table class="table table-responsive-lg">
 	<thead>
 		<tr class="font-size-12">
-			<th>KPI Name</th>
-			<th>Month</th>
-			<th>Unit</th>
-			<th>Raito</th>
-			<th>Branch(es)</th>
+			<th><?= Yii::t('app', 'KPI Name') ?></th>
+			<th><?= Yii::t('app', 'Month') ?></th>
+			<th><?= Yii::t('app', 'Unit') ?></th>
+			<th><?= Yii::t('app', 'Raito') ?></th>
+			<th><?= Yii::t('app', 'Branch') ?></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -54,8 +53,8 @@ use frontend\models\hrvc\Unit;
 						</a>
 					</td>
 
-					<td><?= ModelMaster::shotMonthText($kgi["month"]) ?></td>
-					<td><?= Unit::unitName($kgi["unitId"]) ?></td>
+					<td><?= Yii::t('app', ModelMaster::shotMonthText($kgi["month"])) ?></td>
+					<td><?= Yii::t('app', Unit::unitName($kgi["unitId"])) ?></td>
 					<td class="text-center">
 						<span class="pro-load-table">
 							<?= $number ?>
@@ -86,7 +85,7 @@ use frontend\models\hrvc\Unit;
 		} else { ?>
 			<tr style="line-height: 60px;">
 				<td class="text-center font-size-16" colspan="5">
-					There are no related KGI for this KPI.
+					<?= Yii::t('app', 'There are no related KGI for this KPI') ?>.
 				</td>
 			</tr>
 		<?php

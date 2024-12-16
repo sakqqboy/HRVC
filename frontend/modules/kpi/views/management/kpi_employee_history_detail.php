@@ -10,13 +10,13 @@ $this->title = 'Employee KPI History';
 	<div class="row">
 		<div class="col-8">
 			<i class="fa fa-users font-size-20" aria-hidden="true"></i> <strong class="font-size-20">
-				Request changing KPI Team target
+				<?= Yii::t('app', 'Request changing KPI Team target') ?>
 			</strong>
 		</div>
 		<div class="col-4 text-end pr-15">
 			<a href="<?= Yii::$app->homeUrl ?>kpi/management/wait-approve" class="btn btn-secondary font-size-12">
 				<i class="fa fa-chevron-left mr-5" aria-hidden="true"></i>
-				Back
+				<?= Yii::t('app', 'Back') ?>
 			</a>
 		</div>
 	</div>
@@ -25,10 +25,10 @@ $this->title = 'Employee KPI History';
 		<div class="row">
 			<div class="col-lg-2 col-md-6 col-2 text-center">
 				<div class="col-12 pt-25 pb-25 font-b font-size-20">
-					<?= $kpiDetail["monthName"] ?>
+					<?= Yii::t('app', $kpiDetail["monthName"]) ?>
 				</div>
 				<div class="col-12  text-center">
-					<p class="font-size-10 mb-20">Priority</p>
+					<p class="font-size-10 mb-20"><?= Yii::t('app', 'Priority') ?></p>
 					<div class="circle-Priority" style="margin-left: 70px !important;">
 						<?= $kpiDetail["priority"] ?>
 					</div>
@@ -36,16 +36,16 @@ $this->title = 'Employee KPI History';
 			</div>
 			<div class="col-lg-3 col-md-6 col-3">
 				<div class="col-12 Quant-ratio-Backdrop3">
-					Quant Ratio
+					<?= Yii::t('app', 'Quant Ratio') ?>
 				</div>
 				<div class="col-12 diamond-con-Backdrop3 mt-10">
 					<i class="fa fa-diamond" aria-hidden="true"></i>
-					<span id="quanRatioHistory"><?= $kpiDetail["quantRatio"] == 1 ? "Quantity" : "Quality" ?></span>
+					<span id="quanRatioHistory"><?= $kpiDetail["quantRatio"] == 1 ? Yii::t('app', "Quantity") : Yii::t('app', "Quality") ?></span>
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-6 col-3 text-center">
 				<div class="col-12 bullseye-con-Backdrop3">
-					<i class="fa fa-bullseye" aria-hidden="true"></i> Target
+					<i class="fa fa-bullseye" aria-hidden="true"></i> <?= Yii::t('app', 'Target') ?>
 				</div>
 				<div class="col-12 million-number-Backdrop3 mt-10" id="targetHistory">
 					<?= $kpiDetail["amountType"] == 1 ? number_format($kpiDetail["targetAmount"], 2) : number_format($kpiDetail["targetAmount"]) ?>
@@ -58,7 +58,7 @@ $this->title = 'Employee KPI History';
 			</div>
 			<div class="col-lg-3 cl-md-6 col-3 text-center">
 				<div class="col-12 trophy-con-Backdrop3">
-					<i class="fa fa-trophy" aria-hidden="true"></i> Result
+					<i class="fa fa-trophy" aria-hidden="true"></i> <?= Yii::t('app', 'Result') ?>
 				</div>
 				<div class="col-12 million-number-Backdrop3 mt-10 " id="resultHistory">
 					<?= $kpiDetail["amountType"] == 1 ? number_format($kpiDetail["result"], 2) : number_format($kpiDetail["result"]) ?>
@@ -68,10 +68,10 @@ $this->title = 'Employee KPI History';
 				<div class="col-lg-2 col-md-6 col-5"></div>
 				<div class="col-lg-4 col-md-6 col-6">
 					<div class="col-12 padding-update-Backdrop3">
-						Update Interval
+						<?= Yii::t('app', 'Update Interval') ?>
 					</div>
 					<div class="col-12 update-mouth-Backdrop3 mt-10" id="unitHistory">
-						<?= $kpiDetail["unitText"] ?>
+						<?= Yii::t('app', $kpiDetail["unitText"]) ?>
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6 col-6" style="margin-top:-20px;">
@@ -101,10 +101,10 @@ $this->title = 'Employee KPI History';
 					<thead>
 						<tr style="background-color: #E6E6FA;">
 							<th>#</th>
-							<th class="text-center">Target</th>
-							<th class=text-center>Reson</th>
-							<th>By</th>
-							<th>Status</th>
+							<th class="text-center"><?= Yii::t('app', 'Target') ?></th>
+							<th class=text-center><?= Yii::t('app', 'Reson') ?></th>
+							<th><?= Yii::t('app', 'By') ?></th>
+							<th><?= Yii::t('app', 'Status') ?></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -138,7 +138,7 @@ $this->title = 'Employee KPI History';
 								<td class="text-end font-b"><?= isset($decimalTarget[1]) && $decimalTarget[1] == '00' ? number_format($history["target"]) : number_format($history["target"], 2) ?></td>
 								<td style="width: 10%;"><?= $history["detail"] ?></td>
 								<td>&nbsp;<?= User::employeeNameByuserId($history["createrId"]) ?></td>
-								<td class="<?= $class ?>"><?= $textStatus ?></td>
+								<td class="<?= $class ?>"><?= Yii::t('app', $textStatus) ?></td>
 							</tr>
 						<?php
 							$a++;
@@ -148,14 +148,14 @@ $this->title = 'Employee KPI History';
 				</table>
 			<?php
 			} else { ?>
-				<div class="col-12 text-secondary font-b font-size-14 mt-10">Not fouund</div>
+				<div class="col-12 text-secondary font-b font-size-14 mt-10"><?= Yii::t('app', 'Not fouund') ?></div>
 			<?php
 
 			}
 			?>
 		</div>
 		<div class="col-lg-6 col-md-6 col-12">
-			<div class="col-12 font-b pb-5 border-bottom text-end">Employees</div>
+			<div class="col-12 font-b pb-5 border-bottom text-end"><?= Yii::t('app', 'Employee') ?></div>
 			<?php
 			if (isset($allEmployee) && count($allEmployee) > 0) {
 			?>
@@ -164,9 +164,9 @@ $this->title = 'Employee KPI History';
 						<tr class="bg-body-secondary">
 							<th>#</th>
 							<th>Name</th>
-							<th class="text-center">Target</th>
-							<th class="text-center">Result</th>
-							<th>Assigned By</th>
+							<th class="text-center"><?= Yii::t('app', 'Target') ?></th>
+							<th class="text-center"><?= Yii::t('app', 'Result') ?></th>
+							<th><?= Yii::t('app', 'Assigned By') ?></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -193,7 +193,7 @@ $this->title = 'Employee KPI History';
 			<?php
 			} else {
 			?>
-				<div class="col-12 text-secondary font-b font-size-14 mt-10">Not fouund</div>
+				<div class="col-12 text-secondary font-b font-size-14 mt-10"><?= Yii::t('app', 'Not fouund') ?></div>
 			<?php
 			}
 			?>

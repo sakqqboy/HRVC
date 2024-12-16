@@ -6,32 +6,21 @@ use frontend\models\hrvc\Unit;
 
 $this->title = 'KGI KPI';
 ?>
-
-<?php // $this->render('modal_kpi_view') 
-?>
-<?php // $this->render('modal_team_history') 
-?>
-<?php // $this->render('modal_employee_history') 
-?>
 <div class="col-12">
 	<div class="alert-box text-center">
-		S A V E D ! ! !
+		<?= Yii::t('app', 'S A V E D ! ! !') ?>
 	</div>
 	<table class="table table-borderless">
 		<thead>
 			<tr class="pim-table-header text-center">
-				<th class="text-start" style="border-top-left-radius: 4px;border-bottom-left-radius: 4px;">RELATED KEY PERFORMANCE INDICATOR</th>
-				<th>MONTH</th>
-				<th>UNIT</th>
-				<th>TARGET</th>
-				<th>CODE</th>
-				<th>RATIO</th>
-				<th style="width: 10%;">TEAM</th>
+				<th class="text-start" style="border-top-left-radius: 4px;border-bottom-left-radius: 4px;"><?= Yii::t('app', 'RELATED KEY PERFORMANCE INDICATOR') ?></th>
+				<th><?= Yii::t('app', 'MONTH') ?></th>
+				<th><?= Yii::t('app', 'UNIT') ?></th>
+				<th><?= Yii::t('app', 'TARGET') ?></th>
+				<th><?= Yii::t('app', 'CODE') ?></th>
+				<th><?= Yii::t('app', 'RATIO') ?></th>
+				<th style="width: 10%;"><?= Yii::t('app', 'TEAM') ?></th>
 				<th style="border-top-right-radius: 4px;border-bottom-right-radius: 4px;">
-					<!-- <a class="btn-create font-size-12 text-center no-underline" id="editRelateKgi" style="padding-left: 10px;padding-right:10px;" href="javascript:showEditRelateKgi(1,<?php // $kpiId 
-																													?>)">Edit</a>
-					<a class="btn-create font-size-12 text-center no-underline" id="saveRelateKgi" style="padding-left: 10px;padding-right:10px;display:none;" href="javascript:showEditRelateKgi(0,<?php // $kpiId 
-																															?>)">Save</a> -->
 				</th>
 			</tr>
 		</thead>
@@ -45,13 +34,11 @@ $this->title = 'KGI KPI';
 					</tr>
 					<tr id="kgi-<?= $kgiId ?>" class="text-center pim-table-text related-table-background">
 						<td class="text-start font-b pt-10" style="border-top-left-radius: 3px;border-bottom-left-radius: 3px;letter-spacing:0.5px;">
-							<!-- <input type="checkbox" id="check-relate-kgi" class="checkbox-sm mr-5" style="display:none;" value="<?php // $kgiId 
-																						?>" name="kgi" <?= isset($ghp[$kgiId]) ? 'checked' : '' ?>> -->
 							<?= $i ?>.
 							<?= $kgi["kgiName"] ?>
 						</td>
-						<td><?= $kgi["month"] ?></td>
-						<td><?= $kgi["unit"] ?></td>
+						<td><?= Yii::t('app', $kgi["month"]) ?></td>
+						<td><?= Yii::t('app', $kgi["unit"]) ?></td>
 						<td class="text-end"><?= $kgi["targetAmount"] ?></td>
 						<td><?= $kgi["code"] ?></td>
 						<td><?= $kgi["ratio"] ?></td>
@@ -75,7 +62,7 @@ $this->title = 'KGI KPI';
 						<td style="border-top-right-radius: 3px;border-bottom-right-radius: 3px;">
 							<div class="col-12 pt-3" style="background-color: #EDF5FF;color:#003276;cursor:pointer;">
 								<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/detail.png" class="icon-table">
-								Detail
+								<?= Yii::t('app', 'Detail') ?>
 							</div>
 						</td>
 					</tr>
@@ -89,7 +76,7 @@ $this->title = 'KGI KPI';
 				?>
 				<tr style="line-height: 60px;">
 					<td class="text-center font-size-16" colspan="8">
-						There are no related KPI for this KGI.
+						<?= Yii::t('app', 'There are no related KPI for this KGI') ?>.
 					</td>
 				</tr>
 			<?php

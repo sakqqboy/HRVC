@@ -7,12 +7,12 @@ $this->title = 'Waiting for approve KPI';
 <div class="col-12 mt-90">
 	<div class="row">
 		<div class="col-8">
-			<i class="fa fa-clock-o font-size-20" aria-hidden="true"></i> <strong class="font-size-20"> Waiting for approve KPI</strong>
+			<i class="fa fa-clock-o font-size-20" aria-hidden="true"></i> <strong class="font-size-20"> <?= Yii::t('app', 'Waiting for approve KPI') ?></strong>
 		</div>
 		<div class="col-4 text-end pr-15">
 			<a href="<?= Yii::$app->homeUrl ?>kpi/management/assign-kpi" class="btn btn-secondary font-size-12">
 				<i class="fa fa-chevron-left mr-5" aria-hidden="true"></i>
-				Back
+				<?= Yii::t('app', 'Back') ?>
 			</a>
 		</div>
 	</div>
@@ -23,11 +23,11 @@ $this->title = 'Waiting for approve KPI';
 			<table class="table table-striped">
 				<thead class="table table-secondary">
 					<tr class="secondary-setting">
-						<th>KPI Contents</th>
-						<th>Employee</th>
-						<th>Target</th>
-						<th>New Target</th>
-						<th>Reson</th>
+						<th><?= Yii::t('app', 'KPI Contents') ?></th>
+						<th><?= Yii::t('app', 'Employee') ?></th>
+						<th><?= Yii::t('app', 'Target') ?></th>
+						<th><?= Yii::t('app', 'New Target') ?></th>
+						<th><?= Yii::t('app', 'Reson') ?></th>
 						<th class="text-center font-size-14">
 							<i class="fa fa-cog" aria-hidden="true"></i>
 						</th>
@@ -54,7 +54,7 @@ $this->title = 'Waiting for approve KPI';
 						endforeach;
 					} else { ?>
 						<tr>
-							<td colspan="6" class="col-12 mt-20 font-size-14 text-secondary"> There are no waiting for approve KPI.</td>
+							<td colspan="6" class="col-12 mt-20 font-size-14 text-secondary"> <?= Yii::t('app', 'There are no waiting for approve KPI') ?>.</td>
 						</tr>
 					<?php
 					}
@@ -69,14 +69,14 @@ $this->title = 'Waiting for approve KPI';
 			<table class="table table-striped">
 				<thead class="table table-secondary">
 					<tr class="secondary-setting">
-						<th>KPI Contents</th>
-						<th>Company</th>
-						<th>Branch</th>
-						<th>Department</th>
-						<th>Team</th>
-						<th>Target</th>
-						<th>New Target</th>
-						<th>Reson</th>
+						<th><?= Yii::t('app', 'KPI Contents') ?></th>
+						<th><?= Yii::t('app', 'Company') ?></th>
+						<th><?= Yii::t('app', 'Branch') ?></th>
+						<th><?= Yii::t('app', 'Department') ?></th>
+						<th><?= Yii::t('app', 'Team') ?></th>
+						<th><?= Yii::t('app', 'Target') ?></th>
+						<th><?= Yii::t('app', 'New Target') ?></th>
+						<th><?= Yii::t('app', 'Reson') ?></th>
 						<th class="text-center font-size-14">
 							<i class="fa fa-cog" aria-hidden="true"></i>
 						</th>
@@ -106,7 +106,7 @@ $this->title = 'Waiting for approve KPI';
 						endforeach;
 					} else { ?>
 						<tr>
-							<td colspan="9" class="col-12 mt-20 font-size-14 text-secondary"> There are no waiting for approve KPI.</td>
+							<td colspan="9" class="col-12 mt-20 font-size-14 text-secondary"> <?= Yii::t('app', 'There are no waiting for approve KPI') ?>.</td>
 						</tr>
 					<?php
 					}

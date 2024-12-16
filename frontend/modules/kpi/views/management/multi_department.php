@@ -14,7 +14,7 @@ if (isset($d) && count($d) > 0) {
 		if (count($department) > 1) { ?>
 			<div class="col-12 multi-select pl-30 pt-5 pb-5">
 				<input type="checkbox" id='multi-check-all-<?= $branchId ?>' name="allDepartment[]" class="checkbox-md mr-5 " value="all" onchange="javascript:allDepartment(<?= $branchId ?>)">
-				All
+				<?= Yii::t('app', 'All') ?>
 			</div>
 			<?php
 		}

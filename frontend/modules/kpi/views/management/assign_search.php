@@ -26,21 +26,6 @@ if (isset($kpis) && count($kpis) > 0) {
 			</td>
 			<td class="text-center">
 				<div class="row">
-					<!-- <div class="col-5 badge rounded-pill bg-setting text-center pt-10"> -->
-					<?php
-					//if (isset($kgi["kgiEmployee"]) && count($kgi["kgiEmployee"]) > 0) {
-					//	$e = 0;
-					//	foreach ($kgi["kgiEmployee"] as $employeeId => $emPic) :
-					//	if ($e < 2) { 
-					?>
-					<!--<img class="Image-Description" src=" --><?php // Yii::$app->homeUrl . $emPic 
-												?>
-					<?php
-					//}
-					//	$e++;
-					//endforeach;
-					//}
-					?>
 					<div class="col-1">
 					</div>
 					<div class="col-3  mt-2 text-center pr-25 font-size-11">
@@ -80,7 +65,6 @@ if (isset($kpis) && count($kpis) > 0) {
 						<i class="fa fa-plus-circle circle5"></i>
 					</div>
 					<div class="col-1">
-						<!-- <i class="fa fa-plus-circle circle5"></i> -->
 					</div>
 				</div>
 			</td>
@@ -94,7 +78,7 @@ if (isset($kpis) && count($kpis) > 0) {
 			<td class="text-end">
 				<a href="<?= Yii::$app->homeUrl
 						?>kpi/kpi-team/kpi-team-setting/<?= ModelMaster::encodeParams(['kpiId' => $kpiId])
-																	?>" class="btn btn-sm btn-primary mr-3" title="Team KPI setting">
+											?>" class="btn btn-sm btn-primary mr-3" title="Team KPI setting">
 					<i class="fa fa-users" aria-hidden="true"></i>
 				</a>
 				<a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/indivisual-setting/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>" class="btn btn-sm btn-info text-light" title="Indivisual KPI setting">

@@ -3,10 +3,10 @@
 use frontend\models\hrvc\KpiEmployee;
 ?>
 <div class="row mb-10">
-	<div class="col-4 font-b">Employee</div>
-	<div class="col-3 font-b">Branch</div>
-	<div class="col-3 font-b">Title</div>
-	<div class="col-2 font-b">Team</div>
+	<div class="col-4 font-b"><?= Yii::t('app', 'Employee') ?></div>
+	<div class="col-3 font-b"><?= Yii::t('app', 'Branch') ?></div>
+	<div class="col-3 font-b"><?= Yii::t('app', 'Title') ?></div>
+	<div class="col-2 font-b"><?= Yii::t('app', 'Team') ?></div>
 </div>
 <?php
 if (count($employees) > 0) {
@@ -20,7 +20,7 @@ if (count($employees) > 0) {
 	<div class="row">
 		<div class="col-12 text-start">
 			<input class="form-check-input" type="checkbox" onchange="javascript:checkAllKpiEmployee(<?= $kpiId ?>)" id="all-kpi-employee-<?= $kpiId ?>" <?= $checkAll ?>>
-			<span class="font-size-12 ml-25">All </span>
+			<span class="font-size-12 ml-25"><?= Yii::t('app', 'Al') ?>l </span>
 		</div>
 	</div>
 	<?php
@@ -46,7 +46,7 @@ if (count($employees) > 0) {
 				<?= $em['branch'] ?>
 			</div>
 			<div class="col-3 mt-10 font-size-12 pt-5">
-				<?= $em['title'] ?>
+				<?= Yii::t('app', $em['title']) ?>
 			</div>
 			<div class="col-2 mt-10 font-size-12 pt-5">
 				<?= $em['team'] ?>
