@@ -112,7 +112,7 @@
 								</label>
 								<input id="attachKgiFileAnswer-<?= $kgiIssueId ?>" accept=".pdf" type="file" style="display: none;" name="attachKgiFileAnswer-<?= $kgiIssueId ?>" onchange="javascript:showSelectFileNameKgi(<?= $kgiIssueId ?>)">
 								<a href="javascript:answerKgiIssue(<?= $kgiIssueId ?>)" class="btn btn-primary font-size-13 pt-8">
-									<i class="fa fa-paper-plane-o mr-5" aria-hidden="true"></i> Submit
+									<i class="fa fa-paper-plane-o mr-5" aria-hidden="true"></i> <?= Yii::t('app', 'Submit') ?>
 								</a>
 							</div>
 							<div class="mt-20"></div>
@@ -140,7 +140,7 @@
 			<img src="<?= Yii::$app->homeUrl ?><?= $profile['picture'] ?>" class="image-circle1">&nbsp;
 			<span class="font-size-16"><?= $profile['employeeFirstname'] ?> <?= $profile['employeeSurename'] ?></span>
 			<div class="col-12 font-size-20 text-center text-b text-black-50 ">
-				+ Add a new issue.
+				+ <?= Yii::t('app', 'Add a new issue') ?>.
 			</div>
 			<div class="col-12 mt-20">
 				<div class="input-group pr-20">
@@ -152,7 +152,7 @@
 					<input id="attachKgiFile" accept=".pdf" type="file" style="display: none;" name="attachKgiFile" onchange="javascript:showAttachFileNameKgi(<?= $kgiId ?>)">
 
 					<button class="btn btn-primary form-submitbotton" type="submit">
-						<i class="fa fa-paper-plane-o mr-5" aria-hidden="true"></i> Submit
+						<i class="fa fa-paper-plane-o mr-5" aria-hidden="true"></i> <?= Yii::t('app', 'Submit') ?>
 					</button>
 				</div>
 				<div class="mt-20"></div>

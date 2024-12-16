@@ -1,10 +1,5 @@
 <?php
 
-use common\models\ModelMaster;
-use frontend\models\hrvc\KfiBranch;
-use frontend\models\hrvc\KgiBranch;
-use frontend\models\hrvc\Unit;
-
 $this->title = 'KPI Detail';
 ?>
 <div class="col-12 mt-90">
@@ -50,7 +45,7 @@ $this->title = 'KPI Detail';
 		<div class="row">
 			<div class="col-lg-3 col-6">
 				<div class="col-12 text-success">
-					<i class="fa fa-refresh mr-5" aria-hidden="true"></i> Latest Update
+					<i class="fa fa-refresh mr-5" aria-hidden="true"></i> <?= Yii::t('app', 'Latest Update') ?>
 				</div>
 				<div class="col-12 pt-5 pl-15 font-size-13" style="font-weight: 700;">
 					<?= $kpi['periodCheck'] != '' ? $kpi['periodCheck'] : '-' ?>
@@ -58,7 +53,7 @@ $this->title = 'KPI Detail';
 			</div>
 			<div class="col-lg-5 col-md-9 col-6">
 				<div class="col-12">
-					<i class="fa fa-chevron-right mr-5" aria-hidden="true"></i>Next Update
+					<i class="fa fa-chevron-right mr-5" aria-hidden="true"></i><?= Yii::t('app', 'Next Update') ?>
 					<span class="col-12 pencil-nextupdate" data-bs-toggle="modal" data-bs-target="#update-kpi-modal" onclick="javascript:updateKpi(<?= $kpiId ?>)">
 						<i class="fa fa-pencil-square-o ml-3" aria-hidden="true"></i>
 					</span>
@@ -70,7 +65,7 @@ $this->title = 'KPI Detail';
 			<div class="col-2 text-end">
 				<a class="no-underline-black ml-2 mt-3 font-size-14" href="#team">
 					<span class="badge rounded-pill bg-bsc font-size-14">
-						<i class="fa fa-users mr-5" aria-hidden="true"></i> <?= $kpi["countTeam"] ?> TEAMS
+						<i class="fa fa-users mr-5" aria-hidden="true"></i> <?= $kpi["countTeam"] ?> <?= Yii::t('app', 'TEAM') ?>
 					</span>
 				</a>
 			</div>
@@ -90,7 +85,7 @@ $this->title = 'KPI Detail';
 						endforeach;
 					}
 					?>
-					<a class="no-underline-black ml-2 mt-3 font-size-14" href="#employee"><?= count($kpi["kpiEmployee"]) ?> EMPLOYEE(S)</a>
+					<a class="no-underline-black ml-2 mt-3 font-size-14" href="#employee"><?= count($kpi["kpiEmployee"]) ?> <?= Yii::t('app', 'EMPLOYEE') ?></a>
 				</span>
 			</div>
 		</div>
@@ -99,7 +94,7 @@ $this->title = 'KPI Detail';
 		<div class="row pb-3 mt-30">
 			<div class="col-lg-3 col-md-3 col-12">
 				<div class="col-12 text-center">
-					Priority
+					<?= Yii::t('app', 'Priority') ?>
 				</div>
 				<div class="col-12 mt-10" style="padding-left: 37%;">
 					<div class="priority-detail text-center"><?= $kpi["priority"] ?></div>
@@ -109,18 +104,18 @@ $this->title = 'KPI Detail';
 				<div class="row">
 					<div class="row">
 						<div class="col-6 pt-15">
-							Quant Ratio
+							<?= Yii::t('app', 'Quant Ratio') ?>
 						</div>
 						<div class="col-6 pt-20 font-b font-size-13">
-							<i class="fa fa-diamond" aria-hidden="true"></i> <?= $kpi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?>
+							<i class="fa fa-diamond" aria-hidden="true"></i> <?= $kpi["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-6 pt-20">
-							Update Interval
+							<?= Yii::t('app', 'Update Interval') ?>
 						</div>
 						<div class="col-6 mt-5 pt-20 font-b font-size-13">
-							<i class="fa fa-calendar mr-3" aria-hidden="true"></i> <?= $kpi["unitText"] ?>
+							<i class="fa fa-calendar mr-3" aria-hidden="true"></i> <?= Yii::t('app', $kpi["unitText"]) ?>
 						</div>
 					</div>
 				</div>
@@ -130,7 +125,7 @@ $this->title = 'KPI Detail';
 					<div class="row">
 						<div class="col-5">
 							<div class="col-12 text-center">
-								<i class="fa fa-bullseye" aria-hidden="true"></i> Target
+								<i class="fa fa-bullseye" aria-hidden="true"></i> <?= Yii::t('app', 'Target') ?>
 							</div>
 							<div class="col-12 font-size-13 font-b text-center mt-5">
 								<?php
@@ -155,7 +150,7 @@ $this->title = 'KPI Detail';
 						</div>
 						<div class="col-5">
 							<div class="col-12 text-center">
-								<i class="fa fa-trophy" aria-hidden="true"></i> Result
+								<i class="fa fa-trophy" aria-hidden="true"></i> <?= Yii::t('app', 'Result') ?>
 							</div>
 							<div class="col-12 font-size-13 font-b text-center mt-5">
 								<?php
@@ -203,7 +198,7 @@ $this->title = 'KPI Detail';
 		<div class="row mt-20">
 			<div class="col-5" id="team">
 				<div class="col-12 font-size-16 font-b">
-					Teams (<?= $kpi["countTeam"] ?>)
+					<?= Yii::t('app', 'Teams') ?> (<?= $kpi["countTeam"] ?>)
 				</div>
 				<div class="col-12 mt-10 ml-10">
 					<?= $res["teamText"] ?>
@@ -211,7 +206,7 @@ $this->title = 'KPI Detail';
 			</div>
 			<div class="col-7 border-left" id="employee">
 				<div class="col-12 font-size-16 font-b">
-					Employees (<?= count($kpi["kpiEmployee"]) ?>)
+					<?= Yii::t('app', 'Employee') ?> (<?= count($kpi["kpiEmployee"]) ?>)
 				</div>
 				<div class="col-12 mt-10 text-center">
 					<?= $res["employeeText"] ?>
@@ -223,7 +218,7 @@ $this->title = 'KPI Detail';
 		<div class="row mt-20">
 			<div class="col-12">
 				<div class="col-12 font-size-16 font-b">
-					Update History
+					<?= Yii::t('app', 'Update History') ?>
 				</div>
 				<div class="col-12 mt-10 text-center">
 					<?= $res["historyText"] ?>
@@ -236,7 +231,7 @@ $this->title = 'KPI Detail';
 		<div class="row mt-20">
 			<div class="col-12">
 				<div class="col-12 font-size-16 font-b">
-					Issue & Solution
+					<?= Yii::t('app', 'Issue & Solution') ?>
 				</div>
 				<div class="col-12 mt-10">
 					<?= $res["issueText"] ?>

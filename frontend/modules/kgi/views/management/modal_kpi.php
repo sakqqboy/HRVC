@@ -3,7 +3,7 @@
 		<div class="modal-content">
 			<div class="modal-header" style="height: 100px;margin-top:-10px">
 				<h5 class="modal-title text-primary" id="staticBackdropLabel2">
-					<i class="fa fa-magic" aria-hidden="true"></i> Related KPI
+					<i class="fa fa-magic" aria-hidden="true"></i> <?= Yii::t('app', 'Related KPI') ?>
 				</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>

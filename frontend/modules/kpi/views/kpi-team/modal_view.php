@@ -8,25 +8,11 @@
 					<span class="ml-10" id="kpi-name-view"></span>
 				</div>
 				<div class="modal-title border Completed-Backdrop7 badge rounded-pill bg-warning text-dark" id="status-view"></div>
-				<span class="border border-1 border-deadline-Backdrop7">Deadline <span class="font-size-10 text-dark pr-10"> : <span id="period-date-view"></span></span></span>
+				<span class="border border-1 border-deadline-Backdrop7"><?= Yii::t('app', 'Deadline') ?> <span class="font-size-10 text-dark pr-10"> : <span id="period-date-view"></span></span></span>
 			</div>
 			<div class="col-12 text-end">
-				<span class="border border-1 border-next-Backdrop7">Next Update <span class="font-size-10 text-dark pr-10"> : <span id="next-date-view"></span></span></span>
+				<span class="border border-1 border-next-Backdrop7"><?= Yii::t('app', 'Next Update') ?> <span class="font-size-10 text-dark pr-10"> : <span id="next-date-view"></span></span></span>
 			</div>
-			<!-- <div class="tk" id="company-name-view"></div> -->
-			<!-- <div class="col-12">
-				<div class="row mt-10">
-					<div class="col-6 text-end font-size-12 pr-20 mt-10">
-						<a class="no-underline-black mr-20" href="javascript:relatedKfiForkpi()" style="cursor: pointer;">
-							<i class="fa fa-refresh mr-5" aria-hidden="true"></i>Related KFI
-						</a>
-						<a class="no-underline-black" href="javascript:relatedKpiForkpi()" style="cursor: pointer;">
-							<i class="fa fa-refresh mr-5" aria-hidden="true"></i>Related KPI
-						</a>
-					</div>
-				</div>
-			</div> -->
-
 			<div class="modal-body">
 				<div class="col-12 dashed-Backdrop7">
 					<div class="row mt-20">
@@ -35,20 +21,15 @@
 						</div>
 						<div class="col-lg-2 col-md-6 col-3">
 							<div class="col-12 Quant-ratio-Backdrop3">
-								Quant Ratio
+								<?= Yii::t('app', 'Quant Ratio') ?>
 							</div>
 							<div class="col-12 diamond-con-Backdrop3">
 								<i class="fa fa-diamond mr-5" aria-hidden="true"></i> <span id="quantRatio-view"></span>
 							</div>
 						</div>
-						<!-- <div class="col-lg-1 col-md-6 col-2">
-							<div class="col-12 padding-FEB-Backdrop7">
-								<span id="month-view"></span>
-							</div>
-						</div> -->
 						<div class="col-3 text-center">
 							<div class="col-12 bullseye-con-Backdrop3">
-								<i class="fa fa-bullseye" aria-hidden="true"></i> Target
+								<i class="fa fa-bullseye" aria-hidden="true"></i> <?= Yii::t('app', 'Target') ?>
 							</div>
 							<div class="col-12 million-number-Backdrop3">
 								<span id="target-view"></span>
@@ -61,7 +42,7 @@
 						</div>
 						<div class="col-3 text-center">
 							<div class="col-12 trophy-con-Backdrop3">
-								<i class="fa fa-trophy" aria-hidden="true"></i> Result
+								<i class="fa fa-trophy" aria-hidden="true"></i> <?= Yii::t('app', 'Result') ?>
 							</div>
 							<div class="col-12 million-number-Backdrop3">
 								<span id="result-view"></span>
@@ -72,13 +53,13 @@
 					<div class="row">
 						<div class="col-2">
 							<div class="col-12" style="margin-left:-70px !important; margin-top:-40px;">
-								<p class="Priority1">Priority</p>
+								<p class="Priority1"><?= Yii::t('app', 'Priority') ?></p>
 								<div class="circle-Priority" id="prirority-view"></div>
 							</div>
 						</div>
 						<div class="col-lg-4 col-md-6 col-6">
 							<div class="col-12 padding-update-Backdrop3">
-								Update Interval
+								<?= Yii::t('app', 'Update Interval') ?>
 							</div>
 							<div class="col-12 update-mouth-Backdrop3">
 								<i class="fa fa-calendar mr-7" aria-hidden="true"></i> <span id="unit-view"></span>
@@ -96,14 +77,14 @@
 					</div>
 				</div>
 				<div class="col-12 Description-Backdrop7 pl-10">
-					Description
+					<?= Yii::t('app', 'Description') ?>
 				</div>
 				<div class="col-12 detailsDescription-Backdrop3 pl-20" id="decription-view">
 
 				</div>
 
 				<div class="col-12 Description-Backdrop7 pl-10">
-					Update Histories
+					<?= Yii::t('app', 'Update Histories') ?>
 				</div>
 				<hr>
 				<div class="col-12 history-box" id="kpi-history">

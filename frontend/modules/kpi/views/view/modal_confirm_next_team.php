@@ -8,20 +8,20 @@
             <div class="col-6 text-start font-b font-size-18 pl-15" style="margin-top: -35px;">
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/warning.svg" alt="History"
                     class="home-icon mr-5" style="margin-top:-7px;">
-                Copy Notice
+                <?= Yii::t('app', 'Copy Notice') ?>
             </div>
             <div class="modal-body">
 
                 <div class="col-12 text-start">
-                    When copying PIM content, all existing values be carried forward to the next month, except for the
+                    <?= Yii::t('app', "When copying PIM content, all existing values be carried forward to the next month, except for the
                     results. To update the target, please make
-                    the necessary adjustment on the 'Assign Employee' page.
+                    the necessary adjustment on the 'Assign Employee' page") ?>.
                 </div>
             </div>
             <div class="col-12 text-end mt-20 pr-10 pb-10">
                 <input type="hidden" id="kpiTeamHistoryId" value="">
-                <button type="button" class="btn btn-danger mr-10 btn-sm" data-bs-dismiss="modal">Cancel</button>
-                <a href="javascript:kpiTeamNextTarget()" class="btn btn-primary btn-sm">Copy
+                <button type="button" class="btn btn-danger mr-10 btn-sm" data-bs-dismiss="modal"><?= Yii::t('app', 'Cancel') ?></button>
+                <a href="javascript:kpiTeamNextTarget()" class="btn btn-primary btn-sm"><?= Yii::t('app', 'Copy') ?>
                     <i class="fa fa-clipboard ml-5" aria-hidden="true"></i>
                 </a>
             </div>

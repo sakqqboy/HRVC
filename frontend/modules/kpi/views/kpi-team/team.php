@@ -5,8 +5,8 @@ use frontend\models\hrvc\KpiTeam;
 
 ?>
 <div class="row mb-10">
-	<div class="col-6 font-b">Team</div>
-	<div class="col-6 font-b">Department</div>
+	<div class="col-6 font-b"><?= Yii::t('app', 'Team') ?></div>
+	<div class="col-6 font-b"><?= Yii::t('app', 'Department') ?></div>
 </div>
 <?php
 
@@ -15,7 +15,7 @@ if (isset($teams) && count($teams) > 0) { ?>
 	<div class="row">
 		<div class="col-12 text-start">
 			<input class="form-check-input" type="checkbox" onchange="javascript:checkAllKpiTeam(<?= $kpiId ?>)" id="all-kpi-team-<?= $kpiId ?>" <?= $checkAll ?>>
-			<span class="font-size-12 ml-20">All </span>
+			<span class="font-size-12 ml-20"><?= Yii::t('app', 'All') ?> </span>
 		</div>
 	</div>
 	<?php

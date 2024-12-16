@@ -1,7 +1,5 @@
 <?php
 
-use common\models\ModelMaster;
-use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\User;
 
 $this->title = 'Team kgi History';
@@ -10,12 +8,12 @@ $this->title = 'Team kgi History';
 	<div class="row">
 		<div class="col-8">
 			<i class="fa fa-users font-size-20 mr-5" aria-hidden="true"></i>
-			<span class="pim-head-text"> Request changing KGI Team target</span>
+			<span class="pim-head-text"> <?= Yii::t('app', 'Request changing KGI Team target') ?></span>
 		</div>
 		<div class="col-4 text-end pr-15">
 			<a href="<?= Yii::$app->homeUrl ?>kgi/management/wait-approve" class="btn btn-secondary font-size-12">
 				<i class="fa fa-chevron-left mr-5" aria-hidden="true"></i>
-				Back
+				<?= Yii::t('app', 'Back') ?>
 			</a>
 		</div>
 	</div>
@@ -27,7 +25,7 @@ $this->title = 'Team kgi History';
 					<?= $kgiDetail["monthName"] ?>
 				</div>
 				<div class="col-12  text-center">
-					<p class="font-size-10 mb-20">Priority</p>
+					<p class="font-size-10 mb-20"><?= Yii::t('app', 'Priority') ?></p>
 					<div class="circle-Priority" style="margin-left: 70px !important;">
 						<?= $kgiDetail["priority"] ?>
 					</div>
@@ -35,16 +33,16 @@ $this->title = 'Team kgi History';
 			</div>
 			<div class="col-lg-3 col-md-6 col-3">
 				<div class="col-12 Quant-ratio-Backdrop3">
-					Quant Ratio
+					<?= Yii::t('app', 'Quant Ratio') ?>
 				</div>
 				<div class="col-12 diamond-con-Backdrop3 mt-10">
 					<i class="fa fa-diamond" aria-hidden="true"></i>
-					<span id="quanRatioHistory"><?= $kgiDetail["quantRatio"] == 1 ? "Quantity" : "Quality" ?></span>
+					<span id="quanRatioHistory"><?= $kgiDetail["quantRatio"] == 1 ? Yii::t('app', "Quantity") : Yii::t('app', "Quality") ?></span>
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-6 col-3 text-center">
 				<div class="col-12 bullseye-con-Backdrop3">
-					<i class="fa fa-bullseye" aria-hidden="true"></i> Target
+					<i class="fa fa-bullseye" aria-hidden="true"></i> <?= Yii::t('app', 'Target') ?>
 				</div>
 				<div class="col-12 million-number-Backdrop3 mt-10" id="targetHistory">
 					<?= $kgiDetail["amountType"] == 1 ? number_format($kgiDetail["targetAmount"], 2) : number_format($kgiDetail["targetAmount"]) ?>
@@ -57,7 +55,7 @@ $this->title = 'Team kgi History';
 			</div>
 			<div class="col-lg-3 cl-md-6 col-3 text-center">
 				<div class="col-12 trophy-con-Backdrop3">
-					<i class="fa fa-trophy" aria-hidden="true"></i> Result
+					<i class="fa fa-trophy" aria-hidden="true"></i> <?= Yii::t('app', 'Result') ?>
 				</div>
 				<div class="col-12 million-number-Backdrop3 mt-10 " id="resultHistory">
 					<?= $kgiDetail["amountType"] == 1 ? number_format($kgiDetail["result"], 2) : number_format($kgiDetail["result"]) ?>
@@ -67,10 +65,10 @@ $this->title = 'Team kgi History';
 				<div class="col-lg-2 col-md-6 col-5"></div>
 				<div class="col-lg-4 col-md-6 col-6">
 					<div class="col-12 padding-update-Backdrop3">
-						Update Interval
+						<?= Yii::t('app', 'Update Interval') ?>
 					</div>
 					<div class="col-12 update-mouth-Backdrop3 mt-10" id="unitHistory">
-						<?= $kgiDetail["unitText"] ?>
+						<?= Yii::t('app', $kgiDetail["unitText"]) ?>
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6 col-6" style="margin-top:-20px;">
@@ -89,12 +87,6 @@ $this->title = 'Team kgi History';
 		<div class="col-lg-6 col-md-6 col-12 pim-body bg-white" style="border-top-left-radius: 10px;border-bottom-left-radius: 10px;">
 			<div class="row">
 				<div class="col-12 font-b pb-5 border-bottom"><?= $teamName ?></div>
-				<!-- <div class="col-5 text-end font-b pb-5 border-bottom font-size-12">
-					<a href="javascript:approveTargetKgiTeam(<?php // $kgiTeam['kgiTeamId'] 
-											?>,0)" class="btn btn-sm btn-danger font-size-10 mr-3">Reject</a>
-					<a href="javascript:approveTargetKgiTeam(<?php // $kgiTeam['kgiTeamId'] 
-											?>,1)" class="btn btn-sm btn-primary font-size-10">Approve</a>
-				</div> -->
 			</div>
 			<?php
 			if (isset($kgiTeamHistories) && count($kgiTeamHistories) > 0) { ?>
@@ -102,10 +94,10 @@ $this->title = 'Team kgi History';
 					<thead>
 						<tr style="background-color: #E6E6FA;">
 							<th>#</th>
-							<th class="text-center">Target</th>
-							<th class=text-center>Reson</th>
-							<th>By</th>
-							<th>Status</th>
+							<th class="text-center"><?= Yii::t('app', 'Target') ?></th>
+							<th class=text-center><?= Yii::t('app', 'Reson') ?></th>
+							<th><?= Yii::t('app', 'By') ?></th>
+							<th><?= Yii::t('app', 'Status') ?></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -135,7 +127,7 @@ $this->title = 'Team kgi History';
 								<td class="text-end font-b"><?= $decimalTarget[1] == '00' ? number_format($history["target"]) : number_format($history["target"], 2) ?></td>
 								<td style="width: 10%;"><?= $history["detail"] ?></td>
 								<td>&nbsp;<?= User::employeeNameByuserId($history["createrId"]) ?></td>
-								<td class="<?= $class ?>"><?= $textStatus ?></td>
+								<td class="<?= $class ?>"><?= Yii::t('app', $textStatus) ?></td>
 							</tr>
 						<?php
 							$a++;
@@ -145,14 +137,14 @@ $this->title = 'Team kgi History';
 				</table>
 			<?php
 			} else { ?>
-				<div class="col-12 text-secondary font-b font-size-14 mt-10">Not fouund</div>
+				<div class="col-12 text-secondary font-b font-size-14 mt-10"><?= Yii::t('app', 'Not fouund') ?></div>
 			<?php
 
 			}
 			?>
 		</div>
 		<div class="col-lg-6 col-md-6 col-12 pim-body bg-white" style="border-top-right-radius: 10px;border-bottom-right-radius: 10px;">
-			<div class="col-12 font-b pb-5 border-bottom text-end">Assigned Teams</div>
+			<div class="col-12 font-b pb-5 border-bottom text-end"><?= Yii::t('app', 'Assigned Teams') ?></div>
 			<?php
 			if (isset($allTeams) && count($allTeams) > 0) {
 			?>
@@ -161,9 +153,9 @@ $this->title = 'Team kgi History';
 						<tr class="bg-body-secondary">
 							<th>#</th>
 							<th>Team</th>
-							<th class="text-center">Target</th>
-							<th class="text-center">Result</th>
-							<th>Assigned By</th>
+							<th class="text-center"><?= Yii::t('app', 'Target') ?></th>
+							<th class="text-center"><?= Yii::t('app', 'Result') ?></th>
+							<th><?= Yii::t('app', 'Assigned By') ?></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -197,7 +189,7 @@ $this->title = 'Team kgi History';
 			<?php
 			} else {
 			?>
-				<div class="col-12 text-secondary font-b font-size-14 mt-10">Not fouund</div>
+				<div class="col-12 text-secondary font-b font-size-14 mt-10"><?= Yii::t('app', 'Not fouund') ?></div>
 			<?php
 			}
 			?>

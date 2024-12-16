@@ -8,17 +8,17 @@ $this->title = 'Assign KPI';
 	<div class="row">
 		<div class="col-9">
 			<i class="fa fa-cog font-size-26 mr-3" aria-hidden="true"></i>
-			<strong class="font-size-20">Assign KPI to KGI : <?= $kgiName ?></strong>
+			<strong class="font-size-20"><?= Yii::t('app', 'Assign KPI to KGI') ?> : <?= $kgiName ?></strong>
 		</div>
 		<div class="col-3 text-end">
 			<a href="<?= Yii::$app->homeUrl ?>kgi/management/kgi-kpi/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>" class="font-size-14 btn btn-outline-secondary">
 				<i class="fa fa-chevron-left mr-5" aria-hidden="true"></i>
-				KPI for KGI
+				<?= Yii::t('app', 'KPI for KGI') ?>
 			</a>
 		</div>
 	</div>
 	<div class="alert-box text-center">
-		S A V E D ! ! !
+		<?= Yii::t('app', 'S A V E D ! ! !') ?>
 	</div>
 
 	<div class="row mt-40 pr-10">
@@ -40,7 +40,7 @@ $this->title = 'Assign KPI';
 		<div class="col-lg-6 col-12 border" style="min-height:500px;border-radius:5px;">
 			<div class="row">
 				<div class="col-12 font-b font-size-14 mt-10">
-					KPI
+					<?= Yii::t('app', 'KPI') ?>
 				</div>
 				<div class="col-12 mt-10" id="kpi-branch">
 

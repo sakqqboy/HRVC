@@ -112,7 +112,7 @@
 								</label>
 								<input id="attachKpiFileAnswer-<?= $kpiIssueId ?>" accept=".pdf" type="file" style="display: none;" name="attachKpiFileAnswer-<?= $kpiIssueId ?>" onchange="javascript:showSelectFileNameKpi(<?= $kpiIssueId ?>)">
 								<a href="javascript:answerKpiIssue(<?= $kpiIssueId ?>)" class="btn btn-primary font-size-13 pt-8">
-									<i class="fa fa-paper-plane-o mr-5" aria-hidden="true"></i> Submit
+									<i class="fa fa-paper-plane-o mr-5" aria-hidden="true"></i> <?= Yii::t('app', 'Submit') ?>
 								</a>
 							</div>
 							<div class="mt-20"></div>
@@ -152,7 +152,7 @@
 					<input id="attachkpiFile" accept=".pdf" type="file" style="display: none;" name="attachkpiFile" onchange="javascript:showAttachFileNameKpi(<?= $kpiId ?>)">
 
 					<button class="btn btn-primary form-submitbotton" type="submit">
-						<i class="fa fa-paper-plane-o mr-5" aria-hidden="true"></i> Submit
+						<i class="fa fa-paper-plane-o mr-5" aria-hidden="true"></i> <?= Yii::t('app', 'Submit') ?>
 					</button>
 				</div>
 				<div class="mt-20"></div>

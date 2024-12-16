@@ -23,15 +23,15 @@ $this->title = "KPI GROUP";
 		<table class="table table-striped">
 			<thead class="table-secondary">
 				<tr class="font-size-12">
-					<th>No.</th>
-					<th>Group Name</th>
-					<th>Company</th>
-					<th>Detail</th>
-					<th class="text-center">Target</th>
-					<th>Month</th>
-					<th class="text-center">Total KGI</th>
-					<th>Status</th>
-					<th>Action</th>
+					<th><?= Yii::t('app', 'No') ?>.</th>
+					<th><?= Yii::t('app', 'Group Name') ?></th>
+					<th><?= Yii::t('app', 'Company') ?></th>
+					<th><?= Yii::t('app', 'Detail') ?></th>
+					<th class="text-center"><?= Yii::t('app', 'Target') ?></th>
+					<th><?= Yii::t('app', 'Month') ?></th>
+					<th class="text-center"><?= Yii::t('app', 'Total KG') ?>I</th>
+					<th><?= Yii::t('app', 'Status') ?></th>
+					<th><?= Yii::t('app', 'Action') ?></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -63,7 +63,7 @@ $this->title = "KPI GROUP";
 					endforeach;
 				} else { ?>
 					<tr>
-						<td colspan="9" class="text-center font-b font-size-12">KGI Group not found.</td>
+						<td colspan="9" class="text-center font-b font-size-12"><?= Yii::t('app', 'KGI Group not found') ?>.</td>
 					</tr>
 				<?php
 

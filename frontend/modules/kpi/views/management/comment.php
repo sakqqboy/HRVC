@@ -22,7 +22,7 @@
 					?>
 						<a href="<?= Yii::$app->homeUrl . $file ?>" target="_blank" class="btn btn-bg-white-xs pb-0 pt-3" style="font-size: 10px;font-weight:300;margin:auto;">
 							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/clip.png" class="attach-icon" style="margin-top:-5px;">
-							Attachment
+							<?= Yii::t('app', 'Attachment') ?>
 						</a>
 					<?php
 					}

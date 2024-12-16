@@ -5,7 +5,7 @@
 				<div class="col-12">
 					<div class="row">
 						<div class="col-10 font-size-16 font-b">
-							Request Reason
+							<?= Yii::t('app', 'Request Reason') ?>
 						</div>
 						<div class="col-2 text-end">
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

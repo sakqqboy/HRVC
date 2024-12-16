@@ -14,7 +14,7 @@ if (isset($kgiGroups) && count($kgiGroups) > 0) {
 	endforeach;
 } else { ?>
 	<div class="col-12 font-size-14 mt-10">
-		<span class="text-secondary"> There isn't KGI Group in this company ! ! !</span>
+		<span class="text-secondary"> <?= Yii::t('app', "There isn't KGI Group in this company ! ! !") ?></span>
 	</div>
 <?php
 

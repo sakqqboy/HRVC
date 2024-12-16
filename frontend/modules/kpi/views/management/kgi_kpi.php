@@ -11,12 +11,12 @@ $this->title = 'KGI KPI';
 	<div class="row">
 		<div class="col-9">
 			<i class="fa fa-share-alt font-size-20 mr-3" aria-hidden="true"></i>
-			<strong class="font-size-20">Related KGI for KPI</strong>
+			<strong class="font-size-20"><?= Yii::t('app', 'Related KGI for KPI') ?></strong>
 		</div>
 		<div class="col-3 text-end">
 			<a href="<?= Yii::$app->homeUrl ?>kpi/management/assign-kpi" class="font-size-14 btn btn-outline-secondary">
 				<i class="fa fa-chevron-left mr-5" aria-hidden="true"></i>
-				KPI Assign Management
+				<?= Yii::t('app', 'KPI Assign Management') ?>
 			</a>
 		</div>
 
@@ -29,7 +29,7 @@ $this->title = 'KGI KPI';
 					<?= $kpiDetail["monthName"] ?>
 				</div>
 				<div class="col-12  text-center">
-					<p class="font-size-10 mb-20">Priority</p>
+					<p class="font-size-10 mb-20"><?= Yii::t('app', 'Priority') ?></p>
 					<div class="circle-Priority" style="margin-left: 70px !important;">
 						<?= $kpiDetail["priority"] ?>
 					</div>
@@ -37,16 +37,16 @@ $this->title = 'KGI KPI';
 			</div>
 			<div class="col-lg-3 col-md-6 col-3">
 				<div class="col-12 Quant-ratio-Backdrop3">
-					Quant Ratio
+					<?= Yii::t('app', 'Quant Ratio') ?>
 				</div>
 				<div class="col-12 diamond-con-Backdrop3 mt-10">
 					<i class="fa fa-diamond" aria-hidden="true"></i>
-					<span id="quanRatioHistory"><?= $kpiDetail["quantRatio"] == 1 ? "Quantity" : "Quality" ?></span>
+					<span id="quanRatioHistory"><?= $kpiDetail["quantRatio"] == 1 ? Yii::t('app', "Quantity") : Yii::t('app', "Quality") ?></span>
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-6 col-3 text-center">
 				<div class="col-12 bullseye-con-Backdrop3">
-					<i class="fa fa-bullseye" aria-hidden="true"></i> Target
+					<i class="fa fa-bullseye" aria-hidden="true"></i> <?= Yii::t('app', 'Target') ?>
 				</div>
 				<div class="col-12 million-number-Backdrop3 mt-10" id="targetHistory">
 					<?= $kpiDetail["targetAmount"] ?>
@@ -59,7 +59,7 @@ $this->title = 'KGI KPI';
 			</div>
 			<div class="col-lg-3 cl-md-6 col-3 text-center">
 				<div class="col-12 trophy-con-Backdrop3">
-					<i class="fa fa-trophy" aria-hidden="true"></i> Result
+					<i class="fa fa-trophy" aria-hidden="true"></i> <?= Yii::t('app', 'Result') ?>
 				</div>
 				<div class="col-12 million-number-Backdrop3 mt-10 " id="resultHistory">
 					<?= $kpiDetail["result"] ?>
@@ -69,7 +69,7 @@ $this->title = 'KGI KPI';
 				<div class="col-lg-2 col-md-6 col-5"></div>
 				<div class="col-lg-4 col-md-6 col-6">
 					<div class="col-12 padding-update-Backdrop3">
-						Update Interval
+						<?= Yii::t('app', 'Update Interval') ?>
 					</div>
 					<div class="col-12 update-mouth-Backdrop3 mt-10" id="unitHistory">
 						<?= $kpiDetail["unitText"] ?>
@@ -88,17 +88,17 @@ $this->title = 'KGI KPI';
 
 	</div>
 	<div class="col-12 mt-20">
-		<u><b>Current related KGI (<?= count($kpiHasKgi) ?>)</b></u>
+		<u><b><?= Yii::t('app', 'Current related KGI') ?> (<?= count($kpiHasKgi) ?>)</b></u>
 	</div>
 	<div class="col-12 mt-20">
 
 		<table class="table table-responsive-lg">
 			<thead>
-				<th>KPI Name</th>
-				<th>Target</th>
-				<th>Month</th>
-				<th>Unit</th>
-				<th>Branch(es)</th>
+				<th><?= Yii::t('app', 'KPI Name') ?></th>
+				<th><?= Yii::t('app', 'Targe') ?>t</th>
+				<th><?= Yii::t('app', 'Month') ?></th>
+				<th><?= Yii::t('app', 'Unit') ?></th>
+				<th><?= Yii::t('app', 'Branch') ?></th>
 			</thead>
 			<tbody>
 				<?php
@@ -139,7 +139,7 @@ $this->title = 'KGI KPI';
 				} else { ?>
 					<tr style="line-height: 60px;">
 						<td class="text-center font-size-16" colspan="5">
-							There are no related KGI for this KPI.
+							<?= Yii::t('app', 'There are no related KGI for this KPI') ?>.
 						</td>
 					</tr>
 				<?php

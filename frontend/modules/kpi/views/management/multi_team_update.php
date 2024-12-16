@@ -14,7 +14,7 @@ if (isset($t) && count($t) > 0) {
 		if (count($teams) > 1) { ?>
 			<div class="col-12 multi-select pl-30 pt-5 pb-5">
 				<input type="checkbox" id='multi-check-all-team-<?= $departmentId ?>-update' name="allTeam[]" class="checkbox-md mr-5 " value="all" onchange="javascript:allTeamUpdate(<?= $departmentId ?>)">
-				All
+				<?= Yii::t('app', 'All') ?>
 			</div>
 		<?php
 		}

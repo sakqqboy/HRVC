@@ -107,7 +107,7 @@
 						endforeach;
 					} else { ?>
 						<div class="alert alert-light text-center">
-							Waiting for solution.
+							<?= Yii::t('app', 'Waiting for solution') ?>.
 						</div>
 					<?php
 

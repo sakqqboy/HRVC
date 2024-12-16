@@ -9,7 +9,7 @@ $this->title = 'KGI View';
     <div class="col-12">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
             style="margin-top: -3px;">
-        <strong class="pim-head-text"> Performance Indicator Matrices (PIM)</strong>
+        <strong class="pim-head-text"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</strong>
     </div>
     <div class="col-12 mt-10">
         <?= $this->render('kgi_header_filter', [
@@ -20,7 +20,7 @@ $this->title = 'KGI View';
                 <div class="col-11 pim-name-detail pr-0 pl-5 text-start">
                     <a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" class="mr-5 font-size-12">
                         <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
-                        Back
+                        <?= Yii::t('app', 'Back') ?>
                     </a>
                     <?= $kgiDetail["kgiName"] ?>
                 </div>
@@ -33,7 +33,7 @@ $this->title = 'KGI View';
                             onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
                                 class="pim-icon" style="margin-top: -3px; width: 12px; height: 14px;">
-                            Delete
+                            <?= Yii::t('app', 'Delete') ?>
 
                         </a>
                     <?php } ?>
@@ -60,16 +60,16 @@ $this->title = 'KGI View';
                         <div class="col-4 pim-name-detail ">Description</div>
                         <div class="col-2">
                             <div class="<?= $colorFormat ?>-tag text-center">
-                                <?= $kgiDetail['status'] == 1 ? 'In process' : 'Completed' ?>
+                                <?= $kgiDetail['status'] == 1 ? Yii::t('app', 'In process') : Yii::t('app', 'Completed') ?>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="row">
                                 <div class="col-4 month-<?= $colorFormat ?> pt-2">Term</div>
                                 <div class="col-8 term-<?= $colorFormat ?>  pt-2">
-                                    <?= $kgiDetail['fromDate'] == "" ? 'Not set' : $kgiDetail['fromDate'] ?>
+                                    <?= $kgiDetail['fromDate'] == "" ? Yii::t('app', 'Not set') : $kgiDetail['fromDate'] ?>
                                     &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
-                                    <?= $kgiDetail['toDate'] == "" ? 'Not set' : $kgiDetail['toDate'] ?>
+                                    <?= $kgiDetail['toDate'] == "" ? Yii::t('app', 'Not set') : $kgiDetail['toDate'] ?>
                                 </div>
                             </div>
                         </div>
@@ -109,7 +109,7 @@ $this->title = 'KGI View';
                                             ?>
                                         </div>
                                         <div class="text-center priority-box">
-                                            <div class="col-12">Priority</div>
+                                            <div class="col-12"><?= Yii::t('app', 'Priority') ?></div>
                                             <div class="col-12 text-priority"><?= $kgiDetail["priority"] ?></div>
                                         </div>
                                     </div>
@@ -120,9 +120,9 @@ $this->title = 'KGI View';
                                 <div class="col-12">Quant Ratio</div>
                                 <div class="col-12 border-bottom-<?= $colorFormat ?> pb-5 pim-duedate">
                                     <i class="fa fa-diamond" aria-hidden="true"></i>
-                                    <?= $kgiDetail["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?>
+                                    <?= $kgiDetail["quantRatio"] == 1 ?  Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?>
                                 </div>
-                                <div class="col-12 pr-0 pt-5 pl-0">update Interval</div>
+                                <div class="col-12 pr-0 pt-5 pl-0"><?= Yii::t('app', 'update Interval') ?></div>
                                 <div class="col-12  pim-duedate">
                                     <?= $kgiDetail["unitText"] ?>
                                 </div>
@@ -130,7 +130,7 @@ $this->title = 'KGI View';
                             <div class="col-lg-7 pim-subheader-font pr-15 pl-15">
                                 <div class="row">
                                     <div class="col-5 text-start">
-                                        <div class="col-12">Target</div>
+                                        <div class="col-12"><?= Yii::t('app', 'Target') ?></div>
                                         <div class="col-12 mt-3 number-pim">
                                             <?php
                                             $decimal = explode('.', $kgiDetail["targetAmount"]);
@@ -151,7 +151,7 @@ $this->title = 'KGI View';
                                         <div class="col-12 pt-17"><?= $kgiDetail["code"] ?></div>
                                     </div>
                                     <div class="col-5  text-end">
-                                        <div class="col-12">Result</div>
+                                        <div class="col-12"><?= Yii::t('app', 'Result') ?></div>
                                         <div class="col-12 mt-3 number-pim">
                                             <?php
                                             if ($kgiDetail["result"] != '') {
@@ -194,10 +194,10 @@ $this->title = 'KGI View';
                                     </div>
                                     <div class="col-4 mt-5 pl-0 pr-0 ">
                                         <div class="col-12 text-start" style="letter-spacing:0.3px;font-size:9px;">
-                                            Last Updated on
+                                            <?= Yii::t('app', 'Last Updated on') ?>
                                         </div>
                                         <div class="col-12 text-start pim-duedate">
-                                            <?= $kgiDetail['nextCheckText'] == "" ? 'Not set' : $kgiDetail['nextCheckText'] ?>
+                                            <?= $kgiDetail['nextCheckText'] == "" ? Yii::t('app', 'Not set') : $kgiDetail['nextCheckText'] ?>
                                         </div>
                                     </div>
                                     <div class="col-4 text-center mt-5 pt-6 pl-3 pr-3">
@@ -207,7 +207,7 @@ $this->title = 'KGI View';
                                             <div onclick="javascript:updateKgi(<?= $kgiId ?>,<?= $kgiHistoryId ?>)"
                                                 class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
                                                 data-bs-target="#update-kgi-modal">
-                                                <i class="fa fa-refresh" aria-hidden="true"></i> Update
+                                                <i class="fa fa-refresh" aria-hidden="true"></i> <?= Yii::t('app', 'Update') ?>
                                             </div>
                                         <?php
                                         }
@@ -216,10 +216,10 @@ $this->title = 'KGI View';
                                     <div class="col-4 pl-0 pr-5 mt-5 ">
                                         <div class="col-12 text-end font-<?= $colorFormat ?>"
                                             style="letter-spacing:0.3px;font-size:9px;">
-                                            Next Update Date
+                                            <?= Yii::t('app', 'Next Update Date') ?>
                                         </div>
                                         <div class="col-12 text-end pim-duedate">
-                                            <?= $kgiDetail['nextCheckText'] == "" ? 'Not set' : $kgiDetail['nextCheckText'] ?>
+                                            <?= $kgiDetail['nextCheckText'] == "" ?  Yii::t('app', 'Not set') : $kgiDetail['nextCheckText'] ?>
                                         </div>
                                     </div>
                                 </div>
@@ -236,35 +236,35 @@ $this->title = 'KGI View';
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-1-blue">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-1-black">
-                            Assigned
+                            <?= Yii::t('app', 'Assigned') ?>
                         </div>
                         <div class="col-3  view-tab" id="tab-2" onclick="javascript:viewTabKgi(<?= $kgiHistoryId ?>,2)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-black.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-2-black">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-blue.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-2-blue">
-                            Update History
+                            <?= Yii::t('app', 'Update History') ?>
                         </div>
                         <div class="col-2  view-tab" id="tab-3" onclick="javascript:viewTabKgi(<?= $kgiHistoryId ?>,3)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-3-black">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment-blue.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-3-blue">
-                            Chats
+                            <?= Yii::t('app', 'Chats') ?>
                         </div>
                         <div class="col-2  view-tab" id="tab-4" onclick="javascript:viewTabKgi(<?= $kgiHistoryId ?>,4)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-4-black">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart-blue.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-4-blue">
-                            Chart
+                            <?= Yii::t('app', 'Chart') ?>
                         </div>
                         <div class="col-3  view-tab" id="tab-5" onclick="javascript:viewTabKgi(<?= $kgiHistoryId ?>,5)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;" id="tab-5-black">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate-blue.svg" alt="History"
                                 class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-5-blue">
-                            Relate KPI
+                            <?= Yii::t('app', 'Relate KPI') ?>
                         </div>
                         <input type="hidden" id="currentTab" value="1">
                     </div>

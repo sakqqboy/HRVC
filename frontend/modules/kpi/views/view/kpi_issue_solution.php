@@ -15,13 +15,13 @@
 		<div class="col-12 alert bg-white mt-15 pt-15 pr-30 pl-30" style="height:320px;overflow-y: auto;">
 			<div class="row">
 				<div class="col-12 head-gray-box pt-0">
-					<span class=" head-gray-box-text">Headline</span>
+					<span class=" head-gray-box-text"><?= Yii::t('app', 'Headline') ?></span>
 					<div class="col-12">
 
 						<input class="form-control font-size-12" name="newIssue" id="issue" required placeholder="Issue Headline">
 					</div>
 					<div class="col-12">
-						<span class=" head-gray-box-text">Description</span>
+						<span class=" head-gray-box-text"><?= Yii::t('app', 'Description') ?></span>
 						<textarea style="height: 150px;" class="form-control font-size-12" id="description" name="kpiDescription"></textarea>
 					</div>
 					<div id="attachFile-<?= $kpiId ?>" class="col-12 text-end font-size-12 mt-5"></div>
@@ -29,12 +29,12 @@
 						<label for="attachKpiFile">
 							<a class="btn btn-bg-white-xs pb-0 pt-3" style="font-size: 10px;font-weight:300;margin:auto;">
 								<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/clip.png" class="attach-icon" style="margin-top:-5px;">
-								Attachment
+								<?= Yii::t('app', 'Attachment') ?>
 							</a>
 						</label>
 						<input id="attachKpiFile" accept=".pdf" type="file" style="display: none;" name="attachKpiFile" onchange="javascript:showAttachFileNameKpi(<?= $kpiId ?>)">
 						<a class="btn-create font-size-12 pr-5 pl-5 mt-5 mb-10 no-underline" href="javascript:createNewIssueKpi(<?= $kpiId ?>)">
-							Post Issue
+							<?= Yii::t('app', 'Post Issue') ?>
 						</a>
 					</div>
 				</div>
@@ -49,7 +49,7 @@
 	<div class="col-12 ligth-gray-box">
 		<div class="row pl-15 pr-20">
 			<div class="col-3  sub-tab-active pl-5">
-				Report History
+				<?= Yii::t('app', 'Report History') ?>
 			</div>
 			<div class="col-9  sub-tab">
 			</div>
@@ -91,7 +91,7 @@
 
 											<a href="<?= Yii::$app->homeUrl . $issue['file'] ?>" target="_blank" class="btn btn-bg-white-xs pb-0 pt-3" style="font-size: 10px;font-weight:300;margin:auto;">
 												<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/clip.png" class="attach-icon" style="margin-top:-5px;">
-												Attachment
+												<?= Yii::t('app', 'Attachment') ?>
 											</a>
 										<?php
 										}
@@ -130,7 +130,7 @@
 														?>
 															<a href="<?= Yii::$app->homeUrl . $data['file'] ?>" target="_blank" class="btn btn-bg-white-xs pb-0 pt-3" style="font-size: 10px;font-weight:300;margin:auto;">
 																<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/clip.png" class="attach-icon" style="margin-top:-5px;">
-																Attachment
+																<?= Yii::t('app', 'Attachment') ?>
 															</a>
 														<?php
 														}
@@ -153,18 +153,18 @@
 								<label for="attachKpiFileAnswer-<?= $kpiIssueId ?>" class="mt-2" style="cursor: pointer;">
 									<a class="btn btn-bg-white-xs pb-0 pt-3" style="font-size: 10px;font-weight:300;margin:auto;">
 										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/clip.png" class="attach-icon" style="margin-top:-5px;">
-										Attachment
+										<?= Yii::t('app', 'Attachment') ?>
 									</a>
 								</label>
 								<input id="attachKpiFileAnswer-<?= $kpiIssueId ?>" accept=".pdf" type="file" style="display: none;" name="attachKpiFileAnswer-<?= $kpiIssueId ?>" onchange="javascript:showSelectFileNameKpi(<?= $kpiIssueId ?>)">
 								<a href="javascript:answerKpiIssue(<?= $kpiIssueId ?>)" class="btn-reply font-size-10 mt-5 mb-10 no-underline" style="height: 25px;">
-									Reply Issue
+									<?= Yii::t('app', 'Reply Issue') ?>
 								</a>
 							</div>
 						</div>
 						<div class="col-12 text-end font-size-10 border-bottom pb-5 mb-15">
-							<a href="javascript:showAnswer(<?= $kpiIssueId ?>,1)" id="reply-<?= $kpiIssueId ?>">Reply</a>
-							<a href="javascript:showAnswer(<?= $kpiIssueId ?>,2)" style="display:none;" id="cancel-<?= $kpiIssueId ?>">Cancel</a>
+							<a href="javascript:showAnswer(<?= $kpiIssueId ?>,1)" id="reply-<?= $kpiIssueId ?>"><?= Yii::t('app', 'Reply') ?></a>
+							<a href="javascript:showAnswer(<?= $kpiIssueId ?>,2)" style="display:none;" id="cancel-<?= $kpiIssueId ?>"><?= Yii::t('app', 'Cancel') ?></a>
 						</div>
 				<?php
 						$i++;
