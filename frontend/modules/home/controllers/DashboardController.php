@@ -3,6 +3,7 @@
 namespace frontend\modules\home\controllers;
 
 use common\helpers\Path;
+use common\models\ModelMaster;
 use Exception;
 use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\EmployeePimWeight;
@@ -72,5 +73,18 @@ class DashboardController extends Controller
 			"termId" => $termId,
 			"subordinateTerm" => $subordinateTerm
 		]);
+	}
+	public function actionKgiEmployeeId()
+	{
+		$kgiEmployeeId=$_POST["id"];
+		$res["kgiEmployeeId"]=ModelMaster::encodeParams(["kgiEmployeeId"=>$kgiEmployeeId]);
+		return json_encode($res);
+	}
+
+	public function actionKpiEmployeeId()
+	{
+		$kpiEmployeeId=$_POST["id"];
+		$res["kpiEmployeeId"]=ModelMaster::encodeParams(["kpiEmployeeId"=>$kpiEmployeeId]);
+		return json_encode($res);
 	}
 }

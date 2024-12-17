@@ -7,12 +7,16 @@ use backend\models\hrvc\Kfi;
 use backend\models\hrvc\KfiHistory;
 use backend\models\hrvc\Kgi;
 use backend\models\hrvc\KgiEmployee;
+use backend\models\hrvc\KgiEmployeeHistory;
 use backend\models\hrvc\KgiHistory;
 use backend\models\hrvc\KgiTeam;
+use backend\models\hrvc\KgiTeamHistory;
 use backend\models\hrvc\Kpi;
 use backend\models\hrvc\KpiEmployee;
+use backend\models\hrvc\KpiEmployeeHistory;
 use backend\models\hrvc\KpiHistory;
 use backend\models\hrvc\KpiTeam;
+use backend\models\hrvc\KpiTeamHistory;
 use common\models\ModelMaster;
 use yii\web\Controller;
 
@@ -296,7 +300,6 @@ class DashbordController extends Controller
                             "due" => ModelMaster::engDate($kpiHistory["nextCheckDate"], 2),
 						    // "last" => ModelMaster::engDate($kfiHistory["checkPeriodDate"], 2),
                             "last" => ModelMaster::engDate($kpiHistory["nextCheckDate"], 2),
-
                         ];
 
                         $totlePercent = $totlePercent + $showPercent;
@@ -320,51 +323,377 @@ class DashbordController extends Controller
         return json_encode($data );
     }
     
-    public function actionDashbordTeam($teamId)
+    public function actionDashbordTeam($teamId, $userId, $role)
     {
-        // ดึงข้อมูลออกจากฐานข้อมูล
-        $kgiTeam = KgiTeam::find()->where(['<>', 'status', '99'])
-                                   ->andWhere(['teamId' => $teamId])
-                                   ->asArray()
-                                   ->all();
-        $kpiTeam = KpiTeam::find()->where(['<>', 'status', '99'])
-                                   ->andWhere(['teamId' => $teamId])
-                                   ->asArray()
-                                   ->all();
+        $employeeId = Employee::employeeId($userId);
+		$employee = Employee::EmployeeDetail($employeeId);
+        if ($role <= 3) {
+			$kgiTeams = KgiTeam::find()
+				->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,
+			kgi_team.teamId,kgi_team.target')
+				->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_team.kgiId")
+				->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
+				->where(["kgi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
+				->andFilterWhere(["kgi_team.teamId" => $teamId])
+				->orderBy("k.createDateTime DESC,t.teamName ASC")
+				->asArray()
+				->all();
+		} else {
+			$kgiTeams = KgiTeam::find()
+				->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,
+			kgi_team.teamId,kgi_team.target')
+				->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_team.kgiId")
+				->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
+				->where(["kgi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
+				->orderBy("k.createDateTime DESC,t.teamName ASC")
+				->asArray()
+				->all();
+		}
+
+        if ($role <= 3) {
+			$kpiTeams = KpiTeam::find()
+				->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,
+			kpi_team.teamId,kpi_team.target')
+				->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_team.kpiId")
+				->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
+				->where(["kpi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
+				->andFilterWhere(["kpi_team.teamId" => $teamId])
+				->orderBy("k.createDateTime DESC,t.teamName ASC")
+				->asArray()
+				->all();
+		} else {
+			$kpiTeams = kpiTeam::find()
+				->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,
+			kpi_team.teamId,kpi_team.target')
+				->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_team.kpiId")
+				->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
+				->where(["kpi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
+				->orderBy("k.createDateTime DESC,t.teamName ASC")
+				->asArray()
+				->all();
+		}
+
     
         // นับจำนวนของแต่ละคิวรี้
-        $kgiTeamCount = count($kgiTeam);
-        $kpiTeamCount = count($kpiTeam);
-    
-        // ส่งผลลัพธ์เป็น JSON
+        $kgiTeamCount = count($kgiTeams);
+        $kpiTeamCount = count($kpiTeams);
+        $have = ''; // สร้างตัวแปรเปล่าสำหรับเก็บค่าที่วนลูป
+
+        if (isset($kgiTeams) && count($kgiTeams) > 0) {
+            $totlePercent = 0;
+			foreach ($kgiTeams as $kgiTeam) :
+
+                $kgiTeamHistory = KgiTeamHistory::find()
+					->where(["kgiTeamId" => $kgiTeam["kgiTeamId"]])
+					->asArray()
+					->orderBy('createDateTime DESC')
+					->one();
+				if (!isset($kgiTeamHistory) || empty($kgiTeamHistory)) {
+					$kgiTeamHistory = KgiTeam::find()
+						->where(["kgiTeamId" => $kgiTeam["kgiTeamId"]])
+						->asArray()
+						->orderBy('createDateTime DESC')
+						->one();
+				}
+				$ratio = 0;
+				if ($kgiTeamHistory["target"] != '' && $kgiTeamHistory["target"] != 0 && $kgiTeamHistory["target"] != null) {
+					if ($kgiTeam["code"] == '<' || $kgiTeam["code"] == '=') {
+						$ratio = ($kgiTeamHistory["result"] / $kgiTeamHistory["target"]) * 100;
+					} else {
+						if ($kgiTeamHistory["result"] != '' && $kgiTeamHistory["result"] != 0) {
+							$ratio = ($kgiTeamHistory["target"] / $kgiTeamHistory["result"]) * 100;
+						} else {
+							$ratio = 0;
+						}
+					}
+				} else {
+					$ratio = 0;
+				}
+
+                if (strlen($kgiTeam["kgiName"]) > 34) {
+					$kginame = substr($kgiTeam["kgiName"], 0, 34) . '. . .';
+				} else {
+					$kginame = $kgiTeam["kgiName"];
+				}
+
+                $kgiData[$kgiTeam["kgiTeamId"]] = [
+					"name" => $kginame,
+                    "companyId" => $kgiTeam["companyId"],
+                    "target" => $kgiTeamHistory["target"],
+                    "status" => $kgiTeamHistory["status"],
+					"quantRatio" => $kgiTeam["quantRatio"],
+					"code" => $kgiTeam["code"],
+					"result" => $kgiTeamHistory["result"],
+					"percentage" => number_format($ratio, 2),
+                    "amountType" => $kgiTeam["amountType"],
+                    "active" => '',
+                    "id" => $kgiTeam["kgiTeamId"],
+					"kgiId" => $kgiTeam["kgiId"],
+                    // "due" => ModelMaster::engDate(KgiTeam::lastestCheckDate($kgiTeam["kgiTeamId"]), 2), //lastest check date
+                    "due" =>  ModelMaster::engDate($kgiTeamHistory["nextCheckDate"], 2),
+					"last" =>  ModelMaster::engDate($kgiTeamHistory["nextCheckDate"], 2)         
+					
+				];
+                $totlePercent = $totlePercent + $ratio;
+            endforeach;
+            $totlePercentKGI = ceil($totlePercent / $kgiTeamCount);
+        }
+
+        if (isset($kpiTeams) && count($kpiTeams) > 0) {
+            $totlePercent = 0;
+			foreach ($kpiTeams as $kpiTeam) :
+
+                $kpiTeamHistory = KpiTeamHistory::find()
+					->where(["kpiTeamId" => $kpiTeam["kpiTeamId"]])
+					->asArray()
+					->orderBy('createDateTime DESC')
+					->one();
+				if (!isset($kpiTeamHistory) || empty($kpiTeamHistory)) {
+					$kpiTeamHistory = kpiTeam::find()
+						->where(["kpiTeamId" => $kpiTeam["kpiTeamId"]])
+						->asArray()
+						->orderBy('createDateTime DESC')
+						->one();
+				}
+				$ratio = 0;
+				if ($kpiTeamHistory["target"] != '' && $kpiTeamHistory["target"] != 0 && $kpiTeamHistory["target"] != null) {
+					if ($kpiTeam["code"] == '<' || $kpiTeam["code"] == '=') {
+						$ratio = ($kpiTeamHistory["result"] / $kpiTeamHistory["target"]) * 100;
+					} else {
+						if ($kpiTeamHistory["result"] != '' && $kpiTeamHistory["result"] != 0) {
+							$ratio = ($kpiTeamHistory["target"] / $kpiTeamHistory["result"]) * 100;
+						} else {
+							$ratio = 0;
+						}
+					}
+				} else {
+					$ratio = 0;
+				}
+
+                if (strlen($kpiTeam["kpiName"]) > 34) {
+					$kpiname = substr($kpiTeam["kpiName"], 0, 34) . '. . .';
+				} else {
+					$kpiname = $kpiTeam["kpiName"];
+				}
+
+                $kpiData[$kpiTeam["kpiTeamId"]] = [
+					"name" => $kpiname,
+                    "companyId" => $kpiTeam["companyId"],
+                    "target" => $kpiTeamHistory["target"],
+                    "status" => $kpiTeamHistory["status"],
+					"quantRatio" => $kpiTeam["quantRatio"],
+					"code" => $kpiTeam["code"],
+					"result" => $kpiTeamHistory["result"],
+					"percentage" => number_format($ratio, 2),
+                    "amountType" => $kpiTeam["amountType"],
+                    "active" => '',
+                    "id" => $kpiTeam["kpiTeamId"],
+					"kpiId" => $kpiTeam["kpiId"],
+                    // "due" => ModelMaster::engDate(kpiTeam::lastestCheckDate($kpiTeam["kpiTeamId"]), 2), //lastest check date
+                    "due" =>  ModelMaster::engDate($kpiTeamHistory["nextCheckDate"], 2),
+					"last" =>  ModelMaster::engDate($kpiTeamHistory["nextCheckDate"], 2)         
+					
+				];
+                $totlePercent = $totlePercent + $ratio;
+            endforeach;
+            $totlePercentKPI = ceil($totlePercent / $kpiTeamCount);
+        }
+        
+        // ส่งผลลัพธ์เป็น JSON  
         $data = [
-            'kgiTeamCount' => $kgiTeamCount,
-            'kpiTeamCount' => $kpiTeamCount,
+            'KFI'=>  ['kfiCount' => [],'KFIData' => [],'showPercent' => [] ],
+            'KGI'=>  ['kgiCount' => $kgiTeamCount,'KGIData' => $kgiData,'showPercent' => $totlePercentKGI],
+            'KPI'=>  ['kpiCount' => $kpiTeamCount,'KPIData' => $kpiData,'showPercent' => $totlePercentKPI]
         ];
     
         return json_encode($data);
     }
     
-    public function actionDashbordEmployee( $employeeId)
+    public function actionDashbordEmployee($employeeId, $userId, $role)
     {
         // ดึงข้อมูลออกจากฐานข้อมูล
-        $kgiEmployee = KgiEmployee::find()->where(['<>', 'status', '99'])
-                                          ->andWhere(['employeeId' => $employeeId])
-                                          ->asArray()
-                                          ->all();
-        $kpiEmployee = KpiEmployee::find()->where(['<>', 'status', '99'])
-                                          ->andWhere(['employeeId' => $employeeId])
-                                          ->asArray()
-                                          ->all();
+        // $kgiEmployees = KgiEmployee::find()->where(['<>', 'status', '99'])
+        //                                   ->andWhere(['employeeId' => $employeeId])
+        //                                   ->asArray()
+        //                                   ->all();
+        // $kpiEmployees = KpiEmployee::find()->where(['<>', 'status', '99'])
+        //                                   ->andWhere(['employeeId' => $employeeId])
+        //                                   ->asArray()
+        //                                   ->all();
+
+        $employeeId = Employee::employeeId($userId);
+		if ($role <= 3) {
+			$kgiEmployee = KgiEmployee::find()
+				->select('k.kgiName,k.priority,k.quantRatio,k.amountType,k.code,kgi_employee.target,kgi_employee.result,
+			kgi_employee.status,kgi_employee.employeeId,k.unitId,kgi_employee.month,kgi_employee.year,k.kgiId,k.companyId,e.teamId,e.picture,
+			kgi_employee.kgiEmployeeId,e.employeeFirstname,e.employeeSurename')
+				->JOIN("LEFT JOIN", "kgi k", "kgi_employee.kgiId=k.kgiId")
+				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
+				->where(["kgi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "kgi_employee.employeeId" => $employeeId])
+				->orderby('k.createDateTime')
+				->asArray()
+				->all();
+		} else {
+			$kgiEmployee = KgiEmployee::find()
+				->select('k.kgiName,k.priority,k.quantRatio,k.amountType,k.code,kgi_employee.target,kgi_employee.result,
+			kgi_employee.status,kgi_employee.employeeId,k.unitId,kgi_employee.month,kgi_employee.year,k.kgiId,k.companyId,e.teamId,e.picture,
+			kgi_employee.kgiEmployeeId,e.employeeFirstname,e.employeeSurename')
+				->JOIN("LEFT JOIN", "kgi k", "kgi_employee.kgiId=k.kgiId")
+				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
+				->where(["kgi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
+				->orderby('k.createDateTime')
+				->asArray()
+				->all();
+		}
+
+
+        if ($role <= 3) {
+			$kpiEmployee = kpiEmployee::find()
+				->select('k.kpiName,k.priority,k.quantRatio,k.amountType,k.code,kpi_employee.target,kpi_employee.result,
+			kpi_employee.status,kpi_employee.employeeId,k.unitId,kpi_employee.month,kpi_employee.year,k.kpiId,k.companyId,e.teamId,e.picture,
+			kpi_employee.kpiEmployeeId,e.employeeFirstname,e.employeeSurename')
+				->JOIN("LEFT JOIN", "kpi k", "kpi_employee.kpiId=k.kpiId")
+				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
+				->where(["kpi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "kpi_employee.employeeId" => $employeeId])
+				->orderby('k.createDateTime')
+				->asArray()
+				->all();
+		} else {
+			$kpiEmployee = kpiEmployee::find()
+				->select('k.kpiName,k.priority,k.quantRatio,k.amountType,k.code,kpi_employee.target,kpi_employee.result,
+			kpi_employee.status,kpi_employee.employeeId,k.unitId,kpi_employee.month,kpi_employee.year,k.kpiId,k.companyId,e.teamId,e.picture,
+			kpi_employee.kpiEmployeeId,e.employeeFirstname,e.employeeSurename')
+				->JOIN("LEFT JOIN", "kpi k", "kpi_employee.kpiId=k.kpiId")
+				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
+				->where(["kpi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
+				->orderby('k.createDateTime')
+				->asArray()
+				->all();
+		}
     
         // นับจำนวนของแต่ละคิวรี้
         $kgiEmployeeCount = count($kgiEmployee);
         $kpiEmployeeCount = count($kpiEmployee);
-    
+        $have = ''; // สร้างตัวแปรเปล่าสำหรับเก็บค่าที่วนลูป
+
+        if (isset($kgiEmployee) && count($kgiEmployee) > 0) {
+            $totlePercent = 0;
+			foreach ($kgiEmployee as $kgi) :
+                $kgiEmployeeHistory = KgiEmployeeHistory::find()
+                ->where(["kgiEmployeeId" => $kgi["kgiEmployeeId"], "status" => [1, 2, 4]])
+                ->asArray()
+                ->orderBy('createDateTime DESC')
+                ->one();
+            if (!isset($kgiEmployeeHistory) || empty($kgiEmployeeHistory)) {
+                $kgiEmployeeHistory = KgiEmployee::find()
+                    ->where(["kgiEmployeeId" => $kgi["kgiEmployeeId"], "status" => [1, 2, 4]])
+                    ->asArray()
+                    ->orderBy('createDateTime DESC')
+                    ->one();
+            }
+            $ratio = 0;
+            if ($kgiEmployeeHistory["target"] != '' && $kgiEmployeeHistory["target"] != 0) {
+                if ($kgi["code"] == '<' || $kgi["code"] == '=') {
+                    $ratio = ($kgiEmployeeHistory["result"] / $kgiEmployeeHistory["target"]) * 100;
+                } else {
+                    if ($kgiEmployeeHistory["result"] != '' && $kgiEmployeeHistory["result"] != 0) {
+                        $ratio = ($kgiEmployeeHistory["target"] / $kgiEmployeeHistory["result"]) * 100;
+                    } else {
+                        $ratio = 0;
+                    }
+                }
+            } else {
+                $ratio = 0;
+            }
+            if (strlen($kgi["kgiName"]) > 34) {
+                $kginame = substr($kgi["kgiName"], 0, 34) . '. . .';
+            } else {
+                $kginame = $kgi["kgiName"];
+            }
+            $kgiData[$kgi["kgiEmployeeId"]] = [
+                    "name" => $kginame,
+                    "companyId" => $kgi["companyId"],
+                    "target" => $kgiEmployeeHistory["target"],
+                    "status" => $kgiEmployeeHistory["status"],
+					"quantRatio" => $kgi["quantRatio"],
+					"code" => $kgi["code"],
+					"result" => $kgiEmployeeHistory["result"],
+					"percentage" => number_format($ratio, 2),
+                    "amountType" => $kgi["amountType"],
+                    "active" => '',
+                    "id" => $kgi["kgiEmployeeId"],
+					"kgiId" => $kgi["kgiId"],
+                    "due" =>  ModelMaster::engDate($kgiEmployeeHistory["nextCheckDate"], 2),
+					"last" =>  ModelMaster::engDate($kgiEmployeeHistory["nextCheckDate"], 2)  
+            ];
+                $totlePercent = $totlePercent + $ratio;
+            endforeach;
+            $totlePercentKPI = ceil($totlePercent / $kgiEmployeeCount);
+        }
+
+
+
+        if (isset($kpiEmployee) && count($kpiEmployee) > 0) {
+            $totlePercent = 0;
+			foreach ($kpiEmployee as $kpi) :
+                $kpiEmployeeHistory = KpiEmployeeHistory::find()
+                ->where(["kpiEmployeeId" => $kpi["kpiEmployeeId"], "status" => [1, 2, 4]])
+                ->asArray()
+                ->orderBy('createDateTime DESC')
+                ->one();
+            if (!isset($kpiEmployeeHistory) || empty($kpiEmployeeHistory)) {
+                $kpiEmployeeHistory = kpiEmployee::find()
+                    ->where(["kpiEmployeeId" => $kpi["kpiEmployeeId"], "status" => [1, 2, 4]])
+                    ->asArray()
+                    ->orderBy('createDateTime DESC')
+                    ->one();
+            }
+            $ratio = 0;
+            if ($kpiEmployeeHistory["target"] != '' && $kpiEmployeeHistory["target"] != 0) {
+                if ($kpi["code"] == '<' || $kpi["code"] == '=') {
+                    $ratio = ($kpiEmployeeHistory["result"] / $kpiEmployeeHistory["target"]) * 100;
+                } else {
+                    if ($kpiEmployeeHistory["result"] != '' && $kpiEmployeeHistory["result"] != 0) {
+                        $ratio = ($kpiEmployeeHistory["target"] / $kpiEmployeeHistory["result"]) * 100;
+                    } else {
+                        $ratio = 0;
+                    }
+                }
+            } else {
+                $ratio = 0;
+            }
+            if (strlen($kpi["kpiName"]) > 34) {
+                $kpiname = substr($kpi["kpiName"], 0, 34) . '. . .';
+            } else {
+                $kpiname = $kpi["kpiName"];
+            }
+            $kpiData[$kpi["kpiEmployeeId"]] = [
+                    "name" => $kpiname,
+                    "companyId" => $kpi["companyId"],
+                    "target" => $kpiEmployeeHistory["target"],
+                    "status" => $kpiEmployeeHistory["status"],
+					"quantRatio" => $kpi["quantRatio"],
+					"code" => $kpi["code"],
+					"result" => $kpiEmployeeHistory["result"],
+					"percentage" => number_format($ratio, 2),
+                    "amountType" => $kpi["amountType"],
+                    "active" => '',
+                    "id" => $kpi["kpiEmployeeId"],
+					"kpiId" => $kpi["kpiId"],
+                    "due" =>  ModelMaster::engDate($kpiEmployeeHistory["nextCheckDate"], 2),
+					"last" =>  ModelMaster::engDate($kpiEmployeeHistory["nextCheckDate"], 2)  
+            ];
+                $totlePercent = $totlePercent + $ratio;
+            endforeach;
+            $totlePercentKPI = ceil($totlePercent / $kpiEmployeeCount);
+        }
+
+        
         // ส่งผลลัพธ์เป็น JSON
         $data = [
-            'kgiEmployeeCount' => $kgiEmployeeCount,
-            'kpiEmployeeCount' => $kpiEmployeeCount,
+            'KFI'=>  ['kfiCount' => [],'KFIData' => [],'showPercent' => [] ],
+            'KGI'=>  ['kgiCount' => $kgiEmployeeCount,'KGIData' => $kgiData,'showPercent' => $totlePercentKPI],
+            'KPI'=>  ['kpiCount' => $kpiEmployeeCount,'KPIData' => $kpiData,'showPercent' => $totlePercentKPI]
         ];
     
         return json_encode($data);

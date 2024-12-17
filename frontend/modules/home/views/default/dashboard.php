@@ -6,7 +6,7 @@ $this->title = "Dashboard"
     <div class="d-flex align-items-center mb-4">
         <img src="<?=Yii::$app->homeUrl?>images/icons/black-icons/FinancialSystem/Group23177.svg" class="me-3"
             alt="Icon" style="width: 40px;">
-        <span class="dashboard-title">Performance Matrices Dashboard</span>
+        <span class="dashboard-title"><?= Yii::t('app', 'Performance Matrices Dashboard') ?></span>
         <?php 
                     // foreach ($kgis as $year => $kgiMonth) :
                     // endforeach;
