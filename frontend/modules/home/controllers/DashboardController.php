@@ -181,40 +181,29 @@ class DashboardController extends Controller
                 ],
             ];
 
-
-            // $res['data'] = [
-            //     [
-            //         'title' => "KFI Performance",
-            //         'series' => [
-            //             [
-            //                 'type' => 'areaspline', // เปลี่ยนประเภทเป็น areaspline
-            //                 'name' => 'Performance',
-            //                 'data' => [30.0, 50.0, 50.2, 20.0, 50.1, 30.5, 40.5, 50.0, 50.3, 50.7, 60.0, 40.0],
-            //                 'color' => '#B4C2F1', // สีของเส้นและพื้นที่
-            //                 'fillOpacity' => 0.4, // ความโปร่งใสของพื้นที่ใต้เส้น
-            //                 'lineWidth' => 2, // ความหนาของเส้น
-            //                 'marker' => [
-            //                     'enabled' => true,
-            //                     'fillColor' => '#748EE9', // สีของจุด marker
-            //                 ],
-            //             ],
-            //             [
-            //                 'type' => 'line',
-            //                 'name' => 'Gap',
-            //                 'data' => [100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0],
-            //                 'color' => '#748EE9',
-            //                 'lineWidth' => 2,
-            //                 'marker' => [
-            //                     'enabled' => false, // ปิดจุด marker บนเส้นนี้
-            //                 ],
-            //                 'showInLegend' => false,
-            //             ],
-            //         ],
-            //     ],
-            // ];
-            
-
         } elseif ($type == 'KGI') {
+            // throw new Exception("Company ID: {$companyId}, Team ID: {$teamId}, Employee ID: {$employeeId}");
+
+            // $url = Path::Api() .'home/dashbord/chart-kgi?currentCategory=' . $currentCategory . '&companyId=' . $companyId . '&teamId=' . $teamId . '&employeeId=' . $employeeId;
+            // throw new Exception($url);
+
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'home/dashbord/chart-kgi?currentCategory=' . $currentCategory . '&companyId=' . $companyId . '&teamId=' . $teamId . '&employeeId=' . $employeeId);
+            // curl_setopt($api, CURLOPT_URL, Path::Api() . 'home/dashbord/chart-kgi?currentCategory=company&companyId=3&teamId=38&employeeId=266');
+            $chartKGI = curl_exec($api);
+            $chartKGI = json_decode($chartKGI, true); // แปลง JSON เป็น Array
+            // throw new Exception(print_r($chartKGI,true));
+            
+            // ตรวจสอบข้อมูลจาก API
+            $performanceData = isset($chartKGI['performance']) ? $chartKGI['performance'] : [];
+
+            // throw new Exception(print_r($chartKGI['performance'],true));
+            // ตรวจสอบและเติม 0 ให้ข้อมูล Performance ให้ครบ 12 ตัว
+            $finalPerformanceData = [];
+            for ($i = 1; $i <= 12; $i++) { // เปลี่ยน $i เริ่มจาก 1 ถึง 12
+                $finalPerformanceData[] = isset($performanceData[$i]) ? $performanceData[$i] : 0;
+            }            
+
+
             $res['data'] = [
                 [
                     'title' => "KGI Performance",
@@ -222,22 +211,22 @@ class DashboardController extends Controller
                         [
                             'type' => 'areaspline',
                             'name' => 'Performance',
-                            'data' => [20.0, 50.1, 50.8, 30.5, 40.0, 20.8, 30.5, 40.0, 40.5, 50.0, 50.7, 60.0],
+                            'data' => $finalPerformanceData, // ชุดข้อมูล Performance
                             'color' => '#FFBA00',
                             'fillOpacity' => 0.4,
                             'lineWidth' => 2,
 							'marker' => ['enabled' => true, 'fillColor' => '#FFD000']
-                            // 'marker' => ['radius' => 3],
                         ],
                         [
                             'type' => 'line',
                             'name' => 'Gap',
-                            'data' => [100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0],
+                            'data' => array_fill(0, 12, 100.0), // ชุดข้อมูล Gap เป็น 100 ตลอด 12 จุด
                             'color' => '#FFD000',
                             'lineWidth' => 2,
-							'marker' => ['enabled' => false],
+                            'marker' => [
+                                'enabled' => false,
+                            ],
                             'showInLegend' => false,
-                            // 'marker' => ['radius' => 4, 'fillColor' => '#FFD000'],
                         ],
                     ],
                 ],
