@@ -102,14 +102,14 @@ class KpiPersonalController extends Controller
 	}
 
 	public function actionDeleteKpiPersonal()
-	{ 
+	{
 		$kpiEmployeeId = $_POST["kpiEmployeeId"];
 		KpiEmployee::updateAll(["status" => 99], ["kpiEmployeeId" => $kpiEmployeeId]);
 		KpiEmployeeHistory::updateAll(["status" => 99], ["kpiEmployeeId" => $kpiEmployeeId]);
 		$res["status"] = true;
 		return json_encode($res);
 	}
-	
+
 	public function actionIndividualKpi()
 	{
 		$groupId = Group::currentGroupId();
@@ -280,7 +280,7 @@ class KpiPersonalController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-summarize?kpiId=' . $kpiId);
 		$kpiTeams = curl_exec($api);
 		$kpiTeams = json_decode($kpiTeams, true);
-		
+
 
 		curl_close($api);
 		$months = ModelMaster::monthFull(1);
@@ -300,10 +300,10 @@ class KpiPersonalController extends Controller
 			"kpiEmployeeId" => $kpiEmployeeId
 		]);
 	}
-	
+
 	public function actionAllKpiHistory()
 	{
-		
+
 		$kpiId = $_POST["kpiId"];
 		$kpiEmployeeId = $_POST["kpiEmployeeId"];
 		$kpiEmployeeHistoryId = $_POST["kpiEmployeeHistoryId"];
@@ -313,7 +313,7 @@ class KpiPersonalController extends Controller
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/kpi-history?kpiId=' . $kpiId . '&&kpiEmployeeId=' . $kpiEmployeeId .'&&kpiEmployeeHistoryId=' . $kpiEmployeeHistoryId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/kpi-history?kpiId=' . $kpiId . '&&kpiEmployeeId=' . $kpiEmployeeId . '&&kpiEmployeeHistoryId=' . $kpiEmployeeHistoryId);
 		$history = curl_exec($api);
 		$history = json_decode($history, true);
 
@@ -402,13 +402,13 @@ class KpiPersonalController extends Controller
 				"monthDetail" => $monthDetail,
 				"summarizeMonth" => $summarizeMonth
 			]);
-		}		
+		}
 		return json_encode($res);
 	}
 
 
 	public function actionKpiChart()
-	{	
+	{
 		$kpiId = $_POST["kpiId"];
 		$kpiEmployeeId = $_POST["kpiEmployeeId"];
 		$kpiEmployeeHistoryId = $_POST["kpiEmployeeHistoryId"];
@@ -419,7 +419,7 @@ class KpiPersonalController extends Controller
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/kpi-history-for-chart?kpiId=' . $kpiId . '&&kpiEmployeeId=' . $kpiEmployeeId .'&&kpiEmployeeHistoryId=' . $kpiEmployeeHistoryId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/kpi-history-for-chart?kpiId=' . $kpiId . '&&kpiEmployeeId=' . $kpiEmployeeId . '&&kpiEmployeeHistoryId=' . $kpiEmployeeHistoryId);
 		$history = curl_exec($api);
 		$history = json_decode($history, true);
 		curl_close($api);
@@ -508,7 +508,7 @@ class KpiPersonalController extends Controller
 				}
 				$i++;
 			endforeach;
-		}		
+		}
 
 		$summarizeMonth2 = array_slice($summarizeMonth2, -8);
 		foreach ($summarizeMonth2 as $index => $data):
@@ -533,7 +533,6 @@ class KpiPersonalController extends Controller
 	{
 		$param = ModelMaster::decodeParams($hash);
 		$kpiEmployeeId = $param["kpiEmployeeId"];
-
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -542,7 +541,6 @@ class KpiPersonalController extends Controller
 		$kpiEmployeeDetail = json_decode($kpiEmployeeDetail, true);
 
 		curl_close($api);
-		//   throw new Exception(print_r($kpiEmployeeDetail,true));
 		$months = ModelMaster::monthFull(1);
 		return $this->render('update_personal_kpi', [
 			"kpiEmployeeId" => $kpiEmployeeId,
@@ -561,10 +559,10 @@ class KpiPersonalController extends Controller
 			if (isset($history) && !empty($history)) {
 				// $nextCheckDateArr = explode(' ', $history["nextCheckDate"]);
 				// $nextCheckDate = $nextCheckDateArr[0];
-				if (!empty($history["nextCheckDate"])){
+				if (!empty($history["nextCheckDate"])) {
 					$nextCheckDateArr = explode(' ', $history["nextCheckDate"]);
 					$nextCheckDate = $nextCheckDateArr[0];
-				}else{
+				} else {
 					$nextCheckDate = Null;
 				}
 				$lastCheck = $history->nextCheckDate;

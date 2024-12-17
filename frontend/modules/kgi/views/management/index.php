@@ -155,7 +155,7 @@ $this->title = "KGI";
                                                 <?= $kgi["countTeam"] ?>
                                             </div>
                                         </td>
-                                        <td><?= $kgi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?></td>
+                                        <td><?= $kgi["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?></td>
                                         <td class="text-end">
                                             <?php
                                             $decimal = explode('.', $kgi["targetAmount"]);

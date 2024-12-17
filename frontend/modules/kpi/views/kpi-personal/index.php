@@ -177,9 +177,10 @@ $this->title = "Individual KPI";
                                                 <?= $kpi["priority"] ?>
                                             </div>
                                         </td>
-                                        <div class="col-5 number-tagNew  <?= 'load-' . $colorFormat ?> ">
-                                            <?= count($kpi["employee"]) ?>
-                                        </div>
+                                        <td class="text-center">
+                                            <div class="col-5 number-tagNew  <?= 'load-' . $colorFormat ?> ">
+                                                <?= count($kpi["employee"]) ?>
+                                            </div>
                                         </td>
                                         <td>
 
@@ -227,6 +228,7 @@ $this->title = "Individual KPI";
                                         </td>
                                         <td>
                                             <?php
+                                            $showPercent = 0;
                                             $percent = explode('.', $kpi['ratio']);
                                             if (isset($percent[0]) && $percent[0] == '0') {
                                                 if (isset($percent[1])) {
