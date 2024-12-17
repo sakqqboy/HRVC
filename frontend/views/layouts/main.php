@@ -49,22 +49,18 @@ AppAsset::register($this);
 
     </header> -->
 
-    <main role="main" class="pr-12">
-        <div class="col-12">
-            <div class="row">
-                <div class="menu-left-side">
-                    <?= $this->render("@frontend/views/site/menu_left")
-                    ?>
-                </div>
-
-                <div class="main-content">
-                    <div>
-                        <?= $this->render("@frontend/views/layouts/headernavbar") ?>
-                    </div>
-                    <div class="submain-content">
-                        <?= $content ?>
-                    </div>
-                </div>
+    <main role="main">
+        <div class="menu-left-side">
+            <?= $this->render("@frontend/views/site/menu_left")
+            ?>
+        </div>
+        <div class="main-content">
+            <div class="header-top bg-white">
+                <?= $this->render("@frontend/views/layouts/headernavbar")
+                ?>
+            </div>
+            <div class="submain-content">
+                <?= $content ?>
             </div>
         </div>
     </main>

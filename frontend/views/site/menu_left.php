@@ -6,7 +6,7 @@ use frontend\models\hrvc\UserRole;
 
 ?>
 <div class="col-12">
-        <div class="col-12 pl-5 pr-8 pt-20 text-center">
+        <div class="col-12">
                 <a href="<?= Yii::$app->homeUrl ?>site/index">
                         <div class="col-12">
                                 <img src="<?= Yii::$app->homeUrl ?>image/logo-hrvc-text.svg">
@@ -16,15 +16,14 @@ use frontend\models\hrvc\UserRole;
         <div class="col-12 text-under-logo text-center">
                 <?= Yii::t('app', 'Enchance Visionary Consulting') ?>
         </div>
-        <div class="col-12 mt-20 box-bnt-home">
-                <div class="btn-hrvc-home">
-                        <a href="<?= Yii::$app->homeUrl ?>site/index" class="text-light" style="text-decoration: none;"> <span>
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/home.svg" class="home-icon" style="margin-top: -3px;">
-                                </span> <?= Yii::t('app', 'Home') ?>
-                        </a>
-                </div>
+        <div class="btn-hrvc-home mt-20 font-size-16" style="font-weight:500;">
+                <a href="<?= Yii::$app->homeUrl ?>site/index" class="text-light" style="text-decoration: none;">
+                        <span>
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/home.svg" class="home-icon mr-7" style="margin-top: -3px;">
+                        </span> <?= Yii::t('app', 'Home') ?>
+                </a>
         </div>
-        <div class="col-12 mt-20 box-bnt-home">
+        <div class="col-12 mt-20">
                 <?php
                 $role = UserRole::userRight();
                 if ($role >= 2) {
@@ -112,7 +111,7 @@ use frontend\models\hrvc\UserRole;
                 }
                 ?>
         </div>
-        <div class="col-12 mt-20 box-bnt-home">
+        <div class="col-12 mt-20">
                 <div class="btn-group-menu">
                         <div class="row">
                                 <div class="col-2 pl-20">
@@ -190,7 +189,7 @@ use frontend\models\hrvc\UserRole;
                         </div>
                 </div>
         </div>
-        <div class="col-12 mt-20 box-bnt-home">
+        <div class="col-12 mt-20">
                 <div class="btn-group-menu">
                         <div class="row">
                                 <div class="col-2 pl-20">
@@ -204,98 +203,89 @@ use frontend\models\hrvc\UserRole;
                         </div>
                 </div>
                 <div id="performance-matrices" style="display: none;">
-                        <div class="col-12 first-layer-manu">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/performance.svg" class="first-layer-icon2" style="margin-top: -3px;">
-                                <?= Yii::t('app', 'Performance Dashboard') ?>
-                                <span style="float: right;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:none;" onclick="javascript:hideGroupMenu('performance-dashboard')" id="performance-dashboard-hide">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6-1.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;" onclick="javascript:showGroupMenu('performance-dashboard')" id="performance-dashboard-show">
-                                </span>
-                        </div>
-                        <div id="performance-dashboard" style="display: none;">
-                                <div class="col-12 second-layer-menu">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/KFI.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                        <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="no-underline">
-                                                <?= Yii::t('app', 'Financials') ?>
-                                        </a>
-                                        <span style="float: right;">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:none;" onclick="javascript:hideGroupMenu('third-layer-kfi')" id="third-layer-kfi-hide">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6-1.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;" onclick="javascript:showGroupMenu('third-layer-kfi')" id="third-layer-kfi-show">
-                                        </span>
-                                        <div class="col-12" id="third-layer-kfi" style="display:none;">
-                                                <div class="col-12 third-layer-menu">
-                                                        <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="no-underline">
-                                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/KFI.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                                <?= Yii::t('app', 'Company KFI') ?>
-                                                        </a>
-                                                </div>
-                                        </div>
-                                </div>
-                                <div class="col-12 second-layer-menu">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/KGI.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                        <a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" class="no-underline">
-                                                <?= Yii::t('app', 'Goals') ?>
-                                        </a>
-                                        <span style="float: right;">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:none;" onclick="javascript:hideGroupMenu('third-layer-kgi')" id="third-layer-kgi-hide">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6-1.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;" onclick="javascript:showGroupMenu('third-layer-kgi')" id="third-layer-kgi-show">
-                                        </span>
-                                        <div class="col-12" id="third-layer-kgi" style="display:none;">
-                                                <div class="col-12 third-layer-menu">
-                                                        <a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" class="no-underline">
-                                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/company.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                                <?= Yii::t('app', 'Company KGI') ?>
-                                                        </a>
-                                                </div>
-                                                <div class="col-12 third-layer-menu">
-                                                        <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/team-kgi-grid" class="no-underline">
-                                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/team.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                                <?= Yii::t('app', 'Team KGI') ?>
-                                                        </a>
-                                                </div>
-                                                <div class="col-12 third-layer-menu">
-                                                        <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi-grid" class="no-underline">
-                                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/self.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                                <?= Yii::t('app', 'Self KGI') ?>
-                                                        </a>
-                                                </div>
-                                        </div>
-                                </div>
-                                <div class="col-12 second-layer-menu">
 
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/KPI.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                        <a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="no-underline">
-                                                <?= Yii::t('app', 'Performance') ?>
-                                        </a>
-                                        <span style="float: right;">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:none;" onclick="javascript:hideGroupMenu('third-layer-kpi')" id="third-layer-kpi-hide">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6-1.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;" onclick="javascript:showGroupMenu('third-layer-kpi')" id="third-layer-kpi-show">
-                                        </span>
-                                        <div class="col-12" id="third-layer-kpi" style="display:none;">
-                                                <div class="col-12 third-layer-menu">
-                                                        <a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="no-underline">
-                                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/company.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                                <?= Yii::t('app', 'Company KPI') ?>
-                                                        </a>
-                                                </div>
-                                                <div class="col-12 third-layer-menu">
-                                                        <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/team-kpi-grid" class="no-underline">
-                                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/team.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                                <?= Yii::t('app', 'Team KPI') ?>
-                                                        </a>
-                                                </div>
-                                                <div class="col-12 third-layer-menu">
-                                                        <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi-grid" class="no-underline">
-                                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/self.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                                <?= Yii::t('app', 'Self KPI') ?>
-                                                        </a>
-                                                </div>
+                        <div class="col-12 first-layer-manu">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/KFI.svg" class="first-layer-icon" style="margin-top: -3px;">
+                                <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="no-underline">
+                                        <?= Yii::t('app', 'Financials') ?>
+                                </a>
+                                <span style="float: right;">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:none;" onclick="javascript:hideGroupMenu('third-layer-kfi')" id="third-layer-kfi-hide">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6-1.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;" onclick="javascript:showGroupMenu('third-layer-kfi')" id="third-layer-kfi-show">
+                                </span>
+                                <div class="col-12" id="third-layer-kfi" style="display:none;">
+                                        <div class="col-12 second-layer-menu">
+                                                <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="no-underline">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/KFI.svg" class="first-layer-icon" style="margin-top: -3px;">
+                                                        <?= Yii::t('app', 'Company KFI') ?>
+                                                </a>
                                         </div>
                                 </div>
                         </div>
+                        <div class="col-12 first-layer-manu">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/KGI.svg" class="first-layer-icon" style="margin-top: -3px;">
+                                <a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" class="no-underline">
+                                        <?= Yii::t('app', 'Goals') ?>
+                                </a>
+                                <span style="float: right;">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:none;" onclick="javascript:hideGroupMenu('third-layer-kgi')" id="third-layer-kgi-hide">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6-1.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;" onclick="javascript:showGroupMenu('third-layer-kgi')" id="third-layer-kgi-show">
+                                </span>
+                                <div class="col-12" id="third-layer-kgi" style="display:none;">
+                                        <div class="col-12 second-layer-menu">
+                                                <a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" class="no-underline">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/company.svg" class="first-layer-icon" style="margin-top: -3px;">
+                                                        <?= Yii::t('app', 'Company KGI') ?>
+                                                </a>
+                                        </div>
+                                        <div class="col-12 second-layer-menu">
+                                                <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/team-kgi-grid" class="no-underline">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/team.svg" class="first-layer-icon" style="margin-top: -3px;">
+                                                        <?= Yii::t('app', 'Team KGI') ?>
+                                                </a>
+                                        </div>
+                                        <div class="col-12 second-layer-menu">
+                                                <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi-grid" class="no-underline">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/self.svg" class="first-layer-icon" style="margin-top: -3px;">
+                                                        <?= Yii::t('app', 'Self KGI') ?>
+                                                </a>
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="col-12 first-layer-manu">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/KPI.svg" class="first-layer-icon" style="margin-top: -3px;">
+                                <a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="no-underline">
+                                        <?= Yii::t('app', 'Performance') ?>
+                                </a>
+                                <span style="float: right;">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:none;" onclick="javascript:hideGroupMenu('third-layer-kpi')" id="third-layer-kpi-hide">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6-1.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;" onclick="javascript:showGroupMenu('third-layer-kpi')" id="third-layer-kpi-show">
+                                </span>
+                                <div class="col-12" id="third-layer-kpi" style="display:none;">
+                                        <div class="col-12 second-layer-menu">
+                                                <a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="no-underline">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/company.svg" class="first-layer-icon" style="margin-top: -3px;">
+                                                        <?= Yii::t('app', 'Company KPI') ?>
+                                                </a>
+                                        </div>
+                                        <div class="col-12 second-layer-menu">
+                                                <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/team-kpi-grid" class="no-underline">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/team.svg" class="first-layer-icon" style="margin-top: -3px;">
+                                                        <?= Yii::t('app', 'Team KPI') ?>
+                                                </a>
+                                        </div>
+                                        <div class="col-12 second-layer-menu">
+                                                <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi-grid" class="no-underline">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/self.svg" class="first-layer-icon" style="margin-top: -3px;">
+                                                        <?= Yii::t('app', 'Self KPI') ?>
+                                                </a>
+                                        </div>
+                                </div>
+                        </div>
+                        <!-- </div> -->
                 </div>
         </div>
-        <div class="col-12 mt-20 box-bnt-home">
+        <div class="col-12 mt-20">
                 <div class="btn-group-menu">
                         <div class="row">
                                 <div class="col-2 pl-20">
@@ -360,7 +350,7 @@ use frontend\models\hrvc\UserRole;
                         </div>
                 </div>
         </div>
-        <div class="col-12 mt-20 box-bnt-home">
+        <div class="col-12 mt-20">
                 <div class="btn-group-menu">
                         <div class="row">
                                 <div class="col-2 pl-20">
@@ -436,7 +426,7 @@ use frontend\models\hrvc\UserRole;
                         </div>
                 </div>
         </div>
-        <div class="col-12 mt-20 box-bnt-home mb-10">
+        <div class="col-12 mt-20 mb-10">
                 <div class="btn-hrvc-home">
                         <a href="<?= Yii::$app->homeUrl ?>site/index" class="text-light" style="text-decoration: none;">
                                 <span>

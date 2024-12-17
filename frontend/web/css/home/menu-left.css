@@ -122,13 +122,15 @@
     letter-spacing: 1px;
     text-align: center;
     border-radius: 3px;
+    height: 37px;
 }
 
 .btn-group-menu {
     background-color: #202940;
     color: white;
     width: 100%;
-    font-size: 12px;
+    font-size: 16px;
+    font-weight: 500;
     padding-top: 3%;
     padding-bottom: 3%;
     letter-spacing: 0.5px;
@@ -141,20 +143,22 @@
 .first-layer-manu {
     padding-left: 20px;
     padding-right: 0px;
-    margin-top: 10px;
-    font-weight: 200;
+    margin-top: 15px;
+    font-weight: 500;
     letter-spacing: 0.8px;
-    font-size: 13px;
-    color: white;
+    font-size: 14px;
+    color: #E2E5EE;
+    line-height: 20px;
 }
 
 .second-layer-menu {
-    padding-left: 47px;
+    padding-left: 20px;
     padding-right: 15px;
     margin-top: 8px;
-    font-weight: 200;
+    font-weight: 300;
     letter-spacing: 0.8px;
-    font-size: 12px;
+    font-size: 14px;
+    line-height: 20px;
     color: white;
 }
 
