@@ -17,6 +17,7 @@ use backend\models\hrvc\KpiEmployeeHistory;
 use backend\models\hrvc\KpiHistory;
 use backend\models\hrvc\KpiTeam;
 use backend\models\hrvc\KpiTeamHistory;
+use backend\modules\fs\fs;
 use common\models\ModelMaster;
 use yii\web\Controller;
 
@@ -698,4 +699,155 @@ class DashbordController extends Controller
     
         return json_encode($data);
     }
+
+    public function actionChartKfi($currentCategory, $companyId, $teamId, $employeeId) {
+        // สร้างอาร์เรย์ข้อมูลที่ต้องการ
+
+        $monthlyData = [
+            1 => [], 2 => [], 3 => [], 4 => [], 5 => [], 6 => [], 7 => [], 8 => [], 9 => [], 10 => [], 11 => [], 12 => []
+        ];
+        
+        $kfiHistory = KfiHistory::find()
+        ->where(["status" => [1, 2, 4],"year" => 2024])
+        ->orderBy('month ASC,kfiHistoryId DESC')
+        ->asArray()
+        ->all();
+
+        // ลูปเพื่ออัพเดตข้อมูลในทุกเดือน
+        foreach ($kfiHistory as $entry) {
+            $month = $entry['month'];  // เดือนจากข้อมูล
+            $ratio = 0;
+            
+            // คำนวณค่า ratio
+            if ($entry["target"] != '' && $entry["target"] != 0) {
+                if ($entry["code"] == '<' || $entry["code"] == '=') {
+                    $ratio = ($entry["result"] / $entry["target"]) * 100;
+                } else {
+                    if ($entry["result"] != '' && $entry["result"] != 0) {
+                        $ratio = ($entry["target"] / $entry["result"]) * 100;
+                    } else {
+                        $ratio = 0;
+                    }
+                }
+            } else {
+                $ratio = 0;
+            }
+
+            // เก็บข้อมูลตามเดือน
+            $monthlyData[$month][] = [
+                "kfiId" => $entry["kfiId"],
+                "name" => $entry["kfiHistoryName"],
+                "month" => $entry["month"],
+                "target" => $entry["target"],
+                "result" => $entry["result"],
+                "percentage" => round($ratio, 2)
+            ];
+        }
+
+        // คำนวณผลรวมของเปอร์เซ็นต์ในแต่ละเดือน
+        $monthlySumPercent = [];
+
+        foreach ($monthlyData as $month => $data) {
+            // หากเดือนนั้นไม่มีข้อมูล
+            if (empty($data)) {
+                $monthlySumPercent[$month] = 0;  // ถ้าไม่มีข้อมูลในเดือนนั้น
+            } else {
+                $totalPercentage = 0;
+                $count = 0;
+        
+                // ลูปผ่านข้อมูลในแต่ละเดือน
+                foreach ($data as $item) {
+                    $totalPercentage += floatval($item['percentage']);  // บวกเปอร์เซ็นต์ทั้งหมด
+                    $count++;  // นับจำนวนรายการ
+                }
+        
+                // คำนวณค่าเฉลี่ยเปอร์เซ็นต์
+                if ($count > 0) {
+                    $monthlySumPercent[$month] = round($totalPercentage / $count, 2);  // คำนวณค่าเฉลี่ย
+                } else {
+                    $monthlySumPercent[$month] = 0;  // ถ้าไม่มีข้อมูลในเดือนนั้น
+                }
+            }
+        }
+        
+
+        $data = [
+            'currentCategory' => $currentCategory,
+            'companyId' => $companyId,
+            'teamId' => $teamId,
+            'employeeId' => $employeeId,
+            'performance' => $monthlySumPercent,
+        ];
+
+        // ส่งข้อมูลกลับเป็น JSON
+        return json_encode($data);
+    }
+
+
+
+    public function actionChartKgi($currentCategory, $companyId, $teamId, $employeeId) {
+        // สร้างอาร์เรย์ข้อมูลที่ต้องการ
+        $response = [
+            'currentCategory' => $currentCategory,
+            'companyId' => $companyId,
+            'teamId' => $teamId,
+            'employeeId' => $employeeId
+        ];
+
+        if($currentCategory == 'company'){
+
+
+            //เอาออกมาทั้งหมด
+            $kgiHistory = KgiHistory::find()
+				->where(["status" => [1, 2, 4],"year" => 2024])
+				->orderBy('month ASC,kgiHistoryId DESC')
+				->asArray()
+				->all();
+
+            //เอาทั้งหมดมากรองเพื่อเก็บเป็นชุดๆเป็นเดือนๆไป  
+
+            //เอาแต่ล่ะเดือนมาดูทีล่ะอันแล้วคำนวนเปอร์เซ็น
+
+            //อาผลรวม % ของทุกอันมาเก็บไว้เป็น % ของแต่ละเดือน เดือนไหนไม่มีก็ใส่ 0 
+
+            //เก็บผลลัพค่า % ของแต่ละเดือนใส่เป็นอาเรย์ทั้ง 12 เดือน
+
+        }else if($currentCategory == 'team'){
+
+        }else if($currentCategory == 'self'){
+
+        }
+    
+        // ส่งข้อมูลกลับเป็น JSON
+        return json_encode($kgiHistory);
+    }
+
+
+    public function actionChartKpi($currentCategory, $companyId, $teamId, $employeeId) {
+        // สร้างอาร์เรย์ข้อมูลที่ต้องการ
+        $response = [
+            'currentCategory' => $currentCategory,
+            'companyId' => $companyId,
+            'teamId' => $teamId,
+            'employeeId' => $employeeId
+        ];
+
+        if($currentCategory == 'company'){
+            $kpiHistory = KpiHistory::find()
+            ->where(["status" => [1, 2, 4],"year" => 2024])
+            ->orderBy('month ASC,kpiHistoryId DESC')
+            ->asArray()
+            ->all();
+
+        }else if($currentCategory == 'team'){
+
+        }else if($currentCategory == 'self'){
+
+        }
+    
+        // ส่งข้อมูลกลับเป็น JSON
+        return json_encode($kpiHistory);
+    }
+
+
 }    
