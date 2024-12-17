@@ -19,19 +19,50 @@ class DefaultController extends Controller
      * Renders the index view for the module
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex($english = true)
+    {
+
+        $language = Translator::find()->where(["status" => 1])->orderBy("english ASC")->asArray()->all();
+        return $this->render('index', [
+            "language" => $language,
+            "english" => urldecode($english)
+        ]);
+    }
+    public function actionCreate()
     {
         if (isset($_POST["english"])) {
             $model = new Translator();
             $model->english = $_POST["english"];
             $model->japanese = $_POST["japanese"];
+            $model->thai = $_POST["thai"];
+            $model->chinese = $_POST["chinese"];
+            $model->vietnam = $_POST["vietnam"];
+            $model->spanish = $_POST["spanish"];
+            $model->indonesian = $_POST["indonesian"];
             $model->status = 1;
-            $model->save(false);
+            if ($model->save(false)) {
+                return $this->redirect('index?english=' . $_POST["english"]);
+            }
         }
-        $language = Translator::find()->where(["status" => 1])->orderBy("english ASC")->asArray()->all();
-        return $this->render('index', [
-            "language" => $language
-        ]);
+        return $this->render('form');
+    }
+    public function actionUpdate($translatorId)
+    {
+        $lang = Translator::find()->where(["translatorId" => $translatorId])->one();
+        if (isset($_POST["english"])) {
+            $lang->english = $_POST["english"];
+            $lang->japanese = $_POST["japanese"];
+            $lang->thai = $_POST["thai"];
+            $lang->chinese = $_POST["chinese"];
+            $lang->vietnam = $_POST["vietnam"];
+            $lang->spanish = $_POST["spanish"];
+            $lang->indonesian = $_POST["indonesian"];
+            $lang->status = 1;
+            if ($lang->save(false)) {
+                return $this->redirect('index?english=' . $_POST["english"]);
+            }
+        }
+        return $this->render('form', ["lang" => $lang]);
     }
     public function actionEditTranslate()
     {
@@ -52,10 +83,9 @@ class DefaultController extends Controller
     public function actionDeleteTranslate()
     {
         $res = [];
-        Translator::deleteAll(["id" => $_POST["id"]]);
+        Translator::deleteAll(["translatorId" => $_POST["id"]]);
         $res["status"] = true;
         return json_encode($res);
-        //return $this->redirect('index');
     }
     public function actionImportLanguage()
     {
@@ -173,5 +203,18 @@ class DefaultController extends Controller
             $transaction->rollBack();
             throw $e;
         }
+    }
+    public function actionSearchEnglish()
+    {
+        $word = $_POST["word"];
+        $languages = Translator::find()->where(['LIKE', 'LOWER(english)',  strtolower($word)])->asArray()->all();
+        $text = "";
+        if (count($languages) > 0) {
+            $text = $this->renderAjax("search_result", [
+                "languages" => $languages
+            ]);
+        }
+        $res["textSearch"] = $text;
+        return json_encode($res);
     }
 }

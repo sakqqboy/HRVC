@@ -1,10 +1,11 @@
 function hideGroupMenu(groupname) { 
-	$("#" + groupname).hide();
+	//$("#" + groupname).hide();
+	$("#" + groupname).slideUp(200);
 	$("#" + groupname + '-hide').hide();
 	$("#" + groupname+'-show').show();
 }
 function showGroupMenu(groupname) { 
-	$("#" + groupname).show();
+	$("#" + groupname).slideDown(200);;
 	$("#" + groupname + '-show').hide();
 	$("#" + groupname+'-hide').show();
 }
