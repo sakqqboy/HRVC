@@ -316,7 +316,7 @@ $this->title = "INDIVIDUAL KPI";
                                                                 <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/kpi-individual-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId'], 'kpiEmployeeHistoryId' => $kpi["kpiEmployeeHistoryId"], 'kpiEmployeeId' => $kpiEmployeeId]) ?>"
                                                                     class="font-<?= $colorFormat ?>"
                                                                     style="top: 2px;<?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
-                                                                    <?= Yii::t('app', 'View mate') ?>
+                                                                    <?= Yii::t('app', 'View Mates') ?>
                                                                 </a>
                                                             </div>
                                                         </div>
@@ -358,7 +358,7 @@ $this->title = "INDIVIDUAL KPI";
                                                                 <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/kpi-individual-history/<?= ModelMaster::encodeParams(['kpiId' => $kpi['kpiId'], 'kpiEmployeeHistoryId' => $kpi["kpiEmployeeHistoryId"], 'kpiEmployeeId' => $kpiEmployeeId]) ?>"
                                                                     class="font-<?= $colorFormat ?>"
                                                                     style="top: 2px;<?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
-                                                                    <?= Yii::t('app', 'View Team') ?>
+                                                                    <?= Yii::t('app', 'View Teams') ?>
                                                                 </a>
                                                             </div>
                                                             <div class="col-1">
@@ -480,7 +480,11 @@ $this->title = "INDIVIDUAL KPI";
                                                             }
                                                         }
                                                     } else {
-                                                        $showPercent = round($kpi['ratio']);
+                                                        if ($kpi['ratio'] != '') {
+                                                            $showPercent = round($kpi['ratio']);
+                                                        } else {
+                                                            $showPercent = 0;
+                                                        }
                                                     }
                                                     ?>
                                                     <div class="progress">

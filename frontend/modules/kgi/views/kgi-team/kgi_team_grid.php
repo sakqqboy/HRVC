@@ -489,13 +489,13 @@ $this->title = "TEAM KGI";
                                         </div>
                                     </div>
                                     <div class="col-lg-1 pim-subheader-font border-right-<?= $colorFormat ?> mt-5 pl-10 pr-10">
-                                        <div class="col-12">Quant Ratio</div>
+                                        <div class="col-12"><?= Yii::t('app', 'Quant Ratio') ?></div>
                                         <div class="col-12 border-bottom-<?= $colorFormat ?> pb-10 pim-normal-text">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $kgi["quantRatio"] == 1 ? 'quantity' : 'diamon' ?>.svg"
                                                 class="pim-iconKFI" style="margin-top: -1px; margin-left: 3px;">
-                                            <?= $kgi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?>
+                                            <?= $kgi["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?>
                                         </div>
-                                        <div class="col-12 pr-0 pt-10 pl-0"><?= Yii::t('app', 'update Interval') ?></div>
+                                        <div class="col-12 pr-0 pt-10 pl-0"><?= Yii::t('app', 'Update Interval') ?></div>
                                         <div class="col-12  pim-normal-text">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/monthly.svg"
                                                 class="pim-iconKFI" style="margin-top: -1px; margin-left: 3px;">

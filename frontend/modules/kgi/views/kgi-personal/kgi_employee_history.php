@@ -152,7 +152,7 @@ $this->title = 'Self KGI View';
                                         <i class="fa fa-diamond" aria-hidden="true"></i>
                                         <?= $kgiEmployeeDetail["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?>
                                     </div>
-                                    <div class="col-12 pr-0 pt-5 pl-0"><?= Yii::t('app', 'update Interval') ?></div>
+                                    <div class="col-12 pr-0 pt-5 pl-0"><?= Yii::t('app', 'Update Interval') ?></div>
                                     <div class="col-12  pim-duedate">
                                         <?= Yii::t('app', $kgiEmployeeDetail["unitText"]) ?>
                                     </div>

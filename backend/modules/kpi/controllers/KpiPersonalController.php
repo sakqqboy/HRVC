@@ -156,13 +156,13 @@ class KpiPersonalController extends Controller
 					"unit" => Unit::unitName($kpi["unitId"]),
 					"month" => ModelMaster::monthEng($kpi['month'], 1),
 					"priority" => $kpi["priority"],
-					"ratio" => number_format($ratio, 2),
+					"ratio" => $ratio,
 					"periodCheck" => ModelMaster::engDate(KpiEmployee::lastestCheckDate($kpiEmployeeHistory["kpiEmployeeId"]), 2),
 					"nextCheck" =>  ModelMaster::engDate($kpiEmployeeHistory["nextCheckDate"], 2),
 					"countTeam" => KpiTeam::kpiTeam($kpi["kpiId"]),
 					"flag" => Country::countryFlagBycompany($kpi["companyId"]),
 					"status" => $kpiEmployeeHistory["status"],
-					"kpiEmployeeHistoryId" => $kpiEmployeeHistory["kpiEmployeeHistoryId"] ?? 0, 
+					"kpiEmployeeHistoryId" => $kpiEmployeeHistory["kpiEmployeeHistoryId"] ?? 0,
 					"countryName" => Country::countryNameBycompany($kpi['companyId']),
 					"issue" => KpiIssue::lastestIssue($kpi["kpiId"])["issue"],
 					"solution" => KpiIssue::lastestIssue($kpi["kpiId"])["solution"],
@@ -180,9 +180,9 @@ class KpiPersonalController extends Controller
 		return json_encode($data);
 	}
 
-	
-	public function actionKpiHistory($kpiId,$kpiEmployeeId, $kpiEmployeeHistoryId)
-	{		
+
+	public function actionKpiHistory($kpiId, $kpiEmployeeId, $kpiEmployeeHistoryId)
+	{
 		if ($kpiEmployeeHistoryId == 0) {
 			$kpiEmployeeHistory = KpiEmployeeHistory::find()
 				->where(["kpiEmployeeId" => $kpiEmployeeId, "status" => [1, 2, 4]])
@@ -228,9 +228,9 @@ class KpiPersonalController extends Controller
 		return json_encode($data);
 	}
 
-	public function actionKpiHistoryForChart($kpiId,$kpiEmployeeId, $kpiEmployeeHistoryId)
+	public function actionKpiHistoryForChart($kpiId, $kpiEmployeeId, $kpiEmployeeHistoryId)
 	{
-		
+
 		if ($kpiEmployeeHistoryId == 0) {
 			$kpiEmployeeHistory = KpiEmployeeHistory::find()
 				->where(["kpiEmployeeId" => $kpiEmployeeId, "status" => [1, 2, 4]])
@@ -446,7 +446,7 @@ class KpiPersonalController extends Controller
 				"year" => $kpiEmployee["year"],
 				"remark" => $kpiEmployee["remark"],
 				"picture" => $employee["picture"],
-				"teamName"=>Team::teamName($employee["teamId"]),
+				"teamName" => Team::teamName($employee["teamId"]),
 				// "teamName" => Team::teamName($kpiEmployee["teamId"]),
 				"isOver" => ModelMaster::isOverDuedate(KpiEmployee::nextCheckDate($kpiEmployee['kpiEmployeeId']))
 			];
@@ -604,7 +604,7 @@ class KpiPersonalController extends Controller
 					"periodCheck" => ModelMaster::engDate(KpiEmployee::lastestCheckDate($kpiEmployee["kpiEmployeeId"]), 2),
 					"nextCheck" =>  ModelMaster::engDate($kpiEmployeeHistory["nextCheckDate"], 2),
 					"status" => $kpiEmployeeHistory["status"],
-					"kpiEmployeeHistoryId" => $kpiEmployeeHistory["kpiEmployeeHistoryId"] ?? 0, 
+					"kpiEmployeeHistoryId" => $kpiEmployeeHistory["kpiEmployeeHistoryId"] ?? 0,
 					"flag" => Country::countryFlagBycompany($kpiEmployee["companyId"]),
 					"countryName" => Country::countryNameBycompany($kpiEmployee['companyId']),
 					"kpiEmployee" => KpiEmployee::kpiEmployee($kpiEmployee["kpiId"]),

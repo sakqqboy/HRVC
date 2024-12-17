@@ -37,7 +37,7 @@ $this->title = "KPI Team Setting";
 				</div>
 				<div class="col-12 diamond-con-Backdrop3 mt-10">
 					<i class="fa fa-diamond" aria-hidden="true"></i>
-					<span id="quanRatioHistory"><?= $kpiDetail["quantRatio"] == 1 ? "Quantity" : "Quality" ?></span>
+					<span id="quanRatioHistory"><?= $kpiDetail["quantRatio"] == 1 ? Yii::t('app', "Quantity") : Yii::t('app', "Quality") ?></span>
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-6 col-3 text-center">

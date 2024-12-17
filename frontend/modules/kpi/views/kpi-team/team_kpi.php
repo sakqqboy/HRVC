@@ -206,7 +206,7 @@ $this->title = "KPI";
                                                 <?= $kpi["countTeam"] ?>
                                             </div>
                                         </td>
-                                        <td><?= $kpi["quantRatio"] == 1 ? 'Quantity' : 'Quality' ?></td>
+                                        <td><?= $kpi["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?></td>
                                         <td class="text-end">
                                             <?php
                                             if ($kpi["result"] != '') {
