@@ -28,7 +28,7 @@ use frontend\models\hrvc\UserRole;
                 $role = UserRole::userRight();
                 if ($role >= 2) {
                 ?>
-                        <div class="btn-group-menu mb-10">
+                        <div class="btn-group-menu">
                                 <div class="row">
                                         <div class="col-2 pl-20">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/MasterSetting/group.svg" class="home-icon" style="margin-top: -3px;">
@@ -127,7 +127,7 @@ use frontend\models\hrvc\UserRole;
                 <div id="financial-system" style="display: none;">
                         <div class="col-12 first-layer-manu">
                                 <div class="col-12">
-                                        <a href="<?= Path::fsModule() ?>?__id=<?= Yii::$app->user->id ?>" class="no-underline col-12">
+                                        <a href="<?= Path::fsModule() ?>?__id=<?= Yii::$app->user->id ?>" class="no-underline">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/FinancialSystem/dashboard.svg" class="first-layer-icon" style="margin-top: -3px;">
                                                 <?= Yii::t('app', 'Dashboard') ?>
                                         </a>
@@ -203,7 +203,14 @@ use frontend\models\hrvc\UserRole;
                         </div>
                 </div>
                 <div id="performance-matrices" style="display: none;">
-
+                        <div class="col-12 first-layer-manu">
+                                <div class="col-12">
+                                        <a href="<?= Yii::$app->homeUrl ?>home/default/dashboard" class="no-underline">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/FinancialSystem/dashboard.svg" class="first-layer-icon" style="margin-top: -3px;">
+                                                <?= Yii::t('app', 'Dashboard') ?>
+                                        </a>
+                                </div>
+                        </div>
                         <div class="col-12 first-layer-manu">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/KFI.svg" class="first-layer-icon" style="margin-top: -3px;">
                                 <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="no-underline">
@@ -216,7 +223,7 @@ use frontend\models\hrvc\UserRole;
                                 <div class="col-12" id="third-layer-kfi" style="display:none;">
                                         <div class="col-12 second-layer-menu">
                                                 <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="no-underline">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/KFI.svg" class="first-layer-icon" style="margin-top: -3px;">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/company.svg" class="first-layer-icon" style="margin-top: -3px;">
                                                         <?= Yii::t('app', 'Company KFI') ?>
                                                 </a>
                                         </div>
@@ -428,7 +435,7 @@ use frontend\models\hrvc\UserRole;
         </div>
         <div class="col-12 mt-20 mb-10">
                 <div class="btn-hrvc-home">
-                        <a href="<?= Yii::$app->homeUrl ?>site/index" class="text-light" style="text-decoration: none;">
+                        <a href="<?= Yii::$app->homeUrl ?>language/default/index" class="text-light" style="text-decoration: none;">
                                 <span>
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/8.svg" class="home-icon" style="margin-top: -3px;">
                                 </span> <?= Yii::t('app', 'Setting') ?>

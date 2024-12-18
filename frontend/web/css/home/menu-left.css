@@ -142,7 +142,7 @@
 
 .first-layer-manu {
     padding-left: 20px;
-    padding-right: 0px;
+    padding-right: 9px;
     margin-top: 15px;
     font-weight: 500;
     letter-spacing: 0.8px;
@@ -173,8 +173,8 @@
 }
 
 .first-layer-icon {
-    height: 15px;
-    width: 15px;
+    height: 18px;
+    width: 18px;
     margin-right: 2px;
 }
 

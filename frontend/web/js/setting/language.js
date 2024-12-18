@@ -8,20 +8,24 @@ $url = $baseUrl;
 function searchWord() { 
 	var word = $("#search-english").val();
 	var url = $url + 'language/default/search-english';
-	$.ajax({
-	    type: "POST",
-	    dataType: 'json',
-	    url: url,
-	    data: { word: word },
-	    success: function (data) {
-		    if (data.textSearch != '') {
-			    $("#word-result").html(data.textSearch);
-		    } else { 
-			$("#word-result").html('');
-		    }
+	if (word != '') {
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { word: word },
+			success: function (data) {
+				if (data.textSearch != '') {
+					$("#word-result").html(data.textSearch);
+				} else {
+					$("#word-result").html('');
+				}
    
-	    }
-	});
+			}
+		});
+	} else { 
+		$("#word-result").html('');
+	}
 }
 function deleteTran(translatorId) { 
 	var url = $url + 'language/default/delete-translate';

@@ -19,13 +19,13 @@ class DefaultController extends Controller
      * Renders the index view for the module
      * @return string
      */
-    public function actionIndex($english = true)
+    public function actionIndex($english = false)
     {
 
         $language = Translator::find()->where(["status" => 1])->orderBy("english ASC")->asArray()->all();
         return $this->render('index', [
             "language" => $language,
-            "english" => urldecode($english)
+            "english" => $english == false ? '' : urldecode($english)
         ]);
     }
     public function actionCreate()
