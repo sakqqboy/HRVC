@@ -182,7 +182,13 @@ $this->title = 'Title';
 												Job Description
 											</div>
 											<div class="col-12 mt-20 font-size-12 title-description-box pl-20">
-												<?= substr($t["jobDescription"], 0, 190) ?><?= strlen($t["jobDescription"]) > 190 ? '...' : '' ?>
+												<?php
+												if (isset($t["jobDescription"]) && $t["jobDescription"] != '') {
+												?>
+													<?= substr($t["jobDescription"], 0, 190) ?><?= strlen($t["jobDescription"]) > 190 ? '...' : '' ?>
+												<?php
+												}
+												?>
 											</div>
 										</div>
 									</div>
