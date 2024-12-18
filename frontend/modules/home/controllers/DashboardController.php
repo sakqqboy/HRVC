@@ -132,8 +132,8 @@ class DashboardController extends Controller
         // This is just an example; replace with your Performance logic
         if ($type == 'KFI') {
             
-		//เรียก api ดึงดาต้ามา ใส่ในอาเรย์ก่อนresไป 
-        // เรียก API ดึงข้อมูลมา
+            //เรียก api ดึงดาต้ามา ใส่ในอาเรย์ก่อนresไป 
+            // เรียก API ดึงข้อมูลมา
             curl_setopt($api, CURLOPT_URL, Path::Api() . 'home/dashbord/chart-kfi?currentCategory=' . $currentCategory . '&&companyId=' . $companyId . '&&teamId=' . $teamId . '&&employeeId=' . $employeeId);
             $chartKFI = curl_exec($api);
             $chartKFI = json_decode($chartKFI, true); // แปลง JSON เป็น Array
@@ -232,6 +232,24 @@ class DashboardController extends Controller
                 ],
             ];
         } elseif ($type == 'KPI') {
+
+            
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'home/dashbord/chart-kpi?currentCategory=' . $currentCategory . '&companyId=' . $companyId . '&teamId=' . $teamId . '&employeeId=' . $employeeId);
+            // curl_setopt($api, CURLOPT_URL, Path::Api() . 'home/dashbord/chart-kgi?currentCategory=company&companyId=3&teamId=38&employeeId=266');
+            $chartKGI = curl_exec($api);
+            $chartKGI = json_decode($chartKGI, true); // แปลง JSON เป็น Array
+            // throw new Exception(print_r($chartKGI,true));
+            
+            // ตรวจสอบข้อมูลจาก API
+            $performanceData = isset($chartKGI['performance']) ? $chartKGI['performance'] : [];
+
+            // throw new Exception(print_r($chartKGI['performance'],true));
+            // ตรวจสอบและเติม 0 ให้ข้อมูล Performance ให้ครบ 12 ตัว
+            $finalPerformanceData = [];
+            for ($i = 1; $i <= 12; $i++) { // เปลี่ยน $i เริ่มจาก 1 ถึง 12
+                $finalPerformanceData[] = isset($performanceData[$i]) ? $performanceData[$i] : 0;
+            }            
+
             $res['data'] = [
                 [
                     'title' => "KPI Performance",
@@ -239,7 +257,7 @@ class DashboardController extends Controller
                         [
                             'type' => 'areaspline',
                             'name' => 'Performance',
-                            'data' => [30.5, 40.0, 40.8, 50.5, 40.8, 60.0, 60.5, 60.0, 70.2 , 50.5, 70.2, 60.0],
+                            'data' => $finalPerformanceData, // ชุดข้อมูล Performance
                             'color' => '#F20',
                             'fillOpacity' => 0.4,
                             'lineWidth' => 2,
@@ -249,7 +267,7 @@ class DashboardController extends Controller
                         [
                             'type' => 'line',
                             'name' => 'Gap',
-                            'data' => [100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0],
+                            'data' => array_fill(0, 12, 100.0), // ชุดข้อมูล Gap เป็น 100 ตลอด 12 จุด
                             'color' => '#FF715B',
                             'lineWidth' => 2,
 							'marker' => ['enabled' => false],

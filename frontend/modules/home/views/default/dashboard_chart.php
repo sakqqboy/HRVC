@@ -74,8 +74,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const baseUrl = '<?= $baseUrl ?>'; // Base URL จาก PHP
         var url = `${baseUrl}home/dashboard/chart-dashbord`;
 
-        alert(currentCategory);
-        alert(type);
+        // alert(currentCategory);
+        // alert(type);
         $.ajax({
             type: "POST",
             dataType: 'JSON',
