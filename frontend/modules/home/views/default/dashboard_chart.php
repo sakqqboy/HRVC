@@ -123,21 +123,35 @@ document.addEventListener("DOMContentLoaded", () => {
                     xAxis: {
                         categories: categories, // ใช้ categories ที่ได้จาก PHP
                         plotLines: [{
-                            color: '#007BFF',
+                            color: '#2580D3',
                             width: 1,
                             value: currentMonth, // ตำแหน่งของ plotLine คือตามเดือนปัจจุบัน
                             label: {
                                 text: 'Today',
                                 align: 'right',
                                 y: -10, // เลื่อนขึ้น (- คือลดลง, + คือลงล่าง)
-                                x: 20, // เลื่อนขึ้น (- คือลดลง, + คือลงล่าง)
+                                x: 25, // เลื่อนขึ้น (- คือลดลง, + คือลงล่าง)
+                                useHTML: true, // ใช้ HTML แทนข้อความธรรมดา
                                 style: {
-                                    color: '#007BFF', // เปลี่ยนสีข้อความ
-                                    fontWeight: 'bold', // ความหนาของฟอนต์
-                                    fontSize: '12px', // ขนาดฟอนต์
-                                    backgroundColor: '#007BFF', // สีพื้นหลัง
-                                    fontFamily: 'Verdana, sans-serif', // ฟอนต์ที่ต้องการ
-                                    textDecoration: 'underline' // ตกแต่งข้อความ เช่น เส้นใต้
+                                    color: '#FFFFFF', // สีข้อความ
+                                    fontWeight: 'bold', // ตัวหนา
+                                    fontSize: '10px', // ขนาดฟอนต์
+                                    fontFamily: 'Verdana, sans-serif',
+                                },
+                                formatter: function() {
+                                    return `<div style="
+                                           display: flex;
+                                            width: 49.579px;
+                                            height: 16.526px;
+                                            padding: 4.065px 4.743px;
+                                            flex-direction: column;
+                                            justify-content: center;
+                                            align-items: center;
+                                            gap: 6.776px;
+                                            flex-shrink: 0;
+                                            border-radius: 27.78px;
+                                            background: var(--Primary-Blue---HRVC, #2580D3);
+                                        ">Today</div>`;
                                 },
                                 rotation: 0
                             },
@@ -199,8 +213,43 @@ document.addEventListener("DOMContentLoaded", () => {
                     tooltip: {
                         shared: true,
                         useHTML: true,
-                        headerFormat: '<b>{point.key}</b><br>',
-                        pointFormat: '<span style="color:{series.color}">\u25CF</span> {series.name}: <b>{point.y}</b><br>'
+                        headerFormat: '<b>{point.key}</b><br>', // Show the category (e.g., month or data point)
+                        formatter: function() {
+                            let result = '';
+                            let gap = '';
+                            let name = '';
+                            let pointPosition = this.points[0]
+                                .x; // This gets the x position of the first point in the series
+
+                            // Loop through the series data
+                            this.points.forEach(function(point) {
+                                if (point.series.name == 'Result') {
+                                    result = point.y + '%';
+                                } else if (point.series.name == 'Gap') {
+                                    gap = point.y + '%';
+                                }
+                                name = point.key;
+                            });
+
+                            // Tooltip HTML content (Speech Bubble)
+                            return `
+                                <span style="font-weight: bold; font-size: 14px;">${name}</span>
+                                <div style="position: relative; display: flex; justify-content: space-between; gap: 20px; text-align: center;">
+                                    <div>
+                                        <span style="font-size: 12px; color: #666;">Result</span><br>
+                                        <span style="font-weight: bold; font-size: 14px;">${result}</span>
+                                    </div>
+                                    <div>
+                                        <span style="font-size: 12px; color: #666;">Gap</span><br>
+                                        <span style="font-weight: bold; font-size: 14px;">${gap}</span>
+                                    </div>
+                                </div>
+                                <div style="position: absolute; left: 50%; top: -10px; transform: translateX(-50%); width: 0; height: 0; 
+                                    border-left: 5px solid transparent; 
+                                    border-right: 5px solid transparent; 
+                                    border-bottom: 10px solid #fff;"></div> <!-- Arrow pointing to the point -->
+                            `;
+                        }
                     }
                 });
             }

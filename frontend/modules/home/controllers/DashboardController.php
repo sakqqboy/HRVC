@@ -148,6 +148,9 @@ class DashboardController extends Controller
                 $finalPerformanceData[] = isset($performanceData[$i]) ? $performanceData[$i] : 0;
             }            
 
+            // $finalPerformanceData = [79, 64, 25, 90, 10, 13, 191, 96, 101.358, 83, 6, 32] ;
+
+
             // throw new Exception(print_r($finalPerformanceData,true));
             // สร้างข้อมูลสำหรับกราฟ
             $res['data'] = [
@@ -158,28 +161,61 @@ class DashboardController extends Controller
                             'type' => 'areaspline',
                             'name' => 'Performance',
                             'data' => $finalPerformanceData, // ชุดข้อมูล Performance
-                            'color' => '#B4C2F1',
-                            'fillOpacity' => 0.4,
+                            'color' => '#748EE9',
+                            'fillOpacity' => 0.5,
                             'lineWidth' => 2,
                             'marker' => [
-                                'enabled' => true,
-                                'fillColor' => '#748EE9',
+                                'enabled' => true
                             ],
+                            'visible' => true,
+                            // 'enableMouseTracking' => false, // เปิดให้แสดง tooltip เมื่อเอาเมาส์ไปชี้
+                            'showInLegend' => true
+                        ],
+                        [
+                            'type' => 'line',
+                            'name' => 'Result',
+                            'data' => $finalPerformanceData, // ชุดข้อมูล Performance
+                            'color' => 'transparent', // ทำให้เส้นมองไม่เห็น
+                            'lineWidth' => 0, // ไม่แสดงเส้น
+                            'marker' => [
+                                'enabled' => false, // ไม่แสดงจุด
+                            ],
+                            'showInLegend' => false, // ไม่แสดงใน Legend
+                            'enableMouseTracking' => true, // เปิดการติดตามเมาส์
                         ],
                         [
                             'type' => 'line',
                             'name' => 'Gap',
+                            'data' => array_map(function ($value) {
+                                return 100 - $value;
+                            }, $finalPerformanceData), // คำนวณ Gap
+                            'color' => 'transparent', // ทำให้เส้นมองไม่เห็น
+                            'lineWidth' => 0, // ไม่แสดงเส้น
+                            'marker' => [
+                                'enabled' => false, // ไม่แสดงจุด
+                            ],
+                            'showInLegend' => false, // ไม่แสดงใน Legend
+                            'enableMouseTracking' => true, // เปิดการติดตามเมาส์
+                        ],
+                        [
+                            'type' => 'line',
+                            'name' => 'Max',
                             'data' => array_fill(0, 12, 100.0), // ชุดข้อมูล Gap เป็น 100 ตลอด 12 จุด
                             'color' => '#748EE9',
                             'lineWidth' => 2,
                             'marker' => [
                                 'enabled' => false,
                             ],
+                            'visible' => true,
+                            'enableMouseTracking' => false, // เปิดให้แสดง tooltip เมื่อเอาเมาส์ไปชี้
                             'showInLegend' => false,
                         ],
                     ],
                 ],
             ];
+
+                        // throw new Exception(print_r($res['data'],true));
+
 
         } elseif ($type == 'KGI') {
             // throw new Exception("Company ID: {$companyId}, Team ID: {$teamId}, Employee ID: {$employeeId}");
@@ -215,17 +251,50 @@ class DashboardController extends Controller
                             'color' => '#FFBA00',
                             'fillOpacity' => 0.4,
                             'lineWidth' => 2,
-							'marker' => ['enabled' => true, 'fillColor' => '#FFD000']
+                            'marker' => [
+                                'enabled' => true
+                            ],
+                            'visible' => true,
+                            // 'enableMouseTracking' => false, // เปิดให้แสดง tooltip เมื่อเอาเมาส์ไปชี้
+                            'showInLegend' => true,
+                        ],
+                        [
+                            'type' => 'line',
+                            'name' => 'Result',
+                            'data' => $finalPerformanceData, // ชุดข้อมูล Performance
+                            'color' => 'transparent', // ทำให้เส้นมองไม่เห็น
+                            'lineWidth' => 0, // ไม่แสดงเส้น
+                            'marker' => [
+                                'enabled' => false, // ไม่แสดงจุด
+                            ],
+                            'showInLegend' => false, // ไม่แสดงใน Legend
+                            'enableMouseTracking' => true, // เปิดการติดตามเมาส์
                         ],
                         [
                             'type' => 'line',
                             'name' => 'Gap',
-                            'data' => array_fill(0, 12, 100.0), // ชุดข้อมูล Gap เป็น 100 ตลอด 12 จุด
+                            'data' => array_map(function ($value) {
+                                return 100 - $value;
+                            }, $finalPerformanceData), // คำนวณ Gap
+                            'color' => 'transparent', // ทำให้เส้นมองไม่เห็น
+                            'lineWidth' => 0, // ไม่แสดงเส้น
+                            'marker' => [
+                                'enabled' => false, // ไม่แสดงจุด
+                            ],
+                            'showInLegend' => false, // ไม่แสดงใน Legend
+                            'enableMouseTracking' => true, // เปิดการติดตามเมาส์
+                        ],
+                        [
+                            'type' => 'line',
+                            'name' => 'Max',
+                            'data' => array_fill(0, 12, 100.0), // ชุดข้อมูล Max เป็น 100 ตลอด 12 จุด
                             'color' => '#FFD000',
-                            'lineWidth' => 2,
+                            'lineWidth' => 4,
                             'marker' => [
                                 'enabled' => false,
                             ],
+                            'visible' => true,
+                            'enableMouseTracking' => false, // เปิดให้แสดง tooltip เมื่อเอาเมาส์ไปชี้
                             'showInLegend' => false,
                         ],
                     ],
@@ -261,18 +330,51 @@ class DashboardController extends Controller
                             'color' => '#F20',
                             'fillOpacity' => 0.4,
                             'lineWidth' => 2,
-							'marker' => ['enabled' => true, 'fillColor' => '#FF715B']
-                            // 'marker' => ['radius' => 3],
+                            'marker' => [
+                                'enabled' => true
+                            ],
+                            'visible' => true,
+                            // 'enableMouseTracking' => false, // เปิดให้แสดง tooltip เมื่อเอาเมาส์ไปชี้
+                            'showInLegend' => true,
+                        ],
+                        [
+                            'type' => 'line',
+                            'name' => 'Result',
+                            'data' => $finalPerformanceData, // ชุดข้อมูล Performance
+                            'color' => 'transparent', // ทำให้เส้นมองไม่เห็น
+                            'lineWidth' => 0, // ไม่แสดงเส้น
+                            'marker' => [
+                                'enabled' => false, // ไม่แสดงจุด
+                            ],
+                            'showInLegend' => false, // ไม่แสดงใน Legend
+                            'enableMouseTracking' => true, // เปิดการติดตามเมาส์
+                        ],
+                        [
+                            'type' => 'line',
+                            'name' => 'Gap',
+                            'data' => array_map(function ($value) {
+                                return 100 - $value;
+                            }, $finalPerformanceData), // คำนวณ Gap
+                            'color' => 'transparent', // ทำให้เส้นมองไม่เห็น
+                            'lineWidth' => 0, // ไม่แสดงเส้น
+                            'marker' => [
+                                'enabled' => false, // ไม่แสดงจุด
+                            ],
+                            'showInLegend' => false, // ไม่แสดงใน Legend
+                            'enableMouseTracking' => true, // เปิดการติดตามเมาส์
                         ],
                         [
                             'type' => 'line',
                             'name' => 'Gap',
                             'data' => array_fill(0, 12, 100.0), // ชุดข้อมูล Gap เป็น 100 ตลอด 12 จุด
                             'color' => '#FF715B',
-                            'lineWidth' => 2,
-							'marker' => ['enabled' => false],
+                            'lineWidth' => 4,
+                            'marker' => [
+                                'enabled' => false,
+                            ],
+                            'visible' => true,
+                            'enableMouseTracking' => false, // เปิดให้แสดง tooltip เมื่อเอาเมาส์ไปชี้
                             'showInLegend' => false,
-                            // 'marker' => ['radius' => 4, 'fillColor' => '#FF715B'],
                         ],
                     ],
                 ],
