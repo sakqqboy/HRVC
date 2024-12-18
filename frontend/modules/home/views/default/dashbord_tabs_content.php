@@ -1,6 +1,5 @@
 <?php
 
-use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
 if (empty($contentDetail['KFI'] ?? null) && empty($contentDetail['KGI'] ?? null) && empty($contentDetail['KPI'] ?? null)):
@@ -163,8 +162,10 @@ else:
                             <hr class="custom-hr">
                             <!-- Progress Bar -->
                             <div class="progress-dashboard">
-                                <div class="progress-bar bg-KFI" style="width: <?= $contentDetail['KFI']['showPercent'] ?>%;"
-                                    role="progressbar" aria-valuenow="61" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-KFI"
+                                    style="width: <?= min($contentDetail['KFI']['showPercent'], 100) ?>%;" role="progressbar"
+                                    aria-valuenow="<?= min($contentDetail['KFI']['showPercent'], 100) ?>" aria-valuemin="0"
+                                    aria-valuemax="100"></div>
                             </div>
                         </div>
 
@@ -176,13 +177,13 @@ else:
                                 </div>
                                 <div class="col-2 d-flex justify-content-between">
                                     <span class="toggle-text">
-                                        <button class="show-more-btn" onclick="changeKFIData('left')">
+                                        <button class="show-more-btn" cursor="pointer" onclick="changeKFIData('left')">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/btn-KFI-left.svg"
                                                 style="margin-top: 1px; margin-left: 3px;">
                                         </button>
                                     </span>
                                     <span class="toggle-text">
-                                        <button class="show-more-btn" onclick="changeKFIData('right')">
+                                        <button class="show-more-btn" cursor="pointer" onclick="changeKFIData('right')">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/btn-KFI-right.svg"
                                                 style="margin-top: 1px; margin-left: 3px;">
                                         </button>
@@ -293,8 +294,10 @@ else:
                         <hr class="custom-hr">
                         <!-- Progress Bar -->
                         <div class="progress-dashboard">
-                            <div class="progress-bar bg-KGI" style="width: <?= $contentDetail['KGI']['showPercent'] ?>%;"
-                                role="progressbar" aria-valuenow="49" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-KGI"
+                                style="width: <?= min($contentDetail['KGI']['showPercent'], 100) ?>%;" role="progressbar"
+                                aria-valuenow="<?= min($contentDetail['KGI']['showPercent'], 100) ?>" aria-valuemin="0"
+                                aria-valuemax="100"></div>
                         </div>
                     </div>
 
@@ -422,8 +425,10 @@ else:
                         <hr class="custom-hr">
                         <!-- Progress Bar -->
                         <div class="progress-dashboard">
-                            <div class="progress-bar bg-KPI" style="width: <?= $contentDetail['KPI']['showPercent'] ?>%;"
-                                role="progressbar" aria-valuenow="31" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-KPI"
+                                style="width: <?= min($contentDetail['KPI']['showPercent'], 100) ?>%;" role="progressbar"
+                                aria-valuenow="<?= min($contentDetail['KPI']['showPercent'], 100) ?>" aria-valuemin="0"
+                                aria-valuemax="100"></div>
                         </div>
                     </div>
 
@@ -653,15 +658,25 @@ else:
         }
 
 
-        <?php $baseUrl = Yii::$app->homeUrl; ?>
+        <?php
+        // $baseUrl = Yii::$app->homeUrl;
+        ?>
+
+        var $baseUrl = window.location.protocol + "/ / " + window.location.host;
+        if (window.location.host == 'localhost') {
+            $baseUrl = window.location.protocol + "//" + window.location.host + '/HRVC/frontend/web/';
+        } else {
+            $baseUrl = window.location.protocol + "//" + window.location.host + '/';
+        }
+        $url = $baseUrl;
 
         function chengeButtonKGI(id) {
             if (isNaN(id)) {
                 alert("Invalid ID. Please provide a numeric value.");
                 return;
             }
-            const baseUrl = '<?= $baseUrl ?>'; // Base URL จาก PHP
-            var url = `${baseUrl}home/dashboard/kgi-employee-id`;
+
+            var url = $url + `home/dashboard/kgi-employee-id`;
             // alert(url);
             $.ajax({
                 type: "POST",
@@ -673,7 +688,7 @@ else:
                 success: function(data) {
                     // alert(data);
                     kgiEmployeeId = data.kgiEmployeeId;
-                    const kgiUrl = `${baseUrl}kgi/kgi-personal/update-personal-kgi/` + kgiEmployeeId;
+                    const kgiUrl = $url + `kgi/kgi-personal/update-personal-kgi/` + kgiEmployeeId;
                     // alert(kgiUrl);
                     window.location.href = kgiUrl;
                 },
@@ -686,8 +701,8 @@ else:
                 alert("Invalid ID. Please provide a numeric value.");
                 return;
             }
-            const baseUrl = '<?= $baseUrl ?>'; // Base URL จาก PHP
-            var url = `${baseUrl}home/dashboard/kpi-employee-id`;
+
+            var url = $url + `home/dashboard/kpi-employee-id`;
             // alert(url);
             $.ajax({
                 type: "POST",
@@ -699,7 +714,7 @@ else:
                 success: function(data) {
                     // alert(data);
                     kpiEmployeeId = data.kpiEmployeeId;
-                    const kpiUrl = `${baseUrl}kpi/kpi-personal/update-personal-kpi/` + kpiEmployeeId;
+                    const kpiUrl = $url + `kpi/kpi-personal/update-personal-kpi/` + kpiEmployeeId;
                     // alert(kpiUrl);
                     window.location.href = kpiUrl;
                 },

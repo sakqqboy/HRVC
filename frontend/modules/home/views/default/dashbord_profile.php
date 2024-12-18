@@ -2,7 +2,7 @@
     <div class="d-flex align-items-center">
         <div class="col-4 text-center position-relative">
             <img src="<?=Yii::$app->homeUrl?><?= $employeeProfile['picture'] ?>"
-                class="profile-picture rounded-circle mb-3" alt="User Avatar" style="width: 80px;">
+                class="profile-picture rounded-circle mb-3" alt="User Avatar" style="width: 80px; height: 80px;">
             <span class="badge bg-primary position-absolute bottom-0 start-50 translate-middle-x p-1">
                 <?= $employeeProfile['employeeConditionName'] ?>
             </span>
