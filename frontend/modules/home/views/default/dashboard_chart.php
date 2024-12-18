@@ -65,14 +65,23 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentIndex = 0; // Default to KFI
     let currentCategory = "Company"; // Default category is "Company"
     let type = "KFI";
-    <?php $baseUrl = Yii::$app->homeUrl;?>
+    <?php 
+    // $baseUrl = Yii::$app->homeUrl;
+    ?>
+
+    var $baseUrl = window.location.protocol + "/ / " + window.location.host;
+    if (window.location.host == 'localhost') {
+        $baseUrl = window.location.protocol + "//" + window.location.host + '/HRVC/frontend/web/';
+    } else {
+        $baseUrl = window.location.protocol + "//" + window.location.host + '/';
+    }
+    $url = $baseUrl;
 
     const renderChart = (currentCategory, type) => {
         document.querySelector('.chart-graph').classList.add('hide-legend-images');
         //ตรงนี้จะเเปลี่ยนเป็นajaxไปดึงค่า โดยส่ง  currentCategory  และ type ไปเพื่อแยก  Chart ว่าจะใช้ดาต้าไหน 
 
-        const baseUrl = '<?= $baseUrl ?>'; // Base URL จาก PHP
-        var url = `${baseUrl}home/dashboard/chart-dashbord`;
+        var url = $url + `home/dashboard/chart-dashbord`;
 
         // alert(currentCategory);
         // alert(type);
@@ -85,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 type: type
             },
             success: function(data) {
-                console.log(data); // Check the structure of the data in the console
+                // console.log(data); // Check the structure of the data in the console
                 const chartsData = data.data; // This replaces the static chartsData
                 const chartData = chartsData[0];
                 // alert(JSON.stringify(chartsData[0], null,

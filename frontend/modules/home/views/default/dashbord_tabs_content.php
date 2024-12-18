@@ -658,15 +658,25 @@ function chaengeData() {
 }
 
 
-<?php $baseUrl = Yii::$app->homeUrl;?>
+<?php 
+// $baseUrl = Yii::$app->homeUrl;
+?>
+
+var $baseUrl = window.location.protocol + "/ / " + window.location.host;
+if (window.location.host == 'localhost') {
+    $baseUrl = window.location.protocol + "//" + window.location.host + '/HRVC/frontend/web/';
+} else {
+    $baseUrl = window.location.protocol + "//" + window.location.host + '/';
+}
+$url = $baseUrl;
 
 function chengeButtonKGI(id) {
     if (isNaN(id)) {
         alert("Invalid ID. Please provide a numeric value.");
         return;
     }
-    const baseUrl = '<?= $baseUrl ?>'; // Base URL จาก PHP
-    var url = `${baseUrl}home/dashboard/kgi-employee-id`;
+
+    var url = $url + `home/dashboard/kgi-employee-id`;
     // alert(url);
     $.ajax({
         type: "POST",
@@ -678,7 +688,7 @@ function chengeButtonKGI(id) {
         success: function(data) {
             // alert(data);
             kgiEmployeeId = data.kgiEmployeeId;
-            const kgiUrl = `${baseUrl}kgi/kgi-personal/update-personal-kgi/` + kgiEmployeeId;
+            const kgiUrl = $url + `kgi/kgi-personal/update-personal-kgi/` + kgiEmployeeId;
             // alert(kgiUrl);
             window.location.href = kgiUrl;
         },
@@ -691,8 +701,8 @@ function chengeButtonKPI(id) {
         alert("Invalid ID. Please provide a numeric value.");
         return;
     }
-    const baseUrl = '<?= $baseUrl ?>'; // Base URL จาก PHP
-    var url = `${baseUrl}home/dashboard/kpi-employee-id`;
+
+    var url = $url + `home/dashboard/kpi-employee-id`;
     // alert(url);
     $.ajax({
         type: "POST",
@@ -704,7 +714,7 @@ function chengeButtonKPI(id) {
         success: function(data) {
             // alert(data);
             kpiEmployeeId = data.kpiEmployeeId;
-            const kpiUrl = `${baseUrl}kpi/kpi-personal/update-personal-kpi/` + kpiEmployeeId;
+            const kpiUrl = $url + `kpi/kpi-personal/update-personal-kpi/` + kpiEmployeeId;
             // alert(kpiUrl);
             window.location.href = kpiUrl;
         },
