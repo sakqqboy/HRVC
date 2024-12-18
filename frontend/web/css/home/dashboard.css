@@ -216,6 +216,9 @@
     padding-bottom: 0;
     background-color: #F5F5F5;
     border-bottom: 3px solid #CBD5E1;
+    cursor: pointer;
+    /* เพิ่ม cursor แบบ pointer */
+
     /* Remove the default border */
 }
 
