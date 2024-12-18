@@ -43,6 +43,7 @@
 
 <?php
 $currentYear = date("Y");  // ปีปัจจุบัน
+$currentYear = substr($currentYear, -2);  // Extract the last two digits
 
 $months = array(
     'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
@@ -97,8 +98,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 // console.log(data); // Check the structure of the data in the console
                 const chartsData = data.data; // This replaces the static chartsData
                 const chartData = chartsData[0];
-                // alert(JSON.stringify(chartsData[0], null,
-                //     2)); 
+
+                const maxData = chartData.series[0].data;
+                const maxValue = Math.max(...maxData); // หาค่าที่มากที่สุด
+                const max = maxValue > 100 ? maxValue : 100;
+                // alert(JSON.stringify(maxValue, null,
+                //     2));
+                // alert("ค่าสูงสุดคือ: " + maxValue);
 
                 // Update chart based on the selected index
                 Highcharts.chart('container', {
@@ -160,10 +166,18 @@ document.addEventListener("DOMContentLoaded", () => {
                     },
                     yAxis: {
                         title: {
-                            text: 'Amount'
+                            text: 'Amount',
+                            style: {
+                                color: '#000', // สีข้อความ
+                                fontWeight: 'bold', // ตัวหนา
+                                fontSize: '14px', // ขนาดฟอนต์
+                                fontWeight: '400',
+                                fontFamily: 'SF Pro Text',
+                                letterSpacing: '0.5px'
+                            },
                         },
                         min: 0,
-                        // max: 100, // กำหนดให้ค่ามากสุดเป็น 100%
+                        max: max, // กำหนดให้ค่ามากสุดเป็น 100%
                         gridLineColor: '#E6E6E6',
                         labels: {
                             formatter: function() {
