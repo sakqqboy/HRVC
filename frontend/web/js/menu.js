@@ -1,13 +1,40 @@
+var $baseUrl = window.location.protocol + "/ / " + window.location.host;
+if (window.location.host == 'localhost') {
+	$baseUrl = window.location.protocol + "//" + window.location.host + '/HRVC/frontend/web/';
+} else {
+	$baseUrl = window.location.protocol + "//" + window.location.host + '/';
+}
+$url = $baseUrl;
 function hideGroupMenu(groupname) { 
 	//$("#" + groupname).hide();
 	$("#" + groupname).slideUp(200);
 	$("#" + groupname + '-hide').hide();
-	$("#" + groupname+'-show').show();
+	$("#" + groupname + '-show').show();
+	var url = $url + 'site/session-menu';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { groupname: groupname, type:'hide' },
+		success: function (data) {
+			
+		}
+	});
 }
 function showGroupMenu(groupname) { 
 	$("#" + groupname).slideDown(200);
 	$("#" + groupname + '-show').hide();
-	$("#" + groupname+'-hide').show();
+	$("#" + groupname + '-hide').show();
+	var url = $url + 'site/session-menu';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { groupname: groupname, type:'show' },
+		success: function (data) {
+			
+		}
+	});
 }
 
 $(document).mouseup(function (e) {

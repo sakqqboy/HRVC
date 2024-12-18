@@ -4,6 +4,9 @@ use common\helpers\Path;
 use common\models\ModelMaster;
 use frontend\models\hrvc\UserRole;
 
+$session = Yii::$app->session;
+// $data = $session->getIterator();
+//throw new exception(print_r($data, true));
 ?>
 <div class="col-12">
         <div class="col-12">
@@ -35,12 +38,12 @@ use frontend\models\hrvc\UserRole;
                                         </div>
                                         <div class="col-8 text-start pr-0 pl-5"><?= Yii::t('app', 'Group Management') ?></div>
                                         <div class="col-2 pr-0 pl-5 text-start">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/4.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;display:none;" onclick="javascript:hideGroupMenu('group-management')" id="group-management-hide">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/7.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;" onclick="javascript:showGroupMenu('group-management')" id="group-management-show">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/4.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;display:<?= $session->has('group-management') ? '' : 'none' ?>;" onclick="javascript:hideGroupMenu('group-management')" id="group-management-hide">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/7.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;display:<?= $session->has('group-management') ? 'none' : '' ?>" onclick="javascript:showGroupMenu('group-management')" id="group-management-show">
                                         </div>
                                 </div>
                         </div>
-                        <div id="group-management" style="display:none;">
+                        <div id="group-management" style="display:<?= $session->has('group-management') ? '' : 'none' ?>;">
                                 <?php
                                 if ($role >= 5) {
                                 ?>
@@ -119,12 +122,12 @@ use frontend\models\hrvc\UserRole;
                                 </div>
                                 <div class="col-8 text-start pr-0 pl-5"><?= Yii::t('app', 'Financial System') ?></div>
                                 <div class="col-2 pr-0 pl-5 text-start">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/4.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;display:none;" onclick="javascript:hideGroupMenu('financial-system')" id="financial-system-hide">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/7.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;" onclick="javascript:showGroupMenu('financial-system')" id="financial-system-show">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/4.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;display:<?= $session->has('financial-system') ? '' : 'none' ?>;" onclick="javascript:hideGroupMenu('financial-system')" id="financial-system-hide">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/7.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;display:<?= $session->has('financial-system') ? 'none' : '' ?>;" onclick="javascript:showGroupMenu('financial-system')" id="financial-system-show">
                                 </div>
                         </div>
                 </div>
-                <div id="financial-system" style="display: none;">
+                <div id="financial-system" style="display:<?= $session->has('financial-system') ? '' : 'none' ?>;">
                         <div class="col-12 first-layer-manu">
                                 <div class="col-12">
                                         <a href="<?= Path::fsModule() ?>?__id=<?= Yii::$app->user->id ?>" class="no-underline">
@@ -197,12 +200,12 @@ use frontend\models\hrvc\UserRole;
                                 </div>
                                 <div class="col-8 text-start pr-0 pl-5"><?= Yii::t('app', 'Performance Matrices') ?></div>
                                 <div class="col-2 pr-0 pl-5 text-start">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/4.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;display:none;" onclick="javascript:hideGroupMenu('performance-matrices')" id="performance-matrices-hide">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/7.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;" onclick="javascript:showGroupMenu('performance-matrices')" id="performance-matrices-show">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/4.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;display:<?= $session->has('performance-matrices') ? '' : 'none' ?>" onclick="javascript:hideGroupMenu('performance-matrices')" id="performance-matrices-hide">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/7.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;display:<?= $session->has('performance-matrices') ? 'none' : '' ?>" onclick="javascript:showGroupMenu('performance-matrices')" id="performance-matrices-show">
                                 </div>
                         </div>
                 </div>
-                <div id="performance-matrices" style="display: none;">
+                <div id="performance-matrices" style="display:<?= $session->has('performance-matrices') ? '' : 'none' ?>;">
                         <div class="col-12 first-layer-manu">
                                 <div class="col-12">
                                         <a href="<?= Yii::$app->homeUrl ?>home/default/dashboard" class="no-underline">
@@ -217,10 +220,10 @@ use frontend\models\hrvc\UserRole;
                                         <?= Yii::t('app', 'Financials') ?>
                                 </a>
                                 <span style="float: right;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:none;" onclick="javascript:hideGroupMenu('third-layer-kfi')" id="third-layer-kfi-hide">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6-1.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;" onclick="javascript:showGroupMenu('third-layer-kfi')" id="third-layer-kfi-show">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:<?= $session->has('third-layer-kfi') ? '' : 'none' ?>;" onclick="javascript:hideGroupMenu('third-layer-kfi')" id="third-layer-kfi-hide">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6-1.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:<?= $session->has('third-layer-kfi') ? 'none' : '' ?>" onclick="javascript:showGroupMenu('third-layer-kfi')" id="third-layer-kfi-show">
                                 </span>
-                                <div class="col-12" id="third-layer-kfi" style="display:none;">
+                                <div class="col-12" id="third-layer-kfi" style="display:<?= $session->has('third-layer-kfi') ? '' : 'none' ?>;">
                                         <div class="col-12 second-layer-menu">
                                                 <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="no-underline">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/company.svg" class="first-layer-icon" style="margin-top: -3px;">
@@ -235,10 +238,10 @@ use frontend\models\hrvc\UserRole;
                                         <?= Yii::t('app', 'Goals') ?>
                                 </a>
                                 <span style="float: right;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:none;" onclick="javascript:hideGroupMenu('third-layer-kgi')" id="third-layer-kgi-hide">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6-1.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;" onclick="javascript:showGroupMenu('third-layer-kgi')" id="third-layer-kgi-show">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:<?= $session->has('third-layer-kgi') ? '' : 'none' ?>;" onclick="javascript:hideGroupMenu('third-layer-kgi')" id="third-layer-kgi-hide">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6-1.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:<?= $session->has('third-layer-kgi') ? 'none' : '' ?>" onclick="javascript:showGroupMenu('third-layer-kgi')" id="third-layer-kgi-show">
                                 </span>
-                                <div class="col-12" id="third-layer-kgi" style="display:none;">
+                                <div class="col-12" id="third-layer-kgi" style="display:<?= $session->has('third-layer-kgi') ? '' : 'none' ?>;">
                                         <div class="col-12 second-layer-menu">
                                                 <a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" class="no-underline">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/company.svg" class="first-layer-icon" style="margin-top: -3px;">
@@ -265,10 +268,10 @@ use frontend\models\hrvc\UserRole;
                                         <?= Yii::t('app', 'Performance') ?>
                                 </a>
                                 <span style="float: right;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:none;" onclick="javascript:hideGroupMenu('third-layer-kpi')" id="third-layer-kpi-hide">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6-1.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;" onclick="javascript:showGroupMenu('third-layer-kpi')" id="third-layer-kpi-show">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:<?= $session->has('third-layer-kpi') ? '' : 'none' ?>;" onclick="javascript:hideGroupMenu('third-layer-kpi')" id="third-layer-kpi-hide">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6-1.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:<?= $session->has('third-layer-kpi') ? 'none' : '' ?>" onclick="javascript:showGroupMenu('third-layer-kpi')" id="third-layer-kpi-show">
                                 </span>
-                                <div class="col-12" id="third-layer-kpi" style="display:none;">
+                                <div class="col-12" id="third-layer-kpi" style="display:<?= $session->has('third-layer-kpi') ? '' : 'none' ?>;">
                                         <div class="col-12 second-layer-menu">
                                                 <a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="no-underline">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/company.svg" class="first-layer-icon" style="margin-top: -3px;">
@@ -301,23 +304,23 @@ use frontend\models\hrvc\UserRole;
                                 <div class="col-8 text-start pr-0 pl-5">
                                         <?= Yii::t('app', 'Evaluation System') ?></div>
                                 <div class="col-2 pr-0 pl-5 text-start">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/4.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;display:none;" onclick="javascript:hideGroupMenu('evaluation-system')" id="evaluation-system-hide">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/7.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;" onclick="javascript:showGroupMenu('evaluation-system')" id="evaluation-system-show">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/4.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;display:<?= $session->has('evaluation-system') ? '' : 'none' ?>;" onclick="javascript:hideGroupMenu('evaluation-system')" id="evaluation-system-hide">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/7.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;display:<?= $session->has('evaluation-system') ? 'none' : '' ?>;" onclick="javascript:showGroupMenu('evaluation-system')" id="evaluation-system-show">
                                 </div>
                         </div>
                 </div>
-                <div id="evaluation-system" style="display: none;">
+                <div id="evaluation-system" style="display:<?= $session->has('evaluation-system') ? '' : 'none' ?>;">
                         <div class="col-12 first-layer-manu">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/Evaluation/evaluation_system.svg" class="first-layer-icon" style="margin-top: -3px;">
                                 <a href="<?= Yii::$app->homeUrl ?>evaluation/environment" class="no-underline">
                                         <?= Yii::t('app', 'Evaluation Environment') ?>
                                 </a>
                                 <span style="float: right;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:none;" onclick="javascript:hideGroupMenu('evaluation-environment')" id="evaluation-environment-hide">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6-1.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;" onclick="javascript:showGroupMenu('evaluation-environment')" id="evaluation-environment-show">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:<?= $session->has('evaluation-environment') ? '' : 'none' ?>;" onclick="javascript:hideGroupMenu('evaluation-environment')" id="evaluation-environment-hide">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6-1.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:<?= $session->has('evaluation-environment') ? 'none' : '' ?>;" onclick="javascript:showGroupMenu('evaluation-environment')" id="evaluation-environment-show">
                                 </span>
                         </div>
-                        <div id="evaluation-environment" style="display:none;">
+                        <div id="evaluation-environment" style="display:<?= $session->has('evaluation-environment') ? '' : 'none' ?>;">
                                 <div class="col-12 second-layer-menu">
                                         <a href="<?= Yii::$app->homeUrl ?>home/dashboard" class="no-underline">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/Evaluation/progress.svg" class="first-layer-icon" style="margin-top: -3px;">
@@ -336,10 +339,10 @@ use frontend\models\hrvc\UserRole;
                                                 <?= Yii::t('app', 'Performance') ?>
                                         </a>
                                         <span style="float: right;">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:none;" onclick="javascript:hideGroupMenu('third-layer-performane')" id="third-layer-performane-hide">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6-1.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;" onclick="javascript:showGroupMenu('third-layer-performane')" id="third-layer-performane-show">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:<?= $session->has('third-layer-performane') ? '' : 'none' ?>;" onclick="javascript:hideGroupMenu('third-layer-performane')" id="third-layer-performane-hide">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6-1.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:<?= $session->has('third-layer-performane') ? 'none' : '' ?>" onclick="javascript:showGroupMenu('third-layer-performane')" id="third-layer-performane-show">
                                         </span>
-                                        <div class="col-12" id="third-layer-performane" style="display:none;">
+                                        <div class="col-12" id="third-layer-performane" style="display:<?= $session->has('third-layer-performane') ? '' : 'none' ?>;">
                                                 <div class="col-12 third-layer-menu">
                                                         <a href="" class="no-underline">
                                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/Evaluation/company.svg" class="first-layer-icon" style="margin-top: -3px;">
@@ -365,21 +368,21 @@ use frontend\models\hrvc\UserRole;
                                 </div>
                                 <div class="col-8 text-start pr-0 pl-5"><?= Yii::t('app', 'Behavioral Evaluation') ?></div>
                                 <div class="col-2 pr-0 pl-5 text-start">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/4.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;display:none;" onclick="javascript:hideGroupMenu('behavioral-evaluation')" id="behavioral-evaluation-hide">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/7.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;" onclick="javascript:showGroupMenu('behavioral-evaluation')" id="behavioral-evaluation-show">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/4.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;display:<?= $session->has('behavioral-evaluation') ? '' : 'none' ?>;" onclick="javascript:hideGroupMenu('behavioral-evaluation')" id="behavioral-evaluation-hide">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/7.svg" class="home-icon" style="margin-top: -3px;cursor: pointer;display:<?= $session->has('behavioral-evaluation') ? 'none' : '' ?>" onclick="javascript:showGroupMenu('behavioral-evaluation')" id="behavioral-evaluation-show">
                                 </div>
                         </div>
                 </div>
-                <div id="behavioral-evaluation" style="display: none;">
+                <div id="behavioral-evaluation" style="display:<?= $session->has('behavioral-evaluation') ? '' : 'none' ?>;">
                         <div class="col-12 first-layer-manu">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/BehavioralEvaluation/evaluation.svg" class="first-layer-icon" style="margin-top: -3px;">
                                 <?= Yii::t('app', 'Behavioral Indicator') ?>
                                 <span style="float: right;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:none;" onclick="javascript:hideGroupMenu('behavioral-indicator')" id="behavioral-indicator-hide">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6-1.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;" onclick="javascript:showGroupMenu('behavioral-indicator')" id="behavioral-indicator-show">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:none;display:<?= $session->has('behavioral-indicator') ? '' : 'none' ?>;" onclick="javascript:hideGroupMenu('behavioral-indicator')" id="behavioral-indicator-hide">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6-1.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:<?= $session->has('behavioral-indicator') ? 'none' : '' ?>;" onclick="javascript:showGroupMenu('behavioral-indicator')" id="behavioral-indicator-show">
                                 </span>
                         </div>
-                        <div id="behavioral-indicator" style="display: none;">
+                        <div id="behavioral-indicator" style="display:<?= $session->has('behavioral-indicator') ? '' : 'none' ?>;">
                                 <div class="col-12 second-layer-menu">
                                         <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="no-underline">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/BehavioralEvaluation/evaluation_portal.svg" class="first-layer-icon" style="margin-top: -3px;">
@@ -401,11 +404,11 @@ use frontend\models\hrvc\UserRole;
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/BehavioralEvaluation/company_dashboard.svg" class="first-layer-icon" style="margin-top: -3px;">
                                 <?= Yii::t('app', 'Company Dashboard') ?>
                                 <span style="float: right;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:none;" onclick="javascript:hideGroupMenu('company-dashboard')" id="company-dashboard-hide">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6-1.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;" onclick="javascript:showGroupMenu('company-dashboard')" id="company-dashboard-show">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:<?= $session->has('company-dashboard') ? '' : 'none' ?>;" onclick="javascript:hideGroupMenu('company-dashboard')" id="company-dashboard-hide">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6-1.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:<?= $session->has('company-dashboard') ? 'none' : '' ?>" onclick="javascript:showGroupMenu('company-dashboard')" id="company-dashboard-show">
                                 </span>
                         </div>
-                        <div id="company-dashboard" style="display:none;">
+                        <div id="company-dashboard" style="display:<?= $session->has('company-dashboard') ? '' : 'none' ?>;">
                                 <div class="col-12 second-layer-menu">
                                         <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="no-underline">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/BehavioralEvaluation/template_board.svg" class="first-layer-icon" style="margin-top: -3px;">

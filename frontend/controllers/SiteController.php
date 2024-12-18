@@ -343,4 +343,20 @@ class SiteController extends Controller
             'model' => $model
         ]);
     }
+    public function actionSessionMenu()
+    {
+        $type = $_POST["type"];
+        $menuId = $_POST['groupname'];
+        $session = Yii::$app->session;
+        $session->open();
+        if ($type == 'hide') {
+            if ($session->has($menuId)) {
+                $session->remove($menuId);
+            }
+        } else {
+            $session->set($menuId, $type);
+        }
+        $res["status"] = true;
+        return json_encode($res);
+    }
 }

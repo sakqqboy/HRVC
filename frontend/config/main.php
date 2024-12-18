@@ -61,6 +61,10 @@ return [
         'session' => [
             // this is the name of the session cookie used for login on the frontend
             'name' => 'tcg-frontend-hrvc',
+            'class' => 'yii\web\Session',
+            'cookieParams' => [
+                'lifetime' => 0, // หมายถึงให้หมดอายุเมื่อปิดเบราว์เซอร์
+            ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
