@@ -702,13 +702,14 @@ class DashbordController extends Controller
 
     public function actionChartKfi($currentCategory, $companyId, $teamId, $employeeId) {
         // สร้างอาร์เรย์ข้อมูลที่ต้องการ
-
         $monthlyData = [
             1 => [], 2 => [], 3 => [], 4 => [], 5 => [], 6 => [], 7 => [], 8 => [], 9 => [], 10 => [], 11 => [], 12 => []
         ];
+        $currentYear = date('Y'); // หาปีปัจจุบัน
+
         
         $kfiHistory = KfiHistory::find()
-        ->where(["status" => [1, 2, 4],"year" => 2024])
+        ->where(["status" => [1, 2, 4],"year" => $currentYear])
         ->orderBy('month ASC,kfiHistoryId DESC')
         ->asArray()
         ->all();
@@ -786,67 +787,437 @@ class DashbordController extends Controller
 
 
     public function actionChartKgi($currentCategory, $companyId, $teamId, $employeeId) {
-        // สร้างอาร์เรย์ข้อมูลที่ต้องการ
-        $response = [
-            'currentCategory' => $currentCategory,
-            'companyId' => $companyId,
-            'teamId' => $teamId,
-            'employeeId' => $employeeId
+
+        $monthlyData = [
+            1 => [], 2 => [], 3 => [], 4 => [], 5 => [], 6 => [], 7 => [], 8 => [], 9 => [], 10 => [], 11 => [], 12 => []
         ];
+        $monthlySumPercent = [];
+        $currentYear = date('Y'); // หาปีปัจจุบัน
 
-        if($currentCategory == 'company'){
-
+        if($currentCategory == 'Company'){
 
             //เอาออกมาทั้งหมด
             $kgiHistory = KgiHistory::find()
-				->where(["status" => [1, 2, 4],"year" => 2024])
+				->where(["status" => [1, 2, 4],"year" => $currentYear])
 				->orderBy('month ASC,kgiHistoryId DESC')
 				->asArray()
 				->all();
+        
+                // ลูปเพื่ออัพเดตข้อมูลในทุกเดือน actionDashbordCompany
+        foreach ($kgiHistory as $entry) {
 
-            //เอาทั้งหมดมากรองเพื่อเก็บเป็นชุดๆเป็นเดือนๆไป  
+            $month = intval($entry['month']);  // แปลงเป็น int
+            $ratio = 0;
+            
+            // // คำนวณค่า ratio
+            if ($entry["targetAmount"] != '' && $entry["targetAmount"] != 0) {
+                if ($entry["code"] == '<' || $entry["code"] == '=') {
+                    $ratio = ($entry["result"] / $entry["targetAmount"]) * 100;
+                } else {
+                    if ($entry["result"] != '' && $entry["result"] != 0) {
+                        $ratio = ($entry["targetAmount"] / $entry["result"]) * 100;
+                    } else {
+                        $ratio = 0;
+                    }
+                }
+            } else {
+                $ratio = 0;
+            }
 
-            //เอาแต่ล่ะเดือนมาดูทีล่ะอันแล้วคำนวนเปอร์เซ็น
+            // เก็บข้อมูลตามเดือน
+            $monthlyData[$month][] = [
+                "kgiId" => $entry["kgiId"],
+                "name" => $entry["kgiHistoryName"],
+                "month" => $entry["month"],
+                "target" => $entry["targetAmount"],
+                "result" => $entry["result"],
+                "percentage" => round($ratio, 2)
+            ];
+        }
 
-            //อาผลรวม % ของทุกอันมาเก็บไว้เป็น % ของแต่ละเดือน เดือนไหนไม่มีก็ใส่ 0 
+        foreach ($monthlyData as $month => $data) {
+            // หากเดือนนั้นไม่มีข้อมูล
+            if (empty($data)) {
+                $monthlySumPercent[$month] = 0;  // ถ้าไม่มีข้อมูลในเดือนนั้น
+            } else {
+                $totalPercentage = 0;
+                $count = 0;
+        
+                // ลูปผ่านข้อมูลในแต่ละเดือน
+                foreach ($data as $item) {
+                    $totalPercentage += floatval($item['percentage']);  // บวกเปอร์เซ็นต์ทั้งหมด
+                    $count++;  // นับจำนวนรายการ
+                }
+        
+                // คำนวณค่าเฉลี่ยเปอร์เซ็นต์
+                if ($count > 0) {
+                    $monthlySumPercent[$month] = round($totalPercentage / $count, 2);  // คำนวณค่าเฉลี่ย
+                } else {
+                    $monthlySumPercent[$month] = 0;  // ถ้าไม่มีข้อมูลในเดือนนั้น
+                }
+            }
+        }
 
-            //เก็บผลลัพค่า % ของแต่ละเดือนใส่เป็นอาเรย์ทั้ง 12 เดือน
+        }else if($currentCategory == 'Team'){
 
-        }else if($currentCategory == 'team'){
+            $KgiTeamHistory = KgiTeamHistory::find()
+            ->select(['a.*', 'b.kgiId', 'c.code'])
+            ->from(['a' => 'kgi_team_history'])
+            ->leftJoin(['b' => 'kgi_team'], 'b.kgiTeamId = a.kgiTeamId')
+            ->leftJoin(['c' => 'kgi'], 'c.kgiId = b.kgiId')
+            ->where(['a.status' => [1, 2, 4], 'a.year' => $currentYear])
+            ->orderBy(['a.month' => SORT_ASC, 'a.kgiTeamHistoryId' => SORT_DESC])
+            ->asArray()
+            ->all();
 
-        }else if($currentCategory == 'self'){
+       
+            // ลูปเพื่ออัพเดตข้อมูลในทุกเดือน actionDashbordCompany
+            foreach ($KgiTeamHistory as $entry) {
+
+                $month = intval($entry['month']);  // แปลงเป็น int
+                $ratio = 0;
+                    
+                // คำนวณค่า ratio
+                    if ($entry["target"] != '' && $entry["target"] != 0) {
+                        if ($entry["code"] == '<' || $entry["code"] == '=') {
+                            $ratio = ($entry["result"] / $entry["target"]) * 100;
+                        } else {
+                            if ($entry["result"] != '' && $entry["result"] != 0) {
+                                $ratio = ($entry["target"] / $entry["result"]) * 100;
+                            } else {
+                                $ratio = 0;
+                            }
+                        }
+                    } else {
+                        $ratio = 0;
+                    }
+
+                    // เก็บข้อมูลตามเดือน
+                    $monthlyData[$month][] = [
+                        "kgiId" => $entry["kgiId"],
+                        //    "name" => $entry["kgiHistoryName"],
+                        "month" => $entry["month"],
+                        "target" => $entry["target"],
+                        "result" => $entry["result"],
+                        "percentage" => round($ratio, 2)
+                    ];
+            }
+
+            foreach ($monthlyData as $month => $data) {
+                // หากเดือนนั้นไม่มีข้อมูล
+                if (empty($data)) {
+                    $monthlySumPercent[$month] = 0;  // ถ้าไม่มีข้อมูลในเดือนนั้น
+                } else {
+                    $totalPercentage = 0;
+                    $count = 0;
+            
+                    // ลูปผ่านข้อมูลในแต่ละเดือน
+                    foreach ($data as $item) {
+                        $totalPercentage += floatval($item['percentage']);  // บวกเปอร์เซ็นต์ทั้งหมด
+                        $count++;  // นับจำนวนรายการ
+                    }
+            
+                    // คำนวณค่าเฉลี่ยเปอร์เซ็นต์
+                    if ($count > 0) {
+                        $monthlySumPercent[$month] = round($totalPercentage / $count, 2);  // คำนวณค่าเฉลี่ย
+                    } else {
+                        $monthlySumPercent[$month] = 0;  // ถ้าไม่มีข้อมูลในเดือนนั้น
+                    }
+                }
+            }
+
+        }else if($currentCategory == 'Self'){
+
+            $KgiTeamHistory = KgiEmployeeHistory::find()
+            ->select(['a.*', 'b.kgiId', 'c.code'])
+            ->from(['a' => 'kgi_employee_history'])
+            ->leftJoin(['b' => 'kgi_employee'], 'b.kgiEmployeeId = a.kgiEmployeeId')
+            ->leftJoin(['c' => 'kgi'], 'c.kgiId = b.kgiId')
+            ->where(['a.status' => [1, 2, 4], 'a.year' => $currentYear])
+            ->orderBy(['a.month' => SORT_ASC, 'a.kgiEmployeeId' => SORT_DESC])
+            ->asArray()
+            ->all();
+       
+            // ลูปเพื่ออัพเดตข้อมูลในทุกเดือน actionDashbordCompany
+            foreach ($KgiTeamHistory as $entry) {
+
+                $month = intval($entry['month']);  // แปลงเป็น int
+                $ratio = 0;
+                
+            // คำนวณค่า ratio
+                if ($entry["target"] != '' && $entry["target"] != 0) {
+                    if ($entry["code"] == '<' || $entry["code"] == '=') {
+                        $ratio = ($entry["result"] / $entry["target"]) * 100;
+                    } else {
+                        if ($entry["result"] != '' && $entry["result"] != 0) {
+                            $ratio = ($entry["target"] / $entry["result"]) * 100;
+                        } else {
+                            $ratio = 0;
+                        }
+                    }
+                } else {
+                    $ratio = 0;
+                }
+
+            // เก็บข้อมูลตามเดือน
+                $monthlyData[$month][] = [
+                    "kgiId" => $entry["kgiId"],
+                    //"name" => $entry["kgiHistoryName"],
+                    "month" => $entry["month"],
+                    "target" => $entry["target"],
+                    "result" => $entry["result"],
+                    "percentage" => round($ratio, 2)
+                ];
+            }
+
+            foreach ($monthlyData as $month => $data) {
+                // หากเดือนนั้นไม่มีข้อมูล
+                if (empty($data)) {
+                    $monthlySumPercent[$month] = 0;  // ถ้าไม่มีข้อมูลในเดือนนั้น
+                } else {
+                    $totalPercentage = 0;
+                    $count = 0;
+            
+                    // ลูปผ่านข้อมูลในแต่ละเดือน
+                    foreach ($data as $item) {
+                        $totalPercentage += floatval($item['percentage']);  // บวกเปอร์เซ็นต์ทั้งหมด
+                        $count++;  // นับจำนวนรายการ
+                    }
+            
+                    // คำนวณค่าเฉลี่ยเปอร์เซ็นต์
+                    if ($count > 0) {
+                        $monthlySumPercent[$month] = round($totalPercentage / $count, 2);  // คำนวณค่าเฉลี่ย
+                    } else {
+                        $monthlySumPercent[$month] = 0;  // ถ้าไม่มีข้อมูลในเดือนนั้น
+                    }
+                }
+            }
 
         }
+
+            // สร้างอาร์เรย์ข้อมูลที่ต้องการ
+             $data = [
+                    'currentCategory' => $currentCategory,
+                    'companyId' => $companyId,
+                    'teamId' => $teamId,
+                    'employeeId' => $employeeId,
+                    'performance' => $monthlySumPercent,
+            ];
     
         // ส่งข้อมูลกลับเป็น JSON
-        return json_encode($kgiHistory);
+        return json_encode($data);
     }
 
 
     public function actionChartKpi($currentCategory, $companyId, $teamId, $employeeId) {
-        // สร้างอาร์เรย์ข้อมูลที่ต้องการ
-        $response = [
-            'currentCategory' => $currentCategory,
-            'companyId' => $companyId,
-            'teamId' => $teamId,
-            'employeeId' => $employeeId
+        $monthlyData = [
+            1 => [], 2 => [], 3 => [], 4 => [], 5 => [], 6 => [], 7 => [], 8 => [], 9 => [], 10 => [], 11 => [], 12 => []
         ];
+        $monthlySumPercent = [];
+        $currentYear = date('Y'); // หาปีปัจจุบัน
 
-        if($currentCategory == 'company'){
+        if($currentCategory == 'Company'){
+            
             $kpiHistory = KpiHistory::find()
-            ->where(["status" => [1, 2, 4],"year" => 2024])
+            ->where(["status" => [1, 2, 4],"year" => $currentYear])
             ->orderBy('month ASC,kpiHistoryId DESC')
             ->asArray()
             ->all();
 
-        }else if($currentCategory == 'team'){
+            foreach ($kpiHistory as $entry) {
 
-        }else if($currentCategory == 'self'){
+                $month = intval($entry['month']);  // แปลงเป็น int
+                $ratio = 0;
+                if ($entry["targetAmount"] == null || $entry["targetAmount"] == '' || $entry["targetAmount"] == 0) {
+                    $ratio = 0;
+                } else {
+                    if ($entry["code"] == '<' || $entry["code"] == '=') {
+                        $ratio = ((int)$entry['result'] / (int)$entry["targetAmount"]) * 100;
+                    } else {
+                        if ($entry["result"] != '' && $entry["result"] != 0) {
+                            $ratio = ((int)$entry["targetAmount"] / (int)$entry["result"]) * 100;
+                        } else {
+                            $ratio = 0;
+                        }
+                    }
+                }
+                // เก็บข้อมูลตามเดือน
+                $monthlyData[$month][] = [
+                    "kpiId" => $entry["kpiId"],
+                   "name" => $entry["kpiHistoryName"],
+                    "month" => $entry["month"],
+                    "target" => $entry["targetAmount"],
+                    "result" => $entry["result"],
+                    "percentage" => round($ratio, 2)
+                ];	
+            }
+            
+            foreach ($monthlyData as $month => $data) {
+                // หากเดือนนั้นไม่มีข้อมูล
+                if (empty($data)) {
+                    $monthlySumPercent[$month] = 0;  // ถ้าไม่มีข้อมูลในเดือนนั้น
+                } else {
+                    $totalPercentage = 0;
+                    $count = 0;
+            
+                    // ลูปผ่านข้อมูลในแต่ละเดือน
+                    foreach ($data as $item) {
+                        $totalPercentage += floatval($item['percentage']);  // บวกเปอร์เซ็นต์ทั้งหมด
+                        $count++;  // นับจำนวนรายการ
+                    }
+            
+                    // คำนวณค่าเฉลี่ยเปอร์เซ็นต์
+                    if ($count > 0) {
+                        $monthlySumPercent[$month] = round($totalPercentage / $count, 2);  // คำนวณค่าเฉลี่ย
+                    } else {
+                        $monthlySumPercent[$month] = 0;  // ถ้าไม่มีข้อมูลในเดือนนั้น
+                    }
+                }
+            }
+
+        }else if($currentCategory == 'Team'){
+            $KpiTeamHistory = KpiTeamHistory::find()
+            ->select(['a.*', 'b.kpiId', 'c.code'])
+            ->from(['a' => 'kpi_team_history'])
+            ->leftJoin(['b' => 'kpi_team'], 'b.kpiTeamId = a.kpiTeamId')
+            ->leftJoin(['c' => 'kpi'], 'c.kpiId = b.kpiId')
+            ->where(['a.status' => [1, 2, 4], 'a.year' => $currentYear])
+            ->orderBy(['a.month' => SORT_ASC, 'a.kpiTeamHistoryId' => SORT_DESC])
+            ->asArray()
+            ->all();
+
+            // ลูปเพื่ออัพเดตข้อมูลในทุกเดือน actionDashbordCompany
+            foreach ($KpiTeamHistory as $entry) {
+
+                $month = intval($entry['month']);  // แปลงเป็น int
+                $ratio = 0;
+                    
+                // คำนวณค่า ratio
+                    if ($entry["target"] != '' && $entry["target"] != 0) {
+                        if ($entry["code"] == '<' || $entry["code"] == '=') {
+                            $ratio = ($entry["result"] / $entry["target"]) * 100;
+                        } else {
+                            if ($entry["result"] != '' && $entry["result"] != 0) {
+                                $ratio = ($entry["target"] / $entry["result"]) * 100;
+                            } else {
+                                $ratio = 0;
+                            }
+                        }
+                    } else {
+                        $ratio = 0;
+                    }
+
+                    // เก็บข้อมูลตามเดือน
+                    $monthlyData[$month][] = [
+                        "kgiId" => $entry["kpiId"],
+                        //    "name" => $entry["kgiHistoryName"],
+                        "month" => $entry["month"],
+                        "target" => $entry["target"],
+                        "result" => $entry["result"],
+                        "percentage" => round($ratio, 2)
+                    ];
+            }
+
+            foreach ($monthlyData as $month => $data) {
+                // หากเดือนนั้นไม่มีข้อมูล
+                if (empty($data)) {
+                    $monthlySumPercent[$month] = 0;  // ถ้าไม่มีข้อมูลในเดือนนั้น
+                } else {
+                    $totalPercentage = 0;
+                    $count = 0;
+            
+                    // ลูปผ่านข้อมูลในแต่ละเดือน
+                    foreach ($data as $item) {
+                        $totalPercentage += floatval($item['percentage']);  // บวกเปอร์เซ็นต์ทั้งหมด
+                        $count++;  // นับจำนวนรายการ
+                    }
+            
+                    // คำนวณค่าเฉลี่ยเปอร์เซ็นต์
+                    if ($count > 0) {
+                        $monthlySumPercent[$month] = round($totalPercentage / $count, 2);  // คำนวณค่าเฉลี่ย
+                    } else {
+                        $monthlySumPercent[$month] = 0;  // ถ้าไม่มีข้อมูลในเดือนนั้น
+                    }
+                }
+            }
+
+        }else if($currentCategory == 'Self'){
+            $KpiTeamHistory = KpiEmployeeHistory::find()
+            ->select(['a.*', 'b.kpiId', 'c.code'])
+            ->from(['a' => 'kpi_employee_history'])
+            ->leftJoin(['b' => 'kpi_employee'], 'b.kpiEmployeeId = a.kpiEmployeeId')
+            ->leftJoin(['c' => 'kpi'], 'c.kpiId = b.kpiId')
+            ->where(['a.status' => [1, 2, 4], 'a.year' => $currentYear])
+            ->orderBy(['a.month' => SORT_ASC, 'a.kpiEmployeeId' => SORT_DESC])
+            ->asArray()
+            ->all();
+
+            // ลูปเพื่ออัพเดตข้อมูลในทุกเดือน actionDashbordCompany
+            foreach ($KpiTeamHistory as $entry) {
+
+                $month = intval($entry['month']);  // แปลงเป็น int
+                $ratio = 0;
+                
+            // คำนวณค่า ratio
+                if ($entry["target"] != '' && $entry["target"] != 0) {
+                    if ($entry["code"] == '<' || $entry["code"] == '=') {
+                        $ratio = ($entry["result"] / $entry["target"]) * 100;
+                    } else {
+                        if ($entry["result"] != '' && $entry["result"] != 0) {
+                            $ratio = ($entry["target"] / $entry["result"]) * 100;
+                        } else {
+                            $ratio = 0;
+                        }
+                    }
+                } else {
+                    $ratio = 0;
+                }
+
+            // เก็บข้อมูลตามเดือน
+                $monthlyData[$month][] = [
+                    "kpiId" => $entry["kpiId"],
+                    //"name" => $entry["kgiHistoryName"],
+                    "month" => $entry["month"],
+                    "target" => $entry["target"],
+                    "result" => $entry["result"],
+                    "percentage" => round($ratio, 2)
+                ];
+            }
+
+            foreach ($monthlyData as $month => $data) {
+                // หากเดือนนั้นไม่มีข้อมูล
+                if (empty($data)) {
+                    $monthlySumPercent[$month] = 0;  // ถ้าไม่มีข้อมูลในเดือนนั้น
+                } else {
+                    $totalPercentage = 0;
+                    $count = 0;
+            
+                    // ลูปผ่านข้อมูลในแต่ละเดือน
+                    foreach ($data as $item) {
+                        $totalPercentage += floatval($item['percentage']);  // บวกเปอร์เซ็นต์ทั้งหมด
+                        $count++;  // นับจำนวนรายการ
+                    }
+            
+                    // คำนวณค่าเฉลี่ยเปอร์เซ็นต์
+                    if ($count > 0) {
+                        $monthlySumPercent[$month] = round($totalPercentage / $count, 2);  // คำนวณค่าเฉลี่ย
+                    } else {
+                        $monthlySumPercent[$month] = 0;  // ถ้าไม่มีข้อมูลในเดือนนั้น
+                    }
+                }
+            }
 
         }
     
+            $data = [
+                'currentCategory' => $currentCategory,
+                'companyId' => $companyId,
+                'teamId' => $teamId,
+                'employeeId' => $employeeId,
+                'performance' => $monthlySumPercent,
+            ];
         // ส่งข้อมูลกลับเป็น JSON
-        return json_encode($kpiHistory);
+        return json_encode($data);
     }
 
 
