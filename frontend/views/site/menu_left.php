@@ -5,8 +5,6 @@ use common\models\ModelMaster;
 use frontend\models\hrvc\UserRole;
 
 $session = Yii::$app->session;
-// $data = $session->getIterator();
-//throw new exception(print_r($data, true));
 ?>
 <div class="col-12">
         <div class="col-12">
@@ -128,67 +126,42 @@ $session = Yii::$app->session;
                         </div>
                 </div>
                 <div id="financial-system" style="display:<?= $session->has('financial-system') ? '' : 'none' ?>;">
+
                         <div class="col-12 first-layer-manu">
-                                <div class="col-12">
-                                        <a href="<?= Path::fsModule() ?>?__id=<?= Yii::$app->user->id ?>" class="no-underline">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/FinancialSystem/dashboard.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                <?= Yii::t('app', 'Dashboard') ?>
-                                        </a>
-                                </div>
-                                <div class="col-12 mt-10">
-                                        <a href="<?= Path::fsModule() ?>?__id=<?= Yii::$app->user->id ?>" class="no-underline">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/FinancialSystem/pl_forecase.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                <?= Yii::t('app', 'PL Forecast') ?>
-                                        </a>
-                                </div>
-                                <div class="col-12 mt-10">
-                                        <a href="<?= Path::fsModule() ?>?__id=<?= Yii::$app->user->id ?>" class="no-underline">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/FinancialSystem/pl_config.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                <?= Yii::t('app', 'PL Configuration') ?>
-                                        </a>
-                                </div>
-                                <div class="col-12 mt-10">
-                                        <a href="<?= Path::fsModule() ?>?__id=<?= Yii::$app->user->id ?>" class="no-underline">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/FinancialSystem/golden.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                <?= Yii::t('app', 'Golden Ratio') ?>
-                                        </a>
-                                </div>
-                                <div class="col-12 mt-10">
-                                        <a href="<?= Path::fsModule() ?>?__id=<?= Yii::$app->user->id ?>" class="no-underline">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/FinancialSystem/forecast_account.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                <?= Yii::t('app', 'Forecast Account') ?>
-                                        </a>
-                                </div>
-                                <div class="col-12 mt-10">
-                                        <a href="<?= Path::fsModule() ?>?__id=<?= Yii::$app->user->id ?>" class="no-underline">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/FinancialSystem/currency.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                <?= Yii::t('app', 'Currency Management') ?>
-                                        </a>
-                                </div>
-                                <!-- <span style="float: right;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:none;" onclick="javascript:hideGroupMenu('financial-planing')" id="financial-planing-hide">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6-1.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;" onclick="javascript:showGroupMenu('financial-planing')" id="financial-planing-show">
-                                </span> -->
+                                <a href="<?= Path::fsModule() ?>?__id=<?= Yii::$app->user->id ?>" class="no-underline">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/FinancialSystem/dashboard.svg" class="first-layer-icon" style="margin-top: -3px;">
+                                        <?= Yii::t('app', 'Dashboard') ?>
+                                </a>
                         </div>
-                        <div id="financial-planing" style="display:none;">
-                                <!-- <div class="col-12 second-layer-menu">
-                                        <a href="<?= Path::fsModule() ?>?__id=<?= Yii::$app->user->id ?>" class="no-underline">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/FinancialSystem/Group289674.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                Profit & Loss (PL Forecase)
-                                        </a>
-                                </div>
-                                <div class="col-12 second-layer-menu">
-                                        <a href="<?= Path::fsModule() ?>?__id=<?= Yii::$app->user->id ?>" class="no-underline">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/FinancialSystem/Group289729.png" class="first-layer-icon" style="margin-top: -3px;">
-                                                Golden Ratio (GR)
-                                        </a>
-                                </div>
-                                <div class="col-12 second-layer-menu">
-                                        <a href="<?= Path::fsModule() ?>?__id=<?= Yii::$app->user->id ?>" class="no-underline">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/FinancialSystem/Group289730.png" class="first-layer-icon" style="margin-top: -3px;">
-                                                Forecase Accounts(FA)
-                                        </a>
-                                </div> -->
+                        <div class="col-12 first-layer-manu">
+                                <a href="<?= Path::fsModule() ?>?__id=<?= Yii::$app->user->id ?>" class="no-underline">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/FinancialSystem/pl_forecase.svg" class="first-layer-icon" style="margin-top: -3px;">
+                                        <?= Yii::t('app', 'PL Forecast') ?>
+                                </a>
+                        </div>
+                        <div class="col-12 first-layer-manu">
+                                <a href="<?= Path::fsModule() ?>?__id=<?= Yii::$app->user->id ?>" class="no-underline">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/FinancialSystem/pl_config.svg" class="first-layer-icon" style="margin-top: -3px;">
+                                        <?= Yii::t('app', 'PL Configuration') ?>
+                                </a>
+                        </div>
+                        <div class="col-12 first-layer-manu">
+                                <a href="<?= Path::fsModule() ?>?__id=<?= Yii::$app->user->id ?>" class="no-underline">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/FinancialSystem/golden.svg" class="first-layer-icon" style="margin-top: -3px;">
+                                        <?= Yii::t('app', 'Golden Ratio') ?>
+                                </a>
+                        </div>
+                        <div class="col-12 first-layer-manu">
+                                <a href="<?= Path::fsModule() ?>?__id=<?= Yii::$app->user->id ?>" class="no-underline">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/FinancialSystem/forecast_account.svg" class="first-layer-icon" style="margin-top: -3px;">
+                                        <?= Yii::t('app', 'Forecast Account') ?>
+                                </a>
+                        </div>
+                        <div class="col-12 first-layer-manu">
+                                <a href="<?= Path::fsModule() ?>?__id=<?= Yii::$app->user->id ?>" class="no-underline">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/FinancialSystem/currency.svg" class="first-layer-icon" style="margin-top: -3px;">
+                                        <?= Yii::t('app', 'Currency Management') ?>
+                                </a>
                         </div>
                 </div>
         </div>
