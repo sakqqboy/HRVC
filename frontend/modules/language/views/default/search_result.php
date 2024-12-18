@@ -25,10 +25,11 @@
 					<td><?= $lang["chinese"] ?></td>
 					<td><?= $lang["vietnam"] ?></td>
 					<td><?= $lang["spanish"] ?></td>
-					<td><?= $lang["spanish"] ?></td>
+					<td><?= $lang["indonesian"] ?></td>
 					<td class="text-center">
 						<a href="<?= Yii::$app->homeUrl ?>language/default/update?translatorId=<?= $lang["translatorId"] ?>" class="btn btn-bg-white-xs">
-							<img src="<?= Yii::$app->homeUrl ?>/images/icons/Settings/refresh-black.svg" alt="History" class="pim-icon" style="margin-top: -1px;">
+							<i class="fa fa-pencil" aria-hidden="true"></i>
+							<!-- <img src="<?= Yii::$app->homeUrl ?>/images/icons/Settings/refresh-black.svg" class="pim-icon" style="margin-top: -1px;"> -->
 						</a>
 						<a class="btn btn-bg-red-xs mt-5" href="javascript:deleteTran(<?= $lang["translatorId"] ?>)">
 							<i class="fa fa-times" aria-hidden="true"></i>

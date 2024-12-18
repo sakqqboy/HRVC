@@ -25,7 +25,7 @@ $this->title = Yii::t('app', 'Transtate');
                 <a href="<?= Yii::$app->homeUrl ?>language/default/create" class="btn btn-primary font-size-14 float-end pl-5 pr-5">+ <?= Yii::t('app', 'Add new word') ?></a>
             </div>
             <div class="col-12">
-                <input type="text" name="" class="form-control pl-35 font-size-16" id="search-english" onkeyup="javascript:searchWord()" value="<?= isset($english) ? $english : '' ?>">
+                <input type="text" name="" class="form-control pl-35 font-size-16" id="search-english" onkeyup="javascript:searchWord()" value="<?= $english ?>">
                 <div class="ml-10" style="margin-top: -30px; width:20px;position:absolute;"></span><i class="fa fa-search text-secondary" aria-hidden="true"></i></div>
             </div>
 

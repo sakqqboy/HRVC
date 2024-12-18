@@ -5,7 +5,7 @@ function hideGroupMenu(groupname) {
 	$("#" + groupname+'-show').show();
 }
 function showGroupMenu(groupname) { 
-	$("#" + groupname).slideDown(200);;
+	$("#" + groupname).slideDown(200);
 	$("#" + groupname + '-show').hide();
 	$("#" + groupname+'-hide').show();
 }
