@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             text: 'Amount'
                         },
                         min: 0,
-                        max: 100, // กำหนดให้ค่ามากสุดเป็น 100%
+                        // max: 100, // กำหนดให้ค่ามากสุดเป็น 100%
                         gridLineColor: '#E6E6E6',
                         labels: {
                             formatter: function() {
@@ -224,9 +224,9 @@ document.addEventListener("DOMContentLoaded", () => {
                             // Loop through the series data
                             this.points.forEach(function(point) {
                                 if (point.series.name == 'Result') {
-                                    result = point.y + '%';
+                                    result = point.y.toFixed(2) + '%';
                                 } else if (point.series.name == 'Gap') {
-                                    gap = point.y + '%';
+                                    gap = point.y.toFixed(2) + '%';
                                 }
                                 name = point.key;
                             });
