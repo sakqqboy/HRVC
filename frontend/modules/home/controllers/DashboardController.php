@@ -389,19 +389,31 @@ class DashboardController extends Controller
 
     
     public function actionUpcomingSchedule() {
-        $data = [1,2,3];
+        $data = [];
+        $userId = Yii::$app->user->id;
+        $Id = User::employeeIdFromUserId($userId);
+		$role = UserRole::userRight();
 
         $api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'home/dashbord/upcoming-schedule');
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $Id);
+        $employeeProfile = curl_exec($api);
+        $employeeProfile = json_decode($employeeProfile, true);
+        
+        $companyId = $employeeProfile['companyId'];
+        $teamId = $employeeProfile['teamId'];
+        $employeeId = $employeeProfile['employeeId'];
+        // throw new Exception("Company ID: {$companyId}, Team ID: {$teamId}, Employee ID: {$employeeId}");
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'home/dashbord/upcoming-schedule?id=' . $Id . '&role=' . $role . '&companyId='.$companyId.'&teamId='.$teamId.'&employeeId='.$employeeId);
 		$upcoming = curl_exec($api);
 		$upcoming = json_decode($upcoming, true);
 
         curl_close($api);
 
-        return json_encode($data);
+        return json_encode($upcoming);
     }
 
 

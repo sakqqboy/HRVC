@@ -1,5 +1,5 @@
 <?php 
-echo '55555';
+// echo '55555';
 ?>
 <ul class="list-unstyled small">
 
@@ -52,7 +52,7 @@ function restData() {
         dataType: 'JSON',
         url: url,
         success: function(data) {
-            alert(data);
+            // alert(data);
         },
     });
 }

@@ -17,8 +17,10 @@ use backend\models\hrvc\KpiEmployeeHistory;
 use backend\models\hrvc\KpiHistory;
 use backend\models\hrvc\KpiTeam;
 use backend\models\hrvc\KpiTeamHistory;
+use backend\models\hrvc\User;
 use backend\modules\fs\fs;
 use common\models\ModelMaster;
+use yii\db\Query;
 use yii\web\Controller;
 
 /**
@@ -1220,9 +1222,230 @@ class DashbordController extends Controller
         return json_encode($data);
     }
 
-    public function actionUpcomingSchedule() {
-        $data = [1,2,3];
+    public function actionUpcomingSchedule($id,$role, $companyId, $teamId, $employeeId) {
+		$data = [];
 
+        $type = '';
+        if($role >= 6){
+        // Admin view all
+        // $type = 'Admin';
+        // $kfiHistory = KfiHistory::find()
+		// 		->where(["status" => [1, 2, 4]])
+		// 		->orderBy('year DESC,month DESC,kfiHistoryId DESC')
+		// 		->asArray()
+		// 		->all();
+        // $kpiHistory = KpiHistory::find()
+		// 		->where(["status" => [1, 2, 4]])
+		// 		->orderBy('year DESC,month DESC,kpiHistoryId DESC')
+		// 		->asArray()
+		// 		->all();
+        // $kgiHistory = KgiHistory::find()
+		// 		->where(["status" => [1, 2, 4]])
+		// 		->orderBy('year DESC,month DESC,kgiHistoryId DESC')
+		// 		->asArray()
+		// 		->all();
+
+    $kfiSubQuery = (new Query())
+    ->select('MAX(updateDateTime)')
+    ->from('kfi_history sub')
+    ->where('sub.kfiId = main.kfiId')
+    ->andWhere(['sub.status' => [1, 2, 4]]);
+
+    $kfiHistory = (new Query())
+        ->select([
+            'kfiHistoryId',
+            'kfiId',
+            'createrId',
+            'kfiHistoryName',
+            'unitId',
+            'checkPeriodDate',
+            'nextCheckDate',
+            'fromDate',
+            'toDate',
+            'quantRatio',
+            'amountType',
+            'code',
+            'historyStatus',
+            'target',
+            'result',
+            'formular',
+            'titleProgress',
+            'description',
+            'remark',
+            'month',
+            'year',
+            'status',
+            'createDateTime',
+            'updateDateTime'
+        ])
+        ->from('kfi_history main')
+        ->where(['status' => [1, 2, 4]])
+        ->andWhere(['updateDateTime' => $kfiSubQuery])
+        ->orderBy(['year' => SORT_DESC, 'month' => SORT_DESC, 'kfiHistoryId' => SORT_DESC])
+        ->all();
+
+    // KPI History
+    $kpiSubQuery = (new Query())
+        ->select('MAX(updateDateTime)')
+        ->from('kpi_history sub')
+        ->where('sub.kpiId = main.kpiId')
+        ->andWhere(['sub.status' => [1, 2, 4]]);
+
+    $kpiHistory = (new Query())
+        ->select([
+            'kpiHistoryId',
+            'kpiId',
+            'createrId',
+            'titleProcess',
+            'kpiHistoryName',
+            'unitId',
+            'nextCheckDate',
+            'fromDate',
+            'toDate',
+            'quantRatio',
+            'amountType',
+            'code',
+            'targetAmount',
+            'result',
+            'description',
+            'remark',
+            'month',
+            'year',
+            'status',
+            'createDateTime',
+            'updateDateTime'
+        ])
+        ->from('kpi_history main')
+        ->where(['status' => [1, 2, 4]])
+        ->andWhere(['updateDateTime' => $kpiSubQuery])
+        ->orderBy(['year' => SORT_DESC, 'month' => SORT_DESC, 'kpiHistoryId' => SORT_DESC])
+        ->all();
+
+    // KGI History
+    $kgiSubQuery = (new Query())
+        ->select('MAX(updateDateTime)')
+        ->from('kgi_history sub')
+        ->where('sub.kgiId = main.kgiId')
+        ->andWhere(['sub.status' => [1, 2, 4]]);
+
+    $kgiHistory = (new Query())
+        ->select([
+            'kgiHistoryId',
+            'kgiId',
+            'createrId',
+            'kgiHistoryName',
+            'unitId',
+            'titleProcess',
+            'nextCheckDate',
+            'fromDate',
+            'toDate',
+            'quantRatio',
+            'amountType',
+            'code',
+            'targetAmount',
+            'result',
+            'description',
+            'remark',
+            'month',
+            'year',
+            'status',
+            'createDateTime',
+            'updateDateTime'
+        ])
+        ->from('kgi_history main')
+        ->where(['status' => [1, 2, 4]])
+        ->andWhere(['updateDateTime' => $kgiSubQuery])
+        ->orderBy(['year' => SORT_DESC, 'month' => SORT_DESC, 'kgiHistoryId' => SORT_DESC])
+        ->all();
+
+		if (isset($kfiHistory) && count($kfiHistory) > 0) {
+			foreach ($kfiHistory as $history) :
+				$time = explode(' ', $history["createDateTime"]);
+				$employeeId = Employee::employeeId($history["createrId"]);
+				$data[$history["kfiHistoryId"]] = [
+					"title" => $history["titleProgress"],
+					"remark" => $history["remark"],
+					"picture" => Employee::employeeImage($employeeId),
+					"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
+					"time" => ModelMaster::timeText($time[1]),
+					"status" => $history["historyStatus"], 
+					"target" => $history["target"],
+					"result" => $history["result"],
+					"month" => $history["month"],
+					"year" => $history["year"],
+					"creater" => User::employeeNameByuserId($history["createrId"]),
+				];
+			endforeach;
+		}
+
+        if (isset($kpiHistory) && count($kpiHistory) > 0) {
+			foreach ($kpiHistory as $history) :
+				$time = explode(' ', $history["createDateTime"]);
+				$employeeId = Employee::employeeId($history["createrId"]);
+				$data[$history["kpiHistoryId"]] = [
+					"title" => $history["titleProcess"],
+					"remark" => $history["remark"],
+					"result" => $history["result"],
+					"creater" => User::employeeNameByuserId($history["createrId"]),
+					"picture" => Employee::employeeImage($employeeId),
+					"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
+					"time" => ModelMaster::timeText($time[1]),
+					"status" => $history["status"],
+					"target" => $history["targetAmount"],
+					"month" => $history["month"],
+					"year" => $history["year"],
+					"createDateTime" => ModelMaster::monthDateYearTime($history["createDateTime"])
+				];
+			endforeach;
+		}
+
+
+        if (isset($kgiHistory) && count($kgiHistory) > 0) {
+			foreach ($kgiHistory as $history) :
+				$time = explode(' ', $history["createDateTime"]);
+				$employeeId = Employee::employeeId($history["createrId"]);
+				$data[$history["kgiHistoryId"]] = [
+					"title" => $history["titleProcess"],
+					"remark" => $history["remark"],
+					"result" => $history["result"],
+					"creater" => User::employeeNameByuserId($history["createrId"]),
+					"picture" => Employee::employeeImage($employeeId),
+					"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
+					"time" => ModelMaster::timeText($time[1]),
+					"status" => $history["status"],
+					"target" => $history["targetAmount"],
+					"month" => $history["month"],
+					"year" => $history["year"],
+					"createDateTime" => ModelMaster::monthDateYearTime($history["createDateTime"])
+				];
+			endforeach;
+		}
+        
+
+        }else if($role >= 4) {
+        // Manager view company
+        // $type = 'Manager';
+        
+
+        }else if($role == 3) {
+        // Leader view team
+        // $type = 'Leader';
+
+        }else if ($role < 3){
+         // Staff view self
+        //  $type = 'Staff';
+
+        }
+
+        // $data = [
+        //     'Id' => $id,
+        //     'Role' => $role,
+        //     'CompanyId' => $companyId,
+        //     'TeamId' => $teamId,
+        //     'Employee' => $employeeId,
+        //     'type' => $type
+        // ];
+        
         // ส่งข้อมูลกลับเป็น JSON
         return json_encode($data);
     }
