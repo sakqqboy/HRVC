@@ -1220,5 +1220,11 @@ class DashbordController extends Controller
         return json_encode($data);
     }
 
+    public function actionUpcomingSchedule() {
+        $data = [1,2,3];
+
+        // ส่งข้อมูลกลับเป็น JSON
+        return json_encode($data);
+    }
 
 }    

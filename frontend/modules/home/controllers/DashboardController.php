@@ -387,4 +387,23 @@ class DashboardController extends Controller
         return json_encode($res);
     }
 
+    
+    public function actionUpcomingSchedule() {
+        $data = [1,2,3];
+
+        $api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'home/dashbord/upcoming-schedule');
+		$upcoming = curl_exec($api);
+		$upcoming = json_decode($upcoming, true);
+
+        curl_close($api);
+
+        return json_encode($data);
+    }
+
+
+
 }
