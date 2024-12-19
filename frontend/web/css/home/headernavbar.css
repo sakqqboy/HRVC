@@ -21,14 +21,12 @@
 
 .profile-arrow-menu {
     cursor: pointer;
-    text-align: center;
     margin-top: 3px;
 }
 
 .language-text {
     font-size: 18px;
     font-weight: 500;
-    margin-right: 5px;
     color: #3C3D48;
 }
 
@@ -76,7 +74,7 @@
 }
 
 .country-box-menu {
-    width: 181px;
+    width: 184px;
     height: 307px;
     position: absolute;
     background-color: white;
