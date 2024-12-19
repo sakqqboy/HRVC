@@ -92,19 +92,23 @@
     font-size: 22px;
     font-weight: 500;
     margin-top: -5px;
+    margin-right: 14px;
+    width: 350px;
+    padding-right: 0px;
 }
 
 .profile-dropdown {
-    background-color: #DEE9FE;
+    background-color: #DEE9F4;
     border-radius: 19.5px;
     height: 40px;
-    padding-left: 4px;
-    padding-top: 3px;
     width: 67px;
+    padding-left: 4px;
+    padding-right: 0px;
+    padding-top: 3px;
 }
 
 .language-dropdown {
-    background-color: #DEE9FE;
+    background-color: #DEE9F4;
     border-radius: 19.5px;
     height: 40px;
     padding-left: 4px;

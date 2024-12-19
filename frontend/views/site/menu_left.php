@@ -325,7 +325,7 @@ $session = Yii::$app->session;
                                                 <div class="col-12 third-layer-menu">
                                                         <a href="" class="no-underline">
                                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/Evaluation/self.svg" class="first-layer-icon" style="margin-top: -3px;">
-                                                                <?= Yii::t('app', 'Indevidual') ?>
+                                                                <?= Yii::t('app', 'Individual') ?>
                                                         </a>
                                                 </div>
                                         </div>
