@@ -190,7 +190,7 @@ $session = Yii::$app->session;
                         <div class="col-12 first-layer-manu">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/PerformanceMatrices/KFI.svg" class="first-layer-icon" style="margin-top: -3px;">
                                 <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="no-underline">
-                                        <?= Yii::t('app', 'Financials') ?>
+                                        <?= Yii::t('app', "Financials") ?>
                                 </a>
                                 <span style="float: right;">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/6.svg" class="first-layer-icon" style="cursor:pointer;margin-top: -3px;display:<?= $session->has('third-layer-kfi') ? '' : 'none' ?>;" onclick="javascript:hideGroupMenu('third-layer-kfi')" id="third-layer-kfi-hide">

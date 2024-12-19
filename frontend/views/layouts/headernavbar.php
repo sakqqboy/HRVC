@@ -124,7 +124,7 @@ use frontend\models\hrvc\User;
                     <a href="?language=en-US" style="text-decoration:none;color:#30313D;display:<?= $text == 'EN' ? 'none' : '' ?>">
                         <div class="col-12 head-list-menu">
                             <img src="<?= Yii::$app->homeUrl ?>images/flag/usa.svg" class="mr-12 profile-menu-icon">
-                            EN
+                            English
                         </div>
                     </a>
                     <a href="?language=th" style="text-decoration:none;color:#30313D;display:<?= $text == 'th' ? 'none' : '' ?>">
