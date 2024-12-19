@@ -328,7 +328,7 @@ class DashbordController extends Controller
     {
         $employeeId = Employee::employeeId($userId);
 		$employee = Employee::EmployeeDetail($employeeId);
-        if ($role <= 3) {
+        // if ($role <= 3) {
 			$kgiTeams = KgiTeam::find()
 				->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,
 			kgi_team.teamId,kgi_team.target')
@@ -339,19 +339,19 @@ class DashbordController extends Controller
 				->orderBy("k.createDateTime DESC,t.teamName ASC")
 				->asArray()
 				->all();
-		} else {
-			$kgiTeams = KgiTeam::find()
-				->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,
-			kgi_team.teamId,kgi_team.target')
-				->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_team.kgiId")
-				->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
-				->where(["kgi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
-				->orderBy("k.createDateTime DESC,t.teamName ASC")
-				->asArray()
-				->all();
-		}
+		// } else {
+		// 	$kgiTeams = KgiTeam::find()
+		// 		->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,
+		// 	kgi_team.teamId,kgi_team.target')
+		// 		->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_team.kgiId")
+		// 		->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
+		// 		->where(["kgi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
+		// 		->orderBy("k.createDateTime DESC,t.teamName ASC")
+		// 		->asArray()
+		// 		->all();
+		// }
 
-        if ($role <= 3) {
+        // if ($role <= 3) {
 			$kpiTeams = KpiTeam::find()
 				->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,
 			kpi_team.teamId,kpi_team.target')
@@ -362,17 +362,17 @@ class DashbordController extends Controller
 				->orderBy("k.createDateTime DESC,t.teamName ASC")
 				->asArray()
 				->all();
-		} else {
-			$kpiTeams = kpiTeam::find()
-				->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,
-			kpi_team.teamId,kpi_team.target')
-				->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_team.kpiId")
-				->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
-				->where(["kpi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
-				->orderBy("k.createDateTime DESC,t.teamName ASC")
-				->asArray()
-				->all();
-		}
+		// } else {
+		// 	$kpiTeams = kpiTeam::find()
+		// 		->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,
+		// 	kpi_team.teamId,kpi_team.target')
+		// 		->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_team.kpiId")
+		// 		->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
+		// 		->where(["kpi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
+		// 		->orderBy("k.createDateTime DESC,t.teamName ASC")
+		// 		->asArray()
+		// 		->all();
+		// }
 
     
         // นับจำนวนของแต่ละคิวรี้
@@ -523,7 +523,7 @@ class DashbordController extends Controller
         //                                   ->all();
 
         $employeeId = Employee::employeeId($userId);
-		if ($role <= 3) {
+		// if ($role <= 3) {
 			$kgiEmployee = KgiEmployee::find()
 				->select('k.kgiName,k.priority,k.quantRatio,k.amountType,k.code,kgi_employee.target,kgi_employee.result,
 			kgi_employee.status,kgi_employee.employeeId,k.unitId,kgi_employee.month,kgi_employee.year,k.kgiId,k.companyId,e.teamId,e.picture,
@@ -534,21 +534,21 @@ class DashbordController extends Controller
 				->orderby('k.createDateTime')
 				->asArray()
 				->all();
-		} else {
-			$kgiEmployee = KgiEmployee::find()
-				->select('k.kgiName,k.priority,k.quantRatio,k.amountType,k.code,kgi_employee.target,kgi_employee.result,
-			kgi_employee.status,kgi_employee.employeeId,k.unitId,kgi_employee.month,kgi_employee.year,k.kgiId,k.companyId,e.teamId,e.picture,
-			kgi_employee.kgiEmployeeId,e.employeeFirstname,e.employeeSurename')
-				->JOIN("LEFT JOIN", "kgi k", "kgi_employee.kgiId=k.kgiId")
-				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
-				->where(["kgi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
-				->orderby('k.createDateTime')
-				->asArray()
-				->all();
-		}
+		// } else {
+		// 	$kgiEmployee = KgiEmployee::find()
+		// 		->select('k.kgiName,k.priority,k.quantRatio,k.amountType,k.code,kgi_employee.target,kgi_employee.result,
+		// 	kgi_employee.status,kgi_employee.employeeId,k.unitId,kgi_employee.month,kgi_employee.year,k.kgiId,k.companyId,e.teamId,e.picture,
+		// 	kgi_employee.kgiEmployeeId,e.employeeFirstname,e.employeeSurename')
+		// 		->JOIN("LEFT JOIN", "kgi k", "kgi_employee.kgiId=k.kgiId")
+		// 		->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
+		// 		->where(["kgi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
+		// 		->orderby('k.createDateTime')
+		// 		->asArray()
+		// 		->all();
+		// }
 
 
-        if ($role <= 3) {
+        // if ($role <= 3) {
 			$kpiEmployee = kpiEmployee::find()
 				->select('k.kpiName,k.priority,k.quantRatio,k.amountType,k.code,kpi_employee.target,kpi_employee.result,
 			kpi_employee.status,kpi_employee.employeeId,k.unitId,kpi_employee.month,kpi_employee.year,k.kpiId,k.companyId,e.teamId,e.picture,
@@ -559,18 +559,18 @@ class DashbordController extends Controller
 				->orderby('k.createDateTime')
 				->asArray()
 				->all();
-		} else {
-			$kpiEmployee = kpiEmployee::find()
-				->select('k.kpiName,k.priority,k.quantRatio,k.amountType,k.code,kpi_employee.target,kpi_employee.result,
-			kpi_employee.status,kpi_employee.employeeId,k.unitId,kpi_employee.month,kpi_employee.year,k.kpiId,k.companyId,e.teamId,e.picture,
-			kpi_employee.kpiEmployeeId,e.employeeFirstname,e.employeeSurename')
-				->JOIN("LEFT JOIN", "kpi k", "kpi_employee.kpiId=k.kpiId")
-				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
-				->where(["kpi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
-				->orderby('k.createDateTime')
-				->asArray()
-				->all();
-		}
+		// } else {
+		// 	$kpiEmployee = kpiEmployee::find()
+		// 		->select('k.kpiName,k.priority,k.quantRatio,k.amountType,k.code,kpi_employee.target,kpi_employee.result,
+		// 	kpi_employee.status,kpi_employee.employeeId,k.unitId,kpi_employee.month,kpi_employee.year,k.kpiId,k.companyId,e.teamId,e.picture,
+		// 	kpi_employee.kpiEmployeeId,e.employeeFirstname,e.employeeSurename')
+		// 		->JOIN("LEFT JOIN", "kpi k", "kpi_employee.kpiId=k.kpiId")
+		// 		->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
+		// 		->where(["kpi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
+		// 		->orderby('k.createDateTime')
+		// 		->asArray()
+		// 		->all();
+		// }
     
         // นับจำนวนของแต่ละคิวรี้
         $kgiEmployeeCount = count($kgiEmployee);
