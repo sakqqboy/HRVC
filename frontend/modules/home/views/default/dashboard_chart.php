@@ -6,13 +6,16 @@
 }
 </style>
 <div class="chart-container">
-    <button id="prevButton" class="chart-nav-button">
-        <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/left.svg" alt="Previous">
-    </button>
-    <div id="container" class="chart-graph"></div>
-    <button id="nextButton" class="chart-nav-button">
-        <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/right.svg" alt="Next">
-    </button>
+
+    <div class="chart-prevnext-Button">
+        <button id="prevButton" class="chart-nav-button">
+            <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/left.svg" alt="Previous">
+        </button>
+        <div id="container" class="chart-graph"></div>
+        <button id="nextButton" class="chart-nav-button">
+            <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/right.svg" alt="Next">
+        </button>
+    </div>
 
     <div class="chart-company-info">
         <img id="companyImg" src="<?=Yii::$app->homeUrl?>images/icons/Dark/48px/company.svg" alt="Company Icon"
@@ -110,7 +113,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 Highcharts.chart('container', {
                     chart: {
                         type: 'line',
-                        backgroundColor: '#FFFFFF',
+                        spacingTop: -20, // เพิ่มช่องว่างด้านบน
+                        spacingBottom: 10, // เพิ่มช่องว่างด้านล่าง
+                        spacingLeft: 20, // เพิ่มช่องว่างด้านซ้าย
+                        spacingRight: 20, // เพิ่มช่องว่างด้านขวา
+                        // backgroundColor: '#FFFFFF',
                         borderRadius: 10,
                         style: {
                             fontFamily: 'Arial'
@@ -120,11 +127,14 @@ document.addEventListener("DOMContentLoaded", () => {
                         text: chartData.title,
                         align: 'left',
                         style: {
-                            fontSize: '16px',
-                            color: '#333333'
+                            fontSize: '20px',
+                            fontFamily: 'SF Pro Display',
+                            fontStyle: 'normal',
+                            fontWeight: '500',
+                            color: '#3C3D48'
                         },
-                        x: 70,
-                        y: 15
+                        x: 65,
+                        y: 65
                     },
                     xAxis: {
                         categories: categories, // ใช้ categories ที่ได้จาก PHP
@@ -215,6 +225,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             return '<img src="<?=Yii::$app->homeUrl?>images/icons/Settings/' +
                                 iconPath +
                                 '" style="width: 35px; height: 35px; vertical-align: middle;">' +
+                                ' ' +
                                 this
                                 .name;
                         },

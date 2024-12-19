@@ -6,37 +6,41 @@ $this->title = "Dashboard"
     <div class="aler pim-body bg-white" style="margin-top: -10px;">
 
         <div class="row">
-            <!-- Chart & Tabs -->
-            <div class="col-lg-9">
-                <!-- Chart -->
-                <div class="dashboard-chart mb-4 p-3">
-                    <!-- Chart Content -->
+            <!-- Chart -->
+            <div class="col-lg-8 p-3">
+                <div class="dashboard-chart h-100">
                     <?= $this->render('dashboard_chart') ?>
-                </div>
-
-                <!-- Tabs -->
-                <div class="mb-4 mt-15">
-                    <!-- Tab Content -->
-                    <?= $this->render('dashbord_tabs', ['companyId' => $employeeProfile['companyId'],'teamId' => $employeeProfile['teamId'],'employeeId' => $employeeProfile['employeeId']]) ?>
                 </div>
             </div>
 
-            <!-- rofile & Schedule -->
-            <div class="col-lg-3">
-                <!-- Profile -->
-                <div class="profile-card p-3 mb-4 mt-15">
-                    <!-- Profile Content-->
+            <!-- Profile -->
+            <div class="col-lg-4 p-3">
+                <div class="profile-card h-100">
                     <?= $this->render('dashbord_profile', ['employeeProfile' => $employeeProfile]) ?>
-                </div>
-
-                <!-- navigation -->
-                <div>
-                    <!-- navigation Content -->
-                    <?= $this->render('dashbord_navigation') ?>
-
                 </div>
             </div>
         </div>
+
+        <div class="row mt-4">
+            <!-- Tabs -->
+            <div class="col-lg-8 p-3">
+                <div class="dashboard-tabs">
+                    <?= $this->render('dashbord_tabs', [
+                'companyId' => $employeeProfile['companyId'],
+                'teamId' => $employeeProfile['teamId'],
+                'employeeId' => $employeeProfile['employeeId']
+            ]) ?>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="col-lg-4 p-3">
+                <div class="dashboard-navigation">
+                    <?= $this->render('dashbord_navigation') ?>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 

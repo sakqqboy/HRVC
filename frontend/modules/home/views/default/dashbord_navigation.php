@@ -25,62 +25,14 @@
         <!-- Upcoming Schedule -->
         <div class="tab-pane fade show active fade" id="upcoming-schedule" role="tabpanel"
             aria-labelledby="upcoming-schedule-tab">
-            <ul class="list-unstyled small">
-                <li class="schedule-item mt-5">
-                    <strong>Update KPI</strong> - Non-Japanese Client<br>
-                    <span class="text-muted">10:00 AM, 01/12/2024</span>
-                </li>
-                <li class="schedule-item mt-5">
-                    <strong>Submit Report</strong> - Team Performance<br>
-                    <span class="text-muted mt-5">2:00 PM, 01/12/2024</span>
-                </li>
-                <li class="schedule-item mt-5">
-                    <strong>Update KPI</strong> - Non-Japanese Client<br>
-                    <span class="text-muted">10:00 AM, 01/12/2024</span>
-                </li>
-                <li class="schedule-item mt-5">
-                    <strong>Submit Report</strong> - Team Performance<br>
-                    <span class="text-muted">2:00 PM, 01/12/2024</span>
-                </li>
-                <li class="schedule-item mt-5">
-                    <strong>Update KPI</strong> - Non-Japanese Client<br>
-                    <span class="text-muted">10:00 AM, 01/12/2024</span>
-                </li>
-                <li class="schedule-item mt-5">
-                    <strong>Submit Report</strong> - Team Performance<br>
-                    <span class="text-muted">2:00 PM, 01/12/2024</span>
-                </li>
-            </ul>
+            <?= $this->render('upcoming') ?>
+
         </div>
 
         <!-- Pending Approvals -->
         <div class="tab-pane fade " id="pending-approvals" role="tabpanel" aria-labelledby="pending-approvals-tab">
-            <ul class="list-unstyled small">
-                <li class="schedule-item mt-5">
-                    <strong>Leave Request</strong> - Employee ID #12<br>
-                    <span class="text-muted">Pending since 29/11/2024</span>
-                </li>
-                <li class="schedule-item mt-5">
-                    <strong>Budget Approval</strong> - Marketing Campaign<br>
-                    <span class="text-muted">Pending since 25/11/2024</span>
-                </li>
-                <li class="schedule-item mt-5">
-                    <strong>Update KPI</strong> - Non-Japanese Client<br>
-                    <span class="text-muted">10:00 AM, 01/12/2024</span>
-                </li>
-                <li class="schedule-item mt-5">
-                    <strong>Submit Report</strong> - Team Performance<br>
-                    <span class="text-muted">2:00 PM, 01/12/2024</span>
-                </li>
-                <li class="schedule-item mt-5">
-                    <strong>Update KPI</strong> - Non-Japanese Client<br>
-                    <span class="text-muted">10:00 AM, 01/12/2024</span>
-                </li>
-                <li class="schedule-item mt-5">
-                    <strong>Submit Report</strong> - Team Performance<br>
-                    <span class="text-muted">2:00 PM, 01/12/2024</span>
-                </li>
-            </ul>
+            <?= $this->render('waiting_approval') ?>
+
         </div>
     </div>
 </div>
