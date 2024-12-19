@@ -23,6 +23,7 @@ function loadCompanyTap(companyId) {
         url: url,
         data: { companyId: companyId },
         success: function (data) {
+            // currentKPIIndex = 0;
             $('#tab-content-container').html(data);
         },
         error: function (xhr, status, error) {
@@ -39,6 +40,7 @@ function loadTeamTap(teamId) {
         url: url,
         data: { teamId: teamId },
         success: function (data) {
+            // currentKPIIndex = 0;
             $('#tab-content-container').html(data);
         },
         error: function (xhr, status, error) {
@@ -56,6 +58,7 @@ function loadSelfTap(employeeId) {
         url: url,
         data: { employeeId: employeeId },
         success: function (data) {
+            // currentKPIIndex = 0;
             $('#tab-content-container').html(data);
         },
         error: function (xhr, status, error) {
@@ -71,6 +74,7 @@ function updateData(index, type) {
         'KGI': KGIData,
         'KPI': KPIData
     };
+    // alert(index);
 
     const dataType = data[type];
     if (dataType && dataType[index]) {
