@@ -262,7 +262,7 @@ class KpiPersonalController extends Controller
 					// "remark" => $teamhistory["remark"],
 					//"result" => $history["result"],
 					"picture" => Employee::employeeImage($employeehistory),
-					"createDate" => ModelMaster::engDateHr($employeehistory["createDateTime"]),
+					"createDate" => ModelMaster::engDateHr($employeehistory["createDateTime"]),	
 					"time" => ModelMaster::timeText($time[1]),
 					"status" => $employeehistory["status"],
 					"target" => $employeehistory["target"],

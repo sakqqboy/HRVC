@@ -32,7 +32,7 @@ function restData() {
                 var schedules = data.schedules || Object.values(data); // Adjust the property name if needed
 
                 if (Array.isArray(schedules)) {
-                    alert(schedules.length); // Now data is an array
+                    // alert(schedules.length); // Now data is an array
                     renderSchedule(schedules); // Pass the array to the render function
                 } else {
                     alert("No schedules array found in the data.");
