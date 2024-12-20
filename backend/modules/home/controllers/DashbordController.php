@@ -20,6 +20,7 @@ use backend\models\hrvc\KpiTeamHistory;
 use backend\models\hrvc\User;
 use backend\modules\fs\fs;
 use common\models\ModelMaster;
+use DateTime;
 use Yii;
 use yii\db\Query;
 use yii\web\Controller;
@@ -1235,6 +1236,8 @@ class DashbordController extends Controller
         $kpiself = 0;
         $kgiself= 0;
 
+        $today = new DateTime(); // Get today's date
+
         $type = '';
         if($role >= 6){
             //company
@@ -1380,19 +1383,26 @@ class DashbordController extends Controller
 
                 if (isset($kfiHistory) && count($kfiHistory) > 0) {
                     foreach ($kfiHistory as $history) :
+                        
                         $time = explode(' ', $history["createDateTime"]);
                         $employeeId = Employee::employeeId($history["createrId"]);
-                        $data['kficom' . $history["kfiHistoryId"]] = [
-                            "title" => $history["titleProgress"],
-                            "description" => $history["description"],
-                            "createDate" => ModelMaster::engDateHr($history["createDateTime"]),
-                            "time" => ModelMaster::timeText($time[1]),
-                            "status" => $history["historyStatus"], 
-                            "month" => $history["month"],
-                            "year" => $history["year"],
-                            "creater" => User::employeeNameByuserId($history["createrId"]),
-                        ];
-                        $kficompany++;
+                        if (!empty($history["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
+                        $nextCheckDate = new DateTime($history["nextCheckDate"]); // Convert nextCheckDate to DateTime
+                        $interval = $today->diff($nextCheckDate); // Calculate the difference
+                        if ($interval->days >= 7 && $nextCheckDate >= $today) {
+                            $data['kficom' . $history["kfiHistoryId"]] = [
+                                "title" => $history["titleProgress"],
+                                "description" => $history["description"],
+                                "createDate" => ModelMaster::engDateHr($history["createDateTime"]),
+                                "time" => ModelMaster::timeText($time[1]),
+                                "status" => $history["historyStatus"], 
+                                "month" => $history["month"],
+                                "year" => $history["year"],
+                                "creater" => User::employeeNameByuserId($history["createrId"]),
+                            ];
+                            $kficompany++;
+                        }
+                    }
                     endforeach;
                 }
 
@@ -1400,6 +1410,10 @@ class DashbordController extends Controller
                     foreach ($kpiHistory as $history) :
                         $time = explode(' ', $history["createDateTime"]);
                         $employeeId = Employee::employeeId($history["createrId"]);
+                        if (!empty($history["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
+                            $nextCheckDate = new DateTime($history["nextCheckDate"]); // Convert nextCheckDate to DateTime
+                            $interval = $today->diff($nextCheckDate); // Calculate the difference
+                            if ($interval->days >= 7 && $nextCheckDate >= $today) {
                         $data['kpicom' . $history["kpiHistoryId"]] = [
                             "title" => $history["titleProcess"],
                             "description" => $history["description"],
@@ -1411,6 +1425,7 @@ class DashbordController extends Controller
                             "year" => $history["year"]
                         ];
                         $kpicompany++;
+                    }}
                     endforeach;
                 }
 
@@ -1419,6 +1434,10 @@ class DashbordController extends Controller
                     foreach ($kgiHistory as $history) :
                         $time = explode(' ', $history["createDateTime"]);
                         $employeeId = Employee::employeeId($history["createrId"]);
+                        if (!empty($history["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
+                            $nextCheckDate = new DateTime($history["nextCheckDate"]); // Convert nextCheckDate to DateTime
+                            $interval = $today->diff($nextCheckDate); // Calculate the difference
+                            if ($interval->days >= 7 && $nextCheckDate >= $today) {
                         $data['kgicom' . $history["kgiHistoryId"]] = [
                             "title" => $history["titleProcess"],
                             "description" => $history["description"],
@@ -1430,6 +1449,7 @@ class DashbordController extends Controller
                             "year" => $history["year"]
                         ];
                         $kgicompany++;
+                    }}
                     endforeach;
                 }
             //companyEnd
@@ -1515,6 +1535,10 @@ class DashbordController extends Controller
                         foreach ($kgiHistory as $history) {
                             $time = explode(' ', $history["createDateTime"]);
                             $employeeId = Employee::employeeId($history["createrId"]);
+                            if (!empty($history["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
+                                $nextCheckDate = new DateTime($history["nextCheckDate"]); // Convert nextCheckDate to DateTime
+                                $interval = $today->diff($nextCheckDate); // Calculate the difference
+                                if ($interval->days >= 7 && $nextCheckDate >= $today) {                      
                             $data['kgiteam' . $history["kgiTeamHistoryId"]] = [
                                 "title" => $history["detail"],
                                 "description" => $history["description"],
@@ -1526,6 +1550,7 @@ class DashbordController extends Controller
                                 "year" => $history["year"]
                             ];
                             $kgiteam++;
+                        }}
                         }
                         }
 
@@ -1533,6 +1558,10 @@ class DashbordController extends Controller
                         foreach ($kpiTeamHistory as $teamhistory) {
                             $time = explode(' ', $teamhistory["createDateTime"]);
                             $employeeId = Employee::employeeId($teamhistory["createrId"]);
+                            if (!empty($history["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
+                                $nextCheckDate = new DateTime($history["nextCheckDate"]); // Convert nextCheckDate to DateTime
+                                $interval = $today->diff($nextCheckDate); // Calculate the difference
+                                if ($interval->days >= 7 && $nextCheckDate >= $today) {
                             $data['kpiteam' . $teamhistory["kpiTeamHistoryId"]] = [
                                 "title" => $teamhistory["detail"],
                                 "description" => $teamhistory["description"],
@@ -1544,6 +1573,7 @@ class DashbordController extends Controller
                                 "year" => $teamhistory["year"]
                             ];
                             $kpiteam++;
+                        }}
                         }
                         }
             //teamEND
@@ -1590,6 +1620,10 @@ class DashbordController extends Controller
                     foreach ($kgiEmployeeHistory as $employeehistory) :
                         $time = explode(' ', $employeehistory["createDateTime"]);
                         $employeeId = Employee::employeeId($employeehistory["createrId"]);
+                        if (!empty($history["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
+                            $nextCheckDate = new DateTime($history["nextCheckDate"]); // Convert nextCheckDate to DateTime
+                            $interval = $today->diff($nextCheckDate); // Calculate the difference
+                            if ($interval->days >= 7 && $nextCheckDate >= $today) {
                         $data['kgiself' . $employeehistory["kgiEmployeeHistoryId"]] = [
                             "title" => $employeehistory["detail"],
                             "description" => $employeehistory["description"],  // Use kgi description
@@ -1601,6 +1635,7 @@ class DashbordController extends Controller
                             "creater" => User::employeeNameByuserId($employeehistory["createrId"]),
                         ];
                         $kgiself++;
+                    }}
                     endforeach;
                     }
 
@@ -1645,6 +1680,10 @@ class DashbordController extends Controller
                     foreach ($kpiEmployeeHistory as $employeehistory) :
                         $time = explode(' ', $employeehistory["createDateTime"]);
                         $employeeId = Employee::employeeId($employeehistory["createrId"]);
+                        if (!empty($history["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
+                            $nextCheckDate = new DateTime($history["nextCheckDate"]); // Convert nextCheckDate to DateTime
+                            $interval = $today->diff($nextCheckDate); // Calculate the difference
+                            if ($interval->days >= 7 && $nextCheckDate >= $today) {
                         $data['kpiself' . $employeehistory["kpiEmployeeHistoryId"]] = [
                             "title" => $employeehistory["detail"],
                             "description" => $employeehistory["description"],  // Use kpi description
@@ -1656,6 +1695,7 @@ class DashbordController extends Controller
                             "creater" => User::employeeNameByuserId($employeehistory["createrId"]),
                         ];
                         $kpiself++;
+                    }}
                     endforeach;
                     }
 
@@ -1812,6 +1852,10 @@ class DashbordController extends Controller
                     foreach ($kfiHistory as $history) :
                         $time = explode(' ', $history["createDateTime"]);
                         $employeeId = Employee::employeeId($history["createrId"]);
+                        if (!empty($history["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
+                            $nextCheckDate = new DateTime($history["nextCheckDate"]); // Convert nextCheckDate to DateTime
+                            $interval = $today->diff($nextCheckDate); // Calculate the difference
+                            if ($interval->days >= 7 && $nextCheckDate >= $today) {
                         $data['kficom' . $history["kfiHistoryId"]] = [
                             "title" => $history["titleProgress"],
                             "description" => $history["description"],
@@ -1823,6 +1867,7 @@ class DashbordController extends Controller
                             "creater" => User::employeeNameByuserId($history["createrId"]),
                         ];
                         $kficompany++;
+                    }}
                     endforeach;
                 }
 
@@ -1830,6 +1875,10 @@ class DashbordController extends Controller
                     foreach ($kpiHistory as $history) :
                         $time = explode(' ', $history["createDateTime"]);
                         $employeeId = Employee::employeeId($history["createrId"]);
+                        if (!empty($history["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
+                            $nextCheckDate = new DateTime($history["nextCheckDate"]); // Convert nextCheckDate to DateTime
+                            $interval = $today->diff($nextCheckDate); // Calculate the difference
+                            if ($interval->days >= 7 && $nextCheckDate >= $today) {
                         $data['kpicom' . $history["kpiHistoryId"]] = [
                             "title" => $history["titleProcess"],
                             "description" => $history["description"],
@@ -1841,6 +1890,7 @@ class DashbordController extends Controller
                             "year" => $history["year"]
                         ];
                         $kpicompany++;
+                    }}
                     endforeach;
                 }
 
@@ -1849,6 +1899,10 @@ class DashbordController extends Controller
                     foreach ($kgiHistory as $history) :
                         $time = explode(' ', $history["createDateTime"]);
                         $employeeId = Employee::employeeId($history["createrId"]);
+                        if (!empty($history["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
+                            $nextCheckDate = new DateTime($history["nextCheckDate"]); // Convert nextCheckDate to DateTime
+                            $interval = $today->diff($nextCheckDate); // Calculate the difference
+                            if ($interval->days >= 7 && $nextCheckDate >= $today) {
                         $data['kgicom' . $history["kgiHistoryId"]] = [
                             "title" => $history["titleProcess"],
                             "description" => $history["description"],
@@ -1860,6 +1914,7 @@ class DashbordController extends Controller
                             "year" => $history["year"]
                         ];
                         $kgicompany++;
+                    }}
                     endforeach;
                 }
             //companyEnd
@@ -1947,6 +2002,10 @@ class DashbordController extends Controller
                         foreach ($kgiHistory as $history) {
                             $time = explode(' ', $history["createDateTime"]);
                             $employeeId = Employee::employeeId($history["createrId"]);
+                            if (!empty($history["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
+                                $nextCheckDate = new DateTime($history["nextCheckDate"]); // Convert nextCheckDate to DateTime
+                                $interval = $today->diff($nextCheckDate); // Calculate the difference
+                                if ($interval->days >= 7 && $nextCheckDate >= $today) {
                             $data['kgiteam' . $history["kgiTeamHistoryId"]] = [
                                 "title" => $history["detail"],
                                 "description" => $history["description"],
@@ -1958,6 +2017,7 @@ class DashbordController extends Controller
                                 "year" => $history["year"]
                             ];
                             $kgiteam++;
+                        }}
                         }
                         }
 
@@ -1965,6 +2025,10 @@ class DashbordController extends Controller
                         foreach ($kpiTeamHistory as $teamhistory) {
                             $time = explode(' ', $teamhistory["createDateTime"]);
                             $employeeId = Employee::employeeId($teamhistory["createrId"]);
+                            if (!empty($history["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
+                                $nextCheckDate = new DateTime($history["nextCheckDate"]); // Convert nextCheckDate to DateTime
+                                $interval = $today->diff($nextCheckDate); // Calculate the difference
+                                if ($interval->days >= 7 && $nextCheckDate >= $today) {
                             $data['kpiteam' . $teamhistory["kpiTeamHistoryId"]] = [
                                 "title" => $teamhistory["detail"],
                                 "description" => $teamhistory["description"],
@@ -1976,6 +2040,7 @@ class DashbordController extends Controller
                                 "year" => $teamhistory["year"]
                             ];
                             $kpiteam++;
+                        }}
                         }
                         }
             //teamEND
@@ -2023,6 +2088,10 @@ class DashbordController extends Controller
                     foreach ($kgiEmployeeHistory as $employeehistory) :
                         $time = explode(' ', $employeehistory["createDateTime"]);
                         $employeeId = Employee::employeeId($employeehistory["createrId"]);
+                        if (!empty($history["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
+                            $nextCheckDate = new DateTime($history["nextCheckDate"]); // Convert nextCheckDate to DateTime
+                            $interval = $today->diff($nextCheckDate); // Calculate the difference
+                            if ($interval->days >= 7 && $nextCheckDate >= $today) {
                         $data['kgiself' . $employeehistory["kgiEmployeeHistoryId"]] = [
                             "title" => $employeehistory["detail"],
                             "description" => $employeehistory["description"],  // Use kgi description
@@ -2034,6 +2103,7 @@ class DashbordController extends Controller
                             "creater" => User::employeeNameByuserId($employeehistory["createrId"]),
                         ];
                         $kgiself++;
+                    }}
                     endforeach;
                     }
 
@@ -2079,6 +2149,10 @@ class DashbordController extends Controller
                     foreach ($kpiEmployeeHistory as $employeehistory) :
                         $time = explode(' ', $employeehistory["createDateTime"]);
                         $employeeId = Employee::employeeId($employeehistory["createrId"]);
+                        if (!empty($history["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
+                            $nextCheckDate = new DateTime($history["nextCheckDate"]); // Convert nextCheckDate to DateTime
+                            $interval = $today->diff($nextCheckDate); // Calculate the difference
+                            if ($interval->days >= 7 && $nextCheckDate >= $today) {
                         $data['kpiself' . $employeehistory["kpiEmployeeHistoryId"]] = [
                             "title" => $employeehistory["detail"],
                             "description" => $employeehistory["description"],  // Use kpi description
@@ -2090,6 +2164,7 @@ class DashbordController extends Controller
                             "creater" => User::employeeNameByuserId($employeehistory["createrId"]),
                         ];
                         $kpiself++;
+                    }}
                     endforeach;
                     }
             //employeeEND
@@ -2182,6 +2257,10 @@ class DashbordController extends Controller
                     foreach ($kgiHistory as $history) {
                         $time = explode(' ', $history["createDateTime"]);
                         $employeeId = Employee::employeeId($history["createrId"]);
+                        if (!empty($history["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
+                            $nextCheckDate = new DateTime($history["nextCheckDate"]); // Convert nextCheckDate to DateTime
+                            $interval = $today->diff($nextCheckDate); // Calculate the difference
+                            if ($interval->days >= 7 && $nextCheckDate >= $today) {
                         $data['kgiteam' . $history["kgiTeamHistoryId"]] = [
                             "title" => $history["detail"],
                             "description" => $history["description"],
@@ -2193,6 +2272,7 @@ class DashbordController extends Controller
                             "year" => $history["year"]
                         ];
                         $kgiteam++;
+                    }}
                     }
                     }
 
@@ -2200,6 +2280,10 @@ class DashbordController extends Controller
                     foreach ($kpiTeamHistory as $teamhistory) {
                         $time = explode(' ', $teamhistory["createDateTime"]);
                         $employeeId = Employee::employeeId($teamhistory["createrId"]);
+                        if (!empty($history["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
+                            $nextCheckDate = new DateTime($history["nextCheckDate"]); // Convert nextCheckDate to DateTime
+                            $interval = $today->diff($nextCheckDate); // Calculate the difference
+                            if ($interval->days >= 7 && $nextCheckDate >= $today) {
                         $data['kpiteam' . $teamhistory["kpiTeamHistoryId"]] = [
                             "title" => $teamhistory["detail"],
                             "description" => $teamhistory["description"],
@@ -2211,6 +2295,7 @@ class DashbordController extends Controller
                             "year" => $teamhistory["year"]
                         ];
                         $kpiteam++;
+                    }}
                     }
                     }
         //teamEND
@@ -2259,6 +2344,10 @@ class DashbordController extends Controller
                 foreach ($kgiEmployeeHistory as $employeehistory) :
                     $time = explode(' ', $employeehistory["createDateTime"]);
                     $employeeId = Employee::employeeId($employeehistory["createrId"]);
+                    if (!empty($history["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
+                        $nextCheckDate = new DateTime($history["nextCheckDate"]); // Convert nextCheckDate to DateTime
+                        $interval = $today->diff($nextCheckDate); // Calculate the difference
+                        if ($interval->days >= 7 && $nextCheckDate >= $today) {
                     $data['kgiself' . $employeehistory["kgiEmployeeHistoryId"]] = [
                         "title" => $employeehistory["detail"],
                         "description" => $employeehistory["description"],  // Use kgi description
@@ -2270,6 +2359,7 @@ class DashbordController extends Controller
                         "creater" => User::employeeNameByuserId($employeehistory["createrId"]),
                     ];
                     $kgiself++;
+                }}
                 endforeach;
                 }
 
@@ -2316,6 +2406,10 @@ class DashbordController extends Controller
                 foreach ($kpiEmployeeHistory as $employeehistory) :
                     $time = explode(' ', $employeehistory["createDateTime"]);
                     $employeeId = Employee::employeeId($employeehistory["createrId"]);
+                    if (!empty($history["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
+                        $nextCheckDate = new DateTime($history["nextCheckDate"]); // Convert nextCheckDate to DateTime
+                        $interval = $today->diff($nextCheckDate); // Calculate the difference
+                        if ($interval->days >= 7 && $nextCheckDate >= $today) {
                     $data['kpiself' . $employeehistory["kpiEmployeeHistoryId"]] = [
                         "title" => $employeehistory["detail"],
                         "description" => $employeehistory["description"],  // Use kpi description
@@ -2327,6 +2421,7 @@ class DashbordController extends Controller
                         "creater" => User::employeeNameByuserId($employeehistory["createrId"]),
                     ];
                     $kpiself++;
+                }}
                 endforeach;
                 }
         //employeeEND
@@ -2378,6 +2473,10 @@ class DashbordController extends Controller
             foreach ($kgiEmployeeHistory as $employeehistory) :
                 $time = explode(' ', $employeehistory["createDateTime"]);
                 $employeeId = Employee::employeeId($employeehistory["createrId"]);
+                if (!empty($history["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
+                    $nextCheckDate = new DateTime($history["nextCheckDate"]); // Convert nextCheckDate to DateTime
+                    $interval = $today->diff($nextCheckDate); // Calculate the difference
+                    if ($interval->days >= 7 && $nextCheckDate >= $today) {
                 $data['kgiself' . $employeehistory["kgiEmployeeHistoryId"]] = [
                     "title" => $employeehistory["detail"],
                     "description" => $employeehistory["description"],  // Use kgi description
@@ -2389,6 +2488,7 @@ class DashbordController extends Controller
                     "creater" => User::employeeNameByuserId($employeehistory["createrId"]),
                 ];
                 $kgiself++;
+            }}
             endforeach;
             }
 
@@ -2435,6 +2535,10 @@ class DashbordController extends Controller
             foreach ($kpiEmployeeHistory as $employeehistory) :
                 $time = explode(' ', $employeehistory["createDateTime"]);
                 $employeeId = Employee::employeeId($employeehistory["createrId"]);
+                if (!empty($history["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
+                    $nextCheckDate = new DateTime($history["nextCheckDate"]); // Convert nextCheckDate to DateTime
+                    $interval = $today->diff($nextCheckDate); // Calculate the difference
+                    if ($interval->days >= 7 && $nextCheckDate >= $today) {
                 $data['kpiself' . $employeehistory["kpiEmployeeHistoryId"]] = [
                     "title" => $employeehistory["detail"],
                     "description" => $employeehistory["description"],  // Use kpi description
@@ -2446,6 +2550,7 @@ class DashbordController extends Controller
                     "creater" => User::employeeNameByuserId($employeehistory["createrId"]),
                 ];
                 $kpiself++;
+            }}
             endforeach;
             }
     //employeeEND
