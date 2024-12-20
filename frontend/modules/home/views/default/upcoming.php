@@ -75,7 +75,7 @@ function renderSchedule(data) {
             var count = 0;
             data.forEach(function(item) {
                 // count = count + 1; // Count starts from 1
-                var title = item.title && item.title.trim() ? item.title : "Update KPI";
+                var title = item.title && item.title.trim() ? item.title : "Update";
                 var description = item.description || "No description available";
                 var time = item.time || "No time specified";
                 var createDate = item.createDate || "No date specified";

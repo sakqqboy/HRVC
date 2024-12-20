@@ -50,6 +50,7 @@
                         style="width: 14px; height: 14px;">
                     Employee ID:
                 </strong>
+                <!-- เอาemploye number -->
                 <?= $employeeProfile['employeeId'] ?>
             </li>
             <li>
