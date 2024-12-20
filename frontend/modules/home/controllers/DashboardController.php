@@ -413,6 +413,7 @@ class DashboardController extends Controller
 
         curl_close($api);
 
+        // throw new Exception(print_r($upcoming,true));
         return json_encode($upcoming);
     }
 
