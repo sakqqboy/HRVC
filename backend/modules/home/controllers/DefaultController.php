@@ -28,7 +28,7 @@ class DefaultController extends Controller
     }
     public function actionPendingApproval($role, $employeeId)
     {
-        
+        $employeeBranchId = Employee::EmployeeDetail($employeeId)["branchId"];
         $kgiTeam = KgiTeam::find()
             ->select('kgiId')
             ->where(["status" => 88])
