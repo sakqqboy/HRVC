@@ -22,6 +22,7 @@ use backend\modules\fs\fs;
 use common\models\ModelMaster;
 use DateTime;
 use Yii;
+use yii\db\Expression;
 use yii\db\Query;
 use yii\web\Controller;
 
@@ -1242,180 +1243,186 @@ class DashbordController extends Controller
         if($role >= 6){
             //company
                 // KFI Sub Query
-                $kfiSubQuery = (new Query())
-                ->select('MAX(updateDateTime)')
-                ->from('kfi_history sub')
-                ->where('sub.kfiId = main.kfiId')
-                ->andWhere(['sub.status' => [1, 2, 4]]);
-
-                // Main Query with LEFT JOIN
-                $kfiHistory = (new Query())
+                $kfiHistory = KfiHistory::find()
+                ->alias('main')
                 ->select([
                     'main.kfiHistoryId',
                     'main.kfiId',
-                    'main.createrId',
                     'main.kfiHistoryName',
-                    'main.unitId',
-                    'main.checkPeriodDate',
                     'main.nextCheckDate',
                     'main.fromDate',
                     'main.toDate',
-                    'main.quantRatio',
-                    'main.amountType',
                     'main.code',
-                    'main.historyStatus',
                     'main.target',
                     'main.result',
-                    'main.formular',
+                    'main.createrId',
                     'main.titleProgress',
-                    'main.description AS kfiHistoryDescription',
+                    'main.description',
                     'main.remark',
                     'main.month',
                     'main.year',
                     'main.status',
                     'main.createDateTime',
                     'main.updateDateTime',
-                    'kfi.kfiName AS description',  // ชื่อ KFI จากตาราง kfi
+                    'kfi.kfiName',
                     'kfi.companyId',
                 ])
-                ->from(['main' => 'kfi_history'])
-                ->leftJoin(['kfi' => 'kfi'], 'main.kfiId = kfi.kfiId')  // LEFT JOIN ระหว่าง kfi_history และ kfi
-                ->where(['main.status' => [1, 2, 4]])
-                ->andWhere(['main.updateDateTime' => $kfiSubQuery])
+                ->leftJoin('kfi', 'main.kfiId = kfi.kfiId')
+                ->where([
+                    'main.status' => [1, 2, 4],
+                ])
+                ->andWhere([
+                    'main.updateDateTime' => (new \yii\db\Query())
+                        ->select('MAX(sub.updateDateTime)')
+                        ->from(['sub' => 'kfi_history'])
+                        ->where('sub.kfiId = main.kfiId')
+                        ->andWhere(['sub.status' => [1, 2, 4]])
+                ])
+                ->andWhere([
+                    'or',
+                    ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
+                    ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
+                ])
                 ->orderBy([
                     'main.year' => SORT_DESC,
                     'main.month' => SORT_DESC,
                     'main.kfiHistoryId' => SORT_DESC,
                 ])
-                ->all();
+                ->asArray()
+				->all();
+                // return json_encode($kfiHistory);
 
                         
                 // KPI Sub Query
-                $kpiSubQuery = (new Query())
-                ->select('MAX(updateDateTime)')
-                ->from('kpi_history sub')
-                ->where('sub.kpiId = main.kpiId')
-                ->andWhere(['sub.status' => [1, 2, 4]]);
-
-                // Main Query with LEFT JOIN
-                $kpiHistory = (new Query())
+                $kpiHistory = kpiHistory::find()
+                ->alias('main')
                 ->select([
                     'main.kpiHistoryId',
                     'main.kpiId',
-                    'main.createrId',
-                    'main.titleProcess',
                     'main.kpiHistoryName',
-                    'main.unitId',
                     'main.nextCheckDate',
                     'main.fromDate',
                     'main.toDate',
-                    'main.quantRatio',
-                    'main.amountType',
                     'main.code',
                     'main.targetAmount',
                     'main.result',
-                    'main.description AS kpiHistoryDescription',
+                    'main.createrId',
+                    'main.titleProcess',
+                    'main.description',
                     'main.remark',
                     'main.month',
                     'main.year',
                     'main.status',
                     'main.createDateTime',
                     'main.updateDateTime',
-                    'kpi.kpiName AS description',  // ชื่อ KPI จากตาราง kpi
+                    'kpi.kpiName',
                     'kpi.companyId',
                 ])
-                ->from(['main' => 'kpi_history'])
-                ->leftJoin(['kpi' => 'kpi'], 'main.kpiId = kpi.kpiId')  // LEFT JOIN ระหว่าง kpi_history และ kpi
-                ->where(['main.status' => [1, 2, 4]])
-                ->andWhere(['main.updateDateTime' => $kpiSubQuery])
+                ->leftJoin('kpi', 'main.kpiId = kpi.kpiId')
+                ->where([
+                    'main.status' => [1, 2, 4],
+                ])
+                ->andWhere([
+                    'main.updateDateTime' => (new \yii\db\Query())
+                        ->select('MAX(sub.updateDateTime)')
+                        ->from(['sub' => 'kpi_history'])
+                        ->where('sub.kpiId = main.kpiId')
+                        ->andWhere(['sub.status' => [1, 2, 4]])
+                ])
+                ->andWhere([
+                    'or',
+                    ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
+                    ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
+                ])
                 ->orderBy([
                     'main.year' => SORT_DESC,
                     'main.month' => SORT_DESC,
                     'main.kpiHistoryId' => SORT_DESC,
                 ])
-                ->all();
+                ->asArray()
+				->all();
+                // return json_encode($kpiHistory);
 
                             
                 // KGI Sub Query
-                $kgiSubQuery = (new Query())
-                ->select('MAX(updateDateTime)')
-                ->from('kgi_history sub')
-                ->where('sub.kgiId = main.kgiId')
-                ->andWhere(['sub.status' => [1, 2, 4]]);
-
-                // Main Query
-                $kgiHistory = (new Query())
+                $kgiHistory = kgiHistory::find()
+                ->alias('main')
                 ->select([
                     'main.kgiHistoryId',
                     'main.kgiId',
-                    'main.createrId',
                     'main.kgiHistoryName',
-                    'main.unitId',
-                    'main.titleProcess',
                     'main.nextCheckDate',
                     'main.fromDate',
                     'main.toDate',
-                    'main.quantRatio',
-                    'main.amountType',
                     'main.code',
                     'main.targetAmount',
                     'main.result',
-                    'main.description AS kgiHistoryDescription',
+                    'main.titleProcess',
+                    'main.description',
+                    'main.createrId',
                     'main.remark',
                     'main.month',
                     'main.year',
                     'main.status',
                     'main.createDateTime',
                     'main.updateDateTime',
-                    'kgi.kgiName AS description',
+                    'kgi.kgiName',
                     'kgi.companyId',
                 ])
-                ->from(['main' => 'kgi_history'])
-                ->leftJoin(['kgi' => 'kgi'], 'main.kgiId = kgi.kgiId') // ใช้ LEFT JOIN
-                ->where(['main.status' => [1, 2, 4]])
-                ->andWhere(['main.updateDateTime' => $kgiSubQuery])
+                ->leftJoin('kgi', 'main.kgiId = kgi.kgiId')
+                ->where([
+                    'main.status' => [1, 2, 4],
+                ])
+                ->andWhere([
+                    'main.updateDateTime' => (new \yii\db\Query())
+                        ->select('MAX(sub.updateDateTime)')
+                        ->from(['sub' => 'kgi_history'])
+                        ->where('sub.kgiId = main.kgiId')
+                        ->andWhere(['sub.status' => [1, 2, 4]])
+                ])
+                ->andWhere([
+                    'or',
+                    ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
+                    ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
+                ])
                 ->orderBy([
                     'main.year' => SORT_DESC,
                     'main.month' => SORT_DESC,
                     'main.kgiHistoryId' => SORT_DESC,
                 ])
-                ->all();
+                ->asArray()
+				->all();
+                // return json_encode($kgiHistory);
+
 
                 if (isset($kfiHistory) && count($kfiHistory) > 0) {
                     foreach ($kfiHistory as $history) :
                         
                         $time = explode(' ', $history["createDateTime"]);
-                        $employeeId = Employee::employeeId($history["createrId"]);
+                        // $employeeId = Employee::employeeId($history["createrId"]);
                         if (!empty($history["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
-                        $nextCheckDate = new DateTime($history["nextCheckDate"]); // Convert nextCheckDate to DateTime
-                        $interval = $today->diff($nextCheckDate); // Calculate the difference
-                        if ($nextCheckDate->format('Y-m') == $today->format('Y-m') && $interval->days >= 7 && $nextCheckDate >= $today) {
                             $data['kficom' . $history["kfiHistoryId"]] = [
-                                "title" => $history["titleProgress"],
+                                "title" => $history["kfiName"],
                                 "description" => $history["description"],
                                 "createDate" => ModelMaster::engDateHr($history["createDateTime"]),
                                 "time" => ModelMaster::timeText($time[1]),
-                                "status" => $history["historyStatus"], 
+                                "status" => $history["status"], 
                                 "month" => $history["month"],
                                 "year" => $history["year"],
+                                "nextCheckDate" => $history["nextCheckDate"],
                                 "creater" => User::employeeNameByuserId($history["createrId"]),
                             ];
                             $kficompany++;
                         }
-                    }
                     endforeach;
                 }
 
                 if (isset($kpiHistory) && count($kpiHistory) > 0) {
                     foreach ($kpiHistory as $history) :
                         $time = explode(' ', $history["createDateTime"]);
-                        $employeeId = Employee::employeeId($history["createrId"]);
-                        if (!empty($history["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
-                            $nextCheckDate = new DateTime($history["nextCheckDate"]); // Convert nextCheckDate to DateTime
-                            $interval = $today->diff($nextCheckDate); // Calculate the difference
-                            if ($nextCheckDate->format('Y-m') == $today->format('Y-m') && $interval->days >= 7 && $nextCheckDate >= $today) {
+                        // $employeeId = Employee::employeeId($history["createrId"]);
                         $data['kpicom' . $history["kpiHistoryId"]] = [
-                            "title" => $history["titleProcess"],
+                            "title" => $history["kpiName"],
                             "description" => $history["description"],
                             "creater" => User::employeeNameByuserId($history["createrId"]),
                             "createDate" => ModelMaster::engDateHr($history["createDateTime"]),
@@ -1425,7 +1432,6 @@ class DashbordController extends Controller
                             "year" => $history["year"]
                         ];
                         $kpicompany++;
-                    }}
                     endforeach;
                 }
 
@@ -1433,13 +1439,9 @@ class DashbordController extends Controller
                 if (isset($kgiHistory) && count($kgiHistory) > 0) {
                     foreach ($kgiHistory as $history) :
                         $time = explode(' ', $history["createDateTime"]);
-                        $employeeId = Employee::employeeId($history["createrId"]);
-                        if (!empty($history["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
-                            $nextCheckDate = new DateTime($history["nextCheckDate"]); // Convert nextCheckDate to DateTime
-                            $interval = $today->diff($nextCheckDate); // Calculate the difference
-                            if ($nextCheckDate->format('Y-m') == $today->format('Y-m') && $interval->days >= 7 && $nextCheckDate >= $today) {
+                        // $employeeId = Employee::employeeId($history["createrId"]);
                         $data['kgicom' . $history["kgiHistoryId"]] = [
-                            "title" => $history["titleProcess"],
+                            "title" => $history["kgiName"],
                             "description" => $history["description"],
                             "creater" => User::employeeNameByuserId($history["createrId"]),
                             "createDate" => ModelMaster::engDateHr($history["createDateTime"]),
@@ -1449,138 +1451,154 @@ class DashbordController extends Controller
                             "year" => $history["year"]
                         ];
                         $kgicompany++;
-                    }}
                     endforeach;
                 }
             //companyEnd
+            // return json_encode($data);
 
             //team
                // คำสั่ง SQL สำหรับ kgi_team_history
-                        $sqlKgiHistory = "
-                        SELECT 
-                            main.kgiTeamHistoryId,
-                            main.kgiTeamId,
-                            main.target,
-                            main.result,
-                            main.detail,
-                            main.fromDate,
-                            main.toDate,
-                            main.nextCheckDate,
-                            main.month,
-                            main.year,
-                            main.createrId,
-                            main.status,
-                            main.createDateTime,
-                            main.updateDateTime,
-                            kgi_team.kgiId,
-                            kgi_team.teamId,
-                            kgi.kgiName AS description,
-                            kgi.companyId
-                        FROM kgi_team_history AS main
-                        LEFT JOIN kgi_team AS kgi_team ON main.kgiTeamId = kgi_team.kgiTeamId
-                        LEFT JOIN kgi AS kgi ON kgi_team.kgiId = kgi.kgiId
-                        WHERE 
-                            main.updateDateTime = (
-                                SELECT MAX(sub.updateDateTime)
-                                FROM kgi_team_history AS sub
-                                WHERE sub.kgiTeamId = main.kgiTeamId
-                                AND sub.status IN (1, 2, 4)
-                            )
-                        AND main.status IN (1, 2, 4)
-                        ORDER BY 
-                            main.kgiTeamHistoryId DESC;
-                        ";
+                        $kgiTeamHistory = KgiTeamHistory::find()
+                        ->alias('main')
+                        ->select([
+                            'main.kgiTeamHistoryId',
+                            'main.kgiTeamId',
+                            'main.target',
+                            'main.result',
+                            'main.detail',
+                            'main.fromDate',
+                            'main.toDate',
+                            'main.nextCheckDate',
+                            'main.month',
+                            'main.year',
+                            'main.createrId',
+                            'main.status',
+                            'main.status',
+                            'main.createDateTime',
+                            'main.updateDateTime',
+                            'kgi_team.kgiId',
+                            'kgi_team.teamId',
+                            'kgi.kgiName',
+                            'kgi.companyId',
+                        ])
+                        ->leftJoin('kgi_team', 'main.kgiTeamId = kgi_team.kgiTeamId')
+                        ->leftJoin('kgi', 'kgi_team.kgiId = kgi.kgiId')
+                        ->where([
+                            'main.status' => [1, 2, 4],
+                        ])
+                        ->andWhere([
+                            'main.updateDateTime' => (new \yii\db\Query())
+                                ->select('MAX(sub.updateDateTime)')
+                                ->from(['sub' => 'kgi_team_history'])
+                                ->where('sub.kgiTeamId = main.kgiTeamId')
+                                ->andWhere(['sub.status' => [1, 2, 4]])
+                        ])
+                        ->andWhere([
+                            'or',
+                            ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
+                            ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
+                        ])
+                        ->orderBy([
+                            'main.year' => SORT_DESC,
+                            'main.month' => SORT_DESC,
+                            'main.kgiTeamHistoryId' => SORT_DESC,
+                        ])
+                        ->asArray()  // แปลงผลลัพธ์เป็น array
+                        ->all();     // ดึงข้อมูลทั้งหมด
+                        // return json_encode($kgiTeamHistory);
 
                         // คำสั่ง SQL สำหรับ kpi_team_history
-                        $sqlKpiTeamHistory = "
-                        SELECT 
-                            main.kpiTeamHistoryId,
-                            main.kpiTeamId,
-                            main.target,
-                            main.result,
-                            main.detail,
-                            main.fromDate,
-                            main.toDate,
-                            main.nextCheckDate,
-                            main.month,
-                            main.year,
-                            main.createrId,
-                            main.status,
-                            main.createDateTime,
-                            main.updateDateTime,
-                            kpi_team.kpiId,
-                            kpi_team.teamId,
-                            kpi.kpiName AS description,
-                            kpi.companyId
-                        FROM kpi_team_history AS main
-                        LEFT JOIN kpi_team AS kpi_team ON main.kpiTeamId = kpi_team.kpiTeamId
-                        LEFT JOIN kpi AS kpi ON kpi_team.kpiId = kpi.kpiId
-                        WHERE 
-                            main.updateDateTime = (
-                                SELECT MAX(sub.updateDateTime)
-                                FROM kpi_team_history AS sub
-                                WHERE sub.kpiTeamId = main.kpiTeamId
-                                AND sub.status IN (1, 2, 4)
-                            )
-                        AND main.status IN (1, 2, 4)
-                        ORDER BY 
-                            main.kpiTeamHistoryId DESC;
-                        ";
+                        $kpiTeamHistory = kpiTeamHistory::find()
+                        ->alias('main')
+                        ->select([
+                            'main.kpiTeamHistoryId',
+                            'main.kpiTeamId',
+                            'main.target',
+                            'main.result',
+                            'main.detail',
+                            'main.fromDate',
+                            'main.toDate',
+                            'main.nextCheckDate',
+                            'main.month',
+                            'main.year',
+                            'main.createrId',
+                            'main.status',
+                            'main.createDateTime',
+                            'main.updateDateTime',
+                            'kpi_team.kpiId',
+                            'kpi_team.teamId',
+                            'kpi.kpiName',
+                            'kpi.companyId',
+                        ])
+                        ->leftJoin('kpi_team', 'main.kpiTeamId = kpi_team.kpiTeamId')
+                        ->leftJoin('kpi', 'kpi_team.kpiId = kpi.kpiId')
+                        ->where([
+                            'main.status' => [1, 2, 4],
+                        ])
+                        ->andWhere([
+                            'main.updateDateTime' => (new \yii\db\Query())
+                                ->select('MAX(sub.updateDateTime)')
+                                ->from(['sub' => 'kpi_team_history'])
+                                ->where('sub.kpiTeamId = main.kpiTeamId')
+                                ->andWhere(['sub.status' => [1, 2, 4]])
+                        ])
+                        ->andWhere([
+                            'or',
+                            ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
+                            ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
+                        ])
+                        ->orderBy([
+                            'main.year' => SORT_DESC,
+                            'main.month' => SORT_DESC,
+                            'main.kpiTeamHistoryId' => SORT_DESC,
+                        ])
+                        ->asArray()  // แปลงผลลัพธ์เป็น array
+                        ->all();     // ดึงข้อมูลทั้งหมด
+                        // return json_encode($kpiTeamHistory);
 
-                        // ดึงข้อมูลจากฐานข้อมูล
-                        $kgiHistory = Yii::$app->db->createCommand($sqlKgiHistory)->queryAll();
-                        $kpiTeamHistory = Yii::$app->db->createCommand($sqlKpiTeamHistory)->queryAll();
 
-                        if (!empty($kgiHistory)) {
-                        foreach ($kgiHistory as $history) {
-                            $time = explode(' ', $history["createDateTime"]);
-                            $employeeId = Employee::employeeId($history["createrId"]);
-                            if (!empty($history["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
-                                $nextCheckDate = new DateTime($history["nextCheckDate"]); // Convert nextCheckDate to DateTime
-                                $interval = $today->diff($nextCheckDate); // Calculate the difference
-                                if ($nextCheckDate->format('Y-m') == $today->format('Y-m') && $interval->days >= 7 && $nextCheckDate >= $today) {                      
-                            $data['kgiteam' . $history["kgiTeamHistoryId"]] = [
-                                "title" => $history["detail"],
-                                "description" => $history["description"],
-                                "creater" => User::employeeNameByuserId($history["createrId"]),
-                                "createDate" => ModelMaster::engDateHr($history["createDateTime"]),
-                                "time" => ModelMaster::timeText($time[1]),
-                                "status" => $history["status"],
-                                "month" => $history["month"],
-                                "year" => $history["year"]
-                            ];
-                            $kgiteam++;
-                        }}
-                        }
+                        if (!empty($kgiTeamHistory)) {
+                            foreach ($kgiTeamHistory as $history) {
+                                $time = explode(' ', $history["createDateTime"]);
+                                // $employeeId = Employee::employeeId($history["createrId"]);
+                                $data['kgiteam' . $history["kgiTeamHistoryId"]] = [
+                                    "title" => $history["kgiName"],
+                                    "description" => $history["detail"],
+                                    "creater" => User::employeeNameByuserId($history["createrId"]),
+                                    "createDate" => ModelMaster::engDateHr($history["createDateTime"]),
+                                    "time" => ModelMaster::timeText($time[1]),
+                                    "status" => $history["status"],
+                                    "month" => $history["month"],
+                                    "year" => $history["year"]
+                                ];
+                                $kgiteam++;
+                            }
                         }
 
                         if (!empty($kpiTeamHistory)) {
-                        foreach ($kpiTeamHistory as $teamhistory) {
-                            $time = explode(' ', $teamhistory["createDateTime"]);
-                            $employeeId = Employee::employeeId($teamhistory["createrId"]);
-                            if (!empty($teamhistory["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
-                                $nextCheckDate = new DateTime($teamhistory["nextCheckDate"]); // Convert nextCheckDate to DateTime
-                                $interval = $today->diff($nextCheckDate); // Calculate the difference
-                                if ($nextCheckDate->format('Y-m') == $today->format('Y-m') && $interval->days >= 7 && $nextCheckDate >= $today) {
-                            $data['kpiteam' . $teamhistory["kpiTeamHistoryId"]] = [
-                                "title" => $teamhistory["detail"],
-                                "description" => $teamhistory["description"],
-                                "creater" => User::employeeNameByuserId($teamhistory["createrId"]),
-                                "createDate" => ModelMaster::engDateHr($teamhistory["createDateTime"]),
-                                "time" => ModelMaster::timeText($time[1]),
-                                "status" => $teamhistory["status"],
-                                "month" => $teamhistory["month"],
-                                "year" => $teamhistory["year"]
-                            ];
-                            $kpiteam++;
-                        }}
+                            foreach ($kpiTeamHistory as $teamhistory) {
+                                $time = explode(' ', $teamhistory["createDateTime"]);
+                                // $employeeId = Employee::employeeId($teamhistory["createrId"]);                           
+                                $data['kpiteam' . $teamhistory["kpiTeamHistoryId"]] = [
+                                    "title" => $teamhistory["kpiName"],
+                                    "description" => $teamhistory["detail"],
+                                    "creater" => User::employeeNameByuserId($teamhistory["createrId"]),
+                                    "createDate" => ModelMaster::engDateHr($teamhistory["createDateTime"]),
+                                    "time" => ModelMaster::timeText($time[1]),
+                                    "status" => $teamhistory["status"],
+                                    "month" => $teamhistory["month"],
+                                    "year" => $teamhistory["year"]
+                                ];
+                                $kpiteam++;
+                            }
                         }
-                        }
+                        // return json_encode($data);
             //teamEND
 
             //employee
                // Query for kgi_employee_history
                     $kgiEmployeeHistory = KgiEmployeeHistory::find()
+                    ->alias('main')
                     ->select([
                         'main.kgiEmployeeHistoryId',
                         'main.kgiEmployeeId',
@@ -1599,48 +1617,39 @@ class DashbordController extends Controller
                         'main.updateDateTime',
                         'kgi_employee.kgiId',
                         'kgi_employee.kgiEmployeeId',
-                        'kgi.kgiName AS description',
-                        'kgi.companyId'
+                        'kgi.kgiName',  // Alias 'description' for kgiName
+                        'kgi.companyId',
                     ])
-                    ->from('kgi_employee_history AS main')
-                    ->leftJoin('kgi_employee AS kgi_employee', 'main.kgiEmployeeId = kgi_employee.kgiEmployeeId')
-                    ->leftJoin('kgi AS kgi', 'kgi_employee.kgiId = kgi.kgiId')  // Corrected join here
+                    ->leftJoin('kgi_employee', 'main.kgiEmployeeId = kgi_employee.kgiEmployeeId')
+                    ->leftJoin('kgi', 'kgi_employee.kgiId = kgi.kgiId')
                     ->where([
-                        'main.updateDateTime' => new \yii\db\Expression(
-                            '(SELECT MAX(sub.updateDateTime) FROM kgi_employee_history AS sub WHERE sub.kgiEmployeeId = main.kgiEmployeeId AND sub.status IN (1, 2, 4))'
-                        ),
-                        'main.status' => [1, 2, 4]
+                        'main.status' => [1, 2, 4],
                     ])
-                    ->orderBy(['main.kgiEmployeeHistoryId' => SORT_DESC])
-                    ->asArray()
-                    ->all();
+                    ->andWhere([
+                        'main.updateDateTime' => (new \yii\db\Query())
+                            ->select('MAX(sub.updateDateTime)')
+                            ->from(['sub' => 'kgi_employee_history'])
+                            ->where('sub.kgiEmployeeId = main.kgiEmployeeId')
+                            ->andWhere(['sub.status' => [1, 2, 4]])
+                    ])
+                    ->andWhere([
+                        'or',
+                        ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
+                        ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
+                    ])
+                    ->orderBy([
+                        'main.year' => SORT_DESC,
+                        'main.month' => SORT_DESC,
+                        'main.kgiEmployeeHistoryId' => SORT_DESC,
+                    ])
+                    ->asArray()  // แปลงผลลัพธ์เป็น array
+                    ->all();     // ดึงข้อมูลทั้งหมด
+                    // return json_encode($kgiEmployeeHistory);
 
-
-                    if (isset($kgiEmployeeHistory) && count($kgiEmployeeHistory) > 0) {
-                    foreach ($kgiEmployeeHistory as $employeehistory) :
-                        $time = explode(' ', $employeehistory["createDateTime"]);
-                        $employeeId = Employee::employeeId($employeehistory["createrId"]);
-                        if (!empty($employeehistory["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
-                            $nextCheckDate = new DateTime($employeehistory["nextCheckDate"]); // Convert nextCheckDate to DateTime
-                            $interval = $today->diff($nextCheckDate); // Calculate the difference
-                            if ($nextCheckDate->format('Y-m') == $today->format('Y-m') && $interval->days >= 7 && $nextCheckDate >= $today) {
-                        $data['kgiself' . $employeehistory["kgiEmployeeHistoryId"]] = [
-                            "title" => $employeehistory["detail"],
-                            "description" => $employeehistory["description"],  // Use kgi description
-                            "createDate" => ModelMaster::engDateHr($employeehistory["createDateTime"]),
-                            "time" => ModelMaster::timeText($time[1]),
-                            "status" => $employeehistory["status"],
-                            "month" => $employeehistory["month"],
-                            "year" => $employeehistory["year"],
-                            "creater" => User::employeeNameByuserId($employeehistory["createrId"]),
-                        ];
-                        $kgiself++;
-                    }}
-                    endforeach;
-                    }
 
                     // Query for kpi_employee_history
-                    $kpiEmployeeHistory = KpiEmployeeHistory::find()
+                    $kpiEmployeeHistory = kpiEmployeeHistory::find()
+                    ->alias('main')
                     ->select([
                         'main.kpiEmployeeHistoryId',
                         'main.kpiEmployeeId',
@@ -1659,228 +1668,255 @@ class DashbordController extends Controller
                         'main.updateDateTime',
                         'kpi_employee.kpiId',
                         'kpi_employee.kpiEmployeeId',
-                        'kpi.kpiName AS description',
-                        'kpi.companyId'
+                        'kpi.kpiName',  // Alias 'description' for kpiName
+                        'kpi.companyId',
                     ])
-                    ->from('kpi_employee_history AS main')
-                    ->leftJoin('kpi_employee AS kpi_employee', 'main.kpiEmployeeId = kpi_employee.kpiEmployeeId')
-                    ->leftJoin('kpi AS kpi', 'kpi_employee.kpiId = kpi.kpiId')  // All kgi changed to kpi
+                    ->leftJoin('kpi_employee', 'main.kpiEmployeeId = kpi_employee.kpiEmployeeId')
+                    ->leftJoin('kpi', 'kpi_employee.kpiId = kpi.kpiId')
                     ->where([
-                        'main.updateDateTime' => new \yii\db\Expression(
-                            '(SELECT MAX(sub.updateDateTime) FROM kpi_employee_history AS sub WHERE sub.kpiEmployeeId = main.kpiEmployeeId AND sub.status IN (1, 2, 4))'
-                        ),
-                        'main.status' => [1, 2, 4]
+                        'main.status' => [1, 2, 4],
                     ])
-                    ->orderBy(['main.kpiEmployeeHistoryId' => SORT_DESC])
-                    ->asArray()
-                    ->all();
+                    ->andWhere([
+                        'main.updateDateTime' => (new \yii\db\Query())
+                            ->select('MAX(sub.updateDateTime)')
+                            ->from(['sub' => 'kpi_employee_history'])
+                            ->where('sub.kpiEmployeeId = main.kpiEmployeeId')
+                            ->andWhere(['sub.status' => [1, 2, 4]])
+                    ])
+                    ->andWhere([
+                        'or',
+                        ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
+                        ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
+                    ])
+                    ->orderBy([
+                        'main.year' => SORT_DESC,
+                        'main.month' => SORT_DESC,
+                        'main.kpiEmployeeHistoryId' => SORT_DESC,
+                    ])
+                    ->asArray()  // แปลงผลลัพธ์เป็น array
+                    ->all();     // ดึงข้อมูลทั้งหมด
+                    // return json_encode($kpiEmployeeHistory);
 
-
-                    if (isset($kpiEmployeeHistory) && count($kpiEmployeeHistory) > 0) {
-                    foreach ($kpiEmployeeHistory as $employeehistory) :
-                        $time = explode(' ', $employeehistory["createDateTime"]);
-                        $employeeId = Employee::employeeId($employeehistory["createrId"]);
-                        if (!empty($employeehistory["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
-                            $nextCheckDate = new DateTime($employeehistory["nextCheckDate"]); // Convert nextCheckDate to DateTime
-                            $interval = $today->diff($nextCheckDate); // Calculate the difference
-                            if ($nextCheckDate->format('Y-m') == $today->format('Y-m') && $interval->days >= 7 && $nextCheckDate >= $today) {
-                        $data['kpiself' . $employeehistory["kpiEmployeeHistoryId"]] = [
-                            "title" => $employeehistory["detail"],
-                            "description" => $employeehistory["description"],  // Use kpi description
-                            "createDate" => ModelMaster::engDateHr($employeehistory["createDateTime"]),
-                            "time" => ModelMaster::timeText($time[1]),
-                            "status" => $employeehistory["status"],
-                            "month" => $employeehistory["month"],
-                            "year" => $employeehistory["year"],
-                            "creater" => User::employeeNameByuserId($employeehistory["createrId"]),
-                        ];
-                        $kpiself++;
-                    }}
-                    endforeach;
+                    if (isset($kgiEmployeeHistory) && count($kgiEmployeeHistory) > 0) {
+                        foreach ($kgiEmployeeHistory as $employeehistory) :
+                            $time = explode(' ', $employeehistory["createDateTime"]);
+                            // $employeeId = Employee::employeeId($employeehistory["createrId"]);
+                            $data['kgiself' . $employeehistory["kgiEmployeeHistoryId"]] = [
+                                "title" => $employeehistory["kgiName"],
+                                "description" => $employeehistory["detail"],  // Use kgi description
+                                "createDate" => ModelMaster::engDateHr($employeehistory["createDateTime"]),
+                                "time" => ModelMaster::timeText($time[1]),
+                                "status" => $employeehistory["status"],
+                                "month" => $employeehistory["month"],
+                                "year" => $employeehistory["year"],
+                                "creater" => User::employeeNameByuserId($employeehistory["createrId"]),
+                            ];
+                            $kgiself++;
+                        endforeach;
                     }
 
+                    if (isset($kpiEmployeeHistory) && count($kpiEmployeeHistory) > 0) {
+                        foreach ($kpiEmployeeHistory as $employeehistory) :
+                            $time = explode(' ', $employeehistory["createDateTime"]);
+                            // $employeeId = Employee::employeeId($employeehistory["createrId"]);
+                                $data['kpiself' . $employeehistory["kpiEmployeeHistoryId"]] = [
+                                "title" => $employeehistory["kpiName"],
+                                "description" => $employeehistory["detail"],  // Use kpi description
+                                "createDate" => ModelMaster::engDateHr($employeehistory["createDateTime"]),
+                                "time" => ModelMaster::timeText($time[1]),
+                                "status" => $employeehistory["status"],
+                                "month" => $employeehistory["month"],
+                                "year" => $employeehistory["year"],
+                                "creater" => User::employeeNameByuserId($employeehistory["createrId"]),
+                            ];
+                            $kpiself++;
+                        endforeach;
+                    }
+                    return json_encode($data);
             //employeeEND
-            
 
         }else if($role >= 4) {
             // Manager view company
             // $type = 'Manager';
+            // return json_encode($type);
 
             //company
                 // KFI Sub Query
-                $kfiSubQuery = (new Query())
-                ->select('MAX(updateDateTime)')
-                ->from('kfi_history sub')
-                ->where('sub.kfiId = main.kfiId')
-                ->andWhere(['sub.status' => [1, 2, 4]]);
-
-                // Main Query with LEFT JOIN
-                $kfiHistory = (new Query())
+                $kfiHistory = KfiHistory::find()
+                ->alias('main')
                 ->select([
                     'main.kfiHistoryId',
                     'main.kfiId',
-                    'main.createrId',
                     'main.kfiHistoryName',
-                    'main.unitId',
-                    'main.checkPeriodDate',
                     'main.nextCheckDate',
                     'main.fromDate',
                     'main.toDate',
-                    'main.quantRatio',
-                    'main.amountType',
                     'main.code',
-                    'main.historyStatus',
                     'main.target',
                     'main.result',
-                    'main.formular',
+                    'main.createrId',
                     'main.titleProgress',
-                    'main.description AS kfiHistoryDescription',
+                    'main.description',
                     'main.remark',
                     'main.month',
                     'main.year',
                     'main.status',
                     'main.createDateTime',
                     'main.updateDateTime',
-                    'kfi.kfiName AS description',  // KFI name
+                    'kfi.kfiName',
                     'kfi.companyId',
-                    'kfi.kfiDetail',  // Additional field
                 ])
-                ->from(['main' => 'kfi_history'])
-                ->leftJoin(['kfi' => 'kfi'], 'main.kfiId = kfi.kfiId')
-                ->where(['main.status' => [1, 2, 4],'kfi.companyId' => $companyId])
-                ->andWhere(['main.updateDateTime' => $kfiSubQuery])
+                ->leftJoin('kfi', 'main.kfiId = kfi.kfiId')
+                ->where([
+                    'main.status' => [1, 2, 4],'kfi.companyId' => $companyId
+                ])
+                ->andWhere([
+                    'main.updateDateTime' => (new \yii\db\Query())
+                        ->select('MAX(sub.updateDateTime)')
+                        ->from(['sub' => 'kfi_history'])
+                        ->where('sub.kfiId = main.kfiId')
+                        ->andWhere(['sub.status' => [1, 2, 4]])
+                ])
+                ->andWhere([
+                    'or',
+                    ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
+                    ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
+                ])
                 ->orderBy([
                     'main.year' => SORT_DESC,
                     'main.month' => SORT_DESC,
                     'main.kfiHistoryId' => SORT_DESC,
                 ])
-                ->all();
+                ->asArray()
+				->all();
+                // return json_encode($kfiHistory);
+
                         
                 // KPI Sub Query
-                $kpiSubQuery = (new Query())
-                ->select('MAX(updateDateTime)')
-                ->from('kpi_history sub')
-                ->where('sub.kpiId = main.kpiId')
-                ->andWhere(['sub.status' => [1, 2, 4]]);
-
-                // Main Query with LEFT JOIN
-                $kpiHistory = (new Query())
+                $kpiHistory = kpiHistory::find()
+                ->alias('main')
                 ->select([
                     'main.kpiHistoryId',
                     'main.kpiId',
-                    'main.createrId',
-                    'main.titleProcess',
                     'main.kpiHistoryName',
-                    'main.unitId',
                     'main.nextCheckDate',
                     'main.fromDate',
                     'main.toDate',
-                    'main.quantRatio',
-                    'main.amountType',
                     'main.code',
                     'main.targetAmount',
                     'main.result',
-                    'main.description AS kpiHistoryDescription',
+                    'main.createrId',
+                    'main.titleProcess',
+                    'main.description',
                     'main.remark',
                     'main.month',
                     'main.year',
                     'main.status',
                     'main.createDateTime',
                     'main.updateDateTime',
-                    'kpi.kpiName AS description',  // KPI name
+                    'kpi.kpiName',
                     'kpi.companyId',
-                    'kpi.kpiDetail',  // Additional field
                 ])
-                ->from(['main' => 'kpi_history'])
-                ->leftJoin(['kpi' => 'kpi'], 'main.kpiId = kpi.kpiId')
-                ->where(['main.status' => [1, 2, 4],'kpi.companyId' => $companyId])
-                ->andWhere(['main.updateDateTime' => $kpiSubQuery])
+                ->leftJoin('kpi', 'main.kpiId = kpi.kpiId')
+                ->where([
+                    'main.status' => [1, 2, 4],'kpi.companyId' => $companyId
+                ])
+                ->andWhere([
+                    'main.updateDateTime' => (new \yii\db\Query())
+                        ->select('MAX(sub.updateDateTime)')
+                        ->from(['sub' => 'kpi_history'])
+                        ->where('sub.kpiId = main.kpiId')
+                        ->andWhere(['sub.status' => [1, 2, 4]])
+                ])
+                ->andWhere([
+                    'or',
+                    ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
+                    ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
+                ])
                 ->orderBy([
                     'main.year' => SORT_DESC,
                     'main.month' => SORT_DESC,
                     'main.kpiHistoryId' => SORT_DESC,
                 ])
-                ->all();
+                ->asArray()
+				->all();
+                // return json_encode($kpiHistory);
+
                             
                 // KGI Sub Query
-                $kgiSubQuery = (new Query())
-                ->select('MAX(updateDateTime)')
-                ->from('kgi_history sub')
-                ->where('sub.kgiId = main.kgiId')
-                ->andWhere(['sub.status' => [1, 2, 4]]);
-
-                // Main Query
-                $kgiHistory = (new Query())
+                $kgiHistory = kgiHistory::find()
+                ->alias('main')
                 ->select([
                     'main.kgiHistoryId',
                     'main.kgiId',
-                    'main.createrId',
                     'main.kgiHistoryName',
-                    'main.unitId',
-                    'main.titleProcess',
                     'main.nextCheckDate',
                     'main.fromDate',
                     'main.toDate',
-                    'main.quantRatio',
-                    'main.amountType',
                     'main.code',
                     'main.targetAmount',
                     'main.result',
-                    'main.description AS kgiHistoryDescription',
+                    'main.titleProcess',
+                    'main.description',
+                    'main.createrId',
                     'main.remark',
                     'main.month',
                     'main.year',
                     'main.status',
                     'main.createDateTime',
                     'main.updateDateTime',
-                    'kgi.kgiName AS description',  // KGI name
+                    'kgi.kgiName',
                     'kgi.companyId',
-                    'kgi.kgiDetail',  // Additional field
                 ])
-                ->from(['main' => 'kgi_history'])
-                ->leftJoin(['kgi' => 'kgi'], 'main.kgiId = kgi.kgiId')
-                ->where(['main.status' => [1, 2, 4],'kgi.companyId' => $companyId])
-                ->andWhere(['main.updateDateTime' => $kgiSubQuery])
+                ->leftJoin('kgi', 'main.kgiId = kgi.kgiId')
+                ->where([
+                    'main.status' => [1, 2, 4],'kgi.companyId' => $companyId
+                ])
+                ->andWhere([
+                    'main.updateDateTime' => (new \yii\db\Query())
+                        ->select('MAX(sub.updateDateTime)')
+                        ->from(['sub' => 'kgi_history'])
+                        ->where('sub.kgiId = main.kgiId')
+                        ->andWhere(['sub.status' => [1, 2, 4]])
+                ])
+                ->andWhere([
+                    'or',
+                    ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
+                    ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
+                ])
                 ->orderBy([
                     'main.year' => SORT_DESC,
                     'main.month' => SORT_DESC,
                     'main.kgiHistoryId' => SORT_DESC,
                 ])
-                ->all();
-
+                ->asArray()
+				->all();
+                // return json_encode($kgiHistory);
+                
                 if (isset($kfiHistory) && count($kfiHistory) > 0) {
                     foreach ($kfiHistory as $history) :
                         $time = explode(' ', $history["createDateTime"]);
-                        $employeeId = Employee::employeeId($history["createrId"]);
-                        if (!empty($history["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
-                            $nextCheckDate = new DateTime($history["nextCheckDate"]); // Convert nextCheckDate to DateTime
-                            $interval = $today->diff($nextCheckDate); // Calculate the difference
-                            if ($nextCheckDate->format('Y-m') == $today->format('Y-m') && $interval->days >= 7 && $nextCheckDate >= $today) {
+                        // $employeeId = Employee::employeeId($history["createrId"]);
                         $data['kficom' . $history["kfiHistoryId"]] = [
-                            "title" => $history["titleProgress"],
+                            "title" => $history["kfiName"],
                             "description" => $history["description"],
                             "createDate" => ModelMaster::engDateHr($history["createDateTime"]),
                             "time" => ModelMaster::timeText($time[1]),
-                            "status" => $history["historyStatus"], 
+                            "status" => $history["status"], 
                             "month" => $history["month"],
                             "year" => $history["year"],
                             "creater" => User::employeeNameByuserId($history["createrId"]),
                         ];
                         $kficompany++;
-                    }}
                     endforeach;
                 }
 
                 if (isset($kpiHistory) && count($kpiHistory) > 0) {
                     foreach ($kpiHistory as $history) :
                         $time = explode(' ', $history["createDateTime"]);
-                        $employeeId = Employee::employeeId($history["createrId"]);
-                        if (!empty($history["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
-                            $nextCheckDate = new DateTime($history["nextCheckDate"]); // Convert nextCheckDate to DateTime
-                            $interval = $today->diff($nextCheckDate); // Calculate the difference
-                            if ($nextCheckDate->format('Y-m') == $today->format('Y-m') && $interval->days >= 7 && $nextCheckDate >= $today) {
+                        // $employeeId = Employee::employeeId($history["createrId"]);
                         $data['kpicom' . $history["kpiHistoryId"]] = [
-                            "title" => $history["titleProcess"],
+                            "title" => $history["kpiName"],
                             "description" => $history["description"],
                             "creater" => User::employeeNameByuserId($history["createrId"]),
                             "createDate" => ModelMaster::engDateHr($history["createDateTime"]),
@@ -1890,21 +1926,15 @@ class DashbordController extends Controller
                             "year" => $history["year"]
                         ];
                         $kpicompany++;
-                    }}
                     endforeach;
                 }
-
 
                 if (isset($kgiHistory) && count($kgiHistory) > 0) {
                     foreach ($kgiHistory as $history) :
                         $time = explode(' ', $history["createDateTime"]);
-                        $employeeId = Employee::employeeId($history["createrId"]);
-                        if (!empty($history["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
-                            $nextCheckDate = new DateTime($history["nextCheckDate"]); // Convert nextCheckDate to DateTime
-                            $interval = $today->diff($nextCheckDate); // Calculate the difference
-                            if ($nextCheckDate->format('Y-m') == $today->format('Y-m') && $interval->days >= 7 && $nextCheckDate >= $today) {
+                        // $employeeId = Employee::employeeId($history["createrId"]);
                         $data['kgicom' . $history["kgiHistoryId"]] = [
-                            "title" => $history["titleProcess"],
+                            "title" => $history["kgiName"],
                             "description" => $history["description"],
                             "creater" => User::employeeNameByuserId($history["createrId"]),
                             "createDate" => ModelMaster::engDateHr($history["createDateTime"]),
@@ -1914,187 +1944,259 @@ class DashbordController extends Controller
                             "year" => $history["year"]
                         ];
                         $kgicompany++;
-                    }}
                     endforeach;
                 }
+                // return json_encode($data);
             //companyEnd
 
             //team
                // คำสั่ง SQL สำหรับ kgi_team_history
-                        $sqlKgiHistory = "
-                        SELECT 
-                            main.kgiTeamHistoryId,
-                            main.kgiTeamId,
-                            main.target,
-                            main.result,
-                            main.detail,
-                            main.fromDate,
-                            main.toDate,
-                            main.nextCheckDate,
-                            main.month,
-                            main.year,
-                            main.createrId,
-                            main.status,
-                            main.createDateTime,
-                            main.updateDateTime,
-                            kgi_team.kgiId,
-                            kgi_team.teamId,
-                            kgi.kgiName AS description,
-                            kgi.companyId
-                        FROM kgi_team_history AS main
-                        LEFT JOIN kgi_team AS kgi_team ON main.kgiTeamId = kgi_team.kgiTeamId
-                        LEFT JOIN kgi AS kgi ON kgi_team.kgiId = kgi.kgiId
-                        WHERE 
-                            main.updateDateTime = (
-                                SELECT MAX(sub.updateDateTime)
-                                FROM kgi_team_history AS sub
-                                WHERE sub.kgiTeamId = main.kgiTeamId
-                                AND sub.status IN (1, 2, 4)
-                            )
-                        AND main.status IN (1, 2, 4)
-                        AND kgi.companyId = $companyId 
-                        ORDER BY 
-                            main.kgiTeamHistoryId DESC;
-                        ";
+               $kgiTeamHistory = KgiTeamHistory::find()
+                        ->alias('main')
+                        ->select([
+                            'main.kgiTeamHistoryId',
+                            'main.kgiTeamId',
+                            'main.target',
+                            'main.result',
+                            'main.detail',
+                            'main.fromDate',
+                            'main.toDate',
+                            'main.nextCheckDate',
+                            'main.month',
+                            'main.year',
+                            'main.createrId',
+                            'main.status',
+                            'main.status',
+                            'main.createDateTime',
+                            'main.updateDateTime',
+                            'kgi_team.kgiId',
+                            'kgi_team.teamId',
+                            'kgi.kgiName',
+                            'kgi.companyId',
+                        ])
+                        ->leftJoin('kgi_team', 'main.kgiTeamId = kgi_team.kgiTeamId')
+                        ->leftJoin('kgi', 'kgi_team.kgiId = kgi.kgiId')
+                        ->where([
+                            'main.status' => [1, 2, 4],'kgi.companyId' => $companyId
+                        ])
+                        ->andWhere([
+                            'main.updateDateTime' => (new \yii\db\Query())
+                                ->select('MAX(sub.updateDateTime)')
+                                ->from(['sub' => 'kgi_team_history'])
+                                ->where('sub.kgiTeamId = main.kgiTeamId')
+                                ->andWhere(['sub.status' => [1, 2, 4]])
+                        ])
+                        ->andWhere([
+                            'or',
+                            ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
+                            ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
+                        ])
+                        ->orderBy([
+                            'main.year' => SORT_DESC,
+                            'main.month' => SORT_DESC,
+                            'main.kgiTeamHistoryId' => SORT_DESC,
+                        ])
+                        ->asArray()  // แปลงผลลัพธ์เป็น array
+                        ->all();     // ดึงข้อมูลทั้งหมด
+                        // return json_encode($kgiTeamHistory);
 
                         // คำสั่ง SQL สำหรับ kpi_team_history
-                        $sqlKpiTeamHistory = "
-                        SELECT 
-                            main.kpiTeamHistoryId,
-                            main.kpiTeamId,
-                            main.target,
-                            main.result,
-                            main.detail,
-                            main.fromDate,
-                            main.toDate,
-                            main.nextCheckDate,
-                            main.month,
-                            main.year,
-                            main.createrId,
-                            main.status,
-                            main.createDateTime,
-                            main.updateDateTime,
-                            kpi_team.kpiId,
-                            kpi_team.teamId,
-                            kpi.kpiName AS description,
-                            kpi.companyId
-                        FROM kpi_team_history AS main
-                        LEFT JOIN kpi_team AS kpi_team ON main.kpiTeamId = kpi_team.kpiTeamId
-                        LEFT JOIN kpi AS kpi ON kpi_team.kpiId = kpi.kpiId
-                        WHERE 
-                            main.updateDateTime = (
-                                SELECT MAX(sub.updateDateTime)
-                                FROM kpi_team_history AS sub
-                                WHERE sub.kpiTeamId = main.kpiTeamId
-                                AND sub.status IN (1, 2, 4)
-                            )
-                        AND main.status IN (1, 2, 4)
-                        AND kpi.companyId = $companyId                         
-                        ORDER BY 
-                            main.kpiTeamHistoryId DESC;
-                        ";
-
-                        // ดึงข้อมูลจากฐานข้อมูล
-                        $kgiHistory = Yii::$app->db->createCommand($sqlKgiHistory)->queryAll();
-                        $kpiTeamHistory = Yii::$app->db->createCommand($sqlKpiTeamHistory)->queryAll();
-
-                        if (!empty($kgiHistory)) {
-                        foreach ($kgiHistory as $history) {
-                            $time = explode(' ', $history["createDateTime"]);
-                            $employeeId = Employee::employeeId($history["createrId"]);
-                            if (!empty($history["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
-                                $nextCheckDate = new DateTime($history["nextCheckDate"]); // Convert nextCheckDate to DateTime
-                                $interval = $today->diff($nextCheckDate); // Calculate the difference
-                                if ($nextCheckDate->format('Y-m') == $today->format('Y-m') && $interval->days >= 7 && $nextCheckDate >= $today) {
-                            $data['kgiteam' . $history["kgiTeamHistoryId"]] = [
-                                "title" => $history["detail"],
-                                "description" => $history["description"],
-                                "creater" => User::employeeNameByuserId($history["createrId"]),
-                                "createDate" => ModelMaster::engDateHr($history["createDateTime"]),
-                                "time" => ModelMaster::timeText($time[1]),
-                                "status" => $history["status"],
-                                "month" => $history["month"],
-                                "year" => $history["year"]
-                            ];
-                            $kgiteam++;
-                        }}
-                        }
+                        $kpiTeamHistory = kpiTeamHistory::find()
+                        ->alias('main')
+                        ->select([
+                            'main.kpiTeamHistoryId',
+                            'main.kpiTeamId',
+                            'main.target',
+                            'main.result',
+                            'main.detail',
+                            'main.fromDate',
+                            'main.toDate',
+                            'main.nextCheckDate',
+                            'main.month',
+                            'main.year',
+                            'main.createrId',
+                            'main.status',
+                            'main.createDateTime',
+                            'main.updateDateTime',
+                            'kpi_team.kpiId',
+                            'kpi_team.teamId',
+                            'kpi.kpiName',
+                            'kpi.companyId',
+                        ])
+                        ->leftJoin('kpi_team', 'main.kpiTeamId = kpi_team.kpiTeamId')
+                        ->leftJoin('kpi', 'kpi_team.kpiId = kpi.kpiId')
+                        ->where([
+                            'main.status' => [1, 2, 4],'kpi.companyId' => $companyId
+                        ])
+                        ->andWhere([
+                            'main.updateDateTime' => (new \yii\db\Query())
+                                ->select('MAX(sub.updateDateTime)')
+                                ->from(['sub' => 'kpi_team_history'])
+                                ->where('sub.kpiTeamId = main.kpiTeamId')
+                                ->andWhere(['sub.status' => [1, 2, 4]])
+                        ])
+                        ->andWhere([
+                            'or',
+                            ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
+                            ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
+                        ])
+                        ->orderBy([
+                            'main.year' => SORT_DESC,
+                            'main.month' => SORT_DESC,
+                            'main.kpiTeamHistoryId' => SORT_DESC,
+                        ])
+                        ->asArray()  // แปลงผลลัพธ์เป็น array
+                        ->all();     // ดึงข้อมูลทั้งหมด
+                        // return json_encode($kpiTeamHistory);
+                        
+                        if (!empty($kgiTeamHistory)) {
+                            foreach ($kgiTeamHistory as $history) {
+                                $time = explode(' ', $history["createDateTime"]);
+                                // $employeeId = Employee::employeeId($history["createrId"]);
+                                $data['kgiteam' . $history["kgiTeamHistoryId"]] = [
+                                    "title" => $history["kgiName"],
+                                    "description" => $history["detail"],
+                                    "creater" => User::employeeNameByuserId($history["createrId"]),
+                                    "createDate" => ModelMaster::engDateHr($history["createDateTime"]),
+                                    "time" => ModelMaster::timeText($time[1]),
+                                    "status" => $history["status"],
+                                    "month" => $history["month"],
+                                    "year" => $history["year"]
+                                ];
+                                $kgiteam++;
+                            }
                         }
 
                         if (!empty($kpiTeamHistory)) {
-                        foreach ($kpiTeamHistory as $teamhistory) {
-                            $time = explode(' ', $teamhistory["createDateTime"]);
-                            $employeeId = Employee::employeeId($teamhistory["createrId"]);
-                            if (!empty($teamhistory["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
-                                $nextCheckDate = new DateTime($teamhistory["nextCheckDate"]); // Convert nextCheckDate to DateTime
-                                $interval = $today->diff($nextCheckDate); // Calculate the difference
-                                if ($nextCheckDate->format('Y-m') == $today->format('Y-m') && $interval->days >= 7 && $nextCheckDate >= $today) {
-                            $data['kpiteam' . $teamhistory["kpiTeamHistoryId"]] = [
-                                "title" => $teamhistory["detail"],
-                                "description" => $teamhistory["description"],
-                                "creater" => User::employeeNameByuserId($teamhistory["createrId"]),
-                                "createDate" => ModelMaster::engDateHr($teamhistory["createDateTime"]),
-                                "time" => ModelMaster::timeText($time[1]),
-                                "status" => $teamhistory["status"],
-                                "month" => $teamhistory["month"],
-                                "year" => $teamhistory["year"]
-                            ];
-                            $kpiteam++;
-                        }}
+                            foreach ($kpiTeamHistory as $teamhistory) {
+                                $time = explode(' ', $teamhistory["createDateTime"]);
+                                // $employeeId = Employee::employeeId($teamhistory["createrId"]);
+                                $data['kpiteam' . $teamhistory["kpiTeamHistoryId"]] = [
+                                    "title" => $teamhistory["kpiName"],
+                                    "description" => $teamhistory["detail"],
+                                    "creater" => User::employeeNameByuserId($teamhistory["createrId"]),
+                                    "createDate" => ModelMaster::engDateHr($teamhistory["createDateTime"]),
+                                    "time" => ModelMaster::timeText($time[1]),
+                                    "status" => $teamhistory["status"],
+                                    "month" => $teamhistory["month"],
+                                    "year" => $teamhistory["year"]
+                                ];
+                                $kpiteam++;
+                            }
                         }
-                        }
+                        // return json_encode($data);
             //teamEND
 
             //employee
                // Query for kgi_employee_history
-                    $kgiEmployeeHistory = KgiEmployeeHistory::find()
-                    ->select([
-                        'main.kgiEmployeeHistoryId',
-                        'main.kgiEmployeeId',
-                        'main.target',
-                        'main.result',
-                        'main.fromDate',
-                        'main.toDate',
-                        'main.detail',
-                        'main.nextCheckDate',
-                        'main.month',
-                        'main.year',
-                        'main.lastCheckDate',
-                        'main.createrId',
-                        'main.status',
-                        'main.createDateTime',
-                        'main.updateDateTime',
-                        'kgi_employee.kgiId',
-                        'kgi_employee.kgiEmployeeId',
-                        'kgi.kgiName AS description',
-                        'kgi.companyId'
-                    ])
-                    ->from('kgi_employee_history AS main')
-                    ->leftJoin('kgi_employee AS kgi_employee', 'main.kgiEmployeeId = kgi_employee.kgiEmployeeId')
-                    ->leftJoin('kgi AS kgi', 'kgi_employee.kgiId = kgi.kgiId')  // Corrected join here
-                    ->where([
-                        'main.updateDateTime' => new \yii\db\Expression(
-                            '(SELECT MAX(sub.updateDateTime) FROM kgi_employee_history AS sub WHERE sub.kgiEmployeeId = main.kgiEmployeeId AND sub.status IN (1, 2, 4))'
-                        ),
-                        'main.status' => [1, 2, 4],
-                        'kgi.companyId' => $companyId
-                    ])
-                    ->orderBy(['main.kgiEmployeeHistoryId' => SORT_DESC])
-                    ->asArray()
-                    ->all();
+               $kgiEmployeeHistory = KgiEmployeeHistory::find()
+               ->alias('main')
+               ->select([
+                   'main.kgiEmployeeHistoryId',
+                   'main.kgiEmployeeId',
+                   'main.target',
+                   'main.result',
+                   'main.fromDate',
+                   'main.toDate',
+                   'main.detail',
+                   'main.nextCheckDate',
+                   'main.month',
+                   'main.year',
+                   'main.lastCheckDate',
+                   'main.createrId',
+                   'main.status',
+                   'main.createDateTime',
+                   'main.updateDateTime',
+                   'kgi_employee.kgiId',
+                   'kgi_employee.kgiEmployeeId',
+                   'kgi.kgiName',  // Alias 'description' for kgiName
+                   'kgi.companyId',
+               ])
+               ->leftJoin('kgi_employee', 'main.kgiEmployeeId = kgi_employee.kgiEmployeeId')
+               ->leftJoin('kgi', 'kgi_employee.kgiId = kgi.kgiId')
+               ->where([
+                   'main.status' => [1, 2, 4],
+               ])
+               ->andWhere([
+                   'main.updateDateTime' => (new \yii\db\Query())
+                       ->select('MAX(sub.updateDateTime)')
+                       ->from(['sub' => 'kgi_employee_history'])
+                       ->where('sub.kgiEmployeeId = main.kgiEmployeeId')
+                       ->andWhere(['sub.status' => [1, 2, 4]])
+               ])
+               ->andWhere([
+                   'or',
+                   ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
+                   ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
+               ])
+               ->orderBy([
+                   'main.year' => SORT_DESC,
+                   'main.month' => SORT_DESC,
+                   'main.kgiEmployeeHistoryId' => SORT_DESC,
+               ])
+               ->asArray()  // แปลงผลลัพธ์เป็น array
+               ->all();     // ดึงข้อมูลทั้งหมด
+               // return json_encode($kgiEmployeeHistory);
+
+
+               // Query for kpi_employee_history
+               $kpiEmployeeHistory = kpiEmployeeHistory::find()
+               ->alias('main')
+               ->select([
+                   'main.kpiEmployeeHistoryId',
+                   'main.kpiEmployeeId',
+                   'main.target',
+                   'main.result',
+                   'main.fromDate',
+                   'main.toDate',
+                   'main.detail',
+                   'main.nextCheckDate',
+                   'main.month',
+                   'main.year',
+                   'main.lastCheckDate',
+                   'main.createrId',
+                   'main.status',
+                   'main.createDateTime',
+                   'main.updateDateTime',
+                   'kpi_employee.kpiId',
+                   'kpi_employee.kpiEmployeeId',
+                   'kpi.kpiName',  // Alias 'description' for kpiName
+                   'kpi.companyId',
+               ])
+               ->leftJoin('kpi_employee', 'main.kpiEmployeeId = kpi_employee.kpiEmployeeId')
+               ->leftJoin('kpi', 'kpi_employee.kpiId = kpi.kpiId')
+               ->where([
+                   'main.status' => [1, 2, 4],
+               ])
+               ->andWhere([
+                   'main.updateDateTime' => (new \yii\db\Query())
+                       ->select('MAX(sub.updateDateTime)')
+                       ->from(['sub' => 'kpi_employee_history'])
+                       ->where('sub.kpiEmployeeId = main.kpiEmployeeId')
+                       ->andWhere(['sub.status' => [1, 2, 4]])
+               ])
+               ->andWhere([
+                   'or',
+                   ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
+                   ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
+               ])
+               ->orderBy([
+                   'main.year' => SORT_DESC,
+                   'main.month' => SORT_DESC,
+                   'main.kpiEmployeeHistoryId' => SORT_DESC,
+               ])
+               ->asArray()  // แปลงผลลัพธ์เป็น array
+               ->all();     // ดึงข้อมูลทั้งหมด
+               // return json_encode($kpiEmployeeHistory);
 
 
                     if (isset($kgiEmployeeHistory) && count($kgiEmployeeHistory) > 0) {
                     foreach ($kgiEmployeeHistory as $employeehistory) :
                         $time = explode(' ', $employeehistory["createDateTime"]);
-                        $employeeId = Employee::employeeId($employeehistory["createrId"]);
-                        if (!empty($employeehistory["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
-                            $nextCheckDate = new DateTime($employeehistory["nextCheckDate"]); // Convert nextCheckDate to DateTime
-                            $interval = $today->diff($nextCheckDate); // Calculate the difference
-                            if ($nextCheckDate->format('Y-m') == $today->format('Y-m') && $interval->days >= 7 && $nextCheckDate >= $today) {
+                        // $employeeId = Employee::employeeId($employeehistory["createrId"]);
                         $data['kgiself' . $employeehistory["kgiEmployeeHistoryId"]] = [
-                            "title" => $employeehistory["detail"],
-                            "description" => $employeehistory["description"],  // Use kgi description
+                            "title" => $employeehistory["kgiName"],
+                            "description" => $employeehistory["detail"],  // Use kgi description
                             "createDate" => ModelMaster::engDateHr($employeehistory["createDateTime"]),
                             "time" => ModelMaster::timeText($time[1]),
                             "status" => $employeehistory["status"],
@@ -2103,59 +2205,16 @@ class DashbordController extends Controller
                             "creater" => User::employeeNameByuserId($employeehistory["createrId"]),
                         ];
                         $kgiself++;
-                    }}
                     endforeach;
                     }
-
-                    // Query for kpi_employee_history
-                    $kpiEmployeeHistory = KpiEmployeeHistory::find()
-                    ->select([
-                        'main.kpiEmployeeHistoryId',
-                        'main.kpiEmployeeId',
-                        'main.target',
-                        'main.result',
-                        'main.fromDate',
-                        'main.toDate',
-                        'main.detail',
-                        'main.nextCheckDate',
-                        'main.month',
-                        'main.year',
-                        'main.lastCheckDate',
-                        'main.createrId',
-                        'main.status',
-                        'main.createDateTime',
-                        'main.updateDateTime',
-                        'kpi_employee.kpiId',
-                        'kpi_employee.kpiEmployeeId',
-                        'kpi.kpiName AS description',
-                        'kpi.companyId'
-                    ])
-                    ->from('kpi_employee_history AS main')
-                    ->leftJoin('kpi_employee AS kpi_employee', 'main.kpiEmployeeId = kpi_employee.kpiEmployeeId')
-                    ->leftJoin('kpi AS kpi', 'kpi_employee.kpiId = kpi.kpiId')  // All kgi changed to kpi
-                    ->where([
-                        'main.updateDateTime' => new \yii\db\Expression(
-                            '(SELECT MAX(sub.updateDateTime) FROM kpi_employee_history AS sub WHERE sub.kpiEmployeeId = main.kpiEmployeeId AND sub.status IN (1, 2, 4))'
-                        ),
-                        'main.status' => [1, 2, 4],
-                        'kpi.companyId' => $companyId
-                    ])
-                    ->orderBy(['main.kpiEmployeeHistoryId' => SORT_DESC])
-                    ->asArray()
-                    ->all();
-
 
                     if (isset($kpiEmployeeHistory) && count($kpiEmployeeHistory) > 0) {
                     foreach ($kpiEmployeeHistory as $employeehistory) :
                         $time = explode(' ', $employeehistory["createDateTime"]);
-                        $employeeId = Employee::employeeId($employeehistory["createrId"]);
-                        if (!empty($employeehistory["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
-                            $nextCheckDate = new DateTime($employeehistory["nextCheckDate"]); // Convert nextCheckDate to DateTime
-                            $interval = $today->diff($nextCheckDate); // Calculate the difference
-                            if ($nextCheckDate->format('Y-m') == $today->format('Y-m') && $interval->days >= 7 && $nextCheckDate >= $today) {
+                        // $employeeId = Employee::employeeId($employeehistory["createrId"]);
                         $data['kpiself' . $employeehistory["kpiEmployeeHistoryId"]] = [
-                            "title" => $employeehistory["detail"],
-                            "description" => $employeehistory["description"],  // Use kpi description
+                            "title" => $employeehistory["kpiName"],
+                            "description" => $employeehistory["detail"],  // Use kpi description
                             "createDate" => ModelMaster::engDateHr($employeehistory["createDateTime"]),
                             "time" => ModelMaster::timeText($time[1]),
                             "status" => $employeehistory["status"],
@@ -2164,9 +2223,9 @@ class DashbordController extends Controller
                             "creater" => User::employeeNameByuserId($employeehistory["createrId"]),
                         ];
                         $kpiself++;
-                    }}
                     endforeach;
                     }
+                    return json_encode($data);
             //employeeEND
 
         }else if($role == 3) {
@@ -2174,256 +2233,277 @@ class DashbordController extends Controller
         // $type = 'Leader';
             //team
                     // คำสั่ง SQL สำหรับ kgi_team_history
-                    $sqlKgiHistory = "
-                    SELECT 
-                        main.kgiTeamHistoryId,
-                        main.kgiTeamId,
-                        main.target,
-                        main.result,
-                        main.detail,
-                        main.fromDate,
-                        main.toDate,
-                        main.nextCheckDate,
-                        main.month,
-                        main.year,
-                        main.createrId,
-                        main.status,
-                        main.createDateTime,
-                        main.updateDateTime,
-                        kgi_team.kgiId,
-                        kgi_team.teamId,
-                        kgi.kgiName AS description,
-                        kgi.companyId
-                    FROM kgi_team_history AS main
-                    LEFT JOIN kgi_team AS kgi_team ON main.kgiTeamId = kgi_team.kgiTeamId
-                    LEFT JOIN kgi AS kgi ON kgi_team.kgiId = kgi.kgiId
-                    WHERE 
-                        main.updateDateTime = (
-                            SELECT MAX(sub.updateDateTime)
-                            FROM kgi_team_history AS sub
-                            WHERE sub.kgiTeamId = main.kgiTeamId
-                            AND sub.status IN (1, 2, 4)
-                        )
-                    AND main.status IN (1, 2, 4)
-                    AND kgi.companyId = $companyId
-                    AND kgi_team.teamId = $teamId                     
-                    ORDER BY 
-                        main.kgiTeamHistoryId DESC;
-                    ";
+                    $kgiTeamHistory = KgiTeamHistory::find()
+                        ->alias('main')
+                        ->select([
+                            'main.kgiTeamHistoryId',
+                            'main.kgiTeamId',
+                            'main.target',
+                            'main.result',
+                            'main.detail',
+                            'main.fromDate',
+                            'main.toDate',
+                            'main.nextCheckDate',
+                            'main.month',
+                            'main.year',
+                            'main.createrId',
+                            'main.status',
+                            'main.status',
+                            'main.createDateTime',
+                            'main.updateDateTime',
+                            'kgi_team.kgiId',
+                            'kgi_team.teamId',
+                            'kgi.kgiName',
+                            'kgi.companyId',
+                        ])
+                        ->leftJoin('kgi_team', 'main.kgiTeamId = kgi_team.kgiTeamId')
+                        ->leftJoin('kgi', 'kgi_team.kgiId = kgi.kgiId')
+                        ->where([
+                            'main.status' => [1, 2, 4],'kgi.companyId' => $companyId,'kgi_team.teamId' => $teamId
+                        ])
+                        ->andWhere([
+                            'main.updateDateTime' => (new \yii\db\Query())
+                                ->select('MAX(sub.updateDateTime)')
+                                ->from(['sub' => 'kgi_team_history'])
+                                ->where('sub.kgiTeamId = main.kgiTeamId')
+                                ->andWhere(['sub.status' => [1, 2, 4]])
+                        ])
+                        ->andWhere([
+                            'or',
+                            ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
+                            ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
+                        ])
+                        ->orderBy([
+                            'main.year' => SORT_DESC,
+                            'main.month' => SORT_DESC,
+                            'main.kgiTeamHistoryId' => SORT_DESC,
+                        ])
+                        ->asArray()  // แปลงผลลัพธ์เป็น array
+                        ->all();     // ดึงข้อมูลทั้งหมด
+                        // return json_encode($kgiTeamHistory);
 
-                    // คำสั่ง SQL สำหรับ kpi_team_history
-                    $sqlKpiTeamHistory = "
-                    SELECT 
-                        main.kpiTeamHistoryId,
-                        main.kpiTeamId,
-                        main.target,
-                        main.result,
-                        main.detail,
-                        main.fromDate,
-                        main.toDate,
-                        main.nextCheckDate,
-                        main.month,
-                        main.year,
-                        main.createrId,
-                        main.status,
-                        main.createDateTime,
-                        main.updateDateTime,
-                        kpi_team.kpiId,
-                        kpi_team.teamId,
-                        kpi.kpiName AS description,
-                        kpi.companyId
-                    FROM kpi_team_history AS main
-                    LEFT JOIN kpi_team AS kpi_team ON main.kpiTeamId = kpi_team.kpiTeamId
-                    LEFT JOIN kpi AS kpi ON kpi_team.kpiId = kpi.kpiId
-                    WHERE 
-                        main.updateDateTime = (
-                            SELECT MAX(sub.updateDateTime)
-                            FROM kpi_team_history AS sub
-                            WHERE sub.kpiTeamId = main.kpiTeamId
-                            AND sub.status IN (1, 2, 4)
-                        )
-                    AND main.status IN (1, 2, 4)
-                    AND kpi.companyId = $companyId
-                    AND kpi_team.teamId = $teamId                         
-                    ORDER BY 
-                        main.kpiTeamHistoryId DESC;
-                    ";
+                        // คำสั่ง SQL สำหรับ kpi_team_history
+                        $kpiTeamHistory = kpiTeamHistory::find()
+                        ->alias('main')
+                        ->select([
+                            'main.kpiTeamHistoryId',
+                            'main.kpiTeamId',
+                            'main.target',
+                            'main.result',
+                            'main.detail',
+                            'main.fromDate',
+                            'main.toDate',
+                            'main.nextCheckDate',
+                            'main.month',
+                            'main.year',
+                            'main.createrId',
+                            'main.status',
+                            'main.createDateTime',
+                            'main.updateDateTime',
+                            'kpi_team.kpiId',
+                            'kpi_team.teamId',
+                            'kpi.kpiName',
+                            'kpi.companyId',
+                        ])
+                        ->leftJoin('kpi_team', 'main.kpiTeamId = kpi_team.kpiTeamId')
+                        ->leftJoin('kpi', 'kpi_team.kpiId = kpi.kpiId')
+                        ->where([
+                            'main.status' => [1, 2, 4],'kpi.companyId' => $companyId,'kpi_team.teamId' => $teamId
+                        ])
+                        ->andWhere([
+                            'main.updateDateTime' => (new \yii\db\Query())
+                                ->select('MAX(sub.updateDateTime)')
+                                ->from(['sub' => 'kpi_team_history'])
+                                ->where('sub.kpiTeamId = main.kpiTeamId')
+                                ->andWhere(['sub.status' => [1, 2, 4]])
+                        ])
+                        ->andWhere([
+                            'or',
+                            ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
+                            ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
+                        ])
+                        ->orderBy([
+                            'main.year' => SORT_DESC,
+                            'main.month' => SORT_DESC,
+                            'main.kpiTeamHistoryId' => SORT_DESC,
+                        ])
+                        ->asArray()  // แปลงผลลัพธ์เป็น array
+                        ->all();     // ดึงข้อมูลทั้งหมด
+                        // return json_encode($kpiTeamHistory);
 
-                    // ดึงข้อมูลจากฐานข้อมูล
-                    $kgiHistory = Yii::$app->db->createCommand($sqlKgiHistory)->queryAll();
-                    $kpiTeamHistory = Yii::$app->db->createCommand($sqlKpiTeamHistory)->queryAll();
-
-                    if (!empty($kgiHistory)) {
-                    foreach ($kgiHistory as $history) {
-                        $time = explode(' ', $history["createDateTime"]);
-                        $employeeId = Employee::employeeId($history["createrId"]);
-                        if (!empty($history["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
-                            $nextCheckDate = new DateTime($history["nextCheckDate"]); // Convert nextCheckDate to DateTime
-                            $interval = $today->diff($nextCheckDate); // Calculate the difference
-                            if ($nextCheckDate->format('Y-m') == $today->format('Y-m') && $interval->days >= 7 && $nextCheckDate >= $today) {
-                        $data['kgiteam' . $history["kgiTeamHistoryId"]] = [
-                            "title" => $history["detail"],
-                            "description" => $history["description"],
-                            "creater" => User::employeeNameByuserId($history["createrId"]),
-                            "createDate" => ModelMaster::engDateHr($history["createDateTime"]),
-                            "time" => ModelMaster::timeText($time[1]),
-                            "status" => $history["status"],
-                            "month" => $history["month"],
-                            "year" => $history["year"]
-                        ];
-                        $kgiteam++;
-                    }}
-                    }
+                    if (!empty($kgiTeamHistory)) {
+                        foreach ($kgiTeamHistory as $history) {
+                            $time = explode(' ', $history["createDateTime"]);
+                            // $employeeId = Employee::employeeId($history["createrId"]);
+                            $data['kgiteam' . $history["kgiTeamHistoryId"]] = [
+                                "title" => $history["kgiName"],
+                                "description" => $history["detail"],
+                                "creater" => User::employeeNameByuserId($history["createrId"]),
+                                "createDate" => ModelMaster::engDateHr($history["createDateTime"]),
+                                "time" => ModelMaster::timeText($time[1]),
+                                "status" => $history["status"],
+                                "month" => $history["month"],
+                                "year" => $history["year"]
+                            ];
+                            $kgiteam++;
+                        }
                     }
 
                     if (!empty($kpiTeamHistory)) {
-                    foreach ($kpiTeamHistory as $teamhistory) {
-                        $time = explode(' ', $teamhistory["createDateTime"]);
-                        $employeeId = Employee::employeeId($teamhistory["createrId"]);
-                        if (!empty($teamhistory["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
-                            $nextCheckDate = new DateTime($teamhistory["nextCheckDate"]); // Convert nextCheckDate to DateTime
-                            $interval = $today->diff($nextCheckDate); // Calculate the difference
-                            if ($nextCheckDate->format('Y-m') == $today->format('Y-m') && $interval->days >= 7 && $nextCheckDate >= $today) {
-                        $data['kpiteam' . $teamhistory["kpiTeamHistoryId"]] = [
-                            "title" => $teamhistory["detail"],
-                            "description" => $teamhistory["description"],
-                            "creater" => User::employeeNameByuserId($teamhistory["createrId"]),
-                            "createDate" => ModelMaster::engDateHr($teamhistory["createDateTime"]),
-                            "time" => ModelMaster::timeText($time[1]),
-                            "status" => $teamhistory["status"],
-                            "month" => $teamhistory["month"],
-                            "year" => $teamhistory["year"]
-                        ];
-                        $kpiteam++;
-                    }}
+                        foreach ($kpiTeamHistory as $teamhistory) {
+                            $time = explode(' ', $teamhistory["createDateTime"]);
+                            // $employeeId = Employee::employeeId($teamhistory["createrId"]);
+                            $data['kpiteam' . $teamhistory["kpiTeamHistoryId"]] = [
+                                "title" => $teamhistory["kpiName"],
+                                "description" => $teamhistory["detail"],
+                                "creater" => User::employeeNameByuserId($teamhistory["createrId"]),
+                                "createDate" => ModelMaster::engDateHr($teamhistory["createDateTime"]),
+                                "time" => ModelMaster::timeText($time[1]),
+                                "status" => $teamhistory["status"],
+                                "month" => $teamhistory["month"],
+                                "year" => $teamhistory["year"]
+                            ];
+                            $kpiteam++;
+                        }
                     }
-                    }
+                    // return json_encode($data);
         //teamEND
 
         //employee
             // Query for kgi_employee_history
-                $kgiEmployeeHistory = KgiEmployeeHistory::find()
-                ->select([
-                    'main.kgiEmployeeHistoryId',
-                    'main.kgiEmployeeId',
-                    'main.target',
-                    'main.result',
-                    'main.fromDate',
-                    'main.toDate',
-                    'main.detail',
-                    'main.nextCheckDate',
-                    'main.month',
-                    'main.year',
-                    'main.lastCheckDate',
-                    'main.createrId',
-                    'main.status',
-                    'main.createDateTime',
-                    'main.updateDateTime',
-                    'kgi_employee.kgiId',
-                    'kgi_employee.kgiEmployeeId',
-                    'kgi.kgiName AS description',
-                    'kgi.companyId'
-                ])
-                ->from('kgi_employee_history AS main')
-                ->leftJoin('kgi_employee AS kgi_employee', 'main.kgiEmployeeId = kgi_employee.kgiEmployeeId')
-                ->leftJoin('kgi AS kgi', 'kgi_employee.kgiId = kgi.kgiId')  // Corrected join here
-                ->where([
-                    'main.updateDateTime' => new \yii\db\Expression(
-                        '(SELECT MAX(sub.updateDateTime) FROM kgi_employee_history AS sub WHERE sub.kgiEmployeeId = main.kgiEmployeeId AND sub.status IN (1, 2, 4))'
-                    ),
-                    'main.status' => [1, 2, 4],
-                    'kgi.companyId' => $companyId,
-                    'kgi_employee.kgiEmployeeId' => $employeeId
-                ])
-                ->orderBy(['main.kgiEmployeeHistoryId' => SORT_DESC])
-                ->asArray()
-                ->all();
+            $kgiEmployeeHistory = KgiEmployeeHistory::find()
+               ->alias('main')
+               ->select([
+                   'main.kgiEmployeeHistoryId',
+                   'main.kgiEmployeeId',
+                   'main.target',
+                   'main.result',
+                   'main.fromDate',
+                   'main.toDate',
+                   'main.detail',
+                   'main.nextCheckDate',
+                   'main.month',
+                   'main.year',
+                   'main.lastCheckDate',
+                   'main.createrId',
+                   'main.status',
+                   'main.createDateTime',
+                   'main.updateDateTime',
+                   'kgi_employee.kgiId',
+                   'kgi_employee.kgiEmployeeId',
+                   'kgi.kgiName',  // Alias 'description' for kgiName
+                   'kgi.companyId',
+               ])
+               ->leftJoin('kgi_employee', 'main.kgiEmployeeId = kgi_employee.kgiEmployeeId')
+               ->leftJoin('kgi', 'kgi_employee.kgiId = kgi.kgiId')
+               ->where([
+                   'main.status' => [1, 2, 4],'kgi.companyId' => $companyId,'main.kgiEmployeeId' => $employeeId
+               ])
+               ->andWhere([
+                   'main.updateDateTime' => (new \yii\db\Query())
+                       ->select('MAX(sub.updateDateTime)')
+                       ->from(['sub' => 'kgi_employee_history'])
+                       ->where('sub.kgiEmployeeId = main.kgiEmployeeId')
+                       ->andWhere(['sub.status' => [1, 2, 4]])
+               ])
+               ->andWhere([
+                   'or',
+                   ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
+                   ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
+               ])
+               ->orderBy([
+                   'main.year' => SORT_DESC,
+                   'main.month' => SORT_DESC,
+                   'main.kgiEmployeeHistoryId' => SORT_DESC,
+               ])
+               ->asArray()  // แปลงผลลัพธ์เป็น array
+               ->all();     // ดึงข้อมูลทั้งหมด
+            //    return json_encode($kgiEmployeeHistory);
 
+               // Query for kpi_employee_history
+               $kpiEmployeeHistory = kpiEmployeeHistory::find()
+               ->alias('main')
+               ->select([
+                   'main.kpiEmployeeHistoryId',
+                   'main.kpiEmployeeId',
+                   'main.target',
+                   'main.result',
+                   'main.fromDate',
+                   'main.toDate',
+                   'main.detail',
+                   'main.nextCheckDate',
+                   'main.month',
+                   'main.year',
+                   'main.lastCheckDate',
+                   'main.createrId',
+                   'main.status',
+                   'main.createDateTime',
+                   'main.updateDateTime',
+                   'kpi_employee.kpiId',
+                   'kpi_employee.kpiEmployeeId',
+                   'kpi.kpiName',  // Alias 'description' for kpiName
+                   'kpi.companyId',
+               ])
+               ->leftJoin('kpi_employee', 'main.kpiEmployeeId = kpi_employee.kpiEmployeeId')
+               ->leftJoin('kpi', 'kpi_employee.kpiId = kpi.kpiId')
+               ->where([
+                   'main.status' => [1, 2, 4],'kpi.companyId' => $companyId,'main.kpiEmployeeId' => $employeeId
+               ])
+               ->andWhere([
+                   'main.updateDateTime' => (new \yii\db\Query())
+                       ->select('MAX(sub.updateDateTime)')
+                       ->from(['sub' => 'kpi_employee_history'])
+                       ->where('sub.kpiEmployeeId = main.kpiEmployeeId')
+                       ->andWhere(['sub.status' => [1, 2, 4]])
+               ])
+               ->andWhere([
+                   'or',
+                   ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
+                   ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
+               ])
+               ->orderBy([
+                   'main.year' => SORT_DESC,
+                   'main.month' => SORT_DESC,
+                   'main.kpiEmployeeHistoryId' => SORT_DESC,
+               ])
+               ->asArray()  // แปลงผลลัพธ์เป็น array
+               ->all();     // ดึงข้อมูลทั้งหมด
+            //    return json_encode($kpiEmployeeHistory);
 
                 if (isset($kgiEmployeeHistory) && count($kgiEmployeeHistory) > 0) {
-                foreach ($kgiEmployeeHistory as $employeehistory) :
-                    $time = explode(' ', $employeehistory["createDateTime"]);
-                    $employeeId = Employee::employeeId($employeehistory["createrId"]);
-                    if (!empty($employeehistory["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
-                        $nextCheckDate = new DateTime($employeehistory["nextCheckDate"]); // Convert nextCheckDate to DateTime
-                        $interval = $today->diff($nextCheckDate); // Calculate the difference
-                        if ($nextCheckDate->format('Y-m') == $today->format('Y-m') && $interval->days >= 7 && $nextCheckDate >= $today) {
-                    $data['kgiself' . $employeehistory["kgiEmployeeHistoryId"]] = [
-                        "title" => $employeehistory["detail"],
-                        "description" => $employeehistory["description"],  // Use kgi description
-                        "createDate" => ModelMaster::engDateHr($employeehistory["createDateTime"]),
-                        "time" => ModelMaster::timeText($time[1]),
-                        "status" => $employeehistory["status"],
-                        "month" => $employeehistory["month"],
-                        "year" => $employeehistory["year"],
-                        "creater" => User::employeeNameByuserId($employeehistory["createrId"]),
-                    ];
-                    $kgiself++;
-                }}
-                endforeach;
+                    foreach ($kgiEmployeeHistory as $employeehistory) :
+                        $time = explode(' ', $employeehistory["createDateTime"]);
+                        $data['kgiself' . $employeehistory["kgiEmployeeHistoryId"]] = [
+                            "title" => $employeehistory["kgiName"],
+                            "description" => $employeehistory["detail"],  // Use kgi description
+                            "createDate" => ModelMaster::engDateHr($employeehistory["createDateTime"]),
+                            "time" => ModelMaster::timeText($time[1]),
+                            "status" => $employeehistory["status"],
+                            "month" => $employeehistory["month"],
+                            "year" => $employeehistory["year"],
+                            "creater" => User::employeeNameByuserId($employeehistory["createrId"]),
+                        ];
+                        $kgiself++;
+                    endforeach;
                 }
-
-                // Query for kpi_employee_history
-                $kpiEmployeeHistory = KpiEmployeeHistory::find()
-                ->select([
-                    'main.kpiEmployeeHistoryId',
-                    'main.kpiEmployeeId',
-                    'main.target',
-                    'main.result',
-                    'main.fromDate',
-                    'main.toDate',
-                    'main.detail',
-                    'main.nextCheckDate',
-                    'main.month',
-                    'main.year',
-                    'main.lastCheckDate',
-                    'main.createrId',
-                    'main.status',
-                    'main.createDateTime',
-                    'main.updateDateTime',
-                    'kpi_employee.kpiId',
-                    'kpi_employee.kpiEmployeeId',
-                    'kpi.kpiName AS description',
-                    'kpi.companyId'
-                ])
-                ->from('kpi_employee_history AS main')
-                ->leftJoin('kpi_employee AS kpi_employee', 'main.kpiEmployeeId = kpi_employee.kpiEmployeeId')
-                ->leftJoin('kpi AS kpi', 'kpi_employee.kpiId = kpi.kpiId')  // All kgi changed to kpi
-                ->where([
-                    'main.updateDateTime' => new \yii\db\Expression(
-                        '(SELECT MAX(sub.updateDateTime) FROM kpi_employee_history AS sub WHERE sub.kpiEmployeeId = main.kpiEmployeeId AND sub.status IN (1, 2, 4))'
-                    ),
-                    'main.status' => [1, 2, 4],
-                    'kpi.companyId' => $companyId,
-                    'kpi_employee.kpiEmployeeId' => $employeeId
-                ])
-                ->orderBy(['main.kpiEmployeeHistoryId' => SORT_DESC])
-                ->asArray()
-                ->all();
-
 
                 if (isset($kpiEmployeeHistory) && count($kpiEmployeeHistory) > 0) {
-                foreach ($kpiEmployeeHistory as $employeehistory) :
-                    $time = explode(' ', $employeehistory["createDateTime"]);
-                    $employeeId = Employee::employeeId($employeehistory["createrId"]);
-                    if (!empty($employeehistory["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
-                        $nextCheckDate = new DateTime($employeehistory["nextCheckDate"]); // Convert nextCheckDate to DateTime
-                        $interval = $today->diff($nextCheckDate); // Calculate the difference
-                        if ($nextCheckDate->format('Y-m') == $today->format('Y-m') && $interval->days >= 7 && $nextCheckDate >= $today) {
-                    $data['kpiself' . $employeehistory["kpiEmployeeHistoryId"]] = [
-                        "title" => $employeehistory["detail"],
-                        "description" => $employeehistory["description"],  // Use kpi description
-                        "createDate" => ModelMaster::engDateHr($employeehistory["createDateTime"]),
-                        "time" => ModelMaster::timeText($time[1]),
-                        "status" => $employeehistory["status"],
-                        "month" => $employeehistory["month"],
-                        "year" => $employeehistory["year"],
-                        "creater" => User::employeeNameByuserId($employeehistory["createrId"]),
-                    ];
-                    $kpiself++;
-                }}
-                endforeach;
+                    foreach ($kpiEmployeeHistory as $employeehistory) :
+                        $time = explode(' ', $employeehistory["createDateTime"]);
+                        $data['kpiself' . $employeehistory["kpiEmployeeHistoryId"]] = [
+                            "title" => $employeehistory["kpiName"],
+                            "description" => $employeehistory["detail"],  // Use kpi description
+                            "createDate" => ModelMaster::engDateHr($employeehistory["createDateTime"]),
+                            "time" => ModelMaster::timeText($time[1]),
+                            "status" => $employeehistory["status"],
+                            "month" => $employeehistory["month"],
+                            "year" => $employeehistory["year"],
+                            "creater" => User::employeeNameByuserId($employeehistory["createrId"]),
+                        ];
+                        $kpiself++;
+                    endforeach;
                 }
+                return json_encode($data);
         //employeeEND
 
         }else if ($role < 3){
@@ -2432,6 +2512,7 @@ class DashbordController extends Controller
  //employee
             // Query for kgi_employee_history
             $kgiEmployeeHistory = KgiEmployeeHistory::find()
+            ->alias('main')
             ->select([
                 'main.kgiEmployeeHistoryId',
                 'main.kgiEmployeeId',
@@ -2450,50 +2531,38 @@ class DashbordController extends Controller
                 'main.updateDateTime',
                 'kgi_employee.kgiId',
                 'kgi_employee.kgiEmployeeId',
-                'kgi.kgiName AS description',
-                'kgi.companyId'
+                'kgi.kgiName',  // Alias 'description' for kgiName
+                'kgi.companyId',
             ])
-            ->from('kgi_employee_history AS main')
-            ->leftJoin('kgi_employee AS kgi_employee', 'main.kgiEmployeeId = kgi_employee.kgiEmployeeId')
-            ->leftJoin('kgi AS kgi', 'kgi_employee.kgiId = kgi.kgiId')  // Corrected join here
+            ->leftJoin('kgi_employee', 'main.kgiEmployeeId = kgi_employee.kgiEmployeeId')
+            ->leftJoin('kgi', 'kgi_employee.kgiId = kgi.kgiId')
             ->where([
-                'main.updateDateTime' => new \yii\db\Expression(
-                    '(SELECT MAX(sub.updateDateTime) FROM kgi_employee_history AS sub WHERE sub.kgiEmployeeId = main.kgiEmployeeId AND sub.status IN (1, 2, 4))'
-                ),
-                'main.status' => [1, 2, 4],
-                'kgi.companyId' => $companyId,
-                'kgi_employee.kgiEmployeeId' => $employeeId
+                'main.status' => [1, 2, 4],'kgi.companyId' => $companyId,'main.kgiEmployeeId' => $employeeId
             ])
-            ->orderBy(['main.kgiEmployeeHistoryId' => SORT_DESC])
-            ->asArray()
-            ->all();
-
-
-            if (isset($kgiEmployeeHistory) && count($kgiEmployeeHistory) > 0) {
-            foreach ($kgiEmployeeHistory as $employeehistory) :
-                $time = explode(' ', $employeehistory["createDateTime"]);
-                $employeeId = Employee::employeeId($employeehistory["createrId"]);
-                if (!empty($employeehistory["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
-                    $nextCheckDate = new DateTime($employeehistory["nextCheckDate"]); // Convert nextCheckDate to DateTime
-                    $interval = $today->diff($nextCheckDate); // Calculate the difference
-                    if ($nextCheckDate->format('Y-m') == $today->format('Y-m') && $interval->days >= 7 && $nextCheckDate >= $today) {
-                $data['kgiself' . $employeehistory["kgiEmployeeHistoryId"]] = [
-                    "title" => $employeehistory["detail"],
-                    "description" => $employeehistory["description"],  // Use kgi description
-                    "createDate" => ModelMaster::engDateHr($employeehistory["createDateTime"]),
-                    "time" => ModelMaster::timeText($time[1]),
-                    "status" => $employeehistory["status"],
-                    "month" => $employeehistory["month"],
-                    "year" => $employeehistory["year"],
-                    "creater" => User::employeeNameByuserId($employeehistory["createrId"]),
-                ];
-                $kgiself++;
-            }}
-            endforeach;
-            }
+            ->andWhere([
+                'main.updateDateTime' => (new \yii\db\Query())
+                    ->select('MAX(sub.updateDateTime)')
+                    ->from(['sub' => 'kgi_employee_history'])
+                    ->where('sub.kgiEmployeeId = main.kgiEmployeeId')
+                    ->andWhere(['sub.status' => [1, 2, 4]])
+            ])
+            ->andWhere([
+                'or',
+                ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
+                ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
+            ])
+            ->orderBy([
+                'main.year' => SORT_DESC,
+                'main.month' => SORT_DESC,
+                'main.kgiEmployeeHistoryId' => SORT_DESC,
+            ])
+            ->asArray()  // แปลงผลลัพธ์เป็น array
+            ->all();     // ดึงข้อมูลทั้งหมด
+         //    return json_encode($kgiEmployeeHistory);
 
             // Query for kpi_employee_history
-            $kpiEmployeeHistory = KpiEmployeeHistory::find()
+            $kpiEmployeeHistory = kpiEmployeeHistory::find()
+            ->alias('main')
             ->select([
                 'main.kpiEmployeeHistoryId',
                 'main.kpiEmployeeId',
@@ -2512,59 +2581,80 @@ class DashbordController extends Controller
                 'main.updateDateTime',
                 'kpi_employee.kpiId',
                 'kpi_employee.kpiEmployeeId',
-                'kpi.kpiName AS description',
-                'kpi.companyId'
+                'kpi.kpiName',  // Alias 'description' for kpiName
+                'kpi.companyId',
             ])
-            ->from('kpi_employee_history AS main')
-            ->leftJoin('kpi_employee AS kpi_employee', 'main.kpiEmployeeId = kpi_employee.kpiEmployeeId')
-            ->leftJoin('kpi AS kpi', 'kpi_employee.kpiId = kpi.kpiId')  // All kgi changed to kpi
+            ->leftJoin('kpi_employee', 'main.kpiEmployeeId = kpi_employee.kpiEmployeeId')
+            ->leftJoin('kpi', 'kpi_employee.kpiId = kpi.kpiId')
             ->where([
-                'main.updateDateTime' => new \yii\db\Expression(
-                    '(SELECT MAX(sub.updateDateTime) FROM kpi_employee_history AS sub WHERE sub.kpiEmployeeId = main.kpiEmployeeId AND sub.status IN (1, 2, 4))'
-                ),
-                'main.status' => [1, 2, 4],
-                'kpi.companyId' => $companyId,
-                'kpi_employee.kpiEmployeeId' => $employeeId
+                'main.status' => [1, 2, 4],'kpi.companyId' => $companyId,'main.kpiEmployeeId' => $employeeId
             ])
-            ->orderBy(['main.kpiEmployeeHistoryId' => SORT_DESC])
-            ->asArray()
-            ->all();
+            ->andWhere([
+                'main.updateDateTime' => (new \yii\db\Query())
+                    ->select('MAX(sub.updateDateTime)')
+                    ->from(['sub' => 'kpi_employee_history'])
+                    ->where('sub.kpiEmployeeId = main.kpiEmployeeId')
+                    ->andWhere(['sub.status' => [1, 2, 4]])
+            ])
+            ->andWhere([
+                'or',
+                ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
+                ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
+            ])
+            ->orderBy([
+                'main.year' => SORT_DESC,
+                'main.month' => SORT_DESC,
+                'main.kpiEmployeeHistoryId' => SORT_DESC,
+            ])
+            ->asArray()  // แปลงผลลัพธ์เป็น array
+            ->all();     // ดึงข้อมูลทั้งหมด
+         //    return json_encode($kpiEmployeeHistory);
 
+             if (isset($kgiEmployeeHistory) && count($kgiEmployeeHistory) > 0) {
+                 foreach ($kgiEmployeeHistory as $employeehistory) :
+                     $time = explode(' ', $employeehistory["createDateTime"]);
+                     $data['kgiself' . $employeehistory["kgiEmployeeHistoryId"]] = [
+                         "title" => $employeehistory["kgiName"],
+                         "description" => $employeehistory["detail"],  // Use kgi description
+                         "createDate" => ModelMaster::engDateHr($employeehistory["createDateTime"]),
+                         "time" => ModelMaster::timeText($time[1]),
+                         "status" => $employeehistory["status"],
+                         "month" => $employeehistory["month"],
+                         "year" => $employeehistory["year"],
+                         "creater" => User::employeeNameByuserId($employeehistory["createrId"]),
+                     ];
+                     $kgiself++;
+                 endforeach;
+             }
 
-            if (isset($kpiEmployeeHistory) && count($kpiEmployeeHistory) > 0) {
-            foreach ($kpiEmployeeHistory as $employeehistory) :
-                $time = explode(' ', $employeehistory["createDateTime"]);
-                $employeeId = Employee::employeeId($employeehistory["createrId"]);
-                if (!empty($employeehistory["nextCheckDate"])) { // Check if nextCheckDate is not null or empty
-                    $nextCheckDate = new DateTime($employeehistory["nextCheckDate"]); // Convert nextCheckDate to DateTime
-                    $interval = $today->diff($nextCheckDate); // Calculate the difference
-                    if ($nextCheckDate->format('Y-m') == $today->format('Y-m') && $interval->days >= 7 && $nextCheckDate >= $today) {
-                $data['kpiself' . $employeehistory["kpiEmployeeHistoryId"]] = [
-                    "title" => $employeehistory["detail"],
-                    "description" => $employeehistory["description"],  // Use kpi description
-                    "createDate" => ModelMaster::engDateHr($employeehistory["createDateTime"]),
-                    "time" => ModelMaster::timeText($time[1]),
-                    "status" => $employeehistory["status"],
-                    "month" => $employeehistory["month"],
-                    "year" => $employeehistory["year"],
-                    "creater" => User::employeeNameByuserId($employeehistory["createrId"]),
-                ];
-                $kpiself++;
-            }}
-            endforeach;
-            }
+             if (isset($kpiEmployeeHistory) && count($kpiEmployeeHistory) > 0) {
+                 foreach ($kpiEmployeeHistory as $employeehistory) :
+                     $time = explode(' ', $employeehistory["createDateTime"]);
+                     $data['kpiself' . $employeehistory["kpiEmployeeHistoryId"]] = [
+                         "title" => $employeehistory["kpiName"],
+                         "description" => $employeehistory["detail"],  // Use kpi description
+                         "createDate" => ModelMaster::engDateHr($employeehistory["createDateTime"]),
+                         "time" => ModelMaster::timeText($time[1]),
+                         "status" => $employeehistory["status"],
+                         "month" => $employeehistory["month"],
+                         "year" => $employeehistory["year"],
+                         "creater" => User::employeeNameByuserId($employeehistory["createrId"]),
+                     ];
+                     $kpiself++;
+                 endforeach;
+             }
     //employeeEND
         }
 
-        // $datas = [
-        //     // 'kficompany' => $kficompany,
-        //     // 'kgicompany' => $kgicompany,
-        //     // 'kpicompany' => $kpicompany,
-        //     'kgiteam' => $kgiteam,
-        //     'kpiteam' => $kpiteam,
-        //     'kgiself' => $kgiself,
-        //     'kpiself' => $kpiself
-        // ];
+        $data = [
+            'kficompany' => $kficompany,
+            'kgicompany' => $kgicompany,
+            'kpicompany' => $kpicompany,
+            'kgiteam' => $kgiteam,
+            'kpiteam' => $kpiteam,
+            'kgiself' => $kgiself,
+            'kpiself' => $kpiself
+        ];
         
         // ส่งข้อมูลกลับเป็น JSON
         return json_encode($data);
