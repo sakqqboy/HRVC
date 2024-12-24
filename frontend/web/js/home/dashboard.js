@@ -12,7 +12,7 @@ let currentKPIIndex = 0; // Initial index for KPI
 let KFIData = []; // Declare globally
 let KGIData = []; // Declare globally
 let KPIData = []; // Declare globally
-
+// let direction = '';
 
 function loadCompanyTap(companyId) {
     var url = $baseUrl + 'home/default/company-tab';
@@ -68,7 +68,7 @@ function loadSelfTap(employeeId) {
 }
 
 
-function updateData(index, type) {
+function updateData(index, type, direction) {
     const data = {
         'KFI': KFIData,
         'KGI': KGIData,
@@ -79,7 +79,7 @@ function updateData(index, type) {
     const dataType = data[type];
     if (dataType && dataType[index]) {
         const item = dataType[index]; // ดึงข้อมูลจากดัชนีที่เลือก
-
+        // alert(direction);
         // อัปเดตข้อมูล Progress Bar
         const progressElement = document.getElementById(`${type}-progress`);
         progressElement.setAttribute('data-percentage', item.percentage);
@@ -91,6 +91,62 @@ function updateData(index, type) {
         document.getElementById(`${type}-last-0`).innerText = item.last || '-';
         document.getElementById(`${type}-due-0`).innerText = item.due || '-';
         // document.getElementById(`${type}-count-0`).innerText = item.count || '-';
+        // direction = 'right'
+        // alert(direction);
+        // direction = 'left'; // ทิศทางการเลื่อน
+        // เพิ่ม animation ให้กับ target
+
+        // // เพิ่ม animation ให้กับ target
+        const nameElement = document.getElementById(`${type}-name-0`);
+        const lastElement = document.getElementById(`${type}-last-0`);
+
+        nameElement.classList.add('bounce-animation');
+        lastElement.classList.add('bounce-animation');
+
+
+        // ลบ class หลังจาก animation เสร็จสิ้น
+        setTimeout(() => {
+            nameElement.classList.remove('bounce-animation');
+            lastElement.classList.remove('bounce-animation');
+
+        }, 500); // ความยาวเวลาเดียวกับ animation
+
+
+        // const nameElement = document.getElementById(`${type}-name-0`);
+        const targetElement = document.getElementById(`${type}-target-0`);
+        const resultElement = document.getElementById(`${type}-result-0`);
+
+        // กำหนดคลาสสำหรับเลื่อนเข้าและเลื่อนออกตามทิศทาง
+        const outClass = direction == 'right' ? 'slide-out-animation-left' : 'slide-out-animation-right';
+        const inClass = direction == 'right' ? 'slide-in-animation-left' : 'slide-in-animation-right';
+
+        // เพิ่มคลาสสำหรับเลื่อนออก
+        targetElement.classList.add(outClass);
+        resultElement.classList.add(outClass);
+        // nameElement.classList.add(outClass);
+
+        setTimeout(() => {
+            // อัปเดตข้อความใหม่
+            targetElement.innerText = item.target;
+            resultElement.innerText = item.result;
+            // nameElement.innerText = item.name;
+
+            // ลบคลาสเลื่อนออกและเพิ่มคลาสเลื่อนเข้า
+            targetElement.classList.remove(outClass);
+            resultElement.classList.remove(outClass);
+            // nameElement.classList.remove(outClass);
+
+
+            targetElement.classList.add(inClass);
+            resultElement.classList.add(inClass);
+            // nameElement.classList.add(inClass);
+            // ลบคลาสเลื่อนเข้าเมื่อ animation เสร็จสิ้น
+            setTimeout(() => {
+                targetElement.classList.remove(inClass);
+                resultElement.classList.remove(inClass);
+                // nameElement.classList.remove(inClass);
+            }, 200); // ระยะเวลา animation (500ms)
+        }, 200); // ระยะเวลา animation เลื่อนออก (500ms)
 
     } else {
         console.error(`No data found for ${type} with index ${index}`);
@@ -112,7 +168,7 @@ function changeKFIData(direction) {
     // alert(`Selected KFI Item: ${JSON.stringify(selectedKFI)}`); // แสดงข้อมูลชุดที่เลือก
 
     // เรียกใช้ฟังก์ชัน updateData เพื่อนำข้อมูลไปแสดงผล
-    updateData(currentKFIIndex, 'KFI');
+    updateData(currentKFIIndex, 'KFI', direction);
 }
 
 // ฟังก์ชันเพื่อเปลี่ยนข้อมูล KGI เมื่อคลิกปุ่มซ้ายหรือขวา
@@ -122,7 +178,7 @@ function changeKGIData(direction) {
     } else if (direction == 'left') {
         currentKGIIndex = (currentKGIIndex - 1 + KGIData.length) % KGIData.length;
     }
-    updateData(currentKGIIndex, 'KGI');
+    updateData(currentKGIIndex, 'KGI', direction);
 }
 
 // ฟังก์ชันเพื่อเปลี่ยนข้อมูล KPI เมื่อคลิกปุ่มซ้ายหรือขวา
@@ -132,7 +188,7 @@ function changeKPIData(direction) {
     } else if (direction == 'left') {
         currentKPIIndex = (currentKPIIndex - 1 + KPIData.length) % KPIData.length;
     }
-    updateData(currentKPIIndex, 'KPI');
+    updateData(currentKPIIndex, 'KPI', direction);
 }
 
 function handleAjaxSuccess() {
@@ -146,7 +202,6 @@ function handleAjaxSuccess() {
         setProgress(this, percentage);
     });
 }
-
 
 
 function setProgress(element, percentage) {
@@ -164,10 +219,16 @@ function setProgress(element, percentage) {
     progressLeft.style.borderColor = colorLeft;
 
     // เปลี่ยนสีของ ::after โดยใช้ CSS custom property
-    $(element).css('--color-after', colorAfter); // ใช้ CSS custom property
+    $(element).css('--color-after', colorAfter);
 
-    // อัปเดตข้อความแสดงเปอร์เซ็นต์
-    progressValue.textContent = `${percentage}%`;
+    // เพิ่มเอฟเฟกต์เลื่อนค่าเปอร์เซ็นต์
+    progressValue.style.opacity = 0; // ซ่อนข้อความเก่าชั่วคราว
+    // progressValue.style.transform = 'translateY(-10px)'; // ขยับข้อความขึ้น
+    setTimeout(() => {
+        progressValue.textContent = `${percentage}%`; // เปลี่ยนข้อความใหม่
+        progressValue.style.opacity = 1; // แสดงข้อความใหม่
+        // progressValue.style.transform = 'translateY(0)'; // กลับมาตำแหน่งเดิม
+    }, 300); // เวลาที่ตรงกับ transition ใน CSS
 
     // คำนวณการหมุน
     if (percentage <= 50) {
@@ -178,3 +239,4 @@ function setProgress(element, percentage) {
         progressLeft.style.transform = `rotate(${((percentage - 50) / 50) * 180}deg)`;
     }
 }
+

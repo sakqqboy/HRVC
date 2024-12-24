@@ -272,6 +272,8 @@
     font-size: 24px;
     font-weight: bold;
     display: block;
+    transition: transform 0.1s ease;
+    /* เพิ่มเอฟเฟกต์เมื่อเปลี่ยนค่า */
 }
 
 .total-achievement {
@@ -392,6 +394,8 @@
 }
 
 .progress-bar {
+    transition: width 1.5s ease-in-out;
+    /* ความยาวเวลา 1.5 วินาที */
     border-radius: 5px;
     height: 12px;
 }
@@ -598,7 +602,7 @@ h6.dashboard-kpi-title {
     border-style: dotted;
     margin-top: 5px;
     margin-bottom: 5px;
-    width: 392.5px;
+    /* width: 350.5px; */
     height: 0px;
     stroke-width: 1px;
 }
@@ -757,6 +761,97 @@ h6.dashboard-kpi-title {
     color: #333333;
 }
 
+/* Animation สำหรับข้อความเลื่อนออกไปทางซ้าย */
+@keyframes slide-out-left {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(-30%);
+        opacity: 0;
+    }
+}
+
+/* Animation สำหรับข้อความเลื่อนเข้าจากขวา */
+@keyframes slide-in-left {
+    0% {
+        transform: translateX(30%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Animation สำหรับข้อความเลื่อนออกไปทางขวา */
+@keyframes slide-out-right {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(30%);
+        opacity: 0;
+    }
+}
+
+/* Animation สำหรับข้อความเลื่อนเข้าจากซ้าย */
+@keyframes slide-in-right {
+    0% {
+        transform: translateX(-30%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* คลาสสำหรับเลื่อนออกไปทางซ้าย */
+.slide-out-animation-left {
+    animation: slide-out-left 0.3s forwards;
+}
+
+/* คลาสสำหรับเลื่อนเข้าจากขวา */
+.slide-in-animation-left {
+    animation: slide-in-left 0.3s forwards;
+}
+
+/* คลาสสำหรับเลื่อนออกไปทางขวา */
+.slide-out-animation-right {
+    animation: slide-out-right 0.3s forwards;
+}
+
+/* คลาสสำหรับเลื่อนเข้าจากซ้าย */
+.slide-in-animation-right {
+    animation: slide-in-right 0.3s forwards;
+}
+
+/* เพิ่ม animation สำหรับการขยับข้อความ */
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* เพิ่ม class สำหรับการขยับข้อความ */
+.bounce-animation {
+    animation: bounce 0.5s ease-in-out;
+}
 
 @media (max-width: 768px) {
     .show-fade-one {
