@@ -81,6 +81,7 @@ else:
     border-style: solid;
     position: absolute;
     top: 0;
+    animation: progress-fill 1s linear forwards;
 }
 
 .progress .progress-left .progress-bar {
@@ -122,6 +123,15 @@ else:
     border-color: #CCD7FF;
     /* สีเริ่มต้น */
 }
+
+/* 
+.progress-bar {
+    transition: transform 0.5s ease-in-out;
+}
+
+.progress-value {
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+} */
 </style>
 
 <div class="tab-pane fade show active" role="tabpanel" id="tab-content-container">
@@ -170,6 +180,7 @@ else:
                 </div>
 
                 <div class="card bg-white" id="KFI" style="border: none;">
+                    <!-- <div id="kfi-slide"> -->
                     <div class="key-title-container" id="content-0">
                         <div class="col-9 d-flex">
                             <span class="key-total"
@@ -227,9 +238,10 @@ else:
                             <strong class="bold-text" id="KFI-result-0">N/A</strong>
                         </div>
                     </div>
+                    <!-- </div> -->
                 </div>
 
-                <div class="d-flex justify-content-between align-items-center mt-3">
+                <div class="d-flex justify-content-between align-items-center mt-3" id="content-0-data">
                     <div class="col-4 text-start">
                         <p class="small-text text-muted mb-0"><?= Yii::t('app', 'Last Updated on') ?></p>
                         <strong class="small-text" id="KFI-last-0">N/A</strong>
@@ -410,7 +422,8 @@ else:
                         </div>
                         <!-- Right Section -->
                         <div class="col-5 text-end">
-                            <span class="completion-percentage"><?= $contentDetail['KPI']['showPercent'] ?>%</span>
+                            <span class="completion-percentage"
+                                id="completion-percentage"><?= $contentDetail['KPI']['showPercent'] ?>%</span>
                             <span class="total-achievement"><?= Yii::t('app', 'Completed') ?></span>
                         </div>
                         <div class="col-12 pt-3 d-flex justify-content-between">
@@ -722,6 +735,29 @@ function chengeButtonKPI(id) {
     });
 
 }
+document.addEventListener("DOMContentLoaded", () => {
+    const progressBar = document.getElementById("progress-bar");
+
+    // ตรวจสอบว่า element มีอยู่จริง
+    if (!progressBar) {
+        console.error("Progress bar element not found");
+        return;
+    }
+
+    // ดึงค่าเป้าหมายจาก data-target
+    const targetValue = parseInt(progressBar.getAttribute("data-target"), 10);
+
+    if (isNaN(targetValue)) {
+        console.error("Invalid target value");
+        return;
+    }
+
+    // อัปเดตความกว้างของ Progress Bar
+    setTimeout(() => {
+        progressBar.style.width = `${targetValue}%`;
+        progressBar.setAttribute("aria-valuenow", targetValue);
+    }, 200); // เริ่มหลังจาก 200ms เพื่อให้เห็นการเปลี่ยนแปลงชัดเจน
+});
 </script>
 
 <?php endif; ?>
