@@ -56,4 +56,9 @@ class Kpi extends \backend\models\hrvc\master\KpiMaster
         }
         return $date;
     }
+    public static function kpiName($kpiId)
+    {
+        $kpi = Kpi::find()->select('kpiName')->where(["kpiId" => $kpiId])->asArray()->one();
+        return $kpi["kgiName"];
+    }
 }

@@ -26,17 +26,19 @@ $this->title = "Dashboard"
             <div class="col-lg-8 p-3">
                 <div class="dashboard-tabs">
                     <?= $this->render('dashbord_tabs', [
-                'companyId' => $employeeProfile['companyId'],
-                'teamId' => $employeeProfile['teamId'],
-                'employeeId' => $employeeProfile['employeeId']
-            ]) ?>
+                        'companyId' => $employeeProfile['companyId'],
+                        'teamId' => $employeeProfile['teamId'],
+                        'employeeId' => $employeeProfile['employeeId']
+                    ]) ?>
                 </div>
             </div>
 
             <!-- Navigation -->
             <div class="col-lg-4 p-3">
                 <div class="dashboard-navigation">
-                    <?= $this->render('dashbord_navigation') ?>
+                    <?= $this->render('dashbord_navigation', [
+                        'pendingApprove' => $pendingApprove
+                    ]) ?>
                 </div>
             </div>
         </div>

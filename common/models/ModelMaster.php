@@ -176,6 +176,40 @@ class ModelMaster extends \yii\db\ActiveRecord
             return '';
         }
     }
+    public static function timeDateNumber($dateTime)
+    {
+        $textTime = '';
+        if ($dateTime != '') {
+            $dateTimeArr = explode(' ', $dateTime);
+            if (count($dateTimeArr) > 0) {
+                $fullDate = $dateTimeArr[0];
+                if (count($dateTimeArr) > 1) {
+                    $fullTime = $dateTimeArr[1];
+                    $timeArr = explode(':', $fullTime);
+                    if ((int)$timeArr[0] >= 12) {
+                        $textTime = 'PM';
+                        if ((int)$timeArr[0] == 12) {
+                            $textTime = '12:' . $timeArr[1] . ' PM';
+                        } else {
+                            $time = (int)$timeArr[0] - 12;
+                            $textTime = $time . ':' . $timeArr[1] . ' PM';
+                        }
+                    } else {
+                        $textTime = (int)$timeArr[0] . ':' . $timeArr[1] . ' AM';
+                    }
+                }
+                //throw new Exception($fullDate);
+                $dateArr = explode('-', $fullDate);
+                $year = $dateArr[0];
+                $month = $dateArr[1];
+                $date = (int)$dateArr[2];
+                $text = $textTime . ', ' . $date . '/' . $month . '/' . $year;
+                return $text;
+            }
+        } else {
+            return '';
+        }
+    }
     public static function timeText($time)
     {
         $timeArr = explode(':', $time);

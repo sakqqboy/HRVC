@@ -70,4 +70,9 @@ class Kgi extends \backend\models\hrvc\master\KgiMaster
         }
         return $detail;
     }
+    public static function kgiName($kgiId)
+    {
+        $kgi = Kgi::find()->select('kgiName')->where(["kgiId" => $kgiId])->asArray()->one();
+        return $kgi["kgiName"];
+    }
 }

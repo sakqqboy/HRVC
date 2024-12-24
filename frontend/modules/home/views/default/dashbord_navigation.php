@@ -5,7 +5,7 @@
             <li class="col-6 nav-item text-center">
                 <a class="nav-link active" id="upcoming-schedule-tab" data-bs-toggle="tab" href="#upcoming-schedule"
                     role="tab" aria-controls="upcoming-schedule" aria-selected="true">
-                    <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/calendar-time.svg" alt="Company"
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/calendar-time.svg" alt="Company"
                         class="pim-icon" style="width: 14px; height: 14px;">
                     Upcoming Schedule
                 </a>
@@ -13,7 +13,7 @@
             <li class="col-6 nav-item text-center">
                 <a class="nav-link" id="pending-approvals-tab" data-bs-toggle="tab" href="#pending-approvals" role="tab"
                     aria-controls="pending-approvals" aria-selected="false">
-                    <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/3person.svg" alt="Company" class="pim-icon"
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/3person.svg" alt="Company" class="pim-icon"
                         style="width: 14px; height: 14px;">
                     Pending Approvals
                 </a>
@@ -31,7 +31,9 @@
 
         <!-- Pending Approvals -->
         <div class="tab-pane fade " id="pending-approvals" role="tabpanel" aria-labelledby="pending-approvals-tab">
-            <?= $this->render('waiting_approval') ?>
+            <?= $this->render('waiting_approval', [
+                'pendingApprove' => $pendingApprove
+            ]) ?>
 
         </div>
     </div>

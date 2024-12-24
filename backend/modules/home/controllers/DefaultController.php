@@ -4,8 +4,16 @@ namespace backend\modules\home\controllers;
 
 use backend\models\hrvc\Branch;
 use backend\models\hrvc\Employee;
+use backend\models\hrvc\Kgi;
+use backend\models\hrvc\KgiEmployeeHistory;
 use backend\models\hrvc\KgiTeam;
 use backend\models\hrvc\KgiTeamHistory;
+use backend\models\hrvc\Kpi;
+use backend\models\hrvc\KpiEmployeeHistory;
+use backend\models\hrvc\KpiTeamHistory;
+use backend\models\hrvc\User;
+use common\models\ModelMaster;
+use Exception;
 use yii\web\Controller;
 
 /**
@@ -28,13 +36,195 @@ class DefaultController extends Controller
     }
     public function actionPendingApproval($role, $employeeId)
     {
-        $employeeBranchId = Employee::EmployeeDetail($employeeId)["branchId"];
-        $kgiTeam = KgiTeam::find()
-            ->select('kgiId')
-            ->where(["status" => 88])
-            ->groupBy('kgiId')
-            ->all();
-        $data = [];
+        $employeeDetail = Employee::EmployeeDetail($employeeId);
+        //throw new Exception($employeeId);
+        $kgiEmployee = [];
+        if ($role < 3) { //normal staff
+            $kgiEmployee = KgiEmployeeHistory::find()
+                ->alias('keh')
+                ->select('ke.kgiEmployeeId,keh.updateDateTime,keh.createrId,ke.kgiId')
+                ->JOIN("LEFT JOIN", "kgi_employee ke", "ke.kgiEmployeeId=keh.kgiEmployeeId")
+                ->where(["keh.status" => 88, "ke.employeeId" => $employeeId])
+                ->asArray()
+                ->all();
+            $kpiEmployee = KpiEmployeeHistory::find()
+                ->alias('keh')
+                ->select('ke.kpiEmployeeId,keh.updateDateTime,keh.createrId,ke.kgiId')
+                ->JOIN("LEFT JOIN", "kpi_employee ke", "ke.kpiEmployeeId=keh.kpiEmployeeId")
+                ->where(["keh.status" => 88, "ke.employeeId" => $employeeId])
+                ->asArray()
+                ->all();
+        }
+        if ($role == 3) { //team leader see just in their team
+            $kgiEmployee = KgiEmployeeHistory::find()
+                ->alias('keh')
+                ->select('ke.kgiEmployeeId,keh.updateDateTime,keh.createrId,ke.kgiId')
+                ->JOIN("LEFT JOIN", "kgi_employee ke", "ke.kgiEmployeeId=keh.kgiEmployeeId")
+                ->JOIN("LEFT JOIN", "employee e", "e.employeeId=ke.employeeId")
+                ->where(["keh.status" => 88, "e.teamId" => $employeeDetail["teamId"]])
+                ->asArray()
+                ->all();
+            $kgiTeam = KgiTeamHistory::find()
+                ->alias('kth')
+                ->select('kt.kgiTeamId,kth.updateDateTime,kth.createrId,kt.kgiId')
+                ->JOIN("LEFT JOIN", "kgi_team kt", "kt.kgiTeamId=kth.kgiTeamId")
+                ->where(["kth.status" => 88, "kt.teamId" => $employeeDetail["teamId"]])
+                ->asArray()
+                ->all();
+
+            $kpiEmployee = KpiEmployeeHistory::find()
+                ->alias('keh')
+                ->select('ke.kpiEmployeeId,keh.updateDateTime,keh.createrId,ke.kpiId')
+                ->JOIN("LEFT JOIN", "kpi_employee ke", "ke.kpiEmployeeId=keh.kpiEmployeeId")
+                ->JOIN("LEFT JOIN", "employee e", "e.employeeId=ke.employeeId")
+                ->where(["keh.status" => 88, "e.employeeId" => $employeeDetail["teamId"]])
+                ->asArray()
+                ->all();
+            $kpiTeam = KpiTeamHistory::find()
+                ->alias('kth')
+                ->select('kt.kpiTeamId,kth.updateDateTime,kth.createrId,kt.kpiId')
+                ->JOIN("LEFT JOIN", "kpi_team kt", "kt.kpiTeamId=kth.kpiTeamId")
+                ->where(["kth.status" => 88, "kt.teamId" => $employeeDetail["teamId"]])
+                ->asArray()
+                ->all();
+        }
+
+        if ($role > 3 && $role < 6) { //supervisor manager gm can see just in their branch
+            $kgiEmployee = KgiEmployeeHistory::find()
+                ->alias('keh')
+                ->select('ke.kgiEmployeeId,keh.updateDateTime,keh.createrId,ke.kgiId')
+                ->JOIN("LEFT JOIN", "kgi_employee ke", "ke.kgiEmployeeId=keh.kgiEmployeeId")
+                ->JOIN("LEFT JOIN", "kgi_branch kb", "kb.kgiId=ke.kgiId")
+                ->where([
+                    "keh.status" => 88,
+                    "kb.branchId" => $employeeDetail["branchId"],
+                    "kb.status" => 1
+                ])
+                ->asArray()
+                ->all();
+            $kgiTeam = KgiTeamHistory::find()
+                ->alias('kth')
+                ->select('kt.kgiTeamId,kth.updateDateTime,kth.createrId,kt.kgiId')
+                ->JOIN("LEFT JOIN", "kgi_team kt", "kt.kgiTeamId=kth.kgiTeamId")
+                ->JOIN("LEFT JOIN", "kgi_branch kb", "kb.kgiId=kt.kgiId")
+                ->where([
+                    "kth.status" => 88,
+                    "kb.branchId" => $employeeDetail["branchId"],
+                    "kb.status" => 1,
+                    "kt.status" => 1
+                ])
+                ->asArray()
+                ->all();
+
+            $kpiEmployee = KpiEmployeeHistory::find()
+                ->alias('keh')
+                ->select('ke.kpiEmployeeId,keh.updateDateTime,keh.createrId,ke.kpiId')
+                ->JOIN("LEFT JOIN", "kpi_employee ke", "ke.kpiEmployeeId=keh.kpiEmployeeId")
+                ->JOIN("LEFT JOIN", "kpi_branch kb", "kb.kpiId=ke.kpiId")
+                ->where([
+                    "keh.status" => 88,
+                    "kb.branchId" => $employeeDetail["branchId"],
+                    "kb.status" => 1
+                ])
+                ->asArray()
+                ->all();
+            $kpiTeam = KpiTeamHistory::find()
+                ->alias('kth')
+                ->select('kt.kpiTeamId,kth.updateDateTime,kth.createrId,kt.kpiId')
+                ->JOIN("LEFT JOIN", "kpi_team kt", "kt.kpiTeamId=kth.kpiTeamId")
+                ->JOIN("LEFT JOIN", "kpi_branch kb", "kb.kpiId=kt.kpiId")
+                ->where([
+                    "kth.status" => 88,
+                    "kb.branchId" => $employeeDetail["branchId"],
+                    "kb.status" => 1,
+                    "kt.status" => 1
+
+                ])
+                ->asArray()
+                ->all();
+        }
+        if ($role > 6) { //admin
+            $kgiEmployee = KgiEmployeeHistory::find()
+                ->alias('keh')
+                ->select('ke.kgiEmployeeId,keh.updateDateTime,keh.createrId,ke.kgiId')
+                ->JOIN("LEFT JOIN", "kgi_employee ke", "ke.kgiEmployeeId=keh.kgiEmployeeId")
+                ->where(["keh.status" => 88])
+                ->asArray()
+                ->all();
+            $kgiTeam = KgiTeamHistory::find()
+                ->alias('kth')
+                ->select('kt.kgiTeamId,kth.updateDateTime,kth.createrId,kt.kgiId')
+                ->JOIN("LEFT JOIN", "kgi_team kt", "kt.kgiTeamId=kth.kgiTeamId")
+                ->where(["kth.status" => 88])
+                ->asArray()
+                ->all();
+            $kpiEmployee = KpiEmployeeHistory::find()
+                ->alias('keh')
+                ->select('ke.kpiEmployeeId,keh.updateDateTime,keh.createrId,ke.kpiId')
+                ->JOIN("LEFT JOIN", "kpi_employee ke", "ke.kpiEmployeeId=keh.kpiEmployeeId")
+                ->where(["keh.status" => 88])
+                ->asArray()
+                ->all();
+            $kpiTeam = KpiTeamHistory::find()
+                ->alias('kth')
+                ->select('kt.kpiTeamId,kth.updateDateTime,kth.createrId,kt.kpiId')
+                ->JOIN("LEFT JOIN", "kpi_team kt", "kt.kpiTeamId=kth.kpiTeamId")
+                ->where(["kth.status" => 88])
+                ->asArray()
+                ->all();
+        }
+        if (isset($kgiEmployee) && count($kgiEmployee) > 0) {
+            $i = 0;
+            foreach ($kgiEmployee as $ke):
+                $data["kgiEmployee"][$i] = [
+                    "kgiEmployeeId" => $ke["kgiEmployeeId"],
+                    "name" => "Target Changing",
+                    "kgiName" => Kgi::kgiName($ke["kgiId"]),
+                    "updateDateTime" => ModelMaster::timeDateNumber($ke["updateDateTime"]),
+                    "employee" => User::employeeNameByuserId($ke["createrId"])
+                ];
+                $i++;
+            endforeach;
+        }
+        if (isset($kgiTeam) && count($kgiTeam) > 0) {
+            $i = 0;
+            foreach ($kgiTeam as $kt):
+                $data["kgiTeam"][$i] = [
+                    "kgiTeamId" => $kt["kgiTeamId"],
+                    "name" => "Target Changing",
+                    "kgiName" => Kgi::kgiName($kt["kgiId"]),
+                    "updateDateTime" => ModelMaster::timeDateNumber($kt["updateDateTime"]),
+                    "employee" => User::employeeNameByuserId($kt["createrId"])
+                ];
+                $i++;
+            endforeach;
+        }
+        if (isset($kpiEmployee) && count($kpiEmployee) > 0) {
+            $i = 0;
+            foreach ($kpiEmployee as $ke):
+                $data["kpiEmployee"][$i] = [
+                    "kpiEmployeeId" => $ke["kpiEmployeeId"],
+                    "name" => "Target Changing",
+                    "kpiName" => Kpi::kpiName($ke["kpiId"]),
+                    "updateDateTime" =>  ModelMaster::timeDateNumber($ke["updateDateTime"]),
+                    "employee" => User::employeeNameByuserId($ke["createrId"])
+                ];
+                $i++;
+            endforeach;
+        }
+        if (isset($kpiTeam) && count($kpiTeam) > 0) {
+            $i = 0;
+            foreach ($kpiTeam as $kt):
+                $data["kpiTeam"][$i] = [
+                    "kpiTeamId" => $kt["kpiTeamId"],
+                    "kpiName" => "Target changed",
+                    "kpiName" => Kpi::kpiName($kt["kpiId"]),
+                    "updateDateTime" => ModelMaster::timeMonthDateYear($kt["updateDateTime"]),
+                    "employee" => User::employeeNameByuserId($kt["createrId"])
+                ];
+                $i++;
+            endforeach;
+        }
         return json_encode($data);
     }
 }

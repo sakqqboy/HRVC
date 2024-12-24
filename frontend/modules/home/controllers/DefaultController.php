@@ -38,7 +38,7 @@ class DefaultController extends Controller
         $employeeProfile = curl_exec($api);
         $employeeProfile = json_decode($employeeProfile, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'home/dashboard/pending-approval?role=' . $role . '&&employeeId=' . $employeeId);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'home/default/pending-approval?role=' . $role . '&&employeeId=' . $employeeId);
         $pendingApprove = curl_exec($api);
         $pendingApprove = json_decode($pendingApprove, true);
         // throw new \Exception(print_r($employeeProfile, true));
@@ -48,7 +48,11 @@ class DefaultController extends Controller
         // $employeeProfile = json_decode($employeeProfile, true);
         curl_close($api);
 
-        return $this->render('dashboard', ['employeeProfile' => $employeeProfile, 'userId' => $userId]);
+        return $this->render('dashboard', [
+            'employeeProfile' => $employeeProfile,
+            'userId' => $userId,
+            'pendingApprove' => $pendingApprove
+        ]);
     }
 
     public function actionCompanyTab()
