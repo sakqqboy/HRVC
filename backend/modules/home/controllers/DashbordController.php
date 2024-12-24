@@ -326,7 +326,7 @@ class DashbordController extends Controller
             'KPI'=>  ['kpiCount' => $kpiCount,'KPIData' => $kpiData,'showPercent' => $totlePercentKPI]
         ];
        
-        return json_encode($data );
+        return json_encode($data);
     }
     
     public function actionDashbordTeam($teamId, $userId, $role)
