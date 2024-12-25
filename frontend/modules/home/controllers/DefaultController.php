@@ -141,6 +141,7 @@ class DefaultController extends Controller
         $userId = Yii::$app->user->id;
         $groupId = Group::currentGroupId();
         $role = UserRole::userRight();
+        throw new Exception( $employeeId);
         if ($groupId == null) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
         }

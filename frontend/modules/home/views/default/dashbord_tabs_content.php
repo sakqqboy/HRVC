@@ -605,8 +605,8 @@ else:
         // เตรียม KPIData
         foreach ($contentDetail['KPI']['KPIData'] as $item) {
             $kpiData[] = [
-                'target' => formatNumber($item['target'], 2),
-                'result' => formatNumber($item['result'], 2),
+                'target' => !empty($item['target']) ? formatNumber($item['target'], 2) : '0.00',
+                'result' => !empty($item['result']) ? formatNumber($item['result'], 2) : '0.00',
                 'percentage' => floatval($item['percentage']),
                 'name' => $item['name'],
                 'last' => $item['last'] ?? '-',
@@ -620,8 +620,8 @@ else:
         // เตรียม KGIData
         foreach ($contentDetail['KGI']['KGIData'] as $item) {
             $kgiData[] = [
-                'target' => formatNumber($item['target'], 2),
-                'result' => formatNumber($item['result'], 2),
+                'target' => !empty($item['target']) ? formatNumber($item['target'], 2) : '0.00',
+                'result' => !empty($item['result']) ? formatNumber($item['result'], 2) : '0.00',
                 'percentage' => floatval($item['percentage']),
                 'name' => $item['name'],
                 'last' => $item['last'] ?? '-',
@@ -636,8 +636,8 @@ else:
             // เตรียม KFIData
             foreach ($contentDetail['KFI']['KFIData'] as $item) {
                 $kfiData[] = [
-                    'target' => formatNumber($item['target'], 2),
-                    'result' => formatNumber($item['result'], 2),
+                    'target' => !empty($item['target']) ? formatNumber($item['target'], 2) : '0.00',
+                    'result' => !empty($item['result']) ? formatNumber($item['result'], 2) : '0.00',
                     'percentage' => floatval($item['percentage']),
                     'name' => $item['name'],
                     'last' => $item['last'] ?? '-',
