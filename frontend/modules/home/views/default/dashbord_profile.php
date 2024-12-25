@@ -51,7 +51,7 @@
                     Employee ID:
                 </strong>
                 <!-- เอาemploye number -->
-                <?= $employeeProfile['employeeId'] ?>
+                <?= $employeeProfile['employeeNumber'] ?>
             </li>
             <li>
                 <strong>
