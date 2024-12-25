@@ -1916,6 +1916,11 @@ class DashbordController extends Controller
                         $time = explode(' ', $history["createDateTime"]);
                         // $employeeId = Employee::employeeId($history["createrId"]);
                         $data['kficom' . $history["kfiHistoryId"]] = [
+                           "id" => $history["kfiId"],
+                            "historyId" => $history["kfiHistoryId"],
+                            "typeId" => '0',
+                            "type" => 'company',
+                            "page" => 'kfi',
                             "title" => $history["kfiName"],
                             "description" => $history["description"],
                             "createDate" => ModelMaster::engDateHr($history["createDateTime"]),
@@ -1934,6 +1939,11 @@ class DashbordController extends Controller
                         $time = explode(' ', $history["createDateTime"]);
                         // $employeeId = Employee::employeeId($history["createrId"]);
                         $data['kpicom' . $history["kpiHistoryId"]] = [
+                            "id" => $history["kpiId"],
+                            "historyId" => $history["kpiHistoryId"],
+                            "typeId" => '0',
+                            "type" => 'company',
+                            "page" => 'kpi',
                             "title" => $history["kpiName"],
                             "description" => $history["description"],
                             "creater" => User::employeeNameByuserId($history["createrId"]),
@@ -1952,6 +1962,11 @@ class DashbordController extends Controller
                         $time = explode(' ', $history["createDateTime"]);
                         // $employeeId = Employee::employeeId($history["createrId"]);
                         $data['kgicom' . $history["kgiHistoryId"]] = [
+                            "id" => $history["kgiId"],
+                            "historyId" => $history["kgiHistoryId"],
+                            "typeId" => '0',
+                            "type" => 'company',
+                            "page" => 'kgi',
                             "title" => $history["kgiName"],
                             "description" => $history["description"],
                             "creater" => User::employeeNameByuserId($history["createrId"]),
@@ -2076,6 +2091,11 @@ class DashbordController extends Controller
                                 $time = explode(' ', $history["createDateTime"]);
                                 // $employeeId = Employee::employeeId($history["createrId"]);
                                 $data['kgiteam' . $history["kgiTeamHistoryId"]] = [
+                                    "id" => $history["kgiId"],
+                                    "historyId" => $history["kgiTeamHistoryId"],
+                                    "typeId" => $history["kgiTeamId"],
+                                    "type" => 'team',
+                                    "page" => 'kgi',
                                     "title" => $history["kgiName"],
                                     "description" => $history["detail"],
                                     "creater" => User::employeeNameByuserId($history["createrId"]),
@@ -2094,6 +2114,11 @@ class DashbordController extends Controller
                                 $time = explode(' ', $teamhistory["createDateTime"]);
                                 // $employeeId = Employee::employeeId($teamhistory["createrId"]);
                                 $data['kpiteam' . $teamhistory["kpiTeamHistoryId"]] = [
+                                    "id" => $teamhistory["kpiId"],
+                                    "historyId" => $teamhistory["kpiTeamHistoryId"],
+                                    "typeId" => $teamhistory["kpiTeamId"],
+                                    "type" => 'team',
+                                    "page" => 'kpi',
                                     "title" => $teamhistory["kpiName"],
                                     "description" => $teamhistory["detail"],
                                     "creater" => User::employeeNameByuserId($teamhistory["createrId"]),
@@ -2219,6 +2244,11 @@ class DashbordController extends Controller
                         $time = explode(' ', $employeehistory["createDateTime"]);
                         // $employeeId = Employee::employeeId($employeehistory["createrId"]);
                         $data['kgiself' . $employeehistory["kgiEmployeeHistoryId"]] = [
+                            "id" => $employeehistory["kgiId"],
+                            "historyId" => $employeehistory["kgiEmployeeHistoryId"],
+                            "typeId" => $employeehistory["kgiEmployeeId"],
+                            "type" => 'employee',
+                            "page" => 'kgi',
                             "title" => $employeehistory["kgiName"],
                             "description" => $employeehistory["detail"],  // Use kgi description
                             "createDate" => ModelMaster::engDateHr($employeehistory["createDateTime"]),
@@ -2237,6 +2267,11 @@ class DashbordController extends Controller
                         $time = explode(' ', $employeehistory["createDateTime"]);
                         // $employeeId = Employee::employeeId($employeehistory["createrId"]);
                         $data['kpiself' . $employeehistory["kpiEmployeeHistoryId"]] = [
+                            "id" => $employeehistory["kpiId"],
+                            "historyId" => $employeehistory["kpiEmployeeHistoryId"],
+                            "typeId" => $employeehistory["kpiEmployeeId"],
+                            "type" => 'employee',
+                            "page" => 'kpi',
                             "title" => $employeehistory["kpiName"],
                             "description" => $employeehistory["detail"],  // Use kpi description
                             "createDate" => ModelMaster::engDateHr($employeehistory["createDateTime"]),
@@ -2364,6 +2399,11 @@ class DashbordController extends Controller
                             $time = explode(' ', $history["createDateTime"]);
                             // $employeeId = Employee::employeeId($history["createrId"]);
                             $data['kgiteam' . $history["kgiTeamHistoryId"]] = [
+                                "id" => $history["kgiId"],
+                                "historyId" => $history["kgiTeamHistoryId"],
+                                "typeId" => $history["kgiTeamId"],
+                                "type" => 'team',
+                                "page" => 'kgi',
                                 "title" => $history["kgiName"],
                                 "description" => $history["detail"],
                                 "creater" => User::employeeNameByuserId($history["createrId"]),
@@ -2382,6 +2422,11 @@ class DashbordController extends Controller
                             $time = explode(' ', $teamhistory["createDateTime"]);
                             // $employeeId = Employee::employeeId($teamhistory["createrId"]);
                             $data['kpiteam' . $teamhistory["kpiTeamHistoryId"]] = [
+                                "id" => $teamhistory["kpiId"],
+                                "historyId" => $teamhistory["kpiTeamHistoryId"],
+                                "typeId" => $teamhistory["kpiTeamId"],
+                                "type" => 'team',
+                                "page" => 'kpi',
                                 "title" => $teamhistory["kpiName"],
                                 "description" => $teamhistory["detail"],
                                 "creater" => User::employeeNameByuserId($teamhistory["createrId"]),
@@ -2504,6 +2549,11 @@ class DashbordController extends Controller
                     foreach ($kgiEmployeeHistory as $employeehistory) :
                         $time = explode(' ', $employeehistory["createDateTime"]);
                         $data['kgiself' . $employeehistory["kgiEmployeeHistoryId"]] = [
+                            "id" => $employeehistory["kgiId"],
+                            "historyId" => $employeehistory["kgiEmployeeHistoryId"],
+                            "typeId" => $employeehistory["kgiEmployeeId"],
+                            "type" => 'employee',
+                            "page" => 'kgi',
                             "title" => $employeehistory["kgiName"],
                             "description" => $employeehistory["detail"],  // Use kgi description
                             "createDate" => ModelMaster::engDateHr($employeehistory["createDateTime"]),
@@ -2521,6 +2571,11 @@ class DashbordController extends Controller
                     foreach ($kpiEmployeeHistory as $employeehistory) :
                         $time = explode(' ', $employeehistory["createDateTime"]);
                         $data['kpiself' . $employeehistory["kpiEmployeeHistoryId"]] = [
+                            "id" => $employeehistory["kpiId"],
+                            "historyId" => $employeehistory["kpiEmployeeHistoryId"],
+                            "typeId" => $employeehistory["kpiEmployeeId"],
+                            "type" => 'employee',
+                            "page" => 'kpi',
                             "title" => $employeehistory["kpiName"],
                             "description" => $employeehistory["detail"],  // Use kpi description
                             "createDate" => ModelMaster::engDateHr($employeehistory["createDateTime"]),
@@ -2646,6 +2701,11 @@ class DashbordController extends Controller
                  foreach ($kgiEmployeeHistory as $employeehistory) :
                      $time = explode(' ', $employeehistory["createDateTime"]);
                      $data['kgiself' . $employeehistory["kgiEmployeeHistoryId"]] = [
+                        "id" => $employeehistory["kgiId"],
+                        "historyId" => $employeehistory["kgiEmployeeHistoryId"],
+                        "typeId" => $employeehistory["kgiEmployeeId"],
+                        "type" => 'employee',
+                        "page" => 'kgi',
                          "title" => $employeehistory["kgiName"],
                          "description" => $employeehistory["detail"],  // Use kgi description
                          "createDate" => ModelMaster::engDateHr($employeehistory["createDateTime"]),
@@ -2663,6 +2723,11 @@ class DashbordController extends Controller
                  foreach ($kpiEmployeeHistory as $employeehistory) :
                      $time = explode(' ', $employeehistory["createDateTime"]);
                      $data['kpiself' . $employeehistory["kpiEmployeeHistoryId"]] = [
+                        "id" => $employeehistory["kpiId"],
+                        "historyId" => $employeehistory["kpiEmployeeHistoryId"],
+                        "typeId" => $employeehistory["kpiEmployeeId"],
+                        "type" => 'employee',
+                        "page" => 'kpi',
                          "title" => $employeehistory["kpiName"],
                          "description" => $employeehistory["detail"],  // Use kpi description
                          "createDate" => ModelMaster::engDateHr($employeehistory["createDateTime"]),
