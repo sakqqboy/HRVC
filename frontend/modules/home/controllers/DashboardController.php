@@ -483,6 +483,7 @@ class DashboardController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'home/dashbord/upcoming-schedule?id=' . $Id . '&role=' . $role . '&companyId='.$companyId.'&teamId='.$teamId.'&employeeId='.$employeeId);
 		$upcoming = curl_exec($api);
 		$upcoming = json_decode($upcoming, true);
+        // throw new Exception(print_r($upcoming,true));
 
         curl_close($api);
 
