@@ -1470,6 +1470,7 @@ class DashbordController extends Controller
                             'main.updateDateTime',
                             'kgi_team.kgiId',
                             'kgi_team.teamId',
+                            'kgi_team.kgiTeamId',
                             'kgi.kgiName',
                             'kgi.companyId',
                         ])
@@ -1490,6 +1491,7 @@ class DashbordController extends Controller
                             ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
                             ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
                         ])
+                        ->andWhere(['IS NOT', 'kgi_team.kgiTeamId', null])
                         ->orderBy([
                             'main.year' => SORT_DESC,
                             'main.month' => SORT_DESC,
@@ -1519,6 +1521,7 @@ class DashbordController extends Controller
                             'main.updateDateTime',
                             'kpi_team.kpiId',
                             'kpi_team.teamId',
+                            'kpi_team.kpiTeamId',
                             'kpi.kpiName',
                             'kpi.companyId',
                         ])
@@ -1539,6 +1542,7 @@ class DashbordController extends Controller
                             ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
                             ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
                         ])
+                        ->andWhere(['IS NOT', 'kpi_team.kpiTeamId', null])
                         ->orderBy([
                             'main.year' => SORT_DESC,
                             'main.month' => SORT_DESC,
@@ -1639,6 +1643,7 @@ class DashbordController extends Controller
                         ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
                         ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
                     ])
+                    ->andWhere(['IS NOT', 'kgi_employee.kgiEmployeeId', null])
                     ->orderBy([
                         'main.year' => SORT_DESC,
                         'main.month' => SORT_DESC,
@@ -1690,6 +1695,7 @@ class DashbordController extends Controller
                         ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
                         ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
                     ])
+                    ->andWhere(['IS NOT', 'kpi_employee.kpiEmployeeId', null])
                     ->orderBy([
                         'main.year' => SORT_DESC,
                         'main.month' => SORT_DESC,
@@ -1983,6 +1989,7 @@ class DashbordController extends Controller
                             'main.updateDateTime',
                             'kgi_team.kgiId',
                             'kgi_team.teamId',
+                            'kgi_team.kgiTeamId',
                             'kgi.kgiName',
                             'kgi.companyId',
                         ])
@@ -2003,6 +2010,7 @@ class DashbordController extends Controller
                             ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
                             ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
                         ])
+                        ->andWhere(['IS NOT', 'kgi_team.kgiTeamId', null])
                         ->orderBy([
                             'main.year' => SORT_DESC,
                             'main.month' => SORT_DESC,
@@ -2032,6 +2040,7 @@ class DashbordController extends Controller
                             'main.updateDateTime',
                             'kpi_team.kpiId',
                             'kpi_team.teamId',
+                            'kpi_team.kpiTeamId',
                             'kpi.kpiName',
                             'kpi.companyId',
                         ])
@@ -2052,6 +2061,7 @@ class DashbordController extends Controller
                             ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
                             ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
                         ])
+                        ->andWhere(['IS NOT', 'kpi_team.kpiTeamId', null])
                         ->orderBy([
                             'main.year' => SORT_DESC,
                             'main.month' => SORT_DESC,
@@ -2141,6 +2151,7 @@ class DashbordController extends Controller
                    ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
                    ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
                ])
+               ->andWhere(['IS NOT', 'kgi_employee.kgiEmployeeId', null])
                ->orderBy([
                    'main.year' => SORT_DESC,
                    'main.month' => SORT_DESC,
@@ -2192,6 +2203,7 @@ class DashbordController extends Controller
                    ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
                    ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
                ])
+               ->andWhere(['IS NOT', 'kpi_employee.kpiEmployeeId', null])
                ->orderBy([
                    'main.year' => SORT_DESC,
                    'main.month' => SORT_DESC,
@@ -2265,6 +2277,7 @@ class DashbordController extends Controller
                             'main.updateDateTime',
                             'kgi_team.kgiId',
                             'kgi_team.teamId',
+                            'kgi_team.kgiTeamId',
                             'kgi.kgiName',
                             'kgi.companyId',
                         ])
@@ -2285,6 +2298,7 @@ class DashbordController extends Controller
                             ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
                             ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
                         ])
+                        ->andWhere(['IS NOT', 'kgi_team.kgiTeamId', null])
                         ->orderBy([
                             'main.year' => SORT_DESC,
                             'main.month' => SORT_DESC,
@@ -2314,6 +2328,7 @@ class DashbordController extends Controller
                             'main.updateDateTime',
                             'kpi_team.kpiId',
                             'kpi_team.teamId',
+                            'kpi_team.kpiTeamId',
                             'kpi.kpiName',
                             'kpi.companyId',
                         ])
@@ -2334,6 +2349,7 @@ class DashbordController extends Controller
                             ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
                             ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
                         ])
+                        ->andWhere(['IS NOT', 'kpi_team.kpiTeamId', null])
                         ->orderBy([
                             'main.year' => SORT_DESC,
                             'main.month' => SORT_DESC,
@@ -2423,6 +2439,7 @@ class DashbordController extends Controller
                    ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
                    ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
                ])
+               ->andWhere(['IS NOT', 'kgi_employee.kgiEmployeeId', null])
                ->orderBy([
                    'main.year' => SORT_DESC,
                    'main.month' => SORT_DESC,
@@ -2473,6 +2490,7 @@ class DashbordController extends Controller
                    ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
                    ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
                ])
+               ->andWhere(['IS NOT', 'kpi_employee.kpiEmployeeId', null])
                ->orderBy([
                    'main.year' => SORT_DESC,
                    'main.month' => SORT_DESC,
@@ -2563,6 +2581,7 @@ class DashbordController extends Controller
                 ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
                 ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
             ])
+            ->andWhere(['IS NOT', 'kgi_employee.kgiEmployeeId', null])
             ->orderBy([
                 'main.year' => SORT_DESC,
                 'main.month' => SORT_DESC,
@@ -2613,6 +2632,7 @@ class DashbordController extends Controller
                 ['between', 'main.nextCheckDate', new Expression('DATE_SUB(CURDATE(), INTERVAL 7 DAY)'), new Expression('CURDATE()')],
                 ['<=', 'main.nextCheckDate', new Expression('CURDATE()')],
             ])
+            ->andWhere(['IS NOT', 'kpi_employee.kpiEmployeeId', null])
             ->orderBy([
                 'main.year' => SORT_DESC,
                 'main.month' => SORT_DESC,
