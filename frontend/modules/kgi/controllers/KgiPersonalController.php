@@ -683,7 +683,7 @@ class KgiPersonalController extends Controller
 		$res["monthlyDetailHistoryText"] = "";
 		if ($kgiEmployeeHistoryId != 0) {
 			$kgiEmployeeHistory = KgiEmployeeHistory::find()
-				->where(["kgiTeamHistoryId" => $kgiEmployeeHistoryId])
+				->where(["kgiEmployeeHistoryId" => $kgiEmployeeHistoryId])
 				->asArray()
 				->one();
 			$year = $kgiEmployeeHistory["year"];
