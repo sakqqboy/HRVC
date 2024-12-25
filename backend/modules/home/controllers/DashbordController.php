@@ -1731,7 +1731,7 @@ class DashbordController extends Controller
                                 "historyId" => $employeehistory["kpiEmployeeHistoryId"],
                                 "typeId" => $employeehistory["kpiEmployeeId"],
                                 "type" => 'employee',
-                                "page" => 'kgi',
+                                "page" => 'kpi',
                                 "title" => $employeehistory["kpiName"],
                                 "description" => $employeehistory["detail"],  // Use kpi description
                                 "createDate" => ModelMaster::engDateHr($employeehistory["createDateTime"]),

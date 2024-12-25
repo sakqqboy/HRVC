@@ -107,7 +107,7 @@ function renderSchedule(data) {
 }
 
 function handleItemClick(page, type, id, historyId, typeId) {
-    alert(`page: ${page}\n type: ${type}\n id: ${id}\n historyId: ${historyId}\n typeId: ${typeId}`);
+    // alert(`page: ${page}\n type: ${type}\n id: ${id}\n historyId: ${historyId}\n typeId: ${typeId}`);
     // page = 'kfi';
     var url = $url + `home/dashboard/endcode-upcomming`;
     // alert(url);
