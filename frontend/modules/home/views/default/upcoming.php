@@ -74,20 +74,29 @@ function renderSchedule(data) {
             // alert(data.length);
             var count = 0;
             data.forEach(function(item) {
-                // count = count + 1; // Count starts from 1
+                // ดึงข้อมูลแต่ละค่า
                 var title = item.title && item.title.trim() ? item.title : "Update";
                 var description = item.description || "No description available";
                 var time = item.time || "No time specified";
                 var createDate = item.createDate || "No date specified";
-
-                var listItem = `
-                    <li class="schedule-item mt-5">
-                        <strong>${title}</strong> - ${description}<br>
-                        <span class="text-muted">${time}, ${createDate}</span>
-                    </li>
-                `;
-                $scheduleList.append(listItem);
+                var page = item.page || "No Data";
+                var type = item.type || "No Data";
+                var id = item.id || "No Data";
+                var historyId = item.historyId || "No Data";
+                var typeId = item.typeId || "No Data";
+                // ตรวจสอบว่า id, historyId และ typeId มีค่า ไม่ใช่ "No Data"
+                if (id != "No Data" && historyId != "No Data" && typeId != "No Data") {
+                    // สร้างรายการ HTML
+                    var listItem = `
+                        <li class="schedule-item mt-5" role="button" tabindex="0" onclick="handleItemClick('${page}', '${type}', '${id}', '${historyId}', '${typeId}')">
+                            <strong>${title}</strong> - ${description}<br>
+                            <span class="text-muted">${time}, ${createDate}</span>
+                        </li>
+                    `;
+                    $scheduleList.append(listItem);
+                }
             });
+
         } else {
             $scheduleList.append('<li class="text-muted">No schedule available.</li>');
         }
@@ -95,5 +104,31 @@ function renderSchedule(data) {
         console.error("Error processing data:", error);
         $scheduleList.append('<li class="text-muted">No schedule available.</li>');
     }
+}
+
+function handleItemClick(page, type, id, historyId, typeId) {
+    alert(`page: ${page}\n type: ${type}\n id: ${id}\n historyId: ${historyId}\n typeId: ${typeId}`);
+    page = 'kfi';
+    var url = $url + `home/dashboard/endcode-upcomming`;
+    // alert(url);
+    $.ajax({
+        type: "POST",
+        dataType: 'JSON',
+        url: url,
+        data: {
+            id: id,
+            historyId: historyId,
+            typeId: typeId,
+            page: page,
+            type: type
+        },
+        success: function(data) {
+            alert(JSON.stringify(data));
+            // param = data.param;
+            // const kpiUrl = $url + `kfi/view/kfi-history/` + param;
+            // alert(kpiUrl);
+            // window.location.href = kpiUrl;
+        },
+    });
 }
 </script>

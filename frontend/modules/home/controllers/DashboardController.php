@@ -89,6 +89,79 @@ class DashboardController extends Controller
 		return json_encode($res);
 	}
 
+    public function actionEndcodeUpcomming()
+    {
+        $id = Yii::$app->request->post("id", null);
+        $historyId = Yii::$app->request->post("historyId", null);
+        $typeId = Yii::$app->request->post("typeId", null);
+        $type = Yii::$app->request->post("type", null);
+        $page = Yii::$app->request->post("page", null);
+    
+        $res = [
+            "part" => "",
+            "param" => ""
+        ];
+    
+        if ($page === 'kfi') {
+            $res["part"] = "kfi/view/kfi-history/";
+            $res["param"] = ModelMaster::encodeParams([
+                "kfiId" => $id,
+                "kfiHistoryId" => $historyId,
+                "openTab" => 1
+            ]);
+        } elseif ($page === 'kpi') {
+            if ($type === 'company') {
+                $res["part"] = "kpi/view/kpi-history/";
+                $res["param"] = ModelMaster::encodeParams([
+                    "kpiId" => $id,
+                    "kpiHistoryId" => $historyId,
+                    "openTab" => 1
+                ]);
+            } elseif ($type === 'team') {
+                $res["part"] = "kpi/kpi-team/kpi-team-history/";
+                $res["param"] = ModelMaster::encodeParams([
+                    "kpiId" => $id,
+                    "kpiTeamHistoryId" => $historyId,
+                    "kpiTeamId" => $typeId
+                ]);
+            } elseif ($type === 'employee') {
+                $res["part"] = "kpi/kpi-personal/kpi-individual-history/";
+                $res["param"] = ModelMaster::encodeParams([
+                    "kpiId" => $id,
+                    "kpiEmployeeHistoryId" => $historyId,
+                    "kpiEmployeeId" => $typeId
+                ]);
+            }
+        } elseif ($page === 'kgi') {
+            if ($type === 'company') {
+                $res["part"] = "kgi/view/kgi-history/";
+                $res["param"] = ModelMaster::encodeParams([
+                    "kgiId" => $id,
+                    "kgiHistoryId" => $historyId,
+                    "openTab" => 1
+                ]);
+            } elseif ($type === 'team') {
+                $res["part"] = "kgi/kgi-team/kgi-team-history/";
+                $res["param"] = ModelMaster::encodeParams([
+                    "kgiId" => $id,
+                    "kgiTeamHistoryId" => $historyId,
+                    "kgiTeamId" => $typeId,
+                    "openTab" => 1
+                ]);
+            } elseif ($type === 'employee') {
+                $res["part"] = "kgi/kgi-personal/kgi-employee-history/";
+                $res["param"] = ModelMaster::encodeParams([
+                    "kgiId" => $id,
+                    "kgiEmployeeHistoryId" => $historyId,
+                    "kgiEmployeeId" => $typeId,
+                    "openTab" => 1
+                ]);
+            }
+        }
+    
+        return json_encode($res);
+    }
+    
 	public function actionChartDashbord()
     {
         $currentCategory = $_POST['currentCategory'] ?? '';  // Default to empty if not set
