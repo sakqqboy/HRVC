@@ -333,7 +333,7 @@ class DashbordController extends Controller
     {
         $employeeId = Employee::employeeId($userId);
 		$employee = Employee::EmployeeDetail($employeeId);
-        // if ($role <= 3) {
+        
 			$kgiTeams = KgiTeam::find()
 				->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,
 			kgi_team.teamId,kgi_team.target')
@@ -344,20 +344,7 @@ class DashbordController extends Controller
 				->orderBy("k.createDateTime DESC,t.teamName ASC")
 				->asArray()
 				->all();
-		// } else {
-		// 	$kgiTeams = KgiTeam::find()
-		// 		->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,
-		// 	kgi_team.teamId,kgi_team.target')
-		// 		->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_team.kgiId")
-		// 		->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
-		// 		->where(["kgi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
-		// 		->orderBy("k.createDateTime DESC,t.teamName ASC")
-		// 		->asArray()
-		// 		->all();
-		// }
-
-        // if ($role <= 3) {
-			$kpiTeams = KpiTeam::find()
+				$kpiTeams = KpiTeam::find()
 				->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,
 			kpi_team.teamId,kpi_team.target')
 				->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_team.kpiId")
@@ -367,17 +354,7 @@ class DashbordController extends Controller
 				->orderBy("k.createDateTime DESC,t.teamName ASC")
 				->asArray()
 				->all();
-		// } else {
-		// 	$kpiTeams = kpiTeam::find()
-		// 		->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,
-		// 	kpi_team.teamId,kpi_team.target')
-		// 		->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_team.kpiId")
-		// 		->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
-		// 		->where(["kpi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
-		// 		->orderBy("k.createDateTime DESC,t.teamName ASC")
-		// 		->asArray()
-		// 		->all();
-		// }
+
 
     
         // นับจำนวนของแต่ละคิวรี้
@@ -426,10 +403,10 @@ class DashbordController extends Controller
 					"name" => $kginame,
                     "companyId" => $kgiTeam["companyId"],
                     "target" => $kgiTeamHistory["target"],
+                    "result" => $kgiTeamHistory["result"],
                     "status" => $kgiTeamHistory["status"],
 					"quantRatio" => $kgiTeam["quantRatio"],
 					"code" => $kgiTeam["code"],
-					"result" => $kgiTeamHistory["result"],
 					"percentage" => $ratio, 
                     "amountType" => $kgiTeam["amountType"],
                     "active" => '',
