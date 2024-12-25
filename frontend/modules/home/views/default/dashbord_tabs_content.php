@@ -610,7 +610,7 @@ else:
             $kpiData[] = [
                 'target' => !empty($item['target']) ? formatNumber($item['target'], 2) : '0.00',
                 'result' => !empty($item['result']) ? formatNumber($item['result'], 2) : '0.00',
-                'percentage' => floatval($item['percentage']),
+                'percentage' => number_format(floatval($item['percentage']),2,'.',''),
                 'name' => $item['name'],
                 'last' => $item['last'] ?? '-',
                 'due' => $item['due'] ?? '-',
@@ -625,7 +625,7 @@ else:
             $kgiData[] = [
                 'target' => !empty($item['target']) ? formatNumber($item['target'], 2) : '0.00',
                 'result' => !empty($item['result']) ? formatNumber($item['result'], 2) : '0.00',
-                'percentage' => floatval($item['percentage']),
+                'percentage' => number_format(floatval($item['percentage']),2,'.',''),
                 'name' => $item['name'],
                 'last' => $item['last'] ?? '-',
                 'due' => $item['due'] ?? '-',
@@ -641,7 +641,7 @@ else:
                 $kfiData[] = [
                     'target' => !empty($item['target']) ? formatNumber($item['target'], 2) : '0.00',
                     'result' => !empty($item['result']) ? formatNumber($item['result'], 2) : '0.00',
-                    'percentage' => floatval($item['percentage']),
+                    'percentage' => number_format(floatval($item['percentage']),2,'.',''),
                     'name' => $item['name'],
                     'last' => $item['last'] ?? '-',
                     'due' => $item['due'] ?? '-',
