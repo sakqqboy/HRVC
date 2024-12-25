@@ -249,7 +249,7 @@ else:
                         <!-- แก้ไขจาก KFI-lasr-0 เป็น KFI-last-0 -->
                     </div>
                     <div class="col-4 text-center">
-                        <?php if ($role >= 5) { ?>
+                        <?php if ($role >= 5 && $contentDetail['KFI']['showPercent'] !== '') { ?>
 
                         <button class="btn-update btn-KFI" <?= $updateClickKFI ?> data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop2">
@@ -376,8 +376,8 @@ else:
                         <strong class="small-text" id="KGI-last-0">07/19/2024</strong>
                     </div>
                     <div class="col-4 text-center">
-                        <?php if ($role >= 5) { ?>
-                        <?php if ($tab == 'self') { ?>
+                        <?php if ($role >= 5 && $contentDetail['KGI']['showPercent'] !== '') { ?>
+                        <?php if ($tab == 'self' ) { ?>
                         <button class="btn-update btn-KGI" onclick="chengeButtonKGI(KGIData[currentKGIIndex].id)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-black.svg" class="mb-2"
                                 style="width: 12px; height: 12px;">
@@ -510,8 +510,8 @@ else:
                         <strong class="small-text" id="KPI-last-0">-</strong>
                     </div>
                     <div class="col-4 text-center">
-                        <?php if ($role >= 5) { ?>
-                        <?php if ($tab == 'self') { ?>
+                        <?php if ($role >= 5 && $contentDetail['KPI']['showPercent'] !== '') { ?>
+                        <?php if ($tab == 'self' ) { ?>
                         <!-- 
                         <a class="btn-update btn-KPI-0" onclick="changeKPIData('left')">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg" class="mb-2"
