@@ -149,15 +149,19 @@ $this->title = 'Team KGI View';
                                             <div class="col-12"><?= Yii::t('app', 'Target') ?></div>
                                             <div class="col-12 mt-3 number-pim">
                                                 <?php
-                                                $decimal = explode('.', $kgiTeamDetail["target"]);
-                                                if (isset($decimal[1])) {
-                                                    if ($decimal[1] == '00') {
-                                                        $show = $decimal[0];
+                                                if ($kgiTeamDetail["target"] != '') {
+                                                    $decimal = explode('.', $kgiTeamDetail["target"]);
+                                                    if (isset($decimal[1])) {
+                                                        if ($decimal[1] == '00') {
+                                                            $show = $decimal[0];
+                                                        } else {
+                                                            $show = $kgiTeamDetail["target"];
+                                                        }
                                                     } else {
                                                         $show = $kgiTeamDetail["target"];
                                                     }
                                                 } else {
-                                                    $show = $kgiTeamDetail["target"];
+                                                    $show = 0;
                                                 }
                                                 ?>
                                                 <?= $show ?><?= $kgiTeamDetail["amountType"] == 1 ? '%' : '' ?>
