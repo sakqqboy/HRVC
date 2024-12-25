@@ -2,7 +2,7 @@
 
 use yii\bootstrap5\ActiveForm;
 
-if (empty($contentDetail['KFI'] ?? null) && empty($contentDetail['KGI'] ?? null) && empty($contentDetail['KPI'] ?? null)):
+if (empty($contentDetail['KFI']['KFIData'] ?? null) && empty($contentDetail['KGI']['KGIData']  ?? null) && empty($contentDetail['KPI']['KPIData']  ?? null)):
 ?>
 <p>No data available.</p>
 <?php
@@ -157,7 +157,9 @@ else:
                         </div>
                         <!-- Right Section -->
                         <div class="col-5 text-end">
-                            <span class="completion-percentage"><?= $contentDetail['KFI']['showPercent'] ?>%</span>
+                            <span class="completion-percentage">
+                                <?= isset($contentDetail['KFI']['showPercent']) && $contentDetail['KFI']['showPercent'] !== '' ? $contentDetail['KFI']['showPercent'] : 0 ?>%
+                            </span>
                             <span class="total-achievement"><?= Yii::t('app', 'Total Achievement') ?></span>
                         </div>
                         <div class="col-12 pt-3 d-flex justify-content-between">
@@ -183,8 +185,7 @@ else:
                     <!-- <div id="kfi-slide"> -->
                     <div class="key-title-container" id="content-0">
                         <div class="col-9 d-flex">
-                            <span class="key-total"
-                                id="KFI-name-0"><?= Yii::t('app', 'New Foreign Subscribe Clients') ?></span>
+                            <span class="key-total" id="KFI-name-0"><?= Yii::t('app', '-') ?></span>
                         </div>
                         <div class="col-2 d-flex justify-content-between">
                             <span class="toggle-text">
@@ -226,7 +227,7 @@ else:
                                 Target
                             </small>
                             <br>
-                            <strong class="bold-text" id="KFI-target-0">N/A</strong>
+                            <strong class="bold-text" id="KFI-target-0">-</strong>
                         </div>
                         <div class="col-4 text-end">
                             <small class="small-text text-muted">
@@ -235,7 +236,7 @@ else:
                                     style="margin-top: 1px; margin-left: 3px;">
                             </small>
                             <br>
-                            <strong class="bold-text" id="KFI-result-0">N/A</strong>
+                            <strong class="bold-text" id="KFI-result-0">-</strong>
                         </div>
                     </div>
                     <!-- </div> -->
@@ -244,11 +245,11 @@ else:
                 <div class="d-flex justify-content-between align-items-center mt-3" id="content-0-data">
                     <div class="col-4 text-start">
                         <p class="small-text text-muted mb-0"><?= Yii::t('app', 'Last Updated on') ?></p>
-                        <strong class="small-text" id="KFI-last-0">N/A</strong>
+                        <strong class="small-text" id="KFI-last-0">-</strong>
                         <!-- แก้ไขจาก KFI-lasr-0 เป็น KFI-last-0 -->
                     </div>
                     <div class="col-4 text-center">
-                        <?php if ($role >= 5) { ?>
+                        <?php if ($role >= 5 && $contentDetail['KFI']['showPercent'] !== '') { ?>
 
                         <button class="btn-update btn-KFI" <?= $updateClickKFI ?> data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop2">
@@ -266,7 +267,7 @@ else:
                     </div>
                     <div class="col-4 text-end">
                         <p class="small-textKFI mb-0"><?= Yii::t('app', 'Due Update Date') ?></p>
-                        <strong class="small-text" id="KFI-due-0">N/A</strong>
+                        <strong class="small-text" id="KFI-due-0">-</strong>
                     </div>
                 </div>
 
@@ -291,7 +292,9 @@ else:
                         </div>
                         <!-- Right Section -->
                         <div class="col-5 text-end">
-                            <span class="completion-percentage"><?= $contentDetail['KGI']['showPercent'] ?>%</span>
+                            <span class="completion-percentage">
+                                <?= isset($contentDetail['KGI']['showPercent']) && $contentDetail['KGI']['showPercent'] !== '' ? $contentDetail['KGI']['showPercent'] : 0 ?>%
+                            </span>
                             <span class="total-achievement"><?= Yii::t('app', 'Total Achievement') ?></span>
                         </div>
                         <div class="col-12 pt-3 d-flex justify-content-between">
@@ -316,7 +319,7 @@ else:
                 <div class="card bg-white" id="KGI" style="border: none;">
                     <div class="key-title-container" id="content-KGI">
                         <div class="col-9 d-flex">
-                            <span class="key-total" id="KGI-name-0"><?= Yii::t('app', 'Key Goal Indicator') ?></span>
+                            <span class="key-total" id="KGI-name-0"><?= Yii::t('app', '-') ?></span>
                         </div>
                         <div class="col-2 d-flex justify-content-between">
                             <span class="toggle-text">
@@ -353,7 +356,7 @@ else:
                                 <?= Yii::t('app', 'Target') ?>
                             </small>
                             <br>
-                            <strong class="bold-text" id="KGI-target-0">N/A</strong>
+                            <strong class="bold-text" id="KGI-target-0">-</strong>
                         </div>
                         <div class="col-4 text-end">
                             <small class="small-text text-muted">
@@ -362,7 +365,7 @@ else:
                                     style="margin-top: 1px; margin-left: 3px;">
                             </small>
                             <br>
-                            <strong class="bold-text" id="KGI-result-0">N/A</strong>
+                            <strong class="bold-text" id="KGI-result-0">-</strong>
                         </div>
                     </div>
                 </div>
@@ -373,8 +376,8 @@ else:
                         <strong class="small-text" id="KGI-last-0">07/19/2024</strong>
                     </div>
                     <div class="col-4 text-center">
-                        <?php if ($role >= 5) { ?>
-                        <?php if ($tab == 'self') { ?>
+                        <?php if ($role >= 5 && $contentDetail['KGI']['showPercent'] !== '') { ?>
+                        <?php if ($tab == 'self' ) { ?>
                         <button class="btn-update btn-KGI" onclick="chengeButtonKGI(KGIData[currentKGIIndex].id)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-black.svg" class="mb-2"
                                 style="width: 12px; height: 12px;">
@@ -395,11 +398,11 @@ else:
                             <?= Yii::t('app', 'Locked') ?>
                         </button>
                         <?php } ?>
-                        <!-- <strong class="bold-text" id="KGI-count-0">N/A</strong> -->
+                        <!-- <strong class="bold-text" id="KGI-count-0">-</strong> -->
                     </div>
                     <div class="col-4 text-end">
                         <p class="small-textKGI mb-0"><?= Yii::t('app', 'Due Update Date') ?></p>
-                        <strong class="small-text" id="KGI-due-0">N/A</strong>
+                        <strong class="small-text" id="KGI-due-0">-</strong>
                     </div>
                 </div>
 
@@ -422,8 +425,9 @@ else:
                         </div>
                         <!-- Right Section -->
                         <div class="col-5 text-end">
-                            <span class="completion-percentage"
-                                id="completion-percentage"><?= $contentDetail['KPI']['showPercent'] ?>%</span>
+                            <span class="completion-percentage" id="completion-percentage">
+                                <?= isset($contentDetail['KPI']['showPercent']) && $contentDetail['KPI']['showPercent'] !== '' ? $contentDetail['KPI']['showPercent'] : 0 ?>%
+                            </span>
                             <span class="total-achievement"><?= Yii::t('app', 'Completed') ?></span>
                         </div>
                         <div class="col-12 pt-3 d-flex justify-content-between">
@@ -449,8 +453,7 @@ else:
                 <div class="card bg-white" id="KPI" style="border: none;">
                     <div class="key-title-container" id="content-KPI">
                         <div class="col-9 d-flex">
-                            <span class="key-total"
-                                id="KPI-name-0"><?= Yii::t('app', 'Key Performance Indicator') ?></span>
+                            <span class="key-total" id="KPI-name-0"><?= Yii::t('app', '-') ?></span>
                         </div>
                         <div class="col-2 d-flex justify-content-between">
                             <span class="toggle-text">
@@ -487,7 +490,7 @@ else:
                                 <?= Yii::t('app', 'Target') ?>
                             </small>
                             <br>
-                            <strong class="bold-text" id="KPI-target-0">N/A</strong>
+                            <strong class="bold-text" id="KPI-target-0">-</strong>
                         </div>
                         <div class="col-4 text-end">
                             <small class="small-text text-muted">
@@ -496,7 +499,7 @@ else:
                                     style="margin-top: 1px; margin-left: 3px;">
                             </small>
                             <br>
-                            <strong class="bold-text" id="KPI-result-0">N/A</strong>
+                            <strong class="bold-text" id="KPI-result-0">-</strong>
                         </div>
                     </div>
                 </div>
@@ -504,11 +507,11 @@ else:
                 <div class="d-flex justify-content-between align-items-center mt-3">
                     <div class="col-4 text-start">
                         <p class="small-text text-muted mb-0"><?= Yii::t('app', 'Last Updated on') ?></p>
-                        <strong class="small-text" id="KPI-last-0">N/A</strong>
+                        <strong class="small-text" id="KPI-last-0">-</strong>
                     </div>
                     <div class="col-4 text-center">
-                        <?php if ($role >= 5) { ?>
-                        <?php if ($tab == 'self') { ?>
+                        <?php if ($role >= 5 && $contentDetail['KPI']['showPercent'] !== '') { ?>
+                        <?php if ($tab == 'self' ) { ?>
                         <!-- 
                         <a class="btn-update btn-KPI-0" onclick="changeKPIData('left')">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg" class="mb-2"
@@ -534,11 +537,11 @@ else:
                             <?= Yii::t('app', 'Locked') ?>
                         </button>
                         <?php } ?>
-                        <!-- <strong class="bold-text" id="KPI-count-0">N/A</strong> -->
+                        <!-- <strong class="bold-text" id="KPI-count-0">-</strong> -->
                     </div>
                     <div class="col-4 text-end">
                         <p class="small-textKPI mb-0"><?= Yii::t('app', 'Due Update Date') ?></p>
-                        <strong class="small-text" id="KPI-due-0">N/A</strong>
+                        <strong class="small-text" id="KPI-due-0">-</strong>
                     </div>
                 </div>
 
