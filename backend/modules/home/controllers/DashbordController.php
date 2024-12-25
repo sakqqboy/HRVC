@@ -2284,7 +2284,7 @@ class DashbordController extends Controller
                         ->leftJoin('kgi_team', 'main.kgiTeamId = kgi_team.kgiTeamId')
                         ->leftJoin('kgi', 'kgi_team.kgiId = kgi.kgiId')
                         ->where([
-                            'main.status' => [1, 2, 4],'kgi.companyId' => $companyId,'kgi_team.teamId' => $teamId
+                            'main.status' => [1, 2, 4],'kgi_team.teamId' => $teamId
                         ])
                         ->andWhere([
                             'main.updateDateTime' => (new \yii\db\Query())
@@ -2335,7 +2335,7 @@ class DashbordController extends Controller
                         ->leftJoin('kpi_team', 'main.kpiTeamId = kpi_team.kpiTeamId')
                         ->leftJoin('kpi', 'kpi_team.kpiId = kpi.kpiId')
                         ->where([
-                            'main.status' => [1, 2, 4],'kpi.companyId' => $companyId,'kpi_team.teamId' => $teamId
+                            'main.status' => [1, 2, 4],'kpi_team.teamId' => $teamId
                         ])
                         ->andWhere([
                             'main.updateDateTime' => (new \yii\db\Query())
@@ -2425,7 +2425,7 @@ class DashbordController extends Controller
                ->leftJoin('kgi_employee', 'main.kgiEmployeeId = kgi_employee.kgiEmployeeId')
                ->leftJoin('kgi', 'kgi_employee.kgiId = kgi.kgiId')
                ->where([
-                   'main.status' => [1, 2, 4],'kgi.companyId' => $companyId,'main.kgiEmployeeId' => $employeeId
+                   'main.status' => [1, 2, 4],'main.kgiEmployeeId' => $employeeId
                ])
                ->andWhere([
                    'main.updateDateTime' => (new \yii\db\Query())
@@ -2476,7 +2476,7 @@ class DashbordController extends Controller
                ->leftJoin('kpi_employee', 'main.kpiEmployeeId = kpi_employee.kpiEmployeeId')
                ->leftJoin('kpi', 'kpi_employee.kpiId = kpi.kpiId')
                ->where([
-                   'main.status' => [1, 2, 4],'kpi.companyId' => $companyId,'main.kpiEmployeeId' => $employeeId
+                   'main.status' => [1, 2, 4],'main.kpiEmployeeId' => $employeeId
                ])
                ->andWhere([
                    'main.updateDateTime' => (new \yii\db\Query())
@@ -2567,7 +2567,7 @@ class DashbordController extends Controller
             ->leftJoin('kgi_employee', 'main.kgiEmployeeId = kgi_employee.kgiEmployeeId')
             ->leftJoin('kgi', 'kgi_employee.kgiId = kgi.kgiId')
             ->where([
-                'main.status' => [1, 2, 4],'kgi.companyId' => $companyId,'main.kgiEmployeeId' => $employeeId
+                'main.status' => [1, 2, 4],'main.kgiEmployeeId' => $employeeId
             ])
             ->andWhere([
                 'main.updateDateTime' => (new \yii\db\Query())
@@ -2618,7 +2618,7 @@ class DashbordController extends Controller
             ->leftJoin('kpi_employee', 'main.kpiEmployeeId = kpi_employee.kpiEmployeeId')
             ->leftJoin('kpi', 'kpi_employee.kpiId = kpi.kpiId')
             ->where([
-                'main.status' => [1, 2, 4],'kpi.companyId' => $companyId,'main.kpiEmployeeId' => $employeeId
+                'main.status' => [1, 2, 4],'main.kpiEmployeeId' => $employeeId
             ])
             ->andWhere([
                 'main.updateDateTime' => (new \yii\db\Query())
