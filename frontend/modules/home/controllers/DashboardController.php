@@ -102,7 +102,7 @@ class DashboardController extends Controller
             "param" => ""
         ];
     
-        if ($page === 'kfi') {
+        if ($page == 'kfi') {
             $res["part"] = "kfi/view/kfi-history/";
             $res["param"] = ModelMaster::encodeParams([
                 "kfiId" => $id,

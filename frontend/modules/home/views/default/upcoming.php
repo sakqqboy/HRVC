@@ -108,7 +108,7 @@ function renderSchedule(data) {
 
 function handleItemClick(page, type, id, historyId, typeId) {
     alert(`page: ${page}\n type: ${type}\n id: ${id}\n historyId: ${historyId}\n typeId: ${typeId}`);
-    page = 'kfi';
+    // page = 'kfi';
     var url = $url + `home/dashboard/endcode-upcomming`;
     // alert(url);
     $.ajax({
@@ -123,11 +123,14 @@ function handleItemClick(page, type, id, historyId, typeId) {
             type: type
         },
         success: function(data) {
-            alert(JSON.stringify(data));
-            // param = data.param;
-            // const kpiUrl = $url + `kfi/view/kfi-history/` + param;
+            // alert(JSON.stringify(data));
+            param = data.param;
+            part = data.part;
+            // alert(param);
+            // alert(part);
+            const kpiUrl = $url + part + param;
             // alert(kpiUrl);
-            // window.location.href = kpiUrl;
+            window.location.href = kpiUrl;
         },
     });
 }

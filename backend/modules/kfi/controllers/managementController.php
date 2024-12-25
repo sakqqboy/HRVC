@@ -165,7 +165,7 @@ class ManagementController extends Controller
 		$res["targetAmount"] = $kfi["targetAmount"];
 		$res["status"] = $kfi["status"];
 		$res["creater"] = User::employeeNameByuserId($kfi["createrId"]);
-		$res["monthName"] = strtoupper(ModelMaster::monthEng($kfi['month'], 1));
+		$res["monthName"] = !empty($kfi['month']) ? strtoupper(ModelMaster::monthEng($kfi['month'], 1)) : '0';
 		$res["month"] = $kfi['month'];
 		$res["unit"] = Unit::unitName($kfi['unitId']);
 		$res["countryName"] = Country::countryNameBycompany($kfi['companyId']);
