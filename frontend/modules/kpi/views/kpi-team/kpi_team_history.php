@@ -142,15 +142,19 @@ $this->title = 'KPI View';
                                         <div class="col-12"><?= Yii::t('app', 'Target') ?></div>
                                         <div class="col-12 mt-3 number-pim">
                                             <?php
-                                            $decimal = explode('.', $kpiDetail["targetAmount"]);
-                                            if (isset($decimal[1])) {
-                                                if ($decimal[1] == '00') {
-                                                    $show = $decimal[0];
+                                            if ($kpiDetail["targetAmount"] != '') {
+                                                $decimal = explode('.', $kpiDetail["targetAmount"]);
+                                                if (isset($decimal[1])) {
+                                                    if ($decimal[1] == '00') {
+                                                        $show = $decimal[0];
+                                                    } else {
+                                                        $show = $kpiDetail["targetAmount"];
+                                                    }
                                                 } else {
                                                     $show = $kpiDetail["targetAmount"];
                                                 }
                                             } else {
-                                                $show = $kpiDetail["targetAmount"];
+                                                $show = 0;
                                             }
                                             ?>
                                             <?= $show ?><?= $kpiDetail["amountType"] == 1 ? '%' : '' ?>
