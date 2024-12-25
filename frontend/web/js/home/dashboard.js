@@ -97,22 +97,22 @@ function updateData(index, type, direction) {
         // เพิ่ม animation ให้กับ target
 
         // // เพิ่ม animation ให้กับ target
-        const nameElement = document.getElementById(`${type}-name-0`);
-        const lastElement = document.getElementById(`${type}-last-0`);
-
-        nameElement.classList.add('bounce-animation');
-        lastElement.classList.add('bounce-animation');
-
-
-        // ลบ class หลังจาก animation เสร็จสิ้น
-        setTimeout(() => {
-            nameElement.classList.remove('bounce-animation');
-            lastElement.classList.remove('bounce-animation');
-
-        }, 500); // ความยาวเวลาเดียวกับ animation
-
-
         // const nameElement = document.getElementById(`${type}-name-0`);
+        // const lastElement = document.getElementById(`${type}-last-0`);
+
+        // nameElement.classList.add('bounce-animation');
+        // lastElement.classList.add('bounce-animation');
+
+
+        // // ลบ class หลังจาก animation เสร็จสิ้น
+        // setTimeout(() => {
+        //     nameElement.classList.remove('bounce-animation');
+        //     lastElement.classList.remove('bounce-animation');
+
+        // }, 500); // ความยาวเวลาเดียวกับ animation
+
+
+        const nameElement = document.getElementById(`${type}-name-0`);
         const targetElement = document.getElementById(`${type}-target-0`);
         const resultElement = document.getElementById(`${type}-result-0`);
 
@@ -123,28 +123,28 @@ function updateData(index, type, direction) {
         // เพิ่มคลาสสำหรับเลื่อนออก
         targetElement.classList.add(outClass);
         resultElement.classList.add(outClass);
-        // nameElement.classList.add(outClass);
+        nameElement.classList.add(outClass);
 
         setTimeout(() => {
             // อัปเดตข้อความใหม่
             targetElement.innerText = item.target;
             resultElement.innerText = item.result;
-            // nameElement.innerText = item.name;
+            nameElement.innerText = item.name;
 
             // ลบคลาสเลื่อนออกและเพิ่มคลาสเลื่อนเข้า
             targetElement.classList.remove(outClass);
             resultElement.classList.remove(outClass);
-            // nameElement.classList.remove(outClass);
+            nameElement.classList.remove(outClass);
 
 
             targetElement.classList.add(inClass);
             resultElement.classList.add(inClass);
-            // nameElement.classList.add(inClass);
+            nameElement.classList.add(inClass);
             // ลบคลาสเลื่อนเข้าเมื่อ animation เสร็จสิ้น
             setTimeout(() => {
                 targetElement.classList.remove(inClass);
                 resultElement.classList.remove(inClass);
-                // nameElement.classList.remove(inClass);
+                nameElement.classList.remove(inClass);
             }, 200); // ระยะเวลา animation (500ms)
         }, 200); // ระยะเวลา animation เลื่อนออก (500ms)
 
