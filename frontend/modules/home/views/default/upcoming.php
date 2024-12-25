@@ -85,16 +85,16 @@ function renderSchedule(data) {
                 var historyId = item.historyId || "No Data";
                 var typeId = item.typeId || "No Data";
                 // ตรวจสอบว่า id, historyId และ typeId มีค่า ไม่ใช่ "No Data"
-                if (id != "No Data" && historyId != "No Data" && typeId != "No Data") {
-                    // สร้างรายการ HTML
-                    var listItem = `
+                // if (id != "No Data" && historyId != "No Data" && typeId != "No Data") {
+                // สร้างรายการ HTML
+                var listItem = `
                         <li class="schedule-item mt-5" role="button" tabindex="0" onclick="handleItemClick('${page}', '${type}', '${id}', '${historyId}', '${typeId}')">
                             <strong>${title}</strong> - ${description}<br>
                             <span class="text-muted">${time}, ${createDate}</span>
                         </li>
                     `;
-                    $scheduleList.append(listItem);
-                }
+                $scheduleList.append(listItem);
+                // }
             });
 
         } else {
