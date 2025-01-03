@@ -104,8 +104,8 @@
                                         <?= $detail["month"] ?> <?= $detail["year"] ?>
                                     </div>
                                     <div class="col-4 font-size-12 text-center">
-                                        <?= number_format($detail["target"], 2) ?> /
-                                        <span class="font-blue"><?= number_format($detail["result"], 2) ?></span>
+                                        <?= $detail["target"] != '' ? number_format($detail["target"], 2) : 0 ?> /
+                                        <span class="font-blue"><?= $detail["target"] != '' ? number_format($detail["result"], 2) : 0 ?></span>
                                     </div>
                                 </div>
                             </div>

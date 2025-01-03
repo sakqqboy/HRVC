@@ -402,11 +402,22 @@ class ViewController extends Controller
 		}
 		$summarizeMonth2 = array_slice($summarizeMonth2, -8);
 		foreach ($summarizeMonth2 as $index => $data):
-			$target[$index] = $data["target"];
-			$result[$index] = $data["result"];
-			$targetText .= $target[$index] . ',';
-			$resultText .= $result[$index] . ',';
-			$monthText .= '"' . substr($data["month"], 0, 3) . substr($data["year"], -2) . '",';
+			if ($index == 7) {
+				if ($data["result"] != 0) {
+					$target[$index] = $data["target"];
+					$result[$index] = $data["result"];
+					$targetText .= $target[$index] . ',';
+					$resultText .= $result[$index] . ',';
+					$monthText .= '"' . substr($data["month"], 0, 3) . substr($data["year"], -2) . '",';
+				}
+			} else {
+				$target[$index] = $data["target"];
+				$result[$index] = $data["result"];
+				$targetText .= $target[$index] . ',';
+				$resultText .= $result[$index] . ',';
+				$monthText .= '"' . substr($data["month"], 0, 3) . substr($data["year"], -2) . '",';
+			}
+
 		endforeach;
 		$monthText = substr($monthText, 0, -1);
 		$targetText = substr($targetText, 0, -1);
@@ -478,7 +489,7 @@ class ViewController extends Controller
 			"kfiDetail" => $kfiDetail,
 			"kgis" => $kgis,
 			"ghp" => $ghp,
-			"role" => $role 
+			"role" => $role
 		]);
 
 		return json_encode($res);

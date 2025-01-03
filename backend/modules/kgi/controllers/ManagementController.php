@@ -738,7 +738,9 @@ class ManagementController extends Controller
 				if (!isset($data[$history["year"]][$history["month"]])) {
 					$ratio = 0;
 					if ($history["code"] == '<' || $history["code"] == '=') {
-						$ratio = ((int)$history['result'] / (int)$history["targetAmount"]) * 100;
+						if ($history["targetAmount"] != 0) {
+							$ratio = ((int)$history['result'] / (int)$history["targetAmount"]) * 100;
+						}
 					} else {
 						if ($history["result"] != '' && $history["result"] != 0) {
 							$ratio = ((int)$history["targetAmount"] / (int)$history["result"]) * 100;
