@@ -329,13 +329,28 @@ class ManagementController extends Controller
 	public function actionKfiHistorySummarize($kfiId)
 	{
 		$kfiHistory = KfiHistory::find()
-			->select('kfi_history.kfiHistoryId,kfi_history.month,kfi_history.year,kfi_history.status,kfi_history.nextCheckDate,k.kfiName,kfi_history.result,
-			k.kfiId,k.targetAmount,kfi_history.fromDate,kfi_history.toDate,kfi_history.unitId,kfi_history.code,kfi_history.quantRatio,kfi_history.checkPeriodDate,
-			kfi_history.nextCheckDate,kfi_history.amountType,kfi_history.fromDate,kfi_history.toDate,k.active,k.companyId')
+			->select('kfi_history.kfiHistoryId,
+			kfi_history.month,
+			kfi_history.year,
+			kfi_history.status,
+			k.kfiName,
+			kfi_history.result,
+			kfi_history.kfiId,
+			kfi_history.target,
+			kfi_history.unitId,
+			kfi_history.code,
+			kfi_history.quantRatio,
+			kfi_history.checkPeriodDate,
+			kfi_history.nextCheckDate,
+			kfi_history.amountType,
+			kfi_history.fromDate,
+			kfi_history.toDate,
+			k.active,
+			k.companyId')
 			->JOIN("LEFT JOIN", "kfi k", "k.kfiId=kfi_history.kfiId")
 			->where(["kfi_history.kfiId" => $kfiId])
 			->andWhere("kfi_history.status!=99")
-			->orderBy("kfi_history.year DESC,kfi_history.month DESC,kfi_history.kfiHistoryId DESC")
+			->orderBy("kfi_history.year DESC,kfi_history.month DESC,kfiHistoryId DESC")
 			->asArray()
 			->all();
 		$data = [];
@@ -354,13 +369,15 @@ class ManagementController extends Controller
 				}
 			}
 			foreach ($kfiHistory as $history):
-				if (!isset($data[$history["year"]][$history["month"]])) {
+				if (!isset($data[$history["year"]][$history["month"]]) || count($data[$history["year"]][$history["month"]]) == 0) {
 					$ratio = 0;
 					if ($history["code"] == '<' || $history["code"] == '=') {
-						$ratio = ((int)$history['result'] / (int)$history["targetAmount"]) * 100;
+						if ($history["target"] != 0) {
+							$ratio = ((int)$history['result'] / (int)$history["target"]) * 100;
+						}
 					} else {
 						if ($history["result"] != '' && $history["result"] != 0) {
-							$ratio = ((int)$history["targetAmount"] / (int)$history["result"]) * 100;
+							$ratio = ((int)$history["target"] / (int)$history["result"]) * 100;
 						} else {
 							$ratio = 0;
 						}
@@ -369,7 +386,7 @@ class ManagementController extends Controller
 						"kfiHistoryId" => $history["kfiHistoryId"],
 						"kfiName" => $history["kfiName"],
 						"companyId" => $history['companyId'],
-						"target" => $history['targetAmount'],
+						"target" => $history["target"],
 						"unit" => Unit::unitName($history['unitId']),
 						"month" => ModelMaster::monthEng($history['month'], 1),
 						"year" => $history["year"],
