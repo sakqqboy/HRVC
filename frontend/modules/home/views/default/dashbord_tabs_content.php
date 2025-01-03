@@ -2,12 +2,12 @@
 
 use yii\bootstrap5\ActiveForm;
 
-if (empty($contentDetail['KFI']['KFIData'] ?? null) && empty($contentDetail['KGI']['KGIData']  ?? null) && empty($contentDetail['KPI']['KPIData']  ?? null)):
+// if (empty($contentDetail['KFI']['KFIData'] ?? null) && empty($contentDetail['KGI']['KGIData']  ?? null) && empty($contentDetail['KPI']['KPIData']  ?? null)):
 ?>
-<p>No data available.</p>
+<!-- <p>No data available.</p> -->
 <?php
 
-else:
+// else:
 
     $updateClickKFI = 'onclick="javascript:updateKfi(KFIData[currentKFIIndex].kfiId)"';
     // Default assignments
@@ -165,7 +165,9 @@ else:
                         <div class="col-12 pt-3 d-flex justify-content-between">
                             <span class="total-progress"><?= Yii::t('app', 'Total Progress') ?></span>
                             <span class="total-k"><?= Yii::t('app', 'Total KFI') ?>
-                                <strong class="bold-text"> <?= $contentDetail['KFI']['kfiCount'] ?> </strong>
+                                <strong class="bold-text">
+                                    <?= isset($contentDetail['KFI']['kfiCount']) && $contentDetail['KFI']['kfiCount'] !== '' ? $contentDetail['KFI']['kfiCount'] : 0 ?>
+                                </strong>
                             </span>
                         </div>
                     </div>
@@ -175,9 +177,11 @@ else:
                     <!-- Progress Bar -->
                     <div class="progress-dashboard">
                         <div class="progress-bar bg-KFI"
-                            style="width: <?= min($contentDetail['KFI']['showPercent'], 100) ?>%;" role="progressbar"
-                            aria-valuenow="<?= min($contentDetail['KFI']['showPercent'], 100) ?>" aria-valuemin="0"
-                            aria-valuemax="100"></div>
+                            style="width: 
+                            <?= isset($contentDetail['KFI']['showPercent']) && $contentDetail['KFI']['showPercent'] !== '' ? min($contentDetail['KFI']['showPercent'], 100) : 0 ?>%;"
+                            role="progressbar"
+                            aria-valuenow="<?= isset($contentDetail['KFI']['showPercent']) && $contentDetail['KFI']['showPercent'] !== '' ? min($contentDetail['KFI']['showPercent'], 100) : 0 ?>"
+                            aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
 
@@ -300,7 +304,8 @@ else:
                         <div class="col-12 pt-3 d-flex justify-content-between">
                             <span class="total-progress"><?= Yii::t('app', 'Total Progress') ?></span>
                             <span class="total-k"><?= Yii::t('app', 'Total KGI') ?>
-                                <strong class="bold-text"> <?= $contentDetail['KGI']['kgiCount'] ?> </strong>
+                                <strong class="bold-text">
+                                    <?= isset($contentDetail['KGI']['kgiCount']) && $contentDetail['KGI']['kgiCount'] !== '' ? $contentDetail['KGI']['kgiCount'] : 0 ?></strong>
                             </span>
                         </div>
                     </div>
@@ -310,9 +315,11 @@ else:
                     <!-- Progress Bar -->
                     <div class="progress-dashboard">
                         <div class="progress-bar bg-KGI"
-                            style="width: <?= min($contentDetail['KGI']['showPercent'], 100) ?>%;" role="progressbar"
-                            aria-valuenow="<?= min($contentDetail['KGI']['showPercent'], 100) ?>" aria-valuemin="0"
-                            aria-valuemax="100"></div>
+                            style="width:
+                            <?= isset($contentDetail['KGI']['showPercent']) && $contentDetail['KGI']['showPercent'] !== '' ?  min($contentDetail['KGI']['showPercent'], 100) : 0 ?>%;"
+                            role="progressbar"
+                            aria-valuenow="<?= isset($contentDetail['KGI']['showPercent']) && $contentDetail['KGI']['showPercent'] !== '' ?  min($contentDetail['KGI']['showPercent'], 100) : 0 ?>"
+                            aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
 
@@ -433,7 +440,7 @@ else:
                         <div class="col-12 pt-3 d-flex justify-content-between">
                             <span class="total-progress"><?= Yii::t('app', 'Total Progress') ?></span>
                             <span class="total-k"><?= Yii::t('app', 'Total KPI') ?>
-                                <strong class="bold-text"> <?= $contentDetail['KPI']['kpiCount'] ?> </strong>
+                                <?= isset($contentDetail['KPI']['kpiCount']) && $contentDetail['KPI']['kpiCount'] !== '' ? $contentDetail['KPI']['kpiCount'] : 0 ?>%
                             </span>
                         </div>
                     </div>
@@ -443,9 +450,11 @@ else:
                     <!-- Progress Bar -->
                     <div class="progress-dashboard">
                         <div class="progress-bar bg-KPI"
-                            style="width: <?= min($contentDetail['KPI']['showPercent'], 100) ?>%;" role="progressbar"
-                            aria-valuenow="<?= min($contentDetail['KPI']['showPercent'], 100) ?>" aria-valuemin="0"
-                            aria-valuemax="100"></div>
+                            style="width: 
+                            <?= isset($contentDetail['KPI']['showPercent']) && $contentDetail['KPI']['showPercent'] !== '' ? min($contentDetail['KPI']['showPercent'], 100) : 0 ?>%;"
+                            role="progressbar"
+                            aria-valuenow="<?= isset($contentDetail['KPI']['showPercent']) && $contentDetail['KPI']['showPercent'] !== '' ? min($contentDetail['KPI']['showPercent'], 100) : 0 ?>"
+                            aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
 
@@ -604,53 +613,89 @@ else:
         $kgiData = [];
         $kpiData = [];
 
+if (empty($contentDetail['KFI']['KFIData'] ?? null) && empty($contentDetail['KGI']['KGIData']  ?? null) && empty($contentDetail['KPI']['KPIData']  ?? null)):
 
-        // เตรียม KPIData
-        foreach ($contentDetail['KPI']['KPIData'] as $item) {
-            $kpiData[] = [
-                'target' => !empty($item['target']) ? formatNumber($item['target'], 2) : '0.00',
-                'result' => !empty($item['result']) ? formatNumber($item['result'], 2) : '0.00',
-                'percentage' => number_format(floatval($item['percentage']),2,'.',''),
-                'name' => $item['name'],
-                'last' => $item['last'] ?? '-',
-                'due' => $item['due'] ?? '-',
-                'id' => $item['id'],
-                'kpiId' => $item['kpiId'],
-                'count' => $contentDetail['KPI']['kpiCount'],
-            ];
-        }
+    $kpiData[] = [
+        'target' => '0.00',
+        'result' => '0.00',
+        'percentage' => '0.00',
+        'name' => '-',
+        'last' => '-',
+        'due' =>  '-',
+        'id' => 0,
+        'kpiId' => 0,
+        'count' => 0,
+    ];
+    $kgiData[] = [
+        'target' => '0.00',
+        'result' => '0.00',
+        'percentage' => '0.00',
+        'name' => '-',
+        'last' => '-',
+        'due' =>  '-',
+        'id' => 0,
+        'kgiId' => 0,
+        'count' => 0,
+    ];
+    $kfiData[] = [
+        'target' => '0.00',
+        'result' => '0.00',
+        'percentage' => '0.00',
+        'name' => '-',
+        'last' => '-',
+        'due' =>  '-',
+        'id' => 0,
+        'kfiId' => 0,
+        'count' => 0,
+    ];
+else:
+  // เตรียม KPIData
+  foreach ($contentDetail['KPI']['KPIData'] as $item) {
+    $kpiData[] = [
+        'target' => !empty($item['target']) ? formatNumber($item['target'], 2) : '0.00',
+        'result' => !empty($item['result']) ? formatNumber($item['result'], 2) : '0.00',
+        'percentage' => number_format(floatval($item['percentage']),2,'.',''),
+        'name' => $item['name'],
+        'last' => $item['last'] ?? '-',
+        'due' => $item['due'] ?? '-',
+        'id' => $item['id'],
+        'kpiId' => $item['kpiId'],
+        'count' => $contentDetail['KPI']['kpiCount'],
+    ];
+}
 
-        // เตรียม KGIData
-        foreach ($contentDetail['KGI']['KGIData'] as $item) {
-            $kgiData[] = [
-                'target' => !empty($item['target']) ? formatNumber($item['target'], 2) : '0.00',
-                'result' => !empty($item['result']) ? formatNumber($item['result'], 2) : '0.00',
-                'percentage' => number_format(floatval($item['percentage']),2,'.',''),
-                'name' => $item['name'],
-                'last' => $item['last'] ?? '-',
-                'due' => $item['due'] ?? '-',
-                'id' => $item['id'],
-                'kgiId' => $item['kgiId'],
-                'count' => $contentDetail['KGI']['kgiCount'],
-            ];
-        }
+// เตรียม KGIData
+foreach ($contentDetail['KGI']['KGIData'] as $item) {
+    $kgiData[] = [
+        'target' => !empty($item['target']) ? formatNumber($item['target'], 2) : '0.00',
+        'result' => !empty($item['result']) ? formatNumber($item['result'], 2) : '0.00',
+        'percentage' => number_format(floatval($item['percentage']),2,'.',''),
+        'name' => $item['name'],
+        'last' => $item['last'] ?? '-',
+        'due' => $item['due'] ?? '-',
+        'id' => $item['id'],
+        'kgiId' => $item['kgiId'],
+        'count' => $contentDetail['KGI']['kgiCount'],
+    ];
+}
 
-        if ($tab == 'company') {
-            // เตรียม KFIData
-            foreach ($contentDetail['KFI']['KFIData'] as $item) {
-                $kfiData[] = [
-                    'target' => !empty($item['target']) ? formatNumber($item['target'], 2) : '0.00',
-                    'result' => !empty($item['result']) ? formatNumber($item['result'], 2) : '0.00',
-                    'percentage' => number_format(floatval($item['percentage']),2,'.',''),
-                    'name' => $item['name'],
-                    'last' => $item['last'] ?? '-',
-                    'due' => $item['due'] ?? '-',
-                    'id' => $item['id'],
-                    'kfiId' => $item['kfiId'],
-                    'count' => $contentDetail['KFI']['kfiCount'],
-                ];
-            }
-        }
+if ($tab == 'company') {
+    // เตรียม KFIData
+    foreach ($contentDetail['KFI']['KFIData'] as $item) {
+        $kfiData[] = [
+            'target' => !empty($item['target']) ? formatNumber($item['target'], 2) : '0.00',
+            'result' => !empty($item['result']) ? formatNumber($item['result'], 2) : '0.00',
+            'percentage' => number_format(floatval($item['percentage']),2,'.',''),
+            'name' => $item['name'],
+            'last' => $item['last'] ?? '-',
+            'due' => $item['due'] ?? '-',
+            'id' => $item['id'],
+            'kfiId' => $item['kfiId'],
+            'count' => $contentDetail['KFI']['kfiCount'],
+        ];
+    }
+}
+endif; 
 
         ?>
 
@@ -763,4 +808,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-<?php endif; ?>
+<?php 
+// endif; 
+?>

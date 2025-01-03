@@ -11,7 +11,7 @@ $currentYear = date('Y'); // ปี เช่น 2024
     </div>
     <!-- แท็บทางขวา -->
     <ul class="nav nav-tabs dashboard-tabs justify-content-end" role="tablist">
-        <li class="nav-item">
+        <li class="nav-item rounded-top-left">
             <a class="nav-link active" id="company-tab" data-bs-toggle="tab" role="tab" aria-controls="company"
                 aria-selected="true"
                 onclick="updateHeader('<?= Yii::t('app', 'Company') ?>'); loadCompanyTap(<?= $companyId ?>); return false;">
@@ -29,7 +29,7 @@ $currentYear = date('Y'); // ปี เช่น 2024
                 <?= Yii::t('app', 'Team') ?>
             </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item rounded-top-right">
             <a class="nav-link" id="self-tab" data-bs-toggle="tab" role="tab" aria-controls="self" aria-selected="false"
                 onclick="updateHeader('<?= Yii::t('app', 'Self') ?>'); loadSelfTap(<?= $employeeId ?>); return false;">
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/self.svg" alt="<?= Yii::t('app', 'Self') ?>"
