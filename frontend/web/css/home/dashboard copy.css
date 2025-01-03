@@ -229,24 +229,17 @@
 
 /* Cards */
 .dashboard-kfi-card {
+    background-color: #F0F4FF;
     border-radius: 0 0 10px 10px;
     /* ใช้ radius เฉพาะมุมล่าง */
-    border: 1px solid #748EE9;
-    background: #ECF0FF;
+    border: 1.166px solid #748EE9;
     /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
-    /* display: flex; */
-    /* flex-direction: column;
-    align-items: center; */
-    width: 350px;
-    height: 400px;
-    padding-bottom: 389px;
 }
 
 .dashboard-kfi-top {
     border-radius: 10px 10px 0 0;
     /* ใช้ radius เฉพาะมุมล่าง */
     height: 11px;
-    width: 350px;
     flex-shrink: 0;
     background: #748EE9;
 
@@ -259,155 +252,50 @@
     /* ใช้ radius เฉพาะมุมล่าง */
     border: 1.166px solid #FDCA40;
     /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
-    width: 350px;
-    height: 400px;
-    padding-bottom: 389px;
 }
 
 .dashboard-kgi-top {
     border-radius: 10px 10px 0 0;
     /* ใช้ radius เฉพาะมุมล่าง */
     height: 11px;
-    width: 350px;
     flex-shrink: 0;
     background: #FDCA40;
-
-}
-
-
-.dashboard-kpi-card {
-    background-color: #FFE8E6;
-    border-radius: 0 0 10px 10px;
-    /* ใช้ radius เฉพาะมุมล่าง */
-    border: 1.166px solid #FF715B;
-    /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
-    width: 350px;
-    height: 400px;
-    padding-bottom: 389px;
-}
-
-.dashboard-kpi-top {
-    border-radius: 10px 10px 0 0;
-    /* ใช้ radius เฉพาะมุมล่าง */
-    height: 11px;
-    width: 350px;
-    flex-shrink: 0;
-    background: #FF715B;
 
 }
 
 .key-title {
     font-size: 12px;
     font-weight: bold;
-    display: flex;
-    align-items: center;
 }
 
 .completion-percentage {
-    color: var(--HRVC---Text-Black, #30313D);
-    text-align: center;
-    leading-trim: both;
-    text-edge: cap;
-    font-family: "SF Pro Display";
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 32px;
-    /* 100% */
-    letter-spacing: -0.808px;
+    font-size: 24px;
+    font-weight: bold;
+    display: block;
+    transition: transform 0.1s ease;
     /* เพิ่มเอฟเฟกต์เมื่อเปลี่ยนค่า */
 }
 
-.card-title-text {
-    color: var(--HRVC---Text-Black, #30313D);
-    leading-trim: both;
-    text-edge: cap;
-    font-family: "SF Pro Display";
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 17px;
-    /* 94.444% */
-}
-
 .total-achievement {
-    color: var(--Icon-Gray, #666);
-    font-family: "SF Pro Display";
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 18.595px;
-    /* 154.955% */
-    letter-spacing: -0.18px;
+    font-size: 8px;
+    color: #333;
     display: block;
 }
 
-.total-progress-box {
-    height: 1px;
-    margin-top: 25px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    align-self: stretch;
-}
-
 .total-progress {
-    color: var(--HRVC---Text-Black, #30313D);
-    leading-trim: both;
-    text-edge: cap;
-    font-family: "SF Pro Display";
-    font-size: 13px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 23.312px;
-    /* 179.32% */
+    font-size: 10px;
+    font-weight: bold;
 }
 
 .total-k {
-    color: var(--Icon-Gray, #666);
-    leading-trim: both;
-    text-edge: cap;
-    font-family: "SF Pro Display";
-    font-size: 13px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 18.595px;
-    /* 143.036% */
-    letter-spacing: -0.195px;
-}
-
-.k-total {
-    color: var(--HRVC---Text-Black, #30313D);
-    font-family: "SF Pro Display";
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 600;
-    /* 249.034% */
-    letter-spacing: -1.245px;
+    font-size: 10px;
 }
 
 .key-title-container {
     display: inline-flex;
     align-items: center;
     position: relative;
-    max-width: 100%;
-    /* จำกัดขนาดให้ไม่เกินพื้นที่ */
-    overflow: hidden;
-    /* ป้องกันการล้น */
 }
-
-.key-detail-container {
-    display: flex;
-    align-items: flex-end;
-    /* จัดให้ชิดขอบล่าง */
-    justify-content: space-between;
-    /* ช่องว่างระหว่าง item */
-    flex-grow: 1;
-    /* ขยายเต็ม container */
-}
-
-
-
 
 .btn-update {
     padding: 3px 3px 3px 3px;
@@ -447,19 +335,17 @@
 }
 
 .key-total {
-    color: var(--HRVC---Text-Black, #30313D);
-    leading-trim: both;
-    text-edge: cap;
-    font-family: "SF Pro Display";
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 23.312px;
-    /* 129.509% */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    max-width: 200px;
+    /* กำหนดความกว้าง */
+    transition: max-width 0.3s ease;
 }
 
 .toggle-text {
-    /* margin-left: 16px; */
+    margin-left: 5px;
     cursor: pointer;
 }
 
@@ -473,47 +359,49 @@
 .show-more-btn {
     background: none;
     border: none;
-    max-width: 100%;
-    /* ป้องกันภาพล้น */
-    max-height: 100%;
-    height: auto;
+    cursor: pointer;
+    height: 8px;
+    width: 8px;
     padding: 0px 0px 0px 0px;
 }
 
 
 
 
-.progress-dashboard-KFI {
-    background-color: #CCD7FF;
-    border-radius: 16px;
-    height: 16px;
-    /* สีพื้นหลังสำหรับแถบความคืบหน้า */
+
+.dashboard-kpi-card {
+    background-color: #FFE8E6;
+    border-radius: 0 0 10px 10px;
+    /* ใช้ radius เฉพาะมุมล่าง */
+    border: 1.166px solid #FF715B;
+    /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
 }
 
-.progress-dashboard-KGI {
-    background-color: #FFF9EC;
-    border-radius: 16px;
-    height: 16px;
-    /* สีพื้นหลังสำหรับแถบความคืบหน้า */
+.dashboard-kpi-top {
+    border-radius: 10px 10px 0 0;
+    /* ใช้ radius เฉพาะมุมล่าง */
+    height: 11px;
+    flex-shrink: 0;
+    background: #FF715B;
+
 }
 
-.progress-dashboard-KPI {
-    background-color: #FFF4F2;
-    border-radius: 16px;
-    height: 16px;
+.progress-dashboard {
+    border-radius: 5px;
+    height: 12px;
+    background-color: #e0e0e0;
     /* สีพื้นหลังสำหรับแถบความคืบหน้า */
 }
 
 .progress-bar {
     transition: width 1.5s ease-in-out;
     /* ความยาวเวลา 1.5 วินาที */
-    border-radius: 16px;
-    height: 16px;
+    border-radius: 5px;
+    height: 12px;
 }
 
 .bg-KFI {
     background-color: #748EE9 !important;
-
     /* สีสำหรับ KFI */
 }
 
@@ -548,37 +436,6 @@ h6.dashboard-kpi-title {
     padding: 32px 16px 32px 33px;
     margin-bottom: 20px;
 }
-
-
-
-
-.card-tab1 {
-    /* display: flex; */
-    height: 152px;
-    padding: 16px 10px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    align-self: stretch;
-    border-radius: 5px;
-    background: #FFF;
-    margin-bottom: 20px;
-    border: none;
-}
-
-.card-tab2 {
-    display: flex;
-    flex-direction: column;
-    height: 139px;
-    padding: 16px 10px;
-    gap: 10px;
-    align-self: stretch;
-    border-radius: 5px;
-    background: #FFF;
-    justify-content: space-between;
-    /* Ensure content is spaced */
-}
-
 
 .profile-name {
     font-size: 22px;
@@ -766,16 +623,6 @@ h6.dashboard-kpi-title {
     border-style: dotted;
     margin-top: 5px;
     margin-bottom: 5px;
-    /* width: 350.5px; */
-    height: 0px;
-    stroke-width: 1px;
-}
-
-.custom-hr-card {
-    border-top: 2px solid #C3BDBD;
-    border-style: dotted;
-    margin-top: 15px;
-    margin-bottom: 10px;
     /* width: 350.5px; */
     height: 0px;
     stroke-width: 1px;

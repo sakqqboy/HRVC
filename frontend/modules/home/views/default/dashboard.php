@@ -7,14 +7,14 @@ $this->title = "Dashboard"
 
         <div class="row">
             <!-- Chart -->
-            <div class="col-lg-8 p-3">
+            <div class="col-lg-9 p-3">
                 <div class="dashboard-chart h-100">
                     <?= $this->render('dashboard_chart') ?>
                 </div>
             </div>
 
             <!-- Profile -->
-            <div class="col-lg-4 p-3">
+            <div class="col-lg-3 p-3">
                 <div class="profile-card h-100">
                     <?= $this->render('dashbord_profile', ['employeeProfile' => $employeeProfile]) ?>
                 </div>
@@ -23,7 +23,7 @@ $this->title = "Dashboard"
 
         <div class="row mt-4">
             <!-- Tabs -->
-            <div class="col-lg-8 p-3">
+            <div class="col-lg-9 p-3">
                 <div class="dashboard-tabs">
                     <?= $this->render('dashbord_tabs', [
                         'companyId' => $employeeProfile['companyId'],
@@ -34,7 +34,7 @@ $this->title = "Dashboard"
             </div>
 
             <!-- Navigation -->
-            <div class="col-lg-4 p-3">
+            <div class="col-lg-3 p-3">
                 <div class="dashboard-navigation">
                     <?= $this->render('dashbord_navigation', [
                         'pendingApprove' => $pendingApprove

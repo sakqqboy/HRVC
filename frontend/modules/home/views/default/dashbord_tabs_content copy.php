@@ -145,18 +145,14 @@ use yii\bootstrap5\ActiveForm;
             <div class="dashboard-kfi-top">
             </div>
             <div class="dashboard-kfi-card p-3 position-relative">
-                <div class="card-tab1">
+                <div class="card-tab1 bg-white p-3" style="border: none;">
                     <div class="row align-items-center">
                         <!-- Left Section -->
                         <div class="col-7 text-start">
                             <span class="key-title">
-                                <div class="col-3">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/KFI.svg"
-                                        style="width: 24px; height: 24px;">
-                                </div>
-                                <div class="col-9 card-title-text">
-                                    <?= Yii::t('app', 'Key Financial Indicator') ?>
-                                </div>
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/KFI.svg"
+                                    class="home-icon mr-5">
+                                <?= Yii::t('app', 'Key Financial Indicator') ?>
                             </span>
                         </div>
                         <!-- Right Section -->
@@ -166,24 +162,20 @@ use yii\bootstrap5\ActiveForm;
                             </span>
                             <span class="total-achievement"><?= Yii::t('app', 'Total Achievement') ?></span>
                         </div>
-                        <div class="col-12 total-progress-box">
+                        <div class="col-12 pt-3 d-flex justify-content-between">
                             <span class="total-progress"><?= Yii::t('app', 'Total Progress') ?></span>
-                            <span>
-                                <strong class="total-k">
-                                    <?= Yii::t('app', 'Total KFI') ?>
-                                </strong>
-                                <strong class="k-total">
+                            <span class="total-k"><?= Yii::t('app', 'Total KFI') ?>
+                                <strong class="bold-text">
                                     <?= isset($contentDetail['KFI']['kfiCount']) && $contentDetail['KFI']['kfiCount'] !== '' ? $contentDetail['KFI']['kfiCount'] : 0 ?>
                                 </strong>
                             </span>
-
                         </div>
                     </div>
 
                     <!-- Divider -->
-                    <hr class="custom-hr-card">
+                    <hr class="custom-hr">
                     <!-- Progress Bar -->
-                    <div class="progress-dashboard-KFI">
+                    <div class="progress-dashboard">
                         <div class="progress-bar bg-KFI"
                             style="width: 
                             <?= isset($contentDetail['KFI']['showPercent']) && $contentDetail['KFI']['showPercent'] !== '' ? min($contentDetail['KFI']['showPercent'], 100) : 0 ?>%;"
@@ -193,24 +185,29 @@ use yii\bootstrap5\ActiveForm;
                     </div>
                 </div>
 
-                <div class="card-tab2 bg-white" id="KFI">
+                <div class="card-tab2 bg-white" id="KFI" style="border: none;">
+                    <!-- <div id="kfi-slide"> -->
                     <div class="key-title-container" id="content-0">
-                        <div class="col-9">
+                        <div class="col-9 d-flex">
                             <span class="key-total" id="KFI-name-0"><?= Yii::t('app', '-') ?></span>
                         </div>
-                        <div class="col-2 pr-6" style="display: flex; justify-content: flex-end; align-items: center;">
-                            <button class="show-more-btn" cursor="pointer" onclick="changeKFIData('left')">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/btn-KFI-left.svg">
-                            </button>
-                        </div>
-                        <div class="col-1" style="display: flex; justify-content: flex-end; align-items: center;">
-                            <button class="show-more-btn" cursor="pointer" onclick="changeKFIData('right')">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/btn-KFI-right.svg">
-                            </button>
+                        <div class="col-2 d-flex justify-content-between">
+                            <span class="toggle-text">
+                                <button class="show-more-btn" cursor="pointer" onclick="changeKFIData('left')">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/btn-KFI-left.svg"
+                                        style="margin-top: 1px; margin-left: 3px;">
+                                </button>
+                            </span>
+                            <span class="toggle-text">
+                                <button class="show-more-btn" cursor="pointer" onclick="changeKFIData('right')">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/btn-KFI-right.svg"
+                                        style="margin-top: 1px; margin-left: 3px;">
+                                </button>
+                            </span>
                         </div>
                     </div>
-                    <div class="key-detail-container" id="content-0-data">
-                        <!-- Data section -->
+                    <div class="d-flex justify-content-between align-items-center" id="content-0-data">
+                        <!-- ข้อมูลในแต่ละชุด -->
                         <div class="col-4 text-center" id="KFI-data-0">
                             <div class="row">
                                 <div class="col-md-9 col-sm-6">
@@ -246,6 +243,7 @@ use yii\bootstrap5\ActiveForm;
                             <strong class="bold-text" id="KFI-result-0">-</strong>
                         </div>
                     </div>
+                    <!-- </div> -->
                 </div>
 
                 <div class="d-flex justify-content-between align-items-center mt-3" id="content-0-data">
@@ -286,18 +284,14 @@ use yii\bootstrap5\ActiveForm;
         <div class="col-md-4 pr-0 mb-3">
             <div class="dashboard-kgi-top"></div>
             <div class="dashboard-kgi-card p-3 position-relative">
-                <div class="card-tab1">
+                <div class="card bg-white p-3" style="border: none;">
                     <div class="row align-items-center">
                         <!-- Left Section -->
                         <div class="col-7 text-start">
                             <span class="key-title">
-                                <div class="col-3">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/KGI.svg"
-                                        style="width: 24px; height: 24px;">
-                                </div>
-                                <div class="col-9 card-title-text">
-                                    <?= Yii::t('app', 'Key Goal Indicator') ?>
-                                </div>
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/KGI.svg"
+                                    class="home-icon mr-5">
+                                <?= Yii::t('app', 'Key Goal Indicator') ?>
                             </span>
                         </div>
                         <!-- Right Section -->
@@ -307,23 +301,19 @@ use yii\bootstrap5\ActiveForm;
                             </span>
                             <span class="total-achievement"><?= Yii::t('app', 'Total Achievement') ?></span>
                         </div>
-                        <div class="col-12 total-progress-box">
+                        <div class="col-12 pt-3 d-flex justify-content-between">
                             <span class="total-progress"><?= Yii::t('app', 'Total Progress') ?></span>
-                            <span>
-                                <strong class="total-k">
-                                    <?= Yii::t('app', 'Total KGI') ?>
-                                </strong>
-                                <strong class="k-total">
-                                    <?= isset($contentDetail['KGI']['kgiCount']) && $contentDetail['KGI']['kgiCount'] !== '' ? $contentDetail['KGI']['kgiCount'] : 0 ?>
-                                </strong>
+                            <span class="total-k"><?= Yii::t('app', 'Total KGI') ?>
+                                <strong class="bold-text">
+                                    <?= isset($contentDetail['KGI']['kgiCount']) && $contentDetail['KGI']['kgiCount'] !== '' ? $contentDetail['KGI']['kgiCount'] : 0 ?></strong>
                             </span>
                         </div>
                     </div>
 
                     <!-- Divider -->
-                    <hr class="custom-hr-card">
+                    <hr class="custom-hr">
                     <!-- Progress Bar -->
-                    <div class="progress-dashboard-KGI">
+                    <div class="progress-dashboard">
                         <div class="progress-bar bg-KGI"
                             style="width:
                             <?= isset($contentDetail['KGI']['showPercent']) && $contentDetail['KGI']['showPercent'] !== '' ?  min($contentDetail['KGI']['showPercent'], 100) : 0 ?>%;"
@@ -333,25 +323,27 @@ use yii\bootstrap5\ActiveForm;
                     </div>
                 </div>
 
-                <div class="card-tab2" id="KGI">
+                <div class="card bg-white" id="KGI" style="border: none;">
                     <div class="key-title-container" id="content-KGI">
                         <div class="col-9 d-flex">
                             <span class="key-total" id="KGI-name-0"><?= Yii::t('app', '-') ?></span>
                         </div>
-                        <div class="col-2 pr-6" style="display: flex; justify-content: flex-end; align-items: center;">
-                            <button class="show-more-btn" onclick="changeKGIData('left')">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/btn-KGI-left.svg"
-                                    style="margin-top: 1px; margin-left: 3px;">
-                            </button>
-                        </div>
-                        <div class="col-1" style="display: flex; justify-content: flex-end; align-items: center;">
-                            <button class="show-more-btn" onclick="changeKGIData('right')">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/btn-KGI-right.svg"
-                                    style="margin-top: 1px; margin-left: 3px;">
-                            </button>
+                        <div class="col-2 d-flex justify-content-between">
+                            <span class="toggle-text">
+                                <button class="show-more-btn" onclick="changeKGIData('left')">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/btn-KGI-left.svg"
+                                        style="margin-top: 1px; margin-left: 3px;">
+                                </button>
+                            </span>
+                            <span class="toggle-text">
+                                <button class="show-more-btn" onclick="changeKGIData('right')">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/btn-KGI-right.svg"
+                                        style="margin-top: 1px; margin-left: 3px;">
+                                </button>
+                            </span>
                         </div>
                     </div>
-                    <div class="key-detail-container" id="content-KGI-data">
+                    <div class="d-flex justify-content-between align-items-center" id="content-KGI-data">
                         <div class="col-4 text-center" id="KGI-data">
                             <div class="row">
                                 <div class="col-md-9 col-sm-6">
@@ -428,45 +420,35 @@ use yii\bootstrap5\ActiveForm;
         <div class="col-md-4 pr-0 mb-3">
             <div class="dashboard-kpi-top"></div>
             <div class="dashboard-kpi-card p-3 position-relative">
-                <div class="card-tab1">
+                <div class="card bg-white p-3" style="border: none;">
                     <div class="row align-items-center">
                         <!-- Left Section -->
-                        <div class="col-8 text-start">
+                        <div class="col-7 text-start">
                             <span class="key-title">
-                                <div class="col-3">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/KPI.svg"
-                                        style="width: 24px; height: 24px;">
-                                </div>
-                                <div class="col-9 card-title-text">
-                                    <?= Yii::t('app', 'Key Performance Indicator') ?>
-                                </div>
-
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/KPI.svg"
+                                    class="home-icon mr-5">
+                                <?= Yii::t('app', 'Key Performance Indicator') ?>
                             </span>
                         </div>
                         <!-- Right Section -->
-                        <div class="col-4 text-end">
+                        <div class="col-5 text-end">
                             <span class="completion-percentage" id="completion-percentage">
                                 <?= isset($contentDetail['KPI']['showPercent']) && $contentDetail['KPI']['showPercent'] !== '' ? $contentDetail['KPI']['showPercent'] : 0 ?>%
                             </span>
                             <span class="total-achievement"><?= Yii::t('app', 'Completed') ?></span>
                         </div>
-                        <div class="col-12 total-progress-box">
+                        <div class="col-12 pt-3 d-flex justify-content-between">
                             <span class="total-progress"><?= Yii::t('app', 'Total Progress') ?></span>
-                            <span>
-                                <strong class="total-k">
-                                    <?= Yii::t('app', 'Total KPI') ?>
-                                </strong>
-                                <strong class="k-total">
-                                    <?= isset($contentDetail['KPI']['kpiCount']) && $contentDetail['KPI']['kpiCount'] !== '' ? $contentDetail['KPI']['kpiCount'] : 0 ?>
-                                </strong>
+                            <span class="total-k"><?= Yii::t('app', 'Total KPI') ?>
+                                <?= isset($contentDetail['KPI']['kpiCount']) && $contentDetail['KPI']['kpiCount'] !== '' ? $contentDetail['KPI']['kpiCount'] : 0 ?>%
                             </span>
                         </div>
                     </div>
 
                     <!-- Divider -->
-                    <hr class="custom-hr-card">
+                    <hr class="custom-hr">
                     <!-- Progress Bar -->
-                    <div class="progress-dashboard-KPI">
+                    <div class="progress-dashboard">
                         <div class="progress-bar bg-KPI"
                             style="width: 
                             <?= isset($contentDetail['KPI']['showPercent']) && $contentDetail['KPI']['showPercent'] !== '' ? min($contentDetail['KPI']['showPercent'], 100) : 0 ?>%;"
@@ -477,26 +459,27 @@ use yii\bootstrap5\ActiveForm;
                 </div>
 
 
-                <div class="card-tab2" id="KPI">
+                <div class="card bg-white" id="KPI" style="border: none;">
                     <div class="key-title-container" id="content-KPI">
                         <div class="col-9 d-flex">
                             <span class="key-total" id="KPI-name-0"><?= Yii::t('app', '-') ?></span>
                         </div>
-                        <div class="col-2 pr-6" style="display: flex; justify-content: flex-end; align-items: center;">
-
-                            <button class="show-more-btn" onclick="changeKPIData('left')">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/btn-KPI-left.svg"
-                                    style="margin-top: 1px; margin-left: 3px;">
-                            </button>
-                        </div>
-                        <div class="col-1" style="display: flex; justify-content: flex-end; align-items: center;">
-                            <button class="show-more-btn" onclick="changeKPIData('right')">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/btn-KPI-right.svg"
-                                    style="margin-top: 1px; margin-left: 3px;">
-                            </button>
+                        <div class="col-2 d-flex justify-content-between">
+                            <span class="toggle-text">
+                                <button class="show-more-btn" onclick="changeKPIData('left')">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/btn-KPI-left.svg"
+                                        style="margin-top: 1px; margin-left: 3px;">
+                                </button>
+                            </span>
+                            <span class="toggle-text">
+                                <button class="show-more-btn" onclick="changeKPIData('right')">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/btn-KPI-right.svg"
+                                        style="margin-top: 1px; margin-left: 3px;">
+                                </button>
+                            </span>
                         </div>
                     </div>
-                    <div class="key-detail-container" id="content-KPI-data-0">
+                    <div class="d-flex justify-content-between align-items-center" id="content-KPI-data-0">
                         <div class="col-4 text-center" id="KPI-data-0">
                             <div class="row">
                                 <div class="col-md-9 col-sm-6">

@@ -40,5 +40,5 @@
 </div>
 <!-- View All button -->
 <div class="text-ViewAllbutton">
-    <a href="#" class="text-primary">View All</a>
+    <a href="#" class="view-all-link">View All</a>
 </div>
