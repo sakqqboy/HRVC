@@ -233,7 +233,7 @@
     border-radius: 0 0 10px 10px;
     /* ใช้ radius เฉพาะมุมล่าง */
     border: 1.166px solid #748EE9;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
 }
 
 .dashboard-kfi-top {
@@ -251,7 +251,7 @@
     border-radius: 0 0 10px 10px;
     /* ใช้ radius เฉพาะมุมล่าง */
     border: 1.166px solid #FDCA40;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
 }
 
 .dashboard-kgi-top {
@@ -374,7 +374,7 @@
     border-radius: 0 0 10px 10px;
     /* ใช้ radius เฉพาะมุมล่าง */
     border: 1.166px solid #FF715B;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
 }
 
 .dashboard-kpi-top {
@@ -505,6 +505,17 @@ h6.dashboard-kpi-title {
     color: #000;
     font-size: 12px;
 }
+
+.rounded-top-left .nav-link {
+    border-top-left-radius: 3px;
+    /* Ensure corners are applied */
+}
+
+.rounded-top-right .nav-link {
+    border-top-right-radius: 3px;
+    /* Ensure corners are applied */
+}
+
 
 /* Tab Content */
 .tab-content {

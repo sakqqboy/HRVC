@@ -67,6 +67,9 @@
         </ul>
         <hr class="custom-hr mb-10">
     </div>
+    <br>
+    <br>
+
     <div style="flex: 2;">
         <div class="text-start">
             <div class="d-flex align-items-center">
@@ -81,7 +84,7 @@
                         <img src="<?=Yii::$app->homeUrl?><?= $employeeProfile['flag'] ?>"
                             class="profile-picture rounded-circle mb-3" alt="User Avatar"
                             style="width: 18px; height: 18px;">
-                        <?= $employeeProfile['city'] ?>, <?= $employeeProfile['nationalityName'] ?>
+                        <?= $employeeProfile['city'] ?>, <?= $employeeProfile['countryName'] ?>
                     </p>
                 </div>
             </div>
