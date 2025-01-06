@@ -38,101 +38,6 @@ use yii\bootstrap5\ActiveForm;
     }
 
 ?>
-<style>
-.progress {
-    width: 40px;
-    height: 40px;
-    line-height: 50px;
-    background: none;
-    margin: 0 auto;
-    position: relative;
-}
-
-.progress:after {
-    content: "";
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 12px solid var(--color-after, #CCD7FF);
-    /* ใช้สีจาก custom property */
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-.progress>span {
-    width: 50%;
-    height: 100%;
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    z-index: 1;
-}
-
-.progress .progress-left {
-    left: 0;
-}
-
-.progress .progress-bar {
-    width: 100%;
-    height: 100%;
-    background: none;
-    border-width: 12px;
-    border-style: solid;
-    position: absolute;
-    top: 0;
-    animation: progress-fill 1s linear forwards;
-}
-
-.progress .progress-left .progress-bar {
-    left: 100%;
-    border-top-right-radius: 80px;
-    border-bottom-right-radius: 80px;
-    border-left: 0;
-    transform-origin: center left;
-}
-
-.progress .progress-right {
-    right: 0;
-}
-
-.progress .progress-right .progress-bar {
-    left: -100%;
-    border-top-left-radius: 80px;
-    border-bottom-left-radius: 80px;
-    border-right: 0;
-    transform-origin: center right;
-}
-
-.progress .progress-value {
-    width: 90%;
-    height: 90%;
-    border-radius: 50%;
-    /* border: 18px solid; */
-    background: #fff;
-    font-size: 10px;
-    color: #000;
-    line-height: 35px;
-    text-align: center;
-    position: absolute;
-    top: 5%;
-    left: 5%;
-}
-
-.progress.blue .progress-bar {
-    border-color: #CCD7FF;
-    /* สีเริ่มต้น */
-}
-
-/* 
-.progress-bar {
-    transition: transform 0.5s ease-in-out;
-}
-
-.progress-value {
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-} */
-</style>
 
 <div class="tab-pane fade show active" role="tabpanel" id="tab-content-container">
     <div class="row">
@@ -214,21 +119,27 @@ use yii\bootstrap5\ActiveForm;
                         <div class="col-4 text-center" id="KFI-data-0">
                             <div class="row">
                                 <div class="col-md-9 col-sm-6">
-                                    <div class="progress blue" id="KFI-progress" data-color-left="#748EE9"
-                                        data-color-right="#748EE9" data-color-after="#CCD7FF">
-                                        <span class="progress-left">
-                                            <span class="progress-bar"></span>
-                                        </span>
-                                        <span class="progress-right">
-                                            <span class="progress-bar"></span>
-                                        </span>
-                                        <div class="progress-value" id="">0%</div>
+
+                                    <div class="single-chart">
+                                        <svg viewBox="0 0 36 36" class="circular-chart blue">
+                                            <path class="circle-bg" d="M18 2.0845
+                                                a 15.9155 15.9155 0 0 1 0 31.831
+                                                a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                            <path class="circle" id="KFI-progress" stroke-dasharray="0, 100" d="M18 2.0845
+                                                a 15.9155 15.9155 0 0 1 0 31.831
+                                                a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                            <!-- <text> สำหรับการแสดงเปอร์เซ็นต์ -->
+                                            <text id="KFI-percentage" x="18" y="20.35" text-anchor="middle"
+                                                dominant-baseline="middle" class="percentage">
+                                                0%
+                                            </text>
+                                        </svg>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-4 text-start">
-                            <small class="small-text text-muted">
+                            <small class="small-text-tr">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Target.svg" class="pim-iconKFI"
                                     style="margin-top: 1px; margin-right: 3px;">
                                 Target
@@ -237,7 +148,7 @@ use yii\bootstrap5\ActiveForm;
                             <strong class="bold-text" id="KFI-target-0">-</strong>
                         </div>
                         <div class="col-4 text-end">
-                            <small class="small-text text-muted">
+                            <small class="small-text-tr">
                                 Result
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Result.svg" class="pim-iconKFI"
                                     style="margin-top: 1px; margin-left: 3px;">
@@ -249,9 +160,9 @@ use yii\bootstrap5\ActiveForm;
                 </div>
 
                 <div class="d-flex justify-content-between align-items-center mt-3" id="content-0-data">
-                    <div class="col-4 text-start">
-                        <p class="small-text text-muted mb-0"><?= Yii::t('app', 'Last Updated on') ?></p>
-                        <strong class="small-text" id="KFI-last-0">-</strong>
+                    <div class="col-4 text-end">
+                        <p class="small-text-last mb-0"><?= Yii::t('app', 'Last Updated on') ?></p>
+                        <strong class="small-text-value" id="KFI-last-0">-</strong>
                         <!-- แก้ไขจาก KFI-lasr-0 เป็น KFI-last-0 -->
                     </div>
                     <div class="col-4 text-center">
@@ -271,9 +182,9 @@ use yii\bootstrap5\ActiveForm;
                         </button>
                         <?php } ?>
                     </div>
-                    <div class="col-4 text-end">
+                    <div class="col-4 text-start">
                         <p class="small-textKFI mb-0"><?= Yii::t('app', 'Due Update Date') ?></p>
-                        <strong class="small-text" id="KFI-due-0">-</strong>
+                        <strong class="small-text-value" id="KFI-due-0">-</strong>
                     </div>
                 </div>
 
@@ -355,17 +266,26 @@ use yii\bootstrap5\ActiveForm;
                         <div class="col-4 text-center" id="KGI-data">
                             <div class="row">
                                 <div class="col-md-9 col-sm-6">
-                                    <div class="progress blue" id="KGI-progress" data-color-left="#FDCA40"
-                                        data-color-right="#FDCA40" data-color-after="#FFF2D6">
-                                        <span class="progress-left"><span class="progress-bar"></span></span>
-                                        <span class="progress-right"><span class="progress-bar"></span></span>
-                                        <div class="progress-value" id="">0%</div>
+                                    <div class="single-chart">
+                                        <svg viewBox="0 0 36 36" class="circular-chart yellow">
+                                            <path class="circle-bg" d="M18 2.0845
+                                                a 15.9155 15.9155 0 0 1 0 31.831
+                                                a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                            <path class="circle" id="KGI-progress" stroke-dasharray="0, 100" d="M18 2.0845
+                                                a 15.9155 15.9155 0 0 1 0 31.831
+                                                a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                            <!-- <text> สำหรับการแสดงเปอร์เซ็นต์ -->
+                                            <text id="KGI-percentage" x="18" y="20.35" text-anchor="middle"
+                                                dominant-baseline="middle" class="percentage">
+                                                0%
+                                            </text>
+                                        </svg>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-4 text-start">
-                            <small class="small-text text-muted">
+                            <small class="small-text-tr">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Target.svg" class="pim-iconKGI"
                                     style="margin-top: 1px; margin-right: 3px;">
                                 <?= Yii::t('app', 'Target') ?>
@@ -374,7 +294,7 @@ use yii\bootstrap5\ActiveForm;
                             <strong class="bold-text" id="KGI-target-0">-</strong>
                         </div>
                         <div class="col-4 text-end">
-                            <small class="small-text text-muted">
+                            <small class="small-text-tr">
                                 <?= Yii::t('app', 'Result') ?>
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Result.svg" class="pim-iconKGI"
                                     style="margin-top: 1px; margin-left: 3px;">
@@ -386,9 +306,9 @@ use yii\bootstrap5\ActiveForm;
                 </div>
 
                 <div class="d-flex justify-content-between align-items-center mt-3">
-                    <div class="col-4 text-start">
-                        <p class="small-text text-muted mb-0"><?= Yii::t('app', 'Last Updated on') ?></p>
-                        <strong class="small-text" id="KGI-last-0">07/19/2024</strong>
+                    <div class="col-4 text-end">
+                        <p class="small-text-last mb-0"><?= Yii::t('app', 'Last Updated on') ?></p>
+                        <strong class="small-text-value" id="KGI-last-0">07/19/2024</strong>
                     </div>
                     <div class="col-4 text-center">
                         <?php if ($role >= 5 && $contentDetail['KGI']['showPercent'] !== '') { ?>
@@ -415,9 +335,9 @@ use yii\bootstrap5\ActiveForm;
                         <?php } ?>
                         <!-- <strong class="bold-text" id="KGI-count-0">-</strong> -->
                     </div>
-                    <div class="col-4 text-end">
+                    <div class="col-4 text-start">
                         <p class="small-textKGI mb-0"><?= Yii::t('app', 'Due Update Date') ?></p>
-                        <strong class="small-text" id="KGI-due-0">-</strong>
+                        <strong class="small-text-value" id="KGI-due-0">-</strong>
                     </div>
                 </div>
 
@@ -500,26 +420,36 @@ use yii\bootstrap5\ActiveForm;
                         <div class="col-4 text-center" id="KPI-data-0">
                             <div class="row">
                                 <div class="col-md-9 col-sm-6">
-                                    <div class="progress blue" id="KPI-progress" data-color-left="#FF715B"
-                                        data-color-right="#FF715B" data-color-after="#FFEAE6">
-                                        <span class="progress-left"><span class="progress-bar"></span></span>
-                                        <span class="progress-right"><span class="progress-bar"></span></span>
-                                        <div class="progress-value" id="">0%</div>
+                                    <div class="single-chart">
+                                        <svg viewBox="0 0 36 36" class="circular-chart red">
+                                            <path class="circle-bg" d="M18 2.0845
+                                                a 15.9155 15.9155 0 0 1 0 31.831
+                                                a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                            <path class="circle" id="KPI-progress" stroke-dasharray="0, 100" d="M18 2.0845
+                                                a 15.9155 15.9155 0 0 1 0 31.831
+                                                a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                            <!-- <text> สำหรับการแสดงเปอร์เซ็นต์ -->
+                                            <text id="KPI-percentage" x="18" y="20.35" text-anchor="middle"
+                                                dominant-baseline="middle" class="percentage">
+                                                0%
+                                            </text>
+                                        </svg>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
                         <div class="col-4 text-start">
-                            <small class="small-text text-muted">
+                            <small class="small-text-tr">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Target.svg" class="pim-iconKPI"
-                                    style="margin-top: 1px; margin-right: 3px;">
+                                    style="margin-top: 1px; margin-right: 3px; ">
                                 <?= Yii::t('app', 'Target') ?>
                             </small>
                             <br>
                             <strong class="bold-text" id="KPI-target-0">-</strong>
                         </div>
                         <div class="col-4 text-end">
-                            <small class="small-text text-muted">
+                            <small class="small-text-tr">
                                 <?= Yii::t('app', 'Result') ?>
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Result.svg" class="pim-iconKPI"
                                     style="margin-top: 1px; margin-left: 3px;">
@@ -531,9 +461,9 @@ use yii\bootstrap5\ActiveForm;
                 </div>
 
                 <div class="d-flex justify-content-between align-items-center mt-3">
-                    <div class="col-4 text-start">
-                        <p class="small-text text-muted mb-0"><?= Yii::t('app', 'Last Updated on') ?></p>
-                        <strong class="small-text" id="KPI-last-0">-</strong>
+                    <div class="col-4 text-end">
+                        <p class="small-text-last mb-0"><?= Yii::t('app', 'Last Updated on') ?></p>
+                        <strong class="small-text-value" id="KPI-last-0">-</strong>
                     </div>
                     <div class="col-4 text-center">
                         <?php if ($role >= 5 && $contentDetail['KPI']['showPercent'] !== '') { ?>
@@ -565,9 +495,9 @@ use yii\bootstrap5\ActiveForm;
                         <?php } ?>
                         <!-- <strong class="bold-text" id="KPI-count-0">-</strong> -->
                     </div>
-                    <div class="col-4 text-end">
+                    <div class="col-4 text-start">
                         <p class="small-textKPI mb-0"><?= Yii::t('app', 'Due Update Date') ?></p>
-                        <strong class="small-text" id="KPI-due-0">-</strong>
+                        <strong class="small-text-value" id="KPI-due-0">-</strong>
                     </div>
                 </div>
 

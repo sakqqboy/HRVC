@@ -81,36 +81,28 @@ function updateData(index, type, direction) {
         const item = dataType[index]; // ดึงข้อมูลจากดัชนีที่เลือก
         // alert(direction);
         // อัปเดตข้อมูล Progress Bar
-        const progressElement = document.getElementById(`${type}-progress`);
-        progressElement.setAttribute('data-percentage', item.percentage);
-        setProgress(progressElement, item.percentage);
+        const percentage = item.percentage;
+        // const percentage = 60;
+
+        // อัปเดต stroke-dasharray ของ Progress Bar
+        const progressPath = document.getElementById(`${type}-progress`);
+        const dashArrayValue = `${percentage}, 100`;
+        progressPath.setAttribute("stroke-dasharray", dashArrayValue);
+
+        // อัปเดตข้อความเปอร์เซ็นต์ใน <text>
+        const percentageText = document.getElementById(`${type}-percentage`);
+        // alert(percentage);
+        percentageText.textContent = `${percentage}%`;
+
+        // const progressElement = document.getElementById(`${type}-progress`);
+        // progressElement.setAttribute('data-percentage', item.percentage);
+        // setProgress(progressElement, item.percentage);
 
         document.getElementById(`${type}-name-0`).innerText = item.name;
         document.getElementById(`${type}-target-0`).innerText = item.target;
         document.getElementById(`${type}-result-0`).innerText = item.result;
         document.getElementById(`${type}-last-0`).innerText = item.last || '-';
         document.getElementById(`${type}-due-0`).innerText = item.due || '-';
-        // document.getElementById(`${type}-count-0`).innerText = item.count || '-';
-        // direction = 'right'
-        // alert(direction);
-        // direction = 'left'; // ทิศทางการเลื่อน
-        // เพิ่ม animation ให้กับ target
-
-        // // เพิ่ม animation ให้กับ target
-        // const nameElement = document.getElementById(`${type}-name-0`);
-        // const lastElement = document.getElementById(`${type}-last-0`);
-
-        // nameElement.classList.add('bounce-animation');
-        // lastElement.classList.add('bounce-animation');
-
-
-        // // ลบ class หลังจาก animation เสร็จสิ้น
-        // setTimeout(() => {
-        //     nameElement.classList.remove('bounce-animation');
-        //     lastElement.classList.remove('bounce-animation');
-
-        // }, 500); // ความยาวเวลาเดียวกับ animation
-
 
         const nameElement = document.getElementById(`${type}-name-0`);
         const targetElement = document.getElementById(`${type}-target-0`);
@@ -162,10 +154,6 @@ function changeKFIData(direction) {
         // ถ้ากดซ้าย จะลดดัชนี
         currentKFIIndex = (currentKFIIndex - 1 + KFIData.length) % KFIData.length; // ถ้าเกินขอบเขตจะวนกลับไปที่ท้ายสุด
     }
-
-    // ดึงข้อมูลชุดที่เลือกจาก KFIData ตามดัชนีที่ได้
-    // const selectedKFI = KFIData[currentKFIIndex];
-    // alert(`Selected KFI Item: ${JSON.stringify(selectedKFI)}`); // แสดงข้อมูลชุดที่เลือก
 
     // เรียกใช้ฟังก์ชัน updateData เพื่อนำข้อมูลไปแสดงผล
     updateData(currentKFIIndex, 'KFI', direction);

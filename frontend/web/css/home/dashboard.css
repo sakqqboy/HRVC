@@ -138,14 +138,63 @@
     margin-top: 5px;
 }
 
+.small-text-tr {
+    color: var(--Icon-Gray, #666);
+    font-family: "SF Pro Display";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    /* 166.667% */
+}
+
+
+.small-text-r {
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-top: 5px;
+}
+
+.small-text-last {
+    color: var(--Icon-Gray, #666);
+    leading-trim: both;
+    text-edge: cap;
+    font-family: "SF Pro Display";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px;
+    /* 150.002% */
+    letter-spacing: -0.18px;
+}
+
+.small-text-value {
+    color: var(--HRVC---Text-Black, #30313D);
+    leading-trim: both;
+    text-edge: cap;
+    font-family: "SF Pro Display";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    /* 171.431% */
+    letter-spacing: -0.21px;
+}
+
+
+
 .small-textKFI {
     color: #2F42ED;
     leading-trim: both;
     text-edge: cap;
     font-family: "SF Pro Display";
-    font-size: 10px;
+    font-size: 12px;
     font-style: normal;
     font-weight: 600;
+    line-height: 18px;
+    /* 150.002% */
+    letter-spacing: -0.18px;
 }
 
 .small-textKGI {
@@ -153,9 +202,12 @@
     leading-trim: both;
     text-edge: cap;
     font-family: "SF Pro Display";
-    font-size: 10px;
+    font-size: 12px;
     font-style: normal;
     font-weight: 600;
+    line-height: 18px;
+    /* 150.002% */
+    letter-spacing: -0.18px;
 }
 
 .small-textKPI {
@@ -163,17 +215,25 @@
     leading-trim: both;
     text-edge: cap;
     font-family: "SF Pro Display";
-    font-size: 10px;
+    font-size: 12px;
     font-style: normal;
     font-weight: 600;
+    line-height: 18px;
+    /* 150.002% */
+    letter-spacing: -0.18px;
 }
 
 .bold-text {
-    font-size: 14px;
-    line-height: 1.2;
-    display: inline-block;
-    font-weight: 700;
-    margin-top: 5px;
+    color: var(--HRVC---Text-Black, #30313D);
+    text-align: right;
+    leading-trim: both;
+    text-edge: cap;
+    font-family: "SF Pro Display";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    /* 111.111% */
 }
 
 /* File: web/css/dashboard.css */
@@ -410,8 +470,23 @@
 
 
 .btn-update {
+    /* display: flex; */
+    width: 82px;
+    height: 30px;
+    padding: 7px 9px;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
     padding: 3px 3px 3px 3px;
-    font-size: 12px;
+    text-align: center;
+    font-family: "SF Pro Display";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 15.479px;
+    /* 110.567% */
+    letter-spacing: -0.21px;
+    text-transform: capitalize;
     border-radius: 3px;
     border: none;
     color: #FFF;
@@ -440,7 +515,6 @@
 }
 
 .btn-KPI {
-    border-radius: 3px;
     border: none;
     color: #FFF;
     background: var(--Due-Passed-Red, #FF715B);
@@ -943,7 +1017,7 @@ h6.dashboard-kpi-title {
     }
 
     100% {
-        transform: translateX(-30%);
+        transform: translateX(-50%);
         opacity: 0;
     }
 }
@@ -951,7 +1025,7 @@ h6.dashboard-kpi-title {
 /* Animation สำหรับข้อความเลื่อนเข้าจากขวา */
 @keyframes slide-in-left {
     0% {
-        transform: translateX(30%);
+        transform: translateX(50%);
         opacity: 0;
     }
 
@@ -969,7 +1043,7 @@ h6.dashboard-kpi-title {
     }
 
     100% {
-        transform: translateX(30%);
+        transform: translateX(50%);
         opacity: 0;
     }
 }
@@ -977,7 +1051,7 @@ h6.dashboard-kpi-title {
 /* Animation สำหรับข้อความเลื่อนเข้าจากซ้าย */
 @keyframes slide-in-right {
     0% {
-        transform: translateX(-30%);
+        transform: translateX(-50%);
         opacity: 0;
     }
 
@@ -1035,4 +1109,70 @@ h6.dashboard-kpi-title {
     .title-Respiratory {
         margin-top: 25px;
     }
+}
+
+
+
+.flex-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.single-chart {
+    width: 100%;
+    justify-content: space-around;
+}
+
+.circular-chart {
+    display: block;
+    margin: 10px auto;
+    max-width: 80%;
+    max-height: 250px;
+    top: 15px;
+}
+
+.circle-bg {
+    fill: none;
+    stroke: #eee;
+    stroke-width: 3.8;
+}
+
+.circle {
+    fill: none;
+    stroke-width: 2.8;
+    stroke-linecap: round;
+    animation: progress 1s ease-out forwards;
+}
+
+.circular-chart.red .circle {
+    stroke: #FF715B;
+}
+
+.circular-chart.yellow .circle {
+    stroke: #FDCA40;
+}
+
+.circular-chart.blue .circle {
+    stroke: #748EE9;
+}
+
+
+.circular-chart.red .circle-bg {
+    stroke: #FFEAE6;
+}
+
+.circular-chart.yellow .circle-bg {
+    stroke: #FFF2D6;
+}
+
+.circular-chart.blue .circle-bg {
+    stroke: #CCD7FF;
+}
+
+
+.percentage {
+    fill: #666;
+    font-family: sans-serif;
+    font-size: 0.5em;
+    text-anchor: middle;
 }
