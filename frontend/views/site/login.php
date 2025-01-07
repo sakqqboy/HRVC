@@ -22,6 +22,7 @@ body {
 
 .login-container {
     display: flex;
+    padding: 40px 40px 40px 40px;
     /* flex-wrap: wrap; */
     /* justify-content: center; */
     /* align-items: center; */
@@ -116,6 +117,11 @@ body {
     color: #666;
 }
 
+.problem- {
+    font-size: 12px;
+    color: #666;
+}
+
 .content-head {
     /* display: flex; */
     text-align: center;
@@ -152,19 +158,32 @@ body {
     /* รักษาสัดส่วนของรูป */
 }
 
+.head-image img {
+    max-width: 100%;
+    /* ปรับให้รูปยืดหยุ่นตามพื้นที่ */
+    height: auto;
+    /* รักษาสัดส่วนของรูป */
+}
+
 .login-container {
     position: relative;
-    /* ใช้ position relative เพื่อให้ absolute ของ footer อ้างอิงตำแหน่งจาก container นี้ */
-    height: 100vh;
-    /* ให้ container เต็มความสูงของหน้าจอ */
     overflow: hidden;
-    /* ซ่อนส่วนเกินที่อาจล้นออกมา */
+    /* align-items: center; */
+    /* จัดให้อยู่กึ่งกลางแนวตั้ง */
+}
+
+.login-body {
+    position: relative;
+    overflow: hidden;
+    align-items: center;
+    /* จัดให้อยู่กึ่งกลางแนวตั้ง */
 }
 
 .width-rof-new {
     position: relative;
     /* ใช้ position relative เพื่อให้ absolute ของ footer อ้างอิงตำแหน่งจาก container นี้ */
-    height: 100vh;
+    height: 100%;
+    width: 100%;
     /* ให้ container เต็มความสูงของหน้าจอ */
     overflow: hidden;
     /* ซ่อนส่วนเกินที่อาจล้นออกมา */
@@ -174,16 +193,15 @@ body {
 <div class="login-container">
     <div class="col-6">
 
-        <div class="col-12">
-            <img src="<?= Yii::$app->homeUrl ?>image/title-login.svg" class="width-HRVC">
+        <div class="head-image">
+            <img src="<?= Yii::$app->homeUrl ?>image/title-login.svg" class="width-HRVC-new">
         </div>
 
-        <div class="col-12">
+        <div class="login-body">
             <div class="content-head">
                 <div class="text-welcome">Welcome</div>
                 <div class="text-sub-welcome">Welcome back! Please enter your details.</div>
             </div>
-
             <div class="offset-lg-2 col-lg-8">
                 <div class="mb-4">
                     <label class="form-label">Email</label>
@@ -211,18 +229,17 @@ body {
                         </div>
                     </div>
                     <div class="col-6 text-end">
-                        <span class="problem">Signing Problem?</span> <a href="">Contact Support</a>
+                        <span class="problem">Signing Problem?</span> <a class="problem" href="">Contact Support</a>
                     </div>
                 </div>
                 <div class="d-grid gap-2 mt-3">
                     <button type="submit" class="btn btn-primary">Sign in</button>
                 </div>
             </div>
-
         </div>
 
-        <div class="col-12 footer-image">
-            <img src="<?= Yii::$app->homeUrl ?>image/foot-login.svg" class="width-HRVC">
+        <div class="footer-image">
+            <img src="<?= Yii::$app->homeUrl ?>image/foot-login.svg" class="width-HRVC-new">
         </div>
 
     </div>

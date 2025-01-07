@@ -179,52 +179,52 @@ function changeKPIData(direction) {
     updateData(currentKPIIndex, 'KPI', direction);
 }
 
-function handleAjaxSuccess() {
-    $('.progress').each(function () {
-        const percentage = parseInt($(this).data('percentage'), 10);
+// function handleAjaxSuccess() {
+//     $('.progress').each(function () {
+//         const percentage = parseInt($(this).data('percentage'), 10);
 
-        if (isNaN(percentage) || percentage < 0 || percentage > 100) {
-            console.error(`Invalid percentage value: ${percentage}`);
-            return;
-        }
-        setProgress(this, percentage);
-    });
-}
+//         if (isNaN(percentage) || percentage < 0 || percentage > 100) {
+//             console.error(`Invalid percentage value: ${percentage}`);
+//             return;
+//         }
+//         setProgress(this, percentage);
+//     });
+// }
 
 
-function setProgress(element, percentage) {
-    const progressLeft = element.querySelector('.progress-left .progress-bar');
-    const progressRight = element.querySelector('.progress-right .progress-bar');
-    const progressValue = element.querySelector('.progress-value');
+// function setProgress(element, percentage) {
+//     const progressLeft = element.querySelector('.progress-left .progress-bar');
+//     const progressRight = element.querySelector('.progress-right .progress-bar');
+//     const progressValue = element.querySelector('.progress-value');
 
-    // ดึงค่าสีจาก data attribute
-    const colorLeft = $(element).data('color-left');
-    const colorRight = $(element).data('color-right');
-    const colorAfter = $(element).data('color-after');
+//     // ดึงค่าสีจาก data attribute
+//     const colorLeft = $(element).data('color-left');
+//     const colorRight = $(element).data('color-right');
+//     const colorAfter = $(element).data('color-after');
 
-    // อัปเดตสีของ progress bar
-    progressRight.style.borderColor = colorRight;
-    progressLeft.style.borderColor = colorLeft;
+//     // อัปเดตสีของ progress bar
+//     progressRight.style.borderColor = colorRight;
+//     progressLeft.style.borderColor = colorLeft;
 
-    // เปลี่ยนสีของ ::after โดยใช้ CSS custom property
-    $(element).css('--color-after', colorAfter);
+//     // เปลี่ยนสีของ ::after โดยใช้ CSS custom property
+//     $(element).css('--color-after', colorAfter);
 
-    // เพิ่มเอฟเฟกต์เลื่อนค่าเปอร์เซ็นต์
-    progressValue.style.opacity = 0; // ซ่อนข้อความเก่าชั่วคราว
-    // progressValue.style.transform = 'translateY(-10px)'; // ขยับข้อความขึ้น
-    setTimeout(() => {
-        progressValue.textContent = `${percentage}%`; // เปลี่ยนข้อความใหม่
-        progressValue.style.opacity = 1; // แสดงข้อความใหม่
-        // progressValue.style.transform = 'translateY(0)'; // กลับมาตำแหน่งเดิม
-    }, 300); // เวลาที่ตรงกับ transition ใน CSS
+//     // เพิ่มเอฟเฟกต์เลื่อนค่าเปอร์เซ็นต์
+//     progressValue.style.opacity = 0; // ซ่อนข้อความเก่าชั่วคราว
+//     // progressValue.style.transform = 'translateY(-10px)'; // ขยับข้อความขึ้น
+//     setTimeout(() => {
+//         progressValue.textContent = `${percentage}%`; // เปลี่ยนข้อความใหม่
+//         progressValue.style.opacity = 1; // แสดงข้อความใหม่
+//         // progressValue.style.transform = 'translateY(0)'; // กลับมาตำแหน่งเดิม
+//     }, 300); // เวลาที่ตรงกับ transition ใน CSS
 
-    // คำนวณการหมุน
-    if (percentage <= 50) {
-        progressRight.style.transform = `rotate(${(percentage / 50) * 180}deg)`;
-        progressLeft.style.transform = `rotate(0deg)`;
-    } else {
-        progressRight.style.transform = `rotate(180deg)`;
-        progressLeft.style.transform = `rotate(${((percentage - 50) / 50) * 180}deg)`;
-    }
-}
+//     // คำนวณการหมุน
+//     if (percentage <= 50) {
+//         progressRight.style.transform = `rotate(${(percentage / 50) * 180}deg)`;
+//         progressLeft.style.transform = `rotate(0deg)`;
+//     } else {
+//         progressRight.style.transform = `rotate(180deg)`;
+//         progressLeft.style.transform = `rotate(${((percentage - 50) / 50) * 180}deg)`;
+//     }
+// }
 

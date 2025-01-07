@@ -649,7 +649,7 @@ endif;
 $(document).ready(function() {
     // alert(`start`); // แสดงข้อมูลชุดที่เลือก
     chaengeData()
-    handleAjaxSuccess()
+    // handleAjaxSuccess()
 });
 
 function chaengeData() {
