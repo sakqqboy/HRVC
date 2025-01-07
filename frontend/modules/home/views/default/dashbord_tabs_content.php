@@ -1,13 +1,5 @@
 <?php
-
 use yii\bootstrap5\ActiveForm;
-
-// if (empty($contentDetail['KFI']['KFIData'] ?? null) && empty($contentDetail['KGI']['KGIData']  ?? null) && empty($contentDetail['KPI']['KPIData']  ?? null)):
-?>
-<!-- <p>No data available.</p> -->
-<?php
-
-// else:
 
     $updateClickKFI = 'onclick="javascript:updateKfi(KFIData[currentKFIIndex].kfiId)"';
     // Default assignments
@@ -125,18 +117,18 @@ use yii\bootstrap5\ActiveForm;
                                     <div class="single-chart">
                                         <svg viewBox="0 0 36 36" class="circular-chart blue">
                                             <path class="circle-bg" d="M18 2.0845
-                                                a 15.9155 15.9155 0 0 1 0 31.831
-                                                a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                            a 15.9155 15.9155 0 0 1 0 31.831
+                                            a 15.9155 15.9155 0 0 1 0 -31.831" />
                                             <path class="circle" id="KFI-progress" stroke-dasharray="0, 100" d="M18 2.0845
-                                                a 15.9155 15.9155 0 0 1 0 31.831
-                                                a 15.9155 15.9155 0 0 1 0 -31.831" />
-                                            <!-- <text> สำหรับการแสดงเปอร์เซ็นต์ -->
+                                            a 15.9155 15.9155 0 0 1 0 31.831
+                                            a 15.9155 15.9155 0 0 1 0 -31.831" />
                                             <text id="KFI-percentage" x="18" y="20.35" text-anchor="middle"
                                                 dominant-baseline="middle" class="percentage">
                                                 0%
                                             </text>
                                         </svg>
                                     </div>
+
                                 </div>
                             </div>
                         </div>

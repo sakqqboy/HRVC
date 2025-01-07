@@ -1145,6 +1145,7 @@ h6.dashboard-kpi-title {
     transition: stroke-dashoffset 1s ease-out;
 }
 
+
 .circular-chart.red .circle {
     stroke: #FF715B;
 }
