@@ -755,6 +755,10 @@ h6.dashboard-kpi-title {
     /* เพิ่มระยะห่างระหว่างแต่ละ tab */
 }
 
+.dashboard-navigation {
+    height: 45vh;
+}
+
 .schedule-item {
     padding: 10.448px 16.717px;
     gap: 30.3px;
@@ -772,8 +776,12 @@ h6.dashboard-kpi-title {
     /* ลบช่องว่างด้านล่าง */
     flex-direction: column;
     /* ทำให้เป็นแนวตั้ง */
-
+    height: 100%;
+    /* ยืดความสูงให้เต็มพื้นที่ */
+    flex-grow: 1;
+    /* ยืดให้เต็มพื้นที่ที่เหลือ */
 }
+
 
 .schedule-item strong {
     font-weight: 600;
@@ -790,7 +798,7 @@ h6.dashboard-kpi-title {
 
 #upcoming-schedule,
 #pending-approvals {
-    max-height: 250px;
+    max-height: 300px;
     /* กำหนดความสูงสูงสุด */
     overflow-y: auto;
     /* เมื่อมีเนื้อหามากกว่าความสูงที่กำหนด ให้สามารถเลื่อนได้ */

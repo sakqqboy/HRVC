@@ -168,7 +168,16 @@ body {
     /* ให้ container เต็มความสูงของหน้าจอ */
     overflow: hidden;
     /* ซ่อนส่วนเกินที่อาจล้นออกมา */
+    padding: 0px 0px 0px 0px;
 }
+
+@media (min-width: 1735px) and (min-height: 950px) {
+    .width-rof-new {
+        padding: 0px 100px 0px 100px;
+        /* เพิ่ม padding ด้านซ้ายและขวา */
+    }
+}
+
 
 
 .input-group-icon {
