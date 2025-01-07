@@ -24,33 +24,9 @@ body {
     display: flex;
     padding: 40px 40px 40px 40px;
     /* flex-wrap: wrap; */
-    /* justify-content: center; */
+    justify-content: center;
     /* align-items: center; */
-    /* height: 100vh; */
-}
-
-.login-left {
-    width: 50%;
-    padding: 50px;
-}
-
-.login-right {
-    width: 50%;
-    background-color: #e6f3ff;
-    /* display: flex; */
-    /* justify-content: center; */
-    /* align-items: center; */
-}
-
-.text-heder {
-    color: #2580D3;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.text-sub-heder {
-    color: #666;
-    font-size: 16px;
+    height: 100vh;
 }
 
 .text-welcome {
@@ -67,13 +43,30 @@ body {
 }
 
 .form-label {
-    font-size: 14px;
-    color: #333;
+    color: var(--HRVC---Text-Black, #30313D);
+    leading-trim: both;
+    text-edge: cap;
+    font-family: "SF Pro Display";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 19.286px;
+    /* 107.143% */
 }
 
 .form-control {
+    border-left: none;
     border-radius: 5px;
     height: 45px;
+    background-color: var(--bs-tertiary-bg);
+    /* Set background to white */
+}
+
+.form-password {
+    border-left: none;
+    border-radius: 5px;
+    height: 45px;
+    background-color: white;
 }
 
 .btn-primary {
@@ -88,67 +81,53 @@ body {
     background-color: #1c6cb5;
 }
 
-.link-privacy {
-    font-size: 12px;
-    text-align: center;
-    margin-top: 20px;
-}
-
-.background-blue {
-    padding: 20px;
-    text-align: center;
-}
-
-.background-blue img {
-    max-width: 100%;
-}
-
-.all-cc {
-    text-align: center;
-    margin-top: 30px;
-}
-
-.checkbox-remember {
-    font-size: 14px;
-}
-
 .problem {
-    font-size: 12px;
-    color: #666;
+    color: var(--HRVC---Light-Text, #94989C);
+    leading-trim: both;
+    text-edge: cap;
+    font-family: "SF Pro Display";
+    font-size: 11.633px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
 }
 
-.problem- {
-    font-size: 12px;
-    color: #666;
+.problem-contact {
+    color: var(--Primary-Blue---HRVC, #2580D3);
+    leading-trim: both;
+    text-edge: cap;
+    font-family: "SF Pro Display";
+    font-size: 11.633px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: none;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
 }
+
 
 .content-head {
     /* display: flex; */
     text-align: center;
-
     /* justify-content: center; */
 }
 
 .content-center {
     /* display: flex; */
     text-align: center;
-
     /* justify-content: center; */
 }
 
-
-
 .footer-image {
     position: absolute;
-    /* ใช้ตำแหน่งแบบ absolute */
     bottom: 0;
-    /* ติดกับขอบล่าง */
     left: 0;
-    /* ชิดซ้าย */
     width: 100%;
-    /* กำหนดให้ยืดเต็มความกว้าง */
-    /* text-align: center; */
-    /* จัดรูปให้อยู่กึ่งกลาง */
+
 }
 
 .footer-image img {
@@ -188,6 +167,24 @@ body {
     overflow: hidden;
     /* ซ่อนส่วนเกินที่อาจล้นออกมา */
 }
+
+
+.input-group-icon {
+    display: flex;
+    align-items: center;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bs-body-color);
+    text-align: center;
+    white-space: nowrap;
+    background-color: var(--bs-tertiary-bg);
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    border-right: none;
+    /* Remove the left border */
+    border-radius: var(--bs-border-radius);
+}
 </style>
 
 <div class="login-container">
@@ -206,7 +203,9 @@ body {
                 <div class="mb-4">
                     <label class="form-label">Email</label>
                     <div class="input-group">
-                        <span class="input-group-text"><i class="fa fa-envelope-o"></i></span>
+                        <span class="input-group-icon">
+                            <img src="<?= Yii::$app->homeUrl ?>image/mail-login.svg" class="">
+                        </span>
                         <input type="email" name="LoginForm[username]" class="form-control" required
                             placeholder="email@tokyoconsultingfirmlimited.com">
                     </div>
@@ -214,22 +213,27 @@ body {
                 <div class="mb-3">
                     <label class="form-label">Password</label>
                     <div class="input-group">
-                        <span class="input-group-text"><i class="fa fa-unlock-alt"></i></span>
+                        <span class="input-group-icon">
+                            <img src="<?= Yii::$app->homeUrl ?>image/lock-login.svg" class="">
+                        </span>
                         <input id="password" type="password" name="LoginForm[password]" class="form-control" required
                             placeholder="password">
-                        <span class="input-group-text" onmousedown="javascript:showPassword()"
-                            onmouseup="javascript:setPassword()"><i class="fa fa-eye"></i></span>
+                        <span class="input-group-text" style="border-left: none;"
+                            onmousedown="javascript:showPassword()" onmouseup="javascript:setPassword()">
+                            <img src="<?= Yii::$app->homeUrl ?>image/eye-login.svg" class="">
+                        </span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <div class="form-check checkbox-remember">
                             <input class="form-check-input" type="checkbox" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault"> Remember Credentials</label>
+                            <label class="form-label" for="flexCheckDefault"> Remember Credentials</label>
                         </div>
                     </div>
                     <div class="col-6 text-end">
-                        <span class="problem">Signing Problem?</span> <a class="problem" href="">Contact Support</a>
+                        <span class="problem">Signing Problem?</span> <a class="problem-contact" href="">Contact
+                            Support</a>
                     </div>
                 </div>
                 <div class="d-grid gap-2 mt-3">
