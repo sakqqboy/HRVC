@@ -21,6 +21,21 @@ $this->title = "Dashboard";
         /* ซ่อนส่วนที่เกิน */
     }
 }
+
+@media (max-width: 1410px) and (max-height: 950px) {
+    .dashboard-container {
+        transform: scale(0.75);
+        /* ลดขนาดลงเป็น 67% */
+        transform-origin: top left;
+        /* จุดเริ่มต้นของการย่อ */
+        width: calc(100% / 0.75);
+        /* เพื่อรักษาพื้นที่ตามสัดส่วน */
+        height: calc(100% / 0.75);
+        /* ให้ครอบคลุมพื้นที่ทั้งหมด */
+        overflow: hidden;
+        /* ซ่อนส่วนที่เกิน */
+    }
+}
 </style>
 <!-- <script>
 document.addEventListener('DOMContentLoaded', () => {
