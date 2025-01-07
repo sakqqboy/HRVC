@@ -133,7 +133,7 @@ class DashbordController extends Controller
                                 }
                             }
                         }	
-
+                        $showPercent = 0;
                         $percent = explode('.', $ratio);
                         if (isset($percent[0]) && $percent[0] == '0') {
                             if (isset($percent[1])) {
@@ -205,7 +205,7 @@ class DashbordController extends Controller
                                 }
                             }
                         }	
-
+                        $showPercent = 0;
                         $percent = explode('.', $ratio);
                         if (isset($percent[0]) && $percent[0] == '0') {
                             if (isset($percent[1])) {
@@ -276,7 +276,7 @@ class DashbordController extends Controller
                                 }
                             }
                         }	
-
+                        $showPercent = 0;
                         $percent = explode('.', $ratio);
                         if (isset($percent[0]) && $percent[0] == '0') {
                             if (isset($percent[1])) {
