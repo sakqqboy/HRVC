@@ -27,6 +27,7 @@ function loadCompanyTap(companyId) {
             $('#tab-content-container').html(data);
         },
         error: function (xhr, status, error) {
+            alert(error);
             console.error('Error:', error);
         }
     });
@@ -44,6 +45,7 @@ function loadTeamTap(teamId) {
             $('#tab-content-container').html(data);
         },
         error: function (xhr, status, error) {
+            alert(error);
             console.error('Error:', error);
         }
     });
@@ -62,6 +64,7 @@ function loadSelfTap(employeeId) {
             $('#tab-content-container').html(data);
         },
         error: function (xhr, status, error) {
+            alert(error);
             console.error('Error:', error);
         }
     });

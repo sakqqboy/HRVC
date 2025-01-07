@@ -735,6 +735,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ตรวจสอบว่า element มีอยู่จริง
     if (!progressBar) {
+        alert("Progress bar element not found");
         console.error("Progress bar element not found");
         return;
     }
@@ -743,6 +744,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const targetValue = parseInt(progressBar.getAttribute("data-target"), 10);
 
     if (isNaN(targetValue)) {
+        alert("Invalid target value");
         console.error("Invalid target value");
         return;
     }
