@@ -756,7 +756,8 @@ h6.dashboard-kpi-title {
 }
 
 .dashboard-navigation {
-    height: 45vh;
+    height: 100%;
+    /* ความสูงเต็มพื้นที่ของ parent container */
 }
 
 .schedule-item {
@@ -834,7 +835,12 @@ h6.dashboard-kpi-title {
     padding: 10.448px;
     flex-shrink: 0;
     /* ทำให้ไม่ยุบตัว */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* เพื่อให้ปุ่มกว้างเต็ม container */
 }
+
 
 .text-ViewAllbutton a {
     text-decoration: none;
