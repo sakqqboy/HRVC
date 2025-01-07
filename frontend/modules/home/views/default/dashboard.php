@@ -7,37 +7,40 @@ $this->title = "Dashboard";
 <!-- <meta name="view   port" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> -->
 
 <style>
-@media (max-width: 1290px) and (max-height: 670px) {
+@media (max-width: 1735px) and (max-height: 950px) {
     .dashboard-container {
-        transform: scale(0.64);
-        /* ลดขนาดลงเป็น 67% */
+        transform: scale(0.85);
+        /* ลดขนาดลงเป็น 75% */
         transform-origin: top left;
-        /* จุดเริ่มต้นของการย่อ */
-        width: calc(100% / 0.64);
-        /* เพื่อรักษาพื้นที่ตามสัดส่วน */
-        height: calc(100% / 0.64);
-        /* ให้ครอบคลุมพื้นที่ทั้งหมด */
+        width: calc(100% / 0.85);
+        height: calc(100% / 0.85);
         overflow: hidden;
-        /* ซ่อนส่วนที่เกิน */
     }
 }
 
-@media (max-width: 1410px) and (max-height: 950px) {
+@media (max-width: 1535px) and (max-height: 950px) {
     .dashboard-container {
         transform: scale(0.75);
-        /* ลดขนาดลงเป็น 67% */
+        /* ลดขนาดลงเป็น 75% */
         transform-origin: top left;
-        /* จุดเริ่มต้นของการย่อ */
         width: calc(100% / 0.75);
-        /* เพื่อรักษาพื้นที่ตามสัดส่วน */
         height: calc(100% / 0.75);
-        /* ให้ครอบคลุมพื้นที่ทั้งหมด */
         overflow: hidden;
-        /* ซ่อนส่วนที่เกิน */
+    }
+}
+
+@media (max-width: 1335px) and (max-height: 750px) {
+    .dashboard-container {
+        transform: scale(0.65);
+        /* ลดขนาดลงเป็น 64% */
+        transform-origin: top left;
+        width: calc(100% / 0.65);
+        height: calc(100% / 0.65);
+        overflow: hidden;
     }
 }
 </style>
-<!-- <script>
+<script>
 document.addEventListener('DOMContentLoaded', () => {
     const width = window.innerWidth;
     const height = window.innerHeight;
@@ -50,12 +53,12 @@ window.addEventListener('resize', () => {
     const height = window.innerHeight;
     document.getElementById('screen-size').innerText = `Current screen size: ${width}px x ${height}px`;
 });
-</script> -->
+</script>
 
 <div class="dashboard-container">
     <div class="row pl-4">
         <div class="aler pim-body bg-white" style="margin-top: -10px;">
-            <!-- <div id="screen-size" style="font-size: 16px; color: #333;">แสดงขนาดหน้าจอ</div> -->
+            <div id="screen-size" style="font-size: 16px; color: #333;">แสดงขนาดหน้าจอ</div>
 
             <div class="row">
                 <!-- Chart -->
