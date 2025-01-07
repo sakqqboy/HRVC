@@ -67,7 +67,7 @@ use yii\bootstrap5\ActiveForm;
                         <!-- Right Section -->
                         <div class="col-5 text-end">
                             <span class="completion-percentage">
-                                <?= isset($contentDetail['KFI']['showPercent']) && $contentDetail['KFI']['showPercent'] !== '' ? $contentDetail['KFI']['showPercent'] : 0 ?>%
+                                <?= isset($contentDetail['KFI']['showPercent']) && is_numeric($contentDetail['KFI']['showPercent']) ? $contentDetail['KFI']['showPercent'] : 0 ?>%
                             </span>
                             <span class="total-achievement"><?= Yii::t('app', 'Total Achievement') ?></span>
                         </div>
@@ -216,7 +216,7 @@ use yii\bootstrap5\ActiveForm;
                         <!-- Right Section -->
                         <div class="col-5 text-end">
                             <span class="completion-percentage">
-                                <?= isset($contentDetail['KGI']['showPercent']) && $contentDetail['KGI']['showPercent'] !== '' ? $contentDetail['KGI']['showPercent'] : 0 ?>%
+                                <?= isset($contentDetail['KGI']['showPercent']) && is_numeric($contentDetail['KGI']['showPercent']) ? $contentDetail['KGI']['showPercent'] : 0 ?>%
                             </span>
                             <span class="total-achievement"><?= Yii::t('app', 'Total Achievement') ?></span>
                         </div>
@@ -367,8 +367,8 @@ use yii\bootstrap5\ActiveForm;
                         </div>
                         <!-- Right Section -->
                         <div class="col-4 text-end">
-                            <span class="completion-percentage" id="completion-percentage">
-                                <?= isset($contentDetail['KPI']['showPercent']) && $contentDetail['KPI']['showPercent'] !== '' ? $contentDetail['KPI']['showPercent'] : 0 ?>%
+                            <span class="completion-percentage">
+                                <?= isset($contentDetail['KPI']['showPercent']) && is_numeric($contentDetail['KPI']['showPercent']) ? $contentDetail['KPI']['showPercent'] : 0 ?>%
                             </span>
                             <span class="total-achievement"><?= Yii::t('app', 'Completed') ?></span>
                         </div>
