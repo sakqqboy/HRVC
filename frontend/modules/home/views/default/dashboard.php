@@ -1,6 +1,25 @@
 <?php
-$this->title = "Dashboard"
+$this->title = "Dashboard";
 ?>
+
+
+<!-- เพิ่ม meta tag สำหรับการซูม -->
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<style>
+/* ซูมเอ้าท์เฉพาะหน้าจอที่ต่ำกว่า 1240x578 */
+@media (max-width: 1240px) and (max-height: 578px) {
+    profile-card {
+        transform: scale(0.67);
+        /* ลดขนาด */
+        transform-origin: top left;
+        /* จุดเริ่มต้นการซูม */
+        overflow: hidden;
+        /* ซ่อนส่วนที่เกินขอบ */
+    }
+} -->
+</style>
+
 <div class="row pl-4">
 
     <div class="aler pim-body bg-white" style="margin-top: -10px;">
@@ -44,6 +63,5 @@ $this->title = "Dashboard"
         </div>
 
     </div>
-
 
 </div>
