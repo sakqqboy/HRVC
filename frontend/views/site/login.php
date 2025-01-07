@@ -168,13 +168,13 @@ body {
     /* ให้ container เต็มความสูงของหน้าจอ */
     overflow: hidden;
     /* ซ่อนส่วนเกินที่อาจล้นออกมา */
-    padding: 0px 0px 0px 0px;
+    /* padding: 0px 100px 0px 100px; */
 }
 
-@media (min-width: 1735px) and (min-height: 950px) {
+@media (min-width: 1920px) and (min-height: 945px) {
     .width-rof-new {
-        padding: 0px 100px 0px 100px;
-        /* เพิ่ม padding ด้านซ้ายและขวา */
+        padding-left: 100px;
+        padding-right: 100px;
     }
 }
 
@@ -197,7 +197,21 @@ body {
     border-radius: var(--bs-border-radius);
 }
 </style>
+<!-- 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    document.getElementById('screen-size').innerText = `Current screen size: ${width}px x ${height}px`;
+});
 
+// อัปเดตขนาดเมื่อมีการปรับหน้าต่าง
+window.addEventListener('resize', () => {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    document.getElementById('screen-size').innerText = `Current screen size: ${width}px x ${height}px`;
+});
+</script> -->
 <div class="login-container">
     <div class="col-6">
 
@@ -207,6 +221,7 @@ body {
 
         <div class="login-body">
             <div class="content-head">
+                <!-- <div id="screen-size" style="font-size: 16px; color: #333;">แสดงขนาดหน้าจอ</div> -->
                 <div class="text-welcome">Welcome</div>
                 <div class="text-sub-welcome">Welcome back! Please enter your details.</div>
             </div>
