@@ -40,7 +40,7 @@ $this->title = "Dashboard";
     }
 }
 </style>
-<script>
+<!-- <script>
 document.addEventListener('DOMContentLoaded', () => {
     const width = window.innerWidth;
     const height = window.innerHeight;
@@ -53,12 +53,12 @@ window.addEventListener('resize', () => {
     const height = window.innerHeight;
     document.getElementById('screen-size').innerText = `Current screen size: ${width}px x ${height}px`;
 });
-</script>
+</script> -->
 
 <div class="dashboard-container">
     <div class="row pl-4">
         <div class="aler pim-body bg-white" style="margin-top: -10px;">
-            <div id="screen-size" style="font-size: 16px; color: #333;">แสดงขนาดหน้าจอ</div>
+            <!-- <div id="screen-size" style="font-size: 16px; color: #333;">แสดงขนาดหน้าจอ</div> -->
 
             <div class="row">
                 <!-- Chart -->
