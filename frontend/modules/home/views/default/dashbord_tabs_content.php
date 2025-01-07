@@ -98,19 +98,21 @@ use yii\bootstrap5\ActiveForm;
                     </div>
                 </div>
 
-                <div class="card-tab2 bg-white" id="KFI">
-                    <div class="key-title-container" id="content-0">
-                        <div class="col-9">
+                <div class="card-tab2" id="KFI">
+                    <div class="key-title-container" id="content-KFI">
+                        <div class="col-9 d-flex">
                             <span class="key-total" id="KFI-name-0"><?= Yii::t('app', '-') ?></span>
                         </div>
                         <div class="col-2 pr-6" style="display: flex; justify-content: flex-end; align-items: center;">
-                            <button class="show-more-btn" cursor="pointer" onclick="changeKFIData('left')">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/btn-KFI-left.svg">
+                            <button class="show-more-btn" onclick="changeKFIData('left')">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/btn-KFI-left.svg"
+                                    style="margin-top: 1px; margin-left: 3px;">
                             </button>
                         </div>
                         <div class="col-1" style="display: flex; justify-content: flex-end; align-items: center;">
-                            <button class="show-more-btn" cursor="pointer" onclick="changeKFIData('right')">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/btn-KFI-right.svg">
+                            <button class="show-more-btn" onclick="changeKFIData('right')">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/btn-KFI-right.svg"
+                                    style="margin-top: 1px; margin-left: 3px;">
                             </button>
                         </div>
                     </div>

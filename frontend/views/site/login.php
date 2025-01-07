@@ -114,6 +114,7 @@ body {
     /* display: flex; */
     text-align: center;
     /* justify-content: center; */
+    margin-bottom: 31px;
 }
 
 .content-center {
@@ -152,6 +153,7 @@ body {
 }
 
 .login-body {
+    /* margin-top: 100px; */
     position: relative;
     overflow: hidden;
     align-items: center;

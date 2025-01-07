@@ -105,7 +105,7 @@ class DashbordController extends Controller
             $totlePercent = 0;
 			foreach ($kfis as $kfi) :
 
-                if (strlen($kfi["kfiName"]) > 34) {
+                if (strlen($kfi["kfiName"]) > 25) {
 					$kfiname = substr($kfi["kfiName"], 0, 34) . '. . .';
 				} else {
 					$kfiname = $kfi["kfiName"];
@@ -179,7 +179,7 @@ class DashbordController extends Controller
             $totlePercent = 0;
 			foreach ($kgis as $kgi) :
 
-                if (strlen($kgi["kgiName"]) > 34) {
+                if (strlen($kgi["kgiName"]) > 25) {
 					$kginame = substr($kgi["kgiName"], 0, 34) . '. . .';
 				} else {
 					$kginame = $kgi["kgiName"];
@@ -250,7 +250,7 @@ class DashbordController extends Controller
             $totlePercent = 0;
 			foreach ($kpis as $kpi) :
 
-                if (strlen($kpi["kpiName"]) > 34) {
+                if (strlen($kpi["kpiName"]) > 25) {
 					$kpiname = substr($kpi["kpiName"], 0, 34) . '. . .';
 				} else {
 					$kpiname = $kpi["kpiName"];
@@ -393,7 +393,7 @@ class DashbordController extends Controller
 					$ratio = 0;
 				}
 
-                if (strlen($kgiTeam["kgiName"]) > 34) {
+                if (strlen($kgiTeam["kgiName"]) > 25) {
 					$kginame = substr($kgiTeam["kgiName"], 0, 34) . '. . .';
 				} else {
 					$kginame = $kgiTeam["kgiName"];
@@ -453,7 +453,7 @@ class DashbordController extends Controller
 					$ratio = 0;
 				}
 
-                if (strlen($kpiTeam["kpiName"]) > 34) {
+                if (strlen($kpiTeam["kpiName"]) > 25) {
 					$kpiname = substr($kpiTeam["kpiName"], 0, 34) . '. . .';
 				} else {
 					$kpiname = $kpiTeam["kpiName"];
@@ -588,7 +588,7 @@ class DashbordController extends Controller
             } else {
                 $ratio = 0;
             }
-            if (strlen($kgi["kgiName"]) > 34) {
+            if (strlen($kgi["kgiName"]) > 25) {
                 $kginame = substr($kgi["kgiName"], 0, 34) . '. . .';
             } else {
                 $kginame = $kgi["kgiName"];
@@ -645,7 +645,7 @@ class DashbordController extends Controller
             } else {
                 $ratio = 0;
             }
-            if (strlen($kpi["kpiName"]) > 34) {
+            if (strlen($kpi["kpiName"]) > 25) {
                 $kpiname = substr($kpi["kpiName"], 0, 34) . '. . .';
             } else {
                 $kpiname = $kpi["kpiName"];

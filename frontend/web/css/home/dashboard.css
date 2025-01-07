@@ -233,6 +233,7 @@
     font-style: normal;
     font-weight: 600;
     line-height: 20px;
+    display: inline-block;
     /* 111.111% */
 }
 

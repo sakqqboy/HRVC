@@ -27,7 +27,7 @@ function loadCompanyTap(companyId) {
             $('#tab-content-container').html(data);
         },
         error: function (xhr, status, error) {
-            alert(error);
+            // alert(error);
             console.error('Error:', error);
         }
     });
@@ -45,7 +45,7 @@ function loadTeamTap(teamId) {
             $('#tab-content-container').html(data);
         },
         error: function (xhr, status, error) {
-            alert(error);
+            // alert(error);
             console.error('Error:', error);
         }
     });
@@ -64,7 +64,7 @@ function loadSelfTap(employeeId) {
             $('#tab-content-container').html(data);
         },
         error: function (xhr, status, error) {
-            alert(error);
+            // alert(error);
             console.error('Error:', error);
         }
     });
@@ -110,6 +110,8 @@ function updateData(index, type, direction) {
         const nameElement = document.getElementById(`${type}-name-0`);
         const targetElement = document.getElementById(`${type}-target-0`);
         const resultElement = document.getElementById(`${type}-result-0`);
+
+        // alert(nameElement);
 
         // กำหนดคลาสสำหรับเลื่อนเข้าและเลื่อนออกตามทิศทาง
         const outClass = direction == 'right' ? 'slide-out-animation-left' : 'slide-out-animation-right';
