@@ -106,7 +106,7 @@ class DashbordController extends Controller
 			foreach ($kfis as $kfi) :
 
                 if (strlen($kfi["kfiName"]) > 18) {
-					$kfiname = substr($kfi["kfiName"], 0, 34) . '. . .';
+					$kfiname = substr($kfi["kfiName"], 0, 18) . '. . .';
 				} else {
 					$kfiname = $kfi["kfiName"];
 				}
@@ -180,7 +180,7 @@ class DashbordController extends Controller
 			foreach ($kgis as $kgi) :
 
                 if (strlen($kgi["kgiName"]) > 18) {
-					$kginame = substr($kgi["kgiName"], 0, 34) . '. . .';
+					$kginame = substr($kgi["kgiName"], 0, 18) . '. . .';
 				} else {
 					$kginame = $kgi["kgiName"];
 				}
@@ -251,7 +251,7 @@ class DashbordController extends Controller
 			foreach ($kpis as $kpi) :
 
                 if (strlen($kpi["kpiName"]) > 18) {
-					$kpiname = substr($kpi["kpiName"], 0, 34) . '. . .';
+					$kpiname = substr($kpi["kpiName"], 0, 18) . '. . .';
 				} else {
 					$kpiname = $kpi["kpiName"];
 				}
@@ -394,7 +394,7 @@ class DashbordController extends Controller
 				}
 
                 if (strlen($kgiTeam["kgiName"]) > 18) {
-					$kginame = substr($kgiTeam["kgiName"], 0, 34) . '. . .';
+					$kginame = substr($kgiTeam["kgiName"], 0, 18) . '. . .';
 				} else {
 					$kginame = $kgiTeam["kgiName"];
 				}
@@ -454,7 +454,7 @@ class DashbordController extends Controller
 				}
 
                 if (strlen($kpiTeam["kpiName"]) > 18) {
-					$kpiname = substr($kpiTeam["kpiName"], 0, 34) . '. . .';
+					$kpiname = substr($kpiTeam["kpiName"], 0, 18) . '. . .';
 				} else {
 					$kpiname = $kpiTeam["kpiName"];
 				}
@@ -589,7 +589,7 @@ class DashbordController extends Controller
                 $ratio = 0;
             }
             if (strlen($kgi["kgiName"]) > 18) {
-                $kginame = substr($kgi["kgiName"], 0, 34) . '. . .';
+                $kginame = substr($kgi["kgiName"], 0, 18) . '. . .';
             } else {
                 $kginame = $kgi["kgiName"];
             }
@@ -646,7 +646,7 @@ class DashbordController extends Controller
                 $ratio = 0;
             }
             if (strlen($kpi["kpiName"]) > 18) {
-                $kpiname = substr($kpi["kpiName"], 0, 34) . '. . .';
+                $kpiname = substr($kpi["kpiName"], 0, 18) . '. . .';
             } else {
                 $kpiname = $kpi["kpiName"];
             }
