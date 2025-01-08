@@ -118,31 +118,96 @@
 }
 
 .name-tokyo {
-    font-weight: bold;
-    font-size: 32px;
-    padding-top: 40px;
+    /* padding-top: 20px; */
 }
 
+.name-full-tokyo {
+    color: var(--HRVC---Light-Text, #94989C);
+    leading-trim: both;
+    text-edge: cap;
+    font-family: "SF Pro Display";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.name-sub-tokyo {
+    color: var(--HRVC---Text-Black, #30313D);
+    leading-trim: both;
+    text-edge: cap;
+    font-family: "SF Pro Display";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+
 .tokyo-small {
-    font-size: 12px;
-    padding-top: 10px;
+    color: #3C3D48;
+    leading-trim: both;
+    text-edge: cap;
+    font-family: "SF Pro Display";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
 .all-information {
     font-size: 14px;
 }
 
+.hr-group {
+    border: none;
+    /* ลบเส้น default */
+    border-top: 0.5px solid var(--Stroke-Bluish-Gray, #BBCDDE);
+    /* กำหนดความหนาและสีของเส้น */
+    margin-top: 10px;
+    /* ปรับระยะขอบถ้าจำเป็น */
+}
+
+.hr-group-vertical {
+    width: 10px;
+    height: 0px;
+    transform: rotate(90deg);
+    stroke-width: 0.5px;
+    stroke: var(--Stroke-Bluish-Gray, #BBCDDE);
+}
+
 .Group-Information {
-    padding-left: 20px;
-    text-transform: uppercase;
-    font-weight: 700;
-    line-height: 16.71px;
-    font-size: 14px;
+    /* padding-left: 40px; */
+    color: #3C3D48;
+    leading-trim: both;
+    text-edge: cap;
+    font-family: "SF Pro Display";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: capitalize;
 }
 
 .name-head {
-    font-weight: 700;
+    color: var(--HRVC---Text-Black, #30313D);
+    text-align: right;
+    leading-trim: both;
+    text-edge: cap;
+    font-family: "SF Pro Display";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
     text-align: end;
+}
+
+.group-body {
+    display: flex;
+    /* width: 793px; */
+    /* flex-direction: column; */
+    /* align-items: flex-start; */
+    gap: 42px;
 }
 
 .company-group-picture {
@@ -160,12 +225,73 @@
     font-size: 22px;
 }
 
+.circle-container {
+    display: flex;
+    align-items: center;
+    gap: 7.5px;
+    position: relative;
+}
+
+.cycle-current {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32.25px;
+    height: 32.25px;
+    border-radius: 15.75px;
+    border: 0.75px solid var(--Active-Primary-Blue-Stock, #CBD5E1);
+    background: var(--Primary-Blue---HRVC, #2580D3);
+    position: relative;
+    z-index: 1;
+    /* ทำให้วงกลมซ้อน */
+}
+
+.cycle-current:not(:last-child) {
+    margin-left: -16px;
+    /* ซ้อนทับวงกลมก่อนหน้า */
+}
+
+.cycle-current img {
+    width: 18px;
+    height: 18px;
+}
+
+.number-current {
+    font-size: 16px;
+    background: #FFF;
+    border-radius: 15.75px;
+    border: 0.75px solid #3C3D48;
+    display: flex;
+    width: 44.25px;
+    height: 32.25px;
+    padding: 10.5px 9.75px;
+    justify-content: center;
+    align-items: center;
+    /* z-index: 2; */
+    color: var(--HRVC---Text-Black, #30313D);
+    font-family: "SF Pro Display";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: capitalize;
+}
+
+
 .ABOUT-NAME {
-    font-weight: 700;
+    color: #3C3D48;
+    leading-trim: both;
+    text-edge: cap;
+    font-family: "SF Pro Display";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: capitalize;
 }
 
 .home-tokyo {
-    border-left: lightgray solid thin;
+    /* border-left: lightgray solid thin; */
     font-size: 14px;
 }
 
@@ -191,7 +317,42 @@
 }
 
 .alert-secondary-background {
-    background-color: #FBFBFB;
+    display: flex;
+    width: 183px;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 13.5px;
+}
+
+.text-name-current {
+    color: var(--HRVC---Text-Black, #30313D);
+    leading-trim: both;
+    text-edge: cap;
+    font-family: "SF Pro Display";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 14.464px;
+    /* 120.536% */
+}
+
+.text-see-all {
+    color: var(--Primary-Blue---HRVC, #2580D3);
+    leading-trim: both;
+    text-edge: cap;
+    font-family: "SF Pro Display";
+    font-size: 10.5px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 14.464px;
+    /* 137.755% */
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: none;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
 }
 
 .clipboard0 {
@@ -219,8 +380,31 @@
     padding-left: 20px;
 }
 
+.box-27 {
+    color: #3C3D48;
+    leading-trim: both;
+    text-edge: cap;
+    font-family: "SF Pro Display";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 12.75px;
+    text-align: end;
+    /* 106.25% */
+    /* 106.25% */
+}
+
 .Affiliated0 {
-    font-weight: 700;
+    color: var(--HRVC---Text-Black, #30313D);
+    leading-trim: both;
+    text-edge: cap;
+    font-family: "SF Pro Display";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 12.75px;
+    /* 106.25% */
+    text-transform: capitalize;
 }
 
 
@@ -242,9 +426,9 @@
         width: 100%;
     }
 
-    .alert-secondary-background {
+    /* .alert-secondary-background {
         margin-left: 20px;
-    }
+    } */
 }
 
 @media(max-width: 768px) {
@@ -324,8 +508,16 @@
     }
 
     .box-27 {
-        padding-left: 400px;
-        margin-top: -25px;
+        color: #3C3D48;
+        leading-trim: both;
+        text-edge: cap;
+        font-family: "SF Pro Display";
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 12.75px;
+        /* 106.25% */
+        /* 106.25% */
     }
 
     .numberemployees {
@@ -333,9 +525,9 @@
         padding-top: -20px;
     }
 
-    .alert-secondary-background {
+    /* .alert-secondary-background {
         margin-left: 20px;
-    }
+    } */
 
     .location {
         display: none;

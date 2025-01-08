@@ -1,3 +1,30 @@
+.company-group-content {
+    padding-left: 10px;
+    padding-right: 40px;
+    padding-top: 10px;
+    padding-bottom: 40px;
+
+}
+
+.company-group-body {
+    background: #FFF;
+    height: auto;
+    width: calc(100% + 40px);
+    /* ยืดออก 20px ทั้งสองฝั่ง */
+    margin-left: -10px;
+    /* ดันออกไปทางซ้าย 20px */
+    margin-right: -20px;
+    /* ดันออกไปทางขวา 20px */
+    padding-top: 20px;
+    padding-right: 34px;
+    padding-left: 40px;
+    top: -10px;
+    /* เลื่อนขึ้น 10px */
+    position: relative;
+    /* เพื่อให้ top และ margin มีผล */
+}
+
+
 .eye-view-profile {
     text-align: right;
     padding-top: 30px;
@@ -6,7 +33,33 @@
 .sad-1 {
     width: 100%;
     height: 180px;
+    border-radius: 10px;
+    background: url(<path-to-image>) lightgray 0px -28.074px / 100% 124.599% no-repeat;
+    flex-shrink: 0;
 }
+
+.btn-update-group {
+    display: flex;
+    height: 30px;
+    padding: 9.75px 10.5px;
+    justify-content: center;
+    align-items: center;
+    gap: 7.5px;
+    border-radius: 2.893px;
+    background: var(--Primary-Blue---HRVC, #2580D3);
+    color: #FFF;
+    text-align: center;
+    font-family: "SF Pro Display";
+    font-size: 11.571px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 27px;
+    /* 233.333% */
+    /* margin-top: 20px;
+    margin-right: 34px; */
+    text-decoration: none;
+}
+
 
 .plus-click0 {
     cursor: pointer;
