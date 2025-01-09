@@ -96,6 +96,7 @@ $this->title = 'Group profile';
                                 Industry
                             </div>
                             <div class="col-lg-7 col-md-6 col-12 name-head0 mt-10">
+                                <?= $group["industries"] ?>
                             </div>
                         </div>
                         <div class="col-12 Group-Information">
@@ -127,22 +128,32 @@ $this->title = 'Group profile';
                             <div class="col-lg-8 col-md-6 col-12 name-head0 mt-5">
                                 <a href="<?= $group['website'] ?>" target="_blank"
                                     class="text-primary"><?= $group["website"] ?></a>
-                                <img src="<?= Yii::$app->homeUrl ?>image/coppy.svg"
+                                <!-- <img src="<?= Yii::$app->homeUrl ?>image/coppy.svg"
                                     onclick="javascript:copyToClipboard('<?= $group['website'] ?>')"
-                                    style="width: 10.884px; height: 12px;">
+                                    style="width: 10.884px; height: 12px;"> -->
                             </div>
                         </div>
                     </div>
 
                     <!-- Right Column -->
                     <div class="col-lg-6 col-md-6 col-12 box-about0">
-                        <div class="col-12 ABOUT-NAME">
-                            About us
-                            <hr class="hr-group">
+                        <div class="row about-section">
+                            <div class="col-12 about-name">
+                                <h2>About us</h2>
+                                <hr class="hr-group">
+                            </div>
+                            <div class="col-12 detail-tokyo">
+                                <p id="about-text">
+                                    <?= mb_strlen($group["about"]) > 200 
+                ? mb_substr($group["about"], 0, 200) . '...' 
+                : $group["about"] ?>
+                                    <?php if (mb_strlen($group["about"]) > 200): ?>
+                                    <button id="see-more" class="see-more">See More</button>
+                                    <?php endif; ?>
+                                </p>
+                            </div>
                         </div>
-                        <div class="col-12 detail-tokyo">
-                            <?= $group["about"] ?>
-                        </div>
+
                         <div class="col-12 mt-10 text-end">
                             <img src="<?= Yii::$app->homeUrl ?>image/icon-x<?= empty($group["socialTag"]) ? '-off' : '' ?>.svg"
                                 style="width: 24px; height: 24.6px;">
@@ -164,12 +175,12 @@ $this->title = 'Group profile';
                             <hr class="hr-group">
                         </div>
                         <div class="row">
-                            <div class="col-lg-3 col-md-6 col-12">
+                            <div class="col-lg-4 col-md-6 col-12 mb-3">
                                 <div class="alert alert-secondary-background">
                                     <a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
                                         class="text-decoration-none">
                                         <div class="row align-items-center">
-                                            <div class="col-lg-8 col-md-8 col-8 text-left">
+                                            <div class="col-lg-7 col-md-8 col-8 text-left">
                                                 <div class="circle-container">
                                                     <div class="cycle-current">
                                                         <img src="<?= Yii::$app->homeUrl ?>image/branches.svg"
@@ -186,71 +197,105 @@ $this->title = 'Group profile';
                                                     <div class="number-current"><?= $totalBranches ?></div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4 col-md-4 col-4 text-right">
-                                                <div class="row justify-content-between align-items-center">
-                                                    <div class="text-name-current">Branch</div>
-                                                    <div class="text-see-all">See All</div>
-                                                </div>
+                                            <div class="col-lg-5 col-md-4 col-4 text-right">
+                                                <div class="text-name-current">Branch</div>
+                                                <div class="text-see-all">See All</div>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-6 col-12">
+                            <div class="col-lg-4 col-md-6 col-12 mb-3">
                                 <div class="alert alert-secondary-background">
                                     <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
                                         class="text-decoration-none">
                                         <div class="row align-items-center">
-                                            <div class="col-lg-6 col-md-8 col-8 text-left">
-                                                <div class="number-current"><?= $totalDepartment ?></div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-4 col-4 text-right">
-                                                <div class="row justify-content-between align-items-center">
-                                                    <div class="text-name-current">Department</div>
-                                                    <div class="text-see-all">See All</div>
+                                            <div class="col-lg-7 col-md-8 col-8 text-left">
+                                                <div class="circle-container">
+                                                    <div class="cycle-current">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/departments.svg"
+                                                            alt="icon">
+                                                    </div>
+                                                    <div class="cycle-current">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/departments.svg"
+                                                            alt="icon">
+                                                    </div>
+                                                    <div class="cycle-current">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/departments.svg"
+                                                            alt="icon">
+                                                    </div>
+                                                    <div class="number-current"><?= $totalDepartment ?></div>
                                                 </div>
+                                            </div>
+                                            <div class="col-lg-5 col-md-4 col-4 text-right">
+                                                <div class="text-name-current">Department</div>
+                                                <div class="text-see-all">See All</div>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-6 col-12">
+                            <div class="col-lg-4 col-md-6 col-12 mb-3">
                                 <div class="alert alert-secondary-background">
                                     <a href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
                                         class="text-decoration-none">
                                         <div class="row align-items-center">
-                                            <div class="col-lg-6 col-md-8 col-8 text-left">
-                                                <div class="number-current"><?= $totalTeam ?></div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-4 col-4 text-right">
-                                                <div class="row justify-content-between align-items-center">
-                                                    <div class="text-name-current">Team</div>
-                                                    <div class="text-see-all">See All</div>
+                                            <div class="col-lg-7 col-md-8 col-8 text-left">
+                                                <div class="circle-container">
+                                                    <div class="cycle-current">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
+                                                    </div>
+                                                    <div class="cycle-current">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
+                                                    </div>
+                                                    <div class="cycle-current">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
+                                                    </div>
+                                                    <div class="number-current"><?= $totalTeam ?></div>
                                                 </div>
+                                            </div>
+                                            <div class="col-lg-5 col-md-4 col-4 text-right">
+                                                <div class="text-name-current">Team</div>
+                                                <div class="text-see-all">See All</div>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-6 col-12">
+                            <div class="col-lg-4 col-md-6 col-12 mb-3">
                                 <div class="alert alert-secondary-background">
                                     <a href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
                                         class="text-decoration-none">
                                         <div class="row align-items-center">
-                                            <div class="col-lg-6 col-md-8 col-8 text-left">
-                                                <div class="number-current"><?= $totalEmployees ?></div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-4 col-4 text-right">
-                                                <div class="row justify-content-between align-items-center">
-                                                    <div class="text-name-current">Employee</div>
-                                                    <div class="text-see-all">See All</div>
+                                            <div class="col-7">
+                                                <div class="circle-container-img">
+                                                    <div class="cycle-image">
+                                                        <img src="<?= Yii::$app->homeUrl ?><?php echo $employees[0]['picture'] ?>"
+                                                            alt="icon">
+                                                    </div>
+                                                    <div class="cycle-image">
+                                                        <img src="<?= Yii::$app->homeUrl ?><?php echo $employees[1]['picture'] ?>"
+                                                            alt="icon">
+                                                    </div>
+                                                    <div class="cycle-image">
+                                                        <img src="<?= Yii::$app->homeUrl ?><?php echo $employees[2]['picture'] ?>"
+                                                            alt="icon">
+                                                    </div>
+                                                    <div class="number-current"><?= $totalEmployees ?></div>
                                                 </div>
+
+
+                                            </div>
+                                            <div class="col-lg-5 col-md-4 col-4 text-right">
+                                                <div class="text-name-current">Employee</div>
+                                                <div class="text-see-all">See All</div>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
 
@@ -295,7 +340,7 @@ $this->title = 'Group profile';
 									}
 									?>
                             </div>
-                            <div class="col-lg-9 col-md-8 col-8">
+                            <div class="col-lg-7 col-md-7 col-7">
                                 <div class="tokyoconsultinggroup">
                                     <?= $company['companyName'] ?>
                                     <?php
@@ -306,10 +351,14 @@ $this->title = 'Group profile';
 										}
 										?>
                                 </div>
-                                <i class="fa fa-map-marker FT mr-5" aria-hidden="true"></i><?= $company["city"] ?>,
-                                <?= $company["countryName"] ?>
-                                <div class="numberemployees"><?= Company::totalEmployeeCompany($company['companyId']) ?>
-                                    Employees</div>
+                                <div class="city-group">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/plus-red.svg"
+                                        style="width: 10.5px; height: 10.5px;">
+                                    <?= $company["city"] ?>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-1 col-1 d-flex justify-content-center align-items-center">
+                                <img src="<?= Yii::$app->homeUrl ?>image/btn-view.svg" alt="View Button">
                             </div>
                         </div>
                     </a>
@@ -331,3 +380,35 @@ $this->title = 'Group profile';
         </div>
     </div>
 </div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const seeMoreBtn = document.getElementById("see-more");
+    const aboutText = document.getElementById("about-text");
+
+    <?php if (mb_strlen($group["about"]) > 200): ?>
+    const fullText = `<?= addslashes($group["about"]) ?>`;
+    const shortText = `<?= addslashes(mb_substr($group["about"], 0, 200)) ?>...`;
+
+    seeMoreBtn.addEventListener("click", function() {
+        if (aboutText.textContent.includes(shortText)) {
+            aboutText.innerHTML = fullText +
+                `<button id="see-more" class="see-more">See Less</button>`;
+            document.getElementById("see-more").addEventListener("click", toggleText);
+        } else {
+            aboutText.innerHTML = shortText +
+                `<button id="see-more" class="see-more">See More</button>`;
+            document.getElementById("see-more").addEventListener("click", toggleText);
+        }
+    });
+
+    function toggleText() {
+        if (aboutText.innerHTML.includes(shortText)) {
+            aboutText.innerHTML = fullText + `<button id="see-more" class="see-more">See Less</button>`;
+        } else {
+            aboutText.innerHTML = shortText + `<button id="see-more" class="see-more">See More</button>`;
+        }
+        document.getElementById("see-more").addEventListener("click", toggleText);
+    }
+    <?php endif; ?>
+});
+</script>

@@ -232,6 +232,8 @@
     position: relative;
 }
 
+
+
 .cycle-current {
     display: flex;
     justify-content: center;
@@ -243,12 +245,10 @@
     background: var(--Primary-Blue---HRVC, #2580D3);
     position: relative;
     z-index: 1;
-    /* ทำให้วงกลมซ้อน */
 }
 
 .cycle-current:not(:last-child) {
     margin-left: -16px;
-    /* ซ้อนทับวงกลมก่อนหน้า */
 }
 
 .cycle-current img {
@@ -256,18 +256,45 @@
     height: 18px;
 }
 
+.circle-container-img {
+    display: flex;
+    position: relative;
+}
+
+.cycle-image {
+    display: flex;
+    width: 32.25px;
+    height: 32.25px;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+}
+
+.cycle-image:not(:last-child) {
+    margin-left: -16px;
+}
+
+.cycle-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* ตัดรูปให้พอดีกับขนาดวงกลม */
+}
+
+
 .number-current {
     font-size: 16px;
     background: #FFF;
     border-radius: 15.75px;
     border: 0.75px solid #3C3D48;
     display: flex;
-    width: 44.25px;
-    height: 32.25px;
-    padding: 10.5px 9.75px;
     justify-content: center;
     align-items: center;
-    /* z-index: 2; */
+    width: 44.25px;
+    height: 32.25px;
+    margin-left: -21px;
+    /* ซ้อนทับกับวงกลมก่อนหน้า */
+    z-index: 2;
     color: var(--HRVC---Text-Black, #30313D);
     font-family: "SF Pro Display";
     font-size: 12px;
@@ -275,7 +302,9 @@
     font-weight: 500;
     line-height: normal;
     text-transform: capitalize;
+    position: relative;
 }
+
 
 
 .ABOUT-NAME {
@@ -312,8 +341,26 @@
 }
 
 .tokyoconsultinggroup {
-    font-weight: 600;
-    font-size: 13px;
+    /* font-weight: 600;
+    font-size: 13px; */
+    color: var(--HRVC---Text-Black, #30313D);
+    font-family: "SF Pro Display";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.city-group {
+    color: var(--HRVC---Text-Black, #30313D);
+    leading-trim: both;
+    text-edge: cap;
+    font-family: "SF Pro Display";
+    font-size: 9px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.135px;
 }
 
 .alert-secondary-background {
@@ -323,6 +370,27 @@
     align-items: center;
     padding: 0px;
     gap: 13.5px;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+
+.see-more {
+    background: none;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+    color: var(--Primary-Blue---HRVC, #2580D3);
+    font-family: "SF Pro Display";
+    font-size: 10.5px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 13.928px;
+    padding: 0;
+    display: inline;
+    /* ทำให้ปุ่ม See More อยู่ต่อท้ายข้อความ */
+    margin-left: 5px;
+    /* เพิ่มช่องว่างเล็กน้อยระหว่างข้อความและปุ่ม */
 }
 
 .text-name-current {

@@ -129,6 +129,7 @@ class GroupController extends Controller
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/group-detail?id=' . $groupId);
         $groupJson = curl_exec($api);
         $group = json_decode($groupJson, true);
+        // throw new Exception(print_r($group,true));
 
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
@@ -173,13 +174,28 @@ class GroupController extends Controller
             endforeach;
         }
         $employees = Employee::find()
-            ->where(["status" => 1])
-            ->asArray()
-            ->all();
+        ->where(["status" => 1])
+        ->asArray()
+        ->all();
+
+        // กรองข้อมูลที่ picture ไม่เป็นค่าว่าง
+        $filteredEmployees = array_filter($employees, function($employee) {
+            return !empty($employee['picture']);
+        });
+
+        // จัดเรียงผลลัพธ์ให้อยู่ในอาเรย์ที่มีแค่ 3 ตัวแรก
+        $filteredEmployees = array_values($filteredEmployees); // ใช้ array_values เพื่อรีเซ็ต index ของอาเรย์
+
+        // เลือกแค่ 3 ตัวแรก
+        $filteredEmployees = array_slice($filteredEmployees, 0, 3);
+
+        // แสดงผลลัพธ์
+        // print_r($filteredEmployees);
+
         $totalEmployees = count($employees);
         $branches = Branch::find()->select('branchId')->where(["status" => 1])->all();
 
-
+        // throw new Exception(print_r($filteredEmployees,true));
 
         return $this->render('group_view', [
             "group" => $group,
@@ -187,7 +203,8 @@ class GroupController extends Controller
             "totalEmployees" => $totalEmployees,
             "totalBranches" => $totalBranches,
             "totalDepartment" => $totalDepartment,
-            "totalTeam" => $totalTeam
+            "totalTeam" => $totalTeam,
+            "employees" => $filteredEmployees
         ]);
     }
     public function actionUpdateGroup($hash)
