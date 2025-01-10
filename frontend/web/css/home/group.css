@@ -44,73 +44,85 @@
     color: gray;
 } */
 
-
 .avatar-upload {
     position: relative;
-    max-width: 205px;
+    max-width: 200px;
     margin: 50px auto;
 }
 
-.avatar-upload .avatar-edit {
-    position: absolute;
-    right: 12px;
-    z-index: 1;
-    top: 10px;
-
-}
-
-.avatar-upload .avatar-edit input {
-    display: none;
-}
-
-.avatar-upload .avatar-edit input+label {
-    display: inline-block;
-    width: 34px;
-    height: 34px;
-    margin-bottom: 0;
-    border-radius: 100%;
-    background: #FFFFFF;
-    border: 1px solid transparent;
-    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
-    cursor: pointer;
-    font-weight: normal;
-    transition: all 0.2s ease-in-out;
-}
-
-.avatar-upload .avatar-edit input+label:hover {
-    background: #f1f1f1;
-    border-color: #d6d6d6;
-}
-
-.avatar-upload .avatar-edit input+label:after {
-    content: "\f040";
-    font-family: 'FontAwesome';
-    color: #757575;
-    position: absolute;
-    top: 10px;
-    left: 0;
-    right: 0;
-    text-align: center;
-    margin: auto;
+.banner-uploade {
+    border-radius: 4.744px;
+    border: 0.949px dashed var(--Stroke-Bluish-Gray, #BBCDDE);
+    background: #F4F6F9;
+    height: 201.128px;
 }
 
 .avatar-upload .avatar-preview {
-    width: 192px;
-    height: 192px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
     position: relative;
-    border-radius: 100%;
-    border: 6px solid #F8F8F8;
-    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+    border: 1px dashed var(--Stroke-Bluish-Gray, #BBCDDE);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s ease-in-out;
 }
 
-.avatar-upload .avatar-preview>div {
-    width: 100%;
-    height: 100%;
-    border-radius: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+.avatar-upload .avatar-preview:hover {
+    border-color: #007bff;
 }
+
+.avatar-upload .avatar-preview .upload-label {
+    display: flex;
+    flex-direction: row;
+    /* เปลี่ยนจาก column เป็น row */
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    color: var(--Primary-Blue---HRVC, #2580D3);
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: 500;
+    line-height: 25.264px;
+}
+
+
+.avatar-upload .avatar-preview .upload-label .upload-label img {
+    width: 20px;
+    /* ปรับขนาดรูปภาพ */
+    height: 20px;
+}
+
+.avatar-upload .avatar-preview .upload-label i {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.avatar-upload input[type="file"] {
+    display: none;
+}
+
+.update-group-body {
+    display: flex;
+    /* width: 1480px;
+height: 937px; */
+    padding: 30px 33px;
+    /* flex-direction: column; */
+    /* align-items: flex-start; */
+    /* gap: 10px; */
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: var(--Background-Blue, #F4F6F9);
+}
+
+
 
 .all-avatar {
     margin-left: -70px;

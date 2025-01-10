@@ -7,7 +7,7 @@ $this->title = 'Group profile';
 ?>
 <div class="company-group-body">
 
-    <div class="col-12 company-group-content" style="margin-top: -10px; ">
+    <div class="col-12 company-group-content" style="margin-top: -10px;">
         <div class="col-12" style="height: 180px;">
             <?php
 		if ($group["banner"] != null) { ?>
@@ -41,7 +41,7 @@ $this->title = 'Group profile';
                     </div>
                 </div>
             </div>
-            <div class="col-lg-7 col-md-4 col-12">
+            <div class="col-lg-7 col-md-4 col-12 mt-21">
                 <div class="col-12 name-tokyo">
                     <span class="name-sub-tokyo"><?= $group['displayName'] ?></span>
                     <span class="name-full-tokyo">(<?= $group['groupName'] ?>)</span>
@@ -50,7 +50,7 @@ $this->title = 'Group profile';
                     <img src="<?= Yii::$app->homeUrl . 'image/hyphen.svg' ?>"> <?= $group['tagLine'] ?>
                 </div>
             </div>
-            <div class="col-lg-2 col-md-3 col-12 tcg-edit0">
+            <div class="col-lg-2 col-md-3 col-12 mt-21 tcg-edit0">
                 <a href="<?= Yii::$app->homeUrl ?>setting/group/update-group/<?= ModelMaster::encodeParams(['groupId' => $group['groupId']]) ?>"
                     class="btn-update-group">
                     <img src="<?= Yii::$app->homeUrl . 'image/refresh-white.svg' ?>">

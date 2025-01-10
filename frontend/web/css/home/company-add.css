@@ -3,7 +3,12 @@
     padding-right: 40px;
     padding-top: 10px;
     padding-bottom: 40px;
+}
 
+.company-group-edit {
+    border-radius: 10px;
+    padding: 26px 40px 46px 40px;
+    background: #FFF;
 }
 
 .company-group-body {
@@ -25,6 +30,29 @@
     /* เพื่อให้ top และ margin มีผล */
 }
 
+.uplode-btn-group {
+    display: flex;
+    width: 100px;
+    height: 40px;
+    padding: 7px 9px;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    border-radius: 3px;
+    background: var(--Primary-Blue---HRVC, #2580D3);
+    color: #FFF;
+    text-align: center;
+    leading-trim: both;
+    text-edge: cap;
+    font-family: "SF Pro Display";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px;
+    /* 175% */
+}
+
 
 .eye-view-profile {
     text-align: right;
@@ -32,10 +60,10 @@
 }
 
 .sad-1 {
-    width: 100%;
-    height: 180px;
+    width: 1480px;
+    height: 201.128px;
     border-radius: 10px;
-    background: url(<path-to-image>) lightgray 0px -28.074px / 100% 124.599% no-repeat;
+    /* background: url(<path-to-image>) lightgray 0px -28.074px / 100% 124.599% no-repeat; */
     flex-shrink: 0;
 }
 
@@ -76,7 +104,7 @@
 
 @media(max-width: 992px) {
     .form-companyname {
-        margin-left: 50px;
+        /* margin-left: 50px; */
     }
 
 }
@@ -100,7 +128,7 @@
     }
 
     .form-companyname {
-        margin-left: 10px;
+        /* margin-left: 10px; */
     }
 
     .your-about {

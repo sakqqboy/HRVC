@@ -14,30 +14,30 @@ $this->title = 'Update Group';
 	'action' => Yii::$app->homeUrl . 'setting/group/save-update-group'
 
 ]); ?>
-<div class="col-12" style="margin-top: 60px;background-color:white;padding-bottom:20px;">
-    <div class="col-12" id="imagePreviewBanner" style="height: 180px;background-color:gray;">
-        <?php
+<div class="col-12 company-group-edit">
+    <div class="col-12 banner-uploade" id="imagePreviewBanner">
+        <!-- <?php
 		if ($group["banner"] != null) { ?>
         <img src="<?= Yii::$app->homeUrl . $group['banner'] ?>" class="sad-1" id="old-banner">
         <?php
 		}
-		?>
+		?> -->
     </div>
     <div class="col-12 edit-update text-end" style="padding-right: 30px;">
         <div class="form-group">
-
-            <span class="fileUpload btn btn-light">
-                <div id="upload" class="uplode-btn"><i class="fa fa-upload" aria-hidden="true"></i> Update</div>
+            <span class="fileUpload btn" style="padding: 0;">
+                <div id="upload" class="uplode-btn-group">
+                    <img src="<?= Yii::$app->homeUrl ?>image/upload-white.svg" alt="Upload Icon">
+                    Update
+                </div>
                 <input type="file" name="imageUploadBanner" id="imageUploadBanner" class="upload up upload-checklist"
                     id="up" />
-            </span><!-- btn-orange -->
-            <!-- group -->
-        </div><!-- form-group -->
-
+            </span>
+        </div>
     </div>
     <div class="row">
         <div class="col-lg-4 col-md-6 col-12 all-avatar">
-            <div class="avatar-upload">
+            <!-- <div class="avatar-upload">
                 <div class="avatar-edit">
                     <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" name="image" />
                     <label for="imageUpload"></label>
@@ -46,8 +46,6 @@ $this->title = 'Update Group';
                     <div id="imagePreview">
                         <?php
 						if ($group["picture"] != null) { ?>
-                        <!-- <img src="<?= Yii::$app->homeUrl . $group['picture'] ?>" class="company-group-picture"
-                            id="old-image"> -->
                         <img src="<?= Yii::$app->homeUrl ?>image/upload.png" class="company-group-picture"
                             id="old-image">
                         <?php
@@ -58,40 +56,25 @@ $this->title = 'Update Group';
 						}
 						?>
                     </div>
-
                 </div>
+            </div> -->
+            <div class="avatar-upload">
+                <div class="avatar-preview" id="imagePreview" style="background-color: white;">
+                    <label for="imageUpload" class="upload-label">
+                        <img src="<?= Yii::$app->homeUrl ?>image/upload-img.svg" alt="Upload Icon">
+                        <span>Upload</span>
+                    </label>
+                </div>
+                <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg" name="image" />
             </div>
+
+
         </div>
         <div class="col-lg-6 col-md-6 col-12">
-            <div class="form-companyname">
-                <div class="row">
-                    <div class="col-5 Groupname1">
-                        Group Company Name <span class="profile-moon">*</span>
-                    </div>
-                    <div class="col-7">
-                        <input type="text" class="form-control" name="groupName" value="<?= $group['groupName'] ?>"
-                            required>
-                    </div>
-                    <div class="mt-20"></div>
-                    <div class="col-5">
-                        Philosophy
-                    </div>
-                    <div class="col-7">
-                        <input type="text" class="form-control" name="tagLine" value="<?= $group['tagLine'] ?>">
-                    </div>
-                    <div class="mt-20"></div>
-                    <div class="col-5">
-                        Headquarter <span class="profile-moon">*</span>
-                    </div>
-                    <div class="col-7">
-                        <input type="text" class="form-control" id="colFormLabel" name="headQuaterName"
-                            value="<?= $group['headQuaterName'] ?>" required>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
-    <div class="col-12 mt-50">
+    <!-- <div class="col-12 mt-50">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-12">
                 <hr>
@@ -100,12 +83,34 @@ $this->title = 'Update Group';
                 Group Company Profile
             </div>
         </div>
-    </div>
-    <div class="col-12" s>
-        <div class="row">
+    </div> -->
+    <div class="col-12">
+        <div class="row update-group-body">
             <div class="col-lg-6 col-md-6 col-12">
-                <div class="col-12 mt-40">
+                <div class="col-12">
                     <div class="row">
+                        <div class="col-5 Groupname1">
+                            Group Company Name <span class="profile-moon">*</span>
+                        </div>
+                        <div class="col-7">
+                            <input type="text" class="form-control" name="groupName" value="<?= $group['groupName'] ?>"
+                                required>
+                        </div>
+                        <div class="mt-20"></div>
+                        <div class="col-5">
+                            Philosophy
+                        </div>
+                        <div class="col-7">
+                            <input type="text" class="form-control" name="tagLine" value="<?= $group['tagLine'] ?>">
+                        </div>
+                        <div class="mt-20"></div>
+                        <div class="col-5">
+                            Headquarter <span class="profile-moon">*</span>
+                        </div>
+                        <div class="col-7 ">
+                            <input type="text" class="form-control" id="colFormLabel" name="headQuaterName"
+                                value="<?= $group['headQuaterName'] ?>" required>
+                        </div>
                         <div class="col-3 pl-30">
                             Display <span class="profile-moon">*</span>
                         </div>
@@ -212,13 +217,13 @@ $this->title = 'Update Group';
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-12 mt-40" style="padding-right: 40px;">
+            <div class="col-lg-6 col-md-6 col-12" style="padding-right: 40px;">
                 <div class="row">
-                    <div class="col-2 text-end" style="padding-top: 200px;font-size:14px;">
+                    <div>
                         ABOUT <span class="profile-moon">*</span>
                     </div>
                     <input type="hidden" name="groupId" value="<?= $group['groupId'] + 543 ?>">
-                    <div class="col-10">
+                    <div>
                         <div class="alert alert-secondary" role="alert" style="font-size: 14px;">
                             <textarea style="height:410px;" name="about"
                                 class="form-control"><?= $group['about'] ?></textarea>
