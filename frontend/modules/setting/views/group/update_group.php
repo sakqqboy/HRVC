@@ -296,60 +296,64 @@ $this->title = 'Update Group';
                                 <!-- <input type="text" class="form-control mt-12" name="founded"
                                     value="<?= $group['founded'] ?>"> -->
                                 <div class="input-group">
-                                    <span class="input-group-text"
+                                    <span class="input-group-text mt-12"
                                         style="background-color: #BEDAFF; border-right: none;">
                                         <img src="<?= Yii::$app->homeUrl ?>image/calendar-blue.svg" alt="LinkedIn"
                                             style="width: 20px; height: 20px;">
                                     </span>
-                                    <input type="text" style="border-left: none;" class="form-control" name="linkedin"
-                                        value="<?= $group['founded'] ?>">
+                                    <input type="text" style="border-left: none;" class="form-control mt-12"
+                                        name="linkedin" value="<?= $group['founded'] ?>">
                                 </div>
                             </div>
                             <div class="form-group mb-30">
                                 <label class="name-text-update" for="linkedin">LinkedIn Link</label>
                                 <div class="input-group">
-                                    <span class="input-group-text" style="background-color: white; border-right: none;">
+                                    <span class="input-group-text mt-12"
+                                        style="background-color: white; border-right: none;">
                                         <img src="<?= Yii::$app->homeUrl ?>image/in-image.svg" alt="LinkedIn"
                                             style="width: 20px; height: 20px;">
                                     </span>
-                                    <input type="text" style="border-left: none;" class="form-control" name="linkedin"
-                                        value="<?= $group['socialTag'] ?>">
+                                    <input type="text" style="border-left: none;" class="form-control mt-12"
+                                        name="linkedin" value="<?= $group['socialTag'] ?>">
                                 </div>
                             </div>
 
                             <div class="form-group mb-30">
                                 <label class="name-text-update" for="twitter">X (Twitter) Link</label>
                                 <div class="input-group">
-                                    <span class="input-group-text" style="background-color: white; border-right: none;">
+                                    <span class="input-group-text mt-12"
+                                        style="background-color: white; border-right: none;">
                                         <img src="<?= Yii::$app->homeUrl ?>image/x-image.svg" alt="Twitter/X"
                                             style="width: 20px; height: 20px;">
                                     </span>
-                                    <input type="text" style="border-left: none;" class="form-control" name="twitter"
-                                        value="<?= $group['socialTag'] ?>">
+                                    <input type="text" style="border-left: none;" class="form-control mt-12"
+                                        name="twitter" value="<?= $group['socialTag'] ?>">
                                 </div>
                             </div>
 
                             <div class="form-group mb-30">
                                 <label class="name-text-update" for="facebook">Facebook Link</label>
                                 <div class="input-group">
-                                    <span class="input-group-text" style="background-color: white; border-right: none;">
+                                    <span class="input-group-text mt-12"
+                                        style="background-color: white; border-right: none;">
                                         <img src="<?= Yii::$app->homeUrl ?>image/face-image.svg" alt="Facebook"
                                             style="width: 20px; height: 20px;">
                                     </span>
-                                    <input type="text" style="border-left: none;" class="form-control" name="facebook"
-                                        value="<?= $group['socialTag'] ?>">
+                                    <input type="text" style="border-left: none;" class="form-control mt-12"
+                                        name="facebook" value="<?= $group['socialTag'] ?>">
                                 </div>
                             </div>
 
                             <div class="form-group mb-30">
                                 <label class="name-text-update" for="instagram">Instagram Link</label>
                                 <div class="input-group">
-                                    <span class="input-group-text" style="background-color: white; border-right: none;">
+                                    <span class="input-group-text mt-12"
+                                        style="background-color: white; border-right: none;">
                                         <img src="<?= Yii::$app->homeUrl ?>image/ig-image.svg" alt="Instagram"
                                             style="width: 20px; height: 20px;">
                                     </span>
-                                    <input type="text" style="border-left: none;" class="form-control" name="instagram"
-                                        value="<?= $group['socialTag'] ?>">
+                                    <input type="text" style="border-left: none;" class="form-control mt-12"
+                                        name="instagram" value="<?= $group['socialTag'] ?>">
                                 </div>
                             </div>
 
@@ -380,7 +384,7 @@ $this->title = 'Update Group';
                     <div>
                         <div class="alert alert-secondary" role="alert"
                             style="font-size: 14px; background-color: transparent; border: 0; ">
-                            <textarea style="height:410px;" name="about"
+                            <textarea style="height: 527px;" name="about"
                                 class="form-control"><?= $group['about'] ?></textarea>
 
                         </div>
