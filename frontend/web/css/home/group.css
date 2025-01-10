@@ -47,7 +47,70 @@
 .avatar-upload {
     position: relative;
     max-width: 200px;
-    margin: 50px auto;
+    margin: -75px auto;
+}
+
+.avatar-upload-preview {
+    position: relative;
+    max-width: 200px;
+    margin: 55px auto;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-wrapper img {
+    position: absolute;
+    left: 10px;
+    /* ระยะห่างจากขอบซ้าย */
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+    /* ป้องกันการคลิกบนไอคอน */
+}
+
+.input-wrapper input {
+    padding-left: 40px;
+    /* เว้นระยะสำหรับไอคอน */
+}
+
+.btn-save-group {
+    /* display: flex; */
+    width: 100px;
+    height: 40px;
+    padding: 7px 9px;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    border-radius: 3px;
+    border: none;
+    background: var(--Primary-Blue---HRVC, #2580D3);
+    color: var(--100-white, #FFF);
+    text-align: center;
+    font-family: "SF Pro Display";
+    font-size: 15.429px;
+    font-style: normal;
+    font-weight: 500;
+    /* line-height: 36px; */
+    /* 233.333% */
+}
+
+.btn-cancel-group {
+    /* display: flex; */
+    width: 100px;
+    height: 40px;
+    padding: 7px 9px;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    border-radius: 3px;
+    border: 0.5px solid var(--HRVC---Light-Text, #94989C);
+    background: var(--100-white, #FFF);
 }
 
 .banner-uploade {
@@ -122,7 +185,17 @@ height: 937px; */
     background: var(--Background-Blue, #F4F6F9);
 }
 
-
+.name-text-update {
+    color: var(--HRVC---Text-Black, #30313D);
+    leading-trim: both;
+    text-edge: cap;
+    font-family: "SF Pro Display";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 19.286px;
+    /* 107.143% */
+}
 
 .all-avatar {
     margin-left: -70px;
@@ -319,7 +392,7 @@ height: 937px; */
 
 
 
-.ABOUT-NAME {
+.about-name {
     color: #3C3D48;
     leading-trim: both;
     text-edge: cap;
@@ -560,7 +633,7 @@ height: 937px; */
         margin-top: 30px;
     }
 
-    .ABOUT-NAME {
+    .about-name {
         margin-top: 30px;
     }
 

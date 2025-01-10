@@ -25,7 +25,7 @@ $this->title = 'Group profile';
 	</div> -->
         <div class="row mt-20">
             <div class="col-lg-3 col-md-5 col-12" style="margin-top:-170px;">
-                <div class="avatar-upload" style="margin-left:36px;">
+                <div class="avatar-upload-preview" style="margin-left:36px;">
                     <div class="avatar-preview">
                         <?php
 					if ($group["picture"] != null) { ?>
@@ -139,7 +139,7 @@ $this->title = 'Group profile';
                     <div class="col-lg-6 col-md-6 col-12 box-about0">
                         <div class="row about-section">
                             <div class="col-12 about-name">
-                                <h2>About us</h2>
+                                <span>About us</span>
                                 <hr class="hr-group">
                             </div>
                             <div class="col-12 detail-tokyo">

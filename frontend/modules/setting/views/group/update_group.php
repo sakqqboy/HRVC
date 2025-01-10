@@ -35,7 +35,7 @@ $this->title = 'Update Group';
             </span>
         </div>
     </div>
-    <div class="row">
+    <div class="row mb-41">
         <div class="col-lg-4 col-md-6 col-12 all-avatar">
             <!-- <div class="avatar-upload">
                 <div class="avatar-edit">
@@ -87,7 +87,7 @@ $this->title = 'Update Group';
     <div class="col-12">
         <div class="row update-group-body">
             <div class="col-lg-6 col-md-6 col-12">
-                <div class="col-12">
+                <!-- <div class="col-12">
                     <div class="row">
                         <div class="col-5 Groupname1">
                             Group Company Name <span class="profile-moon">*</span>
@@ -215,21 +215,176 @@ $this->title = 'Update Group';
                             </div>
                         </div>
                     </div>
+                </div> -->
+
+                <div class="container">
+                    <div class="row">
+                        <!-- Left Column -->
+                        <div class="col-md-6">
+                            <div class="form-group mb-30">
+                                <span class="text-danger">* </span><label class="name-text-update"
+                                    for="groupName">Registered Group Name</label>
+                                <input type="text" class="form-control mt-12" name="groupName"
+                                    value="<?= $group['groupName'] ?>" required>
+                            </div>
+                            <div class="form-group mb-30">
+                                <span class="text-danger">* </span> <label class="name-text-update"
+                                    for="groupName">Display Name/Brand Name</label>
+                                <input type="text" class="form-control mt-12" name="groupName"
+                                    value="<?= $group['groupName'] ?>" required>
+                            </div>
+                            <div class="form-group mb-30">
+                                <span class="text-danger">* </span><label class="name-text-update"
+                                    for="tagLine">Slogan/Tagline</label>
+                                <input type="text" class="form-control mt-12" name="tagLine"
+                                    value="<?= $group['tagLine'] ?>">
+                            </div>
+                            <div class="form-group mb-30">
+                                <span class="text-danger">* </span><label class="name-text-update"
+                                    for="industry">Industry</label>
+                                <input type="text" class="form-control mt-12" name="industries"
+                                    value="<?= $group['industries'] ?>" required>
+                            </div>
+                            <div class="form-group mb-30">
+                                <span class="text-danger">* </span> <label class="name-text-update"
+                                    for="addressLine">Address Line</label>
+                                <input type="text" class="form-control mt-12" name="location"
+                                    value="<?= $group['location'] ?>" required>
+                            </div>
+                            <div class="form-group mb-30">
+                                <span class="text-danger">* </span> <label class="name-text-update"
+                                    for="country">Country</label>
+                                <select class="form-control mt-12" name="country" required>
+                                    <option value="<?= $groupCountry['countryId'] ?>">
+                                        <?= $groupCountry['countryName'] ?></option>
+                                    <?php foreach ($countries as $countryId => $country) : ?>
+                                    <option value="<?= $countryId ?>"><?= $country ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="form-group mb-30">
+                                <span class="text-danger">* </span> <label class="name-text-update"
+                                    for="contact">Contact/Phone Number</label>
+                                <input type="text" class="form-control mt-12" name="contact"
+                                    value="<?= $group['contact'] ?>">
+                            </div>
+                            <div class="form-group mb-30">
+                                <span class="text-danger">* </span> <label class="name-text-update"
+                                    for="contact">Contact/Phone Number></label>
+                                <input type="text" class="form-control mt-12" name="contact"
+                                    value="<?= $group['contact'] ?>">
+                            </div>
+                        </div>
+
+                        <!-- Right Column -->
+                        <div class="col-md-6">
+                            <div class="form-group mb-30">
+                                <span class="text-danger">* </span> <label class="name-text-update" for="director">Group
+                                    Director </label>
+                                <input type="text" class="form-control mt-12" name="director"
+                                    value="<?= $group['director'] ?>" required>
+                            </div>
+                            <div class="form-group mb-30">
+                                <span class="text-danger">* </span> <label class="name-text-update" for="email">Group
+                                    Email </label>
+                                <input type="email" class="form-control mt-12" name="email"
+                                    value="<?= $group['email'] ?>">
+                            </div>
+                            <div class="form-group mb-30">
+                                <span class="text-danger">* </span> <label class="name-text-update"
+                                    for="founded">Founded</label>
+                                <!-- <input type="text" class="form-control mt-12" name="founded"
+                                    value="<?= $group['founded'] ?>"> -->
+                                <div class="input-group">
+                                    <span class="input-group-text"
+                                        style="background-color: #BEDAFF; border-right: none;">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/calendar-blue.svg" alt="LinkedIn"
+                                            style="width: 20px; height: 20px;">
+                                    </span>
+                                    <input type="text" style="border-left: none;" class="form-control" name="linkedin"
+                                        value="<?= $group['founded'] ?>">
+                                </div>
+                            </div>
+                            <div class="form-group mb-30">
+                                <label class="name-text-update" for="linkedin">LinkedIn Link</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" style="background-color: white; border-right: none;">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/in-image.svg" alt="LinkedIn"
+                                            style="width: 20px; height: 20px;">
+                                    </span>
+                                    <input type="text" style="border-left: none;" class="form-control" name="linkedin"
+                                        value="<?= $group['socialTag'] ?>">
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-30">
+                                <label class="name-text-update" for="twitter">X (Twitter) Link</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" style="background-color: white; border-right: none;">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/x-image.svg" alt="Twitter/X"
+                                            style="width: 20px; height: 20px;">
+                                    </span>
+                                    <input type="text" style="border-left: none;" class="form-control" name="twitter"
+                                        value="<?= $group['socialTag'] ?>">
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-30">
+                                <label class="name-text-update" for="facebook">Facebook Link</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" style="background-color: white; border-right: none;">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/face-image.svg" alt="Facebook"
+                                            style="width: 20px; height: 20px;">
+                                    </span>
+                                    <input type="text" style="border-left: none;" class="form-control" name="facebook"
+                                        value="<?= $group['socialTag'] ?>">
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-30">
+                                <label class="name-text-update" for="instagram">Instagram Link</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" style="background-color: white; border-right: none;">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/ig-image.svg" alt="Instagram"
+                                            style="width: 20px; height: 20px;">
+                                    </span>
+                                    <input type="text" style="border-left: none;" class="form-control" name="instagram"
+                                        value="<?= $group['socialTag'] ?>">
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-30">
+                                <label class="name-text-update" for="youtube">YouTube Link</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" style="background-color: white; border-right: none;">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/yt-image.svg" alt="YouTube"
+                                            style="width: 20px; height: 20px;">
+                                    </span>
+                                    <input type="text" style="border-left: none;" class="form-control" name="youtube"
+                                        value="<?= $group['socialTag'] ?>">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
+
             </div>
             <div class="col-lg-6 col-md-6 col-12" style="padding-right: 40px;">
                 <div class="row">
-                    <div>
-                        ABOUT <span class="profile-moon">*</span>
+                    <div class="name-text-update">
+                        <span class="profile-moon">*</span>
+                        Group Description
                     </div>
                     <input type="hidden" name="groupId" value="<?= $group['groupId'] + 543 ?>">
                     <div>
-                        <div class="alert alert-secondary" role="alert" style="font-size: 14px;">
+                        <div class="alert alert-secondary" role="alert"
+                            style="font-size: 14px; background-color: transparent; border: 0; ">
                             <textarea style="height:410px;" name="about"
                                 class="form-control"><?= $group['about'] ?></textarea>
 
                         </div>
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-4">
                                 <a href="<?= Yii::$app->homeUrl ?>setting/company/index" class="no-underline">
                                     <div class="alert alert-secondary text-center" role="alert">
@@ -255,9 +410,12 @@ $this->title = 'Update Group';
                                     </div>
                                 </a>
                             </div>
-                        </div>
-                        <div class="col-12 text-end mt-10">
-                            <button type="submit" class="btn btn-success">Apply Changes</button>
+                        </div> -->
+                        <div class="col-12 text-end mt-10 pr-13">
+                            <button class="btn-cancel-group">Cancel</button>
+                            <button type="submit" class="btn-save-group">Save
+                                <img src="<?= Yii::$app->homeUrl ?>image/save-icon.svg" alt="LinkedIn"
+                                    style="width: 20px; height: 20px;"></button>
                         </div>
                     </div>
                 </div>
