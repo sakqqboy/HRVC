@@ -496,8 +496,6 @@ height: 937px; */
 
 .text-name-current {
     color: var(--HRVC---Text-Black, #30313D);
-    leading-trim: both;
-    text-edge: cap;
     font-family: "SF Pro Display";
     font-size: 12px;
     font-style: normal;
@@ -508,8 +506,6 @@ height: 937px; */
 
 .text-see-all {
     color: var(--Primary-Blue---HRVC, #2580D3);
-    leading-trim: both;
-    text-edge: cap;
     font-family: "SF Pro Display";
     font-size: 10.5px;
     font-style: normal;
