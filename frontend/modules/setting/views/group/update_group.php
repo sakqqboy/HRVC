@@ -37,27 +37,6 @@ $this->title = 'Update Group';
     </div>
     <div class="row mb-41">
         <div class="col-lg-4 col-md-6 col-12 all-avatar">
-            <!-- <div class="avatar-upload">
-                <div class="avatar-edit">
-                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" name="image" />
-                    <label for="imageUpload"></label>
-                </div>
-                <div class="avatar-preview" style="background-color:white;">
-                    <div id="imagePreview">
-                        <?php
-						if ($group["picture"] != null) { ?>
-                        <img src="<?= Yii::$app->homeUrl ?>image/upload.png" class="company-group-picture"
-                            id="old-image">
-                        <?php
-						} else { ?>
-                        <img src="<?= Yii::$app->homeUrl ?>image/upload.png" class="company-group-picture"
-                            id="old-image">
-                        <?php
-						}
-						?>
-                    </div>
-                </div>
-            </div> -->
             <div class="avatar-upload">
                 <div class="avatar-preview" id="imagePreview" style="background-color: white;">
                     <label for="imageUpload" class="upload-label">
@@ -74,149 +53,9 @@ $this->title = 'Update Group';
 
         </div>
     </div>
-    <!-- <div class="col-12 mt-50">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-12">
-                <hr>
-            </div>
-            <div class="col-lg-6 col-md-6 col-12 text-end Groupname2" style="padding-right: 40px;">
-                Group Company Profile
-            </div>
-        </div>
-    </div> -->
     <div class="col-12">
         <div class="row update-group-body">
             <div class="col-lg-6 col-md-6 col-12">
-                <!-- <div class="col-12">
-                    <div class="row">
-                        <div class="col-5 Groupname1">
-                            Group Company Name <span class="profile-moon">*</span>
-                        </div>
-                        <div class="col-7">
-                            <input type="text" class="form-control" name="groupName" value="<?= $group['groupName'] ?>"
-                                required>
-                        </div>
-                        <div class="mt-20"></div>
-                        <div class="col-5">
-                            Philosophy
-                        </div>
-                        <div class="col-7">
-                            <input type="text" class="form-control" name="tagLine" value="<?= $group['tagLine'] ?>">
-                        </div>
-                        <div class="mt-20"></div>
-                        <div class="col-5">
-                            Headquarter <span class="profile-moon">*</span>
-                        </div>
-                        <div class="col-7 ">
-                            <input type="text" class="form-control" id="colFormLabel" name="headQuaterName"
-                                value="<?= $group['headQuaterName'] ?>" required>
-                        </div>
-                        <div class="col-3 pl-30">
-                            Display <span class="profile-moon">*</span>
-                        </div>
-                        <div class="col-9">
-                            <input type="text" class="form-control" name="displayName"
-                                value="<?= $group['displayName'] ?>" required>
-                        </div>
-                        <div class="mt-20"></div>
-                        <div class="col-3  pl-30">
-                            Website </div>
-                        <div class="col-9">
-                            <input type="text" class="form-control" name="website" value="<?= $group['website'] ?>">
-                        </div>
-                        <div class="mt-20"></div>
-                        <div class="col-3  pl-30">
-                            Address <span class="profile-moon">*</span>
-                        </div>
-                        <div class="col-9">
-                            <input type="text" class="form-control" name="location" value="<?= $group['location'] ?>"
-                                required>
-                        </div>
-                        <div class="mt-20"></div>
-                        <div class="col-12">
-                            <div class="row">
-                                <div class="col-3  pl-30">
-                                    Country
-                                </div>
-                                <div class="col-4">
-                                    <select class="form-control" name="country" required>
-                                        <option value="<?= $groupCountry['countryId'] ?>">
-                                            <?= $groupCountry['countryName'] ?></option>
-                                        <?php
-										if (isset($countries) && count($countries) > 0) {
-											foreach ($countries as $countryId => $country) : ?>
-                                        <option value="<?= $countryId ?>"><?= $country ?></option>
-                                        <?php
-											endforeach;
-										}
-										?>
-                                    </select>
-
-                                </div>
-                                <div class="col-1">
-                                    City
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="city" value="<?= $group['city'] ?>">
-                                </div>
-                                <div class="mt-20"></div>
-                                <div class="col-3  pl-30">
-                                    Postal Code
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" value="<?= $group['postalCode'] ?>"
-                                        name="postalCode">
-                                </div>
-                                <div class="mt-20"></div>
-                                <div class="col-3  pl-30">
-                                    Industries <span class="profile-moon">*</span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" value="<?= $group['industries'] ?>"
-                                        name="industries" required>
-                                </div>
-                                <div class="col-2">
-                                    Email <span class="profile-moon">*</span>
-                                </div>
-                                <div class="col-3">
-                                    <input type="email" class="form-control" name="email"
-                                        value="<?= $group['email'] ?>">
-                                </div>
-                                <div class="mt-20"></div>
-                                <div class="col-3  pl-30">
-                                    Founded
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" name="founded" class="form-control"
-                                        value="<?= $group['founded'] ?>">
-                                </div>
-                                <div class="col-2">
-                                    Phone <span class="profile-moon">*</span>
-                                </div>
-                                <div class="col-3">
-                                    <input type="text" class="form-control" name="contact"
-                                        value="<?= $group['contact'] ?>">
-                                </div>
-                                <div class="mt-20"></div>
-                                <div class="col-3 pl-30">
-                                    Director <span class="profile-moon">*</span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="director"
-                                        value="<?= $group['director'] ?>" required>
-                                </div>
-                                <div class="col-2">
-                                    Social Tag
-                                </div>
-                                <div class="col-3">
-                                    <input type="text" name="socialTag" class="form-control"
-                                        value="<?= $group['socialTag'] ?>">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-
                 <div class="container">
                     <div class="row">
                         <!-- Left Column -->
@@ -225,76 +64,25 @@ $this->title = 'Update Group';
                                 <span class="text-danger">* </span><label class="name-text-update"
                                     for="groupName">Registered Group Name</label>
                                 <input type="text" class="form-control mt-12" name="groupName"
-                                    value="<?= $group['groupName'] ?>" required>
+                                    value="<?= $group['groupName'] ?>" placeholder="Write the name of Group" required>
                             </div>
                             <div class="form-group mb-30">
                                 <span class="text-danger">* </span> <label class="name-text-update"
                                     for="groupName">Display Name/Brand Name</label>
                                 <input type="text" class="form-control mt-12" name="groupName"
-                                    value="<?= $group['groupName'] ?>" required>
+                                    value="<?= $group['displayName'] ?>"
+                                    placeholder="The name you want to show (example,. Google)" required>
                             </div>
                             <div class="form-group mb-30">
                                 <span class="text-danger">* </span><label class="name-text-update"
                                     for="tagLine">Slogan/Tagline</label>
                                 <input type="text" class="form-control mt-12" name="tagLine"
-                                    value="<?= $group['tagLine'] ?>">
-                            </div>
-                            <div class="form-group mb-30">
-                                <span class="text-danger">* </span><label class="name-text-update"
-                                    for="industry">Industry</label>
-                                <input type="text" class="form-control mt-12" name="industries"
-                                    value="<?= $group['industries'] ?>" required>
-                            </div>
-                            <div class="form-group mb-30">
-                                <span class="text-danger">* </span> <label class="name-text-update"
-                                    for="addressLine">Address Line</label>
-                                <input type="text" class="form-control mt-12" name="location"
-                                    value="<?= $group['location'] ?>" required>
-                            </div>
-                            <div class="form-group mb-30">
-                                <span class="text-danger">* </span> <label class="name-text-update"
-                                    for="country">Country</label>
-                                <select class="form-control mt-12" name="country" required>
-                                    <option value="<?= $groupCountry['countryId'] ?>">
-                                        <?= $groupCountry['countryName'] ?></option>
-                                    <?php foreach ($countries as $countryId => $country) : ?>
-                                    <option value="<?= $countryId ?>"><?= $country ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                            <div class="form-group mb-30">
-                                <span class="text-danger">* </span> <label class="name-text-update"
-                                    for="contact">Contact/Phone Number</label>
-                                <input type="text" class="form-control mt-12" name="contact"
-                                    value="<?= $group['contact'] ?>">
-                            </div>
-                            <div class="form-group mb-30">
-                                <span class="text-danger">* </span> <label class="name-text-update"
-                                    for="contact">Contact/Phone Number></label>
-                                <input type="text" class="form-control mt-12" name="contact"
-                                    value="<?= $group['contact'] ?>">
-                            </div>
-                        </div>
-
-                        <!-- Right Column -->
-                        <div class="col-md-6">
-                            <div class="form-group mb-30">
-                                <span class="text-danger">* </span> <label class="name-text-update" for="director">Group
-                                    Director </label>
-                                <input type="text" class="form-control mt-12" name="director"
-                                    value="<?= $group['director'] ?>" required>
-                            </div>
-                            <div class="form-group mb-30">
-                                <span class="text-danger">* </span> <label class="name-text-update" for="email">Group
-                                    Email </label>
-                                <input type="email" class="form-control mt-12" name="email"
-                                    value="<?= $group['email'] ?>">
+                                    value="<?= $group['tagLine'] ?>" placeholder="Write the Tagline of the group"
+                                    required>
                             </div>
                             <div class="form-group mb-30">
                                 <span class="text-danger">* </span> <label class="name-text-update"
                                     for="founded">Founded</label>
-                                <!-- <input type="text" class="form-control mt-12" name="founded"
-                                    value="<?= $group['founded'] ?>"> -->
                                 <div class="input-group">
                                     <span class="input-group-text mt-12"
                                         style="background-color: #BEDAFF; border-right: none;">
@@ -302,11 +90,60 @@ $this->title = 'Update Group';
                                             style="width: 20px; height: 20px;">
                                     </span>
                                     <input type="text" style="border-left: none;" class="form-control mt-12"
-                                        name="linkedin" value="<?= $group['founded'] ?>">
+                                        name="linkedin" value="<?= $group['founded'] ?>" placeholder="" required>
                                 </div>
                             </div>
                             <div class="form-group mb-30">
-                                <label class="name-text-update" for="linkedin">LinkedIn Link</label>
+                                <span class="text-danger">* </span><label class="name-text-update"
+                                    for="industry">Industry</label>
+                                <input type="text" class="form-control mt-12" name="industries"
+                                    value="<?= $group['industries'] ?>" placeholder="Write the industry name" required>
+                            </div>
+                            <div class="form-group mb-30">
+                                <span class="text-danger">* </span> <label class="name-text-update" for="director">Group
+                                    Director </label>
+                                <input type="text" class="form-control mt-12" name="director"
+                                    value="<?= $group['director'] ?>" placeholder="Write
+                                    the name of Group" required>
+                            </div>
+                            <div class="form-group mb-30">
+                                <span class="text-danger">* </span> <label class="name-text-update"
+                                    for="addressLine">Address Line</label>
+                                <input type="text" class="form-control mt-12" name="location"
+                                    value="<?= $group['location'] ?>" placeholder="Write the email" required>
+                            </div>
+                            <div class="form-group mb-30">
+                                <span class="text-danger">* </span> <label class="name-text-update"
+                                    for="country">Country</label>
+                                <select class="form-control mt-12" name="country" placeholder="Write the phone number"
+                                    required>
+                                    <option value="<?= $groupCountry['countryId'] ?>">
+                                        <?= $groupCountry['countryName'] ?></option>
+                                    <?php foreach ($countries as $countryId => $country) : ?>
+                                    <option value="<?= $countryId ?>"><?= $country ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Right Column -->
+                        <div class="col-md-6">
+                            <div class="form-group mb-30">
+                                <span class="text-danger">* </span> <label class="name-text-update" for="email">Group
+                                    Email </label>
+                                <input type="email" class="form-control mt-12" name="email"
+                                    value="<?= $group['email'] ?>" placeholder="Write the email" required>
+                            </div>
+                            <div class="form-group mb-30">
+                                <span class="text-danger">* </span> <label class="name-text-update" for="phone">
+                                    Contact/Phone Number </label>
+                                <input type="email" class="form-control mt-12" name="email"
+                                    value="<?= $group['contact'] ?>" placeholder="Write the phone number" required>
+                            </div>
+
+                            <div class="form-group mb-30">
+                                <span class="text-danger">* </span><label class="name-text-update"
+                                    for="linkedin">LinkedIn Link</label>
                                 <div class="input-group">
                                     <span class="input-group-text mt-12"
                                         style="background-color: white; border-right: none;">
@@ -314,12 +151,14 @@ $this->title = 'Update Group';
                                             style="width: 20px; height: 20px;">
                                     </span>
                                     <input type="text" style="border-left: none;" class="form-control mt-12"
-                                        name="linkedin" value="<?= $group['socialTag'] ?>">
+                                        name="linkedin" value="<?= $group['socialLinkin'] ?>"
+                                        placeholder="Copy & Paste the Group LinkedIn Link here" required>
                                 </div>
                             </div>
 
                             <div class="form-group mb-30">
-                                <label class="name-text-update" for="twitter">X (Twitter) Link</label>
+                                <span class="text-danger">* </span><label class="name-text-update" for="twitter">X
+                                    (Twitter) Link</label>
                                 <div class="input-group">
                                     <span class="input-group-text mt-12"
                                         style="background-color: white; border-right: none;">
@@ -327,12 +166,14 @@ $this->title = 'Update Group';
                                             style="width: 20px; height: 20px;">
                                     </span>
                                     <input type="text" style="border-left: none;" class="form-control mt-12"
-                                        name="twitter" value="<?= $group['socialTag'] ?>">
+                                        name="twitter" value="<?= $group['socialX'] ?>"
+                                        placeholder="Copy & Paste the Group X (Twitter) Link here" required>
                                 </div>
                             </div>
 
                             <div class="form-group mb-30">
-                                <label class="name-text-update" for="facebook">Facebook Link</label>
+                                <span class="text-danger">* </span><label class="name-text-update"
+                                    for="facebook">Facebook Link</label>
                                 <div class="input-group">
                                     <span class="input-group-text mt-12"
                                         style="background-color: white; border-right: none;">
@@ -340,12 +181,14 @@ $this->title = 'Update Group';
                                             style="width: 20px; height: 20px;">
                                     </span>
                                     <input type="text" style="border-left: none;" class="form-control mt-12"
-                                        name="facebook" value="<?= $group['socialTag'] ?>">
+                                        name="facebook" value="<?= $group['socialFacebook'] ?>"
+                                        placeholder="Copy & Paste the Group Facebook Link here" required>
                                 </div>
                             </div>
 
                             <div class="form-group mb-30">
-                                <label class="name-text-update" for="instagram">Instagram Link</label>
+                                <span class="text-danger">* </span><label class="name-text-update"
+                                    for="instagram">Instagram Link</label>
                                 <div class="input-group">
                                     <span class="input-group-text mt-12"
                                         style="background-color: white; border-right: none;">
@@ -353,19 +196,38 @@ $this->title = 'Update Group';
                                             style="width: 20px; height: 20px;">
                                     </span>
                                     <input type="text" style="border-left: none;" class="form-control mt-12"
-                                        name="instagram" value="<?= $group['socialTag'] ?>">
+                                        name="instagram" value="<?= $group['socialInstargram'] ?>"
+                                        placeholder="Copy & Paste the Group Instagram Link here" required>
                                 </div>
                             </div>
 
                             <div class="form-group mb-30">
+                                <span class="text-danger">* </span>
                                 <label class="name-text-update" for="youtube">YouTube Link</label>
                                 <div class="input-group">
-                                    <span class="input-group-text" style="background-color: white; border-right: none;">
+                                    <span class="input-group-text mt-12"
+                                        style="background-color: white; border-right: none;">
                                         <img src="<?= Yii::$app->homeUrl ?>image/yt-image.svg" alt="YouTube"
                                             style="width: 20px; height: 20px;">
                                     </span>
-                                    <input type="text" style="border-left: none;" class="form-control" name="youtube"
-                                        value="<?= $group['socialTag'] ?>">
+                                    <input type="text" style="border-left: none;" class="form-control mt-12"
+                                        name="youtube" value="<?= $group['socialYoutube'] ?>"
+                                        placeholder="Copy & Paste the Group YouTube Link here" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-30">
+                                <span class="text-danger">* </span> <label class="name-text-update"
+                                    for="director">Website Link </label>
+                                <div class="input-group">
+                                    <span class="input-group-text mt-12"
+                                        style="background-color: white; border-right: none;">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/web-image.svg" alt="YouTube"
+                                            style="width: 20px; height: 20px;">
+                                    </span>
+                                    <input type="text" style="border-left: none;" class="form-control mt-12"
+                                        name="youtube" value="<?= $group['website'] ?>"
+                                        placeholder="Copy & Paste the Group YouTube Link here" required>
                                 </div>
                             </div>
 
@@ -388,33 +250,6 @@ $this->title = 'Update Group';
                                 class="form-control"><?= $group['about'] ?></textarea>
 
                         </div>
-                        <!-- <div class="row">
-                            <div class="col-4">
-                                <a href="<?= Yii::$app->homeUrl ?>setting/company/index" class="no-underline">
-                                    <div class="alert alert-secondary text-center" role="alert">
-                                        <div class="text-primary"> Companies</div>
-                                        <i class="fa fa-plus mt-10" aria-hidden="true"></i>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-4">
-                                <a href="<?= Yii::$app->homeUrl ?>setting/employee/index/" class="no-underline">
-                                    <div class="alert alert-secondary text-center" role="alert">
-                                        <div class="text-primary"> Employees</div>
-                                        <i class="fa fa-plus mt-10" aria-hidden="true"></i>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-4">
-                                <a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
-                                    class="no-underline">
-                                    <div class="alert alert-secondary text-center" role="alert">
-                                        <div class="text-primary"> Branches</div>
-                                        <i class="fa fa-plus mt-10" aria-hidden="true"></i>
-                                    </div>
-                                </a>
-                            </div>
-                        </div> -->
                         <div class="col-12 text-end mt-10 pr-13">
                             <button class="btn-cancel-group">Cancel</button>
                             <button type="submit" class="btn-save-group">Save

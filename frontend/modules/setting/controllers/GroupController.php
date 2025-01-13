@@ -224,7 +224,7 @@ class GroupController extends Controller
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/group-detail?id=' . $groupId);
         $groupJson = curl_exec($api);
         $group = json_decode($groupJson, true);
-
+        // throw new Exception(print_r($group,true));
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/country-detail?id=' . $group["countryId"]);
         $resultCountryDetail = curl_exec($api);
         $groupCountry = json_decode($resultCountryDetail, true);

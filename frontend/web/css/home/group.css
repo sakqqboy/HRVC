@@ -287,6 +287,23 @@ height: 937px; */
     text-align: end;
 }
 
+.name-director {
+    color: var(--Primary-Blue---HRVC, #2580D3);
+    leading-trim: both;
+    text-edge: cap;
+    font-family: "SF Pro Display";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: none;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
+}
+
 .group-body {
     display: flex;
     /* width: 793px; */
@@ -303,6 +320,7 @@ height: 937px; */
 
 .name-head0 {
     text-align: start;
+    word-wrap: break-word;
 }
 
 .number-bold {
@@ -438,8 +456,6 @@ height: 937px; */
 
 .city-group {
     color: var(--HRVC---Text-Black, #30313D);
-    leading-trim: both;
-    text-edge: cap;
     font-family: "SF Pro Display";
     font-size: 9px;
     font-style: normal;
@@ -518,6 +534,18 @@ height: 937px; */
 
 .address-box0 {
     font-size: 14px;
+    display: block;
+    white-space: normal;
+    /* ข้อความจะแบ่งบรรทัดอัตโนมัติ */
+}
+
+.text-wrap {
+    word-wrap: break-word;
+    /* แบ่งคำอัตโนมัติ */
+    word-break: break-word;
+    /* รองรับการตัดคำ */
+    overflow-wrap: break-word;
+    /* รองรับเบราว์เซอร์รุ่นใหม่ */
 }
 
 .detail-tokyo {
@@ -570,6 +598,8 @@ height: 937px; */
 }
 
 
+
+
 @media(max-width: 992px) {
     .edit-update {
         padding-left: 755px;
@@ -585,6 +615,23 @@ height: 937px; */
 }
 
 @media(max-width: 768px) {
+    .group-details {
+        display: flex;
+        flex-wrap: wrap;
+        /* width: 170vw; */
+        /* ใช้ความกว้างของ viewport */
+        margin: 0;
+        padding: 0;
+        /* รีเซ็ต padding */
+        box-sizing: border-box;
+        /* ให้รวม padding ใน width */
+    }
+
+    .all-information {
+        text-align: center;
+        font-size: 14px;
+    }
+
     .edit-update {
         padding-left: 350px;
     }
@@ -594,19 +641,18 @@ height: 937px; */
     }
 
     .name-tokyo {
-        padding-left: 215px;
-        margin-top: -180px;
+        padding-left: 255px;
+        margin-top: -160px;
         font-size: 20px;
     }
 
     .tokyo-small {
-        padding-left: 220px;
+        padding-left: 255px;
         margin-top: -5px;
     }
 
     .tcg-edit0 {
         margin-top: -40px;
-        text-align: right;
     }
 
     .name-head {
@@ -615,18 +661,31 @@ height: 937px; */
     }
 
     .name-head0 {
-        text-align: right;
-        margin-top: -24px;
+        text-align: center;
+        word-wrap: break-word;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        /* เพิ่มระยะห่างระหว่างไอคอนกับข้อความ */
     }
 
     .address-box {
+        text-align: center;
         font-size: 13px;
-        width: 125px;
-        margin-left: 340px;
+        max-width: 100%;
+        word-wrap: break-word;
+        /* ตัดคำเมื่อข้อความยาวเกิน */
+
+        /* ป้องกันข้อความล้น */
+        /* margin-left: 340px; */
     }
 
     .address-box0 {
         font-size: 13px;
+        display: block;
+        white-space: normal;
+        /* ข้อความจะแบ่งบรรทัดอัตโนมัติ */
     }
 
     .Group-Information {

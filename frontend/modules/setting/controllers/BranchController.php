@@ -117,6 +117,9 @@ class BranchController extends Controller
             endforeach;
         }
 
+                //  throw new Exception(print_r($branches, true));
+
+
         return $this->render('create', [
             "company" => $company,
             "companies" => $companyGroup,

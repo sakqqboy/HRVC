@@ -30,6 +30,8 @@
     /* เพื่อให้ top และ margin มีผล */
 }
 
+
+
 .uplode-btn-group {
     display: flex;
     width: 100px;
@@ -139,4 +141,19 @@
         text-align: end;
     }
 
+}
+
+@media(max-width: 450px) {
+    .company-group-body {
+        background: #FFF;
+        height: auto;
+        width: 900%;
+        margin-right: -20px;
+        padding-top: 20px;
+        padding-right: 34px;
+        padding-left: 40px;
+        top: -10px;
+        left: -10px;
+        position: relative;
+    }
 }

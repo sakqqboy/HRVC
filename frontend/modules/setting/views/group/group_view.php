@@ -58,8 +58,8 @@ $this->title = 'Group profile';
                 </a>
             </div>
         </div>
-        <div class="row">
-            <div class="col-9 group-body">
+        <div class="row group-details">
+            <div class="col-9 mx-auto group-body  group-body ">
                 <div class="row">
                     <!-- Left Column -->
                     <div class="col-lg-6 col-md-6 col-12 all-information">
@@ -71,31 +71,34 @@ $this->title = 'Group profile';
                             <div class="col-lg-5 col-md-6 col-12 name-head">
                                 Group Director/ Chairman
                             </div>
-                            <div class="col-lg-7 col-md-6 col-12 name-head0">
-                                <img src="<?= Yii::$app->homeUrl ?>image/Mask-group.png"> <?= $group["director"] ?>
-                            </div>
+                            <a class="col-lg-7 col-md-6 col-12 name-director text-wrap"
+                                href="<?= Yii::$app->homeUrl ?>setting/employee/employee-profile/<?= ModelMaster::encodeParams(['employeeId' => 23]) ?>">
+                                <img src="<?= Yii::$app->homeUrl ?>image/Mask-group.png" alt="Group Image">
+                                <span class="d-inline-block"><?= $group["director"] ?></span>
+                            </a>
                             <div class="col-lg-5 col-md-6 col-12 name-head mt-10">
                                 Headquarter Address
                             </div>
-                            <div class="col-lg-7 col-md-6 col-12 name-head0 mt-10 d-flex align-items-center">
+                            <div
+                                class="col-lg-7 col-md-6 col-12 name-head0 mt-10 d-flex justify-content-center align-items-center">
                                 <div class="col-1">
                                     <img src="<?= Yii::$app->homeUrl ?>image/location.svg"
                                         style="width: 9.333px; height: 12px;">
                                 </div>
-                                <div class="col-11 address-box">
+                                <div class="col-11 address-box text-wrap">
                                     <?= $group["location"] ?>
                                 </div>
                             </div>
                             <div class="col-lg-5 col-md-6 col-12 name-head mt-10">
                                 Founded
                             </div>
-                            <div class="col-lg-7 col-md-6 col-12 name-head0 mt-10">
+                            <div class="col-lg-7 col-md-6 col-12 name-head0 mt-10 text-wrap">
                                 <?= $group["founded"] ?>
                             </div>
                             <div class="col-lg-5 col-md-6 col-12 name-head mt-10">
                                 Industry
                             </div>
-                            <div class="col-lg-7 col-md-6 col-12 name-head0 mt-10">
+                            <div class="col-lg-7 col-md-6 col-12 name-head0 mt-10 text-wrap">
                                 <?= $group["industries"] ?>
                             </div>
                         </div>
@@ -107,8 +110,8 @@ $this->title = 'Group profile';
                             <div class="col-lg-4 col-md-6 col-12 name-head mt-10">
                                 Email
                             </div>
-                            <div class="col-lg-8 col-md-6 col-12 name-head0 mt-5">
-                                <span class="text-primary address-box0"><?= $group["email"] ?></span>
+                            <div class="col-lg-8 col-md-6 col-12 name-head0 mt-5 d-flex align-items-center">
+                                <span class="text-primary address-box0 text-wrap"><?= $group["email"] ?></span>
                                 <img src="<?= Yii::$app->homeUrl ?>image/coppy.svg"
                                     onclick="javascript:copyToClipboard('<?= $group['email'] ?>')"
                                     style="width: 10.884px; height: 12px;">
@@ -116,8 +119,8 @@ $this->title = 'Group profile';
                             <div class="col-lg-4 col-md-6 col-12 name-head mt-10">
                                 Phone
                             </div>
-                            <div class="col-lg-8 col-md-6 col-12 name-head0 mt-5">
-                                <?= $group["contact"] ?>
+                            <div class="col-lg-8 col-md-6 col-12 name-head0 mt-5 d-flex align-items-center">
+                                <span class="text-wrap"><?= $group["contact"] ?></span>
                                 <img src="<?= Yii::$app->homeUrl ?>image/coppy.svg"
                                     onclick="javascript:copyToClipboard('<?= $group['contact'] ?>')"
                                     style="width: 10.884px; height: 12px;">
@@ -125,15 +128,13 @@ $this->title = 'Group profile';
                             <div class="col-lg-4 col-md-6 col-12 name-head mt-10">
                                 Website
                             </div>
-                            <div class="col-lg-8 col-md-6 col-12 name-head0 mt-5">
+                            <div class="col-lg-8 col-md-6 col-12 name-head0 mt-5 d-flex align-items-center">
                                 <a href="<?= $group['website'] ?>" target="_blank"
-                                    class="text-primary"><?= $group["website"] ?></a>
-                                <!-- <img src="<?= Yii::$app->homeUrl ?>image/coppy.svg"
-                                    onclick="javascript:copyToClipboard('<?= $group['website'] ?>')"
-                                    style="width: 10.884px; height: 12px;"> -->
+                                    class="text-primary text-wrap"><?= $group["website"] ?></a>
                             </div>
                         </div>
                     </div>
+
 
                     <!-- Right Column -->
                     <div class="col-lg-6 col-md-6 col-12 box-about0">
@@ -155,15 +156,15 @@ $this->title = 'Group profile';
                         </div>
 
                         <div class="col-12 mt-10 text-end">
-                            <img src="<?= Yii::$app->homeUrl ?>image/icon-x<?= empty($group["socialTag"]) ? '-off' : '' ?>.svg"
+                            <img src="<?= Yii::$app->homeUrl ?>image/icon-x<?= empty($group["socialX"]) ? '-off' : '' ?>.svg"
                                 style="width: 24px; height: 24.6px;">
-                            <img src="<?= Yii::$app->homeUrl ?>image/icon-in<?= empty($group["socialTag"]) ? '-off' : '' ?>.svg"
+                            <img src="<?= Yii::$app->homeUrl ?>image/icon-in<?= empty($group["socialLinkin"]) ? '-off' : '' ?>.svg"
                                 style="width: 24px; height: 24.6px;">
-                            <img src="<?= Yii::$app->homeUrl ?>image/icon-yt<?= empty($group["socialTag"]) ? '-off' : '' ?>.svg"
+                            <img src="<?= Yii::$app->homeUrl ?>image/icon-yt<?= empty($group["socialYoutube"]) ? '-off' : '' ?>.svg"
                                 style="width: 24px; height: 24.6px;">
-                            <img src="<?= Yii::$app->homeUrl ?>image/icon-face<?= empty($group["socialTag"]) ? '-off' : '' ?>.svg"
+                            <img src="<?= Yii::$app->homeUrl ?>image/icon-face<?= empty($group["socialFacebook"]) ? '-off' : '' ?>.svg"
                                 style="width: 24px; height: 24.6px;">
-                            <img src="<?= Yii::$app->homeUrl ?>image/icon-ig<?= empty($group["socialTag"]) ? '-off' : '' ?>.svg"
+                            <img src="<?= Yii::$app->homeUrl ?>image/icon-ig<?= empty($group["socialInstargram"]) ? '-off' : '' ?>.svg"
                                 style="width: 24px; height: 24.6px;">
                         </div>
                     </div>
@@ -302,7 +303,7 @@ $this->title = 'Group profile';
             </div>
 
             <!-- <hr class="hr-group-vertical"> -->
-            <div class="col-lg-3 col-md-4 col-12 home-tokyo">
+            <div class="col-lg-3 col-md-4 col-12  home-tokyo">
                 <div class="row">
                     <div class="col-lg-2 col-md-2 col-12"
                         style="width: 15px; height: 15px; padding-right : 0px; padding-left: 0px; bottom: 5px; ">
