@@ -33,12 +33,19 @@ $this->title = Yii::t('app', 'KFI Grid View');
                             <?php
                             if ($role >= 3) {
                             ?>
-                            <button type="button" class="btn-createnew pl-7 pr-7 pr-9 font-size-12"
+                            <!-- <button type="button" class="btn-createnew pl-7 pr-7 pr-9 font-size-12"
                                 data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
                                 <?= Yii::t('app', 'Create New') ?>
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="History"
                                     class="pim-icon ml-3" style="margin-top: -1px;">
-                            </button>
+                            </button> -->
+                            <a type="button" class="btn-createnew pl-7 pr-7 pr-9 font-size-12"
+                                href="<?= Yii::$app->homeUrl ?>kfi/management/create-kfi/"
+                                style="text-decoration: none;">
+                                <?= Yii::t('app', 'Create New') ?>
+                                <img src=" <?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="History"
+                                    class="pim-icon ml-3" style="margin-top: -1px;">
+                            </a>
                             <?php
                             }
                             ?>

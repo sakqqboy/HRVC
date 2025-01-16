@@ -58,25 +58,84 @@ function branchMultiDepartment() {
 	var multiBranch = [];
 	var sumBranch = totalBranch();
 	var i = 0;
+
 	$("#multi-check:checked").each(function () {
 		multiBranch[i] = $(this).val();
 		i++;
 	});
+
 	if (sumBranch != multiBranch.length) {
 		$("#check-all-branch").prop("checked", false);
 	} else {
 		$("#check-all-branch").prop("checked", true);
 	}
+
 	if (multiBranch.length > 0) {
 		$('input[id="multi-check"]').each(function () {
 			$(".multiCheck-" + $(this).val()).removeAttr('required');
 		});
+		let imageSrc = $url + "image/branches.svg"; // กำหนดแหล่งที่มาของภาพ
+		let blackimageSrc = $url + "image/branches-black.svg"; // กำหนดแหล่งที่มาของภาพ
+
+		// เปลี่ยนค่าใน <div> ที่มี id="selected-count" เฉพาะใน #kfi-branches
+		$("#kfi-branches #branch-selected-count").removeClass("cycle-current-gray").addClass("cycle-current-white");
+		$("#kfi-branches #branch-selected-message").html(``);
+
+		if (multiBranch.length == 1) {
+			$("#kfi-branches .cycle-current").slice(0, 3)
+				.removeClass("cycle-current")
+				.addClass("cycle-current-gray")
+				.find("img")
+				.attr("src", blackimageSrc);
+			// เปลี่ยน class ของ cycle-current-gray เป็น cycle-current สำหรับ 1 div แรก ใน #kfi-branches
+			$("#kfi-branches .cycle-current-gray").slice(0, 1).removeClass("cycle-current-gray").addClass("cycle-current");
+			// เปลี่ยนแหล่งที่มาของภาพสำหรับ 1 รูปแรก
+			$("#kfi-branches .cycle-current").slice(0, 1).find("img").attr("src", imageSrc);
+		}
+		if (multiBranch.length == 2) {
+			$("#kfi-branches .cycle-current").slice(0, 3)
+				.removeClass("cycle-current")
+				.addClass("cycle-current-gray")
+				.find("img")
+				.attr("src", blackimageSrc);
+			// เปลี่ยน class ของ cycle-current-gray เป็น cycle-current สำหรับ 2 div แรก ใน #kfi-branches
+			$("#kfi-branches .cycle-current-gray").slice(0, 2).removeClass("cycle-current-gray").addClass("cycle-current");
+			// เปลี่ยนแหล่งที่มาของภาพสำหรับ 2 รูปแรก
+			$("#kfi-branches .cycle-current").slice(0, 2).find("img").attr("src", imageSrc);
+		}
+		if (multiBranch.length >= 3) {
+			// เปลี่ยน class ของ cycle-current-gray เป็น cycle-current สำหรับ 3 div แรก ใน #kfi-branches
+			$("#kfi-branches .cycle-current-gray").slice(0, 3).removeClass("cycle-current-gray").addClass("cycle-current");
+			// เปลี่ยนแหล่งที่มาของภาพสำหรับ 3 รูปแรก
+			$("#kfi-branches .cycle-current").slice(0, 3).find("img").attr("src", imageSrc);
+		}
+
 	} else {
 		$('input[id="multi-check"]').each(function () {
 			$(".multiCheck-" + $(this).val()).prop('required', true);
 		});
+
+		// เปลี่ยนค่าใน <div> เมื่อไม่มีการเลือก checkbox เฉพาะใน #kfi-branches
+		$("#kfi-branches #branch-selected-count").removeClass("cycle-current-white").addClass("cycle-current-gray");
+		$("#kfi-branches #branch-selected-message").html("No Branches are Selected Yet");
+
+		// เปลี่ยนแหล่งที่มาของภาพกลับเป็น default เฉพาะใน #kfi-branches
+		$("#kfi-branches .cycle-current img").attr("src", $url + "image/branches-black.svg");
+
+		// เปลี่ยน class ของ cycle-current เป็น cycle-current-gray สำหรับ 3 div แรก ใน #kfi-branches
+		$("#kfi-branches .cycle-current").slice(0, 3).removeClass("cycle-current").addClass("cycle-current-gray");
 	}
-	//alert(multiBranch.length);
+
+
+	// สำหรับ Branches
+	var selectedBranchCount = multiBranch.length;
+	$("#branch-selected-count").text(selectedBranchCount.toString());
+	$("#branch-selected-message").text(
+		selectedBranchCount > 0
+			? ``
+			: "No Branches are Selected Yet"
+	);
+
 	var url = $url + 'kgi/management/branch-multi-department';
 	var acType = $("#acType").val();
 	$.ajax({
@@ -135,33 +194,102 @@ function departmentMultiTeam(branchId) {
 	var multiDepartmentBranch = [];
 	var multiDepartment = [];
 	var multiBranch = [];
+	var allSelectedDepartments = []; // ตัวแปรเก็บผลรวมทั้งหมด
 	var i = 0;
+
+	// Collect selected departments for the specific branch
 	$("#multi-check-" + branchId + ":checked").each(function () {
 		multiDepartmentBranch[i] = $(this).val();
 		i++;
 	});
+	// Collect all selected departments across all branches
 	$("#multi-check:checked").each(function () {
 		multiBranch[i] = $(this).val();
 		i++;
 	});
+	// // Collect selected departments from the specific branch
+	// $(".multi-check-department:checked").each(function () {
+	// 	multiDepartment[i] = $(this).val();
+	// 	i++;
+	// });
 	$(".multi-check-department:checked").each(function () {
-		multiDepartment[i] = $(this).val();
-		i++;
+		multiDepartment.push($(this).val());
 	});
-	if (sumDepartment != multiDepartmentBranch.length) {
-		$("#multi-check-all-" + branchId).prop("checked", false);
-	} else {
-		$("#multi-check-all-" + branchId).prop("checked", true);
-	}
-	if (multiDepartmentBranch.length > 0) {
-		$('input[id="multi-check-' + branchId + '"]').each(function () {
-			$(".multiDepartment-" + $(this).val()).removeAttr('required');
+
+	if (multiDepartment.length > 0) {
+		$('input[id="multi-check"]').each(function () {
+			$(".multiCheck-" + $(this).val()).removeAttr('required');
 		});
+
+		let deptImageSrc = $url + "image/departments.svg"; // แหล่งที่มาของภาพสำหรับ departments
+		let deptblackImageSrc = $url + "image/departments-black.svg"; // แหล่งที่มาของภาพสำหรับ departments
+
+		// เปลี่ยน class และข้อความสำหรับ #kfi-departments
+		$("#kfi-departments #department-selected-count")
+			.removeClass("cycle-current-gray")
+			.addClass("cycle-current-white");
+		$("#kfi-departments #department-selected-message").html("");
+
+		if (multiDepartment.length == 1) {
+			$("#kfi-departments .cycle-current").slice(0, 3)
+				.removeClass("cycle-current")
+				.addClass("cycle-current-gray")
+				.find("img")
+				.attr("src", deptblackImageSrc);
+			$("#kfi-departments .cycle-current-gray").slice(0, 1)
+				.removeClass("cycle-current-gray")
+				.addClass("cycle-current")
+				.find("img")
+				.attr("src", deptImageSrc);
+		}
+		if (multiDepartment.length == 2) {
+			$("#kfi-departments .cycle-current").slice(0, 3)
+				.removeClass("cycle-current")
+				.addClass("cycle-current-gray")
+				.find("img")
+				.attr("src", deptblackImageSrc);
+			$("#kfi-departments .cycle-current-gray").slice(0, 2)
+				.removeClass("cycle-current-gray")
+				.addClass("cycle-current")
+				.find("img")
+				.attr("src", deptImageSrc);
+		}
+		if (multiDepartment.length >= 3) {
+			$("#kfi-departments .cycle-current-gray").slice(0, 3)
+				.removeClass("cycle-current-gray")
+				.addClass("cycle-current")
+				.find("img")
+				.attr("src", deptImageSrc);
+		}
 	} else {
-		$('input[id="multi-check-' + branchId + '"]').each(function () {
-			$(".multiDepartment-" + $(this).val()).prop('required', true);
+		$('input[id="multi-check"]').each(function () {
+			$(".multiCheck-" + $(this).val()).prop('required', true);
 		});
+
+		// เปลี่ยน class และข้อความเมื่อไม่มี departments ที่เลือก
+		$("#kfi-departments #department-selected-count")
+			.removeClass("cycle-current-white")
+			.addClass("cycle-current-gray");
+		$("#kfi-departments #department-selected-message").html("No Departments are Selected Yet");
+
+		// เปลี่ยนภาพกลับเป็น default
+		$("#kfi-departments .cycle-current img").attr("src", $url + "image/departments-black.svg");
+		$("#kfi-departments .cycle-current").slice(0, 3)
+			.removeClass("cycle-current")
+			.addClass("cycle-current-gray");
 	}
+
+
+	// สำหรับ Departments
+	var selectedDepartmentCount = multiDepartment.length;
+	$("#department-selected-count").text(selectedDepartmentCount.toString());
+	$("#department-selected-message").text(
+		selectedDepartmentCount > 0
+			? ``
+			: "No Departments are Selected Yet"
+	);
+
+
 	var acType = $("#acType").val();
 	var url = $url + 'kgi/management/department-multi-team';
 	$.ajax({

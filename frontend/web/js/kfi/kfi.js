@@ -25,16 +25,14 @@ function companyBranchKfi() {
         }
     });
 }
+
 function companyMultiBrachKfi() {
     clearEveryShow();
     var acType = $("#acType").val();
-    if (acType == "update") {
-        var companyId = $("#companyId-update").val();
-    } else {
-        var companyId = $("#companyId").val();
-    }
+    var companyId = acType === "update" ? $("#companyId-update").val() : $("#companyId").val();
     var kfiId = $("#kfiId").val();
     var url = $url + 'kfi/management/company-multi-branch';
+
     $.ajax({
         type: "POST",
         dataType: 'json',
@@ -42,16 +40,20 @@ function companyMultiBrachKfi() {
         data: { companyId: companyId, acType: acType, kfiId: kfiId },
         success: function (data) {
             if (data.status) {
-                if (acType == "update") {
+                // เติมข้อมูล branch ลงใน div ที่เหมาะสม
+                // alert(data.branchText)
+                if (acType === "update") {
                     $("#show-multi-branch-update").html(data.branchText);
-
+                    $("#show-multi-branch-update").show();
                 } else {
                     $("#show-multi-branch").html(data.branchText);
+                    $("#show-multi-branch").show();
                 }
             }
         }
     });
 }
+
 
 function branchDepartmentKfi() {
     var branchId = $("#branch-create-kfi").val();
@@ -79,12 +81,14 @@ function selectUnit(currentUnit) {
     if (previous != '') {
         $("#previousUnit").val(previous);
         $("#unit-" + previous).css("background-color", "white");
-        $("#unit-" + previous).css("color", "black");
+        $("#unit-" + previous).css("color", "#6E6E6E");
+        $("#unit-" + previous).css("border-bottom", "3px solid #94989C");
     }
 
     $("#currentUnit").val(currentUnit);
-    $("#unit-" + currentUnit).css("background-color", "#3366FF");
-    $("#unit-" + currentUnit).css("color", "white");
+    $("#unit-" + currentUnit).css("background-color", "#D7EBFF");
+    $("#unit-" + currentUnit).css("color", "#30313D");
+    $("#unit-" + currentUnit).css("border-bottom", "3px solid #2580D3");
 
 }
 function selectUnitUpdate(currentUnit) {
@@ -92,11 +96,13 @@ function selectUnitUpdate(currentUnit) {
     if (previous != '') {
         $(".previousUnit").val(previous);
         $(".unit-" + previous).css("background-color", "white");
-        $(".unit-" + previous).css("color", "black");
+        $(".unit-" + previous).css("color", "#6E6E6E");
+        $(".unit-" + previous).css("border-bottom", "3px solid #94989C");
     }
     $(".currentUnit").val(currentUnit);
-    $(".unit-" + currentUnit).css("background-color", "#3366FF");
-    $(".unit-" + currentUnit).css("color", "white");
+    $(".unit-" + currentUnit).css("background-color", "#D7EBFF");
+    $(".unit-" + currentUnit).css("color", "#30313D");
+    $(".unit-" + currentUnit).css("border-bottom", "3px solid #2580D3");
 }
 function updateKfi(kfiId) {
     // alert(kfiId);
@@ -136,36 +142,114 @@ function updateKfi(kfiId) {
         }
     });
 }
-function branchMultiDepartmentUpdateKfi() {
-    var multiBranch = [];
-    var sumBranch = totalBranchUpdate();
-    var i = 0;
-    $("#multi-check-update:checked").each(function () {
-        multiBranch[i] = $(this).val();
-        i++;
-    });
-    if (sumBranch != multiBranch.length) {
-        $("#check-all-branch-update").prop("checked", false);
-    } else {
-        $("#check-all-branch-update").prop("checked", true);
-    }
-    var url = $url + 'kfi/management/branch-multi-department';
-    var acType = $("#acType").val();
-    var kfiId = $("#kfiId").val();
-    $.ajax({
-        type: "POST",
-        dataType: 'json',
-        url: url,
-        data: { multiBranch: multiBranch, acType: acType, kfiId: kfiId },
-        success: function (data) {
-            if (data.status) {
-                $("#show-multi-department-update").html(data.textDepartment);
-            } else {
-                $("#show-multi-department-update").html('');
-            }
-        }
-    });
+
+
+function openDatePicker() {
+    document.getElementById('monthYearPicker').style.display = 'block';
 }
+
+function closeDatePicker() {
+    var month = document.getElementById('monthSelect').value;
+    var year = document.getElementById('yearSelect').value;
+
+    if (month && year) {
+        document.getElementById('multi-mount-year').innerHTML =
+            `${getMonthName(month)}, ${year} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
+
+        document.getElementById('monthYearPicker').style.display = 'none';
+    }
+}
+
+function getMonthName(month) {
+    const months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ]; return months[month - 1];
+}
+
+
+// กำหนด Flatpickr สำหรับปฏิทินเริ่มต้น
+flatpickr("#startDatePicker", {
+    inline: true,
+    dateFormat: "m/d/Y",
+    onChange: function (selectedDates, dateStr) {
+        window.startDate = dateStr; // เก็บค่า Start Date
+        updateSelectedDates();
+    }
+});
+
+// กำหนด Flatpickr สำหรับปฏิทินสิ้นสุด
+flatpickr("#endDatePicker", {
+    inline: true,
+    dateFormat: "m/d/Y",
+    onChange: function (selectedDates, dateStr) {
+        window.endDate = dateStr; // เก็บค่า End Date
+        updateSelectedDates();
+    }
+});
+
+flatpickr("#updateDatePicker", {
+    inline: true, // แสดงปฏิทินแบบฝัง
+    dateFormat: "d/m/Y", // รูปแบบวันที่เป็น DD/MM/YYYY
+    onChange: function (selectedDates, dateStr) {
+        // อัปเดตข้อความใน multi-due-update
+        document.getElementById('multi-due-update').innerHTML =
+            `${dateStr} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
+        // ซ่อนปฏิทินหลังจากเลือกวันที่
+        document.getElementById('calendar-due-update').style.display = 'none';
+    }
+});
+
+
+
+// อัปเดตข้อความวันที่ใน multi-due-term
+function updateSelectedDates() {
+    const startDate = window.startDate || "Start";
+    const endDate = window.endDate || "End";
+    document.getElementById("multi-due-term").innerHTML =
+        `${startDate} - ${endDate} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
+}
+
+
+
+// function branchMultiDepartment() {
+//     var multiBranch = [];
+//     $(".branch-checkbox:checked").each(function () {
+//         multiBranch.push($(this).val());
+//     });
+//     // alert(0);
+//     // updateSelectedCount();
+//     // ทำการเรียก AJAX หรือการกระทำเพิ่มเติมตามที่ต้องการ
+//     var url = $url + 'kfi/management/branch-multi-department';
+//     var acType = $("#acType").val();
+//     var kfiId = $("#kfiId").val();
+//     $.ajax({
+//         type: "POST",
+//         dataType: 'json',
+//         url: url,
+//         data: { multiBranch: multiBranch, acType: acType, kfiId: kfiId },
+//         success: function (data) {
+//             if (data.status) {
+//                 // alert(1);
+//                 $("#show-multi-department-update").html(data.textDepartment);
+//             } else {
+//                 // alert(2);
+//                 $("#show-multi-department-update").html('');
+//             }
+//         }
+//     });
+// }
+
+function updateSelectedCount() {
+    var selectedCount = $(".branch-checkbox:checked").length;  // นับ checkbox ที่ถูกเลือก
+    alert(selectedCount);  // ใช้สำหรับทดสอบการนับจำนวน
+    $("#selected-count").text(`${selectedCount}`);  // อัปเดตจำนวนที่เลือก
+    $("#selected-message").text(
+        selectedCount > 0 ? `${selectedCount} Branch(es) Selected` : "No Branches are Selected Yet"
+    );
+}
+
+
 function totalBranchUpdate() {
     var totalBranch = 0;
     var data = [];

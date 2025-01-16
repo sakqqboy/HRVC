@@ -4,6 +4,42 @@
 	color: #3C3D48;
 }
 
+.contrainer-body {
+	padding: 40px 40px 40px 40px;
+}
+
+.pim-name-title {
+	color: #3C3D48;
+	leading-trim: both;
+	text-edge: cap;
+	font-family: "SF Pro Display";
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 21.429px;
+	/* 107.143% */
+	text-transform: capitalize;
+}
+
+.pim-text-back {
+	color: #2580D3;
+	leading-trim: both;
+	text-edge: cap;
+	font-family: "SF Pro Display";
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 21.429px;
+	/* 107.143% */
+	letter-spacing: -0.3px;
+	text-decoration-line: underline;
+	text-decoration-style: solid;
+	text-decoration-skip-ink: none;
+	text-decoration-thickness: auto;
+	text-underline-offset: auto;
+	text-underline-position: from-font;
+}
+
 .employee-image-detail {
 	width: 20px;
 	height: 20px;
@@ -1659,4 +1695,275 @@
 	padding: 2px 5px 2px 4px;
 	border-radius: 11.5px;
 	border-color: #2580D3 solid thin;
+}
+
+.current-ratio {
+	color: var(--HRVC---Text-Black, #30313D);
+	font-family: "SF Pro Display";
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 500;
+	/* line-height: 34.199px; */
+	text-transform: capitalize;
+	/* white-space: nowrap; */
+
+}
+
+.current-ratio-data {
+	color: var(--HRVC---Light-Text, #94989C);
+	font-family: "SF Pro Display";
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	/* line-height: 34.199px; */
+	/* 244.282% */
+	text-transform: capitalize;
+}
+
+.circular-chart-create {
+	display: block;
+	margin: 10px auto;
+	max-width: auto;
+	max-height: auto;
+}
+
+.pim-total-reward {
+	color: #3C3D48;
+	font-family: "SF Pro Display";
+	font-size: 22px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 20px;
+	/* 90.909% */
+}
+
+.text-manage-create {
+	color: var(--HRVC---Text-Black, #30313D);
+	leading-trim: both;
+	text-edge: cap;
+	font-family: "SF Pro Display";
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 19.286px;
+	/* 107.143% */
+}
+
+.sub-manage-create {
+	color: #6A7383;
+	leading-trim: both;
+	text-edge: cap;
+	font-family: "SF Pro Display";
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 19.286px;
+	/* 137.755% */
+}
+
+.mount-year {
+	display: none;
+	position: absolute;
+	top: 70px;
+	left: 0;
+	background-color: white;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	padding: 10px;
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+	z-index: 1;
+	width: 100%;
+}
+
+.updatehistory {
+	color: var(--Primary-Blue---HRVC, #2580D3);
+	font-family: "SF Pro Display";
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 19.286px;
+	/* 120.536% */
+	text-decoration-line: underline;
+	text-decoration-style: solid;
+	text-decoration-skip-ink: auto;
+	text-decoration-thickness: 9.5%;
+	/* 1.52px */
+	text-underline-offset: 25%;
+	/* 4px */
+	text-underline-position: from-font;
+}
+
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 32px;
+	/* Reduced width */
+	height: 18px;
+	/* Reduced height */
+}
+
+.switch input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	/* Default background color */
+	-webkit-transition: .4s;
+	transition: .4s;
+}
+
+.slider:before {
+	position: absolute;
+	content: "";
+	height: 14px;
+	/* Adjusted for the new height */
+	width: 14px;
+	/* Adjusted for the new size */
+	left: 2px;
+	/* Adjusted for centering */
+	bottom: 2px;
+	/* Adjusted for centering */
+	background-color: white;
+	-webkit-transition: .4s;
+	transition: .4s;
+}
+
+input:checked+.slider {
+	background-color: hsla(209, 70%, 49%, 1);
+	/* New color */
+}
+
+input:focus+.slider {
+	box-shadow: 0 0 1px hsla(209, 70%, 49%, 1);
+	/* Color for focus */
+}
+
+input:checked+.slider:before {
+	-webkit-transform: translateX(14px);
+	/* Adjusted for new width */
+	-ms-transform: translateX(14px);
+	transform: translateX(14px);
+	/* Adjusted for new width */
+}
+
+/* Rounded sliders */
+.slider.round {
+	border-radius: 18px;
+	/* Adjusted for rounded corners */
+}
+
+.slider.round:before {
+	border-radius: 50%;
+}
+
+.name-last-update {
+	color: #656565;
+	leading-trim: both;
+	text-edge: cap;
+	font-family: "SF Pro Display";
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 18px;
+	/* 128.573% */
+	letter-spacing: -0.21px;
+}
+
+.create-last-update {
+	color: var(--Primary-Blue---HRVC, #2580D3);
+	text-align: right;
+	leading-trim: both;
+	text-edge: cap;
+	font-family: "SF Pro Display";
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 24px;
+	/* 150.002% */
+	letter-spacing: -0.24px;
+	text-decoration-line: underline;
+	text-decoration-style: solid;
+	text-decoration-skip-ink: auto;
+	text-decoration-thickness: auto;
+	text-underline-offset: auto;
+	text-underline-position: from-font;
+}
+
+.select-create-status {
+	display: flex;
+	width: 130px;
+	height: 40px;
+	padding: 6px 15px;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	flex-shrink: 0;
+	border-radius: 24.444px;
+	border: 0.5px solid #2F42ED;
+	background: #E7EAFF;
+	font-size: 14px;
+	font-weight: 600;
+	font-family: "SF Pro Display";
+	color: #2F42ED;
+}
+
+.btn-create-update {
+	display: flex;
+	padding: 7px 9px;
+	justify-content: center;
+	align-items: center;
+	gap: 6px;
+	flex-shrink: 0;
+	border-radius: 3px;
+	border: none;
+	background: var(--Primary-Blue---HRVC, #2580D3);
+	color: #FFF;
+	text-align: center;
+	font-family: "SF Pro Display";
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 28px;
+	/* 175% */
+}
+
+.btn-create-cancle {
+	display: flex;
+	padding: 7px 9px;
+	justify-content: center;
+	align-items: center;
+	gap: 6px;
+	flex-shrink: 0;
+	border-radius: 3px;
+	border: none;
+	border: 0.5px solid var(--HRVC---Light-Text, #94989C);
+	background: var(--100-white, #FFF);
+	color: var(--HRVC---Text-Black, #30313D);
+	text-align: center;
+	font-family: "SF Pro Display";
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 28px;
+	/* 233.333% */
+}
+
+.contrainer-body-detail {
+	border-radius: 5px;
+	padding: 30px;
+	width: 1480px;
+	height: 678px;
+	background-color: #F4F6F9;
+	display: flex;
+	justify-content: space-between;
+	gap: 70px;
 }

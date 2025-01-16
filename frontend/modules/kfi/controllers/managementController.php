@@ -235,6 +235,28 @@ class ManagementController extends Controller
 				//return $this->redirect('index');
 			}
 		}
+
+		$role = UserRole::userRight();
+		$groupId = Group::currentGroupId();
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$companies = curl_exec($api);
+		$companies = json_decode($companies, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
+		$units = curl_exec($api);
+		$units = json_decode($units, true);
+		
+		curl_close($api);
+
+		return $this->render('create', [ 
+			"role" => $role,
+			"companies" => $companies,
+			"units" => $units
+		]);
 	}
 	public function actionSaveUpdateKfi()
 	{
