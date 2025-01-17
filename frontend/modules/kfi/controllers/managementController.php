@@ -235,7 +235,6 @@ class ManagementController extends Controller
 				//return $this->redirect('index');
 			}
 		}
-
 		$role = UserRole::userRight();
 		$groupId = Group::currentGroupId();
 		$api = curl_init();

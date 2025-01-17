@@ -153,12 +153,26 @@ function closeDatePicker() {
     var year = document.getElementById('yearSelect').value;
 
     if (month && year) {
+        // อัปเดตข้อความใน multi-mount-year
         document.getElementById('multi-mount-year').innerHTML =
             `${getMonthName(month)}, ${year} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
 
+        // ซ่อนตัวเลือกวันที่
         document.getElementById('monthYearPicker').style.display = 'none';
+
+        // เปลี่ยนแปลงสไตล์ของ <span> input-group-text
+        const inputGroupText = document.querySelector('.input-group-text');
+        inputGroupText.style.backgroundColor = '#D7EBFF';
+        inputGroupText.style.border = '0.5px solid #BEDAFF';
+
+        // อัปเดตไอคอนภายใน <span>
+        const images = inputGroupText.querySelectorAll('img');
+        images[0].src = $url + 'image/calendar-blue.svg';
+        images[1].src = $url + 'image/weld.svg';
+        images[2].src = $url + 'image/calendar-blue.svg';
     }
 }
+
 
 function getMonthName(month) {
     const months = [
@@ -188,27 +202,72 @@ flatpickr("#endDatePicker", {
     }
 });
 
-flatpickr("#updateDatePicker", {
-    inline: true, // แสดงปฏิทินแบบฝัง
-    dateFormat: "d/m/Y", // รูปแบบวันที่เป็น DD/MM/YYYY
-    onChange: function (selectedDates, dateStr) {
-        // อัปเดตข้อความใน multi-due-update
-        document.getElementById('multi-due-update').innerHTML =
-            `${dateStr} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
-        // ซ่อนปฏิทินหลังจากเลือกวันที่
-        document.getElementById('calendar-due-update').style.display = 'none';
-    }
-});
-
-
-
 // อัปเดตข้อความวันที่ใน multi-due-term
 function updateSelectedDates() {
     const startDate = window.startDate || "Start";
     const endDate = window.endDate || "End";
+
+    // อัปเดตข้อความใน multi-due-term
     document.getElementById("multi-due-term").innerHTML =
         `${startDate} - ${endDate} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
+
+    // ตรวจสอบว่าทั้ง Start Date และ End Date ถูกเลือกแล้ว
+    if (window.startDate && window.endDate) {
+        // เปลี่ยนแปลงสไตล์ของ <span> เฉพาะใน img-due-term
+        const inputGroupText = document.querySelector('#img-due-term .input-group-text');
+        inputGroupText.style.backgroundColor = '#D7EBFF';
+        inputGroupText.style.border = '0.5px solid #BEDAFF';
+
+        // อัปเดตไอคอนภายใน <span>
+        const images = inputGroupText.querySelectorAll('img');
+        images[0].src = $url + 'image/calendar-blue.svg';
+        images[1].src = $url + 'image/weld.svg';
+        images[2].src = $url + 'image/calendar-blue.svg';
+    }
 }
+
+function updateInputGroupStyle(target, backgroundColor, borderColor, icons) {
+    const inputGroupText = target.closest('.input-group').querySelector('.input-group-text');
+    inputGroupText.style.backgroundColor = backgroundColor;
+    inputGroupText.style.border = `0.5px solid ${borderColor}`;
+
+    const images = inputGroupText.querySelectorAll('img');
+    images[0].src = $url + 'image/calendar-blue.svg';
+    images[1].src = $url + 'image/weld.svg';
+    images[2].src = $url + 'image/calendar-blue.svg';
+}
+
+
+flatpickr("#updateDatePicker", {
+    inline: true, // แสดงปฏิทินแบบฝัง
+    dateFormat: "d/m/Y", // รูปแบบวันที่เป็น DD/MM/YYYY
+    onChange: function (selectedDates, dateStr) {
+        updateLastUpdateDate(dateStr);
+    }
+});
+
+function updateLastUpdateDate(dateStr) {
+    // อัปเดตข้อความใน multi-due-update
+    document.getElementById('multi-due-update').innerHTML =
+        `${dateStr} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
+    // ซ่อนปฏิทินหลังจากเลือกวันที่
+    document.getElementById('calendar-due-update').style.display = 'none';
+
+    // หากเลือกวันที่แล้ว เปลี่ยนสีพื้นหลังและอัปเดตไอคอน
+    if (dateStr) {
+        const inputGroupText = document.querySelector('#img-due-update .input-group-text');
+        inputGroupText.style.backgroundColor = '#D7EBFF';
+        inputGroupText.style.border = '0.5px solid #BEDAFF';
+
+        const images = inputGroupText.querySelectorAll('img');
+        images[0].src = $url + 'image/calendar-blue.svg';
+        images[1].src = $url + 'image/weld.svg';
+        images[2].src = $url + 'image/calendar-blue.svg';
+    }
+}
+
+
+
 
 
 

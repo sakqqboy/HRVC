@@ -74,6 +74,7 @@ function branchMultiDepartment() {
 		$('input[id="multi-check"]').each(function () {
 			$(".multiCheck-" + $(this).val()).removeAttr('required');
 		});
+
 		let imageSrc = $url + "image/branches.svg"; // กำหนดแหล่งที่มาของภาพ
 		let blackimageSrc = $url + "image/branches-black.svg"; // กำหนดแหล่งที่มาของภาพ
 
@@ -110,6 +111,18 @@ function branchMultiDepartment() {
 			$("#kfi-branches .cycle-current").slice(0, 3).find("img").attr("src", imageSrc);
 		}
 
+		// แสดงจำนวนที่เลือกใน #multi-branch-text
+		$("#multi-branch-text").html(multiBranch.length + ` Branches Selected`);
+
+		// เปลี่ยน style ของ #multi-branch-text
+		$("#multi-branch-text").css({
+			"color": "var(--HRVC---Text-Black, #30313D)",
+			"font-family": '"SF Pro Display"',
+			"font-size": "14px",
+			"font-style": "normal",
+			"font-weight": "500",
+			"line-height": "20px"
+		});
 	} else {
 		$('input[id="multi-check"]').each(function () {
 			$(".multiCheck-" + $(this).val()).prop('required', true);
@@ -124,8 +137,20 @@ function branchMultiDepartment() {
 
 		// เปลี่ยน class ของ cycle-current เป็น cycle-current-gray สำหรับ 3 div แรก ใน #kfi-branches
 		$("#kfi-branches .cycle-current").slice(0, 3).removeClass("cycle-current").addClass("cycle-current-gray");
-	}
 
+		// ถ้าไม่ได้เลือกบริษัทใดๆ ให้แสดงข้อความ "Select Branches"
+		$("#multi-branch-text").html("<?= Yii::t('app', 'Select Branches') ?>");
+
+		// คืนค่าการตั้งสไตล์กลับเป็นค่าเดิม
+		$("#multi-branch-text").css({
+			"color": "var(--Helper-Text-Gray, #8A8A8A)",
+			"font-family": '"SF Pro Display", sans-serif',
+			"font-size": "14px",
+			"font-weight": "400",
+			"line-height": "20px",
+			"text-transform": "capitalize"
+		});
+	}
 
 	// สำหรับ Branches
 	var selectedBranchCount = multiBranch.length;
@@ -261,6 +286,21 @@ function departmentMultiTeam(branchId) {
 				.find("img")
 				.attr("src", deptImageSrc);
 		}
+
+
+		// แสดงจำนวนที่เลือกใน #multi-branch-text
+		$("#multi-department-text").html(multiDepartment.length + ` Departments Selected`);
+
+		// เปลี่ยน style ของ #multi-branch-text
+		$("#multi-department-text").css({
+			"color": "var(--HRVC---Text-Black, #30313D)",
+			"font-family": '"SF Pro Display"',
+			"font-size": "14px",
+			"font-style": "normal",
+			"font-weight": "500",
+			"line-height": "20px"
+		});
+
 	} else {
 		$('input[id="multi-check"]').each(function () {
 			$(".multiCheck-" + $(this).val()).prop('required', true);
@@ -277,6 +317,20 @@ function departmentMultiTeam(branchId) {
 		$("#kfi-departments .cycle-current").slice(0, 3)
 			.removeClass("cycle-current")
 			.addClass("cycle-current-gray");
+
+
+		// ถ้าไม่ได้เลือกบริษัทใดๆ ให้แสดงข้อความ "Select Department"
+		$("#multi-departments-text").html("<?= Yii::t('app', 'Select Department') ?>");
+
+		// คืนค่าการตั้งสไตล์กลับเป็นค่าเดิม
+		$("#multi-branch-text").css({
+			"color": "var(--Helper-Text-Gray, #8A8A8A)",
+			"font-family": '"SF Pro Display", sans-serif',
+			"font-size": "14px",
+			"font-weight": "400",
+			"line-height": "20px",
+			"text-transform": "capitalize"
+		});
 	}
 
 
