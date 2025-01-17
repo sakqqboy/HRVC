@@ -157,6 +157,16 @@ function closeDatePicker() {
         document.getElementById('multi-mount-year').innerHTML =
             `${getMonthName(month)}, ${year} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
 
+        // เปลี่ยน style ของ #multi-branch-text
+        $("#multi-mount-year").css({
+            "color": "var(--HRVC---Text-Black, #30313D)",
+            "font-family": '"SF Pro Display"',
+            "font-size": "14px",
+            "font-style": "normal",
+            "font-weight": "500",
+            "line-height": "20px"
+        });
+
         // ซ่อนตัวเลือกวันที่
         document.getElementById('monthYearPicker').style.display = 'none';
 
@@ -211,6 +221,18 @@ function updateSelectedDates() {
     document.getElementById("multi-due-term").innerHTML =
         `${startDate} - ${endDate} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
 
+
+    // เปลี่ยน style ของ #multi-branch-text
+    $("#multi-due-term").css({
+        "color": "var(--HRVC---Text-Black, #30313D)",
+        "font-family": '"SF Pro Display"',
+        "font-size": "14px",
+        "font-style": "normal",
+        "font-weight": "500",
+        "line-height": "20px"
+    });
+
+
     // ตรวจสอบว่าทั้ง Start Date และ End Date ถูกเลือกแล้ว
     if (window.startDate && window.endDate) {
         // เปลี่ยนแปลงสไตล์ของ <span> เฉพาะใน img-due-term
@@ -250,6 +272,16 @@ function updateLastUpdateDate(dateStr) {
     // อัปเดตข้อความใน multi-due-update
     document.getElementById('multi-due-update').innerHTML =
         `${dateStr} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
+    // เปลี่ยน style ของ #multi-branch-text
+    $("#multi-due-update").css({
+        "color": "var(--HRVC---Text-Black, #30313D)",
+        "font-family": '"SF Pro Display"',
+        "font-size": "14px",
+        "font-style": "normal",
+        "font-weight": "500",
+        "line-height": "20px"
+    });
+
     // ซ่อนปฏิทินหลังจากเลือกวันที่
     document.getElementById('calendar-due-update').style.display = 'none';
 

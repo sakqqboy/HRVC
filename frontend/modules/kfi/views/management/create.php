@@ -49,6 +49,7 @@
     /* ระยะห่างบรรทัด 20px */
 }
 
+
 #multi-branch {
     font-family: "SF Pro Display", sans-serif;
     font-size: 14px;
@@ -87,6 +88,35 @@
     text-transform: capitalize;
 }
 
+
+#multi-mount-year {
+    font-family: "SF Pro Display", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--Helper-Text-Gray, #8A8A8A);
+    text-transform: capitalize;
+}
+
+
+#multi-due-term {
+    font-family: "SF Pro Display", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--Helper-Text-Gray, #8A8A8A);
+    text-transform: capitalize;
+}
+
+
+#multi-due-update {
+    font-family: "SF Pro Display", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--Helper-Text-Gray, #8A8A8A);
+    text-transform: capitalize;
+}
 
 /* เปลี่ยนสีข้อความของ select เมื่อเลือกแล้ว */
 select.form-select {
@@ -718,8 +748,8 @@ select.form-select option:disabled {
                             <div>
                                 <select class="select-create-status" aria-label="Default select example" name="status"
                                     required="">
-                                    <option value="1">Active</option>
-                                    <option value="2">Finished</option>
+                                    <option value="1">Completed</option>
+                                    <option value="2">In-Progress</option>
                                 </select>
                             </div>
                             <a href="http://localhost/HRVC/frontend/web/kfi/management/grid" class="btn-create-cancle"
