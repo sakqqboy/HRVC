@@ -34,21 +34,6 @@
     /* แสดงส่วนเกินออกมานอกขอบ */
 }
 
-#kfiName::placeholder {
-    color: var(--Helper-Text-Gray, #8A8A8A);
-    /* ตั้งค่าสีของ placeholder */
-    font-family: "SF Pro Display", sans-serif;
-    /* ใช้ฟอนต์ SF Pro Display */
-    font-size: 14px;
-    /* ขนาดฟอนต์ 20px */
-    font-style: normal;
-    /* ฟอนต์สไตล์ปกติ */
-    font-weight: 500;
-    /* น้ำหนักฟอนต์ 500 */
-    line-height: 20px;
-    /* ระยะห่างบรรทัด 20px */
-}
-
 
 #multi-branch {
     font-family: "SF Pro Display", sans-serif;
@@ -488,12 +473,15 @@ select.form-select option:disabled {
                                     <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="LinkedIn"
                                         style="width: 16px; height: 16px;">
                                 </span>
-                                <div class="form-control" id="multi-mount-year"
+                                <div class="form-control" id="multi-mount-year" name="fromMonthYear"
                                     style="border-radius: 53px 53px 53px 53px; text-align: center; cursor: pointer; position: absolute; width: 100%;"
                                     onclick="openDatePicker()">
                                     Select the Month & Year <i class="fa fa-angle-down pull-right mt-5"
                                         aria-hidden="true"></i>
                                 </div>
+                                <!-- hidden inputs เพื่อเก็บค่า month และ year -->
+                                <input type="hidden" id="hiddenMonth" name="month">
+                                <input type="hidden" id="hiddenYear" name="year">
                             </div>
 
                             <!-- Popup for Month/Year Selection -->
@@ -544,6 +532,9 @@ select.form-select option:disabled {
                                         aria-hidden="true"></i>
                                 </div>
                             </div>
+                            <!-- hidden inputs เพื่อเก็บค่า month และ year -->
+                            <input type="hidden" id="fromDate" name="fromDate">
+                            <input type="hidden" id="toDate" name="toDate">
 
                             <!-- Calendar picker -->
                             <div class="calendar-container" id="calendar-due-term"
@@ -580,6 +571,7 @@ select.form-select option:disabled {
                                     Select the Last Update Date <i class="fa fa-angle-down pull-right mt-5"
                                         aria-hidden="true"></i>
                                 </div>
+                                <input type="hidden" id="nextDate" name="nextDate">
                             </div>
                             <div id="calendar-due-update"
                                 style="position: absolute; margin-top: 75px; padding: 10px; border: 1px solid rgb(221, 221, 221); border-radius: 10px; background: rgb(255, 255, 255); width: 100%; z-index: 1; display: none; justify-content: center; align-items: center;">
@@ -924,27 +916,48 @@ $(document).ready(function() {
 document.querySelector('.btn-create-update').addEventListener('click', function(event) {
     // ตรวจสอบฟอร์มก่อนการส่ง
     const form = document.querySelector('form');
+    let formData = new FormData(form);
+    let formValues = '';
 
+    requiredFields.forEach((field) => {
+        const isFilled = field.value.trim() !== ''; // ตรวจสอบว่ามีค่าหรือยัง
+        formValues += `Field Name: ${field.name} - ${isFilled ? 'Filled' : 'Not Filled'}\n`;
+        if (!isFilled) {
+            allValid = false; // หากฟิลด์ใดไม่ถูกกรอก ให้ allValid เป็น false
+        }
+    });
+
+    alert(`Required Field Status:\n${formValues}`);
+
+    // if (allValid) {
+    //     alert('All required fields are filled. Form will be submitted.');
+    //     form.submit(); // ส่งฟอร์มหากฟิลด์ทั้งหมดถูกกรอก
+    // } else {
+    //     alert('Some required fields are missing. Please fill them before submitting.');
+    // }
+    // alert(form.checkValidity());
     // ถ้า valid ให้ดำเนินการต่อ
-    if (form.checkValidity()) {
-        // สร้างอาร์เรย์เพื่อเก็บข้อมูลทั้งหมดที่กรอกในฟอร์ม
-        let formData = new FormData(form);
-        let formValues = '';
+    // if (form.checkValidity()) {
+    //     // สร้างอาร์เรย์เพื่อเก็บข้อมูลทั้งหมดที่กรอกในฟอร์ม
+    //     // เพิ่มค่าจากฟอร์มลงใน formValues เพื่อแสดงใน alert
+    //     formData.forEach((value, key) => {
+    //         formValues += `${key}: ${value}\n`;
+    //     });
 
-        // เพิ่มค่าจากฟอร์มลงใน formValues เพื่อแสดงใน alert
-        formData.forEach((value, key) => {
-            formValues += `${key}: ${value}\n`;
-        });
+    //     // แสดงข้อมูลทั้งหมดใน alert
+    //     alert('ข้อมูลที่กรอกในฟอร์ม:\n' + formValues);
 
-        // แสดงข้อมูลทั้งหมดใน alert
-        alert('ข้อมูลที่กรอกในฟอร์ม:\n' + formValues);
+    //     // สามารถส่งฟอร์มได้
+    //     form.submit();
+    // } else {
 
-        // สามารถส่งฟอร์มได้
-        form.submit();
-    } else {
-        event.preventDefault(); // หยุดการส่งถ้าฟอร์มไม่ถูกต้อง
-        alert('กรุณากรอกข้อมูลให้ครบถ้วน');
-    }
+    //     formData.forEach((value, key) => {
+    //         formValues += `${key}: ${value}\n`;
+    //     });
+
+    //     event.preventDefault(); // หยุดการส่งถ้าฟอร์มไม่ถูกต้อง
+    //     alert(formValues);
+    // }
 });
 
 function updateIcon(input) {

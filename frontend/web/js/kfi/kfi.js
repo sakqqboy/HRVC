@@ -167,6 +167,10 @@ function closeDatePicker() {
             "line-height": "20px"
         });
 
+        // อัปเดต hidden inputs
+        document.getElementById('hiddenMonth').value = month;
+        document.getElementById('hiddenYear').value = year;
+
         // ซ่อนตัวเลือกวันที่
         document.getElementById('monthYearPicker').style.display = 'none';
 
@@ -232,6 +236,10 @@ function updateSelectedDates() {
         "line-height": "20px"
     });
 
+    // อัปเดต hidden inputs
+    document.getElementById('fromDate').value = startDate;
+    document.getElementById('toDate').value = endDate;
+
 
     // ตรวจสอบว่าทั้ง Start Date และ End Date ถูกเลือกแล้ว
     if (window.startDate && window.endDate) {
@@ -284,6 +292,9 @@ function updateLastUpdateDate(dateStr) {
 
     // ซ่อนปฏิทินหลังจากเลือกวันที่
     document.getElementById('calendar-due-update').style.display = 'none';
+
+    document.getElementById('nextDate').value = dateStr;
+
 
     // หากเลือกวันที่แล้ว เปลี่ยนสีพื้นหลังและอัปเดตไอคอน
     if (dateStr) {
