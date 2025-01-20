@@ -192,50 +192,101 @@ class ManagementController extends Controller
 	public function actionCreateKfi()
 	{
 		if (isset($_POST["kfiName"])) {
-			$kfi = new Kfi();
-			$kfi->kfiName = $_POST["kfiName"];
-			$kfi->companyId = $_POST["company"];
-			//$kfi->branchId = $_POST["branch"];
-			$kfi->unitId = $_POST["unit"];
-			$kfi->targetAmount = $_POST["amount"];
-			$kfi->month = $_POST["month"];
-			$kfi->year = $_POST["year"];
-			$kfi->kfiDetail = $_POST["detail"];
-			$kfi->createrId = Yii::$app->user->id;
-			$kfi->status = 1;
-			$kfi->createDateTime = new Expression('NOW()');
-			$kfi->updateDateTime = new Expression('NOW()');
-			if ($kfi->save(false)) {
-				$kfiId = Yii::$app->db->lastInsertID;
-				$kfiHistory = new KfiHistory();
-				$kfiHistory->kfiId = $kfiId;
-				$kfiHistory->createrId = Yii::$app->user->id;
-				$kfiHistory->nextCheckDate = $_POST["nextCheckDate"];
-				$kfiHistory->amountType = $_POST["amountType"];
-				$kfiHistory->code = $_POST["code"];
-				$kfiHistory->status = 1;
-				$kfiHistory->quantRatio = $_POST["quanRatio"];
-				$kfiHistory->historyStatus = 1;
-				$kfiHistory->result =  0;
-				$kfiHistory->unitId =  $_POST["unit"];
-				$kfiHistory->month = $_POST["month"];
-				$kfiHistory->year = $_POST["year"];
-				//$kfiHistory->formular = $_POST["formular"];
-				$kfiHistory->description = $_POST["detail"];
-				$kfiHistory->createDateTime = new Expression('NOW()');
-				$kfiHistory->updateDateTime = new Expression('NOW()');
-				$kfiHistory->save(false);
-				if (isset($_POST["branch"]) && count($_POST["branch"]) > 0) {
-					$this->saveKfiBranch($_POST["branch"], $kfiId);
+
+			if (Yii::$app->request->isPost) {
+				Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+				
+				$data = [
+					'kfiName' => $_POST["kfiName"],  
+					'company' => $_POST["company"],
+					'branch' => $_POST["branch"],
+					'unit' => $_POST["unit"],
+					'amount' => $_POST["amount"],
+					'month' => $_POST["month"],  
+					'year' => $_POST["year"],
+					'detail' => $_POST["detail"],
+					'amountType' => $_POST["amountType"],
+					'code' => $_POST["code"],
+					'quanRatio' => $_POST["quanRatio"],  
+					'nextCheckDate' => $_POST["nextCheckDate"],
+					'department' => $_POST["department"],
+					'status' => $_POST["status"],
+					'result' => $_POST["result"],
+				];
+
+				// // ตรวจสอบและรับข้อมูลจากฟอร์ม
+				// return [
+				// 	'message' => 'ค่าที่ได้รับจากฟอร์ม',
+				// 	'data' =>  $data
+				// 	// 'data' => Yii::$app->request->post()
+				// ];
+		
+			
+				$kfi = new Kfi();
+				$kfi->kfiName = $_POST["kfiName"];
+				$kfi->companyId = $_POST["company"];
+				//$kfi->branchId = $_POST["branch"];
+				$kfi->unitId = $_POST["unit"];
+				$kfi->targetAmount = $_POST["amount"];
+				$kfi->month = $_POST["month"];
+				$kfi->year = $_POST["year"];
+				$kfi->kfiDetail = $_POST["detail"];
+				$kfi->createrId = Yii::$app->user->id;
+				$kfi->status =  isset($_POST["status"]) && $_POST["status"] !== '' ? $_POST["status"] : 1;
+				$kfi->createDateTime = new Expression('NOW()');
+				$kfi->updateDateTime = new Expression('NOW()');
+
+				// return [
+				// 	'message' => 'ค่าที่ได้รับจากฟอร์ม',
+				// 	'data' =>  $data
+				// 	// 'data' => Yii::$app->request->post()
+				// ];
+
+				if ($kfi->save(false)) {
+					$kfiId = Yii::$app->db->lastInsertID;
+					$kfiHistory = new KfiHistory();
+					$kfiHistory->kfiId = $kfiId;
+					$kfiHistory->createrId = Yii::$app->user->id;
+					$kfiHistory->nextCheckDate = $_POST["nextCheckDate"];
+					$kfiHistory->amountType = $_POST["amountType"];
+					$kfiHistory->code = $_POST["code"];
+					$kfiHistory->status = isset($_POST["status"]) && $_POST["status"] !== '' ? $_POST["status"] : 1;
+					$kfiHistory->quantRatio = $_POST["quanRatio"];
+					$kfiHistory->historyStatus = 1;
+					$kfiHistory->result = isset($_POST["result"]) && $_POST["result"] !== '' ? $_POST["result"] : 0;
+					$kfiHistory->unitId =  $_POST["unit"];
+					$kfiHistory->month = $_POST["month"];
+					$kfiHistory->year = $_POST["year"];
+					$kfiHistory->description = $_POST["detail"];
+					$kfiHistory->createDateTime = new Expression('NOW()');
+					$kfiHistory->updateDateTime = new Expression('NOW()');
+					// $kfiHistory->save(false);
+					if (isset($_POST["branch"]) && count($_POST["branch"]) > 0) {
+						
+						$this->saveKfiBranch($_POST["branch"], $kfiId);
+					}
+					if (isset($_POST["department"]) && count($_POST["department"]) > 0) {
+						$this->saveKfiDepartment($_POST["department"], $kfiId);
+					
+					}
+
+					return [
+							'message' => true
+						];
+
+						// return [
+						// 	'message' => 'ค่าที่ได้รับจากฟอร์ม2',
+						// 	'data' => $data
+						// ];
+					// return $this->redirect(Yii::$app->request->referrer);
+					// 	//return $this->redirect('index');
 				}
-				if (isset($_POST["department"]) && count($_POST["department"]) > 0) {
-					$this->saveKfiDepartment($_POST["department"], $kfiId);
-				}
-				return $this->redirect(Yii::$app->request->referrer);
-				//return $this->redirect('index');
+			} else{
+							return ['error' => 'ไม่มีข้อมูลถูกส่งมา'];
 			}
-		}
-		$role = UserRole::userRight();
+	
+		}else{
+			$role = UserRole::userRight();
 		$groupId = Group::currentGroupId();
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -256,6 +307,8 @@ class ManagementController extends Controller
 			"companies" => $companies,
 			"units" => $units
 		]);
+		}
+		
 	}
 	public function actionSaveUpdateKfi()
 	{

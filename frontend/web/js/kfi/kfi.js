@@ -309,7 +309,16 @@ function updateLastUpdateDate(dateStr) {
     }
 }
 
-
+function updateIcon(input) {
+    const icon = document.getElementById('result-icon');
+    if (input.value.trim() === "") {
+        // เปลี่ยนเป็นไอคอนสีเทาเมื่อ input ว่าง
+        icon.src = "/HRVC/frontend/web/image/result-gray.svg";
+    } else {
+        // เปลี่ยนเป็นไอคอนสีน้ำเงินเมื่อมีค่า
+        icon.src = "/HRVC/frontend/web/image/result-blue.svg";
+    }
+}
 
 
 

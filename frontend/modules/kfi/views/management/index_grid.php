@@ -324,6 +324,8 @@ $this->title = Yii::t('app', 'KFI Grid View');
                                     </div>
                                     <div class="col-12 pl-15 pr-10">
                                         <?php
+                                        if (isset($showPercent) && !empty($showPercent)) {
+
                                                 $percent = explode('.', $kfi['ratio']);
                                                 if (isset($percent[0]) && $percent[0] == '0') {
                                                     if (isset($percent[1])) {
@@ -336,6 +338,9 @@ $this->title = Yii::t('app', 'KFI Grid View');
                                                 } else {
                                                     $showPercent = round($kfi['ratio']);
                                                 }
+                                            }else{
+                                                $showPercent = 0;
+                                            }
                                                 ?>
                                         <div class="progress">
                                             <div class="progress-bar-<?= $colorFormat ?>"

@@ -298,7 +298,7 @@ select.form-select option:disabled {
                     </div>
                 </div>
             </div>
-            <form action="URL_TO_HANDLE_FORM" method="POST">
+            <form id="kfiForm" action="" method="POST">
 
                 <div class="contrainer-body-detail">
                     <div style="flex: 1;">
@@ -308,7 +308,7 @@ select.form-select option:disabled {
                                 <span class="text-danger">* </span>
                                 Name <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
                                     data-toggle="tooltip" data-placement="top"
-                                    title="This is the Name description for the icon" alt="Help Icon">
+                                    title="Enter the name of your key financial indicator. This should be clear and specific, such as 'Total Sales,or 'Profit Margin">
                             </label>
                             <input type="text" class="form-control" id="kfiName" name="kfiName"
                                 placeholder="Please Write the Name of Component" required>
@@ -321,7 +321,8 @@ select.form-select option:disabled {
                                 <span class="text-danger">* </span>
                                 Select Company <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
                                     data-toggle="tooltip" data-placement="top"
-                                    title="This is the Select Company description for the icon" alt="Help Icon">
+                                    title="Choose the company for which this financial indicator will be tracked. Only one company can be selected at a time to ensure accurate and focused performance monitoring."
+                                    alt="Help Icon">
                             </label>
                             <select class="form-select" name="company" id="companyId"
                                 onchange="javascript:companyMultiBrachKfi()" required>
@@ -347,7 +348,8 @@ select.form-select option:disabled {
                                     <span class="text-danger">* </span>
                                     Select Branch/s <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
                                         data-toggle="tooltip" data-placement="top"
-                                        title="This is the Select Branch/s description for the icon" alt="Help Icon">
+                                        title="Select the relevant branches where this indicator will be monitored. You can choose multiple branches to track performance across different locations."
+                                        alt="Help Icon">
                                 </label>
                                 <div class="form-control" id="multi-branch" style="width: 426px;">
                                     <span id="multi-branch-text"><?= Yii::t('app', 'Select Branches') ?></span>
@@ -385,7 +387,8 @@ select.form-select option:disabled {
                                 <span class="text-danger">* </span>
                                 Select Department/s <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
                                     data-toggle="tooltip" data-placement="top"
-                                    title="This is the Select Department/s description for the icon" alt="Help Icon">
+                                    title="Choose the departments that will be responsible for this financial indicator. Multiple departments can be selected for cross-functional tracking."
+                                    alt="Help Icon">
                             </label>
                             <div class="form-control" id="multi-department" style="width: 100%">
                                 <span id="multi-department-text"><?= Yii::t('app', 'Select Department') ?></span>
@@ -422,7 +425,8 @@ select.form-select option:disabled {
                                 <span class="text-danger">* </span>
                                 Update Interval <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
                                     data-toggle="tooltip" data-placement="top"
-                                    title="This is the Update Interval description for the icon" alt="Help Icon">
+                                    title="Select how frequently this indicator should be updated: Monthly, Quarterly, Half Yearly, or Yearly. This determines the reporting cycle."
+                                    alt="Help Icon">
                             </label>
                             <div class="btn-group  col-12" role="group" aria-label="Basic outlined example">
                                 <?php
@@ -461,7 +465,8 @@ select.form-select option:disabled {
                                 <span class="text-danger">* </span>
                                 Month & Year <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
                                     data-toggle="tooltip" data-placement="top"
-                                    title="This is the  Month & Year description for the icon" alt="Help Icon">
+                                    title="Select the specific month and year for which you're entering or viewing data. This helps in maintaining chronological records."
+                                    alt="Help Icon">
                             </label>
                             <div class="input-group" style="position: relative;">
                                 <span class="input-group-text pb-10 pt-10"
@@ -513,7 +518,8 @@ select.form-select option:disabled {
                                 <span class="text-danger">* </span>
                                 Due Term <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
                                     data-toggle="tooltip" data-placement="top"
-                                    title="This is the  Due Term description for the icon" alt="Help Icon">
+                                    title="Set the start and end dates for the measurement period. This defines the timeframe for achieving the target."
+                                    alt="Help Icon">
                             </label>
                             <div class="input-group" id="img-due-term" style="position: relative;">
                                 <span class="input-group-text pb-10 pt-10"
@@ -553,12 +559,12 @@ select.form-select option:disabled {
                                 Target Due Update Date <img
                                     src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
                                     data-placement="top"
-                                    title="This is the  Target Due Update Date description for the icon"
+                                    title="Specify the deadline by which the final data must be updated in the system. This ensures timely reporting."
                                     alt="Help Icon">
                             </label>
                             <div class="input-group" style="position: relative;" id="img-due-update">
                                 <span class="input-group-text pb-10 pt-10"
-                                    style="background-color: #C3C3C3;  border:0.5px solid #818181; border-radius: 36px; gap: 4px; z-index: 1;">
+                                    style="background-color: #C3C3C3    ;  border:0.5px solid #818181; border-radius: 36px; gap: 4px; z-index: 1;">
                                     <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="LinkedIn"
                                         style="width: 16px; height: 16px;">
                                     <img src="<?= Yii::$app->homeUrl ?>image/weld-gray.svg" alt="LinkedIn"
@@ -571,7 +577,7 @@ select.form-select option:disabled {
                                     Select the Last Update Date <i class="fa fa-angle-down pull-right mt-5"
                                         aria-hidden="true"></i>
                                 </div>
-                                <input type="hidden" id="nextDate" name="nextDate">
+                                <input type="hidden" id="nextDate" name="nextCheckDate">
                             </div>
                             <div id="calendar-due-update"
                                 style="position: absolute; margin-top: 75px; padding: 10px; border: 1px solid rgb(221, 221, 221); border-radius: 10px; background: rgb(255, 255, 255); width: 100%; z-index: 1; display: none; justify-content: center; align-items: center;">
@@ -585,7 +591,8 @@ select.form-select option:disabled {
                                 <span class="text-danger">* </span>
                                 Quant Ratio <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
                                     data-toggle="tooltip" data-placement="top"
-                                    title="This is the  Quant Ratio description for the icon" alt="Help Icon">
+                                    title="Select the measurement unit for your indicator (e.g., currency, percentage, or numerical value) to ensure consistent reporting."
+                                    alt="Help Icon">
                             </label>
                             <select class="form-select" id="quantRatio-create" name="quanRatio" required>
                                 <!-- <option value=""><?= Yii::t('app', 'Quantity') ?> <?= Yii::t('app', 'or') ?>
@@ -604,7 +611,8 @@ select.form-select option:disabled {
                                     <span class="text-danger">* </span>
                                     Data Type <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
                                         data-toggle="tooltip" data-placement="top"
-                                        title="This is the  Data Type description for the icon" alt="Help Icon">
+                                        title="Choose the type of data being tracked (e.g., numbers, percentages, currency) to ensure proper formatting and calculations."
+                                        alt="Help Icon">
                                 </label>
                                 <select class="form-select" id="amountType-create" name="amountType" required>
                                     <!-- <option value="">% <?= Yii::t('app', 'or') ?> <?= Yii::t('app', 'Number') ?>
@@ -621,7 +629,8 @@ select.form-select option:disabled {
                                     <span class="text-danger">* </span>
                                     Success Condition <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
                                         data-toggle="tooltip" data-placement="top"
-                                        title="This is the  Success Condition description for the icon" alt="Help Icon">
+                                        title="Define the criteria for success (e.g., Greater Than, Less Than, Equal To) to measure achievement against the target."
+                                        alt="Help Icon">
                                 </label>
                                 <select class="form-select" id="code-create" name="code" required>
                                     <option value="">Select</option>
@@ -645,7 +654,8 @@ select.form-select option:disabled {
                                 <span class="text-danger">* </span>
                                 Master Target <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
                                     data-toggle="tooltip" data-placement="top"
-                                    title="This is the  Master Target description for the icon" alt="Help Icon">
+                                    title="Enter the overall target value that needs to be achieved within the specified period."
+                                    alt="Help Icon">
                             </label>
                             <div class="input-group">
                                 <span class="input-group-text"
@@ -668,7 +678,8 @@ select.form-select option:disabled {
                                     <span class="text-danger">* </span>
                                     Result <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
                                         data-toggle="tooltip" data-placement="top"
-                                        title="This is the Result description for the icon" alt="Help Icon">
+                                        title="View or enter the actual achieved value. This field compares performance against the master target."
+                                        alt="Help Icon">
                                 </div>
                                 <div class="updatehistory" style="text-align: right;">
                                     <img src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg">Update History
@@ -720,7 +731,7 @@ select.form-select option:disabled {
                                         title="This is the  Details description for the icon" alt="Help Icon">
                                 </div>
                             </label>
-                            <textarea class="form-control" name="remark" style="height: 165px;" rows="4"></textarea>
+                            <textarea class="form-control" name="detail" style="height: 165px;" rows="4"></textarea>
                         </div>
 
                         <div class="form-group mt-42" style="display: inline-flex; align-items: center;gap: 12px;">
@@ -895,10 +906,9 @@ $(document).ready(function() {
             $(this).css('color', 'var(--Helper-Text-Gray, #8A8A8A)');
         }
     });
-});
 
-$(document).ready(function() {
     $('[data-toggle="tooltip"]').tooltip(); // เปิดใช้งาน Tooltip
+
 });
 
 // document.querySelector('.btn-create-update').addEventListener('click', function(event) {
@@ -913,61 +923,80 @@ $(document).ready(function() {
 //     }
 // });
 
+// document.querySelector('.btn-create-update').addEventListener('click', function(event) {
+//     // ตรวจสอบฟอร์มก่อนการส่ง
+//     // const form = document.querySelector('form');
+//     // let formData = new FormData(form);
+//     // let formValues = '';
+//     // alert(`crik`);
+
+//     // requiredFields.forEach((field) => {
+//     //     const isFilled = field.value.trim() !== ''; // ตรวจสอบว่ามีค่าหรือยัง
+//     //     formValues += `Field Name: ${field.name} - ${isFilled ? 'Filled' : 'Not Filled'}\n`;
+//     //     if (!isFilled) {
+//     //         allValid = false; // หากฟิลด์ใดไม่ถูกกรอก ให้ allValid เป็น false
+//     //     }
+//     // });
+
+//     // alert(`Required Field Status:\n${formValues}`);
+
+//     // if (allValid) {
+//     //     alert('All required fields are filled. Form will be submitted.');
+//     //     form.submit(); // ส่งฟอร์มหากฟิลด์ทั้งหมดถูกกรอก
+//     // } else {
+//     //     alert('Some required fields are missing. Please fill them before submitting.');
+//     // }
+//     // alert(form.checkValidity());
+//     // ถ้า valid ให้ดำเนินการต่อ
+
+// });
+
+// document.querySelector('.btn-create-update').addEventListener('click', function(event) {
+//     event.preventDefault();
+
+//     var form = document.getElementById('kfiForm');
+//     var formData = new FormData(form);
+//     var url = $url + 'kgi/management/create-kfi';
+
+//     fetch(url, {
+//             method: 'POST',
+//             body: formData
+//         })
+//         .then(response => response.json())
+//         .then(data => {
+//             console.log('Response:', data);
+//         })
+//         .catch(error => {
+//             console.error('Error:', error);
+//         });
+// });
+
+
 document.querySelector('.btn-create-update').addEventListener('click', function(event) {
-    // ตรวจสอบฟอร์มก่อนการส่ง
-    const form = document.querySelector('form');
-    let formData = new FormData(form);
-    let formValues = '';
+    event.preventDefault();
 
-    requiredFields.forEach((field) => {
-        const isFilled = field.value.trim() !== ''; // ตรวจสอบว่ามีค่าหรือยัง
-        formValues += `Field Name: ${field.name} - ${isFilled ? 'Filled' : 'Not Filled'}\n`;
-        if (!isFilled) {
-            allValid = false; // หากฟิลด์ใดไม่ถูกกรอก ให้ allValid เป็น false
-        }
-    });
+    var form = document.getElementById('kfiForm');
+    var formData = new FormData(form);
+    var url = $url + 'kfi/management/create-kfi';
 
-    alert(`Required Field Status:\n${formValues}`);
-
-    // if (allValid) {
-    //     alert('All required fields are filled. Form will be submitted.');
-    //     form.submit(); // ส่งฟอร์มหากฟิลด์ทั้งหมดถูกกรอก
-    // } else {
-    //     alert('Some required fields are missing. Please fill them before submitting.');
-    // }
-    // alert(form.checkValidity());
-    // ถ้า valid ให้ดำเนินการต่อ
-    // if (form.checkValidity()) {
-    //     // สร้างอาร์เรย์เพื่อเก็บข้อมูลทั้งหมดที่กรอกในฟอร์ม
-    //     // เพิ่มค่าจากฟอร์มลงใน formValues เพื่อแสดงใน alert
-    //     formData.forEach((value, key) => {
-    //         formValues += `${key}: ${value}\n`;
-    //     });
-
-    //     // แสดงข้อมูลทั้งหมดใน alert
-    //     alert('ข้อมูลที่กรอกในฟอร์ม:\n' + formValues);
-
-    //     // สามารถส่งฟอร์มได้
-    //     form.submit();
-    // } else {
-
-    //     formData.forEach((value, key) => {
-    //         formValues += `${key}: ${value}\n`;
-    //     });
-
-    //     event.preventDefault(); // หยุดการส่งถ้าฟอร์มไม่ถูกต้อง
-    //     alert(formValues);
-    // }
+    fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json()) // แปลง response เป็น JSON
+        .then(data => {
+            if (data.error) {
+                alert(data.error);
+            } else {
+                // ถ้า message เป็น true ให้กลับไปหน้าก่อนหน้า
+                if (data.message === true) {
+                    window.location.href = document.referrer; // หรือใช้ URL ที่ต้องการ
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('เกิดข้อผิดพลาดในการส่งข้อมูล');
+        });
 });
-
-function updateIcon(input) {
-    const icon = document.getElementById('result-icon');
-    if (input.value.trim() === "") {
-        // เปลี่ยนเป็นไอคอนสีเทาเมื่อ input ว่าง
-        icon.src = "/HRVC/frontend/web/image/result-gray.svg";
-    } else {
-        // เปลี่ยนเป็นไอคอนสีน้ำเงินเมื่อมีค่า
-        icon.src = "/HRVC/frontend/web/image/result-blue.svg";
-    }
-}
 </script>
