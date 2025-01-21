@@ -4,6 +4,7 @@ namespace frontend\modules\kfi\controllers;
 
 use common\helpers\Path;
 use common\models\ModelMaster;
+use DateTime;
 use Exception;
 use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\Company;
@@ -214,13 +215,6 @@ class ManagementController extends Controller
 					'result' => $_POST["result"],
 				];
 
-				// // ตรวจสอบและรับข้อมูลจากฟอร์ม
-				// return [
-				// 	'message' => 'ค่าที่ได้รับจากฟอร์ม',
-				// 	'data' =>  $data
-				// 	// 'data' => Yii::$app->request->post()
-				// ];
-		
 			
 				$kfi = new Kfi();
 				$kfi->kfiName = $_POST["kfiName"];
@@ -236,53 +230,76 @@ class ManagementController extends Controller
 				$kfi->createDateTime = new Expression('NOW()');
 				$kfi->updateDateTime = new Expression('NOW()');
 
-				// return [
-				// 	'message' => 'ค่าที่ได้รับจากฟอร์ม',
-				// 	'data' =>  $data
-				// 	// 'data' => Yii::$app->request->post()
-				// ];
 
 				if ($kfi->save(false)) {
 					$kfiId = Yii::$app->db->lastInsertID;
 					$kfiHistory = new KfiHistory();
 					$kfiHistory->kfiId = $kfiId;
 					$kfiHistory->createrId = Yii::$app->user->id;
-					$kfiHistory->nextCheckDate = $_POST["nextCheckDate"];
-					$kfiHistory->amountType = $_POST["amountType"];
-					$kfiHistory->code = $_POST["code"];
-					$kfiHistory->status = isset($_POST["status"]) && $_POST["status"] !== '' ? $_POST["status"] : 1;
-					$kfiHistory->quantRatio = $_POST["quanRatio"];
-					$kfiHistory->historyStatus = 1;
-					$kfiHistory->result = isset($_POST["result"]) && $_POST["result"] !== '' ? $_POST["result"] : 0;
-					$kfiHistory->unitId =  $_POST["unit"];
-					$kfiHistory->month = $_POST["month"];
-					$kfiHistory->year = $_POST["year"];
-					$kfiHistory->description = $_POST["detail"];
+					if (!empty($_POST["nextCheckDate"])) {
+						$date = DateTime::createFromFormat('d/m/Y', $_POST["nextCheckDate"]);
+						if ($date) {
+							$kfiHistory->nextCheckDate = $date->format('Y-m-d');
+						} else {
+							$kfiHistory->nextCheckDate = null; // กรณีรูปแบบวันที่ไม่ถูกต้อง
+						}
+					} else {
+						$kfiHistory->nextCheckDate = null;
+					}
+					$kfiHistory->amountType = $_POST["amountType"] ?? null;
+					$kfiHistory->code = $_POST["code"] ?? null;
+					$kfiHistory->status = $_POST["status"] ?? 1;
+					$kfiHistory->quantRatio = $_POST["quanRatio"] ?? null;
+					$kfiHistory->historyStatus = (string) ($_POST["status"] ?? '1');	
+					$kfiHistory->result = $_POST["result"] ?? 0;
+					$kfiHistory->unitId = $_POST["unit"] ?? null;
+					$kfiHistory->month = $_POST["month"] ?? null;
+					$kfiHistory->year = $_POST["year"] ?? null;
+					$kfiHistory->description = $_POST["detail"] ?? null;
 					$kfiHistory->createDateTime = new Expression('NOW()');
 					$kfiHistory->updateDateTime = new Expression('NOW()');
-					// $kfiHistory->save(false);
-					if (isset($_POST["branch"]) && count($_POST["branch"]) > 0) {
+					if ($kfiHistory->validate()) {
+						$kfiHistory->save(false);
 						
-						$this->saveKfiBranch($_POST["branch"], $kfiId);
-					}
-					if (isset($_POST["department"]) && count($_POST["department"]) > 0) {
-						$this->saveKfiDepartment($_POST["department"], $kfiId);
-					
-					}
-
-					return [
+						if (isset($_POST["branch"]) && count($_POST["branch"]) > 0) {
+							
+							$this->saveKfiBranch($_POST["branch"], $kfiId);
+						}
+						if (isset($_POST["department"]) && count($_POST["department"]) > 0) {
+							$this->saveKfiDepartment($_POST["department"], $kfiId);
+						
+						}
+						
+						return [
 							'message' => true
 						];
-
+						
+					} else {
+						$errors = $kfiHistory->getErrors();
+						return [
+							'message' => false,
+							'error' => $errors
+						];
+					}
 						// return [
 						// 	'message' => 'ค่าที่ได้รับจากฟอร์ม2',
 						// 	'data' => $data
-						// ];
+						// ];	
 					// return $this->redirect(Yii::$app->request->referrer);
 					// 	//return $this->redirect('index');
+				} else {
+					$errors = $kfi->getErrors();
+
+					return [
+						'message' => false,
+						'error' => $errors
+					];
 				}
 			} else{
-							return ['error' => 'ไม่มีข้อมูลถูกส่งมา'];
+				return [
+					'message' => false,
+					'error' => 'ไม่มีข้อมูลถูกส่งมา'
+				];
 			}
 	
 		}else{

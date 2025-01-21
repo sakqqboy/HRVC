@@ -986,11 +986,18 @@ document.querySelector('.btn-create-update').addEventListener('click', function(
         .then(response => response.json()) // แปลง response เป็น JSON
         .then(data => {
             if (data.error) {
-                alert(data.error);
+                alert(JSON.stringify(data.error, null, 2));
+                // alert('เกิดข้อผิดพลาดในการส่งข้อมูล');
             } else {
                 // ถ้า message เป็น true ให้กลับไปหน้าก่อนหน้า
-                if (data.message === true) {
+                if (data.message == true) {
                     window.location.href = document.referrer; // หรือใช้ URL ที่ต้องการ
+                    // alert('สำเร็จ');
+                }
+
+                if (data.message == false) {
+                    // alert(data.error);
+                    alert(JSON.stringify(data.error, null, 2));
                 }
             }
         })
