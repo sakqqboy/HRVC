@@ -6,6 +6,11 @@ if (window.location.host == 'localhost') {
 }
 $url = $baseUrl;
 
+function numberformat(input) {
+    // ลบทุกตัวอักษรที่ไม่ใช่ตัวเลขหรือลูกน้ำ
+    input.value = input.value.replace(/[^0-9.]/g, '');
+}
+
 function companyBranchKfi() {
     var companyId = $("#company-create-kfi").val();
     var url = $url + 'kfi/management/company-branch';
@@ -28,55 +33,55 @@ function companyBranchKfi() {
 }
 
 
-document.querySelector('.btn-create-update').addEventListener('click', function (event) {
-    event.preventDefault();
+// document.querySelector('.btn-create-update').addEventListener('click', function (event) {
+//     event.preventDefault();
 
-    var form = document.getElementById('kfiForm');
-    var formData = new FormData(form);
+//     var form = document.getElementById('kfiForm');
+//     var formData = new FormData(form);
 
-    var statusFrom = '<?= $statusfrom ?>';
+//     var statusFrom = '<?= $statusfrom ?>';
 
-    var url = (statusFrom == 'update') ?
-        urlBase + 'kfi/management/save-update-kfi' :
-        urlBase + 'kfi/management/create-kfi';
+//     var url = (statusFrom == 'update') ?
+//         urlBase + 'kfi/management/save-update-kfi' :
+//         urlBase + 'kfi/management/create-kfi';
 
 
-    fetch(url, {
-        method: 'POST',
-        body: formData
-    })
-        .then(response => response.json()) // แปลง response เป็น JSON
-        .then(data => {
-            if (data.error) {
-                alert(JSON.stringify(data.error, null, 2));
-                // alert('เกิดข้อผิดพลาดในการส่งข้อมูล');
-            } else {
-                // ถ้า message เป็น true ให้กลับไปหน้าก่อนหน้า
-                if (data.message == true) {
-                    window.location.href = document.referrer; // หรือใช้ URL ที่ต้องการ
-                    // alert('สำเร็จ');
-                }
+//     fetch(url, {
+//         method: 'POST',
+//         body: formData
+//     })
+//         .then(response => response.json()) // แปลง response เป็น JSON
+//         .then(data => {
+//             if (data.error) {
+//                 alert(JSON.stringify(data.error, null, 2));
+//                 // alert('เกิดข้อผิดพลาดในการส่งข้อมูล');
+//             } else {
+//                 // ถ้า message เป็น true ให้กลับไปหน้าก่อนหน้า
+//                 if (data.message == true) {
+//                     window.location.href = document.referrer; // หรือใช้ URL ที่ต้องการ
+//                     // alert('สำเร็จ');
+//                 }
 
-                if (data.message == false) {
-                    // alert(data.error);
-                    alert(JSON.stringify(data.error, null, 2));
-                }
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('เกิดข้อผิดพลาดในการส่งข้อมูล');
-        });
-});
+//                 if (data.message == false) {
+//                     // alert(data.error);
+//                     alert(JSON.stringify(data.error, null, 2));
+//                 }
+//             }
+//         })
+//         .catch(error => {
+//             console.error('Error:', error);
+//             alert('เกิดข้อผิดพลาดในการส่งข้อมูล');
+//         });
+// });
 
 function companyMultiBrachKfi() {
     var acType = $("#acType").val();
     var companyId = acType == "update" ? $("#companyId").val() : $("#companyId").val();
     var kfiId = $("#kfiId").val();
 
-    var branchIds = JSON.parse(localStorage.getItem("branchIds")) || [];
+    // var kfiBranchText = JSON.parse(localStorage.getItem("kfiBranchText")) || [];
 
-    // alert(branchIds);
+    // alert(kfiBranchText);
     // ส่งข้อมูลผ่าน AJAX ไปยังเซิร์ฟเวอร์
     $.ajax({
         type: "POST",
@@ -85,8 +90,8 @@ function companyMultiBrachKfi() {
         data: {
             companyId: companyId,
             acType: acType,
-            kfiId: kfiId,
-            branchIds: branchIds // ส่งค่า branchIds ที่เลือกไป
+            kfiId: kfiId
+            // kfiBranchText: kfiBranchText // ส่งค่า branchIds ที่เลือกไป
         },
         success: function (data) {
             if (data.status) {

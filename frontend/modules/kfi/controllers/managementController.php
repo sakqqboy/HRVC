@@ -196,8 +196,8 @@ class ManagementController extends Controller
 	{
 		if (isset($_POST["kfiName"])) {
 
-			if (Yii::$app->request->isPost) {
-				Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+			// if (Yii::$app->request->isPost) {
+			// 	Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 				
 				$data = [
 					'kfiName' => $_POST["kfiName"],  
@@ -217,7 +217,8 @@ class ManagementController extends Controller
 					'result' => $_POST["result"],
 				];
 
-			
+				throw new Exception(print_r($data,true));
+				
 				$kfi = new Kfi();
 				$kfi->kfiName = $_POST["kfiName"];
 				$kfi->companyId = $_POST["company"];
@@ -297,15 +298,15 @@ class ManagementController extends Controller
 						'error' => $errors
 					];
 				}
-			} else{
-				return [
-					'message' => false,
-					'error' => 'ไม่มีข้อมูลถูกส่งมา'
-				];
-			}
+			// } else{
+			// 	return [
+			// 		'message' => false,
+			// 		'error' => 'ไม่มีข้อมูลถูกส่งมา'
+			// 	];
+			// }
 	
 		}else{
-			$role = UserRole::userRight();
+		$role = UserRole::userRight();
 		$groupId = Group::currentGroupId();
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -326,7 +327,7 @@ class ManagementController extends Controller
 			"companies" => $companies,
 			"units" => $units,
 			"data" => $data,
-			"statusfrom" =>  "create"
+			"statusform" =>  "create"
 		]);
 		}
 		
@@ -468,7 +469,7 @@ class ManagementController extends Controller
 			"companies" => $companies,
 			"kfiBranchText" => $kfiBranchText,
 			"kfiDepartmentText" => $kfiDepartmentText,
-			"statusfrom" =>  "update"
+			"statusform" =>  "update"
 		]);
 	} else {
 		throw new Exception("Invalid request, KFI ID is missing. GET Data: " . json_encode($_GET));
