@@ -360,34 +360,37 @@ $this->title = Yii::t('app', 'KFI Grid View');
                                         <?php
                                                 if ($colorFormat == 'disable' && $role >= 5) {
                                                 ?>
-                                        <div onclick="javascript:updateKfi(<?= $kfiId ?>)" class="pim-btn-setup"
-                                            data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+                                        <a type="button" class="pim-btn-setup"
+                                            href="<?= Yii::$app->homeUrl ?>kfi/management/update-kfi/?kfiId=<?= $kfiId ?>"
+                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; width: 82px; height: 30px; gap: 6px; flex-shrink: 0;">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
-                                                class="mb-2" style="width: 12px; height: 12px;">
+                                                style="width: 14px; height: 14px;">
                                             <?= Yii::t('app', 'Setup') ?>
-                                        </div>
+                                        </a>
                                         <?php
                                                 } else if ($role >= 5) {
                                                 ?>
-                                        <div onclick=" javascript:updateKfi(<?= $kfiId ?>)"
-                                            class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
-                                            data-bs-target="#staticBackdrop2">
+
+                                        <a class="pim-btn-<?= $colorFormat ?>"
+                                            href="<?= Yii::$app->homeUrl ?>kfi/management/update-kfi/?kfiId=<?= $kfiId ?>"
+                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; width: 82px; height: 30px; gap: 6px; flex-shrink: 0;">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
-                                                class="mb-2" style="width: 12px; height: 12px;">
+                                                style="width: 14px; height: 14px;">
                                             <?php if ($colorFormat == "complete") {
-                                                            echo  Yii::t('app', "Edit");
-                                                        } else if ($colorFormat == "over") {
-                                                            echo  Yii::t('app', 'Update');
-                                                        } else {
-                                                            echo  Yii::t('app', 'Update');
-                                                        }
-                                                        ?>
-                                        </div>
+                                                echo Yii::t('app', "Edit");
+                                            } else if ($colorFormat == "over") {
+                                                echo Yii::t('app', 'Update');
+                                            } else {
+                                                echo Yii::t('app', 'Update');
+                                            }
+                                            ?>
+                                        </a>
                                         <?php
                                                 } else { ?>
-                                        <div class="pim-btn-disable" data-bs-target="#update-kgi-modal">
+                                        <div class="pim-btn-disable"
+                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; width: 82px; height: 30px; gap: 6px; flex-shrink: 0;">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/locked.svg"
-                                                style="width: 12px; height: 12px;"> <?= Yii::t('app', 'Locked') ?>
+                                                style="width: 14px; height: 14px;"> <?= Yii::t('app', 'Locked') ?>
                                         </div>
                                         <?php
 

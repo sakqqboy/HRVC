@@ -33,6 +33,8 @@ use yii\db\Expression;
 use yii\web\Controller;
 use yii\web\UploadedFile;
 
+use function PHPUnit\Framework\throwException;
+
 // header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
 // header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 // header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
@@ -318,11 +320,13 @@ class ManagementController extends Controller
 		$units = json_decode($units, true);
 		
 		curl_close($api);
-
+		$data = [];
 		return $this->render('create', [ 
 			"role" => $role,
 			"companies" => $companies,
-			"units" => $units
+			"units" => $units,
+			"data" => $data,
+			"statusfrom" =>  "create"
 		]);
 		}
 		
@@ -382,44 +386,96 @@ class ManagementController extends Controller
 		}
 	}
 	public function actionUpdateKfi()
-	{
-		$kfiId = $_POST["kfiId"];
-		$kfi = [];
-		$branch = [];
-		$department = [];
+{
+	$kfiId = Yii::$app->request->get("kfiId");
+
+	// if (!$kfiId || !is_numeric($kfiId)) {
+	// 	throw new Exception("Invalid KFI ID.");
+	// }else{
+	// 	throw new Exception($kfiId);
+	// }
+	
+    if (Yii::$app->request->isGet) {
+		$kfiId = Yii::$app->request->get("kfiId");
+	
+		if (!$kfiId || !is_numeric($kfiId)) {
+			throw new Exception("Invalid KFI ID.");
+		}
+		$role = UserRole::userRight();
+		$groupId = Group::currentGroupId();
+
+	
 		$api = curl_init();
+	
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
+	
+		// ดึงข้อมูล KFI
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&kfiHistoryId=0");
 		$kfi = curl_exec($api);
 		$kfi = json_decode($kfi, true);
+	
+		if (!$kfi || empty($kfi["companyId"])) {
+			throw new Exception("Failed to retrieve KFI details.");
+		}
+	
 		$companyId = $kfi["companyId"];
-		//throw new Exception(print_r($kfi, true));
-		$kfiBranchText = '';
+	
+		// ดึงข้อมูลสาขา
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
 		$kfiBranch = curl_exec($api);
 		$kfiBranch = json_decode($kfiBranch, true);
-		$kfiBranchText = $this->renderAjax('multi_branch_update', [
-			"branches" => $kfiBranch,
-			"kfiId" => $kfiId
-		]);
-		$branch["textBranch"] = $kfiBranchText;
-
-		$kfiDepartmentText = '';
+	
+		// $kfiBranchText = $this->renderAjax('multi_branch_update', [
+		// 	"branches" => $kfiBranch,
+		// 	"kfiId" => $kfiId
+		// ]);
+	
+		// $branch["textBranch"] = $kfiBranchText;
+	
+		// ดึงข้อมูลแผนก
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-department?id=' . $kfiId);
 		$kfiDepartment = curl_exec($api);
 		$kfiDepartment = json_decode($kfiDepartment, true);
-		$kfiDepartmentText = $this->renderAjax('multi_department_update', [
-			"d" => $kfiDepartment,
-			"kfiId" => $kfiId
-		]);
-		$department["textDepartment"] = $kfiDepartmentText;
-		curl_close($api);
+	
+		// $kfiDepartmentText = $this->renderAjax('multi_department_update', [
+		// 	"d" => $kfiDepartment,
+		// 	"kfiId" => $kfiId
+		// ]);
+	
+		// $department["textDepartment"] = $kfiDepartmentText;
 
-		$data = array_merge($kfi, $branch, $department);
-		return json_encode($data);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
+		$units = curl_exec($api);
+		$units = json_decode($units, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$companies = curl_exec($api);
+		$companies = json_decode($companies, true);
+	
+		curl_close($api);
+	
+		// รวมข้อมูลทั้งหมด
+		$data = array_merge($kfi, $kfiBranch, $kfiDepartment);
+
+		// throw new Exception(print_r($data,true));	
+
+		// เรนเดอร์หน้า 'create' และส่งข้อมูลไปแสดงผล
+		return $this->render('create', [
+			"data" => $data,
+			"role" => $role,
+			"units" => $units,
+			"companies" => $companies,
+			"statusfrom" =>  "update"
+		]);
+	} else {
+		throw new Exception("Invalid request, KFI ID is missing. GET Data: " . json_encode($_GET));
 	}
+	
+}
+
+
+
 	public function actionBranchMultiDepartment()
 	{
 		$res["status"] = false;

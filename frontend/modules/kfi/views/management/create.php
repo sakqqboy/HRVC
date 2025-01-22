@@ -311,6 +311,7 @@ select.form-select option:disabled {
                                     title="Enter the name of your key financial indicator. This should be clear and specific, such as 'Total Sales,or 'Profit Margin">
                             </label>
                             <input type="text" class="form-control" id="kfiName" name="kfiName"
+                                value="<?= isset($data['kfiName']) ? htmlspecialchars($data['kfiName']) : '' ?>"
                                 placeholder="Please Write the Name of Component" required>
 
                         </div>
@@ -329,14 +330,17 @@ select.form-select option:disabled {
                                 <option value=""><?= Yii::t('app', 'Select Company') ?></option>
                                 <?php
                                     if (isset($companies) && count($companies) > 0) {
-                                        foreach ($companies as $company) : ?>
-                                <option value="<?= $company["companyId"] ?>"><?= $company["companyName"] ?></option>
-                                <?php endforeach;
+                                        foreach ($companies as $company) : 
+                                            $selected = (isset($data['companyId']) && $data['companyId'] == $company["companyId"]) ? 'selected' : '';
+                                            ?>
+                                <option value="<?= $company["companyId"] ?>" <?= $selected ?>>
+                                    <?= $company["companyName"] ?>
+                                </option>
+                                <?php 
+                                        endforeach;
                                     }
                                 ?>
                             </select>
-
-
                         </div>
 
                         <div class="form-group mt-39"
@@ -353,12 +357,13 @@ select.form-select option:disabled {
                                 </label>
                                 <div class="form-control" id="multi-branch" style="width: 426px;">
                                     <span id="multi-branch-text"><?= Yii::t('app', 'Select Branches') ?></span>
-                                    <div class="col-12" id="show-multi-branch"
+                                    <div class="col-12" <?php if($statusfrom == 'update'): ?>
+                                        id="show-multi-branch-update" <?php else: ?> id="show-multi-branch"
+                                        <?php endif; ?>
                                         style="position: absolute; top: 100%; left: 0; width: 100%; z-index: 999; background-color: white; border: 1px solid #ced4da; padding: 10px; display: none;">
                                     </div>
                                     <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
                                 </div>
-
                                 <div>
                                     <div class="circle-container pl-15" id="kfi-branches" data-type="branch">
                                         <div class="cycle-current-gray">
@@ -700,22 +705,22 @@ select.form-select option:disabled {
                             <div
                                 style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
                                 <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-                                    <label class="switch">
+                                    <!-- <label class="switch">
                                         <input type="checkbox">
                                         <span class="slider round"></span>
                                     </label>
                                     <label class="sub-manage-create" id="branch-selected-message">
                                         Historic Update
-                                    </label>
+                                    </label> -->
                                 </div>
                                 <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-                                    <label class="switch">
+                                    <!-- <label class="switch">
                                         <input type="checkbox">
                                         <span class="slider round"></span>
                                     </label>
                                     <label class="sub-manage-create" id="branch-selected-message">
                                         Override
-                                    </label>
+                                    </label> -->
                                 </div>
                             </div>
                         </div>
@@ -734,7 +739,14 @@ select.form-select option:disabled {
                             <textarea class="form-control" name="detail" style="height: 165px;" rows="4"></textarea>
                         </div>
 
-                        <div class="form-group mt-42" style="display: inline-flex; align-items: center;gap: 12px;">
+                        <div class="form-group mt-42"
+                            style="display: flex; align-items: flex-end; justify-content: flex-end; gap: 12px; width: 100%;">
+                            <?php 
+                                // $status = 'create';
+                                // $statusfrom = 'update';
+
+                                if($statusfrom == 'update'){
+                            ?>
                             <div style="display: flex;
                                 width: 99px;
                                 height: 40px;
@@ -755,23 +767,49 @@ select.form-select option:disabled {
                                     <option value="2">In-Progress</option>
                                 </select>
                             </div>
-                            <a href="http://localhost/HRVC/frontend/web/kfi/management/grid" class="btn-create-cancle"
+                            <?php
+                            }
+                            ?>
+                            <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="btn-create-cancle"
                                 style="width: 100px;">
                                 Cancel
                             </a>
-                            <button type="submit" class="btn-create-update" style="width: 100px;">Update</button>
+                            <?php 
+                                if($statusfrom == 'update'){
+                            ?>
+                            <button type="submit" class="btn-create-update" style="width: 100px;">
+                                <img src="<?= Yii::$app->homeUrl ?>image/updatebtn-white.svg" alt="LinkedIn"
+                                    style="width: 16px; height: 16px;">
+                                Update
+                            </button>
+                            <?php }else{ ?>
+                            <button type="submit" class="btn-create-update" style="width: 100px;">
+                                Create
+                                <img src="<?= Yii::$app->homeUrl ?>image/create-btn-white.svg" alt="LinkedIn"
+                                    style="width: 16px; height: 16px;">
+                            </button>
+                            <?php } ?>
                         </div>
+
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
+<?php if($statusfrom == 'update'){
+    ?>
+<input type="hidden" value="update" id="acType">
+<?
+} else {
+?>
 <input type="hidden" value="create" id="acType">
+<? } ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
 
+    var statusFrom = '<?= $statusfrom ?>';
     // คำนวณปีปัจจุบัน
     const currentYear = new Date().getFullYear();
 
@@ -792,21 +830,32 @@ $(document).ready(function() {
 
     // Toggle multi-branch dropdown visibility
     $("#multi-branch").on("click", function(e) {
-        $("#show-multi-branch").toggle();
+        var targetDropdown = (statusFrom == 'update') ? "#show-multi-branch-update" :
+            "#show-multi-branch";
+        $(targetDropdown).toggle();
         $(".toggle-icon").toggleClass("fa-angle-down fa-angle-up"); // Change icon
         e.stopPropagation();
     });
 
     // Prevent hiding dropdown when clicking inside it
-    $("#show-multi-branch").on("click", function(e) {
+    $("#show-multi-branch, #show-multi-branch-update").on("click", function(e) {
         e.stopPropagation();
     });
 
     // Hide dropdown when clicking outside
     $(document).on("click", function() {
-        $("#show-multi-branch").hide();
+        var targetDropdown = (statusFrom == 'update') ? "#show-multi-branch-update" :
+            "#show-multi-branch";
+        $(targetDropdown).hide();
         $(".toggle-icon").addClass("fa-angle-down").removeClass("fa-angle-up");
     });
+
+
+
+    if (statusFrom == 'update') {
+        // เรียกฟังก์ชัน companyMultiBrachKfi() เมื่อสถานะเป็น update
+        companyMultiBrachKfi();
+    }
 
     // Toggle multi-department dropdown visibility
     $("#multi-department").on("click", function(e) {
@@ -911,73 +960,19 @@ $(document).ready(function() {
 
 });
 
-// document.querySelector('.btn-create-update').addEventListener('click', function(event) {
-//     // ตรวจสอบฟอร์มก่อนการส่ง
-//     const form = document.querySelector('form');
-//     if (form.checkValidity()) {
-//         // สามารถส่งฟอร์มได้
-//         form.submit();
-//     } else {
-//         event.preventDefault(); // หยุดการส่งถ้าฟอร์มไม่ถูกต้อง
-//         alert('กรุณากรอกข้อมูลให้ครบถ้วน');
-//     }
-// });
-
-// document.querySelector('.btn-create-update').addEventListener('click', function(event) {
-//     // ตรวจสอบฟอร์มก่อนการส่ง
-//     // const form = document.querySelector('form');
-//     // let formData = new FormData(form);
-//     // let formValues = '';
-//     // alert(`crik`);
-
-//     // requiredFields.forEach((field) => {
-//     //     const isFilled = field.value.trim() !== ''; // ตรวจสอบว่ามีค่าหรือยัง
-//     //     formValues += `Field Name: ${field.name} - ${isFilled ? 'Filled' : 'Not Filled'}\n`;
-//     //     if (!isFilled) {
-//     //         allValid = false; // หากฟิลด์ใดไม่ถูกกรอก ให้ allValid เป็น false
-//     //     }
-//     // });
-
-//     // alert(`Required Field Status:\n${formValues}`);
-
-//     // if (allValid) {
-//     //     alert('All required fields are filled. Form will be submitted.');
-//     //     form.submit(); // ส่งฟอร์มหากฟิลด์ทั้งหมดถูกกรอก
-//     // } else {
-//     //     alert('Some required fields are missing. Please fill them before submitting.');
-//     // }
-//     // alert(form.checkValidity());
-//     // ถ้า valid ให้ดำเนินการต่อ
-
-// });
-
-// document.querySelector('.btn-create-update').addEventListener('click', function(event) {
-//     event.preventDefault();
-
-//     var form = document.getElementById('kfiForm');
-//     var formData = new FormData(form);
-//     var url = $url + 'kgi/management/create-kfi';
-
-//     fetch(url, {
-//             method: 'POST',
-//             body: formData
-//         })
-//         .then(response => response.json())
-//         .then(data => {
-//             console.log('Response:', data);
-//         })
-//         .catch(error => {
-//             console.error('Error:', error);
-//         });
-// });
-
 
 document.querySelector('.btn-create-update').addEventListener('click', function(event) {
     event.preventDefault();
 
     var form = document.getElementById('kfiForm');
     var formData = new FormData(form);
-    var url = $url + 'kfi/management/create-kfi';
+
+    var statusFrom = '<?= $statusfrom ?>';
+
+    var url = (statusFrom == 'update') ?
+        urlBase + 'kfi/management/save-update-kfi' :
+        urlBase + 'kfi/management/create-kfi';
+
 
     fetch(url, {
             method: 'POST',

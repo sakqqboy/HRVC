@@ -135,6 +135,16 @@
     border-radius: 3px;
     text-decoration: none;
     cursor: pointer;
+    color: var(--100-white, #FFF);
+    text-align: center;
+    font-family: "SF Pro Display";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 15.479px;
+    /* 110.567% */
+    letter-spacing: -0.21px;
+    text-transform: capitalize;
 }
 
 .pim-btn-inprogress {
@@ -146,6 +156,17 @@
     border-radius: 3px;
     text-decoration: none;
     cursor: pointer;
+    color: var(--100-white, #FFF);
+    text-align: center;
+    font-family: "SF Pro Display";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 15.479px;
+    /* 110.567% */
+    letter-spacing: -0.21px;
+    text-transform: capitalize;
+
 }
 
 .pim-btn-setup {
@@ -157,6 +178,16 @@
     border-radius: 3px;
     text-decoration: none;
     cursor: pointer;
+    color: var(--100-white, #FFF);
+    text-align: center;
+    font-family: "SF Pro Display";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 15.479px;
+    /* 110.567% */
+    letter-spacing: -0.21px;
+    text-transform: capitalize;
 }
 
 .pim-btn-complete {
@@ -168,6 +199,16 @@
     border-radius: 3px;
     text-decoration: none;
     cursor: pointer;
+    color: var(--100-white, #FFF);
+    text-align: center;
+    font-family: "SF Pro Display";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 15.479px;
+    /* 110.567% */
+    letter-spacing: -0.21px;
+    text-transform: capitalize;
 }
 
 .pim-btn-disable {
@@ -178,6 +219,16 @@
     padding: 2px 3px 2px 3px;
     border-radius: 3px;
     text-decoration: none;
+    color: var(--100-white, #FFF);
+    text-align: center;
+    font-family: "SF Pro Display";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 15.479px;
+    /* 110.567% */
+    letter-spacing: -0.21px;
+    text-transform: capitalize;
 }
 
 .btn-create {

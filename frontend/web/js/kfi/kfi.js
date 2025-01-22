@@ -26,23 +26,59 @@ function companyBranchKfi() {
     });
 }
 
-function companyMultiBrachKfi() {
-    clearEveryShow();
-    var acType = $("#acType").val();
-    var companyId = acType === "update" ? $("#companyId-update").val() : $("#companyId").val();
-    var kfiId = $("#kfiId").val();
-    var url = $url + 'kfi/management/company-multi-branch';
+// function companyMultiBrachKfi() {
+//     clearEveryShow();
+//     var acType = $("#acType").val();
+//     var companyId = acType === "update" ? $("#companyId-update").val() : $("#companyId").val();
+//     var kfiId = $("#kfiId").val();
+//     var url = $url + 'kfi/management/company-multi-branch';
 
+//     $.ajax({
+//         type: "POST",
+//         dataType: 'json',
+//         url: url,
+//         data: { companyId: companyId, acType: acType, kfiId: kfiId },
+//         success: function (data) {
+//             if (data.status) {
+//                 // เติมข้อมูล branch ลงใน div ที่เหมาะสม
+//                 // alert(data.branchText)
+//                 if (acType === "update") {
+//                     $("#show-multi-branch-update").html(data.branchText);
+//                     $("#show-multi-branch-update").show();
+//                 } else {
+//                     $("#show-multi-branch").html(data.branchText);
+//                     $("#show-multi-branch").show();
+//                 }
+//             }
+//         }
+//     });
+// }
+function companyMultiBrachKfi() {
+    var acType = $("#acType").val();
+    var companyId = acType == "update" ? $("#companyId").val() : $("#companyId").val();
+    var kfiId = $("#kfiId").val();
+    var branchIds = []; // กำหนดอาร์เรย์สำหรับเก็บ branchId ที่ถูกเลือก
+
+    // เก็บค่า branchId ที่ถูกเลือกจาก checkbox
+    $("input[name='branch[]']:checked").each(function () {
+        branchIds.push($(this).val()); // เพิ่ม branchId ที่ถูกเลือกเข้าไปในอาร์เรย์
+    });
+
+    // ส่งข้อมูลผ่าน AJAX ไปยังเซิร์ฟเวอร์
     $.ajax({
         type: "POST",
         dataType: 'json',
-        url: url,
-        data: { companyId: companyId, acType: acType, kfiId: kfiId },
+        url: $url + 'kfi/management/company-multi-branch', // URL ที่รับค่าจาก AJAX
+        data: {
+            companyId: companyId,
+            acType: acType,
+            kfiId: kfiId,
+            branchIds: branchIds // ส่งค่า branchIds ที่เลือกไป
+        },
         success: function (data) {
             if (data.status) {
-                // เติมข้อมูล branch ลงใน div ที่เหมาะสม
-                // alert(data.branchText)
-                if (acType === "update") {
+                // เติมข้อมูลที่ต้องการแสดงกลับจากเซิร์ฟเวอร์
+                if (acType == "update") {
                     $("#show-multi-branch-update").html(data.branchText);
                     $("#show-multi-branch-update").show();
                 } else {
@@ -53,6 +89,8 @@ function companyMultiBrachKfi() {
         }
     });
 }
+
+
 
 
 function branchDepartmentKfi() {
@@ -104,44 +142,26 @@ function selectUnitUpdate(currentUnit) {
     $(".unit-" + currentUnit).css("color", "#30313D");
     $(".unit-" + currentUnit).css("border-bottom", "3px solid #2580D3");
 }
-function updateKfi(kfiId) {
-    // alert(kfiId);
-    $("#acType").val('update');
-    resetUnit();
-    $("#staticBackdrop2").show();
-    $("#update-kfi")[0].reset();
-    $("#kfiId-update").val(kfiId);
-    var url = $url + 'kfi/management/update-kfi';
-    $.ajax({
-        type: "POST",
-        dataType: 'json',
-        url: url,
-        data: { kfiId: kfiId },
-        success: function (data) {
-            $("#kfiName").val(data.kfiName);
-            $("#companyId-update").val(data.companyId);
-            $(".currentUnit").val(data.unitId);
-            $(".previousUnit").val(data.unitId);
-            $("#show-multi-branch-update").html(data.textBranch);
-            $("#show-multi-department-update").html(data.textDepartment);
-            $(".unit-" + parseInt(data.unitId)).css("background-color", "#3366FF");
-            $(".unit-" + data.unitId).css("color", "white");
-            // $("#periodDate-update").val(data.periodCheck);
-            $("#from-date").val(data.fromDate);
-            $("#to-date").val(data.toDate);
-            $("#nextCheckDate-update").val(data.nextCheckDate);
-            $("#targetAmount").val(data.targetAmount);
-            $("#result").val(data.result);
-            $("#kfiDetail").val(data.detail);
-            $("#quantRatio").val(data.quantRatio);
-            $("#monthName").val(data.month);
-            $("#year").val(data.year);
-            $("#amountType").val(data.amountType);
-            $("#code").val(data.code);
-            $("#kfiStatus").val(data.kfiStatus);
-        }
-    });
-}
+
+
+// function updateKfi(kfiId) {
+//     var url = $url + 'kfi/management/update-kfi';
+//     console.log("Requesting URL: " + url);
+
+//     $.ajax({
+//         type: "POST",
+//         dataType: 'html',  // ใช้ HTML เพื่อให้รับการเรนเดอร์หน้ากลับมา
+//         url: url,
+//         data: { kfiId: kfiId },
+//         success: function (response) {
+//             $('body').html(response);
+//         },
+//         error: function (xhr, status, error) {
+//             console.error('AJAX Error:', xhr.responseText);
+//             alert('Error processing request: ' + xhr.statusText);
+//         }
+//     });
+// }
 
 
 function openDatePicker() {
