@@ -217,7 +217,7 @@ class ManagementController extends Controller
 					'result' => $_POST["result"],
 				];
 
-				throw new Exception(print_r($data,true));
+				 throw new Exception(print_r($data,true));
 				
 				$kfi = new Kfi();
 				$kfi->kfiName = $_POST["kfiName"];
@@ -513,7 +513,7 @@ class ManagementController extends Controller
 		}
 		return json_encode($res);
 	}
-	public function saveKfiBranch($branch, $kfiId)
+	public function 	saveKfiBranch($branch, $kfiId)
 	{
 		$kfiBranch = KfiBranch::find()->where(["kfiId" => $kfiId, "status" => 1])->all();
 		if (isset($kfiBranch) && count($kfiBranch) > 0) {

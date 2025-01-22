@@ -1,6 +1,6 @@
 <?php
 use yii\bootstrap5\ActiveForm;
-if($statusform){
+if($statusform == 'update'){
     $parturl = 'kfi/management/update-kfi';
 }else{
     $parturl = 'kfi/management/create-kfi';
@@ -616,8 +616,10 @@ select.form-select option:disabled {
                             </select>
                         </div>
                         <?php
-                            }
+                            } else {
                             ?>
+                        <input type="hidden" name="status" value='1'>
+                        <?php } ?>
                         <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="btn-create-cancle"
                             style="width: 100px;">
                             Cancel
@@ -655,8 +657,8 @@ select.form-select option:disabled {
 <input type="hidden" value="create" id="acType">
 <? } ?>
 <?php ActiveForm::end(); ?>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
 $(document).ready(function() {
 
