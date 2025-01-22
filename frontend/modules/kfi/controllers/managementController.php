@@ -321,7 +321,7 @@ class ManagementController extends Controller
 		
 		curl_close($api);
 		$data = [];
-		return $this->render('create', [ 
+		return $this->render('kfi_from', [ 
 			"role" => $role,
 			"companies" => $companies,
 			"units" => $units,
@@ -426,24 +426,24 @@ class ManagementController extends Controller
 		$kfiBranch = curl_exec($api);
 		$kfiBranch = json_decode($kfiBranch, true);
 	
-		// $kfiBranchText = $this->renderAjax('multi_branch_update', [
-		// 	"branches" => $kfiBranch,
-		// 	"kfiId" => $kfiId
-		// ]);
+		$kfiBranchText = $this->renderAjax('multi_branch_update', [
+			"branches" => $kfiBranch,
+			"kfiId" => $kfiId
+		]);
 	
-		// $branch["textBranch"] = $kfiBranchText;
+		$branch["textBranch"] = $kfiBranchText;
 	
 		// ดึงข้อมูลแผนก
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-department?id=' . $kfiId);
 		$kfiDepartment = curl_exec($api);
 		$kfiDepartment = json_decode($kfiDepartment, true);
 	
-		// $kfiDepartmentText = $this->renderAjax('multi_department_update', [
-		// 	"d" => $kfiDepartment,
-		// 	"kfiId" => $kfiId
-		// ]);
+		$kfiDepartmentText = $this->renderAjax('multi_department_update', [
+			"d" => $kfiDepartment,
+			"kfiId" => $kfiId
+		]);
 	
-		// $department["textDepartment"] = $kfiDepartmentText;
+		$department["textDepartment"] = $kfiDepartmentText;
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
 		$units = curl_exec($api);
@@ -456,16 +456,18 @@ class ManagementController extends Controller
 		curl_close($api);
 	
 		// รวมข้อมูลทั้งหมด
-		$data = array_merge($kfi, $kfiBranch, $kfiDepartment);
+		$data = array_merge($kfi, $branch, $department);
 
 		// throw new Exception(print_r($data,true));	
 
 		// เรนเดอร์หน้า 'create' และส่งข้อมูลไปแสดงผล
-		return $this->render('create', [
+		return $this->render('kfi_from', [
 			"data" => $data,
 			"role" => $role,
 			"units" => $units,
 			"companies" => $companies,
+			"kfiBranchText" => $kfiBranchText,
+			"kfiDepartmentText" => $kfiDepartmentText,
 			"statusfrom" =>  "update"
 		]);
 	} else {

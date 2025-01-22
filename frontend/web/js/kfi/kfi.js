@@ -73,13 +73,10 @@ function companyMultiBrachKfi() {
     var acType = $("#acType").val();
     var companyId = acType == "update" ? $("#companyId").val() : $("#companyId").val();
     var kfiId = $("#kfiId").val();
-    var branchIds = []; // กำหนดอาร์เรย์สำหรับเก็บ branchId ที่ถูกเลือก
 
-    // เก็บค่า branchId ที่ถูกเลือกจาก checkbox
-    $("input[name='branch[]']:checked").each(function () {
-        branchIds.push($(this).val()); // เพิ่ม branchId ที่ถูกเลือกเข้าไปในอาร์เรย์
-    });
+    var branchIds = JSON.parse(localStorage.getItem("branchIds")) || [];
 
+    // alert(branchIds);
     // ส่งข้อมูลผ่าน AJAX ไปยังเซิร์ฟเวอร์
     $.ajax({
         type: "POST",

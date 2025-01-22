@@ -1,3 +1,14 @@
+<?php
+// ตรวจสอบว่าข้อมูล branchId มีอยู่จริงหรือไม่
+$branchIds = [];
+
+foreach ($data as $key => $value) {
+    if (is_array($value) && isset($value['branchId'])) {
+        $branchIds[] = $value['branchId'];
+    }
+}
+?>
+
 <style>
 /* เปลี่ยนสีข้อความของ select เมื่อเลือกแล้ว */
 select.form-select {
@@ -162,6 +173,7 @@ select.form-select option:disabled {
 
                             <div class="form-group "
                                 style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+
                                 <label class="text-manage-create" for="my-input">
                                     <span class="text-danger">* </span>
                                     Select Branch/s <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
@@ -169,8 +181,12 @@ select.form-select option:disabled {
                                         title="Select the relevant branches where this indicator will be monitored. You can choose multiple branches to track performance across different locations."
                                         alt="Help Icon">
                                 </label>
+                                <?php if($statusfrom =='update'){
+                                        echo $kfiBranchText ;
+                                        }else { ?>
                                 <div class="form-control" id="multi-branch" style="width: 426px;">
                                     <span id="multi-branch-text"><?= Yii::t('app', 'Select Branches') ?></span>
+
                                     <div class="col-12" <?php if($statusfrom == 'update'): ?>
                                         id="show-multi-branch-update" <?php else: ?> id="show-multi-branch"
                                         <?php endif; ?>
@@ -178,6 +194,8 @@ select.form-select option:disabled {
                                     </div>
                                     <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
                                 </div>
+                                <?php } ?>
+
                                 <div>
                                     <div class="circle-container pl-15" id="kfi-branches" data-type="branch">
                                         <div class="cycle-current-gray">
@@ -624,14 +642,17 @@ select.form-select option:disabled {
 $(document).ready(function() {
 
     var statusFrom = '<?= $statusfrom ?>';
+    var branchIds = <?= json_encode($branchIds) ?>;
 
-
+    // alert(branchIds);
 
     if (statusFrom == 'update') {
-        // เรียกฟังก์ชัน companyMultiBrachKfi() เมื่อสถานะเป็น update
-        companyMultiBrachKfi();
-    }
+        // บันทึกค่า branchIds ลงใน LocalStorage
+        localStorage.setItem("branchIds", JSON.stringify(branchIds));
 
+        // เรียกใช้งานฟังก์ชันในไฟล์ .js
+        // companyMultiBrachKfi();
+    }
     // คำนวณปีปัจจุบัน
     const currentYear = new Date().getFullYear();
 
