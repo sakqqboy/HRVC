@@ -5,6 +5,7 @@ if (window.location.host == 'localhost') {
     $baseUrl = window.location.protocol + "//" + window.location.host + '/';
 }
 $url = $baseUrl;
+
 function companyBranchKfi() {
     var companyId = $("#company-create-kfi").val();
     var url = $url + 'kfi/management/company-branch';
@@ -26,33 +27,48 @@ function companyBranchKfi() {
     });
 }
 
-// function companyMultiBrachKfi() {
-//     clearEveryShow();
-//     var acType = $("#acType").val();
-//     var companyId = acType === "update" ? $("#companyId-update").val() : $("#companyId").val();
-//     var kfiId = $("#kfiId").val();
-//     var url = $url + 'kfi/management/company-multi-branch';
 
-//     $.ajax({
-//         type: "POST",
-//         dataType: 'json',
-//         url: url,
-//         data: { companyId: companyId, acType: acType, kfiId: kfiId },
-//         success: function (data) {
-//             if (data.status) {
-//                 // เติมข้อมูล branch ลงใน div ที่เหมาะสม
-//                 // alert(data.branchText)
-//                 if (acType === "update") {
-//                     $("#show-multi-branch-update").html(data.branchText);
-//                     $("#show-multi-branch-update").show();
-//                 } else {
-//                     $("#show-multi-branch").html(data.branchText);
-//                     $("#show-multi-branch").show();
-//                 }
-//             }
-//         }
-//     });
-// }
+document.querySelector('.btn-create-update').addEventListener('click', function (event) {
+    event.preventDefault();
+
+    var form = document.getElementById('kfiForm');
+    var formData = new FormData(form);
+
+    var statusFrom = '<?= $statusfrom ?>';
+
+    var url = (statusFrom == 'update') ?
+        urlBase + 'kfi/management/save-update-kfi' :
+        urlBase + 'kfi/management/create-kfi';
+
+
+    fetch(url, {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => response.json()) // แปลง response เป็น JSON
+        .then(data => {
+            if (data.error) {
+                alert(JSON.stringify(data.error, null, 2));
+                // alert('เกิดข้อผิดพลาดในการส่งข้อมูล');
+            } else {
+                // ถ้า message เป็น true ให้กลับไปหน้าก่อนหน้า
+                if (data.message == true) {
+                    window.location.href = document.referrer; // หรือใช้ URL ที่ต้องการ
+                    // alert('สำเร็จ');
+                }
+
+                if (data.message == false) {
+                    // alert(data.error);
+                    alert(JSON.stringify(data.error, null, 2));
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('เกิดข้อผิดพลาดในการส่งข้อมูล');
+        });
+});
+
 function companyMultiBrachKfi() {
     var acType = $("#acType").val();
     var companyId = acType == "update" ? $("#companyId").val() : $("#companyId").val();

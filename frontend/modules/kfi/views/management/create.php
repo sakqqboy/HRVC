@@ -1,108 +1,4 @@
 <style>
-.caret {
-    display: none;
-}
-
-.btn-group .multiselect {
-    border: 1px solid #ced4da;
-}
-
-#calendar-container {
-    position: absolute;
-    top: 50px;
-    z-index: 10;
-    width: 100%;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-}
-
-#calendar-due-update {
-    position: absolute;
-    margin-top: 75px;
-    padding: 10px;
-    border: 1px solid rgb(221, 221, 221);
-    border-radius: 10px;
-    background: rgb(255, 255, 255);
-    width: 100%;
-    z-index: 1;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    /* overflow: visible; */
-    /* แสดงส่วนเกินออกมานอกขอบ */
-}
-
-
-#multi-branch {
-    font-family: "SF Pro Display", sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-    color: var(--Helper-Text-Gray, #8A8A8A);
-    text-transform: capitalize;
-    /* ถ้าต้องการให้ข้อความเป็นตัวพิมพ์ใหญ่แรก */
-}
-
-#multi-branch-text {
-    font-family: "SF Pro Display", sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-    color: var(--Helper-Text-Gray, #8A8A8A);
-    text-transform: capitalize;
-}
-
-#multi-department {
-    font-family: "SF Pro Display", sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-    color: var(--Helper-Text-Gray, #8A8A8A);
-    text-transform: capitalize;
-    /* ถ้าต้องการให้ข้อความเป็นตัวพิมพ์ใหญ่แรก */
-}
-
-#multi-department-text {
-    font-family: "SF Pro Display", sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-    color: var(--Helper-Text-Gray, #8A8A8A);
-    text-transform: capitalize;
-}
-
-
-#multi-mount-year {
-    font-family: "SF Pro Display", sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-    color: var(--Helper-Text-Gray, #8A8A8A);
-    text-transform: capitalize;
-}
-
-
-#multi-due-term {
-    font-family: "SF Pro Display", sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-    color: var(--Helper-Text-Gray, #8A8A8A);
-    text-transform: capitalize;
-}
-
-
-#multi-due-update {
-    font-family: "SF Pro Display", sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-    color: var(--Helper-Text-Gray, #8A8A8A);
-    text-transform: capitalize;
-}
-
 /* เปลี่ยนสีข้อความของ select เมื่อเลือกแล้ว */
 select.form-select {
     color: var(--Helper-Text-Gray, #8A8A8A);
@@ -145,88 +41,6 @@ select.form-select:focus {
 select.form-select option:disabled {
     color: var(--Helper-Text-Gray, #8A8A8A);
     font-weight: 500;
-}
-
-
-
-@media (max-width: 1935px) and (max-height: 950px) {
-    .contrainer-body {
-        transform: scale(0.95);
-        /* ลดขนาดลงเป็น 75% */
-        transform-origin: top left;
-        width: calc(100% / 0.95);
-        height: calc(100% / 0.95);
-        /* overflow: hidden; */
-    }
-
-    .contrainer-body-detail {
-        transform: scale(0.99);
-        transform-origin: top left;
-        width: calc(100% / 0.99);
-        height: calc(100% / 0.99);
-        /* overflow: hidden; */
-    }
-}
-
-
-@media (max-width: 1735px) and (max-height: 950px) {
-    .contrainer-body {
-        transform: scale(0.85);
-        /* ลดขนาดลงเป็น 75% */
-        transform-origin: top left;
-        width: calc(100% / 0.85);
-        height: calc(100% / 0.85);
-        /* overflow: hidden; */
-    }
-
-    .contrainer-body-detail {
-        transform: scale(0.95);
-        /* ลดขนาดลงเป็น 75% */
-        transform-origin: top left;
-        width: calc(100% / 0.95);
-        height: calc(100% / 0.95);
-        /* overflow: hidden; */
-    }
-}
-
-@media (max-width: 1535px) and (max-height: 950px) {
-    .contrainer-body {
-        transform: scale(0.75);
-        /* ลดขนาดลงเป็น 75% */
-        transform-origin: top left;
-        width: calc(100% / 0.75);
-        height: calc(100% / 0.75);
-        /* overflow: hidden; */
-    }
-
-
-    .contrainer-body-detail {
-        transform: scale(0.75);
-        transform-origin: top left;
-        width: calc(100% / 0.75);
-        height: calc(100% / 0.75);
-        /* overflow: hidden; */
-    }
-}
-
-@media (max-width: 1335px) and (max-height: 750px) {
-    .contrainer-body {
-        transform: scale(0.65);
-        /* ลดขนาดลงเป็น 64% */
-        transform-origin: top left;
-        width: calc(100% / 0.65);
-        height: calc(100% / 0.65);
-        /* overflow: hidden; */
-    }
-
-    .contrainer-body-detail {
-        transform: scale(0.65);
-        /* ลดขนาดลงเป็น 64% */
-        transform-origin: top left;
-        width: calc(100% / 0.65);
-        height: calc(100% / 0.65);
-        /* overflow: hidden; */
-    }
 }
 </style>
 
@@ -810,6 +624,14 @@ select.form-select option:disabled {
 $(document).ready(function() {
 
     var statusFrom = '<?= $statusfrom ?>';
+
+
+
+    if (statusFrom == 'update') {
+        // เรียกฟังก์ชัน companyMultiBrachKfi() เมื่อสถานะเป็น update
+        companyMultiBrachKfi();
+    }
+
     // คำนวณปีปัจจุบัน
     const currentYear = new Date().getFullYear();
 
@@ -851,11 +673,6 @@ $(document).ready(function() {
     });
 
 
-
-    if (statusFrom == 'update') {
-        // เรียกฟังก์ชัน companyMultiBrachKfi() เมื่อสถานะเป็น update
-        companyMultiBrachKfi();
-    }
 
     // Toggle multi-department dropdown visibility
     $("#multi-department").on("click", function(e) {
@@ -958,47 +775,5 @@ $(document).ready(function() {
 
     $('[data-toggle="tooltip"]').tooltip(); // เปิดใช้งาน Tooltip
 
-});
-
-
-document.querySelector('.btn-create-update').addEventListener('click', function(event) {
-    event.preventDefault();
-
-    var form = document.getElementById('kfiForm');
-    var formData = new FormData(form);
-
-    var statusFrom = '<?= $statusfrom ?>';
-
-    var url = (statusFrom == 'update') ?
-        urlBase + 'kfi/management/save-update-kfi' :
-        urlBase + 'kfi/management/create-kfi';
-
-
-    fetch(url, {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json()) // แปลง response เป็น JSON
-        .then(data => {
-            if (data.error) {
-                alert(JSON.stringify(data.error, null, 2));
-                // alert('เกิดข้อผิดพลาดในการส่งข้อมูล');
-            } else {
-                // ถ้า message เป็น true ให้กลับไปหน้าก่อนหน้า
-                if (data.message == true) {
-                    window.location.href = document.referrer; // หรือใช้ URL ที่ต้องการ
-                    // alert('สำเร็จ');
-                }
-
-                if (data.message == false) {
-                    // alert(data.error);
-                    alert(JSON.stringify(data.error, null, 2));
-                }
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('เกิดข้อผิดพลาดในการส่งข้อมูล');
-        });
 });
 </script>
