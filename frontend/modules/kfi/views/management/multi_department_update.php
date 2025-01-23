@@ -31,7 +31,8 @@ if (isset($d) && count($d) > 0) {
 			?>
 <div class="col-12 multi-select pl-30 pt-5 pb-5">
     <input type="checkbox" <?= $check ?> id='multi-check-<?= $branchId ?>-update' name="department[]"
-        class="checkbox-md mr-5 multi-check-department-update" value="<?= $departmentId ?>">
+        class="checkbox-md mr-5 multi-check-department-update" value="<?= $departmentId ?>"
+        onchange="javascript:departmentMultiTeamUpdateKfi(<?= $branchId ?>)">
     <?= $departmentName ?>
 </div>
 <?php

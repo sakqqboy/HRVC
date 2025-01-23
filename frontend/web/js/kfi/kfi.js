@@ -132,34 +132,47 @@ function branchDepartmentKfi() {
         $("#department-create-kfi").html('<option value="all"> All</option>');
     }
 }
+
 function selectUnit(currentUnit) {
     var previous = $("#currentUnit").val();
+
     if (previous != '') {
         $("#previousUnit").val(previous);
-        $("#unit-" + previous).css("background-color", "white");
-        $("#unit-" + previous).css("color", "#6E6E6E");
-        $("#unit-" + previous).css("border-bottom", "3px solid #94989C");
+        $("#unit-" + previous).removeClass("unit-active").addClass("unit-inactive");
     }
 
     $("#currentUnit").val(currentUnit);
-    $("#unit-" + currentUnit).css("background-color", "#D7EBFF");
-    $("#unit-" + currentUnit).css("color", "#30313D");
-    $("#unit-" + currentUnit).css("border-bottom", "3px solid #2580D3");
+    $("#unit-" + currentUnit).removeClass("unit-inactive").addClass("unit-active");
+}
 
-}
-function selectUnitUpdate(currentUnit) {
-    var previous = $(".currentUnit").val();
-    if (previous != '') {
-        $(".previousUnit").val(previous);
-        $(".unit-" + previous).css("background-color", "white");
-        $(".unit-" + previous).css("color", "#6E6E6E");
-        $(".unit-" + previous).css("border-bottom", "3px solid #94989C");
-    }
-    $(".currentUnit").val(currentUnit);
-    $(".unit-" + currentUnit).css("background-color", "#D7EBFF");
-    $(".unit-" + currentUnit).css("color", "#30313D");
-    $(".unit-" + currentUnit).css("border-bottom", "3px solid #2580D3");
-}
+// function selectUnit(currentUnit) {
+//     var previous = $("#currentUnit").val();
+//     if (previous != '') {
+//         $("#previousUnit").val(previous);
+//         $("#unit-" + previous).css("background-color", "white");
+//         $("#unit-" + previous).css("color", "#6E6E6E");
+//         $("#unit-" + previous).css("border-bottom", "3px solid #94989C");
+//     }
+
+//     $("#currentUnit").val(currentUnit);
+//     $("#unit-" + currentUnit).css("background-color", "#D7EBFF");
+//     $("#unit-" + currentUnit).css("color", "#30313D");
+//     $("#unit-" + currentUnit).css("border-bottom", "3px solid #2580D3");
+
+// }
+// function selectUnitUpdate(currentUnit) {
+//     var previous = $(".currentUnit").val();
+//     if (previous != '') {
+//         $(".previousUnit").val(previous);
+//         $(".unit-" + previous).css("background-color", "white");
+//         $(".unit-" + previous).css("color", "#6E6E6E");
+//         $(".unit-" + previous).css("border-bottom", "3px solid #94989C");
+//     }
+//     $(".currentUnit").val(currentUnit);
+//     $(".unit-" + currentUnit).css("background-color", "#D7EBFF");
+//     $(".unit-" + currentUnit).css("color", "#30313D");
+//     $(".unit-" + currentUnit).css("border-bottom", "3px solid #2580D3");
+// }
 
 
 // function updateKfi(kfiId) {
@@ -180,6 +193,69 @@ function selectUnitUpdate(currentUnit) {
 //         }
 //     });
 // }
+// ฟังก์ชันสำหรับแสดง/ซ่อนปฏิทิน
+document.getElementById('multi-due-term').addEventListener('click', function () {
+    const calendarPopup = document.getElementById('calendar-due-term');
+    // Toggle แสดง/ซ่อน
+    calendarPopup.style.display = (calendarPopup.style.display === 'none' || calendarPopup
+        .style
+        .display === '') ? 'flex' : 'none';
+});
+
+// ซ่อนปฏิทินเมื่อคลิกภายนอก
+document.addEventListener('click', function (event) {
+    const calendarPopup = document.getElementById('calendar-due-term');
+    const dueTerm = document.getElementById('multi-due-term');
+
+    if (!calendarPopup.contains(event.target) && !dueTerm.contains(event.target)) {
+        calendarPopup.style.display = 'none';
+    }
+});
+
+// ฟังก์ชันแสดง/ซ่อนปฏิทิน
+document.getElementById('multi-due-update').addEventListener('click', function () {
+    const calendarPopup = document.getElementById('calendar-due-update');
+    calendarPopup.style.display = (calendarPopup.style.display === 'none' || calendarPopup
+        .style
+        .display === '') ?
+        'flex' :
+        'none';
+});
+
+// ซ่อนปฏิทินเมื่อคลิกภายนอก
+document.addEventListener('click', function (event) {
+    const calendarPopup = document.getElementById('calendar-due-update');
+    const dueUpdate = document.getElementById('multi-due-update');
+    if (!calendarPopup.contains(event.target) && !dueUpdate.contains(event.target)) {
+        calendarPopup.style.display = 'none';
+    }
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    // คำนวณปีปัจจุบัน
+    const currentYear = new Date().getFullYear();
+
+    // คำนวณช่วงปี
+    const startYear = currentYear - 1; // ปีเริ่มต้น
+    const endYear = startYear + 10; // ปีสิ้นสุด
+
+    // เลือก <select> โดย id
+    const yearSelect = document.getElementById('yearSelect');
+
+    // ตรวจสอบว่า element ถูกพบหรือไม่
+    if (yearSelect) {
+        // สร้างตัวเลือกปี
+        for (let year = startYear; year <= endYear; year++) {
+            const option = document.createElement('option');
+            option.value = year;
+            option.textContent = year;
+            yearSelect.appendChild(option);
+        }
+    } else {
+        console.error("Element with id 'yearSelect' not found.");
+    }
+});
 
 
 function openDatePicker() {
@@ -358,36 +434,61 @@ function updateIcon(input) {
     }
 }
 
+$("#multi-branch").on("click", function (e) {
+    var statusform = $("#acType").val();
+    if (statusform == "update") {
+        $("#show-multi-branch-update").toggle();
+    } else {
+        $("#show-multi-branch").toggle();
+    }
+    $(".toggle-icon-branch").toggleClass("fa-angle-down fa-angle-up");
+
+    // e.stopPropagation();
+});
+
+$("#multi-department").on("click", function (e) {
+    var statusform = $("#acType").val();
+    if (statusform == "update") {
+        $("#show-multi-department-update").toggle();
+    } else {
+        $("#show-multi-department").toggle();
+    }
+    $(".toggle-icon-branch").toggleClass("fa-angle-down fa-angle-up");
+
+    // e.stopPropagation();
+});
 
 
+function branchMultiDepartmentUpdateKfi() {
+    var multiBranch = [];
+    $("#multi-check-update:checked").each(function () {
+        multiBranch.push($(this).val());
+        // i++;
+    });
+    // $("#multi-check:checked").each(function () {
+    // 	multiBranch[i] = $(this).val();
+    // 	i++;
+    // });
+    // updateSelectedCount();
+    // ทำการเรียก AJAX หรือการกระทำเพิ่มเติมตามที่ต้องการ
+    var url = $url + 'kfi/management/branch-multi-department';
+    var acType = $("#acType").val();
+    var kfiId = $("#kfiId").val();
+    // alert(multiBranch);
 
-// function branchMultiDepartment() {
-//     var multiBranch = [];
-//     $(".branch-checkbox:checked").each(function () {
-//         multiBranch.push($(this).val());
-//     });
-//     // alert(0);
-//     // updateSelectedCount();
-//     // ทำการเรียก AJAX หรือการกระทำเพิ่มเติมตามที่ต้องการ
-//     var url = $url + 'kfi/management/branch-multi-department';
-//     var acType = $("#acType").val();
-//     var kfiId = $("#kfiId").val();
-//     $.ajax({
-//         type: "POST",
-//         dataType: 'json',
-//         url: url,
-//         data: { multiBranch: multiBranch, acType: acType, kfiId: kfiId },
-//         success: function (data) {
-//             if (data.status) {
-//                 // alert(1);
-//                 $("#show-multi-department-update").html(data.textDepartment);
-//             } else {
-//                 // alert(2);
-//                 $("#show-multi-department-update").html('');
-//             }
-//         }
-//     });
-// }
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { multiBranch: multiBranch, acType: acType, kfiId: kfiId },
+        success: function (data) {
+            if (data.status) {
+                // alert(1);
+                $("#show-multi-department-update").html(data.textDepartment);
+            }
+        }
+    });
+}
 
 function updateSelectedCount() {
     var selectedCount = $(".branch-checkbox:checked").length;  // นับ checkbox ที่ถูกเลือก

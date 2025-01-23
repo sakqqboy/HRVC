@@ -15,7 +15,7 @@ if (isset($branches) && count($branches) > 0) { ?>
 	?>
 <div class="col-12 multi-select pl-30 pt-5 pb-5">
     <input type="checkbox" id='multi-check' name="branch[<?= $branch['branchId'] ?>]" id=""
-        class="checkbox-md mr-5 multiCheck-<?= $branch['branchId'] ?>" value="<?= $branch['branchId'] ?>" required
+        class="checkbox-md mr-5 multiCheck-<?= $branch['branchId'] ?>" value="<?= $branch['branchId'] ?>"
         onchange="javascript:branchMultiDepartment()">
     <?= $branch["branchName"] ?>
 </div>

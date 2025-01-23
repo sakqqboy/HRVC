@@ -25,7 +25,7 @@ if (isset($d) && count($d) > 0) {
 			if ($haveTeam == 1) {
 			?>
 <div class="col-12 multi-select pl-30 pt-5 pb-5">
-    <input type="checkbox" id='multi-check-<?= $branchId ?>' name="department[]" required
+    <input type="checkbox" id='multi-check-<?= $branchId ?>' name="department[]"
         class="checkbox-md mr-5 multi-check-department multiDepartment-<?= $departmentId ?>"
         value="<?= $departmentId ?>" onchange="javascript:departmentMultiTeam(<?= $branchId ?>)">
     <?= $departmentName ?>
@@ -35,3 +35,5 @@ if (isset($d) && count($d) > 0) {
 		endforeach;
 	endforeach;
 }
+
+?>

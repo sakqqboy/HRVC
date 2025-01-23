@@ -1,7 +1,7 @@
 <?php
 use yii\bootstrap5\ActiveForm;
 if($statusform == 'update'){
-    $parturl = 'kfi/management/update-kfi';
+    $parturl = 'kfi/management/save-update-kfi';
 }else{
     $parturl = 'kfi/management/create-kfi';
 }
@@ -13,6 +13,15 @@ $form = ActiveForm::begin([
     ],
     'action' => Yii::$app->homeUrl . $parturl
 ]);
+$unitId = 0;
+if (isset($data['unitId']) && $data['unitId'] == 2) {
+    $unitId = $data['unitId'];
+    // ทำสิ่งที่ต้องการเมื่อ unitId มีค่าเป็น 2
+}
+$quantRatio = $data['quantRatio'] ?? '';
+$selectedCode = $data['code'] ?? '';
+$selectedAmountType = $data['amountType'] ?? '';
+
 ?>
 
 <style>
@@ -198,21 +207,22 @@ select.form-select option:disabled {
                                     title="Select the relevant branches where this indicator will be monitored. You can choose multiple branches to track performance across different locations."
                                     alt="Help Icon">
                             </label>
-
-                            <div class="form-control" id="multi-branch" style="width: 426px;">
+                            <div class="form-control" id="multi-branch" style="width: 496px;">
                                 <span id="multi-branch-text"><?= Yii::t('app', 'Select Branches') ?></span>
-                                <?php if($statusform =='update'){
-                                        echo $kfiBranchText ;
-                                        }else { ?>
-                                <div class="col-12" <?php if($statusform == 'update'): ?> id="show-multi-branch-update"
-                                    <?php else: ?> id="show-multi-branch" <?php endif; ?>
-                                    style="position: absolute; top: 100%; left: 0; width: 100%; z-index: 999; background-color: white; border: 1px solid #ced4da; padding: 10px; display: none;">
-                                </div>
-                                <?php } ?>
-                                <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
+                                <i class="toggle-icon-branch fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
                             </div>
 
+                            <div class="col-12" <?php if($statusform == 'update'): ?> id="show-multi-branch-update"
+                                <?php else: ?> id="show-multi-branch" <?php endif; ?> style="position: absolute; top: <?= ($statusform == 'create') ? '60%' : '60%'; ?>; 
+                                    left: 0; width: 100%; z-index: 999; background-color: white; 
+                                    border: 1px solid #ced4da; padding: 10px; display: none;">
+                                <?php if($statusform == 'create'): ?>
+                                <!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
+                                <?php else: ?>
+                                <?= $kfiBranchText; ?>
+                                <?php endif; ?>
 
+                            </div>
                             <div>
                                 <div class="circle-container pl-15" id="kfi-branches" data-type="branch">
                                     <div class="cycle-current-gray">
@@ -246,11 +256,19 @@ select.form-select option:disabled {
                         </label>
                         <div class="form-control" id="multi-department" style="width: 100%">
                             <span id="multi-department-text"><?= Yii::t('app', 'Select Department') ?></span>
-                            <div class="col-12" id="show-multi-department"
-                                style="position: absolute; top: 100%; left: 0; width: 100%; z-index: 999; background-color: white; border: 1px solid #ced4da; padding: 10px; display: none;">
-                            </div>
-                            <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
+                            <i class="toggle-icon-department fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
                         </div>
+
+                        <div class="col-12" <?php if($statusform == 'update'): ?> id="show-multi-department-update"
+                            <?php else: ?> id="show-multi-department" <?php endif; ?> style="position: absolute; top: 60%; left: 0; width: 100%; z-index: 999; background-color: white; 
+                            border: 1px solid #ced4da; padding: 10px; display: none;">
+                            <?php if($statusform == 'create'): ?>
+                            <!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
+                            <?php else: ?>
+                            <?= $kfiDepartmentText; ?>
+                            <?php endif; ?>
+                        </div>
+
                         <div>
                             <div class="circle-container pl-15" id="kfi-departments" data-type="department">
                                 <div class="cycle-current-gray">
@@ -282,34 +300,25 @@ select.form-select option:disabled {
                                 title="Select how frequently this indicator should be updated: Monthly, Quarterly, Half Yearly, or Yearly. This determines the reporting cycle."
                                 alt="Help Icon">
                         </label>
-                        <div class="btn-group  col-12" role="group" aria-label="Basic outlined example">
+                        <div class="btn-group col-12" role="group" aria-label="Basic outlined example">
                             <?php
-								if (isset($units) && count($units) > 0) {
-									$i = 1;
-									foreach ($units as $unit) :
-										$style = "";
-										$default = "";
-										if ($i >= 2) {
-											$style = "background-color: rgb(255, 255, 255);  color: #6E6E6E; border-bottom: 3px solid #94989C;";
-										}
-                                        if ($i >= 4) {
-											$style = "background-color: rgb(255, 255, 255); border-radius:0 5px 5px 0; color: #6E6E6E; border-bottom: 3px solid #94989C;";
-										}
-										if ($i == 1) {
-											$style = 'background-color: rgb(255, 255, 255);  color: #6E6E6E;  border-bottom: 3px solid #94989C;';
-										}
-								?>
-                            <button type="button" id="unit-<?= $unit['unitId'] ?>" class="btn col-3  font-size-12 "
-                                onclick="javascript:selectUnit(<?= $unit['unitId'] ?>)" style="<?= $style ?>">
+                                if (isset($units) && count($units) > 0) {
+                                    $i = 1;
+                                    foreach ($units as $unit) :
+                                        $activeClass = ($unitId == $unit['unitId']) ? 'unit-active' : 'unit-inactive';
+                                ?>
+                            <button type="button" id="unit-<?= $unit['unitId'] ?>"
+                                class="btn col-3 font-size-12 <?= $activeClass ?>"
+                                onclick="selectUnit(<?= $unit['unitId'] ?>)">
                                 <?= Yii::t('app', $unit["unitName"]) ?>
                             </button>
                             <?php
-										$i++;
-									endforeach;
-								}
-								?>
-                            <input type="hidden" value="1" id="currentUnit" name="unit" required>
-                            <input type="hidden" value="1" id="previousUnit" required>
+                                        $i++;
+                                    endforeach;
+                                }
+                                ?>
+                            <input type="hidden" value="<?= $unitId ?>" id="currentUnit" name="unit" required>
+                            <input type="hidden" value="<?= $unitId ?>" id="previousUnit" required>
                         </div>
                     </div>
 
@@ -438,7 +447,7 @@ select.form-select option:disabled {
                         </div>
                     </div>
 
-                    <div class=" form-group mt-37"
+                    <div class="form-group mt-37"
                         style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                         <label class="text-manage-create" for="name">
                             <span class="text-danger">* </span>
@@ -448,13 +457,15 @@ select.form-select option:disabled {
                                 alt="Help Icon">
                         </label>
                         <select class="form-select" id="quantRatio-create" name="quanRatio" required>
-                            <!-- <option value=""><?= Yii::t('app', 'Quantity') ?> <?= Yii::t('app', 'or') ?>
-                                    <?= Yii::t('app', 'Quality') ?></option> -->
                             <option value=""><?= Yii::t('app', 'Select the Measurement Unit') ?></option>
-                            <option value="1"><?= Yii::t('app', 'Quantity') ?></option>
-                            <option value="2"><?= Yii::t('app', 'Quality') ?></option>
+                            <option value="1" <?= ($quantRatio == 1) ? 'selected' : '' ?>>
+                                <?= Yii::t('app', 'Quantity') ?>
+                            </option>
+                            <option value="2" <?= ($quantRatio == 2) ? 'selected' : '' ?>>
+                                <?= Yii::t('app', 'Quality') ?>
+                            </option>
                         </select>
-                        <input type="hidden" name="kfiId" id="kfiId" value="">
+                        <input type="hidden" name="kfiId" id="kfiId" value="<?= isset($kfiId) ? $kfiId : '' ?>">
                     </div>
 
                     <div class="form-group mt-37" style="display: flex; gap: 14px; flex-wrap: wrap;">
@@ -468,11 +479,10 @@ select.form-select option:disabled {
                                     alt="Help Icon">
                             </label>
                             <select class="form-select" id="amountType-create" name="amountType" required>
-                                <!-- <option value="">% <?= Yii::t('app', 'or') ?> <?= Yii::t('app', 'Number') ?>
-                                    </option> -->
                                 <option value="">Select</option>
-                                <option value="1">%</option>
-                                <option value="2"><?= Yii::t('app', 'Number') ?></option>
+                                <option value="1" <?= ($selectedAmountType == '1') ? 'selected' : '' ?>>%</option>
+                                <option value="2" <?= ($selectedAmountType == '2') ? 'selected' : '' ?>>
+                                    <?= Yii::t('app', 'Number') ?></option>
                             </select>
                         </div>
 
@@ -487,13 +497,13 @@ select.form-select option:disabled {
                             </label>
                             <select class="form-select" id="code-create" name="code" required>
                                 <option value="">Select</option>
-                                <option value="<">
+                                <option value="<" <?= ($selectedCode == '<') ? 'selected' : '' ?>>
                                     &nbsp;&nbsp;<?= '<' ?>&nbsp;&nbsp;<?= Yii::t('app', 'Result more than target') ?>
                                 </option>
-                                <option value="=">
+                                <option value="=" <?= ($selectedCode == '=') ? 'selected' : '' ?>>
                                     &nbsp;&nbsp;=&nbsp;&nbsp;<?= Yii::t('app', 'Result equal target') ?>
                                 </option>
-                                <option value=">">
+                                <option value=">" <?= ($selectedCode == '>') ? 'selected' : '' ?>>
                                     &nbsp;&nbsp;>&nbsp;&nbsp;<?= Yii::t('app', 'Result less than target') ?>
                                 </option>
                             </select>
@@ -516,8 +526,9 @@ select.form-select option:disabled {
                                 <img src="/HRVC/frontend/web/image/target-blue.svg" alt="LinkedIn"
                                     style="width: 30px; height: 30px;">
                             </span>
-                            <input type="number" class="form-control" name="amount" step="any"
+                            <input type="number" class="form-control text-end" name="amount" step="any"
                                 placeholder="Enter Target Amount"
+                                value="<?= isset($data['targetAmount']) ? $data['targetAmount'] : '' ?>"
                                 style="border-left: none; font-size: 22px; font-style: normal; font-weight: 600;"
                                 required>
                         </div>
@@ -546,6 +557,7 @@ select.form-select option:disabled {
                                     alt="LinkedIn" style="width: 30px; height: 30px;">
                             </span>
                             <input type="number" class="form-control text-end" name="result" id="result-update"
+                                value="<?= isset($data['result']) ? $data['result'] : '' ?>"
                                 style="border-left: none; font-size: 22px; font-style: normal; font-weight: 600;"
                                 required oninput="updateIcon(this);">
 
@@ -584,7 +596,8 @@ select.form-select option:disabled {
                                     title="This is the  Details description for the icon" alt="Help Icon">
                             </div>
                         </label>
-                        <textarea class="form-control" name="detail" style="height: 165px;" rows="4"></textarea>
+                        <textarea class="form-control" name="detail" style="height: 165px;"
+                            rows="4"><?= isset($data['detail']) ? $data['detail'] : '' ?></textarea>
                     </div>
 
                     <div class="form-group mt-42"
@@ -651,13 +664,13 @@ select.form-select option:disabled {
 <?php if($statusform == 'update'){
     ?>
 <input type="hidden" value="update" id="acType">
-<?
+<?php
 } else {
 ?>
 <input type="hidden" value="create" id="acType">
-<? } ?>
+<?php } ?>
 <?php ActiveForm::end(); ?>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 
 <script>
 $(document).ready(function() {
@@ -672,104 +685,15 @@ $(document).ready(function() {
         // เรียกใช้งานฟังก์ชันในไฟล์ .js
         // companyMultiBrachKfi();
     }
-    // คำนวณปีปัจจุบัน
-    const currentYear = new Date().getFullYear();
 
-    // คำนวณช่วงปี
-    const startYear = currentYear - 1; // ปีเริ่มต้น
-    const endYear = startYear + 10; // ปีสิ้นสุด
-
-    // เลือก <select> โดย id
-    const yearSelect = document.getElementById('yearSelect');
-
-    // สร้างตัวเลือกปี
-    for (let year = startYear; year <= endYear; year++) {
-        const option = document.createElement('option');
-        option.value = year;
-        option.textContent = year;
-        yearSelect.appendChild(option);
-    }
-
-    // Toggle multi-branch dropdown visibility
-    $("#multi-branch").on("click", function(e) {
-        var targetDropdown = (statusform == 'update') ? "#show-multi-branch-update" :
-            "#show-multi-branch";
-        $(targetDropdown).toggle();
-        $(".toggle-icon").toggleClass("fa-angle-down fa-angle-up"); // Change icon
-        e.stopPropagation();
-    });
-
-    // Prevent hiding dropdown when clicking inside it
-    $("#show-multi-branch, #show-multi-branch-update").on("click", function(e) {
-        e.stopPropagation();
-    });
-
-    // Hide dropdown when clicking outside
-    $(document).on("click", function() {
-        var targetDropdown = (statusform == 'update') ? "#show-multi-branch-update" :
-            "#show-multi-branch";
-        $(targetDropdown).hide();
-        $(".toggle-icon").addClass("fa-angle-down").removeClass("fa-angle-up");
-    });
-
-
-
-    // Toggle multi-department dropdown visibility
-    $("#multi-department").on("click", function(e) {
-        $("#show-multi-department").toggle();
-        $(".toggle-icon").toggleClass("fa-angle-down fa-angle-up"); // Change icon
-        e.stopPropagation();
-    });
-
-    // Prevent hiding dropdown when clicking inside it
-    $("#show-multi-department").on("click", function(e) {
-        e.stopPropagation();
-    });
-
-    // Hide dropdown when clicking outside
-    $(document).on("click", function() {
-        $("#show-multi-department").hide();
-        $(".toggle-icon").addClass("fa-angle-down").removeClass("fa-angle-up");
-    });
-
-
-    // ฟังก์ชันสำหรับแสดง/ซ่อนปฏิทิน
-    document.getElementById('multi-due-term').addEventListener('click', function() {
-        const calendarPopup = document.getElementById('calendar-due-term');
-        // Toggle แสดง/ซ่อน
-        calendarPopup.style.display = (calendarPopup.style.display === 'none' || calendarPopup
-            .style
-            .display === '') ? 'flex' : 'none';
-    });
-
-    // ซ่อนปฏิทินเมื่อคลิกภายนอก
-    document.addEventListener('click', function(event) {
-        const calendarPopup = document.getElementById('calendar-due-term');
-        const dueTerm = document.getElementById('multi-due-term');
-
-        if (!calendarPopup.contains(event.target) && !dueTerm.contains(event.target)) {
-            calendarPopup.style.display = 'none';
-        }
-    });
-
-    // ฟังก์ชันแสดง/ซ่อนปฏิทิน
-    document.getElementById('multi-due-update').addEventListener('click', function() {
-        const calendarPopup = document.getElementById('calendar-due-update');
-        calendarPopup.style.display = (calendarPopup.style.display === 'none' || calendarPopup
-                .style
-                .display === '') ?
-            'flex' :
-            'none';
-    });
-
-    // ซ่อนปฏิทินเมื่อคลิกภายนอก
-    document.addEventListener('click', function(event) {
-        const calendarPopup = document.getElementById('calendar-due-update');
-        const dueUpdate = document.getElementById('multi-due-update');
-        if (!calendarPopup.contains(event.target) && !dueUpdate.contains(event.target)) {
-            calendarPopup.style.display = 'none';
-        }
-    });
+    // // Prevent hiding dropdown when clicking inside it
+    // $("#show-multi-branch, #show-multi-branch-update").on("click", function(e) {
+    //     e.stopPropagation();
+    // });
+    // // Prevent hiding dropdown when clicking inside it
+    // $("#show-multi-department").on("click", function(e) {
+    //     e.stopPropagation();
+    // });
 
 
     $('#companyId').on('change', function() {

@@ -28,4 +28,5 @@ if (isset($branches) && count($branches) > 0) { ?>
 		}
 	endforeach;
 }
+
 ?>

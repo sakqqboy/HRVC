@@ -199,25 +199,25 @@ class ManagementController extends Controller
 			// if (Yii::$app->request->isPost) {
 			// 	Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 				
-				$data = [
-					'kfiName' => $_POST["kfiName"],  
-					'company' => $_POST["company"],
-					'branch' => $_POST["branch"],
-					'unit' => $_POST["unit"],
-					'amount' => $_POST["amount"],
-					'month' => $_POST["month"],  
-					'year' => $_POST["year"],
-					'detail' => $_POST["detail"],
-					'amountType' => $_POST["amountType"],
-					'code' => $_POST["code"],
-					'quanRatio' => $_POST["quanRatio"],  
-					'nextCheckDate' => $_POST["nextCheckDate"],
-					'department' => $_POST["department"],
-					'status' => $_POST["status"],
-					'result' => $_POST["result"],
-				];
+				// $data = [
+				// 	'kfiName' => $_POST["kfiName"],  
+				// 	'company' => $_POST["company"],
+				// 	'branch' => $_POST["branch"],
+				// 	'unit' => $_POST["unit"],
+				// 	'amount' => $_POST["amount"],
+				// 	'month' => $_POST["month"],  
+				// 	'year' => $_POST["year"],
+				// 	'detail' => $_POST["detail"],
+				// 	'amountType' => $_POST["amountType"],
+				// 	'code' => $_POST["code"],
+				// 	'quanRatio' => $_POST["quanRatio"],  
+				// 	'nextCheckDate' => $_POST["nextCheckDate"],
+				// 	'department' => $_POST["department"],
+				// 	'status' => $_POST["status"],
+				// 	'result' => $_POST["result"],
+				// ];
 
-				 throw new Exception(print_r($data,true));
+				//  throw new Exception(print_r($data,true));
 				
 				$kfi = new Kfi();
 				$kfi->kfiName = $_POST["kfiName"];
@@ -273,9 +273,9 @@ class ManagementController extends Controller
 						
 						}
 						
-						return [
-							'message' => true
-						];
+						// return [
+						// 	'message' => true
+						// ];
 						
 					} else {
 						$errors = $kfiHistory->getErrors();
@@ -288,7 +288,7 @@ class ManagementController extends Controller
 						// 	'message' => 'ค่าที่ได้รับจากฟอร์ม2',
 						// 	'data' => $data
 						// ];	
-					// return $this->redirect(Yii::$app->request->referrer);
+					return $this->redirect(Yii::$app->request->referrer);
 					// 	//return $this->redirect('index');
 				} else {
 					$errors = $kfi->getErrors();
@@ -334,6 +334,26 @@ class ManagementController extends Controller
 	}
 	public function actionSaveUpdateKfi()
 	{
+		$data = [
+					'kfiName' => $_POST["kfiName"],  
+					'company' => $_POST["company"],
+					'branch' => $_POST["branch"],
+					'unit' => $_POST["unit"],
+					'amount' => $_POST["amount"],
+					'month' => $_POST["month"],  
+					'year' => $_POST["year"],
+					'detail' => $_POST["detail"],
+					'amountType' => $_POST["amountType"],
+					'code' => $_POST["code"],
+					'quanRatio' => $_POST["quanRatio"],  
+					'nextCheckDate' => $_POST["nextCheckDate"],
+					'department' => $_POST["department"],
+					'status' => $_POST["status"],
+					'result' => $_POST["result"],
+				];
+
+				 throw new Exception(message: print_r($data,true));
+
 		$isManager = UserRole::isManager();
 		if (isset($_POST["kfiId"])) {
 			//throw new Exception($_POST["kfiId"]);
@@ -433,7 +453,7 @@ class ManagementController extends Controller
 		]);
 	
 		$branch["textBranch"] = $kfiBranchText;
-	
+		// throw new Exception(print_r($kfiBranchText,true));
 		// ดึงข้อมูลแผนก
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-department?id=' . $kfiId);
 		$kfiDepartment = curl_exec($api);
@@ -469,6 +489,7 @@ class ManagementController extends Controller
 			"companies" => $companies,
 			"kfiBranchText" => $kfiBranchText,
 			"kfiDepartmentText" => $kfiDepartmentText,
+			"kfiId" => $kfiId,
 			"statusform" =>  "update"
 		]);
 	} else {

@@ -1960,7 +1960,7 @@ input:checked+.slider:before {
 .contrainer-body-detail {
 	border-radius: 5px;
 	padding: 30px;
-	width: 1480px;
+	width: 1680px;
 	height: 678px;
 	background-color: #F4F6F9;
 	display: flex;
@@ -1968,6 +1968,29 @@ input:checked+.slider:before {
 	gap: 70px;
 }
 
+.unit-active {
+	background-color: #D7EBFF;
+	color: #30313D;
+	border-bottom: 3px solid #2580D3;
+}
+
+.unit-active:hover {
+	background-color: #D7EBFF !important;
+	color: #30313D !important;
+	border-bottom: 3px solid #2580D3 !important;
+}
+
+.unit-inactive {
+	background-color: rgb(255, 255, 255);
+	color: #6E6E6E;
+	border-bottom: 3px solid #94989C;
+}
+
+.unit-inactive:hover {
+	background-color: rgb(255, 255, 255);
+	color: #6E6E6E;
+	border-bottom: 3px solid #94989C;
+}
 
 .caret {
 	display: none;
