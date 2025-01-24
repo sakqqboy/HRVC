@@ -2000,6 +2000,18 @@ input:checked+.slider:before {
 	border: 1px solid #ced4da;
 }
 
+.DueBehind {
+	color: var(--HRVC---Text-Black, #30313D);
+	leading-trim: both;
+	text-edge: cap;
+	font-family: "SF Pro Display";
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 34.199px;
+	text-transform: capitalize;
+}
+
 #calendar-container {
 	position: absolute;
 	top: 50px;

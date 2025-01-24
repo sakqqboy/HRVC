@@ -14,14 +14,19 @@ $form = ActiveForm::begin([
     'action' => Yii::$app->homeUrl . $parturl
 ]);
 $unitId = 0;
-if (isset($data['unitId']) && $data['unitId'] == 2) {
+if (isset($data['unitId']) && $data['unitId'] >= 1) {
     $unitId = $data['unitId'];
     // ทำสิ่งที่ต้องการเมื่อ unitId มีค่าเป็น 2
 }
 $quantRatio = $data['quantRatio'] ?? '';
 $selectedCode = $data['code'] ?? '';
 $selectedAmountType = $data['amountType'] ?? '';
-// echo $statusform;
+
+
+$result = $data['result'] ?? 0;
+$targetAmount = $data['targetAmount'] ?? 0;
+$DueBehind = $targetAmount -  $result;
+// echo $DueBehind;
 ?>
 
 <style>
@@ -123,28 +128,50 @@ select.form-select option:disabled {
                             <?= Yii::t('app', 'Current Achievement Ratio') ?>
                         </text>
                         <text class="current-ratio-data text-end">
-                            <?= Yii::t('app', 'no Data') ?>
+                            <?php 
+                                if ($DueBehind) {
+                                    echo Yii::t('app', 'Due Behind by ') . ' ';
+                                } else {
+                                    echo Yii::t('app', 'no Data');
+                                }
+                            ?>
+                            <span class="DueBehind">
+                                <?= $DueBehind ?>
+                            </span>
                         </text>
                     </div>
                     <div style="width: 10%;">
-                        <svg viewBox="0 0 36 36" class="circular-chart-create">
-                            <path class="circle-bg" d="M18 2.0845
-                                                a 15.9155 15.9155 0 0 1 0 31.831
-                                                a 15.9155 15.9155 0 0 1 0 -31.831" />
-                            <path class="circle" stroke-dasharray="0, 100" d="M18 2.0845
-                                                a 15.9155 15.9155 0 0 1 0 31.831
-                                                a 15.9155 15.9155 0 0 1 0 -31.831" />
-                            <!-- <text> สำหรับการแสดงเปอร์เซ็นต์ -->
-                            <text x="18" y="20.35" text-anchor="middle" dominant-baseline="middle" class="percentage">
-                                0%
+                        <svg viewBox="0 0 36 36" class="circular-chart-create" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Background circle -->
+                            <path class="circle-bg"
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                style="stroke: hsla(217, 100%, 91%, 1); stroke-width: 3;" fill="none" />
+
+
+                            <!-- Foreground circle (progress) -->
+                            <?php 
+                                $percentage = isset($data['ratio']) ? $data['ratio'] : 00;
+                                // $dashArray = ($percentage * 100) / 100; // this will control the progress visually
+                            ?>
+                            <path class="circle"
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                stroke="#4db8ff" stroke-width="3" fill="none"
+                                stroke-dasharray="<?= $percentage ?>, 100" />
+
+                            <!-- Percentage text in the middle -->
+                            <text x="18" y="20.35" text-anchor="middle" dominant-baseline="middle" class="percentage"
+                                style="font-size: 8px; font-weight: bold; fill: #333;">
+                                <?= $percentage ?>%
                             </text>
                         </svg>
+
                     </div>
                     <div style="width: 1px; background-color: #BBCDDE; height: 51px;"></div>
                     <div style="display: flex; align-items: center; gap: 22px;">
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/reward.svg">
+                        <img src="<?= Yii::$app->homeUrl ?><?= isset($data['result']) ? 'image/result-blue.svg' : 'images/icons/Settings/reward.svg'?>"
+                            style="width: 40px; height: 40px;">
                         <text class="pim-total-reward">
-                            000
+                            <?= isset($data['result']) ? $data['result'] : '000' ?>
                         </text>
                     </div>
                 </div>
@@ -316,6 +343,8 @@ select.form-select option:disabled {
                                         $i++;
                                     endforeach;
                                 }
+
+                                // echo  $unitId;
                                 ?>
                             <input type="hidden" value="<?= $unitId ?>" id="currentUnit" name="unit" required>
                             <input type="hidden" value="<?= $unitId ?>" id="previousUnit" required>
@@ -348,8 +377,10 @@ select.form-select option:disabled {
                                     aria-hidden="true"></i>
                             </div>
                             <!-- hidden inputs เพื่อเก็บค่า month และ year -->
-                            <input type="hidden" id="hiddenMonth" name="month">
-                            <input type="hidden" id="hiddenYear" name="year">
+                            <input type="hidden" id="hiddenMonth" name="month"
+                                value="<?= htmlspecialchars($data['month'] ?? '') ?>">
+                            <input type="hidden" id="hiddenYear" name="year"
+                                value="<?= htmlspecialchars($data['year'] ?? '') ?>">
                         </div>
 
                         <!-- Popup for Month/Year Selection -->
@@ -402,8 +433,10 @@ select.form-select option:disabled {
                             </div>
                         </div>
                         <!-- hidden inputs เพื่อเก็บค่า month และ year -->
-                        <input type="hidden" id="fromDate" name="fromDate">
-                        <input type="hidden" id="toDate" name="toDate">
+                        <input type="hidden" id="fromDate" name="fromDate"
+                            value="<?= isset($data['fromDate']) ? $data['fromDate'] : '' ?>">
+                        <input type="hidden" id="toDate" name="toDate"
+                            value="<?= isset($data['toDate']) ? $data['toDate'] : '' ?>">
 
                         <!-- Calendar picker -->
                         <div class="calendar-container" id="calendar-due-term"
@@ -439,7 +472,9 @@ select.form-select option:disabled {
                                 Select the Last Update Date <i class="fa fa-angle-down pull-right mt-5"
                                     aria-hidden="true"></i>
                             </div>
-                            <input type="hidden" id="nextDate" name="nextCheckDate">
+                            <input type="hidden" id="nextDate" name="nextCheckDate"
+                                value="<?= isset($data['nextCheckDate']) ? $data['nextCheckDate'] : '' ?>">
+                            <!-- <input type="hidden" id="nextDate" name="nextCheckDate"> -->
                         </div>
                         <div id="calendar-due-update"
                             style="position: absolute; margin-top: 75px; padding: 10px; border: 1px solid rgb(221, 221, 221); border-radius: 10px; background: rgb(255, 255, 255); width: 100%; z-index: 1; display: none; justify-content: center; align-items: center;">
@@ -553,15 +588,16 @@ select.form-select option:disabled {
                         <div class="input-group">
                             <span class="input-group-text"
                                 style="background-color:rgb(255, 255, 255); border-right: none; padding: 20px;">
-                                <img id="result-icon" src="<?= Yii::$app->homeUrl ?>image/result-gray.svg"
+                                <img id="result-icon"
+                                    src="<?= Yii::$app->homeUrl ?>image/result-<?= isset($data['result']) ? 'blue' : 'gray' ?>.svg"
                                     alt="LinkedIn" style="width: 30px; height: 30px;">
                             </span>
                             <input type="number" class="form-control text-end" name="result" id="result-update"
                                 value="<?= isset($data['result']) ? $data['result'] : '' ?>"
                                 style="border-left: none; font-size: 22px; font-style: normal; font-weight: 600;"
                                 required oninput="updateIcon(this);">
-
                         </div>
+
 
                         <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
                             <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
@@ -691,10 +727,6 @@ $(document).ready(function() {
             departmentMultiTeamUpdateKfi(branchId);
         });
     }
-});
-
-
-$(document).ready(function() {
 
     // ฟังก์ชันเปลี่ยนสีของ placeholder เมื่อมีการเลือกค่า
     function updatePlaceholderColor(selector) {

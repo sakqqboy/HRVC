@@ -545,6 +545,12 @@ document.addEventListener('click', function (event) {
             }
         }
     });
+    const picker = document.getElementById('monthYearPicker');
+    const trigger = document.getElementById('multi-mount-year');
+
+    if (picker.style.display === 'block' && !picker.contains(event.target) && !trigger.contains(event.target)) {
+        picker.style.display = 'none';
+    }
 });
 
 // เรียกใช้งานฟังก์ชันแสดง/ซ่อนปฏิทิน
@@ -576,6 +582,117 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
         console.error("Element with id 'yearSelect' not found.");
     }
+
+    var month = document.getElementById('hiddenMonth').value;
+    var year = document.getElementById('hiddenYear').value;
+
+    if (month && year) {
+        document.getElementById('multi-mount-year').innerHTML =
+            `${getMonthName(month)}, ${year} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
+
+        // เปลี่ยนสไตล์ข้อความ
+        $("#multi-mount-year").css({
+            "color": "var(--HRVC---Text-Black, #30313D)",
+            "font-family": '"SF Pro Display"',
+            "font-size": "14px",
+            "font-style": "normal",
+            "font-weight": "500",
+            "line-height": "20px"
+        });
+        // เปลี่ยนแปลงสไตล์ของ <span> input-group-text
+        const inputGroupText = document.querySelector('.input-group-text');
+        inputGroupText.style.backgroundColor = '#D7EBFF';
+        inputGroupText.style.border = '0.5px solid #BEDAFF';
+
+        // อัปเดตไอคอนภายใน <span>
+        const images = inputGroupText.querySelectorAll('img');
+        images[0].src = $url + 'image/calendar-blue.svg';
+        images[1].src = $url + 'image/weld.svg';
+        images[2].src = $url + 'image/calendar-blue.svg';
+    }
+
+    const startDate = document.getElementById('fromDate').value;
+    const endDate = document.getElementById('toDate').value;
+
+
+    if (startDate && endDate) {
+        document.getElementById("multi-due-term").innerHTML =
+            `${startDate} - ${endDate} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
+
+        // เปลี่ยนสไตล์ข้อความ
+        $("#multi-due-term").css({
+            "color": "var(--HRVC---Text-Black, #30313D)",
+            "font-family": '"SF Pro Display"',
+            "font-size": "14px",
+            "font-style": "normal",
+            "font-weight": "500",
+            "line-height": "20px"
+        });
+        // อัปเดต hidden inputs
+        document.getElementById('fromDate').value = startDate;
+        document.getElementById('toDate').value = endDate;
+        // เปลี่ยนแปลงสไตล์ของ <span> input-group-text
+        const inputGroupText = document.querySelector('#img-due-term .input-group-text');
+        inputGroupText.style.backgroundColor = '#D7EBFF';
+        inputGroupText.style.border = '0.5px solid #BEDAFF';
+
+        // อัปเดตไอคอนภายใน <span>
+        const images = inputGroupText.querySelectorAll('img');
+        images[0].src = $url + 'image/calendar-blue.svg';
+        images[1].src = $url + 'image/weld.svg';
+        images[2].src = $url + 'image/calendar-blue.svg';
+    }
+    const nextCheckDate = document.getElementById('nextDate').value;  // ดึงค่าจาก input hidden
+
+    if (nextCheckDate) {
+        // อัปเดตข้อความใน div multi-due-update
+        document.getElementById("multi-due-update").innerHTML =
+            `${nextCheckDate} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
+
+        // เปลี่ยนสไตล์ข้อความใน #multi-due-update
+        $("#multi-due-update").css({
+            "color": "var(--HRVC---Text-Black, #30313D)",
+            "font-family": '"SF Pro Display"',
+            "font-size": "14px",
+            "font-style": "normal",
+            "font-weight": "500",
+            "line-height": "20px"
+        });
+
+        // เปลี่ยนแปลงสไตล์ของ <span> input-group-text
+        const inputGroupText = document.querySelector('#img-due-update .input-group-text');
+        inputGroupText.style.backgroundColor = '#D7EBFF';
+        inputGroupText.style.border = '0.5px solid #BEDAFF';
+
+        // อัปเดตไอคอนภายใน <span>
+        const images = inputGroupText.querySelectorAll('img');
+        images[0].src = $url + 'image/calendar-blue.svg';
+        images[1].src = $url + 'image/weld.svg';
+        images[2].src = $url + 'image/calendar-blue.svg';
+    }
+
+    // const result = document.getElementById('result').value;
+    // const icon = document.getElementById('result-icon');
+
+    // if (result) {
+    //     icon.src = "/HRVC/frontend/web/image/result-blue.svg";
+    // } else {
+    //     icon.src = "/HRVC/frontend/web/image/result-gray.svg";
+    // }
+
+    // // ดึงค่า result จาก input
+    // const result = inputElement.value;
+    // // ค้นหาไอคอนที่ต้องการเปลี่ยนแปลง
+    // const icon = document.getElementById('result-icon');
+    // // ตรวจสอบค่าใน input และอัปเดตไอคอน
+    // if (result) {
+    //     // เมื่อมีค่าใน input ให้เปลี่ยนเป็นไอคอนสีฟ้า
+    //     icon.src = "/HRVC/frontend/web/image/result-blue.svg";
+    // } else {
+    //     // เมื่อ input ว่าง ให้เปลี่ยนเป็นไอคอนสีเทา
+    //     icon.src = "/HRVC/frontend/web/image/result-gray.svg";
+    // }
+
 });
 
 
@@ -583,17 +700,6 @@ function openDatePicker() {
     const picker = document.getElementById('monthYearPicker');
     picker.style.display = (picker.style.display === 'none' || picker.style.display === '') ? 'block' : 'none';
 }
-
-
-// ซ่อนปฏิทินเมื่อคลิกภายนอก
-document.addEventListener('click', function (event) {
-    const picker = document.getElementById('monthYearPicker');
-    const trigger = document.getElementById('multi-mount-year');
-
-    if (picker.style.display === 'block' && !picker.contains(event.target) && !trigger.contains(event.target)) {
-        picker.style.display = 'none';
-    }
-});
 
 function closeDatePicker() {
     var month = document.getElementById('monthSelect').value;

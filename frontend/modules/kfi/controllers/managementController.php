@@ -199,23 +199,25 @@ class ManagementController extends Controller
 			// if (Yii::$app->request->isPost) {
 			// 	Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 				
-				// $data = [
-				// 	'kfiName' => $_POST["kfiName"],  
-				// 	'company' => $_POST["company"],
-				// 	'branch' => $_POST["branch"],
-				// 	'unit' => $_POST["unit"],
-				// 	'amount' => $_POST["amount"],
-				// 	'month' => $_POST["month"],  
-				// 	'year' => $_POST["year"],
-				// 	'detail' => $_POST["detail"],
-				// 	'amountType' => $_POST["amountType"],
-				// 	'code' => $_POST["code"],
-				// 	'quanRatio' => $_POST["quanRatio"],  
-				// 	'nextCheckDate' => $_POST["nextCheckDate"],
-				// 	'department' => $_POST["department"],
-				// 	'status' => $_POST["status"],
-				// 	'result' => $_POST["result"],
-				// ];
+				$data = [
+					'kfiName' => $_POST["kfiName"],  
+					'company' => $_POST["company"],
+					'branch' => $_POST["branch"],
+					'unit' => $_POST["unit"],
+					'amount' => $_POST["amount"],
+					'month' => $_POST["month"],  
+					'year' => $_POST["year"],
+					'detail' => $_POST["detail"],
+					'amountType' => $_POST["amountType"],
+					'code' => $_POST["code"],
+					'quanRatio' => $_POST["quanRatio"],  
+					'nextCheckDate' => $_POST["nextCheckDate"],
+					'fromDate' => $_POST["fromDate"],
+					'toDate' => $_POST["toDate"],
+					'department' => $_POST["department"],
+					'status' => $_POST["status"],
+					'result' => $_POST["result"],
+				];
 
 				//  throw new Exception(print_r($data,true));
 				
@@ -259,6 +261,26 @@ class ManagementController extends Controller
 					$kfiHistory->month = $_POST["month"] ?? null;
 					$kfiHistory->year = $_POST["year"] ?? null;
 					$kfiHistory->description = $_POST["detail"] ?? null;
+					if (!empty($_POST["fromDate"])) {
+						$fromDate = DateTime::createFromFormat('d/m/Y', $_POST["fromDate"]);
+						if ($fromDate) {
+							$kfiHistory->fromDate = $fromDate->format('Y-m-d'); // เปลี่ยนรูปแบบเป็น Y-m-d
+						} else {
+							$kfiHistory->fromDate = null;
+						}
+					} else {
+						$kfiHistory->fromDate = null;
+					}
+					if (!empty($_POST["toDate"])) {
+						$toDate = DateTime::createFromFormat('d/m/Y', $_POST["toDate"]);
+						if ($toDate) {
+							$kfiHistory->toDate = $toDate->format('Y-m-d'); // เปลี่ยนรูปแบบเป็น Y-m-d
+						} else {
+							$kfiHistory->toDate = null;
+						}
+					} else {
+						$kfiHistory->toDate = null;
+					}
 					$kfiHistory->createDateTime = new Expression('NOW()');
 					$kfiHistory->updateDateTime = new Expression('NOW()');
 					if ($kfiHistory->validate()) {
@@ -347,12 +369,15 @@ class ManagementController extends Controller
 					'code' => $_POST["code"],
 					'quanRatio' => $_POST["quanRatio"],  
 					'nextCheckDate' => $_POST["nextCheckDate"],
+					'fromDate' => $_POST["fromDate"],
+					'toDate' => $_POST["toDate"],
 					'department' => $_POST["department"],
 					'status' => $_POST["status"],
 					'result' => $_POST["result"],
 				];
 
-				//  throw new Exception(message: print_r($data,true));
+				// throw new Exception(print_r($data,true));
+
 
 		$isManager = UserRole::isManager();
 		if (isset($_POST["kfiId"])) {
@@ -374,8 +399,28 @@ class ManagementController extends Controller
 			$kfiHistory->titleProgress = $_POST["progressTitle"];
 			$kfiHistory->remark = $_POST["progressTitle"];
 			//$kfiHistory->checkPeriodDate = $_POST["periodDate"];
-			$kfiHistory->fromDate = $_POST["fromDate"];
-			$kfiHistory->toDate = $_POST["toDate"];
+			// $kfiHistory->fromDate = $_POST["fromDate"];
+			// $kfiHistory->toDate = $_POST["toDate"];
+			if (!empty($_POST["fromDate"])) {
+				$fromDate = DateTime::createFromFormat('d/m/Y', $_POST["fromDate"]);
+				if ($fromDate) {
+					$kfiHistory->fromDate = $fromDate->format('Y-m-d'); // เปลี่ยนรูปแบบเป็น Y-m-d
+				} else {
+					$kfiHistory->fromDate = null;
+				}
+			} else {
+				$kfiHistory->fromDate = null;
+			}
+			if (!empty($_POST["toDate"])) {
+				$toDate = DateTime::createFromFormat('d/m/Y', $_POST["toDate"]);
+				if ($toDate) {
+					$kfiHistory->toDate = $toDate->format('Y-m-d'); // เปลี่ยนรูปแบบเป็น Y-m-d
+				} else {
+					$kfiHistory->toDate = null;
+				}
+			} else {
+				$kfiHistory->toDate = null;
+			}
 			$kfiHistory->nextCheckDate = $_POST["nextCheckDate"];
 			$kfiHistory->amountType = $_POST["amountType"];
 			$kfiHistory->code = $_POST["code"];
