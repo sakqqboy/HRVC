@@ -283,7 +283,10 @@ class ManagementController extends Controller
 						// 	'message' => 'ค่าที่ได้รับจากฟอร์ม2',
 						// 	'data' => $data
 						// ];	
-					return $this->redirect(Yii::$app->request->referrer);
+					// return $this->redirect(Yii::$app->request->referrer);
+					// return $this->goBack();
+					return $this->redirect(Yii::$app->homeUrl . 'kfi/management/grid');
+
 					// 	//return $this->redirect('index');
 				} else {
 					$errors = $kfi->getErrors();
@@ -349,7 +352,7 @@ class ManagementController extends Controller
 					'result' => $_POST["result"],
 				];
 
-				// throw new Exception(print_r($data,true));
+				throw new Exception(print_r($data,true));
 
 
 		$isManager = UserRole::isManager();
@@ -401,7 +404,20 @@ class ManagementController extends Controller
 			if (isset($_POST["department"]) && count($_POST["department"]) > 0) {
 				$this->saveKfiDepartment($_POST["department"], $_POST["kfiId"]);
 			}
-			return $this->redirect(Yii::$app->request->referrer);
+
+			return $this->redirect(Yii::$app->homeUrl . 'kfi/management/grid');
+
+			// $previousUrl = Yii::$app->request->referrer;  // หรือ $_SERVER['HTTP_REFERER']
+
+			// $session = Yii::$app->session;
+			// // $previousUrls = $session->get('previousUrls', []);
+			// echo '<pre>';
+			// print_r($previousUrl);
+			// echo '</pre>';
+			// exit; 
+			// return $this->redirect($previousUrls[count($previousUrls) - 2]);
+
+			// return $this->redirect(Yii::$app->request->referrer);
 			// return $this->redirect('grid');
 		}
 	}

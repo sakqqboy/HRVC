@@ -797,6 +797,7 @@ function validateForm(event) {
     }
 
     document.getElementById('create-kfi').submit(); // ส่งฟอร์มหากข้อมูลครบถ้วน
+    // alert("0");
     return true;
 }
 
