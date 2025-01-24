@@ -46,9 +46,11 @@ select.form-select {
     color: var(--Helper-Text-Gray, #8A8A8A);
 }
 
+
 /* เมื่อเลือกแล้วให้ข้อความเป็นสี #30313D */
 select.form-select:not([value=""]) {
-    color: var(--HRVC---Text-Black, #8A8A8A);
+    color: <?=($statusform=='update') ? '#30313D': 'var(--HRVC---Text-Black, #8A8A8A)';
+    ?>;
 }
 
 
@@ -727,6 +729,7 @@ $(document).ready(function() {
             departmentMultiTeamUpdateKfi(branchId);
         });
     }
+
 
     // ฟังก์ชันเปลี่ยนสีของ placeholder เมื่อมีการเลือกค่า
     function updatePlaceholderColor(selector) {
