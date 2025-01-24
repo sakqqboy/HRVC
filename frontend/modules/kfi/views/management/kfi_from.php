@@ -1,18 +1,21 @@
 <?php
 use yii\bootstrap5\ActiveForm;
-if($statusform == 'update'){
+if ($statusform == 'update') {
     $parturl = 'kfi/management/save-update-kfi';
-}else{
+} else {
     $parturl = 'kfi/management/create-kfi';
 }
-$form = ActiveForm::begin([
+?>
+
+<?php $form = ActiveForm::begin([
     'id' => 'create-kfi',
     'method' => 'post',
     'options' => [
         'enctype' => 'multipart/form-data',
+        'onsubmit' => 'return validateForm(event)' // เรียกฟังก์ชันตรวจสอบก่อนส่งฟอร์ม
     ],
     'action' => Yii::$app->homeUrl . $parturl
-]);
+]); 
 $unitId = 0;
 if (isset($data['unitId']) && $data['unitId'] >= 1) {
     $unitId = $data['unitId'];
@@ -380,14 +383,14 @@ select.form-select option:disabled {
                             </div>
                             <!-- hidden inputs เพื่อเก็บค่า month และ year -->
                             <input type="hidden" id="hiddenMonth" name="month"
-                                value="<?= htmlspecialchars($data['month'] ?? '') ?>">
+                                value="<?= htmlspecialchars($data['month'] ?? '') ?>" required>
                             <input type="hidden" id="hiddenYear" name="year"
-                                value="<?= htmlspecialchars($data['year'] ?? '') ?>">
+                                value="<?= htmlspecialchars($data['year'] ?? '') ?>" required>
                         </div>
 
                         <!-- Popup for Month/Year Selection -->
                         <div id="monthYearPicker" class="mount-year">
-                            <select id="monthSelect" class="form-select" onchange="closeDatePicker()">
+                            <select id="monthSelect" class="form-select" onchange="closeDatePicker()" required>
                                 <option value="1">January</option>
                                 <option value="2">February</option>
                                 <option value="3">March</option>
@@ -402,7 +405,7 @@ select.form-select option:disabled {
                                 <option value="12">December</option>
                             </select>
                             <select id="yearSelect" class="form-select" style="margin-top: 10px;"
-                                onchange="closeDatePicker()">
+                                onchange="closeDatePicker()" required>
                                 <!-- ปีที่ถูกสร้างจะถูกเพิ่มที่นี่ -->
                             </select>
                         </div>
@@ -436,9 +439,9 @@ select.form-select option:disabled {
                         </div>
                         <!-- hidden inputs เพื่อเก็บค่า month และ year -->
                         <input type="hidden" id="fromDate" name="fromDate"
-                            value="<?= isset($data['fromDate']) ? $data['fromDate'] : '' ?>">
+                            value="<?= isset($data['fromDate']) ? $data['fromDate'] : '' ?>" required>
                         <input type="hidden" id="toDate" name="toDate"
-                            value="<?= isset($data['toDate']) ? $data['toDate'] : '' ?>">
+                            value="<?= isset($data['toDate']) ? $data['toDate'] : '' ?>" required>
 
                         <!-- Calendar picker -->
                         <div class="calendar-container" id="calendar-due-term"

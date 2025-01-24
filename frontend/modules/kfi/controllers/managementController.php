@@ -241,16 +241,7 @@ class ManagementController extends Controller
 					$kfiHistory = new KfiHistory();
 					$kfiHistory->kfiId = $kfiId;
 					$kfiHistory->createrId = Yii::$app->user->id;
-					if (!empty($_POST["nextCheckDate"])) {
-						$date = DateTime::createFromFormat('d/m/Y', $_POST["nextCheckDate"]);
-						if ($date) {
-							$kfiHistory->nextCheckDate = $date->format('Y-m-d');
-						} else {
-							$kfiHistory->nextCheckDate = null; // กรณีรูปแบบวันที่ไม่ถูกต้อง
-						}
-					} else {
-						$kfiHistory->nextCheckDate = null;
-					}
+					$kfiHistory->nextCheckDate = $_POST["nextCheckDate"];
 					$kfiHistory->amountType = $_POST["amountType"] ?? null;
 					$kfiHistory->code = $_POST["code"] ?? null;
 					$kfiHistory->status = $_POST["status"] ?? 1;
@@ -261,26 +252,8 @@ class ManagementController extends Controller
 					$kfiHistory->month = $_POST["month"] ?? null;
 					$kfiHistory->year = $_POST["year"] ?? null;
 					$kfiHistory->description = $_POST["detail"] ?? null;
-					if (!empty($_POST["fromDate"])) {
-						$fromDate = DateTime::createFromFormat('d/m/Y', $_POST["fromDate"]);
-						if ($fromDate) {
-							$kfiHistory->fromDate = $fromDate->format('Y-m-d'); // เปลี่ยนรูปแบบเป็น Y-m-d
-						} else {
-							$kfiHistory->fromDate = null;
-						}
-					} else {
-						$kfiHistory->fromDate = null;
-					}
-					if (!empty($_POST["toDate"])) {
-						$toDate = DateTime::createFromFormat('d/m/Y', $_POST["toDate"]);
-						if ($toDate) {
-							$kfiHistory->toDate = $toDate->format('Y-m-d'); // เปลี่ยนรูปแบบเป็น Y-m-d
-						} else {
-							$kfiHistory->toDate = null;
-						}
-					} else {
-						$kfiHistory->toDate = null;
-					}
+					$kfiHistory->fromDate = $_POST["fromDate"];
+					$kfiHistory->toDate = $_POST["toDate"];
 					$kfiHistory->createDateTime = new Expression('NOW()');
 					$kfiHistory->updateDateTime = new Expression('NOW()');
 					if ($kfiHistory->validate()) {
@@ -390,37 +363,18 @@ class ManagementController extends Controller
 			$kfi->status = $_POST["status"];
 			//$kfi->targetAmount = $_POST["targetAmount"];
 			if ($isManager == 1) {
-				$kfi->targetAmount = str_replace(",", "", $_POST["targetAmount"]);
+				$kfi->targetAmount = str_replace(",", "", $_POST["amount"]);
 			}
 			$kfi->save(false);
 			$kfiHistory = new KfiHistory();
 			$kfiHistory->kfiId = $_POST["kfiId"];
 			$kfiHistory->createrId = Yii::$app->user->id;
-			$kfiHistory->titleProgress = $_POST["progressTitle"];
-			$kfiHistory->remark = $_POST["progressTitle"];
+			// $kfiHistory->titleProgress = $_POST["progressTitle"];
+			// $kfiHistory->remark = $_POST["progressTitle"];
 			//$kfiHistory->checkPeriodDate = $_POST["periodDate"];
-			// $kfiHistory->fromDate = $_POST["fromDate"];
-			// $kfiHistory->toDate = $_POST["toDate"];
-			if (!empty($_POST["fromDate"])) {
-				$fromDate = DateTime::createFromFormat('d/m/Y', $_POST["fromDate"]);
-				if ($fromDate) {
-					$kfiHistory->fromDate = $fromDate->format('Y-m-d'); // เปลี่ยนรูปแบบเป็น Y-m-d
-				} else {
-					$kfiHistory->fromDate = null;
-				}
-			} else {
-				$kfiHistory->fromDate = null;
-			}
-			if (!empty($_POST["toDate"])) {
-				$toDate = DateTime::createFromFormat('d/m/Y', $_POST["toDate"]);
-				if ($toDate) {
-					$kfiHistory->toDate = $toDate->format('Y-m-d'); // เปลี่ยนรูปแบบเป็น Y-m-d
-				} else {
-					$kfiHistory->toDate = null;
-				}
-			} else {
-				$kfiHistory->toDate = null;
-			}
+			$kfiHistory->fromDate = $_POST["fromDate"];
+			$kfiHistory->toDate = $_POST["toDate"];
+	
 			$kfiHistory->nextCheckDate = $_POST["nextCheckDate"];
 			$kfiHistory->amountType = $_POST["amountType"];
 			$kfiHistory->code = $_POST["code"];
@@ -428,7 +382,7 @@ class ManagementController extends Controller
 			$kfiHistory->quantRatio = $_POST["quanRatio"];
 			$kfiHistory->historyStatus = $_POST["status"];
 			if ($isManager == 1) {
-				$kfiHistory->target =  str_replace(",", "", $_POST["targetAmount"]);
+				$kfiHistory->target =  str_replace(",", "", $_POST["amount"]);
 			} else {
 				$kfiHistory->target = $kfi->targetAmount;
 			}
@@ -448,7 +402,7 @@ class ManagementController extends Controller
 				$this->saveKfiDepartment($_POST["department"], $_POST["kfiId"]);
 			}
 			return $this->redirect(Yii::$app->request->referrer);
-			return $this->redirect('grid');
+			// return $this->redirect('grid');
 		}
 	}
 	public function actionUpdateKfi()

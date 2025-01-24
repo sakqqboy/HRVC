@@ -752,7 +752,7 @@ function getMonthName(month) {
 // กำหนด Flatpickr สำหรับปฏิทินเริ่มต้น
 flatpickr("#startDatePicker", {
     inline: true,
-    dateFormat: "m/d/Y",
+    dateFormat: "Y/m/d",
     onChange: function (selectedDates, dateStr) {
         window.startDate = dateStr; // เก็บค่า Start Date
         updateSelectedDates();
@@ -762,12 +762,43 @@ flatpickr("#startDatePicker", {
 // กำหนด Flatpickr สำหรับปฏิทินสิ้นสุด
 flatpickr("#endDatePicker", {
     inline: true,
-    dateFormat: "m/d/Y",
+    dateFormat: "Y/m/d",
     onChange: function (selectedDates, dateStr) {
         window.endDate = dateStr; // เก็บค่า End Date
         updateSelectedDates();
     }
 });
+
+// document.getElementById('create-kfi').addEventListener('submit', function (e) {
+//     var fromDate = document.getElementById('fromDate').value.trim();
+//     var toDate = document.getElementById('toDate').value.trim();
+
+//     if (!fromDate || !toDate) {
+//         alert("กรุณาระบุวันที่เริ่มต้นและวันที่สิ้นสุด");
+//         e.preventDefault();  // หยุดการส่งฟอร์ม
+//         return false;        // หยุดการทำงานต่อ
+//     }
+// });
+function validateForm(event) {
+    event.preventDefault(); // ป้องกันการส่งฟอร์มก่อนการตรวจสอบ
+
+    var fromDate = document.getElementById('fromDate').value.trim();
+    var toDate = document.getElementById('toDate').value.trim();
+
+    if (!fromDate && !toDate) {
+        alert("กรุณาระบุวันที่เริ่มต้นและวันที่สิ้นสุด");
+        return false;
+    } else if (!fromDate) {
+        alert("กรุณาระบุวันที่เริ่มต้น");
+        return false;
+    } else if (!toDate) {
+        alert("กรุณาระบุวันที่สิ้นสุด");
+        return false;
+    }
+
+    document.getElementById('create-kfi').submit(); // ส่งฟอร์มหากข้อมูลครบถ้วน
+    return true;
+}
 
 // อัปเดตข้อความวันที่ใน multi-due-term
 function updateSelectedDates() {
@@ -823,7 +854,7 @@ function updateInputGroupStyle(target, backgroundColor, borderColor, icons) {
 
 flatpickr("#updateDatePicker", {
     inline: true, // แสดงปฏิทินแบบฝัง
-    dateFormat: "d/m/Y", // รูปแบบวันที่เป็น DD/MM/YYYY
+    dateFormat: "Y/m/d", // รูปแบบวันที่เป็น DD/MM/YYYY
     onChange: function (selectedDates, dateStr) {
         updateLastUpdateDate(dateStr);
     }
