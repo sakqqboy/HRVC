@@ -667,10 +667,10 @@ select.form-select option:disabled {
                             <select class="select-create-status" aria-label="Default select example" name="status"
                                 required="">
                                 <option value="1"
-                                    <?= isset($data['status']) && $data['status'] == 1 ? 'selected' : '' ?>>Completed
+                                    <?= isset($data['status']) && $data['status'] == 1 ? 'selected' : '' ?>> In-Progress
                                 </option>
                                 <option value="2"
-                                    <?= isset($data['status']) && $data['status'] == 2 ? 'selected' : '' ?>>In-Progress
+                                    <?= isset($data['status']) && $data['status'] == 2 ? 'selected' : '' ?>> Completed
                                 </option>
                             </select>
 
