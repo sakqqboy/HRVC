@@ -352,7 +352,7 @@ class ManagementController extends Controller
 					'result' => $_POST["result"],
 				];
 
-				throw new Exception(print_r($data,true));
+				// throw new Exception(print_r($data,true));
 
 
 		$isManager = UserRole::isManager();
@@ -364,6 +364,8 @@ class ManagementController extends Controller
 			$kfi->unitId = $_POST["unit"];
 			$kfi->kfiDetail = $_POST["detail"];
 			$kfi->status = $_POST["status"];
+			$kfi->month = $_POST["month"];
+			$kfi->year = $_POST["year"];
 			//$kfi->targetAmount = $_POST["targetAmount"];
 			if ($isManager == 1) {
 				$kfi->targetAmount = str_replace(",", "", $_POST["amount"]);
