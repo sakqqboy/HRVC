@@ -917,6 +917,7 @@ $("#multi-branch").on("click", function (e) {
     // e.stopPropagation();
 });
 
+
 $("#multi-department").on("click", function (e) {
     var statusform = $("#acType").val();
     if (statusform == "update") {
@@ -927,6 +928,22 @@ $("#multi-department").on("click", function (e) {
     $(".toggle-icon-branch").toggleClass("fa-angle-down fa-angle-up");
 
     // e.stopPropagation();
+});
+
+// จับการคลิกในที่อื่น ๆ บน document
+$(document).on("click", function (e) {
+    // ตรวจสอบว่าไม่ได้คลิกใน #multi-branch หรือ #show-multi-branch
+    if (!$(e.target).closest("#multi-branch, #show-multi-branch, #show-multi-branch-update").length) {
+        $("#show-multi-branch-update").hide();  // ซ่อน #show-multi-branch-update
+        $("#show-multi-branch").hide();  // ซ่อน #show-multi-branch ถ้ามี
+        $(".toggle-icon-branch").removeClass("fa-angle-up").addClass("fa-angle-down");  // รีเซ็ตไอคอน
+    }
+
+    if (!$(e.target).closest("#multi-department, #show-multi-department, #show-multi-department-update").length) {
+        $("#show-multi-department-update").hide();  // ซ่อน #show-multi-department-update
+        $("#show-multi-department").hide();  // ซ่อน #show-multi-department ถ้ามี
+        $(".toggle-icon-branch").removeClass("fa-angle-up").addClass("fa-angle-down");  // รีเซ็ตไอคอน
+    }
 });
 
 
