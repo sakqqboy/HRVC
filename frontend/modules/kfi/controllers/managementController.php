@@ -180,7 +180,7 @@ class ManagementController extends Controller
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
 
-		//throw new Exception(print_r($kfis, true));
+		// throw new Exception(print_r($kfis, true));
 		return $this->render('index_grid', [
 			"companies" => $companies,
 			"units" => $units,

@@ -324,30 +324,30 @@ $this->title = Yii::t('app', 'KFI Grid View');
                                     </div>
                                     <div class="col-12 pl-15 pr-10">
                                         <?php
-                                        if (isset($showPercent) && !empty($showPercent)) {
-
-                                                $percent = explode('.', $kfi['ratio']);
-                                                if (isset($percent[0]) && $percent[0] == '0') {
-                                                    if (isset($percent[1])) {
-                                                        if ($percent[1] == '00') {
-                                                            $showPercent = 0;
+                                                    $showPercent = 0; // เริ่มต้นค่า $showPercent เป็น 0
+                                                    if (isset($kfi['ratio']) && !empty($kfi['ratio'])) {
+                                                        $percent = explode('.', $kfi['ratio']);
+                                                        if (isset($percent[0]) && $percent[0] == '0') {
+                                                            if (isset($percent[1])) {
+                                                                if ($percent[1] == '00') {
+                                                                    $showPercent = 0;
+                                                                } else {
+                                                                    $showPercent = round(floatval($kfi['ratio']), 1); // ปัดเศษเป็นทศนิยม 1 ตำแหน่ง
+                                                                }
+                                                            }
                                                         } else {
-                                                            $showPercent = round($kfi['ratio'], 1);
+                                                            $showPercent = round(floatval($kfi['ratio']), 2); // ปัดเศษเป็นทศนิยม 2 ตำแหน่ง
                                                         }
                                                     }
-                                                } else {
-                                                    $showPercent = round($kfi['ratio']);
-                                                }
-                                            }else{
-                                                $showPercent = 0;
-                                            }
-                                                ?>
+                                        ?>
+
                                         <div class="progress">
                                             <div class="progress-bar-<?= $colorFormat ?>"
-                                                style="width:<?= $showPercent ?>%;"></div>
+                                                style="width: <?= $showPercent ?>%;"></div>
                                             <span
                                                 class="progress-load load-<?= $colorFormat ?>"><?= $showPercent ?>%</span>
                                         </div>
+
                                     </div>
                                     <div class="col-5 pl-5 pr-5 mt-10 ">
                                         <div class="col-12 text-end "><?= Yii::t('app', 'Last Updated on') ?></div>
