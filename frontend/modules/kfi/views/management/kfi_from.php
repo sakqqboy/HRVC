@@ -21,7 +21,7 @@ if (isset($data['unitId']) && $data['unitId'] == 2) {
 $quantRatio = $data['quantRatio'] ?? '';
 $selectedCode = $data['code'] ?? '';
 $selectedAmountType = $data['amountType'] ?? '';
-
+// echo $statusform;
 ?>
 
 <style>
@@ -670,72 +670,44 @@ select.form-select option:disabled {
 <input type="hidden" value="create" id="acType">
 <?php } ?>
 <?php ActiveForm::end(); ?>
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
-
     var statusform = '<?= $statusform ?>';
+    // alert(statusform);
 
-    // alert(branchIds);
+    if (statusform === 'update') {
+        branchMultiDepartmentUpdateKfi();
 
-    if (statusform == 'update') {
-        // บันทึกค่า branchIds ลงใน LocalStorage
+        // ดึงค่า branchId ที่ถูก checked แล้ว
+        var checkedBranchIds = [];
+        $('input[name="branch[]"]:checked').each(function() {
+            checkedBranchIds.push($(this).val());
+        });
 
-        // เรียกใช้งานฟังก์ชันในไฟล์ .js
-        // companyMultiBrachKfi();
+        // เรียกใช้งานฟังก์ชันสำหรับ branch ที่ถูก checked เท่านั้น
+        checkedBranchIds.forEach(function(branchId) {
+            // alert(branchId);
+            departmentMultiTeamUpdateKfi(branchId);
+        });
+    }
+});
+
+
+$(document).ready(function() {
+
+    // ฟังก์ชันเปลี่ยนสีของ placeholder เมื่อมีการเลือกค่า
+    function updatePlaceholderColor(selector) {
+        $(selector).on('change', function() {
+            $(this).css('color', $(this).val() !== "" ? '#30313D' : 'var(--Helper-Text-Gray, #8A8A8A)');
+        });
     }
 
-    // // Prevent hiding dropdown when clicking inside it
-    // $("#show-multi-branch, #show-multi-branch-update").on("click", function(e) {
-    //     e.stopPropagation();
-    // });
-    // // Prevent hiding dropdown when clicking inside it
-    // $("#show-multi-department").on("click", function(e) {
-    //     e.stopPropagation();
-    // });
-
-
-    $('#companyId').on('change', function() {
-        // ตรวจสอบว่ามีการเลือกค่าใดๆ ใน select หรือไม่
-        if ($(this).val() !== "") {
-            // เปลี่ยนสีของข้อความ placeholder ให้เป็น #30313D เมื่อมีการเลือก
-            $(this).css('color', '#30313D');
-        } else {
-            // คืนค่าค่าปกติ (สีเทา) เมื่อไม่มีการเลือก
-            $(this).css('color', 'var(--Helper-Text-Gray, #8A8A8A)');
-        }
-    });
-    $('#quantRatio-create').on('change', function() {
-        // ตรวจสอบว่ามีการเลือกค่าใดๆ ใน select หรือไม่
-        if ($(this).val() !== "") {
-            // เปลี่ยนสีของข้อความ placeholder ให้เป็น #30313D เมื่อมีการเลือก
-            $(this).css('color', '#30313D');
-        } else {
-            // คืนค่าค่าปกติ (สีเทา) เมื่อไม่มีการเลือก
-            $(this).css('color', 'var(--Helper-Text-Gray, #8A8A8A)');
-        }
-    });
-    $('#amountType-create').on('change', function() {
-        // ตรวจสอบว่ามีการเลือกค่าใดๆ ใน select หรือไม่
-        if ($(this).val() !== "") {
-            // เปลี่ยนสีของข้อความ placeholder ให้เป็น #30313D เมื่อมีการเลือก
-            $(this).css('color', '#30313D');
-        } else {
-            // คืนค่าค่าปกติ (สีเทา) เมื่อไม่มีการเลือก
-            $(this).css('color', 'var(--Helper-Text-Gray, #8A8A8A)');
-        }
-    });
-    $('#code-create').on('change', function() {
-        // ตรวจสอบว่ามีการเลือกค่าใดๆ ใน select หรือไม่
-        if ($(this).val() !== "") {
-            // เปลี่ยนสีของข้อความ placeholder ให้เป็น #30313D เมื่อมีการเลือก
-            $(this).css('color', '#30313D');
-        } else {
-            // คืนค่าค่าปกติ (สีเทา) เมื่อไม่มีการเลือก
-            $(this).css('color', 'var(--Helper-Text-Gray, #8A8A8A)');
-        }
-    });
+    // เรียกใช้งานฟังก์ชันกับ select หลายตัวพร้อมกัน
+    updatePlaceholderColor('#companyId');
+    updatePlaceholderColor('#quantRatio-create');
+    updatePlaceholderColor('#amountType-create');
+    updatePlaceholderColor('#code-create');
 
     $('[data-toggle="tooltip"]').tooltip(); // เปิดใช้งาน Tooltip
 

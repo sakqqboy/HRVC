@@ -9,15 +9,17 @@ if (isset($branches) && count($branches) > 0) { ?>
     <?= Yii::t('app', 'All') ?>
 </div>
 <?php
+$countBranch = 0;
 	foreach ($branches as $branch) :
 		$check = '';
 		$has = KfiBranch::isInThisKfi($branch['branchId'], $kfiId);
 		if ($has == 1) {
 			$check = 'checked';
+			$countBranch ++;
 		}
 		$haveDepartment = Branch::haveDepartment($branch["branchId"]);
 		if ($haveDepartment == 1) {
-	?>
+?>
 <div class="col-12 multi-select pl-30 pt-5 pb-5">
     <input type="checkbox" id='multi-check-update' <?= $check ?> name="branch[]" id=""
         class="checkbox-md mr-5 multiCheck-<?= $branch['branchId'] ?>" value="<?= $branch['branchId'] ?>"
@@ -28,5 +30,4 @@ if (isset($branches) && count($branches) > 0) { ?>
 		}
 	endforeach;
 }
-
 ?>

@@ -352,7 +352,7 @@ class ManagementController extends Controller
 					'result' => $_POST["result"],
 				];
 
-				 throw new Exception(message: print_r($data,true));
+				//  throw new Exception(message: print_r($data,true));
 
 		$isManager = UserRole::isManager();
 		if (isset($_POST["kfiId"])) {
