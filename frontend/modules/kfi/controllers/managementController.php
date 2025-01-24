@@ -495,6 +495,7 @@ class ManagementController extends Controller
 	
 		// รวมข้อมูลทั้งหมด
 		$data = array_merge($kfi, $branch, $department);
+		// throw new Exception(print_r($kfi,true));	
 
 		// throw new Exception(print_r($data,true));	
 

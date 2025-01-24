@@ -659,15 +659,21 @@ select.form-select option:disabled {
                                 Last Updated on
                             </label>
                             <text class="create-last-update">
-                                18/12/2024
+                                <!-- 18/12/2024 -->
+                                <?= isset($data['lastUpdate']) ? $data['lastUpdate'] : '' ?>
                             </text>
                         </div>
                         <div>
                             <select class="select-create-status" aria-label="Default select example" name="status"
                                 required="">
-                                <option value="1">Completed</option>
-                                <option value="2">In-Progress</option>
+                                <option value="1"
+                                    <?= isset($data['status']) && $data['status'] == 1 ? 'selected' : '' ?>>Completed
+                                </option>
+                                <option value="2"
+                                    <?= isset($data['status']) && $data['status'] == 2 ? 'selected' : '' ?>>In-Progress
+                                </option>
                             </select>
+
                         </div>
                         <?php
                             } else {

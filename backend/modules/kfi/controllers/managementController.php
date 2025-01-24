@@ -202,6 +202,7 @@ class ManagementController extends Controller
 			$res2["toDate"] = $kfiHistory["toDate"];
 			$res2["fromDateDetail"] = ModelMaster::engDate($kfiHistory["fromDate"], 2);
 			$res2["toDateDetail"] = ModelMaster::engDate($kfiHistory["toDate"], 2);
+			$res2["lastUpdate"] = ModelMaster::dateNumber($kfiHistory["updateDateTime"]);
 			$res["status"] = $kfiHistory["status"];
 			if ($kfi["targetAmount"] == null || $kfi["targetAmount"] == '' || $kfi["targetAmount"] == 0) {
 				$ratio = 0;
