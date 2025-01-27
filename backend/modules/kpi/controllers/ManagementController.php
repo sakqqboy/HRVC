@@ -114,87 +114,6 @@ class ManagementController extends Controller
 	public function actionKpiDetail($id,$kpiHistoryId)
 	{
 
-		// $kpi = Kpi::find()->where(["kpiId" => $id])->asArray()->one();
-		// $res["kpiName"] = $kpi["kpiName"]; 
-		// $res["year"] = $kpi["year"];
-		// $res["companyName"] = Company::companyName($kpi['companyId']);
-		// $res["companyId"] = $kpi['companyId'];
-		// $res["branchName"] = Branch::kpiBranchName($id);
-		// $res["kpiBranch"] = KpiBranch::kpiBranch($id);
-		// $res["unitId"] = $kpi["unitId"];
-		// $res["detail"] = $kpi["kpiDetail"];
-		// $res["targetAmount"] = $kpi["targetAmount"];
-		// $res["status"] = $kpi["status"];
-		// $res["creater"] = User::employeeNameByuserId($kpi["createrId"]);
-		// $res["monthName"] = strtoupper(ModelMaster::monthEng($kpi['month'], 1));
-		// $res["month"] = $kpi['month'];
-		// $res["unit"] = Unit::unitName($kpi['unitId']);
-		// $res["countryName"] = Country::countryNameBycompany($kpi['companyId']);
-		// $res["flag"] = Country::countryFlagBycompany($kpi["companyId"]);
-		// $res["active"] = $kpi["active"];
-		// $res["branch"] = KpiBranch::kpiBranches($id);
-		// $res["kpiEmployeeDetail"] = KpiEmployee::kpiEmployeeDetail($kpi["kpiId"]);
-		
-		// if ($kpiHistoryId == 0) {
-		// 	$kpiHistory = KpiHistory::find()->where(["status" => [1, 2], "kpiId" => $id])->orderBy('kpiHistoryId DESC')->asArray()->one();
-		// } else {
-		// 	$kpiHistory = KpiHistory::find()
-		// 		->where(["kpiHistoryId" => $kpiHistoryId])
-		// 		->asArray()
-		// 		->one();
-		// }
-		// if (isset($kpiHistory) && !empty($kpiHistory)) {
-		// 	$res2["quantRatio"] = $kpiHistory["quantRatio"];
-		// 	$res2["code"] =  $kpiHistory["code"];
-		// 	$res2["result"] = $kpiHistory["result"];
-		// 	$res2["amountType"] = $kpiHistory["amountType"];
-		// 	$res2["kpiStatus"] = $kpiHistory["historyStatus"];
-		// 	// $res2["nextCheck"] = ModelMaster::engDate($kpiHistory["nextCheckDate"], 2);
-		// 	// $res2["checkDate"] = ModelMaster::engDate($kpiHistory["checkPeriodDate"], 2);
-		// 	// $res2["nextCheckDate"] = $kpiHistory["nextCheckDate"];
-		// 	// $res2["isOver"] = ModelMaster::isOverDuedate(Kpi::nextCheckDate($kpiHistory['kpiId']));
-		// 	// $res["creater"] = User::employeeNameByuserId($kpiHistory["createrId"]);
-		// 	// $res2["periodCheck"] = $kpiHistory["checkPeriodDate"];
-		// 	// $res2["fromDate"] = $kpiHistory["fromDate"];
-		// 	// $res2["toDate"] = $kpiHistory["toDate"];
-		// 	// $res2["fromDateDetail"] = ModelMaster::engDate($kpiHistory["fromDate"], 2);
-		// 	// // $res2["toDateDetail"] = ModelMaster::engDate($kpiHistory["toDate"], 2);
-		// 	// $res["status"] = $kpiHistory["status"];
-		// 	// if ($kpi["targetAmount"] == null || $kpi["targetAmount"] == '' || $kpi["targetAmount"] == 0) {
-		// 	// 	$ratio = 0;
-		// 	// } else {
-		// 	// 	if ($kpiHistory["code"] == '<' || $kpiHistory["code"] == '=') {
-		// 	// 		$ratio = ((int)$kpiHistory['result'] / (int)$kpi["targetAmount"]) * 100;
-		// 	// 	} else {
-		// 	// 		if ($kpiHistory["result"] != '' && $kpiHistory["result"] != 0) {
-		// 	// 			$ratio = ((int)$kpi["targetAmount"] / (int)$kpiHistory["result"]) * 100;
-		// 	// 		} else {
-		// 	// 			$ratio = 0;
-		// 	// 		}
-		// 	// 		//$ratio = ((int)$kpi["targetAmount"] / (int)$kpiHistory['result']) * 100;
-		// 	// 	}
-		// 	// }
-		// 	// $res2["ratio"] = number_format($ratio, 2);
-		// } else {
-		// 	$res2["quantRatio"] = "";
-		// 	$res2["code"] = "";
-		// 	$res2["result"] = "";
-		// 	$res2["amountType"] = "";
-		// 	$res2["kpistatus"] = "";
-		// 	$res2["ratio"] = 0;
-		// 	$res2["nextCheck"] = "";
-		// 	$res2["checkDate"] = "";
-		// 	$res2["nextCheckDate"] = null;
-		// 	$res2["fromDate"] = null;
-		// 	$res2["toDate"] = null;
-		// 	$res2["isOver"] = 1;
-		// 	//$res2["periodCheck"] = $kpi["periodDate"];
-		// }
-		// $res3 = array_merge($res, $res2);
-		// return json_encode($res3);
-
-		// $kpiHistory = KpiHistory::find()->where(["status" => [1, 2], "kpiId" => $id])->orderBy('kpiHistoryId DESC')->asArray()->one();
-
 		if ($kpiHistoryId == 0) {
 			$kpiHistory = KpiHistory::find()->where(["status" => [1, 2, 4], "kpiId" => $id])->orderBy('kpiHistoryId DESC')->asArray()->one();
 		} else {
@@ -257,7 +176,7 @@ class ManagementController extends Controller
 				"kpiEmployee" => KpiEmployee::kpiEmployee($kpi['kpiId']),
 				"kpiEmployeeDetail" => KpiEmployee::kpiEmployeeDetail($kpi["kpiId"]),
 				"countTeam" => KpiTeam::kpiTeam($kpi['kpiId']),
-				"unitText" => Unit::unitName($kpiHistory["unitId"]),
+				"lastUpdate" =>  ModelMaster::dateNumber($kpiHistory["updateDateTime"]),
 				"issue" => KpiIssue::lastestIssue($kpi["kpiId"])["issue"],
 				"solution" => KpiIssue::lastestIssue($kpi["kpiId"])["solution"],
 				"fromDateDetail" => ModelMaster::engDate($kpiHistory["fromDate"], 2),

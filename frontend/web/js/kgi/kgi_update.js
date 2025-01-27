@@ -1,32 +1,32 @@
 var $baseUrl = window.location.protocol + "/ / " + window.location.host;
 if (window.location.host == 'localhost') {
-    $baseUrl = window.location.protocol + "//" + window.location.host + '/HRVC/frontend/web/';
+	$baseUrl = window.location.protocol + "//" + window.location.host + '/HRVC/frontend/web/';
 } else {
-    $baseUrl = window.location.protocol + "//" + window.location.host + '/';
+	$baseUrl = window.location.protocol + "//" + window.location.host + '/';
 }
 $url = $baseUrl;
-function companyMultiBrachUpdate() { 
-	
+function companyMultiBrachUpdate() {
+
 	var companyId = $("#companyId-update").val();
 	clearEveryShow();
 	var acType = $("#acType").val();
-	var kgiId=$("#kgiId").val();
+	var kgiId = $("#kgiId").val();
 	var url = $url + 'kgi/management/company-multi-branch';
 	$.ajax({
 		type: "POST",
 		dataType: 'json',
 		url: url,
-		data: { companyId: companyId, acType: acType,kgiId:kgiId },
-		success: function(data) {
-		    if (data.status) {
-			    $("#show-multi-branch-update").html(data.branchText);
-			//     $("#kgi-group-update").html(data.kgiGroup);
-		    }
-      
+		data: { companyId: companyId, acType: acType, kgiId: kgiId },
+		success: function (data) {
+			if (data.status) {
+				$("#show-multi-branch-update").html(data.branchText);
+				//     $("#kgi-group-update").html(data.kgiGroup);
+			}
+
 		}
-	   });
+	});
 }
-function checkAllBranchUpdate() { 
+function checkAllBranchUpdate() {
 	var sumBranch = totalBranchUpdate();
 	//alert(sumBranch);
 	if ($("#check-all-branch-update").prop("checked") == true) {
@@ -34,12 +34,12 @@ function checkAllBranchUpdate() {
 		$('input[id="multi-check-update"]').each(function () {
 			if (i < sumBranch) {
 				$(this).prop("checked", true);
-			} else { 
+			} else {
 				$(this).prop("checked", true).trigger('change');
 			}
 			i++;
 		});
-	} else { 
+	} else {
 		var i = 1;
 		$('input[id="multi-check-update"]').each(function () {
 			if (i != sumBranch) {
@@ -56,23 +56,23 @@ function branchMultiDepartmentUpdate() {
 	var multiBranch = [];
 	var sumBranch = totalBranchUpdate();
 	var i = 0;
-		$("#multi-check-update:checked").each(function () {
-			multiBranch[i] = $(this).val();
-			i++;
-		});
+	$("#multi-check-update:checked").each(function () {
+		multiBranch[i] = $(this).val();
+		i++;
+	});
 	if (sumBranch != multiBranch.length) {
 		$("#check-all-branch-update").prop("checked", false);
-	} else { 
+	} else {
 		$("#check-all-branch-update").prop("checked", true);
 	}
 	var url = $url + 'kgi/management/branch-multi-department';
 	var acType = $("#acType").val();
-	var kgiId=$("#kgiId").val();
+	var kgiId = $("#kgiId").val();
 	$.ajax({
 		type: "POST",
 		dataType: 'json',
 		url: url,
-		data: { multiBranch: multiBranch, acType: acType,kgiId:kgiId },
+		data: { multiBranch: multiBranch, acType: acType, kgiId: kgiId },
 		success: function (data) {
 			if (data.status) {
 				$("#show-multi-department-update").html(data.textDepartment);
@@ -82,7 +82,7 @@ function branchMultiDepartmentUpdate() {
 		}
 	});
 }
-function totalBranchUpdate() { 
+function totalBranchUpdate() {
 	var totalBranch = 0;
 	var data = [];
 	var i = 0;
@@ -90,12 +90,12 @@ function totalBranchUpdate() {
 		data[i] = $(this).val();
 		i++;
 	});
-	totalBranch=data.length;
+	totalBranch = data.length;
 	return totalBranch;
 }
-function allDepartmentUpdate(branchId) { 
+function allDepartmentUpdate(branchId) {
 	var sumDepartment = totalDepartmentUpdate(branchId);
-	if ($("#multi-check-all-"+branchId+"-update").prop("checked") == true) {
+	if ($("#multi-check-all-" + branchId + "-update").prop("checked") == true) {
 		var i = 1;
 		$('input[id="multi-check-' + branchId + '-update"]').each(function () {
 			if (i < sumDepartment) {
@@ -105,10 +105,10 @@ function allDepartmentUpdate(branchId) {
 			}
 			i++;
 		}
-			);
-	} else { 
+		);
+	} else {
 		var i = 1;
-		
+
 		$('input[id="multi-check-' + branchId + '-update"]').each(function () {
 			if (i != sumDepartment) {
 				$(this).prop("checked", false);
@@ -117,44 +117,44 @@ function allDepartmentUpdate(branchId) {
 			}
 			i++;
 		});
-		
+
 	}
 }
-function departmentMultiTeamUpdate(branchId) { 
+function departmentMultiTeamUpdate(branchId) {
 	var sumDepartment = totalDepartmentUpdate(branchId);
 	var multiDepartmentBranch = [];
 	var multiDepartment = [];
 	var multiBranch = [];
 	var i = 0;
-		$("#multi-check-"+branchId+"-update:checked").each(function () {
-			multiDepartmentBranch[i] = $(this).val();
-			i++;
-		});
-		$("#multi-check-update:checked").each(function () {
-			multiBranch[i] = $(this).val();
-			i++;
-		});
-		$(".multi-check-department-update:checked").each(function () {
-			multiDepartment[i] = $(this).val();
-			i++;
-		});
+	$("#multi-check-" + branchId + "-update:checked").each(function () {
+		multiDepartmentBranch[i] = $(this).val();
+		i++;
+	});
+	$("#multi-check-update:checked").each(function () {
+		multiBranch[i] = $(this).val();
+		i++;
+	});
+	$(".multi-check-department-update:checked").each(function () {
+		multiDepartment[i] = $(this).val();
+		i++;
+	});
 	if (sumDepartment != multiDepartmentBranch.length) {
-		$("#multi-check-all-" + branchId+"-update").prop("checked", false);
-	} else { 
-		$("#multi-check-all-" + branchId+"-update").prop("checked", true);
+		$("#multi-check-all-" + branchId + "-update").prop("checked", false);
+	} else {
+		$("#multi-check-all-" + branchId + "-update").prop("checked", true);
 	}
 	var acType = $("#acType").val();
-	var kgiId=$("#kgiId").val();
+	var kgiId = $("#kgiId").val();
 	var url = $url + 'kgi/management/department-multi-team';
 	$.ajax({
 		type: "POST",
 		dataType: 'json',
 		url: url,
-		data: { multiDepartment: multiDepartment, multiBranch: multiBranch, acType: acType,kgiId:kgiId },
+		data: { multiDepartment: multiDepartment, multiBranch: multiBranch, acType: acType, kgiId: kgiId },
 		success: function (data) {
 			if (data.status) {
 				$("#show-multi-team-update").html(data.textTeam);
-				
+
 			} else {
 				$("#show-multi-team-update").html('');
 			}
@@ -172,25 +172,12 @@ function totalDepartmentUpdate(branchId) {
 	totalDepartment = data.length;
 	return totalDepartment;
 }
-function clearEveryShow() { 
+function clearEveryShow() {
 	$("#show-multi-department-update").html('');
 	$("#show-multi-team-update").html('');
 	$("#show-multi-department-update").html('');
 }
-function allTeamUpdate(departmentId) { 
-	if ($("#multi-check-all-team-"+departmentId+"-update").prop("checked") == true) {
-		$('input[id="multi-check-team-'+departmentId+'-update"]').each(function () {
-			$(this).prop("checked", true);
-		}
-		);
-	} else { 
-		$('input[id="multi-check-team-'+departmentId+'-update"]').each(function () {
-			$(this).prop("checked", false);
-		}
-		);
-		
-	}
-}
+
 function updateKgi(kgiId, kgiHistoryId) {
 	$("#acType").val('update');
 	$("#kgiId").val(kgiId);
@@ -240,61 +227,61 @@ function resetUnit() {
 	$(".unit-4").css("background-color", "white");
 	$(".currentUnit").val('');
 	$(".previousUnit").val('');
-   }
-function checkRequiredUpdate() { 
+}
+function checkRequiredUpdate() {
 	var i = 0;
 	var isError = 0;
 	var multiBranch = [];
-		$("#multi-check-update:checked").each(function () {
-			multiBranch[i] = $(this).val();
-			i++;
-		});
+	$("#multi-check-update:checked").each(function () {
+		multiBranch[i] = $(this).val();
+		i++;
+	});
 	checkedBranch = multiBranch.length;
 	if (checkedBranch == 0) {
 		alert("Please select at least 1 branch.");
 		isError++;
 		return false;
-		
-	} else { 
-		for (a = 0; a < multiBranch.length; a++) { 
+
+	} else {
+		for (a = 0; a < multiBranch.length; a++) {
 			multiDepartment = [];
 			var b = 0;
-			$("#multi-check-"+multiBranch[a]+"-update:checked").each(function () {
+			$("#multi-check-" + multiBranch[a] + "-update:checked").each(function () {
 				multiDepartment[b] = $(this).val();
 				b++;
 			});
 			checkedDepartment = multiDepartment.length;
 			if (checkedDepartment == 0) {
-				
+
 				var branchDepartment = checkBranchDepartment(multiBranch[a]);
 				if (branchDepartment > 0) {
 					isError++;
 					alert("Please select at least 1 department for each selected branch.");
 					return false;
 				}
-			} else { 
+			} else {
 				for (c = 0; c < multiDepartment.length; c++) {
 					var multiTeam = [];
 					var d = 0;
-					$("#multi-check-team"+multiDepartment[d]+"-update:checked").each(function () {
+					$("#multi-check-team" + multiDepartment[d] + "-update:checked").each(function () {
 						multiTeam[d] = $(this).val();
 						d++;
 					});
 					checkedTeam = multiTeam.length;
-					if (checkedDepartment == 0) { 
+					if (checkedDepartment == 0) {
 						alert("Please select at least 1 team for each selected department.");
 						isError++;
 						return false;
 					}
-				 }
+				}
 			}
 		}
-		
+
 	}
 	var check = 0;
-	$('#update-kgi').find('input,select,textarea').each(function(){
-		if(!$(this).prop('required')){
-			
+	$('#update-kgi').find('input,select,textarea').each(function () {
+		if (!$(this).prop('required')) {
+
 		} else {
 			if (!$(this).val()) {
 				check++;
@@ -303,21 +290,20 @@ function checkRequiredUpdate() {
 	});
 	if (check == 0) {
 		$("#update-kgi").submit();
-	} else { 
+	} else {
 		alert("Please fill out the information completely !!!");
 	}
 	//
 }
-function checkBranchDepartment(branchId) { 
+function checkBranchDepartment(branchId) {
 	var url = $url + 'setting/department/branch-department';
 	$.ajax({
 		type: "POST",
 		dataType: 'json',
 		url: url,
-		data: { branchId: branchId},
+		data: { branchId: branchId },
 		success: function (data) {
 			return data.totalDepartments
 		}
 	});
 }
- 

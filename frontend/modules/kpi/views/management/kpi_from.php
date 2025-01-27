@@ -1,7 +1,7 @@
 <?php
 use yii\bootstrap5\ActiveForm;
 if ($statusform == 'update') {
-    $parturl = 'kpi/management/save-update-kpi';
+    $parturl = 'kpi/management/update-kpi';
 } else {
     $parturl = 'kpi/management/create-kpi';
 }
@@ -24,11 +24,13 @@ if (isset($data['unitId']) && $data['unitId'] >= 1) {
 $quantRatio = $data['quantRatio'] ?? '';
 $selectedCode = $data['code'] ?? '';
 $selectedAmountType = $data['amountType'] ?? '';
+$selectedPriority = isset($data['priority']) ? $data['priority'] : '';
 
 
 $result = $data['result'] ?? 0;
 $targetAmount = $data['targetAmount'] ?? 0;
 $DueBehind = $targetAmount -  $result;
+
 // echo $DueBehind;
 ?>
 
@@ -124,7 +126,11 @@ select.form-select option:disabled {
                         </text>
                     </a>
                     <text class="pim-name-title">
-                        Create Key Financial Indicator
+                        <?php  if($statusform == 'update'){?>
+                        <?= Yii::t('app', 'Update Key Performance Indicator') ?>
+                        <?php }else { ?>
+                        <?= Yii::t('app', 'Create Key Performance Indicator') ?>
+                        <?php } ?>
                     </text>
                 </div>
                 <div class="col-4" style="display: flex; justify-content: center; align-items: center; gap: 20px;">
@@ -401,7 +407,7 @@ select.form-select option:disabled {
                         </div>
 
                         <div class="col-12" <?php if($statusform == 'update'): ?> id="show-multi-team-update"
-                            <?php else: ?> id="show-multi-team" <?php endif; ?> style="position: absolute; top: 60%; left: 0; width: 100%; z-index: 999; background-color: white; 
+                            <?php else: ?> id="show-multi-team" <?php endif; ?> style="position: absolute; top: 80%; left: 0; width: 100%; z-index: 999; background-color: white; 
                             border: 1px solid #ced4da; padding: 10px; display: none;">
                             <?php if($statusform == 'create'): ?>
                             <!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
@@ -426,10 +432,10 @@ select.form-select option:disabled {
                         </label>
                         <select class="form-select font-size-13" aria-label="Default select example"
                             id="priority-update" name="priority">
-                            <option value="">A/B/C</option>
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
+                            <option value="" <?= ($selectedPriority == '') ? 'selected' : ''; ?>>A/B/C</option>
+                            <option value="A" <?= ($selectedPriority == 'A') ? 'selected' : ''; ?>>A</option>
+                            <option value="B" <?= ($selectedPriority == 'B') ? 'selected' : ''; ?>>B</option>
+                            <option value="C" <?= ($selectedPriority == 'C') ? 'selected' : ''; ?>>C</option>
                         </select>
                     </div>
                 </div>
@@ -593,8 +599,8 @@ select.form-select option:disabled {
                                     aria-hidden="true"></i>
                             </div>
                             <input type="hidden" id="nextDate" name="nextCheckDate"
-                                value="<?= isset($data['nextCheckDate']) ? $data['nextCheckDate'] : '' ?>">
-                            <!-- <input type="hidden" id="nextDate" name="nextCheckDate"> -->
+                                value="<?= isset($data['nextCheck']) ? $data['nextCheck'] : '' ?>">
+                            <!-- <input type="hidden" id="nextDate" name="nextCheck"> -->
                         </div>
                         <div id="calendar-due-update"
                             style="position: absolute; margin-top: 75px; padding: 10px; border: 1px solid rgb(221, 221, 221); border-radius: 10px; background: rgb(255, 255, 255); width: 100%; z-index: 1; display: none; justify-content: center; align-items: center;">
@@ -846,10 +852,10 @@ select.form-select option:disabled {
 <script>
 $(document).ready(function() {
     var statusform = '<?= $statusform ?>';
-    // alert(statusform);
 
-    if (statusform === 'update') {
+    if (statusform == 'update') {
         branchMultiDepartmentUpdateKpi();
+        // alert(statusform);
 
         // ดึงค่า branchId ที่ถูก checked แล้ว
         var checkedBranchIds = [];
@@ -861,6 +867,18 @@ $(document).ready(function() {
         checkedBranchIds.forEach(function(branchId) {
             // alert(branchId);
             departmentMultiTeamUpdateKpi(branchId);
+        });
+
+        // ดึงค่า team ที่ถูก checked แล้ว
+        var checkedTeamIds = [];
+        $('input[name="team[]"]:checked').each(function() {
+            checkedTeamIds.push($(this).val());
+        });
+
+        // เรียกใช้งานฟังก์ชันสำหรับ team ที่ถูก checked เท่านั้น
+        checkedTeamIds.forEach(function(departmentId) {
+            // alert(departmentId);
+            multiTeamUpdate(departmentId);
         });
     }
 
