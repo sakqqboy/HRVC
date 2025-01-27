@@ -605,22 +605,22 @@ select.form-select option:disabled {
 
                         <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
                             <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-                                <!-- <label class="switch">
-                                        <input type="checkbox">
-                                        <span class="slider round"></span>
-                                    </label>
-                                    <label class="sub-manage-create" id="branch-selected-message">
-                                        Historic Update
-                                    </label> -->
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                                <label class="sub-manage-create" id="branch-selected-message">
+                                    Historic Update
+                                </label>
                             </div>
                             <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-                                <!-- <label class="switch">
-                                        <input type="checkbox">
-                                        <span class="slider round"></span>
-                                    </label>
-                                    <label class="sub-manage-create" id="branch-selected-message">
-                                        Override
-                                    </label> -->
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                                <label class="sub-manage-create" id="branch-selected-message">
+                                    Override
+                                </label>
                             </div>
                         </div>
                     </div>
