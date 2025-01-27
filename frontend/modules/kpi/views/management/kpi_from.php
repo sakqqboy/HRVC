@@ -198,7 +198,7 @@ select.form-select option:disabled {
 
                     </div>
 
-                    <div class="form-group mt-39"
+                    <div class="form-group mt-37"
                         style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                         <label class="text-manage-create" for="name">
                             <span class="text-danger">* </span>
@@ -225,7 +225,7 @@ select.form-select option:disabled {
                         </select>
                     </div>
 
-                    <div class="form-group mt-39"
+                    <div class="form-group mt-37"
                         style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
 
                         <div class="form-group "
@@ -276,7 +276,7 @@ select.form-select option:disabled {
                         </div>
                     </div>
 
-                    <div class="form-group mt-71"
+                    <div class="form-group mt-37"
                         style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                         <label class="text-manage-create" for="name">
                             <span class="text-danger">* </span>
@@ -319,6 +319,67 @@ select.form-select option:disabled {
                                 </label>
                             </div>
                         </div>
+                    </div>
+                    <div class="form-group mt-37"
+                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                        <label class="text-manage-create" for="name">
+                            <span class="text-danger">* </span>
+                            Select Team/s <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
+                                data-toggle="tooltip" data-placement="top"
+                                title="Choose the teams that will be responsible for this financial indicator. Multiple team can be selected for cross-functional tracking."
+                                alt="Help Icon">
+                        </label>
+                        <div class="form-control" id="multi-team" style="width: 100%">
+                            <span id="multi-team-text"><?= Yii::t('app', 'Select Team') ?></span>
+                            <i class="toggle-icon-team fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
+                        </div>
+
+                        <div class="col-12" <?php if($statusform == 'update'): ?> id="show-multi-team-update"
+                            <?php else: ?> id="show-multi-team" <?php endif; ?> style="position: absolute; top: 60%; left: 0; width: 100%; z-index: 999; background-color: white; 
+                            border: 1px solid #ced4da; padding: 10px; display: none;">
+                            <?php if($statusform == 'create'): ?>
+                            <!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
+                            <?php else: ?>
+                            <?= $kpiTeamText; ?>
+                            <?php endif; ?>
+                        </div>
+
+                        <div>
+                            <div class="circle-container pl-15" id="image-team" data-type="team">
+                                <div class="cycle-current-gray">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/teams-black.svg" alt="icon">
+                                </div>
+                                <div class="cycle-current-gray">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/teams-black.svg" alt="icon">
+                                </div>
+                                <div class="cycle-current-gray">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/teams-black.svg" alt="icon">
+                                </div>
+                                <div class="cycle-current-gray" style="color: #000;" id="team-selected-count">
+                                    00
+                                </div>
+                                <label class="sub-manage-create" id="team-selected-message">
+                                    No Team are Selected Yet
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mt-37"
+                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                        <label class="text-manage-create" for="name">
+                            <span class="text-danger">* </span>
+                            Select Company <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
+                                data-toggle="tooltip" data-placement="top"
+                                title="Choose the company for which this financial indicator will be tracked. Only one company can be selected at a time to ensure accurate and focused performance monitoring."
+                                alt="Help Icon">
+                        </label>
+                        <select class="form-select font-size-13" aria-label="Default select example"
+                            id="priority-update" name="priority">
+                            <option value="">A/B/C</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                        </select>
                     </div>
                 </div>
                 <div style="flex: 1;">
@@ -585,7 +646,9 @@ select.form-select option:disabled {
                                     alt="Help Icon">
                             </div>
                             <div class="updatehistory" style="text-align: right;">
-                                <!-- <img src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg">Update History -->
+                                <?php if($statusform == 'update'){ ?>
+                                <img src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg">Update History
+                                <?php } ?>
                             </div>
                         </label>
 
@@ -604,6 +667,7 @@ select.form-select option:disabled {
 
 
                         <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+                            <?php if($statusform == 'update'){ ?>
                             <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
                                 <label class="switch">
                                     <input type="checkbox">
@@ -622,6 +686,7 @@ select.form-select option:disabled {
                                     Override
                                 </label>
                             </div>
+                            <?php } ?>
                         </div>
                     </div>
 

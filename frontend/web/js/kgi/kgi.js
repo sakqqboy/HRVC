@@ -92,53 +92,33 @@ function allDepartment(branchId) {
 
 	}
 }
-
-function multiTeam(departmentId) {
+function allTeam(departmentId) {
 	var sumTeam = totalTeam(departmentId);
-	var multiTeamDepartment = [];
-	var i = 0;
-	$("#multi-check-team-" + departmentId + ":checked").each(function () {
-		multiTeamDepartment[i] = $(this).val();
-		i++;
-	});
-	//alert(sumTeam + '=>' + multiTeamDepartment.length);
-	if (sumTeam != multiTeamDepartment.length) {
-		$("#multi-check-all-team-" + departmentId).prop("checked", false);
-	} else {
-		$("#multi-check-all-team-" + departmentId).prop("checked", true);
-	}
-	if (multiTeamDepartment.length > 0) {
+	if ($("#multi-check-all-team-" + departmentId).prop("checked") == true) {
+		var i = 1;
 		$('input[id="multi-check-team-' + departmentId + '"]').each(function () {
-			$(".multiTeam-department-" + $(this).val()).removeAttr('required');
-		});
+			// $(this).prop("checked", true);
+			if (i < sumTeam) {
+				$(this).prop("checked", true);
+			} else {
+				$(this).prop("checked", true).trigger('change');
+			}
+			i++;
+		}
+		);
 	} else {
+		var i = 1;
 		$('input[id="multi-check-team-' + departmentId + '"]').each(function () {
-			$(".multiTeam-department-" + $(this).val()).prop('required', true);
-		});
-	}
-}
-function multiTeamUpdate(departmentId) {
-	var sumTeam = totalTeamUpdate(departmentId);
-	var multiTeamDepartment = [];
-	var i = 0;
-	$("#multi-check-team-" + departmentId + "-update:checked").each(function () {
-		multiTeamDepartment[i] = $(this).val();
-		i++;
-	});
-	//alert(sumTeam + '=>' + multiTeamDepartment.length);
-	if (sumTeam != multiTeamDepartment.length) {
-		$("#multi-check-all-team-" + departmentId + '-update').prop("checked", false);
-	} else {
-		$("#multi-check-all-team-" + departmentId + '-update').prop("checked", true);
-	}
-	if (multiTeamDepartment.length > 0) {
-		$('input[id="multi-check-team-' + departmentId + '-update"]').each(function () {
-			$(".multiTeam-department-update-" + $(this).val()).removeAttr('required');
-		});
-	} else {
-		$('input[id="multi-check-team-' + departmentId + '-update"]').each(function () {
-			$(".multiTeam-department-update-" + $(this).val()).prop('required', true);
-		});
+			// $(this).prop("checked", false);
+			if (i != sumTeam) {
+				$(this).prop("checked", false);
+			} else {
+				$(this).prop("checked", false).trigger('change');
+			}
+			i++;
+		}
+		);
+
 	}
 }
 function totalDepartment(branchId) {
@@ -152,6 +132,7 @@ function totalDepartment(branchId) {
 	totalDepartment = data.length;
 	return totalDepartment;
 }
+
 function totalTeam(departmentId) {
 	var totalTeam = 0;
 	var data = [];
@@ -182,20 +163,7 @@ function clearEveryShow() {
 	$("#kgi-group-update").html('');
 
 }
-function allTeam(departmentId) {
-	if ($("#multi-check-all-team-" + departmentId).prop("checked") == true) {
-		$('input[id="multi-check-team-' + departmentId + '"]').each(function () {
-			$(this).prop("checked", true);
-		}
-		);
-	} else {
-		$('input[id="multi-check-team-' + departmentId + '"]').each(function () {
-			$(this).prop("checked", false);
-		}
-		);
 
-	}
-}
 function kgiHistory(kgiId) {
 	var url = $url + 'kgi/management/history';
 	$("#v-kgiId").val(kgiId);

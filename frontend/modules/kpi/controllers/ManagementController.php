@@ -190,20 +190,22 @@ class ManagementController extends Controller
 
             $data = [
                 'kpiName' => $_POST["kpiName"],  
-                'company' => $_POST["company"],
+                'company' => $_POST["companyId"],
                 'branch' => $_POST["branch"],
-                'unit' => $_POST["unit"],
+                'unit' => $_POST["unitId"],
                 'amount' => $_POST["amount"],
                 'month' => $_POST["month"],  
                 'year' => $_POST["year"],
                 'detail' => $_POST["detail"],
                 'amountType' => $_POST["amountType"],
                 'code' => $_POST["code"],
-                'quanRatio' => $_POST["quanRatio"],  
+                'quanRatio' => $_POST["quantRatio"],  
                 'nextCheckDate' => $_POST["nextCheckDate"],
                 'fromDate' => $_POST["fromDate"],
                 'toDate' => $_POST["toDate"],
                 'department' => $_POST["department"],
+                'team' => $_POST["team"],
+                'priority' => $_POST["priority"],
                 'status' => $_POST["status"],
                 'result' => $_POST["result"],
             ];
@@ -213,8 +215,8 @@ class ManagementController extends Controller
             $result = isset($_POST["result"]) && $_POST["result"] != '' ? $_POST["result"] : 0;
             $kpi = new Kpi();
             $kpi->kpiName = $_POST["kpiName"];
-            $kpi->companyId = $_POST["company"];
-            $kpi->unitId = $_POST["unit"];
+            $kpi->companyId = $_POST["companyId"];
+            $kpi->unitId = $_POST["unitId"];
             $kpi->fromDate = $_POST["fromDate"];
             $kpi->targetAmount = str_replace(",", "", $_POST["amount"]);
             $kpi->toDate = $_POST["toDate"];
@@ -233,9 +235,9 @@ class ManagementController extends Controller
                 $kpiId = Yii::$app->db->lastInsertID;
                 $kpiHistory = new KpiHistory();
                 $kpiHistory->kpiId = $kpiId;
-                $kpiHistory->unitId = $_POST["unit"];
-                $kpiHistory->nextCheckDate = $_POST["nextDate"];
-                $kpiHistory->targetAmount = str_replace(",", "", $_POST["targetAmount"]);
+                $kpiHistory->unitId = $_POST["unitId"];
+                $kpiHistory->nextCheckDate = $_POST["nextCheckDate"];
+                $kpiHistory->targetAmount = str_replace(",", "", $_POST["amount"]);
                 $kpiHistory->description = $_POST["detail"];
                 $kpiHistory->quantRatio = $_POST["quantRatio"];
                 $kpiHistory->priority = $_POST["priority"];
@@ -244,6 +246,7 @@ class ManagementController extends Controller
                 $kpiHistory->status = $_POST["status"];
                 $kpiHistory->month = $_POST["month"];
                 $kpiHistory->year = $_POST["year"];
+                $kpiHistory->result = $_POST["result"] ?? 0;
                 $kpiHistory->createrId = Yii::$app->user->id;
                 $kpiHistory->createDateTime = new Expression('NOW()');
                 $kpiHistory->updateDateTime = new Expression('NOW()');
