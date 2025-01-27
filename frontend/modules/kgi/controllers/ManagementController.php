@@ -247,6 +247,25 @@ class ManagementController extends Controller
 				return $this->redirect(Yii::$app->homeUrl . 'kgi/assign/assign/' . ModelMaster::encodeParams(["kgiId" => $kgiId, "companyId" => $_POST["companyId"]]));
 				//return $this->redirect('grid');
 			}
+		} else {
+			$groupId = Group::currentGroupId();
+			if ($groupId == null) {
+				return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+			}
+			$role = UserRole::userRight();
+			$api = curl_init();
+			curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+			curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+			curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+			$companies = curl_exec($api);
+			$companies = json_decode($companies, true);
+			curl_close($api);
+			return $this->render('kgi_form', [
+				"statusform" => 'create',
+				"role" => $role,
+				"companies" => $companies
+			]);
 		}
 	}
 	public function actionCompanyMultiBranch()
@@ -1632,14 +1651,14 @@ class ManagementController extends Controller
 		}
 		$branchId = User::userBranchId();
 		$admin = UserRole::isAdmin();
-		if ($admin == 1 ){
+		if ($admin == 1) {
 			$departments = Department::find()
-			->where(["status" => 1])
-			->asArray()->all();
+				->where(["status" => 1])
+				->asArray()->all();
 		} else {
 			$departments = Department::find()
-			->where(["branchId" => $branchId, "status" => 1])
-			->asArray()->all();
+				->where(["branchId" => $branchId, "status" => 1])
+				->asArray()->all();
 		}
 		if (isset($departments) && count($departments) > 0) {
 			foreach ($departments as $department) :
