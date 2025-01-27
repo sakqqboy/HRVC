@@ -241,13 +241,44 @@ select.form-select option:disabled {
                                     title="<?= Yii::t('app', 'Select the relevant branches where this indicator will be monitored. You can choose multiple branches to track Performance achievement across different locations') ?>"
                                     alt="Help Icon">
                             </label>
-                            <div class="form-control" id="multi-branch" style="width: 496px;">
-                                <span id="multi-branch-text"><?= Yii::t('app', 'Select Branches') ?></span>
+                            <div class="form-control" id="multi-branch" style="width: 496px;
+                                display: flex;
+                                align-items: center;
+                                padding: 5px 15px;
+                                border: 1px solid #d1d5db;
+                                border-radius: 5px;
+                                background-color: #fff;
+                                font-size: 14px;
+                                position: relative;">
+                                <span id="multi-branch-text" style="flex-grow: 1;
+                                                                color: #8a8a8a;
+                                                                font-family: SF Pro Display
+                                                                , sans-serif;
+                                                            ">
+                                    <?= Yii::t('app', 'Select Branch/s') ?></span>
+                                <div class="circle-container pl-15" id="image-branches" data-type="branch" style="display: flex;
+                                    align-items: center;
+                                    gap: 5px;
+                                    padding-left: 15px;">
+                                    <div class="cycle-current-gray">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
+                                    </div>
+                                    <div class="cycle-current-gray">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
+                                    </div>
+                                    <div class="cycle-current-gray">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
+                                    </div>
+                                    <div class="cycle-current-gray" style="color: #000; right: 15px;"
+                                        id="branch-selected-count">
+                                        00
+                                    </div>
+                                </div>
                                 <i class="toggle-icon-branch fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
                             </div>
 
                             <div class="col-12" <?php if($statusform == 'update'): ?> id="show-multi-branch-update"
-                                <?php else: ?> id="show-multi-branch" <?php endif; ?> style="position: absolute; top: <?= ($statusform == 'create') ? '60%' : '60%'; ?>; 
+                                <?php else: ?> id="show-multi-branch" <?php endif; ?> style="position: absolute; top: <?= ($statusform == 'create') ? '80%' : '80%'; ?>; 
                                     left: 0; width: 100%; z-index: 999; background-color: white; 
                                     border: 1px solid #ced4da; padding: 10px; display: none;">
                                 <?php if($statusform == 'create'): ?>
@@ -258,23 +289,7 @@ select.form-select option:disabled {
 
                             </div>
                             <div>
-                                <div class="circle-container pl-15" id="image-branches" data-type="branch">
-                                    <div class="cycle-current-gray">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
-                                    </div>
-                                    <div class="cycle-current-gray">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
-                                    </div>
-                                    <div class="cycle-current-gray">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
-                                    </div>
-                                    <div class="cycle-current-gray" style="color: #000;" id="branch-selected-count">
-                                        00
-                                    </div>
-                                    <label class="sub-manage-create" id="branch-selected-message">
-                                        No Branches are Selected Yet
-                                    </label>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -289,13 +304,44 @@ select.form-select option:disabled {
                                 title="<?= Yii::t('app', 'Choose the departments that will be responsible for this performance indicator. Multiple departments can be selected for cross-functional Performance tracking.') ?>"
                                 alt="Help Icon">
                         </label>
-                        <div class="form-control" id="multi-department" style="width: 100%">
-                            <span id="multi-department-text"><?= Yii::t('app', 'Select Department') ?></span>
+                        <div class="form-control" id="multi-department" style="width: 496px;
+                                display: flex;
+                                align-items: center;
+                                padding: 5px 15px;
+                                border: 1px solid #d1d5db;
+                                border-radius: 5px;
+                                background-color: #fff;
+                                font-size: 14px;
+                                position: relative;">
+                            <span id="multi-department-text" style="flex-grow: 1;
+                                       color: #8a8a8a;
+                                       font-family: SF Pro Display
+                                       , sans-serif;">
+                                <?= Yii::t('app', 'Select Department') ?>
+                            </span>
+                            <div class="circle-container pl-15" id="image-departments" data-type="department" style="display: flex;
+                                    align-items: center;
+                                    gap: 5px;
+                                    padding-left: 15px;">
+                                <div class="cycle-current-gray">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/departments-black.svg" alt="icon">
+                                </div>
+                                <div class="cycle-current-gray">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/departments-black.svg" alt="icon">
+                                </div>
+                                <div class="cycle-current-gray">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/departments-black.svg" alt="icon">
+                                </div>
+                                <div class="cycle-current-gray" style="color: #000; right: 15px;"
+                                    id="department-selected-count">
+                                    00
+                                </div>
+                            </div>
                             <i class="toggle-icon-department fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
                         </div>
 
                         <div class="col-12" <?php if($statusform == 'update'): ?> id="show-multi-department-update"
-                            <?php else: ?> id="show-multi-department" <?php endif; ?> style="position: absolute; top: 60%; left: 0; width: 100%; z-index: 999; background-color: white; 
+                            <?php else: ?> id="show-multi-department" <?php endif; ?> style="position: absolute; top: 80%; left: 0; width: 100%; z-index: 999; background-color: white; 
                             border: 1px solid #ced4da; padding: 10px; display: none;">
                             <?php if($statusform == 'create'): ?>
                             <!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
@@ -305,23 +351,7 @@ select.form-select option:disabled {
                         </div>
 
                         <div>
-                            <div class="circle-container pl-15" id="image-departments" data-type="department">
-                                <div class="cycle-current-gray">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/departments-black.svg" alt="icon">
-                                </div>
-                                <div class="cycle-current-gray">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/departments-black.svg" alt="icon">
-                                </div>
-                                <div class="cycle-current-gray">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/departments-black.svg" alt="icon">
-                                </div>
-                                <div class="cycle-current-gray" style="color: #000;" id="department-selected-count">
-                                    00
-                                </div>
-                                <label class="sub-manage-create" id="department-selected-message">
-                                    No Departments are Selected Yet
-                                </label>
-                            </div>
+
                         </div>
                     </div>
                     <div class="form-group mt-37"
@@ -334,8 +364,39 @@ select.form-select option:disabled {
                                 title="<?= Yii::t('app', 'Choose the Team that will be responsible for achieving this performance indicator. Multiple Teams can be selected for collaborative performance achievement.') ?>"
                                 alt="Help Icon">
                         </label>
-                        <div class="form-control" id="multi-team" style="width: 100%">
-                            <span id="multi-team-text"><?= Yii::t('app', 'Select Team') ?></span>
+                        <div class="form-control" id="multi-team" style="width: 496px;
+                                display: flex;
+                                align-items: center;
+                                padding: 5px 15px;
+                                border: 1px solid #d1d5db;
+                                border-radius: 5px;
+                                background-color: #fff;
+                                font-size: 14px;
+                                position: relative;">
+                            <span id="multi-team-text" style="flex-grow: 1;
+                                       color: #8a8a8a;
+                                       font-family: SF Pro Display
+                                       , sans-serif;">
+                                <?= Yii::t('app', 'Select Team') ?>
+                            </span>
+                            <div class="circle-container pl-15" id="image-team" data-type="team" style="display: flex;
+                                    align-items: center;
+                                    gap: 5px;
+                                    padding-left: 15px;">
+                                <div class="cycle-current-gray">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/teams-black.svg" alt="icon">
+                                </div>
+                                <div class="cycle-current-gray">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/teams-black.svg" alt="icon">
+                                </div>
+                                <div class="cycle-current-gray">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/teams-black.svg" alt="icon">
+                                </div>
+                                <div class="cycle-current-gray" style="color: #000;  right: 15px;"
+                                    id="team-selected-count">
+                                    00
+                                </div>
+                            </div>
                             <i class="toggle-icon-team fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
                         </div>
 
@@ -350,23 +411,7 @@ select.form-select option:disabled {
                         </div>
 
                         <div>
-                            <div class="circle-container pl-15" id="image-team" data-type="team">
-                                <div class="cycle-current-gray">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/teams-black.svg" alt="icon">
-                                </div>
-                                <div class="cycle-current-gray">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/teams-black.svg" alt="icon">
-                                </div>
-                                <div class="cycle-current-gray">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/teams-black.svg" alt="icon">
-                                </div>
-                                <div class="cycle-current-gray" style="color: #000;" id="team-selected-count">
-                                    00
-                                </div>
-                                <label class="sub-manage-create" id="team-selected-message">
-                                    No Team are Selected Yet
-                                </label>
-                            </div>
+
                         </div>
                     </div>
                     <div class="form-group mt-37"
