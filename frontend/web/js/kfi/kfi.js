@@ -107,37 +107,37 @@ function branchMultiDepartment() {
         let imageSrc = $url + "image/branches.svg"; // กำหนดแหล่งที่มาของภาพ
         let blackimageSrc = $url + "image/branches-black.svg"; // กำหนดแหล่งที่มาของภาพ
 
-        // เปลี่ยนค่าใน <div> ที่มี id="selected-count" เฉพาะใน #kfi-branches
-        $("#kfi-branches #branch-selected-count").removeClass("cycle-current-gray").addClass("cycle-current-white");
-        $("#kfi-branches #branch-selected-message").html(``);
+        // เปลี่ยนค่าใน <div> ที่มี id="selected-count" เฉพาะใน #image-branches
+        $("#image-branches #branch-selected-count").removeClass("cycle-current-gray").addClass("cycle-current-white");
+        $("#image-branches #branch-selected-message").html(``);
 
         if (multiBranch.length == 1) {
-            $("#kfi-branches .cycle-current").slice(0, 3)
+            $("#image-branches .cycle-current").slice(0, 3)
                 .removeClass("cycle-current")
                 .addClass("cycle-current-gray")
                 .find("img")
                 .attr("src", blackimageSrc);
             // เปลี่ยน class ของ cycle-current-gray เป็น cycle-current สำหรับ 1 div แรก ใน #kfi-branches
-            $("#kfi-branches .cycle-current-gray").slice(0, 1).removeClass("cycle-current-gray").addClass("cycle-current");
+            $("#image-branches .cycle-current-gray").slice(0, 1).removeClass("cycle-current-gray").addClass("cycle-current");
             // เปลี่ยนแหล่งที่มาของภาพสำหรับ 1 รูปแรก
-            $("#kfi-branches .cycle-current").slice(0, 1).find("img").attr("src", imageSrc);
+            $("#image-branches .cycle-current").slice(0, 1).find("img").attr("src", imageSrc);
         }
         if (multiBranch.length == 2) {
-            $("#kfi-branches .cycle-current").slice(0, 3)
+            $("#image-branches .cycle-current").slice(0, 3)
                 .removeClass("cycle-current")
                 .addClass("cycle-current-gray")
                 .find("img")
                 .attr("src", blackimageSrc);
-            // เปลี่ยน class ของ cycle-current-gray เป็น cycle-current สำหรับ 2 div แรก ใน #kfi-branches
-            $("#kfi-branches .cycle-current-gray").slice(0, 2).removeClass("cycle-current-gray").addClass("cycle-current");
+            // เปลี่ยน class ของ cycle-current-gray เป็น cycle-current สำหรับ 2 div แรก ใน #image-branches
+            $("#image-branches .cycle-current-gray").slice(0, 2).removeClass("cycle-current-gray").addClass("cycle-current");
             // เปลี่ยนแหล่งที่มาของภาพสำหรับ 2 รูปแรก
-            $("#kfi-branches .cycle-current").slice(0, 2).find("img").attr("src", imageSrc);
+            $("#image-branches .cycle-current").slice(0, 2).find("img").attr("src", imageSrc);
         }
         if (multiBranch.length >= 3) {
-            // เปลี่ยน class ของ cycle-current-gray เป็น cycle-current สำหรับ 3 div แรก ใน #kfi-branches
-            $("#kfi-branches .cycle-current-gray").slice(0, 3).removeClass("cycle-current-gray").addClass("cycle-current");
+            // เปลี่ยน class ของ cycle-current-gray เป็น cycle-current สำหรับ 3 div แรก ใน #image-branches
+            $("#image-branches .cycle-current-gray").slice(0, 3).removeClass("cycle-current-gray").addClass("cycle-current");
             // เปลี่ยนแหล่งที่มาของภาพสำหรับ 3 รูปแรก
-            $("#kfi-branches .cycle-current").slice(0, 3).find("img").attr("src", imageSrc);
+            $("#image-branches .cycle-current").slice(0, 3).find("img").attr("src", imageSrc);
         }
 
         // แสดงจำนวนที่เลือกใน #multi-branch-text
@@ -157,15 +157,15 @@ function branchMultiDepartment() {
             $(".multiCheck-" + $(this).val()).prop('required', true);
         });
 
-        // เปลี่ยนค่าใน <div> เมื่อไม่มีการเลือก checkbox เฉพาะใน #kfi-branches
-        $("#kfi-branches #branch-selected-count").removeClass("cycle-current-white").addClass("cycle-current-gray");
-        $("#kfi-branches #branch-selected-message").html("No Branches are Selected Yet");
+        // เปลี่ยนค่าใน <div> เมื่อไม่มีการเลือก checkbox เฉพาะใน #image-branches
+        $("#image-branches #branch-selected-count").removeClass("cycle-current-white").addClass("cycle-current-gray");
+        $("#image-branches #branch-selected-message").html("No Branches are Selected Yet");
 
-        // เปลี่ยนแหล่งที่มาของภาพกลับเป็น default เฉพาะใน #kfi-branches
-        $("#kfi-branches .cycle-current img").attr("src", $url + "image/branches-black.svg");
+        // เปลี่ยนแหล่งที่มาของภาพกลับเป็น default เฉพาะใน #image-branches
+        $("#image-branches .cycle-current img").attr("src", $url + "image/branches-black.svg");
 
         // เปลี่ยน class ของ cycle-current เป็น cycle-current-gray สำหรับ 3 div แรก ใน #kfi-branches
-        $("#kfi-branches .cycle-current").slice(0, 3).removeClass("cycle-current").addClass("cycle-current-gray");
+        $("#image-branches .cycle-current").slice(0, 3).removeClass("cycle-current").addClass("cycle-current-gray");
 
         // ถ้าไม่ได้เลือกบริษัทใดๆ ให้แสดงข้อความ "Select Branches"
         $("#multi-branch-text").html("<?= Yii::t('app', 'Select Branches') ?>");
@@ -241,38 +241,38 @@ function departmentMultiTeam(branchId) {
         let deptImageSrc = $url + "image/departments.svg"; // แหล่งที่มาของภาพสำหรับ departments
         let deptblackImageSrc = $url + "image/departments-black.svg"; // แหล่งที่มาของภาพสำหรับ departments
 
-        // เปลี่ยน class และข้อความสำหรับ #kfi-departments
-        $("#kfi-departments #department-selected-count")
+        // เปลี่ยน class และข้อความสำหรับ #image-departments
+        $("#image-departments #department-selected-count")
             .removeClass("cycle-current-gray")
             .addClass("cycle-current-white");
-        $("#kfi-departments #department-selected-message").html("");
+        $("#image-departments #department-selected-message").html("");
 
         if (multiDepartment.length == 1) {
-            $("#kfi-departments .cycle-current").slice(0, 3)
+            $("#image-departments .cycle-current").slice(0, 3)
                 .removeClass("cycle-current")
                 .addClass("cycle-current-gray")
                 .find("img")
                 .attr("src", deptblackImageSrc);
-            $("#kfi-departments .cycle-current-gray").slice(0, 1)
+            $("#image-departments .cycle-current-gray").slice(0, 1)
                 .removeClass("cycle-current-gray")
                 .addClass("cycle-current")
                 .find("img")
                 .attr("src", deptImageSrc);
         }
         if (multiDepartment.length == 2) {
-            $("#kfi-departments .cycle-current").slice(0, 3)
+            $("#image-departments .cycle-current").slice(0, 3)
                 .removeClass("cycle-current")
                 .addClass("cycle-current-gray")
                 .find("img")
                 .attr("src", deptblackImageSrc);
-            $("#kfi-departments .cycle-current-gray").slice(0, 2)
+            $("#image-departments .cycle-current-gray").slice(0, 2)
                 .removeClass("cycle-current-gray")
                 .addClass("cycle-current")
                 .find("img")
                 .attr("src", deptImageSrc);
         }
         if (multiDepartment.length >= 3) {
-            $("#kfi-departments .cycle-current-gray").slice(0, 3)
+            $("#image-departments .cycle-current-gray").slice(0, 3)
                 .removeClass("cycle-current-gray")
                 .addClass("cycle-current")
                 .find("img")
@@ -299,14 +299,14 @@ function departmentMultiTeam(branchId) {
         });
 
         // เปลี่ยน class และข้อความเมื่อไม่มี departments ที่เลือก
-        $("#kfi-departments #department-selected-count")
+        $("#image-departments #department-selected-count")
             .removeClass("cycle-current-white")
             .addClass("cycle-current-gray");
-        $("#kfi-departments #department-selected-message").html("No Departments are Selected Yet");
+        $("#image-departments #department-selected-message").html("No Departments are Selected Yet");
 
         // เปลี่ยนภาพกลับเป็น default
-        $("#kfi-departments .cycle-current img").attr("src", $url + "image/departments-black.svg");
-        $("#kfi-departments .cycle-current").slice(0, 3)
+        $("#image-departments .cycle-current img").attr("src", $url + "image/departments-black.svg");
+        $("#image-departments .cycle-current").slice(0, 3)
             .removeClass("cycle-current")
             .addClass("cycle-current-gray");
 
@@ -779,7 +779,7 @@ flatpickr("#endDatePicker", {
 //         return false;        // หยุดการทำงานต่อ
 //     }
 // });
-function validateForm(event) {
+function validateFormKfi(event) {
     event.preventDefault(); // ป้องกันการส่งฟอร์มก่อนการตรวจสอบ
 
     var fromDate = document.getElementById('fromDate').value.trim();
@@ -972,36 +972,36 @@ function branchMultiDepartmentUpdateKfi() {
         let blackimageSrc = $url + "image/branches-black.svg"; // กำหนดแหล่งที่มาของภาพ
 
         // เปลี่ยนค่าใน <div> ที่มี id="selected-count" เฉพาะใน #kfi-branches
-        $("#kfi-branches #branch-selected-count").removeClass("cycle-current-gray").addClass("cycle-current-white");
-        $("#kfi-branches #branch-selected-message").html(``);
+        $("#image-branches #branch-selected-count").removeClass("cycle-current-gray").addClass("cycle-current-white");
+        $("#image-branches #branch-selected-message").html(``);
 
         if (multiBranch.length == 1) {
-            $("#kfi-branches .cycle-current").slice(0, 3)
+            $("#image-branches .cycle-current").slice(0, 3)
                 .removeClass("cycle-current")
                 .addClass("cycle-current-gray")
                 .find("img")
                 .attr("src", blackimageSrc);
-            // เปลี่ยน class ของ cycle-current-gray เป็น cycle-current สำหรับ 1 div แรก ใน #kfi-branches
-            $("#kfi-branches .cycle-current-gray").slice(0, 1).removeClass("cycle-current-gray").addClass("cycle-current");
+            // เปลี่ยน class ของ cycle-current-gray เป็น cycle-current สำหรับ 1 div แรก ใน #image-branches
+            $("#image-branches .cycle-current-gray").slice(0, 1).removeClass("cycle-current-gray").addClass("cycle-current");
             // เปลี่ยนแหล่งที่มาของภาพสำหรับ 1 รูปแรก
-            $("#kfi-branches .cycle-current").slice(0, 1).find("img").attr("src", imageSrc);
+            $("#image-branches .cycle-current").slice(0, 1).find("img").attr("src", imageSrc);
         }
         if (multiBranch.length == 2) {
-            $("#kfi-branches .cycle-current").slice(0, 3)
+            $("#image-branches .cycle-current").slice(0, 3)
                 .removeClass("cycle-current")
                 .addClass("cycle-current-gray")
                 .find("img")
                 .attr("src", blackimageSrc);
-            // เปลี่ยน class ของ cycle-current-gray เป็น cycle-current สำหรับ 2 div แรก ใน #kfi-branches
-            $("#kfi-branches .cycle-current-gray").slice(0, 2).removeClass("cycle-current-gray").addClass("cycle-current");
+            // เปลี่ยน class ของ cycle-current-gray เป็น cycle-current สำหรับ 2 div แรก ใน #image-branches
+            $("#image-branches .cycle-current-gray").slice(0, 2).removeClass("cycle-current-gray").addClass("cycle-current");
             // เปลี่ยนแหล่งที่มาของภาพสำหรับ 2 รูปแรก
-            $("#kfi-branches .cycle-current").slice(0, 2).find("img").attr("src", imageSrc);
+            $("#image-branches .cycle-current").slice(0, 2).find("img").attr("src", imageSrc);
         }
         if (multiBranch.length >= 3) {
-            // เปลี่ยน class ของ cycle-current-gray เป็น cycle-current สำหรับ 3 div แรก ใน #kfi-branches
-            $("#kfi-branches .cycle-current-gray").slice(0, 3).removeClass("cycle-current-gray").addClass("cycle-current");
+            // เปลี่ยน class ของ cycle-current-gray เป็น cycle-current สำหรับ 3 div แรก ใน #image-branches
+            $("#image-branches .cycle-current-gray").slice(0, 3).removeClass("cycle-current-gray").addClass("cycle-current");
             // เปลี่ยนแหล่งที่มาของภาพสำหรับ 3 รูปแรก
-            $("#kfi-branches .cycle-current").slice(0, 3).find("img").attr("src", imageSrc);
+            $("#image-branches .cycle-current").slice(0, 3).find("img").attr("src", imageSrc);
         }
 
         // แสดงจำนวนที่เลือกใน #multi-branch-text
@@ -1022,15 +1022,15 @@ function branchMultiDepartmentUpdateKfi() {
             $(".multiCheck-" + $(this).val()).prop('required', true);
         });
 
-        // เปลี่ยนค่าใน <div> เมื่อไม่มีการเลือก checkbox เฉพาะใน #kfi-branches
-        $("#kfi-branches #branch-selected-count").removeClass("cycle-current-white").addClass("cycle-current-gray");
-        $("#kfi-branches #branch-selected-message").html("No Branches are Selected Yet");
+        // เปลี่ยนค่าใน <div> เมื่อไม่มีการเลือก checkbox เฉพาะใน #image-branches
+        $("#image-branches #branch-selected-count").removeClass("cycle-current-white").addClass("cycle-current-gray");
+        $("#image-branches #branch-selected-message").html("No Branches are Selected Yet");
 
-        // เปลี่ยนแหล่งที่มาของภาพกลับเป็น default เฉพาะใน #kfi-branches
-        $("#kfi-branches .cycle-current img").attr("src", $url + "image/branches-black.svg");
+        // เปลี่ยนแหล่งที่มาของภาพกลับเป็น default เฉพาะใน #image-branches
+        $("#image-branches .cycle-current img").attr("src", $url + "image/branches-black.svg");
 
-        // เปลี่ยน class ของ cycle-current เป็น cycle-current-gray สำหรับ 3 div แรก ใน #kfi-branches
-        $("#kfi-branches .cycle-current").slice(0, 3).removeClass("cycle-current").addClass("cycle-current-gray");
+        // เปลี่ยน class ของ cycle-current เป็น cycle-current-gray สำหรับ 3 div แรก ใน #image-branches
+        $("#image-branches .cycle-current").slice(0, 3).removeClass("cycle-current").addClass("cycle-current-gray");
 
         // ถ้าไม่ได้เลือกบริษัทใดๆ ให้แสดงข้อความ "Select Branches"
         $("#multi-branch-text").html("<?= Yii::t('app', 'Select Branches') ?>");
@@ -1152,38 +1152,38 @@ function departmentMultiTeamUpdateKfi(branchId) {
         let deptImageSrc = $url + "image/departments.svg"; // แหล่งที่มาของภาพสำหรับ departments
         let deptblackImageSrc = $url + "image/departments-black.svg"; // แหล่งที่มาของภาพสำหรับ departments
 
-        // เปลี่ยน class และข้อความสำหรับ #kfi-departments
-        $("#kfi-departments #department-selected-count")
+        // เปลี่ยน class และข้อความสำหรับ #image-departments
+        $("#image-departments #department-selected-count")
             .removeClass("cycle-current-gray")
             .addClass("cycle-current-white");
-        $("#kfi-departments #department-selected-message").html("");
+        $("#image-departments #department-selected-message").html("");
 
         if (multiDepartment.length == 1) {
-            $("#kfi-departments .cycle-current").slice(0, 3)
+            $("#image-departments .cycle-current").slice(0, 3)
                 .removeClass("cycle-current")
                 .addClass("cycle-current-gray")
                 .find("img")
                 .attr("src", deptblackImageSrc);
-            $("#kfi-departments .cycle-current-gray").slice(0, 1)
+            $("#image-departments .cycle-current-gray").slice(0, 1)
                 .removeClass("cycle-current-gray")
                 .addClass("cycle-current")
                 .find("img")
                 .attr("src", deptImageSrc);
         }
         if (multiDepartment.length == 2) {
-            $("#kfi-departments .cycle-current").slice(0, 3)
+            $("#image-departments .cycle-current").slice(0, 3)
                 .removeClass("cycle-current")
                 .addClass("cycle-current-gray")
                 .find("img")
                 .attr("src", deptblackImageSrc);
-            $("#kfi-departments .cycle-current-gray").slice(0, 2)
+            $("#image-departments .cycle-current-gray").slice(0, 2)
                 .removeClass("cycle-current-gray")
                 .addClass("cycle-current")
                 .find("img")
                 .attr("src", deptImageSrc);
         }
         if (multiDepartment.length >= 3) {
-            $("#kfi-departments .cycle-current-gray").slice(0, 3)
+            $("#image-departments .cycle-current-gray").slice(0, 3)
                 .removeClass("cycle-current-gray")
                 .addClass("cycle-current")
                 .find("img")
@@ -1210,14 +1210,14 @@ function departmentMultiTeamUpdateKfi(branchId) {
         });
 
         // เปลี่ยน class และข้อความเมื่อไม่มี departments ที่เลือก
-        $("#kfi-departments #department-selected-count")
+        $("#image-departments #department-selected-count")
             .removeClass("cycle-current-white")
             .addClass("cycle-current-gray");
-        $("#kfi-departments #department-selected-message").html("No Departments are Selected Yet");
+        $("#image-departments #department-selected-message").html("No Departments are Selected Yet");
 
         // เปลี่ยนภาพกลับเป็น default
-        $("#kfi-departments .cycle-current img").attr("src", $url + "image/departments-black.svg");
-        $("#kfi-departments .cycle-current").slice(0, 3)
+        $("#image-departments .cycle-current img").attr("src", $url + "image/departments-black.svg");
+        $("#image-departments .cycle-current").slice(0, 3)
             .removeClass("cycle-current")
             .addClass("cycle-current-gray");
 

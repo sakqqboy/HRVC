@@ -184,17 +184,40 @@ class ManagementController extends Controller
     }
     public function actionCreateKpi()
     {
+
+        
         if (isset($_POST["kpiName"]) && trim($_POST["kpiName"])) {
+
+            $data = [
+                'kpiName' => $_POST["kpiName"],  
+                'company' => $_POST["company"],
+                'branch' => $_POST["branch"],
+                'unit' => $_POST["unit"],
+                'amount' => $_POST["amount"],
+                'month' => $_POST["month"],  
+                'year' => $_POST["year"],
+                'detail' => $_POST["detail"],
+                'amountType' => $_POST["amountType"],
+                'code' => $_POST["code"],
+                'quanRatio' => $_POST["quanRatio"],  
+                'nextCheckDate' => $_POST["nextCheckDate"],
+                'fromDate' => $_POST["fromDate"],
+                'toDate' => $_POST["toDate"],
+                'department' => $_POST["department"],
+                'status' => $_POST["status"],
+                'result' => $_POST["result"],
+            ];
+
+            //  throw new Exception(print_r($data,true));
+            
             $result = isset($_POST["result"]) && $_POST["result"] != '' ? $_POST["result"] : 0;
             $kpi = new Kpi();
             $kpi->kpiName = $_POST["kpiName"];
-            $kpi->companyId = $_POST["companyId"];
+            $kpi->companyId = $_POST["company"];
             $kpi->unitId = $_POST["unit"];
-            // $kpi->periodDate = $_POST["periodDate"];
             $kpi->fromDate = $_POST["fromDate"];
-            $kpi->targetAmount = str_replace(",", "", $_POST["targetAmount"]);
+            $kpi->targetAmount = str_replace(",", "", $_POST["amount"]);
             $kpi->toDate = $_POST["toDate"];
-            $kpi->targetAmount = str_replace(",", "", $_POST["targetAmount"]);
             $kpi->kpiDetail = $_POST["detail"];
             $kpi->quantRatio = $_POST["quantRatio"];
             $kpi->priority = $_POST["priority"];
@@ -203,7 +226,6 @@ class ManagementController extends Controller
             $kpi->status = $_POST["status"];
             $kpi->month = $_POST["month"];
             $kpi->year = $_POST["year"];
-            //$kpi->result = str_replace(",", "", $result);
             $kpi->createrId = Yii::$app->user->id;
             $kpi->createDateTime = new Expression('NOW()');
             $kpi->updateDateTime = new Expression('NOW()');
@@ -212,7 +234,6 @@ class ManagementController extends Controller
                 $kpiHistory = new KpiHistory();
                 $kpiHistory->kpiId = $kpiId;
                 $kpiHistory->unitId = $_POST["unit"];
-                // $kpiHistory->periodDate = $_POST["periodDate"];
                 $kpiHistory->nextCheckDate = $_POST["nextDate"];
                 $kpiHistory->targetAmount = str_replace(",", "", $_POST["targetAmount"]);
                 $kpiHistory->description = $_POST["detail"];
@@ -223,7 +244,6 @@ class ManagementController extends Controller
                 $kpiHistory->status = $_POST["status"];
                 $kpiHistory->month = $_POST["month"];
                 $kpiHistory->year = $_POST["year"];
-                //$kpiHistory->result = str_replace(",", "", $result);
                 $kpiHistory->createrId = Yii::$app->user->id;
                 $kpiHistory->createDateTime = new Expression('NOW()');
                 $kpiHistory->updateDateTime = new Expression('NOW()');
@@ -238,12 +258,38 @@ class ManagementController extends Controller
                 }
                 if (isset($_POST["team"]) && count($_POST["team"]) > 0) {
                     $this->saveKpiTeam($_POST["team"], $kpiId);
-                    //    $this->saveKpiEmployee($_POST["team"], $kpiId);
                 }
+
+                return $this->redirect(Yii::$app->homeUrl . 'kpi/management/grid');
+
                 //return $this->redirect(Yii::$app->request->referrer);
-                return $this->redirect(Yii::$app->homeUrl . 'kpi/assign/assign/' . ModelMaster::encodeParams(["kpiId" => $kpiId, "companyId" => $_POST["companyId"]]));
+                // return $this->redirect(Yii::$app->homeUrl . 'kpi/assign/assign/' . ModelMaster::encodeParams(["kpiId" => $kpiId, "companyId" => $_POST["companyId"]]));
                 //return $this->redirect('grid');
             }
+        } else {
+                $role = UserRole::userRight();
+                $groupId = Group::currentGroupId();
+                $api = curl_init();
+                curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+                curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+                curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+                $companies = curl_exec($api);
+                $companies = json_decode($companies, true);
+
+                curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
+                $units = curl_exec($api);
+                $units = json_decode($units, true);
+                
+                curl_close($api);
+                $data = [];
+                return $this->render('kpi_from', [ 
+                    "role" => $role,
+                    "companies" => $companies,
+                    "units" => $units,
+                    "data" => $data,
+                    "statusform" =>  "create"
+                ]);
         }
     }
     public function saveKpiBranch($branch, $kpiId)
@@ -842,6 +888,32 @@ class ManagementController extends Controller
             "userId" => Yii::$app->user->id
         ]);
     }
+    public function actionCompanyMultiBranch()
+	{
+		$companyId = $_POST["companyId"];
+		$acType = $_POST["acType"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
+		$branches = curl_exec($api);
+		$branches = json_decode($branches, true);
+		if ($acType == "create") {
+			$branchText = $this->renderAjax('multi_branch', ["branches" => $branches]);
+		} else {
+			$kpiId = $_POST["kpiId"];
+			$branchText = $this->renderAjax('multi_branch_update', [
+				"branches" => $branches,
+				"kpiId" => $kpiId
+			]);
+		}
+		curl_close($api);
+		$res["status"] = true;
+		$res["branchText"] = $branchText;
+		return json_encode($res);
+	}
+    
     public function actionDepartmentMultiTeam()
     {
         $res["status"] = false;

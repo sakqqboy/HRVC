@@ -92,6 +92,60 @@ function viewTabKpi(kpiHistoryId, tabId) {
 		});
 	}
 }
+function validateFormKpi(event) {
+	event.preventDefault(); // ป้องกันการส่งฟอร์มก่อนการตรวจสอบ
+
+	var fromDate = document.getElementById('fromDate').value.trim();
+	var toDate = document.getElementById('toDate').value.trim();
+
+	if (!fromDate && !toDate) {
+		alert("กรุณาระบุวันที่เริ่มต้นและวันที่สิ้นสุด");
+		return false;
+	} else if (!fromDate) {
+		alert("กรุณาระบุวันที่เริ่มต้น");
+		return false;
+	} else if (!toDate) {
+		alert("กรุณาระบุวันที่สิ้นสุด");
+		return false;
+	}
+
+	document.getElementById('create-kpi').submit(); // ส่งฟอร์มหากข้อมูลครบถ้วน
+	// alert("0");
+	return true;
+}
+function companyMultiBrachKpi() {
+	var acType = $("#acType").val();
+	var companyId = acType == "update" ? $("#companyId").val() : $("#companyId").val();
+	var kpiId = $("#kpiId").val();
+
+	// var kfiBranchText = JSON.parse(localStorage.getItem("kfiBranchText")) || [];
+
+	// alert(kfiBranchText);
+	// ส่งข้อมูลผ่าน AJAX ไปยังเซิร์ฟเวอร์
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: $url + 'kpi/management/company-multi-branch', // URL ที่รับค่าจาก AJAX
+		data: {
+			companyId: companyId,
+			acType: acType,
+			kpiId: kpiId
+			// kfiBranchText: kfiBranchText // ส่งค่า branchIds ที่เลือกไป
+		},
+		success: function (data) {
+			if (data.status) {
+				// เติมข้อมูลที่ต้องการแสดงกลับจากเซิร์ฟเวอร์
+				if (acType == "update") {
+					$("#show-multi-branch-update").html(data.branchText);
+					$("#show-multi-branch-update").show();
+				} else {
+					$("#show-multi-branch").html(data.branchText);
+					$("#show-multi-branch").show();
+				}
+			}
+		}
+	});
+}
 function createNewIssueKpi(kpiId) {
 	var issue = $("#issue").val();
 	var description = $("#description").val();

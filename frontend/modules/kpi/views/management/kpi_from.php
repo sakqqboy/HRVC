@@ -1,18 +1,18 @@
 <?php
 use yii\bootstrap5\ActiveForm;
 if ($statusform == 'update') {
-    $parturl = 'kfi/management/save-update-kfi';
+    $parturl = 'kpi/management/save-update-kpi';
 } else {
-    $parturl = 'kfi/management/create-kfi';
+    $parturl = 'kpi/management/create-kpi';
 }
 ?>
 
 <?php $form = ActiveForm::begin([
-    'id' => 'create-kfi',
+    'id' => 'create-kpi',
     'method' => 'post',
     'options' => [
         'enctype' => 'multipart/form-data',
-        'onsubmit' => 'return validateFormKfi(event)' // เรียกฟังก์ชันตรวจสอบก่อนส่งฟอร์ม
+        'onsubmit' => 'return validateFormKpi(event)' // เรียกฟังก์ชันตรวจสอบก่อนส่งฟอร์ม
     ],
     'action' => Yii::$app->homeUrl . $parturl
 ]); 
@@ -116,7 +116,7 @@ select.form-select option:disabled {
         <div class="alert mt-28 pim-body bg-white">
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <div class="col-8">
-                    <a href="<?= Yii::$app->request->referrer ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kfi/management/grid' ?>"
+                    <a href="<?= Yii::$app->request->referrer ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kpi/management/grid' ?>"
                         class="mr-5 font-size-12">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back.svg">
                         <text class="pim-text-back">
@@ -181,7 +181,6 @@ select.form-select option:disabled {
                     </div>
                 </div>
             </div>
-            <!-- <form id="kfiForm" action="" method="POST"> -->
 
             <div class="contrainer-body-detail">
                 <div style="flex: 1;">
@@ -193,8 +192,8 @@ select.form-select option:disabled {
                                 data-toggle="tooltip" data-placement="top"
                                 title="Enter the name of your key financial indicator. This should be clear and specific, such as 'Total Sales,or 'Profit Margin">
                         </label>
-                        <input type="text" class="form-control" id="kfiName" name="kfiName"
-                            value="<?= isset($data['kfiName']) ? htmlspecialchars($data['kfiName']) : '' ?>"
+                        <input type="text" class="form-control" id="kpiName" name="kpiName"
+                            value="<?= isset($data['kpiName']) ? htmlspecialchars($data['kpiName']) : '' ?>"
                             placeholder="Please Write the Name of Component" required>
 
                     </div>
@@ -208,8 +207,8 @@ select.form-select option:disabled {
                                 title="Choose the company for which this financial indicator will be tracked. Only one company can be selected at a time to ensure accurate and focused performance monitoring."
                                 alt="Help Icon">
                         </label>
-                        <select class="form-select" name="company" id="companyId"
-                            onchange="javascript:companyMultiBrachKfi()" required>
+                        <select class="form-select" name="companyId" id="companyId"
+                            onchange="javascript:companyMultiBrachKpi()" required>
                             <option value=""><?= Yii::t('app', 'Select Company') ?></option>
                             <?php
                                     if (isset($companies) && count($companies) > 0) {
@@ -251,7 +250,7 @@ select.form-select option:disabled {
                                 <?php if($statusform == 'create'): ?>
                                 <!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
                                 <?php else: ?>
-                                <?= $kfiBranchText; ?>
+                                <?= $kpiBranchText; ?>
                                 <?php endif; ?>
 
                             </div>
@@ -297,7 +296,7 @@ select.form-select option:disabled {
                             <?php if($statusform == 'create'): ?>
                             <!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
                             <?php else: ?>
-                            <?= $kfiDepartmentText; ?>
+                            <?= $kpiDepartmentText; ?>
                             <?php endif; ?>
                         </div>
 
@@ -351,7 +350,7 @@ select.form-select option:disabled {
 
                                 // echo  $unitId;
                                 ?>
-                            <input type="hidden" value="<?= $unitId ?>" id="currentUnit" name="unit" required>
+                            <input type="hidden" value="<?= $unitId ?>" id="currentUnit" name="unitId" required>
                             <input type="hidden" value="<?= $unitId ?>" id="previousUnit" required>
                         </div>
                     </div>
@@ -505,7 +504,7 @@ select.form-select option:disabled {
                                 <?= Yii::t('app', 'Quality') ?>
                             </option>
                         </select>
-                        <input type="hidden" name="kfiId" id="kfiId" value="<?= isset($kfiId) ? $kfiId : '' ?>">
+                        <input type="hidden" name="kpiId" id="kpiId" value="<?= isset($kpiId) ? $kpiId : '' ?>">
                     </div>
 
                     <div class="form-group mt-37" style="display: flex; gap: 14px; flex-wrap: wrap;">
@@ -680,7 +679,7 @@ select.form-select option:disabled {
                             ?>
                         <input type="hidden" name="status" value='1'>
                         <?php } ?>
-                        <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="btn-create-cancle"
+                        <a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="btn-create-cancle"
                             style="width: 100px;">
                             Cancel
                         </a>
@@ -724,7 +723,7 @@ $(document).ready(function() {
     // alert(statusform);
 
     if (statusform === 'update') {
-        branchMultiDepartmentUpdateKfi();
+        branchMultiDepartmentUpdateKpi();
 
         // ดึงค่า branchId ที่ถูก checked แล้ว
         var checkedBranchIds = [];
@@ -735,7 +734,7 @@ $(document).ready(function() {
         // เรียกใช้งานฟังก์ชันสำหรับ branch ที่ถูก checked เท่านั้น
         checkedBranchIds.forEach(function(branchId) {
             // alert(branchId);
-            departmentMultiTeamUpdateKfi(branchId);
+            departmentMultiTeamUpdateKpi(branchId);
         });
     }
 
