@@ -49,12 +49,19 @@ $this->title = 'KGI Grid View';
                             <?php
                             if ($role >= 3) {
                             ?>
-                                <button type="button" class="btn-createnew font-size-11" data-bs-toggle="modal"
+                                <!-- <button type="button" class="btn-createnew font-size-11" data-bs-toggle="modal"
                                     data-bs-target="#staticBackdrop5" style="position:absolute;">
+                                    <?php // Yii::t('app', 'Create New') 
+                                    ?>
+                                    <img src="<?php // Yii::$app->homeUrl 
+                                                ?>images/icons/Settings/plus.svg" alt="History"
+                                        class="pim-icon ml-3" style="margin-top: -1px;">
+                                </button> -->
+                                <a href="<?= Yii::$app->homeUrl ?>kgi/management/create-kgi" class="btn-createnew font-size-11" style="position:absolute;text-decoration:none;">
                                     <?= Yii::t('app', 'Create New') ?>
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="History"
                                         class="pim-icon ml-3" style="margin-top: -1px;">
-                                </button>
+                                </a>
                             <?php
                             }
                             ?>
