@@ -876,3 +876,23 @@ function kpiEmployeeNextTarget() {
 	});
 }
 
+function overrideChecked(check, value) {
+	// alert(value);
+	const inbox = document.getElementById('result-inbox');
+	const input = document.getElementById('result-update');
+	const icon = document.getElementById('result-icon');
+	// const storedValue = value;
+	input.value = value;
+	input.readOnly = !input.readOnly; // Toggle readonly status
+	if (input.readOnly) {
+		input.style.backgroundColor = '#f0f0f0'; // Gray when readonly
+		input.style.color = 'black';
+		inbox.style.backgroundColor = 'rgb(240, 240, 240)'; // สีเทาอ่อน
+		icon.src = $url + "image/result-gray.svg";
+	} else {
+		input.style.backgroundColor = 'white'; // White when editable
+		input.style.color = 'black';
+		inbox.style.backgroundColor = 'rgb(255, 255, 255)'; // สีพื้นหลังขาว
+		icon.src = $url + "image/result-blue.svg";
+	}
+}

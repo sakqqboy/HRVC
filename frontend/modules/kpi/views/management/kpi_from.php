@@ -28,6 +28,8 @@ $selectedPriority = isset($data['priority']) ? $data['priority'] : '';
 
 
 $result = $data['result'] ?? 0;
+$value = isset($data['result']) ? $data['result'] : 0;
+$sumvalue = isset($data['sumresult']) ? $data['sumresult'] : 0;
 $targetAmount = $data['targetAmount'] ?? 0;
 $DueBehind = $targetAmount -  $result;
 
@@ -711,7 +713,9 @@ select.form-select option:disabled {
                                     title="<?= Yii::t('app', 'Historic update contains the update from the team and indivudials if you wish to use your own values, please toggle on Override to put custom numbers ') ?>"
                                     alt="Help Icon">
                             </div>
-                            <div class="updatehistory" style="text-align: right;">
+                            <div href="javascript:void(0);" class="updatehistory" style="text-align: right;"
+                                cursor="pointer" data-bs-toggle="modal" data-bs-target="#update-history-popup"
+                                onclick="modalHistory();">
                                 <?php if($statusform == 'update'){ ?>
                                 <img
                                     src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg"><?= Yii::t('app', 'Update History') ?>
@@ -720,7 +724,7 @@ select.form-select option:disabled {
                         </label>
 
                         <div class="input-group">
-                            <span class="input-group-text"
+                            <span class="input-group-text" id="result-inbox"
                                 style="background-color:rgb(255, 255, 255); border-right: none; padding: 20px;">
                                 <img id="result-icon"
                                     src="<?= Yii::$app->homeUrl ?>image/result-<?= isset($data['result']) ? 'blue' : 'gray' ?>.svg"
@@ -729,7 +733,9 @@ select.form-select option:disabled {
                             <input type="number" class="form-control text-end" name="result" id="result-update"
                                 value="<?= isset($data['result']) ? $data['result'] : '' ?>"
                                 style="border-left: none; font-size: 22px; font-style: normal; font-weight: 600;"
-                                required oninput="updateIcon(this);">
+                                required oninput="updateIcon(this),updateResultValue(this)">
+                            <input type="hidden" name="resultValue" id="result-cheng"
+                                value="<?= isset($data['result']) ? $data['result'] : '' ?>">
                         </div>
 
 
@@ -737,19 +743,19 @@ select.form-select option:disabled {
                             <?php if($statusform == 'update'){ ?>
                             <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
                                 <label class="switch">
-                                    <input type="checkbox">
+                                    <input type="checkbox" id="historic-checkbox" checked>
                                     <span class="slider round"></span>
                                 </label>
-                                <label class="sub-manage-create" id="branch-selected-message">
+                                <label class="sub-manage-create" id="historic-switch">
                                     <?= Yii::t('app', 'Historic Update') ?>
                                 </label>
                             </div>
                             <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
                                 <label class="switch">
-                                    <input type="checkbox">
+                                    <input type="checkbox" id="override-checkbox">
                                     <span class="slider round"></span>
                                 </label>
-                                <label class="sub-manage-create" id="branch-selected-message">
+                                <label class="sub-manage-create" id="override-switch">
                                     <?= Yii::t('app', 'Override') ?>
                                 </label>
                             </div>
@@ -848,8 +854,42 @@ select.form-select option:disabled {
 <input type="hidden" value="create" id="acType">
 <?php } ?>
 <?php ActiveForm::end(); ?>
+<?= $this->render('modal_history') ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+const value = "<?= $value ?>";
+const sumvalue = "<?= $sumvalue ?>";
+
+// Get both checkboxes
+const historicCheckbox = document.getElementById('historic-checkbox');
+const overrideCheckbox = document.getElementById('override-checkbox');
+
+// Add event listeners to handle toggling behavior
+historicCheckbox.addEventListener('change', function() {
+    if (this.checked) {
+        overrideCheckbox.checked = false;
+        // alert(0);
+        overrideChecked(overrideCheckbox.checked, value);
+    } else {
+        overrideCheckbox.checked = true;
+        // alert(1);
+        overrideChecked(overrideCheckbox.checked, sumvalue);
+    }
+});
+
+overrideCheckbox.addEventListener('change', function() {
+    if (this.checked) {
+        // alert(2);
+        historicCheckbox.checked = false;
+        overrideChecked(overrideCheckbox.checked, sumvalue);
+    } else {
+        // alert(3);
+        historicCheckbox.checked = true;
+        overrideChecked(overrideCheckbox.checked, value);
+    }
+});
+
+
 $(document).ready(function() {
     var statusform = '<?= $statusform ?>';
 
@@ -899,4 +939,29 @@ $(document).ready(function() {
     $('[data-toggle="tooltip"]').tooltip(); // เปิดใช้งาน Tooltip
 
 });
+
+// function modalHistory() {
+//     var url = $url + 'kpi/management/modal-history';
+//     $.ajax({
+//         type: "POST",
+//         dataType: 'json',
+//         url: url,
+//         success: function(data) {
+//             // ใส่ข้อมูลที่โหลดมาจาก AJAX ในเนื้อหาของป็อปอัพ
+//             $("#show-modal-history").html(data.text);
+
+//             // เปิด Modal ของ Bootstrap
+//             $('#update-history-popup').modal('show');
+//         },
+//         error: function(xhr, status, error) {
+//             console.log(xhr.responseText); // ดูข้อความผิดพลาดจากเซิร์ฟเวอร์
+//             alert("เกิดข้อผิดพลาดในการโหลดข้อมูล");
+//         }
+//     });
+// }
+
+
+// function closePopup() {
+//     $('#update-history-popup').modal('hide'); // ปิด Modal ของ Bootstrap
+// }
 </script>

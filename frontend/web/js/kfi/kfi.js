@@ -1371,6 +1371,13 @@ function updateIcon(input) {
     }
 }
 
+function updateResultValue(inputElement) {
+    // นำค่าที่กรอกใน result-update ไปใส่ใน result-cheng
+    const resultValue = inputElement.value;
+    const resultCheng = document.getElementById('result-cheng');
+    resultCheng.value = resultValue;
+}
+
 $("#multi-branch").on("click", function (e) {
     var statusform = $("#acType").val();
     if (statusform == "update") {

@@ -556,6 +556,9 @@ class ManagementController extends Controller
         $isManager = UserRole::isManager();
         if (isset($_POST["kpiId"]) && $_POST["kpiId"] != "") {
             $result = isset($_POST["result"]) && $_POST["result"] != '' ? $_POST["result"] : 0;
+            if ($result != $_POST["resultValue"]){
+                $result = $_POST["resultValue"] ;
+            }
             $kpiId = $_POST["kpiId"];
             //throw new Exception(print_r(Yii::$app->request->post(), true));
             $kpi = Kpi::find()->where(["kpiId" => $kpiId])->one();
@@ -760,6 +763,15 @@ class ManagementController extends Controller
         }
         return json_encode($res);
     }
+
+    public function actionModalHistory()
+    {			$content = $this->renderAjax('modal_history');
+        // $content = $this->renderPartial('modal_history');  // โหลดไฟล์ modal_history.php
+    return json_encode(['text' => $content]);  // ส่งข้อมูลกลับในรูปแบบ JSON
+
+    }
+
+
     public function actionSaveKpiAnswer()
     {
         $solution = $_POST["answer"];

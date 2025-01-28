@@ -143,4 +143,14 @@ class KpiTeam extends \backend\models\hrvc\master\KpiTeamMaster
         }
         return $date;
     }
+
+    public static function autoSummalys($kpiId)
+    {
+        // คำนวณผลรวมของ result ในตาราง kpi_team
+        $sumResult = KpiTeam::find()
+            ->where(['kpiId' => $kpiId])
+            ->sum('result'); // ใช้ sum() เพื่อคำนวณผลรวม
+    
+        return $sumResult ?? 0; // คืนค่า 0 หากไม่มีผลลัพธ์
+    }
 }

@@ -142,6 +142,7 @@ class ManagementController extends Controller
 				"kpiName" => $kpi["kpiName"],
 				"companyId" => $kpi["companyId"],
 				"branch" => KpiBranch::kpiBranch($kpi["kpiId"]),
+				"sumresult" => KpiTeam::autoSummalys($kpi["kpiId"]),
 				"detail" => $kpiHistory['description'],
 				"quantRatio" => $kpiHistory["quantRatio"],
 				"targetAmount" => $kpiHistory["targetAmount"],
