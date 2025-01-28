@@ -85,27 +85,126 @@
                                     </span>
                                 </div>
                             </div>
-                            <div>
+                            <div style="gap: 14px; width: 100%;">
+                                <ul id="schedule-list" class="list-unstyled small">
+                                    <li class="schedule-item mt-5" role="button" tabindex="0">
+                                        <div
+                                            style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                                            <!-- กลุ่มที่ชิดซ้าย -->
+                                            <div style="display: flex; gap: 16px;">
+                                                <div
+                                                    style="display: flex; justify-content: center; align-items: center;">
+                                                    <div class="cycle-current">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
+                                                    </div>
+                                                </div>
+                                                <div style="display: flex; gap: 6px; flex-direction: column;">
+                                                    <text class="text-black" style="font-size: 16px; font-weight: 600;">
+                                                        Team A (Audit)
+                                                    </text>
+                                                    <text class="text-gray" style="font-size: 14px; font-weight: 400;">
+                                                        Accounting & Outsourcing de...
+                                                    </text>
+                                                </div>
+                                            </div>
 
+                                            <!-- กลุ่มที่ชิดขวา -->
+                                            <div style="display: flex;">
+                                                <div>
+                                                    <div style="display: flex; gap: 6px; flex-direction: column;">
+                                                        <text class="text-end">
+                                                            <span class="text-gray"
+                                                                style="font-size: 18px; font-weight: 400;">
+                                                                4,389,456
+                                                            </span>
+                                                            <span class="text-blue"
+                                                                style="font-size: 18px; font-weight: 600;">
+                                                                /3,423,775
+                                                            </span>
+                                                        </text>
+                                                        <text class="text-gray text-end"
+                                                            style="font-size: 14px; font-weight: 400;">
+                                                            January 4, 2025, 7:29 PM
+                                                        </text>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                     <div class="alert  bg-white" style="width: 774.465px; height: 562px;">
-                        <div style="display: flex; justify-content: space-between;  width: 100%;">
-                            <span class="text-blue" style="font-size: 18px; font-weight: 500;">
-                                Individual Achievement
-                            </span>
-                            <div>
-                                <span class="text-gray" style="font-size: 18px; font-weight: 400;">
-                                    Target
+                        <div style="display: flex;flex-direction: column;align-items: flex-start;gap: 23px;">
+                            <div style="display: flex; justify-content: space-between;  width: 100%;">
+                                <span class="text-blue" style="font-size: 18px; font-weight: 500;">
+                                    Individual Achievement
                                 </span>
-                                <span class="text-blue pr-10" style="font-size: 18px; font-weight: 600;">
-                                    /Result
-                                </span>
+                                <div>
+                                    <span class="text-gray" style="font-size: 18px; font-weight: 400;">
+                                        Target
+                                    </span>
+                                    <span class="text-blue pr-10" style="font-size: 18px; font-weight: 600;">
+                                        /Result
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                        <div>
+                            <div style="gap: 14px; width: 100%;">
+                                <ul id="schedule-list" class="list-unstyled small">
+                                    <li class="schedule-item mt-5" role="button" tabindex="0">
+                                        <div
+                                            style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                                            <!-- กลุ่มที่ชิดซ้าย -->
+                                            <div style="display: flex; gap: 16px; align-items: center;">
+                                                <div
+                                                    style="display: flex; justify-content: center; align-items: center;">
+                                                    <div class="col-5">
+                                                        <img src="/HRVC/frontend/web/images/employee/profile/AE5oEMwTio.jpg"
+                                                            class="width-ehsan-small" id="showMenu2">
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    style="display: flex; justify-content: center; align-items: center;">
+                                                    <span class="text-black" style="font-size: 16px; font-weight: 600;">
+                                                        Shuhei Takahashi
+                                                    </span>
+                                                </div>
+                                            </div>
 
+                                            <!-- กลุ่มที่อยู่ตรงกลาง -->
+                                            <div
+                                                style="display: flex; justify-content: center; align-items: center; background-color: rgb(215, 235, 255); border: 0.795px solid #2580D3; border-radius: 36px; padding: 8px 16px; z-index: 1;">
+                                                <div
+                                                    style="display: flex; justify-content: center; align-items: center; gap: 8px;">
+                                                    <div class="cycle-current">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
+                                                    </div>
+                                                    <span class="text-black" style="font-size: 16px; font-weight: 600;">
+                                                        Director Management
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <!-- กลุ่มที่ชิดขวา -->
+                                            <div style="display: flex; flex-direction: column; text-align: right;">
+                                                <div>
+                                                    <span class="text-gray" style="font-size: 18px; font-weight: 400;">
+                                                        4,389,456
+                                                    </span>
+                                                    <span class="text-blue" style="font-size: 18px; font-weight: 600;">
+                                                        /3,423,775
+                                                    </span>
+                                                </div>
+                                                <span class="text-gray" style="font-size: 14px; font-weight: 400;">
+                                                    January 4, 2025, 7:29 PM
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
