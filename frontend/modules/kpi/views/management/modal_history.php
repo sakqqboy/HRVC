@@ -70,11 +70,43 @@
                 </div>
                 <div
                     style="display: flex; justify-content: space-between; align-items: center; gap: 2.1px; width: 100%;">
-                    <div class="alert  bg-white" style="width: 623px; height: 562px;">
+                    <div class="alert  bg-white" style="width: 623px; height: 562px; padding: 22px 23px;">
+                        <div style="display: flex;flex-direction: column;align-items: flex-start;gap: 23px;">
+                            <div style="display: flex; justify-content: space-between;  width: 100%;">
+                                <span class="text-blue" style="font-size: 18px; font-weight: 500;">
+                                    Total Team Achievement
+                                </span>
+                                <div>
+                                    <span class="text-gray" style="font-size: 18px; font-weight: 400;">
+                                        Target
+                                    </span>
+                                    <span class="text-blue pr-10" style="font-size: 18px; font-weight: 600;">
+                                        /Result
+                                    </span>
+                                </div>
+                            </div>
+                            <div>
 
+                            </div>
+                        </div>
                     </div>
                     <div class="alert  bg-white" style="width: 774.465px; height: 562px;">
+                        <div style="display: flex; justify-content: space-between;  width: 100%;">
+                            <span class="text-blue" style="font-size: 18px; font-weight: 500;">
+                                Individual Achievement
+                            </span>
+                            <div>
+                                <span class="text-gray" style="font-size: 18px; font-weight: 400;">
+                                    Target
+                                </span>
+                                <span class="text-blue pr-10" style="font-size: 18px; font-weight: 600;">
+                                    /Result
+                                </span>
+                            </div>
+                        </div>
+                        <div>
 
+                        </div>
                     </div>
                 </div>
                 <div style="display: flex; justify-content: flex-end; align-items: center; gap: 10px;">
