@@ -765,11 +765,53 @@ class ManagementController extends Controller
     }
 
     public function actionModalHistory()
-    {			$content = $this->renderAjax('modal_history');
-        // $content = $this->renderPartial('modal_history');  // โหลดไฟล์ modal_history.php
-    return json_encode(['text' => $content]);  // ส่งข้อมูลกลับในรูปแบบ JSON
+    {	
+        $percentage = $_POST["percentage"];
+        $result = $_POST["result"];
+        $sumvalue = $_POST["sumvalue"];
+        $targetAmount = $_POST["targetAmount"];
+        $kpiId = $_POST["kpiId"];
+        $month = $_POST["month"];
+        $year = $_POST["year"];
+        $formattedRange = $_POST["formattedRange"];
+        // $kpiHistoryId = 0;
+		$kpiHistoryId = $_POST["kpiHistoryId"];
 
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-history?kpiId=' . $kpiId . '&&kpiHistoryId=' . $kpiHistoryId);
+		$history = curl_exec($api);
+		$history = json_decode($history, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-history-team?kpiId=' . $kpiId );
+		$historyTeam = curl_exec($api);
+		$historyTeam = json_decode($historyTeam, true);
+
+		curl_close($api);
+        // throw new Exception(print_r($historyTeam,true));
+
+        $data = [
+            "percentage" => $percentage,
+            "result" => $result,
+            "sumvalue" => $sumvalue,
+            "targetAmount" => $targetAmount,
+            "kpiId" => $kpiId,
+            "month" => $month,
+            "year" => $year,
+            "formattedRange" => $formattedRange,
+            "history" => $history,
+            "historyTeam" => $historyTeam
+        ];
+
+        
+    
+        header("Content-Type: application/json");
+        echo json_encode($data);
+        exit;
     }
+    
 
 
     public function actionSaveKpiAnswer()

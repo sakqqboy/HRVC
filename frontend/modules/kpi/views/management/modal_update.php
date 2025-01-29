@@ -13,18 +13,20 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-6 font-size-14">
                         <div class="col-12">
-                            <label for="exampleFormControlInput1" class="form-label"><strong class="red">*</strong><?= Yii::t('app', 'KPI Contents') ?></label>
+                            <label for="exampleFormControlInput1" class="form-label"><strong
+                                    class="red">*</strong><?= Yii::t('app', 'KPI Contents') ?></label>
                             <input type="text" class="form-control" id="kpiName-update" name="kpiName">
                         </div>
                         <div class="col-12 mt-10">
-                            <label for="input" class="form-label"><strong class="red">*</strong> <?= Yii::t('app', 'Company') ?></label>
+                            <label for="input" class="form-label"><strong class="red">*</strong>
+                                <?= Yii::t('app', 'Company') ?></label>
                             <select class="form-select companyId" id="companyId-update" required name="companyId"
                                 onchange="javascript:companyMultiBrachUpdate()">
                                 <option value=""><?= Yii::t('app', 'Select Company') ?></option>
                                 <?php
                                 if (isset($companies) && count($companies) > 0) {
                                     foreach ($companies as $company) : ?>
-                                        <option value="<?= $company["companyId"] ?>"><?= $company["companyName"] ?></option>
+                                <option value="<?= $company["companyId"] ?>"><?= $company["companyName"] ?></option>
                                 <?php
                                     endforeach;
                                 }
@@ -32,7 +34,8 @@
                             </select>
                         </div>
                         <div class="col-12 mt-10">
-                            <label for="input" class="form-label"><strong class="red">*</strong> <?= Yii::t('app', 'Branch') ?></label>
+                            <label for="input" class="form-label"><strong class="red">*</strong>
+                                <?= Yii::t('app', 'Branch') ?></label>
 
                             <div class="col-12 form-control">
                                 <?= Yii::t('app', 'Select branch') ?>
@@ -43,7 +46,8 @@
 
                         </div>
                         <div class="col-12 mt-10">
-                            <label for="input" class="form-label"><strong class="red">*</strong> <?= Yii::t('app', 'Department') ?></label>
+                            <label for="input" class="form-label"><strong class="red">*</strong>
+                                <?= Yii::t('app', 'Department') ?></label>
                             <div class="col-12 form-control">
                                 <?= Yii::t('app', 'Select Department') ?>
                                 <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
@@ -51,7 +55,8 @@
                             <div class="col-12" id="show-multi-department-update"></div>
                         </div>
                         <div class="col-12 mt-10">
-                            <label for="input" class="form-label"><strong class="red">*</strong> <?= Yii::t('app', 'Team') ?></label>
+                            <label for="input" class="form-label"><strong class="red">*</strong>
+                                <?= Yii::t('app', 'Team') ?></label>
                             <div class="col-12 form-control">
                                 <?= Yii::t('app', 'Select Team') ?>
                                 <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
@@ -59,11 +64,13 @@
                             <div class="col-12" id="show-multi-team-update"></div>
                         </div>
                         <div class="col-12 mt-10">
-                            <label for="exampleFormControl" class="form-label font-size-13"> <?= Yii::t('app', 'Title Progress') ?></label>
+                            <label for="exampleFormControl" class="form-label font-size-13">
+                                <?= Yii::t('app', 'Title Progress') ?></label>
                             <input type="text" class="form-control font-size-13" name="historyName">
                         </div>
                         <div class="col-12 mt-10">
-                            <label for="input" class="form-label"><strong class="red">*</strong> <?= Yii::t('app', 'Check Unit') ?></label>
+                            <label for="input" class="form-label"><strong class="red">*</strong>
+                                <?= Yii::t('app', 'Check Unit') ?></label>
                             <div class="btn-group col-12" role="group" aria-label="Basic outlined example">
                                 <?php
                                 if (isset($units) && count($units) > 0) {
@@ -78,18 +85,16 @@
                                             $default = 'btn-primary';
                                         }
                                 ?>
-                                        <button type="button" id="unit-<?= $unit['unitId'] ?>"
-                                            class="btn border col-3 unit-<?= $i ?>  font-size-12 <?= $default ?>"
-                                            onclick="javascript:selectUnitUpdate(<?= $unit['unitId'] ?>)" style="<?= $style ?>">
-                                            <?= $unit["unitName"] ?>
-                                        </button>
+                                <button type="button" id="unit-<?= $unit['unitId'] ?>"
+                                    class="btn border col-3 unit-<?= $i ?>  font-size-12 <?= $default ?>"
+                                    onclick="javascript:selectUnitUpdate(<?= $unit['unitId'] ?>)" style="<?= $style ?>">
+                                    <?= $unit["unitName"] ?>
+                                </button>
                                 <?php
                                         $i++;
                                     endforeach;
                                 }
                                 ?>
-
-
                                 <input type="hidden" value="" id="currentUnit" class="currentUnit" name="unit" required>
                                 <input type="hidden" value="" id="previousUnit" class="previousUnit" required>
                             </div>
@@ -124,10 +129,12 @@
 
                             <div class="col-12 mt-10">
                                 <div class="input-group">
-                                    <label for="input" class="form-label"><strong class="red">*</strong> <?= Yii::t('app', 'Next Check Date') ?></label>
+                                    <label for="input" class="form-label"><strong class="red">*</strong>
+                                        <?= Yii::t('app', 'Next Check Date') ?></label>
                                     <div class="input-group">
                                         <span class="input-group-text font-size-12">
-                                            <i class="fa fa-calendar-o" aria-hidden="true"></i> &nbsp;&nbsp; <?= Yii::t('app', 'Date') ?></span>
+                                            <i class="fa fa-calendar-o" aria-hidden="true"></i> &nbsp;&nbsp;
+                                            <?= Yii::t('app', 'Date') ?></span>
                                         <input type="date" aria-label="" class="form-control font-size-12 "
                                             id="nextCheckDate-update" required name="nextDate">
                                     </div>
@@ -138,7 +145,8 @@
                     </div>
                     <div class="col-lg-6 col-md-6 col-6">
                         <div class="col-12">
-                            <label for="exampleFormControlTextarea1" class="form-label font-size-13"> <?= Yii::t('app', 'KGI Details') ?></label>
+                            <label for="exampleFormControlTextarea1" class="form-label font-size-13">
+                                <?= Yii::t('app', 'KGI Details') ?></label>
                             <textarea class="form-control" id="detail-update" name="detail" rows="4"></textarea>
                         </div>
                         <div class="row">
@@ -147,7 +155,8 @@
                                         class="red">*</strong> <?= Yii::t('app', 'Quant Ratio') ?></label>
                                 <select class="form-select font-size-13" aria-label="Default select example"
                                     id="quantRatio-update" name="quantRatio">
-                                    <option value=""><?= Yii::t('app', 'Quantity') ?> / <?= Yii::t('app', 'Quality') ?></option>
+                                    <option value=""><?= Yii::t('app', 'Quantity') ?> / <?= Yii::t('app', 'Quality') ?>
+                                    </option>
                                     <option value="1"><?= Yii::t('app', 'Quantity') ?></option>
                                     <option value="2"><?= Yii::t('app', 'Quality') ?></option>
                                 </select>
@@ -168,7 +177,8 @@
                                         class="red">*</strong> <?= Yii::t('app', 'Amount Type') ?></label>
                                 <select class="form-select font-size-13" aria-label="Default select example"
                                     name="amountType" id="amountType-update">
-                                    <option value="">% <?= Yii::t('app', 'or') ?> <?= Yii::t('app', 'Number') ?></option>
+                                    <option value="">% <?= Yii::t('app', 'or') ?> <?= Yii::t('app', 'Number') ?>
+                                    </option>
                                     <option value="1">%</option>
                                     <option value="2"><?= Yii::t('app', 'Number') ?></option>
                                 </select>
@@ -181,9 +191,14 @@
                                     <option value="">
                                         <&nbsp;&nbsp;=&nbsp;&nbsp;>
                                     </option>
-                                    <option value="<">&nbsp;&nbsp;<?= '<' ?>&nbsp;&nbsp;<?= Yii::t('app', 'Result more than target') ?></option>
-                                    <option value="=">&nbsp;&nbsp;=&nbsp;&nbsp;<?= Yii::t('app', 'Result equal target') ?></option>
-                                    <option value=">">&nbsp;&nbsp;>&nbsp;&nbsp;<?= Yii::t('app', 'Result less than target') ?></option>
+                                    <option value="<">
+                                        &nbsp;&nbsp;<?= '<' ?>&nbsp;&nbsp;<?= Yii::t('app', 'Result more than target') ?>
+                                    </option>
+                                    <option value="=">
+                                        &nbsp;&nbsp;=&nbsp;&nbsp;<?= Yii::t('app', 'Result equal target') ?></option>
+                                    <option value=">">
+                                        &nbsp;&nbsp;>&nbsp;&nbsp;<?= Yii::t('app', 'Result less than target') ?>
+                                    </option>
                                 </select>
                             </div>
                             <div class="col-lg-4 col-md-4 col-6 pt-10">
@@ -205,7 +220,7 @@
                                     <?php
                                     if (isset($months) && count($months) > 0) {
                                         foreach ($months as $value => $month) : ?>
-                                            <option value="<?= $value ?>"><?= $month ?></option>
+                                    <option value="<?= $value ?>"><?= $month ?></option>
                                     <?php
                                         endforeach;
                                     }
@@ -213,14 +228,15 @@
                                 </select>
                             </div>
                             <div class="col-lg-4 col-md-6 col-6 pt-10">
-                                <label class="form-label font-size-12"><strong class="red">*</strong> <?= Yii::t('app', 'Year') ?></label>
+                                <label class="form-label font-size-12"><strong class="red">*</strong>
+                                    <?= Yii::t('app', 'Year') ?></label>
                                 <select class="form-select font-size-12" required name="year" id="year-update">
                                     <option value=""><?= Yii::t('app', 'Year') ?></option>
                                     <?php
                                     $year = 2020;
                                     $thisYear = date('Y');
                                     while ($year < ($thisYear + 10)) { ?>
-                                        <option value="<?= $year ?>"><?= $year ?></option>
+                                    <option value="<?= $year ?>"><?= $year ?></option>
                                     <?php
                                         $year++;
                                     }
@@ -240,7 +256,8 @@
                                     id="result-update">
                             </div>
                             <div class="col-12 mt-10">
-                                <label for="exampleFormControlTextarea1" class="form-label font-size-13"> <?= Yii::t('app', 'Remark') ?></label>
+                                <label for="exampleFormControlTextarea1" class="form-label font-size-13">
+                                    <?= Yii::t('app', 'Remark') ?></label>
                                 <textarea class="form-control" name="remark" rows="4"></textarea>
                             </div>
                         </div>
@@ -248,7 +265,8 @@
                 </div>
             </div>
             <div class="modal-footer" style="border: none;">
-                <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal"><?= Yii::t('app', 'Cancel') ?></button>
+                <button type="reset" class="btn btn-secondary"
+                    data-bs-dismiss="modal"><?= Yii::t('app', 'Cancel') ?></button>
                 <a href="javascript:checkRequiredUpdateKpi()" class="btn btn-warning"><?= Yii::t('app', 'Update') ?></a>
             </div>
         </div>

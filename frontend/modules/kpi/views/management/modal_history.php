@@ -1,10 +1,79 @@
 <style>
-/* .contrainer-body-detail {
-    transform: scale(0.92);
-    transform-origin: top left;
-    width: calc(100% / 0.92);
-    height: calc(100% / 0.92);
-} */
+@media (max-width: 1935px) and (max-height: 950px) {
+    .modal-content {
+        transform: scale(0.95);
+        transform-origin: top left;
+        width: calc(100% / 0.95);
+        height: calc(100% / 0.95);
+        /* overflow: hidden; */
+    }
+
+    .modal-dialog {
+        transform: scale(0.95);
+        transform-origin: top left;
+        width: calc(100% / 0.95);
+        height: calc(100% / 0.95);
+        right: 390px;
+    }
+}
+
+
+@media (max-width: 1735px) and (max-height: 950px) {
+    .modal-content {
+        transform: scale(0.85);
+        transform-origin: top left;
+        width: calc(100% / 0.85);
+        height: calc(100% / 0.85);
+        /* overflow: hidden; */
+    }
+
+    .modal-dialog {
+        transform: scale(0.85);
+        transform-origin: top left;
+        width: calc(100% / 0.85);
+        height: calc(100% / 0.85);
+        /* overflow: hidden; */
+        left: -300px;
+    }
+}
+
+@media (max-width: 1535px) and (max-height: 950px) {
+    .modal-content {
+        transform: scale(0.75);
+        transform-origin: top left;
+        width: calc(100% / 0.75);
+        height: calc(100% / 0.75);
+        /* overflow: hidden; */
+    }
+
+    .modal-dialog {
+        transform: scale(0.75);
+        transform-origin: top left;
+        width: calc(100% / 0.75);
+        height: calc(100% / 0.75);
+        /* overflow: hidden; */
+        left: -250px;
+    }
+}
+
+@media (max-width: 1335px) and (max-height: 750px) {
+    .modal-content {
+        transform: scale(0.65);
+        transform-origin: top left;
+        width: calc(100% / 0.65);
+        height: calc(100% / 0.65);
+        /* overflow: hidden; */
+    }
+
+    .modal-dialog {
+        transform: scale(0.65);
+        transform-origin: top left;
+        width: calc(100% / 0.65);
+        height: calc(100% / 0.65);
+        /* overflow: hidden; */
+        left: -200px;
+    }
+}
 </style>
 <div class="modal fade" id="update-history-popup" tabindex="-1" aria-labelledby="updateHistoryModalLabel"
     aria-hidden="true">
@@ -20,28 +89,29 @@
                 style="display: flex; padding: 25px 34px; flex-direction: column; gap: 34px; ">
                 <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
                     <div class="col-7" style="display: flex; gap: 16px; flex-direction: column;">
-                        <text class="text-black" style="font-size: 22px; font-weight: 600;">
-                            December 2024
+                        <text class="text-black" id="mont-hyear" style="font-size: 22px; font-weight: 600;">
+                            mont hyear
                         </text>
-                        <text class="text-gray" style="font-size: 18px; font-weight: 400;">
-                            1st December - 31st December
+                        <text class="text-gray" id="formattedRange" style="font-size: 18px; font-weight: 400;">
+                            formattedRange
                         </text>
                     </div>
                     <div class="col-5" style="display: flex; justify-content: center; align-items: center; gap: 20px;">
                         <div style="display: flex; gap: 15px; flex-direction: column;">
                             <text class="text-gray text-end" style="font-size: 18px; font-weight: 500;">
                                 Total Achievement
-                                <span class="text-black" style="font-size: 18px; font-weight: 400;">
-                                    4,389,456
+                                <span class="text-black" id="Target" style="font-size: 18px; font-weight: 400;">
+                                    Target
                                 </span>
-                                <span class="text-blue" style="font-size: 18px; font-weight: 600;">
-                                    /3,423,775
+                                <span class="text-blue" id="Result" style="font-size: 18px; font-weight: 600;">
+                                    /Result
                                 </span>
                             </text>
                             <text class="text-gray text-end" style="font-size: 14px; font-weight: 400;">
                                 Due Behind by
-                                <span class="text-black text-end" style="font-size: 14px; font-weight: 500;">
-                                    22%
+                                <span class="text-black text-end" id="DueBehind"
+                                    style="font-size: 14px; font-weight: 500;">
+                                    0%
                                 </span>
                             </text>
                         </div>
@@ -53,12 +123,12 @@
                                     style="stroke: hsla(217, 100%, 91%, 1); stroke-width: 3;" fill="none" />
                                 <path class="circle"
                                     d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                                    stroke="#4db8ff" stroke-width="3" fill="none" stroke-dasharray="50, 100" />
+                                    stroke="#4db8ff" stroke-width="3" fill="none" stroke-dasharray="0, 100" />
 
                                 <!-- Percentage text in the middle -->
                                 <text x="18" y="20.35" text-anchor="middle" dominant-baseline="middle"
                                     class="percentage" style="font-size: 8px; font-weight: bold; fill: #333;">
-                                    50%
+                                    0%
                                 </text>
                             </svg>
                         </div>
@@ -85,52 +155,10 @@
                                     </span>
                                 </div>
                             </div>
-                            <div style="gap: 14px; width: 100%;">
-                                <ul id="schedule-list" class="list-unstyled small">
-                                    <li class="schedule-item mt-5" role="button" tabindex="0">
-                                        <div
-                                            style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                                            <!-- กลุ่มที่ชิดซ้าย -->
-                                            <div style="display: flex; gap: 16px;">
-                                                <div
-                                                    style="display: flex; justify-content: center; align-items: center;">
-                                                    <div class="cycle-current">
-                                                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
-                                                    </div>
-                                                </div>
-                                                <div style="display: flex; gap: 6px; flex-direction: column;">
-                                                    <text class="text-black" style="font-size: 16px; font-weight: 600;">
-                                                        Team A (Audit)
-                                                    </text>
-                                                    <text class="text-gray" style="font-size: 14px; font-weight: 400;">
-                                                        Accounting & Outsourcing de...
-                                                    </text>
-                                                </div>
-                                            </div>
+                            <div class="tab-pane fade show active fade"
+                                style="gap: 14px; width: 100%; max-height: 450px; overflow-y: auto;">
+                                <ul id="history-list-team" class="list-unstyled small">
 
-                                            <!-- กลุ่มที่ชิดขวา -->
-                                            <div style="display: flex;">
-                                                <div>
-                                                    <div style="display: flex; gap: 6px; flex-direction: column;">
-                                                        <text class="text-end">
-                                                            <span class="text-gray"
-                                                                style="font-size: 18px; font-weight: 400;">
-                                                                4,389,456
-                                                            </span>
-                                                            <span class="text-blue"
-                                                                style="font-size: 18px; font-weight: 600;">
-                                                                /3,423,775
-                                                            </span>
-                                                        </text>
-                                                        <text class="text-gray text-end"
-                                                            style="font-size: 14px; font-weight: 400;">
-                                                            January 4, 2025, 7:29 PM
-                                                        </text>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -150,59 +178,10 @@
                                     </span>
                                 </div>
                             </div>
-                            <div style="gap: 14px; width: 100%;">
-                                <ul id="schedule-list" class="list-unstyled small">
-                                    <li class="schedule-item mt-5" role="button" tabindex="0">
-                                        <div
-                                            style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                                            <!-- กลุ่มที่ชิดซ้าย -->
-                                            <div style="display: flex; gap: 16px; align-items: center;">
-                                                <div
-                                                    style="display: flex; justify-content: center; align-items: center;">
-                                                    <div class="col-5">
-                                                        <img src="/HRVC/frontend/web/images/employee/profile/AE5oEMwTio.jpg"
-                                                            class="width-ehsan-small" id="showMenu2">
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    style="display: flex; justify-content: center; align-items: center;">
-                                                    <span class="text-black" style="font-size: 16px; font-weight: 600;">
-                                                        Shuhei Takahashi
-                                                    </span>
-                                                </div>
-                                            </div>
-
-                                            <!-- กลุ่มที่อยู่ตรงกลาง -->
-                                            <div
-                                                style="display: flex; justify-content: center; align-items: center; background-color: rgb(215, 235, 255); border: 0.795px solid #2580D3; border-radius: 36px; padding: 8px 16px; z-index: 1;">
-                                                <div
-                                                    style="display: flex; justify-content: center; align-items: center; gap: 8px;">
-                                                    <div class="cycle-current">
-                                                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
-                                                    </div>
-                                                    <span class="text-black" style="font-size: 16px; font-weight: 600;">
-                                                        Director Management
-                                                    </span>
-                                                </div>
-                                            </div>
-
-                                            <!-- กลุ่มที่ชิดขวา -->
-                                            <div style="display: flex; flex-direction: column; text-align: right;">
-                                                <div>
-                                                    <span class="text-gray" style="font-size: 18px; font-weight: 400;">
-                                                        4,389,456
-                                                    </span>
-                                                    <span class="text-blue" style="font-size: 18px; font-weight: 600;">
-                                                        /3,423,775
-                                                    </span>
-                                                </div>
-                                                <span class="text-gray" style="font-size: 14px; font-weight: 400;">
-                                                    January 4, 2025, 7:29 PM
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                    </li>
+                            <div class="tab-pane fade show active fade"
+                                style="gap: 14px; width: 100%; max-height: 450px; overflow-y: auto;">
+                                <ul id="history-list-creater" class="list-unstyled small">
+                                    <!-- ข้อมูล history จะถูกเพิ่มเข้ามาที่นี่ -->
                                 </ul>
                             </div>
                         </div>

@@ -16,7 +16,7 @@ if ($statusform == 'update') {
     ],
     'action' => Yii::$app->homeUrl . $parturl
 ]); 
-$unitId = 0;
+$unitId = 1;
 if (isset($data['unitId']) && $data['unitId'] >= 1) {
     $unitId = $data['unitId'];
     // ทำสิ่งที่ต้องการเมื่อ unitId มีค่าเป็น 2
@@ -26,11 +26,12 @@ $selectedCode = $data['code'] ?? '';
 $selectedAmountType = $data['amountType'] ?? '';
 $selectedPriority = isset($data['priority']) ? $data['priority'] : '';
 
-
+$percentage = isset($data['ratio']) ? $data['ratio'] : 00;
 $result = $data['result'] ?? 0;
 $value = isset($data['result']) ? $data['result'] : 0;
 $sumvalue = isset($data['sumresult']) ? $data['sumresult'] : 0;
 $targetAmount = $data['targetAmount'] ?? 0;
+$kpiHistoryId = $data['kpiHistoryId'] ?? 0;
 $DueBehind = $targetAmount -  $result;
 
 // echo $DueBehind;
@@ -160,12 +161,6 @@ select.form-select option:disabled {
                                 d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                                 style="stroke: hsla(217, 100%, 91%, 1); stroke-width: 3;" fill="none" />
 
-
-                            <!-- Foreground circle (progress) -->
-                            <?php 
-                                $percentage = isset($data['ratio']) ? $data['ratio'] : 00;
-                                // $dashArray = ($percentage * 100) / 100; // this will control the progress visually
-                            ?>
                             <path class="circle"
                                 d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                                 stroke="#4db8ff" stroke-width="3" fill="none"
@@ -715,7 +710,7 @@ select.form-select option:disabled {
                             </div>
                             <div href="javascript:void(0);" class="updatehistory" style="text-align: right;"
                                 cursor="pointer" data-bs-toggle="modal" data-bs-target="#update-history-popup"
-                                onclick="modalHistory();">
+                                onclick="modalHistory(<?= isset($kpiId) ? $kpiId : '' ?>);">
                                 <?php if($statusform == 'update'){ ?>
                                 <img
                                     src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg"><?= Yii::t('app', 'Update History') ?>
@@ -940,28 +935,165 @@ $(document).ready(function() {
 
 });
 
-// function modalHistory() {
-//     var url = $url + 'kpi/management/modal-history';
-//     $.ajax({
-//         type: "POST",
-//         dataType: 'json',
-//         url: url,
-//         success: function(data) {
-//             // ใส่ข้อมูลที่โหลดมาจาก AJAX ในเนื้อหาของป็อปอัพ
-//             $("#show-modal-history").html(data.text);
+function modalHistory(kpiId) {
+    var url = $url + 'kpi/management/modal-history';
 
-//             // เปิด Modal ของ Bootstrap
-//             $('#update-history-popup').modal('show');
-//         },
-//         error: function(xhr, status, error) {
-//             console.log(xhr.responseText); // ดูข้อความผิดพลาดจากเซิร์ฟเวอร์
-//             alert("เกิดข้อผิดพลาดในการโหลดข้อมูล");
-//         }
-//     });
-// }
+    var month = document.getElementById("hiddenMonth").value;
+    var year = document.getElementById("hiddenYear").value;
+    var fromDateValue = document.getElementById("fromDate").value;
+    var toDateValue = document.getElementById("toDate").value;
+    var percentage = <?= json_encode($percentage) ?>;
+    var result = <?= json_encode($result) ?>;
+    var sumvalue = <?= json_encode($sumvalue) ?>;
+    var targetAmount = <?= json_encode($targetAmount) ?>;
+    var kpiHistoryId = <?= json_encode($kpiHistoryId) ?>;
+    var fromDate = new Date(fromDateValue);
+    var toDate = new Date(toDateValue);
+    var fromDay = fromDate.getDate();
+    var toDay = toDate.getDate();
+    var fromMonth = new Intl.DateTimeFormat('en-US', {
+        month: 'long'
+    }).format(fromDate);
+    var toMonth = new Intl.DateTimeFormat('en-US', {
+        month: 'long'
+    }).format(toDate);
+    var formattedRange = `${getOrdinalSuffix(fromDay)} ${fromMonth} - ${getOrdinalSuffix(toDay)} ${toMonth}`;
+    var monthName = getMonthName(parseInt(month)); // แปลงเป็นชื่อเดือน
 
+    $.ajax({
+        type: "POST",
+        dataType: "json", // ✅ รอรับ JSON
+        url: url,
+        data: {
+            percentage: percentage,
+            result: result,
+            sumvalue: sumvalue,
+            targetAmount: targetAmount,
+            kpiId: kpiId,
+            month: monthName,
+            year: year,
+            formattedRange: formattedRange,
+            kpiHistoryId: kpiHistoryId
+        },
+        success: function(data) {
+            var percentage = parseFloat(data.percentage);
+            var dueBehind = 100 - percentage; // ✅ คำนวณส่วนต่าง
+            $("#mont-hyear").text(data.month + " " + data.year);
+            $("#formattedRange").text(data.formattedRange);
+            $("#Target").text(data.targetAmount);
+            $("#Result").text("/" + data.result);
+            $(".percentage").text(percentage + "%");
+            var dashArrayValue = (percentage / 100) * 100;
+            $(".circle").attr("stroke-dasharray", dashArrayValue + ", 100");
+            $("#DueBehind").text(dueBehind + "%");
+            // console.log(data.historyTeam);
+            var historyData = data.history; // ดึงข้อมูล history
+            var historyList = $('#history-list-creater');
+            historyList.empty(); // เคลียร์รายการเก่า
+            var historyArray = Object.values(historyData);
 
-// function closePopup() {
-//     $('#update-history-popup').modal('hide'); // ปิด Modal ของ Bootstrap
-// }
+            var historyTeamData = data.historyTeam; // ดึงข้อมูล history
+            var historyTeamList = $('#history-list-team');
+            historyTeamList.empty(); // เคลียร์รายการเก่า
+            var historyTeamArray = Object.values(historyTeamData);
+
+            historyArray.forEach(function(item) {
+                var listItem = `
+                <li class="schedule-item mt-5" role="button" tabindex="0">
+                        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                            <div style="display: flex; gap: 16px; align-items: center;">
+                                <div style="display: flex; justify-content: center; align-items: center;">
+                                    <div class="col-5">
+                                        <img src="<?= Yii::$app->homeUrl ?>${item.picture}" class="width-ehsan-small" id="picture-history">
+                                    </div>
+                                </div>
+                                <div style="display: flex; justify-content: center; align-items: center;">
+                                    <span class="text-black" id="creater-history" style="font-size: 16px; font-weight: 500;">
+                                        ${item.creater}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; justify-content: center; align-items: center; background-color: rgb(215, 235, 255); border: 0.795px solid #2580D3; border-radius: 36px; padding: 3px 20px; z-index: 1;">
+                                <div style="display: flex; justify-content: center; align-items: center; gap: 8px;">
+                                    <div class="cycle-current">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
+                                    </div>
+                                    <span class="text-black" id="teamName-history" style="font-size: 16px; font-weight: 500;">
+                                        ${item.teamName}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; flex-direction: column; text-align: right;">
+                                <div>
+                                    <span class="text-gray" id="target-history" style="font-size: 18px; font-weight: 400;">
+                                        ${item.target}
+                                    </span>
+                                    <span class="text-blue" id="result-history" style="font-size: 18px; font-weight: 600;">
+                                        /${item.result}
+                                    </span>
+                                </div>
+                                <span class="text-gray" id="createDate-history" style="font-size: 14px; font-weight: 400;">
+                                    ${item.createDateTime}
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+            `;
+                historyList.append(listItem); // เพิ่มข้อมูลลงใน ul
+            });
+
+            historyTeamArray.forEach(function(item) {
+                var listItem = `
+                    <li class="schedule-item mt-5" role="button" tabindex="0">
+                        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                            <!-- กลุ่มที่ชิดซ้าย -->
+                            <div style="display: flex; gap: 16px;">
+                                <div style="display: flex; justify-content: center; align-items: center;">
+                                    <div class="cycle-current">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
+                                    </div>
+                                </div>
+                                <div style="display: flex; gap: 6px; flex-direction: column;">
+                                    <text class="text-black" style="font-size: 16px; font-weight: 600;">
+                                        ${item.teamName} <!-- ใช้ชื่อทีมจาก item -->
+                                    </text>
+                                    <text class="text-gray" style="font-size: 14px; font-weight: 400;">
+                                        Accounting & Outsourcing de... <!-- หรือใช้ข้อมูลอื่นจาก item -->
+                                    </text>
+                                </div>
+                            </div>
+
+                            <!-- กลุ่มที่ชิดขวา -->
+                            <div style="display: flex;">
+                                <div>
+                                    <div style="display: flex; gap: 6px; flex-direction: column;">
+                                        <text class="text-end">
+                                            <span class="text-gray" style="font-size: 18px; font-weight: 400;">
+                                                ${item.target} <!-- แสดง target -->
+                                            </span>
+                                            <span class="text-blue" style="font-size: 18px; font-weight: 600;">
+                                                ${item.result} <!-- แสดง result -->
+                                            </span>
+                                        </text>
+                                        <text class="text-gray text-end" style="font-size: 14px; font-weight: 400;">
+                                            ${item.createDateTime} <!-- แสดงวันที่ที่สร้าง -->
+                                        </text>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                `;
+                historyTeamList.append(listItem); // เพิ่มข้อมูลลงใน ul
+            });
+
+        },
+        error: function(xhr, status, error) {
+            console.log(xhr.responseText); // ดูข้อความผิดพลาดจากเซิร์ฟเวอร์
+            alert("เกิดข้อผิดพลาดในการโหลดข้อมูล");
+        }
+    });
+}
 </script>
