@@ -404,7 +404,6 @@ class ManagementController extends Controller
 	$data = [];
 		if (isset($kpiHistory) && count($kpiHistory) > 0) {
 			foreach ($kpiHistory as $history) :
-				// ตรวจสอบว่า $history ไม่เป็น null และข้อมูลที่ต้องการใช้งานมีค่าหรือไม่
 				if ($history !== null && isset($history["createDateTime"], $history["createrId"], $history["status"])) {
 					$time = explode(' ', $history["createDateTime"]);
 					$employeeId = Employee::employeeId($history["createrId"]);
@@ -415,10 +414,10 @@ class ManagementController extends Controller
 						"teamName" => Team::teamName($teamId),
 						"picture" => Employee::employeeImage($employeeId),
 						"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
-						"time" => ModelMaster::timeText($time[1] ?? '00:00'),  // กำหนดค่าเริ่มต้นหากเวลาเป็น null
+						"time" => ModelMaster::timeText($time[1] ?? '00:00'),  
 						"status" => $history["status"],
-						"target" => $history["target"] ?? '0.00',  // กำหนดค่าเริ่มต้นหาก target เป็น null
-						"result" => $history["result"] ?? '0.00',  // กำหนดค่าเริ่มต้นหาก result เป็น null
+						"target" => $history["target"] ?? '0.00',  
+						"result" => $history["result"] ?? '0.00',  
 						"createDateTime" => ModelMaster::monthDateYearTime($history["createDateTime"])
 					];
 				} else {

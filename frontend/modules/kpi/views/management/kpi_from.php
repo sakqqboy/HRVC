@@ -1074,7 +1074,7 @@ function modalHistory(kpiId) {
                                                 ${item.target} <!-- แสดง target -->
                                             </span>
                                             <span class="text-blue" style="font-size: 18px; font-weight: 600;">
-                                                ${item.result} <!-- แสดง result -->
+                                                /${item.result} <!-- แสดง result -->
                                             </span>
                                         </text>
                                         <text class="text-gray text-end" style="font-size: 14px; font-weight: 400;">

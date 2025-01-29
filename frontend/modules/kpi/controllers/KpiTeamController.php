@@ -652,7 +652,9 @@ class KpiTeamController extends Controller
 	}
 	public function actionPrepareUpdate()
 	{
-		$kpiTeamId = $_POST["kpiTeamId"];
+		$kpiTeamId = $_GET["kpiTeamId"];
+		$role = UserRole::userRight();
+
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -662,7 +664,11 @@ class KpiTeamController extends Controller
 		$kpiTeam = json_decode($kpiTeam, true);
 		curl_close($api);
 		$res["kpiTeam"] = $kpiTeam;
-		return json_encode($res);
+		return $this->render('kpi_from', [
+			"data" => $kpiTeam,
+			"role" => $role,
+			"statusform" =>  "update"
+		]);
 	}
 	public function actionUpdateKpiTeam()
 	{

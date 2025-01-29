@@ -1837,6 +1837,25 @@
 	transition: .4s;
 }
 
+.textbox-check {
+	display: flex;
+	padding: 16px 7px;
+	gap: 10px;
+	align-self: stretch;
+	border-radius: 4px;
+	border: 0.5px solid #2F42ED;
+	background: #FBF9FF;
+}
+
+.textbox-check-hide {
+	display: flex;
+	padding: 16px 7px;
+	gap: 10px;
+	align-self: stretch;
+	border-radius: 4px;
+	background: #DCDCDC;
+}
+
 input:checked+.slider {
 	background-color: hsla(209, 70%, 49%, 1);
 	/* New color */
