@@ -1856,6 +1856,35 @@
 	background: #DCDCDC;
 }
 
+.border-cicle {
+	display: flex;
+	padding: 6px 15px;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	flex-shrink: 0;
+	border-radius: 24.444px;
+}
+
+.mid-center {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.start-center {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.between-center {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
 input:checked+.slider {
 	background-color: hsla(209, 70%, 49%, 1);
 	/* New color */

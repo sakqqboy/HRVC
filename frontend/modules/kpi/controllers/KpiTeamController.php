@@ -6,6 +6,8 @@ use frontend\models\hrvc\KpiHistory;
 use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
+use frontend\models\hrvc\Branch;
+use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Department;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Kpi;
@@ -660,13 +662,47 @@ class KpiTeamController extends Controller
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-detail?kpiTeamId=' . $kpiTeamId . '&&kpiTeamHistoryId=0');
+		$kpiTeamDetail = curl_exec($api);
+		$kpiTeamDetail = json_decode($kpiTeamDetail, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiTeamDetail['kpiId'] . '&&kpiHistoryId=0');
+        $kpi = curl_exec($api);
+        $kpi = json_decode($kpi, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $kpi["companyId"]);
+		$kpiBranch = curl_exec($api);
+		$kpiBranch = json_decode($kpiBranch, true);
+		
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-department?id=' . $kpiTeamDetail['kpiId']);
+        $kpiDepartment = curl_exec($api);
+        $kpiDepartment = json_decode($kpiDepartment, true);
+			
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-team?id=' . $kpiTeamDetail['kpiId']);
 		$kpiTeam = curl_exec($api);
 		$kpiTeam = json_decode($kpiTeam, true);
+
 		curl_close($api);
-		$res["kpiTeam"] = $kpiTeam;
+
+		    $companyId = $kpi["companyId"];
+			$company= [
+				"companyId" => $kpi["companyId"],
+				"companyName" => Company::companyName($kpi["companyId"]),
+				"companyImg" => Company::companyImage($kpi["companyId"]),
+			];
+
+			$unit = Unit::find()->where(["unitId" => $kpi["unitId"]])->asArray()->one();
+			
+		// throw new exception(print_r($kpi, true));
+		
 		return $this->render('kpi_from', [
-			"data" => $kpiTeam,
+			"kpi" => $kpi,
+			"data" => $kpiTeamDetail,
+			"company" => $company ?? [],  
+			"kpiBranch" => $kpiBranch ?? [],  
+			"kpiDepartment" => $kpiDepartment ?? [],
+			"kpiTeam" => $kpiTeam ?? [],
 			"role" => $role,
+			"unit"  => $unit ,
 			"statusform" =>  "update"
 		]);
 	}

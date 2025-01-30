@@ -187,8 +187,7 @@ select.form-select option:disabled {
 
             <div class="contrainer-body-detail">
                 <div style="flex: 1;">
-                    <div class="form-group"
-                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                    <div class="form-group start-center" style="  gap: 14px;">
                         <label class="text-manage-create" for="name">
                             <span class="text-danger">* </span>
                             <?= Yii::t('app', 'Name') ?>
@@ -202,8 +201,7 @@ select.form-select option:disabled {
 
                     </div>
 
-                    <div class="form-group mt-37"
-                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                    <div class="form-group mt-37 start-center" style="  gap: 14px;">
                         <label class="text-manage-create" for="name">
                             <span class="text-danger">* </span>
                             <?= Yii::t('app', 'Select Company') ?>
@@ -230,11 +228,9 @@ select.form-select option:disabled {
                         </select>
                     </div>
 
-                    <div class="form-group mt-37"
-                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                    <div class="form-group start-center mt-37" style="  gap: 14px;">
 
-                        <div class="form-group "
-                            style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                        <div class="form-group start-center" style="  gap: 14px;">
 
                             <label class="text-manage-create" for="my-input">
                                 <span class="text-danger">* </span>
@@ -297,8 +293,7 @@ select.form-select option:disabled {
                         </div>
                     </div>
 
-                    <div class="form-group mt-37"
-                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                    <div class="form-group start-center mt-37" style="  gap: 14px;">
                         <label class="text-manage-create" for="name">
                             <span class="text-danger">* </span>
                             <?= Yii::t('app', 'Select Department/s') ?>
@@ -357,8 +352,7 @@ select.form-select option:disabled {
 
                         </div>
                     </div>
-                    <div class="form-group mt-37"
-                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                    <div class="form-group start-center mt-37" style="  gap: 14px;">
                         <label class="text-manage-create" for="name">
                             <span class="text-danger">* </span>
                             <?= Yii::t('app', 'Select Team/s') ?>
@@ -417,8 +411,7 @@ select.form-select option:disabled {
 
                         </div>
                     </div>
-                    <div class="form-group mt-37"
-                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                    <div class="form-group start-center mt-37" style="  gap: 14px;">
                         <label class="text-manage-create" for="name">
                             <span class="text-danger">* </span>
                             <?= Yii::t('app', 'Determine Priority') ?>
@@ -437,8 +430,7 @@ select.form-select option:disabled {
                     </div>
                 </div>
                 <div style="flex: 1;">
-                    <div class="form-group"
-                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                    <div class="form-group start-center" style="  gap: 14px;">
                         <label class="text-manage-create" for="name">
                             <span class="text-danger">* </span>
                             <?= Yii::t('app', 'Update Interval') ?>
@@ -471,8 +463,7 @@ select.form-select option:disabled {
                         </div>
                     </div>
 
-                    <div class="form-group mt-37"
-                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                    <div class="form-group start-center mt-37" style="  gap: 14px;">
                         <label class="text-manage-create" for="name">
                             <span class="text-danger">* </span>
                             <?= Yii::t('app', 'Month & Year') ?>
@@ -527,8 +518,7 @@ select.form-select option:disabled {
                         </div>
                     </div>
 
-                    <div class="form-group mt-37"
-                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                    <div class="form-group start-center mt-37" style="  gap: 14px;">
                         <label class="text-manage-create" for="name">
                             <span class="text-danger">* </span>
                             <?= Yii::t('app', 'Due Term') ?>
@@ -570,8 +560,7 @@ select.form-select option:disabled {
                         </div>
                     </div>
 
-                    <div class="form-group mt-37"
-                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                    <div class="form-group start-center mt-37" style="  gap: 14px;">
                         <label class="text-manage-create" for="name">
                             <span class="text-danger">* </span>
                             <?= Yii::t('app', 'Target Due Update Date') ?>
@@ -605,8 +594,7 @@ select.form-select option:disabled {
                         </div>
                     </div>
 
-                    <div class="form-group mt-37"
-                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                    <div class="form-group start-center mt-37" style="  gap: 14px;">
                         <label class="text-manage-create" for="name">
                             <span class="text-danger">* </span>
                             <?= Yii::t('app', 'Quant Ratio') ?>
@@ -672,8 +660,7 @@ select.form-select option:disabled {
                     </div>
                 </div>
                 <div style="flex: 1;">
-                    <div class="form-group"
-                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                    <div class="form-group start-center" style="  gap: 14px;">
                         <label class="text-manage-create" for="name">
                             <span class="text-danger">* </span>
                             <?= Yii::t('app', 'Master Target') ?>
@@ -696,8 +683,7 @@ select.form-select option:disabled {
                         </div>
                     </div>
 
-                    <div class="form-group mt-42"
-                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                    <div class="form-group start-center mt-42" style="  gap: 14px;">
                         <label class="text-manage-create" for="name"
                             style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
                             <div style="flex-grow: 1;">
@@ -758,8 +744,7 @@ select.form-select option:disabled {
                         </div>
                     </div>
 
-                    <div class="form-group mt-42"
-                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                    <div class="form-group start-center mt-42" style="  gap: 14px;">
                         <label class="text-manage-create" for="name"
                             style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
                             <div style="flex-grow: 1;">

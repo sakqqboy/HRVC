@@ -1,4 +1,6 @@
 <?php
+
+use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 // if ($statusform == 'update') {
 //     $parturl = 'kpi/management/update-kpi';
@@ -17,23 +19,24 @@ use yii\bootstrap5\ActiveForm;
     ],
     'action' => Yii::$app->homeUrl . $parturl
 ]); 
-$unitId = 1;
-if (isset($data['unitId']) && $data['unitId'] >= 1) {
-    $unitId = $data['unitId'];
-    // ทำสิ่งที่ต้องการเมื่อ unitId มีค่าเป็น 2
-}
-$quantRatio = $data['quantRatio'] ?? '';
-$selectedCode = $data['code'] ?? '';
-$selectedAmountType = $data['amountType'] ?? '';
-$selectedPriority = isset($data['priority']) ? $data['priority'] : '';
 
 $percentage = isset($data['ratio']) ? $data['ratio'] : 00;
 $result = $data['result'] ?? 0;
 $value = isset($data['result']) ? $data['result'] : 0;
-$sumvalue = isset($data['sumresult']) ? $data['sumresult'] : 0;
+$sumvalue = isset($kpi['sumresult']) ? $kpi['sumresult'] : 0;
 $targetAmount = $data['targetAmount'] ?? 0;
-$kpiHistoryId = $data['kpiHistoryId'] ?? 0;
+$kpiHistoryId = $kpi['kpiHistoryId'] ?? 0;
 $DueBehind = $targetAmount -  $result;
+
+
+// แปลงวันที่จาก string ให้เป็น DateTime object
+$nextCheckDate = DateTime::createFromFormat('d M Y', $kpi['nextCheckText']);
+// หาวันที่ปัจจุบัน
+$currentDate = new DateTime();
+// คำนวณความแตกต่างระหว่างวันที่ปัจจุบันและวันที่ที่กำหนด
+$interval = $currentDate->diff($nextCheckDate);
+// แสดงจำนวนวันที่เหลือ
+$daysLeft = $interval->format('%r%a'); // %r คือการแสดงเครื่องหมายบวกหรือลบ
 
 // echo $DueBehind;
 ?>
@@ -103,11 +106,6 @@ select.form-select option:disabled {
 <!-- ลิงก์ไปยัง JS ของ flatpickr -->
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-<link rel="stylesheet" href="<?= Yii::$app->homeUrl ?>assets/bootstrap4/css/bootstrap.min.css">
-<script src="<?= Yii::$app->homeUrl ?>assets/bootstrap4/js/jquery.min.js"></script>
-<script src="<?= Yii::$app->homeUrl ?>assets/bootstrap4/js/bootstrap.bundle.min.js"></script>
-
-
 <div class="contrainer-body">
     <div class="col-12">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
@@ -120,7 +118,7 @@ select.form-select option:disabled {
         ]) ?>
 
         <div class="alert mt-28 pim-body bg-white">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="between-center" style=" ">
                 <div class="col-8">
                     <a href="<?= Yii::$app->request->referrer ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kpi/management/grid' ?>"
                         class="mr-5 font-size-12">
@@ -133,14 +131,15 @@ select.form-select option:disabled {
                         <?= Yii::t('app', 'Update Key Performance Indicator') ?>
                     </text>
                 </div>
-                <div class="col-4" style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+                <div class="col-4 " style="display: flex; justify-content: center; align-items: center; gap: 20px;">
                     <div style="display: flex; gap: 14px; flex-direction: column;">
                         <text class="current-ratio text-end">
                             <?= Yii::t('app', 'Current Achievement Ratio') ?>
                         </text>
                         <text class="current-ratio-data text-end">
-
+                            <?= Yii::t('app', 'Due Behind by') ?>
                             <span class="DueBehind">
+                                <?=$DueBehind?>
                             </span>
                         </text>
                     </div>
@@ -158,7 +157,7 @@ select.form-select option:disabled {
                             <!-- Percentage text in the middle -->
                             <text x="18" y="20.35" text-anchor="middle" dominant-baseline="middle" class="percentage"
                                 style="font-size: 8px; font-weight: bold; fill: #333;">
-                                0%
+                                <?=$percentage?>%
                             </text>
                         </svg>
 
@@ -176,202 +175,266 @@ select.form-select option:disabled {
 
             <div class="contrainer-body-detail">
                 <div style="flex: 1;">
-                    <div class="form-group"
-                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                    <div class="form-group start-center" style="  gap: 14px;">
                         <label class="text-black" for="name" style="font-size: 22px; font-weight: 600;">
-                            Increase The Number of Non-Japanese Clients
-                            to Extend the Growth Trajectory further
+                            <?= isset($data['kpiDetail']) ? $data['kpiName'] : '' ?>
                         </label>
                     </div>
 
-                    <div class="form-group mt-25"
-                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                    <div class="form-group start-center mt-25" style="gap: 14px;">
                         <label class="text-gray" for="name" style="font-size: 14px; font-weight: 400;">
-                            KGI Details
+                            <?= Yii::t('app', 'KPI Details') ?>
                         </label>
-                        <text class="text-black" style="font-size: 14px; font-weight: 400;">
-                            The goal is to increase the number of Non-Japanese clients to diversify the client base and
-                            drive sustained business growth. By targeting international markets and industries, the aim
-                            is to capture a broader market share and reduce dependency on a single demographic. This
-                            will involve identifying potential opportunities outside Japan, creating tailored marketing
-                            strategies to appeal to Non-Japanese audiences, and leveraging existing networks to
-                            establish meaningful connections ...
+                        <text class="text-black" style="font-size: 14px; font-weight: 400; height: 147px;">
+                            <?= !empty($data['kpiDetail']) ? $data['kpiDetail'] : 'No details listed' ?>
                         </text>
                     </div>
 
-                    <div class="form-group mt-42"
-                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                    <div class="form-group start-center mt-42" style="  gap: 14px;">
                         <label class="text-gray" for="name" style="font-size: 14px; font-weight: 400;">
-                            Assigned Companies
+                            <?= Yii::t('app', 'Assigned Companies') ?>
                         </label>
-                        <div class="circle-container pl-15" data-type="branch" style="display: flex;
+                        <div class="circle-container" data-type="branch" style="display: flex;
                                     align-items: center;
                                     gap: 5px;
-                                    padding-left: 15px;">
-                            <div class="cycle-current">
-                                <img src="<?= Yii::$app->homeUrl ?>image/branches.svg" alt="icon">
-                            </div>
-                            <!-- <div class="cycle-current">
-                                <img src="<?= Yii::$app->homeUrl ?>image/branches.svg" alt="icon">
-                            </div>
-                            <div class="cycle-current">
-                                <img src="<?= Yii::$app->homeUrl ?>image/branches.svg" alt="icon">
+                                    ">
+                            <img src="<?= Yii::$app->homeUrl ?><?= $company['companyImg'] ?>" class="pim-pic-gridNew"
+                                style="width: 43px; height: 43px;" alt="icon">
+                            <!-- <div class="cycle-current-white" style="color: #000; right: 15px;"
+                                id="branch-selected-count">
+                                00
                             </div> -->
-                            <div class="cycle-current-white" style="color: #000; right: 15px;"
-                                id="branch-selected-count">
-                                00
-                            </div>
                             <text class="text-black" style="font-size: 18px; font-weight: 500;">
-                                Assigned on 1 Company
+                                <?= Yii::t('app', 'Assigned on') ?>
+                                <?= is_array($company['companyId']) ? '' : 1 ?>
+                                <?= Yii::t('app', 'Company') ?>
                             </text>
                         </div>
                     </div>
-                    <div class="form-group mt-42"
-                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                    <div class="form-group start-center mt-42" style="  gap: 14px;">
                         <label class="text-gray" for="name" style="font-size: 14px; font-weight: 400;">
-                            Assigned Branches
+                            <?= Yii::t('app', 'Assigned Branches') ?>
                         </label>
-                        <div class="circle-container pl-15" data-type="branch" style="display: flex;
+                        <div class="circle-container pl-15" style="display: flex;
                                     align-items: center;
                                     gap: 5px;
                                     padding-left: 15px;">
+                            <?php  if(count($kpiBranch) >= 1 ){ ?>
                             <div class="cycle-current">
                                 <img src="<?= Yii::$app->homeUrl ?>image/branches.svg" alt="icon">
                             </div>
+                            <?php }
+                            if(count($kpiBranch) >= 2 ){ ?>
                             <div class="cycle-current">
                                 <img src="<?= Yii::$app->homeUrl ?>image/branches.svg" alt="icon">
                             </div>
+                            <?php }
+                            if(count($kpiBranch) >= 3 ){ ?>
                             <div class="cycle-current">
                                 <img src="<?= Yii::$app->homeUrl ?>image/branches.svg" alt="icon">
                             </div>
-                            <div class="cycle-current-white" style="color: #000; right: 15px;"
-                                id="branch-selected-count">
-                                00
+                            <?php } ?>
+                            <div class="cycle-current-white" style="color: #000; right: 15px;">
+                                <?= count($kpiBranch) ?>
                             </div>
                             <text class="text-black" style="font-size: 18px; font-weight: 500;">
-                                Assigned on 2 Branches
+                                <?= Yii::t('app', 'Assigned on') ?>
+                                <?= count($kpiBranch) ?>
+                                <?= Yii::t('app', 'Branches') ?>
                             </text>
                         </div>
                     </div>
-                    <div class="form-group mt-42"
-                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                    <div class="form-group start-center mt-42" style="  gap: 14px;">
                         <label class="text-gray" for="name" style="font-size: 14px; font-weight: 400;">
-                            Assigned Department/s
+                            <?= Yii::t('app', 'Assigned Department/s') ?>
                         </label>
-                        <div class="circle-container pl-15" data-type="branch" style="display: flex;
+                        <div class="circle-container pl-15" style="display: flex;
                                     align-items: center;
                                     gap: 5px;
                                     padding-left: 15px;">
+                            <?php  if(count($kpiDepartment) >= 1 ){ ?>
                             <div class="cycle-current">
                                 <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
                             </div>
+                            <?php }
+                            if(count($kpiDepartment) >= 2 ){ ?>
                             <div class="cycle-current">
                                 <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
                             </div>
+                            <?php }
+                            if(count($kpiDepartment) >= 3 ){ ?>
                             <div class="cycle-current">
                                 <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
                             </div>
-                            <div class="cycle-current-white" style="color: #000; right: 15px;"
-                                id="branch-selected-count">
-                                00
+                            <?php } ?>
+                            <div class="cycle-current-white" style="color: #000; right: 15px;">
+                                <?= count($kpiDepartment) ?>
                             </div>
                             <text class="text-black" style="font-size: 18px; font-weight: 500;">
-                                Assigned on 87 Departments
+                                <?= Yii::t('app', 'Assigned on') ?>
+                                <?= count($kpiDepartment) ?>
+                                <?= Yii::t('app', 'Departments') ?>
                             </text>
                         </div>
                     </div>
                 </div>
                 <div style="flex: 1;">
-                    <div class="form-group mt-42"
-                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
-                        <div class="col-12 text-center priority-star">
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star ml-10" aria-hidden="true"></i>
-                        </div>
-                        <div class="col-12 text-center priority-box">
-                            <div class="col-12">Priority</div>
-                            <div class="col-12 text-priority">B</div>
-                        </div>
+                    <div class="form-group start-center mt-42" style="  gap: 14px;">
+                        </br>
+                        </br>
                     </div>
-                    <div class="form-group mt-42"
-                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
-                        <div class="row">
-                            <div class="col-6 border-right-disable">
-                                <div class="col-12  pr-6 pt-10 text-center">
-                                    Quant Ratio</div>
-                                <div class="col-12 pim-duedate text-center mt-2">
-                                    <img src="/HRVC/frontend/web/images/icons/Settings/diamon.svg" class="pim-iconKFI"
-                                        style="margin-top: -1px; margin-left: 3px;">
-                                    Quality
+                    <div class="form-group mt-4 d-flex flex-column align-items-start gap-3">
+                        </br>
+                        <div class="row w-100">
+                            <div class="col-3 d-flex flex-column align-items-start justify-content-center "
+                                style=" border-right: #9ABCE9 solid thin">
+                                <!-- <div class="text-center priority-star">
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star ms-3" aria-hidden="true"></i>
+                                </div> -->
+                                <div class="col-12 text-center priority-star">
+                                    <?php
+                                                    if ($kpi["priority"] == "A" || $kpi["priority"] == "B") {
+                                                    ?>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <?php
+                                                    }
+                                                    if ($kpi["priority"] == "A" || $kpi["priority"] == "C") {
+                                                    ?>
+                                    <i class="fa fa-star big-star" aria-hidden="true"></i>
+                                    <?php
+                                                    }
+                                                    if ($kpi["priority"] == "B") {
+                                                    ?>
+                                    <i class="fa fa-star ml-10" aria-hidden="true"></i>
+                                    <?php
+                                                    }
+                                                    if ($kpi["priority"] == "A") {
+                                                    ?>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <?php
+                                                    }
+                                                    ?>
+                                </div>
+                                <div class="text-center priority-box" style="width: 52.059px; height: 52.059px;">
+                                    <div style="font-size: 14px; font-weight: 400;"><?= Yii::t('app', 'Priority') ?>
+                                    </div>
+                                    <div class="text-priority" style="font-size: 24px; font-weight: 600; bottom: 6px;">
+                                        <?= $kpi["priority"] ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-9 d-flex flex-column justify-content-center gap-3 pl-32">
+                                <span class="text-gray" style="font-size: 14px; font-weight: 500;">
+                                    <?= Yii::t('app', 'Target Due Update Date') ?>
+                                </span>
+                                <div class="text-black">
+                                    <label
+                                        style="font-size: 20px; font-weight: 500;"><?= $daysLeft ?><?= Yii::t('app', 'days left') ?></label><br>
+                                    <label
+                                        style="font-size: 14px; font-weight: 500;"><?= $kpi["nextCheckText"] ?></label>
+                                </div>
+                            </div>
+                        </div>
+                        </br>
+                    </div>
+
+                    <div class="form-group mt-42 d-flex flex-column align-items-center gap-3">
+                        <div class="row w-100 align-items-center justify-content-start">
+                            <!-- Left Column: Quant Ratio -->
+                            <div class="col-3  text-start" style=" border-right: #9ABCE9 solid thin">
+                                <div class="text-gray pt-2" style="font-size: 14px; font-weight: 400;">
+                                    <?= Yii::t('app', 'Quant Ratio') ?>
+                                </div>
+                                <div class="pim-duedate mt-2" style="font-size: 18px; font-weight: 600; ">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $kpi["quantRatio"] == 1 ? 'quantity' : 'diamon' ?>.svg"
+                                        class="pim-iconKFI"
+                                        style="margin-top: -1px; margin-left: 3px; width: 18px; height: 18px;">
+                                    <?= $kpi["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?>
                                 </div>
                             </div>
 
                             <!-- Right Column: Update Interval -->
-                            <div class="col-6">
-                                <div class="col-12 pr-0 pt-10 text-center">
-                                    Update Interval </div>
-                                <div class="col-12 pim-duedate text-center mt-2">
+                            <div class="col-9 text-start" style=" padding-left: 32px; ">
+                                <div class="text-gray pt-2" style="font-size: 14px; font-weight: 400;">
+                                    <?= Yii::t('app', 'Update Interval') ?>
+                                </div>
+                                <div class="pim-duedate mt-2" style="font-size: 18px; font-weight: 600;">
                                     <img src="/HRVC/frontend/web/images/icons/Settings/monthly.svg" class="pim-iconKFI"
-                                        style="margin-top: -3px;">
-                                    Quarterly
+                                        style="margin-top: -3px;  width: 18px; height: 18px;">
+                                    <?= Yii::t('app', is_array($unit) ? $unit['unitName'] : $unit) ?>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group mt-42"
-                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+
+
+
+                    <div class="form-group start-center mt-42" style="  gap: 14px;">
                         <label class="text-gray" for="name" style="font-size: 14px; font-weight: 400;">
-                            Assigned Department/s
+                            <?= Yii::t('app', 'Assigned Team/s') ?>
                         </label>
                         <div class="circle-container pl-15" data-type="branch" style="display: flex;
                                     align-items: center;
                                     gap: 5px;
                                     padding-left: 15px;">
+                            <?php  if(count($kpiTeam) >= 1 ){ ?>
                             <div class="cycle-current">
-                                <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
+                                <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
                             </div>
+                            <?php }
+                            if(count($kpiTeam) >= 2 ){ ?>
                             <div class="cycle-current">
-                                <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
+                                <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
                             </div>
+                            <?php }
+                            if(count($kpiTeam) >= 3 ){ ?>
                             <div class="cycle-current">
-                                <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
+                                <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
                             </div>
-                            <div class="cycle-current-white" style="color: #000; right: 15px;"
-                                id="branch-selected-count">
-                                00
+                            <?php } ?>
+                            <div class="cycle-current-white" style="color: #000; right: 15px;">
+                                <?= count($kpiTeam) ?>
                             </div>
                             <text class="text-black" style="font-size: 18px; font-weight: 500;">
-                                Assigned on 87 Departments
+                                <?= Yii::t('app', 'Assigned on') ?>
+                                <?= count($kpiTeam) ?>
+                                <?= Yii::t('app', 'Teams') ?>
                             </text>
                         </div>
                     </div>
-                    <div class="form-group mt-42"
-                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                    <div class="form-group start-center mt-42" style="  gap: 14px;">
                         <label class="text-gray" for="name" style="font-size: 14px; font-weight: 400;">
-                            Assigned Department/s
+                            <?= Yii::t('app', 'Assigned Employees') ?>
                         </label>
                         <div class="row">
-                            <div class="col-5">
+                            <div class="col-4">
                                 <div class="row pim-picgroup">
                                     <div class="col-2">
                                         <div class="pim-pic-yenlowKFI">
-                                            <img src="/HRVC/frontend/web/images/icons/Settings/personblack.svg"
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg"
                                                 alt="person icon">
                                         </div>
                                     </div>
                                     <div class="col-2">
                                         <div class="pim-pic-yenlowKFI">
-                                            <img src="/HRVC/frontend/web/images/icons/Settings/personblack.svg"
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg"
                                                 alt="person icon">
                                         </div>
                                     </div>
-                                    <div class="col-6 number-tag load-yenlow pr-0 pl-0 pim-pic-gridKFINum ">
-                                        0 </div>
+                                    <div class="col-2">
+                                        <div class="pim-pic-yenlowKFI">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg"
+                                                alt="person icon">
+                                        </div>
+                                    </div>
+                                    <div class="col-4 number-tag load-yenlow pr-0 pl-0 pim-pic-gridKFINum ">
+                                        <?= count($data['kpiEmployee']) ?> </div>
                                 </div>
                             </div>
-                            <div class="col-7 yenlow-assignKFI">
-                                <img src="/HRVC/frontend/web/images/icons/Settings/assign-yenlow.svg">
-                                <a href="/HRVC/frontend/web/kfi/assign/assign/fA_rdloWzA96cHos1oY_UZAtuHtdy3v735MWj2arIxE%3D"
+                            <div class="col-8 yenlow-assignKFI">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-yenlow.svg">
+                                <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $data["kpiId"], "companyId" => $company["companyId"]]) ?>"
                                     class="font-black">
                                     Assign Person </a>
                             </div>
@@ -380,8 +443,7 @@ select.form-select option:disabled {
 
                 </div>
                 <div style="flex: 1;">
-                    <div class="form-group"
-                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                    <div class="form-group start-center" style="  gap: 14px;">
                         <label class="text-manage-create" for="name">
                             <span class="text-danger">* </span>
                             <?= Yii::t('app', 'Master Target') ?>
@@ -404,10 +466,8 @@ select.form-select option:disabled {
                         </div>
                     </div>
 
-                    <div class="form-group mt-42"
-                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
-                        <label class="text-manage-create" for="name"
-                            style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+                    <div class="form-group start-center mt-42" style="  gap: 14px;">
+                        <label class="text-manage-create between-center" for="name" style="  width: 100%; ">
                             <div style="flex-grow: 1;">
                                 <span class="text-danger">* </span>
                                 <?= Yii::t('app', 'Result') ?>
@@ -418,7 +478,7 @@ select.form-select option:disabled {
                             </div>
                             <div href="javascript:void(0);" class="updatehistory" style="text-align: right;"
                                 cursor="pointer" data-bs-toggle="modal" data-bs-target="#update-history-popup"
-                                onclick="modalHistory(<?= isset($kpiId) ? $kpiId : '' ?>);">
+                                onclick="modalHistory(<?= isset($data['kpiId']) ? $data['kpiId'] : '' ?>);">
                                 <img
                                     src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg"><?= Yii::t('app', 'Update History') ?>
                             </div>
@@ -440,7 +500,7 @@ select.form-select option:disabled {
                         </div>
 
 
-                        <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+                        <div class="between-center" style="  width: 100%; ">
                             <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
                                 <label class="switch">
                                     <input type="checkbox" id="historic-checkbox" checked>
@@ -462,27 +522,24 @@ select.form-select option:disabled {
                         </div>
                     </div>
 
-                    <div class="form-group mt-42"
-                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
-                        <label class="text-manage-create" for="name"
-                            style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+                    <div class="form-group start-center mt-42" style="gap: 14px;">
+                        <label class="text-manage-create between-center" for="name" style="  width: 100%; ">
                             <div style="flex-grow: 1;">
                                 <?= Yii::t('app', 'Status') ?>
                             </div>
                         </label>
-                        <div style="display: flex;
-                                    flex-direction: column;
-                                    align-items: flex-start;
-                                    gap: 12px;
-                                    align-self: stretch;">
+                        <div class="start-center" style="  gap: 12px; align-self: stretch;">
                             <div class="textbox-check" style="display: flex; gap: 12px;">
-                                <div style="flex-basis: 5%;">
-                                    <input type="checkbox" id="check1" name="status[]" value="check1">
+                                <div class="mid-center" style="flex-basis: 5%;  ">
+                                    <input type="checkbox" id="check1" name="status[]" value="check1"
+                                        style="width: 22px; height: 22px;">
                                 </div>
-                                <div style="flex-basis: 25%; margin-right: 20px;">
-                                    <div class="" for="check1">In-Progress</div>
+                                <div class="mid-center" style="flex-basis: 25%; margin-right: 20px;  ">
+                                    <div class="border-cicle" style="border: 0.5px solid var(--Progress-Blue, #2F42ED); background: var(--100-white, #FFF);
+                                        color: var(--Progress-Blue, #2F42ED); font-size: 14px; font-weight: 600;"
+                                        for="check1">In-Progress</div>
                                 </div>
-                                <div style="flex-basis: 70%;">
+                                <div style="flex-basis: 70%; ">
                                     <text>
                                         The task is currently being addressed. Ensure it's marked completed before the
                                         due
@@ -491,11 +548,15 @@ select.form-select option:disabled {
                                 </div>
                             </div>
                             <div class="textbox-check-hide">
-                                <div style="flex-basis: 5%;">
-                                    <input type="checkbox" id="check2" name="status[]" value="check2">
+                                <div class="mid-center" style="flex-basis: 5%;  ">
+                                    <input type="checkbox" id="check2" name="status[]" value="check2"
+                                        style="width: 22px; height: 22px;">
                                 </div>
-                                <div style="flex-basis: 25%; margin-right: 20px;">
-                                    <div for="check2">Completed</div>
+
+                                <div class="mid-center" style="flex-basis: 25%; margin-right: 20px;  ">
+                                    <div class="border-cicle"
+                                        style="border: 0.5px solid var(--Progress-Blue, #30313D); background: var(--100-white, #FFF); font-size: 14px; font-weight: 600;"
+                                        for="check2">Completed</div>
                                 </div>
                                 <div style="flex-basis: 70%;">
                                     <text>
@@ -505,11 +566,14 @@ select.form-select option:disabled {
                                 </div>
                             </div>
                             <div class="textbox-check-hide">
-                                <div style="flex-basis: 5%;">
-                                    <input type="checkbox" id="check3" name="status[]" value="check3">
+                                <div class="mid-center" style="flex-basis: 5%;  ">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/triangle-warning.svg" alt="LinkedIn"
+                                        style="width: 20px; height: 20px;">
                                 </div>
-                                <div style="flex-basis: 25%; margin-right: 20px;">
-                                    <div for="check3">Due Passed</div>
+                                <div class="mid-center" style="flex-basis: 25%; margin-right: 20px;  ">
+                                    <div class="border-cicle"
+                                        style="border: 0.5px solid var(--Progress-Blue, #30313D); background: var(--100-white, #FFF); font-size: 14px; font-weight: 600;"
+                                        for="check3">Due Passed</div>
                                 </div>
                                 <div style="flex-basis: 70%;">
                                     <text>
@@ -565,14 +629,14 @@ select.form-select option:disabled {
         </div>
     </div>
 </div>
-<?php if($statusform == 'update'){
-    ?>
+
 <input type="hidden" value="update" id="acType">
-<?php
-} else {
-?>
-<input type="hidden" value="create" id="acType">
-<?php } ?>
+<input type="hidden" id="hiddenMonth" name="month" value="<?= htmlspecialchars($data['monthName'] ?? '') ?>" required>
+<input type="hidden" id="hiddenYear" name="year" value="<?= htmlspecialchars($data['year'] ?? '') ?>" required>
+<input type="hidden" id="fromDate" name="fromDate" value="<?= isset($data['fromDate']) ? $data['fromDate'] : '' ?>"
+    required>
+<input type="hidden" id="toDate" name="toDate" value="<?= isset($data['toDate']) ? $data['toDate'] : '' ?>" required>
+
 <?php ActiveForm::end(); ?>
 <?= $this->render('modal_history') ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -610,68 +674,18 @@ overrideCheckbox.addEventListener('change', function() {
 });
 
 
-$(document).ready(function() {
-    var statusform = '<?= $statusform ?>';
-
-    if (statusform == 'update') {
-        branchMultiDepartmentUpdateKpi();
-        // alert(statusform);
-
-        // ดึงค่า branchId ที่ถูก checked แล้ว
-        var checkedBranchIds = [];
-        $('input[name="branch[]"]:checked').each(function() {
-            checkedBranchIds.push($(this).val());
-        });
-
-        // เรียกใช้งานฟังก์ชันสำหรับ branch ที่ถูก checked เท่านั้น
-        checkedBranchIds.forEach(function(branchId) {
-            // alert(branchId);
-            departmentMultiTeamUpdateKpi(branchId);
-        });
-
-        // ดึงค่า team ที่ถูก checked แล้ว
-        var checkedTeamIds = [];
-        $('input[name="team[]"]:checked').each(function() {
-            checkedTeamIds.push($(this).val());
-        });
-
-        // เรียกใช้งานฟังก์ชันสำหรับ team ที่ถูก checked เท่านั้น
-        checkedTeamIds.forEach(function(departmentId) {
-            // alert(departmentId);
-            multiTeamUpdate(departmentId);
-        });
-    }
-
-
-    // ฟังก์ชันเปลี่ยนสีของ placeholder เมื่อมีการเลือกค่า
-    function updatePlaceholderColor(selector) {
-        $(selector).on('change', function() {
-            $(this).css('color', $(this).val() !== "" ? '#30313D' : 'var(--Helper-Text-Gray, #8A8A8A)');
-        });
-    }
-
-    // เรียกใช้งานฟังก์ชันกับ select หลายตัวพร้อมกัน
-    updatePlaceholderColor('#companyId');
-    updatePlaceholderColor('#quantRatio-create');
-    updatePlaceholderColor('#amountType-create');
-    updatePlaceholderColor('#code-create');
-
-    $('[data-toggle="tooltip"]').tooltip(); // เปิดใช้งาน Tooltip
-
-});
-
 function modalHistory(kpiId) {
     var url = $url + 'kpi/management/modal-history';
-
-    var month = document.getElementById("hiddenMonth").value;
-    var year = document.getElementById("hiddenYear").value;
-    var fromDateValue = document.getElementById("fromDate").value;
-    var toDateValue = document.getElementById("toDate").value;
+    // alert(0);
     var percentage = <?= json_encode($percentage) ?>;
     var result = <?= json_encode($result) ?>;
     var sumvalue = <?= json_encode($sumvalue) ?>;
     var targetAmount = <?= json_encode($targetAmount) ?>;
     var kpiHistoryId = <?= json_encode($kpiHistoryId) ?>;
+    var monthName = document.getElementById("hiddenMonth").value;
+    var year = document.getElementById("hiddenYear").value;
+    var fromDateValue = document.getElementById("fromDate").value;
+    var toDateValue = document.getElementById("toDate").value;
     var fromDate = new Date(fromDateValue);
     var toDate = new Date(toDateValue);
     var fromDay = fromDate.getDate();
@@ -683,8 +697,8 @@ function modalHistory(kpiId) {
         month: 'long'
     }).format(toDate);
     var formattedRange = `${getOrdinalSuffix(fromDay)} ${fromMonth} - ${getOrdinalSuffix(toDay)} ${toMonth}`;
-    var monthName = getMonthName(parseInt(month)); // แปลงเป็นชื่อเดือน
 
+    // alert(toDateValue);
     $.ajax({
         type: "POST",
         dataType: "json", // ✅ รอรับ JSON
