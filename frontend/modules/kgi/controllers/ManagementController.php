@@ -35,14 +35,6 @@ use yii\db\Expression;
 use yii\web\Controller;
 use yii\web\UploadedFile;
 
-/**
- * Default controller for the `kgi` module
- */
-// header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
-// header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-// header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-// header("Cache-Control: post-check=0, pre-check=0", false);
-// header("Pragma: no-cache");
 class ManagementController extends Controller
 {
 	public function beforeAction($action)
@@ -182,15 +174,16 @@ class ManagementController extends Controller
 	{
 
 		if (isset($_POST["kgiName"]) && trim($_POST["kgiName"])) {
+			//throw new exception(print_r(Yii::$app->request->post(), true));
 			$result = isset($_POST["result"]) && $_POST["result"] != '' ? $_POST["result"] : 0;
 			$kgi = new Kgi();
 			$kgi->kgiName = $_POST["kgiName"];
 			$kgi->companyId = $_POST["companyId"];
-			$kgi->unitId = $_POST["unit"];
+			$kgi->unitId = $_POST["unitId"];
 			//$kgi->periodDate = $_POST["periodDate"];
 			$kgi->fromDate = $_POST["fromDate"];
 			$kgi->toDate = $_POST["toDate"];
-			$kgi->targetAmount =  str_replace(",", "", $_POST["targetAmount"]);
+			$kgi->targetAmount =  str_replace(",", "", $_POST["amount"]);
 			$kgi->kgiDetail = $_POST["detail"];
 			$kgi->quantRatio = $_POST["quantRatio"];
 			$kgi->priority = $_POST["priority"];
@@ -210,10 +203,10 @@ class ManagementController extends Controller
 				//$kgiHistory->updaterId = Yii::$app->user->id;
 				// $kgiHistory->kgiHistoryName = $_POST["historyName"];
 				// $kgiHistory->titleProcess = $_POST["historyName"];
-				$kgiHistory->unitId = $_POST["unit"];
+				$kgiHistory->unitId = $_POST["unitId"];
 				//$kgiHistory->periodDate = $_POST["periodDate"];
-				$kgiHistory->nextCheckDate = $_POST["nextDate"];
-				$kgiHistory->targetAmount =  str_replace(",", "", $_POST["targetAmount"]);
+				$kgiHistory->nextCheckDate = $_POST["nextCheckDate"];
+				$kgiHistory->targetAmount =  str_replace(",", "", $_POST["amount"]);
 				$kgiHistory->description = $_POST["detail"];
 				$kgiHistory->quantRatio = $_POST["quantRatio"];
 				$kgiHistory->priority = $_POST["priority"];
@@ -260,11 +253,16 @@ class ManagementController extends Controller
 			curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 			$companies = curl_exec($api);
 			$companies = json_decode($companies, true);
+
+			curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
+			$units = curl_exec($api);
+			$units = json_decode($units, true);
 			curl_close($api);
 			return $this->render('kgi_form', [
 				"statusform" => 'create',
 				"role" => $role,
-				"companies" => $companies
+				"companies" => $companies,
+				"units" => $units
 			]);
 		}
 	}
