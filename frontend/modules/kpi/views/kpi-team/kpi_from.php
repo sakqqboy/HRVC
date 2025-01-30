@@ -609,8 +609,8 @@ select.form-select option:disabled {
                                 Last Updated on
                             </label>
                             <text class="create-last-update">
-                                18/12/2024
-                                <?= isset($data['lastUpdate']) ? $data['lastUpdate'] : '' ?>
+                                <!-- 18/12/2024 -->
+                                <?= isset($kpi['lastUpdate']) ? $kpi['lastUpdate'] : '' ?>
                             </text>
                         </div>
                         <div>
