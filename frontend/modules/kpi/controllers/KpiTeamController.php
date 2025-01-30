@@ -692,7 +692,7 @@ class KpiTeamController extends Controller
 
 			$unit = Unit::find()->where(["unitId" => $kpi["unitId"]])->asArray()->one();
 			
-		// throw new exception(print_r($kpi, true));
+		// throw new exception(print_r($kpiTeamId	, true));
 		
 		return $this->render('kpi_from', [
 			"kpi" => $kpi,
@@ -703,24 +703,42 @@ class KpiTeamController extends Controller
 			"kpiTeam" => $kpiTeam ?? [],
 			"role" => $role,
 			"unit"  => $unit ,
+			"kpiTeamId"  => $kpiTeamId,
 			"statusform" =>  "update"
 		]);
 	}
 	public function actionUpdateKpiTeam()
 	{
+
+		$data = [
+            'kpiTeamId' => $_POST["kpiTeamId"],
+			'targetAmount' => $_POST["amount"], 
+			'status' => $_POST["status"],   
+			'result' => $_POST["result"],
+			// 'month' => $_POST["month"],      
+			// 'year' => $_POST["year"],      
+			'nextDate' => $_POST["nextDate"],
+			'fromDate' => $_POST["fromDate"],      
+			'toDate' => $_POST["toDate"],      
+      
+        ];
+
+		 throw new Exception(print_r($data,true));
+
+		
 		$kpiTeamId = $_POST["kpiTeamId"];
 		$role = UserRole::userRight();
 		$status =  $_POST["status"];
 		if (isset($oldKpiTeam) && !empty($oldKpiTeam)) {
-			if (($oldKpiTeam["target"] != $_POST["targetAmount"]) && $role == 3) {
+			if (($oldKpiTeam["target"] != $_POST["amount"]) && $role == 3) {
 				$status = 88;
 			}
 		}
 		$kpiTeamHistory = new KpiTeamHistory();
 		$kpiTeamHistory->kpiTeamId = $kpiTeamId;
 		$kpiTeamHistory->result = str_replace(",", "",  $_POST["result"]); 
-		if (isset($_POST["targetAmount"])) {
-			$kpiTeamHistory->target = str_replace(",", "",  $_POST["targetAmount"]);
+		if (isset($_POST["amount"])) {
+			$kpiTeamHistory->target = str_replace(",", "",  $_POST["amount"]);
 		} else {
 			$teamKpi = KpiTeam::find()->where(["kpiTeamId" => $kpiTeamId])->one();
 			$kpiTeamHistory->target = str_replace(",", "",   $teamKpi["target"]);
@@ -730,21 +748,21 @@ class KpiTeamController extends Controller
 		$kpiTeamHistory->month = $_POST["month"];
 		$kpiTeamHistory->fromDate = $_POST["fromDate"];
 		$kpiTeamHistory->toDate = $_POST["toDate"];
-		$kpiTeamHistory->month = $_POST["month"];
-		$kpiTeamHistory->year = $_POST["year"];
+		// $kpiTeamHistory->month = $_POST["month"];
+		// $kpiTeamHistory->year = $_POST["year"];
 		$kpiTeamHistory->nextCheckDate = $_POST["nextDate"];
-		$kpiTeamHistory->detail = $_POST["remark"];
+		// $kpiTeamHistory->detail = $_POST["remark"];
 		$kpiTeamHistory->createrId = Yii::$app->user->id;
 		$kpiTeamHistory->createDateTime = new Expression('NOW()');
 		$kpiTeamHistory->updateDateTime = new Expression('NOW()');
 		if ($kpiTeamHistory->save(false)) {
 			$teamkpi = KpiTeam::find()->where(["kpiTeamId" => $kpiTeamId])->one();
 			$teamkpi->status = $_POST["status"];
-			$teamkpi->month = $_POST["month"];
-			$teamkpi->year = $_POST["year"];
+			// $teamkpi->month = $_POST["month"];
+			// $teamkpi->year = $_POST["year"];
 			$teamkpi->result = str_replace(",", "",  $_POST["result"]); 
-			if (isset($_POST["targetAmount"])) {
-				$teamkpi->target = str_replace(",", "",  $_POST["targetAmount"]);
+			if (isset($_POST["amount"])) {
+				$teamkpi->target = str_replace(",", "",  $_POST["amount"]);
 			}
 			$teamkpi->fromDate = $_POST["fromDate"];
 			$teamkpi->toDate = $_POST["toDate"];

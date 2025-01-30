@@ -7,15 +7,14 @@ use yii\bootstrap5\ActiveForm;
 // } else {
 //     $parturl = 'kpi/management/create-kpi';
 // }
-    $parturl = 'kpi/management/update-kpi';
+    $parturl = 'kpi/kpi-team/update-kpi-team';
 ?>
 
 <?php $form = ActiveForm::begin([
     'id' => 'create-kpi',
     'method' => 'post',
     'options' => [
-        'enctype' => 'multipart/form-data',
-        'onsubmit' => 'return validateFormKpi(event)' // เรียกฟังก์ชันตรวจสอบก่อนส่งฟอร์ม
+        'enctype' => 'multipart/form-data'
     ],
     'action' => Yii::$app->homeUrl . $parturl
 ]); 
@@ -177,7 +176,7 @@ select.form-select option:disabled {
                 <div style="flex: 1;">
                     <div class="form-group start-center" style="  gap: 14px;">
                         <label class="text-black" for="name" style="font-size: 22px; font-weight: 600;">
-                            <?= isset($data['kpiDetail']) ? $data['kpiName'] : '' ?>
+                            <?= isset($data['kpiName']) ? $data['kpiName'] : '' ?>
                         </label>
                     </div>
 
@@ -456,13 +455,24 @@ select.form-select option:disabled {
                             <span class="input-group-text"
                                 style="background-color:rgb(255, 255, 255); border-right: none; padding: 20px;">
                                 <img src="/HRVC/frontend/web/image/target-blue.svg" alt="LinkedIn"
-                                    style="width: 30px; height: 30px;">
+                                    style="width: 30px; height: 30px; ">
+                                <span style="font-size: 22px; font-weight: 600; padding-left: 20px; ">
+                                    <?= isset($data['code']) ? $data['code'] : '' ?>
+                                </span>
                             </span>
                             <input type="number" class="form-control text-end" name="amount" step="any"
                                 placeholder="Enter Target Amount"
                                 value="<?= isset($data['targetAmount']) ? $data['targetAmount'] : '' ?>"
-                                style="border-left: none; font-size: 22px; font-style: normal; font-weight: 600;"
+                                style="border-left: none; border-right: none; font-size: 22px; font-style: normal; padding-right: 3px; font-weight: 600;"
                                 required>
+                            <span class="input-group-text"
+                                style="background-color:rgb(255, 255, 255); border-left: none; padding-right: 20px; padding-left: 0px;">
+                                <?php if($data['amountType'] == '%') {?>
+                                <span style="font-size: 22px; font-weight: 600;">
+                                    %
+                                </span>
+                                <?php }?>
+                            </span>
                         </div>
                     </div>
 
@@ -530,38 +540,37 @@ select.form-select option:disabled {
                         </label>
                         <div class="start-center" style="  gap: 12px; align-self: stretch;">
                             <div class="textbox-check" style="display: flex; gap: 12px;">
-                                <div class="mid-center" style="flex-basis: 5%;  ">
-                                    <input type="checkbox" id="check1" name="status[]" value="check1"
-                                        style="width: 22px; height: 22px;">
+                                <div class="mid-center" style="flex-basis: 5%;">
+                                    <input type="checkbox" id="check1" name="status" value="1" class="status-checkbox"
+                                        checked style="width: 22px; height: 22px;">
                                 </div>
-                                <div class="mid-center" style="flex-basis: 25%; margin-right: 20px;  ">
-                                    <div class="border-cicle" style="border: 0.5px solid var(--Progress-Blue, #2F42ED); background: var(--100-white, #FFF);
-                                        color: var(--Progress-Blue, #2F42ED); font-size: 14px; font-weight: 600;"
-                                        for="check1">In-Progress</div>
-                                </div>
-                                <div style="flex-basis: 70%; ">
-                                    <text>
-                                        The task is currently being addressed. Ensure it's marked completed before the
-                                        due
-                                        date to avoid it being automatically listed as overdue.
-                                    </text>
-                                </div>
-                            </div>
-                            <div class="textbox-check-hide">
-                                <div class="mid-center" style="flex-basis: 5%;  ">
-                                    <input type="checkbox" id="check2" name="status[]" value="check2"
-                                        style="width: 22px; height: 22px;">
-                                </div>
-
-                                <div class="mid-center" style="flex-basis: 25%; margin-right: 20px;  ">
+                                <div class="mid-center" style="flex-basis: 25%; margin-right: 20px;">
                                     <div class="border-cicle"
-                                        style="border: 0.5px solid var(--Progress-Blue, #30313D); background: var(--100-white, #FFF); font-size: 14px; font-weight: 600;"
-                                        for="check2">Completed</div>
+                                        style="border: 0.5px solid #2F42ED; background: #FFF; color: #2F42ED; font-size: 14px; font-weight: 600;">
+                                        <?= Yii::t('app', 'In-Progress') ?>
+                                    </div>
                                 </div>
                                 <div style="flex-basis: 70%;">
                                     <text>
-                                        The Component has not been completed
+                                        <?= Yii::t('app', "The task is currently being addressed. Ensure it's marked completed before the due date to avoid it being automatically listed as overdue.") ?>
+                                    </text>
+                                </div>
+                            </div>
 
+                            <div class="textbox-check-hide" style="display: flex; gap: 12px; margin-top: 10px;">
+                                <div class="mid-center" style="flex-basis: 5%;">
+                                    <input type="checkbox" id="check2" name="status" value="2" class="status-checkbox"
+                                        style="width: 22px; height: 22px;">
+                                </div>
+                                <div class="mid-center" style="flex-basis: 25%; margin-right: 20px;">
+                                    <div class="border-cicle"
+                                        style="border: 0.5px solid #30313D; background: #FFF; font-size: 14px; font-weight: 600;">
+                                        <?= Yii::t('app', "Completed") ?>
+                                    </div>
+                                </div>
+                                <div style="flex-basis: 70%;">
+                                    <text>
+                                        <?= Yii::t('app', "The Component has not been completed") ?>
                                     </text>
                                 </div>
                             </div>
@@ -573,13 +582,15 @@ select.form-select option:disabled {
                                 <div class="mid-center" style="flex-basis: 25%; margin-right: 20px;  ">
                                     <div class="border-cicle"
                                         style="border: 0.5px solid var(--Progress-Blue, #30313D); background: var(--100-white, #FFF); font-size: 14px; font-weight: 600;"
-                                        for="check3">Due Passed</div>
+                                        for="check3">
+                                        <?= Yii::t('app', "Due Passed") ?>
+                                    </div>
                                 </div>
                                 <div style="flex-basis: 70%;">
                                     <text>
-                                        This task component be automatically become due passed within 30 Days, if you
+                                        <?= Yii::t('app', "This task component be automatically become due passed within 30 Days, if you
                                         don’t
-                                        mark it as completed
+                                        mark it as completed") ?>
                                     </text>
                                 </div>
                             </div>
@@ -631,11 +642,12 @@ select.form-select option:disabled {
 </div>
 
 <input type="hidden" value="update" id="acType">
-<input type="hidden" id="hiddenMonth" name="month" value="<?= htmlspecialchars($data['monthName'] ?? '') ?>" required>
+<input type="hidden" id="hiddenMonth" name="month" value="<?= htmlspecialchars($data['month'] ?? '') ?>" required>
 <input type="hidden" id="hiddenYear" name="year" value="<?= htmlspecialchars($data['year'] ?? '') ?>" required>
 <input type="hidden" id="fromDate" name="fromDate" value="<?= isset($data['fromDate']) ? $data['fromDate'] : '' ?>"
     required>
 <input type="hidden" id="toDate" name="toDate" value="<?= isset($data['toDate']) ? $data['toDate'] : '' ?>" required>
+<input type="hidden" id="kpiTeamId" name="kpiTeamId" value="<?= isset($kpiTeamId) ? $kpiTeamId : '' ?>" required>
 
 <?php ActiveForm::end(); ?>
 <?= $this->render('modal_history') ?>
@@ -673,6 +685,26 @@ overrideCheckbox.addEventListener('change', function() {
     }
 });
 
+// เช็คให้เลือกได้แค่ตัวเดียว
+document.querySelectorAll('.status-checkbox').forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+        document.querySelectorAll('.status-checkbox').forEach(cb => {
+            if (cb !== this) {
+                cb.checked = false; // เอาเช็คอันอื่นออก
+            }
+        });
+    });
+});
+
+// ส่งเฉพาะค่าที่ถูกเช็ค
+document.getElementById("statusForm").addEventListener("submit", function(event) {
+    let selected = document.querySelector('.status-checkbox:checked');
+    if (!selected) {
+        alert("Please select a status before submitting!");
+        event.preventDefault(); // หยุดการส่งฟอร์ม ถ้าไม่ได้เลือก
+    }
+});
+
 
 function modalHistory(kpiId) {
     var url = $url + 'kpi/management/modal-history';
@@ -682,7 +714,7 @@ function modalHistory(kpiId) {
     var sumvalue = <?= json_encode($sumvalue) ?>;
     var targetAmount = <?= json_encode($targetAmount) ?>;
     var kpiHistoryId = <?= json_encode($kpiHistoryId) ?>;
-    var monthName = document.getElementById("hiddenMonth").value;
+    var month = document.getElementById("hiddenMonth").value;
     var year = document.getElementById("hiddenYear").value;
     var fromDateValue = document.getElementById("fromDate").value;
     var toDateValue = document.getElementById("toDate").value;
@@ -697,8 +729,8 @@ function modalHistory(kpiId) {
         month: 'long'
     }).format(toDate);
     var formattedRange = `${getOrdinalSuffix(fromDay)} ${fromMonth} - ${getOrdinalSuffix(toDay)} ${toMonth}`;
+    var monthName = getMonthName(parseInt(month)); // แปลงเป็นชื่อเดือน
 
-    // alert(toDateValue);
     $.ajax({
         type: "POST",
         dataType: "json", // ✅ รอรับ JSON
