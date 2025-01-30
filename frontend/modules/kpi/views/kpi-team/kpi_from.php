@@ -36,8 +36,11 @@ $currentDate = new DateTime();
 $interval = $currentDate->diff($nextCheckDate);
 // แสดงจำนวนวันที่เหลือ
 $daysLeft = $interval->format('%r%a'); // %r คือการแสดงเครื่องหมายบวกหรือลบ
-
-// echo $DueBehind;
+if ($daysLeft < 0) {
+    echo "Due Pass";
+} else {
+    echo "$daysLeft days left";
+}
 ?>
 
 <style>
@@ -539,55 +542,55 @@ select.form-select option:disabled {
                             </div>
                         </label>
                         <div class="start-center" style="  gap: 12px; align-self: stretch;">
-                            <div class="textbox-check" style="display: flex; gap: 12px;">
+                            <div class="textbox-check-blue" style="display: flex; gap: 12px;">
                                 <div class="mid-center" style="flex-basis: 5%;">
                                     <input type="checkbox" id="check1" name="status" value="1" class="status-checkbox"
                                         checked style="width: 22px; height: 22px;">
                                 </div>
                                 <div class="mid-center" style="flex-basis: 25%; margin-right: 20px;">
-                                    <div class="border-cicle"
-                                        style="border: 0.5px solid #2F42ED; background: #FFF; color: #2F42ED; font-size: 14px; font-weight: 600;">
+                                    <div class="border-cicle  bg-white text-blue-sea"
+                                        style="border: 0.5px solid #2F42ED; font-size: 14px; font-weight: 600;">
                                         <?= Yii::t('app', 'In-Progress') ?>
                                     </div>
                                 </div>
                                 <div style="flex-basis: 70%;">
-                                    <text>
+                                    <text class="text-blue-sea">
                                         <?= Yii::t('app', "The task is currently being addressed. Ensure it's marked completed before the due date to avoid it being automatically listed as overdue.") ?>
                                     </text>
                                 </div>
                             </div>
 
-                            <div class="textbox-check-hide" style="display: flex; gap: 12px; margin-top: 10px;">
+                            <div class="textbox-check-green" style="display: flex; gap: 12px; margin-top: 10px;">
                                 <div class="mid-center" style="flex-basis: 5%;">
                                     <input type="checkbox" id="check2" name="status" value="2" class="status-checkbox"
                                         style="width: 22px; height: 22px;">
                                 </div>
                                 <div class="mid-center" style="flex-basis: 25%; margin-right: 20px;">
-                                    <div class="border-cicle"
-                                        style="border: 0.5px solid #30313D; background: #FFF; font-size: 14px; font-weight: 600;">
+                                    <div class="border-cicle  bg-white text-green"
+                                        style="border: 0.5px solid #2D7F06; font-size: 14px; font-weight: 600;">
                                         <?= Yii::t('app', "Completed") ?>
                                     </div>
                                 </div>
                                 <div style="flex-basis: 70%;">
-                                    <text>
+                                    <text class="text-green">
                                         <?= Yii::t('app', "The Component has not been completed") ?>
                                     </text>
                                 </div>
                             </div>
-                            <div class="textbox-check-hide">
+                            <div class="textbox-check-orang">
                                 <div class="mid-center" style="flex-basis: 5%;  ">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/triangle-warning.svg" alt="LinkedIn"
+                                    <img src="<?= Yii::$app->homeUrl ?>image/warning-orang.svg" alt="LinkedIn"
                                         style="width: 20px; height: 20px;">
                                 </div>
                                 <div class="mid-center" style="flex-basis: 25%; margin-right: 20px;  ">
-                                    <div class="border-cicle"
-                                        style="border: 0.5px solid var(--Progress-Blue, #30313D); background: var(--100-white, #FFF); font-size: 14px; font-weight: 600;"
+                                    <div class="border-cicle bg-white text-orang"
+                                        style="border: 0.5px solid var(--Progress-Blue, #DD7A01); background: var(--100-white, #FFF); font-size: 14px; font-weight: 600;"
                                         for="check3">
                                         <?= Yii::t('app', "Due Passed") ?>
                                     </div>
                                 </div>
                                 <div style="flex-basis: 70%;">
-                                    <text>
+                                    <text class="text-orang">
                                         <?= Yii::t('app', "This task component be automatically become due passed within 30 Days, if you
                                         don’t
                                         mark it as completed") ?>
