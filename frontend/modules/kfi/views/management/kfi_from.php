@@ -124,7 +124,11 @@ select.form-select option:disabled {
                         </text>
                     </a>
                     <text class="pim-name-title">
-                        Create Key Financial Indicator
+                        <?php  if($statusform == 'update'){?>
+                        <?= Yii::t('app', 'Update Key Financial Indicator') ?>
+                        <?php }else { ?>
+                        <?= Yii::t('app', 'Create Key Financial Indicator') ?>
+                        <?php } ?>
                     </text>
                 </div>
                 <div class="col-4" style="display: flex; justify-content: center; align-items: center; gap: 20px;">

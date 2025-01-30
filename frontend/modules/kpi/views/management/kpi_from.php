@@ -3,7 +3,7 @@
 use yii\bootstrap5\ActiveForm;
 
 if ($statusform == 'update') {
-    $parturl = 'kpi/management/save-update-kpi';
+    $parturl = 'kpi/management/update-kpi';
 } else {
     $parturl = 'kpi/management/create-kpi';
 }
@@ -18,7 +18,7 @@ if ($statusform == 'update') {
     ],
     'action' => Yii::$app->homeUrl . $parturl
 ]);
-$unitId = 0;
+$unitId = 1;
 if (isset($data['unitId']) && $data['unitId'] >= 1) {
     $unitId = $data['unitId'];
     // ทำสิ่งที่ต้องการเมื่อ unitId มีค่าเป็น 2
@@ -26,11 +26,16 @@ if (isset($data['unitId']) && $data['unitId'] >= 1) {
 $quantRatio = $data['quantRatio'] ?? '';
 $selectedCode = $data['code'] ?? '';
 $selectedAmountType = $data['amountType'] ?? '';
+$selectedPriority = isset($data['priority']) ? $data['priority'] : '';
 
-
+$percentage = isset($data['ratio']) ? $data['ratio'] : 00;
 $result = $data['result'] ?? 0;
+$value = isset($data['result']) ? $data['result'] : 0;
+$sumvalue = isset($data['sumresult']) ? $data['sumresult'] : 0;
 $targetAmount = $data['targetAmount'] ?? 0;
+$kpiHistoryId = $data['kpiHistoryId'] ?? 0;
 $DueBehind = $targetAmount -  $result;
+
 // echo $DueBehind;
 ?>
 
@@ -126,7 +131,11 @@ $DueBehind = $targetAmount -  $result;
                         </text>
                     </a>
                     <text class="pim-name-title">
-                        Create Key Financial Indicator
+                        <?php if ($statusform == 'update') { ?>
+                            <?= Yii::t('app', 'Update Key Performance Indicator') ?>
+                        <?php } else { ?>
+                            <?= Yii::t('app', 'Create Key Performance Indicator') ?>
+                        <?php } ?>
                     </text>
                 </div>
                 <div class="col-4" style="display: flex; justify-content: center; align-items: center; gap: 20px;">
@@ -154,12 +163,6 @@ $DueBehind = $targetAmount -  $result;
                                 d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                                 style="stroke: hsla(217, 100%, 91%, 1); stroke-width: 3;" fill="none" />
 
-
-                            <!-- Foreground circle (progress) -->
-                            <?php
-                            $percentage = isset($data['ratio']) ? $data['ratio'] : 00;
-                            // $dashArray = ($percentage * 100) / 100; // this will control the progress visually
-                            ?>
                             <path class="circle"
                                 d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                                 stroke="#4db8ff" stroke-width="3" fill="none"
@@ -403,7 +406,7 @@ $DueBehind = $targetAmount -  $result;
                         </div>
 
                         <div class="col-12" <?php if ($statusform == 'update'): ?> id="show-multi-team-update"
-                            <?php else: ?> id="show-multi-team" <?php endif; ?> style="position: absolute; top: 60%; left: 0; width: 100%; z-index: 999; background-color: white; 
+                            <?php else: ?> id="show-multi-team" <?php endif; ?> style="position: absolute; top: 80%; left: 0; width: 100%; z-index: 999; background-color: white; 
                             border: 1px solid #ced4da; padding: 10px; display: none;">
                             <?php if ($statusform == 'create'): ?>
                                 <!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
@@ -428,10 +431,10 @@ $DueBehind = $targetAmount -  $result;
                         </label>
                         <select class="form-select font-size-13" aria-label="Default select example"
                             id="priority-update" name="priority">
-                            <option value="">A/B/C</option>
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
+                            <option value="" <?= ($selectedPriority == '') ? 'selected' : ''; ?>>A/B/C</option>
+                            <option value="A" <?= ($selectedPriority == 'A') ? 'selected' : ''; ?>>A</option>
+                            <option value="B" <?= ($selectedPriority == 'B') ? 'selected' : ''; ?>>B</option>
+                            <option value="C" <?= ($selectedPriority == 'C') ? 'selected' : ''; ?>>C</option>
                         </select>
                     </div>
                 </div>
@@ -595,8 +598,8 @@ $DueBehind = $targetAmount -  $result;
                                     aria-hidden="true"></i>
                             </div>
                             <input type="hidden" id="nextDate" name="nextCheckDate"
-                                value="<?= isset($data['nextCheckDate']) ? $data['nextCheckDate'] : '' ?>">
-                            <!-- <input type="hidden" id="nextDate" name="nextCheckDate"> -->
+                                value="<?= isset($data['nextCheck']) ? $data['nextCheck'] : '' ?>">
+                            <!-- <input type="hidden" id="nextDate" name="nextCheck"> -->
                         </div>
                         <div id="calendar-due-update"
                             style="position: absolute; margin-top: 75px; padding: 10px; border: 1px solid rgb(221, 221, 221); border-radius: 10px; background: rgb(255, 255, 255); width: 100%; z-index: 1; display: none; justify-content: center; align-items: center;">
@@ -707,7 +710,9 @@ $DueBehind = $targetAmount -  $result;
                                     title="<?= Yii::t('app', 'Historic update contains the update from the team and indivudials if you wish to use your own values, please toggle on Override to put custom numbers ') ?>"
                                     alt="Help Icon">
                             </div>
-                            <div class="updatehistory" style="text-align: right;">
+                            <div href="javascript:void(0);" class="updatehistory" style="text-align: right;"
+                                cursor="pointer" data-bs-toggle="modal" data-bs-target="#update-history-popup"
+                                onclick="modalHistory(<?= isset($kpiId) ? $kpiId : '' ?>);">
                                 <?php if ($statusform == 'update') { ?>
                                     <img
                                         src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg"><?= Yii::t('app', 'Update History') ?>
@@ -716,7 +721,7 @@ $DueBehind = $targetAmount -  $result;
                         </label>
 
                         <div class="input-group">
-                            <span class="input-group-text"
+                            <span class="input-group-text" id="result-inbox"
                                 style="background-color:rgb(255, 255, 255); border-right: none; padding: 20px;">
                                 <img id="result-icon"
                                     src="<?= Yii::$app->homeUrl ?>image/result-<?= isset($data['result']) ? 'blue' : 'gray' ?>.svg"
@@ -725,7 +730,9 @@ $DueBehind = $targetAmount -  $result;
                             <input type="number" class="form-control text-end" name="result" id="result-update"
                                 value="<?= isset($data['result']) ? $data['result'] : '' ?>"
                                 style="border-left: none; font-size: 22px; font-style: normal; font-weight: 600;"
-                                required oninput="updateIcon(this);">
+                                required oninput="updateIcon(this),updateResultValue(this)">
+                            <input type="hidden" name="resultValue" id="result-cheng"
+                                value="<?= isset($data['result']) ? $data['result'] : '' ?>">
                         </div>
 
 
@@ -733,19 +740,19 @@ $DueBehind = $targetAmount -  $result;
                             <?php if ($statusform == 'update') { ?>
                                 <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
                                     <label class="switch">
-                                        <input type="checkbox">
+                                        <input type="checkbox" id="historic-checkbox" checked>
                                         <span class="slider round"></span>
                                     </label>
-                                    <label class="sub-manage-create" id="branch-selected-message">
+                                    <label class="sub-manage-create" id="historic-switch">
                                         <?= Yii::t('app', 'Historic Update') ?>
                                     </label>
                                 </div>
                                 <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
                                     <label class="switch">
-                                        <input type="checkbox">
+                                        <input type="checkbox" id="override-checkbox">
                                         <span class="slider round"></span>
                                     </label>
-                                    <label class="sub-manage-create" id="branch-selected-message">
+                                    <label class="sub-manage-create" id="override-switch">
                                         <?= Yii::t('app', 'Override') ?>
                                     </label>
                                 </div>
@@ -844,14 +851,48 @@ $DueBehind = $targetAmount -  $result;
     <input type="hidden" value="create" id="acType">
 <?php } ?>
 <?php ActiveForm::end(); ?>
+<?= $this->render('modal_history') ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+    const value = "<?= $value ?>";
+    const sumvalue = "<?= $sumvalue ?>";
+
+    // Get both checkboxes
+    const historicCheckbox = document.getElementById('historic-checkbox');
+    const overrideCheckbox = document.getElementById('override-checkbox');
+
+    // Add event listeners to handle toggling behavior
+    historicCheckbox.addEventListener('change', function() {
+        if (this.checked) {
+            overrideCheckbox.checked = false;
+            // alert(0);
+            overrideChecked(overrideCheckbox.checked, value);
+        } else {
+            overrideCheckbox.checked = true;
+            // alert(1);
+            overrideChecked(overrideCheckbox.checked, sumvalue);
+        }
+    });
+
+    overrideCheckbox.addEventListener('change', function() {
+        if (this.checked) {
+            // alert(2);
+            historicCheckbox.checked = false;
+            overrideChecked(overrideCheckbox.checked, sumvalue);
+        } else {
+            // alert(3);
+            historicCheckbox.checked = true;
+            overrideChecked(overrideCheckbox.checked, value);
+        }
+    });
+
+
     $(document).ready(function() {
         var statusform = '<?= $statusform ?>';
-        // alert(statusform);
 
-        if (statusform === 'update') {
+        if (statusform == 'update') {
             branchMultiDepartmentUpdateKpi();
+            // alert(statusform);
 
             // ดึงค่า branchId ที่ถูก checked แล้ว
             var checkedBranchIds = [];
@@ -863,6 +904,18 @@ $DueBehind = $targetAmount -  $result;
             checkedBranchIds.forEach(function(branchId) {
                 // alert(branchId);
                 departmentMultiTeamUpdateKpi(branchId);
+            });
+
+            // ดึงค่า team ที่ถูก checked แล้ว
+            var checkedTeamIds = [];
+            $('input[name="team[]"]:checked').each(function() {
+                checkedTeamIds.push($(this).val());
+            });
+
+            // เรียกใช้งานฟังก์ชันสำหรับ team ที่ถูก checked เท่านั้น
+            checkedTeamIds.forEach(function(departmentId) {
+                // alert(departmentId);
+                multiTeamUpdate(departmentId);
             });
         }
 
@@ -883,4 +936,166 @@ $DueBehind = $targetAmount -  $result;
         $('[data-toggle="tooltip"]').tooltip(); // เปิดใช้งาน Tooltip
 
     });
+
+    function modalHistory(kpiId) {
+        var url = $url + 'kpi/management/modal-history';
+
+        var month = document.getElementById("hiddenMonth").value;
+        var year = document.getElementById("hiddenYear").value;
+        var fromDateValue = document.getElementById("fromDate").value;
+        var toDateValue = document.getElementById("toDate").value;
+        var percentage = <?= json_encode($percentage) ?>;
+        var result = <?= json_encode($result) ?>;
+        var sumvalue = <?= json_encode($sumvalue) ?>;
+        var targetAmount = <?= json_encode($targetAmount) ?>;
+        var kpiHistoryId = <?= json_encode($kpiHistoryId) ?>;
+        var fromDate = new Date(fromDateValue);
+        var toDate = new Date(toDateValue);
+        var fromDay = fromDate.getDate();
+        var toDay = toDate.getDate();
+        var fromMonth = new Intl.DateTimeFormat('en-US', {
+            month: 'long'
+        }).format(fromDate);
+        var toMonth = new Intl.DateTimeFormat('en-US', {
+            month: 'long'
+        }).format(toDate);
+        var formattedRange = `${getOrdinalSuffix(fromDay)} ${fromMonth} - ${getOrdinalSuffix(toDay)} ${toMonth}`;
+        var monthName = getMonthName(parseInt(month)); // แปลงเป็นชื่อเดือน
+
+        $.ajax({
+            type: "POST",
+            dataType: "json", // ✅ รอรับ JSON
+            url: url,
+            data: {
+                percentage: percentage,
+                result: result,
+                sumvalue: sumvalue,
+                targetAmount: targetAmount,
+                kpiId: kpiId,
+                month: monthName,
+                year: year,
+                formattedRange: formattedRange,
+                kpiHistoryId: kpiHistoryId
+            },
+            success: function(data) {
+                var percentage = parseFloat(data.percentage);
+                var dueBehind = 100 - percentage; // ✅ คำนวณส่วนต่าง
+                $("#mont-hyear").text(data.month + " " + data.year);
+                $("#formattedRange").text(data.formattedRange);
+                $("#Target").text(data.targetAmount);
+                $("#Result").text("/" + data.result);
+                $(".percentage").text(percentage + "%");
+                var dashArrayValue = (percentage / 100) * 100;
+                $(".circle").attr("stroke-dasharray", dashArrayValue + ", 100");
+                $("#DueBehind").text(dueBehind + "%");
+                // console.log(data.historyTeam);
+                var historyData = data.history; // ดึงข้อมูล history
+                var historyList = $('#history-list-creater');
+                historyList.empty(); // เคลียร์รายการเก่า
+                var historyArray = Object.values(historyData);
+
+                var historyTeamData = data.historyTeam; // ดึงข้อมูล history
+                var historyTeamList = $('#history-list-team');
+                historyTeamList.empty(); // เคลียร์รายการเก่า
+                var historyTeamArray = Object.values(historyTeamData);
+
+                historyArray.forEach(function(item) {
+                    var listItem = `
+                <li class="schedule-item mt-5" role="button" tabindex="0">
+                        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                            <div style="display: flex; gap: 16px; align-items: center;">
+                                <div style="display: flex; justify-content: center; align-items: center;">
+                                    <div class="col-5">
+                                        <img src="<?= Yii::$app->homeUrl ?>${item.picture}" class="width-ehsan-small" id="picture-history">
+                                    </div>
+                                </div>
+                                <div style="display: flex; justify-content: center; align-items: center;">
+                                    <span class="text-black" id="creater-history" style="font-size: 16px; font-weight: 500;">
+                                        ${item.creater}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; justify-content: center; align-items: center; background-color: rgb(215, 235, 255); border: 0.795px solid #2580D3; border-radius: 36px; padding: 3px 20px; z-index: 1;">
+                                <div style="display: flex; justify-content: center; align-items: center; gap: 8px;">
+                                    <div class="cycle-current">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
+                                    </div>
+                                    <span class="text-black" id="teamName-history" style="font-size: 16px; font-weight: 500;">
+                                        ${item.teamName}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; flex-direction: column; text-align: right;">
+                                <div>
+                                    <span class="text-gray" id="target-history" style="font-size: 18px; font-weight: 400;">
+                                        ${item.target}
+                                    </span>
+                                    <span class="text-blue" id="result-history" style="font-size: 18px; font-weight: 600;">
+                                        /${item.result}
+                                    </span>
+                                </div>
+                                <span class="text-gray" id="createDate-history" style="font-size: 14px; font-weight: 400;">
+                                    ${item.createDateTime}
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+            `;
+                    historyList.append(listItem); // เพิ่มข้อมูลลงใน ul
+                });
+
+                historyTeamArray.forEach(function(item) {
+                    var listItem = `
+                    <li class="schedule-item mt-5" role="button" tabindex="0">
+                        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                            <!-- กลุ่มที่ชิดซ้าย -->
+                            <div style="display: flex; gap: 16px;">
+                                <div style="display: flex; justify-content: center; align-items: center;">
+                                    <div class="cycle-current">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
+                                    </div>
+                                </div>
+                                <div style="display: flex; gap: 6px; flex-direction: column;">
+                                    <text class="text-black" style="font-size: 16px; font-weight: 600;">
+                                        ${item.teamName} <!-- ใช้ชื่อทีมจาก item -->
+                                    </text>
+                                    <text class="text-gray" style="font-size: 14px; font-weight: 400;">
+                                        Accounting & Outsourcing de... <!-- หรือใช้ข้อมูลอื่นจาก item -->
+                                    </text>
+                                </div>
+                            </div>
+
+                            <!-- กลุ่มที่ชิดขวา -->
+                            <div style="display: flex;">
+                                <div>
+                                    <div style="display: flex; gap: 6px; flex-direction: column;">
+                                        <text class="text-end">
+                                            <span class="text-gray" style="font-size: 18px; font-weight: 400;">
+                                                ${item.target} <!-- แสดง target -->
+                                            </span>
+                                            <span class="text-blue" style="font-size: 18px; font-weight: 600;">
+                                                /${item.result} <!-- แสดง result -->
+                                            </span>
+                                        </text>
+                                        <text class="text-gray text-end" style="font-size: 14px; font-weight: 400;">
+                                            ${item.createDateTime} <!-- แสดงวันที่ที่สร้าง -->
+                                        </text>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                `;
+                    historyTeamList.append(listItem); // เพิ่มข้อมูลลงใน ul
+                });
+
+            },
+            error: function(xhr, status, error) {
+                console.log(xhr.responseText); // ดูข้อความผิดพลาดจากเซิร์ฟเวอร์
+                alert("เกิดข้อผิดพลาดในการโหลดข้อมูล");
+            }
+        });
+    }
 </script>

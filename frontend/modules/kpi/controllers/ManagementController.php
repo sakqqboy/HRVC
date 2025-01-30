@@ -263,7 +263,9 @@ class ManagementController extends Controller
                     $this->saveKpiTeam($_POST["team"], $kpiId);
                 }
 
-                return $this->redirect(Yii::$app->homeUrl . 'kpi/management/grid');
+                return $this->redirect(Yii::$app->homeUrl . 'kgi/assign/assign/' . ModelMaster::encodeParams(["kgiId" => $kpiId, "companyId" => $_POST["companyId"]]));
+
+                // return $this->redirect(Yii::$app->homeUrl . 'kpi/management/grid');
 
                 //return $this->redirect(Yii::$app->request->referrer);
                 // return $this->redirect(Yii::$app->homeUrl . 'kpi/assign/assign/' . ModelMaster::encodeParams(["kpiId" => $kpiId, "companyId" => $_POST["companyId"]]));
@@ -440,63 +442,131 @@ class ManagementController extends Controller
     }
     public function actionPrepareUpdate()
     {
-        $kpiId = $_POST["kpiId"];
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . '&&kpiHistoryId=0');
-        $kpi = curl_exec($api);
-        $kpi = json_decode($kpi, true);
+        // $kpiId = $_POST["kpiId"];
+        // $kpiId = Yii::$app->request->get("kpiId");
 
-        $companyId = $kpi["companyId"];
-        $kpiBranchText = '';
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
-        $kpiBranch = curl_exec($api);
-        $kpiBranch = json_decode($kpiBranch, true);
-        $kpiBranchText = $this->renderAjax('multi_branch_update', [
-            "branches" => $kpiBranch,
-            "kpiId" => $kpiId
-        ]);
-        $branch["textBranch"] = $kpiBranchText;
+        // if (!$kfiId || !is_numeric($kfiId)) {
+        // 	throw new Exception("Invalid KFI ID.");
+        // }else{
+        // 	throw new Exception($kfiId);
+        // }
+        
+        if (Yii::$app->request->isGet) {
+            $kpiId = Yii::$app->request->get("kpiId");
+        
+            if (!$kpiId || !is_numeric($kpiId)) {
+                throw new Exception("Invalid kpi ID.");
+            }
+            $role = UserRole::userRight();
+            $groupId = Group::currentGroupId();
+            
+            $api = curl_init();
+            curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+            curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . '&&kpiHistoryId=0');
+            $kpi = curl_exec($api);
+            $kpi = json_decode($kpi, true);
 
-        $kpiDepartmentText = '';
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-department?id=' . $kpiId);
-        $kpiDepartment = curl_exec($api);
-        $kpiDepartment = json_decode($kpiDepartment, true);
-        $kpiDepartmentText = $this->renderAjax('multi_department_update', [
-            "d" => $kpiDepartment,
-            "kpiId" => $kpiId
-        ]);
-        $department["textDepartment"] = $kpiDepartmentText;
+            $companyId = $kpi["companyId"];
+            $kpiBranchText = '';
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
+            $kpiBranch = curl_exec($api);
+            $kpiBranch = json_decode($kpiBranch, true);
+            $kpiBranchText = $this->renderAjax('multi_branch_update', [
+                "branches" => $kpiBranch,
+                "kpiId" => $kpiId
+            ]);
+            // $branch["textBranch"] = $kpiBranchText;
+
+            $kpiDepartmentText = '';
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-department?id=' . $kpiId);
+            $kpiDepartment = curl_exec($api);
+            $kpiDepartment = json_decode($kpiDepartment, true);
+            $kpiDepartmentText = $this->renderAjax('multi_department_update', [
+                "d" => $kpiDepartment,
+                "kpiId" => $kpiId
+            ]);
+            // $department["textDepartment"] = $kpiDepartmentText;
 
 
-        $kpiTeamText = '';
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-team?id=' . $kpiId);
-        $kpiTeam = curl_exec($api);
-        $kpiTeam = json_decode($kpiTeam, true);
-        $kpiTeamText = $this->renderAjax('multi_team_update', [
-            "t" => $kpiTeam,
-            "kpiId" => $kpiId
-        ]);
-        $team["textTeam"] = $kpiTeamText;
+            $kpiTeamText = '';
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-team?id=' . $kpiId);
+            $kpiTeam = curl_exec($api);
+            $kpiTeam = json_decode($kpiTeam, true);
+            $kpiTeamText = $this->renderAjax('multi_team_update', [
+                "t" => $kpiTeam,
+                "kpiId" => $kpiId
+            ]);
+            // $team["textTeam"] = $kpiTeamText;
 
 
-        $data = array_merge($kpi, $branch, $department, $team);
-        // throw new Exception(print_r($data, true));
-        curl_close($api);
-        return json_encode($data);
+            // $data = array_merge($kpi, $branch, $department, $team);
+            // throw new Exception(print_r($data, true));
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
+            $units = curl_exec($api);
+            $units = json_decode($units, true);
+
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+            $companies = curl_exec($api);
+            $companies = json_decode($companies, true);
+        
+            curl_close($api);
+            // return json_encode($kpi);
+            return $this->render('kpi_from', [
+                "data" => $kpi,
+                "role" => $role,
+                "units" => $units,
+                "companies" => $companies,
+                "kpiBranchText" => $kpiBranchText,
+                "kpiDepartmentText" => $kpiDepartmentText,
+                "kpiTeamText" => $kpiTeamText,
+                "kpiId" => $kpiId,
+                "statusform" =>  "update"
+            ]);
+        } else {
+            throw new Exception("Invalid request, KFI ID is missing. GET Data: " . json_encode($_GET));
+        }
+
     }
     public function actionUpdateKpi()
     {
+        $data = [
+            'kpiId' => $_POST["kpiId"],  
+            'kpiName' => $_POST["kpiName"],  
+            'company' => $_POST["companyId"],
+            'branch' => $_POST["branch"],
+            'unit' => $_POST["unitId"],
+            'amount' => $_POST["amount"],
+            'month' => $_POST["month"],  
+            'year' => $_POST["year"],
+            'detail' => $_POST["detail"],
+            'amountType' => $_POST["amountType"],
+            'code' => $_POST["code"],
+            'quanRatio' => $_POST["quantRatio"],  
+            'nextCheckDate' => $_POST["nextCheckDate"],
+            'fromDate' => $_POST["fromDate"],
+            'toDate' => $_POST["toDate"],
+            'department' => $_POST["department"],
+            'team' => $_POST["team"],
+            'priority' => $_POST["priority"],
+            'status' => $_POST["status"],
+            'result' => $_POST["result"],
+        ];
+
+        //  throw new Exception(print_r($data,true));
+        
         $isManager = UserRole::isManager();
         if (isset($_POST["kpiId"]) && $_POST["kpiId"] != "") {
             $result = isset($_POST["result"]) && $_POST["result"] != '' ? $_POST["result"] : 0;
+            if ($result != $_POST["resultValue"]){
+                $result = $_POST["resultValue"] ;
+            }
             $kpiId = $_POST["kpiId"];
             //throw new Exception(print_r(Yii::$app->request->post(), true));
             $kpi = Kpi::find()->where(["kpiId" => $kpiId])->one();
             $kpi->kpiName = $_POST["kpiName"];
             $kpi->companyId = $_POST["companyId"];
-            $kpi->unitId = $_POST["unit"];
+            $kpi->unitId = $_POST["unitId"];
             // $kpi->periodDate = $_POST["periodDate"];
             $kpi->fromDate = $_POST["fromDate"];
             $kpi->toDate = $_POST["toDate"];
@@ -506,8 +576,8 @@ class ManagementController extends Controller
             if ($kpi->toDate == "") {
                 $kpi->toDate = $_POST["toDate"];
             }
-            if ($isManager == 1 &&  $_POST["targetAmount"] != "") {
-                $kpi->targetAmount = str_replace(",", "", $_POST["targetAmount"]);
+            if ($isManager == 1 &&  $_POST["amount"] != "") {
+                $kpi->targetAmount = str_replace(",", "", $_POST["amount"]);
             }
             // $kpi->targetAmount = $_POST["targetAmount"];
             $kpi->kpiDetail = $_POST["detail"];
@@ -523,18 +593,18 @@ class ManagementController extends Controller
             if ($kpi->save(false)) {
                 $kpiHistory = new KpiHistory();
                 $kpiHistory->kpiId = $_POST["kpiId"];
-                $kpiHistory->kpiHistoryName = $_POST["historyName"];
-                $kpiHistory->titleProcess = $_POST["historyName"];
-                $kpiHistory->unitId = $_POST["unit"];
+                // $kpiHistory->kpiHistoryName = $_POST["historyName"];
+                // $kpiHistory->titleProcess = $_POST["historyName"];
+                $kpiHistory->unitId = $_POST["unitId"];
                 // $kpiHistory->periodDate = $_POST["periodDate"];
-                $kpiHistory->nextCheckDate = $_POST["nextDate"];
+                $kpiHistory->nextCheckDate = $_POST["nextCheckDate"];
                 if ($isManager == 1) {
-                    $kpiHistory->targetAmount = str_replace(",", "", $_POST["targetAmount"]);
+                    $kpiHistory->targetAmount = str_replace(",", "", $_POST["amount"]);
                 } else {
                     $kpiHistory->targetAmount = $kpi->targetAmount;
                 }
                 $kpiHistory->description = $_POST["detail"];
-                $kpiHistory->remark = $_POST["remark"];
+                // $kpiHistory->remark = $_POST["remark"];
                 $kpiHistory->quantRatio = $_POST["quantRatio"];
                 $kpiHistory->priority = $_POST["priority"];
                 $kpiHistory->amountType = $_POST["amountType"];
@@ -561,7 +631,9 @@ class ManagementController extends Controller
                 return $this->redirect('grid');
             }
         }
-        return $this->redirect(Yii::$app->request->referrer);
+        return $this->redirect(Yii::$app->homeUrl . 'kpi/management/grid');
+
+        // return $this->redirect(Yii::$app->request->referrer);
         //return $this->redirect('grid');
     }
     public function actionHistory()
@@ -693,6 +765,57 @@ class ManagementController extends Controller
         }
         return json_encode($res);
     }
+
+    public function actionModalHistory()
+    {	
+        $percentage = $_POST["percentage"];
+        $result = $_POST["result"];
+        $sumvalue = $_POST["sumvalue"];
+        $targetAmount = $_POST["targetAmount"];
+        $kpiId = $_POST["kpiId"];
+        $month = $_POST["month"];
+        $year = $_POST["year"];
+        $formattedRange = $_POST["formattedRange"];
+        // $kpiHistoryId = 0;
+		$kpiHistoryId = $_POST["kpiHistoryId"];
+
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-history?kpiId=' . $kpiId . '&&kpiHistoryId=' . $kpiHistoryId);
+		$history = curl_exec($api);
+		$history = json_decode($history, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-history-team?kpiId=' . $kpiId );
+		$historyTeam = curl_exec($api);
+		$historyTeam = json_decode($historyTeam, true);
+
+		curl_close($api);
+        // throw new Exception(print_r($historyTeam,true));
+
+        $data = [
+            "percentage" => $percentage,
+            "result" => $result,
+            "sumvalue" => $sumvalue,
+            "targetAmount" => $targetAmount,
+            "kpiId" => $kpiId,
+            "month" => $month,
+            "year" => $year,
+            "formattedRange" => $formattedRange,
+            "history" => $history,
+            "historyTeam" => $historyTeam
+        ];
+
+        
+    
+        header("Content-Type: application/json");
+        echo json_encode($data);
+        exit;
+    }
+    
+
+
     public function actionSaveKpiAnswer()
     {
         $solution = $_POST["answer"];

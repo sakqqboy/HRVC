@@ -21,9 +21,11 @@ use backend\models\hrvc\KgiHasKpi;
 use backend\models\hrvc\KpiEmployee;
 use backend\models\hrvc\Position;
 use backend\models\hrvc\Role;
+use backend\models\hrvc\Team;
 use backend\models\hrvc\Title;
 use backend\models\hrvc\User;
 use backend\models\hrvc\UserRole;
+use yii\db\Query;
 use yii\web\Controller;
 
 /**
@@ -114,87 +116,6 @@ class ManagementController extends Controller
 	public function actionKpiDetail($id,$kpiHistoryId)
 	{
 
-		// $kpi = Kpi::find()->where(["kpiId" => $id])->asArray()->one();
-		// $res["kpiName"] = $kpi["kpiName"]; 
-		// $res["year"] = $kpi["year"];
-		// $res["companyName"] = Company::companyName($kpi['companyId']);
-		// $res["companyId"] = $kpi['companyId'];
-		// $res["branchName"] = Branch::kpiBranchName($id);
-		// $res["kpiBranch"] = KpiBranch::kpiBranch($id);
-		// $res["unitId"] = $kpi["unitId"];
-		// $res["detail"] = $kpi["kpiDetail"];
-		// $res["targetAmount"] = $kpi["targetAmount"];
-		// $res["status"] = $kpi["status"];
-		// $res["creater"] = User::employeeNameByuserId($kpi["createrId"]);
-		// $res["monthName"] = strtoupper(ModelMaster::monthEng($kpi['month'], 1));
-		// $res["month"] = $kpi['month'];
-		// $res["unit"] = Unit::unitName($kpi['unitId']);
-		// $res["countryName"] = Country::countryNameBycompany($kpi['companyId']);
-		// $res["flag"] = Country::countryFlagBycompany($kpi["companyId"]);
-		// $res["active"] = $kpi["active"];
-		// $res["branch"] = KpiBranch::kpiBranches($id);
-		// $res["kpiEmployeeDetail"] = KpiEmployee::kpiEmployeeDetail($kpi["kpiId"]);
-		
-		// if ($kpiHistoryId == 0) {
-		// 	$kpiHistory = KpiHistory::find()->where(["status" => [1, 2], "kpiId" => $id])->orderBy('kpiHistoryId DESC')->asArray()->one();
-		// } else {
-		// 	$kpiHistory = KpiHistory::find()
-		// 		->where(["kpiHistoryId" => $kpiHistoryId])
-		// 		->asArray()
-		// 		->one();
-		// }
-		// if (isset($kpiHistory) && !empty($kpiHistory)) {
-		// 	$res2["quantRatio"] = $kpiHistory["quantRatio"];
-		// 	$res2["code"] =  $kpiHistory["code"];
-		// 	$res2["result"] = $kpiHistory["result"];
-		// 	$res2["amountType"] = $kpiHistory["amountType"];
-		// 	$res2["kpiStatus"] = $kpiHistory["historyStatus"];
-		// 	// $res2["nextCheck"] = ModelMaster::engDate($kpiHistory["nextCheckDate"], 2);
-		// 	// $res2["checkDate"] = ModelMaster::engDate($kpiHistory["checkPeriodDate"], 2);
-		// 	// $res2["nextCheckDate"] = $kpiHistory["nextCheckDate"];
-		// 	// $res2["isOver"] = ModelMaster::isOverDuedate(Kpi::nextCheckDate($kpiHistory['kpiId']));
-		// 	// $res["creater"] = User::employeeNameByuserId($kpiHistory["createrId"]);
-		// 	// $res2["periodCheck"] = $kpiHistory["checkPeriodDate"];
-		// 	// $res2["fromDate"] = $kpiHistory["fromDate"];
-		// 	// $res2["toDate"] = $kpiHistory["toDate"];
-		// 	// $res2["fromDateDetail"] = ModelMaster::engDate($kpiHistory["fromDate"], 2);
-		// 	// // $res2["toDateDetail"] = ModelMaster::engDate($kpiHistory["toDate"], 2);
-		// 	// $res["status"] = $kpiHistory["status"];
-		// 	// if ($kpi["targetAmount"] == null || $kpi["targetAmount"] == '' || $kpi["targetAmount"] == 0) {
-		// 	// 	$ratio = 0;
-		// 	// } else {
-		// 	// 	if ($kpiHistory["code"] == '<' || $kpiHistory["code"] == '=') {
-		// 	// 		$ratio = ((int)$kpiHistory['result'] / (int)$kpi["targetAmount"]) * 100;
-		// 	// 	} else {
-		// 	// 		if ($kpiHistory["result"] != '' && $kpiHistory["result"] != 0) {
-		// 	// 			$ratio = ((int)$kpi["targetAmount"] / (int)$kpiHistory["result"]) * 100;
-		// 	// 		} else {
-		// 	// 			$ratio = 0;
-		// 	// 		}
-		// 	// 		//$ratio = ((int)$kpi["targetAmount"] / (int)$kpiHistory['result']) * 100;
-		// 	// 	}
-		// 	// }
-		// 	// $res2["ratio"] = number_format($ratio, 2);
-		// } else {
-		// 	$res2["quantRatio"] = "";
-		// 	$res2["code"] = "";
-		// 	$res2["result"] = "";
-		// 	$res2["amountType"] = "";
-		// 	$res2["kpistatus"] = "";
-		// 	$res2["ratio"] = 0;
-		// 	$res2["nextCheck"] = "";
-		// 	$res2["checkDate"] = "";
-		// 	$res2["nextCheckDate"] = null;
-		// 	$res2["fromDate"] = null;
-		// 	$res2["toDate"] = null;
-		// 	$res2["isOver"] = 1;
-		// 	//$res2["periodCheck"] = $kpi["periodDate"];
-		// }
-		// $res3 = array_merge($res, $res2);
-		// return json_encode($res3);
-
-		// $kpiHistory = KpiHistory::find()->where(["status" => [1, 2], "kpiId" => $id])->orderBy('kpiHistoryId DESC')->asArray()->one();
-
 		if ($kpiHistoryId == 0) {
 			$kpiHistory = KpiHistory::find()->where(["status" => [1, 2, 4], "kpiId" => $id])->orderBy('kpiHistoryId DESC')->asArray()->one();
 		} else {
@@ -223,7 +144,9 @@ class ManagementController extends Controller
 				"kpiName" => $kpi["kpiName"],
 				"companyId" => $kpi["companyId"],
 				"branch" => KpiBranch::kpiBranch($kpi["kpiId"]),
+				"sumresult" => KpiTeam::autoSummalys($kpi["kpiId"]),
 				"detail" => $kpiHistory['description'],
+				"kpiHistoryId" => $kpiHistory['kpiHistoryId'],
 				"quantRatio" => $kpiHistory["quantRatio"],
 				"targetAmount" => $kpiHistory["targetAmount"],
 				"creater" => User::employeeNameByuserId($kpiHistory["createrId"]),
@@ -257,7 +180,7 @@ class ManagementController extends Controller
 				"kpiEmployee" => KpiEmployee::kpiEmployee($kpi['kpiId']),
 				"kpiEmployeeDetail" => KpiEmployee::kpiEmployeeDetail($kpi["kpiId"]),
 				"countTeam" => KpiTeam::kpiTeam($kpi['kpiId']),
-				"unitText" => Unit::unitName($kpiHistory["unitId"]),
+				"lastUpdate" =>  ModelMaster::dateNumber($kpiHistory["updateDateTime"]),
 				"issue" => KpiIssue::lastestIssue($kpi["kpiId"])["issue"],
 				"solution" => KpiIssue::lastestIssue($kpi["kpiId"])["solution"],
 				"fromDateDetail" => ModelMaster::engDate($kpiHistory["fromDate"], 2),
@@ -283,6 +206,7 @@ class ManagementController extends Controller
 				"companyId" => $kpi["companyId"],
 				"branch" => KpiBranch::kpiBranch($kpi["kpiId"]),
 				"creater" => User::employeeNameByuserId($kpi["createrId"]),
+				"kpiHistoryId" => $kpiHistoryId,
 				"detail" => $kpi['kpiDetail'],
 				"quantRatio" => $kpi["quantRatio"],
 				"targetAmount" => $kpi["targetAmount"],
@@ -440,11 +364,14 @@ class ManagementController extends Controller
 			foreach ($kpiHistory as $history) :
 				$time = explode(' ', $history["createDateTime"]);
 				$employeeId = Employee::employeeId($history["createrId"]);
+				$EmployeeDetail = Employee::EmployeeDetail($employeeId);
+				$teamId = $EmployeeDetail["teamId"];
 				$data[$history["kpiHistoryId"]] = [
 					"title" => $history["titleProcess"],
 					"remark" => $history["remark"],
 					"result" => $history["result"],
 					"creater" => User::employeeNameByuserId($history["createrId"]),
+					"teamName" => Team::teamName($teamId),
 					"picture" => Employee::employeeImage($employeeId),
 					"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
 					"time" => ModelMaster::timeText($time[1]),
@@ -458,6 +385,50 @@ class ManagementController extends Controller
 		}
 		return json_encode($data);
 	}
+
+	public function actionKpiHistoryTeam($kpiId)
+	{
+
+		$kpiHistory = (new Query())
+		->select('kth.*')
+		->from('kpi_team kt')
+		->leftJoin('kpi_team_history kth', 'kt.kpiTeamId = kth.kpiTeamId')
+		->where(['kt.kpiId' => $kpiId])
+		->andWhere(['kth.kpiTeamHistoryId' => (new Query())
+			->select('MAX(kpiTeamHistoryId)')
+			->from('kpi_team_history')
+			->where('kpiTeamId = kt.kpiTeamId')
+		])
+		->all();
+
+	$data = [];
+		if (isset($kpiHistory) && count($kpiHistory) > 0) {
+			foreach ($kpiHistory as $history) :
+				if ($history !== null && isset($history["createDateTime"], $history["createrId"], $history["status"])) {
+					$time = explode(' ', $history["createDateTime"]);
+					$employeeId = Employee::employeeId($history["createrId"]);
+					$EmployeeDetail = Employee::EmployeeDetail($employeeId);
+					$teamId = $EmployeeDetail["teamId"] ?? null;
+					$data[$history["kpiTeamId"]] = [
+						"creater" => User::employeeNameByuserId($history["createrId"]),
+						"teamName" => Team::teamName($teamId),
+						"picture" => Employee::employeeImage($employeeId),
+						"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
+						"time" => ModelMaster::timeText($time[1] ?? '00:00'),  
+						"status" => $history["status"],
+						"target" => $history["target"] ?? '0.00',  
+						"result" => $history["result"] ?? '0.00',  
+						"createDateTime" => ModelMaster::monthDateYearTime($history["createDateTime"])
+					];
+				} else {
+					// หากข้อมูลไม่สมบูรณ์หรือเป็น null ก็ข้ามการทำงานของ iteration นี้
+					continue;
+				}
+			endforeach;
+		}
+		return json_encode($data);
+	}
+
 	public function actionKpiHistoryForChart($kpiId, $kpiHistoryId)
 	{
 		if ($kpiHistoryId == 0) {

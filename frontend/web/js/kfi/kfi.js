@@ -505,7 +505,7 @@ function departmentMultiTeamUpdateKfi(branchId) {
         // แสดงจำนวนที่เลือกใน #multi-department-text
         $("#multi-department-text").html(multiDepartment.length + ` Departments Selected`);
 
-        // เปลี่ยน style ของ #multi-department-text
+        // เปลี่ยน style ของ #multi-branch-text
         $("#multi-department-text").css({
             "color": "var(--HRVC---Text-Black, #30313D)",
             "font-family": '"SF Pro Display"',
@@ -659,19 +659,38 @@ function multiTeam(departmentId) {
 }
 function multiTeamUpdate(departmentId) {
     var sumTeam = totalTeamUpdate(departmentId);
+    var totalChecked = $('input[id^="multi-check-team-"]:checked').length;
     var multiTeamDepartment = [];
     var i = 0;
+    // ตรวจสอบว่าทุกทีมถูกเลือกหรือไม่
+    // if (totalChecked === totalTeams) {
+    //     $("#multi-check-all-team-" + departmentId + '-update').prop("checked", false);
+    // } else {
+    //     $("#multi-check-all-team-" + departmentId + '-update').prop("checked", true);
+    // }
+
+    // // ตั้งค่า required ตามจำนวนที่เลือก
+    // if (totalChecked > 0) {
+    //     $('input[id="multi-check-team-' + departmentId + '-update"]').each(function () {
+    //         $(".multiTeam-department-update-" + $(this).val()).removeAttr('required');
+    //     });
+    // } else {
+    //     $('input[id="multi-check-team-' + departmentId + '-update"]').each(function () {
+    //         $(".multiTeam-department-update-" + $(this).val()).prop('required', true);
+    //     });
+    // }
+
     $("#multi-check-team-" + departmentId + "-update:checked").each(function () {
         multiTeamDepartment[i] = $(this).val();
         i++;
     });
     //alert(sumTeam + '=>' + multiTeamDepartment.length);
-    if (sumTeam != multiTeamDepartment.length) {
+    if (sumTeam != totalChecked) {
         $("#multi-check-all-team-" + departmentId + '-update').prop("checked", false);
     } else {
         $("#multi-check-all-team-" + departmentId + '-update').prop("checked", true);
     }
-    if (multiTeamDepartment.length > 0) {
+    if (totalChecked > 0) {
         $('input[id="multi-check-team-' + departmentId + '-update"]').each(function () {
             $(".multiTeam-department-update-" + $(this).val()).removeAttr('required');
         });
@@ -680,6 +699,252 @@ function multiTeamUpdate(departmentId) {
             $(".multiTeam-department-update-" + $(this).val()).prop('required', true);
         });
     }
+
+    if (totalChecked > 0) {
+        $('input[id^="multi-check-team-"]').each(function () {
+            $(".multiCheck-" + $(this).val()).removeAttr('required');
+        });
+
+        let deptImageSrc = $url + "image/teams.svg";
+        let deptBlackImageSrc = $url + "image/teams-black.svg";
+
+        $("#image-team #team-selected-count")
+            .removeClass("cycle-current-gray")
+            .addClass("cycle-current-white");
+        $("#image-team #team-selected-message").html("");
+
+        $("#image-team .cycle-current-gray")
+            .removeClass("cycle-current-gray")
+            .addClass("cycle-current")
+            .find("img")
+            .attr("src", deptImageSrc);
+
+        if (totalChecked < 3) {
+            $("#image-team .cycle-current").slice(totalChecked, 3)
+                .removeClass("cycle-current")
+                .addClass("cycle-current-gray")
+                .find("img")
+                .attr("src", deptBlackImageSrc);
+        }
+
+        // อัปเดตจำนวนที่เลือก
+        $("#team-selected-count").text(totalChecked.toString());
+        $("#team-selected-message").text("");
+
+        // ปรับสไตล์ข้อความ
+        $("#multi-team-text").html(totalChecked + " Teams Selected").css({
+            "color": "#30313D",
+            "font-family": '"SF Pro Display"',
+            "font-size": "14px",
+            "font-weight": "500",
+            "line-height": "20px"
+        });
+
+    } else {
+        $('input[id^="multi-check-team-"]').each(function () {
+            $(".multiCheck-" + $(this).val()).prop('required', true);
+        });
+
+        // รีเซ็ตค่าหากไม่มีการเลือก
+        $("#image-team .cycle-current").slice(0, 3)
+            .removeClass("cycle-current")
+            .addClass("cycle-current-gray")
+            .find("img")
+            .attr("src", $url + "image/teams-black.svg");
+
+        $("#team-selected-count").text("00");
+        $("#team-selected-message").text("No Teams are Selected Yet");
+
+        $("#multi-team-text").html("Selected Teams").css({
+            "color": "var(--Helper-Text-Gray, #8A8A8A)",
+            "font-family": '"SF Pro Display", sans-serif',
+            "font-size": "14px",
+            "font-weight": "400",
+            "line-height": "20px",
+            "text-transform": "capitalize"
+        });
+    }
+
+
+    // สำหรับ teams
+    var selectedTeamCount = totalChecked;
+    $("#team-selected-count").text(selectedTeamCount.toString());
+    $("#team-selected-message").text(
+        selectedTeamCount > 0
+            ? ``
+            : "No Teams are Selected Yet"
+    );
+}
+
+function allTeamUpdate(departmentId) {
+    // var totalChecked = $('input[id^="multi-check-team-"]:checked').length;
+
+    // var totalTeams = $('input[id^="multi-check-team-"]').length;
+    // alert(totalChecked)
+    if ($("#multi-check-all-team-" + departmentId + "-update").prop("checked") == true) {
+        $('input[id="multi-check-team-' + departmentId + '-update"]').each(function () {
+            $(this).prop("checked", true);
+            var totalChecked = $('input[id^="multi-check-team-"]:checked').length;
+            // alert(totalChecked)
+            if (totalChecked > 0) {
+                $('input[id^="multi-check-team-"]').each(function () {
+                    $(".multiCheck-" + $(this).val()).removeAttr('required');
+                });
+
+                let deptImageSrc = $url + "image/teams.svg";
+                let deptBlackImageSrc = $url + "image/teams-black.svg";
+
+                $("#image-team #team-selected-count")
+                    .removeClass("cycle-current-gray")
+                    .addClass("cycle-current-white");
+                $("#image-team #team-selected-message").html("");
+
+                $("#image-team .cycle-current-gray")
+                    .removeClass("cycle-current-gray")
+                    .addClass("cycle-current")
+                    .find("img")
+                    .attr("src", deptImageSrc);
+
+                if (totalChecked < 3) {
+                    $("#image-team .cycle-current").slice(totalChecked, 3)
+                        .removeClass("cycle-current")
+                        .addClass("cycle-current-gray")
+                        .find("img")
+                        .attr("src", deptBlackImageSrc);
+                }
+
+                // อัปเดตจำนวนที่เลือก
+                $("#team-selected-count").text(totalChecked.toString());
+                $("#team-selected-message").text("");
+
+                // ปรับสไตล์ข้อความ
+                $("#multi-team-text").html(totalChecked + " Teams Selected").css({
+                    "color": "#30313D",
+                    "font-family": '"SF Pro Display"',
+                    "font-size": "14px",
+                    "font-weight": "500",
+                    "line-height": "20px"
+                });
+
+            } else {
+                $('input[id^="multi-check-team-"]').each(function () {
+                    $(".multiCheck-" + $(this).val()).prop('required', true);
+                });
+
+                // รีเซ็ตค่าหากไม่มีการเลือก
+                $("#image-team .cycle-current").slice(0, 3)
+                    .removeClass("cycle-current")
+                    .addClass("cycle-current-gray")
+                    .find("img")
+                    .attr("src", $url + "image/teams-black.svg");
+
+                $("#team-selected-count").text("00");
+                $("#team-selected-message").text("No Teams are Selected Yet");
+
+                $("#multi-team-text").html("Selected Teams").css({
+                    "color": "var(--Helper-Text-Gray, #8A8A8A)",
+                    "font-family": '"SF Pro Display", sans-serif',
+                    "font-size": "14px",
+                    "font-weight": "400",
+                    "line-height": "20px",
+                    "text-transform": "capitalize"
+                });
+            }
+
+
+            // สำหรับ teams
+            var selectedTeamCount = totalChecked;
+            $("#team-selected-count").text(selectedTeamCount.toString());
+            $("#team-selected-message").text(
+                selectedTeamCount > 0
+                    ? ``
+                    : "No Teams are Selected Yet"
+            );
+        }
+        );
+    } else {
+        $('input[id="multi-check-team-' + departmentId + '-update"]').each(function () {
+            $(this).prop("checked", false);
+            var totalChecked = $('input[id^="multi-check-team-"]:checked').length;
+            // alert(totalChecked)
+            if (totalChecked > 0) {
+                $('input[id^="multi-check-team-"]').each(function () {
+                    $(".multiCheck-" + $(this).val()).removeAttr('required');
+                });
+
+                let deptImageSrc = $url + "image/teams.svg";
+                let deptBlackImageSrc = $url + "image/teams-black.svg";
+
+                $("#image-team #team-selected-count")
+                    .removeClass("cycle-current-gray")
+                    .addClass("cycle-current-white");
+                $("#image-team #team-selected-message").html("");
+
+                $("#image-team .cycle-current-gray")
+                    .removeClass("cycle-current-gray")
+                    .addClass("cycle-current")
+                    .find("img")
+                    .attr("src", deptImageSrc);
+
+                if (totalChecked < 3) {
+                    $("#image-team .cycle-current").slice(totalChecked, 3)
+                        .removeClass("cycle-current")
+                        .addClass("cycle-current-gray")
+                        .find("img")
+                        .attr("src", deptBlackImageSrc);
+                }
+
+                // อัปเดตจำนวนที่เลือก
+                $("#team-selected-count").text(totalChecked.toString());
+                $("#team-selected-message").text("");
+
+                // ปรับสไตล์ข้อความ
+                $("#multi-team-text").html(totalChecked + " Teams Selected").css({
+                    "color": "#30313D",
+                    "font-family": '"SF Pro Display"',
+                    "font-size": "14px",
+                    "font-weight": "500",
+                    "line-height": "20px"
+                });
+
+            } else {
+                $('input[id^="multi-check-team-"]').each(function () {
+                    $(".multiCheck-" + $(this).val()).prop('required', true);
+                });
+
+                // รีเซ็ตค่าหากไม่มีการเลือก
+                $("#image-team .cycle-current").slice(0, 3)
+                    .removeClass("cycle-current")
+                    .addClass("cycle-current-gray")
+                    .find("img")
+                    .attr("src", $url + "image/teams-black.svg");
+
+                $("#team-selected-count").text("00");
+                $("#team-selected-message").text("No Teams are Selected Yet");
+
+                $("#multi-team-text").html("Selected Teams").css({
+                    "color": "var(--Helper-Text-Gray, #8A8A8A)",
+                    "font-family": '"SF Pro Display", sans-serif',
+                    "font-size": "14px",
+                    "font-weight": "400",
+                    "line-height": "20px",
+                    "text-transform": "capitalize"
+                });
+            }
+
+
+            // สำหรับ teams
+            var selectedTeamCount = totalChecked;
+            $("#team-selected-count").text(selectedTeamCount.toString());
+            $("#team-selected-message").text(
+                selectedTeamCount > 0
+                    ? ``
+                    : "No Teams are Selected Yet"
+            );
+        }
+        );
+    }
+
 }
 
 function companyMultiBrachKfi() {
@@ -958,6 +1223,16 @@ function getMonthName(month) {
     ]; return months[month - 1];
 }
 
+function getOrdinalSuffix(day) {
+    if (day >= 11 && day <= 13) return day + "th";
+    switch (day % 10) {
+        case 1: return day + "st";
+        case 2: return day + "nd";
+        case 3: return day + "rd";
+        default: return day + "th";
+    }
+}
+
 
 // กำหนด Flatpickr สำหรับปฏิทินเริ่มต้น
 flatpickr("#startDatePicker", {
@@ -1104,6 +1379,13 @@ function updateIcon(input) {
         // เปลี่ยนเป็นไอคอนสีน้ำเงินเมื่อมีค่า
         icon.src = "/HRVC/frontend/web/image/result-blue.svg";
     }
+}
+
+function updateResultValue(inputElement) {
+    // นำค่าที่กรอกใน result-update ไปใส่ใน result-cheng
+    const resultValue = inputElement.value;
+    const resultCheng = document.getElementById('result-cheng');
+    resultCheng.value = resultValue;
 }
 
 $("#multi-branch").on("click", function (e) {
