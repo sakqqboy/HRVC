@@ -54,7 +54,25 @@ function checkAllBranch() {
 		$("#show-multi-team").html('');
 	}
 }
+function validateFormKgi(event) {
+	event.preventDefault(); // ป้องกันการส่งฟอร์มก่อนการตรวจสอบ
+	var fromDate = document.getElementById('fromDate').value.trim();
+	var toDate = document.getElementById('toDate').value.trim();
+	if (!fromDate && !toDate) {
+		alert("กรุณาระบุวันที่เริ่มต้นและวันที่สิ้นสุด");
+		return false;
+	} else if (!fromDate) {
+		alert("กรุณาระบุวันที่เริ่มต้น");
+		return false;
+	} else if (!toDate) {
+		alert("กรุณาระบุวันที่สิ้นสุด");
+		return false;
+	}
 
+	$('#create-kgi').submit();
+	// alert("0");
+	return true;
+}
 function totalBranch() {
 	var totalBranch = 0;
 	var data = [];
