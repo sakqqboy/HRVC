@@ -1152,10 +1152,8 @@
 	border-radius: 10px;
 	position: relative;
 	color: var(--HRVC---Text-Black, #30313D);
-	z-index: 3;
-	leading-trim: both;
+	/* z-index: 3; */
 	font-family: "SF Pro Display";
-	text-edge: cap;
 	font-weight: 500;
 
 }
@@ -1191,7 +1189,7 @@
 	height: 44px;
 	border-radius: 22px;
 	padding-top: 5px;
-	z-index: 3;
+	/* z-index: 3; */
 }
 
 .pim-pic-gridNew {

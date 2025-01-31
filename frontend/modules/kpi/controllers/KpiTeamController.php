@@ -655,7 +655,10 @@ class KpiTeamController extends Controller
 	public function actionPrepareUpdate()
 	{
 		$kpiTeamId = $_GET["kpiTeamId"];
+		// $param = ModelMaster::decodeParams($hash);
 		$role = UserRole::userRight();
+
+		// $kpiTeamId = $param["kpiTeamId"];
 
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);

@@ -347,7 +347,7 @@ height: 937px; */
     border: 0.75px solid var(--Active-Primary-Blue-Stock, #CBD5E1);
     background: var(--Primary-Blue---HRVC, #2580D3);
     position: relative;
-    z-index: 1;
+    /* z-index: 1; */
 }
 
 .cycle-current:not(:last-child) {
@@ -369,7 +369,7 @@ height: 937px; */
     border: 1px solid var(--Blocked-Strock, #818181);
     background: var(--Overall-Blocked, #C3C3C3);
     position: relative;
-    z-index: 1;
+    /* z-index: 1; */
 }
 
 .cycle-current-white {
@@ -382,7 +382,7 @@ height: 937px; */
     border: 1px solid var(--HRVC---Text-Black, #30313D);
     background: var(--100-white, #FFF);
     position: relative;
-    z-index: 1;
+    /* z-index: 1; */
     right: 15px;
 }
 

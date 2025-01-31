@@ -563,7 +563,7 @@ select.form-select option:disabled {
                             </text>
                         </div>
                     </div>
-                    <div class="form-group start-center mt-32" style="  gap: 14px;">
+                    <!-- <div class="form-group start-center mt-32" style="  gap: 14px;">
                         <label class="text-gray" for="name" style="font-size: 14px; font-weight: 400;">
                             <?= Yii::t('app', 'Assigned Employees') ?>
                         </label>
@@ -598,6 +598,40 @@ select.form-select option:disabled {
                                     class="font-black">
                                     Assign Person </a>
                             </div>
+                        </div>
+                    </div> -->
+                    <div class="form-group start-center mt-32" style="  gap: 14px;">
+                        <label class="text-gray" for="name" style="font-size: 14px; font-weight: 400;">
+                            <?= Yii::t('app', 'Assigned Employee/s') ?>
+                        </label>
+                        <div class="circle-container pl-15" data-type="branch" style="display: flex;
+                                    align-items: center;
+                                    gap: 5px;
+                                    padding-left: 15px;">
+                            <?php  if(count($data['kpiEmployee']) >= 1 ){ ?>
+                            <div class="cycle-current" style="width: 43px; height: 43px;">
+                                <img src="<?= Yii::$app->homeUrl ?>image/employees.svg" alt="icon">
+                            </div>
+                            <?php }
+                            if(count($data['kpiEmployee']) >= 2 ){ ?>
+                            <div class="cycle-current" style="width: 43px; height: 43px;">
+                                <img src="<?= Yii::$app->homeUrl ?>image/employees.svg" alt="icon">
+                            </div>
+                            <?php }
+                            if(count($data['kpiEmployee']) >= 3 ){ ?>
+                            <div class="cycle-current" style="width: 43px; height: 43px;">
+                                <img src="<?= Yii::$app->homeUrl ?>image/employees.svg" alt="icon">
+                            </div>
+                            <?php } ?>
+                            <div class="cycle-current-white"
+                                style="width: 43px; height: 43px; color: #000; right: 15px;">
+                                <?= count($data['kpiEmployee']) ?>
+                            </div>
+                            <text class="text-black" style="font-size: 18px; font-weight: 500;">
+                                <?= Yii::t('app', 'Assigned on Our Me &') ?>
+                                <?= count($data['kpiEmployee']) ?>
+                                <?= Yii::t('app', 'Others') ?>
+                            </text>
                         </div>
                     </div>
 

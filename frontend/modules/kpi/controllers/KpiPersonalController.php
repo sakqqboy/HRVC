@@ -6,6 +6,7 @@ use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
 use FFI\Exception as FFIException;
+use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Kpi;
@@ -532,6 +533,8 @@ class KpiPersonalController extends Controller
 	public function actionUpdatePersonalKpi($hash)
 	{
 		$param = ModelMaster::decodeParams($hash);
+		$role = UserRole::userRight();
+
 		$kpiEmployeeId = $param["kpiEmployeeId"];
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -540,13 +543,52 @@ class KpiPersonalController extends Controller
 		$kpiEmployeeDetail = curl_exec($api);
 		$kpiEmployeeDetail = json_decode($kpiEmployeeDetail, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiEmployeeDetail['kpiId'] . '&&kpiHistoryId=0');
+        $kpi = curl_exec($api);
+        $kpi = json_decode($kpi, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $kpi["companyId"]);
+		$kpiBranch = curl_exec($api);
+		$kpiBranch = json_decode($kpiBranch, true);
+		
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-department?id=' . $kpiEmployeeDetail['kpiId']);
+        $kpiDepartment = curl_exec($api);
+        $kpiDepartment = json_decode($kpiDepartment, true);
+			
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-team?id=' . $kpiEmployeeDetail['kpiId']);
+		$kpiTeam = curl_exec($api);
+		$kpiTeam = json_decode($kpiTeam, true);
+
+
 		curl_close($api);
+		$companyId = $kpi["companyId"];
+			$company= [
+				"companyId" => $kpi["companyId"],
+				"companyName" => Company::companyName($kpi["companyId"]),
+				"companyImg" => Company::companyImage($kpi["companyId"]),
+			];
+		// throw new exception(print_r($kpiEmployeeDetail	, true));
+
+		$unit = Unit::find()->where(["unitId" => $kpi["unitId"]])->asArray()->one();
 		$months = ModelMaster::monthFull(1);
-		return $this->render('update_personal_kpi', [
+		return $this->render('kpi_from', [
+			"kpi" => $kpi,
 			"kpiEmployeeId" => $kpiEmployeeId,
-			"kpiEmployeeDetail" => $kpiEmployeeDetail,
-			"months" => $months
+			"data" => $kpiEmployeeDetail,
+			"months" => $months,
+			"company" => $company ?? [],  
+			"kpiBranch" => $kpiBranch ?? [],  
+			"kpiDepartment" => $kpiDepartment ?? [],
+			"kpiTeam" => $kpiTeam ?? [],
+			"role" => $role,
+			"unit"  => $unit ,
+			"statusform" =>  "update"
 		]);
+		// return $this->render('update_personal_kpi', [
+		// 	"kpiEmployeeId" => $kpiEmployeeId,
+		// 	"kpiEmployeeDetail" => $kpiEmployeeDetail,
+		// 	"months" => $months
+		// ]);
 	}
 	public function actionSaveUpdatePersonalKpi()
 	{
