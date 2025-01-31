@@ -343,7 +343,7 @@ height: 937px; */
     align-items: center;
     width: 32.25px;
     height: 32.25px;
-    border-radius: 15.75px;
+    border-radius: 100%;
     border: 0.75px solid var(--Active-Primary-Blue-Stock, #CBD5E1);
     background: var(--Primary-Blue---HRVC, #2580D3);
     position: relative;
@@ -378,7 +378,7 @@ height: 937px; */
     align-items: center;
     width: 32.25px;
     height: 32.25px;
-    border-radius: 15.75px;
+    border-radius: 100%;
     border: 1px solid var(--HRVC---Text-Black, #30313D);
     background: var(--100-white, #FFF);
     position: relative;

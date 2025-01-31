@@ -1917,6 +1917,14 @@
 	align-items: center;
 }
 
+.between-column {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+	/* ปรับให้ div เต็มพื้นที่ */
+}
+
 input:checked+.slider {
 	background-color: hsla(209, 70%, 49%, 1);
 	/* New color */

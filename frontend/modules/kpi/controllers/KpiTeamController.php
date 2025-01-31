@@ -692,7 +692,7 @@ class KpiTeamController extends Controller
 
 			$unit = Unit::find()->where(["unitId" => $kpi["unitId"]])->asArray()->one();
 			
-		// throw new exception(print_r($kpi	, true));
+		// throw new exception(print_r($kpiTeamDetail	, true));
 		
 		return $this->render('kpi_from', [
 			"kpi" => $kpi,

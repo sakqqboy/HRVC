@@ -146,8 +146,8 @@ $this->title = 'Group profile';
                             <div class="col-12 detail-tokyo">
                                 <p id="about-text">
                                     <?= mb_strlen($group["about"]) > 200 
-                ? mb_substr($group["about"], 0, 200) . '...' 
-                : $group["about"] ?>
+                                        ? mb_substr($group["about"], 0, 200) . '...' 
+                                        : $group["about"] ?>
                                     <?php if (mb_strlen($group["about"]) > 200): ?>
                                     <button id="see-more" class="see-more">See More</button>
                                     <?php endif; ?>
