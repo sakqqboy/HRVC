@@ -27,23 +27,44 @@ $targetAmount = $data['targetAmount'] ?? 0;
 $kpiHistoryId = $kpi['kpiHistoryId'] ?? 0;
 $DueBehind = $targetAmount -  $result;
 $detail = !empty($data['kpiDetail']) ? $data['kpiDetail'] : 'No details listed';
-// $detail ="The goal is to increase the number of Non-Japanese clients to diversify the client base and drive sustained business growth. ";
+// $detail ="The goal is to increase the number of Non-Japanese clients to diversify the client base and drive sustained business growth. By targeting international markets and industries, the aim is to capture a broader market share and reduce dependency on a The goal is to increase the number of Non-Japanese clients to diversify the client base and drive sustained business growth. By targeting international markets and industries, the aim is to capture a broader market share and reduce dependency on a ";
 $maxLength = 487;
 
 
-// แปลงวันที่จาก string ให้เป็น DateTime object
-$nextCheckDate = DateTime::createFromFormat('d M Y', $kpi['nextCheckText']);
-// หาวันที่ปัจจุบัน
-$currentDate = new DateTime();
-// คำนวณความแตกต่างระหว่างวันที่ปัจจุบันและวันที่ที่กำหนด
-$interval = $currentDate->diff($nextCheckDate);
-// แสดงจำนวนวันที่เหลือ
-$daysLeft = $interval->format('%r%a'); // %r คือการแสดงเครื่องหมายบวกหรือลบ
-if ($daysLeft < 0) {
-    $daysLeft = "Due Pass";
-} else {
-    $daysLeft = "$daysLeft" . Yii::t('app', 'days left');
+// ตรวจสอบว่า $data['nextCheckText'] มีค่าและสามารถแปลงเป็น DateTime ได้
+$nextCheckDate = !empty($data['nextCheckText']) 
+    ? DateTime::createFromFormat('d M Y', $data['nextCheckText']) 
+    : null;
+
+if ($nextCheckDate === false) {
+    // ถ้าไม่สามารถแปลงได้ ให้กำหนดค่าเป็น "Due Pass"
+    $nextCheckDate = 'Due Pass';
 }
+
+// ถ้าค่า $nextCheckDate เป็น "Due Pass" ให้ไม่คำนวณวันที่เหลือ
+if ($nextCheckDate !== 'Due Pass') {
+    // หาวันที่ปัจจุบัน
+    $currentDate = new DateTime();
+
+    // คำนวณความแตกต่างระหว่างวันที่ปัจจุบันและวันที่ที่กำหนด
+    if ($nextCheckDate instanceof DateTime) {
+        $interval = $currentDate->diff($nextCheckDate);
+
+        // แสดงจำนวนวันที่เหลือ
+        $daysLeft = $interval->format('%r%a'); // %r คือการแสดงเครื่องหมายบวกหรือลบ
+        if ($daysLeft < 0) {
+            $daysLeft = "Due Pass"; // ถ้าผลลัพธ์เป็นลบ แสดงว่าเกินกำหนด
+        } else {
+            $daysLeft = "$daysLeft " . Yii::t('app', 'days left');
+        }
+    } else {
+        $daysLeft = "Due Pass"; // ถ้าไม่สามารถแปลงวันที่ได้
+    }
+} else {
+    $daysLeft = "Due Pass"; // หากไม่สามารถแปลงวันที่ได้
+}
+
+// echo $data['nextCheckText'];
 ?>
 
 <style>
@@ -371,7 +392,7 @@ select.form-select option:disabled {
                                 <div class="text-black">
                                     <label style="font-size: 20px; font-weight: 500;"><?= $daysLeft ?></label><br>
                                     <label
-                                        style="font-size: 14px; font-weight: 500;"><?= $kpi["nextCheckText"] ?></label>
+                                        style="font-size: 14px; font-weight: 500;"><?= $data['nextCheckText'] ?></label>
                                 </div>
                             </div>
                         </div>
@@ -679,58 +700,98 @@ select.form-select option:disabled {
                             </div>
                         </label>
                         <div class="start-center" style="  gap: 12px; align-self: stretch;">
-                            <div class="textbox-check-blue" style="display: flex; gap: 12px;">
+                            <div class="textbox-check-<?= (empty($data['status']) || empty($data['nextCheckText']) ) ? 'hide' : 'blue' ?>"
+                                style="display: flex; gap: 12px;">
                                 <div class="mid-center" style="flex-basis: 5%;">
+                                    <?php if($data['status'] != '2'){ ?>
                                     <input type="checkbox" id="check1" name="status" value="1" class="status-checkbox"
-                                        checked style="width: 22px; height: 22px;">
+                                        <?= (isset($data['status']) && $data['status'] == '1' && !empty($data['nextCheckText']) ) ? 'checked' : '' ?>
+                                        style="width: 22px; height: 22px;">
+                                    <?php } ?>
                                 </div>
                                 <div class="mid-center" style="flex-basis: 25%; margin-right: 20px;">
-                                    <div class="border-cicle  bg-white text-blue-sea"
-                                        style="border: 0.5px solid #2F42ED; font-size: 14px; font-weight: 600;">
+                                    <div class="border-cicle  bg-white text-<?= (empty($data['status']) || empty($data['nextCheckText']) ) ? 'black' : 'blue-sea' ?>"
+                                        style="<?= (empty($data['status']) || empty($data['nextCheckText'])) ? 'border: 0.5px solid #30313D;' : 'border: 0.5px solid #2F42ED;' ?> font-size: 14px; font-weight: 600;">
                                         <?= Yii::t('app', 'In-Progress') ?>
                                     </div>
                                 </div>
                                 <div style="flex-basis: 70%;">
-                                    <text class="text-blue-sea">
+                                    <text
+                                        class="text-<?= (empty($data['status']) || empty($data['nextCheckText']) ) ? 'black' : 'blue-sea' ?>">
                                         <?= Yii::t('app', "The task is currently being addressed. Ensure it's marked completed before the due date to avoid it being automatically listed as overdue.") ?>
                                     </text>
                                 </div>
                             </div>
 
-                            <div class="textbox-check-green" style="display: flex; gap: 12px; margin-top: 10px;">
+                            <div class="textbox-check-<?= (empty($data['status']) || $data['status'] != 2 ) ? 'hide' : 'green' ?>"
+                                style="display: flex; gap: 12px; margin-top: 10px;">
                                 <div class="mid-center" style="flex-basis: 5%;">
                                     <input type="checkbox" id="check2" name="status" value="2" class="status-checkbox"
+                                        <?= (isset($data['status']) && $data['status'] == '2') ? 'checked' : '' ?>
                                         style="width: 22px; height: 22px;">
                                 </div>
                                 <div class="mid-center" style="flex-basis: 25%; margin-right: 20px;">
-                                    <div class="border-cicle  bg-white text-green"
-                                        style="border: 0.5px solid #2D7F06; font-size: 14px; font-weight: 600;">
+                                    <div id="border-cicle-completed"
+                                        class="border-cicle  bg-white text-<?= (empty($data['status']) || empty($data['nextCheckText']) || $data['status'] != 2) ? 'black' : 'green' ?>"
+                                        style="<?= (empty($data['status']) || empty($data['nextCheckText']) || $data['status'] != 2) ? 'border: 0.5px solid #30313D;' : 'border: 0.5px solid #2D7F06;' ?> font-size: 14px; font-weight: 600;">
                                         <?= Yii::t('app', "Completed") ?>
                                     </div>
                                 </div>
                                 <div style="flex-basis: 70%;">
-                                    <text class="text-green">
+                                    <text id="text-green"
+                                        class="text-<?= (empty($data['status']) || empty($data['nextCheckText']) || $data['status'] != 2) ? 'black' : 'green' ?>">
                                         <?= Yii::t('app', "The Component has not been completed") ?>
                                     </text>
                                 </div>
                             </div>
-                            <div class="textbox-check-orang">
+                            <div style="<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText'])) 
+                                                            ? 'border: 0.5px solid var(--Progress-Blue, #30313D);' 
+                                                            : ($daysLeft == 'Due Pass' 
+                                                                ? 'border: 0.5px solid var(--Progress-Blue, #E05757);' 
+                                                                : 'border: 0.5px solid var(--Progress-Blue, #DD7A01);') ?> font-size: 14px; font-weight: 600;"
+                                class="textbox-check-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText'])) 
+                                                            ? 'hide' 
+                                                            : ($daysLeft == 'Due Pass' 
+                                                                ? 'red' 
+                                                                : 'orang') ?>">
                                 <div class="mid-center" style="flex-basis: 5%;  ">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/warning-orang.svg" alt="LinkedIn"
+                                    <img src="<?= Yii::$app->homeUrl ?>image/warning-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText'])) 
+                                                            ? 'black' 
+                                                            : ($daysLeft == 'Due Pass' 
+                                                                ? 'red' 
+                                                                : 'orang') ?>.svg" alt="LinkedIn"
                                         style="width: 20px; height: 20px;">
                                 </div>
-                                <div class="mid-center" style="flex-basis: 25%; margin-right: 20px;  ">
-                                    <div class="border-cicle bg-white text-orang"
-                                        style="border: 0.5px solid var(--Progress-Blue, #DD7A01); background: var(--100-white, #FFF); font-size: 14px; font-weight: 600;"
+                                <div class="mid-center" style="flex-basis: 25%; margin-right: 20px;">
+                                    <div class="border-cicle bg-white text-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText'])) 
+                                                            ? 'black' 
+                                                            : ($daysLeft == 'Due Pass' 
+                                                                ? 'red' 
+                                                                : 'orang') ?>"
+                                        style="<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText'])) 
+                                                            ? 'border: 0.5px solid var(--Progress-Blue, #30313D);' 
+                                                            : ($daysLeft == 'Due Pass' 
+                                                                ? 'border: 0.5px solid var(--Progress-Blue, #E05757);' 
+                                                                : 'border: 0.5px solid var(--Progress-Blue, #DD7A01);') ?>  font-size: 14px; font-weight: 600;"
                                         for="check3">
+
                                         <?= Yii::t('app', "Due Passed") ?>
                                     </div>
                                 </div>
                                 <div style="flex-basis: 70%;">
-                                    <text class="text-orang">
-                                        <?= Yii::t('app', "This task component be automatically become due passed within 30 Days, if you
-                                        don’t
-                                        mark it as completed") ?>
+                                    <text class="text-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText'])) 
+                                                            ? 'black' 
+                                                            : ($daysLeft == 'Due Pass' 
+                                                                ? 'red' 
+                                                                : 'orang') ?>" <div class="border-cicle bg-white text-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText'])) 
+                                                            ? 'black' 
+                                                            : ($daysLeft == 'Due Pass' 
+                                                                ? 'red' 
+                                                                : 'orang') ?>">
+                                        <?= (isset($daysLeft) && $daysLeft == 'Due Pass') ? 
+                                        Yii::t('app', "The component was overdue and revert back to completed") : 
+                                        Yii::t('app', "This task component be automatically become due passed within 30 Days, if you
+                                        don’t mark it as completed") ?>
                                     </text>
                                 </div>
                             </div>
@@ -782,23 +843,77 @@ select.form-select option:disabled {
 </div>
 
 <input type="hidden" value="update" id="acType">
-<!-- <input type="hidden" id="hiddenMonth" name="month" value="<?= htmlspecialchars($data['month'] ?? '') ?>" required> -->
-<!-- <input type="hidden" id="hiddenYear" name="year" value="<?= htmlspecialchars($data['year'] ?? '') ?>" required> -->
-<!-- <input type="hidden" id="fromDate" name="fromDate" value="<?= isset($data['fromDate']) ? $data['fromDate'] : '' ?>"
-    required>
-<input type="hidden" id="toDate" name="toDate" value="<?= isset($data['toDate']) ? $data['toDate'] : '' ?>" required> -->
 <input type="hidden" id="kpiTeamId" name="kpiTeamId" value="<?= isset($kpiTeamId) ? $kpiTeamId : '' ?>" required>
 
 <?php ActiveForm::end(); ?>
 <?= $this->render('modal_history') ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+document.getElementById('check2').addEventListener('change', function() {
+    const check1 = document.getElementById('check1');
+    const textboxDiv = document.querySelector('.textbox-check-hide') || document.querySelector(
+        '.textbox-check-green');
+    const borderCicleDiv = document.getElementById('border-cicle-completed'); // ใช้ ID แทน
+    const textgreen = document.getElementById('text-green'); // ใช้ ID แทน
+
+    if (this.checked) {
+        alert("1"); // แสดง Alert เมื่อกดเลือก check2
+        check1.style.display = 'none'; // ซ่อน check1
+        textgreen.classList.add('text-green');
+
+        if (textboxDiv) {
+            textboxDiv.classList.remove('textbox-check-hide');
+            textboxDiv.classList.add('textbox-check-green');
+        }
+
+        if (borderCicleDiv) {
+            borderCicleDiv.classList.remove('text-black');
+            borderCicleDiv.classList.add('text-green');
+            borderCicleDiv.style.border = '0.5px solid #2D7F06'; // เปลี่ยนสี border
+        }
+
+        if (textgreen) {
+            textgreen.classList.remove('text-black');
+            textgreen.classList.add('text-green'); // เปลี่ยนสีข้อความ
+        }
+
+    } else {
+        check1.style.display = 'inline-block'; // แสดง check1 กลับมา
+        textgreen.classList.add('text-green');
+
+        if (textboxDiv) {
+            textboxDiv.classList.remove('textbox-check-green');
+            textboxDiv.classList.add('textbox-check-hide');
+        }
+
+        if (borderCicleDiv) {
+            borderCicleDiv.classList.remove('text-green');
+            borderCicleDiv.classList.add('text-black');
+            borderCicleDiv.style.border = '0.5px solid #30313D'; // กลับไปเป็นสีเดิม
+        }
+
+        if (textgreen) {
+            textgreen.classList.remove('text-green');
+            textgreen.classList.add('text-black'); // เปลี่ยนกลับเป็นสีดำ
+        }
+    }
+});
+
+// ตรวจสอบค่าก่อนส่งฟอร์ม
+document.getElementById("statusForm")?.addEventListener("submit", function(event) {
+    let selected = document.querySelector('.status-checkbox:checked');
+    if (!selected) {
+        alert("Please select a status before submitting!");
+        event.preventDefault();
+    }
+});
+
 const seeMoreBtn = document.getElementById("see-more");
 const aboutText = document.getElementById("about-text");
 
-<?php if (mb_strlen($detail) > 20): ?>
+<?php if (mb_strlen($detail) > 487): ?>
 const fullText = `<?= addslashes($detail) ?>`;
-const shortText = `<?= addslashes(mb_substr($detail, 0, 20)) ?>...`;
+const shortText = `<?= addslashes(mb_substr($detail, 0, 487)) ?>...`;
 
 seeMoreBtn.addEventListener("click", function() {
     if (aboutText.textContent.includes(shortText)) {
@@ -821,6 +936,7 @@ function toggleText() {
     document.getElementById("see-more").addEventListener("click", toggleText);
 }
 <?php endif; ?>
+
 const value = "<?= $value ?>";
 const sumvalue = "<?= $sumvalue ?>";
 
@@ -853,25 +969,6 @@ overrideCheckbox.addEventListener('change', function() {
     }
 });
 
-// เช็คให้เลือกได้แค่ตัวเดียว
-document.querySelectorAll('.status-checkbox').forEach(checkbox => {
-    checkbox.addEventListener('change', function() {
-        document.querySelectorAll('.status-checkbox').forEach(cb => {
-            if (cb !== this) {
-                cb.checked = false; // เอาเช็คอันอื่นออก
-            }
-        });
-    });
-});
-
-// ส่งเฉพาะค่าที่ถูกเช็ค
-document.getElementById("statusForm").addEventListener("submit", function(event) {
-    let selected = document.querySelector('.status-checkbox:checked');
-    if (!selected) {
-        alert("Please select a status before submitting!");
-        event.preventDefault(); // หยุดการส่งฟอร์ม ถ้าไม่ได้เลือก
-    }
-});
 
 function modalHistory(kpiId) {
     var url = $url + 'kpi/management/modal-history';

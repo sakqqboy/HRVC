@@ -715,15 +715,15 @@ class KpiTeamController extends Controller
 			'targetAmount' => $_POST["amount"], 
 			'status' => $_POST["status"],   
 			'result' => $_POST["result"],
-			// 'month' => $_POST["month"],      
-			// 'year' => $_POST["year"],      
-			'nextDate' => $_POST["nextDate"],
-			'fromDate' => $_POST["fromDate"],      
-			'toDate' => $_POST["toDate"],      
+			'month' => $_POST["month"],      
+			'year' => $_POST["year"],      
+			'toDate' => $_POST["toDate"],
+			'fromDate' => $_POST["fromDate"],
+			'nextCheckDate' => $_POST["nextCheckDate"],            
       
         ];
 
-		 throw new Exception(print_r($data,true));
+		//  throw new Exception(print_r($data,true));
 
 		
 		$kpiTeamId = $_POST["kpiTeamId"];
@@ -748,9 +748,9 @@ class KpiTeamController extends Controller
 		$kpiTeamHistory->month = $_POST["month"];
 		$kpiTeamHistory->fromDate = $_POST["fromDate"];
 		$kpiTeamHistory->toDate = $_POST["toDate"];
-		// $kpiTeamHistory->month = $_POST["month"];
-		// $kpiTeamHistory->year = $_POST["year"];
-		$kpiTeamHistory->nextCheckDate = $_POST["nextDate"];
+		$kpiTeamHistory->month = $_POST["month"];
+		$kpiTeamHistory->year = $_POST["year"];
+		$kpiTeamHistory->nextCheckDate = $_POST["nextCheckDate"];
 		// $kpiTeamHistory->detail = $_POST["remark"];
 		$kpiTeamHistory->createrId = Yii::$app->user->id;
 		$kpiTeamHistory->createDateTime = new Expression('NOW()');
@@ -758,19 +758,21 @@ class KpiTeamController extends Controller
 		if ($kpiTeamHistory->save(false)) {
 			$teamkpi = KpiTeam::find()->where(["kpiTeamId" => $kpiTeamId])->one();
 			$teamkpi->status = $_POST["status"];
-			// $teamkpi->month = $_POST["month"];
-			// $teamkpi->year = $_POST["year"];
+			$teamkpi->month = $_POST["month"];
+			$teamkpi->year = $_POST["year"];
 			$teamkpi->result = str_replace(",", "",  $_POST["result"]); 
 			if (isset($_POST["amount"])) {
 				$teamkpi->target = str_replace(",", "",  $_POST["amount"]);
 			}
 			$teamkpi->fromDate = $_POST["fromDate"];
 			$teamkpi->toDate = $_POST["toDate"];
-			$teamkpi->nextCheckDate = $_POST["nextDate"];
+			$teamkpi->nextCheckDate = $_POST["nextCheckDate"];
 			$teamkpi->updateDateTime = new Expression('NOW()');
 			$teamkpi->save(false);
 		}
-		return $this->redirect(Yii::$app->request->referrer);
+		// return $this->redirect(Yii::$app->request->referrer);
+		return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
+
 		//return $this->redirect('team-kpi');
 	}
 	public function actionKpiTeam()
