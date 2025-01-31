@@ -857,7 +857,7 @@ document.getElementById('check2').addEventListener('change', function() {
     const textgreen = document.getElementById('text-green'); // ใช้ ID แทน
 
     if (this.checked) {
-        alert("1"); // แสดง Alert เมื่อกดเลือก check2
+        // alert("1"); // แสดง Alert เมื่อกดเลือก check2
         check1.style.display = 'none'; // ซ่อน check1
         textgreen.classList.add('text-green');
 
