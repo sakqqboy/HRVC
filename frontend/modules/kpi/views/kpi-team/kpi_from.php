@@ -674,7 +674,7 @@ select.form-select option:disabled {
                         <div class="between-center" style="  width: 100%; ">
                             <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
                                 <label class="switch">
-                                    <input type="checkbox" id="historic-checkbox" checked>
+                                    <input type="checkbox" id="historic-checkbox">
                                     <span class="slider round"></span>
                                 </label>
                                 <label class="sub-manage-create" id="historic-switch">
@@ -683,7 +683,7 @@ select.form-select option:disabled {
                             </div>
                             <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
                                 <label class="switch">
-                                    <input type="checkbox" id="override-checkbox">
+                                    <input type="checkbox" id="override-checkbox" checked>
                                     <span class="slider round"></span>
                                 </label>
                                 <label class="sub-manage-create" id="override-switch">
@@ -849,65 +849,6 @@ select.form-select option:disabled {
 <?= $this->render('modal_history') ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-document.getElementById('check2').addEventListener('change', function() {
-    const check1 = document.getElementById('check1');
-    const textboxDiv = document.querySelector('.textbox-check-hide') || document.querySelector(
-        '.textbox-check-green');
-    const borderCicleDiv = document.getElementById('border-cicle-completed'); // ใช้ ID แทน
-    const textgreen = document.getElementById('text-green'); // ใช้ ID แทน
-
-    if (this.checked) {
-        // alert("1"); // แสดง Alert เมื่อกดเลือก check2
-        check1.style.display = 'none'; // ซ่อน check1
-        textgreen.classList.add('text-green');
-
-        if (textboxDiv) {
-            textboxDiv.classList.remove('textbox-check-hide');
-            textboxDiv.classList.add('textbox-check-green');
-        }
-
-        if (borderCicleDiv) {
-            borderCicleDiv.classList.remove('text-black');
-            borderCicleDiv.classList.add('text-green');
-            borderCicleDiv.style.border = '0.5px solid #2D7F06'; // เปลี่ยนสี border
-        }
-
-        if (textgreen) {
-            textgreen.classList.remove('text-black');
-            textgreen.classList.add('text-green'); // เปลี่ยนสีข้อความ
-        }
-
-    } else {
-        check1.style.display = 'inline-block'; // แสดง check1 กลับมา
-        textgreen.classList.add('text-green');
-
-        if (textboxDiv) {
-            textboxDiv.classList.remove('textbox-check-green');
-            textboxDiv.classList.add('textbox-check-hide');
-        }
-
-        if (borderCicleDiv) {
-            borderCicleDiv.classList.remove('text-green');
-            borderCicleDiv.classList.add('text-black');
-            borderCicleDiv.style.border = '0.5px solid #30313D'; // กลับไปเป็นสีเดิม
-        }
-
-        if (textgreen) {
-            textgreen.classList.remove('text-green');
-            textgreen.classList.add('text-black'); // เปลี่ยนกลับเป็นสีดำ
-        }
-    }
-});
-
-// ตรวจสอบค่าก่อนส่งฟอร์ม
-document.getElementById("statusForm")?.addEventListener("submit", function(event) {
-    let selected = document.querySelector('.status-checkbox:checked');
-    if (!selected) {
-        alert("Please select a status before submitting!");
-        event.preventDefault();
-    }
-});
-
 const seeMoreBtn = document.getElementById("see-more");
 const aboutText = document.getElementById("about-text");
 
@@ -939,6 +880,7 @@ function toggleText() {
 
 const value = "<?= $value ?>";
 const sumvalue = "<?= $sumvalue ?>";
+// const sumvalue = "500";
 
 // Get both checkboxes
 const historicCheckbox = document.getElementById('historic-checkbox');
@@ -949,11 +891,11 @@ historicCheckbox.addEventListener('change', function() {
     if (this.checked) {
         overrideCheckbox.checked = false;
         // alert(0);
-        overrideChecked(overrideCheckbox.checked, value);
+        overrideChecked(overrideCheckbox.checked, sumvalue);
     } else {
         overrideCheckbox.checked = true;
         // alert(1);
-        overrideChecked(overrideCheckbox.checked, sumvalue);
+        overrideChecked(overrideCheckbox.checked, value);
     }
 });
 
@@ -961,11 +903,11 @@ overrideCheckbox.addEventListener('change', function() {
     if (this.checked) {
         // alert(2);
         historicCheckbox.checked = false;
-        overrideChecked(overrideCheckbox.checked, sumvalue);
+        overrideChecked(overrideCheckbox.checked, value);
     } else {
         // alert(3);
         historicCheckbox.checked = true;
-        overrideChecked(overrideCheckbox.checked, value);
+        overrideChecked(overrideCheckbox.checked, sumvalue);
     }
 });
 
