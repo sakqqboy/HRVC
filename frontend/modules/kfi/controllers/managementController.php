@@ -354,7 +354,7 @@ class ManagementController extends Controller
 
 				// throw new Exception(print_r($data,true));
 
-				$param = ModelMaster::decodeParams($hash);
+		$param = ModelMaster::decodeParams($hash);
 
 		$isManager = UserRole::isManager();
 		if (isset($_POST["kfiId"])) {

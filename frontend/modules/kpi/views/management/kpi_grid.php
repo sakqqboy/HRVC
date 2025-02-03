@@ -517,7 +517,7 @@ $this->title = 'KPI Grid View';
                                         <?php
                                                 if ($colorFormat == 'disable' && $role >= 5) {
                                                 ?>
-                                        <a href="<?= Yii::$app->homeUrl ?>kpi/management/prepare-update/?kpiId=<?= $kpiId ?>"
+                                        <a href="<?= Yii::$app->homeUrl ?>kpi/management/prepare-update/?kpiId=<?= ModelMaster::encodeParams(['kpiId' => $kpiId,'kpiHistoryId' => 0]) ?>"
                                             style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; width: 82px; height: 30px; gap: 6px; flex-shrink: 0;"
                                             class="pim-btn-setup">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
@@ -527,7 +527,7 @@ $this->title = 'KPI Grid View';
                                         <?php
                                                 } else if ($role >= 5) {
                                                 ?>
-                                        <a href="<?= Yii::$app->homeUrl ?>kpi/management/prepare-update/?kpiId=<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>"
+                                        <a href="<?= Yii::$app->homeUrl ?>kpi/management/prepare-update/<?= ModelMaster::encodeParams(['kpiId' => $kpiId,'kpiHistoryId' => 0]) ?>"
                                             style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; width: 82px; height: 30px; gap: 6px; flex-shrink: 0;"
                                             class="pim-btn-<?= $colorFormat ?>">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"

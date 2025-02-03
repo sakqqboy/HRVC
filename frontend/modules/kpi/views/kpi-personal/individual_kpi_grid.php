@@ -507,7 +507,7 @@ $this->title = "INDIVIDUAL KPI";
                                             <?php
                                                     if ($colorFormat == 'disable'  && $canEdit == 1) {
                                                     ?>
-                                            <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/update-personal-kpi/<?= ModelMaster::encodeParams(['kpiEmployeeId' => $kpiEmployeeId]) ?>"
+                                            <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/update-personal-kpi/<?= ModelMaster::encodeParams(['kpiEmployeeId' => $kpiEmployeeId,'kpiHistoryId' => 0]) ?>"
                                                 class="no-underline">
                                                 <div class="pim-btn-setup">
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
@@ -518,7 +518,7 @@ $this->title = "INDIVIDUAL KPI";
                                             <?php
                                                     } else if ($canEdit == 1) {
                                                     ?>
-                                            <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/update-personal-kpi/<?= ModelMaster::encodeParams(['kpiEmployeeId' => $kpiEmployeeId]) ?>"
+                                            <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/update-personal-kpi/<?= ModelMaster::encodeParams(['kpiEmployeeId' => $kpiEmployeeId,'kpiHistoryId' => 0]) ?>"
                                                 class="no-underline">
                                                 <div class="pim-btn-<?= $colorFormat ?>">
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"

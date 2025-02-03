@@ -652,13 +652,13 @@ class KpiTeamController extends Controller
 			"waitForApprove" => $waitForApprove
 		]);
 	}
-	public function actionPrepareUpdate()
+	public function actionPrepareUpdate($hash)
 	{
-		$kpiTeamId = $_GET["kpiTeamId"];
-		// $param = ModelMaster::decodeParams($hash);
+		// $kpiTeamId = $_GET["kpiTeamId"];
+		$param = ModelMaster::decodeParams($hash);
 		$role = UserRole::userRight();
 
-		// $kpiTeamId = $param["kpiTeamId"];
+		$kpiTeamId = $param["kpiTeamId"];
 
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);

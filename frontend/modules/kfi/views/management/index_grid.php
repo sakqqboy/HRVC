@@ -361,7 +361,7 @@ $this->title = Yii::t('app', 'KFI Grid View');
                                                 if ($colorFormat == 'disable' && $role >= 5) {
                                                 ?>
                                         <a type="button" class="pim-btn-setup"
-                                            href="<?= Yii::$app->homeUrl ?>kfi/management/update-kfi/?kfiId=<?= $kfiId ?>"
+                                            href="<?= Yii::$app->homeUrl ?>kfi/management/update-kfi/?kfiId=<?= ModelMaster::encodeParams(['kfiId' => $kpiId,'kfiHistoryId' => 0]) ?>"
                                             style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; width: 82px; height: 30px; gap: 6px; flex-shrink: 0;">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
                                                 style="width: 14px; height: 14px;">
@@ -372,7 +372,7 @@ $this->title = Yii::t('app', 'KFI Grid View');
                                                 ?>
 
                                         <a class="pim-btn-<?= $colorFormat ?>"
-                                            href="<?= Yii::$app->homeUrl ?>kfi/management/update-kfi/?kfiId=<?= $kfiId ?>"
+                                            href="<?= Yii::$app->homeUrl ?>kfi/management/update-kfi/?kfiId=<?= ModelMaster::encodeParams(['kfiId' => $kpiId,'kfiHistoryId' => 0]) ?>"
                                             style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; width: 82px; height: 30px; gap: 6px; flex-shrink: 0;">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
                                                 style="width: 14px; height: 14px;">

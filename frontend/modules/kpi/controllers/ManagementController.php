@@ -451,10 +451,10 @@ class ManagementController extends Controller
         // 	throw new Exception($kfiId);
         // }
         $param = ModelMaster::decodeParams($hash);
-
-        if (Yii::$app->request->isGet) {
+        $kpiId =  $param['kpiId'];
+        // throw new Exception($kpiId);
+        
             // $kpiId = Yii::$app->request->get("kpiId");
-            $kpiId =  $param['kpiId'];
             if (!$kpiId || !is_numeric($kpiId)) {
                 throw new Exception("Invalid kpi ID.");
             }
@@ -528,9 +528,7 @@ class ManagementController extends Controller
                 "kpiId" => $kpiId,
                 "statusform" =>  "update"
             ]);
-        } else {
-            throw new Exception("Invalid request, KFI ID is missing. GET Data: " . json_encode($_GET));
-        }
+     
 
     }
     public function actionUpdateKpi()
