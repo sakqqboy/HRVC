@@ -688,7 +688,7 @@ class KpiPersonalController extends Controller
 				$history->kpiEmployeeId = $_POST["kpiEmployeeId"];
 				$history->target = str_replace(",", "", $_POST["amount"]);
 				$history->result = str_replace(",", "", $_POST["result"]);
-				$history->detail = $_POST["detail"];
+				// $history->detail = $_POST["detail"];
 				$history->month = $_POST["month"];
 				$history->year = $_POST["year"];
 				$history->toDate = $_POST["toDate"];
