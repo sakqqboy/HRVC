@@ -94,7 +94,7 @@ $this->title = 'KGI Grid View';
                     <?php
                     if (isset($kgis) && count($kgis) > 0) {
                         foreach ($kgis as $kgiId => $kgi) :
-                            //throw new exception(print_r($kgi, true));
+                            //    throw new exception(print_r($kgi, true));
                             if ($kgi["isOver"] == 1 && $kgi["status"] != 2) {
                                 $colorFormat = 'over';
                             } else {
@@ -535,9 +535,12 @@ $this->title = 'KGI Grid View';
                                                 <?php
                                                 } else if ($role >= 5) {
                                                 ?>
-                                                    <div onclick=" javascript:updateKgi(<?= $kgiId ?>,0)"
-                                                        class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
-                                                        data-bs-target="#update-kgi-modal">
+                                                    <!-- <div onclick=" javascript:updateKgi(<?php // $kgiId 
+                                                                                                ?>,0)" -->
+                                                    <a href="<?= Yii::$app->homeUrl . 'kgi/management/prepare-update/' . ModelMaster::encodeParams(['kgiId' => $kgiId, 'kgiHistoryId' => 0]) ?>"
+                                                        style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; width: 82px; height: 30px; gap: 6px; flex-shrink: 0;"
+                                                        class="pim-btn-<?= $colorFormat ?>">
+                                                        <!-- data-bs-toggle="modal" data-bs-target="#update-kgi-modal"> -->
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
                                                             class="mb-2" style="width: 12px; height: 12px;">
                                                         <?php if ($colorFormat == "complete") {
@@ -548,7 +551,8 @@ $this->title = 'KGI Grid View';
                                                             echo  Yii::t('app', "Update");
                                                         }
                                                         ?>
-                                                    </div>
+                                                    </a>
+                                                    <!-- </div> -->
                                                 <?php
                                                 } else { ?>
                                                     <div class="pim-btn-disable" data-bs-target="#update-kgi-modal">

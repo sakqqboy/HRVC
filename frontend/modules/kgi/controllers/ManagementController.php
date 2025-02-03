@@ -550,10 +550,11 @@ class ManagementController extends Controller
 			endforeach;
 		}
 	}
-	public function actionPrepareUpdate()
+	public function actionPrepareUpdate($hash)
 	{
-		$kgiId = $_POST["kgiId"];
-		$kgiHistoryId = $_POST["kgiHistoryId"];
+		$param = ModelMaster::decodeParams($hash);
+		$kgiId = $param["kgiId"];
+		$kgiHistoryId = $param["kgiHistoryId"];
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -592,9 +593,34 @@ class ManagementController extends Controller
 			"kgiId" => $kgiId
 		]);
 		$team["textTeam"] = $kgiTeamText;
-		$data = array_merge($kgi, $branch, $department, $team);
+		//$data = array_merge($kgi, $branch, $department, $team);
+
+		$groupId = Group::currentGroupId();
+		if ($groupId == null) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+		}
+		$role = UserRole::userRight();
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$companies = curl_exec($api);
+		$companies = json_decode($companies, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
+		$units = curl_exec($api);
+		$units = json_decode($units, true);
 		curl_close($api);
-		return json_encode($data);
+
+		//curl_close($api);
+		//return json_encode($data);
+		return $this->render('kgi_form', [
+			"statusform" => 'create',
+			"role" => $role,
+			"companies" => $companies,
+			"units" => $units
+		]);
 	}
 	public function actionUpdateKgi()
 	{
