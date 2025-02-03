@@ -172,7 +172,6 @@ class ManagementController extends Controller
 	}
 	public function actionCreateKgi()
 	{
-
 		if (isset($_POST["kgiName"]) && trim($_POST["kgiName"])) {
 			//throw new exception(print_r(Yii::$app->request->post(), true));
 			$result = isset($_POST["result"]) && $_POST["result"] != '' ? $_POST["result"] : 0;

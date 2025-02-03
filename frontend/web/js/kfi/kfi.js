@@ -50,7 +50,7 @@ function branchMultiDepartment() {
 
     if (multiBranch.length > 0) {
         $('input[id="multi-check"]').each(function () {
-            $(".multiCheck-" + $(this).val()).removeAttr('required');
+            //$(".multiCheck-" + $(this).val()).removeAttr('required');
         });
 
         let imageSrc = $url + "image/branches.svg"; // กำหนดแหล่งที่มาของภาพ
@@ -103,7 +103,7 @@ function branchMultiDepartment() {
         });
     } else {
         $('input[id="multi-check"]').each(function () {
-            $(".multiCheck-" + $(this).val()).prop('required', true);
+            //$(".multiCheck-" + $(this).val()).prop('required', true);
         });
 
         // เปลี่ยนค่าใน <div> เมื่อไม่มีการเลือก checkbox เฉพาะใน #image-branches
@@ -308,8 +308,8 @@ function departmentMultiTeam(branchId) {
     });
 
     if (multiDepartment.length > 0) {
-        $('input[id="multi-check"]').each(function () {
-            $(".multiCheck-" + $(this).val()).removeAttr('required');
+        $('input[id="multi-check-'+branchId+'"]').each(function () {
+            $(".multiDepartment-" + $(this).val()).removeAttr('required');
         });
 
         let deptImageSrc = $url + "image/departments.svg"; // แหล่งที่มาของภาพสำหรับ departments
@@ -368,8 +368,8 @@ function departmentMultiTeam(branchId) {
         });
 
     } else {
-        $('input[id="multi-check"]').each(function () {
-            $(".multiCheck-" + $(this).val()).prop('required', true);
+        $('input[id="multi-check-'+branchId+'"]').each(function () {
+            $(".multiDepartment-" + $(this).val()).prop('required', true);
         });
 
         // เปลี่ยน class และข้อความเมื่อไม่มี departments ที่เลือก
@@ -571,20 +571,20 @@ function multiTeam(departmentId) {
 
     // ตั้งค่า required ตามจำนวนที่เลือก
     if (totalChecked > 0) {
-        $('input[id^="multi-check-team-"]').each(function () {
-            $(".multiTeam-department-" + $(this).val()).removeAttr('required');
+        $('input[id="multi-check-team-'+departmentId+'"]').each(function () {
+        //    $(".multiTeam-department-" + $(this).val()).removeAttr('required');
         });
     } else {
-        $('input[id^="multi-check-team-"]').each(function () {
-            $(".multiTeam-department-" + $(this).val()).prop('required', true);
+        $('input[id="multi-check-team-'+departmentId+'"]').each(function () {
+        //    $(".multiTeam-department-" + $(this).val()).prop('required', true);
         });
     }
 
     // alert('Selected teams: ' + totalChecked + ' / Total teams: ' + totalTeams);
 
     if (totalChecked > 0) {
-        $('input[id^="multi-check-team-"]').each(function () {
-            $(".multiCheck-" + $(this).val()).removeAttr('required');
+        $('input[id="multi-check-team-'+departmentId+'"]').each(function () {
+            $(".multiTeam-department-" + $(this).val()).removeAttr('required');
         });
 
         let deptImageSrc = $url + "image/teams.svg";
@@ -624,7 +624,7 @@ function multiTeam(departmentId) {
 
     } else {
         $('input[id^="multi-check-team-"]').each(function () {
-            $(".multiCheck-" + $(this).val()).prop('required', true);
+    //        $(".multiTeam-department-" + $(this).val()).prop('required', true);
         });
 
         // รีเซ็ตค่าหากไม่มีการเลือก
@@ -692,11 +692,11 @@ function multiTeamUpdate(departmentId) {
     }
     if (totalChecked > 0) {
         $('input[id="multi-check-team-' + departmentId + '-update"]').each(function () {
-            $(".multiTeam-department-update-" + $(this).val()).removeAttr('required');
+        //    $(".multiTeam-department-update-" + $(this).val()).removeAttr('required');
         });
     } else {
         $('input[id="multi-check-team-' + departmentId + '-update"]').each(function () {
-            $(".multiTeam-department-update-" + $(this).val()).prop('required', true);
+        //    $(".multiTeam-department-update-" + $(this).val()).prop('required', true);
         });
     }
 
@@ -742,7 +742,7 @@ function multiTeamUpdate(departmentId) {
 
     } else {
         $('input[id^="multi-check-team-"]').each(function () {
-            $(".multiCheck-" + $(this).val()).prop('required', true);
+    //        $(".multiCheck-" + $(this).val()).prop('required', true);
         });
 
         // รีเซ็ตค่าหากไม่มีการเลือก

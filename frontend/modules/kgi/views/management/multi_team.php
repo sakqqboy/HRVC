@@ -19,7 +19,7 @@ if (isset($t) && count($t) > 0) {
 		}
 		foreach ($teams as $teamId => $team) : ?>
 			<div class="col-12 multi-select pl-30 pt-5 pb-5">
-				<input type="checkbox" id='multi-check-team-<?= $departmentId ?>' name="team[]" class="checkbox-md mr-5 multiTeam-department-<?= $teamId ?>" value="<?= $teamId ?>" required onchange="javascript:multiTeam(<?= $departmentId ?>)">
+				<input type="checkbox" id='multi-check-team-<?= $departmentId ?>' name="team[]" class="checkbox-md mr-5 multi-check-team multiTeam-department-<?= $teamId ?>" value="<?= $teamId ?>" onchange="javascript:multiTeam(<?= $departmentId ?>)">
 				<?= $team ?>
 			</div>
 <?php

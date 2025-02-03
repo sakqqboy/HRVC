@@ -26,7 +26,7 @@ if (isset($t) && count($t) > 0) {
 			}
 		?>
 			<div class="col-12 multi-select pl-30 pt-5 pb-5">
-				<input type="checkbox" id='multi-check-team-<?= $departmentId ?>-update' <?= $check ?> name="team[]" class="checkbox-md mr-5 multiTeam-department-update-<?= $teamId ?>" value="<?= $teamId ?>" onchange="javascript:multiTeamUpdate(<?= $departmentId ?>)">
+				<input type="checkbox" id='multi-check-team-<?= $departmentId ?>-update' <?= $check ?> name="team[]" class="checkbox-md mr-5 multi-check-team multiTeam-department-update-<?= $teamId ?>" value="<?= $teamId ?>" onchange="javascript:multiTeamUpdate(<?= $departmentId ?>)">
 				<?= $team ?>
 			</div>
 <?php
