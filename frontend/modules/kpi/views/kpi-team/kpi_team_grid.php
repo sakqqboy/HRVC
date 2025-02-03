@@ -405,7 +405,7 @@ $this->title = "TEAM KPI";
                                                     </span>
                                                     <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpi["kpiId"], "companyId" => $kpi["companyId"]]) ?>"
                                                         class="font-black" style="top: 2px;">
-                                                        <?= Yii::t('app', 'Assign Person') ?>
+                                                        <?= Yii::t('app', 'Assign Teams') ?>
                                                     </a>
                                                     <?php
                                                                 }

@@ -7,14 +7,11 @@ if ($statusform == 'update') {
 } else {
     $parturl = 'kpi/management/create-kpi';
 }
-?>
-
-<?php $form = ActiveForm::begin([
+$form = ActiveForm::begin([
     'id' => 'create-kpi',
     'method' => 'post',
     'options' => [
-        'enctype' => 'multipart/form-data',
-        'onsubmit' => 'return validateFormKpi(event)' // เรียกฟังก์ชันตรวจสอบก่อนส่งฟอร์ม
+        'enctype' => 'multipart/form-data'
     ],
     'action' => Yii::$app->homeUrl . $parturl
 ]);
@@ -839,6 +836,21 @@ select.form-select option:disabled {
 <?= $this->render('modal_history') ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+$(document).ready(function() {
+    let isSubmitting = false; // ป้องกัน submit ซ้ำ
+    $("#create-kpi").on("beforeSubmit", function(event) {
+        if (isSubmitting) {
+            return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
+        }
+        isSubmitting = true;
+        if (!validateFormKpi()) {
+            isSubmitting = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
+            return false;
+        }
+        return true; // ถ้า validation ผ่าน ให้ submit ฟอร์มต่อไป
+    });
+});
+
 const value = "<?= $value ?>";
 const sumvalue = "<?= $sumvalue ?>";
 
@@ -905,12 +917,6 @@ $(document).ready(function() {
     }
 
 
-    // ฟังก์ชันเปลี่ยนสีของ placeholder เมื่อมีการเลือกค่า
-    function updatePlaceholderColor(selector) {
-        $(selector).on('change', function() {
-            $(this).css('color', $(this).val() !== "" ? '#30313D' : 'var(--Helper-Text-Gray, #8A8A8A)');
-        });
-    }
 
     // เรียกใช้งานฟังก์ชันกับ select หลายตัวพร้อมกัน
     updatePlaceholderColor('#companyId');
@@ -936,15 +942,28 @@ function modalHistory(kpiId) {
     var kpiHistoryId = <?= json_encode($kpiHistoryId) ?>;
     var fromDate = new Date(fromDateValue);
     var toDate = new Date(toDateValue);
-    var fromDay = fromDate.getDate();
-    var toDay = toDate.getDate();
-    var fromMonth = new Intl.DateTimeFormat('en-US', {
-        month: 'long'
-    }).format(fromDate);
-    var toMonth = new Intl.DateTimeFormat('en-US', {
-        month: 'long'
-    }).format(toDate);
-    var formattedRange = `${getOrdinalSuffix(fromDay)} ${fromMonth} - ${getOrdinalSuffix(toDay)} ${toMonth}`;
+    // ถ้า fromDate ไม่ถูกต้อง
+    if (isNaN(fromDate)) {
+        // ถ้า fromDate ไม่ถูกต้อง ให้ส่งค่าว่าไม่มีวันที่
+        fromDate = null;
+        formattedRange = "No date"; // กำหนดค่าเป็น "ไม่มีวันที่"
+    } else {
+        var fromDay = fromDate.getDate();
+        var fromMonth = new Intl.DateTimeFormat('en-US', {
+            month: 'long'
+        }).format(fromDate);
+
+        // ถ้า toDate ไม่ได้มีค่า ให้แสดงเฉพาะจาก fromDate
+        var formattedRange = `${getOrdinalSuffix(fromDay)} ${fromMonth}`;
+
+        if (toDate && !isNaN(toDate)) {
+            var toDay = toDate.getDate();
+            var toMonth = new Intl.DateTimeFormat('en-US', {
+                month: 'long'
+            }).format(toDate);
+            formattedRange = `${getOrdinalSuffix(fromDay)} ${fromMonth} - ${getOrdinalSuffix(toDay)} ${toMonth}`;
+        }
+    }
     var monthName = getMonthName(parseInt(month)); // แปลงเป็นชื่อเดือน
 
     $.ajax({

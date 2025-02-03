@@ -24,7 +24,8 @@ $result = $data['result'] ?? 0;
 $value = isset($data['result']) ? $data['result'] : 0;
 $sumvalue = isset($kpi['sumresult']) ? $kpi['sumresult'] : 0;
 $targetAmount = $data['targetAmount'] ?? 0;
-$kpiHistoryId = $kpi['kpiHistoryId'] ?? 0;
+// $kpiHistoryId = $kpi['kpiHistoryId'] ?? 0;
+$kpiTeamHistoryId = $data['kpiTeamHistoryId'] ?? 0;
 $DueBehind = $targetAmount -  $result;
 $detail = !empty($data['kpiDetail']) ? $data['kpiDetail'] : 'No details listed';
 // $detail ="The goal is to increase the number of Non-Japanese clients to diversify the client base and drive sustained business growth. By targeting international markets and industries, the aim is to capture a broader market share and reduce dependency on a The goal is to increase the number of Non-Japanese clients to diversify the client base and drive sustained business growth. By targeting international markets and industries, the aim is to capture a broader market share and reduce dependency on a ";
@@ -700,7 +701,8 @@ select.form-select option:disabled {
                             </div>
                         </label>
                         <div class="start-center" style="  gap: 12px; align-self: stretch;">
-                            <div class="textbox-check-<?= (empty($data['status']) || empty($data['nextCheckText']) ) ? 'hide' : 'blue' ?>"
+                            <div id="textbox-check-progress"
+                                class="textbox-check-<?= (empty($data['status']) || empty($data['nextCheckText']) ) ? 'hide' : 'blue' ?>"
                                 style="display: flex; gap: 12px;">
                                 <div class="mid-center" style="flex-basis: 5%;">
                                     <?php if($data['status'] != '2'){ ?>
@@ -710,20 +712,22 @@ select.form-select option:disabled {
                                     <?php } ?>
                                 </div>
                                 <div class="mid-center" style="flex-basis: 25%; margin-right: 20px;">
-                                    <div class="border-cicle  bg-white text-<?= (empty($data['status']) || empty($data['nextCheckText']) ) ? 'black' : 'blue-sea' ?>"
+                                    <div id="border-cicle-progress"
+                                        class="border-cicle  bg-white text-<?= (empty($data['status']) || empty($data['nextCheckText']) ) ? 'black' : 'blue-sea' ?>"
                                         style="<?= (empty($data['status']) || empty($data['nextCheckText'])) ? 'border: 0.5px solid #30313D;' : 'border: 0.5px solid #2F42ED;' ?> font-size: 14px; font-weight: 600;">
                                         <?= Yii::t('app', 'In-Progress') ?>
                                     </div>
                                 </div>
                                 <div style="flex-basis: 70%;">
-                                    <text
+                                    <text id="text-blue"
                                         class="text-<?= (empty($data['status']) || empty($data['nextCheckText']) ) ? 'black' : 'blue-sea' ?>">
                                         <?= Yii::t('app', "The task is currently being addressed. Ensure it's marked completed before the due date to avoid it being automatically listed as overdue.") ?>
                                     </text>
                                 </div>
                             </div>
 
-                            <div class="textbox-check-<?= (empty($data['status']) || $data['status'] != 2 ) ? 'hide' : 'green' ?>"
+                            <div id="textbox-check-completed"
+                                class="textbox-check-<?= (empty($data['status']) || $data['status'] != 2 ) ? 'hide' : 'green' ?>"
                                 style="display: flex; gap: 12px; margin-top: 10px;">
                                 <div class="mid-center" style="flex-basis: 5%;">
                                     <input type="checkbox" id="check2" name="status" value="2" class="status-checkbox"
@@ -744,7 +748,8 @@ select.form-select option:disabled {
                                     </text>
                                 </div>
                             </div>
-                            <div style="<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText'])) 
+                            <div id="textbox-check-warning"
+                                style="<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText'])) 
                                                             ? 'border: 0.5px solid var(--Progress-Blue, #30313D);' 
                                                             : ($daysLeft == 'Due Pass' 
                                                                 ? 'border: 0.5px solid var(--Progress-Blue, #E05757);' 
@@ -815,8 +820,8 @@ select.form-select option:disabled {
                             </text>
                         </div>
                         <div>
-                            <a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="btn-create-cancle"
-                                style="width: 100px;">
+                            <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/kpi-team-history/<?= ModelMaster::encodeParams(['kpiId' => $data['kpiId'], 'kpiTeamHistoryId' => $kpiTeamHistoryId, 'kpiTeamId' => $kpiTeamId]) ?>"
+                                class=" btn-create-cancle" style="width: 100px;">
                                 <img src="<?= Yii::$app->homeUrl ?>image/eye-login.svg" alt="LinkedIn"
                                     style="width: 16px; height: 16px;">
                                 <?= Yii::t('app', 'View') ?>
@@ -913,30 +918,44 @@ overrideCheckbox.addEventListener('change', function() {
 
 
 function modalHistory(kpiId) {
-    var url = $url + 'kpi/management/modal-history';
-    // alert(0);
+    var url = $url + 'kpi/kpi-team/modal-history';
+    // alert(kpiId);
     var percentage = <?= json_encode($percentage) ?>;
     var result = <?= json_encode($result) ?>;
     var sumvalue = <?= json_encode($sumvalue) ?>;
     var targetAmount = <?= json_encode($targetAmount) ?>;
-    var kpiHistoryId = <?= json_encode($kpiHistoryId) ?>;
+    var kpiTeamId = <?= json_encode($kpiTeamId) ?>;
+    var kpiTeamHistoryId = <?= json_encode($kpiTeamHistoryId) ?>;
     var month = document.getElementById("hiddenMonth").value;
     var year = document.getElementById("hiddenYear").value;
     var fromDateValue = document.getElementById("fromDate").value;
     var toDateValue = document.getElementById("toDate").value;
     var fromDate = new Date(fromDateValue);
-    var toDate = new Date(toDateValue);
-    var fromDay = fromDate.getDate();
-    var toDay = toDate.getDate();
-    var fromMonth = new Intl.DateTimeFormat('en-US', {
-        month: 'long'
-    }).format(fromDate);
-    var toMonth = new Intl.DateTimeFormat('en-US', {
-        month: 'long'
-    }).format(toDate);
-    var formattedRange = `${getOrdinalSuffix(fromDay)} ${fromMonth} - ${getOrdinalSuffix(toDay)} ${toMonth}`;
-    var monthName = getMonthName(parseInt(month)); // แปลงเป็นชื่อเดือน
+    var toDate = toDateValue ? new Date(toDateValue) : null; // ตรวจสอบค่าก่อนแปลง
+    // ถ้า fromDate ไม่ถูกต้อง
+    if (isNaN(fromDate)) {
+        // ถ้า fromDate ไม่ถูกต้อง ให้ส่งค่าว่าไม่มีวันที่
+        fromDate = null;
+        formattedRange = "No date"; // กำหนดค่าเป็น "ไม่มีวันที่"
+    } else {
+        var fromDay = fromDate.getDate();
+        var fromMonth = new Intl.DateTimeFormat('en-US', {
+            month: 'long'
+        }).format(fromDate);
 
+        // ถ้า toDate ไม่ได้มีค่า ให้แสดงเฉพาะจาก fromDate
+        var formattedRange = `${getOrdinalSuffix(fromDay)} ${fromMonth}`;
+
+        if (toDate && !isNaN(toDate)) {
+            var toDay = toDate.getDate();
+            var toMonth = new Intl.DateTimeFormat('en-US', {
+                month: 'long'
+            }).format(toDate);
+            formattedRange = `${getOrdinalSuffix(fromDay)} ${fromMonth} - ${getOrdinalSuffix(toDay)} ${toMonth}`;
+        }
+    }
+    var monthName = getMonthName(parseInt(month)); // แปลงเป็นชื่อเดือน
+    // alert(kpiTeamHistoryId);
     $.ajax({
         type: "POST",
         dataType: "json", // ✅ รอรับ JSON
@@ -950,7 +969,8 @@ function modalHistory(kpiId) {
             month: monthName,
             year: year,
             formattedRange: formattedRange,
-            kpiHistoryId: kpiHistoryId
+            kpiTeamId: kpiTeamId,
+            kpiTeamHistoryId: kpiTeamHistoryId
         },
         success: function(data) {
             var percentage = parseFloat(data.percentage);

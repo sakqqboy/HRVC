@@ -668,21 +668,43 @@ class KpiTeamController extends Controller
 		$kpiTeamDetail = curl_exec($api);
 		$kpiTeamDetail = json_decode($kpiTeamDetail, true);
 
+		// ตรวจสอบว่าค่าที่ได้มาไม่เป็น null
+		if (!$kpiTeamDetail || !isset($kpiTeamDetail['kpiId'])) {
+			return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
+		}
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiTeamDetail['kpiId'] . '&&kpiHistoryId=0');
-        $kpi = curl_exec($api);
-        $kpi = json_decode($kpi, true);
+		$kpi = curl_exec($api);
+		$kpi = json_decode($kpi, true);
+
+		if (!$kpi || !isset($kpi["companyId"])) {
+			return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
+		}
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $kpi["companyId"]);
 		$kpiBranch = curl_exec($api);
 		$kpiBranch = json_decode($kpiBranch, true);
-		
+
+		if (!$kpiBranch) {
+			return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
+		}
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-department?id=' . $kpiTeamDetail['kpiId']);
-        $kpiDepartment = curl_exec($api);
-        $kpiDepartment = json_decode($kpiDepartment, true);
-			
+		$kpiDepartment = curl_exec($api);
+		$kpiDepartment = json_decode($kpiDepartment, true);
+
+		if (!$kpiDepartment) {
+			return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
+		}
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-team?id=' . $kpiTeamDetail['kpiId']);
 		$kpiTeam = curl_exec($api);
 		$kpiTeam = json_decode($kpiTeam, true);
+
+		if (!$kpiTeam) {
+			return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
+		}
+
 
 		curl_close($api);
 
@@ -799,6 +821,56 @@ class KpiTeamController extends Controller
 		$res["kpiId"] = $kpiIds;
 		return json_encode($res);
 	}
+
+	public function actionModalHistory()
+    {	
+        $percentage = $_POST["percentage"];
+        $result = $_POST["result"];
+        $sumvalue = $_POST["sumvalue"];
+        $targetAmount = $_POST["targetAmount"];
+        $kpiId = $_POST["kpiId"];
+        $month = $_POST["month"];
+        $year = $_POST["year"];
+        $formattedRange = $_POST["formattedRange"];
+        $kpiTeamId = $_POST["kpiTeamId"];
+		$kpiTeamHistoryId = $_POST["kpiTeamHistoryId"];
+
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-history?kpiId=' . $kpiId . '&&kpiTeamId=' . $kpiTeamId . '&&kpiTeamHistoryId=' . $kpiTeamHistoryId);
+		$history = curl_exec($api);
+		$history = json_decode($history, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-history-team?kpiId=' . $kpiId );
+		$historyTeam = curl_exec($api);
+		$historyTeam = json_decode($historyTeam, true);
+
+		curl_close($api);
+        // throw new Exception(print_r($history,true));
+
+        $data = [
+            "percentage" => $percentage,
+            "result" => $result,
+            "sumvalue" => $sumvalue,
+            "targetAmount" => $targetAmount,
+            "kpiId" => $kpiId,
+            "month" => $month,
+            "year" => $year,
+            "formattedRange" => $formattedRange,
+            "history" => $history,
+            "historyTeam" => $historyTeam
+        ];
+
+                // throw new Exception(print_r($data,true));
+
+        
+    
+        header("Content-Type: application/json");
+        echo json_encode($data);
+        exit;
+    }
 	public function actionKpiTeamView()
 	{
 		$kpiTeamId = $_POST["kpiTeamId"];

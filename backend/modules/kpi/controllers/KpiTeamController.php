@@ -424,6 +424,9 @@ class KpiTeamController extends Controller
 			endforeach;
 		}
 		return json_encode($data);
+		// $data = [1,2,3];
+		// return json_encode($data);
+
 	}
 
 	public function actionKpiHistoryForChart($kpiId, $kpiTeamId, $kpiTeamHistoryId)
@@ -527,6 +530,7 @@ class KpiTeamController extends Controller
 				$ratio = 0;
 			}
 			$data = [
+				"kpiTeamHistoryId" => $kpiTeamHistory["kpiTeamHistoryId"],
 				"kpiName" => $kpiTeamHistory["kpiName"],
 				"kpiId" => $kpiTeamHistory["kpiId"],
 				"priority" => $kpiTeamHistory["priority"],
