@@ -440,7 +440,7 @@ class ManagementController extends Controller
             endforeach;
         }
     }
-    public function actionPrepareUpdate()
+    public function actionPrepareUpdate($hash)
     {
         // $kpiId = $_POST["kpiId"];
         // $kpiId = Yii::$app->request->get("kpiId");
@@ -450,10 +450,11 @@ class ManagementController extends Controller
         // }else{
         // 	throw new Exception($kfiId);
         // }
-        
+        $param = ModelMaster::decodeParams($hash);
+
         if (Yii::$app->request->isGet) {
-            $kpiId = Yii::$app->request->get("kpiId");
-        
+            // $kpiId = Yii::$app->request->get("kpiId");
+            $kpiId =  $param['kpiId'];
             if (!$kpiId || !is_numeric($kpiId)) {
                 throw new Exception("Invalid kpi ID.");
             }

@@ -1274,11 +1274,7 @@ function validateFormKfi() {
         multiDepartment[a] = $(this).val();
         a++;
     });
-    var b = 0;
-    $(".multi-check-team:checked").each(function () {
-        multiTeam[b] = $(this).val();
-        b++;
-    });
+
     var fromDate = document.getElementById('fromDate').value.trim();
     var toDate = document.getElementById('toDate').value.trim();
     var nextDate = $('#nextDate').val();
@@ -1288,9 +1284,6 @@ function validateFormKfi() {
     }
     else if (multiDepartment.length == 0) {
         alert("Please select at least one department!");
-        return false;
-    } else if (multiTeam.length == 0) {
-        alert("Please select at least one team!");
         return false;
     } else if (!fromDate && !toDate) {
         alert("Please fill in Due Term");
