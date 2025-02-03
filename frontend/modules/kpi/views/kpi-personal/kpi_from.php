@@ -1120,7 +1120,7 @@ function modalHistory(kpiId) {
         },
         error: function(xhr, status, error) {
             console.log(xhr.responseText); // ดูข้อความผิดพลาดจากเซิร์ฟเวอร์
-            alert("เกิดข้อผิดพลาดไม่มีข้อมูลในการโหลดข้อมูล");
+            // alert("เกิดข้อผิดพลาดไม่มีข้อมูลในการโหลดข้อมูล");
         }
     });
 }

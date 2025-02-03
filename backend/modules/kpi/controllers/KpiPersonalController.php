@@ -299,7 +299,6 @@ class KpiPersonalController extends Controller
 				->one();
 		}
 
-		// return json_encode($kpiEmployee);
 
 		if (!isset($kpiEmployee) || empty($kpiEmployee)) {
 			$kpiEmployee = kpiEmployee::find()
@@ -318,13 +317,17 @@ class KpiPersonalController extends Controller
 			$kpiId = $kpiE["kpiId"];
 			$employeeId = $kpiE["employeeId"];
 		}
+		
 		$data = [];
 		$ratio = 0;
 		$kpiDetail = kpi::find()
 			//->select('kpiName')
 			->where(["kpiId" => $kpiId])
+			->asArray()
 			->one();
+
 		if (isset($kpiEmployee) && !empty($kpiEmployee)) {
+
 			if ($kpiEmployee["target"] != '' && $kpiEmployee["target"] != 0 && $kpiEmployee["target"] != null) {
 				if ($kpiDetail["code"] == '<' || $kpiDetail["code"] == '=') {
 					$ratio = ($kpiEmployee["result"] / $kpiEmployee["target"]) * 100;
@@ -339,9 +342,10 @@ class KpiPersonalController extends Controller
 				$ratio = 0;
 			}
 			$employee = Employee::EmployeeDetail($employeeId);
+			// return json_encode(print_r($employee,true));
 			$data = [
 				"kpiId" => $kpiId,
-				"kpiEmployeeHistoryId" => $kpiEmployee["kpiEmployeeHistoryId"],
+				// "kpiEmployeeHistoryId" => $kpiEmployee["kpiEmployeeHistoryId"],
 				"kpiName" => $kpiDetail["kpiName"],
 				"monthName" => ModelMaster::monthEng($kpiEmployee['month'], 1),
 				"priority" => $kpiDetail["priority"],
