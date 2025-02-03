@@ -216,3 +216,63 @@ function changeTargetKpiTeamReason(kpiTeamHistoryId) {
 }
 
 
+document.getElementById('check2').addEventListener('change', function () {
+	const check1 = document.getElementById('check1');
+	const textboxDiv = document.querySelector('.textbox-check-hide') || document.querySelector(
+		'.textbox-check-green');
+	const borderCicleDiv = document.getElementById('border-cicle-completed'); // ใช้ ID แทน
+	const textgreen = document.getElementById('text-green'); // ใช้ ID แทน
+
+	if (this.checked) {
+		// alert("1"); // แสดง Alert เมื่อกดเลือก check2
+		check1.style.display = 'none'; // ซ่อน check1
+		textgreen.classList.add('text-green');
+
+		if (textboxDiv) {
+			textboxDiv.classList.remove('textbox-check-hide');
+			textboxDiv.classList.add('textbox-check-green');
+		}
+
+		if (borderCicleDiv) {
+			borderCicleDiv.classList.remove('text-black');
+			borderCicleDiv.classList.add('text-green');
+			borderCicleDiv.style.border = '0.5px solid #2D7F06'; // เปลี่ยนสี border
+		}
+
+		if (textgreen) {
+			textgreen.classList.remove('text-black');
+			textgreen.classList.add('text-green'); // เปลี่ยนสีข้อความ
+		}
+
+	} else {
+		check1.style.display = 'inline-block'; // แสดง check1 กลับมา
+		textgreen.classList.add('text-green');
+
+		if (textboxDiv) {
+			textboxDiv.classList.remove('textbox-check-green');
+			textboxDiv.classList.add('textbox-check-hide');
+		}
+
+		if (borderCicleDiv) {
+			borderCicleDiv.classList.remove('text-green');
+			borderCicleDiv.classList.add('text-black');
+			borderCicleDiv.style.border = '0.5px solid #30313D'; // กลับไปเป็นสีเดิม
+		}
+
+		if (textgreen) {
+			textgreen.classList.remove('text-green');
+			textgreen.classList.add('text-black'); // เปลี่ยนกลับเป็นสีดำ
+		}
+	}
+});
+
+
+// ตรวจสอบค่าก่อนส่งฟอร์ม
+document.getElementById("statusForm")?.addEventListener("submit", function (event) {
+	let selected = document.querySelector('.status-checkbox:checked');
+	if (!selected) {
+		alert("Please select a status before submitting!");
+		event.preventDefault();
+	}
+});
+

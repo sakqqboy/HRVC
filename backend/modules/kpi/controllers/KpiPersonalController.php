@@ -423,6 +423,7 @@ class KpiPersonalController extends Controller
 			}
 			$employee = Employee::EmployeeDetail($employeeId);
 			$data = [
+				"kpiId" => $kpiId,
 				"kpiName" => $kpiDetail["kpiName"],
 				"monthName" => ModelMaster::monthEng($kpiEmployee['month'], 1),
 				"priority" => $kpiDetail["priority"],
@@ -447,6 +448,7 @@ class KpiPersonalController extends Controller
 				"remark" => $kpiEmployee["remark"],
 				"picture" => $employee["picture"],
 				"teamName" => Team::teamName($employee["teamId"]),
+				"kpiEmployee" => KpiEmployee::kpiEmployee($kpiId),
 				// "teamName" => Team::teamName($kpiEmployee["teamId"]),
 				"isOver" => ModelMaster::isOverDuedate(KpiEmployee::nextCheckDate($kpiEmployee['kpiEmployeeId']))
 			];

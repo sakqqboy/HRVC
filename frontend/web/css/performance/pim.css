@@ -1152,10 +1152,8 @@
 	border-radius: 10px;
 	position: relative;
 	color: var(--HRVC---Text-Black, #30313D);
-	z-index: 3;
-	leading-trim: both;
+	/* z-index: 3; */
 	font-family: "SF Pro Display";
-	text-edge: cap;
 	font-weight: 500;
 
 }
@@ -1191,7 +1189,7 @@
 	height: 44px;
 	border-radius: 22px;
 	padding-top: 5px;
-	z-index: 3;
+	/* z-index: 3; */
 }
 
 .pim-pic-gridNew {
@@ -1837,7 +1835,7 @@
 	transition: .4s;
 }
 
-.textbox-check {
+.textbox-check-blue {
 	display: flex;
 	padding: 16px 7px;
 	gap: 10px;
@@ -1847,6 +1845,38 @@
 	background: #FBF9FF;
 }
 
+
+.textbox-check-green {
+	display: flex;
+	padding: 16px 7px;
+	gap: 10px;
+	align-self: stretch;
+	border-radius: 4px;
+	border: 0.5px solid #2D7F06;
+	background: #E1FFD7;
+}
+
+.textbox-check-red {
+	display: flex;
+	padding: 16px 7px;
+	gap: 10px;
+	align-self: stretch;
+	border-radius: 4px;
+	border: 0.5px solid #E05757;
+	background: #FFF4F4;
+}
+
+.textbox-check-orang {
+	display: flex;
+	padding: 16px 7px;
+	gap: 10px;
+	align-self: stretch;
+	border-radius: 4px;
+	border: 0.5px solid #FFD000;
+	background: #FFF9DF;
+}
+
+
 .textbox-check-hide {
 	display: flex;
 	padding: 16px 7px;
@@ -1854,6 +1884,43 @@
 	align-self: stretch;
 	border-radius: 4px;
 	background: #DCDCDC;
+}
+
+.border-cicle {
+	display: flex;
+	padding: 6px 15px;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	flex-shrink: 0;
+	border-radius: 24.444px;
+}
+
+.mid-center {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.start-center {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.between-center {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.between-column {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+	/* ปรับให้ div เต็มพื้นที่ */
 }
 
 input:checked+.slider {
@@ -2088,6 +2155,30 @@ input:checked+.slider:before {
 
 .text-black {
 	color: var(--HRVC---Text-Black, #30313D);
+	font-family: "SF Pro Display";
+	font-style: normal;
+}
+
+.text-blue-sea {
+	color: var(--HRVC---Text-Black, #2F42ED);
+	font-family: "SF Pro Display";
+	font-style: normal;
+}
+
+.text-green {
+	color: var(--HRVC---Text-Black, #2D7F06);
+	font-family: "SF Pro Display";
+	font-style: normal;
+}
+
+.text-red {
+	color: var(--HRVC---Text-Black, #E05757);
+	font-family: "SF Pro Display";
+	font-style: normal;
+}
+
+.text-orang {
+	color: var(--HRVC---Text-Black, #DD7A01);
 	font-family: "SF Pro Display";
 	font-style: normal;
 }

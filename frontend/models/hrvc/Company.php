@@ -53,6 +53,17 @@ class Company extends \frontend\models\hrvc\master\CompanyMaster
             return '';
         }
     }
+
+    public static function companyImage($id)
+    {
+        $company = Company::find()->where(["companyId" => $id])->asArray()->one();
+        if (isset($company) && !empty($company)) {
+            return $company['picture'];
+        } else {
+            return 'images/company/profile/company.svg';
+        }
+    }
+
     public static function totalEmployeeCompany($companyId)
     {
         $employees = Employee::find()->select('employeeId')->where(["companyId" => $companyId])->asArray()->all();

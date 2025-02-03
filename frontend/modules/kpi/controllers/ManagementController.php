@@ -459,6 +459,10 @@ class ManagementController extends Controller
             }
             $role = UserRole::userRight();
             $groupId = Group::currentGroupId();
+
+            // $param = ModelMaster::decodeParams($hash);
+
+		    // $kpiId = $param["kpiId"];
             
             $api = curl_init();
             curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);

@@ -6,6 +6,8 @@ use frontend\models\hrvc\KpiHistory;
 use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
+use frontend\models\hrvc\Branch;
+use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Department;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Kpi;
@@ -653,38 +655,93 @@ class KpiTeamController extends Controller
 	public function actionPrepareUpdate()
 	{
 		$kpiTeamId = $_GET["kpiTeamId"];
+		// $param = ModelMaster::decodeParams($hash);
 		$role = UserRole::userRight();
+
+		// $kpiTeamId = $param["kpiTeamId"];
 
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-detail?kpiTeamId=' . $kpiTeamId . '&&kpiTeamHistoryId=0');
+		$kpiTeamDetail = curl_exec($api);
+		$kpiTeamDetail = json_decode($kpiTeamDetail, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiTeamDetail['kpiId'] . '&&kpiHistoryId=0');
+        $kpi = curl_exec($api);
+        $kpi = json_decode($kpi, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $kpi["companyId"]);
+		$kpiBranch = curl_exec($api);
+		$kpiBranch = json_decode($kpiBranch, true);
+		
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-department?id=' . $kpiTeamDetail['kpiId']);
+        $kpiDepartment = curl_exec($api);
+        $kpiDepartment = json_decode($kpiDepartment, true);
+			
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-team?id=' . $kpiTeamDetail['kpiId']);
 		$kpiTeam = curl_exec($api);
 		$kpiTeam = json_decode($kpiTeam, true);
+
 		curl_close($api);
-		$res["kpiTeam"] = $kpiTeam;
+
+		    $companyId = $kpi["companyId"];
+			$company= [
+				"companyId" => $kpi["companyId"],
+				"companyName" => Company::companyName($kpi["companyId"]),
+				"companyImg" => Company::companyImage($kpi["companyId"]),
+			];
+
+			$unit = Unit::find()->where(["unitId" => $kpi["unitId"]])->asArray()->one();
+			
+		// throw new exception(print_r($kpiTeamDetail	, true));
+		
 		return $this->render('kpi_from', [
-			"data" => $kpiTeam,
+			"kpi" => $kpi,
+			"data" => $kpiTeamDetail,
+			"company" => $company ?? [],  
+			"kpiBranch" => $kpiBranch ?? [],  
+			"kpiDepartment" => $kpiDepartment ?? [],
+			"kpiTeam" => $kpiTeam ?? [],
 			"role" => $role,
+			"unit"  => $unit ,
+			"kpiTeamId"  => $kpiTeamId,
 			"statusform" =>  "update"
 		]);
 	}
 	public function actionUpdateKpiTeam()
 	{
+
+		$data = [
+            'kpiTeamId' => $_POST["kpiTeamId"],
+			'targetAmount' => $_POST["amount"], 
+			'status' => $_POST["status"],   
+			'result' => $_POST["result"],
+			'month' => $_POST["month"],      
+			'year' => $_POST["year"],      
+			'toDate' => $_POST["toDate"],
+			'fromDate' => $_POST["fromDate"],
+			'nextCheckDate' => $_POST["nextCheckDate"],            
+      
+        ];
+
+		//  throw new Exception(print_r($data,true));
+
+		
 		$kpiTeamId = $_POST["kpiTeamId"];
 		$role = UserRole::userRight();
 		$status =  $_POST["status"];
 		if (isset($oldKpiTeam) && !empty($oldKpiTeam)) {
-			if (($oldKpiTeam["target"] != $_POST["targetAmount"]) && $role == 3) {
+			if (($oldKpiTeam["target"] != $_POST["amount"]) && $role == 3) {
 				$status = 88;
 			}
 		}
 		$kpiTeamHistory = new KpiTeamHistory();
 		$kpiTeamHistory->kpiTeamId = $kpiTeamId;
 		$kpiTeamHistory->result = str_replace(",", "",  $_POST["result"]); 
-		if (isset($_POST["targetAmount"])) {
-			$kpiTeamHistory->target = str_replace(",", "",  $_POST["targetAmount"]);
+		if (isset($_POST["amount"])) {
+			$kpiTeamHistory->target = str_replace(",", "",  $_POST["amount"]);
 		} else {
 			$teamKpi = KpiTeam::find()->where(["kpiTeamId" => $kpiTeamId])->one();
 			$kpiTeamHistory->target = str_replace(",", "",   $teamKpi["target"]);
@@ -696,8 +753,8 @@ class KpiTeamController extends Controller
 		$kpiTeamHistory->toDate = $_POST["toDate"];
 		$kpiTeamHistory->month = $_POST["month"];
 		$kpiTeamHistory->year = $_POST["year"];
-		$kpiTeamHistory->nextCheckDate = $_POST["nextDate"];
-		$kpiTeamHistory->detail = $_POST["remark"];
+		$kpiTeamHistory->nextCheckDate = $_POST["nextCheckDate"];
+		// $kpiTeamHistory->detail = $_POST["remark"];
 		$kpiTeamHistory->createrId = Yii::$app->user->id;
 		$kpiTeamHistory->createDateTime = new Expression('NOW()');
 		$kpiTeamHistory->updateDateTime = new Expression('NOW()');
@@ -707,16 +764,18 @@ class KpiTeamController extends Controller
 			$teamkpi->month = $_POST["month"];
 			$teamkpi->year = $_POST["year"];
 			$teamkpi->result = str_replace(",", "",  $_POST["result"]); 
-			if (isset($_POST["targetAmount"])) {
-				$teamkpi->target = str_replace(",", "",  $_POST["targetAmount"]);
+			if (isset($_POST["amount"])) {
+				$teamkpi->target = str_replace(",", "",  $_POST["amount"]);
 			}
 			$teamkpi->fromDate = $_POST["fromDate"];
 			$teamkpi->toDate = $_POST["toDate"];
-			$teamkpi->nextCheckDate = $_POST["nextDate"];
+			$teamkpi->nextCheckDate = $_POST["nextCheckDate"];
 			$teamkpi->updateDateTime = new Expression('NOW()');
 			$teamkpi->save(false);
 		}
-		return $this->redirect(Yii::$app->request->referrer);
+		// return $this->redirect(Yii::$app->request->referrer);
+		return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
+
 		//return $this->redirect('team-kpi');
 	}
 	public function actionKpiTeam()
