@@ -838,12 +838,12 @@ select.form-select option:disabled {
 <script>
 $(document).ready(function() {
     let isSubmitting = false; // ป้องกัน submit ซ้ำ
-    $("#create-kgi").on("beforeSubmit", function(event) {
+    $("#create-kpi").on("beforeSubmit", function(event) {
         if (isSubmitting) {
             return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
         }
         isSubmitting = true;
-        if (!validateFormKgi()) {
+        if (!validateFormKpi()) {
             isSubmitting = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
             return false;
         }
