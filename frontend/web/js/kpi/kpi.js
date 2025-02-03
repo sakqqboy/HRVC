@@ -109,8 +109,8 @@ function validateFormKpi(event) {
 		return false;
 	}
 
-	document.getElementById('create-kpi').submit(); // ส่งฟอร์มหากข้อมูลครบถ้วน
-	// alert("0");
+	// document.getElementById('create-kpi').submit(); // ส่งฟอร์มหากข้อมูลครบถ้วน
+	alert("0");
 	return true;
 }
 function companyMultiBrachKpi() {
@@ -218,8 +218,9 @@ function changeTargetKpiTeamReason(kpiTeamHistoryId) {
 
 document.getElementById('check2').addEventListener('change', function () {
 	const check1 = document.getElementById('check1');
-	const textboxDiv = document.querySelector('.textbox-check-hide') || document.querySelector(
-		'.textbox-check-green');
+	// const textboxDiv = document.querySelector('.textbox-check-hide') || document.querySelector(
+	// 	'.textbox-check-green');
+	const textboxDiv = document.getElementById('textbox-check-completed');
 	const borderCicleDiv = document.getElementById('border-cicle-completed'); // ใช้ ID แทน
 	const textgreen = document.getElementById('text-green'); // ใช้ ID แทน
 
@@ -245,6 +246,7 @@ document.getElementById('check2').addEventListener('change', function () {
 		}
 
 	} else {
+		// alert("2"); // แสดง Alert เมื่อกดเลือก check2
 		check1.style.display = 'inline-block'; // แสดง check1 กลับมา
 		textgreen.classList.add('text-green');
 
@@ -266,7 +268,58 @@ document.getElementById('check2').addEventListener('change', function () {
 	}
 });
 
+document.getElementById('check1').addEventListener('change', function () {
+	const textboxDiv = document.getElementById('textbox-check-progress');
+	const borderCicleDiv = document.getElementById('border-cicle-progress');
+	const textblue = document.getElementById('text-blue'); // ใช้ ID แทน
 
+	if (this.checked) {
+		if (textboxDiv) {
+			// alert("1");
+			textboxDiv.classList.remove('textbox-check-hide');
+			textboxDiv.classList.add('textbox-check-blue');
+		}
+
+		if (borderCicleDiv) {
+			// alert("1");
+			borderCicleDiv.classList.remove('text-black');
+			borderCicleDiv.classList.add('text-blue-sea');
+			borderCicleDiv.style.border = '0.5px solid #2F42ED'; // เปลี่ยนสี border
+		}
+		if (textblue) {
+			textblue.classList.remove('text-black');
+			textblue.classList.add('text-blue-sea'); // เปลี่ยนสีข้อความ
+		}
+
+	} else {
+		// alert("2"); // แสดง Alert เมื่อกดเลือก check1
+		textblue.classList.add('text-blue-sea');
+
+		if (textboxDiv) {
+			textboxDiv.classList.remove('textbox-check-blue');
+			textboxDiv.classList.add('textbox-check-hide');
+		}
+
+		if (borderCicleDiv) {
+			borderCicleDiv.classList.remove('text-blue-sea');
+			borderCicleDiv.classList.add('text-black');
+			borderCicleDiv.style.border = '0.5px solid #30313D'; // กลับไปเป็นสีเดิม
+		}
+
+		if (textblue) {
+			textblue.classList.remove('text-blue-sea');
+			textblue.classList.add('text-black'); // เปลี่ยนกลับเป็นสีดำ
+		}
+	}
+});
+
+
+// ฟังก์ชันเปลี่ยนสีของ placeholder เมื่อมีการเลือกค่า
+function updatePlaceholderColor(selector) {
+	$(selector).on('change', function () {
+		$(this).css('color', $(this).val() !== "" ? '#30313D' : 'var(--Helper-Text-Gray, #8A8A8A)');
+	});
+}
 // ตรวจสอบค่าก่อนส่งฟอร์ม
 document.getElementById("statusForm")?.addEventListener("submit", function (event) {
 	let selected = document.querySelector('.status-checkbox:checked');

@@ -21,7 +21,7 @@ function deleteKpiEmployee() {
 		data: { kpiEmployeeId: kpiEmployeeId },
 		success: function (data) {
 			if (data.status) {
-				$("#delete-kpi-personal").modal("hide");
+				$("#delete-kpi-employee").modal("hide");
 				$("#kpi-employee-" + kpiEmployeeId).hide();
 			}
 		}

@@ -263,9 +263,9 @@ class ManagementController extends Controller
                     $this->saveKpiTeam($_POST["team"], $kpiId);
                 }
 
-                return $this->redirect(Yii::$app->homeUrl . 'kgi/assign/assign/' . ModelMaster::encodeParams(["kgiId" => $kpiId, "companyId" => $_POST["companyId"]]));
+                // return $this->redirect(Yii::$app->homeUrl . 'kpi/assign/assign/' . ModelMaster::encodeParams(["kgiId" => $kpiId, "companyId" => $_POST["companyId"]]));
 
-                // return $this->redirect(Yii::$app->homeUrl . 'kpi/management/grid');
+                return $this->redirect(Yii::$app->homeUrl . 'kpi/management/grid');
 
                 //return $this->redirect(Yii::$app->request->referrer);
                 // return $this->redirect(Yii::$app->homeUrl . 'kpi/assign/assign/' . ModelMaster::encodeParams(["kpiId" => $kpiId, "companyId" => $_POST["companyId"]]));
@@ -810,6 +810,8 @@ class ManagementController extends Controller
             "history" => $history,
             "historyTeam" => $historyTeam
         ];
+
+                // throw new Exception(print_r($data,true));
 
         
     

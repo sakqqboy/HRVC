@@ -536,6 +536,8 @@ class KpiPersonalController extends Controller
 		$role = UserRole::userRight();
 
 		$kpiEmployeeId = $param["kpiEmployeeId"];
+		// throw new exception($kpiEmployeeId	);	
+
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -543,22 +545,42 @@ class KpiPersonalController extends Controller
 		$kpiEmployeeDetail = curl_exec($api);
 		$kpiEmployeeDetail = json_decode($kpiEmployeeDetail, true);
 
+		// เช็คว่าค่าที่ได้มาถูกต้องไหม
+		if (!$kpiEmployeeDetail || !isset($kpiEmployeeDetail['kpiId'])) {
+			return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
+		}
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiEmployeeDetail['kpiId'] . '&&kpiHistoryId=0');
-        $kpi = curl_exec($api);
-        $kpi = json_decode($kpi, true);
+		$kpi = curl_exec($api);
+		$kpi = json_decode($kpi, true);
+
+		if (!$kpi || !isset($kpi["companyId"])) {
+			return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
+		}
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $kpi["companyId"]);
 		$kpiBranch = curl_exec($api);
 		$kpiBranch = json_decode($kpiBranch, true);
-		
+
+		if (!$kpiBranch) {
+			return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
+		}
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-department?id=' . $kpiEmployeeDetail['kpiId']);
-        $kpiDepartment = curl_exec($api);
-        $kpiDepartment = json_decode($kpiDepartment, true);
-			
+		$kpiDepartment = curl_exec($api);
+		$kpiDepartment = json_decode($kpiDepartment, true);
+
+		if (!$kpiDepartment) {
+			return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
+		}
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-team?id=' . $kpiEmployeeDetail['kpiId']);
 		$kpiTeam = curl_exec($api);
 		$kpiTeam = json_decode($kpiTeam, true);
 
+		if (!$kpiTeam) {
+			return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
+		}
 
 		curl_close($api);
 		$companyId = $kpi["companyId"];
@@ -567,7 +589,8 @@ class KpiPersonalController extends Controller
 				"companyName" => Company::companyName($kpi["companyId"]),
 				"companyImg" => Company::companyImage($kpi["companyId"]),
 			];
-		// throw new exception(print_r($kpiEmployeeDetail	, true));
+		// throw new exception(print_r($kpiEmployeeDetail	, true));	
+		
 
 		$unit = Unit::find()->where(["unitId" => $kpi["unitId"]])->asArray()->one();
 		$months = ModelMaster::monthFull(1);
@@ -592,6 +615,23 @@ class KpiPersonalController extends Controller
 	}
 	public function actionSaveUpdatePersonalKpi()
 	{
+
+		$data = [
+            'kpiEmployeeId' => $_POST["kpiEmployeeId"],
+			'targetAmount' => $_POST["amount"], 
+			'status' => $_POST["status"],   
+			'result' => $_POST["result"],
+			'month' => $_POST["month"],      
+			'year' => $_POST["year"],      
+			'toDate' => $_POST["toDate"],
+			'fromDate' => $_POST["fromDate"],
+			'nextCheckDate' => $_POST["nextCheckDate"],            
+      
+        ];
+
+				// throw new exception(print_r($data	, true));	
+
+		
 		if (isset($_POST["kpiEmployeeId"])) {
 			$history = KpiEmployeeHistory::find()
 				->where(["kpiEmployeeId" => $_POST["kpiEmployeeId"]])
@@ -608,11 +648,11 @@ class KpiPersonalController extends Controller
 					$nextCheckDate = Null;
 				}
 				$lastCheck = $history->nextCheckDate;
-				if ($history->target == str_replace(",", "", $_POST["target"]) && $history->result == str_replace(",", "", $_POST["result"]) && $nextCheckDate == $_POST["nextCheckDate"]) {
+				if ($history->target == str_replace(",", "", $_POST["amount"]) && $history->result == str_replace(",", "", $_POST["result"]) && $nextCheckDate == $_POST["nextCheckDate"]) {
 					$history->status = $_POST["status"];
 					$history->updateDateTime = new Expression('NOW()');
 				} else {
-					if ($history->target != str_replace(",", "", $_POST["target"]) && $history->target != null) {
+					if ($history->target != str_replace(",", "", $_POST["amount"]) && $history->target != null) {
 						$role = UserRole::userRight();
 						if ($role <= 3) {
 							$status = 88;
@@ -625,12 +665,14 @@ class KpiPersonalController extends Controller
 						$history = new KpiEmployeeHistory();
 					}
 					$history->kpiEmployeeId = $_POST["kpiEmployeeId"];
-					$history->target = str_replace(",", "", $_POST["target"]);
+					$history->target = str_replace(",", "", $_POST["amount"]);
 					$history->result = str_replace(",", "", $_POST["result"]);
-					$history->detail = $_POST["detail"];
+					// $history->detail = $_POST["detail"];
 					$history->month = $_POST["month"];
 					$history->year = $_POST["year"];
-					$history->nextCheckDate = $_POST["nextCheckDate"] . ' 00:00:00';
+					$history->toDate = $_POST["toDate"];
+					$history->fromDate = $_POST["fromDate"];
+					$history->nextCheckDate = $_POST["nextCheckDate"];
 					$history->lastCheckDate = $lastCheck;
 					$history->status = $status;
 					$history->createDateTime = new Expression('NOW()');
@@ -639,12 +681,14 @@ class KpiPersonalController extends Controller
 			} else {
 				$history = new KpiEmployeeHistory();
 				$history->kpiEmployeeId = $_POST["kpiEmployeeId"];
-				$history->target = str_replace(",", "", $_POST["target"]);
+				$history->target = str_replace(",", "", $_POST["amount"]);
 				$history->result = str_replace(",", "", $_POST["result"]);
 				$history->detail = $_POST["detail"];
 				$history->month = $_POST["month"];
 				$history->year = $_POST["year"];
-				$history->nextCheckDate = $_POST["nextCheckDate"] . ' 00:00:00';
+				$history->toDate = $_POST["toDate"];
+				$history->fromDate = $_POST["fromDate"];
+				$history->nextCheckDate = $_POST["nextCheckDate"];
 				$history->status = $_POST["status"];
 				$history->createDateTime = new Expression('NOW()');
 				$history->updateDateTime = new Expression('NOW()');
@@ -653,7 +697,7 @@ class KpiPersonalController extends Controller
 				->where(["kpiEmployeeId" => $_POST["kpiEmployeeId"]])
 				->one();
 			if ($status != 88) {
-				$kpiEmployee->target = $_POST["target"];
+				$kpiEmployee->target = $_POST["amount"];
 				$kpiEmployee->result = $_POST["result"];
 			} else {
 				$kpiEmployee->status = 1;
@@ -665,16 +709,68 @@ class KpiPersonalController extends Controller
 			$history->createrId = Yii::$app->user->id;
 			if ($history->save(false)) {
 
-				if ($_POST["url"] != Yii::$app->request->referrer) {
-					return $this->redirect($_POST["url"]);
-				} else {
-					return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
-				}
+				// if ($_POST["url"] != Yii::$app->request->referrer) {
+				// 	return $this->redirect($_POST["url"]);
+				// } else {
+				// 	return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
+				// }
+				return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
+
 			}
 		} else {
 			return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
 		}
 	}
+
+	public function actionModalHistory()
+    {	
+        $percentage = $_POST["percentage"];
+        $result = $_POST["result"];
+        $sumvalue = $_POST["sumvalue"];
+        $targetAmount = $_POST["targetAmount"];
+        $kpiId = $_POST["kpiId"];
+        $month = $_POST["month"];
+        $year = $_POST["year"];
+        $formattedRange = $_POST["formattedRange"];
+        $kpiEmployeeId = $_POST["kpiEmployeeId"];;
+		$kpiEmployeeHistoryId = $_POST["kpiEmployeeHistoryId"];
+
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/kpi-history?kpiId=' . $kpiId . '&&kpiEmployeeId=' . $kpiEmployeeId . '&&kpiEmployeeHistoryId=' . $kpiEmployeeHistoryId);
+		$history = curl_exec($api);
+		$history = json_decode($history, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-history-team?kpiId=' . $kpiId );
+		$historyTeam = curl_exec($api);
+		$historyTeam = json_decode($historyTeam, true);
+
+		curl_close($api);
+        // throw new Exception(print_r($history,true));
+
+        $data = [
+            "percentage" => $percentage,
+            "result" => $result,
+            "sumvalue" => $sumvalue,
+            "targetAmount" => $targetAmount,
+            "kpiId" => $kpiId,
+            "month" => $month,
+            "year" => $year,
+            "formattedRange" => $formattedRange,
+            "history" => $history,
+            "historyTeam" => $historyTeam
+        ];
+
+                // throw new Exception(print_r($data,true));
+
+        
+    
+        header("Content-Type: application/json");
+        echo json_encode($data);
+        exit;
+    }
 	public function actionViewPersonalKpi($hash)
 	{
 		$param = ModelMaster::decodeParams($hash);
