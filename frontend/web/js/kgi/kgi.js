@@ -54,24 +54,55 @@ function checkAllBranch() {
 		$("#show-multi-team").html('');
 	}
 }
-function validateFormKgi(event) {
-	event.preventDefault(); // ป้องกันการส่งฟอร์มก่อนการตรวจสอบ
+function validateFormKgi() {
+//	event.preventDefault(); // ป้องกันการส่งฟอร์มก่อนการตรวจสอบ
+	console.log("validateFormKgi called");
+	var multiBranch = [];
+	var multiDepartment = [];
+	var multiTeam = [];
+	var i = 0;
+	$("#multi-check:checked").each(function () {
+		multiBranch[i] = $(this).val();
+		i++;
+	});
+	var a = 0;
+	$(".multi-check-department:checked").each(function () {
+		multiDepartment[a] = $(this).val();
+		a++;
+	});
+	var b = 0;
+	$(".multi-check-team:checked").each(function () {
+		multiTeam[b] = $(this).val();
+		b++;
+	});
 	var fromDate = document.getElementById('fromDate').value.trim();
 	var toDate = document.getElementById('toDate').value.trim();
-	if (!fromDate && !toDate) {
-		alert("กรุณาระบุวันที่เริ่มต้นและวันที่สิ้นสุด");
-		return false;
-	} else if (!fromDate) {
-		alert("กรุณาระบุวันที่เริ่มต้น");
-		return false;
-	} else if (!toDate) {
-		alert("กรุณาระบุวันที่สิ้นสุด");
+	var nextDate = $('#nextDate').val();
+	if (multiBranch.length == 0) {
+		alert("Please select at least one branch!");
 		return false;
 	}
-
-	$('#create-kgi').submit();
-	// alert("0");
-	return true;
+	else if (multiDepartment.length == 0) {
+		alert("Please select at least one department!");
+		return false;
+	} else if (multiTeam.length == 0) {
+		alert("Please select at least one team!");
+		return false;
+	} else if (!fromDate && !toDate) {
+		alert("Please fill in Due Term");
+		return false;
+	} else if (!fromDate) {
+		alert("Please fill in Start Date");
+		return false;
+	} else if (!toDate) {
+		alert("Please fill in End Date");
+		return false;
+	} else if (nextDate == '') {
+		alert("Please fill in Target Due Update Date");
+		return false;
+	} else {
+		return true;
+	}
 }
 function totalBranch() {
 	var totalBranch = 0;

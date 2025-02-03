@@ -12,10 +12,12 @@ if ($statusform == 'update') {
 $this->title = $title;
 $form = ActiveForm::begin([
 	'id' => 'create-kgi',
+	//'enableClientValidation' => false, // ปิด validation ฝั่ง client
+	//'enableAjaxValidation' => false,
 	'method' => 'post',
 	'options' => [
 		'enctype' => 'multipart/form-data',
-		'onsubmit' => 'return validateFormKgi(event)' // เรียกฟังก์ชันตรวจสอบก่อนส่งฟอร์ม
+		//'onsubmit' => 'return validateFormKgi(event)' // เรียกฟังก์ชันตรวจสอบก่อนส่งฟอร์ม
 	],
 	'action' => Yii::$app->homeUrl . $parturl
 ]);
@@ -99,12 +101,6 @@ $DueBehind = $targetAmount -  $result;
 
 <!-- ลิงก์ไปยัง JS ของ flatpickr -->
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
-<link rel="stylesheet" href="<?= Yii::$app->homeUrl ?>assets/bootstrap4/css/bootstrap.min.css">
-<script src="<?= Yii::$app->homeUrl ?>assets/bootstrap4/js/jquery.min.js"></script>
-<script src="<?= Yii::$app->homeUrl ?>assets/bootstrap4/js/bootstrap.bundle.min.js"></script>
-
-
 <div class="contrainer-body">
 	<div class="col-12">
 		<img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
@@ -196,10 +192,9 @@ $DueBehind = $targetAmount -  $result;
 								data-placement="top"
 								title="<?= Yii::t('app', 'Enter the name of your key Performance indicator. This should be clear and specific, such as Number of customer Visits or Number of Cold calls to client') ?>">
 						</label>
-						<input type="text" class="form-control" id="kpiName" name="kgiName"
+						<input type="text" class="form-control" id="kgiName" name="kgiName"
 							value="<?= isset($data['kpiName']) ? htmlspecialchars($data['kpiName']) : '' ?>"
 							placeholder="Please Write the Name of Component" required>
-
 					</div>
 
 					<div class="form-group mt-37"
@@ -213,7 +208,7 @@ $DueBehind = $targetAmount -  $result;
 								alt="Help Icon">
 						</label>
 						<select class="form-select" name="companyId" id="companyId"
-							onchange="javascript:companyMultiBrachKpi()" required>
+							onchange="javascript:companyMultiBrach()" required>
 							<option value=""><?= Yii::t('app', 'Select Company') ?></option>
 							<?php
 							if (isset($companies) && count($companies) > 0) {
@@ -809,7 +804,7 @@ $DueBehind = $targetAmount -  $result;
 							<input type="hidden" name="status" value='1'>
 						<?php } ?>
 						<a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="btn-create-cancle"
-							style="width: 100px;">
+							style="width: 100px;text-decoration:none;">
 							<?= Yii::t('app', 'Cancel') ?>
 						</a>
 						<?php
@@ -845,11 +840,10 @@ $DueBehind = $targetAmount -  $result;
 	<input type="hidden" value="create" id="acType">
 <?php } ?>
 <?php ActiveForm::end(); ?>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 	$(document).ready(function() {
 		var statusform = '<?= $statusform ?>';
-		// alert(statusform);
-
 		if (statusform === 'update') {
 			branchMultiDepartmentUpdateKpi();
 
@@ -882,5 +876,17 @@ $DueBehind = $targetAmount -  $result;
 
 		$('[data-toggle="tooltip"]').tooltip(); // เปิดใช้งาน Tooltip
 
+		let isSubmitting = false; // ป้องกัน submit ซ้ำ
+		$("#create-kgi").on("beforeSubmit", function(event) {
+			if (isSubmitting) {
+				return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
+			}
+			isSubmitting = true;
+			if (!validateFormKgi()) {
+				isSubmitting = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
+				return false;
+			}
+			return true; // ถ้า validation ผ่าน ให้ submit ฟอร์มต่อไป
+		});
 	});
 </script>
