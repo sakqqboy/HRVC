@@ -132,6 +132,7 @@ return [
                 'kfi/management/kfi-kgi/<hash>' => 'kfi/management/kfi-kgi',
                 'kfi/management/assign-kgi/<hash>' => 'kfi/management/assign-kgi',
                 'kfi/management/kfi-detail/<hash>' => 'kfi/management/kfi-detail',
+                'kfi/management/update-kfi/<hash>' => 'kfi/management/update-kfi',
                 'kfi/assign/assign/<hash>' => 'kfi/assign/assign',
                 'kfi/view/index/<hash>' => 'kfi/view/index',
                 'kfi/view/kfi-history/<hash>' => 'kfi/view/kfi-history',

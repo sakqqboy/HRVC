@@ -424,18 +424,13 @@ class ManagementController extends Controller
 			// return $this->redirect('grid');
 		}
 	}
-	public function actionUpdateKfi()
+	public function actionUpdateKfi($hash)
 {
-	$kfiId = Yii::$app->request->get("kfiId");
+	$param = ModelMaster::decodeParams($hash);
 
-	// if (!$kfiId || !is_numeric($kfiId)) {
-	// 	throw new Exception("Invalid KFI ID.");
-	// }else{
-	// 	throw new Exception($kfiId);
-	// }
-	
-    if (Yii::$app->request->isGet) {
-		$kfiId = Yii::$app->request->get("kfiId");
+	$kfiId = $param["kfiId"];
+	$kfiHistoryId = $param["kfiHistoryId"];
+
 	
 		if (!$kfiId || !is_numeric($kfiId)) {
 			throw new Exception("Invalid KFI ID.");
@@ -511,9 +506,7 @@ class ManagementController extends Controller
 			"kfiId" => $kfiId,
 			"statusform" =>  "update"
 		]);
-	} else {
-		throw new Exception("Invalid request, KFI ID is missing. GET Data: " . json_encode($_GET));
-	}
+
 	
 }
 
