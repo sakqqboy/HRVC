@@ -345,7 +345,7 @@ class KpiPersonalController extends Controller
 			// return json_encode(print_r($employee,true));
 			$data = [
 				"kpiId" => $kpiId,
-				// "kpiEmployeeHistoryId" => $kpiEmployee["kpiEmployeeHistoryId"],
+				"kpiEmployeeHistoryId" => !empty($kpiEmployee["kpiEmployeeHistoryId"]) ? $kpiEmployee["kpiEmployeeHistoryId"] : 0,
 				"kpiName" => $kpiDetail["kpiName"],
 				"monthName" => ModelMaster::monthEng($kpiEmployee['month'], 1),
 				"priority" => $kpiDetail["priority"],

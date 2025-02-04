@@ -530,7 +530,7 @@ class KpiTeamController extends Controller
 				$ratio = 0;
 			}
 			$data = [
-				// "kpiTeamHistoryId" => $kpiTeamHistory["kpiTeamHistoryId"],
+				"kpiTeamHistoryId" =>  !empty($kpiTeamHistory["kpiTeamHistoryId"]) ? $kpiTeamHistory["kpiTeamHistoryId"] : 0,
 				"kpiName" => $kpiTeamHistory["kpiName"],
 				"kpiId" => $kpiTeamHistory["kpiId"],
 				"priority" => $kpiTeamHistory["priority"],

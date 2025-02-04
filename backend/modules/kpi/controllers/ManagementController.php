@@ -146,7 +146,7 @@ class ManagementController extends Controller
 				"branch" => KpiBranch::kpiBranch($kpi["kpiId"]),
 				"sumresult" => KpiTeam::autoSummalys($kpi["kpiId"]),
 				"detail" => $kpiHistory['description'],
-				"kpiHistoryId" => $kpiHistory['kpiHistoryId'],
+				"kpiHistoryId" => !empty($kpiHistory['kpiHistoryId']) ? $kpiHistory['kpiHistoryId'] : 0,
 				"quantRatio" => $kpiHistory["quantRatio"],
 				"targetAmount" => $kpiHistory["targetAmount"],
 				"creater" => User::employeeNameByuserId($kpiHistory["createrId"]),

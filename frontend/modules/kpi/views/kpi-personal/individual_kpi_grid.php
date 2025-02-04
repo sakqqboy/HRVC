@@ -508,7 +508,8 @@ $this->title = "INDIVIDUAL KPI";
                                                     if ($colorFormat == 'disable'  && $canEdit == 1) {
                                                     ?>
                                             <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/update-personal-kpi/<?= ModelMaster::encodeParams(['kpiEmployeeId' => $kpiEmployeeId,'kpiHistoryId' => 0]) ?>"
-                                                class="no-underline">
+                                                style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; width: 82px; height: 30px; gap: 6px; flex-shrink: 0;"
+                                                class="pim-btn-setup">
                                                 <div class="pim-btn-setup">
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
                                                         class="mb-2" style="width: 12px; height: 12px;">
@@ -519,7 +520,8 @@ $this->title = "INDIVIDUAL KPI";
                                                     } else if ($canEdit == 1) {
                                                     ?>
                                             <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/update-personal-kpi/<?= ModelMaster::encodeParams(['kpiEmployeeId' => $kpiEmployeeId,'kpiHistoryId' => 0]) ?>"
-                                                class="no-underline">
+                                                style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; width: 82px; height: 30px; gap: 6px; flex-shrink: 0;"
+                                                class="pim-btn-<?= $colorFormat ?>">
                                                 <div class="pim-btn-<?= $colorFormat ?>">
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
                                                         class="mb-2" style="width: 12px; height: 12px;">
