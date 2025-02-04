@@ -549,12 +549,12 @@ $this->title = "TEAM KPI";
                                             <?= $kpi['nextCheckDate'] == "" ? Yii::t('app', 'Not set') : $kpi['nextCheckDate'] ?>
                                         </div>
                                     </div>
-                                    <div class="col-4 text-center mt-10 pt-6">
+                                    <div class="col-4 text-center mt-10">
                                         <?php
                                                 if ($colorFormat == 'disable' && $role >= 5) {
                                                 ?>
                                         <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/prepare-update/<?= ModelMaster::encodeParams(['kpiTeamId' => $kpiTeamId,'kpiHistoryId' => 0]) ?>"
-                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; width: 82px; height: 30px; gap: 6px; flex-shrink: 0;"
+                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px;  height: 30px; gap: 6px; flex-shrink: 0;"
                                             class="pim-btn-setup">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
                                                 class="mb-2" style="width: 12px; height: 12px;">
@@ -564,7 +564,7 @@ $this->title = "TEAM KPI";
                                                 } else if ($role >= 5) {
                                                 ?>
                                         <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/prepare-update/<?= ModelMaster::encodeParams(['kpiTeamId' => $kpiTeamId,'kpiHistoryId' => 0]) ?>"
-                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; width: 82px; height: 30px; gap: 6px; flex-shrink: 0;"
+                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; height: 30px; gap: 6px; flex-shrink: 0;"
                                             class="pim-btn-<?= $colorFormat ?>">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
                                                 class="mb-2" style="width: 12px; height: 12px;">
