@@ -1258,22 +1258,34 @@ flatpickr("#endDatePicker", {
 
 
 
-function validateFormKfi() {
+function validateFormKfi(acType) {
     //	event.preventDefault(); // ป้องกันการส่งฟอร์มก่อนการตรวจสอบ
     console.log("validateFormKgi called");
     var multiBranch = [];
     var multiDepartment = [];
     var multiTeam = [];
     var i = 0;
-    $("#multi-check:checked").each(function () {
-        multiBranch[i] = $(this).val();
-        i++;
-    });
-    var a = 0;
-    $(".multi-check-department:checked").each(function () {
-        multiDepartment[a] = $(this).val();
-        a++;
-    });
+    if (acType != 'update') {
+        $("#multi-check:checked").each(function () {
+            multiBranch[i] = $(this).val();
+            i++;
+        });
+        var a = 0;
+        $(".multi-check-department:checked").each(function () {
+            multiDepartment[a] = $(this).val();
+            a++;
+        });
+    } else {
+        $("#multi-check-update:checked").each(function () {
+            multiBranch[i] = $(this).val();
+            i++;
+        });
+        var a = 0;
+        $(".multi-check-department-update:checked").each(function () {
+            multiDepartment[a] = $(this).val();
+            a++;
+        });
+    }
 
     var fromDate = document.getElementById('fromDate').value.trim();
     var toDate = document.getElementById('toDate').value.trim();

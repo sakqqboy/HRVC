@@ -2,15 +2,9 @@
 
 use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
-// if ($statusform == 'update') {
-//     $parturl = 'kpi/management/update-kpi';
-// } else {
-//     $parturl = 'kpi/management/create-kpi';
-// }
-    $parturl = 'kpi/kpi-team/update-kpi-team';
-?>
+$parturl = 'kpi/kpi-team/update-kpi-team';
 
-<?php $form = ActiveForm::begin([
+$form = ActiveForm::begin([
     'id' => 'create-kpi',
     'method' => 'post',
     'options' => [

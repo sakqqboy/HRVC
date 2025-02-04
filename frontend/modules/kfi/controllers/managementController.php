@@ -330,7 +330,7 @@ class ManagementController extends Controller
 		}
 		
 	}
-	public function actionSaveUpdateKfi($hash)
+	public function actionSaveUpdateKfi()
 	{
 		$data = [
 					'kfiName' => $_POST["kfiName"],  
@@ -343,7 +343,7 @@ class ManagementController extends Controller
 					'detail' => $_POST["detail"],
 					'amountType' => $_POST["amountType"],
 					'code' => $_POST["code"],
-					'quanRatio' => $_POST["quanRatio"],  
+					'quantRatio' => $_POST["quantRatio"],  
 					'nextCheckDate' => $_POST["nextCheckDate"],
 					'fromDate' => $_POST["fromDate"],
 					'toDate' => $_POST["toDate"],
@@ -354,7 +354,7 @@ class ManagementController extends Controller
 
 				// throw new Exception(print_r($data,true));
 
-		$param = ModelMaster::decodeParams($hash);
+		// $param = ModelMaster::decodeParams($hash);
 
 		$isManager = UserRole::isManager();
 		if (isset($_POST["kfiId"])) {
@@ -385,7 +385,7 @@ class ManagementController extends Controller
 			$kfiHistory->amountType = $_POST["amountType"];
 			$kfiHistory->code = $_POST["code"];
 			$kfiHistory->status = $_POST["status"];
-			$kfiHistory->quantRatio = $_POST["quanRatio"];
+			$kfiHistory->quantRatio = $_POST["quantRatio"];
 			$kfiHistory->historyStatus = $_POST["status"];
 			if ($isManager == 1) {
 				$kfiHistory->target =  str_replace(",", "", $_POST["amount"]);

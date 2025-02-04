@@ -11,8 +11,7 @@ if ($statusform == 'update') {
     'id' => 'create-kfi',
     'method' => 'post',
     'options' => [
-        'enctype' => 'multipart/form-data',
-        'onsubmit' => 'return validateFormKfi(event)' // เรียกฟังก์ชันตรวจสอบก่อนส่งฟอร์ม
+        'enctype' => 'multipart/form-data'
     ],
     'action' => Yii::$app->homeUrl . $parturl
 ]); 
@@ -610,22 +609,8 @@ select.form-select option:disabled {
 
                         <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
                             <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-                                <!-- <label class="switch">
-                                        <input type="checkbox">
-                                        <span class="slider round"></span>
-                                    </label>
-                                    <label class="sub-manage-create" id="branch-selected-message">
-                                        Historic Update
-                                    </label> -->
                             </div>
                             <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-                                <!-- <label class="switch">
-                                        <input type="checkbox">
-                                        <span class="slider round"></span>
-                                    </label>
-                                    <label class="sub-manage-create" id="branch-selected-message">
-                                        Override
-                                    </label> -->
                             </div>
                         </div>
                     </div>
@@ -759,13 +744,14 @@ $(document).ready(function() {
 
     $('[data-toggle="tooltip"]').tooltip(); // เปิดใช้งาน Tooltip
 
+    var acType = document.getElementById('acType').value
     let isSubmitting = false; // ป้องกัน submit ซ้ำ
     $("#create-kfi").on("beforeSubmit", function(event) {
         if (isSubmitting) {
             return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
         }
         isSubmitting = true;
-        if (!validateFormKfi()) {
+        if (!validateFormKfi(acType)) {
             isSubmitting = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
             return false;
         }
