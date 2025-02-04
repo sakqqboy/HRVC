@@ -1420,6 +1420,7 @@ function updateIcon(input) {
 
 function updateResultValue(inputElement) {
     // นำค่าที่กรอกใน result-update ไปใส่ใน result-cheng
+    // alert(inputElement.value);
     const resultValue = inputElement.value;
     const resultCheng = document.getElementById('result-cheng');
     resultCheng.value = resultValue;

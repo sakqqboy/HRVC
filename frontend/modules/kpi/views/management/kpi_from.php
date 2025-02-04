@@ -710,11 +710,11 @@ select.form-select option:disabled {
                                     src="<?= Yii::$app->homeUrl ?>image/result-<?= isset($data['result']) ? 'blue' : 'gray' ?>.svg"
                                     alt="LinkedIn" style="width: 30px; height: 30px;">
                             </span>
-                            <input type="number" class="form-control text-end" name="result" id="result-update"
+                            <input type="number" class="form-control text-end" name="resultValue" id="result-update"
                                 value="<?= isset($data['result']) ? $data['result'] : '' ?>"
                                 style="border-left: none; font-size: 22px; font-style: normal; font-weight: 600;"
                                 required oninput="updateIcon(this),updateResultValue(this)">
-                            <input type="hidden" name="resultValue" id="result-cheng"
+                            <input type="hidden" name="result" id="result-cheng"
                                 value="<?= isset($data['result']) ? $data['result'] : '' ?>">
                         </div>
 
