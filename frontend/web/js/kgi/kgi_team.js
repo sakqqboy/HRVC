@@ -193,6 +193,33 @@ function checkKgiTeam(teamId, kgiId) {
         }
     });
 }
+function validateFormKpiTeam() {
+    //	event.preventDefault(); // ป้องกันการส่งฟอร์มก่อนการตรวจสอบ
+    var check1 = document.getElementById('check1').checked;
+    var check2 = document.getElementById('check2').checked;
+    console.log("validateFormKgi called");
+    var fromDate = document.getElementById('fromDate').value.trim();
+    var toDate = document.getElementById('toDate').value.trim();
+    var nextDate = $('#nextDate').val();
+    if (!fromDate && !toDate) {
+        alert("Please fill in Due Term");
+        return false;
+    } else if (!fromDate) {
+        alert("Please fill in Start Date");
+        return false;
+    } else if (!toDate) {
+        alert("Please fill in End Date");
+        return false;
+    } else if (nextDate == '') {
+        alert("Please fill in Target Due Update Date");
+        return false;
+    } else if (!check1 && !check2) {
+        alert("Please select at least one status (In-Progress or Completed)");
+        return false;
+    } else {
+        return true;
+    }
+}
 function checkAllKgiTeam(kgiId) {
     var url = $url + 'kgi/kgi-team/check-all-kgi-team';
     $.ajax({
@@ -220,77 +247,78 @@ function checkAllKgiTeam(kgiId) {
         }
     });
 }
-function viewTabTeamKgi(kgiTeamHistoryId,tabId,kgiId,kgiTeamId) { 
+function viewTabTeamKgi(kgiTeamHistoryId, tabId, kgiId, kgiTeamId) {
     var currentTabId = $("#currentTab").val();
-	var kgiId = $("#kgiId").val();
-	$("#tab-" + currentTabId).removeClass("view-tab-active");
-	$("#tab-" + currentTabId).addClass("view-tab");
-	$("#tab-" + tabId).removeClass("view-tab");
-	$("#tab-" + tabId).addClass("view-tab-active");
-	$("#tab-" + currentTabId + "-blue").hide();
-	$("#tab-" + currentTabId + "-black").show();
-	$("#tab-" + tabId + "-blue").show();
-	$("#tab-" + tabId + "-black").hide();
-	$("#currentTab").val(tabId);
-	if (tabId == 1) {
-		var url = $url + 'kgi/kgi-team/kgi-team-employee';
-		$.ajax({
-			type: "POST",
-			dataType: 'json',
-			url: url,
-			data: { kgiId: kgiId,kgiTeamHistoryId:kgiTeamHistoryId },
-			success: function (data) {kgiId
-				$("#show-content").html(data.kgiEmployeeTeam);
-			}
-		});
-	}
-	if (tabId == 2) {
-		var url = $url + 'kgi/kgi-team/all-kgi-history';
-		$.ajax({
-			type: "POST",
-			dataType: 'json',
-			url: url,
-			data: { kgiTeamId: kgiTeamId, kgiTeamHistoryId: kgiTeamHistoryId},
-			success: function (data) {
-				$("#show-content").html(data.monthlyDetailHistoryText);
-			}
-		});
-	}
-	if (tabId == 3) {
-		var url = $url + 'kgi/view/kgi-issue';
-		$.ajax({
-			type: "POST",
-			dataType: 'json',
-			url: url,
-			data: { kgiId: kgiId },
-			success: function (data) {
-				$("#show-content").html(data.kgiIssue);
-			}
-		});
-	}
+    var kgiId = $("#kgiId").val();
+    $("#tab-" + currentTabId).removeClass("view-tab-active");
+    $("#tab-" + currentTabId).addClass("view-tab");
+    $("#tab-" + tabId).removeClass("view-tab");
+    $("#tab-" + tabId).addClass("view-tab-active");
+    $("#tab-" + currentTabId + "-blue").hide();
+    $("#tab-" + currentTabId + "-black").show();
+    $("#tab-" + tabId + "-blue").show();
+    $("#tab-" + tabId + "-black").hide();
+    $("#currentTab").val(tabId);
+    if (tabId == 1) {
+        var url = $url + 'kgi/kgi-team/kgi-team-employee';
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            url: url,
+            data: { kgiId: kgiId, kgiTeamHistoryId: kgiTeamHistoryId },
+            success: function (data) {
+                kgiId
+                $("#show-content").html(data.kgiEmployeeTeam);
+            }
+        });
+    }
+    if (tabId == 2) {
+        var url = $url + 'kgi/kgi-team/all-kgi-history';
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            url: url,
+            data: { kgiTeamId: kgiTeamId, kgiTeamHistoryId: kgiTeamHistoryId },
+            success: function (data) {
+                $("#show-content").html(data.monthlyDetailHistoryText);
+            }
+        });
+    }
+    if (tabId == 3) {
+        var url = $url + 'kgi/view/kgi-issue';
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            url: url,
+            data: { kgiId: kgiId },
+            success: function (data) {
+                $("#show-content").html(data.kgiIssue);
+            }
+        });
+    }
     if (tabId == 4) {
-    //alert(kgiTeamId);
-		var url = $url + 'kgi/kgi-team/kgi-team-chart';
-		$.ajax({
-			type: "POST",
-			dataType: 'json',
-			url: url,
-			data: { kgiTeamId: kgiTeamId, kgiTeamHistoryId: kgiTeamHistoryId,kgiId: kgiId},
-			success: function (data) {
-				$("#show-content").html(data.kgiChart);
-			}
-		});
-	}
-	if (tabId == 5) { 
-		var url = $url + 'kgi/view/kgi-kpi';
-		$.ajax({
-			type: "POST",
-			dataType: 'json',
-			url: url,
-			data: { kgiId: kgiId },
-			success: function (data) {
-				$("#show-content").html(data.kpi);
-			}
-		});
-	}
+        //alert(kgiTeamId);
+        var url = $url + 'kgi/kgi-team/kgi-team-chart';
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            url: url,
+            data: { kgiTeamId: kgiTeamId, kgiTeamHistoryId: kgiTeamHistoryId, kgiId: kgiId },
+            success: function (data) {
+                $("#show-content").html(data.kgiChart);
+            }
+        });
+    }
+    if (tabId == 5) {
+        var url = $url + 'kgi/view/kgi-kpi';
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            url: url,
+            data: { kgiId: kgiId },
+            success: function (data) {
+                $("#show-content").html(data.kpi);
+            }
+        });
+    }
 }

@@ -18,11 +18,9 @@ $result = $data['result'] ?? 0;
 $value = isset($data['result']) ? $data['result'] : 0;
 $sumvalue = isset($kpi['sumresult']) ? $kpi['sumresult'] : 0;
 $targetAmount = $data['targetAmount'] ?? 0;
-// $kpiHistoryId = $kpi['kpiHistoryId'] ?? 0;
 $kpiTeamHistoryId = $data['kpiTeamHistoryId'] ?? 0;
 $DueBehind = $targetAmount -  $result;
 $detail = !empty($data['kpiDetail']) ? $data['kpiDetail'] : 'No details listed';
-// $detail ="The goal is to increase the number of Non-Japanese clients to diversify the client base and drive sustained business growth. By targeting international markets and industries, the aim is to capture a broader market share and reduce dependency on a The goal is to increase the number of Non-Japanese clients to diversify the client base and drive sustained business growth. By targeting international markets and industries, the aim is to capture a broader market share and reduce dependency on a ";
 $maxLength = 487;
 
 
@@ -848,6 +846,23 @@ select.form-select option:disabled {
 <?= $this->render('modal_history') ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+$(document).ready(function() {
+    var acType = document.getElementById('acType').value
+    let isSubmitting = false; // ป้องกัน submit ซ้ำ
+    $("#create-kpi").on("beforeSubmit", function(event) {
+        if (isSubmitting) {
+            return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
+        }
+        isSubmitting = true;
+        // alert(acType);
+        if (!validateFormKpiTeam(acType)) {
+            isSubmitting = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
+            return false;
+        }
+        return true; // ถ้า validation ผ่าน ให้ submit ฟอร์มต่อไป
+    });
+});
+
 const seeMoreBtn = document.getElementById("see-more");
 const aboutText = document.getElementById("about-text");
 
