@@ -338,7 +338,7 @@ select.form-select option:disabled {
                         </div>
 
                         <div class="col-12" <?php if ($statusform == 'update'): ?> id="show-multi-department-update"
-                            <?php else: ?> id="show-multi-department" <?php endif; ?> style="position: absolute; top: 80%; left: 0; width: 100%; z-index: 999; background-color: white; 
+                            <?php else: ?> id="show-multi-department" <?php endif; ?> style="position: absolute; top: 80%; left: 0; width: 98%; z-index: 999; background-color: white; 
                             border: 1px solid #ced4da; padding: 10px; display: none;">
                             <?php if ($statusform == 'create'): ?>
                             <!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
@@ -397,7 +397,7 @@ select.form-select option:disabled {
                         </div>
 
                         <div class="col-12" <?php if ($statusform == 'update'): ?> id="show-multi-team-update"
-                            <?php else: ?> id="show-multi-team" <?php endif; ?> style="position: absolute; top: 80%; left: 0; width: 100%; z-index: 999; background-color: white; 
+                            <?php else: ?> id="show-multi-team" <?php endif; ?> style="position: absolute; top: 80%; left: 0; width: 98%; z-index: 999; background-color: white; 
                             border: 1px solid #ced4da; padding: 10px; display: none;">
                             <?php if ($statusform == 'create'): ?>
                             <!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
@@ -931,6 +931,7 @@ $(document).ready(function() {
 });
 
 function modalHistory(kpiId) {
+    // alert(kpiId);
     var url = $url + 'kpi/management/modal-history';
 
     var month = document.getElementById("hiddenMonth").value;

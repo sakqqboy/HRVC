@@ -362,7 +362,8 @@ $this->title = Yii::t('app', 'KFI Grid View');
                                                 ?>
                                         <a type="button" class="pim-btn-setup"
                                             href="<?= Yii::$app->homeUrl ?>kfi/management/update-kfi/<?= ModelMaster::encodeParams(['kfiId' => $kfiId,'kfiHistoryId' => 0]) ?>"
-                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; width: 82px; height: 30px; gap: 6px; flex-shrink: 0;">
+                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; width: 82px; height: 30px; gap: 6px; flex-shrink: 0;"
+                                            class="pim-btn-setup">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
                                                 style="width: 14px; height: 14px;">
                                             <?= Yii::t('app', 'Setup') ?>
@@ -373,7 +374,8 @@ $this->title = Yii::t('app', 'KFI Grid View');
 
                                         <a class="pim-btn-<?= $colorFormat ?>"
                                             href="<?= Yii::$app->homeUrl ?>kfi/management/update-kfi/<?= ModelMaster::encodeParams(['kfiId' => $kfiId,'kfiHistoryId' => 0]) ?>"
-                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; width: 82px; height: 30px; gap: 6px; flex-shrink: 0;">
+                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; width: 82px; height: 30px; gap: 6px; flex-shrink: 0;"
+                                            class="pim-btn-setup">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
                                                 style="width: 14px; height: 14px;">
                                             <?php if ($colorFormat == "complete") {

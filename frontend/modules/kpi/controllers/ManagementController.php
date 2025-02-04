@@ -561,8 +561,8 @@ class ManagementController extends Controller
         $isManager = UserRole::isManager();
         if (isset($_POST["kpiId"]) && $_POST["kpiId"] != "") {
             $result = isset($_POST["result"]) && $_POST["result"] != '' ? $_POST["result"] : 0;
-            if ($result != $_POST["resultValue"]){
-                $result = $_POST["resultValue"] ;
+            if ($result != $_POST["result"]){
+                $result = $_POST["result"] ;
             }
             $kpiId = $_POST["kpiId"];
             //throw new Exception(print_r(Yii::$app->request->post(), true));
