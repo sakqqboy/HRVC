@@ -25,7 +25,6 @@ function deleteKgiEmployee() {
 		}
 	});
 }
-
 function kgiFilterForEmployee() {
 	var month = $("#month-filter").val();
 	var status = $("#status-filter").val();

@@ -193,7 +193,6 @@ function checkKgiTeam(teamId, kgiId) {
         }
     });
 }
-
 function checkAllKgiTeam(kgiId) {
     var url = $url + 'kgi/kgi-team/check-all-kgi-team';
     $.ajax({

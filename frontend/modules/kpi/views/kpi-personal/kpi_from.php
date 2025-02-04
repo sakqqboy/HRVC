@@ -702,22 +702,22 @@ select.form-select option:disabled {
 
                         <div class="between-center" style="  width: 100%; ">
                             <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-                                <label class="switch">
+                                <!-- <label class="switch">
                                     <input type="checkbox" id="historic-checkbox">
                                     <span class="slider round"></span>
                                 </label>
                                 <label class="sub-manage-create" id="historic-switch">
                                     <?= Yii::t('app', 'Historic Update') ?>
-                                </label>
+                                </label> -->
                             </div>
                             <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-                                <label class="switch">
+                                <!-- <label class="switch">
                                     <input type="checkbox" id="override-checkbox" checked>
                                     <span class="slider round"></span>
                                 </label>
                                 <label class="sub-manage-create" id="override-switch">
                                     <?= Yii::t('app', 'Override') ?>
-                                </label>
+                                </label> -->
                             </div>
                         </div>
                     </div>
@@ -930,38 +930,38 @@ function toggleText() {
 }
 <?php endif; ?>
 
-const value = "<?= $value ?>";
-const sumvalue = "<?= $sumvalue ?>";
-// const sumvalue = "500";
+// const value = "<?= $value ?>";
+// const sumvalue = "<?= $sumvalue ?>";
+// // const sumvalue = "500";
 
-// Get both checkboxes
-const historicCheckbox = document.getElementById('historic-checkbox');
-const overrideCheckbox = document.getElementById('override-checkbox');
+// // Get both checkboxes
+// const historicCheckbox = document.getElementById('historic-checkbox');
+// const overrideCheckbox = document.getElementById('override-checkbox');
 
-// Add event listeners to handle toggling behavior
-historicCheckbox.addEventListener('change', function() {
-    if (this.checked) {
-        overrideCheckbox.checked = false;
-        // alert(0);
-        overrideChecked(overrideCheckbox.checked, sumvalue);
-    } else {
-        overrideCheckbox.checked = true;
-        // alert(1);
-        overrideChecked(overrideCheckbox.checked, value);
-    }
-});
+// // Add event listeners to handle toggling behavior
+// historicCheckbox.addEventListener('change', function() {
+//     if (this.checked) {
+//         overrideCheckbox.checked = false;
+//         // alert(0);
+//         overrideChecked(overrideCheckbox.checked, sumvalue);
+//     } else {
+//         overrideCheckbox.checked = true;
+//         // alert(1);
+//         overrideChecked(overrideCheckbox.checked, value);
+//     }
+// });
 
-overrideCheckbox.addEventListener('change', function() {
-    if (this.checked) {
-        // alert(2);
-        historicCheckbox.checked = false;
-        overrideChecked(overrideCheckbox.checked, value);
-    } else {
-        // alert(3);
-        historicCheckbox.checked = true;
-        overrideChecked(overrideCheckbox.checked, sumvalue);
-    }
-});
+// overrideCheckbox.addEventListener('change', function() {
+//     if (this.checked) {
+//         // alert(2);
+//         historicCheckbox.checked = false;
+//         overrideChecked(overrideCheckbox.checked, value);
+//     } else {
+//         // alert(3);
+//         historicCheckbox.checked = true;
+//         overrideChecked(overrideCheckbox.checked, sumvalue);
+//     }
+// });
 
 
 function modalHistory(kpiId) {

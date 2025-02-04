@@ -245,4 +245,19 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
             ->all();
         return count($kpiEmployee);
     }
+
+    public static function autoSummalys($kpiId,$month,$year)
+    {
+        // คำนวณผลรวมของ result ในตาราง kpi_team
+        $sumResult = KpiEmployee::find()
+        ->where([
+            'kpiId' => $kpiId,
+            'month' => $month,
+            'year' => $year,
+            'status' => [1,2,4]
+        ])
+        ->sum('result');
+    
+        return $sumResult ?? 0; // คืนค่า 0 หากไม่มีผลลัพธ์
+    }
 }
