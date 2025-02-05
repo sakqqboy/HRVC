@@ -693,8 +693,9 @@ select.form-select option:disabled {
                                     title="<?= Yii::t('app', 'Historic update contains the update from the team and indivudials if you wish to use your own values, please toggle on Override to put custom numbers ') ?>"
                                     alt="Help Icon">
                             </div>
-                            <div href="javascript:void(0);" class="updatehistory" style="text-align: right;"
-                                cursor="pointer" data-bs-toggle="modal" data-bs-target="#update-history-popup"
+                            <div href="javascript:void(0);" class="updatehistory"
+                                style="text-align: right; cursor: pointer; " data-bs-toggle="modal"
+                                data-bs-target="#update-history-popup"
                                 onclick="modalHistory(<?= isset($kpiId) ? $kpiId : '' ?>);">
                                 <?php if ($statusform == 'update') { ?>
                                 <img

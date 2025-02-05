@@ -75,17 +75,54 @@ class DashboardController extends Controller
 			"subordinateTerm" => $subordinateTerm
 		]);
 	}
+    public function actionKfiId()
+	{
+		$kfiId=$_POST["id"];
+		$res["kfiId"]=ModelMaster::encodeParams(["kfiId"=>$kfiId ,'kpiHistoryId' => 0]);
+		return json_encode($res);
+	}
+
+  
+
 	public function actionKgiEmployeeId()
 	{
 		$kgiEmployeeId=$_POST["id"];
-		$res["kgiEmployeeId"]=ModelMaster::encodeParams(["kgiEmployeeId"=>$kgiEmployeeId]);
+		$res["kgiEmployeeId"]=ModelMaster::encodeParams(["kgiEmployeeId"=>$kgiEmployeeId ,'kpiHistoryId' => 0]);
+		return json_encode($res);
+	}
+
+    public function actionKgiId()
+	{
+		$kgiId=$_POST["id"];
+		$res["kgiId"]=ModelMaster::encodeParams(["kgiId"=>$kgiId ,'kpiHistoryId' => 0]);
+		return json_encode($res);
+	}
+
+    public function actionKgiTeamId()
+	{
+		$kgiTeamId=$_POST["id"];
+		$res["kgiTeamId"]=ModelMaster::encodeParams(["kgiTeamId"=>$kgiTeamId ,'kpiHistoryId' => 0]);
 		return json_encode($res);
 	}
 
 	public function actionKpiEmployeeId()
 	{
 		$kpiEmployeeId=$_POST["id"];
-		$res["kpiEmployeeId"]=ModelMaster::encodeParams(["kpiEmployeeId"=>$kpiEmployeeId]);
+		$res["kpiEmployeeId"]=ModelMaster::encodeParams(["kpiEmployeeId"=>$kpiEmployeeId ,'kpiHistoryId' => 0]);
+		return json_encode($res);
+	}
+
+    public function actionKpiTeamId()
+	{
+		$kpiTeamId=$_POST["id"];
+		$res["kpiTeamId"]=ModelMaster::encodeParams(["kpiTeamId"=>$kpiTeamId ,'kpiHistoryId' => 0]);
+		return json_encode($res);
+	}
+
+    public function actionKpiId()
+	{
+		$kpiId=$_POST["id"];
+		$res["kpiId"]=ModelMaster::encodeParams(["kpiId"=>$kpiId ,'kpiHistoryId' => 0]);
 		return json_encode($res);
 	}
 

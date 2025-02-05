@@ -162,8 +162,8 @@ use yii\bootstrap5\ActiveForm;
                     <div class="col-4 text-center">
                         <?php if ($role >= 5 && $contentDetail['KFI']['showPercent'] !== '') { ?>
 
-                        <button class="btn-update btn-KFI" <?= $updateClickKFI ?> data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop2">
+                        <button class="btn-update btn-KFI" onclick="chengeButtonKFI(KFIData[currentKFIIndex].kfiId)"
+                            data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg" class="mb-2"
                                 style="width: 12px; height: 12px;">
                             <?= Yii::t('app', 'Update') ?>
@@ -462,19 +462,19 @@ use yii\bootstrap5\ActiveForm;
                     <div class="col-4 text-center">
                         <?php if ($role >= 5 && $contentDetail['KPI']['showPercent'] !== '') { ?>
                         <?php if ($tab == 'self' ) { ?>
-                        <!-- 
-                        <a class="btn-update btn-KPI-0" onclick="changeKPIData('left')">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg" class="mb-2"
-                                style="width: 12px; height: 12px;">
-                            <?= Yii::t('app', 'Updated') ?>
-                        </a> -->
-                        <button class="btn-update btn-KPI" onclick="chengeButtonKPI(KPIData[currentKPIIndex].id)">
+                        <button class="btn-update btn-KPI" onclick="chengeButtonSelfKPI(KPIData[currentKPIIndex].id)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg" class="mb-2"
                                 style="width: 12px; height: 12px;">
                             <?= Yii::t('app', 'Updated') ?>
                         </button>
+                        <?php } else if ($tab == 'team' ) { ?>
+                        <button class="btn-update btn-KPI-0" onclick="chengeButtonTeamKPI(KPIData[currentKPIIndex].id)">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg" class="mb-2"
+                                style="width: 12px; height: 12px;">
+                            <?= Yii::t('app', 'Update') ?>
+                        </button>
                         <?php } else { ?>
-                        <button class="btn-update btn-KPI-0" <?= $updateClickKPI ?>>
+                        <button class="btn-update btn-KPI-0" onclick="chengeButtonKPI(KPIData[currentKPIIndex].kpiId)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg" class="mb-2"
                                 style="width: 12px; height: 12px;">
                             <?= Yii::t('app', 'Update') ?>
@@ -673,6 +673,33 @@ if (window.location.host == 'localhost') {
 }
 $url = $baseUrl;
 
+function chengeButtonKFI(id) {
+    if (isNaN(id)) {
+        alert("Invalid ID. Please provide a numeric value.");
+        return;
+    }
+    // alert(id);
+    var url = $url + `home/dashboard/kfi-id`;
+    // alert(url);
+    $.ajax({
+        type: "POST",
+        dataType: 'JSON',
+        url: url,
+        data: {
+            id: id
+        },
+        success: function(data) {
+            // alert(data);
+            kpiId = data.kpiId;
+            // alert(kpiId);
+            const kpiUrl = $url + `kfi/management/update-kfi/` + kfiId;
+            // alert(kpiUrl);
+            window.location.href = kpiUrl;
+        },
+    });
+
+}
+
 function chengeButtonKGI(id) {
     if (isNaN(id)) {
         alert("Invalid ID. Please provide a numeric value.");
@@ -699,7 +726,7 @@ function chengeButtonKGI(id) {
 
 }
 
-function chengeButtonKPI(id) {
+function chengeButtonSelfKPI(id) {
     if (isNaN(id)) {
         alert("Invalid ID. Please provide a numeric value.");
         return;
@@ -724,6 +751,60 @@ function chengeButtonKPI(id) {
     });
 
 }
+
+function chengeButtonTeamKPI(id) {
+    if (isNaN(id)) {
+        alert("Invalid ID. Please provide a numeric value.");
+        return;
+    }
+
+    var url = $url + `home/dashboard/kpi-team-id`;
+    // alert(url);
+    $.ajax({
+        type: "POST",
+        dataType: 'JSON',
+        url: url,
+        data: {
+            id: id
+        },
+        success: function(data) {
+            // alert(data);
+            kpiTeamId = data.kpiTeamId;
+            const kpiUrl = $url + `kpi/kpi-team/prepare-update/` + kpiTeamId;
+            // alert(kpiUrl);
+            window.location.href = kpiUrl;
+        },
+    });
+
+}
+
+function chengeButtonKPI(id) {
+    if (isNaN(id)) {
+        alert("Invalid ID. Please provide a numeric value.");
+        return;
+    }
+    // alert(id);
+    var url = $url + `home/dashboard/kpi-id`;
+    // alert(url);
+    $.ajax({
+        type: "POST",
+        dataType: 'JSON',
+        url: url,
+        data: {
+            id: id
+        },
+        success: function(data) {
+            // alert(data);
+            kpiId = data.kpiId;
+            // alert(kpiId);
+            const kpiUrl = $url + `kpi/management/prepare-update/` + kpiId;
+            // alert(kpiUrl);
+            window.location.href = kpiUrl;
+        },
+    });
+
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const progressBar = document.getElementById("progress-bar");
 
