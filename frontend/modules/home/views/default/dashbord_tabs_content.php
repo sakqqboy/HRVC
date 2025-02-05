@@ -306,14 +306,19 @@ use yii\bootstrap5\ActiveForm;
                     <div class="col-4 text-center">
                         <?php if ($role >= 5 && $contentDetail['KGI']['showPercent'] !== '') { ?>
                         <?php if ($tab == 'self' ) { ?>
-                        <button class="btn-update btn-KGI" onclick="chengeButtonKGI(KGIData[currentKGIIndex].id)">
+                        <button class="btn-update btn-KGI" onclick="chengeButtonSelfKGI(KGIData[currentKGIIndex].id)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-black.svg" class="mb-2"
                                 style="width: 12px; height: 12px;">
                             <?= Yii::t('app', 'Updated') ?>
                         </button>
-
+                        <?php } else if ($tab == 'team' ) { ?>
+                        <button class="btn-update btn-KGI" onclick="chengeButtonTeamKGI(KGIData[currentKGIIndex].id)">
+                            <img src=" <?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-black.svg" class="mb-2"
+                                style="width: 12px; height: 12px;">
+                            <?= Yii::t('app', 'Update')  ?>
+                        </button>
                         <?php } else { ?>
-                        <button class="btn-update btn-KGI" <?= $updateClickKGI ?>>
+                        <button class="btn-update btn-KGI" onclick="chengeButtonKGI(KGIData[currentKGIIndex].id)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-black.svg" class="mb-2"
                                 style="width: 12px; height: 12px;">
                             <?= Yii::t('app', 'Update')  ?>
@@ -694,6 +699,58 @@ function chengeButtonKFI(id) {
             const kfiUrl = $url + `kfi/management/update-kfi/` + kfiId;
             // alert(kpiUrl);
             window.location.href = kfiUrl;
+        },
+    });
+
+}
+
+function chengeButtonSelfKGI(id) {
+    if (isNaN(id)) {
+        alert("Invalid ID. Please provide a numeric value.");
+        return;
+    }
+
+    var url = $url + `home/dashboard/kgi-employee-id`;
+    // alert(url);
+    $.ajax({
+        type: "POST",
+        dataType: 'JSON',
+        url: url,
+        data: {
+            id: id
+        },
+        success: function(data) {
+            // alert(data);
+            kgiEmployeeId = data.kgiEmployeeId;
+            const kgiUrl = $url + `kgi/kgi-personal/update-personal-kgi/` + kgiEmployeeId;
+            // alert(kgiUrl);
+            window.location.href = kgiUrl;
+        },
+    });
+
+}
+
+function chengeButtonTeamKGI(id) {
+    if (isNaN(id)) {
+        alert("Invalid ID. Please provide a numeric value.");
+        return;
+    }
+
+    var url = $url + `home/dashboard/kgi-team-id`;
+    // alert(url);
+    $.ajax({
+        type: "POST",
+        dataType: 'JSON',
+        url: url,
+        data: {
+            id: id
+        },
+        success: function(data) {
+            // alert(data);
+            kgiTeamId = data.kgiTeamId;
+            const kgiUrl = $url + `kgi/kgi-team/prepare-update/` + kgiTeamId;
+            // alert(kpiUrl);
+            window.location.href = kgiUrl;
         },
     });
 
