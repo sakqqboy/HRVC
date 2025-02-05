@@ -55,7 +55,7 @@ function checkAllBranch() {
 	}
 }
 function validateFormKgi() {
-//	event.preventDefault(); // ป้องกันการส่งฟอร์มก่อนการตรวจสอบ
+	//	event.preventDefault(); // ป้องกันการส่งฟอร์มก่อนการตรวจสอบ
 	console.log("validateFormKgi called");
 	var multiBranch = [];
 	var multiDepartment = [];

@@ -652,13 +652,13 @@ class KpiTeamController extends Controller
 			"waitForApprove" => $waitForApprove
 		]);
 	}
-	public function actionPrepareUpdate()
+	public function actionPrepareUpdate($hash)
 	{
-		$kpiTeamId = $_GET["kpiTeamId"];
-		// $param = ModelMaster::decodeParams($hash);
+		// $kpiTeamId = $_GET["kpiTeamId"];
+		$param = ModelMaster::decodeParams($hash);
 		$role = UserRole::userRight();
 
-		// $kpiTeamId = $param["kpiTeamId"];
+		$kpiTeamId = $param["kpiTeamId"];
 
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -669,41 +669,41 @@ class KpiTeamController extends Controller
 		$kpiTeamDetail = json_decode($kpiTeamDetail, true);
 
 		// ตรวจสอบว่าค่าที่ได้มาไม่เป็น null
-		if (!$kpiTeamDetail || !isset($kpiTeamDetail['kpiId'])) {
-			return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
-		}
+		// if (!$kpiTeamDetail || !isset($kpiTeamDetail['kpiId'])) {
+		// 	return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
+		// }
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiTeamDetail['kpiId'] . '&&kpiHistoryId=0');
 		$kpi = curl_exec($api);
 		$kpi = json_decode($kpi, true);
 
-		if (!$kpi || !isset($kpi["companyId"])) {
-			return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
-		}
+		// if (!$kpi || !isset($kpi["companyId"])) {
+		// 	return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
+		// }
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $kpi["companyId"]);
 		$kpiBranch = curl_exec($api);
 		$kpiBranch = json_decode($kpiBranch, true);
 
-		if (!$kpiBranch) {
-			return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
-		}
+		// if (!$kpiBranch) {
+		// 	return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
+		// }
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-department?id=' . $kpiTeamDetail['kpiId']);
 		$kpiDepartment = curl_exec($api);
 		$kpiDepartment = json_decode($kpiDepartment, true);
 
-		if (!$kpiDepartment) {
-			return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
-		}
+		// if (!$kpiDepartment) {
+		// 	return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
+		// }
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-team?id=' . $kpiTeamDetail['kpiId']);
 		$kpiTeam = curl_exec($api);
 		$kpiTeam = json_decode($kpiTeam, true);
 
-		if (!$kpiTeam) {
-			return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
-		}
+		// if (!$kpiTeam) {
+		// 	return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
+		// }
 
 
 		curl_close($api);

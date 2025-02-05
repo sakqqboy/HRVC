@@ -338,7 +338,7 @@ select.form-select option:disabled {
                         </div>
 
                         <div class="col-12" <?php if ($statusform == 'update'): ?> id="show-multi-department-update"
-                            <?php else: ?> id="show-multi-department" <?php endif; ?> style="position: absolute; top: 80%; left: 0; width: 100%; z-index: 999; background-color: white; 
+                            <?php else: ?> id="show-multi-department" <?php endif; ?> style="position: absolute; top: 80%; left: 0; width: 98%; z-index: 999; background-color: white; 
                             border: 1px solid #ced4da; padding: 10px; display: none;">
                             <?php if ($statusform == 'create'): ?>
                             <!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
@@ -397,7 +397,7 @@ select.form-select option:disabled {
                         </div>
 
                         <div class="col-12" <?php if ($statusform == 'update'): ?> id="show-multi-team-update"
-                            <?php else: ?> id="show-multi-team" <?php endif; ?> style="position: absolute; top: 80%; left: 0; width: 100%; z-index: 999; background-color: white; 
+                            <?php else: ?> id="show-multi-team" <?php endif; ?> style="position: absolute; top: 80%; left: 0; width: 98%; z-index: 999; background-color: white; 
                             border: 1px solid #ced4da; padding: 10px; display: none;">
                             <?php if ($statusform == 'create'): ?>
                             <!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
@@ -710,11 +710,11 @@ select.form-select option:disabled {
                                     src="<?= Yii::$app->homeUrl ?>image/result-<?= isset($data['result']) ? 'blue' : 'gray' ?>.svg"
                                     alt="LinkedIn" style="width: 30px; height: 30px;">
                             </span>
-                            <input type="number" class="form-control text-end" name="result" id="result-update"
+                            <input type="number" class="form-control text-end" name="resultValue" id="result-update"
                                 value="<?= isset($data['result']) ? $data['result'] : '' ?>"
                                 style="border-left: none; font-size: 22px; font-style: normal; font-weight: 600;"
                                 required oninput="updateIcon(this),updateResultValue(this)">
-                            <input type="hidden" name="resultValue" id="result-cheng"
+                            <input type="hidden" name="result" id="result-cheng"
                                 value="<?= isset($data['result']) ? $data['result'] : '' ?>">
                         </div>
 
@@ -837,13 +837,15 @@ select.form-select option:disabled {
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
+    var acType = document.getElementById('acType').value
     let isSubmitting = false; // ป้องกัน submit ซ้ำ
     $("#create-kpi").on("beforeSubmit", function(event) {
         if (isSubmitting) {
             return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
         }
         isSubmitting = true;
-        if (!validateFormKpi()) {
+        // alert(acType);
+        if (!validateFormKpi(acType)) {
             isSubmitting = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
             return false;
         }
@@ -929,6 +931,7 @@ $(document).ready(function() {
 });
 
 function modalHistory(kpiId) {
+    // alert(kpiId);
     var url = $url + 'kpi/management/modal-history';
 
     var month = document.getElementById("hiddenMonth").value;

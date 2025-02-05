@@ -27,6 +27,33 @@ function deleteKpiEmployee() {
 		}
 	});
 }
+function validateFormKpiEmployee() {
+	//	event.preventDefault(); // ป้องกันการส่งฟอร์มก่อนการตรวจสอบ
+	var check1 = document.getElementById('check1').checked;
+	var check2 = document.getElementById('check2').checked;
+	console.log("validateFormKgi called");
+	var fromDate = document.getElementById('fromDate').value.trim();
+	var toDate = document.getElementById('toDate').value.trim();
+	var nextDate = $('#nextDate').val();
+	if (!fromDate && !toDate) {
+		alert("Please fill in Due Term");
+		return false;
+	} else if (!fromDate) {
+		alert("Please fill in Start Date");
+		return false;
+	} else if (!toDate) {
+		alert("Please fill in End Date");
+		return false;
+	} else if (nextDate == '') {
+		alert("Please fill in Target Due Update Date");
+		return false;
+	} else if (!check1 && !check2) {
+		alert("Please select at least one status (In-Progress or Completed)");
+		return false;
+	} else {
+		return true;
+	}
+}
 function kpiFilterForEmployee() {
 	var month = $("#month-filter").val();
 	var status = $("#status-filter").val();

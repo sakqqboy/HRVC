@@ -355,14 +355,15 @@ $this->title = Yii::t('app', 'KFI Grid View');
                                             <?= $kfi['nextCheck'] == "" ? Yii::t('app', 'Not set') : $kfi['nextCheck'] ?>
                                         </div>
                                     </div>
-                                    <div class="col-2 text-center mt-10 pt-6">
+                                    <div class="col-2 text-center mt-10">
 
                                         <?php
                                                 if ($colorFormat == 'disable' && $role >= 5) {
                                                 ?>
                                         <a type="button" class="pim-btn-setup"
-                                            href="<?= Yii::$app->homeUrl ?>kfi/management/update-kfi/?kfiId=<?= $kfiId ?>"
-                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; width: 82px; height: 30px; gap: 6px; flex-shrink: 0;">
+                                            href="<?= Yii::$app->homeUrl ?>kfi/management/update-kfi/<?= ModelMaster::encodeParams(['kfiId' => $kfiId,'kfiHistoryId' => 0]) ?>"
+                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; height: 30px; gap: 6px; flex-shrink: 0;"
+                                            class="pim-btn-setup">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
                                                 style="width: 14px; height: 14px;">
                                             <?= Yii::t('app', 'Setup') ?>
@@ -372,8 +373,9 @@ $this->title = Yii::t('app', 'KFI Grid View');
                                                 ?>
 
                                         <a class="pim-btn-<?= $colorFormat ?>"
-                                            href="<?= Yii::$app->homeUrl ?>kfi/management/update-kfi/?kfiId=<?= $kfiId ?>"
-                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; width: 82px; height: 30px; gap: 6px; flex-shrink: 0;">
+                                            href="<?= Yii::$app->homeUrl ?>kfi/management/update-kfi/<?= ModelMaster::encodeParams(['kfiId' => $kfiId,'kfiHistoryId' => 0]) ?>"
+                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; height: 30px; gap: 6px; flex-shrink: 0;"
+                                            class="pim-btn-setup">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
                                                 style="width: 14px; height: 14px;">
                                             <?php if ($colorFormat == "complete") {
@@ -388,7 +390,7 @@ $this->title = Yii::t('app', 'KFI Grid View');
                                         <?php
                                                 } else { ?>
                                         <div class="pim-btn-disable"
-                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; width: 82px; height: 30px; gap: 6px; flex-shrink: 0;">
+                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; height: 30px; gap: 6px; flex-shrink: 0;">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/locked.svg"
                                                 style="width: 14px; height: 14px;"> <?= Yii::t('app', 'Locked') ?>
                                         </div>

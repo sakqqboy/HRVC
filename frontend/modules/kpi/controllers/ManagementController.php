@@ -440,7 +440,7 @@ class ManagementController extends Controller
             endforeach;
         }
     }
-    public function actionPrepareUpdate()
+    public function actionPrepareUpdate($hash)
     {
         // $kpiId = $_POST["kpiId"];
         // $kpiId = Yii::$app->request->get("kpiId");
@@ -450,10 +450,11 @@ class ManagementController extends Controller
         // }else{
         // 	throw new Exception($kfiId);
         // }
+        $param = ModelMaster::decodeParams($hash);
+        $kpiId =  $param['kpiId'];
+        // throw new Exception($kpiId);
         
-        if (Yii::$app->request->isGet) {
-            $kpiId = Yii::$app->request->get("kpiId");
-        
+            // $kpiId = Yii::$app->request->get("kpiId");
             if (!$kpiId || !is_numeric($kpiId)) {
                 throw new Exception("Invalid kpi ID.");
             }
@@ -527,9 +528,7 @@ class ManagementController extends Controller
                 "kpiId" => $kpiId,
                 "statusform" =>  "update"
             ]);
-        } else {
-            throw new Exception("Invalid request, KFI ID is missing. GET Data: " . json_encode($_GET));
-        }
+     
 
     }
     public function actionUpdateKpi()
@@ -562,8 +561,8 @@ class ManagementController extends Controller
         $isManager = UserRole::isManager();
         if (isset($_POST["kpiId"]) && $_POST["kpiId"] != "") {
             $result = isset($_POST["result"]) && $_POST["result"] != '' ? $_POST["result"] : 0;
-            if ($result != $_POST["resultValue"]){
-                $result = $_POST["resultValue"] ;
+            if ($result != $_POST["result"]){
+                $result = $_POST["result"] ;
             }
             $kpiId = $_POST["kpiId"];
             //throw new Exception(print_r(Yii::$app->request->post(), true));

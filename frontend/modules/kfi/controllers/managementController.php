@@ -210,7 +210,7 @@ class ManagementController extends Controller
 					'detail' => $_POST["detail"],
 					'amountType' => $_POST["amountType"],
 					'code' => $_POST["code"],
-					'quanRatio' => $_POST["quanRatio"],  
+					'quantRatio' => $_POST["quantRatio"],  
 					'nextCheckDate' => $_POST["nextCheckDate"],
 					'fromDate' => $_POST["fromDate"],
 					'toDate' => $_POST["toDate"],
@@ -245,7 +245,7 @@ class ManagementController extends Controller
 					$kfiHistory->amountType = $_POST["amountType"] ?? null;
 					$kfiHistory->code = $_POST["code"] ?? null;
 					$kfiHistory->status = $_POST["status"] ?? 1;
-					$kfiHistory->quantRatio = $_POST["quanRatio"] ?? null;
+					$kfiHistory->quantRatio = $_POST["quantRatio"] ?? null;
 					$kfiHistory->historyStatus = (string) ($_POST["status"] ?? '1');	
 					$kfiHistory->result = $_POST["result"] ?? 0;
 					$kfiHistory->unitId = $_POST["unit"] ?? null;
@@ -343,7 +343,7 @@ class ManagementController extends Controller
 					'detail' => $_POST["detail"],
 					'amountType' => $_POST["amountType"],
 					'code' => $_POST["code"],
-					'quanRatio' => $_POST["quanRatio"],  
+					'quantRatio' => $_POST["quantRatio"],  
 					'nextCheckDate' => $_POST["nextCheckDate"],
 					'fromDate' => $_POST["fromDate"],
 					'toDate' => $_POST["toDate"],
@@ -354,6 +354,7 @@ class ManagementController extends Controller
 
 				// throw new Exception(print_r($data,true));
 
+		// $param = ModelMaster::decodeParams($hash);
 
 		$isManager = UserRole::isManager();
 		if (isset($_POST["kfiId"])) {
@@ -384,7 +385,7 @@ class ManagementController extends Controller
 			$kfiHistory->amountType = $_POST["amountType"];
 			$kfiHistory->code = $_POST["code"];
 			$kfiHistory->status = $_POST["status"];
-			$kfiHistory->quantRatio = $_POST["quanRatio"];
+			$kfiHistory->quantRatio = $_POST["quantRatio"];
 			$kfiHistory->historyStatus = $_POST["status"];
 			if ($isManager == 1) {
 				$kfiHistory->target =  str_replace(",", "", $_POST["amount"]);
@@ -423,18 +424,13 @@ class ManagementController extends Controller
 			// return $this->redirect('grid');
 		}
 	}
-	public function actionUpdateKfi()
+	public function actionUpdateKfi($hash)
 {
-	$kfiId = Yii::$app->request->get("kfiId");
+	$param = ModelMaster::decodeParams($hash);
 
-	// if (!$kfiId || !is_numeric($kfiId)) {
-	// 	throw new Exception("Invalid KFI ID.");
-	// }else{
-	// 	throw new Exception($kfiId);
-	// }
-	
-    if (Yii::$app->request->isGet) {
-		$kfiId = Yii::$app->request->get("kfiId");
+	$kfiId = $param["kfiId"];
+	$kfiHistoryId = $param["kfiHistoryId"];
+
 	
 		if (!$kfiId || !is_numeric($kfiId)) {
 			throw new Exception("Invalid KFI ID.");
@@ -510,9 +506,7 @@ class ManagementController extends Controller
 			"kfiId" => $kfiId,
 			"statusform" =>  "update"
 		]);
-	} else {
-		throw new Exception("Invalid request, KFI ID is missing. GET Data: " . json_encode($_GET));
-	}
+
 	
 }
 

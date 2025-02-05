@@ -513,12 +513,12 @@ $this->title = 'KPI Grid View';
                                         <div class="col-12 text-end pim-duedate">
                                             <?= $kpi['nextCheck'] == "" ? 'Not set' : $kpi['nextCheck'] ?></div>
                                     </div>
-                                    <div class="col-4 text-center mt-10 pt-6">
+                                    <div class="col-4 text-center mt-10">
                                         <?php
                                                 if ($colorFormat == 'disable' && $role >= 5) {
                                                 ?>
-                                        <a href="<?= Yii::$app->homeUrl ?>kpi/management/prepare-update/?kpiId=<?= $kpiId ?>"
-                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; width: 82px; height: 30px; gap: 6px; flex-shrink: 0;"
+                                        <a href="<?= Yii::$app->homeUrl ?>kpi/management/prepare-update/<?= ModelMaster::encodeParams(['kpiId' => $kpiId,'kpiHistoryId' => 0]) ?>"
+                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; height: 30px; gap: 6px; flex-shrink: 0;"
                                             class="pim-btn-setup">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
                                                 class="mb-2" style="width: 12px; height: 12px;">
@@ -527,8 +527,8 @@ $this->title = 'KPI Grid View';
                                         <?php
                                                 } else if ($role >= 5) {
                                                 ?>
-                                        <a href="<?= Yii::$app->homeUrl ?>kpi/management/prepare-update/?kpiId=<?= $kpiId ?>"
-                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; width: 82px; height: 30px; gap: 6px; flex-shrink: 0;"
+                                        <a href="<?= Yii::$app->homeUrl ?>kpi/management/prepare-update/<?= ModelMaster::encodeParams(['kpiId' => $kpiId,'kpiHistoryId' => 0]) ?>"
+                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; height: 30px; gap: 6px; flex-shrink: 0;"
                                             class="pim-btn-<?= $colorFormat ?>">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
                                                 class="mb-2" style="width: 12px; height: 12px;">

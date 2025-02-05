@@ -1258,27 +1258,35 @@ flatpickr("#endDatePicker", {
 
 
 
-function validateFormKfi() {
+function validateFormKfi(acType) {
     //	event.preventDefault(); // ป้องกันการส่งฟอร์มก่อนการตรวจสอบ
     console.log("validateFormKgi called");
     var multiBranch = [];
     var multiDepartment = [];
     var multiTeam = [];
     var i = 0;
-    $("#multi-check:checked").each(function () {
-        multiBranch[i] = $(this).val();
-        i++;
-    });
-    var a = 0;
-    $(".multi-check-department:checked").each(function () {
-        multiDepartment[a] = $(this).val();
-        a++;
-    });
-    var b = 0;
-    $(".multi-check-team:checked").each(function () {
-        multiTeam[b] = $(this).val();
-        b++;
-    });
+    if (acType != 'update') {
+        $("#multi-check:checked").each(function () {
+            multiBranch[i] = $(this).val();
+            i++;
+        });
+        var a = 0;
+        $(".multi-check-department:checked").each(function () {
+            multiDepartment[a] = $(this).val();
+            a++;
+        });
+    } else {
+        $("#multi-check-update:checked").each(function () {
+            multiBranch[i] = $(this).val();
+            i++;
+        });
+        var a = 0;
+        $(".multi-check-department-update:checked").each(function () {
+            multiDepartment[a] = $(this).val();
+            a++;
+        });
+    }
+
     var fromDate = document.getElementById('fromDate').value.trim();
     var toDate = document.getElementById('toDate').value.trim();
     var nextDate = $('#nextDate').val();
@@ -1288,9 +1296,6 @@ function validateFormKfi() {
     }
     else if (multiDepartment.length == 0) {
         alert("Please select at least one department!");
-        return false;
-    } else if (multiTeam.length == 0) {
-        alert("Please select at least one team!");
         return false;
     } else if (!fromDate && !toDate) {
         alert("Please fill in Due Term");
@@ -1415,6 +1420,7 @@ function updateIcon(input) {
 
 function updateResultValue(inputElement) {
     // นำค่าที่กรอกใน result-update ไปใส่ใน result-cheng
+    // alert(inputElement.value);
     const resultValue = inputElement.value;
     const resultCheng = document.getElementById('result-cheng');
     resultCheng.value = resultValue;

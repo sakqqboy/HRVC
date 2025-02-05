@@ -158,7 +158,7 @@
                             <div class="tab-pane fade show active fade"
                                 style="gap: 14px; width: 100%; max-height: 450px; overflow-y: auto;">
                                 <ul id="history-list-team" class="list-unstyled small">
-
+                                    No data
                                 </ul>
                             </div>
                         </div>
@@ -181,7 +181,7 @@
                             <div class="tab-pane fade show active fade"
                                 style="gap: 14px; width: 100%; max-height: 450px; overflow-y: auto;">
                                 <ul id="history-list-creater" class="list-unstyled small">
-                                    <!-- ข้อมูล history จะถูกเพิ่มเข้ามาที่นี่ -->
+                                    No data
                                 </ul>
                             </div>
                         </div>

@@ -2,6 +2,7 @@
 
 use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
+
 $form = ActiveForm::begin([
 	'id' => 'update-personal-kpi',
 	'method' => 'post',
@@ -690,33 +691,33 @@ select.form-select option:disabled {
                                     src="<?= Yii::$app->homeUrl ?>image/result-<?= isset($data['result']) ? 'blue' : 'gray' ?>.svg"
                                     alt="LinkedIn" style="width: 30px; height: 30px;">
                             </span>
-                            <input type="number" class="form-control text-end" name="result" id="result-update"
+                            <input type="number" class="form-control text-end" name="resultValue" id="result-update"
                                 value="<?= isset($data['result']) ? $data['result'] : '' ?>"
                                 style="border-left: none; font-size: 22px; font-style: normal; font-weight: 600;"
                                 required oninput="updateIcon(this),updateResultValue(this)">
-                            <input type="hidden" name="resultValue" id="result-cheng"
+                            <input type="hidden" name="result" id="result-cheng"
                                 value="<?= isset($data['result']) ? $data['result'] : '' ?>">
                         </div>
 
 
                         <div class="between-center" style="  width: 100%; ">
                             <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-                                <label class="switch">
+                                <!-- <label class="switch">
                                     <input type="checkbox" id="historic-checkbox">
                                     <span class="slider round"></span>
                                 </label>
                                 <label class="sub-manage-create" id="historic-switch">
                                     <?= Yii::t('app', 'Historic Update') ?>
-                                </label>
+                                </label> -->
                             </div>
                             <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-                                <label class="switch">
+                                <!-- <label class="switch">
                                     <input type="checkbox" id="override-checkbox" checked>
                                     <span class="slider round"></span>
                                 </label>
                                 <label class="sub-manage-create" id="override-switch">
                                     <?= Yii::t('app', 'Override') ?>
-                                </label>
+                                </label> -->
                             </div>
                         </div>
                     </div>
@@ -884,6 +885,22 @@ select.form-select option:disabled {
 <?= $this->render('modal_history') ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+$(document).ready(function() {
+    var acType = document.getElementById('acType').value
+    let isSubmitting = false; // ป้องกัน submit ซ้ำ
+    $("#update-personal-kpi").on("beforeSubmit", function(event) {
+        if (isSubmitting) {
+            return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
+        }
+        isSubmitting = true;
+        // alert(acType);
+        if (!validateFormKpiEmployee(acType)) {
+            isSubmitting = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
+            return false;
+        }
+        return true; // ถ้า validation ผ่าน ให้ submit ฟอร์มต่อไป
+    });
+});
 const seeMoreBtn = document.getElementById("see-more");
 const aboutText = document.getElementById("about-text");
 
@@ -913,38 +930,38 @@ function toggleText() {
 }
 <?php endif; ?>
 
-const value = "<?= $value ?>";
-const sumvalue = "<?= $sumvalue ?>";
-// const sumvalue = "500";
+// const value = "<?= $value ?>";
+// const sumvalue = "<?= $sumvalue ?>";
+// // const sumvalue = "500";
 
-// Get both checkboxes
-const historicCheckbox = document.getElementById('historic-checkbox');
-const overrideCheckbox = document.getElementById('override-checkbox');
+// // Get both checkboxes
+// const historicCheckbox = document.getElementById('historic-checkbox');
+// const overrideCheckbox = document.getElementById('override-checkbox');
 
-// Add event listeners to handle toggling behavior
-historicCheckbox.addEventListener('change', function() {
-    if (this.checked) {
-        overrideCheckbox.checked = false;
-        // alert(0);
-        overrideChecked(overrideCheckbox.checked, sumvalue);
-    } else {
-        overrideCheckbox.checked = true;
-        // alert(1);
-        overrideChecked(overrideCheckbox.checked, value);
-    }
-});
+// // Add event listeners to handle toggling behavior
+// historicCheckbox.addEventListener('change', function() {
+//     if (this.checked) {
+//         overrideCheckbox.checked = false;
+//         // alert(0);
+//         overrideChecked(overrideCheckbox.checked, sumvalue);
+//     } else {
+//         overrideCheckbox.checked = true;
+//         // alert(1);
+//         overrideChecked(overrideCheckbox.checked, value);
+//     }
+// });
 
-overrideCheckbox.addEventListener('change', function() {
-    if (this.checked) {
-        // alert(2);
-        historicCheckbox.checked = false;
-        overrideChecked(overrideCheckbox.checked, value);
-    } else {
-        // alert(3);
-        historicCheckbox.checked = true;
-        overrideChecked(overrideCheckbox.checked, sumvalue);
-    }
-});
+// overrideCheckbox.addEventListener('change', function() {
+//     if (this.checked) {
+//         // alert(2);
+//         historicCheckbox.checked = false;
+//         overrideChecked(overrideCheckbox.checked, value);
+//     } else {
+//         // alert(3);
+//         historicCheckbox.checked = true;
+//         overrideChecked(overrideCheckbox.checked, sumvalue);
+//     }
+// });
 
 
 function modalHistory(kpiId) {
@@ -1120,7 +1137,7 @@ function modalHistory(kpiId) {
         },
         error: function(xhr, status, error) {
             console.log(xhr.responseText); // ดูข้อความผิดพลาดจากเซิร์ฟเวอร์
-            alert("เกิดข้อผิดพลาดไม่มีข้อมูลในการโหลดข้อมูล");
+            // alert("เกิดข้อผิดพลาดไม่มีข้อมูลในการโหลดข้อมูล");
         }
     });
 }

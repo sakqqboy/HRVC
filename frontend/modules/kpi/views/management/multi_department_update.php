@@ -6,18 +6,19 @@ use frontend\models\hrvc\KpiDepartment;
 
 if (isset($d) && count($d) > 0) {
 	foreach ($d as $branchId => $department) : ?>
-		<div class="col-12 multi-select-head pl-10 pt-10 pb-3">
-			<?=
+<div class="col-12 multi-select-head pl-10 pt-10 pb-3">
+    <?=
 			Branch::branchName($branchId)
 			?>
-		</div>
-		<?php
+</div>
+<?php
 		if (count($department) > 1) { ?>
-			<div class="col-12 multi-select pl-30 pt-5 pb-5">
-				<input type="checkbox" id='multi-check-all-<?= $branchId ?>-update' name="allDepartment[]" class="checkbox-md mr-5 " value="all" onchange="javascript:allDepartmentUpdate(<?= $branchId ?>)">
-				<?= Yii::t('app', 'All') ?>
-			</div>
-			<?php
+<div class="col-12 multi-select pl-30 pt-5 pb-5">
+    <input type="checkbox" id='multi-check-all-<?= $branchId ?>-update' name="allDepartment[]" class="checkbox-md mr-5 "
+        value="all" onchange="javascript:allDepartmentUpdate(<?= $branchId ?>)">
+    <?= Yii::t('app', 'All') ?>
+</div>
+<?php
 		}
 		foreach ($department as $departmentId => $departmentName) :
 			$haveTeam = Department::haveTeam($departmentId);
@@ -28,10 +29,12 @@ if (isset($d) && count($d) > 0) {
 					$check = 'checked';
 				}
 			?>
-				<div class="col-12 multi-select pl-30 pt-5 pb-5">
-					<input type="checkbox" <?= $check ?> id='multi-check-<?= $branchId ?>-update' name="department[]" class="checkbox-md mr-5 multi-check-department-update" value="<?= $departmentId ?>" onchange="javascript:departmentMultiTeamUpdateKpi(<?= $branchId ?>)">
-					<?= $departmentName ?>
-				</div>
+<div class="col-12 multi-select pl-30 pt-5 pb-5">
+    <input type="checkbox" <?= $check ?> id='multi-check-<?= $branchId ?>-update' name="department[]"
+        class="checkbox-md mr-5 multi-check-department-update" value="<?= $departmentId ?>"
+        onchange="javascript:departmentMultiTeamUpdateKpi(<?= $branchId ?>)">
+    <?= $departmentName ?>
+</div>
 <?php
 			}
 		endforeach;

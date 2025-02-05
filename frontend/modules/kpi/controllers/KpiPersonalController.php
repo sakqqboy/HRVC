@@ -536,7 +536,7 @@ class KpiPersonalController extends Controller
 		$role = UserRole::userRight();
 
 		$kpiEmployeeId = $param["kpiEmployeeId"];
-		// throw new exception($kpiEmployeeId	);	
+		// throw new exception($kpiEmployeeId);	
 
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -547,7 +547,8 @@ class KpiPersonalController extends Controller
 
 		// เช็คว่าค่าที่ได้มาถูกต้องไหม
 		if (!$kpiEmployeeDetail || !isset($kpiEmployeeDetail['kpiId'])) {
-			return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
+			// throw new exception(print_r($kpiEmployeeId	, true));
+			// return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
 		}
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiEmployeeDetail['kpiId'] . '&&kpiHistoryId=0');
@@ -555,7 +556,8 @@ class KpiPersonalController extends Controller
 		$kpi = json_decode($kpi, true);
 
 		if (!$kpi || !isset($kpi["companyId"])) {
-			return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
+			// throw new exception(print_r($kpi	, true));
+			// return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
 		}
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $kpi["companyId"]);
@@ -563,7 +565,8 @@ class KpiPersonalController extends Controller
 		$kpiBranch = json_decode($kpiBranch, true);
 
 		if (!$kpiBranch) {
-			return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
+			// throw new exception(print_r($kpiBranch	, true));
+			// return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
 		}
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-department?id=' . $kpiEmployeeDetail['kpiId']);
@@ -571,7 +574,8 @@ class KpiPersonalController extends Controller
 		$kpiDepartment = json_decode($kpiDepartment, true);
 
 		if (!$kpiDepartment) {
-			return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
+			// throw new exception(print_r($kpiDepartment	, true));
+			// return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
 		}
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-team?id=' . $kpiEmployeeDetail['kpiId']);
@@ -579,7 +583,8 @@ class KpiPersonalController extends Controller
 		$kpiTeam = json_decode($kpiTeam, true);
 
 		if (!$kpiTeam) {
-			return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
+			// throw new exception(print_r($kpiTeam	, true));
+			// return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
 		}
 
 		curl_close($api);
@@ -683,7 +688,7 @@ class KpiPersonalController extends Controller
 				$history->kpiEmployeeId = $_POST["kpiEmployeeId"];
 				$history->target = str_replace(",", "", $_POST["amount"]);
 				$history->result = str_replace(",", "", $_POST["result"]);
-				$history->detail = $_POST["detail"];
+				// $history->detail = $_POST["detail"];
 				$history->month = $_POST["month"];
 				$history->year = $_POST["year"];
 				$history->toDate = $_POST["toDate"];

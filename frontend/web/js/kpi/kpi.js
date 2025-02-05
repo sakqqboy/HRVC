@@ -93,27 +93,44 @@ function viewTabKpi(kpiHistoryId, tabId) {
 	}
 }
 
-function validateFormKpi() {
+function validateFormKpi(acType) {
 	//	event.preventDefault(); // ป้องกันการส่งฟอร์มก่อนการตรวจสอบ
 	console.log("validateFormKgi called");
 	var multiBranch = [];
 	var multiDepartment = [];
 	var multiTeam = [];
 	var i = 0;
-	$("#multi-check:checked").each(function () {
-		multiBranch[i] = $(this).val();
-		i++;
-	});
-	var a = 0;
-	$(".multi-check-department:checked").each(function () {
-		multiDepartment[a] = $(this).val();
-		a++;
-	});
-	var b = 0;
-	$(".multi-check-team:checked").each(function () {
-		multiTeam[b] = $(this).val();
-		b++;
-	});
+	if (acType != 'update') {
+		$("#multi-check:checked").each(function () {
+			multiBranch[i] = $(this).val();
+			i++;
+		});
+		var a = 0;
+		$(".multi-check-department:checked").each(function () {
+			multiDepartment[a] = $(this).val();
+			a++;
+		});
+		var b = 0;
+		$(".multi-check-team:checked").each(function () {
+			multiTeam[b] = $(this).val();
+			b++;
+		});
+	} else {
+		$("#multi-check-update:checked").each(function () {
+			multiBranch[i] = $(this).val();
+			i++;
+		});
+		var a = 0;
+		$(".multi-check-department-update:checked").each(function () {
+			multiDepartment[a] = $(this).val();
+			a++;
+		});
+		var b = 0;
+		$(".multi-check-team-update:checked").each(function () {
+			multiTeam[b] = $(this).val();
+			b++;
+		});
+	}
 	var fromDate = document.getElementById('fromDate').value.trim();
 	var toDate = document.getElementById('toDate').value.trim();
 	var nextDate = $('#nextDate').val();
