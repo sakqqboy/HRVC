@@ -574,26 +574,53 @@ class ManagementController extends Controller
 		$branch["textBranch"] = $kgiBranchText;
 
 		$kgiDepartmentText = '';
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-department?id=' . $kgiId);
-		$kgiDepartment = curl_exec($api);
-		$kgiDepartment = json_decode($kgiDepartment, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-department?id=' . $kgiId);
+		// $kgiDepartment = curl_exec($api);
+		// $kgiDepartment = json_decode($kgiDepartment, true);
+		$branchIdArr = KgiBranch::kgiBranch($kgiId);
+		$d = [];
+		if (count($branchIdArr) > 0) {
+			$i = 0;
+			foreach ($branchIdArr as $branchId) :
+				$department = Department::find()->where(["branchId" => $branchId, "status" => 1])->asArray()->all();
+				if (isset($department) && count($department) > 0) {
+					foreach ($department as $dep) :
+						$d[$dep["branchId"]][$dep["departmentId"]] = $dep["departmentName"];
+					endforeach;
+				}
+			endforeach;
+		}
 		$kgiDepartmentText = $this->renderAjax('multi_department_update', [
-			"d" => $kgiDepartment,
+			"d" => $d,
+			"kgiBranch" => $kgiBranch,
 			"kgiId" => $kgiId
 		]);
 		$department["textDepartment"] = $kgiDepartmentText;
-
 
 		$kgiTeamText = '';
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-team?id=' . $kgiId);
 		$kgiTeam = curl_exec($api);
 		$kgiTeam = json_decode($kgiTeam, true);
+		$kgiDepartment = KgiDepartment::kgiDepartment($kgiId);
+		$t = [];
+		if (count($kgiDepartment) > 0) {
+			$i = 0;
+			foreach ($kgiDepartment as $departmentId) :
+				$teams = Team::find()->where(["departmentId" => $departmentId, "status" => 1])->asArray()->all();
+				if (isset($teams) && count($teams) > 0) {
+					foreach ($teams as $team) :
+						$t[$team["departmentId"]][$team["teamId"]] = $team["teamName"];
+					endforeach;
+				}
+			endforeach;
+		}
 		$kgiTeamText = $this->renderAjax('multi_team_update', [
-			"t" => $kgiTeam,
+			"t" => $t,
 			"kgiId" => $kgiId
 		]);
+		//throw new exception($kgiTeamText);
 		$team["textTeam"] = $kgiTeamText;
-		//$data = array_merge($kgi, $branch, $department, $team);
+		$data = array_merge($kgi, $branch, $department, $team);
 
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
@@ -612,19 +639,26 @@ class ManagementController extends Controller
 		$units = curl_exec($api);
 		$units = json_decode($units, true);
 		curl_close($api);
-
+		//throw new exception(print_r($kgiTeam, true));
 		//curl_close($api);
 		//return json_encode($data);
 		return $this->render('kgi_form', [
-			"statusform" => 'create',
+			"statusform" => 'update',
 			"role" => $role,
 			"companies" => $companies,
-			"units" => $units
+			"units" => $units,
+			"data" => $data,
+			"kgiBranchText" => $kgiBranchText,
+			"kgiDepartmentText" => $kgiDepartmentText,
+			"kgiTeamText" => $kgiTeamText,
+			"kgiId" => $kgiId
+
 		]);
 	}
 	public function actionUpdateKgi()
 	{
 		$isManager = UserRole::isManager();
+		throw new exception(print_r(Yii::$app->request->post(), true));
 		if (isset($_POST["kgiId"]) && $_POST["kgiId"] != "") {
 			$result = isset($_POST["result"]) && $_POST["result"] != '' ? $_POST["result"] : 0;
 			$kgiId = $_POST["kgiId"];
@@ -2105,6 +2139,31 @@ class ManagementController extends Controller
 		} else {
 			$res["reason"] = "";
 		}
+		return json_encode($res);
+	}
+	public function actionAutoResult()
+	{
+		$kgiId = $_POST["kgiId"];
+		$kgi = Kgi::find()->where(["kgiId" => $kgiId])->asArray()->one();
+		$year = $kgi["year"];
+		$month = $kgi["month"];
+		$kgiTeam = KgiTeam::find()
+			->select('kgiTeamId,result')
+			->where([
+				"kgiId" => $kgiId,
+				"status" => [1, 2, 4],
+				"month" => $month,
+				"year" => $year
+			])
+			->asArray()
+			->all();
+		$autoResult = 0;
+		if (isset($kgiTeam) && count($kgiTeam) > 0) {
+			foreach ($kgiTeam as $kg):
+				$autoResult += $kg["result"];
+			endforeach;
+		}
+		$res["result"] = $autoResult;
 		return json_encode($res);
 	}
 }
