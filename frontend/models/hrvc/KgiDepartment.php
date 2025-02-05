@@ -42,4 +42,15 @@ class KgiDepartment extends \frontend\models\hrvc\master\KgiDepartmentMaster
         }
         return $has;
     }
+    public static function kgiDepartment($kgiId)
+    {
+        $kgiDepartment = KgiDepartment::find()
+            ->select('d.departmentId,d.departmentName')
+            ->JOIN("LEFT JOIN", "kgi", "kgi.kgiId=kgi_department.kgiId")
+            ->JOIN("LEFT JOIN", "department d", "d.departmentId=kgi_department.departmentId")
+            ->where(["kgi_department.kgiId" => $kgiId, "kgi.status" => 1, "kgi_department.status" => 1])
+            ->asArray()
+            ->all();
+        return $kgiDepartment;
+    }
 }

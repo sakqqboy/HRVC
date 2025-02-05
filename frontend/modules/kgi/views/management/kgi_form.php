@@ -3,7 +3,7 @@
 use yii\bootstrap5\ActiveForm;
 
 if ($statusform == 'update') {
-	$parturl = 'kgi/management/save-update-kgi';
+	$parturl = 'kgi/management/update-kgi';
 	$title = 'Update KGI';
 } else {
 	$parturl = 'kgi/management/create-kgi';
@@ -11,7 +11,7 @@ if ($statusform == 'update') {
 }
 $this->title = $title;
 $form = ActiveForm::begin([
-	'id' => 'create-kgi',
+	'id' => $statusform == 'update' ? 'update-kgi' : 'create-kgi',
 	//'enableClientValidation' => false, // ปิด validation ฝั่ง client
 	//'enableAjaxValidation' => false,
 	'method' => 'post',
@@ -29,8 +29,7 @@ if (isset($data['unitId']) && $data['unitId'] >= 1) {
 $quantRatio = $data['quantRatio'] ?? '';
 $selectedCode = $data['code'] ?? '';
 $selectedAmountType = $data['amountType'] ?? '';
-
-
+//throw new exception(print_r($data, true));
 $result = $data['result'] ?? 0;
 $targetAmount = $data['targetAmount'] ?? 0;
 $DueBehind = $targetAmount -  $result;
@@ -123,7 +122,7 @@ $DueBehind = $targetAmount -  $result;
 						</text>
 					</a>
 					<text class="pim-name-title">
-						Create Key Financial Indicator
+						Create Key Goal Indicator
 					</text>
 				</div>
 				<div class="col-4" style="display: flex; justify-content: center; align-items: center; gap: 20px;">
@@ -193,7 +192,7 @@ $DueBehind = $targetAmount -  $result;
 								title="<?= Yii::t('app', 'Enter the name of your key Performance indicator. This should be clear and specific, such as Number of customer Visits or Number of Cold calls to client') ?>">
 						</label>
 						<input type="text" class="form-control" id="kgiName" name="kgiName"
-							value="<?= isset($data['kpiName']) ? htmlspecialchars($data['kpiName']) : '' ?>"
+							value="<?= isset($data['kgiName']) ? htmlspecialchars($data['kgiName']) : '' ?>"
 							placeholder="Please Write the Name of Component" required>
 					</div>
 
@@ -207,6 +206,7 @@ $DueBehind = $targetAmount -  $result;
 								title="<?= Yii::t('app', 'Choose the company for which this performance indicator will be tracked. Only one company can be selected at a time to ensure accurate and focused Performance monitoring') ?>"
 								alt="Help Icon">
 						</label>
+						<input type="hidden" id="companyId-update" value="<?= isset($data['companyId']) ? $data['companyId'] : '' ?>">
 						<select class="form-select" name="companyId" id="companyId"
 							onchange="javascript:companyMultiBrach()" required>
 							<option value=""><?= Yii::t('app', 'Select Company') ?></option>
@@ -282,7 +282,7 @@ $DueBehind = $targetAmount -  $result;
 								<?php if ($statusform == 'create'): ?>
 									<!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
 								<?php else: ?>
-									<?= $kpiBranchText; ?>
+									<?= $kgiBranchText; ?>
 								<?php endif; ?>
 
 							</div>
@@ -292,8 +292,7 @@ $DueBehind = $targetAmount -  $result;
 						</div>
 					</div>
 
-					<div class="form-group mt-37"
-						style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+					<div class="form-group mt-37" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
 						<label class="text-manage-create" for="name">
 							<span class="text-danger">* </span>
 							<?= Yii::t('app', 'Select Department/s') ?>
@@ -339,12 +338,12 @@ $DueBehind = $targetAmount -  $result;
 						</div>
 
 						<div class="col-12" <?php if ($statusform == 'update'): ?> id="show-multi-department-update"
-							<?php else: ?> id="show-multi-department" <?php endif; ?> style="position: absolute; top: 80%; left: 0; width: 100%; z-index: 999; background-color: white; 
+							<?php else: ?> id="show-multi-department" <?php endif; ?> style="position: absolute; top: 82%; left: 0; width: 98%; z-index: 999; background-color: white; 
                             border: 1px solid #ced4da; padding: 10px; display: none;">
 							<?php if ($statusform == 'create'): ?>
 								<!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
 							<?php else: ?>
-								<?= $kpiDepartmentText; ?>
+								<?= $kgiDepartmentText; ?>
 							<?php endif; ?>
 						</div>
 
@@ -397,14 +396,13 @@ $DueBehind = $targetAmount -  $result;
 							</div>
 							<i class="toggle-icon-team fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
 						</div>
-
 						<div class="col-12" <?php if ($statusform == 'update'): ?> id="show-multi-team-update"
-							<?php else: ?> id="show-multi-team" <?php endif; ?> style="position: absolute; top: 60%; left: 0; width: 100%; z-index: 999; background-color: white; 
-                            border: 1px solid #ced4da; padding: 10px; display: none;">
+							<?php else: ?> id="show-multi-team" <?php endif; ?> style="position: absolute; top: 82%; left: 0; width: 98%; z-index: 999; background-color: white; 
+                           border: 1px solid #ced4da; padding: 10px; display: none;">
 							<?php if ($statusform == 'create'): ?>
 								<!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
 							<?php else: ?>
-								<?= $kpiTeamText; ?>
+								<?= $kgiTeamText; ?>
 							<?php endif; ?>
 						</div>
 
@@ -591,7 +589,7 @@ $DueBehind = $targetAmount -  $result;
 									aria-hidden="true"></i>
 							</div>
 							<input type="hidden" id="nextDate" name="nextCheckDate"
-								value="<?= isset($data['nextCheckDate']) ? $data['nextCheckDate'] : '' ?>">
+								value="<?= isset($data['nextCheck']) ? $data['nextCheck'] : '' ?>">
 							<!-- <input type="hidden" id="nextDate" name="nextCheckDate"> -->
 						</div>
 						<div id="calendar-due-update"
@@ -619,7 +617,7 @@ $DueBehind = $targetAmount -  $result;
 								<?= Yii::t('app', 'Quality') ?>
 							</option>
 						</select>
-						<input type="hidden" name="kpiId" id="kpiId" value="<?= isset($kpiId) ? $kpiId : '' ?>">
+						<input type="hidden" name="kgiId" id="kgiId" value="<?= isset($kgiId) ? $kgiId : '' ?>">
 					</div>
 
 					<div class="form-group mt-37" style="display: flex; gap: 14px; flex-wrap: wrap;">
@@ -722,6 +720,8 @@ $DueBehind = $targetAmount -  $result;
 								value="<?= isset($data['result']) ? $data['result'] : '' ?>"
 								style="border-left: none; font-size: 22px; font-style: normal; font-weight: 600;"
 								required oninput="updateIcon(this);">
+							<input type="hidden" id="auto-result" value="" name="autoUpdate">
+							<input type="hidden" id="previous-result" value="<?= isset($data['result']) ? $data['result'] : '' ?>">
 						</div>
 
 
@@ -729,19 +729,19 @@ $DueBehind = $targetAmount -  $result;
 							<?php if ($statusform == 'update') { ?>
 								<div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
 									<label class="switch">
-										<input type="checkbox">
+										<input type="checkbox" id="historic-checkbox-kgi" onchange="javascript:autoUpdateResult(<?= $kgiId ?>)">
 										<span class="slider round"></span>
 									</label>
-									<label class="sub-manage-create" id="branch-selected-message">
+									<label class="sub-manage-create" id="historic-switch">
 										<?= Yii::t('app', 'Historic Update') ?>
 									</label>
 								</div>
 								<div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
 									<label class="switch">
-										<input type="checkbox">
+										<input type="checkbox" id="override-checkbox-kgi" checked onchange="javascript:overrideUpdate()">
 										<span class="slider round"></span>
 									</label>
-									<label class="sub-manage-create" id="branch-selected-message">
+									<label class="sub-manage-create" id="override-switch">
 										<?= Yii::t('app', 'Override') ?>
 									</label>
 								</div>
@@ -832,12 +832,15 @@ $DueBehind = $targetAmount -  $result;
 	</div>
 </div>
 <?php if ($statusform == 'update') {
+	//throw new exception(print_r($data, true));
 ?>
 	<input type="hidden" value="update" id="acType">
+	<input type="hidden" value="<?= $data["priority"] ?>" id="priority">
 <?php
 } else {
 ?>
 	<input type="hidden" value="create" id="acType">
+
 <?php } ?>
 <?php ActiveForm::end(); ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -845,22 +848,24 @@ $DueBehind = $targetAmount -  $result;
 	$(document).ready(function() {
 		var statusform = '<?= $statusform ?>';
 		if (statusform === 'update') {
-			branchMultiDepartmentUpdateKpi();
-
-			// ดึงค่า branchId ที่ถูก checked แล้ว
+			var pri = $("#priority").val();
+			branchMultiDepartmentUpdate();
 			var checkedBranchIds = [];
+			var checkedDepartmentIds = [];
 			$('input[name="branch[]"]:checked').each(function() {
 				checkedBranchIds.push($(this).val());
 			});
-
-			// เรียกใช้งานฟังก์ชันสำหรับ branch ที่ถูก checked เท่านั้น
-			checkedBranchIds.forEach(function(branchId) {
-				// alert(branchId);
-				departmentMultiTeamUpdateKpi(branchId);
+			$('input[name="department[]"]:checked').each(function() {
+				checkedDepartmentIds.push($(this).val());
 			});
+			checkedBranchIds.forEach(function(branchId) {
+				departmentMultiTeamUpdate(branchId);
+			});
+			checkedDepartmentIds.forEach(function(departmentId) {
+				multiTeamUpdate(departmentId);
+			});
+			$("#priority-update").val(pri);
 		}
-
-
 		// ฟังก์ชันเปลี่ยนสีของ placeholder เมื่อมีการเลือกค่า
 		function updatePlaceholderColor(selector) {
 			$(selector).on('change', function() {
