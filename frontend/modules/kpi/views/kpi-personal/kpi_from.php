@@ -173,7 +173,8 @@ select.form-select option:disabled {
 
                             <path class="circle"
                                 d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                                stroke="#4db8ff" stroke-width="3" fill="none" stroke-dasharray="0, 100" />
+                                stroke="#4db8ff" stroke-width="3" fill="none"
+                                stroke-dasharray="<?=$percentage?>, 100" />
 
                             <!-- Percentage text in the middle -->
                             <text x="18" y="20.35" text-anchor="middle" dominant-baseline="middle" class="percentage"
