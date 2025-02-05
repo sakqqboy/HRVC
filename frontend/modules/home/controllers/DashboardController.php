@@ -78,7 +78,7 @@ class DashboardController extends Controller
     public function actionKfiId()
 	{
 		$kfiId=$_POST["id"];
-		$res["kfiId"]=ModelMaster::encodeParams(["kfiId"=>$kfiId ,'kpiHistoryId' => 0]);
+		$res["kfiId"]=ModelMaster::encodeParams(["kfiId"=>$kfiId ,'kfiHistoryId' => 0]);
 		return json_encode($res);
 	}
 

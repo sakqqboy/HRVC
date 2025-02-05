@@ -162,8 +162,7 @@ use yii\bootstrap5\ActiveForm;
                     <div class="col-4 text-center">
                         <?php if ($role >= 5 && $contentDetail['KFI']['showPercent'] !== '') { ?>
 
-                        <button class="btn-update btn-KFI" onclick="chengeButtonKFI(KFIData[currentKFIIndex].kfiId)"
-                            data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+                        <button class="btn-update btn-KFI" onclick="chengeButtonKFI(KFIData[currentKFIIndex].kfiId)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg" class="mb-2"
                                 style="width: 12px; height: 12px;">
                             <?= Yii::t('app', 'Update') ?>
@@ -690,11 +689,11 @@ function chengeButtonKFI(id) {
         },
         success: function(data) {
             // alert(data);
-            kpiId = data.kpiId;
-            // alert(kpiId);
-            const kpiUrl = $url + `kfi/management/update-kfi/` + kfiId;
+            kfiId = data.kfiId;
+            // alert(kfiId);
+            const kfiUrl = $url + `kfi/management/update-kfi/` + kfiId;
             // alert(kpiUrl);
-            window.location.href = kpiUrl;
+            window.location.href = kfiUrl;
         },
     });
 
