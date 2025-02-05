@@ -509,4 +509,52 @@ function overrideUpdate() {
 		$("#historic-checkbox-kgi").prop("checked", true).trigger('change');
 	}
 }
+function validateFormKgiUpdate() {
+	var multiBranch = [];
+	var multiDepartment = [];
+	var multiTeam = [];
+	var i = 0;
+	$("#multi-check-update:checked").each(function () {
+		multiBranch[i] = $(this).val();
+		i++;
+	});
+	var a = 0;
+	$(".multi-check-department-update:checked").each(function () {
+		multiDepartment[a] = $(this).val();
+		a++;
+	});
+	var b = 0;
+	$(".multi-check-team-update:checked").each(function () {
+		multiTeam[b] = $(this).val();
+		b++;
+	});
+	var fromDate = document.getElementById('fromDate').value.trim();
+	var toDate = document.getElementById('toDate').value.trim();
+	var nextDate = $('#nextDate').val();
+	if (multiBranch.length == 0) {
+		alert("Please select at least one branch!");
+		return false;
+	}
+	else if (multiDepartment.length == 0) {
+		alert("Please select at least one department!");
+		return false;
+	} else if (multiTeam.length == 0) {
+		alert("Please select at least one team!");
+		return false;
+	} else if (!fromDate && !toDate) {
+		alert("Please fill in Due Term");
+		return false;
+	} else if (!fromDate) {
+		alert("Please fill in Start Date");
+		return false;
+	} else if (!toDate) {
+		alert("Please fill in End Date");
+		return false;
+	} else if (nextDate == '') {
+		alert("Please fill in Target Due Update Date");
+		return false;
+	} else {
+		return true;
+	}
+}
 

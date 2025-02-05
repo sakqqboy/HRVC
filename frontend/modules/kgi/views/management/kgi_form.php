@@ -701,7 +701,8 @@ $DueBehind = $targetAmount -  $result;
 									title="<?= Yii::t('app', 'Historic update contains the update from the team and indivudials if you wish to use your own values, please toggle on Override to put custom numbers ') ?>"
 									alt="Help Icon">
 							</div>
-							<div class="updatehistory" style="text-align: right;">
+							<div class="updatehistory" class="updatehistory" style="text-align: right;cursor:pointer;"
+								data-bs-toggle="modal" data-bs-target="#update-history-popup">
 								<?php if ($statusform == 'update') { ?>
 									<img
 										src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg"><?= Yii::t('app', 'Update History') ?>
@@ -772,17 +773,11 @@ $DueBehind = $targetAmount -  $result;
 
 						if ($statusform == 'update') {
 						?>
-							<div style="display: flex;
-                                width: 99px;
-                                height: 40px;
-                                flex-direction: column;
-                                align-items: flex-end;
-                                ">
+							<div style="display: flex; width: 99px; height: 40px; flex-direction: column; align-items: flex-end;">
 								<label class="name-last-update">
 									Last Updated on
 								</label>
 								<text class="create-last-update">
-									<!-- 18/12/2024 -->
 									<?= isset($data['lastUpdate']) ? $data['lastUpdate'] : '' ?>
 								</text>
 							</div>
@@ -843,6 +838,7 @@ $DueBehind = $targetAmount -  $result;
 
 <?php } ?>
 <?php ActiveForm::end(); ?>
+<?= $this->render('modal_history') ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 	$(document).ready(function() {
@@ -865,6 +861,18 @@ $DueBehind = $targetAmount -  $result;
 				multiTeamUpdate(departmentId);
 			});
 			$("#priority-update").val(pri);
+			let isSubmittingUpdate = false; // ป้องกัน submit ซ้ำ
+			$("#update-kgi").on("beforeSubmit", function(event) {
+				if (isSubmittingUpdate) {
+					return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
+				}
+				isSubmittingUpdate = true;
+				if (!validateFormKgiUpdate()) {
+					isSubmittingUpdate = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
+					return false;
+				}
+				return true; // ถ้า validation ผ่าน ให้ submit ฟอร์มต่อไป
+			});
 		}
 		// ฟังก์ชันเปลี่ยนสีของ placeholder เมื่อมีการเลือกค่า
 		function updatePlaceholderColor(selector) {

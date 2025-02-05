@@ -182,6 +182,7 @@ class ManagementController extends Controller
 				"unitText" => Unit::unitName($kgiHistory["unitId"]),
 				"fromDate" => $kgiHistory["fromDate"],
 				"toDate" => $kgiHistory["toDate"],
+				"lastUpdate" => ModelMaster::dateNumber($kgiHistory["updateDateTime"]),
 				"fromDateDetail" => ModelMaster::engDate($kgiHistory["fromDate"], 2),
 				"toDateDetail" => ModelMaster::engDate($kgiHistory["toDate"], 2),
 				"isOver" => ModelMaster::isOverDuedate(Kgi::nextCheckDate($kgi['kgiId'])),
@@ -240,6 +241,7 @@ class ManagementController extends Controller
 				"toDate" => $kgi["toDate"],
 				"fromDateDetail" => ModelMaster::engDate($kgi["fromDate"], 2),
 				"toDateDetail" => ModelMaster::engDate($kgi["toDate"], 2),
+				"lastUpdate" => '-',
 				"isOver" => ModelMaster::isOverDuedate(Kgi::nextCheckDate($kgi['kgiId'])),
 			];
 		}

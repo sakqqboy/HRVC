@@ -658,23 +658,27 @@ class ManagementController extends Controller
 	public function actionUpdateKgi()
 	{
 		$isManager = UserRole::isManager();
-		throw new exception(print_r(Yii::$app->request->post(), true));
+		//throw new exception(print_r(Yii::$app->request->post(), true));
 		if (isset($_POST["kgiId"]) && $_POST["kgiId"] != "") {
-			$result = isset($_POST["result"]) && $_POST["result"] != '' ? $_POST["result"] : 0;
+			//$result = isset($_POST["result"]) && $_POST["result"] != '' ? $_POST["result"] : 0;
+			if (isset($_POST["result"])) {
+				$result = $_POST["result"];
+			} else {
+				$result = $_POST["autoUpdate"];
+			}
 			$kgiId = $_POST["kgiId"];
-			//throw new Exception(print_r(Yii::$app->request->post(), true));
 			$kgi = Kgi::find()->where(["kgiId" => $kgiId])->one();
 			$kgi->kgiName = $_POST["kgiName"];
 			$kgi->companyId = $_POST["companyId"];
-			$kgi->unitId = $_POST["unit"];
+			$kgi->unitId = $_POST["unitId"];
 			if ($kgi->fromDate == "") {
 				$kgi->fromDate = $_POST["fromDate"];
 			}
 			if ($kgi->toDate == "") {
 				$kgi->toDate = $_POST["toDate"];
 			}
-			if ($isManager == 1 &&  $_POST["targetAmount"] != "") {
-				$kgi->targetAmount = str_replace(",", "", $_POST["targetAmount"]);
+			if ($isManager == 1 &&  $_POST["amount"] != "") {
+				$kgi->targetAmount = str_replace(",", "", $_POST["amount"]);
 			}
 			//$kgi->targetAmount = $_POST["targetAmount"];
 			$kgi->kgiDetail = $_POST["detail"];
@@ -690,17 +694,17 @@ class ManagementController extends Controller
 			if ($kgi->save(false)) {
 				$kgiHistory = new KgiHistory();
 				$kgiHistory->kgiId = $_POST["kgiId"];
-				$kgiHistory->kgiHistoryName = $_POST["historyName"];
-				$kgiHistory->titleProcess = $_POST["historyName"];
-				$kgiHistory->unitId = $_POST["unit"];
-				$kgiHistory->nextCheckDate = $_POST["nextDate"];
+				// $kgiHistory->kgiHistoryName = $_POST["historyName"];
+				// $kgiHistory->titleProcess = $_POST["historyName"];
+				$kgiHistory->unitId = $_POST["unitId"];
+				$kgiHistory->nextCheckDate = $_POST["nextCheckDate"];
 				if ($isManager == 1) {
-					$kgiHistory->targetAmount = str_replace(",", "", $_POST["targetAmount"]);
+					$kgiHistory->targetAmount = str_replace(",", "", $_POST["amount"]);
 				} else {
 					$kgiHistory->targetAmount = $kgi->targetAmount;
 				}
 				$kgiHistory->description = $_POST["detail"];
-				$kgiHistory->remark = $_POST["remark"];
+				//$kgiHistory->remark = $_POST["remark"];
 				$kgiHistory->quantRatio = $_POST["quantRatio"];
 				$kgiHistory->priority = $_POST["priority"];
 				$kgiHistory->amountType = $_POST["amountType"];
