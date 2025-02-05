@@ -82,26 +82,26 @@ class DashboardController extends Controller
 		return json_encode($res);
 	}
 
-  
-
 	public function actionKgiEmployeeId()
 	{
 		$kgiEmployeeId=$_POST["id"];
-		$res["kgiEmployeeId"]=ModelMaster::encodeParams(["kgiEmployeeId"=>$kgiEmployeeId ,'kpiHistoryId' => 0]);
+		$res["kgiEmployeeId"]=ModelMaster::encodeParams(["kgiEmployeeId"=>$kgiEmployeeId ,'kgiHistoryId' => 0]);
 		return json_encode($res);
 	}
 
-    public function actionKgiId()
-	{
-		$kgiId=$_POST["id"];
-		$res["kgiId"]=ModelMaster::encodeParams(["kgiId"=>$kgiId ,'kpiHistoryId' => 0]);
-		return json_encode($res);
-	}
 
     public function actionKgiTeamId()
 	{
 		$kgiTeamId=$_POST["id"];
-		$res["kgiTeamId"]=ModelMaster::encodeParams(["kgiTeamId"=>$kgiTeamId ,'kpiHistoryId' => 0]);
+		$res["kgiTeamId"]=ModelMaster::encodeParams(["kgiTeamId"=>$kgiTeamId ,'kgiHistoryId' => 0]);
+		return json_encode($res);
+	}
+
+    
+    public function actionKgiId()
+	{
+		$kgiId=$_POST["id"];
+		$res["kgiId"]=ModelMaster::encodeParams(["kgiId"=>$kgiId ,'kgiHistoryId' => 0]);
 		return json_encode($res);
 	}
 

@@ -318,7 +318,7 @@ use yii\bootstrap5\ActiveForm;
                             <?= Yii::t('app', 'Update')  ?>
                         </button>
                         <?php } else { ?>
-                        <button class="btn-update btn-KGI" onclick="chengeButtonKGI(KGIData[currentKGIIndex].id)">
+                        <button class="btn-update btn-KGI" onclick="chengeButtonKGI(KGIData[currentKGIIndex].kgiId)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-black.svg" class="mb-2"
                                 style="width: 12px; height: 12px;">
                             <?= Yii::t('app', 'Update')  ?>
@@ -762,7 +762,7 @@ function chengeButtonKGI(id) {
         return;
     }
 
-    var url = $url + `home/dashboard/kgi-employee-id`;
+    var url = $url + `home/dashboard/kgi-id`;
     // alert(url);
     $.ajax({
         type: "POST",
@@ -773,8 +773,8 @@ function chengeButtonKGI(id) {
         },
         success: function(data) {
             // alert(data);
-            kgiEmployeeId = data.kgiEmployeeId;
-            const kgiUrl = $url + `kgi/kgi-personal/update-personal-kgi/` + kgiEmployeeId;
+            kgiId = data.kgiId;
+            const kgiUrl = $url + `kgi/management/prepare-update/` + kgiId;
             // alert(kgiUrl);
             window.location.href = kgiUrl;
         },
