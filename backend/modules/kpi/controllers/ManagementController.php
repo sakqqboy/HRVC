@@ -5,6 +5,7 @@ namespace backend\modules\kpi\controllers;
 use backend\models\hrvc\Branch;
 use backend\models\hrvc\Company;
 use backend\models\hrvc\Country;
+use backend\models\hrvc\Department;
 use backend\models\hrvc\KpiBranch;
 use backend\models\hrvc\KpiIssue;
 use backend\models\hrvc\KpiTeam;
@@ -488,7 +489,7 @@ class ManagementController extends Controller
 					$data[$history["kpiTeamId"]] = [
 						"creater" => User::employeeNameByuserId($history["createrId"]),
 						"teamName" => Team::teamName($teamId),
-						"teamName" => Team::teamName($teamId),
+						"departmentName" => Department::teamDepartment($teamId),
 						"picture" => Employee::employeeImage($employeeId),
 						"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
 						"time" => ModelMaster::timeText($time[1] ?? '00:00'),  
