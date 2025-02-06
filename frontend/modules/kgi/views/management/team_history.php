@@ -16,7 +16,7 @@ if (isset($kgiHistoryTeam) && count($kgiHistoryTeam) > 0) {
 							<?= $kht["teamName"] ?>
 						</text>
 						<text class="text-gray" style="font-size: 14px; font-weight: 400;">
-							Accounting & Outsourcing de... <!-- หรือใช้ข้อมูลอื่นจาก item -->
+							<?= $kht["departmentName"] ?>
 						</text>
 					</div>
 				</div>
@@ -27,14 +27,14 @@ if (isset($kgiHistoryTeam) && count($kgiHistoryTeam) > 0) {
 						<div style="display: flex; gap: 6px; flex-direction: column;">
 							<text class="text-end">
 								<span class="text-gray" style="font-size: 18px; font-weight: 400;">
-									${item.target} <!-- แสดง target -->
+									<?= $kht["target"] ?>
 								</span>
 								<span class="text-blue" style="font-size: 18px; font-weight: 600;">
-									/${item.result} <!-- แสดง result -->
+									/<?= $kht["result"] ?>
 								</span>
 							</text>
 							<text class="text-gray text-end" style="font-size: 14px; font-weight: 400;">
-								${item.createDateTime} <!-- แสดงวันที่ที่สร้าง -->
+								<?= $kht["createDateTime"] ?>
 							</text>
 						</div>
 					</div>

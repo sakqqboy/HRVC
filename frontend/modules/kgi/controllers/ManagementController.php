@@ -2197,6 +2197,8 @@ class ManagementController extends Controller
 
 		$teamText = $this->renderAjax('team_history', ["kgiHistoryTeam" => $kgiHistoryTeam]);
 		$individualText = $this->renderAjax('individual_history');
+		$res["teamText"] = $teamText;
+		$res["individualText"] = $individualText;
 		return json_encode($res);
 	}
 }
