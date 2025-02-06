@@ -93,7 +93,7 @@
                             month/year
                         </text>
                         <text class="text-gray" id="formattedRange" style="font-size: 18px; font-weight: 400;">
-                            formattedRange
+                            format date
                         </text>
                     </div>
                     <div class="col-5" style="display: flex; justify-content: center; align-items: center; gap: 20px;">
