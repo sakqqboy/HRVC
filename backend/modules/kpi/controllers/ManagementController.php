@@ -464,18 +464,18 @@ class ManagementController extends Controller
 	{
 
 		$kpiHistory = (new Query())
-    ->select('kth.*')
-    ->from('kpi_team kt')
-    ->leftJoin('kpi_team_history kth', 'kt.kpiTeamId = kth.kpiTeamId')
-    ->where(['kt.kpiId' => $kpiId])
-    ->andWhere([
-        'kth.kpiTeamHistoryId' => (new Query())
-            ->select('MAX(kpiTeamHistoryId)')
-            ->from('kpi_team_history')
-            ->where(['kpiTeamId' => new Expression('kt.kpiTeamId')]) // ใช้ Expression เพื่อ reference outer query
-    ])
-    ->andWhere(['kth.status' => [1, 2, 4]])
-    ->all();
+		->select('kth.*,kt.teamId')
+		->from('kpi_team kt')
+		->leftJoin('kpi_team_history kth', 'kt.kpiTeamId = kth.kpiTeamId')
+		->where(['kt.kpiId' => $kpiId])
+		->andWhere([
+			'kth.kpiTeamHistoryId' => (new Query())
+				->select('MAX(kpiTeamHistoryId)')
+				->from('kpi_team_history')
+				->where(['kpiTeamId' => new Expression('kt.kpiTeamId')]) // ใช้ Expression เพื่อ reference outer query
+		])
+		->andWhere(['kth.status' => [1, 2, 4]])
+		->all();
 
 
 	$data = [];
@@ -484,16 +484,16 @@ class ManagementController extends Controller
 				if ($history !== null && isset($history["createDateTime"], $history["createrId"], $history["status"])) {
 					$time = explode(' ', $history["createDateTime"]);
 					$employeeId = Employee::employeeId($history["createrId"]);
-					$EmployeeDetail = Employee::EmployeeDetail($employeeId);
-					$teamId = $EmployeeDetail["teamId"] ?? null;
+					// $EmployeeDetail = Employee::EmployeeDetail($employeeId);
+					$teamId = $kpiHistory["teamId"] ?? null;
 					$data[$history["kpiTeamId"]] = [
-						"creater" => User::employeeNameByuserId($history["createrId"]),
+						// "creater" => User::employeeNameByuserId($history["createrId"]),
 						"teamName" => Team::teamName($teamId),
 						"departmentName" => Department::teamDepartment($teamId),
-						"picture" => Employee::employeeImage($employeeId),
+						// "picture" => Employee::employeeImage($employeeId),
 						"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
 						"time" => ModelMaster::timeText($time[1] ?? '00:00'),  
-						"status" => $history["status"],
+						// "status" => $history["status"],
 						"target" => $history["target"] ?? '0.00',  
 						"result" => $history["result"] ?? '0.00',  
 						"createDateTime" => ModelMaster::monthDateYearTime($history["createDateTime"])
