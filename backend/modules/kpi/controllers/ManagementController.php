@@ -21,6 +21,7 @@ use backend\models\hrvc\Employee;
 use backend\models\hrvc\KgiHasKpi;
 use backend\models\hrvc\KpiEmployee;
 use backend\models\hrvc\KpiEmployeeHistory;
+use backend\models\hrvc\KpiTeamHistory;
 use backend\models\hrvc\Position;
 use backend\models\hrvc\Role;
 use backend\models\hrvc\Team;
@@ -463,44 +464,90 @@ class ManagementController extends Controller
 	public function actionKpiHistoryTeam($kpiId)
 	{
 
-		$kpiHistory = (new Query())
-		->select('kth.*,kt.teamId')
-		->from('kpi_team kt')
-		->leftJoin('kpi_team_history kth', 'kt.kpiTeamId = kth.kpiTeamId')
-		->where(['kt.kpiId' => $kpiId])
-		->andWhere([
-			'kth.kpiTeamHistoryId' => (new Query())
-				->select('MAX(kpiTeamHistoryId)')
-				->from('kpi_team_history')
-				->where(['kpiTeamId' => new Expression('kt.kpiTeamId')]) // ใช้ Expression เพื่อ reference outer query
-		])
-		->andWhere(['kth.status' => [1, 2, 4]])
-		->all();
+	// 	$kpiHistory = (new Query())
+	// 	->select('kth.*,kt.teamId')
+	// 	->from('kpi_team kt')
+	// 	->leftJoin('kpi_team_history kth', 'kt.kpiTeamId = kth.kpiTeamId')
+	// 	->where(['kt.kpiId' => $kpiId])
+	// 	->andWhere([
+	// 		'kth.kpiTeamHistoryId' => (new Query())
+	// 			->select('MAX(kpiTeamHistoryId)')
+	// 			->from('kpi_team_history')
+	// 			->where(['kpiTeamId' => new Expression('kt.kpiTeamId')]) // ใช้ Expression เพื่อ reference outer query
+	// 	])
+	// 	->andWhere(['kth.status' => [1, 2, 4]])
+	// 	->all();
 
 
-	$data = [];
-		if (isset($kpiHistory) && count($kpiHistory) > 0) {
-			foreach ($kpiHistory as $history) :
-				if ($history !== null && isset($history["createDateTime"], $history["createrId"], $history["status"])) {
-					$time = explode(' ', $history["createDateTime"]);
-					$employeeId = Employee::employeeId($history["createrId"]);
-					// $EmployeeDetail = Employee::EmployeeDetail($employeeId);
-					$teamId = $kpiHistory["teamId"] ?? null;
-					$data[$history["kpiTeamId"]] = [
-						// "creater" => User::employeeNameByuserId($history["createrId"]),
-						"teamName" => Team::teamName($teamId),
-						"departmentName" => Department::teamDepartment($teamId),
-						// "picture" => Employee::employeeImage($employeeId),
-						"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
-						"time" => ModelMaster::timeText($time[1] ?? '00:00'),  
-						// "status" => $history["status"],
-						"target" => $history["target"] ?? '0.00',  
-						"result" => $history["result"] ?? '0.00',  
-						"createDateTime" => ModelMaster::monthDateYearTime($history["createDateTime"])
+	// $data = [];
+	// 	if (isset($kpiHistory) && count($kpiHistory) > 0) {
+	// 		foreach ($kpiHistory as $history) :
+	// 			if ($history !== null && isset($history["createDateTime"], $history["createrId"], $history["status"])) {
+	// 				$time = explode(' ', $history["createDateTime"]);
+	// 				$employeeId = Employee::employeeId($history["createrId"]);
+	// 				// $EmployeeDetail = Employee::EmployeeDetail($employeeId);
+	// 				$teamId = $kpiHistory["teamId"] ?? null;
+	// 				$data[$history["kpiTeamId"]] = [
+	// 					// "creater" => User::employeeNameByuserId($history["createrId"]),
+	// 					"teamName" => Team::teamName($teamId),
+	// 					"departmentName" => Department::teamDepartment($teamId),
+	// 					// "picture" => Employee::employeeImage($employeeId),
+	// 					"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
+	// 					"time" => ModelMaster::timeText($time[1] ?? '00:00'),  
+	// 					// "status" => $history["status"],
+	// 					"target" => $history["target"] ?? '0.00',  
+	// 					"result" => $history["result"] ?? '0.00',  
+	// 					"createDateTime" => ModelMaster::monthDateYearTime($history["createDateTime"])
+	// 				];
+	// 			} else {
+	// 				// หากข้อมูลไม่สมบูรณ์หรือเป็น null ก็ข้ามการทำงานของ iteration นี้
+	// 				continue;
+	// 			}
+	// 		endforeach;
+	// 	}
+
+	$kpiTeam = kpiTeam::find()
+			->where([
+				"kpiId" => $kpiId,
+				"status" => [1, 2, 4]
+			])
+			->orderBy("updateDateTime DESC")
+			->asArray()
+			->all();
+		$data = [];
+		if (isset($kpiTeam) && count($kpiTeam) > 0) {
+			foreach ($kpiTeam as $kt):
+				$kpiTeamHistory = KpiTeamHistory::find()
+					->where([
+						"kpiTeamHistoryId" => $kt["kpiTeamId"],
+						"status" => [1, 2, 4]
+					])
+					->orderBy('createDateTime DESC')
+					->asArray()
+					->one();
+				if (isset($kpiTeamHistory) && !empty($kpiTeamHistory)) {
+					$time = explode(' ', $kpiTeamHistory["createDateTime"]);
+					$data[$kt["kpiTeamId"]] = [
+						"teamName" => Team::teamName($kt["teamId"]),
+						"createDate" => ModelMaster::engDateHr($kpiTeamHistory["createDateTime"]),
+						"time" => ModelMaster::timeText($time[1] ?? '00:00'),
+						"target" => $history["target"] ?? '0.00',
+						"result" => $history["result"] ?? '0.00',
+						"createDateTime" => ModelMaster::monthDateYearTime($kpiTeamHistory["createDateTime"]),
+						"departmentName" => Department::teamDepartment($kt["teamId"])
 					];
 				} else {
-					// หากข้อมูลไม่สมบูรณ์หรือเป็น null ก็ข้ามการทำงานของ iteration นี้
-					continue;
+					$time = explode(' ', $kt["createDateTime"]);
+					$data[$kt["kpiTeamId"]] = [
+						//"creater" => User::employeeNameByuserId($history["createrId"]),
+						"teamName" => Team::teamName($kt["teamId"]),
+						"createDate" => ModelMaster::engDateHr($kt["createDateTime"]),
+						"time" => ModelMaster::timeText($time[1] ?? '00:00'),
+						"target" => $history["target"] ?? '0.00',
+						"result" => $history["result"] ?? '0.00',
+						"createDateTime" => ModelMaster::monthDateYearTime($kt["createDateTime"]),
+						"departmentName" => Department::teamDepartment($kt["teamId"])
+					];
 				}
 			endforeach;
 		}
