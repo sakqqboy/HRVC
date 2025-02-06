@@ -90,7 +90,7 @@
                 <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
                     <div class="col-7" style="display: flex; gap: 16px; flex-direction: column;">
                         <text class="text-black" id="mont-hyear" style="font-size: 22px; font-weight: 600;">
-                            mont hyear
+                            month/year
                         </text>
                         <text class="text-gray" id="formattedRange" style="font-size: 18px; font-weight: 400;">
                             formattedRange
