@@ -390,47 +390,55 @@ class ManagementController extends Controller
 	{
 		$data = [];
 
-		$kpiHistory = KpiEmployeeHistory::find()
-		->alias('keh')
-		->select([
-			'keh.kpiEmployeeHistoryId',
-			'keh.kpiEmployeeId',
-			'keh.result',
-			'keh.target',
-			'keh.createDateTime',
-			'keh.status AS history_status',
-			'keh.createrId',
-			'ke.employeeId',
-			'ke.kpiId',
-			"CONCAT(e.employeeFirstname, ' ', e.employeeSurename) AS employeeFullname",
-			'e.picture',
-			't.teamName',
-		])
-		->innerJoin(['ke' => 'kpi_employee'], 'keh.kpiEmployeeId = ke.kpiEmployeeId')
-		->innerJoin(['e' => 'employee'], 'ke.employeeId = e.employeeId')
-		->innerJoin(['t' => 'team'], 'e.teamId = t.teamId')
-		->where([
-			'keh.status' => [1, 2, 4],
-			'ke.status' => [1, 2, 4],
-			'ke.kpiId' => $kpiId,
-			'e.status' => 1,
-		])
-		->groupBy([
-			'keh.kpiEmployeeHistoryId',
-			'keh.kpiEmployeeId',
-			'keh.result',
-			'keh.target',
-			'keh.createDateTime',
-			'keh.status',
-			'keh.createrId',
-			'ke.employeeId',
-			'ke.kpiId',
-			'employeeFullname',
-			'e.picture',
-			't.teamName',
-		])
-		->asArray()
-		->all();
+		$kpiHistory = (new Query())
+    ->select([
+        'keh.kpiEmployeeHistoryId',
+        'keh.kpiEmployeeId',
+        'keh.result',
+        'keh.target',
+        'keh.createDateTime',
+        'keh.status AS history_status',
+        'keh.createrId',
+        'keh.updateDateTime',
+        'ke.employeeId',
+        'ke.kpiId',
+        'CONCAT(e.employeeFirstname, " ", e.employeeSurename) AS employeeFullname',
+        'e.picture',
+        't.teamName'
+    ])
+    ->from('kpi_employee_history keh')
+    ->innerJoin(
+        [
+            'latest' => (new Query())
+                ->select(['kpiEmployeeId', 'MAX(updateDateTime) AS latest_update'])
+                ->from('kpi_employee_history')
+                ->groupBy('kpiEmployeeId')
+        ], 'keh.kpiEmployeeId = latest.kpiEmployeeId AND keh.updateDateTime = latest.latest_update'
+    )
+    ->innerJoin('kpi_employee ke', 'keh.kpiEmployeeId = ke.kpiEmployeeId')
+    ->innerJoin('employee e', 'ke.employeeId = e.employeeId')
+    ->innerJoin('team t', 'e.teamId = t.teamId')
+    ->innerJoin('kpi_history kh', 'kh.kpiId = ke.kpiId')
+    ->where(['keh.status' => [1, 2, 3]])
+    ->andWhere(['ke.status' => [1, 2, 3]])
+    ->andWhere(['ke.kpiId' => $kpiId])
+    ->andWhere(['e.status' => 1])
+    ->groupBy([
+        'keh.kpiEmployeeHistoryId',
+        'keh.kpiEmployeeId',
+        'keh.result',
+        'keh.target',
+        'keh.createDateTime',
+        'keh.status',
+        'keh.createrId',
+        'keh.updateDateTime',
+        'ke.employeeId',
+        'ke.kpiId',
+        'employeeFullname',
+        'e.picture',
+        't.teamName'
+    ])
+    ->all();
 
 
 		$data = [];
@@ -439,8 +447,6 @@ class ManagementController extends Controller
 				$time = explode(' ', $history["createDateTime"]);
 				$employeeId = Employee::employeeId($history["createrId"]);
 				$data[$history["kpiEmployeeHistoryId"]] = [
-					// "title" => $history["titleProcess"],
-					// "remark" => $history["remark"],
 					"createrId" => $history["createrId"],
 					"result" => $history["result"],
 					"creater" => User::employeeNameByuserId($history["createrId"]),
@@ -450,8 +456,6 @@ class ManagementController extends Controller
 					"time" => ModelMaster::timeText($time[1]),
 					"status" => $history["history_status"],
 					"target" => $history["target"],
-					// "month" => $history["month"],
-					// "year" => $history["year"],
 					"createDateTime" => ModelMaster::monthDateYearTime($history["createDateTime"])
 				];
 			endforeach;
@@ -518,7 +522,7 @@ class ManagementController extends Controller
 			foreach ($kpiTeam as $kt):
 				$kpiTeamHistory = KpiTeamHistory::find()
 					->where([
-						"kpiTeamHistoryId" => $kt["kpiTeamId"],
+						"kpiTeamId" => $kt["kpiTeamId"],
 						"status" => [1, 2, 4]
 					])
 					->orderBy('createDateTime DESC')
