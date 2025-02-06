@@ -14,6 +14,8 @@ use backend\models\hrvc\KgiGroup;
 use backend\models\hrvc\KgiIssue;
 use backend\models\hrvc\KgiTeam;
 use backend\models\hrvc\KgiTeamHistory;
+use backend\models\hrvc\KpiTeam;
+use backend\models\hrvc\KpiTeamHistory;
 use backend\models\hrvc\Team;
 use backend\models\hrvc\Unit;
 use backend\models\hrvc\User;
@@ -307,7 +309,6 @@ class KgiTeamController extends Controller
 				->asArray()
 				->orderBy('kgi_team_history.createDateTime DESC')
 				->one();
-
 		}
 
 		if (!isset($kgiTeamHistory) || empty($kgiTeamHistory)) {
@@ -866,6 +867,55 @@ class KgiTeamController extends Controller
 					"year" => $history["year"],
 					"creater" => User::employeeNameByuserId($history["createrId"]),
 				];
+			endforeach;
+		}
+		return json_encode($data);
+	}
+	public function actionKgiHistoryTeam($kgiId)
+	{
+		$kgiTeam = KgiTeam::find()
+			->where([
+				"kgiId" => $kgiId,
+				"status" => [1, 2, 4]
+			])
+			->orderBy("updateDateTime DESC")
+			->asArray()
+			->all();
+		$data = [];
+		if (isset($kgiTeam) && count($kgiTeam) > 0) {
+			foreach ($kgiTeam as $kt):
+				$kgiTeamHistory = KgiTeamHistory::find()
+					->where([
+						"kgiTeamHistoryId" => $kt["kgiTeamId"],
+						"status" => [1, 2, 4]
+					])
+					->orderBy('createDateTime DESC')
+					->asArray()
+					->one();
+				if (isset($kgiTeamHistory) && !empty($kgiTeamHistory)) {
+					$time = explode(' ', $kgiTeamHistory["createDateTime"]);
+					$data[$kt["kgiTeamId"]] = [
+						"teamName" => Team::teamName($kt["teamId"]),
+						"createDate" => ModelMaster::engDateHr($kgiTeamHistory["createDateTime"]),
+						"time" => ModelMaster::timeText($time[1] ?? '00:00'),
+						"target" => $history["target"] ?? '0.00',
+						"result" => $history["result"] ?? '0.00',
+						"createDateTime" => ModelMaster::monthDateYearTime($kgiTeamHistory["createDateTime"]),
+						"departmentName" => Department::teamDepartment($kt["teamId"])
+					];
+				} else {
+					$time = explode(' ', $kt["createDateTime"]);
+					$data[$kt["kgiTeamId"]] = [
+						//"creater" => User::employeeNameByuserId($history["createrId"]),
+						"teamName" => Team::teamName($kt["teamId"]),
+						"createDate" => ModelMaster::engDateHr($kt["createDateTime"]),
+						"time" => ModelMaster::timeText($time[1] ?? '00:00'),
+						"target" => $history["target"] ?? '0.00',
+						"result" => $history["result"] ?? '0.00',
+						"createDateTime" => ModelMaster::monthDateYearTime($kt["createDateTime"]),
+						"departmentName" => Department::teamDepartment($kt["teamId"])
+					];
+				}
 			endforeach;
 		}
 		return json_encode($data);

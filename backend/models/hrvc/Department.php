@@ -48,4 +48,20 @@ class Department extends \backend\models\hrvc\master\DepartmentMaster
         $department = Department::find()->select('departmentName')->where(["departmentId" => $departmentId])->asArray()->one();
         return $department["departmentName"];
     }
+    public static function teamDepartment($teamId)
+    {
+        $team = Team::find()->where(["teamId" => $teamId])->asArray()->one();
+        $departmentName = '';
+        if (isset($team) && $team["departmentId"] != '') {
+            $department = Department::find()
+                ->select('departmentName')
+                ->where(["departmentId" => $team["departmentId"]])
+                ->asArray()
+                ->one();
+            if (isset($department)) {
+                $departmentName = $department["departmentName"];
+            }
+        }
+        return $departmentName;
+    }
 }
