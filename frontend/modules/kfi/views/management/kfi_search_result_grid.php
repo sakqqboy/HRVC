@@ -349,18 +349,19 @@ $this->title = 'KFI Grid View';
                                         <?php
                                                 if ($colorFormat == 'disable' && $role >= 5) {
                                                 ?>
-                                        <div onclick="javascript:updateKfi(<?= $kfiId ?>)" class="pim-btn-setup"
-                                            data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+                                        <a class="pim-btn-setup"
+                                            href="<?= Yii::$app->homeUrl ?>kfi/management/update-kfi/<?= ModelMaster::encodeParams(['kfiId' => $kfiId,'kfiHistoryId' => 0]) ?>"
+                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; height: 30px; gap: 6px; flex-shrink: 0;">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
                                                 class="mb-2" style="width: 12px; height: 12px;">
                                             <?= Yii::t('app', 'Setup') ?>
-                                        </div>
+                                        </a>
                                         <?php
                                                 } else if ($role >= 5) {
                                                 ?>
-                                        <div onclick=" javascript:updateKfi(<?= $kfiId ?>)"
-                                            class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
-                                            data-bs-target="#staticBackdrop2">
+                                        <a class="pim-btn-<?= $colorFormat ?>"
+                                            href="<?= Yii::$app->homeUrl ?>kfi/management/update-kfi/<?= ModelMaster::encodeParams(['kfiId' => $kfiId,'kfiHistoryId' => 0]) ?>"
+                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; height: 30px; gap: 6px; flex-shrink: 0;">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
                                                 class="mb-2" style="width: 12px; height: 12px;">
                                             <?php if ($colorFormat == "complete") {
@@ -371,7 +372,7 @@ $this->title = 'KFI Grid View';
                                                             echo  yii::t('app', 'Update');
                                                         }
                                                         ?>
-                                        </div>
+                                        </a>
                                         <?php
                                                 } else { ?>
                                         <div class="pim-btn-disable" data-bs-target="#update-kgi-modal">

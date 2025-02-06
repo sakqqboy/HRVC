@@ -90,10 +90,10 @@
                 <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
                     <div class="col-7" style="display: flex; gap: 16px; flex-direction: column;">
                         <text class="text-black" id="mont-hyear" style="font-size: 22px; font-weight: 600;">
-                            mont hyear
+                            month/year
                         </text>
                         <text class="text-gray" id="formattedRange" style="font-size: 18px; font-weight: 400;">
-                            formattedRange
+                            format date
                         </text>
                     </div>
                     <div class="col-5" style="display: flex; justify-content: center; align-items: center; gap: 20px;">
@@ -141,7 +141,7 @@
                 <div
                     style="display: flex; justify-content: space-between; align-items: center; gap: 2.1px; width: 100%;">
                     <div class="alert  bg-white" style="width: 623px; height: 562px; padding: 22px 23px;">
-                        <div style="display: flex;flex-direction: column;align-items: flex-start;gap: 23px;">
+                        <div style="display: flex;flex-direction: column;align-items: flex-start;">
                             <div style="display: flex; justify-content: space-between;  width: 100%;">
                                 <span class="text-blue" style="font-size: 18px; font-weight: 500;">
                                     Total Team Achievement
@@ -155,7 +155,9 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="tab-pane fade show active fade"
+                            <div style="width: 100%; border-bottom: 0.5px solid #E4E4E4;"></div>
+                            <div style="width: 40%; border-bottom: 2px solid #2580D3;"></div>
+                            <div class="tab-pane fade show active fade pt-23"
                                 style="gap: 14px; width: 100%; max-height: 450px; overflow-y: auto;">
                                 <ul id="history-list-team" class="list-unstyled small">
                                     No data
@@ -164,7 +166,7 @@
                         </div>
                     </div>
                     <div class="alert  bg-white" style="width: 774.465px; height: 562px;">
-                        <div style="display: flex;flex-direction: column;align-items: flex-start;gap: 23px;">
+                        <div style="display: flex;flex-direction: column;align-items: flex-start;">
                             <div style="display: flex; justify-content: space-between;  width: 100%;">
                                 <span class="text-blue" style="font-size: 18px; font-weight: 500;">
                                     Individual Achievement
@@ -178,7 +180,9 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="tab-pane fade show active fade"
+                            <div style="width: 100%; border-bottom: 0.5px solid #E4E4E4;"></div>
+                            <div style="width: 40%; border-bottom: 2px solid #2580D3;"></div>
+                            <div class="tab-pane fade show active fade pt-23"
                                 style="gap: 14px; width: 100%; max-height: 450px; overflow-y: auto;">
                                 <ul id="history-list-creater" class="list-unstyled small">
                                     No data

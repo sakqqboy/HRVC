@@ -744,7 +744,7 @@ class KpiPersonalController extends Controller
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/kpi-history?kpiId=' . $kpiId . '&&kpiEmployeeId=' . $kpiEmployeeId . '&&kpiEmployeeHistoryId=' . $kpiEmployeeHistoryId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-history-employee?kpiId=' . $kpiId);
 		$history = curl_exec($api);
 		$history = json_decode($history, true);
 

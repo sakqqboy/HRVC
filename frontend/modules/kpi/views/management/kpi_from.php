@@ -25,7 +25,8 @@ $selectedCode = $data['code'] ?? '';
 $selectedAmountType = $data['amountType'] ?? '';
 $selectedPriority = isset($data['priority']) ? $data['priority'] : '';
 
-$percentage = isset($data['ratio']) ? $data['ratio'] : 00;
+// $percentage = isset($data['ratio']) ? $data['ratio'] : 00;
+$percentage = isset($data['ratio']) ? round((float)$data['ratio']) : 0;
 $result = $data['result'] ?? 0;
 $value = isset($data['result']) ? $data['result'] : 0;
 $sumvalue = isset($data['sumresult']) ? $data['sumresult'] : 0;
@@ -987,7 +988,8 @@ function modalHistory(kpiId) {
         },
         success: function(data) {
             var percentage = parseFloat(data.percentage);
-            var dueBehind = 100 - percentage; // ✅ คำนวณส่วนต่าง
+            var dueBehind = 100 - percentage;
+            // dueBehind = dueBehind.toFixed(2); // จำกัดทศนิยมไม่เกิน 2 ตำแหน่ง
             $("#mont-hyear").text(data.month + " " + data.year);
             $("#formattedRange").text(data.formattedRange);
             $("#Target").text(data.targetAmount);
@@ -996,12 +998,13 @@ function modalHistory(kpiId) {
             var dashArrayValue = (percentage / 100) * 100;
             $(".circle").attr("stroke-dasharray", dashArrayValue + ", 100");
             $("#DueBehind").text(dueBehind + "%");
-            // console.log(data.historyTeam);
+            console.log(data.kpiId);
+            console.log(data.history);
             var historyData = data.history; // ดึงข้อมูล history
             var historyList = $('#history-list-creater');
             historyList.empty(); // เคลียร์รายการเก่า
             var historyArray = Object.values(historyData);
-
+            console.log(data.historyTeam);
             var historyTeamData = data.historyTeam; // ดึงข้อมูล history
             var historyTeamList = $('#history-list-team');
             historyTeamList.empty(); // เคลียร์รายการเก่า
