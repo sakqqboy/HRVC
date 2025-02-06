@@ -998,13 +998,13 @@ function modalHistory(kpiId) {
             var dashArrayValue = (percentage / 100) * 100;
             $(".circle").attr("stroke-dasharray", dashArrayValue + ", 100");
             $("#DueBehind").text(dueBehind + "%");
-            console.log(data.kpiId);
-            console.log(data.history);
+            // console.log(data.kpiId);
+            // console.log(data.history);
             var historyData = data.history; // ดึงข้อมูล history
             var historyList = $('#history-list-creater');
             historyList.empty(); // เคลียร์รายการเก่า
             var historyArray = Object.values(historyData);
-            console.log(data.historyTeam);
+            // console.log(data.historyTeam);
             var historyTeamData = data.historyTeam; // ดึงข้อมูล history
             var historyTeamList = $('#history-list-team');
             historyTeamList.empty(); // เคลียร์รายการเก่า

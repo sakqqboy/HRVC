@@ -26,6 +26,7 @@ use backend\models\hrvc\Team;
 use backend\models\hrvc\Title;
 use backend\models\hrvc\User;
 use backend\models\hrvc\UserRole;
+use yii\db\Expression;
 use yii\db\Query;
 use yii\web\Controller;
 
@@ -408,8 +409,8 @@ class ManagementController extends Controller
 		->innerJoin(['t' => 'team'], 'e.teamId = t.teamId')
 		->innerJoin(['kh' => 'kpi_history'], 'kh.kpiId = ke.kpiId')
 		->where([
-			'keh.status' => [1, 2, 3],
-			'ke.status' => [1, 2, 3],
+			'keh.status' => [1, 2, 4],
+			'ke.status' => [1, 2, 4],
 			'ke.kpiId' => $kpiId,
 			'e.status' => 1,
 		])
@@ -462,16 +463,19 @@ class ManagementController extends Controller
 	{
 
 		$kpiHistory = (new Query())
-		->select('kth.*')
-		->from('kpi_team kt')
-		->leftJoin('kpi_team_history kth', 'kt.kpiTeamId = kth.kpiTeamId')
-		->where(['kt.kpiId' => $kpiId])
-		->andWhere(['kth.kpiTeamHistoryId' => (new Query())
-			->select('MAX(kpiTeamHistoryId)')
-			->from('kpi_team_history')
-			->where('kpiTeamId = kt.kpiTeamId')
-		])
-		->all();
+    ->select('kth.*')
+    ->from('kpi_team kt')
+    ->leftJoin('kpi_team_history kth', 'kt.kpiTeamId = kth.kpiTeamId')
+    ->where(['kt.kpiId' => $kpiId])
+    ->andWhere([
+        'kth.kpiTeamHistoryId' => (new Query())
+            ->select('MAX(kpiTeamHistoryId)')
+            ->from('kpi_team_history')
+            ->where(['kpiTeamId' => new Expression('kt.kpiTeamId')]) // ใช้ Expression เพื่อ reference outer query
+    ])
+    ->andWhere(['kth.status' => [1, 2, 4]])
+    ->all();
+
 
 	$data = [];
 		if (isset($kpiHistory) && count($kpiHistory) > 0) {
@@ -483,6 +487,7 @@ class ManagementController extends Controller
 					$teamId = $EmployeeDetail["teamId"] ?? null;
 					$data[$history["kpiTeamId"]] = [
 						"creater" => User::employeeNameByuserId($history["createrId"]),
+						"teamName" => Team::teamName($teamId),
 						"teamName" => Team::teamName($teamId),
 						"picture" => Employee::employeeImage($employeeId),
 						"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
