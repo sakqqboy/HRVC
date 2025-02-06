@@ -1,5 +1,6 @@
 <?php
 
+use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
 $this->title = 'KPI View';
@@ -51,24 +52,25 @@ $this->title = 'KPI View';
                         style="margin-right: 5px; padding-right: 5px;">
                         <span class="team-icon pim-team-<?= $colorFormat ?>">
                             <?php if (!empty($kpiEmployeeDetail['picture'])): ?>
-                                <img src="<?= Yii::$app->homeUrl . $kpiEmployeeDetail['picture'] ?>" alt="Team Icon"
-                                    style="border-radius: 100%;">
+                            <img src="<?= Yii::$app->homeUrl . $kpiEmployeeDetail['picture'] ?>" alt="Team Icon"
+                                style="border-radius: 100%;">
                             <?php else: ?>
-                                <img src="/HRVC/frontend/web/image/user.svg" alt="Team Icon">
+                            <img src="/HRVC/frontend/web/image/user.svg" alt="Team Icon">
                             <?php endif; ?>
                         </span>
                         <span class="team-name"> <?= $kpiEmployeeDetail['employeeName']; ?></span>
                     </span>
                     <?php if ($role >= 5) {
                     ?>
-                        <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kpi"
-                            onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)"
-                            onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
-                            onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
-                                class="pim-icon" style="margin-top: -3px; width: 12px; height: 14px;"> <?= Yii::t('app', 'Delete') ?>
+                    <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kpi"
+                        onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)"
+                        onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
+                        onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
+                            class="pim-icon" style="margin-top: -3px; width: 12px; height: 14px;">
+                        <?= Yii::t('app', 'Delete') ?>
 
-                        </a>
+                    </a>
                     <?php } ?>
                 </div>
             </div>
@@ -109,22 +111,22 @@ $this->title = 'KPI View';
                                             <?php
                                             if ($kpiEmployeeDetail["priority"] == "A" || $kpiEmployeeDetail["priority"] == "B") {
                                             ?>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
                                             <?php
                                             }
                                             if ($kpiEmployeeDetail["priority"] == "A" || $kpiEmployeeDetail["priority"] == "C") {
                                             ?>
-                                                <i class="fa fa-star big-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star big-star" aria-hidden="true"></i>
                                             <?php
                                             }
                                             if ($kpiEmployeeDetail["priority"] == "B") {
                                             ?>
-                                                <i class="fa fa-star ml-10" aria-hidden="true"></i>
+                                            <i class="fa fa-star ml-10" aria-hidden="true"></i>
                                             <?php
                                             }
                                             if ($kpiEmployeeDetail["priority"] == "A") {
                                             ?>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
                                             <?php
                                             }
                                             ?>
@@ -148,7 +150,7 @@ $this->title = 'KPI View';
                                 <div class="col-12  pim-duedate">
                                     <?= $kpiEmployeeDetail["unitText"] ?>
                                 </div>
-                            </div>ฟกหด
+                            </div>
                             <div class="col-lg-7 pim-subheader-font pr-15 pl-15">
                                 <div class="row">
                                     <div class="col-5 text-start">
@@ -226,11 +228,12 @@ $this->title = 'KPI View';
                                         <?php
                                         if ($role > 3  && $kpiEmployeeDetail["status"] == 1) {
                                         ?>
-                                            <div onclick="javascript:updateKpi(<?= $kpiId ?>)"
-                                                class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
-                                                data-bs-target="#update-kpi-modal">
-                                                <i class="fa fa-refresh" aria-hidden="true"></i> <?= Yii::t('app', 'Update') ?>
-                                            </div>
+                                        <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/update-personal-kpi/<?= ModelMaster::encodeParams(['kpiEmployeeId' => $kpiEmployeeId,'kpiHistoryId' => 0]) ?>"
+                                            class="pim-btn-<?= $colorFormat ?>"
+                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px;  height: 30px; gap: 6px; flex-shrink: 0;">
+                                            <i class="fa fa-refresh" aria-hidden="true"></i>
+                                            <?= Yii::t('app', 'Update') ?>
+                                        </a>
                                         <?php
                                         }
                                         ?>
@@ -314,28 +317,28 @@ $this->title = 'KPI View';
                                 if (isset($kpiTeams) && count($kpiTeams) > 0) {
                                     $i = 0;
                                     foreach ($kpiTeams as $teamId => $team): ?>
-                                        <div class="col-lg-6 col-md-6 col-12 mb-10">
-                                            <div class="col-12 small-content bg-white pl-20">
-                                                <div class="row">
-                                                    <div class="col-2  pl-0 pr-0">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg"
-                                                            class="image-AssignMembers">
-                                                    </div>
-                                                    <div class="col-7 pl-10 border-right">
-                                                        <div class="col-12 font-size-12 text-b pr-0">
-                                                            <strong><?= $team['teamName'] ?></strong>
-                                                        </div>
-                                                        <div class="col-12 pim-employee-title"
-                                                            style="font-size: 10px !important;">
-                                                            <?= $team["departmentName"] ?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-2 text-center pr-0 pl-0 pt-8" style="font-weight: 400;">
-                                                        <?= $team['totalEmployee'] ?>
-                                                    </div>
+                                <div class="col-lg-6 col-md-6 col-12 mb-10">
+                                    <div class="col-12 small-content bg-white pl-20">
+                                        <div class="row">
+                                            <div class="col-2  pl-0 pr-0">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg"
+                                                    class="image-AssignMembers">
+                                            </div>
+                                            <div class="col-7 pl-10 border-right">
+                                                <div class="col-12 font-size-12 text-b pr-0">
+                                                    <strong><?= $team['teamName'] ?></strong>
+                                                </div>
+                                                <div class="col-12 pim-employee-title"
+                                                    style="font-size: 10px !important;">
+                                                    <?= $team["departmentName"] ?>
                                                 </div>
                                             </div>
+                                            <div class="col-2 text-center pr-0 pl-0 pt-8" style="font-weight: 400;">
+                                                <?= $team['totalEmployee'] ?>
+                                            </div>
                                         </div>
+                                    </div>
+                                </div>
                                 <?php
                                         $i++;
                                     endforeach;
@@ -359,24 +362,24 @@ $this->title = 'KPI View';
                                 <?php
                                 if (isset($kpiEmployeeDetail["kpiEmployeeDetail"]) && count($kpiEmployeeDetail["kpiEmployeeDetail"]) > 0) {
                                     foreach ($kpiDetkpiEmployeeDetailail["kpiEmployeeDetail"] as $employeeId => $employee): ?>
-                                        <div class="col-lg-4 col-md-6 col-12 mt-10 pt-0"
-                                            onclick="javascription:openKpiEmployeeView(<?= $employeeId ?>,<?= $kpiId ?>)"
-                                            style="cursor: pointer;">
-                                            <div class="row">
-                                                <div class="col-3 pr-0 pl-0">
-                                                    <img src="<?= Yii::$app->homeUrl . $employee['picture'] ?>"
-                                                        class="image-AssignMembers">
-                                                </div>
-                                                <div class="col-9 pl-10">
-                                                    <div class="col-12 pim-employee-Name pr-0">
-                                                        <strong><?= $employee['name'] ?></strong>
-                                                    </div>
-                                                    <div class="col-12 pim-employee-title">
-                                                        <?= Yii::t('app', $employee['title']) ?>
-                                                    </div>
-                                                </div>
+                                <div class="col-lg-4 col-md-6 col-12 mt-10 pt-0"
+                                    onclick="javascription:openKpiEmployeeView(<?= $employeeId ?>,<?= $kpiId ?>)"
+                                    style="cursor: pointer;">
+                                    <div class="row">
+                                        <div class="col-3 pr-0 pl-0">
+                                            <img src="<?= Yii::$app->homeUrl . $employee['picture'] ?>"
+                                                class="image-AssignMembers">
+                                        </div>
+                                        <div class="col-9 pl-10">
+                                            <div class="col-12 pim-employee-Name pr-0">
+                                                <strong><?= $employee['name'] ?></strong>
+                                            </div>
+                                            <div class="col-12 pim-employee-title">
+                                                <?= Yii::t('app', $employee['title']) ?>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
                                 <?php
                                     endforeach;
                                 }
@@ -412,15 +415,15 @@ $form = ActiveForm::begin([
 
 
 <script>
-    // Optionally set a default tab to be active on page load
-    window.onload = function() {
-        let openTab = <?php echo json_encode($openTab); ?>; // PHP value passed to JavaScript
-        if (openTab) {
-            viewTabEmployeeKpi(<?= $kpiEmployeeHistoryId ?>,
-                <?= $kpiEmployeeId ?>, openTab); // Set the tab based on the PHP value
-        } else {
-            viewTabEmployeeKpi(<?= $kpiEmployeeHistoryId ?>,
-                <?= $kpiEmployeeId ?>, 1); // Default to tab 1 if no value is passed
-        }
+// Optionally set a default tab to be active on page load
+window.onload = function() {
+    let openTab = <?php echo json_encode($openTab); ?>; // PHP value passed to JavaScript
+    if (openTab) {
+        viewTabEmployeeKpi(<?= $kpiEmployeeHistoryId ?>,
+            <?= $kpiEmployeeId ?>, openTab); // Set the tab based on the PHP value
+    } else {
+        viewTabEmployeeKpi(<?= $kpiEmployeeHistoryId ?>,
+            <?= $kpiEmployeeId ?>, 1); // Default to tab 1 if no value is passed
     }
+}
 </script>
