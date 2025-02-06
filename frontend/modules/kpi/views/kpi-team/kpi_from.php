@@ -13,7 +13,8 @@ $form = ActiveForm::begin([
     'action' => Yii::$app->homeUrl . $parturl
 ]); 
 
-$percentage = isset($data['ratio']) ? $data['ratio'] : 00;
+// $percentage = isset($data['ratio']) ? $data['ratio'] : 00;
+$percentage = isset($data['ratio']) ? number_format((float)$data['ratio'], 2) : '0.00';
 $result = $data['result'] ?? 0;
 $value = isset($data['result']) ? $data['result'] : 0;
 $sumvalue = isset($data['sumresult']) ? $data['sumresult'] : 0;
@@ -986,6 +987,7 @@ function modalHistory(kpiId) {
         success: function(data) {
             var percentage = parseFloat(data.percentage);
             var dueBehind = 100 - percentage; // ✅ คำนวณส่วนต่าง
+            dueBehind = dueBehind.toFixed(2); // จำกัดทศนิยมไม่เกิน 2 ตำแหน่ง
             $("#mont-hyear").text(data.month + " " + data.year);
             $("#formattedRange").text(data.formattedRange);
             $("#Target").text(data.targetAmount);

@@ -19,6 +19,7 @@ use common\helpers\Path;
 use backend\models\hrvc\Employee;
 use backend\models\hrvc\KgiHasKpi;
 use backend\models\hrvc\KpiEmployee;
+use backend\models\hrvc\KpiEmployeeHistory;
 use backend\models\hrvc\Position;
 use backend\models\hrvc\Role;
 use backend\models\hrvc\Team;
@@ -333,11 +334,6 @@ class ManagementController extends Controller
 	}
 	public function actionKpiHistory($kpiId,$kpiHistoryId)
 	{
-		// $kpiHistory = KpiHistory::find()
-		// 	->where(["kpiId" => $kpiId, "status" => [1, 2]])
-		// 	->orderBy('kpiHistoryId DESC')
-		// 	->asArray()
-		// 	->all();
 
 			if ($kpiHistoryId == 0) {
 				$kpiHistory = KpiHistory::find()
@@ -383,6 +379,82 @@ class ManagementController extends Controller
 				];
 			endforeach;
 		}
+		return json_encode($data);
+	}
+
+
+	public function actionKpiHistoryEmployee($kpiId)
+	{
+		$data = [];
+
+		$kpiHistory = KpiEmployeeHistory::find()
+		->alias('keh')
+		->select([
+			'keh.kpiEmployeeHistoryId',
+			'keh.kpiEmployeeId',
+			'keh.result',
+			'keh.target',
+			'keh.createDateTime',
+			'keh.status AS history_status',
+			'keh.createrId',
+			'ke.employeeId',
+			'ke.kpiId',
+			"CONCAT(e.employeeFirstname, ' ', e.employeeSurename) AS employeeFullname",
+			'e.picture',
+			't.teamName',
+		])
+		->innerJoin(['ke' => 'kpi_employee'], 'keh.kpiEmployeeId = ke.kpiEmployeeId')
+		->innerJoin(['e' => 'employee'], 'ke.employeeId = e.employeeId')
+		->innerJoin(['t' => 'team'], 'e.teamId = t.teamId')
+		->innerJoin(['kh' => 'kpi_history'], 'kh.kpiId = ke.kpiId')
+		->where([
+			'keh.status' => [1, 2, 3],
+			'ke.status' => [1, 2, 3],
+			'ke.kpiId' => $kpiId,
+			'e.status' => 1,
+		])
+		->groupBy([
+			'keh.kpiEmployeeHistoryId',
+			'keh.kpiEmployeeId',
+			'keh.result',
+			'keh.target',
+			'keh.createDateTime',
+			'keh.status',
+			'keh.createrId',
+			'ke.employeeId',
+			'ke.kpiId',
+			'employeeFullname',
+			'e.picture',
+			't.teamName',
+		])
+		->asArray()
+		->all();
+
+
+		$data = [];
+		if (isset($kpiHistory) && count($kpiHistory) > 0) {
+			foreach ($kpiHistory as $history) :
+				$time = explode(' ', $history["createDateTime"]);
+				$employeeId = Employee::employeeId($history["createrId"]);
+				$data[$history["kpiEmployeeHistoryId"]] = [
+					// "title" => $history["titleProcess"],
+					// "remark" => $history["remark"],
+					"createrId" => $history["createrId"],
+					"result" => $history["result"],
+					"creater" => User::employeeNameByuserId($history["createrId"]),
+					"teamName" => $history["teamName"],
+					"picture" => Employee::employeeImage($employeeId),
+					"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
+					"time" => ModelMaster::timeText($time[1]),
+					"status" => $history["history_status"],
+					"target" => $history["target"],
+					// "month" => $history["month"],
+					// "year" => $history["year"],
+					"createDateTime" => ModelMaster::monthDateYearTime($history["createDateTime"])
+				];
+			endforeach;
+		}
+		
 		return json_encode($data);
 	}
 

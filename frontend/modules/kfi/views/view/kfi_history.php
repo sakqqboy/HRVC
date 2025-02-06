@@ -29,16 +29,16 @@ $this->title = 'KFI View';
                 </div>
                 <?php if ($role >= 5) {
                 ?>
-                    <div class="col-1">
-                        <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#staticBackdrop4"
-                            onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)"
-                            onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
-                            onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
-                                class="pim-icon" style="margin-top: -3px; width: 12px; height: 14px;">
-                            <?= Yii::t('app', 'Delete') ?>
-                        </a>
-                    </div>
+                <div class="col-1">
+                    <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#staticBackdrop4"
+                        onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)"
+                        onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
+                        onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
+                            class="pim-icon" style="margin-top: -3px; width: 12px; height: 14px;">
+                        <?= Yii::t('app', 'Delete') ?>
+                    </a>
+                </div>
                 <?php
                 }
                 ?>
@@ -176,11 +176,12 @@ $this->title = 'KFI View';
                                         <?php
                                         if ($role > 3  && $kfiDetail["status"] == 1) {
                                         ?>
-                                            <div onclick="javascript:updateKfi(<?= $kfiId ?>)"
-                                                class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
-                                                data-bs-target="#update-kfi-modal">
-                                                <i class="fa fa-refresh" aria-hidden="true"></i> <?= Yii::t('app', 'Update') ?>
-                                            </div>
+                                        <a class="pim-btn-<?= $colorFormat ?>"
+                                            href="<?= Yii::$app->homeUrl ?>kfi/management/update-kfi/<?= ModelMaster::encodeParams(['kfiId' => $kfiId,'kfiHistoryId' => 0]) ?>"
+                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; height: 30px; gap: 6px; flex-shrink: 0;">
+                                            <i class="fa fa-refresh" aria-hidden="true"></i>
+                                            <?= Yii::t('app', 'Update') ?>
+                                        </a>
                                         <?php
                                         }
                                         ?>
@@ -266,12 +267,12 @@ $form = ActiveForm::begin([
 <?= $this->render('modal_employee_history') ?>
 
 <script>
-    window.onload = function() {
-        let openTab = <?= $openTab ?>; // PHP value passed to JavaScript
-        if (openTab) {
-            viewTabKfi(<?= $kfiHistoryId ?>, openTab); // Set the tab based on the PHP value
-        } else {
-            viewTabKfi(<?= $kfiHistoryId ?>, 1); // Default to tab 1 if no value is passed
-        }
+window.onload = function() {
+    let openTab = <?= $openTab ?>; // PHP value passed to JavaScript
+    if (openTab) {
+        viewTabKfi(<?= $kfiHistoryId ?>, openTab); // Set the tab based on the PHP value
+    } else {
+        viewTabKfi(<?= $kfiHistoryId ?>, 1); // Default to tab 1 if no value is passed
     }
+}
 </script>
