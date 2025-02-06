@@ -13,7 +13,7 @@ $form = ActiveForm::begin([
 
 ]);
 
-$percentage = isset($data['ratio']) ? number_format((float)$data['ratio'], 2) : '0.00';
+$percentage = isset($data['ratio']) ? round((float)$data['ratio']) : 0;
 $result = $data['result'] ?? 0;
 $value = isset($data['result']) ? $data['result'] : 0;
 $kpiEmployeeHistoryId = isset($data['kpiEmployeeHistoryId']) ? $data['kpiEmployeeHistoryId'] : 0;
@@ -970,7 +970,7 @@ function modalHistory(kpiId) {
     var url = $url + 'kpi/kpi-personal/modal-history';
     // alert(kpiId);
     var percentage = <?= json_encode($percentage) ?>;
-    dueBehind = dueBehind.toFixed(2); // จำกัดทศนิยมไม่เกิน 2 ตำแหน่ง
+    // dueBehind = dueBehind.toFixed(2); // จำกัดทศนิยมไม่เกิน 2 ตำแหน่ง
     var result = <?= json_encode($result) ?>;
     var sumvalue = <?= json_encode($sumvalue) ?>;
     var targetAmount = <?= json_encode($targetAmount) ?>;

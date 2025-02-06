@@ -404,7 +404,7 @@ class ManagementController extends Controller
 			't.teamName',
 		])
 		->innerJoin(['ke' => 'kpi_employee'], 'keh.kpiEmployeeId = ke.kpiEmployeeId')
-		->innerJoin(['e' => 'employee'], 'ke.employeeId = e.employeeId')
+		->innerJoin(['e' => 'employee'], 'keh.createrId = e.employeeId')
 		->innerJoin(['t' => 'team'], 'e.teamId = t.teamId')
 		->innerJoin(['kh' => 'kpi_history'], 'kh.kpiId = ke.kpiId')
 		->where([
