@@ -2170,4 +2170,27 @@ class ManagementController extends Controller
 		$res["result"] = $autoResult;
 		return json_encode($res);
 	}
+	public function actionKgiUpdateHistory()
+	{
+		$kgiId = $_POST["kgiId"];
+		$res = [];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . '&&kgiHistoryId=0');
+		$kgi = curl_exec($api);
+		$kgi = json_decode($kgi, true);
+		curl_close($api);
+		$res["month"] = $kgi["monthFullName"];
+		$res["year"] = $kgi["year"];
+		$res["fromDate"] = $kgi["fromDateFormat"];
+		$res["toDate"] = $kgi["toDateFormat"];
+		$res["target"] = number_format($kgi["targetAmount"]);
+		$res["result"] = number_format($kgi["result"]);
+		$res["ratio"] = (int)$kgi["ratio"];
+		$res["dueBehide"] = 100 - (int)$kgi["ratio"];
+		$teamText = $this->renderAjax('team_history');
+		$individualText = $this->renderAjax('individual_history');
+		return json_encode($res);
+	}
 }

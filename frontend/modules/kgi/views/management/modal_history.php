@@ -1,79 +1,79 @@
 <style>
-@media (max-width: 1935px) and (max-height: 950px) {
-    .modal-content {
-        transform: scale(0.95);
-        transform-origin: top left;
-        width: calc(100% / 0.95);
-        height: calc(100% / 0.95);
-        /* overflow: hidden; */
+    @media (max-width: 1935px) and (max-height: 950px) {
+        .modal-content {
+            transform: scale(0.95);
+            transform-origin: top left;
+            width: calc(100% / 0.95);
+            height: calc(100% / 0.95);
+            /* overflow: hidden; */
+        }
+
+        .modal-dialog {
+            transform: scale(0.95);
+            transform-origin: top left;
+            width: calc(100% / 0.95);
+            height: calc(100% / 0.95);
+            right: 390px;
+        }
     }
 
-    .modal-dialog {
-        transform: scale(0.95);
-        transform-origin: top left;
-        width: calc(100% / 0.95);
-        height: calc(100% / 0.95);
-        right: 390px;
-    }
-}
 
+    @media (max-width: 1735px) and (max-height: 950px) {
+        .modal-content {
+            transform: scale(0.85);
+            transform-origin: top left;
+            width: calc(100% / 0.85);
+            height: calc(100% / 0.85);
+            /* overflow: hidden; */
+        }
 
-@media (max-width: 1735px) and (max-height: 950px) {
-    .modal-content {
-        transform: scale(0.85);
-        transform-origin: top left;
-        width: calc(100% / 0.85);
-        height: calc(100% / 0.85);
-        /* overflow: hidden; */
-    }
-
-    .modal-dialog {
-        transform: scale(0.85);
-        transform-origin: top left;
-        width: calc(100% / 0.85);
-        height: calc(100% / 0.85);
-        /* overflow: hidden; */
-        left: -300px;
-    }
-}
-
-@media (max-width: 1535px) and (max-height: 950px) {
-    .modal-content {
-        transform: scale(0.75);
-        transform-origin: top left;
-        width: calc(100% / 0.75);
-        height: calc(100% / 0.75);
-        /* overflow: hidden; */
+        .modal-dialog {
+            transform: scale(0.85);
+            transform-origin: top left;
+            width: calc(100% / 0.85);
+            height: calc(100% / 0.85);
+            /* overflow: hidden; */
+            left: -300px;
+        }
     }
 
-    .modal-dialog {
-        transform: scale(0.75);
-        transform-origin: top left;
-        width: calc(100% / 0.75);
-        height: calc(100% / 0.75);
-        /* overflow: hidden; */
-        left: -250px;
-    }
-}
+    @media (max-width: 1535px) and (max-height: 950px) {
+        .modal-content {
+            transform: scale(0.75);
+            transform-origin: top left;
+            width: calc(100% / 0.75);
+            height: calc(100% / 0.75);
+            /* overflow: hidden; */
+        }
 
-@media (max-width: 1335px) and (max-height: 750px) {
-    .modal-content {
-        transform: scale(0.65);
-        transform-origin: top left;
-        width: calc(100% / 0.65);
-        height: calc(100% / 0.65);
-        /* overflow: hidden; */
+        .modal-dialog {
+            transform: scale(0.75);
+            transform-origin: top left;
+            width: calc(100% / 0.75);
+            height: calc(100% / 0.75);
+            /* overflow: hidden; */
+            left: -250px;
+        }
     }
 
-    .modal-dialog {
-        transform: scale(0.65);
-        transform-origin: top left;
-        width: calc(100% / 0.65);
-        height: calc(100% / 0.65);
-        /* overflow: hidden; */
-        left: -200px;
+    @media (max-width: 1335px) and (max-height: 750px) {
+        .modal-content {
+            transform: scale(0.65);
+            transform-origin: top left;
+            width: calc(100% / 0.65);
+            height: calc(100% / 0.65);
+            /* overflow: hidden; */
+        }
+
+        .modal-dialog {
+            transform: scale(0.65);
+            transform-origin: top left;
+            width: calc(100% / 0.65);
+            height: calc(100% / 0.65);
+            /* overflow: hidden; */
+            left: -200px;
+        }
     }
-}
 </style>
 <div class="modal fade" id="update-history-popup" tabindex="-1" aria-labelledby="updateHistoryModalLabel"
     aria-hidden="true">
@@ -89,8 +89,8 @@
                 style="display: flex; padding: 25px 34px; flex-direction: column; gap: 34px; ">
                 <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
                     <div class="col-7" style="display: flex; gap: 16px; flex-direction: column;">
-                        <text class="text-black" id="mont-hyear" style="font-size: 22px; font-weight: 600;">
-                            mont hyear
+                        <text class="text-black" id="month-year" style="font-size: 22px; font-weight: 600;">
+                            month year
                         </text>
                         <text class="text-gray" id="formattedRange" style="font-size: 18px; font-weight: 400;">
                             formattedRange
@@ -123,7 +123,7 @@
                                     style="stroke: hsla(217, 100%, 91%, 1); stroke-width: 3;" fill="none" />
                                 <path class="circle"
                                     d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                                    stroke="#4db8ff" stroke-width="3" fill="none" stroke-dasharray="0, 100" />
+                                    stroke="#4db8ff" stroke-width="3" fill="none" />
 
                                 <!-- Percentage text in the middle -->
                                 <text x="18" y="20.35" text-anchor="middle" dominant-baseline="middle"

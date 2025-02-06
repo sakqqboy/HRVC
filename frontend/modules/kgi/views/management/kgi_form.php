@@ -702,7 +702,7 @@ $DueBehind = $targetAmount -  $result;
 									alt="Help Icon">
 							</div>
 							<div class="updatehistory" class="updatehistory" style="text-align: right;cursor:pointer;"
-								data-bs-toggle="modal" data-bs-target="#update-history-popup">
+								data-bs-toggle="modal" data-bs-target="#update-history-popup" onclick="javascript:kgiUpdateHistory(<?= $kgiId ?>)">
 								<?php if ($statusform == 'update') { ?>
 									<img
 										src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg"><?= Yii::t('app', 'Update History') ?>

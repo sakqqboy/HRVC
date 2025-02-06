@@ -602,6 +602,30 @@ class ModelMaster extends \yii\db\ActiveRecord
             return null;
         }
     }
+    public static function dateMonthFullFormatNormal($date)
+    {
+        if ($date != '') {
+            $dateArr = explode('-', $date);
+            $day = $dateArr[2];
+            $month = $dateArr[1];
+            $year = $dateArr[0];
+            $lastDigit = substr($day, -1);
+            if ($lastDigit == 1) {
+                $subfix = 'st';
+            } else if ($lastDigit == 2) {
+                $subfix = 'nd';
+            } else if ($lastDigit == 3) {
+                $subfix = 'rd';
+            } else {
+                $subfix = 'th';
+            }
+            $fullMonth = ModelMaster::monthEng($month, 1);
+            $fullText = (int)$day . $subfix . "&nbsp;" . $fullMonth;
+            return $fullText;
+        } else {
+            return null;
+        }
+    }
     public static function dateDuration($from, $to)
     {
         if ($from != '' && $to != '') {
