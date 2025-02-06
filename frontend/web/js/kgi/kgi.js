@@ -1025,6 +1025,7 @@ function kgiUpdateHistory(kgiId) {
 				$("#DueBehind").html(data.dueBehide + '%'); 
 				$(".percentage").html(data.ratio + '%');
 				$(".circle").attr("stroke-dasharray", data.ratio + ",100");
+				$("#history-list-team").html(data.teamText);
 			}
 		});
  }
