@@ -933,7 +933,7 @@ $(document).ready(function() {
 });
 
 function modalHistory(kpiId) {
-    alert(kpiId);
+    // alert(kpiId);
     var url = $url + 'kpi/management/modal-history';
 
     var month = document.getElementById("hiddenMonth").value;
