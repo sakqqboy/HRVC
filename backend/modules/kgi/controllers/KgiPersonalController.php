@@ -608,14 +608,14 @@ class KgiPersonalController extends Controller
 					->orderBy('createDateTime DESC')
 					->asArray()
 					->one();
-				$employee = Employee::find()->select('teamId')->where(["employeeId" => $kt["employeeId"]])->one();
+				$employee = Employee::find()->where(["employeeId" => $kt["employeeId"]])->asArray()->one();
 				$teamName = Team::teamName($employee["teamId"]);
 				$employeeId = $kt["employeeId"];
 				if (isset($kgiEmployeeHistory) && !empty($kgiEmployeeHistory)) {
 					$time = explode(' ', $kgiEmployeeHistory["createDateTime"]);
 					$data[$kt["kgiEmployeeId"]] = [
 						"result" => $kgiEmployeeHistory["result"],
-						"creater" => $employee["employeeFirstname"] . ' ' . $employee["employeeLastname"],
+						"creater" => $employee["employeeFirstname"] . ' ' . $employee["employeeSurename"],
 						"teamName" => $teamName,
 						"picture" => Employee::employeeImage($employeeId),
 						"time" => ModelMaster::timeText($time[1]),
@@ -627,7 +627,7 @@ class KgiPersonalController extends Controller
 					$time = explode(' ', $kt["createDateTime"]);
 					$data[$kt["kgiEmployeeId"]] = [
 						"result" => $kt["result"],
-						"creater" => $employee["employeeFirstname"] . ' ' . $employee["employeeLastname"],
+						"creater" => $employee["employeeFirstname"] . ' ' . $employee["employeeSurename"],
 						"teamName" => $teamName,
 						"picture" => Employee::employeeImage($employeeId),
 						"time" => ModelMaster::timeText($time[1]),
