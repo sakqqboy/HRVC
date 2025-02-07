@@ -19,46 +19,34 @@ $value = isset($data['result']) ? $data['result'] : 0;
 $kpiEmployeeHistoryId = isset($data['kpiEmployeeHistoryId']) ? $data['kpiEmployeeHistoryId'] : 0;
 $sumvalue = isset($kpi['sumresult']) ? $kpi['sumresult'] : 0;
 $targetAmount = $data['targetAmount'] ?? 0;
-// $kpiHistoryId = $kpi['kpiHistoryId'] ?? 0;
 $DueBehind = $targetAmount -  $result;
 $detail = !empty($data['kpiDetail']) ? $data['kpiDetail'] : 'No details listed';
-// $detail ="The goal is to increase the number of Non-Japanese clients to diversify the client base and drive sustained business growth. By targeting international markets and industries, the aim is to capture a broader market share and reduce dependency on a The goal is to increase the number of Non-Japanese clients to diversify the client base and drive sustained business growth. By targeting international markets and industries, the aim is to capture a broader market share and reduce dependency on a ";
 $maxLength = 487;
-
-
-// ตรวจสอบว่า $data['nextCheckText'] มีค่าและสามารถแปลงเป็น DateTime ได้
 $nextCheckDate = !empty($data['nextCheckText']) 
     ? DateTime::createFromFormat('d M Y', $data['nextCheckText']) 
     : null;
-
-if ($nextCheckDate === false) {
-    // ถ้าไม่สามารถแปลงได้ ให้กำหนดค่าเป็น "Due Pass"
-    $nextCheckDate = 'Due Pass';
-}
-
-// ถ้าค่า $nextCheckDate เป็น "Due Pass" ให้ไม่คำนวณวันที่เหลือ
-if ($nextCheckDate !== 'Due Pass') {
-    // หาวันที่ปัจจุบัน
-    $currentDate = new DateTime();
-
-    // คำนวณความแตกต่างระหว่างวันที่ปัจจุบันและวันที่ที่กำหนด
-    if ($nextCheckDate instanceof DateTime) {
-        $interval = $currentDate->diff($nextCheckDate);
-
-        // แสดงจำนวนวันที่เหลือ
-        $daysLeft = $interval->format('%r%a'); // %r คือการแสดงเครื่องหมายบวกหรือลบ
-        if ($daysLeft < 0) {
-            $daysLeft = "Due Pass"; // ถ้าผลลัพธ์เป็นลบ แสดงว่าเกินกำหนด
-        } else {
-            $daysLeft = "$daysLeft " . Yii::t('app', 'days left');
-        }
+    
+    if (!$nextCheckDate) {
+        $daysLeft = "Due Pass";
     } else {
-        $daysLeft = "Due Pass"; // ถ้าไม่สามารถแปลงวันที่ได้
+        // หาวันที่ปัจจุบัน
+        $currentDate = new DateTime();
+    
+        // ตรวจสอบว่า $nextCheckDate เป็น DateTime หรือไม่ ถ้าไม่ใช่ให้พยายามแปลง
+        if (!$nextCheckDate instanceof DateTime) {
+            $nextCheckDate = DateTime::createFromFormat('Y-m-d', $nextCheckDate);
+        }
+    
+        // ถ้าแปลงวันที่สำเร็จ ให้คำนวณความแตกต่าง
+        if ($nextCheckDate) {
+            $interval = $currentDate->diff($nextCheckDate);
+            $daysLeft = $interval->format('%r%a'); // %r แสดงเครื่องหมาย (+/-)
+    
+            $daysLeft = ($daysLeft < 0) ? "Due Pass" : "$daysLeft " . Yii::t('app', 'days left');
+        } else {
+            $daysLeft = "Due Pass"; // กรณีแปลงวันที่ไม่สำเร็จ
+        }
     }
-} else {
-    $daysLeft = "Due Pass"; // หากไม่สามารถแปลงวันที่ได้
-}
-
 // echo $data['nextCheckText'];
 ?>
 
@@ -932,40 +920,6 @@ function toggleText() {
 }
 <?php endif; ?>
 
-// const value = "<?= $value ?>";
-// const sumvalue = "<?= $sumvalue ?>";
-// // const sumvalue = "500";
-
-// // Get both checkboxes
-// const historicCheckbox = document.getElementById('historic-checkbox');
-// const overrideCheckbox = document.getElementById('override-checkbox');
-
-// // Add event listeners to handle toggling behavior
-// historicCheckbox.addEventListener('change', function() {
-//     if (this.checked) {
-//         overrideCheckbox.checked = false;
-//         // alert(0);
-//         overrideChecked(overrideCheckbox.checked, sumvalue);
-//     } else {
-//         overrideCheckbox.checked = true;
-//         // alert(1);
-//         overrideChecked(overrideCheckbox.checked, value);
-//     }
-// });
-
-// overrideCheckbox.addEventListener('change', function() {
-//     if (this.checked) {
-//         // alert(2);
-//         historicCheckbox.checked = false;
-//         overrideChecked(overrideCheckbox.checked, value);
-//     } else {
-//         // alert(3);
-//         historicCheckbox.checked = true;
-//         overrideChecked(overrideCheckbox.checked, sumvalue);
-//     }
-// });
-
-
 function modalHistory(kpiId) {
     var url = $url + 'kpi/kpi-personal/modal-history';
     // alert(kpiId);
@@ -1045,97 +999,125 @@ function modalHistory(kpiId) {
             historyTeamList.empty(); // เคลียร์รายการเก่า
             var historyTeamArray = Object.values(historyTeamData);
 
-            historyArray.forEach(function(item) {
-                var listItem = `
-                <li class="schedule-item mt-5" role="button" tabindex="0">
-                        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                            <div style="display: flex; gap: 16px; align-items: center;">
-                                <div style="display: flex; justify-content: center; align-items: center;">
-                                    <div class="col-5">
-                                        <img src="<?= Yii::$app->homeUrl ?>${item.picture}" class="width-ehsan-small" id="picture-history">
-                                    </div>
-                                </div>
-                                <div style="display: flex; justify-content: center; align-items: center;">
-                                    <span class="text-black" id="creater-history" style="font-size: 16px; font-weight: 500;">
-                                        ${item.creater}
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div style="display: flex; justify-content: center; align-items: center; background-color: rgb(215, 235, 255); border: 0.795px solid #2580D3; border-radius: 36px; padding: 3px 20px; z-index: 1;">
-                                <div style="display: flex; justify-content: center; align-items: center; gap: 8px;">
-                                    <div class="cycle-current">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
-                                    </div>
-                                    <span class="text-black" id="teamName-history" style="font-size: 16px; font-weight: 500;">
-                                        ${item.teamName}
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div style="display: flex; flex-direction: column; text-align: right;">
-                                <div>
-                                    <span class="text-gray" id="target-history" style="font-size: 18px; font-weight: 400;">
-                                        ${item.target}
-                                    </span>
-                                    <span class="text-blue" id="result-history" style="font-size: 18px; font-weight: 600;">
-                                        /${item.result}
-                                    </span>
-                                </div>
-                                <span class="text-gray" id="createDate-history" style="font-size: 14px; font-weight: 400;">
-                                    ${item.createDateTime}
-                                </span>
-                            </div>
-                        </div>
-                    </li>
-            `;
-                historyList.append(listItem); // เพิ่มข้อมูลลงใน ul
-            });
-
-            historyTeamArray.forEach(function(item) {
-                var listItem = `
+            if (historyArray.length > 0) {
+                historyArray.forEach(function(item) {
+                    var listItem = `
                     <li class="schedule-item mt-5" role="button" tabindex="0">
-                        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                            <!-- กลุ่มที่ชิดซ้าย -->
-                            <div style="display: flex; gap: 16px;">
-                                <div style="display: flex; justify-content: center; align-items: center;">
-                                    <div class="cycle-current">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
+                            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                                <div style="display: flex; gap: 16px; align-items: center;">
+                                    <div style="display: flex; justify-content: center; align-items: center;">
+                                        <div class="col-5">
+                                            <img src="<?= Yii::$app->homeUrl ?>${item.picture}" class="width-ehsan-small" id="picture-history">
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; justify-content: center; align-items: center;">
+                                        <span class="text-black" id="creater-history" style="font-size: 16px; font-weight: 500;">
+                                            ${item.creater}
+                                        </span>
                                     </div>
                                 </div>
-                                <div style="display: flex; gap: 6px; flex-direction: column;">
-                                    <text class="text-black" style="font-size: 16px; font-weight: 600;">
-                                        ${item.teamName} <!-- ใช้ชื่อทีมจาก item -->
-                                    </text>
-                                    <text class="text-gray" style="font-size: 14px; font-weight: 400;">
-                                        ${item.departmentName} <!-- หรือใช้ข้อมูลอื่นจาก item -->
-                                    </text>
-                                </div>
-                            </div>
 
-                            <!-- กลุ่มที่ชิดขวา -->
-                            <div style="display: flex;">
-                                <div>
-                                    <div style="display: flex; gap: 6px; flex-direction: column;">
-                                        <text class="text-end">
-                                            <span class="text-gray" style="font-size: 18px; font-weight: 400;">
-                                                ${item.target} <!-- แสดง target -->
-                                            </span>
-                                            <span class="text-blue" style="font-size: 18px; font-weight: 600;">
-                                                /${item.result} <!-- แสดง result -->
-                                            </span>
-                                        </text>
-                                        <text class="text-gray text-end" style="font-size: 14px; font-weight: 400;">
-                                            ${item.createDateTime} <!-- แสดงวันที่ที่สร้าง -->
-                                        </text>
+                                <div style="display: flex; justify-content: center; align-items: center; background-color: rgb(215, 235, 255); border: 0.795px solid #2580D3; border-radius: 36px; padding: 3px 20px; z-index: 1;">
+                                    <div style="display: flex; justify-content: center; align-items: center; gap: 8px;">
+                                        <div class="cycle-current">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
+                                        </div>
+                                        <span class="text-black" id="teamName-history" style="font-size: 16px; font-weight: 500;">
+                                            ${item.teamName}
+                                        </span>
                                     </div>
                                 </div>
+
+                                <div style="display: flex; flex-direction: column; text-align: right;">
+                                    <div>
+                                        <span class="text-gray" id="target-history" style="font-size: 18px; font-weight: 400;">
+                                            ${item.target}
+                                        </span>
+                                        <span class="text-blue" id="result-history" style="font-size: 18px; font-weight: 600;">
+                                            /${item.result}
+                                        </span>
+                                    </div>
+                                    <span class="text-gray" id="createDate-history" style="font-size: 14px; font-weight: 400;">
+                                        ${item.createDateTime}
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                    </li>
+                        </li>
                 `;
-                historyTeamList.append(listItem); // เพิ่มข้อมูลลงใน ul
-            });
+                    historyList.append(listItem); // เพิ่มข้อมูลลงใน ul
+                });
+            } else {
+                historyTeamList.append(
+                    `<li class="schedule-item mt-5" role="button" tabindex="0">
+                            <div class="row pt-10 pb-10"
+                                style="display: flex; justify-content: center; align-items: center; width: 100%; font-size: 18px; ">
+                                    No data
+                            </div>
+                    </li>`
+                )
+            }
+
+            if (historyTeamArray > 0) {
+                historyTeamArray.forEach(function(item) {
+                    var listItem = `
+                        <li class="schedule-item mt-5" role="button" tabindex="0">
+                            <div class="row" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+
+                                <div class="col-5" style="display: flex; gap: 16px; align-items: center;">
+                                    <div style="display: flex; justify-content: center; align-items: center;">
+                                        <div class="col-5">
+                                            <img src="<?= Yii::$app->homeUrl ?>${item.picture}" class="width-ehsan-small" id="picture-history">
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; justify-content: center; align-items: center;">
+                                        <span class="text-black" id="creater-history" style="font-size: 16px; font-weight: 500;">
+                                            ${item.creater}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="col-3">
+                                    <div  style="display: flex; justify-content: center; align-items: center; background-color: rgb(215, 235, 255); border: 0.795px solid #2580D3; border-radius: 36px; padding: 3px 20px; z-index: 1;">
+                                        <div style="display: flex; justify-content: center; align-items: center; gap: 8px;">
+                                            <div class="cycle-current">
+                                                <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
+                                            </div>
+                                            <span class="text-black" id="teamName-history" style="font-size: 16px; font-weight: 500;">
+                                                ${item.teamName}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+
+                                <div class="col-4" style="display: flex; flex-direction: column; text-align: right;">
+                                    <div>
+                                        <span class="text-gray" id="target-history" style="font-size: 18px; font-weight: 400;">
+                                            ${item.target}
+                                        </span>
+                                        <span class="text-blue" id="result-history" style="font-size: 18px; font-weight: 600;">
+                                            /${item.result}
+                                        </span>
+                                    </div>
+                                    <span class="text-gray" id="createDate-history" style="font-size: 14px; font-weight: 400;">
+                                        ${item.createDateTime}
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                    `;
+                    historyTeamList.append(listItem); // เพิ่มข้อมูลลงใน ul
+                });
+            } else {
+                historyTeamList.append(
+                    `<li class="schedule-item mt-5" role="button" tabindex="0">
+                            <div class="row pt-10 pb-10"
+                                style="display: flex; justify-content: center; align-items: center; width: 100%; font-size: 18px; ">
+                                    No data
+                            </div>
+                    </li>`
+                )
+            }
 
         },
         error: function(xhr, status, error) {

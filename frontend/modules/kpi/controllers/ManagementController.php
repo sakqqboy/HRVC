@@ -780,7 +780,7 @@ class ManagementController extends Controller
         $year = $_POST["year"];
         $formattedRange = $_POST["formattedRange"];
         // $kpiHistoryId = 0;
-		$kpiHistoryId = $_POST["kpiHistoryId"];
+		// $kpiHistoryId = $_POST["kpiHistoryId"];
 
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -810,9 +810,7 @@ class ManagementController extends Controller
             "historyTeam" => $historyTeam
         ];
 
-                // throw new Exception(print_r($data,true));
-
-        
+        // throw new Exception(print_r($data,true));
     
         header("Content-Type: application/json");
         echo json_encode($data);
