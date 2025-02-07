@@ -1070,7 +1070,7 @@ function modalHistory(kpiId) {
                                         ${item.teamName} <!-- ใช้ชื่อทีมจาก item -->
                                     </text>
                                     <text class="text-gray" style="font-size: 14px; font-weight: 400;">
-                                        Accounting & Outsourcing de... <!-- หรือใช้ข้อมูลอื่นจาก item -->
+                                        ${item.departmentName} <!-- หรือใช้ข้อมูลอื่นจาก item -->
                                     </text>
                                 </div>
                             </div>

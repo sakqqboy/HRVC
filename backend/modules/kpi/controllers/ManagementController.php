@@ -5,6 +5,7 @@ namespace backend\modules\kpi\controllers;
 use backend\models\hrvc\Branch;
 use backend\models\hrvc\Company;
 use backend\models\hrvc\Country;
+use backend\models\hrvc\Department;
 use backend\models\hrvc\KpiBranch;
 use backend\models\hrvc\KpiIssue;
 use backend\models\hrvc\KpiTeam;
@@ -20,6 +21,7 @@ use backend\models\hrvc\Employee;
 use backend\models\hrvc\KgiHasKpi;
 use backend\models\hrvc\KpiEmployee;
 use backend\models\hrvc\KpiEmployeeHistory;
+use backend\models\hrvc\KpiTeamHistory;
 use backend\models\hrvc\Position;
 use backend\models\hrvc\Role;
 use backend\models\hrvc\Team;
@@ -388,48 +390,55 @@ class ManagementController extends Controller
 	{
 		$data = [];
 
-		$kpiHistory = KpiEmployeeHistory::find()
-		->alias('keh')
-		->select([
-			'keh.kpiEmployeeHistoryId',
-			'keh.kpiEmployeeId',
-			'keh.result',
-			'keh.target',
-			'keh.createDateTime',
-			'keh.status AS history_status',
-			'keh.createrId',
-			'ke.employeeId',
-			'ke.kpiId',
-			"CONCAT(e.employeeFirstname, ' ', e.employeeSurename) AS employeeFullname",
-			'e.picture',
-			't.teamName',
-		])
-		->innerJoin(['ke' => 'kpi_employee'], 'keh.kpiEmployeeId = ke.kpiEmployeeId')
-		->innerJoin(['e' => 'employee'], 'keh.createrId = e.employeeId')
-		->innerJoin(['t' => 'team'], 'e.teamId = t.teamId')
-		->innerJoin(['kh' => 'kpi_history'], 'kh.kpiId = ke.kpiId')
-		->where([
-			'keh.status' => [1, 2, 4],
-			'ke.status' => [1, 2, 4],
-			'ke.kpiId' => $kpiId,
-			'e.status' => 1,
-		])
-		->groupBy([
-			'keh.kpiEmployeeHistoryId',
-			'keh.kpiEmployeeId',
-			'keh.result',
-			'keh.target',
-			'keh.createDateTime',
-			'keh.status',
-			'keh.createrId',
-			'ke.employeeId',
-			'ke.kpiId',
-			'employeeFullname',
-			'e.picture',
-			't.teamName',
-		])
-		->asArray()
-		->all();
+		$kpiHistory = (new Query())
+    ->select([
+        'keh.kpiEmployeeHistoryId',
+        'keh.kpiEmployeeId',
+        'keh.result',
+        'keh.target',
+        'keh.createDateTime',
+        'keh.status AS history_status',
+        'keh.createrId',
+        'keh.updateDateTime',
+        'ke.employeeId',
+        'ke.kpiId',
+        'CONCAT(e.employeeFirstname, " ", e.employeeSurename) AS employeeFullname',
+        'e.picture',
+        't.teamName'
+    ])
+    ->from('kpi_employee_history keh')
+    ->innerJoin(
+        [
+            'latest' => (new Query())
+                ->select(['kpiEmployeeId', 'MAX(updateDateTime) AS latest_update'])
+                ->from('kpi_employee_history')
+                ->groupBy('kpiEmployeeId')
+        ], 'keh.kpiEmployeeId = latest.kpiEmployeeId AND keh.updateDateTime = latest.latest_update'
+    )
+    ->innerJoin('kpi_employee ke', 'keh.kpiEmployeeId = ke.kpiEmployeeId')
+    ->innerJoin('employee e', 'ke.employeeId = e.employeeId')
+    ->innerJoin('team t', 'e.teamId = t.teamId')
+    ->innerJoin('kpi_history kh', 'kh.kpiId = ke.kpiId')
+    ->where(['keh.status' => [1, 2, 3]])
+    ->andWhere(['ke.status' => [1, 2, 3]])
+    ->andWhere(['ke.kpiId' => $kpiId])
+    ->andWhere(['e.status' => 1])
+    ->groupBy([
+        'keh.kpiEmployeeHistoryId',
+        'keh.kpiEmployeeId',
+        'keh.result',
+        'keh.target',
+        'keh.createDateTime',
+        'keh.status',
+        'keh.createrId',
+        'keh.updateDateTime',
+        'ke.employeeId',
+        'ke.kpiId',
+        'employeeFullname',
+        'e.picture',
+        't.teamName'
+    ])
+    ->all();
 
 
 		$data = [];
@@ -438,8 +447,6 @@ class ManagementController extends Controller
 				$time = explode(' ', $history["createDateTime"]);
 				$employeeId = Employee::employeeId($history["createrId"]);
 				$data[$history["kpiEmployeeHistoryId"]] = [
-					// "title" => $history["titleProcess"],
-					// "remark" => $history["remark"],
 					"createrId" => $history["createrId"],
 					"result" => $history["result"],
 					"creater" => User::employeeNameByuserId($history["createrId"]),
@@ -449,8 +456,6 @@ class ManagementController extends Controller
 					"time" => ModelMaster::timeText($time[1]),
 					"status" => $history["history_status"],
 					"target" => $history["target"],
-					// "month" => $history["month"],
-					// "year" => $history["year"],
 					"createDateTime" => ModelMaster::monthDateYearTime($history["createDateTime"])
 				];
 			endforeach;
@@ -462,44 +467,90 @@ class ManagementController extends Controller
 	public function actionKpiHistoryTeam($kpiId)
 	{
 
-		$kpiHistory = (new Query())
-    ->select('kth.*')
-    ->from('kpi_team kt')
-    ->leftJoin('kpi_team_history kth', 'kt.kpiTeamId = kth.kpiTeamId')
-    ->where(['kt.kpiId' => $kpiId])
-    ->andWhere([
-        'kth.kpiTeamHistoryId' => (new Query())
-            ->select('MAX(kpiTeamHistoryId)')
-            ->from('kpi_team_history')
-            ->where(['kpiTeamId' => new Expression('kt.kpiTeamId')]) // ใช้ Expression เพื่อ reference outer query
-    ])
-    ->andWhere(['kth.status' => [1, 2, 4]])
-    ->all();
+	// 	$kpiHistory = (new Query())
+	// 	->select('kth.*,kt.teamId')
+	// 	->from('kpi_team kt')
+	// 	->leftJoin('kpi_team_history kth', 'kt.kpiTeamId = kth.kpiTeamId')
+	// 	->where(['kt.kpiId' => $kpiId])
+	// 	->andWhere([
+	// 		'kth.kpiTeamHistoryId' => (new Query())
+	// 			->select('MAX(kpiTeamHistoryId)')
+	// 			->from('kpi_team_history')
+	// 			->where(['kpiTeamId' => new Expression('kt.kpiTeamId')]) // ใช้ Expression เพื่อ reference outer query
+	// 	])
+	// 	->andWhere(['kth.status' => [1, 2, 4]])
+	// 	->all();
 
 
-	$data = [];
-		if (isset($kpiHistory) && count($kpiHistory) > 0) {
-			foreach ($kpiHistory as $history) :
-				if ($history !== null && isset($history["createDateTime"], $history["createrId"], $history["status"])) {
-					$time = explode(' ', $history["createDateTime"]);
-					$employeeId = Employee::employeeId($history["createrId"]);
-					$EmployeeDetail = Employee::EmployeeDetail($employeeId);
-					$teamId = $EmployeeDetail["teamId"] ?? null;
-					$data[$history["kpiTeamId"]] = [
-						"creater" => User::employeeNameByuserId($history["createrId"]),
-						"teamName" => Team::teamName($teamId),
-						"teamName" => Team::teamName($teamId),
-						"picture" => Employee::employeeImage($employeeId),
-						"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
-						"time" => ModelMaster::timeText($time[1] ?? '00:00'),  
-						"status" => $history["status"],
-						"target" => $history["target"] ?? '0.00',  
-						"result" => $history["result"] ?? '0.00',  
-						"createDateTime" => ModelMaster::monthDateYearTime($history["createDateTime"])
+	// $data = [];
+	// 	if (isset($kpiHistory) && count($kpiHistory) > 0) {
+	// 		foreach ($kpiHistory as $history) :
+	// 			if ($history !== null && isset($history["createDateTime"], $history["createrId"], $history["status"])) {
+	// 				$time = explode(' ', $history["createDateTime"]);
+	// 				$employeeId = Employee::employeeId($history["createrId"]);
+	// 				// $EmployeeDetail = Employee::EmployeeDetail($employeeId);
+	// 				$teamId = $kpiHistory["teamId"] ?? null;
+	// 				$data[$history["kpiTeamId"]] = [
+	// 					// "creater" => User::employeeNameByuserId($history["createrId"]),
+	// 					"teamName" => Team::teamName($teamId),
+	// 					"departmentName" => Department::teamDepartment($teamId),
+	// 					// "picture" => Employee::employeeImage($employeeId),
+	// 					"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
+	// 					"time" => ModelMaster::timeText($time[1] ?? '00:00'),  
+	// 					// "status" => $history["status"],
+	// 					"target" => $history["target"] ?? '0.00',  
+	// 					"result" => $history["result"] ?? '0.00',  
+	// 					"createDateTime" => ModelMaster::monthDateYearTime($history["createDateTime"])
+	// 				];
+	// 			} else {
+	// 				// หากข้อมูลไม่สมบูรณ์หรือเป็น null ก็ข้ามการทำงานของ iteration นี้
+	// 				continue;
+	// 			}
+	// 		endforeach;
+	// 	}
+
+	$kpiTeam = kpiTeam::find()
+			->where([
+				"kpiId" => $kpiId,
+				"status" => [1, 2, 4]
+			])
+			->orderBy("updateDateTime DESC")
+			->asArray()
+			->all();
+		$data = [];
+		if (isset($kpiTeam) && count($kpiTeam) > 0) {
+			foreach ($kpiTeam as $kt):
+				$kpiTeamHistory = KpiTeamHistory::find()
+					->where([
+						"kpiTeamId" => $kt["kpiTeamId"],
+						"status" => [1, 2, 4]
+					])
+					->orderBy('createDateTime DESC')
+					->asArray()
+					->one();
+				if (isset($kpiTeamHistory) && !empty($kpiTeamHistory)) {
+					$time = explode(' ', $kpiTeamHistory["createDateTime"]);
+					$data[$kt["kpiTeamId"]] = [
+						"teamName" => Team::teamName($kt["teamId"]),
+						"createDate" => ModelMaster::engDateHr($kpiTeamHistory["createDateTime"]),
+						"time" => ModelMaster::timeText($time[1] ?? '00:00'),
+						"target" => $history["target"] ?? '0.00',
+						"result" => $history["result"] ?? '0.00',
+						"createDateTime" => ModelMaster::monthDateYearTime($kpiTeamHistory["createDateTime"]),
+						"departmentName" => Department::teamDepartment($kt["teamId"])
 					];
 				} else {
-					// หากข้อมูลไม่สมบูรณ์หรือเป็น null ก็ข้ามการทำงานของ iteration นี้
-					continue;
+					$time = explode(' ', $kt["createDateTime"]);
+					$data[$kt["kpiTeamId"]] = [
+						//"creater" => User::employeeNameByuserId($history["createrId"]),
+						"teamName" => Team::teamName($kt["teamId"]),
+						"createDate" => ModelMaster::engDateHr($kt["createDateTime"]),
+						"time" => ModelMaster::timeText($time[1] ?? '00:00'),
+						"target" => $history["target"] ?? '0.00',
+						"result" => $history["result"] ?? '0.00',
+						"createDateTime" => ModelMaster::monthDateYearTime($kt["createDateTime"]),
+						"departmentName" => Department::teamDepartment($kt["teamId"])
+					];
 				}
 			endforeach;
 		}
