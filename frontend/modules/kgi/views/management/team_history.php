@@ -41,7 +41,12 @@ if (isset($kgiHistoryTeam) && count($kgiHistoryTeam) > 0) {
 				</div>
 			</div>
 		</li>
-<?php
+	<?php
 	endforeach;
+} else { ?>
+	<li class="schedule-item mt-5" role="button" tabindex="0">
+		<div class="col-12 text-center font-size-16">No data</div>
+	</li>
+<?php
 }
 ?>

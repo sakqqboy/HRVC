@@ -33,7 +33,7 @@ class KgiTeamController extends Controller
 	public function actionKgiTeam($kgiId)
 	{
 		$kgiTeams = KgiTeam::find()
-			->select('kgi_team.teamId,t.teamName,kgi_team.target,kgi_team.remark,d.departmentName')
+			->select('kgi_team.teamId,t.teamName,kgi_team.target,kgi_team.remark,d.departmentName,d.departmentId')
 			->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
 			->JOIN("LEFT JOIN", "department d", "d.departmentId=t.departmentId")
 			->where(["kgi_team.status" => [1, 2, 4], "t.status" => [1, 2, 4]])
