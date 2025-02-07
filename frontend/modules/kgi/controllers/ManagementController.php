@@ -2185,6 +2185,10 @@ class ManagementController extends Controller
 		$kgiHistoryTeam = curl_exec($api);
 		$kgiHistoryTeam = json_decode($kgiHistoryTeam, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/kgi-history-employee?kgiId=' . $kgiId);
+		$kgiHistoryEmployee = curl_exec($api);
+		$kgiHistoryEmployee = json_decode($kgiHistoryEmployee, true);
+
 		curl_close($api);
 		$res["month"] = $kgi["monthFullName"];
 		$res["year"] = $kgi["year"];
@@ -2196,7 +2200,7 @@ class ManagementController extends Controller
 		$res["dueBehide"] = 100 - (int)$kgi["ratio"];
 
 		$teamText = $this->renderAjax('team_history', ["kgiHistoryTeam" => $kgiHistoryTeam]);
-		$individualText = $this->renderAjax('individual_history');
+		$individualText = $this->renderAjax('individual_history', ["kgiHistoryEmployee" => $kgiHistoryEmployee]);
 		$res["teamText"] = $teamText;
 		$res["individualText"] = $individualText;
 		return json_encode($res);

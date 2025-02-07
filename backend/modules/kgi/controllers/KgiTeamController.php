@@ -886,7 +886,7 @@ class KgiTeamController extends Controller
 			foreach ($kgiTeam as $kt):
 				$kgiTeamHistory = KgiTeamHistory::find()
 					->where([
-						"kgiTeamHistoryId" => $kt["kgiTeamId"],
+						"kgiTeamId" => $kt["kgiTeamId"],
 						"status" => [1, 2, 4]
 					])
 					->orderBy('createDateTime DESC')
@@ -898,20 +898,19 @@ class KgiTeamController extends Controller
 						"teamName" => Team::teamName($kt["teamId"]),
 						"createDate" => ModelMaster::engDateHr($kgiTeamHistory["createDateTime"]),
 						"time" => ModelMaster::timeText($time[1] ?? '00:00'),
-						"target" => $history["target"] ?? '0.00',
-						"result" => $history["result"] ?? '0.00',
+						"target" => $kgiTeamHistory["target"] ?? '0.00',
+						"result" => $kgiTeamHistory["result"] ?? '0.00',
 						"createDateTime" => ModelMaster::monthDateYearTime($kgiTeamHistory["createDateTime"]),
 						"departmentName" => Department::teamDepartment($kt["teamId"])
 					];
 				} else {
 					$time = explode(' ', $kt["createDateTime"]);
 					$data[$kt["kgiTeamId"]] = [
-						//"creater" => User::employeeNameByuserId($history["createrId"]),
 						"teamName" => Team::teamName($kt["teamId"]),
 						"createDate" => ModelMaster::engDateHr($kt["createDateTime"]),
 						"time" => ModelMaster::timeText($time[1] ?? '00:00'),
-						"target" => $history["target"] ?? '0.00',
-						"result" => $history["result"] ?? '0.00',
+						"target" => $kt["target"] ?? '0.00',
+						"result" => $kt["result"] ?? '0.00',
 						"createDateTime" => ModelMaster::monthDateYearTime($kt["createDateTime"]),
 						"departmentName" => Department::teamDepartment($kt["teamId"])
 					];

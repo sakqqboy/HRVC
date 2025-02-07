@@ -151,7 +151,7 @@
                                         Target
                                     </span>
                                     <span class="text-blue pr-10" style="font-size: 18px; font-weight: 600;">
-                                        /Result
+                                        / Result
                                     </span>
                                 </div>
                             </div>
@@ -174,7 +174,7 @@
                                         Target
                                     </span>
                                     <span class="text-blue pr-10" style="font-size: 18px; font-weight: 600;">
-                                        /Result
+                                        / Result
                                     </span>
                                 </div>
                             </div>

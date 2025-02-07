@@ -1026,6 +1026,7 @@ function kgiUpdateHistory(kgiId) {
 				$(".percentage").html(data.ratio + '%');
 				$(".circle").attr("stroke-dasharray", data.ratio + ",100");
 				$("#history-list-team").html(data.teamText);
+				$("#history-list-creater").html(data.individualText);
 			}
 		});
  }
