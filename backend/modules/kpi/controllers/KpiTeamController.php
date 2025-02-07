@@ -31,8 +31,9 @@ class KpiTeamController extends Controller
 	public function actionKpiTeam($kpiId)
 	{
 		$kpiTeams = KpiTeam::find()
-			->select('kpi_team.teamId,t.teamName,kpi_team.target,kpi_team.remark')
+			->select('kpi_team.teamId,t.teamName,kpi_team.target,kpi_team.remark,d.departmentName,d.departmentId')
 			->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
+			->JOIN("LEFT JOIN", "department d", "d.departmentId=t.departmentId")
 			->where(["kpi_team.status" => [1, 2, 4]])
 			->andWhere(["kpi_team.kpiId" => $kpiId])
 			->orderBy('t.teamName')
