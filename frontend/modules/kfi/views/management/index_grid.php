@@ -199,8 +199,8 @@ $this->title = Yii::t('app', 'KFI Grid View');
                                                             </div>
                                                         </div>
                                                         <?php } ?>
-                                                        <div
-                                                            class="col-6 number-tag load-<?= $kfi["countEmployee"] == 0 ? 'yenlow' : $colorFormat ?> pr-0 pl-0 pim-pic-gridKFINum ">
+                                                        <div class="col-6 number-tag load-<?= $kfi["countEmployee"] == 0 ? 'yenlow' : $colorFormat ?> pr-0 pl-0 pim-pic-gridKFINum "
+                                                            style="font-size: 18px;">
                                                             <?= $kfi["countEmployee"] ?>
                                                         </div>
                                                     </div>
