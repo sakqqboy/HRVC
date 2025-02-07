@@ -547,43 +547,6 @@ select.form-select option:disabled {
                             </text>
                         </div>
                     </div>
-                    <!-- <div class="form-group start-center mt-32" style="  gap: 14px;">
-                        <label class="text-gray" for="name" style="font-size: 14px; font-weight: 400;">
-                            <?= Yii::t('app', 'Assigned Employees') ?>
-                        </label>
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="row pim-picgroup">
-                                    <div class="col-2">
-                                        <div class="pim-pic-yenlowKFI">
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg"
-                                                alt="person icon">
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="pim-pic-yenlowKFI">
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg"
-                                                alt="person icon">
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="pim-pic-yenlowKFI">
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg"
-                                                alt="person icon">
-                                        </div>
-                                    </div>
-                                    <div class="col-4 number-tag load-yenlow pr-0 pl-0 pim-pic-gridKFINum ">
-                                        <?= count($data['kpiEmployee']) ?> </div>
-                                </div>
-                            </div>
-                            <div class="col-8 yenlow-assignKFI">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-yenlow.svg">
-                                <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $data["kpiId"], "companyId" => $company["companyId"]]) ?>"
-                                    class="font-black">
-                                    Assign Person </a>
-                            </div>
-                        </div>
-                    </div> -->
                     <div class="form-group start-center mt-32" style="  gap: 14px;">
                         <label class="text-gray" for="name" style="font-size: 14px; font-weight: 400;">
                             <?= Yii::t('app', 'Assigned Employee/s') ?>
@@ -692,22 +655,8 @@ select.form-select option:disabled {
 
                         <div class="between-center" style="  width: 100%; ">
                             <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-                                <!-- <label class="switch">
-                                    <input type="checkbox" id="historic-checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                                <label class="sub-manage-create" id="historic-switch">
-                                    <?= Yii::t('app', 'Historic Update') ?>
-                                </label> -->
                             </div>
                             <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-                                <!-- <label class="switch">
-                                    <input type="checkbox" id="override-checkbox" checked>
-                                    <span class="slider round"></span>
-                                </label>
-                                <label class="sub-manage-create" id="override-switch">
-                                    <?= Yii::t('app', 'Override') ?>
-                                </label> -->
                             </div>
                         </div>
                     </div>

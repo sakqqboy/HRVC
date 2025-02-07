@@ -1058,4 +1058,48 @@ class KpiTeamController extends Controller
 		}
 		return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
 	}
+	
+	public function actionKpiTeamUpdate()
+	{
+		$kpiId = $_POST["kpiId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team?kpiId=' . $kpiId);
+		$kpiTeams = curl_exec($api);
+		$kpiTeams = json_decode($kpiTeams, true);
+
+		curl_close($api);
+		$allDepartment = [];
+		if (isset($kpiTeams) && count($kpiTeams) > 0) {
+			foreach ($kpiTeams as $kgt):
+				$allDepartment[$kgt["departmentId"]] = $kgt["departmentId"];
+			endforeach;
+		}
+		$t = [];
+		$textTeam = "";
+		if (count($allDepartment) > 0) {
+			foreach ($allDepartment as $dId => $id) :
+				$teams = Team::find()
+					->where(["departmentId" => $dId])
+					->andWhere("status!=99")
+					->asArray()
+					->orderBy("teamName")
+					->all();
+				if (isset($teams) && count($teams) > 0) {
+					foreach ($teams as $team) :
+						$t[$dId][$team["teamId"]] = $team["teamName"];
+					endforeach;
+				}
+			endforeach;
+			$textTeam .= $this->renderAjax('multi_team_update', [
+				"t" => $t,
+				"kpiId" => $kpiId
+			]);
+		}
+		$res["textTeam"] = $textTeam;
+		$res["countTeam"] = count($kpiTeams);
+		return json_encode($res);
+	}
 }

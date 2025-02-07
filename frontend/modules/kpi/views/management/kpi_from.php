@@ -901,16 +901,20 @@ $(document).ready(function() {
             departmentMultiTeamUpdateKpi(branchId);
         });
 
-        // ดึงค่า team ที่ถูก checked แล้ว
-        var checkedTeamIds = [];
-        $('input[name="team[]"]:checked').each(function() {
-            checkedTeamIds.push($(this).val());
-        });
+        if (checkedDepartmentIds.length > 0) {
+            // ดึงค่า team ที่ถูก checked แล้ว
+            var checkedTeamIds = [];
+            $('input[name="team[]"]:checked').each(function() {
+                checkedTeamIds.push($(this).val());
+            });
+            // เรียกใช้งานฟังก์ชันสำหรับ team ที่ถูก checked เท่านั้น
+            checkedTeamIds.forEach(function(departmentId) {
+                multiTeamUpdate(departmentId);
+            });
+        } else {
+            multiteamKpi();
+        }
 
-        // เรียกใช้งานฟังก์ชันสำหรับ team ที่ถูก checked เท่านั้น
-        checkedTeamIds.forEach(function(departmentId) {
-            multiTeamUpdate(departmentId);
-        });
     }
 
     // เรียกใช้งานฟังก์ชันกับ select หลายตัวพร้อมกัน

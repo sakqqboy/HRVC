@@ -896,3 +896,79 @@ function overrideChecked(check, value) {
 		icon.src = $url + "image/result-blue.svg";
 	}
 }
+
+function multiteamKpi() {
+	var kpiId = $("#kpiId").val();
+	var url = $url + 'kpi/kpi-team/kpi-team-update';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { kpiId: kpiId },
+		success: function (data) {
+			$("#show-multi-team-update").html(data.textTeam);
+			totalChecked = data.countTeam;
+			if (totalChecked > 0) {
+				let deptImageSrc = $url + "image/teams.svg";
+				let deptBlackImageSrc = $url + "image/teams-black.svg";
+
+				$("#image-team #team-selected-count")
+					.removeClass("cycle-current-gray")
+					.addClass("cycle-current-white");
+				$("#image-team #team-selected-message").html("");
+
+				$("#image-team .cycle-current-gray")
+					.removeClass("cycle-current-gray")
+					.addClass("cycle-current")
+					.find("img")
+					.attr("src", deptImageSrc);
+
+				if (totalChecked < 3) {
+					$("#image-team .cycle-current").slice(totalChecked, 3)
+						.removeClass("cycle-current")
+						.addClass("cycle-current-gray")
+						.find("img")
+						.attr("src", deptBlackImageSrc);
+				}
+
+				// อัปเดตจำนวนที่เลือก
+				$("#team-selected-count").text(totalChecked.toString());
+				$("#team-selected-message").text("");
+
+				// ปรับสไตล์ข้อความ
+				$("#multi-team-text").html(totalChecked + " Teams Selected").css({
+					"color": "#30313D",
+					"font-family": '"SF Pro Display"',
+					"font-size": "14px",
+					"font-weight": "500",
+					"line-height": "20px"
+				});
+
+			} else {
+				$('input[id^="multi-check-team-"]').each(function () {
+					//        $(".multiCheck-" + $(this).val()).prop('required', true);
+				});
+
+				// รีเซ็ตค่าหากไม่มีการเลือก
+				$("#image-team .cycle-current").slice(0, 3)
+					.removeClass("cycle-current")
+					.addClass("cycle-current-gray")
+					.find("img")
+					.attr("src", $url + "image/teams-black.svg");
+
+				$("#team-selected-count").text("00");
+				$("#team-selected-message").text("No Teams are Selected Yet");
+
+				$("#multi-team-text").html("Selected Teams").css({
+					"color": "var(--Helper-Text-Gray, #8A8A8A)",
+					"font-family": '"SF Pro Display", sans-serif',
+					"font-size": "14px",
+					"font-weight": "400",
+					"line-height": "20px",
+					"text-transform": "capitalize"
+				});
+			}
+		}
+	});
+
+}

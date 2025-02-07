@@ -5,7 +5,7 @@ use yii\bootstrap5\ActiveForm;
 
 $this->title = 'KFI';
 ?>
-<div class="col-12">
+<div class=" contrainer-body col-12">
     <div class="col-12">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
             style="margin-top: -3px;">
