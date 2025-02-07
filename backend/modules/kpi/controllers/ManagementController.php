@@ -544,7 +544,7 @@ class ManagementController extends Controller
 				$data[$history["kpiHistoryId"]] = [
 					"title" => $history["titleProcess"],
 					"remark" => $history["remark"],
-			// 		//"result" => $history["result"],
+			 		//"result" => $history["result"],
 					"picture" => Employee::employeeImage($employeeId),
 					"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
 					"time" => ModelMaster::timeText($time[1]),

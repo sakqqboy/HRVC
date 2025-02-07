@@ -18,14 +18,11 @@ $form = ActiveForm::begin([
 $unitId = 1;
 if (isset($data['unitId']) && $data['unitId'] >= 1) {
     $unitId = $data['unitId'];
-    // ทำสิ่งที่ต้องการเมื่อ unitId มีค่าเป็น 2
 }
 $quantRatio = $data['quantRatio'] ?? '';
 $selectedCode = $data['code'] ?? '';
 $selectedAmountType = $data['amountType'] ?? '';
 $selectedPriority = isset($data['priority']) ? $data['priority'] : '';
-
-// $percentage = isset($data['ratio']) ? $data['ratio'] : 00;
 $percentage = isset($data['ratio']) ? round((float)$data['ratio']) : 0;
 $result = $data['result'] ?? 0;
 $value = isset($data['result']) ? $data['result'] : 0;

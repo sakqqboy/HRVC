@@ -23,42 +23,32 @@ $kpiTeamHistoryId = $data['kpiTeamHistoryId'] ?? 0;
 $DueBehind = $targetAmount -  $result;
 $detail = !empty($data['kpiDetail']) ? $data['kpiDetail'] : 'No details listed';
 $maxLength = 487;
-
-
-// ตรวจสอบว่า $data['nextCheckText'] มีค่าและสามารถแปลงเป็น DateTime ได้
 $nextCheckDate = !empty($data['nextCheckText']) 
     ? DateTime::createFromFormat('d M Y', $data['nextCheckText']) 
     : null;
 
-if ($nextCheckDate === false) {
-    // ถ้าไม่สามารถแปลงได้ ให้กำหนดค่าเป็น "Due Pass"
-    $nextCheckDate = 'Due Pass';
-}
-
-// ถ้าค่า $nextCheckDate เป็น "Due Pass" ให้ไม่คำนวณวันที่เหลือ
-if ($nextCheckDate !== 'Due Pass') {
-    // หาวันที่ปัจจุบัน
-    $currentDate = new DateTime();
-
-    // คำนวณความแตกต่างระหว่างวันที่ปัจจุบันและวันที่ที่กำหนด
-    if ($nextCheckDate instanceof DateTime) {
-        $interval = $currentDate->diff($nextCheckDate);
-
-        // แสดงจำนวนวันที่เหลือ
-        $daysLeft = $interval->format('%r%a'); // %r คือการแสดงเครื่องหมายบวกหรือลบ
-        if ($daysLeft < 0) {
-            $daysLeft = "Due Pass"; // ถ้าผลลัพธ์เป็นลบ แสดงว่าเกินกำหนด
-        } else {
-            $daysLeft = "$daysLeft " . Yii::t('app', 'days left');
-        }
+    if (!$nextCheckDate) {
+        $daysLeft = "Due Pass";
     } else {
-        $daysLeft = "Due Pass"; // ถ้าไม่สามารถแปลงวันที่ได้
+        // หาวันที่ปัจจุบัน
+        $currentDate = new DateTime();
+    
+        // ตรวจสอบว่า $nextCheckDate เป็น DateTime หรือไม่ ถ้าไม่ใช่ให้พยายามแปลง
+        if (!$nextCheckDate instanceof DateTime) {
+            $nextCheckDate = DateTime::createFromFormat('Y-m-d', $nextCheckDate);
+        }
+    
+        // ถ้าแปลงวันที่สำเร็จ ให้คำนวณความแตกต่าง
+        if ($nextCheckDate) {
+            $interval = $currentDate->diff($nextCheckDate);
+            $daysLeft = $interval->format('%r%a'); // %r แสดงเครื่องหมาย (+/-)
+    
+            $daysLeft = ($daysLeft < 0) ? "Due Pass" : "$daysLeft " . Yii::t('app', 'days left');
+        } else {
+            $daysLeft = "Due Pass"; // กรณีแปลงวันที่ไม่สำเร็จ
+        }
     }
-} else {
-    $daysLeft = "Due Pass"; // หากไม่สามารถแปลงวันที่ได้
-}
-
-// echo $data['nextCheckText'];
+    
 ?>
 
 <style>
