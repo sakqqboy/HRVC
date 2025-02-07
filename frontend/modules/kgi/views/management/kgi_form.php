@@ -701,13 +701,19 @@ $DueBehind = $targetAmount -  $result;
 									title="<?= Yii::t('app', 'Historic update contains the update from the team and indivudials if you wish to use your own values, please toggle on Override to put custom numbers ') ?>"
 									alt="Help Icon">
 							</div>
-							<div class="updatehistory" class="updatehistory" style="text-align: right;cursor:pointer;"
-								data-bs-toggle="modal" data-bs-target="#update-history-popup" onclick="javascript:kgiUpdateHistory(<?= $kgiId ?>)">
-								<?php if ($statusform == 'update') { ?>
-									<img
-										src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg"><?= Yii::t('app', 'Update History') ?>
-								<?php } ?>
-							</div>
+							<?php
+							if ($statusform == 'update') {
+							?>
+								<div class="updatehistory" class="updatehistory" style="text-align: right;cursor:pointer;"
+									data-bs-toggle="modal" data-bs-target="#update-history-popup" onclick="javascript:kgiUpdateHistory(<?= $kgiId ?>)">
+									<?php if ($statusform == 'update') { ?>
+										<img
+											src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg"><?= Yii::t('app', 'Update History') ?>
+									<?php } ?>
+								</div>
+							<?php
+							}
+							?>
 						</label>
 
 						<div class="input-group">
@@ -857,13 +863,13 @@ $DueBehind = $targetAmount -  $result;
 			checkedBranchIds.forEach(function(branchId) {
 				departmentMultiTeamUpdate(branchId);
 			});
-			if (checkedDepartmentIds.length > 0) {
-				checkedDepartmentIds.forEach(function(departmentId) {
-					multiTeamUpdate(departmentId);
-				});
-			} else {
-				multiteamKgi();
-			}
+			// if (checkedDepartmentIds.length > 0) {
+			// 	checkedDepartmentIds.forEach(function(departmentId) {
+			// 		multiTeamUpdate(departmentId);
+			// 	});
+			// } else {
+			multiteamKgi();
+			// }
 			$("#priority-update").val(pri);
 			let isSubmittingUpdate = false; // ป้องกัน submit ซ้ำ
 			$("#update-kgi").on("beforeSubmit", function(event) {

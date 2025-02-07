@@ -555,6 +555,7 @@ function validateFormKgiUpdate() {
 	}
 }
 function multiteamKgi() { 
+	$("#show-multi-team-update").html(' ');
 	var kgiId = $("#kgiId").val();
 	var url = $url + 'kgi/kgi-team/kgi-team-update';
 	$.ajax({
