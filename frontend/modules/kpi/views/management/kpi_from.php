@@ -892,27 +892,51 @@ $(document).ready(function() {
 
         // ดึงค่า branchId ที่ถูก checked แล้ว
         var checkedBranchIds = [];
+        var checkedDepartmentIds = [];
+
         $('input[name="branch[]"]:checked').each(function() {
             checkedBranchIds.push($(this).val());
         });
 
-        // เรียกใช้งานฟังก์ชันสำหรับ branch ที่ถูก checked เท่านั้น
+        // // เรียกใช้งานฟังก์ชันสำหรับ branch ที่ถูก checked เท่านั้น
+        // checkedBranchIds.forEach(function(branchId) {
+        //     departmentMultiTeamUpdateKpi(branchId);
+        // });
+
+        // ดึงค่า team ที่ถูก checked แล้ว
+        // var checkedTeamIds = [];
+        // $('input[name="team[]"]:checked').each(function() {
+        //     checkedTeamIds.push($(this).val());
+        // });
+
+        // // เรียกใช้งานฟังก์ชันสำหรับ team ที่ถูก checked เท่านั้น
+        // checkedTeamIds.forEach(function(departmentId) {
+        //     multiTeamUpdate(departmentId);
+        // });
+
+        $('input[name="department[]"]:checked').each(function() {
+            checkedDepartmentIds.push($(this).val());
+        });
+
         checkedBranchIds.forEach(function(branchId) {
             departmentMultiTeamUpdateKpi(branchId);
         });
 
         if (checkedDepartmentIds.length > 0) {
-            // ดึงค่า team ที่ถูก checked แล้ว
+            // checkedDepartmentIds.forEach(function(departmentId) {
+            //     multiTeamUpdate(departmentId);
+            // });
             var checkedTeamIds = [];
             $('input[name="team[]"]:checked').each(function() {
                 checkedTeamIds.push($(this).val());
             });
+
             // เรียกใช้งานฟังก์ชันสำหรับ team ที่ถูก checked เท่านั้น
             checkedTeamIds.forEach(function(departmentId) {
                 multiTeamUpdate(departmentId);
             });
         } else {
-            multiteamKpi();
+            multiteamKgi();
         }
 
     }
