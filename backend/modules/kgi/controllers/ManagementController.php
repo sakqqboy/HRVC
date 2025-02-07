@@ -245,8 +245,8 @@ class ManagementController extends Controller
 				"toDate" => $kgi["toDate"],
 				"fromDateDetail" => ModelMaster::engDate($kgi["fromDate"], 2),
 				"toDateDetail" => ModelMaster::engDate($kgi["toDate"], 2),
-				"fromDateFormat" => ModelMaster::dateMonthFullFormatNormal($kgiHistory["fromDate"]),
-				"toDateFormat" => ModelMaster::dateMonthFullFormatNormal($kgiHistory["toDate"]),
+				"fromDateFormat" => ModelMaster::dateMonthFullFormatNormal($kgi["fromDate"]),
+				"toDateFormat" => ModelMaster::dateMonthFullFormatNormal($kgi["toDate"]),
 				"lastUpdate" => '-',
 				"isOver" => ModelMaster::isOverDuedate(Kgi::nextCheckDate($kgi['kgiId'])),
 			];

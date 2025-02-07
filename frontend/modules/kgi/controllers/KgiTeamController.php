@@ -943,4 +943,47 @@ class KgiTeamController extends Controller
 		]);
 		return json_encode($res);
 	}
+	public function actionKgiTeamUpdate()
+	{
+		$kgiId = $_POST["kgiId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-team?kgiId=' . $kgiId);
+		$kgiTeams = curl_exec($api);
+		$kgiTeams = json_decode($kgiTeams, true);
+
+		curl_close($api);
+		$allDepartment = [];
+		if (isset($kgiTeams) && count($kgiTeams) > 0) {
+			foreach ($kgiTeams as $kgt):
+				$allDepartment[$kgt["departmentId"]] = $kgt["departmentId"];
+			endforeach;
+		}
+		$t = [];
+		$textTeam = "";
+		if (count($allDepartment) > 0) {
+			foreach ($allDepartment as $dId => $id) :
+				$teams = Team::find()
+					->where(["departmentId" => $dId])
+					->andWhere("status!=99")
+					->asArray()
+					->orderBy("teamName")
+					->all();
+				if (isset($teams) && count($teams) > 0) {
+					foreach ($teams as $team) :
+						$t[$dId][$team["teamId"]] = $team["teamName"];
+					endforeach;
+				}
+			endforeach;
+			$textTeam .= $this->renderAjax('multi_team_update', [
+				"t" => $t,
+				"kgiId" => $kgiId
+			]);
+		}
+		$res["textTeam"] = $textTeam;
+		$res["countTeam"] = count($kgiTeams);
+		return json_encode($res);
+	}
 }

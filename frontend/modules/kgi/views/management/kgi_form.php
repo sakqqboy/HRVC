@@ -857,9 +857,13 @@ $DueBehind = $targetAmount -  $result;
 			checkedBranchIds.forEach(function(branchId) {
 				departmentMultiTeamUpdate(branchId);
 			});
-			checkedDepartmentIds.forEach(function(departmentId) {
-				multiTeamUpdate(departmentId);
-			});
+			if (checkedDepartmentIds.length > 0) {
+				checkedDepartmentIds.forEach(function(departmentId) {
+					multiTeamUpdate(departmentId);
+				});
+			} else {
+				multiteamKgi();
+			}
 			$("#priority-update").val(pri);
 			let isSubmittingUpdate = false; // ป้องกัน submit ซ้ำ
 			$("#update-kgi").on("beforeSubmit", function(event) {
