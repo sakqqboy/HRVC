@@ -587,4 +587,57 @@ class KgiPersonalController extends Controller
 		}
 		return json_encode($data);
 	}
+	public function actionKgiHistoryEmployee($kgiId)
+	{
+		$kgiEmployee = KgiEmployee::find()
+			->where([
+				"kgiId" => $kgiId,
+				"status" => [1, 2, 4]
+			])
+			->orderBy("updateDateTime DESC")
+			->asArray()
+			->all();
+		$data = [];
+		if (isset($kgiEmployee) && count($kgiEmployee) > 0) {
+			foreach ($kgiEmployee as $kt):
+				$kgiEmployeeHistory = KgiEmployeeHistory::find()
+					->where([
+						"kgiEmployeeId" => $kt["kgiEmployeeId"],
+						"status" => [1, 2, 4]
+					])
+					->orderBy('createDateTime DESC')
+					->asArray()
+					->one();
+				$employee = Employee::find()->where(["employeeId" => $kt["employeeId"]])->asArray()->one();
+				$teamName = Team::teamName($employee["teamId"]);
+				$employeeId = $kt["employeeId"];
+				if (isset($kgiEmployeeHistory) && !empty($kgiEmployeeHistory)) {
+					$time = explode(' ', $kgiEmployeeHistory["createDateTime"]);
+					$data[$kt["kgiEmployeeId"]] = [
+						"result" => $kgiEmployeeHistory["result"],
+						"creater" => $employee["employeeFirstname"] . ' ' . $employee["employeeSurename"],
+						"teamName" => $teamName,
+						"picture" => Employee::employeeImage($employeeId),
+						"time" => ModelMaster::timeText($time[1]),
+						"status" => $kgiEmployeeHistory["status"],
+						"target" => $kgiEmployeeHistory["target"],
+						"createDateTime" => ModelMaster::monthDateYearTime($kgiEmployeeHistory["createDateTime"])
+					];
+				} else {
+					$time = explode(' ', $kt["createDateTime"]);
+					$data[$kt["kgiEmployeeId"]] = [
+						"result" => $kt["result"],
+						"creater" => $employee["employeeFirstname"] . ' ' . $employee["employeeSurename"],
+						"teamName" => $teamName,
+						"picture" => Employee::employeeImage($employeeId),
+						"time" => ModelMaster::timeText($time[1]),
+						"status" => $kt["status"],
+						"target" => $kt["target"],
+						"createDateTime" => ModelMaster::monthDateYearTime($kt["createDateTime"])
+					];
+				}
+			endforeach;
+		}
+		return json_encode($data);
+	}
 }
