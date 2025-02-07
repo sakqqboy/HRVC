@@ -534,8 +534,8 @@ class ManagementController extends Controller
 						"teamName" => Team::teamName($kt["teamId"]),
 						"createDate" => ModelMaster::engDateHr($kpiTeamHistory["createDateTime"]),
 						"time" => ModelMaster::timeText($time[1] ?? '00:00'),
-						"target" => $history["target"] ?? '0.00',
-						"result" => $history["result"] ?? '0.00',
+						"target" => $kpiTeamHistory["target"] ?? '0.00',
+						"result" => $kpiTeamHistory["result"] ?? '0.00',
 						"createDateTime" => ModelMaster::monthDateYearTime($kpiTeamHistory["createDateTime"]),
 						"departmentName" => Department::teamDepartment($kt["teamId"])
 					];
@@ -546,8 +546,8 @@ class ManagementController extends Controller
 						"teamName" => Team::teamName($kt["teamId"]),
 						"createDate" => ModelMaster::engDateHr($kt["createDateTime"]),
 						"time" => ModelMaster::timeText($time[1] ?? '00:00'),
-						"target" => $history["target"] ?? '0.00',
-						"result" => $history["result"] ?? '0.00',
+						"target" => $kt["target"] ?? '0.00',
+						"result" => $kt["result"] ?? '0.00',
 						"createDateTime" => ModelMaster::monthDateYearTime($kt["createDateTime"]),
 						"departmentName" => Department::teamDepartment($kt["teamId"])
 					];

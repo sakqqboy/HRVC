@@ -846,7 +846,6 @@ $(document).ready(function() {
             return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
         }
         isSubmitting = true;
-        // alert(acType);
         if (!validateFormKpi(acType)) {
             isSubmitting = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
             return false;
@@ -893,7 +892,6 @@ $(document).ready(function() {
 
     if (statusform == 'update') {
         branchMultiDepartmentUpdateKpi();
-        // alert(statusform);
 
         // ดึงค่า branchId ที่ถูก checked แล้ว
         var checkedBranchIds = [];
@@ -903,7 +901,6 @@ $(document).ready(function() {
 
         // เรียกใช้งานฟังก์ชันสำหรับ branch ที่ถูก checked เท่านั้น
         checkedBranchIds.forEach(function(branchId) {
-            // alert(branchId);
             departmentMultiTeamUpdateKpi(branchId);
         });
 
@@ -915,12 +912,9 @@ $(document).ready(function() {
 
         // เรียกใช้งานฟังก์ชันสำหรับ team ที่ถูก checked เท่านั้น
         checkedTeamIds.forEach(function(departmentId) {
-            // alert(departmentId);
             multiTeamUpdate(departmentId);
         });
     }
-
-
 
     // เรียกใช้งานฟังก์ชันกับ select หลายตัวพร้อมกัน
     updatePlaceholderColor('#companyId');
@@ -933,7 +927,7 @@ $(document).ready(function() {
 });
 
 function modalHistory(kpiId) {
-    alert(kpiId);
+    // alert(kpiId);
     var url = $url + 'kpi/management/modal-history';
 
     var month = document.getElementById("hiddenMonth").value;
@@ -998,7 +992,6 @@ function modalHistory(kpiId) {
             var dashArrayValue = (percentage / 100) * 100;
             $(".circle").attr("stroke-dasharray", dashArrayValue + ", 100");
             $("#DueBehind").text(dueBehind + "%");
-            // console.log(data.kpiId);
             // console.log(data.history);
             var historyData = data.history; // ดึงข้อมูล history
             var historyList = $('#history-list-creater');
@@ -1010,55 +1003,68 @@ function modalHistory(kpiId) {
             historyTeamList.empty(); // เคลียร์รายการเก่า
             var historyTeamArray = Object.values(historyTeamData);
 
-            historyArray.forEach(function(item) {
-                var listItem = `
-                <li class="schedule-item mt-5" role="button" tabindex="0">
-                        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                            <div style="display: flex; gap: 16px; align-items: center;">
-                                <div style="display: flex; justify-content: center; align-items: center;">
-                                    <div class="col-5">
-                                        <img src="<?= Yii::$app->homeUrl ?>${item.picture}" class="width-ehsan-small" id="picture-history">
+            // alert(JSON.stringify(historyData));
+
+            if (historyArray.length > 0) {
+                historyArray.forEach(function(item) {
+                    var listItem = `
+                        <li class="schedule-item mt-5" role="button" tabindex="0">
+                            <div class="row" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+
+                                <div class="col-5" style="display: flex; gap: 16px; align-items: center;">
+                                    <div style="display: flex; justify-content: center; align-items: center;">
+                                        <div class="col-5">
+                                            <img src="<?= Yii::$app->homeUrl ?>${item.picture}" class="width-ehsan-small" id="picture-history">
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; justify-content: center; align-items: center;">
+                                        <span class="text-black" id="creater-history" style="font-size: 16px; font-weight: 500;">
+                                            ${item.creater}
+                                        </span>
                                     </div>
                                 </div>
-                                <div style="display: flex; justify-content: center; align-items: center;">
-                                    <span class="text-black" id="creater-history" style="font-size: 16px; font-weight: 500;">
-                                        ${item.creater}
-                                    </span>
-                                </div>
-                            </div>
 
-                            <div style="display: flex; justify-content: center; align-items: center; background-color: rgb(215, 235, 255); border: 0.795px solid #2580D3; border-radius: 36px; padding: 3px 20px; z-index: 1;">
-                                <div style="display: flex; justify-content: center; align-items: center; gap: 8px;">
-                                    <div class="cycle-current">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
+                                <div class="col-3">
+                                    <div  style="display: flex; justify-content: center; align-items: center; background-color: rgb(215, 235, 255); border: 0.795px solid #2580D3; border-radius: 36px; padding: 3px 20px; z-index: 1;">
+                                        <div style="display: flex; justify-content: center; align-items: center; gap: 8px;">
+                                            <div class="cycle-current">
+                                                <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
+                                            </div>
+                                            <span class="text-black" id="teamName-history" style="font-size: 16px; font-weight: 500;">
+                                                ${item.teamName}
+                                            </span>
+                                        </div>
                                     </div>
-                                    <span class="text-black" id="teamName-history" style="font-size: 16px; font-weight: 500;">
-                                        ${item.teamName}
+                                </div>
+                                
+
+                                <div class="col-4" style="display: flex; flex-direction: column; text-align: right;">
+                                    <div>
+                                        <span class="text-gray" id="target-history" style="font-size: 18px; font-weight: 400;">
+                                            ${item.target}
+                                        </span>
+                                        <span class="text-blue" id="result-history" style="font-size: 18px; font-weight: 600;">
+                                            /${item.result}
+                                        </span>
+                                    </div>
+                                    <span class="text-gray" id="createDate-history" style="font-size: 14px; font-weight: 400;">
+                                        ${item.createDateTime}
                                     </span>
                                 </div>
                             </div>
+                        </li>
+                    `;
+                    historyList.append(listItem); // เพิ่มข้อมูลลงใน ul
+                });
+            } else {
+                historyList.append(
+                    '<li class="schedule-item mt-5" role="button" tabindex="0"><div style="display: flex; justify-content: center; align-items: center; width: 100%;">No Data</div></li>'
+                )
+            }
 
-                            <div style="display: flex; flex-direction: column; text-align: right;">
-                                <div>
-                                    <span class="text-gray" id="target-history" style="font-size: 18px; font-weight: 400;">
-                                        ${item.target}
-                                    </span>
-                                    <span class="text-blue" id="result-history" style="font-size: 18px; font-weight: 600;">
-                                        /${item.result}
-                                    </span>
-                                </div>
-                                <span class="text-gray" id="createDate-history" style="font-size: 14px; font-weight: 400;">
-                                    ${item.createDateTime}
-                                </span>
-                            </div>
-                        </div>
-                    </li>
-            `;
-                historyList.append(listItem); // เพิ่มข้อมูลลงใน ul
-            });
-
-            historyTeamArray.forEach(function(item) {
-                var listItem = `
+            if (historyTeamArray.length > 0) {
+                historyTeamArray.forEach(function(item) {
+                    var listItem = `
                     <li class="schedule-item mt-5" role="button" tabindex="0">
                         <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
                             <!-- กลุ่มที่ชิดซ้าย -->
@@ -1099,8 +1105,13 @@ function modalHistory(kpiId) {
                         </div>
                     </li>
                 `;
-                historyTeamList.append(listItem); // เพิ่มข้อมูลลงใน ul
-            });
+                    historyTeamList.append(listItem); // เพิ่มข้อมูลลงใน ul
+                });
+            } else {
+                historyTeamList.append(
+                    '<li class="schedule-item mt-5" role="button" tabindex="0"><div style="display: flex; justify-content: center; align-items: center; width: 100%;">No Data</div></li>'
+                )
+            }
 
         },
         error: function(xhr, status, error) {

@@ -160,7 +160,12 @@
                             <div class="tab-pane fade show active fade pt-23"
                                 style="gap: 14px; width: 100%; max-height: 450px; overflow-y: auto;">
                                 <ul id="history-list-team" class="list-unstyled small">
-                                    No data
+                                    <li class="schedule-item mt-5" role="button" tabindex="0">
+                                        <div class="row"
+                                            style="display: flex; justify-content: center; align-items: center; width: 100%;">
+                                            No data
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -185,7 +190,12 @@
                             <div class="tab-pane fade show active fade pt-23"
                                 style="gap: 14px; width: 100%; max-height: 450px; overflow-y: auto;">
                                 <ul id="history-list-creater" class="list-unstyled small">
-                                    No data
+                                    <li class="schedule-item mt-5" role="button" tabindex="0">
+                                        <div class="row"
+                                            style="display: flex; justify-content: center; align-items: center; width: 100%;">
+                                            No data
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
