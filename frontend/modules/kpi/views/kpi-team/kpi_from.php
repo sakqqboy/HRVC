@@ -1059,9 +1059,14 @@ function modalHistory(kpiId) {
                     historyList.append(listItem); // เพิ่มข้อมูลลงใน ul
                 });
             } else {
-                historyList.append(
-                    '<li class="schedule-item mt-5" role="button" tabindex="0"><div style="display: flex; justify-content: center; align-items: center; width: 100%;">No Data</div></li>'
-                );
+                historyTeamList.append(
+                    `<li class="schedule-item mt-5" role="button" tabindex="0">
+                            <div class="row pt-10 pb-10"
+                                style="display: flex; justify-content: center; align-items: center; width: 100%; font-size: 18px; ">
+                                    No data
+                            </div>
+                    </li>`
+                )
             }
 
 
@@ -1112,14 +1117,19 @@ function modalHistory(kpiId) {
                 });
             } else {
                 historyTeamList.append(
-                    '<li class="schedule-item mt-5" role="button" tabindex="0"><div style="display: flex; justify-content: center; align-items: center; width: 100%;">No Data</div></li>'
-                );
+                    `<li class="schedule-item mt-5" role="button" tabindex="0">
+                            <div class="row pt-10 pb-10"
+                                style="display: flex; justify-content: center; align-items: center; width: 100%; font-size: 18px; ">
+                                    No data
+                            </div>
+                    </li>`
+                )
             }
 
         },
         error: function(xhr, status, error) {
             console.log(xhr.responseText); // ดูข้อความผิดพลาดจากเซิร์ฟเวอร์
-            alert("เกิดข้อผิดพลาดในการโหลดข้อมูล");
+            // alert("เกิดข้อผิดพลาดในการโหลดข้อมูล");
         }
     });
 }

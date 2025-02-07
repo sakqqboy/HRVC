@@ -161,8 +161,8 @@
                                 style="gap: 14px; width: 100%; max-height: 450px; overflow-y: auto;">
                                 <ul id="history-list-team" class="list-unstyled small">
                                     <li class="schedule-item mt-5" role="button" tabindex="0">
-                                        <div class="row"
-                                            style="display: flex; justify-content: center; align-items: center; width: 100%;">
+                                        <div class="row pt-10 pb-10"
+                                            style="display: flex; justify-content: center; align-items: center; width: 100%; font-size: 18px; ">
                                             No data
                                         </div>
                                     </li>
@@ -191,8 +191,8 @@
                                 style="gap: 14px; width: 100%; max-height: 450px; overflow-y: auto;">
                                 <ul id="history-list-creater" class="list-unstyled small">
                                     <li class="schedule-item mt-5" role="button" tabindex="0">
-                                        <div class="row"
-                                            style="display: flex; justify-content: center; align-items: center; width: 100%;">
+                                        <div class="row pt-10 pb-10"
+                                            style="display: flex; justify-content: center; align-items: center; width: 100%; font-size: 18px; ">
                                             No data
                                         </div>
                                     </li>
