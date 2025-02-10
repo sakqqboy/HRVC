@@ -898,6 +898,7 @@ function overrideChecked(check, value) {
 }
 
 function multiteamKpi() {
+	$("#show-multi-team-update").html(' ');
 	var kpiId = $("#kpiId").val();
 	var url = $url + 'kpi/kpi-team/kpi-team-update';
 	$.ajax({

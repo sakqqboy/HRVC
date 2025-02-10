@@ -119,7 +119,7 @@ select.form-select option:disabled {
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <div class="col-8">
                     <a href="<?= Yii::$app->request->referrer ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kpi/management/grid' ?>"
-                        class="mr-5 font-size-12">
+                        class="mr-5 font-size-12" style="text-decoration: none;">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back.svg">
                         <text class="pim-text-back">
                             <?= Yii::t('app', 'Back') ?>
@@ -759,8 +759,6 @@ select.form-select option:disabled {
                     <div class="form-group mt-42"
                         style="display: flex; align-items: flex-end; justify-content: flex-end; gap: 12px; width: 100%;">
                         <?php
-                        // $status = 'create';
-                        // $statusform = 'update';
 
                         if ($statusform == 'update') {
                         ?>
@@ -892,27 +890,33 @@ $(document).ready(function() {
 
         // ดึงค่า branchId ที่ถูก checked แล้ว
         var checkedBranchIds = [];
+        var checkedDepartmentIds = [];
+
         $('input[name="branch[]"]:checked').each(function() {
             checkedBranchIds.push($(this).val());
         });
 
-        // เรียกใช้งานฟังก์ชันสำหรับ branch ที่ถูก checked เท่านั้น
+        $('input[name="department[]"]:checked').each(function() {
+            checkedDepartmentIds.push($(this).val());
+        });
+
         checkedBranchIds.forEach(function(branchId) {
             departmentMultiTeamUpdateKpi(branchId);
         });
 
         if (checkedDepartmentIds.length > 0) {
-            // ดึงค่า team ที่ถูก checked แล้ว
+
             var checkedTeamIds = [];
             $('input[name="team[]"]:checked').each(function() {
                 checkedTeamIds.push($(this).val());
             });
+
             // เรียกใช้งานฟังก์ชันสำหรับ team ที่ถูก checked เท่านั้น
             checkedTeamIds.forEach(function(departmentId) {
                 multiTeamUpdate(departmentId);
             });
         } else {
-            multiteamKpi();
+            multiteamKgi();
         }
 
     }

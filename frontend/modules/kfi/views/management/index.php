@@ -5,7 +5,7 @@ use yii\bootstrap5\ActiveForm;
 
 $this->title = 'KFI';
 ?>
-<div class=" contrainer-body col-12">
+<div class="col-12">
     <div class="col-12">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
             style="margin-top: -3px;">
@@ -201,15 +201,6 @@ $this->title = 'KFI';
                                                     <?= Yii::t('app', 'Edit') ?>
                                                 </a>
                                             </li>
-                                            <!-- <li class="pl-4 pr-4" data-bs-toggle="modal"
-                                                data-bs-target="#staticBackdrop2"
-                                                onclick="javascript:updateKfi(<?= $kfiId ?>)" title="Update">
-                                                <a class="dropdown-itemNEWS pl-4 pr-20 mb-5" href="#">
-                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
-                                                        alt="edit" class="pim-icon mr-10" style="margin-top: -2px;">
-                                                    <?= Yii::t('app', 'Edit') ?>
-                                                </a>
-                                            </li> -->
                                             <?php
                                                     }
                                                     ?>

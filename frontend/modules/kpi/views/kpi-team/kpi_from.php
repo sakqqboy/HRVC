@@ -131,7 +131,7 @@ select.form-select option:disabled {
             <div class="between-center" style=" ">
                 <div class="col-8">
                     <a href="<?= Yii::$app->request->referrer ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kpi/management/grid' ?>"
-                        class="mr-5 font-size-12">
+                        class="mr-5 font-size-12" style="text-decoration: none;">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back.svg">
                         <text class="pim-text-back">
                             <?= Yii::t('app', 'Back') ?>
@@ -542,9 +542,14 @@ select.form-select option:disabled {
                                 <?= count($kpiTeam) ?>
                             </div>
                             <text class="text-black" style="font-size: 18px; font-weight: 500;">
-                                <?= Yii::t('app', 'Assigned on Our Team &') ?>
-                                <?= count($kpiTeam) ?>
-                                <?= Yii::t('app', 'Others') ?>
+                                <?= Yii::t('app', 'Assigned on Our Team') ?>
+                                <?php 
+                                 $countTeam =  count($kpiTeam);
+                                 $countTeam = $countTeam - 1;                                 
+                                    if($countTeam > 0){
+                                        echo Yii::t('app', '& ' . $countTeam . ' Others');
+                                    }
+                                ?>
                             </text>
                         </div>
                     </div>
@@ -573,7 +578,8 @@ select.form-select option:disabled {
                                                 alt="person icon">
                                         </div>
                                     </div>
-                                    <div class="col-4 number-tag load-yenlow pr-0 pl-0 pim-pic-gridKFINum ">
+                                    <div class="col-4 number-tag load-yenlow pr-0 pl-0 pim-pic-gridKFINum "
+                                        style="z-index: 0;padding-top: 8px;">
                                         <?= count($data['kpiEmployee']) ?> </div>
                                 </div>
                             </div>
@@ -734,18 +740,18 @@ select.form-select option:disabled {
                                 </div>
                             </div>
                             <div id="textbox-check-warning"
-                                style="<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText'])) 
+                                style="<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']) || $data['status'] == 2) 
                                                             ? 'border: 0.5px solid var(--Progress-Blue, #30313D);' 
                                                             : ($daysLeft == 'Due Pass' 
                                                                 ? 'border: 0.5px solid var(--Progress-Blue, #E05757);' 
                                                                 : 'border: 0.5px solid var(--Progress-Blue, #DD7A01);') ?> font-size: 14px; font-weight: 600;"
-                                class="textbox-check-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText'])) 
+                                class="textbox-check-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']) || $data['status'] == 2) 
                                                             ? 'hide' 
                                                             : ($daysLeft == 'Due Pass' 
                                                                 ? 'red' 
                                                                 : 'orang') ?>">
                                 <div class="mid-center" style="flex-basis: 5%;  ">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/warning-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText'])) 
+                                    <img src="<?= Yii::$app->homeUrl ?>image/warning-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']) || $data['status'] == 2) 
                                                             ? 'black' 
                                                             : ($daysLeft == 'Due Pass' 
                                                                 ? 'red' 
@@ -753,12 +759,12 @@ select.form-select option:disabled {
                                         style="width: 20px; height: 20px;">
                                 </div>
                                 <div class="mid-center" style="flex-basis: 25%; margin-right: 20px;">
-                                    <div class="border-cicle bg-white text-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText'])) 
+                                    <div class="border-cicle bg-white text-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']) || $data['status'] == 2) 
                                                             ? 'black' 
                                                             : ($daysLeft == 'Due Pass' 
                                                                 ? 'red' 
                                                                 : 'orang') ?>"
-                                        style="<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText'])) 
+                                        style="<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']) || $data['status'] == 2) 
                                                             ? 'border: 0.5px solid var(--Progress-Blue, #30313D);' 
                                                             : ($daysLeft == 'Due Pass' 
                                                                 ? 'border: 0.5px solid var(--Progress-Blue, #E05757);' 
@@ -769,7 +775,7 @@ select.form-select option:disabled {
                                     </div>
                                 </div>
                                 <div style="flex-basis: 70%;">
-                                    <text class="text-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText'])) 
+                                    <text class="text-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']) || $data['status'] == 2) 
                                                             ? 'black' 
                                                             : ($daysLeft == 'Due Pass' 
                                                                 ? 'red' 
