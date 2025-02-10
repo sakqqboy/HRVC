@@ -119,7 +119,7 @@ select.form-select option:disabled {
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <div class="col-8">
                     <a href="<?= Yii::$app->request->referrer ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kpi/management/grid' ?>"
-                        class="mr-5 font-size-12">
+                        class="mr-5 font-size-12" style="text-decoration: none;">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back.svg">
                         <text class="pim-text-back">
                             <?= Yii::t('app', 'Back') ?>
