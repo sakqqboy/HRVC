@@ -573,7 +573,8 @@ select.form-select option:disabled {
                                                 alt="person icon">
                                         </div>
                                     </div>
-                                    <div class="col-4 number-tag load-yenlow pr-0 pl-0 pim-pic-gridKFINum ">
+                                    <div class="col-4 number-tag load-yenlow pr-0 pl-0 pim-pic-gridKFINum "
+                                        style="z-index: 0;padding-top: 8px;">
                                         <?= count($data['kpiEmployee']) ?> </div>
                                 </div>
                             </div>

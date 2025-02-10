@@ -1,10 +1,3 @@
-<style>
-.chart-graph.hide-legend-images .highcharts-legend-item .highcharts-area,
-.chart-graph.hide-legend-images .highcharts-legend-item .highcharts-point,
-.chart-graph.hide-legend-images .highcharts-legend-item .highcharts-graph {
-    display: none;
-}
-</style>
 <div class="chart-container">
 
     <div class="chart-prevnext-Button">
@@ -99,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
             },
             success: function(data) {
                 // console.log(data); // Check the structure of the data in the console
-                const chartsData = data.data; // This replaces the static chartsData
+                const chartsData = data.data;
                 const chartData = chartsData[0];
 
                 const maxData = chartData.series[0].data;
