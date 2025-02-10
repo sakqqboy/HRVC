@@ -590,17 +590,21 @@ $this->title = "TEAM KGI";
                                                 <?php
                                                 if ($colorFormat == 'disable'  && $canEdit >= 1) {
                                                 ?>
-                                                    <div onclick="javascript:updateTeamKgi(<?= $kgiTeamId ?>)" class="pim-btn-setup"
-                                                        data-bs-toggle="modal" data-bs-target="#update-kgi-modal-team">
+                                                    <a onclick="javascript:updateTeamKgi(<?= $kgiTeamId ?>)" class="pim-btn-setup" style="display: flex; justify-content: center; align-items: center; padding: 7px 9px;  height: 30px; gap: 6px; flex-shrink: 0;"
+                                                        href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/prepare-update/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiHistoryId' => 0]) ?>">
+
+                                                        <!-- data-bs-toggle="modal" data-bs-target="#update-kgi-modal-team"> -->
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
                                                             class="mb-2" style="width: 12px; height: 12px;"> <?= Yii::t('app', 'Setup') ?>
-                                                    </div>
+                                                    </a>
                                                 <?php
                                                 } else if ($canEdit == 1) {
                                                 ?>
-                                                    <div onclick=" javascript:updateTeamKgi(<?= $kgiTeamId ?>)"
-                                                        class="pim-btn-<?= $colorFormat ?>" data-bs-toggle="modal"
-                                                        data-bs-target="#update-kgi-modal-team">
+                                                    <a onclick=" javascript:updateTeamKgi(<?= $kgiTeamId ?>)"
+                                                        class="pim-btn-<?= $colorFormat ?>"
+                                                        style="display: flex; justify-content: center; align-items: center; padding: 7px 9px;  height: 30px; gap: 6px; flex-shrink: 0;"
+                                                        href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/prepare-update/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiHistoryId' => 0]) ?>">
+                                                        <!-- data-bs-toggle="modal"data-bs-target="#update-kgi-modal-team" -->
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
                                                             class="mb-2" style="width: 12px; height: 12px;">
                                                         <?php if ($colorFormat == "complete") {
@@ -611,7 +615,7 @@ $this->title = "TEAM KGI";
                                                             echo  Yii::t('app', "Update");
                                                         }
                                                         ?>
-                                                    </div>
+                                                    </a>
                                                 <?php
                                                 } else { ?>
                                                     <div class="pim-btn-disable" data-bs-target="#update-kgi-modal">
