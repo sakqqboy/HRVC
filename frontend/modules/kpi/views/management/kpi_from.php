@@ -759,8 +759,6 @@ select.form-select option:disabled {
                     <div class="form-group mt-42"
                         style="display: flex; align-items: flex-end; justify-content: flex-end; gap: 12px; width: 100%;">
                         <?php
-                        // $status = 'create';
-                        // $statusform = 'update';
 
                         if ($statusform == 'update') {
                         ?>
@@ -898,22 +896,6 @@ $(document).ready(function() {
             checkedBranchIds.push($(this).val());
         });
 
-        // // เรียกใช้งานฟังก์ชันสำหรับ branch ที่ถูก checked เท่านั้น
-        // checkedBranchIds.forEach(function(branchId) {
-        //     departmentMultiTeamUpdateKpi(branchId);
-        // });
-
-        // ดึงค่า team ที่ถูก checked แล้ว
-        // var checkedTeamIds = [];
-        // $('input[name="team[]"]:checked').each(function() {
-        //     checkedTeamIds.push($(this).val());
-        // });
-
-        // // เรียกใช้งานฟังก์ชันสำหรับ team ที่ถูก checked เท่านั้น
-        // checkedTeamIds.forEach(function(departmentId) {
-        //     multiTeamUpdate(departmentId);
-        // });
-
         $('input[name="department[]"]:checked').each(function() {
             checkedDepartmentIds.push($(this).val());
         });
@@ -923,9 +905,7 @@ $(document).ready(function() {
         });
 
         if (checkedDepartmentIds.length > 0) {
-            // checkedDepartmentIds.forEach(function(departmentId) {
-            //     multiTeamUpdate(departmentId);
-            // });
+
             var checkedTeamIds = [];
             $('input[name="team[]"]:checked').each(function() {
                 checkedTeamIds.push($(this).val());
