@@ -545,7 +545,7 @@ $this->title = 'KGI Grid View';
                                         <?php
                                                 } else if ($role >= 5) {
                                                 ?>
-                                        <div class="pim-btn-<?= $colorFormat ?>"
+                                        <a class="pim-btn-<?= $colorFormat ?>"
                                             href="<?= Yii::$app->homeUrl . 'kgi/management/prepare-update/' . ModelMaster::encodeParams(['kgiId' => $kgiId, 'kgiHistoryId' => 0]) ?>"
                                             style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; height: 30px; gap: 6px; flex-shrink: 0;">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
@@ -559,7 +559,7 @@ $this->title = 'KGI Grid View';
                                                             echo  Yii::t('app', "Update");
                                                         }
                                                         ?>
-                                        </div>
+                                        </a>
                                         <?php
                                                 } else { ?>
                                         <div class="pim-btn-disable" data-bs-target="#update-kgi-modal">
