@@ -833,6 +833,8 @@ select.form-select option:disabled {
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
+    $('[data-toggle="tooltip"]').tooltip(); // เปิดใช้งาน Tooltip
+
     var acType = document.getElementById('acType').value
     let isSubmitting = false; // ป้องกัน submit ซ้ำ
     $("#update-personal-kpi").on("beforeSubmit", function(event) {
