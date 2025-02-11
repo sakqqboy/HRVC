@@ -538,7 +538,7 @@ if (!$nextCheckDate) {
                             </text>
                         </div>
                     </div>
-                    <div class="form-group start-center mt-32" style="  gap: 14px;">
+                    <div class="form-group start-center mt-32" style="gap: 14px;z-index:0;">
                         <label class="text-gray" for="name" style="font-size: 14px; font-weight: 400;">
                             <?= Yii::t('app', 'Assigned Employees') ?>
                         </label>
@@ -590,7 +590,7 @@ if (!$nextCheckDate) {
                         <div class="input-group">
                             <span class="input-group-text"
                                 style="background-color:rgb(255, 255, 255); border-right: none; padding: 20px;">
-                                <img src="/HRVC/frontend/web/image/target-blue.svg" alt="LinkedIn"
+                                <img src="<?= Yii::$app->homeUrl ?>image/target-blue.svg" alt="LinkedIn"
                                     style="width: 30px; height: 30px; ">
                                 <span style="font-size: 22px; font-weight: 600; padding-left: 20px; ">
                                     <?= isset($data['code']) ? $data['code'] : '' ?>
