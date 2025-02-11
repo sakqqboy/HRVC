@@ -246,8 +246,9 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
         return count($kpiEmployee);
     }
 
-    public static function autoSummalys($kpiId,$month,$year)
+    public static function autoSummalys($kpiId,$month,$year,$kpiTeamId)
     {
+         $teamid = '';
         // คำนวณผลรวมของ result ในตาราง kpi_team
         $sumResult = KpiEmployee::find()
         ->where([
