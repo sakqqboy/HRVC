@@ -392,14 +392,9 @@ class ManagementController extends Controller
 
 	$kfiId = $param["kfiId"];
 	$kfiHistoryId = $param["kfiHistoryId"];
-
 	
-		if (!$kfiId || !is_numeric($kfiId)) {
-			throw new Exception("Invalid KFI ID.");
-		}
 		$role = UserRole::userRight();
 		$groupId = Group::currentGroupId();
-
 	
 		$api = curl_init();
 	
@@ -410,11 +405,7 @@ class ManagementController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&kfiHistoryId=0");
 		$kfi = curl_exec($api);
 		$kfi = json_decode($kfi, true);
-	
-		if (!$kfi || empty($kfi["companyId"])) {
-			throw new Exception("Failed to retrieve KFI details.");
-		}
-	
+
 		$companyId = $kfi["companyId"];
 	
 		// ดึงข้อมูลสาขา
@@ -428,7 +419,6 @@ class ManagementController extends Controller
 		]);
 	
 		$branch["textBranch"] = $kfiBranchText;
-		// throw new Exception(print_r($kfiBranchText,true));
 		// ดึงข้อมูลแผนก
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-department?id=' . $kfiId);
 		$kfiDepartment = curl_exec($api);
@@ -465,11 +455,7 @@ class ManagementController extends Controller
 			"kfiId" => $kfiId,
 			"statusform" =>  "update"
 		]);
-
-	
 }
-
-
 
 	public function actionBranchMultiDepartment()
 	{
