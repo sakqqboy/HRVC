@@ -573,7 +573,7 @@ select.form-select option:disabled {
                         <div class="input-group">
                             <span class="input-group-text"
                                 style="background-color:rgb(255, 255, 255); border-right: none; padding: 20px;">
-                                <img src="/HRVC/frontend/web/image/target-blue.svg" alt="LinkedIn"
+                                <img src="<?= Yii::$app->homeUrl ?>image/target-blue.svg" alt="LinkedIn"
                                     style="width: 30px; height: 30px;">
                             </span>
                             <input type="number" class="form-control text-end" name="amount" step="any"

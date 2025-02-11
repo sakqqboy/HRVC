@@ -321,8 +321,8 @@ select.form-select option:disabled {
                                     <?= Yii::t('app', 'Update Interval') ?>
                                 </div>
                                 <div class="pim-duedate mt-2" style="font-size: 18px; font-weight: 600;">
-                                    <img src="/HRVC/frontend/web/images/icons/Settings/monthly.svg" class="pim-iconKFI"
-                                        style="margin-top: -3px;  width: 18px; height: 18px;">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/monthly.svg"
+                                        class="pim-iconKFI" style="margin-top: -3px;  width: 18px; height: 18px;">
                                     <?= Yii::t('app', is_array($unit) ? $unit['unitName'] : $unit) ?>
                                 </div>
                             </div>
