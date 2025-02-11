@@ -268,10 +268,6 @@ class ManagementController extends Controller
 						
 						}
 						
-						// return [
-						// 	'message' => true
-						// ];
-						
 					} else {
 						$errors = $kfiHistory->getErrors();
 						return [
@@ -279,12 +275,7 @@ class ManagementController extends Controller
 							'error' => $errors
 						];
 					}
-						// return [
-						// 	'message' => 'ค่าที่ได้รับจากฟอร์ม2',
-						// 	'data' => $data
-						// ];	
-					// return $this->redirect(Yii::$app->request->referrer);
-					// return $this->goBack();
+
 					return $this->redirect(Yii::$app->homeUrl . 'kfi/management/grid');
 
 					// 	//return $this->redirect('index');
@@ -296,12 +287,6 @@ class ManagementController extends Controller
 						'error' => $errors
 					];
 				}
-			// } else{
-			// 	return [
-			// 		'message' => false,
-			// 		'error' => 'ไม่มีข้อมูลถูกส่งมา'
-			// 	];
-			// }
 	
 		}else{
 		$role = UserRole::userRight();
@@ -352,14 +337,10 @@ class ManagementController extends Controller
 					'result' => $_POST["result"],
 				];
 
-				// throw new Exception(print_r($data,true));
-
-		// $param = ModelMaster::decodeParams($hash);
+		// throw new Exception(print_r($data,true));
 
 		$isManager = UserRole::isManager();
 		if (isset($_POST["kfiId"])) {
-			//throw new Exception($_POST["kfiId"]);
-			//throw new Exception(print_r(Yii::$app->request->post(), true));
 			$kfi = Kfi::find()->where(["kfiId" => $_POST["kfiId"]])->one();
 			$kfi->kfiName = $_POST["kfiName"];
 			$kfi->unitId = $_POST["unit"];
@@ -367,7 +348,6 @@ class ManagementController extends Controller
 			$kfi->status = $_POST["status"];
 			$kfi->month = $_POST["month"];
 			$kfi->year = $_POST["year"];
-			//$kfi->targetAmount = $_POST["targetAmount"];
 			if ($isManager == 1) {
 				$kfi->targetAmount = str_replace(",", "", $_POST["amount"]);
 			}
@@ -375,12 +355,8 @@ class ManagementController extends Controller
 			$kfiHistory = new KfiHistory();
 			$kfiHistory->kfiId = $_POST["kfiId"];
 			$kfiHistory->createrId = Yii::$app->user->id;
-			// $kfiHistory->titleProgress = $_POST["progressTitle"];
-			// $kfiHistory->remark = $_POST["progressTitle"];
-			//$kfiHistory->checkPeriodDate = $_POST["periodDate"];
 			$kfiHistory->fromDate = $_POST["fromDate"];
 			$kfiHistory->toDate = $_POST["toDate"];
-	
 			$kfiHistory->nextCheckDate = $_POST["nextCheckDate"];
 			$kfiHistory->amountType = $_POST["amountType"];
 			$kfiHistory->code = $_POST["code"];
@@ -396,7 +372,6 @@ class ManagementController extends Controller
 			$kfiHistory->unitId =  $_POST["unit"];
 			$kfiHistory->month = $_POST["month"];
 			$kfiHistory->year = $_POST["year"];
-			//$kfiHistory->formular = $_POST["formular"];
 			$kfiHistory->description = $_POST["detail"];
 			$kfiHistory->createDateTime = new Expression('NOW()');
 			$kfiHistory->updateDateTime = new Expression('NOW()');
@@ -409,19 +384,6 @@ class ManagementController extends Controller
 			}
 
 			return $this->redirect(Yii::$app->homeUrl . 'kfi/management/grid');
-
-			// $previousUrl = Yii::$app->request->referrer;  // หรือ $_SERVER['HTTP_REFERER']
-
-			// $session = Yii::$app->session;
-			// // $previousUrls = $session->get('previousUrls', []);
-			// echo '<pre>';
-			// print_r($previousUrl);
-			// echo '</pre>';
-			// exit; 
-			// return $this->redirect($previousUrls[count($previousUrls) - 2]);
-
-			// return $this->redirect(Yii::$app->request->referrer);
-			// return $this->redirect('grid');
 		}
 	}
 	public function actionUpdateKfi($hash)
@@ -491,9 +453,6 @@ class ManagementController extends Controller
 	
 		// รวมข้อมูลทั้งหมด
 		$data = array_merge($kfi, $branch, $department);
-		// throw new Exception(print_r($kfi,true));	
-
-		// throw new Exception(print_r($data,true));	
 
 		// เรนเดอร์หน้า 'create' และส่งข้อมูลไปแสดงผล
 		return $this->render('kfi_from', [

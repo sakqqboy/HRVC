@@ -68,24 +68,6 @@ class KpiTeamController extends Controller
 	}
 	public function actionSetTeamTarget()
 	{
-		/*if (isset($_POST["kpiId"])) {
-			if (isset($_POST["teamTerget"]) && count($_POST["teamTerget"])) {
-				foreach ($_POST["teamTerget"] as $teamId => $target) :
-					if ($target != '') {
-						$kpiTeam = KpiTeam::find()
-							->where(["kpiId" => $_POST["kpiId"], "teamId" => $teamId])
-							->one();
-						$target = str_replace(",", "", $target);
-						$kpiTeam->target = $target;
-						$kpiTeam->updateDateTime = new Expression('NOW()');
-						$kpiTeam->createrId = Yii::$app->user->id;
-						$kpiTeam->save(false);
-					}
-				endforeach;
-			}
-		}
-		return $this->redirect(Yii::$app->homeUrl . 'kpi/management/assign-kpi');*/
-
 		if (isset($_POST["kpiId"])) {
 			if (isset($_POST["teamTerget"]) && count($_POST["teamTerget"])) {
 				foreach ($_POST["teamTerget"] as $teamId => $target) :
@@ -156,9 +138,7 @@ class KpiTeamController extends Controller
 	public function actionTeamKpi()
 	{
 		$role = UserRole::userRight();
-		// if ($role < 3) {
-		// 	return $this->redirect(Yii::$app->homeUrl . 'kpi/management/grid');
-		// }
+
 		$userId = Yii::$app->user->id;
 		$isAdmin = UserRole::isAdmin();
 		$userBranchId = User::userBranchId();
@@ -238,10 +218,6 @@ class KpiTeamController extends Controller
 		$kpiTeamDetail = curl_exec($api);
 		$kpiTeamDetail = json_decode($kpiTeamDetail, true);
 
-		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . "&&kpiHistoryId=" . $kpiTeamHistoryId);
-		// $kpiDetail = curl_exec($api);
-		// $kpiDetail = json_decode($kpiDetail, true);
-
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
@@ -257,8 +233,7 @@ class KpiTeamController extends Controller
 		curl_close($api);
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
-		// throw new Exception(print_r($kpiTeamDetail, true));
-		// throw new Exception(print_r($kpiTeams[$kpiId], true));
+
 		return $this->render('kpi_team_history', [
 			"role" => $role,
 			"kpiDetail" => $kpiTeamDetail,
@@ -773,10 +748,7 @@ class KpiTeamController extends Controller
 			$teamkpi->updateDateTime = new Expression('NOW()');
 			$teamkpi->save(false);
 		}
-		// return $this->redirect(Yii::$app->request->referrer);
 		return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
-
-		//return $this->redirect('team-kpi');
 	}
 	public function actionKpiTeam()
 	{
