@@ -393,12 +393,8 @@ class ManagementController extends Controller
 	$kfiId = $param["kfiId"];
 	$kfiHistoryId = $param["kfiHistoryId"];
 	
-		if (!$kfiId || !is_numeric($kfiId)) {
-			throw new Exception("Invalid KFI ID.");
-		}
 		$role = UserRole::userRight();
 		$groupId = Group::currentGroupId();
-
 	
 		$api = curl_init();
 	
@@ -459,11 +455,7 @@ class ManagementController extends Controller
 			"kfiId" => $kfiId,
 			"statusform" =>  "update"
 		]);
-
-	
 }
-
-
 
 	public function actionBranchMultiDepartment()
 	{
