@@ -234,13 +234,13 @@ $this->title = 'Self KGI View';
                                         <?php
                                             if ($role > 3  && $kgiEmployeeDetail["status"] == 1) {
                                             ?>
-                                        <a class="no-underline">
-                                            <div class="pim-btn-<?= $colorFormat ?>"">
-                                                <img src="
+                                        <a class="pim-btn-<?= $colorFormat ?>"
+                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px;  height: 30px; gap: 6px; flex-shrink: 0;"
+                                            href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/update-personal-kgi/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId]) ?>">
+                                            <img src="
                                                 <?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
                                                 class="mb-2" style="width: 12px; height: 12px;">
-                                                <?= Yii::t('app', 'Setup') ?>
-                                            </div>
+                                            <?= Yii::t('app', 'Update') ?>
                                         </a>
                                         <?php
                                             }

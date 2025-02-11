@@ -26,6 +26,7 @@ $this->title = 'Team KGI View';
                 if ($kgiTeamDetail["status"] == 1) {
                     if ($kgiTeamDetail["isOver"] == 2) {
                         $colorFormat = 'disable';
+                        // $colorFormat = 'inprogress';
                     } else {
                         $colorFormat = 'inprogress';
                     }
@@ -224,10 +225,12 @@ $this->title = 'Team KGI View';
                                         <?php
                                             if ($role > 3  && $kgiTeamDetail["status"] == 1) {
                                             ?>
-                                        <div class="pim-btn-<?= $colorFormat ?>">
+                                        <a class="pim-btn-<?= $colorFormat ?>"
+                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px;  height: 30px; gap: 6px; flex-shrink: 0;"
+                                            href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/prepare-update/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiHistoryId' => 0]) ?>">
                                             <i class="fa fa-refresh" aria-hidden="true"></i>
                                             <?= Yii::t('app', 'Update') ?>
-                                        </div>
+                                        </a>
                                         <?php
                                             }
                                             ?>

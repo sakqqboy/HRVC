@@ -51,31 +51,31 @@ $this->title = "Individual KGI";
                             <?php
                             if ($role > 3) {
                             ?>
-                                <div
-                                    class="col-12 <?= $waitForApprove["totalRequest"] > 0 ? 'approval-box' : 'noapproval-box' ?> text-center pr-3">
-                                    <?php
+                            <div
+                                class="col-12 <?= $waitForApprove["totalRequest"] > 0 ? 'approval-box' : 'noapproval-box' ?> text-center pr-3">
+                                <?php
                                     if ($waitForApprove["totalRequest"] > 0) {
                                     ?>
-                                        <a href="<?= Yii::$app->homeUrl ?>kgi/management/wait-approve"
-                                            style="text-decoration: none;color:#000000;">
-                                            <span class="approvals-num mr-2"><?= $waitForApprove["totalRequest"] ?></span>
-                                            <?= Yii::t('app', 'Approvals') ?>
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approvals.svg"
-                                                class="first-layer-icon pull-right" style="margin-top:-2px;">
-                                        </a>
-                                    <?php
+                                <a href="<?= Yii::$app->homeUrl ?>kgi/management/wait-approve"
+                                    style="text-decoration: none;color:#000000;">
+                                    <span class="approvals-num mr-2"><?= $waitForApprove["totalRequest"] ?></span>
+                                    <?= Yii::t('app', 'Approvals') ?>
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approvals.svg"
+                                        class="first-layer-icon pull-right" style="margin-top:-2px;">
+                                </a>
+                                <?php
                                     } else { ?>
-                                        <a style="text-decoration: none;color:#2D7F06;">
-                                            <span class="noapprovals-num mr-2"><?= $waitForApprove["totalRequest"] ?></span>
-                                            <?= Yii::t('app', 'No Approvals') ?>
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/check.svg"
-                                                class="first-layer-icon pull-right" style="margin-top:-2px;">
-                                        </a>
-                                    <?php
+                                <a style="text-decoration: none;color:#2D7F06;">
+                                    <span class="noapprovals-num mr-2"><?= $waitForApprove["totalRequest"] ?></span>
+                                    <?= Yii::t('app', 'No Approvals') ?>
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/check.svg"
+                                        class="first-layer-icon pull-right" style="margin-top:-2px;">
+                                </a>
+                                <?php
                                     }
 
                                     ?>
-                                </div>
+                            </div>
                             <?php
                             }
                             ?>
@@ -166,38 +166,39 @@ $this->title = "Individual KGI";
                                     }
 
                             ?>
-                                    <tr height="10">
+                            <tr height="10">
 
-                                    </tr>
-                                    <tr id="kgi-<?= $kgiEmployeeId ?>" class="pim-bg-<?= $colorFormat ?> pim-table-text">
-                                        <td>
-                                            <div class="col-12 border-left-<?= $colorFormat ?> pim-div-border pb-5">
-                                                <?= $kgi["kgiName"] ?>
-                                            </div>
-                                        </td>
-                                        <td><?= $kgi["companyName"] ?></td>
-                                        <td><img src="<?= Yii::$app->homeUrl . $kgi['flag'] ?>" class="Flag-Turkey">
-                                            <?= $kgi["branch"] ?>, <?= Yii::t('app', $kgi["countryName"]) ?></td>
-                                        <td>
-                                            <div
-                                                style="width: 24px; height: 24px; flex-shrink: 0; border-radius: 4px; background: #2580D3; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
-                                                <?= $kgi["priority"] ?>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="col-5 number-tagNew  <?= 'load-' . $colorFormat ?> ">
-                                                <?= count($kgi["employee"]) ?>
-                                            </div>
-                                        </td>
-                                        </td>
-                                        <td>
-                                            <div class="col-5 number-tagNew  <?= 'load-' . $colorFormat ?> ">
-                                                <?= $kgi["countTeam"] ?>
-                                            </div>
-                                        </td>
-                                        <td><?= $kgi["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?></td>
-                                        <td class="text-end">
-                                            <?php
+                            </tr>
+                            <tr id="kgi-<?= $kgiEmployeeId ?>" class="pim-bg-<?= $colorFormat ?> pim-table-text">
+                                <td>
+                                    <div class="col-12 border-left-<?= $colorFormat ?> pim-div-border pb-5">
+                                        <?= $kgi["kgiName"] ?>
+                                    </div>
+                                </td>
+                                <td><?= $kgi["companyName"] ?></td>
+                                <td><img src="<?= Yii::$app->homeUrl . $kgi['flag'] ?>" class="Flag-Turkey">
+                                    <?= $kgi["branch"] ?>, <?= Yii::t('app', $kgi["countryName"]) ?></td>
+                                <td>
+                                    <div
+                                        style="width: 24px; height: 24px; flex-shrink: 0; border-radius: 4px; background: #2580D3; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                                        <?= $kgi["priority"] ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="col-5 number-tagNew  <?= 'load-' . $colorFormat ?> ">
+                                        <?= count($kgi["employee"]) ?>
+                                    </div>
+                                </td>
+                                </td>
+                                <td>
+                                    <div class="col-5 number-tagNew  <?= 'load-' . $colorFormat ?> ">
+                                        <?= $kgi["countTeam"] ?>
+                                    </div>
+                                </td>
+                                <td><?= $kgi["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?>
+                                </td>
+                                <td class="text-end">
+                                    <?php
                                             $targetAmount = $kgi["targetAmount"] ?? ''; // Ensure targetAmount is not null
 
                                             if ($targetAmount === '') {
@@ -211,13 +212,13 @@ $this->title = "Individual KGI";
                                                 }
                                             }
                                             ?>
-                                            <?= $show ?>
-                                        </td>
-                                        <td class="text-center">
-                                            <?= $kgi["code"] ?>
-                                        </td>
-                                        <td class="text-start">
-                                            <?php
+                                    <?= $show ?>
+                                </td>
+                                <td class="text-center">
+                                    <?= $kgi["code"] ?>
+                                </td>
+                                <td class="text-start">
+                                    <?php
                                             if ($kgi["result"] != '') {
                                                 $decimalResult = explode('.', $kgi["result"]);
                                                 if (isset($decimalResult[1])) {
@@ -233,94 +234,94 @@ $this->title = "Individual KGI";
                                                 $showResult = 0;
                                             }
                                             ?>
-                                            <?= $showResult ?>
-                                        </td>
-                                        <td>
-                                            <div id="progress1">
-                                                <div data-num="<?= $kgi["ratio"] == '' ? 0 : $kgi["ratio"] ?>"
-                                                    class="progress-pim-table progress-circle-<?= $colorFormat ?>"></div>
-                                            </div>
-                                        </td>
-                                        <td><?= Yii::t('app', $kgi["month"]) ?></td>
-                                        <td><?= Yii::t('app', $kgi["unit"]) ?></td>
-                                        <td><?= $kgi["periodCheck"] ?></td>
-                                        <td class="<?= $kgi['isOver'] == 1 ? 'text-danger' : '' ?>">
-                                            <?= $kgi["status"] == 1 ? $kgi["nextCheck"] : '' ?>
-                                        </td>
-                                        <td style="width: 53px; height: 50px;">
+                                    <?= $showResult ?>
+                                </td>
+                                <td>
+                                    <div id="progress1">
+                                        <div data-num="<?= $kgi["ratio"] == '' ? 0 : $kgi["ratio"] ?>"
+                                            class="progress-pim-table progress-circle-<?= $colorFormat ?>"></div>
+                                    </div>
+                                </td>
+                                <td><?= Yii::t('app', $kgi["month"]) ?></td>
+                                <td><?= Yii::t('app', $kgi["unit"]) ?></td>
+                                <td><?= $kgi["periodCheck"] ?></td>
+                                <td class="<?= $kgi['isOver'] == 1 ? 'text-danger' : '' ?>">
+                                    <?= $kgi["status"] == 1 ? $kgi["nextCheck"] : '' ?>
+                                </td>
+                                <td style="width: 53px; height: 50px;">
 
-                                            <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/kgi-employee-history/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId, 'kgiEmployeeHistoryId' => 0, 'kgiId' => $kgi['kgiId'], 'openTab' => 1]) ?>"
-                                                class="btn btn-bg-white-xs"
-                                                style="margin-top: -1px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/eye.svg" alt="History"
-                                                    class="pim-icon" style="margin-top: -1px;">
-                                            </a>
-                                            <span class="dropdown" href="#" id="dropdownMenuLink-<?= $kgi['isOver'] ?>"
-                                                data-bs-toggle="dropdown">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.svg"
-                                                    class="icon-table on-cursor">
-                                            </span>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kgi['isOver'] ?>">
-                                                <?php
+                                    <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/kgi-employee-history/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId, 'kgiEmployeeHistoryId' => 0, 'kgiId' => $kgi['kgiId'], 'openTab' => 1]) ?>"
+                                        class="btn btn-bg-white-xs"
+                                        style="margin-top: -1px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/eye.svg" alt="History"
+                                            class="pim-icon" style="margin-top: -1px;">
+                                    </a>
+                                    <span class="dropdown" href="#" id="dropdownMenuLink-<?= $kgi['isOver'] ?>"
+                                        data-bs-toggle="dropdown">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.svg"
+                                            class="icon-table on-cursor">
+                                    </span>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kgi['isOver'] ?>">
+                                        <?php
                                                 if ($canEdit == 1) {
                                                 ?>
-                                                    <li class="pl-4 pr-4" data-bs-toggle="modal"
-                                                        data-bs-target="#update-kgi-modal-team">
-                                                        <a class="dropdown-itemNEWS pl-4 pr-20 mb-5"
-                                                            href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/update-personal-kgi/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId]) ?>">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
-                                                                alt="edit" class="pim-icon mr-10" style="margin-top: -2px;">
-                                                            <?= Yii::t('app', 'Edit') ?>
-                                                        </a>
-                                                    </li>
-                                                <?php
+                                        <li class="pl-4 pr-4">
+                                            <a class="dropdown-itemNEWS pl-4 pr-20 mb-5"
+                                                href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/update-personal-kgi/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId]) ?>">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
+                                                    alt="edit" class="pim-icon mr-10" style="margin-top: -2px;">
+                                                <?= Yii::t('app', 'Edit') ?>
+                                            </a>
+                                        </li>
+                                        <?php
                                                 }
                                                 ?>
-                                                <li class="pl-4 pr-4">
-                                                    <a class="dropdown-itemNEWS pl-4 pr-20 mb-5"
-                                                        style="<?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>"
-                                                        href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-individual-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], "kgiEmployeeId" => $kgiEmployeeId]) ?>">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg"
-                                                            alt="Chats" class="pim-icon mr-10">
-                                                        <?= Yii::t('app', 'History') ?>
-                                                    </a>
-                                                </li>
-                                                <li class="pl-4 pr-4">
-                                                    <a class="dropdown-itemNEWS pl-4 pr-20 mb-5"
-                                                        style="<?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>"
-                                                        href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/kgi-employee-history/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId, 'kgiEmployeeHistoryId' => 0, 'kgiId' => $kgi['kgiId'], 'openTab' => 3]) ?>">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
-                                                            alt="Chats" class="pim-icon mr-10">
-                                                        <?= Yii::t('app', 'Chats') ?>
-                                                    </a>
-                                                </li>
-                                                <li class="pl-4 pr-4">
-                                                    <a class="dropdown-itemNEWS pl-4 pr-20"
-                                                        style="<?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>"
-                                                        href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/kgi-employee-history/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId, 'kgiEmployeeHistoryId' => 0, 'kgiId' => $kgi['kgiId'], 'openTab' => 4]) ?>">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg"
-                                                            alt="Chats" class="pim-icon mr-10">
-                                                        <?= Yii::t('app', 'Chart') ?>
-                                                    </a>
-                                                </li>
-                                                <?php
+                                        <li class="pl-4 pr-4">
+                                            <a class="dropdown-itemNEWS pl-4 pr-20 mb-5"
+                                                style="<?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>"
+                                                href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-individual-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], "kgiEmployeeId" => $kgiEmployeeId]) ?>">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg"
+                                                    alt="Chats" class="pim-icon mr-10">
+                                                <?= Yii::t('app', 'History') ?>
+                                            </a>
+                                        </li>
+                                        <li class="pl-4 pr-4">
+                                            <a class="dropdown-itemNEWS pl-4 pr-20 mb-5"
+                                                style="<?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>"
+                                                href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/kgi-employee-history/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId, 'kgiEmployeeHistoryId' => 0, 'kgiId' => $kgi['kgiId'], 'openTab' => 3]) ?>">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
+                                                    alt="Chats" class="pim-icon mr-10">
+                                                <?= Yii::t('app', 'Chats') ?>
+                                            </a>
+                                        </li>
+                                        <li class="pl-4 pr-4">
+                                            <a class="dropdown-itemNEWS pl-4 pr-20"
+                                                style="<?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>"
+                                                href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/kgi-employee-history/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId, 'kgiEmployeeHistoryId' => 0, 'kgiId' => $kgi['kgiId'], 'openTab' => 4]) ?>">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg"
+                                                    alt="Chats" class="pim-icon mr-10">
+                                                <?= Yii::t('app', 'Chart') ?>
+                                            </a>
+                                        </li>
+                                        <?php
                                                 if ($role >= 5) {
                                                 ?>
-                                                    <li class="pl-4 pr-4" data-bs-toggle="modal"
-                                                        data-bs-target="#delete-kgi-employee"
-                                                        onclick="javascript:prepareDeleteKgiEmployee(<?= $kgiEmployeeId ?>)" title="Delete">
-                                                        <a class="dropdown-itemNEW pl-4 pr-25" href="#">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/delete.svg"
-                                                                alt="Delete" class="pim-icon mr-10" style="margin-top: -2px;">
-                                                            <?= Yii::t('app', 'Delete') ?>
-                                                        </a>
-                                                    </li>
-                                                <?php
+                                        <li class="pl-4 pr-4" data-bs-toggle="modal"
+                                            data-bs-target="#delete-kgi-employee"
+                                            onclick="javascript:prepareDeleteKgiEmployee(<?= $kgiEmployeeId ?>)"
+                                            title="Delete">
+                                            <a class="dropdown-itemNEW pl-4 pr-25" href="#">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/delete.svg"
+                                                    alt="Delete" class="pim-icon mr-10" style="margin-top: -2px;">
+                                                <?= Yii::t('app', 'Delete') ?>
+                                            </a>
+                                        </li>
+                                        <?php
                                                 }
                                                 ?>
-                                            </ul>
-                                        </td>
-                                    </tr>
+                                    </ul>
+                                </td>
+                            </tr>
                             <?php
                                 endforeach;
                             }
