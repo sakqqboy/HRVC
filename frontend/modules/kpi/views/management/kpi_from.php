@@ -2,6 +2,8 @@
 
 use yii\bootstrap5\ActiveForm;
 
+$this->title = 'KPI';
+
 if ($statusform == 'update') {
     $parturl = 'kpi/management/update-kpi';
 } else {

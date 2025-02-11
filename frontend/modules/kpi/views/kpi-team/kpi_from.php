@@ -2,6 +2,8 @@
 
 use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
+$this->title = 'KPI';
+
 $parturl = 'kpi/kpi-team/update-kpi-team';
 
 $form = ActiveForm::begin([
@@ -141,7 +143,7 @@ select.form-select option:disabled {
                         </text>
                     </a>
                     <text class="pim-name-title">
-                        <?= Yii::t('app', 'Update Key Performance Indicator') ?>
+                        <?= Yii::t('app', 'Update Team Key Performance Indicator') ?>
                     </text>
                 </div>
                 <div class="col-4 " style="display: flex; justify-content: center; align-items: center; gap: 20px;">

@@ -1,5 +1,9 @@
 <?php
 use yii\bootstrap5\ActiveForm;
+
+$this->title = 'KFI';
+
+
 if ($statusform == 'update') {
     $parturl = 'kfi/management/save-update-kfi';
 } else {
