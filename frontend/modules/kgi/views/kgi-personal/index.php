@@ -184,9 +184,11 @@ $this->title = "Individual KGI";
                                                 <?= $kgi["priority"] ?>
                                             </div>
                                         </td>
-                                        <div class="col-5 number-tagNew  <?= 'load-' . $colorFormat ?> ">
-                                            <?= count($kgi["employee"]) ?>
-                                        </div>
+                                        <td>
+                                            <div class="col-5 number-tagNew  <?= 'load-' . $colorFormat ?> ">
+                                                <?= count($kgi["employee"]) ?>
+                                            </div>
+                                        </td>
                                         </td>
                                         <td>
                                             <div class="col-5 number-tagNew  <?= 'load-' . $colorFormat ?> ">
