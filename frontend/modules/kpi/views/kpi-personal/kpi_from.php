@@ -219,10 +219,7 @@ select.form-select option:disabled {
                                     ">
                             <img src="<?= Yii::$app->homeUrl ?><?= $company['companyImg'] ?>" class="pim-pic-gridNew"
                                 style="width: 43px; height: 43px;" alt="icon">
-                            <!-- <div class="cycle-current-white" style="color: #000; right: 15px;"
-                                id="branch-selected-count">
-                                00
-                            </div> -->
+
                             <text class="text-black" style="font-size: 18px; font-weight: 500;">
                                 <?= Yii::t('app', 'Assigned on') ?>
                                 <?= is_array($company['companyId']) ? '' : 1 ?>
@@ -333,10 +330,7 @@ select.form-select option:disabled {
                         <div class="row w-100">
                             <div class="col-3 d-flex flex-column align-items-start justify-content-center "
                                 style=" border-right: #9ABCE9 solid thin">
-                                <!-- <div class="text-center priority-star">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star ms-3" aria-hidden="true"></i>
-                                </div> -->
+
                                 <div class="col-12 text-center priority-star">
                                     <?php
                                                     if ($kpi["priority"] == "A" || $kpi["priority"] == "B") {

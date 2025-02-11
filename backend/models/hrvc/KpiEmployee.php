@@ -246,18 +246,32 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
         return count($kpiEmployee);
     }
 
-    public static function autoSummalys($kpiId,$month,$year)
+    public static function autoSummalys($kpiId, $month, $year, $kpiTeamId)
     {
-        // คำนวณผลรวมของ result ในตาราง kpi_team
-        $sumResult = KpiEmployee::find()
-        ->where([
-            'kpiId' => $kpiId,
-            'month' => $month,
-            'year' => $year,
-            'status' => [1,2,4]
-        ])
-        ->sum('result');
+        // ดึง teamId จาก kpiTeamId
+        $teamId = KpiTeam::find()
+            ->select('teamId')
+            ->where(['kpiTeamId' => $kpiTeamId])
+            ->scalar(); // ดึงค่าเดียวแทนที่จะเป็น query object
     
-        return $sumResult ?? 0; // คืนค่า 0 หากไม่มีผลลัพธ์
+        if (!$teamId) {
+            return 0; // หากไม่มีทีมให้คืนค่า 0 ทันที
+        }
+    
+        // คำนวณผลรวมของ result
+        $sumResult = KpiEmployee::find()
+            ->join("LEFT JOIN", "employee e", "e.employeeId = kpi_employee.employeeId")
+            ->where([
+                'kpi_employee.kpiId' => $kpiId,
+                'kpi_employee.month' => $month,
+                'kpi_employee.year' => $year,
+                'kpi_employee.status' => [1, 2, 4],
+                'e.status' => 1,
+                'e.teamId' => $teamId
+            ])
+            ->sum('result');
+    
+        return $sumResult ?? 0;
     }
+    
 }

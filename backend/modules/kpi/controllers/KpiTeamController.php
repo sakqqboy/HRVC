@@ -532,7 +532,7 @@ class KpiTeamController extends Controller
 			}
 			$data = [
 				"kpiTeamHistoryId" =>  !empty($kpiTeamHistory["kpiTeamHistoryId"]) ? $kpiTeamHistory["kpiTeamHistoryId"] : 0,
-				"sumresult" => kpiEmployee::autoSummalys($kpiTeamHistory["kpiId"], $kpiTeamHistory["month"], $kpiTeamHistory["year"]),
+				"sumresult" => KpiEmployee::autoSummalys($kpiTeamHistory["kpiId"], $kpiTeamHistory["month"], $kpiTeamHistory["year"], $kpiTeamId),
 				"kpiName" => $kpiTeamHistory["kpiName"],
 				"kpiId" => $kpiTeamHistory["kpiId"],
 				"priority" => $kpiTeamHistory["priority"],

@@ -545,47 +545,22 @@ class KpiPersonalController extends Controller
 		$kpiEmployeeDetail = curl_exec($api);
 		$kpiEmployeeDetail = json_decode($kpiEmployeeDetail, true);
 
-		// เช็คว่าค่าที่ได้มาถูกต้องไหม
-		if (!$kpiEmployeeDetail || !isset($kpiEmployeeDetail['kpiId'])) {
-			// throw new exception(print_r($kpiEmployeeId	, true));
-			// return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
-		}
-
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiEmployeeDetail['kpiId'] . '&&kpiHistoryId=0');
 		$kpi = curl_exec($api);
 		$kpi = json_decode($kpi, true);
-
-		if (!$kpi || !isset($kpi["companyId"])) {
-			// throw new exception(print_r($kpi	, true));
-			// return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
-		}
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $kpi["companyId"]);
 		$kpiBranch = curl_exec($api);
 		$kpiBranch = json_decode($kpiBranch, true);
 
-		if (!$kpiBranch) {
-			// throw new exception(print_r($kpiBranch	, true));
-			// return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
-		}
-
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-department?id=' . $kpiEmployeeDetail['kpiId']);
 		$kpiDepartment = curl_exec($api);
 		$kpiDepartment = json_decode($kpiDepartment, true);
-
-		if (!$kpiDepartment) {
-			// throw new exception(print_r($kpiDepartment	, true));
-			// return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
-		}
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-team?id=' . $kpiEmployeeDetail['kpiId']);
 		$kpiTeam = curl_exec($api);
 		$kpiTeam = json_decode($kpiTeam, true);
 
-		if (!$kpiTeam) {
-			// throw new exception(print_r($kpiTeam	, true));
-			// return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
-		}
 
 		curl_close($api);
 		$companyId = $kpi["companyId"];
@@ -593,9 +568,7 @@ class KpiPersonalController extends Controller
 				"companyId" => $kpi["companyId"],
 				"companyName" => Company::companyName($kpi["companyId"]),
 				"companyImg" => Company::companyImage($kpi["companyId"]),
-			];
-		// throw new exception(print_r($kpiEmployeeDetail	, true));	
-		
+			];		
 
 		$unit = Unit::find()->where(["unitId" => $kpi["unitId"]])->asArray()->one();
 		$months = ModelMaster::monthFull(1);
@@ -612,11 +585,6 @@ class KpiPersonalController extends Controller
 			"unit"  => $unit ,
 			"statusform" =>  "update"
 		]);
-		// return $this->render('update_personal_kpi', [
-		// 	"kpiEmployeeId" => $kpiEmployeeId,
-		// 	"kpiEmployeeDetail" => $kpiEmployeeDetail,
-		// 	"months" => $months
-		// ]);
 	}
 	public function actionSaveUpdatePersonalKpi()
 	{
@@ -634,7 +602,7 @@ class KpiPersonalController extends Controller
       
         ];
 
-				// throw new exception(print_r($data	, true));	
+		// throw new exception(print_r($data	, true));	
 
 		
 		if (isset($_POST["kpiEmployeeId"])) {
@@ -644,8 +612,6 @@ class KpiPersonalController extends Controller
 				->one();
 			$status = $_POST["status"];
 			if (isset($history) && !empty($history)) {
-				// $nextCheckDateArr = explode(' ', $history["nextCheckDate"]);
-				// $nextCheckDate = $nextCheckDateArr[0];
 				if (!empty($history["nextCheckDate"])) {
 					$nextCheckDateArr = explode(' ', $history["nextCheckDate"]);
 					$nextCheckDate = $nextCheckDateArr[0];
@@ -713,14 +679,7 @@ class KpiPersonalController extends Controller
 			$kpiEmployee->save(false);
 			$history->createrId = Yii::$app->user->id;
 			if ($history->save(false)) {
-
-				// if ($_POST["url"] != Yii::$app->request->referrer) {
-				// 	return $this->redirect($_POST["url"]);
-				// } else {
-				// 	return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
-				// }
 				return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
-
 			}
 		} else {
 			return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
@@ -768,10 +727,8 @@ class KpiPersonalController extends Controller
             "historyTeam" => $historyTeam
         ];
 
-                // throw new Exception(print_r($data,true));
+        // throw new Exception(print_r($data,true));
 
-        
-    
         header("Content-Type: application/json");
         echo json_encode($data);
         exit;
@@ -907,7 +864,7 @@ class KpiPersonalController extends Controller
 				$teams = curl_exec($api);
 				$teams = json_decode($teams, true);
 			}
-			//throw new Exception(print_r($teams, true));
+		//throw new Exception(print_r($teams, true));
 		}
 		curl_close($api);
 		//throw new exception(print_r($teamKpis, true));

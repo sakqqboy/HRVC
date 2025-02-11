@@ -1239,7 +1239,7 @@ function getOrdinalSuffix(day) {
 // กำหนด Flatpickr สำหรับปฏิทินเริ่มต้น
 flatpickr("#startDatePicker", {
     inline: true,
-    dateFormat: "Y/m/d",
+    dateFormat: "Y-m-d",
     onChange: function (selectedDates, dateStr) {
         window.startDate = dateStr; // เก็บค่า Start Date
         updateSelectedDates();
@@ -1249,7 +1249,7 @@ flatpickr("#startDatePicker", {
 // กำหนด Flatpickr สำหรับปฏิทินสิ้นสุด
 flatpickr("#endDatePicker", {
     inline: true,
-    dateFormat: "Y/m/d",
+    dateFormat: "Y-m-d",
     onChange: function (selectedDates, dateStr) {
         window.endDate = dateStr; // เก็บค่า End Date
         updateSelectedDates();

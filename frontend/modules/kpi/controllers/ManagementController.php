@@ -263,13 +263,8 @@ class ManagementController extends Controller
                     $this->saveKpiTeam($_POST["team"], $kpiId);
                 }
 
-                // return $this->redirect(Yii::$app->homeUrl . 'kpi/assign/assign/' . ModelMaster::encodeParams(["kgiId" => $kpiId, "companyId" => $_POST["companyId"]]));
-
                 return $this->redirect(Yii::$app->homeUrl . 'kpi/management/grid');
 
-                //return $this->redirect(Yii::$app->request->referrer);
-                // return $this->redirect(Yii::$app->homeUrl . 'kpi/assign/assign/' . ModelMaster::encodeParams(["kpiId" => $kpiId, "companyId" => $_POST["companyId"]]));
-                //return $this->redirect('grid');
             }
         } else {
                 $role = UserRole::userRight();
@@ -442,29 +437,17 @@ class ManagementController extends Controller
     }
     public function actionPrepareUpdate($hash)
     {
-        // $kpiId = $_POST["kpiId"];
-        // $kpiId = Yii::$app->request->get("kpiId");
 
-        // if (!$kfiId || !is_numeric($kfiId)) {
-        // 	throw new Exception("Invalid KFI ID.");
-        // }else{
-        // 	throw new Exception($kfiId);
-        // }
         $param = ModelMaster::decodeParams($hash);
         $kpiId =  $param['kpiId'];
         // throw new Exception($kpiId);
         
-            // $kpiId = Yii::$app->request->get("kpiId");
             if (!$kpiId || !is_numeric($kpiId)) {
                 throw new Exception("Invalid kpi ID.");
             }
             $role = UserRole::userRight();
             $groupId = Group::currentGroupId();
 
-            // $param = ModelMaster::decodeParams($hash);
-
-		    // $kpiId = $param["kpiId"];
-            
             $api = curl_init();
             curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
             curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -493,7 +476,6 @@ class ManagementController extends Controller
             ]);
             // $department["textDepartment"] = $kpiDepartmentText;
 
-
             $kpiTeamText = '';
             curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-team?id=' . $kpiId);
             $kpiTeam = curl_exec($api);
@@ -502,11 +484,7 @@ class ManagementController extends Controller
                 "t" => $kpiTeam,
                 "kpiId" => $kpiId
             ]);
-            // $team["textTeam"] = $kpiTeamText;
 
-
-            // $data = array_merge($kpi, $branch, $department, $team);
-            // throw new Exception(print_r($data, true));
             curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
             $units = curl_exec($api);
             $units = json_decode($units, true);
@@ -596,10 +574,7 @@ class ManagementController extends Controller
             if ($kpi->save(false)) {
                 $kpiHistory = new KpiHistory();
                 $kpiHistory->kpiId = $_POST["kpiId"];
-                // $kpiHistory->kpiHistoryName = $_POST["historyName"];
-                // $kpiHistory->titleProcess = $_POST["historyName"];
                 $kpiHistory->unitId = $_POST["unitId"];
-                // $kpiHistory->periodDate = $_POST["periodDate"];
                 $kpiHistory->nextCheckDate = $_POST["nextCheckDate"];
                 if ($isManager == 1) {
                     $kpiHistory->targetAmount = str_replace(",", "", $_POST["amount"]);
@@ -607,7 +582,6 @@ class ManagementController extends Controller
                     $kpiHistory->targetAmount = $kpi->targetAmount;
                 }
                 $kpiHistory->description = $_POST["detail"];
-                // $kpiHistory->remark = $_POST["remark"];
                 $kpiHistory->quantRatio = $_POST["quantRatio"];
                 $kpiHistory->priority = $_POST["priority"];
                 $kpiHistory->amountType = $_POST["amountType"];
@@ -636,8 +610,6 @@ class ManagementController extends Controller
         }
         return $this->redirect(Yii::$app->homeUrl . 'kpi/management/grid');
 
-        // return $this->redirect(Yii::$app->request->referrer);
-        //return $this->redirect('grid');
     }
     public function actionHistory()
     {
@@ -779,8 +751,6 @@ class ManagementController extends Controller
         $month = $_POST["month"];
         $year = $_POST["year"];
         $formattedRange = $_POST["formattedRange"];
-        // $kpiHistoryId = 0;
-		// $kpiHistoryId = $_POST["kpiHistoryId"];
 
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -1302,52 +1272,18 @@ class ManagementController extends Controller
         $branchId = $_POST["branchId"];
         $checked = $_POST["checked"];
         if ($checked == 1) {
-            // $kpiBranch = KpiBranch::find()
-            //     ->where(["kpiId" => $kpiId, "branchId" => $branchId])
-            //     ->one();
-            // if (isset($kpiBranch) && !empty($kpiBranch)) {
-            //     $kpiBranch->status = 1;
-            //     $branchDepartment = Department::find()->where(["branchId" => $branchId])->asArray()->all();
-            //     if (isset($branchDepartment) && count($branchDepartment) > 0) {
-            //         foreach ($branchDepartment as $department) :
-            //             KpiDepartment::updateAll(["status" => 1], ["departmentId" => $department["departmentId"], "kpiId" => $kpiId, "status" => 98]);
-            //             $teams = Team::find()
-            //                 ->where(["departmentId" => $department["departmentId"], "status" => 1])
-            //                 ->asArray()
-            //                 ->all();
-            //             if (isset($teams) && count($teams) > 0) {
-            //                 foreach ($teams as $team) :
-            //                     KpiTeam::updateAll(["status" => 1], ["teamId" => $team["teamId"], "kpiId" => $kpiId, "status" => 98]);
-            //                     $employee = Employee::find()
-            //                         ->where(["teamId" => $team["teamId"]])
-            //                         ->asArray()
-            //                         ->all();
-            //                     if (isset($employee) && count($employee) > 0) {
-            //                         foreach ($employee as $em) :
-            //                             KpiEmployee::updateAll(["status" => 1], ["employeeId" => $em["employeeId"], "kpiId" => $kpiId, "status" => 98]);
-            //                         endforeach;
-            //                     }
-
-            //                 endforeach;
-            //             }
-            //         endforeach;
-            //     }
-            // } else {
             $kpiBranch = new KpiBranch();
             $kpiBranch->branchId = $branchId;
             $kpiBranch->kpiId = $kpiId;
             $kpiBranch->status = 1;
             $kpiBranch->createDateTime = new Expression('NOW()');
             $kpiBranch->updateDateTime = new Expression('NOW()');
-            //    }
             $kpiBranch->save(false);
         } else {
-            //KpiBranch::updateAll(["status" => 98], ["branchId" => $branchId, "kpiId" => $kpiId, "status" => 1]);
             KpiBranch::deleteAll(["branchId" => $branchId, "kpiId" => $kpiId]);
             $branchDepartment = Department::find()->where(["branchId" => $branchId])->asArray()->all();
             if (isset($branchDepartment) && count($branchDepartment) > 0) {
                 foreach ($branchDepartment as $department) :
-                    //KpiDepartment::updateAll(["status" => 98], ["departmentId" => $department["departmentId"], "kpiId" => $kpiId, "status" => 1]);
                     KpiDepartment::deleteAll(["departmentId" => $department["departmentId"], "kpiId" => $kpiId]);
                     $teams = Team::find()
                         ->where(["departmentId" => $department["departmentId"], "status" => 1])
@@ -1355,7 +1291,6 @@ class ManagementController extends Controller
                         ->all();
                     if (isset($teams) && count($teams) > 0) {
                         foreach ($teams as $team) :
-                            //KpiTeam::updateAll(["status" => 98], ["teamId" => $team["teamId"], "kpiId" => $kpiId, "status" => 1]);
                             KpiTeam::deleteAll(["teamId" => $team["teamId"], "kpiId" => $kpiId]);
                             $employee = Employee::find()
                                 ->where(["teamId" => $team["teamId"]])
@@ -1363,7 +1298,6 @@ class ManagementController extends Controller
                                 ->all();
                             if (isset($employee) && count($employee) > 0) {
                                 foreach ($employee as $em) :
-                                    //KpiEmployee::updateAll(["status" => 98], ["employeeId" => $em["employeeId"], "kpiId" => $kpiId, "status" => 1]);
                                     KpiEmployee::deleteAll(["employeeId" => $em["employeeId"], "kpiId" => $kpiId]);
                                 endforeach;
                             }
@@ -1473,19 +1407,12 @@ class ManagementController extends Controller
         $employeeId = $_POST["employeeId"];
         $checked = $_POST["checked"];
         if ($checked == 1) {
-            // $kpiEmployee = KpiEmployee::find()
-            //     ->where(["kpiId" => $kpiId, "employeeId" => $employeeId])
-            //     ->one();
-            // if (isset($kpiEmployee) && !empty($kpiEmployee)) {
-            //     $kpiEmployee->status = 1;
-            // } else {
             $kpiEmployee = new KpiEmployee();
             $kpiEmployee->employeeId = $employeeId;
             $kpiEmployee->kpiId = $kpiId;
             $kpiEmployee->status = 1;
             $kpiEmployee->createDateTime = new Expression('NOW()');
             $kpiEmployee->updateDateTime = new Expression('NOW()');
-            //}
             $kpiEmployee->save(false);
             $kpiEmployeeId = Yii::$app->db->lastInsertID;
             $kpiEmployeeHistory = new KpiEmployeeHistory();
@@ -1530,7 +1457,6 @@ class ManagementController extends Controller
                 }
             }
         } else {
-            //KpiEmployee::updateAll(["status" => 99], ["employeeId" => $employeeId, "kpiId" => $kpiId]);
             KpiEmployee::deleteAll(["employeeId" => $employeeId, "kpiId" => $kpiId]);
         }
         $kpiEmployee = KpiEmployee::find()
