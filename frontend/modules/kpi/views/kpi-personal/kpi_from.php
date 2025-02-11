@@ -20,6 +20,9 @@ $kpiEmployeeHistoryId = isset($data['kpiEmployeeHistoryId']) ? $data['kpiEmploye
 $sumvalue = isset($kpi['sumresult']) ? $kpi['sumresult'] : 0;
 $targetAmount = $data['targetAmount'] ?? 0;
 $DueBehind = $targetAmount -  $result;
+if($DueBehind < 0){
+    $DueBehind = 0;
+} 
 $detail = !empty($data['kpiDetail']) ? $data['kpiDetail'] : 'No details listed';
 $maxLength = 487;
 $nextCheckDate = !empty($data['nextCheckText']) 

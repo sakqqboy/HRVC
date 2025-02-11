@@ -21,6 +21,9 @@ $sumvalue = isset($data['sumresult']) ? $data['sumresult'] : 0;
 $targetAmount = $data['targetAmount'] ?? 0;
 $kpiTeamHistoryId = $data['kpiTeamHistoryId'] ?? 0;
 $DueBehind = $targetAmount -  $result;
+if($DueBehind < 0){
+    $DueBehind = 0;
+} 
 $detail = !empty($data['kpiDetail']) ? $data['kpiDetail'] : 'No details listed';
 $maxLength = 487;
 $nextCheckDate = !empty($data['nextCheckText']) 
