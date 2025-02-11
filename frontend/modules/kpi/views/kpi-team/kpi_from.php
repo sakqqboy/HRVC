@@ -2,6 +2,8 @@
 
 use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
+$this->title = 'KPI';
+
 $parturl = 'kpi/kpi-team/update-kpi-team';
 
 $form = ActiveForm::begin([
@@ -21,6 +23,9 @@ $sumvalue = isset($data['sumresult']) ? $data['sumresult'] : 0;
 $targetAmount = $data['targetAmount'] ?? 0;
 $kpiTeamHistoryId = $data['kpiTeamHistoryId'] ?? 0;
 $DueBehind = $targetAmount -  $result;
+if($DueBehind < 0){
+    $DueBehind = 0;
+} 
 $detail = !empty($data['kpiDetail']) ? $data['kpiDetail'] : 'No details listed';
 $maxLength = 487;
 $nextCheckDate = !empty($data['nextCheckText']) 
@@ -138,7 +143,7 @@ select.form-select option:disabled {
                         </text>
                     </a>
                     <text class="pim-name-title">
-                        <?= Yii::t('app', 'Update Key Performance Indicator') ?>
+                        <?= Yii::t('app', 'Update Team Key Performance Indicator') ?>
                     </text>
                 </div>
                 <div class="col-4 " style="display: flex; justify-content: center; align-items: center; gap: 20px;">
@@ -811,7 +816,7 @@ select.form-select option:disabled {
                             </a>
                         </div>
 
-                        <a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="btn-create-cancle"
+                        <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/team-kpi-grid" class="btn-create-cancle"
                             style="width: 100px;">
                             <?= Yii::t('app', 'Cancel') ?>
                         </a>
@@ -838,6 +843,7 @@ select.form-select option:disabled {
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
+    $('[data-toggle="tooltip"]').tooltip(); // เปิดใช้งาน Tooltip
     var acType = document.getElementById('acType').value
     let isSubmitting = false; // ป้องกัน submit ซ้ำ
     $("#create-kpi").on("beforeSubmit", function(event) {

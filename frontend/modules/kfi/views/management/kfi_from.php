@@ -1,5 +1,9 @@
 <?php
 use yii\bootstrap5\ActiveForm;
+
+$this->title = 'KFI';
+
+
 if ($statusform == 'update') {
     $parturl = 'kfi/management/save-update-kfi';
 } else {
@@ -28,6 +32,9 @@ $selectedAmountType = $data['amountType'] ?? '';
 $result = $data['result'] ?? 0;
 $targetAmount = $data['targetAmount'] ?? 0;
 $DueBehind = $targetAmount -  $result;
+if($DueBehind < 0){
+    $DueBehind = 0;
+} 
 // echo $DueBehind;
 ?>
 

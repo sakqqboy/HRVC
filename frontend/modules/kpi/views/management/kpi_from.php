@@ -2,6 +2,8 @@
 
 use yii\bootstrap5\ActiveForm;
 
+$this->title = 'KPI';
+
 if ($statusform == 'update') {
     $parturl = 'kpi/management/update-kpi';
 } else {
@@ -30,7 +32,9 @@ $sumvalue = isset($data['sumresult']) ? $data['sumresult'] : 0;
 $targetAmount = $data['targetAmount'] ?? 0;
 $kpiHistoryId = $data['kpiHistoryId'] ?? 0;
 $DueBehind = $targetAmount -  $result;
-
+if($DueBehind < 0){
+    $DueBehind = 0;
+} 
 // echo $DueBehind;
 ?>
 
