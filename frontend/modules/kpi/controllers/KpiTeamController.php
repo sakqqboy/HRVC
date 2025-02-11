@@ -668,43 +668,21 @@ class KpiTeamController extends Controller
 		$kpiTeamDetail = curl_exec($api);
 		$kpiTeamDetail = json_decode($kpiTeamDetail, true);
 
-		// ตรวจสอบว่าค่าที่ได้มาไม่เป็น null
-		// if (!$kpiTeamDetail || !isset($kpiTeamDetail['kpiId'])) {
-		// 	return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
-		// }
-
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiTeamDetail['kpiId'] . '&&kpiHistoryId=0');
 		$kpi = curl_exec($api);
 		$kpi = json_decode($kpi, true);
-
-		// if (!$kpi || !isset($kpi["companyId"])) {
-		// 	return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
-		// }
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $kpi["companyId"]);
 		$kpiBranch = curl_exec($api);
 		$kpiBranch = json_decode($kpiBranch, true);
 
-		// if (!$kpiBranch) {
-		// 	return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
-		// }
-
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-department?id=' . $kpiTeamDetail['kpiId']);
 		$kpiDepartment = curl_exec($api);
 		$kpiDepartment = json_decode($kpiDepartment, true);
 
-		// if (!$kpiDepartment) {
-		// 	return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
-		// }
-
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-team?id=' . $kpiTeamDetail['kpiId']);
 		$kpiTeam = curl_exec($api);
 		$kpiTeam = json_decode($kpiTeam, true);
-
-		// if (!$kpiTeam) {
-		// 	return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
-		// }
-
 
 		curl_close($api);
 
