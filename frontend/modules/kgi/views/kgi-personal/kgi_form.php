@@ -792,7 +792,7 @@ if (!$nextCheckDate) {
                             </text>
                         </div>
                         <div>
-                            <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/kgi-individual-history/<?= ModelMaster::encodeParams(['kgiId' => $data['kgiId'], 'kgiEmployeeHistoryId' => $kgiEmployeeHistoryId, 'kgiEmployeeId' => $kgiEmployeeId]) ?>"
+                            <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/kgi-employee-history/<?= ModelMaster::encodeParams(['kgiId' => $data['kgiId'], 'kgiEmployeeHistoryId' => $kgiEmployeeHistoryId, 'kgiEmployeeId' => $kgiEmployeeId]) ?>"
                                 class="btn-create-cancle" style="width: 100px;">
                                 <img src="<?= Yii::$app->homeUrl ?>image/eye-login.svg" alt="LinkedIn"
                                     style="width: 16px; height: 16px;">
