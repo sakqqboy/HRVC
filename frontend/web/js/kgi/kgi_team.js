@@ -295,3 +295,41 @@ function viewTabTeamKgi(kgiTeamHistoryId, tabId, kgiId, kgiTeamId) {
         });
     }
 }
+function autoUpdateResultTeam(kgiTeamId) {
+	if ($("#historic-checkbox-kgi-team").prop("checked") == true) {
+		//if (confirm('Are you sure to use the summarize data from Team KGI?')) {
+			$("#override-checkbox-kgi-team").prop("checked", false);
+			
+			var url = $url + 'kgi/kgi-team/auto-result';
+			$.ajax({
+				type: "POST",
+				dataType: 'json',
+				url: url,
+				data: { kgiTeamId: kgiTeamId },
+				success: function (data) {
+					$("#result-update").val(data.result);
+					$("#auto-result").val(data.result);
+				}
+			});
+			$("#result-update").prop("disabled", true);
+		//} else {
+			//$("#override-checkbox-kgi").prop("checked", true);
+			//$("#historic-checkbox-kgi").prop("checked", false);
+			//$("#result-update").prop("disabled", false);
+		//}
+		//cal
+	} else { 
+		$("#override-checkbox-kgi-team").prop("checked", true);
+		$("#result-update").val($("#previous-result").val());
+		$("#result-update").prop("disabled", false);
+	}
+}
+function overrideUpdateTeam() { 
+	if ($("#override-checkbox-kgi-team").prop("checked") == true) {
+		$("#historic-checkbox-kgi-team").prop("checked", false);
+		$("#result-update").prop("disabled", false);
+		$("#result-update").val($("#previous-result").val());
+	} else { 
+		$("#historic-checkbox-kgi-team").prop("checked", true).trigger('change');
+	}
+}
