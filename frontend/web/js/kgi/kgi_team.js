@@ -333,3 +333,26 @@ function overrideUpdateTeam() {
 		$("#historic-checkbox-kgi-team").prop("checked", true).trigger('change');
 	}
 }
+function validateFormKgiTeam() {
+    var fromDate = document.getElementById('fromDate').value.trim();
+    var toDate = document.getElementById('toDate').value.trim();
+    var nextDate = $('#nextDate').val();
+    if (!fromDate && !toDate) {
+        alert("Please fill in Due Term");
+        return false;
+    } else if (!fromDate) {
+        alert("Please fill in Start Date");
+        return false;
+    } else if (!toDate) {
+        alert("Please fill in End Date");
+        return false;
+    } else if (nextDate == '') {
+        alert("Please fill in Target Due Update Date");
+        return false;
+    } else if ($('#check1').prop('checked') == false && $('#check2').prop('checked') == false) {
+        alert("Please check the status");
+        return false;
+    } else {
+        return true;
+    }
+}

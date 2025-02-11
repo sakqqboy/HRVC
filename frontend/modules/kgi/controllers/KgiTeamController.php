@@ -415,15 +415,21 @@ class KgiTeamController extends Controller
 		$oldKgiTeam = KgiTeam::find()->where(["kgiTeamId" => $kgiTeamId])->orderBy("")->asArray()->one();
 		$status =  $_POST["status"];
 		$role = UserRole::userRight();
+		throw new exception(print_r(Yii::$app->request->post(), true));
 		//throw new exception($oldKgiTeam["target"] . 'เก่าคือ' . $_POST["targetAmount"]);
 		if (isset($oldKgiTeam) && !empty($oldKgiTeam)) {
 			if (($oldKgiTeam["target"] != $_POST["targetAmount"]) && $role == 3) {
 				$status = 88;
 			}
 		}
+		if (isset($_POST["result"])) {
+			$result = $_POST["result"];
+		} else {
+			$result = $_POST["autoUpdate"];
+		}
 		$kgiTeamHistory = new KgiTeamHistory();
 		$kgiTeamHistory->kgiTeamId = $kgiTeamId;
-		$kgiTeamHistory->result = $_POST["result"];
+		$kgiTeamHistory->result = $result;
 		if (isset($_POST["targetAmount"])) {
 			$kgiTeamHistory->target = $_POST["targetAmount"];
 		} else {
@@ -450,7 +456,7 @@ class KgiTeamController extends Controller
 			if (isset($_POST["targetAmount"]) && $role > 3) { //if changed by over team leader
 				$teamKgi->target = $_POST["targetAmount"];
 			}
-			$teamKgi->result = $_POST["result"];
+			$teamKgi->result = $result;
 			$teamKgi->fromDate = $_POST["fromDate"];
 			$teamKgi->toDate = $_POST["toDate"];
 			$teamKgi->nextCheckDate = $_POST["nextDate"];
