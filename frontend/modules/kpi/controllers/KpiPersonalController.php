@@ -613,13 +613,13 @@ class KpiPersonalController extends Controller
 			$status = $_POST["status"];
 			if (isset($history) && !empty($history)) {
 				if (!empty($history["nextCheckDate"])) {
-					$nextCheckDateArr = explode(' ', $history["nextCheckDate"]);
-					$nextCheckDate = $nextCheckDateArr[0];
+					$nextCheckDate = $history["nextCheckDate"];
 				} else {
 					$nextCheckDate = Null;
 				}
+
 				$lastCheck = $history->nextCheckDate;
-				if ($history->target == str_replace(",", "", $_POST["amount"]) && $history->result == str_replace(",", "", $_POST["result"]) && $nextCheckDate == $_POST["nextCheckDate"]) {
+				if ($history->target == str_replace(",", "", $_POST["amount"]) && $history->result == str_replace(",", "", $_POST["result"]) && $nextCheckDate == $_POST["nextCheckDate"] && $history->toDate == $_POST["toDate"] && $history->fromDate == $_POST["fromDate"]) {
 					$history->status = $_POST["status"];
 					$history->updateDateTime = new Expression('NOW()');
 				} else {
@@ -635,10 +635,10 @@ class KpiPersonalController extends Controller
 					if (!isset($history) || empty($history)) {
 						$history = new KpiEmployeeHistory();
 					}
+
 					$history->kpiEmployeeId = $_POST["kpiEmployeeId"];
 					$history->target = str_replace(",", "", $_POST["amount"]);
 					$history->result = str_replace(",", "", $_POST["result"]);
-					// $history->detail = $_POST["detail"];
 					$history->month = $_POST["month"];
 					$history->year = $_POST["year"];
 					$history->toDate = $_POST["toDate"];
@@ -648,13 +648,13 @@ class KpiPersonalController extends Controller
 					$history->status = $status;
 					$history->createDateTime = new Expression('NOW()');
 					$history->updateDateTime = new Expression('NOW()');
+
 				}
 			} else {
 				$history = new KpiEmployeeHistory();
 				$history->kpiEmployeeId = $_POST["kpiEmployeeId"];
 				$history->target = str_replace(",", "", $_POST["amount"]);
 				$history->result = str_replace(",", "", $_POST["result"]);
-				// $history->detail = $_POST["detail"];
 				$history->month = $_POST["month"];
 				$history->year = $_POST["year"];
 				$history->toDate = $_POST["toDate"];
@@ -676,6 +676,9 @@ class KpiPersonalController extends Controller
 			$kpiEmployee->updateDateTime = new Expression('NOW()');
 			$kpiEmployee->month = $_POST["month"];
 			$kpiEmployee->year = $_POST["year"];
+			$kpiEmployee->toDate = $_POST["toDate"];
+			$kpiEmployee->fromDate = $_POST["fromDate"];
+			$kpiEmployee->nextCheckDate = $_POST["nextCheckDate"];
 			$kpiEmployee->save(false);
 			$history->createrId = Yii::$app->user->id;
 			if ($history->save(false)) {
