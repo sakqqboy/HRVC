@@ -317,7 +317,7 @@ if (!$nextCheckDate) {
                                     <?= Yii::t('app', 'Update Interval') ?>
                                 </div>
                                 <div class="pim-duedate mt-2" style="font-size: 18px; font-weight: 600;">
-                                    <img src="/HRVC/frontend/web/images/icons/Settings/monthly.svg" class="pim-iconKFI"
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/monthly.svg" class="pim-iconKFI"
                                         style="margin-top: -3px;  width: 18px; height: 18px;">
                                     <?= Yii::t('app', is_array($unit) ? $unit['unitName'] : $unit) ?>
                                 </div>
@@ -601,7 +601,7 @@ if (!$nextCheckDate) {
                         <div class="input-group">
                             <span class="input-group-text"
                                 style="background-color:rgb(255, 255, 255); border-right: none; padding: 20px;">
-                                <img src="/HRVC/frontend/web/image/target-blue.svg" alt="LinkedIn"
+                                <img src="<?= Yii::$app->homeUrl ?>image/target-blue.svg" alt="LinkedIn"
                                     style="width: 30px; height: 30px; ">
                                 <span style="font-size: 22px; font-weight: 600; padding-left: 20px; ">
                                     <?= isset($data['code']) ? $data['code'] : '' ?>
