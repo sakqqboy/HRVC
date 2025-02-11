@@ -684,7 +684,7 @@ if (!$nextCheckDate) {
                                 <div class="mid-center" style="flex-basis: 5%;">
                                     <?php if ($data['status'] != '2') { ?>
                                         <input type="checkbox" id="check1" name="status" value="1" class="status-checkbox"
-                                            <?= (isset($data['status']) && $data['status'] == '1' && !empty($data['nextCheckText'])) ? 'checked' : '' ?>
+                                            <?= (isset($data['status']) && $data['status'] == '1' && !empty($data['nextCheckText'])) ? '    checked' : '' ?>
                                             style="width: 22px; height: 22px;">
                                     <?php } ?>
                                 </div>
@@ -834,18 +834,19 @@ if (!$nextCheckDate) {
     $(document).ready(function() {
         var acType = document.getElementById('acType').value
         let isSubmitting = false; // ป้องกัน submit ซ้ำ
-        $("#create-kgi").on("beforeSubmit", function(event) {
+        $("#update-kgi-team").on("beforeSubmit", function(event) {
             if (isSubmitting) {
                 return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
             }
             isSubmitting = true;
             // alert(acType);
-            if (!validateFormKgiTeam(acType)) {
+            if (!validateFormKgiTeam()) {
                 isSubmitting = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
                 return false;
             }
             return true; // ถ้า validation ผ่าน ให้ submit ฟอร์มต่อไป
         });
+        $('[data-toggle="tooltip"]').tooltip(); // เปิดใช้งาน Tooltip
     });
 
     const seeMoreBtn = document.getElementById("see-more");
@@ -876,243 +877,4 @@ if (!$nextCheckDate) {
             document.getElementById("see-more").addEventListener("click", toggleText);
         }
     <?php endif; ?>
-
-    const value = "<?= $value ?>";
-    const sumvalue = "<?= $sumvalue ?>";
-    // const sumvalue = "500";
-
-    // Get both checkboxes
-    const historicCheckbox = document.getElementById('historic-checkbox');
-    const overrideCheckbox = document.getElementById('override-checkbox');
-
-    // Add event listeners to handle toggling behavior
-    historicCheckbox.addEventListener('change', function() {
-        if (this.checked) {
-            overrideCheckbox.checked = false;
-            // alert(0);
-            overrideChecked(overrideCheckbox.checked, sumvalue);
-        } else {
-            overrideCheckbox.checked = true;
-            // alert(1);
-            overrideChecked(overrideCheckbox.checked, value);
-        }
-    });
-
-    overrideCheckbox.addEventListener('change', function() {
-        if (this.checked) {
-            // alert(2);
-            historicCheckbox.checked = false;
-            overrideChecked(overrideCheckbox.checked, value);
-        } else {
-            // alert(3);
-            historicCheckbox.checked = true;
-            overrideChecked(overrideCheckbox.checked, sumvalue);
-        }
-    });
-
-
-    function modalHistory(kgiId) {
-        var url = $url + 'kgi/kgi-team/modal-history';
-        // alert(kgiId);
-        var percentage = <?= json_encode($percentage) ?>;
-        var result = <?= json_encode($result) ?>;
-        var sumvalue = <?= json_encode($sumvalue) ?>;
-        var targetAmount = <?= json_encode($targetAmount) ?>;
-        var kgiTeamId = <?= json_encode($kgiTeamId) ?>;
-        var kgiTeamHistoryId = <?= json_encode($kgiTeamHistoryId) ?>;
-        var month = document.getElementById("hiddenMonth").value;
-        var year = document.getElementById("hiddenYear").value;
-        var fromDateValue = document.getElementById("fromDate").value;
-        var toDateValue = document.getElementById("toDate").value;
-        var fromDate = new Date(fromDateValue);
-        var toDate = toDateValue ? new Date(toDateValue) : null; // ตรวจสอบค่าก่อนแปลง
-        // ถ้า fromDate ไม่ถูกต้อง
-        if (isNaN(fromDate)) {
-            // ถ้า fromDate ไม่ถูกต้อง ให้ส่งค่าว่าไม่มีวันที่
-            fromDate = null;
-            formattedRange = "No date"; // กำหนดค่าเป็น "ไม่มีวันที่"
-        } else {
-            var fromDay = fromDate.getDate();
-            var fromMonth = new Intl.DateTimeFormat('en-US', {
-                month: 'long'
-            }).format(fromDate);
-
-            // ถ้า toDate ไม่ได้มีค่า ให้แสดงเฉพาะจาก fromDate
-            var formattedRange = `${getOrdinalSuffix(fromDay)} ${fromMonth}`;
-
-            if (toDate && !isNaN(toDate)) {
-                var toDay = toDate.getDate();
-                var toMonth = new Intl.DateTimeFormat('en-US', {
-                    month: 'long'
-                }).format(toDate);
-                formattedRange = `${getOrdinalSuffix(fromDay)} ${fromMonth} - ${getOrdinalSuffix(toDay)} ${toMonth}`;
-            }
-        }
-        var monthName = getMonthName(parseInt(month)); // แปลงเป็นชื่อเดือน
-        // alert(kgiTeamHistoryId);
-        $.ajax({
-            type: "POST",
-            dataType: "json", // ✅ รอรับ JSON
-            url: url,
-            data: {
-                percentage: percentage,
-                result: result,
-                sumvalue: sumvalue,
-                targetAmount: targetAmount,
-                kgiId: kgiId,
-                month: monthName,
-                year: year,
-                formattedRange: formattedRange,
-                kgiTeamId: kgiTeamId,
-                kgiTeamHistoryId: kgiTeamHistoryId
-            },
-            success: function(data) {
-                var percentage = parseFloat(data.percentage);
-                var dueBehind = 100 - percentage; // ✅ คำนวณส่วนต่าง
-                // dueBehind = dueBehind.toFixed(2); // จำกัดทศนิยมไม่เกิน 2 ตำแหน่ง
-                $("#mont-hyear").text(data.month + " " + data.year);
-                $("#formattedRange").text(data.formattedRange);
-                $("#Target").text(data.targetAmount);
-                $("#Result").text("/" + data.result);
-                $(".percentage").text(percentage + "%");
-                var dashArrayValue = (percentage / 100) * 100;
-                $(".circle").attr("stroke-dasharray", dashArrayValue + ", 100");
-                $("#DueBehind").text(dueBehind + "%");
-                // console.log(data.historyTeam);
-                var historyData = data.history; // ดึงข้อมูล history
-                var historyList = $('#history-list-creater');
-                historyList.empty(); // เคลียร์รายการเก่า
-                var historyArray = Object.values(historyData);
-
-                var historyTeamData = data.historyTeam; // ดึงข้อมูล history
-                var historyTeamList = $('#history-list-team');
-                historyTeamList.empty(); // เคลียร์รายการเก่า
-                var historyTeamArray = Object.values(historyTeamData);
-
-                if (historyArray.length > 0) {
-                    historyArray.forEach(function(item) {
-                        var listItem = `
-                        <li class="schedule-item mt-5" role="button" tabindex="0">
-                            <div class="row" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-
-                                <div class="col-5" style="display: flex; gap: 16px; align-items: center;">
-                                    <div style="display: flex; justify-content: center; align-items: center;">
-                                        <div class="col-5">
-                                            <img src="<?= Yii::$app->homeUrl ?>${item.picture}" class="width-ehsan-small" id="picture-history">
-                                        </div>
-                                    </div>
-                                    <div style="display: flex; justify-content: center; align-items: center;">
-                                        <span class="text-black" id="creater-history" style="font-size: 16px; font-weight: 500;">
-                                            ${item.creater}
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div class="col-3">
-                                    <div  style="display: flex; justify-content: center; align-items: center; background-color: rgb(215, 235, 255); border: 0.795px solid #2580D3; border-radius: 36px; padding: 3px 20px; z-index: 1;">
-                                        <div style="display: flex; justify-content: center; align-items: center; gap: 8px;">
-                                            <div class="cycle-current">
-                                                <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
-                                            </div>
-                                            <span class="text-black" id="teamName-history" style="font-size: 16px; font-weight: 500;">
-                                                ${item.teamName}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-
-                                <div class="col-4" style="display: flex; flex-direction: column; text-align: right;">
-                                    <div>
-                                        <span class="text-gray" id="target-history" style="font-size: 18px; font-weight: 400;">
-                                            ${item.target}
-                                        </span>
-                                        <span class="text-blue" id="result-history" style="font-size: 18px; font-weight: 600;">
-                                            /${item.result}
-                                        </span>
-                                    </div>
-                                    <span class="text-gray" id="createDate-history" style="font-size: 14px; font-weight: 400;">
-                                        ${item.createDateTime}
-                                    </span>
-                                </div>
-                            </div>
-                        </li>
-                    `;
-                        historyList.append(listItem); // เพิ่มข้อมูลลงใน ul
-                    });
-                } else {
-                    historyTeamList.append(
-                        `<li class="schedule-item mt-5" role="button" tabindex="0">
-                            <div class="row pt-10 pb-10"
-                                style="display: flex; justify-content: center; align-items: center; width: 100%; font-size: 18px; ">
-                                    No data
-                            </div>
-                    </li>`
-                    )
-                }
-
-
-                if (historyTeamArray.length > 0) {
-                    historyTeamArray.forEach(function(item) {
-                        var listItem = `
-                        <li class="schedule-item mt-5" role="button" tabindex="0">
-                            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                                <!-- กลุ่มที่ชิดซ้าย -->
-                                <div style="display: flex; gap: 16px;">
-                                    <div style="display: flex; justify-content: center; align-items: center;">
-                                        <div class="cycle-current">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
-                                        </div>
-                                    </div>
-                                    <div style="display: flex; gap: 6px; flex-direction: column;">
-                                        <text class="text-black" style="font-size: 16px; font-weight: 600;">
-                                            ${item.teamName} <!-- ใช้ชื่อทีมจาก item -->
-                                        </text>
-                                        <text class="text-gray" style="font-size: 14px; font-weight: 400;">
-                                            ${item.departmentName} <!-- หรือใช้ข้อมูลอื่นจาก item -->
-                                        </text>
-                                    </div>
-                                </div>
-
-                                <!-- กลุ่มที่ชิดขวา -->
-                                <div style="display: flex;">
-                                    <div>
-                                        <div style="display: flex; gap: 6px; flex-direction: column;">
-                                            <text class="text-end">
-                                                <span class="text-gray" style="font-size: 18px; font-weight: 400;">
-                                                    ${item.target} <!-- แสดง target -->
-                                                </span>
-                                                <span class="text-blue" style="font-size: 18px; font-weight: 600;">
-                                                    /${item.result} <!-- แสดง result -->
-                                                </span>
-                                            </text>
-                                            <text class="text-gray text-end" style="font-size: 14px; font-weight: 400;">
-                                                ${item.createDateTime} <!-- แสดงวันที่ที่สร้าง -->
-                                            </text>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    `;
-                        historyTeamList.append(listItem); // เพิ่มข้อมูลลงใน ul
-                    });
-                } else {
-                    historyTeamList.append(
-                        `<li class="schedule-item mt-5" role="button" tabindex="0">
-                            <div class="row pt-10 pb-10"
-                                style="display: flex; justify-content: center; align-items: center; width: 100%; font-size: 18px; ">
-                                    No data
-                            </div>
-                    </li>`
-                    )
-                }
-
-            },
-            error: function(xhr, status, error) {
-                console.log(xhr.responseText); // ดูข้อความผิดพลาดจากเซิร์ฟเวอร์
-                // alert("เกิดข้อผิดพลาดในการโหลดข้อมูล");
-            }
-        });
-    }
 </script>
