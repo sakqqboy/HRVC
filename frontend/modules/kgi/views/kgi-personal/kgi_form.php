@@ -3,25 +3,23 @@
 use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
-$parturl = 'kgi/kgi-team/update-kgi-team';
-$this->title = 'Update Team KGI';
 $form = ActiveForm::begin([
-    'id' => 'update-kgi-team',
+    'id' => 'update-personal-kgi',
     'method' => 'post',
     'options' => [
-        'enctype' => 'multipart/form-data'
+        'enctype' => 'multipart/form-data',
     ],
-    'action' => Yii::$app->homeUrl . $parturl
-]);
+    'action' => Yii::$app->homeUrl . 'kgi/kgi-personal/save-update-personal-kgi'
 
-// $percentage = isset($data['ratio']) ? $data['ratio'] : 00;
-//throw new exception(print_r($data, true));
+]);
+$this->title = "Update Individual KGI";
+//throw new Exception(print_r($data, true));
 $percentage = isset($data['ratio']) ? round((float)$data['ratio']) : 0;
 $result = $data['result'] ?? 0;
 $value = isset($data['result']) ? $data['result'] : 0;
-$sumvalue = isset($data['sumresult']) ? $data['sumresult'] : 0;
+$kgiEmployeeHistoryId = isset($data['kgiEmployeeHistoryId']) ? $data['kgiEmployeeHistoryId'] : 0;
+$sumvalue = isset($kgi['sumresult']) ? $kgi['sumresult'] : 0;
 $targetAmount = $data['target'] ?? 0;
-$kgiTeamHistoryId = $data['kgiTeamHistoryId'] ?? 0;
 $DueBehind = $targetAmount -  $result;
 $detail = !empty($data['kgiDetail']) ? $data['kgiDetail'] : 'No details listed';
 $maxLength = 487;
@@ -50,7 +48,7 @@ if (!$nextCheckDate) {
         $daysLeft = "Due Pass"; // กรณีแปลงวันที่ไม่สำเร็จ
     }
 }
-
+// echo $data['nextCheckText'];
 ?>
 
 <style>
@@ -140,7 +138,7 @@ if (!$nextCheckDate) {
                         </text>
                     </a>
                     <text class="pim-name-title">
-                        <?= Yii::t('app', 'Update Team Key Goal Indicator') ?>
+                        <?= Yii::t('app', 'Update Individual Key Goal Indicator') ?>
                     </text>
                 </div>
                 <div class="col-4 " style="display: flex; justify-content: center; align-items: center; gap: 20px;">
@@ -173,6 +171,7 @@ if (!$nextCheckDate) {
                                 <?= $percentage ?>%
                             </text>
                         </svg>
+
                     </div>
                     <div style="width: 1px; background-color: #BBCDDE; height: 51px;"></div>
                     <div style="display: flex; align-items: center; gap: 22px;">
@@ -187,7 +186,7 @@ if (!$nextCheckDate) {
 
             <div class="contrainer-body-detail">
                 <div class="between-column" style="flex: 1;">
-                    <div class="form-group start-center" style="gap: 14px;">
+                    <div class="form-group start-center" style="  gap: 14px;">
                         <label class="text-black" for="name" style="font-size: 22px; font-weight: 600;">
                             <?= isset($data['kgiName']) ? $data['kgiName'] : '' ?>
                         </label>
@@ -215,8 +214,13 @@ if (!$nextCheckDate) {
                         <label class="text-gray" for="name" style="font-size: 14px; font-weight: 400;">
                             <?= Yii::t('app', 'Assigned Companies') ?>
                         </label>
-                        <div class="circle-container" data-type="branch" style="display: flex;align-items: center;gap: 5px;">
-                            <img src="<?= Yii::$app->homeUrl ?><?= $company['companyImg'] ?>" class="pim-pic-gridNew" style="width: 43px; height: 43px;" alt="icon">
+                        <div class="circle-container" data-type="branch" style="display: flex;
+                                    align-items: center;
+                                    gap: 5px;
+                                    ">
+                            <img src="<?= Yii::$app->homeUrl ?><?= $company['companyImg'] ?>" class="pim-pic-gridNew"
+                                style="width: 43px; height: 43px;" alt="icon">
+
                             <text class="text-black" style="font-size: 18px; font-weight: 500;">
                                 <?= Yii::t('app', 'Assigned on') ?>
                                 <?= is_array($company['companyId']) ? '' : 1 ?>
@@ -228,7 +232,10 @@ if (!$nextCheckDate) {
                         <label class="text-gray" for="name" style="font-size: 14px; font-weight: 400;">
                             <?= Yii::t('app', 'Assigned Branches') ?>
                         </label>
-                        <div class="circle-container pl-15" style="display: flex;align-items: center;gap: 5px;padding-left: 15px;">
+                        <div class="circle-container pl-15" style="display: flex;
+                                    align-items: center;
+                                    gap: 5px;
+                                    padding-left: 15px;">
                             <?php if (count($kgiBranch) >= 1) { ?>
                                 <div class="cycle-current" style="width: 43px; height: 43px;">
                                     <img src="<?= Yii::$app->homeUrl ?>image/branches.svg" alt="icon">
@@ -324,10 +331,7 @@ if (!$nextCheckDate) {
                         <div class="row w-100">
                             <div class="col-3 d-flex flex-column align-items-start justify-content-center "
                                 style=" border-right: #9ABCE9 solid thin">
-                                <!-- <div class="text-center priority-star">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star ms-3" aria-hidden="true"></i>
-                                </div> -->
+
                                 <div class="col-12 text-center priority-star">
                                     <?php
                                     if ($kgi["priority"] == "A" || $kgi["priority"] == "B") {
@@ -495,7 +499,7 @@ if (!$nextCheckDate) {
                                 Select the Last Update Date <i class="fa fa-angle-down pull-right mt-5"
                                     aria-hidden="true"></i>
                             </div>
-                            <input type="hidden" id="nextDate" name="nextDate"
+                            <input type="hidden" id="nextDate" name="nextCheckDate"
                                 value="<?= isset($data['nextCheckDate']) ? $data['nextCheckDate'] : '' ?>">
                         </div>
                         <div id="calendar-due-update"
@@ -533,46 +537,53 @@ if (!$nextCheckDate) {
                             </div>
                             <text class="text-black" style="font-size: 18px; font-weight: 500;">
                                 <?= Yii::t('app', 'Assigned on Our Team') ?>
-
-                                <?= count($kgiTeam) > 1 ? (count($kgiTeam) - 1) . ' & ' . Yii::t('app', 'Others') : '' ?>
+                                <?php
+                                $countTeam =  count($kgiTeam);
+                                $countTeam = $countTeam - 1;
+                                if ($countTeam > 0) {
+                                    echo Yii::t('app', '& ' . $countTeam . ' Others');
+                                }
+                                ?>
                             </text>
                         </div>
                     </div>
                     <div class="form-group start-center mt-32" style="  gap: 14px;">
                         <label class="text-gray" for="name" style="font-size: 14px; font-weight: 400;">
-                            <?= Yii::t('app', 'Assigned Employees') ?>
+                            <?= Yii::t('app', 'Assigned Employee/s') ?>
                         </label>
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="row pim-picgroup">
-                                    <div class="col-2">
-                                        <div class="pim-pic-yenlowKFI">
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg"
-                                                alt="person icon">
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="pim-pic-yenlowKFI">
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg"
-                                                alt="person icon">
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="pim-pic-yenlowKFI">
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg"
-                                                alt="person icon">
-                                        </div>
-                                    </div>
-                                    <div class="col-4 number-tag load-yenlow pr-0 pl-0 pim-pic-gridKFINum ">
-                                        <?= count($data['kgiEmployee']) ?> </div>
+                        <div class="circle-container pl-15" data-type="branch" style="display: flex;
+                                    align-items: center;
+                                    gap: 5px;
+                                    padding-left: 15px;">
+                            <?php if (count($data['kgiEmployee']) >= 1) { ?>
+                                <div class="cycle-current" style="width: 43px; height: 43px;">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/employees.svg" alt="icon">
                                 </div>
+                            <?php }
+                            if (count($data['kgiEmployee']) >= 2) { ?>
+                                <div class="cycle-current" style="width: 43px; height: 43px;">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/employees.svg" alt="icon">
+                                </div>
+                            <?php }
+                            if (count($data['kgiEmployee']) >= 3) { ?>
+                                <div class="cycle-current" style="width: 43px; height: 43px;">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/employees.svg" alt="icon">
+                                </div>
+                            <?php } ?>
+                            <div class="cycle-current-white"
+                                style="width: 43px; height: 43px; color: #000; right: 15px;">
+                                <?= count($data['kgiEmployee']) ?>
                             </div>
-                            <div class="col-8 yenlow-assignKFI">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-yenlow.svg">
-                                <a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $data["kgiId"], "companyId" => $company["companyId"]]) ?>"
-                                    class="font-black">
-                                    Assign Person </a>
-                            </div>
+                            <text class="text-black" style="font-size: 18px; font-weight: 500;">
+                                <?= Yii::t('app', 'Assigned on Me') ?>
+                                <?php
+                                $countTeam =  count($data['kgiEmployee']);
+                                $countTeam = $countTeam - 1;
+                                if ($countTeam > 0) {
+                                    echo Yii::t('app', '& ' . $countTeam . ' Others');
+                                }
+                                ?>
+                            </text>
                         </div>
                     </div>
 
@@ -596,7 +607,7 @@ if (!$nextCheckDate) {
                                     <?= isset($data['code']) ? $data['code'] : '' ?>
                                 </span>
                             </span>
-                            <input type="number" class="form-control text-end" name="targetAmount" step="any"
+                            <input type="number" class="form-control text-end" name="target" step="any"
                                 placeholder="Enter Target Amount"
                                 value="<?= isset($data['target']) ? $data['target'] : '' ?>"
                                 style="border-left: none; border-right: none; font-size: 22px; font-style: normal; padding-right: 3px; font-weight: 600;"
@@ -626,7 +637,7 @@ if (!$nextCheckDate) {
                                 style="text-align: right; cursor: pointer;" data-bs-toggle="modal"
                                 data-bs-target="#update-history-popup" onclick="javascript:kgiUpdateHistory(<?= $data['kgiId'] ?>)">
                                 <img
-                                    src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg"><?= Yii::t('app', 'Update History') ?>
+                                    src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg"> <?= Yii::t('app', 'Update History') ?>
                             </div>
                         </label>
 
@@ -637,34 +648,19 @@ if (!$nextCheckDate) {
                                     src="<?= Yii::$app->homeUrl ?>image/result-<?= isset($data['result']) ? 'blue' : 'gray' ?>.svg"
                                     alt="LinkedIn" style="width: 30px; height: 30px;">
                             </span>
-                            <input type="number" class="form-control text-end" name="result" id="result-update"
+                            <input type="number" class="form-control text-end" name="resultValue" id="result-update"
                                 value="<?= isset($data['result']) ? $data['result'] : '' ?>"
                                 style="border-left: none; font-size: 22px; font-style: normal; font-weight: 600;"
-                                required oninput="updateIcon(this)">
-
-                            <input type="hidden" id="auto-result" value="" name="autoUpdate">
-                            <input type="hidden" id="previous-result" value="<?= isset($data['result']) ? $data['result'] : '' ?>">
+                                required oninput="updateIcon(this),updateResultValue(this)">
+                            <input type="hidden" name="result" id="result-cheng"
+                                value="<?= isset($data['result']) ? $data['result'] : '' ?>">
                         </div>
 
 
                         <div class="between-center" style="  width: 100%; ">
                             <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-                                <label class="switch">
-                                    <input type="checkbox" id="historic-checkbox-kgi-team" onchange="javascript:autoUpdateResultTeam(<?= $kgiTeamId ?>)">
-                                    <span class="slider round"></span>
-                                </label>
-                                <label class="sub-manage-create" id="historic-switch">
-                                    <?= Yii::t('app', 'Historic Update') ?>
-                                </label>
                             </div>
                             <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-                                <label class="switch">
-                                    <input type="checkbox" id="override-checkbox-kgi-team" checked onchange="javascript:overrideUpdateTeam()">
-                                    <span class="slider round"></span>
-                                </label>
-                                <label class="sub-manage-create" id="override-switch">
-                                    <?= Yii::t('app', 'Override') ?>
-                                </label>
                             </div>
                         </div>
                     </div>
@@ -682,7 +678,7 @@ if (!$nextCheckDate) {
                                 <div class="mid-center" style="flex-basis: 5%;">
                                     <?php if ($data['status'] != '2') { ?>
                                         <input type="checkbox" id="check1" name="status" value="1" class="status-checkbox"
-                                            <?= (isset($data['status']) && $data['status'] == '1' && !empty($data['nextCheckText'])) ? '    checked' : '' ?>
+                                            <?= (isset($data['status']) && $data['status'] == '1' && !empty($data['nextCheckText'])) ? 'checked' : '' ?>
                                             style="width: 22px; height: 22px;">
                                     <?php } ?>
                                 </div>
@@ -694,12 +690,14 @@ if (!$nextCheckDate) {
                                     </div>
                                 </div>
                                 <div style="flex-basis: 70%;">
+                                    <!-- แก้ไข diviv เป็น div -->
                                     <text id="text-blue"
                                         class="text-<?= (empty($data['status']) || empty($data['nextCheckText'])) ? 'black' : 'blue-sea' ?>">
                                         <?= Yii::t('app', "The task is currently being addressed. Ensure it's marked completed before the due date to avoid it being automatically listed as overdue.") ?>
                                     </text>
                                 </div>
                             </div>
+
 
                             <div id="textbox-check-completed"
                                 class="textbox-check-<?= (empty($data['status']) || $data['status'] != 2) ? 'hide' : 'green' ?>"
@@ -724,18 +722,18 @@ if (!$nextCheckDate) {
                                 </div>
                             </div>
                             <div id="textbox-check-warning"
-                                style="<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']))
+                                style="<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']) || $data['status'] == 2)
                                             ? 'border: 0.5px solid var(--Progress-Blue, #30313D);'
                                             : ($daysLeft == 'Due Pass'
                                                 ? 'border: 0.5px solid var(--Progress-Blue, #E05757);'
                                                 : 'border: 0.5px solid var(--Progress-Blue, #DD7A01);') ?> font-size: 14px; font-weight: 600;"
-                                class="textbox-check-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']))
+                                class="textbox-check-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']) || $data['status'] == 2)
                                                             ? 'hide'
                                                             : ($daysLeft == 'Due Pass'
                                                                 ? 'red'
                                                                 : 'orang') ?>">
                                 <div class="mid-center" style="flex-basis: 5%;  ">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/warning-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']))
+                                    <img src="<?= Yii::$app->homeUrl ?>image/warning-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']) || $data['status'] == 2)
                                                                                             ? 'black'
                                                                                             : ($daysLeft == 'Due Pass'
                                                                                                 ? 'red'
@@ -743,23 +741,22 @@ if (!$nextCheckDate) {
                                         style="width: 20px; height: 20px;">
                                 </div>
                                 <div class="mid-center" style="flex-basis: 25%; margin-right: 20px;">
-                                    <div class="border-cicle bg-white text-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']))
+                                    <div class="border-cicle bg-white text-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']) || $data['status'] == 2)
                                                                                 ? 'black'
                                                                                 : ($daysLeft == 'Due Pass'
                                                                                     ? 'red'
                                                                                     : 'orang') ?>"
-                                        style="<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']))
+                                        style="<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']) || $data['status'] == 2)
                                                     ? 'border: 0.5px solid var(--Progress-Blue, #30313D);'
                                                     : ($daysLeft == 'Due Pass'
                                                         ? 'border: 0.5px solid var(--Progress-Blue, #E05757);'
                                                         : 'border: 0.5px solid var(--Progress-Blue, #DD7A01);') ?>  font-size: 14px; font-weight: 600;"
                                         for="check3">
-
                                         <?= Yii::t('app', "Due Passed") ?>
                                     </div>
                                 </div>
                                 <div style="flex-basis: 70%;">
-                                    <text class="text-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']))
+                                    <text class="text-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']) || $data['status'] == 2)
                                                             ? 'black'
                                                             : ($daysLeft == 'Due Pass'
                                                                 ? 'red'
@@ -795,16 +792,16 @@ if (!$nextCheckDate) {
                             </text>
                         </div>
                         <div>
-                            <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/kgi-team-history/<?= ModelMaster::encodeParams(['kgiId' => $data['kgiId'], 'kgiTeamHistoryId' => $kgiTeamHistoryId, 'kgiTeamId' => $kgiTeamId]) ?>"
-                                class=" btn-create-cancle" style="width: 100px;">
+                            <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/kgi-individual-history/<?= ModelMaster::encodeParams(['kgiId' => $data['kgiId'], 'kgiEmployeeHistoryId' => $kgiEmployeeHistoryId, 'kgiEmployeeId' => $kgiEmployeeId]) ?>"
+                                class="btn-create-cancle" style="width: 100px;">
                                 <img src="<?= Yii::$app->homeUrl ?>image/eye-login.svg" alt="LinkedIn"
                                     style="width: 16px; height: 16px;">
                                 <?= Yii::t('app', 'View') ?>
                             </a>
                         </div>
 
-                        <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/team-kgi-grid" class="btn-create-cancle"
-                            style="width: 100px;">
+                        <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi-grid"
+                            class="btn-create-cancle" style="width: 100px;">
                             <?= Yii::t('app', 'Cancel') ?>
                         </a>
                         <button type="submit" class="btn-create-update" style="width: 100px;">
@@ -812,16 +809,19 @@ if (!$nextCheckDate) {
                                 style="width: 16px; height: 16px;">
                             <?= Yii::t('app', 'Update') ?>
                         </button>
+
                     </div>
+
                 </div>
             </div>
             <!-- </form> -->
         </div>
     </div>
 </div>
-
+<input type="hidden" name="url" value="<?= Yii::$app->request->referrer ?>">
 <input type="hidden" value="update" id="acType">
-<input type="hidden" id="kgiTeamId" name="kgiTeamId" value="<?= isset($kgiTeamId) ? $kgiTeamId : '' ?>" required>
+<input type="hidden" id="kgiEmployeeId" name="kgiEmployeeId" value="<?= isset($kgiEmployeeId) ? $kgiEmployeeId : '' ?>"
+    required>
 
 <?php ActiveForm::end(); ?>
 <?= $this->render('modal_history') ?>
@@ -830,13 +830,13 @@ if (!$nextCheckDate) {
     $(document).ready(function() {
         var acType = document.getElementById('acType').value
         let isSubmitting = false; // ป้องกัน submit ซ้ำ
-        $("#update-kgi-team").on("beforeSubmit", function(event) {
+        $("#update-personal-kgi").on("beforeSubmit", function(event) {
             if (isSubmitting) {
                 return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
             }
             isSubmitting = true;
             // alert(acType);
-            if (!validateFormKgiTeam()) {
+            if (!validateFormKgiEmployee(acType)) {
                 isSubmitting = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
                 return false;
             }
@@ -844,7 +844,6 @@ if (!$nextCheckDate) {
         });
         $('[data-toggle="tooltip"]').tooltip(); // เปิดใช้งาน Tooltip
     });
-
     const seeMoreBtn = document.getElementById("see-more");
     const aboutText = document.getElementById("about-text");
 

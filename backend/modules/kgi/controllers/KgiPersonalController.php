@@ -241,6 +241,7 @@ class KgiPersonalController extends Controller
 			$employee = Employee::EmployeeDetail($employeeId);
 			$data = [
 				"kgiName" => $kgiDetail["kgiName"],
+				"kgiId" => $kgiId,
 				"monthName" => ModelMaster::monthEng($kgiEmployee['month'], 1),
 				"priority" => $kgiDetail["priority"],
 				"quantRatio" => $kgiDetail["quantRatio"],
@@ -263,7 +264,8 @@ class KgiPersonalController extends Controller
 				"remark" => $kgiEmployee["remark"],
 				"teamName" => Team::teamName($employee["teamId"]),
 				"picture" => $employee["teamId"],
-				"isOver" => ModelMaster::isOverDuedate($kgiEmployee["nextCheckDate"])
+				"isOver" => ModelMaster::isOverDuedate($kgiEmployee["nextCheckDate"]),
+				"kgiEmployee" => KgiEmployee::kgiEmployee($kgiId),
 				// "isOver" => ModelMaster::isOverDuedate(KgiEmployeeHistory::nextCheckDate($kgiEmployee["kgiEmployeeHistoryId"])),
 			];
 		}

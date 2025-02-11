@@ -415,7 +415,7 @@ class KgiTeamController extends Controller
 		$oldKgiTeam = KgiTeam::find()->where(["kgiTeamId" => $kgiTeamId])->orderBy("")->asArray()->one();
 		$status =  $_POST["status"];
 		$role = UserRole::userRight();
-		throw new exception(print_r(Yii::$app->request->post(), true));
+		//throw new exception(print_r(Yii::$app->request->post(), true));
 		//throw new exception($oldKgiTeam["target"] . 'เก่าคือ' . $_POST["targetAmount"]);
 		if (isset($oldKgiTeam) && !empty($oldKgiTeam)) {
 			if (($oldKgiTeam["target"] != $_POST["targetAmount"]) && $role == 3) {
@@ -444,7 +444,7 @@ class KgiTeamController extends Controller
 		$kgiTeamHistory->fromDate = $_POST["fromDate"];
 		$kgiTeamHistory->toDate = $_POST["toDate"];
 		$kgiTeamHistory->nextCheckDate = $_POST["nextDate"];
-		$kgiTeamHistory->detail = $_POST["remark"];
+		//$kgiTeamHistory->detail = $_POST["remark"];
 		$kgiTeamHistory->createrId = Yii::$app->user->id;
 		$kgiTeamHistory->createDateTime = new Expression('NOW()');
 		$kgiTeamHistory->updateDateTime = new Expression('NOW()');
