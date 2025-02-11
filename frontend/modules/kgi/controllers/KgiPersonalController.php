@@ -645,7 +645,7 @@ class KgiPersonalController extends Controller
 	{
 		$param = ModelMaster::decodeParams($hash);
 		$kgiEmployeeId = $param["kgiEmployeeId"];
-		$openTab = $param["openTab"];
+		$openTab = isset($param["openTab"]) ? $param["openTab"] : 1;
 		$kgiEmployeeHistoryId = $param["kgiEmployeeHistoryId"];
 		$kgiId = $param["kgiId"];
 		$role = UserRole::userRight();
