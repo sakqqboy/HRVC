@@ -814,7 +814,7 @@ select.form-select option:disabled {
                             </a>
                         </div>
 
-                        <a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="btn-create-cancle"
+                        <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/team-kpi-grid" class="btn-create-cancle"
                             style="width: 100px;">
                             <?= Yii::t('app', 'Cancel') ?>
                         </a>

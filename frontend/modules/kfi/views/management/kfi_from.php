@@ -28,6 +28,9 @@ $selectedAmountType = $data['amountType'] ?? '';
 $result = $data['result'] ?? 0;
 $targetAmount = $data['targetAmount'] ?? 0;
 $DueBehind = $targetAmount -  $result;
+if($DueBehind < 0){
+    $DueBehind = 0;
+} 
 // echo $DueBehind;
 ?>
 
