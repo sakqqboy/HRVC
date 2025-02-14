@@ -1,4 +1,15 @@
 <div id="container" style="width:100%; height:100%;"></div>
+<?php
+$actualData = array_map('floatval', explode(',', $result));
+$targetData = array_map('floatval', explode(',', $target));
+
+// คำนวณค่า Difference และเพิ่มเข้าไปใน Actual
+$actualWithDifference = array_map(function($actual, $target) {
+    $diff = $target - $actual; // คำนวณความต่าง
+    return [$actual, $diff];   // ใส่เป็น [Actual, Difference]
+}, $actualData, $targetData);
+?>
+
 <script>
 Highcharts.chart('container', {
     chart: {
@@ -41,11 +52,23 @@ Highcharts.chart('container', {
     series: [{
             type: 'line',
             name: 'Actual',
-            data: <?= json_encode(array_map('floatval', explode(',', $result))) ?>, // Ensure numeric format
+            data: <?= json_encode(array_map(function($actual, $target) {
+        return [
+            'y' => $actual,  // ค่าของ Actual 
+            'difference' => $target - $actual // ค่าความต่าง
+        ];
+    }, $actualData, $targetData)) ?>, // ใช้ค่าที่มี Difference
             color: '#FFA800',
             lineWidth: 1,
             marker: {
                 radius: 2
+            },
+            tooltip: {
+                pointFormatter: function() {
+                    let diffColor = this.point.options.difference < 0 ? 'red' : 'black';
+                    return `<span style="color:${this.color}">\u25CF</span> ${this.series.name}: <b>${this.y}</b>
+                      <span style="color:${diffColor}">\u25CF</span> Difference: <b style="color:${diffColor}">${this.point.options.difference}</b>`;
+                }
             }
         },
         {

@@ -194,33 +194,22 @@ document.addEventListener("DOMContentLoaded", () => {
                         verticalAlign: 'top',
                         layout: 'horizontal',
                         symbolRadius: 0,
+                        symbolWidth: 0, // ซ่อนสัญลักษณ์มาตรฐาน
                         useHTML: true,
                         labelFormatter: function() {
                             let iconPath = '';
-                            if (this.name == 'Gap') {
+                            if (this.name == 'Performance') {
                                 if (currentIndex == 0) iconPath =
-                                    'KFI-actual.svg'; // KFI
-                                else if (currentIndex == 1) iconPath =
-                                    'KGI-actual.svg'; // KGI
-                                else if (currentIndex == 2) iconPath =
-                                    'KPI-actual.svg'; // KPI
-
-                            } else if (this.name == 'Performance') {
-                                if (currentIndex == 0) iconPath =
-                                    'KFI-target.svg'; // KFI
+                                'KFI-target.svg'; // KFI
                                 else if (currentIndex == 1) iconPath =
                                     'KGI-target.svg'; // KGI
                                 else if (currentIndex == 2) iconPath =
                                     'KPI-target.svg'; // KPI
-
                             }
-
                             return '<img src="<?=Yii::$app->homeUrl?>images/icons/Settings/' +
                                 iconPath +
-                                '" style="width: 35px; height: 35px; vertical-align: middle;">' +
-                                ' ' +
-                                this
-                                .name;
+                                '" style="width: 35px; height: 35px; vertical-align: middle;"> ' +
+                                this.name;
                         },
                         itemStyle: {
                             fontWeight: 'bold',
