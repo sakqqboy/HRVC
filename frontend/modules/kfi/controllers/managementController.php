@@ -198,144 +198,140 @@ class ManagementController extends Controller
 
 			// if (Yii::$app->request->isPost) {
 			// 	Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-				
-				$data = [
-					'kfiName' => $_POST["kfiName"],  
-					'company' => $_POST["company"],
-					'branch' => $_POST["branch"],
-					'unit' => $_POST["unit"],
-					'amount' => $_POST["amount"],
-					'month' => $_POST["month"],  
-					'year' => $_POST["year"],
-					'detail' => $_POST["detail"],
-					'amountType' => $_POST["amountType"],
-					'code' => $_POST["code"],
-					'quantRatio' => $_POST["quantRatio"],  
-					'nextCheckDate' => $_POST["nextCheckDate"],
-					'fromDate' => $_POST["fromDate"],
-					'toDate' => $_POST["toDate"],
-					'department' => $_POST["department"],
-					'status' => $_POST["status"],
-					'result' => $_POST["result"],
-				];
 
-				//  throw new Exception(print_r($data,true));
-				
-				$kfi = new Kfi();
-				$kfi->kfiName = $_POST["kfiName"];
-				$kfi->companyId = $_POST["company"];
-				//$kfi->branchId = $_POST["branch"];
-				$kfi->unitId = $_POST["unit"];
-				$kfi->targetAmount = $_POST["amount"];
-				$kfi->month = $_POST["month"];
-				$kfi->year = $_POST["year"];
-				$kfi->kfiDetail = $_POST["detail"];
-				$kfi->createrId = Yii::$app->user->id;
-				$kfi->status =  isset($_POST["status"]) && $_POST["status"] !== '' ? $_POST["status"] : 1;
-				$kfi->createDateTime = new Expression('NOW()');
-				$kfi->updateDateTime = new Expression('NOW()');
+			$data = [
+				'kfiName' => $_POST["kfiName"],
+				'company' => $_POST["company"],
+				'branch' => $_POST["branch"],
+				'unit' => $_POST["unit"],
+				'amount' => $_POST["amount"],
+				'month' => $_POST["month"],
+				'year' => $_POST["year"],
+				'detail' => $_POST["detail"],
+				'amountType' => $_POST["amountType"],
+				'code' => $_POST["code"],
+				'quantRatio' => $_POST["quantRatio"],
+				'nextCheckDate' => $_POST["nextCheckDate"],
+				'fromDate' => $_POST["fromDate"],
+				'toDate' => $_POST["toDate"],
+				'department' => $_POST["department"],
+				'status' => $_POST["status"],
+				'result' => $_POST["result"],
+			];
+
+			//  throw new Exception(print_r($data,true));
+
+			$kfi = new Kfi();
+			$kfi->kfiName = $_POST["kfiName"];
+			$kfi->companyId = $_POST["company"];
+			//$kfi->branchId = $_POST["branch"];
+			$kfi->unitId = $_POST["unit"];
+			$kfi->targetAmount = $_POST["amount"];
+			$kfi->month = $_POST["month"];
+			$kfi->year = $_POST["year"];
+			$kfi->kfiDetail = $_POST["detail"];
+			$kfi->createrId = Yii::$app->user->id;
+			$kfi->status =  isset($_POST["status"]) && $_POST["status"] !== '' ? $_POST["status"] : 1;
+			$kfi->createDateTime = new Expression('NOW()');
+			$kfi->updateDateTime = new Expression('NOW()');
 
 
-				if ($kfi->save(false)) {
-					$kfiId = Yii::$app->db->lastInsertID;
-					$kfiHistory = new KfiHistory();
-					$kfiHistory->kfiId = $kfiId;
-					$kfiHistory->createrId = Yii::$app->user->id;
-					$kfiHistory->nextCheckDate = $_POST["nextCheckDate"];
-					$kfiHistory->amountType = $_POST["amountType"] ?? null;
-					$kfiHistory->code = $_POST["code"] ?? null;
-					$kfiHistory->status = $_POST["status"] ?? 1;
-					$kfiHistory->quantRatio = $_POST["quantRatio"] ?? null;
-					$kfiHistory->historyStatus = (string) ($_POST["status"] ?? '1');	
-					$kfiHistory->result = $_POST["result"] ?? 0;
-					$kfiHistory->unitId = $_POST["unit"] ?? null;
-					$kfiHistory->month = $_POST["month"] ?? null;
-					$kfiHistory->year = $_POST["year"] ?? null;
-					$kfiHistory->description = $_POST["detail"] ?? null;
-					$kfiHistory->fromDate = $_POST["fromDate"];
-					$kfiHistory->toDate = $_POST["toDate"];
-					$kfiHistory->createDateTime = new Expression('NOW()');
-					$kfiHistory->updateDateTime = new Expression('NOW()');
-					if ($kfiHistory->validate()) {
-						$kfiHistory->save(false);
-						
-						if (isset($_POST["branch"]) && count($_POST["branch"]) > 0) {
-							
-							$this->saveKfiBranch($_POST["branch"], $kfiId);
-						}
-						if (isset($_POST["department"]) && count($_POST["department"]) > 0) {
-							$this->saveKfiDepartment($_POST["department"], $kfiId);
-						
-						}
-						
-					} else {
-						$errors = $kfiHistory->getErrors();
-						return [
-							'message' => false,
-							'error' => $errors
-						];
+			if ($kfi->save(false)) {
+				$kfiId = Yii::$app->db->lastInsertID;
+				$kfiHistory = new KfiHistory();
+				$kfiHistory->kfiId = $kfiId;
+				$kfiHistory->createrId = Yii::$app->user->id;
+				$kfiHistory->nextCheckDate = $_POST["nextCheckDate"];
+				$kfiHistory->amountType = $_POST["amountType"] ?? null;
+				$kfiHistory->code = $_POST["code"] ?? null;
+				$kfiHistory->status = $_POST["status"] ?? 1;
+				$kfiHistory->quantRatio = $_POST["quantRatio"] ?? null;
+				$kfiHistory->historyStatus = (string) ($_POST["status"] ?? '1');
+				$kfiHistory->result = $_POST["result"] ?? 0;
+				$kfiHistory->unitId = $_POST["unit"] ?? null;
+				$kfiHistory->month = $_POST["month"] ?? null;
+				$kfiHistory->year = $_POST["year"] ?? null;
+				$kfiHistory->description = $_POST["detail"] ?? null;
+				$kfiHistory->fromDate = $_POST["fromDate"];
+				$kfiHistory->toDate = $_POST["toDate"];
+				$kfiHistory->createDateTime = new Expression('NOW()');
+				$kfiHistory->updateDateTime = new Expression('NOW()');
+				if ($kfiHistory->validate()) {
+					$kfiHistory->save(false);
+
+					if (isset($_POST["branch"]) && count($_POST["branch"]) > 0) {
+
+						$this->saveKfiBranch($_POST["branch"], $kfiId);
 					}
-
-					return $this->redirect(Yii::$app->homeUrl . 'kfi/management/grid');
-
-					// 	//return $this->redirect('index');
+					if (isset($_POST["department"]) && count($_POST["department"]) > 0) {
+						$this->saveKfiDepartment($_POST["department"], $kfiId);
+					}
 				} else {
-					$errors = $kfi->getErrors();
-
+					$errors = $kfiHistory->getErrors();
 					return [
 						'message' => false,
 						'error' => $errors
 					];
 				}
-	
-		}else{
-		$role = UserRole::userRight();
-		$groupId = Group::currentGroupId();
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-		$companies = curl_exec($api);
-		$companies = json_decode($companies, true);
+				return $this->redirect(Yii::$app->homeUrl . 'kfi/management/grid');
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
-		$units = curl_exec($api);
-		$units = json_decode($units, true);
-		
-		curl_close($api);
-		$data = [];
-		return $this->render('kfi_from', [ 
-			"role" => $role,
-			"companies" => $companies,
-			"units" => $units,
-			"data" => $data,
-			"statusform" =>  "create"
-		]);
+				// 	//return $this->redirect('index');
+			} else {
+				$errors = $kfi->getErrors();
+
+				return [
+					'message' => false,
+					'error' => $errors
+				];
+			}
+		} else {
+			$role = UserRole::userRight();
+			$groupId = Group::currentGroupId();
+			$api = curl_init();
+			curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+			curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+			curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+			$companies = curl_exec($api);
+			$companies = json_decode($companies, true);
+
+			curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
+			$units = curl_exec($api);
+			$units = json_decode($units, true);
+
+			curl_close($api);
+			$data = [];
+			return $this->render('kfi_from', [
+				"role" => $role,
+				"companies" => $companies,
+				"units" => $units,
+				"data" => $data,
+				"statusform" =>  "create"
+			]);
 		}
-		
 	}
 	public function actionSaveUpdateKfi()
 	{
 		$data = [
-					'kfiName' => $_POST["kfiName"],  
-					'company' => $_POST["company"],
-					'branch' => $_POST["branch"],
-					'unit' => $_POST["unit"],
-					'amount' => $_POST["amount"],
-					'month' => $_POST["month"],  
-					'year' => $_POST["year"],
-					'detail' => $_POST["detail"],
-					'amountType' => $_POST["amountType"],
-					'code' => $_POST["code"],
-					'quantRatio' => $_POST["quantRatio"],  
-					'nextCheckDate' => $_POST["nextCheckDate"],
-					'fromDate' => $_POST["fromDate"],
-					'toDate' => $_POST["toDate"],
-					'department' => $_POST["department"],
-					'status' => $_POST["status"],
-					'result' => $_POST["result"],
-				];
+			'kfiName' => $_POST["kfiName"],
+			'company' => $_POST["company"],
+			'branch' => $_POST["branch"],
+			'unit' => $_POST["unit"],
+			'amount' => $_POST["amount"],
+			'month' => $_POST["month"],
+			'year' => $_POST["year"],
+			'detail' => $_POST["detail"],
+			'amountType' => $_POST["amountType"],
+			'code' => $_POST["code"],
+			'quantRatio' => $_POST["quantRatio"],
+			'nextCheckDate' => $_POST["nextCheckDate"],
+			'fromDate' => $_POST["fromDate"],
+			'toDate' => $_POST["toDate"],
+			'department' => $_POST["department"],
+			'status' => $_POST["status"],
+			'result' => $_POST["result"],
+		];
 
 		// throw new Exception(print_r($data,true));
 
@@ -387,48 +383,48 @@ class ManagementController extends Controller
 		}
 	}
 	public function actionUpdateKfi($hash)
-{
-	$param = ModelMaster::decodeParams($hash);
+	{
+		$param = ModelMaster::decodeParams($hash);
 
-	$kfiId = $param["kfiId"];
-	$kfiHistoryId = $param["kfiHistoryId"];
-	
+		$kfiId = $param["kfiId"];
+		$kfiHistoryId = $param["kfiHistoryId"];
+
 		$role = UserRole::userRight();
 		$groupId = Group::currentGroupId();
-	
+
 		$api = curl_init();
-	
+
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-	
+
 		// ดึงข้อมูล KFI
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&kfiHistoryId=0");
 		$kfi = curl_exec($api);
 		$kfi = json_decode($kfi, true);
 
 		$companyId = $kfi["companyId"];
-	
+
 		// ดึงข้อมูลสาขา
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
 		$kfiBranch = curl_exec($api);
 		$kfiBranch = json_decode($kfiBranch, true);
-	
+
 		$kfiBranchText = $this->renderAjax('multi_branch_update', [
 			"branches" => $kfiBranch,
 			"kfiId" => $kfiId
 		]);
-	
+
 		$branch["textBranch"] = $kfiBranchText;
 		// ดึงข้อมูลแผนก
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-department?id=' . $kfiId);
 		$kfiDepartment = curl_exec($api);
 		$kfiDepartment = json_decode($kfiDepartment, true);
-	
+
 		$kfiDepartmentText = $this->renderAjax('multi_department_update', [
 			"d" => $kfiDepartment,
 			"kfiId" => $kfiId
 		]);
-	
+
 		$department["textDepartment"] = $kfiDepartmentText;
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
@@ -438,9 +434,9 @@ class ManagementController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
-	
+
 		curl_close($api);
-	
+
 		// รวมข้อมูลทั้งหมด
 		$data = array_merge($kfi, $branch, $department);
 
@@ -455,7 +451,7 @@ class ManagementController extends Controller
 			"kfiId" => $kfiId,
 			"statusform" =>  "update"
 		]);
-}
+	}
 
 	public function actionBranchMultiDepartment()
 	{
