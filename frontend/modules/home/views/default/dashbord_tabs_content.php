@@ -160,7 +160,7 @@ use yii\bootstrap5\ActiveForm;
                         <!-- แก้ไขจาก KFI-lasr-0 เป็น KFI-last-0 -->
                     </div>
                     <div class="col-4 text-center">
-                        <?php if ($role >= 5 && $contentDetail['KFI']['showPercent'] !== '') { ?>
+                        <?php if ($role >= 5 && $contentDetail['KFI']['showPercent'] !== '' && !empty($contentDetail['KFI']['KFIData'] ?? null)) { ?>
 
                         <button class="btn-update btn-KFI" onclick="chengeButtonKFI(KFIData[currentKFIIndex].kfiId)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg" class="mb-2"
@@ -304,7 +304,7 @@ use yii\bootstrap5\ActiveForm;
                         <strong class="small-text-value" id="KGI-last-0">07/19/2024</strong>
                     </div>
                     <div class="col-4 text-center">
-                        <?php if ($role >= 5 && $contentDetail['KGI']['showPercent'] !== '') { ?>
+                        <?php if ($role >= 5 && $contentDetail['KGI']['showPercent'] !== '' && !empty($contentDetail['KGI']['KGIData']  ?? null)) { ?>
                         <?php if ($tab == 'self' ) { ?>
                         <button class="btn-update btn-KGI" onclick="chengeButtonSelfKGI(KGIData[currentKGIIndex].id)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-black.svg" class="mb-2"
@@ -464,7 +464,7 @@ use yii\bootstrap5\ActiveForm;
                         <strong class="small-text-value" id="KPI-last-0">-</strong>
                     </div>
                     <div class="col-4 text-center">
-                        <?php if ($role >= 5 && $contentDetail['KPI']['showPercent'] !== '') { ?>
+                        <?php if ($role >= 5 && $contentDetail['KPI']['showPercent'] !== '' && !empty($contentDetail['KPI']['KPIData']  ?? null)) { ?>
                         <?php if ($tab == 'self' ) { ?>
                         <button class="btn-update btn-KPI" onclick="chengeButtonSelfKPI(KPIData[currentKPIIndex].id)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg" class="mb-2"
