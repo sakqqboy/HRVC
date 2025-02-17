@@ -38,12 +38,40 @@ class ManagementController extends Controller
 {
 	public function actionIndex($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId)
 	{
+		if (!empty($adminId) || !empty($gmId) || !empty($managerId)) {
+			$kgis = Kgi::find()
+				->where(["status" => [1, 2, 4]])
+				->asArray()
+				->orderBy('updateDateTime DESC')
+				->all();
+		}
+		if (!empty($supervisorId) || !empty($teamLeaderId) || !empty($staffId)) {
+			if ($supervisorId != '') {
+				$userId = $supervisorId;
+			}
+			if ($teamLeaderId != '') {
+				$userId = $teamLeaderId;
+			}
+			if ($staffId != '') {
+				$userId = $staffId;
+			}
+			$employeeId = Employee::employeeId($userId);
+			$companyId = Employee::EmployeeDetail($employeeId)["companyId"];
+			$kgis = Kgi::find()
+				->where([
+					"status" => [1, 2, 4],
+					"companyId" => $companyId
+				])
+				->asArray()
+				->orderBy('updateDateTime DESC')
+				->all();
+		}
 		$data = [];
-		$kgis = Kgi::find()
-			->where(["status" => [1, 2, 4]])
-			->asArray()
-			->orderBy('updateDateTime DESC')
-			->all();
+		// $kgis = Kgi::find()
+		// 	->where(["status" => [1, 2, 4]])
+		// 	->asArray()
+		// 	->orderBy('updateDateTime DESC')
+		// 	->all();
 		if (count($kgis) > 0) {
 			foreach ($kgis as $kgi) :
 				$ratio = 0;

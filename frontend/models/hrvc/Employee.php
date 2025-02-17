@@ -81,7 +81,7 @@ class Employee extends \frontend\models\hrvc\master\EmployeeMaster
         if ($userId != '') {
             $user = User::find()->where(["userId" => $userId])->asArray()->one();
             if (isset($user) && !empty($user)) {
-                $employee = Employee::find()->select('branchId')
+                $employee = Employee::find()->select('branchId,companyId')
                     ->where(["employeeId" => $user["employeeId"]])->asArray()->one();
             }
         }
