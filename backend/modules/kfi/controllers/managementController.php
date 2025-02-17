@@ -35,12 +35,35 @@ class ManagementController extends Controller
 {
 	public function actionIndex($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId)
 	{
+		if (!empty($adminId) || !empty($gmId) || !empty($managerId)) {
+			$kfis = Kfi::find()
+				->where(["status" => [1, 2, 4]])
+				->asArray()
+				->orderBy('updateDateTime DESC')
+				->all();
+		}
+		if (!empty($supervisorId) || !empty($teamLeaderId) || !empty($staffId)) {
+			if ($supervisorId != '') {
+				$userId = $supervisorId;
+			}
+			if ($teamLeaderId != '') {
+				$userId = $teamLeaderId;
+			}
+			if ($staffId != '') {
+				$userId = $staffId;
+			}
+			$employeeId = Employee::employeeId($userId);
+			$companyId = Employee::EmployeeDetail($employeeId)["companyId"];
+			$kfis = Kfi::find()
+				->where([
+					"status" => [1, 2, 4],
+					"companyId" => $companyId
+				])
+				->asArray()
+				->orderBy('updateDateTime DESC')
+				->all();
+		}
 		$data = [];
-		$kfis = Kfi::find()
-			->where(["status" => [1, 2, 4]])
-			->asArray()
-			->orderBy('updateDateTime DESC')
-			->all();
 		if (isset($kfis) && count($kfis) > 0) {
 			foreach ($kfis as $kfi) :
 				$allEmployee = KfiEmployee::kfiEmployee($kfi["kfiId"]);
