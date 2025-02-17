@@ -17,9 +17,7 @@ $this->title = 'company profile';
 		}
 		?>
     </div>
-    <!-- <div class="col-12 edit-update">
-		<button type="button" class="btn btn-light"> <i class="fa fa-pencil" aria-hidden="true"></i> Update</button>
-	</div> -->
+
     <div class="row">
         <div class="col-lg-2 col-md-5 col-12" style="margin-top:-100px;">
             <div class="avatar-upload" style="margin-left:20px;">

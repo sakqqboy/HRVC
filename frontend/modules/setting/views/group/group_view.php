@@ -20,9 +20,7 @@ $this->title = 'Group profile';
 		?>
 
         </div>
-        <!-- <div class="col-12 edit-update text-end" style="padding-right: 30px;">
-		<a href="" class="btn btn-light"> <i class="fa fa-pencil" aria-hidden="true"></i> Update</a>
-	</div> -->
+
         <div class="row mt-20">
             <div class="col-lg-3 col-md-5 col-12" style="margin-top:-170px;">
                 <div class="avatar-upload-preview" style="margin-left:36px;">
