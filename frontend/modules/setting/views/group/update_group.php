@@ -14,7 +14,7 @@ $this->title = 'Update Group';
 	'action' => Yii::$app->homeUrl . 'setting/group/save-update-group'
 
 ]); ?>
-<div class="col-12 company-group-edit">
+<div class="contrainer-body company-group-edit">
     <div class="col-12 banner-uploade" id="imagePreviewBanner">
         <!-- <?php
 		if ($group["banner"] != null) { ?>

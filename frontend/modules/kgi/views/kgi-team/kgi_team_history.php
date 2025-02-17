@@ -7,7 +7,7 @@ $this->title = 'Team KGI View';
 ?>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
-<div class="col-12">
+<div class="contrainer-body">
 
     <div class="col-12">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"

@@ -6,7 +6,7 @@ use yii\bootstrap5\ActiveForm;
 $this->title = 'Self KGI View';
 ?>
 <script src="https://code.highcharts.com/highcharts.js"></script>
-<div class="col-12">
+<div class="contrainer-body">
 
     <div class="col-12">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"

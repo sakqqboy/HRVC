@@ -55,7 +55,7 @@ window.addEventListener('resize', () => {
 });
 </script> -->
 
-<div class="dashboard-container">
+<div class="dashboard-container mt-50">
     <div class="row pl-4">
         <div class="aler pim-body bg-white" style="margin-top: -10px;">
             <!-- <div id="screen-size" style="font-size: 16px; color: #333;">แสดงขนาดหน้าจอ</div> -->
