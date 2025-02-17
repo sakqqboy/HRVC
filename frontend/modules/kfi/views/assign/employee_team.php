@@ -7,9 +7,9 @@ if (isset($kfiTeamEmployee) && count($kfiTeamEmployee) > 0) {
     <div class="row">
         <div class="col-3">
             <div class="pl-10">
-                <input type="checkbox" class="check-all-<?= $teamId ?> " onclick="checkAllEmployees(<?= $teamId ?>)"
+                <input type="checkbox" class="check-all-<?= $teamId ?>" onclick="checkAllEmployees(<?= $teamId ?>)"
                     style="top: 2px;">
-                <label for=" check-all-<?= $teamId ?>" class="font-size-12">Cleck All</label>
+                <label for="check-all-<?= $teamId ?>" class="font-size-12">Check All</label>
             </div>
         </div>
         <div class="col-4 font-size-12 pt-5 pb-3">
@@ -71,7 +71,7 @@ if (isset($kfiTeamEmployee) && count($kfiTeamEmployee) > 0) {
 ?>
 
 <script>
-// JavaScript ฟังก์ชันสำหรับ Check All และ Uncheck All ด้วยการคลิกที่ checkbox
+// ฟังก์ชันที่ทำงานเมื่อคลิกที่ checkbox "Check All"
 function checkAllEmployees(teamId) {
     var checkboxes = document.querySelectorAll('#employee-in-team-' + teamId + ' input[type="checkbox"]');
     var checkAllCheckbox = document.querySelector('.check-all-' + teamId);
@@ -87,4 +87,35 @@ function checkAllEmployees(teamId) {
         });
     }
 }
+
+// ฟังก์ชันที่ตรวจสอบว่าเช็คบ็อกซ์ทั้งหมดถูกเลือกแล้วหรือไม่เมื่อโหลดหน้า
+document.addEventListener("DOMContentLoaded", function() {
+    var allTeamIds = document.querySelectorAll('[class^="check-all-"]'); // หา check-all ทุกทีม
+    console.log(allTeamIds); // แสดงข้อมูล NodeList ของ check-all ทุกทีม
+
+    allTeamIds.forEach(function(teamCheckbox) {
+        // ตรวจสอบว่า classList มีมากกว่า 1 ค่าก่อนที่จะใช้ split
+        if (teamCheckbox.classList.length > 1) {
+            var teamId = teamCheckbox.classList[1].split('-')[1]; // ดึง teamId จาก class
+            console.log(teamId); // แสดงค่า teamId
+
+            var checkboxes = document.querySelectorAll('#employee-in-team-' + teamId +
+                ' input[type="checkbox"]');
+            console.log(checkboxes); // แสดงข้อมูล NodeList ของ checkboxes ของทีม
+
+            // ตรวจสอบว่าเช็คบ็อกซ์ทุกอันถูกเลือกหรือยัง
+            var allChecked = Array.from(checkboxes).every(function(checkbox) {
+                return checkbox.checked;
+            });
+
+            // ถ้าทุกเช็คบ็อกซ์ถูกเลือก ให้ทำการเลือก "Check All"
+            if (allChecked) {
+                teamCheckbox.checked = true;
+            }
+        } else {
+            console.warn('No teamId found for checkbox: ',
+            teamCheckbox); // แจ้งเตือนหากไม่มี class ที่เป็น teamId
+        }
+    });
+});
 </script>
