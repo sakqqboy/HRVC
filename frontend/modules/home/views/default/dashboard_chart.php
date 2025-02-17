@@ -223,6 +223,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         formatter: function() {
                             let result = '';
                             let gap = '';
+                            let name = '';
 
                             // ตรวจสอบว่า this.points มีข้อมูลหรือไม่
                             if (this.points) {
@@ -234,6 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                         gap = point.y.toFixed(2) +
                                             '%'; // แสดงค่า Gap
                                     }
+                                    name = point.key;
                                 });
                             }
 
@@ -243,7 +245,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             }
 
                             return `
-                                <span style="font-weight: bold; font-size: 14px;">${this.x}</span> <!-- แสดงชื่อหรือลักษณะของแกน X -->
+                                <span style="font-weight: bold; font-size: 14px;">${name}</span> <!-- แสดงชื่อหรือลักษณะของแกน X -->
                                 <div style="position: relative; display: flex; justify-content: space-between; gap: 20px; text-align: center;">
                                     <div>
                                         <span style="font-size: 12px; color: #666;">Result</span><br>
