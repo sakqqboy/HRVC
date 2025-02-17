@@ -56,13 +56,13 @@
 }
 
 .pim-body {
-	padding: 10px 2vw;
+	padding: 2vw 2vw;
 	/* ใช้ vw แทน px เพื่อทำให้ responsive */
-	padding-bottom: 200px;
+	/* padding-bottom: 200px; */
 	width: 100%;
 	/* ขยายเต็มหน้าจอ */
-	min-height: 80vh;
-	box-sizing: border-box;
+	/* min-height: 80vh; */
+	/* box-sizing: border-box; */
 	/* รวม padding ในขนาดองค์ประกอบ */
 }
 
@@ -2047,8 +2047,8 @@ input:checked+.slider:before {
 .contrainer-body-detail {
 	border-radius: 5px;
 	padding: 30px;
-	width: 1680px;
-	height: 678px;
+	width: 100%;
+	/* height: 678px; */
 	background-color: #F4F6F9;
 	display: flex;
 	justify-content: space-between;

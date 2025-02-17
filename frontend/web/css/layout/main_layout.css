@@ -41,8 +41,8 @@
     padding-left: 10px;
     padding-right: 10px;
     position: relative !important;
-    margin-top: 80px;
-    min-height: 80vh;
+    /* margin-top: 80px; */
+    /* min-height: 60vh; */
     box-sizing: border-box;
     flex: 1;
 }

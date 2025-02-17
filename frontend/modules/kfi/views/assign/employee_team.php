@@ -72,6 +72,26 @@ if (isset($kfiTeamEmployee) && count($kfiTeamEmployee) > 0) {
 
 <script>
 // ฟังก์ชันที่ทำงานเมื่อคลิกที่ checkbox "Check All"
+function allEmployeesCheck(teamId) {
+    var checkboxes = document.querySelectorAll('#employee-in-team-' + teamId + ' input[type="checkbox"]');
+    var checkAllCheckbox = document.querySelector('.check-all-' + teamId);
+
+    // ตรวจสอบสถานะของเช็คบ็อกซ์ทั้งหมดในทีม
+    if (checkAllCheckbox) {
+        var allChecked = true;
+
+        // ตรวจสอบว่า checkbox ทุกตัวถูกเช็คหรือไม่
+        checkboxes.forEach(function(checkbox) {
+            if (!checkbox.checked) {
+                allChecked = false; // ถ้ามี checkbox ที่ไม่ถูกเช็ค
+            }
+        });
+
+        // ถ้าทุก checkbox ถูกเช็คให้เช็ค Check All
+        checkAllCheckbox.checked = allChecked;
+    }
+}
+
 function checkAllEmployees(teamId) {
     var checkboxes = document.querySelectorAll('#employee-in-team-' + teamId + ' input[type="checkbox"]');
     var checkAllCheckbox = document.querySelector('.check-all-' + teamId);
@@ -88,34 +108,38 @@ function checkAllEmployees(teamId) {
     }
 }
 
-// ฟังก์ชันที่ตรวจสอบว่าเช็คบ็อกซ์ทั้งหมดถูกเลือกแล้วหรือไม่เมื่อโหลดหน้า
 document.addEventListener("DOMContentLoaded", function() {
-    var allTeamIds = document.querySelectorAll('[class^="check-all-"]'); // หา check-all ทุกทีม
-    console.log(allTeamIds); // แสดงข้อมูล NodeList ของ check-all ทุกทีม
+    var allTeamCheckboxes = document.querySelectorAll('[class^="check-all-"]');
 
-    allTeamIds.forEach(function(teamCheckbox) {
-        // ตรวจสอบว่า classList มีมากกว่า 1 ค่าก่อนที่จะใช้ split
-        if (teamCheckbox.classList.length > 1) {
-            var teamId = teamCheckbox.classList[1].split('-')[1]; // ดึง teamId จาก class
-            console.log(teamId); // แสดงค่า teamId
+    allTeamCheckboxes.forEach(function(checkbox) {
+        var teamId = checkbox.className.match(/check-all-(\d+)/)[1]; // ดึงตัวเลขจาก class name
 
+        // เพิ่ม Event Listener ให้ Check All Checkbox ทำงาน
+        checkbox.addEventListener("change", function() {
             var checkboxes = document.querySelectorAll('#employee-in-team-' + teamId +
                 ' input[type="checkbox"]');
-            console.log(checkboxes); // แสดงข้อมูล NodeList ของ checkboxes ของทีม
+            var isChecked = checkbox.checked;
 
-            // ตรวจสอบว่าเช็คบ็อกซ์ทุกอันถูกเลือกหรือยัง
-            var allChecked = Array.from(checkboxes).every(function(checkbox) {
-                return checkbox.checked;
+            // เมื่อคลิกที่ Check All จะเลือกหรือยกเลิกการเลือก checkbox ทุกตัว
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = isChecked;
             });
 
-            // ถ้าทุกเช็คบ็อกซ์ถูกเลือก ให้ทำการเลือก "Check All"
-            if (allChecked) {
-                teamCheckbox.checked = true;
-            }
-        } else {
-            console.warn('No teamId found for checkbox: ',
-            teamCheckbox); // แจ้งเตือนหากไม่มี class ที่เป็น teamId
-        }
+            // เรียกใช้ checkAllEmployees เพื่ออัปเดตสถานะของ Check All
+            allEmployeesCheck(teamId);
+        });
+
+        // เพิ่ม Event Listener สำหรับ checkbox ที่ individual
+        var individualCheckboxes = document.querySelectorAll('.employee-checkbox-' + teamId);
+        individualCheckboxes.forEach(function(individualCheckbox) {
+            individualCheckbox.addEventListener("change", function() {
+                // เมื่อมีการคลิกที่ individual checkbox ให้เรียก checkAllEmployees เพื่อเช็คสถานะ
+                allEmployeesCheck(teamId);
+            });
+        });
+
+        // เรียกใช้ checkAllEmployees เพื่อเช็คสถานะเริ่มต้น
+        allEmployeesCheck(teamId);
     });
 });
 </script>
