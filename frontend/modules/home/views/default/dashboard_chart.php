@@ -218,29 +218,43 @@ document.addEventListener("DOMContentLoaded", () => {
                     },
                     tooltip: {
                         useHTML: true,
+                        shared: false, // ตั้งค่าให้เป็น false เพื่อไม่ให้ข้อมูลจากหลาย series แสดงร่วมกัน
+                        split: true, // แยกข้อมูลจากแต่ละ series
                         formatter: function() {
                             let result = '';
                             let gap = '';
-                            let name = '';
-                            // if (point.series.name == 'Result') {
-                            //     result = point.y.toFixed(2) + '%';
-                            // } else if (point.series.name == 'Gap') {
-                            //     gap = point.y.toFixed(2) + '%';
-                            // }
-                            name = point.key;
+
+                            // ตรวจสอบว่า this.points มีข้อมูลหรือไม่
+                            if (this.points) {
+                                this.points.forEach(function(point) {
+                                    if (point.series.name == 'Result') {
+                                        result = point.y.toFixed(2) +
+                                            '%'; // แสดงค่า Result
+                                    } else if (point.series.name == 'Gap') {
+                                        gap = point.y.toFixed(2) +
+                                            '%'; // แสดงค่า Gap
+                                    }
+                                });
+                            }
+
+                            // ตรวจสอบว่าค่ามีการแสดงผลหรือไม่
+                            if (!result && !gap) {
+                                return `<span style="color: red; font-weight: bold;">No data available</span>`; // กรณีไม่มีข้อมูล
+                            }
+
                             return `
-                                <span style="font-weight: bold; font-size: 14px;">${name}</span>
+                                <span style="font-weight: bold; font-size: 14px;">${this.x}</span> <!-- แสดงชื่อหรือลักษณะของแกน X -->
                                 <div style="position: relative; display: flex; justify-content: space-between; gap: 20px; text-align: center;">
                                     <div>
                                         <span style="font-size: 12px; color: #666;">Result</span><br>
-                                        <span style="font-weight: bold; font-size: 14px;">${result}</span>
+                                        <span style="font-weight: bold; font-size: 14px;">${result}</span> <!-- แสดงค่า Result -->
                                     </div>
                                     <div>
                                         <span style="font-size: 12px; color: #666;">Gap</span><br>
-                                        <span style="font-weight: bold; font-size: 14px;">${gap}</span>
+                                        <span style="font-weight: bold; font-size: 14px;">${gap}</span> <!-- แสดงค่า Gap -->
                                     </div>
                                 </div>
-                            `;
+                             `;
                         }
                     },
                     series: chartData.series
