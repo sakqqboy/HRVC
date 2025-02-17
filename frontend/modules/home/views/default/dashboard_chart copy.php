@@ -217,17 +217,22 @@ document.addEventListener("DOMContentLoaded", () => {
                         }
                     },
                     tooltip: {
+                        shared: true,
                         useHTML: true,
+                        headerFormat: '<b>{point.key}</b><br>', // Show the category (e.g., month or data point)
                         formatter: function() {
                             let result = '';
                             let gap = '';
                             let name = '';
-                            // if (point.series.name == 'Result') {
-                            //     result = point.y.toFixed(2) + '%';
-                            // } else if (point.series.name == 'Gap') {
-                            //     gap = point.y.toFixed(2) + '%';
-                            // }
-                            name = point.key;
+                            let pointPosition = this.points[0].x;
+                            this.points.forEach(function(point) {
+                                if (point.series.name == 'Result') {
+                                    result = point.y.toFixed(2) + '%';
+                                } else if (point.series.name == 'Gap') {
+                                    gap = point.y.toFixed(2) + '%';
+                                }
+                                name = point.key;
+                            });
                             return `
                                 <span style="font-weight: bold; font-size: 14px;">${name}</span>
                                 <div style="position: relative; display: flex; justify-content: space-between; gap: 20px; text-align: center;">
@@ -242,6 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 </div>
                             `;
                         }
+
                     },
                     series: chartData.series
                 });

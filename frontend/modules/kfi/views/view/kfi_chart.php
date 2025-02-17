@@ -6,17 +6,22 @@ $targetData = array_map('floatval', explode(',', $target));
 
 // คำนวณค่า Difference และเพิ่มเข้าไปใน Actual
 $actualWithDifference = array_map(function($actual, $target) {
+    $diff = $target - $actual; // คำนวณความต่าง
     return [
-        'y' => $actual,  // ค่าของ Actual 
-        'difference' => $target - $actual // ค่าความต่าง
+        'y' => $actual,  // Actual value
+        'difference' => $diff // Difference value
     ];
+}, $actualData, $targetData);
+
+$targetWithDifference = array_map(function($actual, $target) {
+    return ['y' => $target];  // Target value
 }, $actualData, $targetData);
 ?>
 
 <script>
 Highcharts.chart('container', {
     chart: {
-        type: 'line'
+        type: 'line' // Both series will use line chart style
     },
     title: {
         text: 'Trend Chart',
@@ -27,7 +32,7 @@ Highcharts.chart('container', {
         }
     },
     xAxis: {
-        categories: <?= json_encode(explode(',', $month)) ?>
+        categories: <?= json_encode(explode(',', $month)) ?> // Convert months into JSON array
     },
     yAxis: {
         title: {
@@ -50,10 +55,37 @@ Highcharts.chart('container', {
             color: '#333'
         }
     },
+    tooltip: {
+        useHTML: true,
+        formatter: function() {
+            // Get the actual value from the "Actual" series
+            let target = this.series.chart.series[0].data[this.point.index]?.y || 0;
+            // Get the target value from the "Target" series
+            let actual = this.series.chart.series[1].data[this.point.index]?.y || 0;
+            let difference = target !== 0 ? ((target - actual) / target) * 100 : 0;
+            let diffColor = difference < 0 ? 'red' : 'black';
+
+            return `
+                <div style="position: relative; display: flex; justify-content: space-between; gap: 20px; text-align: center;">
+                    <div>
+                        <span style="font-size: 12px; color: #666;">Target</span><br>
+                        <span style="font-weight: bold; font-size: 14px;">${target.toFixed(0)}</span><br>
+                        <span style="font-size: 12px; color: #666;">Result</span><br>
+                        <span style="font-weight: bold; font-size: 14px; color: ${actual < 0 ? 'red' : 'black'};">${actual.toFixed(0)}</span>
+                    </div>
+                    <div>
+                        <br>
+                        <span style="font-size: 12px; color: #666;">Gap</span><br>
+                        <span style="font-weight: bold; font-size: 14px; color: ${diffColor};">${difference.toFixed(0)}%</span>
+                    </div>
+                </div>
+            `;
+        }
+    },
     series: [{
             type: 'area',
             name: 'Target',
-            data: <?= json_encode(array_map('floatval', explode(',', $target))) ?>,
+            data: <?= json_encode(array_map('floatval', explode(',', $target))) ?>, // Ensure numeric format
             color: '#7A92E7',
             fillOpacity: 0.3,
             lineWidth: 0,
@@ -64,76 +96,13 @@ Highcharts.chart('container', {
         {
             type: 'line',
             name: 'Actual',
-            data: <?= json_encode($actualWithDifference) ?>,
+            data: <?= json_encode($actualWithDifference) ?>, // Pass data with Difference
             color: '#19338D',
             lineWidth: 3,
             marker: {
                 radius: 2
-            },
-            tooltip: {
-                pointFormatter: function() {
-                    let diffColor = this.point.difference < 0 ? 'red' : 'black';
-                    return `
-                        <span style="color:${this.color}">\u25CF</span> ${this.series.name}: <b>${this.y}</b><br>
-                        <span style="color:${diffColor}">\u25CF</span> Difference: <b style="color:${diffColor}">${this.point.difference}</b>
-                    `;
-                }
             }
         }
-    ],
-    tooltip: {
-        shared: true,
-        useHTML: true,
-        headerFormat: '<b>{point.key}</b><br>',
-        formatter: function() {
-            let result = 0,
-                target = 0,
-                difference = 0;
-
-            this.points.forEach(point => {
-                if (point.series.name === 'Actual') {
-                    result = parseFloat(point.y);
-                } else if (point.series.name === 'Target') {
-                    target = parseFloat(point.y);
-                }
-            });
-
-            // คำนวณ Gap เป็น %
-            if (target !== 0) {
-                difference = ((target - result) / target) * 100;
-            }
-
-            // เช็คถ้าติดลบให้เป็นสีแดง
-            let diffColor = difference < 0 ? 'red' : 'black';
-
-            return `
-            <div style="display: flex; justify-content: center; align-items: center; gap: 20px; text-align: center;">
-                <div>
-                    <span style="font-size: 12px; color: #666;">Target</span><br>
-                    <span style="font-weight: bold; font-size: 14px;">
-                        ${target.toFixed(2)}
-                    </span>
-                    <br><br>
-                    <span style="font-size: 12px; color: #666;">Result</span><br>
-                    <span style="font-weight: bold; font-size: 14px; color: ${result < 0 ? 'red' : 'black'};">
-                        ${result.toFixed(2)}
-                    </span>
-                </div>
-                <div>
-                    <span style="font-size: 12px; color: #666;">Gap (%)</span><br>
-                    <span style="font-weight: bold; font-size: 14px; color: ${diffColor};">
-                        ${difference.toFixed(2)}%
-                    </span>
-                </div>
-            </div>
-            <div style="position: absolute; left: 50%; top: -20px; transform: translateX(-50%); width: 0; height: 0; 
-                border-left: 20px solid transparent; 
-                border-right: 20px solid transparent; 
-                border-bottom: 30px solid #fff;">
-            </div>
-        `;
-        }
-    }
-
+    ]
 });
 </script>

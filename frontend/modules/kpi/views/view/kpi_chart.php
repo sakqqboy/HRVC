@@ -48,6 +48,31 @@ Highcharts.chart('container', {
             color: '#333333'
         }
     },
+    tooltip: {
+        useHTML: true,
+        formatter: function() {
+            let actual = this.series.chart.series[0].data[this.point.index]?.y || 0;
+            let target = this.series.chart.series[1].data[this.point.index]?.y || 0;
+            let difference = target !== 0 ? ((target - actual) / target) * 100 : 0;
+            let diffColor = difference < 0 ? 'red' : 'black';
+
+            return `
+            <div style="position: relative; display: flex; justify-content: space-between; gap: 20px; text-align: center;">
+                <div>
+                    <span style="font-size: 12px; color: #666;">Target</span><br>
+                    <span style="font-weight: bold; font-size: 14px;">${target.toFixed(0)}</span><br>
+                    <span style="font-size: 12px; color: #666;">Result</span><br>
+                    <span style="font-weight: bold; font-size: 14px; color: ${actual < 0 ? 'red' : 'black'};">${actual.toFixed(0)}</span>
+                </div>
+                <div>
+                    <br>
+                    <span style="font-size: 12px; color: #666;">Gap</span><br>
+                    <span style="font-weight: bold; font-size: 14px; color: ${diffColor};">${difference.toFixed(0)}%</span>
+                </div>
+            </div>
+        `;
+        }
+    },
     series: [{
             type: 'line',
             name: 'Actual',
@@ -62,13 +87,6 @@ Highcharts.chart('container', {
             marker: {
                 radius: 2
             },
-            tooltip: {
-                pointFormatter: function() {
-                    let diffColor = this.point.options.difference < 0 ? 'red' : 'black';
-                    return `<span style="color:${this.color}">\u25CF</span> ${this.series.name}: <b>${this.y}</b>
-                      <span style="color:${diffColor}">\u25CF</span> Difference: <b style="color:${diffColor}">${this.point.options.difference}</b>`;
-                }
-            }
         },
         {
             type: 'area',
