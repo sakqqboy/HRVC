@@ -5,7 +5,7 @@ use yii\bootstrap5\ActiveForm;
 
 $this->title = 'KGI Grid View';
 ?>
-<div class="col-12">
+<div class="contrainer-body">
     <div class="col-12">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group23177.svg"
             class="home-icon mr-5" style="margin-top: -3px;">

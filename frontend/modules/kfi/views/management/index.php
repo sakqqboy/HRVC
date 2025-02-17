@@ -5,7 +5,7 @@ use yii\bootstrap5\ActiveForm;
 
 $this->title = 'KFI';
 ?>
-<div class="col-12">
+<div class="contrainer-body">
     <div class="col-12">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
             style="margin-top: -3px;">
@@ -32,12 +32,13 @@ $this->title = 'KFI';
                             <?php
                             if ($role >= 3) {
                             ?>
-                            <button type="button" class="btn-createnew pl-7 pr-7 pr-9 font-size-12"
-                                data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
+                            <a type="button" class="btn-createnew pl-7 pr-7 pr-9 font-size-12"
+                                href="<?= Yii::$app->homeUrl ?>kfi/management/create-kfi/"
+                                style="text-decoration: none;">
                                 <?= Yii::t('app', 'Create New') ?>
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="History"
+                                <img src=" <?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="History"
                                     class="pim-icon ml-3" style="margin-top: -1px;">
-                            </button>
+                            </a>
                             <?php
                             }
                             ?>

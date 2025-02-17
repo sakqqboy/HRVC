@@ -6,7 +6,7 @@ use yii\bootstrap5\ActiveForm;
 
 $this->title = "KGI";
 ?>
-<div class="col-12">
+<div class="contrainer-body">
     <div class="col-12">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
             style="margin-top: -3px;">
@@ -49,13 +49,12 @@ $this->title = "KGI";
                             <?php
                             if ($role >= 3) {
                             ?>
-                            <button type="button" class="btn-createnew font-size-11" data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop5" style="position:absolute;" onclick="
-                                javascript:changeType()">
+                            <a href="<?= Yii::$app->homeUrl ?>kgi/management/create-kgi"
+                                class="btn-createnew font-size-11" style="position:absolute;text-decoration:none;">
                                 <?= Yii::t('app', 'Create New') ?>
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="History"
                                     class="pim-icon ml-3" style="margin-top: -1px;">
-                            </button>
+                            </a>
                             <?php
                             }
                             ?>

@@ -954,7 +954,7 @@ h6.dashboard-kpi-title {
     top: 10%;
     left: 23%;
     transform: translateY(-50%);
-    z-index: 5;
+    z-index: 3;
     display: flex;
     width: 114px;
     height: 25px;
