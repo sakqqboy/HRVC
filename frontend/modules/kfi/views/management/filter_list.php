@@ -4,9 +4,21 @@
             <option value=""><?= Yii::t('app', 'Company') ?></option>
             <?php
             if (isset($companies) && count($companies) > 0) {
-                foreach ($companies as $company) : ?>
-                    <option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
-            <?php endforeach;
+                foreach ($companies as $company) :
+                    if ($role <= 4) {
+                        if ($companyId == $company["companyId"]) {
+            ?>
+                            <option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
+                        <?php
+                        }
+                    } else { ?>
+                        <option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
+                    <?php
+                    }
+                    ?>
+
+            <?php
+                endforeach;
             }
             ?>
         </select>

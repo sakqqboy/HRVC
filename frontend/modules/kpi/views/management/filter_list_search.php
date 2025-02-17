@@ -14,14 +14,22 @@ use frontend\models\hrvc\Company;
                 <option value="<?= $companyId ?>"><?= Company::companyName($companyId) ?></option>
             <?php
             }
+            if ($role > 4) {
             ?>
-            <option value=""><?= Yii::t('app', 'Company') ?></option>
+                <option value=""><?= Yii::t('app', 'Company') ?></option>
+                <?php
+                if (isset($companies) && count($companies) > 0) {
+                    foreach ($companies as $company) :
+
+                ?>
+                        <option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
+                        <?php
+
+                        ?>
+
             <?php
-            if (isset($companies) && count($companies) > 0) {
-                foreach ($companies as $company) : ?>
-                    <option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
-            <?php
-                endforeach;
+                    endforeach;
+                }
             }
             ?>
         </select>

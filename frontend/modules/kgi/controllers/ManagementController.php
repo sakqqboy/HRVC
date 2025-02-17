@@ -98,6 +98,8 @@ class ManagementController extends Controller
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
 		$url = 'kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId;
+		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
+		$companyId = $employee["companyId"];
 		//$branchId = Branch::userBranchId(Yii::$app->user->id);
 		//throw new exception($role);
 		return $this->render('index', [
@@ -107,7 +109,9 @@ class ManagementController extends Controller
 			"kgis" => $kgis,
 			"isManager" => $isManager,
 			"role" => $role,
-			"userId" => Yii::$app->user->id
+			"userId" => Yii::$app->user->id,
+			"userId" => Yii::$app->user->id,
+			"companyId" => $companyId
 		]);
 	}
 	public function actionGrid()
@@ -160,6 +164,8 @@ class ManagementController extends Controller
 		curl_close($api);
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
+		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
+		$companyId = $employee["companyId"];
 
 		return $this->render('kgi_grid', [
 			"units" => $units,
@@ -167,7 +173,9 @@ class ManagementController extends Controller
 			"months" => $months,
 			"kgis" => $kgis,
 			"isManager" => $isManager,
-			"role" => $role
+			"role" => $role,
+			"userId" => Yii::$app->user->id,
+			"companyId" => $companyId
 		]);
 	}
 	public function actionCreateKgi()

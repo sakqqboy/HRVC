@@ -110,6 +110,8 @@ class ManagementController extends Controller
 		$part = Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId;
 		//throw new Exception($part);
 		curl_close($api);
+		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
+		$companyId = $employee["companyId"];
 		//throw new Exception(print_r($kfis, true));
 
 		// $units = ["1" => "Monthly", "2" => "Weekly", "3" => "QuaterLy", "4" => "Daily"];
@@ -121,8 +123,9 @@ class ManagementController extends Controller
 			"months" => $months,
 			"kfis" => $kfis,
 			"isManager" => $isManager,
-			"role" => $role
-
+			"role" => $role,
+			"userId" => Yii::$app->user->id,
+			"companyId" => $companyId
 		]);
 	}
 	public function actionGrid()
@@ -179,6 +182,8 @@ class ManagementController extends Controller
 		// $units = ["1" => "Monthly", "2" => "Weekly", "3" => "QuaterLy", "4" => "Daily"];
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
+		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
+		$companyId = $employee["companyId"];
 
 		// throw new Exception(print_r($kfis, true));
 		return $this->render('index_grid', [
@@ -187,8 +192,9 @@ class ManagementController extends Controller
 			"months" => $months,
 			"kfis" => $kfis,
 			"isManager" => $isManager,
-			"role" => $role
-
+			"role" => $role,
+			"userId" => Yii::$app->user->id,
+			"companyId" => $companyId
 		]);
 	}
 
@@ -487,7 +493,7 @@ class ManagementController extends Controller
 		}
 		return json_encode($res);
 	}
-	public function 	saveKfiBranch($branch, $kfiId)
+	public function saveKfiBranch($branch, $kfiId)
 	{
 		$kfiBranch = KfiBranch::find()->where(["kfiId" => $kfiId, "status" => 1])->all();
 		if (isset($kfiBranch) && count($kfiBranch) > 0) {
