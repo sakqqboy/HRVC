@@ -377,6 +377,7 @@ $this->title = 'KPI';
         "isManager" => $isManager
     ]) ?>
     <?php ActiveForm::end(); ?>
-    <?= $this->render('modal_delete') ?>
     <?= $this->render('modal_view') ?>
     <?= $this->render('modal_issue') ?>
+</div>
+<?= $this->render('modal_delete') ?>

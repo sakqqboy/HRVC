@@ -400,10 +400,10 @@ $this->title = 'KPI';
         "isManager" => $isManager
     ]) ?>
     <?php ActiveForm::end(); ?>
-    <?= $this->render('modal_delete') ?>
     <?= $this->render('modal_view') ?>
     <?= $this->render('modal_issue') ?>
     <?= $this->render('modal_team_history') ?>
     <?= $this->render('modal_employee_history') ?>
     <?= $this->render('modal_kgi') ?>
 </div>
+<?= $this->render('modal_delete') ?>
