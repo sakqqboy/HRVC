@@ -50,7 +50,9 @@ $this->title = 'Assign KFI';
             <div class="col-12 bg-white pl-8 pr-8 mt-8 mb-10">
                 <div class="row">
                     <div class="col-5 font-size-12 pt-5 pb-3"><b><?= Yii::t('app', 'Assign Individuals') ?></b></div>
-                    <div class="col-4 font-size-12 pt-5 pb-3"><b><?= Yii::t('app', 'Title') ?></b></div>
+                    <div class="col-4 font-size-12 pt-5 pb-3"><b>
+                            <!-- <?= Yii::t('app', 'Title') ?> -->
+                        </b></div>
                 </div>
             </div>
             <div class="col-12 pr-0 pl-0" id="team-employee-target">
