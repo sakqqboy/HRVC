@@ -5,7 +5,7 @@ use common\models\ModelMaster;
 $this->title = 'Company KPI History';
 ?>
 
-<div class="col-12">
+<div class="contrainer-body">
     <div class="col-12">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
             style="margin-top: -3px;">

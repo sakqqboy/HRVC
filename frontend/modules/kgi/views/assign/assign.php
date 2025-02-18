@@ -7,17 +7,17 @@ use yii\helpers\ArrayHelper;
 
 $this->title = 'KGI Grid View';
 ?>
-<div class="col-12" onload="showAlertBox()">
+<div class="contrainer-body" onload="showAlertBox()">
     <?php if (Yii::$app->session->hasFlash('alert-kgi')) : ?>
 
-        <script>
-            window.onload = function() {
-                $('.alert-box-info').slideDown(500);
-                setTimeout(function() {
-                    $('.alert-box-info').fadeOut(300);
-                }, 3000);
-            }
-        </script>
+    <script>
+    window.onload = function() {
+        $('.alert-box-info').slideDown(500);
+        setTimeout(function() {
+            $('.alert-box-info').fadeOut(300);
+        }, 3000);
+    }
+    </script>
 
     <?php endif; ?>
     <div class="alert-box-info text-center">
@@ -69,7 +69,8 @@ $this->title = 'KGI Grid View';
                     <div class="col-12 bg-white pl-8 pr-8 mt-8 mb-10">
                         <div class="row">
                             <div class="col-6 font-size-12 pt-5 pb-3"><b><?= Yii::t('app', 'Assign Team') ?></b></div>
-                            <div class="col-6 text-end  font-size-12 pt-5 pb-3"><b><?= Yii::t('app', 'ALLOCATE TARGET') ?></b></div>
+                            <div class="col-6 text-end  font-size-12 pt-5 pb-3">
+                                <b><?= Yii::t('app', 'ALLOCATE TARGET') ?></b></div>
                         </div>
                     </div>
                     <?php
@@ -95,51 +96,51 @@ $this->title = 'KGI Grid View';
                                 $disableTeam = "";
                             }
                     ?>
-                            <div class="col-12 bg-white mb-10 pb-0 pt-0 pr-8">
-                                <div class="row">
-                                    <div class="col-1 text-end pr-0 pl-0 pt-12">
-                                        <input type="checkbox" name="team[<?= $team['teamId'] ?>]"
-                                            id="team-<?= $team['teamId'] ?>" <?= $checked ?> class="from-check"
-                                            value="<?= $team['teamId'] ?>"
-                                            onclick="javasript:assignKgiToEmployeeInTeam(<?= $team['teamId'] ?>,<?= $kgiId ?>)"
-                                            style="display: <?= $role == 3 ? 'none' : '' ?>;">
-                                        <!--kgi_employee-->
-                                        <?php
+                    <div class="col-12 bg-white mb-10 pb-0 pt-0 pr-8">
+                        <div class="row">
+                            <div class="col-1 text-end pr-0 pl-0 pt-12">
+                                <input type="checkbox" name="team[<?= $team['teamId'] ?>]"
+                                    id="team-<?= $team['teamId'] ?>" <?= $checked ?> class="from-check"
+                                    value="<?= $team['teamId'] ?>"
+                                    onclick="javasript:assignKgiToEmployeeInTeam(<?= $team['teamId'] ?>,<?= $kgiId ?>)"
+                                    style="display: <?= $role == 3 ? 'none' : '' ?>;">
+                                <!--kgi_employee-->
+                                <?php
                                         if ($role == 3 && $checked == "checked") { ?>
-                                            <i class="fa fa-check-square text-primary" aria-hidden="true"></i>
-                                        <?php
+                                <i class="fa fa-check-square text-primary" aria-hidden="true"></i>
+                                <?php
                                         }
                                         ?>
-                                    </div>
-                                    <div class="col-2 pr-5 pl-0 text-end pt-3 pb-3">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.png" style="width:40px;">
-                                    </div>
-                                    <div class="col-5 pl-0 pt-3 ">
-                                        <span class="font-size-12"><b><?= $team["teamName"] ?></b></span>
-                                        <div class="col-12 font-size-10" style="margin-top: -5px;">
-                                            <?= $team["departmentName"] ?></div>
-                                    </div>
-                                    <div class="col-4 pt-9">
-                                        <?php
+                            </div>
+                            <div class="col-2 pr-5 pl-0 text-end pt-3 pb-3">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.png" style="width:40px;">
+                            </div>
+                            <div class="col-5 pl-0 pt-3 ">
+                                <span class="font-size-12"><b><?= $team["teamName"] ?></b></span>
+                                <div class="col-12 font-size-10" style="margin-top: -5px;">
+                                    <?= $team["departmentName"] ?></div>
+                            </div>
+                            <div class="col-4 pt-9">
+                                <?php
                                         if ($disableTeam == "") {
                                         ?>
-                                            <input type="text" class="assign-target text-end font-size-12"
-                                                value="<?= $target > 0 ? number_format($target, 2) : '' ?>"
-                                                name="teamTarget[<?= $team['teamId'] ?>]" placeholder="0.00">
-                                        <?php
+                                <input type="text" class="assign-target text-end font-size-12"
+                                    value="<?= $target > 0 ? number_format($target, 2) : '' ?>"
+                                    name="teamTarget[<?= $team['teamId'] ?>]" placeholder="0.00">
+                                <?php
                                         } else {
                                         ?>
-                                            <input type="text" placeholder="0.00" class="assign-target text-end font-size-12"
-                                                value="<?= $target > 0 ? number_format($target, 2) : '' ?>"
-                                                name="teamTarget[<?= $team['teamId'] ?>]" <?= $disableTeam ?>>
-                                            <input type="hidden" value="<?= $target > 0 ? number_format($target, 2) : '' ?>"
-                                                name="teamTarget[<?= $team['teamId'] ?>]">
-                                        <?php
+                                <input type="text" placeholder="0.00" class="assign-target text-end font-size-12"
+                                    value="<?= $target > 0 ? number_format($target, 2) : '' ?>"
+                                    name="teamTarget[<?= $team['teamId'] ?>]" <?= $disableTeam ?>>
+                                <input type="hidden" value="<?= $target > 0 ? number_format($target, 2) : '' ?>"
+                                    name="teamTarget[<?= $team['teamId'] ?>]">
+                                <?php
                                         }
                                         ?>
-                                    </div>
-                                </div>
                             </div>
+                        </div>
+                    </div>
                     <?php
                         endforeach;
                     }
@@ -175,7 +176,8 @@ $this->title = 'KGI Grid View';
             <div class="col-7">
                 <div class="row">
                     <div class="col-3 font-size-12 border-right pt-5 pl-5 pr-0 text-center">
-                        <?= Yii::t('app', 'Average') ?>/<?= Yii::t('app', 'Team') ?><span class="font-size-12 ml-5"><b><?= number_format($teamAverage) ?></b></span>
+                        <?= Yii::t('app', 'Average') ?>/<?= Yii::t('app', 'Team') ?><span
+                            class="font-size-12 ml-5"><b><?= number_format($teamAverage) ?></b></span>
                     </div>
                     <div class="col-4 font-size-12 border-right  pt-5 pl-0 pr-0 text-center">
                         <?= Yii::t('app', 'Average') ?>/<?= Yii::t('app', 'Individual') ?> <span
@@ -186,20 +188,21 @@ $this->title = 'KGI Grid View';
                             <div class="col-8">
                                 <span
                                     class="font-size-12"><b><?= number_format($kgiTeamEmployee["base"]["totalTargetAll"]) ?></b></span>
-                                <div class="col-12 font-size-10" style="margin-top: -5px;"><?= Yii::t('app', 'Assigned') ?></div>
+                                <div class="col-12 font-size-10" style="margin-top: -5px;">
+                                    <?= Yii::t('app', 'Assigned') ?></div>
                             </div>
                             <div class="col-4  pr-0 pl-0 text-center mt-5 font-size-11">
                                 <?php
                                 if ($isMoreSet == "1") {
                                 ?>
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/arrow-up.png"
-                                        style="width:10px;margin-top:-3px;" class="mr-2">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/arrow-up.png"
+                                    style="width:10px;margin-top:-3px;" class="mr-2">
                                 <?php
                                 }
                                 if ($isMoreSet == "0") {
                                 ?>
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/arrow-down.png"
-                                        style="width:10px;margin-top:-3px;" class="mr-2">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/arrow-down.png"
+                                    style="width:10px;margin-top:-3px;" class="mr-2">
                                 <?php
                                 }
                                 ?>
@@ -211,15 +214,18 @@ $this->title = 'KGI Grid View';
                     <div class="col-2 text-center pt-0">
                         <div class="row">
                             <span class="font-size-12"><b><?= number_format($kgiDetail["targetAmount"]) ?></b></span>
-                            <div class="col-12 font-size-10" style="margin-top: -5px;"><?= Yii::t('app', 'Master & Target') ?></div>
+                            <div class="col-12 font-size-10" style="margin-top: -5px;">
+                                <?= Yii::t('app', 'Master & Target') ?></div>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 ligth-gray-box mb-10 mt-7">
                     <div class="col-12 bg-white pl-8 pr-8 mt-8 mb-10">
                         <div class="row">
-                            <div class="col-5 font-size-12 pt-5 pb-3"><b><?= Yii::t('app', 'Assign Individuals') ?></b></div>
-                            <div class="col-3 font-size-12 pt-5 pb-3 text-center"><?= Yii::t('app', 'ALLOCATE TARGET') ?></div>
+                            <div class="col-5 font-size-12 pt-5 pb-3"><b><?= Yii::t('app', 'Assign Individuals') ?></b>
+                            </div>
+                            <div class="col-3 font-size-12 pt-5 pb-3 text-center">
+                                <?= Yii::t('app', 'ALLOCATE TARGET') ?></div>
                             <div class="col-4 font-size-12 pt-5 pb-3 text-center"><?= Yii::t('app', 'REMARKS') ?></div>
                         </div>
                     </div>
@@ -243,12 +249,12 @@ $this->title = 'KGI Grid View';
 //if ($save == 1) {
 ?>
 <script>
-    // window.onload = function() {
-    // 	$('.alert-box-info').slideDown(500);
-    // 	setTimeout(function() {
-    // 		$('.alert-box-info').fadeOut(300);
-    // 	}, 3000);
-    // }
+// window.onload = function() {
+// 	$('.alert-box-info').slideDown(500);
+// 	setTimeout(function() {
+// 		$('.alert-box-info').fadeOut(300);
+// 	}, 3000);
+// }
 </script>
 <?php
 //}
