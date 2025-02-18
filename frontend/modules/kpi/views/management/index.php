@@ -49,12 +49,12 @@ $this->title = 'KPI';
                             <?php
                             if ($role >= 3) {
                             ?>
-                            <button type="button" class="btn-createnew font-size-11" data-bs-toggle="modal"
+                            <a type="button" class="btn-createnew font-size-11" data-bs-toggle="modal"
                                 data-bs-target="#create-kpi-modal" style="position:absolute;">
                                 <?= Yii::t('app', 'Create New') ?>
                                 <img src=" <?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="History"
                                     class="pim-icon ml-3" style="margin-top: -1px;">
-                            </button>
+                            </a>
                             <?php
                             }
                             ?>
