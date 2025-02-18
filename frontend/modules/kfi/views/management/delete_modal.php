@@ -11,7 +11,7 @@
             </div>
             <div class="modal-body text-start" style="font-size: 14px; color: #6c757d; padding-top: 10px;">
                 <?= Yii::t('app', 'Deleting this KFI will remove all assigned employee teams and their history. You can recover this
-                data within 7 working days. To restore it, please contact the system administrator.') ?>
+                data within 7 working days. To restore it, please contact the system administrator') ?>.
             </div>
             <div class="modal-footer justify-content-end" style="border-top: none; padding-top: 20px;">
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
