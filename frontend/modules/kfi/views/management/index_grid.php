@@ -448,7 +448,6 @@ $this->title = Yii::t('app', 'KFI Grid View');
         ]) ?>
 
         <?php ActiveForm::end(); ?>
-        <?= $this->render('delete_modal') ?>
         <?= $this->render('history_modal', [
             "units" => $units,
         ]) ?>
@@ -459,3 +458,4 @@ $this->title = Yii::t('app', 'KFI Grid View');
         <?= $this->render('modal_kgi') ?>
     </div>
 </div>
+<?= $this->render('delete_modal') ?>

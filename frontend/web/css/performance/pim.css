@@ -2373,6 +2373,11 @@ input:checked+.slider:before {
 		height: calc(100% / 0.65);
 	} */
 
+	.modal,
+	.modal-backdrop {
+		transform: scale(1) !important;
+	}
+
 	.row-box {
 		transform: scale(0.65);
 		transform-origin: top left;

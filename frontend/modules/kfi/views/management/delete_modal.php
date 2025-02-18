@@ -33,3 +33,38 @@
         </div>
     </div>
 </div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    let myModalEl = document.getElementById('staticBackdrop4');
+
+    myModalEl.addEventListener('show.bs.modal', function() {
+        let modal = document.querySelector(".modal");
+        let backdrop = document.querySelector(".modal-backdrop");
+
+        // ป้องกัน modal จากการโดน scale
+        modal.style.transform = "scale(1)";
+        modal.style.position = "fixed";
+        modal.style.top = "50%";
+        modal.style.left = "50%";
+        modal.style.transform = "translate(-50%, -50%)";
+
+        // ป้องกัน backdrop จากการโดน scale
+        if (backdrop) {
+            backdrop.style.transform = "scale(1)";
+            backdrop.style.position = "fixed";
+            backdrop.style.top = "0";
+            backdrop.style.left = "0";
+            backdrop.style.width = "100%";
+            backdrop.style.height = "100%";
+        }
+
+        // ปรับ z-index ให้ modal อยู่บนสุด
+        modal.style.zIndex = "1100";
+        if (backdrop) {
+            backdrop.style.zIndex = "1000";
+        }
+    });
+});
+</script>
