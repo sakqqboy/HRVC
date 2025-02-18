@@ -64,8 +64,6 @@
         /* height: calc(100% / 0.65); */
         /* overflow: hidden; */
     }
-
-
 }
 </style>
 <div class="modal fade" id="update-history-popup" tabindex="-1" aria-labelledby="updateHistoryModalLabel"

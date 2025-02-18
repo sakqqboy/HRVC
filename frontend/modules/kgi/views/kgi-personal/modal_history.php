@@ -4,7 +4,7 @@
         transform: scale(0.95);
         transform-origin: top left;
         width: calc(100% / 0.95);
-        height: calc(100% / 0.95);
+        /* height: calc(100% / 0.95); */
         /* overflow: hidden; */
     }
 
@@ -12,7 +12,7 @@
         transform: scale(0.95);
         transform-origin: top left;
         width: calc(100% / 0.95);
-        height: calc(100% / 0.95);
+        /* height: calc(100% / 0.95); */
         right: 390px;
     }
 }
@@ -23,7 +23,7 @@
         transform: scale(0.85);
         transform-origin: top left;
         width: calc(100% / 0.85);
-        height: calc(100% / 0.85);
+        /* height: calc(100% / 0.85); */
         /* overflow: hidden; */
     }
 
@@ -31,7 +31,7 @@
         transform: scale(0.85);
         transform-origin: top left;
         width: calc(100% / 0.85);
-        height: calc(100% / 0.85);
+        /* height: calc(100% / 0.85); */
         /* overflow: hidden; */
         left: -300px;
     }
@@ -42,7 +42,7 @@
         transform: scale(0.75);
         transform-origin: top left;
         width: calc(100% / 0.75);
-        height: calc(100% / 0.75);
+        /* height: calc(100% / 0.75); */
         /* overflow: hidden; */
     }
 
@@ -50,7 +50,7 @@
         transform: scale(0.75);
         transform-origin: top left;
         width: calc(100% / 0.75);
-        height: calc(100% / 0.75);
+        /* height: calc(100% / 0.75); */
         /* overflow: hidden; */
         left: -250px;
     }
@@ -63,14 +63,6 @@
         width: calc(100% / 0.65);
         /* height: calc(100% / 0.65); */
         /* overflow: hidden; */
-    }
-
-    .modal-dialog {
-        transform: scale(0.65);
-        transform-origin: top left;
-        width: calc(100% / 0.65);
-        /* height: calc(100% / 0.65); */
-        left: -200px;
     }
 }
 </style>
