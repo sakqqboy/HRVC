@@ -280,6 +280,7 @@ $this->title = 'KFI';
             "units" => $units,
         ]) ?>
         <?= $this->render('issue_modal') ?>
-        <?= $this->render('delete_modal') ?>
         <?= $this->render('modal_kgi') ?>
     </div>
+</div>
+<?= $this->render('delete_modal') ?>

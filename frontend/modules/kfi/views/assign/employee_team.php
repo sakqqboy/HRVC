@@ -5,14 +5,10 @@ if (isset($kfiTeamEmployee) && count($kfiTeamEmployee) > 0) {
 ?>
 <div class="col-12 bg-header-assign pb-0 pt-0 pr-8 mt-10" id="team-employee-<?= $teamId ?>">
     <div class="row">
-        <div class="col-3">
-            <div class="pl-10">
-                <input type="checkbox" class="check-all-<?= $teamId ?>" onclick="checkAllEmployees(<?= $teamId ?>)"
-                    style="top: 2px;">
-                <label for="check-all-<?= $teamId ?>" class="font-size-12">Check All</label>
-            </div>
-        </div>
-        <div class="col-4 font-size-12 pt-5 pb-3">
+        <div class="col-7 font-size-12 pt-5 pb-3">
+            <input type="checkbox" class="check-all-<?= $teamId ?> ml-10" onclick="checkAllEmployees(<?= $teamId ?>)"
+                style="top: 2px;">
+            <!-- <label for="check-all-<?= $teamId ?>" class="font-size-12">Check All</label> -->
             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.png" style="width:15px;margin-top:-3px;"
                 class="ml-5 mr-5">
             <b><?= $kfiEmployee["team"]["teamName"] ?>, </b><span class="col-12 font-size-10">
