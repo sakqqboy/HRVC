@@ -12,17 +12,63 @@
     width: 20px;
     height: 20px;
 }
-.multi-select{
+
+.multi-select {
     font-size: 14px;
     border-bottom: lightgray solid thin;
     background-color: aliceblue;
 }
-.multi-select-head{
+
+.multi-select-head {
     font-size: 13px;
     font-weight: 500;
     background-color: aliceblue;
 }
-.multi-box{
+
+.multi-box {
     height: 35px;
-  
+
+}
+
+
+.custom-checkbox {
+    display: none;
+    /* ซ่อน checkbox */
+}
+
+.custom-checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 14px;
+    border: 0.5px solid #2580D3;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #fff;
+    margin-left: 10px;
+}
+
+.custom-checkbox-label::before {
+    font-weight: bold;
+    color: #2580D3;
+}
+
+.custom-checkbox:checked+.custom-checkbox-label {
+    background-color: #2580D3;
+}
+
+.custom-checkbox:checked+.custom-checkbox-label::before {
+    content: "✔";
+    color: white;
+    font-size: 10px;
+}
+
+/* เมื่อสถานะเป็นลบ (บางรายการไม่ได้เลือก) */
+.custom-checkbox-label.minus::before {
+    content: "━";
+    font-size: 5px;
+    font-weight: bold;
+    /* padding-top: 4px; */
+    color: #2580D3;
 }

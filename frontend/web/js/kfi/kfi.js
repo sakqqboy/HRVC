@@ -2023,6 +2023,69 @@ function viewTabKfi(kfiHistoryId, tabId, role = null) {
     }
 }
 
+function allEmployeesCheck(teamId) {
+    var checkboxes = document.querySelectorAll('#employee-in-team-' + teamId + ' input[type="checkbox"]');
+    var checkAllCheckbox = document.querySelector('.check-all-' + teamId);
+    var checkAllLabel = document.querySelector('.check-all-' + teamId + ' + .custom-checkbox-label');
+
+    var allChecked = true;
+    var someChecked = false;
+    // alert(0);
+    // ตรวจสอบสถานะของ checkbox ทั้งหมดในทีม
+    checkboxes.forEach(function (checkbox) {
+        if (!checkbox.checked) {
+            allChecked = false; // ถ้า checkbox ใดไม่ถูกเลือก
+            // alert(0);
+        } else {
+            someChecked = true; // ถ้ามีบาง checkbox ที่ถูกเลือก
+            // alert(1);
+        }
+    });
+
+    // ถ้าทุก checkbox ถูกเลือก
+    if (allChecked) {
+        checkAllCheckbox.checked = true;
+        checkAllLabel.classList.remove('minus');
+        // checkAllLabel.style.top = "0px"; // เอา margin-top ออกถ้าถูกเลือกทั้งหมด
+    } else if (someChecked) {
+        checkAllCheckbox.checked = false;
+        checkAllLabel.classList.add('minus');
+        // checkAllLabel.style.top = "0px"; // เอา margin-top ออกถ้าบางตัวถูกเลือก  
+        // alert(0);
+    } else {
+        checkAllCheckbox.checked = false;
+        checkAllLabel.classList.remove('minus');
+        checkAllLabel.style.top = "3px"; // เพิ่ม margin-top ถ้าไม่มีการเลือก
+        // alert(0);
+    }
+}
+
+// ฟังก์ชันที่ทำงานเมื่อคลิกที่ checkbox "Check All"
+function checkAllEmployees(teamId) {
+    var checkboxes = document.querySelectorAll('#employee-in-team-' + teamId + ' input[type="checkbox"]');
+    var checkAllCheckbox = document.querySelector('.check-all-' + teamId);
+    var checkAllLabel = document.querySelector('.check-all-' + teamId + ' + .custom-checkbox-label');
+
+    // ถ้าเลือก "Check All"
+    if (checkAllCheckbox.checked) {
+        checkboxes.forEach(function (checkbox) {
+            checkbox.checked = true; // เลือกทั้งหมด
+        });
+        checkAllLabel.classList.remove('minus'); // ลบเครื่องหมายลบ
+        checkAllLabel.style.top = "0px"; // เอา margin-top ออกถ้าบางตัวถูกเลือก
+    } else {
+        checkboxes.forEach(function (checkbox) {
+            checkbox.checked = false; // ยกเลิกการเลือกทั้งหมด
+        });
+        checkAllLabel.classList.remove('minus'); // ลบเครื่องหมายลบ
+        checkAllLabel.style.top = "0px"; // เอา margin-top ออกถ้าบางตัวถูกเลือก
+    }
+
+    // เรียกใช้ allEmployeesCheck เพื่ออัปเดตสถานะของ Check All
+    allEmployeesCheck(teamId);
+}
+
+
 function showEditRelateKgi(type, kfiId) {
     if (type == 1) {
         $("#editRelateKgi").hide();

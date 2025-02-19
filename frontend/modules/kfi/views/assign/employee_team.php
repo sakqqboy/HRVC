@@ -4,47 +4,7 @@ if (isset($kfiTeamEmployee) && count($kfiTeamEmployee) > 0) {
         if (isset($kfiEmployee["team"])) {
 ?>
 <style>
-.custom-checkbox {
-    display: none;
-    /* ซ่อน checkbox */
-}
 
-.custom-checkbox-label {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 14px;
-    height: 14px;
-    border: 0.5px solid #2580D3;
-    border-radius: 4px;
-    cursor: pointer;
-    background-color: #fff;
-    margin-left: 10px;
-}
-
-.custom-checkbox-label::before {
-    font-weight: bold;
-    color: #2580D3;
-}
-
-.custom-checkbox:checked+.custom-checkbox-label {
-    background-color: #2580D3;
-}
-
-.custom-checkbox:checked+.custom-checkbox-label::before {
-    content: "✔";
-    color: white;
-    font-size: 10px;
-}
-
-/* เมื่อสถานะเป็นลบ (บางรายการไม่ได้เลือก) */
-.custom-checkbox-label.minus::before {
-    content: "━";
-    font-size: 5px;
-    font-weight: bold;
-    /* padding-top: 4px; */
-    color: #2580D3;
-}
 </style>
 <div class="col-12 bg-header-assign pb-0 pt-0 pr-8 mt-10" id="team-employee-<?= $teamId ?>">
     <div class="row">
@@ -112,68 +72,6 @@ if (isset($kfiTeamEmployee) && count($kfiTeamEmployee) > 0) {
 ?>
 
 <script>
-function allEmployeesCheck(teamId) {
-    var checkboxes = document.querySelectorAll('#employee-in-team-' + teamId + ' input[type="checkbox"]');
-    var checkAllCheckbox = document.querySelector('.check-all-' + teamId);
-    var checkAllLabel = document.querySelector('.check-all-' + teamId + ' + .custom-checkbox-label');
-
-    var allChecked = true;
-    var someChecked = false;
-    // alert(0);
-    // ตรวจสอบสถานะของ checkbox ทั้งหมดในทีม
-    checkboxes.forEach(function(checkbox) {
-        if (!checkbox.checked) {
-            allChecked = false; // ถ้า checkbox ใดไม่ถูกเลือก
-            // alert(0);
-        } else {
-            someChecked = true; // ถ้ามีบาง checkbox ที่ถูกเลือก
-            // alert(1);
-        }
-    });
-
-    // ถ้าทุก checkbox ถูกเลือก
-    if (allChecked) {
-        checkAllCheckbox.checked = true;
-        checkAllLabel.classList.remove('minus');
-        // checkAllLabel.style.top = "0px"; // เอา margin-top ออกถ้าถูกเลือกทั้งหมด
-    } else if (someChecked) {
-        checkAllCheckbox.checked = false;
-        checkAllLabel.classList.add('minus');
-        // checkAllLabel.style.top = "0px"; // เอา margin-top ออกถ้าบางตัวถูกเลือก  
-        // alert(0);
-    } else {
-        checkAllCheckbox.checked = false;
-        checkAllLabel.classList.remove('minus');
-        checkAllLabel.style.top = "3px"; // เพิ่ม margin-top ถ้าไม่มีการเลือก
-        // alert(0);
-    }
-}
-
-// ฟังก์ชันที่ทำงานเมื่อคลิกที่ checkbox "Check All"
-function checkAllEmployees(teamId) {
-    var checkboxes = document.querySelectorAll('#employee-in-team-' + teamId + ' input[type="checkbox"]');
-    var checkAllCheckbox = document.querySelector('.check-all-' + teamId);
-    var checkAllLabel = document.querySelector('.check-all-' + teamId + ' + .custom-checkbox-label');
-
-    // ถ้าเลือก "Check All"
-    if (checkAllCheckbox.checked) {
-        checkboxes.forEach(function(checkbox) {
-            checkbox.checked = true; // เลือกทั้งหมด
-        });
-        checkAllLabel.classList.remove('minus'); // ลบเครื่องหมายลบ
-        checkAllLabel.style.top = "0px"; // เอา margin-top ออกถ้าบางตัวถูกเลือก
-    } else {
-        checkboxes.forEach(function(checkbox) {
-            checkbox.checked = false; // ยกเลิกการเลือกทั้งหมด
-        });
-        checkAllLabel.classList.remove('minus'); // ลบเครื่องหมายลบ
-        checkAllLabel.style.top = "0px"; // เอา margin-top ออกถ้าบางตัวถูกเลือก
-    }
-
-    // เรียกใช้ allEmployeesCheck เพื่ออัปเดตสถานะของ Check All
-    allEmployeesCheck(teamId);
-}
-
 document.addEventListener("DOMContentLoaded", function() {
     var allTeamCheckboxes = document.querySelectorAll('[class^="check-all-"]');
 
