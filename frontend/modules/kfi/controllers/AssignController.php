@@ -41,6 +41,7 @@ class AssignController extends Controller
 		$role = UserRole::userRight();
 
 		$kfiId = $param["kfiId"];
+		//throw new Exception($kfiId);
 		$companyId = $param["companyId"];
 		$role = UserRole::userRight();
 		if ($role < 3) {
