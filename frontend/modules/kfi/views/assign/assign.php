@@ -29,7 +29,7 @@ $this->title = 'Assign KFI';
     <div class="alert mt-10 pim-body bg-white">
         <div class="row">
             <div class="font-size-12 pim-name pr-0 pl-5 text-start">
-                <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="mr-5 font-size-12"
+                <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="mr-10 font-size-12"
                     style="text-decoration: none;">
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back.svg">
                     <text class="pim-text-back">
@@ -39,8 +39,8 @@ $this->title = 'Assign KFI';
                 <span class="pim-name-title">
                     <?= $kfiDetail["kfiName"] ?>
                 </span>
-                <button class="btn-create font-size-12" style="text-decoration: none;" type="submit">
-                    <div class="ml-5 mr-5" style="gap: 5px;">
+                <button class="btn-create font-size-12 ml-10" style="text-decoration: none;" type="submit">
+                    <div class="ml-7 mr-7" style="gap: 5px;">
                         <img src="<?= Yii::$app->homeUrl ?>image/save-whiet.svg" style="width:15px;margin-top:-3px;">
                         <?= Yii::t('app', 'Save') ?>
                     </div>
