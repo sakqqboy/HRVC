@@ -16,6 +16,7 @@ if (isset($kfiTeamEmployee) && count($kfiTeamEmployee) > 0) {
     width: 14px;
     height: 14px;
     border: 0.5px solid #2580D3;
+    border-radius: 4px;
     cursor: pointer;
     background-color: #fff;
     margin-left: 10px;
