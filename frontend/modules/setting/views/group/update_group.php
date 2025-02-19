@@ -139,8 +139,10 @@ $this->title = 'Update Group';
                             <div class="form-group mb-30">
                                 <span class="text-danger">* </span> <label class="name-text-update" for="phone">
                                     Contact/Phone Number </label>
-                                <input class="form-control mt-12" name="phone" value="<?= $group['contact'] ?>"
-                                    placeholder="Write the phone number" required>
+                                <input type="text" class="form-control mt-12" name="phone"
+                                    value="<?= $group['contact'] ?>" placeholder="Write the phone number" required
+                                    pattern="[0-9+\-]+" title="กรุณากรอกเฉพาะตัวเลข, + และ -"
+                                    oninput="this.value = this.value.replace(/[^0-9+\-]/g, '');">
                             </div>
 
                             <div class="form-group mb-30">
@@ -253,7 +255,8 @@ $this->title = 'Update Group';
 
                         </div>
                         <div class="col-12 text-end mt-10 pr-13">
-                            <a href="<?= Yii::$app->homeUrl ?>setting/group/create-group">
+                            <a href="<?= Yii::$app->homeUrl ?>setting/group/create-group"
+                                style="text-decoration: none;">
                                 <button type="button" class="btn-cancel-group"
                                     action="<?= Yii::$app->homeUrl ?>setting/group/create-group">Cancel</button>
                             </a>

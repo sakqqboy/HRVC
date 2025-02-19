@@ -254,7 +254,7 @@ class GroupController extends Controller
             $group->website = $_POST["website"];
             $group->location = $_POST["location"];
             $group->countryId = $_POST["country"];
-            $group->city = $_POST["city"];
+            // $group->city = $_POST["city"];
             // $group->postalCode = $_POST["postalCode"];
             $group->industries = $_POST["industries"];
             $group->email = $_POST["email"];
@@ -264,7 +264,7 @@ class GroupController extends Controller
             // $group->socialTag = $_POST["socialTag"];
             $group->socialInstargram = $_POST["instagram"];
             $group->socialFacebook = $_POST["facebook"];
-            $group->socialYoutube = $_POST["socialYoutube"];
+            $group->socialYoutube = $_POST["youtube"];
             $group->socialLinkin = $_POST["linkedin"];
             $group->socialX = $_POST["twitter"];
             $group->about = $_POST["about"];
@@ -285,8 +285,8 @@ class GroupController extends Controller
                 $countArrayFile = count($filenameArray);
                 $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
                 $pathSave = $path . $fileName;
-                // $fileBanner->saveAs($pathSave);
-                // $group->banner = 'images/group/banner/' . $fileName;
+                $fileBanner->saveAs($pathSave);
+                $group->banner = 'images/group/banner/' . $fileName;
             }
             $fileImage = UploadedFile::getInstanceByName("image");
             if (isset($fileImage) && !empty($fileImage)) {
@@ -303,13 +303,13 @@ class GroupController extends Controller
                 $countArrayFile = count($filenameArray);
                 $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
                 $pathSave = $path . $fileName;
-                // $fileImage->saveAs($pathSave);
-                // $group->picture = 'images/group/profile/' . $fileName;
+                $fileImage->saveAs($pathSave);
+                $group->picture = 'images/group/profile/' . $fileName;
             }
-            // if ($group->save(false)) {
-            //     $groupId = $_POST["groupId"] - 543;
-            //     return $this->redirect(Yii::$app->homeUrl . 'setting/group/group-view/' . ModelMaster::encodeParams(["groupId" => $groupId]));
-            // }
+            if ($group->save(false)) {
+                $groupId = $_POST["groupId"] - 543;
+                return $this->redirect(Yii::$app->homeUrl . 'setting/group/group-view/' . ModelMaster::encodeParams(["groupId" => $groupId]));
+            }
         }
     }
     public function actionFontSize()
