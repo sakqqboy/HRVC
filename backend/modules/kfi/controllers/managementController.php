@@ -708,24 +708,28 @@ class ManagementController extends Controller
 					$checked = "";
 					$target = 0;
 				}
-				$data[$employee["teamId"]]["employee"][$employee["employeeId"]] = [
-					"employeeFirstname" => $employee["employeeFirstname"],
-					"employeeSurename" => $employee["employeeSurename"],
-					"target" => $target,
-					"picture" => $img,
-					"checked" => $checked,
-					"titleName" => $employee["titleName"]
-				];
+				if ($employee["teamId"] != null) {
+					$data[$employee["teamId"]]["employee"][$employee["employeeId"]] = [
+						"employeeFirstname" => $employee["employeeFirstname"],
+						"employeeSurename" => $employee["employeeSurename"],
+						"target" => $target,
+						"picture" => $img,
+						"checked" => $checked,
+						"titleName" => $employee["titleName"]
+					];
+				}
 				/*if (isset($totalTeam[$employee["teamId"]]["total"]) && $totalTeam[$employee["teamId"]]["total"] != null) {
 					$totalTeam[$employee["teamId"]]["total"] += $kfiEmployee["target"];
 				} else {
 					$totalTeam[$employee["teamId"]]["total"] = $kfiEmployee["target"];
 				}*/
 				if (!isset($data[$employee["teamId"]]["team"])) {
-					$data[$employee["teamId"]]["team"] = [
-						"teamName" => $employee["teamName"],
-						"departmentName" => $employee["departmentName"]
-					];
+					if ($employee["teamId"] != null) {
+						$data[$employee["teamId"]]["team"] = [
+							"teamName" => $employee["teamName"],
+							"departmentName" => $employee["departmentName"]
+						];
+					}
 				}
 
 			endforeach;
