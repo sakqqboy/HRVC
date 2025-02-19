@@ -2283,10 +2283,10 @@ input:checked+.slider:before {
 
 @media (max-width: 1935px) and (max-height: 950px) {
 	.contrainer-body {
-		transform: scale(0.95);
+		transform: scale(0.90);
 		transform-origin: top left;
-		width: calc(100% / 0.95);
-		height: calc(100% / 0.95);
+		width: calc(100% / 0.90);
+		height: calc(100% / 0.90);
 	}
 
 	/* 
@@ -2309,10 +2309,10 @@ input:checked+.slider:before {
 
 @media (max-width: 1735px) and (max-height: 950px) {
 	.contrainer-body {
-		transform: scale(0.85);
+		transform: scale(0.80);
 		transform-origin: top left;
-		width: calc(100% / 0.85);
-		height: calc(100% / 0.85);
+		width: calc(100% / 0.80);
+		height: calc(100% / 0.80);
 	}
 
 	/* .contrainer-body-detail {
@@ -2323,20 +2323,20 @@ input:checked+.slider:before {
 	} */
 
 	.row-box {
-		transform: scale(0.85);
+		transform: scale(0.80);
 		transform-origin: top left;
-		width: calc(100% / 0.85);
-		height: calc(100% / 0.85);
+		width: calc(100% / 0.80);
+		height: calc(100% / 0.80);
 	}
 
 }
 
 @media (max-width: 1535px) and (max-height: 950px) {
 	.contrainer-body {
-		transform: scale(0.75);
+		transform: scale(0.70);
 		transform-origin: top left;
-		width: calc(100% / 0.75);
-		height: calc(100% / 0.75);
+		width: calc(100% / 0.70);
+		height: calc(100% / 0.70);
 	}
 
 
@@ -2348,10 +2348,10 @@ input:checked+.slider:before {
 	} */
 
 	.row-box {
-		transform: scale(0.75);
+		transform: scale(0.70);
 		transform-origin: top left;
-		width: calc(100% / 0.75);
-		height: calc(100% / 0.75);
+		width: calc(100% / 0.70);
+		height: calc(100% / 0.70);
 	}
 
 
@@ -2359,10 +2359,10 @@ input:checked+.slider:before {
 
 @media (max-width: 1335px) and (max-height: 750px) {
 	.contrainer-body {
-		transform: scale(0.65);
+		transform: scale(0.60);
 		transform-origin: top left;
-		width: calc(100% / 0.65);
-		height: calc(100% / 0.65);
+		width: calc(100% / 0.60);
+		height: calc(100% / 0.60);
 		margin-top: 30px;
 	}
 
@@ -2379,10 +2379,10 @@ input:checked+.slider:before {
 	}
 
 	.row-box {
-		transform: scale(0.65);
+		transform: scale(0.60);
 		transform-origin: top left;
-		width: calc(100% / 0.65);
-		height: calc(100% / 0.65);
+		width: calc(100% / 0.60);
+		height: calc(100% / 0.60);
 	}
 
 }
@@ -2391,10 +2391,10 @@ input:checked+.slider:before {
 
 @media (max-width: 1135px) and (max-height: 750px) {
 	.contrainer-body {
-		transform: scale(0.55);
+		transform: scale(0.50);
 		transform-origin: top left;
-		width: calc(100% / 0.55);
-		height: calc(100% / 0.55);
+		width: calc(100% / 0.50);
+		height: calc(100% / 0.50);
 		margin-top: 30px;
 	}
 

@@ -535,9 +535,9 @@ $this->title = 'KPI Grid View';
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
                                                 class="mb-2" style="width: 12px; height: 12px;">
                                             <?php if ($colorFormat == "complete") {
-                                                            echo  Yii::t('app', "Edit");
+                                                            echo  Yii::t('app', "Update");
                                                         } else if ($colorFormat == "over") {
-                                                            echo  Yii::t('app', "Passed");
+                                                            echo  Yii::t('app', "Update");
                                                         } else {
                                                             echo  Yii::t('app', "Update");
                                                         }

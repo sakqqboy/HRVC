@@ -4,10 +4,9 @@ use common\models\ModelMaster;
 
 $this->title = 'Branch';
 ?>
-
-<div class="col-12 branch-one">
+<div class="col-12 branch-one mt-50">
     <div class="row all-row">
-        <div class="col-lg-8 col-md-3 col-3 d-flex align-items-center gap-2">
+        <div class="d-flex align-items-center gap-2">
             <img src="<?= Yii::$app->homeUrl ?>image/branch-icon-black.svg" style="width: 24px; height: 24px;">
             <div class="col-12 branch-title pt-5">
                 Branch

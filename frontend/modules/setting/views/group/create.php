@@ -12,7 +12,7 @@ $this->title = 'Create Group';
 	],
 
 ]); ?>
-<div class="col-12" style="margin-top: 60px;background-color:white;padding-bottom:20px;">
+<div class="contrainer-body" style="margin-top: 60px;background-color:white;padding-bottom:20px;">
     <div class="col-12" id="imagePreviewBanner" style="height: 180px;background-color:gray;">
     </div>
     <div class="col-12 edit-update text-end" style="padding-right: 30px;">
