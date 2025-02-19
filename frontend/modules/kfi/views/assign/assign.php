@@ -40,9 +40,10 @@ $this->title = 'Assign KFI';
                     <?= $kfiDetail["kfiName"] ?>
                 </span>
                 <button class="btn-create font-size-12" style="text-decoration: none;" type="submit">
-                    <img src="<?= Yii::$app->homeUrl ?>image/save-whiet.svg" style="width:15px;margin-top:-3px;"
-                        class="ml-5 mr-5">
-                    <?= Yii::t('app', 'Save') ?>
+                    <div class="ml-5 mr-5" style="gap: 5px;">
+                        <img src="<?= Yii::$app->homeUrl ?>image/save-whiet.svg" style="width:15px;margin-top:-3px;">
+                        <?= Yii::t('app', 'Save') ?>
+                    </div>
                 </button>
             </div>
         </div>
