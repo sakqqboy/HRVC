@@ -137,8 +137,8 @@ $this->title = 'Update Group';
                             <div class="form-group mb-30">
                                 <span class="text-danger">* </span> <label class="name-text-update" for="phone">
                                     Contact/Phone Number </label>
-                                <input type="email" class="form-control mt-12" name="email"
-                                    value="<?= $group['contact'] ?>" placeholder="Write the phone number" required>
+                                <input class="form-control mt-12" name="email" value="<?= $group['contact'] ?>"
+                                    placeholder="Write the phone number" required>
                             </div>
 
                             <div class="form-group mb-30">
