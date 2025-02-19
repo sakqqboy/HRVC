@@ -27,27 +27,24 @@ $this->title = 'Assign KFI';
 
 	]); ?>
     <div class="alert mt-10 pim-body bg-white">
-        <div class="col-12">
-            <div class="row">
-                <div class="col-2 font-size-12 pim-name pr-0 pl-5 text-start">
-                    <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="mr-5 font-size-12"
-                        style="text-decoration: none;">
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back.svg">
-                        <text class="pim-text-back">
-                            <?= Yii::t('app', 'Back') ?>
-                        </text>
-                    </a>
-                    <span class="pim-name-title">
-                        <?= $kfiDetail["kfiName"] ?>
-                    </span>
-                    <button class="btn-create font-size-12" style="text-decoration: none;" type="submit">
-                        <img src="<?= Yii::$app->homeUrl ?>image/save-whiet.svg" style="width:15px;margin-top:-3px;"
-                            class="ml-5 mr-5">
-                        <?= Yii::t('app', 'Save') ?>
-                    </button>
-                </div>
+        <div class="row">
+            <div class="font-size-12 pim-name pr-0 pl-5 text-start">
+                <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="mr-5 font-size-12"
+                    style="text-decoration: none;">
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back.svg">
+                    <text class="pim-text-back">
+                        <?= Yii::t('app', 'Back') ?>
+                    </text>
+                </a>
+                <span class="pim-name-title">
+                    <?= $kfiDetail["kfiName"] ?>
+                </span>
+                <button class="btn-create font-size-12" style="text-decoration: none;" type="submit">
+                    <img src="<?= Yii::$app->homeUrl ?>image/save-whiet.svg" style="width:15px;margin-top:-3px;"
+                        class="ml-5 mr-5">
+                    <?= Yii::t('app', 'Save') ?>
+                </button>
             </div>
-
         </div>
         <div class="col-12 ligth-gray-box mb-10 mt-7">
             <div class="col-12 bg-white pl-8 pr-8 mt-8 mb-10">

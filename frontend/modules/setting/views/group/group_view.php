@@ -368,7 +368,7 @@ $this->title = 'Group profile';
 				if (count($companyGroup) > 5) {
 					?>
                     <div class="col-12 text-end">
-                        <a href="#"> See All </a>
+                        <a href="<?= Yii::$app->homeUrl ?>setting/company/index"> See All </a>
                     </div>
                     <?php
 				}
