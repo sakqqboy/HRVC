@@ -39,8 +39,8 @@ if (isset($kfiTeamEmployee) && count($kfiTeamEmployee) > 0) {
 
 /* เมื่อสถานะเป็นลบ (บางรายการไม่ได้เลือก) */
 .custom-checkbox-label.minus::before {
-    content: "⎻";
-    font-size: 15px;
+    content: "━";
+    font-size: 5px;
     font-weight: bold;
     /* padding-top: 4px; */
     color: #2580D3;
