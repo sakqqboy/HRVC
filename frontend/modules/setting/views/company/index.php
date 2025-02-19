@@ -5,20 +5,29 @@ use common\models\ModelMaster;
 $this->title = 'company';
 ?>
 
-<div class="contrainer-body">
-    <div class="col-lg-8 col-md-3 col-3 d-flex align-items-center gap-2">
+<div class="contrainer-body mt-40">
+    <div class=" d-flex align-items-center gap-2">
         <img src="<?= Yii::$app->homeUrl ?>image/branch-icon-black.svg" style="width: 24px; height: 24px;">
-        <div class="col-12 branch-title pt-5">
+        <div class="pim-name-title ml-10">
             Company
         </div>
         <a href="<?= Yii::$app->homeUrl ?>setting/company/create/<?= ModelMaster::encodeParams(['groupId' => $groupId]) ?>"
-            class="btn btn-success">
-            <i class="fa fa-plus" aria-hidden="true"></i> Add
+            style="text-decoration: none;">
+            <button type="button" class="btn-create" style="padding: 7px 9px;"
+                action="<?= Yii::$app->homeUrl ?>setting/group/create-group">Cancel</button>
+        </a>
+
+        <a style="text-decoration: none;"
+            href="<?= Yii::$app->homeUrl ?>setting/company/create/<?= ModelMaster::encodeParams(['groupId' => $groupId]) ?>"></a>
+        <button class="btn-create font-size-14" style="padding: 7px 9px;">
+            <?= Yii::t('app', 'Create New') ?>
+            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
+                style="width:18px; height:18px; margin-top:-3px;">
+        </button>
         </a>
     </div>
 
-    <div class="contrainer-body company-group-edit">
-
+    <div class="company-group-edit mt-30">
         <div class="col-12 mt-20 tb0">
             <table class="table table-bordered">
                 <thead>
