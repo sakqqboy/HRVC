@@ -14,7 +14,9 @@ $this->title = 'Update Group';
 	'action' => Yii::$app->homeUrl . 'setting/group/save-update-group'
 
 ]); ?>
-<div class="contrainer-body company-group-edit">
+<div class="contrainer-body company-group-edit" style="
+    margin-top: 100px;
+">
     <div class="col-12 banner-uploade" id="imagePreviewBanner">
         <!-- <?php
 		if ($group["banner"] != null) { ?>
@@ -69,7 +71,7 @@ $this->title = 'Update Group';
                             <div class="form-group mb-30">
                                 <span class="text-danger">* </span> <label class="name-text-update"
                                     for="groupName">Display Name/Brand Name</label>
-                                <input type="text" class="form-control mt-12" name="groupName"
+                                <input type="text" class="form-control mt-12" name="displayName"
                                     value="<?= $group['displayName'] ?>"
                                     placeholder="The name you want to show (example,. Google)" required>
                             </div>
@@ -86,11 +88,11 @@ $this->title = 'Update Group';
                                 <div class="input-group">
                                     <span class="input-group-text mt-12"
                                         style="background-color: #BEDAFF; border-right: none;">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/calendar-blue.svg" alt="LinkedIn"
+                                        <img src="<?= Yii::$app->homeUrl ?>image/calendar-blue.svg" alt="Founded"
                                             style="width: 20px; height: 20px;">
                                     </span>
                                     <input type="text" style="border-left: none;" class="form-control mt-12"
-                                        name="linkedin" value="<?= $group['founded'] ?>" placeholder="" required>
+                                        name="founded" value="<?= $group['founded'] ?>" placeholder="" required>
                                 </div>
                             </div>
                             <div class="form-group mb-30">
@@ -137,7 +139,7 @@ $this->title = 'Update Group';
                             <div class="form-group mb-30">
                                 <span class="text-danger">* </span> <label class="name-text-update" for="phone">
                                     Contact/Phone Number </label>
-                                <input class="form-control mt-12" name="email" value="<?= $group['contact'] ?>"
+                                <input class="form-control mt-12" name="phone" value="<?= $group['contact'] ?>"
                                     placeholder="Write the phone number" required>
                             </div>
 
@@ -222,11 +224,11 @@ $this->title = 'Update Group';
                                 <div class="input-group">
                                     <span class="input-group-text mt-12"
                                         style="background-color: white; border-right: none;">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/web-image.svg" alt="YouTube"
+                                        <img src="<?= Yii::$app->homeUrl ?>image/web-image.svg" alt="Website"
                                             style="width: 20px; height: 20px;">
                                     </span>
                                     <input type="text" style="border-left: none;" class="form-control mt-12"
-                                        name="youtube" value="<?= $group['website'] ?>"
+                                        name="website" value="<?= $group['website'] ?>"
                                         placeholder="Copy & Paste the Group YouTube Link here" required>
                                 </div>
                             </div>
@@ -251,7 +253,11 @@ $this->title = 'Update Group';
 
                         </div>
                         <div class="col-12 text-end mt-10 pr-13">
-                            <button class="btn-cancel-group">Cancel</button>
+                            <a href="<?= Yii::$app->homeUrl ?>setting/group/create-group">
+                                <button type="button" class="btn-cancel-group"
+                                    action="<?= Yii::$app->homeUrl ?>setting/group/create-group">Cancel</button>
+                            </a>
+
                             <button type="submit" class="btn-save-group">Save
                                 <img src="<?= Yii::$app->homeUrl ?>image/save-icon.svg" alt="LinkedIn"
                                     style="width: 20px; height: 20px;"></button>

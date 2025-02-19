@@ -238,25 +238,35 @@ class GroupController extends Controller
     }
     public function actionSaveUpdateGroup()
     {
+        // echo '<pre>';
+        // print_r($_POST);
+        // echo '</pre>';
+
+        // exit;
         if (isset($_POST["groupName"]) && trim($_POST["groupName"]) != '') {
             $group = Group::find()->where(["groupId" => $_POST["groupId"] - 543])->one();
             $oldBanner = $group->banner;
             $oldImage = $group->picture;
             $group->groupName = $_POST["groupName"];
             $group->tagLine = $_POST["tagLine"];
-            $group->headQuaterName = $_POST["headQuaterName"];
+            // $group->headQuaterName = $_POST["headQuaterName"];
             $group->displayName = $_POST["displayName"];
             $group->website = $_POST["website"];
             $group->location = $_POST["location"];
             $group->countryId = $_POST["country"];
             $group->city = $_POST["city"];
-            $group->postalCode = $_POST["postalCode"];
+            // $group->postalCode = $_POST["postalCode"];
             $group->industries = $_POST["industries"];
             $group->email = $_POST["email"];
-            $group->contact = $_POST["contact"];
+            // $group->contact = $_POST["contact"];
             $group->founded = $_POST["founded"];
             $group->director = $_POST["director"];
-            $group->socialTag = $_POST["socialTag"];
+            // $group->socialTag = $_POST["socialTag"];
+            $group->socialInstargram = $_POST["instagram"];
+            $group->socialFacebook = $_POST["facebook"];
+            $group->socialYoutube = $_POST["socialYoutube"];
+            $group->socialLinkin = $_POST["linkedin"];
+            $group->socialX = $_POST["twitter"];
             $group->about = $_POST["about"];
             $group->status = 1;
             $group->updateDateTime =  new Expression('NOW()');
@@ -275,8 +285,8 @@ class GroupController extends Controller
                 $countArrayFile = count($filenameArray);
                 $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
                 $pathSave = $path . $fileName;
-                $fileBanner->saveAs($pathSave);
-                $group->banner = 'images/group/banner/' . $fileName;
+                // $fileBanner->saveAs($pathSave);
+                // $group->banner = 'images/group/banner/' . $fileName;
             }
             $fileImage = UploadedFile::getInstanceByName("image");
             if (isset($fileImage) && !empty($fileImage)) {
@@ -293,13 +303,13 @@ class GroupController extends Controller
                 $countArrayFile = count($filenameArray);
                 $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
                 $pathSave = $path . $fileName;
-                $fileImage->saveAs($pathSave);
-                $group->picture = 'images/group/profile/' . $fileName;
+                // $fileImage->saveAs($pathSave);
+                // $group->picture = 'images/group/profile/' . $fileName;
             }
-            if ($group->save(false)) {
-                $groupId = $_POST["groupId"] - 543;
-                return $this->redirect(Yii::$app->homeUrl . 'setting/group/group-view/' . ModelMaster::encodeParams(["groupId" => $groupId]));
-            }
+            // if ($group->save(false)) {
+            //     $groupId = $_POST["groupId"] - 543;
+            //     return $this->redirect(Yii::$app->homeUrl . 'setting/group/group-view/' . ModelMaster::encodeParams(["groupId" => $groupId]));
+            // }
         }
     }
     public function actionFontSize()
