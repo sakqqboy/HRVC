@@ -418,11 +418,11 @@ use yii\bootstrap5\ActiveForm;
                         <div class="col-9 d-flex">
                             <?php if ($tab == 'self' ) { ?>
                             <a class="key-total" id="KPI-name-0" href=""
-                                onclick="viewButtonTab('KPI','',KPIData[currentKPIIndex].id)"
+                                onclick="viewButtonTab('KPI','self',KPIData[currentKPIIndex].id)"
                                 style="text-decoration: none "><?= Yii::t('app', '-') ?></a>
                             <?php } else if ($tab == 'team' ) { ?>
                             <a class="key-total" id="KPI-name-0" href=""
-                                onclick="viewButtonTab('KPI','',KPIData[currentKPIIndex].id)"
+                                onclick="viewButtonTab('KPI','team',KPIData[currentKPIIndex].id)"
                                 style="text-decoration: none "><?= Yii::t('app', '-') ?></a>
                             <?php } else { ?>
                             <a class="key-total" id="KPI-name-0" href=""

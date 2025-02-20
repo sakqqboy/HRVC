@@ -10,6 +10,10 @@ use frontend\models\hrvc\EmployeePimWeight;
 use frontend\models\hrvc\Frame;
 use frontend\models\hrvc\FrameTerm;
 use frontend\models\hrvc\Group;
+use frontend\models\hrvc\KgiEmployee;
+use frontend\models\hrvc\KgiTeam;
+use frontend\models\hrvc\KpiEmployee;
+use frontend\models\hrvc\KpiTeam;
 use frontend\models\hrvc\User;
 use frontend\models\hrvc\UserRole;
 use Yii;
@@ -120,6 +124,74 @@ class DashboardController extends Controller
 	}
 
     public function actionKpiId()
+	{
+		$kpiId=$_POST["id"];
+		$res["kpiId"]=ModelMaster::encodeParams(["kpiId"=>$kpiId ,'kpiHistoryId' => 0]);
+		return json_encode($res);
+	}
+
+    //
+    public function actionKfiTabId()
+	{
+		$kfiId=$_POST["id"];
+		$res["kfiId"]=ModelMaster::encodeParams(["kfiId"=>$kfiId ,'openTab' => 1]);
+		return json_encode($res);
+	}
+
+	public function actionKgiTabEmployeeId()
+	{
+        $kgiEmployeeId=$_POST["id"];
+        $kgiId = KgiEmployee::find()
+        ->select('kgiId')
+        ->where(['kgiEmployeeId' => $kgiEmployeeId])
+        ->scalar();
+		$res["kgiEmployeeId"]=ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId, 'kgiEmployeeHistoryId' => 0, 'kgiId' => $kgiId, 'openTab' => 1]);
+		return json_encode($res);
+	}
+
+
+    public function actionKgiTabTeamId()
+	{
+        $kgiTeamId=$_POST["id"];
+        $kgiId = KgiTeam::find()
+        ->select('kgiId')
+        ->where(['kgiTeamId' => $kgiTeamId])
+        ->scalar();
+		$res["kgiTeamId"]=ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiTeamHistoryId' => 0, 'kgiId' => $kgiId, 'openTab' => 1]);
+		return json_encode($res);
+	}
+
+    
+    public function actionKgiTabId()
+	{
+		$kgiId=$_POST["id"];
+		$res["kgiId"]=ModelMaster::encodeParams(["kgiId"=>$kgiId ,'openTab' => 0]);
+		return json_encode($res);
+	}
+
+	public function actionKpiTabEmployeeId()
+	{
+		$kpiEmployeeId=$_POST["id"];
+        $kpiId = KpiEmployee::find()
+        ->select('kpiId')
+        ->where(['kpiEmployeeId' => $kpiEmployeeId])
+        ->scalar();
+		$res["kpiEmployeeId"]=ModelMaster::encodeParams(['kpiId' => $kpiId, 'kpiEmployeeHistoryId' => 0, 'kpiEmployeeId' => $kpiEmployeeId]);
+		return json_encode($res);
+	}
+
+    public function actionKpiTabTeamId()
+	{
+        $kpiTeamId=$_POST["id"];
+        $kpiId = KpiTeam::find()
+        ->select('kpiId')
+        ->where(['kpiTeamId' => $kpiTeamId])
+        ->scalar();
+		$res["kpiTeamId"]=ModelMaster::encodeParams(['kpiId' => $kpiId, 'kpiTeamHistoryId' => 0, 'kpiTeamId' => $kpiTeamId]);
+        return json_encode($res);
+    }
+
+    public function actionKpiTabId()
 	{
 		$kpiId=$_POST["id"];
 		$res["kpiId"]=ModelMaster::encodeParams(["kpiId"=>$kpiId ,'kpiHistoryId' => 0]);
