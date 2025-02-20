@@ -175,9 +175,9 @@ $this->title = 'Group profile';
                         </div>
                         <div class="row">
                             <div class="col-lg-4 col-md-6 col-12 mb-3">
-                                <div class="alert alert-secondary-background">
+                                <div class="alert alert-secondary-background" style="width: 100%;">
                                     <a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
-                                        class="text-decoration-none">
+                                        class="text-decoration-none" style="width: 60%;">
                                         <div class="row align-items-center">
                                             <div class="col-lg-8 col-md-8 col-8 text-left">
                                                 <div class="circle-container">
@@ -205,9 +205,9 @@ $this->title = 'Group profile';
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-12 mb-3">
-                                <div class="alert alert-secondary-background">
+                                <div class="alert alert-secondary-background" style="width: 100%;">
                                     <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
-                                        class="text-decoration-none">
+                                        class="text-decoration-none" style="width: 60%;">
                                         <div class="row align-items-center">
                                             <div class="col-lg-8 col-md-8 col-8 text-left">
                                                 <div class="circle-container">
@@ -235,9 +235,9 @@ $this->title = 'Group profile';
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-12 mb-3">
-                                <div class="alert alert-secondary-background">
+                                <div class="alert alert-secondary-background" style="width: 100%;">
                                     <a href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
-                                        class="text-decoration-none">
+                                        class="text-decoration-none" style="width: 60%;">
                                         <div class="row align-items-center">
                                             <div class="col-lg-8 col-md-8 col-8 text-left">
                                                 <div class="circle-container">
@@ -265,9 +265,9 @@ $this->title = 'Group profile';
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-12 mb-3">
-                                <div class="alert alert-secondary-background">
+                                <div class="alert alert-secondary-background" style="width: 100%;">
                                     <a href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
-                                        class="text-decoration-none">
+                                        class="text-decoration-none" style="width: 60%;">
                                         <div class="row align-items-center">
                                             <div class="col-8">
                                                 <div class="circle-container-img">
