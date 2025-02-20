@@ -820,6 +820,8 @@ h6.dashboard-kpi-title {
     align-items: center;
     gap: 10px;
     align-self: stretch;
+    border-radius: 15.719px;
+    background: var(--Primary-Blue---HRVC, #2580D3);
 }
 
 .text-ViewAllbutton {
@@ -964,7 +966,9 @@ h6.dashboard-kpi-title {
     gap: 10px;
     border-radius: 41px;
     background: #D7EBFF;
-    border: none;
+    font-weight: 600;
+
+    border: 1px solid var(--Primary-Blue---HRVC, #2580D3);
 }
 
 .chart-company-info img {
