@@ -22,12 +22,12 @@ if (isset($kpiTeamEmployee) && count($kpiTeamEmployee) > 0) {
 						<?php
 						if ($kpiEmployee["team"]["isMore"] == '1') {
 						?>
-							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/arrow-up.png" style="width:8px;margin-top:-3px;" class="ml-5">
+							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/arrow-up.svg" style="width:8px;margin-top:-3px;" class="ml-5">
 						<?php
 						}
 						if ($kpiEmployee["team"]["isMore"] == '0') {
 						?>
-							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/arrow-down.png" style="width:8px;margin-top:-3px;" class="ml-5">
+							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/arrow-down.svg" style="width:8px;margin-top:-3px;" class="ml-5">
 						<?php
 						}
 						?>

@@ -669,14 +669,14 @@ class KgiTeamController extends Controller
 				];
 				if ($totalTeamTarget > $teamTarget) {
 					if ($teamTarget > 0) {
-						$percentage = (($totalTeamTarget / $teamTarget) * 100);
+						$percentage = (($totalTeamTarget / $teamTarget) * 100) - 100;
 					} else {
 						$percentage = 0;
 					}
 					$isMore = 1;
 				} else {
 					if ($teamTarget > 0) {
-						$percentage = (($totalTeamTarget / $teamTarget) * 100);
+						$percentage = 100 - (($totalTeamTarget / $teamTarget) * 100);
 					} else {
 						$percentage = 0;
 					}

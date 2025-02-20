@@ -1505,6 +1505,7 @@ class ManagementController extends Controller
 	public function actionUpdateTeamKfi()
 	{
 		//throw new exception(print_r($_POST["employee"], true));
+		$employeeIds = [];
 		if (isset($_POST["employee"]) && count($_POST["employee"]) > 0) {
 			$i = 0;
 			foreach ($_POST["employee"] as $employeeId => $type):
@@ -1525,18 +1526,27 @@ class ManagementController extends Controller
 				$i++;
 			endforeach;
 		}
-		//throw new exception(print_r($employeeIds, true));
-		$deleteKfiEmployee = KfiEmployee::find()
-			->where(['not in', 'employeeId', $employeeIds])
-			->andWhere(["kfiId" => $_POST["kfiId"]])
-			->all();
-		if (isset($deleteKfiEmployee) && count($deleteKfiEmployee) > 0) {
-			foreach ($deleteKfiEmployee as $delKfi):
-				$delKfi->delete(false);
-			//throw new exception(1111);
-			endforeach;
+		if (!isset($_POST["employee"]) || count($_POST["employee"]) == 0) {
+			$dKfiemployee = KfiEmployee::find()
+				->where(["kfiId" => $_POST["kfiId"]])
+				->all();
+			if (isset($dKfiemployee) && count($dKfiemployee) > 0) {
+				foreach ($dKfiemployee as $delKfi):
+					$delKfi->delete(false);
+				endforeach;
+			}
 		}
-		//throw new exception(count($deleteKfiEmployee));
+		if (count($employeeIds) > 0) {
+			$deleteKfiEmployee = KfiEmployee::find()
+				->where(['not in', 'employeeId', $employeeIds])
+				->andWhere(["kfiId" => $_POST["kfiId"]])
+				->all();
+			if (isset($deleteKfiEmployee) && count($deleteKfiEmployee) > 0) {
+				foreach ($deleteKfiEmployee as $delKfi):
+					$delKfi->delete(false);
+				endforeach;
+			}
+		}
 		return $this->redirect(Yii::$app->homeUrl . 'kfi/assign/assign/' . ModelMaster::encodeParams(['kfiId' => $_POST["kfiId"], "companyId" => $_POST["companyId"]]));
 	}
 	public function actionNextKfiHistory()
