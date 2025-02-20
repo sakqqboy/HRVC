@@ -116,22 +116,22 @@ $this->title = 'KPI Grid View';
                             </div>
                             <div class="col-4 pt-9">
                                 <?php
-									if ($disableTeam == "") {
-								?>
+										if ($disableTeam == "") {
+										?>
                                 <input type="text" placeholder="0.00" class="assign-target text-end font-size-12"
                                     value="<?= $target > 0 ? number_format($target, 2) : '' ?>"
                                     name="teamTarget[<?= $team['teamId'] ?>]">
                                 <?php
-									} else {
-								?>
+										} else {
+										?>
                                 <input type="text" placeholder="0.00" class="assign-target text-end font-size-12"
                                     value="<?= $target > 0 ? number_format($target, 2) : '' ?>"
                                     name="teamTarget[<?= $team['teamId'] ?>]" <?= $disableTeam ?>>
                                 <input type="hidden" value="<?= $target > 0 ? number_format($target, 2) : '' ?>"
                                     name="teamTarget[<?= $team['teamId'] ?>]">
                                 <?php
-									}
-								?>
+										}
+										?>
                             </div>
                         </div>
                     </div>
@@ -199,17 +199,7 @@ $this->title = 'KPI Grid View';
                                 <?php
 								}
 								?>
-                                <?php 
-                                if($isMoreSet == "1"){
-                                    $percentage = $percentage - 100;
-                                    echo number_format($percentage);
-                                } else if($isMoreSet == "0"){
-                                    $percentage = 100 - $percentage ;
-                                    echo number_format($percentage);
-                                }else {
-                                    echo "0";
-                                }
-                                 ?>%
+                                <?= number_format($percentage) ?>%
                             </div>
                         </div>
 

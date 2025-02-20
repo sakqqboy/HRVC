@@ -983,37 +983,57 @@ h6.dashboard-kpi-title {
 
 /* Key Buttons Group */
 .chart-button-group {
-    position: absolute;
     top: 8%;
-    left: 78%;
+    left: 75%;
+    position: absolute;
     transform: translateX(-50%);
+    width: 219px;
+    height: 22px;
+    flex-shrink: 0;
+    border-radius: 17px;
+    background: #D9D9D9;
+
+    /* 🔥 เพิ่ม Flexbox */
     display: flex;
-    gap: 20px;
+    justify-content: space-between;
+    /* กระจายปุ่มเท่าๆ กัน */
+    align-items: center;
+    /* จัดกึ่งกลางตามแนวตั้ง */
+    gap: 10px;
+    /* ระยะห่างระหว่างปุ่ม (ปรับได้ตามต้องการ) */
 }
 
 .chart-button-wrapper {
     position: relative;
+
 }
 
 .chart-key-button {
-    width: 16px;
-    height: 16px;
-    border-radius: 2px;
-    margin-right: 10px;
     border: none;
-    padding: 0;
-    cursor: pointer;
+    width: 67px;
+    height: 22px;
+    flex-shrink: 0;
+    border-radius: 17px;
+    color: #000;
+    font-family: "SF Pro Display";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1px;
 }
 
 .kfi {
-    background: #748EE9;
+    /* border: 0.5px solid #5078FF; */
+    background: #A8BBFF;
 }
 
 .kgi {
+    /* border: 0.5px solid #A47800; */
     background: #FDCA40;
 }
 
 .kpi {
+    /* border: 0.5px solid #C21D03; */
     background: #FF715B;
 }
 
@@ -1022,11 +1042,10 @@ h6.dashboard-kpi-title {
     top: 40%;
     left: 80%;
     transform: translateY(-50%);
-    margin-left: 2px;
+    /* margin-left: 2px; */
     font-size: 12px;
     color: #333333;
 }
-
 
 
 /* Animation สำหรับข้อความเลื่อนออกไปทางซ้าย */
