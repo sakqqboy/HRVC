@@ -63,7 +63,8 @@ $this->title = 'KPI Grid View';
                         <div class="row">
                             <div class="col-6 font-size-12 pt-5 pb-3"><b><?= Yii::t('app', 'Assign Team') ?></b></div>
                             <div class="col-6 text-end  font-size-12 pt-5 pb-3">
-                                <b><?= Yii::t('app', 'ALLOCATE TARGET') ?></b></div>
+                                <b><?= Yii::t('app', 'ALLOCATE TARGET') ?></b>
+                            </div>
                         </div>
                     </div>
                     <?php
@@ -115,22 +116,22 @@ $this->title = 'KPI Grid View';
                             </div>
                             <div class="col-4 pt-9">
                                 <?php
-										if ($disableTeam == "") {
-										?>
+									if ($disableTeam == "") {
+								?>
                                 <input type="text" placeholder="0.00" class="assign-target text-end font-size-12"
                                     value="<?= $target > 0 ? number_format($target, 2) : '' ?>"
                                     name="teamTarget[<?= $team['teamId'] ?>]">
                                 <?php
-										} else {
-										?>
+									} else {
+								?>
                                 <input type="text" placeholder="0.00" class="assign-target text-end font-size-12"
                                     value="<?= $target > 0 ? number_format($target, 2) : '' ?>"
                                     name="teamTarget[<?= $team['teamId'] ?>]" <?= $disableTeam ?>>
                                 <input type="hidden" value="<?= $target > 0 ? number_format($target, 2) : '' ?>"
                                     name="teamTarget[<?= $team['teamId'] ?>]">
                                 <?php
-										}
-										?>
+									}
+								?>
                             </div>
                         </div>
                     </div>
@@ -198,7 +199,17 @@ $this->title = 'KPI Grid View';
                                 <?php
 								}
 								?>
-                                <?= number_format($percentage) ?>%
+                                <?php 
+                                if($isMoreSet == "1"){
+                                    $percentage = $percentage - 100;
+                                    echo number_format($percentage);
+                                } else if($isMoreSet == "0"){
+                                    $percentage = 100 - $percentage ;
+                                    echo number_format($percentage);
+                                }else {
+                                    echo "0";
+                                }
+                                 ?>%
                             </div>
                         </div>
 
