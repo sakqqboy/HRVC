@@ -66,25 +66,27 @@ function viewButtonTab(type, level, id) {
         alert("Invalid ID. Please provide a numeric value.");
         return;
     }
-
+    // alert(type);
+    // alert(level);
+    // alert(id);
     let endpointMap = {
         "KFI": {
-            baseUrl: "kfi/view/index/",
+            baseUrl: "kfi/view/kfi-history/",
             api: "home/dashboard/kfi-tab-id",
             key: "kfiId"
         },
         "KGI": {
-            baseUrl: level === "team" ? "kgi/kgi-team/prepare-update/" : (level === "self" ?
-                "kgi/kgi-personal/update-personal-kgi/" : "kgi/management/prepare-update/"),
-            api: level === "team" ? "home/dashboard/kgi-team-id" : (level === "self" ?
-                "home/dashboard/kgi-employee-id" : "home/dashboard/kgi-id"),
+            baseUrl: level === "team" ? "kgi/kgi-team/kgi-team-history/" : (level === "self" ?
+                "kgi/kgi-personal/kgi-employee-history/" : "kgi/view/kgi-history/"),
+            api: level === "team" ? "home/dashboard/kgi-tab-team-id" : (level === "self" ?
+                "home/dashboard/kgi-tab-employee-id" : "home/dashboard/kgi-tab-id"),
             key: level === "team" ? "kgiTeamId" : (level === "self" ? "kgiEmployeeId" : "kgiId")
         },
         "KPI": {
-            baseUrl: level === "team" ? "kpi/kpi-team/prepare-update/" : (level === "self" ?
-                "kpi/kpi-personal/update-personal-kpi/" : "kpi/management/prepare-update/"),
-            api: level === "team" ? "home/dashboard/kpi-team-id" : (level === "self" ?
-                "home/dashboard/kpi-employee-id" : "home/dashboard/kpi-id"),
+            baseUrl: level === "team" ? "kpi/kpi-team/kpi-team-history/" : (level === "self" ?
+                "kpi/kpi-personal/kpi-individual-history/" : "kpi/view/kpi-history/"),
+            api: level === "team" ? "home/dashboard/kpi-tab-team-id" : (level === "self" ?
+                "home/dashboard/kpi-tab-employee-id" : "home/dashboard/kpi-tab-id"),
             key: level === "team" ? "kpiTeamId" : (level === "self" ? "kpiEmployeeId" : "kpiId")
         }
     };
@@ -102,6 +104,7 @@ function viewButtonTab(type, level, id) {
         success: function (data) {
             const targetId = data[config.key];
             const redirectUrl = $url + config.baseUrl + targetId;
+            // alert(redirectUrl);
             window.location.href = redirectUrl;
         }
     });
