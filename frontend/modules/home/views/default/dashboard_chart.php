@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // $baseUrl = Yii::$app->homeUrl;
     ?>
 
-    var $baseUrl = window.location.protocol + "/ / " + window.location.host;
+    var $baseUrl = window.location.protocol + "//" + window.location.host;
     if (window.location.host == 'localhost') {
         $baseUrl = window.location.protocol + "//" + window.location.host + '/HRVC/frontend/web/';
     } else {
