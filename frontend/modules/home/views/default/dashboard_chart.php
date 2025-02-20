@@ -38,27 +38,25 @@
 
 
 <?php
-$currentYear = date("Y");  // ปีปัจจุบัน
-$currentYear = substr($currentYear, -2);  // Extract the last two digits
+$currentYear = date("Y"); 
+$currentYearShort = substr($currentYear, -2);  // ปีแบบสองหลัก
+$currentMonth = date("n") - 1;                // เดือนปัจจุบัน (0-11)
+$currentDay = date("j");                      // วันปัจจุบัน
+$totalDaysInMonth = date("t");                // จำนวนวันในเดือนปัจจุบัน
 
-$months = array(
-    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-);
+// คำนวณตำแหน่งวันปัจจุบันในเดือน (สัดส่วน)
+$currentDayPosition = $currentMonth + ($currentDay - 1) / $totalDaysInMonth;
 
-$categories = array();
-foreach ($months as $month) {
-    $categories[] = $month . ' ' . $currentYear;
-}
-
-$currentMonth = date("n") - 1;  // ลบ 1 เพราะค่าเดือนใน PHP เริ่มจาก 1-12 แต่ใน JavaScript เริ่มจาก 0-11
-// $categories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; // สร้าง Array ของชื่อเดือน
+$months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+$categories = array_map(fn($month) => $month . ' ' . $currentYearShort, $months);
 ?>
+
 <script src="https://code.highcharts.com/highcharts.js"></script>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     const categories = <?php echo json_encode($categories); ?>;
-    const currentMonth = <?php echo $currentMonth; ?>; // ใช้ค่าเดือนปัจจุบันจาก PHP
+    const currentMonth = <?php echo $currentDayPosition; ?>; // ใช้ค่าเดือนปัจจุบันจาก PHP
     let currentIndex = 0; // Default to KFI
     let currentCategory = "Company"; // Default category is "Company"
     let type = "KFI";
