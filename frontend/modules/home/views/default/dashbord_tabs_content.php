@@ -93,7 +93,9 @@ use yii\bootstrap5\ActiveForm;
                 <div class="card-tab2" id="KFI">
                     <div class="key-title-container" id="content-KFI">
                         <div class="col-9 d-flex">
-                            <span class="key-total" id="KFI-name-0"><?= Yii::t('app', '-') ?></span>
+                            <a class="key-total" id="KFI-name-0" href=""
+                                onclick="viewButtonTab('KFI','',KFIData[currentKFIIndex].kfiId)"
+                                style="text-decoration: none "><?= Yii::t('app', '-') ?></a>
                         </div>
                         <div class="col-2 pr-6" style="display: flex; justify-content: flex-end; align-items: center;">
                             <button class="show-more-btn" onclick="changeKFIData('left')">
@@ -162,7 +164,8 @@ use yii\bootstrap5\ActiveForm;
                     <div class="col-4 text-center">
                         <?php if ($role >= 5 && $contentDetail['KFI']['showPercent'] !== '' && !empty($contentDetail['KFI']['KFIData'] ?? null)) { ?>
 
-                        <button class="btn-update btn-KFI" onclick="chengeButtonKFI(KFIData[currentKFIIndex].kfiId)">
+                        <button class="btn-update btn-KFI"
+                            onclick="changeButtonTab('KFI','',KFIData[currentKFIIndex].kfiId)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg" class="mb-2"
                                 style="width: 12px; height: 12px;">
                             <?= Yii::t('app', 'Update') ?>
@@ -240,7 +243,19 @@ use yii\bootstrap5\ActiveForm;
                 <div class="card-tab2" id="KGI">
                     <div class="key-title-container" id="content-KGI">
                         <div class="col-9 d-flex">
-                            <span class="key-total" id="KGI-name-0"><?= Yii::t('app', '-') ?></span>
+                            <?php if ($tab == 'self' ) { ?>
+                            <a class="key-total" id="KGI-name-0" href=""
+                                onclick="viewButtonTab('KGI','self',KGIData[currentKGIIndex].id)"
+                                style="text-decoration: none "><?= Yii::t('app', '-') ?></a>
+                            <?php } else if ($tab == 'team' ) { ?>
+                            <a class="key-total" id="KGI-name-0" href=""
+                                onclick="viewButtonTab('KGI','team',KGIData[currentKGIIndex].id)"
+                                style="text-decoration: none "><?= Yii::t('app', '-') ?></a>
+                            <?php } else { ?>
+                            <a class="key-total" id="KGI-name-0" href=""
+                                onclick="viewButtonTab('KGI','',KGIData[currentKGIIndex].kgiId)"
+                                style="text-decoration: none "><?= Yii::t('app', '-') ?></a>
+                            <?php  } ?>
                         </div>
                         <div class="col-2 pr-6" style="display: flex; justify-content: flex-end; align-items: center;">
                             <button class="show-more-btn" onclick="changeKGIData('left')">
@@ -301,24 +316,27 @@ use yii\bootstrap5\ActiveForm;
                 <div class="d-flex justify-content-between align-items-center mt-3">
                     <div class="col-4 text-end">
                         <p class="small-text-last mb-0"><?= Yii::t('app', 'Last Updated on') ?></p>
-                        <strong class="small-text-value" id="KGI-last-0">07/19/2024</strong>
+                        <strong class="small-text-value" id="KGI-last-0">-</strong>
                     </div>
                     <div class="col-4 text-center">
                         <?php if ($role >= 5 && $contentDetail['KGI']['showPercent'] !== '' && !empty($contentDetail['KGI']['KGIData']  ?? null)) { ?>
                         <?php if ($tab == 'self' ) { ?>
-                        <button class="btn-update btn-KGI" onclick="chengeButtonSelfKGI(KGIData[currentKGIIndex].id)">
+                        <button class="btn-update btn-KGI"
+                            onclick="changeButtonTab('KGI','self',KGIData[currentKGIIndex].id)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-black.svg" class="mb-2"
                                 style="width: 12px; height: 12px;">
                             <?= Yii::t('app', 'Updated') ?>
                         </button>
                         <?php } else if ($tab == 'team' ) { ?>
-                        <button class="btn-update btn-KGI" onclick="chengeButtonTeamKGI(KGIData[currentKGIIndex].id)">
+                        <button class="btn-update btn-KGI"
+                            onclick="changeButtonTab('KGI','team',KGIData[currentKGIIndex].id)">
                             <img src=" <?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-black.svg" class="mb-2"
                                 style="width: 12px; height: 12px;">
                             <?= Yii::t('app', 'Update')  ?>
                         </button>
                         <?php } else { ?>
-                        <button class="btn-update btn-KGI" onclick="chengeButtonKGI(KGIData[currentKGIIndex].kgiId)">
+                        <button class="btn-update btn-KGI"
+                            onclick="changeButtonTab('KGI','',KGIData[currentKGIIndex].kgiId)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-black.svg" class="mb-2"
                                 style="width: 12px; height: 12px;">
                             <?= Yii::t('app', 'Update')  ?>
@@ -398,7 +416,19 @@ use yii\bootstrap5\ActiveForm;
                 <div class="card-tab2" id="KPI">
                     <div class="key-title-container" id="content-KPI">
                         <div class="col-9 d-flex">
-                            <span class="key-total" id="KPI-name-0"><?= Yii::t('app', '-') ?></span>
+                            <?php if ($tab == 'self' ) { ?>
+                            <a class="key-total" id="KPI-name-0" href=""
+                                onclick="viewButtonTab('KPI','',KPIData[currentKPIIndex].id)"
+                                style="text-decoration: none "><?= Yii::t('app', '-') ?></a>
+                            <?php } else if ($tab == 'team' ) { ?>
+                            <a class="key-total" id="KPI-name-0" href=""
+                                onclick="viewButtonTab('KPI','',KPIData[currentKPIIndex].id)"
+                                style="text-decoration: none "><?= Yii::t('app', '-') ?></a>
+                            <?php } else { ?>
+                            <a class="key-total" id="KPI-name-0" href=""
+                                onclick="viewButtonTab('KPI','',KPIData[currentKPIIndex].kpiId)"
+                                style="text-decoration: none "><?= Yii::t('app', '-') ?></a>
+                            <?php  } ?>
                         </div>
                         <div class="col-2 pr-6" style="display: flex; justify-content: flex-end; align-items: center;">
 
@@ -466,19 +496,22 @@ use yii\bootstrap5\ActiveForm;
                     <div class="col-4 text-center">
                         <?php if ($role >= 5 && $contentDetail['KPI']['showPercent'] !== '' && !empty($contentDetail['KPI']['KPIData']  ?? null)) { ?>
                         <?php if ($tab == 'self' ) { ?>
-                        <button class="btn-update btn-KPI" onclick="chengeButtonSelfKPI(KPIData[currentKPIIndex].id)">
+                        <button class="btn-update btn-KPI"
+                            onclick="changeButtonTab('KPI','self',KPIData[currentKPIIndex].id)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg" class="mb-2"
                                 style="width: 12px; height: 12px;">
                             <?= Yii::t('app', 'Updated') ?>
                         </button>
                         <?php } else if ($tab == 'team' ) { ?>
-                        <button class="btn-update btn-KPI-0" onclick="chengeButtonTeamKPI(KPIData[currentKPIIndex].id)">
+                        <button class="btn-update btn-KPI-0"
+                            onclick="changeButtonTab('KPI','team',KPIData[currentKPIIndex].id)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg" class="mb-2"
                                 style="width: 12px; height: 12px;">
                             <?= Yii::t('app', 'Update') ?>
                         </button>
                         <?php } else { ?>
-                        <button class="btn-update btn-KPI-0" onclick="chengeButtonKPI(KPIData[currentKPIIndex].kpiId)">
+                        <button class="btn-update btn-KPI-0"
+                            onclick="changeButtonTab('KPI','',KPIData[currentKPIIndex].kpiId)">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg" class="mb-2"
                                 style="width: 12px; height: 12px;">
                             <?= Yii::t('app', 'Update') ?>
@@ -664,11 +697,6 @@ function chaengeData() {
 
 }
 
-
-<?php
-        // $baseUrl = Yii::$app->homeUrl;
-        ?>
-
 var $baseUrl = window.location.protocol + "/ / " + window.location.host;
 if (window.location.host == 'localhost') {
     $baseUrl = window.location.protocol + "//" + window.location.host + '/HRVC/frontend/web/';
@@ -676,190 +704,6 @@ if (window.location.host == 'localhost') {
     $baseUrl = window.location.protocol + "//" + window.location.host + '/';
 }
 $url = $baseUrl;
-
-function chengeButtonKFI(id) {
-    if (isNaN(id)) {
-        alert("Invalid ID. Please provide a numeric value.");
-        return;
-    }
-    // alert(id);
-    var url = $url + `home/dashboard/kfi-id`;
-    // alert(url);
-    $.ajax({
-        type: "POST",
-        dataType: 'JSON',
-        url: url,
-        data: {
-            id: id
-        },
-        success: function(data) {
-            // alert(data);
-            kfiId = data.kfiId;
-            // alert(kfiId);
-            const kfiUrl = $url + `kfi/management/update-kfi/` + kfiId;
-            // alert(kpiUrl);
-            window.location.href = kfiUrl;
-        },
-    });
-
-}
-
-function chengeButtonSelfKGI(id) {
-    if (isNaN(id)) {
-        alert("Invalid ID. Please provide a numeric value.");
-        return;
-    }
-
-    var url = $url + `home/dashboard/kgi-employee-id`;
-    // alert(url);
-    $.ajax({
-        type: "POST",
-        dataType: 'JSON',
-        url: url,
-        data: {
-            id: id
-        },
-        success: function(data) {
-            // alert(data);
-            kgiEmployeeId = data.kgiEmployeeId;
-            const kgiUrl = $url + `kgi/kgi-personal/update-personal-kgi/` + kgiEmployeeId;
-            // alert(kgiUrl);
-            window.location.href = kgiUrl;
-        },
-    });
-
-}
-
-function chengeButtonTeamKGI(id) {
-    if (isNaN(id)) {
-        alert("Invalid ID. Please provide a numeric value.");
-        return;
-    }
-
-    var url = $url + `home/dashboard/kgi-team-id`;
-    // alert(url);
-    $.ajax({
-        type: "POST",
-        dataType: 'JSON',
-        url: url,
-        data: {
-            id: id
-        },
-        success: function(data) {
-            // alert(data);
-            kgiTeamId = data.kgiTeamId;
-            const kgiUrl = $url + `kgi/kgi-team/prepare-update/` + kgiTeamId;
-            // alert(kpiUrl);
-            window.location.href = kgiUrl;
-        },
-    });
-
-}
-
-function chengeButtonKGI(id) {
-    if (isNaN(id)) {
-        alert("Invalid ID. Please provide a numeric value.");
-        return;
-    }
-
-    var url = $url + `home/dashboard/kgi-id`;
-    // alert(url);
-    $.ajax({
-        type: "POST",
-        dataType: 'JSON',
-        url: url,
-        data: {
-            id: id
-        },
-        success: function(data) {
-            // alert(data);
-            kgiId = data.kgiId;
-            const kgiUrl = $url + `kgi/management/prepare-update/` + kgiId;
-            // alert(kgiUrl);
-            window.location.href = kgiUrl;
-        },
-    });
-
-}
-
-function chengeButtonSelfKPI(id) {
-    if (isNaN(id)) {
-        alert("Invalid ID. Please provide a numeric value.");
-        return;
-    }
-
-    var url = $url + `home/dashboard/kpi-employee-id`;
-    // alert(url);
-    $.ajax({
-        type: "POST",
-        dataType: 'JSON',
-        url: url,
-        data: {
-            id: id
-        },
-        success: function(data) {
-            // alert(data);
-            kpiEmployeeId = data.kpiEmployeeId;
-            const kpiUrl = $url + `kpi/kpi-personal/update-personal-kpi/` + kpiEmployeeId;
-            // alert(kpiUrl);
-            window.location.href = kpiUrl;
-        },
-    });
-
-}
-
-function chengeButtonTeamKPI(id) {
-    if (isNaN(id)) {
-        alert("Invalid ID. Please provide a numeric value.");
-        return;
-    }
-
-    var url = $url + `home/dashboard/kpi-team-id`;
-    // alert(url);
-    $.ajax({
-        type: "POST",
-        dataType: 'JSON',
-        url: url,
-        data: {
-            id: id
-        },
-        success: function(data) {
-            // alert(data);
-            kpiTeamId = data.kpiTeamId;
-            const kpiUrl = $url + `kpi/kpi-team/prepare-update/` + kpiTeamId;
-            // alert(kpiUrl);
-            window.location.href = kpiUrl;
-        },
-    });
-
-}
-
-function chengeButtonKPI(id) {
-    if (isNaN(id)) {
-        alert("Invalid ID. Please provide a numeric value.");
-        return;
-    }
-    // alert(id);
-    var url = $url + `home/dashboard/kpi-id`;
-    // alert(url);
-    $.ajax({
-        type: "POST",
-        dataType: 'JSON',
-        url: url,
-        data: {
-            id: id
-        },
-        success: function(data) {
-            // alert(data);
-            kpiId = data.kpiId;
-            // alert(kpiId);
-            const kpiUrl = $url + `kpi/management/prepare-update/` + kpiId;
-            // alert(kpiUrl);
-            window.location.href = kpiUrl;
-        },
-    });
-
-}
 
 document.addEventListener("DOMContentLoaded", () => {
     const progressBar = document.getElementById("progress-bar");

@@ -2,11 +2,11 @@
 
     <div class="chart-prevnext-Button">
         <button id="prevButton" class="chart-nav-button">
-            <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/left.svg" alt="Previous">
+            <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/left-off.svg" alt="Previous">
         </button>
         <div id="container" class="chart-graph"></div>
         <button id="nextButton" class="chart-nav-button">
-            <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/right.svg" alt="Next">
+            <img src="<?=Yii::$app->homeUrl?>images/icons/Settings/right-off.svg" alt="Next">
         </button>
     </div>
 
@@ -22,43 +22,40 @@
 
     <div class="chart-button-group">
         <div class="chart-button-wrapper">
-            <button id="KFI" class="chart-key-button kfi"></button>
-            <span>KFI</span>
+            <button id="KFI" class="chart-key-button kfi">
+                KFI
+            </button>
         </div>
         <div class="chart-button-wrapper">
-            <button id="KGI" class="chart-key-button kgi"></button>
-            <span>KGI</span>
+            <button id="KGI" class="chart-key-button kgi">KGI</button>
         </div>
         <div class="chart-button-wrapper">
-            <button id="KPI" class="chart-key-button kpi"></button>
-            <span>KPI</span>
+            <button id="KPI" class="chart-key-button kpi">KPI</button>
         </div>
     </div>
 </div>
 
 
 <?php
-$currentYear = date("Y");  // ปีปัจจุบัน
-$currentYear = substr($currentYear, -2);  // Extract the last two digits
+$currentYear = date("Y"); 
+$currentYearShort = substr($currentYear, -2);  // ปีแบบสองหลัก
+$currentMonth = date("n") - 1;                // เดือนปัจจุบัน (0-11)
+$currentDay = date("j");                      // วันปัจจุบัน
+$totalDaysInMonth = date("t");                // จำนวนวันในเดือนปัจจุบัน
 
-$months = array(
-    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-);
+// คำนวณตำแหน่งวันปัจจุบันในเดือน (สัดส่วน)
+$currentDayPosition = $currentMonth + ($currentDay - 1) / $totalDaysInMonth;
 
-$categories = array();
-foreach ($months as $month) {
-    $categories[] = $month . ' ' . $currentYear;
-}
-
-$currentMonth = date("n") - 1;  // ลบ 1 เพราะค่าเดือนใน PHP เริ่มจาก 1-12 แต่ใน JavaScript เริ่มจาก 0-11
-// $categories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; // สร้าง Array ของชื่อเดือน
+$months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+$categories = array_map(fn($month) => $month . ' ' . $currentYearShort, $months);
 ?>
+
 <script src="https://code.highcharts.com/highcharts.js"></script>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     const categories = <?php echo json_encode($categories); ?>;
-    const currentMonth = <?php echo $currentMonth; ?>; // ใช้ค่าเดือนปัจจุบันจาก PHP
+    const currentMonth = <?php echo $currentDayPosition; ?>; // ใช้ค่าเดือนปัจจุบันจาก PHP
     let currentIndex = 0; // Default to KFI
     let currentCategory = "Company"; // Default category is "Company"
     let type = "KFI";
@@ -66,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // $baseUrl = Yii::$app->homeUrl;
     ?>
 
-    var $baseUrl = window.location.protocol + "/ / " + window.location.host;
+    var $baseUrl = window.location.protocol + "/ /" + window.location.host;
     if (window.location.host == 'localhost') {
         $baseUrl = window.location.protocol + "//" + window.location.host + '/HRVC/frontend/web/';
     } else {
@@ -283,12 +280,72 @@ document.addEventListener("DOMContentLoaded", () => {
         // Enable/disable navigation buttons based on the current chart
         const prevButton = document.getElementById('prevButton');
         const nextButton = document.getElementById('nextButton');
-        if (currentIndex === 0) { // KFI is active
-            prevButton.style.display = 'none';
-            nextButton.style.display = 'none';
+        if (currentIndex != 0) { // KFI is active
+
+            // alert(currentIndex);
+            const imgElementright = document.querySelector('img[src*="right-off.svg"]');
+            const imgElementleft = document.querySelector('img[src*="left-off.svg"]');
+            const prevButton = document.getElementById('prevButton'); // เลือกปุ่มตาม ID
+            const nextButton = document.getElementById('nextButton'); // เลือกปุ่มตาม ID
+
+            if (imgElementright) {
+                const newSrcright = imgElementright.getAttribute('src').replace('right-off.svg',
+                    'right.svg');
+                imgElementright.setAttribute('src', newSrcright);
+            }
+
+            if (imgElementleft) {
+                const newSrcleft = imgElementleft.getAttribute('src').replace('left-off.svg',
+                    'left.svg');
+                imgElementleft.setAttribute('src', newSrcleft);
+            }
+
+            if (prevButton) {
+                prevButton.disabled = false;
+                prevButton.style.opacity = '1'; // ทำให้ปุ่มจางลง
+                prevButton.style.cursor = 'pointer'; // เปลี่ยนเมาส์เป็นเครื่องหมายห้าม
+            }
+
+            if (nextButton) {
+                nextButton.disabled = false;
+                nextButton.style.opacity = '1'; // ทำให้ปุ่มจางลง
+                nextButton.style.cursor = 'pointer'; // เปลี่ยนเมาส์เป็นเครื่องหมายห้าม
+            }
+
+            // prevButton.style.display = 'none';
+            // nextButton.style.display = 'none';
         } else {
-            prevButton.style.display = 'inline-block';
-            nextButton.style.display = 'inline-block';
+            const imgElementright = document.querySelector('img[src*="right.svg"]');
+            const imgElementleft = document.querySelector('img[src*="left.svg"]');
+            const prevButton = document.getElementById('prevButton'); // เลือกปุ่มตาม ID
+            const nextButton = document.getElementById('nextButton'); // เลือกปุ่มตาม ID
+
+            if (imgElementright) {
+                const newSrcright = imgElementright.getAttribute('src').replace('right.svg',
+                    'right-off.svg');
+                imgElementright.setAttribute('src', newSrcright);
+            }
+
+            if (imgElementleft) {
+                const newSrcleft = imgElementleft.getAttribute('src').replace('left.svg',
+                    'left-off.svg');
+                imgElementleft.setAttribute('src', newSrcleft);
+            }
+
+            if (prevButton) {
+                prevButton.disabled = true;
+                prevButton.style.opacity = '0.5'; // ทำให้ปุ่มจางลง
+                prevButton.style.cursor = 'not-allowed'; // เปลี่ยนเมาส์เป็นเครื่องหมายห้าม
+            }
+
+            if (nextButton) {
+                nextButton.disabled = true;
+                nextButton.style.opacity = '0.5'; // ทำให้ปุ่มจางลง
+                nextButton.style.cursor = 'not-allowed'; // เปลี่ยนเมาส์เป็นเครื่องหมายห้าม
+            }
+
+            // prevButton.style.display = 'inline-block';
+            // nextButton.style.display = 'inline-block';
         }
 
         // Re-enable all key buttons
@@ -301,7 +358,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Event listeners for KFI, KGI, and KPI
     document.getElementById('KFI').addEventListener('click', () => {
-        // alert('ddd');
+        // alert('KFI');
+        // 🎨 🔥 ปรับ CSS ปุ่มเมื่อเลือก KFI
+        document.querySelector('.kfi').style.cssText =
+            'background: #A8BBFF; border: 0.5px solid #5078FF;';
+        document.querySelector('.kgi').style.cssText = 'background: none; border: none;';
+        document.querySelector('.kpi').style.cssText = 'background: none; border: none;';
         currentIndex = 0;
         currentCategory = "Company"; // Change to "Company" automatically when KFI is selected
         type = "KFI";
@@ -311,7 +373,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById('KGI').addEventListener('click', () => {
         type = "KGI";
-        // alert('ddd');
+        // alert('KGI');
+        // 🎨 🔥 ปรับ CSS ปุ่มเมื่อเลือก KFI
+        document.querySelector('.kfi').style.cssText = 'background: none; border: none;';
+        document.querySelector('.kgi').style.cssText =
+            'background: #FDCA40; border: 0.5px solid #A47800;';
+        document.querySelector('.kpi').style.cssText = 'background: none; border: none;';
         currentIndex = 1;
         updateInfo();
         renderChart(currentCategory, type);
@@ -319,6 +386,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById('KPI').addEventListener('click', () => {
         type = "KPI";
+        // alert('KPI');    
+        // 🎨 🔥 ปรับ CSS ปุ่มเมื่อเลือก KFI
+        document.querySelector('.kfi').style.cssText = 'background: none; border: none;';
+        document.querySelector('.kgi').style.cssText = 'background: none; border: none;';
+        document.querySelector('.kpi').style.cssText =
+            'background: #FF715B; border: 0.5px solid #C21D03;';
         currentIndex = 2;
         updateInfo();
         renderChart(currentCategory, type);
@@ -339,6 +412,11 @@ document.addEventListener("DOMContentLoaded", () => {
         renderChart(currentCategory, type);
         updateInfo();
     });
+
+    document.querySelector('.kfi').style.cssText =
+        'background: #A8BBFF; border: 0.5px solid #5078FF;';
+    document.querySelector('.kgi').style.cssText = 'background: none; border: none;';
+    document.querySelector('.kpi').style.cssText = 'background: none; border: none;';
 
     // Initial render
     updateInfo();
