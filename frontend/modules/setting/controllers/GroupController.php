@@ -11,6 +11,7 @@ use frontend\models\hrvc\Department;
 use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Team;
+use frontend\models\hrvc\UserRole;
 use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
@@ -122,6 +123,26 @@ class GroupController extends Controller
         $totalDepartment = 0;
         $totalTeam = 0;
         $totalEmployees = 0;
+        $role = UserRole::userRight();
+        if ($role == 7) {
+            $adminId = Yii::$app->user->id;
+        }
+        if ($role == 6) {
+            $gmId = Yii::$app->user->id;
+        }
+        if ($role == 5) {
+            $managerId = Yii::$app->user->id;
+        }
+        if ($role == 4) {
+            $supervisorId = Yii::$app->user->id;
+        }
+        if ($role == 3) {
+            $teamLeaderId = Yii::$app->user->id;
+        }
+        if ($role == 1 || $role == 2) {
+            $staffId = Yii::$app->user->id;
+            //return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
+        }
 
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -204,6 +225,7 @@ class GroupController extends Controller
             "totalBranches" => $totalBranches,
             "totalDepartment" => $totalDepartment,
             "totalTeam" => $totalTeam,
+            "role" => $role,
             "employees" => $filteredEmployees
         ]);
     }

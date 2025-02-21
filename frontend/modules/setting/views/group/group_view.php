@@ -21,39 +21,38 @@ $this->title = 'Group profile';
         </div>
 
         <div class="row mt-20">
-            <div class="col-lg-3 col-md-5 col-12" style="margin-top:-170px;">
-                <div class="avatar-upload-preview" style="margin-left:36px;">
+            <div class="col-11" style="margin-top:-170px; display: flex; align-items: center; gap: 20px;">
+                <div class="avatar-upload-preview" style="margin-left:36px; margin-right: 0px;">
                     <div class="avatar-preview">
-                        <?php
-					if ($group["picture"] != null) { ?>
+                        <?php if ($group["picture"] != null) { ?>
                         <img src="<?= Yii::$app->homeUrl . $group['picture'] ?>" class="company-group-picture">
-                        <?php
-					} else { ?>
-
-
+                        <?php } else { ?>
                         <img src="<?= Yii::$app->homeUrl . 'image/groupProfile.jpg' ?>" class="company-group-picture">
-                        <?php
-					}
-					?>
+                        <?php } ?>
+                    </div>
+                </div>
+                <div class="mt-21" style="margin-top: 100px;">
+                    <!-- ลบระยะห่างระหว่างรูปและรายละเอียด -->
+                    <div class="col-12 name-tokyo">
+                        <span class="name-sub-tokyo"><?= $group['displayName'] ?></span>
+                        <span class="name-full-tokyo">(<?= $group['groupName'] ?>)</span>
+                    </div>
+                    <div class="col-12 tokyo-small">
+                        <img src="<?= Yii::$app->homeUrl . 'image/hyphen.svg' ?>"> <?= $group['tagLine'] ?>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-7 col-md-4 col-12 mt-21">
-                <div class="col-12 name-tokyo">
-                    <span class="name-sub-tokyo"><?= $group['displayName'] ?></span>
-                    <span class="name-full-tokyo">(<?= $group['groupName'] ?>)</span>
-                </div>
-                <div class="col-12 tokyo-small">
-                    <img src="<?= Yii::$app->homeUrl . 'image/hyphen.svg' ?>"> <?= $group['tagLine'] ?>
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-3 col-12 mt-21 tcg-edit0">
+
+
+            <?php if($role >= 5 ) { ?>
+            <div class="col-1 mt-21 tcg-edit0" style="right: 15px;">
                 <a href="<?= Yii::$app->homeUrl ?>setting/group/update-group/<?= ModelMaster::encodeParams(['groupId' => $group['groupId']]) ?>"
-                    class="btn-update-group">
+                    class="btn-update-group" style="width: 133px;">
                     <img src="<?= Yii::$app->homeUrl . 'image/refresh-white.svg' ?>">
                     Update Information
                 </a>
             </div>
+            <?php }?>
         </div>
         <div class="row group-details">
             <div class="col-9 mx-auto group-body  group-body ">
