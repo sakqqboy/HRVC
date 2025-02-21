@@ -43,7 +43,6 @@ $this->title = 'Group profile';
                 </div>
             </div>
 
-
             <?php if($role >= 5 ) { ?>
             <div class="col-1 mt-21 tcg-edit0" style="right: 15px;">
                 <a href="<?= Yii::$app->homeUrl ?>setting/group/update-group/<?= ModelMaster::encodeParams(['groupId' => $group['groupId']]) ?>"

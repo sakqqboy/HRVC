@@ -12,6 +12,7 @@ use frontend\models\hrvc\DepartmentTitle;
 use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Team;
+use frontend\models\hrvc\UserRole;
 use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
@@ -64,17 +65,88 @@ class CompanyController extends Controller
 		if (!isset($group) && !empty($group)) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
 		}
+		$role = UserRole::userRight();
+        if ($role == 7) {
+            $adminId = Yii::$app->user->id;
+        }
+        if ($role == 6) {
+            $gmId = Yii::$app->user->id;
+        }
+        if ($role == 5) {
+            $managerId = Yii::$app->user->id;
+        }
+        if ($role == 4) {
+            $supervisorId = Yii::$app->user->id;
+        }
+        if ($role == 3) {
+            $teamLeaderId = Yii::$app->user->id;
+        }
+        if ($role == 1 || $role == 2) {
+            $staffId = Yii::$app->user->id;
+            //return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
+        }
 		$groupId = $group["groupId"];
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$companies = curl_exec($api);
+
+		if ($companies === false) {
+			throw new Exception('API Error: ' . curl_error($api));
+		}
+
 		$companies = json_decode($companies, true);
-		//throw new exception(print_r($companies, true));
 		curl_close($api);
+
+		$data = [];
+		if (!empty($companies)) {
+			foreach ($companies as $company) :
+				$companyId = $company['companyId'];
+
+				$branchIds = Branch::find()->select('branchId')
+					->where(["companyId" => $companyId, "status" => 1])
+					->asArray()->column();  // คืนค่าเป็น array แทน all()
+
+				$totalBranch = count($branchIds);
+				$totalEmployee = Employee::find()->where(["companyId" => $companyId])->count();
+
+				$departments = [];
+				$teams = [];
+				if (!empty($branchIds)) {
+					$departments = Department::find()->select('departmentId')
+						->where(["status" => 1])
+						->andWhere(['IN', 'branchId', $branchIds])
+						->asArray()->column();
+
+					if (!empty($departments)) {
+						$teams = Team::find()->select('teamId')
+							->where(["status" => 1])
+							->andWhere(['IN', 'departmentId', $departments])
+							->asArray()->column();
+					}
+				}
+
+				$data[] = [
+					"about" => $company['about'],
+					"picture" => $company["picture"],
+					"companyName" => $company['companyName'],
+					"flag" => $company['flag'],
+					"city" => $company['city'],
+					"countryName" => $company['countryName'],
+					"companyId" => $company['companyId'],
+					"totalDepartment" => count($departments),
+					"totalTeam" => count($teams),
+					"totalBranch" => $totalBranch,
+					"totalEmployee" => $totalEmployee
+				];
+			endforeach;
+		}
+
+		
 		return $this->render('company_grid', [
-			"companies" => $companies,
+			"companies" => $data,
+			"role" => $role,
 			"groupId" => $groupId
 		]);
 	}

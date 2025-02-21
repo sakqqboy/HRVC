@@ -120,3 +120,31 @@
     width: 22px;
     height: 25px;
 }
+
+
+.mid-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.start-center {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.between-center {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.between-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    /* ปรับให้ div เต็มพื้นที่ */
+}
