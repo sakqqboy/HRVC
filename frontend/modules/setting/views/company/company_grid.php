@@ -13,7 +13,7 @@ $this->title = 'company';
         </div>
         <a href="<?= Yii::$app->homeUrl ?>setting/company/create/<?= ModelMaster::encodeParams(['groupId' => $groupId]) ?>"
             style="text-decoration: none;">
-            <button type="button" class="btn-create" style="padding: 7px 9px;"
+            <button type="button" class="btn-create" style="padding: 3px 9px;"
                 action="<?= Yii::$app->homeUrl ?>setting/group/create-group"><?= Yii::t('app', 'Create New') ?>
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
                     style="width:18px; height:18px; margin-top:-3px;">
