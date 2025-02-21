@@ -58,6 +58,26 @@ class CompanyController extends Controller
 			"groupId" => $groupId
 		]);
 	}
+	public function actionCompanyGrid()
+	{
+		$group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
+		if (!isset($group) && !empty($group)) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
+		}
+		$groupId = $group["groupId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$companies = curl_exec($api);
+		$companies = json_decode($companies, true);
+		//throw new exception(print_r($companies, true));
+		curl_close($api);
+		return $this->render('company_grid', [
+			"companies" => $companies,
+			"groupId" => $groupId
+		]);
+	}
 	public function actionCreate($hash)
 	{
 		$param = ModelMaster::decodeParams($hash);

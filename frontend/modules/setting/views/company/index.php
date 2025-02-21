@@ -11,7 +11,7 @@ $this->title = 'company';
         <div class="pim-name-title ml-10">
             Company
         </div>
-        <a href="<?= Yii::$app->homeUrl ?>setting/company/create/<?= ModelMaster::encodeParams(['groupId' => $groupId]) ?>"
+        <a href="<?= Yii::$app->homeUrl ?>setting/company/company-grid/<?= ModelMaster::encodeParams(['groupId' => $groupId]) ?>"
             style="text-decoration: none;">
             <button type="button" class="btn-create" style="padding: 7px 9px;"
                 action="<?= Yii::$app->homeUrl ?>setting/group/create-group"><?= Yii::t('app', 'Create New') ?>
