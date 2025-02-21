@@ -413,10 +413,22 @@ $this->title = "INDIVIDUAL KGI";
                                                         }
                                                         ?>
                                                     </div>
-                                                    <div class="col-12 text-center priority-box">
-                                                        <div class="col-12"><?= Yii::t('app', 'Priority') ?></div>
-                                                        <div class="col-12 text-priority"><?= $kgi["priority"] ?></div>
-                                                    </div>
+                                                    <?php
+                                                    if ($kgi["priority"] != '') {
+                                                    ?>
+                                                        <div class="col-12 text-center priority-box">
+                                                            <div class="col-12"><?= Yii::t('app', 'Priority') ?></div>
+                                                            <div class="col-12 text-priority"><?= $kgi["priority"] ?></div>
+                                                        </div>
+                                                    <?php
+                                                    } else { ?>
+                                                        <div class="col-12 text-center priority-box-null">
+                                                            <div class="col-12"><?= Yii::t('app', 'Priority') ?></div>
+                                                            <div class="col-12 text-priority">N/A</div>
+                                                        </div>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                 </div>
 
                                             </div>

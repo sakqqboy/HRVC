@@ -48,7 +48,7 @@ class Path
 		if ($_SERVER['HTTP_HOST'] == "localhost") {
 			$url = 'http://localhost/system/index.php';
 		} else {
-			$url = 'https://fs.tcg-hrvc-system.com/index';
+			$url = 'https://fs.tcg-hrvc-system.com/financial/index';
 		}
 		return $url;
 	}

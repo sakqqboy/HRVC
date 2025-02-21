@@ -404,7 +404,7 @@ class ManagementController extends Controller
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
 		// ดึงข้อมูล KFI
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&kfiHistoryId=0");
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&kfiHistoryId=" . $kfiHistoryId);
 		$kfi = curl_exec($api);
 		$kfi = json_decode($kfi, true);
 

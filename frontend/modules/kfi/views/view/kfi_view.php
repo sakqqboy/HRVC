@@ -84,11 +84,12 @@ $this->title = 'Company KFI History';
                                             <?php
                                             if ($colorFormat == 'disable') {
                                             ?>
-                                                <a class="btn btn-bg-blue-xs pr-2 pl-3 mr-5" data-bs-toggle="modal"
-                                                    data-bs-target="#staticBackdrop2" onclick="javascript:updateKfi(<?= $kfiId ?>)">
+                                                <a class="btn btn-bg-blue-xs mr-5" style="margin-top: -3px;"
+                                                    href="<?= Yii::$app->homeUrl ?>kfi/management/update-kfi/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, 'kfiHistoryId' => $kfi['kfiHistoryId']]) ?>">
+                                                    <!-- data-bs-toggle="modal" data-bs-target="#staticBackdrop2" onclick="javascript:updateKfi(<?php // $kfiId 
+                                                                                                                                                ?>)"> -->
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
-                                                        alt="History" style="margin-top: -3px; width: 12px; height: 14px;"
-                                                        class="home-icon">
+                                                        alt="History" class="home-icon" style="margin-top: -2px;">
                                                 </a>
                                             <?php
                                             }
