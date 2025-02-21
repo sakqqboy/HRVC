@@ -1908,32 +1908,6 @@
 	border-radius: 24.444px;
 }
 
-.mid-center {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-}
-
-.start-center {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-}
-
-.between-center {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.between-column {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	height: 100%;
-	/* ปรับให้ div เต็มพื้นที่ */
-}
 
 input:checked+.slider {
 	background-color: hsla(209, 70%, 49%, 1);
