@@ -81,9 +81,9 @@ $this->title = 'Team KGI History';
                                 <?php
                                             if ($colorFormat == 'disable') {
                                             ?>
-                                <a class="btn btn-bg-blue-xs pr-2 pl-3 mr-5" data-bs-toggle="modal"
-                                    data-bs-target="#update-kgi-modal-team" style="margin-top: -3px; "
-                                    onclick="javascript:updateTeamKgi(<?= $kgiTeamId ?>)">
+                                <a class="btn btn-bg-blue-xs pr-2 pl-3 mr-5"
+                                    href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/prepare-update/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiHistoryId' => 0]) ?>"
+                                    style="margin-top: -3px; " onclick="javascript:updateTeamKgi(<?= $kgiTeamId ?>)">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
                                         alt="History" style="margin-top: -2px; width: 12px; height: 14px;"
                                         class="home-icon">
