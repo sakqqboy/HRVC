@@ -25,10 +25,10 @@
     /* ดันออกไปทางซ้าย 20px */
     margin-right: -20px;
     /* ดันออกไปทางขวา 20px */
+    padding-bottom: 20px;
     padding-top: 20px;
     padding-right: 34px;
     padding-left: 40px;
-    top: -10px;
     left: -10px;
     /* เลื่อนขึ้น 10px */
     position: relative;
@@ -157,7 +157,6 @@
         padding-top: 20px;
         padding-right: 34px;
         padding-left: 40px;
-        top: -10px;
         left: -10px;
         position: relative;
     }

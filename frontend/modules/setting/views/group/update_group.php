@@ -14,6 +14,8 @@ $this->title = 'Update Group';
 	'action' => Yii::$app->homeUrl . 'setting/group/save-update-group'
 
 ]); ?>
+
+<link rel="stylesheet" href="<?= Yii::$app->homeUrl ?>assets/bootstrap4/css/bootstrap.min.css">
 <div class="company-group-edit">
     <div class="contrainer-body">
         <div class="col-12 banner-uploade" id="imagePreviewBanner">

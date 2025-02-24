@@ -2275,7 +2275,7 @@ input:checked+.slider:before {
 	}
 
 	.submain-content {
-		height: 50%;
+		height: auto;
 		/* ลดความสูงลง 50% */
 		max-height: 50vh;
 		/* ใช้ vh เพื่อให้ความสูงไม่เกินครึ่งหนึ่งของหน้าจอ */
@@ -2308,7 +2308,7 @@ input:checked+.slider:before {
 	}
 
 	.submain-content {
-		height: 50%;
+		height: auto;
 		/* ลดความสูงลง 50% */
 		max-height: 50vh;
 		/* ใช้ vh เพื่อให้ความสูงไม่เกินครึ่งหนึ่งของหน้าจอ */
@@ -2338,12 +2338,7 @@ input:checked+.slider:before {
 		height: calc(100% / 0.70);
 	}
 
-	.submain-content {
-		height: 100%;
-		/* ลดความสูงลง 50% */
-		max-height: 50vh;
-		/* ใช้ vh เพื่อให้ความสูงไม่เกินครึ่งหนึ่งของหน้าจอ */
-	}
+
 
 	/* .contrainer-body-detail {
 		transform: scale(0.75);
@@ -2372,9 +2367,28 @@ input:checked+.slider:before {
 	}
 
 	.submain-content {
-		height: 50%;
+		height: auto;
 		/* ลดความสูงลง 50% */
-		max-height: 50vh;
+		/* max-height: 120vh; */
+		/* ใช้ vh เพื่อให้ความสูงไม่เกินครึ่งหนึ่งของหน้าจอ */
+		/* overflow: hidden; */
+		/* ป้องกันไม่ให้เนื้อหาล้นออก */
+		box-sizing: border-box;
+		/* รวม padding และ border ในขนาดที่กำหนด */
+
+	}
+
+	.company-group-edit {
+		height: 100%;
+		/* ลดความสูงลง 50% */
+		max-height: 150vh;
+		/* ใช้ vh เพื่อให้ความสูงไม่เกินครึ่งหนึ่งของหน้าจอ */
+	}
+
+	.company-group-body {
+		height: 100%;
+		/* ลดความสูงลง 50% */
+		max-height: 110vh;
 		/* ใช้ vh เพื่อให้ความสูงไม่เกินครึ่งหนึ่งของหน้าจอ */
 	}
 
@@ -2417,7 +2431,7 @@ input:checked+.slider:before {
 		height: calc(100% / 0.50);
 	} */
 	.submain-content {
-		height: 50%;
+		height: auto;
 		/* ลดความสูงลง 50% */
 		max-height: 50vh;
 		/* ใช้ vh เพื่อให้ความสูงไม่เกินครึ่งหนึ่งของหน้าจอ */
