@@ -1,5 +1,5 @@
 <div style="display: flex; justify-content: flex-end; gap: 16px; align-items: center; width: 100%;">
-    <select class="form-select font-size-12 select-pim" id="company-filter" onchange="applySelectStyle(this)"
+    <!-- <select class="form-select font-size-12 select-pim" id="company-filter" onchange="applySelectStyle(this)"
         style="flex: 1;">
         <option value=""><?= Yii::t('app', 'Employee') ?></option>
         <option value=""><?= Yii::t('app', 'Employee') ?></option>
@@ -11,7 +11,7 @@
         <option value=""><?= Yii::t('app', 'Tokyo Co..') ?></option>
         <option value=""><?= Yii::t('app', 'Tokyo Co..') ?></option>
 
-    </select>
+    </select> -->
 
     <select class="form-select font-size-12 select-pim" id="month-filter" onchange="applySelectStyle(this)"
         style="flex: 1;">

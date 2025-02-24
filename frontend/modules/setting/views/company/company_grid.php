@@ -5,7 +5,7 @@ use common\models\ModelMaster;
 $this->title = 'company';
 ?>
 
-<div class="mt-90">
+<div class="contrainer-body mt-10">
     <div class=" d-flex align-items-center gap-2">
         <img src="<?= Yii::$app->homeUrl ?>image/branch-icon-black.svg" style="width: 24px; height: 24px;">
         <div class="pim-name-title ml-10">
@@ -21,29 +21,27 @@ $this->title = 'company';
         </a>
     </div>
 
-    <div class="company-group-edit mt-30">
-        <div class="between-center" style="width: 100%;">
-            <div class="col-7">
-                Registered Companies
-            </div>
-            <div class="col-4" style="text-align: right;">
-                <?= $this->render('filter_list', []) ?>
-            </div>
-            <div class="col-1 pr-0 text-end">
-                <div class="btn-group" role="group">
-                    <a href="#" class="btn btn-primary font-size-12 pim-change-modes">
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridwhite.svg"
-                            style="cursor: pointer;">
-                    </a>
-                    <a href="<?= Yii::$app->homeUrl . 'setting/company/index' ?>"
-                        class="btn btn-outline-primary font-size-12 pim-change-modes">
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listblack.svg"
-                            style="cursor: pointer;">
-                    </a>
-                </div>
+    <div class="between-center mt-20" style="width: 100%;">
+        <div class="col-9">
+            Registered Companies
+        </div>
+        <div class="col-2" style="text-align: right;">
+            <?= $this->render('filter_list', []) ?>
+        </div>
+        <div class="col-1 pr-0 text-end">
+            <div class="btn-group" role="group">
+                <a href="#" class="btn btn-primary font-size-12 pim-change-modes">
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridwhite.svg" style="cursor: pointer;">
+                </a>
+                <a href="<?= Yii::$app->homeUrl . 'setting/company/index' ?>"
+                    class="btn btn-outline-primary font-size-12 pim-change-modes">
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listblack.svg" style="cursor: pointer;">
+                </a>
             </div>
         </div>
+    </div>
 
+    <div class="pim-body bg-white mt-10">
         <div class="alert alert-branch-body" role="alert">
             <div class="row" id="company-branch">
                 <?php
@@ -90,7 +88,7 @@ $this->title = 'company';
                                         </div>
                                         <span class="dropdown" href="#" id="dropdownMenuLink-1"
                                             data-bs-toggle="dropdown" style="align-self: flex-start;">
-                                            <img src="<?= Yii::$app->homeUrl ?>/image/menu.svg" alt="icon"
+                                            <img src="<?= Yii::$app->homeUrl ?>image/menu.svg" alt="icon"
                                                 style="cursor: pointer;">
                                         </span>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-1">
@@ -130,15 +128,15 @@ $this->title = 'company';
                                                 <div class="col-12 text-left">
                                                     <div class="circle-container">
                                                         <div class="cycle-current"><img
-                                                                src="<?= Yii::$app->homeUrl ?>/image/branches.svg"
+                                                                src="<?= Yii::$app->homeUrl ?>image/branches.svg"
                                                                 alt="icon">
                                                         </div>
                                                         <div class="cycle-current"><img
-                                                                src="<?= Yii::$app->homeUrl ?>/image/branches.svg"
+                                                                src="<?= Yii::$app->homeUrl ?>image/branches.svg"
                                                                 alt="icon">
                                                         </div>
                                                         <div class="cycle-current"><img
-                                                                src="<?= Yii::$app->homeUrl ?>/image/branches.svg"
+                                                                src="<?= Yii::$app->homeUrl ?>image/branches.svg"
                                                                 alt="icon">
                                                         </div>
                                                         <div class="text-name-current">
@@ -156,15 +154,15 @@ $this->title = 'company';
                                                 <div class="col-12 text-left">
                                                     <div class="circle-container">
                                                         <div class="cycle-current"><img
-                                                                src="<?= Yii::$app->homeUrl ?>/image/departments.svg"
+                                                                src="<?= Yii::$app->homeUrl ?>image/departments.svg"
                                                                 alt="icon">
                                                         </div>
                                                         <div class="cycle-current"><img
-                                                                src="<?= Yii::$app->homeUrl ?>/image/departments.svg"
+                                                                src="<?= Yii::$app->homeUrl ?>image/departments.svg"
                                                                 alt="icon">
                                                         </div>
                                                         <div class="cycle-current"><img
-                                                                src="<?= Yii::$app->homeUrl ?>/image/departments.svg"
+                                                                src="<?= Yii::$app->homeUrl ?>image/departments.svg"
                                                                 alt="icon">
                                                         </div>
                                                         <div class="text-name-current">
@@ -182,15 +180,15 @@ $this->title = 'company';
                                                 <div class="col-12 text-left">
                                                     <div class="circle-container">
                                                         <div class="cycle-current"><img
-                                                                src="<?= Yii::$app->homeUrl ?>/image/teams.svg"
+                                                                src="<?= Yii::$app->homeUrl ?>image/teams.svg"
                                                                 alt="icon">
                                                         </div>
                                                         <div class="cycle-current"><img
-                                                                src="<?= Yii::$app->homeUrl ?>/image/teams.svg"
+                                                                src="<?= Yii::$app->homeUrl ?>image/teams.svg"
                                                                 alt="icon">
                                                         </div>
                                                         <div class="cycle-current"><img
-                                                                src="<?= Yii::$app->homeUrl ?>/image/teams.svg"
+                                                                src="<?= Yii::$app->homeUrl ?>image/teams.svg"
                                                                 alt="icon">
                                                         </div>
                                                         <div class="text-name-current"><?= $company['totalTeam'] ?> <a
@@ -206,15 +204,15 @@ $this->title = 'company';
                                                 <div class="col-12 text-left">
                                                     <div class="circle-container">
                                                         <div class="cycle-current"><img
-                                                                src="<?= Yii::$app->homeUrl ?>/image/employees.svg"
+                                                                src="<?= Yii::$app->homeUrl ?>image/employees.svg"
                                                                 alt="icon">
                                                         </div>
                                                         <div class="cycle-current"><img
-                                                                src="<?= Yii::$app->homeUrl ?>/image/employees.svg"
+                                                                src="<?= Yii::$app->homeUrl ?>image/employees.svg"
                                                                 alt="icon">
                                                         </div>
                                                         <div class="cycle-current"><img
-                                                                src="<?= Yii::$app->homeUrl ?>/image/employees.svg"
+                                                                src="<?= Yii::$app->homeUrl ?>image/employees.svg"
                                                                 alt="icon">
                                                         </div>
                                                         <div class="text-name-current"><?= $company['totalEmployee'] ?>

@@ -38,11 +38,14 @@
 
 .submain-content {
     width: 100%;
+    /* ขยายเต็มความกว้าง */
+    max-width: 100%;
+    /* จำกัดไม่ให้เกินขนาดหน้าจอ */
     padding-left: 10px;
+    /* ระยะห่างด้านซ้าย */
     padding-right: 10px;
+    /* ระยะห่างด้านขวา */
     position: relative !important;
-    /* margin-top: 50px; */
-    /* min-height: 60vh; */
     box-sizing: border-box;
     flex: 1;
 }
