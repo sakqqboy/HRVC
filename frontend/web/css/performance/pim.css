@@ -2274,6 +2274,13 @@ input:checked+.slider:before {
 		height: calc(100% / 0.90);
 	}
 
+	.submain-content {
+		height: 50%;
+		/* ลดความสูงลง 50% */
+		max-height: 50vh;
+		/* ใช้ vh เพื่อให้ความสูงไม่เกินครึ่งหนึ่งของหน้าจอ */
+	}
+
 	/* 
 	.contrainer-body-detail {
 		transform: scale(0.90);
@@ -2300,6 +2307,13 @@ input:checked+.slider:before {
 		height: calc(100% / 0.80);
 	}
 
+	.submain-content {
+		height: 50%;
+		/* ลดความสูงลง 50% */
+		max-height: 50vh;
+		/* ใช้ vh เพื่อให้ความสูงไม่เกินครึ่งหนึ่งของหน้าจอ */
+	}
+
 	/* .contrainer-body-detail {
 		transform: scale(0.85);
 		transform-origin: top left;
@@ -2324,6 +2338,12 @@ input:checked+.slider:before {
 		height: calc(100% / 0.70);
 	}
 
+	.submain-content {
+		height: 100%;
+		/* ลดความสูงลง 50% */
+		max-height: 50vh;
+		/* ใช้ vh เพื่อให้ความสูงไม่เกินครึ่งหนึ่งของหน้าจอ */
+	}
 
 	/* .contrainer-body-detail {
 		transform: scale(0.75);
@@ -2349,6 +2369,13 @@ input:checked+.slider:before {
 		width: calc(100% / 0.60);
 		height: calc(100% / 0.60);
 		margin-top: 30px;
+	}
+
+	.submain-content {
+		height: 50%;
+		/* ลดความสูงลง 50% */
+		max-height: 50vh;
+		/* ใช้ vh เพื่อให้ความสูงไม่เกินครึ่งหนึ่งของหน้าจอ */
 	}
 
 	/* .contrainer-body-detail {
@@ -2389,6 +2416,12 @@ input:checked+.slider:before {
 		width: calc(100% / 0.50);
 		height: calc(100% / 0.50);
 	} */
+	.submain-content {
+		height: 50%;
+		/* ลดความสูงลง 50% */
+		max-height: 50vh;
+		/* ใช้ vh เพื่อให้ความสูงไม่เกินครึ่งหนึ่งของหน้าจอ */
+	}
 
 	.row-box {
 		transform: scale(0.50);
