@@ -369,7 +369,7 @@ class DashboardController extends Controller
                                 'type' => 'line',
                                 'name' => 'Gap',
                                 'data' => array_map(function ($value) {
-                                    return 100 - $value;
+                                    return  $value - 100;
                                 }, $finalPerformanceData), // คำนวณ Gap
                                 'color' => 'transparent', // ทำให้เส้นมองไม่เห็น
                                 'lineWidth' => 0, // ไม่แสดงเส้น
@@ -456,7 +456,7 @@ class DashboardController extends Controller
                                 'type' => 'line',
                                 'name' => 'Gap',
                                 'data' => array_map(function ($value) {
-                                    return 100 - $value;
+                                    return $value - 100;
                                 }, $finalPerformanceData), // คำนวณ Gap
                                 'color' => 'transparent', // ทำให้เส้นมองไม่เห็น
                                 'lineWidth' => 0, // ไม่แสดงเส้น
@@ -535,7 +535,7 @@ class DashboardController extends Controller
                                 'type' => 'line',
                                 'name' => 'Gap',
                                 'data' => array_map(function ($value) {
-                                    return 100 - $value;
+                                    return $value - 100;
                                 }, $finalPerformanceData), // คำนวณ Gap
                                 'color' => 'transparent', // ทำให้เส้นมองไม่เห็น
                                 'lineWidth' => 0, // ไม่แสดงเส้น

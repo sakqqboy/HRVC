@@ -7,21 +7,23 @@ $this->title = 'Group profile';
 ?>
 <div class="company-group-body mt-50">
     <div class="contrainer-body company-group-content" style="margin-top: -10px;">
-        <div class="col-12" style="height: 180px;">
-            <?php
+        <div class="row">
+            <div class="col-12" style="height: 180px;">
+                <?php
 		if ($group["banner"] != null) { ?>
-            <img src="<?= Yii::$app->homeUrl . $group['banner'] ?>" class="sad-1">
-            <?php
+                <img src="<?= Yii::$app->homeUrl . $group['banner'] ?>" class="sad-1">
+                <?php
 		} else { ?>
-            <img src="<?= Yii::$app->homeUrl . 'image/group.jpg' ?>" class="sad-1">
-            <?php
+                <img src="<?= Yii::$app->homeUrl . 'image/group.jpg' ?>" class="sad-1">
+                <?php
 		}
 		?>
 
+            </div>
         </div>
 
-        <div class="row mt-20">
-            <div class="col-11" style="margin-top:-170px; display: flex; align-items: center; gap: 20px;">
+        <div class="row mt-50">
+            <div class="col-10" style="margin-top:-170px; display: flex; gap: 20px;">
                 <div class="avatar-upload-preview" style="margin-left:36px; margin-right: 0px;">
                     <div class="avatar-preview">
                         <?php if ($group["picture"] != null) { ?>
@@ -31,7 +33,7 @@ $this->title = 'Group profile';
                         <?php } ?>
                     </div>
                 </div>
-                <div class="mt-21" style="margin-top: 100px;">
+                <div style="margin-top: 150px;">
                     <!-- ลบระยะห่างระหว่างรูปและรายละเอียด -->
                     <div class="col-12 name-tokyo">
                         <span class="name-sub-tokyo"><?= $group['displayName'] ?></span>
@@ -44,9 +46,9 @@ $this->title = 'Group profile';
             </div>
 
             <?php if($role >= 5 ) { ?>
-            <div class="col-1 mt-21 tcg-edit0" style="right: 15px;">
+            <div class="col-2 tcg-edit0" style="display: flex; justify-content: flex-end;">
                 <a href="<?= Yii::$app->homeUrl ?>setting/group/update-group/<?= ModelMaster::encodeParams(['groupId' => $group['groupId']]) ?>"
-                    class="btn-update-group" style="width: 133px;">
+                    class="btn-update-group" style="width: 60%;">
                     <img src="<?= Yii::$app->homeUrl . 'image/refresh-white.svg' ?>">
                     Update Information
                 </a>

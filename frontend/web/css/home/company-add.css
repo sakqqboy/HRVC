@@ -9,8 +9,7 @@
     border-radius: 10px;
     padding: 26px 40px 46px 40px;
     background: #FFF;
-    height: auto;
-    min-height: 100vh;
+    height: 100%;
 }
 
 .company-group-body {

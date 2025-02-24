@@ -25,20 +25,11 @@ $this->title = 'Update Group';
 		}
 		?> -->
     </div>
-    <div class="col-12 edit-update text-end" style="padding-right: 30px;">
-        <div class="form-group">
-            <span class="fileUpload btn" style="padding: 0;">
-                <div id="upload" class="uplode-btn-group">
-                    <img src="<?= Yii::$app->homeUrl ?>image/upload-white.svg" alt="Upload Icon">
-                    Update
-                </div>
-                <input type="file" name="imageUploadBanner" id="imageUploadBanner" class="upload up upload-checklist"
-                    id="up" />
-            </span>
-        </div>
-    </div>
-    <div class="row mb-41">
-        <div class="col-lg-4 col-md-6 col-12 all-avatar">
+    <!-- <div class="col-12 edit-update text-end" style="padding-right: 30px;">
+     
+    </div> -->
+    <div class="row mb-100">
+        <!-- <div class="col-lg-4 col-md-6 col-12 all-avatar">
             <div class="avatar-upload">
                 <div class="avatar-preview" id="imagePreview" style="background-color: white;">
                     <label for="imageUpload" class="upload-label">
@@ -48,14 +39,42 @@ $this->title = 'Update Group';
                 </div>
                 <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg" name="image" />
             </div>
-
-
         </div>
         <div class="col-lg-6 col-md-6 col-12">
-
+            <div class="form-group">
+                <span class="fileUpload btn" style="padding: 0;">
+                    <div id="upload" class="uplode-btn-group">
+                        <img src="<?= Yii::$app->homeUrl ?>image/upload-white.svg" alt="Upload Icon">
+                        Update
+                    </div>
+                    <input type="file" name="imageUploadBanner" id="imageUploadBanner"
+                        class="upload up upload-checklist" id="up" />
+                </span>
+            </div>
+        </div> -->
+        <div class="col-12" style="margin-top:-50px; display: flex; gap: 20px;">
+            <div class="col-11 avatar-upload" style="margin-left:36px;">
+                <div class="avatar-preview" id="imagePreview" style="background-color: white;">
+                    <label for="imageUpload" class="upload-label">
+                        <img src="<?= Yii::$app->homeUrl ?>image/upload-img.svg" alt="Upload Icon">
+                        <span>Upload</span>
+                    </label>
+                </div>
+            </div>
+            <div class="col-1">
+                <!-- ลบระยะห่างระหว่างรูปและรายละเอียด -->
+                <span class="fileUpload btn" style="padding: 0;">
+                    <div id="upload" class="uplode-btn-group">
+                        <img src="<?= Yii::$app->homeUrl ?>image/upload-white.svg" alt="Upload Icon">
+                        Update
+                    </div>
+                    <input type="file" name="imageUploadBanner" id="imageUploadBanner"
+                        class="upload up upload-checklist" id="up" />
+                </span>
+            </div>
         </div>
     </div>
-    <div class="col-12">
+    <div class="col-12 mt-50">
         <div class="row update-group-body">
             <div class="col-lg-6 col-md-6 col-12">
                 <div class="container">
