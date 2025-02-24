@@ -10,6 +10,10 @@
     padding: 26px 40px 46px 40px;
     background: #FFF;
     height: 100%;
+    margin-left: -10px;
+    /* ขยายพื้นหลังไปทางซ้าย */
+    margin-right: -10px;
+    /* ขยายพื้นหลังไปทางขวา */
 }
 
 .company-group-body {

@@ -174,10 +174,8 @@
 
 .update-group-body {
     display: flex;
-    /* width: 1480px;
-height: 937px; */
     padding: 30px 33px;
-    /* flex-direction: column; */
+    justify-content: space-between;
     /* align-items: flex-start; */
     /* gap: 10px; */
     flex-shrink: 0;
