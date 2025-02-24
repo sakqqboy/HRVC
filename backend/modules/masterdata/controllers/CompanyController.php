@@ -58,7 +58,8 @@ class CompanyController extends Controller
 			->select('branchId,branchName')
 			->where(["companyId" => $id, "status" => 1])
 			->orderBy('branchName')
-			->asArray()->all();
+			->asArray()
+			->all();
 		return json_encode($branches);
 	}
 }
