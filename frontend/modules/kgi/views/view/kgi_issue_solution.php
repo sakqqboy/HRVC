@@ -12,7 +12,7 @@
 
 		use yii\bootstrap5\ActiveForm;
 		?>
-		<div class="col-12 alert bg-white mt-15 pt-15 pr-30 pl-30" style="height:320px;overflow-y: auto;">
+		<div class="col-12 alert bg-white mt-15 pt-15 pr-30 pl-30" style="height:420px;overflow-y: auto;">
 			<div class="row">
 				<div class="col-12 head-gray-box pt-0">
 					<span class=" head-gray-box-text"><?= Yii::t('app', 'Headline') ?></span>
@@ -22,7 +22,7 @@
 					</div>
 					<div class="col-12">
 						<span class=" head-gray-box-text"><?= Yii::t('app', 'Description') ?></span>
-						<textarea style="height: 150px;" class="form-control font-size-12" id="description" name="kgiDescription"></textarea>
+						<textarea style="height: 270px;" class="form-control font-size-12" id="description" name="kgiDescription"></textarea>
 					</div>
 					<div id="attachFile-<?= $kgiId ?>" class="col-12 text-end font-size-12 mt-5"></div>
 					<div class="col-12 text-end mt-5 mb-10 ">

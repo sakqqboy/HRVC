@@ -659,7 +659,8 @@ class ManagementController extends Controller
 			"kgiBranchText" => $kgiBranchText,
 			"kgiDepartmentText" => $kgiDepartmentText,
 			"kgiTeamText" => $kgiTeamText,
-			"kgiId" => $kgiId
+			"kgiId" => $kgiId,
+			"url" => Yii::$app->request->referrer
 
 		]);
 	}
@@ -738,7 +739,7 @@ class ManagementController extends Controller
 				}
 				if (isset($_POST["kgiGroup"]) && count($_POST["kgiGroup"]) > 0) {
 				}
-				return $this->redirect(Yii::$app->request->referrer);
+				return $this->redirect($_POST["url"]);
 			}
 		}
 		return $this->redirect('grid');

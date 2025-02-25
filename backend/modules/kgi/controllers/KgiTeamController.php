@@ -266,6 +266,7 @@ class KgiTeamController extends Controller
 					"periodCheck" => ModelMaster::engDate(KgiTeam::lastestCheckDate($kgiTeam["kgiTeamId"]), 2), //lastest check date
 					"nextCheckDate" =>  ModelMaster::engDate($kgiTeamHistory["nextCheckDate"], 2),
 					"status" => $kgiTeamHistory["status"],
+					"kgiTeamHistoryId" => $kgiTeamHistory["kgiTeamHistoryId"] ?? 0,
 					"flag" => Country::countryFlagBycompany($kgiTeam["companyId"]),
 					"countryName" => Country::countryNameBycompany($kgiTeam['companyId']),
 					"kgiEmployee" => KgiEmployee::kgiEmployee($kgiTeam["kgiId"]),
@@ -298,7 +299,6 @@ class KgiTeamController extends Controller
 				->asArray()
 				->one();
 		} else {
-
 			$kgiTeamHistory = KgiTeamHistory::find()
 				->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.companyId,k.code,kt.target,kt.kgiTeamId,
 		kt.teamId,kgi_team_history.result,kgi_team_history.fromDate,kgi_team_history.toDate,kgi_team_history.month,kgi_team_history.kgiTeamHistoryId,
@@ -312,7 +312,6 @@ class KgiTeamController extends Controller
 		}
 
 		if (!isset($kgiTeamHistory) || empty($kgiTeamHistory)) {
-
 			$kgiTeamHistory = KgiTeam::find()
 				->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.companyId,k.code,kgi_team.target,kgi_team.kgiTeamId,
 		kgi_team.teamId,kgi_team.result,kgi_team.fromDate,kgi_team.toDate,kgi_team.month,kgi_team.year,
@@ -337,6 +336,7 @@ class KgiTeamController extends Controller
 				$ratio = 0;
 			}
 			$data = [
+				"kgiTeamHistoryId" =>  !empty($kgiTeamHistory["kgiTeamHistoryId"]) ? $kgiTeamHistory["kgiTeamHistoryId"] : 0,
 				"kgiName" => $kgiTeamHistory["kgiName"],
 				"kgiId" => $kgiTeamHistory["kgiId"],
 				"priority" => $kgiTeamHistory["priority"],
