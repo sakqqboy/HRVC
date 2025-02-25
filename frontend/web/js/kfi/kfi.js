@@ -2151,11 +2151,11 @@ function showEditRelateKgi(type, kfiId) {
 function changeStatus() { 
     var pimStatus = $("#pim-status").val();
     $("#pim-status").removeClass('select-create-status');
-    $("#pim-status").removeClass('select-create-status');
+    $("#pim-status").removeClass('select-complete-status');
     if (pimStatus == 1) { 
         $("#pim-status").addClass('select-create-status');
     }
     if (pimStatus == 2) { 
-        $("#pim-status").addClass();
+        $("#pim-status").addClass('select-complete-status');
     }
 }

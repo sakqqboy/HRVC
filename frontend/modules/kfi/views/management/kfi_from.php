@@ -661,8 +661,8 @@ if ($DueBehind < 0) {
                                 </text>
                             </div>
                             <div>
-                                <select class="select-create-status" aria-label="Default select example" name="status"
-                                    required="">
+                                <select class="<?= $data['status'] == 1 ? 'select-create-status' : 'select-complete-status' ?>" aria-label="Default select example" name="status" id="pim-status"
+                                    onchange="javascript:changeStatus()">
                                     <option value="1"
                                         <?= isset($data['status']) && $data['status'] == 1 ? 'selected' : '' ?>> In-Progress
                                     </option>

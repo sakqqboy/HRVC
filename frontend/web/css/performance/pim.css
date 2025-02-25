@@ -1988,6 +1988,24 @@ input:checked+.slider:before {
 	color: #2F42ED;
 }
 
+.select-complete-status {
+	display: flex;
+	width: 130px;
+	height: 40px;
+	padding: 6px 15px;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	flex-shrink: 0;
+	border-radius: 24.444px;
+	border: 0.5px solid #2D7F06;
+	background: #E1FFD7;
+	font-size: 14px;
+	font-weight: 600;
+	font-family: "SF Pro Display";
+	color: #2D7F06;
+}
+
 .btn-create-update {
 	display: flex;
 	padding: 7px 9px;
