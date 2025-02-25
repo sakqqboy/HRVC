@@ -1,60 +1,40 @@
 <?php
 $this->title = "Dashboard";
 ?>
-
-
-<!-- เพิ่ม meta tag สำหรับการซูม -->
-<!-- <meta name="view   port" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> -->
-
 <style>
 @media (max-width: 1735px) and (max-height: 950px) {
     .dashboard-container {
         transform: scale(0.85);
-        /* ลดขนาดลงเป็น 75% */
         transform-origin: top left;
-        width: calc(100% / 0.85);
-        height: calc(100% / 0.85);
-        overflow: hidden;
+        width: calc(100vw / 0.85);
+        height: calc(100vh / 0.85);
+        /* overflow: hidden; */
+        /* box-sizing: border-box; */
     }
 }
 
 @media (max-width: 1535px) and (max-height: 950px) {
     .dashboard-container {
         transform: scale(0.75);
-        /* ลดขนาดลงเป็น 75% */
         transform-origin: top left;
         width: calc(100% / 0.75);
         height: calc(100% / 0.75);
-        overflow: hidden;
+        /* overflow: hidden; */
     }
 }
 
 @media (max-width: 1335px) and (max-height: 750px) {
     .dashboard-container {
         transform: scale(0.65);
-        /* ลดขนาดลงเป็น 64% */
         transform-origin: top left;
         width: calc(100% / 0.65);
         height: calc(100% / 0.65);
-        overflow: hidden;
+        margin-left: -2px;
+
+        /* overflow: hidden; */
     }
 }
 </style>
-<!-- <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    document.getElementById('screen-size').innerText = `Current screen size: ${width}px x ${height}px`;
-});
-
-// อัปเดตขนาดเมื่อมีการปรับหน้าต่าง
-window.addEventListener('resize', () => {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    document.getElementById('screen-size').innerText = `Current screen size: ${width}px x ${height}px`;
-});
-</script> -->
-
 <div class="dashboard-container mt-50">
     <div class="row pl-4">
         <div class="aler pim-body bg-white" style="margin-top: -10px;">
