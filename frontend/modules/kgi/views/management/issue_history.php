@@ -19,6 +19,9 @@ if (isset($kgiIssue) && count($kgiIssue) > 0) {
 				<div class="row">
 					<div class="col-10 pr-0">
 						<?= $issue['issue'] ?>
+						<div class="col-12 mt-5" style="text-indent: 30px;">
+							<?= $issue['description'] ?>
+						</div>
 					</div>
 					<div class="col-2 pl-0 pr-0 middle">
 						<?php
