@@ -473,6 +473,7 @@ class ManagementController extends Controller
 				$employee = Employee::EmployeeDetail($issue["employeeId"]);
 				$data[$issue["kgiIssueId"]] = [
 					"issue" => $issue["issue"],
+					"description" => $issue["description"],
 					"file" => $issue["file"],
 					"employeeName" => $employee["employeeFirstname"] . ' ' . $employee["employeeSurename"],
 					"image" => Employee::employeeImage($issue["employeeId"]),
