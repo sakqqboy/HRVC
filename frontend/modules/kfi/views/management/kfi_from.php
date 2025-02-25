@@ -678,7 +678,7 @@ if ($DueBehind < 0) {
                             <input type="hidden" name="status" value='1'>
                         <?php } ?>
                         <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="btn-create-cancle"
-                            style="width: 100px;">
+                            style="width: 100px;text-decoration: none;">
                             Cancel
                         </a>
                         <?php
@@ -733,6 +733,18 @@ if ($DueBehind < 0) {
             checkedBranchIds.forEach(function(branchId) {
                 // alert(branchId);
                 departmentMultiTeamUpdateKfi(branchId);
+            });
+            let isSubmittingUpdate = false; // ป้องกัน submit ซ้ำ
+            $("#update-kfi").on("beforeSubmit", function(event) {
+                if (isSubmittingUpdate) {
+                    return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
+                }
+                isSubmittingUpdate = true;
+                if (!validateFormKfi(acType)) {
+                    isSubmittingUpdate = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
+                    return false;
+                }
+                return true; // ถ้า validation ผ่าน ให้ submit ฟอร์มต่อไป
             });
         }
 
