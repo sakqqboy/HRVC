@@ -464,7 +464,7 @@ class KgiTeamController extends Controller
 			$teamKgi->updateDateTime = new Expression('NOW()');
 			$teamKgi->save(false);
 		}
-		return $this->redirect(Yii::$app->request->referrer);
+		return $this->redirect($_POST["url"]);
 		//return $this->redirect('team-kgi');
 	}
 	public function actionKgiTeamView()
@@ -691,6 +691,15 @@ class KgiTeamController extends Controller
 		$kgiTeamId = $param["kgiTeamId"];
 		$openTab = isset($param["openTab"]) ? $param["openTab"] : 1;
 		$kgiTeamHistoryId = $param["kgiTeamHistoryId"];
+		$kgiTeamHistory = KgiTeamHistory::find()
+			->select('kgiTeamHistoryId')
+			->where(["kgiTeamId" => $kgiTeamId])
+			->orderBy("kgiTeamHistoryId DESC")
+			->asArray()
+			->one();
+		if (isset($kgiTeamHistory) && !empty($kgiTeamHistory)) {
+			$kgiTeamHistoryId = $kgiTeamHistory["kgiTeamHistoryId"];
+		}
 		$kgiId = $param["kgiId"];
 		$role = UserRole::userRight();
 		$groupId = Group::currentGroupId();

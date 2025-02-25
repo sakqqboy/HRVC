@@ -232,7 +232,7 @@ $this->title = 'Team KGI View';
                                             <?php
                                             }
                                             ?>
-                                            <?= $role ?> => <?= $kgiTeamDetail["status"] ?> => <?= $kgiTeamDetail["isOver"] ?>==>id=<?= $kgiTeamId ?>==>Hid=<?= $kgiTeamHistoryId ?>
+
                                         </div>
                                         <div class="col-4 pl-0 pr-5 mt-5 ">
                                             <div class="col-12 text-end font-<?= $colorFormat ?>"

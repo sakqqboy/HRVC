@@ -7,7 +7,7 @@
             <div class="col-9  sub-tab">
             </div>
         </div>
-        <div class="col-12 mt-15 pt-0" style="height:295px;overflow-y: auto;">
+        <div class="col-12 mt-15 pt-0 alert" style="height:500px;overflow-y: auto;">
             <div class="row">
                 <?php
                 if (isset($kgiTeams) && count($kgiTeams) > 0) {
@@ -50,7 +50,7 @@
             <div class="col-9  sub-tab">
             </div>
         </div>
-        <div class="col-12 alert bg-white mt-15 pt-0" style="height:280px;overflow-y: auto;">
+        <div class="col-12 alert bg-white mt-15 pt-0" style="height:500px;overflow-y: auto;">
             <div class="row">
                 <?php
                 if (isset($kgiDetail["kgiEmployeeDetail"]) && count($kgiDetail["kgiEmployeeDetail"]) > 0) {

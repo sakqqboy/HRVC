@@ -1,4 +1,4 @@
-<div id="container" style="width:100%; height:570px;"></div>
+<div id="container" class="alert" style="width:100%; height:551px;"></div>
 
 <?php
 // แปลงข้อมูลจาก result และ target เป็นตัวเลข
