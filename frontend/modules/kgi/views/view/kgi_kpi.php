@@ -6,7 +6,7 @@ use frontend\models\hrvc\Unit;
 
 $this->title = 'KGI KPI';
 ?>
-<div class="col-12 mt-90" style="display:none ;">
+<div class="col-12 mt-90" style="display:none;">
     <div class="row">
         <div class="col-9">
             <i class="fa fa-share-alt font-size-20 mr-3" aria-hidden="true"></i>
@@ -159,7 +159,7 @@ $this->title = 'KGI KPI';
         </table>
     </div>
 </div>
-<div class="col-12">
+<div class="col-12 alert" style="height:551px;">
     <div class="alert-box text-center">
         <?= Yii::t('app', 'S A V E D ! ! !') ?>
     </div>
