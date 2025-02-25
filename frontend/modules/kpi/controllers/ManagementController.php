@@ -293,6 +293,7 @@ class ManagementController extends Controller
                 "companies" => $companies,
                 "units" => $units,
                 "data" => $data,
+                "lastUrl" => Yii::$app->request->referrer,
                 "statusform" =>  "create"
             ]);
         }
