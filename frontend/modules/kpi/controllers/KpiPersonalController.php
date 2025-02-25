@@ -583,6 +583,7 @@ class KpiPersonalController extends Controller
 			"kpiTeam" => $kpiTeam ?? [],
 			"role" => $role,
 			"unit"  => $unit ,
+			"lastUrl" => Yii::$app->request->referrer,	
 			"statusform" =>  "update"
 		]);
 	}
@@ -682,10 +683,10 @@ class KpiPersonalController extends Controller
 			$kpiEmployee->save(false);
 			$history->createrId = Yii::$app->user->id;
 			if ($history->save(false)) {
-				return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
+				return $this->redirect($_POST["lastUrl"]);
 			}
 		} else {
-			return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
+			return $this->redirect($_POST["lastUrl"]);
 		}
 	}
 
