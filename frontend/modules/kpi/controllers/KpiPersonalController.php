@@ -248,6 +248,15 @@ class KpiPersonalController extends Controller
 		} else {
 			$kpiEmployeeHistoryId = 0;
 		}
+		$kpiEmployeeHistoryId = KpiEmployeeHistory::find()
+		->select('kpiEmployeeHistoryId')
+		->where(["kpiEmployeeId" => $kpiEmployeeId])
+		->orderBy('kpiEmployeeHistoryId DESC')
+		->asArray()->one();
+		
+		if(isset($kpiEmployeeHistoryId) && !empty($kpiEmployeeHistoryId)) {
+			$kpiEmployeeHistoryId = $kpiEmployeeHistoryId['kpiEmployeeHistoryId'];
+		}
 		// throw new Exception($kpiEmployeeHistoryId);
 		$openTab = array_key_exists("openTab", $param) ? $param["openTab"] : 0;
 		$groupId = Group::currentGroupId();

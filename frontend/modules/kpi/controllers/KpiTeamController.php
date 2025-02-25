@@ -206,6 +206,16 @@ class KpiTeamController extends Controller
 		} else {
 			$kpiTeamHistoryId = 0;
 		}
+		$kpiTeamHistoryId = KpiTeamHistory::find()
+		->select('kpiTeamHistoryId')
+		->where(["kpiTeamId" => $kpiTeamId])
+		->orderBy('kpiTeamHistoryId DESC')
+		->asArray()->one();
+		
+		if(isset($kpiTeamHistoryId) && !empty($kpiTeamHistoryId)) {
+			$kpiTeamHistoryId = $kpiTeamHistoryId['kpiTeamHistoryId'];
+		}
+
 		$openTab = array_key_exists("openTab", $param) ? $param["openTab"] : 0;
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
@@ -217,6 +227,7 @@ class KpiTeamController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-detail?kpiTeamId=' . $kpiTeamId . '&&kpiTeamHistoryId=' . $kpiTeamHistoryId);
 		$kpiTeamDetail = curl_exec($api);
 		$kpiTeamDetail = json_decode($kpiTeamDetail, true);
+//   throw new Exception(print_r($kpiTeamDetail,true));
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$companies = curl_exec($api);
