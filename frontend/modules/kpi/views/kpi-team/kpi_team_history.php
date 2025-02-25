@@ -202,7 +202,7 @@ $this->title = 'KPI View';
                                         ?>
                                         <div class="progress">
                                             <div class="progress-bar-<?= $colorFormat ?>"
-                                                style="width:<?= $showPercent ?>%;"></div>
+                                                style="width:<?= $showPercent ?>%;  max-width: 100%;"></div>
                                             <span
                                                 class="progress-load load-<?= $colorFormat ?>"><?= $showPercent ?>%</span>
                                         </div>
