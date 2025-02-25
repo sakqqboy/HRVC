@@ -1,4 +1,4 @@
-<div id="container" style="width:100%; height:100%;"></div>
+<div class="alert" id="container" style="width:100%; height:551px;"></div>
 <?php
 $actualData = array_map('floatval', explode(',', $result));
 $targetData = array_map('floatval', explode(',', $target));
