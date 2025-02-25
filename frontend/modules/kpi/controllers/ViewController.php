@@ -97,6 +97,8 @@ class ViewController extends Controller
 		$kpiTeamsHistory = curl_exec($api);
 		$kpiTeamsHistory = json_decode($kpiTeamsHistory, true);
 
+		
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . "&&kpiHistoryId=0");
 		$kpiDetail = curl_exec($api);
 		$kpiDetail = json_decode($kpiDetail, true);
