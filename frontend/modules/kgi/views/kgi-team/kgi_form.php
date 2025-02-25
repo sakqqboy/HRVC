@@ -368,7 +368,7 @@ select.form-select option:disabled {
                                 <?php
                                     } else { 
                                 ?>
-                                <div class="text-center priority-box" style="width: 52.059px; height: 52.059px;">
+                                <div class="text-center priority-box-null" style="width: 52.059px; height: 52.059px;">
                                     <div style="font-size: 14px; font-weight: 400;"><?= Yii::t('app', 'Priority') ?>
                                     </div>
                                     <div class="text-priority" style="font-size: 24px; font-weight: 600; bottom: 6px;">
