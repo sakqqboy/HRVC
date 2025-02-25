@@ -368,9 +368,9 @@ function departmentMultiTeam(branchId) {
         });
 
     } else {
-        $('input[id="multi-check-' + branchId + '"]').each(function () {
-            $(".multiDepartment-" + $(this).val()).prop('required', true);
-        });
+        // $('input[id="multi-check-' + branchId + '"]').each(function () {
+        //     $(".multiDepartment-" + $(this).val()).prop('required', true);
+        // });
 
         // เปลี่ยน class และข้อความเมื่อไม่มี departments ที่เลือก
         $("#image-departments #department-selected-count")
@@ -2146,5 +2146,16 @@ function showEditRelateKgi(type, kfiId) {
                 $("#show-content").html(data.kgi);
             }
         });
+    }
+}
+function changeStatus() { 
+    var pimStatus = $("#pim-status").val();
+    $("#pim-status").removeClass('select-create-status');
+    $("#pim-status").removeClass('select-create-status');
+    if (pimStatus == 1) { 
+        $("#pim-status").addClass('select-create-status');
+    }
+    if (pimStatus == 2) { 
+        $("#pim-status").addClass();
     }
 }
