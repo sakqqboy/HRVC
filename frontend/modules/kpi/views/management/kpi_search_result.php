@@ -48,9 +48,9 @@ $this->title = 'KPI';
                             <?php
                             if ($role >= 3) {
                             ?>
-                            <a type="button" class="btn-createnew pl-7 pr-7 pr-9 font-size-12"
+                            <a type="button" class="btn-createnew font-size-11"
                                 href="<?= Yii::$app->homeUrl ?>kpi/management/create-kpi/"
-                                style="text-decoration: none;">
+                                style="position:absolute;text-decoration:none;">
                                 <?= Yii::t('app', 'Create New') ?>
                                 <img src=" <?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="History"
                                     class="pim-icon ml-3" style="margin-top: -1px;">
