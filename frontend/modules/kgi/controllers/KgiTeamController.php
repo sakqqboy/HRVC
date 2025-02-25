@@ -404,7 +404,8 @@ class KgiTeamController extends Controller
 			"role" => $role,
 			"unit"  => $unit,
 			"kgiTeamId"  => $kgiTeamId,
-			"statusform" =>  "update"
+			"statusform" =>  "update",
+			"url" => Yii::$app->request->referrer
 		]);
 		//$res["kgiTeam"] = $kgiTeam;
 		//return json_encode($res);

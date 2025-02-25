@@ -325,7 +325,8 @@ class KgiPersonalController extends Controller
 			"kgiTeam" => $kgiTeam ?? [],
 			"role" => $role,
 			"unit"  => $unit,
-			"statusform" =>  "update"
+			"statusform" =>  "update",
+			"url" => Yii::$app->request->referrer
 		]);
 	}
 	public function actionSaveUpdatePersonalKgi()

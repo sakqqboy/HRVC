@@ -793,7 +793,7 @@ if (!$nextCheckDate) {
                         </div>
                         <div>
                             <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/kgi-employee-history/<?= ModelMaster::encodeParams(['kgiId' => $data['kgiId'], 'kgiEmployeeHistoryId' => $kgiEmployeeHistoryId, 'kgiEmployeeId' => $kgiEmployeeId]) ?>"
-                                class="btn-create-cancle" style="width: 100px;">
+                                class="btn-create-cancle" style="width: 100px;;text-decoration:none;">
                                 <img src="<?= Yii::$app->homeUrl ?>image/eye-login.svg" alt="LinkedIn"
                                     style="width: 16px; height: 16px;">
                                 <?= Yii::t('app', 'View') ?>
@@ -801,7 +801,7 @@ if (!$nextCheckDate) {
                         </div>
 
                         <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi-grid"
-                            class="btn-create-cancle" style="width: 100px;">
+                            class="btn-create-cancle" style="width: 100px;;text-decoration:none;">
                             <?= Yii::t('app', 'Cancel') ?>
                         </a>
                         <button type="submit" class="btn-create-update" style="width: 100px;">
@@ -818,7 +818,7 @@ if (!$nextCheckDate) {
         </div>
     </div>
 </div>
-<input type="hidden" name="url" value="<?= Yii::$app->request->referrer ?>">
+<input type="hidden" value="<?= isset($url) ? $url : '' ?>" name="url">
 <input type="hidden" value="update" id="acType">
 <input type="hidden" id="kgiEmployeeId" name="kgiEmployeeId" value="<?= isset($kgiEmployeeId) ? $kgiEmployeeId : '' ?>"
     required>

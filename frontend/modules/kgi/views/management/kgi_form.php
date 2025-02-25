@@ -3,28 +3,28 @@
 use yii\bootstrap5\ActiveForm;
 
 if ($statusform == 'update') {
-	$parturl = 'kgi/management/update-kgi';
-	$title = 'Update KGI';
+    $parturl = 'kgi/management/update-kgi';
+    $title = 'Update KGI';
 } else {
-	$parturl = 'kgi/management/create-kgi';
-	$title = 'Create KGI';
+    $parturl = 'kgi/management/create-kgi';
+    $title = 'Create KGI';
 }
 $this->title = $title;
 $form = ActiveForm::begin([
-	'id' => $statusform == 'update' ? 'update-kgi' : 'create-kgi',
-	//'enableClientValidation' => false, // ปิด validation ฝั่ง client
-	//'enableAjaxValidation' => false,
-	'method' => 'post',
-	'options' => [
-		'enctype' => 'multipart/form-data',
-		//'onsubmit' => 'return validateFormKgi(event)' // เรียกฟังก์ชันตรวจสอบก่อนส่งฟอร์ม
-	],
-	'action' => Yii::$app->homeUrl . $parturl
+    'id' => $statusform == 'update' ? 'update-kgi' : 'create-kgi',
+    //'enableClientValidation' => false, // ปิด validation ฝั่ง client
+    //'enableAjaxValidation' => false,
+    'method' => 'post',
+    'options' => [
+        'enctype' => 'multipart/form-data',
+        //'onsubmit' => 'return validateFormKgi(event)' // เรียกฟังก์ชันตรวจสอบก่อนส่งฟอร์ม
+    ],
+    'action' => Yii::$app->homeUrl . $parturl
 ]);
 $unitId = 1;
 if (isset($data['unitId']) && $data['unitId'] >= 1) {
-	$unitId = $data['unitId'];
-	// ทำสิ่งที่ต้องการเมื่อ unitId มีค่าเป็น 2
+    $unitId = $data['unitId'];
+    // ทำสิ่งที่ต้องการเมื่อ unitId มีค่าเป็น 2
 }
 $quantRatio = $data['quantRatio'] ?? '';
 $selectedCode = $data['code'] ?? '';
@@ -37,62 +37,62 @@ $DueBehind = $targetAmount -  $result;
 ?>
 
 <style>
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 
-input[type="number"] {
-    -moz-appearance: textfield;
-    /* สำหรับ Firefox */
-}
+    input[type="number"] {
+        -moz-appearance: textfield;
+        /* สำหรับ Firefox */
+    }
 
-/* เปลี่ยนสีข้อความของ select เมื่อเลือกแล้ว */
-select.form-select {
-    color: var(--Helper-Text-Gray, #8A8A8A);
-}
-
-
-/* เมื่อเลือกแล้วให้ข้อความเป็นสี #30313D */
-select.form-select:not([value=""]) {
-    color: <?=($statusform=='update') ? '#30313D': 'var(--HRVC---Text-Black, #8A8A8A)';
-    ?>;
-}
+    /* เปลี่ยนสีข้อความของ select เมื่อเลือกแล้ว */
+    select.form-select {
+        color: var(--Helper-Text-Gray, #8A8A8A);
+    }
 
 
-/* สไตล์เมื่อไม่ได้เลือก (ข้อความ placeholder) */
-select.form-select {
-    color: var(--Helper-Text-Gray, #8A8A8A);
-    font-family: "SF Pro Display", sans-serif;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 20px;
-    text-transform: capitalize;
-}
+    /* เมื่อเลือกแล้วให้ข้อความเป็นสี #30313D */
+    select.form-select:not([value=""]) {
+        color: <?= ($statusform == 'update') ? '#30313D' : 'var(--HRVC---Text-Black, #8A8A8A)';
+                ?>;
+    }
 
-/* สไตล์เมื่อเลือกตัวเลือกแล้ว */
-select.form-select option:checked {
-    color: var(--HRVC---Text-Black, #30313D);
-    font-family: "SF Pro Display";
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 20px;
-}
 
-/* เพิ่มความสวยงามเมื่อตัวเลือกถูกโฟกัส */
-select.form-select:focus {
-    color: var(--HRVC---Text-Black, #30313D);
-    font-weight: 500;
-}
+    /* สไตล์เมื่อไม่ได้เลือก (ข้อความ placeholder) */
+    select.form-select {
+        color: var(--Helper-Text-Gray, #8A8A8A);
+        font-family: "SF Pro Display", sans-serif;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px;
+        text-transform: capitalize;
+    }
 
-/* เมื่อ option เป็น disabled (กรณีเลือกแล้วจะไม่สามารถเลือกได้) */
-select.form-select option:disabled {
-    color: var(--Helper-Text-Gray, #8A8A8A);
-    font-weight: 500;
-}
+    /* สไตล์เมื่อเลือกตัวเลือกแล้ว */
+    select.form-select option:checked {
+        color: var(--HRVC---Text-Black, #30313D);
+        font-family: "SF Pro Display";
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px;
+    }
+
+    /* เพิ่มความสวยงามเมื่อตัวเลือกถูกโฟกัส */
+    select.form-select:focus {
+        color: var(--HRVC---Text-Black, #30313D);
+        font-weight: 500;
+    }
+
+    /* เมื่อ option เป็น disabled (กรณีเลือกแล้วจะไม่สามารถเลือกได้) */
+    select.form-select option:disabled {
+        color: var(--Helper-Text-Gray, #8A8A8A);
+        font-weight: 500;
+    }
 </style>
 
 <!-- ลิงก์ไปยัง CSS ของ flatpickr -->
@@ -108,8 +108,8 @@ select.form-select option:disabled {
     </div>
     <div class="col-12 mt-29">
         <?= $this->render('header_filter', [
-			"role" => $role
-		]) ?>
+            "role" => $role
+        ]) ?>
 
         <div class="alert mt-28 pim-body bg-white">
             <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -132,12 +132,12 @@ select.form-select option:disabled {
                         </text>
                         <text class="current-ratio-data text-end">
                             <?php
-							if ($DueBehind) {
-								echo Yii::t('app', 'Due Behind by ') . ' ';
-							} else {
-								echo Yii::t('app', 'no Data');
-							}
-							?>
+                            if ($DueBehind) {
+                                echo Yii::t('app', 'Due Behind by ') . ' ';
+                            } else {
+                                echo Yii::t('app', 'no Data');
+                            }
+                            ?>
                             <span class="DueBehind">
                                 <?= $DueBehind ?>
                             </span>
@@ -153,9 +153,9 @@ select.form-select option:disabled {
 
                             <!-- Foreground circle (progress) -->
                             <?php
-							$percentage = isset($data['ratio']) ? $data['ratio'] : 00;
-							// $dashArray = ($percentage * 100) / 100; // this will control the progress visually
-							?>
+                            $percentage = isset($data['ratio']) ? $data['ratio'] : 00;
+                            // $dashArray = ($percentage * 100) / 100; // this will control the progress visually
+                            ?>
                             <path class="circle"
                                 d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                                 stroke="#4db8ff" stroke-width="3" fill="none"
@@ -212,17 +212,17 @@ select.form-select option:disabled {
                             onchange="javascript:companyMultiBrach()" required>
                             <option value=""><?= Yii::t('app', 'Select Company') ?></option>
                             <?php
-							if (isset($companies) && count($companies) > 0) {
-								foreach ($companies as $company) :
-									$selected = (isset($data['companyId']) && $data['companyId'] == $company["companyId"]) ? 'selected' : '';
-							?>
-                            <option value="<?= $company["companyId"] ?>" <?= $selected ?>>
-                                <?= $company["companyName"] ?>
-                            </option>
+                            if (isset($companies) && count($companies) > 0) {
+                                foreach ($companies as $company) :
+                                    $selected = (isset($data['companyId']) && $data['companyId'] == $company["companyId"]) ? 'selected' : '';
+                            ?>
+                                    <option value="<?= $company["companyId"] ?>" <?= $selected ?>>
+                                        <?= $company["companyName"] ?>
+                                    </option>
                             <?php
-								endforeach;
-							}
-							?>
+                                endforeach;
+                            }
+                            ?>
                         </select>
                     </div>
 
@@ -281,9 +281,9 @@ select.form-select option:disabled {
                                     left: 0; width: 100%; z-index: 999; background-color: white; 
                                     border: 1px solid #ced4da; padding: 10px; display: none;">
                                 <?php if ($statusform == 'create'): ?>
-                                <!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
+                                    <!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
                                 <?php else: ?>
-                                <?= $kgiBranchText; ?>
+                                    <?= $kgiBranchText; ?>
                                 <?php endif; ?>
 
                             </div>
@@ -343,9 +343,9 @@ select.form-select option:disabled {
                             <?php else: ?> id="show-multi-department" <?php endif; ?> style="position: absolute; top: 82%; left: 0; width: 98%; z-index: 999; background-color: white; 
                             border: 1px solid #ced4da; padding: 10px; display: none;">
                             <?php if ($statusform == 'create'): ?>
-                            <!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
+                                <!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
                             <?php else: ?>
-                            <?= $kgiDepartmentText; ?>
+                                <?= $kgiDepartmentText; ?>
                             <?php endif; ?>
                         </div>
 
@@ -402,9 +402,9 @@ select.form-select option:disabled {
                             <?php else: ?> id="show-multi-team" <?php endif; ?> style="position: absolute; top: 82%; left: 0; width: 98%; z-index: 999; background-color: white; 
                            border: 1px solid #ced4da; padding: 10px; display: none;">
                             <?php if ($statusform == 'create'): ?>
-                            <!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
+                                <!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
                             <?php else: ?>
-                            <?= $kgiTeamText; ?>
+                                <?= $kgiTeamText; ?>
                             <?php endif; ?>
                         </div>
 
@@ -444,23 +444,23 @@ select.form-select option:disabled {
                         </label>
                         <div class="btn-group col-12" role="group" aria-label="Basic outlined example">
                             <?php
-							if (isset($units) && count($units) > 0) {
-								$i = 1;
-								foreach ($units as $unit) :
-									$activeClass = ($unitId == $unit['unitId']) ? 'unit-active' : 'unit-inactive';
-							?>
-                            <button type="button" id="unit-<?= $unit['unitId'] ?>"
-                                class="btn col-3 font-size-12 <?= $activeClass ?>"
-                                onclick="selectUnit(<?= $unit['unitId'] ?>)">
-                                <?= Yii::t('app', $unit["unitName"]) ?>
-                            </button>
+                            if (isset($units) && count($units) > 0) {
+                                $i = 1;
+                                foreach ($units as $unit) :
+                                    $activeClass = ($unitId == $unit['unitId']) ? 'unit-active' : 'unit-inactive';
+                            ?>
+                                    <button type="button" id="unit-<?= $unit['unitId'] ?>"
+                                        class="btn col-3 font-size-12 <?= $activeClass ?>"
+                                        onclick="selectUnit(<?= $unit['unitId'] ?>)">
+                                        <?= Yii::t('app', $unit["unitName"]) ?>
+                                    </button>
                             <?php
-									$i++;
-								endforeach;
-							}
+                                    $i++;
+                                endforeach;
+                            }
 
-							// echo  $unitId;
-							?>
+                            // echo  $unitId;
+                            ?>
                             <input type="hidden" value="<?= $unitId ?>" id="currentUnit" name="unitId" required>
                             <input type="hidden" value="<?= $unitId ?>" id="previousUnit" required>
                         </div>
@@ -704,19 +704,19 @@ select.form-select option:disabled {
                                     alt="Help Icon">
                             </div>
                             <?php
-							if ($statusform == 'update') {
-							?>
-                            <div class="updatehistory" class="updatehistory" style="text-align: right;cursor:pointer;"
-                                data-bs-toggle="modal" data-bs-target="#update-history-popup"
-                                onclick="javascript:kgiUpdateHistory(<?= $kgiId ?>)">
-                                <?php if ($statusform == 'update') { ?>
-                                <img
-                                    src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg"><?= Yii::t('app', 'Update History') ?>
-                                <?php } ?>
-                            </div>
+                            if ($statusform == 'update') {
+                            ?>
+                                <div class="updatehistory" class="updatehistory" style="text-align: right;cursor:pointer;"
+                                    data-bs-toggle="modal" data-bs-target="#update-history-popup"
+                                    onclick="javascript:kgiUpdateHistory(<?= $kgiId ?>)">
+                                    <?php if ($statusform == 'update') { ?>
+                                        <img
+                                            src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg"><?= Yii::t('app', 'Update History') ?>
+                                    <?php } ?>
+                                </div>
                             <?php
-							}
-							?>
+                            }
+                            ?>
                         </label>
 
                         <div class="input-group">
@@ -738,26 +738,26 @@ select.form-select option:disabled {
 
                         <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
                             <?php if ($statusform == 'update') { ?>
-                            <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-                                <label class="switch">
-                                    <input type="checkbox" id="historic-checkbox-kgi"
-                                        onchange="javascript:autoUpdateResult(<?= $kgiId ?>)">
-                                    <span class="slider round"></span>
-                                </label>
-                                <label class="sub-manage-create" id="historic-switch">
-                                    <?= Yii::t('app', 'Historic Update') ?>
-                                </label>
-                            </div>
-                            <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-                                <label class="switch">
-                                    <input type="checkbox" id="override-checkbox-kgi" checked
-                                        onchange="javascript:overrideUpdate()">
-                                    <span class="slider round"></span>
-                                </label>
-                                <label class="sub-manage-create" id="override-switch">
-                                    <?= Yii::t('app', 'Override') ?>
-                                </label>
-                            </div>
+                                <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+                                    <label class="switch">
+                                        <input type="checkbox" id="historic-checkbox-kgi"
+                                            onchange="javascript:autoUpdateResult(<?= $kgiId ?>)">
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <label class="sub-manage-create" id="historic-switch">
+                                        <?= Yii::t('app', 'Historic Update') ?>
+                                    </label>
+                                </div>
+                                <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+                                    <label class="switch">
+                                        <input type="checkbox" id="override-checkbox-kgi" checked
+                                            onchange="javascript:overrideUpdate()">
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <label class="sub-manage-create" id="override-switch">
+                                        <?= Yii::t('app', 'Override') ?>
+                                    </label>
+                                </div>
                             <?php } ?>
                         </div>
                     </div>
@@ -780,58 +780,58 @@ select.form-select option:disabled {
                     <div class="form-group mt-42"
                         style="display: flex; align-items: flex-end; justify-content: flex-end; gap: 12px; width: 100%;">
                         <?php
-						// $status = 'create';
-						// $statusform = 'update';
+                        // $status = 'create';
+                        // $statusform = 'update';
 
-						if ($statusform == 'update') {
-						?>
-                        <div
-                            style="display: flex; width: 99px; height: 40px; flex-direction: column; align-items: flex-end;">
-                            <label class="name-last-update">
-                                Last Updated on
-                            </label>
-                            <text class="create-last-update">
-                                <?= isset($data['lastUpdate']) ? $data['lastUpdate'] : '' ?>
-                            </text>
-                        </div>
-                        <div>
-                            <select
-                                class="<?= $data['status'] == 1 ? 'select-create-status' : 'select-complete-status' ?>"
-                                aria-label="Default select example" name="status" id="pim-status"
-                                onchange="javascript:changeStatus()" required="">
-                                <option value="1"
-                                    <?= isset($data['status']) && $data['status'] == 1 ? 'selected' : '' ?>> In-Progress
-                                </option>
-                                <option value="2"
-                                    <?= isset($data['status']) && $data['status'] == 2 ? 'selected' : '' ?>> Completed
-                                </option>
-                            </select>
+                        if ($statusform == 'update') {
+                        ?>
+                            <div
+                                style="display: flex; width: 99px; height: 40px; flex-direction: column; align-items: flex-end;">
+                                <label class="name-last-update">
+                                    Last Updated on
+                                </label>
+                                <text class="create-last-update">
+                                    <?= isset($data['lastUpdate']) ? $data['lastUpdate'] : '' ?>
+                                </text>
+                            </div>
+                            <div>
+                                <select
+                                    class="<?= $data['status'] == 1 ? 'select-create-status' : 'select-complete-status' ?>"
+                                    aria-label="Default select example" name="status" id="pim-status"
+                                    onchange="javascript:changeStatus()" required="">
+                                    <option value="1"
+                                        <?= isset($data['status']) && $data['status'] == 1 ? 'selected' : '' ?>> In-Progress
+                                    </option>
+                                    <option value="2"
+                                        <?= isset($data['status']) && $data['status'] == 2 ? 'selected' : '' ?>> Completed
+                                    </option>
+                                </select>
 
-                        </div>
+                            </div>
                         <?php
-						} else {
-						?>
-                        <input type="hidden" name="status" value='1'>
+                        } else {
+                        ?>
+                            <input type="hidden" name="status" value='1'>
                         <?php } ?>
                         <a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="btn-create-cancle"
                             style="width: 100px;text-decoration:none;">
                             <?= Yii::t('app', 'Cancel') ?>
                         </a>
                         <?php
-						if ($statusform == 'update') {
-						?>
-                        <button type="submit" class="btn-create-update" style="width: 100px;">
-                            <img src="<?= Yii::$app->homeUrl ?>image/updatebtn-white.svg" alt="LinkedIn"
-                                style="width: 16px; height: 16px;">
-                            <?= Yii::t('app', 'Update') ?>
-                        </button>
+                        if ($statusform == 'update') {
+                        ?>
+                            <button type="submit" class="btn-create-update" style="width: 100px;">
+                                <img src="<?= Yii::$app->homeUrl ?>image/updatebtn-white.svg" alt="LinkedIn"
+                                    style="width: 16px; height: 16px;">
+                                <?= Yii::t('app', 'Update') ?>
+                            </button>
                         <?php } else { ?>
-                        <!-- ปรับให้ปุ่มนี้เป็น type="submit" -->
-                        <button type="submit" class="btn-create-update" style="width: 100px;">
-                            <?= Yii::t('app', 'Create') ?>
-                            <img src="<?= Yii::$app->homeUrl ?>image/create-btn-white.svg" alt="LinkedIn"
-                                style="width: 16px; height: 16px;">
-                        </button>
+                            <!-- ปรับให้ปุ่มนี้เป็น type="submit" -->
+                            <button type="submit" class="btn-create-update" style="width: 100px;">
+                                <?= Yii::t('app', 'Create') ?>
+                                <img src="<?= Yii::$app->homeUrl ?>image/create-btn-white.svg" alt="LinkedIn"
+                                    style="width: 16px; height: 16px;">
+                            </button>
                         <?php } ?>
                     </div>
 
@@ -842,83 +842,84 @@ select.form-select option:disabled {
     </div>
 </div>
 <?php if ($statusform == 'update') {
-	//throw new exception(print_r($data, true));
+    //throw new exception(print_r($data, true));
 ?>
-<input type="hidden" value="update" id="acType">
-<input type="hidden" value="<?= $data["priority"] ?>" id="priority">
+    <input type="hidden" value="update" id="acType">
+    <input type="hidden" value="<?= $data["priority"] ?>" id="priority">
+    <input type="hidden" value="<?= isset($url) ? $url : '' ?>" name="url">
 <?php
 } else {
 ?>
-<input type="hidden" value="create" id="acType">
+    <input type="hidden" value="create" id="acType">
 
 <?php } ?>
 <?php ActiveForm::end(); ?>
 <?= $this->render('modal_history') ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-$(document).ready(function() {
-    var statusform = '<?= $statusform ?>';
-    if (statusform === 'update') {
-        var pri = $("#priority").val();
-        branchMultiDepartmentUpdate();
-        var checkedBranchIds = [];
-        var checkedDepartmentIds = [];
-        $('input[name="branch[]"]:checked').each(function() {
-            checkedBranchIds.push($(this).val());
-        });
-        $('input[name="department[]"]:checked').each(function() {
-            checkedDepartmentIds.push($(this).val());
-        });
-        checkedBranchIds.forEach(function(branchId) {
-            departmentMultiTeamUpdate(branchId);
-        });
-        // if (checkedDepartmentIds.length > 0) {
-        // 	checkedDepartmentIds.forEach(function(departmentId) {
-        // 		multiTeamUpdate(departmentId);
-        // 	});
-        // } else {
-        multiteamKgi();
-        // }
-        $("#priority-update").val(pri);
-        let isSubmittingUpdate = false; // ป้องกัน submit ซ้ำ
-        $("#update-kgi").on("beforeSubmit", function(event) {
-            if (isSubmittingUpdate) {
+    $(document).ready(function() {
+        var statusform = '<?= $statusform ?>';
+        if (statusform === 'update') {
+            var pri = $("#priority").val();
+            branchMultiDepartmentUpdate();
+            var checkedBranchIds = [];
+            var checkedDepartmentIds = [];
+            $('input[name="branch[]"]:checked').each(function() {
+                checkedBranchIds.push($(this).val());
+            });
+            $('input[name="department[]"]:checked').each(function() {
+                checkedDepartmentIds.push($(this).val());
+            });
+            checkedBranchIds.forEach(function(branchId) {
+                departmentMultiTeamUpdate(branchId);
+            });
+            // if (checkedDepartmentIds.length > 0) {
+            // 	checkedDepartmentIds.forEach(function(departmentId) {
+            // 		multiTeamUpdate(departmentId);
+            // 	});
+            // } else {
+            multiteamKgi();
+            // }
+            $("#priority-update").val(pri);
+            let isSubmittingUpdate = false; // ป้องกัน submit ซ้ำ
+            $("#update-kgi").on("beforeSubmit", function(event) {
+                if (isSubmittingUpdate) {
+                    return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
+                }
+                isSubmittingUpdate = true;
+                if (!validateFormKgiUpdate()) {
+                    isSubmittingUpdate = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
+                    return false;
+                }
+                return true; // ถ้า validation ผ่าน ให้ submit ฟอร์มต่อไป
+            });
+        }
+        // ฟังก์ชันเปลี่ยนสีของ placeholder เมื่อมีการเลือกค่า
+        function updatePlaceholderColor(selector) {
+            $(selector).on('change', function() {
+                $(this).css('color', $(this).val() !== "" ? '#30313D' : 'var(--Helper-Text-Gray, #8A8A8A)');
+            });
+        }
+
+        // เรียกใช้งานฟังก์ชันกับ select หลายตัวพร้อมกัน
+        updatePlaceholderColor('#companyId');
+        updatePlaceholderColor('#quantRatio-create');
+        updatePlaceholderColor('#amountType-create');
+        updatePlaceholderColor('#code-create');
+
+        $('[data-toggle="tooltip"]').tooltip(); // เปิดใช้งาน Tooltip
+
+        let isSubmitting = false; // ป้องกัน submit ซ้ำ
+        $("#create-kgi").on("beforeSubmit", function(event) {
+            if (isSubmitting) {
                 return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
             }
-            isSubmittingUpdate = true;
-            if (!validateFormKgiUpdate()) {
-                isSubmittingUpdate = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
+            isSubmitting = true;
+            if (!validateFormKgi()) {
+                isSubmitting = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
                 return false;
             }
             return true; // ถ้า validation ผ่าน ให้ submit ฟอร์มต่อไป
         });
-    }
-    // ฟังก์ชันเปลี่ยนสีของ placeholder เมื่อมีการเลือกค่า
-    function updatePlaceholderColor(selector) {
-        $(selector).on('change', function() {
-            $(this).css('color', $(this).val() !== "" ? '#30313D' : 'var(--Helper-Text-Gray, #8A8A8A)');
-        });
-    }
-
-    // เรียกใช้งานฟังก์ชันกับ select หลายตัวพร้อมกัน
-    updatePlaceholderColor('#companyId');
-    updatePlaceholderColor('#quantRatio-create');
-    updatePlaceholderColor('#amountType-create');
-    updatePlaceholderColor('#code-create');
-
-    $('[data-toggle="tooltip"]').tooltip(); // เปิดใช้งาน Tooltip
-
-    let isSubmitting = false; // ป้องกัน submit ซ้ำ
-    $("#create-kgi").on("beforeSubmit", function(event) {
-        if (isSubmitting) {
-            return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
-        }
-        isSubmitting = true;
-        if (!validateFormKgi()) {
-            isSubmitting = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
-            return false;
-        }
-        return true; // ถ้า validation ผ่าน ให้ submit ฟอร์มต่อไป
     });
-});
 </script>
