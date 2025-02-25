@@ -844,6 +844,7 @@ select.form-select option:disabled {
 <input type="hidden" value="update" id="acType">
 <input type="hidden" id="kpiEmployeeId" name="kpiEmployeeId" value="<?= isset($kpiEmployeeId) ? $kpiEmployeeId : '' ?>"
     required>
+<input type="hidden" value="<?= $lastUrl ?>" name="lastUrl" id="lastUrl">
 
 <?php ActiveForm::end(); ?>
 <?= $this->render('modal_history') ?>

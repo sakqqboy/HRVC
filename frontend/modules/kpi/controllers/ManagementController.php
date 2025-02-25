@@ -509,35 +509,37 @@ class ManagementController extends Controller
             "kpiDepartmentText" => $kpiDepartmentText,
             "kpiTeamText" => $kpiTeamText,
             "kpiId" => $kpiId,
+            "lastUrl" => Yii::$app->request->referrer,
             "statusform" =>  "update"
         ]);
     }
     public function actionUpdateKpi()
     {
         $data = [
-            'kpiId' => $_POST["kpiId"],
-            'kpiName' => $_POST["kpiName"],
-            'company' => $_POST["companyId"],
-            'branch' => $_POST["branch"],
-            'unit' => $_POST["unitId"],
-            'amount' => $_POST["amount"],
-            'month' => $_POST["month"],
-            'year' => $_POST["year"],
-            'detail' => $_POST["detail"],
-            'amountType' => $_POST["amountType"],
-            'code' => $_POST["code"],
-            'quanRatio' => $_POST["quantRatio"],
-            'nextCheckDate' => $_POST["nextCheckDate"],
-            'fromDate' => $_POST["fromDate"],
-            'toDate' => $_POST["toDate"],
-            'department' => $_POST["department"],
-            'team' => $_POST["team"],
-            'priority' => $_POST["priority"],
-            'status' => $_POST["status"],
-            'result' => $_POST["result"],
+            // 'kpiId' => $_POST["kpiId"],
+            // 'kpiName' => $_POST["kpiName"],
+            // 'company' => $_POST["companyId"],
+            // 'branch' => $_POST["branch"],
+            // 'unit' => $_POST["unitId"],
+            // 'amount' => $_POST["amount"],
+            // 'month' => $_POST["month"],
+            // 'year' => $_POST["year"],
+            // 'detail' => $_POST["detail"],
+            // 'amountType' => $_POST["amountType"],
+            // 'code' => $_POST["code"],
+            // 'quanRatio' => $_POST["quantRatio"],
+            // 'nextCheckDate' => $_POST["nextCheckDate"],
+            // 'fromDate' => $_POST["fromDate"],
+            // 'toDate' => $_POST["toDate"],
+            // 'department' => $_POST["department"],
+            // 'team' => $_POST["team"],
+            // 'priority' => $_POST["priority"],
+            // 'status' => $_POST["status"],
+            // 'result' => $_POST["result"],
+            'lastUrl' => $_POST["lastUrl"],
         ];
 
-        //  throw new Exception(print_r($data,true));
+        //  throw new Exception(print_r($data,true));   
 
         $isManager = UserRole::isManager();
         if (isset($_POST["kpiId"]) && $_POST["kpiId"] != "") {
@@ -608,10 +610,10 @@ class ManagementController extends Controller
                 if (isset($_POST["team"]) && count($_POST["team"]) > 0) {
                     $this->savekpiTeam($_POST["team"], $kpiId);
                 }
-                return $this->redirect('grid');
+                return $this->redirect($_POST["lastUrl"]);
             }
         }
-        return $this->redirect(Yii::$app->homeUrl . 'kpi/management/grid');
+        // Yii::$app->getUrlManager()->setBaseUrl(Yii::$app->request->referrer);
     }
     public function actionHistory()
     {

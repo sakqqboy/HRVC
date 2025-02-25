@@ -682,6 +682,7 @@ class KpiTeamController extends Controller
 			"role" => $role,
 			"unit"  => $unit ,
 			"kpiTeamId"  => $kpiTeamId,
+			"lastUrl" => Yii::$app->request->referrer,	
 			"statusform" =>  "update"
 		]);
 	}
@@ -748,7 +749,8 @@ class KpiTeamController extends Controller
 			$teamkpi->updateDateTime = new Expression('NOW()');
 			$teamkpi->save(false);
 		}
-		return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
+		// return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
+		return $this->redirect($_POST["lastUrl"]);
 	}
 	public function actionKpiTeam()
 	{
