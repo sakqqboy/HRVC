@@ -13,7 +13,7 @@
 
 		use yii\bootstrap5\ActiveForm;
 		?>
-        <div class="col-12 alert bg-white mt-15 pt-15 pr-30 pl-30" style="height:320px;overflow-y: auto;">
+        <div class="col-12 alert bg-white mt-15 pt-15 pr-30 pl-30" style="height:420px;overflow-y: auto;">
             <div class="row">
                 <div class="col-12 head-gray-box pt-0">
                     <span class=" head-gray-box-text"><?= Yii::t('app', 'Headline') ?></span>
@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-12">
                         <span class=" head-gray-box-text"><?= Yii::t('app', 'Description') ?></span>
-                        <textarea style="height: 150px;" class="form-control font-size-12" id="description"
+                        <textarea style="height: 270px;" class="form-control font-size-12" id="description"
                             name="kpiDescription"></textarea>
                     </div>
                     <div id="attachFile-<?= $kpiId ?>" class="col-12 text-end font-size-12 mt-5"></div>
@@ -61,7 +61,7 @@
             <div class="col-9  sub-tab">
             </div>
         </div>
-        <div class="col-12 alert bg-white mt-15 pt-10 pr-10 pl-10" style="height:320px;overflow-y: auto;">
+        <div class="col-12 alert bg-white mt-15 pt-10 pr-10 pl-10" style="height:420px;overflow-y: auto;">
             <div class="col-12 pim-name-detail">
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/warning-full.png" class="pim-icon mr-3"
                     style="margin-top: -6px;">
@@ -172,7 +172,7 @@
                 <div class="col-12 mb-10" style="display:none;" id="answer-site-<?= $kpiIssueId ?>">
                     <div id="fileName-<?= $kpiIssueId ?>" class="col-12 text-end font-size-12"></div>
                     <textarea name="" class="form-control font-size-12" id="answer-<?= $kpiIssueId ?>"
-                        style="height: 80px;"></textarea>
+                        style="height: 200px;"></textarea>
                     <div class="col-12 text-end">
                         <label for="attachKpiFileAnswer-<?= $kpiIssueId ?>" class="mt-2" style="cursor: pointer;">
                             <a class="btn btn-bg-white-xs pb-0 pt-3"
