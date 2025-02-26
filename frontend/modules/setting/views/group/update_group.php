@@ -28,31 +28,8 @@ $this->title = 'Update Group';
         </div>
 
         <div class="row mb-100">
-            <!-- <div class="col-lg-4 col-md-6 col-12 all-avatar">
-            <div class="avatar-upload">
-                <div class="avatar-preview" id="imagePreview" style="background-color: white;">
-                    <label for="imageUpload" class="upload-label">
-                        <img src="<?= Yii::$app->homeUrl ?>image/upload-img.svg" alt="Upload Icon">
-                        <span>Upload</span>
-                    </label>
-                </div>
-                <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg" name="image" />
-            </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-12">
-            <div class="form-group">
-                <span class="fileUpload btn" style="padding: 0;">
-                    <div id="upload" class="uplode-btn-group">
-                        <img src="<?= Yii::$app->homeUrl ?>image/upload-white.svg" alt="Upload Icon">
-                        Update
-                    </div>
-                    <input type="file" name="imageUploadBanner" id="imageUploadBanner"
-                        class="upload up upload-checklist" id="up" />
-                </span>
-            </div>
-        </div> -->
             <div class="col-12" style="margin-top:-50px; display: flex;">
-                <div class="col-10 avatar-upload" style="margin-left:36px;">
+                <div class="col-10 mb-15 avatar-upload" style="margin-left:36px;">
                     <div class="avatar-preview" id="imagePreview" style="background-color: white;">
                         <label for="imageUpload" class="upload-label">
                             <img src="<?= Yii::$app->homeUrl ?>image/upload-img.svg" alt="Upload Icon">
@@ -60,7 +37,7 @@ $this->title = 'Update Group';
                         </label>
                     </div>
                 </div>
-                <div class="col-2" style="display: flex; justify-content: center;  align-items: center; ">
+                <div class="col-2 mb-15" style="display: flex; justify-content: center;  align-items: center; ">
                     <!-- ลบระยะห่างระหว่างรูปและรายละเอียด -->
                     <span class="fileUpload btn" style="padding: 0;">
                         <div id="upload" class="uplode-btn-group">
