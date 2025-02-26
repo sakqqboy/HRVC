@@ -7,7 +7,7 @@
 			<div class="col-9  sub-tab">
 			</div>
 		</div>
-		<div class="col-12 alert bg-white mt-15 pt-0" style="height:280px;overflow-y: auto;">
+		<div class="col-12 alert bg-white mt-15 pt-0" style="height:500px;overflow-y: auto;">
 			<div class="row">
 				<?php
 				if (isset($kfiDetail["kfiEmployeeDetail"]) && count($kfiDetail["kfiEmployeeDetail"]) > 0) {
