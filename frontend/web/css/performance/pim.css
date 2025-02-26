@@ -62,7 +62,6 @@
 	width: 100%;
 	height: 100%;
 	/* ขยายเต็มหน้าจอ */
-	/* min-height: 100vh; */
 	box-sizing: border-box;
 	/* รวม padding ในขนาดองค์ประกอบ */
 }
@@ -2291,23 +2290,16 @@ input:checked+.slider:before {
 		transform-origin: top left;
 		width: calc(100% / 0.90);
 		height: calc(100% / 0.90);
-		/* min-height: 100vh; */
 	}
 
 	.submain-content {
 		height: auto;
-		/* ลดความสูงลง 50% */
 		max-height: 50vh;
-		/* ใช้ vh เพื่อให้ความสูงไม่เกินครึ่งหนึ่งของหน้าจอ */
 	}
 
-	/* 
-	.contrainer-body-detail {
-		transform: scale(0.90);
-		transform-origin: top left;
-		width: calc(100% / 0.90);
-		height: calc(100% / 0.90);
-	} */
+	.pim-body {
+		min-height: 90vh;
+	}
 
 	.row-box {
 		transform: scale(0.90);
@@ -2329,17 +2321,13 @@ input:checked+.slider:before {
 
 	.submain-content {
 		height: auto;
-		/* ลดความสูงลง 50% */
 		max-height: 50vh;
-		/* ใช้ vh เพื่อให้ความสูงไม่เกินครึ่งหนึ่งของหน้าจอ */
 	}
 
-	/* .contrainer-body-detail {
-		transform: scale(0.85);
-		transform-origin: top left;
-		width: calc(100% / 0.85);
-		height: calc(100% / 0.85);
-	} */
+	.pim-body {
+		min-height: 105vh;
+	}
+
 
 	.row-box {
 		transform: scale(0.80);
@@ -2358,14 +2346,9 @@ input:checked+.slider:before {
 		height: calc(100% / 0.70);
 	}
 
-
-
-	/* .contrainer-body-detail {
-		transform: scale(0.75);
-		transform-origin: top left;
-		width: calc(100% / 0.75);
-		height: calc(100% / 0.75);
-	} */
+	.pim-body {
+		min-height: 115vh;
+	}
 
 	.row-box {
 		transform: scale(0.70);
@@ -2388,40 +2371,26 @@ input:checked+.slider:before {
 
 	.submain-content {
 		height: auto;
-		/* ลดความสูงลง 50% */
-		/* max-height: 120vh; */
-		/* ใช้ vh เพื่อให้ความสูงไม่เกินครึ่งหนึ่งของหน้าจอ */
-		/* overflow: hidden; */
-		/* ป้องกันไม่ให้เนื้อหาล้นออก */
 		box-sizing: border-box;
-		/* รวม padding และ border ในขนาดที่กำหนด */
-
 	}
 
 	.company-group-edit {
 		height: 100%;
-		/* ลดความสูงลง 50% */
 		max-height: 150vh;
-		/* ใช้ vh เพื่อให้ความสูงไม่เกินครึ่งหนึ่งของหน้าจอ */
 	}
 
 	.company-group-body {
 		height: 100%;
-		/* ลดความสูงลง 50% */
 		max-height: 110vh;
-		/* ใช้ vh เพื่อให้ความสูงไม่เกินครึ่งหนึ่งของหน้าจอ */
 	}
-
-	/* .contrainer-body-detail {
-		transform: scale(0.65);
-		transform-origin: top left;
-		width: calc(100% / 0.65);
-		height: calc(100% / 0.65);
-	} */
 
 	.modal,
 	.modal-backdrop {
 		transform: scale(1) !important;
+	}
+
+	.pim-body {
+		min-height: 130vh;
 	}
 
 	.row-box {
@@ -2444,17 +2413,9 @@ input:checked+.slider:before {
 		margin-top: 30px;
 	}
 
-	/* .contrainer-body-detail {
-		transform: scale(0.50);
-		transform-origin: top left;
-		width: calc(100% / 0.50);
-		height: calc(100% / 0.50);
-	} */
 	.submain-content {
 		height: auto;
-		/* ลดความสูงลง 50% */
 		max-height: 50vh;
-		/* ใช้ vh เพื่อให้ความสูงไม่เกินครึ่งหนึ่งของหน้าจอ */
 	}
 
 	.row-box {
