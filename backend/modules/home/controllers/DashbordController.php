@@ -81,6 +81,12 @@ class DashbordController extends Controller
     
     public function actionDashbordCompany($companyId)
     {
+        $kpiData = [];
+        $kgiData = [];
+        $kfiData = [];
+        $totlePercentKPI = 0;
+        $totlePercentKGI = 0;
+        $totlePercentKFI = 0;
         // ดึงข้อมูลออกจากฐานข้อมูล
         $kfis = Kfi::find()->where(['<>', 'status', '99'])
                           ->andWhere(['companyId' => $companyId])
@@ -316,8 +322,6 @@ class DashbordController extends Controller
             endforeach;
 
             $totlePercentKPI = ceil($totlePercent / $kpiCount);
-
-            // $totlePercentKPI = $totlePercent;
 		}
 
         $data = [
@@ -331,6 +335,13 @@ class DashbordController extends Controller
     
     public function actionDashbordTeam($teamId, $userId, $role)
     {
+        $kpiData = [];
+        $kgiData = [];
+        $kfiData = [];
+        $totlePercentKPI = 0;
+        $totlePercentKGI = 0;
+        $totlePercentKFI = 0;
+        
         $employeeId = Employee::employeeId($userId);
 		$employee = Employee::EmployeeDetail($employeeId);
         
@@ -494,6 +505,12 @@ class DashbordController extends Controller
     
     public function actionDashbordEmployee($employeeId, $userId, $role)
     {
+        $kpiData = [];
+        $kgiData = [];
+        $kfiData = [];
+        $totlePercentKPI = 0;
+        $totlePercentKGI = 0;
+        $totlePercentKFI = 0;
         // ดึงข้อมูลออกจากฐานข้อมูล
         // $kgiEmployees = KgiEmployee::find()->where(['<>', 'status', '99'])
         //                                   ->andWhere(['employeeId' => $employeeId])
@@ -611,7 +628,7 @@ class DashbordController extends Controller
             ];
                 $totlePercent = $totlePercent + $ratio;
             endforeach;
-            $totlePercentKPI = ceil($totlePercent / $kgiEmployeeCount);
+            $totlePercentKGI = ceil($totlePercent / $kgiEmployeeCount);
         }
 
 
@@ -675,7 +692,7 @@ class DashbordController extends Controller
         // ส่งผลลัพธ์เป็น JSON
         $data = [
             'KFI'=>  ['kfiCount' => [],'KFIData' => [],'showPercent' => [] ],
-            'KGI'=>  ['kgiCount' => $kgiEmployeeCount,'KGIData' => $kgiData,'showPercent' => $totlePercentKPI],
+            'KGI'=>  ['kgiCount' => $kgiEmployeeCount,'KGIData' => $kgiData,'showPercent' => $totlePercentKGI],
             'KPI'=>  ['kpiCount' => $kpiEmployeeCount,'KPIData' => $kpiData,'showPercent' => $totlePercentKPI]
         ];
     
