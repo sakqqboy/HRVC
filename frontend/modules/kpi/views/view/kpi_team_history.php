@@ -282,7 +282,7 @@ $this->title = 'Team KPI History';
                                                             }
                                                         }
                                                     } else {
-                                                        $showPercent = round($kpi['ratio']);
+                                                        $showPercent = round(floatval($kpi['ratio']));
                                                     }
                                                     ?>
                                         <div class="progress">
