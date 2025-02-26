@@ -240,7 +240,7 @@ $this->title = "Individual KPI";
                                                     }
                                                 }
                                             } else {
-                                                $showPercent = round($kpi['ratio']);
+                                                $showPercent = round(floatval($kpi['ratio']));
                                             }
                                             ?>
                                     <div id="progress1">
