@@ -508,7 +508,7 @@ $this->title = 'KPI Grid View';
                                                         }
                                                     }
                                                 } else {
-                                                    $showPercent = round($kpi['ratio']);
+                                                    $showPercent = round(floatval($kpi['ratio']));
                                                 }
                                                 ?>
                                         <div class="progress">
