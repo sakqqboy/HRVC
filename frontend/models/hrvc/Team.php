@@ -50,7 +50,10 @@ class Team extends \frontend\models\hrvc\master\TeamMaster
     public static function  employeeInTeamDetail($teamId)
     {
         $employee = Employee::find()->select('employeeFirstname,employeeSurename,employeeId')
-            ->where(["teamId" => $teamId])
+            ->where([
+                "teamId" => $teamId,
+                "status" => 1
+            ])
             ->orderBy('employeeFirstname')
             ->asArray()
             ->all();

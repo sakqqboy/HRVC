@@ -502,6 +502,7 @@ class KgiTeamController extends Controller
 					"periodCheck" => ModelMaster::engDate(KgiTeam::lastestCheckDate($kgiTeam["kgiTeamId"]), 2),
 					"nextCheckDate" =>  ModelMaster::engDate($kgiTeamHistory["nextCheckDate"], 2),
 					"status" => $kgiTeamHistory["status"],
+					"kgiTeamHistoryId" => $kgiTeamHistory["kgiTeamHistoryId"] ?? 0,
 					"flag" => Country::countryFlagBycompany($kgiTeam["companyId"]),
 					"countryName" => Country::countryNameBycompany($kgiTeam['companyId']),
 					"kgiEmployee" => KgiEmployee::kgiEmployee($kgiTeam["kgiId"]),

@@ -54,7 +54,7 @@ $this->title = 'Team KGI View';
                         </span>
                         <?php if ($role >= 5) {
                         ?>
-                            <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kgi"
+                            <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kgi-team"
                                 onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)"
                                 onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
                                 onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
