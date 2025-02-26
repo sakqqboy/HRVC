@@ -12,15 +12,15 @@
     margin-left: -10px;
     margin-right: -10px;
     position: relative;
-    height: 100%;
+    /* height: 100%; */
     /* ลดความสูงลง 50% */
-    max-height: 100vh;
+    /* max-height: 100vh; */
     /* ใช้ vh เพื่อให้ความสูงไม่เกินครึ่งหนึ่งของหน้าจอ */
     /* height: auto;
     min-height: 100vh; */
     /* อย่างน้อย 120vh หากเนื้อหาน้อยกว่า */
-    overflow-y: auto;
-    box-sizing: border-box;
+    /* overflow-y: auto; */
+    /* box-sizing: border-box; */
     /* overflow: hidden; */
 }
 
