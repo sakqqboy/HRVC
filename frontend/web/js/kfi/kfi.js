@@ -1047,8 +1047,10 @@ document.addEventListener('click', function (event) {
     const picker = document.getElementById('monthYearPicker');
     const trigger = document.getElementById('multi-mount-year');
 
-    if (picker.style.display === 'block' && !picker.contains(event.target) && !trigger.contains(event.target)) {
-        picker.style.display = 'none';
+    if (picker && trigger) {
+        if (picker.style.display === 'block' && !picker.contains(event.target) && !trigger.contains(event.target)) {
+            picker.style.display = 'none';
+        }
     }
 });
 
@@ -1077,7 +1079,7 @@ document.addEventListener("DOMContentLoaded", function () {
             yearSelect.appendChild(option);
         }
     } else {
-        console.error("Element with id 'yearSelect' not found.");
+        // console.error("Element with id 'yearSelect' not found.");
     }
 
     var month = document.getElementById('hiddenMonth').value;
@@ -2148,14 +2150,14 @@ function showEditRelateKgi(type, kfiId) {
         });
     }
 }
-function changeStatus() { 
+function changeStatus() {
     var pimStatus = $("#pim-status").val();
     $("#pim-status").removeClass('select-create-status');
     $("#pim-status").removeClass('select-complete-status');
-    if (pimStatus == 1) { 
+    if (pimStatus == 1) {
         $("#pim-status").addClass('select-create-status');
     }
-    if (pimStatus == 2) { 
+    if (pimStatus == 2) {
         $("#pim-status").addClass('select-complete-status');
     }
 }
