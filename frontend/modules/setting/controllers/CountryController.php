@@ -30,7 +30,7 @@ class CountryController extends Controller
         if (isset($country) && count($country) > 0) {
             foreach ($country as $c):
                 $countryName = $c->countryName;
-                $shortname = strtolower(substr($countryName, 0, 2));
+                $shortname = strtolower(mb_substr($countryName, 0, 2));
                 $saveName = 'images/flag/svg/' . $shortname . '.svg';
                 $c->flag = $saveName;
                 // if ($saveName == '\xEF\xBB.svg') {
