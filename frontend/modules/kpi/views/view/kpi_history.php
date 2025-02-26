@@ -25,7 +25,7 @@ $this->title = 'KPI View';
                     </a>
                     <?= $kpiDetail["kpiName"] ?>
                 </div>
-                <div class="col-1">
+                <div class="col-1 text-end">
                     <?php if ($role >= 5) {
                     ?>
                     <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kpi"
