@@ -55,7 +55,7 @@ $this->title = 'Group profile';
             </div>
             <?php }?>
         </div>
-        <div class="row group-details">
+        <div class="row group-details mt-10">
             <div class="col-9 mx-auto group-body  group-body ">
                 <div class="row">
                     <!-- Left Column -->
