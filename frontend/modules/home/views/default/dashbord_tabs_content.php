@@ -171,11 +171,11 @@ use yii\bootstrap5\ActiveForm;
                             <?= Yii::t('app', 'Update') ?>
                         </button>
                         <?php } else { ?>
-                        <button class="btn-update btn-Locked">
+                        <!-- <button class="btn-update btn-Locked">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/locked.svg" class="mb-2"
                                 style="width: 12px; height: 12px;">
                             <?= Yii::t('app', 'Locked') ?>
-                        </button>
+                        </button> -->
                         <?php } ?>
                     </div>
                     <div class="col-4 text-start">
@@ -343,11 +343,11 @@ use yii\bootstrap5\ActiveForm;
                         </button>
                         <?php  } ?>
                         <?php } else { ?>
-                        <button class="btn-update btn-Locked">
+                        <!-- <button class="btn-update btn-Locked">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/locked.svg" class="mb-2"
                                 style="width: 12px; height: 12px;">
                             <?= Yii::t('app', 'Locked') ?>
-                        </button>
+                        </button> -->
                         <?php } ?>
                         <!-- <strong class="bold-text" id="KGI-count-0">-</strong> -->
                     </div>
@@ -518,11 +518,11 @@ use yii\bootstrap5\ActiveForm;
                         </button>
                         <?php  } ?>
                         <?php } else { ?>
-                        <button class="btn-update btn-Locked">
+                        <!-- <button class="btn-update btn-Locked">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/locked.svg" class="mb-2"
                                 style="width: 12px; height: 12px;">
                             <?= Yii::t('app', 'Locked') ?>
-                        </button>
+                        </button> -->
                         <?php } ?>
                         <!-- <strong class="bold-text" id="KPI-count-0">-</strong> -->
                     </div>
