@@ -103,6 +103,8 @@ class DefaultController extends Controller
         if ($groupId == null) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
         }
+        //         // throw new Exception( $teamId);
+
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -133,6 +135,8 @@ class DefaultController extends Controller
             "isManager" => $isManager,
             "role" => $role
         ]);
+
+        // return json_encode($role);
     }
 
     public function actionSelfTab()

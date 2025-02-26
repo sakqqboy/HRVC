@@ -56,6 +56,7 @@ function changeButtonTab(type, level, id) {
         success: function (data) {
             const targetId = data[config.key];
             const redirectUrl = $url + config.baseUrl + targetId;
+            // alert(redirectUrl);
             window.location.href = redirectUrl;
         }
     });
@@ -138,11 +139,14 @@ function loadTeamTap(teamId) {
         data: { teamId: teamId },
         success: function (data) {
             // currentKPIIndex = 0;
+            // alert(data);
             $('#tab-content-container').html(data);
         },
         error: function (xhr, status, error) {
+            // alert(JSON.stringify(xhr));
+            alert(status);
             // alert(error);
-            console.error('Error:', error);
+            // console.error('Error:', error);
         }
     });
 }
@@ -160,7 +164,7 @@ function loadSelfTap(employeeId) {
             $('#tab-content-container').html(data);
         },
         error: function (xhr, status, error) {
-            // alert(error);
+            alert(error);
             console.error('Error:', error);
         }
     });
