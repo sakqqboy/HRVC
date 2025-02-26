@@ -2,6 +2,8 @@
 
 namespace frontend\modules\setting\controllers;
 
+use Exception;
+use frontend\models\hrvc\Country;
 use yii\web\Controller;
 
 /**
@@ -21,5 +23,22 @@ class CountryController extends Controller
     public function actionIndex()
     {
         return $this->render('index');
+    }
+    public function actionCountryPicture()
+    {
+        $country = Country::find()->where(["status" => 1])->all();
+        if (isset($country) && count($country) > 0) {
+            foreach ($country as $c):
+                $countryName = $c->countryName;
+                $shortname = strtolower(mb_substr($countryName, 0, 2));
+                $saveName = 'images/flag/svg/' . $shortname . '.svg';
+                $c->flag = $saveName;
+                // if ($saveName == '\xEF\xBB.svg') {
+                //     throw new Exception($c->countryName);
+                // }
+
+                $c->save(false);
+            endforeach;
+        }
     }
 }
