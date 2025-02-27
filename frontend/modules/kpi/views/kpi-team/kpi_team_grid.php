@@ -490,12 +490,12 @@ $this->title = "TEAM KPI";
                                                         $decimal = explode('.', $kpi["target"]);
                                                         if (isset($decimal[1])) {
                                                             if ($decimal[1] == '00') {
-                                                                $show = $decimal[0];
+                                                                $show =  number_format($decimal[0]);
                                                             } else {
-                                                                $show = $kpi["target"];
+                                                                $show =  number_format($kpi["target"]);
                                                             }
                                                         } else {
-                                                            $show = $kpi["target"];
+                                                            $show =  number_format($kpi["target"]);
                                                         }
                                                     } else {
                                                         $show = 0.00;

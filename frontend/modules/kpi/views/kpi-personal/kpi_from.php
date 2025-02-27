@@ -153,7 +153,7 @@ select.form-select option:disabled {
                         <text class="current-ratio-data text-end">
                             <?= Yii::t('app', 'Due Behind by') ?>
                             <span class="DueBehind">
-                                <?=$DueBehind?>
+                                <?= number_format($DueBehind) ?>
                             </span>
                         </text>
                     </div>
@@ -182,7 +182,7 @@ select.form-select option:disabled {
                         <img src="<?= Yii::$app->homeUrl ?><?= isset($data['result']) ? 'image/result-blue.svg' : 'images/icons/Settings/reward.svg'?>"
                             style="width: 40px; height: 40px;">
                         <text class="pim-total-reward">
-                            <?= isset($data['result']) ? $data['result'] : '000' ?>
+                            <?= isset($data['result']) ? number_format($data['result']) : '000' ?>
                         </text>
                     </div>
                 </div>

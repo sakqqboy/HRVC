@@ -168,7 +168,7 @@ $this->title = 'KPI View';
                                                 $show = $kpiEmployeeDetail["targetAmount"];
                                             }
                                             ?>
-                                            <?= $show ?><?= $kpiEmployeeDetail["amountType"] == 1 ? '%' : '' ?>
+                                            <?= number_format($show) ?><?= $kpiEmployeeDetail["amountType"] == 1 ? '%' : '' ?>
                                         </div>
                                     </div>
                                     <div class="col-2 symbol-pim text-center">

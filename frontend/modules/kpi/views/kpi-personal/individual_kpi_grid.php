@@ -451,7 +451,7 @@ $this->title = "INDIVIDUAL KPI";
                                                             $show = $kpi["targetAmount"];
                                                         }
                                                         ?>
-                                                <?= $show ?><?= $kpi["targetAmount"] == 1 ? '%' : '' ?>
+                                                <?= number_format($show) ?><?= $kpi["targetAmount"] == 1 ? '%' : '' ?>
                                             </div>
                                         </div>
                                         <div class="col-2 symbol-pim text-center">
