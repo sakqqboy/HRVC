@@ -1019,7 +1019,9 @@ class KpiTeamController extends Controller
 			$kpiTeam->updateDateTime = new Expression('NOW()');
 			$kpiTeam->save(false);
 		}
-		return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
+		// return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
+		return $this->redirect(Yii::$app->request->referrer);
+
 	}
 	
 	public function actionKpiTeamUpdate()

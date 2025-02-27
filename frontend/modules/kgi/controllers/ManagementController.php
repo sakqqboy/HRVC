@@ -2137,7 +2137,9 @@ class ManagementController extends Controller
 			$kgi->updateDateTime = new Expression('NOW()');
 			$kgi->save(false);
 		}
-		return $this->redirect(Yii::$app->homeUrl . 'kgi/management/grid');
+		// return $this->redirect(Yii::$app->homeUrl . 'kgi/management/grid');
+		return $this->redirect(Yii::$app->request->referrer);
+
 	}
 	public function actionChanngeTeamTargetReason()
 	{

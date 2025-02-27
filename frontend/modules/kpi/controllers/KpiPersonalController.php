@@ -942,6 +942,8 @@ class KpiPersonalController extends Controller
 			$kpiEmployee->updateDateTime = new Expression('NOW()');
 			$kpiEmployee->save(false);
 		}
-		return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
+		// return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
+		return $this->redirect(Yii::$app->request->referrer);
+
 	}
 }

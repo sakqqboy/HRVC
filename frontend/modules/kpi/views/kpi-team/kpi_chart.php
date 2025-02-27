@@ -51,25 +51,32 @@ Highcharts.chart('container', {
     tooltip: {
         useHTML: true,
         formatter: function() {
+            let formatter = new Intl.NumberFormat(
+            'en-US'); // Set up number formatting for thousands separator
+
             let actual = this.series.chart.series[0].data[this.point.index]?.y || 0;
             let target = this.series.chart.series[1].data[this.point.index]?.y || 0;
             let difference = target !== 0 ? ((target - actual) / target) * 100 : 0;
             let diffColor = difference < 0 ? 'red' : 'black';
 
             return `
-            <div style="position: relative; display: flex; justify-content: space-between; gap: 20px; text-align: center;">
-                <div>
-                    <span style="font-size: 12px; color: #666;">Target</span><br>
-                    <span style="font-weight: bold; font-size: 14px;">${target.toFixed(0)}</span><br>
-                    <span style="font-size: 12px; color: #666;">Result</span><br>
-                    <span style="font-weight: bold; font-size: 14px; color: ${actual < 0 ? 'red' : 'black'};">${actual.toFixed(0)}</span>
-                </div>
-                <div>
-                    <br>
-                    <span style="font-size: 12px; color: #666;">Gap</span><br>
-                    <span style="font-weight: bold; font-size: 14px; color: ${diffColor};">${difference.toFixed(0)}%</span>
-                </div>
+        <div style="position: relative; display: flex; justify-content: space-between; gap: 20px; text-align: center;">
+            <div>
+                <span style="font-size: 12px; color: #666;">Target</span><br>
+                <span style="font-weight: bold; font-size: 14px;">${formatter.format(target)}</span><br>
+                <span style="font-size: 12px; color: #666;">Result</span><br>
+                <span style="font-weight: bold; font-size: 14px; color: ${actual < 0 ? 'red' : 'black'};">
+                    ${formatter.format(actual)}
+                </span>
             </div>
+            <div>
+                <br>
+                <span style="font-size: 12px; color: #666;">Gap</span><br>
+                <span style="font-weight: bold; font-size: 14px; color: ${diffColor};">
+                    ${difference.toFixed(0)}%
+                </span>
+            </div>
+        </div>
         `;
         }
     },

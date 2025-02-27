@@ -683,7 +683,8 @@ class KgiTeamController extends Controller
 			$kgiTeam->updateDateTime = new Expression('NOW()');
 			$kgiTeam->save(false);
 		}
-		return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-team/team-kgi-grid');
+		// return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-team/team-kgi-grid');
+		return $this->redirect(Yii::$app->request->referrer);
 	}
 	public function actionKgiTeamHistory($hash)
 	{

@@ -150,12 +150,12 @@ $this->title = 'KPI View';
                                             $decimal = explode('.', $kpiDetail["targetAmount"]);
                                             if (isset($decimal[1])) {
                                                 if ($decimal[1] == '00') {
-                                                    $show = $decimal[0];
+                                                    $show = number_format($decimal[0]);
                                                 } else {
-                                                    $show = $kpiDetail["targetAmount"];
+                                                    $show = number_format($kpiDetail["targetAmount"]);
                                                 }
                                             } else {
-                                                $show = $kpiDetail["targetAmount"];
+                                                $show = number_format($kpiDetail["targetAmount"]);
                                             }
                                             ?>
                                             <?= $show ?><?= $kpiDetail["amountType"] == 1 ? '%' : '' ?>

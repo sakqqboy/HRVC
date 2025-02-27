@@ -654,7 +654,8 @@ class ModelMaster extends \yii\db\ActiveRecord
             $nextYear = $year + 1;
             $nextMonth = $month;
         }
-        if ($unitName == "Half year") {
+        if ($unitName == "Half Year") {
+            // throw new Exception($unitName);
             $nextMonth = (int)$month + 6;
             if ($nextMonth > 12) {
                 $nextYear = $year + 1;
