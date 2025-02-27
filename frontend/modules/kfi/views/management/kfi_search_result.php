@@ -213,8 +213,11 @@ $this->title = 'KFI';
                                     </span>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kfiId ?>">
                                         <?php
-                                                if ($role >= 5) {
-                                                ?>
+                                                if ($colorFormat == "complete") {
+                                                    // echo Yii::t('app', "Update");
+                                        
+                                                } else if ($role >= 5 ) {
+                                        ?>
                                         <li class="pl-4 pr-4" title="Update">
                                             <a class="dropdown-itemNEWS pl-4 pr-20 mb-5"
                                                 href="<?= Yii::$app->homeUrl ?>kfi/management/update-kfi/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, 'kfiHistoryId' => 0]) ?>">

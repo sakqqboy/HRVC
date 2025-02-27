@@ -376,7 +376,8 @@ $this->title = Yii::t('app', 'KFI Grid View');
                                             class="pim-btn-setup">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
                                                 style="width: 14px; height: 14px;">
-                                            <?php  if ($colorFormat == "over") {
+                                            <?php       
+                                                        if ($colorFormat == "over") {
                                                             echo Yii::t('app', 'Update');
                                                         } else {
                                                             echo Yii::t('app', 'Update');
