@@ -168,7 +168,7 @@ $this->title = 'Waiting for approve KGI';
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/question.svg"
                                 style="margin-top: -3px;">
                         </a>
-                        <a href="<?= Yii::$app->homeUrl ?>kgi/management/approve-kgi-team/<?= ModelMaster::encodeParams(["kgiTeamHistoryId" => $kgiTeamHistoryId]) ?>"
+                        <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/kgi-team-history/<?= ModelMaster::encodeParams(['kgiTeamId' => $teamKgi['kgiTeamId'], 'kgiTeamHistoryId' => $kgi['kgiTeamHistoryId'], 'openTab' => 1]) ?>"
                             class="btn btn-bg-white-xs">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" style="margin-top: -2px;">
                         </a>

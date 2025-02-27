@@ -170,7 +170,7 @@ $this->title = 'Waiting for approve KPI';
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/question.svg"
                                 style="margin-top: -3px;">
                         </a>
-                        <a href="<?= Yii::$app->homeUrl ?>kpi/management/approve-kpi-team/<?= ModelMaster::encodeParams(["kpiTeamHistoryId" => $kpiTeamHistoryId]) ?>"
+                        <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/kpi-team-history/<?= ModelMaster::encodeParams(['kpiTeamHistoryId' => $kpiTeamHistoryId, 'kpiTeamId' => $teamKpi["kpiTeamId"]]) ?>"
                             class="btn btn-bg-white-xs">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" style="margin-top: -2px;">
                         </a>
