@@ -1976,13 +1976,14 @@ function prepareKfiNextTarget(kfiHistoryId) {
 function kfiNextTarget() {
     var kfiHistoryId = $("#kfiHistoryId").val();
     var url = $url + 'kfi/management/next-kfi-history';
+    // alert(url);
     $.ajax({
         type: "POST",
         dataType: 'json',
         url: url,
         data: { kfiHistoryId: kfiHistoryId },
         success: function (data) {
-
+            // alert(data);
         }
     });
 }

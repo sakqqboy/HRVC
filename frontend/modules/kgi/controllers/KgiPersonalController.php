@@ -640,7 +640,9 @@ class KgiPersonalController extends Controller
 			$kgiEmployee->updateDateTime = new Expression('NOW()');
 			$kgiEmployee->save(false);
 		}
-		return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi-grid');
+		// return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi-grid');
+		return $this->redirect(Yii::$app->request->referrer);
+
 	}
 	public function actionKgiEmployeeHistory($hash)
 	{

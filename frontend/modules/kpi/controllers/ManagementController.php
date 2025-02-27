@@ -1981,7 +1981,9 @@ class ManagementController extends Controller
             $kpi->updateDateTime = new Expression('NOW()');
             $kpi->save(false);
         }
-        return $this->redirect(Yii::$app->homeUrl . 'kpi/management/grid');
+        // return $this->redirect(Yii::$app->homeUrl . 'kpi/management/grid');
+        return $this->redirect(Yii::$app->request->referrer);
+
     }
     public function actionChanngeTeamTargetReason()
     {

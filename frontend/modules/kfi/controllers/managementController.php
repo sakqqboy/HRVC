@@ -1551,6 +1551,8 @@ class ManagementController extends Controller
 	}
 	public function actionNextKfiHistory()
 	{
+		$nextMonth = null;
+		$nextYear = null;
 		$kfiHistoryId = $_POST["kfiHistoryId"];
 		$currentHistory = KfiHistory::find()->where(["kfiHistoryId" => $kfiHistoryId])->asArray()->one();
 		$unit = Unit::find()->where(["unitId" => $currentHistory["unitId"]])->asArray()->one();
@@ -1588,6 +1590,9 @@ class ManagementController extends Controller
 			$kfi->updateDateTime = new Expression('NOW()');
 			$kfi->save(false);
 		}
-		return $this->redirect(Yii::$app->homeUrl . 'kfi/management/grid');
+		
+		// return print_r($nextTargetMonthYear, true);
+		// return $this->redirect(Yii::$app->homeUrl . 'kfi/management/grid');
+		return $this->redirect(Yii::$app->request->referrer);
 	}
 }
