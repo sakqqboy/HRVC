@@ -2344,6 +2344,8 @@ input:checked+.slider:before {
 		transform-origin: top left;
 		width: calc(100% / 0.70);
 		height: calc(100% / 0.70);
+		margin-top: 30px;
+
 	}
 
 	.pim-body {
