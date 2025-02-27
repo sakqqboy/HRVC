@@ -196,7 +196,6 @@ $this->title = 'KFI';
                                             <?php
                                                 if ($colorFormat == "complete") {
                                                     // echo Yii::t('app', "Update");
-                                        
                                                 } else if ($role >= 5 ) {
                                             ?>
                                             <li class="pl-4 pr-4" title="Update">

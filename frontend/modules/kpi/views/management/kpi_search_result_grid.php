@@ -534,21 +534,22 @@ $this->title = 'KPI Grid View';
                                             <?= Yii::t('app', 'Setup') ?>
                                         </a>
                                         <?php
+                                                } else if ($colorFormat == "complete") {
+                                                    // echo Yii::t('app', "Update");
                                                 } else if ($role >= 5) {
-                                                ?>
+                                        ?>
                                         <a href="<?= Yii::$app->homeUrl ?>kpi/management/prepare-update/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'kpiHistoryId' => 0]) ?>"
                                             class="pim-btn-<?= $colorFormat ?>"
                                             style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; height: 30px; gap: 6px; flex-shrink: 0;">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
                                                 class="mb-2" style="width: 12px; height: 12px;">
-                                            <?php if ($colorFormat == "complete") {
-                                                            echo  Yii::t('app', "Update");
-                                                        } else if ($colorFormat == "over") {
-                                                            echo  Yii::t('app', "Update");
-                                                        } else {
-                                                            echo  Yii::t('app', "Update");
-                                                        }
-                                                        ?>
+                                            <?php 
+                                                    if ($colorFormat == "over") {
+                                                        echo Yii::t('app', 'Update');
+                                                    } else {
+                                                        echo Yii::t('app', 'Update');
+                                                    }
+                                             ?>
                                         </a>
                                         <?php
                                                 } else { ?>

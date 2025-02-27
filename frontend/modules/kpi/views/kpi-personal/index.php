@@ -270,7 +270,9 @@ $this->title = "Individual KPI";
                                     </span>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kpiEmployeeId ?>">
                                         <?php
-                                                if ($canEdit == 1) {
+                                                 if ($colorFormat == "complete") {
+                                                    // echo Yii::t('app', "Update");
+                                                } else if ($canEdit == 1) {
                                                 ?>
                                         <li class="pl-4 pr-4">
                                             <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/update-personal-kpi/<?= ModelMaster::encodeParams(['kpiEmployeeId' => $kpiEmployeeId,'kpiHistoryId' => 0]) ?>"

@@ -291,18 +291,10 @@ $this->title = "KPI";
                                     </span>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kpiTeamId ?>">
                                         <?php
-                                                if ($canEdit == 1) {
+                                                 if ($colorFormat == "complete") {
+                                                    // echo Yii::t('app', "Update");
+                                                } else if ($canEdit == 1) {
                                                 ?>
-                                        <!-- <li class="pl-4 pr-4" data-bs-toggle="modal"
-                                                        data-bs-target="#update-kpi-modal-team"
-                                                        onclick="javascript:updateTeamKpi(<?= $kpiTeamId ?>)">
-                                                        <a class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -3px;">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
-                                                                alt="History" alt="Chart" class="pim-icon mr-10"
-                                                                style="margin-top: -2px;">
-                                                            <?= Yii::t('app', 'Edit') ?>
-                                                        </a>
-                                                    </li> -->
                                         <li class="pl-4 pr-4">
                                             <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                 href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/prepare-update/<?= ModelMaster::encodeParams(['kpiTeamId' => $kpiTeamId,'kpiHistoryId' => 0]) ?>"

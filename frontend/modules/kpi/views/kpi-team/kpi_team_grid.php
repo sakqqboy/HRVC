@@ -573,6 +573,8 @@ $this->title = "TEAM KPI";
                                             <?= Yii::t('app', 'Setup') ?>
                                         </a>
                                         <?php
+                                        } else if ($colorFormat == "complete") {
+                                            // echo Yii::t('app', "Update");
                                                 } else if ($role >= 5) {
                                                 ?>
                                         <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/prepare-update/<?= ModelMaster::encodeParams(['kpiTeamId' => $kpiTeamId, 'kpiHistoryId' => 0]) ?>"
@@ -580,13 +582,12 @@ $this->title = "TEAM KPI";
                                             class="pim-btn-<?= $colorFormat ?>">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
                                                 class="mb-2" style="width: 12px; height: 12px;">
-                                            <?php if ($colorFormat == "complete") {
-                                                            echo  Yii::t('app', "Update");
-                                                        } else if ($colorFormat == "over") {
-                                                            echo  Yii::t('app', "Update");
-                                                        } else {
-                                                            echo  Yii::t('app', "Update");
-                                                        }
+                                            <?php 
+                                                if ($colorFormat == "over") {
+                                                    echo Yii::t('app', 'Update');
+                                                } else {
+                                                    echo Yii::t('app', 'Update');
+                                                }
                                                         ?>
                                         </a>
                                         <?php

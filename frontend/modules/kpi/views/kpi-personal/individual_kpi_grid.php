@@ -529,6 +529,8 @@ $this->title = "INDIVIDUAL KPI";
                                                 </div>
                                             </a>
                                             <?php
+                                            } else if ($colorFormat == "complete") {
+                                                // echo Yii::t('app', "Update");
                                                     } else if ($canEdit == 1) {
                                                     ?>
                                             <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/update-personal-kpi/<?= ModelMaster::encodeParams(['kpiEmployeeId' => $kpiEmployeeId, 'kpiHistoryId' => 0]) ?>"
@@ -537,13 +539,12 @@ $this->title = "INDIVIDUAL KPI";
                                                 <div class="pim-btn-<?= $colorFormat ?>">
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
                                                         class="mb-2" style="width: 12px; height: 12px;">
-                                                    <?php if ($colorFormat == "complete") {
-                                                                    echo  Yii::t('app', "Update");
-                                                                } else if ($colorFormat == "over") {
-                                                                    echo Yii::t('app', "Update");
-                                                                } else {
-                                                                    echo  Yii::t('app', "Update");
-                                                                }
+                                                    <?php 
+                                                    if ($colorFormat == "over") {
+                                                        echo Yii::t('app', 'Update');
+                                                    } else {
+                                                        echo Yii::t('app', 'Update');
+                                                    }
                                                                 ?>
                                                 </div>
                                             </a>

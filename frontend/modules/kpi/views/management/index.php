@@ -241,22 +241,11 @@ $this->title = 'KPI';
                                             class="icon-table on-cursor">
                                     </span>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kpiId ?>">
-
-
                                         <?php
-                                                if ($role >= 5) {
-                                                ?>
-                                        <!-- <li class="pl-4 pr-4" data-bs-toggle="modal" data-bs-target="#update-kpi-modal"
-                                                        onclick="javascript:updateKpi(<?= $kpiId ?>)"
-                                                        style="display: <?= $display ?>;">
-                                                        <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
-                                                            class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
-                                                                alt="History" alt="Chart" class="pim-icon mr-10"
-                                                                style="margin-top: -2px;">
-                                                            <?= Yii::t('app', 'Edit') ?>
-                                                        </a>
-                                                    </li> -->
+                                                 if ($colorFormat == "complete") {
+                                                    // echo Yii::t('app', "Update");
+                                                } else if ($role >= 5) {
+                                        ?>
                                         <li class="pl-4 pr-4" style="display: <?= $display ?>;">
                                             <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                 href="<?= Yii::$app->homeUrl ?>kpi/management/prepare-update/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'kpiHistoryId' => 0]) ?>"
@@ -269,7 +258,7 @@ $this->title = 'KPI';
                                         </li>
                                         <?php
                                                 }
-                                                ?>
+                                        ?>
                                         <li class="pl-4 pr-4" data-bs-toggle="modal">
                                             <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                 href="<?= Yii::$app->homeUrl ?>kpi/view/index/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 2]) ?>"

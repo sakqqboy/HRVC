@@ -249,6 +249,11 @@ $this->title = 'KPI';
                                     </span>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kpiId ?>">
 
+                                        <?php
+                                                 if ($colorFormat == "complete") {
+                                                    // echo Yii::t('app', "Update");
+                                                } else if ($role >= 5) {
+                                        ?>
                                         <li class="pl-4 pr-4" style="display: <?= $display ?>;">
                                             <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                 href="<?= Yii::$app->homeUrl ?>kpi/management/prepare-update/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'kpiHistoryId' => 0]) ?>"
@@ -259,6 +264,9 @@ $this->title = 'KPI';
                                                 <?= Yii::t('app', 'Edit') ?>
                                             </a>
                                         </li>
+                                        <?php
+                                                }
+                                        ?>
 
                                         <li class="pl-4 pr-4" data-bs-toggle="modal">
                                             <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
