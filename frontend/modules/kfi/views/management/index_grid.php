@@ -365,7 +365,10 @@ $this->title = Yii::t('app', 'KFI Grid View');
                                             <?= Yii::t('app', 'Setup') ?>
                                         </a>
                                         <?php
-                                                } else if ($role >= 5 && $colorFormat != 'complete') {
+                                                } else if ($colorFormat == "complete") {
+                                                    // echo Yii::t('app', "Update");
+                                        
+                                                } else if ($role >= 5 ) {
                                         ?>
                                         <a class="pim-btn-<?= $colorFormat ?>"
                                             href="<?= Yii::$app->homeUrl ?>kfi/management/update-kfi/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, 'kfiHistoryId' => 0]) ?>"
@@ -373,9 +376,7 @@ $this->title = Yii::t('app', 'KFI Grid View');
                                             class="pim-btn-setup">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
                                                 style="width: 14px; height: 14px;">
-                                            <?php if ($colorFormat == "complete") {
-                                                            // echo Yii::t('app', "Update");
-                                                        } else if ($colorFormat == "over") {
+                                            <?php  if ($colorFormat == "over") {
                                                             echo Yii::t('app', 'Update');
                                                         } else {
                                                             echo Yii::t('app', 'Update');
