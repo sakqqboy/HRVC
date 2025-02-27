@@ -49,12 +49,12 @@ $this->title = "KGI";
                             <?php
                             if ($role >= 3) {
                             ?>
-                                <a href="<?= Yii::$app->homeUrl ?>kgi/management/create-kgi"
-                                    class="btn-createnew font-size-11" style="position:absolute;text-decoration:none;">
-                                    <?= Yii::t('app', 'Create New') ?>
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="History"
-                                        class="pim-icon ml-3" style="margin-top: -1px;">
-                                </a>
+                            <a href="<?= Yii::$app->homeUrl ?>kgi/management/create-kgi"
+                                class="btn-createnew font-size-11" style="position:absolute;text-decoration:none;">
+                                <?= Yii::t('app', 'Create New') ?>
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="History"
+                                    class="pim-icon ml-3" style="margin-top: -1px;">
+                            </a>
                             <?php
                             }
                             ?>
@@ -127,39 +127,39 @@ $this->title = "KGI";
                                         $display = 'none';
                                     }
                             ?>
-                                    <tr height="10">
+                            <tr height="10">
 
-                                    </tr>
-                                    <tr id="kgi-<?= $kgiId ?>" class="pim-bg-<?= $colorFormat ?> pim-table-text">
-                                        <td>
-                                            <div class="col-12 border-left-<?= $colorFormat ?> pim-div-border pb-5">
-                                                <?= $kgi["kgiName"] ?>
-                                            </div>
-                                        </td>
-                                        <td><?= $kgi["companyName"] ?></td>
-                                        <td><img src="<?= Yii::$app->homeUrl . $kgi['flag'] ?>" class="Flag-Turkey">
-                                            <?= $kgi["branch"] ?>, <?= $kgi["countryName"] ?></td>
-                                        <td class="text-center">
-                                            <div
-                                                style="width: 24px; height: 24px; flex-shrink: 0; border-radius: 4px; background: #2580D3; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
-                                                <?= $kgi["priority"] ?>
-                                            </div>
-                                        </td>
-                                        <td class="text-center">
+                            </tr>
+                            <tr id="kgi-<?= $kgiId ?>" class="pim-bg-<?= $colorFormat ?> pim-table-text">
+                                <td>
+                                    <div class="col-12 border-left-<?= $colorFormat ?> pim-div-border pb-5">
+                                        <?= $kgi["kgiName"] ?>
+                                    </div>
+                                </td>
+                                <td><?= $kgi["companyName"] ?></td>
+                                <td><img src="<?= Yii::$app->homeUrl . $kgi['flag'] ?>" class="Flag-Turkey">
+                                    <?= $kgi["branch"] ?>, <?= $kgi["countryName"] ?></td>
+                                <td class="text-center">
+                                    <div
+                                        style="width: 24px; height: 24px; flex-shrink: 0; border-radius: 4px; background: #2580D3; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                                        <?= $kgi["priority"] ?>
+                                    </div>
+                                </td>
+                                <td class="text-center">
 
-                                            <div class="col-5 number-tagNew  <?= 'load-' . $colorFormat ?> ">
-                                                <?= count($kgi["kgiEmployee"]) ?>
-                                            </div>
-                                        </td>
-                                        <td class="text-start">
-                                            <div class="col-5 number-tagNew  <?= 'load-' . $colorFormat ?> ">
-                                                <?= $kgi["countTeam"] ?>
-                                            </div>
-                                        </td>
-                                        <td><?= $kgi["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?>
-                                        </td>
-                                        <td class="text-end">
-                                            <?php
+                                    <div class="col-5 number-tagNew  <?= 'load-' . $colorFormat ?> ">
+                                        <?= count($kgi["kgiEmployee"]) ?>
+                                    </div>
+                                </td>
+                                <td class="text-start">
+                                    <div class="col-5 number-tagNew  <?= 'load-' . $colorFormat ?> ">
+                                        <?= $kgi["countTeam"] ?>
+                                    </div>
+                                </td>
+                                <td><?= $kgi["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?>
+                                </td>
+                                <td class="text-end">
+                                    <?php
                                             $decimal = explode('.', $kgi["targetAmount"]);
                                             if (isset($decimal[1])) {
                                                 if ($decimal[1] == '00') {
@@ -171,13 +171,13 @@ $this->title = "KGI";
                                                 $show = $kgi["targetAmount"];
                                             }
                                             ?>
-                                            <?= $show ?><?= $kgi["amountType"] == 1 ? '%' : '' ?>
-                                        </td>
-                                        <td class="text-center">
-                                            <?= $kgi["code"] ?>
-                                        </td>
-                                        <td class="text-start">
-                                            <?php
+                                    <?= $show ?><?= $kgi["amountType"] == 1 ? '%' : '' ?>
+                                </td>
+                                <td class="text-center">
+                                    <?= $kgi["code"] ?>
+                                </td>
+                                <td class="text-start">
+                                    <?php
                                             if ($kgi["result"] != '') {
                                                 $decimalResult = explode('.', $kgi["result"]);
                                                 if (isset($decimalResult[1])) {
@@ -193,119 +193,122 @@ $this->title = "KGI";
                                                 $showResult = 0;
                                             }
                                             ?>
-                                            <?= $showResult ?><?= $kgi["amountType"] == 1 ? '%' : '' ?>
-                                        </td>
-                                        <td>
-                                            <div id="progress1">
-                                                <div data-num="<?= $kgi["ratio"] == '' ? 0 : $kgi["ratio"] ?>"
-                                                    class="progress-pim-table progress-circle-<?= $colorFormat ?>"></div>
-                                            </div>
+                                    <?= $showResult ?><?= $kgi["amountType"] == 1 ? '%' : '' ?>
+                                </td>
+                                <td>
+                                    <div id="progress1">
+                                        <div data-num="<?= $kgi["ratio"] == '' ? 0 : $kgi["ratio"] ?>"
+                                            class="progress-pim-table progress-circle-<?= $colorFormat ?>"></div>
+                                    </div>
 
-                                        </td>
-                                        <td><?= $kgi["month"] ?></td>
-                                        <td><?= $kgi["unit"] ?></td>
-                                        <td><?= $kgi["periodCheck"] ?></td>
-                                        <td class="<?= $kgi['isOver'] == 1 ? 'text-danger' : '' ?>">
-                                            <?= $kgi["status"] == 1 ? $kgi["nextCheck"] : '' ?>
-                                        </td>
-                                        <td class="text-center">
-                                            <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>"
-                                                class="btn btn-bg-white-xs mr-5" style="margin-top: -1px;">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/eye.svg" alt="History"
-                                                    class="pim-icon" style="margin-top: -1px;">
+                                </td>
+                                <td><?= $kgi["month"] ?></td>
+                                <td><?= $kgi["unit"] ?></td>
+                                <td><?= $kgi["periodCheck"] ?></td>
+                                <td class="<?= $kgi['isOver'] == 1 ? 'text-danger' : '' ?>">
+                                    <?= $kgi["status"] == 1 ? $kgi["nextCheck"] : '' ?>
+                                </td>
+                                <td class="text-center">
+                                    <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>"
+                                        class="btn btn-bg-white-xs mr-5" style="margin-top: -1px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/eye.svg" alt="History"
+                                            class="pim-icon" style="margin-top: -1px;">
+                                    </a>
+                                    <span class="dropdown" href="#" id="dropdownMenuLink-<?= $kgiId ?>"
+                                        data-bs-toggle="dropdown">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.svg"
+                                            class="icon-table on-cursor">
+                                    </span>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kgiId ?>">
+                                        <?php
+                                                if ($colorFormat == "complete") {
+                                                    // echo Yii::t('app', "Update");
+                                        
+                                                } else if ($role >= 5 ) {
+                                            ?>
+                                        <li class="pl-4 pr-4" style="display: <?= $display ?>;">
+                                            <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
+                                                href="<?= Yii::$app->homeUrl . 'kgi/management/prepare-update/' . ModelMaster::encodeParams(['kgiId' => $kgiId, 'kgiHistoryId' => 0]) ?>"
+                                                class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
+                                                    alt="History" alt="Chart" class="pim-icon mr-10"
+                                                    style="margin-top: -2px;">
+                                                <?= Yii::t('app', 'Update') ?>
                                             </a>
-                                            <span class="dropdown" href="#" id="dropdownMenuLink-<?= $kgiId ?>"
-                                                data-bs-toggle="dropdown">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.svg"
-                                                    class="icon-table on-cursor">
-                                            </span>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kgiId ?>">
-                                                <?php
-                                                if ($role >= 5) {
-                                                ?>
-                                                    <li class="pl-4 pr-4" style="display: <?= $display ?>;">
-                                                        <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
-                                                            href="<?= Yii::$app->homeUrl . 'kgi/management/prepare-update/' . ModelMaster::encodeParams(['kgiId' => $kgiId, 'kgiHistoryId' => 0]) ?>"
-                                                            class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
-                                                                alt="History" alt="Chart" class="pim-icon mr-10"
-                                                                style="margin-top: -2px;">
-                                                            <?= Yii::t('app', 'Update') ?>
-                                                        </a>
-                                                    </li>
-                                                <?php
+                                        </li>
+                                        <?php
                                                 }
                                                 ?>
-                                                <li class="pl-4 pr-4" data-bs-toggle="modal">
-                                                    <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
-                                                        href="<?= Yii::$app->homeUrl ?>kgi/view/index/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 2]) ?>"
-                                                        class="btn btn-bg-white-xs mr-4" style="margin-top: -3px;">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg"
-                                                            alt="History" alt="Chart" class="pim-icon mr-10"
-                                                            style="margin-top: -2px;">
-                                                        <?= Yii::t('app', 'History') ?>
-                                                    </a>
-                                                </li>
-                                                <li class="pl-4 pr-4" data-bs-toggle="modal">
-                                                    <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
-                                                        href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 3]) ?>"
-                                                        class="btn btn-bg-white-xs mr-4" style="margin-top: -3px;">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
-                                                            alt="Chart" class="pim-icon mr-10" style="margin-top: -2px;">
-                                                        <?= Yii::t('app', 'Chats') ?>
-                                                    </a>
-                                                </li>
-                                                <li class="pl-4 pr-4" data-bs-toggle="modal">
-                                                    <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
-                                                        href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 4]) ?>"
-                                                        class="btn btn-bg-white-xs mr-4" style="margin-top: -3px;">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg"
-                                                            alt="Chart" class="pim-icon mr-10" style="margin-top: -2px;">
-                                                        <?= Yii::t('app', 'Chart') ?>
-                                                    </a>
-                                                </li>
-                                                <?php
+                                        <li class="pl-4 pr-4" data-bs-toggle="modal">
+                                            <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
+                                                href="<?= Yii::$app->homeUrl ?>kgi/view/index/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 2]) ?>"
+                                                class="btn btn-bg-white-xs mr-4" style="margin-top: -3px;">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg"
+                                                    alt="History" alt="Chart" class="pim-icon mr-10"
+                                                    style="margin-top: -2px;">
+                                                <?= Yii::t('app', 'History') ?>
+                                            </a>
+                                        </li>
+                                        <li class="pl-4 pr-4" data-bs-toggle="modal">
+                                            <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
+                                                href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 3]) ?>"
+                                                class="btn btn-bg-white-xs mr-4" style="margin-top: -3px;">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
+                                                    alt="Chart" class="pim-icon mr-10" style="margin-top: -2px;">
+                                                <?= Yii::t('app', 'Chats') ?>
+                                            </a>
+                                        </li>
+                                        <li class="pl-4 pr-4" data-bs-toggle="modal">
+                                            <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
+                                                href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 4]) ?>"
+                                                class="btn btn-bg-white-xs mr-4" style="margin-top: -3px;">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg"
+                                                    alt="Chart" class="pim-icon mr-10" style="margin-top: -2px;">
+                                                <?= Yii::t('app', 'Chart') ?>
+                                            </a>
+                                        </li>
+                                        <?php
                                                 if ($role >= 5) {
                                                 ?>
-                                                    <li class="pl-4 pr-4" data-bs-toggle="modal">
-                                                        <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
-                                                            href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgi["companyId"]]) ?>"
-                                                            class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
-                                                            <i class="fa fa-users pim-icon mr-10" aria-hidden="true" alt="Chart"
-                                                                style="margin-top: -2px;"></i>
-                                                            <?= Yii::t('app', 'Team') ?>
-                                                        </a>
-                                                    </li>
-                                                    <li class="pl-4 pr-4" data-bs-toggle="modal">
-                                                        <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
-                                                            href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgi["companyId"], "save" => 0]) ?>"
-                                                            class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
-                                                            <i class="fa fa-user pim-icon mr-10" aria-hidden="true" alt="Chart"
-                                                                style="margin-top: -2px;"></i>
-                                                            <?= Yii::t('app', 'Person') ?>
-                                                        </a>
-                                                    </li>
-                                                <?php
+                                        <li class="pl-4 pr-4" data-bs-toggle="modal">
+                                            <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
+                                                href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgi["companyId"]]) ?>"
+                                                class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+                                                <i class="fa fa-users pim-icon mr-10" aria-hidden="true" alt="Chart"
+                                                    style="margin-top: -2px;"></i>
+                                                <?= Yii::t('app', 'Team') ?>
+                                            </a>
+                                        </li>
+                                        <li class="pl-4 pr-4" data-bs-toggle="modal">
+                                            <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
+                                                href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgi["companyId"], "save" => 0]) ?>"
+                                                class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+                                                <i class="fa fa-user pim-icon mr-10" aria-hidden="true" alt="Chart"
+                                                    style="margin-top: -2px;"></i>
+                                                <?= Yii::t('app', 'Person') ?>
+                                            </a>
+                                        </li>
+                                        <?php
                                                 }
                                                 ?>
-                                                <?php
+                                        <?php
                                                 if ($role >= 5) {
                                                 ?>
-                                                    <li class="pl-4 pr-4" data-bs-toggle="modal" data-bs-target="#delete-kgi"
-                                                        onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)" title="Delete">
-                                                        <a class="dropdown-itemNEW pl-4 pr-25" href="#">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/delete.svg"
-                                                                alt="Delete" class="pim-icon mr-10" style="margin-top: -2px;">
-                                                            <?= Yii::t('app', 'Delete') ?>
-                                                        </a>
-                                                    </li>
-                                                <?php
+                                        <li class="pl-4 pr-4" data-bs-toggle="modal" data-bs-target="#delete-kgi"
+                                            onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)" title="Delete">
+                                            <a class="dropdown-itemNEW pl-4 pr-25" href="#">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/delete.svg"
+                                                    alt="Delete" class="pim-icon mr-10" style="margin-top: -2px;">
+                                                <?= Yii::t('app', 'Delete') ?>
+                                            </a>
+                                        </li>
+                                        <?php
                                                 }
                                                 ?>
 
-                                            </ul>
-                                        </td>
-                                    </tr>
+                                    </ul>
+                                </td>
+                            </tr>
                             <?php
                                 endforeach;
                             }

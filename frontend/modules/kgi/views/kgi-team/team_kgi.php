@@ -280,8 +280,10 @@ $this->title = "TEAM KGI";
                                     </span>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kgi['isOver'] ?>">
                                         <?php
-                                                if ($canEdit == 1) {
-                                                ?>
+                                                if ($colorFormat == "complete") {
+                                                    // echo Yii::t('app', "Update");
+                                                } else if ($canEdit == 1) {
+                                        ?>
                                         <li class="pl-4 pr-4">
                                             <a class=" dropdown-itemNEWS pl-4 pr-20 mb-5"
                                                 href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/prepare-update/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiHistoryId' => 0]) ?>">

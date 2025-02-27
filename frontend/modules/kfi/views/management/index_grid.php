@@ -367,7 +367,6 @@ $this->title = Yii::t('app', 'KFI Grid View');
                                         <?php
                                                 } else if ($colorFormat == "complete") {
                                                     // echo Yii::t('app', "Update");
-                                        
                                                 } else if ($role >= 5 ) {
                                         ?>
                                         <a class="pim-btn-<?= $colorFormat ?>"
