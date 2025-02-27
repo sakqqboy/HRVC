@@ -365,9 +365,8 @@ $this->title = Yii::t('app', 'KFI Grid View');
                                             <?= Yii::t('app', 'Setup') ?>
                                         </a>
                                         <?php
-                                                } else if ($role >= 5) {
-                                                ?>
-
+                                                } else if ($role >= 5 && $colorFormat != 'complete') {
+                                        ?>
                                         <a class="pim-btn-<?= $colorFormat ?>"
                                             href="<?= Yii::$app->homeUrl ?>kfi/management/update-kfi/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, 'kfiHistoryId' => 0]) ?>"
                                             style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; height: 30px; gap: 6px; flex-shrink: 0;"
@@ -375,13 +374,13 @@ $this->title = Yii::t('app', 'KFI Grid View');
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
                                                 style="width: 14px; height: 14px;">
                                             <?php if ($colorFormat == "complete") {
-                                                            echo Yii::t('app', "Update");
+                                                            // echo Yii::t('app', "Update");
                                                         } else if ($colorFormat == "over") {
                                                             echo Yii::t('app', 'Update');
                                                         } else {
                                                             echo Yii::t('app', 'Update');
                                                         }
-                                                        ?>
+                                            ?>
                                         </a>
                                         <?php
                                                 } else { ?>
