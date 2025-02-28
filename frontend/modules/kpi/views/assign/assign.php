@@ -6,14 +6,14 @@ $this->title = 'KPI Grid View';
 ?>
 <div class="contrainer-body">
     <?php if (Yii::$app->session->hasFlash('alert-kpi')) : ?>
-        <script>
-            window.onload = function() {
-                $('.alert-box-info').slideDown(500);
-                setTimeout(function() {
-                    $('.alert-box-info').fadeOut(300);
-                }, 3000);
-            }
-        </script>
+    <script>
+    window.onload = function() {
+        $('.alert-box-info').slideDown(500);
+        setTimeout(function() {
+            $('.alert-box-info').fadeOut(300);
+        }, 3000);
+    }
+    </script>
     <?php endif; ?>
     <div class="alert-box-info text-center">
         S A V E D ! ! !
@@ -90,51 +90,51 @@ $this->title = 'KPI Grid View';
                                 $disableTeam = "";
                             }
                     ?>
-                            <div class="col-12 bg-white mb-10 pb-0 pt-0 pr-8">
-                                <div class="row">
-                                    <div class="col-1 text-end pr-0 pl-0 pt-12">
-                                        <input type="checkbox" name="team[<?= $team['teamId'] ?>]"
-                                            id="team-<?= $team['teamId'] ?>" <?= $checked ?> class="from-check"
-                                            value="<?= $team['teamId'] ?>"
-                                            onclick="javasript:assignKpiToEmployeeInTeam(<?= $team['teamId'] ?>,<?= $kpiId ?>)"
-                                            style="display: <?= $role == 3 ? 'none' : '' ?>;">
-                                        <!--kpi_employee-->
-                                        <?php
+                    <div class="col-12 bg-white mb-10 pb-0 pt-0 pr-8">
+                        <div class="row">
+                            <div class="col-1 text-end pr-0 pl-0 pt-12">
+                                <input type="checkbox" name="team[<?= $team['teamId'] ?>]"
+                                    id="team-<?= $team['teamId'] ?>" <?= $checked ?> class="from-check"
+                                    value="<?= $team['teamId'] ?>"
+                                    onclick="javasript:assignKpiToEmployeeInTeam(<?= $team['teamId'] ?>,<?= $kpiId ?>)"
+                                    style="display: <?= $role == 3 ? 'none' : '' ?>;">
+                                <!--kpi_employee-->
+                                <?php
                                         if ($role == 3 && $checked == "checked") { ?>
-                                            <i class="fa fa-check-square text-primary" aria-hidden="true"></i>
-                                        <?php
+                                <i class="fa fa-check-square text-primary" aria-hidden="true"></i>
+                                <?php
                                         }
                                         ?>
-                                    </div>
-                                    <div class="col-2 pr-5 pl-0 text-end pt-3 pb-3">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.png" style="width:40px;">
-                                    </div>
-                                    <div class="col-5 pl-0 pt-3 ">
-                                        <span class="font-size-12"><b><?= $team["teamName"] ?></b></span>
-                                        <div class="col-12 font-size-10" style="margin-top: -5px;">
-                                            <?= $team["departmentName"] ?></div>
-                                    </div>
-                                    <div class="col-4 pt-9">
-                                        <?php
+                            </div>
+                            <div class="col-2 pr-5 pl-0 text-end pt-3 pb-3">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.png" style="width:40px;">
+                            </div>
+                            <div class="col-5 pl-0 pt-3 ">
+                                <span class="font-size-12"><b><?= $team["teamName"] ?></b></span>
+                                <div class="col-12 font-size-10" style="margin-top: -5px;">
+                                    <?= $team["departmentName"] ?></div>
+                            </div>
+                            <div class="col-4 pt-9">
+                                <?php
                                         if ($disableTeam == "") {
                                         ?>
-                                            <input type="text" placeholder="0.00" class="assign-target text-end font-size-12"
-                                                value="<?= $target > 0 ? number_format($target, 2) : '' ?>"
-                                                name="teamTarget[<?= $team['teamId'] ?>]">
-                                        <?php
+                                <input type="text" placeholder="0.00" class="assign-target text-end font-size-12"
+                                    value="<?= $target > 0 ? number_format($target, 2) : '' ?>"
+                                    name="teamTarget[<?= $team['teamId'] ?>]">
+                                <?php
                                         } else {
                                         ?>
-                                            <input type="text" placeholder="0.00" class="assign-target text-end font-size-12"
-                                                value="<?= $target > 0 ? number_format($target, 2) : '' ?>"
-                                                name="teamTarget[<?= $team['teamId'] ?>]" <?= $disableTeam ?>>
-                                            <input type="hidden" value="<?= $target > 0 ? number_format($target, 2) : '' ?>"
-                                                name="teamTarget[<?= $team['teamId'] ?>]">
-                                        <?php
+                                <input type="text" placeholder="0.00" class="assign-target text-end font-size-12"
+                                    value="<?= $target > 0 ? number_format($target, 2) : '' ?>"
+                                    name="teamTarget[<?= $team['teamId'] ?>]" <?= $disableTeam ?>>
+                                <input type="hidden" value="<?= $target > 0 ? number_format($target, 2) : '' ?>"
+                                    name="teamTarget[<?= $team['teamId'] ?>]">
+                                <?php
                                         }
                                         ?>
-                                    </div>
-                                </div>
                             </div>
+                        </div>
+                    </div>
                     <?php
                         endforeach;
                     }
@@ -188,14 +188,14 @@ $this->title = 'KPI Grid View';
                                 <?php
                                 if ($isMoreSet == "1") {
                                 ?>
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/arrow-up.png"
-                                        style="width:10px;margin-top:-3px;" class="mr-2">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/arrow-up.png"
+                                    style="width:10px;margin-top:-3px;" class="mr-2">
                                 <?php
                                 }
                                 if ($isMoreSet == "0") {
                                 ?>
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/arrow-down.png"
-                                        style="width:10px;margin-top:-3px;" class="mr-2">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/arrow-down.png"
+                                    style="width:10px;margin-top:-3px;" class="mr-2">
                                 <?php
                                 }
                                 ?>
@@ -238,3 +238,39 @@ $this->title = 'KPI Grid View';
     <input type="hidden" name="companyId" value="<?= $companyId ?>">
     <?php ActiveForm::end(); ?>
 </div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // ดักจับเหตุการณ์การกดปุ่ม Enter
+    document.querySelectorAll('.assign-target').forEach(function(input, index) {
+        input.addEventListener('keydown', function(event) {
+            // เช็คถ้ากดปุ่ม Enter
+            if (event.key == 'Enter') {
+                event.preventDefault(); // ป้องกันการส่งฟอร์ม
+
+                // หาค่าของ teamId จาก input field
+                const teamId = input.name.match(/\d+/)[0];
+
+                // หาค่า checkbox ที่เกี่ยวข้อง
+                const checkbox = document.getElementById('team-' + teamId);
+
+                // ตรวจสอบสถานะของ checkbox
+                if (checkbox && !checkbox.checked) {
+                    checkbox.checked = true; // หาก checkbox ยังไม่ถูกเลือกให้เลือก
+                    // เรียกใช้ฟังก์ชัน assignKgiToEmployeeInTeam หลังจากเลือก checkbox
+                    if (checkbox && checkbox.checked) {
+                        assignKgiToEmployeeInTeam(teamId, <?= $kpiId ?>); // เรียกฟังก์ชัน
+                    }
+                }
+
+                // หาตำแหน่งของ textbox ถัดไป
+                const nextInput = document.querySelectorAll('.assign-target')[index + 1];
+                if (nextInput) {
+                    nextInput.focus(); // ส่งเคอร์เซอร์ไปที่ textbox ถัดไป
+                }
+            }
+        });
+    });
+});
+</script>

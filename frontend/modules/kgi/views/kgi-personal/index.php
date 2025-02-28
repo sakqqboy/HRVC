@@ -121,7 +121,7 @@ $this->title = "Individual KGI";
             </div>
             <div class="col-12 mt-15">
                 <div class="row">
-                    <table class="">
+                    <table>
                         <thead>
                             <tr class="pim-table-header">
                                 <td class="pl-10" style="width:13%"><?= Yii::t('app', 'KGI Contents') ?></td>

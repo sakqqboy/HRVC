@@ -65,6 +65,7 @@ function assignKgiToEmployeeInTeam(teamId, kgiId) {
 		$("#employee-in-team-" + teamId).remove();
 	}
 }
+
 function calculateEmployeeTargetValue(teamId) {
 	var total = 0;
 	$('input[id="employee-target-' + teamId + '"]').each(function () {
@@ -73,6 +74,51 @@ function calculateEmployeeTargetValue(teamId) {
 	});
 	$("#total-team-target-" + teamId).html(total.toLocaleString());
 }
+
+function checkEnter(event, employeeId, teamId) {
+	if (event.key === 'Enter') {
+		event.preventDefault();  // ป้องกันการส่งฟอร์มเมื่อกด Enter
+
+		// เลือก checkbox ถ้ากด Enter แล้วไม่ถูกเลือก
+		const checkbox = document.getElementById('target-employee-' + employeeId);
+		if (checkbox && !checkbox.checked) {
+			checkbox.checked = true; // หาก checkbox ยังไม่ถูกเลือกให้เลือก
+		}
+
+		// console.log('Employee ID:', employeeId);
+		let currentInput = document.querySelector(`#employee-target-${teamId}-${employeeId}`);
+
+		// console.log('Current Input:', currentInput);
+
+		if (currentInput) {
+			// ค้นหากล่องที่ห่อหุ้มแถว (div ที่มี class col-12.bg-white.border-bottom)
+			let currentRow = currentInput.closest('.col-12.bg-white.border-bottom');
+
+			if (currentRow) {
+				// ค้นหาแถวถัดไป
+				let nextRow = currentRow.nextElementSibling;
+
+				if (nextRow) {
+					// ค้นหา input ในแถวถัดไป
+					let nextInput = nextRow.querySelector('input[type="text"]');
+					if (nextInput) {
+						nextInput.focus(); // โฟกัสไปที่ input ในแถวถัดไป
+					}
+				} else {
+					console.log('ไม่พบแถวถัดไป');
+				}
+			} else {
+				console.log('ไม่พบแถวปัจจุบัน');
+			}
+		} else {
+			console.log(`ไม่พบ input ที่มี id="employee-target-${teamId}-${employeeId}"`);
+		}
+
+	}
+}
+
+
+
 function showEmployeeTeamTarget(teamId) {
 	$("#employee-in-team-" + teamId).show();
 	$("#show-" + teamId).hide();
@@ -163,21 +209,21 @@ function validateFormKgiEmployee() {
 	var toDate = document.getElementById('toDate').value.trim();
 	var nextDate = $('#nextDate').val();
 	if (!fromDate && !toDate) {
-	    alert("Please fill in Due Term");
-	    return false;
+		alert("Please fill in Due Term");
+		return false;
 	} else if (!fromDate) {
-	    alert("Please fill in Start Date");
-	    return false;
+		alert("Please fill in Start Date");
+		return false;
 	} else if (!toDate) {
-	    alert("Please fill in End Date");
-	    return false;
+		alert("Please fill in End Date");
+		return false;
 	} else if (nextDate == '') {
-	    alert("Please fill in Target Due Update Date");
-	    return false;
+		alert("Please fill in Target Due Update Date");
+		return false;
 	} else if ($('#check1').prop('checked') == false && $('#check2').prop('checked') == false) {
-	    alert("Please check the status");
-	    return false;
+		alert("Please check the status");
+		return false;
 	} else {
-	    return true;
+		return true;
 	}
-   }
+}
