@@ -91,6 +91,17 @@
 	height: 35px;
 }
 
+thead {
+	position: sticky;
+	top: 130px;
+	/* ปรับค่าจาก 50px เป็น 150px หรือค่าที่ต้องการ */
+	background-color: white;
+	/* ทำให้แถวหัวตารางไม่โปร่งใส */
+	z-index: 99999;
+	/* ทำให้แถวหัวอยู่เหนือเนื้อหาที่เลื่อน */
+}
+
+
 .pim-table-text {
 	font-size: 11px;
 	letter-spacing: 0.5px;
