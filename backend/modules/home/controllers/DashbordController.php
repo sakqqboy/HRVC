@@ -87,6 +87,13 @@ class DashbordController extends Controller
         $totlePercentKPI = 0;
         $totlePercentKGI = 0;
         $totlePercentKFI = 0;
+        
+        // $mount = 01;
+        // $year = 2025;
+
+        $mount = date('m');
+        $year = date('Y');
+        
         // ดึงข้อมูลออกจากฐานข้อมูล
         $kfis = Kfi::find()->where(['<>', 'status', '99'])
                           ->andWhere(['companyId' => $companyId])
@@ -116,10 +123,11 @@ class DashbordController extends Controller
 				} else {
 					$kfiname = $kfi["kfiName"];
 				}
+
              
                 // $kfID = $kfi["kfiId"];
                     $kfiHistory = KfiHistory::find()
-                        ->where(["kfiId" => $kfi["kfiId"], "status" => [1, 2]])
+                        ->where(["kfiId" => $kfi["kfiId"], "status" => [1, 2], "month" => $mount, "year" => $year])
                         ->orderBy('year DESC,kfiHistoryId DESC')
                         ->asArray()
                         ->one();
@@ -192,7 +200,7 @@ class DashbordController extends Controller
 				}
              
                     $kgiHistory = KgiHistory::find()
-                        ->where(["kgiId" => $kgi["kgiId"], "status" => [1, 2]])
+                        ->where(["kgiId" => $kgi["kgiId"], "status" => [1, 2], "month" => $mount, "year" => $year])
                         ->orderBy('year DESC,kgiHistoryId DESC')
                         ->asArray()
                         ->one();
@@ -263,7 +271,7 @@ class DashbordController extends Controller
 				}
              
                     $kpiHistory = KpiHistory::find()
-                        ->where(["kpiId" => $kpi["kpiId"], "status" => [1, 2]])
+                        ->where(["kpiId" => $kpi["kpiId"], "status" => [1, 2], "month" => $mount, "year" => $year])
                         ->orderBy('year DESC,kpiHistoryId DESC')
                         ->asArray()
                         ->one();
@@ -341,6 +349,12 @@ class DashbordController extends Controller
         $totlePercentKPI = 0;
         $totlePercentKGI = 0;
         $totlePercentKFI = 0;
+
+        // $mount = 03;
+        // $year = 2025;
+
+        $mount = date('m');
+        $year = date('Y');
         
         $employeeId = Employee::employeeId($userId);
 		$employee = Employee::EmployeeDetail($employeeId);
@@ -378,7 +392,7 @@ class DashbordController extends Controller
 			foreach ($kgiTeams as $kgiTeam) :
 
                 $kgiTeamHistory = KgiTeamHistory::find()
-					->where(["kgiTeamId" => $kgiTeam["kgiTeamId"]])
+					->where(["kgiTeamId" => $kgiTeam["kgiTeamId"], "month" => $mount, "year" => $year])
 					->asArray()
 					->orderBy('createDateTime DESC')
 					->one();
@@ -438,7 +452,7 @@ class DashbordController extends Controller
 			foreach ($kpiTeams as $kpiTeam) :
 
                 $kpiTeamHistory = KpiTeamHistory::find()
-					->where(["kpiTeamId" => $kpiTeam["kpiTeamId"]])
+					->where(["kpiTeamId" => $kpiTeam["kpiTeamId"], "month" => $mount, "year" => $year])
 					->asArray()
 					->orderBy('createDateTime DESC')
 					->one();
@@ -511,6 +525,13 @@ class DashbordController extends Controller
         $totlePercentKPI = 0;
         $totlePercentKGI = 0;
         $totlePercentKFI = 0;
+
+        // $mount = 01;
+        // $year = 2025;
+
+        $mount = date('m');
+        $year = date('Y');
+        
         // ดึงข้อมูลออกจากฐานข้อมูล
         // $kgiEmployees = KgiEmployee::find()->where(['<>', 'status', '99'])
         //                                   ->andWhere(['employeeId' => $employeeId])
@@ -580,7 +601,7 @@ class DashbordController extends Controller
             $totlePercent = 0;
 			foreach ($kgiEmployee as $kgi) :
                 $kgiEmployeeHistory = KgiEmployeeHistory::find()
-                ->where(["kgiEmployeeId" => $kgi["kgiEmployeeId"], "status" => [1, 2, 4]])
+                ->where(["kgiEmployeeId" => $kgi["kgiEmployeeId"], "status" => [1, 2, 4], "month" => $mount, "year" => $year])
                 ->asArray()
                 ->orderBy('createDateTime DESC')
                 ->one();
@@ -637,7 +658,7 @@ class DashbordController extends Controller
             $totlePercent = 0;
 			foreach ($kpiEmployee as $kpi) :
                 $kpiEmployeeHistory = KpiEmployeeHistory::find()
-                ->where(["kpiEmployeeId" => $kpi["kpiEmployeeId"], "status" => [1, 2, 4]])
+                ->where(["kpiEmployeeId" => $kpi["kpiEmployeeId"], "status" => [1, 2, 4], "month" => $mount, "year" => $year])
                 ->asArray()
                 ->orderBy('createDateTime DESC')
                 ->one();
