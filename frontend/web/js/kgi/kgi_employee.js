@@ -116,8 +116,17 @@ function checkEnter(event, employeeId, teamId) {
 
 	}
 }
-
-
+function checkEnterTextArea(event, employeeId, teamId,current) { 
+	if (event.key === 'Enter') {
+		event.preventDefault();
+		var next = current + 1;
+		if ($('#target-employee-' + employeeId).prop("checked")) {
+		} else {
+			$('#target-employee-' + employeeId).prop("checked", true);
+		}
+		$(".input-"+teamId+'-'+next).focus();
+	}
+}
 
 function showEmployeeTeamTarget(teamId) {
 	$("#employee-in-team-" + teamId).show();
