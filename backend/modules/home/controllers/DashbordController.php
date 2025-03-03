@@ -19,8 +19,10 @@ use backend\models\hrvc\KpiTeam;
 use backend\models\hrvc\KpiTeamHistory;
 use backend\models\hrvc\User;
 use backend\modules\fs\fs;
+use backend\modules\kfi\kfi as KfiKfi;
 use common\models\ModelMaster;
 use DateTime;
+use Exception;
 use Yii;
 use yii\db\Expression;
 use yii\db\Query;
@@ -96,15 +98,15 @@ class DashbordController extends Controller
         
         // ดึงข้อมูลออกจากฐานข้อมูล
         $kfis = Kfi::find()->where(['<>', 'status', '99'])
-                          ->andWhere(['companyId' => $companyId])
+                          ->andWhere(['companyId' => $companyId, "month" => $mount, "year" => $year])
                           ->asArray()
                           ->all();
         $kgis = Kgi::find()->where(['<>', 'status', '99'])
-                          ->andWhere(['companyId' => $companyId])
+                          ->andWhere(['companyId' => $companyId, "month" => $mount, "year" => $year])
                           ->asArray()
                           ->all();
         $kpis = Kpi::find()->where(['<>', 'status', '99'])
-                          ->andWhere(['companyId' => $companyId])
+                          ->andWhere(['companyId' => $companyId, "month" => $mount, "year" => $year])
                           ->asArray()
                           ->all();
     
@@ -272,7 +274,7 @@ class DashbordController extends Controller
              
                     $kpiHistory = KpiHistory::find()
                         ->where(["kpiId" => $kpi["kpiId"], "status" => [1, 2], "month" => $mount, "year" => $year])
-                        ->orderBy('year DESC,kpiHistoryId DESC')
+                        ->orderBy('kpiHistoryId DESC')
                         ->asArray()
                         ->one();
 
@@ -361,20 +363,20 @@ class DashbordController extends Controller
         
 			$kgiTeams = KgiTeam::find()
 				->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,
-			kgi_team.teamId,kgi_team.target')
+			kgi_team.teamId,kgi_team.target,k.month,k.year')
 				->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_team.kgiId")
 				->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
-				->where(["kgi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
+				->where(["kgi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4],"k.month" => $mount, "k.year" => $year])
 				->andFilterWhere(["kgi_team.teamId" => $teamId])
 				->orderBy("k.createDateTime DESC,t.teamName ASC")
 				->asArray()
 				->all();
 				$kpiTeams = KpiTeam::find()
 				->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,
-			kpi_team.teamId,kpi_team.target')
+			kpi_team.teamId,kpi_team.target,k.month,k.year')
 				->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_team.kpiId")
 				->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
-				->where(["kpi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
+				->where(["kpi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4], "k.month" => $mount, "k.year" => $year])
 				->andFilterWhere(["kpi_team.teamId" => $teamId])
 				->orderBy("k.createDateTime DESC,t.teamName ASC")
 				->asArray()
@@ -531,66 +533,29 @@ class DashbordController extends Controller
 
         $mount = date('m');
         $year = date('Y');
-        
-        // ดึงข้อมูลออกจากฐานข้อมูล
-        // $kgiEmployees = KgiEmployee::find()->where(['<>', 'status', '99'])
-        //                                   ->andWhere(['employeeId' => $employeeId])
-        //                                   ->asArray()
-        //                                   ->all();
-        // $kpiEmployees = KpiEmployee::find()->where(['<>', 'status', '99'])
-        //                                   ->andWhere(['employeeId' => $employeeId])
-        //                                   ->asArray()
-        //                                   ->all();
 
         $employeeId = Employee::employeeId($userId);
-		// if ($role <= 3) {
 			$kgiEmployee = KgiEmployee::find()
 				->select('k.kgiName,k.priority,k.quantRatio,k.amountType,k.code,kgi_employee.target,kgi_employee.result,
 			kgi_employee.status,kgi_employee.employeeId,k.unitId,kgi_employee.month,kgi_employee.year,k.kgiId,k.companyId,e.teamId,e.picture,
 			kgi_employee.kgiEmployeeId,e.employeeFirstname,e.employeeSurename')
 				->JOIN("LEFT JOIN", "kgi k", "kgi_employee.kgiId=k.kgiId")
 				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
-				->where(["kgi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "kgi_employee.employeeId" => $employeeId])
+				->where(["kgi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "kgi_employee.employeeId" => $employeeId, "k.month" => $mount, "k.year" => $year])
 				->orderby('k.createDateTime')
 				->asArray()
 				->all();
-		// } else {
-		// 	$kgiEmployee = KgiEmployee::find()
-		// 		->select('k.kgiName,k.priority,k.quantRatio,k.amountType,k.code,kgi_employee.target,kgi_employee.result,
-		// 	kgi_employee.status,kgi_employee.employeeId,k.unitId,kgi_employee.month,kgi_employee.year,k.kgiId,k.companyId,e.teamId,e.picture,
-		// 	kgi_employee.kgiEmployeeId,e.employeeFirstname,e.employeeSurename')
-		// 		->JOIN("LEFT JOIN", "kgi k", "kgi_employee.kgiId=k.kgiId")
-		// 		->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
-		// 		->where(["kgi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
-		// 		->orderby('k.createDateTime')
-		// 		->asArray()
-		// 		->all();
-		// }
 
-
-        // if ($role <= 3) {
 			$kpiEmployee = kpiEmployee::find()
 				->select('k.kpiName,k.priority,k.quantRatio,k.amountType,k.code,kpi_employee.target,kpi_employee.result,
 			kpi_employee.status,kpi_employee.employeeId,k.unitId,kpi_employee.month,kpi_employee.year,k.kpiId,k.companyId,e.teamId,e.picture,
 			kpi_employee.kpiEmployeeId,e.employeeFirstname,e.employeeSurename')
 				->JOIN("LEFT JOIN", "kpi k", "kpi_employee.kpiId=k.kpiId")
 				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
-				->where(["kpi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "kpi_employee.employeeId" => $employeeId])
+				->where(["kpi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "kpi_employee.employeeId" => $employeeId, "k.month" => $mount, "k.year" => $year])
 				->orderby('k.createDateTime')
 				->asArray()
 				->all();
-		// } else {
-		// 	$kpiEmployee = kpiEmployee::find()
-		// 		->select('k.kpiName,k.priority,k.quantRatio,k.amountType,k.code,kpi_employee.target,kpi_employee.result,
-		// 	kpi_employee.status,kpi_employee.employeeId,k.unitId,kpi_employee.month,kpi_employee.year,k.kpiId,k.companyId,e.teamId,e.picture,
-		// 	kpi_employee.kpiEmployeeId,e.employeeFirstname,e.employeeSurename')
-		// 		->JOIN("LEFT JOIN", "kpi k", "kpi_employee.kpiId=k.kpiId")
-		// 		->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
-		// 		->where(["kpi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
-		// 		->orderby('k.createDateTime')
-		// 		->asArray()
-		// 		->all();
-		// }
     
         // นับจำนวนของแต่ละคิวรี้
         $kgiEmployeeCount = count($kgiEmployee);
@@ -725,49 +690,72 @@ class DashbordController extends Controller
         $monthlyData = [
             1 => [], 2 => [], 3 => [], 4 => [], 5 => [], 6 => [], 7 => [], 8 => [], 9 => [], 10 => [], 11 => [], 12 => []
         ];
+        $months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+        $monthlySumPercent = [];
         $currentYear = date('Y'); // หาปีปัจจุบัน
 
-        
-        $kfiHistory = KfiHistory::find()
-        ->where(["status" => [1, 2, 4],"year" => $currentYear])
-        ->orderBy('month ASC,kfiHistoryId DESC')
-        ->asArray()
-        ->all();
+        foreach( $months as $month => $data) {
 
-        // ลูปเพื่ออัพเดตข้อมูลในทุกเดือน
-        foreach ($kfiHistory as $entry) {
-            $month = $entry['month'];  // เดือนจากข้อมูล
-            $ratio = 0;
-            
-            // คำนวณค่า ratio
-            if ($entry["target"] != '' && $entry["target"] != 0) {
-                if ($entry["code"] == '<' || $entry["code"] == '=') {
-                    $ratio = ($entry["result"] / $entry["target"]) * 100;
-                } else {
-                    if ($entry["result"] != '' && $entry["result"] != 0) {
-                        $ratio = ($entry["target"] / $entry["result"]) * 100;
-                    } else {
-                        $ratio = 0;
+            $kfiHistory = KfiHistory::find()
+            ->join("LEFT JOIN", "kfi", "kfi.kfiId = kfi_history.kfiId") // LEFT JOIN with the kfi table
+            ->select(['kfi_history.*', 'kfi.companyId'])
+            ->where([
+                "kfi_history.status" => [1, 2, 4], // Referencing kfi_history table correctly
+                "kfi_history.year" => $currentYear,
+                "kfi.companyId" => $companyId // Referencing kfi table correctly
+            ])
+            ->orderBy('kfiHistoryId DESC') // Ordering by kfiHistoryId
+            ->asArray() // Return as an array
+            ->all(); // Fetch all results
+
+
+            // return json_encode($kfiHistory);
+
+            if(count( $kfiHistory) > 0){
+                foreach ($kfiHistory as $entry) {
+                    $month = intval($entry['month']); 
+                    $ratio = 0;
+                    $found = false;
+                                
+                    foreach ($monthlyData[$month] as $mainId) {
+                        if ($mainId['kfiId'] == $entry['kfiId']) {
+                                $found = true;
+                                // break;
+                        }
+                    }
+                    if (!$found) {
+                            if ($entry["target"] != '' && $entry["target"] != 0) {
+                                if ($entry["code"] == '<' || $entry["code"] == '=') {
+                                    $ratio = ($entry["result"] / $entry["target"]) * 100;
+                                } else {
+                                    if ($entry["result"] != '' && $entry["result"] != 0) {
+                                        $ratio = ($entry["target"] / $entry["result"]) * 100;
+                                    } else {
+                                        $ratio = 0;
+                                    }
+                                }
+                            } else {
+                                $ratio = 0;
+                            }
+
+                            // เก็บข้อมูลตามเดือน
+                            $monthlyData[$month][] = [
+                                "kfiId" => $entry["kfiId"],
+                                "name" => $entry["kfiHistoryName"],
+                                "month" => $entry["month"],
+                                "year" => $entry["year"],
+                                "target" => $entry["target"],
+                                "result" => $entry["result"],
+                                "kfiHistory" => $entry["kfiHistoryId"],
+                                "percentage" => round($ratio, 2)
+                            ];
                     }
                 }
-            } else {
-                $ratio = 0;
-            }
-
-            // เก็บข้อมูลตามเดือน
-            $monthlyData[$month][] = [
-                "kfiId" => $entry["kfiId"],
-                "name" => $entry["kfiHistoryName"],
-                "month" => $entry["month"],
-                "target" => $entry["target"],
-                "result" => $entry["result"],
-                "percentage" => round($ratio, 2)
-            ];
+            }    
         }
 
-        // คำนวณผลรวมของเปอร์เซ็นต์ในแต่ละเดือน
-        $monthlySumPercent = [];
-
+        // return json_encode($monthlyData);
+        
         foreach ($monthlyData as $month => $data) {
             // หากเดือนนั้นไม่มีข้อมูล
             if (empty($data)) {
@@ -790,7 +778,8 @@ class DashbordController extends Controller
                 }
             }
         }
-        
+        // return json_encode($monthlySumPercent);
+
 
         $data = [
             'currentCategory' => $currentCategory,
@@ -811,49 +800,67 @@ class DashbordController extends Controller
         $monthlyData = [
             1 => [], 2 => [], 3 => [], 4 => [], 5 => [], 6 => [], 7 => [], 8 => [], 9 => [], 10 => [], 11 => [], 12 => []
         ];
+        $months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
         $monthlySumPercent = [];
         $currentYear = date('Y'); // หาปีปัจจุบัน
 
         if($currentCategory == 'Company'){
 
-            //เอาออกมาทั้งหมด
-            $kgiHistory = KgiHistory::find()
-				->where(["status" => [1, 2, 4],"year" => $currentYear])
-				->orderBy('month ASC,kgiHistoryId DESC')
-				->asArray()
-				->all();
-        
-                // ลูปเพื่ออัพเดตข้อมูลในทุกเดือน actionDashbordCompany
-        foreach ($kgiHistory as $entry) {
+            foreach( $months as $month => $data) {
+                $kgiHistory = KgiHistory::find()
+                ->join("LEFT JOIN", "kgi", "kgi.kgiId = kgi_history.kgiId") // LEFT JOIN with the kgi table
+                ->select(['kgi_history.*', 'kgi.companyId'])
+                ->where([
+                    "kgi_history.status" => [1, 2, 4],  // Referencing kgi_history table
+                    "kgi_history.year" => $currentYear,
+                    "kgi_history.month" => $data,       // Add month condition here
+                    "kgi.companyId" => $companyId      // Referencing kgi table correctly
+                ])
+                ->orderBy('kgiHistoryId DESC')
+                ->asArray()
+                ->all();
 
-            $month = intval($entry['month']);  // แปลงเป็น int
-            $ratio = 0;
-            
-            // // คำนวณค่า ratio
-            if ($entry["targetAmount"] != '' && $entry["targetAmount"] != 0) {
-                if ($entry["code"] == '<' || $entry["code"] == '=') {
-                    $ratio = ($entry["result"] / $entry["targetAmount"]) * 100;
-                } else {
-                    if ($entry["result"] != '' && $entry["result"] != 0) {
-                        $ratio = ($entry["targetAmount"] / $entry["result"]) * 100;
-                    } else {
-                        $ratio = 0;
+                    if(count( $kgiHistory) > 0){
+                        foreach ($kgiHistory as $entry) {
+
+                            $month = intval($entry['month']);  // แปลงเป็น int
+                            $ratio = 0;
+                            $found = false;
+                                
+                                foreach ($monthlyData[$month] as $mainId) {
+                                    if ($mainId['kgiId'] == $entry['kgiId']) {
+                                            $found = true;
+                                            // break;
+                                    }
+                                }
+                                if (!$found) {
+                                    if ($entry["targetAmount"] != '' && $entry["targetAmount"] != 0) {
+                                        if ($entry["code"] == '<' || $entry["code"] == '=') {
+                                            $ratio = ($entry["result"] / $entry["targetAmount"]) * 100;
+                                        } else {
+                                            if ($entry["result"] != '' && $entry["result"] != 0) {
+                                                $ratio = ($entry["targetAmount"] / $entry["result"]) * 100;
+                                            } else {
+                                                $ratio = 0;
+                                            }
+                                        }
+                                    } else {
+                                        $ratio = 0;
+                                    }
+                                    // เก็บข้อมูลตามเดือน
+                                    $monthlyData[$month][] = [
+                                        "kgiId" => $entry["kgiId"],
+                                        "name" => $entry["kgiHistoryName"],
+                                        "month" => $entry["month"],
+                                        "target" => $entry["targetAmount"],
+                                        "result" => $entry["result"],
+                                        "percentage" => round($ratio, 2)
+                                    ];
+                                }
+                        }
                     }
                 }
-            } else {
-                $ratio = 0;
-            }
-
-            // เก็บข้อมูลตามเดือน
-            $monthlyData[$month][] = [
-                "kgiId" => $entry["kgiId"],
-                "name" => $entry["kgiHistoryName"],
-                "month" => $entry["month"],
-                "target" => $entry["targetAmount"],
-                "result" => $entry["result"],
-                "percentage" => round($ratio, 2)
-            ];
-        }
+            // คำนวณผลรวมของเปอร์เซ็นต์ในแต่ละเดือน
 
         foreach ($monthlyData as $month => $data) {
             // หากเดือนนั้นไม่มีข้อมูล
@@ -1033,44 +1040,69 @@ class DashbordController extends Controller
         $monthlyData = [
             1 => [], 2 => [], 3 => [], 4 => [], 5 => [], 6 => [], 7 => [], 8 => [], 9 => [], 10 => [], 11 => [], 12 => []
         ];
+        $months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
         $monthlySumPercent = [];
         $currentYear = date('Y'); // หาปีปัจจุบัน
 
         if($currentCategory == 'Company'){
             
-            $kpiHistory = KpiHistory::find()
-            ->where(["status" => [1, 2, 4],"year" => $currentYear])
-            ->orderBy('month ASC,kpiHistoryId DESC')
-            ->asArray()
-            ->all();
-
-            foreach ($kpiHistory as $entry) {
-
-                $month = intval($entry['month']);  // แปลงเป็น int
-                $ratio = 0;
-                if ($entry["targetAmount"] == null || $entry["targetAmount"] == '' || $entry["targetAmount"] == 0) {
-                    $ratio = 0;
-                } else {
-                    if ($entry["code"] == '<' || $entry["code"] == '=') {
-                        $ratio = ((int)$entry['result'] / (int)$entry["targetAmount"]) * 100;
-                    } else {
-                        if ($entry["result"] != '' && $entry["result"] != 0) {
-                            $ratio = ((int)$entry["targetAmount"] / (int)$entry["result"]) * 100;
-                        } else {
-                            $ratio = 0;
+            foreach($months as $month => $data) {
+                $kpiHistory = KpiHistory::find()
+                ->join("LEFT JOIN", "kpi", "kpi.kpiId = kpi_history.kpiId") 
+                ->select(['kpi_history.*', 'kpi.companyId'])
+                ->where([
+                    "kpi_history.status" => [1, 2, 4],  
+                    "kpi_history.year" => $currentYear,
+                    "kpi_history.month" => $data,       
+                    "kpi.companyId" => $companyId     
+                ])
+                ->orderBy('kpiHistoryId DESC')
+                ->asArray()
+                ->all();
+                
+                    if(count( $kpiHistory) > 0){
+                        foreach ($kpiHistory as $entry) {
+                                $month = intval($entry['month']);
+                                $ratio = 0;
+                                $found = false;
+                                
+                                foreach ($monthlyData[$month] as $mainId) {
+                                    if ($mainId['kpiId'] == $entry['kpiId']) {
+                                            $found = true;
+                                            // break;
+                                    }
+                                }
+                                if (!$found) {
+                                    if ($entry["targetAmount"] == null || $entry["targetAmount"] == '' || $entry["targetAmount"] == 0) {
+                                        $ratio = 0;
+                                    } else {
+                                        if ($entry["code"] == '<' || $entry["code"] == '=') {
+                                            $ratio = ((int)$entry['result'] / (int)$entry["targetAmount"]) * 100;
+                                        } else {
+                                            if ($entry["result"] != '' && $entry["result"] != 0) {
+                                                $ratio = ((int)$entry["targetAmount"] / (int)$entry["result"]) * 100;
+                                            } else {
+                                                $ratio = 0;
+                                            }
+                                        }
+                                    }
+                        
+                                    $monthlyData[$month][] = [
+                                        "kpiId" => $entry["kpiId"],
+                                        "name" => $entry["kpiHistoryName"],
+                                        "month" => $entry["month"],
+                                        "target" => $entry["targetAmount"],
+                                        "result" => $entry["result"],
+                                        "kpiHistoryId" => $entry["kpiHistoryId"],
+                                        "percentage" => round($ratio, 2)
+                                    ];	
+                                }
                         }
                     }
-                }
-                // เก็บข้อมูลตามเดือน
-                $monthlyData[$month][] = [
-                    "kpiId" => $entry["kpiId"],
-                   "name" => $entry["kpiHistoryName"],
-                    "month" => $entry["month"],
-                    "target" => $entry["targetAmount"],
-                    "result" => $entry["result"],
-                    "percentage" => round($ratio, 2)
-                ];	
-            }
+            }        
+            
+            // return json_encode($monthlyData);
+            // throw new Exception(print_r($monthlyData,true));
             
             foreach ($monthlyData as $month => $data) {
                 // หากเดือนนั้นไม่มีข้อมูล

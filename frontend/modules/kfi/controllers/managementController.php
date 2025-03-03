@@ -241,6 +241,7 @@ class ManagementController extends Controller
 			$kfi->createDateTime = new Expression('NOW()');
 			$kfi->updateDateTime = new Expression('NOW()');
 
+			$isManager = UserRole::isManager();
 
 			if ($kfi->save(false)) {
 				$kfiId = Yii::$app->db->lastInsertID;
@@ -253,6 +254,10 @@ class ManagementController extends Controller
 				$kfiHistory->status = $_POST["status"] ?? 1;
 				$kfiHistory->quantRatio = $_POST["quantRatio"] ?? null;
 				$kfiHistory->historyStatus = (string) ($_POST["status"] ?? '1');
+				if ($isManager == 1) {
+					$kfiHistory->target = str_replace(",", "", $_POST["amount"] ?? 0);
+				}
+				
 				$kfiHistory->result = $_POST["result"] ?? 0;
 				$kfiHistory->unitId = $_POST["unit"] ?? null;
 				$kfiHistory->month = $_POST["month"] ?? null;
