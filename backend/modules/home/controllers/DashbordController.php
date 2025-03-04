@@ -956,7 +956,6 @@ class DashbordController extends Controller
             ->asArray() // Return as an array
             ->all(); // Fetch all results
 
-
             // return json_encode($kfiHistory);
 
             if(count( $kfiHistory) > 0){
