@@ -680,12 +680,12 @@ class ManagementController extends Controller
 			$kgi->kgiName = $_POST["kgiName"];
 			$kgi->companyId = $_POST["companyId"];
 			$kgi->unitId = $_POST["unitId"];
-			if ($kgi->fromDate == "") {
-				$kgi->fromDate = $_POST["fromDate"];
-			}
-			if ($kgi->toDate == "") {
-				$kgi->toDate = $_POST["toDate"];
-			}
+			//if ($kgi->fromDate == "") {
+			$kgi->fromDate = $_POST["fromDate"];
+			//}
+			//if ($kgi->toDate == "") {
+			$kgi->toDate = $_POST["toDate"];
+			//}
 			if ($isManager == 1 &&  $_POST["amount"] != "") {
 				$kgi->targetAmount = str_replace(",", "", $_POST["amount"]);
 			}
@@ -2139,7 +2139,6 @@ class ManagementController extends Controller
 		}
 		// return $this->redirect(Yii::$app->homeUrl . 'kgi/management/grid');
 		return $this->redirect(Yii::$app->request->referrer);
-
 	}
 	public function actionChanngeTeamTargetReason()
 	{
