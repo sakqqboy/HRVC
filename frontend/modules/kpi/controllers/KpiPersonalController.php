@@ -614,7 +614,7 @@ class KpiPersonalController extends Controller
 
 		// throw new exception(print_r($data	, true));	
 
-		
+		// throw new Exception(print_r(Yii::$app->request	->post(), true));
 		if (isset($_POST["kpiEmployeeId"])) {
 			$history = KpiEmployeeHistory::find()
 				->where(["kpiEmployeeId" => $_POST["kpiEmployeeId"]])
@@ -629,7 +629,8 @@ class KpiPersonalController extends Controller
 				}
 
 				$lastCheck = $history->nextCheckDate;
-				if ($history->target == str_replace(",", "", $_POST["amount"]) && $history->result == str_replace(",", "", $_POST["result"]) && $nextCheckDate == $_POST["nextCheckDate"] && $history->toDate == $_POST["toDate"] && $history->fromDate == $_POST["fromDate"]) {
+				if ($history->target == str_replace(",", "", $_POST["amount"]) && $history->result == str_replace(",", "", $_POST["result"]) && $nextCheckDate == $_POST["nextCheckDate"] && $history->fromDate == $_POST["fromDate"] && $history->toDate == $_POST["toDate"] && $history->month == $_POST["month"] && $history->year == $_POST["year"]) {
+				// if ($history->target == str_replace(",", "", $_POST["amount"]) && $history->result == str_replace(",", "", $_POST["result"]) && $nextCheckDate == $_POST["nextCheckDate"] && $history->toDate == $_POST["toDate"] && $history->fromDate == $_POST["fromDate"]) {
 					$history->status = $_POST["status"];
 					$history->updateDateTime = new Expression('NOW()');
 				} else {

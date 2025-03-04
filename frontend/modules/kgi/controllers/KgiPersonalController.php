@@ -331,8 +331,10 @@ class KgiPersonalController extends Controller
 	}
 	public function actionSaveUpdatePersonalKgi()
 	{
+
+		// throw new Exception(print_r(Yii::$app->request	->post(), true));
+
 		if (isset($_POST["kgiEmployeeId"])) {
-			//throw new Exception(print_r(Yii::$app->request->post(), true));
 			$history = KgiEmployeeHistory::find()
 				->where(["kgiEmployeeId" => $_POST["kgiEmployeeId"], "status" => [1, 2, 4]])
 				->orderBy('kgiEmployeeHistoryId DESC')
@@ -347,10 +349,12 @@ class KgiPersonalController extends Controller
 				}
 
 				$lastCheck = $history->nextCheckDate;
-				if ($history->target == str_replace(",", "", $_POST["target"]) && $history->result == str_replace(",", "", $_POST["result"]) && $nextCheckDate == $_POST["nextCheckDate"] && $history->fromDate == $_POST["fromDate"] && $history->toDate == $_POST["toDate"]) {
+				if ($history->target == str_replace(",", "", $_POST["target"]) && $history->result == str_replace(",", "", $_POST["result"]) && $nextCheckDate == $_POST["nextCheckDate"] && $history->fromDate == $_POST["fromDate"] && $history->toDate == $_POST["toDate"] && $history->month == $_POST["month"] && $history->year == $_POST["year"]) {
 					$history->status = $_POST["status"];
 					$history->updateDateTime = new Expression('NOW()');
+					// throw new Exception("1");
 				} else {
+					// throw new Exception("3");
 					if ($history->target != str_replace(",", "", $_POST["target"]) && $history->target != null) {
 						$role = UserRole::userRight();
 						if ($role <= 3) {
@@ -377,8 +381,10 @@ class KgiPersonalController extends Controller
 					$history->status = $status;
 					$history->createDateTime = new Expression('NOW()');
 					$history->updateDateTime = new Expression('NOW()');
+
 				}
 			} else {
+				// throw new Exception("2");
 				$history = new KgiEmployeeHistory();
 				$history->kgiEmployeeId = $_POST["kgiEmployeeId"];
 				$history->target = (float)str_replace(",", "", $_POST["target"]);
