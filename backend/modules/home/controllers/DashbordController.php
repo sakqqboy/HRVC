@@ -95,20 +95,126 @@ class DashbordController extends Controller
 
         $mount = date('m');
         $year = date('Y');
-        
-        // ดึงข้อมูลออกจากฐานข้อมูล
-        $kfis = Kfi::find()->where(['<>', 'status', '99'])
-                          ->andWhere(['companyId' => $companyId, "month" => $mount, "year" => $year])
-                          ->asArray()
-                          ->all();
-        $kgis = Kgi::find()->where(['<>', 'status', '99'])
-                          ->andWhere(['companyId' => $companyId, "month" => $mount, "year" => $year])
-                          ->asArray()
-                          ->all();
-        $kpis = Kpi::find()->where(['<>', 'status', '99'])
-                          ->andWhere(['companyId' => $companyId, "month" => $mount, "year" => $year])
-                          ->asArray()
-                          ->all();
+
+        $kfis = KfiHistory::find()
+        ->alias('b')
+        ->select([
+            'a.kfiId', 
+            'a.active', 
+            'a.kfiName', 
+            'a.companyId', 
+            'a.status', 
+            'b.month', 
+            'b.year', 
+            'b.target', 
+            'b.result', 
+            'b.kfiHistoryId', 
+            'b.unitId', 
+            'b.quantRatio', 
+            'b.amountType', 
+            'b.code'
+        ])
+        ->leftJoin('kfi a', 'a.kfiId = b.kfiId')
+        ->where([
+            'a.status' => [1, 2, 4],
+            'b.status' => [1, 2, 4],
+            'a.companyId' => $companyId,  // ป้องกันเลขฐาน 8
+            'b.month' => $mount, // ใช้ตัวแปรจาก PHP
+            'b.year' => $year
+        ])
+        ->andWhere([
+            'b.kfiHistoryId' => new \yii\db\Expression(
+                "(SELECT MAX(kfiHistoryId) 
+                FROM kfi_history 
+                WHERE kfiId = b.kfiId 
+                AND month = :month)"
+            )
+        ])
+        ->addParams([':month' => $mount]) // ป้องกัน SQL Injection
+        ->orderBy(['b.kfiHistoryId' => SORT_DESC])
+        ->asArray()
+        ->all();
+
+        $kgis = kgiHistory::find()
+        ->alias('b')
+        ->select([
+            'a.kgiId',
+            'a.active', 
+            'a.kgiName', 
+            'a.companyId', 
+            'a.status', 
+            'b.month', 
+            'b.year', 
+            'b.targetAmount', 
+            'b.result', 
+            'b.kgiHistoryId', 
+            'b.unitId', 
+            'b.quantRatio', 
+            'b.amountType', 
+            'b.code'
+        ])
+        ->leftJoin('kgi a', 'a.kgiId = b.kgiId')
+        ->where([
+            'a.status' => [1, 2, 4],
+            'b.status' => [1, 2, 4],
+            'a.companyId' => $companyId,  // ป้องกันเลขฐาน 8
+            'b.month' => $mount, // ใช้ตัวแปรจาก PHP
+            'b.year' => $year
+        ])
+        ->andWhere([
+            'b.kgiHistoryId' => new \yii\db\Expression(
+                "(SELECT MAX(kgiHistoryId) 
+                FROM kgi_history 
+                WHERE kgiId = b.kgiId 
+                AND month = :month)"
+            )
+        ])
+        ->addParams([':month' => $mount]) // ป้องกัน SQL Injection
+        ->orderBy(['b.kgiHistoryId' => SORT_DESC])
+        ->asArray()
+        ->all();
+
+
+        $kpis = kpiHistory::find()
+        ->alias('b')
+        ->select([
+            'a.kpiId',
+            'a.active', 
+            'a.kpiName', 
+            'a.companyId', 
+            'a.status', 
+            'b.month', 
+            'b.year', 
+            'b.targetAmount', 
+            'b.result', 
+            'b.kpiHistoryId', 
+            'b.unitId', 
+            'b.quantRatio', 
+            'b.amountType', 
+            'b.code'
+        ])
+        ->leftJoin('kpi a', 'a.kpiId = b.kpiId')
+        ->where([
+            'a.status' => [1, 2, 4],
+            'b.status' => [1, 2, 4],
+            'a.companyId' => $companyId,  // ป้องกันเลขฐาน 8
+            'b.month' => $mount, // ใช้ตัวแปรจาก PHP
+            'b.year' => $year
+        ])
+        ->andWhere([
+            'b.kpiHistoryId' => new \yii\db\Expression(
+                "(SELECT MAX(kpiHistoryId) 
+                FROM kpi_history 
+                WHERE kpiId = b.kpiId 
+                AND month = :month)"
+            )
+        ])
+        ->addParams([':month' => $mount]) // ป้องกัน SQL Injection
+        ->orderBy(['b.kpiHistoryId' => SORT_DESC])
+        ->asArray()
+        ->all();
+
+        // return json_encode($kgis);
     
         // นับจำนวนของแต่ละคิวรี้
         $kfiCount = count($kfis);
@@ -135,15 +241,15 @@ class DashbordController extends Controller
                         ->one();
 
                     if (isset($kfiHistory) && !empty($kfiHistory)) {
-                        if ($kfi["targetAmount"] == null || $kfi["targetAmount"] == '' || $kfi["targetAmount"] == 0) {
+                        if ($kfi["target"] == null || $kfi["target"] == '' || $kfi["target"] == 0) {
                             $ratio = 0;
                         } else {
                             if ($kfiHistory["code"] == '<' || $kfiHistory["code"] == '=') {
-                                $ratio = ((int)$kfiHistory['result'] / (int)$kfi["targetAmount"]) * 100;
+                                $ratio = ((int)$kfiHistory['result'] / (int)$kfi["target"]) * 100;
                             } else {
                                 //$ratio = ((int)$kfi['targetAmount'] / (int)$kfiHistory["result"]) * 100;
                                 if ($kfiHistory["result"] != '' && $kfiHistory["result"] != 0) {
-                                    $ratio = ((int)$kfi["targetAmount"] / (int)$kfiHistory["result"]) * 100;
+                                    $ratio = ((int)$kfi["target"] / (int)$kfiHistory["result"]) * 100;
                                 } else {
                                     $ratio = 0;
                                 }
@@ -166,7 +272,7 @@ class DashbordController extends Controller
                         $kfiData[$kfi["kfiId"]] = [
                             "name" => $kfiname,
                             "companyId" => $kfi['companyId'],
-                            "target" => $kfi['targetAmount'],
+                            "target" => $kfi['target'],
                             "status" => $kfiHistory['status'],
                             "quantRatio" => $kfiHistory["quantRatio"],
                             "code" =>  $kfiHistory["code"],
