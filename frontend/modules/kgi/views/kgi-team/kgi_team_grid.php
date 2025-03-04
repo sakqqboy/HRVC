@@ -338,7 +338,7 @@ $this->title = "TEAM KGI";
 
                                                                 <span class="pull-left">
                                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $kgi["countTeamEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>.svg"
-                                                                        class="home-icon mr-2">
+                                                                        class="assing-icon mr-2">
                                                                 </span>
 
                                                                 <a href="<?= ($kgi["countTeamEmployee"] > 0 && $colorFormat != 'disable') ? Yii::$app->homeUrl . 'kgi/kgi-team/kgi-team-history/' . ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiTeamHistoryId' => 0, 'kgiId' => $kgi["kgiId"], 'openTab' => 1]) : '#' ?>"
@@ -359,7 +359,7 @@ $this->title = "TEAM KGI";
                                                                 class="col-7 <?= $kgi["countTeamEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>-assignNew ">
                                                                 <span class="pull-left">
                                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $kgi["countTeamEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>.svg"
-                                                                        class="home-icon mr-2">
+                                                                        class="assing-icon mr-2">
                                                                 </span>
                                                                 <a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgi["kgiId"], "companyId" => $kgi["companyId"]]) ?>"
                                                                     class="font-<?= $kgi["countTeamEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'black') : $colorFormat ?>"
@@ -414,7 +414,7 @@ $this->title = "TEAM KGI";
 
                                                                 <span class="pull-left">
                                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $kgi["countTeam"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>.svg"
-                                                                        class="home-icon mr-2">
+                                                                        class="assing-icon mr-2">
                                                                 </span>
 
                                                                 <a href="<?= ($kgi["countTeam"] > 0 || $colorFormat != 'disable') ? Yii::$app->homeUrl . 'kgi/kgi-team/kgi-team-history/' . ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiTeamHistoryId' => 0, 'kgiId' => $kgi["kgiId"], 'openTab' => 1]) : '#' ?>"
@@ -435,18 +435,18 @@ $this->title = "TEAM KGI";
                                                                 class="col-7 <?= $kgi["countTeam"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>-assignNew ">
                                                                 <span class="pull-left">
                                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $kgi["countTeam"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>.svg"
-                                                                        class="home-icon mr-2">
-                                                                </span
-                                                                    <a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgi["kgiId"], "companyId" => $kgi["companyId"]]) ?>"
+                                                                        class="assing-icon mr-2">
+                                                                </span>
+                                                                <a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgi["kgiId"], "companyId" => $kgi["companyId"]]) ?>"
                                                                     class="font-<?= ($kgi["countTeam"] == 0 && $colorFormat == 'disable') ? 'black' : $colorFormat ?>"
                                                                     style="top: 2px; <?= ($kgi["countTeam"] == 0 && $colorFormat == 'disable') ?: '' ?>">
-                                                                <?php if ($kgi["countTeam"] == 0 && $colorFormat == 'disable') { ?>
-                                                                    <?= Yii::t('app', 'Assign Team') ?>
-                                                                <?php  } else if ($kgi["countTeam"] == 0) { ?>
-                                                                    <?= Yii::t('app', 'Assign Team') ?>
-                                                                <?php } else {  ?>
-                                                                    <?= Yii::t('app', 'Edit Assign') ?>
-                                                                <?php } ?>
+                                                                    <?php if ($kgi["countTeam"] == 0 && $colorFormat == 'disable') { ?>
+                                                                        <?= Yii::t('app', 'Assign Team') ?>
+                                                                    <?php  } else if ($kgi["countTeam"] == 0) { ?>
+                                                                        <?= Yii::t('app', 'Assign Team') ?>
+                                                                    <?php } else {  ?>
+                                                                        <?= Yii::t('app', 'Edit Assign') ?>
+                                                                    <?php } ?>
                                                                 </a>
                                                             </div>
                                                         <?php }  ?>

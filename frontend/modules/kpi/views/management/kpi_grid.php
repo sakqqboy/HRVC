@@ -91,7 +91,7 @@ $this->title = 'KPI Grid View';
                     </div>
                 </div>
             </div>
-            <div class="col-12 mt-5">
+            <div class="col-12 mt-15">
                 <div class="row">
                     <?php
                     if (isset($kpis) && count($kpis) > 0) {
@@ -132,28 +132,28 @@ $this->title = 'KPI Grid View';
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-5 col-md-2 col-4 text-end pr-20">
+                                    <div class="col-lg-5 col-md-2 col-4 text-end pr-20" style="margin-top: -5px;">
                                         <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 1]) ?>"
                                             class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
-                                            style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                            style="margin-top: -5px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="History"
                                                 class="pim-icon" style="margin-top: -1px;">
                                         </a>
                                         <a href="<?= Yii::$app->homeUrl ?>kpi/view/index/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 2]) ?>"
                                             class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
-                                            style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                            style="margin-top: -5px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg" alt="History"
                                                 class="pim-icon mr-3" style="margin-top: -2px;"><?= Yii::t('app', 'History') ?>
                                         </a>
                                         <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 3]) ?>"
                                             class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
-                                            style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                            style="margin-top: -5px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg" alt="Chats"
                                                 class="pim-icon mr-3" style="margin-top: -2px;"><?= Yii::t('app', 'Chats') ?>
                                         </a>
                                         <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 4]) ?>"
                                             class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
-                                            style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                            style="margin-top: -5px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg" alt="Chart"
                                                 class="pim-icon mr-3" style="margin-top: -2px;"><?= Yii::t('app', 'Chart') ?>
                                         </a>
@@ -165,21 +165,21 @@ $this->title = 'KPI Grid View';
                                                 onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
                                                 onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
-                                                    class="pim-icon" style="margin-top: -2px;">
+                                                    class="pim-icon-delete" style="margin-top: -2px;">
                                             </a>
                                         <?php
                                         }
                                         ?>
                                     </div>
-                                    <div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?> mt-5">
+                                    <div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?> mt-10">
                                         <div class="row">
-                                            <div class="col-12 text-start pl-22">
+                                            <div class="col-12 text-start pl-22 fw-bold text-dark">
                                                 <?= Yii::t('app', 'Assign on') ?>
                                             </div>
-                                            <div class="col-9 pl-20 pr-0">
-                                                <div class="col-12 mt-5 pt-2 pb-1">
+                                            <div class="col-10 pl-20 pr-0 mt-10">
+                                                <div class="col-12 pb-1">
                                                     <div class="row">
-                                                        <div class="col-5 pr-2 pl-13">
+                                                        <div class="col-4 pr-2 pl-13">
                                                             <div class="row d-flex align-items-center"
                                                                 style="min-height: 24px;">
                                                                 <?php if ($kpi["countEmployee"] != 0) {
@@ -251,14 +251,14 @@ $this->title = 'KPI Grid View';
                                                             </div>
                                                         </div>
                                                         <div
-                                                            class="col-6 <?= $kpi["countEmployee"] == 0  && $colorFormat != "disable" ? 'yenlow-assignNew' : $colorFormat . '-assignNew' ?>">
+                                                            class="col-7 <?= $kpi["countEmployee"] == 0  && $colorFormat != "disable" ? 'yenlow-assignNew' : $colorFormat . '-assignNew' ?>">
                                                             <?php
                                                             if ($role <= 4) { // staff to team leader
                                                                 if ($kpi["countEmployee"] > 0) {
                                                             ?>
                                                                     <span class="pull-left">
                                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $colorFormat ?>.svg"
-                                                                            class="home-icon mr-2">
+                                                                            class="assing-icon mr-2">
                                                                     </span>
                                                                     <a class="font-<?= $colorFormat ?>" style="top: 2px;"
                                                                         href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 1]) ?>">
@@ -268,7 +268,7 @@ $this->title = 'KPI Grid View';
                                                                 } else { ?>
                                                                     <span class="pull-left">
                                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $colorFormat == 'disable' ? 'disable' : 'yenlow' ?>.svg"
-                                                                            class="home-icon mr-2">
+                                                                            class="assing-icon mr-2">
                                                                     </span>
                                                                     <a class="font-black" style="top: 2px;">
                                                                         <?= Yii::t('app', 'Not Assign') ?>
@@ -279,7 +279,7 @@ $this->title = 'KPI Grid View';
                                                                 if ($kpi["countEmployee"] > 0) { ?>
                                                                     <span class="pull-left">
                                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.svg"
-                                                                            class="home-icon mr-2">
+                                                                            class="assing-icon mr-2">
                                                                     </span>
                                                                     <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, "companyId" => $kpi["companyId"]]) ?>"
                                                                         class="font-<?= $colorFormat ?>" style="top: 2px;">
@@ -289,7 +289,7 @@ $this->title = 'KPI Grid View';
                                                                 } else { ?>
                                                                     <span class="pull-left">
                                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat == 'disable' ? 'disable' : 'yenlow' ?>.svg"
-                                                                            class="home-icon mr-2">
+                                                                            class="assing-icon mr-2">
                                                                     </span>
                                                                     <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, "companyId" => $kpi["companyId"]]) ?>"
                                                                         class="font-black" style="top: 2px;">
@@ -304,7 +304,7 @@ $this->title = 'KPI Grid View';
                                                 </div>
                                                 <div class="col-12 mt-10 pt-5 pb-1">
                                                     <div class="row">
-                                                        <div class="col-5 pr-2">
+                                                        <div class="col-4 pr-2">
                                                             <div class="row d-flex align-items-center"
                                                                 style="min-height: 24px;">
                                                                 <div class="col-2">
@@ -332,14 +332,14 @@ $this->title = 'KPI Grid View';
 
                                                         </div>
                                                         <div
-                                                            class="col-6 <?= $kpi["countTeam"] == 0  && $colorFormat != "disable" ? 'yenlow-assignNew' : $colorFormat . '-assignNew' ?>">
+                                                            class="col-7 <?= $kpi["countTeam"] == 0  && $colorFormat != "disable" ? 'yenlow-assignNew' : $colorFormat . '-assignNew' ?>">
                                                             <?php
                                                             if ($role <= 4) { // staff to team leader
                                                                 if ($kpi["countTeam"] > 0) {
                                                             ?>
                                                                     <span class="pull-left">
                                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $colorFormat ?>.svg"
-                                                                            class="home-icon mr-2">
+                                                                            class="assing-icon mr-2">
                                                                     </span>
                                                                     <a class="font-<?= $colorFormat ?>" style="top: 2px;"
                                                                         href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 1]) ?>">
@@ -349,7 +349,7 @@ $this->title = 'KPI Grid View';
                                                                 } else { ?>
                                                                     <span class="pull-left">
                                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $colorFormat == 'disable' ? 'disable' : 'yenlow' ?>.svg"
-                                                                            class="home-icon mr-2">
+                                                                            class="assing-icon mr-2">
                                                                     </span>
                                                                     <a class="font-black" style="top: 2px;">
                                                                         <?= Yii::t('app', 'Not Assign') ?>
@@ -360,7 +360,7 @@ $this->title = 'KPI Grid View';
                                                                 if ($kpi["countTeam"] > 0) { ?>
                                                                     <span class="pull-left">
                                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.svg"
-                                                                            class="home-icon mr-2">
+                                                                            class="assing-icon mr-2">
                                                                     </span>
                                                                     <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, "companyId" => $kpi["companyId"]]) ?>"
                                                                         class="font-<?= $colorFormat ?>" style="top: 2px;">
@@ -370,7 +370,7 @@ $this->title = 'KPI Grid View';
                                                                 } else { ?>
                                                                     <span class="pull-left">
                                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat == 'disable' ? 'disable' : 'yenlow' ?>.svg"
-                                                                            class="home-icon mr-2">
+                                                                            class="assing-icon mr-2">
                                                                     </span>
                                                                     <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, "companyId" => $kpi["companyId"]]) ?>"
                                                                         class="font-black" style="top: 2px;">
@@ -387,7 +387,7 @@ $this->title = 'KPI Grid View';
                                                 </div>
                                             </div>
 
-                                            <div class="col-3" style="margin-top:-5px;">
+                                            <div class="col-2 pr-0 pl-0" style="margin-top:5px;">
                                                 <div class="col-12 text-center priority-star">
                                                     <?php
                                                     if ($kpi["priority"] == "A" || $kpi["priority"] == "B") {
@@ -431,22 +431,22 @@ $this->title = 'KPI Grid View';
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-1 pim-subheader-font border-right-<?= $colorFormat ?> mt-5 pl-10 pr-10">
+                                    <div class="col-lg-1 pim-small-text border-right-<?= $colorFormat ?> pl-16 pr-10 mt-20">
                                         <div class="col-12"><?= Yii::t('app', 'Quant Ratio') ?></div>
-                                        <div class="col-12 border-bottom-<?= $colorFormat ?> pb-10 pim-duedate">
+                                        <div class="col-12 border-bottom-<?= $colorFormat ?> pb-10 pim-unit-text">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $kpi["quantRatio"] == 1 ? 'quantity' : 'diamon' ?>.svg"
                                                 class="pim-iconKFI" style="margin-top: -1px; margin-left: 3px;">
                                             <?= $kpi["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?>
                                         </div>
                                         <div class="col-12 pr-0 pt-10 pl-0"><?= Yii::t('app', 'Update Interval') ?></div>
-                                        <div class="col-12  pim-duedate">
+                                        <div class="col-12  pim-unit-text">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/monthly.svg"
                                                 class="pim-iconKFI" style="margin-top: -1px; margin-left: 3px;">
 
                                             <?= Yii::t('app', $kpi["unit"]) ?>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?> pr-15 pl-15 mt-5">
+                                    <div class="col-lg-3 pim-small-text border-right-<?= $colorFormat ?> mt-20 pr-15 pl-15">
                                         <div class="row">
                                             <div class="col-5 text-start">
                                                 <div class="col-12">
@@ -522,12 +522,12 @@ $this->title = 'KPI Grid View';
                                                         class="progress-load load-<?= $colorFormat ?>"><?= $showPercent ?>%</span>
                                                 </div>
                                             </div>
-                                            <div class="col-4 pl-5 pr-5 mt-10">
+                                            <div class="col-4 pl-5 pr-5 mt-16">
                                                 <div class="col-12 text-end"><?= Yii::t('app', 'Last Updated on') ?></div>
                                                 <div class="col-12 text-end pim-duedate">
                                                     <?= $kpi['lastestUpdate'] == "" ? 'Not set' : $kpi['lastestUpdate'] ?></div>
                                             </div>
-                                            <div class="col-4 text-center mt-10">
+                                            <div class="col-4 text-center mt-16 pt-5">
                                                 <?php
                                                 if ($colorFormat == 'disable' && $role >= 5) {
                                                 ?>
@@ -567,7 +567,7 @@ $this->title = 'KPI Grid View';
                                                 }
                                                 ?>
                                             </div>
-                                            <div class="col-4 pl-0 pr-5 mt-10">
+                                            <div class="col-4 pl-0 pr-5 mt-16">
                                                 <div class="col-12 text-start font-<?= $colorFormat ?>">
                                                     <?= Yii::t('app', 'Next Update Date') ?></div>
                                                 <div class="col-12 text-start pim-duedate">
@@ -576,7 +576,7 @@ $this->title = 'KPI Grid View';
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-5 pim-subheader-font mt-5">
+                                    <div class="col-lg-5 pim-subheader-font mt-20">
                                         <div class="row">
                                             <div class="col-lg-6 col-md-6 col-12 pr-3 pl-20">
                                                 <div class="col-12 head-letter head-<?= $colorFormat ?>">
