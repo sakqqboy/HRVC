@@ -361,28 +361,27 @@ class DashbordController extends Controller
         $employeeId = Employee::employeeId($userId);
 		$employee = Employee::EmployeeDetail($employeeId);
         
-			$kgiTeams = KgiTeam::find()
+			    $kgiTeams = KgiTeam::find()
 				->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,
-			kgi_team.teamId,kgi_team.target,k.month,k.year')
+			kgi_team.teamId,kgi_team.target,kgi_team.month,kgi_team.year')
 				->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_team.kgiId")
 				->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
-				->where(["kgi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4],"k.month" => $mount, "k.year" => $year])
+				->where(["kgi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4],"kgi_team.month" => $mount, "kgi_team.year" => $year])
 				->andFilterWhere(["kgi_team.teamId" => $teamId])
 				->orderBy("k.createDateTime DESC,t.teamName ASC")
 				->asArray()
 				->all();
+
 				$kpiTeams = KpiTeam::find()
 				->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,
-			kpi_team.teamId,kpi_team.target,k.month,k.year')
+			kpi_team.teamId,kpi_team.target,kpi_team.month,kpi_team.year')
 				->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_team.kpiId")
 				->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
-				->where(["kpi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4], "k.month" => $mount, "k.year" => $year])
+				->where(["kpi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4], "kpi_team.month" => $mount, "kpi_team.year" => $year])
 				->andFilterWhere(["kpi_team.teamId" => $teamId])
 				->orderBy("k.createDateTime DESC,t.teamName ASC")
 				->asArray()
 				->all();
-
-
     
         // นับจำนวนของแต่ละคิวรี้
         $kgiTeamCount = count($kgiTeams);
@@ -533,29 +532,109 @@ class DashbordController extends Controller
 
         $mount = date('m');
         $year = date('Y');
-
         $employeeId = Employee::employeeId($userId);
-			$kgiEmployee = KgiEmployee::find()
-				->select('k.kgiName,k.priority,k.quantRatio,k.amountType,k.code,kgi_employee.target,kgi_employee.result,
-			kgi_employee.status,kgi_employee.employeeId,k.unitId,kgi_employee.month,kgi_employee.year,k.kgiId,k.companyId,e.teamId,e.picture,
-			kgi_employee.kgiEmployeeId,e.employeeFirstname,e.employeeSurename')
-				->JOIN("LEFT JOIN", "kgi k", "kgi_employee.kgiId=k.kgiId")
-				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
-				->where(["kgi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "kgi_employee.employeeId" => $employeeId, "k.month" => $mount, "k.year" => $year])
-				->orderby('k.createDateTime')
-				->asArray()
-				->all();
 
-			$kpiEmployee = kpiEmployee::find()
-				->select('k.kpiName,k.priority,k.quantRatio,k.amountType,k.code,kpi_employee.target,kpi_employee.result,
-			kpi_employee.status,kpi_employee.employeeId,k.unitId,kpi_employee.month,kpi_employee.year,k.kpiId,k.companyId,e.teamId,e.picture,
-			kpi_employee.kpiEmployeeId,e.employeeFirstname,e.employeeSurename')
-				->JOIN("LEFT JOIN", "kpi k", "kpi_employee.kpiId=k.kpiId")
-				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
-				->where(["kpi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "kpi_employee.employeeId" => $employeeId, "k.month" => $mount, "k.year" => $year])
-				->orderby('k.createDateTime')
-				->asArray()
-				->all();
+        $subQueryKgi = KgiEmployeeHistory::find()
+        ->select('MAX(kgiEmployeeHistoryId)')
+        ->where([
+            'kgiEmployeeId' => new \yii\db\Expression('a.kgiEmployeeId'),
+            'month' => $mount,
+        ]);
+
+        $subQueryKpi = KpiEmployeeHistory::find()
+        ->select('MAX(kpiEmployeeHistoryId)')
+        ->where([
+            'kpiEmployeeId' => new \yii\db\Expression('a.kpiEmployeeId'),
+            'month' => $mount,
+        ]);
+    
+    
+        $kgiEmployee = KgiEmployeeHistory::find()
+            ->alias('b')
+            ->select([
+                'a.kgiId',
+                'b.kgiEmployeeHistoryId',
+                'k.kgiName',
+                'k.priority',
+                'k.quantRatio',
+                'k.amountType',
+                'k.code',
+                'a.target',
+                'a.result',
+                'a.status',
+                'a.employeeId',
+                'k.unitId',
+                'b.month',
+                'b.year',
+                'k.kgiId',
+                'k.companyId',
+                'e.teamId',
+                'a.kgiEmployeeId',
+            ])
+            ->leftJoin(['a' => 'kgi_employee'], 'a.kgiEmployeeId = b.kgiEmployeeId')
+            ->leftJoin(['k' => 'kgi'], 'a.kgiId = k.kgiId')
+            ->leftJoin(['e' => 'employee'], 'e.employeeId = a.employeeId')
+            ->where([
+                'a.status' => [1, 2, 4],
+                'k.status' => [1, 2, 4],
+                'a.employeeId' =>  $employeeId,
+                'b.month' => $mount,
+                'b.year' => $year,
+            ])
+            ->andWhere(['b.kgiEmployeeHistoryId' => $subQueryKgi])
+            ->orderBy(['b.kgiEmployeeHistoryId' => SORT_DESC])
+            ->asArray()
+            ->all();
+
+
+            $kpiEmployee = KpiEmployeeHistory::find()
+            ->alias('b')
+            ->select([
+                'a.kpiId',
+                'b.kpiEmployeeHistoryId',
+                'k.kpiName',
+                'k.priority',
+                'k.quantRatio',
+                'k.amountType',
+                'k.code',
+                'a.target',
+                'a.result',
+                'a.status',
+                'a.employeeId',
+                'k.unitId',
+                'b.month',
+                'b.year',
+                'k.kpiId',
+                'k.companyId',
+                'e.teamId',
+                'a.kpiEmployeeId',
+            ])
+            ->leftJoin(['a' => 'kpi_employee'], 'a.kpiEmployeeId = b.kpiEmployeeId')
+            ->leftJoin(['k' => 'kpi'], 'a.kpiId = k.kpiId')
+            ->leftJoin(['e' => 'employee'], 'e.employeeId = a.employeeId')
+            ->where([
+                'a.status' => [1, 2, 4],
+                'k.status' => [1, 2, 4],
+                'a.employeeId' =>  $employeeId,
+                'b.month' => $mount,
+                'b.year' => $year,
+            ])
+            ->andWhere(['b.kpiEmployeeHistoryId' => $subQueryKpi])
+            ->orderBy(['b.kpiEmployeeHistoryId' => SORT_DESC])
+            ->asArray()
+            ->all();
+    
+
+			// $kpiEmployee = kpiEmployee::find()
+			// 	->select('k.kpiName,k.priority,k.quantRatio,k.amountType,k.code,kpi_employee.target,kpi_employee.result,
+			// kpi_employee.status,kpi_employee.employeeId,k.unitId,kpi_employee.month,kpi_employee.year,k.kpiId,k.companyId,e.teamId,e.picture,
+			// kpi_employee.kpiEmployeeId,e.employeeFirstname,e.employeeSurename')
+			// 	->JOIN("LEFT JOIN", "kpi k", "kpi_employee.kpiId=k.kpiId")
+			// 	->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
+			// 	->where(["kpi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "kpi_employee.employeeId" => $employeeId, "kpi_employee.month" => $mount, "kpi_employee.year" => $year])
+			// 	->orderby('k.createDateTime')
+			// 	->asArray()
+			// 	->all();
     
         // นับจำนวนของแต่ละคิวรี้
         $kgiEmployeeCount = count($kgiEmployee);
@@ -892,44 +971,56 @@ class DashbordController extends Controller
             ->from(['a' => 'kgi_team_history'])
             ->leftJoin(['b' => 'kgi_team'], 'b.kgiTeamId = a.kgiTeamId')
             ->leftJoin(['c' => 'kgi'], 'c.kgiId = b.kgiId')
-            ->where(['a.status' => [1, 2, 4], 'a.year' => $currentYear])
+            ->where(['a.status' => [1, 2, 4], 'a.year' => $currentYear,"b.teamId" => $teamId,"c.companyId" => $companyId  ])
             ->orderBy(['a.month' => SORT_ASC, 'a.kgiTeamHistoryId' => SORT_DESC])
             ->asArray()
             ->all();
 
-       
+            // return json_encode($KgiTeamHistory);
+
             // ลูปเพื่ออัพเดตข้อมูลในทุกเดือน actionDashbordCompany
             foreach ($KgiTeamHistory as $entry) {
 
                 $month = intval($entry['month']);  // แปลงเป็น int
                 $ratio = 0;
-                    
-                // คำนวณค่า ratio
-                    if ($entry["target"] != '' && $entry["target"] != 0) {
-                        if ($entry["code"] == '<' || $entry["code"] == '=') {
-                            $ratio = ($entry["result"] / $entry["target"]) * 100;
-                        } else {
-                            if ($entry["result"] != '' && $entry["result"] != 0) {
-                                $ratio = ($entry["target"] / $entry["result"]) * 100;
-                            } else {
-                                $ratio = 0;
-                            }
+                $found = false;
+                                
+                    foreach ($monthlyData[$month] as $mainId) {
+                        if ($mainId['kgiTeamId'] == $entry['kgiTeamId']) {
+                                $found = true;
+                                // break;
                         }
-                    } else {
-                        $ratio = 0;
                     }
+                    if (!$found) {    
+                    // คำนวณค่า ratio
+                        if ($entry["target"] != '' && $entry["target"] != 0) {
+                            if ($entry["code"] == '<' || $entry["code"] == '=') {
+                                $ratio = ($entry["result"] / $entry["target"]) * 100;
+                            } else {
+                                if ($entry["result"] != '' && $entry["result"] != 0) {
+                                    $ratio = ($entry["target"] / $entry["result"]) * 100;
+                                } else {
+                                    $ratio = 0;
+                                }
+                            }
+                        } else {
+                            $ratio = 0;
+                        }
 
-                    // เก็บข้อมูลตามเดือน
-                    $monthlyData[$month][] = [
-                        "kgiId" => $entry["kgiId"],
-                        //    "name" => $entry["kgiHistoryName"],
-                        "month" => $entry["month"],
-                        "target" => $entry["target"],
-                        "result" => $entry["result"],
-                        "percentage" => round($ratio, 2)
-                    ];
+                        // เก็บข้อมูลตามเดือน
+                        $monthlyData[$month][] = [
+                            "kgiTeamId" => $entry["kgiTeamId"],
+                            //    "name" => $entry["kgiHistoryName"],
+                            "month" => $entry["month"],
+                            "year" => $entry["year"],
+                            "kgiTeamHistoryId" => $entry["kgiTeamHistoryId"],                        
+                            "target" => $entry["target"],
+                            "result" => $entry["result"],
+                            "percentage" => round($ratio, 2)
+                        ];
+                    }
             }
-
+            // return json_encode($monthlyData);
             foreach ($monthlyData as $month => $data) {
                 // หากเดือนนั้นไม่มีข้อมูล
                 if (empty($data)) {
@@ -954,48 +1045,86 @@ class DashbordController extends Controller
             }
 
         }else if($currentCategory == 'Self'){
+            // $KgiTeamHistory = KgiEmployeeHistory::find()
+            // ->select(['a.*', 'b.kgiId', 'c.code'])
+            // ->from(['a' => 'kgi_employee_history'])
+            // ->leftJoin(['b' => 'kgi_employee'], 'b.kgiEmployeeId = a.kgiEmployeeId')
+            // ->leftJoin(['c' => 'kgi'], 'c.kgiId = b.kgiId')
+            // ->where(['a.status' => [1, 2, 4], 'a.year' => $currentYear,"b.employeeId" => $employeeId,"c.companyId" => $companyId  ])
+            // ->orderBy(['a.month' => SORT_ASC, 'a.kgiEmployeeId' => SORT_DESC])
+            // ->asArray()
+            // ->all();
+
+            $subQuery = KgiEmployeeHistory::find()
+            ->select('MAX(kgiEmployeeHistoryId)')
+            ->where([
+                'kgiEmployeeId' => new \yii\db\Expression('b.kgiEmployeeId')
+            ])
+            ->andWhere('month = a.month'); // ให้เลือก MAX ตามเดือนของแต่ละ record
 
             $KgiTeamHistory = KgiEmployeeHistory::find()
-            ->select(['a.*', 'b.kgiId', 'c.code'])
-            ->from(['a' => 'kgi_employee_history'])
-            ->leftJoin(['b' => 'kgi_employee'], 'b.kgiEmployeeId = a.kgiEmployeeId')
-            ->leftJoin(['c' => 'kgi'], 'c.kgiId = b.kgiId')
-            ->where(['a.status' => [1, 2, 4], 'a.year' => $currentYear])
-            ->orderBy(['a.month' => SORT_ASC, 'a.kgiEmployeeId' => SORT_DESC])
-            ->asArray()
-            ->all();
+                ->alias('a')
+                ->select([
+                    'a.*', 
+                    'b.kgiId', 
+                    'c.code'
+                ])
+                ->leftJoin(['b' => 'kgi_employee'], 'b.kgiEmployeeId = a.kgiEmployeeId')
+                ->leftJoin(['c' => 'kgi'], 'c.kgiId = b.kgiId')
+                ->where([
+                    'a.status' => [1, 2, 4],
+                    'b.employeeId' => $employeeId,
+                    'a.year' => $currentYear,
+                    'c.companyId' => $companyId ,
+                ])
+                ->andWhere(['a.kgiEmployeeHistoryId' => $subQuery])
+                ->orderBy(['a.kgiEmployeeHistoryId' => SORT_DESC])
+                ->asArray()
+                ->all();
+
+
        
             // ลูปเพื่ออัพเดตข้อมูลในทุกเดือน actionDashbordCompany
             foreach ($KgiTeamHistory as $entry) {
 
                 $month = intval($entry['month']);  // แปลงเป็น int
                 $ratio = 0;
-                
-            // คำนวณค่า ratio
-                if ($entry["target"] != '' && $entry["target"] != 0) {
-                    if ($entry["code"] == '<' || $entry["code"] == '=') {
-                        $ratio = ($entry["result"] / $entry["target"]) * 100;
-                    } else {
-                        if ($entry["result"] != '' && $entry["result"] != 0) {
-                            $ratio = ($entry["target"] / $entry["result"]) * 100;
-                        } else {
-                            $ratio = 0;
+                $found = false;
+                                
+                    foreach ($monthlyData[$month] as $mainId) {
+                        if ($mainId['kgiEmployeeId'] == $entry['kgiEmployeeId']) {
+                                $found = true;
+                                // break;
                         }
                     }
-                } else {
-                    $ratio = 0;
-                }
+                    if (!$found) {   
+                // คำนวณค่า ratio
+                    if ($entry["target"] != '' && $entry["target"] != 0) {
+                        if ($entry["code"] == '<' || $entry["code"] == '=') {
+                            $ratio = ($entry["result"] / $entry["target"]) * 100;
+                        } else {
+                            if ($entry["result"] != '' && $entry["result"] != 0) {
+                                $ratio = ($entry["target"] / $entry["result"]) * 100;
+                            } else {
+                                $ratio = 0;
+                            }
+                        }
+                    } else {
+                        $ratio = 0;
+                    }
 
-            // เก็บข้อมูลตามเดือน
-                $monthlyData[$month][] = [
-                    "kgiId" => $entry["kgiId"],
-                    //"name" => $entry["kgiHistoryName"],
-                    "month" => $entry["month"],
-                    "target" => $entry["target"],
-                    "result" => $entry["result"],
-                    "percentage" => round($ratio, 2)
-                ];
+                // เก็บข้อมูลตามเดือน
+                    $monthlyData[$month][] = [
+                        "kgiEmployeeId" => $entry["kgiEmployeeId"],
+                        //"name" => $entry["kgiHistoryName"],
+                        "month" => $entry["month"],
+                        "target" => $entry["target"],
+                        "result" => $entry["result"],
+                        "percentage" => round($ratio, 2)
+                    ];
+                }
             }
+            // return json_encode($monthlyData);
 
             foreach ($monthlyData as $month => $data) {
                 // หากเดือนนั้นไม่มีข้อมูล
@@ -1133,17 +1262,26 @@ class DashbordController extends Controller
             ->from(['a' => 'kpi_team_history'])
             ->leftJoin(['b' => 'kpi_team'], 'b.kpiTeamId = a.kpiTeamId')
             ->leftJoin(['c' => 'kpi'], 'c.kpiId = b.kpiId')
-            ->where(['a.status' => [1, 2, 4], 'a.year' => $currentYear])
+            ->where(['a.status' => [1, 2, 4], 'a.year' => $currentYear,"b.teamId" => $teamId,"c.companyId" => $companyId  ])
             ->orderBy(['a.month' => SORT_ASC, 'a.kpiTeamHistoryId' => SORT_DESC])
             ->asArray()
             ->all();
+
 
             // ลูปเพื่ออัพเดตข้อมูลในทุกเดือน actionDashbordCompany
             foreach ($KpiTeamHistory as $entry) {
 
                 $month = intval($entry['month']);  // แปลงเป็น int
                 $ratio = 0;
-                    
+                $found = false;
+                                
+                foreach ($monthlyData[$month] as $mainId) {
+                    if ($mainId['kpiTeamId'] == $entry['kpiTeamId']) {
+                            $found = true;
+                            // break;
+                    }
+                }
+                if (!$found) {       
                 // คำนวณค่า ratio
                     if ($entry["target"] != '' && $entry["target"] != 0) {
                         if ($entry["code"] == '<' || $entry["code"] == '=') {
@@ -1161,13 +1299,15 @@ class DashbordController extends Controller
 
                     // เก็บข้อมูลตามเดือน
                     $monthlyData[$month][] = [
-                        "kgiId" => $entry["kpiId"],
+                        "kpiTeamId" => $entry["kpiTeamId"],
                         //    "name" => $entry["kgiHistoryName"],
                         "month" => $entry["month"],
                         "target" => $entry["target"],
                         "result" => $entry["result"],
                         "percentage" => round($ratio, 2)
                     ];
+                }
+                // return json_encode($monthlyData);
             }
 
             foreach ($monthlyData as $month => $data) {
@@ -1194,46 +1334,83 @@ class DashbordController extends Controller
             }
 
         }else if($currentCategory == 'Self'){
+            // $KpiTeamHistory = KpiEmployeeHistory::find()
+            // ->select(['a.*', 'b.kpiId', 'c.code'])
+            // ->from(['a' => 'kpi_employee_history'])
+            // ->leftJoin(['b' => 'kpi_employee'], 'b.kpiEmployeeId = a.kpiEmployeeId')
+            // ->leftJoin(['c' => 'kpi'], 'c.kpiId = b.kpiId')
+            // ->where(['a.status' => [1, 2, 4], 'a.year' => $currentYear, "b.employeeId" => $employeeId,"c.companyId" => $companyId])
+            // ->orderBy(['a.month' => SORT_ASC, 'a.kpiEmployeeId' => SORT_DESC])
+            // ->asArray()
+            // ->all();
+
+            $subQuery = KpiEmployeeHistory::find()
+            ->select('MAX(kpiEmployeeHistoryId)')
+            ->where([
+                'kpiEmployeeId' => new \yii\db\Expression('b.kpiEmployeeId')
+            ])
+            ->andWhere('month = a.month'); // ให้เลือก MAX ตามเดือนของแต่ละ record
+
             $KpiTeamHistory = KpiEmployeeHistory::find()
-            ->select(['a.*', 'b.kpiId', 'c.code'])
-            ->from(['a' => 'kpi_employee_history'])
-            ->leftJoin(['b' => 'kpi_employee'], 'b.kpiEmployeeId = a.kpiEmployeeId')
-            ->leftJoin(['c' => 'kpi'], 'c.kpiId = b.kpiId')
-            ->where(['a.status' => [1, 2, 4], 'a.year' => $currentYear])
-            ->orderBy(['a.month' => SORT_ASC, 'a.kpiEmployeeId' => SORT_DESC])
-            ->asArray()
-            ->all();
+                ->alias('a')
+                ->select([
+                    'a.*', 
+                    'b.kpiId', 
+                    'c.code'
+                ])
+                ->leftJoin(['b' => 'kpi_employee'], 'b.kpiEmployeeId = a.kpiEmployeeId')
+                ->leftJoin(['c' => 'kpi'], 'c.kpiId = b.kpiId')
+                ->where([
+                    'a.status' => [1, 2, 4],
+                    'b.employeeId' => $employeeId,
+                    'a.year' => $currentYear,
+                    'c.companyId' => $companyId ,
+                ])
+                ->andWhere(['a.kpiEmployeeHistoryId' => $subQuery])
+                ->orderBy(['a.kpiEmployeeHistoryId' => SORT_DESC])
+                ->asArray()
+                ->all();
 
             // ลูปเพื่ออัพเดตข้อมูลในทุกเดือน actionDashbordCompany
             foreach ($KpiTeamHistory as $entry) {
 
                 $month = intval($entry['month']);  // แปลงเป็น int
                 $ratio = 0;
-                
-            // คำนวณค่า ratio
-                if ($entry["target"] != '' && $entry["target"] != 0) {
-                    if ($entry["code"] == '<' || $entry["code"] == '=') {
-                        $ratio = ($entry["result"] / $entry["target"]) * 100;
-                    } else {
-                        if ($entry["result"] != '' && $entry["result"] != 0) {
-                            $ratio = ($entry["target"] / $entry["result"]) * 100;
+                $found = false;
+                                
+                    foreach ($monthlyData[$month] as $mainId) {
+                        if ($mainId['kpiEmployeeId'] == $entry['kpiEmployeeId']) {
+                                $found = true;
+                                // break;
+                        }
+                    }
+                    if (!$found) {   
+                    // คำนวณค่า ratio
+                        if ($entry["target"] != '' && $entry["target"] != 0) {
+                            if ($entry["code"] == '<' || $entry["code"] == '=') {
+                                $ratio = ($entry["result"] / $entry["target"]) * 100;
+                            } else {
+                                if ($entry["result"] != '' && $entry["result"] != 0) {
+                                    $ratio = ($entry["target"] / $entry["result"]) * 100;
+                                } else {
+                                    $ratio = 0;
+                                }
+                            }
                         } else {
                             $ratio = 0;
                         }
-                    }
-                } else {
-                    $ratio = 0;
-                }
 
-            // เก็บข้อมูลตามเดือน
-                $monthlyData[$month][] = [
-                    "kpiId" => $entry["kpiId"],
-                    //"name" => $entry["kgiHistoryName"],
-                    "month" => $entry["month"],
-                    "target" => $entry["target"],
-                    "result" => $entry["result"],
-                    "percentage" => round($ratio, 2)
-                ];
+                    // เก็บข้อมูลตามเดือน
+                        $monthlyData[$month][] = [
+                            "kpiEmployeeId" => $entry["kpiEmployeeId"],
+                            //"name" => $entry["kgiHistoryName"],
+                            "month" => $entry["month"],
+                            "target" => $entry["target"],
+                            "result" => $entry["result"],
+                            "percentage" => round($ratio, 2)
+                        ];
+                    }
+
             }
 
             foreach ($monthlyData as $month => $data) {
