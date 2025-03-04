@@ -145,7 +145,7 @@ class KgiTeamController extends Controller
 	public function actionKgiTeamHistory($kgiId, $teamId)
 	{
 		$kgiTeamHistory = KgiTeamHistory::find()
-			->select('kgi_team_history.*,e.employeeFirstname,e.employeeSurename,kt.remark')
+			->select('kgi_team_history.*,e.employeeFirstname,e.employeeSurename,kt.remark,kt.updateDateTime')
 			->JOIN("LEFT JOIN", "kgi_team kt", "kt.kgiTeamId=kgi_team_history.kgiTeamId")
 			->JOIN("LEFT JOIN", "user u", "u.userId=kgi_team_history.createrId")
 			->JOIN("LEFT JOIN", "employee e", "e.employeeId=u.employeeId")
@@ -178,7 +178,7 @@ class KgiTeamController extends Controller
 		if ($role <= 3) {
 			$kgiTeams = KgiTeam::find()
 				->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,
-			kgi_team.teamId,kgi_team.target')
+			kgi_team.teamId,kgi_team.target,kgi_team.updateDateTime')
 				->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_team.kgiId")
 				->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
 				->where(["kgi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
@@ -189,7 +189,7 @@ class KgiTeamController extends Controller
 		} else {
 			$kgiTeams = KgiTeam::find()
 				->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,
-			kgi_team.teamId,kgi_team.target')
+			kgi_team.teamId,kgi_team.target,kgi_team.updateDateTime')
 				->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_team.kgiId")
 				->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
 				->where(["kgi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
@@ -279,6 +279,7 @@ class KgiTeamController extends Controller
 					"solution" => KgiIssue::lastestIssue($kgiTeam["kgiId"])["solution"],
 					"countTeamEmployee" => $countTeamEmployee,
 					"kgiEmployeeSelect" => $selectPic,
+					"lastestUpdate" => ModelMaster::engDate($kgiTeam["updateDateTime"], 2),
 				];
 			endforeach;
 		}
