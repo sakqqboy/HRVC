@@ -68,7 +68,7 @@ class KpiPersonalController extends Controller
 		$employeeId = Employee::employeeId($userId);
 		if ($role <= 3) {
 			$kpiEmployee = KpiEmployee::find()
-				->select('k.kpiName,k.priority,k.quantRatio,k.amountType,k.code,kpi_employee.target,kpi_employee.result,
+				->select('k.kpiName,k.priority,k.quantRatio,k.amountType,k.code,kpi_employee.target,kpi_employee.result,kpi_employee.updateDateTime
 			kpi_employee.status,kpi_employee.employeeId,k.unitId,kpi_employee.month,kpi_employee.year,k.kpiId,k.companyId,e.teamId,e.picture,
 			kpi_employee.kpiEmployeeId,e.employeeFirstname,e.employeeSurename')
 				->JOIN("LEFT JOIN", "kpi k", "kpi_employee.kpiId=k.kpiId")
@@ -79,7 +79,7 @@ class KpiPersonalController extends Controller
 				->all();
 		} else {
 			$kpiEmployee = KpiEmployee::find()
-				->select('k.kpiName,k.priority,k.quantRatio,k.amountType,k.code,kpi_employee.target,kpi_employee.result,
+				->select('k.kpiName,k.priority,k.quantRatio,k.amountType,k.code,kpi_employee.target,kpi_employee.result,kpi_employee.updateDateTime
 			kpi_employee.status,kpi_employee.employeeId,k.unitId,kpi_employee.month,kpi_employee.year,k.kpiId,k.companyId,e.teamId,e.picture,
 			kpi_employee.kpiEmployeeId,e.employeeFirstname,e.employeeSurename')
 				->JOIN("LEFT JOIN", "kpi k", "kpi_employee.kpiId=k.kpiId")
@@ -174,6 +174,7 @@ class KpiPersonalController extends Controller
 					"canEdit" => 1,
 					"teamMate" =>  $selectPic,
 					"countTeamEmployee" => $countTeamEmployee,
+					"lastestUpdate" => ModelMaster::engDate($kpi["updateDateTime"], 2)
 				];
 			endforeach;
 		}
