@@ -361,27 +361,90 @@ class DashbordController extends Controller
         $employeeId = Employee::employeeId($userId);
 		$employee = Employee::EmployeeDetail($employeeId);
         
-			    $kgiTeams = KgiTeam::find()
-				->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,
-			kgi_team.teamId,kgi_team.target,kgi_team.month,kgi_team.year')
-				->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_team.kgiId")
-				->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
-				->where(["kgi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4],"kgi_team.month" => $mount, "kgi_team.year" => $year])
-				->andFilterWhere(["kgi_team.teamId" => $teamId])
-				->orderBy("k.createDateTime DESC,t.teamName ASC")
-				->asArray()
-				->all();
+			//     $kgiTeams = KgiTeam::find()
+			// 	->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,
+			// kgi_team.teamId,kgi_team.target,kgi_team.month,kgi_team.year')
+			// 	->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_team.kgiId")
+			// 	->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
+			// 	->where(["kgi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4],"kgi_team.month" => $mount, "kgi_team.year" => $year])
+			// 	->andFilterWhere(["kgi_team.teamId" => $teamId])
+			// 	->orderBy("k.createDateTime DESC,t.teamName ASC")
+			// 	->asArray()
+			// 	->all();
 
-				$kpiTeams = KpiTeam::find()
-				->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,
-			kpi_team.teamId,kpi_team.target,kpi_team.month,kpi_team.year')
-				->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_team.kpiId")
-				->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
-				->where(["kpi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4], "kpi_team.month" => $mount, "kpi_team.year" => $year])
-				->andFilterWhere(["kpi_team.teamId" => $teamId])
-				->orderBy("k.createDateTime DESC,t.teamName ASC")
-				->asArray()
-				->all();
+			// 	$kpiTeams = KpiTeam::find()
+			// 	->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,
+			// kpi_team.teamId,kpi_team.target,kpi_team.month,kpi_team.year')
+			// 	->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_team.kpiId")
+			// 	->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
+			// 	->where(["kpi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4], "kpi_team.month" => $mount, "kpi_team.year" => $year])
+			// 	->andFilterWhere(["kpi_team.teamId" => $teamId])
+			// 	->orderBy("k.createDateTime DESC,t.teamName ASC")
+			// 	->asArray()
+			// 	->all();
+
+            $kgiTeams = KgiTeamHistory::find()
+            ->select([
+                'a.kgiId', 'a.target', 'a.result', 'a.status', 'a.teamId', 'a.kgiTeamId',
+                'kgi_team_history.kgiTeamHistoryId', 'kgi_team_history.month', 'kgi_team_history.year',
+                'k.kgiName', 'k.unitId', 'k.quantRatio', 'k.priority', 
+                'k.amountType', 'k.code', 'k.companyId'
+            ])
+            ->leftJoin('kgi_team a', 'a.kgiTeamId = kgi_team_history.kgiTeamId')
+            ->leftJoin('kgi k', 'a.kgiId = k.kgiId')
+            ->leftJoin('team t', 't.teamId = a.teamId')
+            ->where([
+                'a.status' => [1, 2, 4],
+                'k.status' => [1, 2, 4],
+                'a.teamId' => $teamId,
+                'kgi_team_history.month' => $mount,
+                'kgi_team_history.year' => $year,
+            ])
+            ->andWhere([
+                'kgi_team_history.kgiTeamHistoryId' => new \yii\db\Expression(
+                    "(SELECT MAX(kgiTeamHistoryId) 
+                      FROM kgi_team_history 
+                      WHERE kgiTeamId = a.kgiTeamId 
+                      AND month = :month)"
+                )
+            ])
+            ->addParams([':month' => $mount])
+            ->orderBy(['kgi_team_history.kgiTeamHistoryId' => SORT_DESC])
+            ->asArray()
+            ->all();
+        
+
+            $kpiTeams = KpiTeamHistory::find()
+            ->select([
+                'a.kpiId', 'a.target', 'a.result', 'a.status', 'a.teamId', 'a.kpiTeamId',
+                'kpi_team_history.kpiTeamHistoryId', 'kpi_team_history.month', 'kpi_team_history.year',
+                'k.kpiName', 'k.unitId', 'k.quantRatio', 'k.priority', 
+                'k.amountType', 'k.code', 'k.companyId'
+            ])
+            ->leftJoin('kpi_team a', 'a.kpiTeamId = kpi_team_history.kpiTeamId')
+            ->leftJoin('kpi k', 'a.kpiId = k.kpiId')
+            ->leftJoin('team t', 't.teamId = a.teamId')
+            ->where([
+                'a.status' => [1, 2, 4],
+                'k.status' => [1, 2, 4],
+                'a.teamId' => $teamId,
+                'kpi_team_history.month' => $mount,
+                'kpi_team_history.year' => $year,
+            ])
+            ->andWhere([
+                'kpi_team_history.kpiTeamHistoryId' => new \yii\db\Expression(
+                    "(SELECT MAX(kpiTeamHistoryId) 
+                    FROM kpi_team_history 
+                    WHERE kpiTeamId = a.kpiTeamId 
+                    AND month = :month)"
+                )
+            ])
+            ->addParams([':month' => $mount])
+            ->orderBy(['kpi_team_history.kpiTeamHistoryId' => SORT_DESC])
+            ->asArray()
+            ->all();
+
+
     
         // นับจำนวนของแต่ละคิวรี้
         $kgiTeamCount = count($kgiTeams);
