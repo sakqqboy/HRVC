@@ -664,7 +664,7 @@ class ModelMaster extends \yii\db\ActiveRecord
                 $nextYear = $year;
             }
         }
-        if ($unitName == "Quarterly") {
+        if ($unitName == "Quaterly") {
             $nextMonth = (int)$month + 3;
             if ($nextMonth > 12) {
                 $nextYear = $year + 1;

@@ -137,6 +137,7 @@ class ManagementController extends Controller
 					"toDate" => ModelMaster::engDate($kpi["toDate"], 2),
 					"countKgiInKpi" => KgiHasKpi::countKgiWithKpi($kpi['kpiId']),
 					"amountType" => $kpi["amountType"],
+					"lastestUpdate" => ModelMaster::engDate($kpi["updateDateTime"], 2)
 				];
 			endforeach;
 		}
@@ -707,7 +708,8 @@ class ManagementController extends Controller
 						"toDate" => ModelMaster::engDate($kpiHistory["toDate"], 2),
 						"year" => $kpiHistory["year"],
 						"countKgiInKpi" => KgiHasKpi::countKgiWithKpi($kpi['kpiId']),
-						"amountType" => $kpi["amountType"]
+						"amountType" => $kpi["amountType"],
+						"lastestUpdate" => ModelMaster::engDate($kpi["updateDateTime"], 2)
 					];
 				} else {
 					$ratio = 0;
@@ -751,7 +753,8 @@ class ManagementController extends Controller
 						"toDate" => ModelMaster::engDate($kpi["toDate"], 2),
 						"year" => $kpi["year"],
 						"countKgiInKpi" => KgiHasKpi::countKgiWithKpi($kpi['kpiId']),
-						"amountType" => $kpi["amountType"]
+						"amountType" => $kpi["amountType"],
+						"lastestUpdate" => ModelMaster::engDate($kpi["updateDateTime"], 2)
 					];
 				}
 			endforeach;

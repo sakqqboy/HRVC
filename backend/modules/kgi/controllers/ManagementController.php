@@ -139,7 +139,8 @@ class ManagementController extends Controller
 					"isOver" => ModelMaster::isOverDuedate(Kgi::nextCheckDate($kgi['kgiId'])),
 					"countKgiHasKfi" => KfiHasKgi::countKfiWithKgi($kgi['kgiId']),
 					"countKgiHasKpi" => KgiHasKpi::countKgiHasKpi($kgi['kgiId']),
-					"amountType" => $kgi["amountType"]
+					"amountType" => $kgi["amountType"],
+					"lastestUpdate" => ModelMaster::engDate($kgi["updateDateTime"], 2)
 				];
 			endforeach;
 		}
@@ -585,7 +586,8 @@ class ManagementController extends Controller
 						"isOver" => ModelMaster::isOverDuedate(Kgi::nextCheckDate($kgi['kgiId'])),
 						"countKgiHasKfi" => KfiHasKgi::countKfiWithKgi($kgi['kgiId']),
 						"countKgiHasKpi" => KgiHasKpi::countKgiHasKpi($kgi['kgiId']),
-						"amountType" => $kgi["amountType"]
+						"amountType" => $kgi["amountType"],
+						"lastestUpdate" => ModelMaster::engDate($kgi["updateDateTime"], 2)
 					];
 				} else {
 					$ratio = 0;
@@ -634,7 +636,8 @@ class ManagementController extends Controller
 						"isOver" => ModelMaster::isOverDuedate(Kgi::nextCheckDate($kgi['kgiId'])),
 						"countKgiHasKfi" => KfiHasKgi::countKfiWithKgi($kgi['kgiId']),
 						"countKgiHasKpi" => KgiHasKpi::countKgiHasKpi($kgi['kgiId']),
-						"amountType" => $kgi["amountType"]
+						"amountType" => $kgi["amountType"],
+						"lastestUpdate" => ModelMaster::engDate($kgi["updateDateTime"], 2)
 					];
 				}
 			endforeach;
