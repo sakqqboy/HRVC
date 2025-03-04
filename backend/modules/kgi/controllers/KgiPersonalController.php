@@ -314,7 +314,7 @@ class KgiPersonalController extends Controller
 	{
 		$employeeId = Employee::employeeId2($userId);
 		$kgiEmployees = KgiEmployee::find()
-			->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_employee.kgiEmployeeId,k.companyId,
+			->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_employee.kgiEmployeeId,k.companyId,kgi_employee.updateDateTime,
 			kgi_employee.employeeId,kgi_employee.target,kgi_employee.month,e.employeeFirstname,e.employeeSurename,e.teamId,e.picture')
 			->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_employee.kgiId")
 			->JOIN("LEFT JOIN", "kgi_branch kb", "kb.kgiId=k.kgiId")
@@ -437,6 +437,7 @@ class KgiPersonalController extends Controller
 					"teamMate" =>  $selectPic,
 					"teamName" => Team::teamName($teamId),
 					"countTeamEmployee" => $countTeamEmployee,
+					"lastestUpdate" => ModelMaster::engDate($kgiEmployee["updateDateTime"], 2),
 				];
 			endforeach;
 		}

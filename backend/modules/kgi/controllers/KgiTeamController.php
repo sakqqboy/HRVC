@@ -400,7 +400,7 @@ class KgiTeamController extends Controller
 	public function actionKgiTeamFilter($companyId, $branchId, $teamId, $month, $status, $year)
 	{
 		$kgiTeams = KgiTeam::find()
-			->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,
+			->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,kgi_team.updateDateTime,
 			kgi_team.teamId,kgi_team.target')
 			->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_team.kgiId")
 			->JOIN("LEFT JOIN", "kgi_branch kb", "kb.kgiId=k.kgiId")
@@ -516,6 +516,7 @@ class KgiTeamController extends Controller
 					"solution" => KgiIssue::lastestIssue($kgiTeam["kgiId"])["solution"],
 					"countTeamEmployee" => $countTeamEmployee,
 					"kgiEmployeeSelect" => $selectPic,
+					"lastestUpdate" => ModelMaster::engDate($kgiTeam["updateDateTime"], 2),
 				];
 			endforeach;
 		}
