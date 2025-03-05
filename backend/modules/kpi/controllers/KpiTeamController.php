@@ -595,7 +595,7 @@ class KpiTeamController extends Controller
 	public function actionKpiTeamFilter($companyId, $branchId, $teamId, $month, $status, $year)
 	{
 		$kpiTeams = KpiTeam::find()
-			->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,
+			->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,kpi_team.updateDateTime,
 			kpi_team.teamId,kpi_team.target')
 			->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_team.kpiId")
 			->JOIN("LEFT JOIN", "kpi_branch kb", "kb.kpiId=k.kpiId")
@@ -710,6 +710,7 @@ class KpiTeamController extends Controller
 					"solution" => KpiIssue::lastestIssue($kpiTeam["kpiId"])["solution"],
 					"countTeamEmployee" => $countTeamEmployee,
 					"kpiEmployeeSelect" => $selectPic,
+					"lastestUpdate" => ModelMaster::engDate($kpiTeam["updateDateTime"], 2)
 				];
 			endforeach;
 		}

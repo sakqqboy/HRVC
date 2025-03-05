@@ -420,7 +420,7 @@ class KpiPersonalController extends Controller
 	{
 		$employeeId = Employee::employeeId2($userId);
 		$kpiEmployees = KpiEmployee::find()
-			->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_employee.kpiEmployeeId,k.companyId,
+			->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_employee.kpiEmployeeId,k.companyId,kpi_employee.updateDateTime,
 			kpi_employee.employeeId,kpi_employee.target,kpi_employee.month,e.employeeFirstname,e.employeeSurename,e.teamId,e.picture')
 			->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_employee.kpiId")
 			->JOIN("LEFT JOIN", "kpi_branch kb", "kb.kpiId=k.kpiId")
@@ -543,6 +543,7 @@ class KpiPersonalController extends Controller
 					"teamMate" =>  $selectPic,
 					"countTeamEmployee" => $countTeamEmployee,
 					"canEdit" => 1,
+					"lastestUpdate" => ModelMaster::engDate($kpiEmployee["updateDateTime"], 2)
 				];
 			endforeach;
 		}
