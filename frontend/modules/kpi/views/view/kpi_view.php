@@ -19,7 +19,7 @@ $this->title = 'Company KPI History';
             <div class="col-12">
                 <div class="row">
                     <div class="col-6 font-size-12 pim-name pr-0 pl-5 text-start">
-                        <a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="mr-5 font-size-12">
+                        <a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="mr-5 pim-text-back">
                             <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
                             <?= Yii::t('app', 'Back') ?>
                         </a>

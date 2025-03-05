@@ -44,9 +44,12 @@ $this->title = 'KPI Grid View';
             <div class="col-5">
                 <div class="row">
                     <div class="col-10 font-size-12 pim-name pr-0 pl-5 text-start">
-                        <a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="mr-5 font-size-12">
-                            <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
-                            <?= Yii::t('app', 'Back') ?>
+                        <a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="mr-5 font-size-12"
+                            style="text-decoration: none;">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back.svg">
+                            <text class="pim-text-back">
+                                <?= Yii::t('app', 'Back') ?>
+                            </text>
                         </a>
                         <span class="">
                             <?= $kpiDetail["kpiName"] ?>

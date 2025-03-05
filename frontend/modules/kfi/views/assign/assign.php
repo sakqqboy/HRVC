@@ -31,6 +31,7 @@ $this->title = 'Assign KFI';
             <div class="font-size-12 pim-name pr-0 pl-5 text-start">
                 <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="mr-10 font-size-12"
                     style="text-decoration: none;">
+                    <!-- <i class="fa fa-caret-left mr-3" aria-hidden="true"></i> -->
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back.svg">
                     <text class="pim-text-back">
                         <?= Yii::t('app', 'Back') ?>

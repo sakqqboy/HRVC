@@ -21,7 +21,7 @@ $this->title = 'Self KPI History';
                 <div class="row">
                     <div class="col-6 font-size-12 pim-name pr-0 pl-5 text-start">
                         <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi-grid"
-                            class="mr-5 font-size-12">
+                            class="mr-5 pim-text-back">
                             <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
                             <?= Yii::t('app', 'Back') ?>
                         </a>
@@ -56,7 +56,7 @@ $this->title = 'Self KPI History';
                             }
                 ?>
                 <div class="col-lg-4 col-md-6 col-12 ">
-                    <div class="col-12 mt-10 mb-5 pim-big-box pim-<?= $colorFormat ?> pt-3 pl-15">
+                    <div class="col-12 mt-10 mb-5 pim-big-box pim-<?= $colorFormat ?>">
                         <div class="row">
                             <div class="col-5 pim-name"><?= $kpi["month"] ?> <?= $kpi["year"] ?></div>
                             <div class="col-7 text-end">

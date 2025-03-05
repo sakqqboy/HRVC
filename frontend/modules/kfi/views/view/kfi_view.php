@@ -21,7 +21,7 @@ $this->title = 'Company KFI History';
                 <div class="row">
                     <div class="col-6 font-size-12 pim-name pr-0 pl-5 text-start">
                         <a href="<?= Yii::$app->request->referrer ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kfi/management/grid' ?>"
-                            class="mr-5 font-size-12">
+                            class="mr-5 pim-text-back">
                             <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
                             <?= Yii::t('app', 'Back') ?>
                         </a>
