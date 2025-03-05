@@ -55,7 +55,7 @@ $this->title = 'Company KGI History';
                             }
                 ?>
                 <div class="col-lg-4 col-md-6 col-12 ">
-                    <div class="col-12 mt-10 mb-5 pim-big-box pim-<?= $colorFormat ?> pt-3 pl-15">
+                    <div class="col-12 mt-10 mb-5 pim-big-box pim-<?= $colorFormat ?>">
                         <div class="row">
                             <div class="col-5 pim-name"><?= $kgi["month"] ?>
                                 <?= $kgi["year"] ?><?= $kgi['kgiHistoryId'] ?></div>
@@ -96,7 +96,7 @@ $this->title = 'Company KGI History';
                                 <a class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;"
                                     onclick="javascript:prepareKgiNextTarget(<?= $kgi['kgiHistoryId'] ?>)">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/coppy.svg" alt="History"
-                                        style="margin-top: -3px; width: 12px; height: 14px;" class="home-icon">
+                                        style="margin-top: -3px;" class="pim-icon">
                                 </a>
                                 <?php
                                             }
