@@ -43,6 +43,7 @@ class AssignController extends Controller
 		$kfiId = $param["kfiId"];
 		//throw new Exception($kfiId);
 		$companyId = $param["companyId"];
+		$url = $param["url"] ?? Yii::$app->request->referrer;
 		$role = UserRole::userRight();
 		if ($role < 3) {
 			return $this->redirect(Yii::$app->homeUrl . 'kfi/management/index');
@@ -81,7 +82,8 @@ class AssignController extends Controller
 			"teams" => $teams,
 			"text" => $text,
 			"kfiTeamEmployee" => $kfiTeamEmployee,
-			"companyId" => $companyId
+			"companyId" => $companyId,
+			"url" => $url
 		]);
 	}
 }

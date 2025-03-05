@@ -1552,7 +1552,7 @@ class ManagementController extends Controller
 				endforeach;
 			}
 		}
-		return $this->redirect(Yii::$app->homeUrl . 'kfi/assign/assign/' . ModelMaster::encodeParams(['kfiId' => $_POST["kfiId"], "companyId" => $_POST["companyId"]]));
+		return $this->redirect(Yii::$app->homeUrl . 'kfi/assign/assign/' . ModelMaster::encodeParams(['kfiId' => $_POST["kfiId"], "companyId" => $_POST["companyId"], "url" => $_POST["url"]]));
 	}
 	public function actionNextKfiHistory()
 	{

@@ -51,13 +51,13 @@ $this->title = 'KGI Grid View';
             <div class="col-5">
                 <div class="row">
                     <div class="col-10 font-size-12 pim-name pr-0 pl-5 text-start">
-                        <a href="<?= Yii::$app->request->referrer ?>" class="mr-5 font-size-12"
-                            style="text-decoration: none;">
+                        <a href="<?= $url ?>" class="mr-5 font-size-12" style="text-decoration: none;">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back.svg">
                             <text class="pim-text-back">
                                 <?= Yii::t('app', 'Back') ?>
                             </text>
                         </a>
+                        <input type="hidden" id="url" name="url" value="<?= Yii::$app->request->referrer ?>">
                         <span class="">
                             <?= $kgiDetail["kgiName"] ?>
                         </span>

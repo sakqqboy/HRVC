@@ -29,14 +29,14 @@ $this->title = 'Assign KFI';
     <div class="alert mt-10 pim-body bg-white">
         <div class="row">
             <div class="font-size-12 pim-name pr-0 pl-5 text-start">
-                <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="mr-10 font-size-12"
-                    style="text-decoration: none;">
+                <a href="<?= $url ?>" class="mr-10 font-size-12" style="text-decoration: none;">
                     <!-- <i class="fa fa-caret-left mr-3" aria-hidden="true"></i> -->
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back.svg">
                     <text class="pim-text-back">
                         <?= Yii::t('app', 'Back') ?>
                     </text>
                 </a>
+                <input type="hidden" id="url" name="url" value="<?= Yii::$app->request->referrer ?>">
                 <span class="pim-name-title">
                     <?= $kfiDetail["kfiName"] ?>
                 </span>

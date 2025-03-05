@@ -65,6 +65,7 @@ class AssignController extends Controller
 		$companyId = $param["companyId"];
 		$role = UserRole::userRight();
 		$teamId = Team::userTeam(Yii::$app->user->id);
+		$url = $param["url"] ?? Yii::$app->request->referrer;
 		if ($role < 3) {
 			return $this->redirect(Yii::$app->homeUrl . 'kpi/management/index');
 		}
@@ -123,7 +124,8 @@ class AssignController extends Controller
 			"text" => $text,
 			"kpiTeamEmployee" => $kpiTeamEmployee,
 			"companyId" => $companyId,
-			"userTeamId" => $teamId
+			"userTeamId" => $teamId,
+			"url" => $url
 		]);
 	}
 	public function actionEmployeeInTeamTarget()
@@ -260,7 +262,7 @@ class AssignController extends Controller
 				endforeach;
 			}
 		}
-		return $this->redirect(Yii::$app->homeUrl . 'kpi/assign/assign/' . ModelMaster::encodeParams(['kpiId' => $_POST["kpiId"], "companyId" => $_POST["companyId"]]));
+		return $this->redirect(Yii::$app->homeUrl . 'kpi/assign/assign/' . ModelMaster::encodeParams(['kpiId' => $_POST["kpiId"], "companyId" => $_POST["companyId"],"url" => $_POST["url"]]));
 	}
 	public function actionDeleteZero()
 	{

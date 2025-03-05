@@ -65,6 +65,7 @@ class AssignController extends Controller
 		$kgiId = $param["kgiId"];
 		$companyId = $param["companyId"];
 		$teamId = Team::userTeam(Yii::$app->user->id);
+		$url = $param["url"] ?? Yii::$app->request->referrer;
 		//$save = $param["save"];
 		$role = UserRole::userRight();
 		if ($role < 3) {
@@ -126,7 +127,8 @@ class AssignController extends Controller
 			"text" => $text,
 			"kgiTeamEmployee" => $kgiTeamEmployee,
 			"companyId" => $companyId,
-			"userTeamId" => $teamId
+			"userTeamId" => $teamId,
+			"url" => $url
 		]);
 	}
 	public function actionEmployeeInTeamTarget()
@@ -276,6 +278,7 @@ class AssignController extends Controller
 		return $this->redirect(Yii::$app->homeUrl . 'kgi/assign/assign/' . ModelMaster::encodeParams([
 			'kgiId' => $_POST["kgiId"],
 			"companyId" => $_POST["companyId"],
+			"url" => $_POST["url"]
 		]));
 	}
 }
