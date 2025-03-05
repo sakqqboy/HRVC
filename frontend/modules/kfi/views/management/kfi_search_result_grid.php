@@ -345,7 +345,7 @@ $this->title = 'KFI Grid View';
                                     <div class="col-5 pl-5 pr-11 mt-10">
                                         <div class="col-12 text-end "><?= Yii::t('app', 'Last Updated on') ?></div>
                                         <div class="col-12 text-end pim-duedate">
-                                            <?= $kfi['nextCheck'] == "" ? 'Not set' : $kfi['nextCheck'] ?></div>
+                                            <?= $kfi['lastestUpdate'] == "" ? 'Not set' : $kfi['lastestUpdate'] ?></div>
                                     </div>
                                     <div class="col-2 text-center mt-10 pt-6">
                                         <?php

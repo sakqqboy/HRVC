@@ -163,7 +163,8 @@ class ManagementController extends Controller
 						"countKfiHasKgi" => KfiHasKgi::countKgiInkfi($kfi["kfiId"]),
 						"kfiEmployee" => $selectPic,
 						"countEmployee" => count($allEmployee),
-						"aa" => $kfiHistory['kfiHistoryId']
+						"aa" => $kfiHistory['kfiHistoryId'],
+						"lastestUpdate" => ModelMaster::engDate($kfi["updateDateTime"], 2)
 					];
 				}
 
@@ -609,6 +610,7 @@ class ManagementController extends Controller
 						"countKfiHasKgi" => KfiHasKgi::countKgiInkfi($kfi["kfiId"]),
 						"kfiEmployee" => $selectPic,
 						"countEmployee" => count($allEmployee),
+						"lastestUpdate" => ModelMaster::engDate($kfi["updateDateTime"], 2)
 					];
 				}
 
