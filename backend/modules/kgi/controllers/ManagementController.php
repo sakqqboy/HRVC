@@ -155,6 +155,7 @@ class ManagementController extends Controller
 				->one();
 		} else {
 			$kgiHistory = KgiHistory::find()->where(["kgiHistoryId" => $kgiHistoryId])
+				->orderBy('kgiHistoryId DESC')
 				->asArray()
 				->one();
 		}
