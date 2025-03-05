@@ -201,7 +201,8 @@ thead {
 	padding: 5px;
 	padding-top: 20px;
 	padding-bottom: 8px;
-	height: 196px;
+	/* height: 364px; */
+	/* height: 364px; */
 }
 
 .priority-box {
@@ -360,6 +361,15 @@ thead {
 	padding-left: 20px;
 	margin-top: -5px;
 	color: #3C3D48;
+}
+
+.pim-name-history {
+	color: #434343;
+	/* font-family: "SF Pro"; */
+	font-size: 24px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 32.786px;
 }
 
 .inprogress-tag {
