@@ -1239,7 +1239,6 @@ thead {
 }
 
 .pim-pic-gridKFINum {
-	background: #ffffff;
 	/* font-family: "SF Pro Display";
 	font-size: 14px !important;
 	font-style: normal;
@@ -1248,6 +1247,10 @@ thead {
 	position: relative;
 	color: #000000;
 	margin-top: 3px; */
+	background: #ffffff;
+	font-weight: 500;
+	position: relative;
+	text-align: center;
 	width: 44px;
 	height: 44px;
 	border-radius: 22px;

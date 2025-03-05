@@ -101,7 +101,7 @@ $this->title = 'Company KFI History';
                                 <a class="btn btn-bg-white-xs pr-2 pl-3 mr-5"
                                     onclick="javascript:prepareKfiNextTarget(<?= $kfi['kfiHistoryId'] ?>)">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/coppy.svg" alt="History"
-                                        style="margin-top: -3px; width: 12px; height: 14px;" class="home-icon">
+                                        style="margin-top: -3px;" class="pim-icon">
                                 </a>
                                 <?php
                                             }
@@ -149,8 +149,8 @@ $this->title = 'Company KFI History';
                                                                 }
                                                                 ?>
                                                 </div>
-                                                <div
-                                                    class="col-6  number-tag load-<?= $colorFormat ?> pr-0 pl-0 ml-7 pim-pic-gridKFINum ">
+                                                <div class="col-6  number-tag load-<?= $colorFormat ?> ml-7 pim-pic-gridKFINum "
+                                                    style="padding-top: 8px;">
                                                     <?= $kfi["employee"] ?>
                                                 </div>
 
@@ -160,9 +160,9 @@ $this->title = 'Company KFI History';
                                             <?php
                                                         if ($role >= 5) {
                                                         ?>
-                                            <span class="pull-left mt-1 pl-2  pr-4">
+                                            <span class="pull-left mt-1 pl-5">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $colorFormat ?>.svg"
-                                                    class="home-icon" style="margin-top: -3px;">
+                                                    style="margin-top: -3px;">
                                             </span>
                                             <a href="<?= Yii::$app->homeUrl ?>kfi/assign/assign/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, "companyId" => $kfi['companyId']]) ?>"
                                                 class="font-<?= $colorFormat ?>">
