@@ -49,24 +49,24 @@ $this->title = "TEAM KPI";
                             if ($role > 3) {
                             ?>
                             <div
-                                class="col-12 <?= $waitForApprove["totalRequest"] > 0 ? 'approval-box' : 'noapproval-box' ?> text-center pr-3">
+                                class="<?= $waitForApprove["totalRequest"] > 0 ? 'approval-box' : 'noapproval-box' ?> text-center">
                                 <?php
                                     if ($waitForApprove["totalRequest"] > 0) {
                                     ?>
                                 <a href="<?= Yii::$app->homeUrl ?>kpi/management/wait-approve"
                                     style="text-decoration: none;color:#000000;">
-                                    <span class="approvals-num mr-2"><?= $waitForApprove["totalRequest"] ?></span>
+                                    <span class="approvals-num"><?= $waitForApprove["totalRequest"] ?></span>
                                     <?= Yii::t('app', 'Approvals') ?>
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approvals.svg"
-                                        class="first-layer-icon pull-right" style="margin-top:-2px;">
+                                        class="first-layer-icon" style="margin-top:-2px;">
                                 </a>
                                 <?php
                                     } else { ?>
                                 <a style="text-decoration: none;color:#2D7F06;">
-                                    <span class="noapprovals-num mr-2"><?= $waitForApprove["totalRequest"] ?></span>
+                                    <span class="noapprovals-num"><?= $waitForApprove["totalRequest"] ?></span>
                                     <?= Yii::t('app', 'No Approvals') ?>
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/check.svg"
-                                        class="first-layer-icon pull-right" style="margin-top:-2px;">
+                                        class="first-layer-icon" style="margin-top:-2px;">
                                 </a>
                                 <?php
                                     }
