@@ -502,7 +502,7 @@ $this->title = "TEAM KPI";
                                                         $show = 0.00;
                                                     }
                                                     ?>
-                                            <?= $show ?><?= $kpi["target"] == 1 ? '%' : '' ?>
+                                            <?= $show ?><?= $kpi["amountType"] == 1 ? '%' : '' ?>
                                         </div>
                                     </div>
                                     <div class="col-2 symbol-pim text-center">
