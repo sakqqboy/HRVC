@@ -20,12 +20,13 @@
     text-align: center;
     color: #000;
     font-size: 13px;
-    height: 22px;
-    min-width: 22px;
+    height: 34px;
+    min-width: 34px;
     border-radius: 3px;
-    padding-left: 3px;
+    /* padding: 5px 5px 5px 5px; */
+    /* padding-left: 3px;
     padding-top: 0px;
-    padding-right: 3px;
+    padding-right: 3px; */
     background-color: #818181;
 }
 
@@ -34,12 +35,15 @@
     text-align: center;
     color: #000;
     font-size: 13px;
-    height: 22px;
-    min-width: 22px;
+    height: 34px;
+    min-width: 34px;
+    flex-shrink: 0;
     border-radius: 3px;
+    /* padding: 5px 5px 5px 5px; */
+    /* 
     padding-left: 3px;
-    padding-top: 0px;
-    padding-right: 3px;
+    padding-top: 3px;
+    padding-right: 3px; */
     background-color: white;
 }
 
@@ -48,12 +52,13 @@
     text-align: center;
     color: #EC1D42;
     font-size: 13px;
-    height: 22px;
-    min-width: 22px;
+    height: 34px;
+    min-width: 34px;
     border-radius: 3px;
-    padding-left: 3px;
+    /* padding: 5px 5px 5px 5px; */
+    /* padding-left: 3px;
     padding-top: 0px;
-    padding-right: 3px;
+    padding-right: 3px; */
     background-color: #ffff;
 }
 
@@ -62,12 +67,13 @@
     text-align: center;
     color: #000;
     font-size: 13px;
-    height: 22px;
-    min-width: 22px;
+    height: 34px;
+    min-width: 34px;
     border-radius: 3px;
-    padding-left: 3px;
+    /* padding: 5px 5px 5px 5px; */
+    /* padding-left: 3px;
     padding-top: 0px;
-    padding-right: 3px;
+    padding-right: 3px; */
     background: var(--Primary-Blue---HRVC, #2580D3);
 }
 
@@ -76,12 +82,13 @@
     text-align: center;
     color: #BB2020;
     font-size: 13px;
-    height: 22px;
-    min-width: 22px;
+    height: 34px;
+    min-width: 34px;
     border-radius: 3px;
-    padding-left: 3px;
+    /* padding: 5px 5px 5px 5px; */
+    /* padding-left: 3px;
     padding-top: 0px;
-    padding-right: 3px;
+    padding-right: 3px; */
     background-color: #FFE3E3;
 }
 
@@ -90,12 +97,13 @@
     text-align: center;
     color: #ffff;
     font-size: 13px;
-    height: 22px;
-    min-width: 22px;
+    height: 34px;
+    min-width: 34px;
     border-radius: 3px;
-    padding-left: 3px;
+    /* padding: 5px 5px 5px 5px; */
+    /* padding-left: 3px;
     padding-top: 0px;
-    padding-right: 3px;
+    padding-right: 3px; */
     background-color: #EC1D42;
 }
 

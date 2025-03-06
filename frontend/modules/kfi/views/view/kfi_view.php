@@ -85,11 +85,10 @@ $this->title = 'Company KFI History';
                                             if ($colorFormat == 'disable') {
                                             ?>
                                 <a class="btn btn-bg-blue-xs mr-5" style="margin-top: -3px;"
-                                    href="<?= Yii::$app->homeUrl ?>kfi/management/update-kfi/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, 'kfiHistoryId' => $kfi['kfiHistoryId']]) ?>">
-                                    <!-- data-bs-toggle="modal" data-bs-target="#staticBackdrop2" onclick="javascript:updateKfi(<?php // $kfiId 
-                                                                                                                                                ?>)"> -->
+                                    href="<?= Yii::$app->homeUrl ?>kfi/management/update-kfi/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, 'kfiHistoryId' => $kfi['kfiHistoryId']]) ?>"
+                                    style="margin-top: -3px;">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
-                                        alt="History" class="home-icon" style="margin-top: -2px;">
+                                        alt="History" class="pim-icon" style="margin-top: -2px;">
                                 </a>
                                 <?php
                                             }
@@ -98,10 +97,11 @@ $this->title = 'Company KFI History';
                                 <?php
                                             if ($i == 0 && $kfi["status"] == 2 && $role >= 5) {
                                             ?>
-                                <a class="btn btn-bg-white-xs pr-2 pl-3 mr-5"
-                                    onclick="javascript:prepareKfiNextTarget(<?= $kfi['kfiHistoryId'] ?>)">
+                                <a class="btn btn-bg-white-xs mr-5"
+                                    onclick="javascript:prepareKfiNextTarget(<?= $kfi['kfiHistoryId'] ?>)"
+                                    style="margin-top: -3px;">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/coppy.svg" alt="History"
-                                        style="margin-top: -3px;" class="pim-icon">
+                                        style="margin-top: -2px;" class="pim-icon">
                                 </a>
                                 <?php
                                             }
@@ -121,7 +121,7 @@ $this->title = 'Company KFI History';
                                     <?= $kfi['status'] == 1 ? Yii::t('app', 'In process') : Yii::t('app', 'Completed') ?>
                                 </div>
                             </div>
-                            <div class="col-8  pl-15 pr-20 pt-18">
+                            <div class="col-8  pl-15 pr-20 pt-20">
                                 <div class="col-12 text-start pl-5 font-size-14" style="font-weight: 500;">
                                     <?= Yii::t('app', 'Assign on') ?>
                                 </div>
@@ -197,7 +197,8 @@ $this->title = 'Company KFI History';
 
                             </div>
                             <div class="col-3 font-size-10 pt-15 text-end">
-                                <div class="col-12 text-start" style="font-size: 12px; font-weight: 400;">Quant Ratio
+                                <div class="col-12 text-start" style="font-size: 12px; font-weight: 400;">
+                                    <?= Yii::t('app', 'Quality') ?>
                                 </div>
                                 <div class="col-12 pim-duedate text-start mt-2 text-start">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/diamon.svg"

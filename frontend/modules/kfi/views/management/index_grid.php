@@ -142,7 +142,7 @@ $this->title = Yii::t('app', 'KFI Grid View');
                                     onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
                                     onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
-                                        class="pim-icon" style="margin-top: -3px; width: 12px; height: 14px;">
+                                        class="pim-icon" style="margin-top: -3px;">
                                 </a>
                                 <?php
                                         }
