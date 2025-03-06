@@ -81,12 +81,11 @@ $this->title = 'Team KGI History';
                                 <?php
                                             if ($colorFormat == 'disable') {
                                             ?>
-                                <a class="btn btn-bg-blue-xs pr-2 pl-3 mr-5"
+                                <a class="btn btn-bg-blue-xs mr-5"
                                     href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/prepare-update/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiHistoryId' => 0]) ?>"
                                     style="margin-top: -3px; " onclick="javascript:updateTeamKgi(<?= $kgiTeamId ?>)">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
-                                        alt="History" style="margin-top: -2px; width: 12px; height: 14px;"
-                                        class="home-icon">
+                                        alt="History" style="margin-top: -2px;" class="pim-icon">
                                 </a>
                                 <?php
                                             }
@@ -97,7 +96,7 @@ $this->title = 'Team KGI History';
                                 <a class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;"
                                     onclick="javascript:prepareKgiTeamNextTarget(<?= $kgi['kgiTeamHistoryId'] ?>)">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/coppy.svg" alt="History"
-                                        style="margin-top: -3px; width: 12px; height: 14px;" class="home-icon">
+                                        style="margin-top: -3px; " class="pim-icon">
                                 </a>
                                 <?php
                                             }
@@ -105,7 +104,7 @@ $this->title = 'Team KGI History';
 
 
                             </div>
-                            <div class="col-9 mt-10 pl-28">
+                            <div class="col-9 mt-25 pl-28">
                                 <div class="row">
                                     <div class="col-4 month-<?= $colorFormat ?> pt-2"><?= Yii::t('app', 'Term') ?></div>
                                     <div class="col-8 term-<?= $colorFormat ?>  pt-2">
@@ -114,16 +113,20 @@ $this->title = 'Team KGI History';
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-3 mt-10">
+                            <div class="col-3 mt-25">
                                 <div class="<?= $colorFormat ?>-tag text-center">
-                                    <?= $kgi['status'] == 1 ? Yii::t('app', 'In process') : Yii::t('app', 'Completed') ?>
+                                    <?= $colorFormat == 'disable' 
+                                    ? Yii::t('app', 'Not Yet') 
+                                    : ($kgi['status'] == 1 
+                                        ? Yii::t('app', 'In process') 
+                                        : Yii::t('app', 'Completed')) ?>
                                 </div>
                             </div>
-                            <div class="col-9  pl-15 pr-20 pt-5">
-                                <div class="col-12 text-start pl-5 font-size-10">
+                            <div class="col-9  pl-15 pr-20 pt-20">
+                                <div class="col-12 text-start pl-5 font-size-14" style="font-weight: 500;">
                                     <?= Yii::t('app', 'Assign on') ?>
                                 </div>
-                                <div class="col-12 <?= $colorFormat ?>-assign pt-2 pb-2">
+                                <div class="col-12 <?= $colorFormat ?>-assign mt-18" style="padding: 7px 7px 7px 7px">
                                     <div class="row">
                                         <div class="col-5 border-right-<?= $colorFormat ?> pl-10">
                                             <div class="row">
@@ -132,7 +135,7 @@ $this->title = 'Team KGI History';
                                                                 if (isset($kgiEmployee['kgiEmployee'][0])) {
                                                                 ?>
                                                     <img src="<?= Yii::$app->homeUrl . $kgiEmployee['kgiEmployee'][0] ?>"
-                                                        class="pim-pic-grid ">
+                                                        class="pim-pic-grid " style="margin-left: -3px;">
                                                     <?php
                                                                 }
                                                                 ?>
@@ -142,7 +145,7 @@ $this->title = 'Team KGI History';
                                                                 if (isset($kgiEmployee['kgiEmployee'][1])) {
                                                                 ?>
                                                     <img src="<?= Yii::$app->homeUrl . $kgiEmployee['kgiEmployee'][1] ?>"
-                                                        class="pim-pic-grid">
+                                                        class="pim-pic-grid" style="margin-left: -3px;">
                                                     <?php
                                                                 }
                                                                 ?>
@@ -152,13 +155,13 @@ $this->title = 'Team KGI History';
                                                                 if (isset($kgiEmployee['kgiEmployee'][2])) {
                                                                 ?>
                                                     <img src="<?= Yii::$app->homeUrl . $kgiEmployee['kgiEmployee'][2] ?>"
-                                                        class="pim-pic-grid">
+                                                        class="pim-pic-grid" style="margin-left: -3px;">
                                                     <?php
                                                                 }
                                                                 ?>
                                                 </div>
-                                                <div class="col-6 number-tag load-<?= $colorFormat ?> pr-0 pl-0 pt-3"
-                                                    style="margin-left: -3px;height:22px;width: 30px;margin-top: 1px;">
+                                                <div class="col-6 number-tag load-<?= $colorFormat ?> pr-0 pl-0 pt-4"
+                                                    style="margin-left: -3px; height:25px;width: 32px; margin-top: 2px;">
                                                     <?= empty($kgiEmployee) ? 0 : count($kgiEmployee) ?>
                                                 </div>
                                             </div>
@@ -169,14 +172,16 @@ $this->title = 'Team KGI History';
                                                         if ($role > 3) {
                                                         ?>
                                             <a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'companyId' => $kgiDetail['companyId']]) ?>"
-                                                class="font-<?= $colorFormat ?>" style=" top: 2px;">
+                                                class="font-<?= $colorFormat ?>"
+                                                style=" text-decoration: none; font-size: 16px; font-weight: 400;">
                                                 <?= Yii::t('app', 'Assigned Person') ?>
                                             </a>
                                             <?php
                                                         } else {
                                                         ?>
                                             <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/kgi-team-history/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiTeamHistoryId' => $kgi['kgiTeamHistoryId'], 'kgiId' => $kgiId, 'openTab' => 1]) ?>"
-                                                class="font-<?= $colorFormat ?>" style=" top: 2px;">
+                                                class="font-<?= $colorFormat ?>"
+                                                style=" text-decoration: none; font-size: 16px; font-weight: 400;">
                                                 <?= Yii::t('app', 'View Person') ?>
                                             </a>
                                             <?php
@@ -185,26 +190,29 @@ $this->title = 'Team KGI History';
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 <?= $colorFormat ?>-assign pt-2 pb-2 mt-10">
+                                <div class="col-12 <?= $colorFormat ?>-assign mt-20" style="padding: 7px 7px 7px 7px">
+
                                     <div class="row">
                                         <div class="col-5 border-right-<?= $colorFormat ?> pl-10">
                                             <div class="row">
                                                 <div class="col-2 pl-0 pr-0">
 
                                                 </div>
-                                                <div class="col-2 pl-5 pr-0 pt-3">
+                                                <div class="col-2 pl-5 pr-0 pt-5">
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-<?= $colorFormat ?>.svg"
-                                                        style="height:12px;width: 15px">
+                                                        style="height:16px; width: 16px">
                                                 </div>
                                                 <div class="col-1 pl-0">
 
                                                 </div>
                                                 <div class="col-5 number-tag load-<?= $colorFormat ?> pr-0 pl-0 pt-3"
-                                                    style="margin-left: -3px;height:22px;width: 30px;margin-top: 1px;">
+                                                    style="height:25px;width: 32px; margin-top: 1px;">
                                                     <?= $kgiDetail["countTeam"] ?>
                                                 </div>
                                                 <div class="col-2 pl-0 pr-0">
+
                                                 </div>
+
                                             </div>
                                         </div>
                                         <div class="col-7 pl-5 pt-3">
@@ -212,13 +220,15 @@ $this->title = 'Team KGI History';
                                                         if ($role > 3) {
                                                         ?>
                                             <a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgiDetail["companyId"]]) ?>"
-                                                class="font-<?= $colorFormat ?> style=" top: 2px;">
+                                                class="font-<?= $colorFormat ?>"
+                                                style=" text-decoration: none; font-size: 16px; font-weight: 400;">
                                                 <?= Yii::t('app', 'Assigned Team') ?>
                                             </a>
                                             <?php
                                                         } else { ?>
                                             <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/kgi-team-history/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiTeamHistoryId' => $kgi['kgiTeamHistoryId'], 'kgiId' => $kgiId, 'openTab' => 1]) ?>"
-                                                class="font-<?= $colorFormat ?>" style=" top: 2px;">
+                                                class="font-<?= $colorFormat ?>"
+                                                style=" text-decoration: none; font-size: 16px; font-weight: 400;">
                                                 <?= Yii::t('app', 'View Team') ?>
                                             </a>
                                             <?php
@@ -228,16 +238,22 @@ $this->title = 'Team KGI History';
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-3 font-size-10 pt-15">
-                                <div class="col-12 text-end"><?= Yii::t('app', 'Quant Ratio') ?></div>
+                            <div class="col-3 font-size-10 pt-54">
+
+                                <div class="col-12 text-end" style="font-size: 12px; font-weight: 400;">
+                                    <?= Yii::t('app', 'Quant Ratio') ?>
+                                </div>
                                 <div class="col-12   pim-duedate font-size-9 pb-3 text-end">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $kgi["quantRatio"] == 1 ? 'quantity' : 'diamon' ?>.svg"
                                         class="pim-iconKFI" style="margin-top: -1px; margin-left: 3px;">
                                     <b><?= $kgi["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?></b>
                                 </div>
-                                <div class="col-12 mt-6 mb-6 border-bottom-<?= $colorFormat ?>">
+
+                                <div class="col-12 mt-16 mb-16 border-bottom-<?= $colorFormat ?>"></div>
+
+                                <div class="col-12 text-end" style="font-size: 12px; font-weight: 400;">
+                                    <?= Yii::t('app', 'Update Interval') ?>
                                 </div>
-                                <div class="col-12  pr-0 mt-2 text-end"><?= Yii::t('app', 'update Interval') ?></div>
                                 <div class="col-12   pim-duedate text-end"><b>
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/monthly.svg"
                                             class="pim-iconKFI" style="margin-top: -3px; margin-left: 3px;">
@@ -245,10 +261,10 @@ $this->title = 'Team KGI History';
                                     </b>
                                 </div>
                             </div>
-                            <div class="col-12 mt-10">
+                            <div class="col-12 mt-15">
                                 <div class="row">
                                     <div class="col-5 text-start pl-20">
-                                        <div class="col-12 font-size-10">
+                                        <div class="col-12 font-size-13">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Target.svg"
                                                 class="pim-iconKFI" style="margin-top: 1px; margin-right: 3px;">
                                             <?= Yii::t('app', 'Target') ?>
@@ -277,7 +293,7 @@ $this->title = 'Team KGI History';
                                         <div class="col-12 pt-13 font-size-12"><?= $kgi["code"] ?></div>
                                     </div>
                                     <div class="col-5 text-end pr-20">
-                                        <div class="col-12 font-size-10"><?= Yii::t('app', 'Result') ?>
+                                        <div class="col-12 font-size-13"><?= Yii::t('app', 'Result') ?>
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Result.svg"
                                                 class="pim-iconKFI" style="margin-top: 1px; margin-left: 3px;">
                                         </div>

@@ -113,7 +113,11 @@ $this->title = 'Company KPI History';
                             </div>
                             <div class="col-3 mt-25">
                                 <div class="<?= $colorFormat ?>-tag text-center">
-                                    <?= $kpi['status'] == 1 ? Yii::t('app', 'In process') : Yii::t('app', 'Completed') ?>
+                                    <?= $colorFormat == 'disable' 
+                                    ? Yii::t('app', 'Not Yet') 
+                                    : ($kpi['status'] == 1 
+                                        ? Yii::t('app', 'In process') 
+                                        : Yii::t('app', 'Completed')) ?>
                                 </div>
                             </div>
                             <div class="col-9  pl-15 pr-20 pt-20">

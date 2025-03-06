@@ -493,18 +493,19 @@ thead {
 
 .month-disable {
 	color: #ffff;
-	font-size: 11px;
+	font-size: 14px;
 	background-color: #636363;
 	border: #636363 solid thin;
 	border-radius: 30px;
 	text-align: center;
 	z-index: 3;
 	letter-spacing: 0.8px;
+	font-weight: 510;
 }
 
 .term-disable {
 	color: #3C3D48;
-	font-size: 11px;
+	font-size: 14px;
 	background-color: #DCDCDC;
 	border: #C0C0C0 solid thin;
 	padding-right: 0px;
@@ -863,7 +864,7 @@ thead {
 
 .yenlow-teamshow {
 	font-weight: 390;
-	font-size: 9px;
+	font-size: 13px;
 	border: 0.5px solid #d3d325;
 	border: 0.1px solid #000000;
 	background-color: #FFFAED;
@@ -878,7 +879,7 @@ thead {
 
 .over-teamshow {
 	font-weight: 400;
-	font-size: 10px;
+	font-size: 13px;
 	color: #000000;
 	border: 0.5px solid #E05757;
 	background-color: #FFD6D6;
@@ -893,7 +894,7 @@ thead {
 
 .inprogress-teamshow {
 	font-weight: 400;
-	font-size: 10px;
+	font-size: 13px;
 	color: #000000;
 	border: 0.5px solid #2580D3;
 	background-color: #D7EBFF;
@@ -908,7 +909,7 @@ thead {
 
 .complete-teamshow {
 	font-weight: 400;
-	font-size: 10px;
+	font-size: 13px;
 	color: #000000;
 	border: 0.5px solid #2D7F06;
 	background-color: #DEFFDF;
@@ -922,7 +923,7 @@ thead {
 
 .disable-teamshow {
 	font-weight: 400;
-	font-size: 10px;
+	font-size: 13px;
 	color: black;
 	border: 0.5px solid #C3C3C3;
 	background-color: #fff;
@@ -1364,8 +1365,8 @@ thead {
 }
 
 .team-icon {
-	width: 14px;
-	height: 14px;
+	width: 19px;
+	height: 19px;
 	border-radius: 50%;
 	display: flex;
 	justify-content: center;
