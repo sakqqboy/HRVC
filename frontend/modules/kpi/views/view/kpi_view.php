@@ -63,27 +63,29 @@ $this->title = 'Company KPI History';
                                 <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'kpiHistoryId' => $kpi['kpiHistoryId'], 'openTab' => 1]) ?>"
                                     class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
                                     style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="Chats">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="Chats"
+                                        class="pim-icon" style="margin-top: -2px;">
                                 </a>
                                 <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'kpiHistoryId' => $kpi['kpiHistoryId'], 'openTab' => 3]) ?>"
                                     class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
                                     style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg" alt="Chats">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg" alt="Chats"
+                                        class="pim-icon" style="margin-top: -2px;">
                                 </a>
                                 <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'kpiHistoryId' => $kpi['kpiHistoryId'], 'openTab' => 4]) ?>"
                                     class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
                                     style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg" alt="Chart">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg" alt="Chart"
+                                        class="pim-icon" style="margin-top: -2px;">
                                 </a>
                                 <?php
                                             if ($colorFormat == 'disable') {
                                             ?>
-                                <a class="btn btn-bg-blue-xs mr-5" style="margin-top: -3px;"
+                                <a class="btn btn-bg-blue-xs mr-5"
                                     href="<?= Yii::$app->homeUrl ?>kpi/management/prepare-update/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'kpiHistoryId' => 0]) ?>"
-                                    style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; height: 30px; gap: 6px; flex-shrink: 0;">
+                                    style="margin-top: -3px;">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
-                                        alt="History" style="margin-top: -3px; width: 12px; height: 14px;"
-                                        class="home-icon">
+                                        alt="History" style="margin-top: -3px;" class="pim-icon">
                                 </a>
                                 <?php
                                             }
@@ -100,7 +102,7 @@ $this->title = 'Company KPI History';
                                             }
                                             ?>
                             </div>
-                            <div class="col-9 mt-10 pl-28">
+                            <div class="col-9 mt-25 pl-28">
                                 <div class="row">
                                     <div class="col-4 month-<?= $colorFormat ?> pt-2">Term</div>
                                     <div class="col-8 term-<?= $colorFormat ?>  pt-2">
@@ -109,51 +111,51 @@ $this->title = 'Company KPI History';
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-3 mt-10">
+                            <div class="col-3 mt-25">
                                 <div class="<?= $colorFormat ?>-tag text-center">
                                     <?= $kpi['status'] == 1 ? Yii::t('app', 'In process') : Yii::t('app', 'Completed') ?>
                                 </div>
                             </div>
-                            <div class="col-9  pl-15 pr-20 mt-5">
-                                <div class="col-12 text-start pl-5 font-size-10">
+                            <div class="col-9  pl-15 pr-20 pt-20">
+                                <div class="col-12 text-start pl-5 font-size-14" style="font-weight: 500;">
                                     <?= Yii::t('app', 'Assign on') ?>
                                 </div>
-                                <div class="col-12 <?= $colorFormat ?>-assign pt-2 pb-2">
+                                <div class="col-12 <?= $colorFormat ?>-assign mt-18" style="padding: 7px 7px 7px 7px">
                                     <div class="row">
                                         <div class="col-5 border-right-<?= $colorFormat ?> pl-10">
                                             <div class="row">
-                                                <div class="col-2">
+                                                <div class="col-2  pt-2">
                                                     <?php
                                                                 if (isset($kpi['kpiEmployee'][0])) {
                                                                 ?>
                                                     <img src="<?= Yii::$app->homeUrl . $kpi['kpiEmployee'][0] ?>"
-                                                        class="pim-pic-grid">
+                                                        class="pim-pic-grid" style="margin-left: -3px;">
                                                     <?php
                                                                 }
                                                                 ?>
                                                 </div>
-                                                <div class="col-2 pic-after pt-0">
+                                                <div class="col-2 pic-after  pt-2">
                                                     <?php
                                                                 if (isset($kpi['kpiEmployee'][1])) {
                                                                 ?>
                                                     <img src="<?= Yii::$app->homeUrl . $kpi['kpiEmployee'][1] ?>"
-                                                        class="pim-pic-grid">
+                                                        class="pim-pic-grid" style="margin-left: -3px;">
                                                     <?php
                                                                 }
                                                                 ?>
                                                 </div>
-                                                <div class="col-2 pic-after pt-0">
+                                                <div class="col-2 pic-after  pt-2">
                                                     <?php
                                                                 if (isset($kpi['kpiEmployee'][2])) {
                                                                 ?>
                                                     <img src="<?= Yii::$app->homeUrl . $kpi['kpiEmployee'][2] ?>"
-                                                        class="pim-pic-grid">
+                                                        class="pim-pic-grid" style="margin-left: -3px;">
                                                     <?php
                                                                 }
                                                                 ?>
                                                 </div>
                                                 <div class="col-6 number-tag load-<?= $colorFormat ?> pr-0 pl-0 pt-3"
-                                                    style="margin-left: -3px;height:22px;width: 30px;margin-top: 1px;">
+                                                    style="margin-left: -3px; height:25px; width: 32px; margin-top: 2px;">
                                                     <?= $kpi["employee"] ?>
                                                 </div>
                                             </div>
@@ -163,13 +165,15 @@ $this->title = 'Company KPI History';
                                                         if ($role > 3) {
                                                         ?>
                                             <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, "companyId" => $kpi["companyId"]]) ?>"
-                                                class="font-<?= $colorFormat ?>">
+                                                class="font-<?= $colorFormat ?>"
+                                                style="text-decoration: none; font-size: 16px; font-weight: 400;">
                                                 <?= Yii::t('app', 'Assigned Person') ?>
                                             </a>
                                             <?php
                                                         } else {
                                                         ?>
-                                            <span class="font-<?= $colorFormat ?>">
+                                            <span class="font-<?= $colorFormat ?>"
+                                                style="text-decoration: none; font-size: 16px; font-weight: 400;">
                                                 <?= Yii::t('app', 'Assigned Person') ?>
                                             </span>
                                             <?php
@@ -178,22 +182,21 @@ $this->title = 'Company KPI History';
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 <?= $colorFormat ?>-assign pt-2 pb-2 mt-10">
+                                <div class="col-12 <?= $colorFormat ?>-assign mt-20" style="padding: 7px 7px 7px 7px">
                                     <div class="row">
                                         <div class="col-5 border-right-<?= $colorFormat ?> pl-10">
                                             <div class="row">
                                                 <div class="col-2 pl-0 pr-0">
-
                                                 </div>
-                                                <div class="col-2 pl-5 pr-0 pt-3">
+                                                <div class="col-2 pl-5 pr-0 pt-5">
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-<?= $colorFormat ?>.svg"
-                                                        style="height:12px;width: 15px">
+                                                        style="height:16px; width: 16px">
                                                 </div>
                                                 <div class="col-1 pl-0">
 
                                                 </div>
                                                 <div class="col-5 number-tag load-<?= $colorFormat ?> pr-0 pl-0 pt-3"
-                                                    style="margin-left: -3px;height:22px;width: 30px;margin-top: 1px;">
+                                                    style="height:25px;width: 32px; margin-top: 1px;">
                                                     <?= $kpi["countTeam"] ?>
                                                 </div>
                                                 <div class="col-2 pl-0 pr-0">
@@ -205,12 +208,14 @@ $this->title = 'Company KPI History';
                                                         if ($role > 3) {
                                                         ?>
                                             <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, "companyId" => $kpi["companyId"]]) ?>"
-                                                class="font-<?= $colorFormat ?>">
+                                                class="font-<?= $colorFormat ?>"
+                                                style="text-decoration: none; font-size: 16px; font-weight: 400;">
                                                 <?= Yii::t('app', 'Assign Team') ?>
                                             </a>
                                             <?php
                                                         } else { ?>
-                                            <span class="font-<?= $colorFormat ?>">
+                                            <span class="font-<?= $colorFormat ?>"
+                                                style="text-decoration: none; font-size: 16px; font-weight: 400;">
                                                 <?= Yii::t('app', 'Assign Team') ?>
                                             </span>
                                             <?php
@@ -220,16 +225,22 @@ $this->title = 'Company KPI History';
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-3 font-size-10 pt-15">
-                                <div class="col-12  text-end"><?= Yii::t('app', 'Quant Ratio') ?></div>
+                            <div class="col-3 font-size-10 pt-54">
+
+                                <div class="col-12 text-end" style="font-size: 12px; font-weight: 400;">
+                                    <?= Yii::t('app', 'Quant Ratio') ?>
+                                </div>
                                 <div class="col-12   pim-duedate font-size-9 pb-3 text-end">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/diamon.svg"
                                         class="pim-iconKFI" style="margin-top: -3px; margin-left: 3px;">
                                     <b><?= $kpi["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?></b>
                                 </div>
-                                <div class="col-12 mt-6 mb-6 border-bottom-<?= $colorFormat ?>">
+
+                                <div class="col-12 mt-15 mb-15 border-bottom-<?= $colorFormat ?>"></div>
+
+                                <div class="col-12  pr-0 mt-2 text-end" style="font-size: 12px; font-weight: 400;">
+                                    <?= Yii::t('app', 'Update Interval') ?>
                                 </div>
-                                <div class="col-12  pr-0 mt-2 text-end"><?= Yii::t('app', 'Update Interval') ?></div>
                                 <div class="col-12   pim-duedate text-end"><b>
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/monthly.svg"
                                             class="pim-iconKFI" style="margin-top: -3px; margin-left: 3px;">
@@ -237,10 +248,10 @@ $this->title = 'Company KPI History';
                                     </b>
                                 </div>
                             </div>
-                            <div class="col-12 mt-10">
+                            <div class="col-12 mt-15">
                                 <div class="row">
                                     <div class="col-5 text-start pl-20">
-                                        <div class="col-12 font-size-10">
+                                        <div class="col-12 font-size-13">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Target.svg"
                                                 class="pim-iconKFI" style="margin-top: 1px; margin-right: 3px;">
                                             <?= Yii::t('app', 'Target') ?>
@@ -269,7 +280,7 @@ $this->title = 'Company KPI History';
                                         <div class="col-12 pt-13 font-size-12"><?= $kpi["code"] ?></div>
                                     </div>
                                     <div class="col-5 text-end pr-20">
-                                        <div class="col-12 font-size-10">
+                                        <div class="col-12 font-size-13">
                                             <?= Yii::t('app', 'Result') ?>
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Result.svg"
                                                 class="pim-iconKFI" style="margin-top: 1px; margin-left: 3px;">

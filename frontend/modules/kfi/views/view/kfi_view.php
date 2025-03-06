@@ -205,7 +205,7 @@ $this->title = 'Company KFI History';
                                         class="pim-iconKFI" style="margin-top: -3px; margin-left: 3px;">
                                     <b><?= $kfi["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?></b>
                                 </div>
-                                <div class="row mt-6 mb-6 text-end">
+                                <div class="row mt-15 mb-15 text-end">
                                     <div class="col-5"></div>
                                     <div class="col-6 border-bottom-<?= $colorFormat ?>"> </div>
                                 </div>

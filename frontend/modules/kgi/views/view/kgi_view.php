@@ -192,7 +192,7 @@ $this->title = 'Company KGI History';
                                                 <div class="col-2 pl-0 pr-0">
 
                                                 </div>
-                                                <div class="col-2 pl-5 pr-0 pt-3">
+                                                <div class="col-2 pl-5 pr-0 pt-5">
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-<?= $colorFormat ?>.svg"
                                                         style="height:16px; width: 16px">
                                                 </div>
@@ -232,7 +232,7 @@ $this->title = 'Company KGI History';
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-3 font-size-10 pt-49">
+                            <div class="col-3 font-size-10 pt-54">
 
                                 <div class="col-12 text-end" style="font-size: 12px; font-weight: 400;">
                                     <?= Yii::t('app', 'Quant Ratio') ?>
@@ -243,7 +243,7 @@ $this->title = 'Company KGI History';
                                     <b><?= $kgi["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?></b>
                                 </div>
 
-                                <div class="col-12 mt-14 mb-14 border-bottom-<?= $colorFormat ?>"></div>
+                                <div class="col-12 mt-16 mb-16 border-bottom-<?= $colorFormat ?>"></div>
 
                                 <div class="col-12  pr-0 mt-2 text-end" style="font-size: 12px; font-weight: 400;">
                                     <?= Yii::t('app', 'Update Interval') ?>
