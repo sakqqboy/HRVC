@@ -280,7 +280,7 @@ $this->title = 'KGI Grid View';
 
                                                 <?php if ($role <= 4) { ?>
                                                 <div
-                                                    class="col-7 <?= $kgi["countEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>-assignNew ">
+                                                    class="col-5 <?= $kgi["countEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>-assignNew ">
 
                                                     <span class="pull-left">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $kgi["countEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>.svg"
@@ -302,7 +302,7 @@ $this->title = 'KGI Grid View';
                                                 </div>
                                                 <?php  } else { ?>
                                                 <div
-                                                    class="col-7 <?= $kgi["countEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>-assignNew ">
+                                                    class="col-5 <?= $kgi["countEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>-assignNew ">
                                                     <span class="pull-left">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $kgi["countEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>.svg"
                                                             class="assing-icon mr-2">
@@ -352,7 +352,7 @@ $this->title = 'KGI Grid View';
                                                 </div>
                                                 <?php if ($role <= 4) { ?>
                                                 <div
-                                                    class="col-7 <?= $kgi["countTeam"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>-assignNew ">
+                                                    class="col-5 <?= $kgi["countTeam"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>-assignNew ">
 
                                                     <span class="pull-left">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $kgi["countTeam"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>.svg"
@@ -374,7 +374,7 @@ $this->title = 'KGI Grid View';
                                                 </div>
                                                 <?php  } else { ?>
                                                 <div
-                                                    class="col-7 <?= $kgi["countTeam"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>-assignNew ">
+                                                    class="col-5 <?= $kgi["countTeam"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>-assignNew ">
                                                     <span class="pull-left">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $kgi["countTeam"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>.svg"
                                                             class="assing-icon mr-2">

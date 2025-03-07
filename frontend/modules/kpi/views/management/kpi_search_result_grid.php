@@ -250,7 +250,7 @@ $this->title = 'KPI Grid View';
                                                     </div>
                                                 </div>
                                                 <div
-                                                    class="col-7 <?= isset($kpi["countEmployee"]) && $kpi["countEmployee"] == 0  && $colorFormat != "disable" ? 'yenlow-assignNew' : $colorFormat . '-assignNew' ?>">
+                                                    class="col-5 <?= isset($kpi["countEmployee"]) && $kpi["countEmployee"] == 0  && $colorFormat != "disable" ? 'yenlow-assignNew' : $colorFormat . '-assignNew' ?>">
                                                     <?php
                                                             if ($role <= 4) { // staff to team leader
                                                                 if (isset($kpi["countEmployee"]) && $kpi["countEmployee"] > 0) {
@@ -331,7 +331,7 @@ $this->title = 'KPI Grid View';
 
                                                 </div>
                                                 <div
-                                                    class="col-7 <?= $kpi["countTeam"] == 0  && $colorFormat != "disable" ? 'yenlow-assignNew' : $colorFormat . '-assignNew' ?>">
+                                                    class="col-5 <?= $kpi["countTeam"] == 0  && $colorFormat != "disable" ? 'yenlow-assignNew' : $colorFormat . '-assignNew' ?>">
                                                     <?php
                                                             if ($role <= 4) { // staff to team leader
                                                                 if ($kpi["countTeam"] > 0) {

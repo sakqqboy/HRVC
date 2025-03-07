@@ -282,7 +282,7 @@ $this->title = "TEAM KPI";
                                                     </div>
                                                 </div>
                                                 <div
-                                                    class="col-7 <?= $kpi["countTeamEmployee"] == 0  && $colorFormat != "disable" ? 'yenlow-assignNew' : $colorFormat . '-assignNew' ?>">
+                                                    class="col-5 <?= $kpi["countTeamEmployee"] == 0  && $colorFormat != "disable" ? 'yenlow-assignNew' : $colorFormat . '-assignNew' ?>">
                                                     <?php
                                                             if ($role < 3) { // staff
                                                                 if ($kpi["countTeamEmployee"] > 0) {
@@ -363,7 +363,7 @@ $this->title = "TEAM KPI";
                                                     </div>
                                                 </div>
                                                 <div
-                                                    class="col-7 <?= $kpi["countTeam"] == 0  && $colorFormat != "disable" ? 'yenlow-assignNew' : $colorFormat . '-assignNew' ?>">
+                                                    class="col-5 <?= $kpi["countTeam"] == 0  && $colorFormat != "disable" ? 'yenlow-assignNew' : $colorFormat . '-assignNew' ?>">
                                                     <?php
                                                             if ($role <= 3) { // staff
                                                                 if ($kpi["countTeam"] > 0) {

@@ -106,7 +106,7 @@ $this->title = 'Team KGI History';
                             </div>
                             <div class="col-9 mt-25 pl-28">
                                 <div class="row">
-                                    <div class="col-4 month-<?= $colorFormat ?> pt-2"><?= Yii::t('app', 'Term') ?></div>
+                                    <div class="col-2 month-<?= $colorFormat ?> pt-2"><?= Yii::t('app', 'Term') ?></div>
                                     <div class="col-8 term-<?= $colorFormat ?>  pt-2">
                                         <?= $kgi['fromDate'] == "" ? Yii::t('app', 'Not set') : $kgi['fromDate'] ?> -
                                         <?= $kgi['toDate'] == "" ? Yii::t('app', 'Not set') : $kgi['toDate'] ?>
@@ -122,7 +122,7 @@ $this->title = 'Team KGI History';
                                         : Yii::t('app', 'Completed')) ?>
                                 </div>
                             </div>
-                            <div class="col-9  pl-15 pr-20 pt-20">
+                            <div class="col-6 pt-20">
                                 <div class="col-12 text-start pl-5 font-size-14" style="font-weight: 500;">
                                     <?= Yii::t('app', 'Assign on') ?>
                                 </div>
@@ -193,20 +193,20 @@ $this->title = 'Team KGI History';
                                 <div class="col-12 <?= $colorFormat ?>-assign mt-20" style="padding: 7px 7px 7px 7px">
 
                                     <div class="row">
-                                        <div class="col-5 border-right-<?= $colorFormat ?> pl-10">
+                                        <div class="col-5 border-right-<?= $colorFormat ?> ">
                                             <div class="row">
-                                                <div class="col-2 pl-0 pr-0">
+                                                <div class="col-2 pl-0">
 
                                                 </div>
-                                                <div class="col-2 pl-5 pr-0 pt-5">
+                                                <div class="col-2 pr-16 pt-5">
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-<?= $colorFormat ?>.svg"
                                                         style="height:16px; width: 16px">
                                                 </div>
                                                 <div class="col-1 pl-0">
 
                                                 </div>
-                                                <div class="col-5 number-tag load-<?= $colorFormat ?> pr-0 pl-0 pt-3"
-                                                    style="height:25px;width: 32px; margin-top: 1px;">
+                                                <div class="col-5 number-tag load-<?= $colorFormat ?> pt-3"
+                                                    style="height:25px; width: 32px; margin-top: 1px;">
                                                     <?= $kgiDetail["countTeam"] ?>
                                                 </div>
                                                 <div class="col-2 pl-0 pr-0">
@@ -238,23 +238,25 @@ $this->title = 'Team KGI History';
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-3 font-size-10 pt-54">
+                            <div class="col-3">
+                            </div>
+                            <div class="col-3 font-size-10 pl-35 pt-54">
 
-                                <div class="col-12 text-end" style="font-size: 12px; font-weight: 400;">
+                                <div class="col-12 text-start" style="font-size: 12px; font-weight: 400;">
                                     <?= Yii::t('app', 'Quant Ratio') ?>
                                 </div>
-                                <div class="col-12   pim-duedate font-size-9 pb-3 text-end">
+                                <div class="col-12   pim-duedate font-size-9 pb-3 text-start">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $kgi["quantRatio"] == 1 ? 'quantity' : 'diamon' ?>.svg"
                                         class="pim-iconKFI" style="margin-top: -1px; margin-left: 3px;">
                                     <b><?= $kgi["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?></b>
                                 </div>
 
-                                <div class="col-12 mt-16 mb-16 border-bottom-<?= $colorFormat ?>"></div>
+                                <div class="col-9 mt-16 mb-16 border-bottom-<?= $colorFormat ?>"></div>
 
-                                <div class="col-12 text-end" style="font-size: 12px; font-weight: 400;">
+                                <div class="col-12 text-start" style="font-size: 12px; font-weight: 400;">
                                     <?= Yii::t('app', 'Update Interval') ?>
                                 </div>
-                                <div class="col-12   pim-duedate text-end"><b>
+                                <div class="col-12   pim-duedate text-start"><b>
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/monthly.svg"
                                             class="pim-iconKFI" style="margin-top: -3px; margin-left: 3px;">
                                         <?= Yii::t('app', $kgi["unit"]) ?>

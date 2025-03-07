@@ -311,7 +311,7 @@ $this->title = "INDIVIDUAL KPI";
                                                             <?php } ?>
                                                         </div>
                                                     </div>
-                                                    <div class="col-7 <?= $colorFormat . '-assignNew' ?>">
+                                                    <div class="col-5 <?= $colorFormat . '-assignNew' ?>">
                                                         <span class="pull-left">
                                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $colorFormat ?>.svg"
                                                                 class="assing-icon mr-5 ml-3 mt-1">
@@ -353,7 +353,7 @@ $this->title = "INDIVIDUAL KPI";
                                                         </div>
 
                                                     </div>
-                                                    <div class="col-7 <?= $colorFormat ?>-assignNew ">
+                                                    <div class="col-5 <?= $colorFormat ?>-assignNew ">
                                                         <span class="pull-left">
                                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/view-<?= $colorFormat ?>.svg"
                                                                 class="assing-icon mr-5 ml-3  mt-1">
