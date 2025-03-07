@@ -175,16 +175,16 @@ $this->title = "INDIVIDUAL KPI";
                                             if ($role >= 3) {
                                             ?>
                                     <span class="team-wrapper <?= $colorFormat ?>-teamshow pt-4"
-                                        style="margin-right: 5px; padding-right: 5px;">
-                                        <span class="team-icon pim-team-<?= $colorFormat ?>" style="bottom: 2px;">
+                                        style="margin-right: 5px; padding: 5px; bottom: 2px;">
+                                        <span class="team-icon pim-team-<?= $colorFormat ?>">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $colorFormat == 'disable' ? 'teamblack' : 'teamwhite' ?>.svg"
                                                 alt="Team Icon">
                                         </span>
-                                        <span class="team-name" style="bottom: 2px;"><?= $kpi["teamName"] ?></span>
+                                        <span class="team-name"><?= $kpi["teamName"] ?></span>
                                     </span>
                                     <?php } ?>
                                     <span class="team-wrapper <?= $colorFormat ?>-teamshow pb-4"
-                                        style="margin-right: 5px; padding-right: 5px;">
+                                        style="margin-right: 5px; padding: 5px; ">
 
                                         <span class="pim-pic-icon">
                                             <img src="<?= Yii::$app->homeUrl . $kpi['picture'] ?>">
