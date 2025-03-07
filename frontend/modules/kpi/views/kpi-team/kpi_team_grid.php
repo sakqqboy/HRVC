@@ -187,8 +187,7 @@ $this->title = "TEAM KPI";
                                     class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
                                     style="margin-top: -5px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg" alt="Chart"
-                                        class="pim-icon-delete mr-3"
-                                        style="margin-top: -2px;"><?= Yii::t('app', 'Chart') ?>
+                                        class="pim-icon mr-3" style="margin-top: -2px;"><?= Yii::t('app', 'Chart') ?>
                                 </a>
                                 <?php
                                         if ($role >= 5) {
@@ -198,7 +197,7 @@ $this->title = "TEAM KPI";
                                     onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
                                     onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
                                     <img src=" <?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
-                                        class="pim-icon-delete" style="margin-top: -2px;">
+                                        class="pim-icon mr-3" style="margin-top: -2px;">
                                 </a>
                                 <?php
                                         }

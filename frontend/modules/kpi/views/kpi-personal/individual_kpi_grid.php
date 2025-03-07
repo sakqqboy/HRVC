@@ -228,7 +228,7 @@ $this->title = "INDIVIDUAL KPI";
                                         onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
                                         onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
                                         <img src=" <?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
-                                            alt="History" class="pim-icon-delete" style="margin-top: -2px;">
+                                            alt="History" class="pim-icon mr-3" style="margin-top: -2px;">
                                     </a>
                                     <?php
                                             }
