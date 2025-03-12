@@ -432,6 +432,7 @@ class ManagementController extends Controller
 				'ke.year',
 				'CONCAT(e.employeeFirstname, " ", e.employeeSurename) AS employeeFullname',
 				'e.picture',
+				't.teamId',
 				't.teamName'
 			])
 			->from('kpi_employee_history keh')

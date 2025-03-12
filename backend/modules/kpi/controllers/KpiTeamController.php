@@ -19,6 +19,7 @@ use backend\models\hrvc\Unit;
 use backend\models\hrvc\User;
 use common\models\ModelMaster;
 use Exception;
+use yii\db\Query;
 use yii\web\Controller;
 
 header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
@@ -429,6 +430,148 @@ class KpiTeamController extends Controller
 		// $data = [1,2,3];
 		// return json_encode($data);
 
+	}
+
+
+	public function actionKpiHistoryEmployee($kpiId, $month, $year, $teamId)
+	{
+		$data = [];
+
+		$kpiHistory = (new Query())
+			->select([
+				'keh.kpiEmployeeHistoryId',
+				'keh.kpiEmployeeId',
+				'keh.result',
+				'keh.target',
+				'keh.createDateTime',
+				'keh.status AS history_status',
+				'keh.createrId',
+				'keh.updateDateTime',
+				'ke.employeeId',
+				'ke.kpiId',
+				'ke.month',
+				'ke.year',
+				'CONCAT(e.employeeFirstname, " ", e.employeeSurename) AS employeeFullname',
+				'e.picture',
+				't.teamId',
+				't.teamName'
+			])
+			->from('kpi_employee_history keh')
+			->innerJoin(
+				[
+					'latest' => (new Query())
+						->select(['kpiEmployeeId', 'MAX(updateDateTime) AS latest_update'])
+						->from('kpi_employee_history')
+						->groupBy('kpiEmployeeId')
+				],
+				'keh.kpiEmployeeId = latest.kpiEmployeeId AND keh.updateDateTime = latest.latest_update'
+			)
+			->innerJoin('kpi_employee ke', 'keh.kpiEmployeeId = ke.kpiEmployeeId')
+			->innerJoin('employee e', 'ke.employeeId = e.employeeId')
+			->innerJoin('team t', 'e.teamId = t.teamId')
+			->innerJoin('kpi_history kh', 'kh.kpiId = ke.kpiId')
+			->where(['keh.status' => [1, 2, 3]])
+			->andWhere(['ke.status' => [1, 2, 3]])
+			->andWhere(['ke.kpiId' => $kpiId])
+			->andWhere(['ke.month' => $month])
+			->andWhere(['ke.year' => $year])
+			->andWhere(['t.teamId' => $teamId])
+			->andWhere(['e.status' => 1])
+			->groupBy([
+				'keh.kpiEmployeeHistoryId',
+				'keh.kpiEmployeeId',	
+				'keh.result',
+				'keh.target',
+				'keh.createDateTime',
+				'keh.status',
+				'keh.createrId',
+				'keh.updateDateTime',
+				'ke.employeeId',
+				'ke.kpiId',
+				'ke.month',
+				'ke.year',
+				'employeeFullname',
+				'e.picture',
+				't.teamId',
+				't.teamName'
+			])
+			->all();
+
+		$data = [];
+		if (isset($kpiHistory) && count($kpiHistory) > 0) {
+			foreach ($kpiHistory as $history) :
+				$time = explode(' ', $history["createDateTime"]);
+				$employeeId = Employee::employeeId($history["createrId"]);
+				$data[$history["kpiEmployeeHistoryId"]] = [
+					"createrId" => $history["createrId"],
+					"result" => $history["result"],
+					"creater" => User::employeeNameByuserId($history["createrId"]),
+					"teamName" => $history["teamName"],
+					"picture" => Employee::employeeImage($employeeId),
+					"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
+					"time" => ModelMaster::timeText($time[1]),
+					"status" => $history["history_status"],
+					"target" => $history["target"],
+					"createDateTime" => ModelMaster::monthDateYearTime($history["createDateTime"])
+				];
+			endforeach;
+		}
+
+		return json_encode($data);
+	}
+
+	public function actionKpiHistoryTeam($kpiId, $month , $year, $teamId)
+	{
+
+		$kpiTeam = kpiTeam::find()
+			->where([
+				"kpiId" => $kpiId,
+				"month" => $month,
+				"year" => $year,
+				"teamId" => $teamId,
+				"status" => [1, 2, 4]
+			])
+			->orderBy("updateDateTime DESC")
+			->asArray()
+			->all();
+		$data = [];
+		if (isset($kpiTeam) && count($kpiTeam) > 0) {
+			foreach ($kpiTeam as $kt):
+				$kpiTeamHistory = KpiTeamHistory::find()
+					->where([
+						"kpiTeamId" => $kt["kpiTeamId"],
+						"status" => [1, 2, 4]
+					])
+					->orderBy('createDateTime DESC')
+					->asArray()
+					->one();
+				if (isset($kpiTeamHistory) && !empty($kpiTeamHistory)) {
+					$time = explode(' ', $kpiTeamHistory["createDateTime"]);
+					$data[$kt["kpiTeamId"]] = [
+						"teamName" => Team::teamName($kt["teamId"]),
+						"createDate" => ModelMaster::engDateHr($kpiTeamHistory["createDateTime"]),
+						"time" => ModelMaster::timeText($time[1] ?? '00:00'),
+						"target" => $kpiTeamHistory["target"] ?? '0.00',
+						"result" => $kpiTeamHistory["result"] ?? '0.00',
+						"createDateTime" => ModelMaster::monthDateYearTime($kpiTeamHistory["createDateTime"]),
+						"departmentName" => Department::teamDepartment($kt["teamId"])
+					];
+				} else {
+					$time = explode(' ', $kt["createDateTime"]);
+					$data[$kt["kpiTeamId"]] = [
+						//"creater" => User::employeeNameByuserId($history["createrId"]),
+						"teamName" => Team::teamName($kt["teamId"]),
+						"createDate" => ModelMaster::engDateHr($kt["createDateTime"]),
+						"time" => ModelMaster::timeText($time[1] ?? '00:00'),
+						"target" => $kt["target"] ?? '0.00',
+						"result" => $kt["result"] ?? '0.00',
+						"createDateTime" => ModelMaster::monthDateYearTime($kt["createDateTime"]),
+						"departmentName" => Department::teamDepartment($kt["teamId"])
+					];
+				}
+			endforeach;
+		}
+		return json_encode($data);
 	}
 
 	public function actionKpiHistoryForChart($kpiId, $kpiTeamId, $kpiTeamHistoryId)
