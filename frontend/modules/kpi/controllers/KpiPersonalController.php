@@ -707,7 +707,8 @@ class KpiPersonalController extends Controller
         $sumvalue = $_POST["sumvalue"];
         $targetAmount = $_POST["targetAmount"];
         $kpiId = $_POST["kpiId"];
-        $month = $_POST["month"];
+		$month = $_POST["month"];
+        $monthName = $_POST["monthName"];
         $year = $_POST["year"];
         $formattedRange = $_POST["formattedRange"];
         $kpiEmployeeId = $_POST["kpiEmployeeId"];;
@@ -717,11 +718,11 @@ class KpiPersonalController extends Controller
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-history-employee?kpiId=' . $kpiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-history-employee?kpiId='  . $kpiId . '&month=' . $month . '&year=' . $year);
 		$history = curl_exec($api);
 		$history = json_decode($history, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-history-team?kpiId=' . $kpiId );
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-history-team?kpiId='  . $kpiId . '&month=' . $month . '&year=' . $year );
 		$historyTeam = curl_exec($api);
 		$historyTeam = json_decode($historyTeam, true);
 
@@ -734,7 +735,7 @@ class KpiPersonalController extends Controller
             "sumvalue" => $sumvalue,
             "targetAmount" => $targetAmount,
             "kpiId" => $kpiId,
-            "month" => $month,
+            "month" => $monthName,
             "year" => $year,
             "formattedRange" => $formattedRange,
             "history" => $history,
