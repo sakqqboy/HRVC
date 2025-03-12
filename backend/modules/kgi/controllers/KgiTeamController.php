@@ -892,7 +892,9 @@ class KgiTeamController extends Controller
 				$kgiTeamHistory = KgiTeamHistory::find()
 					->where([
 						"kgiTeamId" => $kt["kgiTeamId"],
-						"status" => [1, 2, 4]
+						"status" => [1, 2, 4],
+						"month" => $month != '' ? $month : 0,
+						"year" => $year != '' ? $year : 0,
 					])
 					->orderBy('createDateTime DESC')
 					->asArray()

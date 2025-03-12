@@ -591,12 +591,14 @@ class KgiPersonalController extends Controller
 		}
 		return json_encode($data);
 	}
-	public function actionKgiHistoryEmployee($kgiId)
+	public function actionKgiHistoryEmployee($kgiId, $month, $year)
 	{
 		$kgiEmployee = KgiEmployee::find()
 			->where([
 				"kgiId" => $kgiId,
-				"status" => [1, 2, 4]
+				"status" => [1, 2, 4],
+				"month" => $month != '' ? $month : 0,
+				"year" => $year != '' ? $year : 0,
 			])
 			->orderBy("updateDateTime DESC")
 			->asArray()
@@ -607,7 +609,9 @@ class KgiPersonalController extends Controller
 				$kgiEmployeeHistory = KgiEmployeeHistory::find()
 					->where([
 						"kgiEmployeeId" => $kt["kgiEmployeeId"],
-						"status" => [1, 2, 4]
+						"status" => [1, 2, 4],
+						"month" => $month != '' ? $month : 0,
+						"year" => $year != '' ? $year : 0,
 					])
 					->orderBy('createDateTime DESC')
 					->asArray()
