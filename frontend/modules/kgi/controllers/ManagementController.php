@@ -2197,7 +2197,7 @@ class ManagementController extends Controller
 		$kgiHistoryTeam = curl_exec($api);
 		$kgiHistoryTeam = json_decode($kgiHistoryTeam, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/kgi-history-employee?kgiId=' . $kgiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/kgi-history-employee?kgiId=' . $kgiId . '&&month=' . $month . '&&year=' . $year);
 		$kgiHistoryEmployee = curl_exec($api);
 		$kgiHistoryEmployee = json_decode($kgiHistoryEmployee, true);
 
