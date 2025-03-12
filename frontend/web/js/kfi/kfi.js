@@ -1027,6 +1027,19 @@ function toggleCalendar(triggerId, calendarId) {
         });
     }
 }
+
+function closeCalendarOnDateSelect(datePickerId, calendarId) {
+    const datePicker = document.getElementById(datePickerId);
+    const calendarPopup = document.getElementById(calendarId);
+
+    if (datePicker) {
+        datePicker.addEventListener('change', function () {
+            if (calendarPopup) {
+                calendarPopup.style.display = 'none'; // ปิด popup เมื่อเลือกวันที่
+            }
+        });
+    }
+}
 // ฟังก์ชันซ่อนปฏิทินเมื่อคลิกภายนอก
 document.addEventListener('click', function (event) {
     const calendars = [
@@ -1058,6 +1071,9 @@ document.addEventListener('click', function (event) {
 toggleCalendar('multi-due-term', 'calendar-due-term');
 toggleCalendar('multi-due-update', 'calendar-due-update');
 
+closeCalendarOnDateSelect("endDatePicker", "calendar-due-term");
+
+
 document.addEventListener("DOMContentLoaded", function () {
     // คำนวณปีปัจจุบัน
     const currentYear = new Date().getFullYear();
@@ -1076,6 +1092,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const option = document.createElement('option');
             option.value = year;
             option.textContent = year;
+            if (year == currentYear) {
+                option.selected = true; // ตั้งค่าปีปัจจุบันเป็นค่าเริ่มต้น
+            }
             yearSelect.appendChild(option);
         }
     } else {
@@ -1318,8 +1337,13 @@ function validateFormKfi(acType) {
 
 // อัปเดตข้อความวันที่ใน multi-due-term
 function updateSelectedDates() {
-    const startDate = window.startDate || "Start";
-    const endDate = window.endDate || "End";
+
+    const fromDate = document.getElementById('fromDate');
+    const toDate = document.getElementById('toDate');
+
+    let startDate = window.startDate || (fromDate && fromDate.value !== '' ? fromDate.value : "Start");
+    let endDate = window.endDate || (toDate && toDate.value !== '' ? toDate.value : "End");
+
 
     // อัปเดตข้อความใน multi-due-term
     document.getElementById("multi-due-term").innerHTML =

@@ -412,7 +412,7 @@ class ManagementController extends Controller
 	}
 
 
-	public function actionKpiHistoryEmployee($kpiId)
+	public function actionKpiHistoryEmployee($kpiId, $month, $year)
 	{
 		$data = [];
 
@@ -428,6 +428,8 @@ class ManagementController extends Controller
 				'keh.updateDateTime',
 				'ke.employeeId',
 				'ke.kpiId',
+				'ke.month',
+				'ke.year',
 				'CONCAT(e.employeeFirstname, " ", e.employeeSurename) AS employeeFullname',
 				'e.picture',
 				't.teamName'
@@ -449,10 +451,12 @@ class ManagementController extends Controller
 			->where(['keh.status' => [1, 2, 3]])
 			->andWhere(['ke.status' => [1, 2, 3]])
 			->andWhere(['ke.kpiId' => $kpiId])
+			->andWhere(['ke.month' => $month])
+			->andWhere(['ke.year' => $year])
 			->andWhere(['e.status' => 1])
 			->groupBy([
 				'keh.kpiEmployeeHistoryId',
-				'keh.kpiEmployeeId',
+				'keh.kpiEmployeeId',	
 				'keh.result',
 				'keh.target',
 				'keh.createDateTime',
@@ -461,6 +465,8 @@ class ManagementController extends Controller
 				'keh.updateDateTime',
 				'ke.employeeId',
 				'ke.kpiId',
+				'ke.month',
+				'ke.year',
 				'employeeFullname',
 				'e.picture',
 				't.teamName'
@@ -490,12 +496,14 @@ class ManagementController extends Controller
 		return json_encode($data);
 	}
 
-	public function actionKpiHistoryTeam($kpiId)
+	public function actionKpiHistoryTeam($kpiId, $month , $year)
 	{
 
 		$kpiTeam = kpiTeam::find()
 			->where([
 				"kpiId" => $kpiId,
+				"month" => $month,
+				"year" => $year,
 				"status" => [1, 2, 4]
 			])
 			->orderBy("updateDateTime DESC")

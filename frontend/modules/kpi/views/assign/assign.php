@@ -50,7 +50,7 @@ $this->title = 'KPI Grid View';
                                 <?= Yii::t('app', 'Back') ?>
                             </text>
                         </a>
-                        <input type="hidden" id="url" name="url" value="<?= Yii::$app->request->referrer ?>">
+                        <input type="hidden" id="url" name="url" value="<?= $url ?>">
                         <span class="">
                             <?= $kpiDetail["kpiName"] ?>
                         </span>

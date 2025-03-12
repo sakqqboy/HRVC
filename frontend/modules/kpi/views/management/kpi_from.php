@@ -988,7 +988,8 @@ function modalHistory(kpiId) {
             sumvalue: sumvalue,
             targetAmount: targetAmount,
             kpiId: kpiId,
-            month: monthName,
+            monthName: monthName,
+            month: month,
             year: year,
             formattedRange: formattedRange,
             kpiHistoryId: kpiHistoryId
