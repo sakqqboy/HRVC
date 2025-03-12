@@ -39,7 +39,8 @@ class KpiTeam extends \backend\models\hrvc\master\KpiTeamMaster
         $kpiTeam = KpiTeam::find()
             ->select('t.teamName,kpi_team.teamId')
             ->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
-            ->where(["t.status" => 1, "kpi_team.status" => 1, "kpi_team.kpiId" => $kpiId])
+            ->where(["t.status" => 1, "kpi_team.kpiId" => $kpiId])
+            ->andWhere("kpi_team.status!=99")
             ->asArray()
             ->all();
         return count($kpiTeam);
@@ -144,18 +145,18 @@ class KpiTeam extends \backend\models\hrvc\master\KpiTeamMaster
         return $date;
     }
 
-    public static function autoSummalys($kpiId,$month,$year)
+    public static function autoSummalys($kpiId, $month, $year)
     {
         // คำนวณผลรวมของ result ในตาราง kpi_team
         $sumResult = KpiTeam::find()
-        ->where([
-            'kpiId' => $kpiId,
-            'month' => $month,
-            'year' => $year,
-            'status' => [1,2,4]
-        ])
-        ->sum('result');
-    
+            ->where([
+                'kpiId' => $kpiId,
+                'month' => $month,
+                'year' => $year,
+                'status' => [1, 2, 4]
+            ])
+            ->sum('result');
+
         return $sumResult ?? 0; // คืนค่า 0 หากไม่มีผลลัพธ์
     }
 }

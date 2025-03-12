@@ -45,7 +45,8 @@ class KgiTeam extends \backend\models\hrvc\master\KgiTeamMaster
             ->all();*/
 
         $kgiTeams = KgiTeam::find()
-            ->where(["kgiId" => $kgiId, "status" => [1, 2, 4]])
+            ->where(["kgiId" => $kgiId])
+            ->andWhere("status!=99")
             ->asArray()
             ->all();
         return count($kgiTeams);
