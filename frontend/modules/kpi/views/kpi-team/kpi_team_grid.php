@@ -563,7 +563,7 @@ $this->title = "TEAM KPI";
                                     </div>
                                     <div class="col-4 text-center mt-16 pt-5">
                                         <?php
-                                                if ($colorFormat == 'disable' && $role >= 5) {
+                                                if ($colorFormat == 'disable' && $role >= 3) {
                                                 ?>
                                         <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/prepare-update/<?= ModelMaster::encodeParams(['kpiTeamId' => $kpiTeamId, 'kpiHistoryId' => 0]) ?>"
                                             style="display: flex; justify-content: center; align-items: center; padding: 7px 9px;  height: 30px; gap: 6px; flex-shrink: 0;"
