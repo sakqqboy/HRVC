@@ -2183,6 +2183,8 @@ class ManagementController extends Controller
 	public function actionKgiUpdateHistory()
 	{
 		$kgiId = $_POST["kgiId"];
+		$month = $_POST["month"];
+		$year = $_POST["year"];
 		$res = [];
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -2191,7 +2193,7 @@ class ManagementController extends Controller
 		$kgi = curl_exec($api);
 		$kgi = json_decode($kgi, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-history-team?kgiId=' . $kgiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-history-team?kgiId=' . $kgiId . '&&month=' . $month . '&&year=' . $year);
 		$kgiHistoryTeam = curl_exec($api);
 		$kgiHistoryTeam = json_decode($kgiHistoryTeam, true);
 
