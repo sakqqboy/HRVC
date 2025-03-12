@@ -148,6 +148,8 @@ class ManagementController extends Controller
 	}
 	public function actionKgiDetail($id, $kgiHistoryId)
 	{
+		// throw new Exception(print_r($kgiHistoryId,true));
+
 		if ($kgiHistoryId == 0) {
 			$kgiHistory = KgiHistory::find()->where(["status" => [1, 2, 4], "kgiId" => $id])
 				->orderBy('kgiHistoryId DESC')

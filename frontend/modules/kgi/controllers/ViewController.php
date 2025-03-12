@@ -29,7 +29,10 @@ class ViewController extends Controller
 	}
 	public function actionIndex($hash)
 	{
+		// $testparam = '2kuTjYKCc-NOCkEIOKgdoVOPLb_M7zajc1FJprQi-g0=';
 		$param = ModelMaster::decodeParams($hash);
+		// throw new Exception(print_r($param,true));
+// 
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
@@ -91,6 +94,8 @@ class ViewController extends Controller
 		//throw new Exception(print_r($kgiDetail, true));
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
+		// throw new Exception(print_r($param,true));
+
 		return $this->render('kgi_view', [
 			"role" => $role,
 			"kgiDetail" => $kgiDetail,
