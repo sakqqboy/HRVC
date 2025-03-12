@@ -31,10 +31,11 @@ if (isset($kgiHistoryEmployee) && count($kgiHistoryEmployee) > 0) {
 				<div class="col-4" style="display: flex; flex-direction: column; text-align: right;">
 					<div>
 						<span class="text-gray" id="target-history" style="font-size: 18px; font-weight: 400;">
-							<?= $kt["target"] ?>
+
+							<?= number_format($kt["target"], 2) ?>
 						</span>
 						<span class="text-blue" id="result-history" style="font-size: 18px; font-weight: 600;">
-							/ <?= $kt["result"] ?>
+							/<?= number_format($kt["result"], 2) ?>
 						</span>
 					</div>
 					<span class="text-gray" id="createDate-history" style="font-size: 14px; font-weight: 400;">

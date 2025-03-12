@@ -27,10 +27,10 @@ if (isset($kgiHistoryTeam) && count($kgiHistoryTeam) > 0) {
 						<div style="display: flex; gap: 6px; flex-direction: column;">
 							<text class="text-end">
 								<span class="text-gray" style="font-size: 18px; font-weight: 400;">
-									<?= $kht["target"] ?>
+									<?= number_format($kht["target"], 2) ?>
 								</span>
 								<span class="text-blue" style="font-size: 18px; font-weight: 600;">
-									/<?= $kht["result"] ?>
+									/<?= number_format($kht["result"], 2) ?>
 								</span>
 							</text>
 							<text class="text-gray text-end" style="font-size: 14px; font-weight: 400;">
