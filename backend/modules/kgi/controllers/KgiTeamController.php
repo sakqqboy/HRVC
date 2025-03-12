@@ -874,12 +874,14 @@ class KgiTeamController extends Controller
 		}
 		return json_encode($data);
 	}
-	public function actionKgiHistoryTeam($kgiId)
+	public function actionKgiHistoryTeam($kgiId, $month, $year)
 	{
 		$kgiTeam = KgiTeam::find()
 			->where([
 				"kgiId" => $kgiId,
-				"status" => [1, 2, 4]
+				"status" => [1, 2, 4],
+				"month" => $month != '' ? $month : 0,
+				"year" => $year != '' ? $year : 0,
 			])
 			->orderBy("updateDateTime DESC")
 			->asArray()

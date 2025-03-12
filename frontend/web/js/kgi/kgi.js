@@ -1012,21 +1012,23 @@ function showEditRelateKpi(type, kgiId) {
 }
 function kgiUpdateHistory(kgiId) {
 	var url = $url + 'kgi/management/kgi-update-history';
-		$.ajax({
-			type: "POST",
-			dataType: 'json',
-			url: url,
-			data: { kgiId: kgiId },
-			success: function (data) {
-				$("#month-year").html(data.month + ' ' + data.year); 
-				$("#formattedRange").html(data.fromDate + ' - ' + data.toDate);
-				$("#Target").html(data.target);
-				$("#Result").html(' / ' + data.result); 
-				$("#DueBehind").html(data.dueBehide + '%'); 
-				$(".percentage").html(data.ratio + '%');
-				$(".circle").attr("stroke-dasharray", data.ratio + ",100");
-				$("#history-list-team").html(data.teamText);
-				$("#history-list-creater").html(data.individualText);
-			}
-		});
+	var month = $("#hiddenMonth").val();
+	var year = $("#hiddenYear").val();
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { kgiId: kgiId, month: month, year: year },
+		success: function (data) {
+			$("#month-year").html(data.month + ' ' + data.year);
+			$("#formattedRange").html(data.fromDate + ' - ' + data.toDate);
+			$("#Target").html(data.target);
+			$("#Result").html(' / ' + data.result);
+			$("#DueBehind").html(data.dueBehide + '%');
+			$(".percentage").html(data.ratio + '%');
+			$(".circle").attr("stroke-dasharray", data.ratio + ",100");
+			$("#history-list-team").html(data.teamText);
+			$("#history-list-creater").html(data.individualText);
+		}
+	});
  }
