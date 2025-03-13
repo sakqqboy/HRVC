@@ -195,16 +195,16 @@ class AssignController extends Controller
 			endforeach;
 		}
 		if (!empty($_POST["team"])) {
-		$deleteTeamKgi = KgiTeam::find()
-			->where(['not in', 'teamId', $_POST["team"]])
-			->andWhere(["kgiId" => $_POST["kgiId"]])
-			->all();
-		if (isset($deleteTeamKgi) && count($deleteTeamKgi) > 0) {
-			foreach ($deleteTeamKgi as $delKgi):
-				$delKgi->delete();
-			endforeach;
+			$deleteTeamKgi = KgiTeam::find()
+				->where(['not in', 'teamId', $_POST["team"]])
+				->andWhere(["kgiId" => $_POST["kgiId"]])
+				->all();
+			if (isset($deleteTeamKgi) && count($deleteTeamKgi) > 0) {
+				foreach ($deleteTeamKgi as $delKgi):
+					$delKgi->delete();
+				endforeach;
+			}
 		}
-	} 
 		$employeeIds = [];
 		$i = 0;
 		if (isset($_POST["employeeTarget"]) && count($_POST["employeeTarget"]) > 0) {
@@ -213,28 +213,24 @@ class AssignController extends Controller
 					->where(["employeeId" => $employeeId, "kgiId" => $_POST["kgiId"]])
 					->andWhere("status!=99")
 					->one();
-					// throw new Exception(print_r($_POST["employeeTarget"], true));
+				// throw new Exception(print_r($_POST["employeeTarget"], true));
 
 				$target = str_replace(",", "", $target);
 
 				if (isset($kgiEmployee) && !empty($kgiEmployee)) {
-					if ($kgiEmployee->target != $target && $target > 0) {
+					if ($kgiEmployee->target != $target && $target && trim($target) == "") {
 						$kgiEmployee->target = $target;
 						$kgiEmployee->updateDateTime = new Expression('NOW()');
 						$kgiEmployee->save(false);
 					}
-					if ($target == 0 || $target == 0.00 || trim($target) == "" || $target == null) {
+					if (trim($target) == "" || $target == null) {
 						KgiEmployee::deleteAll([
 							"employeeId" => $employeeId,
 							"kgiId" => $_POST["kgiId"]
 						]);
 					}
 				} else {
-
-					// $target = trim($target);
-					// $target = is_numeric($target) ? (float) $target : 0;
-
-					if ($target >= 1) {
+					if (trim($target) != "" && $target != null) {
 						$kgiEmployee = new KgiEmployee();
 						$kgiEmployee->kgiId = $_POST["kgiId"];
 						$kgiEmployee->employeeId = $employeeId;
@@ -255,7 +251,6 @@ class AssignController extends Controller
 				$employeeIds[$i] = $employeeId;
 				$i++;
 			endforeach;
-
 		}
 		if (count($employeeIds) > 0) {
 			$deleteEmployeeKgi = KgiEmployee::find()

@@ -215,14 +215,14 @@ class AssignController extends Controller
 						$kpiEmployee->updateDateTime = new Expression('NOW()');
 						$kpiEmployee->save(false);
 					}
-					if ($target == 0 || $target == 0.00 || trim($target) == "" || $target == null) {
+					if (trim($target) == "" || $target == null) {
 						KpiEmployee::deleteAll([
 							"employeeId" => $employeeId,
 							"kpiId" => $_POST["kpiId"]
 						]);
 					}
 				} else {
-					if ($target > 0) {
+					if (trim($target) != "" && $target != null) {
 						$kpiEmployee = new KpiEmployee();
 						$kpiEmployee->kpiId = $_POST["kpiId"];
 						$kpiEmployee->employeeId = $employeeId;
@@ -262,7 +262,7 @@ class AssignController extends Controller
 				endforeach;
 			}
 		}
-		return $this->redirect(Yii::$app->homeUrl . 'kpi/assign/assign/' . ModelMaster::encodeParams(['kpiId' => $_POST["kpiId"], "companyId" => $_POST["companyId"],"url" => $_POST["url"]]));
+		return $this->redirect(Yii::$app->homeUrl . 'kpi/assign/assign/' . ModelMaster::encodeParams(['kpiId' => $_POST["kpiId"], "companyId" => $_POST["companyId"], "url" => $_POST["url"]]));
 	}
 	public function actionDeleteZero()
 	{
