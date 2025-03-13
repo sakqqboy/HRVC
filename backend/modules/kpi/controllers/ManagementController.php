@@ -87,7 +87,7 @@ class ManagementController extends Controller
 						}
 					}
 				}
-				$allEmployee = KpiEmployee::kpiEmployee($kpi["kpiId"]);
+				$allEmployee = KpiEmployee::kpiEmployee($kpi["kpiId"],$kpi["month"],$kpi["year"]);
 				$selectPic = [];
 				if (count($allEmployee) >= 3) {
 					$randomEmpployee = array_rand($allEmployee, 3);
@@ -210,7 +210,7 @@ class ManagementController extends Controller
 				"fromDate" => $kpiHistory["fromDate"],
 				"toDate" => $kpiHistory["toDate"],
 				"isOver" => ModelMaster::isOverDuedate(Kpi::nextCheckDate($kpi['kpiId'])),
-				"kpiEmployee" => KpiEmployee::kpiEmployee($kpi['kpiId']),
+				"kpiEmployee" => KpiEmployee::kpiEmployee($kpi["kpiId"],$kpi["month"],$kpi["year"]),
 				"kpiEmployeeDetail" => KpiEmployee::kpiEmployeeDetail($kpi["kpiId"]),
 				"countTeam" => KpiTeam::kpiTeam($kpi['kpiId']),
 				"lastUpdate" =>  ModelMaster::dateNumber($kpiHistory["updateDateTime"]),
@@ -269,8 +269,8 @@ class ManagementController extends Controller
 				"fromDate" => $kpi["fromDate"],
 				"toDate" => $kpi["toDate"],
 				"isOver" => ModelMaster::isOverDuedate(Kpi::nextCheckDate($kpi['kpiId'])),
-				"kpiEmployee" => KpiEmployee::kpiEmployee($kpi['kpiId']),
-				"kpiEmployeeDetail" => KpiEmployee::kpiEmployeeDetail($kpi["kpiId"]),
+				"kpiEmployee" => KpiEmployee::kpiEmployee($kpi["kpiId"],$kpi["month"],$kpi["year"]),
+				"kpiEmployeeDetail" => KpiEmployee::kpiEmployee($kpi["kpiId"],$kpi["month"],$kpi["year"]),
 				"countTeam" => KpiTeam::kpiTeam($kpi['kpiId']),
 				// "unitText" => Unit::unitName($kpiHistory["unitId"]),
 				"issue" => KpiIssue::lastestIssue($kpi["kpiId"])["issue"],
@@ -676,7 +676,7 @@ class ManagementController extends Controller
 							}
 						}
 					}
-					$allEmployee = KpiEmployee::kpiEmployee($kpi["kpiId"]);
+					$allEmployee = KpiEmployee::kpiEmployee($kpi["kpiId"],$kpi["month"],$kpi["year"]);
 					$selectPic = [];
 					if (count($allEmployee) >= 3) {
 						$randomEmpployee = array_rand($allEmployee, 3);
@@ -742,7 +742,7 @@ class ManagementController extends Controller
 						"companyId" => $kpi["companyId"],
 						"branch" => KpiBranch::kpiBranch($kpi["kpiId"]),
 						"kpiBranch" => KpiBranch::kpiBranches($kpi["kpiId"]),
-						"kpiEmployee" => KpiEmployee::kpiEmployee($kpi["kpiId"]),
+						"kpiEmployee" => KpiEmployee::kpiEmployee($kpi["kpiId"],$kpi["month"],$kpi["year"]),
 						"quantRatio" => $kpi["quantRatio"],
 						"targetAmount" => $kpi["targetAmount"],
 						"code" => $kpi["code"],
@@ -809,7 +809,9 @@ class ManagementController extends Controller
 			->all();
 		$data = [];
 		if (isset($kpiHistory) && count($kpiHistory) > 0) {
-			$allEmployee = kpiEmployee::kpiEmployee($kpiId);
+			
+			foreach ($kpiHistory as $history):
+				$allEmployee = KpiEmployee::kpiEmployee($kpiId,$history["month"],$history["year"]);
 			$selectPic = [];
 			if (count($allEmployee) >= 3) {
 				$randomEmpployee = array_rand($allEmployee, 3);
@@ -822,7 +824,7 @@ class ManagementController extends Controller
 					sort($selectPic);
 				}
 			}
-			foreach ($kpiHistory as $history):
+			
 				if (!isset($data[$history["year"]][$history["month"]])) {
 					$ratio = 0;
 					if ($history["code"] == '<' || $history["code"] == '=') {
