@@ -128,7 +128,6 @@ $this->title = 'KGI Grid View';
                                             <?php
                                             }
                                             ?>
-
                                         </div>
                                     </div>
                                     <div class=" col-lg-3 col-md-3 col-4 pl-30">
