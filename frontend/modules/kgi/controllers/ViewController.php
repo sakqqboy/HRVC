@@ -94,7 +94,7 @@ class ViewController extends Controller
 		//throw new Exception(print_r($kgiDetail, true));
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
-		// throw new Exception(print_r($param,true));
+		// throw new Exception(print_r($kgis,true));
 
 		return $this->render('kgi_view', [
 			"role" => $role,
@@ -130,21 +130,56 @@ class ViewController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . '&&kgiHistoryId=0');
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
+		
+		curl_close($api);
+		$kgiHistoryData = [];
+
+		if (!empty($kgiTeamsHistory)) {
+			foreach ($kgiTeamsHistory as $year => $months) {
+				if (!is_array($months)) {
+					continue; // ข้ามค่าที่ไม่ใช่ array
+				}
+
+				foreach ($months as $month => $history) {
+					if (!is_array($history)) {
+						continue; // ข้ามค่าที่ไม่ใช่ array
+					}
+
+					$kgiHistoryData[$year][$month] = [
+						"kgiTeamHistoryId" => $history["kgiTeamHistoryId"] ?? null,
+						"target" => $history['target'] ?? null,
+						"unit" => $history['unit'] ?? null,
+						"month" => ModelMaster::fullMonthText($month),
+						"year" => $year,
+						"teamId" => $teamId,
+						"kgiId" => $kgiId,
+						"status" => $history['status'] ?? null,
+						"quantRatio" => $history["quantRatio"] ?? null,
+						"code" => $history["code"] ?? null,	
+						"result" => $history['result'] ?? null,
+						"ratio" => $history['ratio'] ?? null,
+						"amountType" => $history["amountType"] ?? null,
+						"isOver" => $history['isOver'] ?? null,
+						"fromDate" => $history['fromDate'] ?? null,
+						"toDate" => $history['toDate'] ?? null,
+						"kgiEmployee" => KgiEmployee::countKgiEmployeeInTeam($teamId, $kgiId, $month, $year)
+					];
+				}
+			}
+		}
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
-		$kgiEmployee = KgiEmployee::countKgiEmployeeInTeam($teamId, $kgiId);
-		curl_close($api);
-		//throw new Exception(print_r($kgiTeamsHistory, true));
+		// throw new Exception(print_r($kgiHistoryData, true));
 		return $this->render('kgi_team_history', [
 			"role" => $role,
 			"kgiDetail" => $kgiDetail,
-			"kgiTeamsHistory" => $kgiTeamsHistory,
+			"kgiTeamsHistory" => $kgiHistoryData,
 			"kgiId" => $kgiId,
 			"kgiTeamId" => $kgiTeamId,
 			"units" => $units,
 			"months" => $months,
 			"isManager" => $isManager,
-			"kgiEmployee" => $kgiEmployee,
+			// "kgiEmployee" => $kgiEmployee,
 			"teamId" => $teamId
 		]);
 	}
@@ -247,7 +282,7 @@ class ViewController extends Controller
 		curl_close($api);
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
-		//throw new Exception(print_r($kgiTeams, true));
+		// throw new Exception(print_r($kgiTeams, true));
 		return $this->render('kgi_history', [
 			"role" => $role,
 			"kgiDetail" => $kgiDetail,

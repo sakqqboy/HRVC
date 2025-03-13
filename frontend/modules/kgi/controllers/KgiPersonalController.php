@@ -244,6 +244,7 @@ class KgiPersonalController extends Controller
 		}
 
 		curl_close($api);
+			// throw new Exception(print_r($kgis, true));
 
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();

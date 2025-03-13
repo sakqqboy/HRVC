@@ -105,7 +105,7 @@ class KgiTeamController extends Controller
 				} else {
 					$ratio = 0;
 				}
-				$teamEmployee = KgiEmployee::countKgiFromTeam($kgiTeam["kgiId"], $kgiTeam["teamId"]);
+				$teamEmployee = KgiEmployee::countKgiFromTeam($kgiTeam["kgiId"], $kgiTeam["teamId"], $kgiTeamHistory["month"], $kgiTeamHistory["year"]);
 				$countTeamEmployee = count($teamEmployee);
 				$selectPic = [];
 				if ($countTeamEmployee >= 3) {
@@ -226,7 +226,7 @@ class KgiTeamController extends Controller
 				} else {
 					$ratio = 0;
 				}
-				$teamEmployee = KgiEmployee::countKgiFromTeam($kgiTeam["kgiId"], $kgiTeam["teamId"]);
+				$teamEmployee = KgiEmployee::countKgiFromTeam($kgiTeam["kgiId"], $kgiTeam["teamId"], $kgiTeamHistory["month"], $kgiTeamHistory["year"]);
 				$countTeamEmployee = count($teamEmployee);
 				$selectPic = [];
 				if ($countTeamEmployee >= 3) {
@@ -269,7 +269,7 @@ class KgiTeamController extends Controller
 					"kgiTeamHistoryId" => $kgiTeamHistory["kgiTeamHistoryId"] ?? 0,
 					"flag" => Country::countryFlagBycompany($kgiTeam["companyId"]),
 					"countryName" => Country::countryNameBycompany($kgiTeam['companyId']),
-					"kgiEmployee" => KgiEmployee::kgiEmployee($kgiTeam["kgiId"]),
+					// "kgiEmployee" =>  KgiEmployee::kgiEmployee($kgiTeamHistory["kgiId"],$kgiTeamHistory["month"],$kgiTeamHistory["year"]),
 					"ratio" => number_format($ratio, 2),
 					"isOver" => ModelMaster::isOverDuedate(KgiTeam::nextCheckDate($kgiTeam['kgiTeamId'])),
 					"employee" => KgiTeam::kgiTeamEmployee($kgiTeam['kgiId'], $teamId),
@@ -358,7 +358,7 @@ class KgiTeamController extends Controller
 				"nextCheckDate" =>  $kgiTeamHistory["nextCheckDate"],
 				"nextCheckText" => ModelMaster::engDate($kgiTeamHistory["nextCheckDate"], 2),
 				"status" => $kgiTeamHistory["status"],
-				"kgiEmployee" => KgiEmployee::kgiEmployee($kgiTeamHistory["kgiId"]),
+				"kgiEmployee" => KgiEmployee::kgiEmployee($kgiTeamHistory["kgiId"],$kgiTeamHistory["month"],$kgiTeamHistory["year"]),
 				"ratio" => number_format($ratio, 2),
 				"kgiDetail" => $kgiTeamHistory["kgiDetail"],
 				"remark" => $kgiTeamHistory["remark"],
@@ -400,7 +400,7 @@ class KgiTeamController extends Controller
 	public function actionKgiTeamFilter($companyId, $branchId, $teamId, $month, $status, $year)
 	{
 		$kgiTeams = KgiTeam::find()
-			->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,kgi_team.updateDateTime,
+			->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,kgi_team.updateDateTime,kgi_team.month,kgi_team.year,
 			kgi_team.teamId,kgi_team.target')
 			->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_team.kgiId")
 			->JOIN("LEFT JOIN", "kgi_branch kb", "kb.kgiId=k.kgiId")
@@ -463,7 +463,7 @@ class KgiTeamController extends Controller
 				} else {
 					$ratio = 0;
 				}
-				$teamEmployee = KgiEmployee::countKgiFromTeam($kgiTeam["kgiId"], $kgiTeam["teamId"]);
+				$teamEmployee = KgiEmployee::countKgiFromTeam($kgiTeam["kgiId"], $kgiTeam["teamId"], $kgiTeamHistory["month"], $kgiTeamHistory["year"]);
 				$countTeamEmployee = count($teamEmployee);
 				$selectPic = [];
 				if ($countTeamEmployee >= 3) {
@@ -506,7 +506,7 @@ class KgiTeamController extends Controller
 					"kgiTeamHistoryId" => $kgiTeamHistory["kgiTeamHistoryId"] ?? 0,
 					"flag" => Country::countryFlagBycompany($kgiTeam["companyId"]),
 					"countryName" => Country::countryNameBycompany($kgiTeam['companyId']),
-					"kgiEmployee" => KgiEmployee::kgiEmployee($kgiTeam["kgiId"]),
+					"kgiEmployee" => KgiEmployee::kgiEmployee($kgiTeam["kgiId"],$kgiTeamHistory["month"],$kgiTeamHistory["year"]),
 					"ratio" => number_format($ratio, 2),
 					"isOver" => ModelMaster::isOverDuedate(KgiTeam::nextCheckDate($kgiTeam['kgiTeamId'])),
 					"employee" => KgiTeam::kgiTeamEmployee($kgiTeam['kgiId'], $kgiTeam["teamId"]),

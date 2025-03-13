@@ -88,7 +88,7 @@ class ManagementController extends Controller
 				} else {
 					$ratio = 0;
 				}
-				$allEmployee = KgiEmployee::kgiEmployee($kgi["kgiId"]);
+				$allEmployee = KgiEmployee::kgiEmployee($kgi["kgiId"],$kgi["month"],$kgi["year"]);
 				$selectPic = [];
 				if (count($allEmployee) >= 3) {
 					$randomEmpployee = array_rand($allEmployee, 3);
@@ -121,6 +121,7 @@ class ManagementController extends Controller
 					//"result" => number_format($kgi["result"], 2),
 					"result" => $kgi["result"],
 					"unit" => Unit::unitName($kgi["unitId"]),
+					"year" => $kgi['year'],
 					"month" => ModelMaster::monthEng($kgi['month'], 1),
 					"monthShort" => ModelMaster::monthEng($kgi['month'], 2),
 					"priority" => $kgi["priority"],
@@ -182,7 +183,7 @@ class ManagementController extends Controller
 				"kgiName" => $kgi["kgiName"],
 				"companyId" => $kgi["companyId"],
 				"branch" => KgiBranch::kgiBranch($kgi["kgiId"]),
-				"kgiEmployee" => KgiEmployee::kgiEmployee($kgi["kgiId"]),
+				"kgiEmployee" => KgiEmployee::kgiEmployee($kgi["kgiId"],$kgi["month"],$kgi["year"]),
 				"kgiEmployeeDetail" => KgiEmployee::kgiEmployeeDetail($kgi["kgiId"]),
 				"detail" => $kgiHistory['description'],
 				"quantRatio" => $kgiHistory["quantRatio"],
@@ -242,7 +243,7 @@ class ManagementController extends Controller
 				"kgiName" => $kgi["kgiName"],
 				"companyId" => $kgi["companyId"],
 				"branch" => KgiBranch::kgiBranch($kgi["kgiId"]),
-				"kgiEmployee" => KgiEmployee::kgiEmployee($kgi["kgiId"]),
+				"kgiEmployee" => KgiEmployee::kgiEmployee($kgi["kgiId"],$kgi["month"],$kgi["year"]),
 				"kgiEmployeeDetail" => KgiEmployee::kgiEmployeeDetail($kgi["kgiId"]),
 				"creater" => User::employeeNameByuserId($kgi["createrId"]),
 				"detail" => $kgi['kgiDetail'],
@@ -508,7 +509,7 @@ class ManagementController extends Controller
 
 		if (count($kgis) > 0) {
 			foreach ($kgis as $kgi) :
-				$allEmployee = KgiEmployee::kgiEmployee($kgi["kgiId"]);
+				$allEmployee = KgiEmployee::kgiEmployee($kgi["kgiId"],$kgi["month"],$kgi["year"]);
 				$selectPic = [];
 				if (count($allEmployee) >= 3) {
 					$randomEmpployee = array_rand($allEmployee, 3);
@@ -763,20 +764,23 @@ class ManagementController extends Controller
 			->all();
 		$data = [];
 		if (isset($kgiHistory) && count($kgiHistory) > 0) {
-			$allEmployee = KgiEmployee::kgiEmployee($kgiId);
-			$selectPic = [];
-			if (count($allEmployee) >= 3) {
-				$randomEmpployee = array_rand($allEmployee, 3);
-				$selectPic[0] = $allEmployee[$randomEmpployee[0]];
-				$selectPic[1] = $allEmployee[$randomEmpployee[1]];
-				$selectPic[2] = $allEmployee[$randomEmpployee[2]];
-			} else {
-				if (count($allEmployee) > 0) {
-					$selectPic = $allEmployee;
-					sort($selectPic);
-				}
-			}
+			
 			foreach ($kgiHistory as $history):
+
+				$allEmployee = KgiEmployee::kgiEmployee($kgiId,$history["month"],$history["year"]);
+				$selectPic = [];
+				if (count($allEmployee) >= 3) {
+					$randomEmpployee = array_rand($allEmployee, 3);
+					$selectPic[0] = $allEmployee[$randomEmpployee[0]];
+					$selectPic[1] = $allEmployee[$randomEmpployee[1]];
+					$selectPic[2] = $allEmployee[$randomEmpployee[2]];
+				} else {
+					if (count($allEmployee) > 0) {
+						$selectPic = $allEmployee;
+						sort($selectPic);
+					}
+				}
+				
 				if (!isset($data[$history["year"]][$history["month"]])) {
 					$ratio = 0;
 					if ($history["code"] == '<' || $history["code"] == '=') {

@@ -132,9 +132,9 @@ $this->title = 'Team KGI History';
                                             <div class="row">
                                                 <div class="col-2 pt-2">
                                                     <?php
-                                                                if (isset($kgiEmployee['kgiEmployee'][0])) {
+                                                                if (isset($kgi['kgiEmployee'][0])) {
                                                                 ?>
-                                                    <img src="<?= Yii::$app->homeUrl . $kgiEmployee['kgiEmployee'][0] ?>"
+                                                    <img src="<?= Yii::$app->homeUrl . $kgi['kgiEmployee'][0] ?>"
                                                         class="pim-pic-grid " style="margin-left: -3px;">
                                                     <?php
                                                                 }
@@ -142,9 +142,9 @@ $this->title = 'Team KGI History';
                                                 </div>
                                                 <div class="col-2 pic-after pt-2">
                                                     <?php
-                                                                if (isset($kgiEmployee['kgiEmployee'][1])) {
+                                                                if (isset($kgi['kgiEmployee'][1])) {
                                                                 ?>
-                                                    <img src="<?= Yii::$app->homeUrl . $kgiEmployee['kgiEmployee'][1] ?>"
+                                                    <img src="<?= Yii::$app->homeUrl . $kgi['kgiEmployee'][1] ?>"
                                                         class="pim-pic-grid" style="margin-left: -3px;">
                                                     <?php
                                                                 }
@@ -152,9 +152,9 @@ $this->title = 'Team KGI History';
                                                 </div>
                                                 <div class="col-2 pic-after pt-2">
                                                     <?php
-                                                                if (isset($kgiEmployee['kgiEmployee'][2])) {
+                                                                if (isset($kgi['kgiEmployee'][2])) {
                                                                 ?>
-                                                    <img src="<?= Yii::$app->homeUrl . $kgiEmployee['kgiEmployee'][2] ?>"
+                                                    <img src="<?= Yii::$app->homeUrl . $kgi['kgiEmployee'][2] ?>"
                                                         class="pim-pic-grid" style="margin-left: -3px;">
                                                     <?php
                                                                 }
@@ -162,7 +162,7 @@ $this->title = 'Team KGI History';
                                                 </div>
                                                 <div class="col-6 number-tag load-<?= $colorFormat ?> pr-0 pl-0 pt-4"
                                                     style="margin-left: -3px; height:25px;width: 32px; margin-top: 2px;">
-                                                    <?= empty($kgiEmployee) ? 0 : count($kgiEmployee) ?>
+                                                    <?= empty($kgi['kgiEmployee']) ? 0 : count($kgi['kgiEmployee']) ?>
                                                 </div>
                                             </div>
                                         </div>
