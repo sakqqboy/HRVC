@@ -285,21 +285,21 @@ $this->title = "INDIVIDUAL KPI";
                                                             <?php } else { ?>
                                                             <div class="col-2 ">
                                                                 <div
-                                                                    class="<?= $kpi['countEmployee'] == 0 && $colorFormat != 'disable' ? 'pim-pic-yenlow' : 'pim-pic-' . $colorFormat ?>">
+                                                                    class="<?= $kpi['countTeamEmployee'] == 0 && $colorFormat != 'disable' ? 'pim-pic-yenlow' : 'pim-pic-' . $colorFormat ?>">
                                                                     <img
                                                                         src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg">
                                                                 </div>
                                                             </div>
                                                             <div class="col-2 pic-after pt-0">
                                                                 <div
-                                                                    class="<?= $kpi['countEmployee'] == 0 && $colorFormat != 'disable' ? 'pim-pic-yenlow' : 'pim-pic-' . $colorFormat ?>">
+                                                                    class="<?= $kpi['countTeamEmployee'] == 0 && $colorFormat != 'disable' ? 'pim-pic-yenlow' : 'pim-pic-' . $colorFormat ?>">
                                                                     <img
                                                                         src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg">
                                                                 </div>
                                                             </div>
                                                             <div class="col-2 pic-after pt-0">
                                                                 <div
-                                                                    class="<?= $kpi['countEmployee'] == 0 && $colorFormat != 'disable' ? 'pim-pic-yenlow' : 'pim-pic-' . $colorFormat ?>">
+                                                                    class="<?= $kpi['countTeamEmployee'] == 0 && $colorFormat != 'disable' ? 'pim-pic-yenlow' : 'pim-pic-' . $colorFormat ?>">
                                                                     <img
                                                                         src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg">
                                                                 </div>

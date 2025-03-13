@@ -97,32 +97,38 @@ class KpiEmployee extends \frontend\models\hrvc\master\KpiEmployeeMaster
         }
         return $date;
     }
-    public static function countKpiEmployeeInTeam($teamId,$kgiId){
-        $kpiEmployee=KpiEmployee::find()
-        ->select('e.employeeId,e.picture,e.employeeId,e.gender')
-        ->JOIN("LEFT JOIN","employee e","e.employeeId=kpi_employee.employeeId")
-        ->where(["e.teamId"=>$teamId,"kpi_employee.kpiId"=>$kgiId])
-        ->asArray()
-        ->all();
+    public static function countKpiEmployeeInTeam($teamId,$kpiId,$year,$month){
+        $kpiEmployee = KpiEmployee::find()
+            ->select('e.picture,e.employeeId,e.gender,kpi_employee.year,kpi_employee.month')
+            ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
+            ->where("kpi_employee.status!=99 and e.status!=99")
+            ->andWhere([
+                "kpi_employee.kpiId" => $kpiId,
+                "e.teamId" => $teamId,
+                "kpi_employee.month" => $month,
+                "kpi_employee.year" => $year
+            ])
+            ->asArray()
+            ->all();
         $data=[];
         if(isset($kpiEmployee) && count( $kpiEmployee)>0){
             $i=0;
-foreach($kpiEmployee as $employee):
-    if ($employee["picture"] != '') {
-        $img = $employee["picture"];
-    } else {
-        if ($employee["gender"] == 1) {
-            $img = "image/user.png";
-        } else {
-            $img = "image/lady.png";
-        }
-    }
-$data["kpiEmployee"][$i]=$img;
-$i++;
-endforeach;
+            foreach($kpiEmployee as $employee):
+                if ($employee["picture"] != '') {
+                    $img = $employee["picture"];
+                } else {
+                    if ($employee["gender"] == 1) {
+                        $img = "image/user.png";
+                    } else {
+                        $img = "image/lady.png";
+                    }
+                }
+            $data[$i]=$img;
+            $i++;
+            endforeach;
         }else{
             return null;
         }
-        return $data;
+            return $data;
     }
 }

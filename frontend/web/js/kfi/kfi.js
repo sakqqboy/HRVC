@@ -1127,6 +1127,38 @@ document.addEventListener("DOMContentLoaded", function () {
         images[0].src = $url + 'image/calendar-blue.svg';
         images[1].src = $url + 'image/weld.svg';
         images[2].src = $url + 'image/calendar-blue.svg';
+    } else {
+        const today = new Date();
+        const month = String(today.getMonth() + 1).padStart(2, '0'); // แปลงเป็น string และเติม 0 ถ้าจำนวนน้อยกว่า 2 หลัก
+        year = today.getFullYear();
+
+        document.getElementById('multi-mount-year').innerHTML =
+            `${getMonthName(month)}, ${year} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
+
+        // เปลี่ยนสไตล์ข้อความ
+        $("#multi-mount-year").css({
+            "color": "var(--HRVC---Text-Black, #30313D)",
+            "font-family": '"SF Pro Display"',
+            "font-size": "14px",
+            "font-style": "normal",
+            "font-weight": "500",
+            "line-height": "20px"
+        });
+        // เปลี่ยนแปลงสไตล์ของ <span> input-group-text
+        const inputGroupText = document.querySelector('.input-group-text');
+        inputGroupText.style.backgroundColor = '#D7EBFF';
+        inputGroupText.style.border = '0.5px solid #BEDAFF';
+
+        // อัปเดตไอคอนภายใน <span>
+        const images = inputGroupText.querySelectorAll('img');
+        images[0].src = $url + 'image/calendar-blue.svg';
+        images[1].src = $url + 'image/weld.svg';
+        images[2].src = $url + 'image/calendar-blue.svg';
+
+        document.getElementById('hiddenMonth').value = month;
+        document.getElementById('hiddenYear').value = year;
+        document.getElementById('monthSelect').value = month;
+        document.getElementById('yearSelect').value = year;
     }
 
     const startDate = document.getElementById('fromDate').value;
