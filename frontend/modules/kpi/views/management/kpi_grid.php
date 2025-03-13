@@ -118,7 +118,15 @@ $this->title = 'KPI Grid View';
                             </div>
                             <div class="col-lg-1 col-md-2 col-4 text-center">
                                 <div class="<?= $colorFormat ?>-tag text-center">
-                                    <?= $kpi['status'] == 1 ? 'In process' : 'Completed' ?>
+                                    <?php
+                                            if ($kpi['nextCheck'] == "") { ?>
+                                    <?= Yii::t('app', 'Not set') ?>
+                                    <?php
+                                            } else { ?>
+                                    <?= $kpi['status'] == 1 ?  Yii::t('app', 'In process') :  Yii::t('app', 'Completed') ?>
+                                    <?php
+                                            }
+                                    ?>
                                 </div>
                             </div>
                             <div class=" col-lg-3 col-md-3 col-4 pl-30">
