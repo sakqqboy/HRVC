@@ -610,7 +610,7 @@ class KpiTeamController extends Controller
 
 		curl_close($api);
 
-		// throw new exception(print_r($waitForApprove, true));
+		// throw new exception(print_r($teamKpis, true));
 
 		if ($type == "list") {
 			$file = "team_kpi";

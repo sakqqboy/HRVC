@@ -210,6 +210,7 @@ class KpiPersonalController extends Controller
 			}
 			//throw new Exception(print_r($teams, true));
 		}
+			// throw new Exception(print_r($kpis, true));
 
 		curl_close($api);
 		$months = ModelMaster::monthFull(1);

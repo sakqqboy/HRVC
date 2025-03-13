@@ -69,7 +69,7 @@ class KpiPersonalController extends Controller
 		$employeeId = Employee::employeeId($userId);
 		if ($role <= 3) {
 			$kpiEmployee = KpiEmployee::find()
-				->select('k.kpiName,k.priority,k.quantRatio,k.amountType,k.code,kpi_employee.target,kpi_employee.result,kpi_employee.updateDateTime,
+				->select('k.kpiName,k.priority,k.quantRatio,k.amountType,k.code,kpi_employee.target,kpi_employee.result,kpi_employee.updateDateTime,kpi_employee.month,kpi_employee.year,
 			kpi_employee.status,kpi_employee.employeeId,k.unitId,kpi_employee.month,kpi_employee.year,k.kpiId,k.companyId,e.teamId,e.picture,
 			kpi_employee.kpiEmployeeId,e.employeeFirstname,e.employeeSurename')
 				->JOIN("LEFT JOIN", "kpi k", "kpi_employee.kpiId=k.kpiId")
@@ -80,7 +80,7 @@ class KpiPersonalController extends Controller
 				->all();
 		} else {
 			$kpiEmployee = KpiEmployee::find()
-				->select('k.kpiName,k.priority,k.quantRatio,k.amountType,k.code,kpi_employee.target,kpi_employee.result,kpi_employee.updateDateTime,
+				->select('k.kpiName,k.priority,k.quantRatio,k.amountType,k.code,kpi_employee.target,kpi_employee.result,kpi_employee.updateDateTime,kpi_employee.month,kpi_employee.year,
 			kpi_employee.status,kpi_employee.employeeId,k.unitId,kpi_employee.month,kpi_employee.year,k.kpiId,k.companyId,e.teamId,e.picture,
 			kpi_employee.kpiEmployeeId,e.employeeFirstname,e.employeeSurename')
 				->JOIN("LEFT JOIN", "kpi k", "kpi_employee.kpiId=k.kpiId")
@@ -120,8 +120,8 @@ class KpiPersonalController extends Controller
 				} else {
 					$ratio = 0;
 				}
-				$teamEmployee = KpiEmployee::countKpiFromTeam($kpi["kpiId"], $kpi["teamId"]);
-				$countTeamEmployee = count($teamEmployee);
+				$teamEmployee = KpiEmployee::countKpiFromTeam($kpi["kpiId"], $kpi["teamId"], $kpi["month"], $kpi["year"]);
+				$countTeamEmployee = is_array($teamEmployee) && !empty($teamEmployee) ? count($teamEmployee) : 0;
 				$selectPic = [];
 				if ($countTeamEmployee >= 3) {
 					$randomEmpployee = array_rand($teamEmployee, 3);
@@ -510,7 +510,7 @@ class KpiPersonalController extends Controller
 	{
 		$employeeId = Employee::employeeId2($userId);
 		$kpiEmployees = KpiEmployee::find()
-			->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_employee.kpiEmployeeId,k.companyId,kpi_employee.updateDateTime,
+			->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_employee.kpiEmployeeId,k.companyId,kpi_employee.updateDateTime,kpi_employee.month,kpi_employee.year,
 			kpi_employee.employeeId,kpi_employee.target,kpi_employee.month,e.employeeFirstname,e.employeeSurename,e.teamId,e.picture')
 			->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_employee.kpiId")
 			->JOIN("LEFT JOIN", "kpi_branch kb", "kb.kpiId=k.kpiId")
@@ -577,8 +577,8 @@ class KpiPersonalController extends Controller
 				} else {
 					$ratio = 0;
 				}
-				$teamEmployee = KpiEmployee::countKpiFromTeam($kpiEmployee["kpiId"], $kpiEmployee["teamId"]);
-				$countTeamEmployee = count($teamEmployee);
+				$teamEmployee = KpiEmployee::countKpiFromTeam($kpiEmployee["kpiId"], $kpiEmployee["teamId"], $kpiEmployee["teamId"], $kpiEmployee["teamId"]);
+				$countTeamEmployee = is_array($teamEmployee) && !empty($teamEmployee) ? count($teamEmployee) : 0;
 				$selectPic = [];
 				if ($countTeamEmployee >= 3) {
 					$randomEmpployee = array_rand($teamEmployee, 3);

@@ -129,9 +129,9 @@ $this->title = 'Team KPI History';
                                             <div class="row">
                                                 <div class="col-2 pt-2">
                                                     <?php
-                                                                if (isset($kpiEmployee['kpiEmployee'][0])) {
+                                                                if (isset($kpi['kpiEmployee'][0])) {
                                                                 ?>
-                                                    <img src="<?= Yii::$app->homeUrl . $kpiEmployee['kpiEmployee'][0] ?>"
+                                                    <img src="<?= Yii::$app->homeUrl . $kpi['kpiEmployee'][0] ?>"
                                                         class="pim-pic-grid " style="margin-left: -3px;">
                                                     <?php
                                                                 }
@@ -139,9 +139,9 @@ $this->title = 'Team KPI History';
                                                 </div>
                                                 <div class="col-2 pic-after pt-2">
                                                     <?php
-                                                                if (isset($kpiEmployee['kpiEmployee'][1])) {
+                                                                if (isset($kpi['kpiEmployee'][1])) {
                                                                 ?>
-                                                    <img src="<?= Yii::$app->homeUrl . $kpiEmployee['kpiEmployee'][1] ?>"
+                                                    <img src="<?= Yii::$app->homeUrl . $kpi['kpiEmployee'][1] ?>"
                                                         class="pim-pic-grid" style="margin-left: -3px;">
                                                     <?php
                                                                 }
@@ -149,9 +149,9 @@ $this->title = 'Team KPI History';
                                                 </div>
                                                 <div class="col-2 pic-after pt-2">
                                                     <?php
-                                                                if (isset($kpiEmployee['kpiEmployee'][2])) {
+                                                                if (isset($kpi['kpiEmployee'][2])) {
                                                                 ?>
-                                                    <img src="<?= Yii::$app->homeUrl . $kpiEmployee['kpiEmployee'][2] ?>"
+                                                    <img src="<?= Yii::$app->homeUrl . $kpi['kpiEmployee'][2] ?>"
                                                         class="pim-pic-grid" style="margin-left: -3px;">
                                                     <?php
                                                                 }
@@ -159,17 +159,32 @@ $this->title = 'Team KPI History';
                                                 </div>
                                                 <div class="col-6 number-tag load-<?= $colorFormat ?> pr-0 pl-0 pt-3"
                                                     style="margin-left: -3px; height:25px; width: 32px; margin-top: 2px;">
-                                                    <?= empty($kpiEmployee) ? 0 : count($kpiEmployee) ?>
+                                                    <?= empty($kpi['kpiEmployee']) ? 0 : count($kpi['kpiEmployee']) ?>
 
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-7 pl-5 pt-3">
-                                            <a class="font-<?= $colorFormat ?>"
-                                                style="text-decoration: none; font-size: 16px; font-weight: 400;">
+
+                                            <?php
+                                                        if ($role > 3) {
+                                                        ?>
+                                            <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'companyId' => $kpiDetail['companyId']]) ?>"
+                                                class="font-<?= $colorFormat ?>"
+                                                style=" text-decoration: none; font-size: 16px; font-weight: 400;">
                                                 <?= Yii::t('app', 'Assigned Person') ?>
                                             </a>
-
+                                            <?php
+                                                        } else {
+                                                        ?>
+                                            <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/kpi-team-history/<?= ModelMaster::encodeParams(['kpiTeamId' => $kpiTeamId, 'kpiTeamHistoryId' => $kpi['kpiTeamHistoryId'], 'kpiId' => $kpiId, 'openTab' => 1]) ?>"
+                                                class="font-<?= $colorFormat ?>"
+                                                style=" text-decoration: none; font-size: 16px; font-weight: 400;">
+                                                <?= Yii::t('app', 'View Person') ?>
+                                            </a>
+                                            <?php
+                                                        }
+                                                        ?>
                                         </div>
                                     </div>
                                 </div>
@@ -197,11 +212,24 @@ $this->title = 'Team KPI History';
                                             </div>
                                         </div>
                                         <div class="col-7 pl-5 pt-3">
-                                            <a class="font-<?= $colorFormat ?>"
-                                                style="text-decoration: none; font-size: 16px; font-weight: 400;">
-                                                <?= Yii::t('app', 'Assign Team') ?>
+                                            <?php
+                                                        if ($role > 3) {
+                                                        ?>
+                                            <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, "companyId" => $kpiDetail["companyId"]]) ?>"
+                                                class="font-<?= $colorFormat ?>"
+                                                style=" text-decoration: none; font-size: 16px; font-weight: 400;">
+                                                <?= Yii::t('app', 'Assigned Team') ?>
                                             </a>
-
+                                            <?php
+                                                        } else { ?>
+                                            <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/kpi-team-history/<?= ModelMaster::encodeParams(['kpiTeamId' => $kpiTeamId, 'kpiTeamHistoryId' => $kpi['kpiTeamHistoryId'], 'kpiId' => $kpiId, 'openTab' => 1]) ?>"
+                                                class="font-<?= $colorFormat ?>"
+                                                style=" text-decoration: none; font-size: 16px; font-weight: 400;">
+                                                <?= Yii::t('app', 'View Team') ?>
+                                            </a>
+                                            <?php
+                                                        }
+                                                        ?>
                                         </div>
                                     </div>
                                 </div>

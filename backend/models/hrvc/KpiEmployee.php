@@ -200,15 +200,17 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
         }
         return $percent;
     }
-    public static function countKpiFromTeam($kpiId, $teamId)
+    public static function countKpiFromTeam($kpiId, $teamId,$year,$month)
     {
         $kpiEmployee = KpiEmployee::find()
-            ->select('e.picture,e.employeeId,e.gender')
+            ->select('e.picture,e.employeeId,e.gender,kpi_employee.year,kpi_employee.month')
             ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
             ->where("kpi_employee.status!=99 and e.status!=99")
             ->andWhere([
                 "kpi_employee.kpiId" => $kpiId,
-                "e.teamId" => $teamId
+                "e.teamId" => $teamId,
+                "kpi_employee.month" => $month,
+                "kpi_employee.year" => $year
             ])
             ->asArray()
             ->all();

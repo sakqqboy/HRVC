@@ -97,8 +97,6 @@ class ViewController extends Controller
 		$kpiTeamsHistory = curl_exec($api);
 		$kpiTeamsHistory = json_decode($kpiTeamsHistory, true);
 
-		
-
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . "&&kpiHistoryId=0");
 		$kpiDetail = curl_exec($api);
 		$kpiDetail = json_decode($kpiDetail, true);
@@ -107,21 +105,60 @@ class ViewController extends Controller
 		$units = curl_exec($api);
 		$units = json_decode($units, true);
 
+		$kpiHistoryData = [];
+
+		if (!empty($kpiTeamsHistory)) {
+			foreach ($kpiTeamsHistory as $year => $months) {
+				if (!is_array($months)) {
+					continue; // ข้ามค่าที่ไม่ใช่ array
+				}
+
+				foreach ($months as $month => $history) {
+					if (!is_array($history)) {
+						continue; // ข้ามค่าที่ไม่ใช่ array
+					}
+
+					$kpiHistoryData[$year][$month] = [
+						"kpiTeamHistoryId" => $history["kpiTeamHistoryId"] ?? null,
+						"target" => $history['target'] ?? null,
+						"unit" => $history['unit'] ?? null,
+						"month" => $month,
+						"year" => $year,
+						"teamId" => $teamId,
+						"kpiId" => $kpiId,
+						"status" => $history['status'] ?? null,
+						"quantRatio" => $history["quantRatio"] ?? null,
+						"code" => $history["code"] ?? null,	
+						"result" => $history['result'] ?? null,
+						"ratio" => $history['ratio'] ?? null,
+						"amountType" => $history["amountType"] ?? null,
+						"isOver" => $history['isOver'] ?? null,
+						"fromDate" => $history['fromDate'] ?? null,
+						"toDate" => $history['toDate'] ?? null,
+						"kpiEmployee" => KpiEmployee::countKpiEmployeeInTeam($teamId, $kpiId, $year, $month)
+					];
+				}
+			}
+		}
+
+		// Debug ค่าที่ได้
+		// throw new Exception(print_r($kpiHistoryData, true));
+	
 		$isManager = UserRole::isManager();
 		$months = ModelMaster::monthFull(1);
-		$kpiEmployee=KpiEmployee::countKpiEmployeeInTeam($teamId,$kpiId);
-//   throw new Exception(print_r($kpiTeamsHistory,true));
+		// $kpiEmployee = KpiEmployee::countKpiEmployeeInTeam($teamId,$kpiId,$year,$month);
+		//   throw new Exception(print_r($kpiTeamsHistory,true));
 		curl_close($api);
 		return $this->render('kpi_team_history', [
 			"role" => $role,
 			"kpiDetail" => $kpiDetail,
-			"kpiTeamsHistory" => $kpiTeamsHistory,
+			"kpiTeamsHistory" => $kpiHistoryData,
 			"kpiTeamId" => $kpiTeamId,
 			"kpiId" => $kpiId,
 			"units" => $units,
 			"isManager" => $isManager,
 			"months" => $months,
-			"kpiEmployee" => $kpiEmployee,
+			// "kpiEmployee" => $kpiEmployee,
 			"teamId" => $teamId
 		]);
 	}

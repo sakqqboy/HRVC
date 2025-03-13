@@ -67,7 +67,7 @@ class KpiTeamController extends Controller
 	public function actionKpiTeam2($kpiId)
 	{
 		$kpiTeams = KpiTeam::find()
-			->select('kpi_team.teamId,t.teamName,kpi_team.target,kpi_team.remark,kpi_team.result,kpi_team.kpiTeamId,kpi_team.kpiId,k.code,t.departmentId')
+			->select('kpi_team.teamId,t.teamName,kpi_team.target,kpi_team.remark,kpi_team.result,kpi_team.kpiTeamId,kpi_team.kpiId,k.code,t.departmentId,kpi_team.month,kpi_team.year')
 			->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
 			->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_team.kpiId")
 			->where(["kpi_team.status" => [1, 2, 4]])
@@ -104,7 +104,7 @@ class KpiTeamController extends Controller
 				} else {
 					$ratio = 0;
 				}
-				$teamEmployee = KpiEmployee::countKpiFromTeam($kpiTeam["kpiId"], $kpiTeam["teamId"]);
+				$teamEmployee = KpiEmployee::countKpiFromTeam($kpiTeam["kpiId"], $kpiTeam["teamId"],$kpiTeam["month"],$kpiTeam["year"]);
 				$countTeamEmployee = count($teamEmployee);
 				$selectPic = [];
 				if ($countTeamEmployee >= 3) {
@@ -187,7 +187,7 @@ class KpiTeamController extends Controller
 		$teamId = $employee["teamId"];
 		if ($role <= 3) {
 			$kpiTeams = KpiTeam::find()
-				->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,
+				->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,kpi_team.month,kpi_team.year,
 			kpi_team.teamId,kpi_team.target,kpi_team.updateDateTime')
 				->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_team.kpiId")
 				->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
@@ -198,7 +198,7 @@ class KpiTeamController extends Controller
 				->all();
 		} else {
 			$kpiTeams = KpiTeam::find()
-				->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,
+				->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,kpi_team.month,kpi_team.year,
 			kpi_team.teamId,kpi_team.target,kpi_team.updateDateTime')
 				->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_team.kpiId")
 				->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
@@ -240,7 +240,7 @@ class KpiTeamController extends Controller
 				} else {
 					$ratio = 0;
 				}
-				$teamEmployee = KpiEmployee::countKpiFromTeam($kpiTeam["kpiId"], $kpiTeam["teamId"]);
+				$teamEmployee = KpiEmployee::countKpiFromTeam($kpiTeam["kpiId"], $kpiTeam["teamId"],$kpiTeam["month"],$kpiTeam["year"]);
 				$countTeamEmployee = count($teamEmployee);
 				$selectPic = [];
 				if ($countTeamEmployee >= 3) {
@@ -738,7 +738,7 @@ class KpiTeamController extends Controller
 	public function actionKpiTeamFilter($companyId, $branchId, $teamId, $month, $status, $year)
 	{
 		$kpiTeams = KpiTeam::find()
-			->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,kpi_team.updateDateTime,
+			->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,kpi_team.updateDateTime,kpi_team.month,kpi_team.year,
 			kpi_team.teamId,kpi_team.target')
 			->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_team.kpiId")
 			->JOIN("LEFT JOIN", "kpi_branch kb", "kb.kpiId=k.kpiId")
@@ -800,7 +800,7 @@ class KpiTeamController extends Controller
 				} else {
 					$ratio = 0;
 				}
-				$teamEmployee = KpiEmployee::countKpiFromTeam($kpiTeam["kpiId"], $kpiTeam["teamId"]);
+				$teamEmployee = KpiEmployee::countKpiFromTeam($kpiTeam["kpiId"], $kpiTeam["teamId"],$kpiTeam["month"],$kpiTeam["year"]);
 				$countTeamEmployee = count($teamEmployee);
 				$selectPic = [];
 				if ($countTeamEmployee >= 3) {
