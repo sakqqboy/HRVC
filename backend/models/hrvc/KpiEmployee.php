@@ -42,6 +42,7 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
             ->where(["ke.kpiId" => $kpiId, "ke.status" => 1,"ke.month" => $month,"ke.year" => $year])
             ->asArray()
             ->all();
+        // $employee = ["ke.kpiId" => $kpiId, "ke.status" => 1,"ke.month" => $month,"ke.year" => $year];
         $employee = [];
         if (isset($kpiEmployee) && count($kpiEmployee) > 0) {
             foreach ($kpiEmployee as $ke) :

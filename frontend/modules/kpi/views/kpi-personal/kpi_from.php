@@ -32,7 +32,7 @@ $nextCheckDate = !empty($data['nextCheckText'])
     : null;
     
     if (!$nextCheckDate) {
-        $daysLeft = "Due Pass";
+        $daysLeft = "Not set";
     } else {
         // หาวันที่ปัจจุบัน
         $currentDate = new DateTime();

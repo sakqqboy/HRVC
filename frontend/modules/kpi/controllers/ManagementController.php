@@ -175,7 +175,7 @@ class ManagementController extends Controller
         $isManager = UserRole::isManager();
         $employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
         $companyId = $employee["companyId"];
-        //throw new exception(print_r($kpis, true));
+        // throw new exception(print_r($kpis, true));
         //throw new exception(print_r($kpis, true));
         return $this->render('kpi_grid', [
             "units" => $units,
@@ -517,26 +517,26 @@ class ManagementController extends Controller
     public function actionUpdateKpi()
     {
         $data = [
-            // 'kpiId' => $_POST["kpiId"],
-            // 'kpiName' => $_POST["kpiName"],
-            // 'company' => $_POST["companyId"],
-            // 'branch' => $_POST["branch"],
-            // 'unit' => $_POST["unitId"],
-            // 'amount' => $_POST["amount"],
-            // 'month' => $_POST["month"],
-            // 'year' => $_POST["year"],
-            // 'detail' => $_POST["detail"],
-            // 'amountType' => $_POST["amountType"],
-            // 'code' => $_POST["code"],
-            // 'quanRatio' => $_POST["quantRatio"],
-            // 'nextCheckDate' => $_POST["nextCheckDate"],
-            // 'fromDate' => $_POST["fromDate"],
-            // 'toDate' => $_POST["toDate"],
-            // 'department' => $_POST["department"],
-            // 'team' => $_POST["team"],
-            // 'priority' => $_POST["priority"],
-            // 'status' => $_POST["status"],
-            // 'result' => $_POST["result"],
+            'kpiId' => $_POST["kpiId"],
+            'kpiName' => $_POST["kpiName"],
+            'company' => $_POST["companyId"],
+            'branch' => $_POST["branch"],
+            'unit' => $_POST["unitId"],
+            'amount' => $_POST["amount"],
+            'month' => $_POST["month"],
+            'year' => $_POST["year"],
+            'detail' => $_POST["detail"],
+            'amountType' => $_POST["amountType"],
+            'code' => $_POST["code"],
+            'quanRatio' => $_POST["quantRatio"],
+            'nextCheckDate' => $_POST["nextCheckDate"],
+            'fromDate' => $_POST["fromDate"],
+            'toDate' => $_POST["toDate"],
+            'department' => $_POST["department"],
+            'team' => $_POST["team"],
+            'priority' => $_POST["priority"],
+            'status' => $_POST["status"],
+            'result' => $_POST["result"],
             'lastUrl' => $_POST["lastUrl"],
         ];
 
@@ -574,6 +574,7 @@ class ManagementController extends Controller
             $kpi->code = $_POST["code"];
             $kpi->status = $_POST["status"];
             $kpi->month = $_POST["month"];
+            $kpi->year = $_POST["year"];
             $kpi->result = str_replace(",", "", $result);
             $kpi->createrId = Yii::$app->user->id;
             $kpi->updateDateTime = new Expression('NOW()');
