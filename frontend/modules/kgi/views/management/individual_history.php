@@ -1,6 +1,13 @@
 <?php
+$show = 0;
 if (isset($kgiHistoryEmployee) && count($kgiHistoryEmployee) > 0) {
+	if ($role >= 5) {
+		$show = 1;
+	}
 	foreach ($kgiHistoryEmployee as $kt):
+		if ($kt["teamId"] == $teamId) {
+			$show = 1;
+		}
 ?>
 		<li class="schedule-item mt-5" role="button" tabindex="0">
 			<div class="row" style="display: flex; justify-content: space-between; align-items: center;">

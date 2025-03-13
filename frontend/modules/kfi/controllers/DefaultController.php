@@ -83,4 +83,51 @@ class DefaultController extends Controller
         KpiTeam::deleteAll(1);
         KpiTeamHistory::deleteAll(1);
     }
+    public function actionDeleteOldPim()
+    {
+        KgiTeam::deleteAll("status=99 or year=2024");
+        KgiTeamHistory::deleteAll("status=99 or year=2024");
+        KgiEmployee::deleteAll("status=99 or year=2024");
+        KgiEmployeeHistory::deleteAll("status=99 or year=2024");
+        KpiTeam::deleteAll("status=99 or year=2024");
+        KpiTeamHistory::deleteAll("status=99 or year=2024");
+        KpiEmployee::deleteAll("status=99 or year=2024");
+        KpiEmployeeHistory::deleteAll("status=99 or year=2024");
+
+        Kfi::deleteAll("status=99");
+        KfiHistory::deleteAll("status=99");
+        KfiBranch::deleteAll("status=99");
+        KfiDepartment::deleteAll("status=99");
+        KfiEmployee::deleteAll("status=99");
+        KfiHasKgi::deleteAll("status=99");
+        KfiIssue::deleteAll("status=99");
+        KfiSolution::deleteAll("status=99");
+
+
+
+        Kgi::deleteAll("status=99");
+        KgiHistory::deleteAll("status=99");
+        KgiBranch::deleteAll("status=99");
+        KgiDepartment::deleteAll("status=99");
+        KgiEmployee::deleteAll("status=99");
+        KgiEmployeeHistory::deleteAll("status=99");
+        KgiGroup::deleteAll("status=99");
+        KgiHasKpi::deleteAll("status=99");
+        KgiIssue::deleteAll("status=99");
+        KgiSolution::deleteAll("status=99");
+        KgiTeam::deleteAll("status=99");
+        KgiTeamHistory::deleteAll("status=99");
+
+
+        Kpi::deleteAll("status=99");
+        KpiHistory::deleteAll("status=99");
+        KpiBranch::deleteAll("status=99");
+        KpiDepartment::deleteAll("status=99");
+        KpiEmployee::deleteAll("status=99");
+        KpiEmployeeHistory::deleteAll("status=99");
+        KpiIssue::deleteAll("status=99");
+        KpiSolution::deleteAll("status=99");
+        KpiTeam::deleteAll("status=99");
+        KgiTeamHistory::deleteAll("status=99");
+    }
 }

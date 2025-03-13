@@ -2186,6 +2186,9 @@ class ManagementController extends Controller
 		$month = $_POST["month"];
 		$year = $_POST["year"];
 		$res = [];
+		$role = UserRole::userRight();
+
+		$teamId = Team::userTeam(Yii::$app->user->id);
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -2212,7 +2215,7 @@ class ManagementController extends Controller
 		$res["dueBehide"] = 100 - (int)$kgi["ratio"];
 
 		$teamText = $this->renderAjax('team_history', ["kgiHistoryTeam" => $kgiHistoryTeam]);
-		$individualText = $this->renderAjax('individual_history', ["kgiHistoryEmployee" => $kgiHistoryEmployee]);
+		$individualText = $this->renderAjax('individual_history', ["kgiHistoryEmployee" => $kgiHistoryEmployee, "role" => $role, "teamId" => $teamId]);
 		$res["teamText"] = $teamText;
 		$res["individualText"] = $individualText;
 		return json_encode($res);
