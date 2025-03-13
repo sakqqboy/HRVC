@@ -96,17 +96,17 @@ if (isset($kgiTeamEmployee) && count($kgiTeamEmployee) > 0) {
                                 ?>
                                     <input type="text" class="assign-target text-end" name="employeeTarget[<?= $employeeId ?>]"
                                         placeholder="0.00" style="height: 30px;"
-                                        value="<?= $employee['target'] > 0 ? number_format($employee['target'], 2) : '' ?>"
+                                        value="<?= $employee['target'] != "" ? number_format($employee['target'], 2) : '' ?>"
                                         id="employee-target-<?= $teamId ?>"
                                         onkeyup="javascript:calculateEmployeeTargetValue(<?= $teamId ?>)">
                                 <?php
                                 } else { ?>
                                     <input type="text" class="assign-target text-end" name="employeeTarget[<?= $employeeId ?>]"
                                         placeholder="0.00" style="height: 30px;"
-                                        value="<?= $employee['target'] > 0 ? number_format($employee['target'], 2) : '' ?>"
+                                        value="<?= $employee['target'] != "" ? number_format($employee['target'], 2) : '' ?>"
                                         id="employee-target-<?= $teamId ?>" disabled>
                                     <input type="hidden" name="employeeTarget[<?= $employeeId ?>]" placeholder="0.00" style="height: 30px;"
-                                        value="<?= $employee['target'] > 0 ? number_format($employee['target'], 2) : '' ?>"
+                                        value="<?= $employee['target'] != "" ? number_format($employee['target'], 2) : '' ?>"
                                         id="employee-target-<?= $teamId ?>">
                                 <?php
                                 }
