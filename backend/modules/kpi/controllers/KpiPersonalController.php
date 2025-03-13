@@ -142,6 +142,7 @@ class KpiPersonalController extends Controller
 				}
 				$data[$kpi["kpiEmployeeId"]] = [
 					"kpiId" => $kpi["kpiId"],
+					"teamId" => $kpi["teamId"],
 					"kpiName" => $kpiName,
 					"companyId" => $kpi['companyId'],
 					"kpiEmployeeId" => $kpi["kpiEmployeeId"],
@@ -156,6 +157,7 @@ class KpiPersonalController extends Controller
 					"result" => $kpi["result"],
 					"unit" => Unit::unitName($kpi["unitId"]),
 					"month" => ModelMaster::monthEng($kpi['month'], 1),
+					"year" => $kpi['year'],
 					"priority" => $kpi["priority"],
 					"ratio" => $ratio,
 					"periodCheck" => ModelMaster::engDate(KpiEmployee::lastestCheckDate($kpiEmployeeHistory["kpiEmployeeId"]), 2),

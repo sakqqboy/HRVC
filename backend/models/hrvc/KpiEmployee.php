@@ -200,7 +200,7 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
         }
         return $percent;
     }
-    public static function countKpiFromTeam($kpiId, $teamId,$year,$month)
+    public static function countKpiFromTeam($kpiId, $teamId,$month,$year)
     {
         $kpiEmployee = KpiEmployee::find()
             ->select('e.picture,e.employeeId,e.gender,kpi_employee.year,kpi_employee.month')
