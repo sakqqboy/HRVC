@@ -772,7 +772,7 @@ class ManagementController extends Controller
         $historyTeam = json_decode($historyTeam, true);
 
         curl_close($api);
-        // throw new Exception(print_r($historyTeam,true));
+        // throw new Exception(print_r($month,true));
 
         $data = [
             "percentage" => $percentage,

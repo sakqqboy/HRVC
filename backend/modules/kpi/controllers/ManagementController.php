@@ -174,7 +174,10 @@ class ManagementController extends Controller
 				"kpiName" => $kpi["kpiName"],
 				"companyId" => $kpi["companyId"],
 				"branch" => KpiBranch::kpiBranch($kpi["kpiId"]),
-				"sumresult" => KpiTeam::autoSummalys($kpi["kpiId"], $kpi["month"], $kpi["year"]),
+				// "kpiId" => $kpi["kpiId"],
+				// "month1" => $kpi["month"],
+				// "year1" => $kpi["year"],
+				"sumresult" => KpiTeam::autoSummalys($kpi['kpiId'], $kpi['month'], $kpi['year']),
 				"detail" => $kpiHistory['description'],
 				"kpiHistoryId" => !empty($kpiHistory['kpiHistoryId']) ? $kpiHistory['kpiHistoryId'] : 0,
 				"quantRatio" => $kpiHistory["quantRatio"],
@@ -432,6 +435,7 @@ class ManagementController extends Controller
 				'ke.year',
 				'CONCAT(e.employeeFirstname, " ", e.employeeSurename) AS employeeFullname',
 				'e.picture',
+				't.teamId',
 				't.teamName'
 			])
 			->from('kpi_employee_history keh')

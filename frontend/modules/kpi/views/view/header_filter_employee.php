@@ -12,7 +12,7 @@
                     </a>
                 </div>
                 <div class="col-4 text-center">
-                    <a href="<?= Yii::$app->homeUrl ?>ายร/kpi-personal/individual-kpi-grid" class="header-kpi-active">
+                    <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi-grid" class="header-kpi-active">
                         <span>
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/KPI.svg"
                                 class="home-icon mr-5">
@@ -27,7 +27,7 @@
                 <?php
                 if ($role >= 4) {
                 ?>
-                    <!-- <a href="<?= Yii::$app->homeUrl ?>kfi/management/assign-kfi" class="nav-link text-dark" id="pills-Setting-tab" type="button" role="tab" aria-controls="pills-Action" aria-selected="false">
+                <!-- <a href="<?= Yii::$app->homeUrl ?>kfi/management/assign-kfi" class="nav-link text-dark" id="pills-Setting-tab" type="button" role="tab" aria-controls="pills-Action" aria-selected="false">
 						Assign and approval
 					</a> -->
                 <?php

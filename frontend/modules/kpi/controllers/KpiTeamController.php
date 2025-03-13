@@ -798,15 +798,24 @@ class KpiTeamController extends Controller
         $formattedRange = $_POST["formattedRange"];
         $kpiTeamId = $_POST["kpiTeamId"];
 		$kpiTeamHistoryId = $_POST["kpiTeamHistoryId"];
+		$role = UserRole::userRight();
+		$userId = Yii::$app->user->id;
+		$teamId = Team::userTeam($userId);
 
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-history-employee?kpiId='  . $kpiId . '&month=' . $month . '&year=' . $year);
-		$history = curl_exec($api);
-		$history = json_decode($history, true);
-
+		if ($role >= 4) {
+			curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-history-employee?kpiId='  . $kpiId . '&month=' . $month . '&year=' . $year);
+			$history = curl_exec($api);
+			$history = json_decode($history, true);
+		}else{
+			curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-history-employee?kpiId='  . $kpiId . '&month=' . $month . '&year=' . $year . '&teamId=' . $teamId);
+			$history = curl_exec($api);
+			$history = json_decode($history, true);
+		}
+		
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-history-team?kpiId='  . $kpiId . '&month=' . $month . '&year=' . $year );
 		$historyTeam = curl_exec($api);
 		$historyTeam = json_decode($historyTeam, true);
