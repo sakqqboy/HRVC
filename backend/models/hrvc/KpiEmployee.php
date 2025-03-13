@@ -34,12 +34,12 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
     {
         return array_merge(parent::attributeLabels(), []);
     }
-    public static function kpiEmployee($kpiId)
+    public static function kpiEmployee($kpiId,$month,$year)
     {
         $kpiEmployee = Employee::find()
-            ->select('employee.picture,employee.employeeId,employee.gender')
+            ->select('employee.picture,employee.employeeId,employee.gender,ke.`month`, ke.`year`')
             ->JOIN("LEFT JOIN", "kpi_employee ke", "employee.employeeId=ke.employeeId")
-            ->where(["ke.kpiId" => $kpiId, "ke.status" => 1])
+            ->where(["ke.kpiId" => $kpiId, "ke.status" => 1,"ke.month" => $month,"ke.year" => $year])
             ->asArray()
             ->all();
         $employee = [];

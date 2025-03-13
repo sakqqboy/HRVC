@@ -122,7 +122,7 @@ class ViewController extends Controller
 						"kpiTeamHistoryId" => $history["kpiTeamHistoryId"] ?? null,
 						"target" => $history['target'] ?? null,
 						"unit" => $history['unit'] ?? null,
-						"month" => $month,
+						"month" => ModelMaster::fullMonthText($month),
 						"year" => $year,
 						"teamId" => $teamId,
 						"kpiId" => $kpiId,

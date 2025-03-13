@@ -149,7 +149,7 @@ class KpiPersonalController extends Controller
 					"picture" => $picture,
 					"companyName" => Company::companyName($kpi["companyId"]),
 					"branch" => KpiBranch::kpiBranch($kpi["kpiId"]),
-					"employee" => KpiEmployee::kpiEmployee($kpi["kpiId"]),
+					"employee" => KpiEmployee::kpiEmployee($kpi["kpiId"],$kpi["month"],$kpi["year"]),
 					"quantRatio" => $kpi["quantRatio"],
 					"targetAmount" => $kpi["target"],
 					"code" => $kpi["code"],
@@ -461,7 +461,7 @@ class KpiPersonalController extends Controller
 				"remark" => $kpiEmployee["remark"],
 				"picture" => $employee["picture"],
 				"teamName" => Team::teamName($employee["teamId"]),
-				"kpiEmployee" => KpiEmployee::kpiEmployee($kpiId),
+				"kpiEmployee" => KpiEmployee::kpiEmployee($kpiId,$kpiEmployee["month"],$kpiEmployee["year"]),
 				// "teamName" => Team::teamName($kpiEmployee["teamId"]),
 				"isOver" => ModelMaster::isOverDuedate(KpiEmployee::nextCheckDate($kpiEmployee['kpiEmployeeId']))
 			];
@@ -577,7 +577,7 @@ class KpiPersonalController extends Controller
 				} else {
 					$ratio = 0;
 				}
-				$teamEmployee = KpiEmployee::countKpiFromTeam($kpiEmployee["kpiId"], $kpiEmployee["teamId"], $kpiEmployee["teamId"], $kpiEmployee["teamId"]);
+				$teamEmployee = KpiEmployee::countKpiFromTeam($kpiEmployee["kpiId"], $kpiEmployee["teamId"], $kpiEmployee["month"], $kpiEmployee["year"]);
 				$countTeamEmployee = is_array($teamEmployee) && !empty($teamEmployee) ? count($teamEmployee) : 0;
 				$selectPic = [];
 				if ($countTeamEmployee >= 3) {
@@ -601,7 +601,7 @@ class KpiPersonalController extends Controller
 					"kpiName" => $kpiName,
 					"kpiId" => $kpiEmployee["kpiId"],
 					"companyName" => Company::companyName($kpiEmployee["companyId"]),
-					"employee" => KpiEmployee::kpiEmployee($kpiEmployee["kpiId"]),
+					"employee" => KpiEmployee::kpiEmployee($kpiEmployee["kpiId"],$kpiEmployee["month"],$kpiEmployee["year"]),
 					"employeeName" => $kpiEmployee["employeeFirstname"] . ' ' . $kpiEmployee["employeeSurename"],
 					"picture" => $picture,
 					"branch" => KpiBranch::kpiBranch($kpiEmployee["kpiId"]),
@@ -622,7 +622,7 @@ class KpiPersonalController extends Controller
 					"kpiEmployeeHistoryId" => $kpiEmployeeHistory["kpiEmployeeHistoryId"] ?? 0,
 					"flag" => Country::countryFlagBycompany($kpiEmployee["companyId"]),
 					"countryName" => Country::countryNameBycompany($kpiEmployee['companyId']),
-					"kpiEmployee" => KpiEmployee::kpiEmployee($kpiEmployee["kpiId"]),
+					"kpiEmployee" => KpiEmployee::kpiEmployee($kpiEmployee["kpiId"],$kpiEmployee["month"],$kpiEmployee["year"]),
 					"ratio" => number_format($ratio, 2),
 					"isOver" => ModelMaster::isOverDuedate(KpiEmployee::nextCheckDate($kpiEmployeeHistory['kpiEmployeeId'])),
 					"amountType" => $kpiEmployee["amountType"],
