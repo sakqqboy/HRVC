@@ -20,9 +20,7 @@ $this->title = 'KGI Grid View';
         </script>
 
     <?php endif; ?>
-    <div class="alert-box-info text-center">
-        S A V E D ! ! !
-    </div>
+
 
     <div class="col-12">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.png" class="home-icon mr-5"
@@ -182,6 +180,10 @@ $this->title = 'KGI Grid View';
                     <div class="col-3 font-size-12 border-right pt-5 pl-5 pr-0 text-center">
                         <?= Yii::t('app', 'Average') ?>/<?= Yii::t('app', 'Team') ?><span
                             class="font-size-12 ml-5"><b><?= number_format($teamAverage) ?></b></span>
+
+                    </div>
+                    <div class="alert-box-info text-center">
+                        S A V E D ! ! !
                     </div>
                     <div class="col-4 font-size-12 border-right  pt-5 pl-0 pr-0 text-center">
                         <?= Yii::t('app', 'Average') ?>/<?= Yii::t('app', 'Individual') ?> <span
