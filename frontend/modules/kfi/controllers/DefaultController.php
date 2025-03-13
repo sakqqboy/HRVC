@@ -129,5 +129,15 @@ class DefaultController extends Controller
         KpiSolution::deleteAll("status=99");
         KpiTeam::deleteAll("status=99");
         KgiTeamHistory::deleteAll("status=99");
+
+
+        KgiTeam::deleteAll("status=88");
+        KgiTeamHistory::deleteAll("status=88");
+        KgiEmployee::deleteAll("status=88");
+        KgiEmployeeHistory::deleteAll("status=88");
+        KpiTeam::deleteAll("status=88");
+        KpiTeamHistory::deleteAll("status=88");
+        KpiEmployee::deleteAll("status=88");
+        KpiEmployeeHistory::deleteAll("status=88");
     }
 }
