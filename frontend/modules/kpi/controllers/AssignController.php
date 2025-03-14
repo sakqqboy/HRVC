@@ -9,6 +9,7 @@ use frontend\models\hrvc\Group;
 use frontend\models\hrvc\KgiEmployee;
 use frontend\models\hrvc\KpiEmployee;
 use frontend\models\hrvc\KpiTeam;
+use frontend\models\hrvc\KpiTeamHistory;
 use frontend\models\hrvc\Team;
 use frontend\models\hrvc\UserRole;
 use Yii;
@@ -93,7 +94,8 @@ class AssignController extends Controller
 		$kpiTeamEmployee = json_decode($kpiTeamEmployee, true);
 		//throw new Exception($kpiId);
 
-		//throw new Exception(print_r($kpiTeamEmployee, true));
+		// throw new Exception(print_r($kpiDetail, true));	
+		// throw new Exception(print_r($kpiTeams, true));
 
 		/*if (isset($teams) && count($teams) > 0) {
 			foreach ($teams as $team):
@@ -113,6 +115,7 @@ class AssignController extends Controller
 				}
 			endforeach;
 		}*/
+		// throw new Exception(print_r($kpiTeamEmployee, true));	
 
 		curl_close($api);
 		return $this->render('assign', [
@@ -145,8 +148,10 @@ class AssignController extends Controller
 		$teamDetail = json_decode($teamDetail, true);
 
 
-		// throw new Exception(print_r($employeeTeamTarget, true));
 		curl_close($api);
+
+		// throw new Exception(print_r($employeeTeamTarget, true));
+
 
 		if (isset($employeeTeamTarget) && count($employeeTeamTarget) > 0) {
 			$text = $this->renderAjax('employee_team_target', [
@@ -172,21 +177,40 @@ class AssignController extends Controller
 					->one();
 				$targetTeam = str_replace(",", "", $_POST["teamTarget"][$teamId]);
 				if (isset($kpiTeam) && !empty($kpiTeam)) {
+					//มีอยู่แล้ว
 					if ($kpiTeam->target != $targetTeam) {
 						$kpiTeam->target = $targetTeam;
+						// $kpiTeam->month = $_POST["month"];
+						// $kpiTeam->year = $_POST["year"];
 						$kpiTeam->updateDateTime = new Expression('NOW()');
 						$kpiTeam->save(false);
 					}
 				} else {
+					//ยังไม่มีเพิ่มเดือนละปี
 					$kpiTeam = new KpiTeam();
 					$kpiTeam->kpiId = $_POST["kpiId"];
 					$kpiTeam->teamId = $teamId;
 					$kpiTeam->target = $targetTeam;
+					$kpiTeam->month = $_POST["month"];
+					$kpiTeam->year = $_POST["year"];
 					$kpiTeam->result = 0;
 					$kpiTeam->status = 1;
 					$kpiTeam->createDateTime = new Expression('NOW()');
 					$kpiTeam->updateDateTime = new Expression('NOW()');
-					$kpiTeam->save(false);
+					if ($kpiTeam->save(false)){
+						$kpiTeamHistory = new KpiTeamHistory();
+						$kpiTeamId = Yii::$app->db->lastInsertID;
+						$kpiTeamHistory->kpiTeamId = $kpiTeamId;
+						$kpiTeamHistory->target = $targetTeam;
+						$kpiTeamHistory->month = $_POST["month"];
+						$kpiTeamHistory->year = $_POST["year"];
+						$kpiTeamHistory->result = 0;
+						$kpiTeamHistory->status = 1;
+						$kpiTeamHistory->createDateTime = new Expression('NOW()');
+						$kpiTeamHistory->updateDateTime = new Expression('NOW()');
+						$kpiTeamHistory->save(false);
+					}
+					//ล่าสุด
 				}
 
 			endforeach;
@@ -210,8 +234,11 @@ class AssignController extends Controller
 					->one();
 				$target = str_replace(",", "", $target);
 				if (isset($kpiEmployee) && !empty($kpiEmployee)) {
-					if ($kpiEmployee->target != $target && $target > 0) {
+					//เพิ่มเดือนละปี
+					if ($kpiEmployee->target != $target && trim($target) != "" && $target != null) {
 						$kpiEmployee->target = $target;
+						$kpiEmployee->month = $_POST["month"];
+						$kpiEmployee->year = $_POST["year"];
 						$kpiEmployee->updateDateTime = new Expression('NOW()');
 						$kpiEmployee->save(false);
 					}
@@ -223,10 +250,13 @@ class AssignController extends Controller
 					}
 				} else {
 					if (trim($target) != "" && $target != null) {
+						//เพิ่มเดือนละปี
 						$kpiEmployee = new KpiEmployee();
 						$kpiEmployee->kpiId = $_POST["kpiId"];
 						$kpiEmployee->employeeId = $employeeId;
 						$kpiEmployee->target = $target;
+						$kpiEmployee->month = $_POST["month"];
+						$kpiEmployee->year = $_POST["year"];
 						$kpiEmployee->result = 0;
 						$kpiEmployee->status = 1;
 						$kpiEmployee->createDateTime = new Expression('NOW()');

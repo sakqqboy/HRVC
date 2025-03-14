@@ -214,7 +214,7 @@ class KpiTeamController extends Controller
 		if (isset($kpiTeams) && count($kpiTeams) > 0) {
 			foreach ($kpiTeams as $kpiTeam) :
 				$kpiTeamHistory = KpiTeamHistory::find()
-					->where(["kpiTeamId" => $kpiTeam["kpiTeamId"]])
+					->where(["kpiTeamId" => $kpiTeam["kpiTeamId"] , "status" => [1, 2, 4]])
 					->asArray()
 					->orderBy('createDateTime DESC')
 					->one();
@@ -342,7 +342,7 @@ class KpiTeamController extends Controller
 					$totalTarget += $employeeTarget;
 					$checked = "checked";
 				} else {
-					$employeeTarget = 0;
+					// $employeeTarget = 0;
 					$checked = "";
 				}
 				$data["employee"][$employee["employeeId"]] = [
@@ -898,27 +898,23 @@ class KpiTeamController extends Controller
 						->one();
 
 					if (isset($kpiEmployee) && !empty($kpiEmployee)) {
-						if (isset($kpiEmployee) && count($kpiEmployee) > 0) {
+
 							$employeeTarget = $kpiEmployee["target"];
 							$totalTeamTarget += $employeeTarget;
-							$checked = "checked";
 							$totalEmployee++;
-						} else {
-							$employeeTarget = 0;
-							$checked = "";
-						}
+					
 						$data[$kpiTeam["teamId"]]["employee"][$employee["employeeId"]] = [
 							"employeeFirstname" => $employee["employeeFirstname"],
 							"employeeSurename" => $employee["employeeSurename"],
 							"target" => $employeeTarget,
 							"picture" => $img,
-							"checked" => $checked
+							"checked" => "checked"
 						];
 					} else {
 						$data[$kpiTeam["teamId"]]["employee"][$employee["employeeId"]] = [
 							"employeeFirstname" => $employee["employeeFirstname"],
 							"employeeSurename" => $employee["employeeSurename"],
-							"target" => 0,
+							"target" => "",
 							"picture" => $img,
 							"checked" => ""
 						];
@@ -970,6 +966,7 @@ class KpiTeamController extends Controller
 			->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kt.kpiId")
 			->where([
 				"kpi_team_history.kpiTeamId" => $kpiTeamId,
+				"kpi_team_history.status" => [1, 2, 4]
 			])
 			->andWhere("kpi_team_history.status!=99")
 			->orderBy("kpi_team_history.year DESC,kpi_team_history.month DESC,kpi_team_history.kpiTeamHistoryId")
