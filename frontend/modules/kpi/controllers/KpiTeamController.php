@@ -11,6 +11,8 @@ use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Department;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Kpi;
+use frontend\models\hrvc\KpiEmployee;
+use frontend\models\hrvc\KpiEmployeeHistory;
 use frontend\models\hrvc\KpiTeam;
 use frontend\models\hrvc\KpiTeamHistory;
 use frontend\models\hrvc\Team;
@@ -713,9 +715,29 @@ class KpiTeamController extends Controller
       
         ];
 
+
+
 		//  throw new Exception(print_r($data,true));
+		//เมื่อกดอัพเดต 
+		// อัพเดต KpiTeam จากนั้น อัพเดต KpiTeamHistory โดยเช็คเงื่อนไขดังนี้
+		// ให้อินเสริท KpiTeam และ KpiTeamHistory ปกติ ให้เดือน + 1  เอาไปค้นหาใน KpiTeamHistory ด้วย kpiTeamId  เดือน + 1 สเตตัส 5
+		//เช็คว่าสเตตัสเป็น 2 และ มี ใน KpiTeamHistory ไหม ถ้ามี ให้อัพเดต 5 เป็น 1  ด้วย
+
+		//สมมุต เดือนนี้ 03 มี สเตตัส 5 ในเดือน 04 และกดอัพเดต เดือน 04 มา 
+		//มันจะอินเสริจ เดือน 04 อันใหม่ก่อนแล้วจากนั้นค่อยไปอัพเดต 04 สเตตัส 5 อีกที 
+		//ผลลัพมันจะกลายเป็น เดือน 04 สเตตัส 1 สองอันใน KpiTeamHistory
+
+		//วิธีแก้ถ้ามีเดือนกับปีอยู่แล้ว ให้หน้าฟรอมแก้ไขไม่ได้ แต่ถ้าไม่มีให้แก่ไขได้ เฉพาะทีม
 
 		
+		$nextMonth = $data['month'] + 1;
+		$nextYear = $data['year'];
+
+		// ถ้าเดือนเกิน 12 ให้กลับไปเป็น 1 และเพิ่มปี
+		if ($nextMonth > 12) {
+			$nextMonth = 1;
+			$nextYear++;
+		}
 		$kpiTeamId = $_POST["kpiTeamId"];
 		$role = UserRole::userRight();
 		$status =  $_POST["status"];
@@ -724,42 +746,60 @@ class KpiTeamController extends Controller
 				$status = 88;
 			}
 		}
-		$kpiTeamHistory = new KpiTeamHistory();
-		$kpiTeamHistory->kpiTeamId = $kpiTeamId;
-		$kpiTeamHistory->result = str_replace(",", "",  $_POST["result"]); 
+		$teamkpi = KpiTeam::find()->where(["kpiTeamId" => $kpiTeamId])->one();
+		$teamkpi->status = $_POST["status"];
+		$teamkpi->month = $_POST["month"];
+		$teamkpi->year = $_POST["year"];
+		$teamkpi->result = str_replace(",", "",  $_POST["result"]); 
 		if (isset($_POST["amount"])) {
-			$kpiTeamHistory->target = str_replace(",", "",  $_POST["amount"]);
-		} else {
-			$teamKpi = KpiTeam::find()->where(["kpiTeamId" => $kpiTeamId])->one();
-			$kpiTeamHistory->target = str_replace(",", "",   $teamKpi["target"]);
-			$teamKpi->save(false);
+			$teamkpi->target = str_replace(",", "",  $_POST["amount"]);
 		}
-		$kpiTeamHistory->status = $status;
-		$kpiTeamHistory->month = $_POST["month"];
-		$kpiTeamHistory->fromDate = $_POST["fromDate"];
-		$kpiTeamHistory->toDate = $_POST["toDate"];
-		$kpiTeamHistory->month = $_POST["month"];
-		$kpiTeamHistory->year = $_POST["year"];
-		$kpiTeamHistory->nextCheckDate = $_POST["nextCheckDate"];
-		// $kpiTeamHistory->detail = $_POST["remark"];
-		$kpiTeamHistory->createrId = Yii::$app->user->id;
-		$kpiTeamHistory->createDateTime = new Expression('NOW()');
-		$kpiTeamHistory->updateDateTime = new Expression('NOW()');
-		if ($kpiTeamHistory->save(false)) {
-			$teamkpi = KpiTeam::find()->where(["kpiTeamId" => $kpiTeamId])->one();
-			$teamkpi->status = $_POST["status"];
-			$teamkpi->month = $_POST["month"];
-			$teamkpi->year = $_POST["year"];
-			$teamkpi->result = str_replace(",", "",  $_POST["result"]); 
+		$teamkpi->fromDate = $_POST["fromDate"];
+		$teamkpi->toDate = $_POST["toDate"];
+		$teamkpi->nextCheckDate = $_POST["nextCheckDate"];
+		$teamkpi->updateDateTime = new Expression('NOW()');
+		if ($teamkpi->save(false)) {
+			$kpiTeamHistory = new KpiTeamHistory();
+			$kpiTeamHistory->kpiTeamId = $kpiTeamId;
+			$kpiTeamHistory->result = str_replace(",", "",  $_POST["result"]); 
 			if (isset($_POST["amount"])) {
-				$teamkpi->target = str_replace(",", "",  $_POST["amount"]);
+				$kpiTeamHistory->target = str_replace(",", "",  $_POST["amount"]);
+			} else {
+				$teamKpi = KpiTeam::find()->where(["kpiTeamId" => $kpiTeamId])->one();
+				$kpiTeamHistory->target = str_replace(",", "",   $teamKpi["target"]);
+				$teamKpi->save(false);
 			}
-			$teamkpi->fromDate = $_POST["fromDate"];
-			$teamkpi->toDate = $_POST["toDate"];
-			$teamkpi->nextCheckDate = $_POST["nextCheckDate"];
-			$teamkpi->updateDateTime = new Expression('NOW()');
-			$teamkpi->save(false);
+			$kpiTeamHistory->status = $status;
+			$kpiTeamHistory->month = $_POST["month"];
+			$kpiTeamHistory->fromDate = $_POST["fromDate"];
+			$kpiTeamHistory->toDate = $_POST["toDate"];
+			$kpiTeamHistory->month = $_POST["month"];
+			$kpiTeamHistory->year = $_POST["year"];
+			$kpiTeamHistory->nextCheckDate = $_POST["nextCheckDate"];
+			$kpiTeamHistory->createrId = Yii::$app->user->id;
+			$kpiTeamHistory->createDateTime = new Expression('NOW()');
+			$kpiTeamHistory->updateDateTime = new Expression('NOW()');
+			if ($kpiTeamHistory->save(false)) {
+				//check ว่า มีอันนี้ที่เป็นสเตตัส 5 ในเดือนที่มากกว่า ที่ส่งมา +1 และปีปัจจุบัน รึยัง ถ้ามีแล้วให้อัพเดต 5 เป็น 1
+				$kpiTeamHistory = KpiTeamHistory::find()
+				->where(["kpiTeamId" => $kpiTeamId, "status" => 5 , "month" => $nextMonth, "year" => $nextYear])
+				->one(); // ไม่ใช้ asArray() เพื่อให้เป็น object				
+				if ($kpiTeamHistory !== null && $status == 2) {
+					$teamkpi->month = $kpiTeamHistory -> month;
+					$teamkpi->year = $kpiTeamHistory -> year;
+					$teamkpi->status = 1;
+					$teamkpi ->save(false);
+					$kpiTeamHistory->status = 1;
+					$kpiTeamHistory->updateDateTime = new Expression('NOW()');
+					$kpiTeamHistory->save(false);
+
+				}
+				// throw new Exception(print_r($kpiTeamHistory, true));	
+
+			}
 		}
+		
+		
 		// return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
 		return $this->redirect($_POST["lastUrl"]);
 	}
@@ -1027,7 +1067,44 @@ class KpiTeamController extends Controller
 			$kpiTeam->month = $nextMonth;
 			$kpiTeam->year = $nextYear;
 			$kpiTeam->updateDateTime = new Expression('NOW()');
-			$kpiTeam->save(false);
+			if($kpiTeam->save(false)){
+				$kpiEmpoyee = KpiEmployee::find()->where(["kpiId" => $kpiTeam["kpiId"]])->all();
+				// throw new Exception(print_r($kpiEmpoyee, true)); 
+				foreach($kpiEmpoyee as $empoyee) :
+					if($empoyee -> month  == $nextMonth && $empoyee -> year  == $nextYear){
+						//ปัญหาคือ พอก็อปหน้าคอมปานีมา มันไม่มีในเอ็มพรอยี่ด้วย 
+						//สามารถข้ามเดือนได้ 
+						
+					}else{
+						if($empoyee -> status == 1){
+                            $status = 5;
+                        }
+                        if($empoyee -> status == 2){
+                            $status = 1;
+							// throw new Exception(print_r($empoyee -> status, true)); 
+                            $empoyee -> status = 1;
+                            $empoyee -> month = $nextMonth;
+                            $empoyee -> year = $nextYear;
+                        }
+						$kpiEmpoyeeHistory = new KpiEmployeeHistory();
+						$kpiEmpoyeeHistory->kpiEmployeeId = $empoyee -> kpiEmployeeId;
+						$kpiEmpoyeeHistory->createrId = Yii::$app->user->id;
+						$kpiEmpoyeeHistory->month = $nextMonth;
+						$kpiEmpoyeeHistory->year = $nextYear;
+						$kpiEmpoyeeHistory->createDateTime = new Expression('NOW()');
+						$kpiEmpoyeeHistory->updateDateTime = new Expression('NOW()');
+						$kpiEmpoyeeHistory-> detail = "auto set from company kpi";
+						$kpiEmpoyeeHistory->status = $status;
+						$kpiEmpoyeeHistory->save(false);
+						$empoyee -> save(false);
+						// if ($kpiEmpoyeeHistory->save(false)) {
+						// 	$empoyee -> updateDateTime = new Expression('NOW()');
+						// 	$empoyee -> save(false);
+						// }
+
+					}
+				endforeach;
+			}
 		}
 		// return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
 		return $this->redirect(Yii::$app->request->referrer);

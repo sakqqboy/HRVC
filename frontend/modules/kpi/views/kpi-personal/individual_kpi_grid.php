@@ -540,7 +540,7 @@ $this->title = "INDIVIDUAL KPI";
                                                         // echo Yii::t('app', "Update");
                                                     } else if ($canEdit == 1) {
                                                     ?>
-                                            <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/update-personal-kpi/<?= ModelMaster::encodeParams(['kpiEmployeeId' => $kpiEmployeeId, 'kpiHistoryId' => 0]) ?>"
+                                            <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/update-personal-kpi/<?= ModelMaster::encodeParams(['kpiEmployeeId' => $kpiEmployeeId, 'kpiHistoryId' => $kpi["kpiEmployeeHistoryId"]]) ?>"
                                                 style="display: flex; justify-content: center; align-items: center; padding: 7px 9px;  height: 30px; gap: 6px; flex-shrink: 0;"
                                                 class="pim-btn-<?= $colorFormat ?>">
                                                 <div class="pim-btn-<?= $colorFormat ?>">

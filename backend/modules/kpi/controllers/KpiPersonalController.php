@@ -97,7 +97,7 @@ class KpiPersonalController extends Controller
 				$kpiEmployeeHistory = KpiEmployeeHistory::find()
 					->where(["kpiEmployeeId" => $kpi["kpiEmployeeId"], "status" => [1, 2, 4]])
 					->asArray()
-					->orderBy('createDateTime DESC')
+					->orderBy('month DESC,year DESC,updateDateTime DESC')
 					->one();
 				if (!isset($kpiEmployeeHistory) || empty($kpiEmployeeHistory)) {
 					$kpiEmployeeHistory = KpiEmployee::find()
@@ -378,6 +378,7 @@ class KpiPersonalController extends Controller
 			kpi_employee_history.status,kpi_employee_history.month,kpi_employee_history.year,ke.remark,kpi_employee_history.fromDate,kpi_employee_history.toDate')
 				->JOIN("LEFT JOIN", "kpi_employee ke", "ke.kpiEmployeeId=kpi_employee_history.kpiEmployeeId")
 				->where(["kpi_employee_history.kpiEmployeeHistoryId" => $kpiEmployeeHistoryId])
+				->orderBy('kpi_employee_history.month DESC,kpi_employee_history.year DESC')
 				->asArray()
 				->one();
 		} else {
@@ -386,8 +387,8 @@ class KpiPersonalController extends Controller
 			kpi_employee_history.lastCheckDate,kpi_employee_history.nextCheckDate,kpi_employee_history.detail,kpi_employee_history.kpiEmployeeHistoryId,
 			kpi_employee_history.status,kpi_employee_history.month,kpi_employee_history.year,ke.remark,kpi_employee_history.fromDate,kpi_employee_history.toDate')
 				->JOIN("LEFT JOIN", "kpi_employee ke", "ke.kpiEmployeeId=kpi_employee_history.kpiEmployeeId")
-				->where(["kpi_employee_history.kpiEmployeeId" => $kpiEmployeeId])
-				->orderBy('kpi_employee_history.kpiEmployeeHistoryId DESC')
+				->where(["kpi_employee_history.kpiEmployeeId" => $kpiEmployeeId, "kpi_employee_history.status" => [1, 2]])
+				->orderBy('kpi_employee_history.month DESC,kpi_employee_history.year DESC,kpi_employee_history.kpiEmployeeHistoryId DESC')
 				->asArray()
 				->one();
 		}
@@ -649,6 +650,7 @@ class KpiPersonalController extends Controller
 			->JOIN("LEFT JOIN", "kpi k", "k.kpiId=ke.kpiId")
 			->where([
 				"kpi_employee_history.kpiEmployeeId" => $kpiEmployeeId,
+				"kpi_employee_history.status" => [1, 2, 4]
 			])
 			->andWhere("kpi_employee_history.status!=99")
 			->orderBy("kpi_employee_history.year DESC,kpi_employee_history.month DESC,kpi_employee_history.kpiEmployeeHistoryId")

@@ -8,6 +8,7 @@ use Exception;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\KgiEmployee;
 use frontend\models\hrvc\KpiEmployee;
+use frontend\models\hrvc\KpiEmployeeHistory;
 use frontend\models\hrvc\KpiTeam;
 use frontend\models\hrvc\KpiTeamHistory;
 use frontend\models\hrvc\Team;
@@ -237,8 +238,8 @@ class AssignController extends Controller
 					//เพิ่มเดือนละปี
 					if ($kpiEmployee->target != $target && trim($target) != "" && $target != null) {
 						$kpiEmployee->target = $target;
-						$kpiEmployee->month = $_POST["month"];
-						$kpiEmployee->year = $_POST["year"];
+						// $kpiEmployee->month = $_POST["month"];
+						// $kpiEmployee->year = $_POST["year"];
 						$kpiEmployee->updateDateTime = new Expression('NOW()');
 						$kpiEmployee->save(false);
 					}
@@ -261,7 +262,19 @@ class AssignController extends Controller
 						$kpiEmployee->status = 1;
 						$kpiEmployee->createDateTime = new Expression('NOW()');
 						$kpiEmployee->updateDateTime = new Expression('NOW()');
-						$kpiEmployee->save(false);
+						if($kpiEmployee->save(false)){
+							$kpiEmployeeHistory = new KpiEmployeeHistory();
+							$kpiEmployeeId = Yii::$app->db->lastInsertID;
+							$kpiEmployeeHistory->kpiEmployeeId = $kpiEmployeeId;
+							$kpiEmployeeHistory->target = $target;
+							$kpiEmployeeHistory->month = $_POST["month"];
+							$kpiEmployeeHistory->year = $_POST["year"];
+							$kpiEmployeeHistory->result = 0;
+							$kpiEmployeeHistory->status = 1;
+							$kpiEmployeeHistory->createDateTime = new Expression('NOW()');
+							$kpiEmployeeHistory->updateDateTime = new Expression('NOW()');
+							$kpiEmployeeHistory->save(false);
+						}
 					} else {
 						KpiEmployee::deleteAll([
 							"employeeId" => $employeeId,
