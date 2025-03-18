@@ -670,14 +670,20 @@ class ManagementController extends Controller
 		$kfiBranch = KfiBranch::kfiBranch($kfiId);
 		return json_encode($kfiBranch);
 	}
-	public function actionKfiTeamEmployee($kfiId)
+	public function actionKfiTeamEmployee($kfiId, $companyId)
 	{
 		$employeeInTeam = Employee::find()
 			->select('t.teamId,t.teamName,employee.employeeFirstname,employee.employeeSurename,employee.employeeId,ti.titleName,employee.picture,employee.gender,d.departmentName')
 			->JOIN('LEFT JOIN', "team t", "employee.teamId=t.teamId")
 			->JOIN('LEFT JOIN', "department d", "d.departmentId=t.departmentId")
+			->JOIN("LEFT JOIN", "branch b", "b.branchId=d.branchId")
 			->JOIN("LEFT JOIN", "title ti", "ti.titleId=employee.titleId")
-			->where(["employee.status" => 1])
+			->where([
+				"employee.status" => 1,
+				"d.status" => 1,
+				"b.status" => 1,
+				"b.companyId" => $companyId
+			])
 			->orderBy("t.teamName")
 			->asArray()
 			->all();

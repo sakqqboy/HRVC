@@ -97,7 +97,7 @@ $this->title = 'KGI Grid View';
                     <?php
                     if (isset($kgis) && count($kgis) > 0) {
                         foreach ($kgis as $kgiId => $kgi) :
-                            //    throw new exception(print_r($kgi, true));
+                            // throw new exception(print_r($kgi, true));
                             if ($kgi["isOver"] == 1 && $kgi["status"] != 2) {
                                 $colorFormat = 'over';
                             } else {
@@ -315,7 +315,12 @@ $this->title = 'KGI Grid View';
                                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $kgi["countEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>.svg"
                                                                         class="assing-icon mr-2">
                                                                 </span>
-                                                                <a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgi["companyId"]]) ?>"
+                                                                <a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams([
+                                                                                                                        'kgiId' => $kgiId,
+                                                                                                                        "companyId" => $kgi["companyId"],
+                                                                                                                        "month" => $kgi["monthNumber"],
+                                                                                                                        "year" => $kgi["year"]
+                                                                                                                    ]) ?>"
                                                                     class="font-<?= $kgi["countEmployee"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'black') : $colorFormat ?>">
                                                                     <?php if ($kgi["countEmployee"] == 0 && $colorFormat == 'disable') { ?>
                                                                         <?= Yii::t('app', 'Assign Person') ?>
@@ -324,6 +329,7 @@ $this->title = 'KGI Grid View';
                                                                     <?php } else {  ?>
                                                                         <?= Yii::t('app', 'Edit Assign') ?>
                                                                     <?php } ?>
+
                                                                 </a>
                                                             </div>
                                                         <?php }  ?>
@@ -387,7 +393,12 @@ $this->title = 'KGI Grid View';
                                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $kgi["countTeam"] == 0 ? ($colorFormat == 'disable' ? 'disable' : 'yenlow') : $colorFormat ?>.svg"
                                                                         class="assing-icon mr-2">
                                                                 </span>
-                                                                <a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgi["companyId"]]) ?>"
+                                                                <a href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams([
+                                                                                                                        'kgiId' => $kgiId,
+                                                                                                                        "companyId" => $kgi["companyId"],
+                                                                                                                        "month" => $kgi["monthNumber"],
+                                                                                                                        "year" => $kgi["year"]
+                                                                                                                    ]) ?>"
                                                                     class="font-<?= ($kgi["countTeam"] == 0 && $colorFormat == 'disable') ? 'black' : $colorFormat ?>"
                                                                     <?= ($kgi["countTeam"] == 0 && $colorFormat == 'disable') ?: '' ?>">
                                                                     <?php if ($kgi["countTeam"] == 0 && $colorFormat == 'disable') { ?>

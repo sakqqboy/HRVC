@@ -2103,6 +2103,7 @@ class ManagementController extends Controller
 		$currentHistory = KgiHistory::find()->where(["kgiHistoryId" => $kgiHistoryId])->asArray()->one();
 
 		//   throw new Exception(print_r($currentHistory,true));
+		$kgiId = $currentHistory["kgiId"];
 		$unit = Unit::find()->where(["unitId" => $currentHistory["unitId"]])->asArray()->one();
 		if ($currentHistory["month"] != "" && $currentHistory["year"] != "") {
 			$nextTargetMonthYear = ModelMaster::nextTargetMonthYear($unit["unitName"], $currentHistory["month"], $currentHistory["year"]);
@@ -2135,7 +2136,68 @@ class ManagementController extends Controller
 			$kgi->month = $nextMonth;
 			$kgi->year = $nextYear;
 			$kgi->updateDateTime = new Expression('NOW()');
-			$kgi->save(false);
+			if ($kgi->save(false)) {
+				$oldKgiTeams = KgiTeam::find()->where([
+					"kgiId" => $kgiId,
+					"month" => $currentHistory["month"],
+					"year" => $currentHistory["year"],
+				])
+					->asArray()
+					->all();
+				if (isset($oldKgiTeams) && count($oldKgiTeams) > 0) {
+					foreach ($oldKgiTeams as $ot) {
+						$kgiTeam = KgiTeam::find()->where([
+							"kgiId" => $ot["kgiId"],
+							"teamId" => $ot["teamId"],
+							"month" => $nextMonth,
+							"year" => $nextYear,
+							"status" => 1
+						])
+							->one();
+						if (!isset($kgiTeam) || empty($kgiTeam)) {
+							$team = KgiTeam::find()
+								->where([
+									"kgiId" => $ot["kgiId"],
+									"teamId" => $ot["teamId"],
+									"month" => $currentHistory["month"],
+									"year" => $currentHistory["year"],
+								])
+								->andWhere("status!=99")
+								->one();
+							if (isset($team) && !empty($team)) { //ยังไม่มีเดือนใหม่ หาเดือนปัจจุบัน
+								if ($team->status == 1) { // ถ้า สถานะเเป็น ดำเนินการ (ยังไม่ completed)
+									//$team->status = 5;
+									$status = 5;
+								}
+								if ($team->status == 2) { //ถ้า สถานะเป็น เสร็จแล้ว (ยังไม่กด next target)
+									$team->status = 1;
+									$team->month = $nextMonth;
+									$team->year = $nextYear;
+									$status = 1;
+								}
+
+								$newHistory = new KgiTeamHistory();
+								$newHistory->kgiTeamId = $team->kgiTeamId;
+								$newHistory->kgiTeamId = $team->target;
+								$newHistory->detail = "auto set from company kgi";
+								$newHistory->month = $nextMonth;
+								$newHistory->year = $nextYear;
+								$newHistory->createrId = Yii::$app->user->id;
+								$newHistory->status = $status;
+								$newHistory->createDateTime = new Expression('NOW()');
+								$newHistory->updateDateTime = new Expression('NOW()');
+								$newHistory->save(false);
+								$team->save(false);
+							}
+						} else {
+							// if ($kgiTeam->status == 5) {
+							// 	$kgiTeam->status = 1;
+							// 	$kgiTeam->save(false);
+							// }
+						}
+					}
+				}
+			}
 		}
 		// return $this->redirect(Yii::$app->homeUrl . 'kgi/management/grid');
 		return $this->redirect(Yii::$app->request->referrer);
