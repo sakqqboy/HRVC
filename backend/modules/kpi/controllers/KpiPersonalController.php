@@ -378,7 +378,6 @@ class KpiPersonalController extends Controller
 			kpi_employee_history.status,kpi_employee_history.month,kpi_employee_history.year,ke.remark,kpi_employee_history.fromDate,kpi_employee_history.toDate')
 				->JOIN("LEFT JOIN", "kpi_employee ke", "ke.kpiEmployeeId=kpi_employee_history.kpiEmployeeId")
 				->where(["kpi_employee_history.kpiEmployeeHistoryId" => $kpiEmployeeHistoryId])
-				->orderBy('kpi_employee_history.month DESC,kpi_employee_history.year DESC')
 				->asArray()
 				->one();
 		} else {
@@ -653,7 +652,7 @@ class KpiPersonalController extends Controller
 				"kpi_employee_history.status" => [1, 2, 4]
 			])
 			->andWhere("kpi_employee_history.status!=99")
-			->orderBy("kpi_employee_history.year DESC,kpi_employee_history.month DESC,kpi_employee_history.kpiEmployeeHistoryId")
+			->orderBy("kpi_employee_history.year DESC,kpi_employee_history.month DESC,kpi_employee_history.kpiEmployeeHistoryId DESC")
 			->asArray()
 			->all();
 		$data = [];

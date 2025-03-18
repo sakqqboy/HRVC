@@ -237,14 +237,14 @@ class ManagementController extends Controller
 					$this->saveKgiDepartment($_POST["department"], $kgiId);
 				}
 				if (isset($_POST["team"]) && count($_POST["team"]) > 0) {
-					$this->saveKgiTeam($_POST["team"], $kgiId);
-					//$this->saveKgiEmployee($_POST["team"], $kgiId);
+					//เพิ่มการบันถึกเดือนและปี
+					$this->saveKgiTeam($_POST["team"], $kgiId, $_POST["month"], $_POST["year"]);
 				}
-				if (isset($_POST["kgiGroup"]) && count($_POST["kgiGroup"]) > 0) {
-					//$this->saveKgiGroup($_POST["kgiGroup"], $kgiId);
-				}
-				//return $this->redirect(Yii::$app->request->referrer);
+				// if (isset($_POST["kgiGroup"]) && count($_POST["kgiGroup"]) > 0) {
+				// 	$this->saveKgiGroup($_POST["kgiGroup"], $kgiId);
+				// }
 				return $this->redirect(Yii::$app->homeUrl . 'kgi/assign/assign/' . ModelMaster::encodeParams(["kgiId" => $kgiId, "companyId" => $_POST["companyId"]]));
+				//return $this->redirect(Yii::$app->request->referrer);
 				//return $this->redirect('grid');
 			}
 		} else {
@@ -468,7 +468,7 @@ class ManagementController extends Controller
 			endforeach;
 		}
 	}
-	public function saveKgiTeam($team, $kgiId)
+	public function saveKgiTeam($team, $kgiId , $month, $year)
 	{
 		$kgiTeam = KgiTeam::find()->where(["kgiId" => $kgiId, "status" => 1])->all();
 		if (isset($kgiTeam) && count($kgiTeam) > 0) {
@@ -495,6 +495,8 @@ class ManagementController extends Controller
 					$kgiTeam->kgiId = $kgiId;
 					$kgiTeam->teamId = $t;
 					$kgiTeam->status = 1;
+					$kgiTeam->month = $month;
+					$kgiTeam->year = $year;
 					$kgiTeam->createDateTime = new Expression('NOW()');
 					$kgiTeam->updateDateTime = new Expression('NOW()');
 					$kgiTeam->save(false);
@@ -505,6 +507,8 @@ class ManagementController extends Controller
 					$kgiTeamHistory->result = null;
 					$kgiTeamHistory->createrId = Yii::$app->user->id;
 					$kgiTeamHistory->status = 1;
+					$kgiTeamHistory->month = $month;
+					$kgiTeamHistory->year = $year;
 					$kgiTeamHistory->createDateTime = new Expression('NOW()');
 					$kgiTeamHistory->updateDateTime = new Expression('NOW()');
 					$kgiTeamHistory->save(false);
@@ -735,7 +739,7 @@ class ManagementController extends Controller
 					$this->saveKgiDepartment($_POST["department"], $kgiId);
 				}
 				if (isset($_POST["team"]) && count($_POST["team"]) > 0) {
-					$this->saveKgiTeam($_POST["team"], $kgiId);
+					$this->saveKgiTeam($_POST["team"], $kgiId, $_POST["month"], $_POST["year"]);
 				}
 				if (isset($_POST["kgiGroup"]) && count($_POST["kgiGroup"]) > 0) {
 				}
@@ -1176,7 +1180,7 @@ class ManagementController extends Controller
 				endforeach;
 			}
 			if (count($team) > 0) {
-				$this->saveKgiTeam($team, $kgiCopyId);
+				$this->saveKgiTeam($team, $kgiCopyId, $kgi["month"], $kgi["year"]);
 			}
 			return $this->redirect('grid');
 		}

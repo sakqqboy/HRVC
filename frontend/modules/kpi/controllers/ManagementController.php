@@ -266,6 +266,7 @@ class ManagementController extends Controller
                     $this->saveKpiDepartment($_POST["department"], $kpiId);
                 }
                 if (isset($_POST["team"]) && count($_POST["team"]) > 0) {
+                    //เพิ่มการบันถึกเดือนและปี
                     $this->saveKpiTeam($_POST["team"], $kpiId,$_POST["month"],$_POST["year"]);
                 }
 

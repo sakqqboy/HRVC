@@ -8,7 +8,9 @@ use Exception;
 use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\KgiEmployee;
+use frontend\models\hrvc\KgiEmployeeHistory;
 use frontend\models\hrvc\KgiTeam;
+use frontend\models\hrvc\KgiTeamHistory;
 use frontend\models\hrvc\Team;
 use frontend\models\hrvc\UserRole;
 use Yii;
@@ -96,7 +98,7 @@ class AssignController extends Controller
 		$kgiTeamEmployee = json_decode($kgiTeamEmployee, true);
 		//throw new Exception($kgiId);
 
-		//throw new Exception(print_r($kgiTeamEmployee, true));
+		// throw new Exception(print_r($kgiTeamEmployee, true));
 
 		/*if (isset($teams) && count($teams) > 0) {
 			foreach ($teams as $team):
@@ -185,11 +187,25 @@ class AssignController extends Controller
 					$kgiTeam->kgiId = $_POST["kgiId"];
 					$kgiTeam->teamId = $teamId;
 					$kgiTeam->target = $targetTeam;
+					$kgiTeam->month = $_POST["month"];
+					$kgiTeam->year = $_POST["year"];
 					$kgiTeam->result = 0;
 					$kgiTeam->status = 1;
 					$kgiTeam->createDateTime = new Expression('NOW()');
 					$kgiTeam->updateDateTime = new Expression('NOW()');
-					$kgiTeam->save(false);
+					if($kgiTeam->save(false)) {
+						$KgiTeamHistory = new KgiTeamHistory();
+						$kgiTeamId = Yii::$app->db->lastInsertID;
+						$KgiTeamHistory->kgiTeamId = $kgiTeamId;
+						$KgiTeamHistory->target = $targetTeam;
+						$KgiTeamHistory->month = $_POST["month"];
+						$KgiTeamHistory->year = $_POST["year"];
+						$KgiTeamHistory->result = 0;
+						$KgiTeamHistory->status = 1;
+						$KgiTeamHistory->createDateTime = new Expression('NOW()');
+						$KgiTeamHistory->updateDateTime = new Expression('NOW()');
+						$KgiTeamHistory->save(false);
+					}
 				}
 
 			endforeach;
@@ -239,7 +255,19 @@ class AssignController extends Controller
 						$kgiEmployee->status = 1;
 						$kgiEmployee->createDateTime = new Expression('NOW()');
 						$kgiEmployee->updateDateTime = new Expression('NOW()');
-						$kgiEmployee->save(false);
+						if($kgiEmployee->save(false)){
+							$KgiEmployeeHistory = new KgiEmployeeHistory();
+							$kgiEmployeeId = Yii::$app->db->lastInsertID;
+							$KgiEmployeeHistory->kgiEmployeeId = $kgiEmployeeId;
+							$KgiEmployeeHistory->target = $targetTeam;
+							$KgiEmployeeHistory->month = $_POST["month"];
+							$KgiEmployeeHistory->year = $_POST["year"];
+							$KgiEmployeeHistory->result = 0;
+							$KgiEmployeeHistory->status = 1;
+							$KgiEmployeeHistory->createDateTime = new Expression('NOW()');
+							$KgiEmployeeHistory->updateDateTime = new Expression('NOW()');
+							$KgiEmployeeHistory->save(false);
+						}
 					} else {
 						KgiEmployee::deleteAll([
 							"employeeId" => $employeeId,

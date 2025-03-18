@@ -563,7 +563,7 @@ class KgiTeamController extends Controller
 					$totalTarget += $employeeTarget;
 					$checked = "checked";
 				} else {
-					$employeeTarget = 0;
+					$employeeTarget = "";
 					$checked = "";
 				}
 				$data["employee"][$employee["employeeId"]] = [
@@ -647,7 +647,7 @@ class KgiTeamController extends Controller
 							$checked = "checked";
 							$totalEmployee++;
 						} else {
-							$employeeTarget = 0;
+							$employeeTarget = "";
 							$checked = "";
 						}
 						$data[$kgiTeam["teamId"]]["employee"][$employee["employeeId"]] = [
@@ -661,7 +661,7 @@ class KgiTeamController extends Controller
 						$data[$kgiTeam["teamId"]]["employee"][$employee["employeeId"]] = [
 							"employeeFirstname" => $employee["employeeFirstname"],
 							"employeeSurename" => $employee["employeeSurename"],
-							"target" => 0,
+							"target" => "",
 							"picture" => $img,
 							"checked" => ""
 						];

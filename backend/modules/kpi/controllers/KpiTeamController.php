@@ -970,7 +970,7 @@ class KpiTeamController extends Controller
 				"kpi_team_history.status" => [1, 2, 4]
 			])
 			->andWhere("kpi_team_history.status!=99")
-			->orderBy("kpi_team_history.year DESC,kpi_team_history.month DESC,kpi_team_history.kpiTeamHistoryId")
+			->orderBy("kpi_team_history.year DESC,kpi_team_history.month DESC,kpi_team_history.kpiTeamHistoryId DESC")
 			->asArray()
 			->all();
 		$data = [];

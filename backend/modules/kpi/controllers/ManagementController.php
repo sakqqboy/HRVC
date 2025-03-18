@@ -148,7 +148,7 @@ class ManagementController extends Controller
 	{
 
 		if ($kpiHistoryId == 0) {
-			$kpiHistory = KpiHistory::find()->where(["status" => [1, 2, 4], "kpiId" => $id])->orderBy('kpiHistoryId DESC')->asArray()->one();
+			$kpiHistory = KpiHistory::find()->where(["status" => [1, 2, 4], "kpiId" => $id])->orderBy('year DESC,month DESC,kpiHistoryId DESC')->asArray()->one();
 		} else {
 			$kpiHistory = KpiHistory::find()
 				->where(["kpiHistoryId" => $kpiHistoryId])
