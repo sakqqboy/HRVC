@@ -546,6 +546,7 @@ class KpiPersonalController extends Controller
 		$role = UserRole::userRight();
 
 		$kpiEmployeeId = $param["kpiEmployeeId"];
+		// $kpiHistoryId = $param["kpiHistoryId"];
 		// throw new exception($kpiEmployeeId);	
 
 		$api = curl_init();
@@ -614,7 +615,25 @@ class KpiPersonalController extends Controller
         ];
 
 		// throw new exception(print_r($data	, true));	
+		//เมื่อกดอัพเดต 
+		// อัพเดต kpiEmployee จากนั้น อัพเดต kpiEmployeeHistory โดยเช็คเงื่อนไขดังนี้
+		// ให้อินเสริท KpiTeam และ KpiTeamHistory ปกติ ให้เดือน + 1  เอาไปค้นหาใน KpiTeamHistory ด้วย kpiTeamId  เดือน + 1 สเตตัส 5
+		//เช็คว่าสเตตัสเป็น 2 และ มี ใน KpiTeamHistory ไหม ถ้ามี ให้อัพเดต 5 เป็น 1  ด้วย
 
+		//สมมุต เดือนนี้ 03 มี สเตตัส 5 ในเดือน 04 และกดอัพเดต เดือน 04 มา 
+		//มันจะอินเสริจ เดือน 04 อันใหม่ก่อนแล้วจากนั้นค่อยไปอัพเดต 04 สเตตัส 5 อีกที 
+		//ผลลัพมันจะกลายเป็น เดือน 04 สเตตัส 1 สองอันใน KpiTeamHistory
+
+		$nextMonth = $data['month'] + 1;
+		$nextYear = $data['year'];
+
+		// ถ้าเดือนเกิน 12 ให้กลับไปเป็น 1 และเพิ่มปี
+		if ($nextMonth > 12) {
+			$nextMonth = 1;
+			$nextYear++;
+		}
+
+		//วิธีแก้ถ้ามีเดือนกับปีอยู่แล้ว ให้หน้าฟรอมแก้ไขไม่ได้ แต่ถ้าไม่มีให้แก่ไขได้ เฉพาะทีม
 		// throw new Exception(print_r(Yii::$app->request	->post(), true));
 		if (isset($_POST["kpiEmployeeId"])) {
 			$history = KpiEmployeeHistory::find()
@@ -694,6 +713,21 @@ class KpiPersonalController extends Controller
 			$kpiEmployee->save(false);
 			$history->createrId = Yii::$app->user->id;
 			if ($history->save(false)) {
+			//check ว่า มีอันนี้ที่เป็นสเตตัส 5 ในเดือนที่มากกว่า ที่ส่งมา +1 และปีปัจจุบัน รึยัง ถ้ามีแล้วให้อัพเดต 5 เป็น 1
+				$KpiEmployeeHistory = KpiEmployeeHistory::find()
+				->where(["kpiEmployeeId" => $_POST["kpiEmployeeId"], "status" => 5 , "month" => $nextMonth, "year" => $nextYear])
+				->one(); // ไม่ใช้ asArray() เพื่อให้เป็น object				
+				if ($KpiEmployeeHistory !== null && $status == 2) {
+					$kpiEmployee->month = $KpiEmployeeHistory -> month;
+					$kpiEmployee->year = $KpiEmployeeHistory -> year;
+					$kpiEmployee->status = 1;
+					$kpiEmployee ->save(false);
+					$KpiEmployeeHistory->status = 1;
+					$KpiEmployeeHistory->updateDateTime = new Expression('NOW()');
+					$KpiEmployeeHistory->save(false);
+
+				}
+
 				return $this->redirect($_POST["lastUrl"]);
 			}
 		} else {

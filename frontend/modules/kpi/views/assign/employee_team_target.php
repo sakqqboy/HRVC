@@ -63,7 +63,8 @@
             </div>
             <div class="col-3 font-size-12 text-center pt-5">
                 <input type="text" name="employeeTarget[<?= $employeeId ?>]" class="assign-target text-end"
-                    placeholder="Target" style="height: 30px;" value="<?= number_format($employee['target'], 2) ?>"
+                    placeholder="0.00" style="height: 30px;"
+                    value="<?= isset($employee['target']) && is_numeric($employee['target']) ? number_format($employee['target'], 2) : '' ?>"
                     id="employee-target-<?= $teamId ?>-<?= $employeeId ?>"
                     onkeyup="javascript:calculateEmployeeTargetValue(<?= $teamId ?>)"
                     onkeydown="javascript:checkEnter(event,<?= $employeeId ?>,<?= $teamId ?>)">

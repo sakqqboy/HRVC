@@ -1105,6 +1105,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var year = document.getElementById('hiddenYear').value;
 
     if (month && year) {
+        // alert(month);
         document.getElementById('multi-mount-year').innerHTML =
             `${getMonthName(month)}, ${year} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
 
@@ -1121,6 +1122,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const inputGroupText = document.querySelector('.input-group-text');
         inputGroupText.style.backgroundColor = '#D7EBFF';
         inputGroupText.style.border = '0.5px solid #BEDAFF';
+
+        document.getElementById('monthSelect').value = month;
+        document.getElementById('yearSelect').value = year;
 
         // อัปเดตไอคอนภายใน <span>
         const images = inputGroupText.querySelectorAll('img');

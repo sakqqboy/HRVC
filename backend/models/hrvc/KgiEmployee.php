@@ -34,12 +34,12 @@ class KgiEmployee extends \backend\models\hrvc\master\KgiEmployeeMaster
     {
         return array_merge(parent::attributeLabels(), []);
     }
-    public static function kgiEmployee($kgiId)
+    public static function kgiEmployee($kgiId, $month, $year)
     {
         $kgiEmployee = KgiEmployee::find()
-            ->select('e.picture,e.employeeId,e.gender')
+            ->select('e.picture,e.employeeId,e.gender,kgi_employee.month,kgi_employee.year')
             ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
-            ->where(["kgi_employee.status" => [1, 2, 4], "kgi_employee.kgiId" => $kgiId, "e.status" => 1])
+            ->where(["kgi_employee.status" => [1, 2, 4], "kgi_employee.kgiId" => $kgiId, "e.status" => 1, "kgi_employee.month" => $month, "kgi_employee.year" => $year])
             ->andWhere("kgi_employee.employeeId is not null")
             ->asArray()
             ->all();
@@ -203,7 +203,7 @@ class KgiEmployee extends \backend\models\hrvc\master\KgiEmployeeMaster
         }
         return $percent;
     }
-    public static function countKgiFromTeam($kgiId, $teamId)
+    public static function countKgiFromTeam($kgiId, $teamId, $month, $year)
     {
         $kgiEmployee = KgiEmployee::find()
             ->select('e.picture,e.employeeId,e.gender')
@@ -211,7 +211,9 @@ class KgiEmployee extends \backend\models\hrvc\master\KgiEmployeeMaster
             ->where("kgi_employee.status!=99 and e.status!=99")
             ->andWhere([
                 "kgi_employee.kgiId" => $kgiId,
-                "e.teamId" => $teamId
+                "e.teamId" => $teamId,
+                "kgi_employee.month" => $month,
+                "kgi_employee.year" => $year
             ])
             ->asArray()
             ->all();

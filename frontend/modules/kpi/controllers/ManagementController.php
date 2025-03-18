@@ -266,7 +266,7 @@ class ManagementController extends Controller
                     $this->saveKpiDepartment($_POST["department"], $kpiId);
                 }
                 if (isset($_POST["team"]) && count($_POST["team"]) > 0) {
-                    $this->saveKpiTeam($_POST["team"], $kpiId);
+                    $this->saveKpiTeam($_POST["team"], $kpiId,$_POST["month"],$_POST["year"]);
                 }
 
                 return $this->redirect(Yii::$app->homeUrl . 'kpi/management/grid');
@@ -366,7 +366,7 @@ class ManagementController extends Controller
             endforeach;
         }
     }
-    public function saveKpiTeam($team, $kpiId)
+    public function saveKpiTeam($team, $kpiId, $month, $year)
     {
         $kpiTeam = KpiTeam::find()->where(["kpiId" => $kpiId, "status" => 1])->all();
         if (isset($kpiTeam) && count($kpiTeam) > 0) {
@@ -393,6 +393,8 @@ class ManagementController extends Controller
                     $kpiTeam->kpiId = $kpiId;
                     $kpiTeam->teamId = $t;
                     $kpiTeam->status = 1;
+                    $kpiTeam->month = $month;
+                    $kpiTeam->year = $year;
                     $kpiTeam->createDateTime = new Expression('NOW()');
                     $kpiTeam->updateDateTime = new Expression('NOW()');
                     $kpiTeam->save(false);
@@ -402,6 +404,8 @@ class ManagementController extends Controller
                     $kpiTeamHistory->target = null;
                     $kpiTeamHistory->result = null;
                     $kpiTeamHistory->createrId = Yii::$app->user->id;
+                    $kpiTeamHistory-> month = $month;
+                    $kpiTeamHistory->year = $year;
                     $kpiTeamHistory->status = 1;
                     $kpiTeamHistory->createDateTime = new Expression('NOW()');
                     $kpiTeamHistory->updateDateTime = new Expression('NOW()');
@@ -610,7 +614,7 @@ class ManagementController extends Controller
                     $this->savekpiDepartment($_POST["department"], $kpiId);
                 }
                 if (isset($_POST["team"]) && count($_POST["team"]) > 0) {
-                    $this->savekpiTeam($_POST["team"], $kpiId);
+                    $this->savekpiTeam($_POST["team"], $kpiId, $_POST["month"], $_POST["year"]);
                 }
                 return $this->redirect($_POST["lastUrl"]);
             }
@@ -1145,7 +1149,7 @@ class ManagementController extends Controller
                 $this->saveKpiDepartment($_POST["department"], $kpiId);
             }
             if (isset($_POST["team"]) && count($_POST["team"]) > 0) {
-                $this->saveKpiTeam($_POST["team"], $kpiId);
+                $this->saveKpiTeam($_POST["team"], $kpiId,$kpi["month"],$kpi["year"]);
             }
 
             $branch = [];
@@ -1194,7 +1198,7 @@ class ManagementController extends Controller
                 endforeach;
             }
             if (count($team) > 0) {
-                $this->saveKpiTeam($team, $kpiCopyId);
+                $this->saveKpiTeam($team, $kpiCopyId,$kpi["month"],$kpi["year"]);
             }
             return $this->redirect('grid');
         }
@@ -1982,7 +1986,50 @@ class ManagementController extends Controller
             $kpi->month = $nextMonth;
             $kpi->year = $nextYear;
             $kpi->updateDateTime = new Expression('NOW()');
-            $kpi->save(false);
+            if ($kpi->save(false)){
+               
+                $kpiTeam = KpiTeam::find()->where(["kpiId" => $currentHistory["kpiId"] , "status" => [1, 2, 4]])->all();
+                // throw new Exception(print_r($kpiTeam, true)); 
+                foreach ($kpiTeam as $team) :
+                    if($team -> month  == $nextMonth && $team -> year  == $nextYear){
+                        // $kpiTeam = new KpiTeam();
+                        // $kpiTeam -> kpiId  = $currentHistory["kpiId"];
+                        // $kpiTeam -> teamId = $team["teamId"];
+                        // $kpiTeam -> createrId = Yii::$app->user->id;
+                        // $kpiTeam -> target = $team["target"];
+                        // $kpiTeam -> result = 0;
+                        // $kpiTeam -> month = $nextMonth;
+                        // $kpiTeam -> year = $nextYear;
+                        // $kpiTeam -> createDateTime = new Expression('NOW()');
+                        // $kpiTeam -> updateDateTime = new Expression('NOW()');
+                        
+                        // $kpiTeam -> save(false);
+                    }else{
+                        if($team -> status == 1){
+                            $status = 5;
+                        }
+                        if($team -> status == 2){
+                            $status = 1;
+                            $team -> status = 1;
+                            $team -> month = $nextMonth;
+                            $team -> year = $nextYear;
+                        }
+                   
+                        $kpiTeamHistory = new kpiTeamHistory();
+                        $kpiTeamHistory -> kpiTeamId = $team-> kpiTeamId;
+                        $kpiTeamHistory -> createrId = Yii::$app->user->id;
+                        $kpiTeamHistory -> month = $nextMonth;
+                        $kpiTeamHistory -> year = $nextYear;
+                        $kpiTeamHistory -> createDateTime = new Expression('NOW()');
+                        $kpiTeamHistory -> updateDateTime = new Expression('NOW()');
+                        $kpiTeamHistory -> detail = "auto set from company kpi";
+                        $kpiTeamHistory -> status =  $status;
+                        $kpiTeamHistory -> save(false);
+                        $team -> save(false);
+                    }
+                endforeach;
+
+            }
         }
         // return $this->redirect(Yii::$app->homeUrl . 'kpi/management/grid');
         return $this->redirect(Yii::$app->request->referrer);

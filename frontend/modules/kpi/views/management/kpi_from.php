@@ -467,7 +467,7 @@ select.form-select option:disabled {
                     <div class="form-group start-center mt-37" style="  gap: 14px;">
                         <label class="text-manage-create" for="name">
                             <span class="text-danger">* </span>
-                            <?= Yii::t('app', 'Month & Year') ?>
+                            <?= Yii::t('app', 'Month & Year') ?> <?= $statusform ?>
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
                                 data-placement="top"
                                 title="<?= Yii::t('app', 'Select the specific month and year for which youre entering or viewing data. This helps in maintaining chronological records.') ?>"
@@ -483,19 +483,21 @@ select.form-select option:disabled {
                                 <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="LinkedIn"
                                     style="width: 16px; height: 16px;">
                             </span>
+
                             <div class="form-control" id="multi-mount-year" name="fromMonthYear"
                                 style="border-radius: 53px 53px 53px 53px; text-align: center; cursor: pointer; position: absolute; width: 100%;"
-                                onclick="openDatePicker()">
+                                <?php if ($statusform == 'create'){ ?> onclick="openDatePicker()" <?php } ?>>
                                 Select the Month & Year <i class="fa fa-angle-down pull-right mt-5"
                                     aria-hidden="true"></i>
                             </div>
+
+
                             <!-- hidden inputs เพื่อเก็บค่า month และ year -->
                             <input type="hidden" id="hiddenMonth" name="month"
                                 value="<?= htmlspecialchars($data['month'] ?? '') ?>" required>
                             <input type="hidden" id="hiddenYear" name="year"
                                 value="<?= htmlspecialchars($data['year'] ?? '') ?>" required>
                         </div>
-
                         <!-- Popup for Month/Year Selection -->
                         <div id="monthYearPicker" class="mount-year">
                             <select id="monthSelect" class="form-select" onchange="closeDatePicker()" required>
@@ -517,6 +519,8 @@ select.form-select option:disabled {
                                 <!-- ปีที่ถูกสร้างจะถูกเพิ่มที่นี่ -->
                             </select>
                         </div>
+
+
                     </div>
 
                     <div class="form-group start-center mt-37" style="  gap: 14px;">

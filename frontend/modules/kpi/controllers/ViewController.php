@@ -70,7 +70,7 @@ class ViewController extends Controller
 		$kpis = curl_exec($api);
 		$kpis = json_decode($kpis, true);
 		curl_close($api);
-		//throw new Exception(print_r($kpis, true));
+		// throw new Exception(print_r($kpis, true));
 
 		//throw new Exception($kpiId);
 		// throw new Exception(print_r($kpis, true));

@@ -214,9 +214,9 @@ class KpiTeamController extends Controller
 		if (isset($kpiTeams) && count($kpiTeams) > 0) {
 			foreach ($kpiTeams as $kpiTeam) :
 				$kpiTeamHistory = KpiTeamHistory::find()
-					->where(["kpiTeamId" => $kpiTeam["kpiTeamId"]])
+					->where(["kpiTeamId" => $kpiTeam["kpiTeamId"] , "status" => [1, 2, 4]])
 					->asArray()
-					->orderBy('createDateTime DESC')
+					->orderBy('year DESC, month DESC,updateDateTime DESC')
 					->one();
 
 				if (!isset($kpiTeamHistory) || empty($kpiTeamHistory)) {
@@ -285,7 +285,8 @@ class KpiTeamController extends Controller
 					"countryName" => Country::countryNameBycompany($kpiTeam['companyId']),
 					"kpiEmployee" => KpiEmployee::kpiEmployee($kpiTeam["kpiId"],$kpiTeam["month"],$kpiTeam["year"]),
 					"ratio" => number_format($ratio, 2),
-					"isOver" => ModelMaster::isOverDuedate(KpiTeam::nextCheckDate($kpiTeam['kpiTeamId'])),
+					// "isOver" => ModelMaster::isOverDuedate(KpiTeam::nextCheckDate($kpiTeamHistory['kpiTeamId'])),
+					"isOver" => ModelMaster::isOverDuedate($kpiTeamHistory['nextCheckDate']),
 					"employee" => KpiTeam::kpiTeamEmployee($kpiTeam['kpiId'], $teamId),
 					"countTeam" => KpiTeam::kpiTeam($kpiTeam["kpiId"]),
 					"amountType" => $kpiTeam["amountType"],
@@ -342,7 +343,7 @@ class KpiTeamController extends Controller
 					$totalTarget += $employeeTarget;
 					$checked = "checked";
 				} else {
-					$employeeTarget = 0;
+					// $employeeTarget = 0;
 					$checked = "";
 				}
 				$data["employee"][$employee["employeeId"]] = [
@@ -646,7 +647,7 @@ class KpiTeamController extends Controller
 				->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kt.kpiId")
 				->where(["kpi_team_history.kpiTeamId" => $kpiTeamId, "kpi_team_history.status" => [1, 2]])
 				->asArray()
-				->orderBy('kpi_team_history.createDateTime DESC')
+				->orderBy('kpi_team_history.year DESC, kpi_team_history.month DESC,kpi_team_history.createDateTime DESC')
 				->one();
 		}
 
@@ -898,27 +899,23 @@ class KpiTeamController extends Controller
 						->one();
 
 					if (isset($kpiEmployee) && !empty($kpiEmployee)) {
-						if (isset($kpiEmployee) && count($kpiEmployee) > 0) {
+
 							$employeeTarget = $kpiEmployee["target"];
 							$totalTeamTarget += $employeeTarget;
-							$checked = "checked";
 							$totalEmployee++;
-						} else {
-							$employeeTarget = 0;
-							$checked = "";
-						}
+					
 						$data[$kpiTeam["teamId"]]["employee"][$employee["employeeId"]] = [
 							"employeeFirstname" => $employee["employeeFirstname"],
 							"employeeSurename" => $employee["employeeSurename"],
 							"target" => $employeeTarget,
 							"picture" => $img,
-							"checked" => $checked
+							"checked" => "checked"
 						];
 					} else {
 						$data[$kpiTeam["teamId"]]["employee"][$employee["employeeId"]] = [
 							"employeeFirstname" => $employee["employeeFirstname"],
 							"employeeSurename" => $employee["employeeSurename"],
-							"target" => 0,
+							"target" => "",
 							"picture" => $img,
 							"checked" => ""
 						];
@@ -970,6 +967,7 @@ class KpiTeamController extends Controller
 			->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kt.kpiId")
 			->where([
 				"kpi_team_history.kpiTeamId" => $kpiTeamId,
+				"kpi_team_history.status" => [1, 2, 4]
 			])
 			->andWhere("kpi_team_history.status!=99")
 			->orderBy("kpi_team_history.year DESC,kpi_team_history.month DESC,kpi_team_history.kpiTeamHistoryId")

@@ -97,32 +97,38 @@ class KgiEmployee extends \frontend\models\hrvc\master\KgiEmployeeMaster
         }
         return $date;
     }
-    public static function countKgiEmployeeInTeam($teamId,$kgiId){
-        $kgiEmployee=KgiEmployee::find()
-        ->select('e.employeeId,e.picture,e.employeeId,e.gender')
-        ->JOIN("LEFT JOIN","employee e","e.employeeId=kgi_employee.employeeId")
-        ->where(["e.teamId"=>$teamId,"kgi_employee.kgiId"=>$kgiId])
+    public static function countKgiEmployeeInTeam($teamId,$kgiId,$month,$year){
+        $kgiEmployee = kgiEmployee::find()
+        ->select('e.picture,e.employeeId,e.gender,kgi_employee.year,kgi_employee.month')
+        ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
+        ->where("kgi_employee.status!=99 and e.status!=99")
+        ->andWhere([
+            "kgi_employee.kgiId" => $kgiId,
+            "e.teamId" => $teamId,
+            "kgi_employee.month" => $month,
+            "kgi_employee.year" => $year
+        ])
         ->asArray()
         ->all();
         $data=[];
         if(isset($kgiEmployee) && count( $kgiEmployee)>0){
             $i=0;
-foreach($kgiEmployee as $employee):
-    if ($employee["picture"] != '') {
-        $img = $employee["picture"];
-    } else {
-        if ($employee["gender"] == 1) {
-            $img = "image/user.png";
-        } else {
-            $img = "image/lady.png";
-        }
-    }
-$data["kgiEmployee"][$i]=$img;
-$i++;
-endforeach;
+            foreach($kgiEmployee as $employee):
+                if ($employee["picture"] != '') {
+                    $img = $employee["picture"];
+                } else {
+                    if ($employee["gender"] == 1) {
+                        $img = "image/user.png";
+                    } else {
+                        $img = "image/lady.png";
+                    }
+                }
+            $data[$i]=$img;
+            $i++;
+            endforeach;
         }else{
             return null;
         }
-        return $data;
+            return $data;
     }
 }
