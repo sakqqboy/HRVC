@@ -111,7 +111,7 @@ class ManagementController extends Controller
 					"active" => $kfi["active"],
 					"countKfiHasKgi" => KfiHasKgi::countKgiInkfi($kfi["kfiId"]),
 					"kfiEmployee" => $selectPic,
-					"countEmployee" => count($allEmployee),
+					"countEmployee" => count($allEmployee) . '12344',
 
 				];
 				$kfiHistory = KfiHistory::find()
