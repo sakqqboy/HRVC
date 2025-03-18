@@ -609,6 +609,7 @@ class KgiTeamController extends Controller
 			->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
 			->JOIN("LEFT JOIN", "department d", "d.departmentId=t.departmentId")
 			->where(["kgi_team.kgiId" => $kgiId, "t.status" => 1])
+			->andWhere("kgi_team.status != 99")
 			->asArray()
 			->all();
 		$data = [];
@@ -636,6 +637,7 @@ class KgiTeamController extends Controller
 					}
 					$kgiEmployee = KgiEmployee::find()
 						->where(["employeeId" => $employee["employeeId"], "kgiId" => $kgiId])
+						->andWhere("status != 99")
 						->asArray()
 						->orderBy('createDateTime DESC')
 						->one();

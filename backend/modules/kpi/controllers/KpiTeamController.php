@@ -867,6 +867,7 @@ class KpiTeamController extends Controller
 			->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
 			->JOIN("LEFT JOIN", "department d", "d.departmentId=t.departmentId")
 			->where(["kpi_team.kpiId" => $kpiId, "t.status" => 1])
+			->andWhere("kpi_team.status != 99")
 			->asArray()
 			->all();
 		$data = [];
@@ -894,6 +895,7 @@ class KpiTeamController extends Controller
 					}
 					$kpiEmployee = KpiEmployee::find()
 						->where(["employeeId" => $employee["employeeId"], "kpiId" => $kpiId])
+						->andWhere("status != 99")
 						->asArray()
 						->orderBy('createDateTime DESC')
 						->one();
