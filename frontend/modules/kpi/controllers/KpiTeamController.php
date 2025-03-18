@@ -229,7 +229,7 @@ class KpiTeamController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-detail?kpiTeamId=' . $kpiTeamId . '&&kpiTeamHistoryId=' . $kpiTeamHistoryId);
 		$kpiTeamDetail = curl_exec($api);
 		$kpiTeamDetail = json_decode($kpiTeamDetail, true);
-//   throw new Exception(print_r($kpiTeamDetail,true));
+		//throw new Exception(print_r($kpiTeamDetail,true));
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$companies = curl_exec($api);

@@ -36,7 +36,7 @@ $this->title = 'Assign KFI';
                         <?= Yii::t('app', 'Back') ?>
                     </text>
                 </a>
-                <input type="hidden" id="url" name="url" value="<?= Yii::$app->request->referrer ?>">
+                <input type="hidden" id="url" name="url" value="<?= $url ?>">
                 <span class="pim-name-title">
                     <?= $kfiDetail["kfiName"] ?>
                 </span>
