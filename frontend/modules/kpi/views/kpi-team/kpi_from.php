@@ -418,7 +418,7 @@ select.form-select option:disabled {
                             </span>
                             <div class="form-control" id="multi-mount-year" name="fromMonthYear"
                                 style="border-radius: 53px 53px 53px 53px; text-align: center; cursor: pointer; position: absolute; width: 100% ; height: 100%;"
-                                onclick="openDatePicker()">
+                                <?php if ($statusform == 'create'){ ?> onclick="openDatePicker()" <?php } ?>>
                                 Select the Month & Year <i class="fa fa-angle-down pull-right mt-5"
                                     aria-hidden="true"></i>
                             </div>
