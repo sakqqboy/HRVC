@@ -86,10 +86,12 @@ class DefaultController extends Controller
     public function actionDeleteOldPim()
     {
         KgiTeam::deleteAll("status=99 or year=2024");
+        KgiHistory::deleteAll("status=99 or year=2024");
         KgiTeamHistory::deleteAll("status=99 or year=2024");
         KgiEmployee::deleteAll("status=99 or year=2024");
         KgiEmployeeHistory::deleteAll("status=99 or year=2024");
         KpiTeam::deleteAll("status=99 or year=2024");
+        KpiHistory::deleteAll("status=99 or year=2024");
         KpiTeamHistory::deleteAll("status=99 or year=2024");
         KpiEmployee::deleteAll("status=99 or year=2024");
         KpiEmployeeHistory::deleteAll("status=99 or year=2024");
@@ -102,6 +104,7 @@ class DefaultController extends Controller
         KfiHasKgi::deleteAll("status=99");
         KfiIssue::deleteAll("status=99");
         KfiSolution::deleteAll("status=99");
+
 
 
 

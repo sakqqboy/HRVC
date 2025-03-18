@@ -248,6 +248,8 @@ $this->title = 'KGI Grid View';
         </div>
     </div>
     <input type="hidden" name="kgiId" value="<?= $kgiId ?>">
+    <input type="hidden" name="month" value="<?= $month ?>">
+    <input type="hidden" name="year" value="<?= $year ?>">
     <input type="hidden" name="companyId" value="<?= $companyId ?>">
     <input type="hidden" name="month" value="<?= $kgiDetail["month"] ?>">
     <input type="hidden" name="year" value="<?= $kgiDetail["year"] ?>">

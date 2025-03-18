@@ -44,8 +44,8 @@ class AssignController extends Controller
 	public function actionAssign($hash)
 	{
 		$param = ModelMaster::decodeParams($hash);
-
 		$role = UserRole::userRight();
+		//throw new Exception(print_r($param, true));
 		if ($role == 7) {
 			$adminId = Yii::$app->user->id;
 		}
@@ -66,6 +66,9 @@ class AssignController extends Controller
 		}
 		$kgiId = $param["kgiId"];
 		$companyId = $param["companyId"];
+		$month = $param["month"];
+		$year = $param["year"];
+
 		$teamId = Team::userTeam(Yii::$app->user->id);
 		$url = $param["url"] ?? Yii::$app->request->referrer;
 		//$save = $param["save"];
@@ -78,7 +81,7 @@ class AssignController extends Controller
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-team?kgiId=' . $kgiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-team?kgiId=' . $kgiId . '&&month=' . $month . '&&year=' . $year);
 		$kgiTeams = curl_exec($api);
 		$kgiTeams = json_decode($kgiTeams, true);
 
@@ -96,28 +99,6 @@ class AssignController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-team-employee?kgiId=' . $kgiId);
 		$kgiTeamEmployee = curl_exec($api);
 		$kgiTeamEmployee = json_decode($kgiTeamEmployee, true);
-		//throw new Exception($kgiId);
-
-		// throw new Exception(print_r($kgiTeamEmployee, true));
-
-		/*if (isset($teams) && count($teams) > 0) {
-			foreach ($teams as $team):
-				curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/each-team-employee-kgi?kgiId=' . $kgiId . '&&teamId=' . $team["teamId"]);
-				$employeeTeamTarget = curl_exec($api);
-				$employeeTeamTarget = json_decode($employeeTeamTarget, true);
-
-				curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/team-detail?id=' . $team["teamId"]);
-				$teamDetail = curl_exec($api);
-				$teamDetail = json_decode($teamDetail, true);
-				if (isset($employeeTeamTarget) && count($employeeTeamTarget) > 0) {
-					$text .= $this->renderAjax('employee_team_target', [
-						"employeeTeamTarget" => $employeeTeamTarget,
-						"teamId" => $team["teamId"],
-						"teamDetail" => $teamDetail
-					]);
-				}
-			endforeach;
-		}*/
 
 		curl_close($api);
 		return $this->render('assign', [
@@ -130,10 +111,12 @@ class AssignController extends Controller
 			"kgiTeamEmployee" => $kgiTeamEmployee,
 			"companyId" => $companyId,
 			"userTeamId" => $teamId,
-			"url" => $url
+			"url" => $url,
+			"month" => $month,
+			"year" => $year
 		]);
 	}
-	public function actionEmployeeInTeamTarget()
+	public function actionEmployeeInTeamTarget() //
 	{
 		$teamId = $_POST["teamId"];
 		$kgiId = $_POST["kgiId"];
@@ -234,7 +217,7 @@ class AssignController extends Controller
 				$target = str_replace(",", "", $target);
 
 				if (isset($kgiEmployee) && !empty($kgiEmployee)) {
-					if ($kgiEmployee->target != $target && $target && trim($target) == "") {
+					if ($kgiEmployee->target != $target && trim($target) != "" && $target != null) {
 						$kgiEmployee->target = $target;
 						$kgiEmployee->updateDateTime = new Expression('NOW()');
 						$kgiEmployee->save(false);
@@ -301,7 +284,9 @@ class AssignController extends Controller
 		return $this->redirect(Yii::$app->homeUrl . 'kgi/assign/assign/' . ModelMaster::encodeParams([
 			'kgiId' => $_POST["kgiId"],
 			"companyId" => $_POST["companyId"],
-			"url" => $_POST["url"]
+			"url" => $_POST["url"],
+			"month" => $_POST["month"],
+			"year" => $_POST["year"]
 		]));
 	}
 }

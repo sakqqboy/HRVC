@@ -66,7 +66,7 @@ class AssignController extends Controller
 		$text = '';
 		//throw new Exception(print_r($kfiDetail, true));
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-team-employee?kfiId=' . $kfiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-team-employee?kfiId=' . $kfiId . '&&companyId=' . $companyId);
 		$kfiTeamEmployee = curl_exec($api);
 		$kfiTeamEmployee = json_decode($kfiTeamEmployee, true);
 

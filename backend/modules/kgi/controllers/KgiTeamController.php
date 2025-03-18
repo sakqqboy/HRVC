@@ -30,7 +30,7 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 class KgiTeamController extends Controller
 {
-	public function actionKgiTeam($kgiId)
+	public function actionKgiTeam($kgiId, $month, $year)
 	{
 		$kgiTeams = KgiTeam::find()
 			->select('kgi_team.teamId,t.teamName,kgi_team.target,kgi_team.remark,d.departmentName,d.departmentId')
@@ -201,7 +201,7 @@ class KgiTeamController extends Controller
 		if (isset($kgiTeams) && count($kgiTeams) > 0) {
 			foreach ($kgiTeams as $kgiTeam) :
 				$kgiTeamHistory = KgiTeamHistory::find()
-					->where(["kgiTeamId" => $kgiTeam["kgiTeamId"]])
+					->where(["kgiTeamId" => $kgiTeam["kgiTeamId"], "status" => [1, 2, 4]])
 					->asArray()
 					->orderBy('createDateTime DESC')
 					->one();
@@ -655,7 +655,7 @@ class KgiTeamController extends Controller
 							"employeeSurename" => $employee["employeeSurename"],
 							"target" => $employeeTarget,
 							"picture" => $img,
-							"checked" => $checked
+							"checked" => "checked"
 						];
 					} else {
 						$data[$kgiTeam["teamId"]]["employee"][$employee["employeeId"]] = [

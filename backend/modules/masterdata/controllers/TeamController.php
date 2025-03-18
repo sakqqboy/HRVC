@@ -46,7 +46,13 @@ class TeamController extends Controller
 			->JOIN("LEFT JOIN", "branch b", "b.branchId=d.branchId")
 			->JOIN("LEFT JOIN", "company c", "c.companyId=b.companyId")
 			->JOIN("LEFT JOIN", "country co", "co.countryId=c.countryId")
-			->where(["team.status" => 1, "c.companyId" => $id])
+			->where([
+				"team.status" => 1,
+				"d.status" => 1,
+				"b.status" => 1,
+				"c.status" => 1,
+				"c.companyId" => $id
+			])
 			->orderBy('team.teamName')
 			->asArray()
 			->all();

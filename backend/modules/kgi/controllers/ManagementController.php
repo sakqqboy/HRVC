@@ -124,6 +124,8 @@ class ManagementController extends Controller
 					"year" => $kgi['year'],
 					"month" => ModelMaster::monthEng($kgi['month'], 1),
 					"monthShort" => ModelMaster::monthEng($kgi['month'], 2),
+					"year" => $kgi["year"],
+					"monthNumber" => $kgi["month"],
 					"priority" => $kgi["priority"],
 					"ratio" => number_format($ratio, 2),
 					"periodCheck" => ModelMaster::engDate($kgi["periodDate"], 2), //lastest check
