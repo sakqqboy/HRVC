@@ -972,7 +972,7 @@ class KpiTeamController extends Controller
 				"kpi_team_history.status" => [1, 2, 4]
 			])
 			->andWhere("kpi_team_history.status!=99")
-			->orderBy("kpi_team_history.year DESC,kpi_team_history.month DESC,kpi_team_history.kpiTeamHistoryId DESC")
+			->orderBy("kpi_team_history.year DESC,kpi_team_history.month DESC,kpi_team_history.updateDateTime DESC")
 			->asArray()
 			->all();
 		$data = [];
@@ -992,6 +992,7 @@ class KpiTeamController extends Controller
 						$ratio = 0;
 					}
 				}
+				if (!isset($data[$history["year"]][$history["month"]])) {
 				$data[$history["year"]][$history["month"]] = [
 					"kpiTeamHistoryId" => $history["kpiTeamHistoryId"],
 					"target" => (float)$history['target'],
@@ -1008,9 +1009,10 @@ class KpiTeamController extends Controller
 					"fromDate" => ModelMaster::engDate($history["fromDate"], 2),
 					"toDate" => ModelMaster::engDate($history["toDate"], 2),
 				];
+			}
 			endforeach;
 		}
-		return json_encode($data);
+		return json_encode($data	);
 	}
 	// public function actionWaitForApprove()
 	// {

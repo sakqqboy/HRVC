@@ -1068,7 +1068,12 @@ class KpiTeamController extends Controller
 			$kpiTeam->year = $nextYear;
 			$kpiTeam->updateDateTime = new Expression('NOW()');
 			if($kpiTeam->save(false)){
-				$kpiEmpoyee = KpiEmployee::find()->where(["kpiId" => $kpiTeam["kpiId"]])->all();
+
+				$kpiEmpoyee = KpiEmployee::find()
+				->leftJoin("employee" , "employee.employeeId = kpi_employee.employeeId")
+				->where(["kpi_employee.kpiId" => $kpiTeam["kpiId"],"employee.teamId" => $kpiTeam["teamId"],"kpi_employee.status" => [1,2,4]])
+				->all();
+
 				// throw new Exception(print_r($kpiEmpoyee, true)); 
 				foreach($kpiEmpoyee as $empoyee) :
 					if($empoyee -> month  == $nextMonth && $empoyee -> year  == $nextYear){

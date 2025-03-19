@@ -107,14 +107,19 @@ class ViewController extends Controller
 
 		$kpiHistoryData = [];
 
+		$ddd = 0;
+
 		if (!empty($kpiTeamsHistory)) {
+			// $kpiHistoryData = 1;
 			foreach ($kpiTeamsHistory as $year => $months) {
 				if (!is_array($months)) {
+					// $kpiHistoryData = 2;
 					continue; // ข้ามค่าที่ไม่ใช่ array
 				}
 
 				foreach ($months as $month => $history) {
 					if (!is_array($history)) {
+						// $kpiHistoryData = 3;
 						continue; // ข้ามค่าที่ไม่ใช่ array
 					}
 
@@ -139,10 +144,10 @@ class ViewController extends Controller
 					];
 				}
 			}
-		}
+		}	
 
 		// Debug ค่าที่ได้
-		// throw new Exception(print_r($kpiHistoryData, true));
+		// throw new Exception(print_r($kpiTeamsHistory, true));
 	
 		$isManager = UserRole::isManager();
 		$months = ModelMaster::monthFull(1);

@@ -701,6 +701,7 @@ class KpiPersonalController extends Controller
 			if ($status != 88) {
 				$kpiEmployee->target = $_POST["amount"];
 				$kpiEmployee->result = $_POST["result"];
+				$kpiEmployee->status = $_POST["status"];
 			} else {
 				$kpiEmployee->status = 1;
 			}

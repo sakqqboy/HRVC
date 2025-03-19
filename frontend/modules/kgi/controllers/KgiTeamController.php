@@ -683,7 +683,13 @@ class KgiTeamController extends Controller
 			$kgiTeam->year = $nextYear;
 			$kgiTeam->updateDateTime = new Expression('NOW()');
 			if($kgiTeam->save(false)){
-				$KgiEmployee = KgiEmployee::find()->where(["kgiId" => $kgiTeam["kgiId"]])->all();
+				// $KgiEmployee = KgiEmployee::find()->where(["kgiId" => $kgiTeam["kgiId"]])->all();
+
+				$KgiEmployee = KgiEmployee::find()
+				->leftJoin("employee" , "employee.employeeId = kgi_employee.employeeId")
+				->where(["kgi_employee.kgiId" => $kgiTeam["kgiId"],"employee.teamId" => $kgiTeam["teamId"],"kgi_employee.status" => [1,2,4]])
+				->all();
+				
 				// throw new Exception(print_r($kpiEmpoyee, true)); 
 				foreach($KgiEmployee as $empoyee) :
 					if($empoyee -> month  == $nextMonth && $empoyee -> year  == $nextYear){

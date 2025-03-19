@@ -406,6 +406,7 @@ class KgiPersonalController extends Controller
 			if ($status != 88) {
 				$kgiEmployee->target = (float)str_replace(",", "", $_POST["target"]);
 				$kgiEmployee->result = (float)str_replace(",", "", $_POST["result"]);
+				$kgiEmployee->status = $_POST["status"];
 			} else {
 				$kgiEmployee->status = 1;
 			}

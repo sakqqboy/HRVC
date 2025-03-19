@@ -672,6 +672,7 @@ class KpiPersonalController extends Controller
 						$ratio = 0;
 					}
 				}
+				if (!isset($data[$history["year"]][$history["month"]])) {
 				$data[$history["year"]][$history["month"]] = [
 					"kpiEmployeeHistoryId" => $history["kpiEmployeeHistoryId"],
 					"target" => $history['target'],
@@ -688,6 +689,7 @@ class KpiPersonalController extends Controller
 					"fromDate" => ModelMaster::engDate($history["fromDate"], 2),
 					"toDate" => ModelMaster::engDate($history["toDate"], 2),
 				];
+			}
 			endforeach;
 		}
 		return json_encode($data);
