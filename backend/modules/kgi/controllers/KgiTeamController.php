@@ -30,7 +30,7 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 class KgiTeamController extends Controller
 {
-	public function actionKgiTeam($kgiId, $month, $year)
+	public function actionKgiTeam($kgiId)
 	{
 		$kgiTeams = KgiTeam::find()
 			->select('kgi_team.teamId,t.teamName,kgi_team.target,kgi_team.remark,d.departmentName,d.departmentId')
@@ -358,7 +358,7 @@ class KgiTeamController extends Controller
 				"nextCheckDate" =>  $kgiTeamHistory["nextCheckDate"],
 				"nextCheckText" => ModelMaster::engDate($kgiTeamHistory["nextCheckDate"], 2),
 				"status" => $kgiTeamHistory["status"],
-				"kgiEmployee" => KgiEmployee::kgiEmployee($kgiTeamHistory["kgiId"],$kgiTeamHistory["month"],$kgiTeamHistory["year"]),
+				"kgiEmployee" => KgiEmployee::kgiEmployee($kgiTeamHistory["kgiId"], $kgiTeamHistory["month"], $kgiTeamHistory["year"]),
 				"ratio" => number_format($ratio, 2),
 				"kgiDetail" => $kgiTeamHistory["kgiDetail"],
 				"remark" => $kgiTeamHistory["remark"],
@@ -506,7 +506,7 @@ class KgiTeamController extends Controller
 					"kgiTeamHistoryId" => $kgiTeamHistory["kgiTeamHistoryId"] ?? 0,
 					"flag" => Country::countryFlagBycompany($kgiTeam["companyId"]),
 					"countryName" => Country::countryNameBycompany($kgiTeam['companyId']),
-					"kgiEmployee" => KgiEmployee::kgiEmployee($kgiTeam["kgiId"],$kgiTeamHistory["month"],$kgiTeamHistory["year"]),
+					"kgiEmployee" => KgiEmployee::kgiEmployee($kgiTeam["kgiId"], $kgiTeamHistory["month"], $kgiTeamHistory["year"]),
 					"ratio" => number_format($ratio, 2),
 					"isOver" => ModelMaster::isOverDuedate(KgiTeam::nextCheckDate($kgiTeam['kgiTeamId'])),
 					"employee" => KgiTeam::kgiTeamEmployee($kgiTeam['kgiId'], $kgiTeam["teamId"]),
