@@ -5,8 +5,11 @@ namespace frontend\modules\kgi\controllers;
 use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
+use frontend\models\hrvc\Department;
 use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Group;
+use frontend\models\hrvc\KgiBranch;
+use frontend\models\hrvc\KgiDepartment;
 use frontend\models\hrvc\KgiEmployee;
 use frontend\models\hrvc\KgiEmployeeHistory;
 use frontend\models\hrvc\KgiTeam;
@@ -176,7 +179,7 @@ class AssignController extends Controller
 					$kgiTeam->status = 1;
 					$kgiTeam->createDateTime = new Expression('NOW()');
 					$kgiTeam->updateDateTime = new Expression('NOW()');
-					if($kgiTeam->save(false)) {
+					if ($kgiTeam->save(false)) {
 						$KgiTeamHistory = new KgiTeamHistory();
 						$kgiTeamId = Yii::$app->db->lastInsertID;
 						$KgiTeamHistory->kgiTeamId = $kgiTeamId;
@@ -190,6 +193,30 @@ class AssignController extends Controller
 						$KgiTeamHistory->save(false);
 					}
 				}
+				$team = Team::find()->select('departmentId')->where(["teamId" => $teamId])->asArray()->one();
+				$departmentId = $team["departmentId"];
+				$department = Department::find()->select('branchId')->where(["departmentId" => $departmentId])->asArray()->one();
+				$branchId = $department["branchId"];
+				$kgiDepartment = KgiDepartment::find()->where(["kgiId" => $_POST["kgiId"], "departmentId" => $departmentId, "status" => 1])->one();
+				if (!isset($kgiDepartment) || empty($kgiDepartment)) {
+					$newKgiDepartment = new KgiDepartment();
+					$newKgiDepartment->kgiId = $_POST["kgiId"];
+					$newKgiDepartment->departmentId = $departmentId;
+					$newKgiDepartment->status = 1;
+					$newKgiDepartment->createDateTime = new Expression('NOW()');
+					$newKgiDepartment->updateDateTime = new Expression('NOW()');
+					$newKgiDepartment->save(false);
+				}
+				$kgiBranch = KgiBranch::find()->where(["kgiId" => $_POST["kgiId"], "branchId" => $branchId, "status" => 1])->one();
+				if (!isset($kgiBranch) || empty($kgiBranch)) {
+					$newKgiBranch = new KgiBranch();
+					$newKgiBranch->kgiId = $_POST["kgiId"];
+					$newKgiBranch->branchId = $branchId;
+					$newKgiBranch->status = 1;
+					$newKgiBranch->createDateTime = new Expression('NOW()');
+					$newKgiBranch->updateDateTime = new Expression('NOW()');
+					$newKgiBranch->save(false);
+				}
 
 			endforeach;
 		}
@@ -202,7 +229,7 @@ class AssignController extends Controller
 				foreach ($deleteTeamKgi as $delKgi):
 					$delKgi->status = 99;
 					$delKgi->createrId = Yii::$app->user->id;
-					$delKgi->updateDateTime = new Expression('NOW()');	
+					$delKgi->updateDateTime = new Expression('NOW()');
 					$delKgi->save(false);
 				endforeach;
 			}
@@ -241,7 +268,7 @@ class AssignController extends Controller
 						$kgiEmployee->status = 1;
 						$kgiEmployee->createDateTime = new Expression('NOW()');
 						$kgiEmployee->updateDateTime = new Expression('NOW()');
-						if($kgiEmployee->save(false)){
+						if ($kgiEmployee->save(false)) {
 							$KgiEmployeeHistory = new KgiEmployeeHistory();
 							$kgiEmployeeId = Yii::$app->db->lastInsertID;
 							$KgiEmployeeHistory->kgiEmployeeId = $kgiEmployeeId;
@@ -276,7 +303,7 @@ class AssignController extends Controller
 					// $delKgi->delete();
 					$delKgi->status = 99;
 					$delKgi->createrId = Yii::$app->user->id;
-					$delKgi->updateDateTime = new Expression('NOW()');		
+					$delKgi->updateDateTime = new Expression('NOW()');
 					$delKgi->save(false);
 				endforeach;
 			}
