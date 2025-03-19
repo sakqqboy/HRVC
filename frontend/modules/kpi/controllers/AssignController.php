@@ -5,8 +5,12 @@ namespace frontend\modules\kpi\controllers;
 use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
+use frontend\models\hrvc\Branch;
+use frontend\models\hrvc\Department;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\KgiEmployee;
+use frontend\models\hrvc\KpiBranch;
+use frontend\models\hrvc\KpiDepartment;
 use frontend\models\hrvc\KpiEmployee;
 use frontend\models\hrvc\KpiEmployeeHistory;
 use frontend\models\hrvc\KpiTeam;
@@ -170,6 +174,7 @@ class AssignController extends Controller
 	}
 	public function actionUpdateTeamKpi()
 	{
+		
 		if (isset($_POST["team"]) && count($_POST["team"]) > 0) {
 			foreach ($_POST["team"] as $teamId => $team):
 				$kpiTeam = KpiTeam::find()
@@ -213,6 +218,31 @@ class AssignController extends Controller
 					}
 					//ล่าสุด
 				}
+
+				$departmentId = Team::find() ->select('departmentId') ->where(['teamId' => $teamId]) ->andWhere("status!=99")->one();
+						// $KpiDepartmentId = departmentId
+						$department = KpiDepartment::find() ->where([ 'kpiId' => $_POST["kpiId"],'departmentId' => $departmentId-> departmentId]) ->andWhere("status!=99") ->one();
+						if (empty($department)) {
+							$KpiDepartment = new KpiDepartment();
+							$KpiDepartment->kpiId = $_POST["kpiId"];
+							$KpiDepartment->departmentId = $departmentId ->departmentId;
+							$KpiDepartment->status = 1;
+							$KpiDepartment->createDateTime = new Expression('NOW()');
+							$KpiDepartment->updateDateTime = new Expression('NOW()');
+							$KpiDepartment->save(false);
+						}
+
+						$branchId = Department::find() ->select('branchId') ->where(['departmentId' => $departmentId->departmentId]) ->andWhere("status!=99")->one();
+						$branch = KpiBranch::find() ->where([ 'kpiId' => $_POST["kpiId"],'branchId' => $branchId-> branchId]) ->andWhere("status!=99") ->one();
+						if (empty($branch)) {
+							$KpiBranch = new KpiBranch();
+							$KpiBranch->kpiId = $_POST["kpiId"];
+							$KpiBranch->branchId = $branchId ->branchId;
+							$KpiBranch->status = 1;
+							$KpiBranch->createDateTime = new Expression('NOW()');
+							$KpiBranch->updateDateTime = new Expression('NOW()');
+							$KpiBranch->save(false);
+						}
 
 			endforeach;
 		}
