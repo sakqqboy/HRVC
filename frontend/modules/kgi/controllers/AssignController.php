@@ -273,7 +273,11 @@ class AssignController extends Controller
 				->all();
 			if (isset($deleteEmployeeKgi) && count($deleteEmployeeKgi) > 0) {
 				foreach ($deleteEmployeeKgi as $delKgi):
-					$delKgi->delete();
+					// $delKgi->delete();
+					$delKgi->status = 99;
+					$delKgi->createrId = Yii::$app->user->id;
+					$delKgi->updateDateTime = new Expression('NOW()');		
+					$delKgi->save(false);
 				endforeach;
 			}
 		}

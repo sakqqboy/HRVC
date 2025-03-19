@@ -305,7 +305,11 @@ class AssignController extends Controller
 				->all();
 			if (isset($deleteEmployeeKpi) && count($deleteEmployeeKpi) > 0) {
 				foreach ($deleteEmployeeKpi as $delKpi):
-					$delKpi->delete();
+					// $delKpi->delete();
+					$delKpi->status = 99;
+					$delKpi->createrId = Yii::$app->user->id;
+					$delKpi->updateDateTime = new Expression('NOW()');		
+					$delKpi->save(false);
 				endforeach;
 			}
 		}
