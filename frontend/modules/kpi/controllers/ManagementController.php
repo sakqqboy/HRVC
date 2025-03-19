@@ -415,8 +415,25 @@ class ManagementController extends Controller
             endforeach;
         }
     }
-    public function saveKpiEmployee($team, $kpiId)
+    public function saveKpiEmployee($team, $kpiId, $month, $year)
     {
+        // $KpiEmployee = KpiEmployee::find()->where(["kpiId" => $kpiId, "status" => 1])->all();
+        // if (isset($KpiEmployee) && count($KpiEmployee) > 0) {
+        //     foreach ($KpiEmployee as $kt) :
+        //         foreach ($Employee as $tt) :
+        //             if ($kt->employeeId == $tt) {
+        //                 $saveEmployee[$kt->employeeId] = 1;
+        //                 break;
+        //             } else {
+        //                 $saveEmployee[$kt->employeeId] = 0;
+        //             }
+        //         endforeach;
+        //         if ($saveEmployee[$kt["employeeId"]] == 0) {
+        //             $kt->status = 99;
+        //             $kt->save(false);
+        //         }
+        //     endforeach;
+        // }
         if (count($team) > 0) {
             foreach ($team as $t) :
                 $employee = Employee::find()->where(["teamId" => $t, "status" => 1])->all();
