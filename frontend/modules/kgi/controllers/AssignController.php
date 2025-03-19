@@ -48,7 +48,7 @@ class AssignController extends Controller
 	{
 		$param = ModelMaster::decodeParams($hash);
 		$role = UserRole::userRight();
-		//throw new Exception(print_r($param, true));
+		// throw new Exception(print_r($param, true));
 		if ($role == 7) {
 			$adminId = Yii::$app->user->id;
 		}
@@ -69,8 +69,8 @@ class AssignController extends Controller
 		}
 		$kgiId = $param["kgiId"];
 		$companyId = $param["companyId"];
-		$month = $param["month"];
-		$year = $param["year"];
+		// $month = $param["month"];
+		// $year = $param["year"];
 
 		$teamId = Team::userTeam(Yii::$app->user->id);
 		$url = $param["url"] ?? Yii::$app->request->referrer;
@@ -115,8 +115,8 @@ class AssignController extends Controller
 			"companyId" => $companyId,
 			"userTeamId" => $teamId,
 			"url" => $url,
-			"month" => $month,
-			"year" => $year
+			// "month" => $month,
+			// "year" => $year
 		]);
 	}
 	public function actionEmployeeInTeamTarget() //
@@ -155,6 +155,12 @@ class AssignController extends Controller
 	}
 	public function actionUpdateTeamKgi()
 	{
+
+		// throw new Exception(print_r($_POST, true));
+		
+		// throw new Exception(print_r(count($_POST["employeeTarget"]), true));
+		// exit;
+
 		if (isset($_POST["team"]) && count($_POST["team"]) > 0) {
 			foreach ($_POST["team"] as $teamId => $team):
 				$kgiTeam = KgiTeam::find()
@@ -264,6 +270,8 @@ class AssignController extends Controller
 						$kgiEmployee->kgiId = $_POST["kgiId"];
 						$kgiEmployee->employeeId = $employeeId;
 						$kgiEmployee->target = $target;
+						$kgiEmployee->month = $_POST["month"];
+						$kgiEmployee->year = $_POST["year"];
 						$kgiEmployee->result = 0;
 						$kgiEmployee->status = 1;
 						$kgiEmployee->createDateTime = new Expression('NOW()');

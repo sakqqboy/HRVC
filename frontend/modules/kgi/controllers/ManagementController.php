@@ -243,7 +243,7 @@ class ManagementController extends Controller
 				// if (isset($_POST["kgiGroup"]) && count($_POST["kgiGroup"]) > 0) {
 				// 	$this->saveKgiGroup($_POST["kgiGroup"], $kgiId);
 				// }
-				return $this->redirect(Yii::$app->homeUrl . 'kgi/assign/assign/' . ModelMaster::encodeParams(["kgiId" => $kgiId, "companyId" => $_POST["companyId"]]));
+				return $this->redirect(Yii::$app->homeUrl . 'kgi/assign/assign/' . ModelMaster::encodeParams(["kgiId" => $kgiId, "companyId" => $_POST["companyId"], "month" => $_POST["month"], "year" => $_POST["year"]]));
 				//return $this->redirect(Yii::$app->request->referrer);
 				//return $this->redirect('grid');
 			}
@@ -2141,6 +2141,7 @@ class ManagementController extends Controller
 			$kgi->year = $nextYear;
 			$kgi->updateDateTime = new Expression('NOW()');
 			if ($kgi->save(false)) {
+				
 				$oldKgiTeams = KgiTeam::find()->where([
 					"kgiId" => $kgiId,
 					"month" => $currentHistory["month"],
@@ -2182,7 +2183,7 @@ class ManagementController extends Controller
 
 								$newHistory = new KgiTeamHistory();
 								$newHistory->kgiTeamId = $team->kgiTeamId;
-								$newHistory->kgiTeamId = $team->target;
+								$newHistory->target = $team->target;
 								$newHistory->detail = "auto set from company kgi";
 								$newHistory->month = $nextMonth;
 								$newHistory->year = $nextYear;

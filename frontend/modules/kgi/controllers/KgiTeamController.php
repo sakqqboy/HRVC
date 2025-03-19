@@ -12,6 +12,7 @@ use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Kgi;
 use frontend\models\hrvc\KgiBranch;
 use frontend\models\hrvc\KgiEmployee;
+use frontend\models\hrvc\KgiEmployeeHistory;
 use frontend\models\hrvc\KgiGroup;
 use frontend\models\hrvc\KgiTeam;
 use frontend\models\hrvc\KgiTeamHistory;
@@ -681,7 +682,40 @@ class KgiTeamController extends Controller
 			$kgiTeam->month = $nextMonth;
 			$kgiTeam->year = $nextYear;
 			$kgiTeam->updateDateTime = new Expression('NOW()');
-			$kgiTeam->save(false);
+			if($kgiTeam->save(false)){
+				$KgiEmployee = KgiEmployee::find()->where(["kgiId" => $kgiTeam["kgiId"]])->all();
+				// throw new Exception(print_r($kpiEmpoyee, true)); 
+				foreach($KgiEmployee as $empoyee) :
+					if($empoyee -> month  == $nextMonth && $empoyee -> year  == $nextYear){
+						//ปัญหาคือ พอก็อปหน้าคอมปานีมา มันไม่มีในเอ็มพรอยี่ด้วย 
+						//สามารถข้ามเดือนได้ 
+						
+					}else{
+						if($empoyee -> status == 1){
+                            $status = 5;
+                        }
+                        if($empoyee -> status == 2){
+                            $status = 1;
+							// throw new Exception(print_r($empoyee -> status, true)); 
+                            $empoyee -> status = 1;
+                            $empoyee -> month = $nextMonth;
+                            $empoyee -> year = $nextYear;
+                        }
+						$KgiEmployeeHistory = new KgiEmployeeHistory();
+						$KgiEmployeeHistory->kgiEmployeeId = $empoyee -> kgiEmployeeId;
+						$KgiEmployeeHistory->createrId = Yii::$app->user->id;
+						$KgiEmployeeHistory->month = $nextMonth;
+						$KgiEmployeeHistory->year = $nextYear;
+						$KgiEmployeeHistory->createDateTime = new Expression('NOW()');
+						$KgiEmployeeHistory->updateDateTime = new Expression('NOW()');
+						$KgiEmployeeHistory-> detail = "auto set from company kpi";
+						$KgiEmployeeHistory->status = $status;
+						$KgiEmployeeHistory->save(false);
+						$empoyee -> save(false);
+
+					}
+				endforeach;
+			}
 		}
 		// return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-team/team-kgi-grid');
 		return $this->redirect(Yii::$app->request->referrer);

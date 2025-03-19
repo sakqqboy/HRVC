@@ -165,10 +165,26 @@ $this->title = 'Self KPI History';
                                             </div>
                                         </div>
                                         <div class="col-7 pl-5 pt-3">
-                                            <a class="font-<?= $colorFormat ?>"
-                                                style="text-decoration: none; font-size: 16px; font-weight: 400;">
+
+                                            <?php
+                                                        if ($role > 3) {
+                                                        ?>
+                                            <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, "companyId" => $kpiDetail["companyId"]]) ?>"
+                                                class="font-<?= $colorFormat ?>"
+                                                style=" text-decoration: none; font-size: 16px; font-weight: 400;">
                                                 <?= Yii::t('app', 'View mate') ?>
                                             </a>
+                                            <?php
+                                                        } else {
+                                                        ?>
+                                            <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, "companyId" => $kpiDetail["companyId"]]) ?>"
+                                                class="font-<?= $colorFormat ?>"
+                                                style=" text-decoration: none; font-size: 16px; font-weight: 400;">
+                                                <?= Yii::t('app', 'View mate') ?>
+                                            </a>
+                                            <?php
+                                                        }
+                                                        ?>
 
                                         </div>
                                     </div>
@@ -196,10 +212,26 @@ $this->title = 'Self KPI History';
                                             </div>
                                         </div>
                                         <div class="col-7 pl-5 pt-3">
-                                            <a class="font-<?= $colorFormat ?>"
-                                                style="text-decoration: none; font-size: 16px; font-weight: 400;">
+
+                                            <?php
+                                                        if ($role > 3) {
+                                                        ?>
+                                            <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, "companyId" => $kpiDetail["companyId"]]) ?>"
+                                                class="font-<?= $colorFormat ?>"
+                                                style=" text-decoration: none; font-size: 16px; font-weight: 400;">
                                                 <?= Yii::t('app', 'View mate') ?>
                                             </a>
+                                            <?php
+                                                        } else {
+                                                        ?>
+                                            <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, "companyId" => $kgiDetail["companyId"]]) ?>"
+                                                class="font-<?= $colorFormat ?>"
+                                                style=" text-decoration: none; font-size: 16px; font-weight: 400;">
+                                                <?= Yii::t('app', 'View mate') ?>
+                                            </a>
+                                            <?php
+                                                        }
+                                                        ?>
                                         </div>
                                     </div>
                                 </div>
