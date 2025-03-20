@@ -57,7 +57,7 @@ $this->title = 'Company KGI History';
                 <div class="col-lg-4 col-md-6 col-12 ">
                     <div class="col-12 mt-10 mb-5 pim-big-box pim-<?= $colorFormat ?>">
                         <div class="row">
-                            <div class="col-5 pim-name"><?= $kgi["month"] ?>
+                            <div class="col-5 pim-name-history"><?= $kgi["month"] ?>
                                 <?= $kgi["year"] ?></div>
                             <div class="col-7 text-end">
                                 <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 1, 'kgiHistoryId' => $kgi['kgiHistoryId']]) ?>"

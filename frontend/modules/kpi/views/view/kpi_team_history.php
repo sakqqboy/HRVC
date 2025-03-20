@@ -57,7 +57,7 @@ $this->title = 'Team KPI History';
                 <div class="col-lg-4 col-md-6 col-12 ">
                     <div class="col-12 mt-10 mb-5 pim-big-box pim-<?= $colorFormat ?>">
                         <div class="row">
-                            <div class="col-5 pim-name"><?= $kpi["month"] ?> <?= $kpi["year"] ?></div>
+                            <div class="col-5 pim-name-history"><?= $kpi["month"] ?> <?= $kpi["year"] ?></div>
                             <div class="col-7 text-end">
                                 <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/kpi-team-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'kpiTeamHistoryId' => $kpi['kpiTeamHistoryId'], 'kpiTeamId' => $kpiTeamId]) ?>"
                                     class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"

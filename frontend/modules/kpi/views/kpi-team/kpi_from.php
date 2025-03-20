@@ -2,7 +2,7 @@
 
 use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
-$this->title = 'KPI';
+$title = 'Update KPI';
 
 $parturl = 'kpi/kpi-team/update-kpi-team';
 

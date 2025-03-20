@@ -3,7 +3,7 @@
 use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'KPI';
+$title = 'Update KPI';
 
 $form = ActiveForm::begin([
 	'id' => 'update-personal-kpi',

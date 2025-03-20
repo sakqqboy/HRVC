@@ -59,7 +59,8 @@ $this->title = 'Self KGI History';
                 <div class="col-lg-4 col-md-6 col-12 ">
                     <div class="col-12 mt-10 mb-5 pim-big-box pim-<?= $colorFormat ?>">
                         <div class="row">
-                            <div class="col-5 pim-name"><?= Yii::t('app', $kgi["month"]) ?> <?= $kgi["year"] ?></div>
+                            <div class="col-5 pim-name-history"><?= Yii::t('app', $kgi["month"]) ?> <?= $kgi["year"] ?>
+                            </div>
                             <div class="col-7 text-end">
 
                                 <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/kgi-employee-history/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId, 'kgiEmployeeHistoryId' => $kgi['kgiEmployeeHistoryId'], 'kgiId' => $kgiId, 'openTab' => 1]) ?>"
