@@ -323,7 +323,7 @@ class ManagementController extends Controller
 		$kpiTeams = KpiTeam::find()
 			->select('kpi_team.teamId,t.teamName,t.departmentId')
 			->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
-			->where(["kpi_team.kpiId" => $id, "kpi_team.status" => 1, "t.status" => 1])
+			->where(["kpi_team.kpiId" => $id, "kpi_team.status" => [1,2,4], "t.status" => [1,2,4]])
 			->asArray()
 			->all();
 		$data = [];

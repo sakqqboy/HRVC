@@ -328,7 +328,7 @@ class ManagementController extends Controller
 		$kgiTeams = KgiTeam::find()
 			->select('kgi_team.teamId,t.teamName,t.departmentId')
 			->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
-			->where(["kgi_team.kgiId" => $id, "kgi_team.status" => 1, "t.status" => 1])
+			->where(["kgi_team.kgiId" => $id, "kgi_team.status" => [1,2,4], "t.status" => [1,2,4]])
 			->asArray()
 			->all();
 		$data = [];
