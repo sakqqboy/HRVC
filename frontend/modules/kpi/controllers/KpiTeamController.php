@@ -1127,7 +1127,10 @@ class KpiTeamController extends Controller
 		$kpiTeams = curl_exec($api);
 		$kpiTeams = json_decode($kpiTeams, true);
 
+
 		curl_close($api);
+	//	throw new Exception(print_r($kpiTeams, true));
+
 		$allDepartment = [];
 		if (isset($kpiTeams) && count($kpiTeams) > 0) {
 			foreach ($kpiTeams as $kgt):

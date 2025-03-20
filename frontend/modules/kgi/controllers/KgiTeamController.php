@@ -1055,6 +1055,8 @@ class KgiTeamController extends Controller
 		$kgiTeams = curl_exec($api);
 		$kgiTeams = json_decode($kgiTeams, true);
 
+		// throw new Exception( print_r($kgiTeams, true));
+
 		curl_close($api);
 		$allDepartment = [];
 		if (isset($kgiTeams) && count($kgiTeams) > 0) {

@@ -36,7 +36,7 @@ class KpiTeam extends \frontend\models\hrvc\master\KpiTeamMaster
     }
     public static function isInThisKpi($teamId, $kpiId)
     {
-        $kpiTeam = kpiTeam::find()->where(["teamId" => $teamId, "kpiId" => $kpiId, "status" => 1])->asArray()->one();
+        $kpiTeam = kpiTeam::find()->where(["teamId" => $teamId, "kpiId" => $kpiId, "status" => [1,2,4]])->asArray()->one();
         $has = 0;
         if (isset($kpiTeam) && !empty($kpiTeam)) {
             $has = 1;
