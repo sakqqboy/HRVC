@@ -660,6 +660,7 @@ function multiTeam(departmentId) {
 function multiTeamUpdate(departmentId) {
     var sumTeam = totalTeamUpdate(departmentId);
     var totalChecked = $('input[id^="multi-check-team-"]:checked').length;
+    // alert(totalChecked);
     var multiTeamDepartment = [];
     var i = 0;
     // ตรวจสอบว่าทุกทีมถูกเลือกหรือไม่

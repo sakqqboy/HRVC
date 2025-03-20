@@ -916,24 +916,23 @@ if ($DueBehind < 0) {
                 departmentMultiTeamUpdateKpi(branchId);
             });
 
-            if (checkedDepartmentIds.length > 0) {
+            // if (checkedDepartmentIds.length > 0) {
 
-                var checkedTeamIds = [];
-                $('input[name="team[]"]:checked').each(function() {
-                    checkedTeamIds.push($(this).val());
-                });
+            //     var checkedTeamIds = [];
+            //     $('input[name="team[]"]:checked').each(function() {
+            //         checkedTeamIds.push($(this).val());
+            //     });
 
-                // เรียกใช้งานฟังก์ชันสำหรับ team ที่ถูก checked เท่านั้น
-                checkedTeamIds.forEach(function(departmentId) {
-                    multiTeamUpdate(departmentId);
-                });
-            } else {
-                multiteamKgi();
-            }
+            //     // เรียกใช้งานฟังก์ชันสำหรับ team ที่ถูก checked เท่านั้น
+            //     checkedTeamIds.forEach(function(departmentId) {
+            //         multiTeamUpdate(departmentId);
+            //     });
+            // } else {
+            multiteamKpi();
+            // }
 
+            // เรียกใช้งานฟังก์ชันกับ select หลายตัวพร้อมกัน
         }
-
-        // เรียกใช้งานฟังก์ชันกับ select หลายตัวพร้อมกัน
         updatePlaceholderColor('#companyId');
         updatePlaceholderColor('#quantRatio-create');
         updatePlaceholderColor('#amountType-create');

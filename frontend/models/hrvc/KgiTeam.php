@@ -36,7 +36,7 @@ class KgiTeam extends \frontend\models\hrvc\master\KgiTeamMaster
     }
     public static function isInThisKgi($teamId, $kgiId)
     {
-        $kgiTeam = KgiTeam::find()->where(["teamId" => $teamId, "kgiId" => $kgiId, "status" => 1])->asArray()->one();
+        $kgiTeam = KgiTeam::find()->where(["teamId" => $teamId, "kgiId" => $kgiId, "status" => [1,2,4]])->asArray()->one();
         $has = 0;
         if (isset($kgiTeam) && !empty($kgiTeam)) {
             $has = 1;
