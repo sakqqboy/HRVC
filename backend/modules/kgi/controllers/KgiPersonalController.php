@@ -450,9 +450,11 @@ class KgiPersonalController extends Controller
 			->JOIN("LEFT JOIN", "kgi k", "k.kgiId=ke.kgiId")
 			->where([
 				"kgi_employee_history.kgiEmployeeId" => $kgiEmployeeId,
+				"kgi_employee_history.status" => [1, 2, 4]
+
 			])
 			->andWhere("kgi_employee_history.status!=99")
-			->orderBy("kgi_employee_history.year DESC,kgi_employee_history.month DESC,kgi_employee_history.kgiEmployeeHistoryId")
+			->orderBy("kgi_employee_history.year DESC,kgi_employee_history.month DESC,kgi_employee_history.updateDateTime DESC")
 			->asArray()
 			->all();
 		$data = [];
