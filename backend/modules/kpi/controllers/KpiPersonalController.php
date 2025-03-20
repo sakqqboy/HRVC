@@ -387,7 +387,7 @@ class KpiPersonalController extends Controller
 			kpi_employee_history.status,kpi_employee_history.month,kpi_employee_history.year,ke.remark,kpi_employee_history.fromDate,kpi_employee_history.toDate')
 				->JOIN("LEFT JOIN", "kpi_employee ke", "ke.kpiEmployeeId=kpi_employee_history.kpiEmployeeId")
 				->where(["kpi_employee_history.kpiEmployeeId" => $kpiEmployeeId, "kpi_employee_history.status" => [1, 2]])
-				->orderBy('kpi_employee_history.month DESC,kpi_employee_history.year DESC,kpi_employee_history.kpiEmployeeHistoryId DESC')
+				->orderBy('kpi_employee_history.month DESC,kpi_employee_history.year DESC,kpi_employee_history.createDateTime DESC')
 				->asArray()
 				->one();
 		}

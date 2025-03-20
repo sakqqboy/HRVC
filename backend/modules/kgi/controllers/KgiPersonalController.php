@@ -199,8 +199,8 @@ class KgiPersonalController extends Controller
 			kgi_employee_history.lastCheckDate,kgi_employee_history.nextCheckDate,kgi_employee_history.detail,kgi_employee_history.kgiEmployeeHistoryId,
 			kgi_employee_history.status,kgi_employee_history.month,kgi_employee_history.year,ke.remark,kgi_employee_history.fromDate,kgi_employee_history.toDate')
 				->JOIN("LEFT JOIN", "kgi_employee ke", "ke.kgiEmployeeId=kgi_employee_history.kgiEmployeeId")
-				->where(["kgi_employee_history.kgiEmployeeId" => $kgiEmployeeId])
-				->orderBy('kgi_employee_history.kgiEmployeeHistoryId DESC')
+				->where(["kgi_employee_history.kgiEmployeeId" => $kgiEmployeeId, "kgi_employee_history.status" => [1, 2]])
+				->orderBy('kgi_employee_history.year DESC, kgi_employee_history.month DESC,kgi_employee_history.createDateTime DESC')
 				->asArray()
 				->one();
 		}
