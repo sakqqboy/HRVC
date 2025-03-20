@@ -2191,8 +2191,42 @@ class ManagementController extends Controller
 								$newHistory->status = $status;
 								$newHistory->createDateTime = new Expression('NOW()');
 								$newHistory->updateDateTime = new Expression('NOW()');
-								$newHistory->save(false);
+								if($newHistory->save(false)){
+									//เพิ่ม employee ทั้งหมดใน  kgiTeamId นี้
+									$KgiEmployee = KgiEmployee::find()
+									->leftJoin("employee" , "employee.employeeId = kgi_employee.employeeId")
+									->where(["kgi_employee.kgiId" => $team->kgiId,"employee.teamId" => $team->teamId,"kgi_employee.status" => [1,2,4]])
+									->all();
+							
+									foreach($KgiEmployee as $empoyee) :
+										if($empoyee -> month  == $nextMonth && $empoyee -> year  == $nextYear){
+
+										}else{
+											if($empoyee -> status == 1){
+												$status = 5;
+											}
+											if($empoyee -> status == 2){
+												$status = 1;
+												$empoyee -> status = 1;
+												$empoyee -> month = $nextMonth;
+												$empoyee -> year = $nextYear;
+											}
+											$KgiEmployeeHistory = new KgiEmployeeHistory();
+											$KgiEmployeeHistory->kgiEmployeeId = $empoyee -> kgiEmployeeId;
+											$KgiEmployeeHistory->createrId = Yii::$app->user->id;
+											$KgiEmployeeHistory->month = $nextMonth;
+											$KgiEmployeeHistory->year = $nextYear;
+											$KgiEmployeeHistory->createDateTime = new Expression('NOW()');
+											$KgiEmployeeHistory->updateDateTime = new Expression('NOW()');
+											$KgiEmployeeHistory-> detail = "auto set from company kpi";
+											$KgiEmployeeHistory->status = $status;
+											$KgiEmployeeHistory->save(false);
+											$empoyee -> save(false);
+										}
+									endforeach;
+								} 
 								$team->save(false);
+
 							}
 						} else {
 							// if ($kgiTeam->status == 5) {

@@ -308,7 +308,7 @@ class KgiTeamController extends Controller
 				->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kt.kgiId")
 				->where(["kgi_team_history.kgiTeamId" => $kgiTeamId, "kgi_team_history.status" => [1, 2]])
 				->asArray()
-				->orderBy('kgi_team_history.createDateTime DESC')
+				->orderBy('kgi_team_history.year DESC, kgi_team_history.month DESC,kgi_team_history.createDateTime DESC')
 				->one();
 		}
 
@@ -715,9 +715,11 @@ class KgiTeamController extends Controller
 			->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kt.kgiId")
 			->where([
 				"kgi_team_history.kgiTeamId" => $kgiTeamId,
+				"kgi_team_history.status" => [1, 2, 4]
+
 			])
 			->andWhere("kgi_team_history.status!=99")
-			->orderBy("kgi_team_history.year DESC,kgi_team_history.month DESC,kgi_team_history.kgiTeamHistoryId")
+			->orderBy("kgi_team_history.year DESC,kgi_team_history.month DESC,kgi_team_history.updateDateTime DESC")
 			->asArray()
 			->all();
 		$data = [];
@@ -737,6 +739,7 @@ class KgiTeamController extends Controller
 						$ratio = 0;
 					}
 				}
+				if (!isset($data[$history["year"]][$history["month"]])) {
 				$data[$history["year"]][$history["month"]] = [
 					"kgiTeamHistoryId" => $history["kgiTeamHistoryId"],
 					"target" => $history['target'],
@@ -753,6 +756,7 @@ class KgiTeamController extends Controller
 					"fromDate" => ModelMaster::engDate($history["fromDate"], 2),
 					"toDate" => ModelMaster::engDate($history["toDate"], 2),
 				];
+			}
 			endforeach;
 		}
 		return json_encode($data);
