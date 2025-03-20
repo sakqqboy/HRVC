@@ -288,7 +288,7 @@ class ManagementController extends Controller
 		$kpiBranches = KpiBranch::find()
 			->select('kpi_branch.branchId,b.branchName')
 			->JOIN("LEFT JOIN", "branch b", "b.branchId=kpi_branch.branchId")
-			->where(["kpi_branch.kpiId" => $id])
+			->where(["kpi_branch.kpiId" => $id, "kpi_branch.status" => 1 , "b.status" => 1] )
 			->asArray()
 			->all();
 		$data = [];
@@ -307,7 +307,7 @@ class ManagementController extends Controller
 		$kpiDepartments = KpiDepartment::find()
 			->select('kpi_department.departmentId,d.departmentName,d.branchId')
 			->JOIN("LEFT JOIN", "department d", "d.departmentId=kpi_department.departmentId")
-			->where(["kpi_department.kpiId" => $id])
+			->where(["kpi_department.kpiId" => $id, "kpi_department.status" => 1, "d.status" => 1])
 			->asArray()
 			->all();
 		$data = [];

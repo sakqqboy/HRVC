@@ -660,13 +660,17 @@ class KpiTeamController extends Controller
 		$kpi = curl_exec($api);
 		$kpi = json_decode($kpi, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $kpi["companyId"]);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $kpi["companyId"]);
+		
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-branch?id=' . $kpiTeamDetail["kpiId"]);
 		$kpiBranch = curl_exec($api);
 		$kpiBranch = json_decode($kpiBranch, true);
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-department?id=' . $kpiTeamDetail['kpiId']);
 		$kpiDepartment = curl_exec($api);
 		$kpiDepartment = json_decode($kpiDepartment, true);
+
+		// throw new Exception(print_r($kpiDepartment, true));
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-team?id=' . $kpiTeamDetail['kpiId']);
 		$kpiTeam = curl_exec($api);

@@ -560,7 +560,7 @@ class KpiPersonalController extends Controller
 		$kpi = curl_exec($api);
 		$kpi = json_decode($kpi, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $kpi["companyId"]);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-branch?id=' . $kpiEmployeeDetail["kpiId"]);
 		$kpiBranch = curl_exec($api);
 		$kpiBranch = json_decode($kpiBranch, true);
 
