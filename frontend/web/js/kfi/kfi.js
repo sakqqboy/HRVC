@@ -660,7 +660,7 @@ function multiTeam(departmentId) {
 function multiTeamUpdate(departmentId) {
     var sumTeam = totalTeamUpdate(departmentId);
     var totalChecked = $('input[id^="multi-check-team-"]:checked').length;
-    // alert(totalChecked);
+    
     var multiTeamDepartment = [];
     var i = 0;
     // ตรวจสอบว่าทุกทีมถูกเลือกหรือไม่
@@ -685,8 +685,9 @@ function multiTeamUpdate(departmentId) {
         multiTeamDepartment[i] = $(this).val();
         i++;
     });
+//    alert('totalTeam= '+sumTeam+' totalCheck= '+multiTeamDepartment.length);
     //alert(sumTeam + '=>' + multiTeamDepartment.length);
-    if (sumTeam != totalChecked) {
+    if (sumTeam != multiTeamDepartment.length) {
         $("#multi-check-all-team-" + departmentId + '-update').prop("checked", false);
     } else {
         $("#multi-check-all-team-" + departmentId + '-update').prop("checked", true);
