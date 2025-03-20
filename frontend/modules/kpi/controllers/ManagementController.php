@@ -2032,6 +2032,32 @@ class ManagementController extends Controller
                         $team->save(false);
                     }
                 endforeach;
+                $kpiEmployee = KpiEmployee::find()->where(["kpiId" => $currentHistory["kpiId"], "status" => [1, 2, 4]])->all();
+                foreach ($kpiEmployee as $employee) :
+                    if ($employee->month  == $nextMonth && $employee->year  == $nextYear) {
+                    } else {
+                        if ($employee->status == 1) {
+                            $statusEmployee = 5;
+                        }
+                        if ($employee->status == 2) {
+                            $statusEmployee = 1;
+                            $employee->status = 1;
+                            $employee->month = $nextMonth;
+                            $employee->year = $nextYear;
+                        }
+                        $kpiEmployeeHistory = new kpiEmployeeHistory();
+                        $kpiEmployeeHistory->kpiEmployeeId = $employee->kpiEmployeeId;
+                        $kpiEmployeeHistory->createrId = Yii::$app->user->id;
+                        $kpiEmployeeHistory->month = $nextMonth;
+                        $kpiEmployeeHistory->year = $nextYear;
+                        $kpiEmployeeHistory->createDateTime = new Expression('NOW()');
+                        $kpiEmployeeHistory->updateDateTime = new Expression('NOW()');
+                        $kpiEmployeeHistory->detail = "auto set from company kpi";
+                        $kpiEmployeeHistory->status =  $statusEmployee;
+                        $kpiEmployeeHistory->save(false);
+                        $team->save(false);
+                    }
+                endforeach;
             }
         }
         // return $this->redirect(Yii::$app->homeUrl . 'kpi/management/grid');
