@@ -292,7 +292,7 @@ class ManagementController extends Controller
 		$kgiBranches = KgiBranch::find()
 			->select('kgi_branch.branchId,b.branchName')
 			->JOIN("LEFT JOIN", "branch b", "b.branchId=kgi_branch.branchId")
-			->where(["kgi_branch.kgiId" => $id, "b.status" => 1])
+			->where(["kgi_branch.kgiId" => $id, "b.status" => 1, "kgi_branch.status" => 1])
 			->asArray()
 			->all();
 		$data = [];
@@ -311,7 +311,7 @@ class ManagementController extends Controller
 		$kgiDepartments = KgiDepartment::find()
 			->select('kgi_department.departmentId,d.departmentName,d.branchId')
 			->JOIN("LEFT JOIN", "department d", "d.departmentId=kgi_department.departmentId")
-			->where(["kgi_department.kgiId" => $id])
+			->where(["kgi_department.kgiId" => $id, "d.status" => 1, "kgi_department.status" => 1])
 			->asArray()
 			->all();
 		$data = [];
