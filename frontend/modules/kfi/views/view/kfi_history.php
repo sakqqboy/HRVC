@@ -19,9 +19,9 @@ $this->title = 'KFI View';
         ]) ?>
         <div class="alert mt-10 pim-body bg-white">
             <div class="row">
-                <div class="col-11 pim-name-detail pr-0 pl-5 pt-2  text-start">
+                <div class="col-11 pim-name-title pr-0 pl-5 pt-2  text-start">
                     <a href="<?= Yii::$app->request->referrer ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kfi/management/grid' ?>"
-                        class="mr-5 font-size-12">
+                        class="pim-text-back">
                         <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
                         <?= Yii::t('app', 'Back') ?>
                     </a>
