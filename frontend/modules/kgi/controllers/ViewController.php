@@ -259,6 +259,8 @@ class ViewController extends Controller
 		} else {
 			$kgiHistoryId = 0;
 		}
+		// throw new Exception(print_r($kgiHistoryId, true));
+
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -266,6 +268,9 @@ class ViewController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . '&&kgiHistoryId=' . $kgiHistoryId);
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
+
+		// throw new Exception(print_r($kgiDetail,true));
+
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$companies = curl_exec($api);
@@ -282,7 +287,7 @@ class ViewController extends Controller
 		curl_close($api);
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
-		// throw new Exception(print_r($kgiTeams, true));
+		// throw new Exception(print_r($kgiDetail, true));
 		return $this->render('kgi_history', [
 			"role" => $role,
 			"kgiDetail" => $kgiDetail,

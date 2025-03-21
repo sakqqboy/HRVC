@@ -152,6 +152,7 @@ class ManagementController extends Controller
 	public function actionKgiDetail($id, $kgiHistoryId)
 	{
 		// throw new Exception(print_r($kgiHistoryId,true));
+		// return json_encode($kgiHistoryId);
 
 		if ($kgiHistoryId == 0) {
 			$kgiHistory = KgiHistory::find()->where(["status" => [1, 2, 4], "kgiId" => $id])
@@ -198,8 +199,8 @@ class ManagementController extends Controller
 				"unitId" => $kgiHistory["unitId"],
 				"month" => $kgiHistory['month'],
 				"year" => $kgiHistory['year'],
-				"monthName" => strtoupper(ModelMaster::monthEng($kgi['month'], 2)),
-				"monthFullName" => ModelMaster::monthEng($kgi['month'], 1),
+				"monthName" => strtoupper(ModelMaster::monthEng($kgiHistory['month'], 2)),
+				"monthFullName" => ModelMaster::monthEng($kgiHistory['month'], 1),
 				"priority" => $kgiHistory["priority"],
 				"periodCheck" => $kgiHistory["periodDate"],
 				"status" => $kgiHistory["status"],

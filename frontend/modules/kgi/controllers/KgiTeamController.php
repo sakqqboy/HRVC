@@ -734,15 +734,15 @@ class KgiTeamController extends Controller
 		$openTab = isset($param["openTab"]) ? $param["openTab"] : 1;
 		$kgiTeamHistoryId = $param["kgiTeamHistoryId"];
 		// throw new exception(print_r($kgiTeamHistoryId, true));
-		$kgiTeamHistory = KgiTeamHistory::find()
-			->select('kgiTeamHistoryId')
-			->where(["kgiTeamId" => $kgiTeamId])
-			->orderBy("kgiTeamHistoryId DESC")
-			->asArray()
-			->one();
-		if (isset($kgiTeamHistory) && !empty($kgiTeamHistory)) {
-			$kgiTeamHistoryId = $kgiTeamHistory["kgiTeamHistoryId"];
-		}
+		// $kgiTeamHistory = KgiTeamHistory::find()
+		// 	->select('kgiTeamHistoryId')
+		// 	->where(["kgiTeamId" => $kgiTeamId])
+		// 	->orderBy("kgiTeamHistoryId DESC")
+		// 	->asArray()
+		// 	->one();
+		// if (isset($kgiTeamHistory) && !empty($kgiTeamHistory)) {
+		// 	$kgiTeamHistoryId = $kgiTeamHistory["kgiTeamHistoryId"];
+		// }
 		$kgiId = $param["kgiId"];
 		$role = UserRole::userRight();
 		$groupId = Group::currentGroupId();

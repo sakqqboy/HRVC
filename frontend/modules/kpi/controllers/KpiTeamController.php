@@ -208,15 +208,15 @@ class KpiTeamController extends Controller
 		} else {
 			$kpiTeamHistoryId = 0;
 		}
-		$kpiTeamHistoryId = KpiTeamHistory::find()
-		->select('kpiTeamHistoryId')
-		->where(["kpiTeamId" => $kpiTeamId])
-		->orderBy('kpiTeamHistoryId DESC')
-		->asArray()->one();
+		// $kpiTeamHistoryId = KpiTeamHistory::find()
+		// ->select('kpiTeamHistoryId')
+		// ->where(["kpiTeamId" => $kpiTeamId])
+		// ->orderBy('kpiTeamHistoryId DESC')
+		// ->asArray()->one();
 		
-		if(isset($kpiTeamHistoryId) && !empty($kpiTeamHistoryId)) {
-			$kpiTeamHistoryId = $kpiTeamHistoryId['kpiTeamHistoryId'];
-		}
+		// if(isset($kpiTeamHistoryId) && !empty($kpiTeamHistoryId)) {
+		// 	$kpiTeamHistoryId = $kpiTeamHistoryId['kpiTeamHistoryId'];
+		// }
 
 		$openTab = array_key_exists("openTab", $param) ? $param["openTab"] : 0;
 		$groupId = Group::currentGroupId();
