@@ -67,7 +67,7 @@ $this->title = 'KGI View';
                         <div class="col-6">
                             <div class="row">
                                 <div class="col-4 month-<?= $colorFormat ?> pt-2">
-                                    <?= $kgiDetail['monthName'] ?? Yii::t('app', 'Term') ?>
+                                    <?= $kgiDetail['monthFullName'] ?? Yii::t('app', 'Term') ?>
                                 </div>
                                 <div class="col-8 term-<?= $colorFormat ?>  pt-2">
                                     <?= $kgiDetail['fromDate'] == "" ? Yii::t('app', 'Not set') : $kgiDetail['fromDate'] ?>
