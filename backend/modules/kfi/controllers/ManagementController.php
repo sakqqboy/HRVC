@@ -623,7 +623,7 @@ class ManagementController extends Controller
 	public function actionKfiHasKgi($kfiId)
 	{
 		$kfiHasKgi = KfiHasKgi::find()
-			->select('kgi.kgiName,kgi.kgiId,kgi.unitId,kgi.targetAmount,kgi.month,kgi.code,kgi.result')
+			->select('kgi.kgiName,kgi.kgiId,kgi.unitId,kgi.targetAmount,kgi.month,kgi.year,kgi.code,kgi.result')
 			->JOIN("LEFT JOIN", "kgi", "kgi.kgiId=kfi_has_kgi.kgiId")
 			->JOIN("LEFT JOIN", "kfi", "kfi.kfiId=kfi_has_kgi.kfiId")
 			->where([
@@ -659,7 +659,7 @@ class ManagementController extends Controller
 					"unit" => Unit::unitName($kgi["unitId"]),
 					"month" => ModelMaster::monthEng($kgi['month'], 1),
 					"ratio" => number_format($ratio, 2),
-					"countTeam" => KgiTeam::kgiTeam($kgi["kgiId"]),
+					"countTeam" => KgiTeam::kgiTeam($kgi["kgiId"],$kgi["month"],$kgi["year"]),
 				];
 			endforeach;
 		}
