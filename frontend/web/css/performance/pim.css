@@ -17,8 +17,6 @@
 
 .pim-name-title {
 	color: #3C3D48;
-	leading-trim: both;
-	text-edge: cap;
 	font-family: "SF Pro Display";
 	font-size: 20px;
 	font-style: normal;
@@ -30,8 +28,6 @@
 
 .pim-text-back {
 	color: #2580D3;
-	leading-trim: both;
-	text-edge: cap;
 	font-family: "SF Pro Display";
 	font-size: 20px;
 	font-style: normal;
