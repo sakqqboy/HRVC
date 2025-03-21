@@ -273,7 +273,7 @@ class KgiTeamController extends Controller
 					"ratio" => number_format($ratio, 2),
 					"isOver" => ModelMaster::isOverDuedate(KgiTeam::nextCheckDate($kgiTeam['kgiTeamId'])),
 					"employee" => KgiTeam::kgiTeamEmployee($kgiTeam['kgiId'], $teamId),
-					"countTeam" => KgiTeam::kgiTeam($kgiTeam["kgiId"], $kgiTeam["month"], $kgiTeam["year"]),
+					"countTeam" => KgiTeam::kgiTeam($kgiTeam["kgiId"], $kgiTeamHistory["month"], $kgiTeamHistory["year"]),
 					"amountType" => $kgiTeam["amountType"],
 					"issue" => KgiIssue::lastestIssue($kgiTeam["kgiId"])["issue"],
 					"solution" => KgiIssue::lastestIssue($kgiTeam["kgiId"])["solution"],
