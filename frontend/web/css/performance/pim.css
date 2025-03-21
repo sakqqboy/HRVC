@@ -1593,19 +1593,20 @@ thead {
 .view-tab {
 	background-color: #FFFFFF;
 	padding-top: 3px;
-	font-size: 12px;
+	font-size: 16px;
 	text-align: center;
 	cursor: pointer;
 	border-bottom: 2px solid lightgray;
 	letter-spacing: 0.5px;
 	padding-bottom: 2px;
+	font-weight: 400;
 }
 
 .view-tab-active {
 	background-color: #D7EBFF;
 	border-bottom: #2580D3 solid 2px;
 	padding-top: 3px;
-	font-size: 12px;
+	font-size: 16px;
 	font-weight: 400;
 	text-align: center;
 	cursor: pointer;
@@ -1650,7 +1651,7 @@ thead {
 }
 
 .pim-description {
-	font-size: 12px;
+	font-size: 16px;
 	letter-spacing: 0.5px;
 	text-indent: 15px;
 }
