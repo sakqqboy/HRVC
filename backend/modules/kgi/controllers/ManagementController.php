@@ -746,7 +746,7 @@ class ManagementController extends Controller
 					"unit" => Unit::unitName($kpi["unitId"]),
 					"month" => ModelMaster::monthEng($kpi['month'], 1),
 					"ratio" => number_format($ratio, 2),
-					"countTeam" => KpiTeam::kpiTeam($kpi["kpiId"]),
+					"countTeam" => KpiTeam::kpiTeam($kpi["kpiId"], $kpi["month"], $kpi["year"]),
 				];
 			endforeach;
 		}
