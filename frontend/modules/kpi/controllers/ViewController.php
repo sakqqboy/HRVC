@@ -234,6 +234,8 @@ class ViewController extends Controller
 		} else {
 			$kpiHistoryId = 0;
 		}
+				// throw new Exception($kpiHistoryId);
+
 		$openTab = array_key_exists("openTab", $param) ? $param["openTab"] : 0;
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
@@ -247,6 +249,8 @@ class ViewController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . "&&kpiHistoryId=" . $kpiHistoryId);
 		$kpiDetail = curl_exec($api);
 		$kpiDetail = json_decode($kpiDetail, true);
+		// throw new Exception(print_r($kpiDetail, true));
+
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$companies = curl_exec($api);

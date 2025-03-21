@@ -249,15 +249,15 @@ class KpiPersonalController extends Controller
 		} else {
 			$kpiEmployeeHistoryId = 0;
 		}
-		$kpiEmployeeHistoryId = KpiEmployeeHistory::find()
-		->select('kpiEmployeeHistoryId')
-		->where(["kpiEmployeeId" => $kpiEmployeeId])
-		->orderBy('kpiEmployeeHistoryId DESC')
-		->asArray()->one();
+		// $kpiEmployeeHistoryId = KpiEmployeeHistory::find()
+		// ->select('kpiEmployeeHistoryId')
+		// ->where(["kpiEmployeeId" => $kpiEmployeeId])
+		// ->orderBy('kpiEmployeeHistoryId DESC')
+		// ->asArray()->one();
 		
-		if(isset($kpiEmployeeHistoryId) && !empty($kpiEmployeeHistoryId)) {
-			$kpiEmployeeHistoryId = $kpiEmployeeHistoryId['kpiEmployeeHistoryId'];
-		}
+		// if(isset($kpiEmployeeHistoryId) && !empty($kpiEmployeeHistoryId)) {
+		// 	$kpiEmployeeHistoryId = $kpiEmployeeHistoryId['kpiEmployeeHistoryId'];
+		// }
 		// throw new Exception($kpiEmployeeHistoryId);
 		$openTab = array_key_exists("openTab", $param) ? $param["openTab"] : 0;
 		$groupId = Group::currentGroupId();
@@ -279,6 +279,7 @@ class KpiPersonalController extends Controller
 		$kpiEmployeeDetail = curl_exec($api);
 		$kpiEmployeeDetail = json_decode($kpiEmployeeDetail, true);
 
+		// throw new Exception(print_r($kpiEmployeeDetail, true));
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$companies = curl_exec($api);
