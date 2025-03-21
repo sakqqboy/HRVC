@@ -165,6 +165,14 @@ class DefaultController extends Controller
                 $k->month = $month;
                 $k->year = $year;
                 $k->save(false);
+                $kgiHistory = KgiHistory::find()->where(["kgiId" => $kgiId])->all();
+                if (isset($kgiHistory) && count($kgiHistory) > 0) {
+                    foreach ($kgiHistory as $kg):
+                        $kg->month = $month;
+                        $kg->year = $year;
+                        $kg->save(false);
+                    endforeach;
+                }
                 $kgiTeam = KgiTeam::find()->where(["kgiId" => $kgiId])->all();
                 if (isset($kgiTeam) && count($kgiTeam) > 0) {
                     foreach ($kgiTeam as $kg):
@@ -219,6 +227,14 @@ class DefaultController extends Controller
                 $k->month = $month;
                 $k->year = $year;
                 $k->save(false);
+                $kpiHistory = KpiHistory::find()->where(["kpiId" => $kpiId])->all();
+                if (isset($kpiHistory) && count($kpiHistory) > 0) {
+                    foreach ($kpiHistory as $kg):
+                        $kg->month = $month;
+                        $kg->year = $year;
+                        $kg->save(false);
+                    endforeach;
+                }
                 $kpiTeam = KpiTeam::find()->where(["kpiId" => $kpiId])->all();
                 if (isset($kpiTeam) && count($kpiTeam) > 0) {
                     foreach ($kpiTeam as $kg):
@@ -250,6 +266,98 @@ class DefaultController extends Controller
                         $kg->year = $year;
                         $kg->save(false);
                     endforeach;
+                }
+            endforeach;
+        }
+        $kgiHis = KgiHistory::find()->where(1)->all();
+        if (isset($kgiHis) && count($kgiHis) > 0) {
+            foreach ($kgiHis as $kh):
+                $kgi = Kgi::find()->where(["kgiId" => $kh->kgiId])->one();
+                if (!isset($kgi) || empty($kgi)) {
+                    $kh->delete(false);
+                }
+            endforeach;
+        }
+        $kgiTeam = KgiTeam::find()->where(1)->all();
+        if (isset($kgiTeam) && count($kgiTeam) > 0) {
+            foreach ($kgiTeam as $kt):
+                $kgi = Kgi::find()->where(["kgiId" => $kt->kgiId])->one();
+                if (!isset($kgi) || empty($kgi)) {
+                    $kt->delete(false);
+                }
+            endforeach;
+        }
+        $kgiTeamHistory = KgiTeamHistory::find()->where(1)->all();
+        if (isset($kgiTeamHistory) && count($kgiTeamHistory) > 0) {
+            foreach ($kgiTeamHistory as $kth):
+                $kgiTeam = KgiTeam::find()->where(["kgiTeamId" => $kth->kgiTeamId])->one();
+                if (!isset($kgiTeam) || empty($kgiTeam)) {
+                    $kth->delete(false);
+                }
+            endforeach;
+        }
+        $kgiEmployee = KgiEmployee::find()->where(1)->all();
+        if (isset($kgiEmployee) && count($kgiEmployee) > 0) {
+            foreach ($kgiEmployee as $ke):
+                $kgi = Kgi::find()->where(["kgiId" => $ke->kgiId])->one();
+                if (!isset($kgi) || empty($kgi)) {
+                    $ke->delete(false);
+                }
+            endforeach;
+        }
+        $kgiEmployeeHistory = KgiEmployeeHistory::find()->where(1)->all();
+        if (isset($kgiEmployeeHistory) && count($kgiEmployeeHistory) > 0) {
+            foreach ($kgiEmployeeHistory as $kte):
+                $kgiEmployee = KgiEmployee::find()->where(["kgiEmployeeId" => $kte->kgiEmployeeId])->one();
+                if (!isset($kgiEmployee) || empty($kgiEmployee)) {
+                    $kte->delete(false);
+                }
+            endforeach;
+        }
+
+
+        $kpiHis = KpiHistory::find()->where(1)->all();
+        if (isset($kpiHis) && count($kpiHis) > 0) {
+            foreach ($kpiHis as $kh):
+                $kpi = Kpi::find()->where(["kpiId" => $kh->kpiId])->one();
+                if (!isset($kpi) || empty($kpi)) {
+                    $kh->delete(false);
+                }
+            endforeach;
+        }
+        $kpiTeam = KpiTeam::find()->where(1)->all();
+        if (isset($kpiTeam) && count($kpiTeam) > 0) {
+            foreach ($kpiTeam as $kt):
+                $kpi = Kpi::find()->where(["kpiId" => $kt->kpiId])->one();
+                if (!isset($kpi) || empty($kpi)) {
+                    $kt->delete(false);
+                }
+            endforeach;
+        }
+        $kpiTeamHistory = KpiTeamHistory::find()->where(1)->all();
+        if (isset($kpiTeamHistory) && count($kpiTeamHistory) > 0) {
+            foreach ($kpiTeamHistory as $kth):
+                $kpiTeam = KpiTeam::find()->where(["kpiTeamId" => $kth->kpiTeamId])->one();
+                if (!isset($kpiTeam) || empty($kpiTeam)) {
+                    $kth->delete(false);
+                }
+            endforeach;
+        }
+        $kpiEmployee = KpiEmployee::find()->where(1)->all();
+        if (isset($kpiEmployee) && count($kpiEmployee) > 0) {
+            foreach ($kpiEmployee as $ke):
+                $kpi = Kpi::find()->where(["kpiId" => $ke->kpiId])->one();
+                if (!isset($kpi) || empty($kpi)) {
+                    $ke->delete(false);
+                }
+            endforeach;
+        }
+        $kpiEmployeeHistory = KpiEmployeeHistory::find()->where(1)->all();
+        if (isset($kpiEmployeeHistory) && count($kpiEmployeeHistory) > 0) {
+            foreach ($kpiEmployeeHistory as $kte):
+                $kpiEmployee = KpiEmployee::find()->where(["kpiEmployeeId" => $kte->kpiEmployeeId])->one();
+                if (!isset($kpiEmployee) || empty($kpiEmployee)) {
+                    $kte->delete(false);
                 }
             endforeach;
         }
