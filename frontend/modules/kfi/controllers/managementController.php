@@ -257,7 +257,7 @@ class ManagementController extends Controller
 				if ($isManager == 1) {
 					$kfiHistory->target = str_replace(",", "", $_POST["amount"] ?? 0);
 				}
-				
+
 				$kfiHistory->result = $_POST["result"] ?? 0;
 				$kfiHistory->unitId = $_POST["unit"] ?? null;
 				$kfiHistory->month = $_POST["month"] ?? null;
@@ -1580,7 +1580,7 @@ class ManagementController extends Controller
 		$kfiHistory->status = 1;
 		$kfiHistory->quantRatio = $currentHistory["quantRatio"];
 		$kfiHistory->historyStatus = 1;
-		//$kfiHistory->target = $currentHistory["target"];
+		$kfiHistory->target = $currentHistory["target"];
 		$kfiHistory->result = 0;
 		$kfiHistory->unitId =  $currentHistory["unitId"];
 		$kfiHistory->month = $nextMonth;
@@ -1594,8 +1594,27 @@ class ManagementController extends Controller
 			$kfi->year = $nextYear;
 			$kfi->updateDateTime = new Expression('NOW()');
 			$kfi->save(false);
+			$kfiEmployee = KfiEmployee::find()->where(["kfiId" => $currentHistory["kfiId"], "status" => [1, 2, 4]])->all();
+			foreach ($kfiEmployee as $employee) :
+				$oldEmployee = KfiEmployee::find()
+					->where(["kfiId" => $currentHistory["kfiId"], "employeeId" => $employee->employeeId, "status" => [1, 2, 4]])
+					->one();
+				if (!isset($oldEmployee) || empty($oldEmployee)) {
+					$kfiEmployee = new kfiEmployee();
+					$kfiEmployee->employeeId = $employee->employeeId;
+					$kfiEmployee->kfiId = $currentHistory["kfiId"];
+					$kfiEmployee->target = $currentHistory["target"];
+					$kfiEmployee->status = 1;
+					$kfiEmployee->month = $nextMonth;
+					$kfiEmployee->year = $nextYear;
+					$kfiEmployee->updateDateTime = new Expression('NOW()');
+					$kfiEmployee->createDateTime = new Expression('NOW()');
+					$kfiEmployee->save(false);
+				}
+
+			endforeach;
 		}
-		
+
 		// return print_r($nextTargetMonthYear, true);
 		// return $this->redirect(Yii::$app->homeUrl . 'kfi/management/grid');
 		return $this->redirect(Yii::$app->request->referrer);
