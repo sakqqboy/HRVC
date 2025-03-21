@@ -733,6 +733,7 @@ class KgiTeamController extends Controller
 		$kgiTeamId = $param["kgiTeamId"];
 		$openTab = isset($param["openTab"]) ? $param["openTab"] : 1;
 		$kgiTeamHistoryId = $param["kgiTeamHistoryId"];
+		// throw new exception(print_r($kgiTeamHistoryId, true));
 		$kgiTeamHistory = KgiTeamHistory::find()
 			->select('kgiTeamHistoryId')
 			->where(["kgiTeamId" => $kgiTeamId])
@@ -754,6 +755,8 @@ class KgiTeamController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-team-detail?kgiTeamId=' . $kgiTeamId . '&&kgiTeamHistoryId=' . $kgiTeamHistoryId);
 		$kgiTeamDetail = curl_exec($api);
 		$kgiTeamDetail = json_decode($kgiTeamDetail, true);
+
+				// throw new exception(print_r($kgiTeamDetail, true));
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
 		$units = curl_exec($api);

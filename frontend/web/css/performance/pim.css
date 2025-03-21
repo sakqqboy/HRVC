@@ -1602,6 +1602,10 @@ thead {
 	font-weight: 400;
 }
 
+.text-align-left {
+	text-align: left !important;
+}
+
 .view-tab-active {
 	background-color: #D7EBFF;
 	border-bottom: #2580D3 solid 2px;

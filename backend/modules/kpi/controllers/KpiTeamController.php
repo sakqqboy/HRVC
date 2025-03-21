@@ -635,7 +635,7 @@ class KpiTeamController extends Controller
 		kpi_team_history.status,kpi_team_history.nextCheckDate,k.kpiDetail,kpi_team_history.year,k.amountType,kt.remark')
 				->JOIN("LEFT JOIN", "kpi_team kt", "kt.kpiTeamId=kpi_team_history.kpiTeamId")
 				->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kt.kpiId")
-				->where(["kpi_team_history.kpiTeamHistoryId" => $kpiTeamHistoryId])
+				->where(["kpi_team_history.kpiTeamHistoryId" => $kpiTeamHistoryId, "kpi_team_history.status" => [1, 2]])
 				->asArray()
 				->one();
 		} else {

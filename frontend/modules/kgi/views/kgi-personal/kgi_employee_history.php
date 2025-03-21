@@ -11,7 +11,7 @@ $this->title = 'Self KGI View';
     <div class="col-12">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
             style="margin-top: -3px;">
-        <strong class="pim-head-text"> <?= Yii::t('app', 'Performance Indicator Matric') ?> (PIM)</strong>
+        <strong class="pim-head-text"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</strong>
     </div>
     <div class="col-12 mt-10">
         <?= $this->render('kgi_header_filter', [
@@ -94,7 +94,8 @@ $this->title = 'Self KGI View';
                         <div class="col-6">
                             <div class="row">
                                 <div class="col-4 month-<?= $colorFormat ?> pt-2">
-                                    <?= $kgiEmployeeDetail['monthName'] ?></div>
+                                    <?= $kgiEmployeeDetail['monthName'] ?? Yii::t('app', 'Term') ?>
+                                </div>
                                 <div class="col-8 term-<?= $colorFormat ?>  pt-2">
                                     <?= $kgiEmployeeDetail['fromDate'] == "" ? 'Not set' : $kgiEmployeeDetail['fromDate'] ?>
                                     &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
@@ -110,40 +111,41 @@ $this->title = 'Self KGI View';
                 <div class="col-lg-5 col-12 pl-20">
                     <div class="col-12 pim-big-box pim-detail-<?= $colorFormat ?>">
                         <div class="row">
-                            <div class="col-2 pim-subheader-font border-right-<?= $colorFormat ?>">
-                                <div class="row">
-                                    <div class="offset-1 col-8">
-                                        <div class="text-center priority-star">
-                                            <?php
+                            <div class="col-2 pim-subheader-font border-right-<?= $colorFormat ?>"
+                                style=" display: flex; flex-direction: column; justify-content: center;">
+                                <!-- <div class="row">
+                                    <div class="offset-1 col-8"> -->
+                                <div class="ml-12 priority-star">
+                                    <?php
                                                 if ($kgiEmployeeDetail["priority"] == "A" || $kgiEmployeeDetail["priority"] == "B") {
                                                 ?>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <?php
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <?php
                                                 }
                                                 if ($kgiEmployeeDetail["priority"] == "A" || $kgiEmployeeDetail["priority"] == "C") {
                                                 ?>
-                                            <i class="fa fa-star big-star" aria-hidden="true"></i>
-                                            <?php
+                                    <i class="fa fa-star big-star" aria-hidden="true"></i>
+                                    <?php
                                                 }
                                                 if ($kgiEmployeeDetail["priority"] == "B") {
                                                 ?>
-                                            <i class="fa fa-star ml-10" aria-hidden="true"></i>
-                                            <?php
+                                    <i class="fa fa-star ml-10" aria-hidden="true"></i>
+                                    <?php
                                                 }
                                                 if ($kgiEmployeeDetail["priority"] == "A") {
                                                 ?>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <?php
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <?php
                                                 }
                                                 ?>
-                                        </div>
-                                        <div class="text-center priority-box">
-                                            <div class="col-12"><?= Yii::t('app', 'Priority') ?></div>
-                                            <div class="col-12 text-priority"><?= $kgiEmployeeDetail["priority"] ?>
-                                            </div>
-                                        </div>
+                                </div>
+                                <div class="text-center priority-box">
+                                    <div class="col-12"><?= Yii::t('app', 'Priority') ?></div>
+                                    <div class="col-12 text-priority"><?= $kgiEmployeeDetail["priority"] ?>
                                     </div>
                                 </div>
+                                <!-- </div>
+                                </div> -->
 
                             </div>
                             <div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?> pl-18">
@@ -222,37 +224,40 @@ $this->title = 'Self KGI View';
                                                 class="progress-load load-<?= $colorFormat ?>"><?= $showPercent ?>%</span>
                                         </div>
                                     </div>
-                                    <div class="col-4 mt-5 pl-0 pr-0 ">
-                                        <div class="col-12 text-start" style="letter-spacing:0.3px;font-size:9px;">
-                                            <?= Yii::t('app', 'Last Updated on') ?>
-                                        </div>
-                                        <div class="col-12 text-start pim-duedate">
-                                            <?= $kgiEmployeeDetail['nextCheckText'] == "" ? 'Not set' : $kgiEmployeeDetail['nextCheckText'] ?>
-                                        </div>
-                                    </div>
-                                    <div class="col-4 text-center mt-5 pt-6 pl-3 pr-3">
-                                        <?php
+                                    <div class="col-12 mt-10 align-items-center">
+                                        <div class="row">
+                                            <div class="col-4 mt-5 pl-0 pr-0 ">
+                                                <div class="col-12 text-end"
+                                                    style="letter-spacing:0.3px;font-size:12px;">
+                                                    <?= Yii::t('app', 'Last Updated on') ?>
+                                                </div>
+                                                <div class="col-12 text-end pim-duedate">
+                                                    <?= $kgiEmployeeDetail['nextCheckText'] == "" ? 'Not set' : $kgiEmployeeDetail['nextCheckText'] ?>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 text-center mt-5 pt-6 pl-8 pr-8">
+                                                <?php
                                             if ($role > 3  && $kgiEmployeeDetail["status"] == 1) {
                                             ?>
-                                        <a class="pim-btn-<?= $colorFormat ?>"
-                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px;  height: 30px; gap: 6px; flex-shrink: 0;"
-                                            href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/update-personal-kgi/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId]) ?>">
-                                            <img src="
-                                                <?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
-                                                class="mb-2" style="width: 12px; height: 12px;">
-                                            <?= Yii::t('app', 'Update') ?>
-                                        </a>
-                                        <?php
+                                                <a class="pim-btn-<?= $colorFormat ?>"
+                                                    style="display: flex; justify-content: center; align-items: center; padding: 7px 9px;  height: 30px; gap: 6px; flex-shrink: 0;"
+                                                    href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/update-personal-kgi/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId]) ?>">
+                                                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                                                    <?= Yii::t('app', 'Update') ?>
+                                                </a>
+                                                <?php
                                             }
                                             ?>
-                                    </div>
-                                    <div class="col-4 pl-0 pr-5 mt-5 ">
-                                        <div class="col-12 text-end font-<?= $colorFormat ?>"
-                                            style="letter-spacing:0.3px;font-size:9px;">
-                                            <?= Yii::t('app', 'Next Update Date') ?>
-                                        </div>
-                                        <div class="col-12 text-end pim-duedate">
-                                            <?= $kgiEmployeeDetail['nextCheckText'] == "" ? Yii::t('app', 'Not set') : $kgiEmployeeDetail['nextCheckText'] ?>
+                                            </div>
+                                            <div class="col-4 pl-0 pr-5 mt-5 ">
+                                                <div class="col-12 text-start font-<?= $colorFormat ?>"
+                                                    style="letter-spacing:0.3px;font-size:12px;">
+                                                    <?= Yii::t('app', 'Next Update Date') ?>
+                                                </div>
+                                                <div class="col-12 text-start pim-duedate">
+                                                    <?= $kgiEmployeeDetail['nextCheckText'] == "" ? Yii::t('app', 'Not set') : $kgiEmployeeDetail['nextCheckText'] ?>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

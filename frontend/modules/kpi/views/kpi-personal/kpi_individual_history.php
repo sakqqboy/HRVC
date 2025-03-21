@@ -104,44 +104,45 @@ $this->title = 'KPI View';
                 <div class="col-lg-5 col-12 pl-20">
                     <div class="col-12 pim-big-box pim-detail-<?= $colorFormat ?>">
                         <div class="row">
-                            <div class="col-2 pim-subheader-font border-right-<?= $colorFormat ?>">
-                                <div class="row">
-                                    <div class="offset-1 col-8">
-                                        <div class="text-center priority-star">
-                                            <?php
+                            <div class="col-2 pim-subheader-font border-right-<?= $colorFormat ?>"
+                                style=" display: flex; flex-direction: column; justify-content: center;">
+                                <!-- <div class="row">
+                                    <div class="offset-1 col-8"> -->
+                                <div class="ml-12 priority-star">
+                                    <?php
                                             if ($kpiEmployeeDetail["priority"] == "A" || $kpiEmployeeDetail["priority"] == "B") {
                                             ?>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <?php
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <?php
                                             }
                                             if ($kpiEmployeeDetail["priority"] == "A" || $kpiEmployeeDetail["priority"] == "C") {
                                             ?>
-                                            <i class="fa fa-star big-star" aria-hidden="true"></i>
-                                            <?php
+                                    <i class="fa fa-star big-star" aria-hidden="true"></i>
+                                    <?php
                                             }
                                             if ($kpiEmployeeDetail["priority"] == "B") {
                                             ?>
-                                            <i class="fa fa-star ml-10" aria-hidden="true"></i>
-                                            <?php
+                                    <i class="fa fa-star ml-10" aria-hidden="true"></i>
+                                    <?php
                                             }
                                             if ($kpiEmployeeDetail["priority"] == "A") {
                                             ?>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <?php
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <?php
                                             }
                                             ?>
-                                        </div>
-                                        <div class="text-center priority-box">
-                                            <div class="col-12"><?= Yii::t('app', 'Priority') ?></div>
-                                            <div class="col-12 text-priority"><?= $kpiEmployeeDetail["priority"] ?>
-                                            </div>
-                                        </div>
+                                </div>
+                                <div class="text-center priority-box">
+                                    <div class="col-12"><?= Yii::t('app', 'Priority') ?></div>
+                                    <div class="col-12 text-priority"><?= $kpiEmployeeDetail["priority"] ?>
                                     </div>
                                 </div>
+                                <!-- </div>
+                                </div> -->
 
                             </div>
                             <div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?> pl-18">
-                                <div class="col-12"><?= Yii::t('app', 'Quant Rati') ?></div>
+                                <div class="col-12"><?= Yii::t('app', 'Quant Ratio') ?></div>
                                 <div class="col-12 border-bottom-<?= $colorFormat ?> pb-5 pim-duedate">
                                     <i class="fa fa-diamond" aria-hidden="true"></i>
                                     <?= $kpiEmployeeDetail["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?>
@@ -216,35 +217,40 @@ $this->title = 'KPI View';
                                                 class="progress-load load-<?= $colorFormat ?>"><?= $showPercent ?>%</span>
                                         </div>
                                     </div>
-                                    <div class="col-4 mt-5 pl-0 pr-0 ">
-                                        <div class="col-12 text-start" style="letter-spacing:0.3px;font-size:9px;">
-                                            <?= Yii::t('app', 'Last Updated on') ?>
-                                        </div>
-                                        <div class="col-12 text-start pim-duedate">
-                                            <?= $kpiEmployeeDetail['nextCheckText'] == "" ? Yii::t('app', 'Not set') : $kpiEmployeeDetail['nextCheckText'] ?>
-                                        </div>
-                                    </div>
-                                    <div class="col-4 text-center mt-5 pt-6 pl-3 pr-3">
-                                        <?php
+                                    <div class="col-12 mt-10 align-items-center">
+                                        <div class="row">
+                                            <div class="col-4 mt-5 pl-0 pr-0 ">
+                                                <div class="col-12 text-end"
+                                                    style="letter-spacing:0.3px;font-size:12px;">
+                                                    <?= Yii::t('app', 'Last Updated on') ?>
+                                                </div>
+                                                <div class="col-12 text-end pim-duedate">
+                                                    <?= $kpiEmployeeDetail['nextCheckText'] == "" ? Yii::t('app', 'Not set') : $kpiEmployeeDetail['nextCheckText'] ?>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 text-center mt-5 pt-6 pl-8 pr-8">
+                                                <?php
                                         if ($role > 3  && $kpiEmployeeDetail["status"] == 1) {
                                         ?>
-                                        <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/update-personal-kpi/<?= ModelMaster::encodeParams(['kpiEmployeeId' => $kpiEmployeeId,'kpiHistoryId' => 0]) ?>"
-                                            class="pim-btn-<?= $colorFormat ?>"
-                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px;  height: 30px; gap: 6px; flex-shrink: 0;">
-                                            <i class="fa fa-refresh" aria-hidden="true"></i>
-                                            <?= Yii::t('app', 'Update') ?>
-                                        </a>
-                                        <?php
+                                                <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/update-personal-kpi/<?= ModelMaster::encodeParams(['kpiEmployeeId' => $kpiEmployeeId,'kpiHistoryId' => 0]) ?>"
+                                                    class="pim-btn-<?= $colorFormat ?>"
+                                                    style="display: flex; justify-content: center; align-items: center; padding: 7px 9px;  height: 30px; gap: 6px; flex-shrink: 0;">
+                                                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                                                    <?= Yii::t('app', 'Update') ?>
+                                                </a>
+                                                <?php
                                         }
                                         ?>
-                                    </div>
-                                    <div class="col-4 pl-0 pr-5 mt-5 ">
-                                        <div class="col-12 text-end font-<?= $colorFormat ?>"
-                                            style="letter-spacing:0.3px;font-size:9px;">
-                                            <?= Yii::t('app', 'Next Update Date') ?>
-                                        </div>
-                                        <div class="col-12 text-end pim-duedate">
-                                            <?= $kpiEmployeeDetail['nextCheckText'] == "" ? Yii::t('app', 'Not set') : $kpiEmployeeDetail['nextCheckText'] ?>
+                                            </div>
+                                            <div class="col-4 pl-0 pr-5 mt-5 ">
+                                                <div class="col-12 text-start font-<?= $colorFormat ?>"
+                                                    style="letter-spacing:0.3px;font-size:12px;">
+                                                    <?= Yii::t('app', 'Next Update Date') ?>
+                                                </div>
+                                                <div class="col-12 text-start pim-duedate">
+                                                    <?= $kpiEmployeeDetail['nextCheckText'] == "" ? Yii::t('app', 'Not set') : $kpiEmployeeDetail['nextCheckText'] ?>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

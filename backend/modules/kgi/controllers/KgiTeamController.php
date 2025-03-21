@@ -296,7 +296,7 @@ class KgiTeamController extends Controller
 		kgi_team_history.status,kgi_team_history.nextCheckDate,k.kgiDetail,kgi_team_history.year,k.amountType,kt.remark')
 				->JOIN("LEFT JOIN", "kgi_team kt", "kt.kgiTeamId=kgi_team_history.kgiTeamId")
 				->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kt.kgiId")
-				->where(["kgi_team_history.kgiTeamHistoryId" => $kgiTeamHistoryId])
+				->where(["kgi_team_history.kgiTeamHistoryId" => $kgiTeamHistoryId, "kgi_team_history.status" => [1, 2]])
 				->asArray()
 				->one();
 		} else {

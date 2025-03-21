@@ -66,7 +66,9 @@ $this->title = 'KGI View';
                         </div>
                         <div class="col-6">
                             <div class="row">
-                                <div class="col-4 month-<?= $colorFormat ?> pt-2">Term</div>
+                                <div class="col-4 month-<?= $colorFormat ?> pt-2">
+                                    <?= $kgiDetail['monthName'] ?? Yii::t('app', 'Term') ?>
+                                </div>
                                 <div class="col-8 term-<?= $colorFormat ?>  pt-2">
                                     <?= $kgiDetail['fromDate'] == "" ? Yii::t('app', 'Not set') : $kgiDetail['fromDate'] ?>
                                     &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
@@ -82,51 +84,52 @@ $this->title = 'KGI View';
                 <div class="col-lg-5 col-12 pl-20">
                     <div class="col-12 pim-big-box pim-detail-<?= $colorFormat ?>">
                         <div class="row">
-                            <div class="col-2 pim-subheader-font border-right-<?= $colorFormat ?>">
-                                <div class="row">
-                                    <div class="offset-1 col-8">
-                                        <div class="text-center priority-star">
-                                            <?php
+                            <div class="col-2 pim-subheader-font border-right-<?= $colorFormat ?>"
+                                style=" display: flex; flex-direction: column; justify-content: center;">
+                                <!-- <div class="row"> -->
+                                <!-- <div class="offset-1 col-11"> -->
+                                <div class="ml-12 priority-star">
+                                    <?php
                                             if ($kgiDetail["priority"] == "A" || $kgiDetail["priority"] == "B") {
                                             ?>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <?php
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <?php
                                             }
                                             if ($kgiDetail["priority"] == "A" || $kgiDetail["priority"] == "C") {
                                             ?>
-                                            <i class="fa fa-star big-star" aria-hidden="true"></i>
-                                            <?php
+                                    <i class="fa fa-star big-star" aria-hidden="true"></i>
+                                    <?php
                                             }
                                             if ($kgiDetail["priority"] == "B") {
                                             ?>
-                                            <i class="fa fa-star ml-10" aria-hidden="true"></i>
-                                            <?php
+                                    <i class="fa fa-star ml-10" aria-hidden="true"></i>
+                                    <?php
                                             }
                                             if ($kgiDetail["priority"] == "A") {
                                             ?>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <?php
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <?php
                                             }
                                             ?>
-                                        </div>
-                                        <?php
+                                </div>
+                                <?php
                                         if ($kgiDetail["priority"] != '') {
                                         ?>
-                                        <div class="col-12 text-center priority-box">
-                                            <div class="col-12"><?= Yii::t('app', 'Priority') ?></div>
-                                            <div class="col-12 text-priority"><?= $kgiDetail["priority"] ?></div>
-                                        </div>
-                                        <?php
+                                <div class="col-12 text-center priority-box">
+                                    <div class="col-12"><?= Yii::t('app', 'Priority') ?></div>
+                                    <div class="col-12 text-priority"><?= $kgiDetail["priority"] ?></div>
+                                </div>
+                                <?php
                                         } else { ?>
-                                        <div class="col-12 text-center priority-box-null">
-                                            <div class="col-12"><?= Yii::t('app', 'Priority') ?></div>
-                                            <div class="col-12 text-priority">N/A</div>
-                                        </div>
-                                        <?php
+                                <div class="col-12 text-center priority-box-null">
+                                    <div class="col-12"><?= Yii::t('app', 'Priority') ?></div>
+                                    <div class="col-12 text-priority">N/A</div>
+                                </div>
+                                <?php
                                         }
                                         ?>
-                                    </div>
-                                </div>
+                                <!-- </div> -->
+                                <!-- </div> -->
 
                             </div>
                             <div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?> pl-18">
@@ -205,35 +208,40 @@ $this->title = 'KGI View';
                                                 class="progress-load load-<?= $colorFormat ?>"><?= $showPercent ?>%</span>
                                         </div>
                                     </div>
-                                    <div class="col-4 mt-5 pl-0 pr-0 ">
-                                        <div class="col-12 text-start" style="letter-spacing:0.3px;font-size:9px;">
-                                            <?= Yii::t('app', 'Last Updated on') ?>
-                                        </div>
-                                        <div class="col-12 text-start pim-duedate">
-                                            <?= $kgiDetail['nextCheckText'] == "" ? Yii::t('app', 'Not set') : $kgiDetail['nextCheckText'] ?>
-                                        </div>
-                                    </div>
-                                    <div class="col-4 text-center mt-5 pt-6 pl-3 pr-3">
-                                        <?php
+                                    <div class="col-12 mt-10 align-items-center">
+                                        <div class="row">
+                                            <div class="col-4 mt-5 pl-0 pr-0 ">
+                                                <div class="col-12 text-end"
+                                                    style="letter-spacing:0.3px;font-size:12px;">
+                                                    <?= Yii::t('app', 'Last Updated on') ?>
+                                                </div>
+                                                <div class="col-12 text-end pim-duedate">
+                                                    <?= $kgiDetail['nextCheckText'] == "" ? Yii::t('app', 'Not set') : $kgiDetail['nextCheckText'] ?>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 text-center mt-5 pt-6 pl-8 pr-8">
+                                                <?php
                                         if ($role > 3  && $kgiDetail["status"] == 1) {
                                         ?>
-                                        <a class="pim-btn-<?= $colorFormat ?>"
-                                            href="<?= Yii::$app->homeUrl . 'kgi/management/prepare-update/' . ModelMaster::encodeParams(['kgiId' => $kgiId, 'kgiHistoryId' => 0]) ?>"
-                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; height: 30px; gap: 6px; flex-shrink: 0;">
-                                            <i class="fa fa-refresh" aria-hidden="true"></i>
-                                            <?= Yii::t('app', 'Update') ?>
-                                        </a>
-                                        <?php
+                                                <a class="pim-btn-<?= $colorFormat ?>"
+                                                    href="<?= Yii::$app->homeUrl . 'kgi/management/prepare-update/' . ModelMaster::encodeParams(['kgiId' => $kgiId, 'kgiHistoryId' => 0]) ?>"
+                                                    style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; height: 30px; gap: 6px; flex-shrink: 0;">
+                                                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                                                    <?= Yii::t('app', 'Update') ?>
+                                                </a>
+                                                <?php
                                         }
                                         ?>
-                                    </div>
-                                    <div class="col-4 pl-0 pr-5 mt-5 ">
-                                        <div class="col-12 text-end font-<?= $colorFormat ?>"
-                                            style="letter-spacing:0.3px;font-size:9px;">
-                                            <?= Yii::t('app', 'Next Update Date') ?>
-                                        </div>
-                                        <div class="col-12 text-end pim-duedate">
-                                            <?= $kgiDetail['nextCheckText'] == "" ?  Yii::t('app', 'Not set') : $kgiDetail['nextCheckText'] ?>
+                                            </div>
+                                            <div class="col-4 pl-0 pr-5 mt-5 ">
+                                                <div class="col-12 text-start font-<?= $colorFormat ?>"
+                                                    style="letter-spacing:0.3px;font-size:12px;">
+                                                    <?= Yii::t('app', 'Next Update Date') ?>
+                                                </div>
+                                                <div class="col-12 text-start pim-duedate">
+                                                    <?= $kgiDetail['nextCheckText'] == "" ?  Yii::t('app', 'Not set') : $kgiDetail['nextCheckText'] ?>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
