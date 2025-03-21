@@ -660,15 +660,15 @@ class KgiPersonalController extends Controller
 		$openTab = isset($param["openTab"]) ? $param["openTab"] : 1;
 		$kgiEmployeeHistoryId = $param["kgiEmployeeHistoryId"];
 		$kgiId = $param["kgiId"];
-		$kgiEmployeeHistory = KgiEmployeeHistory::find()
-			->select('kgiEmployeeHistoryId')
-			->where(["kgiEmployeeId" => $kgiEmployeeId])
-			->orderBy("kgiEmployeeHistoryId DESC")
-			->asArray()
-			->one();
-		if (isset($kgiEmployeeHistory) && !empty($kgiEmployeeHistory)) {
-			$kgiEmployeeHistoryId = $kgiEmployeeHistory["kgiEmployeeHistoryId"];
-		}
+		// $kgiEmployeeHistory = KgiEmployeeHistory::find()
+		// 	->select('kgiEmployeeHistoryId')
+		// 	->where(["kgiEmployeeId" => $kgiEmployeeId])
+		// 	->orderBy("kgiEmployeeHistoryId DESC")
+		// 	->asArray()
+		// 	->one();
+		// if (isset($kgiEmployeeHistory) && !empty($kgiEmployeeHistory)) {
+		// 	$kgiEmployeeHistoryId = $kgiEmployeeHistory["kgiEmployeeHistoryId"];
+		// }
 		$role = UserRole::userRight();
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {

@@ -199,7 +199,7 @@ class ManagementController extends Controller
 				"unitId" => $kgiHistory["unitId"],
 				"month" => $kgiHistory['month'],
 				"year" => $kgiHistory['year'],
-				"monthName" => strtoupper(ModelMaster::monthEng($kgi['month'], 2)),
+				"monthName" => strtoupper(ModelMaster::monthEng($kgiHistory['month'], 2)),
 				"monthFullName" => ModelMaster::monthEng($kgiHistory['month'], 1),
 				"priority" => $kgiHistory["priority"],
 				"periodCheck" => $kgiHistory["periodDate"],
