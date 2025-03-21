@@ -143,4 +143,115 @@ class DefaultController extends Controller
         KpiEmployee::deleteAll("status=88");
         KpiEmployeeHistory::deleteAll("status=88");
     }
+    public function actionUpdateToCurrent()
+    {
+        $kgi = Kgi::find()->where(1)->all();
+        if (isset($kgi) && count($kgi) > 0) {
+            foreach ($kgi as $k):
+                $year = '2025';
+                $kgiId = $k->kgiId;
+                if ($k->unitId == 1) {
+                    $month = '01';
+                }
+                if ($k->unitId == 2) {
+                    $month = '03';
+                }
+                if ($k->unitId == 3) {
+                    $month = '06';
+                }
+                if ($k->unitId == 4) {
+                    $month = '12';
+                }
+                $k->month = $month;
+                $k->year = $year;
+                $k->save(false);
+                $kgiTeam = KgiTeam::find()->where(["kgiId" => $kgiId])->all();
+                if (isset($kgiTeam) && count($kgiTeam) > 0) {
+                    foreach ($kgiTeam as $kg):
+                        $kgiTeamHistory = KgiTeamHistory::find()->where(["kgiTeamId" => $kg->kgiTeamId])->all();
+                        if (isset($kgiTeamHistory) && count($kgiTeamHistory) > 0) {
+                            foreach ($kgiTeamHistory as $kgh):
+                                $kgh->month = $month;
+                                $kgh->year = $year;
+                                $kgh->save(false);
+                            endforeach;
+                        }
+                        $kg->month = $month;
+                        $kg->year = $year;
+                        $kg->save(false);
+                    endforeach;
+                }
+                $kgiEmployee = KgiEmployee::find()->where(["kgiId" => $kgiId])->all();
+                if (isset($kgiEmployee) && count($kgiEmployee) > 0) {
+                    foreach ($kgiEmployee as $kg):
+                        $kgiEmployeeHistory = KgiEmployeeHistory::find()->where(["kgiEmployeeId" => $kg->kgiEmployeeId])->all();
+                        if (isset($kgiEmployeeHistory) && count($kgiEmployeeHistory) > 0) {
+                            foreach ($kgiEmployeeHistory as $kgh):
+                                $kgh->month = $month;
+                                $kgh->year = $year;
+                                $kgh->save(false);
+                            endforeach;
+                        }
+                        $kg->month = $month;
+                        $kg->year = $year;
+                        $kg->save(false);
+                    endforeach;
+                }
+            endforeach;
+        }
+        $kpi = Kpi::find()->where(1)->all();
+        if (isset($kpi) && count($kpi) > 0) {
+            foreach ($kpi as $k):
+                $year = '2025';
+                $kpiId = $k->kpiId;
+                if ($k->unitId == 1) {
+                    $month = '01';
+                }
+                if ($k->unitId == 2) {
+                    $month = '03';
+                }
+                if ($k->unitId == 3) {
+                    $month = '06';
+                }
+                if ($k->unitId == 4) {
+                    $month = '12';
+                }
+                $k->month = $month;
+                $k->year = $year;
+                $k->save(false);
+                $kpiTeam = KpiTeam::find()->where(["kpiId" => $kpiId])->all();
+                if (isset($kpiTeam) && count($kpiTeam) > 0) {
+                    foreach ($kpiTeam as $kg):
+                        $kpiTeamHistory = KpiTeamHistory::find()->where(["kpiTeamId" => $kg->kpiTeamId])->all();
+                        if (isset($kpiTeamHistory) && count($kpiTeamHistory) > 0) {
+                            foreach ($kpiTeamHistory as $kgh):
+                                $kgh->month = $month;
+                                $kgh->year = $year;
+                                $kgh->save(false);
+                            endforeach;
+                        }
+                        $kg->month = $month;
+                        $kg->year = $year;
+                        $kg->save(false);
+                    endforeach;
+                }
+                $kpiEmployee = KpiEmployee::find()->where(["kpiId" => $kpiId])->all();
+                if (isset($kpiEmployee) && count($kpiEmployee) > 0) {
+                    foreach ($kpiEmployee as $kg):
+                        $kpiEmployeeHistory = KpiEmployeeHistory::find()->where(["kpiEmployeeId" => $kg->kpiEmployeeId])->all();
+                        if (isset($kpiEmployeeHistory) && count($kpiEmployeeHistory) > 0) {
+                            foreach ($kpiEmployeeHistory as $kgh):
+                                $kgh->month = $month;
+                                $kgh->year = $year;
+                                $kgh->save(false);
+                            endforeach;
+                        }
+                        $kg->month = $month;
+                        $kg->year = $year;
+                        $kg->save(false);
+                    endforeach;
+                }
+            endforeach;
+        }
+    }
 }
