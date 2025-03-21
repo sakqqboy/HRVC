@@ -18,7 +18,7 @@ $this->title = 'KPI View';
         ]) ?>
         <div class="alert mt-10 pim-body bg-white">
             <div class="row">
-                <div class="col-11 pim-name-tltle pr-0 pl-5 text-start">
+                <div class="col-11 pim-name-title pr-0 pl-5 text-start">
                     <a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="mr-5 pim-text-back">
                         <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
                         <?= Yii::t('app', 'Back') ?>

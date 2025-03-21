@@ -672,6 +672,7 @@ class ModelMaster extends \yii\db\ActiveRecord
             } else {
                 $nextYear = $year;
             }
+            // throw new Exception($nextYear);
         }
         if ($nextMonth < 10) {
             $nextMonth = '0' . $nextMonth;

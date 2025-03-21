@@ -1616,8 +1616,10 @@ class ManagementController extends Controller
 		$currentHistory = KfiHistory::find()->where(["kfiHistoryId" => $kfiHistoryId])->asArray()->one();
 		$unit = Unit::find()->where(["unitId" => $currentHistory["unitId"]])->asArray()->one();
 		if ($currentHistory["month"] != "" && $currentHistory["year"] != "") {
-			//throw new exception($unit["unitName"]);
+			// throw new exception($unit["unitName"]);
 			$nextTargetMonthYear = ModelMaster::nextTargetMonthYear($unit["unitName"], $currentHistory["month"], $currentHistory["year"]);
+			// throw new exception($currentHistory["year"]);
+
 			$nextMonth = $nextTargetMonthYear["nextMonth"];
 			$nextYear = $nextTargetMonthYear["nextYear"];
 		} else {
