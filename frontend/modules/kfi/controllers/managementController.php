@@ -1509,19 +1509,63 @@ class ManagementController extends Controller
 	}
 	public function actionUpdateTeamKfi()
 	{
-		//throw new exception(print_r($_POST["employee"], true));
 		$employeeIds = [];
 		if (isset($_POST["employee"]) && count($_POST["employee"]) > 0) {
+			$month = $_POST["month"];
+			$year = $_POST["year"];
 			$i = 0;
+
 			foreach ($_POST["employee"] as $employeeId => $type):
+				$employeeDetail = Employee::find()
+					->select('branchId,departmentId')
+					->where(["employeeId" => $employeeId])
+					->asArray()
+					->one();
+				$kfiBranch = KfiBranch::find()->where([
+					"kfiId" => $_POST["kfiId"],
+					"branchId" => $employeeDetail["branchId"]
+				])
+					->andWhere("status!=99")
+					->one();
+				if (!isset($kfiBranch) || empty($kfiBranch)) {
+					$newKfiBranch = new KfiBranch();
+					$newKfiBranch->branchId =  $employeeDetail["branchId"];
+					$newKfiBranch->kfiId = $_POST["kfiId"];
+					$newKfiBranch->status = 1;
+					$newKfiBranch->createDateTime = new Expression('NOW()');
+					$newKfiBranch->updateDateTime = new Expression('NOW()');
+					$newKfiBranch->save(false);
+				}
+				$kfiDepartment = KfiDepartment::find()->where([
+					"kfiId" => $_POST["kfiId"],
+					"departmentId" => $employeeDetail["departmentId"]
+				])
+					->andWhere("status!=99")
+					->one();
+				if (!isset($kfiDepartment) || empty($kfiDepartment)) {
+					$newKfiDepartment = new KfiDepartment();
+					$newKfiDepartment->departmentId =  $employeeDetail["departmentId"];
+					$newKfiDepartment->kfiId = $_POST["kfiId"];
+					$newKfiDepartment->status = 1;
+					$newKfiDepartment->createDateTime = new Expression('NOW()');
+					$newKfiDepartment->updateDateTime = new Expression('NOW()');
+					$newKfiDepartment->save(false);
+				}
 				$kfiEmployee = KfiEmployee::find()
-					->where(["kfiId" => $_POST["kfiId"], "employeeId" => $employeeId])
+					->where([
+						"kfiId" => $_POST["kfiId"],
+						"employeeId" => $employeeId,
+						"month" => $month,
+						"year" => $year
+					])
 					->andWhere("status!=99")
 					->one();
 				if (!isset($kfiEmployee) || empty($kfiEmployee)) {
 					$kfiEmployee = new KfiEmployee();
 					$kfiEmployee->kfiId = $_POST["kfiId"];
 					$kfiEmployee->employeeId = $employeeId;
+					$kfiEmployee->month = $month;
+					$kfiEmployee->year = $year;
 					$kfiEmployee->status = 1;
 					$kfiEmployee->createDateTime = new Expression('NOW()');
 					$kfiEmployee->updateDateTime = new Expression('NOW()');
@@ -1533,22 +1577,32 @@ class ManagementController extends Controller
 		}
 		if (!isset($_POST["employee"]) || count($_POST["employee"]) == 0) {
 			$dKfiemployee = KfiEmployee::find()
-				->where(["kfiId" => $_POST["kfiId"]])
+				->where([
+					"kfiId" => $_POST["kfiId"],
+					"month" => $month,
+					"year" => $year
+				])
 				->all();
 			if (isset($dKfiemployee) && count($dKfiemployee) > 0) {
 				foreach ($dKfiemployee as $delKfi):
-					$delKfi->delete(false);
+					$delKfi->status = 99;
+					$delKfi->save(false);
 				endforeach;
 			}
 		}
 		if (count($employeeIds) > 0) {
 			$deleteKfiEmployee = KfiEmployee::find()
 				->where(['not in', 'employeeId', $employeeIds])
-				->andWhere(["kfiId" => $_POST["kfiId"]])
+				->andWhere([
+					"kfiId" => $_POST["kfiId"],
+					"month" => $month,
+					"year" => $year
+				])
 				->all();
 			if (isset($deleteKfiEmployee) && count($deleteKfiEmployee) > 0) {
 				foreach ($deleteKfiEmployee as $delKfi):
-					$delKfi->delete(false);
+					$delKfi->status = 99;
+					$delKfi->save(false);
 				endforeach;
 			}
 		}
@@ -1595,24 +1649,32 @@ class ManagementController extends Controller
 			$kfi->updateDateTime = new Expression('NOW()');
 			$kfi->save(false);
 			$kfiEmployee = KfiEmployee::find()->where(["kfiId" => $currentHistory["kfiId"], "status" => [1, 2, 4]])->all();
-			foreach ($kfiEmployee as $employee) :
-				$oldEmployee = KfiEmployee::find()
-					->where(["kfiId" => $currentHistory["kfiId"], "employeeId" => $employee->employeeId, "status" => [1, 2, 4]])
-					->one();
-				if (!isset($oldEmployee) || empty($oldEmployee)) {
-					$kfiEmployee = new kfiEmployee();
-					$kfiEmployee->employeeId = $employee->employeeId;
-					$kfiEmployee->kfiId = $currentHistory["kfiId"];
-					$kfiEmployee->target = $currentHistory["target"];
-					$kfiEmployee->status = 1;
-					$kfiEmployee->month = $nextMonth;
-					$kfiEmployee->year = $nextYear;
-					$kfiEmployee->updateDateTime = new Expression('NOW()');
-					$kfiEmployee->createDateTime = new Expression('NOW()');
-					$kfiEmployee->save(false);
-				}
+			if (isset($kfiEmployee) && count($kfiEmployee) > 0) {
+				foreach ($kfiEmployee as $employee) :
+					$oldEmployee = KfiEmployee::find()
+						->where([
+							"kfiId" => $currentHistory["kfiId"],
+							"employeeId" => $employee->employeeId,
+							"status" => [1, 2, 4],
+							"month" => $nextMonth,
+							"year" => $nextYear
+						])
+						->one();
+					if (!isset($oldEmployee) || empty($oldEmployee)) {
+						$newKfiEmployee = new kfiEmployee();
+						$newKfiEmployee->employeeId = $employee->employeeId;
+						$newKfiEmployee->kfiId = $currentHistory["kfiId"];
+						$newKfiEmployee->target = $currentHistory["target"];
+						$newKfiEmployee->status = 1;
+						$newKfiEmployee->month = $nextMonth;
+						$newKfiEmployee->year = $nextYear;
+						$newKfiEmployee->updateDateTime = new Expression('NOW()');
+						$newKfiEmployee->createDateTime = new Expression('NOW()');
+						$newKfiEmployee->save(false);
+					}
 
-			endforeach;
+				endforeach;
+			}
 		}
 
 		// return print_r($nextTargetMonthYear, true);

@@ -13,19 +13,19 @@ $this->title = 'Assign KFI';
     </div>
     <div class="col-12 mt-10">
         <?= $this->render('header_filter', [
-			"role" => $role
-		]) ?>
+            "role" => $role
+        ]) ?>
     </div>
     <?php
-	$form = ActiveForm::begin([
-		'id' => 'update-kfi-team-employee',
-		'method' => 'post',
-		'options' => [
-			'enctype' => 'multipart/form-data',
-		],
-		'action' => Yii::$app->homeUrl . 'kfi/management/update-team-kfi'
+    $form = ActiveForm::begin([
+        'id' => 'update-kfi-team-employee',
+        'method' => 'post',
+        'options' => [
+            'enctype' => 'multipart/form-data',
+        ],
+        'action' => Yii::$app->homeUrl . 'kfi/management/update-team-kfi'
 
-	]); ?>
+    ]); ?>
     <div class="alert mt-10 pim-body bg-white">
         <div class="row">
             <div class="font-size-12 pim-name pr-0 pl-5 text-start">
@@ -59,9 +59,9 @@ $this->title = 'Assign KFI';
             </div>
             <div class="col-12 pr-0 pl-0" id="team-employee-target">
                 <?= $this->render('employee_team', [
-					"kfiTeamEmployee" => $kfiTeamEmployee,
-				])
-				?>
+                    "kfiTeamEmployee" => $kfiTeamEmployee,
+                ])
+                ?>
             </div>
 
         </div>
@@ -69,5 +69,7 @@ $this->title = 'Assign KFI';
 </div>
 <input type="hidden" name="kfiId" value="<?= $kfiId ?>">
 <input type="hidden" name="companyId" value="<?= $companyId ?>">
+<input type="hidden" name="month" value="<?= $kfiDetail['month'] ?>">
+<input type="hidden" name="year" value="<?= $kfiDetail['year'] ?>">
 <?php ActiveForm::end(); ?>
 </div>
