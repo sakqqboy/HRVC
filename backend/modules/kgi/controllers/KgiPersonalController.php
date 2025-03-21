@@ -315,7 +315,7 @@ class KgiPersonalController extends Controller
 		$employeeId = Employee::employeeId2($userId);
 		$kgiEmployees = KgiEmployee::find()
 			->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_employee.kgiEmployeeId,k.companyId,kgi_employee.updateDateTime,
-			kgi_employee.employeeId,kgi_employee.target,kgi_employee.month,e.employeeFirstname,e.employeeSurename,e.teamId,e.picture')
+			kgi_employee.employeeId,kgi_employee.target,kgi_employee.month,kgi_employee.year,e.employeeFirstname,e.employeeSurename,e.teamId,e.picture')
 			->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_employee.kgiId")
 			->JOIN("LEFT JOIN", "kgi_branch kb", "kb.kgiId=k.kgiId")
 			->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
@@ -356,6 +356,7 @@ class KgiPersonalController extends Controller
 				if (!isset($kgiEmployeeHistory) || empty($kgiEmployeeHistory)) {
 					//throw new exception(1111);
 					$kgiEmployeeHistory = KgiEmployee::find()
+					->select('kgi_employee.*')
 						->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
 						->where(["kgi_employee.kgiEmployeeId" => $kgiEmployee["kgiEmployeeId"], "kgi_employee.status" => [1, 2]])
 						->andFilterWhere([
