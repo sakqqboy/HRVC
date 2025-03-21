@@ -69,7 +69,9 @@ $this->title = 'KFI View';
                         </div>
                         <div class="col-6">
                             <div class="row">
-                                <div class="col-4 month-<?= $colorFormat ?> pt-2"><?= Yii::t('app', 'Term') ?></div>
+                                <div class="col-4 month-<?= $colorFormat ?> pt-2">
+                                    <?= $kfiDetail['monthFullName'] ?? Yii::t('app', 'Term') ?>
+                                </div>
                                 <div class="col-8 term-<?= $colorFormat ?>  pt-2">
                                     <?= $kfiDetail['fromDate'] == "" ? Yii::t('app', 'Not set') : $kfiDetail['fromDate'] ?>
                                     &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;

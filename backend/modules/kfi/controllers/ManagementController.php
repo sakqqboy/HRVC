@@ -222,6 +222,7 @@ class ManagementController extends Controller
 			$res2["isOver"] = ModelMaster::isOverDuedate(Kfi::nextCheckDate($kfiHistory['kfiId']));
 			$res["creater"] = User::employeeNameByuserId($kfiHistory["createrId"]);
 			//$res2["periodCheck"] = $kfiHistory["checkPeriodDate"];
+			$res["monthFullName"] = ModelMaster::monthEng($kfiHistory['month'], 1);
 			$res2["fromDate"] = $kfiHistory["fromDate"];
 			$res2["toDate"] = $kfiHistory["toDate"];
 			$res2["fromDateDetail"] = ModelMaster::engDate($kfiHistory["fromDate"], 2);
