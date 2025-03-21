@@ -29,14 +29,14 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 class KpiTeamController extends Controller
 {
-	public function actionKpiTeam($kpiId)
+	public function actionKpiTeam($kpiId, $month, $year)
 	{
 		$kpiTeams = KpiTeam::find()
 			->select('kpi_team.teamId,t.teamName,kpi_team.target,kpi_team.remark,d.departmentName,d.departmentId')
 			->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
 			->JOIN("LEFT JOIN", "department d", "d.departmentId=t.departmentId")
 			->where(["kpi_team.status" => [1, 2, 4]])
-			->andWhere(["kpi_team.kpiId" => $kpiId])
+			->andWhere(["kpi_team.kpiId" => $kpiId, "kpi_team.month" => $month, "kpi_team.year" => $year])
 			->orderBy('t.teamName')
 			->asArray()
 			->all();
@@ -139,7 +139,7 @@ class KpiTeamController extends Controller
 					"ratio" => number_format($ratio, 2),
 					//"isOver" => ModelMaster::isOverDuedate(KpiTeam::nextCheckDate($kpiTeam['kpiTeamId'])),
 					//"employee" => KpiTeam::kpiTeamEmployee($kpiTeam['kpiId'], $teamId),
-					"countTeam" => KpiTeam::kpiTeam($kpiTeam["kpiId"]),
+					"countTeam" => KpiTeam::kpiTeam($kpiTeam["kpiId"], $kpiTeam["month"], $kpiTeam["year"]),
 					//"amountType" => $kpiTeam["amountType"],
 					//"issue" => KpiIssue::lastestIssue($kpiTeam["kpiId"])["issue"],
 					//"solution" => KpiIssue::lastestIssue($kpiTeam["kpiId"])["solution"],
@@ -288,7 +288,7 @@ class KpiTeamController extends Controller
 					// "isOver" => ModelMaster::isOverDuedate(KpiTeam::nextCheckDate($kpiTeamHistory['kpiTeamId'])),
 					"isOver" => ModelMaster::isOverDuedate($kpiTeamHistory['nextCheckDate']),
 					"employee" => KpiTeam::kpiTeamEmployee($kpiTeam['kpiId'], $teamId),
-					"countTeam" => KpiTeam::kpiTeam($kpiTeam["kpiId"]),
+					"countTeam" => KpiTeam::kpiTeam($kpiTeam["kpiId"], $kpiTeam["month"], $kpiTeam["year"]),
 					"amountType" => $kpiTeam["amountType"],
 					"issue" => KpiIssue::lastestIssue($kpiTeam["kpiId"])["issue"],
 					"solution" => KpiIssue::lastestIssue($kpiTeam["kpiId"])["solution"],
@@ -848,7 +848,7 @@ class KpiTeamController extends Controller
 					"ratio" => number_format($ratio, 2),
 					"isOver" => ModelMaster::isOverDuedate(KpiTeam::nextCheckDate($kpiTeam['kpiTeamId'])),
 					"employee" => KpiTeam::kpiTeamEmployee($kpiTeam['kpiId'], $kpiTeam["kpiTeamId"]),
-					"countTeam" => KpiTeam::kpiTeam($kpiTeam["kpiId"]),
+					"countTeam" => KpiTeam::kpiTeam($kpiTeam["kpiId"], $kpiTeam["month"], $kpiTeam["year"]),
 					"amountType" => $kpiTeam["amountType"],
 					"issue" => KpiIssue::lastestIssue($kpiTeam["kpiId"])["issue"],
 					"solution" => KpiIssue::lastestIssue($kpiTeam["kpiId"])["solution"],
@@ -860,13 +860,13 @@ class KpiTeamController extends Controller
 		}
 		return json_encode($data);
 	}
-	public function actionKpiTeamEmployee($kpiId)
+	public function actionKpiTeamEmployee($kpiId, $month, $year)
 	{
 		$kpiTeams = KpiTeam::find()
-			->select('kpi_team.kpiId,kpi_team.teamId,t.teamName,kpi_team.target,d.departmentName')
+			->select('kpi_team.kpiId,kpi_team.teamId,t.teamName,kpi_team.target,d.departmentName,kpi_team.month,kpi_team.year')
 			->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
 			->JOIN("LEFT JOIN", "department d", "d.departmentId=t.departmentId")
-			->where(["kpi_team.kpiId" => $kpiId, "t.status" => 1])
+			->where(["kpi_team.kpiId" => $kpiId, "t.status" => 1, "kpi_team.month" => $month, "kpi_team.year" => $year])
 			->andWhere("kpi_team.status != 99")
 			->asArray()
 			->all();
@@ -894,7 +894,7 @@ class KpiTeamController extends Controller
 						}
 					}
 					$kpiEmployee = KpiEmployee::find()
-						->where(["employeeId" => $employee["employeeId"], "kpiId" => $kpiId])
+						->where(["employeeId" => $employee["employeeId"], "kpiId" => $kpiId, "month" => $month, "year" => $year])
 						->andWhere("status != 99")
 						->asArray()
 						->orderBy('createDateTime DESC')

@@ -34,12 +34,12 @@ class KpiTeam extends \backend\models\hrvc\master\KpiTeamMaster
     {
         return array_merge(parent::attributeLabels(), []);
     }
-    public static function kpiTeam($kpiId)
+    public static function kpiTeam($kpiId,$month,$year)
     {
         $kpiTeam = KpiTeam::find()
             ->select('t.teamName,kpi_team.teamId')
             ->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
-            ->where(["t.status" => 1, "kpi_team.kpiId" => $kpiId])
+            ->where(["t.status" => 1, "kpi_team.kpiId" => $kpiId, "kpi_team.month" => $month, "kpi_team.year" => $year])
             ->andWhere("kpi_team.status!=99")
             ->asArray()
             ->all();

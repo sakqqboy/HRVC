@@ -80,7 +80,13 @@ class AssignController extends Controller
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team?kpiId=' . $kpiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . '&&kpiHistoryId=0');
+		$kpiDetail = curl_exec($api);
+		$kpiDetail = json_decode($kpiDetail, true);
+		$text = '';
+		// throw new Exception(print_r($kpiDetail, true));	
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team?kpiId=' . $kpiId . '&&month=' . $kpiDetail["month"] . '&&year=' . $kpiDetail["year"]);
 		$kpiTeams = curl_exec($api);
 		$kpiTeams = json_decode($kpiTeams, true);
 
@@ -89,17 +95,13 @@ class AssignController extends Controller
 		$teams = json_decode($teams, true);
 		//throw new Exception(print_r($teams, true));
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . '&&kpiHistoryId=0');
-		$kpiDetail = curl_exec($api);
-		$kpiDetail = json_decode($kpiDetail, true);
-		$text = '';
 		// throw new Exception('Unexpected API Response: ' . $kpiId);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-employee?kpiId=' . $kpiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-employee?kpiId=' . $kpiId . '&&month=' . $kpiDetail["month"] . '&&year=' . $kpiDetail["year"]);
 		$kpiTeamEmployee = curl_exec($api);
 		$kpiTeamEmployee = json_decode($kpiTeamEmployee, true);
 		//throw new Exception($kpiId);
 
-		// throw new Exception(print_r($kpiDetail, true));	
+		// throw new Exception(print_r($kpiId, true));	
 		// throw new Exception(print_r($kpiTeams, true));
 
 		/*if (isset($teams) && count($teams) > 0) {

@@ -133,7 +133,7 @@ class ViewController extends Controller
 		curl_close($api);
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
-		//throw new Exception(print_r($kfiDetail, true));
+		// throw new Exception(print_r($kfiDetail, true));
 		return $this->render('kfi_history', [
 			"role" => $role,
 			"kfiDetail" => $kfiDetail,
