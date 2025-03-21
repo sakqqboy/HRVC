@@ -19,9 +19,9 @@ $this->title = 'KFI View';
         ]) ?>
         <div class="alert mt-10 pim-body bg-white">
             <div class="row">
-                <div class="col-11 pim-name-title pr-0 pl-5 pt-2  text-start">
+                <div class="col-11 pim-name-title pr-0 pl-13 pt-2  text-start">
                     <a href="<?= Yii::$app->request->referrer ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kfi/management/grid' ?>"
-                        class="pim-text-back">
+                        class="pim-text-back mr-13">
                         <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
                         <?= Yii::t('app', 'Back') ?>
                     </a>
@@ -164,35 +164,40 @@ $this->title = 'KFI View';
                                                 class="progress-load load-<?= $colorFormat ?>"><?= $showPercent ?>%</span>
                                         </div>
                                     </div>
-                                    <div class="col-4 mt-5 pl-0 pr-0 ">
-                                        <div class="col-12 text-start" style="letter-spacing:0.3px;font-size:9px;">
-                                            <?= Yii::t('app', 'Last Updated on') ?>
-                                        </div>
-                                        <div class="col-12 text-start pim-duedate">
-                                            <?= $kfiDetail['nextCheck'] == "" ? Yii::t('app', 'Not set') : $kfiDetail['nextCheck'] ?>
-                                        </div>
-                                    </div>
-                                    <div class="col-4 text-center mt-5 pt-6 pl-3 pr-3">
-                                        <?php
-                                        if ($role > 3  && $kfiDetail["status"] == 1) {
-                                        ?>
-                                        <a class="pim-btn-<?= $colorFormat ?>"
-                                            href="<?= Yii::$app->homeUrl ?>kfi/management/update-kfi/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, 'kfiHistoryId' => 0]) ?>"
-                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; height: 30px; gap: 6px; flex-shrink: 0;">
-                                            <i class="fa fa-refresh" aria-hidden="true"></i>
-                                            <?= Yii::t('app', 'Update') ?>
-                                        </a>
-                                        <?php
-                                        }
-                                        ?>
-                                    </div>
-                                    <div class="col-4 pl-0 pr-5 mt-5 ">
-                                        <div class="col-12 text-end font-<?= $colorFormat ?>"
-                                            style="letter-spacing:0.3px;font-size:9px;">
-                                            <?= Yii::t('app', 'Next Update Date') ?>
-                                        </div>
-                                        <div class="col-12 text-end pim-duedate">
-                                            <?= $kfiDetail['nextCheck'] == "" ? Yii::t('app', 'Not set') : $kfiDetail['nextCheck'] ?>
+                                    <div class="col-12 mt-10 align-items-center">
+                                        <div class="row">
+                                            <div class="col-4 mt-5 pl-0 pr-5 ">
+                                                <div class="col-12 text-end"
+                                                    style="letter-spacing:0.3px;font-size:12px;">
+                                                    <?= Yii::t('app', 'Last Updated on') ?>
+                                                </div>
+                                                <div class="col-12 text-end pim-duedate">
+                                                    <?= $kfiDetail['nextCheck'] == "" ? Yii::t('app', 'Not set') : $kfiDetail['nextCheck'] ?>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 text-center mt-5 pt-6 pl-3 pr-3">
+                                                <?php
+                                            if ($role > 3  && $kfiDetail["status"] == 1) {
+                                            ?>
+                                                <a class="pim-btn-<?= $colorFormat ?>"
+                                                    href="<?= Yii::$app->homeUrl ?>kfi/management/update-kfi/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, 'kfiHistoryId' => 0]) ?>"
+                                                    style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; height: 30px; gap: 6px; flex-shrink: 0;">
+                                                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                                                    <?= Yii::t('app', 'Update') ?>
+                                                </a>
+                                                <?php
+                                            }
+                                            ?>
+                                            </div>
+                                            <div class="col-4 pl-0 pl-5 mt-5 ">
+                                                <div class="col-12 text-start font-<?= $colorFormat ?>"
+                                                    style="letter-spacing:0.3px;font-size:12px;">
+                                                    <?= Yii::t('app', 'Next Update Date') ?>
+                                                </div>
+                                                <div class="col-12 text-start pim-duedate">
+                                                    <?= $kfiDetail['nextCheck'] == "" ? Yii::t('app', 'Not set') : $kfiDetail['nextCheck'] ?>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
