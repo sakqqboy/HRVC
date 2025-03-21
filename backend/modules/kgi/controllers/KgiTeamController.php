@@ -177,7 +177,7 @@ class KgiTeamController extends Controller
 		$teamId = $employee["teamId"];
 		if ($role <= 3) {
 			$kgiTeams = KgiTeam::find()
-				->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,
+				->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,kgi_team.month,kgi_team.year,
 			kgi_team.teamId,kgi_team.target,kgi_team.updateDateTime')
 				->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_team.kgiId")
 				->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
@@ -188,7 +188,7 @@ class KgiTeamController extends Controller
 				->all();
 		} else {
 			$kgiTeams = KgiTeam::find()
-				->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,
+				->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,kgi_team.month,kgi_team.year,
 			kgi_team.teamId,kgi_team.target,kgi_team.updateDateTime')
 				->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_team.kgiId")
 				->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
