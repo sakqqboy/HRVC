@@ -47,12 +47,14 @@ function kgiFilterForEmployee() {
 }
 function assignKgiToEmployeeInTeam(teamId, kgiId) {
 	var url = $url + 'kgi/assign/employee-in-team-target';
+	var month = $("#month").val();
+	var year = $("#year").val();
 	if ($("#team-" + teamId).prop("checked") == true) {
 		$.ajax({
 			type: "POST",
 			dataType: 'json',
 			url: url,
-			data: { teamId: teamId, kgiId: kgiId },
+			data: { teamId: teamId, kgiId: kgiId,year:year,month:month },
 			success: function (data) {
 				if (data.status) {
 					$("#team-employee-target").append(data.textHtml);

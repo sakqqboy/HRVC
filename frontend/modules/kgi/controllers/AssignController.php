@@ -84,22 +84,27 @@ class AssignController extends Controller
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-team?kgiId=' . $kgiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . "&&kgiHistoryId=0");
+		$kgiDetail = curl_exec($api);
+		$kgiDetail = json_decode($kgiDetail, true);
+
+		//throw new Exception($kgiDetail["month"] . '=' . $kgiDetail["year"] . $kgiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-team?kgiId=' . $kgiId . '&&month=' . $kgiDetail["month"] . '&&year=' . $kgiDetail["year"]);
 		$kgiTeams = curl_exec($api);
 		$kgiTeams = json_decode($kgiTeams, true);
+
+
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/company-team?id=' . $companyId);
 		$teams = curl_exec($api);
 		$teams = json_decode($teams, true);
 		//throw new Exception(print_r($teams, true));
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . "&&kgiHistoryId=0");
-		$kgiDetail = curl_exec($api);
-		$kgiDetail = json_decode($kgiDetail, true);
+
 		//throw new Exception(print_r($param, true));
 		$text = '';
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-team-employee?kgiId=' . $kgiId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-team-employee?kgiId=' . $kgiId . '&&month=' . $kgiDetail["month"] . '&&year=' . $kgiDetail["year"]);
 		$kgiTeamEmployee = curl_exec($api);
 		$kgiTeamEmployee = json_decode($kgiTeamEmployee, true);
 
@@ -123,6 +128,8 @@ class AssignController extends Controller
 	{
 		$teamId = $_POST["teamId"];
 		$kgiId = $_POST["kgiId"];
+		$month = $_POST["month"];
+		$year = $_POST["year"];
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -157,7 +164,7 @@ class AssignController extends Controller
 	{
 
 		// throw new Exception(print_r($_POST, true));
-		
+
 		// throw new Exception(print_r(count($_POST["employeeTarget"]), true));
 		// exit;
 

@@ -35,7 +35,7 @@ class KgiTeam extends \backend\models\hrvc\master\KgiTeamMaster
     {
         return array_merge(parent::attributeLabels(), []);
     }
-    public static function kgiTeam($kgiId)
+    public static function kgiTeam($kgiId, $month, $year)
     {
         /*$kgiTeam = KgiTeam::find()
             ->select('t.teamName,kgi_team.teamId')
@@ -45,7 +45,7 @@ class KgiTeam extends \backend\models\hrvc\master\KgiTeamMaster
             ->all();*/
 
         $kgiTeams = KgiTeam::find()
-            ->where(["kgiId" => $kgiId])
+            ->where(["kgiId" => $kgiId, "month" => $month, "year" => $year])
             ->andWhere("status!=99")
             ->asArray()
             ->all();

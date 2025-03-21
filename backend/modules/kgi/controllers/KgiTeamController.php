@@ -30,13 +30,13 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 class KgiTeamController extends Controller
 {
-	public function actionKgiTeam($kgiId)
+	public function actionKgiTeam($kgiId, $month, $year)
 	{
 		$kgiTeams = KgiTeam::find()
 			->select('kgi_team.teamId,t.teamName,kgi_team.target,kgi_team.remark,d.departmentName,d.departmentId')
 			->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
 			->JOIN("LEFT JOIN", "department d", "d.departmentId=t.departmentId")
-			->where(["kgi_team.status" => [1, 2, 4], "t.status" => [1, 2, 4]])
+			->where(["kgi_team.status" => [1, 2, 4], "t.status" => [1, 2, 4], "kgi_team.month" => $month, "kgi_team.year" => $year])
 			->andWhere(["kgi_team.kgiId" => $kgiId])
 			->orderBy('t.teamId')
 			->asArray()
@@ -133,7 +133,7 @@ class KgiTeamController extends Controller
 					"nextCheckDate" =>  ModelMaster::engDate($kgiTeamHistory["nextCheckDate"], 2),
 					"ratio" => number_format($ratio, 2),
 					"status" => $kgiTeamHistory["status"],
-					"countTeam" => KgiTeam::kgiTeam($kgiTeam["kgiId"]),
+					"countTeam" => KgiTeam::kgiTeam($kgiTeam["kgiId"], $kgiTeamHistory["month"], $kgiTeamHistory["year"]),
 					"countTeamEmployee" => $countTeamEmployee,
 					"kgiEmployeeSelect" => $selectPic,
 				];
@@ -273,7 +273,7 @@ class KgiTeamController extends Controller
 					"ratio" => number_format($ratio, 2),
 					"isOver" => ModelMaster::isOverDuedate(KgiTeam::nextCheckDate($kgiTeam['kgiTeamId'])),
 					"employee" => KgiTeam::kgiTeamEmployee($kgiTeam['kgiId'], $teamId),
-					"countTeam" => KgiTeam::kgiTeam($kgiTeam["kgiId"]),
+					"countTeam" => KgiTeam::kgiTeam($kgiTeam["kgiId"], $kgiTeam["month"], $kgiTeam["year"]),
 					"amountType" => $kgiTeam["amountType"],
 					"issue" => KgiIssue::lastestIssue($kgiTeam["kgiId"])["issue"],
 					"solution" => KgiIssue::lastestIssue($kgiTeam["kgiId"])["solution"],
@@ -512,7 +512,7 @@ class KgiTeamController extends Controller
 					"employee" => KgiTeam::kgiTeamEmployee($kgiTeam['kgiId'], $kgiTeam["teamId"]),
 					"amountType" => $kgiTeam["amountType"],
 					"issue" => KgiIssue::lastestIssue($kgiTeam["kgiId"])["issue"],
-					"countTeam" => KgiTeam::kgiTeam($kgiTeam["kgiId"]),
+					"countTeam" => KgiTeam::kgiTeam($kgiTeam["kgiId"], $kgiTeamHistory["month"], $kgiTeamHistory["year"]),
 					"solution" => KgiIssue::lastestIssue($kgiTeam["kgiId"])["solution"],
 					"countTeamEmployee" => $countTeamEmployee,
 					"kgiEmployeeSelect" => $selectPic,
@@ -602,7 +602,7 @@ class KgiTeamController extends Controller
 
 		return json_encode($data);
 	}
-	public function actionKgiTeamEmployee($kgiId)
+	public function actionKgiTeamEmployee($kgiId, $month, $year)
 	{
 		$kgiTeams = KgiTeam::find()
 			->select('kgi_team.kgiId,kgi_team.teamId,t.teamName,kgi_team.target,d.departmentName')
@@ -636,7 +636,7 @@ class KgiTeamController extends Controller
 						}
 					}
 					$kgiEmployee = KgiEmployee::find()
-						->where(["employeeId" => $employee["employeeId"], "kgiId" => $kgiId])
+						->where(["employeeId" => $employee["employeeId"], "kgiId" => $kgiId, "month" => $month, "year" => $year])
 						->andWhere("status != 99")
 						->asArray()
 						->orderBy('createDateTime DESC')
@@ -740,23 +740,23 @@ class KgiTeamController extends Controller
 					}
 				}
 				if (!isset($data[$history["year"]][$history["month"]])) {
-				$data[$history["year"]][$history["month"]] = [
-					"kgiTeamHistoryId" => $history["kgiTeamHistoryId"],
-					"target" => $history['target'],
-					"unit" => Unit::unitName($history['unitId']),
-					"month" => ModelMaster::monthEng($history['month'], 1),
-					"year" => $history["year"],
-					"status" => $history['status'],
-					"quantRatio" => $history["quantRatio"],
-					"code" =>  $history["code"],
-					"result" => $history["result"],
-					"ratio" => number_format($ratio, 2),
-					"amountType" => $history["amountType"],
-					"isOver" => ModelMaster::isOverDuedate($history["nextCheckDate"]),
-					"fromDate" => ModelMaster::engDate($history["fromDate"], 2),
-					"toDate" => ModelMaster::engDate($history["toDate"], 2),
-				];
-			}
+					$data[$history["year"]][$history["month"]] = [
+						"kgiTeamHistoryId" => $history["kgiTeamHistoryId"],
+						"target" => $history['target'],
+						"unit" => Unit::unitName($history['unitId']),
+						"month" => ModelMaster::monthEng($history['month'], 1),
+						"year" => $history["year"],
+						"status" => $history['status'],
+						"quantRatio" => $history["quantRatio"],
+						"code" =>  $history["code"],
+						"result" => $history["result"],
+						"ratio" => number_format($ratio, 2),
+						"amountType" => $history["amountType"],
+						"isOver" => ModelMaster::isOverDuedate($history["nextCheckDate"]),
+						"fromDate" => ModelMaster::engDate($history["fromDate"], 2),
+						"toDate" => ModelMaster::engDate($history["toDate"], 2),
+					];
+				}
 			endforeach;
 		}
 		return json_encode($data);
