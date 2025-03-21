@@ -285,7 +285,8 @@ class KgiPersonalController extends Controller
 		$kgi = curl_exec($api);
 		$kgi = json_decode($kgi, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $kgi["companyId"]);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $kgi["companyId"]);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-branch?id=' . $kgiEmployeeDetail["kgiId"]);
 		$kgiBranch = curl_exec($api);
 		$kgiBranch = json_decode($kgiBranch, true);
 
