@@ -121,7 +121,7 @@ class KgiPersonalController extends Controller
 				} else {
 					$ratio = 0;
 				}
-				$kgiEmployeeInteam = KgiEmployee::countKgiFromTeam($kgi["kgiId"], $kgi["teamId"],$kgiEmployeeHistory["month"],$kgiEmployeeHistory["year"]);
+				$kgiEmployeeInteam = KgiEmployee::countKgiFromTeam($kgi["kgiId"], $kgi["teamId"], $kgiEmployeeHistory["month"], $kgiEmployeeHistory["year"]);
 				$countTeamEmployee = count($kgiEmployeeInteam);
 				$selectPic = [];
 				if ($countTeamEmployee >= 3) {
@@ -150,7 +150,7 @@ class KgiPersonalController extends Controller
 					"picture" => $picture,
 					"companyName" => Company::companyName($kgi["companyId"]),
 					"branch" => KgiBranch::kgiBranch($kgi["kgiId"]),
-					"employee" => KgiEmployee::kgiEmployee( $kgi["kgiId"],$kgi["month"],$kgi["year"]),
+					"employee" => KgiEmployee::kgiEmployee($kgi["kgiId"], $kgi["month"], $kgi["year"]),
 					"quantRatio" => $kgi["quantRatio"],
 					"targetAmount" => $kgiEmployeeHistory["target"],
 					"code" => $kgi["code"],
@@ -161,7 +161,7 @@ class KgiPersonalController extends Controller
 					"ratio" => number_format($ratio, 2),
 					"periodCheck" => ModelMaster::engDate(KgiEmployee::lastestCheckDate($kgiEmployeeHistory["kgiEmployeeId"]), 2),
 					"nextCheck" =>  ModelMaster::engDate($kgiEmployeeHistory["nextCheckDate"], 2),
-					"countTeam" => KgiTeam::kgiTeam($kgi["kgiId"], $kgi["month"], $kgi["year"]),
+					"countTeam" => KgiTeam::kgiTeam($kgi["kgiId"], $kgiEmployeeHistory["month"], $kgiEmployeeHistory["year"]),
 					"flag" => Country::countryFlagBycompany($kgi["companyId"]),
 					"status" => $kgiEmployeeHistory["status"],
 					"countryName" => Country::countryNameBycompany($kgi['companyId']),
@@ -266,7 +266,7 @@ class KgiPersonalController extends Controller
 				"teamName" => Team::teamName($employee["teamId"]),
 				"picture" => $employee["teamId"],
 				"isOver" => ModelMaster::isOverDuedate($kgiEmployee["nextCheckDate"]),
-				"kgiEmployee" => KgiEmployee::kgiEmployee($kgiId,$kgiEmployee["month"],$kgiEmployee["year"]),
+				"kgiEmployee" => KgiEmployee::kgiEmployee($kgiId, $kgiEmployee["month"], $kgiEmployee["year"]),
 				// "isOver" => ModelMaster::isOverDuedate(KgiEmployeeHistory::nextCheckDate($kgiEmployee["kgiEmployeeHistoryId"])),
 			];
 		}
@@ -383,7 +383,7 @@ class KgiPersonalController extends Controller
 				} else {
 					$ratio = 0;
 				}
-				$kgiEmployeeInteam = KgiEmployee::countKgiFromTeam($kgiEmployee["kgiId"], $kgiEmployee["teamId"],$kgiEmployeeHistory["month"],$kgiEmployeeHistory['year']);
+				$kgiEmployeeInteam = KgiEmployee::countKgiFromTeam($kgiEmployee["kgiId"], $kgiEmployee["teamId"], $kgiEmployeeHistory["month"], $kgiEmployeeHistory['year']);
 				$countTeamEmployee = count($kgiEmployeeInteam);
 				$selectPic = [];
 				if ($countTeamEmployee >= 3) {
@@ -407,7 +407,7 @@ class KgiPersonalController extends Controller
 					"kgiName" => $kginame,
 					"kgiId" => $kgiEmployee["kgiId"],
 					"companyName" => Company::companyName($kgiEmployee["companyId"]),
-					"employee" => KgiEmployee::kgiEmployee($kgiEmployee["kgiId"],$kgiEmployeeHistory["month"],$kgiEmployeeHistory["year"]),
+					"employee" => KgiEmployee::kgiEmployee($kgiEmployee["kgiId"], $kgiEmployeeHistory["month"], $kgiEmployeeHistory["year"]),
 					"employeeName" => $kgiEmployee["employeeFirstname"] . ' ' . $kgiEmployee["employeeSurename"],
 					"picture" => $picture,
 					"branch" => KgiBranch::kgiBranch($kgiEmployee["kgiId"]),
@@ -427,7 +427,7 @@ class KgiPersonalController extends Controller
 					"status" => $kgiEmployeeHistory["status"],
 					"flag" => Country::countryFlagBycompany($kgiEmployee["companyId"]),
 					"countryName" => Country::countryNameBycompany($kgiEmployee['companyId']),
-					"kgiEmployee" => KgiEmployee::kgiEmployee($kgiEmployee["kgiId"],$kgiEmployeeHistory["month"],$kgiEmployeeHistory["year"]),
+					"kgiEmployee" => KgiEmployee::kgiEmployee($kgiEmployee["kgiId"], $kgiEmployeeHistory["month"], $kgiEmployeeHistory["year"]),
 					"ratio" => number_format($ratio, 2),
 					"isOver" => ModelMaster::isOverDuedate(KgiEmployee::nextCheckDate($kgiEmployeeHistory['kgiEmployeeId'])),
 					"amountType" => $kgiEmployee["amountType"],
@@ -437,7 +437,7 @@ class KgiPersonalController extends Controller
 					"teamMate" =>  $selectPic,
 					"teamName" => Team::teamName($teamId),
 					"countTeamEmployee" => $countTeamEmployee,
- 				];
+				];
 			endforeach;
 		}
 		return json_encode($data);
@@ -475,25 +475,24 @@ class KgiPersonalController extends Controller
 					}
 				}
 				if (!isset($data[$history["year"]][$history["month"]])) {
-				$data[$history["year"]][$history["month"]] = [
-					"kgiEmployeeHistoryId" => $history["kgiEmployeeHistoryId"],
-					"target" => $history['target'],
-					"unit" => Unit::unitName($history['unitId']),
-					"month" => ModelMaster::monthEng($history['month'], 1),
-					"year" => $history["year"],
-					"status" => $history['status'],
-					"quantRatio" => $history["quantRatio"],
-					"code" =>  $history["code"],
-					"result" => $history["result"],
-					"ratio" => number_format($ratio, 2),
-					"amountType" => $history["amountType"],
-					"isOver" => ModelMaster::isOverDuedate($history["nextCheckDate"]),
-					"fromDate" => ModelMaster::engDate($history["fromDate"], 2),
-					"toDate" => ModelMaster::engDate($history["toDate"], 2),
-				];
-			}
+					$data[$history["year"]][$history["month"]] = [
+						"kgiEmployeeHistoryId" => $history["kgiEmployeeHistoryId"],
+						"target" => $history['target'],
+						"unit" => Unit::unitName($history['unitId']),
+						"month" => ModelMaster::monthEng($history['month'], 1),
+						"year" => $history["year"],
+						"status" => $history['status'],
+						"quantRatio" => $history["quantRatio"],
+						"code" =>  $history["code"],
+						"result" => $history["result"],
+						"ratio" => number_format($ratio, 2),
+						"amountType" => $history["amountType"],
+						"isOver" => ModelMaster::isOverDuedate($history["nextCheckDate"]),
+						"fromDate" => ModelMaster::engDate($history["fromDate"], 2),
+						"toDate" => ModelMaster::engDate($history["toDate"], 2),
+					];
+				}
 			endforeach;
-			
 		}
 		return json_encode($data);
 	}
