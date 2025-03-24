@@ -683,43 +683,42 @@ class KgiTeamController extends Controller
 			$kgiTeam->month = $nextMonth;
 			$kgiTeam->year = $nextYear;
 			$kgiTeam->updateDateTime = new Expression('NOW()');
-			if($kgiTeam->save(false)){
+			if ($kgiTeam->save(false)) {
 				// $KgiEmployee = KgiEmployee::find()->where(["kgiId" => $kgiTeam["kgiId"]])->all();
 
 				$KgiEmployee = KgiEmployee::find()
-				->leftJoin("employee" , "employee.employeeId = kgi_employee.employeeId")
-				->where(["kgi_employee.kgiId" => $kgiTeam["kgiId"],"employee.teamId" => $kgiTeam["teamId"],"kgi_employee.status" => [1,2,4]])
-				->all();
-				
+					->leftJoin("employee", "employee.employeeId = kgi_employee.employeeId")
+					->where(["kgi_employee.kgiId" => $kgiTeam["kgiId"], "employee.teamId" => $kgiTeam["teamId"], "kgi_employee.status" => [1, 2, 4]])
+					->all();
+
 				// throw new Exception(print_r($kpiEmpoyee, true)); 
-				foreach($KgiEmployee as $empoyee) :
-					if($empoyee -> month  == $nextMonth && $empoyee -> year  == $nextYear){
+				foreach ($KgiEmployee as $empoyee) :
+					if ($empoyee->month  == $nextMonth && $empoyee->year  == $nextYear) {
 						//ปัญหาคือ พอก็อปหน้าคอมปานีมา มันไม่มีในเอ็มพรอยี่ด้วย 
 						//สามารถข้ามเดือนได้ 
-						
-					}else{
-						if($empoyee -> status == 1){
-                            $status = 5;
-                        }
-                        if($empoyee -> status == 2){
-                            $status = 1;
+
+					} else {
+						if ($empoyee->status == 1) {
+							$status = 5;
+						}
+						if ($empoyee->status == 2) {
+							$status = 1;
 							// throw new Exception(print_r($empoyee -> status, true)); 
-                            $empoyee -> status = 1;
-                            $empoyee -> month = $nextMonth;
-                            $empoyee -> year = $nextYear;
-                        }
+							$empoyee->status = 1;
+							$empoyee->month = $nextMonth;
+							$empoyee->year = $nextYear;
+						}
 						$KgiEmployeeHistory = new KgiEmployeeHistory();
-						$KgiEmployeeHistory->kgiEmployeeId = $empoyee -> kgiEmployeeId;
+						$KgiEmployeeHistory->kgiEmployeeId = $empoyee->kgiEmployeeId;
 						$KgiEmployeeHistory->createrId = Yii::$app->user->id;
 						$KgiEmployeeHistory->month = $nextMonth;
 						$KgiEmployeeHistory->year = $nextYear;
 						$KgiEmployeeHistory->createDateTime = new Expression('NOW()');
 						$KgiEmployeeHistory->updateDateTime = new Expression('NOW()');
-						$KgiEmployeeHistory-> detail = "auto set from company kpi";
+						$KgiEmployeeHistory->detail = "auto set from company kpi";
 						$KgiEmployeeHistory->status = $status;
 						$KgiEmployeeHistory->save(false);
-						$empoyee -> save(false);
-
+						$empoyee->save(false);
 					}
 				endforeach;
 			}
@@ -756,7 +755,7 @@ class KgiTeamController extends Controller
 		$kgiTeamDetail = curl_exec($api);
 		$kgiTeamDetail = json_decode($kgiTeamDetail, true);
 
-				// throw new exception(print_r($kgiTeamDetail, true));
+		// throw new exception(print_r($kgiTeamDetail, true));
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
 		$units = curl_exec($api);
@@ -787,6 +786,7 @@ class KgiTeamController extends Controller
 	{
 		$kgiId = $_POST["kgiId"];
 		$kgiTeamHistoryId = $_POST["kgiTeamHistoryId"];
+		$kgiTeamId = $_POST["kgiTeamId"];
 		$res["kgiEmployeeTeam"] = "";
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -796,9 +796,17 @@ class KgiTeamController extends Controller
 		$kgiTeams = curl_exec($api);
 		$kgiTeams = json_decode($kgiTeams, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . "&&kgiHistoryId=0");
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . "&&kgiHistoryId=0");
+		// $kgiDetail = curl_exec($api);
+		// $kgiDetail = json_decode($kgiDetail, true);
+
+		//throw new exception('kgi/kgi-team/kgi-each-team-employee?kgiTeamId=' . $kgiTeamId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-each-team-employee?kgiTeamId=' . $kgiTeamId);
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
+		//throw new exception('kgi/kgi-team/kgi-each-team-employee?kgiTeamId=' . $kgiTeamId);
+
+
 		curl_close($api);
 		$res["kgiEmployeeTeam"] = $this->renderAjax("kgi_employee_team", [
 			"kgiTeams" => $kgiTeams,

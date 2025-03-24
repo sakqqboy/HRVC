@@ -115,4 +115,22 @@ class Employee extends \frontend\models\hrvc\master\EmployeeMaster
             return '';
         }
     }
+    public static function employeeTeam($employeeId)
+    {
+        $data = [];
+        if ($employeeId != '') {
+            $employee = Employee::find()
+                ->select('t.teamName,t.teamId')
+                ->JOIN("LEFT JOIN", "team t", "t.teamId=employee.teamId")
+                ->where(["employee.employeeId" => $employeeId])
+                ->asArray()
+                ->one();
+
+            $data = [
+                "teamName" => $employee["teamName"],
+                "teamId" => $employee["teamId"]
+            ];
+        }
+        return $data;
+    }
 }

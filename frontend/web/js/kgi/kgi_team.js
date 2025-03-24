@@ -238,7 +238,7 @@ function viewTabTeamKgi(kgiTeamHistoryId, tabId, kgiId, kgiTeamId) {
             type: "POST",
             dataType: 'json',
             url: url,
-            data: { kgiId: kgiId, kgiTeamHistoryId: kgiTeamHistoryId },
+            data: { kgiId: kgiId, kgiTeamHistoryId: kgiTeamHistoryId,kgiTeamId:kgiTeamId },
             success: function (data) {
                 kgiId
                 $("#show-content").html(data.kgiEmployeeTeam);

@@ -12,6 +12,7 @@ use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Kgi;
 use frontend\models\hrvc\KgiEmployee;
 use frontend\models\hrvc\KgiEmployeeHistory;
+use frontend\models\hrvc\KgiTeam;
 use frontend\models\hrvc\Team;
 use frontend\models\hrvc\Unit;
 use frontend\models\hrvc\User;
@@ -244,7 +245,7 @@ class KgiPersonalController extends Controller
 		}
 
 		curl_close($api);
-			// throw new Exception(print_r($kgis, true));
+		// throw new Exception(print_r($kgis, true));
 
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
@@ -383,7 +384,6 @@ class KgiPersonalController extends Controller
 					$history->status = $status;
 					$history->createDateTime = new Expression('NOW()');
 					$history->updateDateTime = new Expression('NOW()');
-
 				}
 			} else {
 				// throw new Exception("2");
@@ -651,7 +651,6 @@ class KgiPersonalController extends Controller
 		}
 		// return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi-grid');
 		return $this->redirect(Yii::$app->request->referrer);
-
 	}
 	public function actionKgiEmployeeHistory($hash)
 	{
@@ -692,7 +691,7 @@ class KgiPersonalController extends Controller
 		$res["kgiEmployee"] = $kgiEmployeeDetail;
 		$isManager = UserRole::isManager();
 		$months = ModelMaster::monthFull(1);
-		//throw new exception(print_r($kgiEmployeeDetail, true));
+		// throw new exception($kgiId);
 		return $this->render('kgi_employee_history', [
 			"role" => $role,
 			"kgiEmployeeDetail" => $kgiEmployeeDetail,
@@ -710,6 +709,13 @@ class KgiPersonalController extends Controller
 	{
 		$kgiId = $_POST["kgiId"];
 		$res["kgiEmployeeTeam"] = "";
+		$kgiEmployeeId = $_POST["kgiEmployeeId"];
+		$kgiEmployee = KgiEmployee::find()->where(["kgiEmployeeId" => $kgiEmployeeId])->asArray()->one();
+		$employeeTeam = Employee::employeeTeam($kgiEmployee["employeeId"]);
+
+		$kgiTeam = KgiTeam::find()
+			->select('kgiTeamId')
+			->where(["kgiId" => $kgiId, "teamId" => $employeeTeam["teamId"]])->asArray()->one();
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -718,7 +724,12 @@ class KgiPersonalController extends Controller
 		$kgiTeams = curl_exec($api);
 		$kgiTeams = json_decode($kgiTeams, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . "&&kgiHistoryId=0");
+
+
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . "&&kgiHistoryId=0");
+		// $kgiDetail = curl_exec($api);
+		// $kgiDetail = json_decode($kgiDetail, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-each-team-employee?kgiTeamId=' . $kgiTeam["kgiTeamId"]);
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
 		curl_close($api);

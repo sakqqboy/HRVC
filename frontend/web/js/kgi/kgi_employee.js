@@ -158,7 +158,7 @@ function viewTabEmployeeKgi(kgiEmployeeHistoryId, tabId, kgiId, kgiEmployeeId) {
 			type: "POST",
 			dataType: 'json',
 			url: url,
-			data: { kgiId: kgiId, kgiEmployeeHistoryId: kgiEmployeeHistoryId },
+			data: { kgiId: kgiId, kgiEmployeeHistoryId: kgiEmployeeHistoryId,kgiEmployeeId:kgiEmployeeId },
 			success: function (data) {
 				kgiId
 				$("#show-content").html(data.kgiEmployeeTeam);

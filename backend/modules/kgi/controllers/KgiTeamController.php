@@ -707,6 +707,42 @@ class KgiTeamController extends Controller
 		}
 		return json_encode($data);
 	}
+	public function actionKgiEachTeamEmployee($kgiTeamId)
+	{
+		$kgiTeam = KgiTeam::find()->where(["kgiTeamId" => $kgiTeamId])->asArray()->one();
+		$month = $kgiTeam["month"];
+		$year = $kgiTeam["year"];
+		$kgiId = $kgiTeam["kgiId"];
+		$kgiEmployee = KgiEmployee::find()
+			->select('e.picture,e.employeeId,e.gender,t.titleName,e.employeeFirstname,e.employeeSurename')
+			->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
+			->JOIN("LEFT JOIN", "title t", "t.titleId=e.titleId")
+			->where([
+				"kgi_employee.status" => [1, 2, 4],
+				"kgi_employee.kgiId" => $kgiId,
+				"e.status" => 1,
+				"e.teamId" => $kgiTeam["teamId"],
+				"kgi_employee.month" => $month,
+				"kgi_employee.year" => $year
+			])
+			->andWhere("kgi_employee.employeeId is not null")
+			->asArray()
+			->all();
+		$employee = [];
+		if (isset($kgiEmployee) && count($kgiEmployee) > 0) {
+			foreach ($kgiEmployee as $ke) :
+				if ($ke["picture"] != "") {
+					$employee[$ke["employeeId"]]["picture"] = $ke["picture"];
+				} else {
+					$employee[$ke["employeeId"]]["picture"] = 'images/icons/Settings/personblack.svg';
+				}
+				$employee[$ke["employeeId"]]["name"] = $ke["employeeFirstname"] . ' ' . $ke["employeeSurename"];
+				$employee[$ke["employeeId"]]["title"] = $ke["titleName"];
+			endforeach;
+		}
+		$data["kgiEmployeeDetail"] = $employee;
+		return json_encode($data);
+	}
 	public function actionKgiTeamHistorySummarize($kgiTeamId)
 	{
 		$kgiTeamHistory = KgiTeamHistory::find()
