@@ -64,6 +64,28 @@ class KpiTeamController extends Controller
 		}
 		return json_encode($data);
 	}
+	public function actionKpiOneTeamSummarize($kpiId,$kpiTeamId)
+	{
+		$kpiTeams = KpiTeam::find()
+			->select('kpi_team.teamId,kpi_team.kpiTeamId,t.teamName,t.departmentId')
+			->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
+			->where(["kpi_team.status" => [1, 2, 4], "t.status" => [1, 2, 4]])
+			->andWhere(["kpi_team.kpiId" => $kpiId,"kpi_team.kpiTeamId" => $kpiTeamId])
+			->orderBy('t.teamName')
+			->asArray()
+			->all();
+		$data = [];
+		if (isset($kpiTeams) && count($kpiTeams) > 0) {
+			foreach ($kpiTeams as $kt):
+				$data[$kt["teamId"]] = [
+					"teamName" => $kt["teamName"],
+					"totalEmployee" => KpiEmployee::totolEmployeeInTeam($kpiId, $kt["teamId"]),
+					"departmentName" => Department::departmentName($kt["departmentId"])
+				];
+			endforeach;
+		}
+		return json_encode($data);
+	}
 	public function actionKpiTeam2($kpiId)
 	{
 		$kpiTeams = KpiTeam::find()
@@ -699,6 +721,7 @@ class KpiTeamController extends Controller
 				"nextCheckText" => ModelMaster::engDate($kpiTeamHistory["nextCheckDate"], 2),
 				"status" => $kpiTeamHistory["status"],
 				"kpiEmployee" => kpiEmployee::kpiEmployee($kpiTeamHistory["kpiId"],$kpiTeamHistory["month"],$kpiTeamHistory["year"]),
+				// "kpiTeamEmployee" => kpiEmployee::kpiTeamEmployee($kpiTeamHistory["kpiId"],$kpiTeamHistory["month"],$kpiTeamHistory["year"],$kpiTeamHistory["teamId"]),
 				"ratio" => number_format($ratio, 2),
 				"kpiDetail" => $kpiTeamHistory["kpiDetail"],
 				"remark" => $kpiTeamHistory["remark"],

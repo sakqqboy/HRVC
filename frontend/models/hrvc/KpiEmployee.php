@@ -83,6 +83,21 @@ class KpiEmployee extends \frontend\models\hrvc\master\KpiEmployeeMaster
         }
         return $canEdit;
     }
+
+    public static function employeeKpiTeamId($kpiEmployeeId) {
+        $teamId = KpiEmployee::find()
+            ->select('kpi_team.kpiTeamId')
+            ->JOIN("LEFT JOIN", "employee", "employee.employeeId = kpi_employee.employeeId")
+            ->JOIN("LEFT JOIN", "kpi_team", "kpi_team.teamId = employee.teamId")
+            ->where(["kpi_employee.kpiEmployeeId" => $kpiEmployeeId])
+            ->asArray()
+            ->one();
+    
+        return $teamId["kpiTeamId"] ?? 0; // ถ้าไม่มีค่าให้คืนค่า 0
+    }
+    
+
+
     public static function nextCheckDate($kpiEmployeeId)
     {
         $date = '';

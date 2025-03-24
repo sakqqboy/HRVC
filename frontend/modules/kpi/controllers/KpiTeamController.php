@@ -217,6 +217,7 @@ class KpiTeamController extends Controller
 		// if(isset($kpiTeamHistoryId) && !empty($kpiTeamHistoryId)) {
 		// 	$kpiTeamHistoryId = $kpiTeamHistoryId['kpiTeamHistoryId'];
 		// }
+		// throw new Exception(print_r($kpiTeamHistoryId,true));
 
 		$openTab = array_key_exists("openTab", $param) ? $param["openTab"] : 0;
 		$groupId = Group::currentGroupId();
@@ -229,7 +230,7 @@ class KpiTeamController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-detail?kpiTeamId=' . $kpiTeamId . '&&kpiTeamHistoryId=' . $kpiTeamHistoryId);
 		$kpiTeamDetail = curl_exec($api);
 		$kpiTeamDetail = json_decode($kpiTeamDetail, true);
-		//throw new Exception(print_r($kpiTeamDetail,true));
+		// throw new Exception(print_r($kpiTeamDetail,true));
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$companies = curl_exec($api);
@@ -242,6 +243,13 @@ class KpiTeamController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-summarize?kpiId=' . $kpiId);
 		$kpiTeams = curl_exec($api);
 		$kpiTeams = json_decode($kpiTeams, true);
+
+		// throw new Exception(print_r($kpiTeamDetail,true));
+
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-one-team-summarize?kpiId=' . $kpiId . '&&kpiTeamId=' . $kpiTeamId);
+		// $kpiTeam = curl_exec($api);
+		// $kpiTeam = json_decode($kpiTeam, true);
+		// // throw new Exception(print_r($kpiTeam,true));
 
 		curl_close($api);
 		$months = ModelMaster::monthFull(1);

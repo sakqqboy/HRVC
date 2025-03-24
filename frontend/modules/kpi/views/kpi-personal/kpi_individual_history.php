@@ -399,6 +399,9 @@ $this->title = 'KPI View';
     </div>
 </div>
 <input type="hidden" id="kpiId" value="<?= $kpiId ?>">
+<input type="hidden" id="kpiEmployeeId" value="<?= $kpiEmployeeId ?>">
+<input type="hidden" id="month" value="<?= $kpiEmployeeDetail['month'] ?>">
+<input type="hidden" id="year" value="<?= $kpiEmployeeDetail['year'] ?>">
 <?php
 $form = ActiveForm::begin([
     'id' => 'update-kpi',

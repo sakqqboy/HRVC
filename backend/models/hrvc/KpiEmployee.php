@@ -60,6 +60,36 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
         }
         return $employee;
     }
+
+    public static function kpiTeamEmployee($kpiId,$month,$year, $teamId)
+    {
+        $kpiEmployee = Employee::find()
+            ->select('employee.picture, employee.employeeId, employee.gender, employee.teamId, ke.month, ke.year')
+            ->JOIN("LEFT JOIN", "kpi_employee ke", "employee.employeeId = ke.employeeId")
+            ->JOIN("LEFT JOIN", "team", "team.teamId = employee.teamId")
+            ->where(["ke.kpiId" => $kpiId, "ke.status" => [1, 2, 4], "team.teamId" => $teamId, "ke.month" => $month, "ke.year" => $year])
+            ->asArray()
+            ->all();
+
+        // $employee = ["ke.kpiId" => $kpiId, "ke.status" => 1,"ke.month" => $month,"ke.year" => $year];
+        $employee = [];
+        if (isset($kpiEmployee) && count($kpiEmployee) > 0) {
+            foreach ($kpiEmployee as $ke) :
+                if ($ke["picture"] != "") {
+                    $employee[$ke["employeeId"]] = $ke["picture"];
+                } else {
+                    $employee[$ke["employeeId"]] = 'image/user.svg';
+                    // if ($ke["gender"] == 1) {
+                    //     $employee[$ke["employeeId"]] = 'image/user.png';
+                    // } else {
+                    //     $employee[$ke["employeeId"]] = 'image/lady.jpg';
+                    // }
+                }
+            endforeach;
+        }
+        return $employee;
+    }
+
     public static function kpiEmployeeDetail($kpiId)
     {
         $kpiEmployee = KpiEmployee::find()
@@ -90,6 +120,39 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
         }
         return $employee;
     }
+
+    public static function kpiEmployeeTeamDetail($kpiId, $teamId)
+    {
+        $kpiEmployee = KpiEmployee::find()
+            ->select('e.picture,e.employeeId,te.teamId,,e.gender,t.titleName,e.employeeFirstname,e.employeeSurename')
+            ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
+            ->JOIN("LEFT JOIN", "title t", "t.titleId=e.titleId")
+            ->JOIN("LEFT JOIN", "team te", "te.teamId=e.teamId")
+            ->where(["kpi_employee.status" => [1, 2, 4], "kpi_employee.kpiId" => $kpiId, "te.teamId" => $teamId, "e.status" => 1])
+            ->andWhere("kpi_employee.employeeId is not null")
+            ->asArray()
+            ->all();
+        $employee = [];
+        if (isset($kpiEmployee) && count($kpiEmployee) > 0) {
+            foreach ($kpiEmployee as $ke) :
+                if ($ke["picture"] != "") {
+                    $employee[$ke["employeeId"]]["picture"] = $ke["picture"];
+                } else {
+                    $employee[$ke["employeeId"]]["picture"] = 'image/user.svg';
+                    // if ($ke["gender"] == 1) {
+                    //     $employee[$ke["employeeId"]]["picture"] = 'image/user.png';
+                    // } else {
+
+                    //     $employee[$ke["employeeId"]]["picture"] = 'image/lady.jpg';
+                    // }
+                }
+                $employee[$ke["employeeId"]]["name"] = $ke["employeeFirstname"] . ' ' . $ke["employeeSurename"];
+                $employee[$ke["employeeId"]]["title"] = $ke["titleName"];
+            endforeach;
+        }
+        return $employee;
+    }
+
     public static function kpiEmployeeTarget($kpiId, $employeeId)
     {
         $kpiEmployee = KpiEmployee::find()

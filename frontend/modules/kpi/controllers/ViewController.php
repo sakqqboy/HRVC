@@ -305,6 +305,49 @@ class ViewController extends Controller
 		]);
 		return json_encode($res);
 	}
+	public function actionKpiTeamEmployeeDetail()
+	{
+		$kpiId = $_POST["kpiId"];
+		if (isset($_POST["kpiTeamId"])) {
+			$kpiTeamId = $_POST["kpiTeamId"];
+			// ดำเนินการต่อเมื่อมีค่า
+		} else {
+			// echo "ค่า kpiTeamId ไม่มีอยู่ใน POST";
+			$kpiEmployeeId = $_POST["kpiEmployeeId"];
+			$kpiTeamId  =  KpiEmployee::employeeKpiTeamId($kpiEmployeeId);
+		}		
+		$month = $_POST["month"];
+		$year = $_POST["year"];
+
+		$res["kpiEmployeeTeam"] = "";
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-summarize?kpiId=' . $kpiId);
+		$kpiTeams = curl_exec($api);
+		$kpiTeams = json_decode($kpiTeams, true);
+
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . '&&kpiHistoryId=0');
+		// $kpiDetail = curl_exec($api);
+		// $kpiDetail = json_decode($kpiDetail, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-team-employee-detail?id=' . $kpiId . '&&kpiTeamId=' . $kpiTeamId . '&&month=' . $month . '&&year=' . $year );
+		$kpiDetail = curl_exec($api);
+		$kpiDetail = json_decode($kpiDetail, true);
+
+		curl_close($api);
+
+		throw new Exception(print_r($kpiDetail, true));
+
+		$res["kpiEmployeeTeam"] = $this->renderAjax("kpi_employee_team", [
+			"kpiTeams" => $kpiTeams,
+			"kpiDetail" => $kpiDetail,
+			"kpiId" => $kpiId
+
+		]);
+		return json_encode($res);
+	}
 	public function actionAllKpiHistory()
 	{
 		$kpiId = $_POST["kpiId"];

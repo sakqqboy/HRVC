@@ -283,6 +283,89 @@ class ManagementController extends Controller
 
 		return json_encode($data);
 	}
+
+	public function actionKpiTeamEmployeeDetail($id, $kpiTeamId ,$month, $year)
+	{
+		// $kpiHistory = KpiHistory::find()->where(["status" => [1, 2, 4], "kpiId" => $id])->orderBy('year DESC,month DESC,kpiHistoryId DESC')->asArray()->one();
+		$kpiHistory = KpiHistory::find()
+		->select('kpi_history.*, kpi_team.teamId')
+		->JOIN("LEFT JOIN", "kpi_team", "kpi_team.kpiId = kpi_history.kpiId")
+		->where(["kpi_history.status" => [1, 2, 4]])
+		->andWhere(["kpi_history.kpiId" => $id, "kpi_team.kpiTeamId" => $kpiTeamId])
+		->orderBy('kpi_history.year DESC,kpi_history.month DESC,kpi_history.kpiHistoryId DESC')
+		->asArray()
+		->one();
+
+		$ratio = 0;
+		if (isset($kpiHistory) && !empty($kpiHistory)) { //wait edit
+			$kpi = Kpi::find()->where(["kpiId" => $id])->asArray()->one();
+			if ($kpi["targetAmount"] != '' && $kpi["targetAmount"] != 0) {
+				if ($kpi["code"] == '<' || $kpi["code"] == '=') {
+					$ratio = ($kpi["result"] / $kpi["targetAmount"]) * 100;
+				} else {
+					if ($kpi["result"] != '' && $kpi["result"] != 0) {
+						$ratio = ($kpi["targetAmount"] / $kpi["result"]) * 100;
+					} else {
+						$ratio = 0;
+					}
+				}
+			} else {
+				$ratio = 0;
+			}
+			$data = [
+				"kpiName" => $kpi["kpiName"],
+				"companyId" => $kpi["companyId"],
+				"branch" => KpiBranch::kpiBranch($kpi["kpiId"]),
+				// "kpiId" => $kpi["kpiId"],
+				// "month1" => $kpi["month"],
+				// "year1" => $kpi["year"],
+				"sumresult" => KpiTeam::autoSummalys($kpi['kpiId'], $kpi['month'], $kpi['year']),
+				"detail" => $kpiHistory['description'],
+				"kpiHistoryId" => !empty($kpiHistory['kpiHistoryId']) ? $kpiHistory['kpiHistoryId'] : 0,
+				"quantRatio" => $kpiHistory["quantRatio"],
+				"targetAmount" => $kpiHistory["targetAmount"],
+				"creater" => User::employeeNameByuserId($kpiHistory["createrId"]),
+				"amountType" => $kpiHistory["amountType"],
+				"code" => $kpiHistory["code"],
+				"result" => $kpiHistory["result"],
+				"unitId" => $kpiHistory["unitId"],
+				"month" => $kpiHistory['month'],
+				"year" => $kpiHistory['year'],
+				"monthName" => strtoupper(ModelMaster::monthEng($kpiHistory['month'], 2)),
+				"monthNameFull" => ModelMaster::monthEng($kpiHistory['month'], 1),
+				"priority" => $kpiHistory["priority"],
+				"periodCheck" => $kpiHistory["periodDate"],
+				"status" => $kpiHistory["status"],
+				"nextCheck" => $kpiHistory["nextCheckDate"],
+				"remark" => $kpiHistory["remark"],
+				"statusText" => $kpiHistory["status"] == 1 ? 'On process' : 'Finished',
+				"nextCheckText" => ModelMaster::engDate($kpiHistory["nextCheckDate"], 2),
+				"periodCheckText" => ModelMaster::engDate($kpiHistory["periodDate"], 2),
+				"companyName" => Company::companyName($kpi["companyId"]),
+				"countryName" => Country::countryNameBycompany($kpi["companyId"]),
+				"flag" => Country::countryFlagBycompany($kpi["companyId"]),
+				"quantRatioText" => $kpiHistory["quantRatio"] == 1 ? "Quantity" : "Quality",
+				"targetAmountText" => number_format($kpiHistory["targetAmount"], 2),
+				"resultText" => $kpiHistory["result"] != '' ? number_format($kpiHistory["result"], 2) : $kpiHistory["result"],
+				"ratio" => number_format($ratio, 2),
+				"unitText" => Unit::unitName($kpiHistory["unitId"]),
+				"fromDate" => $kpiHistory["fromDate"],
+				"toDate" => $kpiHistory["toDate"],
+				"isOver" => ModelMaster::isOverDuedate(Kpi::nextCheckDate($kpi['kpiId'])),
+				"kpiEmployee" => KpiEmployee::kpiEmployee($kpi["kpiId"], $kpi["month"], $kpi["year"]),
+				"kpiEmployeeDetail" => KpiEmployee::kpiEmployeeTeamDetail($kpi["kpiId"],$kpiHistory["teamId"]),
+				"countTeam" => KpiTeam::kpiTeam($kpi['kpiId'], $kpi["month"], $kpi["year"]),
+				"lastUpdate" =>  ModelMaster::dateNumber($kpiHistory["updateDateTime"]),
+				"issue" => KpiIssue::lastestIssue($kpi["kpiId"])["issue"],
+				"solution" => KpiIssue::lastestIssue($kpi["kpiId"])["solution"],
+				"fromDateDetail" => ModelMaster::engDate($kpiHistory["fromDate"], 2),
+				"toDateDetail" => ModelMaster::engDate($kpiHistory["toDate"], 2),
+			];
+		}
+
+		return json_encode($data);
+	}
+
 	public function actionKpiBranch($id)
 	{
 		$kpiBranches = KpiBranch::find()
