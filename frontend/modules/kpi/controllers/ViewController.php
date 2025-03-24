@@ -338,7 +338,7 @@ class ViewController extends Controller
 
 		curl_close($api);
 
-		throw new Exception(print_r($kpiDetail, true));
+		// throw new Exception(print_r($kpiDetail, true));
 
 		$res["kpiEmployeeTeam"] = $this->renderAjax("kpi_employee_team", [
 			"kpiTeams" => $kpiTeams,
