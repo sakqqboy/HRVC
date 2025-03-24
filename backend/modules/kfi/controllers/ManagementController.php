@@ -111,12 +111,14 @@ class ManagementController extends Controller
 					"active" => $kfi["active"],
 					"countKfiHasKgi" => KfiHasKgi::countKgiInkfi($kfi["kfiId"]),
 					"kfiEmployee" => $selectPic,
-					"countEmployee" => count($allEmployee) . '12344',
+					//"countEmployee" => count($allEmployee),
+
+					"countEmployee" => count(KfiEmployee::kfiEmployeeByMonth($kfi["kfiId"], $kfi["month"], $kfi["year"])),
 
 				];
 				$kfiHistory = KfiHistory::find()
 					->where(["kfiId" => $kfi["kfiId"], "status" => [1, 2]])
-					->orderBy('year DESC,kfiHistoryId DESC')
+					->orderBy('year DESC,month DESC,kfiHistoryId DESC')
 					->asArray()
 					->one();
 				if (isset($kfiHistory) && !empty($kfiHistory)) {
@@ -162,7 +164,8 @@ class ManagementController extends Controller
 						"active" => $kfi["active"],
 						"countKfiHasKgi" => KfiHasKgi::countKgiInkfi($kfi["kfiId"]),
 						"kfiEmployee" => $selectPic,
-						"countEmployee" => count($allEmployee),
+						//"countEmployee" => count($allEmployee),
+						"countEmployee" => count(KfiEmployee::kfiEmployeeByMonth($kfi["kfiId"], $kfi["month"], $kfi["year"])),
 						"aa" => $kfiHistory['kfiHistoryId'],
 						"lastestUpdate" => ModelMaster::engDate($kfi["updateDateTime"], 2)
 					];
@@ -428,7 +431,8 @@ class ManagementController extends Controller
 						"fromDate" => ModelMaster::engDate($history["fromDate"], 2),
 						"toDate" => ModelMaster::engDate($history["toDate"], 2),
 						"active" => $history["active"],
-						"employee" => count($allEmployee),
+						//"employee" => count($allEmployee),
+						"employee" => count(KfiEmployee::kfiEmployeeByMonth($kfiId, $history["month"], $history["year"])),
 						"kfiEmployee" => $selectPic,
 					];
 				}
@@ -659,7 +663,7 @@ class ManagementController extends Controller
 					"unit" => Unit::unitName($kgi["unitId"]),
 					"month" => ModelMaster::monthEng($kgi['month'], 1),
 					"ratio" => number_format($ratio, 2),
-					"countTeam" => KgiTeam::kgiTeam($kgi["kgiId"],$kgi["month"],$kgi["year"]),
+					"countTeam" => KgiTeam::kgiTeam($kgi["kgiId"], $kgi["month"], $kgi["year"]),
 				];
 			endforeach;
 		}
@@ -691,6 +695,7 @@ class ManagementController extends Controller
 		$data = [];
 		$totalEmployee = 0;
 		$totalTargetAll = 0;
+		$kfi = Kfi::find()->where(["kfiId" => $kfiId])->asArray()->one();
 		if (isset($employeeInTeam) && count($employeeInTeam) > 0) {
 			foreach ($employeeInTeam as $employee):
 				if ($employee["picture"] != '') {
@@ -703,7 +708,7 @@ class ManagementController extends Controller
 					}
 				}
 				$kfiEmployee = KfiEmployee::find()
-					->where(["employeeId" => $employee["employeeId"], "kfiId" => $kfiId])
+					->where(["employeeId" => $employee["employeeId"], "kfiId" => $kfiId, "month" => $kfi["month"], "year" => $kfi["year"]])
 					->andWhere("status!=99")
 					->orderBy('createDateTime DESC')
 					->asArray()
