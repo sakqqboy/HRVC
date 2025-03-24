@@ -462,7 +462,7 @@ class DefaultController extends Controller
         // }
         $employee = KfiEmployee::find()
             ->select('employeeId')
-            ->where(1)->groupBy("employeeId")->asArray()->all();
+            ->where(["kfiId" => [54, 56, 57, 59]])->groupBy("employeeId")->asArray()->all();
         if (isset($employee) && count($employee) > 0) {
             foreach ($employee as $e):
                 $kfi = Kfi::find()->where(["status" => [1, 2, 4]])->asArray()->all();
