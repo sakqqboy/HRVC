@@ -62,13 +62,19 @@ class KgiEmployee extends \backend\models\hrvc\master\KgiEmployeeMaster
         }
         return $employee;
     }
-    public static function kgiEmployeeDetail($kgiId)
+    public static function kgiEmployeeDetail($kgiId, $month, $year)
     {
         $kgiEmployee = KgiEmployee::find()
             ->select('e.picture,e.employeeId,e.gender,t.titleName,e.employeeFirstname,e.employeeSurename')
             ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
             ->JOIN("LEFT JOIN", "title t", "t.titleId=e.titleId")
-            ->where(["kgi_employee.status" => [1, 2, 4], "kgi_employee.kgiId" => $kgiId, "e.status" => 1])
+            ->where([
+                "kgi_employee.status" => [1, 2, 4],
+                "kgi_employee.kgiId" => $kgiId,
+                "e.status" => 1,
+                "kgi_employee.month" => $month,
+                "kgi_employee.year" => $year
+            ])
             ->andWhere("kgi_employee.employeeId is not null")
             ->asArray()
             ->all();

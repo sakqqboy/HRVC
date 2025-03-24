@@ -96,13 +96,13 @@ class KgiPersonalController extends Controller
 		if (count($kgiEmployee) > 0) {
 			foreach ($kgiEmployee as $kgi) :
 				$kgiEmployeeHistory = KgiEmployeeHistory::find()
-					->where(["kgiEmployeeId" => $kgi["kgiEmployeeId"], "status" => [1, 2, 4]])
+					->where(["kgiEmployeeId" => $kgi["kgiEmployeeId"], "status" => [1, 2, 4], "month" => $kgi["month"], "year" => $kgi["year"]])
 					->asArray()
 					->orderBy('createDateTime DESC')
 					->one();
 				if (!isset($kgiEmployeeHistory) || empty($kgiEmployeeHistory)) {
 					$kgiEmployeeHistory = KgiEmployee::find()
-						->where(["kgiEmployeeId" => $kgi["kgiEmployeeId"], "status" => [1, 2, 4]])
+						->where(["kgiEmployeeId" => $kgi["kgiEmployeeId"], "status" => [1, 2, 4], "month" => $kgi["month"], "year" => $kgi["year"]])
 						->asArray()
 						->orderBy('createDateTime DESC')
 						->one();
@@ -356,7 +356,7 @@ class KgiPersonalController extends Controller
 				if (!isset($kgiEmployeeHistory) || empty($kgiEmployeeHistory)) {
 					//throw new exception(1111);
 					$kgiEmployeeHistory = KgiEmployee::find()
-					->select('kgi_employee.*')
+						->select('kgi_employee.*')
 						->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
 						->where(["kgi_employee.kgiEmployeeId" => $kgiEmployee["kgiEmployeeId"], "kgi_employee.status" => [1, 2]])
 						->andFilterWhere([
