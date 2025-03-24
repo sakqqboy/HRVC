@@ -140,4 +140,9 @@ class KfiEmployee extends \backend\models\hrvc\master\KfiEmployeeMaster
         }
         return $employee;
     }
+    public static function kfiEmployeeByMonth($kfiId, $month, $year)
+    {
+        $kfiEmployee = KfiEmployee::find()->where(["kfiId" => $kfiId, "month" => $month, "year" => $year, "status" => [1, 2, 4]])->all();
+        return $kfiEmployee;
+    }
 }

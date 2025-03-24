@@ -3,6 +3,7 @@
 namespace frontend\modules\kfi\controllers;
 
 use common\models\hrvc\KfiBranch;
+use Exception;
 use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Kfi;
 use frontend\models\hrvc\KfiDepartment;
@@ -34,6 +35,8 @@ use frontend\models\hrvc\KpiIssue;
 use frontend\models\hrvc\KpiSolution;
 use frontend\models\hrvc\KpiTeam;
 use frontend\models\hrvc\KpiTeamHistory;
+use frontend\modules\kfi\kfi as KfiKfi;
+use yii\db\Expression;
 use yii\web\Controller;
 
 /**
@@ -427,5 +430,75 @@ class DefaultController extends Controller
                 }
             endforeach;
         }
+    }
+    public function actionAddKfi()
+    {
+        // $kfiEmployee = KfiEmployee::find()->where(["month" => null, "year" => null])->all();
+        // if (isset($kfiEmployee) && count($kfiEmployee) > 0) {
+        //     $year = '2024';
+        //     foreach ($kfiEmployee as $ke):
+        //         $month = 1;
+        //         while ($month <= 12) {
+        //             if ($month < 10) {
+        //                 $textMonth = '0' . $month;
+        //             } else {
+        //                 $textMonth = $month;
+        //             }
+        //             $new = new KfiEmployee();
+        //             $new->employeeId = $ke->employeeId;
+        //             $new->kfiId = $ke->kfiId;
+        //             $new->target = $ke->target;
+        //             $new->year = $year;
+        //             $new->month = $textMonth;
+        //             $new->status = 1;
+        //             $new->createDateTime = $ke->createDateTime;
+        //             $new->save(false);
+        //             $month++;
+        //         }
+        //         $ke->delete(false);
+        //     endforeach;
+        // } else {
+        //     throw new Exception('111');
+        // }
+        $employee = KfiEmployee::find()
+            ->select('employeeId')
+            ->where(1)->groupBy("employeeId")->asArray()->all();
+        if (isset($employee) && count($employee) > 0) {
+            foreach ($employee as $e):
+                $kfi = Kfi::find()->where(["status" => [1, 2, 4]])->asArray()->all();
+                if (isset($kfi) && count($kfi) > 0) {
+                    foreach ($kfi as $kf):
+                        $year = '2024';
+                        $month = 1;
+                        while ($month <= 12) {
+                            if ($month < 10) {
+                                $textMonth = '0' . $month;
+                            } else {
+                                $textMonth = $month;
+                            }
+                            $kfiHistory = KfiHistory::find()->where(["month" => $month, "year" => $year, "kfiId" => $kf["kfiId"]])->one();
+                            if (isset($kfiHistory) && !empty($kfiHistory)) {
+                                $kfiEmployee = KfiEmployee::find()
+                                    ->where(["month" => $month, "year" => $year, "kfiId" => $kf["kfiId"], "employeeId" => $e["employeeId"]])
+                                    ->one();
+                                if (!isset($kfiEmployee) || empty($kfiEmployee)) {
+                                    $new = new KfiEmployee();
+                                    $new->employeeId = $e["employeeId"];
+                                    $new->kfiId = $kf["kfiId"];
+                                    $new->target = $kf["targetAmount"];
+                                    $new->year = $year;
+                                    $new->month = $textMonth;
+                                    $new->status = 1;
+                                    $new->createDateTime = new Expression('NOW()');
+                                    $new->save(false);
+                                }
+                            }
+                            $month++;
+                        }
+                    endforeach;
+                }
+            endforeach;
+        }
+        //    throw new exception(print_r($kfiEmployee, true));
     }
 }
