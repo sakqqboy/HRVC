@@ -326,11 +326,19 @@ class DashboardController extends Controller
                 // throw new Exception(print_r($performanceData,true));
                 // ตรวจสอบและเติม 0 ให้ข้อมูล Performance ให้ครบ 12 ตัว
                 $finalPerformanceData = [];
-                for ($i = 1; $i <= 12; $i++) { // เปลี่ยน $i เริ่มจาก 1 ถึง 12
+                for ($i = 1; $i <= 12; $i++) { 
                     $finalPerformanceData[] = isset($performanceData[$i]) ? $performanceData[$i] : 0;
-                }            
+                }
 
-                // $finalPerformanceData = [79, 64, 25, 90, 10, 13, 191, 96, 101.358, 83, 6, 32] ;
+                // ลบค่า 0 ที่อยู่ท้ายลิสต์ออก
+                while (!empty($finalPerformanceData) && end($finalPerformanceData) === 0) {
+                    array_pop($finalPerformanceData);
+                }
+                // print_r($finalPerformanceData);
+
+                // throw new Exception(print_r($finalPerformanceData,true));
+
+                // $finalPerformanceData = [79, 64, 25, 40, 60] ;
 
 
                 // throw new Exception(print_r($finalPerformanceData,true));
@@ -421,6 +429,10 @@ class DashboardController extends Controller
                     $finalPerformanceData[] = isset($performanceData[$i]) ? $performanceData[$i] : 0;
                 }            
 
+                while (!empty($finalPerformanceData) && end($finalPerformanceData) === 0) {
+                    array_pop($finalPerformanceData);
+                }
+
 
                 $res['data'] = [
                     [
@@ -500,6 +512,10 @@ class DashboardController extends Controller
                 for ($i = 1; $i <= 12; $i++) { // เปลี่ยน $i เริ่มจาก 1 ถึง 12
                     $finalPerformanceData[] = isset($performanceData[$i]) ? $performanceData[$i] : 0;
                 }            
+
+                while (!empty($finalPerformanceData) && end($finalPerformanceData) === 0) {
+                    array_pop($finalPerformanceData);
+                }
 
                 $res['data'] = [
                     [
