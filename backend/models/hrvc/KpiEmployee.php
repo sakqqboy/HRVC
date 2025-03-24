@@ -39,7 +39,7 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
         $kpiEmployee = Employee::find()
             ->select('employee.picture,employee.employeeId,employee.gender,ke.`month`, ke.`year`')
             ->JOIN("LEFT JOIN", "kpi_employee ke", "employee.employeeId=ke.employeeId")
-            ->where(["ke.kpiId" => $kpiId, "ke.status" => 1,"ke.month" => $month,"ke.year" => $year])
+            ->where(["ke.kpiId" => $kpiId, "ke.status" => [1,2,4],"ke.month" => $month,"ke.year" => $year])
             ->asArray()
             ->all();
         // $employee = ["ke.kpiId" => $kpiId, "ke.status" => 1,"ke.month" => $month,"ke.year" => $year];
