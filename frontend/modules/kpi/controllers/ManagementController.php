@@ -176,7 +176,7 @@ class ManagementController extends Controller
         $employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
         $companyId = $employee["companyId"];
         // throw new exception(print_r($kpis, true));
-        //throw new exception(print_r($kpis, true));
+        // throw new exception(print_r($kpis, true));
         return $this->render('kpi_grid', [
             "units" => $units,
             "companies" => $companies,
