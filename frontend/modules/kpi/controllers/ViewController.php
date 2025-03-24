@@ -332,7 +332,11 @@ class ViewController extends Controller
 		// $kpiDetail = curl_exec($api);
 		// $kpiDetail = json_decode($kpiDetail, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-team-employee-detail?id=' . $kpiId . '&&kpiTeamId=' . $kpiTeamId . '&&month=' . $month . '&&year=' . $year );
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-team-employee-detail?id=' . $kpiId . '&&kpiTeamId=' . $kpiTeamId . '&&month=' . $month . '&&year=' . $year );
+		// $kpiDetail = curl_exec($api);
+		// $kpiDetail = json_decode($kpiDetail, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-each-team-employee?kpiTeamId=' . $kpiTeamId );
 		$kpiDetail = curl_exec($api);
 		$kpiDetail = json_decode($kpiDetail, true);
 
