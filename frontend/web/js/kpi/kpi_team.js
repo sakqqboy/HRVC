@@ -43,6 +43,10 @@ function viewTabTeamKpi(kpiTeamHistoryId, kpiTeamId, tabId) {
 	var currentTabId = $("#currentTab").val();
 	//alert(currentTabId + '==' + tabId);
 	var kpiId = $("#kpiId").val();
+	var kpiTeamId = $("#kpiTeamId").val();
+	var month = $("#month").val();
+	var year = $("#year").val();
+
 	// alert(kpiId);
 	$("#tab-" + currentTabId).removeClass("view-tab-active");
 	$("#tab-" + currentTabId).addClass("view-tab");
@@ -54,14 +58,16 @@ function viewTabTeamKpi(kpiTeamHistoryId, kpiTeamId, tabId) {
 	$("#tab-" + tabId + "-black").hide();
 	$("#currentTab").val(tabId);
 	if (tabId == 1) {
-		var url = $url + 'kpi/view/kpi-team-employee';
+		var url = $url + 'kpi/view/kpi-team-employee-detail';
 		$.ajax({
 			type: "POST",
 			dataType: 'json',
 			url: url,
 			data: {
-				kpiId: kpiId
-				// kpiTeamId: kpiTeamId,
+				kpiId: kpiId,
+				kpiTeamId: kpiTeamId,
+				month: month,
+				year: year
 				// kpiHistoryId: kpiTeamHistoryId
 			},
 			success: function (data) {

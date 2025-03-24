@@ -297,7 +297,7 @@ class KpiPersonalController extends Controller
 		curl_close($api);
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
-		// throw new Exception(print_r($kpiEmployeeDetail, true));
+		// throw new Exception(print_r($kpiTeams, true));
 		return $this->render('kpi_individual_history', [
 			"role" => $role,
 			"kpiEmployeeDetail" => $kpiEmployeeDetail,

@@ -80,6 +80,9 @@ function viewTabEmployeeKpi(kpiEmployeeHistoryId, kpiEmployeeId, tabId) {
 	var currentTabId = $("#currentTab").val();
 	//alert(currentTabId + '==' + tabId);
 	var kpiId = $("#kpiId").val();
+	var kpiEmployeeId = $("#kpiEmployeeId").val();
+	var month = $("#month").val();
+	var year = $("#year").val();
 	// alert(kpiId);
 	$("#tab-" + currentTabId).removeClass("view-tab-active");
 	$("#tab-" + currentTabId).addClass("view-tab");
@@ -91,13 +94,16 @@ function viewTabEmployeeKpi(kpiEmployeeHistoryId, kpiEmployeeId, tabId) {
 	$("#tab-" + tabId + "-black").hide();
 	$("#currentTab").val(tabId);
 	if (tabId == 1) {
-		var url = $url + 'kpi/view/kpi-team-employee';
+		var url = $url + 'kpi/view/kpi-team-employee-detail';
 		$.ajax({
 			type: "POST",
 			dataType: 'json',
 			url: url,
 			data: {
-				kpiId: kpiId
+				kpiId: kpiId,
+				kpiEmployeeId: kpiEmployeeId,
+				month: month,
+				year: year
 				// kpiTeamId: kpiEmployeeId,
 				// kpiHistoryId: kpiEmployeeHistoryId
 			},
