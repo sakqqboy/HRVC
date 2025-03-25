@@ -2386,8 +2386,8 @@ input:checked+.slider:before {
 	.alert-white-4 {
 		/* transform: translate(0, 0); */
 		/* ใช้ translate เพื่อปรับตำแหน่งให้เหมาะสม */
-		position: fixed;
-		top: 120px;
+		/* position: fixed;
+		top: 120px; */
 		/* ใช้ fixed เพื่อให้แน่นอนว่าอยู่ตำแหน่งที่ต้องการ */
 		/* top: 300px; */
 	}
