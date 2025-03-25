@@ -18,9 +18,9 @@ $this->title = "INDIVIDUAL KPI";
                 "role" => $role
             ]) ?>
             <div class="alert mt-10 pim-body bg-white">
-                <div class="row">
+                <div class="row sticky-section">
                     <div class="col-lg-4 col-md-6 col-12  pr-0 pt-1">
-                        <div class="row">
+                        <div class="row ">
                             <div class="col-8">
                                 <div class="row">
                                     <div class="col-4 pim-type-tab pr-0 pl-0 rounded-top-left">
@@ -84,7 +84,7 @@ $this->title = "INDIVIDUAL KPI";
                             </div>
                         </div>
                     </div>
-                    <div class="col-7 pt-1">
+                    <div class="col-7 pt-1 ">
                         <?= $this->render('filter_list', [
                             "companies" => $companies,
                             "companyId" => $companyId,
