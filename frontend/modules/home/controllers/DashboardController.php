@@ -382,8 +382,10 @@ class DashboardController extends Controller
                                 'color' => 'transparent', // ทำให้เส้นมองไม่เห็น
                                 'lineWidth' => 0, // ไม่แสดงเส้น
                                 'marker' => [
-                                    'enabled' => false, // ไม่แสดงจุด
+                                    'enabled' => false,
+                                    'radius' => 0 // ✅ ปิด marker
                                 ],
+                                'halo' => null, // ✅ ปิด halo
                                 'showInLegend' => false, // ไม่แสดงใน Legend
                                 'enableMouseTracking' => true, // เปิดการติดตามเมาส์
                             ],
@@ -395,7 +397,9 @@ class DashboardController extends Controller
                                 'lineWidth' => 2,
                                 'marker' => [
                                     'enabled' => false,
+                                    'radius' => 0 // ✅ ปิด marker
                                 ],
+                                'halo' => null, // ✅ ปิด halo
                                 'visible' => true,
                                 'enableMouseTracking' => false, // เปิดให้แสดง tooltip เมื่อเอาเมาส์ไปชี้
                                 'showInLegend' => false,
