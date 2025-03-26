@@ -438,6 +438,7 @@ class KgiPersonalController extends Controller
 					"teamMate" =>  $selectPic,
 					"teamName" => Team::teamName($teamId),
 					"countTeamEmployee" => $countTeamEmployee,
+					"lastestUpdate" => ModelMaster::engDate($kgiEmployee["updateDateTime"], 2)
 				];
 			endforeach;
 		}
