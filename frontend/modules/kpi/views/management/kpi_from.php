@@ -722,7 +722,7 @@ select.form-select option:disabled {
                             <input type="number" class="form-control text-end" name="resultValue" id="result-update"
                                 value="<?= isset($data['result']) ? $data['result'] : '0' ?>"
                                 style="border-left: none; font-size: 22px; font-style: normal; font-weight: 600;"
-                                required oninput="updateIcon(this),updateResultValue(this)">
+                                required step="any" oninput="updateIcon(this),updateResultValue(this)">
                             <input type="hidden" name="result" id="result-cheng"
                                 value="<?= isset($data['result']) ? $data['result'] : '0' ?>">
                         </div>

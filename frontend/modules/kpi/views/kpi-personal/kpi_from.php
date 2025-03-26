@@ -56,62 +56,62 @@ if (!$nextCheckDate) {
 ?>
 
 <style>
-    input[type="number"]::-webkit-outer-spin-button,
-    input[type="number"]::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
-    input[type="number"] {
-        -moz-appearance: textfield;
-        /* สำหรับ Firefox */
-    }
+input[type="number"] {
+    -moz-appearance: textfield;
+    /* สำหรับ Firefox */
+}
 
-    /* เปลี่ยนสีข้อความของ select เมื่อเลือกแล้ว */
-    select.form-select {
-        color: var(--Helper-Text-Gray, #8A8A8A);
-    }
-
-
-    /* เมื่อเลือกแล้วให้ข้อความเป็นสี #30313D */
-    select.form-select:not([value=""]) {
-        color: <?= ($statusform == 'update') ? '#30313D' : 'var(--HRVC---Text-Black, #8A8A8A)';
-                ?>;
-    }
+/* เปลี่ยนสีข้อความของ select เมื่อเลือกแล้ว */
+select.form-select {
+    color: var(--Helper-Text-Gray, #8A8A8A);
+}
 
 
-    /* สไตล์เมื่อไม่ได้เลือก (ข้อความ placeholder) */
-    select.form-select {
-        color: var(--Helper-Text-Gray, #8A8A8A);
-        font-family: "SF Pro Display", sans-serif;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 20px;
-        text-transform: capitalize;
-    }
+/* เมื่อเลือกแล้วให้ข้อความเป็นสี #30313D */
+select.form-select:not([value=""]) {
+    color: <?=($statusform=='update') ? '#30313D': 'var(--HRVC---Text-Black, #8A8A8A)';
+    ?>;
+}
 
-    /* สไตล์เมื่อเลือกตัวเลือกแล้ว */
-    select.form-select option:checked {
-        color: var(--HRVC---Text-Black, #30313D);
-        font-family: "SF Pro Display";
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 20px;
-    }
 
-    /* เพิ่มความสวยงามเมื่อตัวเลือกถูกโฟกัส */
-    select.form-select:focus {
-        color: var(--HRVC---Text-Black, #30313D);
-        font-weight: 500;
-    }
+/* สไตล์เมื่อไม่ได้เลือก (ข้อความ placeholder) */
+select.form-select {
+    color: var(--Helper-Text-Gray, #8A8A8A);
+    font-family: "SF Pro Display", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    text-transform: capitalize;
+}
 
-    /* เมื่อ option เป็น disabled (กรณีเลือกแล้วจะไม่สามารถเลือกได้) */
-    select.form-select option:disabled {
-        color: var(--Helper-Text-Gray, #8A8A8A);
-        font-weight: 500;
-    }
+/* สไตล์เมื่อเลือกตัวเลือกแล้ว */
+select.form-select option:checked {
+    color: var(--HRVC---Text-Black, #30313D);
+    font-family: "SF Pro Display";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+}
+
+/* เพิ่มความสวยงามเมื่อตัวเลือกถูกโฟกัส */
+select.form-select:focus {
+    color: var(--HRVC---Text-Black, #30313D);
+    font-weight: 500;
+}
+
+/* เมื่อ option เป็น disabled (กรณีเลือกแล้วจะไม่สามารถเลือกได้) */
+select.form-select option:disabled {
+    color: var(--Helper-Text-Gray, #8A8A8A);
+    font-weight: 500;
+}
 </style>
 
 <!-- ลิงก์ไปยัง CSS ของ flatpickr -->
@@ -209,7 +209,7 @@ if (!$nextCheckDate) {
                             </span>
 
                             <?php if (mb_strlen($detail) > $maxLength): ?>
-                                <button type="button" id="see-more" class="see-more">See More</button>
+                            <button type="button" id="see-more" class="see-more">See More</button>
                             <?php endif; ?>
                         </p>
                     </div>
@@ -241,19 +241,19 @@ if (!$nextCheckDate) {
                                     gap: 5px;
                                     padding-left: 15px;">
                             <?php if (count($kpiBranch) >= 1) { ?>
-                                <div class="cycle-current" style="width: 43px; height: 43px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/branches.svg" alt="icon">
-                                </div>
+                            <div class="cycle-current" style="width: 43px; height: 43px;">
+                                <img src="<?= Yii::$app->homeUrl ?>image/branches.svg" alt="icon">
+                            </div>
                             <?php }
                             if (count($kpiBranch) >= 2) { ?>
-                                <div class="cycle-current" style="width: 43px; height: 43px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/branches.svg" alt="icon">
-                                </div>
+                            <div class="cycle-current" style="width: 43px; height: 43px;">
+                                <img src="<?= Yii::$app->homeUrl ?>image/branches.svg" alt="icon">
+                            </div>
                             <?php }
                             if (count($kpiBranch) >= 3) { ?>
-                                <div class="cycle-current" style="width: 43px; height: 43px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/branches.svg" alt="icon">
-                                </div>
+                            <div class="cycle-current" style="width: 43px; height: 43px;">
+                                <img src="<?= Yii::$app->homeUrl ?>image/branches.svg" alt="icon">
+                            </div>
                             <?php } ?>
                             <div class="cycle-current-white"
                                 style="width: 43px; height: 43px; color: #000; right: 15px;">
@@ -287,19 +287,19 @@ if (!$nextCheckDate) {
                             }
                             ?>
                             <?php if ($totalDepartment >= 1) { ?>
-                                <div class="cycle-current" style="width: 43px; height: 43px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
-                                </div>
+                            <div class="cycle-current" style="width: 43px; height: 43px;">
+                                <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
+                            </div>
                             <?php }
                             if ($totalDepartment >= 2) { ?>
-                                <div class="cycle-current" style="width: 43px; height: 43px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
-                                </div>
+                            <div class="cycle-current" style="width: 43px; height: 43px;">
+                                <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
+                            </div>
                             <?php }
                             if ($totalDepartment >= 3) { ?>
-                                <div class="cycle-current" style="width: 43px; height: 43px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
-                                </div>
+                            <div class="cycle-current" style="width: 43px; height: 43px;">
+                                <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
+                            </div>
                             <?php } ?>
 
                             <div class="cycle-current-white"
@@ -353,22 +353,22 @@ if (!$nextCheckDate) {
                                     <?php
                                     if ($kpi["priority"] == "A" || $kpi["priority"] == "B") {
                                     ?>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
                                     <?php
                                     }
                                     if ($kpi["priority"] == "A" || $kpi["priority"] == "C") {
                                     ?>
-                                        <i class="fa fa-star big-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star big-star" aria-hidden="true"></i>
                                     <?php
                                     }
                                     if ($kpi["priority"] == "B") {
                                     ?>
-                                        <i class="fa fa-star ml-10" aria-hidden="true"></i>
+                                    <i class="fa fa-star ml-10" aria-hidden="true"></i>
                                     <?php
                                     }
                                     if ($kpi["priority"] == "A") {
                                     ?>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
                                     <?php
                                     }
                                     ?>
@@ -376,23 +376,23 @@ if (!$nextCheckDate) {
                                 <?php
                                 if ($kpi["priority"] != '') {
                                 ?>
-                                    <div class="text-center priority-box" style="width: 52.059px; height: 52.059px;">
-                                        <div style="font-size: 14px; font-weight: 400;"><?= Yii::t('app', 'Priority') ?>
-                                        </div>
-                                        <div class="text-priority" style="font-size: 24px; font-weight: 600; bottom: 6px;">
-                                            <?= $kpi["priority"] ?>
-                                        </div>
+                                <div class="text-center priority-box" style="width: 52.059px; height: 52.059px;">
+                                    <div style="font-size: 14px; font-weight: 400;"><?= Yii::t('app', 'Priority') ?>
                                     </div>
+                                    <div class="text-priority" style="font-size: 24px; font-weight: 600; bottom: 6px;">
+                                        <?= $kpi["priority"] ?>
+                                    </div>
+                                </div>
                                 <?php
                                 } else { ?>
-                                    <div class="text-center priority-box-box-null"
-                                        style="width: 52.059px; height: 52.059px;">
-                                        <div style="font-size: 14px; font-weight: 400;"><?= Yii::t('app', 'Priority') ?>
-                                        </div>
-                                        <div class="text-priority" style="font-size: 24px; font-weight: 600; bottom: 6px;">
-                                            N/A
-                                        </div>
+                                <div class="text-center priority-box-box-null"
+                                    style="width: 52.059px; height: 52.059px;">
+                                    <div style="font-size: 14px; font-weight: 400;"><?= Yii::t('app', 'Priority') ?>
                                     </div>
+                                    <div class="text-priority" style="font-size: 24px; font-weight: 600; bottom: 6px;">
+                                        N/A
+                                    </div>
+                                </div>
                                 <?php
                                 }
                                 ?>
@@ -551,19 +551,19 @@ if (!$nextCheckDate) {
                                     gap: 5px;
                                     padding-left: 15px;">
                             <?php if (count($kpiTeam) >= 1) { ?>
-                                <div class="cycle-current" style="width: 43px; height: 43px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
-                                </div>
+                            <div class="cycle-current" style="width: 43px; height: 43px;">
+                                <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
+                            </div>
                             <?php }
                             if (count($kpiTeam) >= 2) { ?>
-                                <div class="cycle-current" style="width: 43px; height: 43px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
-                                </div>
+                            <div class="cycle-current" style="width: 43px; height: 43px;">
+                                <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
+                            </div>
                             <?php }
                             if (count($kpiTeam) >= 3) { ?>
-                                <div class="cycle-current" style="width: 43px; height: 43px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
-                                </div>
+                            <div class="cycle-current" style="width: 43px; height: 43px;">
+                                <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
+                            </div>
                             <?php } ?>
                             <div class="cycle-current-white"
                                 style="width: 43px; height: 43px; color: #000; right: 15px;">
@@ -590,19 +590,19 @@ if (!$nextCheckDate) {
                                     gap: 5px;
                                     padding-left: 15px;">
                             <?php if (count($data['kpiEmployee']) >= 1) { ?>
-                                <div class="cycle-current" style="width: 43px; height: 43px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/employees.svg" alt="icon">
-                                </div>
+                            <div class="cycle-current" style="width: 43px; height: 43px;">
+                                <img src="<?= Yii::$app->homeUrl ?>image/employees.svg" alt="icon">
+                            </div>
                             <?php }
                             if (count($data['kpiEmployee']) >= 2) { ?>
-                                <div class="cycle-current" style="width: 43px; height: 43px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/employees.svg" alt="icon">
-                                </div>
+                            <div class="cycle-current" style="width: 43px; height: 43px;">
+                                <img src="<?= Yii::$app->homeUrl ?>image/employees.svg" alt="icon">
+                            </div>
                             <?php }
                             if (count($data['kpiEmployee']) >= 3) { ?>
-                                <div class="cycle-current" style="width: 43px; height: 43px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/employees.svg" alt="icon">
-                                </div>
+                            <div class="cycle-current" style="width: 43px; height: 43px;">
+                                <img src="<?= Yii::$app->homeUrl ?>image/employees.svg" alt="icon">
+                            </div>
                             <?php } ?>
                             <div class="cycle-current-white"
                                 style="width: 43px; height: 43px; color: #000; right: 15px;">
@@ -649,9 +649,9 @@ if (!$nextCheckDate) {
                             <span class="input-group-text"
                                 style="background-color:rgb(255, 255, 255); border-left: none; padding-right: 20px; padding-left: 0px;">
                                 <?php if ($data['amountType'] == '%') { ?>
-                                    <span style="font-size: 22px; font-weight: 600;">
-                                        %
-                                    </span>
+                                <span style="font-size: 22px; font-weight: 600;">
+                                    %
+                                </span>
                                 <?php } ?>
                             </span>
                         </div>
@@ -686,7 +686,7 @@ if (!$nextCheckDate) {
                             <input type="number" class="form-control text-end" name="resultValue" id="result-update"
                                 value="<?= isset($data['result']) ? $data['result'] : '0' ?>"
                                 style="border-left: none; font-size: 22px; font-style: normal; font-weight: 600;"
-                                required oninput="updateIcon(this),updateResultValue(this)">
+                                required step="any" oninput="updateIcon(this),updateResultValue(this)">
                             <input type="hidden" name="result" id="result-cheng"
                                 value="<?= isset($data['result']) ? $data['result'] : '0' ?>">
                         </div>
@@ -712,9 +712,9 @@ if (!$nextCheckDate) {
                                 style="display: flex; gap: 12px;">
                                 <div class="mid-center" style="flex-basis: 5%;">
                                     <?php if ($data['status'] != '2') { ?>
-                                        <input type="checkbox" id="check1" name="status" value="1" class="status-checkbox"
-                                            <?= (isset($data['status']) && $data['status'] == '1' && !empty($data['nextCheckText'])) ? 'checked' : '' ?>
-                                            style="width: 22px; height: 22px;">
+                                    <input type="checkbox" id="check1" name="status" value="1" class="status-checkbox"
+                                        <?= (isset($data['status']) && $data['status'] == '1' && !empty($data['nextCheckText'])) ? 'checked' : '' ?>
+                                        style="width: 22px; height: 22px;">
                                     <?php } ?>
                                 </div>
                                 <div class="mid-center" style="flex-basis: 25%; margin-right: 20px;">
@@ -772,8 +772,8 @@ if (!$nextCheckDate) {
                                                                                             ? 'black'
                                                                                             : ($daysLeft == 'Due Pass'
                                                                                                 ? 'red'
-                                                                                                : 'orang') ?>.svg" alt="LinkedIn"
-                                        style="width: 20px; height: 20px;">
+                                                                                                : 'orang') ?>.svg"
+                                        alt="LinkedIn" style="width: 20px; height: 20px;">
                                 </div>
                                 <div class="mid-center" style="flex-basis: 25%; margin-right: 20px;">
                                     <div class="border-cicle bg-white text-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']) || $data['status'] == 2)
@@ -785,8 +785,7 @@ if (!$nextCheckDate) {
                                                     ? 'border: 0.5px solid var(--Progress-Blue, #30313D);'
                                                     : ($daysLeft == 'Due Pass'
                                                         ? 'border: 0.5px solid var(--Progress-Blue, #E05757);'
-                                                        : 'border: 0.5px solid var(--Progress-Blue, #DD7A01);') ?>  font-size: 14px; font-weight: 600;"
-                                        for="check3">
+                                                        : 'border: 0.5px solid var(--Progress-Blue, #DD7A01);') ?>  font-size: 14px; font-weight: 600;" for="check3">
                                         <?= Yii::t('app', "Due Passed") ?>
                                     </div>
                                 </div>
@@ -795,7 +794,8 @@ if (!$nextCheckDate) {
                                                             ? 'black'
                                                             : ($daysLeft == 'Due Pass'
                                                                 ? 'red'
-                                                                : 'orang') ?>" <div class="border-cicle bg-white text-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']))
+                                                                : 'orang') ?>" <div
+                                        class="border-cicle bg-white text-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']))
                                                                                                                             ? 'black'
                                                                                                                             : ($daysLeft == 'Due Pass'
                                                                                                                                 ? 'red'
@@ -863,136 +863,136 @@ if (!$nextCheckDate) {
 <?= $this->render('modal_history') ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $('[data-toggle="tooltip"]').tooltip(); // เปิดใช้งาน Tooltip
+$(document).ready(function() {
+    $('[data-toggle="tooltip"]').tooltip(); // เปิดใช้งาน Tooltip
 
-        var acType = document.getElementById('acType').value
-        let isSubmitting = false; // ป้องกัน submit ซ้ำ
-        $("#update-personal-kpi").on("beforeSubmit", function(event) {
-            if (isSubmitting) {
-                return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
-            }
-            isSubmitting = true;
-            // alert(acType);
-            if (!validateFormKpiEmployee(acType)) {
-                isSubmitting = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
-                return false;
-            }
-            return true; // ถ้า validation ผ่าน ให้ submit ฟอร์มต่อไป
-        });
+    var acType = document.getElementById('acType').value
+    let isSubmitting = false; // ป้องกัน submit ซ้ำ
+    $("#update-personal-kpi").on("beforeSubmit", function(event) {
+        if (isSubmitting) {
+            return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
+        }
+        isSubmitting = true;
+        // alert(acType);
+        if (!validateFormKpiEmployee(acType)) {
+            isSubmitting = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
+            return false;
+        }
+        return true; // ถ้า validation ผ่าน ให้ submit ฟอร์มต่อไป
     });
-    const seeMoreBtn = document.getElementById("see-more");
-    const aboutText = document.getElementById("about-text");
+});
+const seeMoreBtn = document.getElementById("see-more");
+const aboutText = document.getElementById("about-text");
 
-    <?php if (mb_strlen($detail) > 487): ?>
-        const fullText = `<?= addslashes($detail) ?>`;
-        const shortText = `<?= addslashes(mb_substr($detail, 0, 487)) ?>...`;
+<?php if (mb_strlen($detail) > 487): ?>
+const fullText = `<?= addslashes($detail) ?>`;
+const shortText = `<?= addslashes(mb_substr($detail, 0, 487)) ?>...`;
 
-        seeMoreBtn.addEventListener("click", function() {
-            if (aboutText.textContent.includes(shortText)) {
-                aboutText.innerHTML = fullText +
-                    `<button id="see-more" class="see-more">See Less</button>`;
-                document.getElementById("see-more").addEventListener("click", toggleText);
-            } else {
-                aboutText.innerHTML = shortText +
-                    `<button id="see-more" class="see-more">See More</button>`;
-                document.getElementById("see-more").addEventListener("click", toggleText);
-            }
-        });
+seeMoreBtn.addEventListener("click", function() {
+    if (aboutText.textContent.includes(shortText)) {
+        aboutText.innerHTML = fullText +
+            `<button id="see-more" class="see-more">See Less</button>`;
+        document.getElementById("see-more").addEventListener("click", toggleText);
+    } else {
+        aboutText.innerHTML = shortText +
+            `<button id="see-more" class="see-more">See More</button>`;
+        document.getElementById("see-more").addEventListener("click", toggleText);
+    }
+});
 
-        function toggleText() {
-            if (aboutText.innerHTML.includes(shortText)) {
-                aboutText.innerHTML = fullText + `<button id="see-more" class="see-more">See Less</button>`;
-            } else {
-                aboutText.innerHTML = shortText + `<button id="see-more" class="see-more">See More</button>`;
-            }
-            document.getElementById("see-more").addEventListener("click", toggleText);
-        }
-    <?php endif; ?>
+function toggleText() {
+    if (aboutText.innerHTML.includes(shortText)) {
+        aboutText.innerHTML = fullText + `<button id="see-more" class="see-more">See Less</button>`;
+    } else {
+        aboutText.innerHTML = shortText + `<button id="see-more" class="see-more">See More</button>`;
+    }
+    document.getElementById("see-more").addEventListener("click", toggleText);
+}
+<?php endif; ?>
 
-    function modalHistory(kpiId) {
-        var url = $url + 'kpi/kpi-personal/modal-history';
-        // alert(kpiId);
-        var percentage = <?= json_encode($percentage) ?>;
-        // dueBehind = dueBehind.toFixed(2); // จำกัดทศนิยมไม่เกิน 2 ตำแหน่ง
-        var result = <?= json_encode($result) ?>;
-        var sumvalue = <?= json_encode($sumvalue) ?>;
-        var targetAmount = <?= json_encode($targetAmount) ?>;
-        var kpiEmployeeId = <?= json_encode($kpiEmployeeId) ?>;
-        var kpiEmployeeHistoryId = <?= json_encode($kpiEmployeeHistoryId) ?>;
-        var month = document.getElementById("hiddenMonth").value;
-        var year = document.getElementById("hiddenYear").value;
-        var fromDateValue = document.getElementById("fromDate").value;
-        var toDateValue = document.getElementById("toDate").value;
-        var fromDate = new Date(fromDateValue);
-        var toDate = toDateValue ? new Date(toDateValue) : null; // ตรวจสอบค่าก่อนแปลง
-        // alert(kpiEmployeeId);
-        // ถ้า fromDate ไม่ถูกต้อง
-        if (isNaN(fromDate)) {
-            // ถ้า fromDate ไม่ถูกต้อง ให้ส่งค่าว่าไม่มีวันที่
-            fromDate = null;
-            formattedRange = "No date"; // กำหนดค่าเป็น "ไม่มีวันที่"
-        } else {
-            var fromDay = fromDate.getDate();
-            var fromMonth = new Intl.DateTimeFormat('en-US', {
+function modalHistory(kpiId) {
+    var url = $url + 'kpi/kpi-personal/modal-history';
+    // alert(kpiId);
+    var percentage = <?= json_encode($percentage) ?>;
+    // dueBehind = dueBehind.toFixed(2); // จำกัดทศนิยมไม่เกิน 2 ตำแหน่ง
+    var result = <?= json_encode($result) ?>;
+    var sumvalue = <?= json_encode($sumvalue) ?>;
+    var targetAmount = <?= json_encode($targetAmount) ?>;
+    var kpiEmployeeId = <?= json_encode($kpiEmployeeId) ?>;
+    var kpiEmployeeHistoryId = <?= json_encode($kpiEmployeeHistoryId) ?>;
+    var month = document.getElementById("hiddenMonth").value;
+    var year = document.getElementById("hiddenYear").value;
+    var fromDateValue = document.getElementById("fromDate").value;
+    var toDateValue = document.getElementById("toDate").value;
+    var fromDate = new Date(fromDateValue);
+    var toDate = toDateValue ? new Date(toDateValue) : null; // ตรวจสอบค่าก่อนแปลง
+    // alert(kpiEmployeeId);
+    // ถ้า fromDate ไม่ถูกต้อง
+    if (isNaN(fromDate)) {
+        // ถ้า fromDate ไม่ถูกต้อง ให้ส่งค่าว่าไม่มีวันที่
+        fromDate = null;
+        formattedRange = "No date"; // กำหนดค่าเป็น "ไม่มีวันที่"
+    } else {
+        var fromDay = fromDate.getDate();
+        var fromMonth = new Intl.DateTimeFormat('en-US', {
+            month: 'long'
+        }).format(fromDate);
+
+        // ถ้า toDate ไม่ได้มีค่า ให้แสดงเฉพาะจาก fromDate
+        var formattedRange = `${getOrdinalSuffix(fromDay)} ${fromMonth}`;
+
+        if (toDate && !isNaN(toDate)) {
+            var toDay = toDate.getDate();
+            var toMonth = new Intl.DateTimeFormat('en-US', {
                 month: 'long'
-            }).format(fromDate);
-
-            // ถ้า toDate ไม่ได้มีค่า ให้แสดงเฉพาะจาก fromDate
-            var formattedRange = `${getOrdinalSuffix(fromDay)} ${fromMonth}`;
-
-            if (toDate && !isNaN(toDate)) {
-                var toDay = toDate.getDate();
-                var toMonth = new Intl.DateTimeFormat('en-US', {
-                    month: 'long'
-                }).format(toDate);
-                formattedRange = `${getOrdinalSuffix(fromDay)} ${fromMonth} - ${getOrdinalSuffix(toDay)} ${toMonth}`;
-            }
+            }).format(toDate);
+            formattedRange = `${getOrdinalSuffix(fromDay)} ${fromMonth} - ${getOrdinalSuffix(toDay)} ${toMonth}`;
         }
-        var monthName = getMonthName(parseInt(month)); // แปลงเป็นชื่อเดือน
+    }
+    var monthName = getMonthName(parseInt(month)); // แปลงเป็นชื่อเดือน
 
-        $.ajax({
-            type: "POST",
-            dataType: "json", // ✅ รอรับ JSON
-            url: url,
-            data: {
-                percentage: percentage,
-                result: result,
-                sumvalue: sumvalue,
-                targetAmount: targetAmount,
-                kpiId: kpiId,
-                monthName: monthName,
-                month: month,
-                year: year,
-                kpiEmployeeId: kpiEmployeeId,
-                kpiEmployeeHistoryId: kpiEmployeeHistoryId,
-                formattedRange: formattedRange
-            },
-            success: function(data) {
-                var percentage = parseFloat(data.percentage);
-                var dueBehind = 100 - percentage; // ✅ คำนวณส่วนต่าง
-                $("#mont-hyear").text(data.month + " " + data.year);
-                $("#formattedRange").text(data.formattedRange);
-                $("#Target").text(data.targetAmount);
-                $("#Result").text("/" + data.result);
-                $(".percentage").text(percentage + "%");
-                var dashArrayValue = (percentage / 100) * 100;
-                $(".circle").attr("stroke-dasharray", dashArrayValue + ", 100");
-                $("#DueBehind").text(dueBehind + "%");
-                // console.log(data.historyTeam);
-                var historyData = data.history; // ดึงข้อมูล history
-                var historyList = $('#history-list-creater');
-                historyList.empty(); // เคลียร์รายการเก่า
-                var historyArray = Object.values(historyData);
+    $.ajax({
+        type: "POST",
+        dataType: "json", // ✅ รอรับ JSON
+        url: url,
+        data: {
+            percentage: percentage,
+            result: result,
+            sumvalue: sumvalue,
+            targetAmount: targetAmount,
+            kpiId: kpiId,
+            monthName: monthName,
+            month: month,
+            year: year,
+            kpiEmployeeId: kpiEmployeeId,
+            kpiEmployeeHistoryId: kpiEmployeeHistoryId,
+            formattedRange: formattedRange
+        },
+        success: function(data) {
+            var percentage = parseFloat(data.percentage);
+            var dueBehind = 100 - percentage; // ✅ คำนวณส่วนต่าง
+            $("#mont-hyear").text(data.month + " " + data.year);
+            $("#formattedRange").text(data.formattedRange);
+            $("#Target").text(data.targetAmount);
+            $("#Result").text("/" + data.result);
+            $(".percentage").text(percentage + "%");
+            var dashArrayValue = (percentage / 100) * 100;
+            $(".circle").attr("stroke-dasharray", dashArrayValue + ", 100");
+            $("#DueBehind").text(dueBehind + "%");
+            // console.log(data.historyTeam);
+            var historyData = data.history; // ดึงข้อมูล history
+            var historyList = $('#history-list-creater');
+            historyList.empty(); // เคลียร์รายการเก่า
+            var historyArray = Object.values(historyData);
 
-                var historyTeamData = data.historyTeam; // ดึงข้อมูล history
-                var historyTeamList = $('#history-list-team');
-                historyTeamList.empty(); // เคลียร์รายการเก่า
-                var historyTeamArray = Object.values(historyTeamData);
+            var historyTeamData = data.historyTeam; // ดึงข้อมูล history
+            var historyTeamList = $('#history-list-team');
+            historyTeamList.empty(); // เคลียร์รายการเก่า
+            var historyTeamArray = Object.values(historyTeamData);
 
-                if (historyArray.length > 0) {
-                    historyArray.forEach(function(item) {
-                        var listItem = `
+            if (historyArray.length > 0) {
+                historyArray.forEach(function(item) {
+                    var listItem = `
                     <li class="schedule-item mt-5" role="button" tabindex="0">
                             <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
                                 <div style="display: flex; gap: 16px; align-items: center;">
@@ -1035,23 +1035,23 @@ if (!$nextCheckDate) {
                             </div>
                         </li>
                 `;
-                        historyList.append(listItem); // เพิ่มข้อมูลลงใน ul
-                    });
-                } else {
-                    historyList.append(
-                        `<li class="schedule-item mt-5" role="button" tabindex="0">
+                    historyList.append(listItem); // เพิ่มข้อมูลลงใน ul
+                });
+            } else {
+                historyList.append(
+                    `<li class="schedule-item mt-5" role="button" tabindex="0">
                             <div class="row pt-10 pb-10"
                                 style="display: flex; justify-content: center; align-items: center; width: 100%; font-size: 18px; ">
                                     No data
                             </div>
                     </li>`
-                    )
-                }
+                )
+            }
 
 
-                if (historyTeamArray > 0) {
-                    historyTeamArray.forEach(function(item) {
-                        var listItem = `
+            if (historyTeamArray > 0) {
+                historyTeamArray.forEach(function(item) {
+                    var listItem = `
                         <li class="schedule-item mt-5" role="button" tabindex="0">
                             <div class="row" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
 
@@ -1098,24 +1098,24 @@ if (!$nextCheckDate) {
                             </div>
                         </li>
                     `;
-                        historyTeamList.append(listItem); // เพิ่มข้อมูลลงใน ul
-                    });
-                } else {
-                    historyTeamList.append(
-                        `<li class="schedule-item mt-5" role="button" tabindex="0">
+                    historyTeamList.append(listItem); // เพิ่มข้อมูลลงใน ul
+                });
+            } else {
+                historyTeamList.append(
+                    `<li class="schedule-item mt-5" role="button" tabindex="0">
                             <div class="row pt-10 pb-10"
                                 style="display: flex; justify-content: center; align-items: center; width: 100%; font-size: 18px; ">
                                     No data
                             </div>
                     </li>`
-                    )
-                }
-
-            },
-            error: function(xhr, status, error) {
-                console.log(xhr.responseText); // ดูข้อความผิดพลาดจากเซิร์ฟเวอร์
-                // alert("เกิดข้อผิดพลาดไม่มีข้อมูลในการโหลดข้อมูล");
+                )
             }
-        });
-    }
+
+        },
+        error: function(xhr, status, error) {
+            console.log(xhr.responseText); // ดูข้อความผิดพลาดจากเซิร์ฟเวอร์
+            // alert("เกิดข้อผิดพลาดไม่มีข้อมูลในการโหลดข้อมูล");
+        }
+    });
+}
 </script>
