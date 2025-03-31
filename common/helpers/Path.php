@@ -46,7 +46,7 @@ class Path
 	public static function fsModule()
 	{
 		if ($_SERVER['HTTP_HOST'] == "localhost") {
-			$url = 'http://localhost/system/index.php';
+			$url = 'http://localhost/financial/financial/';
 		} else {
 			$url = 'https://fs.tcg-hrvc-system.com/financial/index';
 		}
