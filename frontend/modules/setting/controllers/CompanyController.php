@@ -66,25 +66,25 @@ class CompanyController extends Controller
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
 		}
 		$role = UserRole::userRight();
-        if ($role == 7) {
-            $adminId = Yii::$app->user->id;
-        }
-        if ($role == 6) {
-            $gmId = Yii::$app->user->id;
-        }
-        if ($role == 5) {
-            $managerId = Yii::$app->user->id;
-        }
-        if ($role == 4) {
-            $supervisorId = Yii::$app->user->id;
-        }
-        if ($role == 3) {
-            $teamLeaderId = Yii::$app->user->id;
-        }
-        if ($role == 1 || $role == 2) {
-            $staffId = Yii::$app->user->id;
-            //return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
-        }
+		if ($role == 7) {
+			$adminId = Yii::$app->user->id;
+		}
+		if ($role == 6) {
+			$gmId = Yii::$app->user->id;
+		}
+		if ($role == 5) {
+			$managerId = Yii::$app->user->id;
+		}
+		if ($role == 4) {
+			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$teamLeaderId = Yii::$app->user->id;
+		}
+		if ($role == 1 || $role == 2) {
+			$staffId = Yii::$app->user->id;
+			//return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
+		}
 		$groupId = $group["groupId"];
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -143,7 +143,7 @@ class CompanyController extends Controller
 			endforeach;
 		}
 
-		
+
 		return $this->render('company_grid', [
 			"companies" => $data,
 			"role" => $role,
@@ -264,12 +264,8 @@ class CompanyController extends Controller
 				$totalDepartment += count($departments);
 			endforeach;
 		}
-
-
 		$totalBranch = count($branch);
 		$totalEmployee = count($employee);
-
-
 		return $this->render('company_view', [
 			"company" => $company,
 			"totalBranch" => $totalBranch,
