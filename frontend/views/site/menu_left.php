@@ -351,7 +351,7 @@ $session = Yii::$app->session;
             <div class="col-12 first-layer-manu">
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/Evaluation/evaluation_system.svg"
                     class="first-layer-icon" style="margin-top: -3px;">
-                <a href="<?= Yii::$app->homeUrl ?>evaluation/environment" class="no-underline">
+                <a class="no-underline">
                     <?= Yii::t('app', 'Evaluation Environment') ?>
                 </a>
                 <span style="float: right;">
@@ -366,21 +366,21 @@ $session = Yii::$app->session;
             <div id="evaluation-environment"
                 style="display:<?= $session->has('evaluation-environment') ? '' : 'none' ?>;">
                 <div class="col-12 second-layer-menu">
-                    <a href="<?= Yii::$app->homeUrl ?>home/dashboard" class="no-underline">
+                    <a class="no-underline">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/Evaluation/progress.svg"
                             class="first-layer-icon" style="margin-top: -3px;">
                         <?= Yii::t('app', 'Progress Dashboard') ?>
                     </a>
                 </div>
                 <div class="col-12 second-layer-menu">
-                    <a href="<?= Yii::$app->homeUrl ?>evaluation/salary/index" class="no-underline">
+                    <a class="no-underline">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/Evaluation/salary.svg"
                             class="first-layer-icon" style="margin-top: -3px;">
                         <?= Yii::t('app', 'Salary Registeration') ?>
                     </a>
                 </div>
                 <div class="col-12 second-layer-menu">
-                    <a href="" class="no-underline">
+                    <a class="no-underline">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/Evaluation/performance.svg"
                             class="first-layer-icon" style="margin-top: -3px;">
                         <?= Yii::t('app', 'Performance') ?>
@@ -400,14 +400,14 @@ $session = Yii::$app->session;
                     <div class="col-12" id="third-layer-performane"
                         style="display:<?= $session->has('third-layer-performane') ? '' : 'none' ?>;">
                         <div class="col-12 third-layer-menu">
-                            <a href="" class="no-underline">
+                            <a class="no-underline">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/Evaluation/company.svg"
                                     class="first-layer-icon" style="margin-top: -3px;">
                                 <?= Yii::t('app', 'Company') ?>
                             </a>
                         </div>
                         <div class="col-12 third-layer-menu">
-                            <a href="" class="no-underline">
+                            <a class="no-underline">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/Evaluation/self.svg"
                                     class="first-layer-icon" style="margin-top: -3px;">
                                 <?= Yii::t('app', 'Individual') ?>
@@ -452,14 +452,14 @@ $session = Yii::$app->session;
             </div>
             <div id="behavioral-indicator" style="display:<?= $session->has('behavioral-indicator') ? '' : 'none' ?>;">
                 <div class="col-12 second-layer-menu">
-                    <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="no-underline">
+                    <a class="no-underline">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/BehavioralEvaluation/evaluation_portal.svg"
                             class="first-layer-icon" style="margin-top: -3px;">
                         <?= Yii::t('app', 'Behavior Portal') ?>
                     </a>
                 </div>
                 <div class="col-12 second-layer-menu">
-                    <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="no-underline">
+                    <a class="no-underline">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/BehavioralEvaluation/registeration.svg"
                             class="first-layer-icon" style="margin-top: -3px;">
                         <?= Yii::t('app', 'Registeration & Config') ?>
@@ -486,28 +486,28 @@ $session = Yii::$app->session;
             </div>
             <div id="company-dashboard" style="display:<?= $session->has('company-dashboard') ? '' : 'none' ?>;">
                 <div class="col-12 second-layer-menu">
-                    <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="no-underline">
+                    <a class="no-underline">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/BehavioralEvaluation/template_board.svg"
                             class="first-layer-icon" style="margin-top: -3px;">
                         <?= Yii::t('app', 'Template Board') ?>
                     </a>
                 </div>
                 <div class="col-12 second-layer-menu">
-                    <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="no-underline">
+                    <a class="no-underline">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/BehavioralEvaluation/question_bank.svg"
                             class="first-layer-icon" style="margin-top: -3px;">
                         <?= Yii::t('app', 'Question Bank') ?>
                     </a>
                 </div>
                 <div class="col-12 second-layer-menu">
-                    <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="no-underline">
+                    <a class="no-underline">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/BehavioralEvaluation/my_360.svg"
                             class="first-layer-icon" style="margin-top: -3px;">
                         <?= Yii::t('app', 'My 360') ?>
                     </a>
                 </div>
                 <div class="col-12 second-layer-menu">
-                    <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="no-underline">
+                    <a class="no-underline">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/BehavioralEvaluation/my_portal.svg"
                             class="first-layer-icon" style="margin-top: -3px;">
                         <?= Yii::t('app', 'My Portal') ?>

@@ -17,7 +17,7 @@ $this->title = "KGI";
             "role" => $role
         ]) ?>
         <div class="alert mt-10 pim-body bg-white">
-            <div class="row">
+            <div class="row sticky-section">
                 <div class="col-lg-4 col-md-6 col-12  pr-0 pt-1">
                     <div class="row">
                         <div class="col-8">

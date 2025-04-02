@@ -729,7 +729,7 @@ select.form-select option:disabled {
                             <input type="number" class="form-control text-end" name="result" id="result-update"
                                 value="<?= isset($data['result']) ? $data['result'] : '' ?>"
                                 style="border-left: none; font-size: 22px; font-style: normal; font-weight: 600;"
-                                required oninput="updateIcon(this);">
+                                required step="any" oninput="updateIcon(this);">
                             <input type="hidden" id="auto-result" value="" name="autoUpdate">
                             <input type="hidden" id="previous-result"
                                 value="<?= isset($data['result']) ? $data['result'] : '' ?>">

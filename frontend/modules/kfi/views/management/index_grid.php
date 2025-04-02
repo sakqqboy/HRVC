@@ -16,7 +16,7 @@ $this->title = Yii::t('app', 'KFI Grid View');
             "role" => $role
         ]) ?>
         <div class="alert  mt-10 pim-body bg-white">
-            <div class="row">
+            <div class="row sticky-section">
                 <div class="col-lg-4 col-md-6 col-12 pt-2 key1">
                     <div class="row">
                         <div class="col-4">
