@@ -60,6 +60,7 @@ class SiteController extends Controller
     /**
      * {@inheritdoc}
      */
+
     public function actions()
     {
         return [
@@ -86,6 +87,10 @@ class SiteController extends Controller
             //return $this->redirect(Yii::$app->homeUrl . 'home/dashboard');
             return $this->redirect(Yii::$app->homeUrl . 'home/default/dashboard');
         }
+    }
+    public function actionTestGrid()
+    {
+        return $this->render('grid');
     }
     public function actionDashboard()
     {
