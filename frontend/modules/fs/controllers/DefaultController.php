@@ -2,6 +2,7 @@
 
 namespace frontend\modules\fs\controllers;
 
+use common\models\ModelMaster;
 use yii\web\Controller;
 
 /**
@@ -17,4 +18,12 @@ class DefaultController extends Controller
     {
         return $this->render('index');
     }
+
+    public function actionCompanyId()
+	{
+		$companyId=$_POST["companyId"];
+		$res["companyId"]=ModelMaster::encodeParams(["companyId"=>$companyId]);
+		return json_encode($res);
+	}
+
 }
