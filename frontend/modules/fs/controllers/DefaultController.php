@@ -36,7 +36,7 @@ class DefaultController extends Controller
     //         "companyId" => ModelMaster::encodeParams(["companyId" => $companyId])
     //     ];
     // }
-    public function actionCompanyId($companyId)
+    public function actionMenuCompanyId($companyId)
 {
     Yii::$app->response->format = Response::FORMAT_JSON; // ✅ กำหนด Format เป็น JSON
 
