@@ -3,7 +3,9 @@
 namespace frontend\modules\fs\controllers;
 
 use common\models\ModelMaster;
+use Yii;
 use yii\web\Controller;
+use yii\web\Response;
 
 /**
  * Default controller for the `fs` module
@@ -19,11 +21,20 @@ class DefaultController extends Controller
         return $this->render('index');
     }
 
-    public function actionCompanyId()
-	{
-		$companyId=$_POST["companyId"];
-		$res["companyId"]=ModelMaster::encodeParams(["companyId"=>$companyId]);
-		return json_encode($res);
-	}
+    public function actionCompanyId($companyId)
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        // รองรับทั้ง GET และ POST
+        // $companyId = Yii::$app->request->post("companyId", Yii::$app->request->get("companyId"));
+
+        if (!$companyId) {
+            return ["error" => "Missing companyId"];
+        }
+
+        return [
+            "companyId" => ModelMaster::encodeParams(["companyId" => $companyId])
+        ];
+    }
 
 }
