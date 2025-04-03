@@ -46,8 +46,14 @@ class DefaultController extends Controller
         if ($menu == 'branch') {
             return $this->redirect(Path::frontendUrl() . 'setting/branch/create/' . ModelMaster::encodeParams(["companyId" => '']));
         }
-        if ($menu == 'company') {
-            //return $this->asJson(["error" => "Missing companyId"]); // ✅ ใช้ `asJson()` เพื่อป้องกัน Error
+        if ($menu == 'department') {
+            return $this->redirect(Path::frontendUrl() . 'setting/department/create/' . ModelMaster::encodeParams(["companyId" => $id]));
+        }
+        if ($menu == 'team') {
+            return $this->redirect(Path::frontendUrl() . 'setting/team/create/' . ModelMaster::encodeParams(["companyId" => $id]));
+        }
+        if ($menu == 'employee') {
+            return $this->redirect(Path::frontendUrl() . 'setting/employee/index/' . ModelMaster::encodeParams(["companyId" => $id]));
         }
     }
 }
