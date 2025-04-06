@@ -51,8 +51,8 @@ $this->title = 'New Company';
                             <div class="col-md-6">
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span><label class="name-text-update"
-                                        for="groupName">Registered Group Name</label>
-                                    <input type="text" class="form-control mt-12" name="groupName"
+                                        for="groupName">Registered Company Name</label>
+                                    <input type="text" class="form-control mt-12" id="colFormLabel" name="companyName"
                                         placeholder="Write the name of Group" required>
                                 </div>
                                 <div class="form-group mb-30">
@@ -61,12 +61,12 @@ $this->title = 'New Company';
                                     <input type="text" class="form-control mt-12" name="displayName"
                                         placeholder="The name you want to show (example,. Google)" required>
                                 </div>
-                                <div class="form-group mb-30">
+                                <!-- <div class="form-group mb-30">
                                     <span class="text-danger">* </span><label class="name-text-update"
                                         for="tagLine">Slogan/Tagline</label>
                                     <input type="text" class="form-control mt-12" name="tagLine"
                                         placeholder="Write the Tagline of the group" required>
-                                </div>
+                                </div> -->
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span> <label class="name-text-update"
                                         for="founded">Founded</label>
@@ -88,7 +88,7 @@ $this->title = 'New Company';
                                 </div>
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span> <label class="name-text-update"
-                                        for="director">Group Director </label>
+                                        for="director">Country in Operation </label>
                                     <input type="text" class="form-control mt-12" name="director"
                                         placeholder="Write the name of Group" required>
                                 </div>
@@ -97,22 +97,61 @@ $this->title = 'New Company';
 
                             <!-- Right Column -->
                             <div class="col-md-6">
-                                <div class="form-group mb-30">
+                                <!-- <div class="form-group mb-30">
                                     <span class="text-danger">* </span> <label class="name-text-update"
                                         for="email">Group
                                         Email </label>
                                     <input type="email" class="form-control mt-12" name="email"
                                         placeholder="Write the email" required>
-                                </div>
+                                </div> -->
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span> <label class="name-text-update" for="phone">
                                         Contact/Phone Number </label>
                                     <input type="text" class="form-control mt-12" name="phone"
-                                        placeholder="Write the phone number" required pattern="[0-9+\-]+"
+                                        placeholder="Write the phonenumber" required pattern="[0-9+\-]+"
                                         title="กรุณากรอกเฉพาะตัวเลข, + และ -"
                                         oninput="this.value = this.value.replace(/[^0-9+\-]/g, '');">
                                 </div>
+                                <div class="form-group mb-30">
+                                    <span class="text-danger">* </span> <label class="name-text-update"
+                                        for="email">Company’s General Email</label>
+                                    <input type="email" class="form-control mt-12" name="email"
+                                        placeholder="e.g., jp_paris_cs@tokyoconsultinggroup.com" required>
+                                </div>
+                                <div class="form-group mb-30">
+                                    <span class="text-danger">* </span> <label class="name-text-update"
+                                        for="email">Company’s Address</label>
+                                    <input type="email" class="form-control mt-12" name="email"
+                                        placeholder="Please input the address here" required>
+                                </div>
 
+                                <div class="form-group mb-30">
+                                    <span class="text-danger">* </span> <label class="name-text-update" for="email">Head
+                                        of Company</label>
+                                    <!-- <input type="email" class="form-control mt-12" name="email"
+                                        placeholder="Select from employees" required> -->
+                                    <div class="input-group">
+                                        <span class="input-group-text mt-12"
+                                            style="background-color: #C3C3C3; border-right: none;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/employee-black.svg" alt="Founded"
+                                                style="width: 20px; height: 20px;">
+                                        </span>
+                                        <input type="text" class="form-control mt-12" name="founded"
+                                            placeholder="Select from employees" readonly
+                                            style="border-left: none; background-color: #C3C3C3; color: #000;">
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-30">
+                                    <span class="text-danger"> <img src="<?= Yii::$app->homeUrl ?>image/think-ideit.svg"
+                                            alt="Founded" style="width: 20px; height: 20px;"> </span> <label
+                                        class="name-text-update" for="email">Hints</label>
+                                    <div class="input-group">
+                                        <text>To assign a company head, first add employees under the company. Then, go
+                                            to the Company Details page, click Edit, and select a head from the
+                                            available employees in the dropdown. Save the changes to confirm.</text>
+                                    </div>
+                                </div>
 
                             </div>
                         </div>
