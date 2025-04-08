@@ -30,12 +30,14 @@ $this->title = 'New Company';
     </div>
     <div class="row">
         <div class="col-lg-4 col-md-6 col-12 all-avatar">
-            <div class="col-10 avatar-upload">
+            <div class="col-10 avatar-upload" style="padding-top: 100px;">
                 <div class="avatar-preview" id="imagePreview" style="background-color: white;">
-                    <label for="imageUpload" class="upload-label">
+                    <label for="imageUpload" class="upload-label" style="cursor: pointer;">
                         <img src="<?= Yii::$app->homeUrl ?>image/upload-img.svg" alt="Upload Icon">
                         <span>Upload</span>
                     </label>
+                    <input type="file" name="image" id="imageUpload" class="upload up upload-checklist"
+                        style="display: none;" />
                 </div>
             </div>
         </div>

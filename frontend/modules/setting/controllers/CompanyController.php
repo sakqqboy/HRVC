@@ -177,6 +177,9 @@ class CompanyController extends Controller
 	}
 	public function actionSaveCreateCompany()
 	{
+
+				// throw new Exception("POST DATA: " . print_r($_POST, true));
+
 		if (isset($_POST["companyName"]) && trim($_POST["companyName"]) != '') {
 			$company = new Company();
 			$company->companyName = $_POST["companyName"];
@@ -302,6 +305,8 @@ class CompanyController extends Controller
 		$companyCountry = json_decode($resultCountryDetail, true);
 
 		curl_close($api);
+		 
+		// throw new Exception("Company: " . print_r($company, true));
 
 		return $this->render('update_company', [
 			"countries" => $countries,
@@ -312,7 +317,7 @@ class CompanyController extends Controller
 	}
 	public function actionSaveUpdateCompany()
 	{
-		// throw new Exception("POST DATA: " . print_r($_POST, true));
+		// throw new Exception("POST DATA: " . print_r($_POST["director"], true));
 
 		if (isset($_POST["companyId"])) {
 			$companyId = $_POST["companyId"] - 543;
