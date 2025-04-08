@@ -312,11 +312,14 @@ class CompanyController extends Controller
 	}
 	public function actionSaveUpdateCompany()
 	{
+		// throw new Exception("POST DATA: " . print_r($_POST, true));
+
 		if (isset($_POST["companyId"])) {
 			$companyId = $_POST["companyId"] - 543;
 			$company = Company::find()->where(["companyId" => $companyId])->one();
 			$oldBanner = $company->banner;
 			$oldImage = $company->picture;
+			// throw new Exception("POST DATA: " . print_r($oldImage, true));
 			$company->companyName = $_POST["companyName"];
 			// $company->tagLine = $_POST["tagLine"];
 			$company->displayName = $_POST["displayName"];
@@ -361,18 +364,25 @@ class CompanyController extends Controller
 				if (!file_exists($path)) {
 					mkdir($path, 0777, true);
 				}
-				$oldPathBanner = Path::getHost() . $oldImage;
-				if (file_exists($oldPathBanner)) {
-					unlink($oldPathBanner);
+
+				// เช็คไฟล์เก่าก่อนลบ
+				if (!empty($oldImage)) {
+					$oldPathBanner = Path::getHost() . $oldImage;
+					if (file_exists($oldPathBanner) && is_file($oldPathBanner)) {
+						unlink($oldPathBanner);
+					}
 				}
+
 				$file = $fileImage->name;
 				$filenameArray = explode('.', $file);
-				$countArrayFile = count($filenameArray);
-				$fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
+				$fileExt = end($filenameArray);
+				$fileName = Yii::$app->security->generateRandomString(10) . '.' . $fileExt;
 				$pathSave = $path . $fileName;
+
 				$fileImage->saveAs($pathSave);
 				$company->picture = 'images/company/profile/' . $fileName;
 			}
+
 			if ($company->save(false)) {
 				return $this->redirect(Yii::$app->homeUrl . 'setting/company/company-view/' . ModelMaster::encodeParams(["companyId" => $companyId]));
 			}

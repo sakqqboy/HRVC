@@ -13,7 +13,7 @@ $this->title = 'New Company';
 	'action' => Yii::$app->homeUrl . 'setting/company/save-create-company'
 
 ]); ?>
-<div class="contrainer-body" style="background-color:white;padding-bottom:20px;">
+<div class="contrainer-body" style="background-color:white;">
     <div class="col-12" id="imagePreviewBanner" style="height: 180px;background-color:gray;">
     </div>
     <div class="col-12 edit-update text-end" style="padding-right: 30px;">
