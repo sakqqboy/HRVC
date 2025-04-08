@@ -19,12 +19,12 @@ $this->title = 'Update Group';
 <div class="company-group-edit">
     <div class="contrainer-body">
         <div class="col-12 banner-uploade" id="imagePreviewBanner">
-            <!-- <?php
+            <?php
 		if ($group["banner"] != null) { ?>
-        <img src="<?= Yii::$app->homeUrl . $group['banner'] ?>" class="sad-1" id="old-banner">
-        <?php
+            <img src="<?= Yii::$app->homeUrl . $group['banner'] ?>" class="sad-1" id="old-banner">
+            <?php
 		}
-		?> -->
+		?>
         </div>
 
         <div class="row mb-100">
@@ -32,8 +32,17 @@ $this->title = 'Update Group';
                 <div class="col-10 mb-15 avatar-upload" style="margin-left:36px;">
                     <div class="avatar-preview" id="imagePreview" style="background-color: white;">
                         <label for="imageUpload" class="upload-label" style="cursor: pointer;">
+                            <?php
+                            if ($group["picture"] != null) { ?>
+                            <img src="<?= Yii::$app->homeUrl . $group['picture'] ?>" class="company-group-picture"
+                                id="old-image">
+                            <?php
+                                } else { ?>
                             <img src="<?= Yii::$app->homeUrl ?>image/upload-img.svg" alt="Upload Icon">
                             <span>Upload</span>
+                            <?php
+                                }
+                            ?>
                         </label>
                         <input type="file" name="image" id="imageUpload" class="upload up upload-checklist"
                             style="display: none;" />
