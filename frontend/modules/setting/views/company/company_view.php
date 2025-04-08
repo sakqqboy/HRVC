@@ -18,7 +18,7 @@ $this->title = 'company profile';
 		?>
     </div>
 
-    <div class="row">
+    <div class="row pt-50">
         <div class="col-lg-2 col-md-5 col-12" style="margin-top:-100px;">
             <div class="avatar-upload" style="margin-left:20px;">
                 <div class="avatar-preview">
