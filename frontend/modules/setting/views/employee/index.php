@@ -78,7 +78,7 @@ $this->title = 'Employee';
 					if (isset($employees) && count($employees) > 0) {
 						foreach ($employees as $employee) :
 					?>
-							<div class="col-lg-3 col-md-4 col-6" id="employee-<?= $employee['employeeId'] ?>">
+							<div class="col-lg-2 col-md-6 col-6" id="employee-<?= $employee['employeeId'] ?>">
 								<div class="alert alert-employee pr-5 pl-5">
 									<div class="row" style="margin-top: -13px;">
 										<div class="col-lg-10 col-md-10 col-10 text-end">
