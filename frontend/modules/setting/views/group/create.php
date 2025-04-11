@@ -12,6 +12,14 @@ $this->title = 'Create Group';
 	],
 
 ]); ?>
+<!-- 1. Flatpickr CSS + JS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<!-- 2. HTML Input -->
+<input type="text" id="founded" name="founded" class="form-control mt-12" placeholder="Select date" required>
+
+
 <link rel="stylesheet" href="<?= Yii::$app->homeUrl ?>assets/bootstrap4/css/bootstrap.min.css">
 <div class="company-group-edit">
     <div class="contrainer-body">
@@ -106,8 +114,8 @@ $this->title = 'Create Group';
                                             <img src="<?= Yii::$app->homeUrl ?>image/calendar-blue.svg" alt="Founded"
                                                 style="width: 20px; height: 20px;">
                                         </span>
-                                        <input type="text" style="border-left: none;" class="form-control mt-12"
-                                            name="founded" required>
+                                        <input type="text" id="founded" name="founded" class="form-control mt-12"
+                                            placeholder="Select date" required>
                                     </div>
                                 </div>
                                 <div class="form-group mb-30">
@@ -131,11 +139,26 @@ $this->title = 'Create Group';
                                 </div>
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span> <label class="name-text-update"
-                                        for="country"><?= Yii::t('app', 'Country') ?></label>
-                                    <select class="form-control mt-12" name="country"
-                                        placeholder="<?= Yii::t('app', 'Write the phone number') ?>" required>
+                                        for="director"><?= Yii::t('app', 'Website Link ') ?></label>
+                                    <div class="input-group">
+                                        <span class="input-group-text mt-12"
+                                            style="background-color: white; border-right: none;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/web-image.svg" alt="Website"
+                                                style="width: 20px; height: 20px;">
+                                        </span>
+                                        <select class="form-control mt-12" style="border-left: none;" name="country"
+                                            required>
+                                            <option value="" disabled selected hidden style="color: var(--Helper-Text, #8A8A8A);
+                                                ">
+                                                <?= Yii::t('app', 'e.g., ASEAN, North America, Europe') ?>
+                                            </option>
+                                            <?php foreach ($countries as $countryId => $country) : ?>
+                                            <option value="<?= $countryId ?>"><?= $country ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
 
-                                    </select>
+
+                                    </div>
                                 </div>
                             </div>
 
@@ -292,3 +315,39 @@ $this->title = 'Create Group';
     </div>
 </div>
 <?php ActiveForm::end(); ?>
+
+<script>
+function getOrdinalSuffix(day) {
+    if (day > 3 && day < 21) return 'th';
+    switch (day % 10) {
+        case 1:
+            return 'st';
+        case 2:
+            return 'nd';
+        case 3:
+            return 'rd';
+        default:
+            return 'th';
+    }
+}
+
+flatpickr("#founded", {
+    dateFormat: "Y-m-d", // format ที่ส่งไป server
+    altInput: true,
+    altFormat: "F Y", // ชั่วคราว จะเปลี่ยนทีหลัง
+    onChange: function(selectedDates, dateStr, instance) {
+        if (selectedDates.length > 0) {
+            const d = selectedDates[0];
+            const day = d.getDate();
+            const month = d.toLocaleString('default', {
+                month: 'long'
+            });
+            const year = d.getFullYear();
+            const suffix = getOrdinalSuffix(day);
+
+            const formatted = `${suffix} ${month} ${year}`;
+            instance.altInput.value = formatted;
+        }
+    }
+});
+</script>

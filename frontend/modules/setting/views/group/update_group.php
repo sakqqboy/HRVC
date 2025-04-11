@@ -14,6 +14,13 @@ $this->title = 'Update Group';
 	'action' => Yii::$app->homeUrl . 'setting/group/save-update-group'
 
 ]); ?>
+<!-- 1. Flatpickr CSS + JS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<!-- 2. HTML Input -->
+<input type="text" id="founded" name="founded" class="form-control mt-12" placeholder="Select date" required>
+
 
 <link rel="stylesheet" href="<?= Yii::$app->homeUrl ?>assets/bootstrap4/css/bootstrap.min.css">
 <div class="company-group-edit">
@@ -132,8 +139,10 @@ $this->title = 'Update Group';
                                             <img src="<?= Yii::$app->homeUrl ?>image/calendar-blue.svg" alt="Founded"
                                                 style="width: 20px; height: 20px;">
                                         </span>
-                                        <input type="text" style="border-left: none;" class="form-control mt-12"
-                                            name="founded" value="<?= $group['founded'] ?>" required>
+                                        <!-- <input type="text" style="border-left: none;" class="form-control mt-12"
+                                            name="founded" required> -->
+                                        <input type="text" id="founded" name="founded" class="form-control mt-12"
+                                            placeholder="Select date" value="<?= $group['founded'] ?>" required>
                                     </div>
                                 </div>
                                 <div class="form-group mb-30">
@@ -327,3 +336,40 @@ $this->title = 'Update Group';
     </div>
 </div>
 <?php ActiveForm::end(); ?>
+
+
+<script>
+function getOrdinalSuffix(day) {
+    if (day > 3 && day < 21) return 'th';
+    switch (day % 10) {
+        case 1:
+            return 'st';
+        case 2:
+            return 'nd';
+        case 3:
+            return 'rd';
+        default:
+            return 'th';
+    }
+}
+
+flatpickr("#founded", {
+    dateFormat: "Y-m-d", // format ที่ส่งไป server
+    altInput: true,
+    altFormat: "F Y", // ชั่วคราว จะเปลี่ยนทีหลัง
+    onChange: function(selectedDates, dateStr, instance) {
+        if (selectedDates.length > 0) {
+            const d = selectedDates[0];
+            const day = d.getDate();
+            const month = d.toLocaleString('default', {
+                month: 'long'
+            });
+            const year = d.getFullYear();
+            const suffix = getOrdinalSuffix(day);
+
+            const formatted = `${suffix} ${month} ${year}`;
+            instance.altInput.value = formatted;
+        }
+    }
+});
+</script>
