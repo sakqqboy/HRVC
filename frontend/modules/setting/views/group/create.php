@@ -12,7 +12,6 @@ $this->title = 'Create Group';
 	],
 
 ]); ?>
-
 <link rel="stylesheet" href="<?= Yii::$app->homeUrl ?>assets/bootstrap4/css/bootstrap.min.css">
 <div class="company-group-edit">
     <div class="contrainer-body">
@@ -22,25 +21,49 @@ $this->title = 'Create Group';
 
         <div class="row mb-100">
             <div class="col-12" style="margin-top:-50px; display: flex;">
-                <div class="col-10 mb-15 avatar-upload" style="margin-left:36px;">
+                <!-- <div class="col-10 mb-15 avatar-upload" style="margin-left:36px;">
                     <div class="avatar-preview" id="imagePreview" style="background-color: white;">
                         <label for="imageUpload" class="upload-label" style="cursor: pointer;">
-
-                            <img src="<?= Yii::$app->homeUrl ?>image/upload-img.svg" alt="Upload Icon">
-                            <span>Upload</span>
-
+                            <img src="<?= Yii::$app->homeUrl . 'image/upload-iconimg.svg' ?>"> <br>
+                            <span><?= Yii::t('app', 'Upload') ?></span>
+                            <span>or Drop Branch Picture here</span>
                         </label>
                         <input type="file" name="image" id="imageUpload" class="upload up upload-checklist"
                             style="display: none;" />
                     </div>
+                </div> -->
+
+                <div class="col-10 mb-15 avatar-upload" style="margin-left:36px;">
+                    <div class="avatar-preview" id="imagePreview" style="
+                            background-color: white;
+                            fill: #FFF;
+                            stroke-width: 1px;
+                            stroke: var(--Primary-Blue---HRVC, #2580D3);
+                            border-radius: 100%;
+                            padding: 20px;
+                            text-align: center;
+                            cursor: pointer;
+                        ">
+                        <label for="imageUpload" class="upload-label" style="cursor: pointer; display: block;">
+                            <img src="<?= Yii::$app->homeUrl . 'image/upload-iconimg.svg' ?>"
+                                style="width: 50px; height: auto;" alt="Upload Icon"> <br><br>
+                            <span style=""><?= Yii::t('app', 'Upload') ?><span style="font-size: 13px; color: #666;"> or
+                                    Drop </span></span><br>
+                            <span style="font-size: 13px; color: #666;">Branch Picture here</span>
+
+                        </label>
+                        <input type=" file" name="image" id="imageUpload" class="upload up upload-checklist"
+                            style="display: none;" />
+                    </div>
                 </div>
+
 
                 <div class="col-2 mb-15" style="display: flex; justify-content: center;  align-items: center; ">
                     <!-- ลบระยะห่างระหว่างรูปและรายละเอียด -->
                     <span class="fileUpload btn" style="padding: 0;">
                         <div id="upload" class="uplode-btn-group">
                             <img src="<?= Yii::$app->homeUrl ?>image/upload-white.svg" alt="Upload Icon">
-                            Update
+                            <?= Yii::t('app', 'Update') ?>
                         </div>
                         <input type="file" name="imageUploadBanner" id="imageUploadBanner"
                             class="upload up upload-checklist" id="up" />
@@ -57,25 +80,26 @@ $this->title = 'Create Group';
                             <div class="col-md-6">
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span><label class="name-text-update"
-                                        for="groupName">Registered Group Name</label>
+                                        for="groupName"><?= Yii::t('app', 'Registered Group Name') ?></label>
                                     <input type="text" class="form-control mt-12" name="groupName"
-                                        placeholder="Write the name of Group" required>
+                                        placeholder="<?= Yii::t('app', 'Write the name of Group') ?>" required>
                                 </div>
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span> <label class="name-text-update"
-                                        for="groupName">Display Name/Brand Name</label>
+                                        for="groupName"><?= Yii::t('app', 'Display Name/Brand Name') ?></label>
                                     <input type="text" class="form-control mt-12" name="displayName"
-                                        placeholder="The name you want to show (example,. Google)" required>
+                                        placeholder="<?= Yii::t('app', 'The name you want to show (example,. Google)') ?>"
+                                        required>
                                 </div>
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span><label class="name-text-update"
-                                        for="tagLine">Slogan/Tagline</label>
+                                        for="tagLine"><?= Yii::t('app', 'Slogan/Tagline') ?></label>
                                     <input type="text" class="form-control mt-12" name="tagLine"
-                                        placeholder="Write the Tagline of the group" required>
+                                        placeholder="<?= Yii::t('app', 'Write the Tagline of the group') ?>" required>
                                 </div>
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span> <label class="name-text-update"
-                                        for="founded">Founded</label>
+                                        for="founded"><?= Yii::t('app', 'Founded') ?></label>
                                     <div class="input-group">
                                         <span class="input-group-text mt-12"
                                             style="background-color: #BEDAFF; border-right: none;">
@@ -83,33 +107,33 @@ $this->title = 'Create Group';
                                                 style="width: 20px; height: 20px;">
                                         </span>
                                         <input type="text" style="border-left: none;" class="form-control mt-12"
-                                            name="founded" placeholder="" required>
+                                            name="founded" required>
                                     </div>
                                 </div>
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span><label class="name-text-update"
-                                        for="industry">Industry</label>
+                                        for="industry"><?= Yii::t('app', 'Industry') ?></label>
                                     <input type="text" class="form-control mt-12" name="industries"
-                                        placeholder="Write the industry name" required>
+                                        placeholder="<?= Yii::t('app', 'Write the industry name') ?>" required>
                                 </div>
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span> <label class="name-text-update"
-                                        for="director">Group
-                                        Director </label>
-                                    <input type="text" class="form-control mt-12" name="director" placeholder="Write
-                                    the name of Group" required>
+                                        for="director"><?= Yii::t('app', 'Group Director') ?>
+                                    </label>
+                                    <input type="text" class="form-control mt-12" name="director"
+                                        placeholder="<?= Yii::t('app', 'Write the name of Group') ?>" required>
                                 </div>
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span> <label class="name-text-update"
-                                        for="addressLine">Address Line</label>
+                                        for="addressLine"><?= Yii::t('app', 'Address Line') ?></label>
                                     <input type="text" class="form-control mt-12" name="location"
-                                        placeholder="Write the email" required>
+                                        placeholder="<?= Yii::t('app', 'Write the email') ?>" required>
                                 </div>
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span> <label class="name-text-update"
-                                        for="country">Country</label>
+                                        for="country"><?= Yii::t('app', 'Country') ?></label>
                                     <select class="form-control mt-12" name="country"
-                                        placeholder="Write the phone number" required>
+                                        placeholder="<?= Yii::t('app', 'Write the phone number') ?>" required>
 
                                     </select>
                                 </div>
@@ -119,23 +143,23 @@ $this->title = 'Create Group';
                             <div class="col-md-6">
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span> <label class="name-text-update"
-                                        for="email">Group
-                                        Email </label>
+                                        for="email"><?= Yii::t('app', 'Group Email') ?>
+                                    </label>
                                     <input type="email" class="form-control mt-12" name="email"
-                                        placeholder="Write the email" required>
+                                        placeholder="<?= Yii::t('app', 'Write the email') ?>" required>
                                 </div>
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span> <label class="name-text-update" for="phone">
-                                        Contact/Phone Number </label>
+                                        <?= Yii::t('app', 'Contact/Phone Number') ?> </label>
                                     <input type="text" class="form-control mt-12" name="phone"
-                                        placeholder="Write the phone number" required pattern="[0-9+\-]+"
-                                        title="กรุณากรอกเฉพาะตัวเลข, + และ -"
+                                        placeholder="<?= Yii::t('app', 'Write the phone number') ?>" required
+                                        pattern="[0-9+\-]+" title="กรุณากรอกเฉพาะตัวเลข, + และ -"
                                         oninput="this.value = this.value.replace(/[^0-9+\-]/g, '');">
                                 </div>
 
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span><label class="name-text-update"
-                                        for="linkedin">LinkedIn Link</label>
+                                        for="linkedin"><?= Yii::t('app', 'LinkedIn Link') ?></label>
                                     <div class="input-group">
                                         <span class="input-group-text mt-12"
                                             style="background-color: white; border-right: none;">
@@ -143,14 +167,15 @@ $this->title = 'Create Group';
                                                 style="width: 20px; height: 20px;">
                                         </span>
                                         <input type="text" style="border-left: none;" class="form-control mt-12"
-                                            name="linkedin" placeholder="Copy & Paste the Group LinkedIn Link here"
+                                            name="linkedin"
+                                            placeholder="<?= Yii::t('app', 'Copy & Paste the Group LinkedIn Link here') ?>"
                                             required>
                                     </div>
                                 </div>
 
                                 <div class="form-group mb-30">
-                                    <span class="text-danger">* </span><label class="name-text-update" for="twitter">X
-                                        (Twitter) Link</label>
+                                    <span class="text-danger">* </span><label class="name-text-update" for="twitter">
+                                        <?= Yii::t('app', 'X (Twitter) Link') ?></label>
                                     <div class="input-group">
                                         <span class="input-group-text mt-12"
                                             style="background-color: white; border-right: none;">
@@ -158,14 +183,15 @@ $this->title = 'Create Group';
                                                 style="width: 20px; height: 20px;">
                                         </span>
                                         <input type="text" style="border-left: none;" class="form-control mt-12"
-                                            name="twitter" placeholder="Copy & Paste the Group X (Twitter) Link here"
+                                            name="twitter"
+                                            placeholder="<?= Yii::t('app', 'Copy & Paste the Group X (Twitter) Link here') ?>"
                                             required>
                                     </div>
                                 </div>
 
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span><label class="name-text-update"
-                                        for="facebook">Facebook Link</label>
+                                        for="facebook"><?= Yii::t('app', 'Facebook Link') ?></label>
                                     <div class="input-group">
                                         <span class="input-group-text mt-12"
                                             style="background-color: white; border-right: none;">
@@ -173,14 +199,15 @@ $this->title = 'Create Group';
                                                 style="width: 20px; height: 20px;">
                                         </span>
                                         <input type="text" style="border-left: none;" class="form-control mt-12"
-                                            name="facebook" placeholder="Copy & Paste the Group Facebook Link here"
+                                            name="facebook"
+                                            placeholder="<?= Yii::t('app', 'Copy & Paste the Group Facebook Link here') ?>"
                                             required>
                                     </div>
                                 </div>
 
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span><label class="name-text-update"
-                                        for="instagram">Instagram Link</label>
+                                        for="instagram"><?= Yii::t('app', 'Instagram Link') ?></label>
                                     <div class="input-group">
                                         <span class="input-group-text mt-12"
                                             style="background-color: white; border-right: none;">
@@ -188,14 +215,16 @@ $this->title = 'Create Group';
                                                 style="width: 20px; height: 20px;">
                                         </span>
                                         <input type="text" style="border-left: none;" class="form-control mt-12"
-                                            name="instagram" placeholder="Copy & Paste the Group Instagram Link here"
+                                            name="instagram"
+                                            placeholder="<?= Yii::t('app', 'Copy & Paste the Group Instagram Link here') ?>"
                                             required>
                                     </div>
                                 </div>
 
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span>
-                                    <label class="name-text-update" for="youtube">YouTube Link</label>
+                                    <label class="name-text-update" for="youtube"><?= Yii::t('app', 'YouTube Link') ?>
+                                    </label>
                                     <div class="input-group">
                                         <span class="input-group-text mt-12"
                                             style="background-color: white; border-right: none;">
@@ -203,14 +232,15 @@ $this->title = 'Create Group';
                                                 style="width: 20px; height: 20px;">
                                         </span>
                                         <input type="text" style="border-left: none;" class="form-control mt-12"
-                                            name="youtube" placeholder="Copy & Paste the Group YouTube Link here"
+                                            name="youtube"
+                                            placeholder="<?= Yii::t('app', 'Copy & Paste the Group YouTube Link here') ?>"
                                             required>
                                     </div>
                                 </div>
 
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span> <label class="name-text-update"
-                                        for="director">Website Link </label>
+                                        for="director"><?= Yii::t('app', 'Website Link ') ?></label>
                                     <div class="input-group">
                                         <span class="input-group-text mt-12"
                                             style="background-color: white; border-right: none;">
@@ -218,7 +248,8 @@ $this->title = 'Create Group';
                                                 style="width: 20px; height: 20px;">
                                         </span>
                                         <input type="text" style="border-left: none;" class="form-control mt-12"
-                                            name="website" placeholder="Copy & Paste the Group YouTube Link here"
+                                            name="website"
+                                            placeholder="<?= Yii::t('app', 'Copy & Paste the Group YouTube Link here') ?>"
                                             required>
                                     </div>
                                 </div>
@@ -232,30 +263,32 @@ $this->title = 'Create Group';
                     <div class="row">
                         <div class="name-text-update">
                             <span class="profile-moon">*</span>
-                            Group Description
+                            <?= Yii::t('app', 'Group Description') ?>
                         </div>
-                        <input type="hidden" name="groupId>
+                        <input type="hidden" name="groupId">
                         <div>
-                            <div class=" alert alert-secondary" role="alert"
-                            style="font-size: 14px; background-color: transparent; border: 0; ">
-                        <textarea style="height: 527px;" name="about" class="form-control"></textarea>
+                            <div class="alert alert-secondary" role="alert"
+                                style="font-size: 14px; background-color: transparent; border: 0; ">
+                                <textarea style="height: 527px;" name="about" class="form-control"
+                                    placeholder="<?= Yii::t('app', 'Write the description of the group') ?>"></textarea>
 
-                    </div>
-                    <div class="col-12 text-end mt-10 pr-13">
-                        <a href="<?= Yii::$app->homeUrl ?>setting/group/create-group" style="text-decoration: none;">
-                            <button type="button" class="btn-cancel-group"
-                                action="<?= Yii::$app->homeUrl ?>setting/group/create-group">Cancel</button>
-                        </a>
+                            </div>
+                            <div class="col-12 text-end mt-10 pr-13">
+                                <a href="<?= Yii::$app->homeUrl ?>setting/group/create-group"
+                                    style="text-decoration: none;">
+                                    <button type="button" class="btn-cancel-group"
+                                        action="<?= Yii::$app->homeUrl ?>setting/group/create-group">Cancel</button>
+                                </a>
 
-                        <button type="submit" class="btn-save-group">Save
-                            <img src="<?= Yii::$app->homeUrl ?>image/save-icon.svg" alt="LinkedIn"
-                                style="width: 20px; height: 20px;"></button>
+                                <button type="submit" class="btn-save-group">Save
+                                    <img src="<?= Yii::$app->homeUrl ?>image/save-icon.svg" alt="LinkedIn"
+                                        style="width: 20px; height: 20px;"></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
 </div>
 <?php ActiveForm::end(); ?>
