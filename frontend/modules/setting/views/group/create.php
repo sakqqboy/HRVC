@@ -12,208 +12,250 @@ $this->title = 'Create Group';
 	],
 
 ]); ?>
-<div class="contrainer-body" style="margin-top: 60px;background-color:white;padding-bottom:20px;">
-    <div class="col-12" id="imagePreviewBanner" style="height: 180px;background-color:gray;">
-    </div>
-    <div class="col-12 edit-update text-end" style="padding-right: 30px;">
-        <div class="form-group">
 
-            <span class="fileUpload btn btn-light">
-                <div id="upload" class="uplode-btn"><i class="fa fa-upload" aria-hidden="true"></i> Update</div>
-                <input type="file" name="imageUploadBanner" id="imageUploadBanner" class="upload up upload-checklist"
-                    id="up" />
-            </span><!-- btn-orange -->
-            <!-- group -->
-        </div><!-- form-group -->
-    </div>
-    <div class="row">
-        <div class="col-lg-4 col-md-6 col-12 all-avatar">
-            <div class="avatar-upload">
-                <div class="avatar-edit">
-                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" name="image" />
-                    <label for="imageUpload"></label>
-                </div>
-                <div class="avatar-preview" style="background-color:white;">
-                    <div id="imagePreview">
-                    </div>
-                </div>
-            </div>
+<link rel="stylesheet" href="<?= Yii::$app->homeUrl ?>assets/bootstrap4/css/bootstrap.min.css">
+<div class="company-group-edit">
+    <div class="contrainer-body">
+        <div class="col-12 banner-uploade" id="imagePreviewBanner">
+
         </div>
-        <div class="col-lg-6 col-md-6 col-12">
-            <div class="form-companyname">
-                <div class="row">
-                    <div class="col-5 Groupname1">
-                        Group Company Name <span class="profile-moon">*</span>
+
+        <div class="row mb-100">
+            <div class="col-12" style="margin-top:-50px; display: flex;">
+                <div class="col-10 mb-15 avatar-upload" style="margin-left:36px;">
+                    <div class="avatar-preview" id="imagePreview" style="background-color: white;">
+                        <label for="imageUpload" class="upload-label" style="cursor: pointer;">
+
+                            <img src="<?= Yii::$app->homeUrl ?>image/upload-img.svg" alt="Upload Icon">
+                            <span>Upload</span>
+
+                        </label>
+                        <input type="file" name="image" id="imageUpload" class="upload up upload-checklist"
+                            style="display: none;" />
                     </div>
-                    <div class="col-7">
-                        <input type="text" class="form-control" id="colFormLabel" name="groupName" required>
-                    </div>
-                    <div class="mt-20"></div>
-                    <div class="col-5">
-                        Tag line
-                    </div>
-                    <div class="col-7">
-                        <input type="text" class="form-control" id="colFormLabel" name="tagLine">
-                    </div>
-                    <div class="mt-20"></div>
-                    <div class="col-5">
-                        Headquarter <span class="profile-moon">*</span>
-                    </div>
-                    <div class="col-7">
-                        <input type="text" class="form-control" id="colFormLabel" name="headQuaterName" required>
-                    </div>
+                </div>
+
+                <div class="col-2 mb-15" style="display: flex; justify-content: center;  align-items: center; ">
+                    <!-- ลบระยะห่างระหว่างรูปและรายละเอียด -->
+                    <span class="fileUpload btn" style="padding: 0;">
+                        <div id="upload" class="uplode-btn-group">
+                            <img src="<?= Yii::$app->homeUrl ?>image/upload-white.svg" alt="Upload Icon">
+                            Update
+                        </div>
+                        <input type="file" name="imageUploadBanner" id="imageUploadBanner"
+                            class="upload up upload-checklist" id="up" />
+                    </span>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-12 mt-50">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-12">
-                <hr>
-            </div>
-            <div class="col-lg-6 col-md-6 col-12 text-end Groupname2" style="padding-right: 40px;">
-                Group Company Profile
-            </div>
-        </div>
-    </div>
-    <div class="col-12" s>
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-12">
-                <div class="col-12 mt-40">
-                    <div class="row">
-                        <div class="col-3 pl-30">
-                            Display <span class="profile-moon">*</span>
-                        </div>
-                        <div class="col-9">
-                            <input type="text" class="form-control" name="displayName" required>
-                        </div>
-                        <div class="mt-20"></div>
-                        <div class="col-3  pl-30">
-                            Website </div>
-                        <div class="col-9">
-                            <input type="text" class="form-control" name="website">
-                        </div>
-                        <div class="mt-20"></div>
-                        <div class="col-3  pl-30">
-                            Address <span class="profile-moon">*</span>
-                        </div>
-                        <div class="col-9">
-                            <input type="text" class="form-control" name="location" required>
-                        </div>
-                        <div class="mt-20"></div>
-                        <div class="col-12">
-                            <div class="row">
-                                <div class="col-3  pl-30">
-                                    Country
+        <div class="col-12 mt-50">
+            <div class="row update-group-body">
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="container">
+                        <div class="row">
+                            <!-- Left Column -->
+                            <div class="col-md-6">
+                                <div class="form-group mb-30">
+                                    <span class="text-danger">* </span><label class="name-text-update"
+                                        for="groupName">Registered Group Name</label>
+                                    <input type="text" class="form-control mt-12" name="groupName"
+                                        placeholder="Write the name of Group" required>
                                 </div>
-                                <div class="col-4">
-                                    <select class="form-control" name="country" required>
-                                        <option value="">Select country</option>
-                                        <?php
-										if (isset($countries) && count($countries) > 0) {
-											foreach ($countries as $countryId => $country) : ?>
-                                        <option value="<?= $countryId ?>"><?= $country ?></option>
-                                        <?php
-											endforeach;
-										}
-										?>
+                                <div class="form-group mb-30">
+                                    <span class="text-danger">* </span> <label class="name-text-update"
+                                        for="groupName">Display Name/Brand Name</label>
+                                    <input type="text" class="form-control mt-12" name="displayName"
+                                        placeholder="The name you want to show (example,. Google)" required>
+                                </div>
+                                <div class="form-group mb-30">
+                                    <span class="text-danger">* </span><label class="name-text-update"
+                                        for="tagLine">Slogan/Tagline</label>
+                                    <input type="text" class="form-control mt-12" name="tagLine"
+                                        placeholder="Write the Tagline of the group" required>
+                                </div>
+                                <div class="form-group mb-30">
+                                    <span class="text-danger">* </span> <label class="name-text-update"
+                                        for="founded">Founded</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text mt-12"
+                                            style="background-color: #BEDAFF; border-right: none;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/calendar-blue.svg" alt="Founded"
+                                                style="width: 20px; height: 20px;">
+                                        </span>
+                                        <input type="text" style="border-left: none;" class="form-control mt-12"
+                                            name="founded" placeholder="" required>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-30">
+                                    <span class="text-danger">* </span><label class="name-text-update"
+                                        for="industry">Industry</label>
+                                    <input type="text" class="form-control mt-12" name="industries"
+                                        placeholder="Write the industry name" required>
+                                </div>
+                                <div class="form-group mb-30">
+                                    <span class="text-danger">* </span> <label class="name-text-update"
+                                        for="director">Group
+                                        Director </label>
+                                    <input type="text" class="form-control mt-12" name="director" placeholder="Write
+                                    the name of Group" required>
+                                </div>
+                                <div class="form-group mb-30">
+                                    <span class="text-danger">* </span> <label class="name-text-update"
+                                        for="addressLine">Address Line</label>
+                                    <input type="text" class="form-control mt-12" name="location"
+                                        placeholder="Write the email" required>
+                                </div>
+                                <div class="form-group mb-30">
+                                    <span class="text-danger">* </span> <label class="name-text-update"
+                                        for="country">Country</label>
+                                    <select class="form-control mt-12" name="country"
+                                        placeholder="Write the phone number" required>
+
                                     </select>
+                                </div>
+                            </div>
 
+                            <!-- Right Column -->
+                            <div class="col-md-6">
+                                <div class="form-group mb-30">
+                                    <span class="text-danger">* </span> <label class="name-text-update"
+                                        for="email">Group
+                                        Email </label>
+                                    <input type="email" class="form-control mt-12" name="email"
+                                        placeholder="Write the email" required>
                                 </div>
-                                <div class="col-1">
-                                    City
+                                <div class="form-group mb-30">
+                                    <span class="text-danger">* </span> <label class="name-text-update" for="phone">
+                                        Contact/Phone Number </label>
+                                    <input type="text" class="form-control mt-12" name="phone"
+                                        placeholder="Write the phone number" required pattern="[0-9+\-]+"
+                                        title="กรุณากรอกเฉพาะตัวเลข, + และ -"
+                                        oninput="this.value = this.value.replace(/[^0-9+\-]/g, '');">
                                 </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="city">
+
+                                <div class="form-group mb-30">
+                                    <span class="text-danger">* </span><label class="name-text-update"
+                                        for="linkedin">LinkedIn Link</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text mt-12"
+                                            style="background-color: white; border-right: none;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/in-image.svg" alt="LinkedIn"
+                                                style="width: 20px; height: 20px;">
+                                        </span>
+                                        <input type="text" style="border-left: none;" class="form-control mt-12"
+                                            name="linkedin" placeholder="Copy & Paste the Group LinkedIn Link here"
+                                            required>
+                                    </div>
                                 </div>
-                                <div class="mt-20"></div>
-                                <div class="col-3  pl-30">
-                                    Postal Code
+
+                                <div class="form-group mb-30">
+                                    <span class="text-danger">* </span><label class="name-text-update" for="twitter">X
+                                        (Twitter) Link</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text mt-12"
+                                            style="background-color: white; border-right: none;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/x-image.svg" alt="Twitter/X"
+                                                style="width: 20px; height: 20px;">
+                                        </span>
+                                        <input type="text" style="border-left: none;" class="form-control mt-12"
+                                            name="twitter" placeholder="Copy & Paste the Group X (Twitter) Link here"
+                                            required>
+                                    </div>
                                 </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="postalCode">
+
+                                <div class="form-group mb-30">
+                                    <span class="text-danger">* </span><label class="name-text-update"
+                                        for="facebook">Facebook Link</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text mt-12"
+                                            style="background-color: white; border-right: none;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/face-image.svg" alt="Facebook"
+                                                style="width: 20px; height: 20px;">
+                                        </span>
+                                        <input type="text" style="border-left: none;" class="form-control mt-12"
+                                            name="facebook" placeholder="Copy & Paste the Group Facebook Link here"
+                                            required>
+                                    </div>
                                 </div>
-                                <div class="mt-20"></div>
-                                <div class="col-3  pl-30">
-                                    Industries <span class="profile-moon">*</span>
+
+                                <div class="form-group mb-30">
+                                    <span class="text-danger">* </span><label class="name-text-update"
+                                        for="instagram">Instagram Link</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text mt-12"
+                                            style="background-color: white; border-right: none;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/ig-image.svg" alt="Instagram"
+                                                style="width: 20px; height: 20px;">
+                                        </span>
+                                        <input type="text" style="border-left: none;" class="form-control mt-12"
+                                            name="instagram" placeholder="Copy & Paste the Group Instagram Link here"
+                                            required>
+                                    </div>
                                 </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="industries" required>
+
+                                <div class="form-group mb-30">
+                                    <span class="text-danger">* </span>
+                                    <label class="name-text-update" for="youtube">YouTube Link</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text mt-12"
+                                            style="background-color: white; border-right: none;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/yt-image.svg" alt="YouTube"
+                                                style="width: 20px; height: 20px;">
+                                        </span>
+                                        <input type="text" style="border-left: none;" class="form-control mt-12"
+                                            name="youtube" placeholder="Copy & Paste the Group YouTube Link here"
+                                            required>
+                                    </div>
                                 </div>
-                                <div class="col-2">
-                                    Email <span class="profile-moon">*</span>
+
+                                <div class="form-group mb-30">
+                                    <span class="text-danger">* </span> <label class="name-text-update"
+                                        for="director">Website Link </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text mt-12"
+                                            style="background-color: white; border-right: none;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/web-image.svg" alt="Website"
+                                                style="width: 20px; height: 20px;">
+                                        </span>
+                                        <input type="text" style="border-left: none;" class="form-control mt-12"
+                                            name="website" placeholder="Copy & Paste the Group YouTube Link here"
+                                            required>
+                                    </div>
                                 </div>
-                                <div class="col-3">
-                                    <input type="email" class="form-control" name="email">
-                                </div>
-                                <div class="mt-20"></div>
-                                <div class="col-3  pl-30">
-                                    Founded
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" name="founded" class="form-control">
-                                </div>
-                                <div class="col-2">
-                                    Contact <span class="profile-moon">*</span>
-                                </div>
-                                <div class="col-3">
-                                    <input type="text" class="form-control" name="contact">
-                                </div>
-                                <div class="mt-20"></div>
-                                <div class="col-3 pl-30">
-                                    Director <span class="profile-moon">*</span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="director" required>
-                                </div>
-                                <div class="col-2">
-                                    Social Tag
-                                </div>
-                                <div class="col-3">
-                                    <input type="text" name="socialTag" class="form-control">
-                                </div>
+
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-12 mt-40" style="padding-right: 40px;">
-                <div class="row">
-                    <div class="col-2 text-end" style="padding-top: 200px;font-size:14px;">
-                        ABOUT <span class="profile-moon">*</span>
-                    </div>
-                    <div class="col-10">
-                        <div class="alert alert-secondary" role="alert" style="font-size: 14px;">
-                            <textarea style="height:410px;" name="about" class="form-control"></textarea>
 
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="row">
+                        <div class="name-text-update">
+                            <span class="profile-moon">*</span>
+                            Group Description
                         </div>
-                        <!-- <div class="row">
-							<div class="col-4">
-								<div class="alert alert-secondary text-center" role="alert">
-									<div class="text-primary"> Companies</div>
-									<i class="fa fa-plus mt-10" aria-hidden="true"></i>
-								</div>
-							</div>
-							<div class="col-4">
-								<div class="alert alert-secondary text-center" role="alert">
-									<div class="text-primary"> Employees</div>
-									<i class="fa fa-plus mt-10" aria-hidden="true"></i>
-								</div>
-							</div>
-							<div class="col-4">
-								<div class="alert alert-secondary text-center" role="alert">
-									<div class="text-primary"> Branches</div>
-									<i class="fa fa-plus mt-10" aria-hidden="true"></i>
-								</div>
-							</div>
-						</div> -->
-                        <div class="col-12 text-end mt-10">
-                            <button type="submit" class="btn btn-success">Create Group</button>
-                        </div>
+                        <input type="hidden" name="groupId>
+                        <div>
+                            <div class=" alert alert-secondary" role="alert"
+                            style="font-size: 14px; background-color: transparent; border: 0; ">
+                        <textarea style="height: 527px;" name="about" class="form-control"></textarea>
+
+                    </div>
+                    <div class="col-12 text-end mt-10 pr-13">
+                        <a href="<?= Yii::$app->homeUrl ?>setting/group/create-group" style="text-decoration: none;">
+                            <button type="button" class="btn-cancel-group"
+                                action="<?= Yii::$app->homeUrl ?>setting/group/create-group">Cancel</button>
+                        </a>
+
+                        <button type="submit" class="btn-save-group">Save
+                            <img src="<?= Yii::$app->homeUrl ?>image/save-icon.svg" alt="LinkedIn"
+                                style="width: 20px; height: 20px;"></button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+</div>
 </div>
 <?php ActiveForm::end(); ?>

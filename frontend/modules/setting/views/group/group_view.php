@@ -105,7 +105,7 @@ $this->title = 'Group profile';
                         </div>
                         <div class="row">
                             <div class="col-lg-5 col-md-6 col-12 name-head mt-10">
-                                Email
+                                <?= Yii::t('app', 'Email') ?>
                             </div>
                             <div class="col-lg-7 col-md-5 col-12 name-head0 mt-5 d-flex align-items-center">
                                 <a class="text-primary address-box0 text-wrap pr-5"><?= $group["email"] ?></a>
@@ -114,7 +114,7 @@ $this->title = 'Group profile';
                                     style="width: 10.884px; height: 12px;">
                             </div>
                             <div class="col-lg-5 col-md-6 col-12 name-head mt-10">
-                                Phone
+                                <?= Yii::t('app', 'Phone') ?>
                             </div>
                             <div class="col-lg-7 col-md-5 col-12 name-head0 mt-5 d-flex align-items-center">
                                 <span class="text-wrap pr-5"><?= $group["contact"] ?></span>
@@ -123,7 +123,7 @@ $this->title = 'Group profile';
                                     style="width: 10.884px; height: 12px;">
                             </div>
                             <div class="col-lg-5 col-md-6 col-12 name-head mt-10">
-                                Website
+                                <?= Yii::t('app', 'Website') ?>
                             </div>
                             <div class="col-lg-7 col-md-5 col-12 name-head0 mt-5 d-flex align-items-center">
                                 <a href="<?= $group['website'] ?>" target="_blank"
@@ -137,16 +137,17 @@ $this->title = 'Group profile';
                     <div class="col-lg-6 col-md-6 col-12 box-about0">
                         <div class="row about-section">
                             <div class="col-12 about-name">
-                                <span>About us</span>
+                                <span><?= Yii::t('app', 'About us') ?></span>
                                 <hr class="hr-group">
                             </div>
                             <div class="col-12 detail-tokyo">
                                 <p id="about-text">
-                                    <?= mb_strlen($group["about"]) > 200 
-                                        ? mb_substr($group["about"], 0, 200) . '...' 
-                                        : $group["about"] ?>
-                                    <?php if (mb_strlen($group["about"]) > 200): ?>
-                                    <button id="see-more" class="see-more">See More</button>
+                                    <?= mb_strlen(Yii::t('app', $group["about"])) > 200 
+                                        ? mb_substr(Yii::t('app', $group["about"]), 0, 200) . '...' 
+                                        : Yii::t('app', $group["about"]) ?>
+                                    <?php if (mb_strlen(Yii::t('app', $group["about"])) > 200): ?>
+                                    <button id="see-more"
+                                        class="see-more"><span><?= Yii::t('app', 'See More') ?></span></button>
                                     <?php endif; ?>
                                 </p>
                             </div>
@@ -169,7 +170,7 @@ $this->title = 'Group profile';
                     <!-- Bottom Row -->
                     <div class="col-12 mt-10 current-stats">
                         <div class="col-12 Group-Information">
-                            Current Stats
+                            <?= Yii::t('app', 'Current Stats') ?>
                             <hr class="hr-group">
                         </div>
                         <div class="row">
@@ -196,8 +197,10 @@ $this->title = 'Group profile';
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-4 text-right">
-                                                <div class="text-name-current">Branch</div>
-                                                <div class="text-see-all">See All</div>
+                                                <div class="text-name-current">
+                                                    <?= Yii::t('app', 'Branch') ?>
+                                                </div>
+                                                <div class="text-see-all"><?= Yii::t('app', 'See All') ?></div>
                                             </div>
                                         </div>
                                     </a>
@@ -226,8 +229,8 @@ $this->title = 'Group profile';
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-4 text-right">
-                                                <div class="text-name-current">Department</div>
-                                                <div class="text-see-all">See All</div>
+                                                <div class="text-name-current"><?= Yii::t('app', 'Department') ?></div>
+                                                <div class="text-see-all"><?= Yii::t('app', 'See All') ?></div>
                                             </div>
                                         </div>
                                     </a>
@@ -256,8 +259,8 @@ $this->title = 'Group profile';
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-4 text-right">
-                                                <div class="text-name-current">Team</div>
-                                                <div class="text-see-all">See All</div>
+                                                <div class="text-name-current"><?= Yii::t('app', 'Team') ?></div>
+                                                <div class="text-see-all"><?= Yii::t('app', 'See All') ?></div>
                                             </div>
                                         </div>
                                     </a>
@@ -288,8 +291,9 @@ $this->title = 'Group profile';
 
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-4 text-right">
-                                                <div class="text-name-current">Employee</div>
-                                                <div class="text-see-all">See All</div>
+                                                <div class="text-name-current"><?= Yii::t('app', 'Employee') ?>
+                                                </div>
+                                                <div class="text-see-all"><?= Yii::t('app', 'See All') ?></div>
                                             </div>
                                         </div>
                                     </a>
@@ -310,7 +314,7 @@ $this->title = 'Group profile';
                         <img src="<?= Yii::$app->homeUrl ?>image/companies.svg" style="width: 15px; height: 15px;">
                     </div>
                     <div class="col-lg-9 col-md-7 col-12 Affiliated0">
-                        Affiliated Companies
+                        <?= Yii::t('app', 'Affiliated Companies') ?>
                     </div>
                     <div class="col-lg-1 col-md-3 col-12 box-27">
                         <?= count($companyGroup) ?>
@@ -372,7 +376,7 @@ $this->title = 'Group profile';
 				if (count($companyGroup) > 5) {
 					?>
                     <div class="col-12 text-end">
-                        <a href="<?= Yii::$app->homeUrl ?>setting/company/index"> See All </a>
+                        <a href="<?= Yii::$app->homeUrl ?>setting/company/index"> <?= Yii::t('app', 'See All') ?> </a>
                     </div>
                     <?php
 				}
