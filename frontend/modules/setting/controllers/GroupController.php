@@ -42,12 +42,26 @@ class GroupController extends Controller
     {
         return $this->render('index');
     }
-    public function actionCreateGroup()
+
+    public function actionDisplayGroup()
     {
+        $role = UserRole::userRight();
         $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
         if (isset($group) && !empty($group)) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/group-view/' . ModelMaster::encodeParams(["groupId" => $group["groupId"]]));
         }
+        
+        return $this->render('display_group', [
+            "role" => $role
+        ]);
+    }
+
+    public function actionCreateGroup()
+    {
+        $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
+        // if (isset($group) && !empty($group)) {
+        //     return $this->redirect(Yii::$app->homeUrl . 'setting/group/group-view/' . ModelMaster::encodeParams(["groupId" => $group["groupId"]]));
+        // }
         if (isset($_POST["groupName"]) && trim($_POST["groupName"]) != '') {
             $group = new Group();
             $group->groupName = $_POST["groupName"];

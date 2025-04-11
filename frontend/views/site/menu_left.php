@@ -52,7 +52,7 @@ $session = Yii::$app->session;
                                 if ($role >= 5) {
                                 ?>
             <div class="col-12 first-layer-manu">
-                <a href="<?= Yii::$app->homeUrl ?>setting/group/create-group" class="no-underline">
+                <a href="<?= Yii::$app->homeUrl ?>setting/group/display-group" class="no-underline">
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/MasterSetting/group.svg"
                         class="first-layer-icon" style="margin-top: -3px;">
                     <?= Yii::t('app', 'Group Configuration') ?>

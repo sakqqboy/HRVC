@@ -36,8 +36,8 @@ $this->title = 'Group profile';
                 <div style="margin-top: 150px;">
                     <!-- ลบระยะห่างระหว่างรูปและรายละเอียด -->
                     <div class="col-12 name-tokyo">
-                        <span class="name-sub-tokyo"><?= $group['displayName'] ?></span>
-                        <span class="name-full-tokyo">(<?= $group['groupName'] ?>)</span>
+                        <span class="name-sub-tokyo"><?= Yii::t('app', $group['displayName']) ?></span>
+                        <span class="name-full-tokyo">(<?= Yii::t('app', $group['groupName']) ?>)</span>
                     </div>
                     <div class="col-12 tokyo-small">
                         <img src="<?= Yii::$app->homeUrl . 'image/hyphen.svg' ?>"> <?= $group['tagLine'] ?>
@@ -50,7 +50,7 @@ $this->title = 'Group profile';
                 <a href="<?= Yii::$app->homeUrl ?>setting/group/update-group/<?= ModelMaster::encodeParams(['groupId' => $group['groupId']]) ?>"
                     class="btn-update-group" style="width: 60%;">
                     <img src="<?= Yii::$app->homeUrl . 'image/refresh-white.svg' ?>">
-                    Update Information
+                    <?= Yii::t('app', 'Update Information') ?>
                 </a>
             </div>
             <?php }?>
@@ -61,12 +61,12 @@ $this->title = 'Group profile';
                     <!-- Left Column -->
                     <div class="col-lg-6 col-md-6 col-12 all-information">
                         <div class="col-12 Group-Information">
-                            Group Details
+                            <?= Yii::t('app', 'Group Details') ?>
                             <hr class="hr-group">
                         </div>
                         <div class="row mb-36">
                             <div class="col-lg-5 col-md-6 col-12 name-head">
-                                Group Director/ Chairman
+                                <?= Yii::t('app', 'Group Director/ Chairman') ?>
                             </div>
                             <a class="col-lg-7 col-md-6 col-12 name-director text-wrap"
                                 href="<?= Yii::$app->homeUrl ?>setting/employee/employee-profile/<?= ModelMaster::encodeParams(['employeeId' => 23]) ?>">
@@ -74,7 +74,7 @@ $this->title = 'Group profile';
                                 <span class="d-inline-block"><?= $group["director"] ?></span>
                             </a>
                             <div class="col-lg-5 col-md-6 col-12 name-head mt-10">
-                                Headquarter Address
+                                <?= Yii::t('app', 'Headquarter Address') ?>
                             </div>
                             <div
                                 class="col-lg-7 col-md-6 col-12 name-head0 mt-10 d-flex justify-content-center align-items-center">
@@ -87,20 +87,20 @@ $this->title = 'Group profile';
                                 </div>
                             </div>
                             <div class="col-lg-5 col-md-6 col-12 name-head mt-10">
-                                Founded
+                                <?= Yii::t('app', 'Founded') ?>
                             </div>
                             <div class="col-lg-7 col-md-6 col-12 name-head0 mt-10 text-wrap">
                                 <?= $group["founded"] ?>
                             </div>
                             <div class="col-lg-5 col-md-6 col-12 name-head mt-10">
-                                Industry
+                                <?= Yii::t('app', 'Industry') ?>
                             </div>
                             <div class="col-lg-7 col-md-6 col-12 name-head0 mt-10 text-wrap">
-                                <?= $group["industries"] ?>
+                                <?= Yii::t('app', $group["industries"]) ?>
                             </div>
                         </div>
                         <div class="col-12 Group-Information">
-                            Contact Information
+                            <?= Yii::t('app', 'Contact Information') ?>
                             <hr class="hr-group">
                         </div>
                         <div class="row">

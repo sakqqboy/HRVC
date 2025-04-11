@@ -83,6 +83,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'setting/group/display_group/<hash>' => 'setting/group/display_group',
                 'setting/group/group-view/<hash>' => 'setting/group/group-view',
                 'setting/group/update-group/<hash>' => 'setting/group/update-group',
                 'setting/company/company-view/<hash>' => 'setting/company/company-view',
