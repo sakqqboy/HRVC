@@ -58,27 +58,36 @@ class GroupController extends Controller
 
     public function actionCreateGroup()
     {
+
+
         $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
         // if (isset($group) && !empty($group)) {
         //     return $this->redirect(Yii::$app->homeUrl . 'setting/group/group-view/' . ModelMaster::encodeParams(["groupId" => $group["groupId"]]));
         // }
         if (isset($_POST["groupName"]) && trim($_POST["groupName"]) != '') {
+            // throw new Exception('POST DATA: ' . print_r($_POST, true));
+
             $group = new Group();
             $group->groupName = $_POST["groupName"];
             $group->tagLine = $_POST["tagLine"];
-            $group->headQuaterName = $_POST["headQuaterName"];
+            // $group->headQuaterName = $_POST["headQuaterName"];
             $group->displayName = $_POST["displayName"];
             $group->website = $_POST["website"];
             $group->location = $_POST["location"];
             $group->countryId = $_POST["country"];
-            $group->city = $_POST["city"];
-            $group->postalCode = $_POST["postalCode"];
+            // $group->city = $_POST["city"];
+            // $group->postalCode = $_POST["postalCode"];
             $group->industries = $_POST["industries"];
             $group->email = $_POST["email"];
-            $group->contact = $_POST["contact"];
+            // $group->contact = $_POST["contact"];
             $group->founded = $_POST["founded"];
             $group->director = $_POST["director"];
-            $group->socialTag = $_POST["socialTag"];
+            // $group->socialTag = $_POST["socialTag"];
+            $group->socialInstargram = $_POST["instagram"];
+            $group->socialFacebook = $_POST["facebook"];
+            $group->socialYoutube = $_POST["youtube"];
+            $group->socialLinkin = $_POST["linkedin"];
+            $group->socialX = $_POST["twitter"];
             $group->about = $_POST["about"];
             $group->status = 1;
             $group->createDateTime = new Expression('NOW()');

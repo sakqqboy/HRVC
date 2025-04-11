@@ -90,7 +90,10 @@ $this->title = 'Group profile';
                                 <?= Yii::t('app', 'Founded') ?>
                             </div>
                             <div class="col-lg-7 col-md-6 col-12 name-head0 mt-10 text-wrap">
-                                <?= $group["founded"] ?>
+                                <?php
+                                $yearOnly = substr($group["founded"], 0, 4);
+                                echo $yearOnly; // แสดงผล: 1998
+                                ?>
                             </div>
                             <div class="col-lg-5 col-md-6 col-12 name-head mt-10">
                                 <?= Yii::t('app', 'Industry') ?>
