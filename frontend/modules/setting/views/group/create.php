@@ -160,10 +160,10 @@ $this->title = 'Create Group';
                                     <div class="input-group">
                                         <span class="input-group-text mt-12"
                                             style="background-color: white; border-right: none;">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/web-image.svg" alt="Website"
+                                            <img src="<?= Yii::$app->homeUrl ?>image/web-gray.svg" alt="Website"
                                                 style="width: 20px; height: 20px;">
                                         </span>
-                                        <select class="form-control mt-12" style="border-left: none;" name="country"
+                                        <select class="form-select mt-12" style="border-left: none;" name="country"
                                             required>
                                             <option value="" disabled selected hidden style="color: var(--Helper-Text, #8A8A8A);
                                                 ">

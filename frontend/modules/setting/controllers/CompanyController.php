@@ -199,29 +199,30 @@ class CompanyController extends Controller
 	public function actionSaveCreateCompany()
 	{
 
-				// throw new Exception("POST DATA: " . print_r($_POST, true));
+				throw new Exception("POST DATA: " . print_r($_POST, true));
 
 		if (isset($_POST["companyName"]) && trim($_POST["companyName"]) != '') {
 			$company = new Company();
 			$company->companyName = $_POST["companyName"];
 			//$company->tagLine = $_POST["tagLine"];
-			if (isset($_POST["headQuaterId"])) {
-				$company->headQuaterId = $_POST["headQuaterId"] - 534;
-			}
+			// if (isset($_POST["headQuaterId"])) {
+			// 	$company->headQuaterId = $_POST["headQuaterId"] - 534;
+			// }
 			$company->displayName = $_POST["displayName"];
-			$company->website = $_POST["website"];
-			$company->location = $_POST["location"];
-			$company->groupId = $_POST["groupId"] - 543;
-			$company->countryId = $_POST["country"];
-			$company->city = $_POST["city"];
-			$company->postalCode = $_POST["postalCode"];
-			$company->industries = $_POST["industries"];
-			$company->email = $_POST["email"];
-			$company->contact = $_POST["contact"];
 			$company->founded = $_POST["founded"];
-			$company->director = $_POST["director"];
-			$company->socialTag = $_POST["socialTag"];
+			$company->industries = $_POST["industries"];
+			$company->countryId = $_POST["country"];
+			$company->contact = $_POST["phone"]; //
+			$company->email = $_POST["email"];
+			$company->location = $_POST["location"];
 			$company->about = $_POST["about"];
+			$company->groupId = $_POST["groupId"] - 543;
+			// $company->director = $_POST["director"];
+			// $company->socialTag = $_POST["socialTag"];
+			// $company->city = $_POST["city"];
+			// $company->postalCode = $_POST["postalCode"];
+			// $company->website = $_POST["website"];
+			// $company->contact = $_POST["contact"];
 			$company->status = 1;
 			$company->createDateTime = new Expression('NOW()');
 			$company->updateDateTime =  new Expression('NOW()');

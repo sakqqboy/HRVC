@@ -130,20 +130,25 @@ $this->title = 'New Company';
                                         placeholder="Write the industry name" required>
                                 </div>
                                 <div class="form-group mb-30">
-                                    <!-- <span class="text-danger">* </span> <label class="name-text-update"
-                                        for="director">Country in Operation </label> -->
-                                    <!-- <input type="text" class="form-control mt-12" name="director"
-                                        placeholder="Write the name of Group" required> -->
                                     <span class="text-danger">* </span> <label class="name-text-update"
-                                        for="country"><?= Yii::t('app', 'Country in Operation') ?></label>
-                                    <select class="form-control mt-12" name="country"
-                                        placeholder="<?= Yii::t('app', 'Write the phone number') ?>" required>
-                                        <option value="<?= $groupCountry['countryId'] ?>">
-                                            <?= $groupCountry['countryName'] ?></option>
-                                        <?php foreach ($countries as $countryId => $country) : ?>
-                                        <option value="<?= $countryId ?>"><?= $country ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
+                                        for="director"><?= Yii::t('app', 'Country in Operation') ?></label>
+                                    <div class="input-group">
+                                        <span class="input-group-text mt-12"
+                                            style="background-color: white; border-right: none;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/web-gray.svg" alt="Website"
+                                                style="width: 20px; height: 20px;">
+                                        </span>
+                                        <select class="form-select mt-12" style="border-left: none;" name="country"
+                                            required>
+                                            <option value="" disabled selected hidden style="color: var(--Helper-Text, #8A8A8A);
+                                                ">
+                                                <?= Yii::t('app', 'e.g., ASEAN, North America, Europe') ?>
+                                            </option>
+                                            <?php foreach ($countries as $countryId => $country) : ?>
+                                            <option value="<?= $countryId ?>"><?= $country ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
                                 </div>
 
                             </div>
@@ -172,15 +177,15 @@ $this->title = 'New Company';
                                         placeholder="e.g., jp_paris_cs@tokyoconsultinggroup.com" required>
                                 </div>
                                 <div class="form-group mb-30">
-                                    <span class="text-danger">* </span> <label class="name-text-update"
-                                        for="email">Company’s Address</label>
-                                    <input type="email" class="form-control mt-12" name="email"
+                                    <span class="text-danger">* </span> <label class="name-text-update">
+                                        Company’s Address</label>
+                                    <input type="text" class="form-control mt-12" name="location"
                                         placeholder="Please input the address here" required>
                                 </div>
 
                                 <div class="form-group mb-30">
-                                    <span class="text-danger">* </span> <label class="name-text-update" for="email">Head
-                                        of Company</label>
+                                    <span class="text-danger">* </span> <label class="name-text-update">
+                                        Head of Company</label>
                                     <!-- <input type="email" class="form-control mt-12" name="email"
                                         placeholder="Select from employees" required> -->
                                     <div class="input-group">
@@ -189,16 +194,15 @@ $this->title = 'New Company';
                                             <img src="<?= Yii::$app->homeUrl ?>image/employee-black.svg" alt="Founded"
                                                 style="width: 20px; height: 20px;">
                                         </span>
-                                        <input type="text" class="form-control mt-12" name="founded"
-                                            placeholder="Select from employees" readonly
-                                            style="border-left: none; background-color: #C3C3C3; color: #000;">
+                                        <input type="text" class="form-select mt-12" placeholder="Select from employees"
+                                            readonly style="border-left: none; background-color: #C3C3C3; color: #000;">
                                     </div>
                                 </div>
 
                                 <div class="form-group mb-30">
                                     <span class="text-danger"> <img src="<?= Yii::$app->homeUrl ?>image/think-ideit.svg"
                                             alt="Founded" style="width: 20px; height: 20px;"> </span> <label
-                                        class="name-text-update" for="email">Hints</label>
+                                        class="name-text-update">Hints</label>
                                     <div class="input-group">
                                         <text>To assign a company head, first add employees under the company. Then, go
                                             to the Company Details page, click Edit, and select a head from the
@@ -241,4 +245,6 @@ $this->title = 'New Company';
         </div>
     </div>
 </div>
+<input type="hidden" name="groupId" value="<?= $groupId + 543 ?>">
+
 <?php ActiveForm::end(); ?>

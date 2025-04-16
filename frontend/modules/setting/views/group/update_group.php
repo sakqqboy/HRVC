@@ -14,6 +14,7 @@ $this->title = 'Update Group';
 	'action' => Yii::$app->homeUrl . 'setting/group/save-update-group'
 
 ]); ?>
+
 <!-- 1. Flatpickr CSS + JS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -183,14 +184,21 @@ $this->title = 'Update Group';
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span> <label class="name-text-update"
                                         for="country"><?= Yii::t('app', 'Country in Operation') ?></label>
-                                    <select class="form-control mt-12" name="country"
-                                        placeholder="<?= Yii::t('app', 'Write the phone number') ?>" required>
-                                        <option value="<?= $groupCountry['countryId'] ?>">
-                                            <?= $groupCountry['countryName'] ?></option>
-                                        <?php foreach ($countries as $countryId => $country) : ?>
-                                        <option value="<?= $countryId ?>"><?= $country ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
+                                    <div class="input-group">
+                                        <span class="input-group-text mt-12"
+                                            style="background-color: white; border-right: none;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/web-gray.svg" alt="Website"
+                                                style="width: 20px; height: 20px;">
+                                        </span>
+                                        <select class="form-select mt-12" style="border-left: none;" name="country"
+                                            placeholder="<?= Yii::t('app', 'Write the phone number') ?>" required>
+                                            <option value="<?= $groupCountry['countryId'] ?>">
+                                                <?= $groupCountry['countryName'] ?></option>
+                                            <?php foreach ($countries as $countryId => $country) : ?>
+                                            <option value="<?= $countryId ?>"><?= $country ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
 
