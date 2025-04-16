@@ -3,30 +3,33 @@
 use common\models\ModelMaster;
 
 $this->title = 'company';
+
+// echo $countries;
 ?>
 
 <div class="contrainer-body mt-10">
-    <div class=" d-flex align-items-center gap-2">
-        <img src="<?= Yii::$app->homeUrl ?>image/branch-icon-black.svg" style="width: 24px; height: 24px;">
-        <div class="pim-name-title ml-10">
-            Company
-        </div>
-        <a href="<?= Yii::$app->homeUrl ?>setting/company/create/<?= ModelMaster::encodeParams(['groupId' => $groupId]) ?>"
-            style="text-decoration: none;">
-            <button type="button" class="btn-create" style="padding: 3px 9px;"
-                action="<?= Yii::$app->homeUrl ?>setting/group/create-group"><?= Yii::t('app', 'Create New') ?>
-                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
-                    style="width:18px; height:18px; margin-top:-3px;">
-            </button>
-        </a>
-    </div>
+
 
     <div class="between-center mt-20" style="width: 100%;">
         <div class="col-9">
-            Registered Companies
+            <div class=" d-flex align-items-center gap-2">
+                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg"
+                    style="width: 24px; height: 24px;">
+                <div class="pim-name-title ml-10">
+                    Company
+                </div>
+                <a href="<?= Yii::$app->homeUrl ?>setting/company/create/<?= ModelMaster::encodeParams(['groupId' => $groupId]) ?>"
+                    style="text-decoration: none;">
+                    <button type="button" class="btn-create" style="padding: 3px 9px;"
+                        action="<?= Yii::$app->homeUrl ?>setting/group/create-group"><?= Yii::t('app', 'Create New') ?>
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
+                            style="width:18px; height:18px; margin-top:-3px;">
+                    </button>
+                </a>
+            </div>
         </div>
         <div class="col-2" style="text-align: right;">
-            <?= $this->render('filter_list', []) ?>
+            <?= $this->render('filter_list', ['countries' => $countries]) ?>
         </div>
         <div class="col-1 pr-0 text-end">
             <div class="btn-group" role="group">
@@ -41,7 +44,7 @@ $this->title = 'company';
         </div>
     </div>
 
-    <div class="pim-body bg-white mt-10">
+    <div class="pim-body company-group-edit bg-white mt-10">
         <div class="alert alert-branch-body" role="alert">
             <div class="row" id="company-branch">
                 <?php
@@ -51,7 +54,7 @@ $this->title = 'company';
 						$maxLength = 200;
 						$about = substr($company['about'], 0, $maxLength);
 				?>
-                <div class="col-lg-4 col-md-5 col-sm-3 col-12">
+                <div class="col-lg-6 col-md-5 col-sm-3 col-12">
                     <div class="card" style="border: none;">
                         <div class="card-body" style="background: #F4F6F9;  border-radius: 5px;">
                             <div class="row">

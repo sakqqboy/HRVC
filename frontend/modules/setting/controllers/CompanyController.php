@@ -117,6 +117,10 @@ class CompanyController extends Controller
 			throw new Exception('API Error: ' . curl_error($api));
 		}
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
+		$result1 = curl_exec($api);
+		$countries = json_decode($result1, true);
+
 		$companies = json_decode($companies, true);
 		curl_close($api);
 
@@ -168,7 +172,8 @@ class CompanyController extends Controller
 		return $this->render('company_grid', [
 			"companies" => $data,
 			"role" => $role,
-			"groupId" => $groupId
+			"groupId" => $groupId,
+			"countries" => $countries
 		]);
 	}
 	public function actionCreate($hash)
@@ -199,7 +204,7 @@ class CompanyController extends Controller
 	public function actionSaveCreateCompany()
 	{
 
-				throw new Exception("POST DATA: " . print_r($_POST, true));
+				// throw new Exception("POST DATA: " . print_r($_POST, true));
 
 		if (isset($_POST["companyName"]) && trim($_POST["companyName"]) != '') {
 			$company = new Company();
@@ -340,27 +345,35 @@ class CompanyController extends Controller
 	public function actionSaveUpdateCompany()
 	{
 		// throw new Exception("POST DATA: " . print_r($_POST["director"], true));
-
 		if (isset($_POST["companyId"])) {
 			$companyId = $_POST["companyId"] - 543;
 			$company = Company::find()->where(["companyId" => $companyId])->one();
 			$oldBanner = $company->banner;
 			$oldImage = $company->picture;
 			// throw new Exception("POST DATA: " . print_r($oldImage, true));
+			// $company->companyName = $_POST["companyName"];
+			// // $company->tagLine = $_POST["tagLine"];
+			// $company->displayName = $_POST["displayName"];
+			// $company->website = $_POST["website"];
+			// $company->location = $_POST["location"];
+			// $company->countryId = $_POST["country"];
+			// $company->city = $_POST["city"];
+			// $company->postalCode = $_POST["postalCode"];
+			// $company->industries = $_POST["industries"];
+			// $company->email = $_POST["email"];
+			// $company->contact = $_POST["contact"];
+			// $company->founded = $_POST["founded"];
+			// $company->director = $_POST["director"];
+			// $company->socialTag = $_POST["socialTag"];
+			// $company->about = $_POST["about"];
 			$company->companyName = $_POST["companyName"];
-			// $company->tagLine = $_POST["tagLine"];
 			$company->displayName = $_POST["displayName"];
-			$company->website = $_POST["website"];
-			$company->location = $_POST["location"];
-			$company->countryId = $_POST["country"];
-			$company->city = $_POST["city"];
-			$company->postalCode = $_POST["postalCode"];
-			$company->industries = $_POST["industries"];
-			$company->email = $_POST["email"];
-			$company->contact = $_POST["contact"];
 			$company->founded = $_POST["founded"];
-			$company->director = $_POST["director"];
-			$company->socialTag = $_POST["socialTag"];
+			$company->industries = $_POST["industries"];
+			$company->countryId = $_POST["country"];
+			$company->contact = $_POST["phone"]; //
+			$company->email = $_POST["email"];
+			$company->location = $_POST["location"];
 			$company->about = $_POST["about"];
 			$company->status = 1;
 			$company->createDateTime = new Expression('NOW()');
@@ -368,7 +381,6 @@ class CompanyController extends Controller
 			$fileBanner = UploadedFile::getInstanceByName("imageUploadBanner");
 			if (isset($fileBanner) && !empty($fileBanner)) {
 				$path = Path::getHost() . 'images/company/banner/';
-
 				if (!file_exists($path)) {
 					mkdir($path, 0777, true);
 				}
@@ -387,19 +399,15 @@ class CompanyController extends Controller
 			$fileImage = UploadedFile::getInstanceByName("image");
 			if (isset($fileImage) && !empty($fileImage)) {
 				$path = Path::getHost() . 'images/company/profile/';
-
 				if (!file_exists($path)) {
 					mkdir($path, 0777, true);
 				}
-
-				// เช็คไฟล์เก่าก่อนลบ
 				if (!empty($oldImage)) {
 					$oldPathBanner = Path::getHost() . $oldImage;
 					if (file_exists($oldPathBanner) && is_file($oldPathBanner)) {
 						unlink($oldPathBanner);
 					}
 				}
-
 				$file = $fileImage->name;
 				$filenameArray = explode('.', $file);
 				$fileExt = end($filenameArray);
@@ -409,7 +417,19 @@ class CompanyController extends Controller
 				$fileImage->saveAs($pathSave);
 				$company->picture = 'images/company/profile/' . $fileName;
 			}
-
+			// if (isset($fileImage) && !empty($fileImage)) {
+			// 	$path = Path::getHost() . 'images/company/profile/';
+			// 	if (!file_exists($path)) {
+			// 		mkdir($path, 0777, true);
+			// 	}
+			// 	$file = $fileImage->name;
+			// 	$filenameArray = explode('.', $file);
+			// 	$countArrayFile = count($filenameArray);
+			// 	$fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
+			// 	$pathSave = $path . $fileName;
+			// 	$fileImage->saveAs($pathSave);
+			// 	$company->picture = 'images/company/profile/' . $fileName;
+			// }
 			if ($company->save(false)) {
 				return $this->redirect(Yii::$app->homeUrl . 'setting/company/company-view/' . ModelMaster::encodeParams(["companyId" => $companyId]));
 			}
