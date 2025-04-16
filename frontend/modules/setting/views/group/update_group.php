@@ -182,7 +182,7 @@ $this->title = 'Update Group';
                                 </div>
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span> <label class="name-text-update"
-                                        for="country"><?= Yii::t('app', 'Country') ?></label>
+                                        for="country"><?= Yii::t('app', 'Country in Operation') ?></label>
                                     <select class="form-control mt-12" name="country"
                                         placeholder="<?= Yii::t('app', 'Write the phone number') ?>" required>
                                         <option value="<?= $groupCountry['countryId'] ?>">

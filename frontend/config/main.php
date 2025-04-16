@@ -90,6 +90,7 @@ return [
                 'setting/company/create/<hash>' => 'setting/company/create',
                 'setting/company/update-company/<hash>' => 'setting/company/update-company',
                 'setting/company/company_grid/<hash>' => 'setting/company/company_grid',
+                'setting/company/display_company/<hash>' => 'setting/company/display_company',
                 'setting/branch/create/<hash>' => 'setting/branch/create',
                 'setting/department/create/<hash>' => 'setting/department/create',
                 'setting/department/search-result/<hash>' => 'setting/department/search-result',

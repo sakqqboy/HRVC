@@ -14,7 +14,7 @@ function deleteCompany(companyId) {
             dataType: 'json',
             url: url,
             data: { companyId: companyId },
-            success: function(data) {
+            success: function (data) {
                 if (data.status) {
                     $("#company-" + companyId).hide(200);
                 } else {
@@ -35,7 +35,7 @@ function companyBranch() {
         dataType: 'json',
         url: url,
         data: { companyId: companyId },
-        success: function(data) {
+        success: function (data) {
             if (data.status) {
                 $("#branch").html(data.branchText);
             }
@@ -51,7 +51,7 @@ function companyDepartment() {
         dataType: 'json',
         url: url,
         data: { companyId: companyId },
-        success: function(data) {
+        success: function (data) {
             if (data.status) {
                 $("#department").html(data.department);
             }
@@ -59,3 +59,37 @@ function companyDepartment() {
         }
     });
 }
+
+function getOrdinalSuffix(day) {
+    if (day > 3 && day < 21) return 'th';
+    switch (day % 10) {
+        case 1:
+            return 'st';
+        case 2:
+            return 'nd';
+        case 3:
+            return 'rd';
+        default:
+            return 'th';
+    }
+}
+
+flatpickr("#founded", {
+    dateFormat: "Y-m-d", // format ที่ส่งไป server
+    altInput: true,
+    altFormat: "F Y", // ชั่วคราว จะเปลี่ยนทีหลัง
+    onChange: function (selectedDates, dateStr, instance) {
+        if (selectedDates.length > 0) {
+            const d = selectedDates[0];
+            const day = d.getDate();
+            const month = d.toLocaleString('default', {
+                month: 'long'
+            });
+            const year = d.getFullYear();
+            const suffix = getOrdinalSuffix(day);
+
+            const formatted = `${suffix} ${month} ${year}`;
+            instance.altInput.value = formatted;
+        }
+    }
+});

@@ -45,6 +45,14 @@ class CompanyController extends Controller
 		if (!isset($group) && !empty($group)) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
 		}
+
+		$company = Company::find()->select('companyId')->where(["status" => 1])->asArray()->one();
+		if (!isset($company) && !empty($company)) {
+			// throw new Exception(print_r($company, true));
+			return $this->redirect(Yii::$app->homeUrl . 'setting/company/display-company/');
+		}
+
+
 		$groupId = $group["groupId"];
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -59,6 +67,19 @@ class CompanyController extends Controller
 			"groupId" => $groupId
 		]);
 	}
+
+	public function actionDisplayCompany()
+	{
+		$group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
+		if (!isset($group) && !empty($group)) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
+		}
+		$groupId = $group["groupId"];
+		return $this->render('display_company', [
+			"groupId" => $groupId
+		]);
+	}
+
 	public function actionCompanyGrid()
 	{
 		$group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
