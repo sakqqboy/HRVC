@@ -34,7 +34,6 @@ $this->title = 'Group profile';
                     </div>
                 </div>
                 <div style="margin-top: 150px;">
-                    <!-- ลบระยะห่างระหว่างรูปและรายละเอียด -->
                     <div class="col-12 name-tokyo">
                         <span class="name-sub-tokyo"><?= Yii::t('app', $group['displayName']) ?></span>
                         <span class="name-full-tokyo">(<?= Yii::t('app', $group['groupName']) ?>)</span>
@@ -173,7 +172,7 @@ $this->title = 'Group profile';
                     <!-- Bottom Row -->
                     <div class="col-12 mt-10 current-stats">
                         <div class="col-12 Group-Information">
-                            <?= Yii::t('app', 'Current Stats') ?>
+                            <?= Yii::t('app', 'Affiliated Entities') ?>
                             <hr class="hr-group">
                         </div>
                         <div class="row">
@@ -184,15 +183,15 @@ $this->title = 'Group profile';
                                         <div class="row align-items-center">
                                             <div class="col-lg-8 col-md-8 col-8 text-left">
                                                 <div class="circle-container">
-                                                    <div class="cycle-current">
+                                                    <div class="cycle-current-yellow">
                                                         <img src="<?= Yii::$app->homeUrl ?>image/branches.svg"
                                                             alt="icon">
                                                     </div>
-                                                    <div class="cycle-current">
+                                                    <div class="cycle-current-yellow">
                                                         <img src="<?= Yii::$app->homeUrl ?>image/branches.svg"
                                                             alt="icon">
                                                     </div>
-                                                    <div class="cycle-current">
+                                                    <div class="cycle-current-yellow">
                                                         <img src="<?= Yii::$app->homeUrl ?>image/branches.svg"
                                                             alt="icon">
                                                     </div>
@@ -216,15 +215,15 @@ $this->title = 'Group profile';
                                         <div class="row align-items-center">
                                             <div class="col-lg-8 col-md-8 col-8 text-left">
                                                 <div class="circle-container">
-                                                    <div class="cycle-current">
+                                                    <div class="cycle-current-red">
                                                         <img src="<?= Yii::$app->homeUrl ?>image/departments.svg"
                                                             alt="icon">
                                                     </div>
-                                                    <div class="cycle-current">
+                                                    <div class="cycle-current-red">
                                                         <img src="<?= Yii::$app->homeUrl ?>image/departments.svg"
                                                             alt="icon">
                                                     </div>
-                                                    <div class="cycle-current">
+                                                    <div class="cycle-current-red">
                                                         <img src="<?= Yii::$app->homeUrl ?>image/departments.svg"
                                                             alt="icon">
                                                     </div>
@@ -246,15 +245,15 @@ $this->title = 'Group profile';
                                         <div class="row align-items-center">
                                             <div class="col-lg-8 col-md-8 col-8 text-left">
                                                 <div class="circle-container">
-                                                    <div class="cycle-current">
+                                                    <div class="cycle-current-green">
                                                         <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon"
                                                             style="margin-right: 1px;">
                                                     </div>
-                                                    <div class="cycle-current">
+                                                    <div class="cycle-current-green">
                                                         <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon"
                                                             style="margin-right: 1px;">
                                                     </div>
-                                                    <div class="cycle-current">
+                                                    <div class="cycle-current-green">
                                                         <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon"
                                                             style="margin-right: 1px;">
                                                     </div>
@@ -276,15 +275,15 @@ $this->title = 'Group profile';
                                         <div class="row align-items-center">
                                             <div class="col-8">
                                                 <div class="circle-container-img">
-                                                    <div class="cycle-image">
+                                                    <div class="cycle-image mr-3">
                                                         <img src="<?= Yii::$app->homeUrl ?><?php echo $employees[0]['picture'] ?>"
                                                             alt="icon">
                                                     </div>
-                                                    <div class="cycle-image">
+                                                    <div class="cycle-image mr-3">
                                                         <img src="<?= Yii::$app->homeUrl ?><?php echo $employees[1]['picture'] ?>"
                                                             alt="icon">
                                                     </div>
-                                                    <div class="cycle-image">
+                                                    <div class="cycle-image mr-10">
                                                         <img src="<?= Yii::$app->homeUrl ?><?php echo $employees[2]['picture'] ?>"
                                                             alt="icon">
                                                     </div>
