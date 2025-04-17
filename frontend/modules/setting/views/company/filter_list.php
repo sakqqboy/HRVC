@@ -16,6 +16,7 @@
             style="cursor: pointer;">
         <?= Yii::t('app', 'Filter') ?>
     </span>
+
 </div>
 
 

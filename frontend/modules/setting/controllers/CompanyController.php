@@ -123,18 +123,37 @@ class CompanyController extends Controller
 
 		$companies = json_decode($companies, true);
 		curl_close($api);
+				// throw new Exception(print_r($companies, true)); // Debug: ดูข้อมูลทั้งหมด
 
 		$data = [];
 		if (!empty($companies)) {
 			foreach ($companies as $company) :
 				$companyId = $company['companyId'];
 
+				$employees = Employee::find()
+				->where(["companyId" => $companyId])
+				->asArray()
+				->all();
+
+				// throw new Exception(print_r($employees, true)); // Debug: ดูข้อมูลทั้งหมด
+
+				// กรองเฉพาะที่มี picture
+				$filteredEmployees = array_filter($employees, function($employee) {
+					return !empty($employee['picture']);
+				});
+
+				// รีเซ็ต index และเลือกแค่ 3 คนแรก
+				$filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
+
+				// throw new Exception(print_r($filteredEmployees, true)); // Debug: ดูเฉพาะ 3 คนที่มี picture
+
+
 				$branchIds = Branch::find()->select('branchId')
 					->where(["companyId" => $companyId, "status" => 1])
 					->asArray()->column();  // คืนค่าเป็น array แทน all()
 
 				$totalBranch = count($branchIds);
-				$totalEmployee = Employee::find()->where(["companyId" => $companyId])->count();
+				$totalEmployee = Employee::find()->where(["companyId" => $companyId, "status" => 1])->count();
 
 				$departments = [];
 				$teams = [];
@@ -163,11 +182,13 @@ class CompanyController extends Controller
 					"totalDepartment" => count($departments),
 					"totalTeam" => count($teams),
 					"totalBranch" => $totalBranch,
-					"totalEmployee" => $totalEmployee
+					"totalEmployee" => $totalEmployee,
+					"employees" => $filteredEmployees
 				];
 			endforeach;
 		}
 
+		
 
 		return $this->render('company_grid', [
 			"companies" => $data,

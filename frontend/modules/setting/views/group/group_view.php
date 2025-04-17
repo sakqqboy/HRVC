@@ -184,15 +184,15 @@ $this->title = 'Group profile';
                                             <div class="col-lg-8 col-md-8 col-8 text-left">
                                                 <div class="circle-container">
                                                     <div class="cycle-current-yellow">
-                                                        <img src="<?= Yii::$app->homeUrl ?>image/branches.svg"
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg"
                                                             alt="icon">
                                                     </div>
                                                     <div class="cycle-current-yellow">
-                                                        <img src="<?= Yii::$app->homeUrl ?>image/branches.svg"
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg"
                                                             alt="icon">
                                                     </div>
                                                     <div class="cycle-current-yellow">
-                                                        <img src="<?= Yii::$app->homeUrl ?>image/branches.svg"
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg"
                                                             alt="icon">
                                                     </div>
                                                     <div class="number-current"><?= $totalBranches ?></div>

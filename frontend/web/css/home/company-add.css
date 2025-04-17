@@ -23,7 +23,7 @@
     /* box-sizing: border-box; */
     /* overflow: hidden; */
 
-    display: flex;
+    /* display: flex; */
     padding: 30px;
     flex-direction: column;
     justify-content: center;

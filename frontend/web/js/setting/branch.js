@@ -5,7 +5,7 @@ if (window.location.host == 'localhost') {
     $baseUrl = window.location.protocol + "//" + window.location.host + '/';
 }
 $url = $baseUrl;
-$("#create-branch").click(function(e) {
+$("#create-branch").click(function (e) {
     var url = $url + 'setting/branch/save-create-branch';
     var branchName = $("#branchName").val();
     var companyId = $("#company").val();
@@ -20,7 +20,7 @@ $("#create-branch").click(function(e) {
             dataType: 'json',
             url: url,
             data: { branchName: branchName, companyId: companyId, description: description },
-            success: function(data) {
+            success: function (data) {
                 if (data.status) {
                     $("#branchName").val('');
                     $("#description").val('');
@@ -34,6 +34,7 @@ $("#create-branch").click(function(e) {
     }
 });
 
+
 function deleteBranch(branchId) {
     if (confirm("Are you sure to delete this branch")) {
         var url = $url + 'setting/branch/delete-branch';
@@ -42,7 +43,7 @@ function deleteBranch(branchId) {
             dataType: 'json',
             url: url,
             data: { branchId: branchId },
-            success: function(data) {
+            success: function (data) {
                 if (data.status) {
                     $("#branch-" + branchId).hide(200);
                 } else {
@@ -61,7 +62,7 @@ function updateBranch(branchId) {
         dataType: 'json',
         url: url,
         data: { branchId: branchId },
-        success: function(data) {
+        success: function (data) {
             $("#create-branch").css("display", "none");
             $("#update-branch").show();
             $("#reset-branch").show();
@@ -72,7 +73,7 @@ function updateBranch(branchId) {
         }
     });
 }
-$("#update-branch").click(function(e) {
+$("#update-branch").click(function (e) {
     var url = $url + 'setting/branch/save-update-branch';
     var branchName = $("#branchName").val();
     var branchId = $("#branchId").val();
@@ -86,7 +87,7 @@ $("#update-branch").click(function(e) {
             dataType: 'json',
             url: url,
             data: { branchName: branchName, branchId: branchId, description: description, companyId: companyId },
-            success: function(data) {
+            success: function (data) {
                 if (data.status) {
                     $("#branchId").val('');
                     $("#branchName").val('');
@@ -103,7 +104,7 @@ $("#update-branch").click(function(e) {
         });
     }
 });
-$("#reset-branch").click(function(e) {
+$("#reset-branch").click(function (e) {
     $("#branchId").val('');
     $("#branchName").val('');
     $("#description").val('');
@@ -120,7 +121,7 @@ function filterBranchCompany() {
         dataType: 'json',
         url: url,
         data: { companyId: companyId },
-        success: function(data) {
+        success: function (data) {
             $("#branch-company").html(data.branch);
         }
     });
