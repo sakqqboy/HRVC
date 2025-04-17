@@ -82,6 +82,10 @@ class CompanyController extends Controller
 
 	public function actionCompanyGrid()
 	{
+		// throw new Exception(print_r('sss', true));
+		// $companyId = Yii::$app->request->post('companyId');
+    	// $countryId = Yii::$app->request->post('countryId');
+
 		$group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
 		if (!isset($group) && !empty($group)) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
@@ -188,8 +192,6 @@ class CompanyController extends Controller
 			endforeach;
 		}
 
-		
-
 		return $this->render('company_grid', [
 			"companies" => $data,
 			"role" => $role,
@@ -197,6 +199,7 @@ class CompanyController extends Controller
 			"countries" => $countries
 		]);
 	}
+	
 	public function actionCreate($hash)
 	{
 		$param = ModelMaster::decodeParams($hash);
