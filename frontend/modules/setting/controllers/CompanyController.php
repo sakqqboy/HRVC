@@ -80,12 +80,24 @@ class CompanyController extends Controller
 		]);
 	}
 
+	public function actionEncodeParamsCountry() {
+		Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+	
+		$countryId = Yii::$app->request->post('countryId');
+		$url =  ModelMaster::encodeParams(['countryId' => $countryId]);
+	
+		return $this->redirect(Yii::$app->homeUrl . 'setting/company/company-grid-filter/'. $url );
+	}
+	
 	public function actionCompanyGrid()
 	{
-		// throw new Exception(print_r('sss', true));
-		// $companyId = Yii::$app->request->post('companyId');
-    	// $countryId = Yii::$app->request->post('countryId');
+			// throw new Exception(print_r($countryId, true));
 
+		// if (Yii::$app->request->isPost && Yii::$app->request->post('countryId') !== null) {
+		// 	$countryId = Yii::$app->request->post('countryId');
+		// 	// throw new Exception(print_r($countryId, true));
+		// }
+		
 		$group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
 		if (!isset($group) && !empty($group)) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
@@ -114,14 +126,145 @@ class CompanyController extends Controller
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		if (empty($countryId)) {
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		}else{
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group-filter?id=' . $groupId . '&countryId=' . $countryId);
+		}
 		$companies = curl_exec($api);
 
 		if ($companies === false) {
 			throw new Exception('API Error: ' . curl_error($api));
 		}
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/company-country');
+		$result1 = curl_exec($api);
+		$countries = json_decode($result1, true);
+
+		$companies = json_decode($companies, true);
+		curl_close($api);
+				// throw new Exception(print_r($companies, true)); // Debug: ดูข้อมูลทั้งหมด
+
+		$data = [];
+		if (!empty($companies)) {
+			foreach ($companies as $company) :
+				$companyId = $company['companyId'];
+
+				$employees = Employee::find()
+				->where(["companyId" => $companyId])
+				->asArray()
+				->all();
+
+				// throw new Exception(print_r($employees, true)); // Debug: ดูข้อมูลทั้งหมด
+
+				// กรองเฉพาะที่มี picture
+				$filteredEmployees = array_filter($employees, function($employee) {
+					return !empty($employee['picture']);
+				});
+
+				// รีเซ็ต index และเลือกแค่ 3 คนแรก
+				$filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
+
+				// throw new Exception(print_r($filteredEmployees, true)); // Debug: ดูเฉพาะ 3 คนที่มี picture
+
+
+				$branchIds = Branch::find()->select('branchId')
+					->where(["companyId" => $companyId, "status" => 1])
+					->asArray()->column();  // คืนค่าเป็น array แทน all()
+
+				$totalBranch = count($branchIds);
+				$totalEmployee = Employee::find()->where(["companyId" => $companyId, "status" => 1])->count();
+
+				$departments = [];
+				$teams = [];
+				if (!empty($branchIds)) {
+					$departments = Department::find()->select('departmentId')
+						->where(["status" => 1])
+						->andWhere(['IN', 'branchId', $branchIds])
+						->asArray()->column();
+
+					if (!empty($departments)) {
+						$teams = Team::find()->select('teamId')
+							->where(["status" => 1])
+							->andWhere(['IN', 'departmentId', $departments])
+							->asArray()->column();
+					}
+				}
+
+				$data[] = [
+					"about" => $company['about'],
+					"picture" => $company["picture"],
+					"companyName" => $company['companyName'],
+					"flag" => $company['flag'],
+					"city" => $company['city'],
+					"countryName" => $company['countryName'],
+					"companyId" => $company['companyId'],
+					"totalDepartment" => count($departments),
+					"totalTeam" => count($teams),
+					"totalBranch" => $totalBranch,
+					"totalEmployee" => $totalEmployee,
+					"employees" => $filteredEmployees
+				];
+			endforeach;
+		}
+
+		return $this->render('company_grid', [
+			"companies" => $data,
+			"role" => $role,
+			"groupId" => $groupId,
+			"countries" => $countries
+		]);
+	}
+
+
+	public function actionCompanyGridFilter($hash)
+	{
+			// throw new Exception(print_r($countryId, true));
+			// $countryId = Yii::$app->request->post('countryId');
+			$param = ModelMaster::decodeParams($hash);
+			$countryId = $param["countryId"];
+
+		// if (Yii::$app->request->isPost && Yii::$app->request->post('countryId') !== null) {
+		// 	$countryId = Yii::$app->request->post('countryId');
+		// 	// throw new Exception(print_r($countryId, true));
+		// }
+		
+		$group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
+		if (!isset($group) && !empty($group)) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
+		}
+		$role = UserRole::userRight();
+		if ($role == 7) {
+			$adminId = Yii::$app->user->id;
+		}
+		if ($role == 6) {
+			$gmId = Yii::$app->user->id;
+		}
+		if ($role == 5) {
+			$managerId = Yii::$app->user->id;
+		}
+		if ($role == 4) {
+			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$teamLeaderId = Yii::$app->user->id;
+		}
+		if ($role == 1 || $role == 2) {
+			$staffId = Yii::$app->user->id;
+			//return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
+		}
+		$groupId = $group["groupId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group-filter?id=' . $groupId . '&countryId=' . $countryId);
+		$companies = curl_exec($api);
+
+		if ($companies === false) {
+			throw new Exception('API Error: ' . curl_error($api));
+		}
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/company-country');
 		$result1 = curl_exec($api);
 		$countries = json_decode($result1, true);
 

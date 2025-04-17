@@ -35,10 +35,7 @@ function applySelectStyle(selectElement) {
 
 function filterCountryCompany() {
     const countryId = document.getElementById('countrySelect').value;
-    alert(countryId);
-
-    var url = $url + 'setting/company/company-grid';
-    alert(url);
+    var url = $url + 'setting/company/encode-params-country';
 
     $.ajax({
         type: "POST",
@@ -48,7 +45,10 @@ function filterCountryCompany() {
             countryId: countryId
         },
         success: function(data) {
-
+            // window.location.href = "company-grid-filter/" + data.url;
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX request failed: " + error);
         }
     });
 }
