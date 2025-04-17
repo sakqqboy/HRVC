@@ -26,6 +26,24 @@
     padding: 2%;
 }
 
+
+.card-comany {
+    display: flex;
+    margin-bottom: 20px;
+    padding: 22px;
+    height: 300px;
+    /* flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+    gap: 24px;
+    align-self: stretch;
+    border-radius: 4px;
+    border: 1px solid var(--Stroke-Bluish-Gray, #BBCDDE);
+    background: #F9FBFF;
+    /* padding: 2%; */
+}
+
+
 .width-risk {
     width: 150px;
 }

@@ -35,3 +35,17 @@
     height: 25px;
     border-radius: 3px;
 }
+
+.name-crad-company {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    align-self: stretch;
+    overflow: hidden;
+    color: var(--HRVC---Text-Black, #30313D);
+    text-overflow: ellipsis;
+    font-family: "SF Pro Display";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}

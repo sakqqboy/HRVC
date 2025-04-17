@@ -55,8 +55,8 @@ $this->title = 'company';
 						$about = substr($company['about'], 0, $maxLength);
 				?>
                 <div class="col-lg-6 col-md-5 col-sm-3 col-12">
-                    <div class="card" style="border: none;">
-                        <div class="card-body" style="background: #F4F6F9;  border-radius: 5px;">
+                    <div class="card-comany">
+                        <div class="card-body" style="background: #F9FBFF;  border-radius: 5px;">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="between-center" style="
@@ -79,7 +79,7 @@ $this->title = 'company';
                                                 ?>
                                             </div>
                                             <div class="header-crad-branch">
-                                                <div class="name-crad-branch">
+                                                <div class="name-crad-company">
                                                     <?= $company['companyName'] ?>
                                                 </div>
                                                 <div class="city-crad-branch">
@@ -91,7 +91,7 @@ $this->title = 'company';
                                         </div>
                                         <span class="dropdown" href="#" id="dropdownMenuLink-1"
                                             data-bs-toggle="dropdown" style="align-self: flex-start;">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/menu.svg" alt="icon"
+                                            <img src="<?= Yii::$app->homeUrl ?>image/3-dot.svg" alt="icon"
                                                 style="cursor: pointer;">
                                         </span>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-1">
