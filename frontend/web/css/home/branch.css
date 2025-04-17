@@ -94,12 +94,12 @@
 
 .btn-create-branch {
     display: flex;
-    /* width: 100px;
-    height: 40px; */
+    width: 131.43;
+    height: 30px;
     padding: 7px 9px;
     justify-content: center;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
     flex-shrink: 0;
     border: none;
     border-radius: 3px;
@@ -107,8 +107,7 @@
     color: #FFF;
     text-align: center;
     font-family: "SF Pro Display";
-    font-size: 16px;
-    font-style: normal;
+    font-size: 14px;
     font-weight: 600;
     line-height: 28px;
     /* 175% */

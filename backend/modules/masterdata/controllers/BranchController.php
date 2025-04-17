@@ -30,7 +30,7 @@ class BranchController extends Controller
 			->select('branch.*,co.countryName,c.companyName,c.picture,co.flag,c.city')
 			->JOIN("LEFT JOIN", "company c", "branch.companyId=c.companyId")
 			->JOIN("LEFT JOIN", "country co", "co.countryId=c.countryId")
-			->where(["branch.status" => 1, "branch.companyId" => $id])
+			->where(["branch.status" => 0, "branch.companyId" => $id])
 			->orderBy('branch.branchName')
 			->asArray()
 			->all();
@@ -43,7 +43,7 @@ class BranchController extends Controller
 			->select('branch.*,co.countryName,c.companyName,c.picture,co.flag,c.city')
 			->JOIN("LEFT JOIN", "company c", "branch.companyId=c.companyId")
 			->JOIN("LEFT JOIN", "country co", "co.countryId=c.countryId")
-			->where(["branch.status" => 1])
+			->where(["branch.status" => 0])
 			->orderBy('c.companyName')
 			->asArray()->all();
 		return json_encode($branch);
