@@ -9,7 +9,6 @@ $this->title = 'company';
 
 <div class="contrainer-body mt-10">
 
-
     <div class="between-center mt-20" style="width: 100%;">
         <div class="col-9">
             <div class=" d-flex align-items-center gap-2">
@@ -227,12 +226,16 @@ $this->title = 'company';
                                                             </button>
                                                             <? } ?>
                                                             <?php if($company['totalBranch'] > 0 && $company['totalDepartment'] == 0) { ?>
-                                                            <button type="button" class="btn-create-small"
-                                                                action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
-                                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
-                                                                    style="width: 12px; height: 12px;">
-                                                                Create
-                                                            </button>
+                                                            <a
+                                                                href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>">
+                                                                style="text-decoration: none;">
+                                                                <button type="button" class="btn-create-small"
+                                                                    action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
+                                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
+                                                                        style="width: 12px; height: 12px;">
+                                                                    Create
+                                                                </button>
+                                                            </a>
                                                             <? } ?>
                                                             <?php if($company['totalDepartment'] > 0) { ?>
                                                             <a class="text-see-all"
@@ -278,12 +281,15 @@ $this->title = 'company';
                                                             </button>
                                                             <? } ?>
                                                             <?php if($company['totalDepartment'] > 0 && $company['totalTeam'] == 0) { ?>
-                                                            <button type="button" class="btn-create-small"
-                                                                action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
-                                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
-                                                                    style="width: 12px; height: 12px;">
-                                                                Create
-                                                            </button>
+                                                            <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
+                                                                style="text-decoration: none;">
+                                                                <button type="button" class="btn-create-small"
+                                                                    action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
+                                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
+                                                                        style="width: 12px; height: 12px;">
+                                                                    Create
+                                                                </button>
+                                                            </a>
                                                             <? } ?>
                                                             <?php if($company['totalTeam'] > 0) { ?>
                                                             <a class="text-see-all"
@@ -349,12 +355,15 @@ $this->title = 'company';
                                                             </button>
                                                             <? } ?>
                                                             <?php if($company['totalTeam'] > 0 && $company['totalEmployee'] == 0) { ?>
+                                                            <a href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
+                                                                style="text-decoration: none;"></a>
                                                             <button type="button" class="btn-create-small"
                                                                 action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
                                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
                                                                     style="width: 12px; height: 12px;">
                                                                 Create
                                                             </button>
+                                                            </a>
                                                             <? } ?>
                                                             <?php if($company['totalEmployee'] > 0) { ?>
                                                             <a class="text-see-all" style="font-size: 10.5px; "

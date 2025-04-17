@@ -123,6 +123,7 @@ class CompanyController extends Controller
 
 		$companies = json_decode($companies, true);
 		curl_close($api);
+				// throw new Exception(print_r($companies, true)); // Debug: ดูข้อมูลทั้งหมด
 
 		$data = [];
 		if (!empty($companies)) {

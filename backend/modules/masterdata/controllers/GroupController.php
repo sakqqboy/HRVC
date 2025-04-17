@@ -46,4 +46,19 @@ class GroupController extends Controller
             ->all();
         return json_encode($company);
     }
+
+    public function actionCompanyGroupFillter($id)
+    {
+        $company = [];
+        $company = Company::find()
+            ->select('company.companyName,company.companyId,company.city,c.countryName,
+            company.picture,company.headQuaterId,company.industries,g.groupName,c.flag,company.about')
+            ->JOIN("LEFT JOIN", "country c", "c.countryId=company.countryId")
+            ->JOIN("LEFT JOIN", "group g", "g.groupId=company.groupId")
+            ->where(["company.groupId" => $id, "company.status" => 1])
+            ->orderBy('company.companyName')
+            ->asArray()
+            ->all();
+        return json_encode($company);
+    }
 }
