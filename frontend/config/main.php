@@ -92,6 +92,7 @@ return [
                 'setting/company/company-grid/<hash>' => 'setting/company/company-grid',
                 'setting/company/company-grid-filter/<hash>' => 'setting/company/company-grid-filter',
                 'setting/company/display_company/<hash>' => 'setting/company/display_company',
+                'setting/branch/index/<hash>' => 'setting/branch/index',
                 'setting/branch/create/<hash>' => 'setting/branch/create',
                 'setting/department/create/<hash>' => 'setting/department/create',
                 'setting/department/search-result/<hash>' => 'setting/department/search-result',

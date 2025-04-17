@@ -36,9 +36,102 @@ class BranchController extends Controller
         }
         return true; //go to origin request
     }
-    public function actionIndex()
+    public function actionIndex($hash)
     {
-        return $this->render('index');
+        $param = ModelMaster::decodeParams($hash);
+        $companyId = $param["companyId"];
+        $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
+        if (!isset($group) && !empty($group)) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
+        }
+        $company = [];
+        $totalEmployees = 0;
+        $totalDepartment = 0;
+        $totalTeam = 0;
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+        if ($companyId != '') {
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
+            $company = curl_exec($api);
+            $company = json_decode($company, true);
+
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
+            $branchJson = curl_exec($api);
+            $branches = json_decode($branchJson, true);
+
+            $branchess = Branch::find()
+                ->where(["status" => 1, "companyId" => $companyId])
+                ->asArray()
+                ->all();
+
+            // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/country-detail?id=' . $company["countryId"]);
+            // $resultCountryDetail = curl_exec($api);
+            // $companyCountry = json_decode($resultCountryDetail, true);
+        } else {
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch');
+            $branchJson = curl_exec($api);
+            $branches = json_decode($branchJson, true);
+
+            $branchess = Branch::find()
+                ->where(["status" => 1])
+                ->asArray()
+                ->all();
+        }
+        //  throw new Exception(print_r($companies, true));
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $group["groupId"]);
+        $companyJson = curl_exec($api);
+        $companyGroup = json_decode($companyJson, true);
+
+        curl_close($api);
+
+        if (isset($branchess) && count($branchess) > 0) {
+            foreach ($branchess as $branch) :
+                $departments = Department::find()
+                    ->where(["branchId" => $branch["branchId"], "status" => 1])
+                    ->asArray()
+                    ->all();
+                foreach ($departments as $department) :
+                    $teams = Team::find()
+                        ->where(["departmentId" => $department["departmentId"], "status" => 1])
+                        ->asArray()
+                        ->all();
+                    if (isset($teams) && count($teams) > 0) {
+                        foreach ($teams as $team) :
+                            $employees = Employee::find()
+                                ->where(["status" => 1, "teamId" => $team["teamId"]])
+                                ->asArray()
+                                ->all();
+                            $totalEmployees += count($employees);
+                        endforeach;
+                    }
+                    $totalTeam += count($teams);
+                endforeach;
+                $totalDepartment += count($departments);
+            endforeach;
+        }
+
+        //  throw new Exception(print_r($branches, true));
+
+        if (count($branches) > 0) {
+            return $this->render('index', [
+                "company" => $company,
+                "companies" => $companyGroup,
+                "branches" => $branches,
+                // "country" => $companyCountry,
+                "companyId" => $companyId,
+                "totalEmployees" => $totalEmployees,
+                "totalDepartment" => $totalDepartment,
+                "totalTeam" => $totalTeam,
+
+            ]);
+        } else {
+            return $this->render('no_branch', [
+                "companyId" => $companyId
+            ]);
+        }
     }
     public function actionCreate($hash)
     {
@@ -117,18 +210,13 @@ class BranchController extends Controller
             endforeach;
         }
 
-                //  throw new Exception(print_r($branches, true));
+        //  throw new Exception(print_r($branches, true));
 
 
         return $this->render('create', [
             "company" => $company,
             "companies" => $companyGroup,
-            "branches" => $branches,
-            // "country" => $companyCountry,
             "companyId" => $companyId,
-            "totalEmployees" => $totalEmployees,
-            "totalDepartment" => $totalDepartment,
-            "totalTeam" => $totalTeam,
 
         ]);
     }
