@@ -248,6 +248,40 @@
 
 }
 
+.btn-create-small {
+    color: var(--100-white, #FFF);
+    font-size: 11.455px;
+    font-weight: 600;
+    padding: 1px 6px;
+    height: 18px;
+    font-size: 10px;
+    line-height: 14px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    border-radius: 3.273px;
+    background: var(--Primary-Blue---HRVC, #2580D3);
+    border: none;
+    cursor: pointer;
+}
+
+.btn-disble-small {
+    color: var(--100-white, #000);
+    font-size: 11.455px;
+    font-weight: 600;
+    padding: 1px 6px;
+    height: 18px;
+    font-size: 10px;
+    line-height: 14px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    border-radius: 3.273px;
+    background: var(--Overall-Blocked, #C3C3C3);
+    border: none;
+    cursor: pointer;
+}
+
 .btn-reply {
     background-color: #2580D3;
     color: white;

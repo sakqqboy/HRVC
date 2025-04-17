@@ -185,8 +185,6 @@
 
 .name-text-update {
     color: var(--HRVC---Text-Black, #30313D);
-    leading-trim: both;
-    text-edge: cap;
     font-family: "SF Pro Display";
     font-size: 18px;
     font-style: normal;
@@ -204,10 +202,29 @@
     /* padding-top: 20px; */
 }
 
+.title-create-text {
+    color: var(--HRVC---Text-Black, #30313D);
+    text-align: center;
+    font-family: "SF Pro Display";
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+}
+
+.body-create-text {
+    width: 513px;
+    color: #939393;
+    text-align: center;
+    font-family: "SF Pro Display";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+}
+
 .name-full-tokyo {
     color: var(--HRVC---Light-Text, #94989C);
-    leading-trim: both;
-    text-edge: cap;
     font-family: "SF Pro Display";
     font-size: 20px;
     font-style: normal;
@@ -217,8 +234,6 @@
 
 .name-sub-tokyo {
     color: var(--HRVC---Text-Black, #30313D);
-    leading-trim: both;
-    text-edge: cap;
     font-family: "SF Pro Display";
     font-size: 24px;
     font-style: normal;
@@ -229,8 +244,6 @@
 
 .tokyo-small {
     color: #3C3D48;
-    leading-trim: both;
-    text-edge: cap;
     font-family: "SF Pro Display";
     font-size: 14px;
     font-style: normal;
@@ -262,8 +275,6 @@
 .Group-Information {
     /* padding-left: 40px; */
     color: #3C3D48;
-    leading-trim: both;
-    text-edge: cap;
     font-family: "SF Pro Display";
     font-size: 12px;
     font-style: normal;
@@ -275,8 +286,6 @@
 .name-head {
     color: var(--HRVC---Text-Black, #30313D);
     text-align: right;
-    leading-trim: both;
-    text-edge: cap;
     font-family: "SF Pro Display";
     font-size: 12px;
     font-style: normal;
@@ -287,8 +296,6 @@
 
 .name-director {
     color: var(--Primary-Blue---HRVC, #2580D3);
-    leading-trim: both;
-    text-edge: cap;
     font-family: "SF Pro Display";
     font-size: 12px;
     font-style: normal;
@@ -516,6 +523,33 @@
     text-transform: capitalize;
     position: relative;
 }
+
+
+.number-current-cycle {
+    font-size: 16px;
+    background: #FFF;
+    border-radius: 15.75px;
+    border: 0.75px solid #3C3D48;
+    padding: 10.5px 9.75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: auto;
+    min-width: 32.25px;
+    height: 32.25px;
+    margin-left: -21px;
+    /* ซ้อนทับกับวงกลมก่อนหน้า */
+    z-index: 2;
+    color: var(--HRVC---Text-Black, #30313D);
+    font-family: "SF Pro Display";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: capitalize;
+    position: relative;
+}
+
 
 
 
