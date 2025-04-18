@@ -5,7 +5,11 @@ use common\models\ModelMaster;
 $this->title = 'Create Branch';
 ?>
 <div class="container-body submain-background mid-center">
-    <div class="col-12">
+    <div class="col-12 pim-name-title">
+        <a href="<?= Yii::$app->request->referrer ?: Yii::$app->homeUrl ?>" style="text-decoration: none;width:66px;height:26px;" class="btn-create-branch">
+            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg" style="width:18px; height:18px; margin-top:-3px;">
+            <?= Yii::t('app', 'Back') ?>
+        </a>
         <?= Yii::t('app', 'Create Branch') ?>
     </div>
     <div class="mid-center max-background"
