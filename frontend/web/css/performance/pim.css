@@ -2396,10 +2396,19 @@ input:checked+.slider:before {
 		z-index: 1001;
 	}
 
-	.dropdown-menu.show {
-		transform: translate(0px, 0px) !important;
-		/* หรือระบุค่าที่ต้องการ */
+	.dropdown-menu {
+		transition: transform 0.2s ease-in-out, opacity 0.2s;
+		opacity: 0;
+		transform: translateY(-5px);
 	}
+
+	.dropdown-menu.show {
+		opacity: 1;
+		transform: translateY(0px);
+		transform: translate(0px, 0px) !important;
+
+	}
+
 
 	/* .menu-dot:has(.dropdown-menu.show) {
 		margin-top: 0 !important;

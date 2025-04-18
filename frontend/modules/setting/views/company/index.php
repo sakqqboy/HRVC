@@ -4,6 +4,7 @@ use common\models\ModelMaster;
 
 $this->title = 'company';
 ?>
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 
 <div class="contrainer-body mt-10">
 
@@ -43,8 +44,8 @@ $this->title = 'company';
 
     <div class="company-group-edit mt-30">
         <div class="col-12 mt-20 tb0">
-            <table class="table table-bordered">
-                <thead>
+            <table class="table align-middle">
+                <thead class="table-light">
                     <tr class="table-border-weight">
                         <th class="text-start">Company Name</th>
                         <th class="text-start">Country</th>
