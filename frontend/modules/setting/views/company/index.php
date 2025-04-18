@@ -44,15 +44,15 @@ $this->title = 'company';
 
     <div class="company-group-edit mt-30">
         <div class="col-12 mt-20 tb0">
-            <table class="table align-middle">
+            <table class="table align-middle table-spacing">
                 <thead class="table-light">
                     <tr class="table-border-weight">
-                        <th class="text-start">Company Name</th>
-                        <th class="text-start">Country</th>
-                        <th class="text-start">Branch</th>
-                        <th class="text-start">Department</th>
-                        <th class="text-start">Team</th>
-                        <th class="text-start">Employee</th>
+                        <th class="text-start" onclick="sortTable(0)">Company Name</th>
+                        <th class="text-start" onclick="sortTable(0)">Country</th>
+                        <th class="text-start" onclick="sortTable(0)">Branch</th>
+                        <th class="text-start" onclick="sortTable(0)">Department</th>
+                        <th class="text-start" onclick="sortTable(0)">Team</th>
+                        <th class="text-start" onclick="sortTable(0)">Employee</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -64,155 +64,153 @@ $this->title = 'company';
                             $maxLength = 200;
                             $about = substr($company['about'], 0, $maxLength);
                     ?>
-                    <tr class="tr-font" id="company-<?= $company['companyId'] ?>">
 
+                    <tr class="tr-font list-table-body " id="company-<?= $company['companyId'] ?>">
                         <td>
                             <?php
                                     if ($company["picture"] != null) { ?>
-                            <img src="<?= Yii::$app->homeUrl ?><?= $company['picture'] ?>" class="width-aa">
+                            <img src="<?= Yii::$app->homeUrl ?><?= $company['picture'] ?>" class="width-aa mr-10">
                             <?php
                                     } else { ?>
-                            <img src="<?= Yii::$app->homeUrl . 'image/userProfile.png' ?>" class="width-aa">
+                            <img src="<?= Yii::$app->homeUrl . 'image/userProfile.png' ?>" class="width-aa mr-10">
                             <?php
                                     }
                                     ?>
                             <?= $company['companyName'] ?>
                         </td>
                         <td>
-                            <img src="<?= Yii::$app->homeUrl ?><?= $company['flag'] ?>" class="bangladresh-hrvc">
+                            <img src="<?= Yii::$app->homeUrl ?><?= $company['flag'] ?>" class="bangladresh-hrvc mr-10"">
                             <?= $company['countryName'] ?>
                         </td>
                         <td>
-                            <div class="circle-container ml-15 ml-15">
-                                <div class="cycle-current-<?= $company['totalBranch'] >= 1 ? 'yellow' : 'gray' ?>">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
-                                </div>
-                                <div class="cycle-current-<?= $company['totalBranch'] >= 2 ? 'yellow' : 'gray' ?>">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
-                                </div>
-                                <div class="cycle-current-<?= $company['totalBranch'] >= 3 ? 'yellow' : 'gray' ?>">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
-                                </div>
-                                <div class="number-current-cycle ">
-                                    <?= $company['totalBranch'] ?>
-                                </div>
+                            <div class=" circle-container ml-15 ml-15">
+                            <div class="cycle-current-<?= $company['totalBranch'] >= 1 ? 'yellow' : 'gray' ?>">
+                                <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
                             </div>
-                        </td>
-                        <td>
-                            <div class="circle-container ml-15">
-                                <div class="cycle-current-<?= $company['totalDepartment'] >= 1 ? 'red' : 'gray' ?>">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/departments<?= $company['totalDepartment'] >= 1 ? '' : '-black' ?>.svg"
-                                        alt="icon">
-                                </div>
-                                <div class="cycle-current-<?= $company['totalDepartment'] >= 2 ? 'red' : 'gray' ?>">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/departments<?= $company['totalDepartment'] >= 2 ? '' : '-black' ?>.svg"
-                                        alt="icon">
-                                </div>
-                                <div class="cycle-current-<?= $company['totalDepartment'] >= 3 ? 'red' : 'gray' ?>">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/departments<?= $company['totalDepartment'] >= 3 ? '' : '-black' ?>.svg"
-                                        alt="icon">
-                                </div>
-                                <div class="number-current-cycle ">
-                                    <?= $company['totalDepartment'] ?>
-                                </div>
+                            <div class="cycle-current-<?= $company['totalBranch'] >= 2 ? 'yellow' : 'gray' ?>">
+                                <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
                             </div>
-                        </td>
-                        <td>
-                            <div class="circle-container ml-15">
-                                <div class="cycle-current-<?= $company['totalTeam'] >= 1 ? 'green' : 'gray' ?>">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/teams<?= $company['totalTeam'] >= 1 ? '' : '-black' ?>.svg"
-                                        alt="icon">
-                                </div>
-                                <div class="cycle-current-<?= $company['totalTeam'] >= 2 ? 'green' : 'gray' ?>">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/teams<?= $company['totalTeam'] >= 2 ? '' : '-black' ?>.svg"
-                                        alt="icon">
-                                </div>
-                                <div class="cycle-current-<?= $company['totalTeam'] >= 3 ? 'green' : 'gray' ?>">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/teams<?= $company['totalTeam'] >= 3 ? '' : '-black' ?>.svg"
-                                        alt="icon">
-                                </div>
-                                <div class="number-current-cycle "><?= $company['totalTeam'] ?>
-                                </div>
+                            <div class="cycle-current-<?= $company['totalBranch'] >= 3 ? 'yellow' : 'gray' ?>">
+                                <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
                             </div>
-                        </td>
-                        <td>
-                            <div class="circle-container ml-15">
-                                <?php if($company['totalEmployee'] >= 1) { ?>
-                                <div class="cycle-image mr-3">
-                                    <img src="<?= Yii::$app->homeUrl ?><?php echo $company['employees'][0]['picture'] ?>"
-                                        alt="icon">
-                                </div>
-                                <?php }else{ ?>
-                                <div class="cycle-current-gray"><img
-                                        src="<?= Yii::$app->homeUrl ?>image/employees-black.svg" alt="icon">
-                                </div>
-                                <?php } ?>
-                                <?php if($company['totalEmployee'] >= 2) { ?>
-                                <div class="cycle-image mr-3">
-                                    <img src="<?= Yii::$app->homeUrl ?><?php echo $company['employees'][1]['picture'] ?>"
-                                        alt="icon">
-                                </div>
-                                <?php }else{ ?>
-                                <div class="cycle-current-gray"><img
-                                        src="<?= Yii::$app->homeUrl ?>image/employees-black.svg" alt="icon">
-                                </div>
-                                <?php } ?>
-                                <?php if($company['totalEmployee'] >= 3) { ?>
-                                <div class="cycle-image mr-3">
-                                    <img src="<?= Yii::$app->homeUrl ?><?php echo $company['employees'][2]['picture'] ?>"
-                                        alt="icon">
-                                </div>
-                                <?php }else{ ?>
-                                <div class="cycle-current-gray"><img
-                                        src="<?= Yii::$app->homeUrl ?>image/employees-black.svg" alt="icon">
-                                </div>
-                                <?php } ?>
-                                <div class="number-current-cycle ">
-                                    <?= $company['totalEmployee'] ?>
-                                </div>
+                            <div class="number-current-cycle ">
+                                <?= $company['totalBranch'] ?>
                             </div>
-                        </td>
-                        <td class="text-center">
-                            <a href="
+        </div>
+        </td>
+        <td>
+            <div class="circle-container ml-15">
+                <div class="cycle-current-<?= $company['totalDepartment'] >= 1 ? 'red' : 'gray' ?>">
+                    <img src="<?= Yii::$app->homeUrl ?>image/departments<?= $company['totalDepartment'] >= 1 ? '' : '-black' ?>.svg"
+                        alt="icon">
+                </div>
+                <div class="cycle-current-<?= $company['totalDepartment'] >= 2 ? 'red' : 'gray' ?>">
+                    <img src="<?= Yii::$app->homeUrl ?>image/departments<?= $company['totalDepartment'] >= 2 ? '' : '-black' ?>.svg"
+                        alt="icon">
+                </div>
+                <div class="cycle-current-<?= $company['totalDepartment'] >= 3 ? 'red' : 'gray' ?>">
+                    <img src="<?= Yii::$app->homeUrl ?>image/departments<?= $company['totalDepartment'] >= 3 ? '' : '-black' ?>.svg"
+                        alt="icon">
+                </div>
+                <div class="number-current-cycle ">
+                    <?= $company['totalDepartment'] ?>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="circle-container ml-15">
+                <div class="cycle-current-<?= $company['totalTeam'] >= 1 ? 'green' : 'gray' ?>">
+                    <img src="<?= Yii::$app->homeUrl ?>image/teams<?= $company['totalTeam'] >= 1 ? '' : '-black' ?>.svg"
+                        alt="icon">
+                </div>
+                <div class="cycle-current-<?= $company['totalTeam'] >= 2 ? 'green' : 'gray' ?>">
+                    <img src="<?= Yii::$app->homeUrl ?>image/teams<?= $company['totalTeam'] >= 2 ? '' : '-black' ?>.svg"
+                        alt="icon">
+                </div>
+                <div class="cycle-current-<?= $company['totalTeam'] >= 3 ? 'green' : 'gray' ?>">
+                    <img src="<?= Yii::$app->homeUrl ?>image/teams<?= $company['totalTeam'] >= 3 ? '' : '-black' ?>.svg"
+                        alt="icon">
+                </div>
+                <div class="number-current-cycle "><?= $company['totalTeam'] ?>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="circle-container ml-15">
+                <?php if($company['totalEmployee'] >= 1) { ?>
+                <div class="cycle-image mr-3">
+                    <img src="<?= Yii::$app->homeUrl ?><?php echo $company['employees'][0]['picture'] ?>" alt="icon">
+                </div>
+                <?php }else{ ?>
+                <div class="cycle-current-gray"><img src="<?= Yii::$app->homeUrl ?>image/employees-black.svg"
+                        alt="icon">
+                </div>
+                <?php } ?>
+                <?php if($company['totalEmployee'] >= 2) { ?>
+                <div class="cycle-image mr-3">
+                    <img src="<?= Yii::$app->homeUrl ?><?php echo $company['employees'][1]['picture'] ?>" alt="icon">
+                </div>
+                <?php }else{ ?>
+                <div class="cycle-current-gray"><img src="<?= Yii::$app->homeUrl ?>image/employees-black.svg"
+                        alt="icon">
+                </div>
+                <?php } ?>
+                <?php if($company['totalEmployee'] >= 3) { ?>
+                <div class="cycle-image mr-3">
+                    <img src="<?= Yii::$app->homeUrl ?><?php echo $company['employees'][2]['picture'] ?>" alt="icon">
+                </div>
+                <?php }else{ ?>
+                <div class="cycle-current-gray"><img src="<?= Yii::$app->homeUrl ?>image/employees-black.svg"
+                        alt="icon">
+                </div>
+                <?php } ?>
+                <div class="number-current-cycle ">
+                    <?= $company['totalEmployee'] ?>
+                </div>
+            </div>
+        </td>
+        <td class="text-center">
+            <a href="
                                         <?= Yii::$app->homeUrl ?>setting/company/company-view/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
-                                class="mr-10" style="margin-top: 5px; ">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="History"
-                                    class="pim-icon" style="margin-top: -1px;">
-                            </a>
-                            <span class="dropdown" href="#" id="dropdownMenuLink-1" data-bs-toggle="dropdown"
-                                style="align-self: flex-start;">
-                                <img src="<?= Yii::$app->homeUrl ?>image/3-dot.svg" alt="icon" style="cursor: pointer;">
+                class="mr-10" style="margin-top: 5px; ">
+                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="History" class="pim-icon"
+                    style="margin-top: -1px;">
+            </a>
+            <span class="dropdown" href="#" id="dropdownMenuLink-1" data-bs-toggle="dropdown"
+                style="align-self: flex-start;">
+                <img src="<?= Yii::$app->homeUrl ?>image/3-dot.svg" alt="icon" style="cursor: pointer;">
 
-                            </span>
-                            <div class="menu-dot ">
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-1">
-                                    <li class="pl-4 pr-4">
-                                        <a href="<?= Yii::$app->homeUrl ?>setting/company/update-company/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
-                                            class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -1px; ">
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
-                                                alt="History" class="pim-icon mr-10" style="margin-top: -2px;">
-                                            edit </a>
-                                    </li>
-                                    <?php if($company['totalBranch'] == 0) { ?>
-                                    <li class="pl-4 pr-4">
-                                        <a class="dropdown-itemNEW pl-4 pr-25"
-                                            href="javascript:deleteCompany(<?= $company['companyId'] ?>)">
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/delete.svg"
-                                                alt="Delete" class="pim-icon mr-10" style="margin-top: -2px;">
-                                            Delete </a>
-                                    </li>
-                                    <?php } ?>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
-                    <?php
+            </span>
+            <div class="menu-dot ">
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-1">
+                    <li class="pl-4 pr-4">
+                        <a href="<?= Yii::$app->homeUrl ?>setting/company/update-company/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
+                            class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -1px; ">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg" alt="History"
+                                class="pim-icon mr-10" style="margin-top: -2px;">
+                            edit </a>
+                    </li>
+                    <?php if($company['totalBranch'] == 0) { ?>
+                    <li class="pl-4 pr-4">
+                        <a class="dropdown-itemNEW pl-4 pr-25"
+                            href="javascript:deleteCompany(<?= $company['companyId'] ?>)">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/delete.svg" alt="Delete"
+                                class="pim-icon mr-10" style="margin-top: -2px;">
+                            Delete </a>
+                    </li>
+                    <?php } ?>
+                </ul>
+            </div>
+        </td>
+        </tr>
+
+        <?php
                             $i++;
                         endforeach;
                     }
                     ?>
-                </tbody>
-            </table>
-        </div>
+        </tbody>
+        </table>
     </div>
+</div>
 </div>

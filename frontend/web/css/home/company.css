@@ -129,3 +129,92 @@
     line-height: 150%;
     /* 21px */
 }
+
+
+.list-table-body {
+    /* display: flex;
+    height: 45px;
+    align-items: center;
+    flex-shrink: 0; */
+    align-self: stretch;
+    border-radius: 3.456px;
+    border: 0.864px solid var(--Color-Tokens-Border-Primary, #E4E4E4);
+    background: var(--Color-Tokens-Background-Primary, #FFF);
+}
+
+.table-spacing {
+    border-collapse: separate !important;
+    border-spacing: 0 14px;
+}
+
+.table-spacing tbody tr {
+    border-radius: 3.456px;
+    background: var(--Color-Tokens-Background-Primary, #FFF);
+}
+
+.table-spacing tbody tr td {
+    border-top: 1px solid #E4E4E4;
+    border-bottom: 1px solid #E4E4E4;
+    padding: 16px 12px;
+    background: #fff;
+}
+
+.table-spacing tbody tr td:first-child {
+    border-left: 1px solid #E4E4E4;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.table-spacing tbody tr td:last-child {
+    border-right: 1px solid #E4E4E4;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.table-spacing thead tr th {
+    border-top: 1px solid #E4E4E4;
+    border-bottom: 1px solid #E4E4E4;
+    background: #F0F2F4;
+    padding: 16px 12px;
+}
+
+/* มุมมน + เส้นซ้าย */
+.table-spacing thead tr th:first-child {
+    border-left: 1px solid #E4E4E4;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+/* มุมมน + เส้นขวา */
+.table-spacing thead tr th:last-child {
+    border-right: 1px solid #E4E4E4;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.table-spacing thead tr th {
+    overflow: hidden;
+    color: var(--Color-Tokens-Content-Dark-Secondary, #727272);
+    text-overflow: ellipsis;
+    font-family: "SF Pro Display";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+    /* display: -webkit-box;
+    -webkit-box-orient: vertical; */
+}
+
+.table-spacing tbody tr td {
+    overflow: hidden;
+    color: var(--HRVC---Text-Black, #30313D);
+    text-overflow: ellipsis;
+    font-family: "SF Pro Display";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    /* display: -webkit-box;
+    -webkit-box-orient: vertical;
+    flex: 1 0 0; */
+}

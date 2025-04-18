@@ -20,36 +20,3 @@
     </span>
 
 </div>
-
-
-<script>
-function applySelectStyle(selectElement) {
-    if (selectElement.value) {
-        selectElement.classList.remove('select-pim');
-        selectElement.classList.add('select-pimselect');
-    } else {
-        selectElement.classList.remove('select-pimselect');
-        selectElement.classList.add('select-pim');
-    }
-}
-
-function filterCountryCompany() {
-    const countryId = document.getElementById('countrySelect').value;
-    var url = $url + 'setting/company/encode-params-country';
-
-    $.ajax({
-        type: "POST",
-        dataType: 'json',
-        url: url,
-        data: {
-            countryId: countryId
-        },
-        success: function(data) {
-            // window.location.href = "company-grid-filter/" + data.url;
-        },
-        error: function(xhr, status, error) {
-            console.error("AJAX request failed: " + error);
-        }
-    });
-}
-</script>
