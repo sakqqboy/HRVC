@@ -17,7 +17,8 @@ $this->title = 'New Company';
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-<div class="company-group-edit">
+<div class="company-group-body">
+    <!-- <div class="company-group-edit"> -->
     <div class="contrainer-body">
         <div class="col-12 banner-uploade" id="imagePreviewBanner">
 

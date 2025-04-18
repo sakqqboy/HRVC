@@ -5,18 +5,16 @@
             <?= Yii::t('app', 'Country') ?>
         </option>
         <?php
-
-            use common\models\ModelMaster;
-
- foreach ($countries as $countryId => $country) : ?>
+        foreach ($countries as $countryId => $country) : ?>
         <option value="<?= $countryId ?>"><?= $country ?></option>
         <?php endforeach; ?>
     </select>
 
     <span class="btn font-size-12 justify-content-center d-flex align-items-center custom-button-select"
-        onclick="filterCountryCompany()" style="flex: 1; text-align: center; cursor: pointer;">
+        onclick="filterCountryCompany('<?=$page?>')" style="flex: 1; text-align: center; cursor: pointer;">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterWhite.svg" class="pim-search-icons me-2">
         <?= Yii::t('app', 'Filter') ?>
     </span>
+
 
 </div>

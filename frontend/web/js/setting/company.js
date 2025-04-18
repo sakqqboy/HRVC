@@ -105,19 +105,23 @@ function applySelectStyle(selectElement) {
     }
 }
 
-function filterCountryCompany() {
+function filterCountryCompany(page) {
+    // console.log("Page:", page); // Add this line to check the value of `page`
+
     const countryId = document.getElementById('countrySelect').value;
     var url = $url + 'setting/company/encode-params-country';
-
+    // alert(page);
     $.ajax({
         type: "POST",
         dataType: 'json',
         url: url,
         data: {
-            countryId: countryId
+            countryId: countryId,
+            page: page
         },
         success: function (data) {
             // window.location.href = "company-grid-filter/" + data.url;
+            alert(data);
         },
         error: function (xhr, status, error) {
             console.error("AJAX request failed: " + error);

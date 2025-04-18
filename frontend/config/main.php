@@ -86,6 +86,7 @@ return [
                 'setting/group/display_group/<hash>' => 'setting/group/display_group',
                 'setting/group/group-view/<hash>' => 'setting/group/group-view',
                 'setting/group/update-group/<hash>' => 'setting/group/update-group',
+                'setting/company/index-filter/<hash>' => 'setting/company/index-filter',
                 'setting/company/company-view/<hash>' => 'setting/company/company-view',
                 'setting/company/create/<hash>' => 'setting/company/create',
                 'setting/company/update-company/<hash>' => 'setting/company/update-company',

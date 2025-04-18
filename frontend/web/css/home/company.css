@@ -218,3 +218,17 @@
     -webkit-box-orient: vertical;
     flex: 1 0 0; */
 }
+
+.table-spacing thead th {
+    position: relative;
+    cursor: pointer;
+    color: #727272;
+}
+
+.table-spacing thead th .sort-icon {
+    font-size: 12px;
+    margin-left: 4px;
+    color: #B5B5B5;
+    /* สีไอคอนอ่อนๆ */
+    vertical-align: middle;
+}

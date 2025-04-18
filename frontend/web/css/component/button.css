@@ -333,3 +333,95 @@
     padding: 3px 5px 3px 5px;
 
 }
+
+.btn-previous {
+    /* display: flex; */
+    /* width: 80px;
+    height: 26px; */
+    padding: 8px 10px;
+    /* flex-direction: column; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    gap: 10px;
+    border-radius: 4.048px;
+    border: 0.5px solid var(--Stroke-Bluish-Gray, #BBCDDE);
+    background: #FBFDFF;
+    color: var(--Primary-Blue---HRVC, #2580D3);
+    text-align: justify;
+    font-feature-settings: 'salt' on;
+    font-family: "SF Pro Display";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    /* line-height: 26.986px; */
+}
+
+
+.btn-next {
+    /* display: flex; */
+    width: 80px;
+    height: 26px;
+    /* padding: 8px 10px; */
+    /* flex-direction: column; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    gap: 10px;
+    border-radius: 4.048px;
+    border: 0.5px solid var(--Stroke-Bluish-Gray, #BBCDDE);
+    background: #FBFDFF;
+    color: var(--Primary-Blue---HRVC, #2580D3);
+    /* text-align: justify; */
+    font-feature-settings: 'salt' on;
+    font-family: "SF Pro Display";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    /* line-height: 26.986px; */
+}
+
+.btn-previous-disable {
+    /* display: flex; */
+    width: 80px;
+    height: 26px;
+    /* padding: 8px 10px; */
+    /* flex-direction: column; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    gap: 10px;
+    border-radius: 4.048px;
+    border: none;
+    background: #EEE;
+    color: var(--Blocked-Text, #3C3D48);
+    /* text-align: justify; */
+    font-feature-settings: 'salt' on;
+    font-family: "SF Pro Display";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    /* line-height: 26.986px; */
+}
+
+
+.btn-next-disable {
+    /* display: flex; */
+    width: 80px;
+    height: 26px;
+    /* padding: 8px 10px; */
+    /* flex-direction: column; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    gap: 10px;
+    border-radius: 4.048px;
+    border: none;
+    background: #EEE;
+    color: var(--Blocked-Text, #3C3D48);
+    /* text-align: justify; */
+    font-feature-settings: 'salt' on;
+    font-family: "SF Pro Display";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    /* line-height: 26.986px; */
+    /* 224.886% */
+
+}
