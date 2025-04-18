@@ -61,4 +61,9 @@ class GroupController extends Controller
             ->all();
         return json_encode($company);
     }
+    public function actionCurrentGroup()
+    {
+        $group = Group::find()->where(["status" => 1])->asArray()->one();
+        return json_encode($group);
+    }
 }
