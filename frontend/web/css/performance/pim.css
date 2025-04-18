@@ -2383,18 +2383,40 @@ input:checked+.slider:before {
 		height: calc(100% / 0.90);
 	}
 
-	.alert-white-4 {
-		/* transform: translate(0, 0); */
-		/* ใช้ translate เพื่อปรับตำแหน่งให้เหมาะสม */
-		/* position: fixed;
-		top: 120px; */
-		/* ใช้ fixed เพื่อให้แน่นอนว่าอยู่ตำแหน่งที่ต้องการ */
-		/* top: 300px; */
+	.menu-dot {
+		/* margin-top: 25px;
+		margin-left: 25px;
+		position: relative;
+		position: fixed; */
+		/* transform-origin: top left;
+		transform: scale(0.95);
+		width: calc(100% / 0.95); */
+		/* transform: translate(-7px, 22px); */
+		transform: scale(0.90);
+		z-index: 1001;
 	}
 
+	.dropdown-menu {
+		transition: transform 0.2s ease-in-out, opacity 0.2s;
+		opacity: 0;
+		transform: translateY(-5px);
+	}
+
+	.dropdown-menu.show {
+		opacity: 1;
+		transform: translateY(0px);
+		transform: translate(0px, 0px) !important;
+
+	}
+
+
+	/* .menu-dot:has(.dropdown-menu.show) {
+		margin-top: 0 !important;
+		margin-left: 0 !important;
+	} */
+
 	.submain-content {
-		/* position: relative; */
-		/* เพิ่ม position relative เพื่อให้ sticky-section ทำงาน */
+
 		height: auto;
 		max-height: 50vh;
 	}
@@ -2404,8 +2426,7 @@ input:checked+.slider:before {
 	}
 
 	.row-box {
-		/* position: relative; */
-		/* เพิ่ม position relative เพื่อให้ sticky-section ทำงาน */
+
 		transform: scale(0.90);
 		transform-origin: top left;
 		width: calc(100% / 0.90);
@@ -2421,6 +2442,17 @@ input:checked+.slider:before {
 		transform-origin: top left;
 		width: calc(100% / 0.80);
 		height: calc(100% / 0.80);
+	}
+
+
+	.menu-dot {
+		margin-top: 100px;
+		position: relative;
+		position: fixed;
+		transform-origin: top left;
+		transform: scale(0.95);
+		width: calc(100% / 0.95);
+		z-index: 1001;
 	}
 
 	.alert-white-4 {

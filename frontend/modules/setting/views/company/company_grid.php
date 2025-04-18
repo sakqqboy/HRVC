@@ -94,59 +94,65 @@ $this->title = 'company';
                                             </div>
                                         </div>
                                     </div>
-                                    <span class="dropdown" href="#" id="dropdownMenuLink-1" data-bs-toggle="dropdown"
-                                        style="align-self: flex-start;">
+                                    <div style="margin-bottom: 30px;">
                                         <?php if($company['totalBranch'] > 0) { ?>
-                                        <a href="<?= Yii::$app->homeUrl ?>setting/company/company-view/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
+                                        <a href="
+                                        <?= Yii::$app->homeUrl ?>setting/company/company-view/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
                                             class="btn btn-bg-white-xs mr-5" style="margin-top: 3px; ">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
                                                 alt="History" class="pim-icon" style="margin-top: -1px;">
                                         </a>
                                         <?php }else { ?>
-                                        <a class="btn btn-bg-red-xs mr-5" data-bs-toggle="modal"
-                                            data-bs-target="#staticBackdrop4" onclick="javascript:prepareDeleteKfi(64)"
+                                        <a class="btn btn-bg-red-xs mr-5"
+                                            href="javascript:deleteCompany(<?= $company['companyId'] ?>)"
                                             style="margin-top: 3px;"
                                             onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
                                             onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
                                                 alt="History" class="pim-icon" style="margin-top: -3px;">
                                         </a>
-                                        <? } ?>
+                                        <?php } ?>
+                                        <span class="dropdown" href="#" id="dropdownMenuLink-1"
+                                            data-bs-toggle="dropdown" style="align-self: flex-start;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/3-dot.svg" alt="icon"
+                                                style="cursor: pointer;">
 
-                                        <img src="<?= Yii::$app->homeUrl ?>image/3-dot.svg" alt="icon"
-                                            style="cursor: pointer;">
-                                        <!-- <img src="<?= Yii::$app->homeUrl ?>image/menu.svg" alt="icon"
-                                                style="cursor: pointer;"> -->
-                                    </span>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-1">
-                                        <?php if($company['totalBranch'] == 0) { ?>
-                                        <li class="pl-4 pr-4">
-                                            <a href="<?= Yii::$app->homeUrl ?>setting/company/company-view/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
-                                                class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -3px;">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
-                                                    alt="History" class="pim-icon mr-10" style="margin-top: -2px;">
-                                                View </a>
-                                        </li>
-                                        <? } ?>
-                                        <li class="pl-4 pr-4">
-                                            <a href="<?= Yii::$app->homeUrl ?>setting/company/update-company/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
-                                                class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -1px; ">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
-                                                    alt="History" class="pim-icon mr-10" style="margin-top: -2px;">
-                                                edit </a>
-                                        </li>
-                                        <?php if($company['totalBranch'] > 0) { ?>
-                                        <li class="pl-4 pr-4">
-                                            <a class="dropdown-itemNEW pl-4 pr-25" data-bs-toggle="modal"
-                                                data-bs-target="#delete-kpi-employee"
-                                                href="javascript:deleteCompany(<?= $company['companyId'] ?>)">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/delete.svg"
-                                                    alt="Delete" class="pim-icon mr-10" style="margin-top: -2px;">
-                                                Delete </a>
-                                        </li>
-                                        <? } ?>
-
-                                    </ul>
+                                        </span>
+                                        <div class="menu-dot ">
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-1">
+                                                <?php if($company['totalBranch'] == 0) { ?>
+                                                <li class="pl-4 pr-4">
+                                                    <a href="<?= Yii::$app->homeUrl ?>setting/company/company-view/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
+                                                        class="dropdown-itemNEWS pl-4  pr-20 mb-5"
+                                                        style="margin-top: -3px;">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
+                                                            alt="History" class="pim-icon mr-10"
+                                                            style="margin-top: -2px;">
+                                                        View </a>
+                                                </li>
+                                                <?php } ?>
+                                                <li class="pl-4 pr-4">
+                                                    <a href="<?= Yii::$app->homeUrl ?>setting/company/update-company/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
+                                                        class="dropdown-itemNEWS pl-4  pr-20 mb-5"
+                                                        style="margin-top: -1px; ">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
+                                                            alt="History" class="pim-icon mr-10"
+                                                            style="margin-top: -2px;">
+                                                        edit </a>
+                                                </li>
+                                                <?php if($company['totalBranch'] == 0) { ?>
+                                                <!-- <li class="pl-4 pr-4">
+                                                    <a class="dropdown-itemNEW pl-4 pr-25"
+                                                        href="javascript:deleteCompany(<?= $company['companyId'] ?>)">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/delete.svg"
+                                                            alt="Delete" class="pim-icon mr-10"
+                                                            style="margin-top: -2px;">
+                                                        Delete </a>
+                                                </li> -->
+                                                <?php } ?>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <!-- ส่วนล่าง -->
@@ -224,7 +230,7 @@ $this->title = 'company';
                                                                     style="width: 12px; height: 12px;">
                                                                 Create
                                                             </button>
-                                                            <? } ?>
+                                                            <?php } ?>
                                                             <?php if($company['totalBranch'] > 0 && $company['totalDepartment'] == 0) { ?>
                                                             <a
                                                                 href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>">
@@ -236,13 +242,13 @@ $this->title = 'company';
                                                                     Create
                                                                 </button>
                                                             </a>
-                                                            <? } ?>
+                                                            <?php } ?>
                                                             <?php if($company['totalDepartment'] > 0) { ?>
                                                             <a class="text-see-all"
                                                                 href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>">
                                                                 see all
                                                             </a>
-                                                            <? } ?>
+                                                            <?php } ?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -279,7 +285,7 @@ $this->title = 'company';
                                                                     style="width: 12px; height: 12px;">
                                                                 Create
                                                             </button>
-                                                            <? } ?>
+                                                            <?php } ?>
                                                             <?php if($company['totalDepartment'] > 0 && $company['totalTeam'] == 0) { ?>
                                                             <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
                                                                 style="text-decoration: none;">
@@ -290,13 +296,13 @@ $this->title = 'company';
                                                                     Create
                                                                 </button>
                                                             </a>
-                                                            <? } ?>
+                                                            <?php } ?>
                                                             <?php if($company['totalTeam'] > 0) { ?>
                                                             <a class="text-see-all"
                                                                 href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>">
                                                                 see all
                                                             </a>
-                                                            <? } ?>
+                                                            <?php } ?>
 
                                                         </div>
                                                     </div>
@@ -311,34 +317,34 @@ $this->title = 'company';
                                                             <img src="<?= Yii::$app->homeUrl ?><?php echo $company['employees'][0]['picture'] ?>"
                                                                 alt="icon">
                                                         </div>
-                                                        <? }else{ ?>
+                                                        <?php }else{ ?>
                                                         <div class="cycle-current-gray"><img
                                                                 src="<?= Yii::$app->homeUrl ?>image/employees-black.svg"
                                                                 alt="icon">
                                                         </div>
-                                                        <? } ?>
+                                                        <?php } ?>
                                                         <?php if($company['totalEmployee'] >= 2) { ?>
                                                         <div class="cycle-image mr-3">
                                                             <img src="<?= Yii::$app->homeUrl ?><?php echo $company['employees'][1]['picture'] ?>"
                                                                 alt="icon">
                                                         </div>
-                                                        <? }else{ ?>
+                                                        <?php }else{ ?>
                                                         <div class="cycle-current-gray"><img
                                                                 src="<?= Yii::$app->homeUrl ?>image/employees-black.svg"
                                                                 alt="icon">
                                                         </div>
-                                                        <? } ?>
+                                                        <?php } ?>
                                                         <?php if($company['totalEmployee'] >= 3) { ?>
                                                         <div class="cycle-image mr-3">
                                                             <img src="<?= Yii::$app->homeUrl ?><?php echo $company['employees'][2]['picture'] ?>"
                                                                 alt="icon">
                                                         </div>
-                                                        <? }else{ ?>
+                                                        <?php }else{ ?>
                                                         <div class="cycle-current-gray"><img
                                                                 src="<?= Yii::$app->homeUrl ?>image/employees-black.svg"
                                                                 alt="icon">
                                                         </div>
-                                                        <? } ?>
+                                                        <?php } ?>
                                                         <div class="number-current-cycle ">
                                                             <?= $company['totalEmployee'] ?>
                                                         </div>
@@ -353,7 +359,7 @@ $this->title = 'company';
                                                                     style="width: 12px; height: 12px;">
                                                                 Create
                                                             </button>
-                                                            <? } ?>
+                                                            <?php } ?>
                                                             <?php if($company['totalTeam'] > 0 && $company['totalEmployee'] == 0) { ?>
                                                             <a href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
                                                                 style="text-decoration: none;"></a>
@@ -364,13 +370,13 @@ $this->title = 'company';
                                                                 Create
                                                             </button>
                                                             </a>
-                                                            <? } ?>
+                                                            <?php } ?>
                                                             <?php if($company['totalEmployee'] > 0) { ?>
                                                             <a class="text-see-all" style="font-size: 10.5px; "
                                                                 href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>">
                                                                 see all
                                                             </a>
-                                                            <? } ?>
+                                                            <?php } ?>
                                                         </div>
                                                     </div>
                                                 </div>

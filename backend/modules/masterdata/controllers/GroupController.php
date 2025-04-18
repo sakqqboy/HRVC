@@ -47,7 +47,7 @@ class GroupController extends Controller
         return json_encode($company);
     }
 
-    public function actionCompanyGroupFillter($id)
+    public function actionCompanyGroupFilter($id, $countryId)
     {
         $company = [];
         $company = Company::find()
@@ -55,7 +55,7 @@ class GroupController extends Controller
             company.picture,company.headQuaterId,company.industries,g.groupName,c.flag,company.about')
             ->JOIN("LEFT JOIN", "country c", "c.countryId=company.countryId")
             ->JOIN("LEFT JOIN", "group g", "g.groupId=company.groupId")
-            ->where(["company.groupId" => $id, "company.status" => 1])
+            ->where(["company.groupId" => $id, "company.status" => 1,"company.countryId" => $countryId])
             ->orderBy('company.companyName')
             ->asArray()
             ->all();
