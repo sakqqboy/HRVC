@@ -61,10 +61,17 @@ class CompanyController extends Controller
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
 		//throw new exception(print_r($companies, true));
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/company-country');
+		$result1 = curl_exec($api);
+		$countries = json_decode($result1, true);
+
+		
 		curl_close($api);
 		return $this->render('index', [
 			"companies" => $companies,
-			"groupId" => $groupId
+			"groupId" => $groupId,
+			"countries" => $countries 
 		]);
 	}
 

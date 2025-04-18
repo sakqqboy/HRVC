@@ -5,20 +5,40 @@ use common\models\ModelMaster;
 $this->title = 'company';
 ?>
 
-<div class="contrainer-body mt-40">
-    <div class=" d-flex align-items-center gap-2">
-        <img src="<?= Yii::$app->homeUrl ?>image/branch-icon-black.svg" style="width: 24px; height: 24px;">
-        <div class="pim-name-title ml-10">
-            Company
+<div class="contrainer-body mt-10">
+
+    <div class="between-center mt-20" style="width: 100%;">
+        <div class="col-9">
+            <div class=" d-flex align-items-center gap-2">
+                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg"
+                    style="width: 24px; height: 24px;">
+                <div class="pim-name-title ml-10">
+                    Company
+                </div>
+                <a href="<?= Yii::$app->homeUrl ?>setting/company/create/<?= ModelMaster::encodeParams(['groupId' => $groupId]) ?>"
+                    style="text-decoration: none;">
+                    <button type="button" class="btn-create" style="padding: 3px 9px;"
+                        action="<?= Yii::$app->homeUrl ?>setting/group/create-group"><?= Yii::t('app', 'Create New') ?>
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
+                            style="width:18px; height:18px; margin-top:-3px;">
+                    </button>
+                </a>
+            </div>
         </div>
-        <a href="<?= Yii::$app->homeUrl ?>setting/company/create/<?= ModelMaster::encodeParams(['groupId' => $groupId]) ?>"
-            style="text-decoration: none;">
-            <button type="button" class="btn-create" style="padding: 3px 9px;">
-                <?= Yii::t('app', 'Create New') ?>
-                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
-                    style="width:18px; height:18px; margin-top:-3px;">
-            </button>
-        </a>
+        <div class="col-2" style="text-align: right;">
+            <?= $this->render('filter_list', ['countries' => $countries]) ?>
+        </div>
+        <div class="col-1 pr-0 text-end">
+            <div class="btn-group" role="group">
+                <a href="<?= Yii::$app->homeUrl . 'setting/company/company-grid' ?>"
+                    class="btn btn-outline-primary font-size-12 pim-change-modes">
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridblack.svg" style="cursor: pointer;">
+                </a>
+                <a href="#" class="btn btn-primary font-size-12 pim-change-modes">
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listwhite.svg" style="cursor: pointer;">
+                </a>
+            </div>
+        </div>
     </div>
 
     <div class="company-group-edit mt-30">
