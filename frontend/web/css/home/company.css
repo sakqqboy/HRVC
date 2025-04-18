@@ -193,7 +193,7 @@
 }
 
 .table-spacing thead tr th {
-    overflow: hidden;
+    /* overflow: hidden; */
     color: var(--Color-Tokens-Content-Dark-Secondary, #727272);
     text-overflow: ellipsis;
     font-family: "SF Pro Display";
@@ -206,7 +206,7 @@
 }
 
 .table-spacing tbody tr td {
-    overflow: hidden;
+    /* overflow: hidden; */
     color: var(--HRVC---Text-Black, #30313D);
     text-overflow: ellipsis;
     font-family: "SF Pro Display";
