@@ -140,15 +140,15 @@ $this->title = 'company';
                                                             style="margin-top: -2px;">
                                                         edit </a>
                                                 </li>
-                                                <?php if($company['totalBranch'] > 0) { ?>
-                                                <li class="pl-4 pr-4">
+                                                <?php if($company['totalBranch'] == 0) { ?>
+                                                <!-- <li class="pl-4 pr-4">
                                                     <a class="dropdown-itemNEW pl-4 pr-25"
                                                         href="javascript:deleteCompany(<?= $company['companyId'] ?>)">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/delete.svg"
                                                             alt="Delete" class="pim-icon mr-10"
                                                             style="margin-top: -2px;">
                                                         Delete </a>
-                                                </li>
+                                                </li> -->
                                                 <?php } ?>
                                             </ul>
                                         </div>

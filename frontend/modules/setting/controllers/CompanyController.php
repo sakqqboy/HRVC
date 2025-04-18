@@ -66,10 +66,73 @@ class CompanyController extends Controller
 		$result1 = curl_exec($api);
 		$countries = json_decode($result1, true);
 
+
+		$data = [];
+		if (!empty($companies)) {
+			foreach ($companies as $company) :
+				$companyId = $company['companyId'];
+
+				$employees = Employee::find()
+				->where(["companyId" => $companyId])
+				->asArray()
+				->all();
+
+				// throw new Exception(print_r($employees, true)); // Debug: ดูข้อมูลทั้งหมด
+
+				// กรองเฉพาะที่มี picture
+				$filteredEmployees = array_filter($employees, function($employee) {
+					return !empty($employee['picture']);
+				});
+
+				// รีเซ็ต index และเลือกแค่ 3 คนแรก
+				$filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
+
+				// throw new Exception(print_r($filteredEmployees, true)); // Debug: ดูเฉพาะ 3 คนที่มี picture
+
+
+				$branchIds = Branch::find()->select('branchId')
+					->where(["companyId" => $companyId, "status" => 1])
+					->asArray()->column();  // คืนค่าเป็น array แทน all()
+
+				$totalBranch = count($branchIds);
+				$totalEmployee = Employee::find()->where(["companyId" => $companyId, "status" => 1])->count();
+
+				$departments = [];
+				$teams = [];
+				if (!empty($branchIds)) {
+					$departments = Department::find()->select('departmentId')
+						->where(["status" => 1])
+						->andWhere(['IN', 'branchId', $branchIds])
+						->asArray()->column();
+
+					if (!empty($departments)) {
+						$teams = Team::find()->select('teamId')
+							->where(["status" => 1])
+							->andWhere(['IN', 'departmentId', $departments])
+							->asArray()->column();
+					}
+				}
+
+				$data[] = [
+					"about" => $company['about'],
+					"picture" => $company["picture"],
+					"companyName" => $company['companyName'],
+					"flag" => $company['flag'],
+					"city" => $company['city'],
+					"countryName" => $company['countryName'],
+					"companyId" => $company['companyId'],
+					"totalDepartment" => count($departments),
+					"totalTeam" => count($teams),
+					"totalBranch" => $totalBranch,
+					"totalEmployee" => $totalEmployee,
+					"employees" => $filteredEmployees
+				];
+			endforeach;
+		}
 		
 		curl_close($api);
 		return $this->render('index', [
-			"companies" => $companies,
+			"companies" => $data,
 			"groupId" => $groupId,
 			"countries" => $countries 
 		]);
@@ -98,12 +161,6 @@ class CompanyController extends Controller
 	
 	public function actionCompanyGrid()
 	{
-			// throw new Exception(print_r($countryId, true));
-
-		// if (Yii::$app->request->isPost && Yii::$app->request->post('countryId') !== null) {
-		// 	$countryId = Yii::$app->request->post('countryId');
-		// 	// throw new Exception(print_r($countryId, true));
-		// }
 		
 		$group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
 		if (!isset($group) && !empty($group)) {
