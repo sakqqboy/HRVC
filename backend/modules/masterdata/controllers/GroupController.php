@@ -102,4 +102,9 @@ class GroupController extends Controller
             'nowPage' => $page
         ]);
     }
+    public function actionCurrentGroup()
+    {
+        $group = Group::find()->where(["status" => 1])->asArray()->one();
+        return json_encode($group);
+    }
 }
