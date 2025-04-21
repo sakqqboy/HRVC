@@ -128,3 +128,51 @@ function filterCountryCompany(page) {
         }
     });
 }
+
+
+function goToPageCompany(nextPage, page, countryId) {
+
+    var url = $url + 'setting/company/encode-params-page';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: {
+            countryId: countryId,
+            page: page,
+            nextPage: nextPage
+        },
+        success: function (data) {
+            // window.location.href = "company-grid-filter/" + data.url;
+            alert(data);
+        },
+        error: function (xhr, status, error) {
+            console.error("AJAX request failed: " + error);
+        }
+    });
+}
+
+// function filterPageCompany(page, nowPage) {
+//     // console.log("Page:", page); // Add this line to check the value of `page`
+
+//     const countryId = document.getElementById('countrySelect').value;
+//     var url = $url + 'setting/company/encode-params-page';
+//     // alert(page);
+//     $.ajax({
+//         type: "POST",
+//         dataType: 'json',
+//         url: url,
+//         data: {
+//             countryId: countryId,
+//             page: page,
+//             nowPage: nowPage
+//         },
+//         success: function (data) {
+//             // window.location.href = "company-grid-filter/" + data.url;
+//             alert(data);
+//         },
+//         error: function (xhr, status, error) {
+//             console.error("AJAX request failed: " + error);
+//         }
+//     });
+// }

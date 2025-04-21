@@ -51,39 +51,55 @@ class GroupController extends Controller
             ->all();
         return json_encode($company);
     }
+
+    public function actionCompanyGroupFilter($id, $countryId, $page)
+{
+    $limit = 7;
+    $offset = ($page - 1) * $limit;
+
+    $query = Company::find()
+        ->select('company.companyName, company.companyId, company.city, c.countryName,
+                  company.picture, company.headQuaterId, company.industries, g.groupName, 
+                  c.flag, company.about')
+        ->join("LEFT JOIN", "country c", "c.countryId = company.countryId")
+        ->join("LEFT JOIN", "`group` g", "g.groupId = company.groupId")
+        ->where(["company.groupId" => $id, "company.status" => 1]);
+
+    if (!empty($countryId)) {
+        $query->andWhere(["company.countryId" => $countryId]);
+    }
+
+    $company = $query
+        ->offset($offset)
+        ->limit($limit)
+        ->orderBy('company.companyName')
+        ->asArray()
+        ->all();
+
+    return json_encode($company);
+}
+
     
     public function actionCompanyPage($id,$page,$countryId)
     {
         $limit = 7;
-
-        $totalRows = Company::find()
-        ->where(["company.groupId" => $id, "company.status" => 1])
-        ->count();
-
+    
+        $query = Company::find()
+            ->where(["company.groupId" => $id, "company.status" => 1]);
+    
+        if (!empty($countryId)) {
+            $query->andWhere(["company.countryId" => $countryId]);
+        }
+    
+        $totalRows = $query->count(); // นับหลังจากใส่เงื่อนไขทั้งหมดแล้ว
+    
         $totalPages = ceil($totalRows / $limit);
-
+    
         return json_encode([
             'totalPages' => $totalPages,
             'totalRows' => $totalRows,
             'perPage' => $limit,
             'nowPage' => $page
         ]);
-        
-    }
-
-
-    public function actionCompanyGroupFilter($id, $countryId)
-    {
-        $company = [];
-        $company = Company::find()
-            ->select('company.companyName,company.companyId,company.city,c.countryName,
-            company.picture,company.headQuaterId,company.industries,g.groupName,c.flag,company.about')
-            ->JOIN("LEFT JOIN", "country c", "c.countryId=company.countryId")
-            ->JOIN("LEFT JOIN", "group g", "g.groupId=company.groupId")
-            ->where(["company.groupId" => $id, "company.status" => 1,"company.countryId" => $countryId])
-            ->orderBy('company.companyName')
-            ->asArray()
-            ->all();
-        return json_encode($company);
     }
 }

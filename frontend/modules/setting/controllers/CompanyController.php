@@ -13,6 +13,7 @@ use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Team;
 use frontend\models\hrvc\UserRole;
+use PHPUnit\TextUI\XmlConfiguration\Extension;
 use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
@@ -59,7 +60,7 @@ class CompanyController extends Controller
 		$countryId = Yii::$app->request->post('countryId');
 		$page = Yii::$app->request->post('page');
 
-		$url =  ModelMaster::encodeParams(['countryId' => $countryId, 'nowPage' => 1]);
+		$url =  ModelMaster::encodeParams(['countryId' => $countryId, 'nextPage' => 1]);
 	
 		if($page == 'grid') {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/company/company-grid-filter/'. $url );
@@ -68,7 +69,26 @@ class CompanyController extends Controller
 		}else{
 			return "eror";
 		}
+	}
 
+	public function actionEncodeParamsPage() {
+		Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+	
+		$countryId = Yii::$app->request->post('countryId');
+		$page = Yii::$app->request->post('page');
+		$nextPage = Yii::$app->request->post('nextPage');
+
+		// throw new exception(print_r($nextPage, true));
+
+		$url =  ModelMaster::encodeParams(['countryId' => $countryId, 'nextPage' => $nextPage]);
+	
+		if($page == 'grid') {
+			// return $this->redirect(Yii::$app->homeUrl . 'setting/company/company-grid-filter/'. $url );
+		}else if($page == 'list') {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/company/index-filter/'. $url );
+		}else{
+			return "eror";
+		}
 	}
 
 	public function actionIndex()
@@ -96,9 +116,9 @@ class CompanyController extends Controller
 		//throw new exception(print_r($companies, true));
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-page?id=' . $groupId . '&page=1' . '&countryId=');
-		$numpage = curl_exec($api);
-		$numpage = json_decode($numpage, true);
-		// throw new exception(print_r($numpage, true));
+		$numPage = curl_exec($api);
+		$numPage = json_decode($numPage, true);
+		// throw new exception(print_r($numPage, true));
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/company-country');
 		$result1 = curl_exec($api);
@@ -173,7 +193,7 @@ class CompanyController extends Controller
 			"companies" => $data,
 			"groupId" => $groupId,
 			"countries" => $countries,
-			"numpage" => $numpage
+			"numPage" => $numPage
 		]);
 	}
 
@@ -181,10 +201,9 @@ class CompanyController extends Controller
 	{
 		$param = ModelMaster::decodeParams($hash);
 		$countryId = $param["countryId"];
+		$nextPage = $param["nextPage"];
 
-		$nowPage = $param["nowPage"];
-
-		// throw new exception(print_r($page, true));
+		// throw new exception(print_r($nextPage, true));
 
 		$group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
 		if (!isset($group) && !empty($group)) {
@@ -203,15 +222,15 @@ class CompanyController extends Controller
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group-filter?id=' . $groupId . '&countryId=' . $countryId . '&page=' . $nowPage);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group-filter?id=' . $groupId . '&countryId=' . $countryId . '&page=' . $nextPage);
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
 		//throw new exception(print_r($companies, true));
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-page?id=' . $groupId . '&page=' . $nowPage . '&countryId=' . $countryId);
-		$numpage = curl_exec($api);
-		$numpage = json_decode($numpage, true);
-		// throw new exception(print_r($numpage, true));
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-page?id=' . $groupId . '&page=' . $nextPage . '&countryId=' . $countryId);
+		$numPage = curl_exec($api);
+		$numPage = json_decode($numPage, true);
+		// throw new exception(print_r($numPage, true));
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/company-country');
 		$result1 = curl_exec($api);
@@ -285,7 +304,9 @@ class CompanyController extends Controller
 		return $this->render('index', [
 			"companies" => $data,
 			"groupId" => $groupId,
-			"countries" => $countries 
+			"countries" => $countries,
+			"numPage" => $numPage,
+			"countryId" => $countryId
 		]);
 	}
 	

@@ -222,72 +222,8 @@ $page = "list"
             </table>
         </div>
 
-        <!-- หลักกการการทำงานของ pagination
-        1 ดึ่งข้อมูลโดย limit ไว้ที่ 7
-        โดยการ ใส่ -> limit (1,7) ที่sql และให้ทำการหา จำนวนหน้าโดยการ
-        เอาจำนวน rowทั้งหมด หารด้วย 7 
-        ถ้าหากมีเศษ + 1 ถ้าไม่มี ไม่ต้อง + จพได้จำนวนหน้า
-        จากนั้นทำตามเงื่อนไขนี้ ถ้ามากว่า 7 ให้โชว ปุ่ม Previous และ Next
-        โดยที่ปุ่ม Previous จะกดได้ก็ต่อเมื่อ ไม่ใช่หน้า 1
-        และ ปุ่ม Next จะกดได้ก็ต่อเมื่อไม่ใช้หน้าสุดท้าย 
-        และส่วนเลขหน้าที่แสดงผล
-        จะแสดงผลเป็นถ้า มี 1 หน้า จะแสดง 1 และ ถ้ามี 3 แสดง 3 จนถึง 4
-        ถ้ามีมากว่า 4 จะขั้นด้วย ... ซึ่งจะสามารถกรอกเลขหน้าได้
-        เมื่อกดเลขหน้าหรือกรอกเลขหน้า จะส่งไปยัง ajax เพื่อ คำนวน คิวรี้ใหม่ สำหรับใช้แสดงผล  -->
-        <div
-            style="width: 100%; text-align: center; display: flex; justify-content: center; align-items: center; gap: 21px;">
-            <!-- ถ้ามีมากกว่า 7 แุวให้แสดง Page Numbers เริ่มจาก 1  -->
-            <?php 
-            if(  $numpage['totalRows'] > 7){
-            ?>
-            <!-- Previous Button -->
-            <button class="btn-previous-disable" disabled>
-                <img src="<?= Yii::$app->homeUrl ?>image/btn-previous-disable.svg"
-                    style="width: 4.958px; height: 8.5px; vertical-align: middle;">
-                <span style="margin-left: 5px;">Previous</span>
-            </button>
-            <!-- Page Numbers -->
-            <a class="btn btn-bg-blue-xs" style="border: none; padding: 5px 10px; border-radius: 5px;">
-                <!-- Page Numbers 1 และหน้าปัจจุบัน-->
-                <span style="color: white; font-weight: 700;">1</span>
-            </a>
-            <a>
-                <span style="color: black; font-weight: 500;">2</span>
-            </a>
-            <a>
-                <span style="color: black; font-weight: 500;">3</span>
-            </a>
-            <!-- ถ้ามี Page Numbers มากกว่า 4 ให้ แสดง ... และเพจสุดท้าย -->
-            <span style="color: black; font-weight: 500;">...</span>
-            <a>
-                <!-- Page Numbers สุดท้าย -->
-                <span style="color: black; font-weight: 500;">5</span>
-            </a>
-            <!-- Next Button -->
-            <button class="btn-next">
-                <span style="margin-right: 5px;">Next</span>
-                <img src="<?= Yii::$app->homeUrl ?>image/btn-next.svg"
-                    style="width: 4.958px; height: 8.5px; vertical-align: middle;">
-            </button>
-            <?php }?>
-        </div>
+        <?= $this->render('pagination_page', ['countryId' => $countryId,'page' => $page,'numPage' => $numPage]) ?>
+
+
     </div>
 </div>
-
-
-
-<script>
-// $(document).ready(function() {
-//     $('#myTable').DataTab7le({
-//         "ordering": true, // เปิดเรียงลำดับ
-//         "paging": true, // เปิดแบ่งหน้า
-//         "searching": true, // เปิดช่องค้นหา
-//         "pageLength": 9, // จำกัด 9 แถวต่อหน้า
-//         "lengthChange": false, // ซ่อน dropdown ที่ให้เปลี่ยนจำนวนแถว
-//         "columnDefs": [{
-//             "orderable": false,
-//             "targets": 6 // ปิด sort ที่คอลัมน์ 7 (ปุ่ม action)
-//         }]
-//     });
-// });
-</script>
