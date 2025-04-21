@@ -18,9 +18,9 @@
 .pim-name-title {
 	color: #3C3D48;
 	font-family: "SF Pro Display";
-	font-size: 20px;
+	font-size: 24px;
 	font-style: normal;
-	font-weight: 500;
+	font-weight: 600;
 	line-height: 21.429px;
 	/* 107.143% */
 	text-transform: capitalize;
@@ -2384,14 +2384,6 @@ input:checked+.slider:before {
 	}
 
 	.menu-dot {
-		/* margin-top: 25px;
-		margin-left: 25px;
-		position: relative;
-		position: fixed; */
-		/* transform-origin: top left;
-		transform: scale(0.95);
-		width: calc(100% / 0.95); */
-		/* transform: translate(-7px, 22px); */
 		transform: scale(0.90);
 		z-index: 1001;
 	}
@@ -2408,12 +2400,6 @@ input:checked+.slider:before {
 		transform: translate(0px, 0px) !important;
 
 	}
-
-
-	/* .menu-dot:has(.dropdown-menu.show) {
-		margin-top: 0 !important;
-		margin-left: 0 !important;
-	} */
 
 	.submain-content {
 
@@ -2446,13 +2432,21 @@ input:checked+.slider:before {
 
 
 	.menu-dot {
-		margin-top: 100px;
-		position: relative;
-		position: fixed;
-		transform-origin: top left;
-		transform: scale(0.95);
-		width: calc(100% / 0.95);
+		transform: scale(0.90);
 		z-index: 1001;
+	}
+
+	.dropdown-menu {
+		transition: transform 0.2s ease-in-out, opacity 0.2s;
+		opacity: 0;
+		transform: translateY(-5px);
+	}
+
+	.dropdown-menu.show {
+		opacity: 1;
+		transform: translateY(0px);
+		transform: translate(0px, 0px) !important;
+
 	}
 
 	.alert-white-4 {
@@ -2490,6 +2484,24 @@ input:checked+.slider:before {
 
 	}
 
+	.menu-dot {
+		transform: scale(0.90);
+		z-index: 1001;
+	}
+
+	.dropdown-menu {
+		transition: transform 0.2s ease-in-out, opacity 0.2s;
+		opacity: 0;
+		transform: translateY(-5px);
+	}
+
+	.dropdown-menu.show {
+		opacity: 1;
+		transform: translateY(0px);
+		transform: translate(0px, 0px) !important;
+
+	}
+
 	.pim-body {
 		min-height: 115vh;
 	}
@@ -2511,6 +2523,24 @@ input:checked+.slider:before {
 		width: calc(100% / 0.60);
 		height: calc(100% / 0.60);
 		margin-top: 30px;
+	}
+
+	.menu-dot {
+		transform: scale(0.90);
+		z-index: 1001;
+	}
+
+	.dropdown-menu {
+		transition: transform 0.2s ease-in-out, opacity 0.2s;
+		opacity: 0;
+		transform: translateY(-5px);
+	}
+
+	.dropdown-menu.show {
+		opacity: 1;
+		transform: translateY(0px);
+		transform: translate(0px, 0px) !important;
+
 	}
 
 	.submain-content {
@@ -2555,6 +2585,24 @@ input:checked+.slider:before {
 		width: calc(100% / 0.50);
 		height: calc(100% / 0.50);
 		margin-top: 30px;
+	}
+
+	.menu-dot {
+		transform: scale(0.90);
+		z-index: 1001;
+	}
+
+	.dropdown-menu {
+		transition: transform 0.2s ease-in-out, opacity 0.2s;
+		opacity: 0;
+		transform: translateY(-5px);
+	}
+
+	.dropdown-menu.show {
+		opacity: 1;
+		transform: translateY(0px);
+		transform: translate(0px, 0px) !important;
+
 	}
 
 	.submain-content {

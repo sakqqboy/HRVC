@@ -3,7 +3,7 @@
 use common\models\ModelMaster;
 
 $this->title = 'company';
-
+$page = "grid"
 // echo $countries;
 ?>
 
@@ -28,7 +28,7 @@ $this->title = 'company';
             </div>
         </div>
         <div class="col-2" style="text-align: right;">
-            <?= $this->render('filter_list', ['countries' => $countries]) ?>
+            <?= $this->render('filter_list', ['countries' => $countries,'page' => $page]) ?>
         </div>
         <div class="col-1 pr-0 text-end">
             <div class="btn-group" role="group">

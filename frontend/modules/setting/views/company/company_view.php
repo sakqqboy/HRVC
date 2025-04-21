@@ -5,8 +5,17 @@ use common\models\ModelMaster;
 $this->title = 'company profile';
 ?>
 
-<div class="contrainer-body">
-    <div class="col-12" style="height: 180px;background-color:gray;">
+<div class="contrainer-body mt-33">
+    <div class="col-12">
+        <div class=" d-flex align-items-center gap-2">
+            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg" style="width: 24px; height: 24px;">
+            <div class="pim-name-title ml-10">
+                Company in Details
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 banner-uploade mt-21" style="border: none;">
         <?php
 		if ($company["banner"] != null) { ?>
         <img src="<?= Yii::$app->homeUrl . $company['banner'] ?>" class="sad-1">
