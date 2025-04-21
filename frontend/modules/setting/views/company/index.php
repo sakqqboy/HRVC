@@ -223,7 +223,7 @@ $page = "list"
         </div>
 
         <!-- หลักกการการทำงานของ pagination
-        1ดึ่งข้อมูลโดย limit ไว้ที่ 7
+        1 ดึ่งข้อมูลโดย limit ไว้ที่ 7
         โดยการ ใส่ -> limit (1,7) ที่sql และให้ทำการหา จำนวนหน้าโดยการ
         เอาจำนวน rowทั้งหมด หารด้วย 7 
         ถ้าหากมีเศษ + 1 ถ้าไม่มี ไม่ต้อง + จพได้จำนวนหน้า
@@ -238,7 +238,7 @@ $page = "list"
             style="width: 100%; text-align: center; display: flex; justify-content: center; align-items: center; gap: 21px;">
             <!-- ถ้ามีมากกว่า 7 แุวให้แสดง Page Numbers เริ่มจาก 1  -->
             <?php 
-            if(  $countrow > 7){
+            if(  $numpage['totalRows'] > 7){
             ?>
             <!-- Previous Button -->
             <button class="btn-previous-disable" disabled>

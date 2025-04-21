@@ -59,7 +59,7 @@ class CompanyController extends Controller
 		$countryId = Yii::$app->request->post('countryId');
 		$page = Yii::$app->request->post('page');
 
-		$url =  ModelMaster::encodeParams(['countryId' => $countryId]);
+		$url =  ModelMaster::encodeParams(['countryId' => $countryId, 'nowPage' => 1]);
 	
 		if($page == 'grid') {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/company/company-grid-filter/'. $url );
@@ -89,11 +89,16 @@ class CompanyController extends Controller
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-		
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId . '&page=1');
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
 		//throw new exception(print_r($companies, true));
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-page?id=' . $groupId . '&page=1' . '&countryId=');
+		$numpage = curl_exec($api);
+		$numpage = json_decode($numpage, true);
+		// throw new exception(print_r($numpage, true));
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/company-country');
 		$result1 = curl_exec($api);
@@ -167,7 +172,8 @@ class CompanyController extends Controller
 		return $this->render('index', [
 			"companies" => $data,
 			"groupId" => $groupId,
-			"countries" => $countries 
+			"countries" => $countries,
+			"numpage" => $numpage
 		]);
 	}
 
@@ -175,6 +181,10 @@ class CompanyController extends Controller
 	{
 		$param = ModelMaster::decodeParams($hash);
 		$countryId = $param["countryId"];
+
+		$nowPage = $param["nowPage"];
+
+		// throw new exception(print_r($page, true));
 
 		$group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
 		if (!isset($group) && !empty($group)) {
@@ -192,11 +202,16 @@ class CompanyController extends Controller
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group-filter?id=' . $groupId . '&countryId=' . $countryId);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group-filter?id=' . $groupId . '&countryId=' . $countryId . '&page=' . $nowPage);
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
 		//throw new exception(print_r($companies, true));
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-page?id=' . $groupId . '&page=' . $nowPage . '&countryId=' . $countryId);
+		$numpage = curl_exec($api);
+		$numpage = json_decode($numpage, true);
+		// throw new exception(print_r($numpage, true));
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/company-country');
 		$result1 = curl_exec($api);

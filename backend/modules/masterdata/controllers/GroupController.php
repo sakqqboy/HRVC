@@ -32,8 +32,11 @@ class GroupController extends Controller
         $group = Group::find()->where(["groupId" => $id])->asArray()->one();
         return json_encode($group);
     }
-    public function actionCompanyGroup($id)
+    public function actionCompanyGroup($id,$page)
     {
+        // $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+        $limit = 7;
+        $offset = ($page - 1) * $limit;
         $company = [];
         $company = Company::find()
             ->select('company.companyName,company.companyId,company.city,c.countryName,
@@ -41,11 +44,33 @@ class GroupController extends Controller
             ->JOIN("LEFT JOIN", "country c", "c.countryId=company.countryId")
             ->JOIN("LEFT JOIN", "group g", "g.groupId=company.groupId")
             ->where(["company.groupId" => $id, "company.status" => 1])
+            ->offset($offset)
+            ->limit($limit)
             ->orderBy('company.companyName')
             ->asArray()
             ->all();
         return json_encode($company);
     }
+    
+    public function actionCompanyPage($id,$page,$countryId)
+    {
+        $limit = 7;
+
+        $totalRows = Company::find()
+        ->where(["company.groupId" => $id, "company.status" => 1])
+        ->count();
+
+        $totalPages = ceil($totalRows / $limit);
+
+        return json_encode([
+            'totalPages' => $totalPages,
+            'totalRows' => $totalRows,
+            'perPage' => $limit,
+            'nowPage' => $page
+        ]);
+        
+    }
+
 
     public function actionCompanyGroupFilter($id, $countryId)
     {
