@@ -193,7 +193,8 @@ class CompanyController extends Controller
 			"companies" => $data,
 			"groupId" => $groupId,
 			"countries" => $countries,
-			"numPage" => $numPage
+			"numPage" => $numPage,
+			"countryId" => 0
 		]);
 	}
 
