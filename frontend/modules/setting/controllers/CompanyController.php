@@ -38,7 +38,11 @@ class CompanyController extends Controller
 		if (!Yii::$app->user->id) {
 			return $this->redirect(Yii::$app->homeUrl . 'site/login');
 		}
-		return true; //go to origin request
+		$role = UserRole::userRight();
+		if($role >= 5 ){
+			return Yii::$app->request->referrer;
+		}
+				return true; //go to origin request
 	}
 
 	
@@ -46,8 +50,14 @@ class CompanyController extends Controller
 	{
 		$group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
 		if (!isset($group) && !empty($group)) {
-			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/display_group/');
 		}
+
+		$company = Company::find()->select('companyId')->where(["status" => 1])->asArray()->one();
+        if (isset($company) && !empty($company)) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/company/company-grid/' . ModelMaster::encodeParams(["groupId" => $group["groupId"]]));
+        }
+        
 		$groupId = $group["groupId"];
 		return $this->render('display_company', [
 			"groupId" => $groupId
@@ -588,6 +598,8 @@ class CompanyController extends Controller
 		$headQuater = curl_exec($api);
 		$headQuater = json_decode($headQuater, true);
 
+		// throw new Exception(print_r($headQuater, true));
+
 		curl_close($api);
 
 		return $this->render('create', [
@@ -617,7 +629,7 @@ class CompanyController extends Controller
 			$company->location = $_POST["location"];
 			$company->about = $_POST["about"];
 			$company->groupId = $_POST["groupId"] - 543;
-			// $company->director = $_POST["director"];
+			$company->directorId = $_POST["directorId"];
 			// $company->socialTag = $_POST["socialTag"];
 			// $company->city = $_POST["city"];
 			// $company->postalCode = $_POST["postalCode"];
@@ -662,6 +674,27 @@ class CompanyController extends Controller
 	}
 	public function actionCompanyView($hash)
 	{
+		$role = UserRole::userRight();
+		if ($role == 7) {
+			$adminId = Yii::$app->user->id;
+		}
+		if ($role == 6) {
+			$gmId = Yii::$app->user->id;
+		}
+		if ($role == 5) {
+			$managerId = Yii::$app->user->id;
+		}
+		if ($role == 4) {
+			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$teamLeaderId = Yii::$app->user->id;
+		}
+		if ($role == 1 || $role == 2) {
+			$staffId = Yii::$app->user->id;
+			//return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
+		}
+		
 		$param = ModelMaster::decodeParams($hash);
 		$companyId = $param["companyId"];
 		$apiCompany = curl_init();
@@ -670,12 +703,17 @@ class CompanyController extends Controller
 		curl_setopt($apiCompany, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
 		$groupJson = curl_exec($apiCompany);
 		$company = json_decode($groupJson, true);
+		
+		curl_setopt($apiCompany, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $company["directorId"]);
+		$groupJson = curl_exec($apiCompany);
+		$director = json_decode($groupJson, true);
 
 		curl_close($apiCompany);
 
 		$totalDepartment = 0;
 		$totalTeam = 0;
 		$branch = Branch::find()->select('branchId')->where(["companyId" => $companyId, "status" => 1])->asArray()->all();
+
 		$employee = Employee::find()->select('employeeId')->where(["companyId" => $companyId])->all();
 		if (isset($branch) && count($branch) > 0) {
 			foreach ($branch as $b) :
@@ -696,7 +734,9 @@ class CompanyController extends Controller
 			"totalBranch" => $totalBranch,
 			"totalEmployee" => $totalEmployee,
 			"totalDepartment" => $totalDepartment,
-			"totalTeam" => $totalTeam
+			"totalTeam" => $totalTeam,
+			"director" => $director,
+			"role" => $role 
 		]);
 	}
 	public function actionUpdateCompany($hash)
@@ -770,6 +810,8 @@ class CompanyController extends Controller
 			$company->email = $_POST["email"];
 			$company->location = $_POST["location"];
 			$company->about = $_POST["about"];
+			$company->directorId = $_POST["directorId"];
+
 			$company->status = 1;
 			$company->createDateTime = new Expression('NOW()');
 			$company->updateDateTime =  new Expression('NOW()');

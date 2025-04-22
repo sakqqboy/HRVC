@@ -4,6 +4,7 @@ namespace backend\modules\masterdata\controllers;
 
 use backend\models\hrvc\Branch;
 use backend\models\hrvc\Company;
+use backend\models\hrvc\Employee;
 use Exception;
 use yii\web\Controller;
 
@@ -44,11 +45,26 @@ class CompanyController extends Controller
 
 	public function actionHeader($id)
 	{
-		$headQuater = Company::find()
-			->select('companyId,companyName')
-			->where(["groupId" => $id, "headQuaterId" => null])
-			->asArray()
-			->one();
+		// เอาemployeeที่มีสถาณะมากกว่า 3
+		// $headQuater = Company::find()
+		// 	->select('companyId,companyName')
+		// 	->where(["groupId" => $id, "headQuaterId" => null])
+		// 	->asArray()
+		// 	->one();
+		$headQuater =  Employee::find()
+		->select([
+			'employee.employeeId',
+			'employee.employeeFirstname',
+			'employee.employeeSurename',
+			'ur.userId'
+		])
+		->innerJoin('user u', 'employee.employeeId = u.employeeId')
+		->innerJoin('user_role ur', 'ur.userId = u.userId')
+		->where(['<=', 'roleId', 3])
+		->groupBy('ur.userId')
+		->asArray()
+		->all();
+			
 		return json_encode($headQuater);
 	}
 	public function actionCompanyBranch($id)

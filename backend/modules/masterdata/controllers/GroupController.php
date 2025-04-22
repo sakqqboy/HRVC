@@ -38,6 +38,7 @@ class GroupController extends Controller
         // $limit = 6;
         $offset = ($page - 1) * $limit;
         $company = [];
+            
         $company = Company::find()
             ->select('company.companyName,company.companyId,company.city,c.countryName,
             company.picture,company.headQuaterId,company.industries,g.groupName,c.flag,company.about')
@@ -49,6 +50,8 @@ class GroupController extends Controller
             ->orderBy('company.companyName')
             ->asArray()
             ->all();
+
+
         return json_encode($company);
     }
 
@@ -60,7 +63,7 @@ class GroupController extends Controller
     //     $limit = 6;
     // }
 
-    $limit = 6;
+    // $limit = 6;
 
     $offset = ($page - 1) * $limit;
 

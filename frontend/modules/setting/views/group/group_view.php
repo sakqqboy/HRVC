@@ -70,7 +70,7 @@ $this->title = 'Group profile';
                             <a class="col-lg-7 col-md-6 col-12 name-director text-wrap"
                                 href="<?= Yii::$app->homeUrl ?>setting/employee/employee-profile/<?= ModelMaster::encodeParams(['employeeId' => 23]) ?>">
                                 <img src="<?= Yii::$app->homeUrl ?>image/Mask-group.png" alt="Group Image">
-                                <span class="d-inline-block"><?= $group["director"] ?></span>
+                                <span class="d-inline-block ml-10"><?= $group["director"] ?></span>
                             </a>
                             <div class="col-lg-5 col-md-6 col-12 name-head mt-10">
                                 <?= Yii::t('app', 'Headquarter Address') ?>

@@ -212,12 +212,26 @@ $this->title = 'New Company';
                                         placeholder="Select from employees" required> -->
                                     <div class="input-group">
                                         <span class="input-group-text mt-12"
-                                            style="background-color: #C3C3C3; border-right: none;">
+                                            style="background-color: #ffff; border-right: none;">
                                             <img src="<?= Yii::$app->homeUrl ?>image/employee-black.svg" alt="Founded"
                                                 style="width: 20px; height: 20px;">
                                         </span>
-                                        <input type="text" class="form-select mt-12" placeholder="Select from employees"
-                                            readonly style="border-left: none; background-color: #C3C3C3; color: #000;">
+                                        <!-- <input type="text" class="form-select mt-12" placeholder="Select from employees"
+                                            readonly style="border-left: none; background-color: #C3C3C3; color: #000;"> -->
+                                        <select class="form-select mt-12" style="border-left: none;" name="directorId"
+                                            required>
+                                            <option value="" disabled selected hidden style="color: var(--Helper-Text, #8A8A8A);
+                                                ">
+                                                <?= Yii::t('app', 'Select from employees') ?>
+                                            </option>
+                                            <?php foreach ($headQuater as $user): ?>
+                                            <option value="<?= $user['employeeId'] ?>"
+                                                <?= isset($company['directorId']) && $company['directorId'] == $user['employeeId'] ? 'selected' : '' ?>>
+                                                <?= $user['employeeFirstname'] . ' ' . $user['employeeSurename'] ?>
+                                            </option>
+                                            <?php endforeach; ?>
+
+                                        </select>
                                     </div>
                                 </div>
 

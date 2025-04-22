@@ -174,7 +174,7 @@ class GroupController extends Controller
         // throw new Exception(print_r($group,true));
 
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId . '&page=1' . '&limit=7');
         $companyJson = curl_exec($api);
         $companyGroup = json_decode($companyJson, true);
 

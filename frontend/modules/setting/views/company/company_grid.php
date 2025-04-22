@@ -17,6 +17,7 @@ $page = "grid"
                 <div class="pim-name-title ml-10">
                     Company
                 </div>
+                <?php if($role >= 5 ) { ?>
                 <a href="<?= Yii::$app->homeUrl ?>setting/company/create/<?= ModelMaster::encodeParams(['groupId' => $groupId]) ?>"
                     style="text-decoration: none;">
                     <button type="button" class="btn-create" style="padding: 3px 9px;"
@@ -25,6 +26,7 @@ $page = "grid"
                             style="width:18px; height:18px; margin-top:-3px;">
                     </button>
                 </a>
+                <?php }?>
             </div>
         </div>
         <div class="col-2" style="text-align: right;">
