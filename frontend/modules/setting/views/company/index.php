@@ -52,15 +52,22 @@ $page = "list"
             <table id="myTable" class="table align-middle table-spacing">
                 <thead class="table-light">
                     <tr class="table-border-weight">
-                        <th class="text-start">Company Name</th>
-                        <th class="text-start">Country</th>
-                        <th class="text-start">Branch</th>
-                        <th class="text-start">Department</th>
-                        <th class="text-start">Team</th>
-                        <th class="text-start">Employee</th>
+                        <th class="text-start" onclick="sortCompany('companyName')">Company Name <img
+                                src="<?= Yii::$app->homeUrl ?>image/sorting.svg" style="cursor: pointer;"></th>
+                        <th class="text-start" onclick="sortCompany('country')">Country <img
+                                src="<?= Yii::$app->homeUrl ?>image/sorting.svg" style="cursor: pointer;"></th>
+                        <th class="text-start" onclick="sortCompany('branch')">Branch <img
+                                src="<?= Yii::$app->homeUrl ?>image/sorting.svg" style="cursor: pointer;"></th>
+                        <th class="text-start" onclick="sortCompany('department')">Department <img
+                                src="<?= Yii::$app->homeUrl ?>image/sorting.svg" style="cursor: pointer;"></th>
+                        <th class="text-start" onclick="sortCompany('team')">Team <img
+                                src="<?= Yii::$app->homeUrl ?>image/sorting.svg" style="cursor: pointer;"></th>
+                        <th class="text-start" onclick="sortCompany('employee')">Employee <img
+                                src="<?= Yii::$app->homeUrl ?>image/sorting.svg" style="cursor: pointer;"></th>
                         <th></th>
                     </tr>
                 </thead>
+
                 <tbody>
                     <?php
                     if (isset($companies) && count($companies) > 0) {   
@@ -227,3 +234,8 @@ $page = "list"
 
     </div>
 </div>
+
+
+<script>
+let sortDirection = {}; // เก็บทิศทางการ sort ของแต่ละคอลัมน์
+</script>

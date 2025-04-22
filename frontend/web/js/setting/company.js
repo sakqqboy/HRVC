@@ -152,6 +152,76 @@ function goToPageCompany(nextPage, page, countryId) {
     });
 }
 
+
+function sortCompany(column) {
+
+    const table = document.getElementById('myTable');
+    const tbody = table.querySelector('tbody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+
+    const getCellValue = (row, column) => {
+        switch (column) {
+            case 'companyName':
+                return row.cells[0].innerText.trim().toLowerCase();
+            case 'country':
+                return row.cells[1].innerText.trim().toLowerCase();
+            case 'branch':
+                return parseInt(row.cells[2].innerText.trim()) || 0;
+            case 'department':
+                return parseInt(row.cells[3].innerText.trim()) || 0;
+            case 'team':
+                return parseInt(row.cells[4].innerText.trim()) || 0;
+            case 'employee':
+                return parseInt(row.cells[5].innerText.trim()) || 0;
+            default:
+                return '';
+        }
+    }
+
+    // toggle direction
+    sortDirection[column] = !sortDirection[column];
+
+    rows.sort((a, b) => {
+        const valA = getCellValue(a, column);
+        const valB = getCellValue(b, column);
+
+        if (typeof valA === 'number' && typeof valB === 'number') {
+            return sortDirection[column] ? valA - valB : valB - valA;
+        }
+
+        return sortDirection[column] ?
+            valA.localeCompare(valB) :
+            valB.localeCompare(valA);
+    });
+
+    rows.forEach(row => tbody.appendChild(row)); // update order
+}
+
+// function sortCompany(field) {
+//     let currentSortField = '';
+//     let currentSortType = 'ASC';
+//     if (currentSortField === field) {
+//         currentSortType = (currentSortType === 'ASC') ? 'DESC' : 'ASC';
+//     } else {
+//         currentSortField = field;
+//         currentSortType = 'ASC';
+//     }
+
+//     $.ajax({
+//         type: 'POST',
+//         url: '<?= Yii::$app->homeUrl ?>your/controller/actionCompanyGrid', // เปลี่ยนเป็นของคุณ
+//         data: {
+//             sortField: currentSortField,
+//             sortType: currentSortType,
+//             page: 1 // กลับไปหน้าแรกทุกครั้งที่ sort
+//         },
+//         success: function (res) {
+//             $('#company-table-container').html(res); // หรือ div ที่แสดงตาราง
+//         }
+//     });
+// }
+
+
 // function filterPageCompany(page, nowPage) {
 //     // console.log("Page:", page); // Add this line to check the value of `page`
 
